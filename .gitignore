@@ -1,0 +1,4 @@
+/dist/
+/node_modules/
+/flow-typed/
+thumbs.db
