@@ -50,6 +50,7 @@
     "babel-preset-react": "^6.24.1",
     "electron": "1.7.9",
     "electron-builder": "^19.49.0",
+    "electron-rebuild": "^1.6.0",
     "electron-webpack": "1.11.0",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
