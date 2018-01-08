@@ -3,6 +3,7 @@
     "flow",
   ],
   "plugins": [
+    "transform-class-properties",
     ["module-resolver", { "root": ["src"] }],
   ],
 }
