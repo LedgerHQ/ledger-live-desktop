@@ -1,6 +1,9 @@
 // @flow
 
 import { app, BrowserWindow } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
+import ledgerco from 'ledgerco'
+
+console.log(ledgerco)
 
 // Global reference to mainWindow
 // Necessary to prevent win from being garbage collected

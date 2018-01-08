@@ -28,6 +28,7 @@
   "dependencies": {
     "electron-devtools-installer": "^2.2.3",
     "history": "^4.7.2",
+    "ledgerco": "^1.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
