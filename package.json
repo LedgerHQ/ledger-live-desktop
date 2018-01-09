@@ -26,6 +26,7 @@
     }
   },
   "dependencies": {
+    "color": "^2.0.1",
     "electron": "1.7.9",
     "electron-devtools-installer": "^2.2.3",
     "history": "^4.7.2",
@@ -51,9 +52,9 @@
   "devDependencies": {
     "babel-eslint": "^8.1.2",
     "babel-plugin-module-resolver": "^3.0.0",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "electron-builder": "^19.49.0",
     "electron-rebuild": "^1.6.0",
     "electron-webpack": "1.11.0",

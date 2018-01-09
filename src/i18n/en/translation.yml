@@ -1,3 +1,6 @@
 common:
   ok: Okay
   cancel: Cancel
+  connectDevise: Please connect your devise
+  connectedDevises: You have {{count}} devise connected
+  connectedDevises_plural: You have {{count}} devises connected

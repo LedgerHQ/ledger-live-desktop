@@ -7,18 +7,13 @@ import { translate } from 'react-i18next'
 
 type Props = {
   devices: Array<Object>,
-  t: string => string,
+  t: (string, ?Object) => string,
 }
 
 class Home extends PureComponent<Props> {
   render() {
     const { devices, t } = this.props
-    return (
-      <div>
-        {t('common.cancel')}
-        {devices.map(device => device.path)}
-      </div>
-    )
+    return <div>{t('common.connectedDevises', { count: devices.length })}</div>
   }
 }
 

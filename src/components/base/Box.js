@@ -3,13 +3,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
-  space,
+  alignItems,
   borderColor,
   borderWidth,
-  fontSize,
   color,
-  alignItems,
+  fontSize,
   justifyContent,
+  space,
 } from 'styled-system'
 
 const spacingScale = [0, 8, 16, 32, 64]
