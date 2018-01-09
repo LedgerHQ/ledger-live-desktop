@@ -1,7 +1,9 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { translate } from 'react-i18next'
 
 type Props = {
   devices: Array<Object>,
@@ -9,10 +11,14 @@ type Props = {
 
 class Home extends PureComponent<Props> {
   render() {
-    const { devices } = this.props
-
-    return <div>{devices.map(device => device.path)}</div>
+    const { devices, t } = this.props
+    return (
+      <div>
+        {t('common.cancel')}
+        {devices.map(device => device.path)}
+      </div>
+    )
   }
 }
 
-export default connect(({ devices }: Props): Object => ({ devices }))(Home)
+export default compose(connect(({ devices }: Props): Object => ({ devices })), translate())(Home)
