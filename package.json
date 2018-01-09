@@ -1,6 +1,6 @@
 {
-  "name": "ledger-boilerplate",
-  "description": "Boilerplate for ledger",
+  "name": "ledger-wallet-desktop",
+  "description": "Ledger Wallet Desktop",
   "version": "0.0.0",
   "author": "Ledger",
   "license": "BSD-2-Clause",
