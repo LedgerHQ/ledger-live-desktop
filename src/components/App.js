@@ -6,8 +6,6 @@ import { ConnectedRouter } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router'
 
-import Box from 'components/base/Box'
-
 import theme from 'styles/theme'
 import Home from 'components/Home'
 
