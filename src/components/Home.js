@@ -7,6 +7,7 @@ import { translate } from 'react-i18next'
 
 type Props = {
   devices: Array<Object>,
+  t: string => string,
 }
 
 class Home extends PureComponent<Props> {
