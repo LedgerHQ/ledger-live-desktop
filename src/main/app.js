@@ -1,6 +1,6 @@
 // @flow
 
-import { app, BrowserWindow } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow } from 'electron'
 
 // Global reference to mainWindow
 // Necessary to prevent win from being garbage collected
