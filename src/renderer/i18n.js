@@ -7,7 +7,7 @@ import Backend from 'i18next-node-fs-backend'
 i18n.use(Backend).init({
   lng: 'en',
   fallbackLng: 'en',
-  debug: true,
+  debug: false,
   backend: {
     loadPath: path.resolve(__dirname, '../i18n/{{lng}}/{{ns}}.yml'),
   },
