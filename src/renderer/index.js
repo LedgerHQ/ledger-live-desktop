@@ -6,6 +6,8 @@ import { AppContainer } from 'react-hot-loader' // eslint-disable-line import/no
 import createHistory from 'history/createBrowserHistory'
 
 import createStore from 'renderer/createStore'
+import initEvents from 'renderer/initEvents'
+
 import App from 'components/App'
 
 import 'styles/global'
@@ -13,6 +15,8 @@ import 'styles/global'
 const history = createHistory()
 const store = createStore(history)
 const rootNode = document.getElementById('app')
+
+initEvents(store)
 
 function r(Comp) {
   if (rootNode) {
