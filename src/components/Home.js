@@ -13,7 +13,7 @@ type Props = {
 class Home extends PureComponent<Props> {
   render() {
     const { devices, t } = this.props
-    return <div>{t('common.connectedDevises', { count: devices.length })}</div>
+    return <div>{t('common.connectedDevices', { count: devices.length })}</div>
   }
 }
 

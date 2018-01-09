@@ -17,7 +17,7 @@ const Wrapper = ({ devices, t }: { devices: Array<Object>, t: string => string }
   <Fragment>
     {devices.length === 0 ? (
       <Overlay align="center" justify="center">
-        <Box color="white">{t('common.connectDevise')}</Box>
+        <Box color="white">{t('common.connectDevice')}</Box>
       </Overlay>
     ) : (
       <Box grow horizontal>
