@@ -1,3 +1,5 @@
+// @flow
+
 import { ipcMain } from 'electron'
 import { isLedgerDevice } from 'ledgerco/lib/utils'
 

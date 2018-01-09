@@ -1,19 +1,23 @@
+// @flow
+
 // eslint-disable import/prefer-default-export
 
-export const devicesUpdate = payload => dispatch =>
-  dispatch({
-    type: 'DEVICES_UPDATE',
-    payload,
-  })
+import type { Device } from 'types/common'
 
-export const deviceAdd = payload => dispatch =>
-  dispatch({
-    type: 'DEVICE_ADD',
-    payload,
-  })
+type devicesUpdateType = (Array<Device>) => { type: string, payload: Array<Device> }
+export const devicesUpdate: devicesUpdateType = payload => ({
+  type: 'DEVICES_UPDATE',
+  payload,
+})
 
-export const deviceRemove = payload => dispatch =>
-  dispatch({
-    type: 'DEVICE_REMOVE',
-    payload,
-  })
+type devicesAddType = Device => { type: string, payload: Device }
+export const deviceAdd: devicesAddType = payload => ({
+  type: 'DEVICE_ADD',
+  payload,
+})
+
+type devicesRemoveType = Device => { type: string, payload: Device }
+export const deviceRemove: devicesRemoveType = payload => ({
+  type: 'DEVICE_REMOVE',
+  payload,
+})

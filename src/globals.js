@@ -1,3 +1,5 @@
+// @flow
+
 const { NODE_ENV } = process.env
 
 global.__ENV__ = NODE_ENV || 'development'
