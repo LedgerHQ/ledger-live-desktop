@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
-import ledgerco from 'ledgerco'
+import { ipcRenderer } from 'electron'
 
 class App extends Component {
   state = {
-    publicKey: null,
+    devices: [],
   }
 
-  componentWillMount() {
-    this.getWalletPublicKey()
-  }
+  componentDidMount() {
+    ipcRenderer.send('listenDevices')
 
-  getWalletPublicKey() {
-    ledgerco.comm_node.create_async().then(comm => {
-      comm.device.setNonBlocking(1)
+    ipcRenderer.on('addDevice', (e, device) =>
+      this.setState(prev => ({
+        devices: [...prev.devices, device].filter(
+          (v, i, s) => s.findIndex(t => t.path === v.path) === i,
+        ),
+      })),
+    )
 
-      const btc = new ledgerco.btc(comm)
-
-      btc.getWalletPublicKey_async("44'/0'/0'/0").then(res =>
-        this.setState({
-          publicKey: res.publicKey,
-        }),
-      )
-    })
+    ipcRenderer.on('removeDevice', (e, device) =>
+      this.setState(prev => ({
+        devices: prev.devices.filter(d => d.path !== device.path),
+      })),
+    )
   }
 
   render() {
-    const { publicKey } = this.state
+    const { devices } = this.state
 
-    return <div>publicKey: {publicKey}</div>
+    return <div>{devices.map(device => device.path)}</div>
   }
 }
 
