@@ -4,28 +4,51 @@ import { ipcRenderer } from 'electron'
 
 import { devicesUpdate, deviceAdd, deviceRemove } from 'actions/devices'
 
+type MsgPayload = {
+  type: string,
+  data: *,
+}
+
+function send(msgType: string, data: *) {
+  ipcRenderer.send('msg', {
+    type: msgType,
+    data,
+  })
+}
+
 export default (store: Object) => {
-  ipcRenderer.on('updateDevices', (e, devices) => {
-    store.dispatch(devicesUpdate(devices))
-    if (devices.length) {
-      ipcRenderer.send('requestWalletInfos', { path: devices[0].path, wallet: 'btc' })
+  const handlers = {
+    updateDevices: devices => {
+      store.dispatch(devicesUpdate(devices))
+      if (devices.length) {
+        send('requestWalletInfos', {
+          path: devices[0].path,
+          wallet: 'btc',
+        })
+      }
+    },
+    addDevice: device => store.dispatch(deviceAdd(device)),
+    removeDevice: device => store.dispatch(deviceRemove(device)),
+    receiveWalletInfos: ({ path, publicKey }) => {
+      console.log({ path, publicKey })
+    },
+    failWalletInfos: ({ path, err }) => {
+      console.log({ path, err })
+    },
+  }
+
+  ipcRenderer.on('msg', (e: *, payload: MsgPayload) => {
+    const { type, data } = payload
+    const handler = handlers[type]
+    if (!handler) {
+      return
     }
-  })
-
-  ipcRenderer.on('addDevice', (e, device) => store.dispatch(deviceAdd(device)))
-  ipcRenderer.on('removeDevice', (e, device) => store.dispatch(deviceRemove(device)))
-
-  ipcRenderer.on('receiveWalletInfos', (e, { path, publicKey }) => {
-    console.log({ path, publicKey })
-  })
-
-  ipcRenderer.on('failWalletInfos', (e, { path, err }) => {
-    console.log({ path, err })
+    handler(data)
   })
 
   // First time, we get all devices
-  ipcRenderer.send('getDevices')
+  send('getDevices')
 
   // Start detection when we plug/unplug devices
-  ipcRenderer.send('listenDevices')
+  send('listenDevices')
 }
