@@ -1,6 +1,7 @@
 // @flow
 
 import { ipcRenderer } from 'electron'
+import objectPath from 'object-path'
 
 import { devicesUpdate, deviceAdd, deviceRemove } from 'actions/devices'
 
@@ -18,17 +19,21 @@ function send(msgType: string, data: *) {
 
 export default (store: Object) => {
   const handlers = {
-    updateDevices: devices => {
-      store.dispatch(devicesUpdate(devices))
-      if (devices.length) {
-        send('requestWalletInfos', {
-          path: devices[0].path,
-          wallet: 'btc',
-        })
-      }
+    devices: {
+      update: devices => {
+        store.dispatch(devicesUpdate(devices))
+        if (devices.length) {
+          send('requestWalletInfos', {
+            path: devices[0].path,
+            wallet: 'btc',
+          })
+        }
+      },
     },
-    addDevice: device => store.dispatch(deviceAdd(device)),
-    removeDevice: device => store.dispatch(deviceRemove(device)),
+    device: {
+      add: device => store.dispatch(deviceAdd(device)),
+      remove: device => store.dispatch(deviceRemove(device)),
+    },
     receiveWalletInfos: ({ path, publicKey }) => {
       console.log({ path, publicKey })
     },
@@ -39,16 +44,18 @@ export default (store: Object) => {
 
   ipcRenderer.on('msg', (e: *, payload: MsgPayload) => {
     const { type, data } = payload
-    const handler = handlers[type]
+
+    const handler = objectPath.get(handlers, type)
     if (!handler) {
       return
     }
+
     handler(data)
   })
 
   // First time, we get all devices
-  send('getDevices')
+  send('devices.all')
 
   // Start detection when we plug/unplug devices
-  send('listenDevices')
+  send('devices.listen')
 }

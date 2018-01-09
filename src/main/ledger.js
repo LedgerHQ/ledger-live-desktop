@@ -3,6 +3,7 @@
 import { ipcMain } from 'electron'
 import { isLedgerDevice } from 'ledgerco/lib/utils'
 import ledgerco, { comm_node } from 'ledgerco'
+import objectPath from 'object-path'
 
 import HID from 'ledger-node-js-hid'
 
@@ -16,17 +17,29 @@ async function getWalletInfos(path: string, wallet: string) {
   throw new Error('invalid wallet')
 }
 
+let isListenDevices = false
+
 const handlers = {
-  listenDevices: send => {
-    HID.listenDevices.start()
-    HID.listenDevices.events.on(
-      'add',
-      device => isLedgerDevice(device) && send('addDevice', device),
-    )
-    HID.listenDevices.events.on(
-      'remove',
-      device => isLedgerDevice(device) && send('removeDevice', device),
-    )
+  devices: {
+    listen: send => {
+      if (isListenDevices) {
+        return
+      }
+
+      isListenDevices = true
+
+      HID.listenDevices.start()
+
+      HID.listenDevices.events.on(
+        'add',
+        device => isLedgerDevice(device) && send('device.add', device),
+      )
+      HID.listenDevices.events.on(
+        'remove',
+        device => isLedgerDevice(device) && send('device.remove', device),
+      )
+    },
+    all: send => send('devices.update', HID.devices().filter(isLedgerDevice)),
   },
   requestWalletInfos: async (send, { path, wallet }) => {
     try {
@@ -36,15 +49,12 @@ const handlers = {
       send('failWalletInfos', { path, err: err.stack })
     }
   },
-  getDevices: send => {
-    send('updateDevices', HID.devices().filter(isLedgerDevice))
-  },
 }
 
 ipcMain.on('msg', (event: *, payload) => {
   const { type, data } = payload
 
-  const handler = handlers[type]
+  const handler = objectPath.get(handlers, type)
   if (!handler) {
     return
   }
