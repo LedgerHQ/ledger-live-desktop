@@ -41,13 +41,17 @@ const handlers = {
     },
     all: send => send('devices.update', HID.devices().filter(isLedgerDevice)),
   },
-  requestWalletInfos: async (send, { path, wallet }) => {
-    try {
-      const publicKey = await getWalletInfos(path, wallet)
-      send('receiveWalletInfos', { path, publicKey })
-    } catch (err) {
-      send('failWalletInfos', { path, err: err.stack })
-    }
+  wallet: {
+    infos: {
+      request: async (send, { path, wallet }) => {
+        try {
+          const publicKey = await getWalletInfos(path, wallet)
+          send('wallet.infos.success', { path, publicKey })
+        } catch (err) {
+          send('wallet.infos.fail', { path, err: err.stack || err })
+        }
+      },
+    },
   },
 }
 

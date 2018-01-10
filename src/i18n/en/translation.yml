@@ -1,6 +1,6 @@
 common:
   ok: Okay
   cancel: Cancel
-  connectDevice: Please connect your device
   connectedDevices: You have {{count}} device connected
+  connectedDevices_0: You don't have device connected
   connectedDevices_plural: You have {{count}} devices connected
