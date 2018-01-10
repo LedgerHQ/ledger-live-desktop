@@ -4,11 +4,11 @@
 
 import type { Dispatch } from 'redux'
 
-import { getDevices } from 'reducers/devices'
+import { getDevices, getCurrentDevice } from 'reducers/devices'
 
 import type { Device, Devices } from 'types/common'
 
-type deviceChooseType = (?Device) => { type: string, payload: ?Device }
+export type deviceChooseType = (?Device) => { type: string, payload: ?Device }
 export const deviceChoose: deviceChooseType = payload => ({
   type: 'DEVICE_CHOOSE',
   payload,
@@ -41,10 +41,10 @@ export const deviceRemove: devicesRemoveType = payload => (dispatch, getState) =
     payload,
   })
 
-  const devices = getDevices(getState())
+  const currentDevice = getCurrentDevice(getState())
 
-  // If we don't detect any device we reset currentDevice
-  if (devices.length === 0) {
+  // If we disconnect the currentDevice we reset it
+  if (currentDevice.path === payload.path) {
     dispatch(deviceChoose(null))
   }
 }

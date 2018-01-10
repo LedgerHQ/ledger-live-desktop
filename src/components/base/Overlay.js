@@ -3,10 +3,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { rgba } from 'styles/helpers'
+
 import Box from 'components/base/Box'
 
 const Overlay = styled(({ sticky, ...props }) => <Box sticky {...props} />)`
-  background-color: ${p => p.theme.colors.night};
+  background-color: ${p => rgba(p.theme.colors.night, 0.4)};
   position: fixed;
 `
 

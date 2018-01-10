@@ -1,30 +1,32 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Devices, T } from 'types/common'
+import type { Device } from 'types/common'
 
-import { getDevices } from 'reducers/devices'
+import { getCurrentDevice } from 'reducers/devices'
 
-type Props = {
-  devices: Devices,
-  t: T,
-}
+import Box from 'components/base/Box'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  devices: getDevices(state),
+  currentDevice: getCurrentDevice(state),
 })
+
+type Props = {
+  currentDevice: Device | null,
+}
 
 class Home extends PureComponent<Props> {
   render() {
-    const { devices, t } = this.props
-
-    return <div>{t('common.connectedDevices', { count: devices.length })}</div>
+    const { currentDevice } = this.props
+    return currentDevice !== null ? (
+      <Box style={{ wordBreak: 'break-word' }} p={20}>
+        Your current device: {currentDevice.path}
+      </Box>
+    ) : null
   }
 }
 
-export default compose(connect(mapStateToProps), translate())(Home)
+export default connect(mapStateToProps)(Home)
