@@ -18,7 +18,7 @@ type Props = {
   currentDevice: Device | null,
 }
 
-class Home extends PureComponent<Props> {
+class DashboardPage extends PureComponent<Props> {
   render() {
     const { currentDevice } = this.props
     return currentDevice !== null ? (
@@ -29,4 +29,4 @@ class Home extends PureComponent<Props> {
   }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(DashboardPage)

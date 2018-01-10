@@ -9,4 +9,7 @@ module.exports = {
       __PROD__,
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+  },
 }

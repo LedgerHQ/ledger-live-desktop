@@ -1,16 +1,25 @@
 // @flow
 
 import React from 'react'
-import type { Element } from 'react'
 import styled from 'styled-components'
+import { push } from 'react-router-redux'
+import { connect } from 'react-redux'
+
+import type { Element } from 'react'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
 type Props = {
   children: string,
+  linkTo?: string | null,
   desc?: string | null,
   icon?: Element<*> | null,
+  push: Function,
+}
+
+const mapDispatchToProps = {
+  push,
 }
 
 const Container = styled(Box).attrs({
@@ -32,9 +41,9 @@ const IconWrapper = styled(Box)`
   border: 2px solid rgba(255, 255, 255, 0.1);
 `
 
-export default function Item({ children, desc, icon }: Props) {
+function Item({ children, desc, icon, linkTo, push }: Props) {
   return (
-    <Container>
+    <Container onClick={linkTo ? () => push(linkTo) : void 0}>
       <IconWrapper mr={2}>{icon || null}</IconWrapper>
       <div>
         <Text fontWeight="bold" fontSize={1}>
@@ -53,4 +62,7 @@ export default function Item({ children, desc, icon }: Props) {
 Item.defaultProps = {
   icon: null,
   desc: null,
+  linkTo: null,
 }
+
+export default connect(null, mapDispatchToProps)(Item)

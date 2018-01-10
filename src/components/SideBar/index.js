@@ -23,19 +23,27 @@ class SideBar extends PureComponent<{}> {
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
             <div>
-              <Item>{'Dashboard'}</Item>
+              <Item linkTo="/">{'Dashboard'}</Item>
               <Item>{'Send'}</Item>
               <Item>{'Receive'}</Item>
-              <Item>{'Settings'}</Item>
+              <Item linkTo="/settings">{'Settings'}</Item>
             </div>
           </Box>
           <Box flow={2}>
             <CapsSubtitle>{'Accounts'}</CapsSubtitle>
             <div>
-              <Item desc="BTC 3.78605936">{'Brian Account'}</Item>
-              <Item desc="ETH 0.05944">{'Virginie Account'}</Item>
-              <Item desc="DOGE 2.2658">{'Ledger Account'}</Item>
-              <Item desc="BTC 0.00015486">{'Nicolas Account'}</Item>
+              <Item linkTo="/account/brian" desc="BTC 3.78605936">
+                {'Brian Account'}
+              </Item>
+              <Item linkTo="/account/virginie" desc="ETH 0.05944">
+                {'Virginie Account'}
+              </Item>
+              <Item linkTo="/account/ledger" desc="DOGE 2.2658">
+                {'Ledger Account'}
+              </Item>
+              <Item linkTo="/account/nicolas" desc="BTC 0.00015486">
+                {'Nicolas Account'}
+              </Item>
             </div>
           </Box>
         </GrowScroll>
