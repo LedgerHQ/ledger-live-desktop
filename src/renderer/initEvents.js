@@ -23,7 +23,7 @@ export default (store: Object) => {
       update: devices => {
         store.dispatch(devicesUpdate(devices))
         if (devices.length) {
-          send('requestWalletInfos', {
+          send('wallet.infos.request', {
             path: devices[0].path,
             wallet: 'btc',
           })
@@ -34,11 +34,15 @@ export default (store: Object) => {
       add: device => store.dispatch(deviceAdd(device)),
       remove: device => store.dispatch(deviceRemove(device)),
     },
-    receiveWalletInfos: ({ path, publicKey }) => {
-      console.log({ path, publicKey })
-    },
-    failWalletInfos: ({ path, err }) => {
-      console.log({ path, err })
+    wallet: {
+      infos: {
+        success: ({ path, publicKey }) => {
+          console.log({ path, publicKey })
+        },
+        fail: ({ path, err }) => {
+          console.log({ path, err })
+        },
+      },
     },
   }
 
