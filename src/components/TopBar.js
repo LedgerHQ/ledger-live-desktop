@@ -48,10 +48,15 @@ class TopBar extends PureComponent<Props, State> {
     }
   }
 
-  handleChangeDevice = () =>
-    this.setState({
-      changeDevice: true,
-    })
+  handleChangeDevice = () => {
+    const { devices } = this.props
+
+    if (devices.length > 0) {
+      this.setState({
+        changeDevice: true,
+      })
+    }
+  }
 
   handleSelectDevice = device => () => {
     const { deviceChoose } = this.props
@@ -92,7 +97,14 @@ class TopBar extends PureComponent<Props, State> {
 }
 
 const CountDevices = ({ count, onChangeDevice } = { count: Number, onChangeDevice: Function }) => (
-  <Box color="night" mr={20} horizontal flow={10} onClick={onChangeDevice}>
+  <Box
+    color="night"
+    mr={20}
+    horizontal
+    flow={10}
+    onClick={onChangeDevice}
+    style={{ cursor: 'pointer' }}
+  >
     <Box>
       <DeviceIcon height={20} width={20} />
     </Box>

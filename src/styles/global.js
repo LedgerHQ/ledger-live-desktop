@@ -11,7 +11,6 @@ injectGlobal`
     font: inherit;
     color: inherit;
     user-select: none;
-    cursor: default;
     min-width: 0;
   }
 

@@ -1,15 +1,17 @@
-// @flow
+process.title = 'ledger-wallet-desktop-usb'
 
-import { ipcMain } from 'electron'
-import { isLedgerDevice } from 'ledgerco/lib/utils'
-import ledgerco, { comm_node } from 'ledgerco'
-import objectPath from 'object-path'
+const HID = require('ledger-node-js-hid')
+const objectPath = require('object-path')
+const { isLedgerDevice } = require('ledgerco/lib/utils')
+const ledgerco = require('ledgerco')
 
-import HID from 'ledger-node-js-hid'
+function send(type, data, options = { kill: true }) {
+  process.send([type, data, options])
+}
 
-async function getWalletInfos(path: string, wallet: string) {
+async function getWalletInfos(path, wallet) {
   if (wallet === 'btc') {
-    const comm = new comm_node(new HID.HID(path), true, 0, false)
+    const comm = new ledgerco.comm_node(new HID.HID(path), true, 0, false)
     const btc = new ledgerco.btc(comm)
     const walletInfos = await btc.getWalletPublicKey_async("44'/0'/0'/0")
     return walletInfos
@@ -21,7 +23,7 @@ let isListenDevices = false
 
 const handlers = {
   devices: {
-    listen: send => {
+    listen: () => {
       if (isListenDevices) {
         return
       }
@@ -32,18 +34,18 @@ const handlers = {
 
       HID.listenDevices.events.on(
         'add',
-        device => isLedgerDevice(device) && send('device.add', device),
+        device => isLedgerDevice(device) && send('device.add', device, { kill: false }),
       )
       HID.listenDevices.events.on(
         'remove',
-        device => isLedgerDevice(device) && send('device.remove', device),
+        device => isLedgerDevice(device) && send('device.remove', device, { kill: false }),
       )
     },
-    all: send => send('devices.update', HID.devices().filter(isLedgerDevice)),
+    all: () => send('devices.update', HID.devices().filter(isLedgerDevice)),
   },
   wallet: {
     infos: {
-      request: async (send, { path, wallet }) => {
+      request: async ({ path, wallet }) => {
         try {
           const publicKey = await getWalletInfos(path, wallet)
           send('wallet.infos.success', { path, publicKey })
@@ -55,20 +57,13 @@ const handlers = {
   },
 }
 
-ipcMain.on('msg', (event: *, payload) => {
-  const { type, data } = payload
+process.on('message', payload => {
+  const [type, data] = payload
 
   const handler = objectPath.get(handlers, type)
   if (!handler) {
     return
   }
 
-  const send = (msgType: string, data: *) => {
-    event.sender.send('msg', {
-      type: msgType,
-      data,
-    })
-  }
-
-  handler(send, data)
+  handler(data)
 })
