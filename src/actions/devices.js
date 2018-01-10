@@ -8,7 +8,7 @@ import { getDevices, getCurrentDevice } from 'reducers/devices'
 
 import type { Device, Devices } from 'types/common'
 
-export type deviceChooseType = (?Device) => { type: string, payload: ?Device }
+export type deviceChooseType = Device => { type: string, payload: Device }
 export const deviceChoose: deviceChooseType = payload => ({
   type: 'DEVICE_CHOOSE',
   payload,

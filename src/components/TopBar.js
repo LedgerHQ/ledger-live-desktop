@@ -25,7 +25,7 @@ const mapDispatchToProps: MapDispatchToProps<*, *, *> = {
 
 type Props = {
   devices: Devices,
-  currentDevice: Device | null,
+  currentDevice: Device,
   deviceChoose: deviceChooseType,
 }
 

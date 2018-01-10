@@ -15,7 +15,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 })
 
 type Props = {
-  currentDevice: Device | null,
+  currentDevice: Device,
 }
 
 class Home extends PureComponent<Props> {
