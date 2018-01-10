@@ -2,10 +2,13 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import { compose } from 'redux'
+import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 
 import type { Element } from 'react'
+import type { Location } from 'react-router'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -15,6 +18,7 @@ type Props = {
   linkTo?: string | null,
   desc?: string | null,
   icon?: Element<*> | null,
+  location: Location,
   push: Function,
 }
 
@@ -29,6 +33,7 @@ const Container = styled(Box).attrs({
   p: 2,
 })`
   cursor: pointer;
+  color: ${p => (p.active ? p.theme.colors.white : '')};
 
   &:hover {
     background: rgba(255, 255, 255, 0.05);
@@ -41,9 +46,10 @@ const IconWrapper = styled(Box)`
   border: 2px solid rgba(255, 255, 255, 0.1);
 `
 
-function Item({ children, desc, icon, linkTo, push }: Props) {
+function Item({ children, desc, icon, linkTo, push, location }: Props) {
+  const { pathname } = location
   return (
-    <Container onClick={linkTo ? () => push(linkTo) : void 0}>
+    <Container onClick={linkTo ? () => push(linkTo) : void 0} active={pathname === linkTo}>
       <IconWrapper mr={2}>{icon || null}</IconWrapper>
       <div>
         <Text fontWeight="bold" fontSize={1}>
@@ -65,4 +71,11 @@ Item.defaultProps = {
   linkTo: null,
 }
 
-export default connect(null, mapDispatchToProps)(Item)
+export default compose(
+  withRouter,
+  // connect router here only to make components re-render
+  // see https://github.com/ReactTraining/react-router/issues/4671
+  connect(({ router }) => ({ router }), mapDispatchToProps, null, {
+    pure: false,
+  }),
+)(Item)
