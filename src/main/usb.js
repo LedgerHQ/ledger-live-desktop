@@ -30,16 +30,13 @@ const handlers = {
 
       isListenDevices = true
 
+      const handleChangeDevice = (device, event) =>
+        isLedgerDevice(device) && send(event, device, { kill: false })
+
       HID.listenDevices.start()
 
-      HID.listenDevices.events.on(
-        'add',
-        device => isLedgerDevice(device) && send('device.add', device, { kill: false }),
-      )
-      HID.listenDevices.events.on(
-        'remove',
-        device => isLedgerDevice(device) && send('device.remove', device, { kill: false }),
-      )
+      HID.listenDevices.events.on('add', handleChangeDevice)
+      HID.listenDevices.events.on('remove', handleChangeDevice)
     },
     all: () => send('devices.update', HID.devices().filter(isLedgerDevice)),
   },
