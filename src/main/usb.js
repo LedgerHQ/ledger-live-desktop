@@ -6,7 +6,7 @@ const { isLedgerDevice } = require('ledgerco/lib/utils')
 const ledgerco = require('ledgerco')
 
 function send(type, data, options = { kill: true }) {
-  process.send([type, data, options])
+  process.send({ type, data, options })
 }
 
 async function getWalletInfos(path, wallet) {
@@ -30,13 +30,13 @@ const handlers = {
 
       isListenDevices = true
 
-      const handleChangeDevice = (device, event) =>
-        isLedgerDevice(device) && send(event, device, { kill: false })
+      const handleChangeDevice = eventName => device =>
+        isLedgerDevice(device) && send(eventName, device, { kill: false })
 
       HID.listenDevices.start()
 
-      HID.listenDevices.events.on('add', handleChangeDevice)
-      HID.listenDevices.events.on('remove', handleChangeDevice)
+      HID.listenDevices.events.on('add', handleChangeDevice('device.add'))
+      HID.listenDevices.events.on('remove', handleChangeDevice('device.remove'))
     },
     all: () => send('devices.update', HID.devices().filter(isLedgerDevice)),
   },
@@ -55,7 +55,7 @@ const handlers = {
 }
 
 process.on('message', payload => {
-  const [type, data] = payload
+  const { type, data } = payload
 
   const handler = objectPath.get(handlers, type)
   if (!handler) {

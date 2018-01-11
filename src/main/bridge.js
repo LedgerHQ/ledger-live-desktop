@@ -18,9 +18,9 @@ ipcMain.on('msg', (event: any, payload) => {
     })
   }
 
-  compute.send([type, data])
+  compute.send({ type, data })
   compute.on('message', payload => {
-    const [type, data, options = {}] = payload
+    const { type, data, options = {} } = payload
     send(type, data)
     if (options.kill) {
       compute.kill()
