@@ -6,7 +6,10 @@ import { translate } from 'react-i18next'
 
 import Box from 'components/base/Box'
 
-import Home from 'components/Home'
+import DashboardPage from 'components/DashboardPage'
+import SettingsPage from 'components/SettingsPage'
+import AccountPage from 'components/AccountPage'
+
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
 
@@ -15,7 +18,9 @@ const Wrapper = () => (
     <SideBar />
     <Box grow bg="cream">
       <TopBar />
-      <Route path="/" component={Home} />
+      <Route path="/" component={DashboardPage} />
+      <Route path="/settings" component={SettingsPage} />
+      <Route path="/account/:account" component={AccountPage} />
     </Box>
   </Box>
 )
