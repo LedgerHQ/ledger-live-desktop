@@ -26,14 +26,16 @@
     }
   },
   "dependencies": {
+    "@ledgerhq/hw-btc": "^1.0.4",
+    "@ledgerhq/hw-comm": "^1.0.4",
+    "@ledgerhq/hw-comm-node-hid": "^1.0.4",
+    "@ledgerhq/hw-eth": "^1.0.4",
     "color": "^2.0.1",
     "electron": "1.7.10",
     "electron-devtools-installer": "^2.2.3",
     "history": "^4.7.2",
     "i18next": "^10.2.2",
     "i18next-node-fs-backend": "^1.0.0",
-    "ledger-node-js-hid": "github:LedgerHQ/ledger-node-js-hid",
-    "ledgerco": "^1.2.1",
     "object-path": "^0.11.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
