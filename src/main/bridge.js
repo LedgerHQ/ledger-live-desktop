@@ -5,13 +5,13 @@ import { ipcMain } from 'electron' // eslint-disable-line import/no-extraneous-d
 import { resolve } from 'path'
 
 // $FlowFixMe
-import usbBridge from 'file-loader!babel-loader!./usb' // eslint-disable-line import/no-webpack-loader-syntax
+import usbBridge from 'file-loader?name=usb.js!babel-loader!./usb' // eslint-disable-line import/no-webpack-loader-syntax
 
 ipcMain.on('msg', (event: any, payload) => {
   const { type, data } = payload
 
   const compute = fork(usbBridge, {
-    cwd: resolve(__dirname, '../../dist/main'),
+    cwd: resolve(__dirname, __DEV__ ? '../../dist/main' : '../static'),
   })
 
   compute.send({ type, data })

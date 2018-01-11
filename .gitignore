@@ -1,4 +1,5 @@
 .DS_Store
+/static/
 /dist/
 /node_modules/
 /flow-typed/

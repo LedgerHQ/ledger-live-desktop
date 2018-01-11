@@ -2,10 +2,7 @@ const webpack = require('webpack')
 
 require('./src/globals')
 
-module.exports = {
-  output: {
-    publicPath: '/',
-  },
+const config = {
   plugins: [
     new webpack.DefinePlugin({
       __DEV__,
@@ -16,3 +13,13 @@ module.exports = {
     historyApiFallback: true,
   },
 }
+
+if (__DEV__) {
+  Object.assign(config, {
+    output: {
+      publicPath: '/',
+    },
+  })
+}
+
+module.exports = config
