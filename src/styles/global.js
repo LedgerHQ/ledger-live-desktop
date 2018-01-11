@@ -13,6 +13,9 @@ injectGlobal`
     user-select: none;
     cursor: inherit;
     min-width: 0;
+
+    // it will surely make problem in the future... to be inspected.
+    flex-shrink: 0;
   }
 
   body {
