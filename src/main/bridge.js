@@ -4,11 +4,14 @@ import { fork } from 'child_process'
 import { ipcMain } from 'electron'
 import { resolve } from 'path'
 
+// $FlowFixMe
+import usbBridge from 'file-loader!babel-loader!./usb' // eslint-disable-line import/no-webpack-loader-syntax
+
 ipcMain.on('msg', (event: any, payload) => {
   const { type, data } = payload
 
-  const compute = fork('./usb', {
-    cwd: resolve(__dirname, './'),
+  const compute = fork(usbBridge, {
+    cwd: resolve(__dirname, '../../dist/main'),
   })
 
   compute.send({ type, data })

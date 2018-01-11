@@ -1,4 +1,15 @@
 {
-  "presets": ["flow", "stage-0"],
+  "presets": [
+    "flow",
+    "stage-0",
+    [
+      "env",
+      {
+        "targets": {
+          "node": "8"
+        }
+      }
+    ]
+  ],
   "plugins": [["module-resolver", { "root": ["src"] }]]
 }
