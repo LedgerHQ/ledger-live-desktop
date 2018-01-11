@@ -78,30 +78,30 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@ledgerhq/hw-btc@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-btc/-/hw-btc-1.0.4.tgz#2a2c79377951c1b3318f9ec2d9c5f5d841579777"
+"@ledgerhq/hw-app-btc@^1.0.4":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-1.0.5.tgz#01689c1bf5baaf744a49183a2a54adee2ae10e1a"
   dependencies:
-    "@ledgerhq/hw-comm" "^1.0.4"
+    "@ledgerhq/hw-transport" "^1.0.5"
 
-"@ledgerhq/hw-comm-node-hid@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-comm-node-hid/-/hw-comm-node-hid-1.0.4.tgz#23f21c247ec9bb12064a620a5b29ef98ab2fdd46"
+"@ledgerhq/hw-app-eth@^1.0.4":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-1.0.5.tgz#39524d2a0e12e3b772d19c4582fffd43a93ae563"
   dependencies:
-    "@ledgerhq/hw-comm" "^1.0.4"
+    "@ledgerhq/hw-transport" "^1.0.5"
+
+"@ledgerhq/hw-transport-node-hid@^1.0.4":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-1.0.5.tgz#2f35773ece17d856a42868fd2d9497c6a7ed20dc"
+  dependencies:
+    "@ledgerhq/hw-transport" "^1.0.5"
     node-hid "^0.7.2"
 
-"@ledgerhq/hw-comm@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-comm/-/hw-comm-1.0.4.tgz#e7aced1a370fd375edecd1178647f9aa55e6b3ae"
+"@ledgerhq/hw-transport@^1.0.4", "@ledgerhq/hw-transport@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.0.5.tgz#8bc40175eed66f0be6971340126e98d374fa01f4"
   dependencies:
     invariant "^2.2.0"
-
-"@ledgerhq/hw-eth@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-eth/-/hw-eth-1.0.4.tgz#200a901d1cd0caae0ea8b6f126c77ad5747e5ad8"
-  dependencies:
-    "@ledgerhq/hw-comm" "^1.0.4"
 
 "@types/node@^7.0.18":
   version "7.0.52"
@@ -3326,7 +3326,7 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
-file-loader@^1.1.5:
+file-loader@^1.1.5, file-loader@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-1.1.6.tgz#7b9a8f2c58f00a77fddf49e940f7ac978a3ea0e8"
   dependencies:

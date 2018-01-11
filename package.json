@@ -26,13 +26,15 @@
     }
   },
   "dependencies": {
-    "@ledgerhq/hw-btc": "^1.0.4",
-    "@ledgerhq/hw-comm": "^1.0.4",
-    "@ledgerhq/hw-comm-node-hid": "^1.0.4",
-    "@ledgerhq/hw-eth": "^1.0.4",
+    "@ledgerhq/hw-app-btc": "^1.0.4",
+    "@ledgerhq/hw-transport": "^1.0.4",
+    "@ledgerhq/hw-transport-node-hid": "^1.0.4",
+    "@ledgerhq/hw-app-eth": "^1.0.4",
+    "babel-loader": "^7.1.2",
     "color": "^2.0.1",
     "electron": "1.7.10",
     "electron-devtools-installer": "^2.2.3",
+    "file-loader": "^1.1.6",
     "history": "^4.7.2",
     "i18next": "^10.2.2",
     "i18next-node-fs-backend": "^1.0.0",
@@ -55,6 +57,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "babel-plugin-module-resolver": "^3.0.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",

@@ -1,17 +1,19 @@
+// @flow
+
+import objectPath from 'object-path'
+
+import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
+import listenDevices from '@ledgerhq/hw-transport-node-hid/lib/listenDevices'
+import getDevices from '@ledgerhq/hw-transport-node-hid/lib/getDevices'
+
+import Btc from '@ledgerhq/hw-app-btc'
+
 process.title = 'ledger-wallet-desktop-usb'
-
-const objectPath = require('object-path')
-
-const CommNodeHid = require('@ledgerhq/hw-comm-node-hid').default
-const listenDevices = require('@ledgerhq/hw-comm-node-hid/lib/listenDevices').default
-const getDevices = require('@ledgerhq/hw-comm-node-hid/lib/getDevices').default
-
-const Btc = require('@ledgerhq/hw-btc').default
 
 const isLedgerDevice = device =>
   (device.vendorId === 0x2581 && device.productId === 0x3b7c) || device.vendorId === 0x2c97
 
-function send(type, data, options = { kill: true }) {
+function send(type: string, data: any, options = { kill: true }) {
   process.send({ type, data, options })
 }
 
