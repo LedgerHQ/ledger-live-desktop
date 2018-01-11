@@ -13,7 +13,7 @@ process.title = 'ledger-wallet-desktop-usb'
 const isLedgerDevice = device =>
   (device.vendorId === 0x2581 && device.productId === 0x3b7c) || device.vendorId === 0x2c97
 
-function send(type: string, data: any, options = { kill: true }) {
+function send(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
 }
 
