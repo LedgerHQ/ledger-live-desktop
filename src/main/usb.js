@@ -1,9 +1,15 @@
 process.title = 'ledger-wallet-desktop-usb'
 
-const HID = require('ledger-node-js-hid')
 const objectPath = require('object-path')
-const { isLedgerDevice } = require('ledgerco/lib/utils')
-const ledgerco = require('ledgerco')
+
+const CommNodeHid = require('@ledgerhq/hw-comm-node-hid').default
+const listenDevices = require('@ledgerhq/hw-comm-node-hid/lib/listenDevices').default
+const getDevices = require('@ledgerhq/hw-comm-node-hid/lib/getDevices').default
+
+const Btc = require('@ledgerhq/hw-btc').default
+
+const isLedgerDevice = device =>
+  (device.vendorId === 0x2581 && device.productId === 0x3b7c) || device.vendorId === 0x2c97
 
 function send(type, data, options = { kill: true }) {
   process.send({ type, data, options })
@@ -11,9 +17,9 @@ function send(type, data, options = { kill: true }) {
 
 async function getWalletInfos(path, wallet) {
   if (wallet === 'btc') {
-    const comm = new ledgerco.comm_node(new HID.HID(path), true, 0, false)
-    const btc = new ledgerco.btc(comm)
-    const walletInfos = await btc.getWalletPublicKey_async("44'/0'/0'/0")
+    const comm = new CommNodeHid(path, true, 0, false)
+    const btc = new Btc(comm)
+    const walletInfos = await btc.getWalletPublicKey(`44'/0'/0'/0`)
     return walletInfos
   }
   throw new Error('invalid wallet')
@@ -33,12 +39,12 @@ const handlers = {
       const handleChangeDevice = eventName => device =>
         isLedgerDevice(device) && send(eventName, device, { kill: false })
 
-      HID.listenDevices.start()
+      listenDevices.start()
 
-      HID.listenDevices.events.on('add', handleChangeDevice('device.add'))
-      HID.listenDevices.events.on('remove', handleChangeDevice('device.remove'))
+      listenDevices.events.on('add', handleChangeDevice('device.add'))
+      listenDevices.events.on('remove', handleChangeDevice('device.remove'))
     },
-    all: () => send('devices.update', HID.devices().filter(isLedgerDevice)),
+    all: () => send('devices.update', getDevices().filter(isLedgerDevice)),
   },
   wallet: {
     infos: {

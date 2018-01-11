@@ -11,17 +11,10 @@ ipcMain.on('msg', (event: any, payload) => {
     cwd: resolve(__dirname, './'),
   })
 
-  const send = (msgType, data) => {
-    event.sender.send('msg', {
-      type: msgType,
-      data,
-    })
-  }
-
   compute.send({ type, data })
   compute.on('message', payload => {
     const { type, data, options = {} } = payload
-    send(type, data)
+    event.sender.send('msg', { type, data })
     if (options.kill) {
       compute.kill()
     }
