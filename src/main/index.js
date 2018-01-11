@@ -1,5 +1,5 @@
 // @flow
 
 require('../globals')
-require('./ledger')
+require('./bridge')
 require('./app')

@@ -16,4 +16,9 @@ i18n.use(Backend).init({
   },
 })
 
+i18n.services.pluralResolver.addRule('en', {
+  numbers: [0, 1, 'plural'],
+  plurals: n => Number(n >= 2 ? 2 : n),
+})
+
 export default i18n
