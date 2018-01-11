@@ -35,7 +35,7 @@ function createMainWindow() {
 
   return window
 }
-// dsq
+
 // Quit application when all windows are closed
 app.on('window-all-closed', () => {
   // On macOS it is common for applications to stay open
