@@ -11,9 +11,9 @@
     }
   },
   "scripts": {
-    "start": "electron-webpack dev",
+    "start": "NODE_ENV=development electron-webpack dev",
     "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
+    "dist": "yarn compile && node scripts/postbuild && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "prettier": "prettier --write \"src/**/*.js\"",
     "postinstall": "electron-rebuild && flow-typed install -s",
@@ -25,14 +25,16 @@
       "webpackConfig": "webpack.renderer.js"
     }
   },
+  "resolutions": {
+    "webpack-sources": "1.0.1"
+  },
   "dependencies": {
     "@ledgerhq/hw-app-btc": "^1.0.4",
-    "@ledgerhq/hw-transport": "^1.0.4",
-    "@ledgerhq/hw-transport-node-hid": "^1.0.4",
     "@ledgerhq/hw-app-eth": "^1.0.4",
+    "@ledgerhq/hw-transport": "^1.0.4",
+    "@ledgerhq/hw-transport-node-hid": "^1.0.7",
     "babel-loader": "^7.1.2",
     "color": "^2.0.1",
-    "electron": "1.7.10",
     "electron-devtools-installer": "^2.2.3",
     "file-loader": "^1.1.6",
     "history": "^4.7.2",
@@ -61,6 +63,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "electron": "1.7.10",
     "electron-builder": "^19.49.0",
     "electron-rebuild": "^1.6.1",
     "electron-webpack": "1.11.0",

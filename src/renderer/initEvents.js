@@ -1,6 +1,6 @@
 // @flow
 
-import { ipcRenderer } from 'electron'
+import { ipcRenderer } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
 import objectPath from 'object-path'
 
 import { devicesUpdate, deviceAdd, deviceRemove } from 'actions/devices'
