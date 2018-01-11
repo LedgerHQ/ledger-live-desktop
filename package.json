@@ -27,9 +27,9 @@
   },
   "dependencies": {
     "@ledgerhq/hw-app-btc": "^1.0.4",
+    "@ledgerhq/hw-app-eth": "^1.0.4",
     "@ledgerhq/hw-transport": "^1.0.4",
     "@ledgerhq/hw-transport-node-hid": "^1.0.4",
-    "@ledgerhq/hw-app-eth": "^1.0.4",
     "babel-loader": "^7.1.2",
     "color": "^2.0.1",
     "electron-devtools-installer": "^2.2.3",
