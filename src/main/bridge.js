@@ -1,7 +1,7 @@
 // @flow
 
 import { fork } from 'child_process'
-import { ipcMain } from 'electron'
+import { ipcMain } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
 import { resolve } from 'path'
 
 // $FlowFixMe
