@@ -44,6 +44,26 @@ export default (store: Object) => {
         },
       },
     },
+    updater: {
+      checking: () => {
+        console.log('[UPDATER] checking for updates')
+      },
+      updateAvailable: info => {
+        console.log('[UPDATER] update available', info)
+      },
+      updateNotAvailable: () => {
+        console.log('[UPDATER] no update available')
+      },
+      error: err => {
+        console.log('[UPDATER] update error', err)
+      },
+      downloadProgress: progress => {
+        console.log('[UPDATER] download in progress...', progress.percent)
+      },
+      downloaded: () => {
+        console.log('[UPDATER] update downloaded')
+      },
+    },
   }
 
   ipcRenderer.on('msg', (e: *, payload: MsgPayload) => {

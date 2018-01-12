@@ -2,16 +2,18 @@
 
 import { app, BrowserWindow } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
 
-// Global reference to mainWindow
-// Necessary to prevent win from being garbage collected
+import setupAutoUpdater from './autoUpdate'
+
+// wait a bit before launching update check, to let js initialize on the
+// renderer (listen to events...)
+const CHECK_UPDATE_TIMEOUT = 1e3
+
+// necessary to prevent win from being garbage collected
 let mainWindow
 
 function createMainWindow() {
   const window = new BrowserWindow()
 
-  // Set url for `win`
-  // points to `webpack-dev-server` in development
-  // points to `index.html` in production
   const url = __DEV__
     ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
     : `file://${__dirname}/index.html`
@@ -36,7 +38,6 @@ function createMainWindow() {
   return window
 }
 
-// Quit application when all windows are closed
 app.on('window-all-closed', () => {
   // On macOS it is common for applications to stay open
   // until the user explicitly quits
@@ -46,7 +47,9 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it is common to re-create a window
   // even after all windows have been closed
-  if (mainWindow === null) mainWindow = createMainWindow()
+  if (mainWindow === null) {
+    mainWindow = createMainWindow()
+  }
 })
 
 const installExtensions = async () => {
@@ -64,4 +67,8 @@ app.on('ready', async () => {
   }
 
   mainWindow = createMainWindow()
+
+  if (__PROD__) {
+    setTimeout(() => setupAutoUpdater(mainWindow), CHECK_UPDATE_TIMEOUT)
+  }
 })
