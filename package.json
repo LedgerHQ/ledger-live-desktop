@@ -11,32 +11,27 @@
     }
   },
   "scripts": {
-    "start": "NODE_ENV=development electron-webpack dev",
+    "start": "bash ./scripts/start.sh",
     "compile": "electron-webpack",
-    "dist": "yarn compile && node scripts/postbuild && electron-builder",
+    "dist": "bash ./scripts/dist.sh && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "prettier": "prettier --write \"src/**/*.js\"",
-    "postinstall": "electron-rebuild && flow-typed install -s",
+    "prettier": "prettier --write \"{src,webpack}/**/*.js\"",
+    "postinstall": "bash ./scripts/postinstall.sh",
     "flow": "flow",
-    "lint": "eslint src"
+    "lint": "eslint src webpack"
   },
   "electronWebpack": {
     "renderer": {
-      "webpackConfig": "webpack.renderer.js"
+      "webpackConfig": "./webpack/renderer.config.js"
     }
   },
-  "resolutions": {
-    "webpack-sources": "1.0.1"
-  },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^1.0.4",
-    "@ledgerhq/hw-app-eth": "^1.0.4",
-    "@ledgerhq/hw-transport": "^1.0.4",
-    "@ledgerhq/hw-transport-node-hid": "^1.0.7",
-    "babel-loader": "^7.1.2",
+    "@ledgerhq/hw-app-btc": "^1.0.8",
+    "@ledgerhq/hw-app-eth": "^1.0.8",
+    "@ledgerhq/hw-transport": "^1.0.8",
+    "@ledgerhq/hw-transport-node-hid": "^1.0.8",
     "color": "^2.0.1",
     "electron-devtools-installer": "^2.2.3",
-    "file-loader": "^1.1.6",
     "history": "^4.7.2",
     "i18next": "^10.2.2",
     "i18next-node-fs-backend": "^1.0.0",
@@ -58,14 +53,16 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
     "babel-plugin-module-resolver": "^3.0.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "concurrently": "^3.5.1",
     "electron": "1.7.10",
     "electron-builder": "^19.49.0",
-    "electron-rebuild": "^1.6.1",
+    "electron-rebuild": "^1.7.3",
     "electron-webpack": "1.11.0",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -77,7 +74,9 @@
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.63.1",
     "flow-typed": "^2.2.3",
+    "node-loader": "^0.6.0",
     "prettier": "^1.10.2",
-    "react-hot-loader": "^4.0.0-beta.12"
+    "react-hot-loader": "^4.0.0-beta.12",
+    "webpack-node-externals": "^1.6.0"
   }
 }
