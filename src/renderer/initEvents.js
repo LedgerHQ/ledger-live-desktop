@@ -10,8 +10,11 @@ type MsgPayload = {
   data: *,
 }
 
-function send(msgType: string, data: *) {
-  ipcRenderer.send('msg', {
+// wait a bit before launching update check
+const CHECK_UPDATE_TIMEOUT = 3e3
+
+function send(channel: string, msgType: string, data: *) {
+  ipcRenderer.send(channel, {
     type: msgType,
     data,
   })
@@ -23,7 +26,7 @@ export default (store: Object) => {
       update: devices => {
         store.dispatch(devicesUpdate(devices))
         if (devices.length) {
-          send('wallet.infos.request', {
+          send('usb', 'wallet.infos.request', {
             path: devices[0].path,
             wallet: 'btc',
           })
@@ -78,8 +81,13 @@ export default (store: Object) => {
   })
 
   // First time, we get all devices
-  send('devices.all')
+  send('usb', 'devices.all')
 
   // Start detection when we plug/unplug devices
-  send('devices.listen')
+  send('usb', 'devices.listen')
+
+  if (__PROD__) {
+    // Start check of eventual updates
+    setTimeout(() => send('msg', 'updater.init'), CHECK_UPDATE_TIMEOUT)
+  }
 }

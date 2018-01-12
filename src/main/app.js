@@ -2,12 +2,6 @@
 
 import { app, BrowserWindow } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
 
-import setupAutoUpdater from './autoUpdate'
-
-// wait a bit before launching update check, to let js initialize on the
-// renderer (listen to events...)
-const CHECK_UPDATE_TIMEOUT = 1e3
-
 // necessary to prevent win from being garbage collected
 let mainWindow
 
@@ -67,8 +61,4 @@ app.on('ready', async () => {
   }
 
   mainWindow = createMainWindow()
-
-  if (__PROD__) {
-    setTimeout(() => setupAutoUpdater(mainWindow), CHECK_UPDATE_TIMEOUT)
-  }
 })
