@@ -1,13 +1,17 @@
 {
   "name": "ledger-wallet-desktop",
   "description": "Ledger Wallet Desktop",
-  "version": "0.0.0",
+  "repository": "https://github.com/meriadec/ledger-wallet-desktop-releases-DEV",
+  "version": "0.1.0",
   "author": "Ledger",
   "license": "BSD-2-Clause",
   "build": {
     "appId": "com.electron.ledger",
     "mac": {
       "category": "public.app-category.utilities"
+    },
+    "linux": {
+      "target": "appImage"
     }
   },
   "scripts": {
@@ -17,6 +21,7 @@
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "prettier": "prettier --write \"{src,webpack}/**/*.js\"",
     "postinstall": "bash ./scripts/postinstall.sh",
+    "release": "build",
     "flow": "flow",
     "lint": "eslint src webpack"
   },
@@ -32,6 +37,7 @@
     "@ledgerhq/hw-transport-node-hid": "^1.0.8",
     "color": "^2.0.1",
     "electron-devtools-installer": "^2.2.3",
+    "electron-updater": "^2.18.2",
     "history": "^4.7.2",
     "i18next": "^10.2.2",
     "i18next-node-fs-backend": "^1.0.0",
