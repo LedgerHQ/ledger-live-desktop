@@ -1,7 +1,7 @@
 .DS_Store
-/static/
-/dist/
-/node_modules/
-/flow-typed/
-thumbs.db
 *.log
+/dist/
+/flow-typed/
+/node_modules/
+/static/
+thumbs.db

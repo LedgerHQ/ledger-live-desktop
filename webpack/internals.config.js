@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const nodeExternals = require('webpack-node-externals') // eslint-disable-line import/no-extraneous-dependencies
 
 const define = require('./define')
 
@@ -20,7 +19,9 @@ module.exports = {
 
   entry: dirs(path.resolve(__dirname, '../src/internals')),
 
-  externals: [nodeExternals()],
+  externals: {
+    'node-hid': 'commonjs node-hid',
+  },
 
   output: {
     path: path.resolve(__dirname, '../static'),
