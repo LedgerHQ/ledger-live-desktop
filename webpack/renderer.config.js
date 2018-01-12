@@ -1,14 +1,7 @@
-const webpack = require('webpack')
-
-require('./src/globals')
+const define = require('./define')
 
 const config = {
-  plugins: [
-    new webpack.DefinePlugin({
-      __DEV__,
-      __PROD__,
-    }),
-  ],
+  plugins: [define],
   devServer: {
     historyApiFallback: true,
   },

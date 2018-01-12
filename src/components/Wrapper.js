@@ -16,7 +16,7 @@ import TopBar from 'components/TopBar'
 const Wrapper = () => (
   <Box grow horizontal>
     <SideBar />
-    <Box grow bg="cream">
+    <Box shrink grow bg="cream">
       <TopBar />
       <Route path="/" component={DashboardPage} />
       <Route path="/settings" component={SettingsPage} />
