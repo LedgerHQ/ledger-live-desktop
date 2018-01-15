@@ -25,10 +25,10 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^1.0.8",
-    "@ledgerhq/hw-app-eth": "^1.0.8",
-    "@ledgerhq/hw-transport": "^1.0.8",
-    "@ledgerhq/hw-transport-node-hid": "^1.0.8",
+    "@ledgerhq/hw-app-btc": "^1.1.2-beta.068e2a14",
+    "@ledgerhq/hw-app-eth": "^1.1.2-beta.068e2a14",
+    "@ledgerhq/hw-transport": "^1.1.2-beta.068e2a14",
+    "@ledgerhq/hw-transport-node-hid": "^1.1.2-beta.068e2a14",
     "color": "^2.0.1",
     "electron-devtools-installer": "^2.2.3",
     "electron-updater": "^2.18.2",
