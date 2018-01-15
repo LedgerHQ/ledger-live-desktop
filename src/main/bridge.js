@@ -11,7 +11,7 @@ import setupAutoUpdater from './autoUpdate'
 ipcMain.on('usb', (event: any, payload) => {
   const { type, data } = payload
 
-  const compute = fork(resolve(__static, './usb'))
+  const compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals/usb`))
 
   compute.send({ type, data })
   compute.on('message', payload => {

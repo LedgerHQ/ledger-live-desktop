@@ -1,0 +1,9 @@
+appId: com.electron.ledger
+
+mac:
+  category: public.app-category.utilities
+linux:
+  target: appImage
+
+files:
+  - dist/internals
