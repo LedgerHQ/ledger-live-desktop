@@ -78,28 +78,28 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@ledgerhq/hw-app-btc@^1.0.8":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-1.1.0.tgz#0ffc31290c0ba6cc6f00e3f9c68c2f80f3c5d3f0"
+"@ledgerhq/hw-app-btc@^1.1.2-beta.068e2a14":
+  version "1.1.2-beta.068e2a14"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-1.1.2-beta.068e2a14.tgz#0e028ac16dd96808d13a846ee5adc649ba1f3a1b"
   dependencies:
-    "@ledgerhq/hw-transport" "^1.1.0"
+    "@ledgerhq/hw-transport" "^1.1.2-beta.068e2a14"
 
-"@ledgerhq/hw-app-eth@^1.0.8":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-1.1.0.tgz#ec0f98fb6b84292d05105092ff684321785a7b1b"
+"@ledgerhq/hw-app-eth@^1.1.2-beta.068e2a14":
+  version "1.1.2-beta.068e2a14"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-1.1.2-beta.068e2a14.tgz#6b9cf888dc109ccadbfd38f6249e973c08366d2a"
   dependencies:
-    "@ledgerhq/hw-transport" "^1.1.0"
+    "@ledgerhq/hw-transport" "^1.1.2-beta.068e2a14"
 
-"@ledgerhq/hw-transport-node-hid@^1.0.8":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-1.1.0.tgz#28255ffe0b04d2d15062c92f588a9f47c243ce2c"
+"@ledgerhq/hw-transport-node-hid@^1.1.2-beta.068e2a14":
+  version "1.1.2-beta.068e2a14"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-1.1.2-beta.068e2a14.tgz#dae63fcfbab570363fc89b93e4e78010c09bfe54"
   dependencies:
-    "@ledgerhq/hw-transport" "^1.1.0"
+    "@ledgerhq/hw-transport" "^1.1.2-beta.068e2a14"
     node-hid "^0.7.2"
 
-"@ledgerhq/hw-transport@^1.0.8", "@ledgerhq/hw-transport@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.1.0.tgz#56dc9810e89a02d5d8e4e9e9f22f63c1f7511136"
+"@ledgerhq/hw-transport@^1.1.2-beta.068e2a14":
+  version "1.1.2-beta.068e2a14"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.1.2-beta.068e2a14.tgz#66c878040bcdff514983e8908ee4645093e2a8a5"
   dependencies:
     events "^1.1.1"
     invariant "^2.2.0"
