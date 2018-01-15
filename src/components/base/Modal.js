@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { closeModal, isModalOpened } from 'reducers/modals'
 
 type Props = {
-  isOpened: boolean,
+  isOpened?: boolean,
   onClose: Function,
   children: any,
 }
@@ -71,6 +71,10 @@ const Body = styled.div.attrs({
 `
 
 class Modal extends PureComponent<Props> {
+  static defaultProps = {
+    isOpened: false,
+  }
+
   render() {
     const { isOpened, onClose, children } = this.props
     return (

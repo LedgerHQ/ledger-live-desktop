@@ -5,7 +5,7 @@ import Btc from '@ledgerhq/hw-app-btc'
 
 async function getWalletInfos(path, wallet) {
   if (wallet === 'btc') {
-    const comm = new CommNodeHid(path, true, 0, false)
+    const comm = await CommNodeHid.open(path)
     const btc = new Btc(comm)
     const walletInfos = await btc.getWalletPublicKey(`44'/0'/0'/0`)
     return walletInfos

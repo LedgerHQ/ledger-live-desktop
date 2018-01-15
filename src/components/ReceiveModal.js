@@ -4,7 +4,9 @@ import React, { PureComponent } from 'react'
 
 import Modal from 'components/base/Modal'
 
-class ReceiveModal extends PureComponent {
+type Props = {}
+
+class ReceiveModal extends PureComponent<Props> {
   render() {
     return <Modal name="receive">receive modal</Modal>
   }

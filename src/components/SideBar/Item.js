@@ -27,7 +27,7 @@ type Props = {
   openModal: Function,
 }
 
-const mapStateToProps = (state, { modal }) => ({
+const mapStateToProps = (state, { modal }: any) => ({
   // connect router here only to make components re-render
   // see https://github.com/ReactTraining/react-router/issues/4671
   router: state.router,

@@ -43,7 +43,8 @@ export const closeModal = createAction('MODAL_CLOSE', name => ({ name }))
 
 // Selectors
 
-export const isModalOpened = (state, name) => state.modals[name] && state.modals[name].isOpened
+export const isModalOpened = (state: Object, name: string) =>
+  state.modals[name] && state.modals[name].isOpened
 
 // Exporting reducer
 
