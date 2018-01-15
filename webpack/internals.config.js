@@ -10,7 +10,7 @@ const dirs = p =>
     .filter(f => fs.statSync(path.join(p, f)).isDirectory())
     .map(d => path.resolve(__dirname, `${p}/${d}`))
     .reduce((result, value) => {
-      const [key] = value.split('/').slice(-1)
+      const [key] = value.split(path.sep).slice(-1)
       result[key] = value
       return result
     }, {})
@@ -23,7 +23,7 @@ module.exports = webpackMain().then(config => ({
   entry: dirs(path.resolve(__dirname, '../src/internals')),
 
   resolve: {
-    extensions: config.extensions,
+    extensions: config.resolve.extensions,
   },
 
   externals: ['node-hid', ...config.externals],
