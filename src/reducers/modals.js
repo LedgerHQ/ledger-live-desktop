@@ -2,7 +2,14 @@
 
 import { handleActions, createAction } from 'redux-actions'
 
-const state = {}
+export type ModalsState = {
+  [key: string]: {
+    isOpened: boolean,
+    data?: Object | null,
+  },
+}
+
+const state: ModalsState = {}
 
 type OpenPayload = {
   name: string,
