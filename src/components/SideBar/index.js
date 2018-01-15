@@ -24,8 +24,8 @@ class SideBar extends PureComponent<{}> {
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
             <div>
               <Item linkTo="/">{'Dashboard'}</Item>
-              <Item>{'Send'}</Item>
-              <Item>{'Receive'}</Item>
+              <Item modal="send">{'Send'}</Item>
+              <Item modal="receive">{'Receive'}</Item>
               <Item linkTo="/settings">{'Settings'}</Item>
             </div>
           </Box>

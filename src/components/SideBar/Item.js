@@ -7,6 +7,8 @@ import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 
+import { openModal, isModalOpened } from 'reducers/modals'
+
 import type { Element } from 'react'
 import type { Location } from 'react-router'
 
@@ -16,14 +18,25 @@ import Text from 'components/base/Text'
 type Props = {
   children: string,
   linkTo?: string | null,
+  modal?: string | null,
   desc?: string | null,
   icon?: Element<*> | null,
   location: Location,
+  isModalOpened: boolean,
   push: Function,
+  openModal: Function,
 }
+
+const mapStateToProps = (state, { modal }: any) => ({
+  // connect router here only to make components re-render
+  // see https://github.com/ReactTraining/react-router/issues/4671
+  router: state.router,
+  isModalOpened: modal ? isModalOpened(state, modal) : false,
+})
 
 const mapDispatchToProps = {
   push,
+  openModal,
 }
 
 const Container = styled(Box).attrs({
@@ -46,10 +59,23 @@ const IconWrapper = styled(Box)`
   border: 2px solid rgba(255, 255, 255, 0.1);
 `
 
-function Item({ children, desc, icon, linkTo, push, location }: Props) {
+function Item({
+  children,
+  desc,
+  icon,
+  linkTo,
+  push,
+  location,
+  modal,
+  openModal,
+  isModalOpened,
+}: Props) {
   const { pathname } = location
   return (
-    <Container onClick={linkTo ? () => push(linkTo) : void 0} active={pathname === linkTo}>
+    <Container
+      onClick={linkTo ? () => push(linkTo) : modal ? () => openModal(modal) : void 0}
+      active={pathname === linkTo || isModalOpened}
+    >
       <IconWrapper mr={2}>{icon || null}</IconWrapper>
       <div>
         <Text fontWeight="bold" fontSize={1}>
@@ -69,13 +95,12 @@ Item.defaultProps = {
   icon: null,
   desc: null,
   linkTo: null,
+  modal: null,
 }
 
 export default compose(
   withRouter,
-  // connect router here only to make components re-render
-  // see https://github.com/ReactTraining/react-router/issues/4671
-  connect(({ router }) => ({ router }), mapDispatchToProps, null, {
+  connect(mapStateToProps, mapDispatchToProps, null, {
     pure: false,
   }),
 )(Item)
