@@ -25,7 +25,7 @@ module.exports = webpackMain().then(config => ({
     extensions: ['.js', '.json', '.node'],
   },
 
-  externals: config.externals,
+  externals: ['node-hid', ...config.externals],
 
   output: {
     path: path.resolve(__dirname, '../dist/internals'),
