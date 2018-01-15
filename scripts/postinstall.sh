@@ -1,4 +1,4 @@
 #/bin/bash
 
-electron-rebuild &&
+electron-builder install-app-deps &&
 flow-typed install -s --overwrite
