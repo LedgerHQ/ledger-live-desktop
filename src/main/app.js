@@ -6,7 +6,9 @@ import { app, BrowserWindow } from 'electron' // eslint-disable-line import/no-e
 let mainWindow
 
 function createMainWindow() {
-  const window = new BrowserWindow()
+  const window = new BrowserWindow({
+    vibrancy: 'dark',
+  })
 
   const url = __DEV__
     ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`

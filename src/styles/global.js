@@ -22,7 +22,6 @@ injectGlobal`
     line-height: 1.5;
     font-size: 16px;
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
-    background: white;
   }
 
   #app {

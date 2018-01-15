@@ -3,6 +3,8 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
+import { rgba } from 'styles/helpers'
+
 import Box, { GrowScroll } from 'components/base/Box'
 import Item from './Item'
 
@@ -15,11 +17,18 @@ const CapsSubtitle = styled(Box).attrs({
   font-weight: bold;
 `
 
+const Container = styled(GrowScroll).attrs({
+  flow: 4,
+  py: 4,
+})`
+  background-color: ${p => rgba(p.theme.color, 0.4)};
+`
+
 class SideBar extends PureComponent<{}> {
   render() {
     return (
       <Box noShrink style={{ width: 250 }}>
-        <GrowScroll flow={4} py={4} bg="night">
+        <Container>
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
             <div>
@@ -46,7 +55,7 @@ class SideBar extends PureComponent<{}> {
               </Item>
             </div>
           </Box>
-        </GrowScroll>
+        </Container>
       </Box>
     )
   }
