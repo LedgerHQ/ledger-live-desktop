@@ -21,14 +21,14 @@ const Container = styled(GrowScroll).attrs({
   flow: 4,
   py: 4,
 })`
-  background-color: ${p => rgba(p.theme.color, 0.4)};
+  background-color: ${p => rgba(p.theme.colors[p.bg], 0.4)};
 `
 
 class SideBar extends PureComponent<{}> {
   render() {
     return (
       <Box noShrink style={{ width: 250 }}>
-        <Container>
+        <Container bg="night">
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
             <div>
