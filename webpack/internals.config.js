@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const webpack = require('webpack')
 const webpackMain = require('electron-webpack/webpack.main.config') // eslint-disable-line import/no-extraneous-dependencies
 
 const define = require('./define')
@@ -17,35 +16,24 @@ const dirs = p =>
     }, {})
 
 module.exports = webpackMain().then(config => ({
-  target: 'electron-main',
+  context: config.context,
+  devtool: config.devtool,
+  target: config.target,
 
   entry: dirs(path.resolve(__dirname, '../src/internals')),
 
   resolve: {
-    extensions: ['.js', '.json', '.node'],
+    extensions: config.extensions,
   },
 
   externals: ['node-hid', ...config.externals],
 
   output: {
     path: path.resolve(__dirname, '../dist/internals'),
-    filename: '[name].js',
-    libraryTarget: 'commonjs2',
+    ...config.output,
   },
 
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: 'babel-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.node$/,
-        use: 'node-loader',
-      },
-    ],
-  },
+  module: config.module,
 
-  plugins: [define, new webpack.optimize.ModuleConcatenationPlugin()],
+  plugins: [define, ...config.plugins],
 }))
