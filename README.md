@@ -1,3 +1,12 @@
+### requirements
+
+#### Linux
+
+```
+libicns
+graphicsmagick
+```
+
 install dependencies
 
 ```
