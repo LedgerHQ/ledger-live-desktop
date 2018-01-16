@@ -16,7 +16,7 @@
     "flow": "flow",
     "lint": "eslint src webpack .storybook",
     "storybook": "start-storybook -p 4444",
-    "build-storybook": "build-storybook"
+    "publish-storybook": "bash ./scripts/publish-storybook.sh"
   },
   "electronWebpack": {
     "renderer": {
