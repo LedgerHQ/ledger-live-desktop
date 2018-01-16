@@ -7,13 +7,13 @@ import wallet from './wallet'
 
 process.title = 'ledger-wallet-desktop-usb'
 
-function send(type: string, data: any, options: Object = { kill: true }) {
+function sendEvent(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
 }
 
 const handlers = {
-  devices: devices(send),
-  wallet: wallet(send),
+  devices: devices(sendEvent),
+  wallet: wallet(sendEvent),
 }
 
 process.on('message', payload => {

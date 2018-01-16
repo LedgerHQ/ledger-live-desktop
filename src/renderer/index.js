@@ -6,7 +6,7 @@ import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
 
 import createStore from 'renderer/createStore'
-import initEvents from 'renderer/initEvents'
+import events from 'renderer/events'
 
 import App from 'components/App'
 
@@ -16,7 +16,7 @@ const history = createHistory()
 const store = createStore(history)
 const rootNode = document.getElementById('app')
 
-initEvents(store)
+events(store)
 
 function r(Comp) {
   if (rootNode) {

@@ -1,32 +1,38 @@
-### requirements
+# Ledger Wallet Desktop
 
-#### Linux
+## Requirements
 
-```
-libicns
-graphicsmagick
-```
+* nodejs v8.x (https://nodejs.org/en/)
+* yarn latest (https://yarnpkg.com/fr/docs/install)
 
-install dependencies
+## Installation
 
 ```
 yarn
 ```
 
-launch development version
+## Development
 
 ```
 yarn start
 ```
 
-build, but not package for distribution
+## Build
+
+> Not package for distribution
 
 ```
 yarn dist:dir
 ```
 
-build and package everything
+> Package everything
 
 ```
 yarn dist
+```
+
+## Release
+
+```
+yarn release
 ```
