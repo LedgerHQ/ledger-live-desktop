@@ -22,19 +22,19 @@ function setCurrentDevice(state) {
 }
 
 const handlers: Object = {
-  DEVICES_UPDATE: (state: DevicesState, { payload: devices }: { payload: Devices }) =>
+  UPDATE_DEVICES: (state: DevicesState, { payload: devices }: { payload: Devices }) =>
     setCurrentDevice({
       ...state,
       devices,
     }),
-  DEVICE_ADD: (state: DevicesState, { payload: device }: { payload: Device }) =>
+  ADD_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) =>
     setCurrentDevice({
       ...state,
       devices: [...state.devices, device].filter(
         (v, i, s) => s.findIndex(t => t.path === v.path) === i,
       ),
     }),
-  DEVICE_REMOVE: (state: DevicesState, { payload: device }: { payload: Device }) => ({
+  REMOVE_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) => ({
     ...state,
     currentDevice:
       state.currentDevice !== null && state.currentDevice.path === device.path
@@ -42,7 +42,7 @@ const handlers: Object = {
         : state.currentDevice,
     devices: state.devices.filter(d => d.path !== device.path),
   }),
-  DEVICE_CHOOSE: (state: DevicesState, { payload: currentDevice }: { payload: Device }) => ({
+  SET_CURRENT_DEVICE: (state: DevicesState, { payload: currentDevice }: { payload: Device }) => ({
     ...state,
     currentDevice,
   }),

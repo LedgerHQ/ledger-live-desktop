@@ -17,18 +17,19 @@ const CapsSubtitle = styled(Box).attrs({
   font-weight: bold;
 `
 
-const Container = styled(GrowScroll).attrs({
-  flow: 4,
-  py: 4,
+const Container = styled(Box).attrs({
+  noShrink: true,
 })`
   background-color: ${p => rgba(p.theme.colors[p.bg], 0.4)};
+  padding-top: 40px;
+  width: 250px;
 `
 
 class SideBar extends PureComponent<{}> {
   render() {
     return (
-      <Box noShrink style={{ width: 250 }}>
-        <Container bg="night">
+      <Container>
+        <GrowScroll flow={4} py={4}>
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
             <div>
@@ -55,8 +56,8 @@ class SideBar extends PureComponent<{}> {
               </Item>
             </div>
           </Box>
-        </Container>
-      </Box>
+        </GrowScroll>
+      </Container>
     )
   }
 }

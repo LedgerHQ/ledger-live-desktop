@@ -13,14 +13,14 @@ async function getWalletInfos(path, wallet) {
   throw new Error('invalid wallet')
 }
 
-export default (send: Function) => ({
+export default (sendEvent: Function) => ({
   infos: {
     request: async ({ path, wallet }: { path: string, wallet: string }) => {
       try {
-        const publicKey = await getWalletInfos(path, wallet)
-        send('wallet.infos.success', { path, publicKey })
+        const data = await getWalletInfos(path, wallet)
+        sendEvent('wallet.infos.success', { path, wallet, data })
       } catch (err) {
-        send('wallet.infos.fail', { path, err: err.stack || err })
+        sendEvent('wallet.infos.fail', { path, wallet, err: err.stack || err })
       }
     },
   },

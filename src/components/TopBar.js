@@ -5,11 +5,11 @@ import { connect } from 'react-redux'
 
 import type { MapStateToProps, MapDispatchToProps } from 'react-redux'
 import type { Device, Devices } from 'types/common'
-import type { deviceChooseType } from 'actions/devices'
+import type { SetCurrentDevice } from 'actions/devices'
 
 import { getDevices, getCurrentDevice } from 'reducers/devices'
 
-import { deviceChoose } from 'actions/devices'
+import { setCurrentDevice } from 'actions/devices'
 
 import Box from 'components/base/Box'
 import Overlay from 'components/base/Overlay'
@@ -20,13 +20,13 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 })
 
 const mapDispatchToProps: MapDispatchToProps<*, *, *> = {
-  deviceChoose,
+  setCurrentDevice,
 }
 
 type Props = {
   devices: Devices,
   currentDevice: Device,
-  deviceChoose: deviceChooseType,
+  setCurrentDevice: SetCurrentDevice,
 }
 
 type State = {
@@ -59,9 +59,9 @@ class TopBar extends PureComponent<Props, State> {
   }
 
   handleSelectDevice = device => () => {
-    const { deviceChoose } = this.props
+    const { setCurrentDevice } = this.props
 
-    deviceChoose(device)
+    setCurrentDevice(device)
 
     this.setState({
       changeDevice: false,

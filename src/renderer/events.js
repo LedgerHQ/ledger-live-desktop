@@ -3,7 +3,8 @@
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 
-import { devicesUpdate, deviceAdd, deviceRemove } from 'actions/devices'
+import { updateDevices, addDevice, removeDevice } from 'actions/devices'
+import { setCurrentWallet } from 'actions/wallets'
 import { setUpdateStatus } from 'reducers/update'
 
 type MsgPayload = {
@@ -14,7 +15,7 @@ type MsgPayload = {
 // wait a bit before launching update check
 const CHECK_UPDATE_TIMEOUT = 3e3
 
-function send(channel: string, msgType: string, data: *) {
+export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
     type: msgType,
     data,
@@ -25,27 +26,17 @@ export default (store: Object) => {
   const handlers = {
     devices: {
       update: devices => {
-        store.dispatch(devicesUpdate(devices))
-        if (devices.length) {
-          send('usb', 'wallet.infos.request', {
-            path: devices[0].path,
-            wallet: 'btc',
-          })
-        }
+        store.dispatch(updateDevices(devices))
       },
     },
     device: {
-      add: device => store.dispatch(deviceAdd(device)),
-      remove: device => store.dispatch(deviceRemove(device)),
+      add: device => store.dispatch(addDevice(device)),
+      remove: device => store.dispatch(removeDevice(device)),
     },
     wallet: {
       infos: {
-        success: ({ path, publicKey }) => {
-          console.log({ path, publicKey })
-        },
-        fail: ({ path, err }) => {
-          console.log({ path, err })
-        },
+        success: ({ wallet, data }) => store.dispatch(setCurrentWallet({ wallet, data })),
+        fail: ({ wallet, err }) => store.dispatch(setCurrentWallet({ wallet, err })),
       },
     },
     updater: {
@@ -70,13 +61,13 @@ export default (store: Object) => {
   })
 
   // First time, we get all devices
-  send('usb', 'devices.all')
+  sendEvent('usb', 'devices.all')
 
   // Start detection when we plug/unplug devices
-  send('usb', 'devices.listen')
+  sendEvent('usb', 'devices.listen')
 
   if (__PROD__) {
     // Start check of eventual updates
-    setTimeout(() => send('msg', 'updater.init'), CHECK_UPDATE_TIMEOUT)
+    setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_TIMEOUT)
   }
 }

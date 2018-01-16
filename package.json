@@ -1,7 +1,7 @@
 {
   "name": "ledger-wallet-desktop",
   "description": "Ledger Wallet Desktop",
-  "repository": "https://github.com/meriadec/ledger-wallet-desktop-releases-DEV",
+  "repository": "https://github.com/LedgerHQ/ledger-wallet-desktop",
   "version": "0.1.0",
   "author": "Ledger",
   "license": "BSD-2-Clause",
