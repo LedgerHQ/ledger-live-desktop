@@ -10,11 +10,13 @@
     "compile": "electron-webpack",
     "dist": "bash ./scripts/dist.sh && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "prettier": "prettier --write \"{src,webpack}/**/*.js\"",
+    "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
     "postinstall": "bash ./scripts/postinstall.sh",
     "release": "build",
     "flow": "flow",
-    "lint": "eslint src webpack"
+    "lint": "eslint src webpack .storybook",
+    "storybook": "start-storybook -p 4444",
+    "build-storybook": "build-storybook"
   },
   "electronWebpack": {
     "renderer": {
@@ -53,6 +55,11 @@
     "webpack": "^3.10.0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.3.9",
+    "@storybook/addon-links": "^3.3.9",
+    "@storybook/addons": "^3.3.9",
+    "@storybook/react": "^3.3.9",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
     "babel-loader": "^7.1.2",
     "babel-plugin-module-resolver": "^3.0.0",
