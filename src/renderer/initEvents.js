@@ -4,6 +4,7 @@ import { ipcRenderer } from 'electron' // eslint-disable-line import/no-extraneo
 import objectPath from 'object-path'
 
 import { devicesUpdate, deviceAdd, deviceRemove } from 'actions/devices'
+import { setUpdateStatus } from 'reducers/update'
 
 type MsgPayload = {
   type: string,
@@ -48,24 +49,12 @@ export default (store: Object) => {
       },
     },
     updater: {
-      checking: () => {
-        console.log('[UPDATER] checking for updates')
-      },
-      updateAvailable: info => {
-        console.log('[UPDATER] update available', info)
-      },
-      updateNotAvailable: () => {
-        console.log('[UPDATER] no update available')
-      },
-      error: err => {
-        console.log('[UPDATER] update error', err)
-      },
-      downloadProgress: progress => {
-        console.log('[UPDATER] download in progress...', progress.percent)
-      },
-      downloaded: () => {
-        console.log('[UPDATER] update downloaded')
-      },
+      checking: () => store.dispatch(setUpdateStatus('checking')),
+      updateAvailable: info => store.dispatch(setUpdateStatus('available', info)),
+      updateNotAvailable: () => store.dispatch(setUpdateStatus('unavailable')),
+      error: err => store.dispatch(setUpdateStatus('error', err)),
+      downloadProgress: progress => store.dispatch(setUpdateStatus('progress', progress)),
+      downloaded: () => store.dispatch(setUpdateStatus('downloaded')),
     },
   }
 

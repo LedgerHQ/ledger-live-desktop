@@ -11,6 +11,7 @@ import SettingsPage from 'components/SettingsPage'
 import AccountPage from 'components/AccountPage'
 import SendModal from 'components/SendModal'
 import ReceiveModal from 'components/ReceiveModal'
+import UpdateNotifier from 'components/UpdateNotifier'
 
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
@@ -24,8 +25,11 @@ const Wrapper = () => (
       <Route path="/settings" component={SettingsPage} />
       <Route path="/account/:account" component={AccountPage} />
     </Box>
+
     <SendModal />
     <ReceiveModal />
+
+    <UpdateNotifier />
   </Box>
 )
 
