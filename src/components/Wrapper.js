@@ -1,6 +1,7 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
+import { ipcRenderer } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
 import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
@@ -16,21 +17,29 @@ import UpdateNotifier from 'components/UpdateNotifier'
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
 
-const Wrapper = () => (
-  <Box grow horizontal>
-    <SideBar />
-    <Box shrink grow bg="cream">
-      <TopBar />
-      <Route path="/" component={DashboardPage} />
-      <Route path="/settings" component={SettingsPage} />
-      <Route path="/account/:account" component={AccountPage} />
-    </Box>
+class Wrapper extends PureComponent<{}> {
+  componentDidMount() {
+    ipcRenderer.send('renderer-ready')
+  }
 
-    <SendModal />
-    <ReceiveModal />
+  render() {
+    return (
+      <Box grow horizontal>
+        <SideBar />
+        <Box shrink grow bg="cream">
+          <TopBar />
+          <Route path="/" component={DashboardPage} />
+          <Route path="/settings" component={SettingsPage} />
+          <Route path="/account/:account" component={AccountPage} />
+        </Box>
 
-    <UpdateNotifier />
-  </Box>
-)
+        <SendModal />
+        <ReceiveModal />
+
+        <UpdateNotifier />
+      </Box>
+    )
+  }
+}
 
 export default translate()(Wrapper)

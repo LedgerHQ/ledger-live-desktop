@@ -1,14 +1,23 @@
 // @flow
 
-import { app, BrowserWindow } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
+import { app, ipcMain, BrowserWindow } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
 
 // necessary to prevent win from being garbage collected
 let mainWindow
 
 function createMainWindow() {
-  const window = new BrowserWindow({
-    vibrancy: 'dark',
-  })
+  const windowOptions = {
+    ...(process.platform === 'darwin'
+      ? {
+          frame: false,
+          titleBarStyle: 'hiddenInset',
+          vibrancy: 'ultra-dark',
+        }
+      : {}),
+    show: false,
+  }
+
+  const window = new BrowserWindow(windowOptions)
 
   const url = __DEV__
     ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
@@ -22,6 +31,10 @@ function createMainWindow() {
 
   window.on('closed', () => {
     mainWindow = null
+  })
+
+  ipcMain.on('renderer-ready', () => {
+    window.show()
   })
 
   window.webContents.on('devtools-opened', () => {
