@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-const webpackMain = require('electron-webpack/webpack.main.config') // eslint-disable-line import/no-extraneous-dependencies
+const webpackMain = require('electron-webpack/webpack.main.config')
 
 const define = require('./define')
 

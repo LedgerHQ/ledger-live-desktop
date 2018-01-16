@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { ipcRenderer } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
+import { ipcRenderer } from 'electron'
 import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
