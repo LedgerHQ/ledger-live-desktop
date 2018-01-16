@@ -1,6 +1,6 @@
 // @flow
 
-import { app, ipcMain, BrowserWindow } from 'electron' // eslint-disable-line import/no-extraneous-dependencies
+import { app, ipcMain, BrowserWindow } from 'electron'
 
 // necessary to prevent win from being garbage collected
 let mainWindow
