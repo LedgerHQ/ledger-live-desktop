@@ -6,25 +6,26 @@
   "author": "Ledger",
   "license": "BSD-2-Clause",
   "scripts": {
-    "start": "bash ./scripts/start.sh",
     "compile": "electron-webpack",
-    "dist": "bash ./scripts/dist.sh && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
-    "postinstall": "bash ./scripts/postinstall.sh",
-    "release": "build",
+    "dist": "bash ./scripts/dist.sh && electron-builder",
     "flow": "flow",
     "lint": "eslint src webpack .storybook",
-    "storybook": "start-storybook -p 4444",
-    "publish-storybook": "bash ./scripts/publish-storybook.sh"
+    "postinstall": "bash ./scripts/postinstall.sh",
+    "prepush": "lint-staged",
+    "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
+    "publish-storybook": "bash ./scripts/publish-storybook.sh",
+    "release": "build",
+    "start": "bash ./scripts/start.sh",
+    "storybook": "start-storybook -p 4444"
+  },
+  "lint-staged": {
+    "*.js": ["eslint --fix", "prettier --write", "git add"]
   },
   "electronWebpack": {
     "renderer": {
       "webpackConfig": "./webpack/renderer.config.js"
     }
-  },
-  "resolutions": {
-    "webpack-sources": "1.0.1"
   },
   "dependencies": {
     "@ledgerhq/hw-app-btc": "^1.1.2-beta.068e2a14",
@@ -83,6 +84,8 @@
     "eslint-plugin-react": "^7.5.1",
     "flow-bin": "^0.63.1",
     "flow-typed": "^2.2.3",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "node-loader": "^0.6.0",
     "prettier": "^1.10.2",
     "react-hot-loader": "^4.0.0-beta.12"
