@@ -5,4 +5,4 @@ import Input from 'components/base/Input'
 
 const stories = storiesOf('Input', module)
 
-stories.add('basic', () => <Input />)
+stories.add('basic', () => <Input placeholder="Foo bar" />)
