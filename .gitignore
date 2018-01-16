@@ -4,4 +4,5 @@
 /flow-typed/
 /node_modules/
 /static/
+/storybook-static/
 thumbs.db
