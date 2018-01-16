@@ -1,5 +1,6 @@
 import React from 'react'
 import { configure, addDecorator } from '@storybook/react'
+import { withKnobs } from '@storybook/addon-knobs'
 import { ThemeProvider } from 'styled-components'
 
 import 'styles/global'
@@ -15,5 +16,7 @@ addDecorator(story => (
     <div style={{ padding: 20 }}>{story()}</div>
   </ThemeProvider>
 ))
+
+addDecorator(withKnobs)
 
 configure(loadStories, module)
