@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
@@ -66,16 +66,16 @@ class SideBar extends PureComponent<Props> {
         <GrowScroll flow={4} py={4}>
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
-            <Fragment>
+            <div>
               <Item linkTo="/">{'Dashboard'}</Item>
               <Item modal="send">{'Send'}</Item>
               <Item modal="receive">{'Receive'}</Item>
               <Item linkTo="/settings">{'Settings'}</Item>
-            </Fragment>
+            </div>
           </Box>
           <Box flow={2}>
             <CapsSubtitle>{'Accounts'}</CapsSubtitle>
-            <Fragment>
+            <div>
               {accounts.map((account, i) => (
                 <Item
                   linkTo="/account/brian"
@@ -85,7 +85,7 @@ class SideBar extends PureComponent<Props> {
                   {account.name}
                 </Item>
               ))}
-            </Fragment>
+            </div>
           </Box>
           <BtnAddAccount onClick={() => openModal('add-account')}>{'Add account'}</BtnAddAccount>
         </GrowScroll>
