@@ -18,6 +18,7 @@
     "no-shadow": 0,
     "no-underscore-dangle": 0,
     "no-void": 0,
+    "no-plusplus": 0,
     "import/no-extraneous-dependencies": 0,
     "react/jsx-curly-brace-presence": 0,
     "react/jsx-filename-extension": 0,
