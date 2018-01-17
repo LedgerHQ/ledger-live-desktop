@@ -4,12 +4,11 @@ import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
-import { setCurrentWallet } from 'actions/wallets'
 import { setUpdateStatus } from 'reducers/update'
 
 type MsgPayload = {
   type: string,
-  data: *,
+  data: any,
 }
 
 // wait a bit before launching update check
@@ -17,6 +16,13 @@ const CHECK_UPDATE_TIMEOUT = 3e3
 
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
+    type: msgType,
+    data,
+  })
+}
+
+export function sendSyncEvent(channel: string, msgType: string, data: any): any {
+  return ipcRenderer.sendSync(`${channel}:sync`, {
     type: msgType,
     data,
   })
@@ -33,12 +39,6 @@ export default (store: Object) => {
       add: device => store.dispatch(addDevice(device)),
       remove: device => store.dispatch(removeDevice(device)),
     },
-    wallet: {
-      infos: {
-        success: ({ wallet, data }) => store.dispatch(setCurrentWallet({ wallet, data })),
-        fail: ({ wallet, err }) => store.dispatch(setCurrentWallet({ wallet, err })),
-      },
-    },
     updater: {
       checking: () => store.dispatch(setUpdateStatus('checking')),
       updateAvailable: info => store.dispatch(setUpdateStatus('available', info)),
@@ -49,14 +49,12 @@ export default (store: Object) => {
     },
   }
 
-  ipcRenderer.on('msg', (e: *, payload: MsgPayload) => {
+  ipcRenderer.on('msg', (event: any, payload: MsgPayload) => {
     const { type, data } = payload
-
     const handler = objectPath.get(handlers, type)
     if (!handler) {
       return
     }
-
     handler(data)
   })
 

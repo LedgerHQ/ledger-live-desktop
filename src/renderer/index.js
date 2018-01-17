@@ -8,6 +8,8 @@ import createHistory from 'history/createHashHistory'
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
+import { fetchAccounts } from 'actions/accounts'
+
 import App from 'components/App'
 
 import 'styles/global'
@@ -17,6 +19,8 @@ const store = createStore(history)
 const rootNode = document.getElementById('app')
 
 events(store)
+
+store.dispatch(fetchAccounts())
 
 function r(Comp) {
   if (rootNode) {

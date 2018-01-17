@@ -20,7 +20,11 @@
     "storybook": "start-storybook -p 4444"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   },
   "electronWebpack": {
     "renderer": {
@@ -33,11 +37,12 @@
     "@ledgerhq/hw-transport": "^1.1.2-beta.068e2a14",
     "@ledgerhq/hw-transport-node-hid": "^1.1.2-beta.068e2a14",
     "color": "^2.0.1",
-    "electron-devtools-installer": "^2.2.3",
+    "electron-store": "^1.3.0",
     "electron-updater": "^2.18.2",
     "history": "^4.7.2",
     "i18next": "^10.2.2",
     "i18next-node-fs-backend": "^1.0.0",
+    "lodash": "^4.17.4",
     "object-path": "^0.11.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -52,8 +57,7 @@
     "redux-thunk": "^2.2.0",
     "source-map-support": "^0.5.0",
     "styled-components": "^2.2.4",
-    "styled-system": "^1.1.1",
-    "webpack": "^3.10.0"
+    "styled-system": "^1.1.1"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.9",
@@ -72,7 +76,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "concurrently": "^3.5.1",
     "electron": "1.7.10",
-    "electron-builder": "^19.53.7",
+    "electron-builder": "^19.54.0",
+    "electron-devtools-installer": "^2.2.3",
     "electron-webpack": "1.11.0",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -88,6 +93,7 @@
     "lint-staged": "^6.0.0",
     "node-loader": "^0.6.0",
     "prettier": "^1.10.2",
-    "react-hot-loader": "^4.0.0-beta.12"
+    "react-hot-loader": "^4.0.0-beta.12",
+    "webpack": "^3.10.0"
   }
 }

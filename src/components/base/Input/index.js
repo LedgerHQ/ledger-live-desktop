@@ -1,6 +1,10 @@
+// @flow
+
+import React, { PureComponent } from 'react'
+
 import styled from 'styled-components'
 
-export default styled.input`
+const Base = styled.input`
   padding: 10px 15px;
   border: 1px solid ${p => p.theme.colors.mouse};
   border-radius: 3px;
@@ -18,3 +22,19 @@ export default styled.input`
     box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
   }
 `
+
+type Props = {
+  onChange: Function,
+}
+
+export default class Input extends PureComponent<Props> {
+  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
+    const { onChange } = this.props
+
+    onChange(e.target.value)
+  }
+
+  render() {
+    return <Base {...this.props} onChange={this.handleChange} />
+  }
+}

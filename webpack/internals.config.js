@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const webpackMain = require('electron-webpack/webpack.main.config')
 
-const define = require('./define')
+const plugins = require('./plugins')
 
 const dirs = p =>
   fs
@@ -35,5 +35,5 @@ module.exports = webpackMain().then(config => ({
 
   module: config.module,
 
-  plugins: [define, ...config.plugins],
+  plugins: [...plugins, ...config.plugins],
 }))

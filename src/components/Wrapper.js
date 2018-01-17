@@ -6,12 +6,11 @@ import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
 import Box from 'components/base/Box'
+import * as modals from 'components/modals'
 
+import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
 import SettingsPage from 'components/SettingsPage'
-import AccountPage from 'components/AccountPage'
-import SendModal from 'components/SendModal'
-import ReceiveModal from 'components/ReceiveModal'
 import UpdateNotifier from 'components/UpdateNotifier'
 
 import AppRegionDrag from 'components/AppRegionDrag'
@@ -27,11 +26,11 @@ class Wrapper extends PureComponent<{}> {
     return (
       <Fragment>
         <AppRegionDrag />
-
-        <SendModal />
-        <ReceiveModal />
-
         <UpdateNotifier />
+
+        {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
+          <ModalComponent key={name} />
+        ))}
 
         <Box grow horizontal>
           <SideBar />

@@ -6,6 +6,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Mortal from 'react-mortal'
 import styled from 'styled-components'
+import noop from 'lodash/noop'
 
 import { closeModal, isModalOpened } from 'reducers/modals'
 
@@ -23,8 +24,13 @@ const mapStateToProps = (state, { name, isOpened }) => ({
   isOpened: isOpened || (name && isModalOpened(state, name)),
 })
 
-const mapDispatchToProps = (dispatch, { name }) => ({
-  onClose: name ? () => dispatch(closeModal(name)) : undefined,
+const mapDispatchToProps = (dispatch, { name, onClose = noop }) => ({
+  onClose: name
+    ? () => {
+        dispatch(closeModal(name))
+        onClose()
+      }
+    : onClose,
 })
 
 const Container = styled.div.attrs({

@@ -71,10 +71,13 @@ function Item({
   isModalOpened,
 }: Props) {
   const { pathname } = location
+  const active = pathname === linkTo || isModalOpened
   return (
     <Container
-      onClick={linkTo ? () => push(linkTo) : modal ? () => openModal(modal) : void 0}
-      active={pathname === linkTo || isModalOpened}
+      onClick={
+        linkTo ? (active ? undefined : () => push(linkTo)) : modal ? () => openModal(modal) : void 0
+      }
+      active={active}
     >
       <IconWrapper mr={2}>{icon || null}</IconWrapper>
       <div>

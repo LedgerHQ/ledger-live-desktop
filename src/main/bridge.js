@@ -7,21 +7,31 @@ import { resolve } from 'path'
 
 import setupAutoUpdater from './autoUpdate'
 
+function onChannelUsb(callType) {
+  return (event: any, payload) => {
+    const { type, data } = payload
+
+    const compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals/usb`))
+
+    compute.send({ type, data })
+    compute.on('message', payload => {
+      const { type, data, options = {} } = payload
+      if (callType === 'async') {
+        event.sender.send('msg', { type, data })
+      }
+      if (callType === 'sync') {
+        event.returnValue = { type, data }
+      }
+      if (options.kill) {
+        compute.kill()
+      }
+    })
+  }
+}
+
 // Forwards every usb message to usb process
-ipcMain.on('usb', (event: any, payload) => {
-  const { type, data } = payload
-
-  const compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals/usb`))
-
-  compute.send({ type, data })
-  compute.on('message', payload => {
-    const { type, data, options = {} } = payload
-    event.sender.send('msg', { type, data })
-    if (options.kill) {
-      compute.kill()
-    }
-  })
-})
+ipcMain.on('usb', onChannelUsb('async'))
+ipcMain.on('usb:sync', onChannelUsb('sync'))
 
 const handlers = {
   updater: {
