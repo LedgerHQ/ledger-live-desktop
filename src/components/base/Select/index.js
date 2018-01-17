@@ -71,6 +71,21 @@ const Dropdown = styled(Box).attrs({
   box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
 `
 
+const FloatingTriangles = styled(Box).attrs({
+  align: 'center',
+  justify: 'center',
+  mr: 2,
+})`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  // to "simulate" border to make arrows appears at the exact same place as
+  // the no-input version
+  padding-right: 1px;
+`
+
 class Select extends PureComponent<Props> {
   renderItems = (items: Array<Object>, downshiftProps: Object) => {
     const { renderItem } = this.props
@@ -123,7 +138,12 @@ class Select extends PureComponent<Props> {
         }) => (
           <Container {...getRootProps({ refKey: 'innerRef' })}>
             {searchable ? (
-              <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
+              <Box relative>
+                <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
+                <FloatingTriangles>
+                  <Triangles />
+                </FloatingTriangles>
+              </Box>
             ) : (
               <TriggerBtn {...getButtonProps()} tabIndex={0} horizontal align="center" flow={2}>
                 <Box grow>

@@ -93,6 +93,7 @@ const itemsColors = [
 
 stories.add('custom render', () => (
   <Select
+    placeholder="Choose a color..."
     items={itemsColors}
     highlight
     searchable
