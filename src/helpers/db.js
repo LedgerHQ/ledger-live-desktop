@@ -1,7 +1,25 @@
 import Store from 'electron-store'
 
-const store = new Store({
-  // encryptionKey: 'toto',
-})
+export default {
+  accounts: () => {
+    const db = new Store({
+      name: 'accounts',
+      default: {
+        accounts: [],
+      },
+    })
 
-export default store
+    return {
+      get: db.get('accounts'),
+      set: accounts => db.get('accounts', accounts),
+    }
+  },
+  settings: () => {
+    const db = new Store({
+      name: 'settings',
+      default: {},
+    })
+
+    return db
+  },
+}

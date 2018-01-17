@@ -13,5 +13,5 @@ export default store => next => action => {
 
   const { accounts } = getState()
 
-  db.set('accounts', accounts.accounts)
+  db.accounts.set(accounts.accounts)
 }
