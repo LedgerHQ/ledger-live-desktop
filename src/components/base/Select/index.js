@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import Downshift from 'downshift'
 import styled from 'styled-components'
+import { space } from 'styled-system'
 
 import type { Element } from 'react'
 
@@ -16,14 +17,29 @@ type Props = {
   onChange: Function,
   fuseOptions?: Object,
   highlight?: boolean,
+  searchable?: boolean,
   renderHighlight?: string => Element<*>,
+  renderItem?: (*) => Element<*>,
 }
 
 const Container = styled(Box).attrs({ relative: true, color: 'steel' })``
 
-const SearchInput = styled(Input)`
+const TriggerBtn = styled(Box).attrs({
+  p: 2,
+})`
+  ${space};
+  border: 1px solid ${p => p.theme.colors.mouse};
+  border-radius: 3px;
+  display: flex;
+  width: 100%;
+  color: ${p => p.theme.colors.steel};
+  background: ${p => p.theme.colors.white};
   border-bottom-left-radius: ${p => (p.isOpen ? 0 : '')};
   border-bottom-right-radius: ${p => (p.isOpen ? 0 : '')};
+  &:focus {
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
+  }
 `
 
 const Item = styled(Box).attrs({
@@ -38,65 +54,93 @@ const ItemWrapper = styled(Box)`
   }
 `
 
-const Dropdown = styled(Box)`
+const Dropdown = styled(Box).attrs({
+  mt: 1,
+})`
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
   border: 1px solid ${p => p.theme.colors.mouse};
-  border-top: none;
   max-height: 300px;
   overflow-y: auto;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
 `
 
 class Select extends PureComponent<Props> {
+  renderItems = (items: Array<Object>, downshiftProps: Object) => {
+    const { renderItem } = this.props
+    const { getItemProps, highlightedIndex } = downshiftProps
+    return (
+      <Dropdown>
+        {items.length ? (
+          items.map((item, i) => (
+            <ItemWrapper key={item.key} {...getItemProps({ item })}>
+              <Item highlighted={i === highlightedIndex}>
+                {renderItem ? renderItem(item) : <span>{item.name_highlight || item.name}</span>}
+              </Item>
+            </ItemWrapper>
+          ))
+        ) : (
+          <ItemWrapper>
+            <Item>{'No results'}</Item>
+          </ItemWrapper>
+        )}
+      </Dropdown>
+    )
+  }
+
   render() {
-    const { items, itemToString, fuseOptions, highlight, renderHighlight, onChange } = this.props
+    const {
+      items,
+      searchable,
+      itemToString,
+      fuseOptions,
+      highlight,
+      renderHighlight,
+      onChange,
+    } = this.props
+
     return (
       <Downshift
         itemToString={itemToString}
         onChange={onChange}
         render={({
           getInputProps,
-          getItemProps,
+          getButtonProps,
           getRootProps,
           isOpen,
           inputValue,
-          highlightedIndex,
           openMenu,
+          ...downshiftProps
         }) => (
           <Container {...getRootProps({ refKey: 'innerRef' })}>
-            <SearchInput
-              keepEvent
-              {...getInputProps({ placeholder: 'Chess?' })}
-              isOpen={isOpen}
-              onClick={openMenu}
-            />
-            {isOpen && (
-              <Search
-                value={inputValue}
-                items={items}
-                fuseOptions={fuseOptions}
-                highlight={highlight}
-                renderHighlight={renderHighlight}
-                render={items =>
-                  items.length ? (
-                    <Dropdown>
-                      {items.map((item, i) => (
-                        <ItemWrapper key={item.key} {...getItemProps({ item })}>
-                          <Item highlighted={i === highlightedIndex}>
-                            <span>{item.name_highlight || item.name}</span>
-                          </Item>
-                        </ItemWrapper>
-                      ))}
-                    </Dropdown>
-                  ) : null
-                }
+            {searchable ? (
+              <Input
+                keepEvent
+                {...getInputProps({ placeholder: 'Chess?' })}
+                isOpen={isOpen}
+                onClick={openMenu}
               />
+            ) : (
+              <TriggerBtn isOpen={isOpen} {...getButtonProps()} tabIndex={0}>
+                lablala
+              </TriggerBtn>
             )}
+            {isOpen &&
+              (searchable ? (
+                <Search
+                  value={inputValue}
+                  items={items}
+                  fuseOptions={fuseOptions}
+                  highlight={highlight}
+                  renderHighlight={renderHighlight}
+                  render={items => this.renderItems(items, downshiftProps)}
+                />
+              ) : (
+                this.renderItems(items, downshiftProps)
+              ))}
           </Container>
         )}
       />

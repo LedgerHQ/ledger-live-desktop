@@ -42,7 +42,8 @@ class Search extends PureComponent<Props, State> {
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.value !== this.props.value) {
       if (this._fuse) {
-        this.formatResults(this._fuse.search(nextProps.value), nextProps)
+        const results = this._fuse.search(nextProps.value)
+        this.formatResults(results, nextProps)
       }
     }
     if (nextProps.highlight !== this.props.highlight) {
@@ -63,7 +64,8 @@ class Search extends PureComponent<Props, State> {
       includeMatches: highlight,
     })
 
-    this.formatResults(this._fuse.search(value), props)
+    const results = this._fuse.search(value)
+    this.formatResults(results, props)
   }
 
   formatResults(results: Array<Object>, props: Props) {
