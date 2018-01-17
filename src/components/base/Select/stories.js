@@ -56,9 +56,9 @@ stories.add('basic', () => (
   <Wrapper>
     {onChange => (
       <Select
+        placeholder="Choose a chess player..."
         items={itemsChessPlayers}
-        itemToString={item => (item ? item.name : '')}
-        renderSelected={item => (item ? item.name : 'Choose a chess player')}
+        renderSelected={item => item.name}
         onChange={onChange}
       />
     )}
@@ -67,6 +67,7 @@ stories.add('basic', () => (
 
 stories.add('searchable', () => (
   <Select
+    placeholder="Choose a chess player..."
     items={itemsChessPlayers}
     searchable
     highlight

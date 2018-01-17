@@ -8,6 +8,7 @@ import { space } from 'styled-system'
 import type { Element } from 'react'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 import Input from 'components/base/Input'
 import Search from 'components/base/Search'
 
@@ -20,7 +21,9 @@ type Props = {
   fuseOptions?: Object,
   highlight?: boolean,
   searchable?: boolean,
+  placeholder?: string,
   renderHighlight?: string => Element<*>,
+  renderSelected?: string => Element<*>,
   renderItem?: (*) => Element<*>,
 }
 
@@ -100,6 +103,7 @@ class Select extends PureComponent<Props> {
       highlight,
       renderHighlight,
       renderSelected,
+      placeholder,
       onChange,
     } = this.props
 
@@ -119,10 +123,16 @@ class Select extends PureComponent<Props> {
         }) => (
           <Container {...getRootProps({ refKey: 'innerRef' })}>
             {searchable ? (
-              <Input keepEvent {...getInputProps({ placeholder: 'Chess?' })} onClick={openMenu} />
+              <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
             ) : (
               <TriggerBtn {...getButtonProps()} tabIndex={0} horizontal align="center" flow={2}>
-                <Box grow>{renderSelected(selectedItem)}</Box>
+                <Box grow>
+                  {selectedItem ? (
+                    renderSelected(selectedItem)
+                  ) : (
+                    <Text color="mouse">{placeholder}</Text>
+                  )}
+                </Box>
                 <Triangles />
               </TriggerBtn>
             )}
