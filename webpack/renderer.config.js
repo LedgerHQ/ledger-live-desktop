@@ -1,7 +1,7 @@
-const define = require('./define')
+const plugins = require('./plugins')
 
 const config = {
-  plugins: [define],
+  plugins,
   devServer: {
     historyApiFallback: true,
   },

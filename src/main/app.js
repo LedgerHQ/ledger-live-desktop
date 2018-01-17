@@ -11,7 +11,7 @@ function createMainWindow() {
       ? {
           frame: false,
           titleBarStyle: 'hiddenInset',
-          vibrancy: 'ultra-dark',
+          vibrancy: 'ultra-dark', // https://github.com/electron/electron/issues/10521
         }
       : {}),
     show: false,

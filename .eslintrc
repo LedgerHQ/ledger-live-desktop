@@ -1,6 +1,6 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "plugin:flowtype/recommended", "prettier", "prettier/react"],
   "plugins": ["flowtype"],
   "globals": {
     "__ENV__": false,
@@ -27,5 +27,8 @@
     "import/resolver": {
       "babel-module": {},
     },
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
   },
 }

@@ -1,7 +1,14 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
+import type { MapStateToProps } from 'react-redux'
+import type { Accounts } from 'types/common'
+
+import { openModal } from 'reducers/modals'
+import { getAccounts } from 'reducers/accounts'
 
 import { rgba } from 'styles/helpers'
 
@@ -13,6 +20,7 @@ const CapsSubtitle = styled(Box).attrs({
   fontSize: 0,
   color: 'shark',
 })`
+  cursor: default;
   text-transform: uppercase;
   font-weight: bold;
 `
@@ -25,41 +33,67 @@ const Container = styled(Box).attrs({
   width: 250px;
 `
 
-class SideBar extends PureComponent<{}> {
+const BtnAddAccount = styled(Box).attrs({
+  align: 'center',
+  color: 'steel',
+})`
+  border-radius: 5px;
+  border: 1px dashed ${p => p.theme.colors.steel};
+  cursor: pointer;
+  margin: 30px 30px 0 30px;
+  padding: 5px;
+`
+
+type Props = {
+  accounts: Accounts,
+  openModal: Function,
+}
+
+const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  accounts: getAccounts(state),
+})
+
+const mapDispatchToProps = {
+  openModal,
+}
+
+class SideBar extends PureComponent<Props> {
   render() {
+    const { accounts, openModal } = this.props
+
     return (
       <Container>
         <GrowScroll flow={4} py={4}>
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
-            <div>
+            <Fragment>
               <Item linkTo="/">{'Dashboard'}</Item>
               <Item modal="send">{'Send'}</Item>
               <Item modal="receive">{'Receive'}</Item>
               <Item linkTo="/settings">{'Settings'}</Item>
-            </div>
+            </Fragment>
           </Box>
           <Box flow={2}>
             <CapsSubtitle>{'Accounts'}</CapsSubtitle>
-            <div>
-              <Item linkTo="/account/brian" desc="BTC 3.78605936">
-                {'Brian Account'}
-              </Item>
-              <Item linkTo="/account/virginie" desc="ETH 0.05944">
-                {'Virginie Account'}
-              </Item>
-              <Item linkTo="/account/ledger" desc="DOGE 2.2658">
-                {'Ledger Account'}
-              </Item>
-              <Item linkTo="/account/nicolas" desc="BTC 0.00015486">
-                {'Nicolas Account'}
-              </Item>
-            </div>
+            <Fragment>
+              {accounts.map((account, i) => (
+                <Item
+                  linkTo="/account/brian"
+                  desc={`${account.type.toUpperCase()} 3.78605936`}
+                  key={i} // eslint-disable-line react/no-array-index-key
+                >
+                  {account.name}
+                </Item>
+              ))}
+            </Fragment>
           </Box>
+          <BtnAddAccount onClick={() => openModal('add-account')}>{'Add account'}</BtnAddAccount>
         </GrowScroll>
       </Container>
     )
   }
 }
 
-export default SideBar
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  pure: false,
+})(SideBar)

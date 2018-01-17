@@ -48,11 +48,11 @@ const handlers: Object = {
   }),
 }
 
-export function getCurrentDevice(state: Object) {
+export function getCurrentDevice(state: { devices: DevicesState }) {
   return state.devices.currentDevice
 }
 
-export function getDevices(state: Object) {
+export function getDevices(state: { devices: DevicesState }) {
   return state.devices.devices
 }
 
