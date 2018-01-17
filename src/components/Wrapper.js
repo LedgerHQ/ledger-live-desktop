@@ -39,7 +39,7 @@ class Wrapper extends PureComponent<{}> {
             <TopBar />
             <Route path="/" exact component={DashboardPage} />
             <Route path="/settings" component={SettingsPage} />
-            <Route path="/account/:account" component={AccountPage} />
+            <Route path="/account/:id" component={AccountPage} />
           </Box>
         </Box>
       </Fragment>

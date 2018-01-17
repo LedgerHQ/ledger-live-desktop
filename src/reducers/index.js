@@ -8,11 +8,13 @@ import type { LocationShape } from 'react-router'
 import accounts from './accounts'
 import devices from './devices'
 import modals from './modals'
+import settings from './settings'
 import update from './update'
 
 import type { AccountsState } from './accounts'
 import type { DevicesState } from './devices'
 import type { ModalsState } from './modals'
+import type { SettingsState } from './settings'
 import type { UpdateState } from './update'
 
 export type State = {
@@ -20,6 +22,7 @@ export type State = {
   devices: DevicesState,
   modals: ModalsState,
   router: LocationShape,
+  settings: SettingsState,
   update: UpdateState,
 }
 
@@ -28,5 +31,6 @@ export default combineReducers({
   devices,
   modals,
   router,
+  settings,
   update,
 })

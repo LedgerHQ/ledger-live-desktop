@@ -1,25 +1,29 @@
 import Store from 'electron-store'
 
 export default {
-  accounts: () => {
+  accounts: (accounts, options = {}) => {
     const db = new Store({
       name: 'accounts',
-      default: {
-        accounts: [],
-      },
+      defaults: {},
+      ...options,
     })
 
-    return {
-      get: db.get('accounts'),
-      set: accounts => db.get('accounts', accounts),
+    if (accounts) {
+      db.store = accounts
     }
+
+    return db.store
   },
-  settings: () => {
+  settings: settings => {
     const db = new Store({
       name: 'settings',
-      default: {},
+      defaults: {},
     })
 
-    return db
+    if (settings) {
+      db.store = settings
+    }
+
+    return db.store
   },
 }
