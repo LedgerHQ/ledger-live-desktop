@@ -3,9 +3,12 @@
 import React, { PureComponent } from 'react'
 
 import styled from 'styled-components'
+import { space } from 'styled-system'
 
-const Base = styled.input`
-  padding: 10px 15px;
+const Base = styled.input.attrs({
+  p: 2,
+})`
+  ${space};
   border: 1px solid ${p => p.theme.colors.mouse};
   border-radius: 3px;
   display: flex;
@@ -24,17 +27,22 @@ const Base = styled.input`
 `
 
 type Props = {
-  onChange: Function,
+  onChange?: Function,
+  keepEvent?: boolean,
 }
 
-export default class Input extends PureComponent<Props> {
+class Input extends PureComponent<Props> {
   handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const { onChange } = this.props
+    const { onChange, keepEvent } = this.props
 
-    onChange(e.target.value)
+    if (onChange) {
+      onChange(keepEvent ? e : e.target.value)
+    }
   }
 
   render() {
     return <Base {...this.props} onChange={this.handleChange} />
   }
 }
+
+export default Input

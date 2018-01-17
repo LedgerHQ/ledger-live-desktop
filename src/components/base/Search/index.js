@@ -4,26 +4,31 @@ import React, { PureComponent, Fragment, createElement } from 'react'
 import Fuse from 'fuse.js'
 
 import type { Element } from 'react'
+import type FuseType from 'fuse.js'
 
 // eslint false positive detection on unused prop-type
 type Props = {
   items: Array<Object>, // eslint-disable-line react/no-unused-prop-types
-  value: String,
+  value: string,
   render: Function,
   highlight?: boolean,
-  renderHighlight?: string => Element, // eslint-disable-line react/no-unused-prop-types
+  renderHighlight?: (string, string) => Element<*>, // eslint-disable-line react/no-unused-prop-types
   fuseOptions?: Object, // eslint-disable-line react/no-unused-prop-types
 
   // if true, it will display no items when value is empty
   filterEmpty?: boolean,
 }
 
-class Search extends PureComponent<Props> {
+type State = {
+  results: Array<Object>,
+}
+
+class Search extends PureComponent<Props, State> {
   static defaultProps = {
     fuseOptions: {},
     highlight: false,
     filterEmpty: false,
-    renderHighlight: chunk => <b>{chunk}</b>,
+    renderHighlight: (chunk: string): * => <b>{chunk}</b>,
   }
 
   state = {
@@ -34,9 +39,11 @@ class Search extends PureComponent<Props> {
     this.initFuse(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     if (nextProps.value !== this.props.value) {
-      this.formatResults(this._fuse.search(nextProps.value), nextProps)
+      if (this._fuse) {
+        this.formatResults(this._fuse.search(nextProps.value), nextProps)
+      }
     }
     if (nextProps.highlight !== this.props.highlight) {
       this.initFuse(nextProps)
@@ -46,7 +53,9 @@ class Search extends PureComponent<Props> {
     }
   }
 
-  initFuse(props) {
+  _fuse: FuseType<*> | null = null
+
+  initFuse(props: Props) {
     const { fuseOptions, highlight, items, value } = props
 
     this._fuse = new Fuse(items, {
@@ -57,7 +66,7 @@ class Search extends PureComponent<Props> {
     this.formatResults(this._fuse.search(value), props)
   }
 
-  formatResults(results, props) {
+  formatResults(results: Array<Object>, props: Props) {
     const { highlight, renderHighlight } = props
     if (highlight) {
       results = results.map(res => {
@@ -78,7 +87,9 @@ class Search extends PureComponent<Props> {
             }
 
             const v = value.substring(start, end + 1)
-            res.push(renderHighlight(v, `${key}-${idx.join(',')}`))
+            if (v && renderHighlight) {
+              res.push(renderHighlight(v, `${key}-${idx.join(',')}`))
+            }
 
             i = end + 1
           })
@@ -88,14 +99,14 @@ class Search extends PureComponent<Props> {
             res.push(suffix)
           }
 
-          const element = createElement(Fragment, {
+          const fragment = createElement(Fragment, {
             key: item[key],
             children: res,
           })
 
           item = {
             ...item,
-            [key]: element,
+            [`${key}_highlight`]: fragment,
           }
         })
         return item

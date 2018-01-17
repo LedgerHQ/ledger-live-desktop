@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import { text, boolean } from '@storybook/addon-knobs'
 
@@ -20,12 +21,16 @@ const items = [
   { key: 'vladimir-kramnik', name: 'Vladimir Kramnik' },
 ]
 
-const Wrapper = ({ children }: { children: any }) => (
+const Wrapper = ({ children }) => (
   <div>
     <div style={{ opacity: 0.2 }}>{'(Change the search value in knobs)'}</div>
     {children}
   </div>
 )
+
+Wrapper.propTypes = {
+  children: PropTypes.any.isRequired,
+}
 
 stories.add('basic', () => {
   const value = text('value', '')
@@ -63,7 +68,9 @@ stories.add('highlight matches', () => {
             {text}
           </b>
         )}
-        render={items => items.map(item => <div key={item.key}>{item.name}</div>)}
+        render={items =>
+          items.map(item => <div key={item.key}>{item.name_highlight || item.name}</div>)
+        }
       />
     </Wrapper>
   )
