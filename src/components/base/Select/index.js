@@ -11,6 +11,8 @@ import Box from 'components/base/Box'
 import Input from 'components/base/Input'
 import Search from 'components/base/Search'
 
+import Triangles from './Triangles'
+
 type Props = {
   items: Array<Object>,
   itemToString: Function,
@@ -34,8 +36,6 @@ const TriggerBtn = styled(Box).attrs({
   width: 100%;
   color: ${p => p.theme.colors.steel};
   background: ${p => p.theme.colors.white};
-  border-bottom-left-radius: ${p => (p.isOpen ? 0 : '')};
-  border-bottom-right-radius: ${p => (p.isOpen ? 0 : '')};
   &:focus {
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
@@ -99,6 +99,7 @@ class Select extends PureComponent<Props> {
       fuseOptions,
       highlight,
       renderHighlight,
+      renderSelected,
       onChange,
     } = this.props
 
@@ -113,19 +114,16 @@ class Select extends PureComponent<Props> {
           isOpen,
           inputValue,
           openMenu,
+          selectedItem,
           ...downshiftProps
         }) => (
           <Container {...getRootProps({ refKey: 'innerRef' })}>
             {searchable ? (
-              <Input
-                keepEvent
-                {...getInputProps({ placeholder: 'Chess?' })}
-                isOpen={isOpen}
-                onClick={openMenu}
-              />
+              <Input keepEvent {...getInputProps({ placeholder: 'Chess?' })} onClick={openMenu} />
             ) : (
-              <TriggerBtn isOpen={isOpen} {...getButtonProps()} tabIndex={0}>
-                lablala
+              <TriggerBtn {...getButtonProps()} tabIndex={0} horizontal align="center" flow={2}>
+                <Box grow>{renderSelected(selectedItem)}</Box>
+                <Triangles />
               </TriggerBtn>
             )}
             {isOpen &&

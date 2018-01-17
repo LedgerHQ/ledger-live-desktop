@@ -58,6 +58,7 @@ stories.add('basic', () => (
       <Select
         items={itemsChessPlayers}
         itemToString={item => (item ? item.name : '')}
+        renderSelected={item => (item ? item.name : 'Choose a chess player')}
         onChange={onChange}
       />
     )}
