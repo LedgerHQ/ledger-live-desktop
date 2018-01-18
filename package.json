@@ -36,6 +36,7 @@
     "@ledgerhq/hw-app-eth": "^1.1.2-beta.068e2a14",
     "@ledgerhq/hw-transport": "^1.1.2-beta.068e2a14",
     "@ledgerhq/hw-transport-node-hid": "^1.1.2-beta.068e2a14",
+    "blockchain.info": "^2.11.0",
     "bcryptjs": "^2.4.3",
     "color": "^2.0.1",
     "downshift": "^1.25.0",
