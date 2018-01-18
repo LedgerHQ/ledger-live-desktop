@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable import/prefer-default-export */
-
 import type { Device, Devices } from 'types/common'
 
 export type SetCurrentDevice = (Device | null) => { type: string, payload: Device | null }

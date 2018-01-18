@@ -76,11 +76,11 @@ class SideBar extends PureComponent<Props> {
           <Box flow={2}>
             <CapsSubtitle>{'Accounts'}</CapsSubtitle>
             <div>
-              {accounts.map((account, i) => (
+              {Object.entries(accounts).map(([id, account]: [string, any]) => (
                 <Item
-                  linkTo="/account/brian"
+                  linkTo={`/account/${id}`}
                   desc={`${account.type.toUpperCase()} 3.78605936`}
-                  key={i} // eslint-disable-line react/no-array-index-key
+                  key={id}
                 >
                   {account.name}
                 </Item>

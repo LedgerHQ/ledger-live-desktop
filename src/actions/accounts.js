@@ -1,7 +1,5 @@
 // @flow
 
-/* eslint-disable import/prefer-default-export */
-
 import db from 'helpers/db'
 
 import type { Account } from 'types/common'
@@ -15,5 +13,5 @@ export const addAccount: AddAccount = payload => ({
 type FetchAccounts = () => { type: string }
 export const fetchAccounts: FetchAccounts = () => ({
   type: 'FETCH_ACCOUNTS',
-  payload: db.get('accounts', []),
+  payload: db('accounts'),
 })

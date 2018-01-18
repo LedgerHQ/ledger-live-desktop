@@ -9,6 +9,8 @@ import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
 import { fetchAccounts } from 'actions/accounts'
+import { fetchSettings } from 'actions/settings'
+import { isLocked } from 'reducers/application'
 
 import App from 'components/App'
 
@@ -20,7 +22,13 @@ const rootNode = document.getElementById('app')
 
 events(store)
 
-store.dispatch(fetchAccounts())
+store.dispatch(fetchSettings())
+
+const state = store.getState() || {}
+
+if (!isLocked(state)) {
+  store.dispatch(fetchAccounts())
+}
 
 function r(Comp) {
   if (rootNode) {

@@ -1,6 +1,9 @@
+/* eslint-disable consistent-return */
+
 import db from 'helpers/db'
 
-// eslint-disable-next-line consistent-return
+import { getAccounts } from 'reducers/accounts'
+
 export default store => next => action => {
   if (!action.type.startsWith('DB:')) {
     return next(action)
@@ -11,7 +14,9 @@ export default store => next => action => {
 
   dispatch({ type, payload: action.payload })
 
-  const { accounts } = getState()
+  const state = getState()
+  const { settings } = state
 
-  db.set('accounts', accounts.accounts)
+  db('settings', settings)
+  db('accounts', getAccounts(state))
 }
