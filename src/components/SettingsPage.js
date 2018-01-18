@@ -14,6 +14,7 @@ import type { MapStateToProps } from 'react-redux'
 import type { Settings } from 'types/common'
 
 import { saveSettings } from 'actions/settings'
+import { unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
@@ -29,6 +30,7 @@ type InputValue = Settings
 type Props = {
   settings: Settings,
   saveSettings: Function,
+  unlock: Function,
 }
 type State = {
   inputValue: InputValue,
@@ -40,6 +42,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 
 const mapDispatchToProps = {
   saveSettings,
+  unlock,
 }
 
 class SettingsPage extends PureComponent<Props, State> {
@@ -63,7 +66,7 @@ class SettingsPage extends PureComponent<Props, State> {
   handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { saveSettings } = this.props
+    const { saveSettings, unlock } = this.props
     const { inputValue } = this.state
 
     const settings = {
@@ -80,8 +83,11 @@ class SettingsPage extends PureComponent<Props, State> {
       settings.password.value = bcrypt.hashSync(password.value, 8)
 
       setEncryptionKey('accounts', password.value)
+    } else {
+      setEncryptionKey('accounts', undefined)
     }
 
+    unlock()
     saveSettings(settings)
   }
 

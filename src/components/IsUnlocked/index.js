@@ -67,6 +67,8 @@ class IsUnlocked extends PureComponent<Props, State> {
       setEncryptionKey('accounts', inputValue.password)
       fetchAccounts()
       unlock()
+
+      this.handleChangeInput('password')('')
     }
   }
 
