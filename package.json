@@ -46,6 +46,7 @@
     "history": "^4.7.2",
     "i18next": "^10.2.2",
     "i18next-node-fs-backend": "^1.0.0",
+    "ledger-wallet-common": "github:LedgerHQ/ledger-wallet-common",
     "lodash": "^4.17.4",
     "object-path": "^0.11.4",
     "react": "^16.2.0",

@@ -8,7 +8,7 @@ import createHistory from 'history/createHashHistory'
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
-import { fetchAccounts } from 'actions/accounts'
+import { fetchAccounts, syncAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
 
@@ -28,6 +28,7 @@ const state = store.getState() || {}
 
 if (!isLocked(state)) {
   store.dispatch(fetchAccounts())
+  store.dispatch(syncAccounts())
 }
 
 function r(Comp) {
