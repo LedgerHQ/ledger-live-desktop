@@ -42,11 +42,15 @@ const mapDispatchToProps = {
   unlock,
 }
 
+const defaultState = {
+  inputValue: {
+    password: '',
+  },
+}
+
 class IsUnlocked extends PureComponent<Props, State> {
   state = {
-    inputValue: {
-      password: '',
-    },
+    ...defaultState,
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
@@ -68,7 +72,9 @@ class IsUnlocked extends PureComponent<Props, State> {
       fetchAccounts()
       unlock()
 
-      this.handleChangeInput('password')('')
+      this.setState({
+        ...defaultState,
+      })
     }
   }
 

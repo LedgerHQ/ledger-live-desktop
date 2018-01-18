@@ -40,7 +40,7 @@
     "color": "^2.0.1",
     "downshift": "^1.25.0",
     "electron-store": "^1.3.0",
-    "electron-updater": "^2.18.2",
+    "electron-updater": "^2.19.1",
     "fuse.js": "^3.2.0",
     "history": "^4.7.2",
     "i18next": "^10.2.2",
