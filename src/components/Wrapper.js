@@ -6,7 +6,7 @@ import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
 import * as modals from 'components/modals'
-import Box from 'components/base/Box'
+import Box, { GrowScroll } from 'components/base/Box'
 
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
@@ -42,9 +42,11 @@ class Wrapper extends PureComponent<{}> {
 
                 <Box shrink grow bg="cream">
                   <TopBar />
-                  <Route path="/" exact component={DashboardPage} />
-                  <Route path="/settings" component={SettingsPage} />
-                  <Route path="/account/:id" component={AccountPage} />
+                  <GrowScroll>
+                    <Route path="/" exact component={DashboardPage} />
+                    <Route path="/settings" component={SettingsPage} />
+                    <Route path="/account/:id" component={AccountPage} />
+                  </GrowScroll>
                 </Box>
               </Box>
             </Fragment>

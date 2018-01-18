@@ -1,33 +1,70 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { formatCurrencyUnit } from 'ledger-wallet-common/lib/data/currency'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Account } from 'types/common'
+import type { Account, AccountData } from 'types/common'
 
-import { getAccountById } from 'reducers/accounts'
+import { getAccountById, getAccountData } from 'reducers/accounts'
 
-import Box from 'components/base/Box'
+import Box, { Card } from 'components/base/Box'
+import Text from 'components/base/Text'
 
 type Props = {
   account: Account,
+  accountData: AccountData,
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
+  accountData: getAccountData(state, props.match.params.id),
 })
+
+function formatBTC(v) {
+  return formatCurrencyUnit(
+    {
+      name: 'bitcoin',
+      code: 'BTC',
+      symbol: 'b',
+      magnitude: 8,
+    },
+    v,
+    true,
+    true,
+  )
+}
 
 class AccountPage extends PureComponent<Props> {
   render() {
-    const { account } = this.props
+    const { account, accountData } = this.props
 
     return (
-      <Box>
-        <Box>{'account page'}</Box>
+      <Box p={3} flow={3}>
         <Box>
-          {account.name} - {account.address}
+          <Text fontSize={4}>{`${account.name} account`}</Text>
         </Box>
+        {accountData && (
+          <Fragment>
+            <Box horizontal flow={3}>
+              <Box flex={1}>
+                <Card title="Balance">{formatBTC(accountData.balance)}</Card>
+              </Box>
+              <Box flex={1}>
+                <Card title="Receive" />
+              </Box>
+            </Box>
+            <Card title="Last operations">
+              {accountData.transactions.map(tr => (
+                <Box horizontal key={tr.hash}>
+                  <Box grow>{'-'}</Box>
+                  <Box>{formatBTC(tr.balance)}</Box>
+                </Box>
+              ))}
+            </Card>
+          </Fragment>
+        )}
       </Box>
     )
   }

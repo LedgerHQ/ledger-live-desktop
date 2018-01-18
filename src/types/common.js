@@ -8,14 +8,32 @@ export type Device = {
 
 export type Devices = Array<Device>
 
+// -------------------- Transactions
+
+export type Transaction = {
+  balance: number,
+  hash: string,
+}
+
+// -------------------- Accounts
+
+export type AccountData = {
+  address: string,
+  balance: number,
+  transactions: Array<Transaction>,
+}
+
 export type Account = {
   id: string,
   name: string,
   type: string,
   address: string,
+  data?: AccountData,
 }
 
-export type Accounts = Object
+export type Accounts = { [_: string]: Account }
+
+// -------------------- Settings
 
 export type Settings = Object
 

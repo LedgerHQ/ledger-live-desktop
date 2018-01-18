@@ -10,7 +10,10 @@ import {
   fontSize,
   justifyContent,
   space,
+  flex,
 } from 'styled-system'
+
+import Text from 'components/base/Text'
 
 const spacingScale = [0, 8, 16, 32, 64]
 
@@ -20,6 +23,7 @@ function getSpace(n) {
 
 const Box = styled.div`
   ${space};
+  ${flex};
   ${fontSize};
   ${color};
   ${alignItems};
@@ -49,6 +53,25 @@ const Box = styled.div`
     margin-left: ${p => (p.horizontal && p.flow ? getSpace(p.flow) : '')};
   }
 `
+
+const RawCard = styled(Box).attrs({ bg: 'white', p: 3 })`
+  box-shadow: rgba(0, 0, 0, 0.1) 0 5px 30px;
+  border-radius: 5px;
+`
+
+export const Card = ({ title, ...props }: { title: string }) => {
+  if (title) {
+    return (
+      <Box flow={2}>
+        <Text fontWeight="bold" color="mouse">
+          {title}
+        </Text>
+        <RawCard {...props} />
+      </Box>
+    )
+  }
+  return <RawCard {...props} />
+}
 
 export const GrowScroll = (props: *) => (
   <Box grow relative>

@@ -2,16 +2,14 @@
 
 import { handleActions } from 'redux-actions'
 import shortid from 'shortid'
+import get from 'lodash/get'
 
-import type { Account, Accounts } from 'types/common'
+import type { State } from 'reducers'
+import type { Account, Accounts, AccountData } from 'types/common'
 
-export type AccountsState = {
-  accounts: Accounts,
-}
+export type AccountsState = Accounts
 
-const state: AccountsState = {
-  accounts: {},
-}
+const state: AccountsState = {}
 
 const handlers: Object = {
   ADD_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => {
@@ -19,27 +17,37 @@ const handlers: Object = {
 
     return {
       ...state,
-      accounts: {
-        ...state.accounts,
-        [id]: {
-          id,
-          ...account,
-        },
+      [id]: {
+        id,
+        ...account,
       },
     }
   },
-  FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => ({
+  FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => accounts,
+  SET_ACCOUNT_DATA: (
+    state: AccountsState,
+    { payload: { accountID, data } }: { payload: { accountID: string, data: AccountData } },
+  ): AccountsState => ({
     ...state,
-    accounts,
+    [accountID]: {
+      ...state[accountID],
+      data,
+    },
   }),
 }
 
+// Selectors
+
 export function getAccounts(state: { accounts: AccountsState }) {
-  return state.accounts.accounts
+  return state.accounts
 }
 
 export function getAccountById(state: { accounts: AccountsState }, id: string) {
   return getAccounts(state)[id]
+}
+
+export function getAccountData(state: State, id: string): AccountData | null {
+  return get(getAccountById(state, id), 'data', null)
 }
 
 export default handleActions(handlers, state)

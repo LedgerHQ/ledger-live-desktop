@@ -28,7 +28,7 @@ const CapsSubtitle = styled(Box).attrs({
 const Container = styled(Box).attrs({
   noShrink: true,
 })`
-  background-color: ${p => rgba(p.theme.colors[p.bg], 0.4)};
+  background-color: ${p => rgba(p.theme.colors[p.bg], process.platform === 'darwin' ? 0.4 : 1)};
   padding-top: 40px;
   width: 250px;
 `
@@ -62,7 +62,7 @@ class SideBar extends PureComponent<Props> {
     const { accounts, openModal } = this.props
 
     return (
-      <Container>
+      <Container bg="night">
         <GrowScroll flow={4} py={4}>
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
