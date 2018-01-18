@@ -42,11 +42,15 @@ const mapDispatchToProps = {
   unlock,
 }
 
+const defaultState = {
+  inputValue: {
+    password: '',
+  },
+}
+
 class IsUnlocked extends PureComponent<Props, State> {
   state = {
-    inputValue: {
-      password: '',
-    },
+    ...defaultState,
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
@@ -68,9 +72,19 @@ class IsUnlocked extends PureComponent<Props, State> {
       fetchAccounts()
       unlock()
 
-      this.handleChangeInput('password')('')
+      this.setState({
+        ...defaultState,
+      })
     }
   }
+
+  handleFocusInput = () => {
+    if (this._input && this._input !== null) {
+      this._input.focus()
+    }
+  }
+
+  _input: ?HTMLInputElement
 
   render() {
     const { inputValue } = this.state
@@ -78,10 +92,12 @@ class IsUnlocked extends PureComponent<Props, State> {
 
     if (isLocked) {
       return (
-        <Box sticky align="center" justify="center">
+        <Box sticky align="center" justify="center" onClick={this.handleFocusInput}>
           <form onSubmit={this.handleSubmit}>
             <Box>
               <Input
+                autoFocus
+                innerRef={(n: any) => (this._input = n)}
                 placeholder="Password"
                 type="password"
                 onChange={this.handleChangeInput('password')}

@@ -1,5 +1,6 @@
+// @flow
+
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 
 import Box from 'components/base/Box'
@@ -22,11 +23,11 @@ const itemsChessPlayers = [
   { key: 'vladimir-kramnik', name: 'Vladimir Kramnik' },
 ]
 
-class Wrapper extends PureComponent {
-  static propTypes = {
-    children: PropTypes.func.isRequired,
-  }
+type State = {
+  item: Object | null,
+}
 
+class Wrapper extends PureComponent<any, State> {
   state = {
     item: null,
   }

@@ -16,14 +16,14 @@ import Triangles from './Triangles'
 
 type Props = {
   items: Array<Object>,
-  itemToString: Function,
-  onChange: Function,
+  itemToString?: Function,
+  onChange?: Function,
   fuseOptions?: Object,
   highlight?: boolean,
   searchable?: boolean,
   placeholder?: string,
   renderHighlight?: string => Element<*>,
-  renderSelected?: string => Element<*>,
+  renderSelected?: Object => Element<*>,
   renderItem?: (*) => Element<*>,
 }
 
@@ -87,6 +87,10 @@ const FloatingTriangles = styled(Box).attrs({
 `
 
 class Select extends PureComponent<Props> {
+  static defaultProps = {
+    itemToString: (item: Object) => item.name,
+  }
+
   renderItems = (items: Array<Object>, downshiftProps: Object) => {
     const { renderItem } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
@@ -147,7 +151,7 @@ class Select extends PureComponent<Props> {
             ) : (
               <TriggerBtn {...getButtonProps()} tabIndex={0} horizontal align="center" flow={2}>
                 <Box grow>
-                  {selectedItem ? (
+                  {selectedItem && renderSelected ? (
                     renderSelected(selectedItem)
                   ) : (
                     <Text color="mouse">{placeholder}</Text>

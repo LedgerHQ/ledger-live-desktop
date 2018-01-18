@@ -1920,7 +1920,7 @@ buffers@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/buffers/-/buffers-0.1.1.tgz#b24579c3bed4d6d396aeee6d9a8ae7f5482ab7bb"
 
-builder-util-runtime@4.0.2, builder-util-runtime@^4.0.2, builder-util-runtime@~4.0.0:
+builder-util-runtime@4.0.2, builder-util-runtime@^4.0.2, builder-util-runtime@~4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-4.0.2.tgz#673f1a0f2e275e6f80a16ce57225589a003c9a52"
   dependencies:
@@ -3173,12 +3173,12 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.30:
   dependencies:
     electron-releases "^2.1.0"
 
-electron-updater@^2.18.2:
-  version "2.18.2"
-  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.18.2.tgz#776b50389b849535425e9e2893d7943ee61e8e3f"
+electron-updater@^2.19.1:
+  version "2.19.1"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.19.1.tgz#2265136b7ef15f7cb06e4032eaaf64382f642437"
   dependencies:
     bluebird-lst "^1.0.5"
-    builder-util-runtime "~4.0.0"
+    builder-util-runtime "~4.0.2"
     electron-is-dev "^0.3.0"
     fs-extra-p "^4.5.0"
     js-yaml "^3.10.0"
