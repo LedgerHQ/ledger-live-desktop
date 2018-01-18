@@ -78,16 +78,26 @@ class IsUnlocked extends PureComponent<Props, State> {
     }
   }
 
+  handleFocusInput = () => {
+    if (this._input && this._input !== null) {
+      this._input.focus()
+    }
+  }
+
+  _input: ?HTMLInputElement
+
   render() {
     const { inputValue } = this.state
     const { isLocked, render } = this.props
 
     if (isLocked) {
       return (
-        <Box sticky align="center" justify="center">
+        <Box sticky align="center" justify="center" onClick={this.handleFocusInput}>
           <form onSubmit={this.handleSubmit}>
             <Box>
               <Input
+                autoFocus
+                innerRef={(n: any) => (this._input = n)}
                 placeholder="Password"
                 type="password"
                 onChange={this.handleChangeInput('password')}

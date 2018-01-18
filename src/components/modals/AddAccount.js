@@ -16,6 +16,7 @@ import { addAccount } from 'actions/accounts'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Modal from 'components/base/Modal'
+import Select from 'components/base/Select'
 
 const Label = styled.label`
   display: block;
@@ -27,13 +28,17 @@ const Steps = {
     <form onSubmit={props.onSubmit}>
       <div>
         <Label>Currency</Label>
-        <select
-          onChange={e => props.onChangeInput('wallet')(e.target.value)}
-          value={props.value.wallet}
-        >
-          <option value="">---</option>
-          <option value="btc">Bitcoin</option>
-        </select>
+        <Select
+          placeholder="Choose a wallet..."
+          onChange={item => props.onChangeInput('wallet')(item.key)}
+          renderSelected={item => item.name}
+          items={[
+            {
+              key: 'btc',
+              name: 'Bitcoin',
+            },
+          ]}
+        />
       </div>
       <div>
         <Label>Account name</Label>

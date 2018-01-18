@@ -110,7 +110,7 @@ class SettingsPage extends PureComponent<Props, State> {
             <Box>
               <Label>Password</Label>
               <Input
-                value={get(inputValue, 'password.value', 'My secure password')}
+                value={get(inputValue, 'password.value', '')}
                 onChange={this.handleChangeInput('password.value')}
                 type="password"
               />

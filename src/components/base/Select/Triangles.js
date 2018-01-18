@@ -21,9 +21,13 @@ const DownTriangle = styled.div`
   border-top: ${p => p.size}px solid ${p => p.theme.colors[p.color]};
 `
 
-export default ({ size = 5, color = 'mouse' }: { size: number, color: string }) => (
+const Triangles = ({ size, color }: { size?: number, color?: string }) => (
   <Box flow={1}>
     <UpTriangle size={size} color={color} />
     <DownTriangle size={size} color={color} />
   </Box>
 )
+
+Triangles.defaultProps = { size: 5, color: 'mouse' }
+
+export default Triangles
