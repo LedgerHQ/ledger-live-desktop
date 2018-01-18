@@ -13,5 +13,5 @@ export const addAccount: AddAccount = payload => ({
 type FetchAccounts = () => { type: string }
 export const fetchAccounts: FetchAccounts = () => ({
   type: 'FETCH_ACCOUNTS',
-  payload: db.accounts(),
+  payload: db('accounts'),
 })

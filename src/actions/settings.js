@@ -13,5 +13,5 @@ export const saveSettings: SaveSettings = payload => ({
 type FetchSettings = () => { type: string }
 export const fetchSettings: FetchSettings = () => ({
   type: 'FETCH_SETTINGS',
-  payload: db.settings(),
+  payload: db('settings'),
 })

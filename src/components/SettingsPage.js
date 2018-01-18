@@ -8,6 +8,8 @@ import bcrypt from 'bcryptjs'
 import get from 'lodash/get'
 import set from 'lodash/set'
 
+import { setEncryptionKey } from 'helpers/db'
+
 import type { MapStateToProps } from 'react-redux'
 import type { Settings } from 'types/common'
 
@@ -72,11 +74,12 @@ class SettingsPage extends PureComponent<Props, State> {
       },
     }
 
-    if (
-      get(inputValue, 'password.state') === true &&
-      get(inputValue, 'password.value', '').trim() !== ''
-    ) {
-      settings.password.value = bcrypt.hashSync(get(inputValue, 'password.value'), 8)
+    const password = get(inputValue, 'password', {})
+
+    if (password.state === true && password.value.trim() !== '') {
+      settings.password.value = bcrypt.hashSync(password.value, 8)
+
+      setEncryptionKey('accounts', password.value)
     }
 
     saveSettings(settings)

@@ -1,29 +1,24 @@
 import Store from 'electron-store'
 
-export default {
-  accounts: (accounts, options = {}) => {
-    const db = new Store({
-      name: 'accounts',
-      defaults: {},
-      ...options,
-    })
+const encryptionKey = {}
 
-    if (accounts) {
-      db.store = accounts
-    }
+const store = type =>
+  new Store({
+    name: type,
+    defaults: {},
+    encryptionKey: encryptionKey[type],
+  })
 
-    return db.store
-  },
-  settings: settings => {
-    const db = new Store({
-      name: 'settings',
-      defaults: {},
-    })
+export function setEncryptionKey(type, value) {
+  encryptionKey[type] = value
+}
 
-    if (settings) {
-      db.store = settings
-    }
+export default (type, values) => {
+  const db = store(type)
 
-    return db.store
-  },
+  if (values) {
+    db.store = values
+  }
+
+  return db.store
 }
