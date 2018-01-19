@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
@@ -11,7 +11,7 @@ import { getAccounts } from 'reducers/accounts'
 
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
-import Modal from 'components/base/Modal'
+import Modal, { ModalBody } from 'components/base/Modal'
 import Select from 'components/base/Select'
 
 const Label = styled.label`
@@ -147,9 +147,19 @@ class Send extends PureComponent<Props, State> {
     const Step = Steps[step]
 
     return (
-      <Modal name="send" onClose={this.handleClose}>
-        <Step {...this.getStepProps()} />
-      </Modal>
+      <Modal
+        name="send"
+        preventBackdropClick
+        onClose={this.handleClose}
+        render={({ onClose }) => (
+          <Fragment>
+            <ModalBody>{step}</ModalBody>
+            <ModalBody onClose={onClose}>
+              <Step {...this.getStepProps()} />
+            </ModalBody>
+          </Fragment>
+        )}
+      />
     )
   }
 }
