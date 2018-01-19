@@ -8,12 +8,18 @@ import Tabs from 'components/base/Tabs'
 
 import TabProfile from './Profile'
 
+type Props = {}
+
+type State = {
+  tab: number,
+}
+
 class SettingsPage extends PureComponent<Props, State> {
   state = {
-    tab: 'profile',
+    tab: 6,
   }
 
-  handleChangeTab = tab => this.setState({ tab })
+  handleChangeTab = (tab: number) => this.setState({ tab })
 
   render() {
     const { tab } = this.state

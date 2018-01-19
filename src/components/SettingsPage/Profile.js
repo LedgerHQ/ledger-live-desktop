@@ -33,7 +33,6 @@ type Props = {
   unlock: Function,
 }
 type State = {
-  tab: number,
   inputValue: InputValue,
 }
 

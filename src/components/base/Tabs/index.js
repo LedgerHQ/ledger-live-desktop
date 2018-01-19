@@ -2,7 +2,6 @@
 
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import isString from 'lodash/isString'
 
 import type { Element } from 'react'
 
@@ -36,24 +35,17 @@ type Props = {
   onTabClick: number => void,
 }
 
-const Tabs = ({ items, index, onTabClick }: Props) => {
-  const item = isString(index) ? items.find(item => item.key === index) : items[index]
-  return (
-    <Fragment>
-      <Box horizontal borderBottom borderWidth={1} borderColor="argile">
-        {items.map((item, i) => (
-          <Tab
-            key={item.key}
-            isActive={isString(index) ? index === item.key : index === i}
-            onClick={() => onTabClick(i)}
-          >
-            {item.title}
-          </Tab>
-        ))}
-      </Box>
-      {item && item.render()}
-    </Fragment>
-  )
-}
+const Tabs = ({ items, index, onTabClick }: Props) => (
+  <Fragment>
+    <Box horizontal borderBottom borderWidth={1} borderColor="argile">
+      {items.map((item, i) => (
+        <Tab key={item.key} isActive={index === i} onClick={() => onTabClick(i)}>
+          {item.title}
+        </Tab>
+      ))}
+    </Box>
+    {items[index] && items[index].render()}
+  </Fragment>
+)
 
 export default Tabs

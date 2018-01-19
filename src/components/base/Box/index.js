@@ -59,7 +59,7 @@ const RawCard = styled(Box).attrs({ bg: 'white', p: 3 })`
   border-radius: 5px;
 `
 
-export const Card = ({ title, ...props }: { title: string }) => {
+export const Card = ({ title, ...props }: { title?: string }) => {
   if (title) {
     return (
       <Box flow={2}>
@@ -71,6 +71,10 @@ export const Card = ({ title, ...props }: { title: string }) => {
     )
   }
   return <RawCard {...props} />
+}
+
+Card.defaultProps = {
+  title: undefined,
 }
 
 export const GrowScroll = (props: *) => (
