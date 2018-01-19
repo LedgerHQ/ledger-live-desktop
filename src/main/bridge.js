@@ -26,6 +26,8 @@ function onChannelUsb(callType) {
         compute.kill()
       }
     })
+
+    process.on('exit', () => compute.kill('SIGINT'))
   }
 }
 
