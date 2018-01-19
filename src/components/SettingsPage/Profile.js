@@ -16,7 +16,7 @@ import type { Settings } from 'types/common'
 import { saveSettings } from 'actions/settings'
 import { unlock } from 'reducers/application'
 
-import Box from 'components/base/Box'
+import Box, { Card } from 'components/base/Box'
 import Input from 'components/base/Input'
 import Button from 'components/base/Button'
 
@@ -93,11 +93,9 @@ class SettingsPage extends PureComponent<Props, State> {
 
   render() {
     const { inputValue } = this.state
-
     return (
       <form onSubmit={this.handleSubmit}>
-        <Box p={3}>
-          <Box>{'settings'}</Box>
+        <Card>
           <Box horizontal>
             <input
               type="checkbox"
@@ -119,7 +117,7 @@ class SettingsPage extends PureComponent<Props, State> {
           <Box>
             <Button type="submit">Save</Button>
           </Box>
-        </Box>
+        </Card>
       </form>
     )
   }

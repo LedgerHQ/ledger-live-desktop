@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import {
   alignItems,
@@ -59,7 +59,7 @@ const RawCard = styled(Box).attrs({ bg: 'white', p: 3 })`
   border-radius: 5px;
 `
 
-export const Card = ({ title, ...props }: { title: string }) => {
+export const Card = ({ title, ...props }: { title?: string }) => {
   if (title) {
     return (
       <Box flow={2}>
@@ -73,10 +73,31 @@ export const Card = ({ title, ...props }: { title: string }) => {
   return <RawCard {...props} />
 }
 
+Card.defaultProps = {
+  title: undefined,
+}
+
 export const GrowScroll = (props: *) => (
   <Box grow relative>
     <Box sticky scroll {...props} />
   </Box>
 )
+
+export class Tabbable extends PureComponent<any> {
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeydown)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeydown)
+  }
+  handleKeydown = (e: SyntheticKeyboardEvent<any>) => {
+    if (e.which === 13 && this.props.onClick) {
+      this.props.onClick(e)
+    }
+  }
+  render() {
+    return <Box tabIndex={0} {...this.props} />
+  }
+}
 
 export default Box

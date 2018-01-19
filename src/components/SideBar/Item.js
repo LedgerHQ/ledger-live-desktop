@@ -46,7 +46,11 @@ const Container = styled(Box).attrs({
   p: 2,
 })`
   cursor: pointer;
-  color: ${p => (p.active ? p.theme.colors.white : '')};
+  color: ${p => (p.isActive ? p.theme.colors.white : '')};
+  background: ${p => (p.isActive ? 'rgba(255, 255, 255, 0.05)' : '')};
+  box-shadow: ${p =>
+    p.isActive ? `${p.theme.colors.blue} 4px 0 0 inset` : `${p.theme.colors.blue} 0 0 0 inset`};
+  transition: ease-in-out 100ms box-shadow;
 
   &:hover {
     background: rgba(255, 255, 255, 0.05);
@@ -54,9 +58,9 @@ const Container = styled(Box).attrs({
 `
 
 const IconWrapper = styled(Box)`
-  width: 30px;
-  height: 30px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  width: 25px;
+  height: 25px;
+  border: 2px solid ${p => (p.isActive ? p.theme.colors.blue : 'rgba(255, 255, 255, 0.1)')};
 `
 
 function Item({
@@ -71,15 +75,19 @@ function Item({
   isModalOpened,
 }: Props) {
   const { pathname } = location
-  const active = pathname === linkTo || isModalOpened
+  const isActive = pathname === linkTo || isModalOpened
   return (
     <Container
       onClick={
-        linkTo ? (active ? undefined : () => push(linkTo)) : modal ? () => openModal(modal) : void 0
+        linkTo
+          ? isActive ? undefined : () => push(linkTo)
+          : modal ? () => openModal(modal) : void 0
       }
-      active={active}
+      isActive={isActive}
     >
-      <IconWrapper mr={2}>{icon || null}</IconWrapper>
+      <IconWrapper isActive={isActive} mr={2}>
+        {icon || null}
+      </IconWrapper>
       <div>
         <Text fontWeight="bold" fontSize={1}>
           {children}
