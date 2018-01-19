@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import {
   alignItems,
@@ -78,5 +78,22 @@ export const GrowScroll = (props: *) => (
     <Box sticky scroll {...props} />
   </Box>
 )
+
+export class Tabbable extends PureComponent<any> {
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeydown)
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeydown)
+  }
+  handleKeydown = (e: SyntheticKeyboardEvent<any>) => {
+    if (e.which === 13 && this.props.onClick) {
+      this.props.onClick(e)
+    }
+  }
+  render() {
+    return <Box tabIndex={0} {...this.props} />
+  }
+}
 
 export default Box
