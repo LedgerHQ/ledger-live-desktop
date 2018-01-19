@@ -15,7 +15,7 @@ import { addAccount } from 'actions/accounts'
 
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
-import Modal from 'components/base/Modal'
+import Modal, { ModalBody } from 'components/base/Modal'
 import Select from 'components/base/Select'
 
 const Label = styled.label`
@@ -219,9 +219,16 @@ class AddAccountModal extends PureComponent<Props, State> {
     const Step = Steps[step]
 
     return (
-      <Modal name="add-account" onClose={this.handleClose}>
-        <Step {...this.getStepProps()} />
-      </Modal>
+      <Modal
+        name="add-account"
+        preventBackdropClick
+        onClose={this.handleClose}
+        render={({ onClose }) => (
+          <ModalBody onClose={onClose}>
+            <Step {...this.getStepProps()} />
+          </ModalBody>
+        )}
+      />
     )
   }
 }
