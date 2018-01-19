@@ -6,6 +6,7 @@ export default {
     white: '#ffffff',
 
     argile: '#eeeeee',
+    blue: '#6193ff',
     cream: '#f9f9f9',
     grenade: '#ea2e49',
     lead: '#999999',
