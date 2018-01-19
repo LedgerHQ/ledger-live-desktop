@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import { Collapse } from 'react-collapse'
 import styled from 'styled-components'
+import isString from 'lodash/isString'
 
 import type { Element } from 'react'
 
@@ -13,6 +13,7 @@ const Tab = styled(Tabbable).attrs({
   pb: 1,
   align: 'center',
   justify: 'center',
+  fontSize: 1,
 })`
   border-bottom: 2px solid transparent;
   border-bottom-color: ${p => (p.isActive ? p.theme.colors.blue : '')};
@@ -20,6 +21,7 @@ const Tab = styled(Tabbable).attrs({
   font-weight: ${p => (p.isActive ? 'bold' : '')};
   margin-bottom: -1px;
   outline: none;
+  cursor: ${p => (p.isActive ? 'default' : 'pointer')};
 `
 
 type Item = {
@@ -34,17 +36,24 @@ type Props = {
   onTabClick: number => void,
 }
 
-const Tabs = ({ items, index, onTabClick }: Props) => (
-  <Fragment>
-    <Box horizontal borderBottom borderWidth={1} borderColor="argile">
-      {items.map((item, i) => (
-        <Tab key={item.key} isActive={index === i} onClick={() => onTabClick(i)}>
-          {item.title}
-        </Tab>
-      ))}
-    </Box>
-    {items[index] && <Collapse isOpened>{items[index].render()}</Collapse>}
-  </Fragment>
-)
+const Tabs = ({ items, index, onTabClick }: Props) => {
+  const item = isString(index) ? items.find(item => item.key === index) : items[index]
+  return (
+    <Fragment>
+      <Box horizontal borderBottom borderWidth={1} borderColor="argile">
+        {items.map((item, i) => (
+          <Tab
+            key={item.key}
+            isActive={isString(index) ? index === item.key : index === i}
+            onClick={() => onTabClick(i)}
+          >
+            {item.title}
+          </Tab>
+        ))}
+      </Box>
+      {item && item.render()}
+    </Fragment>
+  )
+}
 
 export default Tabs
