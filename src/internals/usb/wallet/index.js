@@ -1,24 +1,39 @@
 // @flow
 
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
-import getAddresses from './getAddresses'
 
-async function getWallet(path, wallet) {
+import getAllAccounts from './accounts'
+
+async function getAllAccountsByWallet({ path, wallet, currentAccounts, onProgress }) {
   const transport = await CommNodeHid.open(path)
-  console.log('getWallet', path)
+
   if (wallet === 'btc') {
-    await getAddresses(transport)
+    return getAllAccounts({ transport, currentAccounts, onProgress })
   }
+
   throw new Error('invalid wallet')
 }
 
 export default (sendEvent: Function) => ({
-  request: async ({ path, wallet }: { path: string, wallet: string }) => {
+  request: async ({
+    path,
+    wallet,
+    currentAccounts,
+  }: {
+    path: string,
+    wallet: string,
+    currentAccounts: Array<*>,
+  }) => {
     try {
-      const data = await getWallet(path, wallet)
-      sendEvent('wallet.request.success', { path, wallet, data })
+      const data = await getAllAccountsByWallet({
+        path,
+        wallet,
+        currentAccounts,
+        onProgress: progress => sendEvent('wallet.request.progress', progress, { kill: false }),
+      })
+      sendEvent('wallet.request.success', data)
     } catch (err) {
-      sendEvent('wallet.request.fail', { path, wallet, err: err.stack || err })
+      sendEvent('wallet.request.fail', err.stack || err)
     }
   },
 })

@@ -3,13 +3,15 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { ipcRenderer } from 'electron'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Device } from 'types/common'
+import type { Accounts, Device } from 'types/common'
 
-import { sendSyncEvent } from 'renderer/events'
-import { getCurrentDevice } from 'reducers/devices'
 import { closeModal } from 'reducers/modals'
+import { getAccounts } from 'reducers/accounts'
+import { getCurrentDevice } from 'reducers/devices'
+import { sendEvent } from 'renderer/events'
 
 import { addAccount } from 'actions/accounts'
 
@@ -49,12 +51,34 @@ const Steps = {
   ),
   connectDevice: () => <div>Connect your Ledger</div>,
   startWallet: (props: Object) => <div>Select {props.wallet.toUpperCase()} App on your Ledger</div>,
-  confirmation: (props: Object) => (
+  inProgress: (props: Object) => (
     <div>
-      Add {props.wallet.toUpperCase()} - {props.accountName} - {props.walletAddress} ?
-      <Button onClick={props.onConfirm}>Yes!</Button>
+      In progress.
+      {props.progress !== null && (
+        <div>
+          Account: {props.progress.account} / Transactions: {props.progress.transactions}
+        </div>
+      )}
     </div>
   ),
+  listAccounts: (props: Object) => {
+    const accounts = Object.entries(props.accounts)
+    return (
+      <div>
+        {accounts.length > 0
+          ? accounts.map(([index, account]: [string, any]) => (
+              <div key={index}>
+                <div>Balance: {account.balance}</div>
+                <div>Transactions: {account.transactions.length}</div>
+                <div>
+                  <Button onClick={props.onAddAccount(index)}>Import</Button>
+                </div>
+              </div>
+            ))
+          : 'No accounts'}
+      </div>
+    )
+  },
 }
 
 type InputValue = {
@@ -62,20 +86,23 @@ type InputValue = {
   wallet: string,
 }
 
-type Step = 'createAccount' | 'connectDevice' | 'startWallet' | 'confirmation'
+type Step = 'createAccount' | 'connectDevice' | 'inProgress' | 'startWallet' | 'listAccounts'
 
 type Props = {
   addAccount: Function,
   closeModal: Function,
   currentDevice: Device | null,
+  accounts: Accounts,
 }
 type State = {
   inputValue: InputValue,
   step: Step,
-  walletAddress: string,
+  accounts: Object,
+  progress: null | Object,
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  accounts: getAccounts(state),
   currentDevice: getCurrentDevice(state),
 })
 
@@ -89,13 +116,18 @@ const defaultState = {
     accountName: '',
     wallet: '',
   },
-  walletAddress: '',
+  accounts: {},
+  progress: null,
   step: 'createAccount',
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
   state = {
     ...defaultState,
+  }
+
+  componentDidMount() {
+    ipcRenderer.on('msg', this.handleWalletRequest)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -121,31 +153,21 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   getWalletInfos() {
     const { inputValue } = this.state
-    const { currentDevice } = this.props
+    const { currentDevice, accounts } = this.props
 
     if (currentDevice === null) {
       return
     }
 
-    const { data: { data }, type } = sendSyncEvent('usb', 'wallet.request', {
+    sendEvent('usb', 'wallet.request', {
       path: currentDevice.path,
       wallet: inputValue.wallet,
+      currentAccounts: Object.keys(accounts),
     })
-
-    if (type === 'wallet.request.fail') {
-      this._timeout = setTimeout(() => this.getWalletInfos(), 1e3)
-    }
-
-    if (type === 'wallet.request.success') {
-      this.setState({
-        walletAddress: data.bitcoinAddress,
-        step: 'confirmation',
-      })
-    }
   }
 
   getStepProps() {
-    const { inputValue, walletAddress, step } = this.state
+    const { inputValue, step, progress, accounts } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
 
@@ -158,26 +180,57 @@ class AddAccountModal extends PureComponent<Props, State> {
       ...props(step === 'startWallet', {
         wallet: inputValue.wallet,
       }),
-      ...props(step === 'confirmation', {
-        accountName: inputValue.accountName,
-        onConfirm: this.handleAddAccount,
-        wallet: inputValue.wallet,
-        walletAddress,
+      ...props(step === 'inProgress', {
+        progress,
+      }),
+      ...props(step === 'listAccounts', {
+        accounts,
+        onAddAccount: this.handleAddAccount,
       }),
     }
   }
 
-  handleAddAccount = () => {
-    const { inputValue, walletAddress } = this.state
-    const { addAccount, closeModal } = this.props
+  componentWillUmount() {
+    ipcRenderer.removeListener('msg', this.handleWalletRequest)
+    clearTimeout(this._timeout)
+  }
 
-    const account = {
-      name: inputValue.accountName,
-      type: inputValue.wallet,
-      address: walletAddress,
+  handleWalletRequest = (e, { data, type }) => {
+    if (type === 'wallet.request.progress') {
+      this.setState({
+        step: 'inProgress',
+        progress: data,
+      })
     }
 
-    addAccount(account)
+    if (type === 'wallet.request.fail') {
+      this._timeout = setTimeout(() => this.getWalletInfos(), 1e3)
+    }
+
+    if (type === 'wallet.request.success') {
+      this.setState({
+        accounts: data,
+        step: 'listAccounts',
+      })
+    }
+  }
+
+  handleAddAccount = index => () => {
+    const { inputValue, accounts } = this.state
+    const { addAccount, closeModal } = this.props
+
+    const { id, balance, transactions } = accounts[index]
+
+    addAccount({
+      id,
+      name: inputValue.accountName,
+      type: inputValue.wallet,
+      data: {
+        balance,
+        transactions,
+      },
+    })
+
     closeModal('add-account')
   }
 

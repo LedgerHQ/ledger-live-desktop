@@ -79,7 +79,7 @@ class SideBar extends PureComponent<Props> {
               {Object.entries(accounts).map(([id, account]: [string, any]) => (
                 <Item
                   linkTo={`/account/${id}`}
-                  desc={`${account.type.toUpperCase()} 3.78605936`}
+                  desc={`${account.type.toUpperCase()} ${account.data.balance}`}
                   key={id}
                 >
                   {account.name}

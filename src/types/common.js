@@ -18,7 +18,6 @@ export type Transaction = {
 // -------------------- Accounts
 
 export type AccountData = {
-  address: string,
   balance: number,
   transactions: Array<Transaction>,
 }
@@ -27,7 +26,6 @@ export type Account = {
   id: string,
   name: string,
   type: string,
-  address: string,
   data?: AccountData,
 }
 
