@@ -5,7 +5,15 @@
 * nodejs v8.x (https://nodejs.org/en/)
 * yarn latest (https://yarnpkg.com/fr/docs/install)
 
-## Installation
+## Setup
+
+#### Create .env file and complete it, if you want main & renderer errors to be tracked
+
+```
+SENTRY_URL=http://...
+```
+
+#### Install dependencies
 
 ```
 yarn

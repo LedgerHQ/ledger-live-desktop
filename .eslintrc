@@ -6,6 +6,7 @@
     "__ENV__": false,
     "__DEV__": false,
     "__PROD__": false,
+    "__SENTRY_URL__": false,
     "__static": false,
     "window": false,
   },

@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import Raven from 'raven-js'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
@@ -15,6 +16,11 @@ import { isLocked } from 'reducers/application'
 import App from 'components/App'
 
 import 'styles/global'
+
+if (__PROD__ && __SENTRY_URL__) {
+  Raven.config(__SENTRY_URL__).install()
+  window.addEventListener('unhandledrejection', event => Raven.captureException(event.reason))
+}
 
 const history = createHistory()
 const store = createStore(history)
