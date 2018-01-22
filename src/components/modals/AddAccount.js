@@ -127,16 +127,16 @@ class AddAccountModal extends PureComponent<Props, State> {
       return
     }
 
-    const { data: { data }, type } = sendSyncEvent('usb', 'wallet.infos.request', {
+    const { data: { data }, type } = sendSyncEvent('usb', 'wallet.request', {
       path: currentDevice.path,
       wallet: inputValue.wallet,
     })
 
-    if (type === 'wallet.infos.fail') {
+    if (type === 'wallet.request.fail') {
       this._timeout = setTimeout(() => this.getWalletInfos(), 1e3)
     }
 
-    if (type === 'wallet.infos.success') {
+    if (type === 'wallet.request.success') {
       this.setState({
         walletAddress: data.bitcoinAddress,
         step: 'confirmation',
