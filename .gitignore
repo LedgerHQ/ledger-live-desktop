@@ -6,3 +6,4 @@
 /static/
 /storybook-static/
 thumbs.db
+/.env
