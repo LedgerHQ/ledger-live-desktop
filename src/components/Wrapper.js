@@ -31,8 +31,6 @@ class Wrapper extends Component<{}> {
         <IsUnlocked
           render={() => (
             <Fragment>
-              <UpdateNotifier />
-
               {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
                 <ModalComponent key={name} />
               ))}
@@ -42,11 +40,14 @@ class Wrapper extends Component<{}> {
 
                 <Box shrink grow bg="cream">
                   <TopBar />
-                  <GrowScroll>
-                    <Route path="/" exact component={DashboardPage} />
-                    <Route path="/settings" component={SettingsPage} />
-                    <Route path="/account/:id" component={AccountPage} />
-                  </GrowScroll>
+                  <Box grow relative>
+                    <UpdateNotifier />
+                    <GrowScroll>
+                      <Route path="/" exact component={DashboardPage} />
+                      <Route path="/settings" component={SettingsPage} />
+                      <Route path="/account/:id" component={AccountPage} />
+                    </GrowScroll>
+                  </Box>
                 </Box>
               </Box>
             </Fragment>

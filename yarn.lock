@@ -7313,7 +7313,7 @@ react-mortal@^3.0.1:
     react-motion "^0.5.0"
     react-portal "^4.0.0"
 
-react-motion@^0.5.0:
+react-motion@^0.5.0, react-motion@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.5.2.tgz#0dd3a69e411316567927917c6626551ba0607316"
   dependencies:

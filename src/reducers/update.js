@@ -39,6 +39,10 @@ export function getUpdateStatus(state: { update: UpdateState }): UpdateStatus {
   return state.update.status
 }
 
+export function getUpdateData(state: { update: UpdateState }): Object {
+  return state.update.data || {}
+}
+
 // Default export
 
 export default handleActions(handlers, state)
