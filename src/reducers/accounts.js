@@ -22,13 +22,28 @@ const handlers: Object = {
   SET_ACCOUNT_DATA: (
     state: AccountsState,
     { payload: { accountID, data } }: { payload: { accountID: string, data: AccountData } },
-  ): AccountsState => ({
-    ...state,
-    [accountID]: {
-      ...state[accountID],
-      data,
-    },
-  }),
+  ): AccountsState => {
+    const account = state[accountID]
+
+    const balance = get(account.data, 'balance', 0)
+    const transactions = get(account.data, 'transactions', [])
+    const currentIndex = data.currentIndex
+      ? data.currentIndex
+      : get(account.data, 'currentIndex', 0)
+
+    account.data = {
+      ...account.data,
+      ...data,
+      balance: balance + data.balance,
+      currentIndex,
+      transactions: [...transactions, ...data.transactions],
+    }
+
+    return {
+      ...state,
+      [accountID]: account,
+    }
+  },
 }
 
 // Selectors

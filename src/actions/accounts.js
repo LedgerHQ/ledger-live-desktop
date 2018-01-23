@@ -20,7 +20,10 @@ export const fetchAccounts: FetchAccounts = () => ({
   payload: db('accounts'),
 })
 
-const setAccountData = createAction('SET_ACCOUNT_DATA', (accountID, data) => ({ accountID, data }))
+const setAccountData = createAction('DB:SET_ACCOUNT_DATA', (accountID, data) => ({
+  accountID,
+  data,
+}))
 
 export const syncAccount: Function = account => async (dispatch: Dispatch<*>) => {
   const { id, ...data } = account

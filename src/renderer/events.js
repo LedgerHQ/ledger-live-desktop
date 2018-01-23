@@ -14,7 +14,7 @@ type MsgPayload = {
 
 // wait a bit before launching update check
 const CHECK_UPDATE_TIMEOUT = 3e3
-const SYNC_ACCOUNT_TIMEOUT = 1e3
+const SYNC_ACCOUNT_TIMEOUT = 5e3
 
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
@@ -32,8 +32,9 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
 
 function syncAccounts(accounts) {
   sendEvent('accounts', 'sync.all', {
-    accounts: Object.entries(accounts).map(([id]: [string, any]) => ({
+    accounts: Object.entries(accounts).map(([id, account]: [string, any]) => ({
       id,
+      currentIndex: account.data.currentIndex,
     })),
   })
 }

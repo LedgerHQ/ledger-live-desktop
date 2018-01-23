@@ -32,13 +32,26 @@ export const networks = [
 ]
 
 export function computeTransaction(addresses: Array<*>) {
+  // return (transaction: Object) => {
+  //   const outputVal = transaction.outputs
+  //     .filter(o => addresses.includes(o.address))
+  //     .reduce((acc, cur) => acc + cur.value, 0)
+  //   const inputVal = transaction.inputs
+  //     .filter(i => addresses.includes(i.address))
+  //     .reduce((acc, cur) => acc + cur.value, 0)
+  //   const balance = outputVal - inputVal
+  //   return {
+  //     ...transaction,
+  //     balance,
+  //   }
+  // }
   return (transaction: Object) => {
-    const outputVal = transaction.outputs
-      .filter(o => addresses.includes(o.address))
+    const outputVal = transaction.out
+      .filter(o => addresses.includes(o.addr))
       .reduce((acc, cur) => acc + cur.value, 0)
     const inputVal = transaction.inputs
-      .filter(i => addresses.includes(i.address))
-      .reduce((acc, cur) => acc + cur.value, 0)
+      .filter(i => addresses.includes(i.prev_out.addr))
+      .reduce((acc, cur) => acc + cur.prev_out.value, 0)
     const balance = outputVal - inputVal
     return {
       ...transaction,
@@ -47,7 +60,7 @@ export function computeTransaction(addresses: Array<*>) {
   }
 }
 
-export function getTransactions(addresses: Array<Object>) {
+export function getTransactions(addresses: Array<string>) {
   // return axios.get(
   //   `http://api.ledgerwallet.com/blockchain/v2/btc_testnet/addresses/${addresses.join(
   //     ',',
@@ -67,6 +80,7 @@ export async function getAccount({
   segwit: boolean,
   network: Object,
 }) {
+  const gapLimit = 20
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
 
   let transactions = []
@@ -105,11 +119,9 @@ export async function getAccount({
     return getAddress({ type: 'external', index: address.index + 1 })
   }
 
-  const nextPath = (index = 0) => {
-    const gapLimit = 20
-
-    return Promise.all(
-      Array.from(Array(gapLimit).keys()).map(v =>
+  const nextPath = (index = 0) =>
+    Promise.all(
+      Array.from(new Array(gapLimit).keys()).map(v =>
         Promise.all([
           getAddress({ type: 'external', index: v + index }),
           getAddress({ type: 'internal', index: v + index }),
@@ -117,13 +129,14 @@ export async function getAccount({
       ),
     ).then(async results => {
       const addresses = results.reduce((result, v) => [...result, ...v], [])
+
       const listAddresses = addresses.map(a => a.address)
 
       const { txs } = await getTransactions(listAddresses)
 
       const hasTransactions = txs.length > 0
 
-      transactions = [...transactions, ...txs.map(listAddresses)]
+      transactions = [...transactions, ...txs.map(computeTransaction(listAddresses))]
       lastAddress = hasTransactions ? getLastAddress(addresses, txs[0].out[0]) : lastAddress
 
       if (hasTransactions) {
@@ -144,7 +157,6 @@ export async function getAccount({
           : {}),
       }
     })
-  }
 
   return nextPath(currentIndex)
 }

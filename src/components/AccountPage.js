@@ -39,7 +39,7 @@ class AccountPage extends PureComponent<Props> {
                 <Card title="Balance">{format(accountData.balance)}</Card>
               </Box>
               <Box flex={1}>
-                <Card title="Receive" />
+                <Card title="Receive">{accountData.address}</Card>
               </Box>
             </Box>
             <Card title="Last operations">
