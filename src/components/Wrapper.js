@@ -38,11 +38,11 @@ class Wrapper extends Component<{}> {
               <Box grow horizontal>
                 <SideBar />
 
-                <Box shrink grow bg="cream">
+                <Box shrink grow bg="cream" color="grey">
                   <TopBar />
                   <Box grow relative>
                     <UpdateNotifier />
-                    <GrowScroll p={3}>
+                    <GrowScroll p={4}>
                       <Route path="/" exact component={DashboardPage} />
                       <Route path="/settings" component={SettingsPage} />
                       <Route path="/account/:id" component={AccountPage} />

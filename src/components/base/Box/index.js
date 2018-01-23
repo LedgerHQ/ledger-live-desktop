@@ -55,7 +55,7 @@ const Box = styled.div`
 `
 
 const RawCard = styled(Box).attrs({ bg: 'white', p: 3 })`
-  box-shadow: rgba(0, 0, 0, 0.1) 0 5px 30px;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 8px 30px;
   border-radius: 5px;
 `
 

@@ -16,6 +16,7 @@ import Triangles from './Triangles'
 
 type Props = {
   items: Array<Object>,
+  value?: Object,
   itemToString?: Function,
   onChange?: Function,
   fuseOptions?: Object,
@@ -124,10 +125,13 @@ class Select extends PureComponent<Props> {
       renderSelected,
       placeholder,
       onChange,
+      value,
+      ...props
     } = this.props
 
     return (
       <Downshift
+        selectedItem={value}
         itemToString={itemToString}
         onChange={onChange}
         render={({
@@ -140,7 +144,7 @@ class Select extends PureComponent<Props> {
           selectedItem,
           ...downshiftProps
         }) => (
-          <Container {...getRootProps({ refKey: 'innerRef' })}>
+          <Container {...getRootProps({ refKey: 'innerRef' })} {...props}>
             {searchable ? (
               <Box relative>
                 <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
