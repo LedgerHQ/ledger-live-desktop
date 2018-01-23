@@ -140,7 +140,7 @@ class TopBar extends PureComponent<Props, State> {
             ))}
           </Overlay>
         )}
-        <Box bg="white" noShrink style={{ height: 60 }} align="center" horizontal>
+        <Box bg="white" noShrink style={{ height: 60, zIndex: 20 }} align="center" horizontal>
           <Box grow>
             {sync.progress === true
               ? 'sync...'

@@ -5,7 +5,7 @@ import { ipcMain } from 'electron'
 import objectPath from 'object-path'
 import { resolve } from 'path'
 
-import setupAutoUpdater from './autoUpdate'
+import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
 function onForkChannel(forkType, callType) {
   return (event: any, payload) => {
@@ -49,6 +49,7 @@ ipcMain.on('accounts', onForkChannel('accounts', 'async'))
 const handlers = {
   updater: {
     init: setupAutoUpdater,
+    quitAndInstall,
   },
 }
 

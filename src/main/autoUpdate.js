@@ -14,3 +14,7 @@ export default (notify: SendFunction) => {
 
   autoUpdater.checkForUpdatesAndNotify()
 }
+
+export function quitAndInstall() {
+  autoUpdater.quitAndInstall()
+}

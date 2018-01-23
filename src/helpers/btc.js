@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import bitcoin from 'bitcoinjs-lib'
-import { formatCurrencyUnit } from 'ledger-wallet-common/lib/data/currency'
+import { formatCurrencyUnit } from '@ledgerhq/common/lib/data/currency'
 
 export function format(v: string | number, options: Object = { alwaysShowSign: true }) {
   return formatCurrencyUnit(

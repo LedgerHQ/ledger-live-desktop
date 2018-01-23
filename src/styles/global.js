@@ -37,4 +37,8 @@ injectGlobal`
   em {
     font-style: italic;
   }
+
+  ::-webkit-scrollbar {
+      display: none;
+  }
 `
