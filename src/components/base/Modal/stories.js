@@ -7,7 +7,7 @@ import { Modal, ModalBody } from 'components/base/Modal'
 const stories = storiesOf('Modal', module)
 
 stories.add('basic', () => {
-  const isOpened = boolean('isOpened', false)
+  const isOpened = boolean('isOpened', true)
   return (
     <Modal
       isOpened={isOpened}

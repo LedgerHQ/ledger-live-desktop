@@ -1,8 +1,8 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
-import shortid from 'shortid'
 import get from 'lodash/get'
+import reduce from 'lodash/reduce'
 
 import type { State } from 'reducers'
 import type { Account, Accounts, AccountData } from 'types/common'
@@ -12,17 +12,12 @@ export type AccountsState = Accounts
 const state: AccountsState = {}
 
 const handlers: Object = {
-  ADD_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => {
-    const id = shortid.generate()
-
-    return {
-      ...state,
-      [id]: {
-        id,
-        ...account,
-      },
-    }
-  },
+  ADD_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => ({
+    ...state,
+    [account.id]: {
+      ...account,
+    },
+  }),
   FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => accounts,
   SET_ACCOUNT_DATA: (
     state: AccountsState,
@@ -37,6 +32,17 @@ const handlers: Object = {
 }
 
 // Selectors
+
+export function getTotalBalance(state: { accounts: AccountsState }) {
+  return reduce(
+    state.accounts,
+    (result, account) => {
+      result += account.data.balance
+      return result
+    },
+    0,
+  )
+}
 
 export function getAccounts(state: { accounts: AccountsState }) {
   return state.accounts

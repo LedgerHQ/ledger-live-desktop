@@ -10,6 +10,7 @@ import type { Accounts } from 'types/common'
 import { openModal } from 'reducers/modals'
 import { getAccounts } from 'reducers/accounts'
 
+import { format } from 'helpers/btc'
 import { rgba } from 'styles/helpers'
 
 import Box, { GrowScroll } from 'components/base/Box'
@@ -29,7 +30,6 @@ const Container = styled(Box).attrs({
   noShrink: true,
 })`
   background-color: ${p => rgba(p.theme.colors[p.bg], process.platform === 'darwin' ? 0.4 : 1)};
-  padding-top: 40px;
   width: 250px;
 `
 
@@ -77,11 +77,7 @@ class SideBar extends PureComponent<Props> {
             <CapsSubtitle>{'Accounts'}</CapsSubtitle>
             <div>
               {Object.entries(accounts).map(([id, account]: [string, any]) => (
-                <Item
-                  linkTo={`/account/${id}`}
-                  desc={`${account.type.toUpperCase()} 3.78605936`}
-                  key={id}
-                >
+                <Item linkTo={`/account/${id}`} desc={format(account.data.balance)} key={id}>
                   {account.name}
                 </Item>
               ))}

@@ -7,11 +7,15 @@ import { resolve } from 'path'
 
 import setupAutoUpdater from './autoUpdate'
 
-function onChannelUsb(callType) {
+function onForkChannel(forkType, callType) {
   return (event: any, payload) => {
     const { type, data } = payload
 
-    const compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals/usb`))
+    const compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), [], {
+      env: {
+        FORK_TYPE: forkType,
+      },
+    })
 
     compute.send({ type, data })
     compute.on('message', payload => {
@@ -31,9 +35,9 @@ function onChannelUsb(callType) {
   }
 }
 
-// Forwards every usb message to usb process
-ipcMain.on('usb', onChannelUsb('async'))
-ipcMain.on('usb:sync', onChannelUsb('sync'))
+// Forwards every `type` messages to another process
+ipcMain.on('usb', onForkChannel('usb', 'async'))
+ipcMain.on('accounts', onForkChannel('accounts', 'async'))
 
 const handlers = {
   updater: {

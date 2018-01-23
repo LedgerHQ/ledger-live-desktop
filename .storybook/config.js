@@ -1,6 +1,7 @@
 import React from 'react'
 import { configure, addDecorator } from '@storybook/react'
 import { withKnobs } from '@storybook/addon-knobs'
+import { setOptions } from '@storybook/addon-options'
 import { ThemeProvider } from 'styled-components'
 
 import 'styles/global'
@@ -18,5 +19,12 @@ addDecorator(story => (
 ))
 
 addDecorator(withKnobs)
+
+const { name, repository: url } = require('../package.json')
+
+setOptions({
+  name,
+  url,
+})
 
 configure(loadStories, module)
