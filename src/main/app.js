@@ -2,6 +2,8 @@
 
 import { app, ipcMain, BrowserWindow } from 'electron'
 
+process.setMaxListeners(Infinity)
+
 // necessary to prevent win from being garbage collected
 let mainWindow
 

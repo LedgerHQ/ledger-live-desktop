@@ -26,7 +26,7 @@ class Wrapper extends Component<{}> {
   render() {
     return (
       <Fragment>
-        <AppRegionDrag />
+        {process.platform === 'darwin' && <AppRegionDrag />}
 
         <IsUnlocked
           render={() => (
