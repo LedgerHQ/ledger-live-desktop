@@ -2,6 +2,7 @@
 
 import { handleActions } from 'redux-actions'
 import get from 'lodash/get'
+import reduce from 'lodash/reduce'
 
 import type { State } from 'reducers'
 import type { Account, Accounts, AccountData } from 'types/common'
@@ -31,6 +32,17 @@ const handlers: Object = {
 }
 
 // Selectors
+
+export function getTotalBalance(state: { accounts: AccountsState }) {
+  return reduce(
+    state.accounts,
+    (result, account) => {
+      result += account.data.balance
+      return result
+    },
+    0,
+  )
+}
 
 export function getAccounts(state: { accounts: AccountsState }) {
   return state.accounts

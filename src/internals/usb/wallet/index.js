@@ -15,7 +15,7 @@ async function getAllAccountsByWallet({ path, wallet, currentAccounts, onProgres
 }
 
 export default (sendEvent: Function) => ({
-  request: async ({
+  getAccounts: async ({
     path,
     wallet,
     currentAccounts,
@@ -29,11 +29,11 @@ export default (sendEvent: Function) => ({
         path,
         wallet,
         currentAccounts,
-        onProgress: progress => sendEvent('wallet.request.progress', progress, { kill: false }),
+        onProgress: progress => sendEvent('wallet.getAccounts.progress', progress, { kill: false }),
       })
-      sendEvent('wallet.request.success', data)
+      sendEvent('wallet.getAccounts.success', data)
     } catch (err) {
-      sendEvent('wallet.request.fail', err.stack || err)
+      sendEvent('wallet.getAccounts.fail', err.stack || err)
     }
   },
 })

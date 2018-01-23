@@ -4,28 +4,25 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Device } from 'types/common'
 
-import { getCurrentDevice } from 'reducers/devices'
+import { format } from 'helpers/btc'
+
+import { getTotalBalance } from 'reducers/accounts'
 
 import Box from 'components/base/Box'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  currentDevice: getCurrentDevice(state),
+  totalBalance: getTotalBalance(state),
 })
 
 type Props = {
-  currentDevice: Device | null,
+  totalBalance: number,
 }
 
 class DashboardPage extends PureComponent<Props> {
   render() {
-    const { currentDevice } = this.props
-    return currentDevice !== null ? (
-      <Box style={{ wordBreak: 'break-word' }} p={20}>
-        Your current device: {currentDevice.path}
-      </Box>
-    ) : null
+    const { totalBalance } = this.props
+    return <Box p={20}>Your balance: {format(totalBalance)}</Box>
   }
 }
 

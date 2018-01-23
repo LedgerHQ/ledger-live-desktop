@@ -2,6 +2,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { ipcRenderer } from 'electron'
 
 import type { MapStateToProps, MapDispatchToProps } from 'react-redux'
 import type { Device, Devices } from 'types/common'
@@ -35,6 +36,10 @@ type Props = {
 }
 type State = {
   changeDevice: boolean,
+  sync: {
+    progress: null | boolean,
+    fail: boolean,
+  },
 }
 
 const hasDevices = props => props.currentDevice === null && props.devices.length > 0
@@ -42,12 +47,53 @@ const hasDevices = props => props.currentDevice === null && props.devices.length
 class TopBar extends PureComponent<Props, State> {
   state = {
     changeDevice: hasDevices(this.props),
+    sync: {
+      progress: null,
+      fail: false,
+    },
+  }
+
+  componentDidMount() {
+    ipcRenderer.on('msg', this.handleAccountSync)
   }
 
   componentWillReceiveProps(nextProps) {
     if (hasDevices(nextProps) && this.props.currentDevice !== null) {
       this.setState({
         changeDevice: true,
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener('msg', this.handleAccountSync)
+  }
+
+  handleAccountSync = (e, { type }) => {
+    if (type === 'accounts.sync.progress') {
+      this.setState({
+        sync: {
+          progress: true,
+          fail: false,
+        },
+      })
+    }
+
+    if (type === 'accounts.sync.fail') {
+      this.setState({
+        sync: {
+          progress: null,
+          fail: true,
+        },
+      })
+    }
+
+    if (type === 'accounts.sync.success') {
+      this.setState({
+        sync: {
+          progress: false,
+          fail: false,
+        },
       })
     }
   }
@@ -76,7 +122,7 @@ class TopBar extends PureComponent<Props, State> {
 
   render() {
     const { devices, hasPassword } = this.props
-    const { changeDevice } = this.state
+    const { changeDevice, sync } = this.state
 
     return (
       <Fragment>
@@ -94,16 +140,16 @@ class TopBar extends PureComponent<Props, State> {
             ))}
           </Overlay>
         )}
-        <Box
-          bg="white"
-          noShrink
-          style={{ height: 60 }}
-          justify="flex-end"
-          align="center"
-          horizontal
-        >
-          {hasPassword && <LockApplication onLock={this.handleLock} />}
-          <CountDevices count={devices.length} onChangeDevice={this.handleChangeDevice} />
+        <Box bg="white" noShrink style={{ height: 60 }} align="center" horizontal>
+          <Box grow>
+            {sync.progress === true
+              ? 'sync...'
+              : sync.fail === true ? 'sync fail :(' : 'sync finish!'}
+          </Box>
+          <Box justify="flex-end" horizontal>
+            {hasPassword && <LockApplication onLock={this.handleLock} />}
+            <CountDevices count={devices.length} onChangeDevice={this.handleChangeDevice} />
+          </Box>
         </Box>
       </Fragment>
     )

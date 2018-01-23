@@ -20,7 +20,10 @@ module.exports = webpackMain().then(config => ({
   devtool: config.devtool,
   target: config.target,
 
-  entry: dirs(path.resolve(__dirname, '../src/internals')),
+  entry: {
+    ...dirs(path.resolve(__dirname, '../src/internals')),
+    index: path.resolve(__dirname, '../src/internals/index'),
+  },
 
   resolve: {
     extensions: config.resolve.extensions,

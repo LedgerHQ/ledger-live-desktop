@@ -151,6 +151,11 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
   }
 
+  componentWillUnmount() {
+    ipcRenderer.removeListener('msg', this.handleWalletRequest)
+    clearTimeout(this._timeout)
+  }
+
   getWalletInfos() {
     const { inputValue } = this.state
     const { currentDevice, accounts } = this.props
@@ -159,7 +164,7 @@ class AddAccountModal extends PureComponent<Props, State> {
       return
     }
 
-    sendEvent('usb', 'wallet.request', {
+    sendEvent('usb', 'wallet.getAccounts', {
       path: currentDevice.path,
       wallet: inputValue.wallet,
       currentAccounts: Object.keys(accounts),
@@ -190,24 +195,19 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
   }
 
-  componentWillUmount() {
-    ipcRenderer.removeListener('msg', this.handleWalletRequest)
-    clearTimeout(this._timeout)
-  }
-
   handleWalletRequest = (e, { data, type }) => {
-    if (type === 'wallet.request.progress') {
+    if (type === 'wallet.getAccounts.progress') {
       this.setState({
         step: 'inProgress',
         progress: data,
       })
     }
 
-    if (type === 'wallet.request.fail') {
+    if (type === 'wallet.getAccounts.fail') {
       this._timeout = setTimeout(() => this.getWalletInfos(), 1e3)
     }
 
-    if (type === 'wallet.request.success') {
+    if (type === 'wallet.getAccounts.success') {
       this.setState({
         accounts: data,
         step: 'listAccounts',

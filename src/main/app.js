@@ -29,12 +29,8 @@ function createMainWindow() {
 
   window.loadURL(url)
 
-  window.on('closed', () => {
+  window.on('close', () => {
     mainWindow = null
-  })
-
-  ipcMain.on('renderer-ready', () => {
-    window.show()
   })
 
   window.webContents.on('devtools-opened', () => {
@@ -76,4 +72,6 @@ app.on('ready', async () => {
   }
 
   mainWindow = createMainWindow()
+
+  ipcMain.on('renderer-ready', () => mainWindow && mainWindow.show())
 })

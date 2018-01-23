@@ -2,10 +2,11 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { formatCurrencyUnit } from 'ledger-wallet-common/lib/data/currency'
 
 import type { MapStateToProps } from 'react-redux'
 import type { Account, AccountData } from 'types/common'
+
+import { format } from 'helpers/btc'
 
 import { getAccountById, getAccountData } from 'reducers/accounts'
 
@@ -22,20 +23,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
   accountData: getAccountData(state, props.match.params.id),
 })
 
-function formatBTC(v) {
-  return formatCurrencyUnit(
-    {
-      name: 'bitcoin',
-      code: 'BTC',
-      symbol: 'b',
-      magnitude: 8,
-    },
-    v,
-    true,
-    true,
-  )
-}
-
 class AccountPage extends PureComponent<Props> {
   render() {
     const { account, accountData } = this.props
@@ -49,7 +36,7 @@ class AccountPage extends PureComponent<Props> {
           <Fragment>
             <Box horizontal flow={3}>
               <Box flex={1}>
-                <Card title="Balance">{formatBTC(accountData.balance)}</Card>
+                <Card title="Balance">{format(accountData.balance)}</Card>
               </Box>
               <Box flex={1}>
                 <Card title="Receive" />
@@ -59,7 +46,7 @@ class AccountPage extends PureComponent<Props> {
               {accountData.transactions.map(tr => (
                 <Box horizontal key={tr.hash}>
                   <Box grow>{'-'}</Box>
-                  <Box>{formatBTC(tr.balance)}</Box>
+                  <Box>{format(tr.balance)}</Box>
                 </Box>
               ))}
             </Card>

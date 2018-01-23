@@ -20,16 +20,15 @@
     "storybook": "start-storybook -p 4444"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "prettier --write", "git add"]
   },
   "electronWebpack": {
     "renderer": {
       "webpackConfig": "./webpack/renderer.config.js"
     }
+  },
+  "resolutions": {
+    "webpack-sources": "1.0.1"
   },
   "dependencies": {
     "@ledgerhq/hw-app-btc": "^1.1.2-beta.068e2a14",
