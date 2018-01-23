@@ -11,11 +11,18 @@ function onForkChannel(forkType, callType) {
   return (event: any, payload) => {
     const { type, data } = payload
 
-    const compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), [], {
+    let compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), {
       env: {
         FORK_TYPE: forkType,
       },
     })
+
+    const kill = () => {
+      if (compute) {
+        compute.kill('SIGINT')
+        compute = null
+      }
+    }
 
     compute.send({ type, data })
     compute.on('message', payload => {
@@ -26,12 +33,12 @@ function onForkChannel(forkType, callType) {
       if (callType === 'sync') {
         event.returnValue = { type, data }
       }
-      if (options.kill) {
-        compute.kill()
+      if (options.kill && compute) {
+        kill()
       }
     })
 
-    process.on('exit', () => compute.kill('SIGINT'))
+    process.on('exit', kill)
   }
 }
 
@@ -41,7 +48,7 @@ ipcMain.on('accounts', onForkChannel('accounts', 'async'))
 
 const handlers = {
   updater: {
-    init: send => setupAutoUpdater(send),
+    init: setupAutoUpdater,
   },
 }
 

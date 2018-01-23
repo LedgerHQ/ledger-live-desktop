@@ -4,8 +4,6 @@ import objectPath from 'object-path'
 
 process.title = `ledger-wallet-desktop-${process.env.FORK_TYPE}`
 
-process.setMaxListeners(Infinity)
-
 function sendEvent(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
 }
