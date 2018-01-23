@@ -28,7 +28,7 @@ class AccountPage extends PureComponent<Props> {
     const { account, accountData } = this.props
 
     return (
-      <Box p={3} flow={3}>
+      <Box flow={3}>
         <Box>
           <Text fontSize={4}>{`${account.name} account`}</Text>
         </Box>

@@ -25,7 +25,7 @@ class SettingsPage extends PureComponent<Props, State> {
     const { tab } = this.state
 
     return (
-      <Box p={3} flow={4}>
+      <Box flow={4}>
         <Text fontSize={5}>{'Settings'}</Text>
         <Tabs
           index={tab}

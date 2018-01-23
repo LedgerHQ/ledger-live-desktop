@@ -8,6 +8,7 @@ export default {
     argile: '#eeeeee',
     blue: '#6193ff',
     cream: '#f9f9f9',
+    gray: '#a8b6c2',
     grenade: '#ea2e49',
     lead: '#999999',
     mouse: '#e2e2e2',
