@@ -42,7 +42,7 @@ class Wrapper extends Component<{}> {
                   <TopBar />
                   <Box grow relative>
                     <UpdateNotifier />
-                    <GrowScroll>
+                    <GrowScroll p={3}>
                       <Route path="/" exact component={DashboardPage} />
                       <Route path="/settings" component={SettingsPage} />
                       <Route path="/account/:id" component={AccountPage} />

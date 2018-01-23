@@ -22,7 +22,7 @@ type Props = {
 class DashboardPage extends PureComponent<Props> {
   render() {
     const { totalBalance } = this.props
-    return <Box p={20}>Your balance: {format(totalBalance)}</Box>
+    return <Box>Your balance: {format(totalBalance)}</Box>
   }
 }
 
