@@ -43,7 +43,7 @@ class AccountPage extends PureComponent<Props> {
               </Box>
             </Box>
             <Card title="Last operations">
-              {accountData.transactions.reverse().map(tr => (
+              {accountData.transactions.map(tr => (
                 <Box horizontal key={tr.hash}>
                   <Box grow>{'-'}</Box>
                   <Box>{format(tr.balance)}</Box>

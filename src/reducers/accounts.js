@@ -11,12 +11,20 @@ export type AccountsState = Accounts
 
 const state: AccountsState = {}
 
+function setAccount(account: Account) {
+  return {
+    ...account,
+    data: {
+      ...account.data,
+      transactions: get(account.data, 'transactions', []).reverse(),
+    },
+  }
+}
+
 const handlers: Object = {
   ADD_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => ({
     ...state,
-    [account.id]: {
-      ...account,
-    },
+    [account.id]: setAccount(account),
   }),
   FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => accounts,
   SET_ACCOUNT_DATA: (
@@ -40,7 +48,7 @@ const handlers: Object = {
 
     return {
       ...state,
-      [accountID]: account,
+      [accountID]: setAccount(account),
     }
   },
 }
