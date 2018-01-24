@@ -11,10 +11,14 @@ export type SettingsState = Object
 const state: SettingsState = {}
 
 const handlers: Object = {
-  SAVE_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => settings,
+  SAVE_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => ({
+    ...state,
+    ...settings,
+  }),
   FETCH_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => settings,
 }
 
 export const hasPassword = (state: Object) => get(state.settings, 'password.state', false)
+export const getLanguage = (state: Object) => get(state.settings, 'language', 'en')
 
 export default handleActions(handlers, state)

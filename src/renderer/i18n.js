@@ -5,7 +5,6 @@ import path from 'path'
 import Backend from 'i18next-node-fs-backend'
 
 i18n.use(Backend).init({
-  lng: 'en',
   fallbackLng: 'en',
   debug: false,
   backend: {

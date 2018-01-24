@@ -1,11 +1,14 @@
 // @flow
 
-import { app, ipcMain, BrowserWindow } from 'electron'
+import { app, BrowserWindow } from 'electron'
 
 process.setMaxListeners(100)
 
 // necessary to prevent win from being garbage collected
 let mainWindow
+
+const MIN_HEIGHT = 768
+const MIN_WIDTH = 1024
 
 function createMainWindow() {
   const windowOptions = {
@@ -17,6 +20,10 @@ function createMainWindow() {
         }
       : {}),
     show: true,
+    height: MIN_HEIGHT,
+    width: MIN_WIDTH,
+    minHeight: MIN_HEIGHT,
+    minWidth: MIN_WIDTH,
   }
 
   const window = new BrowserWindow(windowOptions)
@@ -33,6 +40,10 @@ function createMainWindow() {
 
   window.on('close', () => {
     mainWindow = null
+  })
+
+  window.once('ready-to-show', () => {
+    window.show()
   })
 
   window.webContents.on('devtools-opened', () => {
@@ -74,6 +85,4 @@ app.on('ready', async () => {
   }
 
   mainWindow = createMainWindow()
-
-  ipcMain.on('renderer-ready', () => mainWindow && mainWindow.show())
 })

@@ -2,12 +2,16 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import chunk from 'lodash/chunk'
+import { push } from 'react-router-redux'
 
 import type { MapStateToProps } from 'react-redux'
+import type { Accounts } from 'types/common'
 
 import { format } from 'helpers/btc'
 
-import { getTotalBalance } from 'reducers/accounts'
+import { openModal } from 'reducers/modals'
+import { getTotalBalance, getAccounts } from 'reducers/accounts'
 
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -15,10 +19,19 @@ import Select from 'components/base/Select'
 import Tabs from 'components/base/Tabs'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  accounts: getAccounts(state),
   totalBalance: getTotalBalance(state),
 })
 
+const mapDispatchToProps = {
+  push,
+  openModal,
+}
+
 type Props = {
+  accounts: Accounts,
+  push: Function,
+  openModal: Function,
   totalBalance: number,
 }
 
@@ -40,8 +53,11 @@ class DashboardPage extends PureComponent<Props, State> {
   handleChangeTab = tab => this.setState({ tab })
 
   render() {
-    const { totalBalance } = this.props
+    const { totalBalance, openModal, push, accounts } = this.props
     const { tab } = this.state
+
+    const totalAccounts = Object.keys(accounts).length
+
     return (
       <Box flow={4}>
         <Box horizontal align="flex-end">
@@ -50,7 +66,9 @@ class DashboardPage extends PureComponent<Props, State> {
               {'Hello Anonymous,'}
             </Text>
             <Text color="grey" fontSize={3}>
-              {'here is the summary of your 5 accounts'}
+              {totalAccounts > 0
+                ? `here is the summary of your ${totalAccounts} accounts`
+                : 'no accounts'}
             </Text>
           </Box>
           <Box ml="auto">
@@ -85,40 +103,45 @@ class DashboardPage extends PureComponent<Props, State> {
           />
         </Card>
         <Box flow={3}>
-          <Box horizontal flow={3}>
-            <Card flex={1} style={{ height: 200 }}>
-              {'Brian account'}
-            </Card>
-            <Card flex={1} style={{ height: 200 }}>
-              {'Virginie account'}
-            </Card>
-            <Card flex={1} style={{ height: 200 }}>
-              {'Ledger account'}
-            </Card>
-          </Box>
-          <Box horizontal flow={3}>
-            <Card flex={1} style={{ height: 200 }}>
-              {'Brian account'}
-            </Card>
-            <Card flex={1} style={{ height: 200 }}>
-              {'Virginie account'}
-            </Card>
+          {chunk([...Object.keys(accounts), 'add-account'], 3).map((line, i) => (
             <Box
-              p={3}
-              flex={1}
-              borderWidth={2}
-              align="center"
-              justify="center"
-              borderColor="mouse"
-              style={{ borderStyle: 'dashed' }}
+              key={i} // eslint-disable-line react/no-array-index-key
+              horizontal
+              flow={3}
             >
-              {'+ Add account'}
+              {line.map(
+                key =>
+                  key === 'add-account' ? (
+                    <Box
+                      key={key}
+                      p={3}
+                      flex={1}
+                      borderWidth={2}
+                      align="center"
+                      justify="center"
+                      borderColor="mouse"
+                      style={{ borderStyle: 'dashed', cursor: 'pointer' }}
+                      onClick={() => openModal('add-account')}
+                    >
+                      {'+ Add account'}
+                    </Box>
+                  ) : (
+                    <Card
+                      key={key}
+                      flex={1}
+                      style={{ cursor: 'pointer', height: 200 }}
+                      onClick={() => push(`/account/${key}`)}
+                    >
+                      {accounts[key].name}
+                    </Card>
+                  ),
+              )}
             </Box>
-          </Box>
+          ))}
         </Box>
       </Box>
     )
   }
 }
 
-export default connect(mapStateToProps)(DashboardPage)
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage)

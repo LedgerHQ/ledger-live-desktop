@@ -11,12 +11,12 @@ export type AccountsState = Accounts
 
 const state: AccountsState = {}
 
-function setAccount(account: Account) {
+function getAccount(account: Account) {
   return {
     ...account,
     data: {
       ...account.data,
-      transactions: get(account.data, 'transactions', []).reverse(),
+      transactions: get(account.data, 'transactions', []).sort((a, b) => b.time - a.time),
     },
   }
 }
@@ -24,7 +24,7 @@ function setAccount(account: Account) {
 const handlers: Object = {
   ADD_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => ({
     ...state,
-    [account.id]: setAccount(account),
+    [account.id]: getAccount(account),
   }),
   FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => accounts,
   SET_ACCOUNT_DATA: (
@@ -48,7 +48,7 @@ const handlers: Object = {
 
     return {
       ...state,
-      [accountID]: setAccount(account),
+      [accountID]: getAccount(account),
     }
   },
 }
@@ -67,7 +67,10 @@ export function getTotalBalance(state: { accounts: AccountsState }) {
 }
 
 export function getAccounts(state: { accounts: AccountsState }) {
-  return state.accounts
+  return Object.keys(state.accounts).reduce((result, key) => {
+    result[key] = getAccount(state.accounts[key])
+    return result
+  }, {})
 }
 
 export function getAccountById(state: { accounts: AccountsState }, id: string) {

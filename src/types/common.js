@@ -13,6 +13,7 @@ export type Devices = Array<Device>
 export type Transaction = {
   balance: number,
   hash: string,
+  time: number,
 }
 
 // -------------------- Accounts
@@ -35,6 +36,15 @@ export type Accounts = { [_: string]: Account }
 
 // -------------------- Settings
 
-export type Settings = Object
+export type SettingsProfile = {
+  password: {
+    state: boolean,
+    value: string,
+  },
+}
+export type SettingsDisplay = {
+  language: string,
+}
+export type Settings = SettingsProfile & SettingsDisplay
 
 export type T = (string, ?Object) => string

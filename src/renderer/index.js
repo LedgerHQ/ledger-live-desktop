@@ -12,6 +12,7 @@ import events from 'renderer/events'
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
+import { getLanguage } from 'reducers/settings'
 
 import App from 'components/App'
 
@@ -29,12 +30,14 @@ const rootNode = document.getElementById('app')
 store.dispatch(fetchSettings())
 
 const state = store.getState() || {}
+const language = getLanguage(state)
+const locked = isLocked(state)
 
-if (!isLocked(state)) {
+if (!locked) {
   store.dispatch(fetchAccounts())
 }
 
-events(store)
+events({ store, locked })
 
 function r(Comp) {
   if (rootNode) {
@@ -42,11 +45,11 @@ function r(Comp) {
   }
 }
 
-r(<App store={store} history={history} />)
+r(<App store={store} history={history} language={language} />)
 
 if (module.hot) {
   module.hot.accept('../components/App', () => {
     const NewApp = require('../components/App').default // eslint-disable-line global-require
-    r(<NewApp store={store} history={history} />)
+    r(<NewApp store={store} history={history} language={language} />)
   })
 }

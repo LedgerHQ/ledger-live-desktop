@@ -10,10 +10,8 @@ import set from 'lodash/set'
 
 import { setEncryptionKey } from 'helpers/db'
 
-import type { MapStateToProps } from 'react-redux'
-import type { Settings } from 'types/common'
+import type { SettingsProfile } from 'types/common'
 
-import { saveSettings } from 'actions/settings'
 import { unlock } from 'reducers/application'
 
 import Box, { Card } from 'components/base/Box'
@@ -25,30 +23,24 @@ const Label = styled.label`
   text-transform: uppercase;
 `
 
-type InputValue = Settings
+type InputValue = SettingsProfile
 
 type Props = {
-  settings: Settings,
-  saveSettings: Function,
+  settings: SettingsProfile,
+  onSaveSettings: Function,
   unlock: Function,
 }
 type State = {
   inputValue: InputValue,
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  settings: state.settings,
-})
-
 const mapDispatchToProps = {
-  saveSettings,
   unlock,
 }
 
-class SettingsPage extends PureComponent<Props, State> {
+class TabProfile extends PureComponent<Props, State> {
   state = {
     inputValue: {
-      ...this.props.settings,
       password: {
         ...this.props.settings.password,
         value: undefined,
@@ -56,7 +48,7 @@ class SettingsPage extends PureComponent<Props, State> {
     },
   }
 
-  handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
+  handleChangeInput = (key: string) => (value: $Values<InputValue>) =>
     this.setState(prev => ({
       inputValue: {
         ...set(prev.inputValue, key, value),
@@ -66,7 +58,7 @@ class SettingsPage extends PureComponent<Props, State> {
   handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { saveSettings, unlock } = this.props
+    const { onSaveSettings, unlock } = this.props
     const { inputValue } = this.state
 
     const settings = {
@@ -81,14 +73,14 @@ class SettingsPage extends PureComponent<Props, State> {
 
     if (password.state === true && password.value.trim() !== '') {
       settings.password.value = bcrypt.hashSync(password.value, 8)
-
       setEncryptionKey('accounts', password.value)
     } else {
       setEncryptionKey('accounts', undefined)
     }
 
     unlock()
-    saveSettings(settings)
+
+    onSaveSettings(settings)
   }
 
   render() {
@@ -99,7 +91,7 @@ class SettingsPage extends PureComponent<Props, State> {
           <Box horizontal>
             <input
               type="checkbox"
-              checked={get(inputValue, 'password.state')}
+              checked={get(inputValue, 'password.state', false)}
               onChange={e => this.handleChangeInput('password.state')(e.target.checked)}
             />{' '}
             with password
@@ -123,4 +115,4 @@ class SettingsPage extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage)
+export default connect(null, mapDispatchToProps)(TabProfile)

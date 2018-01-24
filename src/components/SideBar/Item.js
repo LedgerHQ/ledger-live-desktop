@@ -9,25 +9,14 @@ import { connect } from 'react-redux'
 
 import { openModal, isModalOpened } from 'reducers/modals'
 
+import type { MapStateToProps } from 'react-redux'
 import type { Element } from 'react'
 import type { Location } from 'react-router'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
-type Props = {
-  children: string,
-  linkTo?: string | null,
-  modal?: string | null,
-  desc?: string | null,
-  icon?: Element<*> | null,
-  location: Location,
-  isModalOpened: boolean,
-  push: Function,
-  openModal: Function,
-}
-
-const mapStateToProps = (state, { modal }: any) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state, { modal }: any) => ({
   // connect router here only to make components re-render
   // see https://github.com/ReactTraining/react-router/issues/4671
   router: state.router,
@@ -62,6 +51,18 @@ const IconWrapper = styled(Box)`
   height: 25px;
   border: 2px solid ${p => (p.isActive ? p.theme.colors.blue : 'rgba(255, 255, 255, 0.1)')};
 `
+
+type Props = {
+  children: string,
+  linkTo?: string | null,
+  modal?: string | null,
+  desc?: string | null,
+  icon?: Element<*> | null,
+  location: Location,
+  isModalOpened: boolean,
+  push: Function,
+  openModal: Function,
+}
 
 function Item({
   children,

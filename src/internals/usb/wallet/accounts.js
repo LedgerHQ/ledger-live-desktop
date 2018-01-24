@@ -72,7 +72,7 @@ export default async ({
     v.toString(16).padStart(4, 0),
   )
 
-  await transport.exchange(`e014000005${p2pkh}${p2sh}${fam.substr(-2)}`, [0x9000])
+  await transport.exchange(Buffer.from(`e014000005${p2pkh}${p2sh}${fam.substr(-2)}`), [0x9000])
 
   const getPublicKey = path => btc.getWalletPublicKey(path)
 
