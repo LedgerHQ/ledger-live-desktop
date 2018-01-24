@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
@@ -17,13 +16,9 @@ import { addAccount } from 'actions/accounts'
 
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
+import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Select from 'components/base/Select'
-
-const Label = styled.label`
-  display: block;
-  text-transform: uppercase;
-`
 
 const Steps = {
   createAccount: (props: Object) => (
@@ -229,6 +224,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     })
 
     closeModal('add-account')
+    this.handleClose()
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>

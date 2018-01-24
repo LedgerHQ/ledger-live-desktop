@@ -2,6 +2,9 @@
 
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
+import get from 'lodash/get'
+
+import type { Accounts } from 'types/common'
 
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 import { syncAccount } from 'actions/accounts'
@@ -17,6 +20,9 @@ type MsgPayload = {
 const CHECK_UPDATE_TIMEOUT = 3e3
 const SYNC_ACCOUNT_TIMEOUT = 5e3
 
+let syncAccounts = true
+let syncTimeout
+
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
     type: msgType,
@@ -31,24 +37,33 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
   })
 }
 
-function startSyncAccounts(store) {
-  const accounts = getAccounts(store.getState())
-
+export function startSyncAccounts(accounts: Accounts) {
+  syncAccounts = true
   sendEvent('accounts', 'sync.all', {
     accounts: Object.entries(accounts).map(([id, account]: [string, any]) => ({
       id,
-      currentIndex: account.data.currentIndex,
+      currentIndex: get(account, 'data.currentIndex', 0),
     })),
   })
 }
 
-export default (store: Object) => {
+export function stopSyncAccounts() {
+  syncAccounts = false
+  clearTimeout(syncTimeout)
+}
+
+export default ({ store, locked }: { store: Object, locked: boolean }) => {
   const handlers = {
     accounts: {
       sync: {
         success: accounts => {
-          accounts.forEach(account => store.dispatch(syncAccount(account)))
-          setTimeout(() => startSyncAccounts(store), SYNC_ACCOUNT_TIMEOUT)
+          if (syncAccounts) {
+            accounts.forEach(account => store.dispatch(syncAccount(account)))
+            syncTimeout = setTimeout(() => {
+              const newAccounts = getAccounts(store.getState())
+              startSyncAccounts(newAccounts)
+            }, SYNC_ACCOUNT_TIMEOUT)
+          }
         },
       },
     },
@@ -80,14 +95,15 @@ export default (store: Object) => {
     handler(data)
   })
 
-  // First time, we get all devices
-  sendEvent('usb', 'devices.all')
-
   // Start detection when we plug/unplug devices
   sendEvent('usb', 'devices.listen')
 
-  // Start accounts sync
-  startSyncAccounts(store)
+  if (!locked) {
+    const accounts = getAccounts(store.getState())
+
+    // Start accounts sync
+    startSyncAccounts(accounts)
+  }
 
   if (__PROD__) {
     // Start check of eventual updates

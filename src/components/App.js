@@ -12,9 +12,17 @@ import i18n from 'renderer/i18n'
 
 import Wrapper from 'components/Wrapper'
 
-export default ({ store, history }: { store: Object, history: Object }) => (
+export default ({
+  store,
+  history,
+  language,
+}: {
+  store: Object,
+  history: Object,
+  language: string,
+}) => (
   <Provider store={store}>
-    <I18nextProvider i18n={i18n}>
+    <I18nextProvider i18n={i18n} initialLanguage={language}>
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
           <Wrapper />

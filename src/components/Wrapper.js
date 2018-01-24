@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Fragment, Component } from 'react'
-import { ipcRenderer } from 'electron'
 import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
@@ -19,10 +18,6 @@ import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
 
 class Wrapper extends Component<{}> {
-  componentDidMount() {
-    ipcRenderer.send('renderer-ready')
-  }
-
   render() {
     return (
       <Fragment>

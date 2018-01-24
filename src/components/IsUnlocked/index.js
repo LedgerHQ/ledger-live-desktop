@@ -5,13 +5,15 @@ import { connect } from 'react-redux'
 import bcrypt from 'bcryptjs'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Settings } from 'types/common'
+import type { Settings, Accounts } from 'types/common'
 
 import get from 'lodash/get'
 
+import { startSyncAccounts, stopSyncAccounts } from 'renderer/events'
 import { setEncryptionKey } from 'helpers/db'
 
 import { fetchAccounts } from 'actions/accounts'
+import { getAccounts } from 'reducers/accounts'
 import { isLocked, unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
@@ -22,6 +24,7 @@ type InputValue = {
 }
 
 type Props = {
+  accounts: Accounts,
   fetchAccounts: Function,
   isLocked: boolean,
   render: Function,
@@ -33,6 +36,7 @@ type State = {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  accounts: getAccounts(state),
   settings: state.settings,
   isLocked: isLocked(state),
 })
@@ -51,6 +55,16 @@ const defaultState = {
 class IsUnlocked extends PureComponent<Props, State> {
   state = {
     ...defaultState,
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.isLocked && !nextProps.isLocked) {
+      startSyncAccounts(nextProps.accounts)
+    }
+
+    if (!this.props.isLocked && nextProps.isLocked) {
+      stopSyncAccounts()
+    }
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>

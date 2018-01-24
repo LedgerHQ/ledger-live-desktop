@@ -1,25 +1,25 @@
 common:
   ok: Okay
-  cancel: Cancel
+  cancel: Annuler
   connectedDevices: You have {{count}} device connected
   connectedDevices_0: You don't have device connected
   connectedDevices_plural: You have {{count}} devices connected
 
 language:
-  en: English
-  fr: French
+  en: Anglais
+  fr: Français
 
 settings:
-  title: Settings
+  title: Réglages
 
   tabs:
-    display: Display
-    money: Money
-    material: Material
-    app: App (beta)
-    tools: Tools
+    display: Affichage
+    money: Monnaie
+    material: Matériel
+    app: App (béta)
+    tools: Outils
     blockchain: Blockchain
-    profile: Profile
+    profile: Profil
 
   display:
-    language: Language
+    language: Langage

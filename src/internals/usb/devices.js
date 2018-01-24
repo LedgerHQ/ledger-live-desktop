@@ -1,28 +1,19 @@
 // @flow
 
-import listenDevices from '@ledgerhq/hw-transport-node-hid/lib/listenDevices'
-import getDevices from '@ledgerhq/hw-transport-node-hid/lib/getDevices'
-
-const isLedgerDevice = device =>
-  (device.vendorId === 0x2581 && device.productId === 0x3b7c) || device.vendorId === 0x2c97
-
-let isListenDevices = false
+import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 
 export default (send: Function) => ({
   listen: () => {
-    if (isListenDevices) {
-      return
-    }
+    CommNodeHid.listen({
+      next: e => {
+        if (e.type === 'add') {
+          send('device.add', e.device, { kill: false })
+        }
 
-    isListenDevices = true
-
-    const handleChangeDevice = eventName => device =>
-      isLedgerDevice(device) && send(eventName, device, { kill: false })
-
-    listenDevices.start()
-
-    listenDevices.events.on('add', handleChangeDevice('device.add'))
-    listenDevices.events.on('remove', handleChangeDevice('device.remove'))
+        if (e.type === 'remove') {
+          send('device.remove', e.device, { kill: false })
+        }
+      },
+    })
   },
-  all: () => send('devices.update', getDevices().filter(isLedgerDevice)),
 })
