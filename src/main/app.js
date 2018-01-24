@@ -16,7 +16,7 @@ function createMainWindow() {
           vibrancy: 'ultra-dark', // https://github.com/electron/electron/issues/10521
         }
       : {}),
-    show: false,
+    show: true,
   }
 
   const window = new BrowserWindow(windowOptions)
