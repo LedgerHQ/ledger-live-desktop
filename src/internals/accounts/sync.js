@@ -8,9 +8,9 @@ export default (send: Function) => ({
 
     send('accounts.sync.progress', null, { kill: false })
 
-    const syncAccount = ({ id }) => {
+    const syncAccount = ({ id, currentIndex }) => {
       const hdnode = getHDNode({ xpub58: id, network })
-      return getAccount({ hdnode, network, segwit: true }).then(account => ({
+      return getAccount({ currentIndex, hdnode, network, segwit: true }).then(account => ({
         id,
         ...account,
       }))

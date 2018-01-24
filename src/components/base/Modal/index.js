@@ -51,7 +51,7 @@ const Container = styled(Box).attrs({
 })`
   overflow: hidden;
   position: fixed;
-  z-index: 1;
+  z-index: 20;
 `
 
 const Backdrop = styled(Box).attrs({

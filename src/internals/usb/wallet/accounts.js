@@ -113,21 +113,20 @@ export default async ({
     }
 
     const hdnode = getHDNode({ xpub58, network })
-    const { transactions, balance } = await getAccount({ hdnode, network, segwit })
+    const account = await getAccount({ hdnode, network, segwit })
 
     onProgress({
       account: currentAccount,
-      transactions: transactions.length,
+      transactions: account.transactions.length,
     })
 
-    const hasTransactions = transactions.length > 0
+    const hasTransactions = account.transactions.length > 0
 
     // If the first account is empty we still add it
     if (currentAccount === 0 || hasTransactions) {
       accounts[currentAccount] = {
         id: xpub58,
-        balance,
-        transactions,
+        ...account,
       }
     }
 

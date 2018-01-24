@@ -6,6 +6,7 @@ import objectPath from 'object-path'
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 import { syncAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
+import { getAccounts } from 'reducers/accounts'
 
 type MsgPayload = {
   type: string,
@@ -14,7 +15,7 @@ type MsgPayload = {
 
 // wait a bit before launching update check
 const CHECK_UPDATE_TIMEOUT = 3e3
-const SYNC_ACCOUNT_TIMEOUT = 1e3
+const SYNC_ACCOUNT_TIMEOUT = 5e3
 
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
@@ -30,10 +31,13 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
   })
 }
 
-function syncAccounts(accounts) {
+function startSyncAccounts(store) {
+  const accounts = getAccounts(store.getState())
+
   sendEvent('accounts', 'sync.all', {
-    accounts: Object.entries(accounts).map(([id]: [string, any]) => ({
+    accounts: Object.entries(accounts).map(([id, account]: [string, any]) => ({
       id,
+      currentIndex: account.data.currentIndex,
     })),
   })
 }
@@ -44,7 +48,7 @@ export default (store: Object) => {
       sync: {
         success: accounts => {
           accounts.forEach(account => store.dispatch(syncAccount(account)))
-          setTimeout(() => syncAccounts(store.getState().accounts), SYNC_ACCOUNT_TIMEOUT)
+          setTimeout(() => startSyncAccounts(store), SYNC_ACCOUNT_TIMEOUT)
         },
       },
     },
@@ -76,8 +80,6 @@ export default (store: Object) => {
     handler(data)
   })
 
-  const state = store.getState()
-
   // First time, we get all devices
   sendEvent('usb', 'devices.all')
 
@@ -85,7 +87,7 @@ export default (store: Object) => {
   sendEvent('usb', 'devices.listen')
 
   // Start accounts sync
-  syncAccounts(state.accounts)
+  startSyncAccounts(store)
 
   if (__PROD__) {
     // Start check of eventual updates

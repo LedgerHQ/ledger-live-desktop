@@ -18,7 +18,9 @@ export type Transaction = {
 // -------------------- Accounts
 
 export type AccountData = {
+  address: string,
   balance: number,
+  currentIndex: number,
   transactions: Array<Transaction>,
 }
 

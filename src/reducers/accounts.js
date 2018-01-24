@@ -11,24 +11,46 @@ export type AccountsState = Accounts
 
 const state: AccountsState = {}
 
+function setAccount(account: Account) {
+  return {
+    ...account,
+    data: {
+      ...account.data,
+      transactions: get(account.data, 'transactions', []).reverse(),
+    },
+  }
+}
+
 const handlers: Object = {
   ADD_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => ({
     ...state,
-    [account.id]: {
-      ...account,
-    },
+    [account.id]: setAccount(account),
   }),
   FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => accounts,
   SET_ACCOUNT_DATA: (
     state: AccountsState,
     { payload: { accountID, data } }: { payload: { accountID: string, data: AccountData } },
-  ): AccountsState => ({
-    ...state,
-    [accountID]: {
-      ...state[accountID],
-      data,
-    },
-  }),
+  ): AccountsState => {
+    const account = state[accountID]
+    const { data: accountData } = account
+
+    const balance = get(accountData, 'balance', 0)
+    const transactions = get(accountData, 'transactions', [])
+    const currentIndex = data.currentIndex ? data.currentIndex : get(accountData, 'currentIndex', 0)
+
+    account.data = {
+      ...accountData,
+      ...data,
+      balance: balance + data.balance,
+      currentIndex,
+      transactions: [...transactions, ...data.transactions],
+    }
+
+    return {
+      ...state,
+      [accountID]: setAccount(account),
+    }
+  },
 }
 
 // Selectors

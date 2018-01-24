@@ -133,7 +133,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   componentWillReceiveProps(nextProps) {
     const { currentDevice } = nextProps
 
-    if (this.state.step !== 'createAccount') {
+    if (this.props.currentDevice === null && this.state.step !== 'createAccount') {
       this.setState({
         step: currentDevice !== null ? 'startWallet' : 'connectDevice',
       })
@@ -219,16 +219,13 @@ class AddAccountModal extends PureComponent<Props, State> {
     const { inputValue, accounts } = this.state
     const { addAccount, closeModal } = this.props
 
-    const { id, balance, transactions } = accounts[index]
+    const { id, ...data } = accounts[index]
 
     addAccount({
       id,
       name: inputValue.accountName,
       type: inputValue.wallet,
-      data: {
-        balance,
-        transactions,
-      },
+      data,
     })
 
     closeModal('add-account')
