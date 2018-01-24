@@ -133,7 +133,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   componentWillReceiveProps(nextProps) {
     const { currentDevice } = nextProps
 
-    if (this.state.step !== 'createAccount') {
+    if (this.props.currentDevice === null && this.state.step !== 'createAccount') {
       this.setState({
         step: currentDevice !== null ? 'startWallet' : 'connectDevice',
       })

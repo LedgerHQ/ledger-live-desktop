@@ -24,15 +24,14 @@ const handlers: Object = {
     { payload: { accountID, data } }: { payload: { accountID: string, data: AccountData } },
   ): AccountsState => {
     const account = state[accountID]
+    const { data: accountData } = account
 
-    const balance = get(account.data, 'balance', 0)
-    const transactions = get(account.data, 'transactions', [])
-    const currentIndex = data.currentIndex
-      ? data.currentIndex
-      : get(account.data, 'currentIndex', 0)
+    const balance = get(accountData, 'balance', 0)
+    const transactions = get(accountData, 'transactions', [])
+    const currentIndex = data.currentIndex ? data.currentIndex : get(accountData, 'currentIndex', 0)
 
     account.data = {
-      ...account.data,
+      ...accountData,
       ...data,
       balance: balance + data.balance,
       currentIndex,
