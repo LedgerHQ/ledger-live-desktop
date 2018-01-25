@@ -149,7 +149,6 @@ class Send extends PureComponent<Props, State> {
     return (
       <Modal
         name="send"
-        preventBackdropClick
         onClose={this.handleClose}
         render={({ onClose }) => (
           <Fragment>

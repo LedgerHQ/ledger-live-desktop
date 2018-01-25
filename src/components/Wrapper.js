@@ -36,7 +36,7 @@ class Wrapper extends Component<{}> {
                 <Box shrink grow bg="cream" color="grey">
                   <TopBar />
                   <Box grow relative>
-                    <UpdateNotifier />
+                    {__PROD__ && <UpdateNotifier />}
                     <GrowScroll p={4}>
                       <Route path="/" exact component={DashboardPage} />
                       <Route path="/settings" component={SettingsPage} />

@@ -84,6 +84,7 @@ export async function getAccount({
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
 
   let transactions = []
+  let allAddresses = []
   let lastAddress = null
 
   const pubKeyToSegwitAddress = (pubKey, scriptVersion) => {
@@ -111,12 +112,15 @@ export async function getAccount({
     }),
   })
 
-  const getLastAddress = (addresses, lastTx) => {
-    const address = addresses
-      .filter(a => a.type === 'external')
-      .find(a => a.address === lastTx.addr) || { index: 0 }
-
-    return getAddress({ type: 'external', index: address.index + 1 })
+  const getLastAddress = (addresses, txs) => {
+    const txsAddresses = [...txs.inputs.map(tx => tx.prev_out.addr), ...txs.out.map(tx => tx.addr)]
+    const lastAddress = addresses.reverse().find(a => txsAddresses.includes(a.address)) || {
+      index: 0,
+    }
+    return {
+      index: lastAddress.index,
+      address: getAddress({ type: 'external', index: lastAddress.index + 1 }).address,
+    }
   }
 
   const nextPath = (index = 0) =>
@@ -129,15 +133,16 @@ export async function getAccount({
       ),
     ).then(async results => {
       const addresses = results.reduce((result, v) => [...result, ...v], [])
-
       const listAddresses = addresses.map(a => a.address)
+
+      allAddresses = [...allAddresses, ...listAddresses]
 
       const { txs } = await getTransactions(listAddresses)
 
       const hasTransactions = txs.length > 0
 
-      transactions = [...transactions, ...txs.map(computeTransaction(listAddresses))]
-      lastAddress = hasTransactions ? getLastAddress(addresses, txs[0].out[0]) : lastAddress
+      transactions = [...transactions, ...txs.map(computeTransaction(allAddresses))]
+      lastAddress = hasTransactions ? getLastAddress(addresses, txs[0]) : lastAddress
 
       if (hasTransactions) {
         return nextPath(index + (gapLimit - 1))
@@ -154,9 +159,22 @@ export async function getAccount({
               currentIndex: lastAddress.index,
               address: lastAddress.address,
             }
-          : {}),
+          : {
+              currentIndex: 0,
+              address: getAddress({ type: 'external', index: 0 }).address,
+            }),
       }
     })
+
+  if (currentIndex > 0) {
+    for (let i = currentIndex; i--; ) {
+      allAddresses = [
+        ...allAddresses,
+        getAddress({ type: 'internal', index: i }).address,
+        getAddress({ type: 'external', index: i }).address,
+      ]
+    }
+  }
 
   return nextPath(currentIndex)
 }

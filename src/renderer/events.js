@@ -6,6 +6,8 @@ import get from 'lodash/get'
 
 import type { Accounts } from 'types/common'
 
+import { CHECK_UPDATE_TIMEOUT, SYNC_ACCOUNT_TIMEOUT } from 'constants'
+
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 import { syncAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
@@ -15,10 +17,6 @@ type MsgPayload = {
   type: string,
   data: any,
 }
-
-// wait a bit before launching update check
-const CHECK_UPDATE_TIMEOUT = 3e3
-const SYNC_ACCOUNT_TIMEOUT = 5e3
 
 let syncAccounts = true
 let syncTimeout
@@ -39,11 +37,15 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
 
 export function startSyncAccounts(accounts: Accounts) {
   syncAccounts = true
+
   sendEvent('accounts', 'sync.all', {
-    accounts: Object.entries(accounts).map(([id, account]: [string, any]) => ({
-      id,
-      currentIndex: get(account, 'data.currentIndex', 0),
-    })),
+    accounts: Object.entries(accounts).map(([id, account]: [string, any]) => {
+      const currentIndex = get(account, 'data.currentIndex', 0)
+      return {
+        id,
+        currentIndex,
+      }
+    }),
   })
 }
 
@@ -52,13 +54,19 @@ export function stopSyncAccounts() {
   clearTimeout(syncTimeout)
 }
 
+export function checkUpdates() {
+  setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_TIMEOUT)
+}
+
 export default ({ store, locked }: { store: Object, locked: boolean }) => {
   const handlers = {
     accounts: {
       sync: {
         success: accounts => {
           if (syncAccounts) {
-            accounts.forEach(account => store.dispatch(syncAccount(account)))
+            accounts.forEach(
+              account => account.transactions.length > 0 && store.dispatch(syncAccount(account)),
+            )
             syncTimeout = setTimeout(() => {
               const newAccounts = getAccounts(store.getState())
               startSyncAccounts(newAccounts)
@@ -107,6 +115,6 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
 
   if (__PROD__) {
     // Start check of eventual updates
-    setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_TIMEOUT)
+    checkUpdates()
   }
 }

@@ -1,5 +1,7 @@
 // @flow
 
+process.setMaxListeners(0)
+
 require('../globals')
 require('./bridge')
 require('./app')

@@ -5,6 +5,7 @@ declare var process: {
   on(event: string, args: any): void,
   nextTick(callback: Function): void,
   setMaxListeners(any): void,
+  removeListener(string, Function): void,
   title: string,
   env: Object,
 }

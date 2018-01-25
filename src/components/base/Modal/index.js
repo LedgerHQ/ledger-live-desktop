@@ -9,8 +9,6 @@ import Mortal from 'react-mortal'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 
-import type { Element } from 'react'
-
 import { rgba } from 'styles/helpers'
 
 import { closeModal, isModalOpened } from 'reducers/modals'
@@ -139,7 +137,7 @@ export const ModalBody = ({
   onClose,
   ...props
 }: {
-  children: Element<any> | string,
+  children: any,
   onClose?: Function,
 }) => (
   <Body>

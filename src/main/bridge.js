@@ -24,8 +24,7 @@ function onForkChannel(forkType, callType) {
       }
     }
 
-    compute.send({ type, data })
-    compute.on('message', payload => {
+    const onMessage = payload => {
       const { type, data, options = {} } = payload
       if (callType === 'async') {
         event.sender.send('msg', { type, data })
@@ -36,7 +35,10 @@ function onForkChannel(forkType, callType) {
       if (options.kill && compute) {
         kill()
       }
-    })
+    }
+
+    compute.on('message', onMessage)
+    compute.send({ type, data })
 
     process.on('exit', kill)
   }

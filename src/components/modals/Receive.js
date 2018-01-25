@@ -11,7 +11,6 @@ class ReceiveModal extends PureComponent<Props> {
     return (
       <Modal
         name="receive"
-        preventBackdropClick
         render={({ onClose }) => <ModalBody onClose={onClose}>receive modal</ModalBody>}
       />
     )
