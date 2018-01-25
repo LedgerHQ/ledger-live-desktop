@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import { openModal, isModalOpened } from 'reducers/modals'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Element } from 'react'
 import type { Location } from 'react-router'
 
 import Box from 'components/base/Box'

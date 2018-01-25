@@ -40,6 +40,7 @@ const TriggerBtn = styled(Box).attrs({
   width: 100%;
   color: ${p => p.theme.colors.steel};
   background: ${p => p.theme.colors.white};
+  cursor: pointer;
   &:focus {
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;

@@ -13,6 +13,7 @@ const Base = styled.button.attrs({
   ${fontSize};
   ${fontWeight};
   border-radius: 5px;
+  cursor: pointer;
   border: none;
   height: 40px;
   box-shadow: ${p => (p.withShadow ? 'rgba(0, 0, 0, 0.2) 0 3px 10px' : '')};
@@ -27,7 +28,7 @@ const Button = ({ primary, ...props }: Props) => {
   if (primary) {
     return <Base fontWeight="bold" color="white" bg="blue" withShadow {...props} />
   }
-  return <Base {...props} />
+  return <Base color="white" {...props} />
 }
 
 Button.defaultProps = {
