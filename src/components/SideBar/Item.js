@@ -15,6 +15,7 @@ import type { Location } from 'react-router'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import Icon from 'components/base/Icon'
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, { modal }: any) => ({
   // connect router here only to make components re-render
@@ -33,6 +34,7 @@ const Container = styled(Box).attrs({
   align: 'center',
   color: 'lead',
   p: 2,
+  flow: 2,
 })`
   cursor: pointer;
   color: ${p => (p.isActive ? p.theme.colors.white : '')};
@@ -44,12 +46,6 @@ const Container = styled(Box).attrs({
   &:hover {
     background: rgba(255, 255, 255, 0.05);
   }
-`
-
-const IconWrapper = styled(Box)`
-  width: 25px;
-  height: 25px;
-  border: 2px solid ${p => (p.isActive ? p.theme.colors.blue : 'rgba(255, 255, 255, 0.1)')};
 `
 
 type Props = {
@@ -86,9 +82,7 @@ function Item({
       }
       isActive={isActive}
     >
-      <IconWrapper isActive={isActive} mr={2}>
-        {icon || null}
-      </IconWrapper>
+      {icon && <Icon fontSize={3} color={isActive ? 'blue' : void 0} name={icon} />}
       <div>
         <Text fontWeight="bold" fontSize={1}>
           {children}

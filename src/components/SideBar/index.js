@@ -67,10 +67,18 @@ class SideBar extends PureComponent<Props> {
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
             <div>
-              <Item linkTo="/">{'Dashboard'}</Item>
-              <Item modal="send">{'Send'}</Item>
-              <Item modal="receive">{'Receive'}</Item>
-              <Item linkTo="/settings">{'Settings'}</Item>
+              <Item icon="bar-chart" linkTo="/">
+                {'Dashboard'}
+              </Item>
+              <Item icon="upload" modal="send">
+                {'Send'}
+              </Item>
+              <Item icon="download" modal="receive">
+                {'Receive'}
+              </Item>
+              <Item icon="cog" linkTo="/settings">
+                {'Settings'}
+              </Item>
             </div>
           </Box>
           <Box flow={2}>
