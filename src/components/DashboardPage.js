@@ -123,7 +123,7 @@ class DashboardPage extends PureComponent<Props, State> {
                       align="center"
                       justify="center"
                       borderColor="mouse"
-                      style={{ borderStyle: 'dashed', cursor: 'pointer' }}
+                      style={{ borderStyle: 'dashed', cursor: 'pointer', textAlign: 'center' }}
                       onClick={() => openModal('add-account')}
                     >
                       {`+ ${t('addAccount.title')}`}

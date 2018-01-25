@@ -70,11 +70,13 @@ export function getTransactions(addresses: Array<string>) {
 }
 
 export async function getAccount({
+  allAddresses = [],
   currentIndex = 0,
   hdnode,
   segwit,
   network,
 }: {
+  allAddresses?: Array<string>,
   currentIndex?: number,
   hdnode: Object,
   segwit: boolean,
@@ -84,7 +86,6 @@ export async function getAccount({
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
 
   let transactions = []
-  let allAddresses = []
   let lastAddress = null
 
   const pubKeyToSegwitAddress = (pubKey, scriptVersion) => {
@@ -135,7 +136,7 @@ export async function getAccount({
       const addresses = results.reduce((result, v) => [...result, ...v], [])
       const listAddresses = addresses.map(a => a.address)
 
-      allAddresses = [...allAddresses, ...listAddresses]
+      allAddresses = [...new Set([...allAddresses, ...listAddresses])]
 
       const { txs } = await getTransactions(listAddresses)
 
@@ -153,6 +154,7 @@ export async function getAccount({
           result += v.balance
           return result
         }, 0),
+        allAddresses,
         transactions,
         ...(lastAddress !== null
           ? {
@@ -166,7 +168,7 @@ export async function getAccount({
       }
     })
 
-  if (currentIndex > 0) {
+  if (allAddresses.length === 0 && currentIndex > 0) {
     for (let i = currentIndex; i--; ) {
       allAddresses = [
         ...allAddresses,

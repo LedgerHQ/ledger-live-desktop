@@ -41,8 +41,10 @@ export function startSyncAccounts(accounts: Accounts) {
   sendEvent('accounts', 'sync.all', {
     accounts: Object.entries(accounts).map(([id, account]: [string, any]) => {
       const currentIndex = get(account, 'data.currentIndex', 0)
+      const allAddresses = get(account, 'data.allAddresses', [])
       return {
         id,
+        allAddresses,
         currentIndex,
       }
     }),
