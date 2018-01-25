@@ -84,7 +84,7 @@ class TabProfile extends PureComponent<Props, State> {
       <form onSubmit={this.handleSubmit}>
         <Card flow={3}>
           <label>
-            <Box horizontal align="center" flow={1}>
+            <Box horizontal align="center" flow={1} style={{ cursor: 'pointer' }}>
               <input
                 type="checkbox"
                 checked={get(inputValue, 'password.state', false)}

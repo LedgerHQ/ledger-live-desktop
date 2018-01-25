@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
 import type { MapStateToProps, MapDispatchToProps } from 'react-redux'
-import type { Device, Devices } from 'types/common'
+import type { Devices } from 'types/common'
 import type { SetCurrentDevice } from 'actions/devices'
 
 import { getDevices, getCurrentDevice } from 'reducers/devices'
@@ -14,7 +14,6 @@ import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
 import Box from 'components/base/Box'
-import Overlay from 'components/base/Overlay'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   devices: getDevices(state),
@@ -32,21 +31,16 @@ type Props = {
   lock: Function,
   hasPassword: boolean,
   devices: Devices,
-  currentDevice: Device,
 }
 type State = {
-  changeDevice: boolean,
   sync: {
     progress: null | boolean,
     fail: boolean,
   },
 }
 
-const hasDevices = props => props.currentDevice === null && props.devices.length > 0
-
 class TopBar extends PureComponent<Props, State> {
   state = {
-    changeDevice: hasDevices(this.props),
     sync: {
       progress: null,
       fail: false,
@@ -55,14 +49,6 @@ class TopBar extends PureComponent<Props, State> {
 
   componentDidMount() {
     ipcRenderer.on('msg', this.handleAccountSync)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (hasDevices(nextProps) && this.props.currentDevice !== null) {
-      this.setState({
-        changeDevice: true,
-      })
-    }
   }
 
   componentWillUnmount() {
@@ -98,48 +84,20 @@ class TopBar extends PureComponent<Props, State> {
     }
   }
 
-  handleChangeDevice = () => {
-    const { devices } = this.props
-
-    if (devices.length > 0) {
-      this.setState({
-        changeDevice: true,
-      })
-    }
-  }
-
   handleSelectDevice = device => () => {
     const { setCurrentDevice } = this.props
 
     setCurrentDevice(device)
-
-    this.setState({
-      changeDevice: false,
-    })
   }
 
   handleLock = () => this.props.lock()
 
   render() {
     const { devices, hasPassword } = this.props
-    const { changeDevice, sync } = this.state
+    const { sync } = this.state
 
     return (
       <Fragment>
-        {changeDevice && (
-          <Overlay p={20}>
-            {devices.map(device => (
-              <Box
-                key={device.path}
-                color="white"
-                bg="night"
-                onClick={this.handleSelectDevice(device)}
-              >
-                {device.path}
-              </Box>
-            ))}
-          </Overlay>
-        )}
         <Box bg="white" noShrink style={{ height: 60, zIndex: 20 }} align="center" horizontal>
           <Box grow>
             {sync.progress === true
@@ -148,7 +106,7 @@ class TopBar extends PureComponent<Props, State> {
           </Box>
           <Box justify="flex-end" horizontal>
             {hasPassword && <LockApplication onLock={this.handleLock} />}
-            <CountDevices count={devices.length} onChangeDevice={this.handleChangeDevice} />
+            <CountDevices count={devices.length} />
           </Box>
         </Box>
       </Fragment>
@@ -156,15 +114,8 @@ class TopBar extends PureComponent<Props, State> {
   }
 }
 
-const CountDevices = ({ count, onChangeDevice } = { count: Number, onChangeDevice: Function }) => (
-  <Box
-    color="night"
-    mr={20}
-    horizontal
-    flow={10}
-    onClick={onChangeDevice}
-    style={{ cursor: 'pointer' }}
-  >
+const CountDevices = ({ count } = { count: Number }) => (
+  <Box color="night" mr={20} horizontal flow={10}>
     <Box>
       <DeviceIcon height={20} width={20} />
     </Box>
