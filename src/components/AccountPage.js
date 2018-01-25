@@ -49,7 +49,7 @@ const Action = styled(Box).attrs({
   text-transform: uppercase;
 
   &:hover {
-    color: ${p => p.theme.colors.gray};
+    color: ${p => p.theme.colors.grey};
   }
 `
 
@@ -66,8 +66,8 @@ class AccountPage extends PureComponent<Props> {
           <Fragment>
             <Box horizontal flow={3}>
               <Box grow>
-                <Card title="Balance" style={{ height: 415 }}>
-                  {format(accountData.balance)}
+                <Card title="Balance" style={{ height: 415 }} align="center" justify="center">
+                  <Text fontSize={6}>{format(accountData.balance)}</Text>
                 </Card>
               </Box>
 

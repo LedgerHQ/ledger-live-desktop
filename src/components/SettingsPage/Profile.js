@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import bcrypt from 'bcryptjs'
 
@@ -17,11 +16,7 @@ import { unlock } from 'reducers/application'
 import Box, { Card } from 'components/base/Box'
 import Input from 'components/base/Input'
 import Button from 'components/base/Button'
-
-const Label = styled.label`
-  display: block;
-  text-transform: uppercase;
-`
+import Label from 'components/base/Label'
 
 type InputValue = SettingsProfile
 
@@ -87,17 +82,19 @@ class TabProfile extends PureComponent<Props, State> {
     const { inputValue } = this.state
     return (
       <form onSubmit={this.handleSubmit}>
-        <Card>
-          <Box horizontal>
-            <input
-              type="checkbox"
-              checked={get(inputValue, 'password.state', false)}
-              onChange={e => this.handleChangeInput('password.state')(e.target.checked)}
-            />{' '}
-            with password
-          </Box>
+        <Card flow={3}>
+          <label>
+            <Box horizontal align="center" flow={1} style={{ cursor: 'pointer' }}>
+              <input
+                type="checkbox"
+                checked={get(inputValue, 'password.state', false)}
+                onChange={e => this.handleChangeInput('password.state')(e.target.checked)}
+              />
+              <div>{' with password'}</div>
+            </Box>
+          </label>
           {get(inputValue, 'password.state') === true && (
-            <Box>
+            <Box flow={1}>
               <Label>Password</Label>
               <Input
                 value={get(inputValue, 'password.value', '')}
@@ -106,8 +103,10 @@ class TabProfile extends PureComponent<Props, State> {
               />
             </Box>
           )}
-          <Box>
-            <Button type="submit">Save</Button>
+          <Box horizontal justify="flex-end">
+            <Button primary type="submit">
+              Save
+            </Button>
           </Box>
         </Card>
       </form>

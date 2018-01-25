@@ -16,15 +16,17 @@ const Tab = styled(Tabbable).attrs({
 })`
   border-bottom: 2px solid transparent;
   border-bottom-color: ${p => (p.isActive ? p.theme.colors.blue : '')};
-  color: ${p => (p.isActive ? p.theme.colors.blue : p.theme.colors.steel)};
+  color: ${p =>
+    p.isActive ? p.theme.colors.blue : p.isDisabled ? p.theme.colors.grey : p.theme.colors.steel};
   margin-bottom: -1px;
   outline: none;
-  cursor: ${p => (p.isActive ? 'default' : 'pointer')};
+  cursor: ${p => (p.isActive ? 'default' : p.isDisabled ? 'not-allowed' : 'pointer')};
   max-width: 200px;
 `
 
 type Item = {
   key: string | number,
+  isDisabled?: boolean,
   title: string | Element<any>,
   render: () => Element<any>,
 }
@@ -39,7 +41,12 @@ const Tabs = ({ items, index, onTabClick }: Props) => (
   <Fragment>
     <Box horizontal borderBottom borderWidth={1} borderColor="argile">
       {items.map((item, i) => (
-        <Tab key={item.key} isActive={index === i} onClick={() => onTabClick(i)}>
+        <Tab
+          key={item.key}
+          isDisabled={item.isDisabled}
+          isActive={index === i}
+          onClick={item.isDisabled ? void 0 : () => onTabClick(i)}
+        >
           {item.title}
         </Tab>
       ))}

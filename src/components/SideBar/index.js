@@ -30,7 +30,7 @@ const Container = styled(Box).attrs({
   noShrink: true,
 })`
   background-color: ${p => rgba(p.theme.colors[p.bg], process.platform === 'darwin' ? 0.4 : 1)};
-  width: 250px;
+  width: ${p => p.theme.sizes.sideBarWidth}px;
 `
 
 const BtnAddAccount = styled(Box).attrs({
@@ -67,10 +67,18 @@ class SideBar extends PureComponent<Props> {
           <Box flow={2}>
             <CapsSubtitle>{'Menu'}</CapsSubtitle>
             <div>
-              <Item linkTo="/">{'Dashboard'}</Item>
-              <Item modal="send">{'Send'}</Item>
-              <Item modal="receive">{'Receive'}</Item>
-              <Item linkTo="/settings">{'Settings'}</Item>
+              <Item icon="bar-chart" linkTo="/">
+                {'Dashboard'}
+              </Item>
+              <Item icon="upload" modal="send">
+                {'Send'}
+              </Item>
+              <Item icon="download" modal="receive">
+                {'Receive'}
+              </Item>
+              <Item icon="cog" linkTo="/settings">
+                {'Settings'}
+              </Item>
             </div>
           </Box>
           <Box flow={2}>
