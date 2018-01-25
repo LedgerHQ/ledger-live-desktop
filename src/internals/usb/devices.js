@@ -1,8 +1,6 @@
-// @flow
-
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 
-export default (send: Function) => ({
+export default send => ({
   listen: () => {
     CommNodeHid.listen({
       next: e => {

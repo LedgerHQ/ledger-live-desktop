@@ -93,31 +93,30 @@
     redux "^3.7.2"
     redux-thunk "^2.2.0"
 
-"@ledgerhq/hw-app-btc@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-2.0.5.tgz#44dabd18c4dcc68127869d384b06f0601c4a7a0e"
+"@ledgerhq/hw-app-btc@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-2.1.0.tgz#6f7354ac4838eda4d78252b4fe984cd034a317bf"
   dependencies:
-    "@ledgerhq/hw-transport" "^2.0.5"
+    "@ledgerhq/hw-transport" "^2.1.0"
 
-"@ledgerhq/hw-app-eth@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-2.0.5.tgz#844d938d7985f498058e7bd5cd48bc86b510d5ec"
+"@ledgerhq/hw-app-eth@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-2.1.0.tgz#66dfbe4b11be9e22ab5574db603cd70aa9b82bf0"
   dependencies:
-    "@ledgerhq/hw-transport" "^2.0.5"
+    "@ledgerhq/hw-transport" "^2.1.0"
 
-"@ledgerhq/hw-transport-node-hid@^2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-2.0.6.tgz#29e76b05156218ccd1fe4c78c887829ac9598f98"
+"@ledgerhq/hw-transport-node-hid@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-2.1.0.tgz#bcaeab27feb7d869f8a8d96cee1e4934f3c87040"
   dependencies:
-    "@ledgerhq/hw-transport" "^2.0.5"
+    "@ledgerhq/hw-transport" "^2.1.0"
     node-hid "^0.7.2"
 
-"@ledgerhq/hw-transport@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-2.0.5.tgz#5070a0e8dfb22f365b08dcf10fb03a8bf44fa5bf"
+"@ledgerhq/hw-transport@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-2.1.0.tgz#7d8460a2ea8d5344796482458b6adb11c1cfc706"
   dependencies:
     events "^1.1.1"
-    invariant "^2.2.0"
 
 "@storybook/addon-actions@^3.3.10":
   version "3.3.10"
@@ -2411,9 +2410,9 @@ color@^0.11.0:
     color-convert "^1.3.0"
     color-string "^0.3.0"
 
-color@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/color/-/color-2.0.1.tgz#e4ed78a3c4603d0891eba5430b04b86314f4c839"
+color@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/color/-/color-3.0.0.tgz#d920b4328d534a3ac8295d68f7bd4ba6c427be9a"
   dependencies:
     color-convert "^1.9.1"
     color-string "^1.5.2"
@@ -3570,9 +3569,9 @@ eslint-module-utils@^2.1.1:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-flowtype@^2.41.1:
-  version "2.41.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.41.1.tgz#0996e1ea1d501dfc945802453a304ae9e8098b78"
+eslint-plugin-flowtype@^2.42.0:
+  version "2.42.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.42.0.tgz#7fcc98df4ed9482a22ac10ba4ca48d649c4c733a"
   dependencies:
     lodash "^4.15.0"
 
@@ -4063,9 +4062,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@^0.63.1:
-  version "0.63.1"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.63.1.tgz#ab00067c197169a5fb5b4996c8f6927b06694828"
+flow-bin@^0.64.0:
+  version "0.64.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.64.0.tgz#ddd3fb3b183ab1ab35a5d5dec9caf5ebbcded167"
 
 flow-typed@^2.2.3:
   version "2.2.3"
@@ -7323,9 +7322,9 @@ react-html-attributes@^1.3.0:
   dependencies:
     html-element-attributes "^1.0.0"
 
-react-i18next@^7.3.1:
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-7.3.1.tgz#b0ca03db9cc4d4067b6481d09d902a5166d620a0"
+react-i18next@^7.3.2:
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-7.3.2.tgz#5036dc0371808bd8afe0c9a4a738ebd39721e33b"
   dependencies:
     hoist-non-react-statics "2.3.1"
     html-parse-stringify2 "2.0.1"

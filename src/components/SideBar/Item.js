@@ -53,7 +53,7 @@ type Props = {
   linkTo?: string | null,
   modal?: string | null,
   desc?: string | null,
-  icon?: Element<*> | null,
+  icon?: string | null,
   location: Location,
   isModalOpened: boolean,
   push: Function,

@@ -9,6 +9,22 @@ language:
   en: Anglais
   fr: Français
 
+sidebar:
+  menu: Menu
+  accounts: Comptes
+
+dashboard:
+  title: Tableau de bord
+
+send:
+  title: Envoyer
+
+receive:
+  title: Recevoir
+
+addAccount:
+  title: Ajouter un compte
+
 settings:
   title: Réglages
 

@@ -9,6 +9,22 @@ language:
   en: English
   fr: French
 
+sidebar:
+  menu: Menu
+  accounts: Accounts
+
+dashboard:
+  title: Dashboard
+
+send:
+  title: Send
+
+receive:
+  title: Receive
+
+addAccount:
+  title: Add account
+
 settings:
   title: Settings
 

@@ -1,8 +1,11 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
+
+import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
+import uniqBy from 'lodash/uniqBy'
 
 import type { State } from 'reducers'
 import type { Account, Accounts, AccountData } from 'types/common'
@@ -12,11 +15,15 @@ export type AccountsState = Accounts
 const state: AccountsState = {}
 
 function getAccount(account: Account) {
+  const transactions = get(account.data, 'transactions', [])
+
+  transactions.sort((a, b) => b.time - a.time)
+
   return {
     ...account,
     data: {
-      ...account.data,
-      transactions: get(account.data, 'transactions', []).sort((a, b) => b.time - a.time),
+      ...(account.data || {}),
+      transactions,
     },
   }
 }
@@ -34,16 +41,21 @@ const handlers: Object = {
     const account = state[accountID]
     const { data: accountData } = account
 
-    const balance = get(accountData, 'balance', 0)
-    const transactions = get(accountData, 'transactions', [])
+    const transactions = uniqBy(
+      [...get(accountData, 'transactions', []), ...data.transactions],
+      tx => tx.hash,
+    )
     const currentIndex = data.currentIndex ? data.currentIndex : get(accountData, 'currentIndex', 0)
 
     account.data = {
       ...accountData,
       ...data,
-      balance: balance + data.balance,
+      balance: transactions.reduce((result, v) => {
+        result += v.balance
+        return result
+      }, 0),
       currentIndex,
-      transactions: [...transactions, ...data.transactions],
+      transactions,
     }
 
     return {
@@ -79,6 +91,10 @@ export function getAccountById(state: { accounts: AccountsState }, id: string) {
 
 export function getAccountData(state: State, id: string): AccountData | null {
   return get(getAccountById(state, id), 'data', null)
+}
+
+export function canCreateAccount(state: State): boolean {
+  return every(getAccounts(state), a => a.data.transactions.length > 0)
 }
 
 export default handleActions(handlers, state)

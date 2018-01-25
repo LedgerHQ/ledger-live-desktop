@@ -16,12 +16,13 @@ const handlers = Object.keys(func).reduce((result, key) => {
   return result
 }, {})
 
-process.on('message', payload => {
+const onMessage = payload => {
   const { type, data } = payload
-
   const handler = objectPath.get(handlers, type)
   if (!handler) {
     return
   }
   handler(data)
-})
+}
+
+process.on('message', onMessage)

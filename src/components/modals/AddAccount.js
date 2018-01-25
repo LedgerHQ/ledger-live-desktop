@@ -8,7 +8,7 @@ import type { MapStateToProps } from 'react-redux'
 import type { Accounts, Device } from 'types/common'
 
 import { closeModal } from 'reducers/modals'
-import { getAccounts } from 'reducers/accounts'
+import { canCreateAccount, getAccounts } from 'reducers/accounts'
 import { getCurrentDevice } from 'reducers/devices'
 import { sendEvent } from 'renderer/events'
 
@@ -46,14 +46,18 @@ const Steps = {
         </Box>
         <Box horizontal justify="flex-end">
           <Button primary type="submit">
-            Create account
+            Add account
           </Button>
         </Box>
       </Box>
     </form>
   ),
-  connectDevice: () => <div>Connect your Ledger</div>,
-  startWallet: (props: Object) => <div>Select {props.wallet.toUpperCase()} App on your Ledger</div>,
+  connectDevice: (props: Object) => (
+    <div>
+      <div>Connect your Ledger: {props.connected ? 'ok' : 'ko'}</div>
+      <div>Start {props.wallet.toUpperCase()} App on your Ledger: ko</div>
+    </div>
+  ),
   inProgress: (props: Object) => (
     <div>
       In progress.
@@ -65,20 +69,38 @@ const Steps = {
     </div>
   ),
   listAccounts: (props: Object) => {
-    const accounts = Object.entries(props.accounts)
+    const accounts = []
+
+    let newAccount = null
+
+    Object.entries(props.accounts).forEach(([, account]: [string, any]) => {
+      const hasTransactions = account.transactions.length > 0
+
+      if (hasTransactions) {
+        accounts.push(account)
+      } else {
+        newAccount = account
+      }
+    })
+
     return (
       <div>
-        {accounts.length > 0
-          ? accounts.map(([index, account]: [string, any]) => (
-              <div key={index}>
-                <div>Balance: {account.balance}</div>
-                <div>Transactions: {account.transactions.length}</div>
-                <div>
-                  <Button onClick={props.onAddAccount(index)}>Import</Button>
-                </div>
-              </div>
-            ))
-          : 'No accounts'}
+        {accounts.map(account => (
+          <div key={account.id} style={{ marginBottom: 10 }}>
+            <div>Balance: {account.balance}</div>
+            <div>Transactions: {account.transactions.length}</div>
+            <div>
+              <Button onClick={props.onAddAccount(account)}>Import</Button>
+            </div>
+          </div>
+        ))}
+        {props.canCreateAccount && newAccount !== null ? (
+          <div>
+            <Button onClick={props.onAddAccount(newAccount)}>Create new account</Button>
+          </div>
+        ) : (
+          <div>You cannot create new account</div>
+        )}
       </div>
     )
   },
@@ -89,13 +111,14 @@ type InputValue = {
   wallet: string,
 }
 
-type Step = 'createAccount' | 'connectDevice' | 'inProgress' | 'startWallet' | 'listAccounts'
+type Step = 'createAccount' | 'connectDevice' | 'inProgress' | 'listAccounts'
 
 type Props = {
+  accounts: Accounts,
   addAccount: Function,
+  canCreateAccount: boolean,
   closeModal: Function,
   currentDevice: Device | null,
-  accounts: Accounts,
 }
 type State = {
   inputValue: InputValue,
@@ -106,6 +129,7 @@ type State = {
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getAccounts(state),
+  canCreateAccount: canCreateAccount(state),
   currentDevice: getCurrentDevice(state),
 })
 
@@ -133,21 +157,11 @@ class AddAccountModal extends PureComponent<Props, State> {
     ipcRenderer.on('msg', this.handleWalletRequest)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { currentDevice } = nextProps
-
-    if (this.props.currentDevice === null && this.state.step !== 'createAccount') {
-      this.setState({
-        step: currentDevice !== null ? 'startWallet' : 'connectDevice',
-      })
-    }
-  }
-
   componentDidUpdate() {
     const { step } = this.state
     const { currentDevice } = this.props
 
-    if (step === 'startWallet' && currentDevice !== null) {
+    if (step === 'connectDevice' && currentDevice !== null) {
       this.getWalletInfos()
     } else {
       clearTimeout(this._timeout)
@@ -160,8 +174,8 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   getWalletInfos() {
-    const { inputValue } = this.state
     const { currentDevice, accounts } = this.props
+    const { inputValue } = this.state
 
     if (currentDevice === null) {
       return
@@ -175,6 +189,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   getStepProps() {
+    const { currentDevice, canCreateAccount } = this.props
     const { inputValue, step, progress, accounts } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
@@ -185,7 +200,8 @@ class AddAccountModal extends PureComponent<Props, State> {
         onSubmit: this.handleSubmit,
         onChangeInput: this.handleChangeInput,
       }),
-      ...props(step === 'startWallet', {
+      ...props(step === 'connectDevice', {
+        connected: currentDevice !== null,
         wallet: inputValue.wallet,
       }),
       ...props(step === 'inProgress', {
@@ -193,6 +209,7 @@ class AddAccountModal extends PureComponent<Props, State> {
       }),
       ...props(step === 'listAccounts', {
         accounts,
+        canCreateAccount,
         onAddAccount: this.handleAddAccount,
       }),
     }
@@ -218,11 +235,11 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
   }
 
-  handleAddAccount = index => () => {
-    const { inputValue, accounts } = this.state
+  handleAddAccount = account => () => {
+    const { inputValue } = this.state
     const { addAccount, closeModal } = this.props
 
-    const { id, ...data } = accounts[index]
+    const { id, ...data } = account
 
     addAccount({
       id,
@@ -232,6 +249,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     })
 
     closeModal('add-account')
+
     this.handleClose()
   }
 
@@ -246,7 +264,6 @@ class AddAccountModal extends PureComponent<Props, State> {
   handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { currentDevice } = this.props
     const { inputValue } = this.state
 
     if (inputValue.accountName.trim() === '' || inputValue.wallet.trim() === '') {
@@ -254,7 +271,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
 
     this.setState({
-      step: currentDevice === null ? 'connectDevice' : 'startWallet',
+      step: 'connectDevice',
     })
   }
 
@@ -275,7 +292,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     return (
       <Modal
         name="add-account"
-        preventBackdropClick
+        preventBackdropClick={step !== 'createAccount'}
         onClose={this.handleClose}
         render={({ onClose }) => (
           <ModalBody onClose={onClose} flow={3}>

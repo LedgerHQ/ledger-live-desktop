@@ -1,12 +1,14 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { compose } from 'redux'
+import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import chunk from 'lodash/chunk'
 import { push } from 'react-router-redux'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Accounts } from 'types/common'
+import type { Accounts, T } from 'types/common'
 
 import { format } from 'helpers/btc'
 
@@ -29,6 +31,7 @@ const mapDispatchToProps = {
 }
 
 type Props = {
+  t: T,
   accounts: Accounts,
   push: Function,
   openModal: Function,
@@ -53,7 +56,7 @@ class DashboardPage extends PureComponent<Props, State> {
   handleChangeTab = tab => this.setState({ tab })
 
   render() {
-    const { totalBalance, openModal, push, accounts } = this.props
+    const { t, totalBalance, openModal, push, accounts } = this.props
     const { tab } = this.state
 
     const totalAccounts = Object.keys(accounts).length
@@ -123,7 +126,7 @@ class DashboardPage extends PureComponent<Props, State> {
                       style={{ borderStyle: 'dashed', cursor: 'pointer' }}
                       onClick={() => openModal('add-account')}
                     >
-                      {'+ Add account'}
+                      {`+ ${t('addAccount.title')}`}
                     </Box>
                   ) : (
                     <Card
@@ -132,7 +135,8 @@ class DashboardPage extends PureComponent<Props, State> {
                       style={{ cursor: 'pointer', height: 200 }}
                       onClick={() => push(`/account/${key}`)}
                     >
-                      {accounts[key].name}
+                      <div>{accounts[key].name}</div>
+                      <div>{accounts[key].data && format(accounts[key].data.balance)}</div>
                     </Card>
                   ),
               )}
@@ -144,4 +148,4 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage)
+export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(DashboardPage)
