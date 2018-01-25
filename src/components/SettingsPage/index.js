@@ -67,26 +67,31 @@ class SettingsPage extends PureComponent<Props, State> {
             },
             {
               key: 'money',
+              isDisabled: true,
               title: t('settings.tabs.money'),
               render: () => <div>{'Monnaie'}</div>,
             },
             {
               key: 'material',
+              isDisabled: true,
               title: t('settings.tabs.material'),
               render: () => <div>{'Matériel'}</div>,
             },
             {
               key: 'app',
+              isDisabled: true,
               title: t('settings.tabs.app'),
               render: () => <div>{'App (beta)'}</div>,
             },
             {
               key: 'tools',
+              isDisabled: true,
               title: t('settings.tabs.tools'),
               render: () => <div>{'Outils'}</div>,
             },
             {
               key: 'blockchain',
+              isDisabled: true,
               title: t('settings.tabs.blockchain'),
               render: () => <div>{'Blockchain'}</div>,
             },
