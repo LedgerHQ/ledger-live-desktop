@@ -81,7 +81,7 @@ class TabProfile extends PureComponent<Props, State> {
             <Label>{t('settings.display.language')}</Label>
             <Select
               onChange={item => this.handleChangeInput('language')(item.key)}
-              renderSelected={item => item.name}
+              renderSelected={item => item && item.name}
               value={currentLanguage}
               items={languages}
             />

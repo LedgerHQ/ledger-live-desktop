@@ -12,7 +12,7 @@ import type { Accounts, T } from 'types/common'
 import { openModal } from 'reducers/modals'
 import { getAccounts } from 'reducers/accounts'
 
-import { format } from 'helpers/btc'
+import { formatBTC } from 'helpers/format'
 import { rgba } from 'styles/helpers'
 
 import Box, { GrowScroll } from 'components/base/Box'
@@ -88,7 +88,7 @@ class SideBar extends PureComponent<Props> {
             <CapsSubtitle>{t('sidebar.accounts')}</CapsSubtitle>
             <div>
               {Object.entries(accounts).map(([id, account]: [string, any]) => (
-                <Item linkTo={`/account/${id}`} desc={format(account.data.balance)} key={id}>
+                <Item linkTo={`/account/${id}`} desc={formatBTC(account.data.balance)} key={id}>
                   {account.name}
                 </Item>
               ))}

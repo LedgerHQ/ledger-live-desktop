@@ -10,7 +10,7 @@ import { push } from 'react-router-redux'
 import type { MapStateToProps } from 'react-redux'
 import type { Accounts, T } from 'types/common'
 
-import { format } from 'helpers/btc'
+import { formatBTC } from 'helpers/format'
 
 import { openModal } from 'reducers/modals'
 import { getTotalBalance, getAccounts } from 'reducers/accounts'
@@ -93,7 +93,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 title: 'Total balance',
                 render: () => (
                   <Box>
-                    <Text fontSize={4}>{format(totalBalance)}</Text>
+                    <Text fontSize={4}>{formatBTC(totalBalance)}</Text>
                   </Box>
                 ),
               },
@@ -136,7 +136,7 @@ class DashboardPage extends PureComponent<Props, State> {
                       onClick={() => push(`/account/${key}`)}
                     >
                       <div>{accounts[key].name}</div>
-                      <div>{accounts[key].data && format(accounts[key].data.balance)}</div>
+                      <div>{accounts[key].data && formatBTC(accounts[key].data.balance)}</div>
                     </Card>
                   ),
               )}

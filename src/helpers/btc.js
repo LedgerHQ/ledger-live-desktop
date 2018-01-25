@@ -2,23 +2,8 @@
 
 // import axios from 'axios'
 import bitcoin from 'bitcoinjs-lib'
-import { formatCurrencyUnit } from '@ledgerhq/common/lib/data/currency'
 
 const blockexplorer = require('blockchain.info/blockexplorer').usingNetwork(3)
-
-export function format(v: string | number, options: Object = { alwaysShowSign: true }) {
-  return formatCurrencyUnit(
-    {
-      name: 'bitcoin',
-      code: 'BTC',
-      symbol: 'b',
-      magnitude: 8,
-    },
-    Number(v),
-    options.alwaysShowSign,
-    true,
-  )
-}
 
 export const networks = [
   {
