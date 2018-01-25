@@ -7,6 +7,7 @@ import { fontSize, color } from 'styled-system'
 const Container = styled.div`
   ${fontSize};
   ${color};
+  line-height: 1;
 `
 
 export default ({ name, ...props }: { name: string }) => (

@@ -49,7 +49,7 @@ const Action = styled(Box).attrs({
   text-transform: uppercase;
 
   &:hover {
-    color: ${p => p.theme.colors.gray};
+    color: ${p => p.theme.colors.grey};
   }
 `
 

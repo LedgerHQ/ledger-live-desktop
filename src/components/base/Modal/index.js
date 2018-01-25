@@ -16,6 +16,7 @@ import { rgba } from 'styles/helpers'
 import { closeModal, isModalOpened } from 'reducers/modals'
 
 import Box from 'components/base/Box'
+import Icon from 'components/base/Icon'
 
 type Props = {
   isOpened?: boolean,
@@ -26,7 +27,7 @@ type Props = {
 }
 
 const springConfig = {
-  stiffness: 350,
+  stiffness: 400,
 }
 
 const mapStateToProps = (state, { name, isOpened }) => ({
@@ -43,6 +44,7 @@ const mapDispatchToProps = (dispatch, { name, onClose = noop }) => ({
 })
 
 const Container = styled(Box).attrs({
+  color: 'grey',
   align: 'center',
   justify: 'flex-start',
   sticky: true,
@@ -86,6 +88,20 @@ const Body = styled(Box).attrs({
   border-radius: 5px;
 `
 
+const CloseContainer = styled(Box).attrs({
+  p: 2,
+  color: 'mouse',
+})`
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &:hover {
+    color: ${p => p.theme.colors.grey};
+  }
+`
+
 export class Modal extends PureComponent<Props> {
   static defaultProps = {
     onClose: noop,
@@ -127,9 +143,9 @@ export const ModalBody = ({
 }) => (
   <Body>
     {onClose && (
-      <Box align="flex-end">
-        <Box onClick={onClose}>[x]</Box>
-      </Box>
+      <CloseContainer onClick={onClose}>
+        <Icon fontSize={3} name="times" />
+      </CloseContainer>
     )}
     {children}
   </Body>
