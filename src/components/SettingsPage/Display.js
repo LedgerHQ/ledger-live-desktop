@@ -76,8 +76,8 @@ class TabProfile extends PureComponent<Props, State> {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <Card>
-          <Box>
+        <Card flow={3}>
+          <Box flow={1}>
             <Label>{t('settings.display.language')}</Label>
             <Select
               onChange={item => this.handleChangeInput('language')(item.key)}
@@ -86,8 +86,10 @@ class TabProfile extends PureComponent<Props, State> {
               items={languages}
             />
           </Box>
-          <Box>
-            <Button type="submit">Save</Button>
+          <Box horizontal justify="flex-end">
+            <Button primary type="submit">
+              Save
+            </Button>
           </Box>
         </Card>
       </form>

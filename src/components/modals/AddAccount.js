@@ -14,6 +14,8 @@ import { sendEvent } from 'renderer/events'
 
 import { addAccount } from 'actions/accounts'
 
+import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Label from 'components/base/Label'
@@ -23,25 +25,31 @@ import Select from 'components/base/Select'
 const Steps = {
   createAccount: (props: Object) => (
     <form onSubmit={props.onSubmit}>
-      <div>
-        <Label>Currency</Label>
-        <Select
-          placeholder="Choose a wallet..."
-          onChange={item => props.onChangeInput('wallet')(item.key)}
-          renderSelected={item => item.name}
-          items={[
-            {
-              key: 'btc',
-              name: 'Bitcoin',
-            },
-          ]}
-        />
-      </div>
-      <div>
-        <Label>Account name</Label>
-        <Input onChange={props.onChangeInput('accountName')} value={props.value.accountName} />
-      </div>
-      <Button type="submit">Create account</Button>
+      <Box flow={3}>
+        <Box flow={1}>
+          <Label>Currency</Label>
+          <Select
+            placeholder="Choose a wallet..."
+            onChange={item => props.onChangeInput('wallet')(item.key)}
+            renderSelected={item => item.name}
+            items={[
+              {
+                key: 'btc',
+                name: 'Bitcoin',
+              },
+            ]}
+          />
+        </Box>
+        <Box flow={1}>
+          <Label>Account name</Label>
+          <Input onChange={props.onChangeInput('accountName')} value={props.value.accountName} />
+        </Box>
+        <Box horizontal justify="flex-end">
+          <Button primary type="submit">
+            Create account
+          </Button>
+        </Box>
+      </Box>
     </form>
   ),
   connectDevice: () => <div>Connect your Ledger</div>,
@@ -270,7 +278,10 @@ class AddAccountModal extends PureComponent<Props, State> {
         preventBackdropClick
         onClose={this.handleClose}
         render={({ onClose }) => (
-          <ModalBody onClose={onClose}>
+          <ModalBody onClose={onClose} flow={3}>
+            <Text fontSize={4} color="steel">
+              {'Add account'}
+            </Text>
             <Step {...this.getStepProps()} />
           </ModalBody>
         )}

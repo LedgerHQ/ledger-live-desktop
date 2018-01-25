@@ -27,7 +27,7 @@ type Props = {
 }
 
 const springConfig = {
-  stiffness: 400,
+  stiffness: 350,
 }
 
 const mapStateToProps = (state, { name, isOpened }) => ({
@@ -137,6 +137,7 @@ export class Modal extends PureComponent<Props> {
 export const ModalBody = ({
   children,
   onClose,
+  ...props
 }: {
   children: Element<any> | string,
   onClose?: Function,
@@ -147,7 +148,7 @@ export const ModalBody = ({
         <Icon fontSize={3} name="times" />
       </CloseContainer>
     )}
-    {children}
+    <Box {...props}>{children}</Box>
   </Body>
 )
 
