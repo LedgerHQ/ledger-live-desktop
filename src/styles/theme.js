@@ -12,6 +12,7 @@ export default {
     blue: '#6193ff',
     cream: '#f9f9f9',
     grey: '#a8b6c2',
+    green: '#a6d495',
     grenade: '#ea2e49',
     lead: '#999999',
     mouse: '#e2e2e2',

@@ -10,8 +10,13 @@ export const saveSettings: SaveSettings = payload => ({
   payload,
 })
 
-type FetchSettings = () => { type: string }
-export const fetchSettings: FetchSettings = () => ({
-  type: 'FETCH_SETTINGS',
-  payload: db('settings'),
-})
+export const fetchSettings: Function = () => dispatch => {
+  const settings = db('settings')
+  if (Object.keys(settings).length === 0) {
+    return
+  }
+  dispatch({
+    type: 'FETCH_SETTINGS',
+    payload: settings,
+  })
+}

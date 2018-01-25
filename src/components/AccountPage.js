@@ -3,15 +3,15 @@
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import moment from 'moment'
 
 import type { MapStateToProps } from 'react-redux'
 import type { Account, AccountData } from 'types/common'
 
-import { format } from 'helpers/btc'
+import { formatBTC } from 'helpers/format'
 
 import { getAccountById, getAccountData } from 'reducers/accounts'
 
+import TransactionsList from 'components/TransactionsList'
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 import QRCode from 'components/base/QRCode'
@@ -67,7 +67,7 @@ class AccountPage extends PureComponent<Props> {
             <Box horizontal flow={3}>
               <Box grow>
                 <Card title="Balance" style={{ height: 415 }} align="center" justify="center">
-                  <Text fontSize={6}>{format(accountData.balance)}</Text>
+                  <Text fontSize={6}>{formatBTC(accountData.balance)}</Text>
                 </Card>
               </Box>
 
@@ -96,12 +96,7 @@ class AccountPage extends PureComponent<Props> {
               </Box>
             </Box>
             <Card title="Last operations">
-              {accountData.transactions.map(tx => (
-                <Box horizontal key={tx.hash}>
-                  <Box grow>{moment(tx.time * 1e3).format('LLL')}</Box>
-                  <Box>{format(tx.balance)}</Box>
-                </Box>
-              ))}
+              <TransactionsList transactions={accountData.transactions} />
             </Card>
           </Fragment>
         )}
