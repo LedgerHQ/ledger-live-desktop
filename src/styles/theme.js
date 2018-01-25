@@ -1,6 +1,9 @@
 // @flow
 
 export default {
+  sizes: {
+    sideBarWidth: 250,
+  },
   colors: {
     black: '#000000',
     white: '#ffffff',

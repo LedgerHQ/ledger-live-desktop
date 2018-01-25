@@ -30,7 +30,7 @@ const Container = styled(Box).attrs({
   noShrink: true,
 })`
   background-color: ${p => rgba(p.theme.colors[p.bg], process.platform === 'darwin' ? 0.4 : 1)};
-  width: 250px;
+  width: ${p => p.theme.sizes.sideBarWidth}px;
 `
 
 const BtnAddAccount = styled(Box).attrs({
