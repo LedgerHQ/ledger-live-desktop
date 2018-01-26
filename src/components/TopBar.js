@@ -9,6 +9,7 @@ import type { Devices } from 'types/common'
 import type { SetCurrentDevice } from 'actions/devices'
 
 import { getDevices, getCurrentDevice } from 'reducers/devices'
+import { getAccounts } from 'reducers/accounts'
 import { setCurrentDevice } from 'actions/devices'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
@@ -16,8 +17,9 @@ import { hasPassword } from 'reducers/settings'
 import Box from 'components/base/Box'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  devices: getDevices(state),
+  hasAccounts: Object.keys(getAccounts(state)).length > 0,
   currentDevice: getCurrentDevice(state),
+  devices: getDevices(state),
   hasPassword: hasPassword(state),
 })
 
@@ -27,10 +29,11 @@ const mapDispatchToProps: MapDispatchToProps<*, *, *> = {
 }
 
 type Props = {
-  setCurrentDevice: SetCurrentDevice,
-  lock: Function,
-  hasPassword: boolean,
+  hasAccounts: boolean,
   devices: Devices,
+  hasPassword: boolean,
+  lock: Function,
+  setCurrentDevice: SetCurrentDevice,
 }
 type State = {
   sync: {
@@ -93,15 +96,16 @@ class TopBar extends PureComponent<Props, State> {
   handleLock = () => this.props.lock()
 
   render() {
-    const { devices, hasPassword } = this.props
+    const { devices, hasPassword, hasAccounts } = this.props
     const { sync } = this.state
 
     return (
       <Box bg="white" px={2} noShrink style={{ height: 60, zIndex: 20 }} align="center" horizontal>
         <Box grow>
-          {sync.progress === true
-            ? 'Synchronizing...'
-            : sync.fail === true ? 'Synchronization fail :(' : 'Synchronisation finished!'}
+          {hasAccounts &&
+            (sync.progress === true
+              ? 'Synchronizing...'
+              : sync.fail === true ? 'Synchronization fail :(' : 'Synchronisation finished!')}
         </Box>
         <Box justify="flex-end" horizontal>
           {hasPassword && <LockApplication onLock={this.handleLock} />}
