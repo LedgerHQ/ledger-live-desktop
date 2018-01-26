@@ -1,9 +1,8 @@
 .DS_Store
 *.log
+/.env
 /dist/
 /flow-typed/
 /node_modules/
-/static/
 /storybook-static/
 thumbs.db
-/.env

@@ -7,7 +7,7 @@ import type { MapStateToProps } from 'react-redux'
 import styled from 'styled-components'
 
 import { getUpdateStatus, getUpdateData } from 'reducers/update'
-import { sendEvent, checkUpdates } from 'renderer/events'
+import { sendEvent } from 'renderer/events'
 import type { State } from 'reducers'
 import type { UpdateStatus } from 'reducers/update'
 
@@ -39,12 +39,6 @@ const Container = styled(Box).attrs({
 `
 
 class UpdateNotifier extends PureComponent<Props> {
-  componentWillReceiveProps(nextProps) {
-    if (['idle', 'unavailable', 'error'].includes(nextProps.updateStatus)) {
-      checkUpdates()
-    }
-  }
-
   renderStatus() {
     const { updateStatus } = this.props
     switch (updateStatus) {

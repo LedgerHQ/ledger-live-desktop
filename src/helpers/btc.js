@@ -60,12 +60,14 @@ export async function getAccount({
   hdnode,
   segwit,
   network,
+  asyncDelay = 100,
 }: {
   allAddresses?: Array<string>,
   currentIndex?: number,
   hdnode: Object,
   segwit: boolean,
   network: Object,
+  asyncDelay?: number,
 }) {
   const gapLimit = 20
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
@@ -99,7 +101,7 @@ export async function getAccount({
   })
 
   const getAsyncAddress = params =>
-    new Promise(resolve => setTimeout(() => resolve(getAddress(params)), 100))
+    new Promise(resolve => setTimeout(() => resolve(getAddress(params)), asyncDelay))
 
   const getLastAddress = (addresses, txs) => {
     const txsAddresses = [...txs.inputs.map(tx => tx.prev_out.addr), ...txs.out.map(tx => tx.addr)]

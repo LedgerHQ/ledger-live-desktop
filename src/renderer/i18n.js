@@ -8,7 +8,7 @@ i18n.use(Backend).init({
   fallbackLng: 'en',
   debug: false,
   backend: {
-    loadPath: path.resolve(__dirname, '../i18n/{{lng}}/{{ns}}.yml'),
+    loadPath: path.join(__static, '/i18n/{{lng}}/{{ns}}.yml'),
   },
   react: {
     wait: true,
