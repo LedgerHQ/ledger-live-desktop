@@ -57,6 +57,12 @@ class IsUnlocked extends PureComponent<Props, State> {
     ...defaultState,
   }
 
+  componentWillMount() {
+    if (this.props.isLocked) {
+      stopSyncAccounts()
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.isLocked && !nextProps.isLocked) {
       startSyncAccounts(nextProps.accounts)

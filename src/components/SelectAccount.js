@@ -12,6 +12,10 @@ import Text from 'components/base/Text'
 
 import type { Account } from 'types/common'
 
+function renderItem(accounts) {
+  return item => <span>{(accounts.find(a => a.id === item) || {}).name}</span>
+}
+
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: values(getAccounts(state)),
 })
@@ -24,12 +28,13 @@ type Props = {
 
 const SelectAccount = ({ accounts, value, onChange }: Props) => (
   <Select
+    itemToString={item => item}
     value={value}
     placeholder="Choose an account"
-    items={accounts}
-    keyProp="id"
+    items={accounts.map(a => a.id)}
     onChange={onChange}
-    itemToString={item => (item ? item.name : '')}
+    renderItem={renderItem(accounts)}
+    renderSelected={renderItem(accounts)}
     renderHighlight={(text, key) => (
       <Text key={key} fontWeight="bold">
         {text}
@@ -37,5 +42,4 @@ const SelectAccount = ({ accounts, value, onChange }: Props) => (
     )}
   />
 )
-
 export default connect(mapStateToProps)(SelectAccount)

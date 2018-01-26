@@ -15,7 +15,7 @@ import Search from 'components/base/Search'
 import Triangles from './Triangles'
 
 type Props = {
-  items: Array<Object>,
+  items: Array<any>,
   value?: Object | null,
   itemToString?: Function,
   onChange?: Function,
@@ -24,7 +24,7 @@ type Props = {
   searchable?: boolean,
   placeholder?: string,
   renderHighlight?: string => Element<*>,
-  renderSelected?: Object => Element<*>,
+  renderSelected?: any => Element<*>,
   renderItem?: (*) => Element<*>,
   keyProp?: string,
 }
@@ -98,11 +98,15 @@ class Select extends PureComponent<Props> {
   renderItems = (items: Array<Object>, downshiftProps: Object) => {
     const { renderItem, keyProp } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
+
     return (
       <Dropdown>
         {items.length ? (
           items.map((item, i) => (
-            <ItemWrapper key={keyProp ? item[keyProp] : item.key} {...getItemProps({ item })}>
+            <ItemWrapper
+              key={keyProp ? item[keyProp] : item.key || item}
+              {...getItemProps({ item })}
+            >
               <Item highlighted={i === highlightedIndex}>
                 {renderItem ? renderItem(item) : <span>{item.name_highlight || item.name}</span>}
               </Item>
