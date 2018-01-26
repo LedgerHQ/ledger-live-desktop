@@ -103,10 +103,7 @@ class Select extends PureComponent<Props> {
       <Dropdown>
         {items.length ? (
           items.map((item, i) => (
-            <ItemWrapper
-              key={keyProp ? item[keyProp] : item.key || item}
-              {...getItemProps({ item })}
-            >
+            <ItemWrapper key={keyProp ? item[keyProp] : item.key} {...getItemProps({ item })}>
               <Item highlighted={i === highlightedIndex}>
                 {renderItem ? renderItem(item) : <span>{item.name_highlight || item.name}</span>}
               </Item>

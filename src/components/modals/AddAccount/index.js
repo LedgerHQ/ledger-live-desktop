@@ -22,6 +22,8 @@ import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Select from 'components/base/Select'
 
+import ImportAccounts from './ImportAccounts'
+
 const Steps = {
   createAccount: (props: Object) => (
     <form onSubmit={props.onSubmit}>
@@ -69,41 +71,51 @@ const Steps = {
     </div>
   ),
   listAccounts: (props: Object) => {
-    const accounts = []
-
-    let newAccount = null
-
-    Object.entries(props.accounts).forEach(([, account]: [string, any]) => {
-      const hasTransactions = account.transactions.length > 0
-
-      if (hasTransactions) {
-        accounts.push(account)
-      } else {
-        newAccount = account
-      }
-    })
-
+    const accounts = Object.entries(props.accounts).map(([, account]: [string, any]) => account)
+    const existingAccounts = accounts.filter(account => account.transactions.length > 0)
+    // const newAccount = accounts.find(account => account.transactions.length === 0)
     return (
-      <div>
-        {accounts.map(account => (
-          <div key={account.id} style={{ marginBottom: 10 }}>
-            <div>Balance: {account.balance}</div>
-            <div>Transactions: {account.transactions.length}</div>
-            <div>
-              <Button onClick={props.onAddAccount(account)}>Import</Button>
-            </div>
-          </div>
-        ))}
-        {props.canCreateAccount && newAccount !== null ? (
-          <div>
-            <Button onClick={props.onAddAccount(newAccount)}>Create new account</Button>
-          </div>
-        ) : (
-          <div>You cannot create new account</div>
-        )}
-      </div>
+      <Box>
+        <ImportAccounts {...props} accounts={existingAccounts} />
+      </Box>
     )
   },
+  // listAccounts: (props: Object) => {
+  //   const accounts = []
+  //
+  //   let newAccount = null
+  //
+  //   Object.entries(props.accounts).forEach(([, account]: [string, any]) => {
+  //     const hasTransactions = account.transactions.length > 0
+  //
+  //     if (hasTransactions) {
+  //       accounts.push(account)
+  //     } else {
+  //       newAccount = account
+  //     }
+  //   })
+  //
+  //   return (
+  //     <div>
+  //       {accounts.map(account => (
+  //         <div key={account.id} style={{ marginBottom: 10 }}>
+  //           <div>Balance: {formatBTC(account.balance)}</div>
+  //           <div>Transactions: {account.transactions.length}</div>
+  //           <div>
+  //             <Button onClick={props.onAddAccount(account)}>Import</Button>
+  //           </div>
+  //         </div>
+  //       ))}
+  //       {props.canCreateAccount && newAccount !== null ? (
+  //         <div>
+  //           <Button onClick={props.onAddAccount(newAccount)}>Create new account</Button>
+  //         </div>
+  //       ) : (
+  //         <div>You cannot create new account</div>
+  //       )}
+  //     </div>
+  //   )
+  // },
 }
 
 type InputValue = {
@@ -211,6 +223,7 @@ class AddAccountModal extends PureComponent<Props, State> {
         accounts,
         canCreateAccount,
         onAddAccount: this.handleAddAccount,
+        onImportAccounts: this.handleImportAccounts,
       }),
     }
   }
@@ -237,7 +250,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   handleAddAccount = account => () => {
     const { inputValue } = this.state
-    const { addAccount, closeModal } = this.props
+    const { addAccount } = this.props
 
     const { id, ...data } = account
 
@@ -247,10 +260,22 @@ class AddAccountModal extends PureComponent<Props, State> {
       type: inputValue.wallet,
       data,
     })
+  }
 
-    closeModal('add-account')
+  handleImportAccounts = accountsSelected => () => {
+    const { inputValue, accounts } = this.state
+    const { addAccount } = this.props
 
-    this.handleClose()
+    Object.entries(accounts).forEach(([, account]: [string, any], i) => {
+      if (accountsSelected.includes(account.id)) {
+        addAccount({
+          id: account.id,
+          name: `Account ${i + 1}`,
+          type: inputValue.wallet,
+          data: account,
+        })
+      }
+    })
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>

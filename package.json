@@ -65,7 +65,7 @@
     "raven-js": "^3.22.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-i18next": "^7.3.2",
+    "react-i18next": "^7.3.4",
     "react-mortal": "^3.0.1",
     "react-motion": "^0.5.2",
     "react-redux": "^5.0.6",

@@ -2,17 +2,11 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
-
-import type { MapStateToProps } from 'react-redux'
-import type { Accounts } from 'types/common'
-
-import { getAccounts } from 'reducers/accounts'
 
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Modal, { ModalBody } from 'components/base/Modal'
-import Select from 'components/base/Select'
+import SelectAccount from 'components/SelectAccount'
 
 const Label = styled.label`
   display: block;
@@ -26,7 +20,7 @@ const Steps = {
         e.preventDefault()
 
         if (
-          props.value.account.trim() === '' ||
+          !props.value.account ||
           props.value.address.trim() === '' ||
           props.value.amount.trim() === ''
         ) {
@@ -39,14 +33,7 @@ const Steps = {
       <div>amount</div>
       <div>
         <Label>Account to debit</Label>
-        <Select
-          onChange={item => props.onChangeInput('account')(item.key)}
-          renderSelected={item => item.name}
-          items={Object.entries(props.accounts).map(([id, account]: [string, any]) => ({
-            key: id,
-            name: account.name,
-          }))}
-        />
+        <SelectAccount onChange={props.onChangeInput('account')} value={props.value.account} />
       </div>
       <div>
         <Label>Recipient address</Label>
@@ -64,59 +51,49 @@ const Steps = {
       <div>summary</div>
       <div>{props.value.amount}</div>
       <div>to {props.value.address}</div>
-      <div>from {props.account.name}</div>
+      <div>from {props.value.account.name}</div>
     </div>
   ),
 }
 
 type InputValue = {
-  account: string,
+  account: any,
   address: string,
   amount: string,
 }
 
 type Step = 'amount' | 'summary'
 
-type Props = {
-  accounts: Accounts,
-}
 type State = {
   inputValue: InputValue,
   step: Step,
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  accounts: getAccounts(state),
-})
-
 const defaultState = {
   inputValue: {
-    account: '',
+    account: undefined,
     address: '',
     amount: '',
   },
   step: 'amount',
 }
 
-class Send extends PureComponent<Props, State> {
+class Send extends PureComponent<{}, State> {
   state = {
     ...defaultState,
   }
 
   getStepProps() {
-    const { accounts } = this.props
     const { inputValue, step } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
 
     return {
       ...props(step === 'amount', {
-        accounts,
         onChangeInput: this.handleChangeInput,
         value: inputValue,
       }),
       ...props(step === 'summary', {
-        account: accounts[inputValue.account],
         value: inputValue,
       }),
       onChangeStep: this.handleChangeStep,
@@ -131,7 +108,7 @@ class Send extends PureComponent<Props, State> {
       },
     }))
 
-  handleChangeStep = step =>
+  handleChangeStep = (step: Step) =>
     this.setState({
       step,
     })
@@ -163,4 +140,4 @@ class Send extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps)(Send)
+export default Send
