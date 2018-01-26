@@ -135,8 +135,12 @@ class DashboardPage extends PureComponent<Props, State> {
                       style={{ cursor: 'pointer', height: 200 }}
                       onClick={() => push(`/account/${key}`)}
                     >
-                      <div>{accounts[key].name}</div>
-                      <div>{accounts[key].data && formatBTC(accounts[key].data.balance)}</div>
+                      <Box>
+                        <Text fontWeight="bold">{accounts[key].name}</Text>
+                      </Box>
+                      <Box grow align="center" justify="center">
+                        {accounts[key].data && formatBTC(accounts[key].data.balance)}
+                      </Box>
                     </Card>
                   ),
               )}
