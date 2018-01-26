@@ -63,24 +63,30 @@ export function checkUpdates() {
 
 export default ({ store, locked }: { store: Object, locked: boolean }) => {
   const handlers = {
+    account: {
+      sync: {
+        success: account => {
+          if (syncAccounts) {
+            const currentAccountData = getAccountData(store.getState(), account.id) || {}
+            const transactions = uniqBy(
+              [...currentAccountData.transactions, ...account.transactions],
+              tx => tx.hash,
+            )
+
+            if (currentAccountData.transactions.length !== transactions.length) {
+              store.dispatch(syncAccount(account))
+            }
+          }
+        },
+      },
+    },
     accounts: {
       sync: {
-        success: accounts => {
+        success: () => {
           if (syncAccounts) {
-            const currentState = store.getState()
-            accounts.forEach(account => {
-              const currentAccountData = getAccountData(currentState, account.id) || {}
-              const transactions = uniqBy(
-                [...currentAccountData.transactions, ...account.transactions],
-                tx => tx.hash,
-              )
-              if (currentAccountData.transactions.length !== transactions.length) {
-                store.dispatch(syncAccount(account))
-              }
-            })
             syncTimeout = setTimeout(() => {
-              const newAccounts = getAccounts(store.getState())
-              startSyncAccounts(newAccounts)
+              const accounts = getAccounts(store.getState())
+              startSyncAccounts(accounts)
             }, SYNC_ACCOUNT_TIMEOUT)
           }
         },

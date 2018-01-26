@@ -17,9 +17,13 @@ export default (send: Function) => ({
     send('accounts.sync.progress', null, { kill: false })
 
     try {
-      const result = await Promise.all(accounts.map(syncAccount))
+      await Promise.all(
+        accounts.map(a =>
+          syncAccount(a).then(account => send('account.sync.success', account, { kill: false })),
+        ),
+      )
 
-      send('accounts.sync.success', result)
+      send('accounts.sync.success')
     } catch (err) {
       send('accounts.sync.fail', err.stack || err)
     }
