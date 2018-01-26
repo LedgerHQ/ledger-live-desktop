@@ -113,7 +113,7 @@ export default async ({
     }
 
     const hdnode = getHDNode({ xpub58, network })
-    const account = await getAccount({ hdnode, network, segwit })
+    const account = await getAccount({ hdnode, network, segwit, asyncDelay: 0 })
 
     onProgress({
       account: currentAccount,
