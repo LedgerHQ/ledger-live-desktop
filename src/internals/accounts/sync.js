@@ -17,14 +17,7 @@ export default (send: Function) => ({
     send('accounts.sync.progress', null, { kill: false })
 
     try {
-      const result = await accounts.reduce(
-        (promise, account) =>
-          promise.then(async results => {
-            const result = await syncAccount(account)
-            return [...results, result]
-          }),
-        Promise.resolve([]),
-      )
+      const result = await Promise.all(accounts.map(syncAccount))
 
       send('accounts.sync.success', result)
     } catch (err) {

@@ -3,6 +3,7 @@
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import get from 'lodash/get'
+import uniqBy from 'lodash/uniqBy'
 
 import type { Accounts } from 'types/common'
 
@@ -11,7 +12,7 @@ import { CHECK_UPDATE_TIMEOUT, SYNC_ACCOUNT_TIMEOUT } from 'constants'
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 import { syncAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
-import { getAccounts } from 'reducers/accounts'
+import { getAccountData, getAccounts } from 'reducers/accounts'
 
 type MsgPayload = {
   type: string,
@@ -66,9 +67,17 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
       sync: {
         success: accounts => {
           if (syncAccounts) {
-            accounts.forEach(
-              account => account.transactions.length > 0 && store.dispatch(syncAccount(account)),
-            )
+            const currentState = store.getState()
+            accounts.forEach(account => {
+              const currentAccountData = getAccountData(currentState, account.id) || {}
+              const transactions = uniqBy(
+                [...currentAccountData.transactions, ...account.transactions],
+                tx => tx.hash,
+              )
+              if (currentAccountData.transactions.length !== transactions.length) {
+                store.dispatch(syncAccount(account))
+              }
+            })
             syncTimeout = setTimeout(() => {
               const newAccounts = getAccounts(store.getState())
               startSyncAccounts(newAccounts)
