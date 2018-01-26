@@ -98,6 +98,9 @@ export async function getAccount({
     }),
   })
 
+  const getAsyncAddress = params =>
+    new Promise(resolve => setTimeout(() => resolve(getAddress(params)), 100))
+
   const getLastAddress = (addresses, txs) => {
     const txsAddresses = [...txs.inputs.map(tx => tx.prev_out.addr), ...txs.out.map(tx => tx.addr)]
     const lastAddress = addresses.reverse().find(a => txsAddresses.includes(a.address)) || {
@@ -110,48 +113,53 @@ export async function getAccount({
   }
 
   const nextPath = (index = 0) =>
-    Promise.all(
-      Array.from(new Array(gapLimit).keys()).map(v =>
-        Promise.all([
-          getAddress({ type: 'external', index: v + index }),
-          getAddress({ type: 'internal', index: v + index }),
-        ]),
-      ),
-    ).then(async results => {
-      const addresses = results.reduce((result, v) => [...result, ...v], [])
-      const listAddresses = addresses.map(a => a.address)
+    Array.from(new Array(gapLimit).keys())
+      .reduce(
+        (promise, v) =>
+          promise.then(async results => {
+            const result = await Promise.all([
+              getAsyncAddress({ type: 'external', index: v + index }),
+              getAsyncAddress({ type: 'internal', index: v + index }),
+            ])
+            return [...results, result]
+          }),
+        Promise.resolve([]),
+      )
+      .then(async results => {
+        const addresses = results.reduce((result, v) => [...result, ...v], [])
+        const listAddresses = addresses.map(a => a.address)
 
-      allAddresses = [...new Set([...allAddresses, ...listAddresses])]
+        allAddresses = [...new Set([...allAddresses, ...listAddresses])]
 
-      const { txs } = await getTransactions(listAddresses)
+        const { txs } = await getTransactions(listAddresses)
 
-      const hasTransactions = txs.length > 0
+        const hasTransactions = txs.length > 0
 
-      transactions = [...transactions, ...txs.map(computeTransaction(allAddresses))]
-      lastAddress = hasTransactions ? getLastAddress(addresses, txs[0]) : lastAddress
+        transactions = [...transactions, ...txs.map(computeTransaction(allAddresses))]
+        lastAddress = hasTransactions ? getLastAddress(addresses, txs[0]) : lastAddress
 
-      if (hasTransactions) {
-        return nextPath(index + (gapLimit - 1))
-      }
+        if (hasTransactions) {
+          return nextPath(index + (gapLimit - 1))
+        }
 
-      return {
-        balance: transactions.reduce((result, v) => {
-          result += v.balance
-          return result
-        }, 0),
-        allAddresses,
-        transactions,
-        ...(lastAddress !== null
-          ? {
-              currentIndex: lastAddress.index,
-              address: lastAddress.address,
-            }
-          : {
-              currentIndex: 0,
-              address: getAddress({ type: 'external', index: 0 }).address,
-            }),
-      }
-    })
+        return {
+          balance: transactions.reduce((result, v) => {
+            result += v.balance
+            return result
+          }, 0),
+          allAddresses,
+          transactions,
+          ...(lastAddress !== null
+            ? {
+                currentIndex: lastAddress.index,
+                address: lastAddress.address,
+              }
+            : {
+                currentIndex: 0,
+                address: getAddress({ type: 'external', index: 0 }).address,
+              }),
+        }
+      })
 
   if (allAddresses.length === 0 && currentIndex > 0) {
     for (let i = currentIndex; i--; ) {
