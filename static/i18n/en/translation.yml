@@ -21,6 +21,7 @@ send:
 
 receive:
   title: Receive
+  modalTitle: Receive funds
 
 addAccount:
   title: Add account

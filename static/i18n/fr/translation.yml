@@ -21,6 +21,7 @@ send:
 
 receive:
   title: Recevoir
+  modalTitle: Recevoir des fonds
 
 addAccount:
   title: Ajouter un compte

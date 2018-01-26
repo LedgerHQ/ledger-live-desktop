@@ -16,7 +16,7 @@ import Triangles from './Triangles'
 
 type Props = {
   items: Array<Object>,
-  value?: Object,
+  value?: Object | null,
   itemToString?: Function,
   onChange?: Function,
   fuseOptions?: Object,
@@ -26,6 +26,7 @@ type Props = {
   renderHighlight?: string => Element<*>,
   renderSelected?: Object => Element<*>,
   renderItem?: (*) => Element<*>,
+  keyProp?: string,
 }
 
 const Container = styled(Box).attrs({ relative: true, color: 'steel' })``
@@ -91,16 +92,17 @@ const FloatingTriangles = styled(Box).attrs({
 class Select extends PureComponent<Props> {
   static defaultProps = {
     itemToString: (item: Object) => item.name,
+    keyProp: undefined,
   }
 
   renderItems = (items: Array<Object>, downshiftProps: Object) => {
-    const { renderItem } = this.props
+    const { renderItem, keyProp } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
     return (
       <Dropdown>
         {items.length ? (
           items.map((item, i) => (
-            <ItemWrapper key={item.key} {...getItemProps({ item })}>
+            <ItemWrapper key={keyProp ? item[keyProp] : item.key} {...getItemProps({ item })}>
               <Item highlighted={i === highlightedIndex}>
                 {renderItem ? renderItem(item) : <span>{item.name_highlight || item.name}</span>}
               </Item>

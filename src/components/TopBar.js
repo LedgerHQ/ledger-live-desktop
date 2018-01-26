@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
@@ -97,25 +97,23 @@ class TopBar extends PureComponent<Props, State> {
     const { sync } = this.state
 
     return (
-      <Fragment>
-        <Box bg="white" noShrink style={{ height: 60, zIndex: 20 }} align="center" horizontal>
-          <Box grow>
-            {sync.progress === true
-              ? 'sync...'
-              : sync.fail === true ? 'sync fail :(' : 'sync finish!'}
-          </Box>
-          <Box justify="flex-end" horizontal>
-            {hasPassword && <LockApplication onLock={this.handleLock} />}
-            <CountDevices count={devices.length} />
-          </Box>
+      <Box bg="white" px={2} noShrink style={{ height: 60, zIndex: 20 }} align="center" horizontal>
+        <Box grow>
+          {sync.progress === true
+            ? 'Synchronizing...'
+            : sync.fail === true ? 'Synchronization fail :(' : 'Synchronisation finished!'}
         </Box>
-      </Fragment>
+        <Box justify="flex-end" horizontal>
+          {hasPassword && <LockApplication onLock={this.handleLock} />}
+          <CountDevices count={devices.length} />
+        </Box>
+      </Box>
     )
   }
 }
 
 const CountDevices = ({ count } = { count: Number }) => (
-  <Box color="night" mr={20} horizontal flow={10}>
+  <Box color="night" horizontal flow={10}>
     <Box>
       <DeviceIcon height={20} width={20} />
     </Box>
