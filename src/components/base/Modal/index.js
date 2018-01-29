@@ -11,7 +11,7 @@ import noop from 'lodash/noop'
 
 import { rgba } from 'styles/helpers'
 
-import { closeModal, isModalOpened } from 'reducers/modals'
+import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
 import Box from 'components/base/Box'
 import Icon from 'components/base/Icon'
@@ -22,6 +22,7 @@ type Props = {
   preventBackdropClick?: boolean,
   preventSideMargin?: boolean,
   render: Function,
+  data?: any,
 }
 
 const springConfig = {
@@ -30,6 +31,7 @@ const springConfig = {
 
 const mapStateToProps = (state, { name, isOpened }) => ({
   isOpened: isOpened || (name && isModalOpened(state, name)),
+  data: getModalData(state, name),
 })
 
 const mapDispatchToProps = (dispatch, { name, onClose = noop }) => ({
@@ -110,7 +112,7 @@ export class Modal extends PureComponent<Props> {
   }
 
   render() {
-    const { preventBackdropClick, preventSideMargin, isOpened, onClose, render } = this.props
+    const { preventBackdropClick, preventSideMargin, isOpened, onClose, render, data } = this.props
     return (
       <Mortal
         isOpened={isOpened}
@@ -124,7 +126,7 @@ export class Modal extends PureComponent<Props> {
           <Container isVisible={isVisible}>
             <Backdrop op={m.opacity} onClick={preventBackdropClick ? undefined : onClose} />
             <Wrapper preventSideMargin={preventSideMargin} op={m.opacity} offset={m.y}>
-              {render({ onClose })}
+              {render({ data, onClose })}
             </Wrapper>
           </Container>
         )}

@@ -2,6 +2,9 @@
 
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
+import get from 'lodash/get'
+
+import { MODAL_RECEIVE } from 'constants'
 
 import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
@@ -17,27 +20,41 @@ type State = {
   account: AccountType | null,
 }
 
+const defaultState = {
+  account: null,
+}
+
 class ReceiveModal extends PureComponent<Props, State> {
   state = {
-    account: null,
+    ...defaultState,
   }
 
   handleChangeAccount = account => {
     this.setState({ account })
   }
 
+  handleClose = () =>
+    this.setState({
+      ...defaultState,
+    })
+
   render() {
     const { account } = this.state
     const { t } = this.props
+
     return (
       <Modal
-        name="receive"
-        render={({ onClose }) => (
+        name={MODAL_RECEIVE}
+        onClose={this.handleClose}
+        render={({ data, onClose }) => (
           <ModalBody onClose={onClose} flow={3}>
             <Text fontSize={4} color="steel">
               {t('receive.modalTitle')}
             </Text>
-            <SelectAccount value={account} onChange={this.handleChangeAccount} />
+            <SelectAccount
+              value={account || get(data, 'account')}
+              onChange={this.handleChangeAccount}
+            />
           </ModalBody>
         )}
       />

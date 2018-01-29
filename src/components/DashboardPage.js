@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 import chunk from 'lodash/chunk'
 import { push } from 'react-router-redux'
 
+import { MODAL_ADD_ACCOUNT } from 'constants'
+
 import type { MapStateToProps } from 'react-redux'
 import type { Accounts, T } from 'types/common'
 
@@ -106,7 +108,7 @@ class DashboardPage extends PureComponent<Props, State> {
           />
         </Card>
         <Box flow={3}>
-          {chunk([...Object.keys(accounts), 'add-account'], 3).map((line, i) => (
+          {chunk([...Object.keys(accounts), MODAL_ADD_ACCOUNT], 3).map((line, i) => (
             <Box
               key={i} // eslint-disable-line react/no-array-index-key
               horizontal
@@ -114,7 +116,7 @@ class DashboardPage extends PureComponent<Props, State> {
             >
               {line.map(
                 key =>
-                  key === 'add-account' ? (
+                  key === MODAL_ADD_ACCOUNT ? (
                     <Box
                       key={key}
                       p={3}
@@ -124,7 +126,7 @@ class DashboardPage extends PureComponent<Props, State> {
                       justify="center"
                       borderColor="mouse"
                       style={{ borderStyle: 'dashed', cursor: 'pointer', textAlign: 'center' }}
-                      onClick={() => openModal('add-account')}
+                      onClick={() => openModal(MODAL_ADD_ACCOUNT)}
                     >
                       {`+ ${t('addAccount.title')}`}
                     </Box>

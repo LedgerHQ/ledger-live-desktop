@@ -4,6 +4,8 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
+import { MODAL_ADD_ACCOUNT } from 'constants'
+
 import type { MapStateToProps } from 'react-redux'
 import type { Accounts, Device } from 'types/common'
 
@@ -280,7 +282,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
     return (
       <Modal
-        name="add-account"
+        name={MODAL_ADD_ACCOUNT}
         preventBackdropClick={step !== 'chooseWallet'}
         onClose={this.handleClose}
         render={({ onClose }) => (
