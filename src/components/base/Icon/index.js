@@ -12,6 +12,6 @@ const Container = styled.span`
 
 export default ({ name, ...props }: { name: string }) => (
   <Container {...props}>
-    <FontAwesomeIcon icon={name} fixedWidth />
+    <FontAwesomeIcon icon={name} />
   </Container>
 )
