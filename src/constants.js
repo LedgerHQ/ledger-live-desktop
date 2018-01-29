@@ -1,2 +1,6 @@
 export const CHECK_UPDATE_TIMEOUT = 5e3
 export const SYNC_ACCOUNT_TIMEOUT = 3e3
+
+export const MODAL_ADD_ACCOUNT = 'MODAL_ADD_ACCOUNT'
+export const MODAL_SEND = 'MODAL_SEND'
+export const MODAL_RECEIVE = 'MODAL_RECEIVE'

@@ -21,6 +21,10 @@ injectGlobal`
     flex-shrink: 0;
   }
 
+  html {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+
   body {
     line-height: 1.5;
     font-size: 16px;
@@ -40,8 +44,18 @@ injectGlobal`
   em {
     font-style: italic;
   }
-
+  
   ::-webkit-scrollbar {
-      display: none;
+    background-color: rgba(0, 0, 0, 0);
+    width: 6px;
+  }
+  ::-webkit-scrollbar:hover {
+    background-color: rgba(0, 0, 0, 0.09);
+  }
+  ::-webkit-scrollbar-thumb:vertical {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  ::-webkit-scrollbar-thumb:vertical:active {
+    background: rgba(0, 0, 0, 0.61);
   }
 `

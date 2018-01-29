@@ -2,36 +2,69 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { space, fontSize, fontWeight, color } from 'styled-system'
+import { borderColor, borderWidth, space, fontSize, fontWeight, color } from 'styled-system'
 
-const Base = styled.button.attrs({
-  px: 4,
-  fontSize: 1,
-})`
+import Icon from 'components/base/Icon'
+
+const Base = styled.button`
+  ${borderColor};
+  ${borderWidth};
   ${space};
   ${color};
   ${fontSize};
   ${fontWeight};
   border-radius: 5px;
   cursor: pointer;
-  border: none;
   height: 40px;
   box-shadow: ${p => (p.withShadow ? 'rgba(0, 0, 0, 0.2) 0 3px 10px' : '')};
   outline: none;
 `
 
 type Props = {
+  children?: any,
+  icon?: string,
   primary?: boolean,
 }
 
-const Button = ({ primary, ...props }: Props) => {
-  if (primary) {
-    return <Base fontWeight="bold" color="white" bg="blue" withShadow {...props} />
+const Button = ({ primary, children, icon, ...props }: Props) => {
+  children = icon ? <Icon name={icon} /> : children
+
+  props = {
+    ...props,
+    bg: 'transparent',
+    color: 'mouse',
+    ...(icon
+      ? {
+          fontSize: 3,
+          px: 1,
+        }
+      : {
+          fontSize: 1,
+          px: 3,
+        }),
+    ...(primary
+      ? {
+          color: 'white',
+          bg: 'blue',
+          borderWidth: 0,
+          withShadow: true,
+        }
+      : {
+          borderColor: 'mouse',
+          borderWidth: 1,
+        }),
   }
-  return <Base color="white" {...props} />
+
+  return (
+    <Base {...props} icon={icon}>
+      {children}
+    </Base>
+  )
 }
 
 Button.defaultProps = {
+  children: undefined,
+  icon: undefined,
   primary: false,
 }
 

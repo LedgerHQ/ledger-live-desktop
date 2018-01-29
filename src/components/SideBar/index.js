@@ -6,6 +6,8 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
+import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'constants'
+
 import type { MapStateToProps } from 'react-redux'
 import type { Accounts, T } from 'types/common'
 
@@ -73,10 +75,10 @@ class SideBar extends PureComponent<Props> {
               <Item icon="chart-bar" linkTo="/">
                 {t('dashboard.title')}
               </Item>
-              <Item icon="upload" modal="send">
+              <Item icon="upload" modal={MODAL_SEND}>
                 {t('send.title')}
               </Item>
-              <Item icon="download" modal="receive">
+              <Item icon="download" modal={MODAL_RECEIVE}>
                 {t('receive.title')}
               </Item>
               <Item icon="cog" linkTo="/settings">
@@ -94,7 +96,7 @@ class SideBar extends PureComponent<Props> {
               ))}
             </div>
           </Box>
-          <BtnAddAccount onClick={() => openModal('add-account')}>
+          <BtnAddAccount onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
             {t('addAccount.title')}
           </BtnAddAccount>
         </GrowScroll>

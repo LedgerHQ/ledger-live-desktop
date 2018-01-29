@@ -7,7 +7,7 @@ import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 
-import { openModal, isModalOpened } from 'reducers/modals'
+import { openModal } from 'reducers/modals'
 
 import type { MapStateToProps } from 'react-redux'
 import type { Location } from 'react-router'
@@ -16,11 +16,10 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Icon from 'components/base/Icon'
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, { modal }: any) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: any) => ({
   // connect router here only to make components re-render
   // see https://github.com/ReactTraining/react-router/issues/4671
   router: state.router,
-  isModalOpened: modal ? isModalOpened(state, modal) : false,
 })
 
 const mapDispatchToProps = {
@@ -54,24 +53,13 @@ type Props = {
   desc?: string | null,
   icon?: string | null,
   location: Location,
-  isModalOpened: boolean,
   push: Function,
   openModal: Function,
 }
 
-function Item({
-  children,
-  desc,
-  icon,
-  linkTo,
-  push,
-  location,
-  modal,
-  openModal,
-  isModalOpened,
-}: Props) {
+function Item({ children, desc, icon, linkTo, push, location, modal, openModal }: Props) {
   const { pathname } = location
-  const isActive = pathname === linkTo || isModalOpened
+  const isActive = pathname === linkTo
   return (
     <Container
       onClick={

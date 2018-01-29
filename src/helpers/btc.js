@@ -1,9 +1,7 @@
 // @flow
 
-// import axios from 'axios'
+import axios from 'axios'
 import bitcoin from 'bitcoinjs-lib'
-
-const blockexplorer = require('blockchain.info/blockexplorer').usingNetwork(3)
 
 export const networks = [
   {
@@ -17,26 +15,13 @@ export const networks = [
 ]
 
 export function computeTransaction(addresses: Array<*>) {
-  // return (transaction: Object) => {
-  //   const outputVal = transaction.outputs
-  //     .filter(o => addresses.includes(o.address))
-  //     .reduce((acc, cur) => acc + cur.value, 0)
-  //   const inputVal = transaction.inputs
-  //     .filter(i => addresses.includes(i.address))
-  //     .reduce((acc, cur) => acc + cur.value, 0)
-  //   const balance = outputVal - inputVal
-  //   return {
-  //     ...transaction,
-  //     balance,
-  //   }
-  // }
   return (transaction: Object) => {
-    const outputVal = transaction.out
-      .filter(o => addresses.includes(o.addr))
+    const outputVal = transaction.outputs
+      .filter(o => addresses.includes(o.address))
       .reduce((acc, cur) => acc + cur.value, 0)
     const inputVal = transaction.inputs
-      .filter(i => addresses.includes(i.prev_out.addr))
-      .reduce((acc, cur) => acc + cur.prev_out.value, 0)
+      .filter(i => addresses.includes(i.address))
+      .reduce((acc, cur) => acc + cur.value, 0)
     const balance = outputVal - inputVal
     return {
       ...transaction,
@@ -46,12 +31,13 @@ export function computeTransaction(addresses: Array<*>) {
 }
 
 export function getTransactions(addresses: Array<string>) {
-  // return axios.get(
-  //   `http://api.ledgerwallet.com/blockchain/v2/btc_testnet/addresses/${addresses.join(
-  //     ',',
-  //   )}/transactions?noToken=true`,
-  // )
-  return blockexplorer.getMultiAddress(addresses)
+  return axios
+    .get(
+      `http://api.ledgerwallet.com/blockchain/v2/btc_testnet/addresses/${addresses.join(
+        ',',
+      )}/transactions?noToken=true`,
+    )
+    .then(({ data }) => data)
 }
 
 export async function getAccount({
@@ -104,7 +90,7 @@ export async function getAccount({
     new Promise(resolve => setTimeout(() => resolve(getAddress(params)), asyncDelay))
 
   const getLastAddress = (addresses, txs) => {
-    const txsAddresses = [...txs.inputs.map(tx => tx.prev_out.addr), ...txs.out.map(tx => tx.addr)]
+    const txsAddresses = [...txs.inputs.map(tx => tx.address), ...txs.outputs.map(tx => tx.address)]
     const lastAddress = addresses.reverse().find(a => txsAddresses.includes(a.address)) || {
       index: 0,
     }

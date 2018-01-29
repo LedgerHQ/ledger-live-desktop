@@ -17,7 +17,7 @@ const state: AccountsState = {}
 function getAccount(account: Account) {
   const transactions = get(account.data, 'transactions', [])
 
-  transactions.sort((a, b) => b.time - a.time)
+  transactions.sort((a, b) => new Date(b.received_at) - new Date(a.received_at))
 
   return {
     ...account,

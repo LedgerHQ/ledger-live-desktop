@@ -53,6 +53,9 @@ export const closeModal = createAction('MODAL_CLOSE', name => ({ name }))
 export const isModalOpened = (state: Object, name: string) =>
   state.modals[name] && state.modals[name].isOpened
 
+export const getModalData = (state: Object, name: string) =>
+  state.modals[name] && state.modals[name].data
+
 // Exporting reducer
 
 export default handleActions(handlers, state)

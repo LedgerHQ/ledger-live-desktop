@@ -2,6 +2,9 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import styled from 'styled-components'
+import get from 'lodash/get'
+
+import { MODAL_SEND } from 'constants'
 
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
@@ -71,7 +74,7 @@ type State = {
 
 const defaultState = {
   inputValue: {
-    account: undefined,
+    account: null,
     address: '',
     amount: '',
   },
@@ -83,7 +86,7 @@ class Send extends PureComponent<{}, State> {
     ...defaultState,
   }
 
-  getStepProps() {
+  getStepProps(data: any) {
     const { inputValue, step } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
@@ -91,7 +94,10 @@ class Send extends PureComponent<{}, State> {
     return {
       ...props(step === 'amount', {
         onChangeInput: this.handleChangeInput,
-        value: inputValue,
+        value: {
+          ...inputValue,
+          account: inputValue.account || get(data, 'account'),
+        },
       }),
       ...props(step === 'summary', {
         value: inputValue,
@@ -125,13 +131,13 @@ class Send extends PureComponent<{}, State> {
 
     return (
       <Modal
-        name="send"
+        name={MODAL_SEND}
         onClose={this.handleClose}
-        render={({ onClose }) => (
+        render={({ data, onClose }) => (
           <Fragment>
             <ModalBody>{step}</ModalBody>
             <ModalBody onClose={onClose}>
-              <Step {...this.getStepProps()} />
+              <Step {...this.getStepProps(data)} />
             </ModalBody>
           </Fragment>
         )}
