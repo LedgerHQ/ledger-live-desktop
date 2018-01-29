@@ -17,15 +17,15 @@ import { addAccount } from 'actions/accounts'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
-import Input from 'components/base/Input'
 import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Select from 'components/base/Select'
 
+import CreateAccount from './CreateAccount'
 import ImportAccounts from './ImportAccounts'
 
 const Steps = {
-  createAccount: (props: Object) => (
+  chooseWallet: (props: Object) => (
     <form onSubmit={props.onSubmit}>
       <Box flow={3}>
         <Box flow={1}>
@@ -42,10 +42,6 @@ const Steps = {
             ]}
           />
         </Box>
-        <Box flow={1}>
-          <Label>Account name</Label>
-          <Input onChange={props.onChangeInput('accountName')} value={props.value.accountName} />
-        </Box>
         <Box horizontal justify="flex-end">
           <Button primary type="submit">
             Add account
@@ -55,75 +51,45 @@ const Steps = {
     </form>
   ),
   connectDevice: (props: Object) => (
-    <div>
-      <div>Connect your Ledger: {props.connected ? 'ok' : 'ko'}</div>
-      <div>Start {props.wallet.toUpperCase()} App on your Ledger: ko</div>
-    </div>
+    <Box>
+      <Box>Connect your Ledger: {props.connected ? 'ok' : 'ko'}</Box>
+      <Box>Start {props.wallet.toUpperCase()} App on your Ledger: ko</Box>
+    </Box>
   ),
   inProgress: (props: Object) => (
-    <div>
+    <Box>
       In progress.
       {props.progress !== null && (
-        <div>
+        <Box>
           Account: {props.progress.account} / Transactions: {props.progress.transactions}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   ),
   listAccounts: (props: Object) => {
     const accounts = Object.entries(props.accounts).map(([, account]: [string, any]) => account)
+    const emptyAccounts = accounts.filter(account => account.transactions.length === 0)
     const existingAccounts = accounts.filter(account => account.transactions.length > 0)
-    // const newAccount = accounts.find(account => account.transactions.length === 0)
+    const canCreateAccount = props.canCreateAccount && emptyAccounts.length === 1
+    const newAccount = emptyAccounts[0]
     return (
-      <Box>
+      <Box flow={10}>
         <ImportAccounts {...props} accounts={existingAccounts} />
+        {canCreateAccount ? (
+          <CreateAccount {...props} account={newAccount} />
+        ) : (
+          <Box>{`You can't create new account`}</Box>
+        )}
       </Box>
     )
   },
-  // listAccounts: (props: Object) => {
-  //   const accounts = []
-  //
-  //   let newAccount = null
-  //
-  //   Object.entries(props.accounts).forEach(([, account]: [string, any]) => {
-  //     const hasTransactions = account.transactions.length > 0
-  //
-  //     if (hasTransactions) {
-  //       accounts.push(account)
-  //     } else {
-  //       newAccount = account
-  //     }
-  //   })
-  //
-  //   return (
-  //     <div>
-  //       {accounts.map(account => (
-  //         <div key={account.id} style={{ marginBottom: 10 }}>
-  //           <div>Balance: {formatBTC(account.balance)}</div>
-  //           <div>Transactions: {account.transactions.length}</div>
-  //           <div>
-  //             <Button onClick={props.onAddAccount(account)}>Import</Button>
-  //           </div>
-  //         </div>
-  //       ))}
-  //       {props.canCreateAccount && newAccount !== null ? (
-  //         <div>
-  //           <Button onClick={props.onAddAccount(newAccount)}>Create new account</Button>
-  //         </div>
-  //       ) : (
-  //         <div>You cannot create new account</div>
-  //       )}
-  //     </div>
-  //   )
-  // },
 }
 
 type InputValue = {
-  accountName: string,
   wallet: string,
 }
 
-type Step = 'createAccount' | 'connectDevice' | 'inProgress' | 'listAccounts'
+type Step = 'chooseWallet' | 'connectDevice' | 'inProgress' | 'listAccounts'
 
 type Props = {
   accounts: Accounts,
@@ -152,12 +118,11 @@ const mapDispatchToProps = {
 
 const defaultState = {
   inputValue: {
-    accountName: '',
     wallet: '',
   },
   accounts: {},
   progress: null,
-  step: 'createAccount',
+  step: 'chooseWallet',
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
@@ -207,7 +172,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     const props = (predicate, props) => (predicate ? props : {})
 
     return {
-      ...props(step === 'createAccount', {
+      ...props(step === 'chooseWallet', {
         value: inputValue,
         onSubmit: this.handleSubmit,
         onChangeInput: this.handleChangeInput,
@@ -248,33 +213,9 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
   }
 
-  handleAddAccount = account => () => {
-    const { inputValue } = this.state
-    const { addAccount } = this.props
+  handleAddAccount = account => this.addAccount(account)
 
-    const { id, ...data } = account
-
-    addAccount({
-      id,
-      name: inputValue.accountName,
-      type: inputValue.wallet,
-      data,
-    })
-  }
-
-  handleImportAccounts = accountsSelected => {
-    const { inputValue } = this.state
-    const { addAccount } = this.props
-
-    accountsSelected.forEach(({ id, name, ...account }) =>
-      addAccount({
-        id,
-        name,
-        type: inputValue.wallet,
-        data: account,
-      }),
-    )
-  }
+  handleImportAccounts = accounts => accounts.forEach(account => this.addAccount(account))
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
     this.setState(prev => ({
@@ -289,7 +230,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
     const { inputValue } = this.state
 
-    if (inputValue.accountName.trim() === '' || inputValue.wallet.trim() === '') {
+    if (inputValue.wallet.trim() === '') {
       return
     }
 
@@ -305,6 +246,18 @@ class AddAccountModal extends PureComponent<Props, State> {
     })
   }
 
+  addAccount = ({ id, name, ...data }) => {
+    const { inputValue } = this.state
+    const { addAccount } = this.props
+
+    addAccount({
+      id,
+      name,
+      type: inputValue.wallet,
+      data,
+    })
+  }
+
   _timeout = undefined
 
   render() {
@@ -315,7 +268,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     return (
       <Modal
         name="add-account"
-        preventBackdropClick={step !== 'createAccount'}
+        preventBackdropClick={step !== 'chooseWallet'}
         onClose={this.handleClose}
         render={({ onClose }) => (
           <ModalBody onClose={onClose} flow={3}>

@@ -39,7 +39,7 @@ class AccountPage extends PureComponent<Props> {
             <Box horizontal flow={3}>
               <Box grow>
                 <Card title="Balance" style={{ height: 435 }} align="center" justify="center">
-                  <Text fontSize={6}>{formatBTC(accountData.balance)}</Text>
+                  <Text fontSize={5}>{formatBTC(accountData.balance)}</Text>
                 </Card>
               </Box>
 

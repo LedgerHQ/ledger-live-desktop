@@ -82,7 +82,7 @@
     "redux-thunk": "^2.2.0",
     "shortid": "^2.2.8",
     "source-map-support": "^0.5.3",
-    "styled-components": "^3.0.2",
+    "styled-components": "^3.1.1",
     "styled-system": "^1.1.1"
   },
   "devDependencies": {
@@ -120,7 +120,7 @@
     "lint-staged": "^6.1.0",
     "node-loader": "^0.6.0",
     "prettier": "^1.10.2",
-    "react-hot-loader": "^4.0.0-beta.17",
+    "react-hot-loader": "^4.0.0-beta.18",
     "webpack": "^3.10.0"
   }
 }

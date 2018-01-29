@@ -55,7 +55,9 @@ class ImportAccounts extends PureComponent<Props, State> {
       },
     }))
 
-  handleImportAccounts = () => {
+  handleImportAccounts = (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     const { accounts, onImportAccounts } = this.props
     const { accountsSelected, accountsName } = this.state
 
@@ -76,40 +78,42 @@ class ImportAccounts extends PureComponent<Props, State> {
     return (
       <Box>
         <Box>Import Accounts</Box>
-        <Box>
-          {accounts.map(account => {
-            const selected = accountsSelected.includes(account.id)
-            const accountName = accountsName[account.id]
-            return (
-              <Box key={account.id} horizontal flow={10}>
-                <Box>
-                  <Checkbox
-                    checked={selected}
-                    onChange={this.handleSelectAccount(account.id, selected)}
-                  />
-                </Box>
-                <Box>
+        <form onSubmit={this.handleImportAccounts}>
+          <Box flow={3}>
+            {accounts.map(account => {
+              const selected = accountsSelected.includes(account.id)
+              const accountName = accountsName[account.id]
+              return (
+                <Box key={account.id} horizontal flow={10}>
                   <Box>
-                    <Input
-                      type="text"
-                      disabled={!selected}
-                      placeholder={accountName.placeholder}
-                      value={accountName.value || ''}
-                      onChange={this.handleChangeInput(account.id)}
+                    <Checkbox
+                      checked={selected}
+                      onChange={this.handleSelectAccount(account.id, selected)}
                     />
                   </Box>
-                  <Box>Balance: {formatBTC(account.balance)}</Box>
-                  <Box>Transactions: {account.transactions.length}</Box>
+                  <Box grow>
+                    <Box>
+                      <Input
+                        type="text"
+                        disabled={!selected}
+                        placeholder={accountName.placeholder}
+                        value={accountName.value || ''}
+                        onChange={this.handleChangeInput(account.id)}
+                      />
+                    </Box>
+                    <Box>Balance: {formatBTC(account.balance)}</Box>
+                    <Box>Transactions: {account.transactions.length}</Box>
+                  </Box>
                 </Box>
-              </Box>
-            )
-          })}
-        </Box>
-        <Box>
-          <Button primary disabled={!canImportAccounts} onClick={this.handleImportAccounts}>
-            Import accounts
-          </Button>
-        </Box>
+              )
+            })}
+            <Box horizontal justify="flex-end">
+              <Button primary disabled={!canImportAccounts} type="submit">
+                Import
+              </Button>
+            </Box>
+          </Box>
+        </form>
       </Box>
     )
   }
