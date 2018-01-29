@@ -1,5 +1,7 @@
 // @flow
 
+import 'env'
+
 import React from 'react'
 import Raven from 'raven-js'
 import { render } from 'react-dom'
