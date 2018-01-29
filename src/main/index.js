@@ -1,5 +1,7 @@
 // @flow
 
+require('env')
+
 process.setMaxListeners(0)
 
 require('../globals')
