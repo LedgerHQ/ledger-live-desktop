@@ -134,6 +134,19 @@ class AddAccountModal extends PureComponent<Props, State> {
     ipcRenderer.on('msg', this.handleWalletRequest)
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.accounts) {
+      this.setState(prev => ({
+        accounts: Object.keys(prev.accounts).reduce((result, value) => {
+          if (!nextProps.accounts[value]) {
+            result[value] = prev.accounts[value]
+          }
+          return result
+        }, {}),
+      }))
+    }
+  }
+
   componentDidUpdate() {
     const { step } = this.state
     const { currentDevice } = this.props
