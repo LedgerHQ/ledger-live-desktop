@@ -65,7 +65,7 @@ const ReceiveBox = ({ address }: Props) => (
         <span>{'Print'}</span>
       </Action>
       <Action>
-        <Icon name="share-square-o" />
+        <Icon name="share-square" />
         <span>{'Share'}</span>
       </Action>
     </Box>

@@ -262,20 +262,18 @@ class AddAccountModal extends PureComponent<Props, State> {
     })
   }
 
-  handleImportAccounts = accountsSelected => () => {
-    const { inputValue, accounts } = this.state
+  handleImportAccounts = accountsSelected => {
+    const { inputValue } = this.state
     const { addAccount } = this.props
 
-    Object.entries(accounts).forEach(([, account]: [string, any], i) => {
-      if (accountsSelected.includes(account.id)) {
-        addAccount({
-          id: account.id,
-          name: `Account ${i + 1}`,
-          type: inputValue.wallet,
-          data: account,
-        })
-      }
-    })
+    accountsSelected.forEach(({ id, name, ...account }) =>
+      addAccount({
+        id,
+        name,
+        type: inputValue.wallet,
+        data: account,
+      }),
+    )
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>

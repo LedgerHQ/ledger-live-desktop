@@ -70,7 +70,7 @@ class SideBar extends PureComponent<Props> {
           <Box flow={2}>
             <CapsSubtitle>{t('sidebar.menu')}</CapsSubtitle>
             <div>
-              <Item icon="bar-chart" linkTo="/">
+              <Item icon="chart-bar" linkTo="/">
                 {t('dashboard.title')}
               </Item>
               <Item icon="upload" modal="send">

@@ -91,7 +91,7 @@ const FloatingTriangles = styled(Box).attrs({
 
 class Select extends PureComponent<Props> {
   static defaultProps = {
-    itemToString: (item: Object) => item.name,
+    itemToString: (item: Object) => item && item.name,
     keyProp: undefined,
   }
 
