@@ -122,7 +122,7 @@ export default async ({
 
     const hasTransactions = account.transactions.length > 0
 
-    accounts[currentAccount] = {
+    accounts[xpub58] = {
       id: xpub58,
       ...account,
     }

@@ -17,7 +17,6 @@ import { getLanguage } from 'reducers/settings'
 import App from 'components/App'
 
 import 'styles/global'
-import 'renderer/head'
 
 if (__PROD__ && __SENTRY_URL__) {
   Raven.config(__SENTRY_URL__, { allowSecretKey: true }).install()

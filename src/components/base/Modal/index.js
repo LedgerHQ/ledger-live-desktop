@@ -50,7 +50,7 @@ const Container = styled(Box).attrs({
     pointerEvents: p.isVisible ? 'auto' : 'none',
   }),
 })`
-  overflow: hidden;
+  overflow: scroll;
   position: fixed;
   z-index: 20;
 `
@@ -69,6 +69,7 @@ const Wrapper = styled(Box).attrs({
   bg: 'transparent',
   flow: 20,
   mt: 100,
+  mb: 100,
   style: p => ({
     opacity: p.op,
     transform: `translate3d(0, ${p.offset}px, 0)`,

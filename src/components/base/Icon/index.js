@@ -3,15 +3,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { fontSize, color } from 'styled-system'
+import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 
-const Container = styled.div`
+const Container = styled.span`
   ${fontSize};
   ${color};
-  line-height: 1;
 `
 
 export default ({ name, ...props }: { name: string }) => (
   <Container {...props}>
-    <i className={`fa fa-${name}`} />
+    <FontAwesomeIcon icon={name} />
   </Container>
 )

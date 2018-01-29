@@ -31,6 +31,7 @@ export default (sendEvent: Function) => ({
         currentAccounts,
         onProgress: progress => sendEvent('wallet.getAccounts.progress', progress, { kill: false }),
       })
+
       sendEvent('wallet.getAccounts.success', data)
     } catch (err) {
       sendEvent('wallet.getAccounts.fail', err.stack || err)

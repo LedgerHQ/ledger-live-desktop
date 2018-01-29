@@ -17,6 +17,7 @@ function createMainWindow() {
           vibrancy: 'ultra-dark', // https://github.com/electron/electron/issues/10521
         }
       : {}),
+    center: true,
     show: true,
     height: MIN_HEIGHT,
     width: MIN_WIDTH,
