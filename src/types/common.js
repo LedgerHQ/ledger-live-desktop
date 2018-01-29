@@ -13,7 +13,7 @@ export type Devices = Array<Device>
 export type Transaction = {
   balance: number,
   hash: string,
-  time: number,
+  received_at: string,
 }
 
 // -------------------- Accounts

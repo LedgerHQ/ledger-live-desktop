@@ -23,8 +23,6 @@ const Cap = styled(Text).attrs({
   letter-spacing: 1px;
 `
 
-const Body = styled(Box)``
-
 const HeaderCol = ({ size, children, ...props }: { size?: number, children: any }) => (
   <Cell size={size} {...props}>
     <Cap>{children}</Cap>
@@ -54,7 +52,7 @@ const Cell = styled(Box).attrs({
 `
 
 const Transaction = ({ tx }: { tx: TransactionType }) => {
-  const time = moment(tx.time * 1e3)
+  const time = moment(tx.received_at)
   return (
     <TransactionRaw>
       <Cell size={DATE_COL_SIZE} justify="space-between">
@@ -74,7 +72,7 @@ const Transaction = ({ tx }: { tx: TransactionType }) => {
           display: 'block',
         }}
       >
-        {tx.balance > 0 ? get(tx, 'inputs.0.prev_out.addr') : get(tx, 'out.0.addr')}
+        {tx.balance > 0 ? get(tx, 'inputs.0.address') : get(tx, 'outputs.0.address')}
       </Cell>
       <Cell size={AMOUNT_COL_SIZE} justify="flex-end">
         <Text color={tx.balance > 0 ? 'green' : void 0}>{formatBTC(tx.balance)}</Text>
@@ -92,6 +90,6 @@ export default ({ transactions }: { transactions: Array<TransactionType> }) => (
         {'Amount'}
       </HeaderCol>
     </Box>
-    <Body>{transactions.map(t => <Transaction key={t.hash} tx={t} />)}</Body>
+    <Box>{transactions.map(t => <Transaction key={t.hash} tx={t} />)}</Box>
   </Box>
 )

@@ -50,7 +50,6 @@
     "axios": "^0.17.1",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",
-    "blockchain.info": "^2.11.0",
     "bs58check": "^2.1.1",
     "color": "^3.0.0",
     "cross-env": "^5.1.3",
