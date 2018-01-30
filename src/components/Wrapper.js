@@ -5,7 +5,8 @@ import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
 import * as modals from 'components/modals'
-import Box, { GrowScroll } from 'components/base/Box'
+import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
 
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'

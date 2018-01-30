@@ -85,6 +85,7 @@ const Wrapper = styled(Box).attrs({
 const Body = styled(Box).attrs({
   bg: p => p.theme.colors.white,
   p: 3,
+  relative: true,
 })`
   border-radius: 5px;
 `

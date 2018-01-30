@@ -8,6 +8,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 const Container = styled.span`
   ${fontSize};
   ${color};
+  position: relative;
 `
 
 export default ({ name, ...props }: { name: string }) => (
