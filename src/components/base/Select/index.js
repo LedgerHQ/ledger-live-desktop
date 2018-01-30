@@ -8,9 +8,10 @@ import { space } from 'styled-system'
 import type { Element } from 'react'
 
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
+import Icon from 'components/base/Icon'
 import Input from 'components/base/Input'
 import Search from 'components/base/Search'
+import Text from 'components/base/Text'
 
 import Triangles from './Triangles'
 
@@ -49,6 +50,7 @@ const TriggerBtn = styled(Box).attrs({
 `
 
 const Item = styled(Box).attrs({
+  align: 'center',
   p: 2,
 })`
   background: ${p => (p.highlighted ? p.theme.colors.cream : p.theme.colors.white)};
@@ -89,13 +91,31 @@ const FloatingTriangles = styled(Box).attrs({
   padding-right: 1px;
 `
 
+const IconSelected = styled(Box).attrs({
+  bg: 'blue',
+  color: 'white',
+  align: 'center',
+  justify: 'center',
+})`
+  border-radius: 50%;
+  height: 15px;
+  font-size: 5px;
+  width: 15px;
+  opacity: ${p => (p.selected ? 1 : 0)};
+
+  // add top for center icon
+  > * {
+    top: 1px;
+  }
+`
+
 class Select extends PureComponent<Props> {
   static defaultProps = {
     itemToString: (item: Object) => item && item.name,
     keyProp: undefined,
   }
 
-  renderItems = (items: Array<Object>, downshiftProps: Object) => {
+  renderItems = (items: Array<Object>, selectedItem: any, downshiftProps: Object) => {
     const { renderItem, keyProp } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
@@ -104,8 +124,15 @@ class Select extends PureComponent<Props> {
         {items.length ? (
           items.map((item, i) => (
             <ItemWrapper key={keyProp ? item[keyProp] : item.key} {...getItemProps({ item })}>
-              <Item highlighted={i === highlightedIndex}>
-                {renderItem ? renderItem(item) : <span>{item.name_highlight || item.name}</span>}
+              <Item highlighted={i === highlightedIndex} horizontal flow={10}>
+                <Box grow>
+                  {renderItem ? renderItem(item) : <span>{item.name_highlight || item.name}</span>}
+                </Box>
+                <Box>
+                  <IconSelected selected={selectedItem === item}>
+                    <Icon name="check" />
+                  </IconSelected>
+                </Box>
               </Item>
             </ItemWrapper>
           ))
@@ -176,10 +203,10 @@ class Select extends PureComponent<Props> {
                   fuseOptions={fuseOptions}
                   highlight={highlight}
                   renderHighlight={renderHighlight}
-                  render={items => this.renderItems(items, downshiftProps)}
+                  render={items => this.renderItems(items, selectedItem, downshiftProps)}
                 />
               ) : (
-                this.renderItems(items, downshiftProps)
+                this.renderItems(items, selectedItem, downshiftProps)
               ))}
           </Container>
         )}

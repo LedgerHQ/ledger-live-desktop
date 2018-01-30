@@ -44,7 +44,7 @@ injectGlobal`
   em {
     font-style: italic;
   }
-  
+
   ::-webkit-scrollbar {
     background-color: rgba(0, 0, 0, 0);
     width: 6px;

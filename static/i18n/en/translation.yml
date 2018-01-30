@@ -40,3 +40,6 @@ settings:
 
   display:
     language: Language
+
+SelectAccount:
+  placeholder: Select a account
