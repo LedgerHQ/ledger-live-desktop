@@ -21,13 +21,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: Object.entries(getAccounts(state)).map(([, account]: [string, any]) => account),
 })
 
-type Props = {
-  accounts: Array<Account>,
-  onChange?: () => Account | void,
-  value?: Account | null,
-  t: T,
-}
-
 const renderItem = item => (
   <Box horizontal align="center">
     <Box grow>
@@ -43,7 +36,14 @@ const renderItem = item => (
   </Box>
 )
 
-export const SelectAccount = ({ accounts, value, onChange, t }: Props) => (
+type Props = {
+  accounts: Array<Account>,
+  onChange?: () => Account | void,
+  value?: Account | null,
+  t: T,
+}
+
+export const SelectAccount = ({ accounts, onChange, value, t }: Props) => (
   <Select
     value={value && accounts.find(a => value && a.id === value.id)}
     renderSelected={renderItem}

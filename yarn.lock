@@ -2606,7 +2606,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.3:
+core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0, core-js@^2.5.1, core-js@^2.5.3:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.3.tgz#8acc38345824f16d8365b7c9b4259168e8ed603e"
 
@@ -7443,6 +7443,10 @@ react-router@^4.2.0:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
+react-smooth-scrollbar@^8.0.6:
+  version "8.0.6"
+  resolved "https://registry.yarnpkg.com/react-smooth-scrollbar/-/react-smooth-scrollbar-8.0.6.tgz#179072e6a547b3af589ea303c50fd86366275edc"
+
 react-split-pane@^0.1.74:
   version "0.1.74"
   resolved "https://registry.yarnpkg.com/react-split-pane/-/react-split-pane-0.1.74.tgz#cf79fc98b51ab0763fdc778749b810a102b036ca"
@@ -8184,6 +8188,14 @@ slice-ansi@1.0.0:
   dependencies:
     readable-stream "~1.0.31"
 
+smooth-scrollbar@^8.2.5:
+  version "8.2.5"
+  resolved "https://registry.yarnpkg.com/smooth-scrollbar/-/smooth-scrollbar-8.2.5.tgz#676a2595b1aad97fe0835d2425e403b0d9c70eb3"
+  dependencies:
+    core-js "^2.5.1"
+    lodash-es "^4.17.4"
+    tslib "^1.7.1"
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -8825,6 +8837,10 @@ truncate-utf8-bytes@^1.0.0:
   resolved "https://registry.yarnpkg.com/truncate-utf8-bytes/-/truncate-utf8-bytes-1.0.2.tgz#405923909592d56f78a5818434b0b78489ca5f2b"
   dependencies:
     utf8-byte-length "^1.0.1"
+
+tslib@^1.7.1:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
 
 tty-browserify@0.0.0:
   version "0.0.0"

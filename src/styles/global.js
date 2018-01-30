@@ -45,17 +45,22 @@ injectGlobal`
     font-style: italic;
   }
 
-  ::-webkit-scrollbar {
-    background-color: rgba(0, 0, 0, 0);
-    width: 6px;
+  .scrollbar-thumb-y {
+    width: 5px !important;
   }
-  ::-webkit-scrollbar:hover {
-    background-color: rgba(0, 0, 0, 0.09);
+  .scrollbar-thumb-x {
+    height: 5px !important;
   }
-  ::-webkit-scrollbar-thumb:vertical {
-    background: rgba(0, 0, 0, 0.5);
+  .scrollbar-track {
+    background: transparent !important;
+    transition: opacity 0.2s ease-in-out !important;
   }
-  ::-webkit-scrollbar-thumb:vertical:active {
-    background: rgba(0, 0, 0, 0.61);
+  .scrollbar-track-y {
+    right: 2px !important;
+    width: 5px !important;
+  }
+  .scrollbar-track-x {
+    bottom: 2px !important;
+    height: 5px !important;
   }
 `

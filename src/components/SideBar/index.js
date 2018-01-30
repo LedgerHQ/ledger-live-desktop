@@ -17,7 +17,8 @@ import { getAccounts } from 'reducers/accounts'
 import { formatBTC } from 'helpers/format'
 import { rgba } from 'styles/helpers'
 
-import Box, { GrowScroll } from 'components/base/Box'
+import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
 import Item from './Item'
 
 const CapsSubtitle = styled(Box).attrs({
