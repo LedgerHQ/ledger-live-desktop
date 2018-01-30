@@ -34,11 +34,15 @@ class GrowScroll extends PureComponent<Props> {
           const minY = offsetLimit.y.min
 
           if (offset.y > maxY) {
-            this.scrollTo(offset.x, maxY)
+            this.setPosition(offset.x, maxY, {
+              withoutCallbacks: true,
+            })
           }
 
           if (offset.y < minY) {
-            this.scrollTo(offset.x, minY)
+            this.setPosition(offset.x, minY, {
+              withoutCallbacks: true,
+            })
           }
         }
       })
