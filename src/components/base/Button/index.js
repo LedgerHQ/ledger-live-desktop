@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { borderColor, borderWidth, space, fontSize, fontWeight, color } from 'styled-system'
 
+import Box from 'components/base/Box'
 import Icon from 'components/base/Icon'
 
 const Base = styled.button`
@@ -27,7 +28,13 @@ type Props = {
 }
 
 const Button = ({ primary, children, icon, ...props }: Props) => {
-  children = icon ? <Icon name={icon} /> : children
+  children = icon ? (
+    <Box align="center" justify="center">
+      <Icon name={icon} />
+    </Box>
+  ) : (
+    children
+  )
 
   props = {
     ...props,

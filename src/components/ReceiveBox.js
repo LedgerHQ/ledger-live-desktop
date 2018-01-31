@@ -27,9 +27,10 @@ const AddressBox = styled(Box).attrs({
 `
 
 const Action = styled(Box).attrs({
-  flow: 1,
-  flex: 1,
+  align: 'center',
   color: 'mouse',
+  flex: 1,
+  flow: 1,
   fontSize: 0,
 })`
   font-weight: bold;

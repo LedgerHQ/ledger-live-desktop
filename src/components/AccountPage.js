@@ -51,7 +51,7 @@ class AccountPage extends PureComponent<Props> {
           <Box horizontal align="center" justify="flex-end" grow flow={20}>
             <Box>
               <Button primary onClick={() => openModal(MODAL_SEND, { account })}>
-                <Box horizontal flow={2}>
+                <Box horizontal flow={2} align="center">
                   <Box>
                     <Icon name="upload" />
                   </Box>
@@ -61,7 +61,7 @@ class AccountPage extends PureComponent<Props> {
             </Box>
             <Box>
               <Button primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
-                <Box horizontal flow={2}>
+                <Box horizontal flow={2} align="center">
                   <Box>
                     <Icon name="download" />
                   </Box>

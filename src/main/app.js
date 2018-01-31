@@ -78,6 +78,13 @@ const installExtensions = async () => {
   ).catch(console.log) // eslint-disable-line
 }
 
+app.setAsDefaultProtocolClient('ledgerhq')
+
+app.on('open-url', (e, url) => {
+  e.preventDefault()
+  console.log('open url', e, url)
+})
+
 app.on('ready', async () => {
   if (__DEV__) {
     await installExtensions()
