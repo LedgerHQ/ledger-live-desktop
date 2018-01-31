@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 
 import { select, boolean, number } from '@storybook/addon-knobs'
