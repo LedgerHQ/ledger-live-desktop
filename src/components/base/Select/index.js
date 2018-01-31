@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import Downshift from 'downshift'
 import styled from 'styled-components'
 import { space } from 'styled-system'
-import get from 'lodash/get'
 
 import type { Element } from 'react'
 
@@ -18,18 +17,19 @@ import Text from 'components/base/Text'
 import Triangles from './Triangles'
 
 type Props = {
-  items: Array<any>,
-  value?: Object | null,
-  itemToString?: Function,
-  onChange?: Function,
   fuseOptions?: Object,
   highlight?: boolean,
-  searchable?: boolean,
+  items: Array<any>,
+  itemToString?: Function,
+  keyProp?: string,
+  maxHeight?: number,
+  onChange?: Function,
   placeholder?: string,
   renderHighlight?: string => Element<*>,
-  renderSelected?: any => Element<*>,
   renderItem?: (*) => Element<*>,
-  keyProp?: string,
+  renderSelected?: any => Element<*>,
+  searchable?: boolean,
+  value?: Object | null,
 }
 
 const Container = styled(Box).attrs({ relative: true, color: 'steel' })``
@@ -102,24 +102,22 @@ const IconSelected = styled(Box).attrs({
   font-size: 5px;
   width: 15px;
   opacity: ${p => (p.selected ? 1 : 0)};
-
-  // add top for center icon
-  > * {
-    top: 1px;
-  }
 `
 
 class Select extends PureComponent<Props> {
   static defaultProps = {
     itemToString: (item: Object) => item && item.name,
     keyProp: undefined,
+    maxHeight: 300,
   }
 
   _scrollToSelectedItem = true
+  _oldHighlightedIndex = 0
   _useKeyboard = false
+  _children = {}
 
   renderItems = (items: Array<Object>, selectedItem: any, downshiftProps: Object) => {
-    const { renderItem, keyProp } = this.props
+    const { renderItem, maxHeight, keyProp } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
     const selectedItemIndex = items.indexOf(selectedItem)
@@ -128,29 +126,36 @@ class Select extends PureComponent<Props> {
       <Dropdown>
         {items.length ? (
           <GrowScroll
-            maxHeight={300}
+            maxHeight={maxHeight}
             onUpdate={scrollbar => {
-              const { contentEl } = scrollbar
-              const children = get(contentEl, 'children[0].children[0].children', {})
-
-              const currentHighlighted = children[highlightedIndex]
-              const currentSelectedItem = children[selectedItemIndex]
+              const currentHighlighted = this._children[highlightedIndex]
+              const currentSelectedItem = this._children[selectedItemIndex]
 
               if (this._useKeyboard && currentHighlighted) {
                 scrollbar.scrollIntoView(currentHighlighted, {
-                  alignToTop: false,
+                  alignToTop: highlightedIndex < this._oldHighlightedIndex,
+                  offsetTop: -1,
+                  onlyScrollIfNeeded: true,
                 })
               } else if (this._scrollToSelectedItem && currentSelectedItem) {
-                scrollbar.scrollIntoView(currentSelectedItem, {
-                  alignToTop: false,
-                })
+                window.requestAnimationFrame(() =>
+                  scrollbar.scrollIntoView(currentSelectedItem, {
+                    offsetTop: -1,
+                  }),
+                )
 
                 this._scrollToSelectedItem = false
               }
+
+              this._oldHighlightedIndex = highlightedIndex
             }}
           >
             {items.map((item, i) => (
-              <ItemWrapper key={keyProp ? item[keyProp] : item.key} {...getItemProps({ item })}>
+              <ItemWrapper
+                key={keyProp ? item[keyProp] : item.key}
+                innerRef={n => (this._children[i] = n)}
+                {...getItemProps({ item })}
+              >
                 <Item highlighted={i === highlightedIndex} horizontal flow={10}>
                   <Box grow>
                     {renderItem ? (

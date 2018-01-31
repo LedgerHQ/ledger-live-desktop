@@ -14,6 +14,7 @@ import { rgba } from 'styles/helpers'
 import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
 import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
 import Icon from 'components/base/Icon'
 
 type Props = {
@@ -52,8 +53,8 @@ const Container = styled(Box).attrs({
     pointerEvents: p.isVisible ? 'auto' : 'none',
   }),
 })`
-  overflow: scroll;
   position: fixed;
+  top: ${process.platform === 'darwin' ? 40 : 0}px;
   z-index: 20;
 `
 
@@ -126,9 +127,11 @@ export class Modal extends PureComponent<Props> {
         {(m, isVisible) => (
           <Container isVisible={isVisible}>
             <Backdrop op={m.opacity} onClick={preventBackdropClick ? undefined : onClose} />
-            <Wrapper preventSideMargin={preventSideMargin} op={m.opacity} offset={m.y}>
-              {render({ data, onClose })}
-            </Wrapper>
+            <GrowScroll full align="center">
+              <Wrapper preventSideMargin={preventSideMargin} op={m.opacity} offset={m.y}>
+                {render({ data, onClose })}
+              </Wrapper>
+            </GrowScroll>
           </Container>
         )}
       </Mortal>

@@ -1,5 +1,10 @@
 appId: com.electron.ledger
 
+protocols:
+  name: Ledger Wallet Desktop
+  schemes:
+    - ledgerhq
+
 mac:
   category: public.app-category.utilities
 linux:
