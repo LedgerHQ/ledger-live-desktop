@@ -7,13 +7,15 @@ import noop from 'lodash/noop'
 import Box from 'components/base/Box'
 
 type Props = {
-  maxHeight?: number,
   children: any,
+  full: boolean,
+  maxHeight?: number,
   onUpdate: Function,
 }
 
 class GrowScroll extends PureComponent<Props> {
   static defaultProps = {
+    full: false,
     onUpdate: noop,
   }
 
@@ -34,10 +36,19 @@ class GrowScroll extends PureComponent<Props> {
   _scrollbar = undefined
 
   render() {
-    const { onUpdate, children, maxHeight, ...props } = this.props
+    const { onUpdate, children, maxHeight, full, ...props } = this.props
 
     return (
-      <Box grow relative>
+      <Box
+        {...(full
+          ? {
+              sticky: true,
+            }
+          : {
+              grow: true,
+              relative: true,
+            })}
+      >
         <Scrollbar
           damping={1}
           style={{

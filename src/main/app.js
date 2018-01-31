@@ -80,11 +80,6 @@ const installExtensions = async () => {
 
 app.setAsDefaultProtocolClient('ledgerhq')
 
-app.on('open-url', (e, url) => {
-  e.preventDefault()
-  console.log('open url', e, url)
-})
-
 app.on('ready', async () => {
   if (__DEV__) {
     await installExtensions()
