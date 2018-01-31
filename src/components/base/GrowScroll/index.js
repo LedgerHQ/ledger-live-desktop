@@ -7,47 +7,17 @@ import noop from 'lodash/noop'
 import Box from 'components/base/Box'
 
 type Props = {
-  maxHeight?: number | string,
+  maxHeight?: number,
   children: any,
-  offsetLimit: Object,
   onUpdate: Function,
 }
 
 class GrowScroll extends PureComponent<Props> {
   static defaultProps = {
     onUpdate: noop,
-    offsetLimit: {
-      y: {
-        max: -3,
-        min: 3,
-      },
-    },
   }
 
   componentDidMount() {
-    const { offsetLimit } = this.props
-
-    if (this._scrollbar) {
-      this._scrollbar.addListener(function onScroll({ limit, offset }) {
-        if (limit.y > 0) {
-          const maxY = limit.y + offsetLimit.y.max
-          const minY = offsetLimit.y.min
-
-          if (offset.y > maxY) {
-            this.setPosition(offset.x, maxY, {
-              withoutCallbacks: true,
-            })
-          }
-
-          if (offset.y < minY) {
-            this.setPosition(offset.x, minY, {
-              withoutCallbacks: true,
-            })
-          }
-        }
-      })
-    }
-
     this.handleUpdate(this.props)
   }
 

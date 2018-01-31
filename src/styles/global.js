@@ -45,22 +45,13 @@ injectGlobal`
     font-style: italic;
   }
 
-  .scrollbar-thumb-y {
-    width: 5px !important;
-  }
-  .scrollbar-thumb-x {
-    height: 5px !important;
+  .scrollbar-thumb {
+    background: rgba(102, 102, 102, 0.5) !important;
+    padding: 2px;
+    background-clip: content-box !important;
   }
   .scrollbar-track {
     background: transparent !important;
     transition: opacity 0.2s ease-in-out !important;
-  }
-  .scrollbar-track-y {
-    right: 2px !important;
-    width: 5px !important;
-  }
-  .scrollbar-track-x {
-    bottom: 2px !important;
-    height: 5px !important;
   }
 `
