@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
 import { boolean } from '@storybook/addon-knobs'
