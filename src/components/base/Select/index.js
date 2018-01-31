@@ -102,11 +102,6 @@ const IconSelected = styled(Box).attrs({
   font-size: 5px;
   width: 15px;
   opacity: ${p => (p.selected ? 1 : 0)};
-
-  // add top for center icon
-  > * {
-    top: 1px;
-  }
 `
 
 class Select extends PureComponent<Props> {
