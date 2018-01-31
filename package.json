@@ -71,6 +71,7 @@
     "react-i18next": "^7.3.4",
     "react-mortal": "^3.0.1",
     "react-motion": "^0.5.2",
+    "react-qr-reader": "^2.0.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",

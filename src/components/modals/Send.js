@@ -1,23 +1,24 @@
 // @flow
 
 import React, { Fragment, PureComponent } from 'react'
-import styled from 'styled-components'
+import { translate } from 'react-i18next'
 import get from 'lodash/get'
+
+import type { T } from 'types/common'
 
 import { MODAL_SEND } from 'constants'
 
+import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
+import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
+import RecipientAddress from 'components/RecipientAddress'
 import SelectAccount from 'components/SelectAccount'
-
-const Label = styled.label`
-  display: block;
-  text-transform: uppercase;
-`
+import Text from 'components/base/Text'
 
 const Steps = {
-  amount: (props: Object) => (
+  amount: ({ t, ...props }: Object) => (
     <form
       onSubmit={(e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -33,20 +34,33 @@ const Steps = {
         props.onChangeStep('summary')
       }}
     >
-      <div>amount</div>
-      <div>
-        <Label>Account to debit</Label>
-        <SelectAccount onChange={props.onChangeInput('account')} value={props.value.account} />
-      </div>
-      <div>
-        <Label>Recipient address</Label>
-        <Input onChange={props.onChangeInput('address')} value={props.value.address} />
-      </div>
-      <div>
-        <Label>Amount</Label>
-        <Input onChange={props.onChangeInput('amount')} value={props.value.amount} />
-      </div>
-      <Button type="submit">Next</Button>
+      <Box flow={3}>
+        <Text fontSize={4} color="steel">
+          {t('send.title')}
+        </Text>
+        <Box flow={1}>
+          <Label>Account to debit</Label>
+          <SelectAccount onChange={props.onChangeInput('account')} value={props.value.account} />
+        </Box>
+        <Box flow={1}>
+          <Label>Recipient address</Label>
+          <RecipientAddress onChange={props.onChangeInput('address')} value={props.value.address} />
+        </Box>
+        <Box flow={1}>
+          <Label>Amount</Label>
+          <Input onChange={props.onChangeInput('amount')} value={props.value.amount} />
+        </Box>
+        <Box horizontal align="center">
+          <Box grow>
+            <Text>Cancel</Text>
+          </Box>
+          <Box justify="flex-end">
+            <Button type="submit" primary>
+              Next
+            </Button>
+          </Box>
+        </Box>
+      </Box>
     </form>
   ),
   summary: (props: Object) => (
@@ -72,6 +86,10 @@ type State = {
   step: Step,
 }
 
+type Props = {
+  t: T,
+}
+
 const defaultState = {
   inputValue: {
     account: null,
@@ -81,13 +99,14 @@ const defaultState = {
   step: 'amount',
 }
 
-class Send extends PureComponent<{}, State> {
+class Send extends PureComponent<Props, State> {
   state = {
     ...defaultState,
   }
 
   getStepProps(data: any) {
     const { inputValue, step } = this.state
+    const { t } = this.props
 
     const props = (predicate, props) => (predicate ? props : {})
 
@@ -103,6 +122,7 @@ class Send extends PureComponent<{}, State> {
         value: inputValue,
       }),
       onChangeStep: this.handleChangeStep,
+      t,
     }
   }
 
@@ -146,4 +166,4 @@ class Send extends PureComponent<{}, State> {
   }
 }
 
-export default Send
+export default translate()(Send)
