@@ -126,9 +126,14 @@ export class Modal extends PureComponent<Props> {
       >
         {(m, isVisible) => (
           <Container isVisible={isVisible}>
-            <Backdrop op={m.opacity} onClick={preventBackdropClick ? undefined : onClose} />
-            <GrowScroll full align="center">
-              <Wrapper preventSideMargin={preventSideMargin} op={m.opacity} offset={m.y}>
+            <Backdrop op={m.opacity} />
+            <GrowScroll full align="center" onClick={preventBackdropClick ? undefined : onClose}>
+              <Wrapper
+                preventSideMargin={preventSideMargin}
+                op={m.opacity}
+                offset={m.y}
+                onClick={e => e.stopPropagation()}
+              >
                 {render({ data, onClose })}
               </Wrapper>
             </GrowScroll>
