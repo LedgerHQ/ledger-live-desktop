@@ -18,7 +18,7 @@ const IconQrCode = ({ onClick }: { onClick: Function }) => (
 const InputAddress = styled(Input).attrs({
   type: 'text',
 })`
-  padding-right: ${p => p.withQrCode && 55};
+  padding-right: ${p => p.withQrCode && '55px'};
 `
 
 const WrapperQrCode = styled(Box)`
