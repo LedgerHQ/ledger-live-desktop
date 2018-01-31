@@ -10,6 +10,7 @@ import CopyToClipboard from 'components/base/CopyToClipboard'
 import Text from 'components/base/Text'
 
 type Props = {
+  amount?: string,
   address: string,
 }
 
@@ -41,10 +42,10 @@ const Action = styled(Box).attrs({
   }
 `
 
-const ReceiveBox = ({ address }: Props) => (
+const ReceiveBox = ({ amount, address }: Props) => (
   <Box flow={3}>
     <Box align="center">
-      <QRCode size={150} data={address} />
+      <QRCode size={150} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />
     </Box>
     <Box align="center" flow={2}>
       <Text fontSize={1}>{'Current address'}</Text>
@@ -71,5 +72,9 @@ const ReceiveBox = ({ address }: Props) => (
     </Box>
   </Box>
 )
+
+ReceiveBox.defaultProps = {
+  amount: undefined,
+}
 
 export default ReceiveBox
