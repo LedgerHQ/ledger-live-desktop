@@ -26,6 +26,13 @@ import Select from 'components/base/Select'
 import CreateAccount from './CreateAccount'
 import ImportAccounts from './ImportAccounts'
 
+const currencies = [
+  {
+    key: 'btc',
+    name: 'Bitcoin',
+  },
+]
+
 const Steps = {
   chooseWallet: (props: Object) => (
     <form onSubmit={props.onSubmit}>
@@ -36,12 +43,8 @@ const Steps = {
             placeholder="Choose a wallet..."
             onChange={item => props.onChangeInput('wallet')(item.key)}
             renderSelected={item => item.name}
-            items={[
-              {
-                key: 'btc',
-                name: 'Bitcoin',
-              },
-            ]}
+            items={currencies}
+            value={currencies.find(c => c.key === props.value.wallet)}
           />
         </Box>
         <Box horizontal justify="flex-end">
