@@ -12,7 +12,10 @@ const stories = storiesOf('Tabs', module)
 
 stories.add('basic', () => (
   <Tabs
-    index={number('index', 0)}
+    index={number('index', 0, {
+      min: 0,
+      max: 1,
+    })}
     onTabClick={action('onTabClick')}
     items={[
       {

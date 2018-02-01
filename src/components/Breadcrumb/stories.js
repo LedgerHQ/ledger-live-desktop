@@ -10,7 +10,10 @@ const stories = storiesOf('Breadcrumb', module)
 
 stories.add('basic', () => (
   <Breadcrumb
-    currentStep={number('currentStep', 1)}
+    currentStep={number('currentStep', 1, {
+      min: 1,
+      max: 4,
+    })}
     items={[
       { label: 'Amount' },
       { label: 'Summary' },
