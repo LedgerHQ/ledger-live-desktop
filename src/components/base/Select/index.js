@@ -67,13 +67,14 @@ const ItemWrapper = styled(Box)`
 const Dropdown = styled(Box).attrs({
   mt: 1,
 })`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  border: 1px solid ${p => p.theme.colors.mouse};
   border-radius: 3px;
+  border: 1px solid ${p => p.theme.colors.mouse};
   box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1;
 `
 
 const FloatingTriangles = styled(Box).attrs({
