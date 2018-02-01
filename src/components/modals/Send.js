@@ -2,7 +2,6 @@
 
 import React, { Fragment, PureComponent } from 'react'
 import { translate } from 'react-i18next'
-import styled from 'styled-components'
 import get from 'lodash/get'
 
 import type { T } from 'types/common'
@@ -14,56 +13,10 @@ import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
+import Breadcrumb from 'components/Breadcrumb'
 import RecipientAddress from 'components/RecipientAddress'
 import SelectAccount from 'components/SelectAccount'
 import Text from 'components/base/Text'
-
-const BreadcrumbWrapper = styled(Box).attrs({
-  horizontal: true,
-  align: 'center',
-  flow: 20,
-  relative: true,
-})``
-const BreadcrumbStep = styled(({ start, active, end, ...props }) => (
-  <Box start={start} end={end} active={active} {...props} />
-)).attrs({
-  color: p => (p.active ? 'blue' : 'mouse'),
-  align: 'center',
-  flow: 5,
-  grow: p => !p.start && !p.end,
-  ml: p => p.end && 20,
-  mr: p => p.start && 20,
-})`
-  &:before {
-    content: ' ';
-    display: block;
-    height: 2px;
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    background: ${p => p.theme.colors.pearl};
-    margin-top: 8px;
-  }
-`
-const BreadcrumbNumberWrapper = styled(Box).attrs({
-  bg: 'white',
-  px: 3,
-  relative: true,
-})`
-  z-index: 1;
-`
-const BreadcrumbNumber = styled(Box).attrs({
-  color: p => (p.active ? 'white' : 'mouse'),
-  bg: p => (p.active ? 'blue' : 'pearl'),
-  align: 'center',
-  justify: 'center',
-})`
-  border-radius: 50%;
-  box-shadow: ${p => p.active && `0 0 0 4px ${p.theme.colors.cream}`};
-  font-size: 9px;
-  height: 20px;
-  width: 20px;
-`
 
 const Steps = {
   '1': ({ t, ...props }: Object) => (
@@ -223,28 +176,5 @@ class Send extends PureComponent<Props, State> {
     )
   }
 }
-
-const Breadcrumb = ({ items, currentStep }: Object) => (
-  <BreadcrumbWrapper>
-    {items.map((item, i) => {
-      const active = i < currentStep
-      const start = i === 0
-      const end = i + 1 === items.length
-      return (
-        <BreadcrumbStep
-          key={i} // eslint-disable-line react/no-array-index-key
-          start={start}
-          end={end}
-          active={active}
-        >
-          <BreadcrumbNumberWrapper>
-            <BreadcrumbNumber active={active}>{i + 1}</BreadcrumbNumber>
-          </BreadcrumbNumberWrapper>
-          <Box fontSize={0}>{item.label}</Box>
-        </BreadcrumbStep>
-      )
-    })}
-  </BreadcrumbWrapper>
-)
 
 export default translate()(Send)
