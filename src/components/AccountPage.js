@@ -70,7 +70,7 @@ class AccountPage extends PureComponent<Props> {
               </Button>
             </Box>
             <Box>
-              <Button icon="sliders-h" />
+              <Button icon="sliders-h" color="white" />
             </Box>
           </Box>
         </Box>

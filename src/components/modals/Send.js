@@ -13,25 +13,20 @@ import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
+import Breadcrumb from 'components/Breadcrumb'
 import RecipientAddress from 'components/RecipientAddress'
 import SelectAccount from 'components/SelectAccount'
 import Text from 'components/base/Text'
 
 const Steps = {
-  amount: ({ t, ...props }: Object) => (
+  '1': ({ t, ...props }: Object) => (
     <form
       onSubmit={(e: SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (
-          !props.value.account ||
-          props.value.address.trim() === '' ||
-          props.value.amount.trim() === ''
-        ) {
-          return
+        if (props.canSubmit) {
+          props.onChangeStep('2')
         }
-
-        props.onChangeStep('summary')
       }}
     >
       <Box flow={3}>
@@ -55,7 +50,7 @@ const Steps = {
             <Text>Cancel</Text>
           </Box>
           <Box justify="flex-end">
-            <Button type="submit" primary>
+            <Button type="submit" primary disabled={!props.canSubmit}>
               Next
             </Button>
           </Box>
@@ -63,7 +58,7 @@ const Steps = {
       </Box>
     </form>
   ),
-  summary: (props: Object) => (
+  '2': (props: Object) => (
     <div>
       <div>summary</div>
       <div>{props.value.amount}</div>
@@ -79,7 +74,7 @@ type InputValue = {
   amount: string,
 }
 
-type Step = 'amount' | 'summary'
+type Step = '1' | '2'
 
 type State = {
   inputValue: InputValue,
@@ -96,7 +91,7 @@ const defaultState = {
     address: '',
     amount: '',
   },
-  step: 'amount',
+  step: '1',
 }
 
 class Send extends PureComponent<Props, State> {
@@ -108,18 +103,24 @@ class Send extends PureComponent<Props, State> {
     const { inputValue, step } = this.state
     const { t } = this.props
 
-    const props = (predicate, props) => (predicate ? props : {})
+    const props = (predicate, props, defaults = {}) => (predicate ? props : defaults)
+
+    const account = inputValue.account || get(data, 'account')
 
     return {
-      ...props(step === 'amount', {
+      ...props(step === '1', {
+        canSubmit: account && inputValue.address.trim() !== '' && inputValue.amount.trim() !== '',
         onChangeInput: this.handleChangeInput,
         value: {
           ...inputValue,
-          account: inputValue.account || get(data, 'account'),
+          account,
         },
       }),
-      ...props(step === 'summary', {
-        value: inputValue,
+      ...props(step === '2', {
+        value: {
+          ...inputValue,
+          account,
+        },
       }),
       onChangeStep: this.handleChangeStep,
       t,
@@ -155,7 +156,17 @@ class Send extends PureComponent<Props, State> {
         onClose={this.handleClose}
         render={({ data, onClose }) => (
           <Fragment>
-            <ModalBody>{step}</ModalBody>
+            <ModalBody p={2}>
+              <Breadcrumb
+                currentStep={step}
+                items={[
+                  { label: 'Amount' },
+                  { label: 'Summary' },
+                  { label: 'Secure validation' },
+                  { label: 'Confirmation' },
+                ]}
+              />
+            </ModalBody>
             <ModalBody onClose={onClose}>
               <Step {...this.getStepProps(data)} />
             </ModalBody>

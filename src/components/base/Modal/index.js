@@ -85,7 +85,6 @@ const Wrapper = styled(Box).attrs({
 
 const Body = styled(Box).attrs({
   bg: p => p.theme.colors.white,
-  p: 3,
   relative: true,
 })`
   border-radius: 5px;
@@ -158,7 +157,9 @@ export const ModalBody = ({
         <Icon fontSize={3} name="times" />
       </CloseContainer>
     )}
-    <Box {...props}>{children}</Box>
+    <Box p={3} {...props}>
+      {children}
+    </Box>
   </Body>
 )
 
