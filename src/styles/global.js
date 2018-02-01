@@ -46,12 +46,13 @@ injectGlobal`
   }
 
   .scrollbar-thumb {
-    background: rgba(102, 102, 102, 0.5) !important;
+    background: rgb(102, 102, 102) !important;
     padding: 2px;
     background-clip: content-box !important;
   }
   .scrollbar-track {
     background: transparent !important;
     transition: opacity 0.2s ease-in-out !important;
+    z-index: 20 !important;
   }
 `

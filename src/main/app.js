@@ -14,7 +14,6 @@ function createMainWindow() {
       ? {
           frame: false,
           titleBarStyle: 'hiddenInset',
-          vibrancy: 'ultra-dark', // https://github.com/electron/electron/issues/10521
         }
       : {}),
     center: true,
@@ -23,6 +22,9 @@ function createMainWindow() {
     width: MIN_WIDTH,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
+    webPreferences: {
+      blinkFeatures: 'CSSBackdropFilter',
+    },
   }
 
   const window = new BrowserWindow(windowOptions)

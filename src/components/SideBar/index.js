@@ -15,7 +15,6 @@ import { openModal } from 'reducers/modals'
 import { getAccounts } from 'reducers/accounts'
 
 import { formatBTC } from 'helpers/format'
-import { rgba } from 'styles/helpers'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
@@ -34,7 +33,7 @@ const CapsSubtitle = styled(Box).attrs({
 const Container = styled(Box).attrs({
   noShrink: true,
 })`
-  background-color: ${p => rgba(p.theme.colors[p.bg], process.platform === 'darwin' ? 0.4 : 1)};
+  margin-top: 40px;
   width: ${p => p.theme.sizes.sideBarWidth}px;
 `
 
@@ -68,8 +67,8 @@ class SideBar extends PureComponent<Props> {
     const { t, accounts, openModal } = this.props
 
     return (
-      <Container bg="night">
-        <GrowScroll flow={4} py={4}>
+      <Container bg="white">
+        <GrowScroll flow={4} py={3}>
           <Box flow={2}>
             <CapsSubtitle>{t('sidebar.menu')}</CapsSubtitle>
             <div>
