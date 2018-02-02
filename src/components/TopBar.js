@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
 
 import type { MapStateToProps, MapDispatchToProps } from 'react-redux'
@@ -15,6 +16,34 @@ import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
 import Box from 'components/base/Box'
+
+const Container = styled(Box).attrs({
+  borderColor: '#e2e2e2',
+  borderWidth: 1,
+  borderBottom: true,
+  noShrink: true,
+  px: 3,
+  align: 'center',
+  horizontal: true,
+})`
+  height: 60px;
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 20;
+`
+
+const Filter = styled.div`
+  background: ${p => p.theme.colors.cream};
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+`
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   hasAccounts: Object.keys(getAccounts(state)).length > 0,
@@ -100,7 +129,7 @@ class TopBar extends PureComponent<Props, State> {
     const { sync } = this.state
 
     return (
-      <Box bg="white" px={2} noShrink style={{ height: 60, zIndex: 20 }} align="center" horizontal>
+      <Container>
         <Box grow>
           {hasAccounts &&
             (sync.progress === true
@@ -111,7 +140,8 @@ class TopBar extends PureComponent<Props, State> {
           {hasPassword && <LockApplication onLock={this.handleLock} />}
           <CountDevices count={devices.length} />
         </Box>
-      </Box>
+        <Filter />
+      </Container>
     )
   }
 }

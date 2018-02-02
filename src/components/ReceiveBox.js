@@ -20,10 +20,11 @@ const AddressBox = styled(Box).attrs({
   bg: 'cream',
   p: 2,
 })`
-  text-align: center;
-  word-break: break-all;
   border-radius: 3px;
+  cursor: text;
+  text-align: center;
   user-select: text;
+  word-break: break-all;
 `
 
 const Action = styled(Box).attrs({

@@ -30,12 +30,11 @@ const mapDispatchToProps = {
 const Container = styled(Box).attrs({
   horizontal: true,
   align: 'center',
-  color: 'lead',
   p: 2,
   flow: 2,
 })`
   cursor: pointer;
-  color: ${p => (p.isActive ? p.theme.colors.white : '')};
+  color: ${p => (p.isActive ? '#1d2027' : '#b8b8b8')};
   background: ${p => (p.isActive ? 'rgba(255, 255, 255, 0.05)' : '')};
   box-shadow: ${p =>
     p.isActive ? `${p.theme.colors.blue} 4px 0 0 inset` : `${p.theme.colors.blue} 0 0 0 inset`};
@@ -71,9 +70,7 @@ function Item({ children, desc, icon, linkTo, push, location, modal, openModal }
     >
       {icon && <Icon fontSize={3} color={isActive ? 'blue' : void 0} name={icon} />}
       <div>
-        <Text fontWeight="bold" fontSize={1}>
-          {children}
-        </Text>
+        <Text fontSize={1}>{children}</Text>
         {desc && (
           <Box color="steel" fontSize={0}>
             {desc}

@@ -46,7 +46,7 @@ export async function getAccount({
   hdnode,
   segwit,
   network,
-  asyncDelay = 100,
+  asyncDelay = 500,
 }: {
   allAddresses?: Array<string>,
   currentIndex?: number,

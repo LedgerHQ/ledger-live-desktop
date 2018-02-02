@@ -31,19 +31,17 @@ class Wrapper extends Component<{}> {
                 <ModalComponent key={name} />
               ))}
 
-              <Box grow horizontal>
+              <Box grow horizontal bg="white">
                 <SideBar />
 
-                <Box shrink grow bg="cream" color="grey">
+                <Box shrink grow bg="cream" color="grey" relative>
                   <TopBar />
-                  <Box grow relative>
-                    {__PROD__ && <UpdateNotifier />}
-                    <GrowScroll p={4}>
-                      <Route path="/" exact component={DashboardPage} />
-                      <Route path="/settings" component={SettingsPage} />
-                      <Route path="/account/:id" component={AccountPage} />
-                    </GrowScroll>
-                  </Box>
+                  {__PROD__ && <UpdateNotifier />}
+                  <GrowScroll p={3} style={{ paddingTop: 80 }}>
+                    <Route path="/" exact component={DashboardPage} />
+                    <Route path="/settings" component={SettingsPage} />
+                    <Route path="/account/:id" component={AccountPage} />
+                  </GrowScroll>
                 </Box>
               </Box>
             </Fragment>

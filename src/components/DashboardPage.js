@@ -15,7 +15,7 @@ import type { Accounts, T } from 'types/common'
 import { formatBTC } from 'helpers/format'
 
 import { openModal } from 'reducers/modals'
-import { getTotalBalance, getAccounts } from 'reducers/accounts'
+import { getTotalBalance, getVisibleAccounts } from 'reducers/accounts'
 
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -23,7 +23,7 @@ import Select from 'components/base/Select'
 import Tabs from 'components/base/Tabs'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  accounts: getAccounts(state),
+  accounts: getVisibleAccounts(state),
   totalBalance: getTotalBalance(state),
 })
 

@@ -14,6 +14,12 @@ export const addAccount: AddAccount = payload => ({
   payload,
 })
 
+export type EditAccount = Account => { type: string, payload: Account }
+export const editAccount: AddAccount = payload => ({
+  type: 'DB:EDIT_ACCOUNT',
+  payload,
+})
+
 type FetchAccounts = () => { type: string }
 export const fetchAccounts: FetchAccounts = () => ({
   type: 'FETCH_ACCOUNTS',
