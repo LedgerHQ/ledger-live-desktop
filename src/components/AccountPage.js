@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
-import { MODAL_SEND, MODAL_RECEIVE } from 'constants'
+import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'constants'
 
 import type { MapStateToProps } from 'react-redux'
 import type { T, Account, AccountData } from 'types/common'
@@ -46,7 +46,7 @@ class AccountPage extends PureComponent<Props> {
       <Box flow={3}>
         <Box horizontal>
           <Box>
-            <Text fontSize={4}>{`${account.name} account`}</Text>
+            <Text fontSize={4}>{account.name}</Text>
           </Box>
           <Box horizontal align="center" justify="flex-end" grow flow={20}>
             <Box>
@@ -70,7 +70,11 @@ class AccountPage extends PureComponent<Props> {
               </Button>
             </Box>
             <Box>
-              <Button icon="sliders-h" color="white" />
+              <Button
+                icon="sliders-h"
+                color="mouse"
+                onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
+              />
             </Box>
           </Box>
         </Box>

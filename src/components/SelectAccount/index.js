@@ -11,14 +11,14 @@ import type { T, Account } from 'types/common'
 
 import { formatBTC } from 'helpers/format'
 
-import { getAccounts } from 'reducers/accounts'
+import { getVisibleAccounts } from 'reducers/accounts'
 
 import Select from 'components/base/Select'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  accounts: Object.entries(getAccounts(state)).map(([, account]: [string, any]) => account),
+  accounts: Object.entries(getVisibleAccounts(state)).map(([, account]: [string, any]) => account),
 })
 
 const renderItem = item => (

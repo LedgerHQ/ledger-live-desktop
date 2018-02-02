@@ -10,11 +10,9 @@ const stories = storiesOf('Modal', module)
 
 stories.add('basic', () => {
   const isOpened = boolean('isOpened', true)
-  const preventSideMargin = boolean('preventSideMargin', true)
   return (
     <Modal
       isOpened={isOpened}
-      preventSideMargin={preventSideMargin}
       render={({ onClose }) => (
         <Fragment>
           <ModalBody>Hey!</ModalBody>

@@ -27,6 +27,7 @@ export type AccountData = {
 
 export type Account = {
   id: string,
+  archived?: boolean,
   name: string,
   type: string,
   data?: AccountData,

@@ -54,6 +54,7 @@ function getProps({ disabled, icon, primary }: Object) {
         withShadow: true,
       },
       {
+        bg: 'transparent',
         borderColor: 'mouse',
         borderWidth: 1,
       },

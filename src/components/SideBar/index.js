@@ -12,12 +12,13 @@ import type { MapStateToProps } from 'react-redux'
 import type { Accounts, T } from 'types/common'
 
 import { openModal } from 'reducers/modals'
-import { getAccounts } from 'reducers/accounts'
+import { getVisibleAccounts } from 'reducers/accounts'
 
 import { formatBTC } from 'helpers/format'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
+import Icon from 'components/base/Icon'
 import Item from './Item'
 
 const CapsSubtitle = styled(Box).attrs({
@@ -33,19 +34,7 @@ const CapsSubtitle = styled(Box).attrs({
 const Container = styled(Box).attrs({
   noShrink: true,
 })`
-  margin-top: 40px;
   width: ${p => p.theme.sizes.sideBarWidth}px;
-`
-
-const BtnAddAccount = styled(Box).attrs({
-  align: 'center',
-  color: 'steel',
-})`
-  border-radius: 5px;
-  border: 1px dashed ${p => p.theme.colors.steel};
-  cursor: pointer;
-  margin: 30px 30px 0 30px;
-  padding: 5px;
 `
 
 type Props = {
@@ -55,7 +44,7 @@ type Props = {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  accounts: getAccounts(state),
+  accounts: getVisibleAccounts(state),
 })
 
 const mapDispatchToProps = {
@@ -68,7 +57,7 @@ class SideBar extends PureComponent<Props> {
 
     return (
       <Container bg="white">
-        <GrowScroll flow={4} py={3}>
+        <Box flow={4} pt={4} grow>
           <Box flow={2}>
             <CapsSubtitle>{t('sidebar.menu')}</CapsSubtitle>
             <div>
@@ -86,20 +75,26 @@ class SideBar extends PureComponent<Props> {
               </Item>
             </div>
           </Box>
-          <Box flow={2}>
-            <CapsSubtitle>{t('sidebar.accounts')}</CapsSubtitle>
-            <div>
+          <Box flow={2} grow>
+            <CapsSubtitle horizontal align="center">
+              <Box grow>{t('sidebar.accounts')}</Box>
+              <Box>
+                <Icon
+                  name="plus-circle"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => openModal(MODAL_ADD_ACCOUNT)}
+                />
+              </Box>
+            </CapsSubtitle>
+            <GrowScroll pb={2}>
               {Object.entries(accounts).map(([id, account]: [string, any]) => (
                 <Item linkTo={`/account/${id}`} desc={formatBTC(account.data.balance)} key={id}>
                   {account.name}
                 </Item>
               ))}
-            </div>
+            </GrowScroll>
           </Box>
-          <BtnAddAccount onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
-            {t('addAccount.title')}
-          </BtnAddAccount>
-        </GrowScroll>
+        </Box>
       </Container>
     )
   }

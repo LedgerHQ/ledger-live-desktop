@@ -33,6 +33,13 @@ const handlers: Object = {
     ...state,
     [account.id]: getAccount(account),
   }),
+  EDIT_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => ({
+    ...state,
+    [account.id]: {
+      ...state[account.id],
+      ...getAccount(account),
+    },
+  }),
   FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => accounts,
   SET_ACCOUNT_DATA: (
     state: AccountsState,
@@ -81,6 +88,19 @@ export function getTotalBalance(state: { accounts: AccountsState }) {
 export function getAccounts(state: { accounts: AccountsState }) {
   return Object.keys(state.accounts).reduce((result, key) => {
     result[key] = getAccount(state.accounts[key])
+    return result
+  }, {})
+}
+
+export function getVisibleAccounts(state: { accounts: AccountsState }) {
+  const accounts = getAccounts(state)
+  return Object.keys(accounts).reduce((result, key) => {
+    const account = accounts[key]
+
+    if (account.archived !== true) {
+      result[key] = account
+    }
+
     return result
   }, {})
 }

@@ -14,21 +14,17 @@ injectGlobal`
     font: inherit;
     color: inherit;
     user-select: none;
-    cursor: inherit;
     min-width: 0;
 
     // it will surely make problem in the future... to be inspected.
     flex-shrink: 0;
   }
 
-  html {
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-  }
-
   body {
-    line-height: 1.5;
-    font-size: 16px;
+    cursor: default;
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   #app {

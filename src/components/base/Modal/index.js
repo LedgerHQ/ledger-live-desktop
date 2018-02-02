@@ -21,7 +21,6 @@ type Props = {
   isOpened?: boolean,
   onClose: Function,
   preventBackdropClick?: boolean,
-  preventSideMargin?: boolean,
   render: Function,
   data?: any,
 }
@@ -54,7 +53,6 @@ const Container = styled(Box).attrs({
   }),
 })`
   position: fixed;
-  top: ${process.platform === 'darwin' ? 40 : 0}px;
   z-index: 20;
 `
 
@@ -78,7 +76,6 @@ const Wrapper = styled(Box).attrs({
     transform: `translate3d(0, ${p.offset}px, 0)`,
   }),
 })`
-  margin-left: ${p => (p.preventSideMargin ? 0 : p.theme.sizes.sideBarWidth)}px;
   width: 570px;
   z-index: 2;
 `
@@ -108,12 +105,11 @@ export class Modal extends PureComponent<Props> {
   static defaultProps = {
     onClose: noop,
     preventBackdropClick: false,
-    preventSideMargin: false,
     isOpened: false,
   }
 
   render() {
-    const { preventBackdropClick, preventSideMargin, isOpened, onClose, render, data } = this.props
+    const { preventBackdropClick, isOpened, onClose, render, data } = this.props
     return (
       <Mortal
         isOpened={isOpened}
@@ -127,12 +123,7 @@ export class Modal extends PureComponent<Props> {
           <Container isVisible={isVisible}>
             <Backdrop op={m.opacity} />
             <GrowScroll full align="center" onClick={preventBackdropClick ? undefined : onClose}>
-              <Wrapper
-                preventSideMargin={preventSideMargin}
-                op={m.opacity}
-                offset={m.y}
-                onClick={e => e.stopPropagation()}
-              >
+              <Wrapper op={m.opacity} offset={m.y} onClick={e => e.stopPropagation()}>
                 {render({ data, onClose })}
               </Wrapper>
             </GrowScroll>

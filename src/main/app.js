@@ -22,9 +22,6 @@ function createMainWindow() {
     width: MIN_WIDTH,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
-    webPreferences: {
-      blinkFeatures: 'CSSBackdropFilter',
-    },
   }
 
   const window = new BrowserWindow(windowOptions)

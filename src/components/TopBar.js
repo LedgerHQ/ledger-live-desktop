@@ -36,13 +36,12 @@ const Container = styled(Box).attrs({
 `
 
 const Filter = styled.div`
+  background: ${p => p.theme.colors.cream};
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  margin: -300px;
   bottom: 0;
-  backdrop-filter: blur(20px);
   z-index: -1;
 `
 
@@ -131,7 +130,6 @@ class TopBar extends PureComponent<Props, State> {
 
     return (
       <Container>
-        <Filter />
         <Box grow>
           {hasAccounts &&
             (sync.progress === true
@@ -142,6 +140,7 @@ class TopBar extends PureComponent<Props, State> {
           {hasPassword && <LockApplication onLock={this.handleLock} />}
           <CountDevices count={devices.length} />
         </Box>
+        <Filter />
       </Container>
     )
   }
