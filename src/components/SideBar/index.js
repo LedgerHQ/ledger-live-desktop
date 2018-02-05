@@ -17,16 +17,17 @@ import { getVisibleAccounts } from 'reducers/accounts'
 
 import { formatBTC } from 'helpers/format'
 
-import Box from 'components/base/Box'
+import Box, { Tabbable } from 'components/base/Box'
+import Bar from 'components/base/Bar'
 import GrowScroll from 'components/base/GrowScroll'
 import Icon from 'components/base/Icon'
 import Text from 'components/base/Text'
 import Item from './Item'
 
 const CapsSubtitle = styled(Box).attrs({
-  px: 2,
+  px: 3,
   fontSize: 0,
-  color: 'shark',
+  color: 'grey',
 })`
   cursor: default;
   text-transform: uppercase;
@@ -44,6 +45,21 @@ const Connected = styled(Box).attrs({
   border-radius: 50%;
   height: 10px;
   width: 10px;
+`
+
+const PlusBtn = styled(Tabbable).attrs({
+  p: 1,
+  m: -1,
+})`
+  cursor: pointer;
+  outline: none;
+  &:hover,
+  &:focus {
+    background: ${p => p.theme.colors.cream};
+  }
+  &:active {
+    background: ${p => p.theme.colors.argile};
+  }
 `
 
 type Props = {
@@ -71,7 +87,7 @@ class SideBar extends PureComponent<Props> {
         <Box flow={3} pt={4} grow>
           <Box flow={2}>
             <CapsSubtitle>{t('sidebar.menu')}</CapsSubtitle>
-            <div>
+            <Box px={2} flow={1}>
               <Item icon="chart-bar" linkTo="/">
                 {t('dashboard.title')}
               </Item>
@@ -84,22 +100,24 @@ class SideBar extends PureComponent<Props> {
               <Item icon="cog" linkTo="/settings">
                 {t('settings.title')}
               </Item>
-            </div>
+            </Box>
           </Box>
+          <Bar color="cream" mx={3} size={2} />
           <Box flow={2} grow>
             <CapsSubtitle horizontal align="center">
               <Box grow>{t('sidebar.accounts')}</Box>
-              <Box>
-                <Icon
-                  name="plus-circle"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => openModal(MODAL_ADD_ACCOUNT)}
-                />
-              </Box>
+              <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
+                <Icon name="plus-circle" />
+              </PlusBtn>
             </CapsSubtitle>
-            <GrowScroll pb={2}>
+            <GrowScroll pb={2} px={2} flow={1}>
               {Object.entries(accounts).map(([id, account]: [string, any]) => (
-                <Item linkTo={`/account/${id}`} desc={formatBTC(account.data.balance)} key={id}>
+                <Item
+                  linkTo={`/account/${id}`}
+                  desc={formatBTC(account.data.balance)}
+                  key={id}
+                  icon={{ iconName: 'btc', prefix: 'fab' }}
+                >
                   {account.name}
                 </Item>
               ))}

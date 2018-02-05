@@ -3,8 +3,10 @@
 /* eslint-disable no-unused-expressions */
 
 import { injectGlobal } from 'styled-components'
+
 import '@fortawesome/fontawesome-free-solid'
 import '@fortawesome/fontawesome-free-regular'
+import '@fortawesome/fontawesome-free-brands'
 
 injectGlobal`
   * {

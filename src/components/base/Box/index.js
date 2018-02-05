@@ -83,20 +83,34 @@ export const GrowScroll = (props: *) => (
   </Box>
 )
 
-export class Tabbable extends PureComponent<any> {
+type TabbableState = {
+  isFocused: boolean,
+}
+
+export class Tabbable extends PureComponent<any, TabbableState> {
+  state = {
+    isFocused: false,
+  }
+
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeydown)
   }
+
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeydown)
   }
+
+  handleFocus = () => this.setState({ isFocused: true })
+  handleBlur = () => this.setState({ isFocused: false })
+
   handleKeydown = (e: SyntheticKeyboardEvent<any>) => {
-    if (e.which === 13 && this.props.onClick) {
+    if (e.which === 13 && this.state.isFocused && this.props.onClick) {
       this.props.onClick(e)
     }
   }
+
   render() {
-    return <Box tabIndex={0} {...this.props} />
+    return <Box tabIndex={0} onFocus={this.handleFocus} onBlur={this.handleBlur} {...this.props} />
   }
 }
 
