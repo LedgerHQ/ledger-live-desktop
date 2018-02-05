@@ -47,7 +47,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       [key]: value,
     })
 
-  handleClose = () =>
+  handleHide = () =>
     this.setState({
       ...defaultState,
     })
@@ -59,7 +59,7 @@ class ReceiveModal extends PureComponent<Props, State> {
     return (
       <Modal
         name={MODAL_RECEIVE}
-        onClose={this.handleClose}
+        onHide={this.handleHide}
         render={({ data, onClose }) => {
           const account = this.getAccount(data)
           return (

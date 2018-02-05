@@ -82,18 +82,23 @@ class AccountPage extends PureComponent<Props> {
           <Fragment>
             <Box horizontal flow={3}>
               <Box grow>
-                <Card title="Balance" style={{ height: 435 }} align="center" justify="center">
+                <Card
+                  title={t('AccountPage.balance')}
+                  style={{ height: 435 }}
+                  align="center"
+                  justify="center"
+                >
                   <Text fontSize={5}>{formatBTC(accountData.balance)}</Text>
                 </Card>
               </Box>
 
               <Box style={{ width: 300 }}>
-                <Card title="Receive" flow={3}>
+                <Card title={t('AccountPage.receive')} flow={3}>
                   <ReceiveBox address={accountData.address} />
                 </Card>
               </Box>
             </Box>
-            <Card title="Last operations">
+            <Card title={t('AccountPage.lastOperations')}>
               <TransactionsList transactions={accountData.transactions} />
             </Card>
           </Fragment>

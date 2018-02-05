@@ -1,6 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { translate } from 'react-i18next'
+import { compose } from 'redux'
 import { Motion, spring } from 'react-motion'
 import { connect } from 'react-redux'
 import type { MapStateToProps } from 'react-redux'
@@ -14,7 +16,10 @@ import type { UpdateStatus } from 'reducers/update'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
+import type { T } from 'types/common'
+
 type Props = {
+  t: T,
   updateStatus: UpdateStatus,
 }
 
@@ -40,7 +45,7 @@ const Container = styled(Box).attrs({
 
 class UpdateNotifier extends PureComponent<Props> {
   renderStatus() {
-    const { updateStatus } = this.props
+    const { updateStatus, t } = this.props
     switch (updateStatus) {
       case 'idle':
       case 'checking':
@@ -52,12 +57,12 @@ class UpdateNotifier extends PureComponent<Props> {
       case 'downloaded':
         return (
           <Box horizontal flow={2}>
-            <Text fontWeight="bold">{'A new version is ready to be installed.'}</Text>
+            <Text fontWeight="bold">{t('update.newVersionReady')}</Text>
             <Text
               style={{ cursor: 'pointer' }}
               onClick={() => sendEvent('msg', 'updater.quitAndInstall')}
             >
-              {'Re-launch app now'}
+              {t('update.relaunch')}
             </Text>
           </Box>
         )
@@ -82,4 +87,4 @@ class UpdateNotifier extends PureComponent<Props> {
   }
 }
 
-export default connect(mapStateToProps, null)(UpdateNotifier)
+export default compose(connect(mapStateToProps, null), translate())(UpdateNotifier)

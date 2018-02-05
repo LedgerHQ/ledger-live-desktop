@@ -2,10 +2,12 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { translate } from 'react-i18next'
 import bcrypt from 'bcryptjs'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Settings, Accounts } from 'types/common'
+import type { Settings, Accounts, T } from 'types/common'
 
 import get from 'lodash/get'
 
@@ -24,6 +26,7 @@ type InputValue = {
 }
 
 type Props = {
+  t: T,
   accounts: Accounts,
   fetchAccounts: Function,
   isLocked: boolean,
@@ -108,7 +111,7 @@ class IsUnlocked extends PureComponent<Props, State> {
 
   render() {
     const { inputValue } = this.state
-    const { isLocked, render } = this.props
+    const { isLocked, render, t } = this.props
 
     if (isLocked) {
       return (
@@ -118,7 +121,7 @@ class IsUnlocked extends PureComponent<Props, State> {
               <Input
                 autoFocus
                 innerRef={(n: any) => (this._input = n)}
-                placeholder="Password"
+                placeholder={t('IsUnlocked.password')}
                 type="password"
                 onChange={this.handleChangeInput('password')}
                 value={inputValue.password}
@@ -133,6 +136,9 @@ class IsUnlocked extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, null, {
-  pure: false,
-})(IsUnlocked)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps, null, {
+    pure: false,
+  }),
+  translate(),
+)(IsUnlocked)

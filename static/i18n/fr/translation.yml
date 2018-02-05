@@ -1,6 +1,8 @@
 common:
   ok: Okay
   cancel: Annuler
+  chooseWalletPlaceholder: Choisir un portefeuille...
+  currency: Monnaie
 
 language:
   en: Anglais
@@ -46,3 +48,15 @@ settings:
 
 SelectAccount:
   placeholder: Sélectionner un compte
+
+AccountPage:
+  balance: Balance
+  receive: Recevoir
+  lastOperations: Dernières opérations
+
+update:
+  newVersionReady: Une nouvelle version est prête à être installée
+  relaunch: Redémarrer l'application maintenant
+
+IsUnlocked:
+  password: Mot de passe
