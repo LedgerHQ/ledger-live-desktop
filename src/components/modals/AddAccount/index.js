@@ -2,12 +2,14 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { translate } from 'react-i18next'
 import { ipcRenderer } from 'electron'
 
 import { MODAL_ADD_ACCOUNT } from 'constants'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Accounts, Device } from 'types/common'
+import type { Accounts, Device, T } from 'types/common'
 
 import { closeModal } from 'reducers/modals'
 import { canCreateAccount, getAccounts } from 'reducers/accounts'
@@ -38,9 +40,9 @@ const Steps = {
     <form onSubmit={props.onSubmit}>
       <Box flow={3}>
         <Box flow={1}>
-          <Label>Currency</Label>
+          <Label>{props.t('common.currency')}</Label>
           <Select
-            placeholder="Choose a wallet..."
+            placeholder={props.t('common.chooseWalletPlaceholder')}
             onChange={item => props.onChangeInput('wallet')(item.key)}
             renderSelected={item => item.name}
             items={currencies}
@@ -49,7 +51,7 @@ const Steps = {
         </Box>
         <Box horizontal justify="flex-end">
           <Button primary type="submit">
-            Add account
+            {props.t('addAccount.title')}
           </Button>
         </Box>
       </Box>
@@ -97,12 +99,14 @@ type InputValue = {
 type Step = 'chooseWallet' | 'connectDevice' | 'inProgress' | 'listAccounts'
 
 type Props = {
+  t: T,
   accounts: Accounts,
   addAccount: Function,
   canCreateAccount: boolean,
   closeModal: Function,
   currentDevice: Device | null,
 }
+
 type State = {
   inputValue: InputValue,
   step: Step,
@@ -184,25 +188,29 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   getStepProps() {
-    const { currentDevice, canCreateAccount } = this.props
+    const { currentDevice, canCreateAccount, t } = this.props
     const { inputValue, step, progress, accounts } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
 
     return {
       ...props(step === 'chooseWallet', {
+        t,
         value: inputValue,
         onSubmit: this.handleSubmit,
         onChangeInput: this.handleChangeInput,
       }),
       ...props(step === 'connectDevice', {
+        t,
         connected: currentDevice !== null,
         wallet: inputValue.wallet,
       }),
       ...props(step === 'inProgress', {
+        t,
         progress,
       }),
       ...props(step === 'listAccounts', {
+        t,
         accounts,
         canCreateAccount,
         onAddAccount: this.handleAddAccount,
@@ -280,6 +288,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   render() {
     const { step } = this.state
+    const { t } = this.props
 
     const Step = Steps[step]
 
@@ -291,7 +300,7 @@ class AddAccountModal extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <ModalBody onClose={onClose} flow={3}>
             <Text fontSize={4} color="steel">
-              {'Add account'}
+              {t('addAccount.title')}
             </Text>
             <Step {...this.getStepProps()} />
           </ModalBody>
@@ -301,4 +310,4 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddAccountModal)
+export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(AddAccountModal)
