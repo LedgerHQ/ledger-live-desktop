@@ -37,6 +37,7 @@ const Container = styled(Box).attrs({ relative: true, color: 'steel' })``
 const TriggerBtn = styled(Box).attrs({
   p: 2,
 })`
+  min-height: 58px;
   ${space};
   border: 1px solid ${p => p.theme.colors.mouse};
   border-radius: 3px;
