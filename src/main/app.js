@@ -22,6 +22,13 @@ function createMainWindow() {
     width: MIN_WIDTH,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
+    webPreferences: {
+      // Disable auxclick event
+      // See https://developers.google.com/web/updates/2016/10/auxclick
+      disableBlinkFeatures: 'Auxclick',
+      // Enable, among other things, the ResizeObserver
+      experimentalFeatures: true,
+    },
   }
 
   const window = new BrowserWindow(windowOptions)

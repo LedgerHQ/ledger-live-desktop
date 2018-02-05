@@ -52,50 +52,47 @@ class ReceiveModal extends PureComponent<Props, State> {
       ...defaultState,
     })
 
-  render() {
+  renderModal = ({ data, onClose }) => {
     const { amount } = this.state
     const { t } = this.props
 
+    const account = this.getAccount(data)
+
     return (
-      <Modal
-        name={MODAL_RECEIVE}
-        onHide={this.handleHide}
-        render={({ data, onClose }) => {
-          const account = this.getAccount(data)
-          return (
-            <ModalBody onClose={onClose} flow={3}>
-              <Text fontSize={4} color="steel">
-                {t('receive.title')}
-              </Text>
+      <ModalBody onClose={onClose} flow={3}>
+        <Text fontSize={4} color="steel">
+          {t('receive.title')}
+        </Text>
+        <Box flow={1}>
+          <Label>Account</Label>
+          <SelectAccount value={account} onChange={this.handleChangeInput('account')} />
+        </Box>
+        {account &&
+          account.data && (
+            <Fragment>
               <Box flow={1}>
-                <Label>Account</Label>
-                <SelectAccount value={account} onChange={this.handleChangeInput('account')} />
+                <Label>Request amount</Label>
+                <Input
+                  type="number"
+                  min={0}
+                  max={account.data.balance / 1e8}
+                  onChange={this.handleChangeInput('amount')}
+                />
               </Box>
-              {account &&
-                account.data && (
-                  <Fragment>
-                    <Box flow={1}>
-                      <Label>Request amount</Label>
-                      <Input
-                        type="number"
-                        min={0}
-                        max={account.data.balance / 1e8}
-                        onChange={this.handleChangeInput('amount')}
-                      />
-                    </Box>
-                    <ReceiveBox amount={amount} address={get(account, 'data.address', '')} />
-                  </Fragment>
-                )}
-              <Box horizontal justify="center">
-                <Button primary onClick={onClose}>
-                  Close
-                </Button>
-              </Box>
-            </ModalBody>
-          )
-        }}
-      />
+              <ReceiveBox amount={amount} address={get(account, 'data.address', '')} />
+            </Fragment>
+          )}
+        <Box horizontal justify="center">
+          <Button primary onClick={onClose}>
+            Close
+          </Button>
+        </Box>
+      </ModalBody>
     )
+  }
+
+  render() {
+    return <Modal name={MODAL_RECEIVE} onHide={this.handleHide} render={this.renderModal} />
   }
 }
 

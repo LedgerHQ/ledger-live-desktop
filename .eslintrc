@@ -9,6 +9,7 @@
     "__SENTRY_URL__": false,
     "__static": false,
     "window": false,
+    "ResizeObserver": false,
   },
   "rules": {
     "camelcase": 0,

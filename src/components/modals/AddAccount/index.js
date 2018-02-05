@@ -286,26 +286,31 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   _timeout = undefined
 
-  render() {
+  renderModal = ({ onClose }) => {
     const { step } = this.state
     const { t } = this.props
 
     const Step = Steps[step]
 
     return (
+      <ModalBody onClose={onClose} flow={3}>
+        <Text fontSize={4} color="steel">
+          {t('addAccount.title')}
+        </Text>
+        <Step {...this.getStepProps()} />
+      </ModalBody>
+    )
+  }
+
+  render() {
+    const { step } = this.state
+
+    return (
       <Modal
         name={MODAL_ADD_ACCOUNT}
         preventBackdropClick={step !== 'chooseWallet'}
-        onClose={this.handleClose}
         onHide={this.handleHide}
-        render={({ onClose }) => (
-          <ModalBody onClose={onClose} flow={3}>
-            <Text fontSize={4} color="steel">
-              {t('addAccount.title')}
-            </Text>
-            <Step {...this.getStepProps()} />
-          </ModalBody>
-        )}
+        render={this.renderModal}
       />
     )
   }

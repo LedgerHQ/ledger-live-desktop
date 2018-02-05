@@ -4,21 +4,22 @@ import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
-import chunk from 'lodash/chunk'
 import { push } from 'react-router-redux'
 
-import { MODAL_ADD_ACCOUNT } from 'constants'
+import chunk from 'lodash/chunk'
+import random from 'lodash/random'
+import takeRight from 'lodash/takeRight'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Accounts, T } from 'types/common'
+import type { Accounts } from 'types/common'
 
 import { formatBTC } from 'helpers/format'
 
-import { openModal } from 'reducers/modals'
 import { getTotalBalance, getVisibleAccounts } from 'reducers/accounts'
 
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
+import { AreaChart, BarChart } from 'components/base/Chart'
 import Select from 'components/base/Select'
 import Tabs from 'components/base/Tabs'
 
@@ -29,20 +30,21 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 
 const mapDispatchToProps = {
   push,
-  openModal,
 }
 
 type Props = {
-  t: T,
   accounts: Accounts,
   push: Function,
-  openModal: Function,
   totalBalance: number,
 }
 
 type State = {
   tab: number,
+  datas: Object,
 }
+
+const ACCOUNTS_BY_LINE = 3
+const TIMEOUT_REFRESH_DATAS = 5e3
 
 const itemsTimes = [
   { key: 'week', name: 'Last week' },
@@ -50,16 +52,74 @@ const itemsTimes = [
   { key: 'year', name: 'Last year' },
 ]
 
+const generateData = v => ({
+  name: `Day ${v}`,
+  value: random(10, 100),
+})
+
 class DashboardPage extends PureComponent<Props, State> {
   state = {
     tab: 0,
+    datas: this.generateDatas(),
+  }
+
+  componentDidMount() {
+    this.addDatasOnAccounts()
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._timeout)
+  }
+
+  getAccountsChunk() {
+    const { accounts } = this.props
+
+    const listAccounts = Object.values(accounts)
+
+    while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
+
+    return chunk(listAccounts, ACCOUNTS_BY_LINE)
+  }
+
+  generateDatas() {
+    const { accounts } = this.props
+
+    return Object.keys(accounts).reduce((result, key) => {
+      result[key] = [...Array(25).keys()].map(v => generateData(v + 1))
+
+      return result
+    }, {})
+  }
+
+  addDatasOnAccounts = () => {
+    this._timeout = setTimeout(() => {
+      const { accounts } = this.props
+
+      this.setState(prev => ({
+        datas: {
+          ...Object.keys(accounts).reduce((result, key) => {
+            if (result[key]) {
+              const nextIndex = result[key].length
+
+              result[key][nextIndex] = generateData(nextIndex)
+            }
+
+            return result
+          }, prev.datas),
+        },
+      }))
+
+      this.addDatasOnAccounts()
+    }, TIMEOUT_REFRESH_DATAS)
   }
 
   handleChangeTab = tab => this.setState({ tab })
 
+  _timeout = undefined
+
   render() {
-    const { t, totalBalance, openModal, push, accounts } = this.props
-    const { tab } = this.state
+    const { totalBalance, push, accounts } = this.props
+    const { tab, datas } = this.state
 
     const totalAccounts = Object.keys(accounts).length
 
@@ -107,42 +167,56 @@ class DashboardPage extends PureComponent<Props, State> {
             ]}
           />
         </Card>
+        <Card flow={3} p={0}>
+          <AreaChart
+            height={250}
+            data={takeRight(
+              Object.keys(datas).reduce((result, key) => {
+                const data = datas[key]
+
+                data.forEach((d, i) => {
+                  result[i] = {
+                    name: d.name,
+                    value: (result[i] ? result[i].value : 0) + d.value,
+                  }
+                })
+
+                return result
+              }, []),
+              25,
+            )}
+          />
+        </Card>
         <Box flow={3}>
-          {chunk([...Object.keys(accounts), MODAL_ADD_ACCOUNT], 3).map((line, i) => (
+          {this.getAccountsChunk().map((accountsByLine, i) => (
             <Box
               key={i} // eslint-disable-line react/no-array-index-key
               horizontal
               flow={3}
             >
-              {line.map(
-                key =>
-                  key === MODAL_ADD_ACCOUNT ? (
+              {accountsByLine.map(
+                (account: any, j) =>
+                  account === null ? (
                     <Box
-                      key={key}
-                      p={3}
+                      key={j} // eslint-disable-line react/no-array-index-key
+                      p={2}
                       flex={1}
-                      borderWidth={2}
-                      align="center"
-                      justify="center"
-                      borderColor="mouse"
-                      style={{ borderStyle: 'dashed', cursor: 'pointer', textAlign: 'center' }}
-                      onClick={() => openModal(MODAL_ADD_ACCOUNT)}
-                    >
-                      {`+ ${t('addAccount.title')}`}
-                    </Box>
+                    />
                   ) : (
                     <Card
-                      key={key}
+                      key={account.id}
+                      p={2}
                       flex={1}
-                      style={{ cursor: 'pointer', height: 200 }}
-                      onClick={() => push(`/account/${key}`)}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => push(`/account/${account.id}`)}
                     >
                       <Box>
-                        <Text fontWeight="bold">{accounts[key].name}</Text>
+                        <Text fontWeight="bold">{account.name}</Text>
                       </Box>
                       <Box grow align="center" justify="center">
-                        {accounts[key].data && formatBTC(accounts[key].data.balance)}
+                        {account.data && formatBTC(account.data.balance)}
                       </Box>
+                      <BarChart height={100} data={takeRight(datas[account.id], 25)} />
                     </Card>
                   ),
               )}
