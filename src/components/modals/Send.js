@@ -140,7 +140,7 @@ class Send extends PureComponent<Props, State> {
       step,
     })
 
-  handleClose = () =>
+  handleHide = () =>
     this.setState({
       ...defaultState,
     })
@@ -153,7 +153,7 @@ class Send extends PureComponent<Props, State> {
     return (
       <Modal
         name={MODAL_SEND}
-        onClose={this.handleClose}
+        onHide={this.handleHide}
         render={({ data, onClose }) => (
           <Fragment>
             <ModalBody p={2}>

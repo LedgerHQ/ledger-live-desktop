@@ -113,7 +113,7 @@ class SettingsAccount extends PureComponent<Props, State> {
     push('/')
   }
 
-  handleClose = () =>
+  handleHide = () =>
     this.setState({
       ...defaultState,
     })
@@ -124,7 +124,7 @@ class SettingsAccount extends PureComponent<Props, State> {
     return (
       <Modal
         name={MODAL_SETTINGS_ACCOUNT}
-        onClose={this.handleClose}
+        onHide={this.handleHide}
         render={({ data, onClose }) => {
           const account = this.getAccount(data)
           return (

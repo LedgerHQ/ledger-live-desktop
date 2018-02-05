@@ -265,12 +265,12 @@ class AddAccountModal extends PureComponent<Props, State> {
     })
   }
 
-  handleClose = () => {
-    clearTimeout(this._timeout)
+  handleClose = () => clearTimeout(this._timeout)
+
+  handleHide = () =>
     this.setState({
       ...defaultState,
     })
-  }
 
   addAccount = ({ id, name, ...data }) => {
     const { inputValue } = this.state
@@ -297,6 +297,7 @@ class AddAccountModal extends PureComponent<Props, State> {
         name={MODAL_ADD_ACCOUNT}
         preventBackdropClick={step !== 'chooseWallet'}
         onClose={this.handleClose}
+        onHide={this.handleHide}
         render={({ onClose }) => (
           <ModalBody onClose={onClose} flow={3}>
             <Text fontSize={4} color="steel">

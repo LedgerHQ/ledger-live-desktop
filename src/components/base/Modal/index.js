@@ -20,6 +20,7 @@ import Icon from 'components/base/Icon'
 type Props = {
   isOpened?: boolean,
   onClose: Function,
+  onHide?: Function,
   preventBackdropClick?: boolean,
   render: Function,
   data?: any,
@@ -109,11 +110,12 @@ export class Modal extends PureComponent<Props> {
   }
 
   render() {
-    const { preventBackdropClick, isOpened, onClose, render, data } = this.props
+    const { preventBackdropClick, isOpened, onClose, onHide, render, data } = this.props
     return (
       <Mortal
         isOpened={isOpened}
         onClose={onClose}
+        onHide={onHide}
         motionStyle={(spring, isVisible) => ({
           opacity: spring(isVisible ? 1 : 0, springConfig),
           y: spring(isVisible ? 0 : 20, springConfig),
