@@ -9,6 +9,8 @@
     "__SENTRY_URL__": false,
     "__static": false,
     "window": false,
+    "document": false,
+    "HTMLDivElement": false,
     "ResizeObserver": false,
   },
   "rules": {

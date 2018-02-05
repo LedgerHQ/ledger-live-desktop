@@ -4,6 +4,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React, { PureComponent } from 'react'
+import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import Mortal from 'react-mortal'
 import styled from 'styled-components'
@@ -13,7 +14,7 @@ import { rgba } from 'styles/helpers'
 
 import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
-import Box from 'components/base/Box'
+import Box, { Tabbable } from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Icon from 'components/base/Icon'
 
@@ -67,7 +68,7 @@ const Backdrop = styled(Box).attrs({
   position: fixed;
 `
 
-const Wrapper = styled(Box).attrs({
+const Wrapper = styled(Tabbable).attrs({
   bg: 'transparent',
   flow: 20,
   mt: 100,
@@ -77,6 +78,7 @@ const Wrapper = styled(Box).attrs({
     transform: `translate3d(0, ${p.offset}px, 0)`,
   }),
 })`
+  outline: none;
   width: 570px;
   z-index: 2;
 `
@@ -109,6 +111,31 @@ export class Modal extends PureComponent<Props> {
     isOpened: false,
   }
 
+  componentDidUpdate(prevProps: Props) {
+    const didOpened = this.props.isOpened && !prevProps.isOpened
+    const didClose = !this.props.isOpened && prevProps.isOpened
+    if (didOpened) {
+      // Store a reference to the last active element, to restore it after
+      // modal close
+      this._lastFocusedElement = document.activeElement
+
+      // Forced to use findDOMNode here, because innerRef is giving a proxied component
+      const domWrapper = findDOMNode(this._wrapper) // eslint-disable-line react/no-find-dom-node
+
+      if (domWrapper instanceof HTMLDivElement) {
+        domWrapper.focus()
+      }
+    }
+    if (didClose) {
+      if (this._lastFocusedElement) {
+        this._lastFocusedElement.focus()
+      }
+    }
+  }
+
+  _wrapper = null
+  _lastFocusedElement = null
+
   render() {
     const { preventBackdropClick, isOpened, onClose, onHide, render, data } = this.props
     return (
@@ -125,7 +152,12 @@ export class Modal extends PureComponent<Props> {
           <Container isVisible={isVisible}>
             <Backdrop op={m.opacity} />
             <GrowScroll full align="center" onClick={preventBackdropClick ? undefined : onClose}>
-              <Wrapper op={m.opacity} offset={m.y} onClick={e => e.stopPropagation()}>
+              <Wrapper
+                op={m.opacity}
+                offset={m.y}
+                onClick={e => e.stopPropagation()}
+                innerRef={n => (this._wrapper = n)}
+              >
                 {render({ data, onClose })}
               </Wrapper>
             </GrowScroll>
