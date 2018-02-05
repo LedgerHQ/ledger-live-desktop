@@ -5,7 +5,7 @@ import { handleActions, createAction } from 'redux-actions'
 export type ModalsState = {
   [key: string]: {
     isOpened: boolean,
-    data?: Object | null,
+    data?: Object,
   },
 }
 
@@ -13,7 +13,7 @@ const state: ModalsState = {}
 
 type OpenPayload = {
   name: string,
-  data?: Object | null,
+  data?: Object,
 }
 
 type ClosePayload = {
@@ -37,7 +37,7 @@ const handlers = {
       ...state,
       [name]: {
         isOpened: false,
-        data: null,
+        data: undefined,
       },
     }
   },
@@ -55,9 +55,9 @@ const handlers = {
 
 // Actions
 
-export const openModal = createAction('MODAL_OPEN', (name, data = {}) => ({ name, data }))
+export const openModal = createAction('MODAL_OPEN', (name, data) => ({ name, data }))
 export const closeModal = createAction('MODAL_CLOSE', name => ({ name }))
-export const setDataModal = createAction('MODAL_SET_DATA', (name, data = {}) => ({ name, data }))
+export const setDataModal = createAction('MODAL_SET_DATA', (name, data) => ({ name, data }))
 
 // Selectors
 

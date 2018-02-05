@@ -53,4 +53,8 @@ injectGlobal`
     transition: opacity 0.2s ease-in-out !important;
     z-index: 20 !important;
   }
+
+  .recharts-wrapper {
+    cursor: inherit !important;
+  }
 `
