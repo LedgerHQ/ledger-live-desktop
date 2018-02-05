@@ -12,7 +12,7 @@ import { openModal } from 'reducers/modals'
 import type { MapStateToProps } from 'react-redux'
 import type { Location } from 'react-router'
 
-import Box from 'components/base/Box'
+import Box, { Tabbable } from 'components/base/Box'
 import Text from 'components/base/Text'
 import Icon from 'components/base/Icon'
 
@@ -27,21 +27,21 @@ const mapDispatchToProps = {
   openModal,
 }
 
-const Container = styled(Box).attrs({
+const Container = styled(Tabbable).attrs({
   horizontal: true,
   align: 'center',
-  p: 2,
+  px: 2,
+  py: 1,
   flow: 2,
 })`
+  border-radius: 5px;
   cursor: pointer;
-  color: ${p => (p.isActive ? '#1d2027' : '#b8b8b8')};
-  background: ${p => (p.isActive ? 'rgba(255, 255, 255, 0.05)' : '')};
-  box-shadow: ${p =>
-    p.isActive ? `${p.theme.colors.blue} 4px 0 0 inset` : `${p.theme.colors.blue} 0 0 0 inset`};
-  transition: ease-in-out 100ms box-shadow;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.05);
+  color: ${p => (p.isActive ? p.theme.colors.shark : p.theme.colors.grey)};
+  background: ${p => (p.isActive ? p.theme.colors.argile : '')};
+  outline: none;
+  &:hover,
+  &:focus {
+    background: ${p => (p.isActive ? p.theme.colors.argile : p.theme.colors.cream)};
   }
 `
 
@@ -68,9 +68,11 @@ function Item({ children, desc, icon, linkTo, push, location, modal, openModal }
       }
       isActive={isActive}
     >
-      {icon && <Icon fontSize={3} color={isActive ? 'blue' : void 0} name={icon} />}
+      {icon && <Icon fontSize={2} color={isActive ? 'blue' : void 0} name={icon} />}
       <div>
-        <Text fontSize={1}>{children}</Text>
+        <Text fontSize={1} fontWeight="bold">
+          {children}
+        </Text>
         {desc && (
           <Box color="steel" fontSize={0}>
             {desc}
