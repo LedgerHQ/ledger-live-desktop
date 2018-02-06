@@ -98,7 +98,7 @@ export class Tabbable extends PureComponent<any, TabbableState> {
   handleBlur = () => this.setState({ isFocused: false })
 
   handleKeydown = (e: SyntheticKeyboardEvent<any>) => {
-    if (e.which === 13 && this.state.isFocused && this.props.onClick) {
+    if ((e.which === 13 || e.which === 32) && this.state.isFocused && this.props.onClick) {
       this.props.onClick(e)
     }
   }

@@ -9,7 +9,7 @@ import { formatBTC } from 'helpers/format'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import Checkbox from 'components/base/Checkbox'
+import CheckBox from 'components/base/CheckBox'
 import Input from 'components/base/Input'
 
 type Props = {
@@ -86,8 +86,8 @@ class ImportAccounts extends PureComponent<Props, State> {
               return (
                 <Box key={account.id} horizontal flow={10}>
                   <Box>
-                    <Checkbox
-                      checked={selected}
+                    <CheckBox
+                      isChecked={selected}
                       onChange={this.handleSelectAccount(account.id, selected)}
                     />
                   </Box>
