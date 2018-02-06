@@ -43,6 +43,13 @@ injectGlobal`
     font-style: italic;
   }
 
+  .scroll-content {
+    height: 100%;
+
+    > div {
+      height: 100%;
+    }
+  }
   .scrollbar-thumb {
     background: rgb(102, 102, 102) !important;
     padding: 2px;

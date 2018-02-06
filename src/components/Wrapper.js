@@ -25,31 +25,27 @@ class Wrapper extends Component<{}> {
       <Fragment>
         {process.platform === 'darwin' && <AppRegionDrag />}
 
-        <IsUnlocked
-          render={() => (
-            <Fragment>
-              {__DEV__ && <DevToolbar />}
+        <IsUnlocked>
+          {__DEV__ && <DevToolbar />}
 
-              {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
-                <ModalComponent key={name} />
-              ))}
+          {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
+            <ModalComponent key={name} />
+          ))}
 
-              <Box grow horizontal bg="white">
-                <SideBar />
+          <Box grow horizontal bg="white">
+            <SideBar />
 
-                <Box shrink grow bg="cream" color="grey" relative>
-                  <TopBar />
-                  <UpdateNotifier />
-                  <GrowScroll p={3} style={{ paddingTop: 80 }}>
-                    <Route path="/" exact component={DashboardPage} />
-                    <Route path="/settings" component={SettingsPage} />
-                    <Route path="/account/:id" component={AccountPage} />
-                  </GrowScroll>
-                </Box>
-              </Box>
-            </Fragment>
-          )}
-        />
+            <Box shrink grow bg="cream" color="grey" relative>
+              <TopBar />
+              <UpdateNotifier />
+              <GrowScroll p={3} style={{ paddingTop: 80 }}>
+                <Route path="/" exact component={DashboardPage} />
+                <Route path="/settings" component={SettingsPage} />
+                <Route path="/account/:id" component={AccountPage} />
+              </GrowScroll>
+            </Box>
+          </Box>
+        </IsUnlocked>
       </Fragment>
     )
   }
