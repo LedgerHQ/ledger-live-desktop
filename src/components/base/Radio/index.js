@@ -1,33 +1,22 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React from 'react'
+import noop from 'lodash/noop'
 import styled from 'styled-components'
 
-import Box from 'components/base/Box'
+import { Tabbable } from 'components/base/Box'
 
-const Base = styled(Box).attrs({
-  align: 'center',
-  justify: 'center',
-  relative: true,
-})`
-  box-shadow: 0 0 0 ${p => (p.checked ? 4 : 1)}px
-    ${p => (p.checked ? p.theme.colors.cream : p.theme.colors.argile)};
+const Base = styled(Tabbable).attrs({ relative: true })`
+  outline: none;
+  box-shadow: 0 0 0 1px ${p => (p.isChecked ? p.theme.colors.cream : p.theme.colors.argile)};
   border-radius: 50%;
   height: 19px;
   width: 19px;
   transition: all ease-in-out 0.1s;
 
-  input[type='radio'] {
-    bottom: 0;
-    cursor: pointer;
-    height: 100%;
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 10;
+  &:focus {
+    box-shadow: 0 0 0 ${p => (p.isChecked ? 4 : 2)}px
+      ${p => (p.isChecked ? p.theme.colors.cream : p.theme.colors.argile)};
   }
 
   &:before,
@@ -45,7 +34,7 @@ const Base = styled(Box).attrs({
   &:before {
     background-color: ${p => p.theme.colors.blue};
     ${p =>
-      p.checked &&
+      p.isChecked &&
       `
       bottom: 0;
       left: 0;
@@ -57,7 +46,7 @@ const Base = styled(Box).attrs({
   &:after {
     background-color: ${p => p.theme.colors.white};
     ${p =>
-      p.checked &&
+      p.isChecked &&
       `
       bottom: 7px;
       left: 7px;
@@ -68,52 +57,17 @@ const Base = styled(Box).attrs({
 `
 
 type Props = {
-  checked: boolean,
+  isChecked: boolean,
   onChange?: Function,
 }
 
-type State = {
-  checked: boolean,
+function Radio(props: Props) {
+  const { isChecked, onChange } = props
+  return <Base {...props} isChecked={isChecked} onClick={() => onChange(!isChecked)} />
 }
 
-class Radio extends PureComponent<Props, State> {
-  static defaultProps = {
-    checked: false,
-  }
-
-  state = {
-    checked: this.props.checked,
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({
-      checked: nextProps.checked,
-    })
-  }
-
-  handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
-    const { onChange } = this.props
-    const { checked } = e.target
-
-    this.setState({
-      checked,
-    })
-
-    if (onChange) {
-      onChange(checked)
-    }
-  }
-
-  render() {
-    const { checked } = this.state
-    const { onChange, ...props } = this.props
-
-    return (
-      <Base {...props} checked={checked}>
-        <input type="radio" checked={checked} onChange={this.handleChange} />
-      </Base>
-    )
-  }
+Radio.defaultProps = {
+  onChange: noop,
 }
 
 export default Radio
