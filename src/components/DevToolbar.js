@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { ipcRenderer } from 'electron'
 import reduce from 'lodash/fp/reduce'
 import flow from 'lodash/fp/flow'
 import filter from 'lodash/fp/filter'
@@ -99,21 +100,46 @@ const Color = ({ color }: { color: ColorType }) => (
 
 type State = {
   isOpened: boolean,
+  cpuUsage: Object,
 }
 
 class DevToolbar extends PureComponent<any, State> {
   state = {
     isOpened: false,
+    cpuUsage: {},
+  }
+
+  componentDidMount() {
+    ipcRenderer.on('msg', this.handleMessage)
+  }
+
+  handleMessage = (e: any, { type, data }: Object) => {
+    if (type === 'usage.cpu') {
+      this.setState(prev => ({
+        cpuUsage: {
+          ...prev.cpuUsage,
+          [data.name]: data.value,
+        },
+      }))
+    }
   }
 
   handleToggle = () => this.setState({ isOpened: !this.state.isOpened })
 
   render() {
-    const { isOpened } = this.state
+    const { isOpened, cpuUsage } = this.state
+
     return (
       <Container isOpened={isOpened}>
         <Handle onClick={this.handleToggle}>{'DEV'}</Handle>
         <Colors>{colors.map(color => <Color key={color.name} color={color} />)}</Colors>
+        <Box>
+          {Object.keys(cpuUsage).map(k => (
+            <Box>
+              {k}: {cpuUsage[k]}
+            </Box>
+          ))}
+        </Box>
       </Container>
     )
   }
