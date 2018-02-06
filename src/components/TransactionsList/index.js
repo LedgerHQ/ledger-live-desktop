@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import moment from 'moment'
 import get from 'lodash/get'
 
+import Defer from 'components/base/Defer'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
@@ -81,7 +82,11 @@ const Transaction = ({ tx }: { tx: TransactionType }) => {
   )
 }
 
-export default ({ transactions }: { transactions: Array<TransactionType> }) => (
+type Props = {
+  transactions: Array<TransactionType>,
+}
+
+export default ({ transactions }: Props) => (
   <Box flow={2}>
     <Box horizontal>
       <HeaderCol size={DATE_COL_SIZE}>{'Date'}</HeaderCol>
@@ -90,6 +95,8 @@ export default ({ transactions }: { transactions: Array<TransactionType> }) => (
         {'Amount'}
       </HeaderCol>
     </Box>
-    <Box>{transactions.map(t => <Transaction key={t.hash} tx={t} />)}</Box>
+    <Defer>
+      <Box>{transactions.map(t => <Transaction key={t.hash} tx={t} />)}</Box>
+    </Defer>
   </Box>
 )

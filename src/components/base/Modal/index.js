@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-multi-comp */
 
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import Mortal from 'react-mortal'
@@ -18,6 +18,7 @@ import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 import Box, { Tabbable } from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Icon from 'components/base/Icon'
+import Defer from 'components/base/Defer'
 
 type Props = {
   isOpened?: boolean,
@@ -117,17 +118,25 @@ class Pure extends Component<any> {
   render() {
     const { data, onClose, render } = this.props
 
-    return render({ data, onClose })
+    return <Defer>{render({ data, onClose })}</Defer>
   }
 }
 
-export class Modal extends PureComponent<Props> {
+export class Modal extends Component<Props> {
   static defaultProps = {
     data: undefined,
     isOpened: false,
     onClose: noop,
     onHide: noop,
     preventBackdropClick: false,
+  }
+
+  shouldComponentUpdate(nextProps: Props) {
+    if (this.props.isOpened || nextProps.isOpened) {
+      return true
+    }
+
+    return false
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -171,12 +180,18 @@ export class Modal extends PureComponent<Props> {
         {(m, isVisible, isAnimated) => (
           <Container isVisible={isVisible}>
             <Backdrop op={m.opacity} />
-            <GrowScroll full align="center" onClick={preventBackdropClick ? undefined : onClose}>
+            <GrowScroll
+              align="center"
+              full
+              justify="flex-start"
+              onClick={preventBackdropClick ? undefined : onClose}
+              style={{ height: '100%' }}
+            >
               <Wrapper
                 op={m.opacity}
                 offset={m.y}
-                onClick={e => e.stopPropagation()}
                 innerRef={n => (this._wrapper = n)}
+                onClick={e => e.stopPropagation()}
               >
                 <Pure isAnimated={isAnimated} render={render} data={data} onClose={onClose} />
               </Wrapper>

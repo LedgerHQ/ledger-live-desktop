@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
@@ -26,12 +26,12 @@ type InputValue = {
 }
 
 type Props = {
-  t: T,
   accounts: Accounts,
+  children: any,
   fetchAccounts: Function,
   isLocked: boolean,
-  render: Function,
   settings: Settings,
+  t: T,
   unlock: Function,
 }
 type State = {
@@ -55,7 +55,7 @@ const defaultState = {
   },
 }
 
-class IsUnlocked extends PureComponent<Props, State> {
+class IsUnlocked extends Component<Props, State> {
   state = {
     ...defaultState,
   }
@@ -74,6 +74,14 @@ class IsUnlocked extends PureComponent<Props, State> {
     if (!this.props.isLocked && nextProps.isLocked) {
       stopSyncAccounts()
     }
+  }
+
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.isLocked) {
+      return true
+    }
+
+    return nextProps.children !== this.props.children
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
@@ -111,7 +119,7 @@ class IsUnlocked extends PureComponent<Props, State> {
 
   render() {
     const { inputValue } = this.state
-    const { isLocked, render, t } = this.props
+    const { isLocked, t } = this.props
 
     if (isLocked) {
       return (
@@ -132,7 +140,7 @@ class IsUnlocked extends PureComponent<Props, State> {
       )
     }
 
-    return render()
+    return this.props.children
   }
 }
 
