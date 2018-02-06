@@ -120,6 +120,9 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     handler(data)
   })
 
+  // Ensure all sub-processes are killed before creating new ones (dev mode...)
+  ipcRenderer.send('clean-processes')
+
   // Start detection when we plug/unplug devices
   sendEvent('usb', 'devices.listen')
 

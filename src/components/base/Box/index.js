@@ -77,12 +77,6 @@ Card.defaultProps = {
   title: undefined,
 }
 
-export const GrowScroll = (props: *) => (
-  <Box grow relative>
-    <Box sticky scroll {...props} />
-  </Box>
-)
-
 type TabbableState = {
   isFocused: boolean,
 }
