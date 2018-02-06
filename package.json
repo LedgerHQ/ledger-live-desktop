@@ -49,6 +49,7 @@
     "@ledgerhq/hw-transport": "^2.2.0",
     "@ledgerhq/hw-transport-node-hid": "^2.2.0",
     "axios": "^0.17.1",
+    "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",
     "bs58check": "^2.1.1",
