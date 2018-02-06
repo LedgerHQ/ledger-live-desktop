@@ -14,6 +14,8 @@ import { syncAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
 import { getAccountData, getAccounts } from 'reducers/accounts'
 
+const { DISABLED_SYNC, DISABLED_AUTO_SYNC } = process.env
+
 type MsgPayload = {
   type: string,
   data: any,
@@ -38,7 +40,6 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
 
 export function startSyncAccounts(accounts: Accounts) {
   syncAccounts = true
-
   sendEvent('accounts', 'sync.all', {
     accounts: Object.entries(accounts).map(([id, account]: [string, any]) => {
       const currentIndex = get(account, 'data.currentIndex', 0)
@@ -83,7 +84,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     accounts: {
       sync: {
         success: () => {
-          if (syncAccounts) {
+          if (syncAccounts && !DISABLED_AUTO_SYNC) {
             syncTimeout = setTimeout(() => {
               const accounts = getAccounts(store.getState())
               startSyncAccounts(accounts)
@@ -123,7 +124,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
   // Start detection when we plug/unplug devices
   sendEvent('usb', 'devices.listen')
 
-  if (!locked) {
+  if (!locked && !DISABLED_SYNC) {
     const accounts = getAccounts(store.getState())
 
     // Start accounts sync

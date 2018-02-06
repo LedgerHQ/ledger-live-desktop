@@ -145,33 +145,37 @@ class Send extends PureComponent<Props, State> {
       ...defaultState,
     })
 
-  renderModal = ({ data, onClose }) => {
+  render() {
     const { step } = this.state
 
-    const Step = Steps[step]
-
     return (
-      <Fragment>
-        <ModalBody p={2}>
-          <Breadcrumb
-            currentStep={step}
-            items={[
-              { label: 'Amount' },
-              { label: 'Summary' },
-              { label: 'Secure validation' },
-              { label: 'Confirmation' },
-            ]}
-          />
-        </ModalBody>
-        <ModalBody onClose={onClose}>
-          <Step {...this.getStepProps(data)} />
-        </ModalBody>
-      </Fragment>
-    )
-  }
+      <Modal
+        name={MODAL_SEND}
+        onHide={this.handleHide}
+        render={({ data, onClose }) => {
+          const Step = Steps[step]
 
-  render() {
-    return <Modal name={MODAL_SEND} onHide={this.handleHide} render={this.renderModal} />
+          return (
+            <Fragment>
+              <ModalBody p={2}>
+                <Breadcrumb
+                  currentStep={step}
+                  items={[
+                    { label: 'Amount' },
+                    { label: 'Summary' },
+                    { label: 'Secure validation' },
+                    { label: 'Confirmation' },
+                  ]}
+                />
+              </ModalBody>
+              <ModalBody onClose={onClose}>
+                <Step {...this.getStepProps(data)} />
+              </ModalBody>
+            </Fragment>
+          )
+        }}
+      />
+    )
   }
 }
 
