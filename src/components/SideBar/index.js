@@ -124,7 +124,7 @@ class SideBar extends PureComponent<Props> {
             </GrowScroll>
           </Box>
         </Box>
-        <Box borderColor="grey" borderWidth={1} borderTop horizontal py={1}>
+        <Box borderColor="argile" borderWidth={1} borderTop horizontal py={2}>
           <Box align="center" justify="center">
             <Connected state={currentDevice !== null} />
           </Box>
