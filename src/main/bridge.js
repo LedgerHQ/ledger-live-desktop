@@ -7,6 +7,12 @@ import { resolve } from 'path'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
+const processes = []
+
+function cleanProcesses() {
+  processes.forEach(kill => kill())
+}
+
 function onForkChannel(forkType, callType) {
   return (event: any, payload) => {
     const { type, data } = payload
@@ -23,6 +29,8 @@ function onForkChannel(forkType, callType) {
         compute = null
       }
     }
+
+    processes.push(kill)
 
     const onMessage = payload => {
       const { type, data, options = {} } = payload
@@ -47,6 +55,8 @@ function onForkChannel(forkType, callType) {
 // Forwards every `type` messages to another process
 ipcMain.on('usb', onForkChannel('usb', 'async'))
 ipcMain.on('accounts', onForkChannel('accounts', 'async'))
+
+ipcMain.on('clean-processes', cleanProcesses)
 
 const handlers = {
   updater: {
