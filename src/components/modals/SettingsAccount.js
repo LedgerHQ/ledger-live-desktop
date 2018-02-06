@@ -118,66 +118,68 @@ class SettingsAccount extends PureComponent<Props, State> {
       ...defaultState,
     })
 
-  renderModal = ({ data, onClose }) => {
+  render() {
     const { editName, nameHovered } = this.state
 
-    const account = this.getAccount(data)
-
     return (
-      <ModalBody onClose={onClose} flow={3}>
-        <Text fontSize={4} color="steel">
-          Account settings
-        </Text>
-        <Box
-          align="center"
-          flow={2}
-          horizontal
-          onMouseEnter={this.handleHoveredName(true)}
-          onMouseLeave={this.handleHoveredName(false)}
-        >
-          <Box>
-            {editName ? (
-              <form onSubmit={this.handleSubmitName(account)}>
-                <Box align="center" horizontal flow={2}>
-                  <Box>
-                    <Input value={account.name} onChange={this.handleChangeName} />
-                  </Box>
-                  <Box flow={2} horizontal>
-                    <Button type="button" onClick={this.handleCancelEditName(data)}>
-                      Cancel
-                    </Button>
-                    <Button type="submit" primary>
-                      Ok
-                    </Button>
-                  </Box>
+      <Modal
+        name={MODAL_SETTINGS_ACCOUNT}
+        onHide={this.handleHide}
+        render={({ data, onClose }) => {
+          const account = this.getAccount(data)
+
+          return (
+            <ModalBody onClose={onClose} flow={3}>
+              <Text fontSize={4} color="steel">
+                Account settings
+              </Text>
+              <Box
+                align="center"
+                flow={2}
+                horizontal
+                onMouseEnter={this.handleHoveredName(true)}
+                onMouseLeave={this.handleHoveredName(false)}
+              >
+                <Box>
+                  {editName ? (
+                    <form onSubmit={this.handleSubmitName(account)}>
+                      <Box align="center" horizontal flow={2}>
+                        <Box>
+                          <Input value={account.name} onChange={this.handleChangeName} />
+                        </Box>
+                        <Box flow={2} horizontal>
+                          <Button type="button" onClick={this.handleCancelEditName(data)}>
+                            Cancel
+                          </Button>
+                          <Button type="submit" primary>
+                            Ok
+                          </Button>
+                        </Box>
+                      </Box>
+                    </form>
+                  ) : (
+                    account.name
+                  )}
                 </Box>
-              </form>
-            ) : (
-              account.name
-            )}
-          </Box>
-          {!editName &&
-            nameHovered && (
-              <Box onClick={this.handleEditName(true)} style={{ cursor: 'pointer' }}>
-                <Icon name="edit" />
+                {!editName &&
+                  nameHovered && (
+                    <Box onClick={this.handleEditName(true)} style={{ cursor: 'pointer' }}>
+                      <Icon name="edit" />
+                    </Box>
+                  )}
               </Box>
-            )}
-        </Box>
-        <Box horizontal grow align="flex-end" flow={2}>
-          <Box grow>
-            <Button onClick={this.handleArchiveAccount(account)}>Archive account</Button>
-          </Box>
-          <Box grow>
-            <Button primary>Go to account</Button>
-          </Box>
-        </Box>
-      </ModalBody>
-    )
-  }
-
-  render() {
-    return (
-      <Modal name={MODAL_SETTINGS_ACCOUNT} onHide={this.handleHide} render={this.renderModal} />
+              <Box horizontal grow align="flex-end" flow={2}>
+                <Box grow>
+                  <Button onClick={this.handleArchiveAccount(account)}>Archive account</Button>
+                </Box>
+                <Box grow>
+                  <Button primary>Go to account</Button>
+                </Box>
+              </Box>
+            </ModalBody>
+          )
+        }}
+      />
     )
   }
 }

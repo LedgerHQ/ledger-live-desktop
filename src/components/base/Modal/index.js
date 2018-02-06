@@ -2,8 +2,9 @@
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable react/no-multi-comp */
 
-import React, { PureComponent } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import Mortal from 'react-mortal'
@@ -31,7 +32,7 @@ const springConfig = {
   stiffness: 350,
 }
 
-const mapStateToProps = (state, { name, isOpened }) => ({
+const mapStateToProps = (state, { name, isOpened }: { name: string, isOpened?: boolean }) => ({
   isOpened: isOpened || (name && isModalOpened(state, name)),
   data: getModalData(state, name),
 })
@@ -104,11 +105,29 @@ const CloseContainer = styled(Box).attrs({
   }
 `
 
+class Pure extends Component<any> {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.isAnimated) {
+      return false
+    }
+
+    return true
+  }
+
+  render() {
+    const { data, onClose, render } = this.props
+
+    return render({ data, onClose })
+  }
+}
+
 export class Modal extends PureComponent<Props> {
   static defaultProps = {
-    onClose: noop,
-    preventBackdropClick: false,
+    data: undefined,
     isOpened: false,
+    onClose: noop,
+    onHide: noop,
+    preventBackdropClick: false,
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -138,6 +157,7 @@ export class Modal extends PureComponent<Props> {
 
   render() {
     const { preventBackdropClick, isOpened, onClose, onHide, render, data } = this.props
+
     return (
       <Mortal
         isOpened={isOpened}
@@ -148,7 +168,7 @@ export class Modal extends PureComponent<Props> {
           y: spring(isVisible ? 0 : 20, springConfig),
         })}
       >
-        {(m, isVisible) => (
+        {(m, isVisible, isAnimated) => (
           <Container isVisible={isVisible}>
             <Backdrop op={m.opacity} />
             <GrowScroll full align="center" onClick={preventBackdropClick ? undefined : onClose}>
@@ -158,7 +178,7 @@ export class Modal extends PureComponent<Props> {
                 onClick={e => e.stopPropagation()}
                 innerRef={n => (this._wrapper = n)}
               >
-                {render({ data, onClose })}
+                <Pure isAnimated={isAnimated} render={render} data={data} onClose={onClose} />
               </Wrapper>
             </GrowScroll>
           </Container>
