@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import noop from 'lodash/noop'
 import styled from 'styled-components'
 
 import { Tabbable } from 'components/base/Box'
@@ -63,11 +62,11 @@ type Props = {
 
 function Radio(props: Props) {
   const { isChecked, onChange } = props
-  return <Base {...props} isChecked={isChecked} onClick={() => onChange(!isChecked)} />
+  return <Base {...props} isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} />
 }
 
 Radio.defaultProps = {
-  onChange: noop,
+  onChange: null,
 }
 
 export default Radio

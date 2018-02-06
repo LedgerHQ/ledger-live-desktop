@@ -17,6 +17,7 @@ import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
+import DevToolbar from 'components/DevToolbar'
 
 class Wrapper extends Component<{}> {
   render() {
@@ -27,6 +28,8 @@ class Wrapper extends Component<{}> {
         <IsUnlocked
           render={() => (
             <Fragment>
+              {__DEV__ && <DevToolbar />}
+
               {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
                 <ModalComponent key={name} />
               ))}

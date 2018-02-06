@@ -14,7 +14,7 @@ import { hasPassword } from 'reducers/settings'
 import Box from 'components/base/Box'
 
 const Container = styled(Box).attrs({
-  borderColor: 'grey',
+  borderColor: 'argile',
   borderWidth: 1,
   borderBottom: true,
   noShrink: true,

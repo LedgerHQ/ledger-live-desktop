@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import noop from 'lodash/noop'
 import styled, { keyframes } from 'styled-components'
 
 import { Tabbable } from 'components/base/Box'
@@ -54,14 +53,14 @@ type Props = {
 function CheckBox(props: Props) {
   const { isChecked, onChange, ...p } = props
   return (
-    <Base isChecked={isChecked} onClick={() => onChange(!isChecked)} {...p}>
+    <Base isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} {...p}>
       {isChecked && <IconWrapper name="check" />}
     </Base>
   )
 }
 
 CheckBox.defaultProps = {
-  onChange: noop,
+  onChange: null,
 }
 
 export default CheckBox
