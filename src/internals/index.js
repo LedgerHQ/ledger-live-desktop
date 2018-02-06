@@ -8,6 +8,12 @@ function sendEvent(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
 }
 
+if (__PROD__ && __SENTRY_URL__) {
+  const Raven = require('raven') // eslint-disable-line global-require
+  const ravenConfig = { captureUnhandledRejections: true }
+  Raven.config(__SENTRY_URL__, ravenConfig).install()
+}
+
 // $FlowFixMe
 const func = require(`./${process.env.FORK_TYPE}`) // eslint-disable-line import/no-dynamic-require
 
