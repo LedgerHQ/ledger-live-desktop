@@ -131,9 +131,9 @@
   dependencies:
     humps "^2.0.1"
 
-"@ledgerhq/common@2.1.3":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/common/-/common-2.1.3.tgz#02ee37050a5a7c22f4b88c6f26d78cf103b5c284"
+"@ledgerhq/common@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/common/-/common-2.3.0.tgz#a6bffa04f05f939f40e623ab8f3c39906ef36dbd"
   dependencies:
     fbjs "^0.8.16"
     invariant "^2.2.2"
@@ -373,9 +373,9 @@
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@types/inline-style-prefixer/-/inline-style-prefixer-3.0.1.tgz#8541e636b029124b747952e9a28848286d2b5bf6"
 
-"@types/node@^7.0.18":
-  version "7.0.52"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.52.tgz#8990d3350375542b0c21a83cd0331e6a8fc86716"
+"@types/node@^8.0.24":
+  version "8.5.10"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.10.tgz#49bd3637125dea5f55d7d1e8f51efd6cb835e1f7"
 
 "@types/react@^16.0.18":
   version "16.0.34"
@@ -3297,9 +3297,9 @@ dotenv@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.0.tgz#0206eb5b336639bf377618a2a304ff00c6a1fddb"
 
-downshift@^1.27.1:
-  version "1.27.1"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.27.1.tgz#c91830ed476771373da7353b69726b436a3e3df3"
+downshift@^1.28.0:
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.28.0.tgz#4d2d153ee6a45fcdba0a7121a7858aff42dd0bf3"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -3518,11 +3518,11 @@ electron-webpack@1.12.1:
     webpack-merge "^4.1.1"
     yargs "^11.0.0"
 
-electron@1.7.12:
-  version "1.7.12"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.7.12.tgz#dcc61a2c1b0c3df25f68b3425379a01abd01190e"
+electron@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.2.tgz#a817cd733c2972b3c7cc4f777caf6e424b88014d"
   dependencies:
-    "@types/node" "^7.0.18"
+    "@types/node" "^8.0.24"
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
@@ -4233,9 +4233,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@^0.64.0:
-  version "0.64.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.64.0.tgz#ddd3fb3b183ab1ab35a5d5dec9caf5ebbcded167"
+flow-bin@^0.65.0:
+  version "0.65.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.65.0.tgz#64ffeca27211c786e2d68508c65686ba1b8a2169"
 
 flow-typed@^2.3.0:
   version "2.3.0"
@@ -8413,9 +8413,9 @@ slice-ansi@1.0.0:
   dependencies:
     readable-stream "~1.0.31"
 
-smooth-scrollbar@^8.2.5:
-  version "8.2.5"
-  resolved "https://registry.yarnpkg.com/smooth-scrollbar/-/smooth-scrollbar-8.2.5.tgz#676a2595b1aad97fe0835d2425e403b0d9c70eb3"
+smooth-scrollbar@^8.2.6:
+  version "8.2.6"
+  resolved "https://registry.yarnpkg.com/smooth-scrollbar/-/smooth-scrollbar-8.2.6.tgz#5f4683d8381ea8dc4aaea7678b0805e4f5711297"
   dependencies:
     core-js "^2.5.1"
     lodash-es "^4.17.4"

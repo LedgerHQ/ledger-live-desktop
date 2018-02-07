@@ -2,6 +2,9 @@
 
 import React, { PureComponent } from 'react'
 import { ipcRenderer } from 'electron'
+import { AreaChart, Area } from 'recharts'
+import takeRight from 'lodash/takeRight'
+import last from 'lodash/last'
 import reduce from 'lodash/fp/reduce'
 import flow from 'lodash/fp/flow'
 import filter from 'lodash/fp/filter'
@@ -10,6 +13,7 @@ import styled from 'styled-components'
 import color from 'color'
 
 import Box from 'components/base/Box'
+import CopyToClipboard from 'components/base/CopyToClipboard'
 
 import theme from 'styles/theme'
 
@@ -62,12 +66,15 @@ const Container = styled(Box).attrs({
 
 const Handle = styled(Box).attrs({
   bg: 'night',
+  justify: 'center',
+  px: 1,
 })`
   cursor: pointer;
-  padding: 3px 8px 3px 8px;
   position: absolute;
   bottom: 100%;
   right: 5px;
+  font-size: 9px;
+  height: 20px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
 `
@@ -77,7 +84,7 @@ const Colors = styled(Box).attrs({
   align: 'flex-start',
 })`
   flex-wrap: wrap;
-  width: 416px;
+  width: ${(80 + 4) * 4}px;
 `
 
 const Cl = styled(Box).attrs({
@@ -86,14 +93,13 @@ const Cl = styled(Box).attrs({
   p: 2,
 })`
   border: 2px solid white;
+  cursor: pointer;
   margin: 2px;
-  width: 100px;
-  user-select: text;
-  cursor: text;
+  width: 80px;
 `
 
-const Color = ({ color }: { color: ColorType }) => (
-  <Cl bg={color.val} color={color.isDark ? 'white' : 'night'}>
+const Color = ({ onClick, color }: { onClick: Function, color: ColorType }) => (
+  <Cl bg={color.val} color={color.isDark ? 'white' : 'night'} onClick={onClick}>
     {color.name}
   </Cl>
 )
@@ -113,12 +119,24 @@ class DevToolbar extends PureComponent<any, State> {
     ipcRenderer.on('msg', this.handleMessage)
   }
 
+  componentWillUnmount() {
+    ipcRenderer.removeListener('msg', this.handleMessage)
+  }
+
   handleMessage = (e: any, { type, data }: Object) => {
     if (type === 'usage.cpu') {
       this.setState(prev => ({
         cpuUsage: {
           ...prev.cpuUsage,
-          [data.name]: data.value,
+          [data.name]: takeRight(
+            [
+              ...(prev.cpuUsage[data.name] || []),
+              {
+                value: parseFloat(data.value),
+              },
+            ],
+            10,
+          ),
         },
       }))
     }
@@ -132,13 +150,42 @@ class DevToolbar extends PureComponent<any, State> {
     return (
       <Container isOpened={isOpened}>
         <Handle onClick={this.handleToggle}>{'DEV'}</Handle>
-        <Colors>{colors.map(color => <Color key={color.name} color={color} />)}</Colors>
-        <Box>
-          {Object.keys(cpuUsage).map(k => (
-            <Box>
-              {k}: {cpuUsage[k]}
-            </Box>
-          ))}
+        <Box horizontal>
+          <Colors>
+            {colors.map(color => (
+              <CopyToClipboard
+                key={color.name}
+                data={color.name}
+                render={copy => <Color color={color} onClick={copy} />}
+              />
+            ))}
+          </Colors>
+          <Box ml={1}>
+            {Object.keys(cpuUsage).map(k => (
+              <Box key={k}>
+                <Box horizontal align="center">
+                  <Box grow>{k}</Box>
+                  <Box fontSize="8px">{last(cpuUsage[k]).value}%</Box>
+                </Box>
+                <Box>
+                  <AreaChart
+                    width={100}
+                    height={40}
+                    data={cpuUsage[k]}
+                    margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
+                  >
+                    <Area
+                      type="monotone"
+                      stroke="#8884d8"
+                      fill="#8884d8"
+                      dataKey="value"
+                      isAnimationActive={false}
+                    />
+                  </AreaChart>
+                </Box>
+              </Box>
+            ))}
+          </Box>
         </Box>
       </Container>
     )
