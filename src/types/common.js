@@ -45,6 +45,7 @@ export type SettingsProfile = {
 }
 export type SettingsDisplay = {
   language: string,
+  orderAccounts: string,
 }
 export type Settings = SettingsProfile & SettingsDisplay
 

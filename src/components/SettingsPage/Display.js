@@ -14,7 +14,6 @@ type InputValue = SettingsDisplay
 
 type Props = {
   t: T,
-  i18n: Object,
   settings: SettingsDisplay,
   onSaveSettings: Function,
 }
@@ -26,22 +25,43 @@ class TabProfile extends PureComponent<Props, State> {
   state = {
     inputValue: {
       language: this.props.settings.language,
+      orderAccounts: this.props.settings.orderAccounts,
     },
   }
 
-  getLanguages() {
+  getDatas() {
     const { t } = this.props
 
-    return [
-      {
-        key: 'en',
-        name: t('language.en'),
-      },
-      {
-        key: 'fr',
-        name: t('language.fr'),
-      },
-    ]
+    return {
+      languages: [
+        {
+          key: 'en',
+          name: t('language.en'),
+        },
+        {
+          key: 'fr',
+          name: t('language.fr'),
+        },
+      ],
+      orderAccounts: [
+        {
+          key: 'custom',
+          name: t('orderAccounts.custom'),
+        },
+        {
+          key: 'name',
+          name: t('orderAccounts.name'),
+        },
+        {
+          key: 'balance',
+          name: t('orderAccounts.balance'),
+        },
+        {
+          key: 'type',
+          name: t('orderAccounts.type'),
+        },
+      ],
+    }
   }
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
@@ -55,24 +75,22 @@ class TabProfile extends PureComponent<Props, State> {
   handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { onSaveSettings, i18n } = this.props
+    const { onSaveSettings } = this.props
     const { inputValue } = this.state
 
-    const settings = {
-      language: inputValue.language,
-    }
-
-    i18n.changeLanguage(settings.language)
-
-    onSaveSettings(settings)
+    onSaveSettings({
+      ...inputValue,
+    })
   }
 
   render() {
     const { t } = this.props
     const { inputValue } = this.state
 
-    const languages = this.getLanguages()
+    const { languages, orderAccounts } = this.getDatas()
+
     const currentLanguage = languages.find(l => l.key === inputValue.language)
+    const currentOrderAccounts = orderAccounts.find(l => l.key === inputValue.orderAccounts)
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -84,6 +102,15 @@ class TabProfile extends PureComponent<Props, State> {
               renderSelected={item => item && item.name}
               value={currentLanguage}
               items={languages}
+            />
+          </Box>
+          <Box flow={1}>
+            <Label>{t('settings.display.orderAccounts')}</Label>
+            <Select
+              onChange={item => this.handleChangeInput('orderAccounts')(item.key)}
+              renderSelected={item => item && item.name}
+              value={currentOrderAccounts}
+              items={orderAccounts}
             />
           </Box>
           <Box horizontal justify="flex-end">
