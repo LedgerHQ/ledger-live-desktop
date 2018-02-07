@@ -40,15 +40,14 @@ class Container extends PureComponent<Props, State> {
     )
 
     if (this._node) {
-      this._ro = new ResizeObserver(entries =>
-        entries.forEach(entry => {
-          if (this._node === entry.target) {
-            this.setState({
-              width: entry.contentRect.width,
-            })
-          }
-        }),
-      )
+      this._ro = new ResizeObserver(entries => {
+        const entry = entries.find(entry => this._node === entry.target)
+        if (entry) {
+          this.setState({
+            width: entry.contentRect.width,
+          })
+        }
+      })
 
       this._ro.observe(this._node)
     }
