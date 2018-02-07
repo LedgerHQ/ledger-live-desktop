@@ -138,7 +138,7 @@ const defaultState = {
   },
   accounts: [],
   progress: null,
-  step: 'listAccounts',
+  step: 'chooseWallet',
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
