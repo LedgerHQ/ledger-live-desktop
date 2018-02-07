@@ -18,7 +18,7 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  accounts: Object.entries(getVisibleAccounts(state)).map(([, account]: [string, any]) => account),
+  accounts: getVisibleAccounts(state),
 })
 
 const renderItem = item => (

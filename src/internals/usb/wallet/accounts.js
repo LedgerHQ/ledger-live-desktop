@@ -105,7 +105,7 @@ export default async ({
     return encodeBase58Check(xpub)
   }
 
-  const getAllAccounts = async (currentAccount = 0, accounts = {}) => {
+  const getAllAccounts = async (currentAccount = 0, accounts = []) => {
     const xpub58 = await getXpub58ByAccount({ account: currentAccount, network })
 
     if (currentAccounts.includes(xpub58)) {
@@ -122,10 +122,10 @@ export default async ({
 
     const hasTransactions = account.transactions.length > 0
 
-    accounts[xpub58] = {
+    accounts.push({
       id: xpub58,
       ...account,
-    }
+    })
 
     if (hasTransactions) {
       return getAllAccounts(currentAccount + 1, accounts)

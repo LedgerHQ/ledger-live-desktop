@@ -33,7 +33,7 @@ export type Account = {
   data?: AccountData,
 }
 
-export type Accounts = { [_: string]: Account }
+export type Accounts = Array<Account>
 
 // -------------------- Settings
 

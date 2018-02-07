@@ -81,6 +81,10 @@ class IsUnlocked extends Component<Props, State> {
       return true
     }
 
+    if (!nextProps.isLocked && this.props.isLocked) {
+      return true
+    }
+
     return nextProps.children !== this.props.children
   }
 

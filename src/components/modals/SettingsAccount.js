@@ -9,7 +9,7 @@ import { MODAL_SETTINGS_ACCOUNT } from 'constants'
 
 import type { Account } from 'types/common'
 
-import { editAccount } from 'actions/accounts'
+import { updateAccount } from 'actions/accounts'
 import { setDataModal, closeModal } from 'reducers/modals'
 
 import Box from 'components/base/Box'
@@ -27,14 +27,14 @@ type State = {
 
 type Props = {
   closeModal: Function,
-  editAccount: Function,
+  updateAccount: Function,
   setDataModal: Function,
   push: Function,
 }
 
 const mapDispatchToProps = {
   closeModal,
-  editAccount,
+  updateAccount,
   setDataModal,
   push,
 }
@@ -91,9 +91,9 @@ class SettingsAccount extends PureComponent<Props, State> {
   handleSubmitName = (account: Account) => (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { editAccount, setDataModal } = this.props
+    const { updateAccount, setDataModal } = this.props
 
-    editAccount(account)
+    updateAccount(account)
     setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
 
     this.setState({
@@ -102,9 +102,9 @@ class SettingsAccount extends PureComponent<Props, State> {
   }
 
   handleArchiveAccount = (account: Account) => () => {
-    const { push, closeModal, editAccount } = this.props
+    const { push, closeModal, updateAccount } = this.props
 
-    editAccount({
+    updateAccount({
       ...account,
       archived: true,
     })
