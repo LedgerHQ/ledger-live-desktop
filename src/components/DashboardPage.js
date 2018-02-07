@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -161,59 +161,63 @@ class DashboardPage extends PureComponent<Props, State> {
             ]}
           />
         </Card>
-        <Card flow={3} p={0}>
-          <AreaChart
-            height={250}
-            data={takeRight(
-              fakeDatas.reduce((res, data) => {
-                data.forEach((d, i) => {
-                  res[i] = {
-                    name: d.name,
-                    value: (res[i] ? res[i].value : 0) + d.value,
-                  }
-                })
-                return res
-              }, []),
-              25,
-            )}
-          />
-        </Card>
-        <Box flow={3}>
-          {this.getAccountsChunk().map((accountsByLine, i) => (
-            <Box
-              key={i} // eslint-disable-line react/no-array-index-key
-              horizontal
-              flow={3}
-            >
-              {accountsByLine.map(
-                (account: any, j) =>
-                  account === null ? (
-                    <Box
-                      key={j} // eslint-disable-line react/no-array-index-key
-                      p={2}
-                      flex={1}
-                    />
-                  ) : (
-                    <Card
-                      key={account.id}
-                      p={2}
-                      flex={1}
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => push(`/account/${account.id}`)}
-                    >
-                      <Box>
-                        <Text fontWeight="bold">{account.name}</Text>
-                      </Box>
-                      <Box grow align="center" justify="center">
-                        {account.data && formatBTC(account.data.balance)}
-                      </Box>
-                      <BarChart height={100} data={takeRight(fakeDatas[j], 25)} />
-                    </Card>
-                  ),
-              )}
+        {totalAccounts > 0 && (
+          <Fragment>
+            <Card flow={3} p={0}>
+              <AreaChart
+                height={250}
+                data={takeRight(
+                  fakeDatas.reduce((res, data) => {
+                    data.forEach((d, i) => {
+                      res[i] = {
+                        name: d.name,
+                        value: (res[i] ? res[i].value : 0) + d.value,
+                      }
+                    })
+                    return res
+                  }, []),
+                  25,
+                )}
+              />
+            </Card>
+            <Box flow={3}>
+              {this.getAccountsChunk().map((accountsByLine, i) => (
+                <Box
+                  key={i} // eslint-disable-line react/no-array-index-key
+                  horizontal
+                  flow={3}
+                >
+                  {accountsByLine.map(
+                    (account: any, j) =>
+                      account === null ? (
+                        <Box
+                          key={j} // eslint-disable-line react/no-array-index-key
+                          p={2}
+                          flex={1}
+                        />
+                      ) : (
+                        <Card
+                          key={account.id}
+                          p={2}
+                          flex={1}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => push(`/account/${account.id}`)}
+                        >
+                          <Box>
+                            <Text fontWeight="bold">{account.name}</Text>
+                          </Box>
+                          <Box grow align="center" justify="center">
+                            {account.data && formatBTC(account.data.balance)}
+                          </Box>
+                          <BarChart height={100} data={takeRight(fakeDatas[j], 25)} />
+                        </Card>
+                      ),
+                  )}
+                </Box>
+              ))}
             </Box>
-          ))}
-        </Box>
+          </Fragment>
+        )}
       </Box>
     )
   }
