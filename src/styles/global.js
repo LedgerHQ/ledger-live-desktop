@@ -57,10 +57,17 @@ const fonts = {
   ],
 }
 
+function transformFonts(allFonts) {
+  return Object.keys(allFonts)
+    .map(name => {
+      const fonts = allFonts[name]
+      return fonts.map(f => fontFace({ name, ...f })).join('\n')
+    })
+    .join('\n')
+}
+
 injectGlobal`
-  ${Object.keys(fonts)
-    .map(fontName => fonts[fontName].map(f => fontFace({ name: fontName, ...f })))
-    .join(`\n`)}
+  ${transformFonts(fonts)};
 
   * {
     box-sizing: border-box;
@@ -79,7 +86,7 @@ injectGlobal`
     cursor: default;
     font-family: "Museo Sans", "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 16px;
-    font-weight: 300,
+    font-weight: 300;
     line-height: 1.5;
   }
 
