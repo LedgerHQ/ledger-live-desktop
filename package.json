@@ -126,7 +126,7 @@
     "lint-staged": "^6.1.0",
     "node-loader": "^0.6.0",
     "prettier": "^1.10.2",
-    "react-hot-loader": "^4.0.0-beta.18",
+    "react-hot-loader": "^4.0.0-beta.21",
     "webpack": "^3.10.0"
   }
 }

@@ -4,5 +4,6 @@
 /dist/
 /flow-typed/
 /node_modules/
+/static/fonts/museosans/
 /storybook-static/
 thumbs.db
