@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import noop from 'lodash/noop'
 import styled, { keyframes } from 'styled-components'
 
 import { Tabbable } from 'components/base/Box'
@@ -60,7 +61,7 @@ function CheckBox(props: Props) {
 }
 
 CheckBox.defaultProps = {
-  onChange: null,
+  onChange: noop,
 }
 
 export default CheckBox
