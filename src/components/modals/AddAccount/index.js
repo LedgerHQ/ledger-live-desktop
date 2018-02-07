@@ -13,11 +13,11 @@ import type { MapStateToProps } from 'react-redux'
 import type { Accounts, Device, T } from 'types/common'
 
 import { closeModal } from 'reducers/modals'
-import { canCreateAccount, getAccounts } from 'reducers/accounts'
+import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'
 import { getCurrentDevice } from 'reducers/devices'
 import { sendEvent } from 'renderer/events'
 
-import { addAccount } from 'actions/accounts'
+import { addAccount, updateAccount } from 'actions/accounts'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -28,6 +28,7 @@ import Select from 'components/base/Select'
 
 import CreateAccount from './CreateAccount'
 import ImportAccounts from './ImportAccounts'
+import RestoreAccounts from './RestoreAccounts'
 
 const currencies = [
   {
@@ -75,7 +76,7 @@ const Steps = {
     </Box>
   ),
   listAccounts: (props: Object) => {
-    const { accounts } = props
+    const { accounts, archivedAccounts } = props
     const emptyAccounts = accounts.filter(account => account.transactions.length === 0)
     const existingAccounts = accounts.filter(account => account.transactions.length > 0)
     const canCreateAccount = props.canCreateAccount && emptyAccounts.length === 1
@@ -83,6 +84,7 @@ const Steps = {
     return (
       <Box flow={10}>
         <ImportAccounts {...props} accounts={existingAccounts} />
+        {!!archivedAccounts.length && <RestoreAccounts {...props} accounts={archivedAccounts} />}
         {canCreateAccount ? (
           <CreateAccount {...props} account={newAccount} />
         ) : (
@@ -102,7 +104,9 @@ type Step = 'chooseWallet' | 'connectDevice' | 'inProgress' | 'listAccounts'
 type Props = {
   t: T,
   accounts: Accounts,
+  archivedAccounts: Accounts,
   addAccount: Function,
+  updateAccount: Function,
   canCreateAccount: boolean,
   closeModal: Function,
   currentDevice: Device | null,
@@ -117,12 +121,14 @@ type State = {
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getAccounts(state),
+  archivedAccounts: getArchivedAccounts(state),
   canCreateAccount: canCreateAccount(state),
   currentDevice: getCurrentDevice(state),
 })
 
 const mapDispatchToProps = {
   addAccount,
+  updateAccount,
   closeModal,
 }
 
@@ -132,7 +138,7 @@ const defaultState = {
   },
   accounts: [],
   progress: null,
-  step: 'chooseWallet',
+  step: 'listAccounts',
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
@@ -184,7 +190,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   getStepProps() {
-    const { currentDevice, canCreateAccount, t } = this.props
+    const { currentDevice, archivedAccounts, canCreateAccount, updateAccount, t } = this.props
     const { inputValue, step, progress, accounts } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
@@ -208,7 +214,9 @@ class AddAccountModal extends PureComponent<Props, State> {
       ...props(step === 'listAccounts', {
         t,
         accounts,
+        archivedAccounts,
         canCreateAccount,
+        updateAccount,
         onAddAccount: this.handleAddAccount,
         onImportAccounts: this.handleImportAccounts,
       }),

@@ -110,6 +110,10 @@ export function getAccounts(state: { accounts: AccountsState }): Array<Account> 
   return state.accounts
 }
 
+export function getArchivedAccounts(state: { accounts: AccountsState }): Array<Account> {
+  return state.accounts.filter(acc => acc.archived === true)
+}
+
 export function getVisibleAccounts(state: { accounts: AccountsState }): Array<Account> {
   return getAccounts(state).filter(account => account.archived !== true)
 }
