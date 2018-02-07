@@ -8,7 +8,60 @@ import '@fortawesome/fontawesome-free-solid'
 import '@fortawesome/fontawesome-free-regular'
 import '@fortawesome/fontawesome-free-brands'
 
+import { fontFace } from 'styles/helpers'
+
+const fonts = {
+  'Open Sans': [
+    {
+      style: 'normal',
+      weight: 700,
+      file: 'opensans/OpenSans-Bold',
+    },
+    {
+      style: 'normal',
+      weight: 800,
+      file: 'opensans/OpenSans-ExtraBold',
+    },
+    {
+      style: 'normal',
+      weight: 300,
+      file: 'opensans/OpenSans-Light',
+    },
+    {
+      style: 'normal',
+      weight: 400,
+      file: 'opensans/OpenSans-Regular',
+    },
+    {
+      style: 'normal',
+      weight: 600,
+      file: 'opensans/OpenSans-SemiBold',
+    },
+  ],
+  'Museo Sans': [
+    {
+      style: 'normal',
+      weight: 100,
+      file: 'museosans/MuseoSans-ExtraLight',
+    },
+    {
+      style: 'italic',
+      weight: 100,
+      file: 'museosans/MuseoSans-ExtraLightItalic',
+    },
+    {
+      style: 'normal',
+      weight: 300,
+      file: 'museosans/MuseoSans-Light',
+    },
+  ],
+}
+
 injectGlobal`
+  ${Object.keys(fonts)
+    .map(fontName => fonts[fontName].map(f => fontFace({ name: fontName, ...f })))
+    .join(`\n`)}
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -24,8 +77,9 @@ injectGlobal`
 
   body {
     cursor: default;
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-family: "Museo Sans", "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 16px;
+    font-weight: 300,
     line-height: 1.5;
   }
 
