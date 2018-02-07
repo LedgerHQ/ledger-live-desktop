@@ -15,6 +15,7 @@ import { unlock } from 'reducers/application'
 
 import Box, { Card } from 'components/base/Box'
 import Input from 'components/base/Input'
+import CheckBox from 'components/base/CheckBox'
 import Button from 'components/base/Button'
 import Label from 'components/base/Label'
 
@@ -80,17 +81,21 @@ class TabProfile extends PureComponent<Props, State> {
 
   render() {
     const { inputValue } = this.state
+
+    const isPasswordChecked = get(inputValue, 'password.state', false)
     return (
       <form onSubmit={this.handleSubmit}>
         <Card flow={3}>
           <label>
-            <Box horizontal align="center" flow={1} style={{ cursor: 'pointer' }}>
-              <input
-                type="checkbox"
-                checked={get(inputValue, 'password.state', false)}
-                onChange={e => this.handleChangeInput('password.state')(e.target.checked)}
-              />
-              <div>{' with password'}</div>
+            <Box
+              horizontal
+              align="center"
+              flow={1}
+              style={{ cursor: 'pointer' }}
+              onClick={() => this.handleChangeInput('password.state')(!isPasswordChecked)}
+            >
+              <CheckBox isChecked={isPasswordChecked} />
+              <div>{' Protect local data with a password'}</div>
             </Box>
           </label>
           {get(inputValue, 'password.state') === true && (
