@@ -78,6 +78,7 @@ class DashboardPage extends PureComponent<Props, State> {
     const listAccounts = [...accounts]
 
     while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
+
     return chunk(listAccounts, ACCOUNTS_BY_LINE)
   }
 
@@ -91,13 +92,15 @@ class DashboardPage extends PureComponent<Props, State> {
       const { accounts } = this.props
 
       this.setState(prev => ({
-        fakeDatas: accounts.reduce((res, acc, i) => {
-          if (res[i]) {
-            const nextIndex = res[i].length
-            res[i][nextIndex] = generateFakeData(nextIndex)
-          }
-          return res
-        }, prev.fakeDatas),
+        fakeDatas: [
+          ...accounts.reduce((res, acc, i) => {
+            if (res[i]) {
+              const nextIndex = res[i].length
+              res[i][nextIndex] = generateFakeData(nextIndex)
+            }
+            return res
+          }, prev.fakeDatas),
+        ],
       }))
 
       this.addFakeDatasOnAccounts()
