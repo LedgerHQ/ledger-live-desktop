@@ -195,30 +195,32 @@ class DevToolbar extends PureComponent<any, State> {
             </GrowScroll>
           </Box>
           <Box flow={10}>
-            {Object.keys(cpuUsage).map(k => (
-              <Box key={k} grow>
-                <Box horizontal align="center">
-                  <Box grow>{k}</Box>
-                  <Box fontSize="8px">{last(cpuUsage[k]).value}%</Box>
+            {Object.keys(cpuUsage)
+              .sort()
+              .map(k => (
+                <Box key={k} grow>
+                  <Box horizontal align="center">
+                    <Box grow>{k}</Box>
+                    <Box fontSize="8px">{last(cpuUsage[k]).value}%</Box>
+                  </Box>
+                  <Box>
+                    <AreaChart
+                      width={100}
+                      height={40}
+                      data={cpuUsage[k]}
+                      margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+                    >
+                      <Area
+                        type="monotone"
+                        stroke="#8884d8"
+                        fill="#8884d8"
+                        dataKey="value"
+                        isAnimationActive={false}
+                      />
+                    </AreaChart>
+                  </Box>
                 </Box>
-                <Box>
-                  <AreaChart
-                    width={100}
-                    height={40}
-                    data={cpuUsage[k]}
-                    margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
-                  >
-                    <Area
-                      type="monotone"
-                      stroke="#8884d8"
-                      fill="#8884d8"
-                      dataKey="value"
-                      isAnimationActive={false}
-                    />
-                  </AreaChart>
-                </Box>
-              </Box>
-            ))}
+              ))}
           </Box>
         </Box>
       </Container>

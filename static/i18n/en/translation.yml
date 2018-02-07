@@ -8,6 +8,12 @@ language:
   en: English
   fr: French
 
+orderAccounts:
+  custom: Custom
+  name: By name
+  balance: By balance
+  type: By type
+
 sidebar:
   menu: Menu
   accounts: Accounts
@@ -45,6 +51,7 @@ settings:
 
   display:
     language: Language
+    orderAccounts: Order accounts
 
 SelectAccount:
   placeholder: Select a account

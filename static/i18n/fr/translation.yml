@@ -8,6 +8,12 @@ language:
   en: Anglais
   fr: Français
 
+orderAccounts:
+  custom: Personnalisé
+  name: Par nom
+  balance: Par solde
+  type: Par type
+
 sidebar:
   menu: Menu
   accounts: Comptes
@@ -45,6 +51,7 @@ settings:
 
   display:
     language: Langage
+    orderAccounts: Ordre des comptes
 
 SelectAccount:
   placeholder: Sélectionner un compte

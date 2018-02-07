@@ -10,6 +10,7 @@ export type SettingsState = Object
 
 const state: SettingsState = {
   language: 'en',
+  orderAccounts: 'balance',
   password: {
     state: false,
   },
@@ -20,7 +21,10 @@ const handlers: Object = {
     ...state,
     ...settings,
   }),
-  FETCH_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => settings,
+  FETCH_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => ({
+    ...state,
+    ...settings,
+  }),
 }
 
 export const hasPassword = (state: Object) => get(state.settings, 'password.state', false)
