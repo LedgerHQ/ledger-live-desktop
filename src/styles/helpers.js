@@ -21,7 +21,7 @@ export const fontFace = ({
 }) => `
   @font-face {
     font-family: "${name}";
-    src: url("/fonts/${file}.woff2") format("woff2");
+    src: url("${__DEV__ ? '' : __static}/fonts/${file}.woff2") format("woff2");
     font-style: ${style};
     font-weight: ${weight};
   }
