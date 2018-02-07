@@ -12,64 +12,85 @@ import type { Account, Accounts, AccountData } from 'types/common'
 
 export type AccountsState = Accounts
 
-const state: AccountsState = {}
+const state: AccountsState = []
 
-function getAccount(account: Account) {
+function orderAccountsTransactions(account: Account) {
   const transactions = get(account.data, 'transactions', [])
-
   transactions.sort((a, b) => new Date(b.received_at) - new Date(a.received_at))
-
   return {
     ...account,
     data: {
-      ...(account.data || {}),
+      ...account.data,
       transactions,
     },
   }
 }
 
+const defaultAccountData: AccountData = {
+  address: '',
+  balance: 0,
+  currentIndex: 0,
+  transactions: [],
+}
+
 const handlers: Object = {
-  ADD_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => ({
-    ...state,
-    [account.id]: getAccount(account),
-  }),
-  EDIT_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) => ({
-    ...state,
-    [account.id]: {
-      ...state[account.id],
-      ...getAccount(account),
-    },
-  }),
-  FETCH_ACCOUNTS: (state: AccountsState, { payload: accounts }: { payload: Accounts }) => accounts,
-  SET_ACCOUNT_DATA: (
+  SET_ACCOUNTS: (
     state: AccountsState,
-    { payload: { accountID, data } }: { payload: { accountID: string, data: AccountData } },
+    { payload: accounts }: { payload: Accounts },
+  ): AccountsState => accounts,
+
+  ADD_ACCOUNT: (
+    state: AccountsState,
+    { payload: account }: { payload: Account },
   ): AccountsState => {
-    const account = state[accountID]
-    const { data: accountData } = account
-
-    const transactions = uniqBy(
-      [...get(accountData, 'transactions', []), ...data.transactions],
-      tx => tx.hash,
-    )
-    const currentIndex = data.currentIndex ? data.currentIndex : get(accountData, 'currentIndex', 0)
-
-    account.data = {
-      ...accountData,
-      ...data,
-      balance: transactions.reduce((result, v) => {
-        result += v.balance
-        return result
-      }, 0),
-      currentIndex,
-      transactions,
-    }
-
-    return {
-      ...state,
-      [accountID]: getAccount(account),
-    }
+    account = orderAccountsTransactions({
+      ...account,
+      data: {
+        ...defaultAccountData,
+        ...account.data,
+      },
+    })
+    return [...state, account]
   },
+
+  UPDATE_ACCOUNT: (
+    state: AccountsState,
+    { payload: account }: { payload: Account },
+  ): AccountsState =>
+    state.map(existingAccount => {
+      if (existingAccount.id !== account.id) {
+        return existingAccount
+      }
+
+      const existingData = get(existingAccount, 'data', {})
+      const data = get(account, 'data', {})
+
+      const transactions = uniqBy(
+        [...get(existingData, 'transactions', []), ...get(data, 'transactions', [])],
+        tx => tx.hash,
+      )
+
+      const currentIndex = data.currentIndex
+        ? data.currentIndex
+        : get(existingData, 'currentIndex', 0)
+
+      const updatedAccount = {
+        ...existingAccount,
+        ...account,
+        data: {
+          ...existingData,
+          ...data,
+          balance: transactions.reduce((result, v) => {
+            result += v.balance
+            return result
+          }, 0),
+          currentIndex,
+          transactions,
+        },
+      }
+
+      return orderAccountsTransactions(updatedAccount)
+    }),
 }
 
 // Selectors
@@ -78,35 +99,24 @@ export function getTotalBalance(state: { accounts: AccountsState }) {
   return reduce(
     state.accounts,
     (result, account) => {
-      result += account.data.balance
+      result += get(account, 'data.balance', 0)
       return result
     },
     0,
   )
 }
 
-export function getAccounts(state: { accounts: AccountsState }) {
-  return Object.keys(state.accounts).reduce((result, key) => {
-    result[key] = getAccount(state.accounts[key])
-    return result
-  }, {})
+export function getAccounts(state: { accounts: AccountsState }): Array<Account> {
+  return state.accounts
 }
 
-export function getVisibleAccounts(state: { accounts: AccountsState }) {
-  const accounts = getAccounts(state)
-  return Object.keys(accounts).reduce((result, key) => {
-    const account = accounts[key]
-
-    if (account.archived !== true) {
-      result[key] = account
-    }
-
-    return result
-  }, {})
+export function getVisibleAccounts(state: { accounts: AccountsState }): Array<Account> {
+  return getAccounts(state).filter(account => account.archived !== true)
 }
 
-export function getAccountById(state: { accounts: AccountsState }, id: string) {
-  return getAccounts(state)[id]
+export function getAccountById(state: { accounts: AccountsState }, id: string): Account | null {
+  const account = getAccounts(state).find(account => account.id === id)
+  return account || null
 }
 
 export function getAccountData(state: State, id: string): AccountData | null {
@@ -114,7 +124,7 @@ export function getAccountData(state: State, id: string): AccountData | null {
 }
 
 export function canCreateAccount(state: State): boolean {
-  return every(getAccounts(state), a => a.data.transactions.length > 0)
+  return every(getAccounts(state), a => get(a, 'data.transactions.length', 0) > 0)
 }
 
 export default handleActions(handlers, state)

@@ -1,9 +1,5 @@
 // @flow
 
-import { createAction } from 'redux-actions'
-
-import type { Dispatch } from 'redux'
-
 import db from 'helpers/db'
 
 import type { Account } from 'types/common'
@@ -14,24 +10,17 @@ export const addAccount: AddAccount = payload => ({
   payload,
 })
 
-export type EditAccount = Account => { type: string, payload: Account }
-export const editAccount: AddAccount = payload => ({
-  type: 'DB:EDIT_ACCOUNT',
+export type UpdateAccount = Account => { type: string, payload: Account }
+export const updateAccount: AddAccount = payload => ({
+  type: 'DB:UPDATE_ACCOUNT',
   payload,
 })
 
 type FetchAccounts = () => { type: string }
-export const fetchAccounts: FetchAccounts = () => ({
-  type: 'FETCH_ACCOUNTS',
-  payload: db('accounts'),
-})
-
-const setAccountData = createAction('DB:SET_ACCOUNT_DATA', (accountID, data) => ({
-  accountID,
-  data,
-}))
-
-export const syncAccount: Function = account => async (dispatch: Dispatch<*>) => {
-  const { id, ...data } = account
-  dispatch(setAccountData(id, data))
+export const fetchAccounts: FetchAccounts = () => {
+  const payload = db.get('accounts')
+  return {
+    type: 'SET_ACCOUNTS',
+    payload,
+  }
 }

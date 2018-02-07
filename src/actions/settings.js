@@ -11,7 +11,7 @@ export const saveSettings: SaveSettings = payload => ({
 })
 
 export const fetchSettings: Function = () => dispatch => {
-  const settings = db('settings')
+  const settings = db.get('settings')
   if (Object.keys(settings).length === 0) {
     return
   }

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { ipcRenderer } from 'electron'
+import differenceBy from 'lodash/differenceBy'
 
 import { MODAL_ADD_ACCOUNT } from 'constants'
 
@@ -74,7 +75,7 @@ const Steps = {
     </Box>
   ),
   listAccounts: (props: Object) => {
-    const accounts = Object.entries(props.accounts).map(([, account]: [string, any]) => account)
+    const { accounts } = props
     const emptyAccounts = accounts.filter(account => account.transactions.length === 0)
     const existingAccounts = accounts.filter(account => account.transactions.length > 0)
     const canCreateAccount = props.canCreateAccount && emptyAccounts.length === 1
@@ -110,7 +111,7 @@ type Props = {
 type State = {
   inputValue: InputValue,
   step: Step,
-  accounts: Object,
+  accounts: Accounts,
   progress: null | Object,
 }
 
@@ -129,7 +130,7 @@ const defaultState = {
   inputValue: {
     wallet: '',
   },
-  accounts: {},
+  accounts: [],
   progress: null,
   step: 'chooseWallet',
 }
@@ -146,12 +147,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   componentWillReceiveProps(nextProps) {
     if (nextProps.accounts) {
       this.setState(prev => ({
-        accounts: Object.keys(prev.accounts).reduce((result, value) => {
-          if (!nextProps.accounts[value]) {
-            result[value] = prev.accounts[value]
-          }
-          return result
-        }, {}),
+        accounts: differenceBy(prev.accounts, nextProps.accounts, 'id'),
       }))
     }
   }
@@ -183,7 +179,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     sendEvent('usb', 'wallet.getAccounts', {
       path: currentDevice.path,
       wallet: inputValue.wallet,
-      currentAccounts: Object.keys(accounts),
+      currentAccounts: accounts.map(acc => acc.id),
     })
   }
 

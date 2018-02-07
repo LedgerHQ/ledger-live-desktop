@@ -32,7 +32,7 @@ const Container = styled(Box).attrs({
 `
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  hasAccounts: Object.keys(getAccounts(state)).length > 0,
+  hasAccounts: getAccounts(state).length > 0,
   hasPassword: hasPassword(state),
 })
 

@@ -40,7 +40,7 @@ type Props = {
 
 type State = {
   tab: number,
-  datas: Object,
+  fakeDatas: Array<any>,
 }
 
 const ACCOUNTS_BY_LINE = 3
@@ -52,7 +52,7 @@ const itemsTimes = [
   { key: 'year', name: 'Last year' },
 ]
 
-const generateData = v => ({
+const generateFakeData = v => ({
   name: `Day ${v}`,
   value: random(10, 100),
 })
@@ -60,11 +60,11 @@ const generateData = v => ({
 class DashboardPage extends PureComponent<Props, State> {
   state = {
     tab: 0,
-    datas: this.generateDatas(),
+    fakeDatas: this.generateFakeDatas(),
   }
 
   componentDidMount() {
-    this.addDatasOnAccounts()
+    this.addFakeDatasOnAccounts()
   }
 
   componentWillUnmount() {
@@ -74,42 +74,33 @@ class DashboardPage extends PureComponent<Props, State> {
   getAccountsChunk() {
     const { accounts } = this.props
 
-    const listAccounts = Object.values(accounts)
+    // create shallow copy of accounts, to be mutated
+    const listAccounts = [...accounts]
 
     while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
-
     return chunk(listAccounts, ACCOUNTS_BY_LINE)
   }
 
-  generateDatas() {
+  generateFakeDatas() {
     const { accounts } = this.props
-
-    return Object.keys(accounts).reduce((result, key) => {
-      result[key] = [...Array(25).keys()].map(v => generateData(v + 1))
-
-      return result
-    }, {})
+    return accounts.map(() => [...Array(25).keys()].map(v => generateFakeData(v + 1)))
   }
 
-  addDatasOnAccounts = () => {
+  addFakeDatasOnAccounts = () => {
     this._timeout = setTimeout(() => {
       const { accounts } = this.props
 
       this.setState(prev => ({
-        datas: {
-          ...Object.keys(accounts).reduce((result, key) => {
-            if (result[key]) {
-              const nextIndex = result[key].length
-
-              result[key][nextIndex] = generateData(nextIndex)
-            }
-
-            return result
-          }, prev.datas),
-        },
+        fakeDatas: accounts.reduce((res, acc, i) => {
+          if (res[i]) {
+            const nextIndex = res[i].length
+            res[i][nextIndex] = generateFakeData(nextIndex)
+          }
+          return res
+        }, prev.fakeDatas),
       }))
 
-      this.addDatasOnAccounts()
+      this.addFakeDatasOnAccounts()
     }, TIMEOUT_REFRESH_DATAS)
   }
 
@@ -119,9 +110,9 @@ class DashboardPage extends PureComponent<Props, State> {
 
   render() {
     const { totalBalance, push, accounts } = this.props
-    const { tab, datas } = this.state
+    const { tab, fakeDatas } = this.state
 
-    const totalAccounts = Object.keys(accounts).length
+    const totalAccounts = accounts.length
 
     return (
       <Box flow={4}>
@@ -171,17 +162,14 @@ class DashboardPage extends PureComponent<Props, State> {
           <AreaChart
             height={250}
             data={takeRight(
-              Object.keys(datas).reduce((result, key) => {
-                const data = datas[key]
-
+              fakeDatas.reduce((res, data) => {
                 data.forEach((d, i) => {
-                  result[i] = {
+                  res[i] = {
                     name: d.name,
-                    value: (result[i] ? result[i].value : 0) + d.value,
+                    value: (res[i] ? res[i].value : 0) + d.value,
                   }
                 })
-
-                return result
+                return res
               }, []),
               25,
             )}
@@ -216,7 +204,7 @@ class DashboardPage extends PureComponent<Props, State> {
                       <Box grow align="center" justify="center">
                         {account.data && formatBTC(account.data.balance)}
                       </Box>
-                      <BarChart height={100} data={takeRight(datas[account.id], 25)} />
+                      <BarChart height={100} data={takeRight(fakeDatas[j], 25)} />
                     </Card>
                   ),
               )}

@@ -16,6 +16,8 @@ import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
 
+import db from 'helpers/db'
+
 import App from 'components/App'
 
 import 'styles/global'
@@ -24,6 +26,10 @@ if (__PROD__ && __SENTRY_URL__) {
   Raven.config(__SENTRY_URL__, { allowSecretKey: true }).install()
   window.addEventListener('unhandledrejection', event => Raven.captureException(event.reason))
 }
+
+// init db with defaults if needed
+db.init('accounts', [])
+db.init('settings', {})
 
 const history = createHistory()
 const store = createStore(history)

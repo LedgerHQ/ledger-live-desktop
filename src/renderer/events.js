@@ -10,7 +10,7 @@ import type { Accounts } from 'types/common'
 import { CHECK_UPDATE_TIMEOUT, SYNC_ACCOUNT_TIMEOUT } from 'constants'
 
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
-import { syncAccount } from 'actions/accounts'
+import { updateAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
 import { getAccountData, getAccounts } from 'reducers/accounts'
 
@@ -41,11 +41,11 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
 export function startSyncAccounts(accounts: Accounts) {
   syncAccounts = true
   sendEvent('accounts', 'sync.all', {
-    accounts: Object.entries(accounts).map(([id, account]: [string, any]) => {
+    accounts: accounts.map(account => {
       const currentIndex = get(account, 'data.currentIndex', 0)
       const allAddresses = get(account, 'data.allAddresses', [])
       return {
-        id,
+        id: account.id,
         allAddresses,
         currentIndex,
       }
@@ -75,7 +75,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
             )
 
             if (currentAccountData.transactions.length !== transactions.length) {
-              store.dispatch(syncAccount(account))
+              store.dispatch(updateAccount(account))
             }
           }
         },

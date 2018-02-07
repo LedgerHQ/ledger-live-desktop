@@ -4,6 +4,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import { Redirect } from 'react-router'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'constants'
 
@@ -41,6 +42,11 @@ const mapDispatchToProps = {
 class AccountPage extends PureComponent<Props> {
   render() {
     const { account, accountData, openModal, t } = this.props
+
+    // Don't even throw if we jumped in wrong account route
+    if (!account) {
+      return <Redirect to="/" />
+    }
 
     return (
       <Box flow={3}>

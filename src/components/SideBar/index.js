@@ -111,11 +111,11 @@ class SideBar extends PureComponent<Props> {
               </PlusBtn>
             </CapsSubtitle>
             <GrowScroll pb={2} px={2} flow={1}>
-              {Object.entries(accounts).map(([id, account]: [string, any]) => (
+              {accounts.map(account => (
                 <Item
-                  linkTo={`/account/${id}`}
-                  desc={formatBTC(account.data.balance)}
-                  key={id}
+                  linkTo={`/account/${account.id}`}
+                  desc={formatBTC(account.data ? account.data.balance : 0)}
+                  key={account.id}
                   icon={{ iconName: 'btc', prefix: 'fab' }}
                 >
                   {account.name}
