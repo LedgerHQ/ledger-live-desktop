@@ -1,8 +1,10 @@
 // @flow
 
 import { app, BrowserWindow, Menu, ipcMain, screen } from 'electron'
+import debounce from 'lodash/debounce'
 
 import menu from 'main/menu'
+import db from 'helpers/db'
 
 // necessary to prevent win from being garbage collected
 let mainWindow
@@ -32,9 +34,10 @@ const defaultWindowOptions = ({ height, width }) => ({
 function createMainWindow() {
   const MIN_HEIGHT = 768
   const MIN_WIDTH = 1024
+  const savedDimensions = db.getIn('settings', 'window.dimensions', {})
 
-  const height = MIN_HEIGHT
-  const width = MIN_WIDTH
+  const width = savedDimensions.width || MIN_WIDTH
+  const height = savedDimensions.height || MIN_HEIGHT
 
   const windowOptions = {
     ...defaultWindowOptions({ height, width }),
@@ -44,11 +47,11 @@ function createMainWindow() {
           titleBarStyle: 'hiddenInset',
         }
       : {}),
-    height,
-    minHeight: MIN_HEIGHT,
-    minWidth: MIN_WIDTH,
-    show: false,
     width,
+    height,
+    minWidth: MIN_WIDTH,
+    minHeight: MIN_HEIGHT,
+    show: false,
     webPreferences: {
       ...defaultWindowOptions.webPreferences,
       // Enable, among other things, the ResizeObserver
@@ -77,6 +80,11 @@ function createMainWindow() {
       }
     }
   })
+
+  window.on('resize', debounce(() => {
+    const [width, height] = window.getSize()
+    db.setIn('settings', 'window.dimensions', { width, height })
+  }, 100))
 
   window.webContents.on('devtools-opened', () => {
     window.focus()

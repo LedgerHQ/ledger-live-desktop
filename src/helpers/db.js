@@ -1,4 +1,6 @@
 import Store from 'electron-store'
+import set from 'lodash/set'
+import get from 'lodash/get'
 
 const encryptionKey = {}
 
@@ -33,6 +35,20 @@ export default {
   set: (key, val) => {
     const db = store(key)
     db.set('data', val)
+    return db.get('data')
+  },
+
+  getIn: (key, path, defaultValue) => {
+    const db = store(key)
+    const data = db.get('data')
+    return get(data, path, defaultValue)
+  },
+
+  setIn: (key, path, val) => {
+    const db = store(key)
+    const data = db.get('data')
+    set(data, path, val)
+    db.set('data', data)
     return db.get('data')
   },
 }
