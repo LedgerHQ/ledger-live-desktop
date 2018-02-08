@@ -1,6 +1,6 @@
 // @flow
 
-import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+import { app, BrowserWindow, Menu, ipcMain, screen } from 'electron'
 
 import menu from 'main/menu'
 
@@ -12,31 +12,43 @@ let forceClose = false
 
 const devTools = __DEV__
 
-const defaultWindowOptions = {
+const getWindowPosition = (height, width) => {
+  const { bounds } = screen.getPrimaryDisplay()
+
+  return {
+    x: Math.ceil(bounds.x + (bounds.width - width) / 2),
+    y: Math.ceil(bounds.y + (bounds.height - height) / 2),
+  }
+}
+
+const defaultWindowOptions = ({ height, width }) => ({
+  ...getWindowPosition(height, width),
   backgroundColor: '#fff',
-  center: true,
   webPreferences: {
     devTools,
   },
-}
+})
 
 function createMainWindow() {
   const MIN_HEIGHT = 768
   const MIN_WIDTH = 1024
 
+  const height = MIN_HEIGHT
+  const width = MIN_WIDTH
+
   const windowOptions = {
-    ...defaultWindowOptions,
+    ...defaultWindowOptions({ height, width }),
     ...(process.platform === 'darwin'
       ? {
           frame: false,
           titleBarStyle: 'hiddenInset',
         }
       : {}),
-    height: MIN_HEIGHT,
+    height,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
     show: false,
-    width: MIN_WIDTH,
+    width,
     webPreferences: {
       ...defaultWindowOptions.webPreferences,
       // Enable, among other things, the ResizeObserver
@@ -80,19 +92,19 @@ function createPreloadWindow() {
   // Preload renderer of main windows
   mainWindow = createMainWindow()
 
-  const HEIGHT = 144
-  const WIDTH = 256
+  const height = 144
+  const width = 256
 
   const windowOptions = {
-    ...defaultWindowOptions,
+    ...defaultWindowOptions({ height, width }),
     closable: false,
     frame: false,
     fullscreenable: false,
-    height: HEIGHT,
+    height,
     resizable: false,
     show: false,
     skipTaskbar: true,
-    width: WIDTH,
+    width,
   }
 
   const window = new BrowserWindow(windowOptions)
