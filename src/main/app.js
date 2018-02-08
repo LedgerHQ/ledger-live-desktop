@@ -23,24 +23,26 @@ const getWindowPosition = (height, width) => {
   }
 }
 
-const defaultWindowOptions = ({ height, width }) => ({
-  ...getWindowPosition(height, width),
+const defaultWindowOptions = {
   backgroundColor: '#fff',
   webPreferences: {
     devTools,
   },
-})
+}
 
 function createMainWindow() {
   const MIN_HEIGHT = 768
   const MIN_WIDTH = 1024
+
   const savedDimensions = db.getIn('settings', 'window.dimensions', {})
+  const savedPositions = db.getIn('settings', 'window.positions', null)
 
   const width = savedDimensions.width || MIN_WIDTH
   const height = savedDimensions.height || MIN_HEIGHT
 
   const windowOptions = {
-    ...defaultWindowOptions({ height, width }),
+    ...defaultWindowOptions,
+    ...(savedPositions !== null ? savedPositions : getWindowPosition(height, width)),
     ...(process.platform === 'darwin'
       ? {
           frame: false,
@@ -81,10 +83,21 @@ function createMainWindow() {
     }
   })
 
-  window.on('resize', debounce(() => {
-    const [width, height] = window.getSize()
-    db.setIn('settings', 'window.dimensions', { width, height })
-  }, 100))
+  window.on(
+    'resize',
+    debounce(() => {
+      const [width, height] = window.getSize()
+      db.setIn('settings', 'window.dimensions', { width, height })
+    }, 100),
+  )
+
+  window.on(
+    'move',
+    debounce(() => {
+      const [x, y] = window.getPosition()
+      db.setIn('settings', 'window.positions', { x, y })
+    }, 100),
+  )
 
   window.webContents.on('devtools-opened', () => {
     window.focus()
@@ -104,7 +117,8 @@ function createPreloadWindow() {
   const width = 256
 
   const windowOptions = {
-    ...defaultWindowOptions({ height, width }),
+    ...defaultWindowOptions,
+    ...getWindowPosition(height, width),
     closable: false,
     frame: false,
     fullscreenable: false,
