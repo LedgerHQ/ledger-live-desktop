@@ -3,9 +3,11 @@
     [
       "env",
       {
+        "loose": true,
         "modules": false,
         "targets": {
-          "node": "8"
+          "electron": "1.8",
+          "node": "current"
         }
       }
     ],

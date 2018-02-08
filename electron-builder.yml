@@ -1,4 +1,4 @@
-appId: com.electron.ledger
+appId: com.ledger.desktop
 
 protocols:
   name: Ledger Wallet Desktop
@@ -6,9 +6,39 @@ protocols:
     - ledgerhq
 
 mac:
-  category: public.app-category.utilities
+  artifactName: ${name}-${version}-${os}.${ext}
+  category: public.app-category.wallet
+  target:
+    - dmg
+    - zip
+
 linux:
-  target: appImage
+  artifactName: ${name}-${version}-${os}-${arch}.${ext}
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: tar.gz
+      arch:
+        - x64
+
+win:
+  artifactName: ${name}-${version}-${os}-${arch}.${ext}
+  target:
+    - target: nsis
+      arch:
+        - x64
+        - ia32
+    - target: zip
+      arch:
+        - x64
+        - ia32
+
+nsis:
+  oneClick: false
+  perMachine: true
+  allowToChangeInstallationDirectory: true
+
 
 files:
   - dist/internals

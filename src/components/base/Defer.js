@@ -7,31 +7,25 @@ type Props = {
 }
 
 type State = {
-  show: boolean,
+  shouldRender: boolean,
 }
 
 class Defer extends PureComponent<Props, State> {
   state = {
-    show: false,
+    shouldRender: false,
   }
 
   componentDidMount() {
     window.requestAnimationFrame(() =>
-      this.setState({
-        show: true,
-      }),
+      window.requestAnimationFrame(() => this.setState({ shouldRender: true })),
     )
   }
 
   render() {
     const { children } = this.props
-    const { show } = this.state
+    const { shouldRender } = this.state
 
-    if (show) {
-      return children
-    }
-
-    return null
+    return shouldRender ? children : null
   }
 }
 
