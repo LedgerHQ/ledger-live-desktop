@@ -9,7 +9,6 @@ language:
   fr: French
 
 orderAccounts:
-  custom: Custom
   name: By name
   balance: By balance
   type: By type

@@ -1,31 +1,44 @@
 // @flow
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu, ipcMain } from 'electron'
+
+import menu from 'main/menu'
 
 // necessary to prevent win from being garbage collected
 let mainWindow
+let preloadWindow
 
-const MIN_HEIGHT = 768
-const MIN_WIDTH = 1024
+let forceClose = false
+
+const devTools = __DEV__
+
+const defaultWindowOptions = {
+  backgroundColor: '#fff',
+  center: true,
+  webPreferences: {
+    devTools,
+  },
+}
 
 function createMainWindow() {
+  const MIN_HEIGHT = 768
+  const MIN_WIDTH = 1024
+
   const windowOptions = {
+    ...defaultWindowOptions,
     ...(process.platform === 'darwin'
       ? {
           frame: false,
           titleBarStyle: 'hiddenInset',
         }
       : {}),
-    center: true,
-    show: true,
     height: MIN_HEIGHT,
-    width: MIN_WIDTH,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
+    show: false,
+    width: MIN_WIDTH,
     webPreferences: {
-      // Disable auxclick event
-      // See https://developers.google.com/web/updates/2016/10/auxclick
-      disableBlinkFeatures: 'Auxclick',
+      ...defaultWindowOptions.webPreferences,
       // Enable, among other things, the ResizeObserver
       experimentalFeatures: true,
     },
@@ -37,18 +50,20 @@ function createMainWindow() {
     ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
     : `file://${__dirname}/index.html`
 
-  if (__DEV__) {
+  if (devTools) {
     window.webContents.openDevTools()
   }
 
   window.loadURL(url)
 
-  window.on('close', () => {
-    mainWindow = null
-  })
+  window.on('close', e => {
+    if (!forceClose) {
+      e.preventDefault()
 
-  window.once('ready-to-show', () => {
-    window.show()
+      if (mainWindow !== null) {
+        mainWindow.hide()
+      }
+    }
   })
 
   window.webContents.on('devtools-opened', () => {
@@ -61,17 +76,55 @@ function createMainWindow() {
   return window
 }
 
+function createPreloadWindow() {
+  // Preload renderer of main windows
+  mainWindow = createMainWindow()
+
+  const HEIGHT = 144
+  const WIDTH = 256
+
+  const windowOptions = {
+    ...defaultWindowOptions,
+    closable: false,
+    frame: false,
+    fullscreenable: false,
+    height: HEIGHT,
+    resizable: false,
+    show: false,
+    skipTaskbar: true,
+    width: WIDTH,
+  }
+
+  const window = new BrowserWindow(windowOptions)
+
+  window.loadURL(`file://${__static}/preload-window.html`)
+
+  window.on('ready-to-show', () => {
+    window.show()
+  })
+
+  return window
+}
+
+app.on('before-quit', () => {
+  forceClose = true
+})
+
 app.on('window-all-closed', () => {
   // On macOS it is common for applications to stay open
   // until the user explicitly quits
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
 })
 
 app.on('activate', () => {
   // On macOS it is common to re-create a window
   // even after all windows have been closed
-  if (mainWindow === null) {
-    mainWindow = createMainWindow()
+  if (mainWindow === null && preloadWindow === null) {
+    preloadWindow = createPreloadWindow()
+  } else if (mainWindow !== null) {
+    mainWindow.show()
   }
 })
 
@@ -91,5 +144,19 @@ app.on('ready', async () => {
     await installExtensions()
   }
 
-  mainWindow = createMainWindow()
+  Menu.setApplicationMenu(menu)
+
+  preloadWindow = createPreloadWindow()
+})
+
+ipcMain.on('app-finish-rendering', () => {
+  if (preloadWindow !== null) {
+    preloadWindow.destroy()
+    preloadWindow = null
+  }
+
+  if (mainWindow !== null) {
+    mainWindow.show()
+    setImmediate(() => mainWindow !== null && mainWindow.focus())
+  }
 })

@@ -1,5 +1,6 @@
 {
   "name": "ledger-wallet-desktop",
+  "productName": "Ledger Wallet Desktop",
   "description": "Ledger Wallet Desktop",
   "repository": "https://github.com/LedgerHQ/ledger-wallet-desktop",
   "version": "0.1.0",
@@ -27,6 +28,7 @@
     ]
   },
   "electronWebpack": {
+    "title": true,
     "renderer": {
       "webpackConfig": "./webpack/renderer.config.js"
     },

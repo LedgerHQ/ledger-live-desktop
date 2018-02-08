@@ -45,8 +45,6 @@ if (!locked) {
   store.dispatch(fetchAccounts())
 }
 
-events({ store, locked })
-
 function r(Comp) {
   if (rootNode) {
     render(<AppContainer>{Comp}</AppContainer>, rootNode)
@@ -54,6 +52,8 @@ function r(Comp) {
 }
 
 r(<App store={store} history={history} language={language} />)
+
+events({ store, locked })
 
 if (module.hot) {
   module.hot.accept('../components/App', () => {

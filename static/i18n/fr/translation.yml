@@ -9,7 +9,6 @@ language:
   fr: Français
 
 orderAccounts:
-  custom: Personnalisé
   name: Par nom
   balance: Par solde
   type: Par type

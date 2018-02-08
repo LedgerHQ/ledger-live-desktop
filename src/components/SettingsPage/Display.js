@@ -45,10 +45,6 @@ class TabProfile extends PureComponent<Props, State> {
       ],
       orderAccounts: [
         {
-          key: 'custom',
-          name: t('orderAccounts.custom'),
-        },
-        {
           key: 'name',
           name: t('orderAccounts.name'),
         },
