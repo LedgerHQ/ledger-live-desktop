@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment, Component } from 'react'
+import { ipcRenderer } from 'electron'
 import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
@@ -11,23 +12,34 @@ import GrowScroll from 'components/base/GrowScroll'
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
 import SettingsPage from 'components/SettingsPage'
-import UpdateNotifier from 'components/UpdateNotifier'
 
 import AppRegionDrag from 'components/AppRegionDrag'
+import DevToolbar from 'components/DevToolbar'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
-import DevToolbar from 'components/DevToolbar'
+import UpdateNotifier from 'components/UpdateNotifier'
 
 class Wrapper extends Component<{}> {
+  componentDidMount() {
+    window.requestAnimationFrame(
+      () => (this._timeout = setTimeout(() => ipcRenderer.send('app-finish-rendering'), 300)),
+    )
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._timeout)
+  }
+
+  _timeout = undefined
+
   render() {
     return (
       <Fragment>
         {process.platform === 'darwin' && <AppRegionDrag />}
+        {__DEV__ && <DevToolbar />}
 
         <IsUnlocked>
-          {__DEV__ && <DevToolbar />}
-
           {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
             <ModalComponent key={name} />
           ))}

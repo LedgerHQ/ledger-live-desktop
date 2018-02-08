@@ -1,10 +1,11 @@
 // @flow
 
 import objectPath from 'object-path'
+import capitalize from 'lodash/capitalize'
 
 const { FORK_TYPE } = process.env
 
-process.title = `ledger-wallet-desktop-${FORK_TYPE}`
+process.title = `Ledger Wallet Desktop ${capitalize(FORK_TYPE)}`
 
 function sendEvent(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
