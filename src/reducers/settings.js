@@ -29,5 +29,6 @@ const handlers: Object = {
 
 export const hasPassword = (state: Object) => get(state.settings, 'password.state', false)
 export const getLanguage = (state: Object) => get(state.settings, 'language', 'en')
+export const getOrderAccounts = (state: Object) => get(state.settings, 'orderAccounts', 'balance')
 
 export default handleActions(handlers, state)

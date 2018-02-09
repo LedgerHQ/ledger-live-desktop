@@ -7,9 +7,11 @@ import { push } from 'react-router-redux'
 
 import { MODAL_SETTINGS_ACCOUNT } from 'constants'
 
+import type { MapStateToProps } from 'react-redux'
 import type { Account } from 'types/common'
 
-import { updateAccount, removeAccount } from 'actions/accounts'
+import { updateOrderAccounts, updateAccount, removeAccount } from 'actions/accounts'
+import { getOrderAccounts } from 'reducers/settings'
 import { setDataModal, closeModal } from 'reducers/modals'
 
 import Box from 'components/base/Box'
@@ -27,18 +29,25 @@ type State = {
 
 type Props = {
   closeModal: Function,
-  updateAccount: Function,
+  orderAccounts: string,
+  push: Function,
   removeAccount: Function,
   setDataModal: Function,
-  push: Function,
+  updateAccount: Function,
+  updateOrderAccounts: Function,
 }
+
+const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  orderAccounts: getOrderAccounts(state),
+})
 
 const mapDispatchToProps = {
   closeModal,
-  updateAccount,
+  push,
   removeAccount,
   setDataModal,
-  push,
+  updateAccount,
+  updateOrderAccounts,
 }
 
 const defaultState = {
@@ -101,6 +110,7 @@ class SettingsAccount extends PureComponent<Props, State> {
 
     updateAccount(account)
     setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
+    this.updateOrderAccounts()
 
     this.setState({
       editName: false,
@@ -117,8 +127,8 @@ class SettingsAccount extends PureComponent<Props, State> {
       updateAccount({ ...account, archived: true })
     }
 
+    this.updateOrderAccounts()
     closeModal(MODAL_SETTINGS_ACCOUNT)
-
     push('/')
   }
 
@@ -126,6 +136,12 @@ class SettingsAccount extends PureComponent<Props, State> {
     this.setState({
       ...defaultState,
     })
+
+  updateOrderAccounts() {
+    const { updateOrderAccounts, orderAccounts } = this.props
+
+    updateOrderAccounts(orderAccounts)
+  }
 
   render() {
     const { editName, nameHovered } = this.state
@@ -195,4 +211,4 @@ class SettingsAccount extends PureComponent<Props, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(SettingsAccount)
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsAccount)
