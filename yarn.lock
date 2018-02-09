@@ -146,6 +146,12 @@
     redux "^3.7.2"
     redux-thunk "^2.2.0"
 
+"@ledgerhq/currencies@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-2.3.0.tgz#4f76a7a47890d23a754b34da4d615fa479e2edec"
+  dependencies:
+    querystring "^0.2.0"
+
 "@ledgerhq/hw-app-btc@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-2.2.0.tgz#c5c99c8974ab8df378f773c5b03052304ce3812b"
