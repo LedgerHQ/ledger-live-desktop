@@ -34,6 +34,12 @@ export const updateAccount: AddAccount = payload => ({
   payload,
 })
 
+export type RemoveAccount = Account => { type: string, payload: Account }
+export const removeAccount: RemoveAccount = payload => ({
+  type: 'DB:REMOVE_ACCOUNT',
+  payload,
+})
+
 export type FetchAccounts = () => (Dispatch<*>, Function) => void
 export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
   const { settings: { orderAccounts } } = getState()

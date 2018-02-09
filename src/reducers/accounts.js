@@ -91,6 +91,9 @@ const handlers: Object = {
 
       return orderAccountsTransactions(updatedAccount)
     }),
+
+  REMOVE_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) =>
+    state.filter(acc => acc.id !== account.id),
 }
 
 // Selectors

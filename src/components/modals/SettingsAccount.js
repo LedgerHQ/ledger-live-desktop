@@ -9,7 +9,7 @@ import { MODAL_SETTINGS_ACCOUNT } from 'constants'
 
 import type { Account } from 'types/common'
 
-import { updateAccount } from 'actions/accounts'
+import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal, closeModal } from 'reducers/modals'
 
 import Box from 'components/base/Box'
@@ -28,6 +28,7 @@ type State = {
 type Props = {
   closeModal: Function,
   updateAccount: Function,
+  removeAccount: Function,
   setDataModal: Function,
   push: Function,
 }
@@ -35,6 +36,7 @@ type Props = {
 const mapDispatchToProps = {
   closeModal,
   updateAccount,
+  removeAccount,
   setDataModal,
   push,
 }
@@ -43,6 +45,10 @@ const defaultState = {
   editName: false,
   accountName: '',
   nameHovered: false,
+}
+
+function hasNoTransactions(account: Account) {
+  return get(account, 'data.transactions.length', 0) === 0
 }
 
 class SettingsAccount extends PureComponent<Props, State> {
@@ -102,12 +108,15 @@ class SettingsAccount extends PureComponent<Props, State> {
   }
 
   handleArchiveAccount = (account: Account) => () => {
-    const { push, closeModal, updateAccount } = this.props
+    const { push, closeModal, updateAccount, removeAccount } = this.props
+    const shouldRemove = hasNoTransactions(account)
 
-    updateAccount({
-      ...account,
-      archived: true,
-    })
+    if (shouldRemove) {
+      removeAccount(account)
+    } else {
+      updateAccount({ ...account, archived: true })
+    }
+
     closeModal(MODAL_SETTINGS_ACCOUNT)
 
     push('/')
@@ -170,7 +179,9 @@ class SettingsAccount extends PureComponent<Props, State> {
               </Box>
               <Box horizontal grow align="flex-end" flow={2}>
                 <Box grow>
-                  <Button onClick={this.handleArchiveAccount(account)}>Archive account</Button>
+                  <Button onClick={this.handleArchiveAccount(account)}>
+                    {hasNoTransactions(account) ? 'Remove account' : 'Archive account'}
+                  </Button>
                 </Box>
                 <Box grow>
                   <Button primary>Go to account</Button>
