@@ -1,8 +1,11 @@
 // @flow
 
-import { formatCurrencyUnit } from '@ledgerhq/common/lib/data/currency'
+import { formatCurrencyUnit } from '@ledgerhq/currencies'
 
-export function formatBTC(v: string | number, options: Object = { alwaysShowSign: true }) {
+export function formatBTC(
+  v: string | number,
+  options: Object = { alwaysShowSign: true, showCode: true },
+) {
   return formatCurrencyUnit(
     {
       name: 'bitcoin',
@@ -11,7 +14,6 @@ export function formatBTC(v: string | number, options: Object = { alwaysShowSign
       magnitude: 8,
     },
     Number(v),
-    options.alwaysShowSign,
-    true,
+    options,
   )
 }
