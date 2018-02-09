@@ -178,7 +178,11 @@ app.on('ready', async () => {
     await installExtensions()
   }
 
-  Menu.setApplicationMenu(menu)
+  if (process.platform === 'darwin') {
+    Menu.setApplicationMenu(menu)
+  } else {
+    Menu.setApplicationMenu(null)
+  }
 
   preloadWindow = createPreloadWindow()
 })
