@@ -152,29 +152,29 @@
   dependencies:
     querystring "^0.2.0"
 
-"@ledgerhq/hw-app-btc@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-2.2.0.tgz#c5c99c8974ab8df378f773c5b03052304ce3812b"
+"@ledgerhq/hw-app-btc@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-3.0.2.tgz#4bad5d65eeef3711083d681a19d58c63cc12fe02"
   dependencies:
-    "@ledgerhq/hw-transport" "^2.2.0"
+    "@ledgerhq/hw-transport" "^3.0.0"
     create-hash "^1.1.3"
 
-"@ledgerhq/hw-app-eth@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-2.2.0.tgz#e8b3591ebb24565d5bacbca5d4c2a0ab99eb965a"
+"@ledgerhq/hw-app-eth@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-3.0.0.tgz#0cc66865f44a1a0b6bbb5711e3585f6b58188a1c"
   dependencies:
-    "@ledgerhq/hw-transport" "^2.2.0"
+    "@ledgerhq/hw-transport" "^3.0.0"
 
-"@ledgerhq/hw-transport-node-hid@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-2.2.0.tgz#da24caf79401f4d3fd841a724e71928c841ae84c"
+"@ledgerhq/hw-transport-node-hid@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-3.0.0.tgz#eda95b99fa5d43e8703dbc0682fdb2a386a0dd25"
   dependencies:
-    "@ledgerhq/hw-transport" "^2.2.0"
+    "@ledgerhq/hw-transport" "^3.0.0"
     node-hid "^0.7.2"
 
-"@ledgerhq/hw-transport@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-2.2.0.tgz#32d6374e6cfacbb4b9b0a545cdd2f6bf3d64623f"
+"@ledgerhq/hw-transport@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-3.0.0.tgz#0a191626f906aa8b786b762a0e08641956c17ede"
   dependencies:
     events "^1.1.1"
 
@@ -3746,9 +3746,9 @@ eslint-module-utils@^2.1.1:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-flowtype@^2.42.0:
-  version "2.42.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.42.0.tgz#7fcc98df4ed9482a22ac10ba4ca48d649c4c733a"
+eslint-plugin-flowtype@^2.43.0:
+  version "2.43.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.43.0.tgz#47cdac5f01cda53f1c3e8477f0c83fee66a1606e"
   dependencies:
     lodash "^4.15.0"
 
@@ -5916,10 +5916,6 @@ lru-cache@^4.0.1, lru-cache@^4.1.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-lsmod@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/lsmod/-/lsmod-1.0.0.tgz#9a00f76dca36eb23fa05350afe1b585d4299e64b"
-
 macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
@@ -7433,16 +7429,15 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-raven-js@^3.22.1:
-  version "3.22.1"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.22.1.tgz#1117f00dfefaa427ef6e1a7d50bbb1fb998a24da"
+raven-js@^3.22.2:
+  version "3.22.2"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.22.2.tgz#85785928ebd664049e54efd0db8ff28da0cbb374"
 
-raven@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/raven/-/raven-2.4.0.tgz#49b7d5f838e5893f31dd72f82d05a35e42203f60"
+raven@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/raven/-/raven-2.4.1.tgz#7a6a6ff1c42d0a3892308f44c94273e7f88677fd"
   dependencies:
     cookie "0.3.1"
-    lsmod "1.0.0"
     md5 "^2.2.1"
     stack-trace "0.0.9"
     timed-out "4.0.1"
@@ -7531,9 +7526,9 @@ react-html-attributes@^1.3.0:
   dependencies:
     html-element-attributes "^1.0.0"
 
-react-i18next@^7.3.4:
-  version "7.3.4"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-7.3.4.tgz#d5932d47ac7f0d723eecef492ea97b7232673706"
+react-i18next@^7.3.6:
+  version "7.3.6"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-7.3.6.tgz#3e4fdd0be7735aa53343720684247ba7f6cfd51a"
   dependencies:
     hoist-non-react-statics "2.3.1"
     html-parse-stringify2 "2.0.1"

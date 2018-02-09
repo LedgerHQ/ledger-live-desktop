@@ -7,11 +7,9 @@ import { push } from 'react-router-redux'
 
 import { MODAL_SETTINGS_ACCOUNT } from 'constants'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Account } from 'types/common'
 
-import { updateOrderAccounts, updateAccount, removeAccount } from 'actions/accounts'
-import { getOrderAccounts } from 'reducers/settings'
+import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal, closeModal } from 'reducers/modals'
 
 import Box from 'components/base/Box'
@@ -22,24 +20,18 @@ import Text from 'components/base/Text'
 import Icon from 'components/base/Icon'
 
 type State = {
-  accountName: string,
+  accountName: string | null,
   editName: boolean,
   nameHovered: boolean,
 }
 
 type Props = {
   closeModal: Function,
-  orderAccounts: string,
   push: Function,
   removeAccount: Function,
   setDataModal: Function,
   updateAccount: Function,
-  updateOrderAccounts: Function,
 }
-
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
-  orderAccounts: getOrderAccounts(state),
-})
 
 const mapDispatchToProps = {
   closeModal,
@@ -47,12 +39,11 @@ const mapDispatchToProps = {
   removeAccount,
   setDataModal,
   updateAccount,
-  updateOrderAccounts,
 }
 
 const defaultState = {
   editName: false,
-  accountName: '',
+  accountName: null,
   nameHovered: false,
 }
 
@@ -72,7 +63,7 @@ class SettingsAccount extends PureComponent<Props, State> {
 
     return {
       ...account,
-      ...(accountName !== ''
+      ...(accountName !== null
         ? {
             name: accountName,
           }
@@ -107,14 +98,16 @@ class SettingsAccount extends PureComponent<Props, State> {
     e.preventDefault()
 
     const { updateAccount, setDataModal } = this.props
+    const { accountName } = this.state
 
-    updateAccount(account)
-    setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
-    this.updateOrderAccounts()
+    if (accountName !== '') {
+      updateAccount(account)
+      setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
 
-    this.setState({
-      editName: false,
-    })
+      this.setState({
+        editName: false,
+      })
+    }
   }
 
   handleArchiveAccount = (account: Account) => () => {
@@ -127,7 +120,6 @@ class SettingsAccount extends PureComponent<Props, State> {
       updateAccount({ ...account, archived: true })
     }
 
-    this.updateOrderAccounts()
     closeModal(MODAL_SETTINGS_ACCOUNT)
     push('/')
   }
@@ -136,12 +128,6 @@ class SettingsAccount extends PureComponent<Props, State> {
     this.setState({
       ...defaultState,
     })
-
-  updateOrderAccounts() {
-    const { updateOrderAccounts, orderAccounts } = this.props
-
-    updateOrderAccounts(orderAccounts)
-  }
 
   render() {
     const { editName, nameHovered } = this.state
@@ -211,4 +197,4 @@ class SettingsAccount extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsAccount)
+export default connect(null, mapDispatchToProps)(SettingsAccount)
