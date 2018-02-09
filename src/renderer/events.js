@@ -69,12 +69,14 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
         success: account => {
           if (syncAccounts) {
             const currentAccountData = getAccountData(store.getState(), account.id) || {}
+            const currentAccountTransactions = get(currentAccountData, 'transactions', [])
+
             const transactions = uniqBy(
-              [...currentAccountData.transactions, ...account.transactions],
+              [...currentAccountTransactions, ...account.transactions],
               tx => tx.hash,
             )
 
-            if (currentAccountData.transactions.length !== transactions.length) {
+            if (currentAccountTransactions.length !== transactions.length) {
               store.dispatch(updateAccount(account))
             }
           }
