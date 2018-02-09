@@ -69,6 +69,7 @@
     "moment": "^2.20.1",
     "object-path": "^0.11.4",
     "qrcode": "^1.2.0",
+    "query-string": "^5.1.0",
     "raven": "^2.4.0",
     "raven-js": "^3.22.1",
     "react": "^16.2.0",

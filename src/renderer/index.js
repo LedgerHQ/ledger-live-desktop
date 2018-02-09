@@ -35,6 +35,8 @@ const history = createHistory()
 const store = createStore(history)
 const rootNode = document.getElementById('app')
 
+global.__PRINT_MODE__ = history.location.pathname.startsWith('/print')
+
 store.dispatch(fetchSettings())
 
 const state = store.getState() || {}
@@ -53,7 +55,9 @@ function r(Comp) {
 
 r(<App store={store} history={history} language={language} />)
 
-events({ store, locked })
+if (!__PRINT_MODE__) {
+  events({ store, locked })
+}
 
 if (module.hot) {
   module.hot.accept('../components/App', () => {

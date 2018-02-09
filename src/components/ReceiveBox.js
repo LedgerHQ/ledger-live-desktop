@@ -8,13 +8,14 @@ import QRCode from 'components/base/QRCode'
 import Icon from 'components/base/Icon'
 import CopyToClipboard from 'components/base/CopyToClipboard'
 import Text from 'components/base/Text'
+import Print from 'components/base/Print'
 
 type Props = {
   amount?: string,
   address: string,
 }
 
-const AddressBox = styled(Box).attrs({
+export const AddressBox = styled(Box).attrs({
   borderWidth: 1,
   borderColor: 'mouse',
   bg: 'cream',
@@ -63,10 +64,15 @@ const ReceiveBox = ({ amount, address }: Props) => (
           </Action>
         )}
       />
-      <Action>
-        <Icon name="print" />
-        <span>{'Print'}</span>
-      </Action>
+      <Print
+        data={{ address, amount }}
+        render={(print, isLoading) => (
+          <Action onClick={print}>
+            <Icon name="print" />
+            <span>{isLoading ? '...' : 'Print'}</span>
+          </Action>
+        )}
+      />
       <Action>
         <Icon name="share-square" />
         <span>{'Share'}</span>
