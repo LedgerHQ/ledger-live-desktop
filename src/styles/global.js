@@ -65,6 +65,13 @@ const fonts = {
       file: 'museosans/MuseoSans-ExtraBold',
     },
   ],
+  Rubik: [
+    {
+      style: 'normal',
+      weight: 500,
+      file: 'rubik/Rubik-Regular',
+    },
+  ],
 }
 
 function transformFonts(allFonts) {

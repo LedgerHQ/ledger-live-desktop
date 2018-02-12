@@ -41,7 +41,7 @@ const Inner = styled(Box).attrs({
 const Bar = styled.div`
   height: 15px;
   width: 1px;
-  background: ${p => p.theme.colors.warmGrey};
+  background: ${p => p.theme.colors.mouse};
 `
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({

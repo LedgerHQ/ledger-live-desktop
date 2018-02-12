@@ -51,6 +51,13 @@ export const fontFamilies = {
       style: 'normal',
     },
   },
+
+  Rubik: {
+    Regular: {
+      weight: 500,
+      style: 'normal',
+    },
+  },
 }
 
 export default {
