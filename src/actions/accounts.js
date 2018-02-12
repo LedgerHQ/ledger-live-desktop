@@ -28,12 +28,6 @@ export const addAccount: AddAccount = payload => ({
   payload,
 })
 
-export type UpdateAccount = Account => { type: string, payload: Account }
-export const updateAccount: AddAccount = payload => ({
-  type: 'DB:UPDATE_ACCOUNT',
-  payload,
-})
-
 export type RemoveAccount = Account => { type: string, payload: Account }
 export const removeAccount: RemoveAccount = payload => ({
   type: 'DB:REMOVE_ACCOUNT',
@@ -56,8 +50,19 @@ export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) 
   getState,
 ) => {
   const { accounts } = getState()
+
   dispatch({
     type: 'DB:SET_ACCOUNTS',
     payload: sortAccounts(accounts, orderAccounts),
   })
+}
+
+export type UpdateAccount = Account => (Function, Function) => void
+export const updateAccount: UpdateAccount = payload => (dispatch, getState) => {
+  const { settings } = getState()
+  dispatch({
+    type: 'UPDATE_ACCOUNT',
+    payload,
+  })
+  dispatch(updateOrderAccounts(settings.orderAccounts))
 }
