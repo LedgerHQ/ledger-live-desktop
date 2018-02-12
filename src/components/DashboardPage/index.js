@@ -13,10 +13,9 @@ import takeRight from 'lodash/takeRight'
 import type { MapStateToProps } from 'react-redux'
 import type { Accounts } from 'types/common'
 
-import { formatBTC } from 'helpers/format'
 import { space } from 'styles/theme'
 
-import { getTotalBalance, getVisibleAccounts } from 'reducers/accounts'
+import { getVisibleAccounts } from 'reducers/accounts'
 
 import { AreaChart } from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
@@ -24,10 +23,10 @@ import Pills from 'components/base/Pills'
 import Text from 'components/base/Text'
 
 import AccountCard from './AccountCard'
+import BalanceInfos from './BalanceInfos'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getVisibleAccounts(state),
-  totalBalance: getTotalBalance(state),
 })
 
 const mapDispatchToProps = {
@@ -37,7 +36,6 @@ const mapDispatchToProps = {
 type Props = {
   accounts: Accounts,
   push: Function,
-  totalBalance: number,
 }
 
 type State = {
@@ -113,7 +111,7 @@ class DashboardPage extends PureComponent<Props, State> {
   _timeout = undefined
 
   render() {
-    const { totalBalance, push, accounts } = this.props
+    const { push, accounts } = this.props
     const { selectedTime, fakeDatas } = this.state
 
     const totalAccounts = accounts.length
@@ -142,7 +140,7 @@ class DashboardPage extends PureComponent<Props, State> {
         {totalAccounts > 0 && (
           <Fragment>
             <Card flow={3} p={0} py={6}>
-              <Text>{formatBTC(totalBalance)}</Text>
+              <BalanceInfos since={selectedTime} />
               <Box ff="Open Sans" fontSize={4} color="warmGrey">
                 <AreaChart
                   id="dashboard-chart"
