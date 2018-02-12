@@ -140,7 +140,9 @@ class DashboardPage extends PureComponent<Props, State> {
         {totalAccounts > 0 && (
           <Fragment>
             <Card flow={3} p={0} py={6}>
-              <BalanceInfos since={selectedTime} />
+              <Box px={6}>
+                <BalanceInfos since={selectedTime} />
+              </Box>
               <Box ff="Open Sans" fontSize={4} color="warmGrey">
                 <AreaChart
                   id="dashboard-chart"
