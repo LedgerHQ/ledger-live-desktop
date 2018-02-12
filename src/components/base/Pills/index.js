@@ -5,6 +5,7 @@ import styled from 'styled-components'
 
 import { rgba } from 'styles/helpers'
 import Box, { Tabbable } from 'components/base/Box'
+import BoldToggle from 'components/base/BoldToggle'
 
 type Item = {
   key: string,
@@ -43,11 +44,14 @@ function Pills(props: Props) {
   const { items, activeKey, onChange, ...p } = props
   return (
     <Container {...p}>
-      {items.map(item => (
-        <Pill isActive={item.key === activeKey} onClick={() => onChange(item)} key={item.key}>
-          {item.label}
-        </Pill>
-      ))}
+      {items.map(item => {
+        const isActive = item.key === activeKey
+        return (
+          <Pill isActive={isActive} onClick={() => onChange(item)} key={item.key}>
+            <BoldToggle isBold={isActive}>{item.label}</BoldToggle>
+          </Pill>
+        )
+      })}
     </Container>
   )
 }
