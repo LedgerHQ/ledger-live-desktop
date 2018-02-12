@@ -5,33 +5,30 @@ import styled from 'styled-components'
 import {
   alignItems,
   borderColor,
+  borderRadius,
   borderWidth,
   color,
+  flex,
   fontSize,
-  fontWeight,
   justifyContent,
   space,
-  flex,
 } from 'styled-system'
+
+import fontFamily from 'styles/styled/fontFamily'
 
 import Text from 'components/base/Text'
 
-import { space as spaceScale } from 'styles/theme'
-
-function getSpace(n) {
-  return `${spaceScale[n] || n}px`
-}
-
 const Box = styled.div`
-  ${space};
-  ${flex};
-  ${fontSize};
-  ${fontWeight};
-  ${color};
   ${alignItems};
-  ${justifyContent};
   ${borderColor};
+  ${borderRadius};
   ${borderWidth};
+  ${color};
+  ${flex};
+  ${fontFamily};
+  ${fontSize};
+  ${justifyContent};
+  ${space};
 
   display: flex;
   flex-shrink: ${p => (p.noShrink === true ? '0' : p.shrink === true ? '1' : '')};
@@ -51,8 +48,8 @@ const Box = styled.div`
     `};
 
   > * + * {
-    margin-top: ${p => (!p.horizontal && p.flow ? getSpace(p.flow) : '')};
-    margin-left: ${p => (p.horizontal && p.flow ? getSpace(p.flow) : '')};
+    margin-top: ${p => (!p.horizontal && p.flow ? `${p.theme.space[p.flow]}px` : '')};
+    margin-left: ${p => (p.horizontal && p.flow ? `${p.theme.space[p.flow]}px` : '')};
   }
 `
 

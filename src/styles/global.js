@@ -55,12 +55,12 @@ const fonts = {
       file: 'museosans/MuseoSans-Regular',
     },
     {
-      style: 'bold',
+      style: 'normal',
       weight: 700,
       file: 'museosans/MuseoSans-Bold',
     },
     {
-      style: 'bold',
+      style: 'normal',
       weight: 900,
       file: 'museosans/MuseoSans-ExtraBold',
     },

@@ -2,13 +2,64 @@
 
 export const space = [0, 5, 10, 15, 20, 30, 40, 50, 70]
 export const fontSizes = [8, 9, 10, 11, 13, 16, 18, 32]
+export const radii = [0, 4]
+
+export const fontFamilies = {
+  'Open Sans': {
+    Light: {
+      weight: 300,
+      style: 'normal',
+    },
+    Regular: {
+      weight: 400,
+      style: 'normal',
+    },
+    SemiBold: {
+      weight: 600,
+      style: 'normal',
+    },
+    Bold: {
+      weight: 700,
+      style: 'normal',
+    },
+    ExtraBold: {
+      weight: 800,
+      style: 'normal',
+    },
+  },
+
+  'Museo Sans': {
+    ExtraLight: {
+      weight: 100,
+      style: 'normal',
+    },
+    Light: {
+      weight: 300,
+      style: 'normal',
+    },
+    Regular: {
+      weight: 500,
+      style: 'normal',
+    },
+    Bold: {
+      weight: 700,
+      style: 'normal',
+    },
+    ExtraBold: {
+      weight: 900,
+      style: 'normal',
+    },
+  },
+}
 
 export default {
   sizes: {
     sideBarWidth: 230,
   },
-  space,
+  radii,
+  fontFamilies,
   fontSizes,
+  space,
   colors: {
     transparent: 'transparent',
 
@@ -29,7 +80,9 @@ export default {
     shark: '#666666',
     steel: '#767676',
 
+    dark: '#1d2028',
     dodgerBlue: '#4b84ff',
+    paleGrey: '#f7f8fa',
     warmGrey: '#999999',
   },
 }

@@ -18,20 +18,20 @@ import { getVisibleAccounts } from 'reducers/accounts'
 import { formatBTC } from 'helpers/format'
 
 import Box, { Tabbable } from 'components/base/Box'
-import Bar from 'components/base/Bar'
 import GrowScroll from 'components/base/GrowScroll'
 import Icon from 'components/base/Icon'
 import Text from 'components/base/Text'
 import Item from './Item'
 
 const CapsSubtitle = styled(Box).attrs({
-  px: 3,
-  fontSize: 0,
-  color: 'grey',
+  color: 'dark',
+  ff: 'Museo Sans|ExtraBold',
+  fontSize: 1,
+  px: 4,
 })`
   cursor: default;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  font-weight: bold;
 `
 
 const Container = styled(Box)`
@@ -84,10 +84,10 @@ class SideBar extends PureComponent<Props> {
 
     return (
       <Container bg="white">
-        <Box flow={3} pt={4} grow>
-          <Box flow={2}>
+        <Box flow={7} pt={8} grow>
+          <Box flow={4}>
             <CapsSubtitle>{t('sidebar.menu')}</CapsSubtitle>
-            <Box px={2} flow={1}>
+            <Box px={4} flow={2}>
               <Item icon="chart-bar" linkTo="/">
                 {t('dashboard.title')}
               </Item>
@@ -102,21 +102,21 @@ class SideBar extends PureComponent<Props> {
               </Item>
             </Box>
           </Box>
-          <Bar color="cream" mx={3} size={2} />
-          <Box flow={2} grow>
+          <Box flow={4} grow pt={1}>
             <CapsSubtitle horizontal align="center">
               <Box grow>{t('sidebar.accounts')}</Box>
               <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
                 <Icon name="plus-circle" />
               </PlusBtn>
             </CapsSubtitle>
-            <GrowScroll pb={2} px={2} flow={1}>
+            <GrowScroll pb={4} px={4} flow={2}>
               {accounts.map(account => (
                 <Item
-                  linkTo={`/account/${account.id}`}
+                  big
                   desc={formatBTC(account.data ? account.data.balance : 0)}
-                  key={account.id}
                   icon={{ iconName: 'btc', prefix: 'fab' }}
+                  key={account.id}
+                  linkTo={`/account/${account.id}`}
                 >
                   {account.name}
                 </Item>
