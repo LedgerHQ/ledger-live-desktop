@@ -9,9 +9,8 @@ import { connect } from 'react-redux'
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'constants'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Accounts, T, Device } from 'types/common'
+import type { Accounts, T } from 'types/common'
 
-import { getCurrentDevice } from 'reducers/devices'
 import { openModal } from 'reducers/modals'
 import { getVisibleAccounts } from 'reducers/accounts'
 
@@ -26,7 +25,6 @@ import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
 
 import Box, { Tabbable } from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
-import Text from 'components/base/Text'
 import Item from './Item'
 
 const CapsSubtitle = styled(Box).attrs({
@@ -42,15 +40,6 @@ const CapsSubtitle = styled(Box).attrs({
 
 const Container = styled(Box)`
   width: ${p => p.theme.sizes.sideBarWidth}px;
-`
-
-const Connected = styled(Box).attrs({
-  bg: p => (p.state ? 'green' : 'grenade'),
-  mx: 3,
-})`
-  border-radius: 50%;
-  height: 10px;
-  width: 10px;
 `
 
 const PlusBtn = styled(Tabbable).attrs({
@@ -72,12 +61,10 @@ type Props = {
   t: T,
   accounts: Accounts,
   openModal: Function,
-  currentDevice: Device,
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getVisibleAccounts(state),
-  currentDevice: getCurrentDevice(state),
 })
 
 const mapDispatchToProps = {
@@ -86,7 +73,7 @@ const mapDispatchToProps = {
 
 class SideBar extends PureComponent<Props> {
   render() {
-    const { t, accounts, openModal, currentDevice } = this.props
+    const { t, accounts, openModal } = this.props
 
     return (
       <Container bg="white">
@@ -129,21 +116,6 @@ class SideBar extends PureComponent<Props> {
                 </Item>
               ))}
             </GrowScroll>
-          </Box>
-        </Box>
-        <Box borderColor="argile" borderWidth={1} borderTop horizontal py={2}>
-          <Box align="center" justify="center">
-            <Connected state={currentDevice !== null} />
-          </Box>
-          <Box>
-            <Box>
-              <Text fontSize={1}>Ledger Nano S</Text>
-            </Box>
-            <Box>
-              <Text fontSize={0} color="grey">
-                {t(currentDevice !== null ? 'device.connected' : 'device.notConnected')}
-              </Text>
-            </Box>
           </Box>
         </Box>
       </Container>
