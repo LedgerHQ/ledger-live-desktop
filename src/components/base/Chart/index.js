@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { AreaChart as ReactAreaChart, Area, XAxis, CartesianGrid, Tooltip } from 'recharts'
+import { AreaChart as ReactAreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 import Box from 'components/base/Box'
 
@@ -89,26 +89,32 @@ export const AreaChart = ({
         {linearGradient && (
           <defs>
             <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-              {linearGradient.map(g => (
-                <stop offset={`${g[0]}%`} stopColor={color} stopOpacity={g[1]} />
+              {linearGradient.map((g, i) => (
+                <stop
+                  key={i} // eslint-disable-line react/no-array-index-key
+                  offset={`${g[0]}%`}
+                  stopColor={color}
+                  stopOpacity={g[1]}
+                />
               ))}
             </linearGradient>
           </defs>
         )}
         {!tiny && (
-          <XAxis
-            dataKey="name"
-            stroke="#e9eff4"
+          <YAxis
+            interval={0}
+            dataKey="value"
+            tickMargin={0}
+            stroke={false}
             tickLine={false}
-            interval={2}
-            tick={({ x, y, index, payload, visibleTicksCount }) => {
+            tick={({ x, y, index, payload }) => {
               const { value } = payload
 
-              if (index !== 0 && index !== visibleTicksCount - 1) {
+              if (index !== 0) {
                 return (
                   <g transform={`translate(${x}, ${y})`}>
-                    <text x={0} y={0} dy={16} textAnchor="middle" fill="currentColor">
-                      {value}
+                    <text x={-30} y={0} dy={5} textAnchor="middle" fill="currentColor">
+                      {value}k
                     </text>
                   </g>
                 )
@@ -118,8 +124,27 @@ export const AreaChart = ({
             }}
           />
         )}
+        {!tiny && (
+          <XAxis
+            dataKey="name"
+            stroke="#e9eff4"
+            tickLine={false}
+            interval={2}
+            tick={({ x, y, payload }) => {
+              const { value } = payload
+
+              return (
+                <g transform={`translate(${x}, ${y})`}>
+                  <text x={0} y={0} dy={20} textAnchor="middle" fill="currentColor">
+                    {value}
+                  </text>
+                </g>
+              )
+            }}
+          />
+        )}
         {!tiny && <CartesianGrid vertical={false} strokeDasharray="5" stroke="#e9eff4" />}
-        {!tiny && <Tooltip />}
+        {!tiny && <Tooltip isAnimationActive={false} />}
         <Area
           isAnimationActive={isAnimationActive}
           animationDuration={ANIMATION_DURATION}

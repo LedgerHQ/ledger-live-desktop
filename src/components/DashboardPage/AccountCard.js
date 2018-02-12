@@ -45,7 +45,7 @@ const AccountCard = ({
       height={52}
       data={data}
       strokeWidth={1}
-      linearGradient={[[5, 0.4], [100, 0]]}
+      linearGradient={[[5, 0.4], [80, 0]]}
     />
   </Card>
 )

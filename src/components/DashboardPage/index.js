@@ -14,6 +14,7 @@ import type { MapStateToProps } from 'react-redux'
 import type { Accounts } from 'types/common'
 
 import { formatBTC } from 'helpers/format'
+import { space } from 'styles/theme'
 
 import { getTotalBalance, getVisibleAccounts } from 'reducers/accounts'
 
@@ -121,7 +122,7 @@ class DashboardPage extends PureComponent<Props, State> {
       <Box flow={7}>
         <Box horizontal align="flex-end">
           <Box>
-            <Text color="dark" ff="Museo Sans|Regular" fontSize={7}>
+            <Text color="dark" ff="Museo Sans" fontSize={7}>
               {'Good morning, Khalil.'}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
@@ -140,11 +141,17 @@ class DashboardPage extends PureComponent<Props, State> {
         </Box>
         {totalAccounts > 0 && (
           <Fragment>
-            <Card flow={3} p={6}>
+            <Card flow={3} p={0} py={6}>
               <Text>{formatBTC(totalBalance)}</Text>
               <Box ff="Open Sans" fontSize={4} color="warmGrey">
                 <AreaChart
                   id="dashboard-chart"
+                  margin={{
+                    top: space[6],
+                    bottom: 0,
+                    left: space[6] - 10,
+                    right: space[6],
+                  }}
                   color="#5286f7"
                   height={250}
                   data={takeRight(
@@ -162,32 +169,37 @@ class DashboardPage extends PureComponent<Props, State> {
                 />
               </Box>
             </Card>
-            <Box flow={3}>
-              {this.getAccountsChunk().map((accountsByLine, i) => (
-                <Box
-                  key={i} // eslint-disable-line react/no-array-index-key
-                  horizontal
-                  flow={3}
-                >
-                  {accountsByLine.map(
-                    (account: any, j) =>
-                      account === null ? (
-                        <Box
-                          key={j} // eslint-disable-line react/no-array-index-key
-                          p={2}
-                          flex={1}
-                        />
-                      ) : (
-                        <AccountCard
-                          key={account.id}
-                          account={account}
-                          data={takeRight(fakeDatas[j], 25)}
-                          onClick={() => push(`/account/${account.id}`)}
-                        />
-                      ),
-                  )}
-                </Box>
-              ))}
+            <Box flow={4}>
+              <Text color="dark" ff="Museo Sans" fontSize={6}>
+                {'Accounts'}
+              </Text>
+              <Box flow={5}>
+                {this.getAccountsChunk().map((accountsByLine, i) => (
+                  <Box
+                    key={i} // eslint-disable-line react/no-array-index-key
+                    horizontal
+                    flow={5}
+                  >
+                    {accountsByLine.map(
+                      (account: any, j) =>
+                        account === null ? (
+                          <Box
+                            key={j} // eslint-disable-line react/no-array-index-key
+                            p={4}
+                            flex={1}
+                          />
+                        ) : (
+                          <AccountCard
+                            key={account.id}
+                            account={account}
+                            data={takeRight(fakeDatas[j], 25)}
+                            onClick={() => push(`/account/${account.id}`)}
+                          />
+                        ),
+                    )}
+                  </Box>
+                ))}
+              </Box>
             </Box>
           </Fragment>
         )}
