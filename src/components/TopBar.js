@@ -7,20 +7,17 @@ import { ipcRenderer } from 'electron'
 
 import type { MapStateToProps, MapDispatchToProps } from 'react-redux'
 
+import { rgba } from 'styles/helpers'
 import { getAccounts } from 'reducers/accounts'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
 import Box from 'components/base/Box'
+import GlobalSearch from 'components/GlobalSearch'
+import Icon from 'components/base/Icon'
 
 const Container = styled(Box).attrs({
-  borderColor: 'argile',
-  borderWidth: 1,
-  borderBottom: true,
-  noShrink: true,
-  px: 3,
-  align: 'center',
-  horizontal: true,
+  px: 5,
 })`
   height: 60px;
   position: absolute;
@@ -29,6 +26,20 @@ const Container = styled(Box).attrs({
   right: 0;
   top: 0;
   z-index: 20;
+`
+
+const Inner = styled(Box).attrs({
+  horizontal: true,
+  grow: true,
+  borderBottom: true,
+  borderWidth: 1,
+  borderColor: p => rgba(p.theme.colors.black, 0.15),
+})``
+
+const Bar = styled.div`
+  height: 15px;
+  width: 1px;
+  background: ${p => p.theme.colors.warmGrey};
 `
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
@@ -45,6 +56,7 @@ type Props = {
   hasPassword: boolean,
   lock: Function,
 }
+
 type State = {
   sync: {
     progress: null | boolean,
@@ -104,16 +116,35 @@ class TopBar extends PureComponent<Props, State> {
     const { sync } = this.state
 
     return (
-      <Container bg="cream">
-        <Box grow>
-          {hasAccounts &&
-            (sync.progress === true
-              ? 'Synchronizing...'
-              : sync.fail === true ? 'Synchronization fail :(' : 'Synchronisation finished!')}
-        </Box>
-        <Box justify="flex-end" horizontal>
-          {hasPassword && <LockApplication onLock={this.handleLock} />}
-        </Box>
+      <Container bg="cream" color="warmGrey">
+        <Inner>
+          <Box grow horizontal flow={4}>
+            <GlobalSearch />
+            <Box justify="center">
+              <Icon name="tablet-alt" />
+            </Box>
+            <Box justify="center">
+              <Icon name="chart-line" />
+            </Box>
+            <Box justify="center">
+              <Bar />
+            </Box>
+            <Box>
+              {hasAccounts &&
+                (sync.progress === true
+                  ? 'Synchronizing...'
+                  : sync.fail === true ? 'Synchronization fail :(' : 'Synchronisation finished!')}
+            </Box>
+            <Box justify="flex-end" horizontal>
+              {hasPassword && <LockApplication onLock={this.handleLock} />}
+            </Box>
+          </Box>
+          <Box horizontal noShrink>
+            <Box justify="center" px={4}>
+              {'Khalil Benihoud'}
+            </Box>
+          </Box>
+        </Inner>
       </Container>
     )
   }
