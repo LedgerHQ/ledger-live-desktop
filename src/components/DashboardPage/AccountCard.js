@@ -6,10 +6,11 @@ import type { Account } from 'types/common'
 
 import { formatBTC } from 'helpers/format'
 
+import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
+
 import { AreaChart } from 'components/base/Chart'
 import Bar from 'components/base/Bar'
 import Box, { Card } from 'components/base/Box'
-import Icon from 'components/base/Icon'
 
 const AccountCard = ({
   account,
@@ -22,8 +23,8 @@ const AccountCard = ({
 }) => (
   <Card p={4} flow={4} flex={1} style={{ cursor: 'pointer' }} onClick={onClick}>
     <Box horizontal ff="Open Sans|SemiBold" flow={3} align="center">
-      <Box style={{ color: '#fcb653' }}>
-        <Icon fontSize="20px" name={{ iconName: 'btc', prefix: 'fab' }} />
+      <Box align="center" justify="center" style={{ color: '#fcb653' }}>
+        <IconCurrencyBitcoin height={20} width={20} />
       </Box>
       <Box>
         <Box style={{ textTransform: 'uppercase' }} fontSize={0} color="warmGrey">

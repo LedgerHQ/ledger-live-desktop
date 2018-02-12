@@ -105,7 +105,7 @@ export const AreaChart = ({
             interval={0}
             dataKey="value"
             tickMargin={0}
-            stroke={false}
+            stroke={null}
             tickLine={false}
             tick={({ x, y, index, payload }) => {
               const { value } = payload

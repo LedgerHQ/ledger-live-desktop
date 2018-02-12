@@ -17,9 +17,15 @@ import { getVisibleAccounts } from 'reducers/accounts'
 
 import { formatBTC } from 'helpers/format'
 
+import IconPieChart from 'icons/PieChart'
+import IconArrowDown from 'icons/ArrowDown'
+import IconArrowUp from 'icons/ArrowUp'
+import IconSettings from 'icons/Settings'
+import IconPlus from 'icons/Plus'
+import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
+
 import Box, { Tabbable } from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
-import Icon from 'components/base/Icon'
 import Text from 'components/base/Text'
 import Item from './Item'
 
@@ -88,16 +94,16 @@ class SideBar extends PureComponent<Props> {
           <Box flow={4}>
             <CapsSubtitle>{t('sidebar.menu')}</CapsSubtitle>
             <Box px={4} flow={2}>
-              <Item icon="chart-bar" linkTo="/">
+              <Item icon={<IconPieChart height={16} width={16} />} linkTo="/">
                 {t('dashboard.title')}
               </Item>
-              <Item icon="upload" modal={MODAL_SEND}>
+              <Item icon={<IconArrowUp height={16} width={16} />} modal={MODAL_SEND}>
                 {t('send.title')}
               </Item>
-              <Item icon="download" modal={MODAL_RECEIVE}>
+              <Item icon={<IconArrowDown height={16} width={16} />} modal={MODAL_RECEIVE}>
                 {t('receive.title')}
               </Item>
-              <Item icon="cog" linkTo="/settings">
+              <Item icon={<IconSettings height={16} width={16} />} linkTo="/settings">
                 {t('settings.title')}
               </Item>
             </Box>
@@ -106,7 +112,7 @@ class SideBar extends PureComponent<Props> {
             <CapsSubtitle horizontal align="center">
               <Box grow>{t('sidebar.accounts')}</Box>
               <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
-                <Icon name="plus-circle" />
+                <IconPlus height={14} width={14} />
               </PlusBtn>
             </CapsSubtitle>
             <GrowScroll pb={4} px={4} flow={2}>
@@ -114,7 +120,8 @@ class SideBar extends PureComponent<Props> {
                 <Item
                   big
                   desc={formatBTC(account.data ? account.data.balance : 0)}
-                  icon={{ iconName: 'btc', prefix: 'fab' }}
+                  iconActiveColor="#fcb653"
+                  icon={<IconCurrencyBitcoin height={16} width={16} />}
                   key={account.id}
                   linkTo={`/account/${account.id}`}
                 >
