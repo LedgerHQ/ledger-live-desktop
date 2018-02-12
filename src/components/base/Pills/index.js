@@ -23,27 +23,29 @@ const Container = styled(Box).attrs({
 })``
 
 const Pill = styled(Tabbable).attrs({
+  ff: p => (p.isActive ? 'Open Sans|SemiBold' : 'Open Sans'),
   color: p => (p.isActive ? 'dodgerBlue' : 'warmGrey'),
   bg: p => (p.isActive ? rgba(p.theme.colors.dodgerBlue, 0.1) : ''),
   px: 2,
-  fontSize: 0,
+  fontSize: 4,
   align: 'center',
   justify: 'center',
 })`
   height: 30px;
   border-radius: 4px;
   outline: none;
-  cursor: pointer;
+  cursor: ${p => (p.isActive ? 'default' : 'pointer')};
 
   &:focus {
     color: ${p => p.theme.colors.dodgerBlue};
+    background-color: ${p => (p.isActive ? '' : rgba(p.theme.colors.black, 0.02))};
   }
 `
 
 function Pills(props: Props) {
   const { items, activeKey, onChange, ...p } = props
   return (
-    <Container {...p}>
+    <Container flow={1} {...p}>
       {items.map(item => {
         const isActive = item.key === activeKey
         return (

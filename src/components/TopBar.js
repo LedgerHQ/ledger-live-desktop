@@ -140,7 +140,7 @@ class TopBar extends PureComponent<Props, State> {
             </Box>
           </Box>
           <Box horizontal noShrink>
-            <Box justify="center" px={4}>
+            <Box justify="center" px={4} ff="Open Sans|SemiBold" fontSize={4}>
               {'Khalil Benihoud'}
             </Box>
           </Box>
