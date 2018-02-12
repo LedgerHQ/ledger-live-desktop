@@ -8,6 +8,7 @@ import {
   borderWidth,
   color,
   fontSize,
+  fontWeight,
   justifyContent,
   space,
   flex,
@@ -25,6 +26,7 @@ const Box = styled.div`
   ${space};
   ${flex};
   ${fontSize};
+  ${fontWeight};
   ${color};
   ${alignItems};
   ${justifyContent};
