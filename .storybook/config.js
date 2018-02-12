@@ -4,6 +4,8 @@ import { withKnobs } from '@storybook/addon-knobs'
 import { setOptions } from '@storybook/addon-options'
 import { ThemeProvider } from 'styled-components'
 
+import 'globals'
+
 import 'styles/global'
 import theme from 'styles/theme'
 

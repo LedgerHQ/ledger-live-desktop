@@ -18,10 +18,9 @@ import { formatBTC } from 'helpers/format'
 import { getTotalBalance, getVisibleAccounts } from 'reducers/accounts'
 
 import Box, { Card } from 'components/base/Box'
+import Pills from 'components/base/Pills'
 import Text from 'components/base/Text'
 import { AreaChart, BarChart } from 'components/base/Chart'
-import Select from 'components/base/Select'
-import Tabs from 'components/base/Tabs'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getVisibleAccounts(state),
@@ -39,17 +38,18 @@ type Props = {
 }
 
 type State = {
-  tab: number,
   fakeDatas: Array<any>,
+  selectedTime: string,
 }
 
 const ACCOUNTS_BY_LINE = 3
 const TIMEOUT_REFRESH_DATAS = 5e3
 
 const itemsTimes = [
-  { key: 'week', name: 'Last week' },
-  { key: 'month', name: 'Last month' },
-  { key: 'year', name: 'Last year' },
+  { key: 'day', label: 'Day' },
+  { key: 'week', label: 'Week' },
+  { key: 'month', label: 'Month' },
+  { key: 'year', label: 'Year' },
 ]
 
 const generateFakeData = v => ({
@@ -59,7 +59,7 @@ const generateFakeData = v => ({
 
 class DashboardPage extends PureComponent<Props, State> {
   state = {
-    tab: 0,
+    selectedTime: 'day',
     fakeDatas: this.generateFakeDatas(),
   }
 
@@ -107,13 +107,11 @@ class DashboardPage extends PureComponent<Props, State> {
     }, TIMEOUT_REFRESH_DATAS)
   }
 
-  handleChangeTab = tab => this.setState({ tab })
-
   _timeout = undefined
 
   render() {
     const { totalBalance, push, accounts } = this.props
-    const { tab, fakeDatas } = this.state
+    const { selectedTime, fakeDatas } = this.state
 
     const totalAccounts = accounts.length
 
@@ -131,39 +129,17 @@ class DashboardPage extends PureComponent<Props, State> {
             </Text>
           </Box>
           <Box ml="auto">
-            <Select
+            <Pills
               items={itemsTimes}
-              value={itemsTimes[0]}
-              renderSelected={item => item.name}
-              style={{ width: 250 }}
+              activeKey={selectedTime}
+              onChange={item => this.setState({ selectedTime: item.key })}
             />
           </Box>
         </Box>
-        <Card flow={3}>
-          <Tabs
-            index={tab}
-            onTabClick={this.handleChangeTab}
-            items={[
-              {
-                key: 'balance',
-                title: 'Total balance',
-                render: () => (
-                  <Box>
-                    <Text fontSize={4}>{formatBTC(totalBalance)}</Text>
-                  </Box>
-                ),
-              },
-              {
-                key: 'market',
-                title: 'Market',
-                render: () => <Box>{'Not yet. Be patient.'}</Box>,
-              },
-            ]}
-          />
-        </Card>
         {totalAccounts > 0 && (
           <Fragment>
-            <Card flow={3} p={0}>
+            <Card flow={3} p={4}>
+              <Text>{formatBTC(totalBalance)}</Text>
               <AreaChart
                 height={250}
                 data={takeRight(

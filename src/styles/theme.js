@@ -4,6 +4,7 @@ export default {
   sizes: {
     sideBarWidth: 250,
   },
+  fontSizes: [13, 14, 16, 20, 24, 32, 48, 64, 72],
   colors: {
     transparent: 'transparent',
 
@@ -23,5 +24,8 @@ export default {
     pearl: '#f4f4f4',
     shark: '#666666',
     steel: '#767676',
+
+    dodgerBlue: '#4b84ff',
+    warmGrey: '#999999',
   },
 }
