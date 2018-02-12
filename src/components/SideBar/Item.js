@@ -28,17 +28,19 @@ const mapDispatchToProps = {
 }
 
 const Container = styled(Tabbable).attrs({
-  horizontal: true,
   align: 'center',
+  flow: 2,
+  horizontal: true,
   px: 2,
   py: 1,
-  flow: 2,
 })`
   border-radius: 5px;
   cursor: pointer;
   color: ${p => (p.isActive ? p.theme.colors.shark : p.theme.colors.grey)};
   background: ${p => (p.isActive ? p.theme.colors.argile : '')};
+  height: 46px;
   outline: none;
+
   &:hover,
   &:focus {
     background: ${p => (p.isActive ? p.theme.colors.argile : p.theme.colors.cream)};

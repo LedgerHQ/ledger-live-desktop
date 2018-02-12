@@ -152,9 +152,9 @@
   dependencies:
     querystring "^0.2.0"
 
-"@ledgerhq/hw-app-btc@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-3.0.2.tgz#4bad5d65eeef3711083d681a19d58c63cc12fe02"
+"@ledgerhq/hw-app-btc@^3.0.8":
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-3.0.8.tgz#13609bcd59ebbb6d1246f88eb37e93091d466493"
   dependencies:
     "@ledgerhq/hw-transport" "^3.0.0"
     create-hash "^1.1.3"

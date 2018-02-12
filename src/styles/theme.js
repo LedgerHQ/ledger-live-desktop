@@ -5,7 +5,7 @@ export const fontSizes = [8, 9, 10, 11, 13, 16, 18, 32]
 
 export default {
   sizes: {
-    sideBarWidth: 250,
+    sideBarWidth: 230,
   },
   space,
   fontSizes,

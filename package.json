@@ -47,7 +47,7 @@
     "@fortawesome/react-fontawesome": "^0.0.17",
     "@ledgerhq/common": "2.3.0",
     "@ledgerhq/currencies": "^2.3.0",
-    "@ledgerhq/hw-app-btc": "^3.0.2",
+    "@ledgerhq/hw-app-btc": "^3.0.8",
     "@ledgerhq/hw-app-eth": "^3.0.0",
     "@ledgerhq/hw-transport": "^3.0.0",
     "@ledgerhq/hw-transport-node-hid": "^3.0.0",
