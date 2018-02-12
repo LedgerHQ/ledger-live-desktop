@@ -50,7 +50,7 @@ class Wrapper extends Component<{}> {
             <Box shrink grow bg="cream" color="grey" relative>
               <TopBar />
               <UpdateNotifier />
-              <GrowScroll p={3} style={{ paddingTop: 80 }}>
+              <GrowScroll p={5} style={{ paddingTop: 80 }}>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
                 <Route path="/account/:id" component={AccountPage} />

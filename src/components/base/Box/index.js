@@ -16,10 +16,10 @@ import {
 
 import Text from 'components/base/Text'
 
-const spacingScale = [0, 8, 16, 32, 64]
+import { space as spaceScale } from 'styles/theme'
 
 function getSpace(n) {
-  return `${spacingScale[n] || n}px`
+  return `${spaceScale[n] || n}px`
 }
 
 const Box = styled.div`

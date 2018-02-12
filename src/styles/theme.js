@@ -1,10 +1,14 @@
 // @flow
 
+export const space = [0, 5, 10, 15, 20, 30, 40, 50, 70]
+export const fontSizes = [8, 9, 10, 11, 13, 16, 18, 32]
+
 export default {
   sizes: {
     sideBarWidth: 250,
   },
-  fontSizes: [13, 14, 16, 20, 24, 32, 48, 64, 72],
+  space,
+  fontSizes,
   colors: {
     transparent: 'transparent',
 
