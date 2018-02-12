@@ -9,12 +9,12 @@ import { connect } from 'react-redux'
 
 import { openModal } from 'reducers/modals'
 
+import type { Node } from 'react'
 import type { MapStateToProps } from 'react-redux'
 import type { Location } from 'react-router'
 
 import Box, { Tabbable } from 'components/base/Box'
 import Text from 'components/base/Text'
-import Icon from 'components/base/Icon'
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: any) => ({
   // connect router here only to make components re-render
@@ -49,18 +49,30 @@ const Container = styled(Tabbable).attrs({
 `
 
 type Props = {
+  iconActiveColor?: string,
   children: string,
   linkTo?: string | null,
   modal?: string | null,
   desc?: string | null,
-  icon?: string | null,
+  icon?: Node | null,
   big?: boolean,
   location: Location,
   push: Function,
   openModal: Function,
 }
 
-function Item({ big, children, desc, icon, linkTo, push, location, modal, openModal }: Props) {
+function Item({
+  big,
+  iconActiveColor,
+  children,
+  desc,
+  icon,
+  linkTo,
+  push,
+  location,
+  modal,
+  openModal,
+}: Props) {
   const { pathname } = location
   const isActive = pathname === linkTo
   return (
@@ -73,7 +85,7 @@ function Item({ big, children, desc, icon, linkTo, push, location, modal, openMo
       }
       isActive={isActive}
     >
-      {icon && <Icon fontSize={5} color={isActive ? 'blue' : void 0} name={icon} />}
+      {icon && <Box color={isActive ? iconActiveColor : void 0}>{icon}</Box>}
       <Box justify="center">
         <Text fontSize={4}>{children}</Text>
         {desc && (
@@ -87,6 +99,7 @@ function Item({ big, children, desc, icon, linkTo, push, location, modal, openMo
 }
 
 Item.defaultProps = {
+  iconActiveColor: 'blue',
   big: false,
   desc: null,
   icon: null,

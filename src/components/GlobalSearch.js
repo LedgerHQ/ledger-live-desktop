@@ -3,8 +3,9 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
+import IconSearch from 'icons/Search'
+
 import Box from 'components/base/Box'
-import Icon from 'components/base/Icon'
 
 const Input = styled.input`
   border: none;
@@ -30,7 +31,7 @@ class GlobalSearch extends PureComponent<{}> {
     return (
       <Box grow horizontal ff="Open Sans|SemiBold" fontSize={4}>
         <Box justify="center" onClick={this.focusInput} pr={2}>
-          <Icon name="search" />
+          <IconSearch height={16} width={16} />
         </Box>
         <Input placeholder="Search" innerRef={input => (this._input = input)} />
       </Box>

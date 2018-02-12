@@ -12,9 +12,11 @@ import { getAccounts } from 'reducers/accounts'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
+import IconDevices from 'icons/Devices'
+import IconActivity from 'icons/Activity'
+
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
-import Icon from 'components/base/Icon'
 
 const Container = styled(Box).attrs({
   px: 5,
@@ -121,10 +123,10 @@ class TopBar extends PureComponent<Props, State> {
           <Box grow horizontal flow={4}>
             <GlobalSearch />
             <Box justify="center">
-              <Icon name="tablet-alt" />
+              <IconDevices height={16} width={16} />
             </Box>
             <Box justify="center">
-              <Icon name="chart-line" />
+              <IconActivity height={16} width={16} />
             </Box>
             <Box justify="center">
               <Bar />
