@@ -17,10 +17,12 @@ import { formatBTC } from 'helpers/format'
 
 import { getTotalBalance, getVisibleAccounts } from 'reducers/accounts'
 
+import { AreaChart } from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import Pills from 'components/base/Pills'
 import Text from 'components/base/Text'
-import { AreaChart, BarChart } from 'components/base/Chart'
+
+import AccountCard from './AccountCard'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getVisibleAccounts(state),
@@ -138,23 +140,27 @@ class DashboardPage extends PureComponent<Props, State> {
         </Box>
         {totalAccounts > 0 && (
           <Fragment>
-            <Card flow={3} p={4}>
+            <Card flow={3} p={6}>
               <Text>{formatBTC(totalBalance)}</Text>
-              <AreaChart
-                height={250}
-                data={takeRight(
-                  fakeDatas.reduce((res, data) => {
-                    data.forEach((d, i) => {
-                      res[i] = {
-                        name: d.name,
-                        value: (res[i] ? res[i].value : 0) + d.value,
-                      }
-                    })
-                    return res
-                  }, []),
-                  25,
-                )}
-              />
+              <Box ff="Open Sans" fontSize={4} color="warmGrey">
+                <AreaChart
+                  id="dashboard-chart"
+                  color="#5286f7"
+                  height={250}
+                  data={takeRight(
+                    fakeDatas.reduce((res, data) => {
+                      data.forEach((d, i) => {
+                        res[i] = {
+                          name: d.name,
+                          value: (res[i] ? res[i].value : 0) + d.value,
+                        }
+                      })
+                      return res
+                    }, []),
+                    25,
+                  )}
+                />
+              </Box>
             </Card>
             <Box flow={3}>
               {this.getAccountsChunk().map((accountsByLine, i) => (
@@ -172,21 +178,12 @@ class DashboardPage extends PureComponent<Props, State> {
                           flex={1}
                         />
                       ) : (
-                        <Card
+                        <AccountCard
                           key={account.id}
-                          p={2}
-                          flex={1}
-                          style={{ cursor: 'pointer' }}
+                          account={account}
+                          data={takeRight(fakeDatas[j], 25)}
                           onClick={() => push(`/account/${account.id}`)}
-                        >
-                          <Box>
-                            <Text fontWeight="bold">{account.name}</Text>
-                          </Box>
-                          <Box grow align="center" justify="center">
-                            {account.data && formatBTC(account.data.balance)}
-                          </Box>
-                          <BarChart height={100} data={takeRight(fakeDatas[j], 25)} />
-                        </Card>
+                        />
                       ),
                   )}
                 </Box>

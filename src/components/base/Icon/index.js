@@ -12,7 +12,7 @@ const Container = styled.span`
   position: relative;
 `
 
-export default ({ name, ...props }: { name: string }) => (
+export default ({ name, ...props }: { name: string | Object }) => (
   <Container {...props}>
     <FontAwesomeIcon icon={name} />
   </Container>
