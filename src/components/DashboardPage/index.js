@@ -116,13 +116,13 @@ class DashboardPage extends PureComponent<Props, State> {
     const totalAccounts = accounts.length
 
     return (
-      <Box flow={4}>
+      <Box flow={7}>
         <Box horizontal align="flex-end">
           <Box>
-            <Text color="black" fontSize={6}>
-              {'Hello Anonymous,'}
+            <Text color="dark" ff="Museo Sans|Regular" fontSize={7}>
+              {'Good morning, Khalil.'}
             </Text>
-            <Text color="grey" fontSize={3}>
+            <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0
                 ? `here is the summary of your ${totalAccounts} accounts`
                 : 'no accounts'}
