@@ -45,14 +45,24 @@ const fonts = {
       file: 'museosans/MuseoSans-ExtraLight',
     },
     {
-      style: 'italic',
-      weight: 100,
-      file: 'museosans/MuseoSans-ExtraLightItalic',
-    },
-    {
       style: 'normal',
       weight: 300,
       file: 'museosans/MuseoSans-Light',
+    },
+    {
+      style: 'normal',
+      weight: 500,
+      file: 'museosans/MuseoSans-Regular',
+    },
+    {
+      style: 'normal',
+      weight: 700,
+      file: 'museosans/MuseoSans-Bold',
+    },
+    {
+      style: 'normal',
+      weight: 900,
+      file: 'museosans/MuseoSans-ExtraBold',
     },
   ],
 }
@@ -70,6 +80,7 @@ injectGlobal`
   ${transformFonts(fonts)};
 
   * {
+    -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
     margin: 0;
     padding: 0;

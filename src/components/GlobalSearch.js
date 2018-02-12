@@ -17,7 +17,7 @@ const Input = styled.input`
   }
 `
 
-class GlobalSearch extends PureComponent {
+class GlobalSearch extends PureComponent<{}> {
   _input = null
 
   focusInput = () => {

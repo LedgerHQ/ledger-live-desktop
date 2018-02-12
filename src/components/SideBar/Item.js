@@ -28,17 +28,20 @@ const mapDispatchToProps = {
 }
 
 const Container = styled(Tabbable).attrs({
-  horizontal: true,
   align: 'center',
-  px: 2,
-  py: 1,
-  flow: 2,
+  borderRadius: 1,
+  ff: 'Open Sans|SemiBold',
+  flow: 3,
+  horizontal: true,
+  px: 3,
 })`
-  border-radius: 5px;
   cursor: pointer;
-  color: ${p => (p.isActive ? p.theme.colors.shark : p.theme.colors.grey)};
-  background: ${p => (p.isActive ? p.theme.colors.argile : '')};
+  color: ${p => p.theme.colors.dark};
+  opacity: ${p => (p.isActive ? 1 : 0.4)};
+  background: ${p => (p.isActive ? p.theme.colors.paleGrey : '')};
+  height: ${p => (p.big ? 50 : 36)}px;
   outline: none;
+
   &:hover,
   &:focus {
     background: ${p => (p.isActive ? p.theme.colors.argile : p.theme.colors.cream)};
@@ -51,16 +54,18 @@ type Props = {
   modal?: string | null,
   desc?: string | null,
   icon?: string | null,
+  big?: boolean,
   location: Location,
   push: Function,
   openModal: Function,
 }
 
-function Item({ children, desc, icon, linkTo, push, location, modal, openModal }: Props) {
+function Item({ big, children, desc, icon, linkTo, push, location, modal, openModal }: Props) {
   const { pathname } = location
   const isActive = pathname === linkTo
   return (
     <Container
+      big={big}
       onClick={
         linkTo
           ? isActive ? undefined : () => push(linkTo)
@@ -68,24 +73,23 @@ function Item({ children, desc, icon, linkTo, push, location, modal, openModal }
       }
       isActive={isActive}
     >
-      {icon && <Icon fontSize={2} color={isActive ? 'blue' : void 0} name={icon} />}
-      <div>
-        <Text fontSize={1} fontWeight="bold">
-          {children}
-        </Text>
+      {icon && <Icon fontSize={5} color={isActive ? 'blue' : void 0} name={icon} />}
+      <Box justify="center">
+        <Text fontSize={4}>{children}</Text>
         {desc && (
-          <Box color="steel" fontSize={0}>
+          <Box color="steel" fontSize={3}>
             {desc}
           </Box>
         )}
-      </div>
+      </Box>
     </Container>
   )
 }
 
 Item.defaultProps = {
-  icon: null,
+  big: false,
   desc: null,
+  icon: null,
   linkTo: null,
   modal: null,
 }
