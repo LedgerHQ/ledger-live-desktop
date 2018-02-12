@@ -3,6 +3,7 @@
 export const space = [0, 5, 10, 15, 20, 30, 40, 50, 70]
 export const fontSizes = [8, 9, 10, 11, 13, 16, 18, 22, 32]
 export const radii = [0, 4]
+export const shadows = ['0 4px 8px 0 rgba(0, 0, 0, 0.03)']
 
 export const fontFamilies = {
   'Open Sans': {
@@ -60,6 +61,7 @@ export default {
   fontFamilies,
   fontSizes,
   space,
+  shadows,
   colors: {
     transparent: 'transparent',
 

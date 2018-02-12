@@ -1,15 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import {
-  AreaChart as ReactAreaChart,
-  BarChart as ReactBarChart,
-  Bar,
-  Area,
-  XAxis,
-  CartesianGrid,
-  Tooltip,
-} from 'recharts'
+import { AreaChart as ReactAreaChart, Area, XAxis, CartesianGrid, Tooltip } from 'recharts'
 
 import Box from 'components/base/Box'
 
@@ -72,68 +64,79 @@ class Container extends PureComponent<Props, State> {
   }
 }
 
-export const AreaChart = ({ height, data }: { height: number, data: Array<Object> }) => (
+export const AreaChart = ({
+  id,
+  linearGradient,
+  strokeWidth,
+  height,
+  color,
+  data,
+  margin,
+  tiny,
+}: {
+  id: string,
+  linearGradient?: Array<Array<*>>,
+  strokeWidth?: number,
+  height: number,
+  color: string,
+  data: Array<Object>,
+  margin?: Object,
+  tiny?: boolean,
+}) => (
   <Container
-    render={({ width }) => (
-      <ReactAreaChart
-        width={width}
-        height={height}
-        data={data}
-        margin={{ top: 10, right: 0, left: 0, bottom: 10 }}
-      >
-        <defs>
-          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#5286f7" stopOpacity={0.3} />
-            <stop offset="65%" stopColor="#5286f7" stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <XAxis
-          dataKey="name"
-          stroke="#d2d3d5"
-          tickLine={false}
-          interval={2}
-          tick={({ x, y, index, payload, visibleTicksCount }) => {
-            const { value } = payload
+    render={({ width, isAnimationActive }) => (
+      <ReactAreaChart width={width} height={height} data={data} margin={margin}>
+        {linearGradient && (
+          <defs>
+            <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+              {linearGradient.map(g => (
+                <stop offset={`${g[0]}%`} stopColor={color} stopOpacity={g[1]} />
+              ))}
+            </linearGradient>
+          </defs>
+        )}
+        {!tiny && (
+          <XAxis
+            dataKey="name"
+            stroke="#e9eff4"
+            tickLine={false}
+            interval={2}
+            tick={({ x, y, index, payload, visibleTicksCount }) => {
+              const { value } = payload
 
-            if (index !== 0 && index !== visibleTicksCount - 1) {
-              return (
-                <g transform={`translate(${x}, ${y})`}>
-                  <text x={0} y={0} dy={16} textAnchor="middle" fill="#666">
-                    {value}
-                  </text>
-                </g>
-              )
-            }
+              if (index !== 0 && index !== visibleTicksCount - 1) {
+                return (
+                  <g transform={`translate(${x}, ${y})`}>
+                    <text x={0} y={0} dy={16} textAnchor="middle" fill="currentColor">
+                      {value}
+                    </text>
+                  </g>
+                )
+              }
 
-            return null
-          }}
-        />
-        <CartesianGrid vertical={false} strokeDasharray="5" stroke="#d2d3d5" />
-        <Tooltip />
+              return null
+            }}
+          />
+        )}
+        {!tiny && <CartesianGrid vertical={false} strokeDasharray="5" stroke="#e9eff4" />}
+        {!tiny && <Tooltip />}
         <Area
+          isAnimationActive={isAnimationActive}
           animationDuration={ANIMATION_DURATION}
           animationEasing="ease-in-out"
           dataKey="value"
-          fill="url(#colorUv)"
-          stroke="#5286f7"
-          strokeWidth={3}
+          fill={`url(#${id})`}
+          stroke={color}
+          strokeWidth={strokeWidth}
         />
       </ReactAreaChart>
     )}
   />
 )
 
-export const BarChart = ({ height, data }: { height: number, data: Array<Object> }) => (
-  <Container
-    render={({ width }) => (
-      <ReactBarChart width={width} height={height} data={data}>
-        <Bar
-          animationDuration={ANIMATION_DURATION}
-          animationEasing="ease-in-out"
-          dataKey="value"
-          fill="#8884d8"
-        />
-      </ReactBarChart>
-    )}
-  />
-)
+AreaChart.defaultProps = {
+  linearGradient: [[5, 0.3], [65, 0]],
+  margin: undefined,
+  strokeWidth: 2,
+  tiny: false,
+}

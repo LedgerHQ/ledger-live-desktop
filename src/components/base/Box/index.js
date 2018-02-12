@@ -7,6 +7,7 @@ import {
   borderColor,
   borderRadius,
   borderWidth,
+  boxShadow,
   color,
   flex,
   fontSize,
@@ -23,6 +24,7 @@ const Box = styled.div`
   ${borderColor};
   ${borderRadius};
   ${borderWidth};
+  ${boxShadow};
   ${color};
   ${flex};
   ${fontFamily};
@@ -53,10 +55,7 @@ const Box = styled.div`
   }
 `
 
-const RawCard = styled(Box).attrs({ bg: 'white', p: 3 })`
-  box-shadow: rgba(0, 0, 0, 0.06) 0 8px 30px;
-  border-radius: 5px;
-`
+const RawCard = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 1 })``
 
 export const Card = ({ title, ...props }: { title?: string }) => {
   if (title) {
