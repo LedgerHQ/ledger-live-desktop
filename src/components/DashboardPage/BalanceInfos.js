@@ -6,11 +6,11 @@ import styled from 'styled-components'
 
 import type { MapStateToProps } from 'react-redux'
 
-import { formatBTC } from 'helpers/format'
 import { getTotalBalance } from 'reducers/accounts'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import FormattedVal from 'components/base/FormattedVal'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   totalBalance: getTotalBalance(state),
@@ -31,21 +31,24 @@ function BalanceInfos(props: Props) {
   return (
     <Box horizontal align="flex-end" flow={7}>
       <Box grow>
-        <Text ff="Rubik" fontSize={8} color="dark" style={{ lineHeight: 1 }}>
-          {formatBTC(totalBalance, {
-            alwaysShowSign: false,
-            showCode: true,
-          })}
-        </Text>
+        <FormattedVal
+          val={totalBalance}
+          currency="BTC"
+          alwaysShowSign={false}
+          showCode
+          fontSize={8}
+          color="dark"
+          style={{ lineHeight: 1 }}
+        />
         <Sub>{'Total balance'}</Sub>
       </Box>
       <Box align="flex-end">
-        <Text>{'+9.25%'}</Text>
-        <Sub>{'Since one week'}</Sub>
+        <FormattedVal isPercent val={9.25} alwaysShowSign fontSize={7} />
+        <Sub>{'since one week'}</Sub>
       </Box>
       <Box align="flex-end">
-        <Text>{'+ USD 6,132.23'}</Text>
-        <Sub>{'Since one week'}</Sub>
+        <FormattedVal currency="USD" alwaysShowSign showCode val={6132.23} fontSize={7} />
+        <Sub>{'since one week'}</Sub>
       </Box>
     </Box>
   )
