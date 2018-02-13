@@ -75,11 +75,11 @@ function createMainWindow() {
           titleBarStyle: 'hiddenInset',
         }
       : {}),
-    width,
     height,
-    minWidth: MIN_WIDTH,
     minHeight: MIN_HEIGHT,
+    minWidth: MIN_WIDTH,
     show: false,
+    width,
   }
 
   const window = new BrowserWindow(windowOptions)
@@ -117,8 +117,8 @@ function createMainWindow() {
 }
 
 function createDevWindow() {
-  const MIN_HEIGHT = 400
-  const MIN_WIDTH = 600
+  const MIN_HEIGHT = 500
+  const MIN_WIDTH = 360
 
   const savedDimensions = db.getIn('settings', 'window.DevWindow.dimensions', {})
   const savedPositions = db.getIn('settings', 'window.DevWindow.positions', null)
@@ -131,8 +131,11 @@ function createDevWindow() {
     ...(savedPositions !== null ? savedPositions : {}),
     fullscreenable: false,
     height,
+    minHeight: MIN_HEIGHT,
+    minWidth: MIN_WIDTH,
     show: false,
     skipTaskbar: true,
+    title: 'Dev Tools',
     width,
   }
 
@@ -142,10 +145,6 @@ function createDevWindow() {
 
   const url = getDefaultUrl()
 
-  if (devTools) {
-    window.webContents.openDevTools()
-  }
-
   saveWindowSettings(window)
 
   window.loadURL(`${url}/#/dev`)
@@ -153,6 +152,9 @@ function createDevWindow() {
   window.on('ready-to-show', () => {
     window.show()
   })
+
+  // Don't want to use HTML <title>
+  window.on('page-title-updated', e => e.preventDefault())
 
   return window
 }

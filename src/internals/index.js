@@ -3,9 +3,11 @@
 import objectPath from 'object-path'
 import capitalize from 'lodash/capitalize'
 
+import cpuUsage from 'helpers/cpuUsage'
+
 const { FORK_TYPE } = process.env
 
-process.title = `Ledger Wallet Desktop ${capitalize(FORK_TYPE)}`
+process.title = `${require('../../package.json').productName} ${capitalize(FORK_TYPE)}` // eslint-disable-line global-require
 
 function sendEvent(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
@@ -37,31 +39,7 @@ const onMessage = payload => {
 process.on('message', onMessage)
 
 if (__DEV__) {
-  const TIMEOUT_CPU_USAGE = 5e3
-
-  let startTime = process.hrtime()
-  let startUsage = process.cpuUsage()
-
-  const cpuUsage = () => {
-    const now = Date.now()
-
-    while (Date.now() - now < 500);
-
-    const newStartTime = process.hrtime()
-    const newStartUsage = process.cpuUsage()
-
-    const elapTime = process.hrtime(startTime)
-    const elapUsage = process.cpuUsage(startUsage)
-
-    startTime = newStartTime
-    startUsage = newStartUsage
-
-    const elapTimeMS = elapTime[0] * 1e3 + elapTime[1] / 1e6
-
-    const elapUserMS = elapUsage.user / 1e3
-    const elapSystMS = elapUsage.system / 1e3
-    const cpuPercent = (100 * (elapUserMS + elapSystMS) / elapTimeMS).toFixed(1)
-
+  cpuUsage(cpuPercent =>
     sendEvent(
       'usage.cpu',
       {
@@ -72,10 +50,6 @@ if (__DEV__) {
         window: 'DevWindow',
         kill: false,
       },
-    )
-
-    setTimeout(cpuUsage, TIMEOUT_CPU_USAGE)
-  }
-
-  cpuUsage()
+    ),
+  )
 }
