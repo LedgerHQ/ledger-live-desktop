@@ -24,6 +24,16 @@ const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) 
   }
 }
 
+const handleCloseWindow = w => e => {
+  if (!forceClose) {
+    e.preventDefault()
+
+    if (w !== null) {
+      w.hide()
+    }
+  }
+}
+
 const getDefaultUrl = () =>
   __DEV__
     ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
@@ -89,22 +99,16 @@ function createMainWindow() {
   const url = getDefaultUrl()
 
   if (devTools) {
-    window.webContents.openDevTools()
+    window.webContents.openDevTools({
+      mode: 'detach',
+    })
   }
 
   saveWindowSettings(window)
 
   window.loadURL(url)
 
-  window.on('close', e => {
-    if (!forceClose) {
-      e.preventDefault()
-
-      if (mainWindow !== null) {
-        mainWindow.hide()
-      }
-    }
-  })
+  window.on('close', handleCloseWindow(window))
 
   window.webContents.on('devtools-opened', () => {
     window.focus()
@@ -120,16 +124,16 @@ function createDevWindow() {
   const MIN_HEIGHT = 500
   const MIN_WIDTH = 360
 
-  const savedDimensions = db.getIn('settings', 'window.DevWindow.dimensions', {})
   const savedPositions = db.getIn('settings', 'window.DevWindow.positions', null)
 
-  const width = savedDimensions.width || MIN_WIDTH
-  const height = savedDimensions.height || MIN_HEIGHT
+  const width = MIN_WIDTH
+  const height = MIN_HEIGHT
 
   const windowOptions = {
     ...defaultWindowOptions,
     ...(savedPositions !== null ? savedPositions : {}),
     fullscreenable: false,
+    resizable: false,
     height,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
@@ -148,6 +152,8 @@ function createDevWindow() {
   saveWindowSettings(window)
 
   window.loadURL(`${url}/#/dev`)
+
+  window.on('close', handleCloseWindow(window))
 
   window.on('ready-to-show', () => {
     window.show()
