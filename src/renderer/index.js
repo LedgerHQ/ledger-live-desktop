@@ -23,8 +23,10 @@ import App from 'components/App'
 
 import 'styles/global'
 
-if (__PROD__ && __SENTRY_URL__) {
-  Raven.config(__SENTRY_URL__, { allowSecretKey: true }).install()
+const { SENTRY_URL } = process.env
+
+if (__PROD__ && SENTRY_URL) {
+  Raven.config(SENTRY_URL, { allowSecretKey: true }).install()
   window.addEventListener('unhandledrejection', event => Raven.captureException(event.reason))
 }
 
