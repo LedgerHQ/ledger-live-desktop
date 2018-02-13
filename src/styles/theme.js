@@ -62,6 +62,7 @@ export const fontFamilies = {
 
 export default {
   sizes: {
+    topBarHeight: 58,
     sideBarWidth: 230,
   },
   radii,

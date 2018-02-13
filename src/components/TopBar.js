@@ -19,9 +19,9 @@ import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
 
 const Container = styled(Box).attrs({
-  px: 5,
+  px: 6,
 })`
-  height: 60px;
+  height: ${p => p.theme.sizes.topBarHeight}px;
   position: absolute;
   overflow: hidden;
   left: 0;

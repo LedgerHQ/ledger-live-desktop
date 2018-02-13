@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment, Component } from 'react'
+import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
 import { Route } from 'react-router'
 import { translate } from 'react-i18next'
@@ -19,6 +20,12 @@ import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
 import UpdateNotifier from 'components/UpdateNotifier'
+
+const Container = styled(GrowScroll).attrs({
+  p: 6,
+})`
+  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[7]}px;
+`
 
 class Wrapper extends Component<{}> {
   componentDidMount() {
@@ -50,11 +57,11 @@ class Wrapper extends Component<{}> {
             <Box shrink grow bg="cream" color="grey" relative>
               <TopBar />
               <UpdateNotifier />
-              <GrowScroll p={5} style={{ paddingTop: 100 }}>
+              <Container>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
                 <Route path="/account/:id" component={AccountPage} />
-              </GrowScroll>
+              </Container>
             </Box>
           </Box>
         </IsUnlocked>

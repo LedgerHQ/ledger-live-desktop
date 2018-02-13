@@ -14,8 +14,6 @@ import type { Accounts, T } from 'types/common'
 import { openModal } from 'reducers/modals'
 import { getVisibleAccounts } from 'reducers/accounts'
 
-import { formatBTC } from 'helpers/format'
-
 import IconPieChart from 'icons/PieChart'
 import IconArrowDown from 'icons/ArrowDown'
 import IconArrowUp from 'icons/ArrowUp'
@@ -25,6 +23,7 @@ import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
 
 import Box, { Tabbable } from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
+import FormattedVal from 'components/base/FormattedVal'
 import Item from './Item'
 
 const CapsSubtitle = styled(Box).attrs({
@@ -106,7 +105,15 @@ class SideBar extends PureComponent<Props> {
               {accounts.map(account => (
                 <Item
                   big
-                  desc={formatBTC(account.data ? account.data.balance : 0)}
+                  desc={
+                    <FormattedVal
+                      alwaysShowSign={false}
+                      color="warmGrey"
+                      currency={account.type}
+                      showCode
+                      val={account.data ? account.data.balance : 0}
+                    />
+                  }
                   iconActiveColor="#fcb653"
                   icon={<IconCurrencyBitcoin height={16} width={16} />}
                   key={account.id}

@@ -45,7 +45,7 @@ function FormattedVal(props: Props) {
   if (isPercent) {
     text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${val} %`
   } else {
-    const curr = currency ? currencies[currency] : null
+    const curr = currency ? currencies[currency.toUpperCase()] : null
     if (!curr) {
       return `[invalid currency ${currency || '(null)'}]`
     }
