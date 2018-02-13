@@ -19,51 +19,57 @@ const template = [
     ],
     [],
   ),
-  ...props(process.platform === 'darwin' || __DEV__, [
-    {
-      role: 'window',
-      submenu: [
-        ...props(
-          __DEV__,
-          [
-            {
-              label: 'App Dev Tools',
-              click() {
-                const devWindow = BrowserWindow.getAllWindows().find(w => w.name === 'DevWindow')
-                if (devWindow) {
-                  devWindow.show()
-                }
+  ...props(
+    process.platform === 'darwin' || __DEV__,
+    [
+      {
+        role: 'window',
+        submenu: [
+          ...props(
+            __DEV__,
+            [
+              {
+                label: 'App Dev Tools',
+                click() {
+                  const devWindow = BrowserWindow.getAllWindows().find(w => w.name === 'DevWindow')
+                  if (devWindow) {
+                    devWindow.show()
+                  }
+                },
               },
-            },
-            {
-              label: 'Main Window Dev Tools',
-              click() {
-                const mainWindow = BrowserWindow.getAllWindows().find(w => w.name === 'MainWindow')
-                if (mainWindow) {
-                  mainWindow.openDevTools({
-                    mode: process.env.DEV_TOOLS_MODE,
-                  })
-                }
+              {
+                label: 'Main Window Dev Tools',
+                click() {
+                  const mainWindow = BrowserWindow.getAllWindows().find(
+                    w => w.name === 'MainWindow',
+                  )
+                  if (mainWindow) {
+                    mainWindow.openDevTools({
+                      mode: process.env.DEV_TOOLS_MODE,
+                    })
+                  }
+                },
               },
-            },
-            ...props(process.platform === 'darwin', [{ type: 'separator' }], []),
-          ],
-          [],
-        ),
-        ...props(
-          process.platform === 'darwin',
-          [
-            { role: 'close' },
-            { role: 'minimize' },
-            { role: 'zoom' },
-            { type: 'separator' },
-            { role: 'front' },
-          ],
-          [],
-        ),
-      ],
-    },
-  ]),
+              ...props(process.platform === 'darwin', [{ type: 'separator' }], []),
+            ],
+            [],
+          ),
+          ...props(
+            process.platform === 'darwin',
+            [
+              { role: 'close' },
+              { role: 'minimize' },
+              { role: 'zoom' },
+              { type: 'separator' },
+              { role: 'front' },
+            ],
+            [],
+          ),
+        ],
+      },
+    ],
+    [],
+  ),
 ]
 
 export default Menu.buildFromTemplate(template)
