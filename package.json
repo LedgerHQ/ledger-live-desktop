@@ -112,7 +112,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "chance": "^1.0.13",
     "concurrently": "^3.5.1",
-    "dotenv": "^5.0.0",
+    "dotenv-webpack": "^1.5.4",
     "electron": "1.8.2",
     "electron-builder": "^20.0.4",
     "electron-devtools-installer": "^2.2.3",

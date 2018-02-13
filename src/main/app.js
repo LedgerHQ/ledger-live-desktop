@@ -100,7 +100,7 @@ function createMainWindow() {
 
   if (devTools) {
     window.webContents.openDevTools({
-      mode: 'detach',
+      mode: process.env.DEV_TOOLS_MODE,
     })
   }
 

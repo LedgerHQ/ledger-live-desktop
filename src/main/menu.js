@@ -41,7 +41,7 @@ const template = [
                 const mainWindow = BrowserWindow.getAllWindows().find(w => w.name === 'MainWindow')
                 if (mainWindow) {
                   mainWindow.openDevTools({
-                    mode: 'detach',
+                    mode: process.env.DEV_TOOLS_MODE,
                   })
                 }
               },
