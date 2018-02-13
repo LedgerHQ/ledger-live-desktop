@@ -7,7 +7,9 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import chunk from 'lodash/chunk'
+import get from 'lodash/get'
 import random from 'lodash/random'
+import sortBy from 'lodash/sortBy'
 import takeRight from 'lodash/takeRight'
 
 import type { MapStateToProps } from 'react-redux'
@@ -21,6 +23,7 @@ import { AreaChart } from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import Pills from 'components/base/Pills'
 import Text from 'components/base/Text'
+import TransactionsList from 'components/TransactionsList'
 
 import AccountCard from './AccountCard'
 import BalanceInfos from './BalanceInfos'
@@ -57,6 +60,28 @@ const generateFakeData = v => ({
   name: `Day ${v}`,
   value: random(10, 100),
 })
+
+const getAllTransactions = accounts => {
+  const allTransactions = accounts.reduce((result, account) => {
+    const transactions = get(account, 'data.transactions', [])
+
+    result = [
+      ...result,
+      ...transactions.map(t => ({
+        ...t,
+        account: {
+          id: account.id,
+          name: account.name,
+          type: account.type,
+        },
+      })),
+    ]
+
+    return result
+  }, [])
+
+  return sortBy(allTransactions, t => t.received_at).reverse()
+}
 
 class DashboardPage extends PureComponent<Props, State> {
   state = {
@@ -200,6 +225,9 @@ class DashboardPage extends PureComponent<Props, State> {
                   </Box>
                 ))}
               </Box>
+              <Card p={0} px={4} title="Recent activity">
+                <TransactionsList withAccounts transactions={getAllTransactions(accounts)} />
+              </Card>
             </Box>
           </Fragment>
         )}

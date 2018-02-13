@@ -11,6 +11,7 @@ export type Devices = Array<Device>
 // -------------------- Transactions
 
 export type Transaction = {
+  account?: Object,
   balance: number,
   hash: string,
   received_at: string,
