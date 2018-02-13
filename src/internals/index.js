@@ -69,6 +69,7 @@ if (__DEV__) {
         value: cpuPercent,
       },
       {
+        window: 'DevWindow',
         kill: false,
       },
     )

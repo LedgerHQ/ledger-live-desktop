@@ -4,6 +4,7 @@ import 'env'
 
 import React from 'react'
 import Raven from 'raven-js'
+import { remote } from 'electron'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
@@ -35,8 +36,6 @@ const history = createHistory()
 const store = createStore(history)
 const rootNode = document.getElementById('app')
 
-global.__PRINT_MODE__ = history.location.pathname.startsWith('/print')
-
 store.dispatch(fetchSettings())
 
 const state = store.getState() || {}
@@ -55,7 +54,8 @@ function r(Comp) {
 
 r(<App store={store} history={history} language={language} />)
 
-if (!__PRINT_MODE__) {
+// Only init events on MainWindow
+if (remote.getCurrentWindow().name === 'MainWindow') {
   events({ store, locked })
 }
 

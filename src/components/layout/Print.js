@@ -12,7 +12,7 @@ type State = {
   data: Object | null,
 }
 
-class PrintWrapper extends PureComponent<any, State> {
+class Print extends PureComponent<any, State> {
   state = {
     data: null,
   }
@@ -49,4 +49,4 @@ class PrintWrapper extends PureComponent<any, State> {
   }
 }
 
-export default PrintWrapper
+export default Print

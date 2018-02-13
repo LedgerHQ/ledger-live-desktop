@@ -11,8 +11,9 @@ import theme from 'styles/theme'
 
 import i18n from 'renderer/i18n'
 
-import Wrapper from 'components/Wrapper'
-import PrintWrapper from 'components/PrintWrapper'
+import Default from 'components/layout/Default'
+import Dev from 'components/layout/Dev'
+import Print from 'components/layout/Print'
 
 export default ({
   store,
@@ -28,8 +29,9 @@ export default ({
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path="/print" component={PrintWrapper} />
-            <Route component={Wrapper} />
+            {__DEV__ && <Route path="/dev" component={Dev} />}
+            <Route path="/print" component={Print} />
+            <Route component={Default} />
           </Switch>
         </ConnectedRouter>
       </ThemeProvider>

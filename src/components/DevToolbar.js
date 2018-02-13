@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { ipcRenderer } from 'electron'
+import { remote, ipcRenderer } from 'electron'
 import { translate } from 'react-i18next'
 import { AreaChart, Area } from 'recharts'
 import takeRight from 'lodash/takeRight'
@@ -10,14 +10,17 @@ import reduce from 'lodash/fp/reduce'
 import flow from 'lodash/fp/flow'
 import filter from 'lodash/fp/filter'
 import sortBy from 'lodash/fp/sortBy'
+import chunk from 'lodash/chunk'
 import styled from 'styled-components'
 import color from 'color'
 
 import Box from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
+import Bar from 'components/base/Bar'
 import CopyToClipboard from 'components/base/CopyToClipboard'
 
 import theme from 'styles/theme'
+
+const mainWindow = remote.BrowserWindow.getAllWindows().find(w => w.name === 'MainWindow')
 
 type HslColor = {
   color: Array<number>,
@@ -53,40 +56,16 @@ const colors: Array<ColorType> = transform(theme.colors)
 
 const Container = styled(Box).attrs({
   bg: 'night',
-  p: 1,
+  p: 5,
+  grow: true,
   color: 'white',
-  fontSize: 0,
-})`
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 1;
-  border-top-left-radius: 3px;
-  transition: ease-in-out transform 300ms;
-  transform: translate3d(0, ${p => (p.isOpened ? '0' : '100%')}, 0);
-`
-
-const Handle = styled(Box).attrs({
-  bg: 'night',
-  justify: 'center',
-  px: 1,
-})`
-  cursor: pointer;
-  position: absolute;
-  bottom: 100%;
-  right: 5px;
-  font-size: 9px;
-  height: 20px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-`
+  fontSize: 3,
+})``
 
 const Colors = styled(Box).attrs({
   horizontal: true,
-  align: 'flex-start',
-})`
-  flex-wrap: wrap;
-`
+  flow: 4,
+})``
 
 const Cl = styled(Box).attrs({
   align: 'center',
@@ -94,9 +73,8 @@ const Cl = styled(Box).attrs({
   p: 2,
 })`
   border: 2px solid white;
+  flex: 1;
   cursor: pointer;
-  margin: 2px;
-  width: 80px;
 `
 
 const Color = ({ onClick, color }: { onClick: Function, color: ColorType }) => (
@@ -106,29 +84,22 @@ const Color = ({ onClick, color }: { onClick: Function, color: ColorType }) => (
 )
 
 const Lang = styled(Box).attrs({
-  bg: p => (p.current ? 'white' : 'night'),
-  color: p => (p.current ? 'night' : 'white'),
+  bg: 'night',
+  color: 'white',
   borderColor: 'white',
-  borderWidth: 1,
-  p: 1,
+  borderWidth: 2,
+  borderRadius: 1,
+  p: 2,
 })`
-  border-radius: 3px;
   cursor: pointer;
 `
 
-const LANGUAGES = {
-  fr: 'français',
-  en: 'english',
-}
-
 type State = {
-  isOpened: boolean,
   cpuUsage: Object,
 }
 
 class DevToolbar extends PureComponent<any, State> {
   state = {
-    isOpened: false,
     cpuUsage: {},
   }
 
@@ -159,32 +130,34 @@ class DevToolbar extends PureComponent<any, State> {
     }
   }
 
-  handleToggle = () => this.setState({ isOpened: !this.state.isOpened })
-  handleChangeLanguage = lang => () => this.props.i18n.changeLanguage(lang)
+  handleChangeLanguage = lang => () => {
+    mainWindow.webContents.send('msg', {
+      type: 'application.changeLanguage',
+      data: lang,
+    })
+  }
 
   render() {
     const { i18n } = this.props
-    const { isOpened, cpuUsage } = this.state
+    const { cpuUsage } = this.state
 
     return (
-      <Container isOpened={isOpened}>
-        <Handle onClick={this.handleToggle}>{'DEV'}</Handle>
-        <Box horizontal grow flow={10}>
-          <Box flow={10}>
-            {Object.keys(LANGUAGES).map(lang => (
-              <Lang
-                key={lang}
-                current={i18n.language === lang}
-                onClick={this.handleChangeLanguage(lang)}
-              >
-                {LANGUAGES[lang]}
+      <Container>
+        <Box grow flow={4}>
+          <Box flow={4} horizontal>
+            {Object.keys(i18n.store.data).map(lang => (
+              <Lang key={lang} onClick={this.handleChangeLanguage(lang)}>
+                {lang}
               </Lang>
             ))}
           </Box>
-          <Box style={{ width: 168 }}>
-            <GrowScroll>
-              <Colors>
-                {colors.map(color => (
+          <Bar size={2} color="white" />
+          <Box flow={4}>
+            {chunk(colors, 8).map((c, i) => (
+              <Colors
+                key={i} // eslint-disable-line react/no-array-index-key
+              >
+                {c.map(color => (
                   <CopyToClipboard
                     key={color.name}
                     data={color.name}
@@ -192,16 +165,17 @@ class DevToolbar extends PureComponent<any, State> {
                   />
                 ))}
               </Colors>
-            </GrowScroll>
+            ))}
           </Box>
-          <Box flow={10}>
+          <Bar size={2} color="white" />
+          <Box flow={4} horizontal>
             {Object.keys(cpuUsage)
               .sort()
               .map(k => (
-                <Box key={k} grow>
-                  <Box horizontal align="center">
-                    <Box grow>{k}</Box>
-                    <Box fontSize="8px">{last(cpuUsage[k]).value}%</Box>
+                <Box key={k}>
+                  <Box horizontal align="center" flow={2}>
+                    <Box fontSize={1}>{last(cpuUsage[k]).value}%</Box>
+                    <Box>{k}</Box>
                   </Box>
                   <Box>
                     <AreaChart

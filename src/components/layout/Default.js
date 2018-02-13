@@ -15,7 +15,6 @@ import DashboardPage from 'components/DashboardPage'
 import SettingsPage from 'components/SettingsPage'
 
 import AppRegionDrag from 'components/AppRegionDrag'
-import DevToolbar from 'components/DevToolbar'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
@@ -27,7 +26,7 @@ const Container = styled(GrowScroll).attrs({
   padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[7]}px;
 `
 
-class Wrapper extends Component<{}> {
+class Default extends Component<{}> {
   componentDidMount() {
     window.requestAnimationFrame(
       () => (this._timeout = setTimeout(() => ipcRenderer.send('app-finish-rendering'), 300)),
@@ -44,7 +43,6 @@ class Wrapper extends Component<{}> {
     return (
       <Fragment>
         {process.platform === 'darwin' && <AppRegionDrag />}
-        {__DEV__ && <DevToolbar />}
 
         <IsUnlocked>
           {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
@@ -70,4 +68,4 @@ class Wrapper extends Component<{}> {
   }
 }
 
-export default translate()(Wrapper)
+export default translate()(Default)
