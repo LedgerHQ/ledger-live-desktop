@@ -7,9 +7,9 @@ import menu from 'main/menu'
 import db from 'helpers/db'
 
 // necessary to prevent win from being garbage collected
-let mainWindow
-let devWindow
-let preloadWindow
+let mainWindow = null
+let devWindow = null
+let preloadWindow = null
 
 let forceClose = false
 
@@ -261,7 +261,7 @@ ipcMain.once('app-finish-rendering', () => {
     setImmediate(() => mainWindow !== null && mainWindow.focus())
   }
 
-  if (devWindow !== null) {
+  if (__DEV__ && devWindow !== null) {
     devWindow.show()
   }
 })
