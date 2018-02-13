@@ -104,7 +104,7 @@ class AccountPage extends PureComponent<Props> {
                 </Card>
               </Box>
             </Box>
-            <Card title={t('AccountPage.lastOperations')}>
+            <Card p={0} px={4} title={t('AccountPage.lastOperations')}>
               <TransactionsList transactions={accountData.transactions} />
             </Card>
           </Fragment>

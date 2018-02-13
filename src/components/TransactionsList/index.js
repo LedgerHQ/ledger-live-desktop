@@ -5,24 +5,39 @@ import styled from 'styled-components'
 import moment from 'moment'
 import get from 'lodash/get'
 
-import Defer from 'components/base/Defer'
-import Box from 'components/base/Box'
-import Text from 'components/base/Text'
-
-import { formatBTC } from 'helpers/format'
-
 import type { Transaction as TransactionType } from 'types/common'
 
-const DATE_COL_SIZE = 250
+import Box from 'components/base/Box'
+import Defer from 'components/base/Defer'
+import FormattedVal from 'components/base/FormattedVal'
+import Text from 'components/base/Text'
+
+import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
+
+const DATE_COL_SIZE = 80
+const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
 
 const Cap = styled(Text).attrs({
-  fontSize: 0,
-  color: 'mouse',
+  fontSize: 2,
+  color: 'warmGrey',
+  ff: 'Museo Sans|Bold',
 })`
   text-transform: uppercase;
-  letter-spacing: 1px;
 `
+
+const Day = styled(Text).attrs({
+  color: 'dark',
+  fontSize: 3,
+  ff: 'Open Sans',
+})`
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+`
+
+const Hour = styled(Day).attrs({
+  color: 'warmGrey',
+})``
 
 const HeaderCol = ({ size, children, ...props }: { size?: number, children: any }) => (
   <Cell size={size} {...props}>
@@ -37,15 +52,17 @@ HeaderCol.defaultProps = {
 const TransactionRaw = styled(Box).attrs({
   horizontal: true,
   align: 'center',
-  py: 2,
 })`
-  &:nth-child(odd) {
-    background: ${p => p.theme.colors.cream};
+  border-bottom: 1px solid ${p => p.theme.colors.argile};
+  height: 68px;
+
+  &:last-child {
+    border-bottom: 0;
   }
 `
 
 const Cell = styled(Box).attrs({
-  px: 2,
+  px: 4,
   horizontal: true,
   align: 'center',
 })`
@@ -58,11 +75,20 @@ const Transaction = ({ tx }: { tx: TransactionType }) => {
     <TransactionRaw>
       <Cell size={DATE_COL_SIZE} justify="space-between">
         <Box>
-          <Text>{time.format('DD/MM/YYYY')}</Text>
-          <Cap>{time.format('HH:mm')}</Cap>
+          <Day>{time.format('DD MMM')}</Day>
+          <Hour>{time.format('HH:mm')}</Hour>
         </Box>
-        <Cap>{tx.balance > 0 ? 'From' : 'To'}</Cap>
       </Cell>
+      {tx.account && (
+        <Cell size={ACCOUNT_COL_SIZE} horizontal flow={2}>
+          <Box align="center" justify="center" style={{ color: '#fcb653' }}>
+            <IconCurrencyBitcoin height={16} width={16} />
+          </Box>
+          <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
+            {tx.account.name}
+          </Box>
+        </Cell>
+      )}
       <Cell
         grow
         shrink
@@ -73,10 +99,15 @@ const Transaction = ({ tx }: { tx: TransactionType }) => {
           display: 'block',
         }}
       >
-        {tx.balance > 0 ? get(tx, 'inputs.0.address') : get(tx, 'outputs.0.address')}
+        <Box ff="Open Sans" fontSize={3} color="lead">
+          {tx.balance > 0 ? 'From' : 'To'}
+        </Box>
+        <Box color="dark" ff="Open Sans" fontSize={3}>
+          {tx.balance > 0 ? get(tx, 'inputs.0.address') : get(tx, 'outputs.0.address')}
+        </Box>
       </Cell>
       <Cell size={AMOUNT_COL_SIZE} justify="flex-end">
-        <Text color={tx.balance > 0 ? 'green' : void 0}>{formatBTC(tx.balance)}</Text>
+        <FormattedVal val={tx.balance} currency="BTC" showCode fontSize={4} alwaysShowSign />
       </Cell>
     </TransactionRaw>
   )
@@ -84,19 +115,31 @@ const Transaction = ({ tx }: { tx: TransactionType }) => {
 
 type Props = {
   transactions: Array<TransactionType>,
+  withAccounts?: boolean,
 }
 
-export default ({ transactions }: Props) => (
-  <Box flow={2}>
-    <Box horizontal>
+const TransactionsList = ({ transactions, withAccounts }: Props) => (
+  <Box flow={1}>
+    <Box horizontal pt={4}>
       <HeaderCol size={DATE_COL_SIZE}>{'Date'}</HeaderCol>
+      {withAccounts && <HeaderCol size={ACCOUNT_COL_SIZE}>{'Account'}</HeaderCol>}
       <HeaderCol grow>{'Address'}</HeaderCol>
       <HeaderCol size={AMOUNT_COL_SIZE} justify="flex-end">
         {'Amount'}
       </HeaderCol>
     </Box>
     <Defer>
-      <Box>{transactions.map(t => <Transaction key={t.hash} tx={t} />)}</Box>
+      <Box>
+        {transactions.map(t => (
+          <Transaction key={`{${t.hash}-${t.account ? t.account.id : ''}`} tx={t} />
+        ))}
+      </Box>
     </Defer>
   </Box>
 )
+
+TransactionsList.defaultProps = {
+  withAccounts: false,
+}
+
+export default TransactionsList
