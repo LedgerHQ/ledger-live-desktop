@@ -17,6 +17,7 @@ type Props = {
   settings: SettingsDisplay,
   onSaveSettings: Function,
 }
+
 type State = {
   inputValue: InputValue,
 }
@@ -25,7 +26,7 @@ class TabProfile extends PureComponent<Props, State> {
   state = {
     inputValue: {
       language: this.props.settings.language,
-      orderAccounts: this.props.settings.orderAccounts,
+      orderAccounts: '',
     },
   }
 
@@ -41,20 +42,6 @@ class TabProfile extends PureComponent<Props, State> {
         {
           key: 'fr',
           name: t('language.fr'),
-        },
-      ],
-      orderAccounts: [
-        {
-          key: 'name',
-          name: t('orderAccounts.name'),
-        },
-        {
-          key: 'balance',
-          name: t('orderAccounts.balance'),
-        },
-        {
-          key: 'type',
-          name: t('orderAccounts.type'),
         },
       ],
     }
@@ -83,10 +70,9 @@ class TabProfile extends PureComponent<Props, State> {
     const { t } = this.props
     const { inputValue } = this.state
 
-    const { languages, orderAccounts } = this.getDatas()
+    const { languages } = this.getDatas()
 
     const currentLanguage = languages.find(l => l.key === inputValue.language)
-    const currentOrderAccounts = orderAccounts.find(l => l.key === inputValue.orderAccounts)
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -98,15 +84,6 @@ class TabProfile extends PureComponent<Props, State> {
               renderSelected={item => item && item.name}
               value={currentLanguage}
               items={languages}
-            />
-          </Box>
-          <Box flow={1}>
-            <Label>{t('settings.display.orderAccounts')}</Label>
-            <Select
-              onChange={item => this.handleChangeInput('orderAccounts')(item.key)}
-              renderSelected={item => item && item.name}
-              value={currentOrderAccounts}
-              items={orderAccounts}
             />
           </Box>
           <Box horizontal justify="flex-end">
