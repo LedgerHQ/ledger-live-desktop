@@ -5,7 +5,7 @@ import capitalize from 'lodash/capitalize'
 
 import cpuUsage from 'helpers/cpuUsage'
 
-const { FORK_TYPE } = process.env
+const { FORK_TYPE, SENTRY_URL } = process.env
 
 process.title = `${require('../../package.json').productName} ${capitalize(FORK_TYPE)}` // eslint-disable-line global-require
 
@@ -13,10 +13,10 @@ function sendEvent(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
 }
 
-if (__PROD__ && __SENTRY_URL__) {
+if (__PROD__ && SENTRY_URL) {
   const Raven = require('raven') // eslint-disable-line global-require
   const ravenConfig = { captureUnhandledRejections: true }
-  Raven.config(__SENTRY_URL__, ravenConfig).install()
+  Raven.config(SENTRY_URL, ravenConfig).install()
 }
 
 // $FlowFixMe
