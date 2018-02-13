@@ -9,9 +9,9 @@ language:
   fr: French
 
 orderAccounts:
-  name: By name
-  balance: By balance
-  type: By type
+  name: Name
+  balance: Balance
+  type: Type
 
 sidebar:
   menu: Menu

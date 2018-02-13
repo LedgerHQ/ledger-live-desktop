@@ -8,9 +8,7 @@ import { translate } from 'react-i18next'
 import type { MapStateToProps } from 'react-redux'
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
-import type { UpdateOrderAccounts } from 'actions/accounts'
 
-import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
 import Box from 'components/base/Box'
@@ -26,7 +24,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 
 const mapDispatchToProps = {
   saveSettings,
-  updateOrderAccounts,
 }
 
 type Props = {
@@ -34,7 +31,6 @@ type Props = {
   saveSettings: SaveSettings,
   settings: Settings,
   t: T,
-  updateOrderAccounts: UpdateOrderAccounts,
 }
 
 type State = {
@@ -49,14 +45,10 @@ class SettingsPage extends PureComponent<Props, State> {
   handleChangeTab = (tab: number) => this.setState({ tab })
 
   handleSaveSettings = newSettings => {
-    const { saveSettings, i18n, settings, updateOrderAccounts } = this.props
+    const { saveSettings, i18n, settings } = this.props
 
     if (newSettings.language !== settings.language) {
       i18n.changeLanguage(newSettings.language)
-    }
-
-    if (newSettings.orderAccounts !== settings.orderAccounts) {
-      updateOrderAccounts(newSettings.orderAccounts)
     }
 
     saveSettings(newSettings)

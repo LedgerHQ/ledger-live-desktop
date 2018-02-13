@@ -15,6 +15,7 @@ import { hasPassword } from 'reducers/settings'
 import IconDevices from 'icons/Devices'
 import IconActivity from 'icons/Activity'
 
+import DropDown from 'components/base/DropDown'
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
 
@@ -23,7 +24,6 @@ const Container = styled(Box).attrs({
 })`
   height: ${p => p.theme.sizes.topBarHeight}px;
   position: absolute;
-  overflow: hidden;
   left: 0;
   right: 0;
   top: 0;
@@ -142,9 +142,13 @@ class TopBar extends PureComponent<Props, State> {
             </Box>
           </Box>
           <Box horizontal noShrink>
-            <Box justify="center" px={4} ff="Open Sans|SemiBold" fontSize={4}>
+            <DropDown
+              items={[{ key: 'empty', label: 'Nothing here yet' }]}
+              ff="Open Sans|SemiBold"
+              fontSize={4}
+            >
               {'Khalil Benihoud'}
-            </Box>
+            </DropDown>
           </Box>
         </Inner>
       </Container>

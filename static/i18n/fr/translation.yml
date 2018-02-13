@@ -9,9 +9,9 @@ language:
   fr: Français
 
 orderAccounts:
-  name: Par nom
-  balance: Par solde
-  type: Par type
+  name: Nom
+  balance: Solde
+  type: Type
 
 sidebar:
   menu: Menu
