@@ -15,6 +15,8 @@ import sortBy from 'lodash/fp/sortBy'
 import chunk from 'lodash/chunk'
 import styled from 'styled-components'
 import color from 'color'
+import fs from 'fs'
+import path from 'path'
 
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
@@ -22,6 +24,9 @@ import CopyToClipboard from 'components/base/CopyToClipboard'
 import { ChartWrapper } from 'components/base/Chart'
 
 import theme from 'styles/theme'
+
+const getLanguages = p => fs.readdirSync(p).filter(f => fs.statSync(path.join(p, f)).isDirectory())
+const languages = getLanguages(path.join(__static, './i18n'))
 
 const mainWindow = remote.BrowserWindow.getAllWindows().find(w => w.name === 'MainWindow')
 
@@ -149,14 +154,13 @@ class DevToolbar extends PureComponent<any, State> {
   }
 
   render() {
-    const { i18n } = this.props
     const { cpuUsage } = this.state
 
     return (
       <Container>
         <Box grow flow={4}>
           <Section title="Languages" horizontal>
-            {Object.keys(i18n.store.data).map(lang => (
+            {languages.map(lang => (
               <Item key={lang} onClick={this.handleChangeLanguage(lang)} style={{ flex: 0 }}>
                 {lang}
               </Item>
