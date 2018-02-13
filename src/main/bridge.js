@@ -1,7 +1,7 @@
 // @flow
 
 import { fork } from 'child_process'
-import { ipcMain } from 'electron'
+import { BrowserWindow, ipcMain } from 'electron'
 import objectPath from 'object-path'
 import { resolve } from 'path'
 
@@ -34,11 +34,17 @@ function onForkChannel(forkType, callType) {
 
     const onMessage = payload => {
       const { type, data, options = {} } = payload
-      if (callType === 'async') {
-        event.sender.send('msg', { type, data })
-      }
-      if (callType === 'sync') {
-        event.returnValue = { type, data }
+
+      if (options.window) {
+        const devWindow = BrowserWindow.getAllWindows().find(w => w.name === options.window)
+        devWindow.webContents.send('msg', { type, data })
+      } else {
+        if (callType === 'async') {
+          event.sender.send('msg', { type, data })
+        }
+        if (callType === 'sync') {
+          event.returnValue = { type, data }
+        }
       }
       if (options.kill && compute) {
         kill()
@@ -72,5 +78,5 @@ ipcMain.on('msg', (event: any, payload) => {
     return
   }
   const send = (type: string, data: *) => event.sender.send('msg', { type, data })
-  handler(send, data)
+  handler(send, data, type)
 })

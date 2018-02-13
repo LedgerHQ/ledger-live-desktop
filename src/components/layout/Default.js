@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment, Component } from 'react'
+import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
 import { Route } from 'react-router'
 import { translate } from 'react-i18next'
@@ -14,13 +15,18 @@ import DashboardPage from 'components/DashboardPage'
 import SettingsPage from 'components/SettingsPage'
 
 import AppRegionDrag from 'components/AppRegionDrag'
-import DevToolbar from 'components/DevToolbar'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
 import UpdateNotifier from 'components/UpdateNotifier'
 
-class Wrapper extends Component<{}> {
+const Container = styled(GrowScroll).attrs({
+  p: 6,
+})`
+  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[7]}px;
+`
+
+class Default extends Component<{}> {
   componentDidMount() {
     window.requestAnimationFrame(
       () => (this._timeout = setTimeout(() => ipcRenderer.send('app-finish-rendering'), 300)),
@@ -37,7 +43,6 @@ class Wrapper extends Component<{}> {
     return (
       <Fragment>
         {process.platform === 'darwin' && <AppRegionDrag />}
-        {__DEV__ && <DevToolbar />}
 
         <IsUnlocked>
           {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
@@ -50,11 +55,11 @@ class Wrapper extends Component<{}> {
             <Box shrink grow bg="cream" color="grey" relative>
               <TopBar />
               <UpdateNotifier />
-              <GrowScroll p={5} style={{ paddingTop: 100 }}>
+              <Container>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
                 <Route path="/account/:id" component={AccountPage} />
-              </GrowScroll>
+              </Container>
             </Box>
           </Box>
         </IsUnlocked>
@@ -63,4 +68,4 @@ class Wrapper extends Component<{}> {
   }
 }
 
-export default translate()(Wrapper)
+export default translate()(Default)

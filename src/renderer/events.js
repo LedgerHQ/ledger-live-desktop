@@ -14,6 +14,8 @@ import { updateAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
 import { getAccountData, getAccounts } from 'reducers/accounts'
 
+import i18n from 'renderer/i18n'
+
 const { DISABLED_SYNC, DISABLED_AUTO_SYNC } = process.env
 
 type MsgPayload = {
@@ -64,6 +66,10 @@ export function checkUpdates() {
 
 export default ({ store, locked }: { store: Object, locked: boolean }) => {
   const handlers = {
+    dispatch: (type, payload) => store.dispatch({ type, payload }),
+    application: {
+      changeLanguage: lang => i18n.changeLanguage(lang),
+    },
     account: {
       sync: {
         success: account => {

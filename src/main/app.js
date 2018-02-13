@@ -8,14 +8,15 @@ import db from 'helpers/db'
 
 // necessary to prevent win from being garbage collected
 let mainWindow
+let devWindow
 let preloadWindow
 
 let forceClose = false
 
 const devTools = __DEV__
 
-const getWindowPosition = (height, width) => {
-  const { bounds } = screen.getPrimaryDisplay()
+const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) => {
+  const { bounds } = display
 
   return {
     x: Math.ceil(bounds.x + (bounds.width - width) / 2),
@@ -23,10 +24,35 @@ const getWindowPosition = (height, width) => {
   }
 }
 
+const getDefaultUrl = () =>
+  __DEV__
+    ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
+    : `file://${__dirname}/index.html`
+
+const saveWindowSettings = window => {
+  window.on(
+    'resize',
+    debounce(() => {
+      const [width, height] = window.getSize()
+      db.setIn('settings', `window.${window.name}.dimensions`, { width, height })
+    }, 100),
+  )
+
+  window.on(
+    'move',
+    debounce(() => {
+      const [x, y] = window.getPosition()
+      db.setIn('settings', `window.${window.name}.positions`, { x, y })
+    }, 100),
+  )
+}
+
 const defaultWindowOptions = {
   backgroundColor: '#fff',
   webPreferences: {
     devTools,
+    // Enable, among other things, the ResizeObserver
+    experimentalFeatures: true,
   },
 }
 
@@ -34,8 +60,8 @@ function createMainWindow() {
   const MIN_HEIGHT = 768
   const MIN_WIDTH = 1024
 
-  const savedDimensions = db.getIn('settings', 'window.dimensions', {})
-  const savedPositions = db.getIn('settings', 'window.positions', null)
+  const savedDimensions = db.getIn('settings', 'window.MainWindow.dimensions', {})
+  const savedPositions = db.getIn('settings', 'window.MainWindow.positions', null)
 
   const width = savedDimensions.width || MIN_WIDTH
   const height = savedDimensions.height || MIN_HEIGHT
@@ -54,22 +80,19 @@ function createMainWindow() {
     minWidth: MIN_WIDTH,
     minHeight: MIN_HEIGHT,
     show: false,
-    webPreferences: {
-      ...defaultWindowOptions.webPreferences,
-      // Enable, among other things, the ResizeObserver
-      experimentalFeatures: true,
-    },
   }
 
   const window = new BrowserWindow(windowOptions)
 
-  const url = __DEV__
-    ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
-    : `file://${__dirname}/index.html`
+  window.name = 'MainWindow'
+
+  const url = getDefaultUrl()
 
   if (devTools) {
     window.webContents.openDevTools()
   }
+
+  saveWindowSettings(window)
 
   window.loadURL(url)
 
@@ -83,22 +106,6 @@ function createMainWindow() {
     }
   })
 
-  window.on(
-    'resize',
-    debounce(() => {
-      const [width, height] = window.getSize()
-      db.setIn('settings', 'window.dimensions', { width, height })
-    }, 100),
-  )
-
-  window.on(
-    'move',
-    debounce(() => {
-      const [x, y] = window.getPosition()
-      db.setIn('settings', 'window.positions', { x, y })
-    }, 100),
-  )
-
   window.webContents.on('devtools-opened', () => {
     window.focus()
     setImmediate(() => {
@@ -109,16 +116,64 @@ function createMainWindow() {
   return window
 }
 
+function createDevWindow() {
+  const MIN_HEIGHT = 400
+  const MIN_WIDTH = 600
+
+  const savedDimensions = db.getIn('settings', 'window.DevWindow.dimensions', {})
+  const savedPositions = db.getIn('settings', 'window.DevWindow.positions', null)
+
+  const width = savedDimensions.width || MIN_WIDTH
+  const height = savedDimensions.height || MIN_HEIGHT
+
+  const windowOptions = {
+    ...defaultWindowOptions,
+    ...(savedPositions !== null ? savedPositions : {}),
+    fullscreenable: false,
+    height,
+    show: false,
+    skipTaskbar: true,
+    width,
+  }
+
+  const window = new BrowserWindow(windowOptions)
+
+  window.name = 'DevWindow'
+
+  const url = getDefaultUrl()
+
+  if (devTools) {
+    window.webContents.openDevTools()
+  }
+
+  saveWindowSettings(window)
+
+  window.loadURL(`${url}/#/dev`)
+
+  window.on('ready-to-show', () => {
+    window.show()
+  })
+
+  return window
+}
+
 function createPreloadWindow() {
   // Preload renderer of main windows
   mainWindow = createMainWindow()
+
+  const [x, y] = mainWindow.getPosition()
+
+  if (__DEV__) {
+    devWindow = createDevWindow()
+  }
 
   const height = 144
   const width = 256
 
   const windowOptions = {
     ...defaultWindowOptions,
-    ...getWindowPosition(height, width),
+    ...getWindowPosition(height, width, screen.getDisplayNearestPoint({ x, y })),
+    alwaysOnTop: true,
     closable: false,
     frame: false,
     fullscreenable: false,
@@ -130,6 +185,8 @@ function createPreloadWindow() {
   }
 
   const window = new BrowserWindow(windowOptions)
+
+  window.name = 'PreloadWindow'
 
   window.loadURL(`file://${__static}/preload-window.html`)
 
@@ -196,5 +253,9 @@ ipcMain.on('app-finish-rendering', () => {
   if (mainWindow !== null) {
     mainWindow.show()
     setImmediate(() => mainWindow !== null && mainWindow.focus())
+  }
+
+  if (devWindow !== null) {
+    devWindow.show()
   }
 })

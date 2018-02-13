@@ -4,13 +4,12 @@ import React from 'react'
 
 import type { Account } from 'types/common'
 
-import { formatBTC } from 'helpers/format'
-
 import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
 
 import { AreaChart } from 'components/base/Chart'
 import Bar from 'components/base/Bar'
 import Box, { Card } from 'components/base/Box'
+import FormattedVal from 'components/base/FormattedVal'
 
 const AccountCard = ({
   account,
@@ -37,7 +36,15 @@ const AccountCard = ({
     </Box>
     <Bar size={1} color="argile" />
     <Box grow justify="center" color="dark">
-      {account.data && formatBTC(account.data.balance)}
+      {account.data && (
+        <FormattedVal
+          alwaysShowSign={false}
+          color="dark"
+          currency={account.type}
+          showCode
+          val={account.data.balance}
+        />
+      )}
     </Box>
     <AreaChart
       tiny
