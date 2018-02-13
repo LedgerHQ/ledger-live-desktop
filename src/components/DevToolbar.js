@@ -1,5 +1,7 @@
 // @flow
 
+/* eslint-disable import/no-named-as-default-member */
+
 import React, { PureComponent } from 'react'
 import { remote, ipcRenderer } from 'electron'
 import { translate } from 'react-i18next'
@@ -17,6 +19,7 @@ import color from 'color'
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
 import CopyToClipboard from 'components/base/CopyToClipboard'
+import { ChartWrapper } from 'components/base/Chart'
 
 import theme from 'styles/theme'
 
@@ -33,6 +36,11 @@ type ColorType = {
     isDark: () => boolean,
     hsl: () => HslColor,
   },
+}
+
+type SimpleType = {
+  name: string,
+  val: string,
 }
 
 const transform = flow(
@@ -53,6 +61,14 @@ const transform = flow(
 )
 
 const colors: Array<ColorType> = transform(theme.colors)
+const spaces: Array<SimpleType> = theme.space.map((s, i) => ({
+  name: s.toString(),
+  val: i.toString(),
+}))
+const fontSizes: Array<SimpleType> = theme.fontSizes.map((s, i) => ({
+  name: s.toString(),
+  val: i.toString(),
+}))
 
 const Container = styled(Box).attrs({
   bg: 'night',
@@ -62,35 +78,30 @@ const Container = styled(Box).attrs({
   fontSize: 3,
 })``
 
-const Colors = styled(Box).attrs({
+const Title = styled(Box).attrs({
+  color: 'white',
+})`
+  text-transform: uppercase;
+`
+
+const Items = styled(Box).attrs({
   horizontal: true,
   flow: 4,
 })``
 
-const Cl = styled(Box).attrs({
+const Item = styled(Box).attrs({
   align: 'center',
-  justify: 'center',
-  p: 2,
-})`
-  border: 2px solid white;
-  flex: 1;
-  cursor: pointer;
-`
-
-const Color = ({ onClick, color }: { onClick: Function, color: ColorType }) => (
-  <Cl bg={color.val} color={color.isDark ? 'white' : 'night'} onClick={onClick}>
-    {color.name}
-  </Cl>
-)
-
-const Lang = styled(Box).attrs({
   bg: 'night',
-  color: 'white',
   borderColor: 'white',
-  borderWidth: 2,
   borderRadius: 1,
-  p: 2,
+  borderWidth: 2,
+  color: 'white',
+  justify: 'center',
+  py: 2,
+  px: 4,
 })`
+  flex: 1;
+  overflow: hidden;
   cursor: pointer;
 `
 
@@ -144,17 +155,17 @@ class DevToolbar extends PureComponent<any, State> {
     return (
       <Container>
         <Box grow flow={4}>
-          <Box flow={4} horizontal>
+          <Section title="Languages" horizontal>
             {Object.keys(i18n.store.data).map(lang => (
-              <Lang key={lang} onClick={this.handleChangeLanguage(lang)}>
+              <Item key={lang} onClick={this.handleChangeLanguage(lang)} style={{ flex: 0 }}>
                 {lang}
-              </Lang>
+              </Item>
             ))}
-          </Box>
+          </Section>
           <Bar size={2} color="white" />
-          <Box flow={4}>
-            {chunk(colors, 8).map((c, i) => (
-              <Colors
+          <Section title="Colors">
+            {chunk(colors, 5).map((c, i) => (
+              <Items
                 key={i} // eslint-disable-line react/no-array-index-key
               >
                 {c.map(color => (
@@ -164,42 +175,107 @@ class DevToolbar extends PureComponent<any, State> {
                     render={copy => <Color color={color} onClick={copy} />}
                   />
                 ))}
-              </Colors>
+              </Items>
             ))}
-          </Box>
+          </Section>
+          <Section title="Space">
+            {chunk(spaces, 5).map((s, i) => (
+              <Items
+                key={i} // eslint-disable-line react/no-array-index-key
+              >
+                {s.map(space => (
+                  <CopyToClipboard
+                    key={space.val}
+                    data={space.val}
+                    render={copy => <Item onClick={copy}>{space.name}</Item>}
+                  />
+                ))}
+              </Items>
+            ))}
+          </Section>
+          <Section title="Font Sizes">
+            {chunk(fontSizes, 5).map((f, i) => (
+              <Items
+                key={i} // eslint-disable-line react/no-array-index-key
+              >
+                {f.map(fontSize => (
+                  <CopyToClipboard
+                    key={fontSize.val}
+                    data={fontSize.val}
+                    render={copy => <Item onClick={copy}>{fontSize.name}</Item>}
+                  />
+                ))}
+              </Items>
+            ))}
+          </Section>
           <Bar size={2} color="white" />
-          <Box flow={4} horizontal>
-            {Object.keys(cpuUsage)
-              .sort()
-              .map(k => (
-                <Box key={k}>
-                  <Box horizontal align="center" flow={2}>
-                    <Box fontSize={1}>{last(cpuUsage[k]).value}%</Box>
-                    <Box>{k}</Box>
-                  </Box>
-                  <Box>
-                    <AreaChart
-                      width={100}
-                      height={40}
-                      data={cpuUsage[k]}
-                      margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
-                    >
-                      <Area
-                        type="monotone"
-                        stroke="#8884d8"
-                        fill="#8884d8"
-                        dataKey="value"
-                        isAnimationActive={false}
+          <Section title="CPU Usage">
+            {chunk(Object.keys(cpuUsage).sort(), 2).map((l, i) => (
+              <Items
+                key={i} // eslint-disable-line react/no-array-index-key
+              >
+                {l.map(k => (
+                  <Box key={k} style={{ flex: 1 }}>
+                    <Box horizontal align="center" flow={2}>
+                      <Box fontSize={1}>{last(cpuUsage[k]).value}%</Box>
+                      <Box>{k}</Box>
+                    </Box>
+                    <Box>
+                      <ChartWrapper
+                        render={({ width }) => (
+                          <AreaChart
+                            width={width}
+                            height={40}
+                            data={cpuUsage[k]}
+                            margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+                          >
+                            <Area
+                              type="monotone"
+                              stroke="#8884d8"
+                              fill="#8884d8"
+                              dataKey="value"
+                              isAnimationActive={false}
+                            />
+                          </AreaChart>
+                        )}
                       />
-                    </AreaChart>
+                    </Box>
                   </Box>
-                </Box>
-              ))}
-          </Box>
+                ))}
+              </Items>
+            ))}
+          </Section>
         </Box>
       </Container>
     )
   }
+}
+
+const Color = ({ onClick, color }: { onClick: Function, color: ColorType }) => (
+  <Item bg={color.val} color={color.isDark ? 'white' : 'night'} onClick={onClick}>
+    {color.name}
+  </Item>
+)
+
+const Section = ({
+  title,
+  children,
+  horizontal,
+}: {
+  title: string,
+  children: any,
+  horizontal?: boolean,
+}) => (
+  <Box flow={2}>
+    <Title>{title}</Title>
+    <Box flow={4} horizontal={horizontal}>
+      {children}
+    </Box>
+  </Box>
+)
+
+Section.defaultProps = {
+  horizontal: false,
 }
 
 export default translate()(DevToolbar)

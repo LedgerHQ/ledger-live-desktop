@@ -5,12 +5,21 @@ import { BrowserWindow, ipcMain } from 'electron'
 import objectPath from 'object-path'
 import { resolve } from 'path'
 
+import cpuUsage from 'helpers/cpuUsage'
+
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
 const processes = []
 
 function cleanProcesses() {
   processes.forEach(kill => kill())
+}
+
+function sendEventToWindow(name, { type, data }) {
+  const anotherWindow = BrowserWindow.getAllWindows().find(w => w.name === name)
+  if (anotherWindow) {
+    anotherWindow.webContents.send('msg', { type, data })
+  }
 }
 
 function onForkChannel(forkType, callType) {
@@ -36,8 +45,7 @@ function onForkChannel(forkType, callType) {
       const { type, data, options = {} } = payload
 
       if (options.window) {
-        const devWindow = BrowserWindow.getAllWindows().find(w => w.name === options.window)
-        devWindow.webContents.send('msg', { type, data })
+        sendEventToWindow(options.window, { type, data })
       } else {
         if (callType === 'async') {
           event.sender.send('msg', { type, data })
@@ -80,3 +88,12 @@ ipcMain.on('msg', (event: any, payload) => {
   const send = (type: string, data: *) => event.sender.send('msg', { type, data })
   handler(send, data, type)
 })
+
+if (__DEV__) {
+  cpuUsage(cpuPercent =>
+    sendEventToWindow('DevWindow', {
+      type: 'usage.cpu',
+      data: { name: 'main', value: cpuPercent },
+    }),
+  )
+}

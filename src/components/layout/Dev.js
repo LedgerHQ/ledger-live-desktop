@@ -4,6 +4,8 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
+
 import DevToolbar from 'components/DevToolbar'
 
 const Container = styled(Box).attrs({
@@ -16,7 +18,9 @@ class Dev extends PureComponent<{}> {
   render() {
     return (
       <Container>
-        <DevToolbar />
+        <GrowScroll>
+          <DevToolbar />
+        </GrowScroll>
       </Container>
     )
   }

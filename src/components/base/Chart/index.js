@@ -16,7 +16,7 @@ type State = {
   width: number,
 }
 
-class Container extends PureComponent<Props, State> {
+export class ChartWrapper extends PureComponent<Props, State> {
   state = {
     isAnimationActive: true,
     width: 0,
@@ -83,7 +83,7 @@ export const AreaChart = ({
   margin?: Object,
   tiny?: boolean,
 }) => (
-  <Container
+  <ChartWrapper
     render={({ width, isAnimationActive }) => (
       <ReactAreaChart width={width} height={height} data={data} margin={margin}>
         {linearGradient && (
