@@ -85,6 +85,7 @@ function createMainWindow() {
           titleBarStyle: 'hiddenInset',
         }
       : {}),
+    autoHideMenuBar: true,
     height,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
@@ -152,6 +153,7 @@ function createDevWindow() {
   saveWindowSettings(window)
 
   window.loadURL(`${url}/#/dev`)
+  window.setMenu(null)
 
   window.on('close', handleCloseWindow(window))
 
@@ -243,16 +245,12 @@ app.on('ready', async () => {
     await installExtensions()
   }
 
-  if (process.platform === 'darwin') {
-    Menu.setApplicationMenu(menu)
-  } else {
-    Menu.setApplicationMenu(null)
-  }
+  Menu.setApplicationMenu(menu)
 
   preloadWindow = createPreloadWindow()
 })
 
-ipcMain.on('app-finish-rendering', () => {
+ipcMain.once('app-finish-rendering', () => {
   if (preloadWindow !== null) {
     preloadWindow.destroy()
     preloadWindow = null

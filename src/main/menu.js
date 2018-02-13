@@ -46,7 +46,7 @@ const template = [
                 }
               },
             },
-            { type: 'separator' },
+            ...props(process.platform === 'darwin', [{ type: 'separator' }], []),
           ],
           [],
         ),
