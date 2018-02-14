@@ -27,14 +27,21 @@ const Trigger = styled(Box)`
 const Drop = styled(Box).attrs({
   bg: 'white',
   boxShadow: 0,
+  borderRadius: 1,
+  mt: 1,
 })`
   position: absolute;
   top: 100%;
   right: 0;
+
+  > * + * {
+    border-top: 1px solid ${p => p.theme.colors.argile};
+  }
 `
 
 const Item = styled(Box).attrs({
   py: 2,
+  fontSize: 3,
   px: 4,
   bg: p => (p.isHighlighted ? 'pearl' : ''),
 })`
