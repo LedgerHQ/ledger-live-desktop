@@ -64,8 +64,8 @@ class SettingsPage extends PureComponent<Props, State> {
     }
 
     return (
-      <Box flow={4}>
-        <Text fontSize={5}>{t('settings.title')}</Text>
+      <Box flow={6}>
+        <Text fontSize={7}>{t('settings.title')}</Text>
         <Tabs
           index={tab}
           onTabClick={this.handleChangeTab}

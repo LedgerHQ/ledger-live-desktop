@@ -12,7 +12,7 @@ const Tab = styled(Tabbable).attrs({
   pb: 2,
   align: 'center',
   justify: 'center',
-  fontSize: 1,
+  fontSize: 3,
 })`
   border-bottom: 2px solid transparent;
   border-bottom-color: ${p => (p.isActive ? p.theme.colors.blue : '')};
