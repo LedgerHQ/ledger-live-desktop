@@ -186,6 +186,7 @@ function createPreloadWindow() {
     alwaysOnTop: true,
     closable: false,
     fullscreenable: false,
+    resizable: false,
   }
 
   const window = new BrowserWindow(windowOptions)

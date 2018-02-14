@@ -35,6 +35,7 @@ const Inner = styled(Box).attrs({
   horizontal: true,
   grow: true,
   borderBottom: true,
+  flow: 4,
   borderWidth: 1,
   borderColor: p => rgba(p.theme.colors.black, 0.15),
 })``
@@ -146,15 +147,17 @@ class TopBar extends PureComponent<Props, State> {
             <Box justify="center">
               <Bar />
             </Box>
-            <Box justify="flex-end" horizontal>
-              {hasPassword && <LockApplication onLock={this.handleLock} />}
-            </Box>
           </Box>
           <Box horizontal noShrink>
             <DropDown
-              items={[{ key: 'empty', label: 'Nothing here yet' }]}
+              items={
+                hasPassword
+                  ? [{ key: 'lock', label: 'Lock application', onClick: this.handleLock }]
+                  : []
+              }
               ff="Open Sans|SemiBold"
               fontSize={4}
+              offsetTop={-2}
             >
               <Box horizontal align="center" flow={1} color="warmGrey">
                 <Box>{'Khalil Benihoud'}</Box>
@@ -167,32 +170,5 @@ class TopBar extends PureComponent<Props, State> {
     )
   }
 }
-
-const LockApplication = ({ onLock }: { onLock: Function }) => (
-  <Box
-    relative
-    color="night"
-    mr={20}
-    horizontal
-    flow={10}
-    onClick={onLock}
-    style={{ cursor: 'pointer' }}
-  >
-    <LockIcon height={20} width={20} />
-  </Box>
-)
-
-const LockIcon = props => (
-  <svg {...props} viewBox="0 0 482.8 482.8">
-    <path
-      d="M395.95 210.4h-7.1v-62.9c0-81.3-66.1-147.5-147.5-147.5-81.3 0-147.5 66.1-147.5 147.5 0 7.5 6 13.5 13.5 13.5s13.5-6 13.5-13.5c0-66.4 54-120.5 120.5-120.5 66.4 0 120.5 54 120.5 120.5v62.9h-275c-14.4 0-26.1 11.7-26.1 26.1v168.1c0 43.1 35.1 78.2 78.2 78.2h204.9c43.1 0 78.2-35.1 78.2-78.2V236.5c0-14.4-11.7-26.1-26.1-26.1zm-.9 194.2c0 28.2-22.9 51.2-51.2 51.2h-204.8c-28.2 0-51.2-22.9-51.2-51.2V237.4h307.2v167.2z"
-      fill="currentColor"
-    />
-    <path
-      d="M241.45 399.1c27.9 0 50.5-22.7 50.5-50.5 0-27.9-22.7-50.5-50.5-50.5-27.9 0-50.5 22.7-50.5 50.5s22.6 50.5 50.5 50.5zm0-74.1c13 0 23.5 10.6 23.5 23.5s-10.5 23.6-23.5 23.6-23.5-10.6-23.5-23.5 10.5-23.6 23.5-23.6z"
-      fill="currentColor"
-    />
-  </svg>
-)
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopBar)

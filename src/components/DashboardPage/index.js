@@ -25,6 +25,7 @@ import { saveSettings } from 'actions/settings'
 import { AreaChart } from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import Pills from 'components/base/Pills'
+import Defer from 'components/base/Defer'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
 
@@ -48,6 +49,8 @@ type Props = {
 }
 
 type State = {
+  accountsChunk: Array<any>,
+  allTransactions: Array<Object>,
   fakeDatas: Array<any>,
   selectedTime: string,
 }
@@ -92,10 +95,21 @@ const getAllTransactions = accounts => {
   return sortBy(allTransactions, t => t.received_at).reverse()
 }
 
+const getAccountsChunk = accounts => {
+  // create shallow copy of accounts, to be mutated
+  const listAccounts = [...accounts]
+
+  while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
+
+  return chunk(listAccounts, ACCOUNTS_BY_LINE)
+}
+
 class DashboardPage extends PureComponent<Props, State> {
   state = {
-    selectedTime: 'day',
+    accountsChunk: getAccountsChunk(this.props.accounts),
+    allTransactions: getAllTransactions(this.props.accounts),
     fakeDatas: generateFakeDatas(this.props.accounts),
+    selectedTime: 'day',
   }
 
   componentDidMount() {
@@ -103,29 +117,22 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (
-      this.state.fakeDatas.length === 0 &&
-      nextProps.accounts.length !== this.props.accounts.length
-    ) {
+    if (this.state.fakeDatas.length === 0) {
       this.setState({
         fakeDatas: generateFakeDatas(nextProps.accounts),
+      })
+    }
+
+    if (nextProps.accounts.length !== this.props.accounts.length) {
+      this.setState({
+        accountsChunk: getAccountsChunk(nextProps.accounts),
+        allTransactions: getAllTransactions(nextProps.accounts),
       })
     }
   }
 
   componentWillUnmount() {
     clearTimeout(this._timeout)
-  }
-
-  getAccountsChunk() {
-    const { accounts } = this.props
-
-    // create shallow copy of accounts, to be mutated
-    const listAccounts = [...accounts]
-
-    while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
-
-    return chunk(listAccounts, ACCOUNTS_BY_LINE)
   }
 
   addFakeDatasOnAccounts = () => {
@@ -154,7 +161,7 @@ class DashboardPage extends PureComponent<Props, State> {
 
   render() {
     const { push, accounts } = this.props
-    const { selectedTime, fakeDatas } = this.state
+    const { accountsChunk, allTransactions, selectedTime, fakeDatas } = this.state
 
     const totalAccounts = accounts.length
 
@@ -185,31 +192,33 @@ class DashboardPage extends PureComponent<Props, State> {
               <Box px={6}>
                 <BalanceInfos since={selectedTime} />
               </Box>
-              <Box ff="Open Sans" fontSize={4} color="warmGrey">
-                <AreaChart
-                  id="dashboard-chart"
-                  margin={{
-                    top: space[6],
-                    bottom: 0,
-                    left: space[6] - 10,
-                    right: space[6],
-                  }}
-                  color="#5286f7"
-                  height={250}
-                  data={takeRight(
-                    fakeDatas.reduce((res, data) => {
-                      data.forEach((d, i) => {
-                        res[i] = {
-                          name: d.name,
-                          value: (res[i] ? res[i].value : 0) + d.value,
-                        }
-                      })
-                      return res
-                    }, []),
-                    25,
-                  )}
-                />
-              </Box>
+              <Defer>
+                <Box ff="Open Sans" fontSize={4} color="warmGrey">
+                  <AreaChart
+                    id="dashboard-chart"
+                    margin={{
+                      top: space[6],
+                      bottom: 0,
+                      left: space[6] - 10,
+                      right: space[6],
+                    }}
+                    color="#5286f7"
+                    height={250}
+                    data={takeRight(
+                      fakeDatas.reduce((res, data) => {
+                        data.forEach((d, i) => {
+                          res[i] = {
+                            name: d.name,
+                            value: (res[i] ? res[i].value : 0) + d.value,
+                          }
+                        })
+                        return res
+                      }, []),
+                      25,
+                    )}
+                  />
+                </Box>
+              </Defer>
             </Card>
             <Box flow={4}>
               <Box horizontal align="flex-end">
@@ -224,7 +233,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 </Box>
               </Box>
               <Box flow={5}>
-                {this.getAccountsChunk().map((accountsByLine, i) => (
+                {accountsChunk.map((accountsByLine, i) => (
                   <Box
                     key={i} // eslint-disable-line react/no-array-index-key
                     horizontal
@@ -252,7 +261,7 @@ class DashboardPage extends PureComponent<Props, State> {
               </Box>
             </Box>
             <Card p={0} px={4} title="Recent activity">
-              <TransactionsList withAccounts transactions={getAllTransactions(accounts)} />
+              <TransactionsList withAccounts transactions={allTransactions} />
             </Card>
           </Fragment>
         )}

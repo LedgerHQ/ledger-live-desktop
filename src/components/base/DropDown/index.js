@@ -14,6 +14,7 @@ type ItemType = {
 
 type Props = {
   children: any,
+  offsetTop: number | string,
   items: Array<ItemType>,
   value?: ItemType | null,
   onChange?: ItemType => void,
@@ -28,7 +29,6 @@ const Drop = styled(Box).attrs({
   bg: 'white',
   boxShadow: 0,
   borderRadius: 1,
-  mt: 1,
 })`
   position: absolute;
   top: 100%;
@@ -45,6 +45,7 @@ const Item = styled(Box).attrs({
   px: 4,
   bg: p => (p.isHighlighted ? 'pearl' : ''),
 })`
+  cursor: pointer;
   white-space: nowrap;
 `
 
@@ -56,18 +57,28 @@ class DropDown extends PureComponent<Props> {
   static defaultProps = {
     value: null,
     onChange: noop,
+    offsetTop: 1,
   }
 
   renderItems = (items: Array<ItemType>, selectedItem: ItemType, downshiftProps: Object) => {
+    const { offsetTop } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
     return (
-      <Drop>
-        {items.map((item, i) => (
-          <Item isHighlighted={highlightedIndex === i} key={item.key} {...getItemProps({ item })}>
-            {item.label}
-          </Item>
-        ))}
+      <Drop mt={offsetTop}>
+        {items.map((item, i) => {
+          const { key, label, ...props } = item
+          return (
+            <Item
+              isHighlighted={highlightedIndex === i}
+              key={item.key}
+              {...getItemProps({ item })}
+              {...props}
+            >
+              {item.label}
+            </Item>
+          )
+        })}
       </Drop>
     )
   }

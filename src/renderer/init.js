@@ -20,8 +20,7 @@ import App from 'components/App'
 
 import 'styles/global'
 
-// init db with defaults if needed
-db.init('accounts', [])
+// Init settings with defaults if needed
 db.init('settings', {})
 
 const history = createHistory()
@@ -35,6 +34,9 @@ const language = getLanguage(state)
 const locked = isLocked(state)
 
 if (!locked) {
+  // Init accounts with defaults if needed
+  db.init('accounts', [])
+
   store.dispatch(fetchAccounts())
 }
 
