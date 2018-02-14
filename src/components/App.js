@@ -15,6 +15,8 @@ import Default from 'components/layout/Default'
 import Dev from 'components/layout/Dev'
 import Print from 'components/layout/Print'
 
+const { DEV_TOOLS } = process.env
+
 export default ({
   store,
   history,
@@ -29,7 +31,7 @@ export default ({
       <ThemeProvider theme={theme}>
         <ConnectedRouter history={history}>
           <Switch>
-            {__DEV__ && <Route path="/dev" component={Dev} />}
+            {(__DEV__ || DEV_TOOLS) && <Route path="/dev" component={Dev} />}
             <Route path="/print" component={Print} />
             <Route component={Default} />
           </Switch>

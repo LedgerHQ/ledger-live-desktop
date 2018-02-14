@@ -13,7 +13,9 @@ let preloadWindow = null
 
 let forceClose = false
 
-const devTools = __DEV__
+const { ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
+
+const devTools = __DEV__ || DEV_TOOLS
 
 const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) => {
   const { bounds } = display
@@ -35,9 +37,7 @@ const handleCloseWindow = w => e => {
 }
 
 const getDefaultUrl = () =>
-  __DEV__
-    ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
-    : `file://${__dirname}/index.html`
+  __DEV__ ? `http://localhost:${ELECTRON_WEBPACK_WDS_PORT || ''}` : `file://${__dirname}/index.html`
 
 const saveWindowSettings = window => {
   window.on(
@@ -101,7 +101,7 @@ function createMainWindow() {
 
   if (devTools) {
     window.webContents.openDevTools({
-      mode: process.env.DEV_TOOLS_MODE,
+      mode: DEV_TOOLS_MODE,
     })
   }
 

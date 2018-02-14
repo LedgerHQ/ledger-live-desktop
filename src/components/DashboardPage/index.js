@@ -73,6 +73,9 @@ const generateFakeData = v => ({
   value: random(10, 100),
 })
 
+const generateFakeDatas = accounts =>
+  accounts.map(() => [...Array(25).keys()].map(v => generateFakeData(v + 1)))
+
 const getAllTransactions = accounts => {
   const allTransactions = accounts.reduce((result, account) => {
     const transactions = get(account, 'data.transactions', [])
@@ -98,11 +101,22 @@ const getAllTransactions = accounts => {
 class DashboardPage extends PureComponent<Props, State> {
   state = {
     selectedTime: 'day',
-    fakeDatas: this.generateFakeDatas(),
+    fakeDatas: generateFakeDatas(this.props.accounts),
   }
 
   componentDidMount() {
     this.addFakeDatasOnAccounts()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.state.fakeDatas.length === 0 &&
+      nextProps.accounts.length !== this.props.accounts.length
+    ) {
+      this.setState({
+        fakeDatas: generateFakeDatas(nextProps.accounts),
+      })
+    }
   }
 
   componentWillUnmount() {
@@ -126,29 +140,24 @@ class DashboardPage extends PureComponent<Props, State> {
     saveSettings({ orderAccounts: order })
   }
 
-  generateFakeDatas() {
-    const { accounts } = this.props
-    return accounts.map(() => [...Array(25).keys()].map(v => generateFakeData(v + 1)))
-  }
-
   addFakeDatasOnAccounts = () => {
+    const { accounts } = this.props
+
     this._timeout = setTimeout(() => {
-      const { accounts } = this.props
-
-      this.setState(prev => ({
-        fakeDatas: [
-          ...accounts.reduce((res, acc, i) => {
-            if (res[i]) {
-              const nextIndex = res[i].length
-              res[i][nextIndex] = generateFakeData(nextIndex)
-            }
-            return res
-          }, prev.fakeDatas),
-        ],
-      }))
-
-      this.addFakeDatasOnAccounts()
-    }, TIMEOUT_REFRESH_DATAS)
+      window.requestAnimationFrame(() => {
+        this.setState(prev => ({
+          fakeDatas: [
+            ...accounts.reduce((res, acc, i) => {
+              if (res[i]) {
+                const nextIndex = res[i].length
+                res[i][nextIndex] = generateFakeData(nextIndex)
+              }
+              return res
+            }, prev.fakeDatas),
+          ],
+        }))
+      }, TIMEOUT_REFRESH_DATAS)
+    })
   }
 
   _timeout = undefined
