@@ -42,3 +42,5 @@ nsis:
 
 files:
   - dist/internals
+  - "!node_modules/jsqr/test-data${/*}"
+  - "!node_modules/recharts/node_modules${/*}"
