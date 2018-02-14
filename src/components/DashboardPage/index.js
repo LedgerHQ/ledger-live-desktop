@@ -13,12 +13,11 @@ import sortBy from 'lodash/sortBy'
 import takeRight from 'lodash/takeRight'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Accounts, T } from 'types/common'
+import type { Accounts } from 'types/common'
 
 import { space } from 'styles/theme'
 
 import { getVisibleAccounts } from 'reducers/accounts'
-import { getOrderAccounts } from 'reducers/settings'
 
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
@@ -28,16 +27,13 @@ import Box, { Card } from 'components/base/Box'
 import Pills from 'components/base/Pills'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
-import DropDown from 'components/base/DropDown'
-
-import IconAngleDown from 'icons/AngleDown'
 
 import AccountCard from './AccountCard'
 import BalanceInfos from './BalanceInfos'
+import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getVisibleAccounts(state),
-  orderAccounts: getOrderAccounts(state),
 })
 
 const mapDispatchToProps = {
@@ -49,10 +45,6 @@ const mapDispatchToProps = {
 type Props = {
   accounts: Accounts,
   push: Function,
-  t: T,
-  updateOrderAccounts: Function,
-  saveSettings: Function,
-  orderAccounts: string,
 }
 
 type State = {
@@ -136,12 +128,6 @@ class DashboardPage extends PureComponent<Props, State> {
     return chunk(listAccounts, ACCOUNTS_BY_LINE)
   }
 
-  setAccountOrder = order => {
-    const { updateOrderAccounts, saveSettings } = this.props
-    updateOrderAccounts(order)
-    saveSettings({ orderAccounts: order })
-  }
-
   addFakeDatasOnAccounts = () => {
     const { accounts } = this.props
 
@@ -167,25 +153,10 @@ class DashboardPage extends PureComponent<Props, State> {
   _timeout = undefined
 
   render() {
-    const { push, accounts, t, orderAccounts } = this.props
+    const { push, accounts } = this.props
     const { selectedTime, fakeDatas } = this.state
 
     const totalAccounts = accounts.length
-
-    const sortItems = [
-      {
-        key: 'name',
-        label: t('orderAccounts.name'),
-      },
-      {
-        key: 'balance',
-        label: t('orderAccounts.balance'),
-      },
-      {
-        key: 'type',
-        label: t('orderAccounts.type'),
-      },
-    ]
 
     return (
       <Box flow={7}>
@@ -249,18 +220,7 @@ class DashboardPage extends PureComponent<Props, State> {
                   <Text ff="Open Sans|SemiBold" fontSize={4}>
                     {'Sort by'}
                   </Text>
-                  <DropDown
-                    onChange={item => this.setAccountOrder(item.key)}
-                    items={sortItems}
-                    ff="Open Sans|SemiBold"
-                    fontSize={4}
-                    value={sortItems.find(s => s.key === orderAccounts)}
-                  >
-                    <Box horizontal align="center" flow={1} color="dark">
-                      <Text>{t(`orderAccounts.${orderAccounts}`)}</Text>
-                      <IconAngleDown height={7} width={8} />
-                    </Box>
-                  </DropDown>
+                  <AccountsOrder />
                 </Box>
               </Box>
               <Box flow={5}>

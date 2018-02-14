@@ -30,7 +30,7 @@ const Steps = {
       }}
     >
       <Box flow={3}>
-        <Text fontSize={4} color="steel">
+        <Text fontSize={6} color="steel">
           {t('send.title')}
         </Text>
         <Box flow={1}>
@@ -157,7 +157,7 @@ class Send extends PureComponent<Props, State> {
 
           return (
             <Fragment>
-              <ModalBody p={2}>
+              <ModalBody p={3}>
                 <Breadcrumb
                   currentStep={step}
                   items={[

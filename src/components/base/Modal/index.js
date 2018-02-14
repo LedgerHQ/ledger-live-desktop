@@ -72,7 +72,7 @@ const Backdrop = styled(Box).attrs({
 
 const Wrapper = styled(Tabbable).attrs({
   bg: 'transparent',
-  flow: 20,
+  flow: 4,
   mt: 100,
   mb: 100,
   style: p => ({
@@ -93,7 +93,7 @@ const Body = styled(Box).attrs({
 `
 
 const CloseContainer = styled(Box).attrs({
-  p: 2,
+  p: 4,
   color: 'mouse',
 })`
   cursor: pointer;
@@ -214,10 +214,10 @@ export const ModalBody = ({
   <Body>
     {onClose && (
       <CloseContainer onClick={onClose}>
-        <Icon fontSize={3} name="times" />
+        <Icon fontSize={6} name="times" />
       </CloseContainer>
     )}
-    <Box p={3} {...props}>
+    <Box p={5} {...props}>
       {children}
     </Box>
   </Body>

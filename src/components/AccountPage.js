@@ -52,36 +52,31 @@ class AccountPage extends PureComponent<Props> {
       <Box flow={3}>
         <Box horizontal>
           <Box>
-            <Text fontSize={4}>{account.name}</Text>
+            <Text fontSize={8}>{account.name}</Text>
           </Box>
-          <Box horizontal align="center" justify="flex-end" grow flow={20}>
-            <Box>
-              <Button primary onClick={() => openModal(MODAL_SEND, { account })}>
-                <Box horizontal flow={2} align="center">
-                  <Box>
-                    <Icon name="upload" />
-                  </Box>
-                  <Box>{t('send.title')}</Box>
+          <Box horizontal align="center" justify="flex-end" grow flow={2}>
+            <Button primary onClick={() => openModal(MODAL_SEND, { account })}>
+              <Box horizontal flow={2} align="center">
+                <Box>
+                  <Icon name="upload" />
                 </Box>
-              </Button>
-            </Box>
-            <Box>
-              <Button primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
-                <Box horizontal flow={2} align="center">
-                  <Box>
-                    <Icon name="download" />
-                  </Box>
-                  <Box>{t('receive.title')}</Box>
+                <Box>{t('send.title')}</Box>
+              </Box>
+            </Button>
+            <Button primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
+              <Box horizontal flow={2} align="center">
+                <Box>
+                  <Icon name="download" />
                 </Box>
-              </Button>
-            </Box>
-            <Box>
-              <Button
-                icon="sliders-h"
-                color="mouse"
-                onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
-              />
-            </Box>
+                <Box>{t('receive.title')}</Box>
+              </Box>
+            </Button>
+            <Button
+              style={{ width: 50 }}
+              icon="sliders-h"
+              color="mouse"
+              onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
+            />
           </Box>
         </Box>
         {accountData && (

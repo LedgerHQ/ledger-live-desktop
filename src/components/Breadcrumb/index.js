@@ -10,6 +10,7 @@ const BreadcrumbWrapper = styled(Box).attrs({
   align: 'center',
   relative: true,
 })``
+
 const BreadcrumbStep = styled(({ start, active, end, ...props }) => (
   <Box start={start} end={end} active={active} {...props} />
 )).attrs({
@@ -84,7 +85,7 @@ const Breadcrumb = ({ items, currentStep }: Props) => (
             <BreadcrumbNumberWrapper>
               <BreadcrumbNumber active={active}>{i + 1}</BreadcrumbNumber>
             </BreadcrumbNumberWrapper>
-            <Box fontSize={0}>{item.label}</Box>
+            <Box fontSize={3}>{item.label}</Box>
           </BreadcrumbStep>
         </Fragment>
       )

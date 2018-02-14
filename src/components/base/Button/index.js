@@ -41,7 +41,7 @@ function getProps({ disabled, icon, primary }: Object) {
         px: 1,
       },
       {
-        fontSize: 1,
+        fontSize: 4,
         px: 3,
       },
     ),
