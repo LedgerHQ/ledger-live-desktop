@@ -49,6 +49,8 @@ type Props = {
 }
 
 type State = {
+  accountsChunk: Array<any>,
+  allTransactions: Array<Object>,
   fakeDatas: Array<any>,
   selectedTime: string,
 }
@@ -93,10 +95,21 @@ const getAllTransactions = accounts => {
   return sortBy(allTransactions, t => t.received_at).reverse()
 }
 
+const getAccountsChunk = accounts => {
+  // create shallow copy of accounts, to be mutated
+  const listAccounts = [...accounts]
+
+  while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
+
+  return chunk(listAccounts, ACCOUNTS_BY_LINE)
+}
+
 class DashboardPage extends PureComponent<Props, State> {
   state = {
-    selectedTime: 'day',
+    accountsChunk: getAccountsChunk(this.props.accounts),
+    allTransactions: getAllTransactions(this.props.accounts),
     fakeDatas: generateFakeDatas(this.props.accounts),
+    selectedTime: 'day',
   }
 
   componentDidMount() {
@@ -104,29 +117,22 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (
-      this.state.fakeDatas.length === 0 &&
-      nextProps.accounts.length !== this.props.accounts.length
-    ) {
+    if (this.state.fakeDatas.length === 0) {
       this.setState({
         fakeDatas: generateFakeDatas(nextProps.accounts),
+      })
+    }
+
+    if (nextProps.accounts.length !== this.props.accounts.length) {
+      this.setState({
+        accountsChunk: getAccountsChunk(nextProps.accounts),
+        allTransactions: getAllTransactions(nextProps.accounts),
       })
     }
   }
 
   componentWillUnmount() {
     clearTimeout(this._timeout)
-  }
-
-  getAccountsChunk() {
-    const { accounts } = this.props
-
-    // create shallow copy of accounts, to be mutated
-    const listAccounts = [...accounts]
-
-    while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
-
-    return chunk(listAccounts, ACCOUNTS_BY_LINE)
   }
 
   addFakeDatasOnAccounts = () => {
@@ -155,7 +161,7 @@ class DashboardPage extends PureComponent<Props, State> {
 
   render() {
     const { push, accounts } = this.props
-    const { selectedTime, fakeDatas } = this.state
+    const { accountsChunk, allTransactions, selectedTime, fakeDatas } = this.state
 
     const totalAccounts = accounts.length
 
@@ -227,7 +233,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 </Box>
               </Box>
               <Box flow={5}>
-                {this.getAccountsChunk().map((accountsByLine, i) => (
+                {accountsChunk.map((accountsByLine, i) => (
                   <Box
                     key={i} // eslint-disable-line react/no-array-index-key
                     horizontal
@@ -255,7 +261,7 @@ class DashboardPage extends PureComponent<Props, State> {
               </Box>
             </Box>
             <Card p={0} px={4} title="Recent activity">
-              <TransactionsList withAccounts transactions={getAllTransactions(accounts)} />
+              <TransactionsList withAccounts transactions={allTransactions} />
             </Card>
           </Fragment>
         )}
