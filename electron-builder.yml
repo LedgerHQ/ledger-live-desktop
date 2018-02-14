@@ -1,5 +1,7 @@
 appId: com.ledger.desktop
 
+buildDependenciesFromSource: true
+
 protocols:
   name: Ledger Wallet Desktop
   schemes:
@@ -38,7 +40,6 @@ nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
-
 
 files:
   - dist/internals

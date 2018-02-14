@@ -4,11 +4,13 @@ import i18n from 'i18next'
 import path from 'path'
 import Backend from 'i18next-node-fs-backend'
 
+import staticPath from 'helpers/staticPath'
+
 i18n.use(Backend).init({
   fallbackLng: 'en',
   debug: false,
   backend: {
-    loadPath: path.join(__static, '/i18n/{{lng}}/{{ns}}.yml'),
+    loadPath: path.join(staticPath, '/i18n/{{lng}}/{{ns}}.yml'),
   },
   react: {
     wait: true,

@@ -1,5 +1,7 @@
 import { BrowserWindow, app, Menu } from 'electron'
 
+const { DEV_TOOLS, DEV_TOOLS_MODE } = process.env
+
 const props = (predicate, values, defaultValue = {}) => (predicate ? values : defaultValue)
 
 const template = [
@@ -20,13 +22,13 @@ const template = [
     [],
   ),
   ...props(
-    process.platform === 'darwin' || __DEV__,
+    process.platform === 'darwin' || __DEV__ || DEV_TOOLS,
     [
       {
         role: 'window',
         submenu: [
           ...props(
-            __DEV__,
+            __DEV__ || DEV_TOOLS,
             [
               {
                 label: 'App Dev Tools',
@@ -45,7 +47,7 @@ const template = [
                   )
                   if (mainWindow) {
                     mainWindow.openDevTools({
-                      mode: process.env.DEV_TOOLS_MODE,
+                      mode: DEV_TOOLS_MODE,
                     })
                   }
                 },
