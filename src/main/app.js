@@ -118,7 +118,10 @@ function createMainWindow() {
     })
   })
 
-  return window
+  return {
+    w: window,
+    options: windowOptions,
+  }
 }
 
 function createDevWindow() {
@@ -153,6 +156,7 @@ function createDevWindow() {
   saveWindowSettings(window)
 
   window.loadURL(`${url}/#/dev`)
+
   window.setMenu(null)
 
   window.on('close', handleCloseWindow(window))
@@ -169,29 +173,19 @@ function createDevWindow() {
 
 function createPreloadWindow() {
   // Preload renderer of main windows
-  mainWindow = createMainWindow()
+  const { w, options } = createMainWindow()
 
-  const [x, y] = mainWindow.getPosition()
+  mainWindow = w
 
   if (__DEV__) {
     devWindow = createDevWindow()
   }
 
-  const height = 144
-  const width = 256
-
   const windowOptions = {
-    ...defaultWindowOptions,
-    ...getWindowPosition(height, width, screen.getDisplayNearestPoint({ x, y })),
+    ...options,
     alwaysOnTop: true,
     closable: false,
-    frame: false,
     fullscreenable: false,
-    height,
-    resizable: false,
-    show: false,
-    skipTaskbar: true,
-    width,
   }
 
   const window = new BrowserWindow(windowOptions)
@@ -199,9 +193,25 @@ function createPreloadWindow() {
   window.name = 'PreloadWindow'
 
   window.loadURL(`file://${__static}/preload-window.html`)
+  window.setMenu(null)
+
+  window.on('resize', () => {
+    const [width, height] = window.getSize()
+    if (mainWindow) {
+      mainWindow.setSize(width, height)
+    }
+  })
+
+  window.on('move', () => {
+    const [x, y] = window.getPosition()
+    if (mainWindow) {
+      mainWindow.setPosition(x, y)
+    }
+  })
 
   window.on('ready-to-show', () => {
     window.show()
+    setImmediate(() => window && window.focus())
   })
 
   return window
