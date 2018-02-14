@@ -1,5 +1,7 @@
 // @flow
 
+require('env')
+
 const { SENTRY_URL } = process.env
 
 if (__PROD__ && SENTRY_URL) {
@@ -7,8 +9,6 @@ if (__PROD__ && SENTRY_URL) {
   const ravenConfig = { captureUnhandledRejections: true }
   Raven.config(SENTRY_URL, ravenConfig).install()
 }
-
-require('env')
 
 process.setMaxListeners(0)
 
