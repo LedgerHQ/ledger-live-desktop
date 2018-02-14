@@ -14,6 +14,7 @@ import { hasPassword } from 'reducers/settings'
 
 import IconDevices from 'icons/Devices'
 import IconActivity from 'icons/Activity'
+import IconAngleDown from 'icons/AngleDown'
 
 import DropDown from 'components/base/DropDown'
 import Box from 'components/base/Box'
@@ -42,6 +43,19 @@ const Bar = styled.div`
   height: 15px;
   width: 1px;
   background: ${p => p.theme.colors.mouse};
+`
+
+const Activity = styled.div`
+  background: ${p =>
+    p.progress === true
+      ? p.theme.colors.dodgerBlue
+      : p.fail === true ? p.theme.colors.grenade : p.theme.colors.green};
+  border-radius: 50%;
+  bottom: 20px;
+  height: 4px;
+  position: absolute;
+  right: -2px;
+  width: 4px;
 `
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
@@ -125,17 +139,12 @@ class TopBar extends PureComponent<Props, State> {
             <Box justify="center">
               <IconDevices height={16} width={16} />
             </Box>
-            <Box justify="center">
+            <Box justify="center" relative>
               <IconActivity height={16} width={16} />
+              {hasAccounts && <Activity progress={sync.progress} fail={sync.fail} />}
             </Box>
             <Box justify="center">
               <Bar />
-            </Box>
-            <Box>
-              {hasAccounts &&
-                (sync.progress === true
-                  ? 'Synchronizing...'
-                  : sync.fail === true ? 'Synchronization fail :(' : 'Synchronisation finished!')}
             </Box>
             <Box justify="flex-end" horizontal>
               {hasPassword && <LockApplication onLock={this.handleLock} />}
@@ -147,7 +156,10 @@ class TopBar extends PureComponent<Props, State> {
               ff="Open Sans|SemiBold"
               fontSize={4}
             >
-              {'Khalil Benihoud'}
+              <Box horizontal align="center" flow={1} color="warmGrey">
+                <Box>{'Khalil Benihoud'}</Box>
+                <IconAngleDown height={7} width={8} />
+              </Box>
             </DropDown>
           </Box>
         </Inner>

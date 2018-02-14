@@ -30,6 +30,8 @@ import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
 import DropDown from 'components/base/DropDown'
 
+import IconAngleDown from 'icons/AngleDown'
+
 import AccountCard from './AccountCard'
 import BalanceInfos from './BalanceInfos'
 
@@ -143,19 +145,21 @@ class DashboardPage extends PureComponent<Props, State> {
   addFakeDatasOnAccounts = () => {
     const { accounts } = this.props
 
-    this._timeout = setTimeout(() => {
-      window.requestAnimationFrame(() => {
-        this.setState(prev => ({
-          fakeDatas: [
-            ...accounts.reduce((res, acc, i) => {
-              if (res[i]) {
-                const nextIndex = res[i].length
-                res[i][nextIndex] = generateFakeData(nextIndex)
-              }
-              return res
-            }, prev.fakeDatas),
-          ],
-        }))
+    window.requestAnimationFrame(() => {
+      this.setState(prev => ({
+        fakeDatas: [
+          ...accounts.reduce((res, acc, i) => {
+            if (res[i]) {
+              const nextIndex = res[i].length
+              res[i][nextIndex] = generateFakeData(nextIndex)
+            }
+            return res
+          }, prev.fakeDatas),
+        ],
+      }))
+
+      this._timeout = setTimeout(() => {
+        this.addFakeDatasOnAccounts()
       }, TIMEOUT_REFRESH_DATAS)
     })
   }
@@ -250,8 +254,12 @@ class DashboardPage extends PureComponent<Props, State> {
                     items={sortItems}
                     ff="Open Sans|SemiBold"
                     fontSize={4}
+                    value={sortItems.find(s => s.key === orderAccounts)}
                   >
-                    <Text color="dark">{t(`orderAccounts.${orderAccounts}`)}</Text>
+                    <Box horizontal align="center" flow={1} color="dark">
+                      <Text>{t(`orderAccounts.${orderAccounts}`)}</Text>
+                      <IconAngleDown height={7} width={8} />
+                    </Box>
                   </DropDown>
                 </Box>
               </Box>
@@ -282,10 +290,10 @@ class DashboardPage extends PureComponent<Props, State> {
                   </Box>
                 ))}
               </Box>
-              <Card p={0} px={4} title="Recent activity">
-                <TransactionsList withAccounts transactions={getAllTransactions(accounts)} />
-              </Card>
             </Box>
+            <Card p={0} px={4} title="Recent activity">
+              <TransactionsList withAccounts transactions={getAllTransactions(accounts)} />
+            </Card>
           </Fragment>
         )}
       </Box>

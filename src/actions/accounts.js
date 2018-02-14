@@ -22,11 +22,27 @@ function sortAccounts(accounts, orderAccounts) {
   return accountsSorted
 }
 
-export type AddAccount = Account => { type: string, payload: Account }
-export const addAccount: AddAccount = payload => ({
-  type: 'DB:ADD_ACCOUNT',
-  payload,
-})
+export type UpdateOrderAccounts = string => (Dispatch<*>, Function) => void
+export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) => (
+  dispatch,
+  getState,
+) => {
+  const { accounts } = getState()
+  dispatch({
+    type: 'DB:SET_ACCOUNTS',
+    payload: sortAccounts(accounts, orderAccounts),
+  })
+}
+
+export type AddAccount = Account => (Function, Function) => void
+export const addAccount: AddAccount = payload => (dispatch, getState) => {
+  const { settings: { orderAccounts } } = getState()
+  dispatch({
+    type: 'ADD_ACCOUNT',
+    payload,
+  })
+  dispatch(updateOrderAccounts(orderAccounts))
+}
 
 export type RemoveAccount = Account => { type: string, payload: Account }
 export const removeAccount: RemoveAccount = payload => ({
@@ -44,25 +60,12 @@ export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
   })
 }
 
-export type UpdateOrderAccounts = string => (Dispatch<*>, Function) => void
-export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) => (
-  dispatch,
-  getState,
-) => {
-  const { accounts } = getState()
-
-  dispatch({
-    type: 'DB:SET_ACCOUNTS',
-    payload: sortAccounts(accounts, orderAccounts),
-  })
-}
-
 export type UpdateAccount = Account => (Function, Function) => void
 export const updateAccount: UpdateAccount = payload => (dispatch, getState) => {
-  const { settings } = getState()
+  const { settings: { orderAccounts } } = getState()
   dispatch({
     type: 'UPDATE_ACCOUNT',
     payload,
   })
-  dispatch(updateOrderAccounts(settings.orderAccounts))
+  dispatch(updateOrderAccounts(orderAccounts))
 }

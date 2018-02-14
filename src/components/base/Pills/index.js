@@ -26,13 +26,13 @@ const Pill = styled(Tabbable).attrs({
   ff: p => (p.isActive ? 'Open Sans|SemiBold' : 'Open Sans'),
   color: p => (p.isActive ? 'dodgerBlue' : 'warmGrey'),
   bg: p => (p.isActive ? rgba(p.theme.colors.dodgerBlue, 0.1) : ''),
-  px: 2,
+  px: 3,
   fontSize: 4,
+  borderRadius: 1,
   align: 'center',
   justify: 'center',
 })`
-  height: 30px;
-  border-radius: 4px;
+  height: 28px;
   outline: none;
   cursor: ${p => (p.isActive ? 'default' : 'pointer')};
 

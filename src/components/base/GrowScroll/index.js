@@ -1,7 +1,10 @@
 // @flow
 
+/* eslint-disable class-methods-use-this */
+
 import React, { PureComponent } from 'react'
 import Scrollbar from 'react-smooth-scrollbar'
+import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar'
 import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
@@ -72,5 +75,18 @@ class GrowScroll extends PureComponent<Props> {
     )
   }
 }
+
+SmoothScrollbar.use(
+  class DisableXScroll extends ScrollbarPlugin {
+    static pluginName = 'disableXScroll'
+
+    transformDelta(delta) {
+      return {
+        x: 0,
+        y: delta.y,
+      }
+    }
+  },
+)
 
 export default GrowScroll
