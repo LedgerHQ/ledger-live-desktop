@@ -29,6 +29,7 @@
     "no-shadow": 0,
     "no-underscore-dangle": 0,
     "no-void": 0,
+    "global-require": 0,
     "react/forbid-prop-types": 0,
     "react/jsx-curly-brace-presence": 0,
     "react/jsx-filename-extension": 0,

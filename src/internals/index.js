@@ -5,18 +5,15 @@ import capitalize from 'lodash/capitalize'
 
 import cpuUsage from 'helpers/cpuUsage'
 
-const { FORK_TYPE, SENTRY_URL } = process.env
+require('../env')
+require('../init-sentry')
 
-process.title = `${require('../../package.json').productName} ${capitalize(FORK_TYPE)}` // eslint-disable-line global-require
+const { FORK_TYPE } = process.env
+
+process.title = `${require('../../package.json').productName} ${capitalize(FORK_TYPE)}`
 
 function sendEvent(type: string, data: any, options: Object = { kill: true }) {
   process.send({ type, data, options })
-}
-
-if (__PROD__ && SENTRY_URL) {
-  const Raven = require('raven') // eslint-disable-line global-require
-  const ravenConfig = { captureUnhandledRejections: true }
-  Raven.config(SENTRY_URL, ravenConfig).install()
 }
 
 // $FlowFixMe
