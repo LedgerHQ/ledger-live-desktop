@@ -27,9 +27,9 @@ export default {
     }
   },
 
-  get: key => {
+  get: (key, defaults) => {
     const db = store(key)
-    return db.get('data')
+    return db.get('data', defaults)
   },
 
   set: (key, val) => {
