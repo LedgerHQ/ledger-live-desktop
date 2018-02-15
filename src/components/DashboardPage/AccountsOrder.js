@@ -14,7 +14,6 @@ import { getOrderAccounts } from 'reducers/settings'
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
-import Box from 'components/base/Box'
 import DropDown from 'components/base/DropDown'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
@@ -62,10 +61,6 @@ class AccountsOrder extends Component<Props, State> {
     const { t } = this.props
     const { cachedValue } = this.state
 
-    if (!cachedValue) {
-      return null
-    }
-
     const sortItems = [
       {
         key: 'name',
@@ -87,11 +82,13 @@ class AccountsOrder extends Component<Props, State> {
         items={sortItems}
         ff="Open Sans|SemiBold"
         fontSize={4}
+        flow={1}
+        color="dark"
+        horizontal
+        align="center"
       >
-        <Box horizontal align="center" flow={1} color="dark">
-          <Text color="dark">{t(`orderAccounts.${cachedValue}`)}</Text>
-          <IconAngleDown height={7} width={8} />
-        </Box>
+        <Text color="dark">{t(`orderAccounts.${cachedValue || 'balance'}`)}</Text>
+        <IconAngleDown height={7} width={8} />
       </DropDown>
     )
   }
