@@ -6,6 +6,8 @@ import sortBy from 'lodash/sortBy'
 import type { Dispatch } from 'redux'
 import type { Account } from 'types/common'
 
+import { startSyncAccounts } from 'renderer/events'
+
 function sortAccounts(accounts, orderAccounts) {
   const accountsSorted = sortBy(accounts, a => {
     if (orderAccounts === 'balance') {
@@ -36,12 +38,17 @@ export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) 
 
 export type AddAccount = Account => (Function, Function) => void
 export const addAccount: AddAccount = payload => (dispatch, getState) => {
-  const { settings: { orderAccounts } } = getState()
+  const { settings: { orderAccounts }, accounts } = getState()
   dispatch({
     type: 'ADD_ACCOUNT',
     payload,
   })
   dispatch(updateOrderAccounts(orderAccounts))
+
+  // Start sync accounts the first time you add an account
+  if (accounts.length === 0) {
+    startSyncAccounts([payload])
+  }
 }
 
 export type RemoveAccount = Account => { type: string, payload: Account }

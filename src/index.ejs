@@ -45,7 +45,7 @@
         position: fixed;
         right: 0;
         top: 0;
-        transition: opacity 0.6s ease-in-out;
+        transition: opacity 0.4s ease-in-out;
         z-index: 100;
       }
       #preload video {
@@ -81,11 +81,18 @@
       const preloadEl = document.getElementById('preload')
       const appEl = document.getElementById('app')
 
-      const initApp = () => {
-        appEl.style.display = 'flex'
-        preloadEl.style.opacity = 0
+      const initApp = (options = {}) => {
+        const { force = false } = options
 
-        preloadEl.addEventListener('transitionend', () => preloadEl.remove())
+        appEl.style.display = 'flex'
+
+        if (force) {
+          preloadEl.remove()
+        } else {
+          preloadEl.style.opacity = 0
+
+          preloadEl.addEventListener('transitionend', () => preloadEl.remove())
+        }
       }
 
       if (name === 'MainWindow') {
@@ -103,7 +110,7 @@
           setTimeout(initApp, delay > 0 ? delay : 1)
         }
       } else {
-        initApp()
+        initApp({ force: true })
       }
     </script>
   </body>

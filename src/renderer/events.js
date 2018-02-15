@@ -179,8 +179,10 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
   if (!locked && !DISABLED_SYNC) {
     const accounts = getAccounts(store.getState())
 
-    // Start accounts sync
-    startSyncAccounts(accounts)
+    // Start accounts sync only if we have accounts
+    if (accounts.length > 0) {
+      startSyncAccounts(accounts)
+    }
   }
 
   if (__PROD__) {
