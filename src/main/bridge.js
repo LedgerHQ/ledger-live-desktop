@@ -30,6 +30,7 @@ function onForkChannel(forkType, callType) {
 
     let compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), {
       env: {
+        DEV_TOOLS,
         FORK_TYPE: forkType,
       },
     })
