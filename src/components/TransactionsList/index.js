@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import get from 'lodash/get'
+import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
 
 import type { Transaction as TransactionType } from 'types/common'
@@ -70,7 +71,13 @@ const Cell = styled(Box).attrs({
   width: ${p => (p.size ? `${p.size}px` : '')};
 `
 
-const Transaction = ({ tx }: { tx: TransactionType }) => {
+const Transaction = ({
+  onAccountClick,
+  tx,
+}: {
+  onAccountClick?: Function,
+  tx: TransactionType,
+}) => {
   const time = moment(tx.received_at)
   return (
     <TransactionRaw>
@@ -81,7 +88,13 @@ const Transaction = ({ tx }: { tx: TransactionType }) => {
         </Box>
       </Cell>
       {tx.account && (
-        <Cell size={ACCOUNT_COL_SIZE} horizontal flow={2}>
+        <Cell
+          size={ACCOUNT_COL_SIZE}
+          horizontal
+          flow={2}
+          style={{ cursor: 'pointer' }}
+          onClick={() => onAccountClick && onAccountClick(tx.account)}
+        >
           <Box align="center" justify="center" style={{ color: '#fcb653' }}>
             <IconCurrencyBitcoin height={16} width={16} />
           </Box>
@@ -114,13 +127,19 @@ const Transaction = ({ tx }: { tx: TransactionType }) => {
   )
 }
 
+Transaction.defaultProps = {
+  onAccountClick: noop,
+}
+
 type Props = {
+  onAccountClick?: Function,
   transactions: Array<TransactionType>,
   withAccounts?: boolean,
 }
 
 class TransactionsList extends Component<Props> {
   static defaultProps = {
+    onAccountClick: noop,
     withAccounts: false,
   }
 
@@ -137,7 +156,7 @@ class TransactionsList extends Component<Props> {
   _hashCache = null
 
   render() {
-    const { transactions, withAccounts } = this.props
+    const { transactions, withAccounts, onAccountClick } = this.props
 
     this._hashCache = this.getHashCache(transactions)
 
@@ -154,7 +173,11 @@ class TransactionsList extends Component<Props> {
         <Defer>
           <Box>
             {transactions.map(t => (
-              <Transaction key={`{${t.hash}-${t.account ? t.account.id : ''}`} tx={t} />
+              <Transaction
+                key={`{${t.hash}-${t.account ? t.account.id : ''}`}
+                onAccountClick={onAccountClick}
+                tx={t}
+              />
             ))}
           </Box>
         </Defer>
