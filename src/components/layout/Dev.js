@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 
-import DevToolbar from 'components/DevToolbar'
+import DevTools from 'components/DevTools'
 
 const Container = styled(Box).attrs({
   grow: true,
@@ -19,7 +19,7 @@ class Dev extends PureComponent<{}> {
     return (
       <Container>
         <GrowScroll>
-          <DevToolbar />
+          <DevTools />
         </GrowScroll>
       </Container>
     )
