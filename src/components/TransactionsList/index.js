@@ -1,9 +1,10 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import get from 'lodash/get'
+import isEqual from 'lodash/isEqual'
 
 import type { Transaction as TransactionType } from 'types/common'
 
@@ -118,28 +119,48 @@ type Props = {
   withAccounts?: boolean,
 }
 
-const TransactionsList = ({ transactions, withAccounts }: Props) => (
-  <Box flow={1}>
-    <Box horizontal pt={4}>
-      <HeaderCol size={DATE_COL_SIZE}>{'Date'}</HeaderCol>
-      {withAccounts && <HeaderCol size={ACCOUNT_COL_SIZE}>{'Account'}</HeaderCol>}
-      <HeaderCol grow>{'Address'}</HeaderCol>
-      <HeaderCol size={AMOUNT_COL_SIZE} justify="flex-end">
-        {'Amount'}
-      </HeaderCol>
-    </Box>
-    <Defer>
-      <Box>
-        {transactions.map(t => (
-          <Transaction key={`{${t.hash}-${t.account ? t.account.id : ''}`} tx={t} />
-        ))}
-      </Box>
-    </Defer>
-  </Box>
-)
+class TransactionsList extends Component<Props> {
+  static defaultProps = {
+    withAccounts: false,
+  }
 
-TransactionsList.defaultProps = {
-  withAccounts: false,
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.transactions !== this.props.transactions) {
+      this._hashCache = this.getHashCache(nextProps.transactions)
+    }
+  }
+
+  shouldComponentUpdate(nextProps: Props) {
+    return !isEqual(this._hashCache, this.getHashCache(nextProps.transactions))
+  }
+
+  getHashCache = (transactions: Array<TransactionType>) => transactions.map(t => t.hash)
+
+  _hashCache = this.getHashCache(this.props.transactions)
+
+  render() {
+    const { transactions, withAccounts } = this.props
+
+    return (
+      <Box flow={1}>
+        <Box horizontal pt={4}>
+          <HeaderCol size={DATE_COL_SIZE}>{'Date'}</HeaderCol>
+          {withAccounts && <HeaderCol size={ACCOUNT_COL_SIZE}>{'Account'}</HeaderCol>}
+          <HeaderCol grow>{'Address'}</HeaderCol>
+          <HeaderCol size={AMOUNT_COL_SIZE} justify="flex-end">
+            {'Amount'}
+          </HeaderCol>
+        </Box>
+        <Defer>
+          <Box>
+            {transactions.map(t => (
+              <Transaction key={`{${t.hash}-${t.account ? t.account.id : ''}`} tx={t} />
+            ))}
+          </Box>
+        </Defer>
+      </Box>
+    )
+  }
 }
 
 export default TransactionsList

@@ -25,7 +25,6 @@ import { saveSettings } from 'actions/settings'
 import { AreaChart } from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import Pills from 'components/base/Pills'
-import Defer from 'components/base/Defer'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
 
@@ -56,6 +55,7 @@ type State = {
 }
 
 const ACCOUNTS_BY_LINE = 3
+const ALL_TRANSACTIONS_LIMIT = 10
 const TIMEOUT_REFRESH_DATAS = 5e3
 
 const itemsTimes = [
@@ -92,7 +92,9 @@ const getAllTransactions = accounts => {
     return result
   }, [])
 
-  return sortBy(allTransactions, t => t.received_at).reverse()
+  return sortBy(allTransactions, t => t.received_at)
+    .reverse()
+    .slice(0, ALL_TRANSACTIONS_LIMIT)
 }
 
 const getAccountsChunk = accounts => {
@@ -123,7 +125,7 @@ class DashboardPage extends PureComponent<Props, State> {
       })
     }
 
-    if (nextProps.accounts.length !== this.props.accounts.length) {
+    if (nextProps.accounts !== this.props.accounts) {
       this.setState({
         accountsChunk: getAccountsChunk(nextProps.accounts),
         allTransactions: getAllTransactions(nextProps.accounts),
@@ -192,33 +194,31 @@ class DashboardPage extends PureComponent<Props, State> {
               <Box px={6}>
                 <BalanceInfos since={selectedTime} />
               </Box>
-              <Defer>
-                <Box ff="Open Sans" fontSize={4} color="warmGrey">
-                  <AreaChart
-                    id="dashboard-chart"
-                    margin={{
-                      top: space[6],
-                      bottom: 0,
-                      left: space[6] - 10,
-                      right: space[6],
-                    }}
-                    color="#5286f7"
-                    height={250}
-                    data={takeRight(
-                      fakeDatas.reduce((res, data) => {
-                        data.forEach((d, i) => {
-                          res[i] = {
-                            name: d.name,
-                            value: (res[i] ? res[i].value : 0) + d.value,
-                          }
-                        })
-                        return res
-                      }, []),
-                      25,
-                    )}
-                  />
-                </Box>
-              </Defer>
+              <Box ff="Open Sans" fontSize={4} color="warmGrey">
+                <AreaChart
+                  id="dashboard-chart"
+                  margin={{
+                    top: space[6],
+                    bottom: 0,
+                    left: space[6] - 10,
+                    right: space[6],
+                  }}
+                  color="#5286f7"
+                  height={250}
+                  data={takeRight(
+                    fakeDatas.reduce((res, data) => {
+                      data.forEach((d, i) => {
+                        res[i] = {
+                          name: d.name,
+                          value: (res[i] ? res[i].value : 0) + d.value,
+                        }
+                      })
+                      return res
+                    }, []),
+                    25,
+                  )}
+                />
+              </Box>
             </Card>
             <Box flow={4}>
               <Box horizontal align="flex-end">
