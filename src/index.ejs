@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      * {
+        -webkit-font-smoothing: antialiased;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font: inherit;
+        color: inherit;
+        user-select: none;
+        min-width: 0;
+
+        /* it will surely make problem in the future... to be inspected. */
+        flex-shrink: 0;
+      }
+
+      body {
+        cursor: default;
+        font-family: "Museo Sans", "Open Sans", Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+
+      #app {
+        display: none;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      #preload {
+        -webkit-app-region: drag;
+        align-items: center;
+        background: white;
+        bottom: 0;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        left: 0;
+        opacity: 1;
+        position: fixed;
+        right: 0;
+        top: 0;
+        transition: opacity 0.6s ease-in-out;
+        z-index: 100;
+      }
+      #preload video {
+        height: 144px;
+        width: 256px;
+      }
+
+      b {
+        font-weight: bold;
+      }
+
+      em {
+        font-style: italic;
+      }
+    </style>
+    <script>
+    <% if (htmlWebpackPlugin.options.nodeModules) { %>
+      require('module').globalPaths.push(
+        '<%= htmlWebpackPlugin.options.nodeModules %>'.replace(/\\/g, '\\\\'),
+      )
+    <% } %>
+    require('source-map-support/source-map-support.js').install()
+    </script>
+  </head>
+  <body>
+    <div id="preload">
+      <video autoplay loop muted src="<%= __DEV__ ? '.' : '../static' %>/videos/loader.mp4" />
+    </div>
+    <div id="app"></div>
+    <script>
+      const { name } = require('electron').remote.getCurrentWindow()
+
+      const preloadEl = document.getElementById('preload')
+      const appEl = document.getElementById('app')
+
+      const initApp = () => {
+        appEl.style.display = 'flex'
+        preloadEl.style.opacity = 0
+
+        preloadEl.addEventListener('transitionend', () => preloadEl.remove())
+      }
+
+      if (name === 'MainWindow') {
+        preloadEl.style.display = 'flex'
+
+        let waitTime = 0
+
+        const PRELOAD_WAIT_TIME_MIN = 2e3
+        const interval = setInterval(() => waitTime += 250, 250)
+
+        window.onAppReady = () => {
+          const delay = PRELOAD_WAIT_TIME_MIN - waitTime
+
+          clearInterval(interval)
+          setTimeout(initApp, delay > 0 ? delay : 1)
+        }
+      } else {
+        initApp()
+      }
+    </script>
+  </body>
+</html>

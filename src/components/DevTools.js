@@ -18,17 +18,17 @@ import color from 'color'
 import fs from 'fs'
 import path from 'path'
 
-import staticPath from 'helpers/staticPath'
-
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
 import CopyToClipboard from 'components/base/CopyToClipboard'
 import { ChartWrapper } from 'components/base/Chart'
 
+import staticPath from 'helpers/staticPath'
+
 import theme from 'styles/theme'
 
 const getLanguages = p => fs.readdirSync(p).filter(f => fs.statSync(path.join(p, f)).isDirectory())
-const languages = getLanguages(path.join(staticPath, './i18n'))
+const languages = getLanguages(path.join(staticPath, '/i18n'))
 
 const mainWindow = remote.BrowserWindow.getAllWindows().find(w => w.name === 'MainWindow')
 

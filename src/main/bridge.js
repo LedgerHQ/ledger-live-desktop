@@ -9,6 +9,8 @@ import cpuUsage from 'helpers/cpuUsage'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
+const { DEV_TOOLS } = process.env
+
 const processes = []
 
 function cleanProcesses() {
@@ -89,7 +91,7 @@ ipcMain.on('msg', (event: any, payload) => {
   handler(send, data, type)
 })
 
-if (__DEV__) {
+if (__DEV__ || DEV_TOOLS) {
   cpuUsage(cpuPercent =>
     sendEventToWindow('DevWindow', {
       type: 'usage.cpu',

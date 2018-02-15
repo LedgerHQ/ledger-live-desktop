@@ -1,6 +1,6 @@
 // @flow
 
-import { app, BrowserWindow, Menu, ipcMain, screen } from 'electron'
+import { app, BrowserWindow, Menu, screen } from 'electron'
 import debounce from 'lodash/debounce'
 
 import menu from 'main/menu'
@@ -8,12 +8,10 @@ import db from 'helpers/db'
 
 // necessary to prevent win from being garbage collected
 let mainWindow = null
-let devWindow = null
-let preloadWindow = null
 
 let forceClose = false
 
-const { ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
+const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
 
 const devTools = __DEV__ || DEV_TOOLS
 
@@ -111,6 +109,13 @@ function createMainWindow() {
 
   window.on('close', handleCloseWindow(window))
 
+  window.on('ready-to-show', () => {
+    window.show()
+    setImmediate(() => {
+      window.focus()
+    })
+  })
+
   window.webContents.on('devtools-opened', () => {
     window.focus()
     setImmediate(() => {
@@ -118,10 +123,7 @@ function createMainWindow() {
     })
   })
 
-  return {
-    w: window,
-    options: windowOptions,
-  }
+  return window
 }
 
 function createDevWindow() {
@@ -155,7 +157,7 @@ function createDevWindow() {
 
   saveWindowSettings(window)
 
-  window.loadURL(`${url}/#/dev`)
+  window.loadURL(`${url}#/dev`)
 
   window.setMenu(null)
 
@@ -167,53 +169,6 @@ function createDevWindow() {
 
   // Don't want to use HTML <title>
   window.on('page-title-updated', e => e.preventDefault())
-
-  return window
-}
-
-function createPreloadWindow() {
-  // Preload renderer of main windows
-  const { w, options } = createMainWindow()
-
-  mainWindow = w
-
-  if (__DEV__) {
-    devWindow = createDevWindow()
-  }
-
-  const windowOptions = {
-    ...options,
-    alwaysOnTop: true,
-    closable: false,
-    fullscreenable: false,
-    resizable: false,
-  }
-
-  const window = new BrowserWindow(windowOptions)
-
-  window.name = 'PreloadWindow'
-
-  window.loadURL(`file://${__static}/preload-window.html`)
-  window.setMenu(null)
-
-  window.on('resize', () => {
-    const [width, height] = window.getSize()
-    if (mainWindow) {
-      mainWindow.setSize(width, height)
-    }
-  })
-
-  window.on('move', () => {
-    const [x, y] = window.getPosition()
-    if (mainWindow) {
-      mainWindow.setPosition(x, y)
-    }
-  })
-
-  window.on('ready-to-show', () => {
-    window.show()
-    setImmediate(() => window && window.focus())
-  })
 
   return window
 }
@@ -233,16 +188,16 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it is common to re-create a window
   // even after all windows have been closed
-  if (mainWindow === null && preloadWindow === null) {
-    preloadWindow = createPreloadWindow()
-  } else if (mainWindow !== null) {
+  if (mainWindow === null) {
+    mainWindow = createMainWindow()
+  } else {
     mainWindow.show()
   }
 })
 
 const installExtensions = async () => {
-  const installer = require('electron-devtools-installer') // eslint-disable-line
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS
+  const installer = require('electron-devtools-installer')
+  const forceDownload = !!UPGRADE_EXTENSIONS
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS']
   return Promise.all(
     extensions.map(name => installer.default(installer[name], forceDownload)),
@@ -256,23 +211,11 @@ app.on('ready', async () => {
     await installExtensions()
   }
 
+  if (devTools) {
+    createDevWindow()
+  }
+
   Menu.setApplicationMenu(menu)
 
-  preloadWindow = createPreloadWindow()
-})
-
-ipcMain.once('app-finish-rendering', () => {
-  if (preloadWindow !== null) {
-    preloadWindow.destroy()
-    preloadWindow = null
-  }
-
-  if (mainWindow !== null) {
-    mainWindow.show()
-    setImmediate(() => mainWindow !== null && mainWindow.focus())
-  }
-
-  if (__DEV__ && devWindow !== null) {
-    devWindow.show()
-  }
+  mainWindow = createMainWindow()
 })
