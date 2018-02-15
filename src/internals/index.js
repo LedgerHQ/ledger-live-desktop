@@ -8,7 +8,7 @@ import cpuUsage from 'helpers/cpuUsage'
 require('../env')
 require('../init-sentry')
 
-const { FORK_TYPE } = process.env
+const { DEV_TOOLS, FORK_TYPE } = process.env
 
 process.title = `${require('../../package.json').productName} ${capitalize(FORK_TYPE)}`
 
@@ -35,7 +35,7 @@ const onMessage = payload => {
 
 process.on('message', onMessage)
 
-if (__DEV__) {
+if (__DEV__ || DEV_TOOLS) {
   cpuUsage(cpuPercent =>
     sendEvent(
       'usage.cpu',

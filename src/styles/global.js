@@ -86,42 +86,6 @@ function transformFonts(allFonts) {
 injectGlobal`
   ${transformFonts(fonts)};
 
-  * {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font: inherit;
-    color: inherit;
-    user-select: none;
-    min-width: 0;
-
-    // it will surely make problem in the future... to be inspected.
-    flex-shrink: 0;
-  }
-
-  body {
-    cursor: default;
-    font-family: "Museo Sans", "Open Sans", Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    line-height: 1.5;
-  }
-
-  #app {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  b {
-    font-weight: bold;
-  }
-
-  em {
-    font-style: italic;
-  }
-
   .scroll-content {
     height: 100%;
 

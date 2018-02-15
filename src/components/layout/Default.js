@@ -2,7 +2,6 @@
 
 import React, { Fragment, Component } from 'react'
 import styled from 'styled-components'
-import { ipcRenderer } from 'electron'
 import { Route } from 'react-router'
 import { translate } from 'react-i18next'
 
@@ -28,9 +27,7 @@ const Container = styled(GrowScroll).attrs({
 
 class Default extends Component<{}> {
   componentDidMount() {
-    window.requestAnimationFrame(
-      () => (this._timeout = setTimeout(() => ipcRenderer.send('app-finish-rendering'), 300)),
-    )
+    window.requestAnimationFrame(() => (this._timeout = setTimeout(() => window.onAppReady(), 300)))
   }
 
   componentWillUnmount() {
