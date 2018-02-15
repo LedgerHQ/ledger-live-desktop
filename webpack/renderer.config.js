@@ -1,7 +1,9 @@
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+
 const plugins = require('./plugins')
 
 const config = {
-  plugins,
+  plugins: [...plugins, new HardSourceWebpackPlugin()],
   devServer: {
     historyApiFallback: true,
   },
