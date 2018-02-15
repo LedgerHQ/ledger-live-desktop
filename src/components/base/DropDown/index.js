@@ -98,14 +98,8 @@ class DropDown extends PureComponent<Props> {
           selectedItem,
           ...downshiftProps
         }) => (
-          <Box
-            {...getRootProps({ refKey: 'innerRef' })}
-            horizontal
-            align="center"
-            relative
-            {...props}
-          >
-            <Trigger {...getButtonProps()} tabIndex={0}>
+          <Box {...getRootProps({ refKey: 'innerRef' })} horizontal relative>
+            <Trigger {...getButtonProps()} tabIndex={0} {...props}>
               {children}
             </Trigger>
             {isOpen && this.renderItems(items, selectedItem, downshiftProps)}

@@ -158,11 +158,14 @@ class TopBar extends PureComponent<Props, State> {
               ff="Open Sans|SemiBold"
               fontSize={4}
               offsetTop={-2}
+              align="center"
+              justify="center"
+              flow={1}
+              color="warmGrey"
+              horizontal
             >
-              <Box horizontal align="center" flow={1} color="warmGrey">
-                <Box>{'Khalil Benihoud'}</Box>
-                <IconAngleDown height={7} width={8} />
-              </Box>
+              <Box>{'Khalil Benihoud'}</Box>
+              <IconAngleDown height={7} width={8} />
             </DropDown>
           </Box>
         </Inner>
