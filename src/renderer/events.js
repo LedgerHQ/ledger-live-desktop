@@ -4,6 +4,7 @@ import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import get from 'lodash/get'
 import uniqBy from 'lodash/uniqBy'
+import debug from 'debug'
 
 import type { Accounts } from 'types/common'
 
@@ -12,9 +13,16 @@ import { CHECK_UPDATE_TIMEOUT, SYNC_ACCOUNT_TIMEOUT } from 'constants'
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 import { updateAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
-import { getAccountData, getAccounts } from 'reducers/accounts'
+import { getAccountData, getAccounts, getAccountById } from 'reducers/accounts'
+import { isLocked } from 'reducers/application'
 
 import i18n from 'renderer/i18n'
+
+const d = {
+  device: debug('lwd:device'),
+  sync: debug('lwd:sync'),
+  update: debug('lwd:update'),
+}
 
 const { DISABLED_SYNC, DISABLED_AUTO_SYNC } = process.env
 
@@ -41,6 +49,7 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
 }
 
 export function startSyncAccounts(accounts: Accounts) {
+  d.sync('Sync accounts - start')
   syncAccounts = true
   sendEvent('accounts', 'sync.all', {
     accounts: accounts.map(account => {
@@ -56,11 +65,13 @@ export function startSyncAccounts(accounts: Accounts) {
 }
 
 export function stopSyncAccounts() {
+  d.sync('Sync accounts - stop')
   syncAccounts = false
   clearTimeout(syncTimeout)
 }
 
 export function checkUpdates() {
+  d.update('Update - check')
   setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_TIMEOUT)
 }
 
@@ -74,7 +85,9 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
       sync: {
         success: account => {
           if (syncAccounts) {
-            const currentAccountData = getAccountData(store.getState(), account.id) || {}
+            const state = store.getState()
+            const currentAccount = getAccountById(state, account.id) || {}
+            const currentAccountData = getAccountData(state, account.id) || {}
             const currentAccountTransactions = get(currentAccountData, 'transactions', [])
 
             const transactions = uniqBy(
@@ -83,6 +96,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
             )
 
             if (currentAccountTransactions.length !== transactions.length) {
+              d.sync(`Update account - ${currentAccount.name}`)
               store.dispatch(
                 updateAccount({
                   ...account,
@@ -99,8 +113,21 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     },
     accounts: {
       sync: {
+        start: () => {
+          if (!syncAccounts) {
+            const state = store.getState()
+            const accounts = getAccounts(state)
+            const locked = isLocked(state)
+
+            if (!locked && !DISABLED_SYNC) {
+              startSyncAccounts(accounts)
+            }
+          }
+        },
+        stop: stopSyncAccounts,
         success: () => {
           if (syncAccounts && !DISABLED_AUTO_SYNC) {
+            d.sync('Sync accounts - success')
             syncTimeout = setTimeout(() => {
               const accounts = getAccounts(store.getState())
               startSyncAccounts(accounts)
@@ -115,8 +142,14 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
       },
     },
     device: {
-      add: device => store.dispatch(addDevice(device)),
-      remove: device => store.dispatch(removeDevice(device)),
+      add: device => {
+        d.device('Device - add')
+        store.dispatch(addDevice(device))
+      },
+      remove: device => {
+        d.device('Device - remove')
+        store.dispatch(removeDevice(device))
+      },
     },
     updater: {
       checking: () => store.dispatch(setUpdateStatus('checking')),

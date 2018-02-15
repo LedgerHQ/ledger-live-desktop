@@ -116,7 +116,7 @@ type State = {
   cpuUsage: Object,
 }
 
-class DevToolbar extends PureComponent<any, State> {
+class DevTools extends PureComponent<any, State> {
   state = {
     cpuUsage: {},
   }
@@ -155,20 +155,22 @@ class DevToolbar extends PureComponent<any, State> {
     })
   }
 
+  handleStartSync = () =>
+    mainWindow.webContents.send('msg', {
+      type: 'accounts.sync.start',
+    })
+
+  handleStopSync = () =>
+    mainWindow.webContents.send('msg', {
+      type: 'accounts.sync.stop',
+    })
+
   render() {
     const { cpuUsage } = this.state
 
     return (
       <Container>
         <Box grow flow={4}>
-          <Section title="Languages" horizontal>
-            {languages.map(lang => (
-              <Item key={lang} onClick={this.handleChangeLanguage(lang)} style={{ flex: 0 }}>
-                {lang}
-              </Item>
-            ))}
-          </Section>
-          <Bar size={2} color="white" />
           <Section title="Colors">
             {chunk(colors, 5).map((c, i) => (
               <Items
@@ -213,6 +215,23 @@ class DevToolbar extends PureComponent<any, State> {
                 ))}
               </Items>
             ))}
+          </Section>
+          <Bar size={2} color="white" />
+          <Section title="Languages" horizontal>
+            {languages.map(lang => (
+              <Item key={lang} onClick={this.handleChangeLanguage(lang)} style={{ flex: 0 }}>
+                {lang}
+              </Item>
+            ))}
+          </Section>
+          <Bar size={2} color="white" />
+          <Section title="Sync Accounts" horizontal>
+            <Item onClick={this.handleStartSync} style={{ flex: 0 }}>
+              Start
+            </Item>
+            <Item onClick={this.handleStopSync} style={{ flex: 0 }}>
+              Stop
+            </Item>
           </Section>
           <Bar size={2} color="white" />
           <Section title="CPU Usage">
@@ -284,4 +303,4 @@ Section.defaultProps = {
   horizontal: false,
 }
 
-export default translate()(DevToolbar)
+export default translate()(DevTools)
