@@ -9,7 +9,6 @@ import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
 import { AreaChart } from 'components/base/Chart'
 import Bar from 'components/base/Bar'
 import Box, { Card } from 'components/base/Box'
-import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
 
 const AccountCard = ({
@@ -47,17 +46,15 @@ const AccountCard = ({
         />
       )}
     </Box>
-    <Defer>
-      <AreaChart
-        tiny
-        id={`account-chart-${account.id}`}
-        color="#fcb653"
-        height={52}
-        data={data}
-        strokeWidth={1}
-        linearGradient={[[5, 0.4], [80, 0]]}
-      />
-    </Defer>
+    <AreaChart
+      tiny
+      id={`account-chart-${account.id}`}
+      color="#fcb653"
+      height={52}
+      data={data}
+      strokeWidth={1}
+      linearGradient={[[5, 0.4], [80, 0]]}
+    />
   </Card>
 )
 
