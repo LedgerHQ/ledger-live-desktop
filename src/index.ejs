@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title><%= process.env.npm_package_productName %></title>
     <meta charset="utf-8">
     <style>
       * {
@@ -61,12 +62,12 @@
       }
     </style>
     <script>
-    <% if (htmlWebpackPlugin.options.nodeModules) { %>
-      require('module').globalPaths.push(
-        '<%= htmlWebpackPlugin.options.nodeModules %>'.replace(/\\/g, '\\\\'),
-      )
-    <% } %>
-    require('source-map-support/source-map-support.js').install()
+      <% if (htmlWebpackPlugin.options.nodeModules) { %>
+        require('module').globalPaths.push(
+          '<%= htmlWebpackPlugin.options.nodeModules %>'.replace(/\\/g, '\\\\'),
+        )
+      <% } %>
+      require('source-map-support/source-map-support.js').install()
     </script>
   </head>
   <body>
@@ -93,7 +94,7 @@
         let waitTime = 0
 
         const PRELOAD_WAIT_TIME_MIN = 2e3
-        const interval = setInterval(() => waitTime += 250, 250)
+        const interval = setInterval(() => (waitTime += 250), 250)
 
         window.onAppReady = () => {
           const delay = PRELOAD_WAIT_TIME_MIN - waitTime
