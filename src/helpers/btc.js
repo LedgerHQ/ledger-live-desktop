@@ -130,11 +130,13 @@ export async function getAccount({
           return nextPath(index + (gapLimit - 1))
         }
 
+        const balance = transactions.reduce((result, v) => {
+          result += v.balance
+          return result
+        }, 0)
+
         return {
-          balance: transactions.reduce((result, v) => {
-            result += v.balance
-            return result
-          }, 0),
+          balance,
           allAddresses,
           transactions,
           ...(lastAddress !== null

@@ -124,22 +124,22 @@ class TransactionsList extends Component<Props> {
     withAccounts: false,
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.transactions !== this.props.transactions) {
-      this._hashCache = this.getHashCache(nextProps.transactions)
-    }
-  }
-
   shouldComponentUpdate(nextProps: Props) {
+    if (this._hashCache === null) {
+      return true
+    }
+
     return !isEqual(this._hashCache, this.getHashCache(nextProps.transactions))
   }
 
   getHashCache = (transactions: Array<TransactionType>) => transactions.map(t => t.hash)
 
-  _hashCache = this.getHashCache(this.props.transactions)
+  _hashCache = null
 
   render() {
     const { transactions, withAccounts } = this.props
+
+    this._hashCache = this.getHashCache(transactions)
 
     return (
       <Box flow={1}>
