@@ -5,7 +5,6 @@ import { handleActions } from 'redux-actions'
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
-import uniqBy from 'lodash/uniqBy'
 
 import type { State } from 'reducers'
 import type { Account, Accounts, AccountData } from 'types/common'
@@ -65,10 +64,7 @@ const handlers: Object = {
       const existingData = get(existingAccount, 'data', {})
       const data = get(account, 'data', {})
 
-      const transactions = uniqBy(
-        [...get(existingData, 'transactions', []), ...get(data, 'transactions', [])],
-        tx => tx.hash,
-      )
+      const transactions = get(data, 'transactions', [])
 
       const currentIndex = data.currentIndex
         ? data.currentIndex

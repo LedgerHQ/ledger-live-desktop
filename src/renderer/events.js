@@ -83,7 +83,15 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
             )
 
             if (currentAccountTransactions.length !== transactions.length) {
-              store.dispatch(updateAccount(account))
+              store.dispatch(
+                updateAccount({
+                  ...account,
+                  data: {
+                    ...account.data,
+                    transactions,
+                  },
+                }),
+              )
             }
           }
         },
