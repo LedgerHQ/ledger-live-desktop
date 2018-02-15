@@ -12,6 +12,7 @@
 ```
 SENTRY_URL=http://...
 DEV_TOOLS_MODE=right|bottom|undocked|detach
+DEBUG=lwd*,-lwd:sync
 ```
 
 #### Install dependencies
