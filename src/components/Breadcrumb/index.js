@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 
 import Box from 'components/base/Box'
@@ -71,26 +71,31 @@ type Props = {
   currentStep: number | string,
 }
 
-const Breadcrumb = ({ items, currentStep }: Props) => (
-  <BreadcrumbWrapper>
-    {items.map((item, i) => {
-      const active = i < parseInt(currentStep, 10)
-      const start = i === 0
-      return (
-        <Fragment
-          key={i} // eslint-disable-line react/no-array-index-key
-        >
-          {!start && <BreadcrumbSeparator active={active} />}
-          <BreadcrumbStep active={active}>
-            <BreadcrumbNumberWrapper>
-              <BreadcrumbNumber active={active}>{i + 1}</BreadcrumbNumber>
-            </BreadcrumbNumberWrapper>
-            <Box fontSize={3}>{item.label}</Box>
-          </BreadcrumbStep>
-        </Fragment>
-      )
-    })}
-  </BreadcrumbWrapper>
-)
+class Breadcrumb extends PureComponent<Props> {
+  render() {
+    const { items, currentStep } = this.props
+    return (
+      <BreadcrumbWrapper>
+        {items.map((item, i) => {
+          const active = i < parseInt(currentStep, 10)
+          const start = i === 0
+          return (
+            <Fragment
+              key={i} // eslint-disable-line react/no-array-index-key
+            >
+              {!start && <BreadcrumbSeparator active={active} />}
+              <BreadcrumbStep active={active}>
+                <BreadcrumbNumberWrapper>
+                  <BreadcrumbNumber active={active}>{i + 1}</BreadcrumbNumber>
+                </BreadcrumbNumberWrapper>
+                <Box fontSize={3}>{item.label}</Box>
+              </BreadcrumbStep>
+            </Fragment>
+          )
+        })}
+      </BreadcrumbWrapper>
+    )
+  }
+}
 
 export default Breadcrumb

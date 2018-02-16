@@ -99,6 +99,16 @@ class Send extends PureComponent<Props, State> {
     ...defaultState,
   }
 
+  componentWillMount() {
+    const { t } = this.props
+    this._items = [
+      { label: t('sendModal.Amount') },
+      { label: t('sendModal.Summary') },
+      { label: t('sendModal.SecureValidation') },
+      { label: t('sendModal.Confirmation') },
+    ]
+  }
+
   getStepProps(data: any) {
     const { inputValue, step } = this.state
     const { t } = this.props
@@ -126,6 +136,8 @@ class Send extends PureComponent<Props, State> {
       t,
     }
   }
+
+  _items = []
 
   handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
     this.setState(prev => ({
@@ -158,15 +170,7 @@ class Send extends PureComponent<Props, State> {
           return (
             <Fragment>
               <ModalBody p={3}>
-                <Breadcrumb
-                  currentStep={step}
-                  items={[
-                    { label: 'Amount' },
-                    { label: 'Summary' },
-                    { label: 'Secure validation' },
-                    { label: 'Confirmation' },
-                  ]}
-                />
+                <Breadcrumb currentStep={step} items={this._items} />
               </ModalBody>
               <ModalBody onClose={onClose}>
                 <Step {...this.getStepProps(data)} />

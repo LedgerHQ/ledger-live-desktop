@@ -66,3 +66,9 @@ update:
 
 IsUnlocked:
   password: Mot de passe
+
+sendModal:
+  Amount: Montant
+  Summary: Résumé
+  SecureValidation: Validation sécurisée
+  Confirmation: Confirmation
