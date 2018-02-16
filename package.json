@@ -91,7 +91,8 @@
     "smooth-scrollbar": "^8.2.6",
     "source-map-support": "^0.5.3",
     "styled-components": "^3.1.6",
-    "styled-system": "^1.1.7"
+    "styled-system": "^1.1.7",
+    "ledger-test-library": "KhalilBellakrid/ledger-test-library"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.13",
@@ -116,6 +117,7 @@
     "electron": "1.8.2",
     "electron-builder": "^20.0.4",
     "electron-devtools-installer": "^2.2.3",
+    "electron-rebuild": "^1.7.3",
     "electron-webpack": "1.12.1",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",

@@ -1,6 +1,6 @@
 // @flow
 
-import axios from 'axios'
+import ledger from 'ledger-test-library'
 import bitcoin from 'bitcoinjs-lib'
 
 export const networks = [
@@ -31,13 +31,7 @@ export function computeTransaction(addresses: Array<*>) {
 }
 
 export function getTransactions(addresses: Array<string>) {
-  return axios
-    .get(
-      `http://api.ledgerwallet.com/blockchain/v2/btc_testnet/addresses/${addresses.join(
-        ',',
-      )}/transactions?noToken=true`,
-    )
-    .then(({ data }) => data)
+  return ledger.getTransactions(addresses)
 }
 
 export async function getAccount({
@@ -119,7 +113,7 @@ export async function getAccount({
 
         allAddresses = [...new Set([...allAddresses, ...listAddresses])]
 
-        const { txs } = await getTransactions(listAddresses)
+        const txs = await getTransactions(listAddresses)
 
         const hasTransactions = txs.length > 0
 
