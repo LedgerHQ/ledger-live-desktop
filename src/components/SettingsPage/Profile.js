@@ -89,7 +89,7 @@ class TabProfile extends PureComponent<Props, State> {
           <label>
             <Box
               horizontal
-              align="center"
+              alignItems="center"
               flow={2}
               style={{ cursor: 'pointer' }}
               onClick={() => this.handleChangeInput('password.state')(!isPasswordChecked)}
@@ -108,7 +108,7 @@ class TabProfile extends PureComponent<Props, State> {
               />
             </Box>
           )}
-          <Box horizontal justify="flex-end">
+          <Box horizontal justifyContent="flex-end">
             <Button primary type="submit">
               Save
             </Button>

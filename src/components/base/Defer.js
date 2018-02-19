@@ -16,10 +16,18 @@ class Defer extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
+    this._mounted = true
+
     window.requestAnimationFrame(() =>
-      window.requestAnimationFrame(() => this.setState({ shouldRender: true })),
+      window.requestAnimationFrame(() => this._mounted && this.setState({ shouldRender: true })),
     )
   }
+
+  componentWillUnmount() {
+    this._mounted = false
+  }
+
+  _mounted = false
 
   render() {
     const { children } = this.props

@@ -29,8 +29,8 @@ const Pill = styled(Tabbable).attrs({
   px: 3,
   fontSize: 4,
   borderRadius: 1,
-  align: 'center',
-  justify: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
 })`
   height: 28px;
   outline: none;

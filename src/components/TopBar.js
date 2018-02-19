@@ -34,11 +34,10 @@ const Container = styled(Box).attrs({
 const Inner = styled(Box).attrs({
   horizontal: true,
   grow: true,
-  borderBottom: true,
   flow: 4,
-  borderWidth: 1,
-  borderColor: p => rgba(p.theme.colors.black, 0.15),
-})``
+})`
+  border-bottom: 1px solid ${p => rgba(p.theme.colors.black, 0.15)};
+`
 
 const Bar = styled.div`
   height: 15px;
@@ -137,14 +136,14 @@ class TopBar extends PureComponent<Props, State> {
         <Inner>
           <Box grow horizontal flow={4}>
             <GlobalSearch />
-            <Box justify="center">
+            <Box justifyContent="center">
               <IconDevices height={16} width={16} />
             </Box>
-            <Box justify="center" relative>
+            <Box justifyContent="center" relative>
               <IconActivity height={16} width={16} />
               {hasAccounts && <Activity progress={sync.progress} fail={sync.fail} />}
             </Box>
-            <Box justify="center">
+            <Box justifyContent="center">
               <Bar />
             </Box>
           </Box>
@@ -158,8 +157,8 @@ class TopBar extends PureComponent<Props, State> {
               ff="Open Sans|SemiBold"
               fontSize={4}
               offsetTop={-2}
-              align="center"
-              justify="center"
+              alignItems="center"
+              justifyContent="center"
               flow={1}
               color="warmGrey"
               horizontal

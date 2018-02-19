@@ -87,7 +87,7 @@ class ReceiveModal extends PureComponent<Props, State> {
                     <ReceiveBox amount={amount} address={get(account, 'data.address', '')} />
                   </Fragment>
                 )}
-              <Box horizontal justify="center">
+              <Box horizontal justifyContent="center">
                 <Button primary onClick={onClose}>
                   Close
                 </Button>

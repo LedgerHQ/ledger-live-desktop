@@ -97,16 +97,15 @@ const Items = styled(Box).attrs({
 })``
 
 const Item = styled(Box).attrs({
-  align: 'center',
+  alignItems: 'center',
   bg: 'night',
-  borderColor: 'white',
   borderRadius: 1,
-  borderWidth: 2,
   color: 'white',
-  justify: 'center',
+  justifyContent: 'center',
   py: 2,
   px: 4,
 })`
+  border: 2px solid ${p => p.theme.colors.white};
   flex: 1;
   overflow: hidden;
   cursor: pointer;
@@ -241,7 +240,7 @@ class DevTools extends PureComponent<any, State> {
               >
                 {l.map(k => (
                   <Box key={k} style={{ flex: 1 }}>
-                    <Box horizontal align="center" flow={2}>
+                    <Box horizontal alignItems="center" flow={2}>
                       <Box fontSize={1}>{last(cpuUsage[k]).value}%</Box>
                       <Box>{k}</Box>
                     </Box>

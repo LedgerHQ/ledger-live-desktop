@@ -21,8 +21,8 @@ const AccountCard = ({
   onClick: Function,
 }) => (
   <Card p={4} flow={4} flex={1} style={{ cursor: 'pointer' }} onClick={onClick}>
-    <Box horizontal ff="Open Sans|SemiBold" flow={3} align="center">
-      <Box align="center" justify="center" style={{ color: '#fcb653' }}>
+    <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
+      <Box alignItems="center" justifyContent="center" style={{ color: '#fcb653' }}>
         <IconCurrencyBitcoin height={20} width={20} />
       </Box>
       <Box>
@@ -35,7 +35,7 @@ const AccountCard = ({
       </Box>
     </Box>
     <Bar size={1} color="argile" />
-    <Box grow justify="center" color="dark">
+    <Box grow justifyContent="center" color="dark">
       {account.data && (
         <FormattedVal
           alwaysShowSign={false}

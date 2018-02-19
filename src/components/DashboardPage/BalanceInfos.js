@@ -29,7 +29,7 @@ const Sub = styled(Text).attrs({
 function BalanceInfos(props: Props) {
   const { totalBalance } = props
   return (
-    <Box horizontal align="flex-end" flow={7}>
+    <Box horizontal alignItems="flex-end" flow={7}>
       <Box grow>
         <FormattedVal
           val={totalBalance}
@@ -42,11 +42,11 @@ function BalanceInfos(props: Props) {
         />
         <Sub>{'Total balance'}</Sub>
       </Box>
-      <Box align="flex-end">
+      <Box alignItems="flex-end">
         <FormattedVal isPercent val={9.25} alwaysShowSign fontSize={7} />
         <Sub>{'since one week'}</Sub>
       </Box>
-      <Box align="flex-end">
+      <Box alignItems="flex-end">
         <FormattedVal currency="USD" alwaysShowSign showCode val={6132.23} fontSize={7} />
         <Sub>{'since one week'}</Sub>
       </Box>

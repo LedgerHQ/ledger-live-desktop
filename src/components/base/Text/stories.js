@@ -23,7 +23,7 @@ const FontStyles = () => (
     {map(fontFamilies, (weights, fontName) => (
       <Box key={fontName}>
         {map(weights, (_, weight) => (
-          <Box key={weight} horizontal align="center">
+          <Box key={weight} horizontal alignItems="center">
             <Box style={{ width: 200 }}>
               <Text style={{ fontFamily: 'monospace' }} fontSize={3}>
                 {fontName} {weight}

@@ -53,7 +53,7 @@ const TriggerBtn = styled(Box).attrs({
 `
 
 const Item = styled(Box).attrs({
-  align: 'center',
+  alignItems: 'center',
   p: 2,
 })`
   background: ${p => (p.highlighted ? p.theme.colors.cream : p.theme.colors.white)};
@@ -79,8 +79,8 @@ const Dropdown = styled(Box).attrs({
 `
 
 const FloatingTriangles = styled(Box).attrs({
-  align: 'center',
-  justify: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
   mr: 2,
 })`
   position: absolute;
@@ -96,8 +96,8 @@ const FloatingTriangles = styled(Box).attrs({
 const IconSelected = styled(Box).attrs({
   bg: 'blue',
   color: 'white',
-  align: 'center',
-  justify: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
 })`
   border-radius: 50%;
   height: 15px;
@@ -233,7 +233,13 @@ class Select extends PureComponent<Props> {
                   </FloatingTriangles>
                 </Box>
               ) : (
-                <TriggerBtn {...getButtonProps()} tabIndex={0} horizontal align="center" flow={2}>
+                <TriggerBtn
+                  {...getButtonProps()}
+                  tabIndex={0}
+                  horizontal
+                  alignItems="center"
+                  flow={2}
+                >
                   <Box grow>
                     {selectedItem && renderSelected ? (
                       renderSelected(selectedItem)

@@ -49,8 +49,8 @@ const mapDispatchToProps = (dispatch, { name, onClose = noop }) => ({
 
 const Container = styled(Box).attrs({
   color: 'grey',
-  align: 'center',
-  justify: 'flex-start',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
   sticky: true,
   style: p => ({
     pointerEvents: p.isVisible ? 'auto' : 'none',
@@ -181,9 +181,9 @@ export class Modal extends Component<Props> {
           <Container isVisible={isVisible}>
             <Backdrop op={m.opacity} />
             <GrowScroll
-              align="center"
+              alignItems="center"
               full
-              justify="flex-start"
+              justifyContent="flex-start"
               onClick={preventBackdropClick ? undefined : onClose}
               style={{ height: '100%' }}
             >

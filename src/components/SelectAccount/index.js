@@ -22,7 +22,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 })
 
 const renderItem = item => (
-  <Box horizontal align="center">
+  <Box horizontal alignItems="center">
     <Box grow>
       <Text color="night" fontSize={0} fontWeight="bold">
         {item.name}

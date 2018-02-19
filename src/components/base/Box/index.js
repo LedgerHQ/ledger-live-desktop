@@ -4,9 +4,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import {
   alignItems,
-  borderColor,
   borderRadius,
-  borderWidth,
   boxShadow,
   color,
   flex,
@@ -21,9 +19,7 @@ import Text from 'components/base/Text'
 
 const Box = styled.div`
   ${alignItems};
-  ${borderColor};
   ${borderRadius};
-  ${borderWidth};
   ${boxShadow};
   ${color};
   ${flex};

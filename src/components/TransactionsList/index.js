@@ -53,7 +53,7 @@ HeaderCol.defaultProps = {
 
 const TransactionRaw = styled(Box).attrs({
   horizontal: true,
-  align: 'center',
+  alignItems: 'center',
 })`
   border-bottom: 1px solid ${p => p.theme.colors.argile};
   height: 68px;
@@ -66,7 +66,7 @@ const TransactionRaw = styled(Box).attrs({
 const Cell = styled(Box).attrs({
   px: 4,
   horizontal: true,
-  align: 'center',
+  alignItems: 'center',
 })`
   width: ${p => (p.size ? `${p.size}px` : '')};
 `
@@ -81,7 +81,7 @@ const Transaction = ({
   const time = moment(tx.received_at)
   return (
     <TransactionRaw>
-      <Cell size={DATE_COL_SIZE} justify="space-between">
+      <Cell size={DATE_COL_SIZE} justifyContent="space-between">
         <Box>
           <Day>{time.format('DD MMM')}</Day>
           <Hour>{time.format('HH:mm')}</Hour>
@@ -95,7 +95,7 @@ const Transaction = ({
           style={{ cursor: 'pointer' }}
           onClick={() => onAccountClick && onAccountClick(tx.account)}
         >
-          <Box align="center" justify="center" style={{ color: '#fcb653' }}>
+          <Box alignItems="center" justifyContent="center" style={{ color: '#fcb653' }}>
             <IconCurrencyBitcoin height={16} width={16} />
           </Box>
           <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
@@ -120,7 +120,7 @@ const Transaction = ({
           {tx.balance > 0 ? get(tx, 'inputs.0.address') : get(tx, 'outputs.0.address')}
         </Box>
       </Cell>
-      <Cell size={AMOUNT_COL_SIZE} justify="flex-end">
+      <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
         <FormattedVal val={tx.balance} currency="BTC" showCode fontSize={4} alwaysShowSign />
       </Cell>
     </TransactionRaw>
@@ -166,7 +166,7 @@ class TransactionsList extends Component<Props> {
           <HeaderCol size={DATE_COL_SIZE}>{'Date'}</HeaderCol>
           {withAccounts && <HeaderCol size={ACCOUNT_COL_SIZE}>{'Account'}</HeaderCol>}
           <HeaderCol grow>{'Address'}</HeaderCol>
-          <HeaderCol size={AMOUNT_COL_SIZE} justify="flex-end">
+          <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
             {'Amount'}
           </HeaderCol>
         </Box>

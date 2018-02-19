@@ -86,7 +86,7 @@ class TabProfile extends PureComponent<Props, State> {
               items={languages}
             />
           </Box>
-          <Box horizontal justify="flex-end">
+          <Box horizontal justifyContent="flex-end">
             <Button primary type="submit">
               Save
             </Button>

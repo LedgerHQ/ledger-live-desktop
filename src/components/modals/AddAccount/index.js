@@ -51,7 +51,7 @@ const Steps = {
             value={currencies.find(c => c.key === props.value.wallet)}
           />
         </Box>
-        <Box horizontal justify="flex-end">
+        <Box horizontal justifyContent="flex-end">
           <Button primary type="submit">
             {props.t('addAccount.title')}
           </Button>

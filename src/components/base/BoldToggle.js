@@ -20,7 +20,7 @@ function BoldToggle(props: Props) {
         {children}
       </Text>
       {!isBold && (
-        <Box sticky align="center" justify="center">
+        <Box sticky alignItems="center" justifyContent="center">
           <Text fontWeight={normalWeight} {...p}>
             {children}
           </Text>

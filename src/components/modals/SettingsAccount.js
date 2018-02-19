@@ -145,7 +145,7 @@ class SettingsAccount extends PureComponent<Props, State> {
                 Account settings
               </Text>
               <Box
-                align="center"
+                alignItems="center"
                 flow={2}
                 horizontal
                 onMouseEnter={this.handleHoveredName(true)}
@@ -154,7 +154,7 @@ class SettingsAccount extends PureComponent<Props, State> {
                 <Box>
                   {editName ? (
                     <form onSubmit={this.handleSubmitName(account)}>
-                      <Box align="center" horizontal flow={2}>
+                      <Box alignItems="center" horizontal flow={2}>
                         <Box>
                           <Input value={account.name} onChange={this.handleChangeName} />
                         </Box>
@@ -179,7 +179,7 @@ class SettingsAccount extends PureComponent<Props, State> {
                     </Box>
                   )}
               </Box>
-              <Box horizontal grow align="flex-end" flow={2}>
+              <Box horizontal grow alignItems="flex-end" flow={2}>
                 <Box grow>
                   <Button onClick={this.handleArchiveAccount(account)}>
                     {hasNoTransactions(account) ? 'Remove account' : 'Archive account'}

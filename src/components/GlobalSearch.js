@@ -30,7 +30,7 @@ class GlobalSearch extends PureComponent<{}> {
   render() {
     return (
       <Box grow horizontal ff="Open Sans|SemiBold" fontSize={4}>
-        <Box justify="center" onClick={this.focusInput} pr={2}>
+        <Box justifyContent="center" onClick={this.focusInput} pr={2}>
           <IconSearch height={16} width={16} />
         </Box>
         <Input placeholder="Search" innerRef={input => (this._input = input)} />

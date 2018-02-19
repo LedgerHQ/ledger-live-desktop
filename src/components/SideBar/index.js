@@ -95,7 +95,7 @@ class SideBar extends PureComponent<Props> {
             </Box>
           </Box>
           <Box flow={4} grow pt={1}>
-            <CapsSubtitle horizontal align="center">
+            <CapsSubtitle horizontal alignItems="center">
               <Box grow>{t('sidebar.accounts')}</Box>
               <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
                 <IconPlus height={14} width={14} />
