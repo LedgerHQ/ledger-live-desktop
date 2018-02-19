@@ -31,7 +31,7 @@ export function computeTransaction(addresses: Array<*>) {
 }
 
 export function getTransactions(addresses: Array<string>) {
-  return ledger.getTransactions(addresses)
+  return ledger.getTransactions(addresses, true)
 }
 
 export async function getAccount({
