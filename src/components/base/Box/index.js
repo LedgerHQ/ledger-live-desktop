@@ -56,11 +56,11 @@ const RawCard = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadiu
 export const Card = ({ title, ...props }: { title?: string }) => {
   if (title) {
     return (
-      <Box flow={4}>
+      <Box flow={4} grow>
         <Text color="dark" ff="Museo Sans" fontSize={6}>
           {title}
         </Text>
-        <RawCard {...props} />
+        <RawCard grow {...props} />
       </Box>
     )
   }

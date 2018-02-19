@@ -62,6 +62,7 @@ class ReceiveModal extends PureComponent<Props, State> {
         onHide={this.handleHide}
         render={({ data, onClose }) => {
           const account = this.getAccount(data)
+          const accountData = get(account, 'data', {})
 
           return (
             <ModalBody onClose={onClose} flow={3}>
@@ -72,21 +73,24 @@ class ReceiveModal extends PureComponent<Props, State> {
                 <Label>Account</Label>
                 <SelectAccount value={account} onChange={this.handleChangeInput('account')} />
               </Box>
-              {account &&
-                account.data && (
-                  <Fragment>
-                    <Box flow={1}>
-                      <Label>Request amount</Label>
-                      <Input
-                        type="number"
-                        min={0}
-                        max={account.data.balance / 1e8}
-                        onChange={this.handleChangeInput('amount')}
-                      />
-                    </Box>
-                    <ReceiveBox amount={amount} address={get(account, 'data.address', '')} />
-                  </Fragment>
-                )}
+              {accountData && (
+                <Fragment>
+                  <Box flow={1}>
+                    <Label>Request amount</Label>
+                    <Input
+                      type="number"
+                      min={0}
+                      max={accountData.balance / 1e8}
+                      onChange={this.handleChangeInput('amount')}
+                    />
+                  </Box>
+                  <ReceiveBox
+                    path={accountData.path}
+                    amount={amount}
+                    address={accountData.address || ''}
+                  />
+                </Fragment>
+              )}
               <Box horizontal justifyContent="center">
                 <Button primary onClick={onClose}>
                   Close

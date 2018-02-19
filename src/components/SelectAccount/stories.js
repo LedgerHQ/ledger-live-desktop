@@ -17,6 +17,7 @@ const accounts = [...Array(20)].map(() => ({
     address: chance.string(),
     balance: chance.floating({ min: 0, max: 20 }),
     currentIndex: chance.integer({ min: 0, max: 20 }),
+    path: '',
     transactions: [],
   },
 }))

@@ -51,6 +51,20 @@ function getPath({ coin, account, segwit }: { coin: Coin, account?: any, segwit:
   return `${segwit ? 49 : 44}'/${coin}'${account !== undefined ? `/${account}'` : ''}`
 }
 
+export function verifyAddress({
+  transport,
+  path,
+  segwit = true,
+}: {
+  transport: Object,
+  path: string,
+  segwit?: boolean,
+}) {
+  const btc = new Btc(transport)
+
+  return btc.getWalletPublicKey(path, true, segwit)
+}
+
 export default async ({
   transport,
   currentAccounts,
@@ -87,8 +101,8 @@ export default async ({
 
   const fingerprint = ((result[0] << 24) | (result[1] << 16) | (result[2] << 8) | result[3]) >>> 0
 
-  const getXpub58ByAccount = async ({ account, network }) => {
-    const { publicKey, chainCode } = await getPublicKey(getPath({ segwit, coin, account }))
+  const getXpub58ByPath = async ({ path, account, network }) => {
+    const { publicKey, chainCode } = await getPublicKey(path)
     const compressPublicKey = getCompressPublicKey(publicKey)
 
     const childnum = (0x80000000 | account) >>> 0
@@ -106,14 +120,15 @@ export default async ({
   }
 
   const getAllAccounts = async (currentAccount = 0, accounts = []) => {
-    const xpub58 = await getXpub58ByAccount({ account: currentAccount, network })
+    const path = getPath({ segwit, coin, account: currentAccount })
+    const xpub58 = await getXpub58ByPath({ path, account: currentAccount, network })
 
     if (currentAccounts.includes(xpub58)) {
       return getAllAccounts(currentAccount + 1, accounts) // Skip existing account
     }
 
     const hdnode = getHDNode({ xpub58, network })
-    const account = await getAccount({ hdnode, network, segwit, asyncDelay: 0 })
+    const account = await getAccount({ path, hdnode, network, segwit, asyncDelay: 0 })
 
     onProgress({
       account: currentAccount,

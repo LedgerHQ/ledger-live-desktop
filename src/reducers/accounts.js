@@ -29,6 +29,7 @@ const defaultAccountData: AccountData = {
   address: '',
   balance: 0,
   currentIndex: 0,
+  path: '',
   transactions: [],
 }
 
