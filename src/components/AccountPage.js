@@ -95,7 +95,7 @@ class AccountPage extends PureComponent<Props> {
 
               <Box style={{ width: 300 }}>
                 <Card title={t('AccountPage.receive')} flow={3}>
-                  <ReceiveBox address={accountData.address} />
+                  <ReceiveBox path={accountData.path} address={accountData.address} />
                 </Card>
               </Box>
             </Box>

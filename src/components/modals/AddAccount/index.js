@@ -183,7 +183,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
 
     sendEvent('usb', 'wallet.getAccounts', {
-      path: currentDevice.path,
+      pathDevice: currentDevice.path,
       wallet: inputValue.wallet,
       currentAccounts: accounts.map(acc => acc.id),
     })

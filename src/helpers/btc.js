@@ -37,6 +37,7 @@ export function getTransactions(addresses: Array<string>) {
 export async function getAccount({
   allAddresses = [],
   currentIndex = 0,
+  path,
   hdnode,
   segwit,
   network,
@@ -44,6 +45,7 @@ export async function getAccount({
 }: {
   allAddresses?: Array<string>,
   currentIndex?: number,
+  path: string,
   hdnode: Object,
   segwit: boolean,
   network: Object,
@@ -69,15 +71,12 @@ export async function getAccount({
     return pubKeyToSegwitAddress(hdnode.getPublicKeyBuffer(), script)
   }
 
+  const getPath = (type, index) => `${type === 'external' ? 0 : 1}/${index}`
+
   const getAddress = ({ type, index }) => ({
     type,
     index,
-    address: getPublicAddress({
-      hdnode,
-      path: `${type === 'external' ? 0 : 1}/${index}`,
-      script,
-      segwit,
-    }),
+    address: getPublicAddress({ hdnode, path: getPath(type, index), script, segwit }),
   })
 
   const getAsyncAddress = params =>
@@ -89,7 +88,7 @@ export async function getAccount({
       index: 0,
     }
     return {
-      index: lastAddress.index,
+      ...lastAddress,
       address: getAddress({ type: 'external', index: lastAddress.index + 1 }).address,
     }
   }
@@ -129,19 +128,16 @@ export async function getAccount({
           return result
         }, 0)
 
+        const currentAddress =
+          lastAddress !== null ? lastAddress : getAddress({ type: 'external', index: 0 })
+
         return {
-          balance,
+          address: currentAddress.address,
           allAddresses,
+          balance,
+          currentIndex: currentAddress.index,
+          path: `${path}/${getPath('external', currentAddress.index + 1)}`,
           transactions,
-          ...(lastAddress !== null
-            ? {
-                currentIndex: lastAddress.index,
-                address: lastAddress.address,
-              }
-            : {
-                currentIndex: 0,
-                address: getAddress({ type: 'external', index: 0 }).address,
-              }),
         }
       })
 

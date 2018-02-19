@@ -23,15 +23,16 @@ export type AccountData = {
   address: string,
   balance: number,
   currentIndex: number,
+  path: string,
   transactions: Array<Transaction>,
 }
 
 export type Account = {
-  id: string,
   archived?: boolean,
+  data?: AccountData,
+  id: string,
   name: string,
   type: string,
-  data?: AccountData,
 }
 
 export type Accounts = Array<Account>
