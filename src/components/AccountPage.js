@@ -39,6 +39,13 @@ const mapDispatchToProps = {
   openModal,
 }
 
+function enrichTransactionsWithAccount(transactions, account) {
+  return transactions.map(t => ({
+    ...t,
+    account,
+  }))
+}
+
 class AccountPage extends PureComponent<Props> {
   render() {
     const { account, accountData, openModal, t } = this.props
@@ -100,7 +107,9 @@ class AccountPage extends PureComponent<Props> {
               </Box>
             </Box>
             <Card p={0} px={4} title={t('AccountPage.lastOperations')}>
-              <TransactionsList transactions={accountData.transactions} />
+              <TransactionsList
+                transactions={enrichTransactionsWithAccount(accountData.transactions, account)}
+              />
             </Card>
           </Fragment>
         )}

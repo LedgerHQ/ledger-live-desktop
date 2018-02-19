@@ -27,7 +27,7 @@ const AccountCard = ({
       </Box>
       <Box>
         <Box style={{ textTransform: 'uppercase' }} fontSize={0} color="warmGrey">
-          {account.type}
+          {account.unit.code}
         </Box>
         <Box fontSize={4} color="dark">
           {account.name}
@@ -40,7 +40,7 @@ const AccountCard = ({
         <FormattedVal
           alwaysShowSign={false}
           color="dark"
-          currency={account.type}
+          unit={account.unit}
           showCode
           val={account.data.balance}
         />

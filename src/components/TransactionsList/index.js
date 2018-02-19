@@ -121,7 +121,13 @@ const Transaction = ({
         </Box>
       </Cell>
       <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-        <FormattedVal val={tx.balance} currency="BTC" showCode fontSize={4} alwaysShowSign />
+        <FormattedVal
+          val={tx.balance}
+          unit={tx.account.unit}
+          showCode
+          fontSize={4}
+          alwaysShowSign
+        />
       </Cell>
     </TransactionRaw>
   )

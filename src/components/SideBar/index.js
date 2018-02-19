@@ -106,7 +106,7 @@ class SideBar extends PureComponent<Props> {
                     <FormattedVal
                       alwaysShowSign={false}
                       color="warmGrey"
-                      currency={account.type}
+                      unit={account.unit}
                       showCode
                       val={account.data ? account.data.balance : 0}
                     />

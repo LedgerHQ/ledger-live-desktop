@@ -6,6 +6,9 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { ipcRenderer } from 'electron'
 import differenceBy from 'lodash/differenceBy'
+import { listCurrencies, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+
+import type { Currency } from '@ledgerhq/currencies'
 
 import { MODAL_ADD_ACCOUNT } from 'constants'
 
@@ -30,25 +33,24 @@ import CreateAccount from './CreateAccount'
 import ImportAccounts from './ImportAccounts'
 import RestoreAccounts from './RestoreAccounts'
 
-const currencies = [
-  {
-    key: 'btc',
-    name: 'Bitcoin',
-  },
-]
+const currencies = listCurrencies().map(currency => ({
+  key: currency.coinType,
+  name: currency.name,
+  data: currency,
+}))
 
 const Steps = {
-  chooseWallet: (props: Object) => (
+  chooseCurrency: (props: Object) => (
     <form onSubmit={props.onSubmit}>
       <Box flow={3}>
         <Box flow={1}>
           <Label>{props.t('common.currency')}</Label>
           <Select
             placeholder={props.t('common.chooseWalletPlaceholder')}
-            onChange={item => props.onChangeInput('wallet')(item.key)}
+            onChange={item => props.onChangeCurrency(item.data)}
             renderSelected={item => item.name}
             items={currencies}
-            value={currencies.find(c => c.key === props.value.wallet)}
+            value={props.currency ? currencies.find(c => c.key === props.currency.coinType) : null}
           />
         </Box>
         <Box horizontal justifyContent="flex-end">
@@ -62,7 +64,7 @@ const Steps = {
   connectDevice: (props: Object) => (
     <Box>
       <Box>Connect your Ledger: {props.connected ? 'ok' : 'ko'}</Box>
-      <Box>Start {props.wallet.toUpperCase()} App on your Ledger: ko</Box>
+      <Box>Start {props.currency.name} App on your Ledger: ko</Box>
     </Box>
   ),
   inProgress: (props: Object) => (
@@ -95,11 +97,7 @@ const Steps = {
   },
 }
 
-type InputValue = {
-  wallet: string,
-}
-
-type Step = 'chooseWallet' | 'connectDevice' | 'inProgress' | 'listAccounts'
+type Step = 'chooseCurrency' | 'connectDevice' | 'inProgress' | 'listAccounts'
 
 type Props = {
   t: T,
@@ -113,8 +111,8 @@ type Props = {
 }
 
 type State = {
-  inputValue: InputValue,
   step: Step,
+  currency: Currency | null,
   accounts: Accounts,
   progress: null | Object,
 }
@@ -133,12 +131,10 @@ const mapDispatchToProps = {
 }
 
 const defaultState = {
-  inputValue: {
-    wallet: '',
-  },
+  currency: null,
   accounts: [],
   progress: null,
-  step: 'chooseWallet',
+  step: 'chooseCurrency',
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
@@ -176,36 +172,36 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   getWalletInfos() {
     const { currentDevice, accounts } = this.props
-    const { inputValue } = this.state
+    const { currency } = this.state
 
-    if (currentDevice === null) {
+    if (currentDevice === null || currency === null) {
       return
     }
 
     sendEvent('usb', 'wallet.getAccounts', {
       pathDevice: currentDevice.path,
-      wallet: inputValue.wallet,
+      coinType: currency.coinType,
       currentAccounts: accounts.map(acc => acc.id),
     })
   }
 
   getStepProps() {
     const { currentDevice, archivedAccounts, canCreateAccount, updateAccount, t } = this.props
-    const { inputValue, step, progress, accounts } = this.state
+    const { currency, step, progress, accounts } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
 
     return {
-      ...props(step === 'chooseWallet', {
+      ...props(step === 'chooseCurrency', {
         t,
-        value: inputValue,
+        currency,
+        onChangeCurrency: this.handleChangeCurrency,
         onSubmit: this.handleSubmit,
-        onChangeInput: this.handleChangeInput,
       }),
       ...props(step === 'connectDevice', {
         t,
         connected: currentDevice !== null,
-        wallet: inputValue.wallet,
+        currency,
       }),
       ...props(step === 'inProgress', {
         t,
@@ -247,22 +243,10 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   handleImportAccounts = accounts => accounts.forEach(account => this.addAccount(account))
 
-  handleChangeInput = (key: $Keys<InputValue>) => (value: $Values<InputValue>) =>
-    this.setState(prev => ({
-      inputValue: {
-        ...prev.inputValue,
-        [key]: value,
-      },
-    }))
+  handleChangeCurrency = (currency: Currency) => this.setState({ currency })
 
   handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    const { inputValue } = this.state
-
-    if (inputValue.wallet.trim() === '') {
-      return
-    }
 
     this.setState({
       step: 'connectDevice',
@@ -277,13 +261,19 @@ class AddAccountModal extends PureComponent<Props, State> {
     })
 
   addAccount = ({ id, name, ...data }) => {
-    const { inputValue } = this.state
+    const { currency } = this.state
     const { addAccount } = this.props
+
+    if (currency === null) {
+      return
+    }
 
     addAccount({
       id,
       name,
-      type: inputValue.wallet,
+      coinType: currency.coinType,
+      currency,
+      unit: getDefaultUnitByCoinType(currency.coinType),
       data,
     })
   }
