@@ -107,7 +107,7 @@ class ImportAccounts extends PureComponent<Props, State> {
                 </Box>
               )
             })}
-            <Box horizontal justify="flex-end">
+            <Box horizontal justifyContent="flex-end">
               <Button primary disabled={!canImportAccounts} type="submit">
                 Import
               </Button>

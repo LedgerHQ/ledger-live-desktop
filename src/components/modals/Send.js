@@ -45,11 +45,11 @@ const Steps = {
           <Label>Amount</Label>
           <Input onChange={props.onChangeInput('amount')} value={props.value.amount} />
         </Box>
-        <Box horizontal align="center">
+        <Box horizontal alignItems="center">
           <Box grow>
             <Text>Cancel</Text>
           </Box>
-          <Box justify="flex-end">
+          <Box justifyContent="flex-end">
             <Button type="submit" primary disabled={!props.canSubmit}>
               Next
             </Button>

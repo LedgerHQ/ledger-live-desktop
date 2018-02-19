@@ -33,11 +33,11 @@ const justify = [
 
 stories.add('basic', () => (
   <Box
-    align={select('align', align, 'center')}
+    alignItems={select('align', align, 'center')}
     flow={number('flow', undefined)}
     grow={boolean('grow', false)}
     horizontal={boolean('horizontal', false)}
-    justify={select('justify', justify, 'center')}
+    justifyContent={select('justify', justify, 'center')}
     padding={number('padding', undefined)}
     relative={boolean('relative', false)}
     sticky={boolean('sticky', true)}
@@ -50,9 +50,9 @@ const Container = props => <Box flow={10} {...props} />
 const Row = props => <Box horizontal flow={10} {...props} />
 const Col = styled(({ color, ...props }) => (
   <Box
-    align="center"
+    alignItems="center"
     grow
-    justify="center"
+    justifyContent="center"
     style={{
       backgroundColor: color,
     }}

@@ -54,9 +54,9 @@ class AccountPage extends PureComponent<Props> {
           <Box>
             <Text fontSize={8}>{account.name}</Text>
           </Box>
-          <Box horizontal align="center" justify="flex-end" grow flow={2}>
+          <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
             <Button primary onClick={() => openModal(MODAL_SEND, { account })}>
-              <Box horizontal flow={2} align="center">
+              <Box horizontal flow={2} alignItems="center">
                 <Box>
                   <Icon name="upload" />
                 </Box>
@@ -64,7 +64,7 @@ class AccountPage extends PureComponent<Props> {
               </Box>
             </Button>
             <Button primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
-              <Box horizontal flow={2} align="center">
+              <Box horizontal flow={2} alignItems="center">
                 <Box>
                   <Icon name="download" />
                 </Box>
@@ -86,8 +86,8 @@ class AccountPage extends PureComponent<Props> {
                 <Card
                   title={t('AccountPage.balance')}
                   style={{ height: 435 }}
-                  align="center"
-                  justify="center"
+                  alignItems="center"
+                  justifyContent="center"
                 >
                   <Text fontSize={5}>{formatBTC(accountData.balance)}</Text>
                 </Card>

@@ -16,27 +16,26 @@ type Props = {
 }
 
 export const AddressBox = styled(Box).attrs({
-  borderWidth: 1,
-  borderColor: 'mouse',
   bg: 'cream',
   p: 2,
 })`
   border-radius: 3px;
+  border: 1px solid ${p => p.theme.colors.mouse};
   cursor: text;
-  text-align: center;
+  text-alignitems: center;
   user-select: text;
   word-break: break-all;
 `
 
 const Action = styled(Box).attrs({
-  align: 'center',
+  alignItems: 'center',
   color: 'mouse',
   flex: 1,
   flow: 1,
   fontSize: 0,
 })`
   font-weight: bold;
-  text-align: center;
+  text-alignitems: center;
   cursor: pointer;
   text-transform: uppercase;
 
@@ -47,10 +46,10 @@ const Action = styled(Box).attrs({
 
 const ReceiveBox = ({ amount, address }: Props) => (
   <Box flow={3}>
-    <Box align="center">
+    <Box alignItems="center">
       <QRCode size={150} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />
     </Box>
-    <Box align="center" flow={2}>
+    <Box alignItems="center" flow={2}>
       <Text fontSize={1}>{'Current address'}</Text>
       <AddressBox>{address}</AddressBox>
     </Box>

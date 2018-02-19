@@ -7,11 +7,17 @@ import type { Element } from 'react'
 
 import Box, { Tabbable } from 'components/base/Box'
 
+const WrapperTab = styled(Box).attrs({
+  horizontal: true,
+})`
+  border-bottom: 1px solid ${p => p.theme.colors.argile};
+`
+
 const Tab = styled(Tabbable).attrs({
   flex: 1,
   pb: 2,
-  align: 'center',
-  justify: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
   fontSize: 3,
 })`
   border-bottom: 2px solid transparent;
@@ -39,7 +45,7 @@ type Props = {
 
 const Tabs = ({ items, index, onTabClick }: Props) => (
   <Fragment>
-    <Box horizontal borderBottom borderWidth={1} borderColor="argile">
+    <WrapperTab>
       {items.map((item, i) => (
         <Tab
           key={item.key}
@@ -50,7 +56,7 @@ const Tabs = ({ items, index, onTabClick }: Props) => (
           {item.title}
         </Tab>
       ))}
-    </Box>
+    </WrapperTab>
     {items[index] && items[index].render()}
   </Fragment>
 )

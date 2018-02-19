@@ -28,7 +28,7 @@ const mapDispatchToProps = {
 }
 
 const Container = styled(Tabbable).attrs({
-  align: 'center',
+  alignItems: 'center',
   borderRadius: 1,
   ff: 'Open Sans|SemiBold',
   flow: 3,
@@ -86,7 +86,7 @@ function Item({
       isActive={isActive}
     >
       {icon && <Box color={isActive ? iconActiveColor : void 0}>{icon}</Box>}
-      <Box justify="center">
+      <Box justifyContent="center">
         <Text fontSize={4}>{children}</Text>
         {desc && (
           <Box color="steel" fontSize={3}>

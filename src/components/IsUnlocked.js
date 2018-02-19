@@ -127,7 +127,7 @@ class IsUnlocked extends Component<Props, State> {
 
     if (isLocked) {
       return (
-        <Box sticky align="center" justify="center" onClick={this.handleFocusInput}>
+        <Box sticky alignItems="center" justifyContent="center" onClick={this.handleFocusInput}>
           <form onSubmit={this.handleSubmit}>
             <Box>
               <Input

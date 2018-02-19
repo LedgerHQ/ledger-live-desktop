@@ -63,7 +63,7 @@ class RecipientAddress extends PureComponent<Props, State> {
     const { qrReaderOpened } = this.state
 
     return (
-      <Box relative justify="center">
+      <Box relative justifyContent="center">
         <InputAddress value={value} withQrCode={withQrCode} onChange={onChange} />
         {withQrCode && (
           <Fragment>

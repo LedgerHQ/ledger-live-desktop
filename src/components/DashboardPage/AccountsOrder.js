@@ -85,7 +85,7 @@ class AccountsOrder extends Component<Props, State> {
         flow={1}
         color="dark"
         horizontal
-        align="center"
+        alignItems="center"
       >
         <Text color="dark">{t(`orderAccounts.${cachedValue || 'balance'}`)}</Text>
         <IconAngleDown height={7} width={8} />

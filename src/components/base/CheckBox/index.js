@@ -20,8 +20,8 @@ const bounce = keyframes`
 `
 
 const Base = styled(Tabbable).attrs({
-  align: 'center',
-  justify: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
 })`
   cursor: pointer;
   outline: none;

@@ -54,7 +54,7 @@ class CreateAccount extends PureComponent<Props, State> {
               <Label>Account name</Label>
               <Input value={accountName} onChange={this.handleChangeInput} />
             </Box>
-            <Box horizontal justify="flex-end">
+            <Box horizontal justifyContent="flex-end">
               <Button primary type="submit">
                 Create
               </Button>

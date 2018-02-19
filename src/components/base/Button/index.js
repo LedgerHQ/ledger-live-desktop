@@ -2,20 +2,19 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { borderColor, borderWidth, space, fontSize, fontWeight, color } from 'styled-system'
+import { space, fontSize, fontWeight, color } from 'styled-system'
 import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
 import Icon from 'components/base/Icon'
 
 const Base = styled.button`
-  ${borderColor};
-  ${borderWidth};
   ${space};
   ${color};
   ${fontSize};
   ${fontWeight};
   border-radius: 5px;
+  border: ${p => (p.primary ? '' : `1px solid ${p.theme.colors.mouse}`)};
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
   height: 40px;
   box-shadow: ${p => (p.withShadow ? 'rgba(0, 0, 0, 0.2) 0 3px 10px' : '')};
@@ -50,13 +49,10 @@ function getProps({ disabled, icon, primary }: Object) {
       {
         color: 'white',
         bg: 'blue',
-        borderWidth: 0,
         withShadow: true,
       },
       {
         bg: 'transparent',
-        borderColor: 'mouse',
-        borderWidth: 1,
       },
     ),
     ...props(disabled, {
@@ -69,7 +65,7 @@ function getProps({ disabled, icon, primary }: Object) {
 
 const Button = ({ children, onClick, primary, icon, disabled, ...props }: Props) => {
   children = icon ? (
-    <Box align="center" justify="center">
+    <Box alignItems="center" justifyContent="center">
       <Icon name={icon} />
     </Box>
   ) : (

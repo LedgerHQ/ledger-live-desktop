@@ -137,6 +137,8 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
+    this._mounted = true
+
     this.addFakeDatasOnAccounts()
   }
 
@@ -159,6 +161,7 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   componentWillUnmount() {
+    this._mounted = false
     clearTimeout(this._timeout)
   }
 
@@ -176,10 +179,12 @@ class DashboardPage extends PureComponent<Props, State> {
     }, fakeDatas)
 
     window.requestIdleCallback(() => {
-      this.setState({
-        fakeDatas: newFakeDatas,
-        fakeDatasMerge: mergeFakeDatas(newFakeDatas),
-      })
+      if (this._mounted) {
+        this.setState({
+          fakeDatas: newFakeDatas,
+          fakeDatasMerge: mergeFakeDatas(newFakeDatas),
+        })
+      }
 
       this._timeout = setTimeout(() => {
         this.addFakeDatasOnAccounts()
@@ -188,6 +193,7 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   _timeout = undefined
+  _mounted = false
 
   render() {
     const { push, accounts } = this.props
@@ -198,7 +204,7 @@ class DashboardPage extends PureComponent<Props, State> {
 
     return (
       <Box flow={7}>
-        <Box horizontal align="flex-end">
+        <Box horizontal alignItems="flex-end">
           <Box>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
               {'Good morning, Khalil.'}
@@ -239,7 +245,7 @@ class DashboardPage extends PureComponent<Props, State> {
               </Box>
             </Card>
             <Box flow={4}>
-              <Box horizontal align="flex-end">
+              <Box horizontal alignItems="flex-end">
                 <Text color="dark" ff="Museo Sans" fontSize={6}>
                   {'Accounts'}
                 </Text>

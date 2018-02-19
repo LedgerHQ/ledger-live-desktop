@@ -14,10 +14,11 @@ stories.add('basic', () => {
 
   return (
     <Box
-      borderWidth={1}
-      borderColor="night"
       bg={reverseColor ? 'night' : 'white'}
       color={reverseColor ? 'white' : 'night'}
+      style={{
+        border: '1px solid black',
+      }}
     >
       <GrowScroll maxHeight={400}>
         {[...Array(1000).keys()].map(v => <div key={v}>{v}</div>)}

@@ -7,7 +7,7 @@ import Box from 'components/base/Box'
 
 const BreadcrumbWrapper = styled(Box).attrs({
   horizontal: true,
-  align: 'center',
+  alignItems: 'center',
   relative: true,
 })``
 
@@ -15,7 +15,7 @@ const BreadcrumbStep = styled(({ start, active, end, ...props }) => (
   <Box start={start} end={end} active={active} {...props} />
 )).attrs({
   color: p => (p.active ? 'blue' : 'mouse'),
-  align: 'center',
+  alignItems: 'center',
   flow: 5,
   relative: true,
 })`
@@ -55,8 +55,8 @@ const BreadcrumbNumberWrapper = styled(Box).attrs({
 const BreadcrumbNumber = styled(Box).attrs({
   color: p => (p.active ? 'white' : 'mouse'),
   bg: p => (p.active ? 'blue' : 'pearl'),
-  align: 'center',
-  justify: 'center',
+  alignItems: 'center',
+  justifyContent: 'center',
 })`
   border-radius: 50%;
   box-shadow: ${p => `0 0 0 ${p.active ? 4 : 0}px ${p.theme.colors.cream}`};
