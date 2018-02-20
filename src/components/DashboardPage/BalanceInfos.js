@@ -3,6 +3,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import type { MapStateToProps } from 'react-redux'
 
@@ -33,7 +34,7 @@ function BalanceInfos(props: Props) {
       <Box grow>
         <FormattedVal
           val={totalBalance}
-          currency="BTC"
+          unit={getDefaultUnitByCoinType(0)}
           alwaysShowSign={false}
           showCode
           fontSize={8}
@@ -47,7 +48,7 @@ function BalanceInfos(props: Props) {
         <Sub>{'since one week'}</Sub>
       </Box>
       <Box alignItems="flex-end">
-        <FormattedVal currency="USD" alwaysShowSign showCode val={6132.23} fontSize={7} />
+        <FormattedVal fiat="USD" alwaysShowSign showCode val={6132.23} fontSize={7} />
         <Sub>{'since one week'}</Sub>
       </Box>
     </Box>

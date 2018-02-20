@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { formatCurrencyUnit } from '@ledgerhq/currencies'
+import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
 import type { Unit } from '@ledgerhq/currencies'
 
 import Text from 'components/base/Text'
@@ -15,6 +15,7 @@ const T = styled(Text).attrs({
 
 type Props = {
   val: number,
+  fiat?: string | null,
   isPercent?: boolean,
   unit?: Unit | null,
   alwaysShowSign?: boolean,
@@ -22,7 +23,8 @@ type Props = {
 }
 
 function FormattedVal(props: Props) {
-  const { val, isPercent, unit, alwaysShowSign, showCode, ...p } = props
+  const { val, fiat, isPercent, alwaysShowSign, showCode, ...p } = props
+  let { unit } = props
 
   const isNegative = val < 0
 
@@ -31,7 +33,9 @@ function FormattedVal(props: Props) {
   if (isPercent) {
     text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${val} %`
   } else {
-    if (!unit) {
+    if (fiat) {
+      unit = getFiatUnit(fiat)
+    } else if (!unit) {
       return ''
     }
     text = formatCurrencyUnit(unit, val, {
@@ -52,6 +56,7 @@ FormattedVal.defaultProps = {
   isPercent: false,
   alwaysShowSign: false,
   showCode: false,
+  fiat: null,
 }
 
 export default FormattedVal

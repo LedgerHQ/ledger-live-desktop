@@ -78,7 +78,7 @@ const Transaction = ({
   tx: TransactionType,
 }) => {
   const time = moment(tx.received_at)
-  const Icon = getIconByCoinType(tx.account.currency.coinType)
+  const Icon = getIconByCoinType(get(tx, 'account.currency.coinType'))
   return (
     <TransactionRaw>
       <Cell size={DATE_COL_SIZE} justifyContent="space-between">
@@ -123,7 +123,7 @@ const Transaction = ({
       <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
         <FormattedVal
           val={tx.balance}
-          unit={tx.account.unit}
+          unit={get(tx, 'account.unit')}
           showCode
           fontSize={4}
           alwaysShowSign

@@ -1,9 +1,10 @@
 // @flow
 
-import React, { Fragment, createElement } from 'react'
+import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
-
 import { listCurrencies } from '@ledgerhq/currencies'
+import { getIconByCoinType } from '@ledgerhq/currencies/react'
+
 import type { Currency } from '@ledgerhq/currencies'
 
 const stories = storiesOf('currencies', module)
@@ -23,40 +24,43 @@ stories.add('currencies list', () => (
         </tr>
       </thead>
       <tbody>
-        {currencies.map(cur => (
-          <tr key={cur.coinType}>
-            <td>{cur.coinType}</td>
-            <td>{cur.name}</td>
-            <td>
-              {cur.color ? (
-                <Fragment>
-                  <div
-                    style={{
-                      width: 50,
-                      height: 25,
-                      backgroundColor: cur.color,
-                    }}
-                  />
-                  <div>{cur.color}</div>
-                </Fragment>
-              ) : (
-                '-'
-              )}
-            </td>
-            <td>{cur.icon ? createElement(cur.icon, { size: 30 }) : '-'}</td>
-            <td>
-              {cur.units && (
-                <ul style={{ paddingRight: 10 }}>
-                  {cur.units.map(unit => (
-                    <li key={unit.code}>
-                      {unit.code} ({unit.magnitude})
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </td>
-          </tr>
-        ))}
+        {currencies.map(cur => {
+          const Icon = getIconByCoinType(cur.coinType)
+          return (
+            <tr key={cur.coinType}>
+              <td>{cur.coinType}</td>
+              <td>{cur.name}</td>
+              <td>
+                {cur.color ? (
+                  <Fragment>
+                    <div
+                      style={{
+                        width: 50,
+                        height: 25,
+                        backgroundColor: cur.color,
+                      }}
+                    />
+                    <div>{cur.color}</div>
+                  </Fragment>
+                ) : (
+                  '-'
+                )}
+              </td>
+              <td>{Icon ? <Icon size={30} /> : '-'}</td>
+              <td>
+                {cur.units && (
+                  <ul style={{ paddingRight: 10 }}>
+                    {cur.units.map(unit => (
+                      <li key={unit.code}>
+                        {unit.code} ({unit.magnitude})
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </td>
+            </tr>
+          )
+        })}
       </tbody>
     </table>
   </div>
