@@ -5665,6 +5665,7 @@ ledger-test-library@KhalilBellakrid/ledger-test-library:
   resolved "https://codeload.github.com/KhalilBellakrid/ledger-test-library/tar.gz/250c9fc992f498360f6396d4ed3ea1bb7637d863"
   dependencies:
     axios "^0.17.1"
+    bindings "^1.3.0"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 
