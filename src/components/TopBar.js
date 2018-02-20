@@ -12,11 +12,12 @@ import { getAccounts } from 'reducers/accounts'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
-import IconDevices from 'icons/Devices'
 import IconActivity from 'icons/Activity'
 import IconAngleDown from 'icons/AngleDown'
+import IconDevices from 'icons/Devices'
+import IconUser from 'icons/User'
 
-import DropDown from 'components/base/DropDown'
+import DropDown, { DropDownItem as DDItem } from 'components/base/DropDown'
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
 
@@ -56,6 +57,17 @@ const Activity = styled.div`
   position: absolute;
   right: -2px;
   width: 4px;
+`
+
+const DropDownItem = styled(DDItem).attrs({
+  horizontal: true,
+  justifyContent: 'flex-start',
+  alignItems: 'center',
+  flow: 3,
+  ff: 'Open Sans|SemiBold',
+  px: 2,
+})`
+  height: 35px;
 `
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
@@ -149,19 +161,37 @@ class TopBar extends PureComponent<Props, State> {
           </Box>
           <Box horizontal noShrink>
             <DropDown
-              items={
-                hasPassword
-                  ? [{ key: 'lock', label: 'Lock application', onClick: this.handleLock }]
-                  : []
-              }
-              ff="Open Sans|SemiBold"
-              fontSize={4}
-              offsetTop={-2}
+              items={[
+                {
+                  key: 'profile',
+                  label: 'Edit profile',
+                  icon: <IconUser height={16} width={16} />,
+                },
+                ...(hasPassword
+                  ? [
+                      {
+                        key: 'lock',
+                        label: 'Lock application',
+                        icon: <IconUser height={16} width={16} />,
+                        onClick: this.handleLock,
+                      },
+                    ]
+                  : []),
+              ]}
+              renderItem={({ item, isHighlighted }) => (
+                <DropDownItem isHighlighted={isHighlighted}>
+                  <Box color={isHighlighted ? 'dodgerBlue' : ''}>{item.icon}</Box>
+                  <Box>{item.label}</Box>
+                </DropDownItem>
+              )}
               alignItems="center"
-              justifyContent="center"
-              flow={1}
               color="warmGrey"
+              ff="Open Sans|SemiBold"
+              flow={1}
+              fontSize={4}
               horizontal
+              justifyContent="center"
+              offsetTop={-2}
             >
               <Box>{'Khalil Benihoud'}</Box>
               <IconAngleDown height={7} width={8} />

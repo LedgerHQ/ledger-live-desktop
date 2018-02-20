@@ -6,22 +6,22 @@ import Text from 'components/base/Text'
 import Box from 'components/base/Box'
 
 type Props = {
-  boldWeight?: string | number,
-  normalWeight?: string | number,
+  ff?: string | number,
+  ffBold?: string | number,
   isBold: boolean,
   children: any,
 }
 
 function BoldToggle(props: Props) {
-  const { boldWeight, normalWeight, isBold, children, ...p } = props
+  const { ff, ffBold, isBold, children, ...p } = props
   return (
     <Box relative>
-      <Text fontWeight={boldWeight} style={{ opacity: isBold ? 1 : 0 }} {...p}>
+      <Text ff={ffBold} style={{ opacity: isBold ? 1 : 0 }} {...p}>
         {children}
       </Text>
       {!isBold && (
         <Box sticky alignItems="center" justifyContent="center">
-          <Text fontWeight={normalWeight} {...p}>
+          <Text ff={ff} {...p}>
             {children}
           </Text>
         </Box>
@@ -31,8 +31,8 @@ function BoldToggle(props: Props) {
 }
 
 BoldToggle.defaultProps = {
-  boldWeight: 600,
-  normalWeight: 400,
+  ff: 'Open Sans',
+  ffBold: 'Open Sans|SemiBold',
 }
 
 export default BoldToggle
