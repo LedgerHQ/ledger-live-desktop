@@ -3,6 +3,7 @@
 import React from 'react'
 import map from 'lodash/map'
 import { storiesOf } from '@storybook/react'
+import { text } from '@storybook/addon-knobs'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -17,7 +18,7 @@ const Title = ({ children }: { children: string }) => (
   </Text>
 )
 
-const FontStyles = () => (
+const FontStyles = ({ txt }: { txt: string }) => (
   <Box flow={4}>
     <Title>{'Font styles'}</Title>
     {map(fontFamilies, (weights, fontName) => (
@@ -30,7 +31,7 @@ const FontStyles = () => (
               </Text>
             </Box>
             <Text key={weight} ff={`${fontName}|${weight}`}>
-              {'The quick brown fox jumps over the lazy dog'}
+              {txt}
             </Text>
           </Box>
         ))}
@@ -57,7 +58,7 @@ const FontSizes = () => (
 
 stories.add('all fonts styles', () => (
   <Box flow={4}>
-    <FontStyles />
+    <FontStyles txt={text('text', 'The quick brown fox jumps over the lazy dog')} />
     <FontSizes />
   </Box>
 ))
