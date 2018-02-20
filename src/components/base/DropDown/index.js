@@ -92,6 +92,12 @@ class DropDown extends PureComponent<Props> {
       case Downshift.stateChangeTypes.clickButton:
         return changes
 
+      case Downshift.stateChangeTypes.keyDownEnter:
+        return {
+          ...changes,
+          highlightedIndex: state.highlightedIndex,
+        }
+
       default:
         return {
           ...changes,
@@ -115,9 +121,9 @@ class DropDown extends PureComponent<Props> {
     return (
       <Drop mt={offsetTop}>
         {items.map((item, i) => {
-          const { key } = item
+          const { key, ...props } = item
           return (
-            <Box key={key} {...getItemProps({ item })}>
+            <Box key={key} {...getItemProps({ item })} {...props}>
               {renderItem({
                 item,
                 isHighlighted: highlightedIndex === i,

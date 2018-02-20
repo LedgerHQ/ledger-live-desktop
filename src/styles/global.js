@@ -8,7 +8,8 @@ import '@fortawesome/fontawesome-free-solid'
 import '@fortawesome/fontawesome-free-regular'
 import '@fortawesome/fontawesome-free-brands'
 
-import { fontFace } from 'styles/helpers'
+import { fontFace, rgba } from 'styles/helpers'
+import { radii, colors } from 'styles/theme'
 
 const fonts = {
   'Open Sans': [
@@ -106,5 +107,17 @@ injectGlobal`
 
   .recharts-wrapper {
     cursor: inherit !important;
+  }
+
+  .tippy-tooltip {
+    background-color: ${rgba(colors.dark, 0.8)};
+    border-radius: ${radii[1]}px;
+    padding: 0;
+  }
+  .tippy-tooltip .tippy-content {
+    background: transparent;
+  }
+  .tippy-popper .tippy-roundarrow {
+    fill: ${rgba(colors.dark, 0.8)};
   }
 `

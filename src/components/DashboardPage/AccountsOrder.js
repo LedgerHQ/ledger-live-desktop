@@ -1,9 +1,11 @@
 // @flow
 
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
+import debounce from 'lodash/debounce'
 
 import type { MapStateToProps } from 'react-redux'
 import type { T } from 'types/common'
@@ -13,6 +15,7 @@ import { getOrderAccounts } from 'reducers/settings'
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
+import BoldToggle from 'components/base/BoldToggle'
 import Box from 'components/base/Box'
 import DropDown, { DropDownItem } from 'components/base/DropDown'
 import Text from 'components/base/Text'
@@ -20,6 +23,14 @@ import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
 import IconArrowDown from 'icons/ArrowDown'
 import IconArrowUp from 'icons/ArrowUp'
+
+const OrderIcon = styled(Box).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'dodgerBlue',
+})`
+  opacity: ${p => (p.isActive ? 1 : 0)};
+`
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   orderAccounts: getOrderAccounts(state),
@@ -50,15 +61,21 @@ class AccountsOrder extends Component<Props, State> {
     this.setState({ cachedValue: this.props.orderAccounts })
   }
 
-  setAccountOrder = order => {
-    const { updateOrderAccounts, saveSettings } = this.props
-    this.setState({ cachedValue: order }, () => {
-      window.requestIdleCallback(() => {
-        updateOrderAccounts(order)
-        saveSettings({ orderAccounts: order })
+  setAccountOrder = debounce(
+    order => {
+      const { updateOrderAccounts, saveSettings } = this.props
+      this.setState({ cachedValue: order }, () => {
+        window.requestIdleCallback(() => {
+          updateOrderAccounts(order)
+          saveSettings({ orderAccounts: order })
+        })
       })
-    })
-  }
+    },
+    250,
+    {
+      leading: true,
+    },
+  )
 
   getCurrentOrder = () => {
     const { cachedValue } = this.state
@@ -122,16 +139,16 @@ class AccountsOrder extends Component<Props, State> {
         isActive={isActive}
         flow={2}
       >
-        <Box grow>{item.label}</Box>
-        {isActive && (
-          <Box alignItems="center" justifyContent="center" color="dodgerBlue">
-            {order === 'desc' ? (
-              <IconArrowUp height={14} width={14} />
-            ) : (
-              <IconArrowDown height={14} width={14} />
-            )}
-          </Box>
-        )}
+        <Box grow alignItems="flex-start">
+          <BoldToggle isBold={isActive}>{item.label}</BoldToggle>
+        </Box>
+        <OrderIcon isActive={isActive}>
+          {order === 'desc' ? (
+            <IconArrowUp height={14} width={14} />
+          ) : (
+            <IconArrowDown height={14} width={14} />
+          )}
+        </OrderIcon>
       </DropDownItem>
     )
   }
@@ -145,6 +162,7 @@ class AccountsOrder extends Component<Props, State> {
     return (
       <DropDown
         flow={1}
+        offsetTop={2}
         horizontal
         items={sortItems}
         renderItem={this.renderItem}

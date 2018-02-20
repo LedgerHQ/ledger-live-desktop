@@ -10,7 +10,7 @@ export type SettingsState = Object
 
 const state: SettingsState = {
   language: 'en',
-  orderAccounts: 'balance',
+  orderAccounts: 'balance|desc',
   password: {
     state: false,
   },

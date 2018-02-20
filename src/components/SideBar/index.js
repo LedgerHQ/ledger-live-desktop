@@ -22,8 +22,10 @@ import IconPlus from 'icons/Plus'
 import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
 
 import Box, { Tabbable } from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
 import FormattedVal from 'components/base/FormattedVal'
+import GrowScroll from 'components/base/GrowScroll'
+import Tooltip from 'components/base/Tooltip'
+
 import Item from './Item'
 
 const CapsSubtitle = styled(Box).attrs({
@@ -47,13 +49,6 @@ const PlusBtn = styled(Tabbable).attrs({
 })`
   cursor: pointer;
   outline: none;
-  &:hover,
-  &:focus {
-    background: ${p => p.theme.colors.cream};
-  }
-  &:active {
-    background: ${p => p.theme.colors.argile};
-  }
 `
 
 type Props = {
@@ -97,9 +92,11 @@ class SideBar extends PureComponent<Props> {
           <Box flow={4} grow pt={1}>
             <CapsSubtitle horizontal alignItems="center">
               <Box grow>{t('sidebar.accounts')}</Box>
-              <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
-                <IconPlus height={14} width={14} />
-              </PlusBtn>
+              <Tooltip render={() => t('addAccount.title')} offset={[0, 1]}>
+                <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
+                  <IconPlus height={14} width={14} />
+                </PlusBtn>
+              </Tooltip>
             </CapsSubtitle>
             <GrowScroll pb={4} px={4} flow={2}>
               {accounts.map(account => (
