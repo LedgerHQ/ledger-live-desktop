@@ -9,15 +9,17 @@ import type { Account } from 'types/common'
 import { startSyncAccounts } from 'renderer/events'
 
 function sortAccounts(accounts, orderAccounts) {
+  const [order, sort] = orderAccounts.split('|')
+
   const accountsSorted = sortBy(accounts, a => {
-    if (orderAccounts === 'balance') {
+    if (order === 'balance') {
       return a.data.balance
     }
 
-    return a[orderAccounts]
+    return a[order]
   })
 
-  if (orderAccounts === 'balance') {
+  if (sort === 'asc') {
     accountsSorted.reverse()
   }
 

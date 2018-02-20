@@ -250,9 +250,6 @@ class DashboardPage extends PureComponent<Props, State> {
                   {'Accounts'}
                 </Text>
                 <Box ml="auto" horizontal flow={1}>
-                  <Text ff="Open Sans|SemiBold" fontSize={4}>
-                    {'Sort by'}
-                  </Text>
                   <AccountsOrder />
                 </Box>
               </Box>

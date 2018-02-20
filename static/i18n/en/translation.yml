@@ -9,9 +9,9 @@ language:
   fr: French
 
 orderAccounts:
-  name: Name
+  name: Alphabetic
   balance: Balance
-  type: Type
+  type: Cryptocurrency
 
 sidebar:
   menu: Menu
