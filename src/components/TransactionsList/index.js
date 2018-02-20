@@ -6,6 +6,7 @@ import moment from 'moment'
 import get from 'lodash/get'
 import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
+import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Transaction as TransactionType } from 'types/common'
 
@@ -13,8 +14,6 @@ import Box from 'components/base/Box'
 import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
-
-import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
 
 const DATE_COL_SIZE = 80
 const ACCOUNT_COL_SIZE = 150
@@ -79,6 +78,7 @@ const Transaction = ({
   tx: TransactionType,
 }) => {
   const time = moment(tx.received_at)
+  const Icon = getIconByCoinType(tx.account.currency.coinType)
   return (
     <TransactionRaw>
       <Cell size={DATE_COL_SIZE} justifyContent="space-between">
@@ -96,7 +96,7 @@ const Transaction = ({
           onClick={() => onAccountClick && onAccountClick(tx.account)}
         >
           <Box alignItems="center" justifyContent="center" style={{ color: '#fcb653' }}>
-            <IconCurrencyBitcoin height={16} width={16} />
+            {Icon && <Icon size={16} />}
           </Box>
           <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
             {tx.account.name}
