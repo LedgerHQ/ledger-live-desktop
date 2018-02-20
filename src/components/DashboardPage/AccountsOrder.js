@@ -6,7 +6,6 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import type { MapStateToProps } from 'react-redux'
-
 import type { T } from 'types/common'
 
 import { getOrderAccounts } from 'reducers/settings'
@@ -14,9 +13,13 @@ import { getOrderAccounts } from 'reducers/settings'
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
-import DropDown from 'components/base/DropDown'
+import Box from 'components/base/Box'
+import DropDown, { DropDownItem } from 'components/base/DropDown'
 import Text from 'components/base/Text'
+
 import IconAngleDown from 'icons/AngleDown'
+import IconArrowDown from 'icons/ArrowDown'
+import IconArrowUp from 'icons/ArrowUp'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   orderAccounts: getOrderAccounts(state),
@@ -57,11 +60,38 @@ class AccountsOrder extends Component<Props, State> {
     })
   }
 
-  render() {
-    const { t } = this.props
+  getCurrentOrder = () => {
     const { cachedValue } = this.state
 
-    const sortItems = [
+    if (cachedValue !== null) {
+      return cachedValue.split('|')[1]
+    }
+
+    return 'desc'
+  }
+
+  getCurrentValue = () => {
+    const { cachedValue } = this.state
+
+    if (cachedValue !== null) {
+      return cachedValue.split('|')[0]
+    }
+
+    return null
+  }
+
+  getReverseOrder = () => {
+    const currentOrder = this.getCurrentOrder()
+
+    return currentOrder === 'desc' ? 'asc' : 'desc'
+  }
+
+  getSortItems = () => {
+    const { t } = this.props
+
+    const currentOrder = this.getCurrentOrder()
+
+    return [
       {
         key: 'name',
         label: t('orderAccounts.name'),
@@ -74,21 +104,80 @@ class AccountsOrder extends Component<Props, State> {
         key: 'type',
         label: t('orderAccounts.type'),
       },
-    ]
+    ].map(item => ({
+      ...item,
+      key: `${item.key}|${currentOrder}`,
+    }))
+  }
+
+  renderItem = ({ item, isHighlighted, isActive }) => {
+    const [, order] = item.key.split('|')
+
+    return (
+      <DropDownItem
+        alignItems="center"
+        justifyContent="flex-start"
+        horizontal
+        isHighlighted={isHighlighted}
+        isActive={isActive}
+        flow={2}
+      >
+        <Box grow>{item.label}</Box>
+        {isActive && (
+          <Box alignItems="center" justifyContent="center" color="dodgerBlue">
+            {order === 'desc' ? (
+              <IconArrowUp height={14} width={14} />
+            ) : (
+              <IconArrowDown height={14} width={14} />
+            )}
+          </Box>
+        )}
+      </DropDownItem>
+    )
+  }
+
+  render() {
+    const { t } = this.props
+    const { cachedValue } = this.state
+
+    const sortItems = this.getSortItems()
 
     return (
       <DropDown
-        onChange={item => this.setAccountOrder(item.key)}
-        items={sortItems}
-        ff="Open Sans|SemiBold"
-        fontSize={4}
         flow={1}
-        color="dark"
         horizontal
-        alignItems="center"
+        items={sortItems}
+        renderItem={this.renderItem}
+        keepOpenOnChange
+        onStateChange={({ selectedItem: item }) => {
+          if (!item) {
+            return
+          }
+
+          const currentAccountOrder = this.getCurrentValue()
+          const [accountOrder] = item.key.split('|')
+
+          const order =
+            currentAccountOrder === accountOrder ? this.getReverseOrder() : this.getCurrentOrder()
+
+          this.setAccountOrder(`${accountOrder}|${order}`)
+        }}
+        value={sortItems.find(item => item.key === cachedValue)}
       >
-        <Text color="dark">{t(`orderAccounts.${cachedValue || 'balance'}`)}</Text>
-        <IconAngleDown height={7} width={8} />
+        <Text ff="Open Sans|SemiBold" fontSize={4}>
+          {'Sort by'}
+        </Text>
+        <Box
+          alignItems="center"
+          color="dark"
+          ff="Open Sans|SemiBold"
+          flow={1}
+          fontSize={4}
+          horizontal
+        >
+          <Text color="dark">{t(`orderAccounts.${this.getCurrentValue() || 'balance'}`)}</Text>
+          <IconAngleDown height={7} width={8} />
+        </Box>
       </DropDown>
     )
   }
