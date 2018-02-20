@@ -7,8 +7,8 @@ import getAllAccounts, { verifyAddress } from './accounts'
 async function getAllAccountsByCoinType({ pathDevice, coinType, currentAccounts, onProgress }) {
   const transport = await CommNodeHid.open(pathDevice)
 
-  // 0: BTC
-  if (coinType === 0) {
+  // 1: BTC Testnet
+  if (coinType === 1) {
     return getAllAccounts({ transport, currentAccounts, onProgress })
   }
 
