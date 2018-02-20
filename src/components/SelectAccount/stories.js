@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import Chance from 'chance'
+import { getCurrencyByCoinType, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import { SelectAccount } from 'components/SelectAccount'
 
@@ -12,7 +13,9 @@ const stories = storiesOf('SelectAccount', module)
 const accounts = [...Array(20)].map(() => ({
   id: chance.string(),
   name: chance.name(),
-  type: 'BTC',
+  coinType: 0,
+  currency: getCurrencyByCoinType(0),
+  unit: getDefaultUnitByCoinType(0),
   data: {
     address: chance.string(),
     balance: chance.floating({ min: 0, max: 20 }),

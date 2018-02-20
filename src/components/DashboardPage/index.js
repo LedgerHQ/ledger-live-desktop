@@ -96,11 +96,7 @@ const getAllTransactions = accounts => {
       ...result,
       ...transactions.map(t => ({
         ...t,
-        account: {
-          id: account.id,
-          name: account.name,
-          type: account.type,
-        },
+        account,
       })),
     ]
 

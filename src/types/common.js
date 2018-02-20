@@ -1,5 +1,7 @@
 // @flow
 
+import type { Unit, Currency } from '@ledgerhq/currencies'
+
 export type Device = {
   vendorId: string,
   productId: string,
@@ -32,7 +34,9 @@ export type Account = {
   data?: AccountData,
   id: string,
   name: string,
-  type: string,
+  coinType: number,
+  currency: Currency,
+  unit: Unit,
 }
 
 export type Accounts = Array<Account>

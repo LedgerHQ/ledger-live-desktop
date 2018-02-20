@@ -5,6 +5,7 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'constants'
 
@@ -19,7 +20,6 @@ import IconArrowDown from 'icons/ArrowDown'
 import IconArrowUp from 'icons/ArrowUp'
 import IconSettings from 'icons/Settings'
 import IconPlus from 'icons/Plus'
-import IconCurrencyBitcoin from 'icons/currencies/Bitcoin'
 
 import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -99,26 +99,29 @@ class SideBar extends PureComponent<Props> {
               </Tooltip>
             </CapsSubtitle>
             <GrowScroll pb={4} px={4} flow={2}>
-              {accounts.map(account => (
-                <Item
-                  big
-                  desc={
-                    <FormattedVal
-                      alwaysShowSign={false}
-                      color="warmGrey"
-                      currency={account.type}
-                      showCode
-                      val={account.data ? account.data.balance : 0}
-                    />
-                  }
-                  iconActiveColor="#fcb653"
-                  icon={<IconCurrencyBitcoin height={16} width={16} />}
-                  key={account.id}
-                  linkTo={`/account/${account.id}`}
-                >
-                  {account.name}
-                </Item>
-              ))}
+              {accounts.map(account => {
+                const Icon = getIconByCoinType(account.currency.coinType)
+                return (
+                  <Item
+                    big
+                    desc={
+                      <FormattedVal
+                        alwaysShowSign={false}
+                        color="warmGrey"
+                        unit={account.unit}
+                        showCode
+                        val={account.data ? account.data.balance : 0}
+                      />
+                    }
+                    iconActiveColor={account.currency.color}
+                    icon={Icon ? <Icon size={16} /> : null}
+                    key={account.id}
+                    linkTo={`/account/${account.id}`}
+                  >
+                    {account.name}
+                  </Item>
+                )
+              })}
             </GrowScroll>
           </Box>
         </Box>

@@ -3,7 +3,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { formatCurrencyUnit } from '@ledgerhq/currencies'
+import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import type { Unit } from '@ledgerhq/currencies'
 
 import Text from 'components/base/Text'
 
@@ -12,31 +13,18 @@ const T = styled(Text).attrs({
   color: p => (p.isNegative ? p.theme.colors.grenade : p.theme.colors.green),
 })``
 
-const currencies = {
-  BTC: {
-    name: 'bitcoin',
-    code: 'BTC',
-    symbol: 'b',
-    magnitude: 8,
-  },
-  USD: {
-    name: 'dollar',
-    code: 'USD',
-    symbol: '$',
-    magnitude: 0,
-  },
-}
-
 type Props = {
   val: number,
+  fiat?: string | null,
   isPercent?: boolean,
-  currency?: any,
+  unit?: Unit | null,
   alwaysShowSign?: boolean,
   showCode?: boolean,
 }
 
 function FormattedVal(props: Props) {
-  const { val, isPercent, currency, alwaysShowSign, showCode, ...p } = props
+  const { val, fiat, isPercent, alwaysShowSign, showCode, ...p } = props
+  let { unit } = props
 
   const isNegative = val < 0
 
@@ -45,11 +33,12 @@ function FormattedVal(props: Props) {
   if (isPercent) {
     text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${val} %`
   } else {
-    const curr = currency ? currencies[currency.toUpperCase()] : null
-    if (!curr) {
-      return `[invalid currency ${currency || '(null)'}]`
+    if (fiat) {
+      unit = getFiatUnit(fiat)
+    } else if (!unit) {
+      return ''
     }
-    text = formatCurrencyUnit(curr, val, {
+    text = formatCurrencyUnit(unit, val, {
       alwaysShowSign,
       showCode,
     })
@@ -63,10 +52,11 @@ function FormattedVal(props: Props) {
 }
 
 FormattedVal.defaultProps = {
-  currency: null,
+  unit: null,
   isPercent: false,
   alwaysShowSign: false,
   showCode: false,
+  fiat: null,
 }
 
 export default FormattedVal
