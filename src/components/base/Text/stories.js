@@ -10,7 +10,7 @@ import Text from 'components/base/Text'
 
 import { fontFamilies, fontSizes } from 'styles/theme'
 
-const stories = storiesOf('Text', module)
+const stories = storiesOf('Common/Text', module)
 
 const Title = ({ children }: { children: string }) => (
   <Text style={{ fontFamily: 'monospace' }} fontSize={5}>

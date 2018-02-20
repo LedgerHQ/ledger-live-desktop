@@ -7,7 +7,7 @@ import { text, boolean } from '@storybook/addon-knobs'
 
 import Search from 'components/base/Search'
 
-const stories = storiesOf('Search', module)
+const stories = storiesOf('Components/Search', module)
 
 const items = [
   { key: 'aleksandr-grichtchouk', name: 'Aleksandr Grichtchouk' },

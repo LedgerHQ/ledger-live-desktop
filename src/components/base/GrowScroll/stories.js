@@ -7,7 +7,7 @@ import { boolean } from '@storybook/addon-knobs'
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 
-const stories = storiesOf('GrowScroll', module)
+const stories = storiesOf('Components/GrowScroll', module)
 
 stories.add('basic', () => {
   const reverseColor = boolean('reverseColor', false)

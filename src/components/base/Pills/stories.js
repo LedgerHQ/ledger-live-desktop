@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react'
 
 import Pills from 'components/base/Pills'
 
-const stories = storiesOf('Pills', module)
+const stories = storiesOf('Components/Pills', module)
 
 type State = {
   key: string,

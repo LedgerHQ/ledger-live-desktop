@@ -6,7 +6,7 @@ import { number } from '@storybook/addon-knobs'
 
 import Breadcrumb from 'components/Breadcrumb'
 
-const stories = storiesOf('Breadcrumb', module)
+const stories = storiesOf('Components/Breadcrumb', module)
 
 stories.add('basic', () => (
   <Breadcrumb

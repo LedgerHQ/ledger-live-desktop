@@ -5,6 +5,6 @@ import { storiesOf } from '@storybook/react'
 
 import Input from 'components/base/Input'
 
-const stories = storiesOf('Input', module)
+const stories = storiesOf('Components/Input', module)
 
 stories.add('basic', () => <Input placeholder="Foo bar" />)

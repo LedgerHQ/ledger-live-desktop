@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 import Box from 'components/base/Box'
 
-const stories = storiesOf('Box', module)
+const stories = storiesOf('Components/Box', module)
 
 const align = [
   undefined,
