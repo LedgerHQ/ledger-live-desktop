@@ -8,7 +8,7 @@ import { storiesOf } from '@storybook/react'
 
 import Tabs from 'components/base/Tabs'
 
-const stories = storiesOf('Tabs', module)
+const stories = storiesOf('Components/Tabs', module)
 
 stories.add('basic', () => (
   <Tabs

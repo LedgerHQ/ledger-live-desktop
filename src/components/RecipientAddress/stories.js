@@ -6,7 +6,7 @@ import { boolean } from '@storybook/addon-knobs'
 
 import RecipientAddress from 'components/RecipientAddress'
 
-const stories = storiesOf('RecipientAddress', module)
+const stories = storiesOf('Components/RecipientAddress', module)
 
 type State = {
   value: any,

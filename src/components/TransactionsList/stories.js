@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react'
 
 import TransactionsList from 'components/TransactionsList'
 
-const stories = storiesOf('TransactionsList', module)
+const stories = storiesOf('Components/TransactionsList', module)
 
 const transactions = [
   {

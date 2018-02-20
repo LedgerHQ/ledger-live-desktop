@@ -8,7 +8,7 @@ import { getCurrencyByCoinType, getDefaultUnitByCoinType } from '@ledgerhq/curre
 import { SelectAccount } from 'components/SelectAccount'
 
 const chance = new Chance()
-const stories = storiesOf('SelectAccount', module)
+const stories = storiesOf('Components/SelectAccount', module)
 
 const accounts = [...Array(20)].map(() => ({
   id: chance.string(),

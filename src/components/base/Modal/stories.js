@@ -6,7 +6,7 @@ import { boolean } from '@storybook/addon-knobs'
 
 import { Modal, ModalBody } from 'components/base/Modal'
 
-const stories = storiesOf('Modal', module)
+const stories = storiesOf('Components/Modal', module)
 
 stories.add('basic', () => {
   const isOpened = boolean('isOpened', true)

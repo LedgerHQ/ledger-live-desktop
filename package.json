@@ -18,7 +18,7 @@
     "publish-storybook": "bash ./scripts/publish-storybook.sh",
     "release": "build",
     "start": "bash ./scripts/start.sh",
-    "storybook": "start-storybook -s ./static -p 4444"
+    "storybook": "STORYBOOK_ENV=1 start-storybook -s ./static -p 4444"
   },
   "lint-staged": {
     "*.js": [

@@ -6,7 +6,7 @@ import { text, number } from '@storybook/addon-knobs'
 
 import Icon from 'components/base/Icon'
 
-const stories = storiesOf('Icon', module)
+const stories = storiesOf('Components/Icon', module)
 
 const Wrapper = ({ children }: { children: any }) => (
   <div>

@@ -7,7 +7,7 @@ import { boolean } from '@storybook/addon-knobs'
 
 import Radio from 'components/base/Radio'
 
-const stories = storiesOf('Radio', module)
+const stories = storiesOf('Components/Radio', module)
 
 stories.add('basic', () => (
   <Radio isChecked={boolean('checked', false)} onChange={action('onChange')} />
