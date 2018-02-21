@@ -1,0 +1,23 @@
+version: 2
+
+docker_defaults: &docker_defaults
+  docker:
+    - image: circleci/node:9.5
+
+jobs:
+  build:
+    <<: *docker_defaults
+    steps:
+      - checkout
+      - run:
+          name: Dependencies
+          command: yarn
+      - run:
+          name: Lint
+          command: yarn lint
+      - run:
+          name: Flow
+          command: yarn flow
+      - run:
+          name: Compile
+          command: yarn compile
