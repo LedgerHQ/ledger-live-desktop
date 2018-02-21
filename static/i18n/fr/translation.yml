@@ -1,44 +1,33 @@
 common:
-  ok: Okay
+  ok: Ok
   cancel: Annuler
   chooseWalletPlaceholder: Choisir un portefeuille...
   currency: Monnaie
-
 language:
   en: Anglais
   fr: Français
-
 orderAccounts:
-  name: Alphabetic
+  name: Alphabétique
   balance: Balance
   type: Cryptocurrency
-
 sidebar:
   menu: Menu
   accounts: Comptes
-
 device:
   connected: Connecté
   notConnected: Non connecté
-
 dashboard:
   title: Tableau de bord
-
 send:
   title: Envoyer
-
 receive:
   title: Recevoir
-
 addAccount:
   title: Ajouter un compte
-
   import:
-    placeholder: Compte {{index}}
-
+    placeholder: 'Compte {{index}}'
 settings:
   title: Réglages
-
   tabs:
     display: Affichage
     money: Monnaie
@@ -47,26 +36,20 @@ settings:
     tools: Outils
     blockchain: Blockchain
     profile: Profil
-
   display:
     language: Langage
     orderAccounts: Ordre des comptes
-
 SelectAccount:
   placeholder: Sélectionner un compte
-
 AccountPage:
   balance: Balance
   receive: Recevoir
   lastOperations: Dernières opérations
-
 update:
   newVersionReady: Une nouvelle version est prête à être installée
   relaunch: Redémarrer l'application maintenant
-
 IsUnlocked:
   password: Mot de passe
-
 sendModal:
   Amount: Montant
   Summary: Résumé

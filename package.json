@@ -18,7 +18,8 @@
     "publish-storybook": "bash ./scripts/publish-storybook.sh",
     "release": "build",
     "start": "bash ./scripts/start.sh",
-    "storybook": "STORYBOOK_ENV=1 start-storybook -s ./static -p 4444"
+    "storybook": "STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
+    "trans": "node scripts/trans"
   },
   "lint-staged": {
     "*.js": [
@@ -112,6 +113,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "chalk": "^2.3.1",
     "chance": "^1.0.13",
     "concurrently": "^3.5.1",
     "dotenv": "^5.0.0",
@@ -131,6 +133,7 @@
     "flow-typed": "^2.3.0",
     "hard-source-webpack-plugin": "^0.5.18",
     "husky": "^0.14.3",
+    "js-yaml": "^3.10.0",
     "lint-staged": "^6.1.1",
     "node-loader": "^0.6.0",
     "prettier": "^1.10.2",

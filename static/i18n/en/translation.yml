@@ -3,42 +3,31 @@ common:
   cancel: Cancel
   chooseWalletPlaceholder: Choose a wallet...
   currency: Currency
-
 language:
   en: English
   fr: French
-
 orderAccounts:
   name: Alphabetic
   balance: Balance
   type: Cryptocurrency
-
 sidebar:
   menu: Menu
   accounts: Accounts
-
 device:
   connected: Connected
   notConnected: Not connected
-
 dashboard:
   title: Dashboard
-
 send:
   title: Send
-
 receive:
   title: Receive
-
 addAccount:
   title: Add account
-
   import:
-    placeholder: Account {{index}}
-
+    placeholder: 'Account {{index}}'
 settings:
   title: Settings
-
   tabs:
     display: Display
     money: Money
@@ -47,26 +36,20 @@ settings:
     tools: Tools
     blockchain: Blockchain
     profile: Profile
-
   display:
     language: Language
     orderAccounts: Order accounts
-
 SelectAccount:
-  placeholder: Select a account
-
+  placeholder: Select an account
 AccountPage:
   balance: Balance
   receive: Receive
   lastOperations: Last operations
-
 update:
   newVersionReady: A new version is ready to be installed.
   relaunch: Re-launch app now
-
 IsUnlocked:
   password: Password
-
 sendModal:
   Amount: Amount
   Summary: Summary
