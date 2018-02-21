@@ -12,17 +12,16 @@ const stories = storiesOf('Components/SelectAccount', module)
 
 const accounts = [...Array(20)].map(() => ({
   id: chance.string(),
-  name: chance.name(),
+  address: chance.string(),
+  addresses: [],
+  balance: chance.floating({ min: 0, max: 20 }),
   coinType: 0,
   currency: getCurrencyByCoinType(0),
+  index: chance.integer({ min: 0, max: 20 }),
+  name: chance.name(),
+  path: '',
+  transactions: [],
   unit: getDefaultUnitByCoinType(0),
-  data: {
-    address: chance.string(),
-    balance: chance.floating({ min: 0, max: 20 }),
-    currentIndex: chance.integer({ min: 0, max: 20 }),
-    path: '',
-    transactions: [],
-  },
 }))
 
 type State = {

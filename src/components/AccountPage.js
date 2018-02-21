@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -9,11 +9,11 @@ import { Redirect } from 'react-router'
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'constants'
 
 import type { MapStateToProps } from 'react-redux'
-import type { T, Account, AccountData } from 'types/common'
+import type { T, Account } from 'types/common'
 
 import { formatBTC } from 'helpers/format'
 
-import { getAccountById, getAccountData } from 'reducers/accounts'
+import { getAccountById } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
 import Box, { Card } from 'components/base/Box'
@@ -26,29 +26,20 @@ import TransactionsList from 'components/TransactionsList'
 type Props = {
   t: T,
   account: Account,
-  accountData: AccountData,
   openModal: Function,
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
-  accountData: getAccountData(state, props.match.params.id),
 })
 
 const mapDispatchToProps = {
   openModal,
 }
 
-function enrichTransactionsWithAccount(transactions, account) {
-  return transactions.map(t => ({
-    ...t,
-    account,
-  }))
-}
-
 class AccountPage extends PureComponent<Props> {
   render() {
-    const { account, accountData, openModal, t } = this.props
+    const { account, openModal, t } = this.props
 
     // Don't even throw if we jumped in wrong account route
     if (!account) {
@@ -86,33 +77,27 @@ class AccountPage extends PureComponent<Props> {
             />
           </Box>
         </Box>
-        {accountData && (
-          <Fragment>
-            <Box horizontal flow={3}>
-              <Box grow>
-                <Card
-                  title={t('AccountPage.balance')}
-                  style={{ height: 435 }}
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Text fontSize={5}>{formatBTC(accountData.balance)}</Text>
-                </Card>
-              </Box>
-
-              <Box style={{ width: 300 }}>
-                <Card title={t('AccountPage.receive')} flow={3}>
-                  <ReceiveBox path={accountData.path} address={accountData.address} />
-                </Card>
-              </Box>
-            </Box>
-            <Card p={0} px={4} title={t('AccountPage.lastOperations')}>
-              <TransactionsList
-                transactions={enrichTransactionsWithAccount(accountData.transactions, account)}
-              />
+        <Box horizontal flow={3}>
+          <Box grow>
+            <Card
+              title={t('AccountPage.balance')}
+              style={{ height: 435 }}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text fontSize={5}>{formatBTC(account.balance)}</Text>
             </Card>
-          </Fragment>
-        )}
+          </Box>
+
+          <Box style={{ width: 300 }}>
+            <Card title={t('AccountPage.receive')} flow={3}>
+              <ReceiveBox path={account.path} address={account.address} />
+            </Card>
+          </Box>
+        </Box>
+        <Card p={0} px={4} title={t('AccountPage.lastOperations')}>
+          <TransactionsList transactions={account.transactions} />
+        </Card>
       </Box>
     )
   }

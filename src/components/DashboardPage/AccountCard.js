@@ -37,15 +37,13 @@ const AccountCard = ({
       </Box>
       <Bar size={1} color="argile" />
       <Box grow justifyContent="center" color="dark">
-        {account.data && (
-          <FormattedVal
-            alwaysShowSign={false}
-            color="dark"
-            unit={account.unit}
-            showCode
-            val={account.data.balance}
-          />
-        )}
+        <FormattedVal
+          alwaysShowSign={false}
+          color="dark"
+          unit={account.unit}
+          showCode
+          val={account.balance}
+        />
       </Box>
       <AreaChart
         tiny

@@ -13,7 +13,7 @@ import { CHECK_UPDATE_TIMEOUT, SYNC_ACCOUNT_TIMEOUT } from 'constants'
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 import { updateAccount } from 'actions/accounts'
 import { setUpdateStatus } from 'reducers/update'
-import { getAccountData, getAccounts, getAccountById } from 'reducers/accounts'
+import { getAccounts, getAccountById } from 'reducers/accounts'
 import { isLocked } from 'reducers/application'
 
 import i18n from 'renderer/i18n'
@@ -53,12 +53,12 @@ export function startSyncAccounts(accounts: Accounts) {
   syncAccounts = true
   sendEvent('accounts', 'sync.all', {
     accounts: accounts.map(account => {
-      const currentIndex = get(account, 'data.currentIndex', 0)
-      const allAddresses = get(account, 'data.allAddresses', [])
+      const index = get(account, 'index', 0)
+      const addresses = get(account, 'addresses', [])
       return {
         id: account.id,
-        allAddresses,
-        currentIndex,
+        allAddresses: addresses,
+        currentIndex: index,
       }
     }),
   })
@@ -87,8 +87,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
           if (syncAccounts) {
             const state = store.getState()
             const currentAccount = getAccountById(state, account.id) || {}
-            const currentAccountData = getAccountData(state, account.id) || {}
-            const currentAccountTransactions = get(currentAccountData, 'transactions', [])
+            const currentAccountTransactions = get(currentAccount, 'transactions', [])
 
             const transactions = uniqBy(
               [...currentAccountTransactions, ...account.transactions],
@@ -100,10 +99,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
               store.dispatch(
                 updateAccount({
                   ...account,
-                  data: {
-                    ...account.data,
-                    transactions,
-                  },
+                  transactions,
                 }),
               )
             }

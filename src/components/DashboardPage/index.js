@@ -90,7 +90,7 @@ const mergeFakeDatas = fakeDatas =>
 
 const getAllTransactions = accounts => {
   const allTransactions = accounts.reduce((result, account) => {
-    const transactions = get(account, 'data.transactions', [])
+    const transactions = get(account, 'transactions', [])
 
     result = [
       ...result,
@@ -103,7 +103,7 @@ const getAllTransactions = accounts => {
     return result
   }, [])
 
-  return sortBy(allTransactions, t => t.received_at)
+  return sortBy(allTransactions, t => t.receivedAt)
     .reverse()
     .slice(0, ALL_TRANSACTIONS_LIMIT)
 }

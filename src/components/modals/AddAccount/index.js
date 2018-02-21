@@ -260,7 +260,7 @@ class AddAccountModal extends PureComponent<Props, State> {
       ...defaultState,
     })
 
-  addAccount = ({ id, name, ...data }) => {
+  addAccount = account => {
     const { currency } = this.state
     const { addAccount } = this.props
 
@@ -269,12 +269,10 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
 
     addAccount({
-      id,
-      name,
+      ...account,
       coinType: currency.coinType,
       currency,
       unit: getDefaultUnitByCoinType(currency.coinType),
-      data,
     })
   }
 

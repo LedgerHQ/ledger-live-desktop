@@ -133,11 +133,16 @@ export async function getAccount({
 
         return {
           address: currentAddress.address,
-          allAddresses,
+          addresses: allAddresses,
           balance,
-          currentIndex: currentAddress.index,
+          index: currentAddress.index,
           path: `${path}/${getPath('external', currentAddress.index + 1)}`,
-          transactions,
+          transactions: transactions.map(t => ({
+            address: t.balance > 0 ? t.inputs[0].address : t.outputs[0].address,
+            balance: t.balance,
+            hash: t.hash,
+            receivedAt: t.received_at,
+          })),
         }
       })
 

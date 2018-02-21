@@ -48,7 +48,7 @@ const defaultState = {
 }
 
 function hasNoTransactions(account: Account) {
-  return get(account, 'data.transactions.length', 0) === 0
+  return get(account, 'transactions.length', 0) === 0
 }
 
 class SettingsAccount extends PureComponent<Props, State> {

@@ -1,7 +1,8 @@
 // @flow
 
-import db from 'helpers/db'
 import sortBy from 'lodash/sortBy'
+
+import db from 'helpers/db'
 
 import type { Dispatch } from 'redux'
 import type { Account } from 'types/common'
@@ -13,7 +14,7 @@ function sortAccounts(accounts, orderAccounts) {
 
   const accountsSorted = sortBy(accounts, a => {
     if (order === 'balance') {
-      return a.data.balance
+      return a.balance
     }
 
     return a[order]

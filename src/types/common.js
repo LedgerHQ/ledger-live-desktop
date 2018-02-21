@@ -13,29 +13,27 @@ export type Devices = Array<Device>
 // -------------------- Transactions
 
 export type Transaction = {
-  account?: Object,
+  account?: Account,
+  address: string,
   balance: number,
   hash: string,
-  received_at: string,
+  receivedAt: string,
 }
 
 // -------------------- Accounts
 
-export type AccountData = {
-  address: string,
-  balance: number,
-  currentIndex: number,
-  path: string,
-  transactions: Array<Transaction>,
-}
-
 export type Account = {
+  address: string,
+  addresses: Array<string>,
   archived?: boolean,
-  data?: AccountData,
-  id: string,
-  name: string,
+  balance: number,
   coinType: number,
   currency: Currency,
+  id: string,
+  index: number,
+  name: string,
+  path: string,
+  transactions: Array<Transaction>,
   unit: Unit,
 }
 
