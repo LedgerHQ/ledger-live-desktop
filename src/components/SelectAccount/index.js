@@ -7,7 +7,7 @@ import { translate } from 'react-i18next'
 import noop from 'lodash/noop'
 
 import type { MapStateToProps } from 'react-redux'
-import type { T, Account } from 'types/common'
+import type { T, Accounts, Account } from 'types/common'
 
 import { formatBTC } from 'helpers/format'
 
@@ -30,14 +30,14 @@ const renderItem = item => (
     </Box>
     <Box>
       <Text color="mouse" fontSize={0}>
-        {formatBTC(item.data.balance)}
+        {formatBTC(item.balance)}
       </Text>
     </Box>
   </Box>
 )
 
 type Props = {
-  accounts: Array<Account>,
+  accounts: Accounts,
   onChange?: () => Account | void,
   value?: Account | null,
   t: T,

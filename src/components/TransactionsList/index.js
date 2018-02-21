@@ -73,11 +73,13 @@ const Cell = styled(Box).attrs({
 const Transaction = ({
   onAccountClick,
   tx,
+  withAccounts,
 }: {
   onAccountClick?: Function,
   tx: TransactionType,
+  withAccounts?: boolean,
 }) => {
-  const time = moment(tx.received_at)
+  const time = moment(tx.receivedAt)
   const Icon = getIconByCoinType(get(tx, 'account.currency.coinType'))
   return (
     <TransactionRaw>
@@ -87,22 +89,23 @@ const Transaction = ({
           <Hour>{time.format('HH:mm')}</Hour>
         </Box>
       </Cell>
-      {tx.account && (
-        <Cell
-          size={ACCOUNT_COL_SIZE}
-          horizontal
-          flow={2}
-          style={{ cursor: 'pointer' }}
-          onClick={() => onAccountClick && onAccountClick(tx.account)}
-        >
-          <Box alignItems="center" justifyContent="center" style={{ color: '#fcb653' }}>
-            {Icon && <Icon size={16} />}
-          </Box>
-          <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
-            {tx.account.name}
-          </Box>
-        </Cell>
-      )}
+      {withAccounts &&
+        tx.account && (
+          <Cell
+            size={ACCOUNT_COL_SIZE}
+            horizontal
+            flow={2}
+            style={{ cursor: 'pointer' }}
+            onClick={() => onAccountClick && onAccountClick(tx.account)}
+          >
+            <Box alignItems="center" justifyContent="center" style={{ color: '#fcb653' }}>
+              {Icon && <Icon size={16} />}
+            </Box>
+            <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
+              {tx.account.name}
+            </Box>
+          </Cell>
+        )}
       <Cell
         grow
         shrink
@@ -117,7 +120,7 @@ const Transaction = ({
           {tx.balance > 0 ? 'From' : 'To'}
         </Box>
         <Box color="dark" ff="Open Sans" fontSize={3}>
-          {tx.balance > 0 ? get(tx, 'inputs.0.address') : get(tx, 'outputs.0.address')}
+          {tx.address}
         </Box>
       </Cell>
       <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
@@ -135,6 +138,7 @@ const Transaction = ({
 
 Transaction.defaultProps = {
   onAccountClick: noop,
+  withAccounts: false,
 }
 
 type Props = {
@@ -181,6 +185,7 @@ class TransactionsList extends Component<Props> {
             {transactions.map(t => (
               <Transaction
                 key={`{${t.hash}-${t.account ? t.account.id : ''}`}
+                withAccounts={withAccounts}
                 onAccountClick={onAccountClick}
                 tx={t}
               />

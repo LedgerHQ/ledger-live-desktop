@@ -7,30 +7,19 @@ import get from 'lodash/get'
 import reduce from 'lodash/reduce'
 
 import type { State } from 'reducers'
-import type { Account, Accounts, AccountData } from 'types/common'
+import type { Account, Accounts } from 'types/common'
 
 export type AccountsState = Accounts
 
 const state: AccountsState = []
 
 function orderAccountsTransactions(account: Account) {
-  const transactions = get(account.data, 'transactions', [])
-  transactions.sort((a, b) => new Date(b.received_at) - new Date(a.received_at))
+  const { transactions } = account
+  transactions.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt))
   return {
     ...account,
-    data: {
-      ...account.data,
-      transactions,
-    },
+    transactions,
   }
-}
-
-const defaultAccountData: AccountData = {
-  address: '',
-  balance: 0,
-  currentIndex: 0,
-  path: '',
-  transactions: [],
 }
 
 const handlers: Object = {
@@ -42,16 +31,7 @@ const handlers: Object = {
   ADD_ACCOUNT: (
     state: AccountsState,
     { payload: account }: { payload: Account },
-  ): AccountsState => {
-    account = orderAccountsTransactions({
-      ...account,
-      data: {
-        ...defaultAccountData,
-        ...account.data,
-      },
-    })
-    return [...state, account]
-  },
+  ): AccountsState => [...state, orderAccountsTransactions(account)],
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
@@ -62,28 +42,17 @@ const handlers: Object = {
         return existingAccount
       }
 
-      const existingData = get(existingAccount, 'data', {})
-      const data = get(account, 'data', {})
-
-      const transactions = get(data, 'transactions', [])
-
-      const currentIndex = data.currentIndex
-        ? data.currentIndex
-        : get(existingData, 'currentIndex', 0)
+      const { transactions, index } = account
 
       const updatedAccount = {
         ...existingAccount,
         ...account,
-        data: {
-          ...existingData,
-          ...data,
-          balance: transactions.reduce((result, v) => {
-            result += v.balance
-            return result
-          }, 0),
-          currentIndex,
-          transactions,
-        },
+        balance: transactions.reduce((result, v) => {
+          result += v.balance
+          return result
+        }, 0),
+        index: index || get(existingAccount, 'currentIndex', 0),
+        transactions,
       }
 
       return orderAccountsTransactions(updatedAccount)
@@ -99,7 +68,7 @@ export function getTotalBalance(state: { accounts: AccountsState }) {
   return reduce(
     state.accounts,
     (result, account) => {
-      result += get(account, 'data.balance', 0)
+      result += get(account, 'balance', 0)
       return result
     },
     0,
@@ -123,12 +92,8 @@ export function getAccountById(state: { accounts: AccountsState }, id: string): 
   return account || null
 }
 
-export function getAccountData(state: State, id: string): AccountData | null {
-  return get(getAccountById(state, id), 'data', null)
-}
-
 export function canCreateAccount(state: State): boolean {
-  return every(getAccounts(state), a => get(a, 'data.transactions.length', 0) > 0)
+  return every(getAccounts(state), a => get(a, 'transactions.length', 0) > 0)
 }
 
 export default handleActions(handlers, state)

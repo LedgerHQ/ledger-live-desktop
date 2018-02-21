@@ -110,7 +110,7 @@ class SideBar extends PureComponent<Props> {
                         color="warmGrey"
                         unit={account.unit}
                         showCode
-                        val={account.data ? account.data.balance : 0}
+                        val={account.balance || 0}
                       />
                     }
                     iconActiveColor={account.currency.color}

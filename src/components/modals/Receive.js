@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import get from 'lodash/get'
 
@@ -62,7 +62,6 @@ class ReceiveModal extends PureComponent<Props, State> {
         onHide={this.handleHide}
         render={({ data, onClose }) => {
           const account = this.getAccount(data)
-          const accountData = get(account, 'data', {})
 
           return (
             <ModalBody onClose={onClose} flow={3}>
@@ -73,24 +72,16 @@ class ReceiveModal extends PureComponent<Props, State> {
                 <Label>Account</Label>
                 <SelectAccount value={account} onChange={this.handleChangeInput('account')} />
               </Box>
-              {accountData && (
-                <Fragment>
-                  <Box flow={1}>
-                    <Label>Request amount</Label>
-                    <Input
-                      type="number"
-                      min={0}
-                      max={accountData.balance / 1e8}
-                      onChange={this.handleChangeInput('amount')}
-                    />
-                  </Box>
-                  <ReceiveBox
-                    path={accountData.path}
-                    amount={amount}
-                    address={accountData.address || ''}
-                  />
-                </Fragment>
-              )}
+              <Box flow={1}>
+                <Label>Request amount</Label>
+                <Input
+                  type="number"
+                  min={0}
+                  max={account.balance / 1e8}
+                  onChange={this.handleChangeInput('amount')}
+                />
+              </Box>
+              <ReceiveBox path={account.path} amount={amount} address={account.address || ''} />
               <Box horizontal justifyContent="center">
                 <Button primary onClick={onClose}>
                   Close
