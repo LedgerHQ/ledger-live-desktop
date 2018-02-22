@@ -183,7 +183,7 @@ class AccountsOrder extends Component<Props, State> {
         value={sortItems.find(item => item.key === cachedValue)}
       >
         <Text ff="Open Sans|SemiBold" fontSize={4}>
-          {'Sort by'}
+          {t('global.sortBy')}
         </Text>
         <Box
           alignItems="center"

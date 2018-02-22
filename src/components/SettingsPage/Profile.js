@@ -9,7 +9,7 @@ import set from 'lodash/set'
 
 import { setEncryptionKey } from 'helpers/db'
 
-import type { SettingsProfile } from 'types/common'
+import type { SettingsProfile, T } from 'types/common'
 
 import { unlock } from 'reducers/application'
 
@@ -22,6 +22,7 @@ import Label from 'components/base/Label'
 type InputValue = SettingsProfile
 
 type Props = {
+  t: T,
   settings: SettingsProfile,
   onSaveSettings: Function,
   unlock: Function,
@@ -80,6 +81,7 @@ class TabProfile extends PureComponent<Props, State> {
   }
 
   render() {
+    const { t } = this.props
     const { inputValue } = this.state
 
     const isPasswordChecked = get(inputValue, 'password.state', false)
@@ -95,12 +97,12 @@ class TabProfile extends PureComponent<Props, State> {
               onClick={() => this.handleChangeInput('password.state')(!isPasswordChecked)}
             >
               <CheckBox isChecked={isPasswordChecked} />
-              <div>{' Protect local data with a password'}</div>
+              <div>{t('settings.profile.protectWithPassword')}</div>
             </Box>
           </label>
           {get(inputValue, 'password.state') === true && (
             <Box flow={1}>
-              <Label>Password</Label>
+              <Label>{t('settings.profile.password')}</Label>
               <Input
                 value={get(inputValue, 'password.value', '')}
                 onChange={this.handleChangeInput('password.value')}
@@ -110,7 +112,7 @@ class TabProfile extends PureComponent<Props, State> {
           )}
           <Box horizontal justifyContent="flex-end">
             <Button primary type="submit">
-              Save
+              {t('global.save')}
             </Button>
           </Box>
         </Card>

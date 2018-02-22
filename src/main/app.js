@@ -11,7 +11,13 @@ let mainWindow = null
 
 let forceClose = false
 
-const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
+const {
+  UPGRADE_EXTENSIONS,
+  ELECTRON_WEBPACK_WDS_PORT,
+  DEV_TOOLS,
+  DEV_TOOLS_MODE,
+  HIDE_DEV_WINDOW,
+} = process.env
 
 const devTools = __DEV__ || DEV_TOOLS
 
@@ -211,7 +217,7 @@ app.on('ready', async () => {
     await installExtensions()
   }
 
-  if (devTools) {
+  if (devTools && !HIDE_DEV_WINDOW) {
     createDevWindow()
   }
 

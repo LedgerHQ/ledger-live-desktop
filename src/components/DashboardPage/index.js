@@ -13,7 +13,7 @@ import sortBy from 'lodash/sortBy'
 import takeRight from 'lodash/takeRight'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Accounts } from 'types/common'
+import type { Accounts, T } from 'types/common'
 
 import { space } from 'styles/theme'
 
@@ -43,6 +43,7 @@ const mapDispatchToProps = {
 }
 
 type Props = {
+  t: T,
   accounts: Accounts,
   push: Function,
 }
@@ -59,12 +60,7 @@ const ACCOUNTS_BY_LINE = 3
 const ALL_TRANSACTIONS_LIMIT = 10
 const TIMEOUT_REFRESH_DATAS = 5e3
 
-const itemsTimes = [
-  { key: 'day', label: 'Day' },
-  { key: 'week', label: 'Week' },
-  { key: 'month', label: 'Month' },
-  { key: 'year', label: 'Year' },
-]
+const itemsTimes = [{ key: 'day' }, { key: 'week' }, { key: 'month' }, { key: 'year' }]
 
 const generateFakeData = v => ({
   name: `Day ${v}`,
@@ -132,6 +128,13 @@ class DashboardPage extends PureComponent<Props, State> {
     }
   }
 
+  componentWillMount() {
+    this._itemsTimes = itemsTimes.map(item => ({
+      ...item,
+      label: this.props.t(`time.${item.key}`),
+    }))
+  }
+
   componentDidMount() {
     this._mounted = true
 
@@ -190,9 +193,10 @@ class DashboardPage extends PureComponent<Props, State> {
 
   _timeout = undefined
   _mounted = false
+  _itemsTimes = []
 
   render() {
-    const { push, accounts } = this.props
+    const { push, accounts, t } = this.props
     const { accountsChunk, allTransactions, selectedTime, fakeDatas, fakeDatasMerge } = this.state
 
     let accountIndex = 0
@@ -203,17 +207,17 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {'Good morning, Khalil.'}
+              {t('dashboard.greetings', { name: 'Khalil' })}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0
-                ? `here is the summary of your ${totalAccounts} accounts`
-                : 'no accounts'}
+                ? t('dashboard.summary', { count: totalAccounts })
+                : t('dashboard.noAccounts')}
             </Text>
           </Box>
           <Box ml="auto">
             <Pills
-              items={itemsTimes}
+              items={this._itemsTimes}
               activeKey={selectedTime}
               onChange={item => this.setState({ selectedTime: item.key })}
             />
@@ -243,7 +247,7 @@ class DashboardPage extends PureComponent<Props, State> {
             <Box flow={4}>
               <Box horizontal alignItems="flex-end">
                 <Text color="dark" ff="Museo Sans" fontSize={6}>
-                  {'Accounts'}
+                  {t('sidebar.accounts')}
                 </Text>
                 <Box ml="auto" horizontal flow={1}>
                   <AccountsOrder />
@@ -277,7 +281,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 ))}
               </Box>
             </Box>
-            <Card p={0} px={4} title="Recent activity">
+            <Card p={0} px={4} title={t('dashboard.recentActivity')}>
               <TransactionsList
                 withAccounts
                 transactions={allTransactions}

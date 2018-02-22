@@ -3,6 +3,8 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
+import type { T } from 'types/common'
+
 import IconSearch from 'icons/Search'
 
 import Box from 'components/base/Box'
@@ -30,7 +32,11 @@ type State = {
   isFocused: boolean,
 }
 
-class GlobalSearch extends PureComponent<{}, State> {
+type Props = {
+  t: T,
+}
+
+class GlobalSearch extends PureComponent<Props, State> {
   state = {
     isFocused: false,
   }
@@ -54,6 +60,7 @@ class GlobalSearch extends PureComponent<{}, State> {
     })
 
   render() {
+    const { t } = this.props
     const { isFocused } = this.state
 
     return (
@@ -62,7 +69,7 @@ class GlobalSearch extends PureComponent<{}, State> {
           <IconSearch height={16} width={16} />
         </Box>
         <Input
-          placeholder="Search"
+          placeholder={t('global.search')}
           innerRef={input => (this._input = input)}
           onBlur={this.handleBlur}
           onFocus={this.handleFocus}
