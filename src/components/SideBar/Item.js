@@ -38,12 +38,11 @@ const Container = styled(Tabbable).attrs({
   cursor: pointer;
   color: ${p => p.theme.colors.dark};
   opacity: ${p => (p.isActive ? 1 : 0.4)};
-  background: ${p => (p.isActive ? p.theme.colors.paleGrey : '')};
+  background: ${p => (p.isActive ? p.theme.colors.argile : '')};
   height: ${p => (p.big ? 50 : 36)}px;
   outline: none;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background: ${p => (p.isActive ? p.theme.colors.argile : p.theme.colors.cream)};
   }
 `
