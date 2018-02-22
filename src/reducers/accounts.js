@@ -6,6 +6,8 @@ import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
 
+import { getDefaultUnitByCoinType, getCurrencyByCoinType } from '@ledgerhq/currencies'
+
 import type { State } from 'reducers'
 import type { Account, Accounts } from 'types/common'
 
@@ -94,6 +96,46 @@ export function getAccountById(state: { accounts: AccountsState }, id: string): 
 
 export function canCreateAccount(state: State): boolean {
   return every(getAccounts(state), a => get(a, 'transactions.length', 0) > 0)
+}
+
+export function serializeAccounts(accounts: Array<Object>) {
+  return accounts.map((account, key) => {
+    const a = {
+      id: account.id,
+      address: account.address,
+      addresses: account.addresses,
+      balance: account.balance,
+      coinType: account.coinType,
+      currency: getCurrencyByCoinType(account.coinType),
+      index: account.index,
+      name: account.name || `${key}`,
+      path: account.path,
+      unit: account.unit || getDefaultUnitByCoinType(account.coinType),
+    }
+
+    return {
+      ...a,
+      transactions: account.transactions.map(t => ({
+        ...t,
+        account: a,
+      })),
+    }
+  })
+}
+
+export function deserializeAccounts(accounts: Accounts) {
+  return accounts.map(account => ({
+    id: account.id,
+    address: account.address,
+    addresses: account.addresses,
+    balance: account.balance,
+    coinType: account.coinType,
+    index: account.index,
+    name: account.name,
+    path: account.path,
+    transactions: account.transactions.map(({ account, ...t }) => t),
+    unit: account.unit,
+  }))
 }
 
 export default handleActions(handlers, state)
