@@ -59,6 +59,7 @@ class SettingsPage extends PureComponent<Props, State> {
     const { tab } = this.state
 
     const props = {
+      t,
       settings,
       onSaveSettings: this.handleSaveSettings,
     }

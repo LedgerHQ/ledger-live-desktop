@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
 
 import type { SettingsDisplay, T } from 'types/common'
 
@@ -88,7 +87,7 @@ class TabProfile extends PureComponent<Props, State> {
           </Box>
           <Box horizontal justifyContent="flex-end">
             <Button primary type="submit">
-              Save
+              {t('global.save')}
             </Button>
           </Box>
         </Card>
@@ -97,4 +96,4 @@ class TabProfile extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(TabProfile)
+export default TabProfile

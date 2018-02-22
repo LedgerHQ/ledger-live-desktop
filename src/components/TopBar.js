@@ -1,11 +1,14 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { compose } from 'redux'
+import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
 
 import type { MapStateToProps, MapDispatchToProps } from 'react-redux'
+import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
 import { getAccounts } from 'reducers/accounts'
@@ -80,6 +83,7 @@ const mapDispatchToProps: MapDispatchToProps<*, *, *> = {
 }
 
 type Props = {
+  t: T,
   hasAccounts: boolean,
   hasPassword: boolean,
   lock: Function,
@@ -140,14 +144,14 @@ class TopBar extends PureComponent<Props, State> {
   handleLock = () => this.props.lock()
 
   render() {
-    const { hasPassword, hasAccounts } = this.props
+    const { hasPassword, hasAccounts, t } = this.props
     const { sync } = this.state
 
     return (
       <Container bg="cream" color="warmGrey">
         <Inner>
           <Box grow horizontal flow={4}>
-            <GlobalSearch />
+            <GlobalSearch t={t} />
             <Box justifyContent="center">
               <IconDevices height={16} width={16} />
             </Box>
@@ -164,14 +168,14 @@ class TopBar extends PureComponent<Props, State> {
               items={[
                 {
                   key: 'profile',
-                  label: 'Edit profile',
+                  label: t('mainDropdown.editProfile'),
                   icon: <IconUser height={16} width={16} />,
                 },
                 ...(hasPassword
                   ? [
                       {
                         key: 'lock',
-                        label: 'Lock application',
+                        label: t('mainDropdown.lockApplication'),
                         icon: <IconUser height={16} width={16} />,
                         onClick: this.handleLock,
                       },
@@ -203,4 +207,4 @@ class TopBar extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopBar)
+export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(TopBar)

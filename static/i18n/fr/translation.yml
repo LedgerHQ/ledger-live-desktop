@@ -18,6 +18,11 @@ device:
   notConnected: Non connecté
 dashboard:
   title: Tableau de bord
+  greetings: 'Bonjour, {{name}}.'
+  summary: voici le résumé de votre compte
+  summary_plural: 'voici le résumé de vos {{count}} comptes'
+  noAccounts: aucun compte
+  recentActivity: Activité récente
 send:
   title: Envoyer
 receive:
@@ -37,8 +42,11 @@ settings:
     blockchain: Blockchain
     profile: Profil
   display:
-    language: Langage
+    language: Langue
     orderAccounts: Ordre des comptes
+  profile:
+    protectWithPassword: Protégez les données locales avec un mot de passe
+    password: Mot de passe
 SelectAccount:
   placeholder: Sélectionner un compte
 AccountPage:
@@ -55,3 +63,22 @@ sendModal:
   Summary: Résumé
   SecureValidation: Validation sécurisée
   Confirmation: Confirmation
+time:
+  day: Jour
+  week: Semaine
+  month: Mois
+  year: Année
+global:
+  sortBy: Trier par
+  search: Rechercher
+  save: Sauvegarder
+transactionsList:
+  date: Date
+  account: Compte
+  address: Adresse
+  amount: Montant
+  from: Depuis
+  to: Vers
+mainDropdown:
+  editProfile: Éditer le profil
+  lockApplication: Verrouiller l'application

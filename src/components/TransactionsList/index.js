@@ -3,12 +3,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
+import { translate } from 'react-i18next'
 import get from 'lodash/get'
 import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
-import type { Transaction as TransactionType } from 'types/common'
+import type { Transaction as TransactionType, T } from 'types/common'
 
 import Box from 'components/base/Box'
 import Defer from 'components/base/Defer'
@@ -71,10 +72,12 @@ const Cell = styled(Box).attrs({
 `
 
 const Transaction = ({
+  t,
   onAccountClick,
   tx,
   withAccounts,
 }: {
+  t: T,
   onAccountClick?: Function,
   tx: TransactionType,
   withAccounts?: boolean,
@@ -117,7 +120,7 @@ const Transaction = ({
         }}
       >
         <Box ff="Open Sans" fontSize={3} color="lead">
-          {tx.balance > 0 ? 'From' : 'To'}
+          {tx.balance > 0 ? t('transactionsList.from') : t('transactionsList.to')}
         </Box>
         <Box color="dark" ff="Open Sans" fontSize={3}>
           {tx.address}
@@ -142,6 +145,7 @@ Transaction.defaultProps = {
 }
 
 type Props = {
+  t: T,
   onAccountClick?: Function,
   transactions: Array<TransactionType>,
   withAccounts?: boolean,
@@ -166,28 +170,31 @@ class TransactionsList extends Component<Props> {
   _hashCache = null
 
   render() {
-    const { transactions, withAccounts, onAccountClick } = this.props
+    const { transactions, withAccounts, onAccountClick, t } = this.props
 
     this._hashCache = this.getHashCache(transactions)
 
     return (
       <Box flow={1}>
         <Box horizontal pt={4}>
-          <HeaderCol size={DATE_COL_SIZE}>{'Date'}</HeaderCol>
-          {withAccounts && <HeaderCol size={ACCOUNT_COL_SIZE}>{'Account'}</HeaderCol>}
-          <HeaderCol grow>{'Address'}</HeaderCol>
+          <HeaderCol size={DATE_COL_SIZE}>{t('transactionsList.date')}</HeaderCol>
+          {withAccounts && (
+            <HeaderCol size={ACCOUNT_COL_SIZE}>{t('transactionsList.account')}</HeaderCol>
+          )}
+          <HeaderCol grow>{t('transactionsList.address')}</HeaderCol>
           <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-            {'Amount'}
+            {t('transactionsList.amount')}
           </HeaderCol>
         </Box>
         <Defer>
           <Box>
-            {transactions.map(t => (
+            {transactions.map(trans => (
               <Transaction
-                key={`{${t.hash}-${t.account ? t.account.id : ''}`}
+                t={t}
+                key={`{${trans.hash}-${trans.account ? trans.account.id : ''}`}
                 withAccounts={withAccounts}
                 onAccountClick={onAccountClick}
-                tx={t}
+                tx={trans}
               />
             ))}
           </Box>
@@ -197,4 +204,4 @@ class TransactionsList extends Component<Props> {
   }
 }
 
-export default TransactionsList
+export default translate()(TransactionsList)
