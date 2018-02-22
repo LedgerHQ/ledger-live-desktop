@@ -23,11 +23,12 @@ import { sendEvent } from 'renderer/events'
 import { addAccount, updateAccount } from 'actions/accounts'
 
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
 import Button from 'components/base/Button'
+import FormattedVal from 'components/base/FormattedVal'
 import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Select from 'components/base/Select'
+import Text from 'components/base/Text'
 
 import CreateAccount from './CreateAccount'
 import ImportAccounts from './ImportAccounts'
@@ -67,12 +68,24 @@ const Steps = {
       <Box>Start {props.currency.name} App on your Ledger: ko</Box>
     </Box>
   ),
-  inProgress: (props: Object) => (
+  inProgress: ({ progress, unit }: Object) => (
     <Box>
       In progress.
-      {props.progress !== null && (
+      {progress !== null && (
         <Box>
-          Account: {props.progress.account} / Transactions: {props.progress.transactions}
+          <Box>Account: {progress.account}</Box>
+          <Box>
+            Balance:{' '}
+            <FormattedVal
+              alwaysShowSign={false}
+              color="dark"
+              unit={unit}
+              showCode
+              val={progress.balance || 0}
+            />
+          </Box>
+          <Box>Transactions: {progress.transactions || 0}</Box>
+          {progress.success && <Box>Finish ! Next account in progress...</Box>}
         </Box>
       )}
     </Box>
@@ -143,7 +156,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    ipcRenderer.on('msg', this.handleWalletRequest)
+    ipcRenderer.on('msg', this.handleMsgEvent)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -166,7 +179,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   componentWillUnmount() {
-    ipcRenderer.removeListener('msg', this.handleWalletRequest)
+    ipcRenderer.removeListener('msg', this.handleMsgEvent)
     clearTimeout(this._timeout)
   }
 
@@ -206,6 +219,7 @@ class AddAccountModal extends PureComponent<Props, State> {
       ...props(step === 'inProgress', {
         t,
         progress,
+        unit: currency !== null && getDefaultUnitByCoinType(currency.coinType),
       }),
       ...props(step === 'listAccounts', {
         t,
@@ -219,12 +233,24 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
   }
 
-  handleWalletRequest = (e, { data, type }) => {
+  handleMsgEvent = (e, { data, type }) => {
+    if (type === 'wallet.getAccounts.start') {
+      this._pid = data.pid
+    }
+
     if (type === 'wallet.getAccounts.progress') {
-      this.setState({
+      this.setState(prev => ({
         step: 'inProgress',
-        progress: data,
-      })
+        progress:
+          prev.progress === null
+            ? data
+            : prev.progress.success
+              ? data
+              : {
+                  ...prev.progress,
+                  ...data,
+                },
+      }))
     }
 
     if (type === 'wallet.getAccounts.fail') {
@@ -253,7 +279,12 @@ class AddAccountModal extends PureComponent<Props, State> {
     })
   }
 
-  handleClose = () => clearTimeout(this._timeout)
+  handleClose = () => {
+    sendEvent('msg', 'kill.process', {
+      pid: this._pid,
+    })
+    clearTimeout(this._timeout)
+  }
 
   handleHide = () =>
     this.setState({
@@ -277,6 +308,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   _timeout = undefined
+  _pid = null
 
   render() {
     const { step } = this.state
@@ -286,6 +318,7 @@ class AddAccountModal extends PureComponent<Props, State> {
       <Modal
         name={MODAL_ADD_ACCOUNT}
         preventBackdropClick={step !== 'chooseWallet'}
+        onClose={this.handleClose}
         onHide={this.handleHide}
         render={({ onClose }) => {
           const Step = Steps[step]

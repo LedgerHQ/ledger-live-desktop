@@ -2,6 +2,7 @@
 
 import ledger from 'ledger-test-library'
 import bitcoin from 'bitcoinjs-lib'
+import noop from 'lodash/noop'
 
 export const networks = [
   {
@@ -42,6 +43,7 @@ export async function getAccount({
   segwit,
   network,
   asyncDelay = 500,
+  onProgress = noop,
 }: {
   allAddresses?: Array<string>,
   currentIndex?: number,
@@ -50,10 +52,12 @@ export async function getAccount({
   segwit: boolean,
   network: Object,
   asyncDelay?: number,
+  onProgress?: Function,
 }) {
   const gapLimit = 20
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
 
+  let balance = 0
   let transactions = []
   let lastAddress = null
 
@@ -116,17 +120,20 @@ export async function getAccount({
 
         const hasTransactions = txs.length > 0
 
-        transactions = [...transactions, ...txs.map(computeTransaction(allAddresses))]
-        lastAddress = hasTransactions ? getLastAddress(addresses, txs[0]) : lastAddress
-
         if (hasTransactions) {
+          const newTransactions = txs.map(computeTransaction(allAddresses))
+
+          lastAddress = getLastAddress(addresses, txs[0])
+          transactions = [...transactions, ...newTransactions]
+          balance = newTransactions.reduce((result, v) => result + v.balance, balance)
+
+          onProgress({
+            balance,
+            transactions: transactions.length,
+          })
+
           return nextPath(index + (gapLimit - 1))
         }
-
-        const balance = transactions.reduce((result, v) => {
-          result += v.balance
-          return result
-        }, 0)
 
         const currentAddress =
           lastAddress !== null ? lastAddress : getAddress({ type: 'external', index: 0 })

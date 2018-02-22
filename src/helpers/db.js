@@ -4,7 +4,7 @@ import Store from 'electron-store'
 import set from 'lodash/set'
 import get from 'lodash/get'
 
-import { getCurrencyByCoinType } from '@ledgerhq/currencies'
+import { getDefaultUnitByCoinType, getCurrencyByCoinType } from '@ledgerhq/currencies'
 
 import type { Accounts } from 'types/common'
 
@@ -25,23 +25,29 @@ export function setEncryptionKey(key: DBKey, value?: string) {
   encryptionKey[key] = value
 }
 
-export function serializeAccounts(accounts: Accounts) {
-  return accounts.map(account => ({
-    id: account.id,
-    address: account.address,
-    addresses: account.addresses,
-    balance: account.balance,
-    coinType: account.coinType,
-    currency: getCurrencyByCoinType(account.coinType),
-    index: account.index,
-    name: account.name,
-    path: account.path,
-    unit: account.unit,
-    transactions: account.transactions.map(t => ({
-      ...t,
-      account,
-    })),
-  }))
+export function serializeAccounts(accounts: Array<Object>) {
+  return accounts.map((account, key) => {
+    const a = {
+      id: account.id,
+      address: account.address,
+      addresses: account.addresses,
+      balance: account.balance,
+      coinType: account.coinType,
+      currency: getCurrencyByCoinType(account.coinType),
+      index: account.index,
+      name: account.name || `${key}`,
+      path: account.path,
+      unit: account.unit || getDefaultUnitByCoinType(account.coinType),
+    }
+
+    return {
+      ...a,
+      transactions: account.transactions.map(t => ({
+        ...t,
+        account: a,
+      })),
+    }
+  })
 }
 
 export function deserializeAccounts(accounts: Accounts) {

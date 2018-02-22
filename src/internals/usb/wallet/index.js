@@ -9,10 +9,10 @@ async function getAllAccountsByCoinType({ pathDevice, coinType, currentAccounts,
 
   // 1: BTC Testnet
   if (coinType === 1) {
-    return getAllAccounts({ transport, currentAccounts, onProgress })
+    return getAllAccounts({ coinType, transport, currentAccounts, onProgress })
   }
 
-  throw new Error('invalid coinType')
+  throw new Error('Invalid coinType')
 }
 
 export default (sendEvent: Function) => ({
@@ -23,8 +23,16 @@ export default (sendEvent: Function) => ({
   }: {
     pathDevice: string,
     coinType: number,
-    currentAccounts: Array<*>,
+    currentAccounts: Array<string>,
   }) => {
+    sendEvent(
+      'wallet.getAccounts.start',
+      {
+        pid: process.pid,
+      },
+      { kill: false },
+    )
+
     try {
       const data = await getAllAccountsByCoinType({
         pathDevice,
