@@ -7,7 +7,7 @@ import bs58check from 'bs58check'
 import Btc from '@ledgerhq/hw-app-btc'
 
 import { getAccount, getHDNode, networks } from 'helpers/btc'
-import { serializeAccounts } from 'helpers/db'
+import { serializeAccounts } from 'reducers/accounts'
 
 type CoinType = 0 | 1
 
