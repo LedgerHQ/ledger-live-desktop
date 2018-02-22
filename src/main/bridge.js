@@ -80,6 +80,13 @@ const handlers = {
     init: setupAutoUpdater,
     quitAndInstall,
   },
+  kill: {
+    process: (send, { pid }) => {
+      try {
+        process.kill(pid, 'SIGINT')
+      } catch (e) {} // eslint-disable-line no-empty
+    },
+  },
 }
 
 ipcMain.on('msg', (event: any, payload) => {

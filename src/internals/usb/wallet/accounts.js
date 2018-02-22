@@ -7,8 +7,17 @@ import bs58check from 'bs58check'
 import Btc from '@ledgerhq/hw-app-btc'
 
 import { getAccount, getHDNode, networks } from 'helpers/btc'
+import { serializeAccounts } from 'helpers/db'
 
-type Coin = 0 | 1
+type CoinType = 0 | 1
+
+async function sleep(delay, callback) {
+  if (delay !== 0) {
+    await new Promise(resolve => setTimeout(resolve, delay))
+  }
+
+  return callback()
+}
 
 function getCompressPublicKey(publicKey) {
   let compressedKeyIndex
@@ -47,8 +56,16 @@ function encodeBase58Check(vchIn) {
   return bs58check.encode(Buffer.from(vchIn))
 }
 
-function getPath({ coin, account, segwit }: { coin: Coin, account?: any, segwit: boolean }) {
-  return `${segwit ? 49 : 44}'/${coin}'${account !== undefined ? `/${account}'` : ''}`
+function getPath({
+  coinType,
+  account,
+  segwit,
+}: {
+  coinType: CoinType,
+  account?: any,
+  segwit: boolean,
+}) {
+  return `${segwit ? 49 : 44}'/${coinType}'${account !== undefined ? `/${account}'` : ''}`
 }
 
 export function verifyAddress({
@@ -69,18 +86,20 @@ export default async ({
   transport,
   currentAccounts,
   onProgress,
-  coin = 1,
+  coinType = 1,
   segwit = true,
+  nextAccountDelay = 1e3,
 }: {
   transport: Object,
   currentAccounts: Array<*>,
   onProgress: Function,
-  coin?: Coin,
+  coinType?: CoinType,
   segwit?: boolean,
+  nextAccountDelay?: number,
 }) => {
   const btc = new Btc(transport)
 
-  const network = networks[coin]
+  const network = networks[coinType]
 
   const [p2pkh, p2sh, fam] = [network.pubKeyHash, network.scriptHash, network.family].map(v =>
     v.toString(16).padStart(4, 0),
@@ -91,7 +110,7 @@ export default async ({
   const getPublicKey = path => btc.getWalletPublicKey(path)
 
   let result = bitcoin.crypto.sha256(
-    await getPublicKey(getPath({ segwit, coin })).then(
+    await getPublicKey(getPath({ segwit, coinType })).then(
       ({ publicKey }) => new Uint8Array(parseHexString(getCompressPublicKey(publicKey))),
     ),
   )
@@ -120,7 +139,7 @@ export default async ({
   }
 
   const getAllAccounts = async (currentAccount = 0, accounts = []) => {
-    const path = getPath({ segwit, coin, account: currentAccount })
+    const path = getPath({ segwit, coinType, account: currentAccount })
     const xpub58 = await getXpub58ByPath({ path, account: currentAccount, network })
 
     if (currentAccounts.includes(xpub58)) {
@@ -128,25 +147,39 @@ export default async ({
     }
 
     const hdnode = getHDNode({ xpub58, network })
-    const account = await getAccount({ path, hdnode, network, segwit, asyncDelay: 0 })
-
-    onProgress({
-      account: currentAccount,
-      transactions: account.transactions.length,
+    const account = await getAccount({
+      path,
+      hdnode,
+      network,
+      segwit,
+      asyncDelay: 0,
+      onProgress: ({ transactions, ...progress }) =>
+        transactions > 0 && onProgress({ account: currentAccount, transactions, ...progress }),
     })
 
     const hasTransactions = account.transactions.length > 0
 
     accounts.push({
       id: xpub58,
+      coinType,
       ...account,
     })
 
     if (hasTransactions) {
-      return getAllAccounts(currentAccount + 1, accounts)
+      onProgress({
+        success: true,
+      })
+
+      const nextAccount = await sleep(nextAccountDelay, () =>
+        getAllAccounts(currentAccount + 1, accounts),
+      )
+
+      return nextAccount
     }
 
-    return accounts
+    const result = await sleep(nextAccountDelay, () => accounts)
+
+    return serializeAccounts(result)
   }
 
   return getAllAccounts()

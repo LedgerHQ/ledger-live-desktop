@@ -5,11 +5,10 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { formatBTC } from 'helpers/format'
-
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import CheckBox from 'components/base/CheckBox'
+import FormattedVal from 'components/base/FormattedVal'
 import Input from 'components/base/Input'
 
 type Props = {
@@ -101,7 +100,16 @@ class ImportAccounts extends PureComponent<Props, State> {
                         onChange={this.handleChangeInput(account.id)}
                       />
                     </Box>
-                    <Box>Balance: {formatBTC(account.balance)}</Box>
+                    <Box>
+                      Balance:{' '}
+                      <FormattedVal
+                        alwaysShowSign={false}
+                        color="dark"
+                        unit={account.unit}
+                        showCode
+                        val={account.balance}
+                      />
+                    </Box>
                     <Box>Transactions: {account.transactions.length}</Box>
                   </Box>
                 </Box>
