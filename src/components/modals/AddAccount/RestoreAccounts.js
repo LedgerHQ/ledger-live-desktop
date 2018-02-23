@@ -10,7 +10,7 @@ import Text from 'components/base/Text'
 import type { Accounts } from 'types/common'
 
 const Container = styled(Box)`
-  border: 1px solid ${p => p.theme.colors.grenade};
+  border: 1px solid ${p => p.theme.colors.alertRed};
 `
 
 type Props = {

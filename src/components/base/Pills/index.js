@@ -24,8 +24,8 @@ const Container = styled(Box).attrs({
 
 const Pill = styled(Tabbable).attrs({
   ff: p => (p.isActive ? 'Open Sans|SemiBold' : 'Open Sans'),
-  color: p => (p.isActive ? 'dodgerBlue' : 'warmGrey'),
-  bg: p => (p.isActive ? rgba(p.theme.colors.dodgerBlue, 0.1) : ''),
+  color: p => (p.isActive ? 'wallet' : 'grey'),
+  bg: p => (p.isActive ? rgba(p.theme.colors.wallet, 0.1) : ''),
   px: 3,
   fontSize: 4,
   borderRadius: 1,
@@ -37,7 +37,7 @@ const Pill = styled(Tabbable).attrs({
   cursor: ${p => (p.isActive ? 'default' : 'pointer')};
 
   &:focus {
-    color: ${p => p.theme.colors.dodgerBlue};
+    color: ${p => p.theme.colors.wallet};
     background-color: ${p => (p.isActive ? '' : rgba(p.theme.colors.black, 0.02))};
   }
 `

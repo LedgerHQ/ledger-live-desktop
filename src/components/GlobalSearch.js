@@ -14,7 +14,6 @@ const Container = styled(Box).attrs({
   horizontal: true,
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
-  color: p => (p.isFocused ? 'dark' : 'warmGrey'),
 })``
 
 const Input = styled.input`
@@ -22,10 +21,6 @@ const Input = styled.input`
   background: transparent;
   outline: none;
   flex-grow: 1;
-
-  &::placeholder {
-    color: ${p => p.theme.colors.warmGrey};
-  }
 `
 
 type State = {

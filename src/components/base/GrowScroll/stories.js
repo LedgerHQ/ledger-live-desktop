@@ -14,8 +14,8 @@ stories.add('basic', () => {
 
   return (
     <Box
-      bg={reverseColor ? 'night' : 'white'}
-      color={reverseColor ? 'white' : 'night'}
+      bg={reverseColor ? 'dark' : 'white'}
+      color={reverseColor ? 'white' : 'dark'}
       style={{
         border: '1px solid black',
       }}

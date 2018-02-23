@@ -10,7 +10,7 @@ import Icon from 'components/base/Icon'
 import Input from 'components/base/Input'
 
 const IconQrCode = ({ onClick }: { onClick: Function }) => (
-  <Box color="steel" style={{ position: 'absolute', right: 15 }}>
+  <Box color="graphite" style={{ position: 'absolute', right: 15 }}>
     <Icon fontSize={30} name="qrcode" style={{ cursor: 'pointer' }} onClick={onClick} />
   </Box>
 )

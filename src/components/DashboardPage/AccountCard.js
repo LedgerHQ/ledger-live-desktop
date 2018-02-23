@@ -23,11 +23,11 @@ const AccountCard = ({
   return (
     <Card p={4} flow={4} flex={1} style={{ cursor: 'pointer' }} onClick={onClick}>
       <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
-        <Box alignItems="center" justifyContent="center" style={{ color: '#fcb653' }}>
+        <Box alignItems="center" justifyContent="center" style={{ color: account.currency.color }}>
           {Icon && <Icon size={20} />}
         </Box>
         <Box>
-          <Box style={{ textTransform: 'uppercase' }} fontSize={0} color="warmGrey">
+          <Box style={{ textTransform: 'uppercase' }} fontSize={0} color="graphite">
             {account.unit.code}
           </Box>
           <Box fontSize={4} color="dark">
@@ -48,7 +48,7 @@ const AccountCard = ({
       <AreaChart
         tiny
         id={`account-chart-${account.id}`}
-        color="#fcb653"
+        color={account.currency.color}
         height={52}
         data={data}
         strokeWidth={1}

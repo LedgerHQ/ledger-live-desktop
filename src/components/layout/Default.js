@@ -61,7 +61,7 @@ class Default extends Component<Props> {
           <Box grow horizontal bg="white">
             <SideBar />
 
-            <Box shrink grow bg="cream" color="grey" relative>
+            <Box shrink grow bg="lightGrey" color="grey" relative>
               <TopBar />
               <UpdateNotifier />
               <Container innerRef={n => (this._scrollContainer = n)}>

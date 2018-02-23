@@ -10,7 +10,7 @@ import Text from 'components/base/Text'
 
 const T = styled(Text).attrs({
   ff: 'Rubik',
-  color: p => (p.isNegative ? p.theme.colors.grenade : p.theme.colors.green),
+  color: p => (p.isNegative ? p.theme.colors.alertRed : p.theme.colors.positiveGreen),
 })``
 
 type Props = {

@@ -21,9 +21,11 @@ const Tab = styled(Tabbable).attrs({
   fontSize: 3,
 })`
   border-bottom: 2px solid transparent;
-  border-bottom-color: ${p => (p.isActive ? p.theme.colors.blue : '')};
+  border-bottom-color: ${p => (p.isActive ? p.theme.colors.wallet : '')};
   color: ${p =>
-    p.isActive ? p.theme.colors.blue : p.isDisabled ? p.theme.colors.grey : p.theme.colors.steel};
+    p.isActive
+      ? p.theme.colors.wallet
+      : p.isDisabled ? p.theme.colors.grey : p.theme.colors.graphite};
   margin-bottom: -1px;
   outline: none;
   cursor: ${p => (p.isActive ? 'default' : p.isDisabled ? 'not-allowed' : 'pointer')};

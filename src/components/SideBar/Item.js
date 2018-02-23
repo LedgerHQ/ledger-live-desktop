@@ -38,12 +38,13 @@ const Container = styled(Tabbable).attrs({
   cursor: pointer;
   color: ${p => p.theme.colors.dark};
   opacity: ${p => (p.isActive ? 1 : 0.4)};
-  background: ${p => (p.isActive ? p.theme.colors.argile : '')};
+  background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
   height: ${p => (p.big ? 50 : 36)}px;
   outline: none;
 
-  &:hover {
-    background: ${p => (p.isActive ? p.theme.colors.argile : p.theme.colors.cream)};
+  &:hover,
+  &:focus {
+    background: ${p => p.theme.colors.lightGrey};
   }
 `
 
@@ -88,7 +89,7 @@ function Item({
       <Box justifyContent="center">
         <Text fontSize={4}>{children}</Text>
         {desc && (
-          <Box color="steel" fontSize={3}>
+          <Box color="graphite" fontSize={3}>
             {desc}
           </Box>
         )}
@@ -98,7 +99,7 @@ function Item({
 }
 
 Item.defaultProps = {
-  iconActiveColor: 'blue',
+  iconActiveColor: 'wallet',
   big: false,
   desc: null,
   icon: null,

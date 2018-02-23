@@ -27,9 +27,9 @@ const Base = styled(Tabbable).attrs({
   outline: none;
   border-radius: 3px;
   border: 1px solid transparent;
-  background-color: ${p => (p.isChecked ? p.theme.colors.blue : p.theme.colors.white)};
+  background-color: ${p => (p.isChecked ? p.theme.colors.wallet : p.theme.colors.white)};
   box-shadow: 0 0 0 ${p => (p.isChecked ? 4 : 1)}px
-    ${p => (p.isChecked ? p.theme.colors.cream : p.theme.colors.argile)};
+    ${p => (p.isChecked ? p.theme.colors.lightGrey : p.theme.colors.graphite)};
   font-size: 7px;
   height: 19px;
   width: 19px;
