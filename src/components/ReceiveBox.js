@@ -82,6 +82,14 @@ class ReceiveBox extends PureComponent<Props, State> {
     ipcRenderer.on('msg', this.handleMsgEvent)
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props.address !== nextProps.address) {
+      this.setState({
+        ...defaultState,
+      })
+    }
+  }
+
   componentWillUnmount() {
     ipcRenderer.removeListener('msg', this.handleMsgEvent)
     this.setState({
