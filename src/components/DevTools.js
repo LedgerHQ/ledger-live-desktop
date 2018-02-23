@@ -78,7 +78,7 @@ const fontSizes: Array<SimpleType> = theme.fontSizes.map((s, i) => ({
 }))
 
 const Container = styled(Box).attrs({
-  bg: 'night',
+  bg: 'dark',
   p: 5,
   grow: true,
   color: 'white',
@@ -98,7 +98,7 @@ const Items = styled(Box).attrs({
 
 const Item = styled(Box).attrs({
   alignItems: 'center',
-  bg: 'night',
+  bg: 'dark',
   borderRadius: 1,
   color: 'white',
   justifyContent: 'center',
@@ -276,7 +276,7 @@ class DevTools extends PureComponent<any, State> {
 }
 
 const Color = ({ onClick, color }: { onClick: Function, color: ColorType }) => (
-  <Item bg={color.val} color={color.isDark ? 'white' : 'night'} onClick={onClick}>
+  <Item bg={color.val} color={color.isDark ? 'white' : 'dark'} onClick={onClick}>
     {color.name}
   </Item>
 )

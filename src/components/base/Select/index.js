@@ -32,7 +32,7 @@ type Props = {
   value?: Object | null,
 }
 
-const Container = styled(Box).attrs({ relative: true, color: 'steel' })``
+const Container = styled(Box).attrs({ relative: true, color: 'graphite' })``
 
 const TriggerBtn = styled(Box).attrs({
   p: 2,
@@ -43,7 +43,7 @@ const TriggerBtn = styled(Box).attrs({
   border-radius: 3px;
   display: flex;
   width: 100%;
-  color: ${p => p.theme.colors.steel};
+  color: ${p => p.theme.colors.graphite};
   background: ${p => p.theme.colors.white};
   cursor: pointer;
   &:focus {
@@ -56,7 +56,7 @@ const Item = styled(Box).attrs({
   alignItems: 'center',
   p: 2,
 })`
-  background: ${p => (p.highlighted ? p.theme.colors.cream : p.theme.colors.white)};
+  background: ${p => (p.highlighted ? p.theme.colors.lightGrey : p.theme.colors.white)};
 `
 
 const ItemWrapper = styled(Box)`
@@ -94,7 +94,7 @@ const FloatingTriangles = styled(Box).attrs({
 `
 
 const IconSelected = styled(Box).attrs({
-  bg: 'blue',
+  bg: 'wallet',
   color: 'white',
   alignItems: 'center',
   justifyContent: 'center',

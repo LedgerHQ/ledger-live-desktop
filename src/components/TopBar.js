@@ -46,14 +46,14 @@ const Inner = styled(Box).attrs({
 const Bar = styled.div`
   height: 15px;
   width: 1px;
-  background: ${p => p.theme.colors.mouse};
+  background: #ff0000;
 `
 
 const Activity = styled.div`
   background: ${p =>
     p.progress === true
-      ? p.theme.colors.dodgerBlue
-      : p.fail === true ? p.theme.colors.grenade : p.theme.colors.green};
+      ? p.theme.colors.wallet
+      : p.fail === true ? p.theme.colors.alertRed : p.theme.colors.positiveGreen};
   border-radius: 50%;
   bottom: 20px;
   height: 4px;
@@ -148,7 +148,7 @@ class TopBar extends PureComponent<Props, State> {
     const { sync } = this.state
 
     return (
-      <Container bg="cream" color="warmGrey">
+      <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal flow={4}>
             <GlobalSearch t={t} />
@@ -184,12 +184,11 @@ class TopBar extends PureComponent<Props, State> {
               ]}
               renderItem={({ item, isHighlighted }) => (
                 <DropDownItem isHighlighted={isHighlighted}>
-                  <Box color={isHighlighted ? 'dodgerBlue' : ''}>{item.icon}</Box>
+                  <Box color={isHighlighted ? 'wallet' : ''}>{item.icon}</Box>
                   <Box>{item.label}</Box>
                 </DropDownItem>
               )}
               alignItems="center"
-              color="warmGrey"
               ff="Open Sans|SemiBold"
               flow={1}
               fontSize={4}

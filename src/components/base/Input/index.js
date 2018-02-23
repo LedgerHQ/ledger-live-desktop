@@ -13,7 +13,7 @@ const Base = styled.input.attrs({
   border-radius: 3px;
   display: flex;
   width: 100%;
-  color: ${p => p.theme.colors.steel};
+  color: ${p => p.theme.colors.graphite};
   background: ${p => p.theme.colors.white};
 
   &::placeholder {

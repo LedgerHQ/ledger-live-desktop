@@ -48,7 +48,7 @@ function getProps({ disabled, icon, primary }: Object) {
       primary,
       {
         color: 'white',
-        bg: 'blue',
+        bg: 'wallet',
         withShadow: true,
       },
       {

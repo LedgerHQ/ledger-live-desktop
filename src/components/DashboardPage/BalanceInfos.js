@@ -23,7 +23,7 @@ type Props = {
 
 const Sub = styled(Text).attrs({
   ff: 'Open Sans',
-  color: 'warmGrey',
+  color: 'graphite',
   fontSize: 4,
 })``
 

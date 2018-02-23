@@ -8,7 +8,7 @@ import Box from 'components/base/Box'
 const Wrapper = styled(Box).attrs({
   align: 'center',
   justify: 'center',
-  color: p => (p.isActive ? 'blue' : 'mouse'),
+  color: p => (p.isActive ? 'wallet' : 'mouse'),
 })`
   width: 40px;
   flex-shrink: 0;
@@ -20,13 +20,13 @@ const Number = styled(Box).attrs({
   align: 'center',
   justify: 'center',
   color: p => (p.isActive ? 'white' : 'mouse'),
-  bg: p => (p.isActive ? 'blue' : 'pearl'),
+  bg: p => (p.isActive ? 'wallet' : 'pearl'),
 })`
   width: 20px;
   height: 20px;
   border-radius: 50%;
   font-size: 9px;
-  box-shadow: ${p => `0 0 0 ${p.isActive ? 4 : 0}px ${p.theme.colors.cream}`};
+  box-shadow: ${p => `0 0 0 ${p.isActive ? 4 : 0}px ${p.theme.colors.lightGrey}`};
   transition: all ease-in-out 0.1s ${p => (p.isActive ? 0.4 : 0)}s;
 `
 
@@ -45,7 +45,7 @@ const Bar = styled.div`
     top: 0;
     bottom: 0;
     position: absolute;
-    background: ${p => p.theme.colors.blue};
+    background: ${p => p.theme.colors.wallet};
     transition: transform ease-in-out 0.4s;
     transform-origin: center left;
     transform: scaleX(${p => (p.isActive ? 1 : 0)});

@@ -22,7 +22,7 @@ const AMOUNT_COL_SIZE = 150
 
 const Cap = styled(Text).attrs({
   fontSize: 2,
-  color: 'warmGrey',
+  color: 'graphite',
   ff: 'Museo Sans|Bold',
 })`
   text-transform: uppercase;
@@ -38,7 +38,7 @@ const Day = styled(Text).attrs({
 `
 
 const Hour = styled(Day).attrs({
-  color: 'warmGrey',
+  color: 'graphite',
 })``
 
 const HeaderCol = ({ size, children, ...props }: { size?: number, children: any }) => (
@@ -101,7 +101,11 @@ const Transaction = ({
             style={{ cursor: 'pointer' }}
             onClick={() => onAccountClick && onAccountClick(tx.account)}
           >
-            <Box alignItems="center" justifyContent="center" style={{ color: '#fcb653' }}>
+            <Box
+              alignItems="center"
+              justifyContent="center"
+              style={{ color: tx.account.currency.color }}
+            >
               {Icon && <Icon size={16} />}
             </Box>
             <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
@@ -119,7 +123,7 @@ const Transaction = ({
           display: 'block',
         }}
       >
-        <Box ff="Open Sans" fontSize={3} color="lead">
+        <Box ff="Open Sans" fontSize={3} color="graphite">
           {tx.balance > 0 ? t('transactionsList.from') : t('transactionsList.to')}
         </Box>
         <Box color="dark" ff="Open Sans" fontSize={3}>

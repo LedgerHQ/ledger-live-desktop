@@ -229,7 +229,7 @@ class DashboardPage extends PureComponent<Props, State> {
               <Box px={6}>
                 <BalanceInfos since={selectedTime} />
               </Box>
-              <Box ff="Open Sans" fontSize={4} color="warmGrey">
+              <Box ff="Open Sans" fontSize={4} color="graphite">
                 <AreaChart
                   id="dashboard-chart"
                   margin={{

@@ -141,7 +141,7 @@ class SettingsAccount extends PureComponent<Props, State> {
 
           return (
             <ModalBody onClose={onClose} flow={3}>
-              <Text fontSize={4} color="steel">
+              <Text fontSize={4} color="graphite">
                 Account settings
               </Text>
               <Box

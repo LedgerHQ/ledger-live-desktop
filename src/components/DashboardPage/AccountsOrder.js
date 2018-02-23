@@ -27,7 +27,7 @@ import IconArrowUp from 'icons/ArrowUp'
 const OrderIcon = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'dodgerBlue',
+  color: 'wallet',
 })`
   opacity: ${p => (p.isActive ? 1 : 0)};
 `

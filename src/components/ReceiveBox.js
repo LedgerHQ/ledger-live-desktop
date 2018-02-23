@@ -20,7 +20,7 @@ import QRCode from 'components/base/QRCode'
 import Text from 'components/base/Text'
 
 export const AddressBox = styled(Box).attrs({
-  bg: 'cream',
+  bg: 'lightGrey',
   p: 2,
 })`
   border-radius: 3px;

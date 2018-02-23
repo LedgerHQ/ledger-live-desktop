@@ -325,7 +325,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
           return (
             <ModalBody onClose={onClose} flow={3}>
-              <Text fontSize={6} color="steel">
+              <Text fontSize={6} color="graphite">
                 {t('addAccount.title')}
               </Text>
               <Step {...this.getStepProps()} />

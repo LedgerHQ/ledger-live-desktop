@@ -30,7 +30,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
 
 const Container = styled(Box).attrs({
   p: 1,
-  bg: 'blue',
+  bg: 'wallet',
   color: 'white',
   style: p => ({
     transform: `translate3d(0, ${p.offset}%, 0)`,
