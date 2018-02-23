@@ -317,7 +317,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     return (
       <Modal
         name={MODAL_ADD_ACCOUNT}
-        preventBackdropClick={step !== 'chooseWallet'}
+        preventBackdropClick={step !== 'chooseCurrency'}
         onClose={this.handleClose}
         onHide={this.handleHide}
         render={({ onClose }) => {
