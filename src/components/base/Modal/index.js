@@ -30,7 +30,7 @@ type Props = {
 }
 
 const springConfig = {
-  stiffness: 350,
+  stiffness: 380,
 }
 
 const mapStateToProps = (state, { name, isOpened }: { name: string, isOpened?: boolean }) => ({
@@ -77,7 +77,7 @@ const Wrapper = styled(Tabbable).attrs({
   mb: 100,
   style: p => ({
     opacity: p.op,
-    transform: `translate3d(0, ${p.offset}px, 0)`,
+    transform: `scale3d(${p.scale}, ${p.scale}, ${p.scale})`,
   }),
 })`
   outline: none;
@@ -174,22 +174,21 @@ export class Modal extends Component<Props> {
         onHide={onHide}
         motionStyle={(spring, isVisible) => ({
           opacity: spring(isVisible ? 1 : 0, springConfig),
-          y: spring(isVisible ? 0 : 20, springConfig),
+          scale: spring(isVisible ? 1 : 0.95, springConfig),
         })}
       >
         {(m, isVisible, isAnimated) => (
-          <Container isVisible={isVisible}>
+          <Container isVisible={isVisible} onClick={preventBackdropClick ? undefined : onClose}>
             <Backdrop op={m.opacity} />
             <GrowScroll
               alignItems="center"
               full
               justifyContent="flex-start"
-              onClick={preventBackdropClick ? undefined : onClose}
               style={{ height: '100%' }}
             >
               <Wrapper
                 op={m.opacity}
-                offset={m.y}
+                scale={m.scale}
                 innerRef={n => (this._wrapper = n)}
                 onClick={e => e.stopPropagation()}
               >
