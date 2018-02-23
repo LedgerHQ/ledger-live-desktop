@@ -3,7 +3,7 @@
   "productName": "Ledger Wallet Desktop",
   "description": "Ledger Wallet Desktop",
   "repository": "https://github.com/LedgerHQ/ledger-wallet-desktop",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "author": "Ledger",
   "license": "BSD-2-Clause",
   "scripts": {
