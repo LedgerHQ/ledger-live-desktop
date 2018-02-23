@@ -11,6 +11,7 @@
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "dist": "yarn compile && electron-builder",
     "flow": "flow",
+    "flow-typed": "flow-typed install -s --overwrite",
     "lint": "eslint src webpack .storybook",
     "postinstall": "bash ./scripts/postinstall.sh",
     "precommit": "lint-staged",

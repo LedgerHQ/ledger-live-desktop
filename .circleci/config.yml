@@ -13,6 +13,9 @@ jobs:
           name: Dependencies
           command: yarn
       - run:
+          name: Flow typed
+          command: yarn flow-typed
+      - run:
           name: Lint
           command: yarn lint
       - run:
