@@ -37,8 +37,9 @@ const Container = styled(Box).attrs({ relative: true, color: 'graphite' })``
 const TriggerBtn = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   p: 4,
+  pr: 5,
 })`
-  min-height: 58px;
+  min-height: 64px;
   ${space};
   border: 1px solid ${p => p.theme.colors.mouse};
   border-radius: 3px;

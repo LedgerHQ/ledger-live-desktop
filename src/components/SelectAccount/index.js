@@ -24,12 +24,12 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 const renderItem = item => (
   <Box horizontal alignItems="center">
     <Box grow>
-      <Text color="dark" fontSize={0} fontWeight="bold">
+      <Text color="dark" fontSize={4} fontWeight="bold">
         {item.name}
       </Text>
     </Box>
     <Box>
-      <Text color="mouse" fontSize={0}>
+      <Text color="mouse" fontSize={4}>
         {formatBTC(item.balance)}
       </Text>
     </Box>
@@ -51,6 +51,7 @@ export const SelectAccount = ({ accounts, onChange, value, t }: Props) => (
     keyProp="id"
     items={accounts}
     placeholder={t('SelectAccount.placeholder')}
+    fontSize={4}
     onChange={onChange}
   />
 )
