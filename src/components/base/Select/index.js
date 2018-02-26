@@ -35,7 +35,8 @@ type Props = {
 const Container = styled(Box).attrs({ relative: true, color: 'graphite' })``
 
 const TriggerBtn = styled(Box).attrs({
-  p: 2,
+  ff: 'Open Sans|SemiBold',
+  p: 4,
 })`
   min-height: 58px;
   ${space};
@@ -247,7 +248,9 @@ class Select extends PureComponent<Props> {
                       <Text color="mouse">{placeholder}</Text>
                     )}
                   </Box>
-                  <Triangles />
+                  <FloatingTriangles>
+                    <Triangles />
+                  </FloatingTriangles>
                 </TriggerBtn>
               )}
               {isOpen &&

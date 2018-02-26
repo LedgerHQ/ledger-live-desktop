@@ -20,13 +20,6 @@ body {
   line-height: 1.5;
 }
 
-input,
-textarea {
-  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  font-weight: 600;
-  line-height: normal;
-}
-
 #app {
   display: none;
   flex-direction: column;
