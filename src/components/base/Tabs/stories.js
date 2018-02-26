@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 
 import { number } from '@storybook/addon-knobs'

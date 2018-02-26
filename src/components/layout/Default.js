@@ -38,7 +38,9 @@ class Default extends Component<Props> {
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      this._scrollContainer._scrollbar.scrollTo(0, 0)
+      if (this._scrollContainer) {
+        this._scrollContainer._scrollbar.scrollTo(0, 0)
+      }
     }
   }
 
@@ -47,6 +49,7 @@ class Default extends Component<Props> {
   }
 
   _timeout = undefined
+  _scrollContainer = null
 
   render() {
     return (

@@ -1,6 +1,6 @@
 // @flow
 
-import type { RouterHistory } from 'react-router-dom'
+import type { HashHistory } from 'history'
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
@@ -10,7 +10,7 @@ import db from 'middlewares/db'
 
 import reducers from 'reducers'
 
-export default (history: RouterHistory) => {
+export default (history: HashHistory) => {
   const middlewares = [routerMiddleware(history), thunk, db]
   const enhancers = compose(
     applyMiddleware(...middlewares),
