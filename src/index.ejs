@@ -4,40 +4,8 @@
     <title><%= process.env.npm_package_productName %></title>
     <meta charset="utf-8">
     <style>
-      * {
-        -webkit-font-smoothing: antialiased;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font: inherit;
-        color: inherit;
-        user-select: none;
-        min-width: 0;
 
-        /* it will surely make problem in the future... to be inspected. */
-        flex-shrink: 0;
-      }
-
-      body {
-        cursor: default;
-        font-family: "Museo Sans", "Open Sans", Arial, Helvetica, sans-serif;
-        font-size: 16px;
-        font-weight: 300;
-        line-height: 1.5;
-      }
-
-      input,
-      textarea {
-        font-family: "Open Sans", Arial, Helvetica, sans-serif;;
-        font-weight: 600;
-        line-height: normal;
-      }
-
-      #app {
-        display: none;
-        flex-direction: column;
-        min-height: 100vh;
-      }
+      <%= __GLOBAL_STYLES__ %>
 
       #preload {
         -webkit-app-region: drag;
@@ -55,18 +23,12 @@
         transition: opacity 0.4s ease-in-out;
         z-index: 100;
       }
+
       #preload video {
         height: 144px;
         width: 256px;
       }
 
-      b {
-        font-weight: bold;
-      }
-
-      em {
-        font-style: italic;
-      }
     </style>
     <script>
       <% if (htmlWebpackPlugin.options.nodeModules) { %>

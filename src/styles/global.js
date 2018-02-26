@@ -10,6 +10,7 @@ import '@fortawesome/fontawesome-free-brands'
 
 import { fontFace, rgba } from 'styles/helpers'
 import { radii, colors } from 'styles/theme'
+import reset from './reset'
 
 const fonts = {
   'Open Sans': [
@@ -86,37 +87,13 @@ function transformFonts(allFonts) {
 
 injectGlobal`
   ${transformFonts(fonts)};
-
-  .scroll-content {
-    height: 100%;
-
-    > div {
-      height: 100%;
-    }
-  }
-  .scrollbar-thumb {
-    background: rgb(102, 102, 102) !important;
-    padding: 2px;
-    background-clip: content-box !important;
-  }
-  .scrollbar-track {
-    background: transparent !important;
-    transition: opacity 0.2s ease-in-out !important;
-    z-index: 20 !important;
-  }
-
-  .recharts-wrapper {
-    cursor: inherit !important;
-  }
+  ${reset};
 
   .tippy-tooltip {
     background-color: ${rgba(colors.dark, 0.8)};
     border-radius: ${radii[1]}px;
-    padding: 0;
   }
-  .tippy-tooltip .tippy-content {
-    background: transparent;
-  }
+
   .tippy-popper .tippy-roundarrow {
     fill: ${rgba(colors.dark, 0.8)};
   }
