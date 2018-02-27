@@ -1,14 +1,17 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-
 import styled from 'styled-components'
 import { space } from 'styled-system'
 
+import fontFamily from 'styles/styled/fontFamily'
+
 const Base = styled.input.attrs({
-  p: 2,
+  p: 4,
+  ff: 'Open Sans|SemiBold',
 })`
   ${space};
+  ${fontFamily};
   border: 1px solid ${p => p.theme.colors.mouse};
   border-radius: 3px;
   display: flex;

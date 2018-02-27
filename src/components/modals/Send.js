@@ -29,9 +29,9 @@ const Steps = {
         }
       }}
     >
-      <Box flow={3}>
+      <Box flow={5}>
         <Text fontSize={6}>{t('send.title')}</Text>
-        <Box flow={1}>
+        <Box flow={2}>
           <Label>Account to debit</Label>
           <SelectAccount onChange={props.onChangeInput('account')} value={props.value.account} />
         </Box>
