@@ -1,3 +1,5 @@
+import { ff } from 'styles/helpers'
+
 export default props => {
   const prop = props.ff
 
@@ -5,12 +7,5 @@ export default props => {
     return null
   }
 
-  const [font, type = 'Regular'] = prop.split('|')
-  const { style, weight } = props.theme.fontFamilies[font][type]
-
-  return {
-    fontFamily: font,
-    fontWeight: weight,
-    fontStyle: style,
-  }
+  return ff(prop)
 }

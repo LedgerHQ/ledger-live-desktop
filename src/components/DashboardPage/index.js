@@ -51,7 +51,7 @@ type Props = {
 type State = {
   accountsChunk: Array<any>,
   allTransactions: Array<Object>,
-  fakeDatas: Array<any>,
+  fakeDatas: Object,
   fakeDatasMerge: Array<any>,
   selectedTime: string,
 }
@@ -63,16 +63,22 @@ const TIMEOUT_REFRESH_DATAS = 5e3
 const itemsTimes = [{ key: 'day' }, { key: 'week' }, { key: 'month' }, { key: 'year' }]
 
 const generateFakeData = v => ({
+  index: v,
   name: `Day ${v}`,
   value: random(10, 100),
 })
 
 const generateFakeDatas = accounts =>
-  accounts.map(() => [...Array(25).keys()].map(v => generateFakeData(v + 1)))
+  accounts.reduce((result, a) => {
+    result[a.id] = [...Array(25).keys()].map(v => generateFakeData(v + 1))
+
+    return result
+  }, {})
 
 const mergeFakeDatas = fakeDatas =>
   takeRight(
-    fakeDatas.reduce((res, data) => {
+    Object.keys(fakeDatas).reduce((res, k) => {
+      const data = fakeDatas[k]
       data.forEach((d, i) => {
         res[i] = {
           name: d.name,
@@ -122,7 +128,7 @@ class DashboardPage extends PureComponent<Props, State> {
     this.state = {
       accountsChunk: getAccountsChunk(props.accounts),
       allTransactions: getAllTransactions(props.accounts),
-      fakeDatas: generateFakeDatas(props.accounts),
+      fakeDatas,
       fakeDatasMerge: mergeFakeDatas(fakeDatas),
       selectedTime: 'day',
     }
@@ -142,7 +148,7 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.fakeDatas.length === 0) {
+    if (Object.keys(this.state.fakeDatas).length === 0) {
       const fakeDatas = generateFakeDatas(nextProps.accounts)
 
       this.setState({
@@ -165,30 +171,32 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   addFakeDatasOnAccounts = () => {
-    const { accounts } = this.props
-    const { fakeDatas } = this.state
+    this._timeout = setTimeout(() => {
+      const { fakeDatas } = this.state
 
-    const newFakeDatas = accounts.reduce((res, acc, i) => {
-      if (res[i]) {
-        const nextIndex = res[i].length
-        res[i][nextIndex] = generateFakeData(nextIndex)
-        res[i] = takeRight(res[i], 25)
-      }
-      return res
-    }, fakeDatas)
+      const newFakeDatas = {}
 
-    window.requestIdleCallback(() => {
-      if (this._mounted) {
-        this.setState({
-          fakeDatas: newFakeDatas,
-          fakeDatasMerge: mergeFakeDatas(newFakeDatas),
-        })
-      }
+      Object.keys(fakeDatas).forEach(k => {
+        const data = fakeDatas[k]
 
-      this._timeout = setTimeout(() => {
+        data.shift()
+
+        const lastIndex = data[data.length - 1]
+
+        newFakeDatas[k] = [...data, generateFakeData(lastIndex.index + 1)]
+      })
+
+      window.requestIdleCallback(() => {
+        if (this._mounted) {
+          this.setState({
+            fakeDatas: newFakeDatas,
+            fakeDatasMerge: mergeFakeDatas(newFakeDatas),
+          })
+        }
+
         this.addFakeDatasOnAccounts()
-      }, TIMEOUT_REFRESH_DATAS)
-    })
+      })
+    }, TIMEOUT_REFRESH_DATAS)
   }
 
   _timeout = undefined
@@ -199,7 +207,6 @@ class DashboardPage extends PureComponent<Props, State> {
     const { push, accounts, t } = this.props
     const { accountsChunk, allTransactions, selectedTime, fakeDatas, fakeDatasMerge } = this.state
 
-    let accountIndex = 0
     const totalAccounts = accounts.length
 
     return (
@@ -232,15 +239,16 @@ class DashboardPage extends PureComponent<Props, State> {
               <Box ff="Open Sans" fontSize={4} color="graphite">
                 <AreaChart
                   id="dashboard-chart"
-                  margin={{
+                  padding={{
                     top: space[6],
-                    bottom: 0,
-                    left: space[6] - 10,
+                    bottom: space[6],
+                    left: space[6] * 2,
                     right: space[6],
                   }}
                   color="#5286f7"
                   height={250}
                   data={fakeDatasMerge}
+                  strokeWidth={2}
                 />
               </Box>
             </Card>
@@ -272,7 +280,7 @@ class DashboardPage extends PureComponent<Props, State> {
                           <AccountCard
                             key={account.id}
                             account={account}
-                            data={fakeDatas[accountIndex++]}
+                            data={fakeDatas[account.id]}
                             onClick={() => push(`/account/${account.id}`)}
                           />
                         ),
