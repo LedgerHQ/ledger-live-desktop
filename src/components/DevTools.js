@@ -5,7 +5,12 @@
 import React, { PureComponent } from 'react'
 import { remote, ipcRenderer } from 'electron'
 import { translate } from 'react-i18next'
-import { AreaChart, Area } from 'recharts'
+import { VictoryArea } from 'victory'
+import styled from 'styled-components'
+import color from 'color'
+import fs from 'fs'
+import path from 'path'
+
 import takeRight from 'lodash/takeRight'
 import last from 'lodash/last'
 import reduce from 'lodash/fp/reduce'
@@ -13,15 +18,11 @@ import flow from 'lodash/fp/flow'
 import filter from 'lodash/fp/filter'
 import sortBy from 'lodash/fp/sortBy'
 import chunk from 'lodash/chunk'
-import styled from 'styled-components'
-import color from 'color'
-import fs from 'fs'
-import path from 'path'
 
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
 import CopyToClipboard from 'components/base/CopyToClipboard'
-import { ChartWrapper } from 'components/base/Chart'
+import { WrapperChart } from 'components/base/Chart'
 
 import staticPath from 'helpers/staticPath'
 
@@ -245,22 +246,22 @@ class DevTools extends PureComponent<any, State> {
                       <Box>{k}</Box>
                     </Box>
                     <Box>
-                      <ChartWrapper
-                        render={({ width }) => (
-                          <AreaChart
-                            width={width}
-                            height={40}
+                      <WrapperChart
+                        height={50}
+                        render={({ height, width }) => (
+                          <VictoryArea
                             data={cpuUsage[k]}
-                            margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
-                          >
-                            <Area
-                              type="monotone"
-                              stroke="#8884d8"
-                              fill="#8884d8"
-                              dataKey="value"
-                              isAnimationActive={false}
-                            />
-                          </AreaChart>
+                            y="value"
+                            style={{
+                              data: {
+                                stroke: '#8884d8',
+                                fill: '#8884d8',
+                              },
+                            }}
+                            height={height}
+                            width={width}
+                            padding={{ top: 10, right: 0, left: 0, bottom: 0 }}
+                          />
                         )}
                       />
                     </Box>

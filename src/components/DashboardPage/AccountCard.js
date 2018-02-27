@@ -5,7 +5,7 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Account } from 'types/common'
 
-import { AreaChart } from 'components/base/Chart'
+import { SimpleAreaChart } from 'components/base/Chart'
 import Bar from 'components/base/Bar'
 import Box, { Card } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -20,6 +20,7 @@ const AccountCard = ({
   onClick: Function,
 }) => {
   const Icon = getIconByCoinType(account.currency.coinType)
+
   return (
     <Card p={4} flow={4} flex={1} style={{ cursor: 'pointer' }} onClick={onClick}>
       <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
@@ -45,14 +46,13 @@ const AccountCard = ({
           val={account.balance}
         />
       </Box>
-      <AreaChart
-        tiny
+      <SimpleAreaChart
         id={`account-chart-${account.id}`}
         color={account.currency.color}
         height={52}
         data={data}
-        strokeWidth={1}
-        linearGradient={[[5, 0.4], [80, 0]]}
+        strokeWidth={1.5}
+        linearGradient={[[5, 0.2], [75, 0]]}
       />
     </Card>
   )

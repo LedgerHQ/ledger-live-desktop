@@ -52,14 +52,9 @@ em {
   z-index: 20 !important;
 }
 
-.recharts-wrapper {
-  cursor: inherit !important;
-}
-
-.tippy-tooltip .tippy-content {
-  background: transparent;
-}
-
 .tippy-tooltip {
   padding: 0;
+}
+.tippy-tooltip .tippy-content {
+  background: transparent;
 }`
