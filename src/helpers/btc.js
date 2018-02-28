@@ -145,6 +145,7 @@ export async function getAccount({
           index: currentAddress.index,
           path: `${path}/${getPath('external', currentAddress.index + 1)}`,
           transactions: transactions.map(t => ({
+            confirmations: t.confirmations,
             address: t.balance > 0 ? t.inputs[0].address : t.outputs[0].address,
             balance: t.balance,
             hash: t.hash,

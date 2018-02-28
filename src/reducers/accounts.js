@@ -5,6 +5,7 @@ import { handleActions } from 'redux-actions'
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
+import defaultsDeep from 'lodash/defaultsDeep'
 
 import { getDefaultUnitByCoinType, getCurrencyByCoinType } from '@ledgerhq/currencies'
 
@@ -24,11 +25,19 @@ function orderAccountsTransactions(account: Account) {
   }
 }
 
+function applyDefaults(account) {
+  return defaultsDeep(account, {
+    settings: {
+      minConfirmations: 2,
+    },
+  })
+}
+
 const handlers: Object = {
   SET_ACCOUNTS: (
     state: AccountsState,
     { payload: accounts }: { payload: Accounts },
-  ): AccountsState => accounts,
+  ): AccountsState => accounts.map(applyDefaults),
 
   ADD_ACCOUNT: (
     state: AccountsState,
