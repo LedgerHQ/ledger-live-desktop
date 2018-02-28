@@ -41,7 +41,7 @@ const TriggerBtn = styled(Box).attrs({
 })`
   min-height: 64px;
   ${space};
-  border: 1px solid ${p => p.theme.colors.mouse};
+  border: 1px solid ${p => p.theme.colors.fog};
   border-radius: 3px;
   display: flex;
   width: 100%;
@@ -63,7 +63,7 @@ const Item = styled(Box).attrs({
 
 const ItemWrapper = styled(Box)`
   & + & {
-    border-top: 1px solid ${p => p.theme.colors.mouse};
+    border-top: 1px solid ${p => p.theme.colors.fog};
   }
 `
 
@@ -71,7 +71,7 @@ const Dropdown = styled(Box).attrs({
   mt: 1,
 })`
   border-radius: 3px;
-  border: 1px solid ${p => p.theme.colors.mouse};
+  border: 1px solid ${p => p.theme.colors.fog};
   box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
   left: 0;
   position: absolute;
@@ -246,7 +246,7 @@ class Select extends PureComponent<Props> {
                     {selectedItem && renderSelected ? (
                       renderSelected(selectedItem)
                     ) : (
-                      <Text color="mouse">{placeholder}</Text>
+                      <Text color="fog">{placeholder}</Text>
                     )}
                   </Box>
                   <FloatingTriangles>

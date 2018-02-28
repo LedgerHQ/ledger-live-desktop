@@ -58,7 +58,7 @@ const TransactionRaw = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
-  border-bottom: 1px solid ${p => p.theme.colors.argile};
+  border-bottom: 1px solid ${p => p.theme.colors.fog};
   height: 68px;
 
   &:last-child {

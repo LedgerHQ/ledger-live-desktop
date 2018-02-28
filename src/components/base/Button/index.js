@@ -14,7 +14,7 @@ const Base = styled.button`
   ${fontSize};
   ${fontWeight};
   border-radius: 5px;
-  border: ${p => (p.primary ? '' : `1px solid ${p.theme.colors.mouse}`)};
+  border: ${p => (p.primary ? '' : `1px solid ${p.theme.colors.fog}`)};
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
   height: 40px;
   box-shadow: ${p => (p.withShadow ? 'rgba(0, 0, 0, 0.2) 0 3px 10px' : '')};
@@ -57,7 +57,7 @@ function getProps({ disabled, icon, primary }: Object) {
     ),
     ...props(disabled, {
       color: 'white',
-      bg: 'argile',
+      bg: 'fog',
       withShadow: false,
     }),
   }

@@ -94,7 +94,7 @@ const Body = styled(Box).attrs({
 
 const CloseContainer = styled(Box).attrs({
   p: 4,
-  color: 'mouse',
+  color: 'fog',
 })`
   cursor: pointer;
   position: absolute;

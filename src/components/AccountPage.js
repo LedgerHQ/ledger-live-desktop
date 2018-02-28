@@ -72,7 +72,7 @@ class AccountPage extends PureComponent<Props> {
             <Button
               style={{ width: 50 }}
               icon="sliders-h"
-              color="mouse"
+              color="fog"
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
             />
           </Box>

@@ -12,7 +12,7 @@ const Base = styled.input.attrs({
 })`
   ${space};
   ${fontFamily};
-  border: 1px solid ${p => p.theme.colors.mouse};
+  border: 1px solid ${p => p.theme.colors.fog};
   border-radius: 3px;
   display: flex;
   width: 100%;
@@ -20,7 +20,7 @@ const Base = styled.input.attrs({
   background: ${p => p.theme.colors.white};
 
   &::placeholder {
-    color: ${p => p.theme.colors.mouse};
+    color: ${p => p.theme.colors.fog};
   }
 
   &:focus {

@@ -36,7 +36,7 @@ const Base = styled(Tabbable).attrs({
   transition: all ease-in 0.1s;
 
   &:focus {
-    border-color: ${p => p.theme.colors.mouse};
+    border-color: ${p => p.theme.colors.fog};
   }
 `
 
