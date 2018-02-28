@@ -122,16 +122,23 @@ const Transaction = ({
         grow
         shrink
         style={{
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
           display: 'block',
         }}
       >
         <Box ff="Open Sans" fontSize={3} color="graphite">
           {tx.balance > 0 ? t('transactionsList.from') : t('transactionsList.to')}
         </Box>
-        <Box color="dark" ff="Open Sans" fontSize={3}>
+        <Box
+          color="dark"
+          ff="Open Sans"
+          fontSize={3}
+          style={{
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+            display: 'block',
+          }}
+        >
           {tx.address}
         </Box>
       </Cell>
