@@ -18,9 +18,14 @@ export type Transaction = {
   balance: number,
   hash: string,
   receivedAt: string,
+  confirmations: number,
 }
 
 // -------------------- Accounts
+
+export type AccountSettings = {
+  minConfirmations: number,
+}
 
 export type Account = {
   address: string,
@@ -35,6 +40,7 @@ export type Account = {
   path: string,
   transactions: Array<Transaction>,
   unit: Unit,
+  settings: AccountSettings,
 }
 
 export type Accounts = Array<Account>

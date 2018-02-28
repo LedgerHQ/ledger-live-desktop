@@ -25,7 +25,7 @@ import TransactionsList from 'components/TransactionsList'
 
 type Props = {
   t: T,
-  account: Account,
+  account?: Account,
   openModal: Function,
 }
 
