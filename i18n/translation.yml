@@ -1,0 +1,84 @@
+common:
+  ok: Okay
+  cancel: Cancel
+  chooseWalletPlaceholder: Choose a wallet...
+  currency: Currency
+language:
+  en: English
+  fr: French
+orderAccounts:
+  name: Alphabetic
+  balance: Balance
+  type: Cryptocurrency
+sidebar:
+  menu: Menu
+  accounts: Accounts
+device:
+  connected: Connected
+  notConnected: Not connected
+dashboard:
+  title: Dashboard
+  greetings: 'Good morning, {{name}}.'
+  summary: here is the summary of your account
+  summary_plural: 'here is the summary of your {{count}} accounts'
+  noAccounts: no accounts
+  recentActivity: Recent activity
+send:
+  title: Send
+receive:
+  title: Receive
+addAccount:
+  title: Add account
+  import:
+    placeholder: 'Account {{index}}'
+settings:
+  title: Settings
+  tabs:
+    display: Display
+    money: Money
+    material: Material
+    app: App (beta)
+    tools: Tools
+    blockchain: Blockchain
+    profile: Profile
+  display:
+    language: Language
+    orderAccounts: Order accounts
+  profile:
+    protectWithPassword: Protect local data with a password
+    password: Password
+SelectAccount:
+  placeholder: Select an account
+AccountPage:
+  balance: Balance
+  receive: Receive
+  lastOperations: Last operations
+update:
+  newVersionReady: A new version is ready to be installed.
+  relaunch: Re-launch app now
+IsUnlocked:
+  password: Password
+sendModal:
+  Amount: Amount
+  Summary: Summary
+  SecureValidation: Secure validation
+  Confirmation: Confirmation
+time:
+  day: Day
+  week: Week
+  month: Month
+  year: Year
+global:
+  sortBy: Sort by
+  search: Search
+  save: Save
+transactionsList:
+  date: Date
+  account: Account
+  address: Address
+  amount: Amount
+  from: From
+  to: To
+mainDropdown:
+  editProfile: Edit profile
+  lockApplication: Lock application
