@@ -22,6 +22,9 @@ const accounts = [...Array(20)].map(() => ({
   path: '',
   transactions: [],
   unit: getDefaultUnitByCoinType(0),
+  settings: {
+    minConfirmations: 2,
+  },
 }))
 
 type State = {

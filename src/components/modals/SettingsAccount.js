@@ -18,9 +18,11 @@ import Input from 'components/base/Input'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
 import Icon from 'components/base/Icon'
+import Label from 'components/base/Label'
 
 type State = {
   accountName: string | null,
+  minConfirmations: number | null,
   editName: boolean,
   nameHovered: boolean,
 }
@@ -44,6 +46,7 @@ const mapDispatchToProps = {
 const defaultState = {
   editName: false,
   accountName: null,
+  minConfirmations: null,
   nameHovered: false,
 }
 
@@ -57,7 +60,7 @@ class SettingsAccount extends PureComponent<Props, State> {
   }
 
   getAccount(data: Object) {
-    const { accountName } = this.state
+    const { accountName, minConfirmations } = this.state
 
     const account = get(data, 'account', {})
 
@@ -68,6 +71,10 @@ class SettingsAccount extends PureComponent<Props, State> {
             name: accountName,
           }
         : {}),
+      settings: {
+        ...account.settings,
+        minConfirmations: minConfirmations || account.settings.minConfirmations,
+      },
     }
   }
 
@@ -75,6 +82,20 @@ class SettingsAccount extends PureComponent<Props, State> {
     this.setState({
       nameHovered: state,
     })
+
+  handleChangeMinConfirmations = account => minConfirmations => {
+    const { updateAccount } = this.props
+    this.setState({ minConfirmations })
+    window.requestAnimationFrame(() => {
+      updateAccount({
+        ...account,
+        settings: {
+          ...account.settings,
+          minConfirmations,
+        },
+      })
+    })
+  }
 
   handleEditName = (state: boolean) => () =>
     this.setState({
@@ -178,6 +199,16 @@ class SettingsAccount extends PureComponent<Props, State> {
                       <Icon name="edit" />
                     </Box>
                   )}
+              </Box>
+              <Box>
+                <Label>{'Minimum confirmations'}</Label>
+                <Input
+                  type="number"
+                  min={1}
+                  max={100}
+                  value={account.settings.minConfirmations}
+                  onChange={this.handleChangeMinConfirmations(account)}
+                />
               </Box>
               <Box horizontal grow alignItems="flex-end" flow={2}>
                 <Box grow>

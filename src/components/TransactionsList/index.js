@@ -15,10 +15,12 @@ import Box from 'components/base/Box'
 import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
+import ConfirmationCheck from './ConfirmationCheck'
 
 const DATE_COL_SIZE = 80
 const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
+const CONFIRMATION_COL_SIZE = 30
 
 const Cap = styled(Text).attrs({
   fontSize: 2,
@@ -41,7 +43,7 @@ const Hour = styled(Day).attrs({
   color: 'graphite',
 })``
 
-const HeaderCol = ({ size, children, ...props }: { size?: number, children: any }) => (
+const HeaderCol = ({ size, children, ...props }: { size?: number, children?: any }) => (
   <Cell size={size} {...props}>
     <Cap>{children}</Cap>
   </Cell>
@@ -49,6 +51,7 @@ const HeaderCol = ({ size, children, ...props }: { size?: number, children: any 
 
 HeaderCol.defaultProps = {
   size: undefined,
+  children: undefined,
 }
 
 const TransactionRaw = styled(Box).attrs({
@@ -76,11 +79,13 @@ const Transaction = ({
   onAccountClick,
   tx,
   withAccounts,
+  minConfirmations,
 }: {
   t: T,
   onAccountClick?: Function,
   tx: TransactionType,
   withAccounts?: boolean,
+  minConfirmations: number,
 }) => {
   const time = moment(tx.receivedAt)
   const Icon = getIconByCoinType(get(tx, 'account.currency.coinType'))
@@ -117,16 +122,23 @@ const Transaction = ({
         grow
         shrink
         style={{
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          textOverflow: 'ellipsis',
           display: 'block',
         }}
       >
         <Box ff="Open Sans" fontSize={3} color="graphite">
           {tx.balance > 0 ? t('transactionsList.from') : t('transactionsList.to')}
         </Box>
-        <Box color="dark" ff="Open Sans" fontSize={3}>
+        <Box
+          color="dark"
+          ff="Open Sans"
+          fontSize={3}
+          style={{
+            overflow: 'hidden',
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+            display: 'block',
+          }}
+        >
           {tx.address}
         </Box>
       </Cell>
@@ -138,6 +150,9 @@ const Transaction = ({
           fontSize={4}
           alwaysShowSign
         />
+      </Cell>
+      <Cell size={CONFIRMATION_COL_SIZE} px={0} align="center" justify="center">
+        <ConfirmationCheck minConfirmations={minConfirmations} confirmations={tx.confirmations} />
       </Cell>
     </TransactionRaw>
   )
@@ -153,12 +168,14 @@ type Props = {
   onAccountClick?: Function,
   transactions: Array<TransactionType>,
   withAccounts?: boolean,
+  minConfirmations: number,
 }
 
 class TransactionsList extends Component<Props> {
   static defaultProps = {
     onAccountClick: noop,
     withAccounts: false,
+    minConfirmations: 2,
   }
 
   shouldComponentUpdate(nextProps: Props) {
@@ -174,7 +191,7 @@ class TransactionsList extends Component<Props> {
   _hashCache = null
 
   render() {
-    const { transactions, withAccounts, onAccountClick, t } = this.props
+    const { transactions, withAccounts, onAccountClick, minConfirmations, t } = this.props
 
     this._hashCache = this.getHashCache(transactions)
 
@@ -189,6 +206,7 @@ class TransactionsList extends Component<Props> {
           <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
             {t('transactionsList.amount')}
           </HeaderCol>
+          <HeaderCol size={CONFIRMATION_COL_SIZE} px={0} />
         </Box>
         <Defer>
           <Box>
@@ -198,6 +216,7 @@ class TransactionsList extends Component<Props> {
                 key={`{${trans.hash}-${trans.account ? trans.account.id : ''}`}
                 withAccounts={withAccounts}
                 onAccountClick={onAccountClick}
+                minConfirmations={minConfirmations}
                 tx={trans}
               />
             ))}
