@@ -148,7 +148,7 @@ export default async ({
 
     const hdnode = getHDNode({ xpub58, network })
     const account = await getAccount({
-      path,
+      rootPath: path,
       hdnode,
       coinType,
       network,

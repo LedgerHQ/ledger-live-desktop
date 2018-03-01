@@ -13,6 +13,7 @@ import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
+import { setCounterValues } from 'reducers/counterValues'
 
 import db from 'helpers/db'
 
@@ -27,6 +28,9 @@ const history = createHistory()
 const store = createStore(history)
 const rootNode = document.getElementById('app')
 
+const counterValues = require('../datas.json')
+
+store.dispatch(setCounterValues(counterValues))
 store.dispatch(fetchSettings())
 
 const state = store.getState() || {}

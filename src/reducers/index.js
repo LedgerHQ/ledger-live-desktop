@@ -5,23 +5,26 @@ import { routerReducer as router } from 'react-router-redux'
 
 import type { LocationShape } from 'react-router'
 
-import application from './application'
 import accounts from './accounts'
+import application from './application'
+import counterValues from './counterValues'
 import devices from './devices'
 import modals from './modals'
 import settings from './settings'
 import update from './update'
 
-import type { ApplicationState } from './application'
 import type { AccountsState } from './accounts'
+import type { ApplicationState } from './application'
+import type { CounterValuesState } from './counterValues'
 import type { DevicesState } from './devices'
 import type { ModalsState } from './modals'
 import type { SettingsState } from './settings'
 import type { UpdateState } from './update'
 
 export type State = {
-  application: ApplicationState,
   accounts: AccountsState,
+  application: ApplicationState,
+  counterValues: CounterValuesState,
   devices: DevicesState,
   modals: ModalsState,
   router: LocationShape,
@@ -30,8 +33,9 @@ export type State = {
 }
 
 export default combineReducers({
-  application,
   accounts,
+  application,
+  counterValues,
   devices,
   modals,
   router,

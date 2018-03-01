@@ -2,7 +2,14 @@
 
 import ledger from 'ledger-test-library'
 import bitcoin from 'bitcoinjs-lib'
+
+import groupBy from 'lodash/groupBy'
 import noop from 'lodash/noop'
+import uniqBy from 'lodash/uniqBy'
+
+import type { Transactions } from 'types/common'
+
+const GAP_LIMIT_ADDRESSES = 20
 
 export const networks = [
   {
@@ -15,36 +22,63 @@ export const networks = [
   },
 ]
 
-export function computeTransaction(addresses: Array<*>) {
-  return (transaction: Object) => {
-    const outputVal = transaction.outputs
+export function computeTransaction(addresses: Array<string>) {
+  return (t: Object) => {
+    const outputVal = t.outputs
       .filter(o => addresses.includes(o.address))
       .reduce((acc, cur) => acc + cur.value, 0)
-    const inputVal = transaction.inputs
+    const inputVal = t.inputs
       .filter(i => addresses.includes(i.address))
       .reduce((acc, cur) => acc + cur.value, 0)
     const balance = outputVal - inputVal
     return {
-      ...transaction,
+      address: t.balance > 0 ? t.inputs[0].address : t.outputs[0].address,
       balance,
+      confirmations: t.confirmations,
+      hash: t.hash,
+      receivedAt: t.received_at,
     }
   }
 }
 
+export function getBalanceByDay(transactions: Transactions) {
+  const txsByDate = groupBy(transactions, tx => {
+    const [date] = new Date(tx.receivedAt).toISOString().split('T')
+    return date
+  })
+
+  let balance = 0
+
+  return Object.keys(txsByDate)
+    .sort()
+    .reduce((result, k) => {
+      const txs = txsByDate[k]
+
+      balance += txs.reduce((r, v) => {
+        r += v.balance
+        return r
+      }, 0)
+
+      result[k] = balance
+
+      return result
+    }, {})
+}
+
 export async function getAccount({
+  rootPath,
   allAddresses = [],
   currentIndex = 0,
-  path,
   hdnode,
   segwit,
   network,
   coinType,
-  asyncDelay = 500,
+  asyncDelay = 250,
   onProgress = noop,
 }: {
+  rootPath: string,
   allAddresses?: Array<string>,
   currentIndex?: number,
-  path: string,
   hdnode: Object,
   segwit: boolean,
   coinType: number,
@@ -52,7 +86,6 @@ export async function getAccount({
   asyncDelay?: number,
   onProgress?: Function,
 }) {
-  const gapLimit = 20
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
 
   let balance = 0
@@ -75,28 +108,26 @@ export async function getAccount({
 
   const getPath = (type, index) => `${type === 'external' ? 0 : 1}/${index}`
 
-  const getAddress = ({ type, index }) => ({
-    type,
-    index,
-    address: getPublicAddress({ hdnode, path: getPath(type, index), script, segwit }),
-  })
+  const getAddress = ({ type, index }) => {
+    const p = getPath(type, index)
+    return {
+      type,
+      index,
+      path: `${rootPath}/${p}`,
+      address: getPublicAddress({ hdnode, path: p, script, segwit }),
+    }
+  }
 
   const getAsyncAddress = params =>
     new Promise(resolve => setTimeout(() => resolve(getAddress(params)), asyncDelay))
 
   const getLastAddress = (addresses, txs) => {
     const txsAddresses = [...txs.inputs.map(tx => tx.address), ...txs.outputs.map(tx => tx.address)]
-    const lastAddress = addresses.reverse().find(a => txsAddresses.includes(a.address)) || {
-      index: 0,
-    }
-    return {
-      ...lastAddress,
-      address: getAddress({ type: 'external', index: lastAddress.index + 1 }).address,
-    }
+    return addresses.find(a => txsAddresses.includes(a.address)) || null
   }
 
   const nextPath = (index = 0) =>
-    Array.from(new Array(gapLimit).keys())
+    Array.from(new Array(GAP_LIMIT_ADDRESSES).keys())
       .reduce(
         (promise, v) =>
           promise.then(async results => {
@@ -117,39 +148,44 @@ export async function getAccount({
         const transactionsOpts = { coin_type: coinType }
         const txs = await ledger.getTransactions(listAddresses, transactionsOpts)
 
+        txs.reverse()
+
         const hasTransactions = txs.length > 0
 
         if (hasTransactions) {
           const newTransactions = txs.map(computeTransaction(allAddresses))
+          const txHashs = transactions.map(t => t.hash)
+
+          balance = newTransactions
+            .filter(t => !txHashs.includes(t.hash))
+            .reduce((result, v) => result + v.balance, balance)
 
           lastAddress = getLastAddress(addresses, txs[0])
-          transactions = [...transactions, ...newTransactions]
-          balance = newTransactions.reduce((result, v) => result + v.balance, balance)
+          transactions = uniqBy([...transactions, ...newTransactions], t => t.hash)
 
           onProgress({
             balance,
             transactions: transactions.length,
           })
 
-          return nextPath(index + (gapLimit - 1))
+          return nextPath(index + (GAP_LIMIT_ADDRESSES - 1))
         }
 
-        const currentAddress =
-          lastAddress !== null ? lastAddress : getAddress({ type: 'external', index: 0 })
+        const { type, ...nextAddress } =
+          lastAddress !== null
+            ? getAddress({
+                type: 'external',
+                index: lastAddress.index + 1,
+              })
+            : getAddress({ type: 'external', index: 0 })
 
         return {
-          address: currentAddress.address,
-          addresses: allAddresses,
+          ...nextAddress,
+          addresses: transactions.length > 0 ? allAddresses : [],
           balance,
-          index: currentAddress.index,
-          path: `${path}/${getPath('external', currentAddress.index + 1)}`,
-          transactions: transactions.map(t => ({
-            confirmations: t.confirmations,
-            address: t.balance > 0 ? t.inputs[0].address : t.outputs[0].address,
-            balance: t.balance,
-            hash: t.hash,
-            receivedAt: t.received_at,
-          })),
+          balanceByDay: getBalanceByDay(transactions),
+          rootPath,
+          transactions,
         }
       })
 

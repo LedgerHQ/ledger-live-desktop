@@ -23,18 +23,19 @@ type Props = {
 }
 
 function FormattedVal(props: Props) {
-  const { val, fiat, isPercent, alwaysShowSign, showCode, ...p } = props
-  let { unit } = props
+  const { fiat, isPercent, alwaysShowSign, showCode, ...p } = props
+  let { val, unit } = props
 
   const isNegative = val < 0
 
   let text = ''
 
   if (isPercent) {
-    text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${val} %`
+    text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${isNegative ? val * -1 : val} %`
   } else {
     if (fiat) {
       unit = getFiatUnit(fiat)
+      val *= 100
     } else if (!unit) {
       return ''
     }

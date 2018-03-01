@@ -8,8 +8,9 @@ import Box, { Tabbable } from 'components/base/Box'
 import BoldToggle from 'components/base/BoldToggle'
 
 type Item = {
-  key: string,
   label: string,
+  key: string,
+  value?: any,
 }
 
 type Props = {

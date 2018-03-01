@@ -8,28 +8,23 @@ import { push } from 'react-router-redux'
 
 import chunk from 'lodash/chunk'
 import get from 'lodash/get'
-import random from 'lodash/random'
 import sortBy from 'lodash/sortBy'
-import takeRight from 'lodash/takeRight'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Accounts, T } from 'types/common'
-
-import { space } from 'styles/theme'
+import type { Account, Accounts, T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
-import { AreaChart } from 'components/base/Chart'
+import BalanceSummary from 'components/BalanceSummary'
 import Box, { Card } from 'components/base/Box'
 import Pills from 'components/base/Pills'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
 
 import AccountCard from './AccountCard'
-import BalanceInfos from './BalanceInfos'
 import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
@@ -49,46 +44,19 @@ type Props = {
 }
 
 type State = {
-  accountsChunk: Array<any>,
+  accountsChunk: Array<Array<Account | null>>,
   allTransactions: Array<Object>,
-  fakeDatas: Object,
-  fakeDatasMerge: Array<any>,
   selectedTime: string,
 }
 
 const ACCOUNTS_BY_LINE = 3
 const ALL_TRANSACTIONS_LIMIT = 10
-const TIMEOUT_REFRESH_DATAS = 5e3
 
-const itemsTimes = [{ key: 'day' }, { key: 'week' }, { key: 'month' }, { key: 'year' }]
-
-const generateFakeData = v => ({
-  index: v,
-  name: `Day ${v}`,
-  value: random(10, 100),
-})
-
-const generateFakeDatas = accounts =>
-  accounts.reduce((result, a) => {
-    result[a.id] = [...Array(25).keys()].map(v => generateFakeData(v + 1))
-
-    return result
-  }, {})
-
-const mergeFakeDatas = fakeDatas =>
-  takeRight(
-    Object.keys(fakeDatas).reduce((res, k) => {
-      const data = fakeDatas[k]
-      data.forEach((d, i) => {
-        res[i] = {
-          name: d.name,
-          value: (res[i] ? res[i].value : 0) + d.value,
-        }
-      })
-      return res
-    }, []),
-    25,
-  )
+const itemsTimes = [
+  { key: 'week', value: 7 },
+  { key: 'month', value: 30 },
+  { key: 'year', value: 365 },
+]
 
 const getAllTransactions = accounts => {
   const allTransactions = accounts.reduce((result, account) => {
@@ -120,43 +88,25 @@ const getAccountsChunk = accounts => {
 }
 
 class DashboardPage extends PureComponent<Props, State> {
-  constructor(props) {
-    super()
-
-    const fakeDatas = generateFakeDatas(props.accounts)
-
-    this.state = {
-      accountsChunk: getAccountsChunk(props.accounts),
-      allTransactions: getAllTransactions(props.accounts),
-      fakeDatas,
-      fakeDatasMerge: mergeFakeDatas(fakeDatas),
-      selectedTime: 'day',
-    }
+  state = {
+    accountsChunk: getAccountsChunk(this.props.accounts),
+    allTransactions: getAllTransactions(this.props.accounts),
+    selectedTime: 'week',
   }
 
   componentWillMount() {
     this._itemsTimes = itemsTimes.map(item => ({
       ...item,
+      value: item.value,
       label: this.props.t(`time:${item.key}`),
     }))
   }
 
   componentDidMount() {
     this._mounted = true
-
-    this.addFakeDatasOnAccounts()
   }
 
   componentWillReceiveProps(nextProps) {
-    if (Object.keys(this.state.fakeDatas).length === 0) {
-      const fakeDatas = generateFakeDatas(nextProps.accounts)
-
-      this.setState({
-        fakeDatas,
-        fakeDatasMerge: mergeFakeDatas(fakeDatas),
-      })
-    }
-
     if (nextProps.accounts !== this.props.accounts) {
       this.setState({
         accountsChunk: getAccountsChunk(nextProps.accounts),
@@ -167,46 +117,29 @@ class DashboardPage extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     this._mounted = false
-    clearTimeout(this._timeout)
   }
 
-  addFakeDatasOnAccounts = () => {
-    this._timeout = setTimeout(() => {
-      const { fakeDatas } = this.state
+  getDaysCount() {
+    const { selectedTime } = this.state
 
-      const newFakeDatas = {}
+    const selectedTimeItems = this._itemsTimes.find(i => i.key === selectedTime)
 
-      Object.keys(fakeDatas).forEach(k => {
-        const data = fakeDatas[k]
-
-        data.shift()
-
-        const lastIndex = data[data.length - 1]
-
-        newFakeDatas[k] = [...data, generateFakeData(lastIndex.index + 1)]
-      })
-
-      window.requestIdleCallback(() => {
-        if (this._mounted) {
-          this.setState({
-            fakeDatas: newFakeDatas,
-            fakeDatasMerge: mergeFakeDatas(newFakeDatas),
-          })
-        }
-
-        this.addFakeDatasOnAccounts()
-      })
-    }, TIMEOUT_REFRESH_DATAS)
+    return selectedTimeItems && selectedTimeItems.value ? selectedTimeItems.value : 7
   }
 
-  _timeout = undefined
+  handleChangeSelectedTime = item =>
+    this.setState({
+      selectedTime: item.key,
+    })
+
   _mounted = false
   _itemsTimes = []
 
   render() {
     const { push, accounts, t } = this.props
-    const { accountsChunk, allTransactions, selectedTime, fakeDatas, fakeDatasMerge } = this.state
+    const { accountsChunk, allTransactions, selectedTime } = this.state
 
+    const daysCount = this.getDaysCount()
     const totalAccounts = accounts.length
 
     return (
@@ -226,32 +159,13 @@ class DashboardPage extends PureComponent<Props, State> {
             <Pills
               items={this._itemsTimes}
               activeKey={selectedTime}
-              onChange={item => this.setState({ selectedTime: item.key })}
+              onChange={this.handleChangeSelectedTime}
             />
           </Box>
         </Box>
         {totalAccounts > 0 && (
           <Fragment>
-            <Card flow={3} p={0} py={6}>
-              <Box px={6}>
-                <BalanceInfos since={selectedTime} />
-              </Box>
-              <Box ff="Open Sans" fontSize={4} color="graphite">
-                <AreaChart
-                  id="dashboard-chart"
-                  padding={{
-                    top: space[6],
-                    bottom: space[6],
-                    left: space[6] * 2,
-                    right: space[6],
-                  }}
-                  color="#5286f7"
-                  height={250}
-                  data={fakeDatasMerge}
-                  strokeWidth={2}
-                />
-              </Box>
-            </Card>
+            <BalanceSummary accounts={accounts} selectedTime={selectedTime} daysCount={daysCount} />
             <Box flow={4}>
               <Box horizontal alignItems="flex-end">
                 <Text color="dark" ff="Museo Sans" fontSize={6}>
@@ -278,9 +192,9 @@ class DashboardPage extends PureComponent<Props, State> {
                           />
                         ) : (
                           <AccountCard
-                            key={account.id}
                             account={account}
-                            data={fakeDatas[account.id]}
+                            daysCount={daysCount}
+                            key={account.id}
                             onClick={() => push(`/account/${account.id}`)}
                           />
                         ),

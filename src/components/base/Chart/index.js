@@ -1,5 +1,7 @@
 // @flow
 
+/* eslint-disable react/no-multi-comp */
+
 import React, { Fragment, PureComponent } from 'react'
 import {
   VictoryChart,
@@ -11,11 +13,15 @@ import {
 } from 'victory'
 
 import { radii, space, colors, fontSizes } from 'styles/theme'
-import { rgba, ff } from 'styles/helpers'
+import { ff } from 'styles/helpers'
 
 import Box from 'components/base/Box'
 
 const ANIMATION_DURATION = 600
+const DEFAULT_PROPS = {
+  color: 'blue',
+  padding: 0,
+}
 
 type Props = {
   height: number,
@@ -88,7 +94,7 @@ function getLinearGradient({
   id: string,
   color: string,
 }) {
-  return (
+  return linearGradient.length > 0 ? (
     <svg style={{ height: 0 }}>
       <defs>
         <linearGradient id={id} x1="0" y1="0" x2="0" y2="100%">
@@ -103,19 +109,24 @@ function getLinearGradient({
         </linearGradient>
       </defs>
     </svg>
-  )
+  ) : null
 }
 
 type LinearGradient = Array<Array<*>>
 
-type Chart = {
+type GenericChart = {
   id: string,
   linearGradient: LinearGradient,
   strokeWidth: number,
   height: number,
-  padding?: Object | number,
+  padding: Object | number,
   color: string,
   data: Array<Object>,
+}
+type Chart = GenericChart & {
+  renderLabels: Function,
+  renderTickX: Function,
+  renderTickY: Function,
 }
 
 export const SimpleAreaChart = ({
@@ -126,10 +137,10 @@ export const SimpleAreaChart = ({
   id,
   padding,
   color,
-}: Chart) => (
+}: GenericChart) => (
   <WrapperChart
     height={height}
-    render={({ width, isAnimationActive }) => (
+    render={({ width }) => (
       <Fragment>
         {getLinearGradient({
           linearGradient,
@@ -137,7 +148,9 @@ export const SimpleAreaChart = ({
           color,
         })}
         <VictoryArea
-          animate={isAnimationActive ? { duration: ANIMATION_DURATION } : null}
+          domainPadding={{
+            y: [0, space[1]],
+          }}
           data={data}
           x="name"
           y="value"
@@ -158,114 +171,140 @@ export const SimpleAreaChart = ({
 )
 
 SimpleAreaChart.defaultProps = {
-  padding: 0,
+  height: 50,
+  id: 'simple-chart',
+  linearGradient: [],
+  strokeWidth: 1,
+  ...DEFAULT_PROPS,
 }
 
-export const AreaChart = ({
-  strokeWidth,
-  id,
-  color,
-  linearGradient,
-  padding,
-  height,
-  data,
-}: Chart) => {
-  const tickLabelsStyle = {
-    fill: colors.grey,
-    fontSize: fontSizes[4],
-    fontFamily: 'inherit',
-    fontWeight: 'inherit',
+const AreaChartTooltip = (
+  <VictoryTooltip
+    corderRadius={radii[1]}
+    pointerLength={0}
+    height={25}
+    labelComponent={
+      <VictoryLabel
+        style={{
+          ...ff('Open Sans|SemiBold'),
+          fontSize: fontSizes[2],
+          fill: colors.white,
+        }}
+      />
+    }
+    flyoutStyle={{
+      fill: colors.dark,
+      stroke: null,
+    }}
+    width={a => space[1] * 2 + a.value.length}
+  />
+)
+
+const AreaChartContainer = <VictoryVoronoiContainer voronoiDimension="x" />
+
+export class AreaChart extends PureComponent<Chart> {
+  static defaultProps = {
+    height: 100,
+    id: 'chart',
+    linearGradient: [[5, 0.2], [50, 0]],
+    strokeWidth: 2,
+    renderLabels: (d: Object) => d.y,
+    renderTickX: (t: any) => t,
+    renderTickY: (t: any) => t,
+    ...DEFAULT_PROPS,
   }
 
-  return (
-    <WrapperChart
-      height={height}
-      render={({ width, isAnimationActive }) => (
-        <Fragment>
-          {getLinearGradient({
-            linearGradient,
-            id,
-            color,
-          })}
-          <VictoryChart
-            height={height}
-            width={width}
-            padding={padding}
-            containerComponent={<VictoryVoronoiContainer voronoiDimension="x" />}
-          >
-            <VictoryAxis
-              tickCount={6}
-              style={{
-                axis: {
-                  stroke: colors.lightGrey,
-                },
-                tickLabels: {
-                  ...tickLabelsStyle,
-                  padding: space[2],
-                },
-              }}
-            />
-            <VictoryAxis
-              dependentAxis
-              tickCount={4}
-              style={{
-                grid: {
-                  stroke: colors.lightGrey,
-                  strokeDasharray: 5,
-                },
-                axis: {
-                  stroke: null,
-                },
-                tickLabels: {
-                  ...tickLabelsStyle,
-                  padding: space[4],
-                },
-              }}
-            />
-            <VictoryArea
-              animate={isAnimationActive ? { duration: ANIMATION_DURATION } : null}
-              data={data}
-              x="name"
-              y="value"
-              labelComponent={
-                <VictoryTooltip
-                  corderRadius={radii[1]}
-                  pointerLength={0}
-                  height={25}
-                  labelComponent={
-                    <VictoryLabel
-                      style={{
-                        ...ff('Open Sans|SemiBold'),
-                        fontSize: fontSizes[2],
-                        fill: colors.white,
-                      }}
-                    />
-                  }
-                  flyoutStyle={{
-                    fill: rgba(colors.dark, 0.8),
-                    stroke: null,
-                  }}
-                  width={a => space[1] * 2 + a.value.length}
-                />
-              }
-              labels={d => d.y}
-              style={{
-                data: {
-                  stroke: color,
-                  fill: `url(#${id})`,
-                  strokeWidth,
-                },
-              }}
-              width={width}
-            />
-          </VictoryChart>
-        </Fragment>
-      )}
-    />
-  )
-}
+  render() {
+    const {
+      color,
+      data,
+      height,
+      id,
+      linearGradient,
+      padding,
+      renderLabels,
+      renderTickX,
+      renderTickY,
+      strokeWidth,
+    } = this.props
 
-AreaChart.defaultProps = {
-  linearGradient: [[5, 0.2], [50, 0]],
-  padding: undefined,
+    const tickLabelsStyle = {
+      fill: colors.grey,
+      fontSize: fontSizes[4],
+      fontFamily: 'inherit',
+      fontWeight: 'inherit',
+    }
+
+    return (
+      <WrapperChart
+        height={height}
+        render={({ width, isAnimationActive }) => (
+          <Fragment>
+            {getLinearGradient({
+              linearGradient,
+              id,
+              color,
+            })}
+            <VictoryChart
+              height={height}
+              width={width}
+              padding={padding}
+              domainPadding={{
+                y: [0, space[1]],
+              }}
+              containerComponent={AreaChartContainer}
+            >
+              <VictoryAxis
+                tickCount={6}
+                tickFormat={renderTickX}
+                style={{
+                  axis: {
+                    stroke: colors.lightGrey,
+                  },
+                  tickLabels: {
+                    ...tickLabelsStyle,
+                    padding: space[2],
+                  },
+                }}
+              />
+              <VictoryAxis
+                dependentAxis
+                tickCount={4}
+                tickFormat={renderTickY}
+                style={{
+                  grid: {
+                    stroke: colors.lightGrey,
+                    strokeDasharray: 5,
+                  },
+                  axis: {
+                    stroke: null,
+                  },
+                  tickLabels: {
+                    ...tickLabelsStyle,
+                    padding: space[4],
+                  },
+                }}
+              />
+              <VictoryArea
+                animate={isAnimationActive ? { duration: ANIMATION_DURATION } : null}
+                data={data}
+                x="name"
+                y="value"
+                labelComponent={AreaChartTooltip}
+                labels={renderLabels}
+                style={{
+                  data: {
+                    stroke: color,
+                    fill: `url(#${id})`,
+                    strokeWidth,
+                  },
+                }}
+                width={width}
+              />
+            </VictoryChart>
+          </Fragment>
+        )}
+      />
+    )
+  }
 }
