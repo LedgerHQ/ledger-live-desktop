@@ -1,0 +1,7 @@
+---
+title: Tableau de bord
+greetings: 'Bonjour, {{name}}.'
+summary: voici le résumé de votre compte
+summary_plural: 'voici le résumé de vos {{count}} comptes'
+noAccounts: aucun compte
+recentActivity: Activité récente

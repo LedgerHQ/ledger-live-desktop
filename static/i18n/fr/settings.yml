@@ -1,0 +1,16 @@
+---
+title: Réglages
+tabs:
+  display: Affichage
+  money: Monnaie
+  material: Matériel
+  app: App (béta)
+  tools: Outils
+  blockchain: Blockchain
+  profile: Profil
+display:
+  language: Langue
+  orderAccounts: Ordre des comptes
+profile:
+  protectWithPassword: Protégez les données locales avec un mot de passe
+  password: Mot de passe
