@@ -28,6 +28,6 @@ const Triangles = ({ size, color }: { size?: number, color?: string }) => (
   </Box>
 )
 
-Triangles.defaultProps = { size: 5, color: 'mouse' }
+Triangles.defaultProps = { size: 5, color: 'fog' }
 
 export default Triangles

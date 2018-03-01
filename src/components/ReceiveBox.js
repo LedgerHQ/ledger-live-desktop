@@ -24,7 +24,7 @@ export const AddressBox = styled(Box).attrs({
   p: 2,
 })`
   border-radius: 3px;
-  border: 1px solid ${p => p.theme.colors.mouse};
+  border: 1px solid ${p => p.theme.colors.fog};
   cursor: text;
   text-align: center;
   user-select: text;
@@ -33,7 +33,7 @@ export const AddressBox = styled(Box).attrs({
 
 const Action = styled(Box).attrs({
   alignItems: 'center',
-  color: 'mouse',
+  color: 'fog',
   flex: 1,
   flow: 1,
   fontSize: 0,

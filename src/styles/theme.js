@@ -63,8 +63,6 @@ export const fontFamilies = {
 export const colors = {
   transparent: 'transparent',
 
-  argile: '#ff0000',
-  mouse: '#ff0000',
   pearl: '#ff0000',
 
   // new colors

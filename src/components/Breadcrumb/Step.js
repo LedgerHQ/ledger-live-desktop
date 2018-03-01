@@ -8,7 +8,7 @@ import Box from 'components/base/Box'
 const Wrapper = styled(Box).attrs({
   align: 'center',
   justify: 'center',
-  color: p => (p.isActive ? 'wallet' : 'mouse'),
+  color: p => (p.isActive ? 'wallet' : 'fog'),
 })`
   width: 40px;
   flex-shrink: 0;
@@ -19,7 +19,7 @@ const Wrapper = styled(Box).attrs({
 const Number = styled(Box).attrs({
   align: 'center',
   justify: 'center',
-  color: p => (p.isActive ? 'white' : 'mouse'),
+  color: p => (p.isActive ? 'white' : 'fog'),
   bg: p => (p.isActive ? 'wallet' : 'pearl'),
 })`
   width: 20px;

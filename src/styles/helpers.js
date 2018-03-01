@@ -11,6 +11,16 @@ export const rgba = (c: string, a: number) =>
     .rgb()
     .toString()
 
+export const darken = (c: string, a: number) =>
+  Color(c)
+    .darken(a)
+    .toString()
+
+export const lighten = (c: string, a: number) =>
+  Color(c)
+    .lighten(a)
+    .toString()
+
 export const ff = (v: string) => {
   const [font, type = 'Regular'] = v.split('|')
   const { style, weight } = fontFamilies[font][type]

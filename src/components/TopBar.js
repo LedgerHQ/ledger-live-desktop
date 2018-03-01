@@ -46,7 +46,7 @@ const Inner = styled(Box).attrs({
 const Bar = styled.div`
   height: 15px;
   width: 1px;
-  background: #ff0000;
+  background: ${p => p.theme.colors.fog};
 `
 
 const Activity = styled.div`

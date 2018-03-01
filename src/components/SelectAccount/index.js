@@ -29,7 +29,7 @@ const renderItem = item => (
       </Text>
     </Box>
     <Box>
-      <Text color="mouse" fontSize={4}>
+      <Text color="fog" fontSize={4}>
         {formatBTC(item.balance)}
       </Text>
     </Box>

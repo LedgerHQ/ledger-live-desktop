@@ -19,6 +19,7 @@ import { openModal } from 'reducers/modals'
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
 import Icon from 'components/base/Icon'
+import IconControls from 'icons/Controls'
 import ReceiveBox from 'components/ReceiveBox'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
@@ -70,11 +71,13 @@ class AccountPage extends PureComponent<Props> {
               </Box>
             </Button>
             <Button
-              style={{ width: 50 }}
-              icon="sliders-h"
-              color="mouse"
+              style={{ width: 40, padding: 0 }}
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
-            />
+            >
+              <Box align="center">
+                <IconControls width={16} />
+              </Box>
+            </Button>
           </Box>
         </Box>
         <Box horizontal flow={3}>

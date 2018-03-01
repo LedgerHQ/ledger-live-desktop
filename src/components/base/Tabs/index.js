@@ -10,7 +10,7 @@ import Box, { Tabbable } from 'components/base/Box'
 const WrapperTab = styled(Box).attrs({
   horizontal: true,
 })`
-  border-bottom: 1px solid ${p => p.theme.colors.argile};
+  border-bottom: 1px solid ${p => p.theme.colors.fog};
 `
 
 const Tab = styled(Tabbable).attrs({
