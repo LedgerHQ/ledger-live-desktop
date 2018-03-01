@@ -15,5 +15,15 @@
     "react",
     "stage-0"
   ],
-  "plugins": [["module-resolver", { "root": ["src"] }], "styled-components"]
+  "plugins": [["module-resolver", { "root": ["src"] }], "styled-components"],
+  "env": {
+    "test": {
+      "presets": [
+        "env",
+        "stage-0",
+        "react",
+      ],
+      "plugins": [["module-resolver", { "root": ["src"] }], "styled-components"],
+    }
+  }
 }

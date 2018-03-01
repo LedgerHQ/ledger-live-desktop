@@ -133,7 +133,7 @@ class IsUnlocked extends Component<Props, State> {
               <Input
                 autoFocus
                 innerRef={(n: any) => (this._input = n)}
-                placeholder={t('IsUnlocked.password')}
+                placeholder={t('common:password')}
                 type="password"
                 onChange={this.handleChangeInput('password')}
                 value={inputValue.password}

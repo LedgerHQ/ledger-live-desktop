@@ -66,49 +66,49 @@ class SettingsPage extends PureComponent<Props, State> {
 
     return (
       <Box flow={6}>
-        <Text fontSize={7}>{t('settings.title')}</Text>
+        <Text fontSize={7}>{t('settings:title')}</Text>
         <Tabs
           index={tab}
           onTabClick={this.handleChangeTab}
           items={[
             {
               key: 'display',
-              title: t('settings.tabs.display'),
+              title: t('settings:tabs.display'),
               render: () => <TabDisplay {...props} />,
             },
             {
               key: 'money',
               isDisabled: true,
-              title: t('settings.tabs.money'),
+              title: t('settings:tabs.money'),
               render: () => <div>{'Monnaie'}</div>,
             },
             {
               key: 'material',
               isDisabled: true,
-              title: t('settings.tabs.material'),
+              title: t('settings:tabs.material'),
               render: () => <div>{'Matériel'}</div>,
             },
             {
               key: 'app',
               isDisabled: true,
-              title: t('settings.tabs.app'),
+              title: t('settings:tabs.app'),
               render: () => <div>{'App (beta)'}</div>,
             },
             {
               key: 'tools',
               isDisabled: true,
-              title: t('settings.tabs.tools'),
+              title: t('settings:tabs.tools'),
               render: () => <div>{'Outils'}</div>,
             },
             {
               key: 'blockchain',
               isDisabled: true,
-              title: t('settings.tabs.blockchain'),
+              title: t('settings:tabs.blockchain'),
               render: () => <div>{'Blockchain'}</div>,
             },
             {
               key: 'profile',
-              title: t('settings.tabs.profile'),
+              title: t('settings:tabs.profile'),
               render: () => <TabProfile {...props} />,
             },
           ]}

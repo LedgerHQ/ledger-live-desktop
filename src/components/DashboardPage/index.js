@@ -137,7 +137,7 @@ class DashboardPage extends PureComponent<Props, State> {
   componentWillMount() {
     this._itemsTimes = itemsTimes.map(item => ({
       ...item,
-      label: this.props.t(`time.${item.key}`),
+      label: this.props.t(`time:${item.key}`),
     }))
   }
 
@@ -214,12 +214,12 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {t('dashboard.greetings', { name: 'Khalil' })}
+              {t('dashboard:greetings', { name: 'Khalil' })}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0
-                ? t('dashboard.summary', { count: totalAccounts })
-                : t('dashboard.noAccounts')}
+                ? t('dashboard:summary', { count: totalAccounts })
+                : t('dashboard:noAccounts')}
             </Text>
           </Box>
           <Box ml="auto">
@@ -255,7 +255,7 @@ class DashboardPage extends PureComponent<Props, State> {
             <Box flow={4}>
               <Box horizontal alignItems="flex-end">
                 <Text color="dark" ff="Museo Sans" fontSize={6}>
-                  {t('sidebar.accounts')}
+                  {t('sidebar:accounts')}
                 </Text>
                 <Box ml="auto" horizontal flow={1}>
                   <AccountsOrder />
@@ -289,7 +289,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 ))}
               </Box>
             </Box>
-            <Card p={0} px={4} title={t('dashboard.recentActivity')}>
+            <Card p={0} px={4} title={t('dashboard:recentActivity')}>
               <TransactionsList
                 withAccounts
                 transactions={allTransactions}

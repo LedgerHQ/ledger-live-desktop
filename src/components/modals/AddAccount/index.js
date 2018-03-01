@@ -45,9 +45,9 @@ const Steps = {
     <form onSubmit={props.onSubmit}>
       <Box flow={3}>
         <Box flow={1}>
-          <Label>{props.t('common.currency')}</Label>
+          <Label>{props.t('common:currency')}</Label>
           <Select
-            placeholder={props.t('common.chooseWalletPlaceholder')}
+            placeholder={props.t('common:chooseWalletPlaceholder')}
             onChange={item => props.onChangeCurrency(item.data)}
             renderSelected={item => item.name}
             items={currencies}
@@ -56,7 +56,7 @@ const Steps = {
         </Box>
         <Box horizontal justifyContent="flex-end">
           <Button primary type="submit">
-            {props.t('addAccount.title')}
+            {props.t('addAccount:title')}
           </Button>
         </Box>
       </Box>
@@ -326,7 +326,7 @@ class AddAccountModal extends PureComponent<Props, State> {
           return (
             <ModalBody onClose={onClose} flow={3}>
               <Text fontSize={6} color="graphite">
-                {t('addAccount.title')}
+                {t('addAccount:title')}
               </Text>
               <Step {...this.getStepProps()} />
             </ModalBody>

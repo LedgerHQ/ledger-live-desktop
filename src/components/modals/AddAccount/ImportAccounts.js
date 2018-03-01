@@ -27,7 +27,7 @@ class ImportAccounts extends PureComponent<Props, State> {
     accountsSelected: [],
     accountsName: this.props.accounts.reduce((result, value, index) => {
       result[value.id] = {
-        placeholder: this.props.t(`addAccount.import.placeholder`, {
+        placeholder: this.props.t(`addAccount:placeholder`, {
           index: index + 1,
         }),
       }

@@ -30,7 +30,7 @@ const Steps = {
       }}
     >
       <Box flow={5}>
-        <Text fontSize={6}>{t('send.title')}</Text>
+        <Text fontSize={6}>{t('send:title')}</Text>
         <Box flow={2}>
           <Label>Account to debit</Label>
           <SelectAccount onChange={props.onChangeInput('account')} value={props.value.account} />
@@ -100,10 +100,10 @@ class Send extends PureComponent<Props, State> {
   componentWillMount() {
     const { t } = this.props
     this._items = [
-      { label: t('sendModal.Amount') },
-      { label: t('sendModal.Summary') },
-      { label: t('sendModal.SecureValidation') },
-      { label: t('sendModal.Confirmation') },
+      { label: t('sendModal:Amount') },
+      { label: t('sendModal:Summary') },
+      { label: t('sendModal:SecureValidation') },
+      { label: t('sendModal:Confirmation') },
     ]
   }
 

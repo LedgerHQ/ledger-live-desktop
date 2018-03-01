@@ -168,14 +168,14 @@ class TopBar extends PureComponent<Props, State> {
               items={[
                 {
                   key: 'profile',
-                  label: t('mainDropdown.editProfile'),
+                  label: t('common:editProfile'),
                   icon: <IconUser height={16} width={16} />,
                 },
                 ...(hasPassword
                   ? [
                       {
                         key: 'lock',
-                        label: t('mainDropdown.lockApplication'),
+                        label: t('common:lockApplication'),
                         icon: <IconUser height={16} width={16} />,
                         onClick: this.handleLock,
                       },
