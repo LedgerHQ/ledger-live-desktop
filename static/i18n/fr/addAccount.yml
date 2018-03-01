@@ -1,0 +1,4 @@
+---
+title: Ajouter un compte
+import:
+  placeholder: 'Compte {{index}}'
