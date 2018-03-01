@@ -150,6 +150,7 @@ export default async ({
     const account = await getAccount({
       path,
       hdnode,
+      coinType,
       network,
       segwit,
       asyncDelay: 0,

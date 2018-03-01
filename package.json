@@ -68,7 +68,7 @@
     "history": "^4.7.2",
     "i18next": "^10.5.0",
     "i18next-node-fs-backend": "^1.0.0",
-    "ledger-test-library": "KhalilBellakrid/ledger-test-library",
+    "ledger-test-library": "KhalilBellakrid/ledger-test-library-nodejs",
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "object-path": "^0.11.4",
