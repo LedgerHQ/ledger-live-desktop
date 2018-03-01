@@ -7,6 +7,22 @@ import Backend from 'i18next-node-fs-backend'
 import staticPath from 'helpers/staticPath'
 
 i18n.use(Backend).init({
+  ns: [
+    'accountPage',
+    'accountsOrder',
+    'addAccount',
+    'common',
+    'dashboard',
+    'device',
+    'language',
+    'receive',
+    'send',
+    'settings',
+    'sidebar',
+    'time',
+    'transactionsList',
+    'update',
+  ],
   fallbackLng: 'en',
   debug: false,
   backend: {

@@ -97,12 +97,12 @@ class TabProfile extends PureComponent<Props, State> {
               onClick={() => this.handleChangeInput('password.state')(!isPasswordChecked)}
             >
               <CheckBox isChecked={isPasswordChecked} />
-              <div>{t('settings.profile.protectWithPassword')}</div>
+              <div>{t('settings:profile.protectWithPassword')}</div>
             </Box>
           </label>
           {get(inputValue, 'password.state') === true && (
             <Box flow={1}>
-              <Label>{t('settings.profile.password')}</Label>
+              <Label>{t('settings:profile.password')}</Label>
               <Input
                 value={get(inputValue, 'password.value', '')}
                 onChange={this.handleChangeInput('password.value')}
@@ -112,7 +112,7 @@ class TabProfile extends PureComponent<Props, State> {
           )}
           <Box horizontal justifyContent="flex-end">
             <Button primary type="submit">
-              {t('global.save')}
+              {t('common:save')}
             </Button>
           </Box>
         </Card>

@@ -59,7 +59,7 @@ class AccountPage extends PureComponent<Props> {
                 <Box>
                   <Icon name="upload" />
                 </Box>
-                <Box>{t('send.title')}</Box>
+                <Box>{t('send:title')}</Box>
               </Box>
             </Button>
             <Button primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
@@ -67,7 +67,7 @@ class AccountPage extends PureComponent<Props> {
                 <Box>
                   <Icon name="download" />
                 </Box>
-                <Box>{t('receive.title')}</Box>
+                <Box>{t('receive:title')}</Box>
               </Box>
             </Button>
             <Button
@@ -83,7 +83,7 @@ class AccountPage extends PureComponent<Props> {
         <Box horizontal flow={3}>
           <Box grow>
             <Card
-              title={t('AccountPage.balance')}
+              title={t('account:balance')}
               style={{ height: 435 }}
               alignItems="center"
               justifyContent="center"
@@ -93,12 +93,12 @@ class AccountPage extends PureComponent<Props> {
           </Box>
 
           <Box style={{ width: 300 }}>
-            <Card title={t('AccountPage.receive')} flow={3}>
+            <Card title={t('account:receive')} flow={3}>
               <ReceiveBox path={account.path} address={account.address} />
             </Card>
           </Box>
         </Box>
-        <Card p={0} px={4} title={t('AccountPage.lastOperations')}>
+        <Card p={0} px={4} title={t('account:lastOperations')}>
           <TransactionsList transactions={account.transactions} />
         </Card>
       </Box>

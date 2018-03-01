@@ -57,12 +57,12 @@ class UpdateNotifier extends PureComponent<Props> {
       case 'downloaded':
         return (
           <Box horizontal flow={2}>
-            <Text fontWeight="bold">{t('update.newVersionReady')}</Text>
+            <Text fontWeight="bold">{t('update:newVersionReady')}</Text>
             <Text
               style={{ cursor: 'pointer' }}
-              onClick={() => sendEvent('msg', 'updater.quitAndInstall')}
+              onClick={() => sendEvent('msg', 'updater:quitAndInstall')}
             >
-              {t('update.relaunch')}
+              {t('update:relaunch')}
             </Text>
           </Box>
         )

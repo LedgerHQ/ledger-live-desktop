@@ -66,7 +66,7 @@ class ReceiveModal extends PureComponent<Props, State> {
           return (
             <ModalBody onClose={onClose} flow={3}>
               <Text fontSize={4} color="graphite">
-                {t('receive.title')}
+                {t('receive:title')}
               </Text>
               <Box flow={1}>
                 <Label>Account</Label>
