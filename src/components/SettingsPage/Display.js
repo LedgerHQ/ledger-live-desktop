@@ -36,11 +36,11 @@ class TabProfile extends PureComponent<Props, State> {
       languages: [
         {
           key: 'en',
-          name: t('language.en'),
+          name: t('language:en'),
         },
         {
           key: 'fr',
-          name: t('language.fr'),
+          name: t('language:fr'),
         },
       ],
     }
@@ -77,7 +77,7 @@ class TabProfile extends PureComponent<Props, State> {
       <form onSubmit={this.handleSubmit}>
         <Card flow={3}>
           <Box flow={1}>
-            <Label>{t('settings.display.language')}</Label>
+            <Label>{t('settings:display.language')}</Label>
             <Select
               onChange={item => this.handleChangeInput('language')(item.key)}
               renderSelected={item => item && item.name}
@@ -87,7 +87,7 @@ class TabProfile extends PureComponent<Props, State> {
           </Box>
           <Box horizontal justifyContent="flex-end">
             <Button primary type="submit">
-              {t('global.save')}
+              {t('common:save')}
             </Button>
           </Box>
         </Card>

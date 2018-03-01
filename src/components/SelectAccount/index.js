@@ -50,7 +50,7 @@ export const SelectAccount = ({ accounts, onChange, value, t }: Props) => (
     renderItem={renderItem}
     keyProp="id"
     items={accounts}
-    placeholder={t('SelectAccount.placeholder')}
+    placeholder={t('common:selectAccount')}
     fontSize={4}
     onChange={onChange}
   />

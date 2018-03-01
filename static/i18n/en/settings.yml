@@ -1,0 +1,15 @@
+title: Settings
+tabs:
+  display: Display
+  money: Money
+  material: Material
+  app: App (beta)
+  tools: Tools
+  blockchain: Blockchain
+  profile: Profile
+display:
+  language: Language
+  orderAccounts: Order accounts
+profile:
+  protectWithPassword: Protect local data with a password
+  password: Password

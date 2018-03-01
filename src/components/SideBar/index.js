@@ -73,26 +73,26 @@ class SideBar extends PureComponent<Props> {
       <Container bg="white">
         <Box flow={7} pt={8} grow>
           <Box flow={4}>
-            <CapsSubtitle>{t('sidebar.menu')}</CapsSubtitle>
+            <CapsSubtitle>{t('sidebar:menu')}</CapsSubtitle>
             <Box px={4} flow={2}>
               <Item icon={<IconPieChart height={16} width={16} />} linkTo="/">
-                {t('dashboard.title')}
+                {t('dashboard:title')}
               </Item>
               <Item icon={<IconArrowUp height={16} width={16} />} modal={MODAL_SEND}>
-                {t('send.title')}
+                {t('send:title')}
               </Item>
               <Item icon={<IconArrowDown height={16} width={16} />} modal={MODAL_RECEIVE}>
-                {t('receive.title')}
+                {t('receive:title')}
               </Item>
               <Item icon={<IconSettings height={16} width={16} />} linkTo="/settings">
-                {t('settings.title')}
+                {t('settings:title')}
               </Item>
             </Box>
           </Box>
           <Box flow={4} grow pt={1}>
             <CapsSubtitle horizontal alignItems="center">
-              <Box grow>{t('sidebar.accounts')}</Box>
-              <Tooltip render={() => t('addAccount.title')} offset={[0, 1]}>
+              <Box grow>{t('sidebar:accounts')}</Box>
+              <Tooltip render={() => t('addAccount:title')} offset={[0, 1]}>
                 <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
                   <IconPlus height={14} width={14} />
                 </PlusBtn>

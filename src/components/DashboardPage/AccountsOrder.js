@@ -111,15 +111,15 @@ class AccountsOrder extends Component<Props, State> {
     return [
       {
         key: 'name',
-        label: t('orderAccounts.name'),
+        label: t('accountsOrder:name'),
       },
       {
         key: 'balance',
-        label: t('orderAccounts.balance'),
+        label: t('accountsOrder:balance'),
       },
       {
         key: 'type',
-        label: t('orderAccounts.type'),
+        label: t('accountsOrder:type'),
       },
     ].map(item => ({
       ...item,
@@ -183,7 +183,7 @@ class AccountsOrder extends Component<Props, State> {
         value={sortItems.find(item => item.key === cachedValue)}
       >
         <Text ff="Open Sans|SemiBold" fontSize={4}>
-          {t('global.sortBy')}
+          {t('common:sortBy')}
         </Text>
         <Box
           alignItems="center"
@@ -193,7 +193,7 @@ class AccountsOrder extends Component<Props, State> {
           fontSize={4}
           horizontal
         >
-          <Text color="dark">{t(`orderAccounts.${this.getCurrentValue() || 'balance'}`)}</Text>
+          <Text color="dark">{t(`accountsOrder:${this.getCurrentValue() || 'balance'}`)}</Text>
           <IconAngleDown height={7} width={8} />
         </Box>
       </DropDown>

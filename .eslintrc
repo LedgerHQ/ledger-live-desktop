@@ -14,6 +14,9 @@
     "document": false,
     "HTMLDivElement": false,
     "ResizeObserver": false,
+    "jest": false,
+    "describe": false,
+    "test": false,
   },
   "rules": {
     "camelcase": 0,
