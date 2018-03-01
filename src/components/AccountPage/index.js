@@ -20,9 +20,9 @@ import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
 import Icon from 'components/base/Icon'
 import IconControls from 'icons/Controls'
-import ReceiveBox from 'components/ReceiveBox'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
+import AccountHeader from './AccountHeader'
 
 type Props = {
   t: T,
@@ -48,11 +48,9 @@ class AccountPage extends PureComponent<Props> {
     }
 
     return (
-      <Box flow={3}>
+      <Box flow={7}>
         <Box horizontal>
-          <Box>
-            <Text fontSize={8}>{account.name}</Text>
-          </Box>
+          <AccountHeader account={account} />
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
             <Button primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={2} alignItems="center">
@@ -80,24 +78,9 @@ class AccountPage extends PureComponent<Props> {
             </Button>
           </Box>
         </Box>
-        <Box horizontal flow={3}>
-          <Box grow>
-            <Card
-              title={t('account:balance')}
-              style={{ height: 435 }}
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Text fontSize={5}>{formatBTC(account.balance)}</Text>
-            </Card>
-          </Box>
-
-          <Box style={{ width: 300 }}>
-            <Card title={t('account:receive')} flow={3}>
-              <ReceiveBox path={account.path} address={account.address} />
-            </Card>
-          </Box>
-        </Box>
+        <Card style={{ height: 435 }} alignItems="center" justifyContent="center">
+          <Text fontSize={5}>{formatBTC(account.balance)}</Text>
+        </Card>
         <Card p={0} px={4} title={t('account:lastOperations')}>
           <TransactionsList transactions={account.transactions} />
         </Card>

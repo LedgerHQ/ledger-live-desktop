@@ -58,11 +58,16 @@ const TransactionRaw = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
+  cursor: pointer;
   border-bottom: 1px solid ${p => p.theme.colors.fog};
   height: 68px;
 
   &:last-child {
     border-bottom: 0;
+  }
+
+  &:hover {
+    background: ${p => p.theme.colors.lightGrey};
   }
 `
 
