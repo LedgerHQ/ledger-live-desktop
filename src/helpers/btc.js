@@ -31,10 +31,6 @@ export function computeTransaction(addresses: Array<*>) {
   }
 }
 
-export function getTransactions(addresses: Array<string>) {
-  return ledger.getTransactions(addresses, true)
-}
-
 export async function getAccount({
   allAddresses = [],
   currentIndex = 0,
@@ -42,6 +38,7 @@ export async function getAccount({
   hdnode,
   segwit,
   network,
+  coinType,
   asyncDelay = 500,
   onProgress = noop,
 }: {
@@ -50,6 +47,7 @@ export async function getAccount({
   path: string,
   hdnode: Object,
   segwit: boolean,
+  coinType: number,
   network: Object,
   asyncDelay?: number,
   onProgress?: Function,
@@ -116,7 +114,8 @@ export async function getAccount({
 
         allAddresses = [...new Set([...allAddresses, ...listAddresses])]
 
-        const txs = await getTransactions(listAddresses)
+        const transactionsOpts = { coin_type: coinType }
+        const txs = await ledger.getTransactions(listAddresses, transactionsOpts)
 
         const hasTransactions = txs.length > 0
 
