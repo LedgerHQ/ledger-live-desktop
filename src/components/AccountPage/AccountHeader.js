@@ -34,7 +34,7 @@ class AccountHeader extends PureComponent<Props> {
         )}
         <Box>
           <CurName>{account.currency.name}</CurName>
-          <Text ff="Museo Sans|Regular" fontSize={7}>
+          <Text ff="Museo Sans|Regular" fontSize={7} color="dark">
             {account.name}
           </Text>
         </Box>

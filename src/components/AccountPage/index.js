@@ -18,10 +18,11 @@ import { openModal } from 'reducers/modals'
 
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
-import Icon from 'components/base/Icon'
 import IconControls from 'icons/Controls'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
+import IconArrowUp from 'icons/ArrowUp'
+import IconArrowDown from 'icons/ArrowDown'
 import AccountHeader from './AccountHeader'
 
 type Props = {
@@ -54,17 +55,13 @@ class AccountPage extends PureComponent<Props> {
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
             <Button primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={2} alignItems="center">
-                <Box>
-                  <Icon name="upload" />
-                </Box>
+                <IconArrowUp height={16} width={16} />
                 <Box>{t('send:title')}</Box>
               </Box>
             </Button>
             <Button primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
               <Box horizontal flow={2} alignItems="center">
-                <Box>
-                  <Icon name="download" />
-                </Box>
+                <IconArrowDown height={16} width={16} />
                 <Box>{t('receive:title')}</Box>
               </Box>
             </Button>
