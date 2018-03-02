@@ -206,7 +206,7 @@ export class AreaChart extends PureComponent<Chart> {
   static defaultProps = {
     height: 100,
     id: 'chart',
-    linearGradient: [[5, 0.2], [50, 0]],
+    linearGradient: [[5, 0.2], [100, 0]],
     strokeWidth: 2,
     renderLabels: (d: Object) => d.y,
     renderTickX: (t: any) => t,

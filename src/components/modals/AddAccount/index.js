@@ -171,24 +171,10 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { fetchingCounterValues, currency } = this.state
-
     if (nextProps.accounts) {
       this.setState(prev => ({
         accounts: differenceBy(prev.accounts, nextProps.accounts, 'id'),
       }))
-    }
-
-    if (currency !== null && fetchingCounterValues) {
-      const { code } = getDefaultUnitByCoinType(currency.coinType)
-      const symbol = `${code.toString()}-USD`
-
-      if (nextProps.counterValues[symbol]) {
-        this.setState({
-          fetchingCounterValues: false,
-          step: 'connectDevice',
-        })
-      }
     }
   }
 
@@ -297,7 +283,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   handleChangeCurrency = (currency: Currency) => this.setState({ currency })
 
-  handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const { fetchCounterValues } = this.props
@@ -308,7 +294,12 @@ class AddAccountModal extends PureComponent<Props, State> {
         fetchingCounterValues: true,
       })
 
-      fetchCounterValues(currency.coinType)
+      await fetchCounterValues(currency.coinType)
+
+      this.setState({
+        fetchingCounterValues: false,
+        step: 'connectDevice',
+      })
     }
   }
 

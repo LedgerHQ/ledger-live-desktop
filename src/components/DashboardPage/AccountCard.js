@@ -86,7 +86,7 @@ const AccountCard = ({
               color={account.currency.color}
               height={52}
               id={`account-chart-${account.id}`}
-              linearGradient={[[5, 0.2], [75, 0]]}
+              linearGradient={[[5, 0.2], [100, 0]]}
               simple
               strokeWidth={1.5}
             />
