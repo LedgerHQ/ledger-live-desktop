@@ -81,12 +81,11 @@ class AccountPage extends PureComponent<Props> {
         <Card style={{ height: 435 }} alignItems="center" justifyContent="center">
           <Text fontSize={5}>{formatBTC(account.balance)}</Text>
         </Card>
-        <Card p={0} px={4} title={t('account:lastOperations')}>
-          <TransactionsList
-            transactions={account.transactions}
-            minConfirmations={account.settings.minConfirmations}
-          />
-        </Card>
+        <TransactionsList
+          title={t('account:lastOperations')}
+          transactions={account.transactions}
+          minConfirmations={account.settings.minConfirmations}
+        />
       </Box>
     )
   }
