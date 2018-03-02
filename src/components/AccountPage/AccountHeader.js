@@ -17,6 +17,14 @@ const CurName = styled(Text).attrs({
   letter-spacing: 1px;
 `
 
+const AccountName = styled(Text).attrs({
+  color: 'dark',
+  ff: 'Museo Sans',
+  fontSize: 7,
+})`
+  line-height: 1;
+`
+
 type Props = {
   account: Account,
 }
@@ -34,9 +42,7 @@ class AccountHeader extends PureComponent<Props> {
         )}
         <Box>
           <CurName>{account.currency.name}</CurName>
-          <Text ff="Museo Sans|Regular" fontSize={7} color="dark">
-            {account.name}
-          </Text>
+          <AccountName>{account.name}</AccountName>
         </Box>
       </Box>
     )

@@ -48,6 +48,17 @@ class Default extends Component<Props> {
     clearTimeout(this._timeout)
   }
 
+  handleScroll = () => {
+    document.querySelectorAll('.tippy-popper').forEach((p: any) => {
+      const instance = p._tippy
+
+      if (instance.state.visible) {
+        instance.popperInstance.disableEventListeners()
+        instance.hide(0)
+      }
+    })
+  }
+
   _timeout = undefined
   _scrollContainer = null
 
@@ -67,7 +78,7 @@ class Default extends Component<Props> {
             <Box shrink grow bg="lightGrey" color="grey" relative>
               <TopBar />
               <UpdateNotifier />
-              <Container innerRef={n => (this._scrollContainer = n)}>
+              <Container innerRef={n => (this._scrollContainer = n)} onScroll={this.handleScroll}>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
                 <Route path="/account/:id" component={AccountPage} />

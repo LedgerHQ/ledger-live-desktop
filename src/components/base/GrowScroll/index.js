@@ -14,20 +14,32 @@ type Props = {
   full: boolean,
   maxHeight?: number,
   onUpdate: Function,
+  onScroll: Function,
 }
 
 class GrowScroll extends PureComponent<Props> {
   static defaultProps = {
     full: false,
     onUpdate: noop,
+    onScroll: noop,
   }
 
   componentDidMount() {
     this.handleUpdate(this.props)
+
+    if (this._scrollbar) {
+      this._scrollbar.addListener(this.handleScroll)
+    }
   }
 
   componentWillReceiveProps(nextProps: Props) {
     this.handleUpdate(nextProps)
+  }
+
+  componentWillUnmount() {
+    if (this._scrollbar) {
+      this._scrollbar.removeListener(this.handleScroll)
+    }
   }
 
   handleUpdate = (props: Props) => {
@@ -35,6 +47,8 @@ class GrowScroll extends PureComponent<Props> {
       props.onUpdate(this._scrollbar)
     }
   }
+
+  handleScroll = this.props.onScroll
 
   _scrollbar = undefined
 
