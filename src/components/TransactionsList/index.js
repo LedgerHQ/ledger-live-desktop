@@ -206,19 +206,20 @@ class TransactionsList extends Component<Props> {
     this._hashCache = this.getHashCache(transactions)
 
     return (
-      <Card flow={1} title={title} p={0}>
-        <Box horizontal pt={4}>
-          <HeaderCol size={DATE_COL_SIZE}>{t('transactionsList:date')}</HeaderCol>
-          {withAccounts && (
-            <HeaderCol size={ACCOUNT_COL_SIZE}>{t('transactionsList:account')}</HeaderCol>
-          )}
-          <HeaderCol grow>{t('transactionsList:address')}</HeaderCol>
-          <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-            {t('transactionsList:amount')}
-          </HeaderCol>
-          <HeaderCol size={CONFIRMATION_COL_SIZE} px={0} />
-        </Box>
-        <Defer>
+      <Defer>
+        <Card flow={1} title={title} p={0}>
+          <Box horizontal pt={4}>
+            <HeaderCol size={DATE_COL_SIZE}>{t('transactionsList:date')}</HeaderCol>
+            {withAccounts && (
+              <HeaderCol size={ACCOUNT_COL_SIZE}>{t('transactionsList:account')}</HeaderCol>
+            )}
+            <HeaderCol grow>{t('transactionsList:address')}</HeaderCol>
+            <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
+              {t('transactionsList:amount')}
+            </HeaderCol>
+            <HeaderCol size={CONFIRMATION_COL_SIZE} px={0} />
+          </Box>
+
           <Box>
             {transactions.map(trans => (
               <Transaction
@@ -231,8 +232,8 @@ class TransactionsList extends Component<Props> {
               />
             ))}
           </Box>
-        </Defer>
-      </Card>
+        </Card>
+      </Defer>
     )
   }
 }
