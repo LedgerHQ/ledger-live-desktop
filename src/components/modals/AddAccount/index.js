@@ -21,6 +21,7 @@ import { getCurrentDevice } from 'reducers/devices'
 import { sendEvent } from 'renderer/events'
 
 import { addAccount, updateAccount } from 'actions/accounts'
+import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -55,9 +56,13 @@ const Steps = {
           />
         </Box>
         <Box horizontal justifyContent="flex-end">
-          <Button primary type="submit">
-            {props.t('addAccount:title')}
-          </Button>
+          {props.fetchingCounterValues ? (
+            'Fetching counterValues...'
+          ) : (
+            <Button primary type="submit">
+              {props.t('addAccount:title')}
+            </Button>
+          )}
         </Box>
       </Box>
     </form>
@@ -113,41 +118,47 @@ const Steps = {
 type Step = 'chooseCurrency' | 'connectDevice' | 'inProgress' | 'listAccounts'
 
 type Props = {
-  t: T,
   accounts: Accounts,
-  archivedAccounts: Accounts,
   addAccount: Function,
-  updateAccount: Function,
+  archivedAccounts: Accounts,
   canCreateAccount: boolean,
   closeModal: Function,
+  counterValues: Object,
   currentDevice: Device | null,
+  fetchCounterValues: Function,
+  t: T,
+  updateAccount: Function,
 }
 
 type State = {
-  step: Step,
-  currency: Currency | null,
   accounts: Accounts,
+  currency: Currency | null,
+  fetchingCounterValues: boolean,
   progress: null | Object,
+  step: Step,
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   accounts: getAccounts(state),
   archivedAccounts: getArchivedAccounts(state),
   canCreateAccount: canCreateAccount(state),
+  counterValues: state.counterValues,
   currentDevice: getCurrentDevice(state),
 })
 
 const mapDispatchToProps = {
   addAccount,
-  updateAccount,
   closeModal,
+  fetchCounterValues,
+  updateAccount,
 }
 
 const defaultState = {
+  step: 'chooseCurrency',
+  progress: null,
+  fetchingCounterValues: false,
   currency: null,
   accounts: [],
-  progress: null,
-  step: 'chooseCurrency',
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
@@ -200,16 +211,17 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   getStepProps() {
     const { currentDevice, archivedAccounts, canCreateAccount, updateAccount, t } = this.props
-    const { currency, step, progress, accounts } = this.state
+    const { currency, step, progress, accounts, fetchingCounterValues } = this.state
 
     const props = (predicate, props) => (predicate ? props : {})
 
     return {
       ...props(step === 'chooseCurrency', {
-        t,
         currency,
+        fetchingCounterValues,
         onChangeCurrency: this.handleChangeCurrency,
         onSubmit: this.handleSubmit,
+        t,
       }),
       ...props(step === 'connectDevice', {
         t,
@@ -271,12 +283,24 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   handleChangeCurrency = (currency: Currency) => this.setState({ currency })
 
-  handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    this.setState({
-      step: 'connectDevice',
-    })
+    const { fetchCounterValues } = this.props
+    const { currency } = this.state
+
+    if (currency !== null) {
+      this.setState({
+        fetchingCounterValues: true,
+      })
+
+      await fetchCounterValues(currency.coinType)
+
+      this.setState({
+        fetchingCounterValues: false,
+        step: 'connectDevice',
+      })
+    }
   }
 
   handleClose = () => {

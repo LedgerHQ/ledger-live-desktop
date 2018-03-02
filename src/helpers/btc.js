@@ -154,7 +154,9 @@ export async function getAccount({
         try {
           txs = await ledger.getTransactions(listAddresses, transactionsOpts)
           txs = txs.filter(t => !allTxsHash.includes(t.hash)).reverse()
-        } catch (e) {} // eslint-disable-line no-empty
+        } catch (e) {
+          console.log('getTransactions', e) // eslint-disable-line no-console
+        }
 
         const hasTransactions = txs.length > 0
 

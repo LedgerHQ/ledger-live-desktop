@@ -18,9 +18,10 @@ import { getVisibleAccounts } from 'reducers/accounts'
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
+import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
-import Pills from 'components/base/Pills'
+import PillsDaysCount from 'components/PillsDaysCount'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'
 
@@ -47,16 +48,11 @@ type State = {
   accountsChunk: Array<Array<Account | null>>,
   allTransactions: Array<Object>,
   selectedTime: string,
+  daysCount: number,
 }
 
 const ACCOUNTS_BY_LINE = 3
 const ALL_TRANSACTIONS_LIMIT = 10
-
-const itemsTimes = [
-  { key: 'week', value: 7 },
-  { key: 'month', value: 30 },
-  { key: 'year', value: 365 },
-]
 
 const getAllTransactions = accounts => {
   const allTransactions = accounts.reduce((result, account) => {
@@ -92,18 +88,7 @@ class DashboardPage extends PureComponent<Props, State> {
     accountsChunk: getAccountsChunk(this.props.accounts),
     allTransactions: getAllTransactions(this.props.accounts),
     selectedTime: 'week',
-  }
-
-  componentWillMount() {
-    this._itemsTimes = itemsTimes.map(item => ({
-      ...item,
-      value: item.value,
-      label: this.props.t(`time:${item.key}`),
-    }))
-  }
-
-  componentDidMount() {
-    this._mounted = true
+    daysCount: 7,
   }
 
   componentWillReceiveProps(nextProps) {
@@ -115,37 +100,22 @@ class DashboardPage extends PureComponent<Props, State> {
     }
   }
 
-  componentWillUnmount() {
-    this._mounted = false
-  }
-
-  getDaysCount() {
-    const { selectedTime } = this.state
-
-    const selectedTimeItems = this._itemsTimes.find(i => i.key === selectedTime)
-
-    return selectedTimeItems && selectedTimeItems.value ? selectedTimeItems.value : 7
-  }
-
   handleChangeSelectedTime = item =>
     this.setState({
       selectedTime: item.key,
+      daysCount: item.value,
     })
-
-  _mounted = false
-  _itemsTimes = []
 
   render() {
     const { push, accounts, t } = this.props
-    const { accountsChunk, allTransactions, selectedTime } = this.state
+    const { accountsChunk, allTransactions, selectedTime, daysCount } = this.state
 
-    const daysCount = this.getDaysCount()
     const totalAccounts = accounts.length
 
     return (
       <Box flow={7}>
         <Box horizontal alignItems="flex-end">
-          <Box>
+          <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
               {t('dashboard:greetings', { name: 'Khalil' })}
             </Text>
@@ -155,17 +125,28 @@ class DashboardPage extends PureComponent<Props, State> {
                 : t('dashboard:noAccounts')}
             </Text>
           </Box>
-          <Box ml="auto">
-            <Pills
-              items={this._itemsTimes}
-              activeKey={selectedTime}
-              onChange={this.handleChangeSelectedTime}
-            />
+          <Box>
+            <PillsDaysCount selectedTime={selectedTime} onChange={this.handleChangeSelectedTime} />
           </Box>
         </Box>
         {totalAccounts > 0 && (
           <Fragment>
-            <BalanceSummary accounts={accounts} selectedTime={selectedTime} daysCount={daysCount} />
+            <BalanceSummary
+              chartId="dashboard-chart"
+              chartColor="#5286f7"
+              accounts={accounts}
+              selectedTime={selectedTime}
+              daysCount={daysCount}
+              renderHeader={({ totalBalance, selectedTime, sinceBalance }) => (
+                <BalanceInfos
+                  t={t}
+                  fiat="USD"
+                  totalBalance={totalBalance}
+                  since={selectedTime}
+                  sinceBalance={sinceBalance}
+                />
+              )}
+            />
             <Box flow={4}>
               <Box horizontal alignItems="flex-end">
                 <Text color="dark" ff="Museo Sans" fontSize={6}>

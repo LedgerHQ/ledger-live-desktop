@@ -49,7 +49,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.7",
     "@fortawesome/react-fontawesome": "^0.0.17",
     "@ledgerhq/common": "^4.2.0",
-    "@ledgerhq/currencies": "^4.2.2",
+    "@ledgerhq/currencies": "^4.3.0-beta.f8165b69",
     "@ledgerhq/hw-app-btc": "^4.2.2",
     "@ledgerhq/hw-app-eth": "^4.2.0",
     "@ledgerhq/hw-transport": "^4.2.0",

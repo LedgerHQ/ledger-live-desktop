@@ -29,8 +29,8 @@ const history = createHistory()
 const store = createStore(history)
 const rootNode = document.getElementById('app')
 
-store.dispatch(initCounterValues())
 store.dispatch(fetchSettings())
+store.dispatch(initCounterValues())
 
 const state = store.getState() || {}
 const language = getLanguage(state)

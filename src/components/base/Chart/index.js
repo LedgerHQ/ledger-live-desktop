@@ -206,7 +206,7 @@ export class AreaChart extends PureComponent<Chart> {
   static defaultProps = {
     height: 100,
     id: 'chart',
-    linearGradient: [[5, 0.2], [50, 0]],
+    linearGradient: [[5, 0.2], [100, 0]],
     strokeWidth: 2,
     renderLabels: (d: Object) => d.y,
     renderTickX: (t: any) => t,
@@ -242,7 +242,7 @@ export class AreaChart extends PureComponent<Chart> {
     return (
       <WrapperChart
         height={height}
-        render={({ width, isAnimationActive }) => (
+        render={({ width }) => (
           <Fragment>
             {getLinearGradient({
               linearGradient,
@@ -259,11 +259,12 @@ export class AreaChart extends PureComponent<Chart> {
               containerComponent={AreaChartContainer}
             >
               <VictoryAxis
+                animate={false}
                 tickCount={6}
                 tickFormat={renderTickX}
                 style={{
                   axis: {
-                    stroke: colors.lightGrey,
+                    stroke: colors.fog,
                   },
                   tickLabels: {
                     ...tickLabelsStyle,
@@ -277,7 +278,7 @@ export class AreaChart extends PureComponent<Chart> {
                 tickFormat={renderTickY}
                 style={{
                   grid: {
-                    stroke: colors.lightGrey,
+                    stroke: colors.fog,
                     strokeDasharray: 5,
                   },
                   axis: {
@@ -290,7 +291,6 @@ export class AreaChart extends PureComponent<Chart> {
                 }}
               />
               <VictoryArea
-                animate={isAnimationActive ? { duration: ANIMATION_DURATION } : null}
                 data={data}
                 x="name"
                 y="value"

@@ -20,7 +20,7 @@ export const updateCounterValues: UpdateCounterValues = payload => ({
   payload,
 })
 
-type FetchCounterValues = (?number) => (Dispatch<*>, Function) => void
+type FetchCounterValues = (?number) => (Dispatch<*>, Function) => Promise<any>
 export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, getState) => {
   const { accounts, counterValues } = getState()
 
@@ -39,7 +39,7 @@ export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, get
     const todayCounterValues = get(counterValues, `${code}-USD.${today}`, null)
 
     if (todayCounterValues !== null) {
-      return {}
+      return null
     }
 
     return axios
@@ -56,11 +56,16 @@ export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, get
       }))
   }
 
-  Promise.all(coinTypes.map(fetchCounterValuesByCoinType)).then(result => {
+  return Promise.all(coinTypes.map(fetchCounterValuesByCoinType)).then(result => {
     const newCounterValues = result.reduce((r, v) => {
-      r[v.symbol] = v.values
+      if (v !== null) {
+        r[v.symbol] = v.values
+      }
       return r
     }, {})
-    dispatch(updateCounterValues(newCounterValues))
+
+    if (Object.keys(newCounterValues).length !== 0) {
+      dispatch(updateCounterValues(newCounterValues))
+    }
   })
 }
