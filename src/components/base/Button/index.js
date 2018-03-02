@@ -34,6 +34,11 @@ const Base = styled.button.attrs({
   }
 
   &:active {
+    border: ${p =>
+      p.primary
+        ? 'none'
+        : `2px solid ${p.disabled ? 'transparent' : darken(p.theme.colors.grey, 0.2)}`};
+    color: ${p => (p.primary ? '' : darken(p.theme.colors.grey, 0.2))};
     background: ${p => (p.primary ? darken(p.theme.colors.wallet, 0.1) : '')};
   }
 `
