@@ -19,7 +19,7 @@ import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
 import BalanceSummary from 'components/BalanceSummary'
-import Box, { Card } from 'components/base/Box'
+import Box from 'components/base/Box'
 import Pills from 'components/base/Pills'
 import Text from 'components/base/Text'
 import TransactionsList from 'components/TransactionsList'

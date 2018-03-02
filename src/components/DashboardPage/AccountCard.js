@@ -42,7 +42,7 @@ const AccountCard = ({
             </Box>
           </Box>
         </Box>
-        <Bar size={1} color="argile" />
+        <Bar size={1} color="fog" />
         <Box justifyContent="center">
           <FormattedVal
             alwaysShowSign={false}

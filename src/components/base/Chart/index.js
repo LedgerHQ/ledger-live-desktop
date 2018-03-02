@@ -178,7 +178,7 @@ SimpleAreaChart.defaultProps = {
   ...DEFAULT_PROPS,
 }
 
-const AreaChartTooltip = (
+const areaChartTooltip = ({ renderLabels }: { renderLabels: Function }) => (
   <VictoryTooltip
     corderRadius={radii[1]}
     pointerLength={0}
@@ -196,7 +196,7 @@ const AreaChartTooltip = (
       fill: colors.dark,
       stroke: null,
     }}
-    width={a => space[1] * 2 + a.value.length}
+    width={a => space[2] * 2 + renderLabels(a).length * 5.2} // Approximatif size of char for calculate Tooltip witdh
   />
 )
 
@@ -290,7 +290,9 @@ export class AreaChart extends PureComponent<Chart> {
                 data={data}
                 x="name"
                 y="value"
-                labelComponent={AreaChartTooltip}
+                labelComponent={areaChartTooltip({
+                  renderLabels,
+                })}
                 labels={renderLabels}
                 style={{
                   data: {

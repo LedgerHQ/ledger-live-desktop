@@ -8,7 +8,7 @@ import '@fortawesome/fontawesome-free-solid'
 import '@fortawesome/fontawesome-free-regular'
 import '@fortawesome/fontawesome-free-brands'
 
-import { fontFace, rgba } from 'styles/helpers'
+import { fontFace } from 'styles/helpers'
 import { radii, colors } from 'styles/theme'
 import reset from './reset'
 
@@ -90,11 +90,11 @@ injectGlobal`
   ${reset};
 
   .tippy-tooltip {
-    background-color: ${rgba(colors.dark, 0.8)};
+    background-color: ${colors.dark};
     border-radius: ${radii[1]}px;
   }
 
   .tippy-popper .tippy-roundarrow {
-    fill: ${rgba(colors.dark, 0.8)};
+    fill: ${colors.dark};
   }
 `

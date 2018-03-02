@@ -15,10 +15,11 @@ export default store => next => action => {
   dispatch({ type, payload: action.payload })
 
   const state = getState()
-  const { settings } = state
+  const { settings, counterValues } = state
 
   const accounts = getAccounts(state)
 
   db.set('settings', settings)
   db.set('accounts', accounts)
+  db.set('counterValues', counterValues)
 }

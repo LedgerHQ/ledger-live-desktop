@@ -149,7 +149,7 @@ export async function getAccount({
 
         const transactionsOpts = { coin_type: coinType }
         let txs = await ledger.getTransactions(listAddresses, transactionsOpts)
-        txs.reverse().filter(t => !allTxsHash.includes(t.hash))
+        txs = txs.filter(t => !allTxsHash.includes(t.hash)).reverse()
 
         const hasTransactions = txs.length > 0
 
