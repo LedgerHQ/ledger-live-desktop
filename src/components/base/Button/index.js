@@ -7,19 +7,26 @@ import noop from 'lodash/noop'
 
 import { darken, lighten } from 'styles/helpers'
 
+import fontFamily from 'styles/styled/fontFamily'
+
 import Box from 'components/base/Box'
 import Icon from 'components/base/Icon'
 
-const Base = styled.button`
+const Base = styled.button.attrs({
+  ff: 'Museo Sans|Regular',
+  fontSize: 3,
+  px: 2,
+})`
   ${space};
   ${color};
   ${fontSize};
   ${fontWeight};
-  border-radius: 5px;
+  ${fontFamily};
+  border-radius: 4px;
   border: ${p =>
     p.primary ? 'none' : `2px solid ${p.disabled ? 'transparent' : p.theme.colors.grey}`};
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
-  height: 40px;
+  height: 30px;
   outline: none;
 
   &:hover {

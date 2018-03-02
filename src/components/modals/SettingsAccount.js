@@ -91,7 +91,7 @@ class SettingsAccount extends PureComponent<Props, State> {
         ...account,
         settings: {
           ...account.settings,
-          minConfirmations,
+          minConfirmations: Number(minConfirmations),
         },
       })
     })
