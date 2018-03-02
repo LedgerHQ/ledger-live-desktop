@@ -50,7 +50,7 @@ const BalanceSummary = ({ accounts, selectedTime, daysCount }: Props) => (
               }}
               strokeWidth={2}
               renderLabels={d =>
-                formatCurrencyUnit(getFiatUnit('USD'), d.y * 10, {
+                formatCurrencyUnit(getFiatUnit('USD'), d.y * 100, {
                   showCode: true,
                 })
               }

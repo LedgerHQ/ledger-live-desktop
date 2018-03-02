@@ -2,7 +2,6 @@
 
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
-import get from 'lodash/get'
 import debug from 'debug'
 
 import type { Accounts } from 'types/common'
@@ -52,13 +51,13 @@ export function startSyncAccounts(accounts: Accounts) {
   syncAccounts = true
   sendEvent('accounts', 'sync.all', {
     accounts: accounts.map(account => {
-      const index = get(account, 'index', 0)
-      const addresses = get(account, 'addresses', [])
+      const { id, rootPath, addresses, index, transactions } = account
       return {
-        id: account.id,
-        rootPath: account.rootPath,
+        id,
         allAddresses: addresses,
         currentIndex: index,
+        rootPath,
+        transactions,
       }
     }),
   })
@@ -92,20 +91,11 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
               return
             }
 
-            const { name, balanceByDay } = currentAccount
+            const { name } = currentAccount
 
             if (account.transactions.length > 0) {
               d.sync(`Update account - ${name}`)
-              store.dispatch(
-                updateAccount({
-                  ...account,
-                  balance: currentAccount.balance + account.balance,
-                  balanceByDay: Object.keys(balanceByDay).reduce((result, k) => {
-                    result[k] = balanceByDay[k] + (account.balanceByDay[k] || 0)
-                    return result
-                  }, {}),
-                }),
-              )
+              store.dispatch(updateAccount(account))
             }
           }
         },

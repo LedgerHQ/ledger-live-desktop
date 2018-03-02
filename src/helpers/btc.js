@@ -68,6 +68,7 @@ export function getBalanceByDay(transactions: Transactions) {
 export async function getAccount({
   rootPath,
   allAddresses = [],
+  allTxsHash = [],
   currentIndex = 0,
   hdnode,
   segwit,
@@ -78,6 +79,7 @@ export async function getAccount({
 }: {
   rootPath: string,
   allAddresses?: Array<string>,
+  allTxsHash?: Array<string>,
   currentIndex?: number,
   hdnode: Object,
   segwit: boolean,
@@ -122,7 +124,7 @@ export async function getAccount({
     new Promise(resolve => setTimeout(() => resolve(getAddress(params)), asyncDelay))
 
   const getLastAddress = (addresses, txs) => {
-    const txsAddresses = [...txs.inputs.map(tx => tx.address), ...txs.outputs.map(tx => tx.address)]
+    const txsAddresses = [...txs.inputs.map(t => t.address), ...txs.outputs.map(t => t.address)]
     return addresses.find(a => txsAddresses.includes(a.address)) || null
   }
 
@@ -146,9 +148,8 @@ export async function getAccount({
         allAddresses = [...new Set([...allAddresses, ...listAddresses])]
 
         const transactionsOpts = { coin_type: coinType }
-        const txs = await ledger.getTransactions(listAddresses, transactionsOpts)
-
-        txs.reverse()
+        let txs = await ledger.getTransactions(listAddresses, transactionsOpts)
+        txs.reverse().filter(t => !allTxsHash.includes(t.hash))
 
         const hasTransactions = txs.length > 0
 

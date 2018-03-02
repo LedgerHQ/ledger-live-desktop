@@ -53,17 +53,18 @@ const handlers: Object = {
         return existingAccount
       }
 
-      const { transactions, index } = account
+      const { balance, balanceByDay, transactions } = existingAccount
 
       const updatedAccount = {
         ...existingAccount,
         ...account,
-        balance: transactions.reduce((result, v) => {
-          result += v.balance
+        balance: balance + account.balance,
+        balanceByDay: Object.keys(balanceByDay).reduce((result, k) => {
+          result[k] = balanceByDay[k] + (account.balanceByDay[k] || 0)
           return result
-        }, 0),
-        index: index || get(existingAccount, 'index', 0),
-        transactions,
+        }, {}),
+        index: account.index || get(existingAccount, 'index', 0),
+        transactions: [...transactions, ...account.transactions],
       }
 
       return orderAccountsTransactions(updatedAccount)

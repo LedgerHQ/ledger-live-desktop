@@ -90,11 +90,7 @@ function calculateBalance(props) {
   })
 
   return {
-    allBalances: getAllBalances({
-      accounts: props.accounts,
-      counterValues: props.counterValues,
-      daysCount: props.daysCount,
-    }),
+    allBalances,
     totalBalance: last(allBalances).value,
     sinceBalance: first(allBalances).value,
   }
