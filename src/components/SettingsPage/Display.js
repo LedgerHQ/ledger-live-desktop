@@ -25,7 +25,6 @@ class TabProfile extends PureComponent<Props, State> {
   state = {
     inputValue: {
       language: this.props.settings.language,
-      orderAccounts: '',
     },
   }
 
