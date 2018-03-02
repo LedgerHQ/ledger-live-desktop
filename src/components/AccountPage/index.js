@@ -131,12 +131,14 @@ class AccountPage extends PureComponent<Props, State> {
                 </Box>
                 <Box horizontal justifyContent="center" flow={7}>
                   <BalanceSincePercent
+                    t={t}
                     alignItems="center"
                     totalBalance={totalBalance}
                     sinceBalance={sinceBalance}
                     since={selectedTime}
                   />
                   <BalanceSinceDiff
+                    t={t}
                     fiat="USD"
                     alignItems="center"
                     totalBalance={totalBalance}

@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import type { Unit } from '@ledgerhq/currencies'
+import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -13,12 +14,15 @@ const Sub = styled(Text).attrs({
   ff: 'Open Sans',
   color: 'warnGrey',
   fontSize: 4,
-})``
+})`
+  text-transform: lowercase;
+`
 
 type BalanceSinceProps = {
   since: string,
   totalBalance: number,
   sinceBalance: number,
+  t: T,
 }
 
 type BalanceTotalProps = {
@@ -33,7 +37,7 @@ type Props = {
 } & BalanceSinceProps
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
-  const { totalBalance, sinceBalance, since, ...otherProps } = props
+  const { t, totalBalance, sinceBalance, since, ...otherProps } = props
   return (
     <Box {...otherProps}>
       <FormattedVal
@@ -42,13 +46,13 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
         alwaysShowSign
         fontSize={7}
       />
-      <Sub>since one {since}</Sub>
+      <Sub>{t('time:since', { since: t(`time:${since}`) })}</Sub>
     </Box>
   )
 }
 
 export function BalanceSinceDiff(props: Props) {
-  const { totalBalance, sinceBalance, since, fiat, ...otherProps } = props
+  const { t, totalBalance, sinceBalance, since, fiat, ...otherProps } = props
   return (
     <Box {...otherProps}>
       <FormattedVal
@@ -58,7 +62,7 @@ export function BalanceSinceDiff(props: Props) {
         val={totalBalance - sinceBalance}
         fontSize={7}
       />
-      <Sub>since one {since}</Sub>
+      <Sub>{t('time:since', { since: t(`time:${since}`) })}</Sub>
     </Box>
   )
 }
@@ -89,17 +93,18 @@ BalanceTotal.defaultProps = {
 }
 
 function BalanceInfos(props: Props) {
-  const { fiat, totalBalance, since, sinceBalance } = props
+  const { t, fiat, totalBalance, since, sinceBalance } = props
   return (
     <Box horizontal alignItems="flex-end" flow={7}>
       <BalanceTotal fiat={fiat} totalBalance={totalBalance}>
-        <Sub>{'Total balance'}</Sub>
+        <Sub>{t('dashboard:totalBalance')}</Sub>
       </BalanceTotal>
       <BalanceSincePercent
         alignItems="flex-end"
         totalBalance={totalBalance}
         sinceBalance={sinceBalance}
         since={since}
+        t={t}
       />
       <BalanceSinceDiff
         fiat="USD"
@@ -107,6 +112,7 @@ function BalanceInfos(props: Props) {
         totalBalance={totalBalance}
         sinceBalance={sinceBalance}
         since={since}
+        t={t}
       />
     </Box>
   )

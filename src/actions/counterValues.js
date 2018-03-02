@@ -58,7 +58,9 @@ export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, get
 
   Promise.all(coinTypes.map(fetchCounterValuesByCoinType)).then(result => {
     const newCounterValues = result.reduce((r, v) => {
-      r[v.symbol] = v.values
+      if (v.symbol) {
+        r[v.symbol] = v.values
+      }
       return r
     }, {})
     dispatch(updateCounterValues(newCounterValues))

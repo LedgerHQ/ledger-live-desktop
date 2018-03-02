@@ -139,6 +139,7 @@ class DashboardPage extends PureComponent<Props, State> {
               daysCount={daysCount}
               renderHeader={({ totalBalance, selectedTime, sinceBalance }) => (
                 <BalanceInfos
+                  t={t}
                   fiat="USD"
                   totalBalance={totalBalance}
                   since={selectedTime}

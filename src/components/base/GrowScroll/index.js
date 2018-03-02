@@ -28,7 +28,7 @@ class GrowScroll extends PureComponent<Props> {
     this.handleUpdate(this.props)
 
     if (this._scrollbar) {
-      this._scrollbar.addListener(this.handleScroll)
+      this._scrollbar.addListener(this.props.onScroll)
     }
   }
 
@@ -38,7 +38,7 @@ class GrowScroll extends PureComponent<Props> {
 
   componentWillUnmount() {
     if (this._scrollbar) {
-      this._scrollbar.removeListener(this.handleScroll)
+      this._scrollbar.removeListener(this.props.onScroll)
     }
   }
 
@@ -47,8 +47,6 @@ class GrowScroll extends PureComponent<Props> {
       props.onUpdate(this._scrollbar)
     }
   }
-
-  handleScroll = this.props.onScroll
 
   _scrollbar = undefined
 
