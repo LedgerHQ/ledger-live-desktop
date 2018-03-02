@@ -1,5 +1,8 @@
 # Ledger Wallet Desktop
 
+[![CircleCI](https://circleci.com/gh/LedgerHQ/ledger-wallet-desktop.svg?style=svg)](https://circleci.com/gh/LedgerHQ/ledger-wallet-desktop)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
+
 ## Requirements
 
 * nodejs v8.x (https://nodejs.org/en/)

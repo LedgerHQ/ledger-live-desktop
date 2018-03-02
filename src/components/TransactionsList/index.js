@@ -11,7 +11,7 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Transaction as TransactionType, T } from 'types/common'
 
-import Box from 'components/base/Box'
+import Box, { Card } from 'components/base/Box'
 import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
@@ -20,7 +20,7 @@ import ConfirmationCheck from './ConfirmationCheck'
 const DATE_COL_SIZE = 80
 const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
-const CONFIRMATION_COL_SIZE = 30
+const CONFIRMATION_COL_SIZE = 44
 
 const Cap = styled(Text).attrs({
   fontSize: 2,
@@ -58,11 +58,16 @@ const TransactionRaw = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
+  cursor: pointer;
   border-bottom: 1px solid ${p => p.theme.colors.fog};
   height: 68px;
 
   &:last-child {
     border-bottom: 0;
+  }
+
+  &:hover {
+    background: ${p => p.theme.colors.lightGrey};
   }
 `
 
@@ -151,7 +156,7 @@ const Transaction = ({
           alwaysShowSign
         />
       </Cell>
-      <Cell size={CONFIRMATION_COL_SIZE} px={0} align="center" justify="center">
+      <Cell size={CONFIRMATION_COL_SIZE} px={0} align="center" justify="flex-start">
         <ConfirmationCheck minConfirmations={minConfirmations} confirmations={tx.confirmations} />
       </Cell>
     </TransactionRaw>
@@ -169,6 +174,7 @@ type Props = {
   transactions: Array<TransactionType>,
   withAccounts?: boolean,
   minConfirmations: number,
+  title?: string,
 }
 
 class TransactionsList extends Component<Props> {
@@ -179,6 +185,10 @@ class TransactionsList extends Component<Props> {
   }
 
   shouldComponentUpdate(nextProps: Props) {
+    if (this.props.minConfirmations !== nextProps.minConfirmations) {
+      return true
+    }
+
     if (this._hashCache === null) {
       return true
     }
@@ -191,12 +201,12 @@ class TransactionsList extends Component<Props> {
   _hashCache = null
 
   render() {
-    const { transactions, withAccounts, onAccountClick, minConfirmations, t } = this.props
+    const { transactions, title, withAccounts, onAccountClick, minConfirmations, t } = this.props
 
     this._hashCache = this.getHashCache(transactions)
 
     return (
-      <Box flow={1}>
+      <Card flow={1} title={title} p={0}>
         <Box horizontal pt={4}>
           <HeaderCol size={DATE_COL_SIZE}>{t('transactionsList:date')}</HeaderCol>
           {withAccounts && (
@@ -222,7 +232,7 @@ class TransactionsList extends Component<Props> {
             ))}
           </Box>
         </Defer>
-      </Box>
+      </Card>
     )
   }
 }

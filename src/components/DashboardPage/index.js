@@ -289,13 +289,12 @@ class DashboardPage extends PureComponent<Props, State> {
                 ))}
               </Box>
             </Box>
-            <Card p={0} px={4} title={t('dashboard:recentActivity')}>
-              <TransactionsList
-                withAccounts
-                transactions={allTransactions}
-                onAccountClick={account => push(`/account/${account.id}`)}
-              />
-            </Card>
+            <TransactionsList
+              title={t('dashboard:recentActivity')}
+              withAccounts
+              transactions={allTransactions}
+              onAccountClick={account => push(`/account/${account.id}`)}
+            />
           </Fragment>
         )}
       </Box>
