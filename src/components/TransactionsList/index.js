@@ -184,6 +184,10 @@ class TransactionsList extends Component<Props> {
   }
 
   shouldComponentUpdate(nextProps: Props) {
+    if (this.props.minConfirmations !== nextProps.minConfirmations) {
+      return true
+    }
+
     if (this._hashCache === null) {
       return true
     }

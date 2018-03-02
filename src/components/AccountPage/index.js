@@ -69,7 +69,7 @@ class AccountPage extends PureComponent<Props> {
               </Box>
             </Button>
             <Button
-              style={{ width: 40, padding: 0 }}
+              style={{ width: 30, padding: 0 }}
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
             >
               <Box align="center">
@@ -82,7 +82,10 @@ class AccountPage extends PureComponent<Props> {
           <Text fontSize={5}>{formatBTC(account.balance)}</Text>
         </Card>
         <Card p={0} px={4} title={t('account:lastOperations')}>
-          <TransactionsList transactions={account.transactions} />
+          <TransactionsList
+            transactions={account.transactions}
+            minConfirmations={account.settings.minConfirmations}
+          />
         </Card>
       </Box>
     )

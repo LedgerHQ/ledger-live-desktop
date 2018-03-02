@@ -120,6 +120,7 @@ export function serializeAccounts(accounts: Array<Object>) {
       name: account.name || `${key}`,
       path: account.path,
       unit: account.unit || getDefaultUnitByCoinType(account.coinType),
+      settings: account.settings,
     }
 
     return {
@@ -144,6 +145,7 @@ export function deserializeAccounts(accounts: Accounts) {
     path: account.path,
     transactions: account.transactions.map(({ account, ...t }) => t),
     unit: account.unit,
+    settings: account.settings,
   }))
 }
 
