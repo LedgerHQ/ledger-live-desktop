@@ -196,7 +196,7 @@ const areaChartTooltip = ({ renderLabels }: { renderLabels: Function }) => (
       fill: colors.dark,
       stroke: null,
     }}
-    width={a => space[2] * 2 + renderLabels(a).length * 5.2} // Approximatif size of char for calculate Tooltip witdh
+    width={a => space[2] * 2 + renderLabels(a).length * 5.2} // Approximatif size of char for calculate Tooltip width
   />
 )
 
@@ -213,6 +213,10 @@ export class AreaChart extends PureComponent<Chart> {
     renderTickY: (t: any) => t,
     ...DEFAULT_PROPS,
   }
+
+  _tooltip = areaChartTooltip({
+    renderLabels: this.props.renderLabels,
+  })
 
   render() {
     const {
@@ -290,9 +294,7 @@ export class AreaChart extends PureComponent<Chart> {
                 data={data}
                 x="name"
                 y="value"
-                labelComponent={areaChartTooltip({
-                  renderLabels,
-                })}
+                labelComponent={this._tooltip}
                 labels={renderLabels}
                 style={{
                   data: {

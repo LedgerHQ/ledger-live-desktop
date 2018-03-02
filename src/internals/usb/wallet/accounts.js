@@ -148,12 +148,12 @@ export default async ({
 
     const hdnode = getHDNode({ xpub58, network })
     const account = await getAccount({
-      rootPath: path,
-      hdnode,
-      coinType,
-      network,
-      segwit,
       asyncDelay: 0,
+      coinType,
+      hdnode,
+      network,
+      rootPath: path,
+      segwit,
       onProgress: ({ transactions, ...progress }) =>
         transactions > 0 && onProgress({ account: currentAccount, transactions, ...progress }),
     })
