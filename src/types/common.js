@@ -21,6 +21,8 @@ export type Transaction = {
   confirmations: number,
 }
 
+export type Transactions = Array<Transaction>
+
 // -------------------- Accounts
 
 export type AccountSettings = {
@@ -32,13 +34,15 @@ export type Account = {
   addresses: Array<string>,
   archived?: boolean,
   balance: number,
+  balanceByDay: Object,
   coinType: number,
   currency: Currency,
   id: string,
   index: number,
   name: string,
   path: string,
-  transactions: Array<Transaction>,
+  rootPath: string,
+  transactions: Transactions,
   unit: Unit,
   settings: AccountSettings,
 }

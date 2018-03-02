@@ -92,7 +92,7 @@ class SideBar extends PureComponent<Props> {
           <Box flow={4} grow pt={1}>
             <CapsSubtitle horizontal alignItems="center">
               <Box grow>{t('sidebar:accounts')}</Box>
-              <Tooltip render={() => t('addAccount:title')} offset={[0, 1]}>
+              <Tooltip render={() => t('addAccount:title')}>
                 <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
                   <IconPlus height={14} width={14} />
                 </PlusBtn>

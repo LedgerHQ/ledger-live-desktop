@@ -83,7 +83,7 @@ class ReceiveModal extends PureComponent<Props, State> {
                       onChange={this.handleChangeInput('amount')}
                     />
                   </Box>
-                  <ReceiveBox path={account.path} amount={amount} address={account.address || ''} />
+                  <ReceiveBox account={account} amount={amount} />
                 </Fragment>
               )}
               <Box horizontal justifyContent="center">

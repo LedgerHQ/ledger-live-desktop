@@ -2,8 +2,6 @@
 
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
-import get from 'lodash/get'
-import uniqBy from 'lodash/uniqBy'
 import debug from 'debug'
 
 import type { Accounts } from 'types/common'
@@ -53,12 +51,13 @@ export function startSyncAccounts(accounts: Accounts) {
   syncAccounts = true
   sendEvent('accounts', 'sync.all', {
     accounts: accounts.map(account => {
-      const index = get(account, 'index', 0)
-      const addresses = get(account, 'addresses', [])
+      const { id, rootPath, addresses, index, transactions } = account
       return {
-        id: account.id,
+        id,
         allAddresses: addresses,
         currentIndex: index,
+        rootPath,
+        transactions,
       }
     }),
   })
@@ -86,22 +85,17 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
         success: account => {
           if (syncAccounts) {
             const state = store.getState()
-            const currentAccount = getAccountById(state, account.id) || {}
-            const currentAccountTransactions = get(currentAccount, 'transactions', [])
+            const currentAccount = getAccountById(state, account.id)
 
-            const transactions = uniqBy(
-              [...currentAccountTransactions, ...account.transactions],
-              tx => tx.hash,
-            )
+            if (!currentAccount) {
+              return
+            }
 
-            if (currentAccountTransactions.length !== transactions.length) {
-              d.sync(`Update account - ${currentAccount.name}`)
-              store.dispatch(
-                updateAccount({
-                  ...account,
-                  transactions,
-                }),
-              )
+            const { name } = currentAccount
+
+            if (account.transactions.length > 0) {
+              d.sync(`Update account - ${name}`)
+              store.dispatch(updateAccount(account))
             }
           }
         },

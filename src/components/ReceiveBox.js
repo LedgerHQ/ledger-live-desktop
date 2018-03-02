@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
 
 import type { MapStateToProps } from 'react-redux'
-import type { Device } from 'types/common'
+import type { Account, Device } from 'types/common'
 
 import { getCurrentDevice } from 'reducers/devices'
 import { sendEvent } from 'renderer/events'
@@ -54,9 +54,8 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 
 type Props = {
   currentDevice: Device | null,
-  address: string,
+  account: Account,
   amount?: string,
-  path: string,
 }
 
 type State = {
@@ -83,7 +82,7 @@ class ReceiveBox extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (this.props.address !== nextProps.address) {
+    if (this.props.account !== nextProps.account) {
       this.setState({
         ...defaultState,
       })
@@ -112,12 +111,12 @@ class ReceiveBox extends PureComponent<Props, State> {
   }
 
   handleVerifyAddress = () => {
-    const { currentDevice, path } = this.props
+    const { currentDevice, account } = this.props
 
     if (currentDevice !== null) {
       sendEvent('usb', 'wallet.verifyAddress', {
         pathDevice: currentDevice.path,
-        path,
+        path: `${account.rootPath}${account.path}`,
       })
 
       this.setState({
@@ -127,7 +126,7 @@ class ReceiveBox extends PureComponent<Props, State> {
   }
 
   render() {
-    const { amount, address } = this.props
+    const { amount, account } = this.props
     const { isVerified, isDisplay } = this.state
 
     if (!isDisplay) {
@@ -137,6 +136,8 @@ class ReceiveBox extends PureComponent<Props, State> {
         </Box>
       )
     }
+
+    const { address } = account
 
     return (
       <Box flow={3}>

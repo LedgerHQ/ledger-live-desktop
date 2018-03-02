@@ -53,17 +53,18 @@ const handlers: Object = {
         return existingAccount
       }
 
-      const { transactions, index } = account
+      const { balance, balanceByDay, transactions } = existingAccount
 
       const updatedAccount = {
         ...existingAccount,
         ...account,
-        balance: transactions.reduce((result, v) => {
-          result += v.balance
+        balance: balance + account.balance,
+        balanceByDay: Object.keys(balanceByDay).reduce((result, k) => {
+          result[k] = balanceByDay[k] + (account.balanceByDay[k] || 0)
           return result
-        }, 0),
-        index: index || get(existingAccount, 'currentIndex', 0),
-        transactions,
+        }, {}),
+        index: account.index || get(existingAccount, 'index', 0),
+        transactions: [...transactions, ...account.transactions],
       }
 
       return orderAccountsTransactions(updatedAccount)
@@ -114,11 +115,13 @@ export function serializeAccounts(accounts: Array<Object>) {
       address: account.address,
       addresses: account.addresses,
       balance: account.balance,
+      balanceByDay: account.balanceByDay,
       coinType: account.coinType,
       currency: getCurrencyByCoinType(account.coinType),
       index: account.index,
       name: account.name || `${key}`,
       path: account.path,
+      rootPath: account.rootPath,
       unit: account.unit || getDefaultUnitByCoinType(account.coinType),
       settings: account.settings,
     }
@@ -139,10 +142,12 @@ export function deserializeAccounts(accounts: Accounts) {
     address: account.address,
     addresses: account.addresses,
     balance: account.balance,
+    balanceByDay: account.balanceByDay,
     coinType: account.coinType,
     index: account.index,
     name: account.name,
     path: account.path,
+    rootPath: account.rootPath,
     transactions: account.transactions.map(({ account, ...t }) => t),
     unit: account.unit,
     settings: account.settings,

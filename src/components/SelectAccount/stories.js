@@ -15,11 +15,13 @@ const accounts = [...Array(20)].map(() => ({
   address: chance.string(),
   addresses: [],
   balance: chance.floating({ min: 0, max: 20 }),
+  balanceByDay: {},
   coinType: 0,
   currency: getCurrencyByCoinType(0),
   index: chance.integer({ min: 0, max: 20 }),
   name: chance.name(),
   path: '',
+  rootPath: '',
   transactions: [],
   unit: getDefaultUnitByCoinType(0),
   settings: {

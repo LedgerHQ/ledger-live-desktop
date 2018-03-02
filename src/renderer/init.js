@@ -11,6 +11,7 @@ import events from 'renderer/events'
 
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
+import { initCounterValues, fetchCounterValues } from 'actions/counterValues'
 import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
 
@@ -20,13 +21,15 @@ import App from 'components/App'
 
 import 'styles/global'
 
-// Init settings with defaults if needed
+// Init db with defaults if needed
 db.init('settings', {})
+db.init('counterValues', {})
 
 const history = createHistory()
 const store = createStore(history)
 const rootNode = document.getElementById('app')
 
+store.dispatch(initCounterValues())
 store.dispatch(fetchSettings())
 
 const state = store.getState() || {}
@@ -38,6 +41,7 @@ if (!locked) {
   db.init('accounts', [])
 
   store.dispatch(fetchAccounts())
+  store.dispatch(fetchCounterValues())
 }
 
 function r(Comp) {

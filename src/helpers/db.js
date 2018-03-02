@@ -6,7 +6,7 @@ import get from 'lodash/get'
 
 import { serializeAccounts, deserializeAccounts } from 'reducers/accounts'
 
-type DBKey = 'settings' | 'accounts'
+type DBKey = 'settings' | 'accounts' | 'counterValues'
 
 const encryptionKey = {}
 
