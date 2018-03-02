@@ -8,7 +8,7 @@ import staticPath from 'helpers/staticPath'
 
 i18n.use(Backend).init({
   ns: [
-    'accountPage',
+    'account',
     'accountsOrder',
     'addAccount',
     'common',
