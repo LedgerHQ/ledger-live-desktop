@@ -3,7 +3,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import first from 'lodash/first'
+import find from 'lodash/find'
 import last from 'lodash/last'
 
 import type { MapStateToProps } from 'react-redux'
@@ -30,10 +30,13 @@ function calculateBalance(props) {
     interval,
   }).map(e => ({ name: e.date, value: e.balance }))
 
+  const firstNonEmptyDay = find(allBalances, e => e.value)
+  const sinceBalance = firstNonEmptyDay ? firstNonEmptyDay.value : 0
+
   return {
     allBalances,
     totalBalance: last(allBalances).value,
-    sinceBalance: first(allBalances).value,
+    sinceBalance,
   }
 }
 
