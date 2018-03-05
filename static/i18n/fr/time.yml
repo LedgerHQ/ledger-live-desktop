@@ -3,4 +3,4 @@ day: Jour
 week: Semaine
 month: Mois
 year: Année
-since: since one {{since}}
+since: depuis un {{since}}
