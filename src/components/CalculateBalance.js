@@ -3,91 +3,32 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import first from 'lodash/first'
+import last from 'lodash/last'
 
 import type { MapStateToProps } from 'react-redux'
 import type { Accounts } from 'types/common'
 
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
-
-import first from 'lodash/first'
-import get from 'lodash/get'
-import last from 'lodash/last'
+import { getBalanceHistoryForAccounts } from 'helpers/balance'
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => ({
   counterValues: state.counterValues,
 })
 
-function getAllBalances({
-  accounts,
-  counterValues,
-  daysCount,
-}: {
-  accounts: Accounts,
-  counterValues: Object,
-  daysCount: number,
-}) {
-  const getDate = date => moment(date).format('YYYY-MM-DD')
-  const getValue = (balance, unit, d) =>
-    balance / 10 ** unit.magnitude * counterValues['BTC-USD'][d]
-
-  const allBalancesByCoinType = accounts.reduce((result, account) => {
-    const { coinType } = account
-
-    Object.keys(account.balanceByDay).forEach(k => {
-      if (!result[coinType]) {
-        result[coinType] = {}
-      }
-      result[coinType][k] = account.balanceByDay[k] + get(result, `${coinType}.${k}`, 0)
-    })
-
-    return result
-  }, {})
-
-  const allBalances = Object.keys(allBalancesByCoinType).reduce((result, coinType) => {
-    const unit = getDefaultUnitByCoinType(parseInt(coinType, 10))
-
-    const balanceByDay = allBalancesByCoinType[coinType]
-
-    const balanceByDayKeys = Object.keys(balanceByDay).sort((a, b) => new Date(b) - new Date(a))
-
-    const lastDay = balanceByDayKeys[0]
-    const lastBalance = balanceByDay[lastDay]
-
-    let balance = lastBalance
-    let index = daysCount
-
-    result[lastDay] = getValue(balance, unit, lastDay)
-
-    let d = getDate(moment(lastDay).subtract(1, 'days'))
-
-    while (index !== 0) {
-      result[d] = getValue(balance, unit, d) + (result[d] || 0)
-      d = getDate(moment(d).subtract(1, 'days'))
-
-      if (balanceByDay[d]) {
-        balance = balanceByDay[d]
-      }
-
-      index--
-    }
-
-    return result
-  }, {})
-
-  return Object.keys(allBalances)
-    .sort()
-    .map(k => ({
-      name: k,
-      value: allBalances[k],
-    }))
-}
-
 function calculateBalance(props) {
-  const allBalances = getAllBalances({
+  const interval = {
+    start: moment()
+      .subtract(props.daysCount, 'days')
+      .format('YYYY-MM-DD'),
+    end: moment().format('YYYY-MM-DD'),
+  }
+
+  const allBalances = getBalanceHistoryForAccounts({
+    fiat: 'USD',
     accounts: props.accounts,
     counterValues: props.counterValues,
-    daysCount: props.daysCount,
-  })
+    interval,
+  }).map(e => ({ name: e.date, value: e.balance }))
 
   return {
     allBalances,
