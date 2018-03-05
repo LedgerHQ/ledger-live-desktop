@@ -46,7 +46,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
         alwaysShowSign
         fontSize={7}
       />
-      <Sub>{t('time:since', { since: t(`time:${since}`) })}</Sub>
+      <Sub>{t(`time:since.${since}`)}</Sub>
     </Box>
   )
 }
@@ -62,7 +62,7 @@ export function BalanceSinceDiff(props: Props) {
         val={totalBalance - sinceBalance}
         fontSize={7}
       />
-      <Sub>{t('time:since', { since: t(`time:${since}`) })}</Sub>
+      <Sub>{t(`time:since.${since}`)}</Sub>
     </Box>
   )
 }

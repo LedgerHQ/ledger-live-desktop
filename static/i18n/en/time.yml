@@ -3,4 +3,8 @@ week: Week
 month: Month
 year: Year
 
-since: since one {{since}}
+since:
+  day: since a day
+  week: since a week
+  month: since a month
+  year: since a year
