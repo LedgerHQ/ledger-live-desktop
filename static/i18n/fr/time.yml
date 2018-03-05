@@ -4,7 +4,7 @@ week: Semaine
 month: Mois
 year: Année
 since:
-  day: since a day
-  week: since a week
-  month: since a month
-  year: since a year
+  day: depuis un jour
+  week: depuis une semaine
+  month: depuis un mois
+  year: depuis un an
