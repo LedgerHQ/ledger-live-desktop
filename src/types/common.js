@@ -60,6 +60,9 @@ export type SettingsProfile = {
 export type SettingsDisplay = {
   language: string,
 }
-export type Settings = SettingsProfile & SettingsDisplay
+export type SettingsMoney = {
+  counterValue: string,
+}
+export type Settings = SettingsProfile & SettingsDisplay & SettingsMoney
 
 export type T = (string, ?Object) => string

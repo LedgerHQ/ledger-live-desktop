@@ -28,13 +28,13 @@ type BalanceSinceProps = {
 
 type BalanceTotalProps = {
   children?: any,
-  fiat?: string,
+  counterValue?: string,
   totalBalance: number,
   unit?: Unit,
 }
 
 type Props = {
-  fiat: string,
+  counterValue: string,
 } & BalanceSinceProps
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
@@ -53,11 +53,11 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
 }
 
 export function BalanceSinceDiff(props: Props) {
-  const { t, totalBalance, sinceBalance, since, fiat, ...otherProps } = props
+  const { t, totalBalance, sinceBalance, since, counterValue, ...otherProps } = props
   return (
     <Box {...otherProps}>
       <FormattedVal
-        fiat={fiat}
+        fiat={counterValue}
         alwaysShowSign
         showCode
         val={totalBalance - sinceBalance}
@@ -69,13 +69,13 @@ export function BalanceSinceDiff(props: Props) {
 }
 
 export function BalanceTotal(props: BalanceTotalProps) {
-  const { fiat, totalBalance, children, unit } = props
+  const { counterValue, totalBalance, children, unit } = props
   return (
     <Box grow>
       <FormattedVal
         alwaysShowSign={false}
         color="dark"
-        fiat={fiat}
+        fiat={counterValue}
         fontSize={8}
         showCode
         style={{ lineHeight: 1 }}
@@ -88,16 +88,16 @@ export function BalanceTotal(props: BalanceTotalProps) {
 }
 
 BalanceTotal.defaultProps = {
-  fiat: undefined,
+  counterValue: undefined,
   children: null,
   unit: undefined,
 }
 
 function BalanceInfos(props: Props) {
-  const { t, fiat, totalBalance, since, sinceBalance, refBalance } = props
+  const { t, totalBalance, since, sinceBalance, refBalance, counterValue } = props
   return (
     <Box horizontal alignItems="flex-end" flow={7}>
-      <BalanceTotal fiat={fiat} totalBalance={totalBalance}>
+      <BalanceTotal counterValue={counterValue} totalBalance={totalBalance}>
         <Sub>{t('dashboard:totalBalance')}</Sub>
       </BalanceTotal>
       <BalanceSincePercent
@@ -109,7 +109,7 @@ function BalanceInfos(props: Props) {
         t={t}
       />
       <BalanceSinceDiff
-        fiat="USD"
+        counterValue={counterValue}
         alignItems="flex-end"
         totalBalance={totalBalance}
         sinceBalance={sinceBalance}

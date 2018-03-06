@@ -38,6 +38,7 @@ function renderTickX(selectedTime) {
 }
 
 type Props = {
+  counterValue: string,
   chartColor: string,
   chartId: string,
   accounts: Accounts,
@@ -47,6 +48,7 @@ type Props = {
 }
 
 const BalanceSummary = ({
+  counterValue,
   chartColor,
   chartId,
   accounts,
@@ -54,10 +56,11 @@ const BalanceSummary = ({
   daysCount,
   renderHeader,
 }: Props) => {
-  const unit = getFiatUnit('USD')
+  const unit = getFiatUnit(counterValue)
   return (
     <Card p={0} py={6}>
       <CalculateBalance
+        counterValue={counterValue}
         accounts={accounts}
         daysCount={daysCount}
         render={({ allBalances, totalBalance, sinceBalance, refBalance }) => (

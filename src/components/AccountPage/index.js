@@ -11,6 +11,7 @@ import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'constants'
 import type { T, Account } from 'types/common'
 
 import { getAccountById } from 'reducers/accounts'
+import { getCounterValue } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
 import IconControls from 'icons/Controls'
@@ -33,6 +34,7 @@ import AccountHeader from './AccountHeader'
 
 const mapStateToProps = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
+  counterValue: getCounterValue(state),
 })
 
 const mapDispatchToProps = {
@@ -40,6 +42,7 @@ const mapDispatchToProps = {
 }
 
 type Props = {
+  counterValue: string,
   t: T,
   account?: Account,
   openModal: Function,
@@ -63,7 +66,7 @@ class AccountPage extends PureComponent<Props, State> {
     })
 
   render() {
-    const { account, openModal, t } = this.props
+    const { account, openModal, t, counterValue } = this.props
     const { selectedTime, daysCount } = this.state
 
     // Don't even throw if we jumped in wrong account route
@@ -100,6 +103,7 @@ class AccountPage extends PureComponent<Props, State> {
         </Box>
         <Box mb={7}>
           <BalanceSummary
+            counterValue={counterValue}
             chartColor={account.currency.color}
             chartId={`account-chart-${account.id}`}
             accounts={[account]}
@@ -113,7 +117,7 @@ class AccountPage extends PureComponent<Props, State> {
                       <FormattedVal
                         alwaysShowSign={false}
                         color="warmGrey"
-                        fiat="USD"
+                        fiat={counterValue}
                         fontSize={6}
                         showCode
                         style={{ lineHeight: 1 }}
@@ -139,7 +143,7 @@ class AccountPage extends PureComponent<Props, State> {
                   />
                   <BalanceSinceDiff
                     t={t}
-                    fiat="USD"
+                    counterValue={counterValue}
                     alignItems="center"
                     totalBalance={totalBalance}
                     sinceBalance={sinceBalance}

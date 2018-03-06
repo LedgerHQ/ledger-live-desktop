@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
   counterValues: state.counterValues,
 })
 
-function calculateBalance(props) {
+function calculateBalance(props: Object) {
   const interval = {
     start: moment()
       .subtract(props.daysCount, 'days')
@@ -24,7 +24,7 @@ function calculateBalance(props) {
   }
 
   const allBalances = getBalanceHistoryForAccounts({
-    fiat: 'USD',
+    counterValue: props.counterValue,
     accounts: props.accounts,
     counterValues: props.counterValues,
     interval,

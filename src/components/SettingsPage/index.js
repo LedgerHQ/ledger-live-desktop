@@ -7,8 +7,10 @@ import { translate } from 'react-i18next'
 
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
+import type { FetchCounterValues } from 'actions/counterValues'
 
 import { saveSettings } from 'actions/settings'
+import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -16,12 +18,14 @@ import Tabs from 'components/base/Tabs'
 
 import TabDisplay from './Display'
 import TabProfile from './Profile'
+import TabMoney from './Money'
 
 const mapStateToProps = state => ({
   settings: state.settings,
 })
 
 const mapDispatchToProps = {
+  fetchCounterValues,
   saveSettings,
 }
 
@@ -29,6 +33,7 @@ type Props = {
   i18n: Object,
   saveSettings: SaveSettings,
   settings: Settings,
+  fetchCounterValues: FetchCounterValues,
   t: T,
 }
 
@@ -44,13 +49,17 @@ class SettingsPage extends PureComponent<Props, State> {
   handleChangeTab = (tab: number) => this.setState({ tab })
 
   handleSaveSettings = newSettings => {
-    const { saveSettings, i18n, settings } = this.props
+    const { fetchCounterValues, saveSettings, i18n, settings } = this.props
+
+    saveSettings(newSettings)
 
     if (newSettings.language !== settings.language) {
       i18n.changeLanguage(newSettings.language)
     }
 
-    saveSettings(newSettings)
+    if (newSettings.counterValue !== settings.counterValue) {
+      fetchCounterValues()
+    }
   }
 
   render() {
@@ -77,9 +86,8 @@ class SettingsPage extends PureComponent<Props, State> {
             },
             {
               key: 'money',
-              isDisabled: true,
               title: t('settings:tabs.money'),
-              render: () => <div>{'Monnaie'}</div>,
+              render: () => <TabMoney {...props} />,
             },
             {
               key: 'material',
