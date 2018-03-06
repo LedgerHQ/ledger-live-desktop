@@ -141,6 +141,7 @@
     "node-loader": "^0.6.0",
     "prettier": "^1.11.1",
     "react-hot-loader": "^4.0.0",
+    "react-test-renderer": "^16.2.0",
     "webpack": "^3.11.0"
   }
 }

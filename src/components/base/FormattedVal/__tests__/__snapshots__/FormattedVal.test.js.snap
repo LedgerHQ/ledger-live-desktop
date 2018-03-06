@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components FormattedVal renders a fiat 1`] = `
+<span
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
+  color="#96d071"
+>
+  20.00
+</span>
+`;
+
+exports[`components FormattedVal renders a formatted val 1`] = `
+<span
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
+  color="#96d071"
+>
+  4
+</span>
+`;
+
+exports[`components FormattedVal renders a percent 1`] = `
+<span
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
+  color="#96d071"
+>
+  30 %
+</span>
+`;
+
+exports[`components FormattedVal shows code 1`] = `
+<span
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
+  color="#96d071"
+>
+  BTC 4
+</span>
+`;
+
+exports[`components FormattedVal shows sign 1`] = `
+<span
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
+  color="#96d071"
+>
+  + 4
+</span>
+`;
+
+exports[`components FormattedVal shows sign 2`] = `
+<span
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE fjJBpt"
+  color="#fa4352"
+>
+  - 4
+</span>
+`;
