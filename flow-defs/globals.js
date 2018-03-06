@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 declare var __DEV__: boolean
+declare var __TEST__: boolean
 declare var __PROD__: boolean
 declare var __ENV__: string
 declare var __PRINT_MODE__: string
