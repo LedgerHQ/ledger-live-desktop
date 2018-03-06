@@ -3,13 +3,12 @@
 /* eslint-disable react/no-multi-comp */
 
 import React, { Fragment, Component, PureComponent } from 'react'
-import {
-  VictoryChart,
-  VictoryArea,
-  VictoryAxis,
-  VictoryTooltip,
-  VictoryVoronoiContainer,
-} from 'victory'
+
+import VictoryChart from 'victory-chart/lib/components/victory-chart/victory-chart'
+import VictoryArea from 'victory-chart/lib/components/victory-area/victory-area'
+import VictoryAxis from 'victory-chart/lib/components/victory-axis/victory-axis'
+import VictoryTooltip from 'victory-core/lib/victory-tooltip/victory-tooltip'
+import VictoryVoronoiContainer from 'victory-chart/lib/components/containers/victory-voronoi-container'
 
 import { space, colors, fontSizes } from 'styles/theme'
 
