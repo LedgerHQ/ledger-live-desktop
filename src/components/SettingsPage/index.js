@@ -5,7 +5,6 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
 
@@ -18,7 +17,7 @@ import Tabs from 'components/base/Tabs'
 import TabDisplay from './Display'
 import TabProfile from './Profile'
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   settings: state.settings,
 })
 

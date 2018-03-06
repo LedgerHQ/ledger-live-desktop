@@ -8,7 +8,6 @@ import { Redirect } from 'react-router'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'constants'
 
-import type { MapStateToProps } from 'react-redux'
 import type { T, Account } from 'types/common'
 
 import { getAccountById } from 'reducers/accounts'
@@ -32,7 +31,7 @@ import TransactionsList from 'components/TransactionsList'
 
 import AccountHeader from './AccountHeader'
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
+const mapStateToProps = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
 })
 

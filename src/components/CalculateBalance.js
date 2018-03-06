@@ -7,12 +7,11 @@ import find from 'lodash/find'
 import first from 'lodash/first'
 import last from 'lodash/last'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Accounts } from 'types/common'
 
 import { getBalanceHistoryForAccounts } from 'helpers/balance'
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   counterValues: state.counterValues,
 })
 

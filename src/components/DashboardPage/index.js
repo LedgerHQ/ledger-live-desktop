@@ -10,7 +10,6 @@ import chunk from 'lodash/chunk'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Account, Accounts, T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
@@ -28,7 +27,7 @@ import TransactionsList from 'components/TransactionsList'
 import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
 })
 
