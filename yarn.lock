@@ -3482,7 +3482,7 @@ electron-builder-lib@20.2.0, electron-builder-lib@~20.2.0:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
-electron-builder@^20.0.4, electron-builder@^20.2.0:
+electron-builder@^20.2.0:
   version "20.2.0"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.2.0.tgz#aaeaa439cb96c9a3d7ffda25b28130327c982982"
   dependencies:
@@ -3646,7 +3646,7 @@ electron-webpack@1.13.0:
     webpack-merge "^4.1.1"
     yargs "^11.0.0"
 
-electron@1.8.2, electron@^1.8.2:
+electron@1.8.2:
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.2.tgz#a817cd733c2972b3c7cc4f777caf6e424b88014d"
   dependencies:
