@@ -13,6 +13,30 @@ import { AreaChart } from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 
+function getTickCountX(selectedTime) {
+  switch (selectedTime) {
+    default:
+    case 'week':
+      return 7
+
+    case 'month':
+      return 10
+
+    case 'year':
+      return 13
+  }
+}
+
+function renderTickX(selectedTime) {
+  let format = 'MMM. D'
+
+  if (selectedTime === 'year') {
+    format = 'MMM.'
+  }
+
+  return t => moment(t).format(format)
+}
+
 type Props = {
   chartColor: string,
   chartId: string,
@@ -66,8 +90,10 @@ const BalanceSummary = ({
                     showCode: true,
                   })
                 }
-                renderTickX={t => moment(t).format('MMM. D')}
+                renderTickX={renderTickX(selectedTime)}
                 renderTickY={t => formatShort(unit, t)}
+                tickCountX={getTickCountX(selectedTime)}
+                tickCountY={4}
               />
             </Box>
           </Fragment>

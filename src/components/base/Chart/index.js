@@ -156,6 +156,8 @@ type Chart = GenericChart & {
   renderLabels: Function,
   renderTickX: Function,
   renderTickY: Function,
+  tickCountX: number,
+  tickCountY: number,
 }
 
 export const SimpleAreaChart = ({
@@ -235,6 +237,8 @@ export class AreaChart extends PureComponent<Chart> {
       renderTickX,
       renderTickY,
       strokeWidth,
+      tickCountX,
+      tickCountY,
     } = this.props
 
     const tickLabelsStyle = {
@@ -265,7 +269,7 @@ export class AreaChart extends PureComponent<Chart> {
             >
               <VictoryAxis
                 animate={false}
-                tickCount={6}
+                tickCount={tickCountX}
                 tickFormat={renderTickX}
                 style={{
                   axis: {
@@ -279,7 +283,7 @@ export class AreaChart extends PureComponent<Chart> {
               />
               <VictoryAxis
                 dependentAxis
-                tickCount={4}
+                tickCount={tickCountY}
                 tickFormat={renderTickY}
                 style={{
                   grid: {
