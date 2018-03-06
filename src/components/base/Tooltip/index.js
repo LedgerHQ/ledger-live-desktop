@@ -16,8 +16,8 @@ const Template = styled.div`
   display: none;
 `
 
-const Wrapper = styled(Box).attrs({
-  bg: 'transparent',
+export const TooltipContainer = styled(Box).attrs({
+  bg: 'dark',
   borderRadius: 1,
   color: 'white',
   ff: 'Open Sans|SemiBold',
@@ -70,7 +70,7 @@ class Tooltip extends PureComponent<Props> {
     return (
       <Container innerRef={n => (this._node = n)}>
         <Template>
-          <Wrapper innerRef={n => (this._template = n)}>{render()}</Wrapper>
+          <TooltipContainer innerRef={n => (this._template = n)}>{render()}</TooltipContainer>
         </Template>
         {children}
       </Container>

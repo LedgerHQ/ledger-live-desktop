@@ -8,21 +8,22 @@ import get from 'lodash/get'
 
 import db from 'helpers/db'
 
-type InitCounterValues = () => { type: string, payload: Object }
+export type InitCounterValues = () => { type: string, payload: Object }
 export const initCounterValues: InitCounterValues = () => ({
   type: 'UPDATE_COUNTER_VALUES',
   payload: db.get('counterValues'),
 })
 
-type UpdateCounterValues = Object => { type: string, payload: Object }
+export type UpdateCounterValues = Object => { type: string, payload: Object }
 export const updateCounterValues: UpdateCounterValues = payload => ({
   type: 'DB:UPDATE_COUNTER_VALUES',
   payload,
 })
 
-type FetchCounterValues = (?number) => (Dispatch<*>, Function) => Promise<any>
+export type FetchCounterValues = (?number) => (Dispatch<*>, Function) => Promise<any>
 export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, getState) => {
-  const { accounts, counterValues } = getState()
+  const { accounts, counterValues, settings } = getState()
+  const { counterValue } = settings
 
   let coinTypes = []
 
@@ -36,7 +37,7 @@ export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, get
 
   const fetchCounterValuesByCoinType = coinType => {
     const { code } = getDefaultUnitByCoinType(coinType)
-    const todayCounterValues = get(counterValues, `${code}-USD.${today}`, null)
+    const todayCounterValues = get(counterValues, `${code}-${counterValue}.${today}`, null)
 
     if (todayCounterValues !== null) {
       return null
@@ -44,10 +45,10 @@ export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, get
 
     return axios
       .get(
-        `https://min-api.cryptocompare.com/data/histoday?&extraParams=ledger-test&fsym=${code}&tsym=USD&allData=1`,
+        `https://min-api.cryptocompare.com/data/histoday?&extraParams=ledger-test&fsym=${code}&tsym=${counterValue}&allData=1`,
       )
       .then(({ data }) => ({
-        symbol: `${code}-USD`,
+        symbol: `${code}-${counterValue}`,
         values: data.Data.reduce((result, d) => {
           const date = moment(d.time * 1000).format('YYYY-MM-DD')
           result[date] = d.close

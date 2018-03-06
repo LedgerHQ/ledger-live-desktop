@@ -7,7 +7,6 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
 
-import type { MapStateToProps } from 'react-redux'
 import type { T } from 'types/common'
 
 import { getOrderAccounts } from 'reducers/settings'
@@ -32,7 +31,7 @@ const OrderIcon = styled(Box).attrs({
   opacity: ${p => (p.isActive ? 1 : 0)};
 `
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   orderAccounts: getOrderAccounts(state),
 })
 

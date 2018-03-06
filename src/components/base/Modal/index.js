@@ -20,25 +20,19 @@ import GrowScroll from 'components/base/GrowScroll'
 import Icon from 'components/base/Icon'
 import Defer from 'components/base/Defer'
 
-type Props = {
-  isOpened?: boolean,
-  onClose: Function,
-  onHide?: Function,
-  preventBackdropClick?: boolean,
-  render: Function,
-  data?: any,
-}
-
 const springConfig = {
   stiffness: 380,
 }
 
-const mapStateToProps = (state, { name, isOpened }: { name: string, isOpened?: boolean }) => ({
+const mapStateToProps: Function = (
+  state,
+  { name, isOpened }: { name: string, isOpened?: boolean },
+): Object => ({
   isOpened: isOpened || (name && isModalOpened(state, name)),
   data: getModalData(state, name),
 })
 
-const mapDispatchToProps = (dispatch, { name, onClose = noop }) => ({
+const mapDispatchToProps: Function = (dispatch, { name, onClose = noop }): Object => ({
   onClose: name
     ? () => {
         dispatch(closeModal(name))
@@ -120,6 +114,15 @@ class Pure extends Component<any> {
 
     return <Defer>{render({ data, onClose })}</Defer>
   }
+}
+
+type Props = {
+  isOpened?: boolean,
+  onClose: Function,
+  onHide?: Function,
+  preventBackdropClick?: boolean,
+  render: Function,
+  data?: any,
 }
 
 export class Modal extends Component<Props> {

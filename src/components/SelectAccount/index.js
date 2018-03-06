@@ -6,32 +6,28 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import noop from 'lodash/noop'
 
-import type { MapStateToProps } from 'react-redux'
 import type { T, Accounts, Account } from 'types/common'
-
-import { formatBTC } from 'helpers/format'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 
 import Select from 'components/base/Select'
+import FormattedVal from 'components/base/FormattedVal'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
 })
 
-const renderItem = item => (
+const renderItem = a => (
   <Box horizontal alignItems="center">
     <Box grow>
       <Text color="dark" fontSize={4} fontWeight="bold">
-        {item.name}
+        {a.name}
       </Text>
     </Box>
     <Box>
-      <Text color="fog" fontSize={4}>
-        {formatBTC(item.balance)}
-      </Text>
+      <FormattedVal val={a.balance} unit={a.unit} />
     </Box>
   </Box>
 )

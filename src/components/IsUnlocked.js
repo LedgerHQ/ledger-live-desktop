@@ -6,7 +6,6 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import bcrypt from 'bcryptjs'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Settings, Accounts, T } from 'types/common'
 
 import get from 'lodash/get'
@@ -38,13 +37,13 @@ type State = {
   inputValue: InputValue,
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   accounts: getAccounts(state),
   settings: state.settings,
   isLocked: isLocked(state),
 })
 
-const mapDispatchToProps = {
+const mapDispatchToProps: Object = {
   fetchAccounts,
   unlock,
 }

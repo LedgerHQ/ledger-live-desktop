@@ -49,17 +49,17 @@ function getBalanceAtIntervalStart(account: Account, interval: DateInterval): nu
 
 export function getBalanceHistoryForAccount({
   account,
-  fiat,
+  counterValue,
   counterValues,
   interval,
 }: {
-  fiat: string,
+  counterValue: string,
   account: Account,
   counterValues: Object,
   interval: DateInterval,
 }): Array<BalanceHistoryDay> {
   const unit = getDefaultUnitByCoinType(account.coinType)
-  const counterVals = counterValues[`${unit.code}-${fiat}`]
+  const counterVals = counterValues[`${unit.code}-${counterValue}`]
   let lastBalance = getBalanceAtIntervalStart(account, interval)
   return mapInterval(interval, date => {
     let balance = 0
@@ -84,11 +84,11 @@ export function getBalanceHistoryForAccount({
 
 export function getBalanceHistoryForAccounts({
   accounts,
-  fiat,
+  counterValue,
   counterValues,
   interval,
 }: {
-  fiat: string,
+  counterValue: string,
   accounts: Accounts,
   counterValues: Object,
   interval: DateInterval,
@@ -96,7 +96,7 @@ export function getBalanceHistoryForAccounts({
   // calculate balance history for each account on the given interval
   const balances = accounts.map(account =>
     getBalanceHistoryForAccount({
-      fiat,
+      counterValue,
       account,
       counterValues,
       interval,
