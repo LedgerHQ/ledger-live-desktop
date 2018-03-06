@@ -3,8 +3,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
 import type { Unit } from '@ledgerhq/currencies'
+
+import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
 
 import Text from 'components/base/Text'
 
@@ -35,7 +36,7 @@ function FormattedVal(props: Props) {
   } else {
     if (fiat) {
       unit = getFiatUnit(fiat)
-      val *= 100
+      val *= 10 ** unit.magnitude
     } else if (!unit) {
       return ''
     }
