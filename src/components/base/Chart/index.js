@@ -13,6 +13,7 @@ import VictoryVoronoiContainer from 'victory-chart/lib/components/containers/vic
 import { space, colors, fontSizes } from 'styles/theme'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 import { TooltipContainer } from 'components/base/Tooltip'
 
 const ANIMATION_DURATION = 600
@@ -121,7 +122,7 @@ class CustomTooltip extends Component<Object> {
   }
 
   render() {
-    const { x, y, active, text, datum } = this.props
+    const { x, y, active, text, datum, renderer } = this.props
 
     if (!active) {
       return null
@@ -133,7 +134,7 @@ class CustomTooltip extends Component<Object> {
           mt={-space[1]}
           style={{ position: 'absolute', top: y, left: x, transform: `translate3d(-50%, 0, 0)` }}
         >
-          {text(datum)}
+          <Text style={{ lineHeight: 1 }}>{renderer(text(datum))}</Text>
         </TooltipContainer>
       </foreignObject>
     )
@@ -150,13 +151,6 @@ type GenericChart = {
   padding: Object | number,
   color: string,
   data: Array<Object>,
-}
-type Chart = GenericChart & {
-  renderLabels: Function,
-  renderTickX: Function,
-  renderTickY: Function,
-  tickCountX: number,
-  tickCountY: number,
 }
 
 export const SimpleAreaChart = ({
@@ -208,7 +202,14 @@ SimpleAreaChart.defaultProps = {
   ...DEFAULT_PROPS,
 }
 
-const areaChartTooltip = <CustomTooltip />
+type Chart = GenericChart & {
+  renderLabels: Function,
+  renderTickX: Function,
+  renderTickY: Function,
+  renderTooltip: Function,
+  tickCountX: number,
+  tickCountY: number,
+}
 
 const AreaChartContainer = <VictoryVoronoiContainer voronoiDimension="x" />
 
@@ -223,6 +224,8 @@ export class AreaChart extends PureComponent<Chart> {
     renderTickY: (t: any) => t,
     ...DEFAULT_PROPS,
   }
+
+  _tooltip = <CustomTooltip renderer={this.props.renderTooltip} />
 
   render() {
     const {
@@ -302,7 +305,7 @@ export class AreaChart extends PureComponent<Chart> {
                 data={data}
                 x="name"
                 y="value"
-                labelComponent={areaChartTooltip}
+                labelComponent={this._tooltip}
                 labels={renderLabels}
                 style={{
                   data: {
