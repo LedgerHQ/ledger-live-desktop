@@ -106,7 +106,7 @@ class AccountPage extends PureComponent<Props, State> {
             accounts={[account]}
             selectedTime={selectedTime}
             daysCount={daysCount}
-            renderHeader={({ totalBalance, sinceBalance }) => (
+            renderHeader={({ totalBalance, sinceBalance, refBalance }) => (
               <Box flow={4} mb={2}>
                 <Box horizontal>
                   <BalanceTotal totalBalance={account.balance} unit={account.unit}>
@@ -135,6 +135,7 @@ class AccountPage extends PureComponent<Props, State> {
                     alignItems="center"
                     totalBalance={totalBalance}
                     sinceBalance={sinceBalance}
+                    refBalance={refBalance}
                     since={selectedTime}
                   />
                   <BalanceSinceDiff
@@ -143,6 +144,7 @@ class AccountPage extends PureComponent<Props, State> {
                     alignItems="center"
                     totalBalance={totalBalance}
                     sinceBalance={sinceBalance}
+                    refBalance={refBalance}
                     since={selectedTime}
                   />
                 </Box>

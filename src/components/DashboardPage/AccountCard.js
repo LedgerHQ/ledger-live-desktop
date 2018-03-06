@@ -59,7 +59,7 @@ const AccountCard = ({
       <CalculateBalance
         accounts={[account]}
         daysCount={daysCount}
-        render={({ allBalances, totalBalance, sinceBalance }) => (
+        render={({ allBalances, totalBalance, refBalance }) => (
           <Box flow={4}>
             <Box flow={2} horizontal>
               <Box justifyContent="center">
@@ -75,7 +75,7 @@ const AccountCard = ({
               <Box grow justifyContent="center">
                 <FormattedVal
                   isPercent
-                  val={Math.floor((totalBalance - sinceBalance) / sinceBalance * 100)}
+                  val={Math.floor((totalBalance - refBalance) / refBalance * 100)}
                   alwaysShowSign
                   fontSize={3}
                 />

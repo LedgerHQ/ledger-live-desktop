@@ -22,6 +22,7 @@ type BalanceSinceProps = {
   since: string,
   totalBalance: number,
   sinceBalance: number,
+  refBalance: number,
   t: T,
 }
 
@@ -37,12 +38,12 @@ type Props = {
 } & BalanceSinceProps
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
-  const { t, totalBalance, sinceBalance, since, ...otherProps } = props
+  const { t, totalBalance, sinceBalance, refBalance, since, ...otherProps } = props
   return (
     <Box {...otherProps}>
       <FormattedVal
         isPercent
-        val={Math.floor((totalBalance - sinceBalance) / sinceBalance * 100)}
+        val={Math.floor((totalBalance - refBalance) / refBalance * 100)}
         alwaysShowSign
         fontSize={7}
       />
@@ -93,7 +94,7 @@ BalanceTotal.defaultProps = {
 }
 
 function BalanceInfos(props: Props) {
-  const { t, fiat, totalBalance, since, sinceBalance } = props
+  const { t, fiat, totalBalance, since, sinceBalance, refBalance } = props
   return (
     <Box horizontal alignItems="flex-end" flow={7}>
       <BalanceTotal fiat={fiat} totalBalance={totalBalance}>
@@ -103,6 +104,7 @@ function BalanceInfos(props: Props) {
         alignItems="flex-end"
         totalBalance={totalBalance}
         sinceBalance={sinceBalance}
+        refBalance={refBalance}
         since={since}
         t={t}
       />
@@ -111,6 +113,7 @@ function BalanceInfos(props: Props) {
         alignItems="flex-end"
         totalBalance={totalBalance}
         sinceBalance={sinceBalance}
+        refBalance={refBalance}
         since={since}
         t={t}
       />

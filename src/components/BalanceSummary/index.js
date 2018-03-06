@@ -36,7 +36,7 @@ const BalanceSummary = ({
       <CalculateBalance
         accounts={accounts}
         daysCount={daysCount}
-        render={({ allBalances, totalBalance, sinceBalance }) => (
+        render={({ allBalances, totalBalance, sinceBalance, refBalance }) => (
           <Fragment>
             {renderHeader !== null && (
               <Box px={6}>
@@ -44,6 +44,7 @@ const BalanceSummary = ({
                   totalBalance,
                   selectedTime,
                   sinceBalance,
+                  refBalance,
                 })}
               </Box>
             )}
