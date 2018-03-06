@@ -10,6 +10,7 @@ tabs:
   profile: Profil
 display:
   language: Langue
+  counterValue: Counter Value
   orderAccounts: Ordre des comptes
 profile:
   protectWithPassword: Protégez les données locales avec un mot de passe
