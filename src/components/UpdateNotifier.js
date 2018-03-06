@@ -5,7 +5,6 @@ import { translate } from 'react-i18next'
 import { compose } from 'redux'
 import { Motion, spring } from 'react-motion'
 import { connect } from 'react-redux'
-import type { MapStateToProps } from 'react-redux'
 import styled from 'styled-components'
 
 import { getUpdateStatus, getUpdateData } from 'reducers/update'
@@ -23,7 +22,7 @@ type Props = {
   updateStatus: UpdateStatus,
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps = (state: State) => ({
   updateStatus: getUpdateStatus(state),
   updateData: getUpdateData(state),
 })

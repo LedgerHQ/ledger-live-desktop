@@ -9,6 +9,7 @@ tabs:
   profile: Profile
 display:
   language: Language
+  counterValue: Counter Value
   orderAccounts: Order accounts
 profile:
   protectWithPassword: Protect local data with a password

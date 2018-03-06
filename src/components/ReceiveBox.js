@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Account, Device } from 'types/common'
 
 import { getCurrentDevice } from 'reducers/devices'
@@ -48,7 +47,7 @@ const Action = styled(Box).attrs({
   }
 `
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   currentDevice: getCurrentDevice(state),
 })
 

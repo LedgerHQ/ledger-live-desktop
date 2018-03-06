@@ -5,6 +5,7 @@
   "globals": {
     "__ENV__": false,
     "__DEV__": false,
+    "__TEST__": false,
     "__PROD__": false,
     "__SENTRY_URL__": false,
     "__PRINT_MODE__": false,
@@ -17,6 +18,7 @@
     "jest": false,
     "describe": false,
     "test": false,
+    "it": false,
     "expect": false,
   },
   "rules": {

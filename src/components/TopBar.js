@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
 
-import type { MapStateToProps, MapDispatchToProps } from 'react-redux'
 import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
@@ -73,12 +72,12 @@ const DropDownItem = styled(DDItem).attrs({
   height: 35px;
 `
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   hasAccounts: getAccounts(state).length > 0,
   hasPassword: hasPassword(state),
 })
 
-const mapDispatchToProps: MapDispatchToProps<*, *, *> = {
+const mapDispatchToProps = {
   lock,
 }
 

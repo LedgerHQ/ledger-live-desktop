@@ -9,7 +9,6 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'constants'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Accounts, T } from 'types/common'
 
 import { openModal } from 'reducers/modals'
@@ -57,11 +56,11 @@ type Props = {
   openModal: Function,
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
 })
 
-const mapDispatchToProps = {
+const mapDispatchToProps: Object = {
   openModal,
 }
 

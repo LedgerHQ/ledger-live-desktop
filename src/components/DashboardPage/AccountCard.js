@@ -12,10 +12,12 @@ import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
 
 const AccountCard = ({
+  counterValue,
   account,
   onClick,
   daysCount,
 }: {
+  counterValue: string,
   account: Account,
   onClick: Function,
   daysCount: number,
@@ -57,14 +59,15 @@ const AccountCard = ({
         </Box>
       </Box>
       <CalculateBalance
+        counterValue={counterValue}
         accounts={[account]}
         daysCount={daysCount}
-        render={({ allBalances, totalBalance, sinceBalance }) => (
+        render={({ allBalances, totalBalance, refBalance }) => (
           <Box flow={4}>
             <Box flow={2} horizontal>
               <Box justifyContent="center">
                 <FormattedVal
-                  fiat="USD"
+                  fiat={counterValue}
                   val={totalBalance}
                   alwaysShowSign={false}
                   showCode
@@ -75,7 +78,7 @@ const AccountCard = ({
               <Box grow justifyContent="center">
                 <FormattedVal
                   isPercent
-                  val={Math.floor((totalBalance - sinceBalance) / sinceBalance * 100)}
+                  val={Math.floor((totalBalance - refBalance) / refBalance * 100)}
                   alwaysShowSign
                   fontSize={3}
                 />

@@ -12,7 +12,6 @@ import type { Currency } from '@ledgerhq/currencies'
 
 import { MODAL_ADD_ACCOUNT } from 'constants'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Accounts, Device, T } from 'types/common'
 
 import { closeModal } from 'reducers/modals'
@@ -138,7 +137,7 @@ type State = {
   step: Step,
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   accounts: getAccounts(state),
   archivedAccounts: getArchivedAccounts(state),
   canCreateAccount: canCreateAccount(state),

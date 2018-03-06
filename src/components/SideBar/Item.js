@@ -10,19 +10,18 @@ import { connect } from 'react-redux'
 import { openModal } from 'reducers/modals'
 
 import type { Node } from 'react'
-import type { MapStateToProps } from 'react-redux'
 import type { Location } from 'react-router'
 
 import Box, { Tabbable } from 'components/base/Box'
 import Text from 'components/base/Text'
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: any) => ({
+const mapStateToProps = (state: any) => ({
   // connect router here only to make components re-render
   // see https://github.com/ReactTraining/react-router/issues/4671
   router: state.router,
 })
 
-const mapDispatchToProps = {
+const mapDispatchToProps: Object = {
   push,
   openModal,
 }

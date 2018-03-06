@@ -27,7 +27,7 @@ describe('helpers > balance', () => {
       }
 
       const balances = getBalanceHistoryForAccount({
-        fiat: 'USD',
+        counterValue: 'USD',
         account,
         counterValues,
         interval,
@@ -54,7 +54,7 @@ describe('helpers > balance', () => {
       }
 
       const balances = getBalanceHistoryForAccount({
-        fiat: 'USD',
+        counterValue: 'USD',
         account,
         counterValues,
         interval,
@@ -81,7 +81,7 @@ describe('helpers > balance', () => {
       }
 
       const balances = getBalanceHistoryForAccount({
-        fiat: 'USD',
+        counterValue: 'USD',
         account,
         counterValues,
         interval,
@@ -118,7 +118,7 @@ describe('helpers > balance', () => {
       }
 
       const balances = getBalanceHistoryForAccounts({
-        fiat: 'USD',
+        counterValue: 'USD',
         accounts: [account1, account2],
         counterValues,
         interval,

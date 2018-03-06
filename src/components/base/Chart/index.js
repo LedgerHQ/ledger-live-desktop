@@ -2,20 +2,19 @@
 
 /* eslint-disable react/no-multi-comp */
 
-import React, { Fragment, PureComponent } from 'react'
+import React, { Fragment, Component, PureComponent } from 'react'
 import {
   VictoryChart,
   VictoryArea,
   VictoryAxis,
   VictoryTooltip,
   VictoryVoronoiContainer,
-  VictoryLabel,
 } from 'victory'
 
-import { radii, space, colors, fontSizes } from 'styles/theme'
-import { ff } from 'styles/helpers'
+import { space, colors, fontSizes } from 'styles/theme'
 
 import Box from 'components/base/Box'
+import { TooltipContainer } from 'components/base/Tooltip'
 
 const ANIMATION_DURATION = 600
 const DEFAULT_PROPS = {
@@ -112,6 +111,36 @@ function getLinearGradient({
   ) : null
 }
 
+class CustomTooltip extends Component<Object> {
+  static defaultEvents = VictoryTooltip.defaultEvents
+
+  shouldComponentUpdate(nextProps) {
+    const isActive = nextProps.active === true
+    const wasActive = this.props.active === true && !nextProps.active
+
+    return isActive || wasActive
+  }
+
+  render() {
+    const { x, y, active, text, datum } = this.props
+
+    if (!active) {
+      return null
+    }
+
+    return (
+      <foreignObject>
+        <TooltipContainer
+          mt={-space[1]}
+          style={{ position: 'absolute', top: y, left: x, transform: `translate3d(-50%, 0, 0)` }}
+        >
+          {text(datum)}
+        </TooltipContainer>
+      </foreignObject>
+    )
+  }
+}
+
 type LinearGradient = Array<Array<*>>
 
 type GenericChart = {
@@ -127,6 +156,8 @@ type Chart = GenericChart & {
   renderLabels: Function,
   renderTickX: Function,
   renderTickY: Function,
+  tickCountX: number,
+  tickCountY: number,
 }
 
 export const SimpleAreaChart = ({
@@ -178,27 +209,7 @@ SimpleAreaChart.defaultProps = {
   ...DEFAULT_PROPS,
 }
 
-const areaChartTooltip = ({ renderLabels }: { renderLabels: Function }) => (
-  <VictoryTooltip
-    corderRadius={radii[1]}
-    pointerLength={0}
-    height={25}
-    labelComponent={
-      <VictoryLabel
-        style={{
-          ...ff('Open Sans|SemiBold'),
-          fontSize: fontSizes[2],
-          fill: colors.white,
-        }}
-      />
-    }
-    flyoutStyle={{
-      fill: colors.dark,
-      stroke: null,
-    }}
-    width={a => space[2] * 2 + renderLabels(a).length * 5.2} // Approximatif size of char for calculate Tooltip width
-  />
-)
+const areaChartTooltip = <CustomTooltip />
 
 const AreaChartContainer = <VictoryVoronoiContainer voronoiDimension="x" />
 
@@ -214,10 +225,6 @@ export class AreaChart extends PureComponent<Chart> {
     ...DEFAULT_PROPS,
   }
 
-  _tooltip = areaChartTooltip({
-    renderLabels: this.props.renderLabels,
-  })
-
   render() {
     const {
       color,
@@ -230,6 +237,8 @@ export class AreaChart extends PureComponent<Chart> {
       renderTickX,
       renderTickY,
       strokeWidth,
+      tickCountX,
+      tickCountY,
     } = this.props
 
     const tickLabelsStyle = {
@@ -260,7 +269,7 @@ export class AreaChart extends PureComponent<Chart> {
             >
               <VictoryAxis
                 animate={false}
-                tickCount={6}
+                tickCount={tickCountX}
                 tickFormat={renderTickX}
                 style={{
                   axis: {
@@ -274,7 +283,7 @@ export class AreaChart extends PureComponent<Chart> {
               />
               <VictoryAxis
                 dependentAxis
-                tickCount={4}
+                tickCount={tickCountY}
                 tickFormat={renderTickY}
                 style={{
                   grid: {
@@ -294,7 +303,7 @@ export class AreaChart extends PureComponent<Chart> {
                 data={data}
                 x="name"
                 y="value"
-                labelComponent={this._tooltip}
+                labelComponent={areaChartTooltip}
                 labels={renderLabels}
                 style={{
                   data: {

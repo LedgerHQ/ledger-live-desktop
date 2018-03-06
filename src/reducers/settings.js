@@ -8,12 +8,17 @@ import type { Settings } from 'types/common'
 
 export type SettingsState = Object
 
-const state: SettingsState = {
+const defaultState: SettingsState = {
+  counterValue: 'USD',
   language: 'en',
   orderAccounts: 'balance|desc',
   password: {
     state: false,
   },
+}
+
+const state: SettingsState = {
+  ...defaultState,
 }
 
 const handlers: Object = {
@@ -27,8 +32,12 @@ const handlers: Object = {
   }),
 }
 
-export const hasPassword = (state: Object) => get(state.settings, 'password.state', false)
-export const getLanguage = (state: Object) => get(state.settings, 'language', 'en')
-export const getOrderAccounts = (state: Object) => get(state.settings, 'orderAccounts', 'balance')
+export const hasPassword = (state: Object) =>
+  get(state.settings, 'password.state', defaultState.password.state)
+export const getCounterValue = (state: Object) =>
+  get(state.settings, 'counterValue', defaultState.counterValue)
+export const getLanguage = (state: Object) => get(state.settings, 'language', defaultState.language)
+export const getOrderAccounts = (state: Object) =>
+  get(state.settings, 'orderAccounts', defaultState.orderAccounts)
 
 export default handleActions(handlers, state)

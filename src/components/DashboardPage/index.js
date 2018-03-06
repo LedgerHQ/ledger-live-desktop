@@ -10,10 +10,10 @@ import chunk from 'lodash/chunk'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
-import type { MapStateToProps } from 'react-redux'
 import type { Account, Accounts, T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
+import { getCounterValue } from 'reducers/settings'
 
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
@@ -28,8 +28,9 @@ import TransactionsList from 'components/TransactionsList'
 import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
+  counterValue: getCounterValue(state),
 })
 
 const mapDispatchToProps = {
@@ -42,6 +43,7 @@ type Props = {
   t: T,
   accounts: Accounts,
   push: Function,
+  counterValue: string,
 }
 
 type State = {
@@ -107,7 +109,7 @@ class DashboardPage extends PureComponent<Props, State> {
     })
 
   render() {
-    const { push, accounts, t } = this.props
+    const { push, accounts, t, counterValue } = this.props
     const { accountsChunk, allTransactions, selectedTime, daysCount } = this.state
 
     const totalAccounts = accounts.length
@@ -132,18 +134,20 @@ class DashboardPage extends PureComponent<Props, State> {
         {totalAccounts > 0 && (
           <Fragment>
             <BalanceSummary
+              counterValue={counterValue}
               chartId="dashboard-chart"
               chartColor="#5286f7"
               accounts={accounts}
               selectedTime={selectedTime}
               daysCount={daysCount}
-              renderHeader={({ totalBalance, selectedTime, sinceBalance }) => (
+              renderHeader={({ totalBalance, selectedTime, sinceBalance, refBalance }) => (
                 <BalanceInfos
                   t={t}
-                  fiat="USD"
+                  counterValue={counterValue}
                   totalBalance={totalBalance}
                   since={selectedTime}
                   sinceBalance={sinceBalance}
+                  refBalance={refBalance}
                 />
               )}
             />
@@ -173,6 +177,7 @@ class DashboardPage extends PureComponent<Props, State> {
                           />
                         ) : (
                           <AccountCard
+                            counterValue={counterValue}
                             account={account}
                             daysCount={daysCount}
                             key={account.id}
