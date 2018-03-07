@@ -16,11 +16,20 @@ jobs:
           name: Flow typed
           command: yarn flow-typed
       - run:
+          name: Temporary remove flow definitions for react-redux
+          command: rm flow-typed/npm/react-redux_v5.x.x.js
+      - run:
           name: Lint
           command: yarn lint
       - run:
           name: Flow
           command: yarn flow
       - run:
-          name: Compile
-          command: yarn compile
+          name: Build
+          command: yarn dist:dir
+      - run:
+          name: Generate build stats
+          command: "du -h dist | sort -h > /tmp/build-stats.txt"
+      - store_artifacts:
+          path: /tmp/build-stats.txt
+          destination: build-stats.txt

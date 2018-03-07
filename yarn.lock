@@ -150,21 +150,6 @@
   dependencies:
     humps "^2.0.1"
 
-"@ledgerhq/common@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/common/-/common-4.2.0.tgz#b4e831f2d4b6b9550660141ae4f3aee0198a0987"
-  dependencies:
-    fbjs "^0.8.16"
-    invariant "^2.2.2"
-    lodash "^4.17.4"
-    normalizr-gre "^3.2.4"
-    prop-types "^15.5.10"
-    query-string "^5.0.0"
-    react "^16.0.0"
-    react-redux "^5.0.5"
-    redux "^3.7.2"
-    redux-thunk "^2.2.0"
-
 "@ledgerhq/currencies@^4.5.0":
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.5.0.tgz#b54650049be6e2452e3b9f869edd6ea5deb45169"
@@ -3570,7 +3555,7 @@ electron-builder-lib@~20.2.0:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
-electron-builder@^20.0.4, electron-builder@^20.2.0:
+electron-builder@^20.2.0:
   version "20.3.1"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.3.1.tgz#a05bc5cb729d416ee15122552dac3592f2ede4fd"
   dependencies:
@@ -3734,7 +3719,7 @@ electron-webpack@1.13.0:
     webpack-merge "^4.1.1"
     yargs "^11.0.0"
 
-electron@1.8.3, electron@^1.8.2:
+electron@1.8.3:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.3.tgz#001416ea3a25ce594e317cb5531bc41eadd22f7f"
   dependencies:
@@ -6321,9 +6306,6 @@ ledger-test-library@KhalilBellakrid/ledger-test-library-nodejs#7d37482:
   dependencies:
     axios "^0.17.1"
     bindings "^1.3.0"
-    electron "^1.8.2"
-    electron-builder "^20.0.4"
-    electron-rebuild "^1.7.3"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 
@@ -7114,10 +7096,6 @@ normalize-url@^1.4.0, normalize-url@^1.9.1:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
-
-normalizr-gre@^3.2.4:
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/normalizr-gre/-/normalizr-gre-3.2.4.tgz#1e0bbd84dad08f00a222c0cf89764b115e9f83f0"
 
 npm-path@^2.0.2:
   version "2.0.4"
@@ -8155,7 +8133,7 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^5.0.0, query-string@^5.1.0:
+query-string@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-5.1.0.tgz#9583b15fd1307f899e973ed418886426a9976469"
   dependencies:
@@ -8383,7 +8361,7 @@ react-qr-reader@^2.1.0:
     prop-types "^15.5.8"
     webrtc-adapter "^6.1.1"
 
-react-redux@^5.0.5, react-redux@^5.0.7:
+react-redux@^5.0.7:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
   dependencies:
@@ -8478,7 +8456,7 @@ react-treebeard@^2.1.0:
     shallowequal "^0.2.2"
     velocity-react "^1.3.1"
 
-react@^16.0.0, react@^16.2.0:
+react@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
@@ -9341,6 +9319,10 @@ source-map-url@^0.4.0:
 source-map@0.5.x, source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, source-map@~0.5.0, source-map@~0.5.1, source-map@~0.5.3:
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
+
+source-map@0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.0.tgz#36446016b0e5b626cf0315d6ff14b15bafb9dc10"
 
 source-map@^0.4.4, source-map@~0.4.1:
   version "0.4.4"
