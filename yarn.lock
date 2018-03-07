@@ -165,9 +165,9 @@
     redux "^3.7.2"
     redux-thunk "^2.2.0"
 
-"@ledgerhq/currencies@^4.3.0-beta.f8165b69":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.3.0.tgz#d06d82030b374e72c237d0fb065d1fc175399c9e"
+"@ledgerhq/currencies@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.5.0.tgz#b54650049be6e2452e3b9f869edd6ea5deb45169"
   dependencies:
     lodash "^4.17.5"
     numeral "^2.0.6"
@@ -1091,9 +1091,17 @@ babel-jest@^22.4.1:
     babel-plugin-istanbul "^4.1.5"
     babel-preset-jest "^22.4.1"
 
-babel-loader@^7.1.2, babel-loader@^7.1.3:
+babel-loader@^7.1.2:
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-7.1.3.tgz#ff5b440da716e9153abb946251a9ab7670037b16"
+  dependencies:
+    find-cache-dir "^1.0.0"
+    loader-utils "^1.0.2"
+    mkdirp "^0.5.1"
+
+babel-loader@^7.1.4:
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-7.1.4.tgz#e3463938bd4e6d55d1c174c5485d406a188ed015"
   dependencies:
     find-cache-dir "^1.0.0"
     loader-utils "^1.0.2"

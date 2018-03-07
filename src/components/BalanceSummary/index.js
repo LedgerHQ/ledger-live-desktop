@@ -3,7 +3,7 @@
 import React, { Fragment } from 'react'
 import moment from 'moment'
 
-import { formatShort, formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import { formatShort, getFiatUnit } from '@ledgerhq/currencies'
 
 import type { Accounts } from 'types/common'
 
@@ -12,6 +12,7 @@ import { space } from 'styles/theme'
 import { AreaChart } from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
+import FormattedVal from 'components/base/FormattedVal'
 
 function getTickCountX(selectedTime) {
   switch (selectedTime) {
@@ -88,11 +89,16 @@ const BalanceSummary = ({
                   right: space[6],
                 }}
                 strokeWidth={2}
-                renderLabels={d =>
-                  formatCurrencyUnit(unit, d.y * 100, {
-                    showCode: true,
-                  })
-                }
+                renderLabels={d => d.y}
+                renderTooltip={d => (
+                  <FormattedVal
+                    alwaysShowSign={false}
+                    color="white"
+                    showCode
+                    fiat={counterValue}
+                    val={d}
+                  />
+                )}
                 renderTickX={renderTickX(selectedTime)}
                 renderTickY={t => formatShort(unit, t)}
                 tickCountX={getTickCountX(selectedTime)}

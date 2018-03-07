@@ -5,7 +5,7 @@
 import React, { PureComponent } from 'react'
 import { remote, ipcRenderer } from 'electron'
 import { translate } from 'react-i18next'
-import { VictoryArea } from 'victory'
+import VictoryArea from 'victory-chart/lib/components/victory-area/victory-area'
 import styled from 'styled-components'
 import color from 'color'
 import fs from 'fs'
