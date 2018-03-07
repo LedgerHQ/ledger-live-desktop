@@ -4,6 +4,8 @@ import axios from 'axios'
 import moment from 'moment'
 import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
+import type { Dispatch } from 'redux'
+
 import get from 'lodash/get'
 
 import db from 'helpers/db'
