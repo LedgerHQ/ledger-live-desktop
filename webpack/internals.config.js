@@ -38,5 +38,5 @@ module.exports = webpackMain().then(config => ({
 
   module: config.module,
 
-  plugins: [...plugins, ...config.plugins],
+  plugins: [...plugins('internals'), ...config.plugins],
 }))

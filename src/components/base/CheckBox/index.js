@@ -5,7 +5,7 @@ import noop from 'lodash/noop'
 import styled, { keyframes } from 'styled-components'
 
 import { Tabbable } from 'components/base/Box'
-import Icon from 'components/base/Icon'
+import IconCheck from 'icons/Check'
 
 const bounce = keyframes`
   0% {
@@ -20,6 +20,7 @@ const bounce = keyframes`
 `
 
 const Base = styled(Tabbable).attrs({
+  color: 'white',
   alignItems: 'center',
   justifyContent: 'center',
 })`
@@ -40,9 +41,7 @@ const Base = styled(Tabbable).attrs({
   }
 `
 
-const IconWrapper = styled(Icon).attrs({
-  color: 'white',
-})`
+const IconWrapper = styled(IconCheck)`
   animation: ${bounce} ease-in-out 350ms;
 `
 
@@ -55,7 +54,7 @@ function CheckBox(props: Props) {
   const { isChecked, onChange, ...p } = props
   return (
     <Base isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} {...p}>
-      {isChecked && <IconWrapper name="check" />}
+      {isChecked && <IconWrapper height={7} width={7} />}
     </Base>
   )
 }

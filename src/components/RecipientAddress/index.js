@@ -6,12 +6,13 @@ import QrReader from 'react-qr-reader'
 import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
-import Icon from 'components/base/Icon'
 import Input from 'components/base/Input'
 
-const IconQrCode = ({ onClick }: { onClick: Function }) => (
+import IconQrCode from 'icons/QrCode'
+
+const WrapperIcon = ({ onClick }: { onClick: Function }) => (
   <Box color="graphite" style={{ position: 'absolute', right: 15 }}>
-    <Icon fontSize={30} name="qrcode" style={{ cursor: 'pointer' }} onClick={onClick} />
+    <IconQrCode height={30} width={30} style={{ cursor: 'pointer' }} onClick={onClick} />
   </Box>
 )
 
@@ -67,7 +68,7 @@ class RecipientAddress extends PureComponent<Props, State> {
         <InputAddress value={value} withQrCode={withQrCode} onChange={onChange} />
         {withQrCode && (
           <Fragment>
-            <IconQrCode onClick={this.handleClickQrCode} />
+            <WrapperIcon onClick={this.handleClickQrCode} />
             {qrReaderOpened && (
               <WrapperQrCode>
                 <QrReader

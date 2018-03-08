@@ -9,10 +9,11 @@ import type { Element } from 'react'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
-import Icon from 'components/base/Icon'
 import Input from 'components/base/Input'
 import Search from 'components/base/Search'
 import Text from 'components/base/Text'
+
+import IconCheck from 'icons/Check'
 
 import Triangles from './Triangles'
 
@@ -170,7 +171,7 @@ class Select extends PureComponent<Props> {
                   </Box>
                   <Box>
                     <IconSelected selected={selectedItem === item}>
-                      <Icon name="check" />
+                      <IconCheck height={15} width={15} />
                     </IconSelected>
                   </Box>
                 </Item>

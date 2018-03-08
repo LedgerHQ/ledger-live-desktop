@@ -3,7 +3,7 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const plugins = require('./plugins')
 
 const config = {
-  plugins: [...plugins, new HardSourceWebpackPlugin()],
+  plugins: [...plugins('renderer'), new HardSourceWebpackPlugin()],
   devServer: {
     historyApiFallback: true,
   },

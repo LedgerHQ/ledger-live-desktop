@@ -14,7 +14,7 @@ import { setUpdateStatus } from 'reducers/update'
 import { getAccounts, getAccountById } from 'reducers/accounts'
 import { isLocked } from 'reducers/application'
 
-import i18n from 'renderer/i18n'
+import i18n from 'renderer/i18n/electron'
 
 const d = {
   device: debug('lwd:device'),

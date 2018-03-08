@@ -23,7 +23,7 @@ jobs:
           command: yarn lint
       - run:
           name: Flow
-          command: yarn flow
+          command: yarn flow --quiet
       - run:
           name: Build
           command: yarn dist:dir
