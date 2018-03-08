@@ -22,12 +22,12 @@ const mapStateToProps = state => ({
 const renderItem = a => (
   <Box horizontal alignItems="center">
     <Box grow>
-      <Text color="dark" fontSize={4} fontWeight="bold">
+      <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
         {a.name}
       </Text>
     </Box>
     <Box>
-      <FormattedVal val={a.balance} unit={a.unit} />
+      <FormattedVal color="grey" val={a.balance} unit={a.unit} />
     </Box>
   </Box>
 )
