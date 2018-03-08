@@ -13,7 +13,6 @@ import { sendEvent } from 'renderer/events'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import CopyToClipboard from 'components/base/CopyToClipboard'
-import Icon from 'components/base/Icon'
 import Print from 'components/base/Print'
 import QRCode from 'components/base/QRCode'
 import Text from 'components/base/Text'
@@ -158,7 +157,6 @@ class ReceiveBox extends PureComponent<Props, State> {
             data={address}
             render={copy => (
               <Action onClick={copy}>
-                <Icon name="clone" />
                 <span>{'Copy'}</span>
               </Action>
             )}
@@ -167,13 +165,11 @@ class ReceiveBox extends PureComponent<Props, State> {
             data={{ address, amount }}
             render={(print, isLoading) => (
               <Action onClick={print}>
-                <Icon name="print" />
                 <span>{isLoading ? '...' : 'Print'}</span>
               </Action>
             )}
           />
           <Action>
-            <Icon name="share-square" />
             <span>{'Share'}</span>
           </Action>
         </Box>

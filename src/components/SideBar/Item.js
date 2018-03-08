@@ -43,7 +43,11 @@ const Container = styled(Tabbable).attrs({
 
   &:hover,
   &:focus {
-    background: ${p => p.theme.colors.lightGrey};
+    opacity: 1;
+
+    svg {
+      color: ${p => p.theme.colors[p.iconActiveColor] || p.iconActiveColor};
+    }
   }
 `
 
@@ -77,12 +81,13 @@ function Item({
   return (
     <Container
       big={big}
+      iconActiveColor={iconActiveColor}
+      isActive={isActive}
       onClick={
         linkTo
           ? isActive ? undefined : () => push(linkTo)
           : modal ? () => openModal(modal) : void 0
       }
-      isActive={isActive}
     >
       {icon && <Box color={isActive ? iconActiveColor : void 0}>{icon}</Box>}
       <Box justifyContent="center">

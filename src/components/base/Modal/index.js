@@ -17,8 +17,9 @@ import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
 import Box, { Tabbable } from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
-import Icon from 'components/base/Icon'
 import Defer from 'components/base/Defer'
+
+import IconCross from 'icons/Cross'
 
 const springConfig = {
   stiffness: 380,
@@ -216,7 +217,7 @@ export const ModalBody = ({
   <Body>
     {onClose && (
       <CloseContainer onClick={onClose}>
-        <Icon fontSize={6} name="times" />
+        <IconCross height={16} width={16} />
       </CloseContainer>
     )}
     <Box p={5} {...props}>
