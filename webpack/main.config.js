@@ -1,7 +1,7 @@
 const plugins = require('./plugins')
 
 const config = {
-  plugins,
+  plugins: plugins('main'),
 }
 
 module.exports = config

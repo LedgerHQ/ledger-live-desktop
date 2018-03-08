@@ -5,7 +5,7 @@
 
 ## Requirements
 
-* nodejs v8.x (https://nodejs.org/en/)
+* nodejs v9.x (https://nodejs.org/en/)
 * yarn latest (https://yarnpkg.com/fr/docs/install)
 
 ## Setup
@@ -36,6 +36,12 @@ yarn start
 
 ```
 yarn dist:dir
+```
+
+> Check bundle size
+
+```
+BUNDLE_ANALYZER=1 yarn dist:dir
 ```
 
 > Package everything

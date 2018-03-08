@@ -9,9 +9,6 @@ import { darken, lighten } from 'styles/helpers'
 
 import fontFamily from 'styles/styled/fontFamily'
 
-import Box from 'components/base/Box'
-import Icon from 'components/base/Icon'
-
 const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
   fontSize: 3,
@@ -85,20 +82,12 @@ function getProps({ disabled, icon, primary }: Object) {
 }
 
 const Button = (props: Props) => {
-  const { onClick, primary, icon, disabled } = props
-  let { children } = props
-  children = icon ? (
-    <Box alignItems="center" justifyContent="center">
-      <Icon name={icon} />
-    </Box>
-  ) : (
-    children
-  )
+  const { onClick, children, primary, disabled } = props
 
   return (
     <Base
       {...props}
-      {...getProps({ primary, icon, disabled })}
+      {...getProps({ primary, disabled })}
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
     >

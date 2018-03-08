@@ -17,8 +17,9 @@ import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
-import Icon from 'components/base/Icon'
 import Label from 'components/base/Label'
+
+import IconEdit from 'icons/Edit'
 
 type State = {
   accountName: string | null,
@@ -196,7 +197,7 @@ class SettingsAccount extends PureComponent<Props, State> {
                 {!editName &&
                   nameHovered && (
                     <Box onClick={this.handleEditName(true)} style={{ cursor: 'pointer' }}>
-                      <Icon name="edit" />
+                      <IconEdit height={16} width={16} />
                     </Box>
                   )}
               </Box>
