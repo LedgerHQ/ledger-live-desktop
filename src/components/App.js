@@ -9,7 +9,7 @@ import { I18nextProvider } from 'react-i18next'
 
 import theme from 'styles/theme'
 
-import i18n from 'renderer/i18n'
+import i18n from 'renderer/i18n/electron'
 
 import Default from 'components/layout/Default'
 import Dev from 'components/layout/Dev'

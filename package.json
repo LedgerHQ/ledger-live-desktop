@@ -138,6 +138,7 @@
     "react-hot-loader": "^4.0.0",
     "react-test-renderer": "^16.2.0",
     "webpack": "^3.11.0",
-    "webpack-bundle-analyzer": "^2.11.1"
+    "webpack-bundle-analyzer": "^2.11.1",
+    "yaml-loader": "^0.5.0"
   }
 }

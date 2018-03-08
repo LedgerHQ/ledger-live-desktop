@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { boolean } from '@storybook/addon-knobs'
 
 import TransactionsList from 'components/TransactionsList'
 
@@ -22,4 +23,6 @@ const transactions = [
   },
 ]
 
-stories.add('basic', () => <TransactionsList transactions={transactions} />)
+stories.add('basic', () => (
+  <TransactionsList transactions={transactions} canShowMore={boolean('canShowMore')} />
+))
