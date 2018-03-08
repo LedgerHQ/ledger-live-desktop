@@ -73,7 +73,7 @@
     "raven-js": "^3.22.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-i18next": "^7.4.0",
+    "react-i18next": "^7.5.0",
     "react-mortal": "^3.2.0",
     "react-motion": "^0.5.2",
     "react-qr-reader": "^2.1.0",
