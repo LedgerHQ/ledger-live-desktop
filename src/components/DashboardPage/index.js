@@ -190,6 +190,7 @@ class DashboardPage extends PureComponent<Props, State> {
               </Box>
             </Box>
             <TransactionsList
+              canShowMore
               title={t('dashboard:recentActivity')}
               withAccounts
               transactions={allTransactions}

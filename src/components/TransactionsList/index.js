@@ -11,6 +11,7 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Transaction as TransactionType, T } from 'types/common'
 
+import IconAngleDown from 'icons/AngleDown'
 import Box, { Card } from 'components/base/Box'
 import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
@@ -77,6 +78,23 @@ const Cell = styled(Box).attrs({
   alignItems: 'center',
 })`
   width: ${p => (p.size ? `${p.size}px` : '')};
+`
+
+const ShowMore = styled(Box).attrs({
+  horizontal: true,
+  flow: 1,
+  ff: 'Open Sans|SemiBold',
+  fontSize: 3,
+  justify: 'center',
+  align: 'center',
+  p: 4,
+  color: 'wallet',
+})`
+  border-top: 1px solid ${p => p.theme.colors.fog};
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
 const Transaction = ({
@@ -175,6 +193,7 @@ type Props = {
   withAccounts?: boolean,
   minConfirmations: number,
   title?: string,
+  canShowMore: boolean,
 }
 
 class TransactionsList extends Component<Props> {
@@ -182,9 +201,14 @@ class TransactionsList extends Component<Props> {
     onAccountClick: noop,
     withAccounts: false,
     minConfirmations: 2,
+    canShowMore: false,
   }
 
   shouldComponentUpdate(nextProps: Props) {
+    if (this.props.canShowMore !== nextProps.canShowMore) {
+      return true
+    }
+
     if (this.props.minConfirmations !== nextProps.minConfirmations) {
       return true
     }
@@ -201,7 +225,15 @@ class TransactionsList extends Component<Props> {
   _hashCache = null
 
   render() {
-    const { transactions, title, withAccounts, onAccountClick, minConfirmations, t } = this.props
+    const {
+      transactions,
+      title,
+      withAccounts,
+      onAccountClick,
+      minConfirmations,
+      canShowMore,
+      t,
+    } = this.props
 
     this._hashCache = this.getHashCache(transactions)
 
@@ -232,6 +264,13 @@ class TransactionsList extends Component<Props> {
               />
             ))}
           </Box>
+
+          {canShowMore && (
+            <ShowMore>
+              <span>{t('transactionsList:showMore')}</span>
+              <IconAngleDown width={8} height={8} />
+            </ShowMore>
+          )}
         </Card>
       </Defer>
     )
