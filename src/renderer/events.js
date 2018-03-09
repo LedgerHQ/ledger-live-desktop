@@ -29,8 +29,8 @@ type MsgPayload = {
   data: any,
 }
 
-let syncAccounts = true
-let syncTimeout
+let syncAccountsInProgress = true
+let syncAccountsTimeout
 
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
@@ -48,7 +48,7 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
 
 export function startSyncAccounts(accounts: Accounts) {
   d.sync('Sync accounts - start')
-  syncAccounts = true
+  syncAccountsInProgress = true
   sendEvent('accounts', 'sync.all', {
     accounts: accounts.map(account => {
       const { id, coinType, rootPath, addresses, index, transactions } = account
@@ -66,8 +66,8 @@ export function startSyncAccounts(accounts: Accounts) {
 
 export function stopSyncAccounts() {
   d.sync('Sync accounts - stop')
-  syncAccounts = false
-  clearTimeout(syncTimeout)
+  syncAccountsInProgress = false
+  clearTimeout(syncAccountsTimeout)
 }
 
 export function checkUpdates() {
@@ -84,7 +84,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     account: {
       sync: {
         success: account => {
-          if (syncAccounts) {
+          if (syncAccountsInProgress) {
             const state = store.getState()
             const existingAccount = getAccountById(state, account.id)
 
@@ -115,7 +115,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     accounts: {
       sync: {
         start: () => {
-          if (!syncAccounts) {
+          if (!syncAccountsInProgress) {
             const state = store.getState()
             const accounts = getAccounts(state)
             const locked = isLocked(state)
@@ -127,9 +127,9 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
         },
         stop: stopSyncAccounts,
         success: () => {
-          if (syncAccounts && !DISABLED_AUTO_SYNC) {
+          if (syncAccountsInProgress && !DISABLED_AUTO_SYNC) {
             d.sync('Sync accounts - success')
-            syncTimeout = setTimeout(() => {
+            syncAccountsTimeout = setTimeout(() => {
               const accounts = getAccounts(store.getState())
               startSyncAccounts(accounts)
             }, SYNC_ACCOUNT_TIMEOUT)

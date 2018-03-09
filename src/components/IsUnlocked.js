@@ -95,7 +95,7 @@ class IsUnlocked extends Component<Props, State> {
       },
     }))
 
-  handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const { settings, unlock, fetchAccounts } = this.props
@@ -103,7 +103,7 @@ class IsUnlocked extends Component<Props, State> {
 
     if (bcrypt.compareSync(inputValue.password, get(settings, 'password.value'))) {
       setEncryptionKey('accounts', inputValue.password)
-      fetchAccounts()
+      await fetchAccounts()
       unlock()
 
       this.setState({
