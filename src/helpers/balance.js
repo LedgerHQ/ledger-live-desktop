@@ -1,8 +1,12 @@
 // @flow
 
 import moment from 'moment'
-import isUndefined from 'lodash/isUndefined'
 import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+
+import find from 'lodash/find'
+import first from 'lodash/first'
+import isUndefined from 'lodash/isUndefined'
+import last from 'lodash/last'
 
 import type { Accounts, Account } from 'types/common'
 
@@ -14,6 +18,13 @@ type DateInterval = {
 type BalanceHistoryDay = {
   date: string,
   balance: number,
+}
+
+type CalculateBalance = {
+  accounts: Accounts,
+  counterValue: string,
+  counterValues: Object,
+  daysCount: number,
 }
 
 // Map the given date interval
@@ -114,4 +125,30 @@ export function getBalanceHistoryForAccounts({
         return { ...item, balance: b }
       })
     : balances.length > 0 ? balances[0] : []
+}
+
+export default function calculateBalance(props: CalculateBalance) {
+  const interval = {
+    start: moment()
+      .subtract(props.daysCount, 'days')
+      .format('YYYY-MM-DD'),
+    end: moment().format('YYYY-MM-DD'),
+  }
+
+  const allBalances = getBalanceHistoryForAccounts({
+    counterValue: props.counterValue,
+    accounts: props.accounts,
+    counterValues: props.counterValues,
+    interval,
+  }).map(e => ({ name: e.date, value: e.balance }))
+
+  const firstNonEmptyDay = find(allBalances, e => e.value)
+  const refBalance = firstNonEmptyDay ? firstNonEmptyDay.value : 0
+
+  return {
+    allBalances,
+    totalBalance: last(allBalances).value,
+    sinceBalance: first(allBalances).value,
+    refBalance,
+  }
 }

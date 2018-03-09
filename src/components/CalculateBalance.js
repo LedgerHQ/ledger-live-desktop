@@ -2,44 +2,14 @@
 
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import moment from 'moment'
-import find from 'lodash/find'
-import first from 'lodash/first'
-import last from 'lodash/last'
 
 import type { Accounts } from 'types/common'
 
-import { getBalanceHistoryForAccounts } from 'helpers/balance'
+import calculateBalance from 'helpers/balance'
 
 const mapStateToProps = state => ({
   counterValues: state.counterValues,
 })
-
-function calculateBalance(props: Object) {
-  const interval = {
-    start: moment()
-      .subtract(props.daysCount, 'days')
-      .format('YYYY-MM-DD'),
-    end: moment().format('YYYY-MM-DD'),
-  }
-
-  const allBalances = getBalanceHistoryForAccounts({
-    counterValue: props.counterValue,
-    accounts: props.accounts,
-    counterValues: props.counterValues,
-    interval,
-  }).map(e => ({ name: e.date, value: e.balance }))
-
-  const firstNonEmptyDay = find(allBalances, e => e.value)
-  const refBalance = firstNonEmptyDay ? firstNonEmptyDay.value : 0
-
-  return {
-    allBalances,
-    totalBalance: last(allBalances).value,
-    sinceBalance: first(allBalances).value,
-    refBalance,
-  }
-}
 
 type Props = {
   accounts: Accounts,
@@ -55,10 +25,16 @@ type State = {
   refBalance: number,
 }
 
-class CalculateBalance extends PureComponent<Props, State> {
-  state = {
-    ...calculateBalance(this.props),
+function calculateBalanceToState(props: Object) {
+  const { accounts, counterValue, counterValues, daysCount } = props
+
+  return {
+    ...calculateBalance({ accounts, counterValue, counterValues, daysCount }),
   }
+}
+
+class CalculateBalance extends PureComponent<Props, State> {
+  state = calculateBalanceToState(this.props)
 
   componentWillReceiveProps(nextProps) {
     const sameAccounts = this.props.accounts === nextProps.accounts
@@ -66,9 +42,7 @@ class CalculateBalance extends PureComponent<Props, State> {
     const sameDaysCount = this.props.daysCount === nextProps.daysCount
 
     if (!sameAccounts || !sameCounterValues || !sameDaysCount) {
-      this.setState({
-        ...calculateBalance(nextProps),
-      })
+      this.setState(calculateBalanceToState(nextProps))
     }
   }
 

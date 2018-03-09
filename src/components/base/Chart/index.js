@@ -111,15 +111,40 @@ function getLinearGradient({
   ) : null
 }
 
-class CustomTooltip extends Component<Object> {
+class CustomTooltip extends Component<any, any> {
   static defaultEvents = VictoryTooltip.defaultEvents
+
+  state = this.props
+
+  componentWillMount() {
+    this._mounted = true
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._shouldRender = false
+    this.updateState(nextProps)
+  }
 
   shouldComponentUpdate(nextProps) {
     const isActive = nextProps.active === true
     const wasActive = this.props.active === true && !nextProps.active
 
-    return isActive || wasActive
+    return (isActive && this._shouldRender) || wasActive
   }
+
+  componentWillUnmount() {
+    this._mounted = false
+  }
+
+  updateState = props =>
+    this._mounted &&
+    window.requestAnimationFrame(() => {
+      this._shouldRender = true
+      this.setState(props)
+    })
+
+  _shouldRender = false
+  _mounted = false
 
   render() {
     const { x, y, active, text, datum, renderer } = this.props

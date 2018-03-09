@@ -14,7 +14,7 @@ const accounts = [...Array(20)].map(() => ({
   id: chance.string(),
   address: chance.string(),
   addresses: [],
-  balance: chance.floating({ min: 0, max: 20 }),
+  balance: chance.integer({ min: 10000000, max: 2000000000 }),
   balanceByDay: {},
   coinType: 0,
   currency: getCurrencyByCoinType(0),
