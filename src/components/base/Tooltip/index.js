@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import tippy from 'tippy.js'
 
-import { space } from 'styles/theme'
+import { space, colors } from 'styles/theme'
 
 import Box from 'components/base/Box'
 
@@ -16,15 +16,36 @@ const Template = styled.div`
   display: none;
 `
 
-export const TooltipContainer = styled(Box).attrs({
-  bg: 'dark',
-  borderRadius: 1,
-  color: 'white',
-  ff: 'Open Sans|SemiBold',
-  fontSize: 2,
-  px: 2,
-  py: 1,
-})``
+export const TooltipContainer = ({
+  children,
+  innerRef,
+  style,
+}: {
+  children: any,
+  innerRef?: Function,
+  style?: Object,
+}) => (
+  <div
+    ref={innerRef}
+    style={{
+      background: colors.dark,
+      borderRadius: 4,
+      color: 'white',
+      fontFamily: 'Open Sans',
+      fontWeight: 600,
+      fontSize: 10,
+      padding: '5px 10px 5px 10px',
+      ...style,
+    }}
+  >
+    {children}
+  </div>
+)
+
+TooltipContainer.defaultProps = {
+  innerRef: undefined,
+  style: undefined,
+}
 
 type Props = {
   offset?: Array<number>,
