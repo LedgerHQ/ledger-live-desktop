@@ -16,6 +16,7 @@ type Props = {
 const Wrapper = styled(Box).attrs({
   horizontal: true,
   align: 'center',
+  justify: 'center',
 })`
   margin-bottom: 25px;
 `
