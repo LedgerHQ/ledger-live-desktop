@@ -5,12 +5,14 @@ import styled from 'styled-components'
 
 import Box from 'components/base/Box'
 
+const RADIUS = 17
+
 const Wrapper = styled(Box).attrs({
   align: 'center',
   justify: 'center',
   color: p => (p.isActive ? 'wallet' : 'fog'),
 })`
-  width: 40px;
+  width: ${RADIUS}px;
   flex-shrink: 0;
   text-align: center;
   font-size: 9px;
@@ -19,22 +21,26 @@ const Wrapper = styled(Box).attrs({
 const Number = styled(Box).attrs({
   align: 'center',
   justify: 'center',
-  color: p => (p.isActive ? 'white' : 'fog'),
-  bg: p => (p.isActive ? 'wallet' : 'pearl'),
+  color: 'white',
+  bg: p => (p.isActive ? 'wallet' : 'fog'),
+  ff: 'Rubik|Regular',
 })`
-  width: 20px;
-  height: 20px;
+  width: ${RADIUS}px;
+  height: ${RADIUS}px;
   border-radius: 50%;
-  font-size: 9px;
+  font-size: 10px;
+  line-height: 10px;
   box-shadow: ${p => `0 0 0 ${p.isActive ? 4 : 0}px ${p.theme.colors.lightGrey}`};
   transition: all ease-in-out 0.1s ${p => (p.isActive ? 0.4 : 0)}s;
 `
 
 const Bar = styled.div`
   height: 2px;
-  background: ${p => p.theme.colors.pearl};
+  background: ${p => p.theme.colors.fog};
   flex-grow: 1;
+  max-width: 100px;
   position: relative;
+  margin-top: -2px;
 
   &:after {
     background: ${p => p.theme.colors.pearl};
@@ -52,9 +58,12 @@ const Bar = styled.div`
   }
 `
 
-const Label = styled(Box)`
+const Label = styled(Box).attrs({
+  fontSize: 3,
+  ff: 'Museo Sans|Bold',
+})`
   position: absolute;
-  margin-top: 30px;
+  margin-top: 27px;
   transition: color ease-in-out 0.1s ${p => (p.isActive ? 0.4 : 0)}s;
 `
 
