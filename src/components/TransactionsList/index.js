@@ -175,7 +175,11 @@ const Transaction = ({
         />
       </Cell>
       <Cell size={CONFIRMATION_COL_SIZE} px={0} align="center" justify="flex-start">
-        <ConfirmationCheck minConfirmations={minConfirmations} confirmations={tx.confirmations} />
+        <ConfirmationCheck
+          minConfirmations={minConfirmations}
+          confirmations={tx.confirmations}
+          t={t}
+        />
       </Cell>
     </TransactionRaw>
   )

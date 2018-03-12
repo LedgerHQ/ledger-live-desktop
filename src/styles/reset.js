@@ -21,7 +21,7 @@ body {
 }
 
 #app {
-  display: none;
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
 }

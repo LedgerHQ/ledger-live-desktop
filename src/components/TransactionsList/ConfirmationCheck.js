@@ -5,6 +5,8 @@ import styled from 'styled-components'
 
 import { rgba } from 'styles/helpers'
 
+import type { T } from 'types/common'
+
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
 import IconCheck from 'icons/Check'
@@ -24,13 +26,19 @@ const Container = styled(Box).attrs({
 const ConfirmationCheck = ({
   confirmations,
   minConfirmations,
+  t,
 }: {
   confirmations: number,
   minConfirmations: number,
+  t: T,
 }) => {
   const isConfirmed = confirmations >= minConfirmations
   return (
-    <Tooltip render={() => (isConfirmed ? 'Confirmed' : 'Not confirmed')}>
+    <Tooltip
+      render={() =>
+        isConfirmed ? t('transactionsList:confirmed') : t('transactionsList:notConfirmed')
+      }
+    >
       <Container isConfirmed={isConfirmed}>
         {isConfirmed ? <IconCheck width={12} /> : <IconClock width={12} />}
       </Container>

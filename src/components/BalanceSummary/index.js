@@ -7,9 +7,7 @@ import { formatShort, getFiatUnit } from '@ledgerhq/currencies'
 
 import type { Accounts } from 'types/common'
 
-import { space } from 'styles/theme'
-
-import { AreaChart } from 'components/base/Chart'
+import Chart from 'components/base/NewChart'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
@@ -76,33 +74,24 @@ const BalanceSummary = ({
                 })}
               </Box>
             )}
-            <Box ff="Open Sans" fontSize={4} color="graphite">
-              <AreaChart
+            <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
+              <Chart
+                id={chartId}
                 color={chartColor}
                 data={allBalances}
                 height={250}
-                id={chartId}
-                padding={{
-                  top: space[6],
-                  bottom: space[6],
-                  left: space[6] * 2,
-                  right: space[6],
-                }}
-                strokeWidth={2}
-                renderLabels={d => d.y}
+                nbTicksX={getTickCountX(selectedTime)}
+                renderTickX={renderTickX(selectedTime)}
+                renderTickY={t => formatShort(unit, t)}
                 renderTooltip={d => (
                   <FormattedVal
                     alwaysShowSign={false}
                     color="white"
                     showCode
                     fiat={counterValue}
-                    val={d}
+                    val={d.value}
                   />
                 )}
-                renderTickX={renderTickX(selectedTime)}
-                renderTickY={t => formatShort(unit, t)}
-                tickCountX={getTickCountX(selectedTime)}
-                tickCountY={4}
               />
             </Box>
           </Fragment>
