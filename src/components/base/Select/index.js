@@ -161,7 +161,7 @@ class Select extends PureComponent<Props> {
                 innerRef={n => (this._children[i] = n)}
                 {...getItemProps({ item })}
               >
-                <Item highlighted={i === highlightedIndex} horizontal flow={10}>
+                <Item highlighted={i === highlightedIndex} horizontal flow={2}>
                   <Box grow>
                     {renderItem ? (
                       renderItem(item)
@@ -171,7 +171,7 @@ class Select extends PureComponent<Props> {
                   </Box>
                   <Box>
                     <IconSelected selected={selectedItem === item}>
-                      <IconCheck height={15} width={15} />
+                      <IconCheck height={7} width={7} />
                     </IconSelected>
                   </Box>
                 </Item>

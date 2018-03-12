@@ -111,32 +111,72 @@ function getLinearGradient({
   ) : null
 }
 
-class CustomTooltip extends Component<Object> {
+class CustomTooltip extends Component<any, any> {
   static defaultEvents = VictoryTooltip.defaultEvents
+
+  state = this.props
+
+  componentWillMount() {
+    this._mounted = true
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._shouldRender = false
+    this.updateState(nextProps)
+  }
 
   shouldComponentUpdate(nextProps) {
     const isActive = nextProps.active === true
     const wasActive = this.props.active === true && !nextProps.active
 
-    return isActive || wasActive
+    return (isActive && this._shouldRender) || wasActive
   }
 
+  componentWillUnmount() {
+    this._mounted = false
+  }
+
+  updateState = props =>
+    window.requestAnimationFrame(() => {
+      this._shouldRender = true
+      if (this._mounted) {
+        this.setState(props)
+      }
+    })
+
+  _shouldRender = false
+  _mounted = false
+
   render() {
-    const { x, y, active, text, datum, renderer } = this.props
+    const { strokeWidth, dotColor, x, y, active, text, datum, renderer } = this.props
 
     if (!active) {
       return null
     }
 
     return (
-      <foreignObject>
-        <TooltipContainer
-          mt={-space[1]}
-          style={{ position: 'absolute', top: y, left: x, transform: `translate3d(-50%, 0, 0)` }}
-        >
-          <Text style={{ lineHeight: 1 }}>{renderer(text(datum))}</Text>
-        </TooltipContainer>
-      </foreignObject>
+      <g>
+        <circle
+          cx={x}
+          cy={y + space[2]}
+          r={strokeWidth}
+          stroke={dotColor}
+          strokeWidth={strokeWidth}
+          fill={colors.white}
+        />
+        <foreignObject>
+          <TooltipContainer
+            style={{
+              position: 'absolute',
+              top: y - space[4],
+              left: x,
+              transform: `translate3d(-50%, 0, 0)`,
+            }}
+          >
+            <Text style={{ lineHeight: 1 }}>{renderer(text(datum))}</Text>
+          </TooltipContainer>
+        </foreignObject>
+      </g>
     )
   }
 }
@@ -225,7 +265,13 @@ export class AreaChart extends PureComponent<Chart> {
     ...DEFAULT_PROPS,
   }
 
-  _tooltip = <CustomTooltip renderer={this.props.renderTooltip} />
+  _tooltip = (
+    <CustomTooltip
+      strokeWidth={this.props.strokeWidth}
+      dotColor={this.props.color}
+      renderer={this.props.renderTooltip}
+    />
+  )
 
   render() {
     const {

@@ -5,7 +5,7 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Account } from 'types/common'
 
-import { SimpleAreaChart } from 'components/base/Chart'
+import Chart from 'components/base/NewChart'
 import Bar from 'components/base/Bar'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
@@ -84,14 +84,13 @@ const AccountCard = ({
                 />
               </Box>
             </Box>
-            <SimpleAreaChart
+            <Chart
               data={allBalances}
               color={account.currency.color}
               height={52}
+              hideAxis
+              interactive={false}
               id={`account-chart-${account.id}`}
-              linearGradient={[[5, 0.2], [100, 0]]}
-              simple
-              strokeWidth={1.5}
             />
           </Box>
         )}

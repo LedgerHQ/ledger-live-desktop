@@ -7,6 +7,8 @@ import db from 'helpers/db'
 import type { Dispatch } from 'redux'
 import type { Account } from 'types/common'
 
+import { fetchCounterValues } from 'actions/counterValues'
+
 import { startSyncAccounts } from 'renderer/events'
 
 function sortAccounts(accounts, orderAccounts) {
@@ -60,7 +62,7 @@ export const removeAccount: RemoveAccount = payload => ({
   payload,
 })
 
-export type FetchAccounts = () => (Dispatch<*>, Function) => void
+export type FetchAccounts = () => (Function, Function) => Promise<*, *>
 export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
   const { settings: { orderAccounts } } = getState()
   const accounts = db.get('accounts')
@@ -68,6 +70,7 @@ export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
     type: 'SET_ACCOUNTS',
     payload: sortAccounts(accounts, orderAccounts),
   })
+  return dispatch(fetchCounterValues())
 }
 
 export type UpdateAccount = Account => (Function, Function) => void

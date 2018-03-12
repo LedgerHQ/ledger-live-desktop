@@ -11,7 +11,7 @@ import events from 'renderer/events'
 
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
-import { initCounterValues, fetchCounterValues } from 'actions/counterValues'
+import { initCounterValues } from 'actions/counterValues'
 import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
 
@@ -36,26 +36,29 @@ const state = store.getState() || {}
 const language = getLanguage(state)
 const locked = isLocked(state)
 
-if (!locked) {
-  // Init accounts with defaults if needed
-  db.init('accounts', [])
-
-  store.dispatch(fetchAccounts())
-  store.dispatch(fetchCounterValues())
-}
-
 function r(Comp) {
   if (rootNode) {
     render(<AppContainer>{Comp}</AppContainer>, rootNode)
   }
 }
 
-r(<App store={store} history={history} language={language} />)
+async function init() {
+  if (!locked) {
+    // Init accounts with defaults if needed
+    db.init('accounts', [])
 
-// Only init events on MainWindow
-if (remote.getCurrentWindow().name === 'MainWindow') {
-  events({ store, locked })
+    await store.dispatch(fetchAccounts())
+  }
+
+  r(<App store={store} history={history} language={language} />)
+
+  // Only init events on MainWindow
+  if (remote.getCurrentWindow().name === 'MainWindow') {
+    events({ store, locked })
+  }
 }
+
+init()
 
 if (module.hot) {
   module.hot.accept('../components/App', () => {
