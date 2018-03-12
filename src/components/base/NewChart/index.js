@@ -51,6 +51,11 @@ export type Props = {
   interactive?: boolean, // eslint-disable-line react/no-unused-prop-types
   height: number,
   dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
+  id?: string, // eslint-disable-line react/no-unused-prop-types
+  nbTicksX: number, // eslint-disable-line react/no-unused-prop-types
+  renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
+  renderTickX?: Function, // eslint-disable-line react/no-unused-prop-types
+  renderTickY?: Function, // eslint-disable-line react/no-unused-prop-types
 }
 
 class Chart extends PureComponent<Props> {
@@ -60,6 +65,8 @@ class Chart extends PureComponent<Props> {
     interactive: true,
     height: 400,
     dateFormat: '%Y-%m-%d',
+    id: 'chart',
+    nbTicksX: 5,
   }
 
   componentDidMount() {
@@ -103,43 +110,36 @@ class Chart extends PureComponent<Props> {
 
     this.refreshChart = prevProps => {
       const { _node: node, props } = this
-      const { data: raw, color, dateFormat, height, hideAxis, interactive } = props
-      let { COLORS, MARGINS } = ctx
+      const { data: raw, color, dateFormat, height, hideAxis, interactive, renderTooltip } = props
 
-      const DATA = enrichData(raw, d3.timeParse(dateFormat))
-      ctx.DATA = DATA
+      ctx.DATA = enrichData(raw, d3.timeParse(dateFormat))
 
       // Detect what needs to be updated
-      const INVALIDATED = {
+      ctx.INVALIDATED = {
         color: firstRender || (prevProps && color !== prevProps.color),
         margin: firstRender || (prevProps && hideAxis !== prevProps.hideAxis),
       }
       firstRender = false
-      ctx.INVALIDATED = INVALIDATED
 
       // Reset color if needed
-      if (INVALIDATED.color) {
-        COLORS = generateColors(color)
-        ctx.COLORS = COLORS
+      if (ctx.INVALIDATED.color) {
+        ctx.COLORS = generateColors(color)
       }
 
       // Reset margins if needed
-      if (INVALIDATED.margin) {
-        MARGINS = generateMargins(hideAxis)
-        ctx.MARGINS = MARGINS
+      if (ctx.INVALIDATED.margin) {
+        ctx.MARGINS = generateMargins(hideAxis)
       }
 
       // Derived draw variables
-      const HEIGHT = Math.max(0, height - MARGINS.top - MARGINS.bottom)
-      const WIDTH = Math.max(0, this._width - MARGINS.left - MARGINS.right)
-      ctx.HEIGHT = HEIGHT
-      ctx.WIDTH = WIDTH
+      ctx.HEIGHT = Math.max(0, height - ctx.MARGINS.top - ctx.MARGINS.bottom)
+      ctx.WIDTH = Math.max(0, this._width - ctx.MARGINS.left - ctx.MARGINS.right)
 
       // Scales and areas
-      const x = d3.scaleTime().range([0, WIDTH])
-      const y = d3.scaleLinear().range([HEIGHT, 0])
-      x.domain(d3.extent(DATA, d => d.parsedDate))
-      y.domain([0, d3.max(DATA, d => d.value)])
+      const x = d3.scaleTime().range([0, ctx.WIDTH])
+      const y = d3.scaleLinear().range([ctx.HEIGHT, 0])
+      x.domain(d3.extent(ctx.DATA, d => d.parsedDate))
+      y.domain([0, d3.max(ctx.DATA, d => d.value)])
       ctx.x = x
       ctx.y = y
 
@@ -160,6 +160,7 @@ class Chart extends PureComponent<Props> {
           props,
           shouldTooltipUpdate: d => d !== lastDisplayedTooltip,
           onTooltipUpdate: d => (lastDisplayedTooltip = d),
+          renderTooltip,
         })
       }
     }

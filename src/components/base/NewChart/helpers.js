@@ -21,12 +21,19 @@ export function generateColors(color) {
 }
 
 export function generateMargins(hideAxis) {
-  return {
+  const margins = {
     top: hideAxis ? 5 : 10,
-    bottom: hideAxis ? 5 : 40,
-    right: hideAxis ? 5 : 10,
-    left: hideAxis ? 5 : 70,
+    bottom: hideAxis ? 5 : 30,
+    right: hideAxis ? 5 : 40,
+    left: hideAxis ? 5 : 80,
   }
+
+  // FIXME: Forced to "use" margins here to prevent babel/uglify to believe
+  //        there is a constant variable re-assignment. I don't get it, but it
+  //        works, so, eh.
+  void margins
+
+  return margins
 }
 
 export function observeResize(node, cb) {

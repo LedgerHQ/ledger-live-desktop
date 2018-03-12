@@ -10,7 +10,7 @@ const debug = d('Chart')
 
 export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any, props: Props }) {
   const { NODES, COLORS } = ctx
-  const { hideAxis, interactive } = props
+  const { hideAxis, interactive, id } = props
 
   // Container
 
@@ -47,7 +47,7 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
   ensure({ NODES, key: 'gradient' }, () =>
     NODES.defs
       .append('linearGradient')
-      .attr('id', 'gradient')
+      .attr('id', `gradient-${id || ''}`)
       .attr('x1', '0%')
       .attr('x2', '0%')
       .attr('y1', '0%')
@@ -69,7 +69,7 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
   )
 
   ensure({ NODES, key: 'fillArea' }, () =>
-    NODES.wrapper.append('path').attr('fill', 'url(#gradient)'),
+    NODES.wrapper.append('path').attr('fill', `url(#gradient-${id || ''})`),
   )
 
   // Line

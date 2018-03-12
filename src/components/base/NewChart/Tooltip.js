@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import { colors as themeColors } from 'styles/theme'
 import { TooltipContainer } from 'components/base/Tooltip'
@@ -8,10 +8,7 @@ import { TooltipContainer } from 'components/base/Tooltip'
 import type { Item } from './types'
 
 /**
- * styled-components is not run on those components, because tooltip is
- * rendered as a string on d3 updates
- *
- * so, we use inline style.
+ * we use inline style for more perfs, as tooltip may re-render numerous times
  */
 
 const Arrow = () => (
@@ -32,7 +29,7 @@ const Arrow = () => (
   </svg>
 )
 
-export default ({ d }: { d: Item }) => (
+const Tooltip = ({ d, renderTooltip }: { d: Item, renderTooltip?: Function }) => (
   <div style={{ position: 'relative' }}>
     <div
       style={{
@@ -45,10 +42,16 @@ export default ({ d }: { d: Item }) => (
       }}
     >
       <TooltipContainer style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: 14 }}>
-          <b>{Math.round(d.value)}</b>
-        </div>
-        {d.date}
+        {renderTooltip ? (
+          renderTooltip(d)
+        ) : (
+          <Fragment>
+            <div style={{ fontSize: 14 }}>
+              <b>{Math.round(d.value)}</b>
+            </div>
+            <span>{d.date}</span>
+          </Fragment>
+        )}
       </TooltipContainer>
       <div style={{ background: 'red' }}>
         <Arrow />
@@ -56,3 +59,9 @@ export default ({ d }: { d: Item }) => (
     </div>
   </div>
 )
+
+Tooltip.defaultProps = {
+  renderTooltip: undefined,
+}
+
+export default Tooltip

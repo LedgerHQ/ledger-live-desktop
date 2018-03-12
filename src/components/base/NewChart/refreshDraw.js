@@ -9,7 +9,7 @@ import type { CTX } from './types'
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, interactive } = props
+  const { hideAxis, interactive, renderTickX, renderTickY, nbTicksX } = props
 
   const area = d3
     .area()
@@ -61,8 +61,18 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
 
   // Draw axis
   if (!hideAxis) {
-    NODES.axisLeft.call(d3.axisLeft(y).ticks(3))
-    NODES.axisBot.call(d3.axisBottom(x).ticks(5))
+    NODES.axisLeft.call(
+      d3
+        .axisLeft(y)
+        .ticks(3)
+        .tickFormat(val => (renderTickY ? renderTickY(val) : val)),
+    )
+    NODES.axisBot.call(
+      d3
+        .axisBottom(x)
+        .ticks(nbTicksX)
+        .tickFormat(val => (renderTickX ? renderTickX(val) : val)),
+    )
     stylizeAxis(NODES.axisLeft)
     stylizeAxis(NODES.axisBot)
   }
@@ -99,7 +109,7 @@ function stylizeAxis(axis) {
   axis.selectAll('path').attr('stroke', 'none')
   axis
     .selectAll('text')
-    .attr('stroke', themeColors.smoke)
+    .attr('stroke', themeColors.grey)
     .style('font-size', '12px')
     .style('font-family', 'Open Sans')
     .style('font-weight', 300)

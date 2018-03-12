@@ -3,6 +3,9 @@
 import React from 'react'
 import * as d3 from 'd3'
 import { renderToString } from 'react-dom/server'
+import { ThemeProvider } from 'styled-components'
+
+import theme from 'styles/theme'
 
 import type { Props } from '.'
 import type { CTX } from './types'
@@ -14,11 +17,13 @@ export default function handleMouseEvents({
   props,
   shouldTooltipUpdate,
   onTooltipUpdate,
+  renderTooltip,
 }: {
   ctx: CTX,
   props: Props,
   shouldTooltipUpdate: Function,
   onTooltipUpdate: Function,
+  renderTooltip?: Function,
 }) {
   const { MARGINS, HEIGHT, WIDTH, NODES, DATA, x, y } = ctx
   const { hideAxis } = props
@@ -85,7 +90,13 @@ export default function handleMouseEvents({
     onTooltipUpdate(d)
     NODES.focus.attr('transform', `translate(${x(d.parsedDate)},${y(d.value)})`)
     NODES.tooltip
-      .html(renderToString(<Tooltip d={d.ref} />))
+      .html(
+        renderToString(
+          <ThemeProvider theme={theme}>
+            <Tooltip renderTooltip={renderTooltip} d={d.ref} />
+          </ThemeProvider>,
+        ),
+      )
       .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, ${y(d.value)}px, 0)`)
     if (!hideAxis) {
       NODES.xBar

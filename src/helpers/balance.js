@@ -140,7 +140,7 @@ export default function calculateBalance(props: CalculateBalance) {
     accounts: props.accounts,
     counterValues: props.counterValues,
     interval,
-  }).map(e => ({ name: e.date, value: e.balance }))
+  }).map(e => ({ date: e.date, value: e.balance }))
 
   const firstNonEmptyDay = find(allBalances, e => e.value)
   const refBalance = firstNonEmptyDay ? firstNonEmptyDay.value : 0
