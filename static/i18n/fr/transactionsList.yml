@@ -6,3 +6,5 @@ amount: Montant
 from: Depuis
 to: Vers
 showMore: Voir plus
+confirmed: Confirmed
+notConfirmed: Not confirmed
