@@ -1,10 +1,10 @@
 // @flow
 
 import React from 'react'
-import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import noop from 'lodash/noop'
+import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { T, Accounts, Account } from 'types/common'
 
@@ -19,18 +19,27 @@ const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
 })
 
-const renderItem = a => (
-  <Box horizontal alignItems="center">
-    <Box grow>
-      <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-        {a.name}
-      </Text>
+const renderItem = a => {
+  const Icon = getIconByCoinType(a.coinType)
+  const { color } = a.currency
+  return (
+    <Box horizontal alignItems="center" flow={2}>
+      {Icon && (
+        <Box style={{ width: 16, height: 16, color }}>
+          <Icon size={16} />
+        </Box>
+      )}
+      <Box grow>
+        <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+          {a.name}
+        </Text>
+      </Box>
+      <Box>
+        <FormattedVal color="grey" val={a.balance} unit={a.unit} showCode />
+      </Box>
     </Box>
-    <Box>
-      <FormattedVal color="grey" val={a.balance} unit={a.unit} />
-    </Box>
-  </Box>
-)
+  )
+}
 
 type Props = {
   accounts: Accounts,
@@ -39,7 +48,7 @@ type Props = {
   t: T,
 }
 
-export const SelectAccount = ({ accounts, onChange, value, t }: Props) => (
+const RawSelectAccount = ({ accounts, onChange, value, t }: Props) => (
   <Select
     value={value && accounts.find(a => value && a.id === value.id)}
     renderSelected={renderItem}
@@ -52,9 +61,11 @@ export const SelectAccount = ({ accounts, onChange, value, t }: Props) => (
   />
 )
 
-SelectAccount.defaultProps = {
+RawSelectAccount.defaultProps = {
   onChange: noop,
   value: undefined,
 }
 
-export default compose(connect(mapStateToProps), translate())(SelectAccount)
+export const SelectAccount = translate()(RawSelectAccount)
+
+export default connect(mapStateToProps)(SelectAccount)

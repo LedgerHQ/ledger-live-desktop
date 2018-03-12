@@ -2,16 +2,19 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { space } from 'styled-system'
+import { space, fontSize } from 'styled-system'
 
 import fontFamily from 'styles/styled/fontFamily'
 
 const Base = styled.input.attrs({
-  p: 4,
+  px: 3,
   ff: 'Open Sans|SemiBold',
+  fontSize: 4,
 })`
   ${space};
   ${fontFamily};
+  ${fontSize};
+  height: 40px;
   border: 1px solid ${p => p.theme.colors.fog};
   border-radius: 3px;
   display: flex;
