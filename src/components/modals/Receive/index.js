@@ -2,13 +2,16 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
+
 import get from 'lodash/get'
 
 import { MODAL_RECEIVE } from 'constants'
 
+// import { getCounterValue } from 'reducers/settings'
+
 import Box from 'components/base/Box'
-import Button from 'components/base/Button'
-import Input from 'components/base/Input'
+// import Button from 'components/base/Button'
+// import Input from 'components/base/Input'
 import Label from 'components/base/Label'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 import ReceiveBox from 'components/ReceiveBox'
@@ -51,15 +54,21 @@ class ReceiveModal extends PureComponent<Props, State> {
       ...defaultState,
     })
 
+  _steps = [
+    'receiveModal:Infos',
+    'receiveModal:ConnectDevice',
+    'receiveModal:SecureValidation',
+    'receiveModal:Confirmation',
+  ].map(v => ({ label: this.props.t(v) }))
+
   render() {
-    const { amount } = this.state
-    const { t } = this.props
+    // const { amount } = this.state
 
     return (
       <Modal
         name={MODAL_RECEIVE}
         onHide={this.handleHide}
-        render={({ data, onClose }) => {
+        render={({ data }) => {
           const account = this.getAccount(data)
 
           return (

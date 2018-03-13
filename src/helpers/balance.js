@@ -70,7 +70,7 @@ export function getBalanceHistoryForAccount({
   interval: DateInterval,
 }): Array<BalanceHistoryDay> {
   const unit = getDefaultUnitByCoinType(account.coinType)
-  const counterVals = counterValues[`${unit.code}-${counterValue}`]
+  const counterVals = counterValues[`${unit.code}-${counterValue}`].byDate
   let lastBalance = getBalanceAtIntervalStart(account, interval)
   return mapInterval(interval, date => {
     let balance = 0

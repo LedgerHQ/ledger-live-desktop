@@ -2902,9 +2902,9 @@ crocket@^0.9.11:
   dependencies:
     xpipe "*"
 
-cross-env@^5.1.3:
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.3.tgz#f8ae18faac87692b0a8b4d2f7000d4ec3a85dfd7"
+cross-env@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.4.tgz#f61c14291f7cc653bb86457002ea80a04699d022"
   dependencies:
     cross-spawn "^5.1.0"
     is-windows "^1.0.0"
@@ -3687,6 +3687,35 @@ electron-builder-lib@20.4.0:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
+electron-builder-lib@20.4.1:
+  version "20.4.1"
+  resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.4.1.tgz#8560563e21ca0596046eac398cad204154665a5e"
+  dependencies:
+    "7zip-bin" "~3.1.0"
+    app-builder-bin "1.7.2"
+    async-exit-hook "^2.0.1"
+    bluebird-lst "^1.0.5"
+    builder-util "5.6.4"
+    builder-util-runtime "4.0.5"
+    chromium-pickle-js "^0.2.0"
+    debug "^3.1.0"
+    ejs "^2.5.7"
+    electron-osx-sign "0.4.10"
+    electron-publish "20.2.0"
+    fs-extra-p "^4.5.2"
+    hosted-git-info "^2.6.0"
+    is-ci "^1.1.0"
+    isbinaryfile "^3.0.2"
+    js-yaml "^3.11.0"
+    lazy-val "^1.0.3"
+    minimatch "^3.0.4"
+    normalize-package-data "^2.4.0"
+    plist "^2.1.0"
+    read-config-file "3.0.0"
+    sanitize-filename "^1.6.1"
+    semver "^5.5.0"
+    temp-file "^3.1.1"
+
 electron-builder-lib@~20.2.0:
   version "20.2.1"
   resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.2.1.tgz#ff8dc6ac7f6f3c676fc370ddafb2aba464a17672"
@@ -3716,7 +3745,11 @@ electron-builder-lib@~20.2.0:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
+<<<<<<< HEAD
 electron-builder@^20.4.0:
+=======
+electron-builder@^20.0.4:
+>>>>>>> Clean RequestAmount
   version "20.4.0"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.4.0.tgz#d1393719339c17dd7c2dd16d58b4e138ca6646ce"
   dependencies:
@@ -3726,6 +3759,25 @@ electron-builder@^20.4.0:
     chalk "^2.3.2"
     dmg-builder "4.1.1"
     electron-builder-lib "20.4.0"
+    electron-download-tf "4.3.4"
+    fs-extra-p "^4.5.2"
+    is-ci "^1.1.0"
+    lazy-val "^1.0.3"
+    read-config-file "3.0.0"
+    sanitize-filename "^1.6.1"
+    update-notifier "^2.3.0"
+    yargs "^11.0.0"
+
+electron-builder@^20.4.1:
+  version "20.4.1"
+  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.4.1.tgz#ec8b5ada929df8d7a4ab4b1685568be4e12bf8f3"
+  dependencies:
+    bluebird-lst "^1.0.5"
+    builder-util "5.6.4"
+    builder-util-runtime "4.0.5"
+    chalk "^2.3.2"
+    dmg-builder "4.1.1"
+    electron-builder-lib "20.4.1"
     electron-download-tf "4.3.4"
     fs-extra-p "^4.5.2"
     is-ci "^1.1.0"
@@ -3775,6 +3827,17 @@ electron-download@^3.0.1:
 electron-is-dev@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/electron-is-dev/-/electron-is-dev-0.3.0.tgz#14e6fda5c68e9e4ecbeff9ccf037cbd7c05c5afe"
+
+electron-osx-sign@0.4.10:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/electron-osx-sign/-/electron-osx-sign-0.4.10.tgz#be4f3b89b2a75a1dc5f1e7249081ab2929ca3a26"
+  dependencies:
+    bluebird "^3.5.0"
+    compare-version "^0.1.2"
+    debug "^2.6.8"
+    isbinaryfile "^3.0.2"
+    minimist "^1.2.0"
+    plist "^2.1.0"
 
 electron-osx-sign@0.4.8:
   version "0.4.8"
@@ -5256,6 +5319,10 @@ home-path@^1.0.1:
 hosted-git-info@^2.1.4, hosted-git-info@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
+
+hosted-git-info@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -7788,9 +7855,9 @@ pngjs@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.3.2.tgz#097c3c2a75feb223eadddea6bc9f0050cf830bc3"
 
-popper.js@^1.12.9:
-  version "1.12.9"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
+popper.js@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.13.0.tgz#e1e7ff65cc43f7cf9cf16f1510a75e81f84f4565"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -10036,11 +10103,11 @@ tinycolor2@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
-tippy.js@^2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.2.3.tgz#ae2aa54763a86d38682de199ef7f6442c2926413"
+tippy.js@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.3.0.tgz#22505ce181f5049063c0201d310f4f0bfa794ce7"
   dependencies:
-    popper.js "^1.12.9"
+    popper.js "^1.13.0"
 
 tmp@^0.0.33:
   version "0.0.33"

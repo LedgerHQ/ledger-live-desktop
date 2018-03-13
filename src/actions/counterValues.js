@@ -6,6 +6,8 @@ import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import type { Dispatch } from 'redux'
 
+import { serializeCounterValues } from 'reducers/counterValues'
+
 import get from 'lodash/get'
 
 import db from 'helpers/db'
@@ -51,21 +53,19 @@ export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, get
       )
       .then(({ data }) => ({
         symbol: `${code}-${counterValue}`,
-        values: data.Data.reduce((result, d) => {
-          const date = moment(d.time * 1000).format('YYYY-MM-DD')
-          result[date] = d.close
-          return result
-        }, {}),
+        values: data.Data.map(d => [moment(d.time * 1000).format('YYYY-MM-DD'), d.close]),
       }))
   }
 
-  return Promise.all(coinTypes.map(fetchCounterValuesByCoinType)).then(result => {
-    const newCounterValues = result.reduce((r, v) => {
-      if (v !== null) {
-        r[v.symbol] = v.values
-      }
-      return r
-    }, {})
+  return Promise.all(coinTypes.map(fetchCounterValuesByCoinType)).then(results => {
+    const newCounterValues = serializeCounterValues(
+      results.reduce((r, v) => {
+        if (v !== null) {
+          r[v.symbol] = v.values
+        }
+        return r
+      }, {}),
+    )
 
     if (Object.keys(newCounterValues).length !== 0) {
       dispatch(updateCounterValues(newCounterValues))

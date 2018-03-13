@@ -5,6 +5,7 @@ import set from 'lodash/set'
 import get from 'lodash/get'
 
 import { serializeAccounts, deserializeAccounts } from 'reducers/accounts'
+import { serializeCounterValues, deserializeCounterValues } from 'reducers/counterValues'
 
 type DBKey = 'settings' | 'accounts' | 'counterValues'
 
@@ -31,6 +32,16 @@ function middleware(type, key, data: any) {
 
     if (type === 'set') {
       data = deserializeAccounts(data)
+    }
+  }
+
+  if (key === 'counterValues') {
+    if (type === 'get') {
+      data = serializeCounterValues(data)
+    }
+
+    if (type === 'set') {
+      data = deserializeCounterValues(data)
     }
   }
 
