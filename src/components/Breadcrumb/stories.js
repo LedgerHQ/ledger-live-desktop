@@ -6,9 +6,9 @@ import { number } from '@storybook/addon-knobs'
 
 import Breadcrumb from 'components/Breadcrumb'
 
-const stories = storiesOf('Components/Breadcrumb', module)
+const stories = storiesOf('Components', module)
 
-stories.add('basic', () => (
+stories.add('Breadcrumb', () => (
   <Breadcrumb
     currentStep={number('currentStep', 1, {
       min: 1,

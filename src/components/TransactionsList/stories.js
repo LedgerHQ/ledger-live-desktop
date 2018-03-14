@@ -6,7 +6,7 @@ import { boolean } from '@storybook/addon-knobs'
 
 import TransactionsList from 'components/TransactionsList'
 
-const stories = storiesOf('Components/TransactionsList', module)
+const stories = storiesOf('Components', module)
 
 const transactions = [
   {
@@ -23,6 +23,6 @@ const transactions = [
   },
 ]
 
-stories.add('basic', () => (
+stories.add('TransactionsList', () => (
   <TransactionsList transactions={transactions} canShowMore={boolean('canShowMore')} />
 ))

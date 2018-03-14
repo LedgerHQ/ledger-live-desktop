@@ -9,7 +9,7 @@ import { color } from '@storybook/addon-knobs/react'
 
 import Chart from 'components/base/NewChart'
 
-const stories = storiesOf('Components/Chart', module)
+const stories = storiesOf('Components', module)
 
 const data = generateRandomData(365)
 
@@ -52,7 +52,7 @@ class Wrapper extends Component<any, State> {
   }
 }
 
-stories.add('default', () => <Wrapper />)
+stories.add('Chart', () => <Wrapper />)
 
 function generateRandomData(n) {
   const today = moment()
