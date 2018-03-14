@@ -2,11 +2,13 @@ import { getBalanceHistoryForAccount, getBalanceHistoryForAccounts } from 'helpe
 
 const counterValues = {
   'BTC-USD': {
-    '2018-01-01': 1000,
-    '2018-01-02': 2000,
-    '2018-01-03': 3000,
-    '2018-01-04': 4000,
-    '2018-01-05': 5000,
+    byDate: {
+      '2018-01-01': 1000,
+      '2018-01-02': 2000,
+      '2018-01-03': 3000,
+      '2018-01-04': 4000,
+      '2018-01-05': 5000,
+    },
   },
 }
 

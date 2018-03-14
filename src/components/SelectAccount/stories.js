@@ -10,20 +10,20 @@ import { SelectAccount } from 'components/SelectAccount'
 const chance = new Chance()
 const stories = storiesOf('Components', module)
 
-const accounts = [...Array(20)].map(() => ({
+export const accounts = [...Array(20)].map(() => ({
   id: chance.string(),
   address: chance.string(),
   addresses: [],
-  balance: chance.integer({ min: 10000000, max: 2000000000 }),
+  balance: chance.integer({ min: 10000000000, max: 2000000000000 }),
   balanceByDay: {},
-  coinType: 0,
-  currency: getCurrencyByCoinType(0),
+  coinType: 1,
+  currency: getCurrencyByCoinType(1),
   index: chance.integer({ min: 0, max: 20 }),
   name: chance.name(),
   path: '',
   rootPath: '',
   transactions: [],
-  unit: getDefaultUnitByCoinType(0),
+  unit: getDefaultUnitByCoinType(1),
   settings: {
     minConfirmations: 2,
   },
