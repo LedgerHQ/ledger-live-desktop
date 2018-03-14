@@ -8,8 +8,8 @@ import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import InputCurrency from 'components/base/InputCurrency'
 
-const stories = storiesOf('Components/InputCurrency', module)
+const stories = storiesOf('Components', module)
 
 const unit = getDefaultUnitByCoinType(1)
 
-stories.add('basic', () => <InputCurrency unit={unit} onChange={action('onChange')} />)
+stories.add('InputCurrency', () => <InputCurrency unit={unit} onChange={action('onChange')} />)
