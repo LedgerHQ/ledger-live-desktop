@@ -19,6 +19,24 @@ const handlers = {
     ...state,
     ...counterValues,
   }),
+  UPDATE_LAST_COUNTER_VALUE: (
+    state: CounterValuesState,
+    { payload: { symbol, value } }: { payload: { symbol: string, value: number } },
+  ): CounterValuesState => {
+    // We update only last value (newer)
+    if (state[symbol]) {
+      const [date] = state[symbol].list[0]
+      // [0] date, [1] value, only update value
+      state[symbol].list[0][1] = value
+      // Keep the same value for byDate object
+      state[symbol].byDate[date] = value
+
+      // Update reference for a proper update
+      return { ...state }
+    }
+
+    return state
+  },
 }
 
 export function getLastCounterValueBySymbol(
