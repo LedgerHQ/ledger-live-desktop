@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component, Fragment } from 'react'
+import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 import Chance from 'chance'
 import moment from 'moment'
 import { storiesOf } from '@storybook/react'
@@ -12,6 +13,7 @@ import Chart from 'components/base/NewChart'
 const stories = storiesOf('Components', module)
 
 const data = generateRandomData(365)
+const unit = getDefaultUnitByCoinType(0)
 
 type State = {
   start: number,
@@ -45,7 +47,8 @@ class Wrapper extends Component<any, State> {
           hideAxis={boolean('hideAxis', false)}
           color={color('color', '#5f8ced')}
           data={data.slice(start, stop)}
-          height={number('height', 300, { min: 100, max: 900 })}
+          height={number('height', 300)}
+          unit={unit}
         />
       </Fragment>
     )
@@ -62,7 +65,7 @@ function generateRandomData(n) {
   while (!day.isSame(today)) {
     data.push({
       date: day.format('YYYY-MM-DD'),
-      value: chance.integer({ min: 0, max: 50e3 }),
+      value: chance.integer({ min: 0.5e8, max: 1e8 }),
     })
     day.add(1, 'day')
   }
