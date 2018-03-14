@@ -10,7 +10,7 @@ import chunk from 'lodash/chunk'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
-import type { Account, Accounts, T } from 'types/common'
+import type { Account, Accounts, Operations, T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 import { getCounterValue } from 'reducers/settings'
@@ -23,7 +23,7 @@ import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
 import PillsDaysCount from 'components/PillsDaysCount'
 import Text from 'components/base/Text'
-import TransactionsList from 'components/TransactionsList'
+import OperationsList from 'components/OperationsList'
 
 import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
@@ -48,21 +48,21 @@ type Props = {
 
 type State = {
   accountsChunk: Array<Array<Account | null>>,
-  allTransactions: Array<Object>,
+  allOperations: Operations,
   selectedTime: string,
   daysCount: number,
 }
 
 const ACCOUNTS_BY_LINE = 3
-const ALL_TRANSACTIONS_LIMIT = 10
+const ALL_OPERATIONS_LIMIT = 10
 
-const getAllTransactions = accounts => {
-  const allTransactions = accounts.reduce((result, account) => {
-    const transactions = get(account, 'transactions', [])
+const getAllOperations = accounts => {
+  const allOperations = accounts.reduce((result, account) => {
+    const operations = get(account, 'operations', [])
 
     result = [
       ...result,
-      ...transactions.map(t => ({
+      ...operations.map(t => ({
         ...t,
         account,
       })),
@@ -71,9 +71,9 @@ const getAllTransactions = accounts => {
     return result
   }, [])
 
-  return sortBy(allTransactions, t => t.receivedAt)
+  return sortBy(allOperations, t => t.receivedAt)
     .reverse()
-    .slice(0, ALL_TRANSACTIONS_LIMIT)
+    .slice(0, ALL_OPERATIONS_LIMIT)
 }
 
 const getAccountsChunk = accounts => {
@@ -88,7 +88,7 @@ const getAccountsChunk = accounts => {
 class DashboardPage extends PureComponent<Props, State> {
   state = {
     accountsChunk: getAccountsChunk(this.props.accounts),
-    allTransactions: getAllTransactions(this.props.accounts),
+    allOperations: getAllOperations(this.props.accounts),
     selectedTime: 'week',
     daysCount: 7,
   }
@@ -97,7 +97,7 @@ class DashboardPage extends PureComponent<Props, State> {
     if (nextProps.accounts !== this.props.accounts) {
       this.setState({
         accountsChunk: getAccountsChunk(nextProps.accounts),
-        allTransactions: getAllTransactions(nextProps.accounts),
+        allOperations: getAllOperations(nextProps.accounts),
       })
     }
   }
@@ -110,7 +110,7 @@ class DashboardPage extends PureComponent<Props, State> {
 
   render() {
     const { push, accounts, t, counterValue } = this.props
-    const { accountsChunk, allTransactions, selectedTime, daysCount } = this.state
+    const { accountsChunk, allOperations, selectedTime, daysCount } = this.state
 
     const totalAccounts = accounts.length
 
@@ -189,11 +189,11 @@ class DashboardPage extends PureComponent<Props, State> {
                 ))}
               </Box>
             </Box>
-            <TransactionsList
+            <OperationsList
               canShowMore
               title={t('dashboard:recentActivity')}
               withAccounts
-              transactions={allTransactions}
+              operations={allOperations}
               onAccountClick={account => push(`/account/${account.id}`)}
             />
           </Fragment>

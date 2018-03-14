@@ -36,7 +36,7 @@ const ConfirmationCheck = ({
   return (
     <Tooltip
       render={() =>
-        isConfirmed ? t('transactionsList:confirmed') : t('transactionsList:notConfirmed')
+        isConfirmed ? t('operationsList:confirmed') : t('operationsList:notConfirmed')
       }
     >
       <Container isConfirmed={isConfirmed}>

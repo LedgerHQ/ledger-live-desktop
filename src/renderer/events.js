@@ -57,14 +57,14 @@ export function startSyncAccounts(accounts: Accounts) {
   syncAccountsInProgress = true
   sendEvent('accounts', 'sync.all', {
     accounts: accounts.map(account => {
-      const { id, coinType, rootPath, addresses, index, transactions } = account
+      const { id, coinType, rootPath, addresses, index, operations } = account
       return {
         id,
         coinType,
         allAddresses: addresses,
         currentIndex: index,
         rootPath,
-        transactions,
+        operations,
       }
     }),
   })
@@ -114,9 +114,9 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
               return
             }
 
-            const { name, balance, balanceByDay, transactions } = existingAccount
+            const { name, balance, balanceByDay, operations } = existingAccount
 
-            if (account.transactions.length > 0) {
+            if (account.operations.length > 0) {
               d.sync(`Update account - ${name}`)
               const updatedAccount = {
                 ...account,
@@ -126,7 +126,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
                   return result
                 }, {}),
                 index: account.index || existingAccount.index,
-                transactions: [...transactions, ...account.transactions],
+                operations: [...operations, ...account.operations],
               }
               store.dispatch(updateAccount(updatedAccount))
             }

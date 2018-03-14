@@ -50,8 +50,8 @@ const defaultState = {
   nameHovered: false,
 }
 
-function hasNoTransactions(account: Account) {
-  return get(account, 'transactions.length', 0) === 0
+function hasNoOperations(account: Account) {
+  return get(account, 'operations.length', 0) === 0
 }
 
 class SettingsAccount extends PureComponent<Props, State> {
@@ -133,7 +133,7 @@ class SettingsAccount extends PureComponent<Props, State> {
 
   handleArchiveAccount = (account: Account) => () => {
     const { push, closeModal, updateAccount, removeAccount } = this.props
-    const shouldRemove = hasNoTransactions(account)
+    const shouldRemove = hasNoOperations(account)
 
     if (shouldRemove) {
       removeAccount(account)
@@ -212,7 +212,7 @@ class SettingsAccount extends PureComponent<Props, State> {
               </ModalContent>
               <ModalFooter horizontal justify="flex-end" flow={2}>
                 <Button onClick={this.handleArchiveAccount(account)}>
-                  {hasNoTransactions(account) ? 'Remove account' : 'Archive account'}
+                  {hasNoOperations(account) ? 'Remove account' : 'Archive account'}
                 </Button>
                 <Button primary>Go to account</Button>
               </ModalFooter>

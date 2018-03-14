@@ -16,12 +16,12 @@ export type AccountsState = Accounts
 
 const state: AccountsState = []
 
-function orderAccountsTransactions(account: Account) {
-  const { transactions } = account
-  transactions.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt))
+function orderAccountsOperations(account: Account) {
+  const { operations } = account
+  operations.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt))
   return {
     ...account,
-    transactions,
+    operations,
   }
 }
 
@@ -42,7 +42,7 @@ const handlers: Object = {
   ADD_ACCOUNT: (
     state: AccountsState,
     { payload: account }: { payload: Account },
-  ): AccountsState => [...state, orderAccountsTransactions(account)],
+  ): AccountsState => [...state, orderAccountsOperations(account)],
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
@@ -58,7 +58,7 @@ const handlers: Object = {
         ...account,
       }
 
-      return orderAccountsTransactions(updatedAccount)
+      return orderAccountsOperations(updatedAccount)
     }),
 
   REMOVE_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) =>
@@ -96,7 +96,7 @@ export function getAccountById(state: { accounts: AccountsState }, id: string): 
 }
 
 export function canCreateAccount(state: State): boolean {
-  return every(getAccounts(state), a => get(a, 'transactions.length', 0) > 0)
+  return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
 }
 
 export function serializeAccounts(accounts: Array<Object>) {
@@ -119,7 +119,7 @@ export function serializeAccounts(accounts: Array<Object>) {
 
     return {
       ...a,
-      transactions: account.transactions.map(t => ({
+      operations: account.operations.map(t => ({
         ...t,
         account: a,
       })),
@@ -139,7 +139,7 @@ export function deserializeAccounts(accounts: Accounts) {
     name: account.name,
     path: account.path,
     rootPath: account.rootPath,
-    transactions: account.transactions.map(({ account, ...t }) => t),
+    operations: account.operations.map(({ account, ...t }) => t),
     unit: account.unit,
     settings: account.settings,
   }))

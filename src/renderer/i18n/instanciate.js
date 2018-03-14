@@ -14,7 +14,7 @@ const commonConfig = {
     'settings',
     'sidebar',
     'time',
-    'transactionsList',
+    'operationsList',
     'update',
   ],
   fallbackLng: 'en',

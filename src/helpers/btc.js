@@ -7,7 +7,7 @@ import groupBy from 'lodash/groupBy'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
 
-import type { Transactions } from 'types/common'
+import type { Operations } from 'types/common'
 
 const GAP_LIMIT_ADDRESSES = 20
 
@@ -22,7 +22,7 @@ export const networks = [
   },
 ]
 
-export function computeTransaction(addresses: Array<string>) {
+export function computeOperation(addresses: Array<string>) {
   return (t: Object) => {
     const outputVal = t.outputs
       .filter(o => addresses.includes(o.address))
@@ -30,10 +30,11 @@ export function computeTransaction(addresses: Array<string>) {
     const inputVal = t.inputs
       .filter(i => addresses.includes(i.address))
       .reduce((acc, cur) => acc + cur.value, 0)
-    const balance = outputVal - inputVal
+    const amount = outputVal - inputVal
     return {
-      address: t.balance > 0 ? t.inputs[0].address : t.outputs[0].address,
-      balance,
+      id: t.hash,
+      address: t.amount > 0 ? t.inputs[0].address : t.outputs[0].address,
+      amount,
       confirmations: t.confirmations,
       hash: t.hash,
       receivedAt: t.received_at,
@@ -41,8 +42,8 @@ export function computeTransaction(addresses: Array<string>) {
   }
 }
 
-export function getBalanceByDay(transactions: Transactions) {
-  const txsByDate = groupBy(transactions, tx => {
+export function getBalanceByDay(operations: Operations) {
+  const txsByDate = groupBy(operations, tx => {
     const [date] = new Date(tx.receivedAt).toISOString().split('T')
     return date
   })
@@ -55,7 +56,7 @@ export function getBalanceByDay(transactions: Transactions) {
       const txs = txsByDate[k]
 
       balance += txs.reduce((r, v) => {
-        r += v.balance
+        r += v.amount
         return r
       }, 0)
 
@@ -91,7 +92,7 @@ export async function getAccount({
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
 
   let balance = 0
-  let transactions = []
+  let operations = []
   let lastAddress = null
 
   const pubKeyToSegwitAddress = (pubKey, scriptVersion) => {
@@ -149,31 +150,31 @@ export async function getAccount({
 
         let txs = []
 
-        const transactionsOpts = { coin_type: coinType }
+        const operationsOpts = { coin_type: coinType }
 
         try {
-          txs = await ledger.getTransactions(listAddresses, transactionsOpts)
+          txs = await ledger.getTransactions(listAddresses, operationsOpts)
           txs = txs.filter(t => !allTxsHash.includes(t.hash)).reverse()
         } catch (e) {
-          console.log('getTransactions', e) // eslint-disable-line no-console
+          console.log('getOperations', e) // eslint-disable-line no-console
         }
 
-        const hasTransactions = txs.length > 0
+        const hasOperations = txs.length > 0
 
-        if (hasTransactions) {
-          const newTransactions = txs.map(computeTransaction(allAddresses))
-          const txHashs = transactions.map(t => t.hash)
+        if (hasOperations) {
+          const newOperations = txs.map(computeOperation(allAddresses))
+          const txHashs = operations.map(t => t.hash)
 
-          balance = newTransactions
+          balance = newOperations
             .filter(t => !txHashs.includes(t.hash))
-            .reduce((result, v) => result + v.balance, balance)
+            .reduce((result, v) => result + v.amount, balance)
 
           lastAddress = getLastAddress(addresses, txs[0])
-          transactions = uniqBy([...transactions, ...newTransactions], t => t.hash)
+          operations = uniqBy([...operations, ...newOperations], t => t.hash)
 
           onProgress({
             balance,
-            transactions: transactions.length,
+            operations: operations.length,
           })
 
           return nextPath(index + (GAP_LIMIT_ADDRESSES - 1))
@@ -189,11 +190,11 @@ export async function getAccount({
 
         return {
           ...nextAddress,
-          addresses: transactions.length > 0 ? allAddresses : [],
+          addresses: operations.length > 0 ? allAddresses : [],
           balance,
-          balanceByDay: getBalanceByDay(transactions),
+          balanceByDay: getBalanceByDay(operations),
           rootPath,
-          transactions,
+          operations,
         }
       })
 

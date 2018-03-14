@@ -22,7 +22,7 @@ export const accounts = [...Array(20)].map(() => ({
   name: chance.name(),
   path: '',
   rootPath: '',
-  transactions: [],
+  operations: [],
   unit: getDefaultUnitByCoinType(1),
   settings: {
     minConfirmations: 2,

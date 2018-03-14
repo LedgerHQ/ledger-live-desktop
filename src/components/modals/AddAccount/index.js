@@ -88,7 +88,7 @@ const Steps = {
               val={progress.balance || 0}
             />
           </Box>
-          <Box>Transactions: {progress.transactions || 0}</Box>
+          <Box>Operations: {progress.operations || 0}</Box>
           {progress.success && <Box>Finish ! Next account in progress...</Box>}
         </Box>
       )}
@@ -96,8 +96,8 @@ const Steps = {
   ),
   listAccounts: (props: Object) => {
     const { accounts, archivedAccounts } = props
-    const emptyAccounts = accounts.filter(account => account.transactions.length === 0)
-    const existingAccounts = accounts.filter(account => account.transactions.length > 0)
+    const emptyAccounts = accounts.filter(account => account.operations.length === 0)
+    const existingAccounts = accounts.filter(account => account.operations.length > 0)
     const canCreateAccount = props.canCreateAccount && emptyAccounts.length === 1
     const newAccount = emptyAccounts[0]
     return (

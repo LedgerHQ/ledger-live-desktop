@@ -2,6 +2,7 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import isUndefined from 'lodash/isUndefined'
 
 import type { Unit } from '@ledgerhq/currencies'
 
@@ -26,6 +27,10 @@ type Props = {
 function FormattedVal(props: Props) {
   const { fiat, isPercent, alwaysShowSign, showCode, ...p } = props
   let { val, unit } = props
+
+  if (isUndefined(val)) {
+    throw new Error('FormattedVal require a `val` prop. Received `undefined`')
+  }
 
   const isNegative = val < 0
 
