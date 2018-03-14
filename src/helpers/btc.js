@@ -7,7 +7,7 @@ import groupBy from 'lodash/groupBy'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
 
-import type { Operations } from 'types/common'
+import type { Operation } from 'types/common'
 
 const GAP_LIMIT_ADDRESSES = 20
 
@@ -42,7 +42,7 @@ export function computeOperation(addresses: Array<string>) {
   }
 }
 
-export function getBalanceByDay(operations: Operations) {
+export function getBalanceByDay(operations: Operation[]) {
   const txsByDate = groupBy(operations, tx => {
     const [date] = new Date(tx.receivedAt).toISOString().split('T')
     return date

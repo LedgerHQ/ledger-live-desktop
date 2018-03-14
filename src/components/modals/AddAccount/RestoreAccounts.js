@@ -7,14 +7,14 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
 
-import type { Accounts } from 'types/common'
+import type { Account } from 'types/common'
 
 const Container = styled(Box)`
   border: 1px solid ${p => p.theme.colors.alertRed};
 `
 
 type Props = {
-  archivedAccounts: Accounts,
+  archivedAccounts: Account[],
   updateAccount: Function,
 }
 

@@ -4,7 +4,7 @@ import React, { Fragment } from 'react'
 
 import { getFiatUnit } from '@ledgerhq/currencies'
 
-import type { Accounts } from 'types/common'
+import type { Account } from 'types/common'
 
 import Chart from 'components/base/NewChart'
 import Box, { Card } from 'components/base/Box'
@@ -15,7 +15,7 @@ type Props = {
   counterValue: string,
   chartColor: string,
   chartId: string,
-  accounts: Accounts,
+  accounts: Account[],
   selectedTime: string,
   daysCount: number,
   renderHeader: null | Function,

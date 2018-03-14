@@ -10,10 +10,9 @@ import defaultsDeep from 'lodash/defaultsDeep'
 import { getDefaultUnitByCoinType, getCurrencyByCoinType } from '@ledgerhq/currencies'
 
 import type { State } from 'reducers'
-import type { Account, Accounts } from 'types/common'
+import type { Account } from 'types/common'
 
-export type AccountsState = Accounts
-
+export type AccountsState = Account[]
 const state: AccountsState = []
 
 function orderAccountsOperations(account: Account) {
@@ -36,7 +35,7 @@ function applyDefaults(account) {
 const handlers: Object = {
   SET_ACCOUNTS: (
     state: AccountsState,
-    { payload: accounts }: { payload: Accounts },
+    { payload: accounts }: { payload: Account[] },
   ): AccountsState => accounts.map(applyDefaults),
 
   ADD_ACCOUNT: (
@@ -78,15 +77,15 @@ export function getTotalBalance(state: { accounts: AccountsState }) {
   )
 }
 
-export function getAccounts(state: { accounts: AccountsState }): Array<Account> {
+export function getAccounts(state: { accounts: AccountsState }): Account[] {
   return state.accounts
 }
 
-export function getArchivedAccounts(state: { accounts: AccountsState }): Array<Account> {
+export function getArchivedAccounts(state: { accounts: AccountsState }): Account[] {
   return state.accounts.filter(acc => acc.archived === true)
 }
 
-export function getVisibleAccounts(state: { accounts: AccountsState }): Array<Account> {
+export function getVisibleAccounts(state: { accounts: AccountsState }): Account[] {
   return getAccounts(state).filter(account => account.archived !== true)
 }
 
@@ -127,7 +126,7 @@ export function serializeAccounts(accounts: Array<Object>) {
   })
 }
 
-export function deserializeAccounts(accounts: Accounts) {
+export function deserializeAccounts(accounts: Account[]) {
   return accounts.map(account => ({
     id: account.id,
     address: account.address,

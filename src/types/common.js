@@ -22,8 +22,6 @@ export type Operation = {
   confirmations: number,
 }
 
-export type Operations = Array<Operation>
-
 // -------------------- Accounts
 
 export type AccountSettings = {
@@ -43,12 +41,10 @@ export type Account = {
   name: string,
   path: string,
   rootPath: string,
-  operations: Operations,
+  operations: Operation[],
   unit: Unit,
   settings: AccountSettings,
 }
-
-export type Accounts = Array<Account>
 
 // -------------------- Settings
 

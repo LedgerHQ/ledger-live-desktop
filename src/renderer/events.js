@@ -5,7 +5,7 @@ import objectPath from 'object-path'
 import debug from 'debug'
 import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
-import type { Accounts } from 'types/common'
+import type { Account } from 'types/common'
 
 import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'constants'
 
@@ -52,7 +52,7 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
   })
 }
 
-export function startSyncAccounts(accounts: Accounts) {
+export function startSyncAccounts(accounts: Account[]) {
   d.sync('Sync accounts - start')
   syncAccountsInProgress = true
   sendEvent('accounts', 'sync.all', {
@@ -76,7 +76,7 @@ export function stopSyncAccounts() {
   clearTimeout(syncAccountsTimeout)
 }
 
-export function startSyncCounterValues(counterValue: string, accounts: Accounts) {
+export function startSyncCounterValues(counterValue: string, accounts: Account[]) {
   d.sync('Sync counterValues - start')
 
   sendEvent('msg', 'counterValues.sync', {

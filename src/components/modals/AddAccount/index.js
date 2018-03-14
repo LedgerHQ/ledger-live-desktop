@@ -12,7 +12,7 @@ import type { Currency } from '@ledgerhq/currencies'
 
 import { MODAL_ADD_ACCOUNT } from 'constants'
 
-import type { Accounts, Device, T } from 'types/common'
+import type { Account, Device, T } from 'types/common'
 
 import { closeModal } from 'reducers/modals'
 import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'
@@ -117,9 +117,9 @@ const Steps = {
 type Step = 'chooseCurrency' | 'connectDevice' | 'inProgress' | 'listAccounts'
 
 type Props = {
-  accounts: Accounts,
+  accounts: Account[],
   addAccount: Function,
-  archivedAccounts: Accounts,
+  archivedAccounts: Account[],
   canCreateAccount: boolean,
   closeModal: Function,
   counterValues: Object,
@@ -130,7 +130,7 @@ type Props = {
 }
 
 type State = {
-  accounts: Accounts,
+  accounts: Account[],
   currency: Currency | null,
   fetchingCounterValues: boolean,
   progress: null | Object,

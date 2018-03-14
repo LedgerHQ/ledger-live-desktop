@@ -10,7 +10,7 @@ import chunk from 'lodash/chunk'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
-import type { Account, Accounts, Operations, T } from 'types/common'
+import type { Account, Operation, T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 import { getCounterValue } from 'reducers/settings'
@@ -41,14 +41,14 @@ const mapDispatchToProps = {
 
 type Props = {
   t: T,
-  accounts: Accounts,
+  accounts: Account[],
   push: Function,
   counterValue: string,
 }
 
 type State = {
   accountsChunk: Array<Array<Account | null>>,
-  allOperations: Operations,
+  allOperations: Operation[],
   selectedTime: string,
   daysCount: number,
 }

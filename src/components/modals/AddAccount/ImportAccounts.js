@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
-import type { T, Accounts } from 'types/common'
+import type { T, Account } from 'types/common'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -13,7 +13,7 @@ import Input from 'components/base/Input'
 
 type Props = {
   t: T,
-  accounts: Accounts,
+  accounts: Account[],
   onImportAccounts: Function,
 }
 

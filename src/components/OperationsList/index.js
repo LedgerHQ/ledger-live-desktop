@@ -193,7 +193,7 @@ Operation.defaultProps = {
 type Props = {
   t: T,
   onAccountClick?: Function,
-  operations: Array<OperationType>,
+  operations: OperationType[],
   withAccounts?: boolean,
   minConfirmations: number,
   title?: string,
@@ -224,7 +224,7 @@ class OperationsList extends Component<Props> {
     return !isEqual(this._hashCache, this.getHashCache(nextProps.operations))
   }
 
-  getHashCache = (operations: Array<OperationType>) => operations.map(t => t.hash)
+  getHashCache = (operations: OperationType[]) => operations.map(t => t.hash)
 
   _hashCache = null
 
