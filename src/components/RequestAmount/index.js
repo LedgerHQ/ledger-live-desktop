@@ -1,65 +1,70 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { compose } from 'redux'
+import { translate } from 'react-i18next'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { getDefaultUnitByCoinType, getFiatUnit } from '@ledgerhq/currencies'
 
 import isNaN from 'lodash/isNaN'
+import noop from 'lodash/noop'
 
-import type { Account } from 'types/common'
+import type { T, Account } from 'types/common'
 
 import { getCounterValue } from 'reducers/settings'
+import { getLastCounterValueBySymbol } from 'reducers/counterValues'
 
-import Input from 'components/base/Input'
+import InputCurrency from 'components/base/InputCurrency'
+import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 
-const mapStateToProps = state => ({
-  counterValue: getCounterValue(state),
-  counterValues: state.counterValues,
-})
+const InputRight = styled(Box).attrs({
+  ff: 'Rubik',
+  color: 'graphite',
+  fontSize: 4,
+  justifyContent: 'center',
+  pr: 3,
+})``
+const InputCenter = styled(Box).attrs({
+  ff: 'Rubik',
+  color: 'graphite',
+  fontSize: 4,
+  justifyContent: 'center',
+})``
+
+const mapStateToProps = (state, { account }) => {
+  const counterValue = getCounterValue(state)
+  const unit = getDefaultUnitByCoinType(account.coinType)
+  const symbol = `${unit.code}-${counterValue}`
+  return {
+    counterValue,
+    lastCounterValue: getLastCounterValueBySymbol(symbol, state),
+  }
+}
+
+function maxUnitDigits(unit, value) {
+  const [leftDigits, rightDigits] = value.toString().split('.')
+
+  return Number(`${leftDigits}${rightDigits ? `.${rightDigits.slice(0, unit.magnitude)}` : ''}`)
+}
 
 function calculateMax(props) {
   const { account, counterValue, lastCounterValue } = props
 
-  const unit = {
-    currency: getDefaultUnitByCoinType(account.coinType),
-    fiat: getFiatUnit(counterValue),
-  }
-
-  const leftMax = account.balance / 10 ** unit.currency.magnitude
+  const unit = getUnit({ account, counterValue })
+  const leftMax = account.balance / 10 ** unit.left.magnitude
 
   return {
-    left: account.balance / 10 ** unit.currency.magnitude,
-    right: leftMax * lastCounterValue,
+    left: account.balance / 10 ** unit.left.magnitude,
+    right: maxUnitDigits(unit.right, leftMax * lastCounterValue),
   }
-}
-
-function formatCur(unit, val) {
-  if (val === '') {
-    return ''
-  }
-  if (val === '0' || val <= 0) {
-    return 0
-  }
-  const factor = 10 ** unit.magnitude
-  return (Math.round(val * factor) / factor).toFixed(unit.magnitude)
-}
-
-function cleanValue(value) {
-  return {
-    left: value.left || 0,
-    right: value.right || 0,
-  }
-}
-
-function parseValue(value) {
-  return value.toString().replace(/,/, '.')
 }
 
 function getUnit({ account, counterValue }) {
   return {
-    currency: getDefaultUnitByCoinType(account.coinType),
-    fiat: getFiatUnit(counterValue),
+    left: getDefaultUnitByCoinType(account.coinType),
+    right: getFiatUnit(counterValue),
   }
 }
 
@@ -67,32 +72,30 @@ function calculateValues({
   dir,
   value,
   max,
-  unit,
   lastCounterValue,
 }: {
   dir: string,
-  value: string | number,
+  value: Object,
   max: Object,
-  unit: Object,
   lastCounterValue: number,
 }) {
-  value = parseValue(value)
+  const v = value[dir]
 
   const getMax = (d, v) => {
     const result = v > max[d] ? max[d] : v
-    return isNaN(result) ? 0 : result
+    return isNaN(result) ? '0' : result.toString()
   }
 
   const newValue = {}
 
   if (dir === 'left') {
-    newValue.left = value === '' ? value : getMax('left', value)
-    newValue.right = formatCur(unit.fiat, getMax('right', Number(value) * lastCounterValue))
+    newValue.left = v === '' ? v : getMax('left', v)
+    newValue.right = getMax('right', Number(v) * lastCounterValue)
   }
 
   if (dir === 'right') {
-    newValue.left = formatCur(unit.currency, getMax('left', Number(value) / lastCounterValue))
-    newValue.right = value === '' ? value : getMax('right', value)
+    newValue.left = getMax('left', Number(v) / lastCounterValue)
+    newValue.right = v === '' ? v : getMax('right', v)
   }
 
   return newValue
@@ -102,9 +105,10 @@ type Direction = 'left' | 'right'
 
 type Props = {
   account: Account,
-  lastCounterValue: number,
   counterValue: string,
+  lastCounterValue: number, // eslint-disable-line react/no-unused-prop-types
   onChange: Function,
+  t: T,
   value: Object,
 }
 
@@ -121,6 +125,7 @@ type State = {
 
 export class RequestAmount extends PureComponent<Props, State> {
   static defaultProps = {
+    onChange: noop,
     value: {},
   }
 
@@ -131,125 +136,113 @@ export class RequestAmount extends PureComponent<Props, State> {
 
     const max = calculateMax(props)
 
-    let value = {}
+    let v = {
+      left: 0,
+      right: 0,
+    }
 
     if (props.value.left) {
-      value = {
-        ...calculateValues({
-          dir: 'left',
-          value: props.value.left,
-          max,
-          lastCounterValue: props.lastCounterValue,
-          unit: getUnit({
-            account: props.account,
-            counterValue: props.counterValue,
-          }),
-        }),
-      }
+      v = calculateValues({
+        ...props,
+        dir: 'left',
+        max,
+      })
     }
 
     if (props.value.right) {
-      value = {
-        ...calculateValues({
-          dir: 'right',
-          value: props.value.right,
-          max,
-          lastCounterValue: props.lastCounterValue,
-          unit: getUnit({
-            account: props.account,
-            counterValue: props.counterValue,
-          }),
-        }),
-      }
+      v = calculateValues({
+        ...props,
+        dir: 'right',
+        max,
+      })
     }
-
-    value = cleanValue(value)
 
     this.state = {
       max,
-      value,
+      value: v,
     }
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.account !== nextProps.account) {
+      const max = calculateMax(nextProps)
       this.setState({
-        max: calculateMax(nextProps),
-      })
-    }
-
-    if (this.props.value.left !== nextProps.value.left) {
-      this.setState({
-        value: cleanValue({
-          ...calculateValues({
-            dir: 'left',
-            value: nextProps.value.left,
-            max: this.state.max,
-            lastCounterValue: nextProps.lastCounterValue,
-            unit: getUnit({
-              account: nextProps.account,
-              counterValue: nextProps.counterValue,
-            }),
-          }),
-        }),
-      })
-    }
-
-    if (this.props.value.right !== nextProps.value.right) {
-      this.setState({
-        value: cleanValue({
-          ...calculateValues({
-            dir: 'right',
-            value: nextProps.value.right,
-            max: this.state.max,
-            lastCounterValue: nextProps.lastCounterValue,
-            unit: getUnit({
-              account: nextProps.account,
-              counterValue: nextProps.counterValue,
-            }),
-          }),
+        max,
+        value: calculateValues({
+          ...nextProps,
+          dir: 'left',
+          max,
         }),
       })
     }
   }
 
-  handleChangeAmount = (dir: Direction) => (v: string) => {
-    const { onChange, lastCounterValue, account, counterValue } = this.props
+  componentDidUpdate(prevProps: Props) {
+    this.updateValueWithProps(prevProps, this.props)
+  }
+
+  handleChangeAmount = (dir: Direction) => (v: number | string) => {
+    const { onChange, value, account, counterValue, ...otherProps } = this.props
     const { max } = this.state
 
-    v = parseValue(v)
-
-    // Check if value is valid Number
-    if (isNaN(Number(v))) {
-      return
-    }
+    const otherDir = dir === 'left' ? 'right' : 'left'
+    const unit = getUnit({
+      account,
+      counterValue,
+    })
 
     const newValue = calculateValues({
+      ...otherProps,
       dir,
-      value: v,
+      value: {
+        [dir]: v.toString(),
+      },
       max,
-      lastCounterValue,
-      unit: getUnit({
-        account,
-        counterValue,
-      }),
     })
+    newValue[otherDir] = maxUnitDigits(unit[otherDir], newValue[otherDir]).toString()
 
     this.setState({
       value: newValue,
     })
-
-    onChange(cleanValue(newValue))
+    onChange(newValue)
   }
 
-  handleBlur = () =>
-    this.setState(prev => ({
-      value: cleanValue(prev.value),
-    }))
+  handleClickMax = () => {
+    const { account } = this.props
+    this.handleChangeAmount('left')(account.balance)
+  }
+
+  updateValueWithProps = (props: Props, nextProps: Props) => {
+    if (
+      props.value.left !== nextProps.value.left &&
+      nextProps.value.left !== this.state.value.left
+    ) {
+      this.setState({
+        value: calculateValues({
+          ...nextProps,
+          dir: 'left',
+          max: this.state.max,
+        }),
+      })
+    }
+
+    if (
+      props.value.right !== nextProps.value.right &&
+      nextProps.value.right !== this.state.value.right
+    ) {
+      this.setState({
+        value: calculateValues({
+          ...nextProps,
+          dir: 'right',
+          max: this.state.max,
+        }),
+      })
+    }
+  }
 
   render() {
+    const { account, counterValue, t } = this.props
     const { value } = this.state
-    const { account, counterValue } = this.props
 
     const unit = getUnit({
       account,
@@ -258,30 +251,25 @@ export class RequestAmount extends PureComponent<Props, State> {
 
     return (
       <Box horizontal flow={2}>
-        <Box grow horizontal flow={2}>
-          <Box justifyContent="center">{unit.currency.code}</Box>
-          <Box grow>
-            <Input
-              value={value.left}
-              onBlur={this.handleBlur}
-              onChange={this.handleChangeAmount('left')}
-            />
-          </Box>
-        </Box>
-        <Box justifyContent="center">=</Box>
-        <Box grow horizontal flow={2}>
-          <Box justifyContent="center">{unit.fiat.code}</Box>
-          <Box grow>
-            <Input
-              value={value.right}
-              onBlur={this.handleBlur}
-              onChange={this.handleChangeAmount('right')}
-            />
-          </Box>
-        </Box>
+        <InputCurrency
+          unit={unit.left}
+          value={value.left}
+          onChange={this.handleChangeAmount('left')}
+          renderRight={<InputRight>{unit.left.code}</InputRight>}
+        />
+        <InputCenter>=</InputCenter>
+        <InputCurrency
+          unit={unit.right}
+          value={value.right}
+          onChange={this.handleChangeAmount('right')}
+          renderRight={<InputRight>{unit.right.code}</InputRight>}
+        />
+        <Button ml={5} primary onClick={this.handleClickMax}>
+          {t('common:max')}
+        </Button>
       </Box>
     )
   }
 }
 
-export default connect(mapStateToProps)(RequestAmount)
+export default compose(connect(mapStateToProps), translate())(RequestAmount)

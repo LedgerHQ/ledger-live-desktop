@@ -12,7 +12,7 @@ import fontFamily from 'styles/styled/fontFamily'
 const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
   fontSize: 3,
-  px: 2,
+  px: p => (p.small ? 2 : 4),
 })`
   ${space};
   ${color};
@@ -23,7 +23,7 @@ const Base = styled.button.attrs({
   border: ${p =>
     p.primary ? 'none' : `2px solid ${p.disabled ? 'transparent' : p.theme.colors.grey}`};
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
-  height: 30px;
+  height: ${p => (p.small ? 30 : 40)}px;
   outline: none;
 
   &:hover {
@@ -46,6 +46,7 @@ type Props = {
   primary?: boolean,
   disabled?: boolean,
   onClick?: Function,
+  small?: boolean,
 }
 
 function getProps({ disabled, icon, primary }: Object) {
@@ -98,10 +99,11 @@ const Button = (props: Props) => {
 
 Button.defaultProps = {
   children: undefined,
-  icon: undefined,
   disabled: undefined,
-  primary: false,
+  icon: undefined,
   onClick: noop,
+  primary: false,
+  small: false,
 }
 
 export default Button

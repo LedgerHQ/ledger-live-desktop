@@ -3658,35 +3658,6 @@ ejs@^2.5.7:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.7.tgz#cc872c168880ae3c7189762fd5ffc00896c9518a"
 
-electron-builder-lib@20.4.0:
-  version "20.4.0"
-  resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.4.0.tgz#e9a6d34b4bc6ed848a39a9ee894a3da015474c2a"
-  dependencies:
-    "7zip-bin" "~3.1.0"
-    app-builder-bin "1.7.2"
-    async-exit-hook "^2.0.1"
-    bluebird-lst "^1.0.5"
-    builder-util "5.6.4"
-    builder-util-runtime "4.0.5"
-    chromium-pickle-js "^0.2.0"
-    debug "^3.1.0"
-    ejs "^2.5.7"
-    electron-osx-sign "0.4.8"
-    electron-publish "20.2.0"
-    fs-extra-p "^4.5.2"
-    hosted-git-info "^2.5.0"
-    is-ci "^1.1.0"
-    isbinaryfile "^3.0.2"
-    js-yaml "^3.11.0"
-    lazy-val "^1.0.3"
-    minimatch "^3.0.4"
-    normalize-package-data "^2.4.0"
-    plist "^2.1.0"
-    read-config-file "3.0.0"
-    sanitize-filename "^1.6.1"
-    semver "^5.5.0"
-    temp-file "^3.1.1"
-
 electron-builder-lib@20.4.1:
   version "20.4.1"
   resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-20.4.1.tgz#8560563e21ca0596046eac398cad204154665a5e"
@@ -3744,29 +3715,6 @@ electron-builder-lib@~20.2.0:
     sanitize-filename "^1.6.1"
     semver "^5.5.0"
     temp-file "^3.1.1"
-
-<<<<<<< HEAD
-electron-builder@^20.4.0:
-=======
-electron-builder@^20.0.4:
->>>>>>> Clean RequestAmount
-  version "20.4.0"
-  resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.4.0.tgz#d1393719339c17dd7c2dd16d58b4e138ca6646ce"
-  dependencies:
-    bluebird-lst "^1.0.5"
-    builder-util "5.6.4"
-    builder-util-runtime "4.0.5"
-    chalk "^2.3.2"
-    dmg-builder "4.1.1"
-    electron-builder-lib "20.4.0"
-    electron-download-tf "4.3.4"
-    fs-extra-p "^4.5.2"
-    is-ci "^1.1.0"
-    lazy-val "^1.0.3"
-    read-config-file "3.0.0"
-    sanitize-filename "^1.6.1"
-    update-notifier "^2.3.0"
-    yargs "^11.0.0"
 
 electron-builder@^20.4.1:
   version "20.4.1"
@@ -6537,6 +6485,9 @@ ledger-test-library@KhalilBellakrid/ledger-test-library-nodejs#7d37482:
   dependencies:
     axios "^0.17.1"
     bindings "^1.3.0"
+    electron "^1.8.2"
+    electron-builder "^20.0.4"
+    electron-rebuild "^1.7.3"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 

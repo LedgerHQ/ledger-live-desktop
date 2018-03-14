@@ -2,7 +2,12 @@
 
 import { handleActions } from 'redux-actions'
 
-export type CounterValuesState = {}
+export type CounterValuesState = {
+  [string]: {
+    byDate: Object,
+    list: Array<[string, number]>,
+  },
+}
 
 const state: CounterValuesState = {}
 
@@ -14,6 +19,13 @@ const handlers = {
     ...state,
     ...counterValues,
   }),
+}
+
+export function getLastCounterValueBySymbol(
+  symbol: string,
+  state: { counterValues: CounterValuesState },
+): number {
+  return state.counterValues[symbol].list[0][1]
 }
 
 export function serializeCounterValues(counterValues: Object) {

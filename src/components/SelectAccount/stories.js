@@ -14,7 +14,7 @@ export const accounts = [...Array(20)].map(() => ({
   id: chance.string(),
   address: chance.string(),
   addresses: [],
-  balance: chance.integer({ min: 10000000, max: 2000000000 }),
+  balance: chance.integer({ min: 10000000000, max: 2000000000000 }),
   balanceByDay: {},
   coinType: 1,
   currency: getCurrencyByCoinType(1),

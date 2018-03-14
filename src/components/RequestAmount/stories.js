@@ -3,7 +3,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { text } from '@storybook/addon-knobs'
+import { number } from '@storybook/addon-knobs'
 
 import { accounts } from 'components/SelectAccount/stories'
 
@@ -20,10 +20,11 @@ const props = {
 stories.add('basic', () => (
   <RequestAmount
     {...props}
+    t={k => k}
     onChange={action('onChange')}
     value={{
-      left: text('left value', 0),
-      right: text('right value', 0),
+      left: number('left value', 0),
+      right: number('right value', 0),
     }}
   />
 ))
