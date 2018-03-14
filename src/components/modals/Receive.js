@@ -10,10 +10,9 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Label from 'components/base/Label'
-import Modal, { ModalBody } from 'components/base/Modal'
+import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 import ReceiveBox from 'components/ReceiveBox'
 import SelectAccount from 'components/SelectAccount'
-import Text from 'components/base/Text'
 
 import type { Account as AccountType, T } from 'types/common'
 
@@ -65,32 +64,32 @@ class ReceiveModal extends PureComponent<Props, State> {
 
           return (
             <ModalBody onClose={onClose} flow={3}>
-              <Text fontSize={4} color="graphite">
-                {t('receive:title')}
-              </Text>
-              <Box flow={1}>
-                <Label>Account</Label>
-                <SelectAccount value={account} onChange={this.handleChangeInput('account')} />
-              </Box>
-              {account && (
-                <Fragment>
-                  <Box flow={1}>
-                    <Label>Request amount</Label>
-                    <Input
-                      type="number"
-                      min={0}
-                      max={account.balance / 1e8}
-                      onChange={this.handleChangeInput('amount')}
-                    />
-                  </Box>
-                  <ReceiveBox account={account} amount={amount} />
-                </Fragment>
-              )}
-              <Box horizontal justifyContent="center">
+              <ModalTitle>{t('receive:title')}</ModalTitle>
+              <ModalContent>
+                <Box flow={1}>
+                  <Label>Account</Label>
+                  <SelectAccount value={account} onChange={this.handleChangeInput('account')} />
+                </Box>
+                {account && (
+                  <Fragment>
+                    <Box flow={1}>
+                      <Label>Request amount</Label>
+                      <Input
+                        type="number"
+                        min={0}
+                        max={account.balance / 1e8}
+                        onChange={this.handleChangeInput('amount')}
+                      />
+                    </Box>
+                    <ReceiveBox account={account} amount={amount} />
+                  </Fragment>
+                )}
+              </ModalContent>
+              <ModalFooter horizontal align="center" justify="flex-end">
                 <Button primary onClick={onClose}>
-                  Close
+                  {'Close'}
                 </Button>
-              </Box>
+              </ModalFooter>
             </ModalBody>
           )
         }}

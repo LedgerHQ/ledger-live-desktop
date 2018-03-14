@@ -1,8 +1,9 @@
 // @flow
 
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import get from 'lodash/get'
+import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import type { T } from 'types/common'
 
@@ -12,11 +13,11 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Label from 'components/base/Label'
-import Modal, { ModalBody } from 'components/base/Modal'
+import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 import Breadcrumb from 'components/Breadcrumb'
 import RecipientAddress from 'components/RecipientAddress'
 import SelectAccount from 'components/SelectAccount'
-import Text from 'components/base/Text'
+import FormattedVal from 'components/base/FormattedVal'
 
 const Steps = {
   '1': ({ t, ...props }: Object) => (
@@ -29,9 +30,8 @@ const Steps = {
         }
       }}
     >
-      <Box flow={5}>
-        <Text fontSize={6}>{t('send:title')}</Text>
-        <Box flow={2}>
+      <Box flow={4}>
+        <Box flow={1}>
           <Label>Account to debit</Label>
           <SelectAccount onChange={props.onChangeInput('account')} value={props.value.account} />
         </Box>
@@ -42,16 +42,6 @@ const Steps = {
         <Box flow={1}>
           <Label>Amount</Label>
           <Input onChange={props.onChangeInput('amount')} value={props.value.amount} />
-        </Box>
-        <Box horizontal alignItems="center">
-          <Box grow>
-            <Text>Cancel</Text>
-          </Box>
-          <Box justifyContent="flex-end">
-            <Button type="submit" primary disabled={!props.canSubmit}>
-              Next
-            </Button>
-          </Box>
         </Box>
       </Box>
     </form>
@@ -157,25 +147,35 @@ class Send extends PureComponent<Props, State> {
 
   render() {
     const { step } = this.state
-
+    const { t } = this.props
+    const Step = Steps[step]
     return (
       <Modal
         name={MODAL_SEND}
         onHide={this.handleHide}
-        render={({ data, onClose }) => {
-          const Step = Steps[step]
-
-          return (
-            <Fragment>
-              <ModalBody p={3}>
+        render={({ data, onClose }) => (
+          <ModalBody onClose={onClose}>
+            <ModalTitle>{t('send:title')}</ModalTitle>
+            <ModalContent>
+              <Box mb={6} mt={2}>
                 <Breadcrumb currentStep={step} items={this._items} />
-              </ModalBody>
-              <ModalBody onClose={onClose}>
-                <Step {...this.getStepProps(data)} />
-              </ModalBody>
-            </Fragment>
-          )
-        }}
+              </Box>
+              <Step {...this.getStepProps(data)} />
+            </ModalContent>
+            <ModalFooter horizontal align="center">
+              <Box grow>
+                <Label>{'Total spent'}</Label>
+                <FormattedVal
+                  color="dark"
+                  val={15496420404}
+                  unit={getDefaultUnitByCoinType(0)}
+                  showCode
+                />
+              </Box>
+              <Button primary>{'Next'}</Button>
+            </ModalFooter>
+          </ModalBody>
+        )}
       />
     )
   }

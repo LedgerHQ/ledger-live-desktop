@@ -23,9 +23,9 @@ const Wrapper = styled(Box).attrs({
 
 class Breadcrumb extends PureComponent<Props> {
   render() {
-    const { items, currentStep } = this.props
+    const { items, currentStep, ...props } = this.props
     return (
-      <Wrapper>
+      <Wrapper {...props}>
         {items.map((item, i) => (
           <Step key={i} isActive={i < parseInt(currentStep, 10)} isFirst={i === 0} number={i + 1}>
             {item.label}

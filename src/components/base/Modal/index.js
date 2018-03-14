@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import noop from 'lodash/noop'
 
 import { rgba } from 'styles/helpers'
+import { radii } from 'styles/theme'
 
 import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
@@ -83,9 +84,8 @@ const Wrapper = styled(Tabbable).attrs({
 const Body = styled(Box).attrs({
   bg: p => p.theme.colors.white,
   relative: true,
-})`
-  border-radius: 5px;
-`
+  borderRadius: 1,
+})``
 
 const CloseContainer = styled(Box).attrs({
   p: 4,
@@ -220,14 +220,34 @@ export const ModalBody = ({
         <IconCross height={16} width={16} />
       </CloseContainer>
     )}
-    <Box p={5} {...props}>
-      {children}
-    </Box>
+    <Box {...props}>{children}</Box>
   </Body>
 )
 
 ModalBody.defaultProps = {
   onClose: undefined,
 }
+
+export const ModalTitle = styled(Box).attrs({
+  ff: 'Museo Sans|Regular',
+  fontSize: 6,
+  color: 'dark',
+  align: 'center',
+  p: 5,
+})``
+
+export const ModalFooter = styled(Box).attrs({
+  px: 5,
+  py: 3,
+})`
+  border-top: 2px solid ${p => p.theme.colors.lightGrey};
+  border-bottom-left-radius: ${radii[1]}px;
+  border-bottom-right-radius: ${radii[1]}px;
+`
+
+export const ModalContent = styled(Box).attrs({
+  px: 5,
+  pb: 5,
+})``
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal)
