@@ -9,7 +9,7 @@ import type { Account } from 'types/common'
 
 import { fetchCounterValues } from 'actions/counterValues'
 
-import { startSyncAccounts } from 'renderer/events'
+import { startSyncAccounts, startSyncCounterValues } from 'renderer/events'
 
 function sortAccounts(accounts, orderAccounts) {
   const [order, sort] = orderAccounts.split('|')
@@ -43,7 +43,7 @@ export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) 
 
 export type AddAccount = Account => (Function, Function) => void
 export const addAccount: AddAccount = payload => (dispatch, getState) => {
-  const { settings: { orderAccounts }, accounts } = getState()
+  const { settings: { counterValue, orderAccounts }, accounts } = getState()
   dispatch({
     type: 'ADD_ACCOUNT',
     payload,
@@ -52,7 +52,9 @@ export const addAccount: AddAccount = payload => (dispatch, getState) => {
 
   // Start sync accounts the first time you add an account
   if (accounts.length === 0) {
-    startSyncAccounts([payload])
+    const accounts = [payload]
+    startSyncCounterValues(counterValue, accounts)
+    startSyncAccounts(accounts)
   }
 }
 

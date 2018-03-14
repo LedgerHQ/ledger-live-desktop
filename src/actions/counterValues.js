@@ -24,6 +24,15 @@ export const updateCounterValues: UpdateCounterValues = payload => ({
   payload,
 })
 
+export type UpdateLastCounterValueBySymbol = (string, Object) => { type: string, payload: Object }
+export const updateLastCounterValueBySymbol: UpdateLastCounterValueBySymbol = (symbol, value) => ({
+  type: 'DB:UPDATE_LAST_COUNTER_VALUE',
+  payload: {
+    symbol,
+    value,
+  },
+})
+
 export type FetchCounterValues = (?number) => (Dispatch<*>, Function) => Promise<any>
 export const fetchCounterValues: FetchCounterValues = coinType => (dispatch, getState) => {
   const { accounts, counterValues, settings } = getState()

@@ -10,12 +10,18 @@ import type { Settings, Accounts, T } from 'types/common'
 
 import get from 'lodash/get'
 
-import { startSyncAccounts, stopSyncAccounts } from 'renderer/events'
+import {
+  startSyncCounterValues,
+  startSyncAccounts,
+  stopSyncAccounts,
+  stopSyncCounterValues,
+} from 'renderer/events'
 import { setEncryptionKey } from 'helpers/db'
 
 import { fetchAccounts } from 'actions/accounts'
 import { getAccounts } from 'reducers/accounts'
 import { isLocked, unlock } from 'reducers/application'
+import { getCounterValue } from 'reducers/settings'
 
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
@@ -27,6 +33,7 @@ type InputValue = {
 type Props = {
   accounts: Accounts,
   children: any,
+  counterValue: string,
   fetchAccounts: Function,
   isLocked: boolean,
   settings: Settings,
@@ -39,8 +46,9 @@ type State = {
 
 const mapStateToProps = state => ({
   accounts: getAccounts(state),
-  settings: state.settings,
+  counterValue: getCounterValue(state),
   isLocked: isLocked(state),
+  settings: state.settings,
 })
 
 const mapDispatchToProps: Object = {
@@ -61,16 +69,19 @@ class IsUnlocked extends Component<Props, State> {
 
   componentWillMount() {
     if (this.props.isLocked) {
+      stopSyncCounterValues()
       stopSyncAccounts()
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.isLocked && !nextProps.isLocked) {
+      startSyncCounterValues(nextProps.counterValue, nextProps.accounts)
       startSyncAccounts(nextProps.accounts)
     }
 
     if (!this.props.isLocked && nextProps.isLocked) {
+      stopSyncCounterValues()
       stopSyncAccounts()
     }
   }

@@ -3,16 +3,20 @@
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import debug from 'debug'
+import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import type { Accounts } from 'types/common'
 
-import { CHECK_UPDATE_TIMEOUT, SYNC_ACCOUNT_TIMEOUT } from 'constants'
+import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'constants'
 
-import { updateDevices, addDevice, removeDevice } from 'actions/devices'
-import { updateAccount } from 'actions/accounts'
-import { setUpdateStatus } from 'reducers/update'
 import { getAccounts, getAccountById } from 'reducers/accounts'
+import { getCounterValue } from 'reducers/settings'
 import { isLocked } from 'reducers/application'
+import { setUpdateStatus } from 'reducers/update'
+
+import { updateLastCounterValueBySymbol } from 'actions/counterValues'
+import { updateAccount } from 'actions/accounts'
+import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 
 import i18n from 'renderer/i18n/electron'
 
@@ -29,8 +33,10 @@ type MsgPayload = {
   data: any,
 }
 
-let syncAccountsInProgress = true
+let syncAccountsInProgress = false
 let syncAccountsTimeout
+
+let syncCounterValuesTimeout
 
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
@@ -70,9 +76,25 @@ export function stopSyncAccounts() {
   clearTimeout(syncAccountsTimeout)
 }
 
+export function startSyncCounterValues(counterValue: string, accounts: Accounts) {
+  d.sync('Sync counterValues - start')
+
+  sendEvent('msg', 'counterValues.sync', {
+    counterValue,
+    currencies: [
+      ...new Set(accounts.map(account => getDefaultUnitByCoinType(account.coinType).code)),
+    ],
+  })
+}
+
+export function stopSyncCounterValues() {
+  d.sync('Sync counterValues - stop')
+  clearTimeout(syncCounterValuesTimeout)
+}
+
 export function checkUpdates() {
   d.update('Update - check')
-  setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_TIMEOUT)
+  setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_DELAY)
 }
 
 export default ({ store, locked }: { store: Object, locked: boolean }) => {
@@ -132,7 +154,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
             syncAccountsTimeout = setTimeout(() => {
               const accounts = getAccounts(store.getState())
               startSyncAccounts(accounts)
-            }, SYNC_ACCOUNT_TIMEOUT)
+            }, SYNC_ACCOUNT_DELAY)
           }
         },
       },
@@ -150,6 +172,18 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
       remove: device => {
         d.device('Device - remove')
         store.dispatch(removeDevice(device))
+      },
+    },
+    counterValues: {
+      update: counterValues => {
+        counterValues.map(c => store.dispatch(updateLastCounterValueBySymbol(c.symbol, c.value)))
+
+        syncCounterValuesTimeout = setTimeout(() => {
+          const state = store.getState()
+          const accounts = getAccounts(state)
+          const counterValue = getCounterValue(state)
+          startSyncCounterValues(counterValue, accounts)
+        }, SYNC_COUNTER_VALUES_DELAY)
       },
     },
     updater: {
@@ -177,11 +211,16 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
   // Start detection when we plug/unplug devices
   sendEvent('usb', 'devices.listen')
 
-  if (!locked && !DISABLED_SYNC) {
-    const accounts = getAccounts(store.getState())
+  const state = store.getState()
+
+  if (!locked) {
+    const accounts = getAccounts(state)
+    const counterValue = getCounterValue(state)
+
+    startSyncCounterValues(counterValue, accounts)
 
     // Start accounts sync only if we have accounts
-    if (accounts.length > 0) {
+    if (accounts.length > 0 && !DISABLED_SYNC) {
       startSyncAccounts(accounts)
     }
   }

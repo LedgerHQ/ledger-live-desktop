@@ -40,7 +40,6 @@ class CalculateBalance extends PureComponent<Props, State> {
     const sameAccounts = this.props.accounts === nextProps.accounts
     const sameCounterValues = this.props.counterValues === nextProps.counterValues
     const sameDaysCount = this.props.daysCount === nextProps.daysCount
-
     if (!sameAccounts || !sameCounterValues || !sameDaysCount) {
       this.setState(calculateBalanceToState(nextProps))
     }
