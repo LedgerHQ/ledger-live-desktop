@@ -1,9 +1,9 @@
 const TIMEOUT_CPU_USAGE = 5e3
 
-const cpuUsage = (startTime, startUsage) => {
-  const now = Date.now()
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-  while (Date.now() - now < 500);
+const cpuUsage = async (startTime, startUsage) => {
+  await wait(500)
 
   const newStartTime = process.hrtime()
   const newStartUsage = process.cpuUsage()
@@ -28,8 +28,8 @@ const cpuUsage = (startTime, startUsage) => {
 }
 
 export default callback => {
-  const initCpuUsage = (startTime, startUsage) => {
-    const { cpuPercent, newStartTime, newStartUsage } = cpuUsage(startTime, startUsage)
+  const initCpuUsage = async (startTime, startUsage) => {
+    const { cpuPercent, newStartTime, newStartUsage } = await cpuUsage(startTime, startUsage)
 
     callback(cpuPercent)
 
