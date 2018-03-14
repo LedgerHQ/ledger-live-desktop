@@ -14,8 +14,7 @@ import Search from 'components/base/Search'
 import Text from 'components/base/Text'
 
 import IconCheck from 'icons/Check'
-
-import Triangles from './Triangles'
+import IconAngleDown from 'icons/AngleDown'
 
 type Props = {
   fuseOptions?: Object,
@@ -37,10 +36,11 @@ const Container = styled(Box).attrs({ relative: true, color: 'graphite' })``
 
 const TriggerBtn = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
-  p: 4,
+  fontSize: 4,
+  pl: 3,
   pr: 5,
 })`
-  min-height: 64px;
+  height: 40px;
   ${space};
   border: 1px solid ${p => p.theme.colors.fog};
   border-radius: 3px;
@@ -62,12 +62,6 @@ const Item = styled(Box).attrs({
   background: ${p => (p.highlighted ? p.theme.colors.lightGrey : p.theme.colors.white)};
 `
 
-const ItemWrapper = styled(Box)`
-  & + & {
-    border-top: 1px solid ${p => p.theme.colors.fog};
-  }
-`
-
 const Dropdown = styled(Box).attrs({
   mt: 1,
 })`
@@ -81,7 +75,7 @@ const Dropdown = styled(Box).attrs({
   z-index: 1;
 `
 
-const FloatingTriangles = styled(Box).attrs({
+const FloatingDown = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
   mr: 2,
@@ -90,6 +84,7 @@ const FloatingTriangles = styled(Box).attrs({
   top: 0;
   right: 0;
   bottom: 0;
+  color: ${p => p.theme.colors.grey};
 
   // to "simulate" border to make arrows appears at the exact same place as
   // the no-input version
@@ -97,15 +92,12 @@ const FloatingTriangles = styled(Box).attrs({
 `
 
 const IconSelected = styled(Box).attrs({
-  bg: 'wallet',
-  color: 'white',
+  color: 'wallet',
   alignItems: 'center',
   justifyContent: 'center',
 })`
-  border-radius: 50%;
-  height: 15px;
-  font-size: 5px;
-  width: 15px;
+  height: 12px;
+  width: 12px;
   opacity: ${p => (p.selected ? 1 : 0)};
 `
 
@@ -156,7 +148,7 @@ class Select extends PureComponent<Props> {
             }}
           >
             {items.map((item, i) => (
-              <ItemWrapper
+              <Box
                 key={keyProp ? item[keyProp] : item.key}
                 innerRef={n => (this._children[i] = n)}
                 {...getItemProps({ item })}
@@ -171,17 +163,17 @@ class Select extends PureComponent<Props> {
                   </Box>
                   <Box>
                     <IconSelected selected={selectedItem === item}>
-                      <IconCheck height={7} width={7} />
+                      <IconCheck height={12} width={12} />
                     </IconSelected>
                   </Box>
                 </Item>
-              </ItemWrapper>
+              </Box>
             ))}
           </GrowScroll>
         ) : (
-          <ItemWrapper>
+          <Box>
             <Item>{'No results'}</Item>
-          </ItemWrapper>
+          </Box>
         )}
       </Dropdown>
     )
@@ -231,9 +223,9 @@ class Select extends PureComponent<Props> {
               {searchable ? (
                 <Box relative>
                   <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
-                  <FloatingTriangles>
-                    <Triangles />
-                  </FloatingTriangles>
+                  <FloatingDown>
+                    <IconAngleDown width={10} height={10} />
+                  </FloatingDown>
                 </Box>
               ) : (
                 <TriggerBtn
@@ -250,9 +242,9 @@ class Select extends PureComponent<Props> {
                       <Text color="fog">{placeholder}</Text>
                     )}
                   </Box>
-                  <FloatingTriangles>
-                    <Triangles />
-                  </FloatingTriangles>
+                  <FloatingDown>
+                    <IconAngleDown width={10} height={10} />
+                  </FloatingDown>
                 </TriggerBtn>
               )}
               {isOpen &&

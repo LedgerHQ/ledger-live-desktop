@@ -28,7 +28,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
-import TransactionsList from 'components/TransactionsList'
+import OperationsList from 'components/OperationsList'
 
 import AccountHeader from './AccountHeader'
 
@@ -79,19 +79,20 @@ class AccountPage extends PureComponent<Props, State> {
         <Box horizontal mb={5}>
           <AccountHeader account={account} />
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
-            <Button primary onClick={() => openModal(MODAL_SEND, { account })}>
+            <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={1} alignItems="center">
                 <IconArrowUp width={12} />
                 <Box>{t('send:title')}</Box>
               </Box>
             </Button>
-            <Button primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
+            <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
               <Box horizontal flow={1} alignItems="center">
                 <IconArrowDown width={12} />
                 <Box>{t('receive:title')}</Box>
               </Box>
             </Button>
             <Button
+              small
               style={{ width: 30, padding: 0 }}
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
             >
@@ -155,9 +156,9 @@ class AccountPage extends PureComponent<Props, State> {
             )}
           />
         </Box>
-        <TransactionsList
+        <OperationsList
           title={t('account:lastOperations')}
-          transactions={account.transactions}
+          operations={account.operations}
           minConfirmations={account.settings.minConfirmations}
         />
       </Box>

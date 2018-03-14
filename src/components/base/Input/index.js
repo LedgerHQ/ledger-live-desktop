@@ -2,39 +2,67 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { space } from 'styled-system'
+import { fontSize } from 'styled-system'
+
+import noop from 'lodash/noop'
 
 import fontFamily from 'styles/styled/fontFamily'
 
-const Base = styled.input.attrs({
-  p: 4,
-  ff: 'Open Sans|SemiBold',
+import Box from 'components/base/Box'
+
+const Container = styled(Box).attrs({
+  horizontal: true,
 })`
-  ${space};
-  ${fontFamily};
-  border: 1px solid ${p => p.theme.colors.fog};
-  border-radius: 3px;
-  display: flex;
-  width: 100%;
-  color: ${p => p.theme.colors.graphite};
   background: ${p => p.theme.colors.white};
+  border-radius: 3px;
+  border: 1px solid ${p => p.theme.colors.fog};
+  box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
+  height: 40px;
+`
+
+const Base = styled.input.attrs({
+  ff: p => p.ff || 'Open Sans|SemiBold',
+  fontSize: 4,
+})`
+  ${fontFamily};
+  ${fontSize};
+  border: 0;
+  color: ${p => p.theme.colors.dark};
+  height: 100%;
+  outline: none;
+  padding: 0;
+  width: 100%;
 
   &::placeholder {
     color: ${p => p.theme.colors.fog};
   }
-
-  &:focus {
-    outline: none;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
-  }
 `
 
 type Props = {
-  onChange?: Function,
   keepEvent?: boolean,
+  onBlur: Function,
+  onChange?: Function,
+  onFocus: Function,
+  renderLeft?: any,
+  renderRight?: any,
 }
 
-class Input extends PureComponent<Props> {
+type State = {
+  isFocus: boolean,
+}
+
+class Input extends PureComponent<Props, State> {
+  static defaultProps = {
+    onBlur: noop,
+    onFocus: noop,
+    renderLeft: null,
+    renderRight: null,
+  }
+
+  state = {
+    isFocus: false,
+  }
+
   handleChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { onChange, keepEvent } = this.props
 
@@ -43,8 +71,45 @@ class Input extends PureComponent<Props> {
     }
   }
 
+  handleClick = () => this._input && this._input.focus()
+
+  handleFocus = () => {
+    const { onFocus } = this.props
+    this.setState({
+      isFocus: true,
+    })
+    onFocus()
+  }
+
+  handleBlur = () => {
+    const { onBlur } = this.props
+    this.setState({
+      isFocus: false,
+    })
+    onBlur()
+  }
+
+  _input = null
+
   render() {
-    return <Base {...this.props} onChange={this.handleChange} />
+    const { isFocus } = this.state
+    const { renderLeft, renderRight } = this.props
+
+    return (
+      <Container onClick={this.handleClick} isFocus={isFocus} shrink>
+        {renderLeft}
+        <Box px={3} grow shrink>
+          <Base
+            {...this.props}
+            innerRef={n => (this._input = n)}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+          />
+        </Box>
+        {renderRight}
+      </Container>
+    )
   }
 }
 

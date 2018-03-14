@@ -4,9 +4,9 @@ import { getAccount, getHDNode, networks } from 'helpers/btc'
 
 const network = networks[1]
 
-function syncAccount({ id, transactions, ...currentAccount }) {
+function syncAccount({ id, operations, ...currentAccount }) {
   const hdnode = getHDNode({ xpub58: id, network })
-  const allTxsHash = transactions.map(t => t.hash)
+  const allTxsHash = operations.map(t => t.hash)
   return getAccount({ hdnode, network, allTxsHash, segwit: true, ...currentAccount }).then(
     account => ({
       id,

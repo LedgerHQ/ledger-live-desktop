@@ -12,7 +12,7 @@ import type { Currency } from '@ledgerhq/currencies'
 
 import { MODAL_ADD_ACCOUNT } from 'constants'
 
-import type { Accounts, Device, T } from 'types/common'
+import type { Account, Device, T } from 'types/common'
 
 import { closeModal } from 'reducers/modals'
 import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'
@@ -88,7 +88,7 @@ const Steps = {
               val={progress.balance || 0}
             />
           </Box>
-          <Box>Transactions: {progress.transactions || 0}</Box>
+          <Box>Operations: {progress.operations || 0}</Box>
           {progress.success && <Box>Finish ! Next account in progress...</Box>}
         </Box>
       )}
@@ -96,8 +96,8 @@ const Steps = {
   ),
   listAccounts: (props: Object) => {
     const { accounts, archivedAccounts } = props
-    const emptyAccounts = accounts.filter(account => account.transactions.length === 0)
-    const existingAccounts = accounts.filter(account => account.transactions.length > 0)
+    const emptyAccounts = accounts.filter(account => account.operations.length === 0)
+    const existingAccounts = accounts.filter(account => account.operations.length > 0)
     const canCreateAccount = props.canCreateAccount && emptyAccounts.length === 1
     const newAccount = emptyAccounts[0]
     return (
@@ -117,9 +117,9 @@ const Steps = {
 type Step = 'chooseCurrency' | 'connectDevice' | 'inProgress' | 'listAccounts'
 
 type Props = {
-  accounts: Accounts,
+  accounts: Account[],
   addAccount: Function,
-  archivedAccounts: Accounts,
+  archivedAccounts: Account[],
   canCreateAccount: boolean,
   closeModal: Function,
   counterValues: Object,
@@ -130,7 +130,7 @@ type Props = {
 }
 
 type State = {
-  accounts: Accounts,
+  accounts: Account[],
   currency: Currency | null,
   fetchingCounterValues: boolean,
   progress: null | Object,

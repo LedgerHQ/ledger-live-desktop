@@ -91,6 +91,7 @@ const AccountCard = ({
               hideAxis
               interactive={false}
               id={`account-chart-${account.id}`}
+              unit={account.unit}
             />
           </Box>
         )}

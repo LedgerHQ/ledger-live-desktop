@@ -37,6 +37,8 @@ import React, { PureComponent } from 'react'
 import * as d3 from 'd3'
 import noop from 'lodash/noop'
 
+import type { Unit } from '@ledgerhq/currencies'
+
 import refreshNodes from './refreshNodes'
 import refreshDraw from './refreshDraw'
 import handleMouseEvents from './handleMouseEvents'
@@ -46,27 +48,27 @@ import type { Data } from './types'
 
 export type Props = {
   data: Data, // eslint-disable-line react/no-unused-prop-types
+  unit: Unit, // eslint-disable-line react/no-unused-prop-types
+
+  id?: string, // eslint-disable-line react/no-unused-prop-types
+  height?: number,
+  tickXScale: string, // eslint-disable-line react/no-unused-prop-types
   color?: string, // eslint-disable-line react/no-unused-prop-types
   hideAxis?: boolean, // eslint-disable-line react/no-unused-prop-types
-  interactive?: boolean, // eslint-disable-line react/no-unused-prop-types
-  height: number,
   dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
-  id?: string, // eslint-disable-line react/no-unused-prop-types
-  nbTicksX: number, // eslint-disable-line react/no-unused-prop-types
+  interactive?: boolean, // eslint-disable-line react/no-unused-prop-types
   renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
-  renderTickX?: Function, // eslint-disable-line react/no-unused-prop-types
-  renderTickY?: Function, // eslint-disable-line react/no-unused-prop-types
 }
 
 class Chart extends PureComponent<Props> {
   static defaultProps = {
+    id: 'chart',
     color: '#000',
     hideAxis: false,
     interactive: true,
     height: 400,
     dateFormat: '%Y-%m-%d',
-    id: 'chart',
-    nbTicksX: 5,
+    tickXScale: 'month',
   }
 
   componentDidMount() {
@@ -132,7 +134,7 @@ class Chart extends PureComponent<Props> {
       }
 
       // Derived draw variables
-      ctx.HEIGHT = Math.max(0, height - ctx.MARGINS.top - ctx.MARGINS.bottom)
+      ctx.HEIGHT = Math.max(0, (height || 0) - ctx.MARGINS.top - ctx.MARGINS.bottom)
       ctx.WIDTH = Math.max(0, this._width - ctx.MARGINS.left - ctx.MARGINS.right)
 
       // Scales and areas

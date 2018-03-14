@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import Button from 'components/base/Button'
 
-const stories = storiesOf('Components/Button', module)
+const stories = storiesOf('Components/base', module)
 
 const Th = styled.th`
   padding: 20px;
@@ -17,7 +17,7 @@ const Td = styled.td`
   min-width: 150px;
 `
 
-stories.add('all', () => (
+stories.add('Button', () => (
   <table border={1}>
     <thead>
       <tr>

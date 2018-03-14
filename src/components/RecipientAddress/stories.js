@@ -6,7 +6,7 @@ import { boolean } from '@storybook/addon-knobs'
 
 import RecipientAddress from 'components/RecipientAddress'
 
-const stories = storiesOf('Components/RecipientAddress', module)
+const stories = storiesOf('Components', module)
 
 type State = {
   value: any,
@@ -27,7 +27,7 @@ class Wrapper extends PureComponent<any, State> {
   }
 }
 
-stories.add('basic', () => (
+stories.add('RecipientAddress', () => (
   <Wrapper
     render={({ onChange, value }) => (
       <RecipientAddress

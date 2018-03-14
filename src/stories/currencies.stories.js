@@ -7,11 +7,11 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Currency } from '@ledgerhq/currencies'
 
-const stories = storiesOf('Common/Currencies', module)
+const stories = storiesOf('Common', module)
 
 const currencies: Array<Currency> = listCurrencies()
 
-stories.add('currencies list', () => (
+stories.add('Currencies', () => (
   <div>
     <table border="1">
       <thead>

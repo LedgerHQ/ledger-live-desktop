@@ -8,7 +8,7 @@ import first from 'lodash/first'
 import isUndefined from 'lodash/isUndefined'
 import last from 'lodash/last'
 
-import type { Accounts, Account } from 'types/common'
+import type { Account } from 'types/common'
 
 type DateInterval = {
   start: string,
@@ -21,7 +21,7 @@ type BalanceHistoryDay = {
 }
 
 type CalculateBalance = {
-  accounts: Accounts,
+  accounts: Account[],
   counterValue: string,
   counterValues: Object,
   daysCount: number,
@@ -70,7 +70,7 @@ export function getBalanceHistoryForAccount({
   interval: DateInterval,
 }): Array<BalanceHistoryDay> {
   const unit = getDefaultUnitByCoinType(account.coinType)
-  const counterVals = counterValues[`${unit.code}-${counterValue}`]
+  const counterVals = counterValues[`${unit.code}-${counterValue}`].byDate
   let lastBalance = getBalanceAtIntervalStart(account, interval)
   return mapInterval(interval, date => {
     let balance = 0
@@ -100,7 +100,7 @@ export function getBalanceHistoryForAccounts({
   interval,
 }: {
   counterValue: string,
-  accounts: Accounts,
+  accounts: Account[],
   counterValues: Object,
   interval: DateInterval,
 }): Array<BalanceHistoryDay> {

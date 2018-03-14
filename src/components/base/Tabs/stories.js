@@ -6,9 +6,9 @@ import { storiesOf } from '@storybook/react'
 
 import Tabs from 'components/base/Tabs'
 
-const stories = storiesOf('Components/Tabs', module)
+const stories = storiesOf('Components/base', module)
 
-stories.add('basic', () => (
+stories.add('Tabs', () => (
   <Tabs
     index={number('index', 0, {
       min: 0,

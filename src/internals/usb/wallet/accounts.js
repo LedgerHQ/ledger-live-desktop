@@ -154,11 +154,11 @@ export default async ({
       network,
       rootPath: path,
       segwit,
-      onProgress: ({ transactions, ...progress }) =>
-        transactions > 0 && onProgress({ account: currentAccount, transactions, ...progress }),
+      onProgress: ({ operations, ...progress }) =>
+        operations > 0 && onProgress({ account: currentAccount, operations, ...progress }),
     })
 
-    const hasTransactions = account.transactions.length > 0
+    const hasOperations = account.operations.length > 0
 
     accounts.push({
       id: xpub58,
@@ -166,7 +166,7 @@ export default async ({
       ...account,
     })
 
-    if (hasTransactions) {
+    if (hasOperations) {
       onProgress({
         success: true,
       })

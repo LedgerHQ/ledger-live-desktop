@@ -16,8 +16,8 @@ jobs:
           name: Flow typed
           command: yarn flow-typed
       - run:
-          name: Temporary remove flow definitions for react-redux
-          command: rm flow-typed/npm/react-redux_v5.x.x.js
+          name: Temporary remove broken flow definitions
+          command: rm flow-typed/npm/{react-redux_v5.x.x.js,redux_v3.x.x.js}
       - run:
           name: Lint
           command: yarn lint

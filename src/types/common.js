@@ -10,18 +10,17 @@ export type Device = {
 
 export type Devices = Array<Device>
 
-// -------------------- Transactions
+// -------------------- Operations
 
-export type Transaction = {
+export type Operation = {
+  id: string,
   account?: Account,
   address: string,
-  balance: number,
+  amount: number,
   hash: string,
   receivedAt: string,
   confirmations: number,
 }
-
-export type Transactions = Array<Transaction>
 
 // -------------------- Accounts
 
@@ -42,12 +41,10 @@ export type Account = {
   name: string,
   path: string,
   rootPath: string,
-  transactions: Transactions,
+  operations: Operation[],
   unit: Unit,
   settings: AccountSettings,
 }
-
-export type Accounts = Array<Account>
 
 // -------------------- Settings
 

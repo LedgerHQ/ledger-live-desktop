@@ -15,8 +15,7 @@ import { setDataModal, closeModal } from 'reducers/modals'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
-import Modal, { ModalBody } from 'components/base/Modal'
-import Text from 'components/base/Text'
+import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 import Label from 'components/base/Label'
 
 import IconEdit from 'icons/Edit'
@@ -51,8 +50,8 @@ const defaultState = {
   nameHovered: false,
 }
 
-function hasNoTransactions(account: Account) {
-  return get(account, 'transactions.length', 0) === 0
+function hasNoOperations(account: Account) {
+  return get(account, 'operations.length', 0) === 0
 }
 
 class SettingsAccount extends PureComponent<Props, State> {
@@ -134,7 +133,7 @@ class SettingsAccount extends PureComponent<Props, State> {
 
   handleArchiveAccount = (account: Account) => () => {
     const { push, closeModal, updateAccount, removeAccount } = this.props
-    const shouldRemove = hasNoTransactions(account)
+    const shouldRemove = hasNoOperations(account)
 
     if (shouldRemove) {
       removeAccount(account)
@@ -162,65 +161,61 @@ class SettingsAccount extends PureComponent<Props, State> {
           const account = this.getAccount(data)
 
           return (
-            <ModalBody onClose={onClose} flow={3}>
-              <Text fontSize={4} color="graphite">
-                Account settings
-              </Text>
-              <Box
-                alignItems="center"
-                flow={2}
-                horizontal
-                onMouseEnter={this.handleHoveredName(true)}
-                onMouseLeave={this.handleHoveredName(false)}
-              >
-                <Box>
-                  {editName ? (
-                    <form onSubmit={this.handleSubmitName(account)}>
-                      <Box alignItems="center" horizontal flow={2}>
-                        <Box>
-                          <Input value={account.name} onChange={this.handleChangeName} />
+            <ModalBody onClose={onClose}>
+              <ModalTitle>{'Account settings'}</ModalTitle>
+              <ModalContent flow={4}>
+                <Box
+                  alignItems="center"
+                  flow={2}
+                  horizontal
+                  onMouseEnter={this.handleHoveredName(true)}
+                  onMouseLeave={this.handleHoveredName(false)}
+                >
+                  <Box>
+                    {editName ? (
+                      <form onSubmit={this.handleSubmitName(account)}>
+                        <Box alignItems="center" horizontal flow={2}>
+                          <Box>
+                            <Input value={account.name} onChange={this.handleChangeName} />
+                          </Box>
+                          <Box flow={2} horizontal>
+                            <Button type="button" onClick={this.handleCancelEditName(data)}>
+                              Cancel
+                            </Button>
+                            <Button type="submit" primary>
+                              Ok
+                            </Button>
+                          </Box>
                         </Box>
-                        <Box flow={2} horizontal>
-                          <Button type="button" onClick={this.handleCancelEditName(data)}>
-                            Cancel
-                          </Button>
-                          <Button type="submit" primary>
-                            Ok
-                          </Button>
-                        </Box>
+                      </form>
+                    ) : (
+                      account.name
+                    )}
+                  </Box>
+                  {!editName &&
+                    nameHovered && (
+                      <Box onClick={this.handleEditName(true)} style={{ cursor: 'pointer' }}>
+                        <IconEdit height={16} width={16} />
                       </Box>
-                    </form>
-                  ) : (
-                    account.name
-                  )}
+                    )}
                 </Box>
-                {!editName &&
-                  nameHovered && (
-                    <Box onClick={this.handleEditName(true)} style={{ cursor: 'pointer' }}>
-                      <IconEdit height={16} width={16} />
-                    </Box>
-                  )}
-              </Box>
-              <Box>
-                <Label>{'Minimum confirmations'}</Label>
-                <Input
-                  type="number"
-                  min={1}
-                  max={100}
-                  value={account.settings.minConfirmations}
-                  onChange={this.handleChangeMinConfirmations(account)}
-                />
-              </Box>
-              <Box horizontal grow alignItems="flex-end" flow={2}>
-                <Box grow>
-                  <Button onClick={this.handleArchiveAccount(account)}>
-                    {hasNoTransactions(account) ? 'Remove account' : 'Archive account'}
-                  </Button>
+                <Box>
+                  <Label>{'Minimum confirmations'}</Label>
+                  <Input
+                    type="number"
+                    min={1}
+                    max={100}
+                    value={account.settings.minConfirmations}
+                    onChange={this.handleChangeMinConfirmations(account)}
+                  />
                 </Box>
-                <Box grow>
-                  <Button primary>Go to account</Button>
-                </Box>
-              </Box>
+              </ModalContent>
+              <ModalFooter horizontal justify="flex-end" flow={2}>
+                <Button onClick={this.handleArchiveAccount(account)}>
+                  {hasNoOperations(account) ? 'Remove account' : 'Archive account'}
+                </Button>
+                <Button primary>Go to account</Button>
+              </ModalFooter>
             </ModalBody>
           )
         }}

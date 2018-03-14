@@ -13,7 +13,7 @@ const resources = {
   settings: require('../../../static/i18n/en/settings.yml'),
   sidebar: require('../../../static/i18n/en/sidebar.yml'),
   time: require('../../../static/i18n/en/time.yml'),
-  transactionsList: require('../../../static/i18n/en/transactionsList.yml'),
+  operationsList: require('../../../static/i18n/en/operationsList.yml'),
   update: require('../../../static/i18n/en/update.yml'),
 }
 

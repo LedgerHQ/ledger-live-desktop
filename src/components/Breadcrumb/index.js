@@ -16,15 +16,16 @@ type Props = {
 const Wrapper = styled(Box).attrs({
   horizontal: true,
   align: 'center',
+  justify: 'center',
 })`
   margin-bottom: 25px;
 `
 
 class Breadcrumb extends PureComponent<Props> {
   render() {
-    const { items, currentStep } = this.props
+    const { items, currentStep, ...props } = this.props
     return (
-      <Wrapper>
+      <Wrapper {...props}>
         {items.map((item, i) => (
           <Step key={i} isActive={i < parseInt(currentStep, 10)} isFirst={i === 0} number={i + 1}>
             {item.label}

@@ -3,7 +3,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import type { Accounts } from 'types/common'
+import type { Account } from 'types/common'
 
 import calculateBalance from 'helpers/balance'
 
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 })
 
 type Props = {
-  accounts: Accounts,
+  accounts: Account[],
   counterValues: Object,
   daysCount: number,
   render: Function,
@@ -40,7 +40,6 @@ class CalculateBalance extends PureComponent<Props, State> {
     const sameAccounts = this.props.accounts === nextProps.accounts
     const sameCounterValues = this.props.counterValues === nextProps.counterValues
     const sameDaysCount = this.props.daysCount === nextProps.daysCount
-
     if (!sameAccounts || !sameCounterValues || !sameDaysCount) {
       this.setState(calculateBalanceToState(nextProps))
     }

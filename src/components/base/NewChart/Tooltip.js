@@ -1,9 +1,12 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React from 'react'
+
+import type { Unit } from '@ledgerhq/currencies'
 
 import { colors as themeColors } from 'styles/theme'
 import { TooltipContainer } from 'components/base/Tooltip'
+import FormattedVal from 'components/base/FormattedVal'
 
 import type { Item } from './types'
 
@@ -29,7 +32,17 @@ const Arrow = () => (
   </svg>
 )
 
-const Tooltip = ({ d, renderTooltip }: { d: Item, renderTooltip?: Function }) => (
+const Tooltip = ({
+  d,
+  renderTooltip,
+  fiat,
+  unit,
+}: {
+  d: Item,
+  renderTooltip?: Function,
+  fiat?: string,
+  unit?: Unit,
+}) => (
   <div style={{ position: 'relative' }}>
     <div
       style={{
@@ -45,12 +58,14 @@ const Tooltip = ({ d, renderTooltip }: { d: Item, renderTooltip?: Function }) =>
         {renderTooltip ? (
           renderTooltip(d)
         ) : (
-          <Fragment>
-            <div style={{ fontSize: 14 }}>
-              <b>{Math.round(d.value)}</b>
-            </div>
-            <span>{d.date}</span>
-          </Fragment>
+          <FormattedVal
+            alwaysShowSign={false}
+            color="white"
+            showCode
+            fiat={fiat}
+            unit={unit}
+            val={d.value}
+          />
         )}
       </TooltipContainer>
       <div style={{ background: 'red' }}>
@@ -62,6 +77,8 @@ const Tooltip = ({ d, renderTooltip }: { d: Item, renderTooltip?: Function }) =>
 
 Tooltip.defaultProps = {
   renderTooltip: undefined,
+  fiat: undefined,
+  unit: undefined,
 }
 
 export default Tooltip
