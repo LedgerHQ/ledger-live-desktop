@@ -8,7 +8,7 @@ import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import InputCurrency from 'components/base/InputCurrency'
 
-const stories = storiesOf('Components', module)
+const stories = storiesOf('Components/base', module)
 
 const unit = getDefaultUnitByCoinType(1)
 

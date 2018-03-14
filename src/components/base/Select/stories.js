@@ -7,7 +7,7 @@ import Box from 'components/base/Box'
 import Select from 'components/base/Select'
 import Text from 'components/base/Text'
 
-const stories = storiesOf('Components/Select', module)
+const stories = storiesOf('Components/base/Select', module)
 
 const itemsChessPlayers = [
   { key: 'aleksandr-grichtchouk', name: 'Aleksandr Grichtchouk' },
