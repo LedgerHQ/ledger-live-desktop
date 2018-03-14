@@ -28,7 +28,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
-import TransactionsList from 'components/TransactionsList'
+import OperationsList from 'components/OperationsList'
 
 import AccountHeader from './AccountHeader'
 
@@ -156,9 +156,9 @@ class AccountPage extends PureComponent<Props, State> {
             )}
           />
         </Box>
-        <TransactionsList
+        <OperationsList
           title={t('account:lastOperations')}
-          transactions={account.transactions}
+          operations={account.operations}
           minConfirmations={account.settings.minConfirmations}
         />
       </Box>

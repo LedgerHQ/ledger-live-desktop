@@ -9,7 +9,7 @@ import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
-import type { Transaction as TransactionType, T } from 'types/common'
+import type { Operation as OperationType, T } from 'types/common'
 
 import IconAngleDown from 'icons/AngleDown'
 import Box, { Card } from 'components/base/Box'
@@ -55,7 +55,7 @@ HeaderCol.defaultProps = {
   children: undefined,
 }
 
-const TransactionRaw = styled(Box).attrs({
+const OperationRaw = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
@@ -97,7 +97,7 @@ const ShowMore = styled(Box).attrs({
   }
 `
 
-const Transaction = ({
+const Operation = ({
   t,
   onAccountClick,
   tx,
@@ -106,14 +106,14 @@ const Transaction = ({
 }: {
   t: T,
   onAccountClick?: Function,
-  tx: TransactionType,
+  tx: OperationType,
   withAccounts?: boolean,
   minConfirmations: number,
 }) => {
   const time = moment(tx.receivedAt)
   const Icon = getIconByCoinType(get(tx, 'account.currency.coinType'))
   return (
-    <TransactionRaw>
+    <OperationRaw>
       <Cell size={DATE_COL_SIZE} justifyContent="space-between">
         <Box>
           <Day>{time.format('DD MMM')}</Day>
@@ -149,7 +149,7 @@ const Transaction = ({
         }}
       >
         <Box ff="Open Sans" fontSize={3} color="graphite">
-          {tx.balance > 0 ? t('transactionsList:from') : t('transactionsList:to')}
+          {tx.amount > 0 ? t('operationsList:from') : t('operationsList:to')}
         </Box>
         <Box
           color="dark"
@@ -167,7 +167,7 @@ const Transaction = ({
       </Cell>
       <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
         <FormattedVal
-          val={tx.balance}
+          val={tx.amount}
           unit={get(tx, 'account.unit')}
           showCode
           fontSize={4}
@@ -181,11 +181,11 @@ const Transaction = ({
           t={t}
         />
       </Cell>
-    </TransactionRaw>
+    </OperationRaw>
   )
 }
 
-Transaction.defaultProps = {
+Operation.defaultProps = {
   onAccountClick: noop,
   withAccounts: false,
 }
@@ -193,14 +193,14 @@ Transaction.defaultProps = {
 type Props = {
   t: T,
   onAccountClick?: Function,
-  transactions: Array<TransactionType>,
+  operations: OperationType[],
   withAccounts?: boolean,
   minConfirmations: number,
   title?: string,
   canShowMore: boolean,
 }
 
-class TransactionsList extends Component<Props> {
+class OperationsList extends Component<Props> {
   static defaultProps = {
     onAccountClick: noop,
     withAccounts: false,
@@ -221,16 +221,16 @@ class TransactionsList extends Component<Props> {
       return true
     }
 
-    return !isEqual(this._hashCache, this.getHashCache(nextProps.transactions))
+    return !isEqual(this._hashCache, this.getHashCache(nextProps.operations))
   }
 
-  getHashCache = (transactions: Array<TransactionType>) => transactions.map(t => t.hash)
+  getHashCache = (operations: OperationType[]) => operations.map(t => t.hash)
 
   _hashCache = null
 
   render() {
     const {
-      transactions,
+      operations,
       title,
       withAccounts,
       onAccountClick,
@@ -239,26 +239,26 @@ class TransactionsList extends Component<Props> {
       t,
     } = this.props
 
-    this._hashCache = this.getHashCache(transactions)
+    this._hashCache = this.getHashCache(operations)
 
     return (
       <Defer>
         <Card flow={1} title={title} p={0}>
           <Box horizontal pt={4}>
-            <HeaderCol size={DATE_COL_SIZE}>{t('transactionsList:date')}</HeaderCol>
+            <HeaderCol size={DATE_COL_SIZE}>{t('operationsList:date')}</HeaderCol>
             {withAccounts && (
-              <HeaderCol size={ACCOUNT_COL_SIZE}>{t('transactionsList:account')}</HeaderCol>
+              <HeaderCol size={ACCOUNT_COL_SIZE}>{t('operationsList:account')}</HeaderCol>
             )}
-            <HeaderCol grow>{t('transactionsList:address')}</HeaderCol>
+            <HeaderCol grow>{t('operationsList:address')}</HeaderCol>
             <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-              {t('transactionsList:amount')}
+              {t('operationsList:amount')}
             </HeaderCol>
             <HeaderCol size={CONFIRMATION_COL_SIZE} px={0} />
           </Box>
 
           <Box>
-            {transactions.map(trans => (
-              <Transaction
+            {operations.map(trans => (
+              <Operation
                 t={t}
                 key={`{${trans.hash}-${trans.account ? trans.account.id : ''}`}
                 withAccounts={withAccounts}
@@ -271,7 +271,7 @@ class TransactionsList extends Component<Props> {
 
           {canShowMore && (
             <ShowMore>
-              <span>{t('transactionsList:showMore')}</span>
+              <span>{t('operationsList:showMore')}</span>
               <IconAngleDown width={8} height={8} />
             </ShowMore>
           )}
@@ -281,4 +281,4 @@ class TransactionsList extends Component<Props> {
   }
 }
 
-export default translate()(TransactionsList)
+export default translate()(OperationsList)

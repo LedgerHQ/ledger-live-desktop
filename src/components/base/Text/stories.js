@@ -10,7 +10,7 @@ import Text from 'components/base/Text'
 
 import { fontFamilies, fontSizes } from 'styles/theme'
 
-const stories = storiesOf('Common/Text', module)
+const stories = storiesOf('Common', module)
 
 const Title = ({ children }: { children: string }) => (
   <Text style={{ fontFamily: 'monospace' }} fontSize={5}>
@@ -56,7 +56,7 @@ const FontSizes = () => (
   </Box>
 )
 
-stories.add('all fonts styles', () => (
+stories.add('Text styles', () => (
   <Box flow={4}>
     <FontStyles txt={text('text', 'The quick brown fox jumps over the lazy dog')} />
     <FontSizes />

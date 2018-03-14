@@ -8,7 +8,7 @@ import { Modal, ModalBody, ModalTitle, ModalContent, ModalFooter } from 'compone
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
-const stories = storiesOf('Components', module)
+const stories = storiesOf('Components/base', module)
 
 stories.add('Modal', () => {
   const isOpened = boolean('isOpened', true)

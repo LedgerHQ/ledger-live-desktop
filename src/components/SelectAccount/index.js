@@ -6,7 +6,7 @@ import { translate } from 'react-i18next'
 import noop from 'lodash/noop'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
-import type { T, Accounts, Account } from 'types/common'
+import type { T, Account } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 
@@ -42,7 +42,7 @@ const renderItem = a => {
 }
 
 type Props = {
-  accounts: Accounts,
+  accounts: Account[],
   onChange?: () => Account | void,
   value?: Account | null,
   t: T,

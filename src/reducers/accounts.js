@@ -10,18 +10,17 @@ import defaultsDeep from 'lodash/defaultsDeep'
 import { getDefaultUnitByCoinType, getCurrencyByCoinType } from '@ledgerhq/currencies'
 
 import type { State } from 'reducers'
-import type { Account, Accounts } from 'types/common'
+import type { Account } from 'types/common'
 
-export type AccountsState = Accounts
-
+export type AccountsState = Account[]
 const state: AccountsState = []
 
-function orderAccountsTransactions(account: Account) {
-  const { transactions } = account
-  transactions.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt))
+function orderAccountsOperations(account: Account) {
+  const { operations } = account
+  operations.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt))
   return {
     ...account,
-    transactions,
+    operations,
   }
 }
 
@@ -36,13 +35,13 @@ function applyDefaults(account) {
 const handlers: Object = {
   SET_ACCOUNTS: (
     state: AccountsState,
-    { payload: accounts }: { payload: Accounts },
+    { payload: accounts }: { payload: Account[] },
   ): AccountsState => accounts.map(applyDefaults),
 
   ADD_ACCOUNT: (
     state: AccountsState,
     { payload: account }: { payload: Account },
-  ): AccountsState => [...state, orderAccountsTransactions(account)],
+  ): AccountsState => [...state, orderAccountsOperations(account)],
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
@@ -58,7 +57,7 @@ const handlers: Object = {
         ...account,
       }
 
-      return orderAccountsTransactions(updatedAccount)
+      return orderAccountsOperations(updatedAccount)
     }),
 
   REMOVE_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) =>
@@ -78,15 +77,15 @@ export function getTotalBalance(state: { accounts: AccountsState }) {
   )
 }
 
-export function getAccounts(state: { accounts: AccountsState }): Array<Account> {
+export function getAccounts(state: { accounts: AccountsState }): Account[] {
   return state.accounts
 }
 
-export function getArchivedAccounts(state: { accounts: AccountsState }): Array<Account> {
+export function getArchivedAccounts(state: { accounts: AccountsState }): Account[] {
   return state.accounts.filter(acc => acc.archived === true)
 }
 
-export function getVisibleAccounts(state: { accounts: AccountsState }): Array<Account> {
+export function getVisibleAccounts(state: { accounts: AccountsState }): Account[] {
   return getAccounts(state).filter(account => account.archived !== true)
 }
 
@@ -96,7 +95,7 @@ export function getAccountById(state: { accounts: AccountsState }, id: string): 
 }
 
 export function canCreateAccount(state: State): boolean {
-  return every(getAccounts(state), a => get(a, 'transactions.length', 0) > 0)
+  return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
 }
 
 export function serializeAccounts(accounts: Array<Object>) {
@@ -119,7 +118,7 @@ export function serializeAccounts(accounts: Array<Object>) {
 
     return {
       ...a,
-      transactions: account.transactions.map(t => ({
+      operations: account.operations.map(t => ({
         ...t,
         account: a,
       })),
@@ -127,7 +126,7 @@ export function serializeAccounts(accounts: Array<Object>) {
   })
 }
 
-export function deserializeAccounts(accounts: Accounts) {
+export function deserializeAccounts(accounts: Account[]) {
   return accounts.map(account => ({
     id: account.id,
     address: account.address,
@@ -139,7 +138,7 @@ export function deserializeAccounts(accounts: Accounts) {
     name: account.name,
     path: account.path,
     rootPath: account.rootPath,
-    transactions: account.transactions.map(({ account, ...t }) => t),
+    operations: account.operations.map(({ account, ...t }) => t),
     unit: account.unit,
     settings: account.settings,
   }))

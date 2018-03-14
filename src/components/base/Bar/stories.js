@@ -7,6 +7,6 @@ import { storiesOf } from '@storybook/react'
 
 import Bar from 'components/base/Bar'
 
-const stories = storiesOf('Components', module)
+const stories = storiesOf('Components/base', module)
 
 stories.add('Bar', () => <Bar size={number('size', 1)} color="grey" />)

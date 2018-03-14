@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import Button from 'components/base/Button'
 
-const stories = storiesOf('Components', module)
+const stories = storiesOf('Components/base', module)
 
 const Th = styled.th`
   padding: 20px;

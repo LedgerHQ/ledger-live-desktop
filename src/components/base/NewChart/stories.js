@@ -10,7 +10,7 @@ import { color } from '@storybook/addon-knobs/react'
 
 import Chart from 'components/base/NewChart'
 
-const stories = storiesOf('Components', module)
+const stories = storiesOf('Components/base', module)
 
 const data = generateRandomData(365)
 const unit = getDefaultUnitByCoinType(0)

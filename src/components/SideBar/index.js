@@ -9,7 +9,7 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'constants'
 
-import type { Accounts, T } from 'types/common'
+import type { Account, T } from 'types/common'
 
 import { openModal } from 'reducers/modals'
 import { getVisibleAccounts } from 'reducers/accounts'
@@ -52,7 +52,7 @@ const PlusBtn = styled(Tabbable).attrs({
 
 type Props = {
   t: T,
-  accounts: Accounts,
+  accounts: Account[],
   openModal: Function,
 }
 

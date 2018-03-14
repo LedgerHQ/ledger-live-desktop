@@ -6,7 +6,7 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import bcrypt from 'bcryptjs'
 
-import type { Settings, Accounts, T } from 'types/common'
+import type { Settings, Account, T } from 'types/common'
 
 import get from 'lodash/get'
 
@@ -31,7 +31,7 @@ type InputValue = {
 }
 
 type Props = {
-  accounts: Accounts,
+  accounts: Account[],
   children: any,
   counterValue: string,
   fetchAccounts: Function,

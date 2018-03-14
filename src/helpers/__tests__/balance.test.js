@@ -69,7 +69,7 @@ describe('helpers > balance', () => {
       ])
     })
 
-    test('should work if interval dont contain transactions', () => {
+    test('should work if interval dont contain operations', () => {
       const account = {
         coinType: 0,
         balanceByDay: {
