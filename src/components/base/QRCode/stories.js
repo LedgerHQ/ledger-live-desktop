@@ -7,6 +7,6 @@ import { text, number } from '@storybook/addon-knobs'
 
 import QRCode from 'components/base/QRCode'
 
-const stories = storiesOf('Components/QRCode', module)
+const stories = storiesOf('Components', module)
 
-stories.add('basic', () => <QRCode data={text('data', 'sample')} size={number('size', 200)} />)
+stories.add('QRCode', () => <QRCode data={text('data', 'sample')} size={number('size', 200)} />)

@@ -8,7 +8,7 @@ import { getCurrencyByCoinType, getDefaultUnitByCoinType } from '@ledgerhq/curre
 import { SelectAccount } from 'components/SelectAccount'
 
 const chance = new Chance()
-const stories = storiesOf('Components/SelectAccount', module)
+const stories = storiesOf('Components', module)
 
 const accounts = [...Array(20)].map(() => ({
   id: chance.string(),
@@ -48,7 +48,7 @@ class Wrapper extends PureComponent<any, State> {
   }
 }
 
-stories.add('basic', () => (
+stories.add('SelectAccount', () => (
   <Wrapper
     render={({ onChange, value }) => (
       <SelectAccount onChange={onChange} value={value} accounts={accounts} t={k => k} />

@@ -26,7 +26,7 @@ export default function handleMouseEvents({
   renderTooltip?: Function,
 }) {
   const { MARGINS, HEIGHT, WIDTH, NODES, DATA, x, y } = ctx
-  const { hideAxis } = props
+  const { hideAxis, unit } = props
 
   const bisectDate = d3.bisector(d => d.parsedDate).left
 
@@ -93,7 +93,7 @@ export default function handleMouseEvents({
       .html(
         renderToString(
           <ThemeProvider theme={theme}>
-            <Tooltip renderTooltip={renderTooltip} d={d.ref} />
+            <Tooltip unit={unit} renderTooltip={renderTooltip} d={d.ref} />
           </ThemeProvider>,
         ),
       )

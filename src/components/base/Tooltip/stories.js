@@ -5,6 +5,6 @@ import { storiesOf } from '@storybook/react'
 
 import Tooltip from 'components/base/Tooltip'
 
-const stories = storiesOf('Components/Tooltip', module)
+const stories = storiesOf('Components', module)
 
-stories.add('basic', () => <Tooltip render={() => <div>Oyo!</div>}>Hover me!</Tooltip>)
+stories.add('Tooltip', () => <Tooltip render={() => <div>Oyo!</div>}>Hover me!</Tooltip>)

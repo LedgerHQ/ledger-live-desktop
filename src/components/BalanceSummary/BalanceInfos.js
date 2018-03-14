@@ -43,7 +43,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
     <Box {...otherProps}>
       <FormattedVal
         isPercent
-        val={Math.floor((totalBalance - refBalance) / refBalance * 100)}
+        val={refBalance ? Math.floor((totalBalance - refBalance) / refBalance * 100) : 0}
         alwaysShowSign
         fontSize={7}
       />

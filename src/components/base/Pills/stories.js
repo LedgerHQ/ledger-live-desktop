@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react'
 
 import Pills from 'components/base/Pills'
 
-const stories = storiesOf('Components/Pills', module)
+const stories = storiesOf('Components', module)
 
 type State = {
   key: string,
@@ -32,4 +32,4 @@ class Wrapper extends PureComponent<any, State> {
   }
 }
 
-stories.add('basic', () => <Wrapper />)
+stories.add('Pills', () => <Wrapper />)

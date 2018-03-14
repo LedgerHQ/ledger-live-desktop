@@ -1,15 +1,41 @@
 // @flow
 
 import * as d3 from 'd3'
+import moment from 'moment'
+import { formatShort } from '@ledgerhq/currencies'
 
 import { colors as themeColors } from 'styles/theme'
 
 import type { Props } from '.'
 import type { CTX } from './types'
 
+const TICK_X_SCALE = {
+  week: 7,
+  month: 10,
+  year: 13,
+  default: 10,
+}
+
+function getTickXCount(tickXScale) {
+  return TICK_X_SCALE[tickXScale] || TICK_X_SCALE.default
+}
+
+const RENDER_TICK_X = {
+  year: 'MMM.',
+  default: 'MMM. D',
+}
+
+function getRenderTickX(selectedTime) {
+  return t => moment(t).format(RENDER_TICK_X[selectedTime] || RENDER_TICK_X.default)
+}
+
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, interactive, renderTickX, renderTickY, nbTicksX } = props
+  const { hideAxis, interactive, tickXScale, unit } = props
+
+  const nbTicksX = getTickXCount(tickXScale)
+  const renderTickX = getRenderTickX(tickXScale)
+  const renderTickY = t => formatShort(unit, t)
 
   const area = d3
     .area()

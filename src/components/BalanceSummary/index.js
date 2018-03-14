@@ -1,9 +1,8 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import moment from 'moment'
 
-import { formatShort, getFiatUnit } from '@ledgerhq/currencies'
+import { getFiatUnit } from '@ledgerhq/currencies'
 
 import type { Accounts } from 'types/common'
 
@@ -11,30 +10,6 @@ import Chart from 'components/base/NewChart'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
-
-function getTickCountX(selectedTime) {
-  switch (selectedTime) {
-    default:
-    case 'week':
-      return 7
-
-    case 'month':
-      return 10
-
-    case 'year':
-      return 13
-  }
-}
-
-function renderTickX(selectedTime) {
-  let format = 'MMM. D'
-
-  if (selectedTime === 'year') {
-    format = 'MMM.'
-  }
-
-  return t => moment(t).format(format)
-}
 
 type Props = {
   counterValue: string,
@@ -80,9 +55,8 @@ const BalanceSummary = ({
                 color={chartColor}
                 data={allBalances}
                 height={250}
-                nbTicksX={getTickCountX(selectedTime)}
-                renderTickX={renderTickX(selectedTime)}
-                renderTickY={t => formatShort(unit, t)}
+                unit={unit}
+                tickXScale={selectedTime}
                 renderTooltip={d => (
                   <FormattedVal
                     alwaysShowSign={false}
