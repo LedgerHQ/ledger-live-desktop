@@ -3,10 +3,14 @@
 /* eslint-disable no-unused-expressions */
 
 import { injectGlobal } from 'styled-components'
+import omitBy from 'lodash/omitBy'
 
 import { fontFace } from 'styles/helpers'
 import { radii, colors } from 'styles/theme'
 import reset from './reset'
+
+const { STORYBOOK_ENV, NODE_ENV } = process.env
+const COPYRIGHTED_FONTS = ['Museo Sans']
 
 const fonts = {
   'Open Sans': [
@@ -73,6 +77,11 @@ const fonts = {
 }
 
 function transformFonts(allFonts) {
+  allFonts = omitBy(
+    allFonts,
+    (_, key: string) =>
+      NODE_ENV === 'production' && STORYBOOK_ENV && COPYRIGHTED_FONTS.includes(key),
+  )
   return Object.keys(allFonts)
     .map(name => {
       const fonts = allFonts[name]
