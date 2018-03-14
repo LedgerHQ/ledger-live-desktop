@@ -3,7 +3,7 @@ import { configure, addDecorator } from '@storybook/react'
 import { withKnobs } from '@storybook/addon-knobs'
 import { setOptions } from '@storybook/addon-options'
 import { ThemeProvider } from 'styled-components'
-import { I18nextProvider, translate } from 'react-i18next'
+import { I18nextProvider } from 'react-i18next'
 
 import 'globals'
 
