@@ -45,6 +45,7 @@ type Props = {
   onFocus: Function,
   renderLeft?: any,
   renderRight?: any,
+  containerProps?: Object,
 }
 
 type State = {
@@ -93,10 +94,10 @@ class Input extends PureComponent<Props, State> {
 
   render() {
     const { isFocus } = this.state
-    const { renderLeft, renderRight } = this.props
+    const { renderLeft, renderRight, containerProps } = this.props
 
     return (
-      <Container onClick={this.handleClick} isFocus={isFocus} shrink>
+      <Container onClick={this.handleClick} isFocus={isFocus} shrink {...containerProps}>
         {renderLeft}
         <Box px={3} grow shrink>
           <Base

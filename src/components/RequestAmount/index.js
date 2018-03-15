@@ -112,11 +112,13 @@ type Props = {
   value: Object,
 }
 
+export type DoubleVal = {
+  left: number,
+  right: number,
+}
+
 type State = {
-  max: {
-    left: number,
-    right: number,
-  },
+  max: DoubleVal,
   value: {
     left: string | number,
     right: string | number,
