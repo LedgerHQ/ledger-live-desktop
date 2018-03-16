@@ -1,6 +1,18 @@
 ---
-title: Envoyer
-Amount: Montant
-Summary: Résumé
-SecureValidation: Validation sécurisée
-Confirmation: Confirmation
+title: Envoyer des fonds
+totalSpent: Total dépensé
+steps:
+  amount:
+    title: Informations
+    selectAccountDebit: Sélectionnez un compte à débiter
+    recipientAddress: Addresse de réception
+    amount: Montant
+    max: Max
+    fees: Taxes
+    advancedOptions: Options avancées
+  connectDevice:
+    title: Connecter l'appareil
+  verification:
+    title: Vérification
+  confirmation:
+    title: Confirmation
