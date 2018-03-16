@@ -5,7 +5,7 @@ import qrcode from 'qrcode'
 
 type Props = {
   data: string,
-  size?: number,
+  size: number,
 }
 
 class QRCode extends PureComponent<Props> {
