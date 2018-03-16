@@ -1,18 +1,18 @@
 ---
-title: Send funds
-totalSpent: Total spent
+title: Envoyer des fonds
+totalSpent: Total dépensé
 steps:
   amount:
     title: Informations
-    selectAccountDebit: Select an account to debit
-    recipientAddress: Recipient address
-    amount: Amount
+    selectAccountDebit: Sélectionnez un compte à débiter
+    recipientAddress: Addresse de réception
+    amount: Montant
     max: Max
-    fees: Fees
-    advancedOptions: Advanced options
+    fees: Taxes
+    advancedOptions: Options avancées
   connectDevice:
-    title: Connect device
+    title: Connecter l'appareil
   verification:
-    title: Verification
+    title: Vérification
   confirmation:
     title: Confirmation
