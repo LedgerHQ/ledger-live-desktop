@@ -15,10 +15,8 @@ const state: DevicesState = {
 }
 
 function setCurrentDevice(state) {
-  return {
-    ...state,
-    currentDevice: state.devices.length === 1 ? state.devices[0] : state.currentDevice,
-  }
+  const currentDevice = state.devices.length ? state.devices[state.devices.length - 1] : null
+  return { ...state, currentDevice }
 }
 
 const handlers: Object = {

@@ -27,7 +27,7 @@ const Base = styled.button.attrs({
   outline: none;
 
   &:hover {
-    background: ${p => (p.primary ? lighten(p.theme.colors.wallet, 0.05) : '')};
+    background: ${p => (p.disabled ? '' : p.primary ? lighten(p.theme.colors.wallet, 0.05) : '')};
   }
 
   &:active {

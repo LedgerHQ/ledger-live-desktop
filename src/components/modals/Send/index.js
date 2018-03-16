@@ -25,6 +25,7 @@ type Props = {
 
 type State = {
   stepIndex: number,
+  isDeviceReady: boolean,
   amount: DoubleVal,
   account: Account | null,
   recipientAddress: string,
@@ -40,6 +41,7 @@ const GET_STEPS = t => [
 
 const INITIAL_STATE = {
   stepIndex: 0,
+  isDeviceReady: false,
   account: null,
   recipientAddress: '',
   amount: {
@@ -53,6 +55,24 @@ class SendModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
   _steps = GET_STEPS(this.props.t)
+
+  canNext = account => {
+    const { stepIndex } = this.state
+
+    // informations
+    if (stepIndex === 0) {
+      const { amount, recipientAddress } = this.state
+      return !!amount.left && !!recipientAddress && !!account
+    }
+
+    // connect device
+    if (stepIndex === 1) {
+      const { isDeviceReady } = this.state
+      return !!isDeviceReady
+    }
+
+    return false
+  }
 
   handleReset = () => this.setState(INITIAL_STATE)
 
@@ -90,6 +110,7 @@ class SendModal extends PureComponent<Props, State> {
         onHide={this.handleReset}
         render={({ data, onClose }) => {
           const acc = account || get(data, 'account', null)
+          const canNext = this.canNext(acc)
           return (
             <ModalBody onClose={onClose}>
               <ModalTitle>{t('send:title')}</ModalTitle>
@@ -97,7 +118,15 @@ class SendModal extends PureComponent<Props, State> {
                 <Breadcrumb mb={6} mt={2} currentStep={stepIndex} items={this._steps} />
                 {this.renderStep(acc)}
               </ModalContent>
-              {acc && <Footer onNext={this.handleNextStep} account={acc} amount={amount} t={t} />}
+              {acc && (
+                <Footer
+                  canNext={canNext}
+                  onNext={this.handleNextStep}
+                  account={acc}
+                  amount={amount}
+                  t={t}
+                />
+              )}
             </ModalBody>
           )
         }}

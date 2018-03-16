@@ -17,9 +17,10 @@ type Props = {
   account: Account,
   amount: DoubleVal,
   onNext: Function,
+  canNext: boolean,
 }
 
-function Footer({ account, amount, t, onNext }: Props) {
+function Footer({ account, amount, t, onNext, canNext }: Props) {
   return (
     <ModalFooter horizontal align="center">
       <Box grow>
@@ -42,7 +43,7 @@ function Footer({ account, amount, t, onNext }: Props) {
           </Box>
         </Box>
       </Box>
-      <Button primary onClick={onNext}>
+      <Button primary onClick={onNext} disabled={!canNext}>
         {'Next'}
       </Button>
     </ModalFooter>
