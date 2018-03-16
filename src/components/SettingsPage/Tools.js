@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 
 import Box, { Card } from 'components/base/Box'
-import Modal, { ModalBody } from 'components/base/Modal'
+import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
 import Button from 'components/base/Button'
 import QRCodeExporter from 'components/QRCodeExporter'
 
@@ -21,12 +21,14 @@ class TabProfile extends PureComponent<*, *> {
   }
 
   renderQRCodeModal = ({ onClose }: *) => (
-    <ModalBody onClick={onClose} justify="center" align="center">
-      <p style={{ padding: '1em' }}>
-        {/* TODO translate */}
-        Open Ledger Wallet Mobile App, go to <strong>Settings {'>'} Import Accounts</strong>
-      </p>
-      <QRCodeExporter />
+    <ModalBody onClose={onClose} justify="center" align="center">
+      <ModalTitle>{'QRCode Mobile Export'}</ModalTitle>
+      <ModalContent flow={4}>
+        <Box>
+          Open Ledger Wallet Mobile App, go to <strong>Settings {'>'} Import Accounts</strong>
+        </Box>
+        <QRCodeExporter />
+      </ModalContent>
     </ModalBody>
   )
 
