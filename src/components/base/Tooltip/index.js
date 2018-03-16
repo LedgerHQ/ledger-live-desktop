@@ -86,10 +86,10 @@ class Tooltip extends PureComponent<Props> {
   _template = undefined
 
   render() {
-    const { children, render } = this.props
+    const { children, render, ...props } = this.props
 
     return (
-      <Container innerRef={n => (this._node = n)}>
+      <Container innerRef={n => (this._node = n)} {...props}>
         <Template>
           <TooltipContainer innerRef={n => (this._template = n)}>{render()}</TooltipContainer>
         </Template>

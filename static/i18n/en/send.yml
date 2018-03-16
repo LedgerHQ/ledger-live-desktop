@@ -1,5 +1,17 @@
-title: Send
-Amount: Amount
-Summary: Summary
-SecureValidation: Secure validation
-Confirmation: Confirmation
+title: Send funds
+totalSpent: Total spent
+steps:
+  amount:
+    title: Informations
+    selectAccountDebit: Select an account to debit
+    recipientAddress: Recipient address
+    amount: Amount
+    max: Max
+    fees: Fees
+    advancedOptions: Advanced options
+  connectDevice:
+    title: Connect device
+  verification:
+    title: Verification
+  confirmation:
+    title: Confirmation
