@@ -206,7 +206,13 @@ export class RequestAmount extends PureComponent<Props, State> {
     this.setState({
       value: newValue,
     })
-    onChange(newValue)
+    onChange({
+      values: newValue,
+      rawValues: {
+        left: Number(newValue.left) * 10 ** unit.left.magnitude,
+        right: Number(newValue.right),
+      },
+    })
   }
 
   handleClickMax = () => {

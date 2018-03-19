@@ -18,17 +18,19 @@ type Props = {
   amount: DoubleVal,
   onNext: Function,
   canNext: boolean,
+  counterValue: string,
 }
 
-function Footer({ account, amount, t, onNext, canNext }: Props) {
+function Footer({ account, amount, t, onNext, canNext, counterValue }: Props) {
   return (
     <ModalFooter horizontal align="center">
       <Box grow>
         <Label>{t('send:totalSpent')}</Label>
         <Box horizontal flow={2} align="center">
           <FormattedVal
+            disableRounding
             color="dark"
-            val={amount.left * 10 ** account.unit.magnitude}
+            val={amount.left}
             unit={account.unit}
             showCode
           />
@@ -36,7 +38,14 @@ function Footer({ account, amount, t, onNext, canNext }: Props) {
             <Text ff="Rubik" fontSize={3}>
               {'('}
             </Text>
-            <FormattedVal color="grey" fontSize={3} val={amount.right} fiat="USD" showCode />
+            <FormattedVal
+              disableRounding
+              color="grey"
+              fontSize={3}
+              val={amount.right}
+              fiat={counterValue}
+              showCode
+            />
             <Text ff="Rubik" fontSize={3}>
               {')'}
             </Text>

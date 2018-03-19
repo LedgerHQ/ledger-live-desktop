@@ -22,10 +22,11 @@ type Props = {
   unit?: Unit | null,
   alwaysShowSign?: boolean,
   showCode?: boolean,
+  disableRounding?: boolean,
 }
 
 function FormattedVal(props: Props) {
-  const { fiat, isPercent, alwaysShowSign, showCode, ...p } = props
+  const { disableRounding, fiat, isPercent, alwaysShowSign, showCode, ...p } = props
   let { val, unit } = props
 
   if (isUndefined(val)) {
@@ -47,6 +48,7 @@ function FormattedVal(props: Props) {
     }
     text = formatCurrencyUnit(unit, val, {
       alwaysShowSign,
+      disableRounding,
       showCode,
     })
   }
@@ -59,11 +61,12 @@ function FormattedVal(props: Props) {
 }
 
 FormattedVal.defaultProps = {
-  unit: null,
-  isPercent: false,
   alwaysShowSign: false,
-  showCode: false,
+  disableRounding: false,
   fiat: null,
+  isPercent: false,
+  showCode: false,
+  unit: null,
 }
 
 export default FormattedVal
