@@ -20,10 +20,10 @@ import Box, { Tabbable } from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Defer from 'components/base/Defer'
 
-import IconCross from 'icons/Cross'
+export { default as ModalBody } from './ModalBody'
 
 const springConfig = {
-  stiffness: 380,
+  stiffness: 320,
 }
 
 const mapStateToProps: Function = (
@@ -79,26 +79,6 @@ const Wrapper = styled(Tabbable).attrs({
   outline: none;
   width: 570px;
   z-index: 2;
-`
-
-const Body = styled(Box).attrs({
-  bg: p => p.theme.colors.white,
-  relative: true,
-  borderRadius: 1,
-})``
-
-const CloseContainer = styled(Box).attrs({
-  p: 4,
-  color: 'fog',
-})`
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  &:hover {
-    color: ${p => p.theme.colors.grey};
-  }
 `
 
 class Pure extends Component<any> {
@@ -204,28 +184,6 @@ export class Modal extends Component<Props> {
       </Mortal>
     )
   }
-}
-
-export const ModalBody = ({
-  children,
-  onClose,
-  ...props
-}: {
-  children: any,
-  onClose?: Function,
-}) => (
-  <Body>
-    {onClose && (
-      <CloseContainer onClick={onClose}>
-        <IconCross height={16} width={16} />
-      </CloseContainer>
-    )}
-    <Box {...props}>{children}</Box>
-  </Body>
-)
-
-ModalBody.defaultProps = {
-  onClose: undefined,
 }
 
 export const ModalTitle = styled(Box).attrs({
