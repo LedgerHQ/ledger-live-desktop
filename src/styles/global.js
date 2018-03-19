@@ -5,7 +5,7 @@
 import { injectGlobal } from 'styled-components'
 import omitBy from 'lodash/omitBy'
 
-import { fontFace } from 'styles/helpers'
+import { fontFace, rgba } from 'styles/helpers'
 import { radii, colors } from 'styles/theme'
 import reset from './reset'
 
@@ -101,5 +101,9 @@ injectGlobal`
 
   .tippy-popper .tippy-roundarrow {
     fill: ${colors.dark};
+  }
+
+  ::selection {
+    background: ${rgba(colors.wallet, 0.1)};
   }
 `

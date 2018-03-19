@@ -9,6 +9,8 @@ steps:
     max: Max
     fees: Fees
     advancedOptions: Advanced options
+    useRBF: Use the RBF transaction
+    message: Leave a message (140)
   connectDevice:
     title: Connect device
   verification:
