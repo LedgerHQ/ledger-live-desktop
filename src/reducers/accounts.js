@@ -99,31 +99,12 @@ export function canCreateAccount(state: State): boolean {
 }
 
 export function serializeAccounts(accounts: Array<Object>) {
-  return accounts.map((account, key) => {
-    const a = {
-      id: account.id,
-      address: account.address,
-      addresses: account.addresses,
-      balance: account.balance,
-      balanceByDay: account.balanceByDay,
-      coinType: account.coinType,
-      currency: getCurrencyByCoinType(account.coinType),
-      index: account.index,
-      name: account.name || `${key}`,
-      path: account.path,
-      rootPath: account.rootPath,
-      unit: account.unit || getDefaultUnitByCoinType(account.coinType),
-      settings: account.settings,
-    }
-
-    return {
-      ...a,
-      operations: account.operations.map(t => ({
-        ...t,
-        account: a,
-      })),
-    }
-  })
+  return accounts.map((account, key) => ({
+    ...account,
+    currency: getCurrencyByCoinType(account.coinType),
+    name: account.name || `${key}`,
+    unit: account.unit || getDefaultUnitByCoinType(account.coinType),
+  }))
 }
 
 export function deserializeAccounts(accounts: Account[]) {
@@ -136,11 +117,11 @@ export function deserializeAccounts(accounts: Account[]) {
     coinType: account.coinType,
     index: account.index,
     name: account.name,
+    operations: account.operations,
     path: account.path,
     rootPath: account.rootPath,
-    operations: account.operations.map(({ account, ...t }) => t),
-    unit: account.unit,
     settings: account.settings,
+    unit: account.unit,
   }))
 }
 
