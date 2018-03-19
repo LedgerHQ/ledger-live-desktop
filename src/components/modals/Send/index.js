@@ -1,6 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import get from 'lodash/get'
 
@@ -8,6 +10,8 @@ import type { T, Account } from 'types/common'
 import type { DoubleVal } from 'components/RequestAmount'
 
 import { MODAL_SEND } from 'constants'
+
+import { getCounterValue } from 'reducers/settings'
 
 import Breadcrumb from 'components/Breadcrumb'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
@@ -19,14 +23,22 @@ import StepConnectDevice from './02-step-connect-device'
 import StepVerification from './03-step-verification'
 import StepConfirmation from './04-step-confirmation'
 
+const mapStateToProps = state => ({
+  counterValue: getCounterValue(state),
+})
+
 type Props = {
   t: T,
+  counterValue: string,
 }
 
 type State = {
   stepIndex: number,
   isDeviceReady: boolean,
-  amount: DoubleVal,
+  amount: {
+    values: DoubleVal,
+    rawValues: DoubleVal,
+  },
   account: Account | null,
   recipientAddress: string,
   fees: number,
@@ -45,8 +57,14 @@ const INITIAL_STATE = {
   account: null,
   recipientAddress: '',
   amount: {
-    left: 0,
-    right: 0,
+    values: {
+      left: 0,
+      right: 0,
+    },
+    rawValues: {
+      left: 0,
+      right: 0,
+    },
   },
   fees: 0,
 }
@@ -62,7 +80,7 @@ class SendModal extends PureComponent<Props, State> {
     // informations
     if (stepIndex === 0) {
       const { amount, recipientAddress } = this.state
-      return !!amount.left && !!recipientAddress && !!account
+      return !!amount.rawValues.left && !!recipientAddress && !!account
     }
 
     // connect device
@@ -87,21 +105,23 @@ class SendModal extends PureComponent<Props, State> {
   createChangeHandler = key => value => this.setState({ [key]: value })
 
   renderStep = acc => {
-    const { stepIndex, account } = this.state
+    const { stepIndex, account, amount, ...othersState } = this.state
     const step = this._steps[stepIndex]
     if (!step) {
       return null
     }
     const { Comp } = step
     const stepProps = {
-      ...this.state,
+      ...othersState,
+      amount: amount.values,
       account: account || acc,
     }
+
     return <Comp onChange={this.createChangeHandler} {...stepProps} {...this.props} />
   }
 
   render() {
-    const { t } = this.props
+    const { t, counterValue } = this.props
     const { stepIndex, amount, account } = this.state
 
     return (
@@ -120,10 +140,11 @@ class SendModal extends PureComponent<Props, State> {
               </ModalContent>
               {acc && (
                 <Footer
+                  counterValue={counterValue}
                   canNext={canNext}
                   onNext={this.handleNextStep}
                   account={acc}
-                  amount={amount}
+                  amount={amount.rawValues}
                   t={t}
                 />
               )}
@@ -135,4 +156,4 @@ class SendModal extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(SendModal)
+export default compose(connect(mapStateToProps), translate())(SendModal)
