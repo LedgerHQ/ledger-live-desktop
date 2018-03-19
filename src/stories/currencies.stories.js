@@ -51,7 +51,7 @@ stories.add('Currencies', () => (
                 {cur.units && (
                   <ul style={{ paddingRight: 10 }}>
                     {cur.units.map(unit => (
-                      <li key={unit.code}>
+                      <li key={unit.code} style={{ listStyleType: 'none' }}>
                         {unit.code} ({unit.magnitude})
                       </li>
                     ))}
