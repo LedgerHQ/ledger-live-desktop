@@ -43,7 +43,7 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/currencies": "^4.7.0",
+    "@ledgerhq/currencies": "^4.7.1",
     "@ledgerhq/hw-app-btc": "^4.7.0",
     "@ledgerhq/hw-app-eth": "^4.6.0",
     "@ledgerhq/hw-transport": "^4.7.0",
