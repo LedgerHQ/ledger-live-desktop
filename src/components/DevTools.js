@@ -40,6 +40,7 @@ type HslColor = {
 type ColorType = {
   name: string,
   val: string,
+  isDark: boolean,
   color: {
     isDark: () => boolean,
     hsl: () => HslColor,
