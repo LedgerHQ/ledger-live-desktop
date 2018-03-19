@@ -112,7 +112,7 @@ class SendModal extends PureComponent<Props, State> {
           const acc = account || get(data, 'account', null)
           const canNext = this.canNext(acc)
           return (
-            <ModalBody onClose={onClose}>
+            <ModalBody onClose={onClose} deferHeight={acc ? 595 : 355}>
               <ModalTitle>{t('send:title')}</ModalTitle>
               <ModalContent>
                 <Breadcrumb mb={6} mt={2} currentStep={stepIndex} items={this._steps} />

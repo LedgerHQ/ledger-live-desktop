@@ -74,7 +74,7 @@ class ReceiveModal extends PureComponent<Props, State> {
           const account = this.getAccount(data)
 
           return (
-            <ModalBody onClose={onClose} flow={3}>
+            <ModalBody onClose={onClose} flow={3} deferHeight={282}>
               <ModalTitle>{t('receive:title')}</ModalTitle>
               <ModalContent>
                 <Box flow={1}>
