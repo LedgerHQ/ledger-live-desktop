@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { fontSize } from 'styled-system'
+import { fontSize, space } from 'styled-system'
 
 import noop from 'lodash/noop'
 
@@ -35,6 +35,26 @@ const Base = styled.input.attrs({
 
   &::placeholder {
     color: ${p => p.theme.colors.fog};
+  }
+`
+
+export const Textarea = styled.textarea.attrs({
+  p: 2,
+  fontSize: 4,
+  ff: p => p.ff || 'Open Sans|SemiBold',
+})`
+  ${space};
+  ${fontFamily};
+  ${fontSize};
+  min-height: 80px;
+  color: ${p => p.theme.colors.dark};
+  background: ${p => p.theme.colors.white};
+  border-radius: 3px;
+  border: 1px solid ${p => p.theme.colors.fog};
+  box-shadow: none;
+  &:focus {
+    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
+    outline: none;
   }
 `
 
