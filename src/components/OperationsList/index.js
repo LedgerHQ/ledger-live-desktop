@@ -9,7 +9,7 @@ import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
-import type { Operation as OperationType, T } from 'types/common'
+import type { Account, Operation as OperationType, T } from 'types/common'
 
 import IconAngleDown from 'icons/AngleDown'
 import Box, { Card } from 'components/base/Box'
@@ -98,18 +98,21 @@ const ShowMore = styled(Box).attrs({
 `
 
 const Operation = ({
+  account,
   t,
   onAccountClick,
   tx,
-  withAccounts,
+  withAccount,
   minConfirmations,
 }: {
+  account: Account | null,
   t: T,
   onAccountClick?: Function,
   tx: OperationType,
-  withAccounts?: boolean,
+  withAccount?: boolean,
   minConfirmations: number,
 }) => {
+  const acc = account || tx.account
   const time = moment(tx.receivedAt)
   const Icon = getIconByCoinType(get(tx, 'account.currency.coinType'))
   return (
@@ -120,24 +123,20 @@ const Operation = ({
           <Hour>{time.format('HH:mm')}</Hour>
         </Box>
       </Cell>
-      {withAccounts &&
-        tx.account && (
+      {withAccount &&
+        acc && (
           <Cell
             size={ACCOUNT_COL_SIZE}
             horizontal
             flow={2}
             style={{ cursor: 'pointer' }}
-            onClick={() => onAccountClick && onAccountClick(tx.account)}
+            onClick={() => onAccountClick && onAccountClick(acc)}
           >
-            <Box
-              alignItems="center"
-              justifyContent="center"
-              style={{ color: tx.account.currency.color }}
-            >
+            <Box alignItems="center" justifyContent="center" style={{ color: acc.currency.color }}>
               {Icon && <Icon size={16} />}
             </Box>
             <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
-              {tx.account.name}
+              {acc.name}
             </Box>
           </Cell>
         )}
@@ -166,13 +165,7 @@ const Operation = ({
         </Box>
       </Cell>
       <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-        <FormattedVal
-          val={tx.amount}
-          unit={get(tx, 'account.unit')}
-          showCode
-          fontSize={4}
-          alwaysShowSign
-        />
+        <FormattedVal val={tx.amount} unit={acc && acc.unit} showCode fontSize={4} alwaysShowSign />
       </Cell>
       <Cell size={CONFIRMATION_COL_SIZE} px={0} align="center" justify="flex-start">
         <ConfirmationCheck
@@ -187,23 +180,25 @@ const Operation = ({
 
 Operation.defaultProps = {
   onAccountClick: noop,
-  withAccounts: false,
+  withAccount: false,
 }
 
 type Props = {
-  t: T,
+  account: Account | null,
+  canShowMore: boolean,
+  minConfirmations: number,
   onAccountClick?: Function,
   operations: OperationType[],
-  withAccounts?: boolean,
-  minConfirmations: number,
+  t: T,
   title?: string,
-  canShowMore: boolean,
+  withAccount?: boolean,
 }
 
 class OperationsList extends Component<Props> {
   static defaultProps = {
+    account: null,
     onAccountClick: noop,
-    withAccounts: false,
+    withAccount: false,
     minConfirmations: 2,
     canShowMore: false,
   }
@@ -230,13 +225,14 @@ class OperationsList extends Component<Props> {
 
   render() {
     const {
-      operations,
-      title,
-      withAccounts,
-      onAccountClick,
-      minConfirmations,
+      account,
       canShowMore,
+      minConfirmations,
+      onAccountClick,
+      operations,
       t,
+      title,
+      withAccount,
     } = this.props
 
     this._hashCache = this.getHashCache(operations)
@@ -246,7 +242,7 @@ class OperationsList extends Component<Props> {
         <Card flow={1} title={title} p={0}>
           <Box horizontal pt={4}>
             <HeaderCol size={DATE_COL_SIZE}>{t('operationsList:date')}</HeaderCol>
-            {withAccounts && (
+            {withAccount && (
               <HeaderCol size={ACCOUNT_COL_SIZE}>{t('operationsList:account')}</HeaderCol>
             )}
             <HeaderCol grow>{t('operationsList:address')}</HeaderCol>
@@ -257,14 +253,15 @@ class OperationsList extends Component<Props> {
           </Box>
 
           <Box>
-            {operations.map(trans => (
+            {operations.map(tx => (
               <Operation
+                account={account}
                 t={t}
-                key={`{${trans.hash}-${trans.account ? trans.account.id : ''}`}
-                withAccounts={withAccounts}
+                key={`{${tx.hash}${tx.account ? `-${tx.account.id}` : ''}`}
+                withAccount={withAccount}
                 onAccountClick={onAccountClick}
                 minConfirmations={minConfirmations}
-                tx={trans}
+                tx={tx}
               />
             ))}
           </Box>
