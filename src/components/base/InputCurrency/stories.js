@@ -1,15 +1,46 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions'
 
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import { getDefaultUnitByCoinType, getFiatUnit } from '@ledgerhq/currencies'
 
 import InputCurrency from 'components/base/InputCurrency'
 
-const stories = storiesOf('Components/base', module)
+const stories = storiesOf('Components', module)
 
-const unit = getDefaultUnitByCoinType(1)
+const units = [
+  getDefaultUnitByCoinType(1),
+  getDefaultUnitByCoinType(2),
+  getDefaultUnitByCoinType(3),
+  getDefaultUnitByCoinType(6),
+  getFiatUnit('USD'),
+]
 
-stories.add('InputCurrency', () => <InputCurrency unit={unit} onChange={action('onChange')} />)
+class Wrapper extends Component<any, any> {
+  state = {
+    value: 0,
+    unit: units[0],
+  }
+
+  handleChange = (value, unit) => this.setState({ value, unit })
+
+  render() {
+    const { render } = this.props
+    const { value, unit } = this.state
+
+    return render({
+      onChange: this.handleChange,
+      unit,
+      value,
+    })
+  }
+}
+
+stories.add('InputCurrency', () => (
+  <Wrapper
+    render={({ value, unit, onChange }) => (
+      <InputCurrency value={value} unit={unit} units={units} onChange={onChange} />
+    )}
+  />
+))

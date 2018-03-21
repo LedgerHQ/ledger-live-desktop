@@ -66,17 +66,18 @@ export const colors = {
   pearl: '#ff0000',
 
   // new colors
-  identity: '#41ccb4',
-  wallet: '#4b84ff',
-  positiveGreen: '#96d071',
   alertRed: '#fa4352',
   black: '#000000',
   dark: '#1d2028',
-  smoke: '#666666',
+  fog: '#d8d8d8',
   graphite: '#767676',
   grey: '#999999',
-  fog: '#d8d8d8',
+  identity: '#41ccb4',
+  lightGraphite: '#fafafa',
   lightGrey: '#f9f9f9',
+  positiveGreen: '#96d071',
+  smoke: '#666666',
+  wallet: '#4b84ff',
   white: '#ffffff',
 }
 

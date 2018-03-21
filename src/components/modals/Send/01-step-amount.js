@@ -2,45 +2,47 @@
 
 import React, { Fragment } from 'react'
 
+import type { Unit } from '@ledgerhq/currencies'
 import type { Account, T } from 'types/common'
 import type { DoubleVal } from 'components/RequestAmount'
 
 import Box from 'components/base/Box'
-import SelectAccount from 'components/SelectAccount'
+import CheckBox from 'components/base/CheckBox'
+import { Textarea } from 'components/base/Input'
+import InputCurrency from 'components/base/InputCurrency'
 import Label from 'components/base/Label'
 import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
 import RecipientAddress from 'components/RecipientAddress'
 import RequestAmount from 'components/RequestAmount'
 import Select from 'components/base/Select'
-import Input, { Textarea } from 'components/base/Input'
+import SelectAccount from 'components/SelectAccount'
 import Spoiler from 'components/base/Spoiler'
-import CheckBox from 'components/base/CheckBox'
 
-type Props = {
+type PropsStepAmount = {
   account: Account | null,
   onChange: Function,
   recipientAddress: string,
   amount: DoubleVal,
+  fees: {
+    value: number,
+    unit: Unit | null,
+  },
   isRBF: boolean,
   t: T,
 }
 
-function StepAmount(props: Props) {
-  const { onChange, account, recipientAddress, t, amount, isRBF } = props
+function StepAmount(props: PropsStepAmount) {
+  const { onChange, fees, account, recipientAddress, t, amount, isRBF } = props
 
   return (
     <Box flow={4}>
-      {/*                                                                    */}
-      {/*                      ACCOUNT SELECTION                             */}
-      {/*                                                                    */}
+      {/* ACCOUNT SELECTION */}
       <Box flow={1}>
         <Label>{t('send:steps.amount.selectAccountDebit')}</Label>
         <SelectAccount onChange={onChange('account')} value={account} />
       </Box>
 
-      {/*                                                                    */}
-      {/*                      RECIPIENT ADDRESS                             */}
-      {/*                                                                    */}
+      {/* RECIPIENT ADDRESS */}
       <Box flow={1}>
         <Label>
           <span>{t('send:steps.amount.recipientAddress')}</span>
@@ -55,41 +57,31 @@ function StepAmount(props: Props) {
 
       {account && (
         <Fragment>
-          {/*                                                                */}
-          {/*                        AMOUNT                                  */}
-          {/*                                                                */}
+          {/* AMOUNT */}
           <Box flow={1}>
             <Label>{t('send:steps.amount.amount')}</Label>
             <RequestAmount account={account} onChange={onChange('amount')} value={amount} />
           </Box>
 
-          {/*                                                                */}
-          {/*                         FEES                                   */}
-          {/*                                                                */}
+          {/* FEES */}
           <Box flow={1}>
             <Label>
               <span>{t('send:steps.amount.fees')}</span>
               <LabelInfoTooltip ml={1} text={t('send:steps.amount.fees')} />
             </Label>
             <Box horizontal flow={5}>
-              <Select
-                style={{ width: 200 }}
-                items={[{ key: 'custom', name: 'Custom' }]}
-                value={{ key: 'custom', name: 'Custom' }}
-                renderSelected={item => item.name}
-                onChange={onChange('fees')}
+              <Fees
+                amount={fees.value}
+                unit={fees.unit}
+                account={account}
+                onChange={(value, unit) => onChange('fees')({ value, unit })}
               />
-              <Input containerProps={{ grow: true }} />
             </Box>
           </Box>
 
-          {/*                                                                */}
-          {/*                  ADVANCED OPTIONS                              */}
-          {/*                                                                */}
+          {/* ADVANCED OPTIONS */}
           <Spoiler title="Advanced options">
-            {/*                 */}
             {/* RBF transaction */}
-            {/*                 */}
             <Box horizontal align="center" flow={5}>
               <Box style={{ width: 200 }}>
                 <Label>
@@ -102,9 +94,7 @@ function StepAmount(props: Props) {
               </Box>
             </Box>
 
-            {/*         */}
             {/* Message */}
-            {/*         */}
             <Box horizontal align="flex-start" flow={5}>
               <Box style={{ width: 200 }}>
                 <Label>
@@ -119,6 +109,37 @@ function StepAmount(props: Props) {
         </Fragment>
       )}
     </Box>
+  )
+}
+
+type PropsFees = {
+  account: Account,
+  amount: number,
+  onChange: Function,
+  unit: Unit | null,
+}
+
+function Fees(props: PropsFees) {
+  const { onChange, account, unit, amount } = props
+  const { units } = account.currency
+
+  return (
+    <Fragment>
+      <Select
+        style={{ width: 200 }}
+        items={[{ key: 'custom', name: 'Custom' }]}
+        value={{ key: 'custom', name: 'Custom' }}
+        renderSelected={item => item.name}
+        onChange={() => onChange(amount, unit)}
+      />
+      <InputCurrency
+        units={units}
+        unit={unit || units[0]}
+        containerProps={{ grow: true }}
+        value={amount}
+        onChange={onChange}
+      />
+    </Fragment>
   )
 }
 

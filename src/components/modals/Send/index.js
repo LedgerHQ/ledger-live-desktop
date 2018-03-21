@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import get from 'lodash/get'
 
+import type { Unit } from '@ledgerhq/currencies'
 import type { T, Account } from 'types/common'
 import type { DoubleVal } from 'components/RequestAmount'
 
@@ -41,7 +42,10 @@ type State = {
   },
   account: Account | null,
   recipientAddress: string,
-  fees: number,
+  fees: {
+    value: number,
+    unit: Unit | null,
+  },
   isRBF: boolean,
 }
 
@@ -67,7 +71,10 @@ const INITIAL_STATE = {
       right: 0,
     },
   },
-  fees: 0,
+  fees: {
+    value: 0,
+    unit: null,
+  },
   isRBF: false,
 }
 
