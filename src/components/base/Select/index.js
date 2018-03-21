@@ -195,7 +195,7 @@ class Select extends PureComponent<Props> {
                   </Box>
                   <Box>
                     <IconSelected selected={selectedItem === item}>
-                      <IconCheck height={12} width={12} />
+                      <IconCheck size={12} />
                     </IconSelected>
                   </Box>
                 </Item>
@@ -258,7 +258,7 @@ class Select extends PureComponent<Props> {
                 <Box relative>
                   <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
                   <FloatingDown>
-                    <IconAngleDown width={16} height={16} />
+                    <IconAngleDown size={16} />
                   </FloatingDown>
                 </Box>
               ) : (
@@ -280,7 +280,7 @@ class Select extends PureComponent<Props> {
                     )}
                   </Box>
                   <FloatingDown>
-                    <IconAngleDown width={16} height={16} />
+                    <IconAngleDown size={16} />
                   </FloatingDown>
                 </TriggerBtn>
               )}

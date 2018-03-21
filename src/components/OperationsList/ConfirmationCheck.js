@@ -40,7 +40,7 @@ const ConfirmationCheck = ({
       }
     >
       <Container isConfirmed={isConfirmed}>
-        {isConfirmed ? <IconCheck width={12} /> : <IconClock width={12} />}
+        {isConfirmed ? <IconCheck size={12} /> : <IconClock size={12} />}
       </Container>
     </Tooltip>
   )

@@ -12,6 +12,7 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 import type { Account, Operation as OperationType, T } from 'types/common'
 
 import IconAngleDown from 'icons/AngleDown'
+
 import Box, { Card } from 'components/base/Box'
 import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
@@ -269,7 +270,7 @@ class OperationsList extends Component<Props> {
           {canShowMore && (
             <ShowMore>
               <span>{t('operationsList:showMore')}</span>
-              <IconAngleDown width={8} height={8} />
+              <IconAngleDown size={12} />
             </ShowMore>
           )}
         </Card>

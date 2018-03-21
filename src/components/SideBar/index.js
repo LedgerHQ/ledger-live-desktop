@@ -74,16 +74,16 @@ class SideBar extends PureComponent<Props> {
           <Box flow={4}>
             <CapsSubtitle>{t('sidebar:menu')}</CapsSubtitle>
             <Box px={4} flow={2}>
-              <Item icon={<IconPieChart height={16} width={16} />} linkTo="/">
+              <Item icon={<IconPieChart size={16} />} linkTo="/">
                 {t('dashboard:title')}
               </Item>
-              <Item icon={<IconArrowUp height={16} width={16} />} modal={MODAL_SEND}>
+              <Item icon={<IconArrowUp size={16} />} modal={MODAL_SEND}>
                 {t('send:title')}
               </Item>
-              <Item icon={<IconArrowDown height={16} width={16} />} modal={MODAL_RECEIVE}>
+              <Item icon={<IconArrowDown size={16} />} modal={MODAL_RECEIVE}>
                 {t('receive:title')}
               </Item>
-              <Item icon={<IconSettings height={16} width={16} />} linkTo="/settings">
+              <Item icon={<IconSettings size={16} />} linkTo="/settings">
                 {t('settings:title')}
               </Item>
             </Box>
@@ -93,7 +93,7 @@ class SideBar extends PureComponent<Props> {
               <Box grow>{t('sidebar:accounts')}</Box>
               <Tooltip render={() => t('addAccount:title')}>
                 <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
-                  <IconPlus height={14} width={14} />
+                  <IconPlus size={14} />
                 </PlusBtn>
               </Tooltip>
             </CapsSubtitle>

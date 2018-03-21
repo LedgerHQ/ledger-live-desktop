@@ -142,11 +142,7 @@ class AccountsOrder extends Component<Props, State> {
           <BoldToggle isBold={isActive}>{item.label}</BoldToggle>
         </Box>
         <OrderIcon isActive={isActive}>
-          {order === 'desc' ? (
-            <IconArrowUp height={14} width={14} />
-          ) : (
-            <IconArrowDown height={14} width={14} />
-          )}
+          {order === 'desc' ? <IconArrowUp size={14} /> : <IconArrowDown size={14} />}
         </OrderIcon>
       </DropDownItem>
     )
@@ -193,7 +189,7 @@ class AccountsOrder extends Component<Props, State> {
           horizontal
         >
           <Text color="dark">{t(`accountsOrder:${this.getCurrentValue() || 'balance'}`)}</Text>
-          <IconAngleDown height={7} width={8} />
+          <IconAngleDown size={16} />
         </Box>
       </DropDown>
     )
