@@ -21,7 +21,7 @@ export const AddressBox = styled(Box).attrs({
   bg: 'lightGrey',
   p: 2,
 })`
-  border-radius: 3px;
+  border-radius: ${p => p.theme.radii[1]}px;
   border: 1px solid ${p => p.theme.colors.fog};
   cursor: text;
   text-align: center;

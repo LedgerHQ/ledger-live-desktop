@@ -77,7 +77,7 @@ const Wrapper = styled(Tabbable).attrs({
   }),
 })`
   outline: none;
-  width: 570px;
+  width: 500px;
   z-index: 2;
 `
 

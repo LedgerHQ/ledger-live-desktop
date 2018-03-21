@@ -14,7 +14,7 @@ const Container = styled(Box).attrs({
   horizontal: true,
 })`
   background: ${p => p.theme.colors.white};
-  border-radius: 3px;
+  border-radius: ${p => p.theme.radii[1]}px;
   border: 1px solid ${p => p.theme.colors.fog};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: 40px;
@@ -49,7 +49,7 @@ export const Textarea = styled.textarea.attrs({
   min-height: 80px;
   color: ${p => p.theme.colors.dark};
   background: ${p => p.theme.colors.white};
-  border-radius: 3px;
+  border-radius: ${p => p.theme.radii[1]}px;
   border: 1px solid ${p => p.theme.colors.fog};
   box-shadow: none;
   &:focus {

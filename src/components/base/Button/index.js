@@ -19,7 +19,7 @@ const Base = styled.button.attrs({
   ${fontSize};
   ${fontWeight};
   ${fontFamily};
-  border-radius: 4px;
+  border-radius: ${p => p.theme.radii[1]}px;
   border: ${p =>
     p.primary ? 'none' : `2px solid ${p.disabled ? 'transparent' : p.theme.colors.grey}`};
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};

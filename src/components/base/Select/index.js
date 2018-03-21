@@ -63,15 +63,31 @@ const TriggerBtn = styled(Box).attrs({
 
 const Item = styled(Box).attrs({
   alignItems: 'center',
-  p: 2,
+  fontSize: 4,
+  ff: p => `Open Sans|${p.selected ? 'SemiBold' : 'Regular'}`,
+  px: 3,
+  py: 2,
+  color: 'dark',
 })`
   background: ${p => (p.highlighted ? p.theme.colors.lightGrey : p.theme.colors.white)};
+
+  ${p =>
+    p.first &&
+    `
+    border-top-left-radius: ${p.theme.radii[1]}px;
+    border-top-right-radius: ${p.theme.radii[1]}px;
+  `} ${p =>
+    p.last &&
+    `
+    border-bottom-left-radius: ${p.theme.radii[1]}px;
+    border-bottom-right-radius: ${p.theme.radii[1]}px;
+  `};
 `
 
 const Dropdown = styled(Box).attrs({
   mt: 1,
 })`
-  border-radius: 3px;
+  border-radius: ${p => p.theme.radii[1]}px;
   border: 1px solid ${p => p.theme.colors.fog};
   box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
   left: 0;
@@ -162,7 +178,14 @@ class Select extends PureComponent<Props> {
                 innerRef={n => (this._children[i] = n)}
                 {...getItemProps({ item })}
               >
-                <Item highlighted={i === highlightedIndex} horizontal flow={2}>
+                <Item
+                  first={i === 0}
+                  last={i === items.length - 1}
+                  highlighted={i === highlightedIndex}
+                  selected={selectedItem === item}
+                  horizontal
+                  flow={3}
+                >
                   <Box grow>
                     {renderItem ? (
                       renderItem(item)
@@ -235,7 +258,7 @@ class Select extends PureComponent<Props> {
                 <Box relative>
                   <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
                   <FloatingDown>
-                    <IconAngleDown width={10} height={10} />
+                    <IconAngleDown width={16} height={16} />
                   </FloatingDown>
                 </Box>
               ) : (
@@ -257,7 +280,7 @@ class Select extends PureComponent<Props> {
                     )}
                   </Box>
                   <FloatingDown>
-                    <IconAngleDown width={10} height={10} />
+                    <IconAngleDown width={16} height={16} />
                   </FloatingDown>
                 </TriggerBtn>
               )}

@@ -43,6 +43,13 @@ const Currencies = styled(Box)`
   right: -1px;
 `
 
+const Currency = styled(Box).attrs({
+  color: 'grey',
+  fontSize: 2,
+  pl: 2,
+  pr: 1,
+})``
+
 type Value = string | number
 
 type Props = {
@@ -133,8 +140,6 @@ class InputCurrency extends PureComponent<Props, State> {
       return null
     }
 
-    const renderItem = item => item.code
-
     return (
       <Currencies onClick={e => e.stopPropagation()}>
         <Select
@@ -144,8 +149,8 @@ class InputCurrency extends PureComponent<Props, State> {
           onChange={item => onChange(unformat(item, value), item)}
           items={units}
           value={unit}
-          renderItem={renderItem}
-          renderSelected={renderItem}
+          renderItem={item => item.code}
+          renderSelected={item => <Currency>{item.code}</Currency>}
         />
       </Currencies>
     )
