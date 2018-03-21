@@ -126,7 +126,7 @@ function Fees(props: PropsFees) {
   return (
     <Fragment>
       <Select
-        style={{ width: 200 }}
+        style={{ width: 156 }}
         items={[{ key: 'custom', name: 'Custom' }]}
         value={{ key: 'custom', name: 'Custom' }}
         renderSelected={item => item.name}

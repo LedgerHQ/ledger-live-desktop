@@ -47,7 +47,7 @@ class Spoiler extends PureComponent<Props, State> {
       <Fragment>
         <Box horizontal flow={1} color="dark" align="center">
           <IconContainer isOpened={isOpened}>
-            <IconChevronRight width={12} height={12} />
+            <IconChevronRight size={12} />
           </IconContainer>
           <Title onClick={this.toggle}>{title}</Title>
         </Box>

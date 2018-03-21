@@ -2,8 +2,8 @@
 
 import React from 'react'
 
-export default (props: Object) => (
-  <svg viewBox="0 0 16 16" {...props}>
+export default ({ size, ...p }: { size: number }) => (
+  <svg viewBox="0 0 16 16" height={size} width={size} {...p}>
     <path
       fill="currentColor"
       transform="matrix(1, 0, 0, -1, 0, 16)"

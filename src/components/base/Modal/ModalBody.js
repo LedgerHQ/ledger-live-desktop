@@ -41,7 +41,7 @@ class ModalBody extends PureComponent<Props, State> {
       <Body style={{ height: isHidden && deferHeight ? deferHeight : undefined }}>
         {onClose && (
           <CloseContainer onClick={onClose}>
-            <IconCross height={16} width={16} />
+            <IconCross size={16} />
           </CloseContainer>
         )}
         {(!isHidden || !deferHeight) && <Inner {...props}>{children}</Inner>}

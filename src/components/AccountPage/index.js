@@ -81,13 +81,13 @@ class AccountPage extends PureComponent<Props, State> {
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
             <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={1} alignItems="center">
-                <IconArrowUp width={12} />
+                <IconArrowUp size={12} />
                 <Box>{t('send:title')}</Box>
               </Box>
             </Button>
             <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
               <Box horizontal flow={1} alignItems="center">
-                <IconArrowDown width={12} />
+                <IconArrowDown size={12} />
                 <Box>{t('receive:title')}</Box>
               </Box>
             </Button>
@@ -97,7 +97,7 @@ class AccountPage extends PureComponent<Props, State> {
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
             >
               <Box align="center">
-                <IconControls width={16} />
+                <IconControls size={16} />
               </Box>
             </Button>
           </Box>

@@ -52,7 +52,7 @@ stories.add('Icons', () => (
       return (
         <IconWrapper onClick={copy(iconName)} key={iconName}>
           <div style={{ marginBottom: 15 }}>{iconName}</div>
-          <Component size={32} width={32} height={32} />
+          <Component size={32} />
         </IconWrapper>
       )
     })}

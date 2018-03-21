@@ -30,8 +30,11 @@ const InputCenter = styled(Box).attrs({
   ff: 'Rubik',
   color: 'graphite',
   fontSize: 4,
+  alignItems: 'center',
   justifyContent: 'center',
-})``
+})`
+  width: 30px;
+`
 
 const mapStateToProps = (state, { account }) => {
   const counterValue = getCounterValue(state)
@@ -258,23 +261,37 @@ export class RequestAmount extends PureComponent<Props, State> {
     })
 
     return (
-      <Box horizontal flow={2}>
-        <InputCurrency
-          unit={unit.left}
-          value={value.left}
-          onChange={this.handleChangeAmount('left')}
-          renderRight={<InputRight>{unit.left.code}</InputRight>}
-        />
-        <InputCenter>=</InputCenter>
-        <InputCurrency
-          unit={unit.right}
-          value={value.right}
-          onChange={this.handleChangeAmount('right')}
-          renderRight={<InputRight>{unit.right.code}</InputRight>}
-        />
-        <Button ml={5} primary onClick={this.handleClickMax}>
-          {t('common:max')}
-        </Button>
+      <Box horizontal flow={5}>
+        <Box horizontal>
+          <InputCurrency
+            containerProps={{
+              style: {
+                width: 156,
+              },
+            }}
+            unit={unit.left}
+            value={value.left}
+            onChange={this.handleChangeAmount('left')}
+            renderRight={<InputRight>{unit.left.code}</InputRight>}
+          />
+          <InputCenter>=</InputCenter>
+          <InputCurrency
+            containerProps={{
+              style: {
+                width: 156,
+              },
+            }}
+            unit={unit.right}
+            value={value.right}
+            onChange={this.handleChangeAmount('right')}
+            renderRight={<InputRight>{unit.right.code}</InputRight>}
+          />
+        </Box>
+        <Box grow justifyContent="flex-end">
+          <Button primary onClick={this.handleClickMax}>
+            {t('common:max')}
+          </Button>
+        </Box>
       </Box>
     )
   }

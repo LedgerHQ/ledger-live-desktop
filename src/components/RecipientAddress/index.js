@@ -72,7 +72,7 @@ class RecipientAddress extends PureComponent<Props, State> {
           onChange={onChange}
           renderRight={
             <Right onClick={this.handleClickQrCode}>
-              <IconQrCode width={16} height={16} />
+              <IconQrCode size={16} />
               {qrReaderOpened && (
                 <WrapperQrCode>
                   <QrReader
