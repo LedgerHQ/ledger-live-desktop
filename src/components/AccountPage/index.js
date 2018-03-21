@@ -158,7 +158,6 @@ class AccountPage extends PureComponent<Props, State> {
         </Box>
         <OperationsList
           account={account}
-          minConfirmations={account.settings.minConfirmations}
           operations={account.operations}
           title={t('account:lastOperations')}
         />
