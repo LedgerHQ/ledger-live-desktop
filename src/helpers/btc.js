@@ -34,9 +34,10 @@ export function computeOperation(addresses: Array<string>) {
     return {
       id: t.hash,
       address: t.amount > 0 ? t.inputs[0].address : t.outputs[0].address,
+      from: t.inputs.map(t => t.address),
+      to: t.outputs.map(t => t.address),
       amount,
       confirmations: t.confirmations,
-      hash: t.hash,
       receivedAt: t.received_at,
     }
   }
@@ -163,14 +164,14 @@ export async function getAccount({
 
         if (hasOperations) {
           const newOperations = txs.map(computeOperation(allAddresses))
-          const txHashs = operations.map(t => t.hash)
+          const txHashs = operations.map(t => t.id)
 
           balance = newOperations
-            .filter(t => !txHashs.includes(t.hash))
+            .filter(t => !txHashs.includes(t.id))
             .reduce((result, v) => result + v.amount, balance)
 
           lastAddress = getLastAddress(addresses, txs[0])
-          operations = uniqBy([...operations, ...newOperations], t => t.hash)
+          operations = uniqBy([...operations, ...newOperations], t => t.id)
 
           onProgress({
             balance,

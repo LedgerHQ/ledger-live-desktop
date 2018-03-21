@@ -15,7 +15,10 @@ import isEqual from 'lodash/isEqual'
 
 import type { Account, Operation as OperationType, T } from 'types/common'
 
+import { MODAL_OPERATION_DETAILS } from 'constants'
+
 import { getCounterValue } from 'reducers/settings'
+import { openModal } from 'reducers/modals'
 
 import IconAngleDown from 'icons/AngleDown'
 
@@ -115,6 +118,7 @@ const Operation = ({
   counterValues,
   minConfirmations,
   onAccountClick,
+  onOperationClick,
   t,
   tx,
   withAccount,
@@ -123,7 +127,8 @@ const Operation = ({
   counterValue: string,
   counterValues: Object | null,
   minConfirmations: number,
-  onAccountClick?: Function,
+  onAccountClick: Function,
+  onOperationClick: Function,
   t: T,
   tx: OperationType,
   withAccount?: boolean,
@@ -134,7 +139,7 @@ const Operation = ({
   const type = tx.amount > 0 ? 'from' : 'to'
 
   return (
-    <OperationRaw>
+    <OperationRaw onClick={() => onOperationClick({ operation: tx, account })}>
       <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
         <ConfirmationCheck
           type={type}
@@ -158,7 +163,10 @@ const Operation = ({
             horizontal
             flow={2}
             style={{ cursor: 'pointer' }}
-            onClick={() => onAccountClick && onAccountClick(account)}
+            onClick={e => {
+              e.stopPropagation()
+              onAccountClick(account)
+            }}
           >
             <Box
               alignItems="center"
@@ -203,6 +211,7 @@ const Operation = ({
 
 Operation.defaultProps = {
   onAccountClick: noop,
+  onOperationClick: noop,
   withAccount: false,
 }
 
@@ -211,12 +220,17 @@ const mapStateToProps = state => ({
   counterValues: state.counterValues,
 })
 
+const mapDispatchToProps = {
+  openModal,
+}
+
 type Props = {
   account: Account,
   canShowMore: boolean,
   counterValue: string,
   counterValues: Object,
   onAccountClick?: Function,
+  openModal: Function,
   operations: OperationType[],
   t: T,
   title?: string,
@@ -251,7 +265,9 @@ export class OperationsList extends Component<Props> {
     return !isEqual(this._hashCache, this.getHashCache(nextProps.operations))
   }
 
-  getHashCache = (operations: OperationType[]) => operations.map(t => t.hash)
+  getHashCache = (operations: OperationType[]) => operations.map(t => t.id)
+
+  handleClickOperation = (data: Object) => this.props.openModal(MODAL_OPERATION_DETAILS, data)
 
   _hashCache = null
 
@@ -285,9 +301,10 @@ export class OperationsList extends Component<Props> {
                     account={acc}
                     counterValue={counterValue}
                     counterValues={cValues}
-                    key={`{${tx.hash}${acc ? `-${acc.id}` : ''}`}
+                    key={`{${tx.id}${acc ? `-${acc.id}` : ''}`}
                     minConfirmations={acc.settings.minConfirmations}
                     onAccountClick={onAccountClick}
+                    onOperationClick={this.handleClickOperation}
                     t={t}
                     tx={tx}
                     withAccount={withAccount}
@@ -308,4 +325,4 @@ export class OperationsList extends Component<Props> {
   }
 }
 
-export default compose(translate(), connect(mapStateToProps))(OperationsList)
+export default compose(translate(), connect(mapStateToProps, mapDispatchToProps))(OperationsList)
