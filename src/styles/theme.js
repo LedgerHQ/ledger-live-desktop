@@ -75,7 +75,7 @@ export const colors = {
   identity: '#41ccb4',
   lightGraphite: '#fafafa',
   lightGrey: '#f9f9f9',
-  positiveGreen: '#96d071',
+  positiveGreen: '#66be54',
   smoke: '#666666',
   wallet: '#4b84ff',
   white: '#ffffff',

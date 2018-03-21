@@ -3,13 +3,19 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { translate } from 'react-i18next'
+import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+
 import get from 'lodash/get'
 import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Account, Operation as OperationType, T } from 'types/common'
+
+import { getCounterValue } from 'reducers/settings'
 
 import IconAngleDown from 'icons/AngleDown'
 
@@ -19,18 +25,10 @@ import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
 import ConfirmationCheck from './ConfirmationCheck'
 
-const DATE_COL_SIZE = 80
+const DATE_COL_SIZE = 100
 const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
 const CONFIRMATION_COL_SIZE = 44
-
-const Cap = styled(Text).attrs({
-  fontSize: 2,
-  color: 'graphite',
-  ff: 'Museo Sans|Bold',
-})`
-  text-transform: uppercase;
-`
 
 const Day = styled(Text).attrs({
   color: 'dark',
@@ -42,26 +40,15 @@ const Day = styled(Text).attrs({
 `
 
 const Hour = styled(Day).attrs({
-  color: 'graphite',
+  color: 'grey',
 })``
-
-const HeaderCol = ({ size, children, ...props }: { size?: number, children?: any }) => (
-  <Cell size={size} {...props}>
-    <Cap>{children}</Cap>
-  </Cell>
-)
-
-HeaderCol.defaultProps = {
-  size: undefined,
-  children: undefined,
-}
 
 const OperationRaw = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
   cursor: pointer;
-  border-bottom: 1px solid ${p => p.theme.colors.fog};
+  border-bottom: 1px solid ${p => p.theme.colors.lightGrey};
   height: 68px;
 
   &:last-child {
@@ -91,89 +78,124 @@ const ShowMore = styled(Box).attrs({
   p: 4,
   color: 'wallet',
 })`
-  border-top: 1px solid ${p => p.theme.colors.fog};
   cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
 `
 
+const AddressEllipsis = styled.div`
+  display: block;
+  flex-shrink: 1;
+  min-width: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+const Address = ({ value }: { value: string }) => {
+  const addrSize = value.length / 2
+
+  const left = value.slice(0, 10)
+  const right = value.slice(-addrSize)
+  const middle = value.slice(10, -addrSize)
+
+  return (
+    <Box horizontal color="smoke" ff="Open Sans" fontSize={3}>
+      <div>{left}</div>
+      <AddressEllipsis>{middle}</AddressEllipsis>
+      <div>{right}</div>
+    </Box>
+  )
+}
+
 const Operation = ({
   account,
-  t,
+  counterValue,
+  counterValues,
+  minConfirmations,
   onAccountClick,
+  t,
   tx,
   withAccount,
-  minConfirmations,
 }: {
-  account: Account | null,
-  t: T,
+  account: Account,
+  counterValue: string,
+  counterValues: Object | null,
+  minConfirmations: number,
   onAccountClick?: Function,
+  t: T,
   tx: OperationType,
   withAccount?: boolean,
-  minConfirmations: number,
 }) => {
-  const acc = account || tx.account
+  const { unit } = account
   const time = moment(tx.receivedAt)
-  const Icon = getIconByCoinType(get(tx, 'account.currency.coinType'))
+  const Icon = getIconByCoinType(get(account, 'currency.coinType'))
+  const type = tx.amount > 0 ? 'from' : 'to'
+
   return (
     <OperationRaw>
-      <Cell size={DATE_COL_SIZE} justifyContent="space-between">
+      <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
+        <ConfirmationCheck
+          type={type}
+          minConfirmations={minConfirmations}
+          confirmations={tx.confirmations}
+          t={t}
+        />
+      </Cell>
+      <Cell size={DATE_COL_SIZE} justifyContent="space-between" px={3}>
         <Box>
-          <Day>{time.format('DD MMM')}</Day>
+          <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke">
+            {t(`operationsList:${type}`)}
+          </Box>
           <Hour>{time.format('HH:mm')}</Hour>
         </Box>
       </Cell>
       {withAccount &&
-        acc && (
+        account && (
           <Cell
             size={ACCOUNT_COL_SIZE}
             horizontal
             flow={2}
             style={{ cursor: 'pointer' }}
-            onClick={() => onAccountClick && onAccountClick(acc)}
+            onClick={() => onAccountClick && onAccountClick(account)}
           >
-            <Box alignItems="center" justifyContent="center" style={{ color: acc.currency.color }}>
+            <Box
+              alignItems="center"
+              justifyContent="center"
+              style={{ color: account.currency.color }}
+            >
               {Icon && <Icon size={16} />}
             </Box>
-            <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
-              {acc.name}
+            <Box ff="Open Sans|SemiBold" fontSize={3} color="dark">
+              {account.name}
             </Box>
           </Cell>
         )}
-      <Cell
-        grow
-        shrink
-        style={{
-          display: 'block',
-        }}
-      >
-        <Box ff="Open Sans" fontSize={3} color="graphite">
-          {tx.amount > 0 ? t('operationsList:from') : t('operationsList:to')}
-        </Box>
-        <Box
-          color="dark"
-          ff="Open Sans"
-          fontSize={3}
-          style={{
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow: 'ellipsis',
-            display: 'block',
-          }}
-        >
-          {tx.address}
-        </Box>
+      <Cell grow shrink style={{ display: 'block' }}>
+        <Address value={tx.address} />
       </Cell>
-      <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-        <FormattedVal val={tx.amount} unit={acc && acc.unit} showCode fontSize={4} alwaysShowSign />
-      </Cell>
-      <Cell size={CONFIRMATION_COL_SIZE} px={0} align="center" justify="flex-start">
-        <ConfirmationCheck
-          minConfirmations={minConfirmations}
-          confirmations={tx.confirmations}
-          t={t}
-        />
+      <Cell size={AMOUNT_COL_SIZE}>
+        <Box alignItems="flex-end">
+          <FormattedVal
+            val={tx.amount}
+            unit={unit}
+            showCode
+            fontSize={4}
+            alwaysShowSign
+            color={tx.amount < 0 ? 'smoke' : 'positiveGreen'}
+          />
+          {counterValues && (
+            <FormattedVal
+              val={counterValues[time.format('YYYY-MM-DD')] * (tx.amount / 10 ** unit.magnitude)}
+              fiat={counterValue}
+              showCode
+              fontSize={3}
+              alwaysShowSign
+              color="grey"
+            />
+          )}
+        </Box>
       </Cell>
     </OperationRaw>
   )
@@ -184,10 +206,16 @@ Operation.defaultProps = {
   withAccount: false,
 }
 
+const mapStateToProps = state => ({
+  counterValue: getCounterValue(state),
+  counterValues: state.counterValues,
+})
+
 type Props = {
-  account: Account | null,
+  account: Account,
   canShowMore: boolean,
-  minConfirmations: number,
+  counterValue: string,
+  counterValues: Object,
   onAccountClick?: Function,
   operations: OperationType[],
   t: T,
@@ -195,21 +223,24 @@ type Props = {
   withAccount?: boolean,
 }
 
-class OperationsList extends Component<Props> {
+export class OperationsList extends Component<Props> {
   static defaultProps = {
     account: null,
     onAccountClick: noop,
     withAccount: false,
-    minConfirmations: 2,
     canShowMore: false,
   }
 
   shouldComponentUpdate(nextProps: Props) {
-    if (this.props.canShowMore !== nextProps.canShowMore) {
+    if (this.props.account !== nextProps.account) {
       return true
     }
 
-    if (this.props.minConfirmations !== nextProps.minConfirmations) {
+    if (this.props.withAccount !== nextProps.withAccount) {
+      return true
+    }
+
+    if (this.props.canShowMore !== nextProps.canShowMore) {
       return true
     }
 
@@ -228,7 +259,8 @@ class OperationsList extends Component<Props> {
     const {
       account,
       canShowMore,
-      minConfirmations,
+      counterValue,
+      counterValues,
       onAccountClick,
       operations,
       t,
@@ -240,43 +272,40 @@ class OperationsList extends Component<Props> {
 
     return (
       <Defer>
-        <Card flow={1} title={title} p={0}>
-          <Box horizontal pt={4}>
-            <HeaderCol size={DATE_COL_SIZE}>{t('operationsList:date')}</HeaderCol>
-            {withAccount && (
-              <HeaderCol size={ACCOUNT_COL_SIZE}>{t('operationsList:account')}</HeaderCol>
-            )}
-            <HeaderCol grow>{t('operationsList:address')}</HeaderCol>
-            <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-              {t('operationsList:amount')}
-            </HeaderCol>
-            <HeaderCol size={CONFIRMATION_COL_SIZE} px={0} />
-          </Box>
+        <Box>
+          <Card flow={1} title={title} p={0}>
+            <Box>
+              {operations.map(tx => {
+                const acc = account || tx.account
+                const unit = getDefaultUnitByCoinType(acc.coinType)
+                const cValues = get(counterValues, `${unit.code}-${counterValue}.byDate`, null)
 
-          <Box>
-            {operations.map(tx => (
-              <Operation
-                account={account}
-                t={t}
-                key={`{${tx.hash}${tx.account ? `-${tx.account.id}` : ''}`}
-                withAccount={withAccount}
-                onAccountClick={onAccountClick}
-                minConfirmations={minConfirmations}
-                tx={tx}
-              />
-            ))}
-          </Box>
-
+                return (
+                  <Operation
+                    account={acc}
+                    counterValue={counterValue}
+                    counterValues={cValues}
+                    key={`{${tx.hash}${acc ? `-${acc.id}` : ''}`}
+                    minConfirmations={acc.settings.minConfirmations}
+                    onAccountClick={onAccountClick}
+                    t={t}
+                    tx={tx}
+                    withAccount={withAccount}
+                  />
+                )
+              })}
+            </Box>
+          </Card>
           {canShowMore && (
             <ShowMore>
               <span>{t('operationsList:showMore')}</span>
               <IconAngleDown size={12} />
             </ShowMore>
           )}
-        </Card>
+        </Box>
       </Defer>
     )
   }
 }
 
-export default translate()(OperationsList)
+export default compose(translate(), connect(mapStateToProps))(OperationsList)
