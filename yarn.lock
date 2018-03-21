@@ -3560,9 +3560,9 @@ dotenv@^5.0.0, dotenv@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
 
-downshift@^1.30.1:
-  version "1.30.1"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.30.1.tgz#b5a8d771e7a412afb982eacae36a00a320e8cdee"
+downshift@^1.31.1:
+  version "1.31.1"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.31.1.tgz#86760be5d2ceb9f322746458fc085ea0b923805c"
 
 duplexer2@~0.1.4:
   version "0.1.4"
@@ -3637,7 +3637,7 @@ electron-builder-lib@20.5.1, electron-builder-lib@~20.5.0:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
-electron-builder@^20.5.1:
+electron-builder@^20.0.4, electron-builder@^20.5.1:
   version "20.5.1"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.5.1.tgz#8e6fba76dcd65aeabab60f15bd46f294ee04dd11"
   dependencies:
@@ -3801,7 +3801,7 @@ electron-webpack@1.13.0:
     webpack-merge "^4.1.1"
     yargs "^11.0.0"
 
-electron@1.8.4:
+electron@1.8.4, electron@^1.8.2:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.4.tgz#cca8d0e6889f238f55b414ad224f03e03b226a38"
   dependencies:
@@ -5324,9 +5324,9 @@ i18next-node-fs-backend@^1.0.0:
     js-yaml "3.5.4"
     json5 "0.5.0"
 
-i18next@^10.5.1:
-  version "10.5.1"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-10.5.1.tgz#f8e1ca4e15c440ebc3a9a5c3d015c3a6d2887890"
+i18next@^10.6.0:
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-10.6.0.tgz#90ffd9f9bc617f34b9a12e037260f524445f7684"
 
 iconv-lite@0.4, iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@^0.4.19, iconv-lite@~0.4.13:
   version "0.4.19"
@@ -6385,6 +6385,9 @@ ledger-test-library@KhalilBellakrid/ledger-test-library-nodejs#7d37482:
   dependencies:
     axios "^0.17.1"
     bindings "^1.3.0"
+    electron "^1.8.2"
+    electron-builder "^20.0.4"
+    electron-rebuild "^1.7.3"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 
@@ -7692,9 +7695,9 @@ pngjs@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.3.2.tgz#097c3c2a75feb223eadddea6bc9f0050cf830bc3"
 
-popper.js@^1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.13.0.tgz#e1e7ff65cc43f7cf9cf16f1510a75e81f84f4565"
+popper.js@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.1.tgz#b8815e5cda6f62fc2042e47618649f75866e6753"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -9958,11 +9961,11 @@ tinycolor2@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
-tippy.js@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.3.0.tgz#22505ce181f5049063c0201d310f4f0bfa794ce7"
+tippy.js@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.4.0.tgz#a5e28b63f0c9b06c29cd65c0ac629953b673e35e"
   dependencies:
-    popper.js "^1.13.0"
+    popper.js "^1.14.1"
 
 tmp@^0.0.33:
   version "0.0.33"

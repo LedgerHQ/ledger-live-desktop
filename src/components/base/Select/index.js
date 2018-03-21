@@ -17,6 +17,9 @@ import IconCheck from 'icons/Check'
 import IconAngleDown from 'icons/AngleDown'
 
 type Props = {
+  bg?: string,
+  flatLeft?: boolean,
+  flatRight?: boolean,
   fuseOptions?: Object,
   highlight?: boolean,
   items: Array<any>,
@@ -40,15 +43,18 @@ const TriggerBtn = styled(Box).attrs({
   pl: 3,
   pr: 5,
 })`
-  height: 40px;
   ${space};
+  height: 40px;
+  background: ${p => p.bg || p.theme.colors.white};
+  border-bottom-left-radius: ${p => (p.flatLeft ? 0 : p.theme.radii[1])}px;
+  border-bottom-right-radius: ${p => (p.flatRight ? 0 : p.theme.radii[1])}px;
+  border-top-left-radius: ${p => (p.flatLeft ? 0 : p.theme.radii[1])}px;
+  border-top-right-radius: ${p => (p.flatRight ? 0 : p.theme.radii[1])}px;
   border: 1px solid ${p => p.theme.colors.fog};
-  border-radius: 3px;
+  color: ${p => p.theme.colors.graphite};
+  cursor: pointer;
   display: flex;
   width: 100%;
-  color: ${p => p.theme.colors.graphite};
-  background: ${p => p.theme.colors.white};
-  cursor: pointer;
   &:focus {
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
@@ -103,6 +109,9 @@ const IconSelected = styled(Box).attrs({
 
 class Select extends PureComponent<Props> {
   static defaultProps = {
+    bg: undefined,
+    flatLeft: false,
+    flatRight: false,
     itemToString: (item: Object) => item && item.name,
     keyProp: undefined,
     maxHeight: 300,
@@ -181,6 +190,8 @@ class Select extends PureComponent<Props> {
 
   render() {
     const {
+      flatLeft,
+      flatRight,
       items,
       searchable,
       itemToString,
@@ -201,7 +212,7 @@ class Select extends PureComponent<Props> {
         onChange={onChange}
         render={({
           getInputProps,
-          getButtonProps,
+          getToggleButtonProps,
           getRootProps,
           isOpen,
           inputValue,
@@ -229,11 +240,14 @@ class Select extends PureComponent<Props> {
                 </Box>
               ) : (
                 <TriggerBtn
-                  {...getButtonProps()}
-                  tabIndex={0}
-                  horizontal
+                  {...getToggleButtonProps()}
+                  bg={props.bg}
                   alignItems="center"
+                  flatLeft={flatLeft}
+                  flatRight={flatRight}
                   flow={2}
+                  horizontal
+                  tabIndex={0}
                 >
                   <Box grow>
                     {selectedItem && renderSelected ? (
