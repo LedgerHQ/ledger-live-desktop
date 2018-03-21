@@ -130,7 +130,7 @@ const Operation = ({
 }) => {
   const { unit } = account
   const time = moment(tx.receivedAt)
-  const Icon = getIconByCoinType(get(account, 'currency.coinType'))
+  const Icon = getIconByCoinType(account.currency.coinType)
   const type = tx.amount > 0 ? 'from' : 'to'
 
   return (
