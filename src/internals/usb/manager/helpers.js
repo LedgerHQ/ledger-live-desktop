@@ -205,7 +205,9 @@ export async function getFirmwareInfo(transport: Transport<*>) {
 function log(namespace: string, str: string = '', color?: string) {
   namespace = namespace.padEnd(15)
   const coloredNamespace = color ? chalk[color](namespace) : namespace
-  console.log(`${chalk.bold(`> ${coloredNamespace}`)} ${str}`) // eslint-disable-line no-console
+  if (__DEV__) {
+    console.log(`${chalk.bold(`> ${coloredNamespace}`)} ${str}`) // eslint-disable-line no-console
+  }
 }
 
 /**
