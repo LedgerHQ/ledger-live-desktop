@@ -17,9 +17,13 @@ import Modal, { ModalBody } from 'components/base/Modal'
 
 import ManagerApp from './ManagerApp'
 
+const ICONS_FALLBACK = {
+  bitcoin_testnet: 'bitcoin',
+}
+
 const List = styled(Box).attrs({
   horizontal: true,
-  m: -1,
+  m: -2,
 })`
   flex-wrap: wrap;
 `
@@ -36,6 +40,7 @@ type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
 
 type LedgerApp = {
   name: string,
+  icon: string,
   app: Object,
 }
 
@@ -107,6 +112,7 @@ class ManagerPage extends PureComponent<Props, State> {
         <ManagerApp
           key={c.name}
           name={c.name}
+          icon={ICONS_FALLBACK[c.icon] || c.icon}
           onInstall={this.handleInstall(c)}
           onUninstall={this.handleUninstall(c)}
         />
