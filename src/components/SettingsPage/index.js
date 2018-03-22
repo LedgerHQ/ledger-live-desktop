@@ -18,6 +18,7 @@ import Tabs from 'components/base/Tabs'
 
 import TabDisplay from './Display'
 import TabProfile from './Profile'
+import TabTools from './Tools'
 import TabMoney from './Money'
 
 const mapStateToProps = state => ({
@@ -103,9 +104,8 @@ class SettingsPage extends PureComponent<Props, State> {
             },
             {
               key: 'tools',
-              isDisabled: true,
               title: t('settings:tabs.tools'),
-              render: () => <div>{'Outils'}</div>,
+              render: () => <TabTools {...props} />,
             },
             {
               key: 'blockchain',

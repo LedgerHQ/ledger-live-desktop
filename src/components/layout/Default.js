@@ -13,6 +13,7 @@ import GrowScroll from 'components/base/GrowScroll'
 
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
+import ManagerPage from 'components/ManagerPage'
 import SettingsPage from 'components/SettingsPage'
 
 import AppRegionDrag from 'components/AppRegionDrag'
@@ -81,6 +82,7 @@ class Default extends Component<Props> {
               <Container innerRef={n => (this._scrollContainer = n)} onScroll={this.handleScroll}>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
+                <Route path="/manager" component={ManagerPage} />
                 <Route path="/account/:id" component={AccountPage} />
               </Container>
             </Box>

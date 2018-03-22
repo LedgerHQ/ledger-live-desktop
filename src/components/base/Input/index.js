@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { fontSize } from 'styled-system'
+import { fontSize, space } from 'styled-system'
 
 import noop from 'lodash/noop'
 
@@ -14,7 +14,7 @@ const Container = styled(Box).attrs({
   horizontal: true,
 })`
   background: ${p => p.theme.colors.white};
-  border-radius: 3px;
+  border-radius: ${p => p.theme.radii[1]}px;
   border: 1px solid ${p => p.theme.colors.fog};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: 40px;
@@ -38,6 +38,26 @@ const Base = styled.input.attrs({
   }
 `
 
+export const Textarea = styled.textarea.attrs({
+  p: 2,
+  fontSize: 4,
+  ff: p => p.ff || 'Open Sans|SemiBold',
+})`
+  ${space};
+  ${fontFamily};
+  ${fontSize};
+  min-height: 80px;
+  color: ${p => p.theme.colors.dark};
+  background: ${p => p.theme.colors.white};
+  border-radius: ${p => p.theme.radii[1]}px;
+  border: 1px solid ${p => p.theme.colors.fog};
+  box-shadow: none;
+  &:focus {
+    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
+    outline: none;
+  }
+`
+
 type Props = {
   keepEvent?: boolean,
   onBlur: Function,
@@ -45,6 +65,7 @@ type Props = {
   onFocus: Function,
   renderLeft?: any,
   renderRight?: any,
+  containerProps?: Object,
 }
 
 type State = {
@@ -93,10 +114,10 @@ class Input extends PureComponent<Props, State> {
 
   render() {
     const { isFocus } = this.state
-    const { renderLeft, renderRight } = this.props
+    const { renderLeft, renderRight, containerProps } = this.props
 
     return (
-      <Container onClick={this.handleClick} isFocus={isFocus} shrink>
+      <Container onClick={this.handleClick} isFocus={isFocus} shrink {...containerProps}>
         {renderLeft}
         <Box px={3} grow shrink>
           <Base

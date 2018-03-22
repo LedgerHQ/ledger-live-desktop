@@ -191,10 +191,10 @@ class DashboardPage extends PureComponent<Props, State> {
             </Box>
             <OperationsList
               canShowMore
-              title={t('dashboard:recentActivity')}
-              withAccounts
-              operations={allOperations}
               onAccountClick={account => push(`/account/${account.id}`)}
+              operations={allOperations}
+              title={t('dashboard:recentActivity')}
+              withAccount
             />
           </Fragment>
         )}

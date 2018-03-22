@@ -12,29 +12,24 @@ import fontFamily from 'styles/styled/fontFamily'
 const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
   fontSize: 3,
-  px: p => (p.small ? 2 : 4),
+  px: p => (p.primary ? (p.small ? 2 : 4) : 1),
 })`
   ${space};
   ${color};
   ${fontSize};
   ${fontWeight};
   ${fontFamily};
-  border-radius: 4px;
-  border: ${p =>
-    p.primary ? 'none' : `2px solid ${p.disabled ? 'transparent' : p.theme.colors.grey}`};
+  border-radius: ${p => p.theme.radii[1]}px;
+  border: none;
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
   height: ${p => (p.small ? 30 : 40)}px;
   outline: none;
 
   &:hover {
-    background: ${p => (p.primary ? lighten(p.theme.colors.wallet, 0.05) : '')};
+    background: ${p => (p.disabled ? '' : p.primary ? lighten(p.theme.colors.wallet, 0.05) : '')};
   }
 
   &:active {
-    border: ${p =>
-      p.primary
-        ? 'none'
-        : `2px solid ${p.disabled ? 'transparent' : darken(p.theme.colors.grey, 0.2)}`};
     color: ${p => (p.primary ? '' : darken(p.theme.colors.grey, 0.2))};
     background: ${p => (p.primary ? darken(p.theme.colors.wallet, 0.1) : '')};
   }

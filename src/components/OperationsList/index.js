@@ -3,33 +3,35 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { translate } from 'react-i18next'
+import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+
 import get from 'lodash/get'
 import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
-import type { Operation as OperationType, T } from 'types/common'
+import type { Account, Operation as OperationType, T } from 'types/common'
+
+import { MODAL_OPERATION_DETAILS } from 'constants'
+
+import { getCounterValue } from 'reducers/settings'
+import { openModal } from 'reducers/modals'
 
 import IconAngleDown from 'icons/AngleDown'
+
 import Box, { Card } from 'components/base/Box'
 import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
 import ConfirmationCheck from './ConfirmationCheck'
 
-const DATE_COL_SIZE = 80
+const DATE_COL_SIZE = 100
 const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
 const CONFIRMATION_COL_SIZE = 44
-
-const Cap = styled(Text).attrs({
-  fontSize: 2,
-  color: 'graphite',
-  ff: 'Museo Sans|Bold',
-})`
-  text-transform: uppercase;
-`
 
 const Day = styled(Text).attrs({
   color: 'dark',
@@ -41,26 +43,15 @@ const Day = styled(Text).attrs({
 `
 
 const Hour = styled(Day).attrs({
-  color: 'graphite',
+  color: 'grey',
 })``
-
-const HeaderCol = ({ size, children, ...props }: { size?: number, children?: any }) => (
-  <Cell size={size} {...props}>
-    <Cap>{children}</Cap>
-  </Cell>
-)
-
-HeaderCol.defaultProps = {
-  size: undefined,
-  children: undefined,
-}
 
 const OperationRaw = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
   cursor: pointer;
-  border-bottom: 1px solid ${p => p.theme.colors.fog};
+  border-bottom: 1px solid ${p => p.theme.colors.lightGrey};
   height: 68px;
 
   &:last-child {
@@ -90,96 +81,136 @@ const ShowMore = styled(Box).attrs({
   p: 4,
   color: 'wallet',
 })`
-  border-top: 1px solid ${p => p.theme.colors.fog};
   cursor: pointer;
   &:hover {
     text-decoration: underline;
   }
 `
 
-const Operation = ({
-  t,
-  onAccountClick,
-  tx,
-  withAccounts,
-  minConfirmations,
-}: {
-  t: T,
-  onAccountClick?: Function,
-  tx: OperationType,
-  withAccounts?: boolean,
-  minConfirmations: number,
-}) => {
-  const time = moment(tx.receivedAt)
-  const Icon = getIconByCoinType(get(tx, 'account.currency.coinType'))
+const AddressEllipsis = styled.div`
+  display: block;
+  flex-shrink: 1;
+  min-width: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+const Address = ({ value }: { value: string }) => {
+  const addrSize = value.length / 2
+
+  const left = value.slice(0, 10)
+  const right = value.slice(-addrSize)
+  const middle = value.slice(10, -addrSize)
+
   return (
-    <OperationRaw>
-      <Cell size={DATE_COL_SIZE} justifyContent="space-between">
+    <Box horizontal color="smoke" ff="Open Sans" fontSize={3}>
+      <div>{left}</div>
+      <AddressEllipsis>{middle}</AddressEllipsis>
+      <div>{right}</div>
+    </Box>
+  )
+}
+
+const Operation = ({
+  account,
+  counterValue,
+  counterValues,
+  minConfirmations,
+  onAccountClick,
+  onOperationClick,
+  t,
+  tx,
+  withAccount,
+}: {
+  account: Account,
+  counterValue: string,
+  counterValues: Object | null,
+  minConfirmations: number,
+  onAccountClick: Function,
+  onOperationClick: Function,
+  t: T,
+  tx: OperationType,
+  withAccount?: boolean,
+}) => {
+  const { unit } = account
+  const time = moment(tx.receivedAt)
+  const Icon = getIconByCoinType(account.currency.coinType)
+  const type = tx.amount > 0 ? 'from' : 'to'
+  const cValue = counterValues
+    ? counterValues[time.format('YYYY-MM-DD')] * (tx.amount / 10 ** unit.magnitude)
+    : null
+
+  return (
+    <OperationRaw
+      onClick={() =>
+        onOperationClick({ operation: tx, account, type, counterValue: cValue, fiat: counterValue })
+      }
+    >
+      <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
+        <ConfirmationCheck
+          type={type}
+          minConfirmations={minConfirmations}
+          confirmations={tx.confirmations}
+          t={t}
+        />
+      </Cell>
+      <Cell size={DATE_COL_SIZE} justifyContent="space-between" px={3}>
         <Box>
-          <Day>{time.format('DD MMM')}</Day>
+          <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke">
+            {t(`operationsList:${type}`)}
+          </Box>
           <Hour>{time.format('HH:mm')}</Hour>
         </Box>
       </Cell>
-      {withAccounts &&
-        tx.account && (
+      {withAccount &&
+        account && (
           <Cell
             size={ACCOUNT_COL_SIZE}
             horizontal
             flow={2}
             style={{ cursor: 'pointer' }}
-            onClick={() => onAccountClick && onAccountClick(tx.account)}
+            onClick={e => {
+              e.stopPropagation()
+              onAccountClick(account)
+            }}
           >
             <Box
               alignItems="center"
               justifyContent="center"
-              style={{ color: tx.account.currency.color }}
+              style={{ color: account.currency.color }}
             >
               {Icon && <Icon size={16} />}
             </Box>
-            <Box ff="Open Sans|SemiBold" fontSize={4} color="dark">
-              {tx.account.name}
+            <Box ff="Open Sans|SemiBold" fontSize={3} color="dark">
+              {account.name}
             </Box>
           </Cell>
         )}
-      <Cell
-        grow
-        shrink
-        style={{
-          display: 'block',
-        }}
-      >
-        <Box ff="Open Sans" fontSize={3} color="graphite">
-          {tx.amount > 0 ? t('operationsList:from') : t('operationsList:to')}
-        </Box>
-        <Box
-          color="dark"
-          ff="Open Sans"
-          fontSize={3}
-          style={{
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow: 'ellipsis',
-            display: 'block',
-          }}
-        >
-          {tx.address}
-        </Box>
+      <Cell grow shrink style={{ display: 'block' }}>
+        <Address value={tx.address} />
       </Cell>
-      <Cell size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-        <FormattedVal
-          val={tx.amount}
-          unit={get(tx, 'account.unit')}
-          showCode
-          fontSize={4}
-          alwaysShowSign
-        />
-      </Cell>
-      <Cell size={CONFIRMATION_COL_SIZE} px={0} align="center" justify="flex-start">
-        <ConfirmationCheck
-          minConfirmations={minConfirmations}
-          confirmations={tx.confirmations}
-          t={t}
-        />
+      <Cell size={AMOUNT_COL_SIZE}>
+        <Box alignItems="flex-end">
+          <FormattedVal
+            val={tx.amount}
+            unit={unit}
+            showCode
+            fontSize={4}
+            alwaysShowSign
+            color={tx.amount < 0 ? 'smoke' : 'positiveGreen'}
+          />
+          {cValue && (
+            <FormattedVal
+              val={cValue}
+              fiat={counterValue}
+              showCode
+              fontSize={3}
+              alwaysShowSign
+              color="grey"
+            />
+          )}
+        </Box>
       </Cell>
     </OperationRaw>
   )
@@ -187,33 +218,50 @@ const Operation = ({
 
 Operation.defaultProps = {
   onAccountClick: noop,
-  withAccounts: false,
+  onOperationClick: noop,
+  withAccount: false,
+}
+
+const mapStateToProps = state => ({
+  counterValue: getCounterValue(state),
+  counterValues: state.counterValues,
+})
+
+const mapDispatchToProps = {
+  openModal,
 }
 
 type Props = {
-  t: T,
-  onAccountClick?: Function,
-  operations: OperationType[],
-  withAccounts?: boolean,
-  minConfirmations: number,
-  title?: string,
+  account: Account,
   canShowMore: boolean,
+  counterValue: string,
+  counterValues: Object,
+  onAccountClick?: Function,
+  openModal: Function,
+  operations: OperationType[],
+  t: T,
+  title?: string,
+  withAccount?: boolean,
 }
 
-class OperationsList extends Component<Props> {
+export class OperationsList extends Component<Props> {
   static defaultProps = {
+    account: null,
     onAccountClick: noop,
-    withAccounts: false,
-    minConfirmations: 2,
+    withAccount: false,
     canShowMore: false,
   }
 
   shouldComponentUpdate(nextProps: Props) {
-    if (this.props.canShowMore !== nextProps.canShowMore) {
+    if (this.props.account !== nextProps.account) {
       return true
     }
 
-    if (this.props.minConfirmations !== nextProps.minConfirmations) {
+    if (this.props.withAccount !== nextProps.withAccount) {
+      return true
+    }
+
+    if (this.props.canShowMore !== nextProps.canShowMore) {
       return true
     }
 
@@ -224,61 +272,64 @@ class OperationsList extends Component<Props> {
     return !isEqual(this._hashCache, this.getHashCache(nextProps.operations))
   }
 
-  getHashCache = (operations: OperationType[]) => operations.map(t => t.hash)
+  getHashCache = (operations: OperationType[]) => operations.map(t => t.id)
+
+  handleClickOperation = (data: Object) => this.props.openModal(MODAL_OPERATION_DETAILS, data)
 
   _hashCache = null
 
   render() {
     const {
-      operations,
-      title,
-      withAccounts,
-      onAccountClick,
-      minConfirmations,
+      account,
       canShowMore,
+      counterValue,
+      counterValues,
+      onAccountClick,
+      operations,
       t,
+      title,
+      withAccount,
     } = this.props
 
     this._hashCache = this.getHashCache(operations)
 
     return (
       <Defer>
-        <Card flow={1} title={title} p={0}>
-          <Box horizontal pt={4}>
-            <HeaderCol size={DATE_COL_SIZE}>{t('operationsList:date')}</HeaderCol>
-            {withAccounts && (
-              <HeaderCol size={ACCOUNT_COL_SIZE}>{t('operationsList:account')}</HeaderCol>
-            )}
-            <HeaderCol grow>{t('operationsList:address')}</HeaderCol>
-            <HeaderCol size={AMOUNT_COL_SIZE} justifyContent="flex-end">
-              {t('operationsList:amount')}
-            </HeaderCol>
-            <HeaderCol size={CONFIRMATION_COL_SIZE} px={0} />
-          </Box>
+        <Box>
+          <Card flow={1} title={title} p={0}>
+            <Box>
+              {operations.map(tx => {
+                const acc = account || tx.account
+                const unit = getDefaultUnitByCoinType(acc.coinType)
+                const cValues = get(counterValues, `${unit.code}-${counterValue}.byDate`, null)
 
-          <Box>
-            {operations.map(trans => (
-              <Operation
-                t={t}
-                key={`{${trans.hash}-${trans.account ? trans.account.id : ''}`}
-                withAccounts={withAccounts}
-                onAccountClick={onAccountClick}
-                minConfirmations={minConfirmations}
-                tx={trans}
-              />
-            ))}
-          </Box>
-
+                return (
+                  <Operation
+                    account={acc}
+                    counterValue={counterValue}
+                    counterValues={cValues}
+                    key={`${tx.id}${acc ? `-${acc.id}` : ''}`}
+                    minConfirmations={acc.settings.minConfirmations}
+                    onAccountClick={onAccountClick}
+                    onOperationClick={this.handleClickOperation}
+                    t={t}
+                    tx={tx}
+                    withAccount={withAccount}
+                  />
+                )
+              })}
+            </Box>
+          </Card>
           {canShowMore && (
             <ShowMore>
               <span>{t('operationsList:showMore')}</span>
-              <IconAngleDown width={8} height={8} />
+              <IconAngleDown size={12} />
             </ShowMore>
           )}
-        </Card>
+        </Box>
       </Defer>
     )
   }
 }
 
-export default translate()(OperationsList)
+export default compose(translate(), connect(mapStateToProps, mapDispatchToProps))(OperationsList)

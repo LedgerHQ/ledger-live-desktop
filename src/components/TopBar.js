@@ -152,10 +152,10 @@ class TopBar extends PureComponent<Props, State> {
           <Box grow horizontal flow={4}>
             <GlobalSearch t={t} />
             <Box justifyContent="center">
-              <IconDevices height={16} width={16} />
+              <IconDevices size={16} />
             </Box>
             <Box justifyContent="center" relative>
-              <IconActivity height={16} width={16} />
+              <IconActivity size={16} />
               {hasAccounts && <Activity progress={sync.progress} fail={sync.fail} />}
             </Box>
             <Box justifyContent="center">
@@ -168,14 +168,14 @@ class TopBar extends PureComponent<Props, State> {
                 {
                   key: 'profile',
                   label: t('common:editProfile'),
-                  icon: <IconUser height={16} width={16} />,
+                  icon: <IconUser size={16} />,
                 },
                 ...(hasPassword
                   ? [
                       {
                         key: 'lock',
                         label: t('common:lockApplication'),
-                        icon: <IconUser height={16} width={16} />,
+                        icon: <IconUser size={16} />,
                         onClick: this.handleLock,
                       },
                     ]
@@ -196,7 +196,7 @@ class TopBar extends PureComponent<Props, State> {
               offsetTop={-2}
             >
               <Box>{'Khalil Benihoud'}</Box>
-              <IconAngleDown height={7} width={8} />
+              <IconAngleDown size={12} />
             </DropDown>
           </Box>
         </Inner>

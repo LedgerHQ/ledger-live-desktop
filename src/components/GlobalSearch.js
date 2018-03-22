@@ -61,7 +61,7 @@ class GlobalSearch extends PureComponent<Props, State> {
     return (
       <Container isFocused={isFocused}>
         <Box justifyContent="center" onClick={this.focusInput} pr={2}>
-          <IconSearch height={16} width={16} />
+          <IconSearch size={16} />
         </Box>
         <Input
           placeholder={t('common:search')}

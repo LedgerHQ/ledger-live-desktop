@@ -2,47 +2,35 @@
 
 import React from 'react'
 import noop from 'lodash/noop'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import { Tabbable } from 'components/base/Box'
-import IconCheck from 'icons/Check'
-
-const bounce = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-`
 
 const Base = styled(Tabbable).attrs({
-  color: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
+  bg: p => (p.isChecked ? 'wallet' : 'fog'),
+  horizontal: true,
+  align: 'center',
 })`
+  backround: red;
+  width: 50px;
+  height: 24px;
+  border-radius: 16px;
+  transition: 250ms linear background-color;
   cursor: pointer;
-  outline: none;
-  border-radius: 3px;
-  border: 1px solid transparent;
-  background-color: ${p => (p.isChecked ? p.theme.colors.wallet : p.theme.colors.white)};
-  box-shadow: 0 0 0 ${p => (p.isChecked ? 4 : 1)}px
-    ${p => (p.isChecked ? p.theme.colors.lightGrey : p.theme.colors.graphite)};
-  font-size: 7px;
-  height: 19px;
-  width: 19px;
-  transition: all ease-in 0.1s;
-
   &:focus {
-    border-color: ${p => p.theme.colors.fog};
+    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 2px;
+    outline: none;
   }
 `
 
-const IconWrapper = styled(IconCheck)`
-  animation: ${bounce} ease-in-out 350ms;
+const Ball = styled.div`
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  transition: 250ms ease-in-out transform;
+  transform: translate3d(${p => (p.isChecked ? '28px' : '0')}, 0, 0);
 `
 
 type Props = {
@@ -54,7 +42,7 @@ function CheckBox(props: Props) {
   const { isChecked, onChange, ...p } = props
   return (
     <Base isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} {...p}>
-      {isChecked && <IconWrapper height={7} width={7} />}
+      <Ball isChecked={isChecked} />
     </Base>
   )
 }

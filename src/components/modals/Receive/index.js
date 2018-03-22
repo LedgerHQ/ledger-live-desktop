@@ -74,7 +74,7 @@ class ReceiveModal extends PureComponent<Props, State> {
           const account = this.getAccount(data)
 
           return (
-            <ModalBody onClose={onClose} flow={3}>
+            <ModalBody onClose={onClose} flow={3} deferHeight={282}>
               <ModalTitle>{t('receive:title')}</ModalTitle>
               <ModalContent>
                 <Box flow={1}>
@@ -88,7 +88,7 @@ class ReceiveModal extends PureComponent<Props, State> {
                       <RequestAmount
                         account={account}
                         value={amount}
-                        onChange={this.handleChangeInput('amount')}
+                        onChange={v => this.handleChangeInput('amount')(v.values)}
                       />
                     </Box>
                     <ReceiveBox account={account} amount={amount.left} />

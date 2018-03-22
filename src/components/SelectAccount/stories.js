@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { storiesOf } from '@storybook/react'
 import Chance from 'chance'
 import { getCurrencyByCoinType, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
@@ -29,11 +29,7 @@ export const accounts = [...Array(20)].map(() => ({
   },
 }))
 
-type State = {
-  value: any,
-}
-
-class Wrapper extends PureComponent<any, State> {
+class Wrapper extends Component<any, any> {
   state = {
     value: '',
   }

@@ -195,7 +195,7 @@ class SettingsAccount extends PureComponent<Props, State> {
                   {!editName &&
                     nameHovered && (
                       <Box onClick={this.handleEditName(true)} style={{ cursor: 'pointer' }}>
-                        <IconEdit height={16} width={16} />
+                        <IconEdit size={16} />
                       </Box>
                     )}
                 </Box>

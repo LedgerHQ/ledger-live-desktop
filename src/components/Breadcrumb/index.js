@@ -25,13 +25,20 @@ class Breadcrumb extends PureComponent<Props> {
   render() {
     const { items, currentStep, ...props } = this.props
     return (
-      <Wrapper {...props}>
-        {items.map((item, i) => (
-          <Step key={i} isActive={i < parseInt(currentStep, 10)} isFirst={i === 0} number={i + 1}>
-            {item.label}
-          </Step>
-        ))}
-      </Wrapper>
+      <Box {...props}>
+        <Wrapper>
+          {items.map((item, i) => (
+            <Step
+              key={i}
+              isActive={i <= parseInt(currentStep, 10)}
+              isFirst={i === 0}
+              number={i + 1}
+            >
+              {item.label}
+            </Step>
+          ))}
+        </Wrapper>
+      </Box>
     )
   }
 }

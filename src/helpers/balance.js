@@ -89,6 +89,11 @@ export function getBalanceHistoryForAccount({
       balance = b / 10 ** unit.magnitude * counterVals[date]
     }
 
+    if (isNaN(balance)) {
+      console.warn(`This should not happen. Cant calculate balance for ${date}`) // eslint-disable-line no-console
+      return { date, balance: 0 }
+    }
+
     return { date, balance }
   })
 }

@@ -1,31 +1,32 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import QrReader from 'react-qr-reader'
 import noop from 'lodash/noop'
+
+import { radii } from 'styles/theme'
 
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
 
 import IconQrCode from 'icons/QrCode'
 
-const WrapperIcon = ({ onClick }: { onClick: Function }) => (
-  <Box color="graphite" style={{ position: 'absolute', right: 15 }}>
-    <IconQrCode height={30} width={30} style={{ cursor: 'pointer' }} onClick={onClick} />
-  </Box>
-)
-
-const InputAddress = styled(Input).attrs({
-  type: 'text',
+const Right = styled(Box).attrs({
+  bg: 'lightGrey',
+  px: 3,
+  align: 'center',
+  justify: 'center',
 })`
-  padding-right: ${p => p.withQrCode && '55px'};
+  border-top-right-radius: ${radii[1]}px;
+  border-bottom-right-radius: ${radii[1]}px;
+  border-left: 1px solid ${p => p.theme.colors.fog};
 `
 
 const WrapperQrCode = styled(Box)`
   margin-top: 10px;
   position: absolute;
-  right: 15px;
+  right: 0;
   top: 100%;
 `
 
@@ -65,21 +66,25 @@ class RecipientAddress extends PureComponent<Props, State> {
 
     return (
       <Box relative justifyContent="center">
-        <InputAddress value={value} withQrCode={withQrCode} onChange={onChange} />
-        {withQrCode && (
-          <Fragment>
-            <WrapperIcon onClick={this.handleClickQrCode} />
-            {qrReaderOpened && (
-              <WrapperQrCode>
-                <QrReader
-                  onScan={this.handleScanQrCode}
-                  onError={noop}
-                  style={{ height: qrCodeSize, width: qrCodeSize }}
-                />
-              </WrapperQrCode>
-            )}
-          </Fragment>
-        )}
+        <Input
+          value={value}
+          withQrCode={withQrCode}
+          onChange={onChange}
+          renderRight={
+            <Right onClick={this.handleClickQrCode}>
+              <IconQrCode size={16} />
+              {qrReaderOpened && (
+                <WrapperQrCode>
+                  <QrReader
+                    onScan={this.handleScanQrCode}
+                    onError={noop}
+                    style={{ height: qrCodeSize, width: qrCodeSize }}
+                  />
+                </WrapperQrCode>
+              )}
+            </Right>
+          }
+        />
       </Box>
     )
   }

@@ -7,6 +7,7 @@ declare var __ENV__: string
 declare var __PRINT_MODE__: string
 declare var __SENTRY_URL__: string
 declare var __GLOBAL_STYLES__: string
+declare var __APP_VERSION__: string
 declare var __static: string
 declare var describe: Function
 declare var test: Function
