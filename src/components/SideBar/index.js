@@ -17,6 +17,7 @@ import { getVisibleAccounts } from 'reducers/accounts'
 import IconPieChart from 'icons/PieChart'
 import IconArrowDown from 'icons/ArrowDown'
 import IconArrowUp from 'icons/ArrowUp'
+import IconQrCode from 'icons/QrCode'
 import IconSettings from 'icons/Settings'
 import IconPlus from 'icons/Plus'
 
@@ -82,6 +83,9 @@ class SideBar extends PureComponent<Props> {
               </Item>
               <Item icon={<IconArrowDown size={16} />} modal={MODAL_RECEIVE}>
                 {t('receive:title')}
+              </Item>
+              <Item icon={<IconQrCode size={16} />} linkTo="/manager">
+                {t('sidebar:manager')}
               </Item>
               <Item icon={<IconSettings size={16} />} linkTo="/settings">
                 {t('settings:title')}

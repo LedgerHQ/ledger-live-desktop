@@ -16,8 +16,9 @@ type DeviceStatus = 'unconnected' | 'connected' | 'appOpened'
 
 type Props = {
   currentDevice: Device | null,
-  account: Account,
-  onStatusChange: DeviceStatus => void,
+  account?: Account,
+  onStatusChange?: DeviceStatus => void,
+  render?: Function,
 }
 
 type State = {
@@ -68,7 +69,7 @@ class DeviceMonit extends PureComponent<Props, State> {
   checkAppOpened = () => {
     const { currentDevice, account } = this.props
 
-    if (currentDevice === null || account.currency === null) {
+    if (currentDevice === null || !account || account.currency === null) {
       return
     }
 
@@ -82,8 +83,9 @@ class DeviceMonit extends PureComponent<Props, State> {
   _timeout: any = null
 
   handleStatusChange = status => {
+    const { onStatusChange } = this.props
     this.setState({ status })
-    this.props.onStatusChange(status)
+    onStatusChange && onStatusChange(status)
   }
 
   handleMsgEvent = (e, { type }) => {
@@ -99,6 +101,10 @@ class DeviceMonit extends PureComponent<Props, State> {
 
   render() {
     const { status } = this.state
+    const { render } = this.props
+    if (render) {
+      return render(status)
+    }
     return (
       <div>
         <div>device connected {status !== 'unconnected' ? 'TRUE' : 'FALSE'}</div>
