@@ -137,9 +137,16 @@ const Operation = ({
   const time = moment(tx.receivedAt)
   const Icon = getIconByCoinType(account.currency.coinType)
   const type = tx.amount > 0 ? 'from' : 'to'
+  const cValue = counterValues
+    ? counterValues[time.format('YYYY-MM-DD')] * (tx.amount / 10 ** unit.magnitude)
+    : null
 
   return (
-    <OperationRaw onClick={() => onOperationClick({ operation: tx, account })}>
+    <OperationRaw
+      onClick={() =>
+        onOperationClick({ operation: tx, account, type, counterValue: cValue, fiat: counterValue })
+      }
+    >
       <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
         <ConfirmationCheck
           type={type}
@@ -193,9 +200,9 @@ const Operation = ({
             alwaysShowSign
             color={tx.amount < 0 ? 'smoke' : 'positiveGreen'}
           />
-          {counterValues && (
+          {cValue && (
             <FormattedVal
-              val={counterValues[time.format('YYYY-MM-DD')] * (tx.amount / 10 ** unit.magnitude)}
+              val={cValue}
               fiat={counterValue}
               showCode
               fontSize={3}
@@ -301,7 +308,7 @@ export class OperationsList extends Component<Props> {
                     account={acc}
                     counterValue={counterValue}
                     counterValues={cValues}
-                    key={`{${tx.id}${acc ? `-${acc.id}` : ''}`}
+                    key={`${tx.id}${acc ? `-${acc.id}` : ''}`}
                     minConfirmations={acc.settings.minConfirmations}
                     onAccountClick={onAccountClick}
                     onOperationClick={this.handleClickOperation}

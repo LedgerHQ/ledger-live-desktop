@@ -1,63 +1,148 @@
 // @flow
 
 import React from 'react'
+import { shell } from 'electron'
+import { translate } from 'react-i18next'
 import styled from 'styled-components'
+import moment from 'moment'
+
+import type { T } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'constants'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Bar from 'components/base/Bar'
+import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
+import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 
-const ColLeft = styled(Box)`
+const Line = styled(Box).attrs({
+  horizontal: true,
+})``
+
+const ColLeft = styled(Box).attrs({
+  color: 'smoke',
+  ff: 'Open Sans',
+  fontSize: 4,
+})`
   width: 95px;
 `
+const ColRight = styled(Box).attrs({
+  fontSize: 4,
+  ff: 'Open Sans',
+  color: 'dark',
+  shrink: true,
+})`
+  word-break: break-all;
+`
 
-const OperationDetails = () => (
+const CanSelect = styled.div`
+  user-select: text;
+`
+
+const B = styled(Bar).attrs({
+  color: 'lightGrey',
+  size: 1,
+})``
+
+const OperationDetails = ({ t }: { t: T }) => (
   <Modal
     name={MODAL_OPERATION_DETAILS}
     render={({ data, onClose }) => {
-      const { operation, account } = data
+      const { operation, account, type, counterValue, fiat } = data
+
+      const { name, unit, settings: { minConfirmations } } = account
+      const { id, amount, confirmations, receivedAt, from, to } = operation
+
+      const isConfirmed = confirmations >= minConfirmations
 
       return (
         <ModalBody onClose={onClose}>
           <ModalTitle>Operation details</ModalTitle>
           <ModalContent flow={4}>
-            <Box>
-              <Box>{operation.amount}</Box>
+            <Box alignItems="center" mt={3}>
+              <ConfirmationCheck
+                confirmations={confirmations}
+                minConfirmations={minConfirmations}
+                style={{
+                  transform: 'scale(2)',
+                }}
+                t={t}
+                type={type}
+                withTooltip={false}
+              />
+              <Box mt={5} alignItems="center">
+                <Box>
+                  <FormattedVal
+                    unit={unit}
+                    alwaysShowSign
+                    showCode
+                    val={amount}
+                    fontSize={8}
+                    style={{ lineHeight: 1 }}
+                  />
+                </Box>
+                <Box mt={1}>
+                  <FormattedVal
+                    val={counterValue}
+                    fiat={fiat}
+                    showCode
+                    fontSize={5}
+                    alwaysShowSign
+                    color="grey"
+                    style={{ lineHeight: 1 }}
+                  />
+                </Box>
+              </Box>
             </Box>
-            <Box>
+            <Line mt={4}>
               <ColLeft>Acccount</ColLeft>
-              <Box>{account.name}</Box>
-            </Box>
-            <Bar />
-            <Box>
+              <ColRight>{name}</ColRight>
+            </Line>
+            <B />
+            <Line>
               <ColLeft>Date</ColLeft>
-              <Box>{operation.receivedAt}</Box>
-            </Box>
-            <Bar />
-            <Box>
+              <ColRight>{moment(receivedAt).format('LLL')}</ColRight>
+            </Line>
+            <B />
+            <Line>
               <ColLeft>Status</ColLeft>
-              <Box>{operation.confirmations}</Box>
-            </Box>
-            <Bar />
-            <Box>
+              <ColRight color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
+                <Box>
+                  {isConfirmed
+                    ? t('operationDetails:confirmed')
+                    : t('operationDetails:notConfirmed')}
+                </Box>
+                <Box>({confirmations})</Box>
+              </ColRight>
+            </Line>
+            <B />
+            <Line>
               <ColLeft>From</ColLeft>
-              <Box>{operation.from.join(',')}</Box>
-            </Box>
-            <Box>
+              <ColRight>{from.map(v => <CanSelect key={v}>{v}</CanSelect>)}</ColRight>
+            </Line>
+            <B />
+            <Line>
               <ColLeft>To</ColLeft>
-              <Box>{operation.to.join(',')}</Box>
-            </Box>
-            <Box>
+              <ColRight>{to.map(v => <CanSelect key={v}>{v}</CanSelect>)}</ColRight>
+            </Line>
+            <B />
+            <Line>
               <ColLeft>Identifier</ColLeft>
-              <Box>{operation.id}</Box>
-            </Box>
+              <ColRight>
+                <CanSelect>{id}</CanSelect>
+              </ColRight>
+            </Line>
           </ModalContent>
           <ModalFooter horizontal justify="flex-end" flow={2}>
-            <Button>Cancel</Button>
-            <Button primary>View operation</Button>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button
+              primary
+              onClick={() => shell.openExternal(`https://testnet.blockchain.info/tx/${id}`)}
+            >
+              View operation
+            </Button>
           </ModalFooter>
         </ModalBody>
       )
@@ -65,4 +150,4 @@ const OperationDetails = () => (
   />
 )
 
-export default OperationDetails
+export default translate()(OperationDetails)

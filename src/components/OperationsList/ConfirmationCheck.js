@@ -17,7 +17,7 @@ import Tooltip from 'components/base/Tooltip'
 const Container = styled(Box).attrs({
   bg: p =>
     p.isConfirmed
-      ? rgba(p.type === 'from' ? p.theme.colors.positiveGreen : p.theme.colors.grey, 0.1)
+      ? rgba(p.type === 'from' ? p.theme.colors.positiveGreen : p.theme.colors.grey, 0.2)
       : 'none',
   color: p => (p.type === 'from' ? p.theme.colors.positiveGreen : p.theme.colors.grey),
   align: 'center',
@@ -47,33 +47,47 @@ const WrapperClock = styled(Box).attrs({
 `
 
 const ConfirmationCheck = ({
-  type,
   confirmations,
   minConfirmations,
   t,
+  type,
+  withTooltip,
+  ...props
 }: {
-  type: 'to' | 'from',
   confirmations: number,
   minConfirmations: number,
   t: T,
+  type: 'to' | 'from',
+  withTooltip?: boolean,
 }) => {
   const isConfirmed = confirmations >= minConfirmations
-  return (
+
+  const renderContent = () => (
+    <Container type={type} isConfirmed={isConfirmed} {...props}>
+      {type === 'from' ? <IconArrowDown size={12} /> : <IconArrowUp size={12} />}
+      {!isConfirmed && (
+        <WrapperClock>
+          <IconClock size={10} />
+        </WrapperClock>
+      )}
+    </Container>
+  )
+
+  return withTooltip ? (
     <Tooltip
       render={() =>
         isConfirmed ? t('operationsList:confirmed') : t('operationsList:notConfirmed')
       }
     >
-      <Container type={type} isConfirmed={isConfirmed}>
-        {type === 'from' ? <IconArrowDown size={12} /> : <IconArrowUp size={12} />}
-        {!isConfirmed && (
-          <WrapperClock>
-            <IconClock size={10} />
-          </WrapperClock>
-        )}
-      </Container>
+      {renderContent()}
     </Tooltip>
+  ) : (
+    renderContent()
   )
+}
+
+ConfirmationCheck.defaultProps = {
+  withTooltip: true,
 }
 
 export default ConfirmationCheck

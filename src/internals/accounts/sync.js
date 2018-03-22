@@ -6,7 +6,7 @@ const network = networks[1]
 
 function syncAccount({ id, operations, ...currentAccount }) {
   const hdnode = getHDNode({ xpub58: id, network })
-  const allTxsHash = operations.map(t => t.hash)
+  const allTxsHash = operations.map(t => t.id)
   return getAccount({ hdnode, network, allTxsHash, segwit: true, ...currentAccount }).then(
     account => ({
       id,

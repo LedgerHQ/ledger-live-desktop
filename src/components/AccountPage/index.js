@@ -5,10 +5,13 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
+import styled from 'styled-components'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'constants'
 
 import type { T, Account } from 'types/common'
+
+import { darken } from 'styles/helpers'
 
 import { getAccountById } from 'reducers/accounts'
 import { getCounterValue } from 'reducers/settings'
@@ -31,6 +34,18 @@ import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
 
 import AccountHeader from './AccountHeader'
+
+const ButtonSettings = styled(Button).attrs({
+  small: true,
+})`
+  border: 2px solid ${p => p.theme.colors.grey};
+  width: 30px;
+  padding: 0;
+
+  &:active {
+    border: 2px solid ${p => darken(p.theme.colors.grey, 0.2)};
+  }
+`
 
 const mapStateToProps = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
@@ -91,15 +106,11 @@ class AccountPage extends PureComponent<Props, State> {
                 <Box>{t('receive:title')}</Box>
               </Box>
             </Button>
-            <Button
-              small
-              style={{ width: 30, padding: 0 }}
-              onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}
-            >
+            <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
               <Box align="center">
                 <IconControls size={16} />
               </Box>
-            </Button>
+            </ButtonSettings>
           </Box>
         </Box>
         <Box mb={7}>
