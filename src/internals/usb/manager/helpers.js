@@ -8,7 +8,7 @@ import noop from 'lodash/noop'
 import type Transport from '@ledgerhq/hw-transport'
 
 import type { IPCSend } from 'types/electron'
-import { BASE_SOCKET_URL, DEFAULT_SOCKET_PARAMS, APDUS } from './constants'
+import { BASE_SOCKET_URL, APDUS } from './constants'
 
 type WebsocketType = {
   send: (string, any) => void,
@@ -20,6 +20,13 @@ type Message = {
   query?: string,
   response?: string,
   data: any,
+}
+
+type LedgerAppParams = {
+  firmware: string,
+  firmwareKey: string,
+  delete: string,
+  deleteKey: string,
 }
 
 /**
@@ -63,15 +70,9 @@ export function createTransportHandler(
  */
 export async function installApp(
   transport: Transport<*>,
-  { appName }: { appName: string },
+  { appParams }: { appParams: LedgerAppParams },
 ): Promise<void> {
-  log('INSTALL', `Request to install ${appName} app`)
-  return createSocketDialog(transport, ({ version }) => ({
-    firmware: `nanos/${version}/${appName}/app_latest`,
-    firmwareKey: `nanos/${version}/${appName}/app_latest_key`,
-    delete: `nanos/${version}/${appName}/app_del`,
-    deleteKey: `nanos/${version}/${appName}/app_del_key`,
-  }))
+  return createSocketDialog(transport, appParams)
 }
 
 /**
@@ -79,15 +80,13 @@ export async function installApp(
  */
 export async function uninstallApp(
   transport: Transport<*>,
-  { appName }: { appName: string },
+  { appParams }: { appParams: LedgerAppParams },
 ): Promise<void> {
-  log('INSTALL', `Request to uninstall ${appName} app`)
-  return createSocketDialog(transport, ({ version }) => ({
-    firmware: `nanos/${version}/${appName}/app_del`,
-    firmwareKey: `nanos/${version}/${appName}/app_del_key`,
-    delete: `nanos/${version}/${appName}/app_del`,
-    deleteKey: `nanos/${version}/${appName}/app_del_key`,
-  }))
+  return createSocketDialog(transport, {
+    ...appParams,
+    firmware: appParams.delete,
+    firmwareKey: appParams.deleteKey,
+  })
 }
 
 /**
@@ -143,16 +142,10 @@ async function bulk(ws: WebsocketType, transport: Transport<*>, msg: Message) {
  * Open socket connection with firmware api, and init a dialog
  * with the device
  */
-function createSocketDialog(transport: Transport<*>, buildParams: Function) {
+function createSocketDialog(transport: Transport<*>, appParams: LedgerAppParams) {
   return new Promise(async (resolve, reject) => {
     try {
-      const { targetId, version } = await getFirmwareInfo(transport)
-      const fullParams = qs.stringify({
-        targetId,
-        ...DEFAULT_SOCKET_PARAMS,
-        ...buildParams({ targetId, version }),
-      })
-      const url = `${BASE_SOCKET_URL}?${fullParams}`
+      const url = `${BASE_SOCKET_URL}?${qs.stringify(appParams)}`
 
       log('WS CONNECTING', url)
       const ws: WebsocketType = new Websocket(url)
@@ -195,7 +188,7 @@ function createSocketDialog(transport: Transport<*>, buildParams: Function) {
 /**
  * Retrieve targetId and firmware version from device
  */
-async function getFirmwareInfo(transport: Transport<*>) {
+export async function getFirmwareInfo(transport: Transport<*>) {
   const res = await transport.send(...APDUS.GET_FIRMWARE)
   const byteArray = [...res]
   const data = byteArray.slice(0, byteArray.length - 2)

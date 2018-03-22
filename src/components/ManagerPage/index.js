@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
-import { listCurrencies } from '@ledgerhq/currencies'
 
-import type { Currency } from '@ledgerhq/currencies'
 import type { Device } from 'types/common'
 
 import { runJob } from 'renderer/events'
@@ -18,8 +16,6 @@ import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
 
 import ManagerApp from './ManagerApp'
-
-const CURRENCIES = listCurrencies()
 
 const List = styled(Box).attrs({
   horizontal: true,
@@ -36,25 +32,54 @@ type Props = {
   device: Device,
 }
 
-type Status = 'idle' | 'busy' | 'success' | 'error'
+type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
+
+type LedgerApp = {
+  name: string,
+  app: Object,
+}
 
 type State = {
   status: Status,
   error: string | null,
+  appsList: LedgerApp[],
 }
 
 class ManagerPage extends PureComponent<Props, State> {
   state = {
-    status: 'idle',
+    status: 'loading',
     error: null,
+    appsList: [],
   }
 
-  createDeviceJobHandler = options => (currency: Currency) => async () => {
+  componentDidMount() {
+    this.fetchList()
+  }
+
+  componentWillUnmount() {
+    this._unmounted = true
+  }
+
+  _unmounted = false
+
+  async fetchList() {
+    const appsList = await runJob({
+      channel: 'usb',
+      job: 'manager.listApps',
+      successResponse: 'manager.listAppsSuccess',
+      errorResponse: 'manager.listAppsError',
+    })
+    if (!this._unmounted) {
+      this.setState({ appsList, status: 'idle' })
+    }
+  }
+
+  createDeviceJobHandler = options => ({ app: appParams }) => async () => {
     this.setState({ status: 'busy' })
     try {
       const { job, successResponse, errorResponse } = options
       const { device: { path: devicePath } } = this.props
-      const data = { appName: currency.name.toLowerCase(), devicePath }
+      const data = { appParams, devicePath }
       await runJob({ channel: 'usb', job, successResponse, errorResponse, data })
       this.setState({ status: 'success' })
     } catch (err) {
@@ -78,10 +103,10 @@ class ManagerPage extends PureComponent<Props, State> {
 
   renderList = () => (
     <List>
-      {CURRENCIES.map(c => (
+      {this.state.appsList.map(c => (
         <ManagerApp
-          key={c.coinType}
-          currency={c}
+          key={c.name}
+          name={c.name}
           onInstall={this.handleInstall(c)}
           onUninstall={this.handleUninstall(c)}
         />
@@ -100,9 +125,17 @@ class ManagerPage extends PureComponent<Props, State> {
                 <Box fontSize={8}>{'Connect your device'}</Box>
               </Box>
             )}
-            {deviceStatus === 'connected' && this.renderList()}
+            {deviceStatus === 'connected' && (
+              <Box>
+                {status === 'loading' ? (
+                  <Box ff="Museo Sans|Bold">{'Loading app list...'}</Box>
+                ) : (
+                  this.renderList()
+                )}
+              </Box>
+            )}
             <Modal
-              isOpened={status !== 'idle'}
+              isOpened={status !== 'idle' && status !== 'loading'}
               render={() => (
                 <ModalBody p={6} align="center" justify="center" style={{ height: 300 }}>
                   {status === 'busy' ? (

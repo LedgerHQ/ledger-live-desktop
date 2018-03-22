@@ -2,9 +2,6 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
-
-import type { Currency } from '@ledgerhq/currencies'
 
 import Box, { Tabbable } from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -24,18 +21,16 @@ const ActionBtn = styled(Tabbable).attrs({
 })``
 
 type Props = {
-  currency: Currency,
+  name: string,
   onInstall: Function,
   onUninstall: Function,
 }
 
 export default function ManagerApp(props: Props) {
-  const { currency, onInstall, onUninstall } = props
-  const Icon = getIconByCoinType(currency.coinType)
+  const { name, onInstall, onUninstall } = props
   return (
     <Container flow={3}>
-      {Icon && <Icon size={24} />}
-      <Text>{currency.name}</Text>
+      <Text ff="Museo Sans|Bold">{name}</Text>
       <Box horizontal flow={2}>
         <ActionBtn onClick={onInstall}>{'Install'}</ActionBtn>
         <ActionBtn onClick={onUninstall}>{'Remove'}</ActionBtn>
