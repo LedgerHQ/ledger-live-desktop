@@ -15,6 +15,8 @@ import Button from 'components/base/Button'
 import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
+
+import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 
 const Line = styled(Box).attrs({
@@ -50,7 +52,7 @@ const OperationDetails = ({ t }: { t: T }) => (
   <Modal
     name={MODAL_OPERATION_DETAILS}
     render={({ data, onClose }) => {
-      const { operation, account, type, counterValue, fiat } = data
+      const { operation, account, type } = data
 
       const { name, unit, settings: { minConfirmations } } = account
       const { id, amount, confirmations, receivedAt, from, to } = operation
@@ -84,14 +86,13 @@ const OperationDetails = ({ t }: { t: T }) => (
                   />
                 </Box>
                 <Box mt={1}>
-                  <FormattedVal
-                    val={counterValue}
-                    fiat={fiat}
-                    showCode
-                    fontSize={5}
-                    alwaysShowSign
+                  <CounterValue
                     color="grey"
+                    fontSize={5}
                     style={{ lineHeight: 1 }}
+                    time={receivedAt}
+                    unit={unit}
+                    value={amount}
                   />
                 </Box>
               </Box>
@@ -120,12 +121,28 @@ const OperationDetails = ({ t }: { t: T }) => (
             <B />
             <Line>
               <ColLeft>From</ColLeft>
-              <ColRight>{from.map(v => <CanSelect key={v}>{v}</CanSelect>)}</ColRight>
+              <ColRight>
+                {from.map((v, i) => (
+                  <CanSelect
+                    key={i} // eslint-disable-line react/no-array-index-key
+                  >
+                    {v}
+                  </CanSelect>
+                ))}
+              </ColRight>
             </Line>
             <B />
             <Line>
               <ColLeft>To</ColLeft>
-              <ColRight>{to.map(v => <CanSelect key={v}>{v}</CanSelect>)}</ColRight>
+              <ColRight>
+                {to.map((v, i) => (
+                  <CanSelect
+                    key={i} // eslint-disable-line react/no-array-index-key
+                  >
+                    {v}
+                  </CanSelect>
+                ))}
+              </ColRight>
             </Line>
             <B />
             <Line>

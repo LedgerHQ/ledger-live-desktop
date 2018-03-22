@@ -7,9 +7,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
-import get from 'lodash/get'
 import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
 
@@ -17,15 +15,16 @@ import type { Account, Operation as OperationType, T } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'constants'
 
-import { getCounterValue } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
 import IconAngleDown from 'icons/AngleDown'
 
 import Box, { Card } from 'components/base/Box'
+import CounterValue from 'components/CounterValue'
 import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
+
 import ConfirmationCheck from './ConfirmationCheck'
 
 const DATE_COL_SIZE = 100
@@ -114,8 +113,6 @@ const Address = ({ value }: { value: string }) => {
 
 const Operation = ({
   account,
-  counterValue,
-  counterValues,
   minConfirmations,
   onAccountClick,
   onOperationClick,
@@ -124,8 +121,6 @@ const Operation = ({
   withAccount,
 }: {
   account: Account,
-  counterValue: string,
-  counterValues: Object | null,
   minConfirmations: number,
   onAccountClick: Function,
   onOperationClick: Function,
@@ -137,16 +132,9 @@ const Operation = ({
   const time = moment(tx.receivedAt)
   const Icon = getIconByCoinType(account.currency.coinType)
   const type = tx.amount > 0 ? 'from' : 'to'
-  const cValue = counterValues
-    ? counterValues[time.format('YYYY-MM-DD')] * (tx.amount / 10 ** unit.magnitude)
-    : null
 
   return (
-    <OperationRaw
-      onClick={() =>
-        onOperationClick({ operation: tx, account, type, counterValue: cValue, fiat: counterValue })
-      }
-    >
+    <OperationRaw onClick={() => onOperationClick({ operation: tx, account, type })}>
       <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
         <ConfirmationCheck
           type={type}
@@ -200,16 +188,7 @@ const Operation = ({
             alwaysShowSign
             color={tx.amount < 0 ? 'smoke' : 'positiveGreen'}
           />
-          {cValue && (
-            <FormattedVal
-              val={cValue}
-              fiat={counterValue}
-              showCode
-              fontSize={3}
-              alwaysShowSign
-              color="grey"
-            />
-          )}
+          <CounterValue color="grey" fontSize={3} time={time} unit={unit} value={tx.amount} />
         </Box>
       </Cell>
     </OperationRaw>
@@ -222,11 +201,6 @@ Operation.defaultProps = {
   withAccount: false,
 }
 
-const mapStateToProps = state => ({
-  counterValue: getCounterValue(state),
-  counterValues: state.counterValues,
-})
-
 const mapDispatchToProps = {
   openModal,
 }
@@ -234,8 +208,6 @@ const mapDispatchToProps = {
 type Props = {
   account: Account,
   canShowMore: boolean,
-  counterValue: string,
-  counterValues: Object,
   onAccountClick?: Function,
   openModal: Function,
   operations: OperationType[],
@@ -279,17 +251,7 @@ export class OperationsList extends Component<Props> {
   _hashCache = null
 
   render() {
-    const {
-      account,
-      canShowMore,
-      counterValue,
-      counterValues,
-      onAccountClick,
-      operations,
-      t,
-      title,
-      withAccount,
-    } = this.props
+    const { account, canShowMore, onAccountClick, operations, t, title, withAccount } = this.props
 
     this._hashCache = this.getHashCache(operations)
 
@@ -300,14 +262,9 @@ export class OperationsList extends Component<Props> {
             <Box>
               {operations.map(tx => {
                 const acc = account || tx.account
-                const unit = getDefaultUnitByCoinType(acc.coinType)
-                const cValues = get(counterValues, `${unit.code}-${counterValue}.byDate`, null)
-
                 return (
                   <Operation
                     account={acc}
-                    counterValue={counterValue}
-                    counterValues={cValues}
                     key={`${tx.id}${acc ? `-${acc.id}` : ''}`}
                     minConfirmations={acc.settings.minConfirmations}
                     onAccountClick={onAccountClick}
@@ -332,4 +289,4 @@ export class OperationsList extends Component<Props> {
   }
 }
 
-export default compose(translate(), connect(mapStateToProps, mapDispatchToProps))(OperationsList)
+export default compose(translate(), connect(null, mapDispatchToProps))(OperationsList)
