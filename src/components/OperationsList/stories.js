@@ -6,11 +6,24 @@ import { storiesOf } from '@storybook/react'
 import { boolean } from '@storybook/addon-knobs'
 import { translate } from 'react-i18next'
 
+import { accounts } from 'components/SelectAccount/stories'
+
 import { OperationsList } from 'components/OperationsList'
 
 const stories = storiesOf('Components', module)
 
 const unit = getDefaultUnitByCoinType(0)
+
+const account = ({ name }) => ({
+  ...accounts[0],
+  settings: {
+    minConfirmations: 10,
+  },
+  currency: getCurrencyByCoinType(0),
+  name,
+  coinType: 0,
+  unit,
+})
 
 const counterValue = 'USD'
 const counterValues = {
@@ -28,15 +41,9 @@ const operations = [
     amount: 130000000,
     receivedAt: '2018-01-09T16:03:52Z',
     confirmations: 1,
-    account: {
-      settings: {
-        minConfirmations: 10,
-      },
-      currency: getCurrencyByCoinType(0),
+    account: account({
       name: 'Account 1',
-      coinType: 0,
-      unit,
-    },
+    }),
   },
   {
     address: '5c6ea1716520c7d6e038d36a3223faced3c',
@@ -44,15 +51,9 @@ const operations = [
     amount: 130000000,
     receivedAt: '2018-01-09T16:03:52Z',
     confirmations: 11,
-    account: {
-      settings: {
-        minConfirmations: 10,
-      },
-      currency: getCurrencyByCoinType(0),
+    account: account({
       name: 'Account 1',
-      coinType: 0,
-      unit,
-    },
+    }),
   },
   {
     address: '27416a48caab90fab053b507b8b6b9d4',
@@ -60,15 +61,9 @@ const operations = [
     amount: -65000000,
     receivedAt: '2018-01-09T16:02:40Z',
     confirmations: 11,
-    account: {
-      settings: {
-        minConfirmations: 10,
-      },
-      currency: getCurrencyByCoinType(0),
+    account: account({
       name: 'Account 2',
-      coinType: 0,
-      unit,
-    },
+    }),
   },
   {
     address: '27416a48caab90fab053b507b8b6b9d4',
@@ -76,15 +71,9 @@ const operations = [
     amount: -65000000,
     receivedAt: '2018-01-09T16:02:40Z',
     confirmations: 1,
-    account: {
-      settings: {
-        minConfirmations: 10,
-      },
-      currency: getCurrencyByCoinType(0),
+    account: account({
       name: 'Account 2',
-      coinType: 0,
-      unit,
-    },
+    }),
   },
 ]
 

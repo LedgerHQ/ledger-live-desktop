@@ -1,4 +1,5 @@
 export AddAccount from './AddAccount'
+export OperationDetails from './OperationDetails'
 export Receive from './Receive'
 export Send from './Send'
 export SettingsAccount from './SettingsAccount'

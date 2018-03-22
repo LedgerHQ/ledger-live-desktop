@@ -16,8 +16,9 @@ export type Operation = {
   id: string,
   account?: Account,
   address: string,
+  from: Array<string>,
+  to: Array<string>,
   amount: number,
-  hash: string,
   receivedAt: string,
   confirmations: number,
 }
