@@ -92,7 +92,8 @@
     "styled-components": "^3.2.3",
     "styled-system": "^2.2.1",
     "tippy.js": "^2.4.0",
-    "victory": "^0.25.6"
+    "victory": "^0.25.6",
+    "ws": "^5.1.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.3.15",
