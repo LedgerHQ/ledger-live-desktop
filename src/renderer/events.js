@@ -56,7 +56,7 @@ export function runJob({
   job: string,
   successResponse: string,
   errorResponse: string,
-  data: any,
+  data?: any,
 }): Promise<void> {
   return new Promise((resolve, reject) => {
     ipcRenderer.send(channel, { type: job, data })

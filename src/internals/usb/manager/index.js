@@ -17,6 +17,7 @@
  */
 
 import type { IPCSend } from 'types/electron'
+import axios from 'axios'
 import { createTransportHandler, installApp, uninstallApp } from './helpers'
 
 export default (send: IPCSend) => ({
@@ -31,4 +32,13 @@ export default (send: IPCSend) => ({
     successResponse: 'device.appUninstalled',
     errorResponse: 'device.appUninstallError',
   }),
+
+  listApps: async () => {
+    try {
+      const { data } = await axios.get('https://api.ledgerwallet.com/update/applications')
+      send('manager.listAppsSuccess', data['nanos-1.4'])
+    } catch (err) {
+      send('manager.listAppsError', { message: err.message, stack: err.stack })
+    }
+  },
 })
