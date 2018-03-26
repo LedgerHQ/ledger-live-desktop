@@ -2,13 +2,12 @@
 
 import moment from 'moment'
 import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import find from 'lodash/find'
 import first from 'lodash/first'
 import isUndefined from 'lodash/isUndefined'
 import last from 'lodash/last'
-
-import type { Account } from 'types/common'
 
 type DateInterval = {
   start: string,

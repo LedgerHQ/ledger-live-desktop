@@ -2,12 +2,11 @@
 
 import ledger from 'ledger-test-library'
 import bitcoin from 'bitcoinjs-lib'
+import type { Operation } from '@ledgerhq/wallet-common/lib/types'
 
 import groupBy from 'lodash/groupBy'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
-
-import type { Operation } from 'types/common'
 
 const GAP_LIMIT_ADDRESSES = 20
 
@@ -31,21 +30,25 @@ export function computeOperation(addresses: Array<string>) {
       .filter(i => addresses.includes(i.address))
       .reduce((acc, cur) => acc + cur.value, 0)
     const amount = outputVal - inputVal
+    console.warn('assiging a fake account id and blockHeight to operation')
     return {
       id: t.hash,
+      hash: t.hash,
       address: t.amount > 0 ? t.inputs[0].address : t.outputs[0].address,
       from: t.inputs.map(t => t.address),
       to: t.outputs.map(t => t.address),
       amount,
       confirmations: t.confirmations,
-      receivedAt: t.received_at,
+      date: t.received_at,
+      accountId: 'abcd',
+      blockHeight: 0,
     }
   }
 }
 
 export function getBalanceByDay(operations: Operation[]) {
   const txsByDate = groupBy(operations, tx => {
-    const [date] = new Date(tx.receivedAt).toISOString().split('T')
+    const [date] = new Date(tx.date).toISOString().split('T')
     return date
   })
 

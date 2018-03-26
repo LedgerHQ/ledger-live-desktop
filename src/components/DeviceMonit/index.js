@@ -3,10 +3,11 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import { sendEvent } from 'renderer/events'
 import { getCurrentDevice } from 'reducers/devices'
-import type { Device, Account } from 'types/common'
+import type { Device } from 'types/common'
 
 const mapStateToProps = state => ({
   currentDevice: getCurrentDevice(state),

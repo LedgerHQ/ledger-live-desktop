@@ -2,8 +2,9 @@
 
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { T, Account } from 'types/common'
+import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'

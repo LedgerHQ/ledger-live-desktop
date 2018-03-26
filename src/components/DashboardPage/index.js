@@ -5,12 +5,13 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import type { Account, Operation } from '@ledgerhq/wallet-common/lib/types'
 
 import chunk from 'lodash/chunk'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
-import type { Account, Operation, T } from 'types/common'
+import type { T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 import { getCounterValue } from 'reducers/settings'
@@ -71,7 +72,7 @@ const getAllOperations = accounts => {
     return result
   }, [])
 
-  return sortBy(allOperations, t => t.receivedAt)
+  return sortBy(allOperations, t => t.date)
     .reverse()
     .slice(0, ALL_OPERATIONS_LIMIT)
 }

@@ -5,38 +5,29 @@ import { handleActions } from 'redux-actions'
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
-import defaultsDeep from 'lodash/defaultsDeep'
+import type { Account, AccountRaw } from '@ledgerhq/wallet-common/lib/types'
 
 import { getDefaultUnitByCoinType, getCurrencyByCoinType } from '@ledgerhq/currencies'
 
 import type { State } from 'reducers'
-import type { Account } from 'types/common'
 
 export type AccountsState = Account[]
 const state: AccountsState = []
 
 function orderAccountsOperations(account: Account) {
   const { operations } = account
-  operations.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt))
+  operations.sort((a, b) => new Date(b.date) - new Date(a.date))
   return {
     ...account,
     operations,
   }
 }
 
-function applyDefaults(account) {
-  return defaultsDeep(account, {
-    settings: {
-      minConfirmations: 2,
-    },
-  })
-}
-
 const handlers: Object = {
   SET_ACCOUNTS: (
     state: AccountsState,
     { payload: accounts }: { payload: Account[] },
-  ): AccountsState => accounts.map(applyDefaults),
+  ): AccountsState => accounts,
 
   ADD_ACCOUNT: (
     state: AccountsState,
@@ -120,7 +111,6 @@ export function deserializeAccounts(accounts: Account[]) {
     operations: account.operations,
     path: account.path,
     rootPath: account.rootPath,
-    settings: account.settings,
     unit: account.unit,
   }))
 }

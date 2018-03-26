@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import bcrypt from 'bcryptjs'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { Settings, Account, T } from 'types/common'
+import type { Settings, T } from 'types/common'
 
 import get from 'lodash/get'
 

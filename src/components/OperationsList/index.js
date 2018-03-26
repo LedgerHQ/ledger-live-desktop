@@ -7,11 +7,12 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import type { Account, Operation as OperationType } from '@ledgerhq/wallet-common/lib/types'
 
 import noop from 'lodash/noop'
 import isEqual from 'lodash/isEqual'
 
-import type { Account, Operation as OperationType, T } from 'types/common'
+import type { T } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
 
@@ -117,7 +118,7 @@ const Operation = ({
   onAccountClick,
   onOperationClick,
   t,
-  tx,
+  op,
   withAccount,
 }: {
   account: Account,
@@ -125,21 +126,21 @@ const Operation = ({
   onAccountClick: Function,
   onOperationClick: Function,
   t: T,
-  tx: OperationType,
+  op: OperationType,
   withAccount?: boolean,
 }) => {
   const { unit } = account
-  const time = moment(tx.receivedAt)
+  const time = moment(op.date)
   const Icon = getIconByCoinType(account.currency.coinType)
-  const type = tx.amount > 0 ? 'from' : 'to'
+  const type = op.amount > 0 ? 'from' : 'to'
 
   return (
-    <OperationRaw onClick={() => onOperationClick({ operation: tx, account, type })}>
+    <OperationRaw onClick={() => onOperationClick({ operation: op, account, type })}>
       <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
         <ConfirmationCheck
           type={type}
           minConfirmations={minConfirmations}
-          confirmations={tx.confirmations}
+          confirmations={op.confirmations}
           t={t}
         />
       </Cell>
@@ -176,19 +177,19 @@ const Operation = ({
           </Cell>
         )}
       <Cell grow shrink style={{ display: 'block' }}>
-        <Address value={tx.address} />
+        <Address value={op.address} />
       </Cell>
       <Cell size={AMOUNT_COL_SIZE}>
         <Box alignItems="flex-end">
           <FormattedVal
-            val={tx.amount}
+            val={op.amount}
             unit={unit}
             showCode
             fontSize={4}
             alwaysShowSign
-            color={tx.amount < 0 ? 'smoke' : 'positiveGreen'}
+            color={op.amount < 0 ? 'smoke' : 'positiveGreen'}
           />
-          <CounterValue color="grey" fontSize={3} time={time} unit={unit} value={tx.amount} />
+          <CounterValue color="grey" fontSize={3} time={time} unit={unit} value={op.amount} />
         </Box>
       </Cell>
     </OperationRaw>
@@ -260,17 +261,18 @@ export class OperationsList extends Component<Props> {
         <Box>
           <Card flow={1} title={title} p={0}>
             <Box>
-              {operations.map(tx => {
-                const acc = account || tx.account
+              {operations.map(op => {
+                // $FlowFixMe
+                const acc = account || op.account
                 return (
                   <Operation
                     account={acc}
-                    key={`${tx.id}${acc ? `-${acc.id}` : ''}`}
-                    minConfirmations={acc.settings.minConfirmations}
+                    key={`${op.id}${acc ? `-${acc.id}` : ''}`}
+                    minConfirmations={acc.minConfirmations}
                     onAccountClick={onAccountClick}
                     onOperationClick={this.handleClickOperation}
                     t={t}
-                    tx={tx}
+                    op={op}
                     withAccount={withAccount}
                   />
                 )

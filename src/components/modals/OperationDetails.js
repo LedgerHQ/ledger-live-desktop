@@ -54,8 +54,8 @@ const OperationDetails = ({ t }: { t: T }) => (
     render={({ data, onClose }) => {
       const { operation, account, type } = data
 
-      const { name, unit, settings: { minConfirmations } } = account
-      const { id, amount, confirmations, receivedAt, from, to } = operation
+      const { name, unit, minConfirmations } = account
+      const { id, amount, confirmations, date, from, to } = operation
 
       const isConfirmed = confirmations >= minConfirmations
 
@@ -90,7 +90,7 @@ const OperationDetails = ({ t }: { t: T }) => (
                     color="grey"
                     fontSize={5}
                     style={{ lineHeight: 1 }}
-                    time={receivedAt}
+                    time={date}
                     unit={unit}
                     value={amount}
                   />
@@ -104,7 +104,7 @@ const OperationDetails = ({ t }: { t: T }) => (
             <B />
             <Line>
               <ColLeft>Date</ColLeft>
-              <ColRight>{moment(receivedAt).format('LLL')}</ColRight>
+              <ColRight>{moment(date).format('LLL')}</ColRight>
             </Line>
             <B />
             <Line>

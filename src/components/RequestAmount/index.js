@@ -6,11 +6,12 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { getDefaultUnitByCoinType, getFiatUnit } from '@ledgerhq/currencies'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import isNaN from 'lodash/isNaN'
 import noop from 'lodash/noop'
 
-import type { T, Account } from 'types/common'
+import type { T } from 'types/common'
 
 import { getCounterValue } from 'reducers/settings'
 import { getLastCounterValueBySymbol } from 'reducers/counterValues'

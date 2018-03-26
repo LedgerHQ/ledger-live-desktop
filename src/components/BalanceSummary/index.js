@@ -1,10 +1,8 @@
 // @flow
 
 import React, { Fragment } from 'react'
-
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 import { getFiatUnit } from '@ledgerhq/currencies'
-
-import type { Account } from 'types/common'
 
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'

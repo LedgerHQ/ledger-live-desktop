@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
 import styled from 'styled-components'
 
-import type { Account } from 'types/common'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'

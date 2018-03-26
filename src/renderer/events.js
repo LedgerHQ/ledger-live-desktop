@@ -4,8 +4,7 @@ import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import debug from 'debug'
 import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
-
-import type { Account } from 'types/common'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'config/constants'
 

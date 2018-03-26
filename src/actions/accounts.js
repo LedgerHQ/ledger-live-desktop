@@ -1,11 +1,11 @@
 // @flow
 
 import sortBy from 'lodash/sortBy'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import db from 'helpers/db'
 
 import type { Dispatch } from 'redux'
-import type { Account } from 'types/common'
 
 import { fetchCounterValues } from 'actions/counterValues'
 
@@ -44,10 +44,7 @@ export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) 
 export type AddAccount = Account => (Function, Function) => void
 export const addAccount: AddAccount = payload => (dispatch, getState) => {
   const { settings: { counterValue, orderAccounts }, accounts } = getState()
-  dispatch({
-    type: 'ADD_ACCOUNT',
-    payload,
-  })
+  dispatch({ type: 'ADD_ACCOUNT', payload })
   dispatch(updateOrderAccounts(orderAccounts))
 
   // Start sync accounts the first time you add an account

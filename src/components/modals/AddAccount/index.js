@@ -7,12 +7,13 @@ import { translate } from 'react-i18next'
 import { ipcRenderer } from 'electron'
 import differenceBy from 'lodash/differenceBy'
 import { listCurrencies, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { Currency } from '@ledgerhq/currencies'
 
 import { MODAL_ADD_ACCOUNT } from 'config/constants'
 
-import type { Account, Device, T } from 'types/common'
+import type { Device, T } from 'types/common'
 
 import { closeModal } from 'reducers/modals'
 import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'

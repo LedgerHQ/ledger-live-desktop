@@ -1,9 +1,9 @@
 // @flow
 
 import React from 'react'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import DeviceMonit from 'components/DeviceMonit'
-import type { Account } from 'types/common'
 
 type Props = {
   account: Account | null,

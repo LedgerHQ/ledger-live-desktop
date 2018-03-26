@@ -5,9 +5,10 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import get from 'lodash/get'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { Unit } from '@ledgerhq/currencies'
-import type { T, Account } from 'types/common'
+import type { T } from 'types/common'
 import type { DoubleVal } from 'components/RequestAmount'
 
 import { MODAL_SEND } from 'config/constants'
