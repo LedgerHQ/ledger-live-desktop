@@ -3,6 +3,7 @@ const fs = require('fs')
 const webpackMain = require('electron-webpack/webpack.main.config')
 
 const plugins = require('./plugins')
+const resolve = require('./resolve')
 
 const dirs = p =>
   fs
@@ -16,6 +17,8 @@ const dirs = p =>
     }, {})
 
 module.exports = webpackMain().then(config => ({
+  mode: config.mode,
+
   context: config.context,
   devtool: config.devtool,
   target: config.target,
@@ -26,6 +29,7 @@ module.exports = webpackMain().then(config => ({
   },
 
   resolve: {
+    ...resolve,
     extensions: config.resolve.extensions,
   },
 

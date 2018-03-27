@@ -5,7 +5,7 @@ import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
 import type { Account } from 'types/common'
 
-import Chart from 'components/base/NewChart'
+import Chart from 'components/base/Chart'
 import Bar from 'components/base/Bar'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'

@@ -10,7 +10,7 @@ import { listCurrencies, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import type { Currency } from '@ledgerhq/currencies'
 
-import { MODAL_ADD_ACCOUNT } from 'constants'
+import { MODAL_ADD_ACCOUNT } from 'config/constants'
 
 import type { Account, Device, T } from 'types/common'
 

@@ -6,7 +6,7 @@ import { getFiatUnit } from '@ledgerhq/currencies'
 
 import type { Account } from 'types/common'
 
-import Chart from 'components/base/NewChart'
+import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'

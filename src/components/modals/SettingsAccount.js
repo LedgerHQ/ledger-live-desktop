@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { push } from 'react-router-redux'
 
-import { MODAL_SETTINGS_ACCOUNT } from 'constants'
+import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
 import type { Account } from 'types/common'
 

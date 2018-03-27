@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 
 import get from 'lodash/get'
 
-import { MODAL_RECEIVE } from 'constants'
+import { MODAL_RECEIVE } from 'config/constants'
 
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'

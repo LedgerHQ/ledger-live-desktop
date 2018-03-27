@@ -10,7 +10,7 @@ import type { Unit } from '@ledgerhq/currencies'
 import type { T, Account } from 'types/common'
 import type { DoubleVal } from 'components/RequestAmount'
 
-import { MODAL_SEND } from 'constants'
+import { MODAL_SEND } from 'config/constants'
 
 import { getCounterValue } from 'reducers/settings'
 

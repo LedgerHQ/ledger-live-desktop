@@ -85,7 +85,3 @@ files:
   - "!node_modules/rxjs{,/**/*}"
   - "!node_modules/source-map/dist{,/**/*}"
   - "!node_modules/styled-components/src{,/**/*}"
-  - "!node_modules/victory-chart/{es,dist,src}{,/**/*}"
-  - "!node_modules/victory-core/{es,dist,src}{,/**/*}"
-  - "!node_modules/victory-pie{,/**/*}"
-  - "!node_modules/victory{,/**/*}"
