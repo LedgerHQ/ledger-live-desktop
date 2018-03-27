@@ -30,7 +30,7 @@ export function computeOperation(addresses: Array<string>) {
       .filter(i => addresses.includes(i.address))
       .reduce((acc, cur) => acc + cur.value, 0)
     const amount = outputVal - inputVal
-    console.warn('assiging a fake account id and blockHeight to operation')
+    console.warn('assiging a fake account id and blockHeight to operation') // eslint-disable-line no-console
     return {
       id: t.hash,
       hash: t.hash,
@@ -92,7 +92,7 @@ export async function getAccount({
   network: Object,
   asyncDelay?: number,
   onProgress?: Function,
-}) {
+}): Promise<any> {
   const script = segwit ? parseInt(network.scriptHash, 10) : parseInt(network.pubKeyHash, 10)
 
   let balance = 0

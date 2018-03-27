@@ -48,6 +48,7 @@
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport": "^4.7.3",
     "@ledgerhq/hw-transport-node-hid": "^4.7.3",
+    "@ledgerhq/wallet-common": "^0.6.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",

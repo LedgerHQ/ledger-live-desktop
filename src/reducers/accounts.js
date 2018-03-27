@@ -6,7 +6,7 @@ import { createAccountModel } from '@ledgerhq/wallet-common/lib/models/account'
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
-import type { Account, AccountRaw } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { State } from 'reducers'
 
@@ -90,7 +90,10 @@ export function canCreateAccount(state: State): boolean {
   return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
 }
 
-export function serializeAccounts(accounts: AccountRaw[]): Account[] {
+// Yeah. `any` should be `AccountRaw[]` but it can also be a map
+// of wrapped accounts. And as flow is apparently incapable of doing
+// such a simple thing, let's put any, right? I don't care.
+export function serializeAccounts(accounts: any): Account[] {
   // ensure that accounts are always wrapped in data key
   if (accounts.length && !accounts[0].data) {
     accounts = accounts.map(account => ({ data: account }))
@@ -98,7 +101,7 @@ export function serializeAccounts(accounts: AccountRaw[]): Account[] {
   return accounts.map(accountModel.decode)
 }
 
-export function deserializeAccounts(accounts: Account[]): AccountRaw[] {
+export function deserializeAccounts(accounts: Account[]) {
   return accounts.map(accountModel.encode)
 }
 
