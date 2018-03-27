@@ -4,6 +4,7 @@ const webpackMain = require('electron-webpack/webpack.main.config')
 
 const plugins = require('./plugins')
 const resolve = require('./resolve')
+const rules = require('./rules')
 
 const dirs = p =>
   fs
@@ -40,7 +41,10 @@ module.exports = webpackMain().then(config => ({
     path: path.resolve(__dirname, '../dist/internals'),
   },
 
-  module: config.module,
+  module: {
+    ...config.module,
+    rules,
+  },
 
   plugins: [...plugins('internals'), ...config.plugins],
 }))
