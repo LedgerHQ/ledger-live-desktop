@@ -90,11 +90,15 @@ export function canCreateAccount(state: State): boolean {
   return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
 }
 
-export function serializeAccounts(accounts: Account[]) {
+export function serializeAccounts(accounts: AccountRaw[]): Account[] {
+  // ensure that accounts are always wrapped in data key
+  if (accounts.length && !accounts[0].data) {
+    accounts = accounts.map(account => ({ data: account }))
+  }
   return accounts.map(accountModel.decode)
 }
 
-export function deserializeAccounts(accounts: AccountRaw[]) {
+export function deserializeAccounts(accounts: Account[]): AccountRaw[] {
   return accounts.map(accountModel.encode)
 }
 

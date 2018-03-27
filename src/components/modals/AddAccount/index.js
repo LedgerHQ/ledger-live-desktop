@@ -270,8 +270,20 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
 
     if (type === 'wallet.getAccounts.success') {
+      // As data is passed inside electron event system,
+      // dates are converted to their string equivalent
+      //
+      // so, quick & dirty way to put back Date objects
+      const parsedData = data.map(account => ({
+        ...account,
+        operations: account.operations.map(op => ({
+          ...op,
+          date: new Date(op.date),
+        })),
+      }))
+
       this.setState({
-        accounts: data,
+        accounts: parsedData,
         step: 'listAccounts',
       })
     }
