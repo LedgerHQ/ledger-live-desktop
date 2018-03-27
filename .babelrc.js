@@ -1,9 +1,11 @@
+const { NODE_ENV } = process.env
+
 const presets = [
   [
     '@babel/preset-env',
     {
       loose: true,
-      modules: false,
+      modules: NODE_ENV === 'test' ? 'commonjs' : false,
       targets: {
         electron: '1.8',
         node: 'current',
@@ -20,7 +22,8 @@ const plugins = [
   [
     'babel-plugin-styled-components',
     {
-      displayName: process.env.NODE_ENV !== 'production',
+      displayName: NODE_ENV === 'development',
+      minify: NODE_ENV === 'production',
     },
   ],
 ]
