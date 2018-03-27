@@ -2,8 +2,8 @@
 
 exports[`components FormattedVal renders a fiat 1`] = `
 <span
-  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
-  color="#96d071"
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eAhrPH"
+  color="#66be54"
 >
   20.00
 </span>
@@ -11,8 +11,8 @@ exports[`components FormattedVal renders a fiat 1`] = `
 
 exports[`components FormattedVal renders a formatted val 1`] = `
 <span
-  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
-  color="#96d071"
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eAhrPH"
+  color="#66be54"
 >
   4
 </span>
@@ -20,8 +20,8 @@ exports[`components FormattedVal renders a formatted val 1`] = `
 
 exports[`components FormattedVal renders a percent 1`] = `
 <span
-  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
-  color="#96d071"
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eAhrPH"
+  color="#66be54"
 >
   30 %
 </span>
@@ -29,8 +29,8 @@ exports[`components FormattedVal renders a percent 1`] = `
 
 exports[`components FormattedVal shows code 1`] = `
 <span
-  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
-  color="#96d071"
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eAhrPH"
+  color="#66be54"
 >
   BTC 4
 </span>
@@ -38,8 +38,8 @@ exports[`components FormattedVal shows code 1`] = `
 
 exports[`components FormattedVal shows sign 1`] = `
 <span
-  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eCVsWd"
-  color="#96d071"
+  className="FormattedVal__T-fevxLy hYRXSf Text-bUpXnE eAhrPH"
+  color="#66be54"
 >
   + 4
 </span>
