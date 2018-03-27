@@ -17,7 +17,7 @@ const accountModel = createAccountModel()
 
 function orderAccountsOperations(account: Account) {
   const { operations } = account
-  operations.sort((a, b) => new Date(b.date) - new Date(a.date))
+  operations.sort((a, b) => b.date - a.date)
   return {
     ...account,
     operations,

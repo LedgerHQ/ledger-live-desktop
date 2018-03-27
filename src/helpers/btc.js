@@ -2,7 +2,7 @@
 
 import ledger from 'ledger-test-library'
 import bitcoin from 'bitcoinjs-lib'
-import type { Operation } from '@ledgerhq/wallet-common/lib/types'
+import type { OperationRaw } from '@ledgerhq/wallet-common/lib/types'
 
 import groupBy from 'lodash/groupBy'
 import noop from 'lodash/noop'
@@ -46,7 +46,7 @@ export function computeOperation(addresses: Array<string>) {
   }
 }
 
-export function getBalanceByDay(operations: Operation[]) {
+export function getBalanceByDay(operations: OperationRaw[]) {
   const txsByDate = groupBy(operations, tx => {
     const [date] = new Date(tx.date).toISOString().split('T')
     return date
