@@ -13,7 +13,7 @@ import isEqual from 'lodash/isEqual'
 
 import type { Account, Operation as OperationType, T } from 'types/common'
 
-import { MODAL_OPERATION_DETAILS } from 'constants'
+import { MODAL_OPERATION_DETAILS } from 'config/constants'
 
 import { openModal } from 'reducers/modals'
 

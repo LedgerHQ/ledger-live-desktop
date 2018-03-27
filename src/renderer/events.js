@@ -7,7 +7,7 @@ import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
 import type { Account } from 'types/common'
 
-import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'constants'
+import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'config/constants'
 
 import { getAccounts, getAccountById } from 'reducers/accounts'
 import { getCounterValue } from 'reducers/settings'

@@ -1,371 +1,187 @@
 // @flow
 
-/* eslint-disable react/no-multi-comp */
+/**
+ *                                   Chart
+ *                                   -----
+ *
+ *                                    XX
+ *                                   XXXX
+ *                          X       XX  X
+ *                         XXXX    XX   X
+ *                        XX  X  XX     X
+ *                       X    XXXX       X     XX    X
+ *                      XX     XX        X   XX XX  XX
+ *                     XX                XX XX   XXXX
+ *                                        XX
+ *                                        XX
+ *  Usage:
+ *
+ *    <Chart
+ *      data={data}
+ *      interactive       // Handle mouse events, display tooltip etc.
+ *      color="#5f8ced"   // Main color for line, gradient, etc.
+ *      height={300}      // Fix height. Width is responsive to container.
+ *    />
+ *
+ *    `data` looks like:
+ *
+ *     [
+ *       { date: '2018-01-01', value: 10 },
+ *       { date: '2018-01-02', value: 25 },
+ *       { date: '2018-01-03', value: 50 },
+ *     ]
+ *
+ */
 
-import React, { Fragment, Component, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import * as d3 from 'd3'
+import noop from 'lodash/noop'
 
-import VictoryChart from 'victory-chart/lib/components/victory-chart/victory-chart'
-import VictoryArea from 'victory-chart/lib/components/victory-area/victory-area'
-import VictoryAxis from 'victory-chart/lib/components/victory-axis/victory-axis'
-import VictoryTooltip from 'victory-core/lib/victory-tooltip/victory-tooltip'
-import VictoryVoronoiContainer from 'victory-chart/lib/components/containers/victory-voronoi-container'
+import type { Unit } from '@ledgerhq/currencies'
 
-import { space, colors, fontSizes } from 'styles/theme'
+import refreshNodes from './refreshNodes'
+import refreshDraw from './refreshDraw'
+import handleMouseEvents from './handleMouseEvents'
+import { enrichData, generateColors, generateMargins, observeResize } from './helpers'
 
-import Box from 'components/base/Box'
-import Text from 'components/base/Text'
-import { TooltipContainer } from 'components/base/Tooltip'
+import type { Data } from './types'
 
-const ANIMATION_DURATION = 600
-const DEFAULT_PROPS = {
-  color: 'blue',
-  padding: 0,
+export type Props = {
+  data: Data, // eslint-disable-line react/no-unused-prop-types
+  unit?: Unit, // eslint-disable-line react/no-unused-prop-types
+
+  id?: string, // eslint-disable-line react/no-unused-prop-types
+  height?: number,
+  tickXScale: string, // eslint-disable-line react/no-unused-prop-types
+  color?: string, // eslint-disable-line react/no-unused-prop-types
+  hideAxis?: boolean, // eslint-disable-line react/no-unused-prop-types
+  dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
+  interactive?: boolean, // eslint-disable-line react/no-unused-prop-types
+  renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
 }
 
-type Props = {
-  height: number,
-  render: Function,
-}
-
-type State = {
-  isAnimationActive: boolean,
-  width: number,
-}
-
-export class WrapperChart extends PureComponent<Props, State> {
-  state = {
-    isAnimationActive: true,
-    width: 0,
+class Chart extends PureComponent<Props> {
+  static defaultProps = {
+    color: '#000',
+    dateFormat: '%Y-%m-%d',
+    height: 400,
+    hideAxis: false,
+    id: 'chart',
+    interactive: true,
+    tickXScale: 'month',
+    unit: undefined,
   }
 
   componentDidMount() {
-    this._timeout = setTimeout(
-      () =>
-        this.setState({
-          isAnimationActive: false,
-        }),
-      ANIMATION_DURATION * 2,
-    )
-
-    if (this._node) {
-      this._ro = new ResizeObserver(entries => {
-        const entry = entries.find(entry => this._node === entry.target)
-        if (entry) {
-          this.setState({
-            width: entry.contentRect.width,
-          })
-        }
-      })
-
-      this._ro.observe(this._node)
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._timeout)
-
-    if (this._ro) {
-      this._ro.disconnect()
-    }
-  }
-
-  _ro = undefined
-  _node = undefined
-  _timeout = undefined
-
-  render() {
-    const { render, height } = this.props
-    const { isAnimationActive, width } = this.state
-    return (
-      <Box ff="Open Sans" innerRef={n => (this._node = n)} style={{ height }}>
-        {render({ isAnimationActive, height, width })}
-      </Box>
-    )
-  }
-}
-
-function getLinearGradient({
-  linearGradient,
-  id,
-  color,
-}: {
-  linearGradient: LinearGradient,
-  id: string,
-  color: string,
-}) {
-  return linearGradient.length > 0 ? (
-    <svg style={{ height: 0 }}>
-      <defs>
-        <linearGradient id={id} x1="0" y1="0" x2="0" y2="100%">
-          {linearGradient.map((g, i) => (
-            <stop
-              key={i} // eslint-disable-line react/no-array-index-key
-              offset={`${g[0]}%`}
-              stopColor={color}
-              stopOpacity={g[1]}
-            />
-          ))}
-        </linearGradient>
-      </defs>
-    </svg>
-  ) : null
-}
-
-class CustomTooltip extends Component<any, any> {
-  static defaultEvents = VictoryTooltip.defaultEvents
-
-  state = this.props
-
-  componentWillMount() {
-    this._mounted = true
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this._shouldRender = false
-    this.updateState(nextProps)
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const isActive = nextProps.active === true
-    const wasActive = this.props.active === true && !nextProps.active
-
-    return (isActive && this._shouldRender) || wasActive
-  }
-
-  componentWillUnmount() {
-    this._mounted = false
-  }
-
-  updateState = props =>
-    window.requestAnimationFrame(() => {
-      this._shouldRender = true
-      if (this._mounted) {
-        this.setState(props)
+    const { width } = this._ruler.getBoundingClientRect()
+    this._width = width
+    this.createChart()
+    observeResize(this._ruler, width => {
+      if (width !== this._width) {
+        this._width = width
+        this.refreshChart(this.props)
       }
     })
+  }
 
-  _shouldRender = false
-  _mounted = false
+  componentDidUpdate(prevProps: Props) {
+    this.refreshChart(prevProps)
+  }
 
-  render() {
-    const { strokeWidth, dotColor, x, y, active, text, datum, renderer } = this.props
+  _ruler: any
+  _node: any
+  _width: number
+  refreshChart: Function
 
-    if (!active) {
-      return null
+  createChart() {
+    const ctx = {
+      NODES: {},
+      INVALIDATED: {},
+      MARGINS: {},
+      COLORS: {},
+      DATA: [],
+      WIDTH: 0,
+      HEIGHT: 0,
+      x: noop,
+      y: noop,
     }
 
+    let firstRender = true
+
+    // Keep reference to mouse handler to allow destroy when refresh
+    let mouseHandler = null
+
+    this.refreshChart = prevProps => {
+      const { _node: node, props } = this
+      const { data: raw, color, dateFormat, height, hideAxis, interactive, renderTooltip } = props
+
+      ctx.DATA = enrichData(raw, d3.timeParse(dateFormat))
+
+      // Detect what needs to be updated
+      ctx.INVALIDATED = {
+        color: firstRender || (prevProps && color !== prevProps.color),
+        margin: firstRender || (prevProps && hideAxis !== prevProps.hideAxis),
+      }
+      firstRender = false
+
+      // Reset color if needed
+      if (ctx.INVALIDATED.color) {
+        ctx.COLORS = generateColors(color)
+      }
+
+      // Reset margins if needed
+      if (ctx.INVALIDATED.margin) {
+        ctx.MARGINS = generateMargins(hideAxis)
+      }
+
+      // Derived draw variables
+      ctx.HEIGHT = Math.max(0, (height || 0) - ctx.MARGINS.top - ctx.MARGINS.bottom)
+      ctx.WIDTH = Math.max(0, this._width - ctx.MARGINS.left - ctx.MARGINS.right)
+
+      // Scales and areas
+      const x = d3.scaleTime().range([0, ctx.WIDTH])
+      const y = d3.scaleLinear().range([ctx.HEIGHT, 0])
+      x.domain(d3.extent(ctx.DATA, d => d.parsedDate))
+      y.domain([0, d3.max(ctx.DATA, d => d.value)])
+      ctx.x = x
+      ctx.y = y
+
+      // Reference to last tooltip, to prevent un-necessary re-render
+      let lastDisplayedTooltip = null
+
+      // Add/remove nodes depending on props
+      refreshNodes({ ctx, node, props })
+
+      // Redraw
+      refreshDraw({ ctx, props })
+
+      // Mouse handler
+      mouseHandler && mouseHandler.remove() // eslint-disable-line no-unused-expressions
+      if (interactive) {
+        mouseHandler = handleMouseEvents({
+          ctx,
+          props,
+          shouldTooltipUpdate: d => d !== lastDisplayedTooltip,
+          onTooltipUpdate: d => (lastDisplayedTooltip = d),
+          renderTooltip,
+        })
+      }
+    }
+
+    this.refreshChart()
+  }
+
+  render() {
+    const { height } = this.props
     return (
-      <g>
-        <circle
-          cx={x}
-          cy={y + space[2]}
-          r={strokeWidth}
-          stroke={dotColor}
-          strokeWidth={strokeWidth}
-          fill={colors.white}
+      <div style={{ position: 'relative', height }} ref={n => (this._ruler = n)}>
+        <div
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+          ref={n => (this._node = n)}
         />
-        <foreignObject>
-          <TooltipContainer
-            style={{
-              position: 'absolute',
-              top: y - space[4],
-              left: x,
-              transform: `translate3d(-50%, 0, 0)`,
-            }}
-          >
-            <Text style={{ lineHeight: 1 }}>{renderer(text(datum))}</Text>
-          </TooltipContainer>
-        </foreignObject>
-      </g>
+      </div>
     )
   }
 }
 
-type LinearGradient = Array<Array<*>>
-
-type GenericChart = {
-  id: string,
-  linearGradient: LinearGradient,
-  strokeWidth: number,
-  height: number,
-  padding: Object | number,
-  color: string,
-  data: Array<Object>,
-}
-
-export const SimpleAreaChart = ({
-  linearGradient,
-  height,
-  data,
-  strokeWidth,
-  id,
-  padding,
-  color,
-}: GenericChart) => (
-  <WrapperChart
-    height={height}
-    render={({ width }) => (
-      <Fragment>
-        {getLinearGradient({
-          linearGradient,
-          id,
-          color,
-        })}
-        <VictoryArea
-          domainPadding={{
-            y: [0, space[1]],
-          }}
-          data={data}
-          x="name"
-          y="value"
-          style={{
-            data: {
-              stroke: color,
-              fill: `url(#${id})`,
-              strokeWidth,
-            },
-          }}
-          padding={padding}
-          height={height}
-          width={width}
-        />
-      </Fragment>
-    )}
-  />
-)
-
-SimpleAreaChart.defaultProps = {
-  height: 50,
-  id: 'simple-chart',
-  linearGradient: [],
-  strokeWidth: 1,
-  ...DEFAULT_PROPS,
-}
-
-type Chart = GenericChart & {
-  renderLabels: Function,
-  renderTickX: Function,
-  renderTickY: Function,
-  renderTooltip: Function,
-  tickCountX: number,
-  tickCountY: number,
-}
-
-const AreaChartContainer = <VictoryVoronoiContainer voronoiDimension="x" />
-
-export class AreaChart extends PureComponent<Chart> {
-  static defaultProps = {
-    height: 100,
-    id: 'chart',
-    linearGradient: [[5, 0.2], [100, 0]],
-    strokeWidth: 2,
-    renderLabels: (d: Object) => d.y,
-    renderTickX: (t: any) => t,
-    renderTickY: (t: any) => t,
-    ...DEFAULT_PROPS,
-  }
-
-  _tooltip = (
-    <CustomTooltip
-      strokeWidth={this.props.strokeWidth}
-      dotColor={this.props.color}
-      renderer={this.props.renderTooltip}
-    />
-  )
-
-  render() {
-    const {
-      color,
-      data,
-      height,
-      id,
-      linearGradient,
-      padding,
-      renderLabels,
-      renderTickX,
-      renderTickY,
-      strokeWidth,
-      tickCountX,
-      tickCountY,
-    } = this.props
-
-    const tickLabelsStyle = {
-      fill: colors.grey,
-      fontSize: fontSizes[4],
-      fontFamily: 'inherit',
-      fontWeight: 'inherit',
-    }
-
-    return (
-      <WrapperChart
-        height={height}
-        render={({ width }) => (
-          <Fragment>
-            {getLinearGradient({
-              linearGradient,
-              id,
-              color,
-            })}
-            <VictoryChart
-              height={height}
-              width={width}
-              padding={padding}
-              domainPadding={{
-                y: [0, space[1]],
-              }}
-              containerComponent={AreaChartContainer}
-            >
-              <VictoryAxis
-                animate={false}
-                tickCount={tickCountX}
-                tickFormat={renderTickX}
-                style={{
-                  axis: {
-                    stroke: colors.fog,
-                  },
-                  tickLabels: {
-                    ...tickLabelsStyle,
-                    padding: space[2],
-                  },
-                }}
-              />
-              <VictoryAxis
-                dependentAxis
-                tickCount={tickCountY}
-                tickFormat={renderTickY}
-                style={{
-                  grid: {
-                    stroke: colors.fog,
-                    strokeDasharray: 5,
-                  },
-                  axis: {
-                    stroke: null,
-                  },
-                  tickLabels: {
-                    ...tickLabelsStyle,
-                    padding: space[4],
-                  },
-                }}
-              />
-              <VictoryArea
-                data={data}
-                x="name"
-                y="value"
-                labelComponent={this._tooltip}
-                labels={renderLabels}
-                style={{
-                  data: {
-                    stroke: color,
-                    fill: `url(#${id})`,
-                    strokeWidth,
-                  },
-                }}
-                width={width}
-              />
-            </VictoryChart>
-          </Fragment>
-        )}
-      />
-    )
-  }
-}
+export default Chart

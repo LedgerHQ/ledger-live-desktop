@@ -8,7 +8,7 @@ import { storiesOf } from '@storybook/react'
 import { boolean, number } from '@storybook/addon-knobs'
 import { color } from '@storybook/addon-knobs/react'
 
-import Chart from 'components/base/NewChart'
+import Chart from 'components/base/Chart'
 
 const stories = storiesOf('Components/base', module)
 

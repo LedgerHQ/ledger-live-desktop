@@ -7,7 +7,7 @@ import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
 import styled from 'styled-components'
 
-import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'constants'
+import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
 import type { T, Account } from 'types/common'
 

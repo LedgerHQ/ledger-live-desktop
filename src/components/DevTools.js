@@ -5,7 +5,6 @@
 import React, { PureComponent } from 'react'
 import { remote, ipcRenderer } from 'electron'
 import { translate } from 'react-i18next'
-import VictoryArea from 'victory-chart/lib/components/victory-area/victory-area'
 import styled from 'styled-components'
 import color from 'color'
 import fs from 'fs'
@@ -19,10 +18,10 @@ import filter from 'lodash/fp/filter'
 import sortBy from 'lodash/fp/sortBy'
 import chunk from 'lodash/chunk'
 
+import Chart from 'components/base/Chart'
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
 import CopyToClipboard from 'components/base/CopyToClipboard'
-import { WrapperChart } from 'components/base/Chart'
 
 import staticPath from 'helpers/staticPath'
 
@@ -139,6 +138,7 @@ class DevTools extends PureComponent<any, State> {
             [
               ...(prev.cpuUsage[data.name] || []),
               {
+                date: new Date().getTime().toString(),
                 value: parseFloat(data.value),
               },
             ],
@@ -247,7 +247,16 @@ class DevTools extends PureComponent<any, State> {
                       <Box>{k}</Box>
                     </Box>
                     <Box>
-                      <WrapperChart
+                      <Chart
+                        id={k}
+                        data={cpuUsage[k]}
+                        dateFormat="%Q"
+                        color="#8884d8"
+                        height={50}
+                        hideAxis
+                        interactive={false}
+                      />
+                      {/* <WrapperChart
                         height={50}
                         render={({ height, width }) => (
                           <VictoryArea
@@ -264,7 +273,7 @@ class DevTools extends PureComponent<any, State> {
                             padding={{ top: 10, right: 0, left: 0, bottom: 0 }}
                           />
                         )}
-                      />
+                      /> */}
                     </Box>
                   </Box>
                 ))}

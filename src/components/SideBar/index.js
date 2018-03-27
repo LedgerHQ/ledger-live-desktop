@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
 
-import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'constants'
+import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'config/constants'
 
 import type { Account, T } from 'types/common'
 

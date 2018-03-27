@@ -35,7 +35,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
 
   const nbTicksX = getTickXCount(tickXScale)
   const renderTickX = getRenderTickX(tickXScale)
-  const renderTickY = t => formatShort(unit, t)
+  const renderTickY = t => (unit ? formatShort(unit, t) : t)
 
   const area = d3
     .area()

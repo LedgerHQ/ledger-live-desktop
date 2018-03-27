@@ -8,7 +8,7 @@ import moment from 'moment'
 
 import type { T } from 'types/common'
 
-import { MODAL_OPERATION_DETAILS } from 'constants'
+import { MODAL_OPERATION_DETAILS } from 'config/constants'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
