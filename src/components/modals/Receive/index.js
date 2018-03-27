@@ -2,6 +2,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
+import type { Account as AccountType } from '@ledgerhq/wallet-common/lib/types'
 
 import get from 'lodash/get'
 
@@ -15,7 +16,7 @@ import ReceiveBox from 'components/ReceiveBox'
 import RequestAmount from 'components/RequestAmount'
 import SelectAccount from 'components/SelectAccount'
 
-import type { Account as AccountType, T } from 'types/common'
+import type { T } from 'types/common'
 
 type Props = {
   t: T,

@@ -4,10 +4,9 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { push } from 'react-router-redux'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
-
-import type { Account } from 'types/common'
 
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal, closeModal } from 'reducers/modals'
@@ -73,7 +72,7 @@ class SettingsAccount extends PureComponent<Props, State> {
         : {}),
       settings: {
         ...account.settings,
-        minConfirmations: minConfirmations || account.settings.minConfirmations,
+        minConfirmations: minConfirmations || account.minConfirmations,
       },
     }
   }
@@ -89,10 +88,7 @@ class SettingsAccount extends PureComponent<Props, State> {
     window.requestAnimationFrame(() => {
       updateAccount({
         ...account,
-        settings: {
-          ...account.settings,
-          minConfirmations: Number(minConfirmations),
-        },
+        minConfirmations: Number(minConfirmations),
       })
     })
   }
@@ -205,7 +201,7 @@ class SettingsAccount extends PureComponent<Props, State> {
                     type="number"
                     min={1}
                     max={100}
-                    value={account.settings.minConfirmations}
+                    value={account.minConfirmations}
                     onChange={this.handleChangeMinConfirmations(account)}
                   />
                 </Box>

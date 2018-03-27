@@ -6,10 +6,11 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'config/constants'
 
-import type { Account, T } from 'types/common'
+import type { T } from 'types/common'
 
 import { openModal } from 'reducers/modals'
 import { getVisibleAccounts } from 'reducers/accounts'

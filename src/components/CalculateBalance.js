@@ -2,8 +2,7 @@
 
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-
-import type { Account } from 'types/common'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import calculateBalance from 'helpers/balance'
 

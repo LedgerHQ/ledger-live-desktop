@@ -2,8 +2,7 @@
 
 import React from 'react'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
-
-import type { Account } from 'types/common'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import Chart from 'components/base/Chart'
 import Bar from 'components/base/Bar'

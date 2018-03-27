@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import noop from 'lodash/noop'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { T, Account } from 'types/common'
+import type { T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 

@@ -1,8 +1,9 @@
 // @flow
 
 import React from 'react'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { T, Account } from 'types/common'
+import type { T } from 'types/common'
 import type { DoubleVal } from 'components/RequestAmount'
 
 import { ModalFooter } from 'components/base/Modal'

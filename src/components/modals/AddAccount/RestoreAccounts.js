@@ -2,12 +2,11 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
-
-import type { Account } from 'types/common'
 
 const Container = styled(Box)`
   border: 1px solid ${p => p.theme.colors.alertRed};

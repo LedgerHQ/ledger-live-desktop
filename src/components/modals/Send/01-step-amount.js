@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { Unit } from '@ledgerhq/currencies'
-import type { Account, T } from 'types/common'
+import type { T } from 'types/common'
 import type { DoubleVal } from 'components/RequestAmount'
 
 import Box from 'components/base/Box'

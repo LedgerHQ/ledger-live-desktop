@@ -4,8 +4,9 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { ipcRenderer } from 'electron'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { Account, Device } from 'types/common'
+import type { Device } from 'types/common'
 
 import { getCurrentDevice } from 'reducers/devices'
 import { sendEvent } from 'renderer/events'

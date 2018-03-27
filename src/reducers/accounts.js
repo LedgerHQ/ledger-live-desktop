@@ -1,42 +1,34 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
+import { createAccountModel } from '@ledgerhq/wallet-common/lib/models/account'
 
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
-import defaultsDeep from 'lodash/defaultsDeep'
-
-import { getDefaultUnitByCoinType, getCurrencyByCoinType } from '@ledgerhq/currencies'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { State } from 'reducers'
-import type { Account } from 'types/common'
 
 export type AccountsState = Account[]
 const state: AccountsState = []
 
+const accountModel = createAccountModel()
+
 function orderAccountsOperations(account: Account) {
   const { operations } = account
-  operations.sort((a, b) => new Date(b.receivedAt) - new Date(a.receivedAt))
+  operations.sort((a, b) => b.date - a.date)
   return {
     ...account,
     operations,
   }
 }
 
-function applyDefaults(account) {
-  return defaultsDeep(account, {
-    settings: {
-      minConfirmations: 2,
-    },
-  })
-}
-
 const handlers: Object = {
   SET_ACCOUNTS: (
     state: AccountsState,
     { payload: accounts }: { payload: Account[] },
-  ): AccountsState => accounts.map(applyDefaults),
+  ): AccountsState => accounts,
 
   ADD_ACCOUNT: (
     state: AccountsState,
@@ -98,31 +90,19 @@ export function canCreateAccount(state: State): boolean {
   return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
 }
 
-export function serializeAccounts(accounts: Array<Object>) {
-  return accounts.map((account, key) => ({
-    ...account,
-    currency: getCurrencyByCoinType(account.coinType),
-    name: account.name || `${key}`,
-    unit: account.unit || getDefaultUnitByCoinType(account.coinType),
-  }))
+// Yeah. `any` should be `AccountRaw[]` but it can also be a map
+// of wrapped accounts. And as flow is apparently incapable of doing
+// such a simple thing, let's put any, right? I don't care.
+export function serializeAccounts(accounts: any): Account[] {
+  // ensure that accounts are always wrapped in data key
+  if (accounts.length && !accounts[0].data) {
+    accounts = accounts.map(account => ({ data: account }))
+  }
+  return accounts.map(accountModel.decode)
 }
 
 export function deserializeAccounts(accounts: Account[]) {
-  return accounts.map(account => ({
-    id: account.id,
-    address: account.address,
-    addresses: account.addresses,
-    balance: account.balance,
-    balanceByDay: account.balanceByDay,
-    coinType: account.coinType,
-    index: account.index,
-    name: account.name,
-    operations: account.operations,
-    path: account.path,
-    rootPath: account.rootPath,
-    settings: account.settings,
-    unit: account.unit,
-  }))
+  return accounts.map(accountModel.encode)
 }
 
 export default handleActions(handlers, state)
