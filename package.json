@@ -5,7 +5,7 @@
   "repository": "https://github.com/LedgerHQ/ledger-wallet-desktop",
   "version": "0.1.0",
   "author": "Ledger",
-  "license": "BSD-2-Clause",
+  "license": "MIT",
   "scripts": {
     "compile": "bash ./scripts/dist.sh",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",

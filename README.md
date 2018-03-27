@@ -3,6 +3,8 @@
 [![CircleCI](https://circleci.com/gh/LedgerHQ/ledger-wallet-desktop.svg?style=svg)](https://circleci.com/gh/LedgerHQ/ledger-wallet-desktop)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
 
+:warning: Disclaimer: this project is under active development. Use at your own risks.
+
 ## Requirements
 
 * nodejs v9.x (https://nodejs.org/en/)
