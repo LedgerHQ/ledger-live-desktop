@@ -81,9 +81,8 @@ export function getVisibleAccounts(state: { accounts: AccountsState }): Account[
   return getAccounts(state).filter(account => account.archived !== true)
 }
 
-export function getAccountById(state: { accounts: AccountsState }, id: string): Account | null {
-  const account = getAccounts(state).find(account => account.id === id)
-  return account || null
+export function getAccountById(state: { accounts: AccountsState }, id: string): ?Account {
+  return getAccounts(state).find(account => account.id === id)
 }
 
 export function canCreateAccount(state: State): boolean {
