@@ -15,7 +15,7 @@ import type { T } from 'types/common'
 import { darken } from 'styles/helpers'
 
 import { getAccountById } from 'reducers/accounts'
-import { getCounterValue } from 'reducers/settings'
+import { getCounterValueCode } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
 import IconControls from 'icons/Controls'
@@ -50,7 +50,7 @@ const ButtonSettings = styled(Button).attrs({
 
 const mapStateToProps = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
-  counterValue: getCounterValue(state),
+  counterValue: getCounterValueCode(state),
 })
 
 const mapDispatchToProps = {

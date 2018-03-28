@@ -9,11 +9,10 @@ import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { Unit } from '@ledgerhq/currencies'
 import type { T } from 'types/common'
-import type { DoubleVal } from 'components/RequestAmount'
 
 import { MODAL_SEND } from 'config/constants'
 
-import { getCounterValue } from 'reducers/settings'
+import { getCounterValueCode } from 'reducers/settings'
 
 import Breadcrumb from 'components/Breadcrumb'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
@@ -26,7 +25,7 @@ import StepVerification from './03-step-verification'
 import StepConfirmation from './04-step-confirmation'
 
 const mapStateToProps = state => ({
-  counterValue: getCounterValue(state),
+  counterValue: getCounterValueCode(state),
 })
 
 type Props = {
@@ -37,10 +36,7 @@ type Props = {
 type State = {
   stepIndex: number,
   isDeviceReady: boolean,
-  amount: {
-    values: DoubleVal,
-    rawValues: DoubleVal,
-  },
+  amount: { left: number, right: number },
   account: Account | null,
   recipientAddress: string,
   fees: {
@@ -63,14 +59,8 @@ const INITIAL_STATE = {
   account: null,
   recipientAddress: '',
   amount: {
-    values: {
-      left: 0,
-      right: 0,
-    },
-    rawValues: {
-      left: 0,
-      right: 0,
-    },
+    left: 0,
+    right: 0,
   },
   fees: {
     value: 0,
@@ -90,7 +80,7 @@ class SendModal extends PureComponent<Props, State> {
     // informations
     if (stepIndex === 0) {
       const { amount, recipientAddress } = this.state
-      return !!amount.rawValues.left && !!recipientAddress && !!account
+      return !!amount.left && !!recipientAddress && !!account
     }
 
     // connect device
@@ -123,7 +113,7 @@ class SendModal extends PureComponent<Props, State> {
     const { Comp } = step
     const stepProps = {
       ...othersState,
-      amount: amount.values,
+      amount,
       account: account || acc,
     }
 
@@ -154,7 +144,7 @@ class SendModal extends PureComponent<Props, State> {
                   canNext={canNext}
                   onNext={this.handleNextStep}
                   account={acc}
-                  amount={amount.rawValues}
+                  amount={amount}
                   t={t}
                 />
               )}

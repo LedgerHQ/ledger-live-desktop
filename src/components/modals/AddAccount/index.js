@@ -306,7 +306,7 @@ class AddAccountModal extends PureComponent<Props, State> {
         fetchingCounterValues: true,
       })
 
-      await fetchCounterValues(currency.coinType)
+      await fetchCounterValues([currency])
 
       this.setState({
         fetchingCounterValues: false,

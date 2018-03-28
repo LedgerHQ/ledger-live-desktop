@@ -14,7 +14,7 @@ import sortBy from 'lodash/sortBy'
 import type { T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
-import { getCounterValue } from 'reducers/settings'
+import { getCounterValueCode } from 'reducers/settings'
 
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
@@ -31,7 +31,7 @@ import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
-  counterValue: getCounterValue(state),
+  counterValue: getCounterValueCode(state),
 })
 
 const mapDispatchToProps = {

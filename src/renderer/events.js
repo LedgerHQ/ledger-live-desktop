@@ -3,17 +3,19 @@
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import debug from 'debug'
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import uniqBy from 'lodash/uniqBy'
+import { getFiatUnit } from '@ledgerhq/currencies'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Currency, Unit } from '@ledgerhq/currencies'
 
 import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'config/constants'
 
 import { getAccounts, getAccountById } from 'reducers/accounts'
-import { getCounterValue } from 'reducers/settings'
+import { getCounterValueCode } from 'reducers/settings'
 import { isLocked } from 'reducers/application'
 import { setUpdateStatus } from 'reducers/update'
 
-import { updateLastCounterValueBySymbol } from 'actions/counterValues'
+import { updateCounterValues } from 'actions/counterValues'
 import { updateAccount } from 'actions/accounts'
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 
@@ -106,15 +108,11 @@ export function stopSyncAccounts() {
   clearTimeout(syncAccountsTimeout)
 }
 
-export function startSyncCounterValues(counterValue: string, accounts: Account[]) {
+export function startSyncCounterValues(counterValueCode: string, accounts: Account[]) {
   d.sync('Sync counterValues - start')
-
-  sendEvent('msg', 'counterValues.sync', {
-    counterValue,
-    currencies: [
-      ...new Set(accounts.map(account => getDefaultUnitByCoinType(account.coinType).code)),
-    ],
-  })
+  const currencies: Currency[] = uniqBy(accounts.map(a => a.currency), 'code')
+  const counterValue: Unit = getFiatUnit(counterValueCode)
+  sendEvent('msg', 'counterValues.sync', { currencies, counterValue })
 }
 
 export function stopSyncCounterValues() {
@@ -206,12 +204,11 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     },
     counterValues: {
       update: counterValues => {
-        counterValues.map(c => store.dispatch(updateLastCounterValueBySymbol(c.symbol, c.value)))
-
+        store.dispatch(updateCounterValues(counterValues))
         syncCounterValuesTimeout = setTimeout(() => {
           const state = store.getState()
           const accounts = getAccounts(state)
-          const counterValue = getCounterValue(state)
+          const counterValue = getCounterValueCode(state)
           startSyncCounterValues(counterValue, accounts)
         }, SYNC_COUNTER_VALUES_DELAY)
       },
@@ -245,7 +242,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
 
   if (!locked) {
     const accounts = getAccounts(state)
-    const counterValue = getCounterValue(state)
+    const counterValue = getCounterValueCode(state)
 
     startSyncCounterValues(counterValue, accounts)
 
