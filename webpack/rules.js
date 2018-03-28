@@ -8,5 +8,6 @@ module.exports = [
       babelrc: false,
       ...babelConfig(),
     },
+    exclude: /node_modules/,
   },
 ]
