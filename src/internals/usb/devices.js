@@ -38,8 +38,15 @@ export default (send: IPCSend) => ({
 async function isValidHIDDevice(devicePath: string): Promise<boolean> {
   try {
     const transport: Transport<*> = await CommNodeHid.open(devicePath)
-    await transport.send(...APDUS.GET_FIRMWARE)
-    return true
+    try {
+      await transport.send(...APDUS.GET_FIRMWARE)
+      return true
+    } catch (err) {
+      // if we are inside an app, the first call should have failed,
+      // so we try this one
+      await transport.send(...APDUS.GET_FIRMWARE_FALLBACK)
+      return true
+    }
   } catch (err) {
     return false
   }
