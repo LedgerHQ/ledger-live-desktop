@@ -7,6 +7,9 @@ docker_defaults: &docker_defaults
 jobs:
   build:
     <<: *docker_defaults
+    branches:
+      ignore:
+        - gh-pages
     steps:
       - checkout
       - run:
