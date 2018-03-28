@@ -1,246 +1,118 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
-import { Trans, translate } from 'react-i18next'
-import { getCurrencyByCoinType } from '@ledgerhq/currencies'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import { connect } from 'react-redux'
+import { ipcRenderer } from 'electron'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { T, Device, Devices } from 'types/common'
+import { sendEvent } from 'renderer/events'
+import { getCurrentDevice } from 'reducers/devices'
+import type { Device } from 'types/common'
 
-import noop from 'lodash/noop'
+const mapStateToProps = state => ({
+  currentDevice: getCurrentDevice(state),
+})
 
-import Box from 'components/base/Box'
-
-import IconCheck from 'icons/Check'
-import IconExclamationCircle from 'icons/ExclamationCircle'
-import IconInfoCircle from 'icons/InfoCircle'
-import IconLoader from 'icons/Loader'
-import IconUsb from 'icons/Usb'
-
-import * as IconDevice from 'icons/device'
-
-const Step = styled(Box).attrs({
-  borderRadius: 1,
-  justifyContent: 'center',
-  fontSize: 4,
-})`
-  border: 1px solid
-    ${p =>
-      p.validated
-        ? p.theme.colors.wallet
-        : p.hasErrors ? p.theme.colors.alertRed : p.theme.colors.fog};
-`
-const StepIcon = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-})`
-  width: 64px;
-`
-const StepContent = styled(Box).attrs({
-  horizontal: true,
-  alignItems: 'center',
-})`
-  height: 60px;
-
-  strong {
-    font-weight: 600;
-  }
-`
-
-const ListDevices = styled(Box).attrs({
-  p: 3,
-  pt: 1,
-  flow: 2,
-})``
-
-const DeviceItem = styled(Box).attrs({
-  bg: 'lightGrey',
-  borderRadius: 1,
-  alignItems: 'center',
-  color: 'dark',
-  ff: 'Open Sans|SemiBold',
-  fontSize: 4,
-  horizontal: true,
-  pr: 3,
-  pl: 0,
-})`
-  cursor: pointer;
-  height: 54px;
-`
-const DeviceIcon = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'graphite',
-})`
-  width: 55px;
-`
-const DeviceSelected = styled(Box).attrs({
-  alignItems: 'center',
-  bg: p => (p.selected ? 'wallet' : 'white'),
-  color: 'white',
-  justifyContent: 'center',
-})`
-  border-radius: 50%;
-  border: 1px solid ${p => (p.selected ? p.theme.colors.wallet : p.theme.colors.fog)};
-  height: 18px;
-  width: 18px;
-`
-
-const WrapperIconCurrency = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-})`
-  border: 1px solid ${p => p.theme.colors[p.color]};
-  border-radius: 8px;
-  height: 24px;
-  width: 24px;
-`
-
-const Info = styled(Box).attrs({
-  alignItems: 'center',
-  color: p => (p.hasErrors ? 'alertRed' : 'grey'),
-  flow: 2,
-  fontSize: 3,
-  horizontal: true,
-  ml: 1,
-  pt: 1,
-})``
-
-const StepCheck = ({ checked, hasErrors }: { checked: boolean, hasErrors?: boolean }) => (
-  <Box pr={5}>
-    {checked ? (
-      <Box color="wallet">
-        <IconCheck size={16} />
-      </Box>
-    ) : hasErrors ? (
-      <Box color="alertRed">
-        <IconExclamationCircle size={16} />
-      </Box>
-    ) : (
-      <IconLoader size={16} />
-    )}
-  </Box>
-)
-
-StepCheck.defaultProps = {
-  hasErrors: false,
-}
+type DeviceStatus = 'unconnected' | 'connected' | 'appOpened'
 
 type Props = {
-  appOpened: null | 'success' | 'fail',
-  coinType: number,
-  devices: Devices,
-  deviceSelected: Device | null,
-  onChangeDevice: Function,
-  t: T,
+  currentDevice: Device | null,
+  account?: Account,
+  onStatusChange?: DeviceStatus => void,
+  render?: Function,
 }
 
-class DeviceMonit extends PureComponent<Props> {
-  static defaultProps = {
-    appOpened: null,
-    devices: [],
-    deviceSelected: null,
-    onChangeDevice: noop,
+type State = {
+  status: DeviceStatus,
+}
+
+class DeviceMonit extends PureComponent<Props, State> {
+  state = {
+    status: this.props.currentDevice ? 'connected' : 'unconnected',
   }
 
-  getDeviceSelected() {
-    const { deviceSelected, devices } = this.props
-
-    return deviceSelected || (devices.length === 1 && devices[0]) || null
+  componentDidMount() {
+    ipcRenderer.on('msg', this.handleMsgEvent)
+    if (this.props.currentDevice !== null) {
+      this.checkAppOpened()
+    }
   }
 
-  getAppState() {
-    const { appOpened } = this.props
+  componentWillReceiveProps(nextProps) {
+    const { status } = this.state
+    const { currentDevice } = this.props
+    const { currentDevice: nextCurrentDevice } = nextProps
 
-    return {
-      success: appOpened === 'success',
-      fail: appOpened === 'fail',
+    if (status === 'unconnected' && !currentDevice && nextCurrentDevice) {
+      this.handleStatusChange('connected')
+    }
+
+    if (status !== 'unconnected' && !nextCurrentDevice) {
+      this.handleStatusChange('unconnected')
+    }
+  }
+
+  componentDidUpdate() {
+    const { currentDevice } = this.props
+
+    if (currentDevice !== null) {
+      this.checkAppOpened()
+    } else {
+      clearTimeout(this._timeout)
+    }
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.removeListener('msg', this.handleMsgEvent)
+    clearTimeout(this._timeout)
+  }
+
+  checkAppOpened = () => {
+    const { currentDevice, account } = this.props
+
+    if (currentDevice === null || !account || account.currency === null) {
+      return
+    }
+
+    sendEvent('usb', 'wallet.checkIfAppOpened', {
+      devicePath: currentDevice.path,
+      accountPath: account.path,
+      accountAddress: account.address,
+    })
+  }
+
+  _timeout: any = null
+
+  handleStatusChange = status => {
+    const { onStatusChange } = this.props
+    this.setState({ status })
+    onStatusChange && onStatusChange(status)
+  }
+
+  handleMsgEvent = (e, { type }) => {
+    if (type === 'wallet.checkIfAppOpened.success') {
+      this.handleStatusChange('appOpened')
+      clearTimeout(this._timeout)
+    }
+
+    if (type === 'wallet.checkIfAppOpened.fail') {
+      this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
   }
 
   render() {
-    const { coinType, t, onChangeDevice, devices } = this.props
-
-    const deviceSelected = this.getDeviceSelected()
-    const appState = this.getAppState()
-
-    const hasDevice = devices.length > 0
-    const hasMultipleDevices = devices.length > 1
-
-    const { name: appName } = getCurrencyByCoinType(coinType)
-    const IconCurrency = getIconByCoinType(coinType)
-
+    const { status } = this.state
+    const { render } = this.props
+    if (render) {
+      return render(status)
+    }
     return (
-      <Box flow={4}>
-        <Step validated={hasDevice}>
-          <StepContent>
-            <StepIcon>
-              <IconUsb size={36} />
-            </StepIcon>
-            <Box grow>
-              <Trans i18nKey="connectDevice:step1.connect" parent="div">
-                Connect your <strong>Ledger device</strong> to your computer and enter your{' '}
-                <strong>PIN code</strong> on your device
-              </Trans>
-            </Box>
-            <StepCheck checked={hasDevice} />
-          </StepContent>
-          {hasMultipleDevices && (
-            <ListDevices>
-              <Box color="graphite" fontSize={3}>
-                {t('connectDevice:step1.choose')}
-              </Box>
-              <Box flow={2}>
-                {devices.map(d => {
-                  const Icon = IconDevice[d.product.replace(/\s/g, '')]
-                  return (
-                    <DeviceItem
-                      key={`${d.vendorId}-${d.productId}`}
-                      onClick={() => onChangeDevice(d)}
-                    >
-                      <DeviceIcon>
-                        <Icon size={28} />
-                      </DeviceIcon>
-                      <Box grow>
-                        {d.manufacturer} {d.product}
-                      </Box>
-                      <Box>
-                        <DeviceSelected selected={d === deviceSelected}>
-                          <IconCheck size={10} />
-                        </DeviceSelected>
-                      </Box>
-                    </DeviceItem>
-                  )
-                })}
-              </Box>
-            </ListDevices>
-          )}
-        </Step>
-        <Step validated={appState.success} hasErrors={appState.fail}>
-          <StepContent>
-            <StepIcon>
-              <WrapperIconCurrency>
-                <IconCurrency size={12} />
-              </WrapperIconCurrency>
-            </StepIcon>
-            <Box grow>
-              <Trans i18nKey="connectDevice:step2.open" parent="div">
-                Open <strong>{{ appName }} App</strong> on your device
-              </Trans>
-            </Box>
-            <StepCheck checked={appState.success} hasErrors={appState.fail} />
-          </StepContent>
-        </Step>
-        <Info hasErrors={appState.fail}>
-          <Box>
-            <IconInfoCircle size={12} />
-          </Box>
-          <Box>{t('connectDevice:info')}</Box>
-        </Info>
-      </Box>
+      <div>
+        <div>device connected {status !== 'unconnected' ? 'TRUE' : 'FALSE'}</div>
+        <div>app opened {status === 'appOpened' ? 'TRUE' : 'FALSE'}</div>
+      </div>
     )
   }
 }
 
-export default translate()(DeviceMonit)
+export default connect(mapStateToProps)(DeviceMonit)

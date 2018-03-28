@@ -3,7 +3,7 @@
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import Btc from '@ledgerhq/hw-app-btc'
 
-import getAllAccounts, { verifyAddress } from './accounts'
+import getAllAccounts, { getPath, verifyAddress } from './accounts'
 
 async function getAllAccountsByCoinType({ pathDevice, coinType, currentAccounts, onProgress }) {
   const transport = await CommNodeHid.open(pathDevice)
@@ -59,11 +59,13 @@ export default (sendEvent: Function) => ({
     }
   },
   checkIfAppOpened: async ({
+    coinType,
     devicePath,
     accountPath,
     accountAddress,
     segwit = true,
   }: {
+    coinType?: number,
     devicePath: string,
     accountPath: string,
     accountAddress: string,
@@ -72,11 +74,18 @@ export default (sendEvent: Function) => ({
     try {
       const transport = await CommNodeHid.open(devicePath)
       const btc = new Btc(transport)
-      const { bitcoinAddress } = await btc.getWalletPublicKey(accountPath, false, segwit)
-      if (bitcoinAddress === accountAddress) {
+      if (accountPath) {
+        const { bitcoinAddress } = await btc.getWalletPublicKey(accountPath, false, segwit)
+        if (bitcoinAddress === accountAddress) {
+          sendEvent('wallet.checkIfAppOpened.success')
+        } else {
+          throw new Error('Address is different')
+        }
+      }
+
+      if (coinType) {
+        await btc.getWalletPublicKey(getPath({ coinType, segwit }), false, segwit)
         sendEvent('wallet.checkIfAppOpened.success')
-      } else {
-        throw new Error('Address is different')
       }
     } catch (err) {
       sendEvent('wallet.checkIfAppOpened.fail')

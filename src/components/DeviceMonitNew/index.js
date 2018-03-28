@@ -1,21 +1,25 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
+
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Device, Devices } from 'types/common'
 
 import { sendEvent } from 'renderer/events'
-import { getCurrentDevice } from 'reducers/devices'
-import type { Device } from 'types/common'
+import { getDevices, getCurrentDevice } from 'reducers/devices'
 
-const mapStateToProps = state => ({
-  currentDevice: getCurrentDevice(state),
+const mapStateToProps = (state, props) => ({
+  devices: getDevices(state),
+  currentDevice: props.device || getCurrentDevice(state),
 })
 
-type DeviceStatus = 'unconnected' | 'connected' | 'appOpened'
+type DeviceStatus = 'unconnected' | 'connected' | 'appOpened.success' | 'appOpened.fail'
 
 type Props = {
+  coinType: number,
+  devices: Devices,
   currentDevice: Device | null,
   account?: Account,
   onStatusChange?: DeviceStatus => void,
@@ -68,16 +72,30 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 
   checkAppOpened = () => {
-    const { currentDevice, account } = this.props
+    const { currentDevice, account, coinType } = this.props
 
-    if (currentDevice === null || !account || account.currency === null) {
+    if (currentDevice === null) {
       return
+    }
+
+    let options = null
+
+    if (account && account.currency) {
+      options = {
+        accountPath: account.path,
+        accountAddress: account.address,
+      }
+    }
+
+    if (coinType) {
+      options = {
+        coinType,
+      }
     }
 
     sendEvent('usb', 'wallet.checkIfAppOpened', {
       devicePath: currentDevice.path,
-      accountPath: account.path,
-      accountAddress: account.address,
+      ...options,
     })
   }
 
@@ -91,27 +109,25 @@ class DeviceMonit extends PureComponent<Props, State> {
 
   handleMsgEvent = (e, { type }) => {
     if (type === 'wallet.checkIfAppOpened.success') {
-      this.handleStatusChange('appOpened')
+      this.handleStatusChange('appOpened.success')
       clearTimeout(this._timeout)
     }
 
     if (type === 'wallet.checkIfAppOpened.fail') {
+      this.handleStatusChange('appOpened.fail')
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
   }
 
   render() {
     const { status } = this.state
-    const { render } = this.props
+    const { devices, currentDevice, render } = this.props
+
     if (render) {
-      return render(status)
+      return render({ status, devices, currentDevice })
     }
-    return (
-      <div>
-        <div>device connected {status !== 'unconnected' ? 'TRUE' : 'FALSE'}</div>
-        <div>app opened {status === 'appOpened' ? 'TRUE' : 'FALSE'}</div>
-      </div>
-    )
+
+    return null
   }
 }
 

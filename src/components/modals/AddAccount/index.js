@@ -25,6 +25,8 @@ import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
+import DeviceConnect from 'components/DeviceConnect'
+import DeviceMonit from 'components/DeviceMonitNew'
 import FormattedVal from 'components/base/FormattedVal'
 import Label from 'components/base/Label'
 import Modal, { ModalBody } from 'components/base/Modal'
@@ -68,10 +70,22 @@ const Steps = {
     </form>
   ),
   connectDevice: (props: Object) => (
-    <Box>
-      <Box>Connect your Ledger: {props.connected ? 'ok' : 'ko'}</Box>
-      <Box>Start {props.currency.name} App on your Ledger: ko</Box>
-    </Box>
+    <DeviceMonit
+      coinType={props.currency.coinType}
+      render={({ status, devices, currentDevice }) => (
+        <DeviceConnect
+          coinType={props.currency.coinType}
+          appOpened={
+            status === 'appConnected.success'
+              ? 'success'
+              : status === 'appConnected.fail' ? 'fail' : null
+          }
+          devices={devices}
+          deviceSelected={currentDevice}
+          onChangeDevice={d => console.log('onChangeDevice', d)}
+        />
+      )}
+    />
   ),
   inProgress: ({ progress, unit }: Object) => (
     <Box>
@@ -182,11 +196,11 @@ class AddAccountModal extends PureComponent<Props, State> {
     const { step } = this.state
     const { currentDevice } = this.props
 
-    if (step === 'connectDevice' && currentDevice !== null) {
-      this.getWalletInfos()
-    } else {
-      clearTimeout(this._timeout)
-    }
+    // if (step === 'connectDevice' && currentDevice !== null) {
+    //   this.getWalletInfos()
+    // } else {
+    //   clearTimeout(this._timeout)
+    // }
   }
 
   componentWillUnmount() {
@@ -225,7 +239,6 @@ class AddAccountModal extends PureComponent<Props, State> {
       }),
       ...props(step === 'connectDevice', {
         t,
-        connected: currentDevice !== null,
         currency,
       }),
       ...props(step === 'inProgress', {

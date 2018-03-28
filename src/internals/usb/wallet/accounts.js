@@ -9,7 +9,7 @@ import Btc from '@ledgerhq/hw-app-btc'
 import { getAccount, getHDNode, networks } from 'helpers/btc'
 import { serializeAccounts } from 'reducers/accounts'
 
-type CoinType = 0 | 1
+type CoinType = number
 
 async function sleep(delay, callback) {
   if (delay !== 0) {
@@ -56,10 +56,10 @@ function encodeBase58Check(vchIn) {
   return bs58check.encode(Buffer.from(vchIn))
 }
 
-function getPath({
+export function getPath({
   coinType,
   account,
-  segwit,
+  segwit = true,
 }: {
   coinType: CoinType,
   account?: any,
