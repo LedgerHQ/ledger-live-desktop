@@ -43,12 +43,12 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/currencies": "^4.7.3",
+    "@ledgerhq/currencies": "^4.7.5",
     "@ledgerhq/hw-app-btc": "^4.7.3",
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport": "^4.7.3",
     "@ledgerhq/hw-transport-node-hid": "^4.7.3",
-    "@ledgerhq/wallet-common": "^0.6.0",
+    "@ledgerhq/wallet-common": "^0.10.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",
@@ -117,7 +117,7 @@
     "concurrently": "^3.5.1",
     "dotenv": "^5.0.1",
     "electron": "1.8.4",
-    "electron-builder": "^20.8.0",
+    "electron-builder": "^20.8.1",
     "electron-devtools-installer": "^2.2.3",
     "electron-rebuild": "^1.7.3",
     "electron-webpack": "^2.0.1",
