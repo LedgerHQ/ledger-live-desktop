@@ -955,9 +955,9 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/wallet-common@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.10.0.tgz#0275de0d0f73bdfb7aee7bbbaa324f2f3f993aee"
+"@ledgerhq/wallet-common@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.10.1.tgz#72e17329de02bebb5ed54bf797113266824e4af8"
   dependencies:
     "@ledgerhq/currencies" "^4.7.1"
     axios "^0.18.0"

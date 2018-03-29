@@ -14,7 +14,7 @@ import Select from 'components/base/Select'
 import type { Unit } from '@ledgerhq/currencies'
 
 function parseValue(value) {
-  return value.toString().replace(/,/, '.')
+  return value.toString().replace(/,/g, '.')
 }
 
 function format(unit: Unit, value: Value) {

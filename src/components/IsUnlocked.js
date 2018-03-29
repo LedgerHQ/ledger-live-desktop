@@ -22,7 +22,7 @@ import { setEncryptionKey } from 'helpers/db'
 import { fetchAccounts } from 'actions/accounts'
 import { getAccounts } from 'reducers/accounts'
 import { isLocked, unlock } from 'reducers/application'
-import { getCounterValue } from 'reducers/settings'
+import { getCounterValueCode } from 'reducers/settings'
 
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
@@ -47,7 +47,7 @@ type State = {
 
 const mapStateToProps = state => ({
   accounts: getAccounts(state),
-  counterValue: getCounterValue(state),
+  counterValue: getCounterValueCode(state),
   isLocked: isLocked(state),
   settings: state.settings,
 })

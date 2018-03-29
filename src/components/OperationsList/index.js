@@ -129,7 +129,7 @@ const Operation = ({
   op: OperationType,
   withAccount?: boolean,
 }) => {
-  const { unit } = account
+  const { unit, currency } = account
   const time = moment(op.date)
   const Icon = getIconByCoinType(account.currency.coinType)
   const type = op.amount > 0 ? 'from' : 'to'
@@ -179,7 +179,7 @@ const Operation = ({
       <Cell grow shrink style={{ display: 'block' }}>
         <Address value={op.address} />
       </Cell>
-      <Cell size={AMOUNT_COL_SIZE}>
+      <Cell size={AMOUNT_COL_SIZE} justify="flex-end">
         <Box alignItems="flex-end">
           <FormattedVal
             val={op.amount}
@@ -189,7 +189,14 @@ const Operation = ({
             alwaysShowSign
             color={op.amount < 0 ? 'smoke' : 'positiveGreen'}
           />
-          <CounterValue color="grey" fontSize={3} time={time} unit={unit} value={op.amount} />
+          <CounterValue
+            color="grey"
+            fontSize={3}
+            time={time}
+            currency={currency}
+            unit={unit}
+            value={op.amount}
+          />
         </Box>
       </Cell>
     </OperationRaw>

@@ -26,8 +26,8 @@ type Props = {
 }
 
 function FormattedVal(props: Props) {
-  const { disableRounding, fiat, isPercent, alwaysShowSign, showCode, ...p } = props
-  let { val, unit } = props
+  const { val, disableRounding, fiat, isPercent, alwaysShowSign, showCode, ...p } = props
+  let { unit } = props
 
   if (isUndefined(val)) {
     throw new Error('FormattedVal require a `val` prop. Received `undefined`')
@@ -42,7 +42,6 @@ function FormattedVal(props: Props) {
   } else {
     if (fiat) {
       unit = getFiatUnit(fiat)
-      val *= 10 ** unit.magnitude
     } else if (!unit) {
       return ''
     }
