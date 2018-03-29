@@ -192,8 +192,8 @@ const Operation = ({
           <CounterValue
             color="grey"
             fontSize={3}
-            time={time}
-            currency={currency}
+            date={time}
+            ticker={currency.units[0].code}
             unit={unit}
             value={op.amount}
           />

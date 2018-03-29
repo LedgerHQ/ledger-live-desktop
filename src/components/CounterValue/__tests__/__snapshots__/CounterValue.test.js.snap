@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components CounterValue basic 1`] = `
+<span
+  className="s1c17x4y-0 fJKscS s8vzclq-0 hjqlvj"
+  color="#66be54"
+>
+  + USD 10.00
+</span>
+`;
+
+exports[`components CounterValue specifying ticker different from default 1`] = `
+<span
+  className="s1c17x4y-0 fJKscS s8vzclq-0 hjqlvj"
+  color="#66be54"
+>
+  + USD 5.00
+</span>
+`;
+
+exports[`components CounterValue using countervalue different from default 1`] = `
+<span
+  className="s1c17x4y-0 fJKscS s8vzclq-0 hjqlvj"
+  color="#66be54"
+>
+  + EUR 0.42
+</span>
+`;
+
+exports[`components CounterValue with time travel whith date in countervalues 1`] = `
+<span
+  className="s1c17x4y-0 fJKscS s8vzclq-0 hjqlvj"
+  color="#66be54"
+>
+  + USD 20.00
+</span>
+`;
+
+exports[`components CounterValue with time travel whith date not in countervalues 1`] = `
+<span
+  className="s1c17x4y-0 fJKscS s8vzclq-0 hjqlvj"
+  color="#66be54"
+>
+  + USD 0.00
+</span>
+`;
+
+exports[`components CounterValue without countervalues populated 1`] = `
+<span
+  className="s1c17x4y-0 fJKscS s8vzclq-0 hjqlvj"
+  color="#66be54"
+>
+  + USD 0.00
+</span>
+`;

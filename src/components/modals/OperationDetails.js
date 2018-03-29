@@ -90,9 +90,9 @@ const OperationDetails = ({ t }: { t: T }) => (
                     color="grey"
                     fontSize={5}
                     style={{ lineHeight: 1 }}
-                    time={date}
+                    date={date}
                     unit={unit}
-                    currency={currency}
+                    ticker={currency.units[0].code}
                     value={amount}
                   />
                 </Box>

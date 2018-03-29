@@ -1,7 +1,7 @@
 import React from 'react'
 import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
-import { render } from 'test-utils'
+import render from '__mocks__/render'
 import FormattedVal from '..'
 
 const bitcoinUnit = getDefaultUnitByCoinType(0)

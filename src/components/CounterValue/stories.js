@@ -3,7 +3,7 @@
 import React from 'react'
 import { getCurrencyByCoinType, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 import { storiesOf } from '@storybook/react'
-import { boolean, text } from '@storybook/addon-knobs'
+import { text } from '@storybook/addon-knobs'
 import createHistory from 'history/createHashHistory'
 
 import { CounterValue } from 'components/CounterValue'
@@ -32,9 +32,8 @@ stories.add('CounterValue', () => (
     getCounterValue={getCounterValue}
     counterValueCode={counterValue}
     counterValues={counterValues}
-    currency={currency}
+    ticker={currency.units[0].code}
     unit={unit}
-    formatValue={boolean('formatValue', true)}
     value={Number(text('value', '100000000'))}
   />
 ))
