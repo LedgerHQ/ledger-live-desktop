@@ -16,6 +16,7 @@ import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
 
 import db from 'helpers/db'
+import dbMiddleware from 'middlewares/db'
 
 import App from 'components/App'
 
@@ -26,7 +27,7 @@ db.init('settings', {})
 db.init('counterValues', {})
 
 const history = createHistory()
-const store = createStore(history)
+const store = createStore({ history, dbMiddleware })
 const rootNode = document.getElementById('app')
 
 store.dispatch(fetchSettings())

@@ -50,7 +50,7 @@ const mapStateToProps = (state, props) => {
   }
 }
 
-export class CounterValue extends PureComponent<Props> {
+class CounterValue extends PureComponent<Props> {
   static defaultProps = {
     value: 0,
     date: undefined,

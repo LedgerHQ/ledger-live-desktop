@@ -79,8 +79,7 @@ export class RequestAmount extends PureComponent<Props, State> {
 
     const { account, rightUnit, value, getCounterValue } = this.props
 
-    const rawLeftValue = value * 10 ** account.unit.magnitude
-    const rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
+    const rawRightValue = getCounterValue(account.currency, rightUnit)(value)
     const rightValue = rawRightValue / 10 ** rightUnit.magnitude
 
     this.state = {
@@ -101,15 +100,11 @@ export class RequestAmount extends PureComponent<Props, State> {
     const { getCounterValue, getReverseCounterValue, account, max, onChange } = this.props
     const { rightUnit } = this.state
     if (changedField === 'left') {
-      let rawLeftValue = val * 10 ** account.unit.magnitude
-      if (rawLeftValue > max) {
-        rawLeftValue = max
-      }
-      const leftValue = rawLeftValue / 10 ** account.unit.magnitude
-      const rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
+      const leftValue = val > max ? max : val
+      const rawRightValue = getCounterValue(account.currency, rightUnit)(leftValue)
       const rightValue = rawRightValue / 10 ** rightUnit.magnitude
       this.setState({ rightValue, leftValue })
-      onChange({ left: rawLeftValue, right: rawRightValue })
+      onChange({ left: leftValue, right: rawRightValue })
     } else if (changedField === 'right') {
       let rawRightValue = val * 10 ** rightUnit.magnitude
       let rawLeftValue = getReverseCounterValue(account.currency, rightUnit)(rawRightValue)
@@ -118,7 +113,7 @@ export class RequestAmount extends PureComponent<Props, State> {
         rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
       }
       const rightValue = rawRightValue / 10 ** rightUnit.magnitude
-      const leftValue = rawLeftValue / 10 ** account.unit.magnitude
+      const leftValue = rawLeftValue
       this.setState({ rightValue, leftValue })
       onChange({ left: rawLeftValue, right: rawRightValue })
     }

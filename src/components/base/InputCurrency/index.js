@@ -128,7 +128,7 @@ class InputCurrency extends PureComponent<Props, State> {
     const { value } = this.state
 
     if (value.toString() !== v.toString()) {
-      onChange(v.toString(), unit)
+      onChange(Number(v), unit)
     }
   }
 

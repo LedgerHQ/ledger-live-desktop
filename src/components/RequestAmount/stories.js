@@ -3,31 +3,20 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { number } from '@storybook/addon-knobs'
-import { translate } from 'react-i18next'
 
 import { accounts } from 'components/SelectAccount/stories'
 
-import { RequestAmount } from 'components/RequestAmount'
+import RequestAmount from 'components/RequestAmount'
 
 const stories = storiesOf('Components', module)
 
-const props = {
-  counterValue: 'USD',
-  lastCounterValue: 9177.69,
-  account: accounts[0],
-}
-
-const RequestAmountComp = translate()(RequestAmount)
-
 stories.add('RequestAmount', () => (
-  <RequestAmountComp
-    {...props}
+  <RequestAmount
     t={k => k}
+    counterValue="USD"
+    account={accounts[0]}
     onChange={action('onChange')}
-    value={{
-      left: number('left value', 0),
-      right: number('right value', 0),
-    }}
+    value={3}
+    max={400000000000}
   />
 ))
