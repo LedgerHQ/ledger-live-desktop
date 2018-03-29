@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import { getFiatUnit } from '@ledgerhq/currencies'
 import type { Unit, Currency } from '@ledgerhq/currencies'
 
 import { getCounterValueCode } from 'reducers/settings'
@@ -43,10 +44,8 @@ export class CounterValue extends PureComponent<Props> {
       getCounterValue,
       ...props
     } = this.props
-
-    const date = moment(time).format('YYYY-MM-DD')
-    const v = getCounterValue(currency, counterValueCode)(value, date)
-
+    const date = new Date(moment(time).format('YYYY-MM-DD'))
+    const v = getCounterValue(currency, getFiatUnit(counterValueCode))(value, date)
     return formatValue ? (
       <FormattedVal val={v} fiat={counterValueCode} showCode alwaysShowSign {...props} />
     ) : (
