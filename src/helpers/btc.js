@@ -30,7 +30,6 @@ export function computeOperation(addresses: Array<string>) {
       .filter(i => addresses.includes(i.address))
       .reduce((acc, cur) => acc + cur.value, 0)
     const amount = outputVal - inputVal
-    console.warn('assiging a fake account id and blockHeight to operation') // eslint-disable-line no-console
     return {
       id: t.hash,
       hash: t.hash,
@@ -167,6 +166,7 @@ export async function getAccount({
 
         if (hasOperations) {
           const newOperations = txs.map(computeOperation(allAddresses))
+
           const txHashs = operations.map(t => t.id)
 
           balance = newOperations
@@ -174,11 +174,13 @@ export async function getAccount({
             .reduce((result, v) => result + v.amount, balance)
 
           lastAddress = getLastAddress(addresses, txs[0])
+
           operations = uniqBy([...operations, ...newOperations], t => t.id)
 
           onProgress({
             balance,
-            operations: operations.length,
+            operations,
+            balanceByDay: getBalanceByDay(operations),
           })
 
           return nextPath(index + (GAP_LIMIT_ADDRESSES - 1))
@@ -192,14 +194,22 @@ export async function getAccount({
               })
             : getAddress({ type: 'external', index: 0 })
 
-        return {
+        const account = {
           ...nextAddress,
+          coinType,
           addresses: operations.length > 0 ? allAddresses : [],
           balance,
           balanceByDay: getBalanceByDay(operations),
           rootPath,
           operations,
         }
+
+        onProgress({
+          ...account,
+          finish: true,
+        })
+
+        return account
       })
 
   if (allAddresses.length === 0 && currentIndex > 0) {
