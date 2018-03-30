@@ -11,7 +11,7 @@ export type SettingsState = Object
 const defaultState: SettingsState = {
   counterValue: 'USD',
   language: 'en',
-  orderAccounts: 'balance|desc',
+  orderAccounts: 'balance|asc',
   password: {
     state: false,
   },

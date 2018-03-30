@@ -155,7 +155,8 @@ export default async ({
       rootPath: path,
       segwit,
       onProgress: ({ operations, ...progress }) =>
-        operations > 0 && onProgress({ account: currentAccount, operations, ...progress }),
+        operations.length > 0 &&
+        onProgress({ id: xpub58, accountIndex: currentAccount, operations, ...progress }),
     })
 
     const hasOperations = account.operations.length > 0
@@ -167,10 +168,6 @@ export default async ({
     })
 
     if (hasOperations) {
-      onProgress({
-        success: true,
-      })
-
       const nextAccount = await sleep(nextAccountDelay, () =>
         getAllAccounts(currentAccount + 1, accounts),
       )

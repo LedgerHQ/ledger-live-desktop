@@ -38,10 +38,12 @@ const StepIcon = styled(Box).attrs({
   width: 64px;
 `
 const StepContent = styled(Box).attrs({
+  color: 'dark',
   horizontal: true,
   alignItems: 'center',
 })`
   height: 60px;
+  line-height: 1.2;
 
   strong {
     font-weight: 600;
@@ -141,6 +143,14 @@ type Props = {
   t: T,
 }
 
+const emitChangeDevice = props => {
+  const { onChangeDevice, deviceSelected, devices } = props
+
+  if (deviceSelected === null && devices.length > 0) {
+    onChangeDevice(devices[0])
+  }
+}
+
 class DeviceConnect extends PureComponent<Props> {
   static defaultProps = {
     accountName: null,
@@ -150,10 +160,12 @@ class DeviceConnect extends PureComponent<Props> {
     onChangeDevice: noop,
   }
 
-  getDeviceSelected() {
-    const { deviceSelected, devices } = this.props
+  componentDidMount() {
+    emitChangeDevice(this.props)
+  }
 
-    return deviceSelected || (devices.length === 1 && devices[0]) || null
+  componentWillReceiveProps(nextProps) {
+    emitChangeDevice(nextProps)
   }
 
   getAppState() {
@@ -166,9 +178,8 @@ class DeviceConnect extends PureComponent<Props> {
   }
 
   render() {
-    const { accountName, coinType, t, onChangeDevice, devices } = this.props
+    const { deviceSelected, accountName, coinType, t, onChangeDevice, devices } = this.props
 
-    const deviceSelected = this.getDeviceSelected()
     const appState = this.getAppState()
 
     const hasDevice = devices.length > 0
@@ -176,8 +187,7 @@ class DeviceConnect extends PureComponent<Props> {
 
     const { name: appName } = getCurrencyByCoinType(coinType)
     const IconCurrency = getIconByCoinType(coinType)
-    console.log('devices', devices)
-    console.log('deviceSelected', deviceSelected)
+
     return (
       <Box flow={4}>
         <Step validated={hasDevice}>
@@ -196,21 +206,21 @@ class DeviceConnect extends PureComponent<Props> {
           {hasMultipleDevices && (
             <ListDevices>
               <Box color="graphite" fontSize={3}>
-                {t('deviceConnect:step1.choose', { count: devices.length })}
+                {t('deviceConnect:step1.choose', { devicesCount: devices.length })}
               </Box>
               <Box flow={2}>
-                {devices.map(d => {
+                {devices.map((d, i) => {
                   const Icon = IconDevice[d.product.replace(/\s/g, '')]
                   return (
                     <DeviceItem
-                      key={`${d.vendorId}-${d.productId}`}
+                      key={i} // eslint-disable-line react/no-array-index-key
                       onClick={() => onChangeDevice(d)}
                     >
                       <DeviceIcon>
                         <Icon size={28} />
                       </DeviceIcon>
-                      <Box grow>
-                        {d.manufacturer} {d.product}
+                      <Box grow noShrink>
+                        {`${d.manufacturer} ${d.product}`}
                       </Box>
                       <Box>
                         <DeviceSelected selected={d === deviceSelected}>

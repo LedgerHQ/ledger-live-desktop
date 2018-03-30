@@ -6,8 +6,8 @@ const rules = require('./rules')
 
 const config = {
   mode: __ENV__,
-  resolve,
   plugins: [...plugins('renderer'), new HardSourceWebpackPlugin()],
+  resolve,
   module: {
     rules,
   },

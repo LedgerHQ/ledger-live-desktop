@@ -77,7 +77,7 @@ export default (sendEvent: Function) => ({
       if (accountPath) {
         const { bitcoinAddress } = await btc.getWalletPublicKey(accountPath, false, segwit)
         if (bitcoinAddress === accountAddress) {
-          sendEvent('wallet.checkIfAppOpened.success')
+          sendEvent('wallet.checkIfAppOpened.success', { devicePath })
         } else {
           throw new Error('Address is different')
         }
@@ -85,10 +85,10 @@ export default (sendEvent: Function) => ({
 
       if (coinType) {
         await btc.getWalletPublicKey(getPath({ coinType, segwit }), false, segwit)
-        sendEvent('wallet.checkIfAppOpened.success')
+        sendEvent('wallet.checkIfAppOpened.success', { devicePath })
       }
     } catch (err) {
-      sendEvent('wallet.checkIfAppOpened.fail')
+      sendEvent('wallet.checkIfAppOpened.fail', { devicePath })
     }
   },
 })

@@ -24,7 +24,7 @@ type Props = {
 
 function Footer({ account, amount, t, onNext, canNext, counterValue }: Props) {
   return (
-    <ModalFooter horizontal align="center">
+    <ModalFooter horizontal alignItems="center">
       <Box grow>
         <Label>{t('send:totalSpent')}</Label>
         <Box horizontal flow={2} align="center">

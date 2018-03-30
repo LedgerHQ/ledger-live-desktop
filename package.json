@@ -40,6 +40,7 @@
     }
   },
   "resolutions": {
+    "uglify-es": "3.3.7",
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
@@ -47,8 +48,8 @@
     "@ledgerhq/hw-app-btc": "^4.7.3",
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport": "^4.7.3",
-    "@ledgerhq/hw-transport-node-hid": "^4.7.3",
-    "@ledgerhq/wallet-common": "^0.10.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.7.6",
+    "@ledgerhq/wallet-common": "^0.10.1",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",
@@ -72,8 +73,8 @@
     "query-string": "^6.0.0",
     "raven": "^2.4.2",
     "raven-js": "^3.24.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
     "react-i18next": "^7.5.1",
     "react-mortal": "^3.2.0",
     "react-motion": "^0.5.2",
@@ -129,7 +130,7 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.68.0",
+    "flow-bin": "^0.69.0",
     "flow-typed": "^2.4.0",
     "hard-source-webpack-plugin": "^0.6.0",
     "husky": "^0.14.3",
@@ -139,8 +140,8 @@
     "node-loader": "^0.6.0",
     "prettier": "^1.11.1",
     "react-hot-loader": "^4.0.0",
-    "react-test-renderer": "^16.2.0",
-    "webpack": "^4.3.0",
+    "react-test-renderer": "^16.3.0",
+    "webpack": "^4.4.1",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.13",
     "yaml-loader": "^0.5.0"

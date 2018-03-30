@@ -1,6 +1,6 @@
 step1:
   connect: Connect your <0>Ledger device</0> to your computer and enter your <1>PIN code</1> on your device
-  choose: We detected {{count}} devices connected, please select one:
+  choose: We detected {{devicesCount}} devices connected, please select one:
 
 step2:
   open: Open <0>{{appName}}</0> App on your device

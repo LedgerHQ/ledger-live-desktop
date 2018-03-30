@@ -8,19 +8,23 @@ import type { Account } from '@ledgerhq/wallet-common/lib/types'
 import type { Device, Devices } from 'types/common'
 
 import { sendEvent } from 'renderer/events'
-import { getDevices, getCurrentDevice } from 'reducers/devices'
+import { getDevices } from 'reducers/devices'
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = state => ({
   devices: getDevices(state),
-  currentDevice: props.device || getCurrentDevice(state),
 })
 
-type DeviceStatus = 'unconnected' | 'connected' | 'appOpened.success' | 'appOpened.fail'
+type DeviceStatus =
+  | 'unconnected'
+  | 'connected'
+  | 'appOpened.success'
+  | 'appOpened.fail'
+  | 'appOpened.progress'
 
 type Props = {
   coinType: number,
   devices: Devices,
-  currentDevice: Device | null,
+  deviceSelected: Device | null,
   account?: Account,
   onStatusChange?: DeviceStatus => void,
   render?: Function,
@@ -32,37 +36,41 @@ type State = {
 
 class DeviceMonit extends PureComponent<Props, State> {
   state = {
-    status: this.props.currentDevice ? 'connected' : 'unconnected',
+    status: this.props.deviceSelected ? 'connected' : 'unconnected',
   }
 
   componentDidMount() {
     ipcRenderer.on('msg', this.handleMsgEvent)
-    if (this.props.currentDevice !== null) {
+    if (this.props.deviceSelected !== null) {
       this.checkAppOpened()
     }
   }
 
   componentWillReceiveProps(nextProps) {
     const { status } = this.state
-    const { currentDevice } = this.props
-    const { currentDevice: nextCurrentDevice } = nextProps
+    const { deviceSelected, devices } = this.props
+    const { devices: nextDevices, deviceSelected: nextDeviceSelected } = nextProps
 
-    if (status === 'unconnected' && !currentDevice && nextCurrentDevice) {
+    if (status === 'unconnected' && !deviceSelected && nextDeviceSelected) {
       this.handleStatusChange('connected')
     }
 
-    if (status !== 'unconnected' && !nextCurrentDevice) {
-      this.handleStatusChange('unconnected')
+    if (status !== 'unconnected' && devices !== nextDevices) {
+      const isConnected = nextDevices.find(d => d === nextDeviceSelected)
+      if (!isConnected) {
+        this.handleStatusChange('unconnected')
+        clearTimeout(this._timeout)
+      }
     }
   }
 
-  componentDidUpdate() {
-    const { currentDevice } = this.props
+  componentDidUpdate(prevProps) {
+    const { deviceSelected } = this.props
+    const { deviceSelected: prevDeviceSelected } = prevProps
 
-    if (currentDevice !== null) {
-      this.checkAppOpened()
-    } else {
-      clearTimeout(this._timeout)
+    if (prevDeviceSelected !== deviceSelected) {
+      this.handleStatusChange('appOpened.progress')
+      this._timeout = setTimeout(this.checkAppOpened, 250)
     }
   }
 
@@ -72,9 +80,9 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 
   checkAppOpened = () => {
-    const { currentDevice, account, coinType } = this.props
+    const { deviceSelected, account, coinType } = this.props
 
-    if (currentDevice === null) {
+    if (deviceSelected === null) {
       return
     }
 
@@ -94,7 +102,7 @@ class DeviceMonit extends PureComponent<Props, State> {
     }
 
     sendEvent('usb', 'wallet.checkIfAppOpened', {
-      devicePath: currentDevice.path,
+      devicePath: deviceSelected.path,
       ...options,
     })
   }
@@ -107,13 +115,19 @@ class DeviceMonit extends PureComponent<Props, State> {
     onStatusChange && onStatusChange(status)
   }
 
-  handleMsgEvent = (e, { type }) => {
-    if (type === 'wallet.checkIfAppOpened.success') {
-      this.handleStatusChange('appOpened.success')
-      clearTimeout(this._timeout)
+  handleMsgEvent = (e, { type, data }) => {
+    const { deviceSelected } = this.props
+
+    if (deviceSelected === null) {
+      return
     }
 
-    if (type === 'wallet.checkIfAppOpened.fail') {
+    if (type === 'wallet.checkIfAppOpened.success' && deviceSelected.path === data.devicePath) {
+      clearTimeout(this._timeout)
+      this.handleStatusChange('appOpened.success')
+    }
+
+    if (type === 'wallet.checkIfAppOpened.fail' && deviceSelected.path === data.devicePath) {
       this.handleStatusChange('appOpened.fail')
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
@@ -121,10 +135,14 @@ class DeviceMonit extends PureComponent<Props, State> {
 
   render() {
     const { status } = this.state
-    const { devices, currentDevice, render } = this.props
+    const { devices, deviceSelected, render } = this.props
 
     if (render) {
-      return render({ status, devices, currentDevice })
+      return render({
+        status,
+        devices,
+        deviceSelected: status === 'connected' ? deviceSelected : null,
+      })
     }
 
     return null
