@@ -1,3 +1,14 @@
 title: Add account
-import:
-  placeholder: 'Account {{index}}'
+
+steps:
+  currency:
+    title: Informations
+  connectDevice:
+    title: Connect Device
+  importProgress:
+    title: In Progress
+  importAccounts:
+    title: Import Accounts
+    cta_0: Import Account
+    cta_1: Import {{count}} Account
+    cta_2: Import {{count}} Accounts

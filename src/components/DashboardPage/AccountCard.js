@@ -1,7 +1,9 @@
 // @flow
 
 import React from 'react'
+import styled from 'styled-components'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
+
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import Chart from 'components/base/Chart'
@@ -10,21 +12,28 @@ import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
 
+const Wrapper = styled(Card).attrs({
+  p: 4,
+  flex: 1,
+})`
+  cursor: ${p => (p.onClick ? 'pointer' : 'default')};
+`
+
 const AccountCard = ({
   counterValue,
   account,
   onClick,
   daysCount,
+  ...props
 }: {
   counterValue: string,
   account: Account,
-  onClick: Function,
+  onClick?: Function,
   daysCount: number,
 }) => {
   const Icon = getIconByCoinType(account.currency.coinType)
-
   return (
-    <Card p={4} flex={1} style={{ cursor: 'pointer' }} onClick={onClick}>
+    <Wrapper onClick={onClick} {...props}>
       <Box flow={4}>
         <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
           <Box
@@ -95,8 +104,12 @@ const AccountCard = ({
           </Box>
         )}
       />
-    </Card>
+    </Wrapper>
   )
+}
+
+AccountCard.defaultProps = {
+  onClick: undefined,
 }
 
 export default AccountCard
