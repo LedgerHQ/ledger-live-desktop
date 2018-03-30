@@ -1,73 +1,41 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
+import merge from 'lodash/merge'
+import get from 'lodash/get'
+import {
+  makeCalculateCounterValue,
+  makeReverseCounterValue,
+  formatCounterValueDay,
+} from '@ledgerhq/wallet-common/lib/helpers/countervalue'
+import type { CalculateCounterValue } from '@ledgerhq/wallet-common/lib/types'
 
-export type CounterValuesState = {
-  [string]: {
-    byDate: Object,
-    list: Array<[string, number]>,
-  },
-}
+import type { State } from 'reducers'
 
+export type CounterValuesState = {}
 const state: CounterValuesState = {}
 
 const handlers = {
-  UPDATE_COUNTER_VALUES: (
-    state: CounterValuesState,
-    { payload: counterValues }: { payload: CounterValuesState },
-  ): CounterValuesState => ({
-    ...state,
-    ...counterValues,
-  }),
-  UPDATE_LAST_COUNTER_VALUE: (
-    state: CounterValuesState,
-    { payload: { symbol, value } }: { payload: { symbol: string, value: number } },
-  ): CounterValuesState => {
-    // We update only last value (newer)
-    if (state[symbol]) {
-      const [date] = state[symbol].list[0]
-      // [0] date, [1] value, only update value
-      state[symbol].list[0][1] = value
-      // Keep the same value for byDate object
-      state[symbol].byDate[date] = value
+  UPDATE_COUNTER_VALUES: (state, { payload: counterValues }) => merge(state, counterValues),
+}
 
-      // Update reference for a proper update
-      return { ...state }
+const getPairHistory = state => (coinTicker, fiat) => {
+  const byDate = get(state, `counterValues.${coinTicker}.${fiat}`)
+  return date => {
+    if (!byDate) {
+      return 0
     }
-
-    return state
-  },
-}
-
-export function getLastCounterValueBySymbol(
-  symbol: string,
-  state: { counterValues: CounterValuesState },
-): number {
-  return state.counterValues[symbol].list[0][1]
-}
-
-export function serializeCounterValues(counterValues: Object) {
-  return Object.keys(counterValues).reduce((result, key) => {
-    const counterValue = counterValues[key].sort(([dateA], [dateB]) => (dateA < dateB ? 1 : -1))
-
-    result[key] = {
-      byDate: counterValue.reduce((r, [date, value]) => {
-        r[date] = value
-        return r
-      }, {}),
-      list: counterValue,
+    if (!date) {
+      return byDate.latest || 0
     }
-
-    return result
-  }, {})
+    return byDate[formatCounterValueDay(date)] || 0
+  }
 }
 
-export function deserializeCounterValues(counterValues: Object) {
-  return Object.keys(counterValues).reduce((result, key) => {
-    const counterValue = counterValues[key]
-    result[key] = counterValue.list
-    return result
-  }, {})
-}
+export const calculateCounterValueSelector = (state: State): CalculateCounterValue =>
+  makeCalculateCounterValue(getPairHistory(state))
+
+export const reverseCounterValueSelector = (state: State): CalculateCounterValue =>
+  makeReverseCounterValue(getPairHistory(state))
 
 export default handleActions(handlers, state)

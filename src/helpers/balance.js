@@ -1,6 +1,7 @@
 // @flow
 
 import moment from 'moment'
+import get from 'lodash/get'
 import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
@@ -69,7 +70,7 @@ export function getBalanceHistoryForAccount({
   interval: DateInterval,
 }): Array<BalanceHistoryDay> {
   const unit = getDefaultUnitByCoinType(account.coinType)
-  const counterVals = counterValues[`${unit.code}-${counterValue}`].byDate
+  const counterVals = get(counterValues, `${unit.code}.${counterValue}`)
   let lastBalance = getBalanceAtIntervalStart(account, interval)
   return mapInterval(interval, date => {
     let balance = 0
@@ -81,11 +82,11 @@ export function getBalanceHistoryForAccount({
     // if we don't have data on account balance for that day,
     // we take the prev day
     if (isUndefined(account.balanceByDay[date])) {
-      balance = lastBalance === null ? 0 : lastBalance / 10 ** unit.magnitude * counterVals[date]
+      balance = lastBalance === null ? 0 : lastBalance * counterVals[date]
     } else {
       const b = account.balanceByDay[date]
       lastBalance = b
-      balance = b / 10 ** unit.magnitude * counterVals[date]
+      balance = b * counterVals[date]
     }
 
     if (isNaN(balance)) {

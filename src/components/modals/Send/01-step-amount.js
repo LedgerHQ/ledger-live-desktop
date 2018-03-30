@@ -5,7 +5,6 @@ import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { Unit } from '@ledgerhq/currencies'
 import type { T } from 'types/common'
-import type { DoubleVal } from 'components/RequestAmount'
 
 import Box from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
@@ -23,7 +22,7 @@ type PropsStepAmount = {
   account: Account | null,
   onChange: Function,
   recipientAddress: string,
-  amount: DoubleVal,
+  amount: { left: number, right: number },
   fees: {
     value: number,
     unit: Unit | null,
@@ -61,7 +60,12 @@ function StepAmount(props: PropsStepAmount) {
           {/* AMOUNT */}
           <Box flow={1}>
             <Label>{t('send:steps.amount.amount')}</Label>
-            <RequestAmount account={account} onChange={onChange('amount')} value={amount} />
+            <RequestAmount
+              max={account.balance - 0}
+              account={account}
+              onChange={onChange('amount')}
+              value={amount.left}
+            />
           </Box>
 
           {/* FEES */}

@@ -1,6 +1,7 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
+import { getFiatUnit } from '@ledgerhq/currencies'
 
 import get from 'lodash/get'
 
@@ -34,9 +35,14 @@ const handlers: Object = {
 
 export const hasPassword = (state: Object) =>
   get(state.settings, 'password.state', defaultState.password.state)
-export const getCounterValue = (state: Object) =>
+
+export const getCounterValueCode = (state: Object) =>
   get(state.settings, 'counterValue', defaultState.counterValue)
+
+export const getCounterValueFiatUnit = (state: Object) => getFiatUnit(getCounterValueCode(state))
+
 export const getLanguage = (state: Object) => get(state.settings, 'language', defaultState.language)
+
 export const getOrderAccounts = (state: Object) =>
   get(state.settings, 'orderAccounts', defaultState.orderAccounts)
 

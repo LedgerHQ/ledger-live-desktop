@@ -1,24 +1,14 @@
 // @flow
 
-import axios from 'axios'
+import { fetchCurrentCounterValues } from '@ledgerhq/wallet-common/lib/api/countervalue'
 
 type SendFunction = (type: string, data: *) => void
 
 export default async (send: SendFunction, { counterValue, currencies }: Object) => {
-  const data = await axios
-    .get(
-      `https://min-api.cryptocompare.com/data/pricemulti?extraParams=ledger-test&fsyms=${currencies.join(
-        ',',
-      )}&tsyms=${counterValue}`,
-    )
-    .then(({ data }) =>
-      currencies.reduce((result, code) => {
-        result.push({
-          symbol: `${code}-${counterValue}`,
-          value: data[code][counterValue],
-        })
-        return result
-      }, []),
-    )
-  send('counterValues.update', data)
+  try {
+    const data = await fetchCurrentCounterValues(currencies, counterValue)
+    send('counterValues.update', data)
+  } catch (err) {
+    console.error(err) // eslint-disable-line no-console
+  }
 }

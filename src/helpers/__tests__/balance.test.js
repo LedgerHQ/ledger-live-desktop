@@ -1,13 +1,13 @@
 import { getBalanceHistoryForAccount, getBalanceHistoryForAccounts } from 'helpers/balance'
 
 const counterValues = {
-  'BTC-USD': {
-    byDate: {
-      '2018-01-01': 1000,
-      '2018-01-02': 2000,
-      '2018-01-03': 3000,
-      '2018-01-04': 4000,
-      '2018-01-05': 5000,
+  BTC: {
+    USD: {
+      '2018-01-01': 1,
+      '2018-01-02': 2,
+      '2018-01-03': 3,
+      '2018-01-04': 4,
+      '2018-01-05': 5,
     },
   },
 }
@@ -18,8 +18,8 @@ describe('helpers > balance', () => {
       const account = {
         coinType: 0,
         balanceByDay: {
-          '2018-01-01': 100000000,
-          '2018-01-02': 200000000,
+          '2018-01-01': 1,
+          '2018-01-02': 2,
         },
       }
 
@@ -36,8 +36,8 @@ describe('helpers > balance', () => {
       })
 
       expect(balances).toEqual([
-        { date: '2018-01-01', balance: 1000 },
-        { date: '2018-01-02', balance: 4000 },
+        { date: '2018-01-01', balance: 1 },
+        { date: '2018-01-02', balance: 4 },
       ])
     })
 
@@ -45,8 +45,8 @@ describe('helpers > balance', () => {
       const account = {
         coinType: 0,
         balanceByDay: {
-          '2018-01-01': 100000000,
-          '2018-01-03': 200000000,
+          '2018-01-01': 1,
+          '2018-01-03': 2,
         },
       }
 
@@ -63,9 +63,9 @@ describe('helpers > balance', () => {
       })
 
       expect(balances).toEqual([
-        { date: '2018-01-01', balance: 1000 },
-        { date: '2018-01-02', balance: 2000 },
-        { date: '2018-01-03', balance: 6000 },
+        { date: '2018-01-01', balance: 1 },
+        { date: '2018-01-02', balance: 2 },
+        { date: '2018-01-03', balance: 6 },
       ])
     })
 
@@ -73,7 +73,7 @@ describe('helpers > balance', () => {
       const account = {
         coinType: 0,
         balanceByDay: {
-          '2018-01-01': 100000000,
+          '2018-01-01': 1,
         },
       }
 
@@ -90,8 +90,8 @@ describe('helpers > balance', () => {
       })
 
       expect(balances).toEqual([
-        { date: '2018-01-02', balance: 2000 },
-        { date: '2018-01-03', balance: 3000 },
+        { date: '2018-01-02', balance: 2 },
+        { date: '2018-01-03', balance: 3 },
       ])
     })
   })
@@ -101,16 +101,16 @@ describe('helpers > balance', () => {
       const account1 = {
         coinType: 0,
         balanceByDay: {
-          '2018-01-01': 100000000,
-          '2018-01-02': 200000000,
+          '2018-01-01': 1,
+          '2018-01-02': 2,
         },
       }
 
       const account2 = {
         coinType: 0,
         balanceByDay: {
-          '2018-01-02': 500000000,
-          '2018-01-04': 600000000,
+          '2018-01-02': 5,
+          '2018-01-04': 6,
         },
       }
 
@@ -127,10 +127,10 @@ describe('helpers > balance', () => {
       })
 
       expect(balances).toEqual([
-        { date: '2018-01-01', balance: 1000 },
-        { date: '2018-01-02', balance: 14000 },
-        { date: '2018-01-03', balance: 21000 },
-        { date: '2018-01-04', balance: 32000 },
+        { date: '2018-01-01', balance: 1 },
+        { date: '2018-01-02', balance: 14 },
+        { date: '2018-01-03', balance: 21 },
+        { date: '2018-01-04', balance: 32 },
       ])
     })
   })

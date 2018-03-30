@@ -3,26 +3,25 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
+import type { Unit, Currency } from '@ledgerhq/currencies'
 
-import isNaN from 'lodash/isNaN'
-
-import type { Unit } from '@ledgerhq/currencies'
-
-import { getCounterValue } from 'reducers/settings'
+import { getCounterValueCode } from 'reducers/settings'
+import { calculateCounterValueSelector } from 'reducers/counterValues'
 
 import FormattedVal from 'components/base/FormattedVal'
 
 const mapStateToProps = state => ({
-  counterValue: getCounterValue(state),
-  counterValues: state.counterValues,
+  counterValueCode: getCounterValueCode(state),
+  getCounterValue: calculateCounterValueSelector(state),
 })
 
 type Props = {
   formatValue: boolean,
-  counterValue: string,
-  counterValues: Object,
+  counterValueCode: string,
+  getCounterValue: Function,
   time?: Date | string | number,
   unit: Unit,
+  currency: Currency,
   value: number,
 }
 
@@ -34,17 +33,22 @@ export class CounterValue extends PureComponent<Props> {
   }
 
   render() {
-    const { formatValue, value, unit, counterValue, counterValues, time, ...props } = this.props
+    const {
+      formatValue,
+      value,
+      currency,
+      unit,
+      counterValueCode,
+      time,
+      getCounterValue,
+      ...props
+    } = this.props
 
-    const cValues = counterValues[`${unit.code}-${counterValue}`]
-
-    const v = isNaN(Number(value))
-      ? 0
-      : (time ? cValues.byDate[moment(time).format('YYYY-MM-DD')] : cValues.list[0][1]) *
-        (value / 10 ** unit.magnitude)
+    const date = moment(time).format('YYYY-MM-DD')
+    const v = getCounterValue(currency, counterValueCode)(value, date)
 
     return formatValue ? (
-      <FormattedVal val={v} fiat={counterValue} showCode alwaysShowSign {...props} />
+      <FormattedVal val={v} fiat={counterValueCode} showCode alwaysShowSign {...props} />
     ) : (
       v
     )

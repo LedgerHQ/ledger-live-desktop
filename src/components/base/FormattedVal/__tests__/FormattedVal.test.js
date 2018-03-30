@@ -37,7 +37,7 @@ describe('components', () => {
     })
 
     it('renders a fiat', () => {
-      const component = <FormattedVal fiat="USD" val={20} />
+      const component = <FormattedVal fiat="USD" val={2000} />
       const tree = render(component)
       expect(tree).toMatchSnapshot()
     })

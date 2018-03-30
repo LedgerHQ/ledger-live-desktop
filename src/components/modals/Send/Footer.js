@@ -4,7 +4,6 @@ import React from 'react'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { T } from 'types/common'
-import type { DoubleVal } from 'components/RequestAmount'
 
 import { ModalFooter } from 'components/base/Modal'
 import Box from 'components/base/Box'
@@ -16,7 +15,7 @@ import Text from 'components/base/Text'
 type Props = {
   t: T,
   account: Account,
-  amount: DoubleVal,
+  amount: { left: number, right: number },
   onNext: Function,
   canNext: boolean,
   counterValue: string,
