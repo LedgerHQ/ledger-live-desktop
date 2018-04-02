@@ -3,7 +3,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { getFiatUnit } from '@ledgerhq/currencies'
-import type { Unit } from '@ledgerhq/currencies'
 
 import { getCounterValueCode } from 'reducers/settings'
 import { calculateCounterValueSelector } from 'reducers/counterValues'
@@ -14,14 +13,11 @@ type Props = {
   // wich market to query
   ticker: string,
 
-  // when? if not given: take latest
-  date?: Date,
-
-  // in which unit we want it to render
-  unit: Unit,
-
   // the value :)
   value: number,
+
+  // when? if not given: take latest
+  date?: Date,
 
   // from reducers
   counterValueCode: string,

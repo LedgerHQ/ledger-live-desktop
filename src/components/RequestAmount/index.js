@@ -79,7 +79,11 @@ export class RequestAmount extends PureComponent<Props, State> {
 
     const { account, rightUnit, value, getCounterValue } = this.props
 
-    const rawRightValue = getCounterValue(account.currency, rightUnit)(value)
+    // @TODO forced to do those horrible and redondant calculations in order
+    // to make `getCounterValue` works. `getCounterValue` should take ticker code,
+    // and the both units in parameter. Not "a currency and a unit".
+    const rawLeftValue = value * 10 ** account.unit.magnitude
+    const rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
     const rightValue = rawRightValue / 10 ** rightUnit.magnitude
 
     this.state = {
@@ -99,12 +103,21 @@ export class RequestAmount extends PureComponent<Props, State> {
   handleChangeAmount = (changedField: string) => (val: number) => {
     const { getCounterValue, getReverseCounterValue, account, max, onChange } = this.props
     const { rightUnit } = this.state
+
+    // @TODO forced to do those horrible and redondant calculations in order
+    // to make `getCounterValue` works. `getCounterValue` should take ticker code,
+    // and the both units in parameter. Not "a currency and a unit".
+
     if (changedField === 'left') {
-      const leftValue = val > max ? max : val
-      const rawRightValue = getCounterValue(account.currency, rightUnit)(leftValue)
+      let rawLeftValue = val * 10 ** account.unit.magnitude
+      if (rawLeftValue > max) {
+        rawLeftValue = max
+      }
+      const leftValue = rawLeftValue / 10 ** account.unit.magnitude
+      const rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
       const rightValue = rawRightValue / 10 ** rightUnit.magnitude
       this.setState({ rightValue, leftValue })
-      onChange({ left: leftValue, right: rawRightValue })
+      onChange({ left: rawLeftValue, right: rawRightValue })
     } else if (changedField === 'right') {
       let rawRightValue = val * 10 ** rightUnit.magnitude
       let rawLeftValue = getReverseCounterValue(account.currency, rightUnit)(rawRightValue)
@@ -113,7 +126,7 @@ export class RequestAmount extends PureComponent<Props, State> {
         rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
       }
       const rightValue = rawRightValue / 10 ** rightUnit.magnitude
-      const leftValue = rawLeftValue
+      const leftValue = rawLeftValue / 10 ** account.unit.magnitude
       this.setState({ rightValue, leftValue })
       onChange({ left: rawLeftValue, right: rawRightValue })
     }

@@ -192,9 +192,8 @@ const Operation = ({
           <CounterValue
             color="grey"
             fontSize={3}
-            date={time}
+            date={time.toDate()}
             ticker={currency.units[0].code}
-            unit={unit}
             value={op.amount}
           />
         </Box>

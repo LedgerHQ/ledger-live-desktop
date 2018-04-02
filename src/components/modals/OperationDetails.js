@@ -91,7 +91,6 @@ const OperationDetails = ({ t }: { t: T }) => (
                     fontSize={5}
                     style={{ lineHeight: 1 }}
                     date={date}
-                    unit={unit}
                     ticker={currency.units[0].code}
                     value={amount}
                   />
