@@ -30,12 +30,12 @@ jobs:
       - run:
           name: Test
           command: yarn test
-      - run:
-          name: Build
-          command: yarn dist:dir
-      - run:
-          name: Generate build stats
-          command: "du -h dist | sort -h > /tmp/build-stats.txt"
-      - store_artifacts:
-          path: /tmp/build-stats.txt
-          destination: build-stats.txt
+      # - run:
+      #     name: Build
+      #     command: yarn dist:dir
+      # - run:
+      #     name: Generate build stats
+      #     command: "du -h dist | sort -h > /tmp/build-stats.txt"
+      # - store_artifacts:
+      #     path: /tmp/build-stats.txt
+      #     destination: build-stats.txt
