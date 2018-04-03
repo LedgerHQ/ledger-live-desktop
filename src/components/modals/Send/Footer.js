@@ -17,24 +17,31 @@ type Props = {
   t: T,
   account: Account,
   amount: number,
+  fees: number,
   onNext: Function,
   canNext: boolean,
 }
 
-function Footer({ account, amount, t, onNext, canNext }: Props) {
+function Footer({ account, amount, fees, t, onNext, canNext }: Props) {
   return (
     <ModalFooter horizontal alignItems="center">
       <Box grow>
         <Label>{t('send:totalSpent')}</Label>
         <Box horizontal flow={2} align="center">
-          <FormattedVal disableRounding color="dark" val={amount} unit={account.unit} showCode />
+          <FormattedVal
+            disableRounding
+            color="dark"
+            val={amount + fees}
+            unit={account.unit}
+            showCode
+          />
           <Box horizontal align="center">
             <Text ff="Rubik" fontSize={3}>
               {'('}
             </Text>
             <CounterValue
               ticker={account.currency.units[0].code}
-              value={amount}
+              value={amount + fees}
               disableRounding
               color="grey"
               fontSize={3}

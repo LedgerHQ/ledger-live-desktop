@@ -5,7 +5,6 @@ import { translate } from 'react-i18next'
 import get from 'lodash/get'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { Unit } from '@ledgerhq/currencies'
 import type { T } from 'types/common'
 
 import { MODAL_SEND } from 'config/constants'
@@ -28,12 +27,9 @@ type State = {
   stepIndex: number,
   isDeviceReady: boolean,
   amount: number,
+  fees: number,
   account: Account | null,
   recipientAddress: string,
-  fees: {
-    value: number,
-    unit: Unit | null,
-  },
   isRBF: boolean,
 }
 
@@ -50,10 +46,7 @@ const INITIAL_STATE = {
   account: null,
   recipientAddress: '',
   amount: 0,
-  fees: {
-    value: 0,
-    unit: null,
-  },
+  fees: 0,
   isRBF: false,
 }
 
@@ -61,6 +54,7 @@ class SendModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
   _steps = GET_STEPS(this.props.t)
+  _account: Account | null = null
 
   canNext = account => {
     const { stepIndex } = this.state
@@ -90,7 +84,25 @@ class SendModal extends PureComponent<Props, State> {
     this.setState({ stepIndex: stepIndex + 1 })
   }
 
-  createChangeHandler = key => value => this.setState({ [key]: value })
+  createChangeHandler = key => value => {
+    const patch = { [key]: value }
+    // ensure max is always restecped when changing fees
+    if (key === 'fees') {
+      const { amount } = this.state
+      // if changing fees goes further than max, change amount
+      if (this._account && amount + value > this._account.balance) {
+        const diff = amount + value - this._account.balance
+        patch.amount = amount - diff
+        // if the user is a little joker, and try to put fees superior
+        // to the max, let's reset amount to 0 and put fees to max.
+        if (patch.amount < 0) {
+          patch.amount = 0
+          patch.fees = this._account.balance
+        }
+      }
+    }
+    this.setState(patch)
+  }
 
   renderStep = acc => {
     const { stepIndex, account, amount, ...othersState } = this.state
@@ -110,7 +122,7 @@ class SendModal extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { stepIndex, amount, account } = this.state
+    const { stepIndex, amount, account, fees } = this.state
 
     return (
       <Modal
@@ -119,6 +131,11 @@ class SendModal extends PureComponent<Props, State> {
         render={({ data, onClose }) => {
           const acc = account || get(data, 'account', null)
           const canNext = this.canNext(acc)
+
+          // hack: access the selected account, living in modal data, outside
+          // of the modal render function
+          this._account = acc
+
           return (
             <ModalBody onClose={onClose} deferHeight={acc ? 630 : 355}>
               <ModalTitle>{t('send:title')}</ModalTitle>
@@ -132,6 +149,7 @@ class SendModal extends PureComponent<Props, State> {
                   onNext={this.handleNextStep}
                   account={acc}
                   amount={amount}
+                  fees={fees}
                   t={t}
                 />
               )}

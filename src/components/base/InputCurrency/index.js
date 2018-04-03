@@ -57,6 +57,7 @@ type Props = {
 }
 
 type State = {
+  unit: Unit,
   isFocus: boolean,
   displayValue: string,
 }
@@ -72,20 +73,23 @@ class InputCurrency extends PureComponent<Props, State> {
   state = {
     isFocus: false,
     displayValue: '0',
+    unit: this.props.unit,
   }
 
   componentWillMount() {
-    const { value, unit } = this.props
+    const { value } = this.props
+    const { unit } = this.state
     const displayValue = format(unit, value)
     this.setState({ displayValue })
   }
 
   componentWillReceiveProps(nextProps: Props) {
+    const { unit } = this.state
     if (this.props.value !== nextProps.value) {
       const { isFocus } = this.state
       const displayValue = isFocus
-        ? (nextProps.value / 10 ** nextProps.unit.magnitude).toString()
-        : format(nextProps.unit, nextProps.value)
+        ? (nextProps.value / 10 ** unit.magnitude).toString()
+        : format(unit, nextProps.value)
       this.setState({ displayValue })
     }
   }
@@ -108,13 +112,14 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   handleBlur = () => {
-    const { unit, value } = this.props
+    const { value } = this.props
+    const { unit } = this.state
     const v = format(unit, value)
     this.setState({ isFocus: false, displayValue: v })
   }
 
   handleFocus = () => {
-    const { unit } = this.props
+    const { unit } = this.state
 
     this.setState(prev => ({
       isFocus: true,
@@ -123,8 +128,8 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   emitOnChange = (v: string) => {
-    const { onChange, unit } = this.props
-    const { displayValue } = this.state
+    const { onChange } = this.props
+    const { displayValue, unit } = this.state
 
     if (displayValue.toString() !== v.toString()) {
       const satoshiValue = Number(v) * 10 ** unit.magnitude
@@ -133,7 +138,8 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   renderListUnits = () => {
-    const { unit, units, onChange, value } = this.props
+    const { units, value } = this.props
+    const { unit } = this.state
 
     if (units.length <= 1) {
       return null
@@ -145,7 +151,10 @@ class InputCurrency extends PureComponent<Props, State> {
           bg="lightGraphite"
           keyProp="code"
           flatLeft
-          onChange={item => onChange(unformat(item, value), item)}
+          onChange={item => {
+            this.setState({ unit: item, displayValue: format(item, value) })
+            // onChange(unformat(item, value), item)
+          }}
           items={units}
           value={unit}
           renderItem={item => item.code}
