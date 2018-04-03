@@ -4,11 +4,11 @@ steps:
   currency:
     title: Informations
   connectDevice:
-    title: Connect Device
+    title: Connecter l'appareil
   importProgress:
-    title: In Progress
+    title: En cours
   importAccounts:
-    title: Import Accounts
-    cta_0: Import Account
-    cta_1: Import {{count}} Account
-    cta_2: Import {{count}} Accounts
+    title: Importer les comptes
+    cta_0: Importer le compte
+    cta_1: Importer {{count}} compte
+    cta_2: Importer {{count}} comptes
