@@ -22,9 +22,10 @@ type Props = {
 }
 
 type State = {
-  deviceSelected: Device | null,
-  stepIndex: number,
   account: Account | null,
+  deviceSelected: Device | null,
+  appStatus: null | string,
+  stepIndex: number,
 }
 
 const GET_STEPS = t => [
@@ -35,10 +36,11 @@ const GET_STEPS = t => [
 const INITIAL_STATE = {
   account: null,
   deviceSelected: null,
+  appStatus: null,
   stepIndex: 0,
 }
 
-class SendModal extends PureComponent<Props, State> {
+class ReceiveModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
   _steps = GET_STEPS(this.props.t)
@@ -48,6 +50,11 @@ class SendModal extends PureComponent<Props, State> {
 
     if (stepIndex === 0) {
       return acc !== null
+    }
+
+    if (stepIndex === 1) {
+      const { deviceSelected, appStatus } = this.state
+      return deviceSelected !== null && appStatus === 'success'
     }
 
     return false
@@ -67,6 +74,8 @@ class SendModal extends PureComponent<Props, State> {
 
   handleChangeAccount = account => this.setState({ account })
 
+  handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
+
   renderStep = acc => {
     const { deviceSelected, stepIndex } = this.state
     const { t } = this.props
@@ -85,8 +94,10 @@ class SendModal extends PureComponent<Props, State> {
         onChangeAccount: this.handleChangeAccount,
       }),
       ...props(stepIndex === 1, {
+        accountName: acc ? acc.name : undefined,
         deviceSelected,
         onChangeDevice: this.handleChangeDevice,
+        onStatusChange: this.handleChangeStatus,
       }),
     }
 
@@ -144,4 +155,4 @@ class SendModal extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(SendModal)
+export default translate()(ReceiveModal)

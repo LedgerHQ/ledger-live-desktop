@@ -67,7 +67,7 @@ type State = {
   deviceSelected: Device | null,
   fetchingCounterValues: boolean,
   selectedAccounts: Array<number>,
-  status: null | string,
+  appStatus: null | string,
   stepIndex: number,
 }
 
@@ -77,7 +77,7 @@ const INITIAL_STATE = {
   deviceSelected: null,
   fetchingCounterValues: false,
   selectedAccounts: [],
-  status: null,
+  appStatus: null,
   stepIndex: 0,
 }
 
@@ -148,8 +148,8 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
 
     if (stepIndex === 1) {
-      const { deviceSelected, status } = this.state
-      return deviceSelected !== null && status === 'appOpened.success'
+      const { deviceSelected, appStatus } = this.state
+      return deviceSelected !== null && appStatus === 'success'
     }
 
     if (stepIndex === 3) {
@@ -225,7 +225,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   handleChangeCurrency = (currency: Currency) => this.setState({ currency })
 
-  handleChangeStatus = status => this.setState({ status })
+  handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 
   handleImportAccount = () => {
     const { archivedAccounts, updateAccount } = this.props
