@@ -17,11 +17,11 @@ function parseValue(value) {
   return value.toString().replace(/,/g, '.')
 }
 
-function format(unit: Unit, value: number, useGrouping = false) {
+function format(unit: Unit, value: number, { isFocused, showAllDigits }) {
   return formatCurrencyUnit(unit, value, {
-    useGrouping,
+    useGrouping: !isFocused,
     disableRounding: true,
-    showAllDigits: false,
+    showAllDigits: !!showAllDigits && !isFocused,
   })
 }
 
@@ -44,11 +44,12 @@ type Props = {
   unit: Unit,
   units: Array<Unit>,
   value: number,
+  showAllDigits?: boolean,
 }
 
 type State = {
   unit: Unit,
-  isFocus: boolean,
+  isFocused: boolean,
   displayValue: string,
 }
 
@@ -58,37 +59,52 @@ class InputCurrency extends PureComponent<Props, State> {
     renderRight: null,
     units: [],
     value: 0,
+    showAllDigits: false,
   }
 
   state = {
-    isFocus: false,
-    displayValue: '0',
+    isFocused: false,
+    displayValue: '',
     unit: this.props.unit,
   }
 
   componentWillMount() {
-    const { value } = this.props
-    const { unit } = this.state
-    const displayValue = format(unit, value, true)
-    this.setState({ displayValue })
+    this.syncInput({ isFocused: false })
   }
 
   componentWillReceiveProps(nextProps: Props) {
+    const { value, showAllDigits } = this.props
     const { unit } = this.state
-    if (this.props.value !== nextProps.value) {
-      const { isFocus } = this.state
-      const displayValue = isFocus
-        ? (nextProps.value / 10 ** unit.magnitude).toString()
-        : format(unit, nextProps.value, true)
-      this.setState({ displayValue })
+    const needsToBeReformatted =
+      value !== nextProps.value || showAllDigits !== nextProps.showAllDigits
+    if (needsToBeReformatted) {
+      const { isFocused } = this.state
+      this.setState({
+        displayValue:
+          nextProps.value === 0
+            ? ''
+            : format(unit, nextProps.value, {
+                isFocused,
+                showAllDigits: nextProps.showAllDigits,
+              }),
+      })
     }
   }
 
   handleChange = (v: string) => {
     v = parseValue(v)
 
+    // allow to type directly `.` in input to have `0.`
+    if (v.startsWith('.')) {
+      v = `0${v}`
+    }
+
     // forbid multiple 0 at start
-    if (v.startsWith('00')) {
+    if (v === '' || v.startsWith('00')) {
+      const { onChange } = this.props
+      const { unit } = this.state
+      onChange(0, unit)
+      this.setState({ displayValue: '' })
       return
     }
 
@@ -98,19 +114,19 @@ class InputCurrency extends PureComponent<Props, State> {
     }
 
     this.emitOnChange(v)
-    this.setState({ displayValue: v || '0' })
+    this.setState({ displayValue: v || '' })
   }
 
-  handleBlur = () => {
-    const { value } = this.props
-    const { unit } = this.state
-    this.setState({ isFocus: false, displayValue: format(unit, value, true) })
-  }
+  handleBlur = () => this.syncInput({ isFocused: false })
+  handleFocus = () => this.syncInput({ isFocused: true })
 
-  handleFocus = () => {
-    const { value } = this.props
+  syncInput = ({ isFocused }) => {
+    const { value, showAllDigits } = this.props
     const { unit } = this.state
-    this.setState({ isFocus: true, displayValue: format(unit, value) })
+    this.setState({
+      isFocused,
+      displayValue: value === 0 ? '' : format(unit, value, { isFocused, showAllDigits }),
+    })
   }
 
   emitOnChange = (v: string) => {
@@ -124,7 +140,7 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   renderListUnits = () => {
-    const { units, value } = this.props
+    const { units, value, showAllDigits } = this.props
     const { unit } = this.state
 
     if (units.length <= 1) {
@@ -138,7 +154,10 @@ class InputCurrency extends PureComponent<Props, State> {
           keyProp="code"
           flatLeft
           onChange={item => {
-            this.setState({ unit: item, displayValue: format(item, value, true) })
+            this.setState({
+              unit: item,
+              displayValue: format(item, value, { isFocused: false, showAllDigits }),
+            })
           }}
           items={units}
           value={unit}
@@ -150,8 +169,8 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   render() {
-    const { renderRight } = this.props
-    const { displayValue } = this.state
+    const { renderRight, showAllDigits } = this.props
+    const { displayValue, unit } = this.state
 
     return (
       <Input
@@ -162,6 +181,7 @@ class InputCurrency extends PureComponent<Props, State> {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         renderRight={renderRight || this.renderListUnits()}
+        placeholder={format(unit, 0, { isFocused: false, showAllDigits })}
       />
     )
   }

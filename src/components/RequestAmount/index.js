@@ -102,6 +102,7 @@ export class RequestAmount extends PureComponent<Props> {
             value={right}
             onChange={this.handleChangeAmount('right')}
             renderRight={<InputRight>{rightUnit.code}</InputRight>}
+            showAllDigits
           />
         </Box>
         <Box grow justify="flex-end">
