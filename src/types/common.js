@@ -1,9 +1,11 @@
 // @flow
 
 export type Device = {
-  vendorId: string,
-  productId: string,
+  manufacturer: string,
   path: string,
+  product: string,
+  productId: string,
+  vendorId: string,
 }
 
 export type Devices = Array<Device>

@@ -5,19 +5,17 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { ipcRenderer } from 'electron'
-import differenceBy from 'lodash/differenceBy'
-import { listCurrencies, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
-
 import type { Currency } from '@ledgerhq/currencies'
-
-import { MODAL_ADD_ACCOUNT } from 'config/constants'
 
 import type { Device, T } from 'types/common'
 
+import { MODAL_ADD_ACCOUNT } from 'config/constants'
+
 import { closeModal } from 'reducers/modals'
 import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'
-import { getCurrentDevice } from 'reducers/devices'
 import { sendEvent } from 'renderer/events'
 
 import { addAccount, updateAccount } from 'actions/accounts'
@@ -25,125 +23,24 @@ import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import FormattedVal from 'components/base/FormattedVal'
-import Label from 'components/base/Label'
-import Modal, { ModalBody } from 'components/base/Modal'
-import Select from 'components/base/Select'
-import Text from 'components/base/Text'
+import Breadcrumb from 'components/Breadcrumb'
+import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
 
-import CreateAccount from './CreateAccount'
-import ImportAccounts from './ImportAccounts'
-import RestoreAccounts from './RestoreAccounts'
+import StepCurrency from './01-step-currency'
+import StepConnectDevice from './02-step-connect-device'
+import StepImport from './03-step-import'
 
-const currencies = listCurrencies().map(currency => ({
-  key: currency.coinType,
-  name: currency.name,
-  data: currency,
-}))
-
-const Steps = {
-  chooseCurrency: (props: Object) => (
-    <form onSubmit={props.onSubmit}>
-      <Box flow={3}>
-        <Box flow={1}>
-          <Label>{props.t('common:currency')}</Label>
-          <Select
-            placeholder={props.t('common:chooseWalletPlaceholder')}
-            onChange={item => props.onChangeCurrency(item.data)}
-            renderSelected={item => item.name}
-            items={currencies}
-            value={props.currency ? currencies.find(c => c.key === props.currency.coinType) : null}
-          />
-        </Box>
-        <Box horizontal justifyContent="flex-end">
-          {props.fetchingCounterValues ? (
-            'Fetching counterValues...'
-          ) : (
-            <Button primary type="submit">
-              {props.t('addAccount:title')}
-            </Button>
-          )}
-        </Box>
-      </Box>
-    </form>
-  ),
-  connectDevice: (props: Object) => (
-    <Box>
-      <Box>Connect your Ledger: {props.connected ? 'ok' : 'ko'}</Box>
-      <Box>Start {props.currency.name} App on your Ledger: ko</Box>
-    </Box>
-  ),
-  inProgress: ({ progress, unit }: Object) => (
-    <Box>
-      In progress.
-      {progress !== null && (
-        <Box>
-          <Box>Account: {progress.account}</Box>
-          <Box>
-            Balance:{' '}
-            <FormattedVal
-              alwaysShowSign={false}
-              color="dark"
-              unit={unit}
-              showCode
-              val={progress.balance || 0}
-            />
-          </Box>
-          <Box>Operations: {progress.operations || 0}</Box>
-          {progress.success && <Box>Finish ! Next account in progress...</Box>}
-        </Box>
-      )}
-    </Box>
-  ),
-  listAccounts: (props: Object) => {
-    const { accounts, archivedAccounts } = props
-    const emptyAccounts = accounts.filter(account => account.operations.length === 0)
-    const existingAccounts = accounts.filter(account => account.operations.length > 0)
-    const canCreateAccount = props.canCreateAccount && emptyAccounts.length === 1
-    const newAccount = emptyAccounts[0]
-    return (
-      <Box flow={10}>
-        <ImportAccounts {...props} accounts={existingAccounts} />
-        {!!archivedAccounts.length && <RestoreAccounts {...props} accounts={archivedAccounts} />}
-        {canCreateAccount ? (
-          <CreateAccount {...props} account={newAccount} />
-        ) : (
-          <Box>{`You can't create new account`}</Box>
-        )}
-      </Box>
-    )
-  },
-}
-
-type Step = 'chooseCurrency' | 'connectDevice' | 'inProgress' | 'listAccounts'
-
-type Props = {
-  accounts: Account[],
-  addAccount: Function,
-  archivedAccounts: Account[],
-  canCreateAccount: boolean,
-  closeModal: Function,
-  counterValues: Object,
-  currentDevice: Device | null,
-  fetchCounterValues: Function,
-  t: T,
-  updateAccount: Function,
-}
-
-type State = {
-  accounts: Account[],
-  currency: Currency | null,
-  fetchingCounterValues: boolean,
-  progress: null | Object,
-  step: Step,
-}
+const GET_STEPS = t => [
+  { label: t('addAccount:steps.currency.title'), Comp: StepCurrency },
+  { label: t('addAccount:steps.connectDevice.title'), Comp: StepConnectDevice },
+  { label: t('addAccount:steps.importProgress.title'), Comp: StepImport },
+  { label: t('addAccount:steps.importAccounts.title'), Comp: StepImport },
+]
 
 const mapStateToProps = state => ({
   accounts: getAccounts(state),
   archivedAccounts: getArchivedAccounts(state),
   canCreateAccount: canCreateAccount(state),
-  counterValues: state.counterValues,
-  currentDevice: getCurrentDevice(state),
 })
 
 const mapDispatchToProps = {
@@ -153,221 +50,330 @@ const mapDispatchToProps = {
   updateAccount,
 }
 
-const defaultState = {
-  step: 'chooseCurrency',
-  progress: null,
-  fetchingCounterValues: false,
+type Props = {
+  accounts: Account[],
+  addAccount: Function,
+  archivedAccounts: Account[],
+  canCreateAccount: boolean,
+  closeModal: Function,
+  fetchCounterValues: Function,
+  t: T,
+  updateAccount: Function,
+}
+
+type State = {
+  accountsImport: Object,
+  currency: Currency | null,
+  deviceSelected: Device | null,
+  fetchingCounterValues: boolean,
+  selectedAccounts: Array<number>,
+  status: null | string,
+  stepIndex: number,
+}
+
+const INITIAL_STATE = {
+  accountsImport: {},
   currency: null,
-  accounts: [],
+  deviceSelected: null,
+  fetchingCounterValues: false,
+  selectedAccounts: [],
+  status: null,
+  stepIndex: 0,
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
-  state = {
-    ...defaultState,
-  }
+  state = INITIAL_STATE
 
   componentDidMount() {
     ipcRenderer.on('msg', this.handleMsgEvent)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.accounts) {
-      this.setState(prev => ({
-        accounts: differenceBy(prev.accounts, nextProps.accounts, 'id'),
-      }))
-    }
-  }
+  async componentWillUpdate(nextProps, nextState) {
+    const { fetchingCounterValues, stepIndex } = this.state
+    const { stepIndex: nextStepIndex } = nextState
 
-  componentDidUpdate() {
-    const { step } = this.state
-    const { currentDevice } = this.props
-
-    if (step === 'connectDevice' && currentDevice !== null) {
-      this.getWalletInfos()
-    } else {
-      clearTimeout(this._timeout)
+    if (!fetchingCounterValues && stepIndex === 0 && nextStepIndex === 1) {
+      await this.fetchCounterValues()
     }
   }
 
   componentWillUnmount() {
+    this.killProcess()
     ipcRenderer.removeListener('msg', this.handleMsgEvent)
     clearTimeout(this._timeout)
   }
 
-  getWalletInfos() {
-    const { currentDevice, accounts } = this.props
-    const { currency } = this.state
+  importsAccounts() {
+    const { accounts } = this.props
+    const { deviceSelected, currency } = this.state
 
-    if (currentDevice === null || currency === null) {
+    if (deviceSelected === null || currency === null) {
       return
     }
 
     sendEvent('usb', 'wallet.getAccounts', {
-      pathDevice: currentDevice.path,
+      pathDevice: deviceSelected.path,
       coinType: currency.coinType,
       currentAccounts: accounts.map(acc => acc.id),
     })
   }
 
-  getStepProps() {
-    const { currentDevice, archivedAccounts, canCreateAccount, updateAccount, t } = this.props
-    const { currency, step, progress, accounts, fetchingCounterValues } = this.state
+  async fetchCounterValues() {
+    const { fetchCounterValues } = this.props
+    const { currency } = this.state
 
-    const props = (predicate, props) => (predicate ? props : {})
-
-    return {
-      ...props(step === 'chooseCurrency', {
-        currency,
-        fetchingCounterValues,
-        onChangeCurrency: this.handleChangeCurrency,
-        onSubmit: this.handleSubmit,
-        t,
-      }),
-      ...props(step === 'connectDevice', {
-        t,
-        connected: currentDevice !== null,
-        currency,
-      }),
-      ...props(step === 'inProgress', {
-        t,
-        progress,
-        unit: currency !== null && getDefaultUnitByCoinType(currency.coinType),
-      }),
-      ...props(step === 'listAccounts', {
-        t,
-        accounts,
-        archivedAccounts,
-        canCreateAccount,
-        updateAccount,
-        onAddAccount: this.handleAddAccount,
-        onImportAccounts: this.handleImportAccounts,
-      }),
+    if (!currency) {
+      return
     }
+
+    this.setState({
+      fetchingCounterValues: true,
+      stepIndex: 0,
+    })
+
+    await fetchCounterValues([currency])
+
+    this.setState({
+      fetchingCounterValues: false,
+      stepIndex: 1,
+    })
   }
 
+  canNext = () => {
+    const { stepIndex } = this.state
+
+    if (stepIndex === 0) {
+      const { currency } = this.state
+      return currency !== null
+    }
+
+    if (stepIndex === 1) {
+      const { deviceSelected, status } = this.state
+      return deviceSelected !== null && status === 'appOpened.success'
+    }
+
+    if (stepIndex === 3) {
+      const { selectedAccounts } = this.state
+      return selectedAccounts.length > 0
+    }
+
+    return false
+  }
+
+  _steps = GET_STEPS(this.props.t)
+
   handleMsgEvent = (e, { data, type }) => {
+    const { accountsImport, currency } = this.state
+    const { addAccount } = this.props
+
     if (type === 'wallet.getAccounts.start') {
       this._pid = data.pid
     }
 
     if (type === 'wallet.getAccounts.progress') {
       this.setState(prev => ({
-        step: 'inProgress',
-        progress:
-          prev.progress === null
-            ? data
-            : prev.progress.success
-              ? data
-              : {
-                  ...prev.progress,
+        stepIndex: 2,
+        accountsImport: {
+          ...(data !== null
+            ? {
+                [data.id]: {
                   ...data,
+                  name: `Account ${data.accountIndex + 1}`,
                 },
+              }
+            : {}),
+          ...prev.accountsImport,
+        },
       }))
-    }
 
-    if (type === 'wallet.getAccounts.fail') {
-      this._timeout = setTimeout(() => this.getWalletInfos(), 1e3)
+      if (currency && data && data.finish) {
+        const { accountIndex, finish, ...account } = data
+        addAccount({
+          ...account,
+          // As data is passed inside electron event system,
+          // dates are converted to their string equivalent
+          //
+          // so, quick & dirty way to put back Date objects
+          operations: account.operations.map(op => ({
+            ...op,
+            date: new Date(op.date),
+          })),
+          name: `Account ${accountIndex + 1}`,
+          archived: true,
+          currency,
+          unit: getDefaultUnitByCoinType(currency.coinType),
+        })
+      }
     }
 
     if (type === 'wallet.getAccounts.success') {
-      // As data is passed inside electron event system,
-      // dates are converted to their string equivalent
-      //
-      // so, quick & dirty way to put back Date objects
-      const parsedData = data.map(account => ({
-        ...account,
-        operations: account.operations.map(op => ({
-          ...op,
-          date: new Date(op.date),
-        })),
-      }))
-
       this.setState({
-        accounts: parsedData,
-        step: 'listAccounts',
+        selectedAccounts: Object.keys(accountsImport).map(k => accountsImport[k].id),
+        stepIndex: 3,
       })
     }
   }
 
-  handleAddAccount = account => this.addAccount(account)
+  handleChangeDevice = d => this.setState({ deviceSelected: d })
 
-  handleImportAccounts = accounts => accounts.forEach(account => this.addAccount(account))
+  handleSelectAccount = a => () =>
+    this.setState(prev => ({
+      selectedAccounts: prev.selectedAccounts.includes(a)
+        ? prev.selectedAccounts.filter(x => x !== a)
+        : [a, ...prev.selectedAccounts],
+    }))
 
   handleChangeCurrency = (currency: Currency) => this.setState({ currency })
 
-  handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  handleChangeStatus = status => this.setState({ status })
 
-    const { fetchCounterValues } = this.props
-    const { currency } = this.state
+  handleImportAccount = () => {
+    const { archivedAccounts, updateAccount } = this.props
+    const { selectedAccounts } = this.state
 
-    if (currency !== null) {
-      this.setState({
-        fetchingCounterValues: true,
-      })
+    const accounts = archivedAccounts.filter(a => selectedAccounts.includes(a.id))
 
-      await fetchCounterValues([currency])
+    accounts.forEach(a =>
+      updateAccount({
+        ...a,
+        archived: false,
+      }),
+    )
 
-      this.setState({
-        fetchingCounterValues: false,
-        step: 'connectDevice',
-      })
-    }
+    this.setState({
+      selectedAccounts: [],
+    })
   }
 
-  handleClose = () => {
+  handleNextStep = () => {
+    const { stepIndex } = this.state
+    if (stepIndex >= this._steps.length - 1) {
+      return
+    }
+    this.setState({ stepIndex: stepIndex + 1 })
+  }
+
+  handleReset = () => {
+    this.killProcess()
+    clearTimeout(this._timeout)
+    this.setState(INITIAL_STATE)
+  }
+
+  killProcess = () =>
     sendEvent('msg', 'kill.process', {
       pid: this._pid,
     })
-    clearTimeout(this._timeout)
-  }
-
-  handleHide = () =>
-    this.setState({
-      ...defaultState,
-    })
-
-  addAccount = account => {
-    const { currency } = this.state
-    const { addAccount } = this.props
-
-    if (currency === null) {
-      return
-    }
-
-    addAccount({
-      ...account,
-      coinType: currency.coinType,
-      currency,
-      unit: getDefaultUnitByCoinType(currency.coinType),
-    })
-  }
 
   _timeout = undefined
   _pid = null
 
-  render() {
-    const { step } = this.state
+  renderStep() {
+    const { accounts, archivedAccounts, t } = this.props
+    const { stepIndex, currency, accountsImport, deviceSelected, selectedAccounts } = this.state
+    const step = this._steps[stepIndex]
+    if (!step) {
+      return null
+    }
+    const { Comp } = step
+
+    const props = (predicate, props) => (predicate ? props : {})
+
+    const stepProps = {
+      t,
+      currency,
+      ...props(stepIndex === 0, {
+        onChangeCurrency: this.handleChangeCurrency,
+      }),
+      ...props(stepIndex === 1, {
+        deviceSelected,
+        onStatusChange: this.handleChangeStatus,
+        onChangeDevice: this.handleChangeDevice,
+      }),
+      ...props(stepIndex === 2, {
+        accountsImport,
+        importProgress: true,
+      }),
+      ...props(stepIndex === 3, {
+        accountsImport: Object.keys(accountsImport).reduce((result, k) => {
+          const account = accountsImport[k]
+          const existingAccount = accounts.find(a => a.id === account.id)
+          if (!existingAccount || (existingAccount && existingAccount.archived)) {
+            result[account.id] = account
+          }
+          return result
+        }, {}),
+        archivedAccounts: archivedAccounts.filter(a => !accountsImport[a.id]),
+        importProgress: false,
+        onSelectAccount: this.handleSelectAccount,
+        selectedAccounts,
+      }),
+    }
+
+    return <Comp {...stepProps} />
+  }
+
+  renderButton() {
     const { t } = this.props
+    const { fetchingCounterValues, stepIndex, selectedAccounts } = this.state
+
+    let onClick
+
+    switch (stepIndex) {
+      case 1:
+        onClick = () => {
+          this.handleNextStep()
+          this.importsAccounts()
+        }
+        break
+
+      case 3:
+        onClick = this.handleImportAccount
+        break
+
+      default:
+        onClick = this.handleNextStep
+    }
+
+    const props = {
+      primary: true,
+      disabled: fetchingCounterValues || !this.canNext(),
+      onClick,
+      children: fetchingCounterValues
+        ? 'Fetching counterValues...'
+        : stepIndex === 3
+          ? t('addAccount:steps.importAccounts.cta', {
+              count: selectedAccounts.length,
+            })
+          : t('common:next'),
+    }
+
+    return <Button {...props} />
+  }
+
+  render() {
+    const { t } = this.props
+    const { stepIndex } = this.state
 
     return (
       <Modal
         name={MODAL_ADD_ACCOUNT}
-        preventBackdropClick={step !== 'chooseCurrency'}
-        onClose={this.handleClose}
-        onHide={this.handleHide}
-        render={({ onClose }) => {
-          const Step = Steps[step]
-
-          return (
-            <ModalBody onClose={onClose} flow={3}>
-              <Text fontSize={6} color="graphite">
-                {t('addAccount:title')}
-              </Text>
-              <Step {...this.getStepProps()} />
-            </ModalBody>
-          )
-        }}
+        onHide={this.handleReset}
+        render={({ onClose }) => (
+          <ModalBody onClose={onClose}>
+            <ModalTitle>{t('addAccount:title')}</ModalTitle>
+            <ModalContent>
+              <Breadcrumb mb={6} mt={2} currentStep={stepIndex} items={this._steps} />
+              {this.renderStep()}
+            </ModalContent>
+            {stepIndex !== 2 && (
+              <ModalFooter>
+                <Box horizontal alignItems="center" justifyContent="flex-end">
+                  {this.renderButton()}
+                </Box>
+              </ModalFooter>
+            )}
+          </ModalBody>
+        )}
       />
     )
   }

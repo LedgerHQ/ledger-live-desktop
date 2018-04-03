@@ -51,7 +51,7 @@ const Tooltip = ({
         left: 0,
         transform: `translate3d(-50%, 0, 0)`,
         whiteSpace: 'nowrap',
-        marginBottom: 10,
+        marginBottom: 5,
       }}
     >
       <TooltipContainer style={{ textAlign: 'center' }}>
@@ -68,9 +68,7 @@ const Tooltip = ({
           />
         )}
       </TooltipContainer>
-      <div style={{ background: 'red' }}>
-        <Arrow />
-      </div>
+      <Arrow />
     </div>
   </div>
 )
