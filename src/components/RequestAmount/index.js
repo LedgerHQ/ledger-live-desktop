@@ -52,7 +52,7 @@ type Props = {
   max: number,
 
   // change handler
-  onChange: ({ left: number, right: number }) => void,
+  onChange: number => void,
 
   // used to determine the left input unit
   account: Account,
@@ -66,83 +66,40 @@ type Props = {
   getReverseCounterValue: CalculateCounterValue,
 }
 
-type State = {
-  leftUnit: Unit,
-  rightUnit: Unit,
-  leftValue: number,
-  rightValue: number,
-}
-
-export class RequestAmount extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props)
-
-    const { account, rightUnit, value, getCounterValue } = this.props
-
-    const rawLeftValue = value * 10 ** account.unit.magnitude
-    const rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
-    const rightValue = rawRightValue / 10 ** rightUnit.magnitude
-
-    this.state = {
-      leftUnit: account.unit,
-      rightUnit,
-      leftValue: value,
-      rightValue,
-    }
-  }
-
+export class RequestAmount extends PureComponent<Props> {
   handleClickMax = () => {
-    const leftValue = this.props.max / 10 ** this.props.account.unit.magnitude
-    this.handleChangeAmount('left')(leftValue)
-    this.setState({ leftValue })
+    this.props.onChange(this.props.max)
   }
 
   handleChangeAmount = (changedField: string) => (val: number) => {
-    const { getCounterValue, getReverseCounterValue, account, max, onChange } = this.props
-    const { rightUnit } = this.state
+    const { rightUnit, getReverseCounterValue, account, max, onChange } = this.props
     if (changedField === 'left') {
-      let rawLeftValue = val * 10 ** account.unit.magnitude
-      if (rawLeftValue > max) {
-        rawLeftValue = max
-      }
-      const leftValue = rawLeftValue / 10 ** account.unit.magnitude
-      const rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
-      const rightValue = rawRightValue / 10 ** rightUnit.magnitude
-      this.setState({ rightValue, leftValue })
-      onChange({ left: rawLeftValue, right: rawRightValue })
+      onChange(val > max ? max : val)
     } else if (changedField === 'right') {
-      let rawRightValue = val * 10 ** rightUnit.magnitude
-      let rawLeftValue = getReverseCounterValue(account.currency, rightUnit)(rawRightValue)
-      if (rawLeftValue > max) {
-        rawLeftValue = max
-        rawRightValue = getCounterValue(account.currency, rightUnit)(rawLeftValue)
-      }
-      const rightValue = rawRightValue / 10 ** rightUnit.magnitude
-      const leftValue = rawLeftValue / 10 ** account.unit.magnitude
-      this.setState({ rightValue, leftValue })
-      onChange({ left: rawLeftValue, right: rawRightValue })
+      const leftVal = getReverseCounterValue(account.currency, rightUnit)(val)
+      onChange(leftVal > max ? max : leftVal)
     }
   }
 
   render() {
-    const { t } = this.props
-    const { leftUnit, rightUnit, leftValue, rightValue } = this.state
+    const { t, value, account, rightUnit, getCounterValue } = this.props
+    const right = getCounterValue(account.currency, rightUnit)(value)
 
     return (
       <Box horizontal flow="5">
         <Box horizontal align="center">
           <InputCurrency
             containerProps={{ style: { width: 156 } }}
-            unit={leftUnit}
-            value={leftValue}
+            unit={account.unit}
+            value={value}
             onChange={this.handleChangeAmount('left')}
-            renderRight={<InputRight>{leftUnit.code}</InputRight>}
+            renderRight={<InputRight>{account.unit.code}</InputRight>}
           />
           <InputCenter>=</InputCenter>
           <InputCurrency
             containerProps={{ style: { width: 156 } }}
             unit={rightUnit}
-            value={rightValue}
+            value={right}
             onChange={this.handleChangeAmount('right')}
             renderRight={<InputRight>{rightUnit.code}</InputRight>}
           />

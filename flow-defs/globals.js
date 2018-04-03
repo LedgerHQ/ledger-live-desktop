@@ -11,5 +11,7 @@ declare var __APP_VERSION__: string
 declare var __static: string
 declare var describe: Function
 declare var test: Function
+declare var it: Function
+declare var expect: Function
 
 declare var ResizeObserver: Class<any>

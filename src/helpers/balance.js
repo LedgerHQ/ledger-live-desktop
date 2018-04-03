@@ -69,6 +69,7 @@ export function getBalanceHistoryForAccount({
   counterValues: Object,
   interval: DateInterval,
 }): Array<BalanceHistoryDay> {
+  const todayDate = moment().format('YYYY-MM-DD')
   const unit = getDefaultUnitByCoinType(account.coinType)
   const counterVals = get(counterValues, `${unit.code}.${counterValue}`)
   let lastBalance = getBalanceAtIntervalStart(account, interval)
@@ -79,14 +80,19 @@ export function getBalanceHistoryForAccount({
       return { balance, date }
     }
 
+    const isToday = date === todayDate
+    const counterVal = isToday
+      ? counterVals.latest || counterVals[date] || 0
+      : counterVals[date] || 0
+
     // if we don't have data on account balance for that day,
     // we take the prev day
     if (isUndefined(account.balanceByDay[date])) {
-      balance = lastBalance === null ? 0 : lastBalance * counterVals[date]
+      balance = lastBalance === null ? 0 : lastBalance * counterVal
     } else {
       const b = account.balanceByDay[date]
       lastBalance = b
-      balance = b * counterVals[date]
+      balance = b * counterVal
     }
 
     if (isNaN(balance)) {

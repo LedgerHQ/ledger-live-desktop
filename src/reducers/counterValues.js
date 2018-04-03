@@ -16,7 +16,7 @@ export type CounterValuesState = {}
 const state: CounterValuesState = {}
 
 const handlers = {
-  UPDATE_COUNTER_VALUES: (state, { payload: counterValues }) => merge(state, counterValues),
+  UPDATE_COUNTER_VALUES: (state, { payload: counterValues }) => merge({ ...state }, counterValues),
 }
 
 const getPairHistory = state => (coinTicker, fiat) => {

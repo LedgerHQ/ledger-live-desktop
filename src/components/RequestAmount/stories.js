@@ -1,33 +1,39 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import { number } from '@storybook/addon-knobs'
-import { translate } from 'react-i18next'
 
 import { accounts } from 'components/SelectAccount/stories'
 
-import { RequestAmount } from 'components/RequestAmount'
+import RequestAmount from 'components/RequestAmount'
 
 const stories = storiesOf('Components', module)
 
-const props = {
-  counterValue: 'USD',
-  lastCounterValue: 9177.69,
-  account: accounts[0],
+type State = {
+  value: number,
 }
 
-const RequestAmountComp = translate()(RequestAmount)
+class Wrapper extends PureComponent<any, State> {
+  state = {
+    value: 3e8,
+  }
+  handleChange = value => {
+    action('onChange')(value)
+    this.setState({ value })
+  }
+  render() {
+    const { value } = this.state
+    return (
+      <RequestAmount
+        counterValue="USD"
+        account={accounts[0]}
+        onChange={this.handleChange}
+        value={value}
+        max={4e8}
+      />
+    )
+  }
+}
 
-stories.add('RequestAmount', () => (
-  <RequestAmountComp
-    {...props}
-    t={k => k}
-    onChange={action('onChange')}
-    value={{
-      left: number('left value', 0),
-      right: number('right value', 0),
-    }}
-  />
-))
+stories.add('RequestAmount', () => <Wrapper />)
