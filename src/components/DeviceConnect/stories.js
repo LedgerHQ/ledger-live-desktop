@@ -36,9 +36,9 @@ const devices = [
 stories.add('DeviceConnect', () => (
   <DeviceConnect
     accountName={boolean('withAccount', true) ? text('accountName', 'Test Account') : null}
-    coinType={select('coinType', [0, 1, 145, 156, 2, 3, 5], 0)}
+    coinType={Number(select('coinType', [0, 1, 145, 156, 2, 3, 5], '0'))}
     appOpened={select('appOpened', ['', 'success', 'fail'], '')}
-    devices={devices.slice(0, select('devices', [0, 1, 2, 3], 0))}
+    devices={devices.slice(0, Number(select('devices', [0, 1, 2, 3], '0')))}
     deviceSelected={devices[select('deviceSelected', ['', 0, 1, 2], '')] || null}
     onChangeDevice={action('onChangeDevice')}
   />

@@ -12,7 +12,7 @@ import fontFamily from 'styles/styled/fontFamily'
 const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
   fontSize: 3,
-  px: p => (p.primary ? (p.small ? 2 : 4) : 1),
+  px: p => (p.primary ? (p.small ? 2 : 3) : 1),
 })`
   ${space};
   ${color};
@@ -22,7 +22,7 @@ const Base = styled.button.attrs({
   border-radius: ${p => p.theme.radii[1]}px;
   border: none;
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
-  height: ${p => (p.small ? 30 : 40)}px;
+  height: ${p => (p.small ? 30 : 36)}px;
   outline: none;
 
   &:hover {
