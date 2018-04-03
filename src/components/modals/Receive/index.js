@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import get from 'lodash/get'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
@@ -16,6 +16,7 @@ import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'compone
 import StepConnectDevice from 'components/modals/StepConnectDevice'
 
 import StepAccount from './01-step-account'
+import StepConfirmAddress from './03-step-confirm-address'
 
 type Props = {
   t: T,
@@ -31,6 +32,7 @@ type State = {
 const GET_STEPS = t => [
   { label: t('receive:steps.chooseAccount.title'), Comp: StepAccount },
   { label: t('receive:steps.connectDevice.title'), Comp: StepConnectDevice },
+  { label: t('receive:steps.confirmAddress.title'), Comp: StepConfirmAddress },
 ]
 
 const INITIAL_STATE = {
@@ -58,6 +60,16 @@ class ReceiveModal extends PureComponent<Props, State> {
     }
 
     return false
+  }
+
+  canClose = () => {
+    const { stepIndex } = this.state
+
+    if (stepIndex === 2) {
+      return false
+    }
+
+    return true
   }
 
   handleReset = () => this.setState(INITIAL_STATE)
@@ -122,31 +134,43 @@ class ReceiveModal extends PureComponent<Props, State> {
       children: t('common:next'),
     }
 
-    return <Button {...props} />
+    return (
+      <Fragment>
+        {stepIndex === 1 && (
+          <Button fontSize={4}>{t('receive:steps.connectDevice.withoutDevice')}</Button>
+        )}
+        <Button {...props} />
+      </Fragment>
+    )
   }
 
   render() {
     const { t } = this.props
     const { stepIndex, account } = this.state
 
+    const canClose = this.canClose()
+
     return (
       <Modal
+        preventBackdropClick={!canClose}
         name={MODAL_RECEIVE}
         onHide={this.handleReset}
         render={({ data, onClose }) => {
           const acc = account || get(data, 'account', null)
           return (
-            <ModalBody onClose={onClose} deferHeight={344}>
+            <ModalBody onClose={canClose ? onClose : undefined} deferHeight={330}>
               <ModalTitle>{t('receive:title')}</ModalTitle>
               <ModalContent>
                 <Breadcrumb mb={6} currentStep={stepIndex} items={this._steps} />
                 {this.renderStep(acc)}
               </ModalContent>
-              <ModalFooter>
-                <Box horizontal alignItems="center" justifyContent="flex-end">
-                  {this.renderButton(acc)}
-                </Box>
-              </ModalFooter>
+              {canClose && (
+                <ModalFooter>
+                  <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+                    {this.renderButton(acc)}
+                  </Box>
+                </ModalFooter>
+              )}
             </ModalBody>
           )
         }}

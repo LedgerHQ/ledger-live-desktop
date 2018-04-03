@@ -38,8 +38,8 @@ const StepConnectDevice = (props: Props) => (
 )
 
 StepConnectDevice.defaultProps = {
-  account: undefined,
   accountName: undefined,
+  account: undefined,
   currency: undefined,
 }
 

@@ -4,9 +4,16 @@ steps:
   chooseAccount:
     title: Choose Account
     label: Account
+
   connectDevice:
     title: Connect Device
+    withoutDevice: I don't have my device
+
   confirmAddress:
     title: Confirm Address
+    action: Confirm address on device
+    text: To receive funds, confirm the address on your device.
+    label: Current address
+
   receiveFunds:
     title: Receive Funds

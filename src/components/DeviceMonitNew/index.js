@@ -140,7 +140,7 @@ class DeviceMonit extends PureComponent<Props, State> {
     if (render) {
       return render({
         appStatus,
-        coinType: (account && account.coinType) || coinType,
+        coinType: account ? account.coinType : coinType,
         devices,
         deviceSelected: deviceStatus === 'connected' ? deviceSelected : null,
         deviceStatus,

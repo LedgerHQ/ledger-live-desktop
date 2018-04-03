@@ -68,11 +68,12 @@ export const colors = {
   // new colors
   alertRed: '#fa4352',
   black: '#000000',
-  dark: '#1d2028',
+  dark: '#142533',
   fog: '#d8d8d8',
   graphite: '#767676',
   grey: '#999999',
   identity: '#41ccb4',
+  lightFog: '#eeeeee',
   lightGraphite: '#fafafa',
   lightGrey: '#f9f9f9',
   positiveGreen: '#66be54',

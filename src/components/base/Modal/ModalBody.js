@@ -22,6 +22,10 @@ type State = {
 }
 
 class ModalBody extends PureComponent<Props, State> {
+  static defaultProps = {
+    onClose: undefined,
+  }
+
   state = {
     isHidden: true,
   }

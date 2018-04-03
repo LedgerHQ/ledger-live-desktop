@@ -10,7 +10,7 @@ const RADIUS = 17
 const Wrapper = styled(Box).attrs({
   align: 'center',
   justify: 'center',
-  color: p => (p.isActive ? 'wallet' : 'fog'),
+  color: p => (p.isActive ? 'wallet' : 'grey'),
 })`
   width: ${RADIUS}px;
   flex-shrink: 0;
@@ -25,13 +25,13 @@ const Number = styled(Box).attrs({
   bg: p => (p.isActive ? 'wallet' : 'fog'),
   ff: 'Rubik|Regular',
 })`
-  width: ${RADIUS}px;
-  height: ${RADIUS}px;
   border-radius: 50%;
   font-size: 10px;
+  height: ${RADIUS}px;
   line-height: 10px;
-  box-shadow: ${p => `0 0 0 ${p.isActive ? 4 : 0}px ${p.theme.colors.lightGrey}`};
+  padding-left: 1px;
   transition: all ease-in-out 0.1s ${p => (p.isActive ? 0.4 : 0)}s;
+  width: ${RADIUS}px;
 `
 
 const Bar = styled.div`
@@ -60,7 +60,7 @@ const Bar = styled.div`
 
 const Label = styled(Box).attrs({
   fontSize: 3,
-  ff: 'Museo Sans|Bold',
+  ff: 'Museo Sans|Regular',
 })`
   position: absolute;
   margin-top: 27px;
