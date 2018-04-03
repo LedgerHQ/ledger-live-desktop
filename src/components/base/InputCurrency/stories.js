@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
+import { boolean } from '@storybook/addon-knobs'
 
 import { getCurrencyByCoinType } from '@ledgerhq/currencies'
 
@@ -14,7 +15,7 @@ const { units } = getCurrencyByCoinType(1)
 
 class Wrapper extends Component<any, any> {
   state = {
-    value: 1e8,
+    value: 0,
     unit: units[0],
   }
 
@@ -38,7 +39,13 @@ class Wrapper extends Component<any, any> {
 stories.add('InputCurrency', () => (
   <Wrapper
     render={({ value, unit, onChange }) => (
-      <InputCurrency value={value} unit={unit} units={units} onChange={onChange} />
+      <InputCurrency
+        value={value}
+        unit={unit}
+        units={units}
+        onChange={onChange}
+        showAllDigits={boolean('showAllDigits', false)}
+      />
     )}
   />
 ))

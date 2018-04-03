@@ -913,17 +913,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@ledgerhq/currencies@^4.7.1":
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.7.3.tgz#0e28c0f1c74cf00b990be6865fbec374f808b71f"
-  dependencies:
-    lodash "^4.17.5"
-    numeral "^2.0.6"
-    querystring "^0.2.0"
-
-"@ledgerhq/currencies@^4.7.5":
-  version "4.7.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.7.5.tgz#e852b58359254fbb2087de328df84343b586f4ab"
+"@ledgerhq/currencies@^4.10.1":
+  version "4.10.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.10.1.tgz#462081005e3e37e0737bad9aba189eef1663e96a"
   dependencies:
     lodash "^4.17.5"
     numeral "^2.0.6"
@@ -955,13 +947,13 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/wallet-common@^0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.10.1.tgz#72e17329de02bebb5ed54bf797113266824e4af8"
+"@ledgerhq/wallet-common@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.12.0.tgz#50ac697929062772182735e4013266c41a661fe2"
   dependencies:
-    "@ledgerhq/currencies" "^4.7.1"
+    "@ledgerhq/currencies" "^4.10.1"
     axios "^0.18.0"
-    babel-jest "^23.0.0-alpha.0"
+    babel-jest "^22.4.3"
     invariant "^2.2.2"
     lodash "^4.17.4"
     prando "^3.0.1"
@@ -1927,13 +1919,6 @@ babel-jest@^22.4.3:
     babel-plugin-istanbul "^4.1.5"
     babel-preset-jest "^22.4.3"
 
-babel-jest@^23.0.0-alpha.0:
-  version "23.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-23.0.0-alpha.4.tgz#e3bb1e486f4178b381cc7b37e6cafb1af3a9d1bf"
-  dependencies:
-    babel-plugin-istanbul "^4.1.6"
-    babel-preset-jest "^23.0.0-alpha.4"
-
 babel-loader@^7.1.4:
   version "7.1.4"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-7.1.4.tgz#e3463938bd4e6d55d1c174c5485d406a188ed015"
@@ -1976,22 +1961,9 @@ babel-plugin-istanbul@^4.1.5:
     istanbul-lib-instrument "^1.7.5"
     test-exclude "^4.1.1"
 
-babel-plugin-istanbul@^4.1.6:
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/babel-plugin-istanbul/-/babel-plugin-istanbul-4.1.6.tgz#36c59b2192efce81c5b378321b74175add1c9a45"
-  dependencies:
-    babel-plugin-syntax-object-rest-spread "^6.13.0"
-    find-up "^2.1.0"
-    istanbul-lib-instrument "^1.10.1"
-    test-exclude "^4.2.1"
-
 babel-plugin-jest-hoist@^22.4.3:
   version "22.4.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-22.4.3.tgz#7d8bcccadc2667f96a0dcc6afe1891875ee6c14a"
-
-babel-plugin-jest-hoist@^23.0.0-alpha.4:
-  version "23.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-23.0.0-alpha.4.tgz#3f32715d54640e37cc62a84a9d3d7eada6a067fc"
 
 babel-plugin-macros@^2.2.0:
   version "2.2.0"
@@ -2582,13 +2554,6 @@ babel-preset-jest@^22.4.3:
   resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-22.4.3.tgz#e92eef9813b7026ab4ca675799f37419b5a44156"
   dependencies:
     babel-plugin-jest-hoist "^22.4.3"
-    babel-plugin-syntax-object-rest-spread "^6.13.0"
-
-babel-preset-jest@^23.0.0-alpha.4:
-  version "23.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-23.0.0-alpha.4.tgz#d3080507330e6d23c47dcc366d69f7a330174f70"
-  dependencies:
-    babel-plugin-jest-hoist "^23.0.0-alpha.4"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
 babel-preset-minify@^0.3.0:
@@ -4817,7 +4782,7 @@ electron-builder-lib@~20.6.2:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
-electron-builder@^20.0.4, electron-builder@^20.8.1:
+electron-builder@^20.8.1:
   version "20.8.1"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.8.1.tgz#3d19607a7f7d3ee7f3e110a6fc66c720ed1d2cc0"
   dependencies:
@@ -4997,7 +4962,7 @@ electron-webpack@^2.0.1:
     webpack-merge "^4.1.2"
     yargs "^11.1.0"
 
-electron@1.8.4, electron@^1.8.2:
+electron@1.8.4:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.4.tgz#cca8d0e6889f238f55b414ad224f03e03b226a38"
   dependencies:
@@ -7287,27 +7252,11 @@ istanbul-lib-coverage@^1.1.1, istanbul-lib-coverage@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-1.1.2.tgz#4113c8ff6b7a40a1ef7350b01016331f63afde14"
 
-istanbul-lib-coverage@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-1.2.0.tgz#f7d8f2e42b97e37fe796114cb0f9d68b5e3a4341"
-
 istanbul-lib-hook@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/istanbul-lib-hook/-/istanbul-lib-hook-1.1.0.tgz#8538d970372cb3716d53e55523dd54b557a8d89b"
   dependencies:
     append-transform "^0.4.0"
-
-istanbul-lib-instrument@^1.10.1:
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-instrument/-/istanbul-lib-instrument-1.10.1.tgz#724b4b6caceba8692d3f1f9d0727e279c401af7b"
-  dependencies:
-    babel-generator "^6.18.0"
-    babel-template "^6.16.0"
-    babel-traverse "^6.18.0"
-    babel-types "^6.18.0"
-    babylon "^6.18.0"
-    istanbul-lib-coverage "^1.2.0"
-    semver "^5.3.0"
 
 istanbul-lib-instrument@^1.7.5, istanbul-lib-instrument@^1.8.0, istanbul-lib-instrument@^1.9.2:
   version "1.9.2"
@@ -8028,9 +7977,6 @@ ledger-test-library@KhalilBellakrid/ledger-test-library-nodejs#7d37482:
   dependencies:
     axios "^0.17.1"
     bindings "^1.3.0"
-    electron "^1.8.2"
-    electron-builder "^20.0.4"
-    electron-rebuild "^1.7.3"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 
@@ -11927,16 +11873,6 @@ test-exclude@^4.1.1:
   dependencies:
     arrify "^1.0.1"
     micromatch "^2.3.11"
-    object-assign "^4.1.0"
-    read-pkg-up "^1.0.1"
-    require-main-filename "^1.0.1"
-
-test-exclude@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-4.2.1.tgz#dfa222f03480bca69207ca728b37d74b45f724fa"
-  dependencies:
-    arrify "^1.0.1"
-    micromatch "^3.1.8"
     object-assign "^4.1.0"
     read-pkg-up "^1.0.1"
     require-main-filename "^1.0.1"

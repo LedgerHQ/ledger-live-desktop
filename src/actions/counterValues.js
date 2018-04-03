@@ -1,7 +1,7 @@
 // @flow
 
 import { getFiatUnit } from '@ledgerhq/currencies'
-import { fetchHistodayCounterValuesMultiple } from '@ledgerhq/wallet-common/lib/api/countervalue'
+import { fetchHistodayRates } from '@ledgerhq/wallet-common/lib/api/countervalue'
 
 import type { Currency } from '@ledgerhq/currencies'
 import type { Dispatch } from 'redux'
@@ -32,6 +32,6 @@ export const fetchCounterValues: FetchCounterValues = (currencies: ?(Currency[])
 
   const { counterValue } = settings
   const fiatUnit = getFiatUnit(counterValue)
-  const counterValues = await fetchHistodayCounterValuesMultiple(currencies, fiatUnit)
+  const counterValues = await fetchHistodayRates(currencies, fiatUnit)
   dispatch(updateCounterValues(counterValues))
 }

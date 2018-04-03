@@ -44,12 +44,12 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/currencies": "^4.7.5",
+    "@ledgerhq/currencies": "^4.10.1",
     "@ledgerhq/hw-app-btc": "^4.7.3",
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport": "^4.7.3",
     "@ledgerhq/hw-transport-node-hid": "^4.7.6",
-    "@ledgerhq/wallet-common": "^0.10.1",
+    "@ledgerhq/wallet-common": "^0.12.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",
