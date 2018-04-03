@@ -88,7 +88,7 @@ class DeviceMonit extends PureComponent<Props, State> {
 
     let options = null
 
-    if (account && account.currency) {
+    if (account) {
       options = {
         accountPath: account.path,
         accountAddress: account.address,
@@ -134,11 +134,12 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 
   render() {
+    const { coinType, account, devices, deviceSelected, render } = this.props
     const { status } = this.state
-    const { devices, deviceSelected, render } = this.props
 
     if (render) {
       return render({
+        coinType: (account && account.coinType) || coinType,
         status,
         devices,
         deviceSelected: status === 'connected' ? deviceSelected : null,

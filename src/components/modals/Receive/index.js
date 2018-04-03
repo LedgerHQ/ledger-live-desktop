@@ -1,105 +1,140 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
-import type { Account as AccountType } from '@ledgerhq/wallet-common/lib/types'
-
 import get from 'lodash/get'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
+
+import type { T, Device } from 'types/common'
 
 import { MODAL_RECEIVE } from 'config/constants'
 
 import Box from 'components/base/Box'
-import Label from 'components/base/Label'
 import Button from 'components/base/Button'
-import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
-import ReceiveBox from 'components/ReceiveBox'
-import RequestAmount from 'components/RequestAmount'
-import SelectAccount from 'components/SelectAccount'
+import Breadcrumb from 'components/Breadcrumb'
+import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import StepConnectDevice from 'components/modals/StepConnectDevice'
 
-import type { T } from 'types/common'
+import StepAccount from './01-step-account'
 
 type Props = {
   t: T,
 }
 
 type State = {
-  account: AccountType | null,
-  amount: Object,
+  deviceSelected: Device | null,
+  stepIndex: number,
+  account: Account | null,
 }
 
-const defaultState = {
+const GET_STEPS = t => [
+  { label: t('receive:steps.chooseAccount.title'), Comp: StepAccount },
+  { label: t('receive:steps.connectDevice.title'), Comp: StepConnectDevice },
+]
+
+const INITIAL_STATE = {
   account: null,
-  amount: {
-    left: 0,
-    right: 0,
-  },
+  deviceSelected: null,
+  stepIndex: 0,
 }
 
-class ReceiveModal extends PureComponent<Props, State> {
-  state = {
-    ...defaultState,
+class SendModal extends PureComponent<Props, State> {
+  state = INITIAL_STATE
+
+  _steps = GET_STEPS(this.props.t)
+
+  canNext = acc => {
+    const { stepIndex } = this.state
+
+    if (stepIndex === 0) {
+      return acc !== null
+    }
+
+    return false
   }
 
-  getAccount(data) {
-    const { account } = this.state
+  handleReset = () => this.setState(INITIAL_STATE)
 
-    return account || get(data, 'account')
+  handleNextStep = () => {
+    const { stepIndex } = this.state
+    if (stepIndex >= this._steps.length - 1) {
+      return
+    }
+    this.setState({ stepIndex: stepIndex + 1 })
   }
 
-  handleChangeInput = key => value =>
-    this.setState({
-      [key]: value,
-    })
+  handleChangeDevice = d => this.setState({ deviceSelected: d })
 
-  handleHide = () =>
-    this.setState({
-      ...defaultState,
-    })
+  handleChangeAccount = account => this.setState({ account })
 
-  _steps = [
-    'receiveModal:Infos',
-    'receiveModal:ConnectDevice',
-    'receiveModal:SecureValidation',
-    'receiveModal:Confirmation',
-  ].map(v => ({ label: this.props.t(v) }))
+  renderStep = acc => {
+    const { deviceSelected, stepIndex } = this.state
+    const { t } = this.props
+    const step = this._steps[stepIndex]
+    if (!step) {
+      return null
+    }
+    const { Comp } = step
+
+    const props = (predicate, props) => (predicate ? props : {})
+
+    const stepProps = {
+      t,
+      account: acc,
+      ...props(stepIndex === 0, {
+        onChangeAccount: this.handleChangeAccount,
+      }),
+      ...props(stepIndex === 1, {
+        deviceSelected,
+        onChangeDevice: this.handleChangeDevice,
+      }),
+    }
+
+    return <Comp {...stepProps} />
+  }
+
+  renderButton = acc => {
+    const { t } = this.props
+    const { stepIndex } = this.state
+
+    let onClick
+
+    switch (stepIndex) {
+      default:
+        onClick = this.handleNextStep
+    }
+
+    const props = {
+      primary: true,
+      disabled: !this.canNext(acc),
+      onClick,
+      children: t('common:next'),
+    }
+
+    return <Button {...props} />
+  }
 
   render() {
     const { t } = this.props
-    const { amount } = this.state
+    const { stepIndex, account } = this.state
 
     return (
       <Modal
         name={MODAL_RECEIVE}
-        onHide={this.handleHide}
+        onHide={this.handleReset}
         render={({ data, onClose }) => {
-          const account = this.getAccount(data)
-
+          const acc = account || get(data, 'account', null)
           return (
-            <ModalBody onClose={onClose} flow={3} deferHeight={282}>
+            <ModalBody onClose={onClose} deferHeight={344}>
               <ModalTitle>{t('receive:title')}</ModalTitle>
               <ModalContent>
-                <Box flow={1}>
-                  <Label>Account</Label>
-                  <SelectAccount value={account} onChange={this.handleChangeInput('account')} />
-                </Box>
-                {account && (
-                  <Fragment>
-                    <Box flow={1}>
-                      <Label>Request amount</Label>
-                      <RequestAmount
-                        account={account}
-                        value={amount}
-                        onChange={v => this.handleChangeInput('amount')(v.values)}
-                      />
-                    </Box>
-                    <ReceiveBox account={account} amount={amount.left} />
-                  </Fragment>
-                )}
+                <Breadcrumb mb={6} currentStep={stepIndex} items={this._steps} />
+                {this.renderStep(acc)}
               </ModalContent>
-              <ModalFooter horizontal align="center" justify="flex-end">
-                <Button primary onClick={onClose}>
-                  {'Close'}
-                </Button>
+              <ModalFooter>
+                <Box horizontal alignItems="center" justifyContent="flex-end">
+                  {this.renderButton(acc)}
+                </Box>
               </ModalFooter>
             </ModalBody>
           )
@@ -109,4 +144,4 @@ class ReceiveModal extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(ReceiveModal)
+export default translate()(SendModal)

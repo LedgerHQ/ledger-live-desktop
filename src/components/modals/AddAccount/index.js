@@ -22,12 +22,12 @@ import { addAccount, updateAccount } from 'actions/accounts'
 import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
-import Button from 'components/base/Button'
 import Breadcrumb from 'components/Breadcrumb'
+import Button from 'components/base/Button'
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
+import StepConnectDevice from 'components/modals/StepConnectDevice'
 
 import StepCurrency from './01-step-currency'
-import StepConnectDevice from './02-step-connect-device'
 import StepImport from './03-step-import'
 
 const GET_STEPS = t => [
@@ -362,7 +362,7 @@ class AddAccountModal extends PureComponent<Props, State> {
           <ModalBody onClose={onClose}>
             <ModalTitle>{t('addAccount:title')}</ModalTitle>
             <ModalContent>
-              <Breadcrumb mb={6} mt={2} currentStep={stepIndex} items={this._steps} />
+              <Breadcrumb mb={6} currentStep={stepIndex} items={this._steps} />
               {this.renderStep()}
             </ModalContent>
             {stepIndex !== 2 && (
