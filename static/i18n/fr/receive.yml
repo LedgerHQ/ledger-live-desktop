@@ -1,2 +1,12 @@
 ---
-title: Recevoir
+title: Receive funds
+steps:
+  chooseAccount:
+    title: Choose Account
+    label: Account
+  connectDevice:
+    title: Connect Device
+  confirmAddress:
+    title: Confirm Address
+  receiveFunds:
+    title: Receive Funds
