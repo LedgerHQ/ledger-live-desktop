@@ -141,7 +141,7 @@ class InputCurrency extends PureComponent<Props, State> {
 
   renderListUnits = () => {
     const { units, value, showAllDigits } = this.props
-    const { unit } = this.state
+    const { unit, isFocused } = this.state
 
     if (units.length <= 1) {
       return null
@@ -163,6 +163,7 @@ class InputCurrency extends PureComponent<Props, State> {
           value={unit}
           renderItem={item => item.code}
           renderSelected={item => <Currency>{item.code}</Currency>}
+          fakeFocusRight={isFocused}
         />
       </Currencies>
     )
