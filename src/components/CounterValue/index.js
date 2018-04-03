@@ -63,6 +63,7 @@ class CounterValue extends PureComponent<Props> {
 
 function generateFakeCurrency(ticker) {
   return {
+    ticker,
     units: [
       {
         code: ticker,

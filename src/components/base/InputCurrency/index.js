@@ -120,7 +120,7 @@ class InputCurrency extends PureComponent<Props, State> {
   handleBlur = () => this.syncInput({ isFocused: false })
   handleFocus = () => this.syncInput({ isFocused: true })
 
-  syncInput = ({ isFocused }) => {
+  syncInput = ({ isFocused }: { isFocused: boolean }) => {
     const { value, showAllDigits } = this.props
     const { unit } = this.state
     this.setState({

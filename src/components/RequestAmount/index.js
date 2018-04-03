@@ -6,7 +6,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import type { Account, CalculateCounterValue } from '@ledgerhq/wallet-common/lib/types'
-import type { Unit } from '@ledgerhq/currencies'
+import type { FiatUnit } from '@ledgerhq/currencies'
 
 import type { T } from 'types/common'
 
@@ -59,7 +59,7 @@ type Props = {
 
   // used to determine the right input unit
   // retrieved via selector (take the chosen countervalue unit)
-  rightUnit: Unit,
+  rightUnit: FiatUnit,
 
   // used to calculate the opposite field value (right & left)
   getCounterValue: CalculateCounterValue,
