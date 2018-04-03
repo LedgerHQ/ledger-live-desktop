@@ -913,17 +913,17 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@ledgerhq/currencies@^4.7.1":
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.7.3.tgz#0e28c0f1c74cf00b990be6865fbec374f808b71f"
+"@ledgerhq/currencies@^4.10.0":
+  version "4.10.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.10.0.tgz#8cc25a232ca62fa5f4e17140df0678cdb48123e0"
   dependencies:
     lodash "^4.17.5"
     numeral "^2.0.6"
     querystring "^0.2.0"
 
-"@ledgerhq/currencies@^4.7.5":
-  version "4.7.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.7.5.tgz#e852b58359254fbb2087de328df84343b586f4ab"
+"@ledgerhq/currencies@^4.7.1":
+  version "4.7.3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.7.3.tgz#0e28c0f1c74cf00b990be6865fbec374f808b71f"
   dependencies:
     lodash "^4.17.5"
     numeral "^2.0.6"
@@ -955,9 +955,9 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/wallet-common@^0.10.1":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.10.1.tgz#72e17329de02bebb5ed54bf797113266824e4af8"
+"@ledgerhq/wallet-common@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.11.0.tgz#3b6bbc4f93ff766ff5f1c570322fe73260fe4835"
   dependencies:
     "@ledgerhq/currencies" "^4.7.1"
     axios "^0.18.0"
@@ -4817,7 +4817,7 @@ electron-builder-lib@~20.6.2:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
-electron-builder@^20.0.4, electron-builder@^20.8.1:
+electron-builder@^20.8.1:
   version "20.8.1"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.8.1.tgz#3d19607a7f7d3ee7f3e110a6fc66c720ed1d2cc0"
   dependencies:
@@ -4997,7 +4997,7 @@ electron-webpack@^2.0.1:
     webpack-merge "^4.1.2"
     yargs "^11.1.0"
 
-electron@1.8.4, electron@^1.8.2:
+electron@1.8.4:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.4.tgz#cca8d0e6889f238f55b414ad224f03e03b226a38"
   dependencies:
@@ -8028,9 +8028,6 @@ ledger-test-library@KhalilBellakrid/ledger-test-library-nodejs#7d37482:
   dependencies:
     axios "^0.17.1"
     bindings "^1.3.0"
-    electron "^1.8.2"
-    electron-builder "^20.0.4"
-    electron-rebuild "^1.7.3"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 

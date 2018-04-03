@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { parseCurrencyUnit, formatCurrencyUnit } from '@ledgerhq/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/currencies'
 
 import noop from 'lodash/noop'
 import isNaN from 'lodash/isNaN'
@@ -17,22 +17,12 @@ function parseValue(value) {
   return value.toString().replace(/,/g, '.')
 }
 
-function format(unit: Unit, value: number) {
+function format(unit: Unit, value: number, useGrouping = false) {
   return formatCurrencyUnit(unit, value, {
+    useGrouping,
     disableRounding: true,
     showAllDigits: false,
   })
-}
-
-function unformat(unit, value) {
-  if (value === 0 || value === '') {
-    return '0'
-  }
-
-  let v = parseCurrencyUnit(unit, value.toString())
-  v /= 10 ** unit.magnitude
-
-  return v.toString()
 }
 
 const Currencies = styled(Box)`
@@ -79,7 +69,7 @@ class InputCurrency extends PureComponent<Props, State> {
   componentWillMount() {
     const { value } = this.props
     const { unit } = this.state
-    const displayValue = format(unit, value)
+    const displayValue = format(unit, value, true)
     this.setState({ displayValue })
   }
 
@@ -89,15 +79,15 @@ class InputCurrency extends PureComponent<Props, State> {
       const { isFocus } = this.state
       const displayValue = isFocus
         ? (nextProps.value / 10 ** unit.magnitude).toString()
-        : format(unit, nextProps.value)
+        : format(unit, nextProps.value, true)
       this.setState({ displayValue })
     }
   }
 
   handleChange = (v: string) => {
-    // const { displayValue } = this.state
     v = parseValue(v)
 
+    // forbid multiple 0 at start
     if (v.startsWith('00')) {
       return
     }
@@ -114,17 +104,13 @@ class InputCurrency extends PureComponent<Props, State> {
   handleBlur = () => {
     const { value } = this.props
     const { unit } = this.state
-    const v = format(unit, value)
-    this.setState({ isFocus: false, displayValue: v })
+    this.setState({ isFocus: false, displayValue: format(unit, value, true) })
   }
 
   handleFocus = () => {
+    const { value } = this.props
     const { unit } = this.state
-
-    this.setState(prev => ({
-      isFocus: true,
-      displayValue: unformat(unit, prev.displayValue),
-    }))
+    this.setState({ isFocus: true, displayValue: format(unit, value) })
   }
 
   emitOnChange = (v: string) => {
@@ -152,8 +138,7 @@ class InputCurrency extends PureComponent<Props, State> {
           keyProp="code"
           flatLeft
           onChange={item => {
-            this.setState({ unit: item, displayValue: format(item, value) })
-            // onChange(unformat(item, value), item)
+            this.setState({ unit: item, displayValue: format(item, value, true) })
           }}
           items={units}
           value={unit}

@@ -14,7 +14,7 @@ const { units } = getCurrencyByCoinType(1)
 
 class Wrapper extends Component<any, any> {
   state = {
-    value: 1e8,
+    value: 1000e8,
     unit: units[0],
   }
 
