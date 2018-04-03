@@ -1,22 +1,6 @@
 import i18n from 'i18next'
 
 const commonConfig = {
-  ns: [
-    'account',
-    'accountsOrder',
-    'addAccount',
-    'common',
-    'dashboard',
-    'device',
-    'language',
-    'receive',
-    'send',
-    'settings',
-    'sidebar',
-    'time',
-    'operationsList',
-    'update',
-  ],
   fallbackLng: 'en',
   debug: false,
   react: {
@@ -35,7 +19,7 @@ function addPluralRule(i18n) {
 export function createWithBackend(backend, backendOpts) {
   i18n.use(backend).init({
     ...commonConfig,
-    backend: backendOpts,
+    ...backendOpts,
   })
   return addPluralRule(i18n)
 }
@@ -43,7 +27,7 @@ export function createWithBackend(backend, backendOpts) {
 export function createWithResources(resources) {
   i18n.init({
     ...commonConfig,
-    resources,
+    ...resources,
   })
   return addPluralRule(i18n)
 }
