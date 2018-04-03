@@ -1,8 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import get from 'lodash/get'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
@@ -11,8 +9,6 @@ import type { Unit } from '@ledgerhq/currencies'
 import type { T } from 'types/common'
 
 import { MODAL_SEND } from 'config/constants'
-
-import { getCounterValueCode } from 'reducers/settings'
 
 import Breadcrumb from 'components/Breadcrumb'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
@@ -24,19 +20,14 @@ import StepConnectDevice from './02-step-connect-device'
 import StepVerification from './03-step-verification'
 import StepConfirmation from './04-step-confirmation'
 
-const mapStateToProps = state => ({
-  counterValue: getCounterValueCode(state),
-})
-
 type Props = {
   t: T,
-  counterValue: string,
 }
 
 type State = {
   stepIndex: number,
   isDeviceReady: boolean,
-  amount: { left: number, right: number },
+  amount: number,
   account: Account | null,
   recipientAddress: string,
   fees: {
@@ -58,10 +49,7 @@ const INITIAL_STATE = {
   isDeviceReady: false,
   account: null,
   recipientAddress: '',
-  amount: {
-    left: 0,
-    right: 0,
-  },
+  amount: 0,
   fees: {
     value: 0,
     unit: null,
@@ -80,7 +68,7 @@ class SendModal extends PureComponent<Props, State> {
     // informations
     if (stepIndex === 0) {
       const { amount, recipientAddress } = this.state
-      return !!amount.left && !!recipientAddress && !!account
+      return !!amount && !!recipientAddress && !!account
     }
 
     // connect device
@@ -121,7 +109,7 @@ class SendModal extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, counterValue } = this.props
+    const { t } = this.props
     const { stepIndex, amount, account } = this.state
 
     return (
@@ -140,7 +128,6 @@ class SendModal extends PureComponent<Props, State> {
               </ModalContent>
               {acc && (
                 <Footer
-                  counterValue={counterValue}
                   canNext={canNext}
                   onNext={this.handleNextStep}
                   account={acc}
@@ -156,4 +143,4 @@ class SendModal extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps), translate())(SendModal)
+export default translate()(SendModal)

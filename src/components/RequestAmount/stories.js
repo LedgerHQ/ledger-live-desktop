@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
@@ -10,13 +10,30 @@ import RequestAmount from 'components/RequestAmount'
 
 const stories = storiesOf('Components', module)
 
-stories.add('RequestAmount', () => (
-  <RequestAmount
-    t={k => k}
-    counterValue="USD"
-    account={accounts[0]}
-    onChange={action('onChange')}
-    value={3}
-    max={400000000000}
-  />
-))
+type State = {
+  value: number,
+}
+
+class Wrapper extends PureComponent<any, State> {
+  state = {
+    value: 3e8,
+  }
+  handleChange = value => {
+    action('onChange')(value)
+    this.setState({ value })
+  }
+  render() {
+    const { value } = this.state
+    return (
+      <RequestAmount
+        counterValue="USD"
+        account={accounts[0]}
+        onChange={this.handleChange}
+        value={value}
+        max={4e8}
+      />
+    )
+  }
+}
+
+stories.add('RequestAmount', () => <Wrapper />)

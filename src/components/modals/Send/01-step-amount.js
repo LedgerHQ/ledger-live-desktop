@@ -22,7 +22,7 @@ type PropsStepAmount = {
   account: Account | null,
   onChange: Function,
   recipientAddress: string,
-  amount: { left: number, right: number },
+  amount: number,
   fees: {
     value: number,
     unit: Unit | null,
@@ -64,7 +64,7 @@ function StepAmount(props: PropsStepAmount) {
               max={account.balance - 0}
               account={account}
               onChange={onChange('amount')}
-              value={amount.left}
+              value={amount}
             />
           </Box>
 

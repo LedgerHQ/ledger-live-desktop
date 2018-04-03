@@ -17,10 +17,8 @@ function parseValue(value) {
   return value.toString().replace(/,/g, '.')
 }
 
-function format(unit: Unit, value: Value) {
-  let v = value === '' ? 0 : Number(value)
-  v *= 10 ** unit.magnitude
-  return formatCurrencyUnit(unit, v, {
+function format(unit: Unit, value: number) {
+  return formatCurrencyUnit(unit, value, {
     disableRounding: true,
     showAllDigits: false,
   })
@@ -28,13 +26,13 @@ function format(unit: Unit, value: Value) {
 
 function unformat(unit, value) {
   if (value === 0 || value === '') {
-    return 0
+    return '0'
   }
 
   let v = parseCurrencyUnit(unit, value.toString())
   v /= 10 ** unit.magnitude
 
-  return v
+  return v.toString()
 }
 
 const Currencies = styled(Box)`
@@ -50,19 +48,17 @@ const Currency = styled(Box).attrs({
   pr: 1,
 })``
 
-type Value = string | number
-
 type Props = {
   onChange: Function,
   renderRight: any,
   unit: Unit,
   units: Array<Unit>,
-  value: Value,
+  value: number,
 }
 
 type State = {
   isFocus: boolean,
-  value: Value,
+  displayValue: string,
 }
 
 class InputCurrency extends PureComponent<Props, State> {
@@ -75,21 +71,32 @@ class InputCurrency extends PureComponent<Props, State> {
 
   state = {
     isFocus: false,
-    value: this.props.value,
+    displayValue: '0',
+  }
+
+  componentWillMount() {
+    const { value, unit } = this.props
+    const displayValue = format(unit, value)
+    this.setState({ displayValue })
   }
 
   componentWillReceiveProps(nextProps: Props) {
     if (this.props.value !== nextProps.value) {
       const { isFocus } = this.state
-      const value = isFocus ? nextProps.value : format(nextProps.unit, nextProps.value)
-      this.setState({
-        value,
-      })
+      const displayValue = isFocus
+        ? (nextProps.value / 10 ** nextProps.unit.magnitude).toString()
+        : format(nextProps.unit, nextProps.value)
+      this.setState({ displayValue })
     }
   }
 
-  handleChange = (v: Value) => {
+  handleChange = (v: string) => {
+    // const { displayValue } = this.state
     v = parseValue(v)
+
+    if (v.startsWith('00')) {
+      return
+    }
 
     // Check if value is valid Number
     if (isNaN(Number(v))) {
@@ -97,21 +104,13 @@ class InputCurrency extends PureComponent<Props, State> {
     }
 
     this.emitOnChange(v)
-    this.setState({
-      value: v,
-    })
+    this.setState({ displayValue: v || '0' })
   }
 
   handleBlur = () => {
-    const { unit } = this.props
-    const { value } = this.state
-
+    const { unit, value } = this.props
     const v = format(unit, value)
-
-    this.setState({
-      isFocus: false,
-      value: v,
-    })
+    this.setState({ isFocus: false, displayValue: v })
   }
 
   handleFocus = () => {
@@ -119,22 +118,22 @@ class InputCurrency extends PureComponent<Props, State> {
 
     this.setState(prev => ({
       isFocus: true,
-      value: unformat(unit, prev.value),
+      displayValue: unformat(unit, prev.displayValue),
     }))
   }
 
-  emitOnChange = (v: Value) => {
+  emitOnChange = (v: string) => {
     const { onChange, unit } = this.props
-    const { value } = this.state
+    const { displayValue } = this.state
 
-    if (value.toString() !== v.toString()) {
-      onChange(Number(v), unit)
+    if (displayValue.toString() !== v.toString()) {
+      const satoshiValue = Number(v) * 10 ** unit.magnitude
+      onChange(satoshiValue, unit)
     }
   }
 
   renderListUnits = () => {
-    const { unit, units, onChange } = this.props
-    const { value } = this.state
+    const { unit, units, onChange, value } = this.props
 
     if (units.length <= 1) {
       return null
@@ -158,13 +157,13 @@ class InputCurrency extends PureComponent<Props, State> {
 
   render() {
     const { renderRight } = this.props
-    const { value } = this.state
+    const { displayValue } = this.state
 
     return (
       <Input
         {...this.props}
         ff="Rubik"
-        value={value}
+        value={displayValue}
         onChange={this.handleChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
