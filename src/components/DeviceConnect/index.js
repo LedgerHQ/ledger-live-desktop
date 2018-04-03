@@ -209,13 +209,10 @@ class DeviceConnect extends PureComponent<Props> {
                 {t('deviceConnect:step1.choose', { devicesCount: devices.length })}
               </Box>
               <Box flow={2}>
-                {devices.map((d, i) => {
+                {devices.map(d => {
                   const Icon = IconDevice[d.product.replace(/\s/g, '')]
                   return (
-                    <DeviceItem
-                      key={i} // eslint-disable-line react/no-array-index-key
-                      onClick={() => onChangeDevice(d)}
-                    >
+                    <DeviceItem key={d.path} onClick={() => onChangeDevice(d)}>
                       <DeviceIcon>
                         <Icon size={28} />
                       </DeviceIcon>
