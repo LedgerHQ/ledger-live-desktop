@@ -20,6 +20,7 @@ type Props = {
   bg?: string,
   flatLeft?: boolean,
   flatRight?: boolean,
+  fakeFocusRight?: boolean,
   fuseOptions?: Object,
   highlight?: boolean,
   items: Array<any>,
@@ -57,8 +58,20 @@ const TriggerBtn = styled(Box).attrs({
   width: 100%;
   &:focus {
     outline: none;
+    border-color: ${p => p.theme.colors.wallet};
     box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
   }
+
+  ${p => {
+    const c = p.theme.colors.wallet
+    return p.fakeFocusRight
+      ? `
+    border-top: 1px solid ${c};
+    border-right: 1px solid ${c};
+    border-bottom: 1px solid ${c};
+  `
+      : ''
+  }};
 `
 
 const Item = styled(Box).attrs({
@@ -128,6 +141,7 @@ class Select extends PureComponent<Props> {
     bg: undefined,
     flatLeft: false,
     flatRight: false,
+    fakeFocusRight: false,
     itemToString: (item: Object) => item && item.name,
     keyProp: undefined,
     maxHeight: 300,
@@ -215,6 +229,7 @@ class Select extends PureComponent<Props> {
     const {
       flatLeft,
       flatRight,
+      fakeFocusRight,
       items,
       searchable,
       itemToString,
@@ -268,6 +283,7 @@ class Select extends PureComponent<Props> {
                   alignItems="center"
                   flatLeft={flatLeft}
                   flatRight={flatRight}
+                  fakeFocusRight={fakeFocusRight}
                   flow={2}
                   horizontal
                   tabIndex={0}
