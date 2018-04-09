@@ -947,9 +947,9 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/wallet-common@^0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.12.0.tgz#50ac697929062772182735e4013266c41a661fe2"
+"@ledgerhq/wallet-common@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.13.0.tgz#e35613692f6da6549047becf09ebbdc264d6ff85"
   dependencies:
     "@ledgerhq/currencies" "^4.10.1"
     axios "^0.18.0"
@@ -4668,9 +4668,9 @@ dotenv@^5.0.0, dotenv@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-5.0.1.tgz#a5317459bd3d79ab88cff6e44057a6a3fbb1fcef"
 
-downshift@^1.31.2:
-  version "1.31.2"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.31.2.tgz#6f638e9720d7540d9dffa0b4c4587cf10811cf8c"
+downshift@^1.31.4:
+  version "1.31.4"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.31.4.tgz#72ab0b8ac4c5801221ed098f97817c70899c9d16"
 
 duplexer2@~0.1.4:
   version "0.1.4"
@@ -5034,6 +5034,10 @@ entities@^1.1.1, entities@~1.1.1:
 env-paths@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-1.0.0.tgz#4168133b42bb05c38a35b1ae4397c8298ab369e0"
+
+envinfo@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/envinfo/-/envinfo-4.4.2.tgz#472c49f3a8b9bca73962641ce7cb692bf623cd1c"
 
 errno@^0.1.3, errno@~0.1.7:
   version "0.1.7"
@@ -6708,9 +6712,9 @@ i18next-node-fs-backend@^1.0.0:
     js-yaml "3.5.4"
     json5 "0.5.0"
 
-i18next@^10.6.0:
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-10.6.0.tgz#90ffd9f9bc617f34b9a12e037260f524445f7684"
+i18next@^11.1.1:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-11.1.1.tgz#df3a683542d7756a8aa8d6b884b61141239c394a"
 
 iconv-lite@0.4, iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@^0.4.19, iconv-lite@~0.4.13:
   version "0.4.19"
@@ -7977,6 +7981,9 @@ ledger-test-library@KhalilBellakrid/ledger-test-library-nodejs#7d37482:
   dependencies:
     axios "^0.17.1"
     bindings "^1.3.0"
+    electron "^1.8.2"
+    electron-builder "^20.0.4"
+    electron-rebuild "^1.7.3"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 
@@ -7995,9 +8002,9 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lint-staged@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-7.0.2.tgz#c99f6800e0525fa9c16f04c13ebe137edfd4fcd7"
+lint-staged@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-7.0.4.tgz#1aa7f27427e4c4c85d4d6524ac98aac10cbaf1b8"
   dependencies:
     app-root-path "^2.0.1"
     chalk "^2.3.1"
@@ -8019,6 +8026,7 @@ lint-staged@^7.0.2:
     pify "^3.0.0"
     please-upgrade-node "^3.0.1"
     staged-git-files "1.1.1"
+    string-argv "^0.0.2"
     stringify-object "^3.2.2"
 
 listenercount@~1.0.1:
@@ -9391,9 +9399,9 @@ pngjs@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.3.2.tgz#097c3c2a75feb223eadddea6bc9f0050cf830bc3"
 
-popper.js@^1.14.1:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.1.tgz#b8815e5cda6f62fc2042e47618649f75866e6753"
+popper.js@^1.14.2:
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -10094,9 +10102,18 @@ react-docgen@^3.0.0-beta11:
     node-dir "^0.1.10"
     recast "^0.12.6"
 
-react-dom@^16.0.0, react-dom@^16.3.0:
+react-dom@^16.0.0:
   version "16.3.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.0.tgz#b318e52184188ecb5c3e81117420cca40618643e"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+
+react-dom@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.1.tgz#6a3c90a4fb62f915bdbcf6204422d93a7d4ca573"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -10157,9 +10174,9 @@ react-inspector@^2.2.2:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
 
-react-is@^16.3.0:
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0.tgz#f0e8bfd8c09b480dd610b8639d9ed65c13601224"
+react-is@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.1.tgz#ee66e6d8283224a83b3030e110056798488359ba"
 
 react-modal@^3.3.2:
   version "3.3.2"
@@ -10264,14 +10281,14 @@ react-style-proptype@^3.0.0:
   dependencies:
     prop-types "^15.5.4"
 
-react-test-renderer@^16.3.0:
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.3.0.tgz#7e88d8cb4c2b95c161b6c6c998991166f74d473e"
+react-test-renderer@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.3.1.tgz#d9257936d8535bd40f57f3d5a84e7b0452fb17f2"
   dependencies:
     fbjs "^0.8.16"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-    react-is "^16.3.0"
+    react-is "^16.3.1"
 
 react-textarea-autosize@^5.2.1:
   version "5.2.1"
@@ -10309,9 +10326,9 @@ react@^16.0.0, react@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react@^16.3.0:
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.3.0.tgz#fc5a01c68f91e9b38e92cf83f7b795ebdca8ddff"
+react@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.1.tgz#4a2da433d471251c69b6033ada30e2ed1202cfd8"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -11526,6 +11543,10 @@ strict-uri-encode@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
 
+string-argv@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/string-argv/-/string-argv-0.0.2.tgz#dac30408690c21f3c3630a3ff3a05877bdcbd736"
+
 string-length@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-2.0.0.tgz#d40dbb686a3ace960c1cffca562bf2c45f8363ed"
@@ -11937,11 +11958,11 @@ tinycolor2@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
-tippy.js@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.4.1.tgz#ae9b6418dbfed2563f46bd3cf9e277d893ccc740"
+tippy.js@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.5.0.tgz#393826b42aa1750268e0d2a4d6f047abe4c96d50"
   dependencies:
-    popper.js "^1.14.1"
+    popper.js "^1.14.2"
 
 tmp@^0.0.33:
   version "0.0.33"
@@ -12555,6 +12576,37 @@ webpack-cli@^2.0.13:
     yeoman-environment "^2.0.0"
     yeoman-generator "^2.0.3"
 
+webpack-cli@^2.0.14:
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/webpack-cli/-/webpack-cli-2.0.14.tgz#71d03d8c10547c1dfd674f71ff3b0457c33a74cd"
+  dependencies:
+    chalk "^2.3.2"
+    cross-spawn "^6.0.5"
+    diff "^3.5.0"
+    enhanced-resolve "^4.0.0"
+    envinfo "^4.4.2"
+    glob-all "^3.1.0"
+    global-modules "^1.0.0"
+    got "^8.2.0"
+    import-local "^1.0.0"
+    inquirer "^5.1.0"
+    interpret "^1.0.4"
+    jscodeshift "^0.5.0"
+    listr "^0.13.0"
+    loader-utils "^1.1.0"
+    lodash "^4.17.5"
+    log-symbols "^2.2.0"
+    mkdirp "^0.5.1"
+    p-each-series "^1.0.0"
+    p-lazy "^1.0.0"
+    prettier "^1.5.3"
+    supports-color "^5.3.0"
+    v8-compile-cache "^1.1.2"
+    webpack-addons "^1.1.5"
+    yargs "^11.1.0"
+    yeoman-environment "^2.0.0"
+    yeoman-generator "^2.0.3"
+
 webpack-core@~0.6.0:
   version "0.6.9"
   resolved "https://registry.yarnpkg.com/webpack-core/-/webpack-core-0.6.9.tgz#fc571588c8558da77be9efb6debdc5a3b172bdc2"
@@ -12675,9 +12727,9 @@ webpack@^3.11.0:
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
 
-webpack@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.4.1.tgz#b0105789890c28bfce9f392623ef5850254328a4"
+webpack@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.5.0.tgz#1e6f71e148ead02be265ff2879c9cd6bb30b8848"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^3.0.0"

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import { rgba } from 'styles/helpers'
 
@@ -10,18 +10,31 @@ import Box from 'components/base/Box'
 import IconCheck from 'icons/Check'
 import IconCross from 'icons/Cross'
 
+const pulseAnimation = p => keyframes`
+  0% {
+    box-shadow: 0 0 0 1px ${rgba(p.theme.colors.wallet, 0.4)};
+  }
+  70% {
+    box-shadow: 0 0 0 8px ${rgba(p.theme.colors.wallet, 0)};
+  }
+  100% {
+    box-shadow: 0 0 0 0 ${rgba(p.theme.colors.wallet, 0)};
+  }
+`
+
 const Wrapper = styled(Box).attrs({
   color: p => (p.notValid ? 'alertRed' : 'wallet'),
   relative: true,
 })`
+  padding-top: 40px;
   transition: all ease-in-out 0.1s;
 `
 
 const WrapperIcon = styled(Box)`
   color: ${p => (p.notValid ? p.theme.colors.alertRed : p.theme.colors.positiveGreen)};
   position: absolute;
-  left: 195px;
-  top: 18px;
+  left: 193px;
+  bottom: 16px;
 
   svg {
     transition: all ease-in-out 0.1s;
@@ -30,15 +43,16 @@ const WrapperIcon = styled(Box)`
 
 const Check = ({ notValid }: { notValid: boolean }) => (
   <WrapperIcon notValid={notValid}>
-    {notValid ? <IconCross size={10} /> : <IconCheck size={10} />}
+    {notValid ? <IconCross size={11} /> : <IconCheck size={11} />}
   </WrapperIcon>
 )
 
 const PushButton = styled(Box)`
   background: linear-gradient(to bottom, #ffffff, ${p => p.theme.colors.wallet});
-  height: 35px;
+  bottom: 53px;
+  height: 28px;
+  left: 205px;
   position: absolute;
-  padding-right: 1px;
   width: 1px;
 
   &:before,
@@ -52,21 +66,21 @@ const PushButton = styled(Box)`
   }
 
   &:before {
+    animation: ${p => pulseAnimation(p)} 1s linear infinite;
     background-color: ${p => p.theme.colors.wallet};
-    height: 8px;
-    margin-left: -4px;
-    width: 8px;
+    height: 9px;
     margin-bottom: -4px;
+    margin-left: -5px;
+    width: 9px;
     z-index: 1;
   }
 
   &:after {
     background-color: ${p => rgba(p.theme.colors.wallet, 0.4)};
-    box-shadow: 0 0 0 1px ${p => rgba(p.theme.colors.wallet, 0.6)};
-    height: 14px;
-    margin-left: -7px;
+    height: 15px;
     margin-bottom: -7px;
-    width: 14px;
+    margin-left: -8px;
+    width: 15px;
   }
 `
 
@@ -76,7 +90,7 @@ type Props = {
 
 export default (props: Props) => (
   <Wrapper {...props}>
-    <PushButton />
+    {!props.notValid && <PushButton />}
     <Check notValid={props.notValid} />
     <svg width="365" height="44">
       <defs>
