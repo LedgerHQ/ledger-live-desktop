@@ -1,4 +1,4 @@
-require('babel-polyfill')
+require('@babel/polyfill')
 const Raven = require('raven-js')
 
 require('../env')

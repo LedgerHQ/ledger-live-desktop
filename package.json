@@ -51,6 +51,7 @@
     "@ledgerhq/hw-transport-node-hid": "^4.7.6",
     "@ledgerhq/wallet-common": "^0.13.2",
     "axios": "^0.18.0",
+    "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",
     "bs58check": "^2.1.1",
@@ -97,6 +98,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.42",
+    "@babel/polyfill": "7.0.0-beta.42",
     "@babel/preset-env": "7.0.0-beta.42",
     "@babel/preset-flow": "7.0.0-beta.42",
     "@babel/preset-react": "7.0.0-beta.42",
@@ -113,7 +115,6 @@
     "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-styled-components": "^1.5.0",
-    "babel-polyfill": "^6.26.0",
     "chalk": "^2.3.1",
     "chance": "^1.0.13",
     "concurrently": "^3.5.1",
