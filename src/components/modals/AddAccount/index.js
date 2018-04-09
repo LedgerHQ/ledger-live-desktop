@@ -362,7 +362,7 @@ class AddAccountModal extends PureComponent<Props, State> {
           <ModalBody onClose={onClose}>
             <ModalTitle>{t('addAccount:title')}</ModalTitle>
             <ModalContent>
-              <Breadcrumb mb={6} currentStep={stepIndex} items={this._steps} />
+              <Breadcrumb mb={5} currentStep={stepIndex} items={this._steps} />
               {this.renderStep()}
             </ModalContent>
             {stepIndex !== 2 && (

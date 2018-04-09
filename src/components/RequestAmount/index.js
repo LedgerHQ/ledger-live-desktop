@@ -64,9 +64,17 @@ type Props = {
   // used to calculate the opposite field value (right & left)
   getCounterValue: CalculateCounterValue,
   getReverseCounterValue: CalculateCounterValue,
+
+  // display max button
+  withMax: boolean,
 }
 
 export class RequestAmount extends PureComponent<Props> {
+  static defaultProps = {
+    max: Infinity,
+    withMax: true,
+  }
+
   handleClickMax = () => {
     this.props.onChange(this.props.max)
   }
@@ -81,35 +89,49 @@ export class RequestAmount extends PureComponent<Props> {
     }
   }
 
-  render() {
-    const { t, value, account, rightUnit, getCounterValue } = this.props
+  renderInputs(containerProps: Object) {
+    const { value, account, rightUnit, getCounterValue } = this.props
     const right = getCounterValue(account.currency, rightUnit)(value)
 
     return (
-      <Box horizontal flow="5">
-        <Box horizontal align="center">
-          <InputCurrency
-            containerProps={{ style: { width: 156 } }}
-            unit={account.unit}
-            value={value}
-            onChange={this.handleChangeAmount('left')}
-            renderRight={<InputRight>{account.unit.code}</InputRight>}
-          />
-          <InputCenter>=</InputCenter>
-          <InputCurrency
-            containerProps={{ style: { width: 156 } }}
-            unit={rightUnit}
-            value={right}
-            onChange={this.handleChangeAmount('right')}
-            renderRight={<InputRight>{rightUnit.code}</InputRight>}
-            showAllDigits
-          />
-        </Box>
-        <Box grow justify="flex-end">
-          <Button primary onClick={this.handleClickMax}>
-            {t('common:max')}
-          </Button>
-        </Box>
+      <Box horizontal grow shrink>
+        <InputCurrency
+          containerProps={containerProps}
+          unit={account.unit}
+          value={value}
+          onChange={this.handleChangeAmount('left')}
+          renderRight={<InputRight>{account.unit.code}</InputRight>}
+        />
+        <InputCenter>=</InputCenter>
+        <InputCurrency
+          containerProps={containerProps}
+          unit={rightUnit}
+          value={right}
+          onChange={this.handleChangeAmount('right')}
+          renderRight={<InputRight>{rightUnit.code}</InputRight>}
+          showAllDigits
+        />
+      </Box>
+    )
+  }
+
+  render() {
+    const { withMax, t } = this.props
+
+    return (
+      <Box horizontal flow={5} alignItems="center">
+        {withMax ? (
+          <Box horizontal>{this.renderInputs({ style: { width: 156 } })}</Box>
+        ) : (
+          this.renderInputs({ grow: true })
+        )}
+        {withMax && (
+          <Box grow justify="flex-end">
+            <Button primary onClick={this.handleClickMax}>
+              {t('common:max')}
+            </Button>
+          </Box>
+        )}
       </Box>
     )
   }

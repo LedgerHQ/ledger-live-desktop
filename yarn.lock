@@ -947,18 +947,16 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/wallet-common@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.13.0.tgz#e35613692f6da6549047becf09ebbdc264d6ff85"
+"@ledgerhq/wallet-common@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-0.13.2.tgz#55bff35179acb8e4c12836eeea7885ebaa85e6c4"
   dependencies:
     "@ledgerhq/currencies" "^4.10.1"
     axios "^0.18.0"
-    babel-jest "^22.4.3"
     invariant "^2.2.2"
     lodash "^4.17.4"
     prando "^3.0.1"
     react "^16.0.0"
-    timemachine "^0.3.0"
 
 "@posthtml/esm@^1.0.0":
   version "1.0.0"
@@ -4782,7 +4780,7 @@ electron-builder-lib@~20.6.2:
     semver "^5.5.0"
     temp-file "^3.1.1"
 
-electron-builder@^20.8.1:
+electron-builder@^20.0.4, electron-builder@^20.8.1:
   version "20.8.1"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-20.8.1.tgz#3d19607a7f7d3ee7f3e110a6fc66c720ed1d2cc0"
   dependencies:
@@ -4962,7 +4960,7 @@ electron-webpack@^2.0.1:
     webpack-merge "^4.1.2"
     yargs "^11.1.0"
 
-electron@1.8.4:
+electron@1.8.4, electron@^1.8.2:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.4.tgz#cca8d0e6889f238f55b414ad224f03e03b226a38"
   dependencies:
@@ -10016,17 +10014,17 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-raven-js@^3.24.0:
-  version "3.24.0"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.24.0.tgz#59464d8bc4b3812ae87a282e9bb98ecad5b4b047"
+raven-js@^3.24.1:
+  version "3.24.1"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.24.1.tgz#7327e08786248517eedd36205bf50f1047821ffa"
 
-raven@^2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/raven/-/raven-2.4.2.tgz#0129e2adc30788646fd530b67d08a8ce25d4f6dc"
+raven@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/raven/-/raven-2.5.0.tgz#7a2b4ce8b9ff884448924ad19ca33b574bce59a2"
   dependencies:
     cookie "0.3.1"
     md5 "^2.2.1"
-    stack-trace "0.0.9"
+    stack-trace "0.0.10"
     timed-out "4.0.1"
     uuid "3.0.0"
 
@@ -11466,9 +11464,9 @@ stable@~0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/stable/-/stable-0.1.6.tgz#910f5d2aed7b520c6e777499c1f32e139fdecb10"
 
-stack-trace@0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.9.tgz#a8f6eaeca90674c333e7c43953f275b451510695"
+stack-trace@0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
 
 stack-utils@^1.0.1:
   version "1.0.1"
@@ -11943,10 +11941,6 @@ time-stamp@^2.0.0:
 timed-out@4.0.1, timed-out@^4.0.0, timed-out@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
-
-timemachine@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/timemachine/-/timemachine-0.3.0.tgz#83e2eb696cbfe4696c1708e6a3700df4e62fc525"
 
 timers-browserify@^2.0.4:
   version "2.0.6"

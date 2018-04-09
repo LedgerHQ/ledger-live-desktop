@@ -29,7 +29,6 @@ const Number = styled(Box).attrs({
   font-size: 10px;
   height: ${RADIUS}px;
   line-height: 10px;
-  padding-left: 1px;
   transition: all ease-in-out 0.1s ${p => (p.isActive ? 0.4 : 0)}s;
   width: ${RADIUS}px;
 `
@@ -60,7 +59,7 @@ const Bar = styled.div`
 
 const Label = styled(Box).attrs({
   fontSize: 3,
-  ff: 'Museo Sans|Regular',
+  ff: 'Museo Sans|Bold',
 })`
   position: absolute;
   margin-top: 27px;

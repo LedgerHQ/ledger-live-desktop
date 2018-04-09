@@ -13,7 +13,7 @@ steps:
     title: Confirm Address
     action: Confirm address on device
     text: To receive funds, confirm the address on your device.
-    label: Current address
 
   receiveFunds:
     title: Receive Funds
+    label: Amount (Optional)

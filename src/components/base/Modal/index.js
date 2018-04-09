@@ -187,11 +187,13 @@ export class Modal extends Component<Props> {
 }
 
 export const ModalTitle = styled(Box).attrs({
+  alignItems: 'center',
+  color: 'dark',
   ff: 'Museo Sans|Regular',
   fontSize: 6,
-  color: 'dark',
-  align: 'center',
+  justifyContent: 'center',
   p: 5,
+  relative: true,
 })``
 
 export const ModalFooter = styled(Box).attrs({

@@ -15,7 +15,7 @@ const pulseAnimation = p => keyframes`
     box-shadow: 0 0 0 1px ${rgba(p.theme.colors.wallet, 0.4)};
   }
   70% {
-    box-shadow: 0 0 0 8px ${rgba(p.theme.colors.wallet, 0)};
+    box-shadow: 0 0 0 6px ${rgba(p.theme.colors.wallet, 0)};
   }
   100% {
     box-shadow: 0 0 0 0 ${rgba(p.theme.colors.wallet, 0)};
@@ -26,7 +26,7 @@ const Wrapper = styled(Box).attrs({
   color: p => (p.notValid ? 'alertRed' : 'wallet'),
   relative: true,
 })`
-  padding-top: 40px;
+  padding-top: ${p => (p.notValid ? 0 : 30)}px;
   transition: all ease-in-out 0.1s;
 `
 
@@ -55,32 +55,21 @@ const PushButton = styled(Box)`
   position: absolute;
   width: 1px;
 
-  &:before,
-  &:after {
-    border-radius: 50%;
-    bottom: 0;
-    content: ' ';
-    display: block;
-    position: absolute;
-    left: 50%;
-  }
-
   &:before {
     animation: ${p => pulseAnimation(p)} 1s linear infinite;
     background-color: ${p => p.theme.colors.wallet};
+    border-radius: 50%;
+    bottom: 0;
+    box-sizing: border-box;
+    content: ' ';
+    display: block;
     height: 9px;
+    left: 50%;
     margin-bottom: -4px;
-    margin-left: -5px;
+    margin-left: -4px;
+    position: absolute;
     width: 9px;
     z-index: 1;
-  }
-
-  &:after {
-    background-color: ${p => rgba(p.theme.colors.wallet, 0.4)};
-    height: 15px;
-    margin-bottom: -7px;
-    margin-left: -8px;
-    width: 15px;
   }
 `
 
@@ -88,7 +77,7 @@ type Props = {
   notValid: boolean,
 }
 
-export default (props: Props) => (
+const DeviceConfirm = (props: Props) => (
   <Wrapper {...props}>
     {!props.notValid && <PushButton />}
     <Check notValid={props.notValid} />
@@ -183,3 +172,9 @@ export default (props: Props) => (
     </svg>
   </Wrapper>
 )
+
+DeviceConfirm.defaultProps = {
+  notValid: false,
+}
+
+export default DeviceConfirm
