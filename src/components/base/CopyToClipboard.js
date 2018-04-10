@@ -1,6 +1,11 @@
 // @flow
 
-import { clipboard } from 'electron'
+let clipboard = null
+
+if (!process.env.STORYBOOK_ENV) {
+  const electron = require('electron')
+  clipboard = electron.clipboard // eslint-disable-line
+}
 
 type Props = {
   data: string,
@@ -9,7 +14,12 @@ type Props = {
 
 function CopyToClipboard(props: Props) {
   const { render, data } = props
-  return render(() => clipboard.writeText(data))
+
+  if (clipboard === null) {
+    return render()
+  }
+
+  return render(() => clipboard && clipboard.writeText(data))
 }
 
 export default CopyToClipboard

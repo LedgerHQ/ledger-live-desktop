@@ -2,49 +2,43 @@
 
 import React, { PureComponent } from 'react'
 import { remote } from 'electron'
-import queryString from 'query-string'
+import qs from 'qs'
 
-import QRCode from 'components/base/QRCode'
-import Box from 'components/base/Box'
-import { AddressBox } from 'components/ReceiveBox'
+import CurrentAddress from 'components/CurrentAddress'
 
-type State = {
-  data: Object | null,
-}
-
-class Print extends PureComponent<any, State> {
-  state = {
-    data: null,
-  }
-
-  componentWillMount() {
-    this.setState({
-      data: queryString.parse(this.props.location.search),
-    })
-  }
-
+class Print extends PureComponent<any> {
   componentDidMount() {
     window.requestAnimationFrame(() =>
       setTimeout(() => {
-        // hacky way to detect that render is ready
-        // from the parent window
-        remote.getCurrentWindow().minimize()
+        if (!this._node) {
+          return
+        }
+
+        const { height, width } = this._node.getBoundingClientRect()
+        const currentWindow = remote.getCurrentWindow()
+
+        currentWindow.setContentSize(width, height)
+        currentWindow.emit('print-ready')
       }, 300),
     )
   }
 
+  _node = null
+
   render() {
-    const { data } = this.state
+    const data = qs.parse(this.props.location.search, { ignoreQueryPrefix: true })
+
     if (!data) {
       return null
     }
-    const { address, amount } = data
+    const { account, amount } = data
     return (
-      <Box p={3} flow={3}>
-        <QRCode size={150} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />
-        <AddressBox>{address}</AddressBox>
-        {amount && <AddressBox>{amount}</AddressBox>}
-      </Box>
+      <CurrentAddress
+        innerRef={n => (this._node = n)}
+        amount={amount}
+        account={account}
+        withQRCode
+      />
     )
   }
 }

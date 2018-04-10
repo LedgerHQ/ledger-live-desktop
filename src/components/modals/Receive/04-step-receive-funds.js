@@ -16,6 +16,7 @@ type Props = {
   addressVerified: null | boolean,
   amount: string | number,
   onChangeAmount: Function,
+  onVerify: Function,
   t: T,
 }
 
@@ -35,10 +36,14 @@ export default (props: Props) => (
       />
     </Box>
     <CurrentAddress
+      account={props.account}
       addressVerified={props.addressVerified}
       amount={props.amount}
-      account={props.account}
+      onVerify={props.onVerify}
+      withBadge
+      withFooter
       withQRCode
+      withVerify={props.addressVerified === false}
     />
   </Box>
 )

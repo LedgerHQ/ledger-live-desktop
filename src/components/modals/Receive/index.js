@@ -207,6 +207,7 @@ class ReceiveModal extends PureComponent<Props, State> {
         addressVerified,
         amount,
         onChangeAmount: this.handleChangeAmount,
+        onVerify: this.handlePrevStep,
       }),
     }
 
