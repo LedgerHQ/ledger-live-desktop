@@ -168,11 +168,7 @@ class AccountPage extends PureComponent<Props, State> {
             )}
           />
         </Box>
-        <OperationsList
-          account={account}
-          operations={account.operations}
-          title={t('account:lastOperations')}
-        />
+        <OperationsList account={account} title={t('account:lastOperations')} />
       </Box>
     )
   }

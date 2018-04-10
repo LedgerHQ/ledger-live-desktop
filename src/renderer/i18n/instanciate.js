@@ -4,7 +4,7 @@ const commonConfig = {
   fallbackLng: 'en',
   debug: false,
   react: {
-    wait: true,
+    wait: process.env.NODE_ENV !== 'test',
   },
 }
 

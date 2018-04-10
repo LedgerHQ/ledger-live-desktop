@@ -5,11 +5,9 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import type { Account, Operation } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import chunk from 'lodash/chunk'
-import get from 'lodash/get'
-import sortBy from 'lodash/sortBy'
 
 import type { T } from 'types/common'
 
@@ -49,33 +47,11 @@ type Props = {
 
 type State = {
   accountsChunk: Array<Array<Account | null>>,
-  allOperations: Operation[],
   selectedTime: string,
   daysCount: number,
 }
 
 const ACCOUNTS_BY_LINE = 3
-const ALL_OPERATIONS_LIMIT = 10
-
-const getAllOperations = accounts => {
-  const allOperations = accounts.reduce((result, account) => {
-    const operations = get(account, 'operations', [])
-
-    result = [
-      ...result,
-      ...operations.map(t => ({
-        ...t,
-        account,
-      })),
-    ]
-
-    return result
-  }, [])
-
-  return sortBy(allOperations, t => t.date)
-    .reverse()
-    .slice(0, ALL_OPERATIONS_LIMIT)
-}
 
 const getAccountsChunk = accounts => {
   // create shallow copy of accounts, to be mutated
@@ -89,7 +65,6 @@ const getAccountsChunk = accounts => {
 class DashboardPage extends PureComponent<Props, State> {
   state = {
     accountsChunk: getAccountsChunk(this.props.accounts),
-    allOperations: getAllOperations(this.props.accounts),
     selectedTime: 'week',
     daysCount: 7,
   }
@@ -98,7 +73,6 @@ class DashboardPage extends PureComponent<Props, State> {
     if (nextProps.accounts !== this.props.accounts) {
       this.setState({
         accountsChunk: getAccountsChunk(nextProps.accounts),
-        allOperations: getAllOperations(nextProps.accounts),
       })
     }
   }
@@ -111,7 +85,7 @@ class DashboardPage extends PureComponent<Props, State> {
 
   render() {
     const { push, accounts, t, counterValue } = this.props
-    const { accountsChunk, allOperations, selectedTime, daysCount } = this.state
+    const { accountsChunk, selectedTime, daysCount } = this.state
 
     const totalAccounts = accounts.length
 
@@ -193,7 +167,7 @@ class DashboardPage extends PureComponent<Props, State> {
             <OperationsList
               canShowMore
               onAccountClick={account => push(`/account/${account.id}`)}
-              operations={allOperations}
+              accounts={accounts}
               title={t('dashboard:recentActivity')}
               withAccount
             />

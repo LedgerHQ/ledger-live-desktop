@@ -5,6 +5,7 @@ import { remote } from 'electron'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
+import moment from 'moment'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
@@ -36,6 +37,8 @@ store.dispatch(initCounterValues())
 const state = store.getState() || {}
 const language = getLanguage(state)
 const locked = isLocked(state)
+
+moment.locale(language)
 
 function r(Comp) {
   if (rootNode) {
