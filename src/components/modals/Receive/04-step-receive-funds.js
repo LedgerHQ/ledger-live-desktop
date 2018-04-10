@@ -12,7 +12,7 @@ import SelectAccount from 'components/SelectAccount'
 import RequestAmount from 'components/RequestAmount'
 
 type Props = {
-  account: Account,
+  account: Account | null,
   addressVerified: null | boolean,
   amount: string | number,
   onChangeAmount: Function,

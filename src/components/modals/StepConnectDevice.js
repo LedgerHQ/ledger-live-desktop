@@ -11,7 +11,7 @@ import DeviceMonit from 'components/DeviceMonitNew'
 
 type Props = {
   accountName?: string,
-  account?: Account,
+  account?: Account | null,
   currency?: Currency | null,
   deviceSelected: Device | null,
   onChangeDevice: Function,

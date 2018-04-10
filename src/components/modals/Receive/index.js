@@ -3,9 +3,8 @@
 import React, { Fragment, PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
-import get from 'lodash/get'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 import type { T, Device } from 'types/common'
 
 import { MODAL_RECEIVE } from 'config/constants'
@@ -64,11 +63,11 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   _steps = GET_STEPS(this.props.t)
 
-  canNext = acc => {
-    const { stepIndex } = this.state
+  canNext = () => {
+    const { account, stepIndex } = this.state
 
     if (stepIndex === 0) {
-      return acc !== null
+      return account !== null
     }
 
     if (stepIndex === 1) {
@@ -160,14 +159,24 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   handleChangeAmount = amount => this.setState({ amount })
 
+  handleBeforeOpenModal = ({ data }) => {
+    const { account } = this.state
+    if (data && data.account && !account) {
+      this.setState({
+        account: data.account,
+        stepIndex: 1,
+      })
+    }
+  }
+
   handleSkipStep = () =>
     this.setState({
       addressVerified: false,
       stepIndex: this._steps.length - 1, // last step
     })
 
-  renderStep = acc => {
-    const { amount, addressVerified, deviceSelected, stepIndex } = this.state
+  renderStep = () => {
+    const { account, amount, addressVerified, deviceSelected, stepIndex } = this.state
     const { t } = this.props
     const step = this._steps[stepIndex]
     if (!step) {
@@ -179,12 +188,12 @@ class ReceiveModal extends PureComponent<Props, State> {
 
     const stepProps = {
       t,
-      account: acc,
+      account,
       ...props(stepIndex === 0, {
         onChangeAccount: this.handleChangeAccount,
       }),
       ...props(stepIndex === 1, {
-        accountName: acc ? acc.name : undefined,
+        accountName: account ? account.name : undefined,
         deviceSelected,
         onChangeDevice: this.handleChangeDevice,
         onStatusChange: this.handleChangeStatus,
@@ -204,7 +213,7 @@ class ReceiveModal extends PureComponent<Props, State> {
     return <Comp {...stepProps} />
   }
 
-  renderButton = acc => {
+  renderButton = () => {
     const { t } = this.props
     const { stepIndex } = this.state
 
@@ -222,7 +231,7 @@ class ReceiveModal extends PureComponent<Props, State> {
         onClick = this.handleNextStep
         props = {
           primary: true,
-          disabled: !this.canNext(acc),
+          disabled: !this.canNext(),
           onClick,
           children: t('common:next'),
         }
@@ -242,46 +251,44 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { stepIndex, account } = this.state
+    const { stepIndex } = this.state
 
     const canClose = this.canClose()
     const canPrev = this.canPrev()
 
     return (
       <Modal
-        preventBackdropClick={!canClose}
         name={MODAL_RECEIVE}
+        onBeforeOpen={this.handleBeforeOpenModal}
         onHide={this.handleReset}
-        render={({ data, onClose }) => {
-          const acc = account || get(data, 'account', null)
-          return (
-            <ModalBody onClose={canClose ? onClose : undefined} deferHeight={330}>
-              <ModalTitle>
-                {canPrev && (
-                  <PrevButton onClick={this.handlePrevStep}>
-                    <Box horizontal alignItems="center">
-                      <IconAngleLeft size={16} />
-                      {t('common:back')}
-                    </Box>
-                  </PrevButton>
-                )}
-                {t('receive:title')}
-              </ModalTitle>
-              <ModalContent>
-                <Breadcrumb mb={5} currentStep={stepIndex} items={this._steps} />
-                {this.renderStep(acc)}
-              </ModalContent>
-              {stepIndex !== 3 &&
-                canClose && (
-                  <ModalFooter>
-                    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-                      {this.renderButton(acc)}
-                    </Box>
-                  </ModalFooter>
-                )}
-            </ModalBody>
-          )
-        }}
+        preventBackdropClick={!canClose}
+        render={({ onClose }) => (
+          <ModalBody onClose={canClose ? onClose : undefined}>
+            <ModalTitle>
+              {canPrev && (
+                <PrevButton onClick={this.handlePrevStep}>
+                  <Box horizontal alignItems="center">
+                    <IconAngleLeft size={16} />
+                    {t('common:back')}
+                  </Box>
+                </PrevButton>
+              )}
+              {t('receive:title')}
+            </ModalTitle>
+            <ModalContent>
+              <Breadcrumb mb={5} currentStep={stepIndex} items={this._steps} />
+              {this.renderStep()}
+            </ModalContent>
+            {stepIndex !== 3 &&
+              canClose && (
+                <ModalFooter>
+                  <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+                    {this.renderButton()}
+                  </Box>
+                </ModalFooter>
+              )}
+          </ModalBody>
+        )}
       />
     )
   }

@@ -30,7 +30,7 @@ const Text = styled(Box).attrs({
 `
 
 type Props = {
-  account: Account,
+  account: Account | null,
   addressVerified: null | boolean,
   device: Device | null,
   onCheck: Function,
@@ -41,16 +41,19 @@ export default (props: Props) => (
   <Container>
     <Title>{props.t('receive:steps.confirmAddress.action')}</Title>
     <Text>{props.t('receive:steps.confirmAddress.text')}</Text>
-    <CurrentAddress addressVerified={props.addressVerified} account={props.account} />
-    {props.device && (
-      <Box mb={2}>
-        <DeviceCheckAddress
-          account={props.account}
-          device={props.device}
-          onCheck={props.onCheck}
-          render={({ isVerified }) => <DeviceConfirm notValid={isVerified === false} />}
-        />
-      </Box>
+    {props.account && (
+      <CurrentAddress addressVerified={props.addressVerified} account={props.account} />
     )}
+    {props.device &&
+      props.account && (
+        <Box mb={2}>
+          <DeviceCheckAddress
+            account={props.account}
+            device={props.device}
+            onCheck={props.onCheck}
+            render={({ isVerified }) => <DeviceConfirm notValid={isVerified === false} />}
+          />
+        </Box>
+      )}
   </Container>
 )

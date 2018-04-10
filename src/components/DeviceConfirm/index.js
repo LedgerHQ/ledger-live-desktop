@@ -49,7 +49,7 @@ const Check = ({ notValid }: { notValid: boolean }) => (
 
 const PushButton = styled(Box)`
   background: linear-gradient(to bottom, #ffffff, ${p => p.theme.colors.wallet});
-  bottom: 53px;
+  bottom: 48px;
   height: 28px;
   left: 205px;
   position: absolute;
