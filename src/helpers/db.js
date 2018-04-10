@@ -83,4 +83,12 @@ export default {
 
     return val
   },
+
+  resetAll: () => {
+    const keys = ['settings', 'accounts', 'counterValues']
+    keys.forEach(k => {
+      const db = store(k)
+      db.clear()
+    })
+  },
 }
