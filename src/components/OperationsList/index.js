@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import { connect } from 'react-redux'
@@ -32,11 +32,18 @@ import Defer from 'components/base/Defer'
 
 import ConfirmationCheck from './ConfirmationCheck'
 
-const today = moment()
 const DATE_COL_SIZE = 100
 const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
 const CONFIRMATION_COL_SIZE = 44
+
+const calendarOpts = {
+  sameDay: 'LL – [Today]',
+  nextDay: 'LL – [Tomorrow]',
+  lastDay: 'LL – [Yesterday]',
+  lastWeek: 'LL',
+  sameElse: 'LL',
+}
 
 const Day = styled(Text).attrs({
   color: 'dark',
@@ -231,32 +238,12 @@ type Props = {
   title?: string,
 }
 
-export class OperationsList extends Component<Props> {
+export class OperationsList extends PureComponent<Props> {
   static defaultProps = {
     onAccountClick: noop,
     withAccount: false,
     canShowMore: false,
     nbToShow: 20,
-  }
-
-  shouldComponentUpdate(nextProps: Props) {
-    if (this.props.account !== nextProps.account) {
-      return true
-    }
-
-    if (this.props.accounts !== nextProps.accounts) {
-      return true
-    }
-
-    if (this.props.withAccount !== nextProps.withAccount) {
-      return true
-    }
-
-    if (this.props.canShowMore !== nextProps.canShowMore) {
-      return true
-    }
-
-    return false
   }
 
   handleClickOperation = (data: Object) => this.props.openModal(MODAL_OPERATION_DETAILS, data)
@@ -278,7 +265,7 @@ export class OperationsList extends Component<Props> {
       return null
     }
     const groupedOperations = accounts
-      ? groupAccountsOperationsByDay(accounts, nbToShow || 20)
+      ? groupAccountsOperationsByDay(accounts, nbToShow)
       : groupAccountOperationsByDay(account, nbToShow)
 
     const accountsMap = accounts ? keyBy(accounts, 'id') : { [account.id]: account }
@@ -293,12 +280,10 @@ export class OperationsList extends Component<Props> {
           )}
           {groupedOperations.map(group => {
             const d = moment(group.day)
-            const isToday = d.isSame(today, 'day')
-            const isYesterday = d.isSame(moment(today).subtract(1, 'day'), 'day')
             return (
               <Box flow={2} key={group.day.toISOString()}>
                 <Box ff="Open Sans|SemiBold" fontSize={4} color="grey">
-                  {isToday ? 'Today' : isYesterday ? 'Yesterday' : d.format('D MMMM YYYY')}
+                  {d.calendar(null, calendarOpts)}
                 </Box>
                 <Card p={0}>
                   {group.data.map(op => {

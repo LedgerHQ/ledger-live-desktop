@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import moment from 'moment'
 
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
@@ -56,6 +57,7 @@ class SettingsPage extends PureComponent<Props, State> {
 
     if (newSettings.language !== settings.language) {
       i18n.changeLanguage(newSettings.language)
+      moment.locale(newSettings.language)
     }
 
     if (newSettings.counterValue !== settings.counterValue) {
