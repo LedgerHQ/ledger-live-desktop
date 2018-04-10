@@ -7,10 +7,14 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import {
+  groupAccountOperationsByDay,
+  groupAccountsOperationsByDay,
+} from '@ledgerhq/wallet-common/lib/helpers/account'
 import type { Account, Operation as OperationType } from '@ledgerhq/wallet-common/lib/types'
 
 import noop from 'lodash/noop'
-import isEqual from 'lodash/isEqual'
+import keyBy from 'lodash/keyBy'
 
 import type { T } from 'types/common'
 
@@ -22,12 +26,13 @@ import IconAngleDown from 'icons/AngleDown'
 
 import Box, { Card } from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
-import Defer from 'components/base/Defer'
 import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
+import Defer from 'components/base/Defer'
 
 import ConfirmationCheck from './ConfirmationCheck'
 
+const today = moment()
 const DATE_COL_SIZE = 100
 const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
@@ -69,6 +74,7 @@ const Cell = styled(Box).attrs({
   alignItems: 'center',
 })`
   width: ${p => (p.size ? `${p.size}px` : '')};
+  overflow: ${p => (p.noOverflow ? 'hidden' : '')};
 `
 
 const ShowMore = styled(Box).attrs({
@@ -155,6 +161,7 @@ const Operation = ({
       {withAccount &&
         account && (
           <Cell
+            noOverflow
             size={ACCOUNT_COL_SIZE}
             horizontal
             flow={2}
@@ -214,25 +221,30 @@ const mapDispatchToProps = {
 
 type Props = {
   account: Account,
+  accounts: Account[],
   canShowMore: boolean,
   onAccountClick?: Function,
   openModal: Function,
-  operations: OperationType[],
   t: T,
-  title?: string,
   withAccount?: boolean,
+  nbToShow: number,
+  title?: string,
 }
 
 export class OperationsList extends Component<Props> {
   static defaultProps = {
-    account: null,
     onAccountClick: noop,
     withAccount: false,
     canShowMore: false,
+    nbToShow: 20,
   }
 
   shouldComponentUpdate(nextProps: Props) {
     if (this.props.account !== nextProps.account) {
+      return true
+    }
+
+    if (this.props.accounts !== nextProps.accounts) {
       return true
     }
 
@@ -244,47 +256,73 @@ export class OperationsList extends Component<Props> {
       return true
     }
 
-    if (this._hashCache === null) {
-      return true
-    }
-
-    return !isEqual(this._hashCache, this.getHashCache(nextProps.operations))
+    return false
   }
-
-  getHashCache = (operations: OperationType[]) => operations.map(t => t.id)
 
   handleClickOperation = (data: Object) => this.props.openModal(MODAL_OPERATION_DETAILS, data)
 
-  _hashCache = null
-
   render() {
-    const { account, canShowMore, onAccountClick, operations, t, title, withAccount } = this.props
+    const {
+      account,
+      title,
+      accounts,
+      canShowMore,
+      onAccountClick,
+      t,
+      withAccount,
+      nbToShow,
+    } = this.props
 
-    this._hashCache = this.getHashCache(operations)
+    if (!account && !accounts) {
+      console.warn('Preventing render OperationsList because not received account or accounts') // eslint-disable-line no-console
+      return null
+    }
+    const groupedOperations = accounts
+      ? groupAccountsOperationsByDay(accounts, nbToShow || 20)
+      : groupAccountOperationsByDay(account, nbToShow)
+
+    const accountsMap = accounts ? keyBy(accounts, 'id') : { [account.id]: account }
 
     return (
       <Defer>
-        <Box>
-          <Card flow={1} title={title} p={0}>
-            <Box>
-              {operations.map(op => {
-                // $FlowFixMe
-                const acc = account || op.account
-                return (
-                  <Operation
-                    account={acc}
-                    key={`${op.id}${acc ? `-${acc.id}` : ''}`}
-                    minConfirmations={acc.minConfirmations}
-                    onAccountClick={onAccountClick}
-                    onOperationClick={this.handleClickOperation}
-                    t={t}
-                    op={op}
-                    withAccount={withAccount}
-                  />
-                )
-              })}
-            </Box>
-          </Card>
+        <Box flow={4}>
+          {title && (
+            <Text color="dark" ff="Museo Sans" fontSize={6}>
+              {title}
+            </Text>
+          )}
+          {groupedOperations.map(group => {
+            const d = moment(group.day)
+            const isToday = d.isSame(today, 'day')
+            const isYesterday = d.isSame(moment(today).subtract(1, 'day'), 'day')
+            return (
+              <Box flow={2} key={group.day.toISOString()}>
+                <Box ff="Open Sans|SemiBold" fontSize={4} color="grey">
+                  {isToday ? 'Today' : isYesterday ? 'Yesterday' : d.format('D MMMM YYYY')}
+                </Box>
+                <Card p={0}>
+                  {group.data.map(op => {
+                    const account = accountsMap[op.accountId]
+                    if (!account) {
+                      return null
+                    }
+                    return (
+                      <Operation
+                        key={op.hash}
+                        account={account}
+                        minConfirmations={account.minConfirmations}
+                        onAccountClick={onAccountClick}
+                        onOperationClick={this.handleClickOperation}
+                        t={t}
+                        op={op}
+                        withAccount={withAccount}
+                      />
+                    )
+                  })}
+                </Card>
+              </Box>
+            )
+          })}
           {canShowMore && (
             <ShowMore>
               <span>{t('operationsList:showMore')}</span>
