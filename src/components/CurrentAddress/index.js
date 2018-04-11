@@ -6,7 +6,6 @@ import styled from 'styled-components'
 
 import noop from 'lodash/noop'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
 import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
@@ -101,9 +100,9 @@ const FooterButton = ({
 )
 
 type Props = {
-  account: Account,
-  addressVerified: null | boolean,
-  amount: null | string,
+  address: string,
+  addressVerified?: boolean,
+  amount?: string,
   onCopy: Function,
   onPrint: Function,
   onShare: Function,
@@ -131,7 +130,7 @@ class CurrentAddress extends PureComponent<Props> {
 
   render() {
     const {
-      account,
+      address,
       addressVerified,
       amount,
       onCopy,
@@ -153,10 +152,7 @@ class CurrentAddress extends PureComponent<Props> {
         <WrapperAddress notValid={notValid} grow>
           {withQRCode && (
             <Box mb={4}>
-              <QRCode
-                size={150}
-                data={`bitcoin:${account.address}${amount ? `?amount=${amount}` : ''}`}
-              />
+              <QRCode size={150} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />
             </Box>
           )}
           <Label>
@@ -164,7 +160,7 @@ class CurrentAddress extends PureComponent<Props> {
             <IconInfoCircle size={12} />
           </Label>
           <Address withQRCode={withQRCode} notValid={notValid}>
-            {account.address}
+            {address}
           </Address>
         </WrapperAddress>
         {withBadge && (
@@ -184,13 +180,13 @@ class CurrentAddress extends PureComponent<Props> {
               <FooterButton icon={<IconCheck size={16} />} label="Verify" onClick={onVerify} />
             )}
             <CopyToClipboard
-              data={account.address}
+              data={address}
               render={copy => (
                 <FooterButton icon={<IconCopy size={16} />} label="Copy" onClick={copy} />
               )}
             />
             <Print
-              data={{ account, amount }}
+              data={{ address, amount }}
               render={(print, isLoading) => (
                 <FooterButton
                   icon={<IconPrint size={16} />}

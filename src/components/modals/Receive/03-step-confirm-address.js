@@ -42,7 +42,7 @@ export default (props: Props) => (
     <Title>{props.t('receive:steps.confirmAddress.action')}</Title>
     <Text>{props.t('receive:steps.confirmAddress.text')}</Text>
     {props.account && (
-      <CurrentAddress addressVerified={props.addressVerified} account={props.account} />
+      <CurrentAddress addressVerified={props.addressVerified} address={props.account.address} />
     )}
     {props.device &&
       props.account && (

@@ -66,7 +66,7 @@ export const colors = {
   pearl: '#ff0000',
 
   // new colors
-  alertRed: '#fa4352',
+  alertRed: '#ea2e49',
   black: '#000000',
   dark: '#142533',
   fog: '#d8d8d8',

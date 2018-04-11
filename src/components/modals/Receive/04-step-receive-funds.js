@@ -36,7 +36,7 @@ export default (props: Props) => (
       />
     </Box>
     <CurrentAddress
-      account={props.account}
+      address={props.account && props.account.address}
       addressVerified={props.addressVerified}
       amount={props.amount}
       onVerify={props.onVerify}

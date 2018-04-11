@@ -35,11 +35,13 @@ type Props = {
 
 type State = {
   account: Account | null,
-  amount: string | number,
   addressVerified: null | boolean,
+  amount: string | number,
   appStatus: null | string,
   deviceSelected: Device | null,
   stepIndex: number,
+  stepsDisabled: Array<number>,
+  stepsErrors: Array<number>,
 }
 
 const GET_STEPS = t => [
@@ -56,6 +58,8 @@ const INITIAL_STATE = {
   appStatus: null,
   deviceSelected: null,
   stepIndex: 0,
+  stepsDisabled: [],
+  stepsErrors: [],
 }
 
 class ReceiveModal extends PureComponent<Props, State> {
@@ -137,6 +141,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       deviceSelected: null,
       appStatus: null,
       addressVerified: null,
+      stepsErrors: [],
       stepIndex: newStepIndex,
     })
   }
@@ -150,6 +155,7 @@ class ReceiveModal extends PureComponent<Props, State> {
   handleCheckAddress = isVerified => {
     this.setState({
       addressVerified: isVerified,
+      stepsErrors: isVerified === false ? [2] : [],
     })
 
     if (isVerified === true) {
@@ -172,6 +178,7 @@ class ReceiveModal extends PureComponent<Props, State> {
   handleSkipStep = () =>
     this.setState({
       addressVerified: false,
+      stepsErrors: [],
       stepIndex: this._steps.length - 1, // last step
     })
 
@@ -252,7 +259,7 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { stepIndex } = this.state
+    const { stepsErrors, stepIndex } = this.state
 
     const canClose = this.canClose()
     const canPrev = this.canPrev()
@@ -277,7 +284,12 @@ class ReceiveModal extends PureComponent<Props, State> {
               {t('receive:title')}
             </ModalTitle>
             <ModalContent>
-              <Breadcrumb mb={5} currentStep={stepIndex} items={this._steps} />
+              <Breadcrumb
+                mb={5}
+                currentStep={stepIndex}
+                stepsErrors={stepsErrors}
+                items={this._steps}
+              />
               {this.renderStep()}
             </ModalContent>
             {stepIndex !== 3 &&

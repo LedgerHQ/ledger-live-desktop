@@ -5,11 +5,15 @@ import styled from 'styled-components'
 
 import Box from 'components/base/Box'
 
-const RADIUS = 17
+import IconCheck from 'icons/Check'
+import IconCross from 'icons/Cross'
+
+const RADIUS = 18
 
 const Wrapper = styled(Box).attrs({
   alignItems: 'center',
-  color: p => (p.isActive ? 'wallet' : 'grey'),
+  color: p =>
+    ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'grey',
   grow: true,
   justifyContent: 'center',
 })`
@@ -19,18 +23,19 @@ const Wrapper = styled(Box).attrs({
   font-size: 9px;
 `
 
-const Number = styled(Box).attrs({
+const StepNumber = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
   color: 'white',
-  bg: p => (p.isActive ? 'wallet' : 'fog'),
+  bg: p =>
+    ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'fog',
   ff: 'Rubik|Regular',
 })`
   border-radius: 50%;
   font-size: 10px;
   height: ${RADIUS}px;
   line-height: 10px;
-  transition: all ease-in-out 0.1s ${p => (p.isActive ? 0.4 : 0)}s;
+  transition: all ease-in-out 0.1s ${p => (['active', 'valid'].includes(p.status) ? 0.4 : 0)}s;
   width: ${RADIUS}px;
 `
 
@@ -40,21 +45,29 @@ const Label = styled(Box).attrs({
 })`
   position: absolute;
   margin-top: 23px;
-  transition: color ease-in-out 0.1s ${p => (p.isActive ? 0.4 : 0)}s;
+  transition: color ease-in-out 0.1s ${p => (['active', 'valid'].includes(p.status) ? 0.4 : 0)}s;
 `
 
 type Props = {
   number: number,
-  isActive: boolean,
+  status: 'next' | 'active' | 'valid' | 'error' | 'disable',
   children: any,
 }
 
 function Step(props: Props) {
-  const { number, isActive, children } = props
+  const { number, status, children } = props
   return (
-    <Wrapper isActive={isActive}>
-      <Number isActive={isActive}>{number}</Number>
-      <Label isActive={isActive}>{children}</Label>
+    <Wrapper status={status}>
+      <StepNumber status={status}>
+        {status === 'active' || status === 'next' ? (
+          number
+        ) : status === 'valid' ? (
+          <IconCheck size={10} />
+        ) : (
+          <IconCross size={10} />
+        )}
+      </StepNumber>
+      <Label status={status}>{children}</Label>
     </Wrapper>
   )
 }

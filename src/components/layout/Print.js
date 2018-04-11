@@ -31,12 +31,12 @@ class Print extends PureComponent<any> {
     if (!data) {
       return null
     }
-    const { account, amount } = data
+    const { address, amount } = data
     return (
       <CurrentAddress
         innerRef={n => (this._node = n)}
         amount={amount}
-        account={account}
+        address={address}
         withQRCode
       />
     )
