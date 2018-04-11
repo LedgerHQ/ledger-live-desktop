@@ -31,9 +31,9 @@ const Text = styled(Box).attrs({
 `
 
 type Props = {
-  account: Account | null,
-  addressVerified: boolean | null,
-  device: Device | null,
+  account: ?Account,
+  addressVerified: ?boolean,
+  device: ?Device,
   onCheck: Function,
   t: T,
 }

@@ -12,8 +12,8 @@ import SelectAccount from 'components/SelectAccount'
 import RequestAmount from 'components/RequestAmount'
 
 type Props = {
-  account: Account | null,
-  addressVerified: boolean | null,
+  account: ?Account,
+  addressVerified: ?boolean,
   amount: string | number,
   onChangeAmount: Function,
   onVerify: Function,
