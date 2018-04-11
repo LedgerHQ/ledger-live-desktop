@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
@@ -15,6 +15,7 @@ const Container = styled(Box).attrs({
   alignItems: 'center',
   fontSize: 4,
   color: 'dark',
+  px: 7,
 })``
 
 const Title = styled(Box).attrs({
@@ -31,7 +32,7 @@ const Text = styled(Box).attrs({
 
 type Props = {
   account: Account | null,
-  addressVerified: null | boolean,
+  addressVerified: boolean | null,
   device: Device | null,
   onCheck: Function,
   t: T,
@@ -39,21 +40,29 @@ type Props = {
 
 export default (props: Props) => (
   <Container>
-    <Title>{props.t('receive:steps.confirmAddress.action')}</Title>
-    <Text>{props.t('receive:steps.confirmAddress.text')}</Text>
-    {props.account && (
-      <CurrentAddress addressVerified={props.addressVerified} address={props.account.address} />
+    {props.addressVerified === false ? (
+      <Fragment>
+        <Title>{props.t('receive:steps.confirmAddress.error.title')}</Title>
+        <Text mb={5}>{props.t('receive:steps.confirmAddress.error.text')}</Text>
+        <DeviceConfirm notValid />
+      </Fragment>
+    ) : (
+      <Fragment>
+        <Title>{props.t('receive:steps.confirmAddress.action')}</Title>
+        <Text>{props.t('receive:steps.confirmAddress.text')}</Text>
+        {props.account && <CurrentAddress address={props.account.address} />}
+        {props.device &&
+          props.account && (
+            <Box mb={2} mt={-1}>
+              <DeviceCheckAddress
+                account={props.account}
+                device={props.device}
+                onCheck={props.onCheck}
+                render={({ isVerified }) => <DeviceConfirm notValid={isVerified === false} />}
+              />
+            </Box>
+          )}
+      </Fragment>
     )}
-    {props.device &&
-      props.account && (
-        <Box mb={2}>
-          <DeviceCheckAddress
-            account={props.account}
-            device={props.device}
-            onCheck={props.onCheck}
-            render={({ isVerified }) => <DeviceConfirm notValid={isVerified === false} />}
-          />
-        </Box>
-      )}
   </Container>
 )

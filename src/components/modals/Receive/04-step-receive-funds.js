@@ -13,7 +13,7 @@ import RequestAmount from 'components/RequestAmount'
 
 type Props = {
   account: Account | null,
-  addressVerified: null | boolean,
+  addressVerified: boolean | null,
   amount: string | number,
   onChangeAmount: Function,
   onVerify: Function,

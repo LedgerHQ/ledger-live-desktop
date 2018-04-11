@@ -24,22 +24,37 @@ const Bar = styled.div`
   height: 1px;
   left: ${p => p.start}%;
   position: absolute;
-  right: ${p => p.start}%;
+  right: ${p => p.end}%;
   top: 8px;
   z-index: 1;
 
-  &:after {
-    background: ${p => p.theme.colors.wallet};
+  &:after,
+  &:before {
     bottom: 0;
     content: '';
     display: block;
     left: 0;
     position: absolute;
-    right: ${p => (p.current === 0 ? 0 : `${p.current}%`)};
+    right: auto;
     top: 0;
     transition: right ease-in-out 0.4s;
   }
+
+  &:after {
+    background: ${p => p.theme.colors.wallet};
+    right: ${p => (p.current === 0 ? 0 : `${p.current}%`)};
+    z-index: 1;
+  }
+
+  &:before {
+    background: ${p => p.theme.colors.fog};
+    left: ${p => (p.disabled ? `${p.disabled[0]}%` : 0)};
+    right: ${p => (p.disabled ? `${p.disabled[1]}%` : 'auto')};
+    z-index: 2;
+  }
 `
+
+const indexToPurcent = (index, itemsLength) => 100 - 100 / (itemsLength - 1) * parseInt(index, 10)
 
 type Props = {
   currentStep: number | string,
@@ -58,6 +73,7 @@ class Breadcrumb extends PureComponent<Props> {
     const { items, stepsDisabled, stepsErrors, currentStep, ...props } = this.props
     const itemsLength = items.length
     const start = 100 / itemsLength / 2
+
     return (
       <Box {...props} relative>
         <Wrapper>
@@ -90,8 +106,17 @@ class Breadcrumb extends PureComponent<Props> {
           })}
         </Wrapper>
         <Bar
+          end={start}
           start={start}
-          current={!currentStep ? 100 : 100 - 100 / (itemsLength - 1) * parseInt(currentStep, 10)}
+          disabled={
+            stepsDisabled.length > 0
+              ? [
+                  stepsDisabled[0] === 0 ? 0 : indexToPurcent(stepsDisabled[0] + 1, itemsLength),
+                  indexToPurcent(stepsDisabled[stepsDisabled.length - 1], itemsLength),
+                ]
+              : null
+          }
+          current={!currentStep ? 100 : indexToPurcent(currentStep, itemsLength)}
         />
       </Box>
     )

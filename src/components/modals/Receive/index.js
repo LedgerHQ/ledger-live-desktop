@@ -138,11 +138,12 @@ class ReceiveModal extends PureComponent<Props, State> {
     }
 
     this.setState({
-      deviceSelected: null,
-      appStatus: null,
       addressVerified: null,
-      stepsErrors: [],
+      appStatus: null,
+      deviceSelected: null,
       stepIndex: newStepIndex,
+      stepsDisabled: [],
+      stepsErrors: [],
     })
   }
 
@@ -163,6 +164,12 @@ class ReceiveModal extends PureComponent<Props, State> {
     }
   }
 
+  handleRetryCheckAddress = () =>
+    this.setState({
+      addressVerified: null,
+      stepsErrors: [],
+    })
+
   handleChangeAmount = amount => this.setState({ amount })
 
   handleBeforeOpenModal = ({ data }) => {
@@ -179,6 +186,7 @@ class ReceiveModal extends PureComponent<Props, State> {
     this.setState({
       addressVerified: false,
       stepsErrors: [],
+      stepsDisabled: [1, 2],
       stepIndex: this._steps.length - 1, // last step
     })
 
@@ -223,7 +231,7 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   renderButton = () => {
     const { t } = this.props
-    const { stepIndex } = this.state
+    const { stepIndex, addressVerified } = this.state
 
     let onClick
     let props
@@ -232,7 +240,8 @@ class ReceiveModal extends PureComponent<Props, State> {
       case 2:
         props = {
           primary: true,
-          children: 'Contact Support',
+          onClick: this.handleRetryCheckAddress,
+          children: t('common:retry'),
         }
         break
       default:
@@ -252,6 +261,10 @@ class ReceiveModal extends PureComponent<Props, State> {
             {t('receive:steps.connectDevice.withoutDevice')}
           </Button>
         )}
+        {stepIndex === 2 &&
+          addressVerified === false && (
+            <Button fontSize={4}>{t('receive:steps.confirmAddress.support')}</Button>
+          )}
         <Button {...props} />
       </Fragment>
     )
@@ -259,7 +272,7 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { stepsErrors, stepIndex } = this.state
+    const { stepsErrors, stepsDisabled, stepIndex } = this.state
 
     const canClose = this.canClose()
     const canPrev = this.canPrev()
@@ -288,6 +301,7 @@ class ReceiveModal extends PureComponent<Props, State> {
                 mb={5}
                 currentStep={stepIndex}
                 stepsErrors={stepsErrors}
+                stepsDisabled={stepsDisabled}
                 items={this._steps}
               />
               {this.renderStep()}

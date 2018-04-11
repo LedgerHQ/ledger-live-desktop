@@ -29,7 +29,7 @@ const springConfig = {
 const mapStateToProps: Function = (
   state,
   { name, isOpened, onBeforeOpen }: { name: string, isOpened?: boolean, onBeforeOpen: Function },
-): Object => {
+): * => {
   const data = getModalData(state, name)
   const modalOpened = isOpened || (name && isModalOpened(state, name))
 
@@ -43,7 +43,7 @@ const mapStateToProps: Function = (
   }
 }
 
-const mapDispatchToProps: Function = (dispatch, { name, onClose = noop }): Object => ({
+const mapDispatchToProps: Function = (dispatch, { name, onClose = noop }): * => ({
   onClose: name
     ? () => {
         dispatch(closeModal(name))

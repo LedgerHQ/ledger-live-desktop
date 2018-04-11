@@ -13,6 +13,10 @@ steps:
     title: Confirm Address
     action: Confirm address on device
     text: To receive funds, confirm the address on your device.
+    support: Contact Support
+    error:
+      title: Houston, we have a problem!
+      text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
 
   receiveFunds:
     title: Receive Funds
