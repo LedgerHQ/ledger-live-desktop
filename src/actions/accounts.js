@@ -43,7 +43,10 @@ export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) 
 
 export type AddAccount = Account => (Function, Function) => void
 export const addAccount: AddAccount = payload => (dispatch, getState) => {
-  const { settings: { counterValue, orderAccounts }, accounts } = getState()
+  const {
+    settings: { counterValue, orderAccounts },
+    accounts,
+  } = getState()
   dispatch({ type: 'ADD_ACCOUNT', payload })
   dispatch(updateOrderAccounts(orderAccounts))
 
@@ -63,7 +66,9 @@ export const removeAccount: RemoveAccount = payload => ({
 
 export type FetchAccounts = () => (Function, Function) => Promise<*, *>
 export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
-  const { settings: { orderAccounts } } = getState()
+  const {
+    settings: { orderAccounts },
+  } = getState()
   const accounts = db.get('accounts')
   dispatch({
     type: 'SET_ACCOUNTS',
@@ -74,7 +79,9 @@ export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
 
 export type UpdateAccount = Account => (Function, Function) => void
 export const updateAccount: UpdateAccount = payload => (dispatch, getState) => {
-  const { settings: { orderAccounts } } = getState()
+  const {
+    settings: { orderAccounts },
+  } = getState()
   dispatch({
     type: 'UPDATE_ACCOUNT',
     payload,

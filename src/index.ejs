@@ -45,7 +45,8 @@
     </div>
     <div id="app"></div>
     <script>
-      const { name } = require('electron').remote.getCurrentWindow()
+      const { remote } = require('electron')
+      const { name } = remote.getCurrentWindow()
 
       const preloadEl = document.getElementById('preload')
       const appEl = document.getElementById('app')

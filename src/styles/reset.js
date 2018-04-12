@@ -35,6 +35,10 @@ em {
   font-style: italic;
 }
 
+#a11y-status-message {
+  display: none;
+}
+
 .scroll-content {
   height: 100%;
 

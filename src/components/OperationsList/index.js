@@ -293,7 +293,7 @@ export class OperationsList extends PureComponent<Props> {
                     }
                     return (
                       <Operation
-                        key={op.hash}
+                        key={`${account.id}-${op.hash}`}
                         account={account}
                         minConfirmations={account.minConfirmations}
                         onAccountClick={onAccountClick}

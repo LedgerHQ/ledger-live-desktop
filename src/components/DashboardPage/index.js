@@ -1,15 +1,20 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
+import { ipcRenderer } from 'electron'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import chunk from 'lodash/chunk'
 
 import type { T } from 'types/common'
+
+import { colors } from 'styles/theme'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 import { getCounterValueCode } from 'reducers/settings'
@@ -77,11 +82,31 @@ class DashboardPage extends PureComponent<Props, State> {
     }
   }
 
+  handleCalculateBalance = data => {
+    const { counterValue } = this.props
+
+    if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
+      this._cacheBalance = data.totalBalance
+
+      ipcRenderer.send('touch-bar-update', {
+        text: 'Total balance',
+        color: colors.wallet,
+        balance: {
+          counterValue: formatCurrencyUnit(getFiatUnit(counterValue), data.totalBalance, {
+            showCode: true,
+          }),
+        },
+      })
+    }
+  }
+
   handleChangeSelectedTime = item =>
     this.setState({
       selectedTime: item.key,
       daysCount: item.value,
     })
+
+  _cacheBalance = null
 
   render() {
     const { push, accounts, t, counterValue } = this.props
@@ -109,9 +134,10 @@ class DashboardPage extends PureComponent<Props, State> {
         {totalAccounts > 0 && (
           <Fragment>
             <BalanceSummary
+              onCalculate={this.handleCalculateBalance}
               counterValue={counterValue}
               chartId="dashboard-chart"
-              chartColor="#5286f7"
+              chartColor={colors.wallet}
               accounts={accounts}
               selectedTime={selectedTime}
               daysCount={daysCount}

@@ -2,6 +2,9 @@
 
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
+
+import noop from 'lodash/noop'
+
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import calculateBalance from 'helpers/balance'
@@ -14,6 +17,7 @@ type Props = {
   accounts: Account[],
   counterValues: Object,
   daysCount: number,
+  onCalculate: Function,
   render: Function,
 }
 
@@ -33,14 +37,26 @@ function calculateBalanceToState(props: Object) {
 }
 
 class CalculateBalance extends PureComponent<Props, State> {
-  state = calculateBalanceToState(this.props)
+  static defaultProps = {
+    onCalculate: noop,
+  }
+
+  constructor(props) {
+    super(props)
+
+    const state = calculateBalanceToState(props)
+    props.onCalculate(state)
+    this.state = state
+  }
 
   componentWillReceiveProps(nextProps) {
     const sameAccounts = this.props.accounts === nextProps.accounts
     const sameCounterValues = this.props.counterValues === nextProps.counterValues
     const sameDaysCount = this.props.daysCount === nextProps.daysCount
     if (!sameAccounts || !sameCounterValues || !sameDaysCount) {
-      this.setState(calculateBalanceToState(nextProps))
+      const state = calculateBalanceToState(nextProps)
+      nextProps.onCalculate(state)
+      this.setState(state)
     }
   }
 

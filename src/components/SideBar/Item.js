@@ -85,8 +85,12 @@ function Item({
       isActive={isActive}
       onClick={
         linkTo
-          ? isActive ? undefined : () => push(linkTo)
-          : modal ? () => openModal(modal) : void 0
+          ? isActive
+            ? undefined
+            : () => push(linkTo)
+          : modal
+            ? () => openModal(modal)
+            : void 0
       }
     >
       {icon && <Box color={isActive ? iconActiveColor : void 0}>{icon}</Box>}

@@ -29,7 +29,9 @@ const Step = styled(Box).attrs({
     ${p =>
       p.validated
         ? p.theme.colors.wallet
-        : p.hasErrors ? p.theme.colors.alertRed : p.theme.colors.fog};
+        : p.hasErrors
+          ? p.theme.colors.alertRed
+          : p.theme.colors.fog};
 `
 const StepIcon = styled(Box).attrs({
   alignItems: 'center',

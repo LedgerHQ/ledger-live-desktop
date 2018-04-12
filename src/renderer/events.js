@@ -127,7 +127,7 @@ export function checkUpdates() {
 
 export default ({ store, locked }: { store: Object, locked: boolean }) => {
   const handlers = {
-    dispatch: (type, payload) => store.dispatch({ type, payload }),
+    dispatch: ({ type, payload }) => store.dispatch({ type, payload }),
     application: {
       changeLanguage: lang => i18n.changeLanguage(lang),
     },

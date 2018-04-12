@@ -1,11 +1,14 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { ipcRenderer } from 'electron'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
 import styled from 'styled-components'
+import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
@@ -75,6 +78,29 @@ class AccountPage extends PureComponent<Props, State> {
     daysCount: 7,
   }
 
+  handleCalculateBalance = data => {
+    const { counterValue, account } = this.props
+
+    if (!account) {
+      return
+    }
+
+    if (process.platform === 'darwin') {
+      ipcRenderer.send('touch-bar-update', {
+        text: account.name,
+        color: account.currency.color,
+        balance: {
+          currency: formatCurrencyUnit(account.unit, account.balance, {
+            showCode: true,
+          }),
+          counterValue: formatCurrencyUnit(getFiatUnit(counterValue), data.totalBalance, {
+            showCode: true,
+          }),
+        },
+      })
+    }
+  }
+
   handleChangeSelectedTime = item =>
     this.setState({
       selectedTime: item.key,
@@ -116,12 +142,13 @@ class AccountPage extends PureComponent<Props, State> {
         </Box>
         <Box mb={7}>
           <BalanceSummary
-            counterValue={counterValue}
+            accounts={[account]}
             chartColor={account.currency.color}
             chartId={`account-chart-${account.id}`}
-            accounts={[account]}
-            selectedTime={selectedTime}
+            counterValue={counterValue}
             daysCount={daysCount}
+            onCalculate={this.handleCalculateBalance}
+            selectedTime={selectedTime}
             renderHeader={({ totalBalance, sinceBalance, refBalance }) => (
               <Box flow={4} mb={2}>
                 <Box horizontal>

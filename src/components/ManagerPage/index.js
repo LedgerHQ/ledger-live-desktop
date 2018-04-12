@@ -83,7 +83,9 @@ class ManagerPage extends PureComponent<Props, State> {
     this.setState({ status: 'busy' })
     try {
       const { job, successResponse, errorResponse } = options
-      const { device: { path: devicePath } } = this.props
+      const {
+        device: { path: devicePath },
+      } = this.props
       const data = { appParams, devicePath }
       await runJob({ channel: 'usb', job, successResponse, errorResponse, data })
       this.setState({ status: 'success' })
