@@ -85,7 +85,7 @@ class DashboardPage extends PureComponent<Props, State> {
   handleCalculateBalance = data => {
     const { counterValue } = this.props
 
-    if (this._cacheBalance !== data.totalBalance) {
+    if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
       this._cacheBalance = data.totalBalance
 
       ipcRenderer.send('touch-bar-update', {

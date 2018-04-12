@@ -62,7 +62,9 @@
           preloadEl.addEventListener('transitionend', () => preloadEl.remove())
         }
 
-        ipcRenderer.emit('touch-bar-init')
+        if (process.platform === 'darwin') {
+          ipcRenderer.emit('touch-bar-init')
+        }
       }
 
       if (name === 'MainWindow') {

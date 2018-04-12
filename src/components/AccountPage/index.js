@@ -85,18 +85,20 @@ class AccountPage extends PureComponent<Props, State> {
       return
     }
 
-    ipcRenderer.send('touch-bar-update', {
-      text: account.name,
-      color: account.currency.color,
-      balance: {
-        currency: formatCurrencyUnit(account.unit, account.balance, {
-          showCode: true,
-        }),
-        counterValue: formatCurrencyUnit(getFiatUnit(counterValue), data.totalBalance, {
-          showCode: true,
-        }),
-      },
-    })
+    if (process.platform === 'darwin') {
+      ipcRenderer.send('touch-bar-update', {
+        text: account.name,
+        color: account.currency.color,
+        balance: {
+          currency: formatCurrencyUnit(account.unit, account.balance, {
+            showCode: true,
+          }),
+          counterValue: formatCurrencyUnit(getFiatUnit(counterValue), data.totalBalance, {
+            showCode: true,
+          }),
+        },
+      })
+    }
   }
 
   handleChangeSelectedTime = item =>
