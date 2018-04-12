@@ -45,7 +45,8 @@
     </div>
     <div id="app"></div>
     <script>
-      const { name } = require('electron').remote.getCurrentWindow()
+      const { remote, ipcRenderer } = require('electron')
+      const { name } = remote.getCurrentWindow()
 
       const preloadEl = document.getElementById('preload')
       const appEl = document.getElementById('app')
@@ -60,6 +61,8 @@
 
           preloadEl.addEventListener('transitionend', () => preloadEl.remove())
         }
+
+        ipcRenderer.emit('touch-bar-init')
       }
 
       if (name === 'MainWindow') {

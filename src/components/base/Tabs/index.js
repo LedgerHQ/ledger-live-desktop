@@ -25,7 +25,9 @@ const Tab = styled(Tabbable).attrs({
   color: ${p =>
     p.isActive
       ? p.theme.colors.wallet
-      : p.isDisabled ? p.theme.colors.grey : p.theme.colors.graphite};
+      : p.isDisabled
+        ? p.theme.colors.grey
+        : p.theme.colors.graphite};
   margin-bottom: -1px;
   outline: none;
   cursor: ${p => (p.isActive ? 'default' : p.isDisabled ? 'not-allowed' : 'pointer')};

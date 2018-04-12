@@ -144,7 +144,9 @@ class ReceiveBox extends PureComponent<Props, State> {
           isVerified:{' '}
           {isVerified === null
             ? 'not yet...'
-            : isVerified === true ? 'ok!' : '/!\\ contact support'}
+            : isVerified === true
+              ? 'ok!'
+              : '/!\\ contact support'}
         </Box>
         <Box alignItems="center">
           <QRCode size={150} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />

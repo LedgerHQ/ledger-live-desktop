@@ -135,7 +135,9 @@ export function getBalanceHistoryForAccounts({
         }
         return { ...item, balance: b }
       })
-    : balances.length > 0 ? balances[0] : []
+    : balances.length > 0
+      ? balances[0]
+      : []
 }
 
 export default function calculateBalance(props: CalculateBalance) {

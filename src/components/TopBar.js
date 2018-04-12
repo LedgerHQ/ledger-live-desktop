@@ -52,7 +52,9 @@ const Activity = styled.div`
   background: ${p =>
     p.progress === true
       ? p.theme.colors.wallet
-      : p.fail === true ? p.theme.colors.alertRed : p.theme.colors.positiveGreen};
+      : p.fail === true
+        ? p.theme.colors.alertRed
+        : p.theme.colors.positiveGreen};
   border-radius: 50%;
   bottom: 20px;
   height: 4px;

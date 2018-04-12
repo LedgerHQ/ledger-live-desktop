@@ -7,4 +7,6 @@ export default (__DEV__ && !STORYBOOK_ENV && NODE_ENV !== 'test'
   ? __static
   : isRunningInAsar
     ? __dirname.replace(/app\.asar$/, 'static')
-    : !STORYBOOK_ENV ? `${__dirname}/../../static` : 'static')
+    : !STORYBOOK_ENV
+      ? `${__dirname}/../../static`
+      : 'static')

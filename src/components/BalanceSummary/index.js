@@ -10,6 +10,7 @@ import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
 
 type Props = {
+  onCalculate: Function,
   counterValue: string,
   chartColor: string,
   chartId: string,
@@ -20,21 +21,23 @@ type Props = {
 }
 
 const BalanceSummary = ({
-  counterValue,
+  accounts,
   chartColor,
   chartId,
-  accounts,
-  selectedTime,
+  counterValue,
   daysCount,
+  onCalculate,
   renderHeader,
+  selectedTime,
 }: Props) => {
   const unit = getFiatUnit(counterValue)
   return (
     <Card p={0} py={6}>
       <CalculateBalance
-        counterValue={counterValue}
         accounts={accounts}
+        counterValue={counterValue}
         daysCount={daysCount}
+        onCalculate={onCalculate}
         render={({ allBalances, totalBalance, sinceBalance, refBalance }) => (
           <Fragment>
             {renderHeader !== null && (
