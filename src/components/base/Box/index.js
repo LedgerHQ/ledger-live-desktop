@@ -53,7 +53,7 @@ const Box = styled.div`
 
 const RawCard = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 1 })``
 
-export const Card = ({ title, ...props }: { title?: string }) => {
+export const Card = ({ title, ...props }: { title?: any }) => {
   if (title) {
     return (
       <Box flow={4} grow>

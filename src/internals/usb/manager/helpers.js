@@ -4,7 +4,6 @@ import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import chalk from 'chalk'
 import Websocket from 'ws'
 import qs from 'qs'
-import noop from 'lodash/noop'
 import type Transport from '@ledgerhq/hw-transport'
 
 import type { IPCSend } from 'types/electron'
@@ -23,10 +22,10 @@ type Message = {
 }
 
 type LedgerAppParams = {
-  firmware: string,
-  firmwareKey: string,
-  delete: string,
-  deleteKey: string,
+  firmware?: string,
+  firmwareKey?: string,
+  delete?: string,
+  deleteKey?: string,
 }
 
 /**
@@ -54,8 +53,8 @@ export function createTransportHandler(
     try {
       const transport: Transport<*> = await CommNodeHid.open(devicePath)
       // $FlowFixMe
-      await action(transport, params)
-      send(successResponse)
+      const data = await action(transport, params)
+      send(successResponse, data)
     } catch (err) {
       if (!err) {
         send(errorResponse, { message: 'Unknown error...' })
@@ -72,7 +71,7 @@ export async function installApp(
   transport: Transport<*>,
   { appParams }: { appParams: LedgerAppParams },
 ): Promise<void> {
-  return createSocketDialog(transport, appParams)
+  return createSocketDialog(transport, '/install', appParams)
 }
 
 /**
@@ -82,11 +81,17 @@ export async function uninstallApp(
   transport: Transport<*>,
   { appParams }: { appParams: LedgerAppParams },
 ): Promise<void> {
-  return createSocketDialog(transport, {
+  return createSocketDialog(transport, '/install', {
     ...appParams,
     firmware: appParams.delete,
     firmwareKey: appParams.deleteKey,
   })
+}
+
+export async function getMemInfos(transport: Transport<*>): Promise<Object> {
+  const { targetId } = await getFirmwareInfo(transport)
+  // Dont ask me about this `perso_11`: I don't know. But we need it.
+  return createSocketDialog(transport, '/get-mem-infos', { targetId, perso: 'perso_11' })
 }
 
 /**
@@ -142,10 +147,11 @@ async function bulk(ws: WebsocketType, transport: Transport<*>, msg: Message) {
  * Open socket connection with firmware api, and init a dialog
  * with the device
  */
-function createSocketDialog(transport: Transport<*>, appParams: LedgerAppParams) {
+function createSocketDialog(transport: Transport<*>, endpoint: string, appParams: LedgerAppParams) {
   return new Promise(async (resolve, reject) => {
     try {
-      const url = `${BASE_SOCKET_URL}?${qs.stringify(appParams)}`
+      let lastData
+      const url = `${BASE_SOCKET_URL}${endpoint}?${qs.stringify(appParams)}`
 
       log('WS CONNECTING', url)
       const ws: WebsocketType = new Websocket(url)
@@ -154,14 +160,18 @@ function createSocketDialog(transport: Transport<*>, appParams: LedgerAppParams)
 
       ws.on('close', () => {
         log('WS CLOSED')
-        resolve()
+        resolve(lastData)
       })
 
       ws.on('message', async rawMsg => {
         const handlers = {
           exchange: msg => exchange(ws, transport, msg),
           bulk: msg => bulk(ws, transport, msg),
-          success: noop,
+          success: msg => {
+            if (msg.data) {
+              lastData = msg.data
+            }
+          },
           error: msg => {
             log('WS ERROR', ':(')
             throw new Error(msg.data)
