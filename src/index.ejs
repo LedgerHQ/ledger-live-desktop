@@ -45,7 +45,7 @@
     </div>
     <div id="app"></div>
     <script>
-      const { remote, ipcRenderer } = require('electron')
+      const { remote } = require('electron')
       const { name } = remote.getCurrentWindow()
 
       const preloadEl = document.getElementById('preload')
@@ -60,10 +60,6 @@
           preloadEl.style.opacity = 0
 
           preloadEl.addEventListener('transitionend', () => preloadEl.remove())
-        }
-
-        if (process.platform === 'darwin') {
-          ipcRenderer.emit('touch-bar-init')
         }
       }
 

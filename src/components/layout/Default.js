@@ -35,7 +35,15 @@ type Props = {
 
 class Default extends Component<Props> {
   componentDidMount() {
-    window.requestAnimationFrame(() => (this._timeout = setTimeout(() => window.onAppReady(), 300)))
+    window.requestAnimationFrame(
+      () =>
+        (this._timeout = setTimeout(() => {
+          window.onAppReady()
+          if (process.platform === 'darwin') {
+            ipcRenderer.send('touch-bar-init')
+          }
+        }, 300)),
+    )
   }
 
   componentWillReceiveProps(nextProps: Props) {
