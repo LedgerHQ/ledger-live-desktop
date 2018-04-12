@@ -41,10 +41,12 @@ class CalculateBalance extends PureComponent<Props, State> {
     onCalculate: noop,
   }
 
-  state = calculateBalanceToState(this.props)
+  constructor(props) {
+    super(props)
 
-  componentDidMount() {
-    this.props.onCalculate(this.state)
+    const state = calculateBalanceToState(props)
+    props.onCalculate(state)
+    this.state = state
   }
 
   componentWillReceiveProps(nextProps) {
