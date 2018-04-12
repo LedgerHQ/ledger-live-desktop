@@ -1,4 +1,14 @@
 ---
 title: Ajouter un compte
-import:
-  placeholder: 'Compte {{index}}'
+steps:
+  currency:
+    title: Informations
+  connectDevice:
+    title: Connecter l'appareil
+  importProgress:
+    title: En cours
+  importAccounts:
+    title: Importer les comptes
+    cta_0: Importer le compte
+    cta_1: Importer {{count}} compte
+    cta_2: Importer {{count}} comptes
