@@ -12,7 +12,10 @@ const stories = storiesOf('Components', module)
 
 export const accounts = [...Array(20)].map(() => ({
   id: chance.string(),
-  address: chance.string(),
+  address: chance.string({
+    pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+    length: 30,
+  }),
   addresses: [],
   balance: chance.integer({ min: 10000000000, max: 2000000000000 }),
   balanceByDay: {},

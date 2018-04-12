@@ -28,6 +28,9 @@ class QRCode extends PureComponent<Props> {
     qrcode.toCanvas(this._canvas, data, {
       width: size,
       margin: 0,
+      color: {
+        light: '#ffffff00', // transparent background
+      },
     })
   }
 

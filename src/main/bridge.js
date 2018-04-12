@@ -1,6 +1,6 @@
 // @flow
 
-import 'babel-polyfill'
+import '@babel/polyfill'
 import { fork } from 'child_process'
 import { BrowserWindow, ipcMain } from 'electron'
 import objectPath from 'object-path'

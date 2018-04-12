@@ -68,7 +68,7 @@ class InputCurrency extends PureComponent<Props, State> {
     unit: this.props.unit,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.syncInput({ isFocused: false })
   }
 
@@ -125,7 +125,8 @@ class InputCurrency extends PureComponent<Props, State> {
     const { unit } = this.state
     this.setState({
       isFocused,
-      displayValue: value === 0 ? '' : format(unit, value, { isFocused, showAllDigits }),
+      displayValue:
+        value === '' || value === 0 ? '' : format(unit, value, { isFocused, showAllDigits }),
     })
   }
 

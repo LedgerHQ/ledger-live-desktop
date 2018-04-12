@@ -11,9 +11,9 @@ import DeviceMonit from 'components/DeviceMonitNew'
 
 type Props = {
   accountName?: string,
-  account?: Account,
-  currency?: Currency | null,
-  deviceSelected: Device | null,
+  account?: ?Account,
+  currency?: ?Currency,
+  deviceSelected: ?Device,
   onChangeDevice: Function,
   onStatusChange: Function,
 }
@@ -38,8 +38,8 @@ const StepConnectDevice = (props: Props) => (
 )
 
 StepConnectDevice.defaultProps = {
-  account: undefined,
   accountName: undefined,
+  account: undefined,
   currency: undefined,
 }
 

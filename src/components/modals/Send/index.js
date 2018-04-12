@@ -140,7 +140,7 @@ class SendModal extends PureComponent<Props, State> {
             <ModalBody onClose={onClose} deferHeight={acc ? 630 : 355}>
               <ModalTitle>{t('send:title')}</ModalTitle>
               <ModalContent>
-                <Breadcrumb mb={6} mt={2} currentStep={stepIndex} items={this._steps} />
+                <Breadcrumb mb={5} mt={2} currentStep={stepIndex} items={this._steps} />
                 {this.renderStep(acc)}
               </ModalContent>
               {acc && (

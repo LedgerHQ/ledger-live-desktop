@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
+import { text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 
 import { accounts } from 'components/SelectAccount/stories'
@@ -23,17 +24,21 @@ class Wrapper extends PureComponent<any, State> {
     this.setState({ value })
   }
   render() {
+    const { max, withMax } = this.props
     const { value } = this.state
     return (
       <RequestAmount
-        counterValue="USD"
         account={accounts[0]}
+        counterValue="USD"
+        max={max}
         onChange={this.handleChange}
         value={value}
-        max={4e8}
+        withMax={withMax}
       />
     )
   }
 }
 
-stories.add('RequestAmount', () => <Wrapper />)
+stories.add('RequestAmount', () => (
+  <Wrapper withMax={boolean('withMax', true)} max={Number(text('max', '4e8'))} />
+))

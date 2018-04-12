@@ -24,7 +24,7 @@ const renderItem = a => {
   const Icon = getIconByCoinType(a.coinType)
   const { color } = a.currency
   return (
-    <Box horizontal alignItems="center" flow={2}>
+    <Box grow horizontal alignItems="center" flow={2}>
       {Icon && (
         <Box style={{ width: 16, height: 16, color }}>
           <Icon size={16} />
@@ -49,8 +49,9 @@ type Props = {
   t: T,
 }
 
-const RawSelectAccount = ({ accounts, onChange, value, t }: Props) => (
+const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => (
   <Select
+    {...props}
     value={value && accounts.find(a => value && a.id === value.id)}
     renderSelected={renderItem}
     renderItem={renderItem}

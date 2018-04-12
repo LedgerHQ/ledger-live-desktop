@@ -11,7 +11,7 @@ import fontFamily from 'styles/styled/fontFamily'
 
 const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
-  fontSize: 3,
+  fontSize: p => p.fontSize || 3,
   px: p => (p.primary ? (p.small ? 2 : 3) : 1),
 })`
   ${space};
@@ -71,8 +71,8 @@ function getProps({ disabled, icon, primary }: Object) {
       },
     ),
     ...props(disabled, {
-      color: 'white',
-      bg: 'fog',
+      color: 'grey',
+      bg: 'lightFog',
     }),
   }
 }
@@ -82,8 +82,8 @@ const Button = (props: Props) => {
 
   return (
     <Base
-      {...props}
       {...getProps({ primary, disabled })}
+      {...props}
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
     >

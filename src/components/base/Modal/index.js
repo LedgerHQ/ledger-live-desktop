@@ -28,13 +28,22 @@ const springConfig = {
 
 const mapStateToProps: Function = (
   state,
-  { name, isOpened }: { name: string, isOpened?: boolean },
-): Object => ({
-  isOpened: isOpened || (name && isModalOpened(state, name)),
-  data: getModalData(state, name),
-})
+  { name, isOpened, onBeforeOpen }: { name: string, isOpened?: boolean, onBeforeOpen: Function },
+): * => {
+  const data = getModalData(state, name)
+  const modalOpened = isOpened || (name && isModalOpened(state, name))
 
-const mapDispatchToProps: Function = (dispatch, { name, onClose = noop }): Object => ({
+  if (onBeforeOpen) {
+    onBeforeOpen({ data, isOpened: modalOpened })
+  }
+
+  return {
+    isOpened: modalOpened,
+    data,
+  }
+}
+
+const mapDispatchToProps: Function = (dispatch, { name, onClose = noop }): * => ({
   onClose: name
     ? () => {
         dispatch(closeModal(name))
@@ -98,12 +107,12 @@ class Pure extends Component<any> {
 }
 
 type Props = {
+  data?: any,
   isOpened?: boolean,
   onClose: Function,
   onHide?: Function,
   preventBackdropClick?: boolean,
   render: Function,
-  data?: any,
 }
 
 export class Modal extends Component<Props> {
@@ -138,6 +147,7 @@ export class Modal extends Component<Props> {
         domWrapper.focus()
       }
     }
+
     if (didClose) {
       if (this._lastFocusedElement) {
         this._lastFocusedElement.focus()
@@ -149,7 +159,7 @@ export class Modal extends Component<Props> {
   _lastFocusedElement = null
 
   render() {
-    const { preventBackdropClick, isOpened, onClose, onHide, render, data } = this.props
+    const { preventBackdropClick, isOpened, onHide, render, data, onClose } = this.props
 
     return (
       <Mortal
@@ -187,11 +197,13 @@ export class Modal extends Component<Props> {
 }
 
 export const ModalTitle = styled(Box).attrs({
+  alignItems: 'center',
+  color: 'dark',
   ff: 'Museo Sans|Regular',
   fontSize: 6,
-  color: 'dark',
-  align: 'center',
+  justifyContent: 'center',
   p: 5,
+  relative: true,
 })``
 
 export const ModalFooter = styled(Box).attrs({

@@ -1,10 +1,10 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
+import styled from 'styled-components'
 import { translate } from 'react-i18next'
-import get from 'lodash/get'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 import type { T, Device } from 'types/common'
 
 import { MODAL_RECEIVE } from 'config/constants'
@@ -15,7 +15,19 @@ import Breadcrumb from 'components/Breadcrumb'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
 
+import IconAngleLeft from 'icons/AngleLeft'
+
 import StepAccount from './01-step-account'
+import StepConfirmAddress from './03-step-confirm-address'
+import StepReceiveFunds from './04-step-receive-funds'
+
+const PrevButton = styled(Button).attrs({
+  fontSize: 4,
+  ml: 4,
+})`
+  position: absolute;
+  left: 0;
+`
 
 type Props = {
   t: T,
@@ -23,21 +35,31 @@ type Props = {
 
 type State = {
   account: Account | null,
-  deviceSelected: Device | null,
+  addressVerified: null | boolean,
+  amount: string | number,
   appStatus: null | string,
+  deviceSelected: Device | null,
   stepIndex: number,
+  stepsDisabled: Array<number>,
+  stepsErrors: Array<number>,
 }
 
 const GET_STEPS = t => [
   { label: t('receive:steps.chooseAccount.title'), Comp: StepAccount },
   { label: t('receive:steps.connectDevice.title'), Comp: StepConnectDevice },
+  { label: t('receive:steps.confirmAddress.title'), Comp: StepConfirmAddress },
+  { label: t('receive:steps.receiveFunds.title'), Comp: StepReceiveFunds },
 ]
 
 const INITIAL_STATE = {
   account: null,
-  deviceSelected: null,
+  addressVerified: null,
+  amount: '',
   appStatus: null,
+  deviceSelected: null,
   stepIndex: 0,
+  stepsDisabled: [],
+  stepsErrors: [],
 }
 
 class ReceiveModal extends PureComponent<Props, State> {
@@ -45,16 +67,44 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   _steps = GET_STEPS(this.props.t)
 
-  canNext = acc => {
-    const { stepIndex } = this.state
+  canNext = () => {
+    const { account, stepIndex } = this.state
 
     if (stepIndex === 0) {
-      return acc !== null
+      return account !== null
     }
 
     if (stepIndex === 1) {
       const { deviceSelected, appStatus } = this.state
       return deviceSelected !== null && appStatus === 'success'
+    }
+
+    return false
+  }
+
+  canClose = () => {
+    const { stepIndex, addressVerified } = this.state
+
+    if (stepIndex === 2) {
+      return addressVerified === false
+    }
+
+    return true
+  }
+
+  canPrev = () => {
+    const { addressVerified, stepIndex } = this.state
+
+    if (stepIndex === 1) {
+      return true
+    }
+
+    if (stepIndex === 2) {
+      return addressVerified === false
+    }
+
+    if (stepIndex === 3) {
+      return true
     }
 
     return false
@@ -70,14 +120,78 @@ class ReceiveModal extends PureComponent<Props, State> {
     this.setState({ stepIndex: stepIndex + 1 })
   }
 
+  handlePrevStep = () => {
+    const { stepIndex } = this.state
+
+    let newStepIndex
+
+    switch (stepIndex) {
+      default:
+      case 1:
+        newStepIndex = 0
+        break
+
+      case 2:
+      case 3:
+        newStepIndex = 1
+        break
+    }
+
+    this.setState({
+      addressVerified: null,
+      appStatus: null,
+      deviceSelected: null,
+      stepIndex: newStepIndex,
+      stepsDisabled: [],
+      stepsErrors: [],
+    })
+  }
+
   handleChangeDevice = d => this.setState({ deviceSelected: d })
 
   handleChangeAccount = account => this.setState({ account })
 
   handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 
-  renderStep = acc => {
-    const { deviceSelected, stepIndex } = this.state
+  handleCheckAddress = isVerified => {
+    this.setState({
+      addressVerified: isVerified,
+      stepsErrors: isVerified === false ? [2] : [],
+    })
+
+    if (isVerified === true) {
+      this.handleNextStep()
+    }
+  }
+
+  handleRetryCheckAddress = () =>
+    this.setState({
+      addressVerified: null,
+      stepsErrors: [],
+    })
+
+  handleChangeAmount = amount => this.setState({ amount })
+
+  handleBeforeOpenModal = ({ data }) => {
+    const { account } = this.state
+    if (data && data.account && !account) {
+      this.setState({
+        account: data.account,
+        stepIndex: 1,
+      })
+    }
+  }
+
+  handleSkipStep = () =>
+    this.setState({
+      addressVerified: false,
+      stepsErrors: [],
+      stepsDisabled: [1, 2],
+      stepIndex: this._steps.length - 1, // last step
+    })
+
+  renderStep = () => {
+    const { account, amount, addressVerified, deviceSelected, stepIndex } = this.state
     const { t } = this.props
     const step = this._steps[stepIndex]
     if (!step) {
@@ -89,67 +203,119 @@ class ReceiveModal extends PureComponent<Props, State> {
 
     const stepProps = {
       t,
-      account: acc,
+      account,
       ...props(stepIndex === 0, {
         onChangeAccount: this.handleChangeAccount,
       }),
       ...props(stepIndex === 1, {
-        accountName: acc ? acc.name : undefined,
+        accountName: account ? account.name : undefined,
         deviceSelected,
         onChangeDevice: this.handleChangeDevice,
         onStatusChange: this.handleChangeStatus,
+      }),
+      ...props(stepIndex === 2, {
+        addressVerified,
+        onCheck: this.handleCheckAddress,
+        device: deviceSelected,
+      }),
+      ...props(stepIndex === 3, {
+        addressVerified,
+        amount,
+        onChangeAmount: this.handleChangeAmount,
+        onVerify: this.handlePrevStep,
       }),
     }
 
     return <Comp {...stepProps} />
   }
 
-  renderButton = acc => {
+  renderButton = () => {
     const { t } = this.props
-    const { stepIndex } = this.state
+    const { stepIndex, addressVerified } = this.state
 
     let onClick
+    let props
 
     switch (stepIndex) {
+      case 2:
+        props = {
+          primary: true,
+          onClick: this.handleRetryCheckAddress,
+          children: t('common:retry'),
+        }
+        break
       default:
         onClick = this.handleNextStep
+        props = {
+          primary: true,
+          disabled: !this.canNext(),
+          onClick,
+          children: t('common:next'),
+        }
     }
 
-    const props = {
-      primary: true,
-      disabled: !this.canNext(acc),
-      onClick,
-      children: t('common:next'),
-    }
-
-    return <Button {...props} />
+    return (
+      <Fragment>
+        {stepIndex === 1 && (
+          <Button onClick={this.handleSkipStep} fontSize={4}>
+            {t('receive:steps.connectDevice.withoutDevice')}
+          </Button>
+        )}
+        {stepIndex === 2 &&
+          addressVerified === false && (
+            <Button fontSize={4}>{t('receive:steps.confirmAddress.support')}</Button>
+          )}
+        <Button {...props} />
+      </Fragment>
+    )
   }
 
   render() {
     const { t } = this.props
-    const { stepIndex, account } = this.state
+    const { stepsErrors, stepsDisabled, stepIndex } = this.state
+
+    const canClose = this.canClose()
+    const canPrev = this.canPrev()
 
     return (
       <Modal
         name={MODAL_RECEIVE}
+        onBeforeOpen={this.handleBeforeOpenModal}
         onHide={this.handleReset}
-        render={({ data, onClose }) => {
-          const acc = account || get(data, 'account', null)
-          return (
-            <ModalBody onClose={onClose} deferHeight={344}>
-              <ModalTitle>{t('receive:title')}</ModalTitle>
-              <ModalContent>
-                <Breadcrumb mb={6} currentStep={stepIndex} items={this._steps} />
-                {this.renderStep(acc)}
-              </ModalContent>
-              <ModalFooter>
-                <Box horizontal alignItems="center" justifyContent="flex-end">
-                  {this.renderButton(acc)}
-                </Box>
-              </ModalFooter>
-            </ModalBody>
-          )
-        }}
+        preventBackdropClick={!canClose}
+        render={({ onClose }) => (
+          <ModalBody onClose={canClose ? onClose : undefined}>
+            <ModalTitle>
+              {canPrev && (
+                <PrevButton onClick={this.handlePrevStep}>
+                  <Box horizontal alignItems="center">
+                    <IconAngleLeft size={16} />
+                    {t('common:back')}
+                  </Box>
+                </PrevButton>
+              )}
+              {t('receive:title')}
+            </ModalTitle>
+            <ModalContent>
+              <Breadcrumb
+                mb={5}
+                currentStep={stepIndex}
+                stepsErrors={stepsErrors}
+                stepsDisabled={stepsDisabled}
+                items={this._steps}
+              />
+              {this.renderStep()}
+            </ModalContent>
+            {stepIndex !== 3 &&
+              canClose && (
+                <ModalFooter>
+                  <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+                    {this.renderButton()}
+                  </Box>
+                </ModalFooter>
+              )}
+          </ModalBody>
+        )}
       />
     )
   }

@@ -10,7 +10,7 @@ import Label from 'components/base/Label'
 import SelectAccount from 'components/SelectAccount'
 
 type Props = {
-  account: Account | null,
+  account: ?Account,
   onChangeAccount: Function,
   t: T,
 }
