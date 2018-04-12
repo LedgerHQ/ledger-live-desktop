@@ -47,8 +47,8 @@ exports[`components FormattedVal shows sign 1`] = `
 
 exports[`components FormattedVal shows sign 2`] = `
 <span
-  className="s1c17x4y-0 fJKscS s8vzclq-0 gqakkd"
-  color="#fa4352"
+  className="s1c17x4y-0 fJKscS s8vzclq-0 hENkfw"
+  color="#ea2e49"
 >
   - 4
 </span>

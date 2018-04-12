@@ -3,7 +3,7 @@
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import chalk from 'chalk'
 import Websocket from 'ws'
-import qs from 'query-string'
+import qs from 'qs'
 import noop from 'lodash/noop'
 import type Transport from '@ledgerhq/hw-transport'
 

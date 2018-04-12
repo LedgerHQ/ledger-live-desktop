@@ -22,6 +22,10 @@ type State = {
 }
 
 class ModalBody extends PureComponent<Props, State> {
+  static defaultProps = {
+    onClose: undefined,
+  }
+
   state = {
     isHidden: true,
   }
@@ -58,6 +62,7 @@ const CloseContainer = styled(Box).attrs({
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 1;
 
   &:hover {
     color: ${p => p.theme.colors.grey};

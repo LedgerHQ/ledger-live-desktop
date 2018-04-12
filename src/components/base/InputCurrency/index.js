@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { parseCurrencyUnit, formatCurrencyUnit } from '@ledgerhq/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/currencies'
 
 import noop from 'lodash/noop'
 import isNaN from 'lodash/isNaN'
@@ -17,24 +17,12 @@ function parseValue(value) {
   return value.toString().replace(/,/g, '.')
 }
 
-function format(unit: Unit, value: Value) {
-  let v = value === '' ? 0 : Number(value)
-  v *= 10 ** unit.magnitude
-  return formatCurrencyUnit(unit, v, {
+function format(unit: Unit, value: number, { isFocused, showAllDigits }) {
+  return formatCurrencyUnit(unit, value, {
+    useGrouping: !isFocused,
     disableRounding: true,
-    showAllDigits: false,
+    showAllDigits: !!showAllDigits && !isFocused,
   })
-}
-
-function unformat(unit, value) {
-  if (value === 0 || value === '') {
-    return 0
-  }
-
-  let v = parseCurrencyUnit(unit, value.toString())
-  v /= 10 ** unit.magnitude
-
-  return v
 }
 
 const Currencies = styled(Box)`
@@ -50,19 +38,19 @@ const Currency = styled(Box).attrs({
   pr: 1,
 })``
 
-type Value = string | number
-
 type Props = {
   onChange: Function,
   renderRight: any,
   unit: Unit,
   units: Array<Unit>,
-  value: Value,
+  value: number,
+  showAllDigits?: boolean,
 }
 
 type State = {
-  isFocus: boolean,
-  value: Value,
+  unit: Unit,
+  isFocused: boolean,
+  displayValue: string,
 }
 
 class InputCurrency extends PureComponent<Props, State> {
@@ -71,25 +59,54 @@ class InputCurrency extends PureComponent<Props, State> {
     renderRight: null,
     units: [],
     value: 0,
+    showAllDigits: false,
   }
 
   state = {
-    isFocus: false,
-    value: this.props.value,
+    isFocused: false,
+    displayValue: '',
+    unit: this.props.unit,
+  }
+
+  componentDidMount() {
+    this.syncInput({ isFocused: false })
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (this.props.value !== nextProps.value) {
-      const { isFocus } = this.state
-      const value = isFocus ? nextProps.value : format(nextProps.unit, nextProps.value)
+    const { value, showAllDigits } = this.props
+    const { unit } = this.state
+    const needsToBeReformatted =
+      value !== nextProps.value || showAllDigits !== nextProps.showAllDigits
+    if (needsToBeReformatted) {
+      const { isFocused } = this.state
       this.setState({
-        value,
+        displayValue:
+          nextProps.value === 0
+            ? ''
+            : format(unit, nextProps.value, {
+                isFocused,
+                showAllDigits: nextProps.showAllDigits,
+              }),
       })
     }
   }
 
-  handleChange = (v: Value) => {
+  handleChange = (v: string) => {
     v = parseValue(v)
+
+    // allow to type directly `.` in input to have `0.`
+    if (v.startsWith('.')) {
+      v = `0${v}`
+    }
+
+    // forbid multiple 0 at start
+    if (v === '' || v.startsWith('00')) {
+      const { onChange } = this.props
+      const { unit } = this.state
+      onChange(0, unit)
+      this.setState({ displayValue: '' })
+      return
+    }
 
     // Check if value is valid Number
     if (isNaN(Number(v))) {
@@ -97,44 +114,35 @@ class InputCurrency extends PureComponent<Props, State> {
     }
 
     this.emitOnChange(v)
+    this.setState({ displayValue: v || '' })
+  }
+
+  handleBlur = () => this.syncInput({ isFocused: false })
+  handleFocus = () => this.syncInput({ isFocused: true })
+
+  syncInput = ({ isFocused }: { isFocused: boolean }) => {
+    const { value, showAllDigits } = this.props
+    const { unit } = this.state
     this.setState({
-      value: v,
+      isFocused,
+      displayValue:
+        value === '' || value === 0 ? '' : format(unit, value, { isFocused, showAllDigits }),
     })
   }
 
-  handleBlur = () => {
-    const { unit } = this.props
-    const { value } = this.state
+  emitOnChange = (v: string) => {
+    const { onChange } = this.props
+    const { displayValue, unit } = this.state
 
-    const v = format(unit, value)
-
-    this.setState({
-      isFocus: false,
-      value: v,
-    })
-  }
-
-  handleFocus = () => {
-    const { unit } = this.props
-
-    this.setState(prev => ({
-      isFocus: true,
-      value: unformat(unit, prev.value),
-    }))
-  }
-
-  emitOnChange = (v: Value) => {
-    const { onChange, unit } = this.props
-    const { value } = this.state
-
-    if (value.toString() !== v.toString()) {
-      onChange(v.toString(), unit)
+    if (displayValue.toString() !== v.toString()) {
+      const satoshiValue = Number(v) * 10 ** unit.magnitude
+      onChange(satoshiValue, unit)
     }
   }
 
   renderListUnits = () => {
-    const { unit, units, onChange } = this.props
-    const { value } = this.state
+    const { units, value, showAllDigits } = this.props
+    const { unit, isFocused } = this.state
 
     if (units.length <= 1) {
       return null
@@ -146,29 +154,36 @@ class InputCurrency extends PureComponent<Props, State> {
           bg="lightGraphite"
           keyProp="code"
           flatLeft
-          onChange={item => onChange(unformat(item, value), item)}
+          onChange={item => {
+            this.setState({
+              unit: item,
+              displayValue: format(item, value, { isFocused: false, showAllDigits }),
+            })
+          }}
           items={units}
           value={unit}
           renderItem={item => item.code}
           renderSelected={item => <Currency>{item.code}</Currency>}
+          fakeFocusRight={isFocused}
         />
       </Currencies>
     )
   }
 
   render() {
-    const { renderRight } = this.props
-    const { value } = this.state
+    const { renderRight, showAllDigits } = this.props
+    const { displayValue, unit } = this.state
 
     return (
       <Input
         {...this.props}
         ff="Rubik"
-        value={value}
+        value={displayValue}
         onChange={this.handleChange}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         renderRight={renderRight || this.renderListUnits()}
+        placeholder={format(unit, 0, { isFocused: false, showAllDigits })}
       />
     )
   }

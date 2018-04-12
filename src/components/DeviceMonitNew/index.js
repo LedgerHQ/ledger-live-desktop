@@ -14,29 +14,28 @@ const mapStateToProps = state => ({
   devices: getDevices(state),
 })
 
-type DeviceStatus =
-  | 'unconnected'
-  | 'connected'
-  | 'appOpened.success'
-  | 'appOpened.fail'
-  | 'appOpened.progress'
+type DeviceStatus = 'unconnected' | 'connected'
+
+type AppStatus = 'success' | 'fail' | 'progress'
 
 type Props = {
   coinType: number,
   devices: Devices,
   deviceSelected: Device | null,
   account?: Account,
-  onStatusChange?: DeviceStatus => void,
+  onStatusChange?: (DeviceStatus, AppStatus) => void,
   render?: Function,
 }
 
 type State = {
-  status: DeviceStatus,
+  deviceStatus: DeviceStatus,
+  appStatus: AppStatus,
 }
 
 class DeviceMonit extends PureComponent<Props, State> {
   state = {
-    status: this.props.deviceSelected ? 'connected' : 'unconnected',
+    appStatus: 'progress',
+    deviceStatus: this.props.deviceSelected ? 'connected' : 'unconnected',
   }
 
   componentDidMount() {
@@ -47,19 +46,18 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { status } = this.state
+    const { deviceStatus } = this.state
     const { deviceSelected, devices } = this.props
     const { devices: nextDevices, deviceSelected: nextDeviceSelected } = nextProps
 
-    if (status === 'unconnected' && !deviceSelected && nextDeviceSelected) {
-      this.handleStatusChange('connected')
+    if (deviceStatus === 'unconnected' && !deviceSelected && nextDeviceSelected) {
+      this.handleStatusChange('connected', 'progress')
     }
 
-    if (status !== 'unconnected' && devices !== nextDevices) {
+    if (deviceStatus !== 'unconnected' && devices !== nextDevices) {
       const isConnected = nextDevices.find(d => d === nextDeviceSelected)
       if (!isConnected) {
-        this.handleStatusChange('unconnected')
-        clearTimeout(this._timeout)
+        this.handleStatusChange('unconnected', 'progress')
       }
     }
   }
@@ -69,7 +67,7 @@ class DeviceMonit extends PureComponent<Props, State> {
     const { deviceSelected: prevDeviceSelected } = prevProps
 
     if (prevDeviceSelected !== deviceSelected) {
-      this.handleStatusChange('appOpened.progress')
+      this.handleStatusChange('connected', 'progress')
       this._timeout = setTimeout(this.checkAppOpened, 250)
     }
   }
@@ -88,7 +86,7 @@ class DeviceMonit extends PureComponent<Props, State> {
 
     let options = null
 
-    if (account && account.currency) {
+    if (account) {
       options = {
         accountPath: account.path,
         accountAddress: account.address,
@@ -109,13 +107,15 @@ class DeviceMonit extends PureComponent<Props, State> {
 
   _timeout: any = null
 
-  handleStatusChange = status => {
+  handleStatusChange = (deviceStatus, appStatus) => {
     const { onStatusChange } = this.props
-    this.setState({ status })
-    onStatusChange && onStatusChange(status)
+    clearTimeout(this._timeout)
+    this.setState({ deviceStatus, appStatus })
+    onStatusChange && onStatusChange(deviceStatus, appStatus)
   }
 
   handleMsgEvent = (e, { type, data }) => {
+    const { deviceStatus } = this.state
     const { deviceSelected } = this.props
 
     if (deviceSelected === null) {
@@ -123,25 +123,27 @@ class DeviceMonit extends PureComponent<Props, State> {
     }
 
     if (type === 'wallet.checkIfAppOpened.success' && deviceSelected.path === data.devicePath) {
-      clearTimeout(this._timeout)
-      this.handleStatusChange('appOpened.success')
+      this.handleStatusChange(deviceStatus, 'success')
+      this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
 
     if (type === 'wallet.checkIfAppOpened.fail' && deviceSelected.path === data.devicePath) {
-      this.handleStatusChange('appOpened.fail')
+      this.handleStatusChange(deviceStatus, 'fail')
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
   }
 
   render() {
-    const { status } = this.state
-    const { devices, deviceSelected, render } = this.props
+    const { coinType, account, devices, deviceSelected, render } = this.props
+    const { appStatus, deviceStatus } = this.state
 
     if (render) {
       return render({
-        status,
+        appStatus,
+        coinType: account ? account.coinType : coinType,
         devices,
-        deviceSelected: status === 'connected' ? deviceSelected : null,
+        deviceSelected: deviceStatus === 'connected' ? deviceSelected : null,
+        deviceStatus,
       })
     }
 

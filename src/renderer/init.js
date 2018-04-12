@@ -5,6 +5,7 @@ import { remote } from 'electron'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
+import moment from 'moment'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
@@ -16,6 +17,7 @@ import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
 
 import db from 'helpers/db'
+import dbMiddleware from 'middlewares/db'
 
 import App from 'components/App'
 
@@ -26,7 +28,7 @@ db.init('settings', {})
 db.init('counterValues', {})
 
 const history = createHistory()
-const store = createStore(history)
+const store = createStore({ history, dbMiddleware })
 const rootNode = document.getElementById('app')
 
 store.dispatch(fetchSettings())
@@ -35,6 +37,8 @@ store.dispatch(initCounterValues())
 const state = store.getState() || {}
 const language = getLanguage(state)
 const locked = isLocked(state)
+
+moment.locale(language)
 
 function r(Comp) {
   if (rootNode) {

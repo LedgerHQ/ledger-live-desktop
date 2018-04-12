@@ -1,10 +1,14 @@
 // @flow
 
-import { app, BrowserWindow, Menu, screen } from 'electron'
+import { app, BrowserWindow, Menu, screen, TouchBar, ipcMain } from 'electron'
 import debounce from 'lodash/debounce'
 
 import menu from 'main/menu'
 import db from 'helpers/db'
+
+import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
+
+const { TouchBarButton, TouchBarGroup, TouchBarLabel } = TouchBar
 
 // necessary to prevent win from being garbage collected
 let mainWindow = null
@@ -59,6 +63,70 @@ const saveWindowSettings = window => {
       db.setIn('settings', `window.${window.name}.positions`, { x, y })
     }, 100),
   )
+}
+
+function configureTouchBar(w) {
+  const defaultItems = [
+    new TouchBarButton({
+      label: 'Send funds',
+      click: () =>
+        w.webContents.send('msg', {
+          type: 'dispatch',
+          data: { type: 'MODAL_OPEN', payload: { name: MODAL_SEND } },
+        }),
+    }),
+    new TouchBarButton({
+      label: 'Receive funds',
+      click: () =>
+        w.webContents.send('msg', {
+          type: 'dispatch',
+          data: { type: 'MODAL_OPEN', payload: { name: MODAL_RECEIVE } },
+        }),
+    }),
+  ]
+
+  w.setTouchBar(new TouchBar(defaultItems))
+
+  ipcMain.on('touch-bar-update', (e, d) => {
+    if (d.clear) {
+      w.setTouchBar(new TouchBar(defaultItems))
+      return
+    }
+
+    const items = [
+      new TouchBarLabel({
+        textColor: d.color,
+        label: d.text,
+      }),
+    ]
+
+    if (d.balance.currency) {
+      items.push(
+        new TouchBarLabel({
+          textColor: d.color,
+          label: d.balance.currency,
+        }),
+      )
+    }
+
+    if (d.balance.counterValue) {
+      items.push(
+        new TouchBarLabel({
+          textColor: d.color,
+          label: d.balance.counterValue,
+        }),
+      )
+    }
+
+    w.setTouchBar(
+      new TouchBar([
+        ...defaultItems,
+        new TouchBarGroup({
+          items,
+        }),
+      ]),
+    )
+  })
 }
 
 const defaultWindowOptions = {
@@ -129,6 +197,10 @@ function createMainWindow() {
     })
   })
 
+  if (process.platform === 'darwin') {
+    configureTouchBar(window)
+  }
+
   return window
 }
 
@@ -169,9 +241,7 @@ function createDevWindow() {
 
   window.on('close', handleCloseWindow(window))
 
-  window.on('ready-to-show', () => {
-    window.show()
-  })
+  window.on('ready-to-show', () => window.show())
 
   // Don't want to use HTML <title>
   window.on('page-title-updated', e => e.preventDefault())

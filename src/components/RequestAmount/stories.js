@@ -1,33 +1,44 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
+import { text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
-import { number } from '@storybook/addon-knobs'
-import { translate } from 'react-i18next'
 
 import { accounts } from 'components/SelectAccount/stories'
 
-import { RequestAmount } from 'components/RequestAmount'
+import RequestAmount from 'components/RequestAmount'
 
 const stories = storiesOf('Components', module)
 
-const props = {
-  counterValue: 'USD',
-  lastCounterValue: 9177.69,
-  account: accounts[0],
+type State = {
+  value: number,
 }
 
-const RequestAmountComp = translate()(RequestAmount)
+class Wrapper extends PureComponent<any, State> {
+  state = {
+    value: 3e8,
+  }
+  handleChange = value => {
+    action('onChange')(value)
+    this.setState({ value })
+  }
+  render() {
+    const { max, withMax } = this.props
+    const { value } = this.state
+    return (
+      <RequestAmount
+        account={accounts[0]}
+        counterValue="USD"
+        max={max}
+        onChange={this.handleChange}
+        value={value}
+        withMax={withMax}
+      />
+    )
+  }
+}
 
 stories.add('RequestAmount', () => (
-  <RequestAmountComp
-    {...props}
-    t={k => k}
-    onChange={action('onChange')}
-    value={{
-      left: number('left value', 0),
-      right: number('right value', 0),
-    }}
-  />
+  <Wrapper withMax={boolean('withMax', true)} max={Number(text('max', '4e8'))} />
 ))

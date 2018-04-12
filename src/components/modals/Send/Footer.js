@@ -8,6 +8,7 @@ import type { T } from 'types/common'
 import { ModalFooter } from 'components/base/Modal'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
+import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
@@ -15,13 +16,13 @@ import Text from 'components/base/Text'
 type Props = {
   t: T,
   account: Account,
-  amount: { left: number, right: number },
+  amount: number,
+  fees: number,
   onNext: Function,
   canNext: boolean,
-  counterValue: string,
 }
 
-function Footer({ account, amount, t, onNext, canNext, counterValue }: Props) {
+function Footer({ account, amount, fees, t, onNext, canNext }: Props) {
   return (
     <ModalFooter horizontal alignItems="center">
       <Box grow>
@@ -30,7 +31,7 @@ function Footer({ account, amount, t, onNext, canNext, counterValue }: Props) {
           <FormattedVal
             disableRounding
             color="dark"
-            val={amount.left}
+            val={amount + fees}
             unit={account.unit}
             showCode
           />
@@ -38,12 +39,12 @@ function Footer({ account, amount, t, onNext, canNext, counterValue }: Props) {
             <Text ff="Rubik" fontSize={3}>
               {'('}
             </Text>
-            <FormattedVal
+            <CounterValue
+              ticker={account.currency.units[0].code}
+              value={amount + fees}
               disableRounding
               color="grey"
               fontSize={3}
-              val={amount.right}
-              fiat={counterValue}
               showCode
             />
             <Text ff="Rubik" fontSize={3}>

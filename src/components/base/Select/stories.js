@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import { storiesOf } from '@storybook/react'
+import { boolean } from '@storybook/addon-knobs'
 
 import Box from 'components/base/Box'
 import Select from 'components/base/Select'
@@ -57,6 +58,7 @@ stories.add('basic', () => (
   <Wrapper>
     {onChange => (
       <Select
+        disabled={boolean('disabled', false)}
         placeholder="Choose a chess player..."
         items={itemsChessPlayers}
         renderSelected={item => item.name}

@@ -14,12 +14,12 @@ import Search from 'components/base/Search'
 import Text from 'components/base/Text'
 
 import IconCheck from 'icons/Check'
-import IconAngleDown from 'icons/AngleDown'
 
 type Props = {
   bg?: string,
   flatLeft?: boolean,
   flatRight?: boolean,
+  fakeFocusRight?: boolean,
   fuseOptions?: Object,
   highlight?: boolean,
   items: Array<any>,
@@ -33,32 +33,52 @@ type Props = {
   renderSelected?: any => Element<*>,
   searchable?: boolean,
   value?: Object | null,
+  disabled: boolean,
 }
 
 const Container = styled(Box).attrs({ relative: true, color: 'graphite' })``
 
 const TriggerBtn = styled(Box).attrs({
+  alignItems: 'center',
   ff: 'Open Sans|SemiBold',
+  flow: 2,
   fontSize: 4,
-  pl: 3,
-  pr: 5,
+  horizontal: true,
+  px: 3,
 })`
   ${space};
   height: 40px;
-  background: ${p => p.bg || p.theme.colors.white};
+  background: ${p => (p.disabled ? p.theme.colors.lightGrey : p.bg || p.theme.colors.white)};
   border-bottom-left-radius: ${p => (p.flatLeft ? 0 : p.theme.radii[1])}px;
   border-bottom-right-radius: ${p => (p.flatRight ? 0 : p.theme.radii[1])}px;
   border-top-left-radius: ${p => (p.flatLeft ? 0 : p.theme.radii[1])}px;
   border-top-right-radius: ${p => (p.flatRight ? 0 : p.theme.radii[1])}px;
   border: 1px solid ${p => p.theme.colors.fog};
   color: ${p => p.theme.colors.graphite};
-  cursor: pointer;
+  cursor: ${p => (p.disabled ? 'cursor' : 'pointer')};
   display: flex;
   width: 100%;
+
   &:focus {
     outline: none;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;
+    ${p =>
+      p.disabled
+        ? ''
+        : `
+    border-color: ${p.theme.colors.wallet};
+    box-shadow: rgba(0, 0, 0, 0.05) 0 2px 2px;`};
   }
+
+  ${p => {
+    const c = p.theme.colors.wallet
+    return p.fakeFocusRight
+      ? `
+    border-top: 1px solid ${c};
+    border-right: 1px solid ${c};
+    border-bottom: 1px solid ${c};
+  `
+      : ''
+  }};
 `
 
 const Item = styled(Box).attrs({
@@ -97,22 +117,6 @@ const Dropdown = styled(Box).attrs({
   z-index: 1;
 `
 
-const FloatingDown = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-  mr: 2,
-})`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  color: ${p => p.theme.colors.grey};
-
-  // to "simulate" border to make arrows appears at the exact same place as
-  // the no-input version
-  padding-right: 1px;
-`
-
 const IconSelected = styled(Box).attrs({
   color: 'wallet',
   alignItems: 'center',
@@ -123,9 +127,29 @@ const IconSelected = styled(Box).attrs({
   opacity: ${p => (p.selected ? 1 : 0)};
 `
 
+const AngleDown = props => (
+  <Box color="grey" alignItems="center" justifyContent="center" {...props}>
+    <svg viewBox="0 0 16 16" width="16" height="16">
+      <path
+        fill="currentColor"
+        d="M7.70785815 10.86875l-5.08670521-4.5875c-.16153725-.146875-.16153725-.384375 0-.53125l.68051867-.61875c.16153726-.146875.42274645-.146875.58428371 0L8 8.834375l4.1140447-3.703125c.1615372-.146875.4227464-.146875.5842837 0l.6805187.61875c.1615372.146875.1615372.384375 0 .53125l-5.08670525 4.5875c-.16153726.146875-.42274644.146875-.5842837 0z"
+      />
+    </svg>
+  </Box>
+)
+
+const renderSelectedItem = ({ selectedItem, renderSelected, placeholder }: any) =>
+  selectedItem && renderSelected ? (
+    renderSelected(selectedItem)
+  ) : (
+    <Text color="fog">{placeholder}</Text>
+  )
+
 class Select extends PureComponent<Props> {
   static defaultProps = {
     bg: undefined,
+    disabled: false,
+    fakeFocusRight: false,
     flatLeft: false,
     flatRight: false,
     itemToString: (item: Object) => item && item.name,
@@ -213,17 +237,19 @@ class Select extends PureComponent<Props> {
 
   render() {
     const {
+      disabled,
+      fakeFocusRight,
       flatLeft,
       flatRight,
-      items,
-      searchable,
-      itemToString,
       fuseOptions,
       highlight,
+      items,
+      itemToString,
+      onChange,
+      placeholder,
       renderHighlight,
       renderSelected,
-      placeholder,
-      onChange,
+      searchable,
       value,
       ...props
     } = this.props
@@ -247,41 +273,46 @@ class Select extends PureComponent<Props> {
             this._scrollToSelectedItem = true
           }
 
+          if (disabled) {
+            return (
+              <Container {...getRootProps({ refKey: 'innerRef' })}>
+                <TriggerBtn disabled bg={props.bg} tabIndex={0}>
+                  {renderSelectedItem({ selectedItem, renderSelected, placeholder })}
+                </TriggerBtn>
+              </Container>
+            )
+          }
+
           return (
             <Container
               {...getRootProps({ refKey: 'innerRef' })}
               {...props}
+              horizontal
               onKeyDown={() => (this._useKeyboard = true)}
               onKeyUp={() => (this._useKeyboard = false)}
             >
               {searchable ? (
-                <Box relative>
-                  <Input keepEvent {...getInputProps({ placeholder })} onClick={openMenu} />
-                  <FloatingDown>
-                    <IconAngleDown size={16} />
-                  </FloatingDown>
+                <Box grow>
+                  <Input
+                    keepEvent
+                    {...getInputProps({ placeholder })}
+                    onClick={openMenu}
+                    renderRight={<AngleDown mr={2} />}
+                  />
                 </Box>
               ) : (
                 <TriggerBtn
                   {...getToggleButtonProps()}
                   bg={props.bg}
-                  alignItems="center"
+                  fakeFocusRight={fakeFocusRight}
                   flatLeft={flatLeft}
                   flatRight={flatRight}
-                  flow={2}
-                  horizontal
                   tabIndex={0}
                 >
                   <Box grow>
-                    {selectedItem && renderSelected ? (
-                      renderSelected(selectedItem)
-                    ) : (
-                      <Text color="fog">{placeholder}</Text>
-                    )}
+                    {renderSelectedItem({ selectedItem, renderSelected, placeholder })}
                   </Box>
-                  <FloatingDown>
-                    <IconAngleDown size={16} />
-                  </FloatingDown>
+                  <AngleDown mr={-1} />
                 </TriggerBtn>
               )}
               {isOpen &&

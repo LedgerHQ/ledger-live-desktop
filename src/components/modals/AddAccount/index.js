@@ -22,12 +22,12 @@ import { addAccount, updateAccount } from 'actions/accounts'
 import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
-import Button from 'components/base/Button'
 import Breadcrumb from 'components/Breadcrumb'
+import Button from 'components/base/Button'
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
+import StepConnectDevice from 'components/modals/StepConnectDevice'
 
 import StepCurrency from './01-step-currency'
-import StepConnectDevice from './02-step-connect-device'
 import StepImport from './03-step-import'
 
 const GET_STEPS = t => [
@@ -67,7 +67,7 @@ type State = {
   deviceSelected: Device | null,
   fetchingCounterValues: boolean,
   selectedAccounts: Array<number>,
-  status: null | string,
+  appStatus: null | string,
   stepIndex: number,
 }
 
@@ -77,7 +77,7 @@ const INITIAL_STATE = {
   deviceSelected: null,
   fetchingCounterValues: false,
   selectedAccounts: [],
-  status: null,
+  appStatus: null,
   stepIndex: 0,
 }
 
@@ -148,8 +148,8 @@ class AddAccountModal extends PureComponent<Props, State> {
     }
 
     if (stepIndex === 1) {
-      const { deviceSelected, status } = this.state
-      return deviceSelected !== null && status === 'appOpened.success'
+      const { deviceSelected, appStatus } = this.state
+      return deviceSelected !== null && appStatus === 'success'
     }
 
     if (stepIndex === 3) {
@@ -225,7 +225,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   handleChangeCurrency = (currency: Currency) => this.setState({ currency })
 
-  handleChangeStatus = status => this.setState({ status })
+  handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 
   handleImportAccount = () => {
     const { archivedAccounts, updateAccount } = this.props
@@ -362,7 +362,7 @@ class AddAccountModal extends PureComponent<Props, State> {
           <ModalBody onClose={onClose}>
             <ModalTitle>{t('addAccount:title')}</ModalTitle>
             <ModalContent>
-              <Breadcrumb mb={6} mt={2} currentStep={stepIndex} items={this._steps} />
+              <Breadcrumb mb={5} currentStep={stepIndex} items={this._steps} />
               {this.renderStep()}
             </ModalContent>
             {stepIndex !== 2 && (

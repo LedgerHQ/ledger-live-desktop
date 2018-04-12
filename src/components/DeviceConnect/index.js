@@ -29,7 +29,9 @@ const Step = styled(Box).attrs({
     ${p =>
       p.validated
         ? p.theme.colors.wallet
-        : p.hasErrors ? p.theme.colors.alertRed : p.theme.colors.fog};
+        : p.hasErrors
+          ? p.theme.colors.alertRed
+          : p.theme.colors.fog};
 `
 const StepIcon = styled(Box).attrs({
   alignItems: 'center',
@@ -197,8 +199,11 @@ class DeviceConnect extends PureComponent<Props> {
             </StepIcon>
             <Box grow shrink>
               <Trans i18nKey="deviceConnect:step1.connect" parent="div">
-                Connect your <strong>Ledger device</strong> to your computer and enter your{' '}
-                <strong>PIN code</strong> on your device
+                {'Connect your '}
+                <strong>Ledger device</strong>
+                {' to your computer and enter your '}
+                <strong>PIN code</strong>
+                {' on your device'}
               </Trans>
             </Box>
             <StepCheck checked={hasDevice} />
@@ -206,7 +211,7 @@ class DeviceConnect extends PureComponent<Props> {
           {hasMultipleDevices && (
             <ListDevices>
               <Box color="graphite" fontSize={3}>
-                {t('deviceConnect:step1.choose', { devicesCount: devices.length })}
+                {t('deviceConnect:step1.choose', { count: devices.length })}
               </Box>
               <Box flow={2}>
                 {devices.map(d => {
@@ -240,8 +245,9 @@ class DeviceConnect extends PureComponent<Props> {
             </StepIcon>
             <Box grow shrink>
               <Trans i18nKey="deviceConnect:step2.open" parent="div">
-                {/* $FlowFixMe */}
-                Open <strong>{{ appName }} App</strong> on your device
+                {'Open '}
+                <strong>{appName}</strong>
+                {' App on your device'}
               </Trans>
             </Box>
             <StepCheck checked={appState.success} hasErrors={appState.fail} />
@@ -254,8 +260,8 @@ class DeviceConnect extends PureComponent<Props> {
             </Box>
             <Box>
               <Trans i18nKey="deviceConnect:info" parent="div">
-                {/* $FlowFixMe */}
-                You must use the device associated to the account <strong>{{ accountName }}</strong>
+                {'You must use the device associated to the account '}
+                <strong>{accountName}</strong>
               </Trans>
             </Box>
           </Info>

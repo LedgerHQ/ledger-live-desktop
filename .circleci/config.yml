@@ -20,7 +20,7 @@ jobs:
           command: yarn flow-typed
       - run:
           name: Temporary remove broken flow definitions
-          command: rm flow-typed/npm/{react-redux_v5.x.x.js,redux_v3.x.x.js}
+          command: rm flow-typed/npm/{react-i18next_v7.x.x.js,react-redux_v5.x.x.js,redux_v3.x.x.js}
       - run:
           name: Lint
           command: yarn lint
@@ -30,12 +30,12 @@ jobs:
       - run:
           name: Test
           command: yarn test
-      - run:
-          name: Build
-          command: yarn dist:dir
-      - run:
-          name: Generate build stats
-          command: "du -h dist | sort -h > /tmp/build-stats.txt"
-      - store_artifacts:
-          path: /tmp/build-stats.txt
-          destination: build-stats.txt
+      # - run:
+      #     name: Build
+      #     command: yarn dist:dir
+      # - run:
+      #     name: Generate build stats
+      #     command: "du -h dist | sort -h > /tmp/build-stats.txt"
+      # - store_artifacts:
+      #     path: /tmp/build-stats.txt
+      #     destination: build-stats.txt

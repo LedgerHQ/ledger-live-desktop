@@ -29,4 +29,4 @@ export type SettingsMoney = {
 
 export type Settings = SettingsProfile & SettingsDisplay & SettingsMoney
 
-export type T = (string, ?Object) => string
+export type T = (?string, ?Object) => string

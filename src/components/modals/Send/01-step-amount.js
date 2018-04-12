@@ -3,7 +3,6 @@
 import React, { Fragment } from 'react'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
-import type { Unit } from '@ledgerhq/currencies'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
@@ -22,11 +21,8 @@ type PropsStepAmount = {
   account: Account | null,
   onChange: Function,
   recipientAddress: string,
-  amount: { left: number, right: number },
-  fees: {
-    value: number,
-    unit: Unit | null,
-  },
+  amount: number,
+  fees: number,
   isRBF: boolean,
   t: T,
 }
@@ -61,10 +57,10 @@ function StepAmount(props: PropsStepAmount) {
           <Box flow={1}>
             <Label>{t('send:steps.amount.amount')}</Label>
             <RequestAmount
-              max={account.balance - 0}
+              max={account.balance - fees}
               account={account}
               onChange={onChange('amount')}
-              value={amount.left}
+              value={amount}
             />
           </Box>
 
@@ -75,12 +71,7 @@ function StepAmount(props: PropsStepAmount) {
               <LabelInfoTooltip ml={1} text={t('send:steps.amount.fees')} />
             </Label>
             <Box horizontal flow={5}>
-              <Fees
-                amount={fees.value}
-                unit={fees.unit}
-                account={account}
-                onChange={(value, unit) => onChange('fees')({ value, unit })}
-              />
+              <Fees amount={fees} account={account} onChange={value => onChange('fees')(value)} />
             </Box>
           </Box>
 
@@ -121,11 +112,10 @@ type PropsFees = {
   account: Account,
   amount: number,
   onChange: Function,
-  unit: Unit | null,
 }
 
 function Fees(props: PropsFees) {
-  const { onChange, account, unit, amount } = props
+  const { onChange, account, amount } = props
   const { units } = account.currency
 
   return (
@@ -135,11 +125,11 @@ function Fees(props: PropsFees) {
         items={[{ key: 'custom', name: 'Custom' }]}
         value={{ key: 'custom', name: 'Custom' }}
         renderSelected={item => item.name}
-        onChange={() => onChange(amount, unit)}
+        onChange={() => onChange(amount)}
       />
       <InputCurrency
+        unit={units[0]}
         units={units}
-        unit={unit || units[0]}
         containerProps={{ grow: true }}
         value={amount}
         onChange={onChange}

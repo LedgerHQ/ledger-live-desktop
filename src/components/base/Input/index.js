@@ -3,7 +3,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { fontSize, space } from 'styled-system'
-
 import noop from 'lodash/noop'
 
 import fontFamily from 'styles/styled/fontFamily'
@@ -15,7 +14,7 @@ const Container = styled(Box).attrs({
 })`
   background: ${p => p.theme.colors.white};
   border-radius: ${p => p.theme.radii[1]}px;
-  border: 1px solid ${p => p.theme.colors.fog};
+  border: 1px solid ${p => (p.isFocus ? p.theme.colors.wallet : p.theme.colors.fog)};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: 40px;
 `

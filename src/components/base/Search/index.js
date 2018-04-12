@@ -39,18 +39,18 @@ class Search extends PureComponent<Props, State> {
     this.initFuse(this.props)
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.value !== this.props.value) {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.value !== this.props.value) {
       if (this._fuse) {
-        const results = this._fuse.search(nextProps.value)
-        this.formatResults(results, nextProps)
+        const results = this._fuse.search(this.props.value)
+        this.formatResults(results, this.props)
       }
     }
-    if (nextProps.highlight !== this.props.highlight) {
-      this.initFuse(nextProps)
+    if (prevProps.highlight !== this.props.highlight) {
+      this.initFuse(this.props)
     }
-    if (nextProps.items !== this.props.items) {
-      this.initFuse(nextProps)
+    if (prevProps.items !== this.props.items) {
+      this.initFuse(this.props)
     }
   }
 

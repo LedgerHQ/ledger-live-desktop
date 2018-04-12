@@ -1,10 +1,14 @@
 // @flow
 
 import { PureComponent } from 'react'
-import { remote } from 'electron'
-import queryString from 'query-string'
+import qs from 'qs'
 
-const { BrowserWindow } = remote
+let BrowserWindow = null
+
+if (!process.env.STORYBOOK_ENV) {
+  const { remote } = require('electron')
+  BrowserWindow = remote.BrowserWindow // eslint-disable-line
+}
 
 type Props = {
   render: Function,
@@ -21,6 +25,10 @@ class Print extends PureComponent<Props, State> {
   }
 
   handlePrint = () => {
+    if (BrowserWindow === null) {
+      return
+    }
+
     const { data } = this.props
 
     this.setState({ isLoading: true })
@@ -33,22 +41,18 @@ class Print extends PureComponent<Props, State> {
       },
     })
 
-    w.webContents.openDevTools()
-
     const url = __DEV__
       ? `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT || ''}`
       : `file://${__dirname}/index.html`
 
-    w.loadURL(`${url}/#/print?${queryString.stringify(data)}`)
+    w.loadURL(`${url}/#/print?${qs.stringify(data)}`)
 
-    w.webContents.on('did-finish-load', () => {
-      w.on('minimize', () => {
-        w.webContents.print({}, () => {
-          w.destroy()
-          this.setState({ isLoading: false })
-        })
-      })
-    })
+    w.webContents.on('did-finish-load', () =>
+      w.on('print-ready', () => {
+        w.webContents.print({}, () => w.destroy())
+        this.setState({ isLoading: false })
+      }),
+    )
   }
 
   render() {
