@@ -85,7 +85,7 @@ function configureTouchBar(w) {
     }),
   ]
 
-  ipcMain.on('touch-bar-init', () => w.setTouchBar(new TouchBar(defaultItems)))
+  w.setTouchBar(new TouchBar(defaultItems))
 
   ipcMain.on('touch-bar-update', (e, d) => {
     if (d.clear) {

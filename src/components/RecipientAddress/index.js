@@ -28,6 +28,7 @@ const WrapperQrCode = styled(Box)`
   position: absolute;
   right: 0;
   top: 100%;
+  z-index: 2;
 `
 
 type Props = {
