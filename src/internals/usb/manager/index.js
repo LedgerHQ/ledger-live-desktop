@@ -18,7 +18,7 @@
 
 import type { IPCSend } from 'types/electron'
 import axios from 'axios'
-import { createTransportHandler, installApp, uninstallApp } from './helpers'
+import { createTransportHandler, installApp, uninstallApp, getMemInfos } from './helpers'
 
 export default (send: IPCSend) => ({
   installApp: createTransportHandler(send, {
@@ -31,6 +31,12 @@ export default (send: IPCSend) => ({
     action: uninstallApp,
     successResponse: 'device.appUninstalled',
     errorResponse: 'device.appUninstallError',
+  }),
+
+  getMemInfos: createTransportHandler(send, {
+    action: getMemInfos,
+    successResponse: 'device.getMemInfosSuccess',
+    errorResponse: 'device.getMemInfosError',
   }),
 
   listApps: async () => {

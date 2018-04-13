@@ -1,171 +1,67 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
 
-import type { Device } from 'types/common'
+import type { Device, T } from 'types/common'
 
-import { runJob } from 'renderer/events'
-import { getCurrentDevice } from 'reducers/devices'
+import { getCurrentDevice, getDevices } from 'reducers/devices'
 
-import DeviceMonit from 'components/DeviceMonit'
 import Box from 'components/base/Box'
-import Modal, { ModalBody } from 'components/base/Modal'
+import Pills from 'components/base/Pills'
 
-import ManagerApp from './ManagerApp'
-
-const ICONS_FALLBACK = {
-  bitcoin_testnet: 'bitcoin',
-}
-
-const List = styled(Box).attrs({
-  horizontal: true,
-  m: -2,
-})`
-  flex-wrap: wrap;
-`
+import AppsList from './AppsList'
+import DeviceInfos from './DeviceInfos'
 
 const mapStateToProps = state => ({
   device: getCurrentDevice(state),
+  nbDevices: getDevices(state).length,
 })
 
+const TABS = [{ key: 'apps', value: 'apps' }, { key: 'device', value: 'device' }]
+
 type Props = {
+  t: T,
   device: Device,
-}
-
-type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
-
-type LedgerApp = {
-  name: string,
-  icon: string,
-  app: Object,
+  nbDevices: number,
 }
 
 type State = {
-  status: Status,
-  error: string | null,
-  appsList: LedgerApp[],
+  currentTab: 'apps' | 'device',
 }
 
 class ManagerPage extends PureComponent<Props, State> {
   state = {
-    status: 'loading',
-    error: null,
-    appsList: [],
+    currentTab: 'device',
   }
 
-  componentDidMount() {
-    this.fetchList()
-  }
-
-  componentWillUnmount() {
-    this._unmounted = true
-  }
-
-  _unmounted = false
-
-  async fetchList() {
-    const appsList = await runJob({
-      channel: 'usb',
-      job: 'manager.listApps',
-      successResponse: 'manager.listAppsSuccess',
-      errorResponse: 'manager.listAppsError',
-    })
-    if (!this._unmounted) {
-      this.setState({ appsList, status: 'idle' })
-    }
-  }
-
-  createDeviceJobHandler = options => ({ app: appParams }) => async () => {
-    this.setState({ status: 'busy' })
-    try {
-      const { job, successResponse, errorResponse } = options
-      const {
-        device: { path: devicePath },
-      } = this.props
-      const data = { appParams, devicePath }
-      await runJob({ channel: 'usb', job, successResponse, errorResponse, data })
-      this.setState({ status: 'success' })
-    } catch (err) {
-      this.setState({ status: 'error', error: err.message })
-    }
-  }
-
-  handleInstall = this.createDeviceJobHandler({
-    job: 'manager.installApp',
-    successResponse: 'device.appInstalled',
-    errorResponse: 'device.appInstallError',
-  })
-
-  handleUninstall = this.createDeviceJobHandler({
-    job: 'manager.uninstallApp',
-    successResponse: 'device.appUninstalled',
-    errorResponse: 'device.appUninstallError',
-  })
-
-  handleCloseModal = () => this.setState({ status: 'idle' })
-
-  renderList = () => (
-    <List>
-      {this.state.appsList.map(c => (
-        <ManagerApp
-          key={c.name}
-          name={c.name}
-          icon={ICONS_FALLBACK[c.icon] || c.icon}
-          onInstall={this.handleInstall(c)}
-          onUninstall={this.handleUninstall(c)}
-        />
-      ))}
-    </List>
-  )
+  handleTabChange = t => this.setState({ currentTab: t.value })
 
   render() {
-    const { status, error } = this.state
+    const { device, t, nbDevices } = this.props
+    const { currentTab } = this.state
+    if (!device) {
+      return 'eu... connecte ton device?'
+    }
+    const tabs = TABS.map(i => {
+      let label = t(`manager:tabs.${i.key}`)
+      if (i.key === 'device') {
+        label += ` (${nbDevices})`
+      }
+      return { ...i, label }
+    })
     return (
-      <DeviceMonit
-        render={deviceStatus => (
-          <Box>
-            {deviceStatus === 'unconnected' && (
-              <Box style={{ height: 500 }} align="center" justify="center">
-                <Box fontSize={8}>{'Connect your device'}</Box>
-              </Box>
-            )}
-            {deviceStatus === 'connected' && (
-              <Box>
-                {status === 'loading' ? (
-                  <Box ff="Museo Sans|Bold">{'Loading app list...'}</Box>
-                ) : (
-                  this.renderList()
-                )}
-              </Box>
-            )}
-            <Modal
-              isOpened={status !== 'idle' && status !== 'loading'}
-              render={() => (
-                <ModalBody p={6} align="center" justify="center" style={{ height: 300 }}>
-                  {status === 'busy' ? (
-                    <Box>{'Loading...'}</Box>
-                  ) : status === 'error' ? (
-                    <Box>
-                      <div>{'error happened'}</div>
-                      {error}
-                      <button onClick={this.handleCloseModal}>close</button>
-                    </Box>
-                  ) : status === 'success' ? (
-                    <Box>
-                      {'success'}
-                      <button onClick={this.handleCloseModal}>close</button>
-                    </Box>
-                  ) : null}
-                </ModalBody>
-              )}
-            />
+      <Fragment>
+        <Pills items={tabs} activeKey={currentTab} onChange={this.handleTabChange} mb={6} />
+        {currentTab === 'apps' && <AppsList device={device} />}
+        {currentTab === 'device' && (
+          <Box flow={4}>
+            <DeviceInfos device={device} />
           </Box>
         )}
-      />
+      </Fragment>
     )
   }
 }
