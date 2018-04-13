@@ -23,8 +23,16 @@ currencies:
   explorer: Blockchain explorer
   explorerDesc: Lorem ipsum dolor sit amet
 profile:
-  protectWithPassword: Protect local data with a password
+  username: Username
+  usernameDesc: Lorem ipsum dolor sit amet
   password: Password
+  passwordDesc: Lorem ipsum dolor sit amet
+  sync: Sync accounts
+  syncDesc: Lorem ipsum dolor sit amet
+  export: Export logs
+  exportDesc: Lorem ipsum dolor sit amet
+  reset: Reset application
+  resetDesc: Lorem ipsum dolor sit amet
 about:
   faq: FAQ
   faqDesc: Lorem ipsum dolor sit amet

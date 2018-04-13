@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import moment from 'moment'
+import { listFiats } from '@ledgerhq/currencies'
 
 import type { Settings, T } from 'types/common'
 
@@ -15,6 +16,12 @@ import {
   SettingsSectionRow as Row,
 } from '../SettingsSection'
 
+const fiats = listFiats().map(fiat => ({
+  key: fiat.code,
+  fiat,
+  name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
+}))
+
 type Props = {
   t: T,
   settings: Settings,
@@ -24,11 +31,13 @@ type Props = {
 
 type State = {
   cachedLanguageKey: string,
+  cachedCounterValue: ?string,
 }
 
 class TabProfile extends PureComponent<Props, State> {
   state = {
     cachedLanguageKey: this.props.settings.language,
+    cachedCounterValue: fiats.find(fiat => fiat.fiat.code === this.props.settings.counterValue),
   }
 
   getDatas() {
@@ -36,6 +45,14 @@ class TabProfile extends PureComponent<Props, State> {
     return {
       languages: [{ key: 'en', name: t('language:en') }, { key: 'fr', name: t('language:fr') }],
     }
+  }
+
+  handleChangeCounterValue = item => {
+    const { saveSettings } = this.props
+    this.setState({ cachedCounterValue: item.fiat })
+    window.requestIdleCallback(() => {
+      saveSettings({ counterValue: item.fiat.code })
+    })
   }
 
   handleChangeLanguage = (languageKey: string) => {
@@ -50,7 +67,7 @@ class TabProfile extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { cachedLanguageKey } = this.state
+    const { cachedLanguageKey, cachedCounterValue } = this.state
     const { languages } = this.getDatas()
     const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
 
@@ -66,7 +83,17 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('settings:display.counterValue')}
             desc={t('settings:display.counterValueDesc')}
           >
-            {'-'}
+            <Select
+              searchable
+              fuseOptions={{ keys: ['name'] }}
+              style={{ minWidth: 250 }}
+              small
+              onChange={item => this.handleChangeCounterValue(item)}
+              itemToString={item => (item ? item.name : '')}
+              renderSelected={item => item && item.name}
+              items={fiats}
+              value={cachedCounterValue}
+            />
           </Row>
           <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
             <Select

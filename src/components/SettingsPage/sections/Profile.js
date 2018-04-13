@@ -44,8 +44,20 @@ class TabProfile extends PureComponent<Props, State> {
           desc="Lorem ipsum dolor sit amet"
         />
         <Body>
-          <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
-            noetuhnoeth
+          <Row title={t('settings:profile.username')} desc={t('settings:profile.usernameDesc')}>
+            {'-'}
+          </Row>
+          <Row title={t('settings:profile.password')} desc={t('settings:profile.passwordDesc')}>
+            {'-'}
+          </Row>
+          <Row title={t('settings:profile.sync')} desc={t('settings:profile.syncDesc')}>
+            {'-'}
+          </Row>
+          <Row title={t('settings:profile.export')} desc={t('settings:profile.exportDesc')}>
+            {'-'}
+          </Row>
+          <Row title={t('settings:profile.reset')} desc={t('settings:profile.resetDesc')}>
+            {'-'}
           </Row>
         </Body>
       </Section>

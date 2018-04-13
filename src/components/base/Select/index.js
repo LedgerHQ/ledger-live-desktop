@@ -297,10 +297,11 @@ class Select extends PureComponent<Props> {
               {searchable ? (
                 <Box grow>
                   <Input
+                    small
                     keepEvent
-                    {...getInputProps({ placeholder })}
                     onClick={openMenu}
                     renderRight={<AngleDown mr={2} />}
+                    {...getInputProps({ placeholder })}
                   />
                 </Box>
               ) : (
