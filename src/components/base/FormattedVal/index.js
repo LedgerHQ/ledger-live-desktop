@@ -2,6 +2,8 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import Ticker from 'react-flip-ticker'
+
 import isUndefined from 'lodash/isUndefined'
 
 import type { Unit } from '@ledgerhq/currencies'
@@ -22,7 +24,10 @@ const T = styled(Text).attrs({
       : p.isNegative
         ? p.theme.colors.alertRed
         : p.theme.colors.positiveGreen,
-})``
+})`
+  line-height: 0.9;
+  white-space: pre;
+`
 
 const I = ({ color, children }: { color: string, children: any }) => (
   <Box color={color}>{children}</Box>
@@ -30,6 +35,7 @@ const I = ({ color, children }: { color: string, children: any }) => (
 
 type Props = {
   alwaysShowSign?: boolean,
+  animateTicker?: boolean,
   disableRounding?: boolean,
   fiat?: string | null,
   isPercent?: boolean,
@@ -40,7 +46,16 @@ type Props = {
 }
 
 function FormattedVal(props: Props) {
-  const { disableRounding, fiat, isPercent, alwaysShowSign, showCode, withIcon, ...p } = props
+  const {
+    animateTicker,
+    disableRounding,
+    fiat,
+    isPercent,
+    alwaysShowSign,
+    showCode,
+    withIcon,
+    ...p
+  } = props
   let { val, unit } = props
 
   if (isUndefined(val)) {
@@ -71,6 +86,10 @@ function FormattedVal(props: Props) {
     })
   }
 
+  if (animateTicker) {
+    text = <Ticker text={text} />
+  }
+
   return (
     <T isNegative={isNegative} withIcon={withIcon} {...p}>
       {withIcon ? (
@@ -86,7 +105,9 @@ function FormattedVal(props: Props) {
               </I>
             )}
           </Box>
-          <Box>{text}</Box>
+          <Box horizontal alignItems="center">
+            {text}
+          </Box>
         </Box>
       ) : (
         text
@@ -97,6 +118,7 @@ function FormattedVal(props: Props) {
 
 FormattedVal.defaultProps = {
   alwaysShowSign: false,
+  animateTicker: false,
   disableRounding: false,
   fiat: null,
   isPercent: false,

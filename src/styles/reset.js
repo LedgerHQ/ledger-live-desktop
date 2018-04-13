@@ -62,4 +62,9 @@ em {
 }
 .tippy-tooltip .tippy-content {
   background: transparent;
+}
+
+.currentTicker {
+  background: white;
+  z-index: 11 !important;
 }`

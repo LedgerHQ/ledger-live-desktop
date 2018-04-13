@@ -15,12 +15,12 @@ import type { T } from 'types/common'
 import { openModal } from 'reducers/modals'
 import { getVisibleAccounts } from 'reducers/accounts'
 
+import IconManager from 'icons/Manager'
 import IconPieChart from 'icons/PieChart'
-import IconArrowDown from 'icons/ArrowDown'
-import IconArrowUp from 'icons/ArrowUp'
-import IconQrCode from 'icons/QrCode'
-import IconSettings from 'icons/Settings'
 import IconPlus from 'icons/Plus'
+import IconReceive from 'icons/Receive'
+import IconSend from 'icons/Send'
+import IconSettings from 'icons/Settings'
 
 import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -79,13 +79,13 @@ class SideBar extends PureComponent<Props> {
               <Item icon={<IconPieChart size={16} />} linkTo="/">
                 {t('dashboard:title')}
               </Item>
-              <Item icon={<IconArrowUp size={16} />} modal={MODAL_SEND}>
+              <Item icon={<IconSend size={16} />} modal={MODAL_SEND}>
                 {t('send:title')}
               </Item>
-              <Item icon={<IconArrowDown size={16} />} modal={MODAL_RECEIVE}>
+              <Item icon={<IconReceive size={16} />} modal={MODAL_RECEIVE}>
                 {t('receive:title')}
               </Item>
-              <Item icon={<IconQrCode size={16} />} linkTo="/manager">
+              <Item icon={<IconManager size={16} />} linkTo="/manager">
                 {t('sidebar:manager')}
               </Item>
               <Item icon={<IconSettings size={16} />} linkTo="/settings">
@@ -98,7 +98,7 @@ class SideBar extends PureComponent<Props> {
               <Box grow>{t('sidebar:accounts')}</Box>
               <Tooltip render={() => t('addAccount:title')}>
                 <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
-                  <IconPlus size={14} />
+                  <IconPlus size={16} />
                 </PlusBtn>
               </Tooltip>
             </CapsSubtitle>

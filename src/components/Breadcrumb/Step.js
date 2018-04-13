@@ -16,6 +16,7 @@ const Wrapper = styled(Box).attrs({
     ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'grey',
   grow: true,
   justifyContent: 'center',
+  relative: true,
 })`
   width: ${RADIUS}px;
   flex-shrink: 0;
@@ -42,9 +43,11 @@ const StepNumber = styled(Box).attrs({
 const Label = styled(Box).attrs({
   fontSize: 3,
   ff: 'Museo Sans|Bold',
+  px: 2,
 })`
+  line-height: 1.2;
   position: absolute;
-  margin-top: 23px;
+  top: 25px;
   transition: color ease-in-out 0.1s ${p => (['active', 'valid'].includes(p.status) ? 0.4 : 0)}s;
 `
 

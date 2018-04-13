@@ -11,7 +11,7 @@ import type { CTX } from './types'
 
 const TICK_X_SCALE = {
   week: 7,
-  month: 10,
+  month: 7,
   year: 13,
   default: 10,
 }
