@@ -42,10 +42,10 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
   return (
     <Box {...otherProps}>
       <FormattedVal
+        fontSize={7}
         isPercent
         val={refBalance ? Math.floor((totalBalance - refBalance) / refBalance * 100) : 0}
-        alwaysShowSign
-        fontSize={7}
+        withIcon
       />
       <Sub>{t(`time:since.${since}`)}</Sub>
     </Box>
@@ -58,10 +58,10 @@ export function BalanceSinceDiff(props: Props) {
     <Box {...otherProps}>
       <FormattedVal
         fiat={counterValue}
-        alwaysShowSign
+        fontSize={7}
         showCode
         val={totalBalance - sinceBalance}
-        fontSize={7}
+        withIcon
       />
       <Sub>{t(`time:since.${since}`)}</Sub>
     </Box>
@@ -73,7 +73,6 @@ export function BalanceTotal(props: BalanceTotalProps) {
   return (
     <Box grow>
       <FormattedVal
-        alwaysShowSign={false}
         color="dark"
         fiat={counterValue}
         fontSize={8}
