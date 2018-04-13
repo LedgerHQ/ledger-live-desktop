@@ -71,7 +71,7 @@ const OperationRaw = styled(Box).attrs({
   }
 
   &:hover {
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => p.theme.colors.lightFog};
   }
 `
 

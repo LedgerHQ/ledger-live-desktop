@@ -12,7 +12,7 @@ import fontFamily from 'styles/styled/fontFamily'
 const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
   fontSize: p => p.fontSize || 3,
-  px: p => (p.primary ? (p.small ? 2 : 3) : 1),
+  px: p => (p.primary ? (p.small ? 2 : 3) : 2),
 })`
   ${space};
   ${color};
@@ -20,7 +20,8 @@ const Base = styled.button.attrs({
   ${fontWeight};
   ${fontFamily};
   border-radius: ${p => p.theme.radii[1]}px;
-  border: none;
+  border: ${p => (p.outline ? `1px solid ${p.theme.colors.wallet}` : 'none')};
+  color: ${p => (p.outline ? p.theme.colors.wallet : '')};
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
   height: ${p => (p.small ? 30 : 36)}px;
   outline: none;
@@ -30,7 +31,13 @@ const Base = styled.button.attrs({
   }
 
   &:active {
-    color: ${p => (p.primary ? '' : darken(p.theme.colors.grey, 0.2))};
+    color: ${p =>
+      p.primary
+        ? ''
+        : p.outline
+          ? darken(p.theme.colors.wallet, 0.1)
+          : darken(p.theme.colors.grey, 0.2)};
+    border-color: ${p => (p.outline ? darken(p.theme.colors.wallet, 0.1) : '')};
     background: ${p => (p.primary ? darken(p.theme.colors.wallet, 0.1) : '')};
   }
 `

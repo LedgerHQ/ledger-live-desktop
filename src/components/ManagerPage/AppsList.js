@@ -2,19 +2,20 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import { translate } from 'react-i18next'
 
 import { runJob } from 'renderer/events'
 
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
 
-import type { Device } from 'types/common'
+import type { Device, T } from 'types/common'
 
 import ManagerApp from './ManagerApp'
 
 const List = styled(Box).attrs({
   horizontal: true,
-  m: -2,
+  m: -3,
 })`
   flex-wrap: wrap;
 `
@@ -35,12 +36,14 @@ type jobHandlerOptions = {
 
 type LedgerApp = {
   name: string,
+  version: string,
   icon: string,
   app: Object,
 }
 
 type Props = {
   device: Device,
+  t: T,
 }
 
 type State = {
@@ -86,7 +89,9 @@ class AppsList extends PureComponent<Props, State> {
     this.setState({ status: 'busy' })
     try {
       const { job, successResponse, errorResponse } = options
-      const { device: { path: devicePath } } = this.props
+      const {
+        device: { path: devicePath },
+      } = this.props
       const data = { appParams, devicePath }
       await runJob({ channel: 'usb', job, successResponse, errorResponse, data })
       this.setState({ status: 'success' })
@@ -109,7 +114,7 @@ class AppsList extends PureComponent<Props, State> {
 
   handleCloseModal = () => this.setState({ status: 'idle' })
 
-  render() {
+  renderList() {
     const { status, error } = this.state
     return (
       <List>
@@ -117,6 +122,7 @@ class AppsList extends PureComponent<Props, State> {
           <ManagerApp
             key={c.name}
             name={c.name}
+            version={`Version ${c.version}`}
             icon={ICONS_FALLBACK[c.icon] || c.icon}
             onInstall={this.handleInstall(c)}
             onUninstall={this.handleUninstall(c)}
@@ -146,6 +152,20 @@ class AppsList extends PureComponent<Props, State> {
       </List>
     )
   }
+
+  render() {
+    const { t } = this.props
+    return (
+      <Box flow={6}>
+        <Box>
+          <Box mb={4} color="dark" ff="Museo Sans" fontSize={6}>
+            {t('manager:allApps')}
+          </Box>
+          {this.renderList()}
+        </Box>
+      </Box>
+    )
+  }
 }
 
-export default AppsList
+export default translate()(AppsList)
