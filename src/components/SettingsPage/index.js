@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
-import moment from 'moment'
 
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
@@ -16,10 +15,10 @@ import { fetchCounterValues } from 'actions/counterValues'
 import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
 
-import TabDisplay from './Display'
-import TabProfile from './Profile'
-import TabTools from './Tools'
-import TabMoney from './Money'
+import SectionDisplay from './sections/Display'
+import SectionCurrencies from './sections/Currencies'
+import SectionProfile from './sections/Profile'
+import SectionAbout from './sections/About'
 
 const mapStateToProps = state => ({
   settings: state.settings,
@@ -55,14 +54,9 @@ class SettingsPage extends PureComponent<Props, State> {
   }
 
   handleSaveSettings = newSettings => {
-    const { fetchCounterValues, saveSettings, i18n, settings } = this.props
+    const { fetchCounterValues, saveSettings, settings } = this.props
 
     saveSettings(newSettings)
-
-    if (newSettings.language !== settings.language) {
-      i18n.changeLanguage(newSettings.language)
-      moment.locale(newSettings.language)
-    }
 
     if (newSettings.counterValue !== settings.counterValue) {
       fetchCounterValues()
@@ -70,53 +64,35 @@ class SettingsPage extends PureComponent<Props, State> {
   }
 
   render() {
-    const { settings, t } = this.props
+    const { settings, t, i18n, saveSettings } = this.props
     const { tab } = this.state
 
     const props = {
       t,
       settings,
-      onSaveSettings: this.handleSaveSettings,
+      saveSettings,
     }
 
     this._items = [
       {
         key: 'display',
         label: t('settings:tabs.display'),
-        value: () => <TabDisplay {...props} />,
+        value: () => <SectionDisplay {...props} i18n={i18n} />,
       },
       {
-        key: 'money',
-        label: t('settings:tabs.money'),
-        value: () => <TabMoney {...props} />,
-      },
-      {
-        key: 'material',
-        isDisabled: true,
-        label: t('settings:tabs.material'),
-        value: () => <div>{'Matériel'}</div>,
-      },
-      {
-        key: 'app',
-        isDisabled: true,
-        label: t('settings:tabs.app'),
-        value: () => <div>{'App (beta)'}</div>,
-      },
-      {
-        key: 'tools',
-        label: t('settings:tabs.tools'),
-        value: () => <TabTools {...props} />,
-      },
-      {
-        key: 'blockchain',
-        isDisabled: true,
-        label: t('settings:tabs.blockchain'),
-        value: () => <div>{'Blockchain'}</div>,
+        key: 'currencies',
+        label: t('settings:tabs.currencies'),
+        value: () => <SectionCurrencies {...props} />,
       },
       {
         key: 'profile',
         label: t('settings:tabs.profile'),
-        value: () => <TabProfile {...props} />,
+        value: () => <SectionProfile {...props} />,
+      },
+      {
+        key: 'about',
+        label: t('settings:tabs.about'),
+        value: () => <SectionAbout {...props} />,
       },
     ]
 
@@ -124,10 +100,10 @@ class SettingsPage extends PureComponent<Props, State> {
 
     return (
       <Box>
-        <Box fontSize={7} mb={4}>
+        <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={5}>
           {t('settings:title')}
         </Box>
-        <Pills mb={6} items={this._items} activeKey={item.key} onChange={this.handleChangeTab} />
+        <Pills mb={4} items={this._items} activeKey={item.key} onChange={this.handleChangeTab} />
         {item.value && item.value()}
       </Box>
     )

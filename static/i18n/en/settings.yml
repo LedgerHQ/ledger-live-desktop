@@ -1,16 +1,34 @@
 title: Settings
 tabs:
   display: Display
-  money: Money
-  material: Material
-  app: App (beta)
-  tools: Tools
-  blockchain: Blockchain
+  currencies: Currencies
   profile: Profile
+  about: About
 display:
-  language: Language
-  counterValue: Counter Value
-  orderAccounts: Order accounts
+  language: Interface language
+  languageDesc: Lorem ipsum dolor sit amet
+  counterValue: Countervalue
+  counterValueDesc: Lorem ipsum dolor sit amet
+  region: Region
+  regionDesc: Lorem ipsum dolor sit amet
+  stock: Stock market indicators
+  stockDesc: Lorem ipsum dolor sit amet
+currencies:
+  confirmationsToSpend: Confirmations to spend
+  confirmationsToSpendDesc: Lorem ipsum dolor sit amet
+  confirmationsNb: Number of confirmations
+  confirmationsNbDesc: Lorem ipsum dolor sit amet
+  transactionsFees: Transactions fees
+  transactionsFeesDesc: Lorem ipsum dolor sit amet
+  explorer: Blockchain explorer
+  explorerDesc: Lorem ipsum dolor sit amet
 profile:
   protectWithPassword: Protect local data with a password
   password: Password
+about:
+  faq: FAQ
+  faqDesc: Lorem ipsum dolor sit amet
+  contactUs: Contact us
+  contactUsDesc: Lorem ipsum dolor sit amet
+  terms: Terms and Privacy policy
+  termsDesc: Lorem ipsum dolor sit amet

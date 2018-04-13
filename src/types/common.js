@@ -12,22 +12,14 @@ export type Devices = Array<Device>
 
 // -------------------- Settings
 
-export type SettingsProfile = {
+export type Settings = {
+  language: string,
+  counterValue: string,
   password: {
-    state: boolean,
+    isEnabled: boolean,
     value: string,
   },
 }
-
-export type SettingsDisplay = {
-  language: string,
-}
-
-export type SettingsMoney = {
-  counterValue: string,
-}
-
-export type Settings = SettingsProfile & SettingsDisplay & SettingsMoney
 
 export type T = (?string, ?Object) => string
 
