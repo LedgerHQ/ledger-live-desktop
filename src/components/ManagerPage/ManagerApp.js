@@ -3,24 +3,22 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Box, { Tabbable } from 'components/base/Box'
+import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import Button from 'components/base/Button'
 
 const Container = styled(Box).attrs({
   align: 'center',
-  justify: 'center',
-  m: 2,
+  m: 3,
+  p: 4,
+  boxShadow: 0,
+  flow: 3,
 })`
-  width: 150px;
-  height: 150px;
+  width: 156px;
+  height: 186px;
   background: white;
+  line-height: normal;
 `
-
-// https://api.ledgerwallet.com/update/assets/icons/bitcoin
-
-const ActionBtn = styled(Tabbable).attrs({
-  fontSize: 3,
-})``
 
 const AppIcon = styled.img`
   display: block;
@@ -28,25 +26,42 @@ const AppIcon = styled.img`
   height: 50px;
 `
 
+const AppName = styled(Box).attrs({
+  ff: 'Museo Sans|Regular',
+  fontSize: 4,
+  color: 'dark',
+})`
+  display: block;
+  width: 115px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
 type Props = {
   name: string,
+  version: string,
   icon: string,
   onInstall: Function,
-  onUninstall: Function,
+  // onUninstall: Function,
 }
 
 export default function ManagerApp(props: Props) {
-  const { name, icon, onInstall, onUninstall } = props
+  const { name, version, icon, onInstall } = props
   const iconUrl = `https://api.ledgerwallet.com/update/assets/icons/${icon}`
   return (
-    <Container flow={3}>
+    <Container>
       <AppIcon src={iconUrl} />
-
-      <Text ff="Museo Sans|Bold">{name}</Text>
-      <Box horizontal flow={2}>
-        <ActionBtn onClick={onInstall}>{'Install'}</ActionBtn>
-        <ActionBtn onClick={onUninstall}>{'Remove'}</ActionBtn>
+      <Box align="center">
+        <AppName>{name}</AppName>
+        <Text ff="Open Sans|Regular" fontSize={3} color="grey">
+          {version}
+        </Text>
       </Box>
+      <Button outline onClick={onInstall}>
+        {'Install'}
+      </Button>
     </Container>
   )
 }

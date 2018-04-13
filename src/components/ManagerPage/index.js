@@ -34,7 +34,7 @@ type State = {
 
 class ManagerPage extends PureComponent<Props, State> {
   state = {
-    currentTab: 'device',
+    currentTab: 'apps',
   }
 
   handleTabChange = t => this.setState({ currentTab: t.value })
@@ -42,9 +42,6 @@ class ManagerPage extends PureComponent<Props, State> {
   render() {
     const { device, t, nbDevices } = this.props
     const { currentTab } = this.state
-    if (!device) {
-      return 'eu... connecte ton device?'
-    }
     const tabs = TABS.map(i => {
       let label = t(`manager:tabs.${i.key}`)
       if (i.key === 'device') {

@@ -29,7 +29,9 @@ class DeviceInfos extends PureComponent<Props, State> {
   handleGetMemInfos = async () => {
     try {
       this.setState({ isLoading: true })
-      const { device: { path: devicePath } } = this.props
+      const {
+        device: { path: devicePath },
+      } = this.props
       const memoryInfos = await runJob({
         channel: 'usb',
         job: 'manager.getMemInfos',
