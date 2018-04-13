@@ -21,8 +21,8 @@ function getTickXCount(tickXScale) {
 }
 
 const RENDER_TICK_X = {
-  year: 'MMM.',
-  default: 'MMM. D',
+  year: 'MMM',
+  default: 'MMM D',
 }
 
 function getRenderTickX(selectedTime) {
@@ -121,7 +121,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
 
     NODES.yTicks
       .selectAll('.tick:first-of-type line')
-      .attr('stroke-width', '2px')
+      .attr('stroke-width', '1px')
       .attr('stroke-dasharray', 'none')
   }
 
@@ -135,8 +135,7 @@ function stylizeAxis(axis) {
   axis.selectAll('path').attr('stroke', 'none')
   axis
     .selectAll('text')
-    .attr('stroke', themeColors.grey)
+    .attr('fill', themeColors.grey)
     .style('font-size', '12px')
     .style('font-family', 'Open Sans')
-    .style('font-weight', 300)
 }
