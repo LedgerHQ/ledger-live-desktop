@@ -76,20 +76,12 @@ const OperationDetails = ({ t }: { t: T }) => (
               />
               <Box mt={5} alignItems="center">
                 <Box>
-                  <FormattedVal
-                    unit={unit}
-                    alwaysShowSign
-                    showCode
-                    val={amount}
-                    fontSize={8}
-                    style={{ lineHeight: 1 }}
-                  />
+                  <FormattedVal unit={unit} alwaysShowSign showCode val={amount} fontSize={8} />
                 </Box>
                 <Box mt={1}>
                   <CounterValue
                     color="grey"
                     fontSize={5}
-                    style={{ lineHeight: 1 }}
                     date={date}
                     ticker={currency.units[0].code}
                     value={amount}

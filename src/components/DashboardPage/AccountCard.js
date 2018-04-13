@@ -60,9 +60,6 @@ const AccountCard = ({
             unit={account.unit}
             showCode
             val={account.balance}
-            style={{
-              lineHeight: 1,
-            }}
           />
         </Box>
       </Box>

@@ -12,8 +12,8 @@ import FormattedVal from 'components/base/FormattedVal'
 
 const Sub = styled(Text).attrs({
   ff: 'Open Sans',
-  color: 'warnGrey',
   fontSize: 4,
+  mt: 1,
 })`
   text-transform: lowercase;
 `
@@ -42,6 +42,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
   return (
     <Box {...otherProps}>
       <FormattedVal
+        animateTicker
         fontSize={7}
         isPercent
         val={refBalance ? Math.floor((totalBalance - refBalance) / refBalance * 100) : 0}
@@ -57,6 +58,7 @@ export function BalanceSinceDiff(props: Props) {
   return (
     <Box {...otherProps}>
       <FormattedVal
+        animateTicker
         fiat={counterValue}
         fontSize={7}
         showCode
@@ -73,11 +75,11 @@ export function BalanceTotal(props: BalanceTotalProps) {
   return (
     <Box grow>
       <FormattedVal
+        animateTicker
         color="dark"
         fiat={counterValue}
         fontSize={8}
         showCode
-        style={{ lineHeight: 1 }}
         unit={unit}
         val={totalBalance}
       />

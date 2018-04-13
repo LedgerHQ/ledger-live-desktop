@@ -22,8 +22,8 @@ import { getCounterValueCode } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
 import IconControls from 'icons/Controls'
-import IconArrowDown from 'icons/ArrowDown'
-import IconArrowUp from 'icons/ArrowUp'
+import IconReceive from 'icons/Receive'
+import IconSend from 'icons/Send'
 
 import BalanceSummary from 'components/BalanceSummary'
 import {
@@ -123,13 +123,13 @@ class AccountPage extends PureComponent<Props, State> {
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
             <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={1} alignItems="center">
-                <IconArrowUp size={12} />
+                <IconSend size={12} />
                 <Box>{t('send:title')}</Box>
               </Box>
             </Button>
             <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
               <Box horizontal flow={1} alignItems="center">
-                <IconArrowDown size={12} />
+                <IconReceive size={12} />
                 <Box>{t('receive:title')}</Box>
               </Box>
             </Button>
@@ -155,12 +155,12 @@ class AccountPage extends PureComponent<Props, State> {
                   <BalanceTotal totalBalance={account.balance} unit={account.unit}>
                     <Box mt={1}>
                       <FormattedVal
+                        animateTicker
                         alwaysShowSign={false}
                         color="warmGrey"
                         fiat={counterValue}
                         fontSize={6}
                         showCode
-                        style={{ lineHeight: 1 }}
                         val={totalBalance}
                       />
                     </Box>
