@@ -13,9 +13,8 @@ import type { FetchCounterValues } from 'actions/counterValues'
 import { saveSettings } from 'actions/settings'
 import { fetchCounterValues } from 'actions/counterValues'
 
+import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
-import Tabs from 'components/base/Tabs'
 
 import TabDisplay from './Display'
 import TabProfile from './Profile'
@@ -48,7 +47,12 @@ class SettingsPage extends PureComponent<Props, State> {
     tab: 0,
   }
 
-  handleChangeTab = (tab: number) => this.setState({ tab })
+  _items = []
+
+  handleChangeTab = (item: any) => {
+    const tab = this._items.indexOf(item)
+    this.setState({ tab })
+  }
 
   handleSaveSettings = newSettings => {
     const { fetchCounterValues, saveSettings, i18n, settings } = this.props
@@ -75,53 +79,56 @@ class SettingsPage extends PureComponent<Props, State> {
       onSaveSettings: this.handleSaveSettings,
     }
 
+    this._items = [
+      {
+        key: 'display',
+        label: t('settings:tabs.display'),
+        value: () => <TabDisplay {...props} />,
+      },
+      {
+        key: 'money',
+        label: t('settings:tabs.money'),
+        value: () => <TabMoney {...props} />,
+      },
+      {
+        key: 'material',
+        isDisabled: true,
+        label: t('settings:tabs.material'),
+        value: () => <div>{'Matériel'}</div>,
+      },
+      {
+        key: 'app',
+        isDisabled: true,
+        label: t('settings:tabs.app'),
+        value: () => <div>{'App (beta)'}</div>,
+      },
+      {
+        key: 'tools',
+        label: t('settings:tabs.tools'),
+        value: () => <TabTools {...props} />,
+      },
+      {
+        key: 'blockchain',
+        isDisabled: true,
+        label: t('settings:tabs.blockchain'),
+        value: () => <div>{'Blockchain'}</div>,
+      },
+      {
+        key: 'profile',
+        label: t('settings:tabs.profile'),
+        value: () => <TabProfile {...props} />,
+      },
+    ]
+
+    const item = this._items[tab]
+
     return (
-      <Box flow={6}>
-        <Text fontSize={7}>{t('settings:title')}</Text>
-        <Tabs
-          index={tab}
-          onTabClick={this.handleChangeTab}
-          items={[
-            {
-              key: 'display',
-              title: t('settings:tabs.display'),
-              render: () => <TabDisplay {...props} />,
-            },
-            {
-              key: 'money',
-              title: t('settings:tabs.money'),
-              render: () => <TabMoney {...props} />,
-            },
-            {
-              key: 'material',
-              isDisabled: true,
-              title: t('settings:tabs.material'),
-              render: () => <div>{'Matériel'}</div>,
-            },
-            {
-              key: 'app',
-              isDisabled: true,
-              title: t('settings:tabs.app'),
-              render: () => <div>{'App (beta)'}</div>,
-            },
-            {
-              key: 'tools',
-              title: t('settings:tabs.tools'),
-              render: () => <TabTools {...props} />,
-            },
-            {
-              key: 'blockchain',
-              isDisabled: true,
-              title: t('settings:tabs.blockchain'),
-              render: () => <div>{'Blockchain'}</div>,
-            },
-            {
-              key: 'profile',
-              title: t('settings:tabs.profile'),
-              render: () => <TabProfile {...props} />,
-            },
-          ]}
-        />
+      <Box>
+        <Box fontSize={7} mb={4}>
+          {t('settings:title')}
+        </Box>
+        <Pills mb={6} items={this._items} activeKey={item.key} onChange={this.handleChangeTab} />
+        {item.value && item.value()}
       </Box>
     )
   }
