@@ -2,6 +2,9 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import { translate } from 'react-i18next'
+
+import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -40,6 +43,7 @@ const AppName = styled(Box).attrs({
 `
 
 type Props = {
+  t: T,
   name: string,
   version: string,
   icon: string,
@@ -47,8 +51,8 @@ type Props = {
   // onUninstall: Function,
 }
 
-export default function ManagerApp(props: Props) {
-  const { name, version, icon, onInstall } = props
+function ManagerApp(props: Props) {
+  const { name, version, icon, onInstall, t } = props
   const iconUrl = `https://api.ledgerwallet.com/update/assets/icons/${icon}`
   return (
     <Container>
@@ -60,8 +64,10 @@ export default function ManagerApp(props: Props) {
         </Text>
       </Box>
       <Button outline onClick={onInstall}>
-        {'Install'}
+        {t('manager:install')}
       </Button>
     </Container>
   )
 }
+
+export default translate()(ManagerApp)

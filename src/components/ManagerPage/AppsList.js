@@ -2,13 +2,14 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import { translate } from 'react-i18next'
 
 import { runJob } from 'renderer/events'
 
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
 
-import type { Device } from 'types/common'
+import type { Device, T } from 'types/common'
 
 import ManagerApp from './ManagerApp'
 
@@ -42,6 +43,7 @@ type LedgerApp = {
 
 type Props = {
   device: Device,
+  t: T,
 }
 
 type State = {
@@ -152,11 +154,12 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   render() {
+    const { t } = this.props
     return (
       <Box flow={6}>
         <Box>
           <Box mb={4} color="dark" ff="Museo Sans" fontSize={6}>
-            {'All apps'}
+            {t('manager:allApps')}
           </Box>
           {this.renderList()}
         </Box>
@@ -165,4 +168,4 @@ class AppsList extends PureComponent<Props, State> {
   }
 }
 
-export default AppsList
+export default translate()(AppsList)
