@@ -84,8 +84,10 @@ class InputPassword extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, maxLength } = this.props
+    const { t, value, maxLength } = this.props
     const { passwordStrength, inputType } = this.state
+
+    const hasValue = value.trim() !== ''
 
     return (
       <Box flow={1}>
@@ -101,11 +103,15 @@ class InputPassword extends PureComponent<Props, State> {
           }
         />
         <Box flow={1} horizontal>
-          {[1, 2, 3, 4].map(v => (
-            <Strength key={v} warning={passwordStrength <= 1} activated={passwordStrength >= v} />
+          {[0, 1, 2, 3, 4].map(v => (
+            <Strength
+              key={v}
+              warning={passwordStrength <= 1}
+              activated={hasValue && passwordStrength >= v}
+            />
           ))}
         </Box>
-        {passwordStrength > 0 && (
+        {hasValue && (
           <Warning passwordStrength={passwordStrength}>
             {t(`password:warning_${passwordStrength}`)}
           </Warning>
