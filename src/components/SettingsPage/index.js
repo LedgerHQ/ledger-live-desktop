@@ -43,7 +43,7 @@ type State = {
 
 class SettingsPage extends PureComponent<Props, State> {
   state = {
-    tab: 0,
+    tab: 2,
   }
 
   _items = []

@@ -3,11 +3,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { remote } from 'electron'
+import bcrypt from 'bcryptjs'
 
 import type { Settings, T } from 'types/common'
 
 import { unlock } from 'reducers/application'
-import db from 'helpers/db'
+import db, { setEncryptionKey } from 'helpers/db'
 
 import Input from 'components/base/Input'
 import CheckBox from 'components/base/CheckBox'
@@ -32,7 +33,6 @@ type Props = {
   t: T,
   settings: Settings,
   saveSettings: Function,
-  // unlock: Function,
 }
 
 type State = {
@@ -71,6 +71,21 @@ class TabProfile extends PureComponent<Props, State> {
     } else {
       // console.log(`decrypting data`)
     }
+  }
+
+  handleChangePassword = (password: ?string) => {
+    const { saveSettings, unlock } = this.props
+    const hash = bcrypt.hashSync(password, 8)
+    setEncryptionKey('accounts', password)
+    window.requestIdleCallback(() => {
+      saveSettings({
+        password: {
+          isEnabled: hash !== undefined,
+          value: hash,
+        },
+      })
+      unlock()
+    })
   }
 
   render() {
@@ -125,8 +140,11 @@ class TabProfile extends PureComponent<Props, State> {
 
         <PasswordModal
           t={t}
-          isOpened={isPasswordModalOpened}
+          isOpened={true || isPasswordModalOpened}
           onClose={this.handleClosePasswordModal}
+          onChangePassword={this.handleChangePassword}
+          isPasswordEnabled={isPasswordEnabled}
+          currentPasswordHash={settings.password.value}
         />
       </Section>
     )
