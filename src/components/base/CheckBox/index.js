@@ -24,13 +24,13 @@ const Base = styled(Tabbable).attrs({
 `
 
 const Ball = styled.div`
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: white;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
   transition: 250ms ease-in-out transform;
-  transform: translate3d(${p => (p.isChecked ? '28px' : '0')}, 0, 0);
+  transform: translate3d(${p => (p.isChecked ? '28px' : '2px')}, 0, 0);
 `
 
 type Props = {
