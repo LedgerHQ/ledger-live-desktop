@@ -117,7 +117,22 @@ class StepperNumber extends PureComponent<Props, State> {
     }
   }
 
-  handleMouseUp = () => clearTimeout(this._timeout)
+  handleMouseDown = (type: 'increment' | 'decrement') => () => {
+    document.addEventListener('mouseup', this.handleMouseUp)
+
+    if (type === 'increment') {
+      this.increment()
+    }
+
+    if (type === 'decrement') {
+      this.decrement()
+    }
+  }
+
+  handleMouseUp = () => {
+    clearTimeout(this._timeout)
+    document.removeEventListener('mouseup', this.handleMouseUp)
+  }
 
   render() {
     const { value } = this.state
@@ -127,19 +142,11 @@ class StepperNumber extends PureComponent<Props, State> {
 
     return (
       <Container>
-        <Btn
-          onMouseDown={!isMin ? this.decrement : undefined}
-          onMouseUp={this.handleMouseUp}
-          disabled={isMin}
-        >
+        <Btn onMouseDown={!isMin ? this.handleMouseDown('decrement') : undefined} disabled={isMin}>
           -
         </Btn>
         <Num>{value}</Num>
-        <Btn
-          onMouseDown={!isMax ? this.increment : undefined}
-          onMouseUp={this.handleMouseUp}
-          disabled={isMax}
-        >
+        <Btn onMouseDown={!isMax ? this.handleMouseDown('increment') : undefined} disabled={isMax}>
           +
         </Btn>
       </Container>
