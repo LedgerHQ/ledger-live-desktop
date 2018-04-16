@@ -18,18 +18,33 @@ type Props = {
   desc: string,
   confirmText: string,
   cancelText: string,
+  onReject: Function,
+  onConfirm: Function,
   t: T,
 }
 
 class ConfirmModal extends PureComponent<Props> {
   render() {
-    const { isOpened, title, subTitle, desc, confirmText, cancelText, isDanger, t } = this.props
+    const {
+      isOpened,
+      title,
+      subTitle,
+      desc,
+      confirmText,
+      cancelText,
+      isDanger,
+      onReject,
+      onConfirm,
+      t,
+      ...props
+    } = this.props
 
     const realConfirmText = confirmText || t('common:confirm')
     const realCancelText = cancelText || t('common:cancel')
     return (
       <Modal
         isOpened={isOpened}
+        {...props}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
             <ModalTitle>{title}</ModalTitle>
@@ -44,8 +59,8 @@ class ConfirmModal extends PureComponent<Props> {
               </Box>
             </ModalContent>
             <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-              <Button>{realCancelText}</Button>
-              <Button primary={!isDanger} danger={isDanger}>
+              <Button onClick={onReject}>{realCancelText}</Button>
+              <Button onClick={onConfirm} primary={!isDanger} danger={isDanger}>
                 {realConfirmText}
               </Button>
             </ModalFooter>

@@ -33,6 +33,7 @@ import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps = state => ({
+  username: state.settings.username,
   accounts: getVisibleAccounts(state),
   counterValue: getCounterValueCode(state),
 })
@@ -48,6 +49,7 @@ type Props = {
   accounts: Account[],
   push: Function,
   counterValue: string,
+  username: string,
 }
 
 type State = {
@@ -109,7 +111,7 @@ class DashboardPage extends PureComponent<Props, State> {
   _cacheBalance = null
 
   render() {
-    const { push, accounts, t, counterValue } = this.props
+    const { push, accounts, t, counterValue, username } = this.props
     const { accountsChunk, selectedTime, daysCount } = this.state
 
     const totalAccounts = accounts.length
@@ -119,7 +121,7 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {t('dashboard:greetings', { name: 'Khalil' })}
+              {t('dashboard:greetings', { name: username })}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0

@@ -72,6 +72,7 @@ const Base = styled.button.attrs({
   fontSize: p => p.fontSize || 3,
   px: 2,
   color: 'grey',
+  bg: 'transparent',
 })`
   ${space};
   ${color};

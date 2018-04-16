@@ -33,6 +33,7 @@ profile:
   exportDesc: Lorem ipsum dolor sit amet
   reset: Reset application
   resetDesc: Lorem ipsum dolor sit amet
+  resetButton: Hard reset
 about:
   faq: FAQ
   faqDesc: Lorem ipsum dolor sit amet
@@ -40,3 +41,7 @@ about:
   contactUsDesc: Lorem ipsum dolor sit amet
   terms: Terms and Privacy policy
   termsDesc: Lorem ipsum dolor sit amet
+hardResetModal:
+  title: Hard reset
+  subTitle: Are you sure houston?
+  desc: Lorem ipsum dolor sit amet

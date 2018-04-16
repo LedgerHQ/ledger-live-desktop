@@ -95,7 +95,7 @@ class Input extends PureComponent<Props, State> {
 
   handleClick = () => this._input && this._input.focus()
 
-  handleFocus = e => {
+  handleFocus = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { onFocus } = this.props
     this.setState({
       isFocus: true,
@@ -103,7 +103,7 @@ class Input extends PureComponent<Props, State> {
     onFocus(e)
   }
 
-  handleBlur = e => {
+  handleBlur = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { onBlur } = this.props
     this.setState({
       isFocus: false,

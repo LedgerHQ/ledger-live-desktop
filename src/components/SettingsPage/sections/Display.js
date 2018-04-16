@@ -31,7 +31,7 @@ type Props = {
 
 type State = {
   cachedLanguageKey: string,
-  cachedCounterValue: ?string,
+  cachedCounterValue: ?Object,
 }
 
 class TabProfile extends PureComponent<Props, State> {
@@ -47,7 +47,7 @@ class TabProfile extends PureComponent<Props, State> {
     }
   }
 
-  handleChangeCounterValue = item => {
+  handleChangeCounterValue = (item: Object) => {
     const { saveSettings } = this.props
     this.setState({ cachedCounterValue: item.fiat })
     window.requestIdleCallback(() => {

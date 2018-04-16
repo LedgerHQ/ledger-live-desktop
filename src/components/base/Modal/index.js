@@ -21,6 +21,7 @@ import GrowScroll from 'components/base/GrowScroll'
 import Defer from 'components/base/Defer'
 
 export { default as ModalBody } from './ModalBody'
+export { default as ConfirmModal } from './ConfirmModal'
 
 const springConfig = {
   stiffness: 320,

@@ -14,6 +14,7 @@ export type Devices = Array<Device>
 
 export type Settings = {
   language: string,
+  username: string,
   counterValue: string,
   password: {
     isEnabled: boolean,
