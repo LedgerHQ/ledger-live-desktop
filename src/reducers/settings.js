@@ -10,6 +10,7 @@ import type { Settings } from 'types/common'
 export type SettingsState = Object
 
 const defaultState: SettingsState = {
+  username: 'Anonymous',
   counterValue: 'USD',
   language: 'en',
   orderAccounts: 'balance|asc',

@@ -75,6 +75,7 @@ const DropDownItem = styled(DDItem).attrs({
 `
 
 const mapStateToProps = state => ({
+  username: state.settings.username,
   hasAccounts: getAccounts(state).length > 0,
   hasPassword: hasPassword(state),
 })
@@ -88,6 +89,7 @@ type Props = {
   hasAccounts: boolean,
   hasPassword: boolean,
   lock: Function,
+  username: string,
 }
 
 type State = {
@@ -145,7 +147,7 @@ class TopBar extends PureComponent<Props, State> {
   handleLock = () => this.props.lock()
 
   render() {
-    const { hasPassword, hasAccounts, t } = this.props
+    const { hasPassword, hasAccounts, username, t } = this.props
     const { sync } = this.state
 
     return (
@@ -197,7 +199,7 @@ class TopBar extends PureComponent<Props, State> {
               justifyContent="center"
               offsetTop={-2}
             >
-              <Box>{'Khalil Benihoud'}</Box>
+              <Box>{username}</Box>
               <IconAngleDown size={12} />
             </DropDown>
           </Box>
