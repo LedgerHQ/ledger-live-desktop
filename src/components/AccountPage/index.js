@@ -85,7 +85,9 @@ class AccountPage extends PureComponent<Props, State> {
       return
     }
 
-    if (process.platform === 'darwin') {
+    if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
+      this._cacheBalance = data.totalBalance
+
       ipcRenderer.send('touch-bar-update', {
         text: account.name,
         color: account.currency.color,
@@ -107,6 +109,8 @@ class AccountPage extends PureComponent<Props, State> {
       daysCount: item.value,
     })
 
+  _cacheBalance = null
+
   render() {
     const { account, openModal, t, counterValue } = this.props
     const { selectedTime, daysCount } = this.state
@@ -117,7 +121,8 @@ class AccountPage extends PureComponent<Props, State> {
     }
 
     return (
-      <Box>
+      // Force re-render account page, for avoid animation
+      <Box key={account.id}>
         <Box horizontal mb={5}>
           <AccountHeader account={account} />
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
@@ -153,17 +158,15 @@ class AccountPage extends PureComponent<Props, State> {
               <Box flow={4} mb={2}>
                 <Box horizontal>
                   <BalanceTotal totalBalance={account.balance} unit={account.unit}>
-                    <Box mt={1}>
-                      <FormattedVal
-                        animateTicker
-                        alwaysShowSign={false}
-                        color="warmGrey"
-                        fiat={counterValue}
-                        fontSize={6}
-                        showCode
-                        val={totalBalance}
-                      />
-                    </Box>
+                    <FormattedVal
+                      animateTicker
+                      alwaysShowSign={false}
+                      color="warmGrey"
+                      fiat={counterValue}
+                      fontSize={6}
+                      showCode
+                      val={totalBalance}
+                    />
                   </BalanceTotal>
                   <Box>
                     <PillsDaysCount

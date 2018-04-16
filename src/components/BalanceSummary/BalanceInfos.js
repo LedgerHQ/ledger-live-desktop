@@ -7,13 +7,11 @@ import type { Unit } from '@ledgerhq/currencies'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 
-const Sub = styled(Text).attrs({
+const Sub = styled(Box).attrs({
   ff: 'Open Sans',
   fontSize: 4,
-  mt: 1,
 })`
   text-transform: lowercase;
 `
@@ -73,7 +71,7 @@ export function BalanceSinceDiff(props: Props) {
 export function BalanceTotal(props: BalanceTotalProps) {
   const { counterValue, totalBalance, children, unit } = props
   return (
-    <Box grow>
+    <Box grow {...props}>
       <FormattedVal
         animateTicker
         color="dark"
@@ -97,7 +95,7 @@ BalanceTotal.defaultProps = {
 function BalanceInfos(props: Props) {
   const { t, totalBalance, since, sinceBalance, refBalance, counterValue } = props
   return (
-    <Box horizontal alignItems="flex-end" flow={7}>
+    <Box horizontal alignItems="center" flow={7}>
       <BalanceTotal counterValue={counterValue} totalBalance={totalBalance}>
         <Sub>{t('dashboard:totalBalance')}</Sub>
       </BalanceTotal>

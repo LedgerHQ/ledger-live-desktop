@@ -7,9 +7,9 @@ import { rgba } from 'styles/helpers'
 
 import type { T } from 'types/common'
 
-import IconArrowDown from 'icons/ArrowDown'
-import IconArrowUp from 'icons/ArrowUp'
 import IconClock from 'icons/Clock'
+import IconReceive from 'icons/Receive'
+import IconSend from 'icons/Send'
 
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
@@ -64,7 +64,7 @@ const ConfirmationCheck = ({
 
   const renderContent = () => (
     <Container type={type} isConfirmed={isConfirmed} {...props}>
-      {type === 'from' ? <IconArrowDown size={12} /> : <IconArrowUp size={12} />}
+      {type === 'from' ? <IconReceive size={12} /> : <IconSend size={12} />}
       {!isConfirmed && (
         <WrapperClock>
           <IconClock size={10} />

@@ -2,35 +2,42 @@
 
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
-import get from 'lodash/get'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
-import type { T } from 'types/common'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { T, Device } from 'types/common'
+
+import { getVisibleAccounts } from 'reducers/accounts'
 
 import { MODAL_SEND } from 'config/constants'
 
 import Breadcrumb from 'components/Breadcrumb'
-import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
+import Button from 'components/base/Button'
+import Modal, { ModalFooter, ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
+import PrevButton from 'components/modals/PrevButton'
+import StepConnectDevice from 'components/modals/StepConnectDevice'
 
 import Footer from './Footer'
 
 import StepAmount from './01-step-amount'
-import StepConnectDevice from './02-step-connect-device'
 import StepVerification from './03-step-verification'
 import StepConfirmation from './04-step-confirmation'
 
 type Props = {
+  accounts: Account[],
   t: T,
 }
 
 type State = {
-  stepIndex: number,
-  isDeviceReady: boolean,
-  amount: number,
-  fees: number,
   account: Account | null,
-  recipientAddress: string,
+  amount: number,
+  appStatus: null | string,
+  deviceSelected: Device | null,
+  fees: number,
   isRBF: boolean,
+  recipientAddress: string,
+  stepIndex: number,
 }
 
 const GET_STEPS = t => [
@@ -40,35 +47,52 @@ const GET_STEPS = t => [
   { label: t('send:steps.confirmation.title'), Comp: StepConfirmation },
 ]
 
+const mapStateToProps = state => ({
+  accounts: getVisibleAccounts(state).sort((a, b) => (a.name < b.name ? -1 : 1)),
+})
+
 const INITIAL_STATE = {
-  stepIndex: 0,
-  isDeviceReady: false,
   account: null,
-  recipientAddress: '',
   amount: 0,
+  appStatus: null,
+  deviceSelected: null,
   fees: 0,
   isRBF: false,
+  recipientAddress: '',
+  stepIndex: 0,
 }
 
 class SendModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
-  _steps = GET_STEPS(this.props.t)
   _account: Account | null = null
+  _steps = GET_STEPS(this.props.t)
 
-  canNext = account => {
+  canNext = () => {
     const { stepIndex } = this.state
 
-    // informations
     if (stepIndex === 0) {
       const { amount, recipientAddress } = this.state
-      return !!amount && !!recipientAddress && !!account
+      return !!amount && !!recipientAddress && !!this._account
     }
 
-    // connect device
     if (stepIndex === 1) {
-      const { isDeviceReady } = this.state
-      return !!isDeviceReady
+      const { deviceSelected, appStatus } = this.state
+      return deviceSelected !== null && appStatus === 'success'
+    }
+
+    if (stepIndex === 2) {
+      return true
+    }
+
+    return false
+  }
+
+  canPrev = () => {
+    const { stepIndex } = this.state
+
+    if (stepIndex === 1) {
+      return true
     }
 
     return false
@@ -82,6 +106,34 @@ class SendModal extends PureComponent<Props, State> {
       return
     }
     this.setState({ stepIndex: stepIndex + 1 })
+  }
+
+  handleChangeDevice = d => this.setState({ deviceSelected: d })
+
+  handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
+
+  handlePrevStep = () => {
+    const { stepIndex } = this.state
+
+    let newStepIndex
+
+    switch (stepIndex) {
+      default:
+      case 1:
+        newStepIndex = 0
+        break
+
+      case 2:
+      case 3:
+        newStepIndex = 1
+        break
+    }
+
+    this.setState({
+      appStatus: null,
+      deviceSelected: null,
+      stepIndex: newStepIndex,
+    })
   }
 
   createChangeHandler = key => value => {
@@ -104,54 +156,75 @@ class SendModal extends PureComponent<Props, State> {
     this.setState(patch)
   }
 
-  renderStep = acc => {
-    const { stepIndex, account, amount, ...othersState } = this.state
+  renderStep = () => {
+    const { t } = this.props
+    const { stepIndex, amount, deviceSelected, ...otherState } = this.state
     const step = this._steps[stepIndex]
     if (!step) {
       return null
     }
     const { Comp } = step
+
+    const props = (predicate, props) => (predicate ? props : {})
+
     const stepProps = {
-      ...othersState,
+      ...otherState,
+      t,
       amount,
-      account: account || acc,
+      account: this._account,
+      ...props(stepIndex === 1, {
+        accountName: this._account ? this._account.name : undefined,
+        deviceSelected,
+        onChangeDevice: this.handleChangeDevice,
+        onStatusChange: this.handleChangeStatus,
+      }),
     }
 
     return <Comp onChange={this.createChangeHandler} {...stepProps} {...this.props} />
   }
 
   render() {
-    const { t } = this.props
+    const { accounts, t } = this.props
     const { stepIndex, amount, account, fees } = this.state
+
+    const canNext = this.canNext()
+    const canPrev = this.canPrev()
 
     return (
       <Modal
         name={MODAL_SEND}
         onHide={this.handleReset}
         render={({ data, onClose }) => {
-          const acc = account || get(data, 'account', null)
-          const canNext = this.canNext(acc)
-
           // hack: access the selected account, living in modal data, outside
           // of the modal render function
-          this._account = acc
+          this._account = account || (data && data.account) || accounts[0]
 
           return (
-            <ModalBody onClose={onClose} deferHeight={acc ? 630 : 355}>
-              <ModalTitle>{t('send:title')}</ModalTitle>
+            <ModalBody onClose={onClose}>
+              <ModalTitle>
+                {canPrev && <PrevButton onClick={this.handlePrevStep} />}
+                {t('send:title')}
+              </ModalTitle>
               <ModalContent>
-                <Breadcrumb mb={5} currentStep={stepIndex} items={this._steps} />
-                {this.renderStep(acc)}
+                <Breadcrumb mb={6} currentStep={stepIndex} items={this._steps} />
+                {this.renderStep()}
               </ModalContent>
-              {acc && (
-                <Footer
-                  canNext={canNext}
-                  onNext={this.handleNextStep}
-                  account={acc}
-                  amount={amount}
-                  fees={fees}
-                  t={t}
-                />
+              {this._account &&
+                stepIndex !== 3 && (
+                  <Footer
+                    canNext={canNext}
+                    onNext={this.handleNextStep}
+                    account={this._account}
+                    amount={amount}
+                    fees={fees}
+                    t={t}
+                  />
+                )}
+              {stepIndex === 3 && (
+                <ModalFooter horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+                  <Button onClick={onClose}>{t('common:close')}</Button>
+                  <Button primary>{t('send:steps.confirmation.cta')}</Button>
+                </ModalFooter>
               )}
             </ModalBody>
           )
@@ -161,4 +234,4 @@ class SendModal extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(SendModal)
+export default compose(connect(mapStateToProps), translate())(SendModal)

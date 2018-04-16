@@ -11,13 +11,13 @@ import type { Unit } from '@ledgerhq/currencies'
 import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
 
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
 
 import IconBottom from 'icons/Bottom'
 import IconTop from 'icons/Top'
 
-const T = styled(Text).attrs({
+const T = styled(Box).attrs({
   ff: 'Rubik',
+  horizontal: true,
   color: p =>
     p.withIcon
       ? p.theme.colors.dark
@@ -25,7 +25,7 @@ const T = styled(Text).attrs({
         ? p.theme.colors.alertRed
         : p.theme.colors.positiveGreen,
 })`
-  line-height: 0.9;
+  line-height: 1.2;
   white-space: pre;
 `
 
