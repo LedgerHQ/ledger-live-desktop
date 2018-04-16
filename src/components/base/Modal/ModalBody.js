@@ -73,7 +73,9 @@ const Body = styled(Box).attrs({
   bg: p => p.theme.colors.white,
   relative: true,
   borderRadius: 1,
-})``
+})`
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+`
 
 const appear = keyframes`
   from { opacity: 0; }

@@ -19,8 +19,9 @@ const Drop = styled(Box).attrs({
   p: 2,
 })`
   position: absolute;
-  top: 100%;
   right: 0;
+  top: 100%;
+  z-index: 1;
 `
 
 export const DropDownItem = styled(Box).attrs({

@@ -17,3 +17,4 @@ steps:
     title: Verification
   confirmation:
     title: Confirmation
+    cta: View operation details

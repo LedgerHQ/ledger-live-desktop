@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Fragment, PureComponent } from 'react'
-import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
@@ -10,24 +9,15 @@ import type { T, Device } from 'types/common'
 import { MODAL_RECEIVE } from 'config/constants'
 
 import Box from 'components/base/Box'
-import Button from 'components/base/Button'
 import Breadcrumb from 'components/Breadcrumb'
+import Button from 'components/base/Button'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import PrevButton from 'components/modals/PrevButton'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
-
-import IconAngleLeft from 'icons/AngleLeft'
 
 import StepAccount from './01-step-account'
 import StepConfirmAddress from './03-step-confirm-address'
 import StepReceiveFunds from './04-step-receive-funds'
-
-const PrevButton = styled(Button).attrs({
-  fontSize: 4,
-  ml: 4,
-})`
-  position: absolute;
-  left: 0;
-`
 
 type Props = {
   t: T,
@@ -286,19 +276,12 @@ class ReceiveModal extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <ModalBody onClose={canClose ? onClose : undefined}>
             <ModalTitle>
-              {canPrev && (
-                <PrevButton onClick={this.handlePrevStep}>
-                  <Box horizontal alignItems="center">
-                    <IconAngleLeft size={16} />
-                    {t('common:back')}
-                  </Box>
-                </PrevButton>
-              )}
+              {canPrev && <PrevButton onClick={this.handlePrevStep} />}
               {t('receive:title')}
             </ModalTitle>
             <ModalContent>
               <Breadcrumb
-                mb={5}
+                mb={6}
                 currentStep={stepIndex}
                 stepsErrors={stepsErrors}
                 stepsDisabled={stepsDisabled}

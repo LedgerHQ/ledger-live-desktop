@@ -72,6 +72,7 @@ const AccountCard = ({
             <Box flow={2} horizontal>
               <Box justifyContent="center">
                 <FormattedVal
+                  animateTicker
                   fiat={counterValue}
                   val={totalBalance}
                   alwaysShowSign={false}

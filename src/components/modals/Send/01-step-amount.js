@@ -38,21 +38,21 @@ function StepAmount(props: PropsStepAmount) {
         <SelectAccount onChange={onChange('account')} value={account} />
       </Box>
 
-      {/* RECIPIENT ADDRESS */}
-      <Box flow={1}>
-        <Label>
-          <span>{t('send:steps.amount.recipientAddress')}</span>
-          <LabelInfoTooltip ml={1} text={t('send:steps.amount.recipientAddress')} />
-        </Label>
-        <RecipientAddress
-          withQrCode
-          value={recipientAddress}
-          onChange={onChange('recipientAddress')}
-        />
-      </Box>
-
       {account && (
         <Fragment>
+          {/* RECIPIENT ADDRESS */}
+          <Box flow={1}>
+            <Label>
+              <span>{t('send:steps.amount.recipientAddress')}</span>
+              <LabelInfoTooltip ml={1} text={t('send:steps.amount.recipientAddress')} />
+            </Label>
+            <RecipientAddress
+              withQrCode
+              value={recipientAddress}
+              onChange={onChange('recipientAddress')}
+            />
+          </Box>
+
           {/* AMOUNT */}
           <Box flow={1}>
             <Label>{t('send:steps.amount.amount')}</Label>

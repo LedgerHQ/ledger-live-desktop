@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import noop from 'lodash/noop'
 import { getIconByCoinType } from '@ledgerhq/currencies/react'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
 import type { T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
@@ -56,7 +56,7 @@ const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => 
     renderSelected={renderItem}
     renderItem={renderItem}
     keyProp="id"
-    items={accounts}
+    items={accounts.sort((a, b) => (a.name < b.name ? -1 : 1))}
     placeholder={t('common:selectAccount')}
     fontSize={4}
     onChange={onChange}
