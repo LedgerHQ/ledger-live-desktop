@@ -51,16 +51,19 @@ class TabProfile extends PureComponent<Props, State> {
     isPasswordModalOpened: false,
   }
 
-  setPassword = hash => {
+  setPassword = password => {
     const { saveSettings, unlock } = this.props
-    setEncryptionKey('accounts', hash)
-    saveSettings({
-      password: {
-        isEnabled: hash !== undefined,
-        value: hash,
-      },
+    window.requestIdleCallback(() => {
+      setEncryptionKey('accounts', password)
+      const hash = password ? bcrypt.hashSync(password, 8) : undefined
+      saveSettings({
+        password: {
+          isEnabled: hash !== undefined,
+          value: hash,
+        },
+      })
+      unlock()
     })
-    unlock()
   }
 
   debounceSaveUsername = debounce(
@@ -94,8 +97,7 @@ class TabProfile extends PureComponent<Props, State> {
 
   handleChangePassword = (password: ?string) => {
     if (password) {
-      const hash = bcrypt.hashSync(password, 8)
-      this.setPassword(hash)
+      this.setPassword(password)
       this.handleClosePasswordModal()
     }
   }
