@@ -8,7 +8,6 @@ import type { T } from 'types/common'
 import Box from 'components/base/Box'
 import CurrentAddress from 'components/CurrentAddress'
 import Label from 'components/base/Label'
-import SelectAccount from 'components/SelectAccount'
 import RequestAmount from 'components/RequestAmount'
 
 type Props = {
@@ -23,10 +22,6 @@ type Props = {
 export default (props: Props) => (
   <Box flow={5}>
     <Box flow={1}>
-      <Label>{props.t('receive:steps.chooseAccount.label')}</Label>
-      <SelectAccount disabled value={props.account} />
-    </Box>
-    <Box flow={1}>
       <Label>{props.t('receive:steps.receiveFunds.label')}</Label>
       <RequestAmount
         account={props.account}
@@ -36,6 +31,7 @@ export default (props: Props) => (
       />
     </Box>
     <CurrentAddress
+      accountName={props.account && props.account.name}
       address={props.account && props.account.address}
       addressVerified={props.addressVerified}
       amount={props.amount}
