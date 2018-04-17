@@ -12,26 +12,26 @@ import fontFamily from 'styles/styled/fontFamily'
 const buttonStyles = {
   primary: {
     default: p => `
-      background: ${p.disabled ? lighten(p.theme.colors.wallet, 0.1) : p.theme.colors.wallet};
-      color: white;
+      background: ${p.disabled ? p.theme.colors.lightFog : p.theme.colors.wallet};
+      color: ${p.disabled ? p.theme.colors.grey : p.theme.colors.white};
     `,
     hover: p => `
-      background: ${lighten(p.theme.colors.wallet, 0.05)};
+      background: ${darken(p.theme.colors.wallet, 0.05)};
     `,
     active: p => `
-      background: ${darken(p.theme.colors.wallet, 0.1)};
+      background: ${darken(p.theme.colors.wallet, 0.05)};
     `,
   },
   danger: {
     default: p => `
-      background: ${p.disabled ? lighten(p.theme.colors.alertRed, 0.3) : p.theme.colors.alertRed};
-      color: white;
+      background: ${p.disabled ? p.theme.colors.lightFog : p.theme.colors.alertRed};
+      color: ${p.disabled ? p.theme.colors.grey : p.theme.colors.white};
     `,
     hover: p => `
-      background: ${lighten(p.theme.colors.alertRed, 0.1)};
+      background: ${lighten(p.theme.colors.alertRed, 0.2)};
     `,
     active: p => `
-      background: ${darken(p.theme.colors.alertRed, 0.1)};
+      background: ${lighten(p.theme.colors.alertRed, 0.2)};
     `,
   },
   outline: {
@@ -87,7 +87,8 @@ const Base = styled.button.attrs({
   outline: none;
 
   ${p => getStyles(p, 'default')};
-  &:hover {
+  &:hover,
+  &:focus {
     ${p => getStyles(p, 'hover')};
   }
   &:active {

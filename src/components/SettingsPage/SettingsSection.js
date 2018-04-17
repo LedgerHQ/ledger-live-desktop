@@ -31,7 +31,16 @@ const RoundIconContainer = styled(Box).attrs({
 
 export const SettingsSectionBody = styled(Box)`
   > * + * {
-    border-top: 1px solid ${p => p.theme.colors.lightFog};
+    &:after {
+      background: ${p => p.theme.colors.lightFog};
+      content: '';
+      display: block;
+      height: 1px;
+      left: ${p => p.theme.space[4]}px;
+      position: absolute;
+      right: ${p => p.theme.space[4]}px;
+      top: 0;
+    }
   }
 `
 
@@ -39,15 +48,17 @@ export function SettingsSectionHeader({
   title,
   desc,
   icon,
+  renderRight,
 }: {
   title: string,
   desc: string,
   icon: any,
+  renderRight?: any,
 }) {
   return (
     <SettingsSectionHeaderContainer>
       <RoundIconContainer mr={3}>{icon}</RoundIconContainer>
-      <Box>
+      <Box grow>
         <Box ff="Museo Sans|Regular" color="dark">
           {title}
         </Box>
@@ -55,11 +66,25 @@ export function SettingsSectionHeader({
           {desc}
         </Box>
       </Box>
+      {renderRight && (
+        <Box alignItems="center" justifyContent="flex-end">
+          {renderRight}
+        </Box>
+      )}
     </SettingsSectionHeaderContainer>
   )
 }
 
-const SettingsSectionRowContainer = styled(Box).attrs({ p: 4, horizontal: true, align: 'center' })`
+SettingsSectionHeader.defaultProps = {
+  renderRight: undefined,
+}
+
+const SettingsSectionRowContainer = styled(Box).attrs({
+  p: 4,
+  horizontal: true,
+  align: 'center',
+  relative: true,
+})`
   cursor: ${p => (p.onClick ? 'pointer' : '')};
 `
 

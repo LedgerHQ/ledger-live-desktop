@@ -18,7 +18,6 @@ const Base = styled(Tabbable).attrs({
   transition: 250ms linear background-color;
   cursor: pointer;
   &:focus {
-    box-shadow: rgba(0, 0, 0, 0.1) 0 2px 2px;
     outline: none;
   }
 `

@@ -4,7 +4,9 @@ import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import { Switch, Route } from 'react-router'
 
+import type { RouterHistory, Match } from 'react-router'
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
 import type { FetchCounterValues } from 'actions/counterValues'
@@ -30,27 +32,57 @@ const mapDispatchToProps = {
 }
 
 type Props = {
+  fetchCounterValues: FetchCounterValues,
+  history: RouterHistory,
   i18n: Object,
+  match: Match,
   saveSettings: SaveSettings,
   settings: Settings,
-  fetchCounterValues: FetchCounterValues,
   t: T,
 }
 
 type State = {
-  tab: number,
+  tab: Object,
 }
 
 class SettingsPage extends PureComponent<Props, State> {
-  state = {
-    tab: 0,
+  constructor(props) {
+    super(props)
+
+    this._items = [
+      {
+        key: 'display',
+        label: props.t('settings:tabs.display'),
+        value: p => () => <SectionDisplay {...p} />,
+      },
+      {
+        key: 'currencies',
+        label: props.t('settings:tabs.currencies'),
+        value: p => () => <SectionCurrencies {...p} />,
+      },
+      {
+        key: 'profile',
+        label: props.t('settings:tabs.profile'),
+        value: p => () => <SectionProfile {...p} />,
+      },
+      {
+        key: 'about',
+        label: props.t('settings:tabs.about'),
+        value: p => () => <SectionAbout {...p} />,
+      },
+    ]
+
+    this.state = {
+      tab: this._items[0],
+    }
   }
 
   _items = []
 
   handleChangeTab = (item: any) => {
-    const tab = this._items.indexOf(item)
-    this.setState({ tab })
+    const { match, history } = this.props
+    history.push(`${match.url}/${item.key}`)
+    this.setState({ tab: item })
   }
 
   handleSaveSettings = newSettings => {
@@ -64,47 +96,29 @@ class SettingsPage extends PureComponent<Props, State> {
   }
 
   render() {
-    const { settings, t, i18n, saveSettings } = this.props
+    const { match, settings, t, i18n, saveSettings } = this.props
     const { tab } = this.state
-
     const props = {
       t,
       settings,
       saveSettings,
+      i18n,
     }
 
-    this._items = [
-      {
-        key: 'display',
-        label: t('settings:tabs.display'),
-        value: () => <SectionDisplay {...props} i18n={i18n} />,
-      },
-      {
-        key: 'currencies',
-        label: t('settings:tabs.currencies'),
-        value: () => <SectionCurrencies {...props} />,
-      },
-      {
-        key: 'profile',
-        label: t('settings:tabs.profile'),
-        value: () => <SectionProfile {...props} />,
-      },
-      {
-        key: 'about',
-        label: t('settings:tabs.about'),
-        value: () => <SectionAbout {...props} />,
-      },
-    ]
-
-    const item = this._items[tab]
+    const defaultItem = this._items[0]
 
     return (
       <Box>
         <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={5}>
           {t('settings:title')}
         </Box>
-        <Pills mb={4} items={this._items} activeKey={item.key} onChange={this.handleChangeTab} />
-        {item.value && item.value()}
+        <Pills mb={4} items={this._items} activeKey={tab.key} onChange={this.handleChangeTab} />
+        <Switch>
+          {this._items.map(i => (
+            <Route key={i.key} path={`${match.url}/${i.key}`} render={i.value && i.value(props)} />
+          ))}
+          <Route render={defaultItem.value && defaultItem.value(props)} />
+        </Switch>
       </Box>
     )
   }

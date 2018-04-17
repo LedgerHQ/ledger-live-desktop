@@ -2,7 +2,12 @@
 
 import React, { PureComponent } from 'react'
 
+import { listCurrencies } from '@ledgerhq/currencies'
+
+import type { Currency } from '@ledgerhq/currencies'
 import type { T } from 'types/common'
+
+import SelectCurrency from 'components/SelectCurrency'
 
 import IconCurrencies from 'icons/Currencies'
 
@@ -17,15 +22,29 @@ type Props = {
   t: T,
 }
 
-class TabCurrencies extends PureComponent<Props> {
+type State = {
+  currency: Currency,
+}
+
+class TabCurrencies extends PureComponent<Props, State> {
+  state = {
+    currency: listCurrencies()[0],
+  }
+
+  handleChangeCurrency = currency => this.setState({ currency })
+
   render() {
     const { t } = this.props
+    const { currency } = this.state
     return (
       <Section>
         <Header
           icon={<IconCurrencies size={16} />}
           title={t('settings:tabs.currencies')}
           desc="Lorem ipsum dolor sit amet"
+          renderRight={
+            <SelectCurrency small value={currency} onChange={this.handleChangeCurrency} />
+          }
         />
         <Body>
           <Row

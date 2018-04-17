@@ -5,8 +5,10 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { withRouter } from 'react-router'
 import { ipcRenderer } from 'electron'
 
+import type { RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
@@ -85,6 +87,7 @@ const mapDispatchToProps = {
 }
 
 type Props = {
+  history: RouterHistory,
   t: T,
   hasAccounts: boolean,
   hasPassword: boolean,
@@ -147,7 +150,7 @@ class TopBar extends PureComponent<Props, State> {
   handleLock = () => this.props.lock()
 
   render() {
-    const { hasPassword, hasAccounts, username, t } = this.props
+    const { hasPassword, history, hasAccounts, username, t } = this.props
     const { sync } = this.state
 
     return (
@@ -173,6 +176,7 @@ class TopBar extends PureComponent<Props, State> {
                   key: 'profile',
                   label: t('common:editProfile'),
                   icon: <IconUser size={16} />,
+                  onClick: () => history.push('/settings/profile'),
                 },
                 ...(hasPassword
                   ? [
@@ -209,4 +213,6 @@ class TopBar extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(TopBar)
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps), translate())(
+  TopBar,
+)

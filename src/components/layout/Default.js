@@ -6,6 +6,7 @@ import { ipcRenderer } from 'electron'
 import styled from 'styled-components'
 import { Route, withRouter } from 'react-router'
 import { translate } from 'react-i18next'
+
 import type { Location } from 'react-router'
 
 import * as modals from 'components/modals'
