@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import zxcvbn from 'zxcvbn'
@@ -50,6 +50,7 @@ type Props = {
   onChange: Function,
   t: T,
   value: string,
+  withStrength: boolean,
 }
 
 class InputPassword extends PureComponent<Props, State> {
@@ -84,7 +85,7 @@ class InputPassword extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, value, maxLength } = this.props
+    const { t, value, maxLength, withStrength } = this.props
     const { passwordStrength, inputType } = this.state
 
     const hasValue = value.trim() !== ''
@@ -102,19 +103,23 @@ class InputPassword extends PureComponent<Props, State> {
             </InputRight>
           }
         />
-        <Box flow={1} horizontal>
-          {[0, 1, 2, 3, 4].map(v => (
-            <Strength
-              key={v}
-              warning={passwordStrength <= 1}
-              activated={hasValue && passwordStrength >= v}
-            />
-          ))}
-        </Box>
-        {hasValue && (
-          <Warning passwordStrength={passwordStrength}>
-            {t(`password:warning_${passwordStrength}`)}
-          </Warning>
+        {withStrength && (
+          <Fragment>
+            <Box flow={1} horizontal>
+              {[0, 1, 2, 3, 4].map(v => (
+                <Strength
+                  key={v}
+                  warning={passwordStrength <= 1}
+                  activated={hasValue && passwordStrength >= v}
+                />
+              ))}
+            </Box>
+            {hasValue && (
+              <Warning passwordStrength={passwordStrength}>
+                {t(`password:warning_${passwordStrength}`)}
+              </Warning>
+            )}
+          </Fragment>
         )}
       </Box>
     )

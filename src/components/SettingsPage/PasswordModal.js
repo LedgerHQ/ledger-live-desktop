@@ -8,7 +8,7 @@ import { unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import Input from 'components/base/Input'
+import InputPassword from 'components/base/InputPassword'
 import Label from 'components/base/Label'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
@@ -30,15 +30,15 @@ type Props = {
 type State = {
   currentPassword: string,
   newPassword: string,
-  repeatPassword: string,
+}
+
+const INITIAL_STATE = {
+  currentPassword: '',
+  newPassword: '',
 }
 
 class PasswordModal extends PureComponent<Props, State> {
-  state = {
-    currentPassword: '',
-    newPassword: '',
-    repeatPassword: '',
-  }
+  state = INITIAL_STATE
 
   handleSave = (e: SyntheticEvent<HTMLFormElement>) => {
     if (e) {
@@ -47,32 +47,35 @@ class PasswordModal extends PureComponent<Props, State> {
     if (!this.isValid()) {
       return
     }
-    const { currentPassword, newPassword, repeatPassword } = this.state
+    const { currentPassword, newPassword } = this.state
     const { isPasswordEnabled, currentPasswordHash, onChangePassword } = this.props
     if (isPasswordEnabled) {
-      const calculatedPasswordHash = bcrypt.hashSync(currentPassword, 8)
-      if (calculatedPasswordHash !== currentPasswordHash) {
+      if (!bcrypt.compareSync(currentPassword, currentPasswordHash)) {
         return
       }
       onChangePassword(newPassword)
-    } else if (newPassword === repeatPassword) {
+    } else {
       onChangePassword(newPassword)
     }
   }
 
   handleInputChange = key => value => this.setState({ [key]: value })
 
+  handleReset = () => this.setState(INITIAL_STATE)
+
   isValid = () => {
-    const { newPassword, repeatPassword } = this.state
-    return newPassword && newPassword === repeatPassword
+    const { newPassword } = this.state
+    return newPassword
   }
 
   render() {
     const { t, isPasswordEnabled, onClose, ...props } = this.props
+    const { currentPassword, newPassword } = this.state
     const isValid = this.isValid()
     return (
       <Modal
         {...props}
+        onHide={this.handleReset}
         onClose={onClose}
         render={({ onClose }) => (
           <form onSubmit={this.handleSave}>
@@ -90,35 +93,28 @@ class PasswordModal extends PureComponent<Props, State> {
                         <Label htmlFor="password">
                           {t('settings:profile.passwordModalPasswordInput')}
                         </Label>
-                        <Input
+                        <InputPassword
                           type="password"
                           placeholder={t('settings:profile.passwordModalPasswordInput')}
                           autoFocus
                           id="password"
                           onChange={this.handleInputChange('currentPassword')}
+                          value={currentPassword}
                         />
                       </Box>
                     )}
                     <Box flow={1}>
-                      <Label htmlFor="newPassword">
-                        {t('settings:profile.passwordModalNewPasswordInput')}
-                      </Label>
-                      <Input
-                        type="password"
+                      {isPasswordEnabled && (
+                        <Label htmlFor="newPassword">
+                          {t('settings:profile.passwordModalNewPasswordInput')}
+                        </Label>
+                      )}
+                      <InputPassword
                         placeholder={t('settings:profile.passwordModalNewPasswordInput')}
                         id="newPassword"
                         onChange={this.handleInputChange('newPassword')}
-                      />
-                    </Box>
-                    <Box flow={1}>
-                      <Label htmlFor="repeatPassword">
-                        {t('settings:profile.passwordModalRepeatPasswordInput')}
-                      </Label>
-                      <Input
-                        type="password"
-                        placeholder={t('settings:profile.passwordModalRepeatPasswordInput')}
-                        id="repeatPassword"
-                        onChange={this.handleInputChange('repeatPassword')}
+                        value={newPassword}
+                        withStrength
                       />
                     </Box>
                   </Box>

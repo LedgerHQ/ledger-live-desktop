@@ -7,6 +7,8 @@ import bcrypt from 'bcryptjs'
 
 import type { Settings, T } from 'types/common'
 
+import debounce from 'lodash/debounce'
+
 import { unlock } from 'reducers/application'
 import db, { setEncryptionKey } from 'helpers/db'
 
@@ -32,11 +34,13 @@ const mapDispatchToProps = {
 type Props = {
   t: T,
   settings: Settings,
+  unlock: Function,
   saveSettings: Function,
 }
 
 type State = {
   isHardResetModalOpened: boolean,
+  isPasswordModalOpened: boolean,
   username: string,
 }
 
@@ -44,14 +48,29 @@ class TabProfile extends PureComponent<Props, State> {
   state = {
     username: this.props.settings.username,
     isHardResetModalOpened: false,
+    isPasswordModalOpened: false,
   }
 
-  handleChangeUsername = username => {
-    const { saveSettings } = this.props
-    this.setState({ username })
-    window.requestIdleCallback(() => {
-      saveSettings({ username: username.trim() || 'Anonymous' })
+  setPassword = hash => {
+    const { saveSettings, unlock } = this.props
+    setEncryptionKey('accounts', hash)
+    saveSettings({
+      password: {
+        isEnabled: hash !== undefined,
+        value: hash,
+      },
     })
+    unlock()
+  }
+
+  debounceSaveUsername = debounce(
+    v => this.props.saveSettings({ username: v.trim() || 'Anonymous' }),
+    250,
+  )
+
+  handleChangeUsername = username => {
+    this.setState({ username })
+    this.debounceSaveUsername(username)
   }
 
   handleOpenHardResetModal = () => this.setState({ isHardResetModalOpened: true })
@@ -69,23 +88,16 @@ class TabProfile extends PureComponent<Props, State> {
     if (isChecked) {
       this.handleOpenPasswordModal()
     } else {
-      // console.log(`decrypting data`)
+      this.setPassword(undefined)
     }
   }
 
   handleChangePassword = (password: ?string) => {
-    const { saveSettings, unlock } = this.props
-    const hash = bcrypt.hashSync(password, 8)
-    setEncryptionKey('accounts', password)
-    window.requestIdleCallback(() => {
-      saveSettings({
-        password: {
-          isEnabled: hash !== undefined,
-          value: hash,
-        },
-      })
-      unlock()
-    })
+    if (password) {
+      const hash = bcrypt.hashSync(password, 8)
+      this.setPassword(hash)
+      this.handleClosePasswordModal()
+    }
   }
 
   render() {
@@ -110,7 +122,11 @@ class TabProfile extends PureComponent<Props, State> {
           </Row>
           <Row title={t('settings:profile.password')} desc={t('settings:profile.passwordDesc')}>
             <Box horizontal flow={2} align="center">
-              {isPasswordEnabled && <Button>{t('settings:profile.changePassword')}</Button>}
+              {isPasswordEnabled && (
+                <Button onClick={this.handleOpenPasswordModal}>
+                  {t('settings:profile.changePassword')}
+                </Button>
+              )}
               <CheckBox isChecked={isPasswordEnabled} onChange={this.handleChangePasswordCheck} />
             </Box>
           </Row>
@@ -140,7 +156,7 @@ class TabProfile extends PureComponent<Props, State> {
 
         <PasswordModal
           t={t}
-          isOpened={true || isPasswordModalOpened}
+          isOpened={isPasswordModalOpened}
           onClose={this.handleClosePasswordModal}
           onChangePassword={this.handleChangePassword}
           isPasswordEnabled={isPasswordEnabled}

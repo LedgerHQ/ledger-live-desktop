@@ -25,7 +25,7 @@ import { isLocked, unlock } from 'reducers/application'
 import { getCounterValueCode } from 'reducers/settings'
 
 import Box from 'components/base/Box'
-import Input from 'components/base/Input'
+import InputPassword from 'components/base/InputPassword'
 
 type InputValue = {
   password: string,
@@ -141,7 +141,7 @@ class IsUnlocked extends Component<Props, State> {
         <Box sticky alignItems="center" justifyContent="center" onClick={this.handleFocusInput}>
           <form onSubmit={this.handleSubmit}>
             <Box>
-              <Input
+              <InputPassword
                 autoFocus
                 innerRef={(n: any) => (this._input = n)}
                 placeholder={t('common:password')}
