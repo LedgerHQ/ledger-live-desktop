@@ -16,6 +16,8 @@ import type { Account, Operation as OperationType } from '@ledgerhq/wallet-commo
 import noop from 'lodash/noop'
 import keyBy from 'lodash/keyBy'
 
+import { rgba } from 'styles/helpers'
+
 import type { T } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
@@ -71,7 +73,7 @@ const OperationRaw = styled(Box).attrs({
   }
 
   &:hover {
-    background: ${p => p.theme.colors.lightFog};
+    background: ${p => rgba(p.theme.colors.wallet, 0.04)};
   }
 `
 

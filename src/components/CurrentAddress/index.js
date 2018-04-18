@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
 
 import noop from 'lodash/noop'
@@ -25,20 +25,12 @@ import IconShield from 'icons/Shield'
 const Container = styled(Box).attrs({
   borderRadius: 1,
   alignItems: 'center',
-  bg: p => (p.withQRCode ? 'lightGrey' : 'transparent'),
-  py: 5,
+  bg: p =>
+    p.withQRCode ? (p.notValid ? rgba(p.theme.colors.alertRed, 0.02) : 'lightGrey') : 'transparent',
+  py: 4,
   px: 7,
-})``
-
-const WrapperAddress = styled(Box).attrs({
-  alignItems: 'center',
-  borderRadius: 1,
-  py: p => (p.notValid ? 4 : 0),
-  px: 4,
 })`
-  background: ${p => (p.notValid ? rgba(p.theme.colors.alertRed, 0.05) : 'transparent')};
-  border: ${p => (p.notValid ? `1px dashed ${rgba(p.theme.colors.alertRed, 0.26)}` : 'none')};
-  width: 100%;
+  border: ${p => (p.notValid ? `1px dashed ${rgba(p.theme.colors.alertRed, 0.5)}` : 'none')};
 `
 
 const Address = styled(Box).attrs({
@@ -63,11 +55,17 @@ const Label = styled(Box).attrs({
   fontSize: 4,
   flow: 1,
   horizontal: true,
-})``
+})`
+  strong {
+    color: ${p => p.theme.colors.dark};
+    font-weight: 600;
+    border-bottom: 1px dashed ${p => p.theme.colors.dark};
+  }
+`
 
 const Footer = styled(Box).attrs({
   horizontal: true,
-  mt: 5,
+  mt: 4,
 })`
   text-transform: uppercase;
   width: 100%;
@@ -77,9 +75,20 @@ const FooterButtonWrapper = styled(Box).attrs({
   color: 'grey',
   alignItems: 'center',
   justifyContent: 'center',
-  grow: true,
+  borderRadius: 1,
 })`
   cursor: pointer;
+  height: 55px;
+  width: 55px;
+
+  &:hover {
+    background-color: rgba(100, 144, 241, 0.1);
+    color: ${p => p.theme.colors.dark};
+
+    svg {
+      color: ${p => p.theme.colors.wallet};
+    }
+  }
 `
 
 const FooterButton = ({
@@ -91,15 +100,18 @@ const FooterButton = ({
   label: string,
   onClick: Function,
 }) => (
-  <FooterButtonWrapper onClick={onClick}>
-    {icon}
-    <Box fontSize={3} ff="Museo Sans|Bold" mt={1}>
-      {label}
-    </Box>
-  </FooterButtonWrapper>
+  <Box grow alignItems="center" justifyContent="center">
+    <FooterButtonWrapper onClick={onClick}>
+      {icon}
+      <Box fontSize={3} ff="Museo Sans|Bold" mt={1}>
+        {label}
+      </Box>
+    </FooterButtonWrapper>
+  </Box>
 )
 
 type Props = {
+  accountName?: string,
   address: string,
   addressVerified?: boolean,
   amount?: string,
@@ -130,6 +142,7 @@ class CurrentAddress extends PureComponent<Props> {
 
   render() {
     const {
+      accountName,
       address,
       addressVerified,
       amount,
@@ -149,20 +162,27 @@ class CurrentAddress extends PureComponent<Props> {
 
     return (
       <Container withQRCode={withQRCode} notValid={notValid} {...props}>
-        <WrapperAddress notValid={notValid} grow>
-          {withQRCode && (
-            <Box mb={4}>
-              <QRCode size={150} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />
-            </Box>
-          )}
-          <Label>
-            <Box>{t('currentAddress:label')}</Box>
-            <IconInfoCircle size={12} />
-          </Label>
-          <Address withQRCode={withQRCode} notValid={notValid}>
-            {address}
-          </Address>
-        </WrapperAddress>
+        {withQRCode && (
+          <Box mb={4}>
+            <QRCode size={120} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />
+          </Box>
+        )}
+        <Label>
+          <Box>
+            {accountName ? (
+              <Trans i18nKey="currentAddress:labelFrom" parent="div">
+                {'Address from '}
+                <strong>{accountName}</strong>
+              </Trans>
+            ) : (
+              t('currentAddress:label')
+            )}
+          </Box>
+          <IconInfoCircle size={12} />
+        </Label>
+        <Address withQRCode={withQRCode} notValid={notValid}>
+          {address}
+        </Address>
         {withBadge && (
           <Box horizontal flow={2} mt={2} alignItems="center">
             <Box color={notValid ? 'alertRed' : 'wallet'}>
@@ -186,7 +206,7 @@ class CurrentAddress extends PureComponent<Props> {
               )}
             />
             <Print
-              data={{ address, amount }}
+              data={{ address, amount, accountName }}
               render={(print, isLoading) => (
                 <FooterButton
                   icon={<IconPrint size={16} />}

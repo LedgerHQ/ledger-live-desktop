@@ -16,17 +16,17 @@ const Container = styled(Box).attrs({
   border-radius: ${p => p.theme.radii[1]}px;
   border: 1px solid ${p => (p.isFocus ? p.theme.colors.wallet : p.theme.colors.fog)};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
-  height: 40px;
+  height: ${p => (p.small ? '34' : '40')}px;
 `
 
 const Base = styled.input.attrs({
-  ff: p => p.ff || 'Open Sans|SemiBold',
+  ff: p => (p.ff || p.small ? 'Open Sans' : 'Open Sans|SemiBold'),
   fontSize: 4,
 })`
   ${fontFamily};
   ${fontSize};
   border: 0;
-  color: ${p => p.theme.colors.dark};
+  color: ${p => p.theme.colors.graphite};
   height: 100%;
   outline: none;
   padding: 0;
@@ -65,6 +65,7 @@ type Props = {
   renderLeft?: any,
   renderRight?: any,
   containerProps?: Object,
+  small?: boolean,
 }
 
 type State = {
@@ -77,6 +78,7 @@ class Input extends PureComponent<Props, State> {
     onFocus: noop,
     renderLeft: null,
     renderRight: null,
+    small: false,
   }
 
   state = {
@@ -93,34 +95,41 @@ class Input extends PureComponent<Props, State> {
 
   handleClick = () => this._input && this._input.focus()
 
-  handleFocus = () => {
+  handleFocus = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { onFocus } = this.props
     this.setState({
       isFocus: true,
     })
-    onFocus()
+    onFocus(e)
   }
 
-  handleBlur = () => {
+  handleBlur = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const { onBlur } = this.props
     this.setState({
       isFocus: false,
     })
-    onBlur()
+    onBlur(e)
   }
 
   _input = null
 
   render() {
     const { isFocus } = this.state
-    const { renderLeft, renderRight, containerProps } = this.props
+    const { renderLeft, renderRight, containerProps, small } = this.props
 
     return (
-      <Container onClick={this.handleClick} isFocus={isFocus} shrink {...containerProps}>
+      <Container
+        onClick={this.handleClick}
+        isFocus={isFocus}
+        shrink
+        {...containerProps}
+        small={small}
+      >
         {renderLeft}
         <Box px={3} grow shrink>
           <Base
             {...this.props}
+            small={small}
             innerRef={n => (this._input = n)}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}

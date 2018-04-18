@@ -11,11 +11,17 @@ import {
   fontSize,
   justifyContent,
   space,
+  style,
 } from 'styled-system'
 
 import fontFamily from 'styles/styled/fontFamily'
 
 import Text from 'components/base/Text'
+
+const textAlign = style({
+  prop: 'textAlign',
+  cssProperty: 'textAlign',
+})
 
 const Box = styled.div`
   ${alignItems};
@@ -27,6 +33,7 @@ const Box = styled.div`
   ${fontSize};
   ${justifyContent};
   ${space};
+  ${textAlign};
 
   display: flex;
   flex-shrink: ${p => (p.noShrink === true ? '0' : p.shrink === true ? '1' : '')};

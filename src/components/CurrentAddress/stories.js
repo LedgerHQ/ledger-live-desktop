@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { boolean } from '@storybook/addon-knobs'
+import { boolean, text } from '@storybook/addon-knobs'
 
 import CurrentAddress from 'components/CurrentAddress'
 
@@ -12,6 +12,7 @@ const stories = storiesOf('Components', module)
 
 stories.add('CurrentAddress', () => (
   <CurrentAddress
+    accountName={text('accountName', '')}
     address={accounts[0].address}
     addressVerified={boolean('addressVerified', true)}
     withBadge={boolean('withBadge', false)}

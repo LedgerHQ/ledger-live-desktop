@@ -5,8 +5,10 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { withRouter } from 'react-router'
 import { ipcRenderer } from 'electron'
 
+import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
@@ -75,6 +77,7 @@ const DropDownItem = styled(DDItem).attrs({
 `
 
 const mapStateToProps = state => ({
+  username: state.settings.username,
   hasAccounts: getAccounts(state).length > 0,
   hasPassword: hasPassword(state),
 })
@@ -84,10 +87,13 @@ const mapDispatchToProps = {
 }
 
 type Props = {
-  t: T,
   hasAccounts: boolean,
   hasPassword: boolean,
+  history: RouterHistory,
+  location: Location,
   lock: Function,
+  t: T,
+  username: string,
 }
 
 type State = {
@@ -145,7 +151,7 @@ class TopBar extends PureComponent<Props, State> {
   handleLock = () => this.props.lock()
 
   render() {
-    const { hasPassword, hasAccounts, t } = this.props
+    const { location, hasPassword, history, hasAccounts, username, t } = this.props
     const { sync } = this.state
 
     return (
@@ -171,6 +177,13 @@ class TopBar extends PureComponent<Props, State> {
                   key: 'profile',
                   label: t('common:editProfile'),
                   icon: <IconUser size={16} />,
+                  onClick: () => {
+                    const url = '/settings/profile'
+
+                    if (location.pathname !== url) {
+                      history.push(url)
+                    }
+                  },
                 },
                 ...(hasPassword
                   ? [
@@ -197,7 +210,7 @@ class TopBar extends PureComponent<Props, State> {
               justifyContent="center"
               offsetTop={-2}
             >
-              <Box>{'Khalil Benihoud'}</Box>
+              <Box>{username}</Box>
               <IconAngleDown size={12} />
             </DropDown>
           </Box>
@@ -207,4 +220,6 @@ class TopBar extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(TopBar)
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps), translate())(
+  TopBar,
+)

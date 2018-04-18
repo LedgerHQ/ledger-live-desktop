@@ -8,6 +8,7 @@ export default styled.label.attrs({
   ff: 'Museo Sans|Regular',
   color: 'grey',
   align: 'center',
+  display: 'block',
 })`
   ${alignItems};
   ${color};
