@@ -31,7 +31,7 @@ class TabCurrencies extends PureComponent<Props, State> {
     currency: listCurrencies()[0],
   }
 
-  handleChangeCurrency = currency => this.setState({ currency })
+  handleChangeCurrency = (currency: Currency) => this.setState({ currency })
 
   render() {
     const { t } = this.props
