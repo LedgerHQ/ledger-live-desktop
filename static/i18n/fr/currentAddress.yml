@@ -1,2 +1,3 @@
 ---
 label: Adresse actuelle
+labelFrom: Address from <1><0>{{accountName}}</0></1>
