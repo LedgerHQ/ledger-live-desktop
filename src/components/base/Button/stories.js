@@ -48,6 +48,17 @@ stories.add('Button', () => (
         </Td>
       </tr>
       <tr>
+        <Td>danger</Td>
+        <Td>
+          <Button danger>Danger button</Button>
+        </Td>
+        <Td>
+          <Button danger disabled>
+            Danger button
+          </Button>
+        </Td>
+      </tr>
+      <tr>
         <Td>outline</Td>
         <Td>
           <Button outline>Outline button</Button>

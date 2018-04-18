@@ -94,10 +94,10 @@ export function canCreateAccount(state: State): boolean {
 // such a simple thing, let's put any, right? I don't care.
 export function serializeAccounts(accounts: any): Account[] {
   // ensure that accounts are always wrapped in data key
-  if (accounts.length && !accounts[0].data) {
+  if (accounts && accounts.length && !accounts[0].data) {
     accounts = accounts.map(account => ({ data: account }))
   }
-  return accounts.map(accountModel.decode)
+  return accounts ? accounts.map(accountModel.decode) : []
 }
 
 export function deserializeAccounts(accounts: Account[]) {

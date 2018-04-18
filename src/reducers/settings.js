@@ -10,11 +10,13 @@ import type { Settings } from 'types/common'
 export type SettingsState = Object
 
 const defaultState: SettingsState = {
+  username: 'Anonymous',
   counterValue: 'USD',
   language: 'en',
   orderAccounts: 'balance|asc',
   password: {
-    state: false,
+    isEnabled: false,
+    value: '',
   },
 }
 
@@ -34,7 +36,7 @@ const handlers: Object = {
 }
 
 export const hasPassword = (state: Object) =>
-  get(state.settings, 'password.state', defaultState.password.state)
+  get(state.settings, 'password.isEnabled', defaultState.password.isEnabled)
 
 export const getCounterValueCode = (state: Object) =>
   get(state.settings, 'counterValue', defaultState.counterValue)

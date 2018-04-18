@@ -34,20 +34,21 @@ type Props = {
   searchable?: boolean,
   value?: Object | null,
   disabled: boolean,
+  small?: boolean,
 }
 
 const Container = styled(Box).attrs({ relative: true, color: 'graphite' })``
 
 const TriggerBtn = styled(Box).attrs({
   alignItems: 'center',
-  ff: 'Open Sans|SemiBold',
+  ff: p => (p.small ? 'Open Sans' : 'Open Sans|SemiBold'),
   flow: 2,
-  fontSize: 4,
+  fontSize: p => (p.small ? 3 : 4),
   horizontal: true,
   px: 3,
 })`
   ${space};
-  height: 40px;
+  height: ${p => (p.small ? '34' : '40')}px;
   background: ${p => (p.disabled ? p.theme.colors.lightGrey : p.bg || p.theme.colors.white)};
   border-bottom-left-radius: ${p => (p.flatLeft ? 0 : p.theme.radii[1])}px;
   border-bottom-right-radius: ${p => (p.flatRight ? 0 : p.theme.radii[1])}px;
@@ -149,6 +150,7 @@ class Select extends PureComponent<Props> {
   static defaultProps = {
     bg: undefined,
     disabled: false,
+    small: false,
     fakeFocusRight: false,
     flatLeft: false,
     flatRight: false,
@@ -251,6 +253,7 @@ class Select extends PureComponent<Props> {
       renderSelected,
       searchable,
       value,
+      small,
       ...props
     } = this.props
 
@@ -276,7 +279,7 @@ class Select extends PureComponent<Props> {
           if (disabled) {
             return (
               <Container {...getRootProps({ refKey: 'innerRef' })}>
-                <TriggerBtn disabled bg={props.bg} tabIndex={0}>
+                <TriggerBtn disabled bg={props.bg} tabIndex={0} small={small}>
                   {renderSelectedItem({ selectedItem, renderSelected, placeholder })}
                 </TriggerBtn>
               </Container>
@@ -294,10 +297,11 @@ class Select extends PureComponent<Props> {
               {searchable ? (
                 <Box grow>
                   <Input
+                    small
                     keepEvent
-                    {...getInputProps({ placeholder })}
                     onClick={openMenu}
                     renderRight={<AngleDown mr={2} />}
+                    {...getInputProps({ placeholder })}
                   />
                 </Box>
               ) : (
@@ -308,6 +312,7 @@ class Select extends PureComponent<Props> {
                   flatLeft={flatLeft}
                   flatRight={flatRight}
                   tabIndex={0}
+                  small={small}
                 >
                   <Box grow>
                     {renderSelectedItem({ selectedItem, renderSelected, placeholder })}

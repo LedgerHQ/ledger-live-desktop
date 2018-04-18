@@ -21,6 +21,7 @@ import GrowScroll from 'components/base/GrowScroll'
 import Defer from 'components/base/Defer'
 
 export { default as ModalBody } from './ModalBody'
+export { default as ConfirmModal } from './ConfirmModal'
 
 const springConfig = {
   stiffness: 320,
@@ -54,8 +55,6 @@ const mapDispatchToProps: Function = (dispatch, { name, onClose = noop }): * => 
 
 const Container = styled(Box).attrs({
   color: 'grey',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
   sticky: true,
   style: p => ({
     pointerEvents: p.isVisible ? 'auto' : 'none',
@@ -78,8 +77,6 @@ const Backdrop = styled(Box).attrs({
 const Wrapper = styled(Tabbable).attrs({
   bg: 'transparent',
   flow: 4,
-  mt: 100,
-  mb: 100,
   style: p => ({
     opacity: p.op,
     transform: `scale3d(${p.scale}, ${p.scale}, ${p.scale})`,
@@ -174,12 +171,7 @@ export class Modal extends Component<Props> {
         {(m, isVisible, isAnimated) => (
           <Container isVisible={isVisible} onClick={preventBackdropClick ? undefined : onClose}>
             <Backdrop op={m.opacity} />
-            <GrowScroll
-              alignItems="center"
-              full
-              justifyContent="flex-start"
-              style={{ height: '100%' }}
-            >
+            <GrowScroll alignItems="center" full justifyContent="center" style={{ height: '100%' }}>
               <Wrapper
                 op={m.opacity}
                 scale={m.scale}

@@ -1,16 +1,55 @@
 title: Settings
 tabs:
   display: Display
-  money: Money
-  material: Material
-  app: App (beta)
-  tools: Tools
-  blockchain: Blockchain
+  currencies: Currencies
   profile: Profile
+  about: About
 display:
-  language: Language
-  counterValue: Counter Value
-  orderAccounts: Order accounts
+  language: Interface language
+  languageDesc: Lorem ipsum dolor sit amet
+  counterValue: Countervalue
+  counterValueDesc: Lorem ipsum dolor sit amet
+  region: Region
+  regionDesc: Lorem ipsum dolor sit amet
+  stock: Stock market indicators
+  stockDesc: Lorem ipsum dolor sit amet
+currencies:
+  confirmationsToSpend: Confirmations to spend
+  confirmationsToSpendDesc: Lorem ipsum dolor sit amet
+  confirmationsNb: Number of confirmations
+  confirmationsNbDesc: Lorem ipsum dolor sit amet
+  transactionsFees: Transactions fees
+  transactionsFeesDesc: Lorem ipsum dolor sit amet
+  explorer: Blockchain explorer
+  explorerDesc: Lorem ipsum dolor sit amet
 profile:
-  protectWithPassword: Protect local data with a password
+  username: Username
+  usernameDesc: Lorem ipsum dolor sit amet
   password: Password
+  passwordDesc: Lorem ipsum dolor sit amet
+  changePassword: Change password
+  passwordModalTitle: Password
+  passwordModalSubtitle: Set a password to lock your application
+  passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
+  passwordModalPasswordInput: Current password
+  passwordModalNewPasswordInput: New password
+  passwordModalRepeatPasswordInput: Repeat password
+  passwordModalSave: Save
+  sync: Sync accounts
+  syncDesc: Lorem ipsum dolor sit amet
+  export: Export logs
+  exportDesc: Lorem ipsum dolor sit amet
+  reset: Reset application
+  resetDesc: Lorem ipsum dolor sit amet
+  resetButton: Hard reset
+about:
+  faq: FAQ
+  faqDesc: Lorem ipsum dolor sit amet
+  contactUs: Contact us
+  contactUsDesc: Lorem ipsum dolor sit amet
+  terms: Terms and Privacy policy
+  termsDesc: Lorem ipsum dolor sit amet
+hardResetModal:
+  title: Hard reset
+  subTitle: Are you sure houston?
+  desc: Lorem ipsum dolor sit amet
