@@ -21,7 +21,7 @@ export const networks = [
   },
 ]
 
-export function computeOperation(addresses: Array<string>) {
+export function computeOperation(addresses: Array<string>, accountId: string) {
   return (t: Object) => {
     const outputVal = t.outputs
       .filter(o => addresses.includes(o.address))
@@ -39,7 +39,7 @@ export function computeOperation(addresses: Array<string>) {
       amount,
       confirmations: t.confirmations,
       date: t.received_at,
-      accountId: 'abcd',
+      accountId,
       blockHeight: 0,
     }
   }
@@ -78,6 +78,7 @@ export async function getAccount({
   segwit,
   network,
   coinType,
+  accountId,
   asyncDelay = 250,
   onProgress = noop,
 }: {
@@ -88,6 +89,7 @@ export async function getAccount({
   hdnode: Object,
   segwit: boolean,
   coinType: number,
+  accountId: string,
   network: Object,
   asyncDelay?: number,
   onProgress?: Function,
@@ -165,7 +167,7 @@ export async function getAccount({
         const hasOperations = txs.length > 0
 
         if (hasOperations) {
-          const newOperations = txs.map(computeOperation(allAddresses))
+          const newOperations = txs.map(computeOperation(allAddresses, accountId))
 
           const txHashs = operations.map(t => t.id)
 
