@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { withRouter } from 'react-router'
 import { ipcRenderer } from 'electron'
 
-import type { RouterHistory } from 'react-router'
+import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
@@ -87,11 +87,12 @@ const mapDispatchToProps = {
 }
 
 type Props = {
-  history: RouterHistory,
-  t: T,
   hasAccounts: boolean,
   hasPassword: boolean,
+  history: RouterHistory,
+  location: Location,
   lock: Function,
+  t: T,
   username: string,
 }
 
@@ -150,7 +151,7 @@ class TopBar extends PureComponent<Props, State> {
   handleLock = () => this.props.lock()
 
   render() {
-    const { hasPassword, history, hasAccounts, username, t } = this.props
+    const { location, hasPassword, history, hasAccounts, username, t } = this.props
     const { sync } = this.state
 
     return (
@@ -176,7 +177,13 @@ class TopBar extends PureComponent<Props, State> {
                   key: 'profile',
                   label: t('common:editProfile'),
                   icon: <IconUser size={16} />,
-                  onClick: () => history.push('/settings/profile'),
+                  onClick: () => {
+                    const url = '/settings/profile'
+
+                    if (location.pathname !== url) {
+                      history.push(url)
+                    }
+                  },
                 },
                 ...(hasPassword
                   ? [

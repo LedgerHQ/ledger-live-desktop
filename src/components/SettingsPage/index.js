@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Switch, Route } from 'react-router'
 
-import type { RouterHistory, Match } from 'react-router'
+import type { RouterHistory, Match, Location } from 'react-router'
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
 import type { FetchCounterValues } from 'actions/counterValues'
@@ -35,6 +35,7 @@ type Props = {
   fetchCounterValues: FetchCounterValues,
   history: RouterHistory,
   i18n: Object,
+  location: Location,
   match: Match,
   saveSettings: SaveSettings,
   settings: Settings,
@@ -73,16 +74,32 @@ class SettingsPage extends PureComponent<Props, State> {
     ]
 
     this.state = {
-      tab: this._items[0],
+      tab: this.getCurrentTab({ url: props.match.url, pathname: props.location.pathname }),
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.setState({
+        tab: this.getCurrentTab({
+          url: nextProps.match.url,
+          pathname: nextProps.location.pathname,
+        }),
+      })
+    }
+  }
+
+  getCurrentTab = ({ url, pathname }) =>
+    this._items.find(i => `${url}/${i.key}` === pathname) || this._items[0]
 
   _items = []
 
   handleChangeTab = (item: any) => {
-    const { match, history } = this.props
-    history.push(`${match.url}/${item.key}`)
-    this.setState({ tab: item })
+    const { match, history, location } = this.props
+    const url = `${match.url}/${item.key}`
+    if (location.pathname !== url) {
+      history.push(`${match.url}/${item.key}`)
+    }
   }
 
   handleSaveSettings = newSettings => {
