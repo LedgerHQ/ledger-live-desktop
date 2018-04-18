@@ -32,7 +32,7 @@ profile:
   passwordModalTitle: Password
   passwordModalSubtitle: Set a password to lock your application
   passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
-  passwordModalPasswordInput: Current password
+  passwordModalPasswordInput: Mot de passe actuel
   passwordModalNewPasswordInput: New password
   passwordModalRepeatPasswordInput: Repeat password
   passwordModalSave: Save
