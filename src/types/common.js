@@ -12,6 +12,20 @@ export type Devices = Array<Device>
 
 // -------------------- Settings
 
+export type CurrencySettings = {
+  coinType: number,
+
+  confirmationsToSpend: number,
+  minConfirmationsToSpend: number,
+  maxConfirmationsToSpend: number,
+
+  confirmationsNb: number,
+  minConfirmationsNb: number,
+  maxConfirmationsNb: number,
+
+  transactionFees: number,
+}
+
 export type Settings = {
   language: string,
   username: string,
@@ -20,6 +34,7 @@ export type Settings = {
     isEnabled: boolean,
     value: string,
   },
+  currencies: CurrencySettings[],
 }
 
 export type T = (?string, ?Object) => string

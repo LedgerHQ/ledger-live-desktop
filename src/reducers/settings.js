@@ -18,6 +18,7 @@ const defaultState: SettingsState = {
     isEnabled: false,
     value: '',
   },
+  currencies: [],
 }
 
 const state: SettingsState = {
