@@ -20,7 +20,7 @@ jobs:
           command: yarn flow-typed
       - run:
           name: Temporary remove broken flow definitions
-          command: rm flow-typed/npm/{react-i18next_v7.x.x.js,react-redux_v5.x.x.js,redux_v3.x.x.js,styled-components_v3.x.x.js}
+          command: rm flow-typed/npm/{react-i18next_v7.x.x.js,react-redux_v5.x.x.js,styled-components_v3.x.x.js}
       - run:
           name: Lint
           command: yarn lint
