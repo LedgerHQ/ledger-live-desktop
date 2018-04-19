@@ -3,7 +3,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import Ticker from 'react-flip-ticker'
 
 import isUndefined from 'lodash/isUndefined'
 
@@ -15,6 +14,7 @@ import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
 import { getMarketColor } from 'styles/helpers'
 
 import Box from 'components/base/Box'
+import FlipTicker from 'components/base/FlipTicker'
 
 import IconBottom from 'icons/Bottom'
 import IconTop from 'icons/Top'
@@ -98,7 +98,7 @@ export function FormattedVal(props: Props) {
   }
 
   if (animateTicker) {
-    text = <Ticker text={text} />
+    text = <FlipTicker value={text} />
   }
 
   const marketColor = settings

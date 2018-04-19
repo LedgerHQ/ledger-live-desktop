@@ -76,7 +76,6 @@
     "raven-js": "^3.24.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-flip-ticker": "^0.3.0",
     "react-i18next": "^7.6.0",
     "react-mortal": "^3.2.0",
     "react-motion": "^0.5.2",
