@@ -210,7 +210,7 @@ export async function getAccount({
           balanceByDay: getBalanceByDay(operations),
           rootPath,
           operations,
-          blockTime: new Date(),
+          lastSyncDate: new Date(),
           blockHeight,
         }
 

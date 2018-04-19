@@ -105,8 +105,8 @@ export function deserializeAccounts(accounts: Account[]) {
     // as account can be passed by main process, the Date types
     // can be converted to string. we ensure here that we have real
     // date
-    if (typeof account.blockTime === 'string') {
-      account.blockTime = new Date(account.blockTime)
+    if (typeof account.lastSyncDate === 'string') {
+      account.lastSyncDate = new Date(account.lastSyncDate)
     }
 
     return accountModel.encode(account)
