@@ -40,6 +40,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
   return (
     <Box {...otherProps}>
       <FormattedVal
+        color="dark"
         animateTicker
         fontSize={7}
         isPercent
@@ -56,6 +57,7 @@ export function BalanceSinceDiff(props: Props) {
   return (
     <Box {...otherProps}>
       <FormattedVal
+        color="dark"
         animateTicker
         fiat={counterValue}
         fontSize={7}

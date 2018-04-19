@@ -16,9 +16,9 @@ import type { Account, Operation as OperationType } from '@ledgerhq/wallet-commo
 import noop from 'lodash/noop'
 import keyBy from 'lodash/keyBy'
 
-import { rgba } from 'styles/helpers'
+import { getMarketColor, rgba } from 'styles/helpers'
 
-import type { T } from 'types/common'
+import type { Settings, T } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
 
@@ -135,6 +135,7 @@ const Operation = ({
   t,
   op,
   withAccount,
+  marketIndicator,
 }: {
   account: Account,
   minConfirmations: number,
@@ -143,20 +144,28 @@ const Operation = ({
   t: T,
   op: OperationType,
   withAccount?: boolean,
+  marketIndicator: string,
 }) => {
   const { unit, currency } = account
   const time = moment(op.date)
   const Icon = getIconByCoinType(account.currency.coinType)
-  const type = op.amount > 0 ? 'from' : 'to'
+  const isNegative = op.amount < 0
+  const type = !isNegative ? 'from' : 'to'
+
+  const marketColor = getMarketColor({
+    marketIndicator,
+    isNegative,
+  })
 
   return (
-    <OperationRaw onClick={() => onOperationClick({ operation: op, account, type })}>
+    <OperationRaw onClick={() => onOperationClick({ operation: op, account, type, marketColor })}>
       <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
         <ConfirmationCheck
-          type={type}
-          minConfirmations={minConfirmations}
           confirmations={op.confirmations}
+          marketColor={marketColor}
+          minConfirmations={minConfirmations}
           t={t}
+          type={type}
         />
       </Cell>
       <Cell size={DATE_COL_SIZE} justifyContent="space-between" px={3}>
@@ -203,7 +212,7 @@ const Operation = ({
             showCode
             fontSize={4}
             alwaysShowSign
-            color={op.amount < 0 ? 'smoke' : 'positiveGreen'}
+            color={op.amount < 0 ? 'smoke' : undefined}
           />
           <CounterValue
             color="grey"
@@ -224,6 +233,10 @@ Operation.defaultProps = {
   withAccount: false,
 }
 
+const mapStateToProps = state => ({
+  settings: state.settings,
+})
+
 const mapDispatchToProps = {
   openModal,
 }
@@ -238,6 +251,7 @@ type Props = {
   withAccount?: boolean,
   nbToShow: number,
   title?: string,
+  settings: Settings,
 }
 
 export class OperationsList extends PureComponent<Props> {
@@ -253,13 +267,14 @@ export class OperationsList extends PureComponent<Props> {
   render() {
     const {
       account,
-      title,
       accounts,
       canShowMore,
-      onAccountClick,
-      t,
-      withAccount,
       nbToShow,
+      onAccountClick,
+      settings,
+      t,
+      title,
+      withAccount,
     } = this.props
 
     if (!account && !accounts) {
@@ -295,13 +310,14 @@ export class OperationsList extends PureComponent<Props> {
                     }
                     return (
                       <Operation
-                        key={`${account.id}-${op.hash}`}
                         account={account}
+                        key={`${account.id}-${op.hash}`}
+                        marketIndicator={settings.marketIndicator}
                         minConfirmations={account.minConfirmations}
                         onAccountClick={onAccountClick}
                         onOperationClick={this.handleClickOperation}
-                        t={t}
                         op={op}
+                        t={t}
                         withAccount={withAccount}
                       />
                     )
@@ -322,4 +338,4 @@ export class OperationsList extends PureComponent<Props> {
   }
 }
 
-export default compose(translate(), connect(null, mapDispatchToProps))(OperationsList)
+export default compose(translate(), connect(mapStateToProps, mapDispatchToProps))(OperationsList)

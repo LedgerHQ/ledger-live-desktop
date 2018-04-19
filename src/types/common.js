@@ -35,6 +35,7 @@ export type Settings = {
     value: string,
   },
   currencies: CurrencySettings[],
+  marketIndicator: 'eastern' | 'western',
 }
 
 export type T = (?string, ?Object) => string

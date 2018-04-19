@@ -80,6 +80,12 @@ export const colors = {
   smoke: '#666666',
   wallet: '#6490f1',
   white: '#ffffff',
+
+  // market indicator
+  marketUp_eastern: '#66be54',
+  marketUp_western: '#ea2e49',
+  marketDown_eastern: '#ea2e49',
+  marketDown_western: '#6490f1',
 }
 
 export default {

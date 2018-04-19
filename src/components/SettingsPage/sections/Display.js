@@ -7,6 +7,8 @@ import { listFiats } from '@ledgerhq/currencies'
 import type { Settings, T } from 'types/common'
 
 import Select from 'components/base/Select'
+import RadioGroup from 'components/base/RadioGroup'
+
 import IconDisplay from 'icons/Display'
 
 import {
@@ -30,12 +32,14 @@ type Props = {
 }
 
 type State = {
+  cachedMarketIndicator: string,
   cachedLanguageKey: string,
   cachedCounterValue: ?Object,
 }
 
 class TabProfile extends PureComponent<Props, State> {
   state = {
+    cachedMarketIndicator: this.props.settings.marketIndicator,
     cachedLanguageKey: this.props.settings.language,
     cachedCounterValue: fiats.find(fiat => fiat.fiat.code === this.props.settings.counterValue),
   }
@@ -45,6 +49,20 @@ class TabProfile extends PureComponent<Props, State> {
     return {
       languages: [{ key: 'en', name: t('language:en') }, { key: 'fr', name: t('language:fr') }],
     }
+  }
+
+  getMarketIndicators() {
+    const { t } = this.props
+    return [
+      {
+        label: t('common:eastern'),
+        key: 'eastern',
+      },
+      {
+        label: t('common:western'),
+        key: 'western',
+      },
+    ]
   }
 
   handleChangeCounterValue = (item: Object) => {
@@ -65,9 +83,20 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
+  handleChangeMarketIndicator = (item: Object) => {
+    const { saveSettings } = this.props
+    const marketIndicator = item.key
+    this.setState({
+      cachedMarketIndicator: marketIndicator,
+    })
+    window.requestIdleCallback(() => {
+      saveSettings({ marketIndicator })
+    })
+  }
+
   render() {
     const { t } = this.props
-    const { cachedLanguageKey, cachedCounterValue } = this.state
+    const { cachedMarketIndicator, cachedLanguageKey, cachedCounterValue } = this.state
     const { languages } = this.getDatas()
     const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
 
@@ -109,7 +138,11 @@ class TabProfile extends PureComponent<Props, State> {
             {'-'}
           </Row>
           <Row title={t('settings:display.stock')} desc={t('settings:display.stockDesc')}>
-            {'-'}
+            <RadioGroup
+              items={this.getMarketIndicators()}
+              activeKey={cachedMarketIndicator}
+              onChange={this.handleChangeMarketIndicator}
+            />
           </Row>
         </Body>
       </Section>
