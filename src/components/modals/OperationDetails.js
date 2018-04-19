@@ -52,7 +52,7 @@ const OperationDetails = ({ t }: { t: T }) => (
   <Modal
     name={MODAL_OPERATION_DETAILS}
     render={({ data, onClose }) => {
-      const { operation, account, type } = data
+      const { marketColor, operation, account, type } = data
 
       const { name, unit, currency, minConfirmations } = account
       const { id, amount, confirmations, date, from, to } = operation
@@ -65,6 +65,7 @@ const OperationDetails = ({ t }: { t: T }) => (
           <ModalContent flow={4}>
             <Box alignItems="center" mt={3}>
               <ConfirmationCheck
+                marketColor={marketColor}
                 confirmations={confirmations}
                 minConfirmations={minConfirmations}
                 style={{

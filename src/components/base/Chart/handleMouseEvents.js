@@ -4,6 +4,9 @@ import React from 'react'
 import * as d3 from 'd3'
 import { renderToString } from 'react-dom/server'
 import { ThemeProvider } from 'styled-components'
+import { Provider } from 'react-redux'
+
+import createStore from 'renderer/createStore'
 
 import theme from 'styles/theme'
 
@@ -92,9 +95,11 @@ export default function handleMouseEvents({
     NODES.tooltip
       .html(
         renderToString(
-          <ThemeProvider theme={theme}>
-            <Tooltip unit={unit} renderTooltip={renderTooltip} d={d.ref} />
-          </ThemeProvider>,
+          <Provider store={createStore({})}>
+            <ThemeProvider theme={theme}>
+              <Tooltip unit={unit} renderTooltip={renderTooltip} d={d.ref} />
+            </ThemeProvider>
+          </Provider>,
         ),
       )
       .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, ${y(d.value)}px, 0)`)

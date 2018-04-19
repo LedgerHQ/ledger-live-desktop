@@ -19,6 +19,7 @@ const defaultState: SettingsState = {
     value: '',
   },
   currencies: [],
+  marketIndicator: 'eastern',
 }
 
 const state: SettingsState = {

@@ -16,18 +16,14 @@ import Tooltip from 'components/base/Tooltip'
 
 const Container = styled(Box).attrs({
   bg: p =>
-    p.isConfirmed
-      ? rgba(p.type === 'from' ? p.theme.colors.positiveGreen : p.theme.colors.grey, 0.2)
-      : 'none',
-  color: p => (p.type === 'from' ? p.theme.colors.positiveGreen : p.theme.colors.grey),
+    p.isConfirmed ? rgba(p.type === 'from' ? p.marketColor : p.theme.colors.grey, 0.2) : 'none',
+  color: p => (p.type === 'from' ? p.marketColor : p.theme.colors.grey),
   align: 'center',
   justify: 'center',
 })`
   border: ${p =>
     !p.isConfirmed
-      ? `1px solid ${
-          p.type === 'from' ? p.theme.colors.positiveGreen : rgba(p.theme.colors.grey, 0.2)
-        }`
+      ? `1px solid ${p.type === 'from' ? p.marketColor : rgba(p.theme.colors.grey, 0.2)}`
       : 0};
   border-radius: 50%;
   position: relative;
@@ -47,6 +43,7 @@ const WrapperClock = styled(Box).attrs({
 `
 
 const ConfirmationCheck = ({
+  marketColor,
   confirmations,
   minConfirmations,
   t,
@@ -54,6 +51,7 @@ const ConfirmationCheck = ({
   withTooltip,
   ...props
 }: {
+  marketColor: string,
   confirmations: number,
   minConfirmations: number,
   t: T,
@@ -63,7 +61,7 @@ const ConfirmationCheck = ({
   const isConfirmed = confirmations >= minConfirmations
 
   const renderContent = () => (
-    <Container type={type} isConfirmed={isConfirmed} {...props}>
+    <Container type={type} isConfirmed={isConfirmed} marketColor={marketColor} {...props}>
       {type === 'from' ? <IconReceive size={12} /> : <IconSend size={12} />}
       {!isConfirmed && (
         <WrapperClock>
