@@ -25,9 +25,6 @@ import {
 //     instead of using same default for all.
 //
 const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
-  // will be overwritten
-  coinType: 0,
-
   confirmationsToSpend: 10,
   minConfirmationsToSpend: 10,
   maxConfirmationsToSpend: 50,
@@ -57,7 +54,7 @@ class TabCurrencies extends PureComponent<Props, State> {
   getCurrencySettings() {
     const { settings } = this.props
     const { currency } = this.state
-    return settings.currencies.find(c => c.coinType === currency.coinType)
+    return settings.currenciesSettings[currency.coinType]
   }
 
   handleChangeCurrency = (currency: Currency) => this.setState({ currency })
@@ -73,23 +70,23 @@ class TabCurrencies extends PureComponent<Props, State> {
     const currencySettings = this.getCurrencySettings()
     let newCurrenciesSettings = []
     if (!currencySettings) {
-      newCurrenciesSettings = [
-        ...settings.currencies,
-        {
+      newCurrenciesSettings = {
+        ...settings.currenciesSettings,
+        [currency.coinType]: {
           ...CURRENCY_DEFAULTS_SETTINGS,
-          coinType: currency.coinType,
           [key]: val,
         },
-      ]
+      }
     } else {
-      newCurrenciesSettings = settings.currencies.map(c => {
-        if (c.coinType !== currency.coinType) {
-          return c
-        }
-        return { ...c, [key]: val }
-      })
+      newCurrenciesSettings = {
+        ...settings.currenciesSettings,
+        [currency.coinType]: {
+          ...currencySettings,
+          [key]: val,
+        },
+      }
     }
-    saveSettings({ currencies: newCurrenciesSettings })
+    saveSettings({ currenciesSettings: newCurrenciesSettings })
   }
 
   render() {
