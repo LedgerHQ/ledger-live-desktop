@@ -28,9 +28,13 @@ const T = styled(Box).attrs({
   white-space: pre;
 `
 
-const I = ({ color, children }: { color: string, children: any }) => (
+const I = ({ color, children }: { color?: string, children: any }) => (
   <Box color={color}>{children}</Box>
 )
+
+I.defaultProps = {
+  color: undefined,
+}
 
 const mapStateToProps = state => ({
   settings: state.settings,
@@ -43,14 +47,14 @@ type Props = {
   disableRounding?: boolean,
   fiat?: string | null,
   isPercent?: boolean,
-  settings: Settings,
+  settings?: Settings,
   showCode?: boolean,
   unit?: Unit | null,
   val: number,
   withIcon?: boolean,
 }
 
-function FormattedVal(props: Props) {
+export function FormattedVal(props: Props) {
   const {
     animateTicker,
     disableRounding,
@@ -97,25 +101,21 @@ function FormattedVal(props: Props) {
     text = <Ticker text={text} />
   }
 
-  const marketColor = getMarketColor({
-    marketIndicator: settings.marketIndicator,
-    isNegative,
-  })
+  const marketColor = settings
+    ? getMarketColor({
+        marketIndicator: settings.marketIndicator,
+        isNegative,
+      })
+    : undefined
 
   return (
     <T color={color || marketColor} withIcon={withIcon} {...p}>
       {withIcon ? (
         <Box horizontal alignItems="center" flow={1}>
           <Box>
-            {isNegative ? (
-              <I color={marketColor}>
-                <IconBottom size={16} />
-              </I>
-            ) : (
-              <I color={marketColor}>
-                <IconTop size={16} />
-              </I>
-            )}
+            <I color={marketColor}>
+              {isNegative ? <IconBottom size={16} /> : <IconTop size={16} />}
+            </I>
           </Box>
           <Box horizontal alignItems="center">
             {text}
@@ -135,6 +135,7 @@ FormattedVal.defaultProps = {
   disableRounding: false,
   fiat: null,
   isPercent: false,
+  settings: undefined,
   showCode: false,
   unit: null,
   withIcon: false,
