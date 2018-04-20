@@ -1,11 +1,11 @@
 ---
 ok: Ok
-confirm: Confirm
+confirm: Confirmer
 cancel: Annuler
 chooseWalletPlaceholder: Choisir un portefeuille...
 currency: Monnaie
 selectAccount: Sélectionner un compte
-selectCurrency: Select an currency
+selectCurrency: Sélectionnez une devise
 sortBy: Trier par
 search: Rechercher
 save: Sauvegarder
@@ -17,5 +17,5 @@ next: Suivant
 back: Retour
 retry: Réessayer
 close: Fermer
-eastern: Eastern
-western: Western
+eastern: Orientale
+western: Occidentale
