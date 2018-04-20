@@ -2,10 +2,12 @@
 
 import { handleActions } from 'redux-actions'
 import { getFiatUnit } from '@ledgerhq/currencies'
+import type { Currency } from '@ledgerhq/currencies'
 
 import get from 'lodash/get'
 
-import type { Settings } from 'types/common'
+import type { Settings, CurrencySettings } from 'types/common'
+import type { State } from 'reducers'
 
 export type SettingsState = Object
 
@@ -18,6 +20,20 @@ const defaultState: SettingsState = {
     isEnabled: false,
     value: '',
   },
+  marketIndicator: 'eastern',
+  currenciesSettings: {},
+}
+
+const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
+  confirmationsToSpend: 10,
+  minConfirmationsToSpend: 10,
+  maxConfirmationsToSpend: 50,
+
+  confirmationsNb: 10,
+  minConfirmationsNb: 10,
+  maxConfirmationsNb: 50,
+
+  transactionFees: 10,
 }
 
 const state: SettingsState = {
@@ -47,5 +63,12 @@ export const getLanguage = (state: Object) => get(state.settings, 'language', de
 
 export const getOrderAccounts = (state: Object) =>
   get(state.settings, 'orderAccounts', defaultState.orderAccounts)
+
+export const currencySettingsSelector = (state: State, currency: Currency): CurrencySettings => {
+  const currencySettings = state.settings.currenciesSettings[currency.coinType]
+  return currencySettings || CURRENCY_DEFAULTS_SETTINGS
+}
+
+export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 
 export default handleActions(handlers, state)

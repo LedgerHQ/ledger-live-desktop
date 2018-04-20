@@ -2,15 +2,19 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import Ticker from 'react-flip-ticker'
+import { connect } from 'react-redux'
 
 import isUndefined from 'lodash/isUndefined'
 
+import type { Settings } from 'types/common'
 import type { Unit } from '@ledgerhq/currencies'
 
 import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
 
+import { getMarketColor } from 'styles/helpers'
+
 import Box from 'components/base/Box'
+import FlipTicker from 'components/base/FlipTicker'
 
 import IconBottom from 'icons/Bottom'
 import IconTop from 'icons/Top'
@@ -18,34 +22,39 @@ import IconTop from 'icons/Top'
 const T = styled(Box).attrs({
   ff: 'Rubik',
   horizontal: true,
-  color: p =>
-    p.withIcon
-      ? p.theme.colors.dark
-      : p.isNegative
-        ? p.theme.colors.alertRed
-        : p.theme.colors.positiveGreen,
+  color: p => (p.withIcon ? p.theme.colors.dark : p.color),
 })`
   line-height: 1.2;
   white-space: pre;
 `
 
-const I = ({ color, children }: { color: string, children: any }) => (
+const I = ({ color, children }: { color?: string, children: any }) => (
   <Box color={color}>{children}</Box>
 )
+
+I.defaultProps = {
+  color: undefined,
+}
+
+const mapStateToProps = state => ({
+  settings: state.settings,
+})
 
 type Props = {
   alwaysShowSign?: boolean,
   animateTicker?: boolean,
+  color?: string,
   disableRounding?: boolean,
   fiat?: string | null,
   isPercent?: boolean,
+  settings?: Settings,
   showCode?: boolean,
   unit?: Unit | null,
   val: number,
   withIcon?: boolean,
 }
 
-function FormattedVal(props: Props) {
+export function FormattedVal(props: Props) {
   const {
     animateTicker,
     disableRounding,
@@ -54,6 +63,8 @@ function FormattedVal(props: Props) {
     alwaysShowSign,
     showCode,
     withIcon,
+    settings,
+    color,
     ...p
   } = props
   let { val, unit } = props
@@ -87,23 +98,24 @@ function FormattedVal(props: Props) {
   }
 
   if (animateTicker) {
-    text = <Ticker text={text} />
+    text = <FlipTicker value={text} />
   }
 
+  const marketColor = settings
+    ? getMarketColor({
+        marketIndicator: settings.marketIndicator,
+        isNegative,
+      })
+    : undefined
+
   return (
-    <T isNegative={isNegative} withIcon={withIcon} {...p}>
+    <T color={color || marketColor} withIcon={withIcon} {...p}>
       {withIcon ? (
         <Box horizontal alignItems="center" flow={1}>
           <Box>
-            {isNegative ? (
-              <I color="alertRed">
-                <IconBottom size={16} />
-              </I>
-            ) : (
-              <I color="positiveGreen">
-                <IconTop size={16} />
-              </I>
-            )}
+            <I color={marketColor}>
+              {isNegative ? <IconBottom size={16} /> : <IconTop size={16} />}
+            </I>
           </Box>
           <Box horizontal alignItems="center">
             {text}
@@ -119,12 +131,14 @@ function FormattedVal(props: Props) {
 FormattedVal.defaultProps = {
   alwaysShowSign: false,
   animateTicker: false,
+  color: undefined,
   disableRounding: false,
   fiat: null,
   isPercent: false,
+  settings: undefined,
   showCode: false,
   unit: null,
   withIcon: false,
 }
 
-export default FormattedVal
+export default connect(mapStateToProps)(FormattedVal)

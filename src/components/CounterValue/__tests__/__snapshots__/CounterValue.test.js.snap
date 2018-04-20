@@ -20,8 +20,8 @@ exports[`components CounterValue specifying ticker different from default 1`] = 
 
 exports[`components CounterValue using countervalue different from default 1`] = `
 <div
-  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 grmBGS"
-  color="#66be54"
+  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 bPBcmj"
+  color={undefined}
 >
   + EUR 0.42
 </div>

@@ -2,6 +2,7 @@
 
 import ledger from 'ledger-test-library'
 import bitcoin from 'bitcoinjs-lib'
+import axios from 'axios'
 import type { OperationRaw } from '@ledgerhq/wallet-common/lib/types'
 
 import groupBy from 'lodash/groupBy'
@@ -21,7 +22,7 @@ export const networks = [
   },
 ]
 
-export function computeOperation(addresses: Array<string>) {
+export function computeOperation(addresses: Array<string>, accountId: string) {
   return (t: Object) => {
     const outputVal = t.outputs
       .filter(o => addresses.includes(o.address))
@@ -39,8 +40,8 @@ export function computeOperation(addresses: Array<string>) {
       amount,
       confirmations: t.confirmations,
       date: t.received_at,
-      accountId: 'abcd',
-      blockHeight: 0,
+      accountId,
+      blockHeight: t.block.height,
     }
   }
 }
@@ -78,6 +79,7 @@ export async function getAccount({
   segwit,
   network,
   coinType,
+  accountId,
   asyncDelay = 250,
   onProgress = noop,
 }: {
@@ -88,6 +90,7 @@ export async function getAccount({
   hdnode: Object,
   segwit: boolean,
   coinType: number,
+  accountId: string,
   network: Object,
   asyncDelay?: number,
   onProgress?: Function,
@@ -165,7 +168,7 @@ export async function getAccount({
         const hasOperations = txs.length > 0
 
         if (hasOperations) {
-          const newOperations = txs.map(computeOperation(allAddresses))
+          const newOperations = txs.map(computeOperation(allAddresses, accountId))
 
           const txHashs = operations.map(t => t.id)
 
@@ -194,6 +197,11 @@ export async function getAccount({
               })
             : getAddress({ type: 'external', index: 0 })
 
+        // TODO: in the future, it should be done with the libc call
+        const {
+          data: { height: blockHeight },
+        } = await axios.get('https://api.ledgerwallet.com/blockchain/v2/btc_testnet/blocks/current')
+
         const account = {
           ...nextAddress,
           coinType,
@@ -202,6 +210,8 @@ export async function getAccount({
           balanceByDay: getBalanceByDay(operations),
           rootPath,
           operations,
+          lastSyncDate: new Date(),
+          blockHeight,
         }
 
         onProgress({

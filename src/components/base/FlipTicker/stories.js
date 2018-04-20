@@ -1,0 +1,59 @@
+// @flow
+
+import React, { Component } from 'react'
+
+import { storiesOf } from '@storybook/react'
+import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import Chance from 'chance'
+
+import Box from 'components/base/Box'
+
+import FlipTicker from 'components/base/FlipTicker'
+
+const stories = storiesOf('Components/base', module)
+
+const unit = getFiatUnit('USD')
+const chance = new Chance()
+
+function getValue() {
+  return formatCurrencyUnit(unit, chance.floating({ min: 1000, max: 100000 }), {
+    showCode: true,
+  })
+}
+
+class Wrapper extends Component<any, any> {
+  state = {
+    value: getValue(),
+  }
+
+  componentDidMount() {
+    this.generateValue()
+  }
+
+  generateValue = () =>
+    setTimeout(() => {
+      this.setState({
+        value: getValue(),
+      })
+      this.generateValue()
+    }, 5000)
+
+  render() {
+    const { render } = this.props
+    const { value } = this.state
+    return render(value)
+  }
+}
+
+stories.add('FlipTicker', () => (
+  <Wrapper
+    render={value => (
+      <Box flow={2}>
+        <FlipTicker value={value} fontSize={2} />
+        <FlipTicker value={value} />
+        <FlipTicker value={value} fontSize={8} />
+        <Box>{value}</Box>
+      </Box>
+    )}
+  />
+))

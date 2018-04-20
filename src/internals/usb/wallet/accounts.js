@@ -150,6 +150,7 @@ export default async ({
     const account = await getAccount({
       asyncDelay: 0,
       coinType,
+      accountId: xpub58,
       hdnode,
       network,
       rootPath: path,

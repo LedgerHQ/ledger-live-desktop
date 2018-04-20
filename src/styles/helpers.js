@@ -3,7 +3,7 @@
 import Color from 'color'
 
 import staticPath from 'helpers/staticPath'
-import { fontFamilies } from 'styles/theme'
+import { colors, fontFamilies } from 'styles/theme'
 
 export const rgba = (c: string, a: number) =>
   Color(c)
@@ -52,3 +52,17 @@ export const fontFace = ({
     font-weight: ${weight};
   }
 `
+
+export function getMarketColor({
+  marketIndicator,
+  isNegative,
+}: {
+  marketIndicator: string,
+  isNegative: boolean,
+}) {
+  if (isNegative) {
+    return colors[`marketDown_${marketIndicator}`]
+  }
+
+  return colors[`marketUp_${marketIndicator}`]
+}
