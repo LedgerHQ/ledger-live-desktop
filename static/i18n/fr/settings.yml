@@ -2,55 +2,55 @@
 title: Réglages
 tabs:
   display: Affichage
-  currencies: Currencies
+  currencies: Devises
   profile: Profil
-  about: About
+  about: A propos
 display:
-  language: Interface language
+  language: Langue de l'interface
   languageDesc: Lorem ipsum dolor sit amet
-  counterValue: Countervalue
+  counterValue: Contre-valeur
   counterValueDesc: Lorem ipsum dolor sit amet
-  region: Region
+  region: Région
   regionDesc: Lorem ipsum dolor sit amet
-  stock: Stock market indicators
+  stock: Indicateurs de marché boursier
   stockDesc: Lorem ipsum dolor sit amet
 currencies:
-  confirmationsToSpend: Confirmations to spend
+  confirmationsToSpend: Confirmations à dépenser
   confirmationsToSpendDesc: Lorem ipsum dolor sit amet
-  confirmationsNb: Number of confirmations
+  confirmationsNb: Nombre de confirmations
   confirmationsNbDesc: Lorem ipsum dolor sit amet
-  transactionsFees: Transactions fees
+  transactionsFees: Frais de transaction
   transactionsFeesDesc: Lorem ipsum dolor sit amet
-  explorer: Blockchain explorer
+  explorer: Explorateur de blockchain
   explorerDesc: Lorem ipsum dolor sit amet
 profile:
-  username: Username
+  username: Nom d'utilisateur
   usernameDesc: Lorem ipsum dolor sit amet
   password: Mot de passe
   passwordDesc: Lorem ipsum dolor sit amet
-  changePassword: Change password
-  passwordModalTitle: Password
-  passwordModalSubtitle: Set a password to lock your application
-  passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
+  changePassword: Changer le mot de passe
+  passwordModalTitle: Mot de passe
+  passwordModalSubtitle: Définir un mot de passe pour verrouiller votre application
+  passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. integer non nibh diam.
   passwordModalPasswordInput: Mot de passe actuel
-  passwordModalNewPasswordInput: New password
-  passwordModalRepeatPasswordInput: Repeat password
-  passwordModalSave: Save
-  sync: Sync accounts
+  passwordModalNewPasswordInput: Nouveau mot de passe
+  passwordModalRepeatPasswordInput: Répéter mot de passe
+  passwordModalSave: Sauvegarder
+  sync: Synchroniser les comptes
   syncDesc: Lorem ipsum dolor sit amet
-  export: Export logs
+  export: Exporter le journal
   exportDesc: Lorem ipsum dolor sit amet
-  reset: Reset application
+  reset: Réinitialiser l'application
   resetDesc: Lorem ipsum dolor sit amet
-  resetButton: Hard reset
+  resetButton: Réinitialisation
 about:
   faq: FAQ
   faqDesc: Lorem ipsum dolor sit amet
-  contactUs: Contact us
+  contactUs: Nous contacter
   contactUsDesc: Lorem ipsum dolor sit amet
-  terms: Terms and Privacy policy
+  terms: Conditions et politique de confidentialité
   termsDesc: Lorem ipsum dolor sit amet
 hardResetModal:
-  title: Hard reset
-  subTitle: Are you sure houston?
+  title: Réinitialisation
+  subTitle: Êtes-vous sûr ?
   desc: Lorem ipsum dolor sit amet
