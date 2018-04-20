@@ -82,10 +82,10 @@ export const colors = {
   white: '#ffffff',
 
   // market indicator
-  marketUp_eastern: '#66be54',
-  marketUp_western: '#ea2e49',
-  marketDown_eastern: '#ea2e49',
-  marketDown_western: '#6490f1',
+  marketUp_eastern: '#ea2e49',
+  marketUp_western: '#66be54',
+  marketDown_eastern: '#6490f1',
+  marketDown_western: '#ea2e49',
 }
 
 export default {

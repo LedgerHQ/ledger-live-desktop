@@ -20,7 +20,7 @@ const defaultState: SettingsState = {
     isEnabled: false,
     value: '',
   },
-  marketIndicator: 'eastern',
+  marketIndicator: 'western',
   currenciesSettings: {},
 }
 

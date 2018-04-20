@@ -7956,6 +7956,9 @@ ledger-test-library@KhalilBellakrid/ledger-test-library-nodejs#7d37482:
   dependencies:
     axios "^0.17.1"
     bindings "^1.3.0"
+    electron "^1.8.2"
+    electron-builder "^20.0.4"
+    electron-rebuild "^1.7.3"
     nan "^2.6.2"
     prebuild-install "^2.2.2"
 
