@@ -228,21 +228,12 @@ class AddAccountModal extends PureComponent<Props, State> {
   handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 
   handleImportAccount = () => {
-    const { archivedAccounts, updateAccount } = this.props
+    const { archivedAccounts, updateAccount, closeModal } = this.props
     const { selectedAccounts } = this.state
-
     const accounts = archivedAccounts.filter(a => selectedAccounts.includes(a.id))
-
-    accounts.forEach(a =>
-      updateAccount({
-        ...a,
-        archived: false,
-      }),
-    )
-
-    this.setState({
-      selectedAccounts: [],
-    })
+    accounts.forEach(a => updateAccount({ ...a, archived: false }))
+    this.setState({ selectedAccounts: [] })
+    closeModal(MODAL_ADD_ACCOUNT)
   }
 
   handleNextStep = () => {

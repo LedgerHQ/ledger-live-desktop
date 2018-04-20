@@ -49,6 +49,10 @@ class DeviceInfos extends PureComponent<Props, State> {
     const { device } = this.props
     const { memoryInfos, isLoading } = this.state
 
+    if (!device) {
+      return <Box py={5}>{'You dont have any device connected'}</Box>
+    }
+
     const title = (
       <Text>
         {device.manufacturer}
