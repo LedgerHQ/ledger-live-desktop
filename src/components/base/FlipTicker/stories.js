@@ -36,7 +36,7 @@ class Wrapper extends Component<any, any> {
         value: getValue(),
       })
       this.generateValue()
-    }, 5000)
+    }, 1000)
 
   render() {
     const { render } = this.props

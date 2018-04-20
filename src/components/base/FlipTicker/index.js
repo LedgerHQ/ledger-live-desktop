@@ -29,6 +29,11 @@ const TickWrapper = styled(Box).attrs({
 const RANGE_NUMBER = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const RANGE_COMPONENT = RANGE_NUMBER.map((r, i) => <Box key={i}>{r}</Box>)
 
+const SPRINT_CONFIG = {
+  stiffness: 280,
+  damping: 23,
+}
+
 type Props = {
   value: string,
 }
@@ -94,7 +99,7 @@ function Tick(props: { height: number, value: string }) {
   return (
     <Motion
       style={{
-        offset: spring(offset),
+        offset: spring(offset, SPRINT_CONFIG),
       }}
     >
       {m => <TickWrapper offset={m.offset}>{RANGE_COMPONENT}</TickWrapper>}
