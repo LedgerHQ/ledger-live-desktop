@@ -1,7 +1,7 @@
 ---
 step1:
-  connect: Connect your <1>Ledger device</1> to your computer and enter your <3>PIN code</3> on your device
-  choose: "We detected {{count}} devices connected, please select one:"
+  connect: Connectez votre <1>périphérique Ledger</1> à votre ordinateur et entrer votre <3>code PIN</3>
+  choose: "Nous avons détécté {{count}} périphériques, merci d'en choisir un:"
 step2:
-  open: Open <1><0>{{appName}}</0></1> App on your device
-info: You must use the device associated to the account <1><0>{{accountName}}</0></1>
+  open: Ouvrez l'application <1><0>{{appName}}</0></1> sur votre périphérique
+info: Vous devez utiliser le périphérique associé au compte <1><0>{{accountName}}</0></1>
