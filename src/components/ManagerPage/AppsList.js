@@ -39,6 +39,10 @@ type LedgerApp = {
   version: string,
   icon: string,
   app: Object,
+  bolos_version: {
+    min: number,
+    max: number,
+  },
 }
 
 type Props = {
@@ -120,7 +124,7 @@ class AppsList extends PureComponent<Props, State> {
       <List>
         {this.state.appsList.map(c => (
           <ManagerApp
-            key={c.name}
+            key={`${c.name}_${c.version}_${c.bolos_version.min}`}
             name={c.name}
             version={`Version ${c.version}`}
             icon={ICONS_FALLBACK[c.icon] || c.icon}
