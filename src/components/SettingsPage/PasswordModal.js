@@ -94,9 +94,9 @@ class PasswordModal extends PureComponent<Props, State> {
                           {t('settings:profile.passwordModalPasswordInput')}
                         </Label>
                         <InputPassword
+                          autoFocus
                           type="password"
                           placeholder={t('settings:profile.passwordModalPasswordInput')}
-                          autoFocus
                           id="password"
                           onChange={this.handleInputChange('currentPassword')}
                           value={currentPassword}
@@ -110,6 +110,7 @@ class PasswordModal extends PureComponent<Props, State> {
                         </Label>
                       )}
                       <InputPassword
+                        autoFocus={!isPasswordEnabled}
                         placeholder={t('settings:profile.passwordModalNewPasswordInput')}
                         id="newPassword"
                         onChange={this.handleInputChange('newPassword')}
