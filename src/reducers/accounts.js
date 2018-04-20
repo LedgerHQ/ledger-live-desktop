@@ -101,7 +101,16 @@ export function serializeAccounts(accounts: any): Account[] {
 }
 
 export function deserializeAccounts(accounts: Account[]) {
-  return accounts.map(accountModel.encode)
+  return accounts.map(account => {
+    // as account can be passed by main process, the Date types
+    // can be converted to string. we ensure here that we have real
+    // date
+    if (typeof account.lastSyncDate === 'string') {
+      account.lastSyncDate = new Date(account.lastSyncDate)
+    }
+
+    return accountModel.encode(account)
+  })
 }
 
 export default handleActions(handlers, state)
