@@ -9,7 +9,6 @@ import type { Device, T } from 'types/common'
 
 import { getCurrentDevice, getDevices } from 'reducers/devices'
 
-import Box from 'components/base/Box'
 import Pills from 'components/base/Pills'
 
 import AppsList from './AppsList'
@@ -37,6 +36,14 @@ class ManagerPage extends PureComponent<Props, State> {
     currentTab: 'apps',
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { device } = this.props
+    const { currentTab } = this.state
+    if (device && !nextProps.device && currentTab === 'device') {
+      this.setState({ currentTab: 'apps' })
+    }
+  }
+
   handleTabChange = t => this.setState({ currentTab: t.value })
 
   render() {
@@ -45,19 +52,18 @@ class ManagerPage extends PureComponent<Props, State> {
     const tabs = TABS.map(i => {
       let label = t(`manager:tabs.${i.key}`)
       if (i.key === 'device') {
+        if (!device) {
+          return null
+        }
         label += ` (${nbDevices})`
       }
       return { ...i, label }
-    })
+    }).filter(Boolean)
     return (
       <Fragment>
         <Pills items={tabs} activeKey={currentTab} onChange={this.handleTabChange} mb={6} />
         {currentTab === 'apps' && <AppsList device={device} />}
-        {currentTab === 'device' && (
-          <Box flow={4}>
-            <DeviceInfos device={device} />
-          </Box>
-        )}
+        {currentTab === 'device' && <DeviceInfos device={device} />}
       </Fragment>
     )
   }
