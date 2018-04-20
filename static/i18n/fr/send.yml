@@ -18,3 +18,4 @@ steps:
     title: Vérification
   confirmation:
     title: Confirmation
+    cta: Voir les détails de l'opération

@@ -2,16 +2,55 @@
 title: Réglages
 tabs:
   display: Affichage
-  money: Monnaie
-  material: Matériel
-  app: App (béta)
-  tools: Outils
-  blockchain: Blockchain
+  currencies: Devises
   profile: Profil
+  about: A propos
 display:
-  language: Langue
+  language: Langue de l'interface
+  languageDesc: Lorem ipsum dolor sit amet
   counterValue: Contre-valeur
-  orderAccounts: Ordre des comptes
+  counterValueDesc: Lorem ipsum dolor sit amet
+  region: Région
+  regionDesc: Lorem ipsum dolor sit amet
+  stock: Indicateurs de marché boursier
+  stockDesc: Lorem ipsum dolor sit amet
+currencies:
+  confirmationsToSpend: Confirmations à dépenser
+  confirmationsToSpendDesc: Lorem ipsum dolor sit amet
+  confirmationsNb: Nombre de confirmations
+  confirmationsNbDesc: Lorem ipsum dolor sit amet
+  transactionsFees: Frais de transaction
+  transactionsFeesDesc: Lorem ipsum dolor sit amet
+  explorer: Explorateur de blockchain
+  explorerDesc: Lorem ipsum dolor sit amet
 profile:
-  protectWithPassword: Protégez les données locales avec un mot de passe
+  username: Nom d'utilisateur
+  usernameDesc: Lorem ipsum dolor sit amet
   password: Mot de passe
+  passwordDesc: Lorem ipsum dolor sit amet
+  changePassword: Changer le mot de passe
+  passwordModalTitle: Mot de passe
+  passwordModalSubtitle: Définir un mot de passe pour verrouiller votre application
+  passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. integer non nibh diam.
+  passwordModalPasswordInput: Mot de passe actuel
+  passwordModalNewPasswordInput: Nouveau mot de passe
+  passwordModalRepeatPasswordInput: Répéter mot de passe
+  passwordModalSave: Sauvegarder
+  sync: Synchroniser les comptes
+  syncDesc: Lorem ipsum dolor sit amet
+  export: Exporter le journal
+  exportDesc: Lorem ipsum dolor sit amet
+  reset: Réinitialiser l'application
+  resetDesc: Lorem ipsum dolor sit amet
+  resetButton: Réinitialisation
+about:
+  faq: FAQ
+  faqDesc: Lorem ipsum dolor sit amet
+  contactUs: Nous contacter
+  contactUsDesc: Lorem ipsum dolor sit amet
+  terms: Conditions et politique de confidentialité
+  termsDesc: Lorem ipsum dolor sit amet
+hardResetModal:
+  title: Réinitialisation
+  subTitle: Êtes-vous sûr ?
+  desc: Lorem ipsum dolor sit amet

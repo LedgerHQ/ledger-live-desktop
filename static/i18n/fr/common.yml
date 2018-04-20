@@ -1,9 +1,11 @@
 ---
 ok: Ok
+confirm: Confirmer
 cancel: Annuler
 chooseWalletPlaceholder: Choisir un portefeuille...
 currency: Monnaie
 selectAccount: Sélectionner un compte
+selectCurrency: Sélectionnez une devise
 sortBy: Trier par
 search: Rechercher
 save: Sauvegarder
@@ -14,3 +16,6 @@ max: Max
 next: Suivant
 back: Retour
 retry: Réessayer
+close: Fermer
+eastern: Orientale
+western: Occidentale
