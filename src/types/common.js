@@ -29,6 +29,7 @@ export type CurrenciesSettings = {
 }
 
 export type Settings = {
+  hasCompletedOnboarding: boolean,
   language: string,
   orderAccounts: string,
   username: string,

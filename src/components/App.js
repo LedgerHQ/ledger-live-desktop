@@ -12,6 +12,8 @@ import theme from 'styles/theme'
 
 import i18n from 'renderer/i18n/electron'
 
+import Onboarding from 'components/Onboarding'
+
 import ThrowBlock from 'components/ThrowBlock'
 import Default from 'components/layout/Default'
 import Dev from 'components/layout/Dev'
@@ -32,6 +34,7 @@ const App = ({
     <I18nextProvider i18n={i18n} initialLanguage={language}>
       <ThemeProvider theme={theme}>
         <ThrowBlock>
+          <Onboarding />
           <ConnectedRouter history={history}>
             <Switch>
               {(__DEV__ || DEV_TOOLS) && <Route path="/dev" component={Dev} />}
