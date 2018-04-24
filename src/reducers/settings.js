@@ -12,6 +12,7 @@ import type { State } from 'reducers'
 export type SettingsState = Object
 
 const defaultState: SettingsState = {
+  hasCompletedOnboarding: false,
   username: 'Anonymous',
   counterValue: 'USD',
   language: 'en',
