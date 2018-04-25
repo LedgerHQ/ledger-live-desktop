@@ -11,7 +11,7 @@ cp -R static/fonts/rubik storybook-static/static/fonts
 cd storybook-static
 
 git init
-git remote add origin git@github.com:LedgerHQ/ledger-wallet-desktop.git
+git remote add origin git@github.com:LedgerHQ/ledger-live-desktop.git
 git add .
 git commit -m 'deploy storybook'
 git push -f origin master:gh-pages
