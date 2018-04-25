@@ -24,6 +24,20 @@ const fiats = listFiats().map(fiat => ({
   name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
 }))
 
+/* temporary subset of countries */
+const COUNTRIES = [
+  { name: 'China', key: 'CN' },
+  { name: 'France', key: 'FR' },
+  { name: 'India', key: 'IN' },
+  { name: 'Italy', key: 'IT' },
+  { name: 'Japan', key: 'JP' },
+  { name: 'Russian Federation', key: 'RU' },
+  { name: 'Singapore', key: 'SG' },
+  { name: 'Switzerland', key: 'CH' },
+  { name: 'United Kingdom', key: 'GB' },
+  { name: 'United States', key: 'US' },
+]
+
 type Props = {
   t: T,
   settings: Settings,
@@ -35,6 +49,7 @@ type State = {
   cachedMarketIndicator: string,
   cachedLanguageKey: string,
   cachedCounterValue: ?Object,
+  cachedRegion: Object,
 }
 
 class TabProfile extends PureComponent<Props, State> {
@@ -42,6 +57,7 @@ class TabProfile extends PureComponent<Props, State> {
     cachedMarketIndicator: this.props.settings.marketIndicator,
     cachedLanguageKey: this.props.settings.language,
     cachedCounterValue: fiats.find(fiat => fiat.fiat.code === this.props.settings.counterValue),
+    cachedRegion: this.props.settings.region,
   }
 
   getDatas() {
@@ -83,6 +99,14 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
+  handleChangeRegion = (region: Object) => {
+    const { saveSettings } = this.props
+    this.setState({ cachedRegion: region })
+    window.requestIdleCallback(() => {
+      saveSettings({ region })
+    })
+  }
+
   handleChangeMarketIndicator = (item: Object) => {
     const { saveSettings } = this.props
     const marketIndicator = item.key
@@ -96,9 +120,15 @@ class TabProfile extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { cachedMarketIndicator, cachedLanguageKey, cachedCounterValue } = this.state
+    const {
+      cachedMarketIndicator,
+      cachedLanguageKey,
+      cachedCounterValue,
+      cachedRegion,
+    } = this.state
     const { languages } = this.getDatas()
     const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
+    const currentRegion = COUNTRIES.find(r => r.key === cachedRegion.key)
 
     return (
       <Section>
@@ -135,7 +165,14 @@ class TabProfile extends PureComponent<Props, State> {
             />
           </Row>
           <Row title={t('settings:display.region')} desc={t('settings:display.regionDesc')}>
-            {'-'}
+            <Select
+              style={{ minWidth: 130 }}
+              small
+              onChange={item => this.handleChangeRegion(item)}
+              renderSelected={item => item && item.name}
+              value={currentRegion}
+              items={COUNTRIES}
+            />
           </Row>
           <Row title={t('settings:display.stock')} desc={t('settings:display.stockDesc')}>
             <RadioGroup

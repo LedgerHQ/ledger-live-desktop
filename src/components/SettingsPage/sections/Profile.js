@@ -19,6 +19,7 @@ import Button from 'components/base/Button'
 import { ConfirmModal } from 'components/base/Modal'
 import IconUser from 'icons/User'
 import PasswordModal from '../PasswordModal'
+import DisablePasswordModal from '../DisablePasswordModal'
 
 import {
   SettingsSection as Section,
@@ -41,6 +42,7 @@ type Props = {
 type State = {
   isHardResetModalOpened: boolean,
   isPasswordModalOpened: boolean,
+  isDisablePasswordModalOpened: boolean,
   username: string,
 }
 
@@ -49,6 +51,7 @@ class TabProfile extends PureComponent<Props, State> {
     username: this.props.settings.username,
     isHardResetModalOpened: false,
     isPasswordModalOpened: false,
+    isDisablePasswordModalOpened: false,
   }
 
   setPassword = password => {
@@ -80,6 +83,8 @@ class TabProfile extends PureComponent<Props, State> {
   handleCloseHardResetModal = () => this.setState({ isHardResetModalOpened: false })
   handleOpenPasswordModal = () => this.setState({ isPasswordModalOpened: true })
   handleClosePasswordModal = () => this.setState({ isPasswordModalOpened: false })
+  handleDisablePassowrd = () => this.setState({ isDisablePasswordModalOpened: true })
+  handleCloseDisablePasswordModal = () => this.setState({ isDisablePasswordModalOpened: false })
 
   handleHardReset = () => {
     db.resetAll()
@@ -91,7 +96,7 @@ class TabProfile extends PureComponent<Props, State> {
     if (isChecked) {
       this.handleOpenPasswordModal()
     } else {
-      this.setPassword(undefined)
+      this.handleDisablePassowrd()
     }
   }
 
@@ -99,12 +104,20 @@ class TabProfile extends PureComponent<Props, State> {
     if (password) {
       this.setPassword(password)
       this.handleClosePasswordModal()
+    } else {
+      this.setPassword(undefined)
+      this.handleCloseDisablePasswordModal()
     }
   }
 
   render() {
     const { t, settings } = this.props
-    const { username, isHardResetModalOpened, isPasswordModalOpened } = this.state
+    const {
+      username,
+      isHardResetModalOpened,
+      isPasswordModalOpened,
+      isDisablePasswordModalOpened,
+    } = this.state
     const isPasswordEnabled = settings.password.isEnabled === true
     return (
       <Section>
@@ -132,12 +145,6 @@ class TabProfile extends PureComponent<Props, State> {
               <CheckBox isChecked={isPasswordEnabled} onChange={this.handleChangePasswordCheck} />
             </Box>
           </Row>
-          <Row title={t('settings:profile.sync')} desc={t('settings:profile.syncDesc')}>
-            <Button primary>{t('settings:profile.sync')}</Button>
-          </Row>
-          <Row title={t('settings:profile.export')} desc={t('settings:profile.exportDesc')}>
-            <Button primary>{t('settings:profile.export')}</Button>
-          </Row>
           <Row title={t('settings:profile.reset')} desc={t('settings:profile.resetDesc')}>
             <Button danger onClick={this.handleOpenHardResetModal}>
               {t('settings:profile.resetButton')}
@@ -160,6 +167,15 @@ class TabProfile extends PureComponent<Props, State> {
           t={t}
           isOpened={isPasswordModalOpened}
           onClose={this.handleClosePasswordModal}
+          onChangePassword={this.handleChangePassword}
+          isPasswordEnabled={isPasswordEnabled}
+          currentPasswordHash={settings.password.value}
+        />
+
+        <DisablePasswordModal
+          t={t}
+          isOpened={isDisablePasswordModalOpened}
+          onClose={this.handleCloseDisablePasswordModal}
           onChangePassword={this.handleChangePassword}
           isPasswordEnabled={isPasswordEnabled}
           currentPasswordHash={settings.password.value}

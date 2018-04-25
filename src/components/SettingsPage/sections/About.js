@@ -6,7 +6,7 @@ import { shell } from 'electron'
 import type { T } from 'types/common'
 
 import IconHelp from 'icons/Help'
-import IconChevronRight from 'icons/ChevronRight'
+import IconExternalLink from 'icons/ExternalLink'
 
 import {
   SettingsSection as Section,
@@ -33,25 +33,25 @@ class SectionAbout extends PureComponent<Props> {
         />
         <Body>
           <Row
-            onClick={this.handleOpenLink('http://google.com')}
+            onClick={this.handleOpenLink('https://support.ledgerwallet.com/hc/en-us')}
             title={t('settings:about.faq')}
             desc={t('settings:about.faqDesc')}
           >
-            <IconChevronRight size={16} />
+            <IconExternalLink size={16} />
           </Row>
           <Row
-            onClick={this.handleOpenLink('http://google.com')}
+            onClick={this.handleOpenLink('https://support.ledgerwallet.com/hc/en-us/requests/new')}
             title={t('settings:about.contactUs')}
             desc={t('settings:about.contactUsDesc')}
           >
-            <IconChevronRight size={16} />
+            <IconExternalLink size={16} />
           </Row>
           <Row
-            onClick={this.handleOpenLink('http://google.com')}
+            onClick={this.handleOpenLink('https://www.ledgerwallet.com/terms')}
             title={t('settings:about.terms')}
             desc={t('settings:about.termsDesc')}
           >
-            <IconChevronRight size={16} />
+            <IconExternalLink size={16} />
           </Row>
         </Body>
       </Section>

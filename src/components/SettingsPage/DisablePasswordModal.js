@@ -1,28 +1,19 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
 import bcrypt from 'bcryptjs'
-
-import { unlock } from 'reducers/application'
+import { ErrorMessageInput } from 'components/base/Input'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
-import Label from 'components/base/Label'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
-import { ErrorMessageInput } from 'components/base/Input'
 
 import type { T } from 'types/common'
-
-const mapDispatchToProps = {
-  unlock,
-}
 
 type Props = {
   t: T,
   onClose: Function,
-  unlock: Function,
   isPasswordEnabled: boolean,
   currentPasswordHash: string,
   onChangePassword: Function,
@@ -30,36 +21,32 @@ type Props = {
 
 type State = {
   currentPassword: string,
-  newPassword: string,
   incorrectPassword: boolean,
 }
 
 const INITIAL_STATE = {
   currentPassword: '',
-  newPassword: '',
   incorrectPassword: false,
 }
 
-class PasswordModal extends PureComponent<Props, State> {
+class DisablePasswordModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
-  handleSave = (e: SyntheticEvent<HTMLFormElement>) => {
+  disablePassword = (e: SyntheticEvent<HTMLFormElement>) => {
     if (e) {
       e.preventDefault()
     }
-    if (!this.isValid()) {
-      return
-    }
-    const { currentPassword, newPassword } = this.state
+
+    const { currentPassword } = this.state
     const { isPasswordEnabled, currentPasswordHash, onChangePassword } = this.props
     if (isPasswordEnabled) {
       if (!bcrypt.compareSync(currentPassword, currentPasswordHash)) {
         this.setState({ incorrectPassword: true })
         return
       }
-      onChangePassword(newPassword)
+      onChangePassword('')
     } else {
-      onChangePassword(newPassword)
+      onChangePassword('')
     }
   }
 
@@ -72,40 +59,31 @@ class PasswordModal extends PureComponent<Props, State> {
 
   handleReset = () => this.setState(INITIAL_STATE)
 
-  isValid = () => {
-    const { newPassword } = this.state
-    return newPassword
-  }
-
   render() {
     const { t, isPasswordEnabled, onClose, ...props } = this.props
-    const { currentPassword, newPassword, incorrectPassword } = this.state
-    const isValid = this.isValid()
+    const { currentPassword, incorrectPassword } = this.state
     return (
       <Modal
         {...props}
         onHide={this.handleReset}
         onClose={onClose}
         render={({ onClose }) => (
-          <form onSubmit={this.handleSave}>
+          <form onSubmit={this.disablePassword}>
             <ModalBody onClose={onClose}>
-              <ModalTitle>{t('settings:profile.passwordModalTitle')}</ModalTitle>
+              <ModalTitle>{t('settings:profile.disablePasswordModalTitle')}</ModalTitle>
               <ModalContent>
                 <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
-                  {t('settings:profile.passwordModalSubtitle')}
+                  {t('settings:profile.disablePasswordModalSubtitle')}
                 </Box>
                 <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
-                  {t('settings:profile.passwordModalDesc')}
+                  {t('settings:profile.disablePasswordModalDesc')}
                   <Box px={7} mt={4} flow={3}>
                     {isPasswordEnabled && (
                       <Box flow={1}>
-                        <Label htmlFor="password">
-                          {t('settings:profile.passwordModalPasswordInput')}
-                        </Label>
                         <InputPassword
                           autoFocus
                           type="password"
-                          placeholder={t('settings:profile.passwordModalPasswordInput')}
+                          placeholder={t('settings:profile.disablePasswordModalInput')}
                           id="password"
                           onChange={this.handleInputChange('currentPassword')}
                           value={currentPassword}
@@ -117,21 +95,6 @@ class PasswordModal extends PureComponent<Props, State> {
                         )}
                       </Box>
                     )}
-                    <Box flow={1}>
-                      {isPasswordEnabled && (
-                        <Label htmlFor="newPassword">
-                          {t('settings:profile.passwordModalNewPasswordInput')}
-                        </Label>
-                      )}
-                      <InputPassword
-                        autoFocus={!isPasswordEnabled}
-                        placeholder={t('settings:profile.passwordModalNewPasswordInput')}
-                        id="newPassword"
-                        onChange={this.handleInputChange('newPassword')}
-                        value={newPassword}
-                        withStrength
-                      />
-                    </Box>
                   </Box>
                 </Box>
               </ModalContent>
@@ -139,8 +102,12 @@ class PasswordModal extends PureComponent<Props, State> {
                 <Button type="button" onClick={onClose}>
                   {t('common:cancel')}
                 </Button>
-                <Button primary onClick={this.handleSave} disabled={!isValid}>
-                  {t('settings:profile.passwordModalSave')}
+                <Button
+                  primary
+                  onClick={this.disablePassword}
+                  disabled={!currentPassword && !incorrectPassword}
+                >
+                  {t('settings:profile.disablePasswordModalSave')}
                 </Button>
               </ModalFooter>
             </ModalBody>
@@ -151,4 +118,4 @@ class PasswordModal extends PureComponent<Props, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(PasswordModal)
+export default DisablePasswordModal
