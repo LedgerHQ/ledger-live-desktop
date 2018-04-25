@@ -2,7 +2,7 @@
 
 exports[`components CounterValue basic 1`] = `
 <div
-  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 grmBGS"
+  className="k45ou1-0 iqaJGf e345n3-0 bJwMKx"
   color="#66be54"
 >
   + USD 10.00
@@ -11,7 +11,7 @@ exports[`components CounterValue basic 1`] = `
 
 exports[`components CounterValue specifying ticker different from default 1`] = `
 <div
-  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 grmBGS"
+  className="k45ou1-0 iqaJGf e345n3-0 bJwMKx"
   color="#66be54"
 >
   + USD 5.00
@@ -20,7 +20,7 @@ exports[`components CounterValue specifying ticker different from default 1`] = 
 
 exports[`components CounterValue using countervalue different from default 1`] = `
 <div
-  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 bPBcmj"
+  className="k45ou1-0 iqaJGf e345n3-0 huzgmt"
   color={undefined}
 >
   + EUR 0.42
@@ -29,7 +29,7 @@ exports[`components CounterValue using countervalue different from default 1`] =
 
 exports[`components CounterValue with time travel whith date in countervalues 1`] = `
 <div
-  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 grmBGS"
+  className="k45ou1-0 iqaJGf e345n3-0 bJwMKx"
   color="#66be54"
 >
   + USD 20.00
@@ -38,7 +38,7 @@ exports[`components CounterValue with time travel whith date in countervalues 1`
 
 exports[`components CounterValue with time travel whith date not in countervalues 1`] = `
 <div
-  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 grmBGS"
+  className="k45ou1-0 iqaJGf e345n3-0 bJwMKx"
   color="#66be54"
 >
   + USD 0.00
@@ -47,7 +47,7 @@ exports[`components CounterValue with time travel whith date not in countervalue
 
 exports[`components CounterValue without countervalues populated 1`] = `
 <div
-  className="s1c17x4y-0 jLdFhK s1xoa5y3-0 grmBGS"
+  className="k45ou1-0 iqaJGf e345n3-0 bJwMKx"
   color="#66be54"
 >
   + USD 0.00
