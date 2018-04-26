@@ -36,6 +36,11 @@ profile:
   passwordModalNewPasswordInput: Nouveau mot de passe
   passwordModalRepeatPasswordInput: Répéter mot de passe
   passwordModalSave: Sauvegarder
+  disablePasswordModalTitle: Disable Password
+  disablePasswordModalSubtitle: Type your password
+  disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
+  disablePasswordModalInput: Type your password
+  disablePasswordModalSave: Save
   sync: Synchroniser les comptes
   syncDesc: Lorem ipsum dolor sit amet
   export: Exporter le journal
