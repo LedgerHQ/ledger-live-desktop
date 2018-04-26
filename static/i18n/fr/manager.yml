@@ -4,3 +4,7 @@ tabs:
   device: Mon appareil
 install: Installer
 allApps: Toutes les applications
+plugYourDevice:
+  title: Plug your device
+  desc: Lorem Ipsum is simply dummy text of the printing and typesetting industry’s standard dummy text
+  cta: Plug my device
