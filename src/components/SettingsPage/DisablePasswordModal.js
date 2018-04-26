@@ -2,11 +2,11 @@
 
 import React, { PureComponent } from 'react'
 import bcrypt from 'bcryptjs'
-import { ErrorMessageInput } from 'components/base/Input'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
+import { ErrorMessageInput } from 'components/base/Input'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
 import type { T } from 'types/common'
