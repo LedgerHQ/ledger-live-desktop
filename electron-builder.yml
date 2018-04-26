@@ -1,9 +1,9 @@
-appId: com.ledger.desktop
+appId: com.ledger.live
 
 buildDependenciesFromSource: true
 
 protocols:
-  name: Ledger Wallet Desktop
+  name: Ledger Live
   schemes:
     - ledgerhq
 

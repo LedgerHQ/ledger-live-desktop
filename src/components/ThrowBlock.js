@@ -60,7 +60,7 @@ ${error.stack}
 \`\`\`
 `,
     })
-    shell.openExternal(`https://github.com/LedgerHQ/ledger-wallet-desktop/issues/new?${q}`)
+    shell.openExternal(`https://github.com/LedgerHQ/ledger-live-desktop/issues/new?${q}`)
   }
 
   handleRestart = () => {

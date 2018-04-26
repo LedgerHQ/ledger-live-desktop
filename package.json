@@ -1,8 +1,8 @@
 {
-  "name": "ledger-wallet-desktop",
-  "productName": "Ledger Wallet Desktop",
-  "description": "Ledger Wallet Desktop",
-  "repository": "https://github.com/LedgerHQ/ledger-wallet-desktop",
+  "name": "ledger-live-desktop",
+  "productName": "Ledger Live",
+  "description": "Ledger Live - Desktop",
+  "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
   "version": "0.1.0",
   "author": "Ledger",
   "license": "MIT",
