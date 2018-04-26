@@ -166,6 +166,8 @@ class TabProfile extends PureComponent<Props, State> {
           </Row>
           <Row title={t('settings:display.region')} desc={t('settings:display.regionDesc')}>
             <Select
+              searchable
+              fuseOptions={{ keys: ['name'] }}
               style={{ minWidth: 130 }}
               small
               onChange={item => this.handleChangeRegion(item)}
