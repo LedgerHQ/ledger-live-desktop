@@ -210,13 +210,14 @@ class SendModal extends PureComponent<Props, State> {
                 {this.renderStep()}
               </ModalContent>
               {this._account &&
-                stepIndex !== 3 && (
+                stepIndex < 2 && (
                   <Footer
                     canNext={canNext}
                     onNext={this.handleNextStep}
                     account={this._account}
                     amount={amount}
                     fees={fees}
+                    showTotal={stepIndex === 0}
                     t={t}
                   />
                 )}

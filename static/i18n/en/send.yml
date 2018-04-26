@@ -15,6 +15,10 @@ steps:
     title: Connect device
   verification:
     title: Verification
+    warning: |
+      You are about to validate a transaction.
+      Be careful, we strongly recommand you to verify that the informations on your Ledger device are correct.
+    body: Once you have checked everything is ok, you can validate securely the transaction on your device.
   confirmation:
     title: Confirmation
     cta: View operation details
