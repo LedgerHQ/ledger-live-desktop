@@ -23,6 +23,7 @@ const defaultState: SettingsState = {
   },
   marketIndicator: 'western',
   currenciesSettings: {},
+  region: { key: 'US', name: 'United States' },
 }
 
 const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
