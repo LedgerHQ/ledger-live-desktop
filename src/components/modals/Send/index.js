@@ -37,6 +37,7 @@ type State = {
   fees: number,
   isRBF: boolean,
   recipientAddress: string,
+  txValidated: null | boolean,
   stepIndex: number,
 }
 
@@ -59,6 +60,7 @@ const INITIAL_STATE = {
   fees: 0,
   isRBF: false,
   recipientAddress: '',
+  txValidated: null,
   stepIndex: 0,
 }
 
@@ -136,6 +138,16 @@ class SendModal extends PureComponent<Props, State> {
     })
   }
 
+  handleValidate = isValidated => {
+    this.setState({
+      txValidated: isValidated,
+    })
+
+    if (isValidated === true) {
+      this.handleNextStep()
+    }
+  }
+
   createChangeHandler = key => value => {
     const patch = { [key]: value }
     // ensure max is always restecped when changing fees
@@ -158,7 +170,7 @@ class SendModal extends PureComponent<Props, State> {
 
   renderStep = () => {
     const { t } = this.props
-    const { stepIndex, amount, deviceSelected, ...otherState } = this.state
+    const { stepIndex, deviceSelected, txValidated, ...otherState } = this.state
     const step = this._steps[stepIndex]
     if (!step) {
       return null
@@ -170,7 +182,6 @@ class SendModal extends PureComponent<Props, State> {
     const stepProps = {
       ...otherState,
       t,
-      amount,
       account: this._account,
       ...props(stepIndex === 1, {
         accountName: this._account ? this._account.name : undefined,
@@ -178,9 +189,13 @@ class SendModal extends PureComponent<Props, State> {
         onChangeDevice: this.handleChangeDevice,
         onStatusChange: this.handleChangeStatus,
       }),
+      ...props(stepIndex === 2, {
+        device: deviceSelected,
+        onValidate: this.handleValidate,
+      }),
     }
 
-    return <Comp onChange={this.createChangeHandler} {...stepProps} {...this.props} />
+    return <Comp onChange={this.createChangeHandler} {...stepProps} />
   }
 
   render() {

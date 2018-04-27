@@ -6,9 +6,11 @@ import uniqueId from 'lodash/uniqueId'
 
 import Box from 'components/base/Box'
 import WarnBox from 'components/WarnBox'
+import DeviceCheckAddress from 'components/DeviceCheckAddress'
 import DeviceConfirm from 'components/DeviceConfirm'
 
-import type { T } from 'types/common'
+import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Device, T } from 'types/common'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -27,6 +29,9 @@ const Info = styled(Box).attrs({
 `
 
 type Props = {
+  account: ?Account,
+  device: ?Device,
+  onValidate: Function,
   t: T,
 }
 
@@ -39,6 +44,16 @@ export default (props: Props) => (
         .map(line => <p key={uniqueId()}>{line}</p>)}
     </WarnBox>
     <Info>{props.t('send:steps.verification.body')}</Info>
-    <DeviceConfirm />
+    {// TODO: Actually create a tx
+    // DeviceCheckAddress used as a placeholder in the meantime
+    props.account &&
+      props.device && (
+        <DeviceCheckAddress
+          account={props.account}
+          device={props.device}
+          onCheck={props.onValidate}
+          render={({ isVerified }) => <DeviceConfirm notValid={isVerified === false} />}
+        />
+      )}
   </Container>
 )
