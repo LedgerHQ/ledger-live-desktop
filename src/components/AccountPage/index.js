@@ -7,9 +7,12 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
 import styled from 'styled-components'
-import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import {
+  formatCurrencyUnit,
+  getFiatCurrencyByTicker,
+} from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -95,9 +98,13 @@ class AccountPage extends PureComponent<Props, State> {
           currency: formatCurrencyUnit(account.unit, account.balance, {
             showCode: true,
           }),
-          counterValue: formatCurrencyUnit(getFiatUnit(counterValue), data.totalBalance, {
-            showCode: true,
-          }),
+          counterValue: formatCurrencyUnit(
+            getFiatCurrencyByTicker(counterValue).units[0],
+            data.totalBalance,
+            {
+              showCode: true,
+            },
+          ),
         },
       })
     }

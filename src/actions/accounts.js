@@ -1,7 +1,7 @@
 // @flow
 
 import sortBy from 'lodash/sortBy'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import db from 'helpers/db'
 

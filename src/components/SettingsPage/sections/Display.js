@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import moment from 'moment'
-import { listFiats } from '@ledgerhq/currencies'
+import { listFiatCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import type { Settings, T } from 'types/common'
 
@@ -18,11 +18,14 @@ import {
   SettingsSectionRow as Row,
 } from '../SettingsSection'
 
-const fiats = listFiats().map(fiat => ({
-  key: fiat.code,
-  fiat,
-  name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
-}))
+const fiats = listFiatCurrencies()
+  .map(f => f.units[0])
+  // For now we take first unit, in the future we'll need to figure out something else
+  .map(fiat => ({
+    key: fiat.code,
+    fiat,
+    name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
+  }))
 
 /* temporary subset of countries */
 const COUNTRIES = [

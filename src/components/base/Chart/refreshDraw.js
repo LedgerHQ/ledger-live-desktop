@@ -2,7 +2,7 @@
 
 import * as d3 from 'd3'
 import moment from 'moment'
-import { formatShort } from '@ledgerhq/currencies'
+import { formatShort } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import { colors as themeColors } from 'styles/theme'
 

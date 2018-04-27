@@ -3,7 +3,7 @@
 import React, { Fragment, PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T, Device } from 'types/common'
 
 import { MODAL_RECEIVE } from 'config/constants'

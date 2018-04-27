@@ -2,21 +2,21 @@
 
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
-import { listCurrencies } from '@ledgerhq/currencies'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
-import type { Currency } from '@ledgerhq/currencies'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 const stories = storiesOf('Common', module)
 
-const currencies: Array<Currency> = listCurrencies()
+const currencies: Array<CryptoCurrency> = listCryptoCurrencies()
 
 stories.add('Currencies', () => (
   <div>
     <table border="1">
       <thead>
         <tr>
-          <td>{'coin type'}</td>
+          <td>{'id'}</td>
           <td>{'name'}</td>
           <td>{'color'}</td>
           <td>{'icon'}</td>
@@ -25,10 +25,10 @@ stories.add('Currencies', () => (
       </thead>
       <tbody>
         {currencies.map(cur => {
-          const Icon = getIconByCoinType(cur.coinType)
+          const Icon = getCryptoCurrencyIcon(cur)
           return (
-            <tr key={cur.coinType}>
-              <td>{cur.coinType}</td>
+            <tr key={cur.id}>
+              <td>{cur.id}</td>
               <td>{cur.name}</td>
               <td>
                 {cur.color ? (

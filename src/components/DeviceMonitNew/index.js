@@ -4,7 +4,7 @@ import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device, Devices } from 'types/common'
 
 import { sendEvent } from 'renderer/events'
@@ -19,7 +19,7 @@ type DeviceStatus = 'unconnected' | 'connected'
 type AppStatus = 'success' | 'fail' | 'progress'
 
 type Props = {
-  coinType: number,
+  currency: ?CryptoCurrency,
   devices: Devices,
   deviceSelected: Device | null,
   account?: Account,
@@ -78,7 +78,7 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 
   checkAppOpened = () => {
-    const { deviceSelected, account, coinType } = this.props
+    const { deviceSelected, account, currency } = this.props
 
     if (deviceSelected === null) {
       return
@@ -93,9 +93,9 @@ class DeviceMonit extends PureComponent<Props, State> {
       }
     }
 
-    if (coinType) {
+    if (currency) {
       options = {
-        coinType,
+        currencyId: currency.id,
       }
     }
 
@@ -134,13 +134,13 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 
   render() {
-    const { coinType, account, devices, deviceSelected, render } = this.props
+    const { currency, account, devices, deviceSelected, render } = this.props
     const { appStatus, deviceStatus } = this.state
 
     if (render) {
       return render({
         appStatus,
-        coinType: account ? account.coinType : coinType,
+        currency: account ? account.currency : currency,
         devices,
         deviceSelected: deviceStatus === 'connected' ? deviceSelected : null,
         deviceStatus,

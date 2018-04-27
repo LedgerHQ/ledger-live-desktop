@@ -1,10 +1,10 @@
 import React from 'react'
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import render from '__mocks__/render'
 import FormattedVal from '..'
 
-const bitcoinUnit = getDefaultUnitByCoinType(0)
+const bitcoinUnit = getCryptoCurrencyById('bitcoin').units[0]
 
 describe('components', () => {
   describe('FormattedVal', () => {

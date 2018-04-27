@@ -2,7 +2,7 @@
 
 import React from 'react'
 
-import type { Unit } from '@ledgerhq/currencies'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
 
 import { colors as themeColors } from 'styles/theme'
 import { TooltipContainer } from 'components/base/Tooltip'

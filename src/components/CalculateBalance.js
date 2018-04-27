@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import noop from 'lodash/noop'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import calculateBalance from 'helpers/balance'
 

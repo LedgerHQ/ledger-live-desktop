@@ -1,6 +1,6 @@
 // @flow
 
-import { fetchCurrentRates } from '@ledgerhq/wallet-common/lib/api/countervalue'
+import { fetchCurrentRates } from '@ledgerhq/live-common/lib/api/countervalue'
 
 type SendFunction = (type: string, data: *) => void
 

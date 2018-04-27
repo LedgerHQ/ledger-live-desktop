@@ -6,9 +6,12 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import {
+  formatCurrencyUnit,
+  getFiatCurrencyByTicker,
+} from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import chunk from 'lodash/chunk'
 
@@ -94,9 +97,13 @@ class DashboardPage extends PureComponent<Props, State> {
         text: 'Total balance',
         color: colors.wallet,
         balance: {
-          counterValue: formatCurrencyUnit(getFiatUnit(counterValue), data.totalBalance, {
-            showCode: true,
-          }),
+          counterValue: formatCurrencyUnit(
+            getFiatCurrencyByTicker(counterValue).units[0],
+            data.totalBalance,
+            {
+              showCode: true,
+            },
+          ),
         },
       })
     }

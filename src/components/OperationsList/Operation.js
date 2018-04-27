@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import moment from 'moment'
 import noop from 'lodash/noop'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
-import type { Account, Operation as OperationType } from '@ledgerhq/wallet-common/lib/types'
+import type { Account, Operation as OperationType } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
@@ -126,7 +126,7 @@ class Operation extends PureComponent<Props> {
     } = this.props
     const { unit, currency } = account
     const time = moment(op.date)
-    const Icon = getIconByCoinType(account.currency.coinType)
+    const Icon = getCryptoCurrencyIcon(account.currency)
     const isNegative = op.amount < 0
     const type = !isNegative ? 'from' : 'to'
 

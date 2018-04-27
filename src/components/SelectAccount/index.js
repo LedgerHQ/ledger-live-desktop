@@ -3,11 +3,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
 import noop from 'lodash/noop'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 })
 
 const renderItem = a => {
-  const Icon = getIconByCoinType(a.coinType)
+  const Icon = getCryptoCurrencyIcon(a)
   const { color } = a.currency
   return (
     <Box grow horizontal alignItems="center" flow={2}>

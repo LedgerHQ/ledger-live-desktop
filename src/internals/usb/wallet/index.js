@@ -5,12 +5,11 @@ import Btc from '@ledgerhq/hw-app-btc'
 
 import getAllAccounts, { getPath, verifyAddress } from './accounts'
 
-async function getAllAccountsByCoinType({ pathDevice, coinType, currentAccounts, onProgress }) {
+async function getAllAccountsByCurrencyId({ pathDevice, currencyId, currentAccounts, onProgress }) {
   const transport = await CommNodeHid.open(pathDevice)
 
-  // 1: BTC Testnet
-  if (coinType === 1) {
-    return getAllAccounts({ coinType, transport, currentAccounts, onProgress })
+  if (currencyId === 'bitcoin_testnet') {
+    return getAllAccounts({ currencyId, transport, currentAccounts, onProgress })
   }
 
   throw new Error('Invalid coinType')
@@ -19,11 +18,11 @@ async function getAllAccountsByCoinType({ pathDevice, coinType, currentAccounts,
 export default (sendEvent: Function) => ({
   getAccounts: async ({
     pathDevice,
-    coinType,
+    currencyId,
     currentAccounts,
   }: {
     pathDevice: string,
-    coinType: number,
+    currencyId: string,
     currentAccounts: Array<string>,
   }) => {
     sendEvent(
@@ -35,9 +34,9 @@ export default (sendEvent: Function) => ({
     )
 
     try {
-      const data = await getAllAccountsByCoinType({
+      const data = await getAllAccountsByCurrencyId({
         pathDevice,
-        coinType,
+        currencyId,
         currentAccounts,
         onProgress: progress => sendEvent('wallet.getAccounts.progress', progress, { kill: false }),
       })
@@ -59,13 +58,13 @@ export default (sendEvent: Function) => ({
     }
   },
   checkIfAppOpened: async ({
-    coinType,
+    currencyId,
     devicePath,
     accountPath,
     accountAddress,
     segwit = true,
   }: {
-    coinType?: number,
+    currencyId?: string,
     devicePath: string,
     accountPath: string,
     accountAddress: string,
@@ -82,9 +81,8 @@ export default (sendEvent: Function) => ({
           throw new Error('Address is different')
         }
       }
-
-      if (coinType) {
-        await btc.getWalletPublicKey(getPath({ coinType, segwit }), false, segwit)
+      if (currencyId) {
+        await btc.getWalletPublicKey(getPath({ currencyId, segwit }), false, segwit)
         sendEvent('wallet.checkIfAppOpened.success', { devicePath })
       }
     } catch (err) {

@@ -2,9 +2,9 @@
 
 import React, { PureComponent } from 'react'
 
-import { listCurrencies } from '@ledgerhq/currencies'
+import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type { Currency } from '@ledgerhq/currencies'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Settings, CurrencySettings, T } from 'types/common'
 
 import SelectCurrency from 'components/SelectCurrency'
@@ -43,21 +43,21 @@ type Props = {
 }
 
 type State = {
-  currency: Currency,
+  currency: CryptoCurrency,
 }
 
 class TabCurrencies extends PureComponent<Props, State> {
   state = {
-    currency: listCurrencies()[0],
+    currency: listCryptoCurrencies()[0],
   }
 
   getCurrencySettings() {
     const { settings } = this.props
     const { currency } = this.state
-    return settings.currenciesSettings[currency.coinType]
+    return settings.currenciesSettings[currency.id]
   }
 
-  handleChangeCurrency = (currency: Currency) => this.setState({ currency })
+  handleChangeCurrency = (currency: CryptoCurrency) => this.setState({ currency })
 
   handleChangeConfirmationsToSpend = (nb: number) =>
     this.updateCurrencySetting('confirmationsToSpend', nb)
@@ -72,7 +72,7 @@ class TabCurrencies extends PureComponent<Props, State> {
     if (!currencySettings) {
       newCurrenciesSettings = {
         ...settings.currenciesSettings,
-        [currency.coinType]: {
+        [currency.id]: {
           ...CURRENCY_DEFAULTS_SETTINGS,
           [key]: val,
         },
@@ -80,7 +80,7 @@ class TabCurrencies extends PureComponent<Props, State> {
     } else {
       newCurrenciesSettings = {
         ...settings.currenciesSettings,
-        [currency.coinType]: {
+        [currency.id]: {
           ...currencySettings,
           [key]: val,
         },
@@ -95,7 +95,7 @@ class TabCurrencies extends PureComponent<Props, State> {
     const { confirmationsToSpend, confirmationsNb } =
       this.getCurrencySettings() || CURRENCY_DEFAULTS_SETTINGS
     return (
-      <Section key={currency.coinType}>
+      <Section key={currency.id}>
         <Header
           icon={<IconCurrencies size={16} />}
           title={t('settings:tabs.currencies')}

@@ -1,8 +1,8 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
-import { getFiatUnit } from '@ledgerhq/currencies'
+import type { Account } from '@ledgerhq/live-common/lib/types'
+import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
@@ -30,7 +30,7 @@ const BalanceSummary = ({
   renderHeader,
   selectedTime,
 }: Props) => {
-  const unit = getFiatUnit(counterValue)
+  const unit = getFiatCurrencyByTicker(counterValue).units[0]
   return (
     <Card p={0} py={6}>
       <CalculateBalance

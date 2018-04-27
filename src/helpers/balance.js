@@ -2,8 +2,7 @@
 
 import moment from 'moment'
 import get from 'lodash/get'
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import find from 'lodash/find'
 import first from 'lodash/first'
@@ -70,7 +69,7 @@ export function getBalanceHistoryForAccount({
   interval: DateInterval,
 }): Array<BalanceHistoryDay> {
   const todayDate = moment().format('YYYY-MM-DD')
-  const unit = getDefaultUnitByCoinType(account.coinType)
+  const { unit } = account
   const counterVals = get(counterValues, `${unit.code}.${counterValue}`)
   let lastBalance = getBalanceAtIntervalStart(account, interval)
   return mapInterval(interval, date => {

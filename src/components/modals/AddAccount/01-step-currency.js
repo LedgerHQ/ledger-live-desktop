@@ -2,9 +2,9 @@
 
 import React from 'react'
 
-import { listCurrencies } from '@ledgerhq/currencies'
+import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type { Currency } from '@ledgerhq/currencies/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import get from 'lodash/get'
@@ -13,15 +13,15 @@ import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import Select from 'components/base/Select'
 
-const currencies = listCurrencies().map(currency => ({
-  key: currency.coinType,
+const currencies = listCryptoCurrencies().map(currency => ({
+  key: currency.id,
   name: currency.name,
   data: currency,
 }))
 
 type Props = {
   onChangeCurrency: Function,
-  currency: Currency | null,
+  currency?: ?CryptoCurrency,
   t: T,
 }
 

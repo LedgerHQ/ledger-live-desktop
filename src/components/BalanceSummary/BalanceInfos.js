@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import type { Unit } from '@ledgerhq/currencies'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
