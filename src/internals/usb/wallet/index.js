@@ -3,17 +3,7 @@
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import Btc from '@ledgerhq/hw-app-btc'
 
-import getAllAccounts, { getPath, verifyAddress } from './accounts'
-
-async function getAllAccountsByCurrencyId({ pathDevice, currencyId, currentAccounts, onProgress }) {
-  const transport = await CommNodeHid.open(pathDevice)
-
-  if (currencyId === 'bitcoin_testnet') {
-    return getAllAccounts({ currencyId, transport, currentAccounts, onProgress })
-  }
-
-  throw new Error('Invalid coinType')
-}
+import { getPath, verifyAddress } from './accounts'
 
 export default (sendEvent: Function) => ({
   getAccounts: async ({
@@ -25,26 +15,9 @@ export default (sendEvent: Function) => ({
     currencyId: string,
     currentAccounts: Array<string>,
   }) => {
-    sendEvent(
-      'wallet.getAccounts.start',
-      {
-        pid: process.pid,
-      },
-      { kill: false },
+    console.warn(
+      `NOT IMPLEMENTED: getting account for ${pathDevice} ${currencyId} ${currentAccounts.length}`,
     )
-
-    try {
-      const data = await getAllAccountsByCurrencyId({
-        pathDevice,
-        currencyId,
-        currentAccounts,
-        onProgress: progress => sendEvent('wallet.getAccounts.progress', progress, { kill: false }),
-      })
-
-      sendEvent('wallet.getAccounts.success', data)
-    } catch (err) {
-      sendEvent('wallet.getAccounts.fail', err.stack || err)
-    }
   },
   verifyAddress: async ({ pathDevice, path }: { pathDevice: string, path: string }) => {
     const transport = await CommNodeHid.open(pathDevice)
