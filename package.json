@@ -14,20 +14,12 @@
     "flow": "flow",
     "lint": "eslint src webpack .storybook",
     "postinstall": "bash ./scripts/postinstall.sh",
-    "precommit": "lint-staged",
     "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
     "publish-storybook": "bash ./scripts/publish-storybook.sh",
     "release": "build",
     "start": "bash ./scripts/start.sh",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
     "trans": "node scripts/trans"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
   },
   "electronWebpack": {
     "title": true,
@@ -139,7 +131,6 @@
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "js-yaml": "^3.10.0",
-    "lint-staged": "^7.0.4",
     "node-loader": "^0.6.0",
     "prettier": "^1.12.1",
     "react-hot-loader": "^4.1.0",
