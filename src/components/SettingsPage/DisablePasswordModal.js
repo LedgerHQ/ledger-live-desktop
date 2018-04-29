@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
+import Label from 'components/base/Label'
 import { ErrorMessageInput } from 'components/base/Input'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
@@ -72,14 +73,14 @@ class DisablePasswordModal extends PureComponent<Props, State> {
             <ModalBody onClose={onClose}>
               <ModalTitle>{t('settings:profile.disablePasswordModalTitle')}</ModalTitle>
               <ModalContent>
-                <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
-                  {t('settings:profile.disablePasswordModalSubtitle')}
-                </Box>
                 <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
                   {t('settings:profile.disablePasswordModalDesc')}
                   <Box px={7} mt={4} flow={3}>
                     {isPasswordEnabled && (
                       <Box flow={1}>
+                        <Label htmlFor="password">
+                          {t('settings:profile.disablePasswordModalInput')}
+                        </Label>
                         <InputPassword
                           autoFocus
                           type="password"
