@@ -139,13 +139,12 @@ class SendModal extends PureComponent<Props, State> {
   }
 
   handleValidate = isValidated => {
+    const { stepIndex } = this.state
+
     this.setState({
       txValidated: isValidated,
+      stepIndex: stepIndex + 1,
     })
-
-    if (isValidated === true) {
-      this.handleNextStep()
-    }
   }
 
   createChangeHandler = key => value => {
@@ -193,6 +192,9 @@ class SendModal extends PureComponent<Props, State> {
         device: deviceSelected,
         onValidate: this.handleValidate,
       }),
+      ...props(stepIndex === 3, {
+        txValidated,
+      }),
     }
 
     return <Comp onChange={this.createChangeHandler} {...stepProps} />
@@ -200,7 +202,7 @@ class SendModal extends PureComponent<Props, State> {
 
   render() {
     const { accounts, t } = this.props
-    const { stepIndex, amount, account, fees } = this.state
+    const { stepIndex, amount, account, fees, txValidated } = this.state
 
     const canNext = this.canNext()
     const canPrev = this.canPrev()
@@ -239,7 +241,16 @@ class SendModal extends PureComponent<Props, State> {
               {stepIndex === 3 && (
                 <ModalFooter horizontal alignItems="center" justifyContent="flex-end" flow={2}>
                   <Button onClick={onClose}>{t('common:close')}</Button>
-                  <Button primary>{t('send:steps.confirmation.cta')}</Button>
+                  {txValidated ? (
+                    // TODO: actually go to operations details
+                    <Button onClick={onClose} primary>
+                      {t('send:steps.confirmation.success.cta')}
+                    </Button>
+                  ) : (
+                    <Button onClick={() => this.setState({ stepIndex: 0 })} primary>
+                      {t('send:steps.confirmation.error.cta')}
+                    </Button>
+                  )}
                 </ModalFooter>
               )}
             </ModalBody>
