@@ -4,10 +4,14 @@ import bcrypt from 'bcryptjs'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
 import type { Settings, T } from 'types/common'
+import IconLockScreen from 'icons/LockScreen'
+
+import { ErrorMessageInput } from 'components/base/Input'
 
 import get from 'lodash/get'
 
@@ -43,6 +47,7 @@ type Props = {
 }
 type State = {
   inputValue: InputValue,
+  incorrectPassword: boolean,
 }
 
 const mapStateToProps = state => ({
@@ -61,8 +66,27 @@ const defaultState = {
   inputValue: {
     password: '',
   },
+  incorrectPassword: false,
 }
 
+export const PageTitle = styled(Box).attrs({
+  width: '152px',
+  height: '27px',
+  fontFamily: 'MuseoSans',
+  fontSize: '22px',
+  color: '#1d2028',
+})``
+
+export const LockScreenDesc = styled(Box).attrs({
+  width: '340px',
+  height: '36px',
+  fontFamily: 'OpenSans',
+  fontSize: '13px',
+  textAlign: 'center',
+  color: '#666',
+})`
+  margin: 10px auto 25px;
+`
 class IsUnlocked extends Component<Props, State> {
   state = {
     ...defaultState,
@@ -121,6 +145,8 @@ class IsUnlocked extends Component<Props, State> {
       this.setState({
         ...defaultState,
       })
+    } else {
+      this.setState({ incorrectPassword: true })
     }
   }
 
@@ -133,22 +159,36 @@ class IsUnlocked extends Component<Props, State> {
   _input: ?HTMLInputElement
 
   render() {
-    const { inputValue } = this.state
+    const { inputValue, incorrectPassword } = this.state
     const { isLocked, t } = this.props
 
     if (isLocked) {
       return (
         <Box sticky alignItems="center" justifyContent="center" onClick={this.handleFocusInput}>
           <form onSubmit={this.handleSubmit}>
-            <Box>
-              <InputPassword
-                autoFocus
-                innerRef={(n: any) => (this._input = n)}
-                placeholder={t('common:password')}
-                type="password"
-                onChange={this.handleChangeInput('password')}
-                value={inputValue.password}
-              />
+            <Box align="center">
+              <IconLockScreen size={136} />
+              <PageTitle>{t('common:lockScreen.title')}</PageTitle>
+              <LockScreenDesc>
+                {t('common:lockScreen.subTitle')}
+                <br />
+                {t('common:lockScreen.description')}
+              </LockScreenDesc>
+              <Box style={{ minWidth: '230px' }}>
+                <InputPassword
+                  autoFocus
+                  innerRef={(n: any) => (this._input = n)}
+                  placeholder={t('common:lockScreen.inputPlaceholder')}
+                  type="password"
+                  onChange={this.handleChangeInput('password')}
+                  value={inputValue.password}
+                />
+                {incorrectPassword && (
+                  <ErrorMessageInput>
+                    {t('password:errorMessageIncorrectPassword')}
+                  </ErrorMessageInput>
+                )}
+              </Box>
             </Box>
           </form>
         </Box>
