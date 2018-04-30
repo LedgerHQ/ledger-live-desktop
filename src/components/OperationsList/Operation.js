@@ -49,6 +49,10 @@ const OperationRaw = styled(Box).attrs({
 `
 
 const Address = ({ value }: { value: string }) => {
+    if (!value) {
+      return <Box />
+    }
+
   const addrSize = value.length / 2
 
   const left = value.slice(0, 10)

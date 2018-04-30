@@ -38,7 +38,7 @@ const Base = styled.input.attrs({
 `
 
 export const ErrorMessageInput = styled(Box).attrs({
-  alignItems: 'flex-end',
+  alignItems: 'flex-start',
   color: 'alertRed',
   ff: 'Open Sans|SemiBold',
   fontSize: 3,

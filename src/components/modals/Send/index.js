@@ -37,6 +37,7 @@ type State = {
   fees: number,
   isRBF: boolean,
   recipientAddress: string,
+  txValidated: null | boolean,
   stepIndex: number,
 }
 
@@ -59,6 +60,7 @@ const INITIAL_STATE = {
   fees: 0,
   isRBF: false,
   recipientAddress: '',
+  txValidated: null,
   stepIndex: 0,
 }
 
@@ -136,6 +138,15 @@ class SendModal extends PureComponent<Props, State> {
     })
   }
 
+  handleValidate = isValidated => {
+    const { stepIndex } = this.state
+
+    this.setState({
+      txValidated: isValidated,
+      stepIndex: stepIndex + 1,
+    })
+  }
+
   createChangeHandler = key => value => {
     const patch = { [key]: value }
     // ensure max is always restecped when changing fees
@@ -158,34 +169,47 @@ class SendModal extends PureComponent<Props, State> {
 
   renderStep = () => {
     const { t } = this.props
-    const { stepIndex, amount, deviceSelected, ...otherState } = this.state
+    const { stepIndex, deviceSelected, txValidated, ...otherState } = this.state
     const step = this._steps[stepIndex]
     if (!step) {
       return null
     }
     const { Comp } = step
-
-    const props = (predicate, props) => (predicate ? props : {})
-
     const stepProps = {
       ...otherState,
       t,
-      amount,
       account: this._account,
-      ...props(stepIndex === 1, {
-        accountName: this._account ? this._account.name : undefined,
-        deviceSelected,
-        onChangeDevice: this.handleChangeDevice,
-        onStatusChange: this.handleChangeStatus,
-      }),
     }
 
-    return <Comp onChange={this.createChangeHandler} {...stepProps} {...this.props} />
+    switch (stepIndex) {
+      case 1:
+        stepProps.accountName = this._account ? this._account.name : undefined
+        stepProps.deviceSelected = deviceSelected
+        stepProps.onChangeDevice = this.handleChangeDevice
+        stepProps.onStatusChange = this.handleChangeStatus
+        break
+
+      case 2:
+        stepProps.device = deviceSelected
+        stepProps.onValidate = this.handleValidate
+        break
+
+      case 3:
+        if (txValidated !== null) {
+          stepProps.txValidated = txValidated
+        }
+        break
+
+      default:
+        break
+    }
+
+    return <Comp onChange={this.createChangeHandler} {...stepProps} />
   }
 
   render() {
     const { accounts, t } = this.props
-    const { stepIndex, amount, account, fees } = this.state
+    const { stepIndex, amount, account, fees, txValidated } = this.state
 
     const canNext = this.canNext()
     const canPrev = this.canPrev()
@@ -210,20 +234,30 @@ class SendModal extends PureComponent<Props, State> {
                 {this.renderStep()}
               </ModalContent>
               {this._account &&
-                stepIndex !== 3 && (
+                stepIndex < 2 && (
                   <Footer
                     canNext={canNext}
                     onNext={this.handleNextStep}
                     account={this._account}
                     amount={amount}
                     fees={fees}
+                    showTotal={stepIndex === 0}
                     t={t}
                   />
                 )}
               {stepIndex === 3 && (
                 <ModalFooter horizontal alignItems="center" justifyContent="flex-end" flow={2}>
                   <Button onClick={onClose}>{t('common:close')}</Button>
-                  <Button primary>{t('send:steps.confirmation.cta')}</Button>
+                  {txValidated ? (
+                    // TODO: actually go to operations details
+                    <Button onClick={onClose} primary>
+                      {t('send:steps.confirmation.success.cta')}
+                    </Button>
+                  ) : (
+                    <Button onClick={() => this.setState({ stepIndex: 0 })} primary>
+                      {t('send:steps.confirmation.error.cta')}
+                    </Button>
+                  )}
                 </ModalFooter>
               )}
             </ModalBody>

@@ -8,8 +8,9 @@ import type { Settings, T } from 'types/common'
 
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
-
 import IconDisplay from 'icons/Display'
+
+import COUNTRIES from 'helpers/countries.json'
 
 import {
   SettingsSection as Section,
@@ -27,20 +28,6 @@ const fiats = listFiatCurrencies()
     name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
   }))
 
-/* temporary subset of countries */
-const COUNTRIES = [
-  { name: 'China', key: 'CN' },
-  { name: 'France', key: 'FR' },
-  { name: 'India', key: 'IN' },
-  { name: 'Italy', key: 'IT' },
-  { name: 'Japan', key: 'JP' },
-  { name: 'Russian Federation', key: 'RU' },
-  { name: 'Singapore', key: 'SG' },
-  { name: 'Switzerland', key: 'CH' },
-  { name: 'United Kingdom', key: 'GB' },
-  { name: 'United States', key: 'US' },
-]
-
 type Props = {
   t: T,
   settings: Settings,
@@ -52,7 +39,7 @@ type State = {
   cachedMarketIndicator: string,
   cachedLanguageKey: string,
   cachedCounterValue: ?Object,
-  cachedRegion: Object,
+  cachedRegion: string,
 }
 
 class TabProfile extends PureComponent<Props, State> {
@@ -102,7 +89,7 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
-  handleChangeRegion = (region: Object) => {
+  handleChangeRegion = (region: string) => {
     const { saveSettings } = this.props
     this.setState({ cachedRegion: region })
     window.requestIdleCallback(() => {
@@ -131,7 +118,7 @@ class TabProfile extends PureComponent<Props, State> {
     } = this.state
     const { languages } = this.getDatas()
     const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
-    const currentRegion = COUNTRIES.find(r => r.key === cachedRegion.key)
+    const currentRegion = COUNTRIES.find(r => r.key === cachedRegion)
 
     return (
       <Section>
@@ -171,9 +158,8 @@ class TabProfile extends PureComponent<Props, State> {
             <Select
               searchable
               fuseOptions={{ keys: ['name'] }}
-              style={{ minWidth: 130 }}
-              small
-              onChange={item => this.handleChangeRegion(item)}
+              maxHeight={200}
+              onChange={item => this.handleChangeRegion(item.key)}
               renderSelected={item => item && item.name}
               value={currentRegion}
               items={COUNTRIES}
