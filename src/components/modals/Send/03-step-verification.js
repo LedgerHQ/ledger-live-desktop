@@ -9,7 +9,7 @@ import { multiline } from 'styles/helpers'
 import DeviceCheckAddress from 'components/DeviceCheckAddress'
 import DeviceConfirm from 'components/DeviceConfirm'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device, T } from 'types/common'
 
 const Container = styled(Box).attrs({
