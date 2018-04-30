@@ -47,6 +47,7 @@ export default {
     }
   },
 
+  // TODO flowtype this. we should be able to express all the possible entries and their expected type (with a union type)
   get: (key: DBKey, defaults: any): any => {
     const db = store(key)
     const data = db.get('data', defaults)

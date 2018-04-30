@@ -956,14 +956,6 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@ledgerhq/currencies@^4.10.1":
-  version "4.10.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/currencies/-/currencies-4.10.1.tgz#462081005e3e37e0737bad9aba189eef1663e96a"
-  dependencies:
-    lodash "^4.17.5"
-    numeral "^2.0.6"
-    querystring "^0.2.0"
-
 "@ledgerhq/hw-app-btc@^4.7.3":
   version "4.7.3"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.7.3.tgz#5a7d365f893f5a72bbb6b639d1738edced712c5f"
@@ -990,14 +982,14 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/wallet-common@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/wallet-common/-/wallet-common-1.2.0.tgz#5e648829b6dff0fe33f31da2ee4a974df405642e"
+"@ledgerhq/live-common@^2.0.0-rc4":
+  version "2.0.0-rc4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.0.0-rc4.tgz#5f1028ff3e52fc6bf7e42c5ea64d71be9b843f82"
   dependencies:
-    "@ledgerhq/currencies" "^4.10.1"
     axios "^0.18.0"
     invariant "^2.2.2"
     lodash "^4.17.4"
+    numeral "^2.0.6"
     prando "^3.0.1"
     react "^16.0.0"
 
@@ -5018,7 +5010,7 @@ electron-webpack@^2.0.1:
     webpack-merge "^4.1.2"
     yargs "^11.1.0"
 
-electron@1.8.4:
+electron@1.8.4, electron@^1.8.2:
   version "1.8.4"
   resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.4.tgz#cca8d0e6889f238f55b414ad224f03e03b226a38"
   dependencies:

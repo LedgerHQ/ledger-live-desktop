@@ -9,8 +9,6 @@ import Btc from '@ledgerhq/hw-app-btc'
 import { getAccount, getHDNode, networks } from 'helpers/btc'
 import { serializeAccounts } from 'reducers/accounts'
 
-type CoinType = number
-
 async function sleep(delay, callback) {
   if (delay !== 0) {
     await new Promise(resolve => setTimeout(resolve, delay))
@@ -56,16 +54,24 @@ function encodeBase58Check(vchIn) {
   return bs58check.encode(Buffer.from(vchIn))
 }
 
+export function coinTypeForId(id: string) {
+  if (id === 'bitcoin_testnet') return 1
+  if (id === 'bitcoin') return 0
+  throw new Error('coinTypeForId is a hack and will disappear with libcore')
+}
+
 export function getPath({
-  coinType,
+  currencyId,
   account,
   segwit = true,
 }: {
-  coinType: CoinType,
+  currencyId: string,
   account?: any,
   segwit: boolean,
 }) {
-  return `${segwit ? 49 : 44}'/${coinType}'${account !== undefined ? `/${account}'` : ''}`
+  return `${segwit ? 49 : 44}'/${coinTypeForId(currencyId)}'${
+    account !== undefined ? `/${account}'` : ''
+  }`
 }
 
 export function verifyAddress({
@@ -86,20 +92,20 @@ export default async ({
   transport,
   currentAccounts,
   onProgress,
-  coinType = 1,
+  currencyId = 'bitcoin_testnet',
   segwit = true,
   nextAccountDelay = 1e3,
 }: {
   transport: Object,
   currentAccounts: Array<*>,
   onProgress: Function,
-  coinType?: CoinType,
+  currencyId?: string,
   segwit?: boolean,
   nextAccountDelay?: number,
 }) => {
   const btc = new Btc(transport)
 
-  const network = networks[coinType]
+  const network = networks[currencyId]
 
   const [p2pkh, p2sh, fam] = [network.pubKeyHash, network.scriptHash, network.family].map(v =>
     v.toString(16).padStart(4, 0),
@@ -110,7 +116,7 @@ export default async ({
   const getPublicKey = path => btc.getWalletPublicKey(path)
 
   let result = bitcoin.crypto.sha256(
-    await getPublicKey(getPath({ segwit, coinType })).then(
+    await getPublicKey(getPath({ segwit, currencyId })).then(
       ({ publicKey }) => new Uint8Array(parseHexString(getCompressPublicKey(publicKey))),
     ),
   )
@@ -139,7 +145,7 @@ export default async ({
   }
 
   const getAllAccounts = async (currentAccount = 0, accounts = []) => {
-    const path = getPath({ segwit, coinType, account: currentAccount })
+    const path = getPath({ segwit, currencyId, account: currentAccount })
     const xpub58 = await getXpub58ByPath({ path, account: currentAccount, network })
 
     if (currentAccounts.includes(xpub58)) {
@@ -149,7 +155,7 @@ export default async ({
     const hdnode = getHDNode({ xpub58, network })
     const account = await getAccount({
       asyncDelay: 0,
-      coinType,
+      currencyId,
       accountId: xpub58,
       hdnode,
       network,
@@ -164,7 +170,6 @@ export default async ({
 
     accounts.push({
       id: xpub58,
-      coinType,
       ...account,
     })
 

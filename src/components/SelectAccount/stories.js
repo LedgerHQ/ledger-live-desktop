@@ -2,35 +2,13 @@
 
 import React, { Component } from 'react'
 import { storiesOf } from '@storybook/react'
-import Chance from 'chance'
-import { getCurrencyByCoinType, getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import { genAccount } from '@ledgerhq/live-common/lib/mock/account'
 
 import { SelectAccount } from 'components/SelectAccount'
 
-const chance = new Chance()
 const stories = storiesOf('Components', module)
 
-export const accounts = [...Array(20)].map(() => ({
-  id: chance.string(),
-  address: chance.string({
-    pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-    length: 30,
-  }),
-  addresses: [],
-  balance: chance.integer({ min: 10000000000, max: 2000000000000 }),
-  balanceByDay: {},
-  coinType: 1,
-  currency: getCurrencyByCoinType(1),
-  index: chance.integer({ min: 0, max: 20 }),
-  name: chance.name(),
-  path: '',
-  rootPath: '',
-  operations: [],
-  unit: getDefaultUnitByCoinType(1),
-  settings: {
-    minConfirmations: 2,
-  },
-}))
+export const accounts = [...Array(20)].map((_, i) => genAccount(i))
 
 class Wrapper extends Component<any, any> {
   state = {

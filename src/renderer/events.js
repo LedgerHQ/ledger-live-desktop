@@ -4,9 +4,8 @@ import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import debug from 'debug'
 import uniqBy from 'lodash/uniqBy'
-import { getFiatUnit } from '@ledgerhq/currencies'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
-import type { Currency, Unit } from '@ledgerhq/currencies'
+import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
+import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'config/constants'
 
@@ -89,10 +88,10 @@ export function startSyncAccounts(accounts: Account[]) {
   syncAccountsInProgress = true
   sendEvent('accounts', 'sync.all', {
     accounts: accounts.map(account => {
-      const { id, coinType, rootPath, addresses, index, operations } = account
+      const { id, currency, rootPath, addresses, index, operations } = account
       return {
         id,
-        coinType,
+        currencyId: currency.id,
         allAddresses: addresses,
         currentIndex: index,
         rootPath,
@@ -111,7 +110,7 @@ export function stopSyncAccounts() {
 export function startSyncCounterValues(counterValueCode: string, accounts: Account[]) {
   d.sync('Sync counterValues - start')
   const currencies: Currency[] = uniqBy(accounts.map(a => a.currency), 'code')
-  const counterValue: Unit = getFiatUnit(counterValueCode)
+  const counterValue = getFiatCurrencyByTicker(counterValueCode)
   sendEvent('msg', 'counterValues.sync', { currencies, counterValue })
 }
 

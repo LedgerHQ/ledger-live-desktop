@@ -25,7 +25,7 @@ export type CurrencySettings = {
 }
 
 export type CurrenciesSettings = {
-  [coinType: number]: CurrencySettings,
+  [id: string]: CurrencySettings,
 }
 
 export type Settings = {

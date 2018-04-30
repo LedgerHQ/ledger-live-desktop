@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 

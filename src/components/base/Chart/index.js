@@ -37,7 +37,7 @@ import React, { PureComponent } from 'react'
 import * as d3 from 'd3'
 import noop from 'lodash/noop'
 
-import type { Unit } from '@ledgerhq/currencies'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
 
 import refreshNodes from './refreshNodes'
 import refreshDraw from './refreshDraw'

@@ -1,13 +1,13 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
 import styled from 'styled-components'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
 
 const CurName = styled(Text).attrs({
   ff: 'Open Sans|SemiBold',
@@ -32,14 +32,11 @@ type Props = {
 class AccountHeader extends PureComponent<Props> {
   render() {
     const { account } = this.props
-    const Icon = getIconByCoinType(account.currency.coinType)
     return (
       <Box horizontal align="center" flow={2}>
-        {Icon && (
-          <Box color={account.currency.color}>
-            <Icon size={24} />
-          </Box>
-        )}
+        <Box color={account.currency.color}>
+          <CryptoCurrencyIcon currency={account.currency} size={24} />
+        </Box>
         <Box>
           <CurName>{account.currency.name}</CurName>
           <AccountName>{account.name}</AccountName>

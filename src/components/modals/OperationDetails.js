@@ -7,7 +7,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
 
-import type { Account, Operation } from '@ledgerhq/wallet-common/lib/types'
+import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'

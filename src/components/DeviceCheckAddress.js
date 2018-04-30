@@ -3,7 +3,7 @@
 import { PureComponent } from 'react'
 import { ipcRenderer } from 'electron'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
 import { sendEvent } from 'renderer/events'

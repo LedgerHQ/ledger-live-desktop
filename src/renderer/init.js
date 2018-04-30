@@ -34,7 +34,7 @@ const rootNode = document.getElementById('app')
 store.dispatch(fetchSettings())
 store.dispatch(initCounterValues())
 
-const state = store.getState() || {}
+const state = store.getState()
 const language = getLanguage(state)
 const locked = isLocked(state)
 

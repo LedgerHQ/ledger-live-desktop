@@ -2,9 +2,9 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { getFiatUnit } from '@ledgerhq/currencies'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
-import { getCounterValueCode } from 'reducers/settings'
+import { counterValueCurrencySelector } from 'reducers/settings'
 import { calculateCounterValueSelector } from 'reducers/counterValues'
 
 import FormattedVal from 'components/base/FormattedVal'
@@ -13,19 +13,16 @@ type Props = {
   // wich market to query
   ticker: string,
 
-  // the value :)
-  value: number,
-
   // when? if not given: take latest
   date?: Date,
 
   // from reducers
-  counterValueCode: string,
-  getCounterValue: Function,
+  counterValueCurrency: CryptoCurrency,
+  value: number,
 }
 
 const mapStateToProps = (state, props) => {
-  const { ticker } = props
+  const { ticker, value, date } = props
 
   // TODO: in wallet-common, stop using currency.
   // always use ticker and remove that hack
@@ -36,13 +33,15 @@ const mapStateToProps = (state, props) => {
     console.warn('`currency` is deprecated in CounterValue. use `ticker` instead.') // eslint-disable-line no-console
   }
 
-  const counterValueCode = getCounterValueCode(state)
-  const counterValueUnit = getFiatUnit(counterValueCode)
-  const getCounterValue = calculateCounterValueSelector(state)(currency, counterValueUnit)
+  const counterValueCurrency = counterValueCurrencySelector(state)
+  const counterValue =
+    !counterValueCurrency || !currency
+      ? 0
+      : calculateCounterValueSelector(state)(currency, counterValueCurrency)(value, date)
 
   return {
-    counterValueCode,
-    getCounterValue,
+    counterValueCurrency,
+    value: counterValue,
   }
 }
 
@@ -53,10 +52,15 @@ class CounterValue extends PureComponent<Props> {
   }
 
   render() {
-    const { getCounterValue, counterValueCode, date, value, ...props } = this.props
-    const counterValue = getCounterValue(value, date)
+    const { value, counterValueCurrency, date, ...props } = this.props
     return (
-      <FormattedVal val={counterValue} fiat={counterValueCode} showCode alwaysShowSign {...props} />
+      <FormattedVal
+        val={value}
+        fiat={counterValueCurrency.units[0].code}
+        showCode
+        alwaysShowSign
+        {...props}
+      />
     )
   }
 }

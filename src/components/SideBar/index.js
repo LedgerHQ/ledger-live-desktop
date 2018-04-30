@@ -5,8 +5,8 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'config/constants'
 
@@ -104,7 +104,7 @@ class SideBar extends PureComponent<Props> {
             </CapsSubtitle>
             <GrowScroll pb={4} px={4} flow={2}>
               {accounts.map(account => {
-                const Icon = getIconByCoinType(account.currency.coinType)
+                const Icon = getCryptoCurrencyIcon(account.currency)
                 return (
                   <Item
                     big

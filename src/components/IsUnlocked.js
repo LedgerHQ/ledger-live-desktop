@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import type { Settings, T } from 'types/common'
 import IconLockScreen from 'icons/LockScreen'

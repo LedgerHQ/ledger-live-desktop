@@ -5,10 +5,8 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { ipcRenderer } from 'electron'
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
-import type { Currency } from '@ledgerhq/currencies'
+import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import type { Device, T } from 'types/common'
 
@@ -63,11 +61,11 @@ type Props = {
 
 type State = {
   accountsImport: Object,
-  currency: Currency | null,
-  deviceSelected: Device | null,
+  currency: ?CryptoCurrency,
+  deviceSelected: ?Device,
   fetchingCounterValues: boolean,
   selectedAccounts: Array<number>,
-  appStatus: null | string,
+  appStatus: ?string,
   stepIndex: number,
 }
 
@@ -107,13 +105,13 @@ class AddAccountModal extends PureComponent<Props, State> {
     const { accounts } = this.props
     const { deviceSelected, currency } = this.state
 
-    if (deviceSelected === null || currency === null) {
+    if (!deviceSelected || !currency) {
       return
     }
 
     sendEvent('usb', 'wallet.getAccounts', {
       pathDevice: deviceSelected.path,
-      coinType: currency.coinType,
+      currencyId: currency.id,
       currentAccounts: accounts.map(acc => acc.id),
     })
   }
@@ -201,7 +199,7 @@ class AddAccountModal extends PureComponent<Props, State> {
           name: `Account ${accountIndex + 1}`,
           archived: true,
           currency,
-          unit: getDefaultUnitByCoinType(currency.coinType),
+          unit: currency.units[0],
         })
       }
     }
@@ -223,7 +221,7 @@ class AddAccountModal extends PureComponent<Props, State> {
         : [a, ...prev.selectedAccounts],
     }))
 
-  handleChangeCurrency = (currency: Currency) => this.setState({ currency })
+  handleChangeCurrency = (currency: CryptoCurrency) => this.setState({ currency })
 
   handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 

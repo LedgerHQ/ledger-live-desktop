@@ -19,7 +19,7 @@ function makeChunks(state: State): Array<string> {
       'account',
       account.id,
       account.name,
-      account.coinType,
+      account.currency.id,
     ]),
   ]
   return data.map((arr, i) => JSON.stringify([data.length, i, ...arr]))

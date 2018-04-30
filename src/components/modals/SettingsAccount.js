@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { push } from 'react-router-redux'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 

@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T, Device } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'

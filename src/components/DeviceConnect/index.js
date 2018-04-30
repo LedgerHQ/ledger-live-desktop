@@ -3,14 +3,14 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
-import { getCurrencyByCoinType } from '@ledgerhq/currencies'
-import { getIconByCoinType } from '@ledgerhq/currencies/react'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import type { T, Device, Devices } from 'types/common'
 
 import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
+import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 
 import IconCheck from 'icons/Check'
 import IconExclamationCircle from 'icons/ExclamationCircle'
@@ -138,7 +138,7 @@ StepCheck.defaultProps = {
 type Props = {
   accountName: null | string,
   appOpened: null | 'success' | 'fail',
-  coinType: number,
+  currency: CryptoCurrency,
   devices: Devices,
   deviceSelected: Device | null,
   onChangeDevice: Function,
@@ -180,15 +180,12 @@ class DeviceConnect extends PureComponent<Props> {
   }
 
   render() {
-    const { deviceSelected, accountName, coinType, t, onChangeDevice, devices } = this.props
+    const { deviceSelected, accountName, currency, t, onChangeDevice, devices } = this.props
 
     const appState = this.getAppState()
 
     const hasDevice = devices.length > 0
     const hasMultipleDevices = devices.length > 1
-
-    const { name: appName } = getCurrencyByCoinType(coinType)
-    const IconCurrency = getIconByCoinType(coinType)
 
     return (
       <Box flow={4}>
@@ -240,13 +237,13 @@ class DeviceConnect extends PureComponent<Props> {
           <StepContent>
             <StepIcon>
               <WrapperIconCurrency>
-                <IconCurrency size={12} />
+                <CryptoCurrencyIcon currency={currency} size={12} />
               </WrapperIconCurrency>
             </StepIcon>
             <Box grow shrink>
               <Trans i18nKey="deviceConnect:step2.open" parent="div">
                 {'Open '}
-                <strong>{appName}</strong>
+                <strong>{currency.name}</strong>
                 {' App on your device'}
               </Trans>
             </Box>

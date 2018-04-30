@@ -2,10 +2,8 @@
 
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
 
-import type { Currency } from '@ledgerhq/currencies/lib/types'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
 
 import Box from 'components/base/Box'
 
@@ -29,7 +27,7 @@ const AccountItem = styled(AccountCard)`
 type Props = {
   accountsImport: Object,
   archivedAccounts: Account[],
-  currency: Currency | null,
+  currency?: ?CryptoCurrency,
   importProgress: boolean,
   onSelectAccount?: Function,
   selectedAccounts?: Array<number>,
@@ -37,7 +35,7 @@ type Props = {
 
 function StepImport(props: Props) {
   const hasAccountsImports = Object.keys(props.accountsImport).length > 0
-  const unit = props.currency !== null && getDefaultUnitByCoinType(props.currency.coinType)
+  const unit = props.currency && props.currency.units[0]
   return (
     <Box>
       {props.importProgress ? (
@@ -56,7 +54,7 @@ function StepImport(props: Props) {
                   onClick={props.onSelectAccount && props.onSelectAccount(a.id)}
                   account={{
                     ...a,
-                    coinType: props.currency && props.currency.coinType,
+                    currencyId: props.currency && props.currency.id,
                     name: `Account ${a.accountIndex}`,
                     currency: props.currency,
                     unit,

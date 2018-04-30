@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { formatCurrencyUnit } from '@ledgerhq/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import noop from 'lodash/noop'
 import isNaN from 'lodash/isNaN'
@@ -11,7 +11,7 @@ import Box from 'components/base/Box'
 import Input from 'components/base/Input'
 import Select from 'components/base/Select'
 
-import type { Unit } from '@ledgerhq/currencies'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
 
 function parseValue(value) {
   return value.toString().replace(/,/g, '.')

@@ -1,12 +1,13 @@
 // @flow
 
-import { getFiatUnit } from '@ledgerhq/currencies'
-import { fetchHistodayRates } from '@ledgerhq/wallet-common/lib/api/countervalue'
-
-import type { Currency } from '@ledgerhq/currencies'
 import type { Dispatch } from 'redux'
+import { fetchHistodayRates } from '@ledgerhq/live-common/lib/api/countervalue'
+import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
 
+import { counterValueCurrencySelector } from 'reducers/settings'
+import { currenciesSelector } from 'reducers/accounts'
 import db from 'helpers/db'
+import type { State } from 'reducers'
 
 export type InitCounterValues = () => { type: string, payload: Object }
 export const initCounterValues: InitCounterValues = () => ({
@@ -20,18 +21,23 @@ export const updateCounterValues: UpdateCounterValues = payload => ({
   payload,
 })
 
-export type FetchCounterValues = (?(Currency[])) => (Dispatch<*>, Function) => Promise<any>
-export const fetchCounterValues: FetchCounterValues = (currencies: ?(Currency[])) => async (
-  dispatch,
-  getState,
-) => {
-  const { accounts, settings } = getState()
-  if (!currencies) {
-    currencies = accounts.map(a => a.currency)
-  }
+function cryptoCurrenciesToCurrencies(currencies: CryptoCurrency[]): Currency[] {
+  // $FlowFixMe this function is just to fix flow types. array contravariant issue.
+  return currencies
+}
 
-  const { counterValue } = settings
-  const fiatUnit = getFiatUnit(counterValue)
-  const counterValues = await fetchHistodayRates(currencies, fiatUnit)
+export type FetchCounterValues = (
+  currencies?: Currency[],
+) => (Dispatch<*>, () => State) => Promise<any>
+
+export const fetchCounterValues: FetchCounterValues = currencies => async (dispatch, getState) => {
+  const state = getState()
+  const currency = counterValueCurrencySelector(state)
+  if (!currency) return
+  if (!currencies) {
+    // TODO this should be default, there is no need to provide the currencies in parameter
+    currencies = cryptoCurrenciesToCurrencies(currenciesSelector(state))
+  }
+  const counterValues = await fetchHistodayRates(currencies, currency)
   dispatch(updateCounterValues(counterValues))
 }
