@@ -21,7 +21,7 @@ export type SettingsState = {
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,
   },
-  region: { key: string, name: string }, // FIXME need to only store the key because imagine there is a typo in name in the future. it is derivated data
+  region: string,
 }
 
 const defaultState: SettingsState = {
