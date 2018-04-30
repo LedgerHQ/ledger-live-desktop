@@ -175,26 +175,33 @@ class SendModal extends PureComponent<Props, State> {
       return null
     }
     const { Comp } = step
-
-    const props = (predicate, props) => (predicate ? props : {})
-
     const stepProps = {
       ...otherState,
       t,
       account: this._account,
-      ...props(stepIndex === 1, {
-        accountName: this._account ? this._account.name : undefined,
-        deviceSelected,
-        onChangeDevice: this.handleChangeDevice,
-        onStatusChange: this.handleChangeStatus,
-      }),
-      ...props(stepIndex === 2, {
-        device: deviceSelected,
-        onValidate: this.handleValidate,
-      }),
-      ...props(stepIndex === 3, {
-        txValidated,
-      }),
+    }
+
+    switch (stepIndex) {
+      case 1:
+        stepProps.accountName = this._account ? this._account.name : undefined
+        stepProps.deviceSelected = deviceSelected
+        stepProps.onChangeDevice = this.handleChangeDevice
+        stepProps.onStatusChange = this.handleChangeStatus
+        break
+
+      case 2:
+        stepProps.device = deviceSelected
+        stepProps.onValidate = this.handleValidate
+        break
+
+      case 3:
+        if (txValidated !== null) {
+          stepProps.txValidated = txValidated
+        }
+        break
+
+      default:
+        break
     }
 
     return <Comp onChange={this.createChangeHandler} {...stepProps} />
