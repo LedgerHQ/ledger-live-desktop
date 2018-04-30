@@ -70,20 +70,20 @@ const defaultState = {
 }
 
 export const PageTitle = styled(Box).attrs({
-  width: '152px',
-  height: '27px',
-  fontFamily: 'MuseoSans',
-  fontSize: '22px',
-  color: '#1d2028',
+  width: 152,
+  height: 27,
+  ff: 'Museo Sans|Regular',
+  fontSize: 22,
+  color: 'dark',
 })``
 
 export const LockScreenDesc = styled(Box).attrs({
-  width: '340px',
-  height: '36px',
-  fontFamily: 'OpenSans',
-  fontSize: '13px',
+  width: 340,
+  height: 36,
+  ff: 'Open Sans|Regular',
+  fontSize: 13,
   textAlign: 'center',
-  color: '#666',
+  color: 'smoke',
 })`
   margin: 10px auto 25px;
 `
@@ -174,7 +174,7 @@ class IsUnlocked extends Component<Props, State> {
                 <br />
                 {t('common:lockScreen.description')}
               </LockScreenDesc>
-              <Box style={{ minWidth: '230px' }}>
+              <Box style={{ minWidth: 230 }}>
                 <InputPassword
                   autoFocus
                   innerRef={(n: any) => (this._input = n)}
