@@ -73,7 +73,7 @@ export const PageTitle = styled(Box).attrs({
   width: 152,
   height: 27,
   ff: 'Museo Sans|Regular',
-  fontSize: 22,
+  fontSize: 7,
   color: 'dark',
 })``
 
@@ -81,7 +81,7 @@ export const LockScreenDesc = styled(Box).attrs({
   width: 340,
   height: 36,
   ff: 'Open Sans|Regular',
-  fontSize: 13,
+  fontSize: 4,
   textAlign: 'center',
   color: 'smoke',
 })`
