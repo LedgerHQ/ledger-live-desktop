@@ -32,10 +32,11 @@ const currencies = listCryptoCurrencies().sort((a, b) => a.name.localeCompare(b.
 type Props = {
   onChange: Function,
   value?: CryptoCurrency,
+  placeholder: string,
   t: T,
 }
 
-const SelectCurrency = ({ onChange, value, t, ...props }: Props) => (
+const SelectCurrency = ({ onChange, value, t, placeholder, ...props }: Props) => (
   <Select
     {...props}
     value={value}
@@ -43,7 +44,7 @@ const SelectCurrency = ({ onChange, value, t, ...props }: Props) => (
     renderItem={renderItem}
     keyProp="id"
     items={currencies}
-    placeholder={t('common:selectCurrency')}
+    placeholder={placeholder || t('common:selectCurrency')}
     fontSize={4}
     onChange={onChange}
   />

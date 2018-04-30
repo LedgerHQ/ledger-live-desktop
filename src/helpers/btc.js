@@ -17,7 +17,7 @@ export const networks = {
     ...bitcoin.networks.bitcoin,
     family: 1,
   },
-  testnet: {
+  bitcoin_testnet: {
     ...bitcoin.networks.testnet,
     family: 1,
   },
