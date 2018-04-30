@@ -6,18 +6,18 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import chunk from 'lodash/chunk'
+
 import {
   formatCurrencyUnit,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
-
-import chunk from 'lodash/chunk'
-
 import type { T } from 'types/common'
 
 import { colors } from 'styles/theme'
+import { runJob } from 'renderer/events'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 import { getCounterValueCode, localeSelector } from 'reducers/settings'
@@ -36,6 +36,7 @@ import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps = state => ({
+  devices: state.devices,
   accounts: getVisibleAccounts(state),
   counterValue: getCounterValueCode(state),
   locale: localeSelector(state),
@@ -132,13 +133,38 @@ class DashboardPage extends PureComponent<Props, State> {
   _cacheBalance = null
 
   render() {
-    const { push, accounts, t, counterValue } = this.props
+    const { push, accounts, t, counterValue, devices } = this.props
     const { accountsChunk, selectedTime, daysCount } = this.state
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
+    const { currentDevice } = devices
+
     return (
       <Box flow={7}>
+        {currentDevice && (
+          <Box p={8}>
+            {currentDevice.path}
+            <button
+              onClick={async () => {
+                const accounts = await runJob({
+                  channel: 'usb',
+                  job: 'wallet.scanAccountsOnDevice',
+                  successResponse: 'wallet.scanAccountsOnDevice.success',
+                  errorResponse: 'wallet.scanAccountsOnDevice.fail',
+                  data: {
+                    devicePath: currentDevice.path,
+                    currencyId: 'bitcoin_testnet',
+                  },
+                })
+                console.log(accounts)
+              }}
+            >
+              {'scan accounts on device'}
+            </button>
+          </Box>
+        )}
+
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>

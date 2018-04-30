@@ -4,8 +4,26 @@ import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import Btc from '@ledgerhq/hw-app-btc'
 
 import { getPath, verifyAddress } from './accounts'
+import scanAccountsOnDevice from './scanAccountsOnDevice'
 
 export default (sendEvent: Function) => ({
+  /**
+   * Scan all the accounts for the given device and currency and returns them
+   */
+  scanAccountsOnDevice: async ({
+    devicePath,
+    currencyId,
+  }: {
+    devicePath: string,
+    currencyId: string,
+  }) => {
+    try {
+      const accounts = await scanAccountsOnDevice({ devicePath, currencyId })
+      sendEvent('wallet.scanAccountsOnDevice.success', accounts)
+    } catch (err) {
+      sendEvent('wallet.scanAccountsOnDevice.fail', err)
+    }
+  },
   getAccounts: async ({
     pathDevice,
     currencyId,

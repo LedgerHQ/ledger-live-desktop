@@ -37,6 +37,9 @@ DEV_TOOLS_MODE=bottom
 
 # Filter debug output
 DEBUG=lwd*,-lwd:syncb
+
+# hide the dev window
+HIDE_DEV_WINDOW=0
 ```
 
 #### Development commands
