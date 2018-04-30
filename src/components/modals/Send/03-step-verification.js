@@ -2,10 +2,10 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import uniqueId from 'lodash/uniqueId'
 
 import Box from 'components/base/Box'
 import WarnBox from 'components/WarnBox'
+import { multiline } from 'styles/helpers'
 import DeviceCheckAddress from 'components/DeviceCheckAddress'
 import DeviceConfirm from 'components/DeviceConfirm'
 
@@ -37,12 +37,7 @@ type Props = {
 
 export default (props: Props) => (
   <Container>
-    <WarnBox>
-      {props
-        .t('send:steps.verification.warning')
-        .split('\n')
-        .map(line => <p key={uniqueId()}>{line}</p>)}
-    </WarnBox>
+    <WarnBox>{multiline(props.t('send:steps.verification.warning'))}</WarnBox>
     <Info>{props.t('send:steps.verification.body')}</Info>
     {// TODO: Actually create a tx
     // DeviceCheckAddress used as a placeholder in the meantime
