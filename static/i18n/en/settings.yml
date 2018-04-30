@@ -36,9 +36,8 @@ profile:
   passwordModalRepeatPasswordInput: Repeat password
   passwordModalSave: Save
   disablePasswordModalTitle: Disable Password
-  disablePasswordModalSubtitle: Type your password
   disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
-  disablePasswordModalInput: Type your password
+  disablePasswordModalInput: Current password
   disablePasswordModalSave: Save
   sync: Sync accounts
   syncDesc: Lorem ipsum dolor sit amet

@@ -320,8 +320,8 @@ class Select extends PureComponent<Props> {
                   <AngleDown mr={-1} />
                 </TriggerBtn>
               )}
-              {isOpen &&
-                (searchable ? (
+              <div hidden={!isOpen}>
+                {searchable ? (
                   <Search
                     value={inputValue}
                     items={items}
@@ -332,7 +332,8 @@ class Select extends PureComponent<Props> {
                   />
                 ) : (
                   this.renderItems(items, selectedItem, downshiftProps)
-                ))}
+                )}
+              </div>
             </Container>
           )
         }}
