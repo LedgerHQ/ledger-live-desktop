@@ -18,3 +18,8 @@ retry: Retry
 close: Close
 eastern: Eastern
 western: Western
+lockScreen:
+  title: Welcome Back
+  subTitle: Your application is locked
+  description: Please enter your password to continue
+  inputPlaceholder: Type your password
