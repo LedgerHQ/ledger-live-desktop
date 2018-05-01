@@ -1,7 +1,7 @@
 const CommNodeHid = require('@ledgerhq/hw-transport-node-hid').default
 const Btc = require('@ledgerhq/hw-app-btc').default
 
-const CREATE_ACCOUNT = false
+const { CREATE } = process.env
 
 const {
   createWallet,
@@ -28,15 +28,15 @@ waitForDevices(async device => {
     const currency = await getCurrency('bitcoin_testnet')
 
     console.log(`> Create wallet`)
-    const wallet = CREATE_ACCOUNT
+    const wallet = CREATE
       ? await createWallet('khalil', currency)
       : await getWallet('khalil')
 
     console.log(`> Create account`)
-    const account = CREATE_ACCOUNT ? await createAccount(wallet, hwApp) : await wallet.getAccount(0)
+    const account = CREATE ? await createAccount(wallet, hwApp) : await wallet.getAccount(0)
 
     console.log(`> Sync account`)
-    if (true || CREATE_ACCOUNT) {
+    if (true || CREATE) {
       await syncAccount(account)
     }
 
