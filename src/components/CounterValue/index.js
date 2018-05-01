@@ -2,35 +2,44 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import type { Currency } from '@ledgerhq/live-common/lib/types'
 
 import { counterValueCurrencySelector } from 'reducers/settings'
 import { calculateCounterValueSelector } from 'reducers/counterValues'
 
 import FormattedVal from 'components/base/FormattedVal'
 
-type Props = {
+import type { State } from 'reducers'
+
+type OwnProps = {
   // wich market to query
+  // FIXME drop ticker in favor of currency
   ticker: string,
+  currency?: Currency,
 
   // when? if not given: take latest
   date?: Date,
 
-  // from reducers
-  counterValueCurrency: CryptoCurrency,
   value: number,
 }
 
-const mapStateToProps = (state, props) => {
+type Props = OwnProps & {
+  // from reducers
+  counterValueCurrency: Currency,
+  value: number,
+}
+
+const mapStateToProps = (state: State, props: OwnProps) => {
   const { ticker, value, date } = props
 
-  // TODO: in wallet-common, stop using currency.
-  // always use ticker and remove that hack
+  if (ticker) {
+    // FIXME actually ticker should be deprecated, not currency!!
+    console.warn('CounterValue: `currency` should be passed instead of `ticker`') // eslint-disable-line no-console
+  }
+
   let { currency } = props
   if (!currency && ticker) {
     currency = generateFakeCurrency(ticker)
-  } else if (currency) {
-    console.warn('`currency` is deprecated in CounterValue. use `ticker` instead.') // eslint-disable-line no-console
   }
 
   const counterValueCurrency = counterValueCurrencySelector(state)
@@ -46,11 +55,6 @@ const mapStateToProps = (state, props) => {
 }
 
 class CounterValue extends PureComponent<Props> {
-  static defaultProps = {
-    value: 0,
-    date: undefined,
-  }
-
   render() {
     const { value, counterValueCurrency, date, ...props } = this.props
     return (
@@ -79,7 +83,7 @@ function generateFakeCurrency(ticker) {
     ],
 
     // unused
-    coinType: 0,
+    id: '',
     color: '#000',
     name: 'fake-coin',
     scheme: 'bitcoin',

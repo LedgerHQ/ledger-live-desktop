@@ -1,5 +1,5 @@
 // @flow
-
+import invariant from 'invariant'
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
@@ -9,28 +9,39 @@ import type { Device, Devices } from 'types/common'
 
 import { sendEvent } from 'renderer/events'
 import { getDevices } from 'reducers/devices'
+import type { State as StoreState } from 'reducers/index'
 
-const mapStateToProps = state => ({
-  devices: getDevices(state),
-})
+type OwnProps = {
+  currency: ?CryptoCurrency,
+  deviceSelected: ?Device,
+  account: ?Account,
+  onStatusChange?: (DeviceStatus, AppStatus) => void,
+  // TODO prefer children function
+  render?: ({
+    appStatus: AppStatus,
+    currency: CryptoCurrency,
+    devices: Devices,
+    deviceSelected: ?Device,
+    deviceStatus: DeviceStatus,
+  }) => React$Element<*>,
+}
+
+type Props = OwnProps & {
+  devices: Devices,
+}
 
 type DeviceStatus = 'unconnected' | 'connected'
 
 type AppStatus = 'success' | 'fail' | 'progress'
 
-type Props = {
-  currency: ?CryptoCurrency,
-  devices: Devices,
-  deviceSelected: Device | null,
-  account?: Account,
-  onStatusChange?: (DeviceStatus, AppStatus) => void,
-  render?: Function,
-}
-
 type State = {
   deviceStatus: DeviceStatus,
   appStatus: AppStatus,
 }
+
+const mapStateToProps = (state: StoreState) => ({
+  devices: getDevices(state),
+})
 
 class DeviceMonit extends PureComponent<Props, State> {
   state = {
@@ -80,7 +91,7 @@ class DeviceMonit extends PureComponent<Props, State> {
   checkAppOpened = () => {
     const { deviceSelected, account, currency } = this.props
 
-    if (deviceSelected === null) {
+    if (!deviceSelected) {
       return
     }
 
@@ -105,7 +116,7 @@ class DeviceMonit extends PureComponent<Props, State> {
     })
   }
 
-  _timeout: any = null
+  _timeout: *
 
   handleStatusChange = (deviceStatus, appStatus) => {
     const { onStatusChange } = this.props
@@ -118,7 +129,7 @@ class DeviceMonit extends PureComponent<Props, State> {
     const { deviceStatus } = this.state
     const { deviceSelected } = this.props
 
-    if (deviceSelected === null) {
+    if (!deviceSelected) {
       return
     }
 
@@ -138,9 +149,11 @@ class DeviceMonit extends PureComponent<Props, State> {
     const { appStatus, deviceStatus } = this.state
 
     if (render) {
+      const cur = account ? account.currency : currency
+      invariant(cur, 'currency is either provided or taken from account')
       return render({
         appStatus,
-        currency: account ? account.currency : currency,
+        currency: cur,
         devices,
         deviceSelected: deviceStatus === 'connected' ? deviceSelected : null,
         deviceStatus,
