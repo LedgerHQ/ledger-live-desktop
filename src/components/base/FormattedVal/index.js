@@ -98,11 +98,13 @@ export function FormattedVal(props: Props) {
     if (withIcon && isNegative) {
       val *= -1
     }
+    const locale = settings ? settings.language : ''
 
     text = formatCurrencyUnit(unit, val, {
       alwaysShowSign,
       disableRounding,
       showCode,
+      locale,
     })
   }
 
