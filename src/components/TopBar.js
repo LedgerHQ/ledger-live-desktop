@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -17,11 +17,10 @@ import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
 import IconActivity from 'icons/Activity'
-import IconAngleDown from 'icons/AngleDown'
 import IconDevices from 'icons/Devices'
-import IconUser from 'icons/User'
+import IconLock from 'icons/Lock'
+import IconSettings from 'icons/Settings'
 
-import DropDown, { DropDownItem as DDItem } from 'components/base/DropDown'
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
 
@@ -65,19 +64,7 @@ const Activity = styled.div`
   width: 4px;
 `
 
-const DropDownItem = styled(DDItem).attrs({
-  horizontal: true,
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  flow: 3,
-  ff: 'Open Sans|SemiBold',
-  px: 2,
-})`
-  height: 35px;
-`
-
 const mapStateToProps = state => ({
-  username: state.settings.username,
   hasAccounts: getAccounts(state).length > 0,
   hasPassword: hasPassword(state),
 })
@@ -93,7 +80,6 @@ type Props = {
   location: Location,
   lock: Function,
   t: T,
-  username: string,
 }
 
 type State = {
@@ -150,8 +136,16 @@ class TopBar extends PureComponent<Props, State> {
 
   handleLock = () => this.props.lock()
 
+  navigateToSettings = () => {
+    const { location, history } = this.props
+    const url = '/settings'
+
+    if (location.pathname !== url) {
+      history.push(url)
+    }
+  }
   render() {
-    const { location, hasPassword, history, hasAccounts, username, t } = this.props
+    const { hasPassword, hasAccounts, t } = this.props
     const { sync } = this.state
 
     return (
@@ -169,50 +163,19 @@ class TopBar extends PureComponent<Props, State> {
             <Box justifyContent="center">
               <Bar />
             </Box>
-          </Box>
-          <Box horizontal noShrink>
-            <DropDown
-              items={[
-                {
-                  key: 'profile',
-                  label: t('common:editProfile'),
-                  icon: <IconUser size={16} />,
-                  onClick: () => {
-                    const url = '/settings/profile'
-
-                    if (location.pathname !== url) {
-                      history.push(url)
-                    }
-                  },
-                },
-                ...(hasPassword
-                  ? [
-                      {
-                        key: 'lock',
-                        label: t('common:lockApplication'),
-                        icon: <IconUser size={16} />,
-                        onClick: this.handleLock,
-                      },
-                    ]
-                  : []),
-              ]}
-              renderItem={({ item, isHighlighted }) => (
-                <DropDownItem isHighlighted={isHighlighted}>
-                  <Box color={isHighlighted ? 'wallet' : ''}>{item.icon}</Box>
-                  <Box>{item.label}</Box>
-                </DropDownItem>
-              )}
-              alignItems="center"
-              ff="Open Sans|SemiBold"
-              flow={1}
-              fontSize={4}
-              horizontal
-              justifyContent="center"
-              offsetTop={-2}
-            >
-              <Box>{username}</Box>
-              <IconAngleDown size={12} />
-            </DropDown>
+            <Box justifyContent="center" onClick={this.navigateToSettings}>
+              <IconSettings size={16} />
+            </Box>
+            {hasPassword && (
+              <Fragment>
+                <Box justifyContent="center">
+                  <Bar />
+                </Box>
+                <Box justifyContent="center" onClick={this.handleLock}>
+                  <IconLock size={16} />
+                </Box>
+              </Fragment>
+            )}
           </Box>
         </Inner>
       </Container>
