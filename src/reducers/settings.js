@@ -9,7 +9,6 @@ import type { State } from 'reducers'
 
 export type SettingsState = {
   hasCompletedOnboarding: boolean,
-  username: string,
   counterValue: string,
   language: string,
   orderAccounts: string,
@@ -29,7 +28,6 @@ const language = window.navigator.language.split('-')[0]
 
 const defaultState: SettingsState = {
   hasCompletedOnboarding: false,
-  username: 'Anonymous',
   counterValue: 'USD',
   language,
   orderAccounts: 'balance|asc',

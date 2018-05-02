@@ -7,12 +7,9 @@ import bcrypt from 'bcryptjs'
 
 import type { Settings, T } from 'types/common'
 
-import debounce from 'lodash/debounce'
-
 import { unlock } from 'reducers/application'
 import db, { setEncryptionKey } from 'helpers/db'
 
-import Input from 'components/base/Input'
 import CheckBox from 'components/base/CheckBox'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -43,12 +40,10 @@ type State = {
   isHardResetModalOpened: boolean,
   isPasswordModalOpened: boolean,
   isDisablePasswordModalOpened: boolean,
-  username: string,
 }
 
 class TabProfile extends PureComponent<Props, State> {
   state = {
-    username: this.props.settings.username,
     isHardResetModalOpened: false,
     isPasswordModalOpened: false,
     isDisablePasswordModalOpened: false,
@@ -67,16 +62,6 @@ class TabProfile extends PureComponent<Props, State> {
       })
       unlock()
     })
-  }
-
-  debounceSaveUsername = debounce(
-    v => this.props.saveSettings({ username: v.trim() || 'Anonymous' }),
-    250,
-  )
-
-  handleChangeUsername = username => {
-    this.setState({ username })
-    this.debounceSaveUsername(username)
   }
 
   handleOpenHardResetModal = () => this.setState({ isHardResetModalOpened: true })
@@ -113,7 +98,6 @@ class TabProfile extends PureComponent<Props, State> {
   render() {
     const { t, settings } = this.props
     const {
-      username,
       isHardResetModalOpened,
       isPasswordModalOpened,
       isDisablePasswordModalOpened,
@@ -127,14 +111,6 @@ class TabProfile extends PureComponent<Props, State> {
           desc="Lorem ipsum dolor sit amet"
         />
         <Body>
-          <Row title={t('settings:profile.username')} desc={t('settings:profile.usernameDesc')}>
-            <Input
-              small
-              placeholder={t('settings:profile.username')}
-              onChange={this.handleChangeUsername}
-              value={username}
-            />
-          </Row>
           <Row title={t('settings:profile.password')} desc={t('settings:profile.passwordDesc')}>
             <Box horizontal flow={2} align="center">
               {isPasswordEnabled && (
