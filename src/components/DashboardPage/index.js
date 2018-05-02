@@ -15,7 +15,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import chunk from 'lodash/chunk'
 
-import type { T } from 'types/common'
+import type { T, Settings } from 'types/common'
 
 import { colors } from 'styles/theme'
 
@@ -39,6 +39,7 @@ const mapStateToProps = state => ({
   username: state.settings.username,
   accounts: getVisibleAccounts(state),
   counterValue: getCounterValueCode(state),
+  settings: state.settings,
 })
 
 const mapDispatchToProps = {
@@ -53,6 +54,7 @@ type Props = {
   push: Function,
   counterValue: string,
   username: string,
+  settings: Settings,
 }
 
 type State = {
@@ -88,7 +90,7 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   handleCalculateBalance = data => {
-    const { counterValue } = this.props
+    const { counterValue, settings } = this.props
 
     if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
       this._cacheBalance = data.totalBalance
@@ -102,6 +104,7 @@ class DashboardPage extends PureComponent<Props, State> {
             data.totalBalance,
             {
               showCode: true,
+              locale: settings.language,
             },
           ),
         },

@@ -24,11 +24,14 @@ export type SettingsState = {
   region: string,
 }
 
+/* have to check if available for all OS */
+const language = window.navigator.language.split('-')[0]
+
 const defaultState: SettingsState = {
   hasCompletedOnboarding: false,
   username: 'Anonymous',
   counterValue: 'USD',
-  language: 'en',
+  language,
   orderAccounts: 'balance|asc',
   password: {
     isEnabled: false,

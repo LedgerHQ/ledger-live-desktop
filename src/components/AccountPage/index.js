@@ -16,7 +16,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
-import type { T } from 'types/common'
+import type { T, Settings } from 'types/common'
 
 import { darken } from 'styles/helpers'
 
@@ -57,6 +57,7 @@ const ButtonSettings = styled(Button).attrs({
 const mapStateToProps = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
   counterValue: getCounterValueCode(state),
+  settings: state.settings,
 })
 
 const mapDispatchToProps = {
@@ -68,6 +69,7 @@ type Props = {
   t: T,
   account?: Account,
   openModal: Function,
+  settings: Settings,
 }
 
 type State = {
@@ -82,7 +84,7 @@ class AccountPage extends PureComponent<Props, State> {
   }
 
   handleCalculateBalance = data => {
-    const { counterValue, account } = this.props
+    const { counterValue, account, settings } = this.props
 
     if (!account) {
       return
@@ -97,12 +99,14 @@ class AccountPage extends PureComponent<Props, State> {
         balance: {
           currency: formatCurrencyUnit(account.unit, account.balance, {
             showCode: true,
+            locale: settings.language,
           }),
           counterValue: formatCurrencyUnit(
             getFiatCurrencyByTicker(counterValue).units[0],
             data.totalBalance,
             {
               showCode: true,
+              locale: settings.language,
             },
           ),
         },
