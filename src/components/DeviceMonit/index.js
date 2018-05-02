@@ -9,22 +9,28 @@ import { sendEvent } from 'renderer/events'
 import { getCurrentDevice } from 'reducers/devices'
 import type { Device } from 'types/common'
 
-const mapStateToProps = state => ({
-  currentDevice: getCurrentDevice(state),
-})
+import type { State as StoreState } from 'reducers'
 
 type DeviceStatus = 'unconnected' | 'connected' | 'appOpened'
 
-type Props = {
-  currentDevice: Device | null,
+type OwnProps = {
   account?: Account,
   onStatusChange?: DeviceStatus => void,
-  render?: Function,
+  // FIXME prefer use of children function
+  render?: DeviceStatus => React$Element<*>,
+}
+
+type Props = OwnProps & {
+  currentDevice: ?Device,
 }
 
 type State = {
   status: DeviceStatus,
 }
+
+const mapStateToProps = (state: StoreState, _props: OwnProps) => ({
+  currentDevice: getCurrentDevice(state),
+})
 
 class DeviceMonit extends PureComponent<Props, State> {
   state = {
@@ -70,7 +76,7 @@ class DeviceMonit extends PureComponent<Props, State> {
   checkAppOpened = () => {
     const { currentDevice, account } = this.props
 
-    if (currentDevice === null || !account || account.currency === null) {
+    if (!currentDevice || !account) {
       return
     }
 
@@ -83,7 +89,7 @@ class DeviceMonit extends PureComponent<Props, State> {
 
   _timeout: any = null
 
-  handleStatusChange = status => {
+  handleStatusChange = (status: DeviceStatus) => {
     const { onStatusChange } = this.props
     this.setState({ status })
     onStatusChange && onStatusChange(status)

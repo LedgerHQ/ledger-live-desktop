@@ -8,6 +8,7 @@ import isUndefined from 'lodash/isUndefined'
 
 import type { Settings } from 'types/common'
 import type { Unit } from '@ledgerhq/live-common/lib/types'
+import type { State } from 'reducers'
 
 import {
   formatCurrencyUnit,
@@ -39,7 +40,7 @@ I.defaultProps = {
   color: undefined,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   settings: state.settings,
 })
 
@@ -48,11 +49,11 @@ type Props = {
   animateTicker?: boolean,
   color?: string,
   disableRounding?: boolean,
-  fiat?: string | null,
+  fiat?: string,
   isPercent?: boolean,
   settings?: Settings,
   showCode?: boolean,
-  unit?: Unit | null,
+  unit?: Unit,
   val: number,
   withIcon?: boolean,
 }
@@ -134,19 +135,6 @@ export function FormattedVal(props: Props) {
       )}
     </T>
   )
-}
-
-FormattedVal.defaultProps = {
-  alwaysShowSign: false,
-  animateTicker: false,
-  color: undefined,
-  disableRounding: false,
-  fiat: null,
-  isPercent: false,
-  settings: undefined,
-  showCode: false,
-  unit: null,
-  withIcon: false,
 }
 
 export default connect(mapStateToProps)(FormattedVal)

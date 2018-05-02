@@ -12,7 +12,7 @@ type Props = {
   accountName?: string,
   account?: ?Account,
   currency?: ?CryptoCurrency,
-  deviceSelected: ?Device,
+  deviceSelected?: ?Device,
   onChangeDevice: Function,
   onStatusChange: Function,
 }
