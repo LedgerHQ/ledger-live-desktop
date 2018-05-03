@@ -63,7 +63,12 @@ async function scanNextAccount({ wallet, hwApp, accountIndex = 0, accountsCount,
     return accounts
   }
 
-  return scanNextAccount(wallet, hwApp, accountIndex + 1, accounts)
+  return scanNextAccount({
+    wallet,
+    hwApp,
+    accountIndex: accountIndex + 1,
+    accounts,
+  })
 }
 
 export default async function scanAccountsOnDevice(props: Props): Account[] {
