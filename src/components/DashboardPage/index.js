@@ -10,6 +10,7 @@ import {
   formatCurrencyUnit,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
+import moment from 'moment'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
@@ -110,6 +111,22 @@ class DashboardPage extends PureComponent<Props, State> {
     }
   }
 
+  handleGreeting = () => {
+    const localTimeHour = new Date().getHours()
+    if (localTimeHour) {
+      const afternoon_breakpoint = 12
+      const evening_breakpoint = 17
+
+      if (localTimeHour >= afternoon_breakpoint && localTimeHour < evening_breakpoint) {
+        return 'dashboard:greeting.afternoon'
+      } else if (localTimeHour >= evening_breakpoint) {
+        return 'dashboard:greeting.evening'
+      }
+      return 'dashboard:greeting.morning'
+    }
+    return ''
+  }
+
   handleChangeSelectedTime = item =>
     this.setState({
       selectedTime: item.key,
@@ -121,7 +138,7 @@ class DashboardPage extends PureComponent<Props, State> {
   render() {
     const { push, accounts, t, counterValue } = this.props
     const { accountsChunk, selectedTime, daysCount } = this.state
-
+    const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
     return (
@@ -129,7 +146,7 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {t('dashboard:greetings')}
+              {timeFrame ? t(timeFrame) : t('dashboard:defaultGreeting')}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0
