@@ -8,7 +8,6 @@
 //                                "     `--[]
 //
 
-import core from 'ledger-core'
 import Btc from '@ledgerhq/hw-app-btc'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 
@@ -19,42 +18,44 @@ type Props = {
   currencyId: string,
 }
 
-async function getOrCreateWallet(walletPool, currencyId) {
+async function getOrCreateWallet(currencyId) {
+  const core = require('ledger-core')
   try {
-    const wallet = await core.getWallet(walletPool, currencyId)
+    const wallet = await core.getWallet(currencyId)
     return wallet
   } catch (err) {
-    const currency = await core.getCurrency(walletPool, currencyId)
-    const wallet = await core.createWallet(walletPool, currencyId, currency)
+    const currency = await core.getCurrency(currencyId)
+    const wallet = await core.createWallet(currencyId, currency)
     return wallet
   }
 }
 
-async function scanNextAccount(wallet, hwApp, accountIndex = 0) {
-  console.log(`creating an account with index ${accountIndex}`)
+async function scanNextAccount(wallet, hwApp, accountIndex = 0, accounts = []) {
+  const core = require('ledger-core')
+  console.log(`>> On index ${accountIndex}...`)
   const account = await core.createAccount(wallet, hwApp)
-  console.log(`synchronizing account ${accountIndex}`)
   await core.syncAccount(account)
-  console.log(`finished sync`)
   const utxoCount = await account.asBitcoinLikeAccount().getUTXOCount()
-  console.log(`utxoCount = ${utxoCount}`)
+  console.log(`>> Found ${utxoCount} utxos`)
+  if (utxoCount === 0) {
+    return accounts
+  }
+  accounts.push(account)
+  return scanNextAccount(wallet, hwApp, accountIndex + 1, accounts)
 }
 
 export default async function scanAccountsOnDevice(props: Props): Account[] {
   try {
     const { devicePath, currencyId } = props
-    const walletPool = core.createWalletPool()
-    console.log(`get or create wallet`)
-    const wallet = await getOrCreateWallet(walletPool, currencyId)
-    console.log(`open device`)
+    const wallet = await getOrCreateWallet(currencyId)
     const transport = await CommNodeHid.open(devicePath)
-    console.log(`create app`)
     const hwApp = new Btc(transport)
-    console.log(`scan account`)
+    console.log(`>> Scanning accounts...`)
     const accounts = await scanNextAccount(wallet, hwApp)
     console.log(accounts)
     return []
   } catch (err) {
     console.log(err)
+    return []
   }
 }

@@ -35,7 +35,7 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^4.7.3",
+    "@ledgerhq/hw-app-btc": "^4.11.1",
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport": "^4.7.3",
     "@ledgerhq/hw-transport-node-hid": "^4.7.6",
