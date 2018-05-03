@@ -112,18 +112,15 @@ class DashboardPage extends PureComponent<Props, State> {
 
   handleGreeting = () => {
     const localTimeHour = new Date().getHours()
-    if (localTimeHour) {
-      const afternoon_breakpoint = 12
-      const evening_breakpoint = 17
+    const afternoon_breakpoint = 12
+    const evening_breakpoint = 17
 
-      if (localTimeHour >= afternoon_breakpoint && localTimeHour < evening_breakpoint) {
-        return 'dashboard:greeting.afternoon'
-      } else if (localTimeHour >= evening_breakpoint) {
-        return 'dashboard:greeting.evening'
-      }
-      return 'dashboard:greeting.morning'
+    if (localTimeHour >= afternoon_breakpoint && localTimeHour < evening_breakpoint) {
+      return 'dashboard:greeting.afternoon'
+    } else if (localTimeHour >= evening_breakpoint) {
+      return 'dashboard:greeting.evening'
     }
-    return ''
+    return 'dashboard:greeting.morning'
   }
 
   handleChangeSelectedTime = item =>
@@ -145,7 +142,7 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {timeFrame ? t(timeFrame) : t('dashboard:defaultGreeting')}
+              {t(timeFrame)}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0
