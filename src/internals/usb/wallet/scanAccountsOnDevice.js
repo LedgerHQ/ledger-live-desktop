@@ -13,6 +13,8 @@ import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 
 import type { Account } from '@ledgerhq/wallet-common/lib/types'
 
+const OPS_LIMIT = 10000
+
 type Props = {
   devicePath: string,
   currencyId: string,
@@ -35,12 +37,24 @@ async function scanNextAccount(wallet, hwApp, accountIndex = 0, accounts = []) {
   console.log(`>> On index ${accountIndex}...`)
   const account = await core.createAccount(wallet, hwApp)
   await core.syncAccount(account)
-  const utxoCount = await account.asBitcoinLikeAccount().getUTXOCount()
-  console.log(`>> Found ${utxoCount} utxos`)
-  if (utxoCount === 0) {
+
+  const utxosCount = await account.asBitcoinLikeAccount().getUTXOCount()
+  console.log(`>> utxosCount is ${utxosCount}`)
+
+  console.log(`>> about to query operations`)
+  const query = account.queryOperations()
+
+  console.log(`>> about to execute query`)
+  const ops = await query.limit(OPS_LIMIT).execute()
+
+  console.log(`>> Found ${ops.length} operations`)
+  accounts.push(account)
+
+  // returns if the current index points on an account with no ops
+  if (!ops.length) {
     return accounts
   }
-  accounts.push(account)
+
   return scanNextAccount(wallet, hwApp, accountIndex + 1, accounts)
 }
 
