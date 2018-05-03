@@ -24,6 +24,23 @@ export function getPath({
   }`
 }
 
+export async function getFreshReceiveAddress({
+  currencyId,
+  accountIndex,
+}: {
+  currencyId: string,
+  accountIndex: number,
+}) {
+  const core = require('ledger-core')
+  const wallet = await core.getWallet(currencyId)
+  const account = await wallet.getAccount(accountIndex)
+  const addresses = await account.getFreshPublicAddresses()
+  if (!addresses.length) {
+    throw new Error('No fresh addresses')
+  }
+  return addresses[0]
+}
+
 export function verifyAddress({
   transport,
   path,

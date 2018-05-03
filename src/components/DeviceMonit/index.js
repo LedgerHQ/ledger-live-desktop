@@ -84,6 +84,7 @@ class DeviceMonit extends PureComponent<Props, State> {
       devicePath: currentDevice.path,
       accountPath: account.path,
       accountAddress: account.address,
+      segwit: account.path.startsWith("49'"), // TODO: store segwit info in account
     })
   }
 

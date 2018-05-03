@@ -3,7 +3,7 @@
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import Btc from '@ledgerhq/hw-app-btc'
 
-import { getPath, verifyAddress } from './accounts'
+import { getPath, verifyAddress, getFreshReceiveAddress } from './accounts'
 import scanAccountsOnDevice from './scanAccountsOnDevice'
 
 export default (sendEvent: Function) => ({
@@ -36,6 +36,21 @@ export default (sendEvent: Function) => ({
     console.warn(
       `NOT IMPLEMENTED: getting account for ${pathDevice} ${currencyId} ${currentAccounts.length}`,
     )
+  },
+  getFreshReceiveAddress: async ({
+    currencyId,
+    accountIndex,
+  }: {
+    currencyId: string,
+    accountIndex: number,
+  }) => {
+    try {
+      console.log(accountIndex)
+      const freshAddress = await getFreshReceiveAddress({ currencyId, accountIndex })
+      sendEvent('wallet.getFreshReceiveAddress.success', freshAddress)
+    } catch (err) {
+      sendEvent('wallet.getFreshReceiveAddress.fail', err)
+    }
   },
   verifyAddress: async ({ pathDevice, path }: { pathDevice: string, path: string }) => {
     const transport = await CommNodeHid.open(pathDevice)

@@ -59,7 +59,7 @@ async function scanNextAccount({ wallet, hwApp, accountIndex = 0, accountsCount,
   accounts.push(account)
 
   // returns if the current index points on an account with no ops
-  if (!ops.length) {
+  if (utxosCount === 0) {
     return accounts
   }
 

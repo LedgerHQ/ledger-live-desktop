@@ -144,6 +144,23 @@ class DashboardPage extends PureComponent<Props, State> {
       <Box flow={7}>
         {currentDevice && (
           <Box p={8}>
+            <button
+              onClick={async () => {
+                const freshAddress = await runJob({
+                  channel: 'usb',
+                  job: 'wallet.getFreshReceiveAddress',
+                  successResponse: 'wallet.getFreshReceiveAddress.success',
+                  errorResponse: 'wallet.getFreshReceiveAddress.fail',
+                  data: {
+                    accountIndex: accounts[0].index,
+                    currencyId: 'bitcoin_testnet',
+                  },
+                })
+                console.log(freshAddress)
+              }}
+            >
+              {'get fresh address'}
+            </button>
             {currentDevice.path}
             <button
               onClick={async () => {

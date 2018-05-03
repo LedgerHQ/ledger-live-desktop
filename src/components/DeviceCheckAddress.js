@@ -55,7 +55,8 @@ class CheckAddress extends PureComponent<Props, State> {
   verifyAddress = ({ device, account }: { device: Device, account: Account }) =>
     sendEvent('usb', 'wallet.verifyAddress', {
       pathDevice: device.path,
-      path: `${account.rootPath}${account.path}`,
+      path: account.path,
+      segwit: account.path.startsWith("49'"), // TODO: store segwit info in account
     })
 
   render() {
