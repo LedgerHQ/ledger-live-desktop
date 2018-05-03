@@ -1,5 +1,8 @@
 title: Dashboard
-greetings: 'Good morning, {{name}}.'
+greeting:
+  morning: "Good Morning!"
+  evening: "Good Evening!"
+  afternoon: "Good Afternoon!"
 summary: here is the summary of your account
 summary_plural: 'here is the summary of your {{count}} accounts'
 noAccounts: no accounts

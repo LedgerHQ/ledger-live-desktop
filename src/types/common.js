@@ -32,7 +32,6 @@ export type Settings = {
   hasCompletedOnboarding: boolean,
   language: string,
   orderAccounts: string,
-  username: string,
   counterValue: string,
   password: {
     isEnabled: boolean,
