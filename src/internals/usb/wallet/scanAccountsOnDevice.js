@@ -32,10 +32,18 @@ async function getOrCreateWallet(currencyId) {
   }
 }
 
-async function scanNextAccount(wallet, hwApp, accountIndex = 0, accounts = []) {
+async function scanNextAccount({ wallet, hwApp, accountIndex = 0, accountsCount, accounts = [] }) {
   const core = require('ledger-core')
-  console.log(`>> On index ${accountIndex}...`)
-  const account = await core.createAccount(wallet, hwApp)
+
+  // create account only if account has not been scanned yet
+  // if it has already been created, we just need to get it, and sync it
+  const hasBeenScanned = accountIndex < accountsCount
+
+  console.log(`>> On index ${accountIndex} hasBeenScanned: ${hasBeenScanned}...`)
+  const account = hasBeenScanned
+    ? await wallet.getAccount(accountIndex)
+    : await core.createAccount(wallet, hwApp)
+
   await core.syncAccount(account)
 
   const utxosCount = await account.asBitcoinLikeAccount().getUTXOCount()
@@ -62,12 +70,17 @@ export default async function scanAccountsOnDevice(props: Props): Account[] {
   try {
     const { devicePath, currencyId } = props
     const wallet = await getOrCreateWallet(currencyId)
+    const accountsCount = await wallet.getAccountCount()
     const transport = await CommNodeHid.open(devicePath)
     const hwApp = new Btc(transport)
+    console.log(`accountsCount: ${accountsCount}`)
     console.log(`>> Scanning accounts...`)
-    const accounts = await scanNextAccount(wallet, hwApp)
-    console.log(accounts)
-    return []
+    const accounts = await scanNextAccount({
+      wallet,
+      hwApp,
+      accountsCount,
+    })
+    return accounts
   } catch (err) {
     console.log(err)
     return []
