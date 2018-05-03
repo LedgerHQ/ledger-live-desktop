@@ -10,7 +10,6 @@ import {
   formatCurrencyUnit,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
-import moment from 'moment'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
