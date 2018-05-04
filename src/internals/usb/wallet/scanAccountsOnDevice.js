@@ -9,9 +9,13 @@
 //
 
 import Btc from '@ledgerhq/hw-app-btc'
+import padStart from 'lodash/padStart'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
+
+import { toHexInt, encodeBase58Check } from 'helpers/generic'
 
 const OPS_LIMIT = 10000
 
@@ -39,27 +43,19 @@ async function scanNextAccount({ wallet, hwApp, accountIndex = 0, accountsCount,
   // if it has already been created, we just need to get it, and sync it
   const hasBeenScanned = accountIndex < accountsCount
 
-  console.log(`>> On index ${accountIndex} hasBeenScanned: ${hasBeenScanned}...`)
   const account = hasBeenScanned
     ? await wallet.getAccount(accountIndex)
     : await core.createAccount(wallet, hwApp)
 
   await core.syncAccount(account)
 
-  const utxosCount = await account.asBitcoinLikeAccount().getUTXOCount()
-  console.log(`>> utxosCount is ${utxosCount}`)
-
-  console.log(`>> about to query operations`)
   const query = account.queryOperations()
-
-  console.log(`>> about to execute query`)
   const ops = await query.limit(OPS_LIMIT).execute()
 
-  console.log(`>> Found ${ops.length} operations`)
   accounts.push(account)
 
   // returns if the current index points on an account with no ops
-  if (utxosCount === 0) {
+  if (ops.length === 0) {
     return accounts
   }
 
@@ -71,23 +67,88 @@ async function scanNextAccount({ wallet, hwApp, accountIndex = 0, accountsCount,
   })
 }
 
-export default async function scanAccountsOnDevice(props: Props): Account[] {
+export default async function scanAccountsOnDevice(props: Props): AccountRaw[] {
   try {
+    const core = require('ledger-core')
+
     const { devicePath, currencyId } = props
     const wallet = await getOrCreateWallet(currencyId)
     const accountsCount = await wallet.getAccountCount()
     const transport = await CommNodeHid.open(devicePath)
     const hwApp = new Btc(transport)
-    console.log(`accountsCount: ${accountsCount}`)
-    console.log(`>> Scanning accounts...`)
-    const accounts = await scanNextAccount({
-      wallet,
-      hwApp,
-      accountsCount,
-    })
-    return accounts
+
+    // retrieve native accounts
+    const njsAccounts = await scanNextAccount({ wallet, hwApp, accountsCount })
+
+    // create AccountRaw[]
+    const rawAccounts = await njsAccounts.reduce(async (promise, njsAccount, i) => {
+      const rawAccounts = await promise
+      const rawAccount = await buildRawAccount({
+        njsAccount,
+        accountIndex: i,
+        wallet,
+        currencyId,
+        core,
+        hwApp,
+      })
+      return [...rawAccounts, rawAccount]
+    }, Promise.resolve([]))
+
+    return rawAccounts
   } catch (err) {
     console.log(err)
     return []
   }
+}
+
+async function buildRawAccount({ njsAccount, wallet, currencyId, core, hwApp, accountIndex }) {
+  const jsCurrency = getCryptoCurrencyById(currencyId)
+
+  // retrieve xpub
+  const { derivations } = await wallet.getAccountCreationInfo(accountIndex)
+  const [walletPath, accountPath] = derivations
+  const { publicKey, chainCode, bitcoinAddress } = await hwApp.getWalletPublicKey(accountPath)
+  const nativeDerivationPath = core.createDerivationPath(accountPath)
+  const depth = nativeDerivationPath.getDepth()
+  const childNum = nativeDerivationPath.getChildNum(accountIndex)
+  const fingerprint = core.createBtcFingerprint(publicKey)
+  const { bitcoinLikeNetworkParameters } = wallet.getCurrency()
+  const network = Buffer.from(bitcoinLikeNetworkParameters.XPUBVersion).readUIntBE(0, 4)
+  const xpub = createXPUB(depth, fingerprint, childNum, chainCode, publicKey, network)
+
+  const { height: blockHeight } = await njsAccount.getLastBlock()
+
+  const rawAccount: AccountRaw = {
+    id: xpub,
+    xpub,
+    path: accountPath, // TODO: this should be called `accountPath` in Account/AccountRaw types
+    rootPath: walletPath, // TODO: this should be `walletPath` in Account/AccountRaw types
+    name: '', // TODO: placeholder name?
+    address: bitcoinAddress, // TODO: discuss about the utility of storing it here
+    balance: 0,
+    blockHeight,
+    archived: false,
+    index: accountIndex,
+    balanceByDay: {},
+    operations: [],
+    currencyId,
+    unitMagnitude: jsCurrency.units[0].magnitude,
+    lastSyncDate: new Date().toISOString(),
+  }
+
+  return rawAccount
+}
+
+/**
+ * TODO: should be calculated by the lib core
+ *       why? because the xpub generated here seems invalid
+ */
+function createXPUB(depth, fingerprint, childnum, chaincode, publicKey, network) {
+  let xpub = toHexInt(network)
+  xpub += padStart(depth.toString(16), 2, '0')
+  xpub += padStart(fingerprint.toString(16), 8, '0')
+  xpub += padStart(childnum.toString(16), 8, '0')
+  xpub += chaincode
+  xpub += publicKey
+  return encodeBase58Check(xpub)
 }

@@ -44,6 +44,7 @@
     "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "bitcoinjs-lib": "^3.3.2",
+    "bs58": "^4.0.1",
     "color": "^3.0.0",
     "cross-env": "^5.1.4",
     "d3": "^5.1.0",
