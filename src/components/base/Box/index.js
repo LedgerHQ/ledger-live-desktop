@@ -12,6 +12,7 @@ import {
   justifyContent,
   space,
   style,
+  cursor,
 } from 'styled-system'
 
 import fontFamily from 'styles/styled/fontFamily'
@@ -34,6 +35,7 @@ const Box = styled.div`
   ${justifyContent};
   ${space};
   ${textAlign};
+  ${cursor};
 
   display: flex;
   flex-shrink: ${p => (p.noShrink === true ? '0' : p.shrink === true ? '1' : '')};

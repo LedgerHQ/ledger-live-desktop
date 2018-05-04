@@ -9,7 +9,6 @@ import { resolve } from 'path'
 import cpuUsage from 'helpers/cpuUsage'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
-import counterValuesSync from './counterValuesSync'
 
 const { DEV_TOOLS } = process.env
 
@@ -81,9 +80,6 @@ const handlers = {
   updater: {
     init: setupAutoUpdater,
     quitAndInstall,
-  },
-  counterValues: {
-    sync: counterValuesSync,
   },
   kill: {
     process: (send, { pid }) => {

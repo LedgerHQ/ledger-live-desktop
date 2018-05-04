@@ -17,7 +17,6 @@ import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/acc
 import { sendEvent } from 'renderer/events'
 
 import { addAccount, updateAccount } from 'actions/accounts'
-import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
 import Breadcrumb from 'components/Breadcrumb'
@@ -44,7 +43,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   addAccount,
   closeModal,
-  fetchCounterValues,
   updateAccount,
 }
 
@@ -54,7 +52,6 @@ type Props = {
   archivedAccounts: Account[],
   canCreateAccount: boolean,
   closeModal: Function,
-  fetchCounterValues: Function,
   t: T,
   updateAccount: Function,
 }
@@ -117,7 +114,6 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   async fetchCounterValues() {
-    const { fetchCounterValues } = this.props
     const { currency } = this.state
 
     if (!currency) {
@@ -129,7 +125,10 @@ class AddAccountModal extends PureComponent<Props, State> {
       stepIndex: 0,
     })
 
-    await fetchCounterValues([currency])
+    // FIXME I don't really understand this step.
+    // also countervalues should not block the app to work.
+    // imagine our api is down...
+    // await fetchCounterValues([currency])
 
     this.setState({
       fetchingCounterValues: false,

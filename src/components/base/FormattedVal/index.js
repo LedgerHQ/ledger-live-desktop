@@ -64,6 +64,8 @@ type Props = OwnProps & {
   locale: string,
 }
 
+let _logged
+
 function FormattedVal(props: Props) {
   const {
     animateTicker,
@@ -92,7 +94,10 @@ function FormattedVal(props: Props) {
     text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${isNegative ? val * -1 : val} %`
   } else {
     if (fiat) {
-      console.warn('FormattedVal: passing fiat prop is deprecated')
+      if (!_logged) {
+        _logged = true
+        console.warn('FormattedVal: passing fiat prop is deprecated')
+      }
       const cur = findCurrencyByTicker(fiat)
       if (cur) {
         ;[unit] = cur.units

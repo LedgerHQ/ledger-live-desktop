@@ -3,6 +3,8 @@
 import db from 'helpers/db'
 
 import { getAccounts } from 'reducers/accounts'
+import { settingsExportSelector } from 'reducers/settings'
+import CounterValues from 'helpers/countervalues'
 
 export default store => next => action => {
   if (!action.type.startsWith('DB:')) {
@@ -15,11 +17,7 @@ export default store => next => action => {
   dispatch({ type, payload: action.payload })
 
   const state = getState()
-  const { settings, counterValues } = state
-
-  const accounts = getAccounts(state)
-
-  db.set('settings', settings)
-  db.set('accounts', accounts)
-  db.set('counterValues', counterValues)
+  db.set('settings', settingsExportSelector(state))
+  db.set('accounts', getAccounts(state))
+  db.set('countervalues', CounterValues.exportSelector(state))
 }

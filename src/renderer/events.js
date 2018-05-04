@@ -1,20 +1,18 @@
 // @flow
 
+// FIXME this file is spaghetti. we need one file per usecase.
+
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import debug from 'debug'
-import uniqBy from 'lodash/uniqBy'
-import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
-import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'config/constants'
+import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY } from 'config/constants'
 
 import { getAccounts, getAccountById } from 'reducers/accounts'
-import { getCounterValueCode } from 'reducers/settings'
 import { isLocked } from 'reducers/application'
 import { setUpdateStatus } from 'reducers/update'
 
-import { updateCounterValues } from 'actions/counterValues'
 import { updateAccount } from 'actions/accounts'
 import { updateDevices, addDevice, removeDevice } from 'actions/devices'
 
@@ -35,8 +33,6 @@ type MsgPayload = {
 
 let syncAccountsInProgress = false
 let syncAccountsTimeout
-
-let syncCounterValuesTimeout
 
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
@@ -105,18 +101,6 @@ export function stopSyncAccounts() {
   d.sync('Sync accounts - stop')
   syncAccountsInProgress = false
   clearTimeout(syncAccountsTimeout)
-}
-
-export function startSyncCounterValues(counterValueCode: string, accounts: Account[]) {
-  d.sync('Sync counterValues - start')
-  const currencies: Currency[] = uniqBy(accounts.map(a => a.currency), 'code')
-  const counterValue = getFiatCurrencyByTicker(counterValueCode)
-  sendEvent('msg', 'counterValues.sync', { currencies, counterValue })
-}
-
-export function stopSyncCounterValues() {
-  d.sync('Sync counterValues - stop')
-  clearTimeout(syncCounterValuesTimeout)
 }
 
 export function checkUpdates() {
@@ -201,17 +185,6 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
         store.dispatch(removeDevice(device))
       },
     },
-    counterValues: {
-      update: counterValues => {
-        store.dispatch(updateCounterValues(counterValues))
-        syncCounterValuesTimeout = setTimeout(() => {
-          const state = store.getState()
-          const accounts = getAccounts(state)
-          const counterValue = getCounterValueCode(state)
-          startSyncCounterValues(counterValue, accounts)
-        }, SYNC_COUNTER_VALUES_DELAY)
-      },
-    },
     updater: {
       checking: () => store.dispatch(setUpdateStatus('checking')),
       updateAvailable: info => store.dispatch(setUpdateStatus('available', info)),
@@ -241,9 +214,6 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
 
   if (!locked) {
     const accounts = getAccounts(state)
-    const counterValue = getCounterValueCode(state)
-
-    startSyncCounterValues(counterValue, accounts)
 
     // Start accounts sync only if we have accounts
     if (accounts.length > 0 && !DISABLED_SYNC) {

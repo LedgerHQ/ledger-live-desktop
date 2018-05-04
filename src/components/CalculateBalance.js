@@ -1,70 +1,61 @@
 // @flow
+/* eslint-disable react/no-unused-prop-types */
 
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import noop from 'lodash/noop'
+import type { Account, BalanceHistory } from '@ledgerhq/live-common/lib/types'
+import { getBalanceHistorySum } from '@ledgerhq/live-common/lib/helpers/account'
+import CounterValues from 'helpers/countervalues'
+import { exchangeSettingsForAccountSelector, counterValueCurrencySelector } from 'reducers/settings'
+import type { State } from 'reducers'
 
-import type { Account } from '@ledgerhq/live-common/lib/types'
-
-import calculateBalance from 'helpers/balance'
-
-const mapStateToProps = state => ({
-  counterValues: state.counterValues,
-})
-
-type Props = {
+type OwnProps = {
   accounts: Account[],
-  counterValues: Object,
   daysCount: number,
-  onCalculate: Function,
-  render: Function,
+  children: Props => *,
 }
 
-type State = {
-  allBalances: Array<Object>,
-  totalBalance: number,
-  sinceBalance: number,
-  refBalance: number,
+type Props = OwnProps & {
+  balanceHistory: BalanceHistory,
+  balanceStart: number,
+  balanceEnd: number,
+  isAvailable: boolean,
 }
 
-function calculateBalanceToState(props: Object) {
-  const { accounts, counterValue, counterValues, daysCount } = props
-
+const mapStateToProps = (state: State, props: OwnProps) => {
+  const counterValueCurrency = counterValueCurrencySelector(state)
+  let isAvailable = true
+  const balanceHistory = getBalanceHistorySum(
+    props.accounts,
+    props.daysCount,
+    (account, value, date) => {
+      const cv = CounterValues.calculateSelector(state, {
+        value,
+        date,
+        to: counterValueCurrency,
+        from: account.currency,
+        exchange: exchangeSettingsForAccountSelector(state, { account }),
+      })
+      if (!cv && cv !== 0) {
+        isAvailable = false
+        return 0
+      }
+      return cv
+    },
+  )
   return {
-    ...calculateBalance({ accounts, counterValue, counterValues, daysCount }),
+    isAvailable,
+    balanceHistory,
+    balanceStart: balanceHistory[0].value,
+    balanceEnd: balanceHistory[balanceHistory.length - 1].value,
   }
 }
 
-class CalculateBalance extends PureComponent<Props, State> {
-  static defaultProps = {
-    onCalculate: noop,
-  }
-
-  constructor(props) {
-    super(props)
-
-    const state = calculateBalanceToState(props)
-    props.onCalculate(state)
-    this.state = state
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const sameAccounts = this.props.accounts === nextProps.accounts
-    const sameCounterValues = this.props.counterValues === nextProps.counterValues
-    const sameDaysCount = this.props.daysCount === nextProps.daysCount
-    if (!sameAccounts || !sameCounterValues || !sameDaysCount) {
-      const state = calculateBalanceToState(nextProps)
-      nextProps.onCalculate(state)
-      this.setState(state)
-    }
-  }
-
+class CalculateBalance extends PureComponent<Props> {
   render() {
-    const { render } = this.props
-    const { allBalances, totalBalance, sinceBalance, refBalance } = this.state
-
-    return render({ allBalances, totalBalance, sinceBalance, refBalance })
+    const { children } = this.props
+    return children(this.props)
   }
 }
 

@@ -22,6 +22,8 @@ export type CurrencySettings = {
   maxConfirmationsNb: number,
 
   transactionFees: number,
+
+  exchange: string,
 }
 
 export type CurrenciesSettings = {

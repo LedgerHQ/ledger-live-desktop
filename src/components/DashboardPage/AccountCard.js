@@ -11,6 +11,7 @@ import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
+import DeltaChange from '../DeltaChange'
 
 const Wrapper = styled(Card).attrs({
   p: 4,
@@ -57,35 +58,31 @@ const AccountCard = ({
         />
       </Box>
     </Box>
-    <CalculateBalance
-      counterValue={counterValue}
-      accounts={[account]}
-      daysCount={daysCount}
-      render={({ allBalances, totalBalance, refBalance }) => (
+    <CalculateBalance counterValue={counterValue} accounts={[account]} daysCount={daysCount}>
+      {({ isAvailable, balanceHistory, balanceStart, balanceEnd }) => (
         <Box flow={4}>
           <Box flow={2} horizontal>
             <Box justifyContent="center">
-              <FormattedVal
-                animateTicker
-                fiat={counterValue}
-                val={totalBalance}
-                alwaysShowSign={false}
-                showCode
-                fontSize={3}
-                color="graphite"
-              />
+              {isAvailable ? (
+                <FormattedVal
+                  animateTicker
+                  fiat={counterValue}
+                  val={balanceEnd}
+                  alwaysShowSign={false}
+                  showCode
+                  fontSize={3}
+                  color="graphite"
+                />
+              ) : null}
             </Box>
             <Box grow justifyContent="center">
-              <FormattedVal
-                isPercent
-                val={Math.floor((totalBalance - refBalance) / refBalance * 100)}
-                alwaysShowSign
-                fontSize={3}
-              />
+              {balanceStart && isAvailable ? (
+                <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
+              ) : null}
             </Box>
           </Box>
           <Chart
-            data={allBalances}
+            data={balanceHistory}
             color={account.currency.color}
             height={52}
             hideAxis
@@ -95,7 +92,7 @@ const AccountCard = ({
           />
         </Box>
       )}
-    />
+    </CalculateBalance>
   </Wrapper>
 )
 
