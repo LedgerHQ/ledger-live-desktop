@@ -19,3 +19,8 @@ retry: Réessayer
 close: Fermer
 eastern: Orientale
 western: Occidentale
+lockScreen:
+  title: Welcome Back
+  subTitle: Your application is locked
+  description: Please enter your password to continue
+  inputPlaceholder: Type your password
