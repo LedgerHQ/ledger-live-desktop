@@ -173,7 +173,7 @@ async function buildRawAccount({
     xpub,
     path: accountPath, // TODO: this should be called `accountPath` in Account/AccountRaw types
     rootPath: walletPath, // TODO: this should be `walletPath` in Account/AccountRaw types
-    name: '', // TODO: placeholder name?
+    name: `Account ${accountIndex}`, // TODO: placeholder name?
     address: bitcoinAddress, // TODO: discuss about the utility of storing it here
     addresses,
     balance: 0,

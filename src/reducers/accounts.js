@@ -115,6 +115,10 @@ export function canCreateAccount(state: State): boolean {
   return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
 }
 
+export function decodeAccount(account: AccountRaw): Account {
+  return accountModel.decode({ data: account })
+}
+
 // Yeah. `any` should be `AccountRaw[]` but it can also be a map
 // of wrapped accounts. And as flow is apparently incapable of doing
 // such a simple thing, let's put any, right? I don't care.

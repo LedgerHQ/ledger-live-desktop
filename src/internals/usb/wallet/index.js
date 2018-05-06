@@ -18,11 +18,13 @@ export default (sendEvent: Function) => ({
     currencyId: string,
   }) => {
     try {
+      sendEvent('wallet.scanAccountsOnDevice.start', { pid: process.pid }, { kill: false })
       const accounts = await scanAccountsOnDevice({
         devicePath,
         currencyId,
-        onAccountScanned: account =>
-          sendEvent('wallet.scanAccountsOnDevice.accountScanned', account),
+        onAccountScanned: account => {
+          sendEvent('wallet.scanAccountsOnDevice.accountScanned', account, { kill: false })
+        },
       })
       sendEvent('wallet.scanAccountsOnDevice.success', accounts)
     } catch (err) {

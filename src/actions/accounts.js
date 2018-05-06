@@ -43,16 +43,9 @@ export type AddAccount = Account => (Function, Function) => void
 export const addAccount: AddAccount = payload => (dispatch, getState) => {
   const {
     settings: { orderAccounts },
-    accounts,
   } = getState()
   dispatch({ type: 'ADD_ACCOUNT', payload })
   dispatch(updateOrderAccounts(orderAccounts))
-
-  // Start sync accounts the first time you add an account
-  if (accounts.length === 0) {
-    const accounts = [payload]
-    startSyncAccounts(accounts)
-  }
 }
 
 export type RemoveAccount = Account => { type: string, payload: Account }

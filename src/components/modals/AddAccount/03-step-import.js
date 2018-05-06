@@ -25,74 +25,31 @@ const AccountItem = styled(AccountCard)`
 `
 
 type Props = {
-  accountsImport: Object,
-  archivedAccounts: Account[],
-  currency?: ?CryptoCurrency,
-  importProgress: boolean,
-  onSelectAccount?: Function,
-  selectedAccounts?: Array<number>,
+  scannedAccounts: Account[],
+  selectedAccounts: Account[],
+  existingAccounts: Account[],
+  onToggleAccount: Function,
 }
 
 function StepImport(props: Props) {
-  const hasAccountsImports = Object.keys(props.accountsImport).length > 0
-  const unit = props.currency && props.currency.units[0]
+  const { scannedAccounts, selectedAccounts, existingAccounts, onToggleAccount } = props
   return (
-    <Box>
-      {props.importProgress ? (
-        <Box alignItems="center">In progress...</Box>
-      ) : (
-        hasAccountsImports && <Box mb={-2}>Accounts</Box>
-      )}
-      {hasAccountsImports && (
-        <AccountsContainer pt={5}>
-          {Object.keys(props.accountsImport).map(k => {
-            const a = props.accountsImport[k]
-            return (
-              <AccountItemWrapper key={a.id}>
-                <AccountItem
-                  selected={props.selectedAccounts && props.selectedAccounts.includes(a.id)}
-                  onClick={props.onSelectAccount && props.onSelectAccount(a.id)}
-                  account={{
-                    ...a,
-                    currencyId: props.currency && props.currency.id,
-                    name: `Account ${a.accountIndex}`,
-                    currency: props.currency,
-                    unit,
-                  }}
-                  counterValue="USD"
-                  daysCount={365}
-                />
-              </AccountItemWrapper>
-            )
-          })}
-        </AccountsContainer>
-      )}
-      {!props.importProgress &&
-        props.archivedAccounts.length > 0 && (
-          <Fragment>
-            <Box pb={3}>Archived accounts</Box>
-            <AccountsContainer>
-              {props.archivedAccounts.map(a => (
-                <AccountItemWrapper key={a.id}>
-                  <AccountItem
-                    selected={props.selectedAccounts && props.selectedAccounts.includes(a.id)}
-                    onClick={props.onSelectAccount && props.onSelectAccount(a.id)}
-                    account={a}
-                    counterValue="USD"
-                    daysCount={365}
-                  />
-                </AccountItemWrapper>
-              ))}
-            </AccountsContainer>
-          </Fragment>
-        )}
+    <Box flow={4}>
+      {scannedAccounts.map(account => {
+        const isSelected = selectedAccounts.find(a => a.id === account.id)
+        const isExisting = existingAccounts.find(a => a.id === account.id && a.archived === false)
+        return (
+          <Box
+            bg="lightgrey"
+            key={account.id}
+            onClick={onToggleAccount && !isExisting ? () => onToggleAccount(account) : undefined}
+          >
+            {isSelected && `[SELECTED]`} {isExisting && `[ALREADY IMPORTED]`} {account.name}
+          </Box>
+        )
+      })}
     </Box>
   )
-}
-
-StepImport.defaultProps = {
-  onSelectAccount: undefined,
-  selectedAccounts: [],
 }
 
 export default StepImport
