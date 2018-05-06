@@ -196,11 +196,10 @@ class AddAccountModal extends PureComponent<Props, State> {
       // add it to the reducer if needed, archived
       if (!existingAccounts.find(a => a.id === account.id)) {
         addAccount(account)
+        this.setState(state => ({
+          scannedAccounts: [...state.scannedAccounts, account],
+        }))
       }
-
-      this.setState(state => ({
-        scannedAccounts: [...state.scannedAccounts, account],
-      }))
     }
   }
 

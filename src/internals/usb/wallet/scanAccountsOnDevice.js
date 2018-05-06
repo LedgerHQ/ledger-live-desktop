@@ -81,7 +81,9 @@ async function scanNextAccount(props) {
     ? await wallet.getAccount(accountIndex)
     : await core.createAccount(wallet, hwApp)
 
-  await core.syncAccount(njsAccount)
+  if (!hasBeenScanned) {
+    await core.syncAccount(njsAccount)
+  }
 
   const query = njsAccount.queryOperations()
   const ops = await query.limit(OPS_LIMIT).execute()
@@ -93,17 +95,18 @@ async function scanNextAccount(props) {
     currencyId,
     core,
     hwApp,
+    ops,
   })
-
-  // trigger event
-  onAccountScanned(account)
-
-  accounts.push(account)
 
   // returns if the current index points on an account with no ops
   if (ops.length === 0) {
     return accounts
   }
+
+  // trigger event
+  onAccountScanned(account)
+
+  accounts.push(account)
 
   return scanNextAccount({ ...props, accountIndex: accountIndex + 1 })
 }
@@ -128,6 +131,7 @@ async function buildRawAccount({
   // core,
   hwApp,
   accountIndex,
+  ops,
 }: {
   njsAccount: NJSAccount,
   wallet: NJSWallet,
@@ -135,6 +139,7 @@ async function buildRawAccount({
   accountIndex: number,
   core: Object,
   hwApp: Object,
+  ops: NJSOperation[],
 }) {
   const jsCurrency = getCryptoCurrencyById(currencyId)
 
@@ -168,6 +173,22 @@ async function buildRawAccount({
     path: `${accountPath}/${i}'`,
   }))
 
+  const operations = ops.map(op => {
+    const hash = op.getUid()
+    return {
+      id: hash,
+      hash,
+      senders: op.getSenders(),
+      recipients: op.getRecipients(),
+      // TODO: find why NJSAmount not working
+      // amount: op.getAmount().toInt(),
+      amount: 0,
+      blockHeight: op.getBlockHeight(),
+      accountId: xpub,
+      date: op.getDate().toISOString(),
+    }
+  })
+
   const rawAccount: AccountRaw = {
     id: xpub,
     xpub,
@@ -181,7 +202,7 @@ async function buildRawAccount({
     archived: false,
     index: accountIndex,
     balanceByDay: {},
-    operations: [],
+    operations,
     currencyId,
     unitMagnitude: jsCurrency.units[0].magnitude,
     lastSyncDate: new Date().toISOString(),
