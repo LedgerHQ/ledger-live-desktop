@@ -23,35 +23,80 @@ const OPS_LIMIT = 10000
 type Props = {
   devicePath: string,
   currencyId: string,
+  onAccountScanned: Function,
 }
 
-async function getOrCreateWallet(currencyId) {
-  const core = require('ledger-core')
-  try {
-    const wallet = await core.getWallet(currencyId)
-    return wallet
-  } catch (err) {
-    const currency = await core.getCurrency(currencyId)
-    const wallet = await core.createWallet(currencyId, currency)
-    return wallet
-  }
+export default async function scanAccountsOnDevice(props: Props): AccountRaw[] {
+  const { devicePath, currencyId, onAccountScanned } = props
+
+  // instanciate app on device
+  const transport = await CommNodeHid.open(devicePath)
+  const hwApp = new Btc(transport)
+
+  // compute wallet identifier
+  const deviceIdentifiers = await hwApp.getWalletPublicKey(devicePath)
+  const { publicKey } = deviceIdentifiers
+  const WALLET_IDENTIFIER = `${publicKey}__${currencyId}`
+
+  // retrieve or create the wallet
+  const wallet = await getOrCreateWallet(WALLET_IDENTIFIER, currencyId)
+  const accountsCount = await wallet.getAccountCount()
+
+  // recursively scan all accounts on device on the given app
+  // new accounts will be created in sqlite, existing ones will be updated
+  const accounts = await scanNextAccount({
+    wallet,
+    hwApp,
+    currencyId,
+    accountsCount,
+    accountIndex: 0,
+    accounts: [],
+    onAccountScanned,
+  })
+
+  return accounts
 }
 
-async function scanNextAccount({ wallet, hwApp, accountIndex, accountsCount, accounts }) {
+async function scanNextAccount(props) {
+  const {
+    wallet,
+    hwApp,
+    currencyId,
+    accountsCount,
+    accountIndex,
+    accounts,
+    onAccountScanned,
+  } = props
+
+  // TODO: investigate why importing it on file scope causes trouble
   const core = require('ledger-core')
+
+  console.log(`>> Scanning account ${accountIndex}`)
 
   // create account only if account has not been scanned yet
   // if it has already been created, we just need to get it, and sync it
   const hasBeenScanned = accountIndex < accountsCount
 
-  const account = hasBeenScanned
+  const njsAccount = hasBeenScanned
     ? await wallet.getAccount(accountIndex)
     : await core.createAccount(wallet, hwApp)
 
-  await core.syncAccount(account)
+  await core.syncAccount(njsAccount)
 
-  const query = account.queryOperations()
+  const query = njsAccount.queryOperations()
   const ops = await query.limit(OPS_LIMIT).execute()
+
+  const account = await buildRawAccount({
+    njsAccount,
+    accountIndex,
+    wallet,
+    currencyId,
+    core,
+    hwApp,
+  })
+
+  // trigger event
+  onAccountScanned(account)
 
   accounts.push(account)
 
@@ -60,55 +105,27 @@ async function scanNextAccount({ wallet, hwApp, accountIndex, accountsCount, acc
     return accounts
   }
 
-  return scanNextAccount({
-    wallet,
-    hwApp,
-    accountIndex: accountIndex + 1,
-    accounts,
-    accountsCount,
-  })
+  return scanNextAccount({ ...props, accountIndex: accountIndex + 1 })
 }
 
-export default async function scanAccountsOnDevice(props: Props): AccountRaw[] {
+async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId) {
+  // TODO: investigate why importing it on file scope causes trouble
   const core = require('ledger-core')
-
-  const { devicePath, currencyId } = props
-  const wallet = await getOrCreateWallet(currencyId)
-  const accountsCount = await wallet.getAccountCount()
-  const transport = await CommNodeHid.open(devicePath)
-  const hwApp = new Btc(transport)
-
-  // retrieve native accounts
-  const njsAccounts = await scanNextAccount({
-    wallet,
-    hwApp,
-    accountsCount,
-    accountIndex: 0,
-    accounts: [],
-  })
-
-  // create AccountRaw[], looping on every njsAccount and transform it to an AccountRaw
-  const rawAccounts = []
-  for (let i = 0; i < njsAccounts.length; i++) {
-    const rawAccount = await buildRawAccount({
-      njsAccount: njsAccounts[i],
-      accountIndex: i,
-      wallet,
-      currencyId,
-      core,
-      hwApp,
-    })
-    rawAccounts.push(rawAccount)
+  try {
+    const wallet = await core.getWallet(WALLET_IDENTIFIER)
+    return wallet
+  } catch (err) {
+    const currency = await core.getCurrency(currencyId)
+    const wallet = await core.createWallet(WALLET_IDENTIFIER, currency)
+    return wallet
   }
-
-  return rawAccounts
 }
 
 async function buildRawAccount({
   njsAccount,
   wallet,
   currencyId,
-  core,
+  // core,
   hwApp,
   accountIndex,
 }: {
@@ -125,10 +142,17 @@ async function buildRawAccount({
   const { derivations } = await wallet.getAccountCreationInfo(accountIndex)
   const [walletPath, accountPath] = derivations
   const { publicKey, chainCode, bitcoinAddress } = await hwApp.getWalletPublicKey(accountPath)
-  const nativeDerivationPath = core.createDerivationPath(accountPath)
-  const depth = nativeDerivationPath.getDepth()
-  const childNum = nativeDerivationPath.getChildNum(accountIndex)
-  const fingerprint = core.createBtcFingerprint(publicKey)
+
+  // TODO: wtf is happening?
+  //
+  // const nativeDerivationPath = core.createDerivationPath(accountPath)
+  // const depth = nativeDerivationPath.getDepth()
+  const depth = 'depth'
+  // const childNum = nativeDerivationPath.getChildNum(accountIndex)
+  const childNum = 'childNum'
+  // const fingerprint = core.createBtcFingerprint(publicKey)
+  const fingerprint = 'fingerprint'
+
   const { bitcoinLikeNetworkParameters } = wallet.getCurrency()
   const network = Buffer.from(bitcoinLikeNetworkParameters.XPUBVersion).readUIntBE(0, 4)
   const xpub = createXPUB(depth, fingerprint, childNum, chainCode, publicKey, network)
@@ -137,7 +161,12 @@ async function buildRawAccount({
   const { height: blockHeight } = await njsAccount.getLastBlock()
 
   // get a bunch of fresh addresses
-  const addresses = []
+  const rawAddresses = await njsAccount.getFreshPublicAddresses()
+  // TODO: waiting for libcore
+  const addresses = rawAddresses.map((strAddr, i) => ({
+    str: strAddr,
+    path: `${accountPath}/${i}'`,
+  }))
 
   const rawAccount: AccountRaw = {
     id: xpub,

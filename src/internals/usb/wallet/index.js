@@ -18,7 +18,12 @@ export default (sendEvent: Function) => ({
     currencyId: string,
   }) => {
     try {
-      const accounts = await scanAccountsOnDevice({ devicePath, currencyId })
+      const accounts = await scanAccountsOnDevice({
+        devicePath,
+        currencyId,
+        onAccountScanned: account =>
+          sendEvent('wallet.scanAccountsOnDevice.accountScanned', account),
+      })
       sendEvent('wallet.scanAccountsOnDevice.success', accounts)
     } catch (err) {
       sendEvent('wallet.scanAccountsOnDevice.fail', err)
