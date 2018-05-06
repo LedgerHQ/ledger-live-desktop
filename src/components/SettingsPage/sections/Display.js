@@ -9,6 +9,7 @@ import type { Settings, T } from 'types/common'
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
 import IconDisplay from 'icons/Display'
+import languageKeys from 'config/languages'
 
 import regionsByKey from 'helpers/regions.json'
 
@@ -55,13 +56,6 @@ class TabProfile extends PureComponent<Props, State> {
     cachedRegion: this.props.settings.region,
   }
 
-  getDatas() {
-    const { t } = this.props
-    return {
-      languages: [{ key: 'en', name: t('language:en') }, { key: 'fr', name: t('language:fr') }],
-    }
-  }
-
   getMarketIndicators() {
     const { t } = this.props
     return [
@@ -84,7 +78,7 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
-  handleChangeLanguage = (languageKey: string) => {
+  handleChangeLanguage = ({ key: languageKey }: *) => {
     const { i18n, saveSettings } = this.props
     this.setState({ cachedLanguageKey: languageKey })
     window.requestIdleCallback(() => {
@@ -121,7 +115,8 @@ class TabProfile extends PureComponent<Props, State> {
       cachedCounterValue,
       cachedRegion,
     } = this.state
-    const { languages } = this.getDatas()
+
+    const languages = languageKeys.map(key => ({ key, name: t(`language:${key}`) }))
     const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
     const regionsFiltered = regions.filter(({ language }) => cachedLanguageKey === language)
     const currentRegion =
@@ -142,7 +137,7 @@ class TabProfile extends PureComponent<Props, State> {
             <Select
               style={{ minWidth: 250 }}
               small
-              onChange={item => this.handleChangeCounterValue(item)}
+              onChange={this.handleChangeCounterValue}
               itemToString={item => (item ? item.name : '')}
               renderSelected={item => item && item.name}
               items={fiats}
@@ -153,7 +148,7 @@ class TabProfile extends PureComponent<Props, State> {
             <Select
               style={{ minWidth: 250 }}
               small
-              onChange={item => this.handleChangeLanguage(item.key)}
+              onChange={this.handleChangeLanguage}
               renderSelected={item => item && item.name}
               value={currentLanguage}
               items={languages}
