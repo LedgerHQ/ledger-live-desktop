@@ -15,12 +15,12 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import chunk from 'lodash/chunk'
 
-import type { T, Settings } from 'types/common'
+import type { T } from 'types/common'
 
 import { colors } from 'styles/theme'
 
 import { getVisibleAccounts } from 'reducers/accounts'
-import { getCounterValueCode } from 'reducers/settings'
+import { getCounterValueCode, localeSelector } from 'reducers/settings'
 
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
@@ -38,7 +38,7 @@ import AccountsOrder from './AccountsOrder'
 const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
   counterValue: getCounterValueCode(state),
-  settings: state.settings,
+  locale: localeSelector(state),
 })
 
 const mapDispatchToProps = {
@@ -52,11 +52,11 @@ type Props = {
   accounts: Account[],
   push: Function,
   counterValue: string,
-  settings: Settings,
+  locale: string,
 }
 
 type State = {
-  accountsChunk: Array<Array<Account | null>>,
+  accountsChunk: Array<Array<?Account>>,
   selectedTime: string,
   daysCount: number,
 }
@@ -88,7 +88,7 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   handleCalculateBalance = data => {
-    const { counterValue, settings } = this.props
+    const { counterValue, locale } = this.props
 
     if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
       this._cacheBalance = data.totalBalance
@@ -102,7 +102,7 @@ class DashboardPage extends PureComponent<Props, State> {
             data.totalBalance,
             {
               showCode: true,
-              locale: settings.language,
+              locale,
             },
           ),
         },

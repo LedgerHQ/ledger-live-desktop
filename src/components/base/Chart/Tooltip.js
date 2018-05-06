@@ -6,7 +6,7 @@ import type { Unit } from '@ledgerhq/live-common/lib/types'
 
 import { colors as themeColors } from 'styles/theme'
 import { TooltipContainer } from 'components/base/Tooltip'
-import { FormattedVal } from 'components/base/FormattedVal'
+import FormattedVal from 'components/base/FormattedVal'
 
 import type { Item } from './types'
 
