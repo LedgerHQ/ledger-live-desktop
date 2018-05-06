@@ -80,8 +80,13 @@ export const counterValueCurrencySelector = (state: State): ?Currency =>
 
 export const getLanguage = (state: State) => state.settings.language
 
-export const localeSelector = (state: State) =>
-  `${state.settings.language}-${state.settings.region}`
+export const localeSelector = (state: State) => {
+  const { language, region } = state.settings
+  if (!region) {
+    return language || 'en'
+  }
+  return `${language || 'en'}-${region}`
+}
 
 export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 
