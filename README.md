@@ -13,17 +13,13 @@ Project has been tested under [NodeJS](https://nodejs.org) v9.3.0, with [Yarn](h
 
 #### Setup
 
-1. Install dependencies
+1.  Install dependencies
 
 ```bash
-# app dependencies
 yarn
-
-# npm packages flow definitions
-yarn flow-typed
 ```
 
-2. Create `.env` file
+2.  Create `.env` file
 
 ```bash
 # ENV VARIABLES

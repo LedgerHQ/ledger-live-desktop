@@ -6,13 +6,16 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import {
+  formatCurrencyUnit,
+  getFiatCurrencyByTicker,
+} from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import chunk from 'lodash/chunk'
 
-import type { T } from 'types/common'
+import type { T, Settings } from 'types/common'
 
 import { colors } from 'styles/theme'
 
@@ -33,9 +36,9 @@ import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps = state => ({
-  username: state.settings.username,
   accounts: getVisibleAccounts(state),
   counterValue: getCounterValueCode(state),
+  settings: state.settings,
 })
 
 const mapDispatchToProps = {
@@ -49,7 +52,7 @@ type Props = {
   accounts: Account[],
   push: Function,
   counterValue: string,
-  username: string,
+  settings: Settings,
 }
 
 type State = {
@@ -85,7 +88,7 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 
   handleCalculateBalance = data => {
-    const { counterValue } = this.props
+    const { counterValue, settings } = this.props
 
     if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
       this._cacheBalance = data.totalBalance
@@ -94,12 +97,30 @@ class DashboardPage extends PureComponent<Props, State> {
         text: 'Total balance',
         color: colors.wallet,
         balance: {
-          counterValue: formatCurrencyUnit(getFiatUnit(counterValue), data.totalBalance, {
-            showCode: true,
-          }),
+          counterValue: formatCurrencyUnit(
+            getFiatCurrencyByTicker(counterValue).units[0],
+            data.totalBalance,
+            {
+              showCode: true,
+              locale: settings.language,
+            },
+          ),
         },
       })
     }
+  }
+
+  handleGreeting = () => {
+    const localTimeHour = new Date().getHours()
+    const afternoon_breakpoint = 12
+    const evening_breakpoint = 17
+
+    if (localTimeHour >= afternoon_breakpoint && localTimeHour < evening_breakpoint) {
+      return 'dashboard:greeting.afternoon'
+    } else if (localTimeHour >= evening_breakpoint) {
+      return 'dashboard:greeting.evening'
+    }
+    return 'dashboard:greeting.morning'
   }
 
   handleChangeSelectedTime = item =>
@@ -111,9 +132,9 @@ class DashboardPage extends PureComponent<Props, State> {
   _cacheBalance = null
 
   render() {
-    const { push, accounts, t, counterValue, username } = this.props
+    const { push, accounts, t, counterValue } = this.props
     const { accountsChunk, selectedTime, daysCount } = this.state
-
+    const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
     return (
@@ -121,7 +142,7 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {t('dashboard:greetings', { name: username })}
+              {t(timeFrame)}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0

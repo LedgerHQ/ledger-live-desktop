@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, Fragment } from 'react'
-import { getDefaultUnitByCoinType } from '@ledgerhq/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import Chance from 'chance'
 import moment from 'moment'
 import { storiesOf } from '@storybook/react'
@@ -13,7 +13,7 @@ import Chart from 'components/base/Chart'
 const stories = storiesOf('Components/base', module)
 
 const data = generateRandomData(365)
-const unit = getDefaultUnitByCoinType(0)
+const unit = getCryptoCurrencyById('bitcoin').units[0]
 
 type State = {
   start: number,

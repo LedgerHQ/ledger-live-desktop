@@ -1,12 +1,13 @@
 // @flow
 
+import { createSelector } from 'reselect'
 import { handleActions } from 'redux-actions'
-import { createAccountModel } from '@ledgerhq/wallet-common/lib/models/account'
+import { createAccountModel } from '@ledgerhq/live-common/lib/models/account'
 
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import type { State } from 'reducers'
 
@@ -58,7 +59,32 @@ const handlers: Object = {
 
 // Selectors
 
+export function accountsSelector(state: { accounts: AccountsState }): Account[] {
+  return state.accounts
+}
+
+export const archivedAccountsSelector = createSelector(accountsSelector, accounts =>
+  accounts.filter(acc => acc.archived),
+)
+
+export const visibleAccountsSelector = createSelector(accountsSelector, accounts =>
+  accounts.filter(acc => !acc.archived),
+)
+
+export const currenciesSelector = createSelector(visibleAccountsSelector, accounts =>
+  [...new Set(accounts.map(a => a.currency))].sort((a, b) => a.name.localeCompare(b.name)),
+)
+
+export const accountSelector = createSelector(
+  accountsSelector,
+  (_, { accountId }: { accountId: string }) => accountId,
+  (accounts, accountId) => accounts.find(a => a.id === accountId),
+)
+
+// TODO remove deprecated selectors
+
 export function getTotalBalance(state: { accounts: AccountsState }) {
+  // TODO we will have it using utility functions
   return reduce(
     state.accounts,
     (result, account) => {

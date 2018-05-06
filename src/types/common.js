@@ -25,14 +25,13 @@ export type CurrencySettings = {
 }
 
 export type CurrenciesSettings = {
-  [coinType: number]: CurrencySettings,
+  [id: string]: CurrencySettings,
 }
 
 export type Settings = {
   hasCompletedOnboarding: boolean,
   language: string,
   orderAccounts: string,
-  username: string,
   counterValue: string,
   password: {
     isEnabled: boolean,
@@ -40,6 +39,7 @@ export type Settings = {
   },
   marketIndicator: 'eastern' | 'western',
   currenciesSettings: CurrenciesSettings,
+  region: string,
 }
 
 export type T = (?string, ?Object) => string

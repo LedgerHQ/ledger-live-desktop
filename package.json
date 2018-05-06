@@ -12,23 +12,14 @@
     "dist": "yarn compile && electron-builder",
     "test": "jest",
     "flow": "flow",
-    "flow-typed": "flow-typed install -s --overwrite",
     "lint": "eslint src webpack .storybook",
     "postinstall": "bash ./scripts/postinstall.sh",
-    "precommit": "lint-staged",
     "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
     "publish-storybook": "bash ./scripts/publish-storybook.sh",
     "release": "build",
     "start": "bash ./scripts/start.sh",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
     "trans": "node scripts/trans"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
   },
   "electronWebpack": {
     "title": true,
@@ -44,12 +35,11 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/currencies": "^4.10.1",
     "@ledgerhq/hw-app-btc": "^4.7.3",
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport": "^4.7.3",
     "@ledgerhq/hw-transport-node-hid": "^4.7.6",
-    "@ledgerhq/wallet-common": "^1.2.0",
+    "@ledgerhq/live-common": "^2.0.0",
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",
@@ -66,6 +56,7 @@
     "history": "^4.7.2",
     "i18next": "^11.2.2",
     "i18next-node-fs-backend": "^1.0.0",
+    "invariant": "^2.2.4",
     "ledger-test-library": "KhalilBellakrid/ledger-test-library-nodejs#7d37482",
     "lodash": "^4.17.5",
     "moment": "^2.22.1",
@@ -89,6 +80,7 @@
     "redux": "^4.0.0",
     "redux-actions": "^2.3.0",
     "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
     "smooth-scrollbar": "^8.2.7",
     "source-map": "0.7.2",
     "source-map-support": "^0.5.4",
@@ -140,7 +132,6 @@
     "husky": "^0.14.3",
     "jest": "^22.4.3",
     "js-yaml": "^3.10.0",
-    "lint-staged": "^7.0.4",
     "node-loader": "^0.6.0",
     "prettier": "^1.12.1",
     "react-hot-loader": "^4.1.0",

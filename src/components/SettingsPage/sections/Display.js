@@ -2,14 +2,15 @@
 
 import React, { PureComponent } from 'react'
 import moment from 'moment'
-import { listFiats } from '@ledgerhq/currencies'
+import { listFiatCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import type { Settings, T } from 'types/common'
 
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
-
 import IconDisplay from 'icons/Display'
+
+import COUNTRIES from 'helpers/countries.json'
 
 import {
   SettingsSection as Section,
@@ -18,11 +19,14 @@ import {
   SettingsSectionRow as Row,
 } from '../SettingsSection'
 
-const fiats = listFiats().map(fiat => ({
-  key: fiat.code,
-  fiat,
-  name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
-}))
+const fiats = listFiatCurrencies()
+  .map(f => f.units[0])
+  // For now we take first unit, in the future we'll need to figure out something else
+  .map(fiat => ({
+    key: fiat.code,
+    fiat,
+    name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
+  }))
 
 type Props = {
   t: T,
@@ -35,6 +39,7 @@ type State = {
   cachedMarketIndicator: string,
   cachedLanguageKey: string,
   cachedCounterValue: ?Object,
+  cachedRegion: string,
 }
 
 class TabProfile extends PureComponent<Props, State> {
@@ -42,6 +47,7 @@ class TabProfile extends PureComponent<Props, State> {
     cachedMarketIndicator: this.props.settings.marketIndicator,
     cachedLanguageKey: this.props.settings.language,
     cachedCounterValue: fiats.find(fiat => fiat.fiat.code === this.props.settings.counterValue),
+    cachedRegion: this.props.settings.region,
   }
 
   getDatas() {
@@ -83,6 +89,14 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
+  handleChangeRegion = (region: string) => {
+    const { saveSettings } = this.props
+    this.setState({ cachedRegion: region })
+    window.requestIdleCallback(() => {
+      saveSettings({ region })
+    })
+  }
+
   handleChangeMarketIndicator = (item: Object) => {
     const { saveSettings } = this.props
     const marketIndicator = item.key
@@ -96,9 +110,15 @@ class TabProfile extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { cachedMarketIndicator, cachedLanguageKey, cachedCounterValue } = this.state
+    const {
+      cachedMarketIndicator,
+      cachedLanguageKey,
+      cachedCounterValue,
+      cachedRegion,
+    } = this.state
     const { languages } = this.getDatas()
     const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
+    const currentRegion = COUNTRIES.find(r => r.key === cachedRegion)
 
     return (
       <Section>
@@ -135,7 +155,15 @@ class TabProfile extends PureComponent<Props, State> {
             />
           </Row>
           <Row title={t('settings:display.region')} desc={t('settings:display.regionDesc')}>
-            {'-'}
+            <Select
+              searchable
+              fuseOptions={{ keys: ['name'] }}
+              maxHeight={200}
+              onChange={item => this.handleChangeRegion(item.key)}
+              renderSelected={item => item && item.name}
+              value={currentRegion}
+              items={COUNTRIES}
+            />
           </Row>
           <Row title={t('settings:display.stock')} desc={t('settings:display.stockDesc')}>
             <RadioGroup

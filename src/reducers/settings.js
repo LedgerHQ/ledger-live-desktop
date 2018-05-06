@@ -1,21 +1,35 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
-import { getFiatUnit } from '@ledgerhq/currencies'
-import type { Currency } from '@ledgerhq/currencies'
-
-import get from 'lodash/get'
+import { findCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
+import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
 
 import type { Settings, CurrencySettings } from 'types/common'
 import type { State } from 'reducers'
 
-export type SettingsState = Object
+export type SettingsState = {
+  hasCompletedOnboarding: boolean,
+  counterValue: string,
+  language: string,
+  orderAccounts: string,
+  password: {
+    isEnabled: boolean,
+    value: string,
+  },
+  marketIndicator: string,
+  currenciesSettings: {
+    [currencyId: string]: CurrencySettings,
+  },
+  region: string,
+}
+
+/* have to check if available for all OS */
+const language = window.navigator.language.split('-')[0]
 
 const defaultState: SettingsState = {
   hasCompletedOnboarding: false,
-  username: 'Anonymous',
   counterValue: 'USD',
-  language: 'en',
+  language,
   orderAccounts: 'balance|asc',
   password: {
     isEnabled: false,
@@ -23,6 +37,7 @@ const defaultState: SettingsState = {
   },
   marketIndicator: 'western',
   currenciesSettings: {},
+  region: 'US',
 }
 
 const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
@@ -52,22 +67,25 @@ const handlers: Object = {
   }),
 }
 
-export const hasPassword = (state: Object) =>
-  get(state.settings, 'password.isEnabled', defaultState.password.isEnabled)
+// TODO refactor selectors to *Selector naming convention
 
-export const getCounterValueCode = (state: Object) =>
-  get(state.settings, 'counterValue', defaultState.counterValue)
+export const hasPassword = (state: State): boolean => state.settings.password.isEnabled
 
-export const getCounterValueFiatUnit = (state: Object) => getFiatUnit(getCounterValueCode(state))
+export const getCounterValueCode = (state: State) => state.settings.counterValue
 
-export const getLanguage = (state: Object) => get(state.settings, 'language', defaultState.language)
+export const counterValueCurrencySelector = (state: State): ?Currency =>
+  findCurrencyByTicker(getCounterValueCode(state))
 
-export const getOrderAccounts = (state: Object) =>
-  get(state.settings, 'orderAccounts', defaultState.orderAccounts)
+export const getLanguage = (state: State) => state.settings.language
 
-export const currencySettingsSelector = (state: State, currency: Currency): CurrencySettings => {
-  const currencySettings = state.settings.currenciesSettings[currency.coinType]
-  return currencySettings || CURRENCY_DEFAULTS_SETTINGS
+export const getOrderAccounts = (state: State) => state.settings.orderAccounts
+
+export const currencySettingsSelector = (
+  state: State,
+  currency: CryptoCurrency,
+): CurrencySettings => {
+  const currencySettings = state.settings.currenciesSettings[currency.id]
+  return { ...CURRENCY_DEFAULTS_SETTINGS, ...currencySettings }
 }
 
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator

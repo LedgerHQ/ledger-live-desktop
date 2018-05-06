@@ -5,12 +5,11 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import type { Account, CalculateCounterValue } from '@ledgerhq/wallet-common/lib/types'
-import type { FiatUnit } from '@ledgerhq/currencies'
+import type { Currency, Account, CalculateCounterValue } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
-import { getCounterValueFiatUnit } from 'reducers/settings'
+import { counterValueCurrencySelector } from 'reducers/settings'
 import { calculateCounterValueSelector, reverseCounterValueSelector } from 'reducers/counterValues'
 
 import InputCurrency from 'components/base/InputCurrency'
@@ -36,7 +35,7 @@ const InputCenter = styled(Box).attrs({
 `
 
 const mapStateToProps = state => ({
-  rightUnit: getCounterValueFiatUnit(state),
+  rightCurrency: counterValueCurrencySelector(state),
   getCounterValue: calculateCounterValueSelector(state),
   getReverseCounterValue: reverseCounterValueSelector(state),
 })
@@ -59,7 +58,7 @@ type Props = {
 
   // used to determine the right input unit
   // retrieved via selector (take the chosen countervalue unit)
-  rightUnit: FiatUnit,
+  rightCurrency: Currency,
 
   // used to calculate the opposite field value (right & left)
   getCounterValue: CalculateCounterValue,
@@ -80,19 +79,19 @@ export class RequestAmount extends PureComponent<Props> {
   }
 
   handleChangeAmount = (changedField: string) => (val: number) => {
-    const { rightUnit, getReverseCounterValue, account, max, onChange } = this.props
+    const { rightCurrency, getReverseCounterValue, account, max, onChange } = this.props
     if (changedField === 'left') {
       onChange(val > max ? max : val)
     } else if (changedField === 'right') {
-      const leftVal = getReverseCounterValue(account.currency, rightUnit)(val)
+      const leftVal = getReverseCounterValue(account.currency, rightCurrency)(val)
       onChange(leftVal > max ? max : leftVal)
     }
   }
 
   renderInputs(containerProps: Object) {
-    const { value, account, rightUnit, getCounterValue } = this.props
-    const right = getCounterValue(account.currency, rightUnit)(value)
-
+    const { value, account, rightCurrency, getCounterValue } = this.props
+    const right = getCounterValue(account.currency, rightCurrency)(value)
+    const rightUnit = rightCurrency.units[0]
     return (
       <Box horizontal grow shrink>
         <InputCurrency

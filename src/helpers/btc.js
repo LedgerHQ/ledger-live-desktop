@@ -1,9 +1,10 @@
 // @flow
 
+import { coinTypeForId } from 'internals/usb/wallet/accounts'
 import ledger from 'ledger-test-library'
 import bitcoin from 'bitcoinjs-lib'
 import axios from 'axios'
-import type { OperationRaw } from '@ledgerhq/wallet-common/lib/types'
+import type { OperationRaw } from '@ledgerhq/live-common/lib/types'
 
 import groupBy from 'lodash/groupBy'
 import noop from 'lodash/noop'
@@ -11,16 +12,16 @@ import uniqBy from 'lodash/uniqBy'
 
 const GAP_LIMIT_ADDRESSES = 20
 
-export const networks = [
-  {
+export const networks = {
+  bitcoin: {
     ...bitcoin.networks.bitcoin,
     family: 1,
   },
-  {
+  bitcoin_testnet: {
     ...bitcoin.networks.testnet,
     family: 1,
   },
-]
+}
 
 export function computeOperation(addresses: Array<string>, accountId: string) {
   return (t: Object) => {
@@ -78,7 +79,7 @@ export async function getAccount({
   hdnode,
   segwit,
   network,
-  coinType,
+  currencyId,
   accountId,
   asyncDelay = 250,
   onProgress = noop,
@@ -89,7 +90,7 @@ export async function getAccount({
   currentIndex?: number,
   hdnode: Object,
   segwit: boolean,
-  coinType: number,
+  currencyId: string,
   accountId: string,
   network: Object,
   asyncDelay?: number,
@@ -156,7 +157,7 @@ export async function getAccount({
 
         let txs = []
 
-        const operationsOpts = { coin_type: coinType }
+        const operationsOpts = { coin_type: coinTypeForId(currencyId) }
 
         try {
           txs = await ledger.getTransactions(listAddresses, operationsOpts)
@@ -204,7 +205,7 @@ export async function getAccount({
 
         const account = {
           ...nextAddress,
-          coinType,
+          currencyId,
           addresses: operations.length > 0 ? allAddresses : [],
           balance,
           balanceByDay: getBalanceByDay(operations),

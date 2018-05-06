@@ -5,13 +5,12 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { boolean } from '@storybook/addon-knobs'
 
-import { getCurrencyByCoinType } from '@ledgerhq/currencies'
-
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import InputCurrency from 'components/base/InputCurrency'
 
 const stories = storiesOf('Components', module)
 
-const { units } = getCurrencyByCoinType(1)
+const { units } = getCryptoCurrencyById('bitcoin')
 
 class Wrapper extends Component<any, any> {
   state = {

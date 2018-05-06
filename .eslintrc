@@ -42,6 +42,7 @@
     "no-return-assign": 0,
     "no-shadow": 0,
     "no-underscore-dangle": 0,
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "vars": "all", "args": "after-used", "ignoreRestSiblings": true }],
     "no-use-before-define": 0,
     "no-restricted-syntax": 0,
     "no-prototype-builtins": 0,
@@ -51,6 +52,7 @@
     "react/jsx-filename-extension": 0,
     "react/jsx-no-target-blank": 0,
     "react/prefer-stateless-function": 0,
+    "react/require-default-props": 0,
   },
   "settings": {
     "import/resolver": {

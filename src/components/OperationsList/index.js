@@ -9,9 +9,9 @@ import { translate } from 'react-i18next'
 import {
   groupAccountOperationsByDay,
   groupAccountsOperationsByDay,
-} from '@ledgerhq/wallet-common/lib/helpers/account'
+} from '@ledgerhq/live-common/lib/helpers/account'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import noop from 'lodash/noop'
 import keyBy from 'lodash/keyBy'

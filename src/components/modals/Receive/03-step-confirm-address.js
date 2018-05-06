@@ -3,7 +3,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device, T } from 'types/common'
 
 import Box from 'components/base/Box'

@@ -1,6 +1,8 @@
 // @flow
 
+import React from 'react'
 import Color from 'color'
+import uniqueId from 'lodash/uniqueId'
 
 import staticPath from 'helpers/staticPath'
 import { colors, fontFamilies } from 'styles/theme'
@@ -52,6 +54,9 @@ export const fontFace = ({
     font-weight: ${weight};
   }
 `
+
+export const multiline = (str: string) =>
+  str.split('\n').map(line => <p key={uniqueId()}>{line}</p>)
 
 export function getMarketColor({
   marketIndicator,

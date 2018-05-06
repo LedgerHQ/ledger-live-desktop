@@ -35,6 +35,10 @@ profile:
   passwordModalNewPasswordInput: New password
   passwordModalRepeatPasswordInput: Repeat password
   passwordModalSave: Save
+  disablePasswordModalTitle: Disable Password
+  disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
+  disablePasswordModalInput: Current password
+  disablePasswordModalSave: Save
   sync: Sync accounts
   syncDesc: Lorem ipsum dolor sit amet
   export: Export logs

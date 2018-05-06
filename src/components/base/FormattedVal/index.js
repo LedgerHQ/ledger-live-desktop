@@ -7,9 +7,13 @@ import { connect } from 'react-redux'
 import isUndefined from 'lodash/isUndefined'
 
 import type { Settings } from 'types/common'
-import type { Unit } from '@ledgerhq/currencies'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
+import type { State } from 'reducers'
 
-import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import {
+  formatCurrencyUnit,
+  findCurrencyByTicker,
+} from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import { getMarketColor } from 'styles/helpers'
 
@@ -36,7 +40,7 @@ I.defaultProps = {
   color: undefined,
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   settings: state.settings,
 })
 
@@ -45,11 +49,11 @@ type Props = {
   animateTicker?: boolean,
   color?: string,
   disableRounding?: boolean,
-  fiat?: string | null,
+  fiat?: string,
   isPercent?: boolean,
   settings?: Settings,
   showCode?: boolean,
-  unit?: Unit | null,
+  unit?: Unit,
   val: number,
   withIcon?: boolean,
 }
@@ -81,19 +85,26 @@ export function FormattedVal(props: Props) {
     text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${isNegative ? val * -1 : val} %`
   } else {
     if (fiat) {
-      unit = getFiatUnit(fiat)
-    } else if (!unit) {
+      console.warn('FormattedVal: passing fiat prop is deprecated')
+      const cur = findCurrencyByTicker(fiat)
+      if (cur) {
+        ;[unit] = cur.units
+      }
+    }
+    if (!unit) {
       return ''
     }
 
     if (withIcon && isNegative) {
       val *= -1
     }
+    const locale = settings ? settings.language : ''
 
     text = formatCurrencyUnit(unit, val, {
       alwaysShowSign,
       disableRounding,
       showCode,
+      locale,
     })
   }
 
@@ -126,19 +137,6 @@ export function FormattedVal(props: Props) {
       )}
     </T>
   )
-}
-
-FormattedVal.defaultProps = {
-  alwaysShowSign: false,
-  animateTicker: false,
-  color: undefined,
-  disableRounding: false,
-  fiat: null,
-  isPercent: false,
-  settings: undefined,
-  showCode: false,
-  unit: null,
-  withIcon: false,
 }
 
 export default connect(mapStateToProps)(FormattedVal)

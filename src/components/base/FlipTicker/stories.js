@@ -3,7 +3,10 @@
 import React, { Component } from 'react'
 
 import { storiesOf } from '@storybook/react'
-import { formatCurrencyUnit, getFiatUnit } from '@ledgerhq/currencies'
+import {
+  formatCurrencyUnit,
+  getFiatCurrencyByTicker,
+} from '@ledgerhq/live-common/lib/helpers/currencies'
 import Chance from 'chance'
 
 import Box from 'components/base/Box'
@@ -12,7 +15,7 @@ import FlipTicker from 'components/base/FlipTicker'
 
 const stories = storiesOf('Components/base', module)
 
-const unit = getFiatUnit('USD')
+const unit = getFiatCurrencyByTicker('USD').units[0]
 const chance = new Chance()
 
 function getValue() {

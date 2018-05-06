@@ -2,61 +2,69 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { getFiatUnit } from '@ledgerhq/currencies'
+import type { Currency } from '@ledgerhq/live-common/lib/types'
 
-import { getCounterValueCode } from 'reducers/settings'
+import { counterValueCurrencySelector } from 'reducers/settings'
 import { calculateCounterValueSelector } from 'reducers/counterValues'
 
 import FormattedVal from 'components/base/FormattedVal'
 
-type Props = {
-  // wich market to query
-  ticker: string,
+import type { State } from 'reducers'
 
-  // the value :)
-  value: number,
+type OwnProps = {
+  // wich market to query
+  // FIXME drop ticker in favor of currency
+  ticker: string,
+  currency?: Currency,
 
   // when? if not given: take latest
   date?: Date,
 
-  // from reducers
-  counterValueCode: string,
-  getCounterValue: Function,
+  value: number,
 }
 
-const mapStateToProps = (state, props) => {
-  const { ticker } = props
+type Props = OwnProps & {
+  // from reducers
+  counterValueCurrency: Currency,
+  value: number,
+}
 
-  // TODO: in wallet-common, stop using currency.
-  // always use ticker and remove that hack
+const mapStateToProps = (state: State, props: OwnProps) => {
+  const { ticker, value, date } = props
+
+  if (ticker) {
+    // FIXME actually ticker should be deprecated, not currency!!
+    console.warn('CounterValue: `currency` should be passed instead of `ticker`') // eslint-disable-line no-console
+  }
+
   let { currency } = props
   if (!currency && ticker) {
     currency = generateFakeCurrency(ticker)
-  } else if (currency) {
-    console.warn('`currency` is deprecated in CounterValue. use `ticker` instead.') // eslint-disable-line no-console
   }
 
-  const counterValueCode = getCounterValueCode(state)
-  const counterValueUnit = getFiatUnit(counterValueCode)
-  const getCounterValue = calculateCounterValueSelector(state)(currency, counterValueUnit)
+  const counterValueCurrency = counterValueCurrencySelector(state)
+  const counterValue =
+    !counterValueCurrency || !currency
+      ? 0
+      : calculateCounterValueSelector(state)(currency, counterValueCurrency)(value, date)
 
   return {
-    counterValueCode,
-    getCounterValue,
+    counterValueCurrency,
+    value: counterValue,
   }
 }
 
 class CounterValue extends PureComponent<Props> {
-  static defaultProps = {
-    value: 0,
-    date: undefined,
-  }
-
   render() {
-    const { getCounterValue, counterValueCode, date, value, ...props } = this.props
-    const counterValue = getCounterValue(value, date)
+    const { value, counterValueCurrency, date, ...props } = this.props
     return (
-      <FormattedVal val={counterValue} fiat={counterValueCode} showCode alwaysShowSign {...props} />
+      <FormattedVal
+        val={value}
+        fiat={counterValueCurrency.units[0].code}
+        showCode
+        alwaysShowSign
+        {...props}
+      />
     )
   }
 }
@@ -75,7 +83,7 @@ function generateFakeCurrency(ticker) {
     ],
 
     // unused
-    coinType: 0,
+    id: '',
     color: '#000',
     name: 'fake-coin',
     scheme: 'bitcoin',

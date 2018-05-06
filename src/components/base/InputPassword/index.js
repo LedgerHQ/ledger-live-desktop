@@ -50,7 +50,7 @@ type Props = {
   onChange: Function,
   t: T,
   value: string,
-  withStrength: boolean,
+  withStrength?: boolean,
 }
 
 class InputPassword extends PureComponent<Props, State> {

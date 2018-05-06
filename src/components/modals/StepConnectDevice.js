@@ -2,8 +2,7 @@
 
 import React from 'react'
 
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
-import type { Currency } from '@ledgerhq/currencies/lib/types'
+import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
 import DeviceConnect from 'components/DeviceConnect'
@@ -12,8 +11,8 @@ import DeviceMonit from 'components/DeviceMonitNew'
 type Props = {
   accountName?: string,
   account?: ?Account,
-  currency?: ?Currency,
-  deviceSelected: ?Device,
+  currency?: ?CryptoCurrency,
+  deviceSelected?: ?Device,
   onChangeDevice: Function,
   onStatusChange: Function,
 }
@@ -21,13 +20,13 @@ type Props = {
 const StepConnectDevice = (props: Props) => (
   <DeviceMonit
     account={props.account}
-    coinType={props.currency && props.currency.coinType}
+    currency={props.currency}
     deviceSelected={props.deviceSelected}
     onStatusChange={props.onStatusChange}
-    render={({ coinType, appStatus, devices, deviceSelected }) => (
+    render={({ currency, appStatus, devices, deviceSelected }) => (
       <DeviceConnect
         accountName={props.accountName}
-        coinType={coinType}
+        currency={currency}
         appOpened={appStatus === 'success' ? 'success' : appStatus === 'fail' ? 'fail' : null}
         devices={devices}
         deviceSelected={deviceSelected}
@@ -36,11 +35,5 @@ const StepConnectDevice = (props: Props) => (
     )}
   />
 )
-
-StepConnectDevice.defaultProps = {
-  accountName: undefined,
-  account: undefined,
-  currency: undefined,
-}
 
 export default StepConnectDevice

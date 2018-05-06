@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { genAccount } from '@ledgerhq/wallet-common/lib/mock/account'
+import { genAccount } from '@ledgerhq/live-common/lib/mock/account'
 import { storiesOf } from '@storybook/react'
 import { boolean } from '@storybook/addon-knobs'
 

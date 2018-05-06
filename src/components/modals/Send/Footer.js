@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import type { Account } from '@ledgerhq/wallet-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
@@ -20,42 +20,47 @@ type Props = {
   fees: number,
   onNext: Function,
   canNext: boolean,
+  showTotal: boolean,
 }
 
-function Footer({ account, amount, fees, t, onNext, canNext }: Props) {
+function Footer({ account, amount, fees, t, onNext, canNext, showTotal }: Props) {
   return (
-    <ModalFooter horizontal alignItems="center">
-      <Box grow>
-        <Label>{t('send:totalSpent')}</Label>
-        <Box horizontal flow={2} align="center">
-          <FormattedVal
-            disableRounding
-            color="dark"
-            val={amount + fees}
-            unit={account.unit}
-            showCode
-          />
-          <Box horizontal align="center">
-            <Text ff="Rubik" fontSize={3}>
-              {'('}
-            </Text>
-            <CounterValue
-              ticker={account.currency.units[0].code}
-              value={amount + fees}
-              disableRounding
-              color="grey"
-              fontSize={3}
-              showCode
-            />
-            <Text ff="Rubik" fontSize={3}>
-              {')'}
-            </Text>
+    <ModalFooter>
+      <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+        {showTotal && (
+          <Box grow>
+            <Label>{t('send:totalSpent')}</Label>
+            <Box horizontal flow={2} align="center">
+              <FormattedVal
+                disableRounding
+                color="dark"
+                val={amount + fees}
+                unit={account.unit}
+                showCode
+              />
+              <Box horizontal align="center">
+                <Text ff="Rubik" fontSize={3}>
+                  {'('}
+                </Text>
+                <CounterValue
+                  ticker={account.currency.units[0].code}
+                  value={amount + fees}
+                  disableRounding
+                  color="grey"
+                  fontSize={3}
+                  showCode
+                />
+                <Text ff="Rubik" fontSize={3}>
+                  {')'}
+                </Text>
+              </Box>
+            </Box>
           </Box>
-        </Box>
+        )}
+        <Button primary onClick={onNext} disabled={!canNext}>
+          {'Next'}
+        </Button>
       </Box>
-      <Button primary onClick={onNext} disabled={!canNext}>
-        {'Next'}
-      </Button>
     </ModalFooter>
   )
 }

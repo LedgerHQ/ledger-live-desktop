@@ -7,9 +7,9 @@ import {
   makeCalculateCounterValue,
   makeReverseCounterValue,
   formatCounterValueDay,
-} from '@ledgerhq/wallet-common/lib/helpers/countervalue'
+} from '@ledgerhq/live-common/lib/helpers/countervalue'
 
-import type { CalculateCounterValue } from '@ledgerhq/wallet-common/lib/types'
+import type { CalculateCounterValue } from '@ledgerhq/live-common/lib/types'
 import type { State } from 'reducers'
 
 export type CounterValuesState = {}
