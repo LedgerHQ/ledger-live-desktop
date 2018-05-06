@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 import isUndefined from 'lodash/isUndefined'
 
-import type { Settings } from 'types/common'
 import type { Unit } from '@ledgerhq/live-common/lib/types'
 import type { State } from 'reducers'
 
@@ -14,6 +13,8 @@ import {
   formatCurrencyUnit,
   findCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
+
+import { marketIndicatorSelector, localeSelector } from 'reducers/settings'
 
 import { getMarketColor } from 'styles/helpers'
 
@@ -40,25 +41,30 @@ I.defaultProps = {
   color: undefined,
 }
 
-const mapStateToProps = (state: State) => ({
-  settings: state.settings,
-})
-
-type Props = {
+type OwnProps = {
   alwaysShowSign?: boolean,
   animateTicker?: boolean,
   color?: string,
   disableRounding?: boolean,
   fiat?: string,
   isPercent?: boolean,
-  settings?: Settings,
   showCode?: boolean,
   unit?: Unit,
   val: number,
   withIcon?: boolean,
 }
 
-export function FormattedVal(props: Props) {
+const mapStateToProps = (state: State, _props: OwnProps) => ({
+  marketIndicator: marketIndicatorSelector(state),
+  locale: localeSelector(state),
+})
+
+type Props = OwnProps & {
+  marketIndicator: string,
+  locale: string,
+}
+
+function FormattedVal(props: Props) {
   const {
     animateTicker,
     disableRounding,
@@ -67,7 +73,8 @@ export function FormattedVal(props: Props) {
     alwaysShowSign,
     showCode,
     withIcon,
-    settings,
+    locale,
+    marketIndicator,
     color,
     ...p
   } = props
@@ -98,7 +105,6 @@ export function FormattedVal(props: Props) {
     if (withIcon && isNegative) {
       val *= -1
     }
-    const locale = settings ? settings.language : ''
 
     text = formatCurrencyUnit(unit, val, {
       alwaysShowSign,
@@ -112,12 +118,10 @@ export function FormattedVal(props: Props) {
     text = <FlipTicker value={text} />
   }
 
-  const marketColor = settings
-    ? getMarketColor({
-        marketIndicator: settings.marketIndicator,
-        isNegative,
-      })
-    : undefined
+  const marketColor = getMarketColor({
+    marketIndicator,
+    isNegative,
+  })
 
   return (
     <T color={color || marketColor} withIcon={withIcon} {...p}>

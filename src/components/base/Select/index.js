@@ -32,7 +32,7 @@ type Props = {
   renderItem?: (*) => Element<*>,
   renderSelected?: any => Element<*>,
   searchable?: boolean,
-  value?: Object | null,
+  value?: *,
   disabled: boolean,
   small?: boolean,
 }

@@ -24,7 +24,9 @@ export type SettingsState = {
 }
 
 /* have to check if available for all OS */
-const language = window.navigator.language.split('-')[0]
+const localeSplit = window.navigator.language.split('-')
+const language = (localeSplit[0] || 'en').toLowerCase()
+const region = (localeSplit[1] || 'US').toUpperCase()
 
 const defaultState: SettingsState = {
   hasCompletedOnboarding: false,
@@ -37,7 +39,7 @@ const defaultState: SettingsState = {
   },
   marketIndicator: 'western',
   currenciesSettings: {},
-  region: 'US',
+  region,
 }
 
 const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
@@ -77,6 +79,14 @@ export const counterValueCurrencySelector = (state: State): ?Currency =>
   findCurrencyByTicker(getCounterValueCode(state))
 
 export const getLanguage = (state: State) => state.settings.language
+
+export const localeSelector = (state: State) => {
+  const { language, region } = state.settings
+  if (!region) {
+    return language || 'en'
+  }
+  return `${language || 'en'}-${region}`
+}
 
 export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 

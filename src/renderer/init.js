@@ -23,6 +23,10 @@ import App from 'components/App'
 
 import 'styles/global'
 
+if (process.env.LEDGER_RESET_ALL) {
+  db.resetAll()
+}
+
 // Init db with defaults if needed
 db.init('settings', {})
 db.init('counterValues', {})

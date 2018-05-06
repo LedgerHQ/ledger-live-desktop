@@ -9,8 +9,9 @@ import type { Settings, T } from 'types/common'
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
 import IconDisplay from 'icons/Display'
+import languageKeys from 'config/languages'
 
-import COUNTRIES from 'helpers/countries.json'
+import regionsByKey from 'helpers/regions.json'
 
 import {
   SettingsSection as Section,
@@ -18,6 +19,11 @@ import {
   SettingsSectionBody as Body,
   SettingsSectionRow as Row,
 } from '../SettingsSection'
+
+const regions = Object.keys(regionsByKey).map(key => {
+  const [language, region] = key.split('-')
+  return { key, language, region, name: regionsByKey[key] }
+})
 
 const fiats = listFiatCurrencies()
   .map(f => f.units[0])
@@ -50,13 +56,6 @@ class TabProfile extends PureComponent<Props, State> {
     cachedRegion: this.props.settings.region,
   }
 
-  getDatas() {
-    const { t } = this.props
-    return {
-      languages: [{ key: 'en', name: t('language:en') }, { key: 'fr', name: t('language:fr') }],
-    }
-  }
-
   getMarketIndicators() {
     const { t } = this.props
     return [
@@ -79,7 +78,7 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
-  handleChangeLanguage = (languageKey: string) => {
+  handleChangeLanguage = ({ key: languageKey }: *) => {
     const { i18n, saveSettings } = this.props
     this.setState({ cachedLanguageKey: languageKey })
     window.requestIdleCallback(() => {
@@ -89,7 +88,7 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
-  handleChangeRegion = (region: string) => {
+  handleChangeRegion = ({ region }: *) => {
     const { saveSettings } = this.props
     this.setState({ cachedRegion: region })
     window.requestIdleCallback(() => {
@@ -116,9 +115,12 @@ class TabProfile extends PureComponent<Props, State> {
       cachedCounterValue,
       cachedRegion,
     } = this.state
-    const { languages } = this.getDatas()
+
+    const languages = languageKeys.map(key => ({ key, name: t(`language:${key}`) }))
     const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
-    const currentRegion = COUNTRIES.find(r => r.key === cachedRegion)
+    const regionsFiltered = regions.filter(({ language }) => cachedLanguageKey === language)
+    const currentRegion =
+      regionsFiltered.find(({ region }) => cachedRegion === region) || regionsFiltered[0]
 
     return (
       <Section>
@@ -133,11 +135,9 @@ class TabProfile extends PureComponent<Props, State> {
             desc={t('settings:display.counterValueDesc')}
           >
             <Select
-              searchable
-              fuseOptions={{ keys: ['name'] }}
               style={{ minWidth: 250 }}
               small
-              onChange={item => this.handleChangeCounterValue(item)}
+              onChange={this.handleChangeCounterValue}
               itemToString={item => (item ? item.name : '')}
               renderSelected={item => item && item.name}
               items={fiats}
@@ -146,9 +146,9 @@ class TabProfile extends PureComponent<Props, State> {
           </Row>
           <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
             <Select
-              style={{ minWidth: 130 }}
+              style={{ minWidth: 250 }}
               small
-              onChange={item => this.handleChangeLanguage(item.key)}
+              onChange={this.handleChangeLanguage}
               renderSelected={item => item && item.name}
               value={currentLanguage}
               items={languages}
@@ -156,13 +156,11 @@ class TabProfile extends PureComponent<Props, State> {
           </Row>
           <Row title={t('settings:display.region')} desc={t('settings:display.regionDesc')}>
             <Select
-              searchable
-              fuseOptions={{ keys: ['name'] }}
-              maxHeight={200}
-              onChange={item => this.handleChangeRegion(item.key)}
+              style={{ minWidth: 250 }}
+              onChange={this.handleChangeRegion}
               renderSelected={item => item && item.name}
               value={currentRegion}
-              items={COUNTRIES}
+              items={regionsFiltered}
             />
           </Row>
           <Row title={t('settings:display.stock')} desc={t('settings:display.stockDesc')}>

@@ -18,6 +18,7 @@ function parseValue(value) {
 }
 
 function format(unit: Unit, value: number, { isFocused, showAllDigits }) {
+  // FIXME do we need locale for the input too ?
   return formatCurrencyUnit(unit, value, {
     useGrouping: !isFocused,
     disableRounding: true,
