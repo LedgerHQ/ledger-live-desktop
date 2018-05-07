@@ -95,6 +95,12 @@ class TabProfile extends PureComponent<Props, State> {
     }
   }
 
+  handleDeveloperMode = developerMode => {
+    this.props.saveSettings({
+      developerMode,
+    })
+  }
+
   render() {
     const { t, settings } = this.props
     const {
@@ -120,6 +126,12 @@ class TabProfile extends PureComponent<Props, State> {
               )}
               <CheckBox isChecked={isPasswordEnabled} onChange={this.handleChangePasswordCheck} />
             </Box>
+          </Row>
+          <Row
+            title={t('settings:profile.developerMode')}
+            desc={t('settings:profile.developerModeDesc')}
+          >
+            <CheckBox isChecked={settings.developerMode} onChange={this.handleDeveloperMode} />
           </Row>
           <Row title={t('settings:profile.reset')} desc={t('settings:profile.resetDesc')}>
             <Button danger onClick={this.handleOpenHardResetModal}>
