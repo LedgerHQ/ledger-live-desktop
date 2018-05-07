@@ -7,8 +7,6 @@ import db from 'helpers/db'
 
 import type { Dispatch } from 'redux'
 
-import { startSyncAccounts } from 'renderer/events'
-
 function sortAccounts(accounts, orderAccounts) {
   const [order, sort] = orderAccounts.split('|')
 

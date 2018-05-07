@@ -17,7 +17,6 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import { colors } from 'styles/theme'
-import { runJob } from 'renderer/events'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 import { getCounterValueCode, localeSelector } from 'reducers/settings'
@@ -36,7 +35,6 @@ import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps = state => ({
-  devices: state.devices,
   accounts: getVisibleAccounts(state),
   counterValue: getCounterValueCode(state),
   locale: localeSelector(state),
@@ -133,55 +131,13 @@ class DashboardPage extends PureComponent<Props, State> {
   _cacheBalance = null
 
   render() {
-    const { push, accounts, t, counterValue, devices } = this.props
+    const { push, accounts, t, counterValue } = this.props
     const { accountsChunk, selectedTime, daysCount } = this.state
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
-    const { currentDevice } = devices
-
     return (
       <Box flow={7}>
-        {currentDevice && (
-          <Box p={8}>
-            <button
-              onClick={async () => {
-                const freshAddress = await runJob({
-                  channel: 'usb',
-                  job: 'wallet.getFreshReceiveAddress',
-                  successResponse: 'wallet.getFreshReceiveAddress.success',
-                  errorResponse: 'wallet.getFreshReceiveAddress.fail',
-                  data: {
-                    accountIndex: accounts[0].index,
-                    currencyId: 'bitcoin_testnet',
-                  },
-                })
-                console.log(freshAddress)
-              }}
-            >
-              {'get fresh address'}
-            </button>
-            {currentDevice.path}
-            <button
-              onClick={async () => {
-                const accounts = await runJob({
-                  channel: 'usb',
-                  job: 'wallet.scanAccountsOnDevice',
-                  successResponse: 'wallet.scanAccountsOnDevice.success',
-                  errorResponse: 'wallet.scanAccountsOnDevice.fail',
-                  data: {
-                    devicePath: currentDevice.path,
-                    currencyId: 'bitcoin_testnet',
-                  },
-                })
-                console.log(accounts)
-              }}
-            >
-              {'scan accounts on device'}
-            </button>
-          </Box>
-        )}
-
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>

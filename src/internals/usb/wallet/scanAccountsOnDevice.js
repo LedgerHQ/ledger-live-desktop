@@ -26,7 +26,7 @@ type Props = {
   onAccountScanned: Function,
 }
 
-export default async function scanAccountsOnDevice(props: Props): AccountRaw[] {
+export default async function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   const { devicePath, currencyId, onAccountScanned } = props
 
   // instanciate app on device
@@ -134,11 +134,13 @@ async function buildRawAccount({
   ops,
 }: {
   njsAccount: NJSAccount,
+  // $FlowFixMe
   wallet: NJSWallet,
   currencyId: string,
   accountIndex: number,
   core: Object,
   hwApp: Object,
+  // $FlowFixMe
   ops: NJSOperation[],
 }) {
   const jsCurrency = getCryptoCurrencyById(currencyId)
@@ -178,6 +180,7 @@ async function buildRawAccount({
     return {
       id: hash,
       hash,
+      address: '',
       senders: op.getSenders(),
       recipients: op.getRecipients(),
       // TODO: find why NJSAmount not working
@@ -217,8 +220,11 @@ async function buildRawAccount({
  */
 function createXPUB(depth, fingerprint, childnum, chaincode, publicKey, network) {
   let xpub = toHexInt(network)
+  // $FlowFixMe
   xpub += padStart(depth.toString(16), 2, '0')
+  // $FlowFixMe
   xpub += padStart(fingerprint.toString(16), 8, '0')
+  // $FlowFixMe
   xpub += padStart(childnum.toString(16), 8, '0')
   xpub += chaincode
   xpub += publicKey

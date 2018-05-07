@@ -7,7 +7,7 @@ import { createAccountModel } from '@ledgerhq/live-common/lib/models/account'
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
 
 import type { State } from 'reducers'
 
@@ -116,7 +116,10 @@ export function canCreateAccount(state: State): boolean {
 }
 
 export function decodeAccount(account: AccountRaw): Account {
-  return accountModel.decode({ data: account })
+  return accountModel.decode({
+    data: account,
+    version: 0, // TODO: should we keep v0 ?
+  })
 }
 
 // Yeah. `any` should be `AccountRaw[]` but it can also be a map
