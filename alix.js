@@ -79,7 +79,7 @@ waitForDevices(async device => {
     const account = CREATE ? await createAccount(wallet, hwApp) : await wallet.getAccount(0)
 
     console.log(`> Sync account`)
-    if (true || CREATE) {
+    if (CREATE) {
       await syncAccount(account)
     }
 
@@ -125,6 +125,10 @@ async function createTransaction(wallet, account) {
   const bitcoinLikeAccount = account.asBitcoinLikeAccount()
   const walletCurrency = wallet.getCurrency()
   const amount = createAmount(walletCurrency, 10000)
+
+  console.log(`--------------------------------`)
+  console.log(amount.toLong())
+  console.log(`-----------------after `)
   const fees = createAmount(walletCurrency, 1000)
 
   const transactionBuilder = bitcoinLikeAccount.buildTransaction()

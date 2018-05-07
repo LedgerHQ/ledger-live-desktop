@@ -183,12 +183,12 @@ async function buildRawAccount({
       address: '',
       senders: op.getSenders(),
       recipients: op.getRecipients(),
-      // TODO: find why NJSAmount not working
-      // amount: op.getAmount().toInt(),
-      amount: 0,
       blockHeight: op.getBlockHeight(),
       accountId: xpub,
       date: op.getDate().toISOString(),
+
+      // amount: op.getAmount().toLong(),
+      amount: 0,
     }
   })
 
