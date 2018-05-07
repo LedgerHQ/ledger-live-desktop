@@ -40,6 +40,7 @@ export type Settings = {
   marketIndicator: 'eastern' | 'western',
   currenciesSettings: CurrenciesSettings,
   region: string,
+  developerMode: boolean,
 }
 
 export type T = (?string, ?Object) => string

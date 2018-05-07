@@ -21,6 +21,7 @@ export type SettingsState = {
     [currencyId: string]: CurrencySettings,
   },
   region: string,
+  developerMode: boolean,
 }
 
 /* have to check if available for all OS */
@@ -40,6 +41,7 @@ const defaultState: SettingsState = {
   marketIndicator: 'western',
   currenciesSettings: {},
   region,
+  developerMode: false,
 }
 
 const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
@@ -77,6 +79,8 @@ export const getCounterValueCode = (state: State) => state.settings.counterValue
 
 export const counterValueCurrencySelector = (state: State): ?Currency =>
   findCurrencyByTicker(getCounterValueCode(state))
+
+export const developerModeSelector = (state: State): boolean => state.settings.developerMode
 
 export const getLanguage = (state: State) => state.settings.language
 
