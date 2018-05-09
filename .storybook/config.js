@@ -6,8 +6,8 @@ import { ThemeProvider } from 'styled-components'
 import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 
+import 'babel-polyfill'
 import 'globals'
-
 import 'styles/global'
 import theme from 'styles/theme'
 import i18n from 'renderer/i18n/storybook'

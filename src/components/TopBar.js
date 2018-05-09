@@ -12,7 +12,6 @@ import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
-import { getAccounts } from 'reducers/accounts'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
@@ -23,6 +22,8 @@ import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
+
+import CounterValues from 'helpers/countervalues'
 
 const Container = styled(Box).attrs({
   px: 6,
@@ -62,10 +63,10 @@ const Activity = styled.div`
   position: absolute;
   right: -2px;
   width: 4px;
+  cursor: pointer;
 `
 
 const mapStateToProps = state => ({
-  hasAccounts: getAccounts(state).length > 0,
   hasPassword: hasPassword(state),
 })
 
@@ -74,7 +75,6 @@ const mapDispatchToProps = {
 }
 
 type Props = {
-  hasAccounts: boolean,
   hasPassword: boolean,
   history: RouterHistory,
   location: Location,
@@ -145,7 +145,7 @@ class TopBar extends PureComponent<Props, State> {
     }
   }
   render() {
-    const { hasPassword, hasAccounts, t } = this.props
+    const { hasPassword, t } = this.props
     const { sync } = this.state
 
     return (
@@ -156,10 +156,22 @@ class TopBar extends PureComponent<Props, State> {
             <Box justifyContent="center">
               <IconDevices size={16} />
             </Box>
-            <Box justifyContent="center" relative>
-              <IconActivity size={16} />
-              {hasAccounts && <Activity progress={sync.progress} fail={sync.fail} />}
-            </Box>
+            <CounterValues.PollingConsumer>
+              {polling => (
+                <Box
+                  justifyContent="center"
+                  relative
+                  cursor="pointer"
+                  onClick={() => polling.poll()}
+                >
+                  <IconActivity size={16} />
+                  <Activity
+                    progress={polling.pending || sync.progress}
+                    fail={polling.error || sync.fail}
+                  />
+                </Box>
+              )}
+            </CounterValues.PollingConsumer>
             <Box justifyContent="center">
               <Bar />
             </Box>

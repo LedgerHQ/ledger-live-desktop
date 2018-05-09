@@ -1,7 +1,7 @@
 // @flow
 
 export type Item = {
-  date: string,
+  date: Date,
   value: number,
 }
 

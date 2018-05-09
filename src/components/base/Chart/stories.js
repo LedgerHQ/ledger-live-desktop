@@ -64,7 +64,7 @@ function generateRandomData(n) {
   const chance = new Chance()
   while (!day.isSame(today)) {
     data.push({
-      date: day.format('YYYY-MM-DD'),
+      date: day.toDate(),
       value: chance.integer({ min: 0.5e8, max: 1e8 }),
     })
     day.add(1, 'day')

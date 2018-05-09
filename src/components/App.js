@@ -18,6 +18,7 @@ import ThrowBlock from 'components/ThrowBlock'
 import Default from 'components/layout/Default'
 import Dev from 'components/layout/Dev'
 import Print from 'components/layout/Print'
+import CounterValues from 'helpers/countervalues'
 
 const { DEV_TOOLS } = process.env
 
@@ -31,20 +32,22 @@ const App = ({
   language: string,
 }) => (
   <Provider store={store}>
-    <I18nextProvider i18n={i18n} initialLanguage={language}>
-      <ThemeProvider theme={theme}>
-        <ThrowBlock>
-          <Onboarding />
-          <ConnectedRouter history={history}>
-            <Switch>
-              {(__DEV__ || DEV_TOOLS) && <Route path="/dev" component={Dev} />}
-              <Route path="/print" component={Print} />
-              <Route component={Default} />
-            </Switch>
-          </ConnectedRouter>
-        </ThrowBlock>
-      </ThemeProvider>
-    </I18nextProvider>
+    <CounterValues.PollingProvider>
+      <I18nextProvider i18n={i18n} initialLanguage={language}>
+        <ThemeProvider theme={theme}>
+          <ThrowBlock>
+            <Onboarding />
+            <ConnectedRouter history={history}>
+              <Switch>
+                {(__DEV__ || DEV_TOOLS) && <Route path="/dev" component={Dev} />}
+                <Route path="/print" component={Print} />
+                <Route component={Default} />
+              </Switch>
+            </ConnectedRouter>
+          </ThrowBlock>
+        </ThemeProvider>
+      </I18nextProvider>
+    </CounterValues.PollingProvider>
   </Provider>
 )
 

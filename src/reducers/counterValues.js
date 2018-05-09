@@ -1,41 +1,22 @@
 // @flow
 
-import { handleActions } from 'redux-actions'
-import merge from 'lodash/merge'
-import get from 'lodash/get'
-import {
-  makeCalculateCounterValue,
-  makeReverseCounterValue,
-  formatCounterValueDay,
-} from '@ledgerhq/live-common/lib/helpers/countervalue'
+import CounterValues from 'helpers/countervalues'
 
-import type { CalculateCounterValue } from '@ledgerhq/live-common/lib/types'
+import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { State } from 'reducers'
 
-export type CounterValuesState = {}
-const state: CounterValuesState = {}
+// FIXME DEPRECATED approach. we will move to use calculateSelector everywhere.. it's just easier to process for now.
 
-const handlers = {
-  UPDATE_COUNTER_VALUES: (state, { payload: counterValues }) => merge({ ...state }, counterValues),
-}
+export const calculateCounterValueSelector = (state: State) => (
+  from: Currency,
+  to: Currency,
+  exchange: string,
+) => (value: number, date?: Date, disableRounding?: boolean): ?number =>
+  CounterValues.calculateSelector(state, { from, to, exchange, value, date, disableRounding })
 
-const getPairHistory = state => (coinTicker, fiat) => {
-  const byDate = get(state, `counterValues.${coinTicker}.${fiat}`)
-  return date => {
-    if (!byDate) {
-      return 0
-    }
-    if (!date) {
-      return byDate.latest || 0
-    }
-    return byDate[formatCounterValueDay(date)] || 0
-  }
-}
-
-export const calculateCounterValueSelector = (state: State): CalculateCounterValue =>
-  makeCalculateCounterValue(getPairHistory(state))
-
-export const reverseCounterValueSelector = (state: State): CalculateCounterValue =>
-  makeReverseCounterValue(getPairHistory(state))
-
-export default handleActions(handlers, state)
+export const reverseCounterValueSelector = (state: State) => (
+  from: Currency,
+  to: Currency,
+  exchange: string,
+) => (value: number, date?: Date, disableRounding?: boolean): ?number =>
+  CounterValues.reverseSelector(state, { from, to, exchange, value, date, disableRounding })

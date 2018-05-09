@@ -8,6 +8,7 @@ import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
+import DeltaChange from '../DeltaChange'
 
 const Sub = styled(Box).attrs({
   ff: 'Open Sans',
@@ -39,12 +40,12 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
   const { t, totalBalance, sinceBalance, refBalance, since, ...otherProps } = props
   return (
     <Box {...otherProps}>
-      <FormattedVal
+      <DeltaChange
+        from={refBalance}
+        to={totalBalance}
         color="dark"
         animateTicker
         fontSize={7}
-        isPercent
-        val={refBalance ? Math.floor((totalBalance - refBalance) / refBalance * 100) : 0}
         withIcon
       />
       <Sub>{t(`time:since.${since}`)}</Sub>

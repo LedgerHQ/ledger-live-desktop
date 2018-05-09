@@ -2,6 +2,9 @@
 
 import React from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
+import { createStructuredSelector } from 'reselect'
+import { connect } from 'react-redux'
+import { exchangeSettingsForAccountSelector } from 'reducers/settings'
 
 import type { T } from 'types/common'
 
@@ -21,9 +24,14 @@ type Props = {
   onNext: Function,
   canNext: boolean,
   showTotal: boolean,
+  exchange: string,
 }
 
-function Footer({ account, amount, fees, t, onNext, canNext, showTotal }: Props) {
+const mapStateToProps = createStructuredSelector({
+  exchange: exchangeSettingsForAccountSelector,
+})
+
+function Footer({ exchange, account, amount, fees, t, onNext, canNext, showTotal }: Props) {
   return (
     <ModalFooter>
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
@@ -43,7 +51,8 @@ function Footer({ account, amount, fees, t, onNext, canNext, showTotal }: Props)
                   {'('}
                 </Text>
                 <CounterValue
-                  ticker={account.currency.units[0].code}
+                  exchange={exchange}
+                  currency={account.currency}
                   value={amount + fees}
                   disableRounding
                   color="grey"
@@ -65,4 +74,4 @@ function Footer({ account, amount, fees, t, onNext, canNext, showTotal }: Props)
   )
 }
 
-export default Footer
+export default connect(mapStateToProps)(Footer)

@@ -17,7 +17,12 @@ type Props = {
   accounts: Account[],
   selectedTime: string,
   daysCount: number,
-  renderHeader: null | Function,
+  renderHeader?: ({
+    selectedTime: *,
+    totalBalance: number,
+    sinceBalance: number,
+    refBalance: number,
+  }) => *,
 }
 
 const BalanceSummary = ({
@@ -38,40 +43,46 @@ const BalanceSummary = ({
         counterValue={counterValue}
         daysCount={daysCount}
         onCalculate={onCalculate}
-        render={({ allBalances, totalBalance, sinceBalance, refBalance }) => (
-          <Fragment>
-            {renderHeader !== null && (
-              <Box px={6}>
-                {renderHeader({
-                  totalBalance,
-                  selectedTime,
-                  sinceBalance,
-                  refBalance,
-                })}
+      >
+        {({ isAvailable, balanceHistory, balanceStart, balanceEnd }) =>
+          !isAvailable ? null : (
+            <Fragment>
+              {renderHeader ? (
+                <Box px={6}>
+                  {renderHeader({
+                    selectedTime,
+                    // FIXME refactor these
+                    totalBalance: balanceEnd,
+                    sinceBalance: balanceStart,
+                    refBalance: balanceStart,
+                  })}
+                </Box>
+              ) : null}
+              <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
+                <Chart
+                  id={chartId}
+                  color={chartColor}
+                  data={balanceHistory}
+                  height={250}
+                  unit={unit}
+                  tickXScale={selectedTime}
+                  renderTooltip={d =>
+                    isAvailable ? (
+                      <FormattedVal
+                        alwaysShowSign={false}
+                        color="white"
+                        showCode
+                        fiat={counterValue}
+                        val={d.value}
+                      />
+                    ) : null
+                  }
+                />
               </Box>
-            )}
-            <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
-              <Chart
-                id={chartId}
-                color={chartColor}
-                data={allBalances}
-                height={250}
-                unit={unit}
-                tickXScale={selectedTime}
-                renderTooltip={d => (
-                  <FormattedVal
-                    alwaysShowSign={false}
-                    color="white"
-                    showCode
-                    fiat={counterValue}
-                    val={d.value}
-                  />
-                )}
-              />
-            </Box>
-          </Fragment>
-        )}
-      />
+            </Fragment>
+          )
+        }
+      </CalculateBalance>
     </Card>
   )
 }

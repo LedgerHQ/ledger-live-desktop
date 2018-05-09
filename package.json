@@ -39,7 +39,7 @@
     "@ledgerhq/hw-app-eth": "^4.7.3",
     "@ledgerhq/hw-transport": "^4.7.3",
     "@ledgerhq/hw-transport-node-hid": "^4.7.6",
-    "@ledgerhq/live-common": "^2.0.0",
+    "@ledgerhq/live-common": "^2.2.0-beta.10",
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",
