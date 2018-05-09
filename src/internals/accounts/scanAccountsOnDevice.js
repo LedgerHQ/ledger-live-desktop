@@ -187,8 +187,7 @@ async function buildRawAccount({
       accountId: xpub,
       date: op.getDate().toISOString(),
 
-      // amount: op.getAmount().toLong(),
-      amount: 0,
+      amount: op.getAmount().toLong(),
     }
   })
 
