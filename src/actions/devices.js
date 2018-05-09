@@ -1,6 +1,6 @@
 // @flow
 
-import type { Device, Devices } from 'types/common'
+import type { Device } from 'types/common'
 
 export type SetCurrentDevice = (Device | null) => { type: string, payload: Device | null }
 export const setCurrentDevice: SetCurrentDevice = payload => ({
@@ -17,11 +17,5 @@ export const addDevice: AddDevice = payload => ({
 type RemoveDevice = Device => { type: string, payload: Device }
 export const removeDevice: RemoveDevice = payload => ({
   type: 'REMOVE_DEVICE',
-  payload,
-})
-
-type UpdateDevices = Devices => { type: string, payload: Devices }
-export const updateDevices: UpdateDevices = payload => ({
-  type: 'UPDATE_DEVICES',
   payload,
 })

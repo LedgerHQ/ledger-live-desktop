@@ -2,7 +2,8 @@
 
 import React, { PureComponent } from 'react'
 
-import { runJob } from 'renderer/events'
+import runJob from 'renderer/runJob'
+
 import Text from 'components/base/Text'
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -33,10 +34,10 @@ class DeviceInfos extends PureComponent<Props, State> {
         device: { path: devicePath },
       } = this.props
       const memoryInfos = await runJob({
-        channel: 'usb',
-        job: 'manager.getMemInfos',
-        successResponse: 'device.getMemInfosSuccess',
-        errorResponse: 'device.getMemInfosError',
+        channel: 'manager',
+        job: 'getMemInfos',
+        successResponse: 'manager.getMemInfosSuccess',
+        errorResponse: 'manager.getMemInfosError',
         data: { devicePath },
       })
       this.setState({ memoryInfos, isLoading: false })

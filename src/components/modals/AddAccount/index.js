@@ -20,7 +20,7 @@ import {
   decodeAccount,
 } from 'reducers/accounts'
 
-import { runJob } from 'renderer/events'
+import runJob from 'renderer/runJob'
 
 import { addAccount, updateAccount } from 'actions/accounts'
 
@@ -120,10 +120,10 @@ class AddAccountModal extends PureComponent<Props, State> {
     try {
       // scan every account for given currency and device
       await runJob({
-        channel: 'usb',
-        job: 'wallet.scanAccountsOnDevice',
-        successResponse: 'wallet.scanAccountsOnDevice.success',
-        errorResponse: 'wallet.scanAccountsOnDevice.fail',
+        channel: 'accounts',
+        job: 'scan',
+        successResponse: 'accounts.scanAccountsOnDevice.success',
+        errorResponse: 'accounts.scanAccountsOnDevice.fail',
         data: {
           devicePath: deviceSelected.path,
           currencyId: currency.id,
@@ -186,7 +186,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   handleMsgEvent = (e, { data, type }) => {
     const { addAccount, existingAccounts } = this.props
 
-    if (type === 'wallet.scanAccountsOnDevice.accountScanned') {
+    if (type === 'accounts.scanAccountsOnDevice.accountScanned') {
       // create Account from AccountRaw account scanned on device
       const account = {
         ...decodeAccount(data),

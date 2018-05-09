@@ -37,14 +37,14 @@ class CheckAddress extends PureComponent<Props, State> {
   handleMsgEvent = (e: any, { type }: { type: string }) => {
     const { onCheck } = this.props
 
-    if (type === 'wallet.verifyAddress.success') {
+    if (type === 'accounts.verifyAddress.success') {
       this.setState({
         isVerified: true,
       })
       onCheck(true)
     }
 
-    if (type === 'wallet.verifyAddress.fail') {
+    if (type === 'accounts.verifyAddress.fail') {
       this.setState({
         isVerified: false,
       })
@@ -53,7 +53,7 @@ class CheckAddress extends PureComponent<Props, State> {
   }
 
   verifyAddress = ({ device, account }: { device: Device, account: Account }) =>
-    sendEvent('usb', 'wallet.verifyAddress', {
+    sendEvent('accounts', 'verifyAddress', {
       pathDevice: device.path,
       path: account.path,
       segwit: account.path.startsWith("49'"), // TODO: store segwit info in account

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-import type { Device, Devices } from 'types/common'
+import type { Device } from 'types/common'
 
 import { sendEvent } from 'renderer/events'
 import { getDevices } from 'reducers/devices'
@@ -20,14 +20,14 @@ type OwnProps = {
   render?: ({
     appStatus: AppStatus,
     currency: CryptoCurrency,
-    devices: Devices,
+    devices: Device[],
     deviceSelected: ?Device,
     deviceStatus: DeviceStatus,
   }) => React$Element<*>,
 }
 
 type Props = OwnProps & {
-  devices: Devices,
+  devices: Device[],
 }
 
 type DeviceStatus = 'unconnected' | 'connected'
@@ -111,7 +111,7 @@ class DeviceMonit extends PureComponent<Props, State> {
       }
     }
 
-    sendEvent('usb', 'wallet.checkIfAppOpened', {
+    sendEvent('devices', 'checkIfAppOpened', {
       devicePath: deviceSelected.path,
       ...options,
     })
@@ -134,12 +134,12 @@ class DeviceMonit extends PureComponent<Props, State> {
       return
     }
 
-    if (type === 'wallet.checkIfAppOpened.success' && deviceSelected.path === data.devicePath) {
+    if (type === 'devices.checkIfAppOpened.success' && deviceSelected.path === data.devicePath) {
       this.handleStatusChange(deviceStatus, 'success')
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
 
-    if (type === 'wallet.checkIfAppOpened.fail' && deviceSelected.path === data.devicePath) {
+    if (type === 'devices.checkIfAppOpened.fail' && deviceSelected.path === data.devicePath) {
       this.handleStatusChange(deviceStatus, 'fail')
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }

@@ -25,7 +25,7 @@ function sendEventToWindow(name, { type, data }) {
   }
 }
 
-function onForkChannel(forkType, callType) {
+function onForkChannel(forkType) {
   return (event: any, payload) => {
     const { type, data } = payload
 
@@ -51,12 +51,7 @@ function onForkChannel(forkType, callType) {
       if (options.window) {
         sendEventToWindow(options.window, { type, data })
       } else {
-        if (callType === 'async') {
-          event.sender.send('msg', { type, data })
-        }
-        if (callType === 'sync') {
-          event.returnValue = { type, data }
-        }
+        event.sender.send('msg', { type, data })
       }
       if (options.kill && compute) {
         kill()
@@ -71,8 +66,9 @@ function onForkChannel(forkType, callType) {
 }
 
 // Forwards every `type` messages to another process
-ipcMain.on('usb', onForkChannel('usb', 'async'))
-ipcMain.on('accounts', onForkChannel('accounts', 'async'))
+ipcMain.on('devices', onForkChannel('devices'))
+ipcMain.on('accounts', onForkChannel('accounts'))
+ipcMain.on('manager', onForkChannel('manager'))
 
 ipcMain.on('clean-processes', cleanProcesses)
 
@@ -94,6 +90,7 @@ ipcMain.on('msg', (event: any, payload) => {
   const { type, data } = payload
   const handler = objectPath.get(handlers, type)
   if (!handler) {
+    console.warn(`No handler found for ${type}`)
     return
   }
   const send = (type: string, data: *) => event.sender.send('msg', { type, data })
