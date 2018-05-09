@@ -114,8 +114,9 @@ class TabCurrencies extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, currencies, counterValueCurrency } = this.props
     const { currency } = this.state
+    if (!currency) return null // this case means there is no accounts
+    const { t, currencies, counterValueCurrency } = this.props
     const { confirmationsToSpend, confirmationsNb, exchange } =
       this.getCurrencySettings() || CURRENCY_DEFAULTS_SETTINGS
     return (
