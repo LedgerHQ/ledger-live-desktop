@@ -69,7 +69,7 @@ async function scanNextAccount(props) {
   } = props
 
   // TODO: investigate why importing it on file scope causes trouble
-  const core = require('ledger-core')
+  const core = require('init-ledger-core')()
 
   console.log(`>> Scanning account ${accountIndex}`)
 
@@ -113,7 +113,7 @@ async function scanNextAccount(props) {
 
 async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId) {
   // TODO: investigate why importing it on file scope causes trouble
-  const core = require('ledger-core')
+  const core = require('init-ledger-core')()
   try {
     const wallet = await core.getWallet(WALLET_IDENTIFIER)
     return wallet

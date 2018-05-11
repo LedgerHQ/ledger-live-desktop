@@ -2,15 +2,18 @@
 
 import '@babel/polyfill'
 import { fork } from 'child_process'
-import { BrowserWindow, ipcMain } from 'electron'
+import { BrowserWindow, ipcMain, app } from 'electron'
 import objectPath from 'object-path'
-import { resolve } from 'path'
+import path from 'path'
 
 import cpuUsage from 'helpers/cpuUsage'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
 const { DEV_TOOLS } = process.env
+
+// sqlite files will be located in the app local data folder
+const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
 
 const processes = []
 
@@ -29,10 +32,11 @@ function onForkChannel(forkType) {
   return (event: any, payload) => {
     const { type, data } = payload
 
-    let compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), {
+    let compute = fork(path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), {
       env: {
         DEV_TOOLS,
         FORK_TYPE: forkType,
+        LEDGER_LIVE_SQLITE_PATH,
       },
     })
 

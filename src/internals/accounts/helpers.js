@@ -31,7 +31,9 @@ export async function getFreshReceiveAddress({
   currencyId: string,
   accountIndex: number,
 }) {
-  const core = require('ledger-core')
+  // TODO: investigate why importing it on file scope causes trouble
+  const core = require('init-ledger-core')()
+
   const wallet = await core.getWallet(currencyId)
   const account = await wallet.getAccount(accountIndex)
   const addresses = await account.getFreshPublicAddresses()
