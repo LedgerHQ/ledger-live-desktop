@@ -33,13 +33,38 @@ export default async function scanAccountsOnDevice(props: Props): Promise<Accoun
   const transport = await CommNodeHid.open(devicePath)
   const hwApp = new Btc(transport)
 
+  const commonParams = {
+    hwApp,
+    currencyId,
+    onAccountScanned,
+    devicePath,
+  }
+
+  // scan segwit AND non-segwit accounts
+  const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
+  const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: false })
+
+  const accounts = [...segwitAccounts, ...nonSegwitAccounts]
+
+  return accounts
+}
+
+async function scanAccountsOnDeviceBySegwit({
+  hwApp,
+  currencyId,
+  onAccountScanned,
+  devicePath,
+  isSegwit,
+}) {
   // compute wallet identifier
-  const deviceIdentifiers = await hwApp.getWalletPublicKey(devicePath)
+  const isVerify = false
+  const deviceIdentifiers = await hwApp.getWalletPublicKey(devicePath, isVerify, isSegwit)
   const { publicKey } = deviceIdentifiers
-  const WALLET_IDENTIFIER = `${publicKey}__${currencyId}`
+
+  const WALLET_IDENTIFIER = `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
 
   // retrieve or create the wallet
-  const wallet = await getOrCreateWallet(WALLET_IDENTIFIER, currencyId)
+  const wallet = await getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit)
   const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
@@ -52,6 +77,7 @@ export default async function scanAccountsOnDevice(props: Props): Promise<Accoun
     accountIndex: 0,
     accounts: [],
     onAccountScanned,
+    isSegwit,
   })
 
   return accounts
@@ -66,12 +92,13 @@ async function scanNextAccount(props) {
     accountIndex,
     accounts,
     onAccountScanned,
+    isSegwit,
   } = props
 
   // TODO: investigate why importing it on file scope causes trouble
   const core = require('init-ledger-core')()
 
-  console.log(`>> Scanning account ${accountIndex}`)
+  console.log(`>> Scanning account ${accountIndex} - isSegwit: ${isSegwit.toString()}`)
 
   // create account only if account has not been scanned yet
   // if it has already been created, we just need to get it, and sync it
@@ -87,6 +114,8 @@ async function scanNextAccount(props) {
 
   const query = njsAccount.queryOperations()
   const ops = await query.limit(OPS_LIMIT).execute()
+
+  console.log(`found ${ops.length} transactions`)
 
   const account = await buildRawAccount({
     njsAccount,
@@ -111,7 +140,7 @@ async function scanNextAccount(props) {
   return scanNextAccount({ ...props, accountIndex: accountIndex + 1 })
 }
 
-async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId) {
+async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit) {
   // TODO: investigate why importing it on file scope causes trouble
   const core = require('init-ledger-core')()
   try {
@@ -119,7 +148,14 @@ async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId) {
     return wallet
   } catch (err) {
     const currency = await core.getCurrency(currencyId)
-    const wallet = await core.createWallet(WALLET_IDENTIFIER, currency)
+    const walletConfig = isSegwit
+      ? {
+          KEYCHAIN_ENGINE: 'BIP49_P2SH',
+          KEYCHAIN_DERIVATION_SCHEME: "49'/<coin_type>'/<account>'/<node>/<address>",
+        }
+      : undefined
+    const njsWalletConfig = core.createWalletConfig(walletConfig)
+    const wallet = await core.createWallet(WALLET_IDENTIFIER, currency, njsWalletConfig)
     return wallet
   }
 }
@@ -143,12 +179,32 @@ async function buildRawAccount({
   // $FlowFixMe
   ops: NJSOperation[],
 }) {
+  // const njsBalanceHistory = await njsAccount.getBalanceHistory(
+  //   new Date('2018-05-01').toISOString(),
+  //   new Date('2018-06-01').toISOString(),
+  //   core.TIME_PERIODS.DAY,
+  // )
+
+  // const balanceHistory = njsBalanceHistory.map(njsAmount => njsAmount.toLong())
+
+  const njsBalance = await njsAccount.getBalance()
+  const balance = njsBalance.toLong()
+
   const jsCurrency = getCryptoCurrencyById(currencyId)
 
   // retrieve xpub
   const { derivations } = await wallet.getAccountCreationInfo(accountIndex)
   const [walletPath, accountPath] = derivations
-  const { publicKey, chainCode, bitcoinAddress } = await hwApp.getWalletPublicKey(accountPath)
+
+  console.log(`so, the account path is ${accountPath}`)
+
+  const VERIFY = false
+  const isSegwit = true
+  const { publicKey, chainCode, bitcoinAddress } = await hwApp.getWalletPublicKey(
+    accountPath,
+    VERIFY,
+    isSegwit,
+  )
 
   // TODO: wtf is happening?
   //
@@ -199,7 +255,7 @@ async function buildRawAccount({
     name: `Account ${accountIndex}`, // TODO: placeholder name?
     address: bitcoinAddress, // TODO: discuss about the utility of storing it here
     addresses,
-    balance: 0,
+    balance,
     blockHeight,
     archived: false,
     index: accountIndex,
