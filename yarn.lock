@@ -8494,9 +8494,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-ledger-core@meriadec/lib-ledger-core-node-bindings:
+ledger-core@meriadec/lib-ledger-core-node-bindings#0a1d404:
   version "1.0.0"
-  resolved "https://codeload.github.com/meriadec/lib-ledger-core-node-bindings/tar.gz/b0b02cbe39265f74a6c47b53b1762ce842b2ae8c"
+  resolved "https://codeload.github.com/meriadec/lib-ledger-core-node-bindings/tar.gz/0a1d404130e7386b49745be9f80783606c85eaf6"
   dependencies:
     "@ledgerhq/hw-app-btc" "^4.7.3"
     "@ledgerhq/hw-transport-node-hid" "^4.7.6"
