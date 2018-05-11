@@ -16,11 +16,23 @@ import Box from 'components/base/Box'
 
 import OnboardingBreadcrumb from './OnboardingBreadcrumb'
 import InitStep from './steps/Init'
-import UserChoice from './steps/UserChoice'
+import ChooseDevice from './steps/ChooseDevice'
+import ChoosePIN from './steps/ChoosePIN'
+import WriteSeed from './steps/WriteSeed'
+import GenuineCheck from './steps/GenuineCheck'
+import SetUpWalletEnv from './steps/SetUpWalletEnv'
+import SetPassword from './steps/SetPassword'
+import Analytics from './steps/Analytics'
 
 const STEPS = {
   init: InitStep,
-  userChoice: UserChoice,
+  chooseDevice: ChooseDevice,
+  choosePIN: ChoosePIN,
+  writeSeed: WriteSeed,
+  genuineCheck: GenuineCheck,
+  setupWalletEnv: SetUpWalletEnv,
+  setPassword: SetPassword,
+  analytics: Analytics,
 }
 
 const mapStateToProps = state => ({
@@ -83,7 +95,9 @@ class Onboarding extends PureComponent<Props> {
     return (
       <Container>
         {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
-        <StepComponent {...stepProps} />
+        <StepContainer>
+          <StepComponent {...stepProps} />
+        </StepContainer>
       </Container>
     )
   }
@@ -91,6 +105,7 @@ class Onboarding extends PureComponent<Props> {
 
 const Container = styled(Box).attrs({
   bg: 'white',
+  p: 5,
 })`
   position: fixed;
   top: 0;
@@ -99,5 +114,7 @@ const Container = styled(Box).attrs({
   bottom: 0;
   z-index: 100;
 `
-
+const StepContainer = styled(Box).attrs({
+  p: 20,
+})``
 export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(Onboarding)

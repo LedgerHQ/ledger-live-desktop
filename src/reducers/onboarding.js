@@ -33,8 +33,62 @@ const state: OnboardingState = {
       },
     },
     {
-      name: 'userChoice',
-      label: 'something:translated',
+      name: 'chooseDevice',
+      label: 'chooseDevice:translated',
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: true,
+      },
+    },
+    {
+      name: 'choosePIN',
+      label: 'choosePIN:translated',
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: true,
+      },
+    },
+    {
+      name: 'writeSeed',
+      label: 'writeSeed:translated',
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: true,
+      },
+    },
+    {
+      name: 'genuineCheck',
+      label: 'genuineCheck:translated',
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: true,
+      },
+    },
+    {
+      name: 'setupWalletEnv',
+      label: 'Install Apps & Create Account:translated',
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: true,
+      },
+    },
+    {
+      name: 'setPassword',
+      label: 'Password:translated',
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: true,
+      },
+    },
+    {
+      name: 'analytics',
+      label: 'Analytics & Bug report:translated',
       options: {
         showFooter: false,
         showBackground: true,

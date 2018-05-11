@@ -11,8 +11,8 @@ import { Title, Description, Inner } from '../helperComponents'
 import type { StepProps } from '..'
 
 export default (props: StepProps) => {
-  const { nextStep, jumpStep } = props
-  /* TODO: all titles, descriptions to be wrapped in a translation tag once defined */
+  const { nextStep } = props
+
   return (
     <Box sticky alignItems="center" justifyContent="center">
       <Box align="center">
@@ -26,32 +26,16 @@ export default (props: StepProps) => {
           <Inner>
             <DeviceContainer onClick={() => nextStep()}>
               <DeviceIcon>
-                <IconNanoS size={24} />
+                <IconNanoS size={46} />
               </DeviceIcon>
-              <TrackChoiceTitle>Clean Nano S setup</TrackChoiceTitle>
-              <Description>Please replace it with the final wording once it’s done.</Description>
-            </DeviceContainer>
-            <DeviceContainer onClick={() => jumpStep('genuineCheck')}>
-              <DeviceIcon>
-                <IconBlue size={24} />
-              </DeviceIcon>
-              <TrackChoiceTitle>Existing seed + Clean setup</TrackChoiceTitle>
-              <Description>Please replace it with the final wording once it’s done.</Description>
-            </DeviceContainer>
-          </Inner>
-          <Inner>
-            <DeviceContainer onClick={() => nextStep()}>
-              <DeviceIcon>
-                <IconNanoS size={24} />
-              </DeviceIcon>
-              <TrackChoiceTitle>Migrate accounts</TrackChoiceTitle>
+              <Title>Ledger Nano S</Title>
               <Description>Please replace it with the final wording once it’s done.</Description>
             </DeviceContainer>
             <DeviceContainer>
               <DeviceIcon>
-                <IconBlue size={24} />
+                <IconBlue size={46} />
               </DeviceIcon>
-              <TrackChoiceTitle>Not a user, but would love to</TrackChoiceTitle>
+              <Title>Ledger Blue</Title>
               <Description>Please replace it with the final wording once it’s done.</Description>
             </DeviceContainer>
           </Inner>
@@ -76,10 +60,3 @@ const DeviceIcon = styled(Box).attrs({
 })`
   width: 55px;
 `
-export const TrackChoiceTitle = styled(Box).attrs({
-  width: 152,
-  height: 27,
-  ff: 'Museo Sans|Regular',
-  fontSize: 5,
-  color: 'dark',
-})``
