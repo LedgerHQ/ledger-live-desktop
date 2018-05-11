@@ -9,7 +9,6 @@ const core = require('ledger-core')
 let instanciated = false
 
 module.exports = () => {
-  console.log(`INSTANCIATED = ${instanciated}`)
   if (!instanciated) {
     core.instanciateWalletPool({
       // sqlite files will be located in the app local data folder
