@@ -2,16 +2,17 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import { shell } from 'electron'
 
 import Box from 'components/base/Box'
-import IconNanoS from 'icons/device/NanoS'
-import IconBlue from 'icons/device/Blue'
+import IconUser from 'icons/User'
 import { Title, Description, Inner } from '../helperComponents'
 
 import type { StepProps } from '..'
 
 export default (props: StepProps) => {
   const { nextStep, jumpStep } = props
+  const handleOpenLink = (url: string) => () => shell.openExternal(url)
   /* TODO: all titles, descriptions to be wrapped in a translation tag once defined */
   return (
     <Box sticky alignItems="center" justifyContent="center">
@@ -22,34 +23,37 @@ export default (props: StepProps) => {
           <br />
           Lorem ipsum dolor amet ledger lorem dolor ipsum amet
         </Description>
-        <Box>
+        <Box style={{ paddingBottom: 10 }}>
           <Inner>
             <DeviceContainer onClick={() => nextStep()}>
-              <DeviceIcon>
-                <IconNanoS size={24} />
+              {/* colors are temp, we don't have icons now */}
+              <DeviceIcon style={{ color: '#66be54' }}>
+                <IconUser size={24} />
               </DeviceIcon>
               <TrackChoiceTitle>Clean Nano S setup</TrackChoiceTitle>
               <Description>Please replace it with the final wording once it’s done.</Description>
             </DeviceContainer>
-            <DeviceContainer onClick={() => jumpStep('genuineCheck')}>
-              <DeviceIcon>
-                <IconBlue size={24} />
+            <DeviceContainer onClick={() => jumpStep('choosePIN')}>
+              <DeviceIcon style={{ color: '#66be54' }}>
+                <IconUser size={24} />
               </DeviceIcon>
               <TrackChoiceTitle>Existing seed + Clean setup</TrackChoiceTitle>
               <Description>Please replace it with the final wording once it’s done.</Description>
             </DeviceContainer>
           </Inner>
+        </Box>
+        <Box>
           <Inner>
             <DeviceContainer onClick={() => nextStep()}>
-              <DeviceIcon>
-                <IconNanoS size={24} />
+              <DeviceIcon style={{ color: '#6490f1' }}>
+                <IconUser size={24} />
               </DeviceIcon>
               <TrackChoiceTitle>Migrate accounts</TrackChoiceTitle>
               <Description>Please replace it with the final wording once it’s done.</Description>
             </DeviceContainer>
-            <DeviceContainer>
-              <DeviceIcon>
-                <IconBlue size={24} />
+            <DeviceContainer onClick={handleOpenLink('https://www.ledger.fr/')}>
+              <DeviceIcon style={{ color: '#ea2e41' }}>
+                <IconUser size={24} />
               </DeviceIcon>
               <TrackChoiceTitle>Not a user, but would love to</TrackChoiceTitle>
               <Description>Please replace it with the final wording once it’s done.</Description>
@@ -75,6 +79,7 @@ const DeviceIcon = styled(Box).attrs({
   color: 'graphite',
 })`
   width: 55px;
+  padding: 10px;
 `
 export const TrackChoiceTitle = styled(Box).attrs({
   width: 152,

@@ -11,18 +11,23 @@ import type { OnboardingState } from 'reducers/onboarding'
 
 import { saveSettings } from 'actions/settings'
 import { nextStep, prevStep, jumpStep } from 'reducers/onboarding'
+import { getCurrentDevice } from 'reducers/devices'
+
+// TODO: re-write it without auto lock, fixed width of the password modal, not dynamic titles
+import { unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
 
-import OnboardingBreadcrumb from './OnboardingBreadcrumb'
+import Start from './steps/Start'
 import InitStep from './steps/Init'
+import OnboardingBreadcrumb from './OnboardingBreadcrumb'
 import ChooseDevice from './steps/ChooseDevice'
 import ChoosePIN from './steps/ChoosePIN'
 import WriteSeed from './steps/WriteSeed'
 import GenuineCheck from './steps/GenuineCheck'
-import SetUpWalletEnv from './steps/SetUpWalletEnv'
 import SetPassword from './steps/SetPassword'
 import Analytics from './steps/Analytics'
+import Finish from './steps/Finish'
 
 const STEPS = {
   init: InitStep,
@@ -30,14 +35,16 @@ const STEPS = {
   choosePIN: ChoosePIN,
   writeSeed: WriteSeed,
   genuineCheck: GenuineCheck,
-  setupWalletEnv: SetUpWalletEnv,
   setPassword: SetPassword,
   analytics: Analytics,
+  finish: Finish,
+  start: Start,
 }
 
 const mapStateToProps = state => ({
   hasCompletedOnboarding: state.settings.hasCompletedOnboarding,
   onboarding: state.onboarding,
+  getCurrentDevice: getCurrentDevice(state),
 })
 
 const mapDispatchToProps = {
@@ -45,6 +52,7 @@ const mapDispatchToProps = {
   nextStep,
   prevStep,
   jumpStep,
+  unlock,
 }
 
 type Props = {
@@ -55,6 +63,8 @@ type Props = {
   prevStep: Function,
   nextStep: Function,
   jumpStep: Function,
+  getCurrentDevice: Function,
+  unlock: Function,
 }
 
 export type StepProps = {
@@ -63,14 +73,25 @@ export type StepProps = {
   nextStep: Function,
   jumpStep: Function,
   finish: Function,
+  savePassword: Function,
+  getDeviceInfo: Function,
 }
 
 class Onboarding extends PureComponent<Props> {
+  getDeviceInfo = () => this.props.getCurrentDevice
   finish = () => this.props.saveSettings({ hasCompletedOnboarding: true })
+  savePassword = hash => {
+    this.props.saveSettings({
+      password: {
+        isEnabled: hash !== undefined,
+        value: hash,
+      },
+    })
+    this.props.unlock()
+  }
 
   render() {
     const { hasCompletedOnboarding, onboarding, prevStep, nextStep, jumpStep, t } = this.props
-
     if (hasCompletedOnboarding) {
       return null
     }
@@ -90,6 +111,8 @@ class Onboarding extends PureComponent<Props> {
       nextStep,
       jumpStep,
       finish: this.finish,
+      savePassword: this.savePassword,
+      getDeviceInfo: this.getDeviceInfo,
     }
 
     return (
@@ -112,7 +135,7 @@ const Container = styled(Box).attrs({
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
+  z-index: 25;
 `
 const StepContainer = styled(Box).attrs({
   p: 20,

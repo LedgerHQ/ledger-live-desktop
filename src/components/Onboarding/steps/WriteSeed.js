@@ -4,8 +4,7 @@ import React from 'react'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import { ModalFooter } from 'components/base/Modal/index'
-import { Title, Description } from '../helperComponents'
+import { Title, Description, OnboardingFooter } from '../helperComponents'
 
 import type { StepProps } from '..'
 
@@ -21,14 +20,14 @@ export default (props: StepProps) => {
           Lorem ipsum dolor amet ledger lorem dolor ipsum amet
         </Description>
       </Box>
-      <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
+      <OnboardingFooter horizontal align="center" justify="flex-end" flow={2}>
         <Button small outline onClick={() => prevStep()}>
           Go Back
         </Button>
         <Button small primary onClick={() => nextStep()}>
           Continue
         </Button>
-      </ModalFooter>
+      </OnboardingFooter>
     </Box>
   )
 }

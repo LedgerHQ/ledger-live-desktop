@@ -21,8 +21,17 @@ export type OnboardingState = {
 
 const state: OnboardingState = {
   stepIndex: 0,
-  stepName: 'init',
+  stepName: 'start',
   steps: [
+    {
+      name: 'start',
+      external: true,
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: false,
+      },
+    },
     {
       name: 'init',
       external: true,
@@ -69,15 +78,6 @@ const state: OnboardingState = {
       },
     },
     {
-      name: 'setupWalletEnv',
-      label: 'Install Apps & Create Account:translated',
-      options: {
-        showFooter: false,
-        showBackground: true,
-        showBreadcrumb: true,
-      },
-    },
-    {
       name: 'setPassword',
       label: 'Password:translated',
       options: {
@@ -93,6 +93,15 @@ const state: OnboardingState = {
         showFooter: false,
         showBackground: true,
         showBreadcrumb: true,
+      },
+    },
+    {
+      name: 'finish',
+      external: true,
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: false,
       },
     },
   ],
