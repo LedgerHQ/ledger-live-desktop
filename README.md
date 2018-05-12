@@ -25,8 +25,8 @@ yarn
 # ENV VARIABLES
 # -------------
 
-# Where errors will be tracked
-SENTRY_URL=http://...
+# Where errors will be tracked (you may not want to edit this line)
+# SENTRY_URL=
 
 # OPTIONAL ENV VARIABLES
 # ----------------------

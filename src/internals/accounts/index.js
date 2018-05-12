@@ -32,7 +32,7 @@ export default {
       })
       send('accounts.scanAccountsOnDevice.success', accounts)
     } catch (err) {
-      send('accounts.scanAccountsOnDevice.fail', err)
+      send('accounts.scanAccountsOnDevice.fail', formatErr(err))
     }
   },
 
@@ -66,4 +66,15 @@ export default {
       send('accounts.verifyAddress.fail')
     }
   },
+}
+
+// TODO: move this to a helper
+function formatErr(err) {
+  if (err instanceof Error) {
+    return err.message || err.code
+  }
+  if (typeof err === 'string') {
+    return err
+  }
+  return 'unknown error'
 }

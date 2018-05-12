@@ -119,6 +119,7 @@ async function scanNextAccount(props) {
 
   const account = await buildRawAccount({
     njsAccount,
+    isSegwit,
     accountIndex,
     wallet,
     currencyId,
@@ -162,14 +163,16 @@ async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit) {
 
 async function buildRawAccount({
   njsAccount,
+  isSegwit,
   wallet,
   currencyId,
-  // core,
+  core,
   hwApp,
   accountIndex,
   ops,
 }: {
   njsAccount: NJSAccount,
+  isSegwit: boolean,
   // $FlowFixMe
   wallet: NJSWallet,
   currencyId: string,
@@ -179,13 +182,13 @@ async function buildRawAccount({
   // $FlowFixMe
   ops: NJSOperation[],
 }) {
-  // const njsBalanceHistory = await njsAccount.getBalanceHistory(
-  //   new Date('2018-05-01').toISOString(),
-  //   new Date('2018-06-01').toISOString(),
-  //   core.TIME_PERIODS.DAY,
-  // )
+  const njsBalanceHistory = await njsAccount.getBalanceHistory(
+    new Date('2018-05-01').toISOString(),
+    new Date('2018-06-01').toISOString(),
+    core.TIME_PERIODS.DAY,
+  )
 
-  // const balanceHistory = njsBalanceHistory.map(njsAmount => njsAmount.toLong())
+  const balanceHistory = njsBalanceHistory.map(njsAmount => njsAmount.toLong())
 
   const njsBalance = await njsAccount.getBalance()
   const balance = njsBalance.toLong()
@@ -198,23 +201,20 @@ async function buildRawAccount({
 
   console.log(`so, the account path is ${accountPath}`)
 
-  const VERIFY = false
-  const isSegwit = true
+  const isVerify = false
   const { publicKey, chainCode, bitcoinAddress } = await hwApp.getWalletPublicKey(
     accountPath,
-    VERIFY,
+    isVerify,
     isSegwit,
   )
 
-  // TODO: wtf is happening?
-  //
-  // const nativeDerivationPath = core.createDerivationPath(accountPath)
-  // const depth = nativeDerivationPath.getDepth()
-  const depth = 'depth'
-  // const childNum = nativeDerivationPath.getChildNum(accountIndex)
-  const childNum = 'childNum'
-  // const fingerprint = core.createBtcFingerprint(publicKey)
-  const fingerprint = 'fingerprint'
+  const nativeDerivationPath = core.createDerivationPath(accountPath)
+  const depth = nativeDerivationPath.getDepth()
+  // const depth = 'depth'
+  const childNum = nativeDerivationPath.getChildNum(accountIndex)
+  // const childNum = 'childNum'
+  const fingerprint = core.createBtcFingerprint(publicKey)
+  // const fingerprint = 'fingerprint'
 
   const { bitcoinLikeNetworkParameters } = wallet.getCurrency()
   const network = Buffer.from(bitcoinLikeNetworkParameters.XPUBVersion).readUIntBE(0, 4)
@@ -250,10 +250,11 @@ async function buildRawAccount({
   const rawAccount: AccountRaw = {
     id: xpub,
     xpub,
-    path: accountPath, // TODO: this should be called `accountPath` in Account/AccountRaw types
-    rootPath: walletPath, // TODO: this should be `walletPath` in Account/AccountRaw types
+    path: accountPath,
+    walletPath,
     name: `Account ${accountIndex}`, // TODO: placeholder name?
-    address: bitcoinAddress, // TODO: discuss about the utility of storing it here
+    isSegwit,
+    address: bitcoinAddress,
     addresses,
     balance,
     blockHeight,

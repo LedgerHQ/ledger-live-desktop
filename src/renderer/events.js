@@ -167,13 +167,13 @@ export function startSyncAccounts(accounts: Account[]) {
   syncAccountsInProgress = true
   sendEvent('accounts', 'sync', {
     accounts: accounts.map(account => {
-      const { id, currency, rootPath, addresses, index, operations } = account
+      const { id, currency, walletPath, addresses, index, operations } = account
       return {
         id,
         currencyId: currency.id,
         allAddresses: addresses,
         currentIndex: index,
-        rootPath,
+        walletPath,
         operations,
       }
     }),
