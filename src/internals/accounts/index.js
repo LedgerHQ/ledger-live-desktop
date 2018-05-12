@@ -32,6 +32,7 @@ export default {
       })
       send('accounts.scanAccountsOnDevice.success', accounts)
     } catch (err) {
+      console.log(err)
       send('accounts.scanAccountsOnDevice.fail', formatErr(err))
     }
   },

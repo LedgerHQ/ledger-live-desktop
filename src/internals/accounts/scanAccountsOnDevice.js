@@ -13,8 +13,10 @@ import padStart from 'lodash/padStart'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 
+import type Transport from '@ledgerhq/hw-transport'
+
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
-import type { NJSAccount } from 'ledger-core/src/ledgercore_doc'
+import type { NJSAccount, NJSOperation } from 'ledger-core/src/ledgercore_doc'
 
 import { toHexInt, encodeBase58Check } from 'helpers/generic'
 
@@ -30,7 +32,7 @@ export default async function scanAccountsOnDevice(props: Props): Promise<Accoun
   const { devicePath, currencyId, onAccountScanned } = props
 
   // instanciate app on device
-  const transport = await CommNodeHid.open(devicePath)
+  const transport: Transport<*> = await CommNodeHid.open(devicePath)
   const hwApp = new Btc(transport)
 
   const commonParams = {
@@ -115,9 +117,7 @@ async function scanNextAccount(props) {
   const query = njsAccount.queryOperations()
   const ops = await query.limit(OPS_LIMIT).execute()
 
-  console.log(`found ${ops.length} transactions`)
-
-  const account = await buildRawAccount({
+  const account = await buildAccountRaw({
     njsAccount,
     isSegwit,
     accountIndex,
@@ -161,7 +161,7 @@ async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit) {
   }
 }
 
-async function buildRawAccount({
+async function buildAccountRaw({
   njsAccount,
   isSegwit,
   wallet,
@@ -182,13 +182,13 @@ async function buildRawAccount({
   // $FlowFixMe
   ops: NJSOperation[],
 }) {
-  const njsBalanceHistory = await njsAccount.getBalanceHistory(
-    new Date('2018-05-01').toISOString(),
-    new Date('2018-06-01').toISOString(),
-    core.TIME_PERIODS.DAY,
-  )
-
-  const balanceHistory = njsBalanceHistory.map(njsAmount => njsAmount.toLong())
+  const balanceByDay = ops.length
+    ? await getBalanceByDaySinceOperation({
+        njsAccount,
+        njsOperation: ops[0],
+        core,
+      })
+    : {}
 
   const njsBalance = await njsAccount.getBalance()
   const balance = njsBalance.toLong()
@@ -199,26 +199,10 @@ async function buildRawAccount({
   const { derivations } = await wallet.getAccountCreationInfo(accountIndex)
   const [walletPath, accountPath] = derivations
 
-  console.log(`so, the account path is ${accountPath}`)
-
   const isVerify = false
-  const { publicKey, chainCode, bitcoinAddress } = await hwApp.getWalletPublicKey(
-    accountPath,
-    isVerify,
-    isSegwit,
-  )
+  const { bitcoinAddress } = await hwApp.getWalletPublicKey(accountPath, isVerify, isSegwit)
 
-  const nativeDerivationPath = core.createDerivationPath(accountPath)
-  const depth = nativeDerivationPath.getDepth()
-  // const depth = 'depth'
-  const childNum = nativeDerivationPath.getChildNum(accountIndex)
-  // const childNum = 'childNum'
-  const fingerprint = core.createBtcFingerprint(publicKey)
-  // const fingerprint = 'fingerprint'
-
-  const { bitcoinLikeNetworkParameters } = wallet.getCurrency()
-  const network = Buffer.from(bitcoinLikeNetworkParameters.XPUBVersion).readUIntBE(0, 4)
-  const xpub = createXPUB(depth, fingerprint, childNum, chainCode, publicKey, network)
+  const xpub = 'abcd'
 
   // blockHeight
   const { height: blockHeight } = await njsAccount.getLastBlock()
@@ -231,21 +215,12 @@ async function buildRawAccount({
     path: `${accountPath}/${i}'`,
   }))
 
-  const operations = ops.map(op => {
-    const hash = op.getUid()
-    return {
-      id: hash,
-      hash,
-      address: '',
-      senders: op.getSenders(),
-      recipients: op.getRecipients(),
-      blockHeight: op.getBlockHeight(),
-      accountId: xpub,
-      date: op.getDate().toISOString(),
-
-      amount: op.getAmount().toLong(),
-    }
-  })
+  const operations = ops.map(op =>
+    buildOperationRaw({
+      op,
+      xpub,
+    }),
+  )
 
   const rawAccount: AccountRaw = {
     id: xpub,
@@ -260,7 +235,7 @@ async function buildRawAccount({
     blockHeight,
     archived: false,
     index: accountIndex,
-    balanceByDay: {},
+    balanceByDay,
     operations,
     currencyId,
     unitMagnitude: jsCurrency.units[0].magnitude,
@@ -270,19 +245,60 @@ async function buildRawAccount({
   return rawAccount
 }
 
-/**
- * TODO: should be calculated by the lib core
- *       why? because the xpub generated here seems invalid
- */
-function createXPUB(depth, fingerprint, childnum, chaincode, publicKey, network) {
-  let xpub = toHexInt(network)
-  // $FlowFixMe
-  xpub += padStart(depth.toString(16), 2, '0')
-  // $FlowFixMe
-  xpub += padStart(fingerprint.toString(16), 8, '0')
-  // $FlowFixMe
-  xpub += padStart(childnum.toString(16), 8, '0')
-  xpub += chaincode
-  xpub += publicKey
-  return encodeBase58Check(xpub)
+function buildOperationRaw({ op, xpub }: { op: NJSOperation, xpub: string }) {
+  const hash = op.getUid()
+  return {
+    id: hash,
+    hash,
+    address: '',
+    senders: op.getSenders(),
+    recipients: op.getRecipients(),
+    blockHeight: op.getBlockHeight(),
+    accountId: xpub,
+    date: op.getDate().toISOString(),
+    amount: op.getAmount().toLong(),
+  }
+}
+
+async function getBalanceByDaySinceOperation({
+  njsAccount,
+  njsOperation,
+  core,
+}: {
+  njsAccount: NJSAccount,
+  njsOperation: NJSOperation,
+  core: Object,
+}) {
+  const startDate = njsOperation.getDate()
+  // set end date to tomorrow
+  const endDate = new Date()
+  endDate.setDate(endDate.getDate() + 1)
+  const njsBalanceHistory = await njsAccount.getBalanceHistory(
+    startDate.toISOString(),
+    endDate.toISOString(),
+    core.TIME_PERIODS.DAY,
+  )
+  let i = 0
+  const res = {}
+  while (!areSameDay(startDate, endDate)) {
+    const dateSQLFormatted = startDate.toISOString().substr(0, 10)
+    const balanceDay = njsBalanceHistory[i]
+    if (balanceDay) {
+      res[dateSQLFormatted] = njsBalanceHistory[i].toLong()
+    } else {
+      console.warn(`No balance for day ${dateSQLFormatted}. This is a bug.`) // eslint-disable-line no-console
+    }
+    startDate.setDate(startDate.getDate() + 1)
+    i++
+  }
+
+  return res
+}
+
+function areSameDay(date1, date2) {
+  return (
+    date1.getYear() === date2.getYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate()
+  )
 }

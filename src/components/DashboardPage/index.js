@@ -16,6 +16,8 @@ import {
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
+import runJob from 'renderer/runJob'
+
 import { colors } from 'styles/theme'
 
 import { getVisibleAccounts } from 'reducers/accounts'
@@ -138,6 +140,24 @@ class DashboardPage extends PureComponent<Props, State> {
 
     return (
       <Box flow={7}>
+        <button
+          onClick={async () => {
+            console.log(`syncing the accounts`)
+            const accounts = await runJob({
+              channel: 'accounts',
+              job: 'scan',
+              successResponse: 'accounts.scanAccountsOnDevice.success',
+              errorResponse: 'accounts.scanAccountsOnDevice.fail',
+              data: {
+                devicePath: '/dev/hidraw0',
+                currencyId: 'bitcoin_testnet',
+              },
+            })
+            console.log(accounts)
+          }}
+        >
+          sync the accounts
+        </button>
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
