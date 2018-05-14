@@ -61,7 +61,7 @@ const Container = styled(Box).attrs({
   }),
 })`
   position: fixed;
-  z-index: 20;
+  z-index: 30;
 `
 
 const Backdrop = styled(Box).attrs({
