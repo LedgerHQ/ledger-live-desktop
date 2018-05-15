@@ -25,6 +25,7 @@ import { getCounterValueCode, localeSelector } from 'reducers/settings'
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
+import UpdateNotifier from 'components/UpdateNotifier'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
@@ -139,6 +140,7 @@ class DashboardPage extends PureComponent<Props, State> {
 
     return (
       <Box flow={7}>
+        <UpdateNotifier mt={-5} />
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
