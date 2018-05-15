@@ -12,7 +12,6 @@ import {
   justifyContent,
   space,
   style,
-  cursor,
 } from 'styled-system'
 
 import fontFamily from 'styles/styled/fontFamily'
@@ -22,6 +21,11 @@ import Text from 'components/base/Text'
 const textAlign = style({
   prop: 'textAlign',
   cssProperty: 'textAlign',
+})
+
+const cursor = style({
+  prop: 'cursor',
+  cssProperty: 'cursor',
 })
 
 const Box = styled.div`
