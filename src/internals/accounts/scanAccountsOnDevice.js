@@ -9,7 +9,6 @@
 //
 
 import Btc from '@ledgerhq/hw-app-btc'
-import padStart from 'lodash/padStart'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 
@@ -17,8 +16,6 @@ import type Transport from '@ledgerhq/hw-transport'
 
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from 'ledger-core/src/ledgercore_doc'
-
-import { toHexInt, encodeBase58Check } from 'helpers/generic'
 
 const OPS_LIMIT = 10000
 
@@ -100,7 +97,7 @@ async function scanNextAccount(props) {
   // TODO: investigate why importing it on file scope causes trouble
   const core = require('init-ledger-core')()
 
-  console.log(`>> Scanning account ${accountIndex} - isSegwit: ${isSegwit.toString()}`)
+  console.log(`>> Scanning account ${accountIndex} - isSegwit: ${isSegwit.toString()}`) // eslint-disable-line no-console
 
   // create account only if account has not been scanned yet
   // if it has already been created, we just need to get it, and sync it
@@ -215,12 +212,7 @@ async function buildAccountRaw({
     path: `${accountPath}/${i}'`,
   }))
 
-  const operations = ops.map(op =>
-    buildOperationRaw({
-      op,
-      xpub,
-    }),
-  )
+  const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
 
   const rawAccount: AccountRaw = {
     id: xpub,
@@ -245,8 +237,14 @@ async function buildAccountRaw({
   return rawAccount
 }
 
-function buildOperationRaw({ op, xpub }: { op: NJSOperation, xpub: string }) {
+function buildOperationRaw({ core, op, xpub }: { core: Object, op: NJSOperation, xpub: string }) {
   const hash = op.getUid()
+  const operationType = op.getOperationType()
+  const absoluteAmount = op.getAmount().toLong()
+
+  // if transaction is a send, amount becomes negative
+  const amount = operationType === core.OPERATION_TYPES.SEND ? -absoluteAmount : absoluteAmount
+
   return {
     id: hash,
     hash,
@@ -256,7 +254,7 @@ function buildOperationRaw({ op, xpub }: { op: NJSOperation, xpub: string }) {
     blockHeight: op.getBlockHeight(),
     accountId: xpub,
     date: op.getDate().toISOString(),
-    amount: op.getAmount().toLong(),
+    amount,
   }
 }
 
