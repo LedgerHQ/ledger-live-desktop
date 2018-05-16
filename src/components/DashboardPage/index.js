@@ -135,7 +135,7 @@ class DashboardPage extends PureComponent<Props, State> {
   render() {
     const { push, accounts, t, counterValue } = this.props
     const { accountsChunk, selectedTime, daysCount } = this.state
-    const timeFrame = this.handleGreeting()
+    // const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
     return (
@@ -144,7 +144,7 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {t(timeFrame)}
+              {"NOW, YOU'RE PLAYING WITH v0.1.1 POWER!"}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0

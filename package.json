@@ -3,7 +3,7 @@
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
   "repository": "https://github.com/MortalKastor/ledger-live-desktop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
