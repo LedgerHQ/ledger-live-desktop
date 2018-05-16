@@ -217,7 +217,7 @@ async function buildAccountRaw({
     xpub,
     path: accountPath,
     walletPath,
-    name: `Account ${accountIndex}`, // TODO: placeholder name?
+    name: `Account ${accountIndex}${isSegwit ? ' (segwit)' : ''}`, // TODO: placeholder name?
     isSegwit,
     address: bitcoinAddress,
     addresses,
