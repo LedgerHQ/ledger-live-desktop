@@ -57,7 +57,7 @@
     "i18next": "^11.2.2",
     "i18next-node-fs-backend": "^1.0.0",
     "invariant": "^2.2.4",
-    "ledger-core": "meriadec/lib-ledger-core-node-bindings#697ec09",
+    "ledger-core": "meriadec/lib-ledger-core-node-bindings#883d7fd",
     "lodash": "^4.17.5",
     "moment": "^2.22.1",
     "object-path": "^0.11.4",
