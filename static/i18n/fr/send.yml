@@ -17,13 +17,13 @@ steps:
   verification:
     title: Vérification
     warning: |
-      You are about to validate a transaction.
-      Be careful, we strongly recommand you to verify that the informations on your Ledger device are correct.
-    body: Once you have checked everything is ok, you can validate securely the transaction on your device.
+      Vous êtes sur le point de valider une transaction. 
+      Soyez prudent, nous vous recommandons vivement de vérifier que les informations sur votre appareil Ledger sont correctes.
+    body: Après avoir vérifié que tout est correct, vous pouvez valider la transaction de manière sécurisée sur votre appareil.
   confirmation:
     title: Confirmation
     success:
-      title: Transaction successfully completed
+      title: Transaction effectuée avec succès
       text: You may have to wait few confirmations unitl the transaction appear
       cta: View operation details
     error:
