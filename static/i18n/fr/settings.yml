@@ -48,7 +48,7 @@ profile:
   resetDesc: Lorem ipsum dolor sit amet
   resetButton: Réinitialisation
   developerMode: Mode développeur
-  developerModeDesc: Enable visibility of developer apps & currencies like Bitcoin Testnet
+  developerModeDesc: Rendre visible les applications en développement et les monnaies comme le Bitcoin Testnet
 about:
   faq: FAQ
   faqDesc: Lorem ipsum dolor sit amet
