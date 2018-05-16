@@ -199,7 +199,7 @@ async function buildAccountRaw({
   const isVerify = false
   const { bitcoinAddress } = await hwApp.getWalletPublicKey(accountPath, isVerify, isSegwit)
 
-  const xpub = 'abcd'
+  const xpub = bitcoinAddress
 
   // blockHeight
   const { height: blockHeight } = await njsAccount.getLastBlock()
