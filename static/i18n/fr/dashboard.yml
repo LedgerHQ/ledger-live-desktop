@@ -1,9 +1,9 @@
 ---
 title: Tableau de bord
 greeting:
-  morning: "Good Morning!"
-  evening: "Good Evening!"
-  afternoon: "Good Afternoon!"
+  morning: "Bonjour!"
+  evening: "Bonsoir!"
+  afternoon: "Bonjour!"
 summary: voici le résumé de votre compte
 summary_plural: 'voici le résumé de vos {{count}} comptes'
 noAccounts: aucun compte
