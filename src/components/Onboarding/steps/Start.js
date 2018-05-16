@@ -10,14 +10,14 @@ import type { StepProps } from '..'
 import { Title, Description } from '../helperComponents'
 
 export default (props: StepProps) => {
-  const { jumpStep } = props
+  const { jumpStep, t } = props
   return (
     <Box sticky alignItems="center" justifyContent="center">
       <Box align="center" alignItems="center">
         <IconGetStarted />
         <Box style={{ paddingTop: '20px' }}>
-          <Title>Welcome to the new Ledger Live Desktop app.</Title>
-          <Description>Let’s get started!</Description>
+          <Title>{t('onboarding:start.title')}</Title>
+          <Description>{t('onboarding:start.desc')}</Description>
         </Box>
         <Button primary onClick={() => jumpStep('init')}>
           Get Started

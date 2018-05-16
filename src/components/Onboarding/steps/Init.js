@@ -12,34 +12,34 @@ import { Title } from '../helperComponents'
 import type { StepProps } from '..'
 
 export default (props: StepProps) => {
-  const { nextStep, jumpStep } = props
+  const { nextStep, jumpStep, t } = props
   const optionCards = [
     {
       key: 'newDevice',
       icon: <IconUser size={22} />,
-      title: 'Initialize your new Ledger device',
-      desc: 'Please replace it with the final wording once it’s done.',
+      title: t('onboarding:init.newDevice.title'),
+      desc: t('onboarding:init.newDevice.desc'),
       onClick: () => nextStep(),
     },
     {
       key: 'restoreDevice',
       icon: <IconUser size={22} />,
-      title: 'Restore a Ledger device',
-      desc: 'Please replace it with the final wording once it’s done.',
+      title: t('onboarding:init.restoreDevice.title'),
+      desc: t('onboarding:init.restoreDevice.desc'),
       onClick: () => jumpStep('choosePIN'),
     },
     {
       key: 'initializedDevice',
       icon: <IconUser size={22} />,
-      title: 'I have already initialized my device',
-      desc: 'Please replace it with the final wording once it’s done.',
+      title: t('onboarding:init.initializedDevice.title'),
+      desc: t('onboarding:init.initializedDevice.desc'),
       onClick: () => jumpStep('choosePIN'),
     },
     {
       key: 'noDevice',
       icon: <IconUser size={22} />,
-      title: 'Do not have a Ledger device yet? Buy one',
-      desc: 'Please replace it with the final wording once it’s done.',
+      title: t('onboarding:init.noDevice.title'),
+      desc: t('onboarding:init.noDevice.desc'),
       onClick: () => shell.openExternal('https://www.ledger.fr/'),
     },
   ]
@@ -51,10 +51,7 @@ export default (props: StepProps) => {
           <IconUser size={36} />
         </Box>
         <Box style={{ padding: 20, maxWidth: 650 }}>
-          <Title>
-            Welcome to Ledger Live, the computer companion app to your Ledger device. Please select
-            one of the options below:
-          </Title>
+          <Title>{t('onboarding:init.title')}</Title>
         </Box>
         <Box flow={5}>{optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}</Box>
       </Box>
@@ -64,8 +61,8 @@ export default (props: StepProps) => {
 
 type CardType = {
   icon: any,
-  desc: string,
-  title: string,
+  desc: any,
+  title: any,
   onClick: Function,
 }
 

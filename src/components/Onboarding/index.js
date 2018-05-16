@@ -128,7 +128,7 @@ class Onboarding extends PureComponent<Props> {
 
 const Container = styled(Box).attrs({
   bg: 'white',
-  p: 5,
+  p: 60,
 })`
   position: fixed;
   top: 0;
@@ -138,6 +138,6 @@ const Container = styled(Box).attrs({
   z-index: 25;
 `
 const StepContainer = styled(Box).attrs({
-  p: 20,
+  p: 40,
 })``
 export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(Onboarding)

@@ -4,39 +4,40 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'components/base/Box'
-import IconNanoS from 'icons/device/NanoS'
-import IconBlue from 'icons/device/Blue'
+import IconLedgerNano from 'icons/onboarding/LedgerNano'
+import IconLedgerBlue from 'icons/onboarding/LedgerBlue'
 import { Title, Description, Inner } from '../helperComponents'
 
 import type { StepProps } from '..'
 
 export default (props: StepProps) => {
-  const { nextStep } = props
+  const { nextStep, t } = props
 
   return (
     <Box sticky alignItems="center" justifyContent="center">
       <Box align="center">
-        <Title>This is the title of the screen. 1 line is the maximum</Title>
-        <Description>
-          This is a long text, please replace it with the final wording once it’s done.
-          <br />
-          Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-        </Description>
+        <Title>{t('onboarding:chooseDevice.title')}</Title>
+        {/* TODO shrink description so it forms 2 lines */}
+        <Description>{t('onboarding:chooseDevice.desc')}</Description>
         <Box>
           <Inner>
             <DeviceContainer onClick={() => nextStep()}>
               <DeviceIcon>
-                <IconNanoS size={46} />
+                <IconLedgerNano />
               </DeviceIcon>
-              <Title>Ledger Nano S</Title>
-              <Description>Please replace it with the final wording once it’s done.</Description>
+              <BlockTitle>{t('onboarding:chooseDevice.ledgerNanoCard.title')}</BlockTitle>
+              <BlockDescription>
+                {t('onboarding:chooseDevice.ledgerNanoCard.desc')}
+              </BlockDescription>
             </DeviceContainer>
             <DeviceContainer>
               <DeviceIcon>
-                <IconBlue size={46} />
+                <IconLedgerBlue />
               </DeviceIcon>
-              <Title>Ledger Blue</Title>
-              <Description>Please replace it with the final wording once it’s done.</Description>
+              <BlockTitle>{t('onboarding:chooseDevice.ledgerBlueCard.title')}</BlockTitle>
+              <BlockDescription>
+                {t('onboarding:chooseDevice.ledgerBlueCard.desc')}
+              </BlockDescription>
             </DeviceContainer>
           </Inner>
         </Box>
@@ -59,4 +60,19 @@ const DeviceIcon = styled(Box).attrs({
   color: 'graphite',
 })`
   width: 55px;
+  min-height: 80px;
+`
+export const BlockDescription = styled(Box).attrs({
+  ff: 'Open Sans|Regular',
+  fontSize: 4,
+  textAlign: 'center',
+  color: 'smoke',
+})``
+export const BlockTitle = styled(Box).attrs({
+  ff: 'Open Sans|Regular',
+  fontSize: 4,
+  textAlign: 'center',
+})`
+  font-weight: 600;
+  padding-bottom: 10px;
 `
