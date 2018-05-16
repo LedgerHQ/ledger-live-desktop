@@ -69,10 +69,7 @@ type Props = {
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const { t, type, onClose, operation, account, marketColor, currencySettings } = props
-  const { id, amount, date } = operation
-
-  // $FlowFixMe YEAH, I know those fields should not be present in operation
-  const { from, to } = operation
+  const { id, hash, amount, date, senders, recipients } = operation
 
   const { name, unit, currency } = account
   const confirmations = account.blockHeight - operation.blockHeight
@@ -131,34 +128,18 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         <B />
         <Line>
           <ColLeft>From</ColLeft>
-          <ColRight>
-            {from.map((v, i) => (
-              <CanSelect
-                key={i} // eslint-disable-line react/no-array-index-key
-              >
-                {v}
-              </CanSelect>
-            ))}
-          </ColRight>
+          <ColRight>{senders.map(v => <CanSelect key={v}> {v} </CanSelect>)}</ColRight>
         </Line>
         <B />
         <Line>
           <ColLeft>To</ColLeft>
-          <ColRight>
-            {to.map((v, i) => (
-              <CanSelect
-                key={i} // eslint-disable-line react/no-array-index-key
-              >
-                {v}
-              </CanSelect>
-            ))}
-          </ColRight>
+          <ColRight>{recipients.map(v => <CanSelect key={v}> {v} </CanSelect>)}</ColRight>
         </Line>
         <B />
         <Line>
           <ColLeft>Identifier</ColLeft>
           <ColRight>
-            <CanSelect>{id}</CanSelect>
+            <CanSelect>{hash}</CanSelect>
           </ColRight>
         </Line>
       </ModalContent>

@@ -126,7 +126,7 @@ export class OperationsList extends PureComponent<Props> {
                     return (
                       <Operation
                         account={account}
-                        key={`${account.id}-${op.hash}`}
+                        key={op.id}
                         onAccountClick={onAccountClick}
                         onOperationClick={this.handleClickOperation}
                         op={op}

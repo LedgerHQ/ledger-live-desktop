@@ -236,6 +236,7 @@ async function buildAccountRaw({
 }
 
 function buildOperationRaw({ core, op, xpub }: { core: Object, op: NJSOperation, xpub: string }) {
+  const id = op.getUid()
   const bitcoinLikeOperation = op.asBitcoinLikeOperation()
   const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
   const hash = bitcoinLikeTransaction.getHash()
@@ -246,7 +247,7 @@ function buildOperationRaw({ core, op, xpub }: { core: Object, op: NJSOperation,
   const amount = operationType === core.OPERATION_TYPES.SEND ? -absoluteAmount : absoluteAmount
 
   return {
-    id: hash,
+    id,
     hash,
     address: '',
     senders: op.getSenders(),
