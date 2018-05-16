@@ -41,10 +41,6 @@ nsis:
   perMachine: true
   allowToChangeInstallationDirectory: true
 
-publish:
-  provider: github
-  releaseType: release
-
 files:
   # Include files
   - dist/internals
