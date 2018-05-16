@@ -11,7 +11,7 @@ import { ipcRenderer } from 'electron'
 import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
-import { rgba } from 'styles/helpers'
+import { rgba, darken } from 'styles/helpers'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
@@ -48,6 +48,18 @@ const Bar = styled.div`
   height: 15px;
   width: 1px;
   background: ${p => p.theme.colors.fog};
+`
+
+const SettingButtonContainer = styled(Box).attrs({
+  px: 4,
+  ml: 0,
+  justifyContent: 'center',
+  cursor: 'pointer',
+})`
+  &:hover > * {
+    color: ${p => darken(p.theme.colors.graphite, 0.15)};
+    cursor: pointer;
+  }
 `
 
 const Activity = styled.div`
@@ -175,9 +187,9 @@ class TopBar extends PureComponent<Props, State> {
             <Box justifyContent="center">
               <Bar />
             </Box>
-            <Box justifyContent="center" onClick={this.navigateToSettings}>
+            <SettingButtonContainer onClick={this.navigateToSettings}>
               <IconSettings size={16} />
-            </Box>
+            </SettingButtonContainer>
             {hasPassword && (
               <Fragment>
                 <Box justifyContent="center">
