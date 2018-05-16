@@ -58,7 +58,7 @@ class UpdateNotifier extends PureComponent<Props> {
             <Box ml="auto">
               <Text
                 style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                onClick={() => sendEvent('msg', 'updater:quitAndInstall')}
+                onClick={() => sendEvent('msg', 'updater.quitAndInstall')}
               >
                 {t('update:relaunch')}
               </Text>
