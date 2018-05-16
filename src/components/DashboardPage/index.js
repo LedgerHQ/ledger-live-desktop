@@ -144,7 +144,7 @@ class DashboardPage extends PureComponent<Props, State> {
         <Box horizontal alignItems="flex-end">
           <Box grow>
             <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {"NOW, YOU'RE PLAYING WITH v0.1.2 POWER!"}
+              {"v0.1.3 THE FUTURE IS NOW"}
             </Text>
             <Text color="grey" fontSize={5} ff="Museo Sans|Light">
               {totalAccounts > 0
