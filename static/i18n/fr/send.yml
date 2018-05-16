@@ -24,10 +24,10 @@ steps:
     title: Confirmation
     success:
       title: Transaction effectuée avec succès
-      text: You may have to wait few confirmations unitl the transaction appear
-      cta: View operation details
+      text: Vous devrez peut-être attendre plusieurs confirmations avant que la transaction n'apparaisse
+      cta: Voir les détails de l'opération
     error:
-      title: Transaction aborted
+      title: Transaction interrompue
       text: |
         The transaction have been aborted on your device.
         You can try again the operation.
