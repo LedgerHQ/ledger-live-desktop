@@ -171,7 +171,7 @@ export class Modal extends Component<Props> {
         {(m, isVisible, isAnimated) => (
           <Container isVisible={isVisible} onClick={preventBackdropClick ? undefined : onClose}>
             <Backdrop op={m.opacity} />
-            <GrowScroll alignItems="center" full justifyContent="center" style={{ height: '100%' }}>
+            <GrowScroll alignItems="center" full py={8}>
               <Wrapper
                 op={m.opacity}
                 scale={m.scale}
