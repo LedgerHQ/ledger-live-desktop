@@ -21,8 +21,8 @@ import Box from 'components/base/Box'
 import Start from './steps/Start'
 import InitStep from './steps/Init'
 import OnboardingBreadcrumb from './OnboardingBreadcrumb'
-import ChooseDevice from './steps/ChooseDevice'
-import ChoosePIN from './steps/ChoosePIN'
+import SelectDevice from './steps/SelectDevice'
+import SelectPIN from './steps/SelectPIN'
 import WriteSeed from './steps/WriteSeed'
 import GenuineCheck from './steps/GenuineCheck'
 import SetPassword from './steps/SetPassword'
@@ -31,8 +31,8 @@ import Finish from './steps/Finish'
 
 const STEPS = {
   init: InitStep,
-  chooseDevice: ChooseDevice,
-  choosePIN: ChoosePIN,
+  selectDevice: SelectDevice,
+  selectPIN: SelectPIN,
   writeSeed: WriteSeed,
   genuineCheck: GenuineCheck,
   setPassword: SetPassword,

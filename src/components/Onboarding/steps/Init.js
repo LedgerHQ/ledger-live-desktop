@@ -53,7 +53,9 @@ export default (props: StepProps) => {
         <Box style={{ padding: 20, maxWidth: 650 }}>
           <Title>{t('onboarding:init.title')}</Title>
         </Box>
-        <Box flow={5}>{optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}</Box>
+        <Box mt={5} flow={5}>
+          {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
+        </Box>
       </Box>
     </Box>
   )
@@ -98,12 +100,10 @@ export const CardDescription = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
   textAlign: 'left',
-  color: 'smoke',
+  color: 'grey',
 })``
 export const CardTitle = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
+  ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'left',
-})`
-  font-weight: 600;
-`
+})``

@@ -16,27 +16,26 @@ export default (props: StepProps) => {
   return (
     <Box sticky alignItems="center" justifyContent="center">
       <Box align="center">
-        <Title>{t('onboarding:chooseDevice.title')}</Title>
-        {/* TODO shrink description so it forms 2 lines */}
-        <Description>{t('onboarding:chooseDevice.desc')}</Description>
+        <Title>{t('onboarding:selectDevice.title')}</Title>
+        <Description style={{ maxWidth: 714 }}>{t('onboarding:selectDevice.desc')}</Description>
         <Box>
           <Inner>
             <DeviceContainer onClick={() => nextStep()}>
               <DeviceIcon>
                 <IconLedgerNano />
               </DeviceIcon>
-              <BlockTitle>{t('onboarding:chooseDevice.ledgerNanoCard.title')}</BlockTitle>
+              <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
               <BlockDescription>
-                {t('onboarding:chooseDevice.ledgerNanoCard.desc')}
+                {t('onboarding:selectDevice.ledgerNanoCard.desc')}
               </BlockDescription>
             </DeviceContainer>
             <DeviceContainer>
               <DeviceIcon>
                 <IconLedgerBlue />
               </DeviceIcon>
-              <BlockTitle>{t('onboarding:chooseDevice.ledgerBlueCard.title')}</BlockTitle>
+              <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerBlueCard.title')}</BlockTitle>
               <BlockDescription>
-                {t('onboarding:chooseDevice.ledgerBlueCard.desc')}
+                {t('onboarding:selectDevice.ledgerBlueCard.desc')}
               </BlockDescription>
             </DeviceContainer>
           </Inner>
@@ -53,6 +52,11 @@ const DeviceContainer = styled(Box).attrs({
   width: 218px;
   height: 204px;
   border: 1px solid #d8d8d8;
+  &:hover,
+  &:focus {
+    opacity: 0.5;
+    cursor: pointer;
+  }
 `
 const DeviceIcon = styled(Box).attrs({
   alignItems: 'center',
@@ -66,13 +70,10 @@ export const BlockDescription = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
   textAlign: 'center',
-  color: 'smoke',
+  color: 'grey',
 })``
 export const BlockTitle = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
+  ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'center',
-})`
-  font-weight: 600;
-  padding-bottom: 10px;
-`
+})``
