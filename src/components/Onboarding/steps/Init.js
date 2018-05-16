@@ -1,90 +1,109 @@
 // @flow
 
 import React from 'react'
-import styled from 'styled-components'
 import { shell } from 'electron'
 
-import Box from 'components/base/Box'
+import styled from 'styled-components'
+import Box, { Card } from 'components/base/Box'
 import IconUser from 'icons/User'
-import { Title, Description, Inner } from '../helperComponents'
+import IconChevronRight from 'icons/ChevronRight'
+import { Title } from '../helperComponents'
 
 import type { StepProps } from '..'
 
 export default (props: StepProps) => {
-  const { nextStep, jumpStep } = props
-  const handleOpenLink = (url: string) => () => shell.openExternal(url)
-  /* TODO: all titles, descriptions to be wrapped in a translation tag once defined */
+  const { nextStep, jumpStep, t } = props
+  const optionCards = [
+    {
+      key: 'newDevice',
+      icon: <IconUser size={22} />,
+      title: t('onboarding:init.newDevice.title'),
+      desc: t('onboarding:init.newDevice.desc'),
+      onClick: () => nextStep(),
+    },
+    {
+      key: 'restoreDevice',
+      icon: <IconUser size={22} />,
+      title: t('onboarding:init.restoreDevice.title'),
+      desc: t('onboarding:init.restoreDevice.desc'),
+      onClick: () => jumpStep('choosePIN'),
+    },
+    {
+      key: 'initializedDevice',
+      icon: <IconUser size={22} />,
+      title: t('onboarding:init.initializedDevice.title'),
+      desc: t('onboarding:init.initializedDevice.desc'),
+      onClick: () => jumpStep('choosePIN'),
+    },
+    {
+      key: 'noDevice',
+      icon: <IconUser size={22} />,
+      title: t('onboarding:init.noDevice.title'),
+      desc: t('onboarding:init.noDevice.desc'),
+      onClick: () => shell.openExternal('https://www.ledger.fr/'),
+    },
+  ]
+
   return (
     <Box sticky alignItems="center" justifyContent="center">
       <Box align="center">
-        <Title>This is the title of the screen. 1 line is the maximum</Title>
-        <Description>
-          This is a long text, please replace it with the final wording once it’s done.
-          <br />
-          Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-        </Description>
-        <Box style={{ paddingBottom: 10 }}>
-          <Inner>
-            <DeviceContainer onClick={() => nextStep()}>
-              {/* colors are temp, we don't have icons now */}
-              <DeviceIcon style={{ color: '#66be54' }}>
-                <IconUser size={24} />
-              </DeviceIcon>
-              <TrackChoiceTitle>Clean Nano S setup</TrackChoiceTitle>
-              <Description>Please replace it with the final wording once it’s done.</Description>
-            </DeviceContainer>
-            <DeviceContainer onClick={() => jumpStep('choosePIN')}>
-              <DeviceIcon style={{ color: '#66be54' }}>
-                <IconUser size={24} />
-              </DeviceIcon>
-              <TrackChoiceTitle>Existing seed + Clean setup</TrackChoiceTitle>
-              <Description>Please replace it with the final wording once it’s done.</Description>
-            </DeviceContainer>
-          </Inner>
+        <Box color="wallet">
+          <IconUser size={36} />
         </Box>
-        <Box>
-          <Inner>
-            <DeviceContainer onClick={() => nextStep()}>
-              <DeviceIcon style={{ color: '#6490f1' }}>
-                <IconUser size={24} />
-              </DeviceIcon>
-              <TrackChoiceTitle>Migrate accounts</TrackChoiceTitle>
-              <Description>Please replace it with the final wording once it’s done.</Description>
-            </DeviceContainer>
-            <DeviceContainer onClick={handleOpenLink('https://www.ledger.fr/')}>
-              <DeviceIcon style={{ color: '#ea2e41' }}>
-                <IconUser size={24} />
-              </DeviceIcon>
-              <TrackChoiceTitle>Not a user, but would love to</TrackChoiceTitle>
-              <Description>Please replace it with the final wording once it’s done.</Description>
-            </DeviceContainer>
-          </Inner>
+        <Box style={{ padding: 20, maxWidth: 650 }}>
+          <Title>{t('onboarding:init.title')}</Title>
+        </Box>
+        <Box mt={5} flow={5}>
+          {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
         </Box>
       </Box>
     </Box>
   )
 }
 
-const DeviceContainer = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-})`
-  width: 218px;
-  height: 204px;
-  border: 1px solid #d8d8d8;
-`
-const DeviceIcon = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'graphite',
-})`
-  width: 55px;
-  padding: 10px;
-`
-export const TrackChoiceTitle = styled(Box).attrs({
-  width: 152,
-  height: 27,
-  ff: 'Museo Sans|Regular',
-  fontSize: 5,
-  color: 'dark',
+type CardType = {
+  icon: any,
+  desc: any,
+  title: any,
+  onClick: Function,
+}
+
+export function OptionFlowCard({ card }: { card: CardType }) {
+  const { icon, desc, title, onClick } = card
+  return (
+    <Card
+      horizontal
+      p={5}
+      style={{
+        cursor: 'pointer',
+        border: 'solid 1px #d8d8d8',
+        minWidth: '533px',
+        maxHeight: '80px',
+      }}
+      onClick={onClick}
+    >
+      <Box justify="center" color="grey" style={{ width: 50 }}>
+        {icon}
+      </Box>
+      <Box ff="Open Sans|Regular" justify="center" fontSize={4} grow>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{desc}</CardDescription>
+      </Box>
+      <Box justify="center" color="grey">
+        <IconChevronRight size={22} />
+      </Box>
+    </Card>
+  )
+}
+
+export const CardDescription = styled(Box).attrs({
+  ff: 'Open Sans|Regular',
+  fontSize: 4,
+  textAlign: 'left',
+  color: 'grey',
+})``
+export const CardTitle = styled(Box).attrs({
+  ff: 'Open Sans|SemiBold',
+  fontSize: 4,
+  textAlign: 'left',
 })``
