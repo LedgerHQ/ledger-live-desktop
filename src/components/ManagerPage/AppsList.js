@@ -64,7 +64,7 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.fetchList()
+    this.fetchAppList()
   }
 
   componentWillUnmount() {
@@ -73,8 +73,7 @@ class AppsList extends PureComponent<Props, State> {
 
   _unmounted = false
 
-  async fetchList() {
-    console.log(`fetching app list`)
+  async fetchAppList() {
     const appsList =
       CACHED_APPS ||
       (await runJob({
@@ -98,23 +97,23 @@ class AppsList extends PureComponent<Props, State> {
         device: { path: devicePath },
       } = this.props
       const data = { appParams, devicePath }
-      await runJob({ channel: 'usb', job, successResponse, errorResponse, data })
+      await runJob({ channel: 'manager', job, successResponse, errorResponse, data })
       this.setState({ status: 'success' })
     } catch (err) {
       this.setState({ status: 'error', error: err.message })
     }
   }
 
-  handleInstall = this.createDeviceJobHandler({
-    job: 'manager.installApp',
-    successResponse: 'device.appInstalled',
-    errorResponse: 'device.appInstallError',
+  handleInstallApp = this.createDeviceJobHandler({
+    job: 'installApp',
+    successResponse: 'manager.appInstalled',
+    errorResponse: 'manager.appInstallError',
   })
 
-  handleUninstall = this.createDeviceJobHandler({
-    job: 'manager.uninstallApp',
-    successResponse: 'device.appUninstalled',
-    errorResponse: 'device.appUninstallError',
+  handleUninstallApp = this.createDeviceJobHandler({
+    job: 'uninstallApp',
+    successResponse: 'manager.appUninstalled',
+    errorResponse: 'manager.appUninstallError',
   })
 
   handleCloseModal = () => this.setState({ status: 'idle' })
@@ -129,8 +128,8 @@ class AppsList extends PureComponent<Props, State> {
             name={c.name}
             version={`Version ${c.version}`}
             icon={ICONS_FALLBACK[c.icon] || c.icon}
-            onInstall={this.handleInstall(c)}
-            onUninstall={this.handleUninstall(c)}
+            onInstall={this.handleInstallApp(c)}
+            onUninstall={this.handleUninstallApp(c)}
           />
         ))}
         <Modal

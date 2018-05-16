@@ -13,6 +13,7 @@ import Pills from 'components/base/Pills'
 
 import AppsList from './AppsList'
 import DeviceInfos from './DeviceInfos'
+import FirmwareUpdate from './FirmwareUpdate'
 
 const mapStateToProps = state => ({
   device: getCurrentDevice(state),
@@ -62,7 +63,12 @@ class ManagerPage extends PureComponent<Props, State> {
     return (
       <Fragment>
         <Pills items={tabs} activeKey={currentTab} onChange={this.handleTabChange} mb={6} />
-        {currentTab === 'apps' && <AppsList device={device} />}
+        {currentTab === 'apps' && (
+          <Fragment>
+            <FirmwareUpdate t={t} device={device} mb={4} />
+            <AppsList device={device} />
+          </Fragment>
+        )}
         {currentTab === 'device' && <DeviceInfos device={device} />}
       </Fragment>
     )
