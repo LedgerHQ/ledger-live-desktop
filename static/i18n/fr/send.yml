@@ -29,6 +29,6 @@ steps:
     error:
       title: Transaction interrompue
       text: |
-        The transaction have been aborted on your device.
-        You can try again the operation.
-      cta: Retry operation
+        La transaction a été interrompue sur votre appareil.
+        Vous pouvez réessayer l’opération.
+      cta: Réessayer l'opération
