@@ -17,8 +17,6 @@ import type Transport from '@ledgerhq/hw-transport'
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from 'ledger-core/src/ledgercore_doc'
 
-const OPS_LIMIT = 10000
-
 type Props = {
   devicePath: string,
   currencyId: string,
@@ -112,7 +110,7 @@ async function scanNextAccount(props) {
   }
 
   const query = njsAccount.queryOperations()
-  const ops = await query.limit(OPS_LIMIT).execute()
+  const ops = await query.complete().execute()
 
   const account = await buildAccountRaw({
     njsAccount,
@@ -238,7 +236,9 @@ async function buildAccountRaw({
 }
 
 function buildOperationRaw({ core, op, xpub }: { core: Object, op: NJSOperation, xpub: string }) {
-  const hash = op.getUid()
+  const bitcoinLikeOperation = op.asBitcoinLikeOperation()
+  const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
+  const hash = bitcoinLikeTransaction.getHash()
   const operationType = op.getOperationType()
   const absoluteAmount = op.getAmount().toLong()
 
