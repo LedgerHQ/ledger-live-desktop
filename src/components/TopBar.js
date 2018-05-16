@@ -164,7 +164,7 @@ class TopBar extends PureComponent<Props, State> {
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal flow={4}>
-            <GlobalSearch t={t} />
+            <GlobalSearch t={t} isHidden />
             <Box justifyContent="center">
               <IconDevices size={16} />
             </Box>
