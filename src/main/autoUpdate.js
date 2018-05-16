@@ -1,5 +1,6 @@
 // @flow
 
+import { app, BrowserWindow } from 'electron'
 import { autoUpdater } from 'electron-updater'
 
 type SendFunction = (type: string, data: *) => void
@@ -16,5 +17,14 @@ export default (notify: SendFunction) => {
 }
 
 export function quitAndInstall() {
-  autoUpdater.quitAndInstall()
+  setImmediate(() => {
+    const browserWindows = BrowserWindow.getAllWindows()
+
+    app.removeAllListeners('window-all-closed')
+    browserWindows.forEach(browserWindow => {
+      browserWindow.removeAllListeners('close')
+    })
+
+    autoUpdater.quitAndInstall(false)
+  })
 }
