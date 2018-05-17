@@ -21,12 +21,14 @@ type Message = {
   data: any,
 }
 
-type LedgerAppParams = {
+type LedgerScriptParams = {
   firmware?: string,
   firmwareKey?: string,
   delete?: string,
   deleteKey?: string,
 }
+
+type FirmwareUpdateType = 'osu' | 'final'
 
 /**
  * Generate handler which create transport with given
@@ -68,7 +70,7 @@ export function createTransportHandler(
  */
 export async function installApp(
   transport: Transport<*>,
-  { appParams }: { appParams: LedgerAppParams },
+  { appParams }: { appParams: LedgerScriptParams },
 ): Promise<void> {
   return createSocketDialog(transport, '/install', appParams)
 }
@@ -78,7 +80,7 @@ export async function installApp(
  */
 export async function uninstallApp(
   transport: Transport<*>,
-  { appParams }: { appParams: LedgerAppParams },
+  { appParams }: { appParams: LedgerScriptParams },
 ): Promise<void> {
   return createSocketDialog(transport, '/install', {
     ...appParams,
@@ -105,7 +107,11 @@ function socketSend(ws: WebsocketType, msg: Message) {
 /**
  * Exchange data on transport
  */
-async function exchange(ws: WebsocketType, transport: Transport<*>, msg: Message): Promise<void> {
+export async function exchange(
+  ws: WebsocketType,
+  transport: Transport<*>,
+  msg: Message,
+): Promise<void> {
   const { data, nonce } = msg
   const r: Buffer = await transport.exchange(Buffer.from(data, 'hex'))
   const status = r.slice(r.length - 2)
@@ -121,7 +127,7 @@ async function exchange(ws: WebsocketType, transport: Transport<*>, msg: Message
 /**
  * Bulk update on transport
  */
-async function bulk(ws: WebsocketType, transport: Transport<*>, msg: Message) {
+export async function bulk(ws: WebsocketType, transport: Transport<*>, msg: Message) {
   const { data, nonce } = msg
 
   // Execute all apdus and collect last status
@@ -146,11 +152,15 @@ async function bulk(ws: WebsocketType, transport: Transport<*>, msg: Message) {
  * Open socket connection with firmware api, and init a dialog
  * with the device
  */
-function createSocketDialog(transport: Transport<*>, endpoint: string, appParams: LedgerAppParams) {
+export async function createSocketDialog(
+  transport: Transport<*>,
+  endpoint: string,
+  params: LedgerScriptParams,
+) {
   return new Promise(async (resolve, reject) => {
     try {
       let lastData
-      const url = `${BASE_SOCKET_URL}${endpoint}?${qs.stringify(appParams)}`
+      const url = `${BASE_SOCKET_URL}${endpoint}?${qs.stringify(params)}`
 
       log('WS CONNECTING', url)
       const ws: WebsocketType = new Websocket(url)
@@ -211,7 +221,7 @@ export async function getFirmwareInfo(transport: Transport<*>) {
 /**
  * Debug helper
  */
-function log(namespace: string, str: string = '', color?: string) {
+export function log(namespace: string, str: string = '', color?: string) {
   namespace = namespace.padEnd(15)
   // $FlowFixMe
   const coloredNamespace = color ? chalk[color](namespace) : namespace
@@ -223,7 +233,7 @@ function log(namespace: string, str: string = '', color?: string) {
 /**
  * Log a socket send/receive
  */
-function logWS(type: string, msg: Message) {
+export function logWS(type: string, msg: Message) {
   const arrow = type === 'SEND' ? '↑' : '↓'
   const namespace = `${arrow} WS ${type}`
   const color = type === 'SEND' ? 'blue' : 'red'
@@ -243,3 +253,15 @@ function logWS(type: string, msg: Message) {
     log(namespace, JSON.stringify(msg), color)
   }
 }
+
+/**
+ * Helpers to build OSU and Final firmware params
+ */
+export const buildParamsFromFirmware = (type: FirmwareUpdateType): Function => (
+  data: any,
+): LedgerScriptParams => ({
+  firmware: data[`${type}_firmware`],
+  firmwareKey: data[`${type}_firmware_key`],
+  perso: data[`${type}_perso`],
+  targetId: data[`${type}_target_id`],
+})

@@ -13,7 +13,6 @@ export default async (send: IPCSend, data: any) => {
   try {
     const transport = await CommNodeHid.open(data.devicePath)
     const infos = await getFirmwareInfo(transport)
-
     // Get device infos from targetId
     const { data: deviceVersion } = await axios.get(
       `${API_BASE_URL}/device_versions_target_id/${infos.targetId}`,
