@@ -64,14 +64,24 @@ export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
   })
 }
 
-export type UpdateAccount = Account => (Function, Function) => void
+export type UpdateAccountWithUpdater = (accountId: string, (Account) => Account) => *
+
+export const updateAccountWithUpdater: UpdateAccountWithUpdater = (accountId, updater) => ({
+  type: 'UPDATE_ACCOUNT',
+  accountId,
+  updater,
+})
+
+export type UpdateAccount = ($Shape<Account>) => (Function, Function) => void
 export const updateAccount: UpdateAccount = payload => (dispatch, getState) => {
   const {
     settings: { orderAccounts },
   } = getState()
   dispatch({
     type: 'UPDATE_ACCOUNT',
-    payload,
+    updater: account => ({ ...account, ...payload }),
+    accountId: payload.id,
   })
   dispatch(updateOrderAccounts(orderAccounts))
+  // TODO should not be here IMO.. feels wrong for perf, probably better to move in reducer too
 }

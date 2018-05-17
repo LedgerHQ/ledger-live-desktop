@@ -3,7 +3,6 @@
 import React, { PureComponent, Fragment, createElement } from 'react'
 import Fuse from 'fuse.js'
 
-import type { Element } from 'react'
 import type FuseType from 'fuse.js'
 
 // eslint false positive detection on unused prop-type
@@ -12,7 +11,7 @@ type Props = {
   value: string,
   render: Function,
   highlight?: boolean,
-  renderHighlight?: (string, string) => Element<*>, // eslint-disable-line react/no-unused-prop-types
+  renderHighlight?: (string, string) => React$Node, // eslint-disable-line react/no-unused-prop-types
   fuseOptions?: Object, // eslint-disable-line react/no-unused-prop-types
 
   // if true, it will display no items when value is empty

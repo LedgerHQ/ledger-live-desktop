@@ -30,6 +30,10 @@ type Props = OwnProps & {
 
 const mapStateToProps = (state: State, props: OwnProps) => {
   const { currency, value, date, exchange } = props
+  if (__DEV__) {
+    if (!exchange) console.warn('CounterValue: exchange is required')
+    if (!currency) console.warn('CounterValue: currency is required')
+  }
   const counterValueCurrency = counterValueCurrencySelector(state)
   const counterValue = calculateCounterValueSelector(state)(
     currency,

@@ -36,7 +36,7 @@ const Text = styled(Box).attrs({
 `
 
 type Props = {
-  txValidated: boolean,
+  txValidated: ?string,
   t: T,
 }
 
@@ -53,6 +53,7 @@ function StepConfirmation(props: Props) {
       </span>
       <Title>{t(`${tPrefix}.title`)}</Title>
       <Text>{multiline(t(`${tPrefix}.text`))}</Text>
+      <Text>{txValidated || ''}</Text>
     </Container>
   )
 }

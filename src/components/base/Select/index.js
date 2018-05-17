@@ -5,8 +5,6 @@ import Downshift from 'downshift'
 import styled from 'styled-components'
 import { space } from 'styled-system'
 
-import type { Element } from 'react'
-
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Input from 'components/base/Input'
@@ -28,9 +26,9 @@ type Props = {
   maxHeight?: number,
   onChange?: Function,
   placeholder?: string,
-  renderHighlight?: string => Element<*>,
-  renderItem?: (*) => Element<*>,
-  renderSelected?: any => Element<*>,
+  renderHighlight?: string => React$Node,
+  renderItem?: (*) => React$Node,
+  renderSelected?: any => React$Node,
   searchable?: boolean,
   value?: *,
   disabled: boolean,

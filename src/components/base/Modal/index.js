@@ -105,10 +105,10 @@ class Pure extends Component<any> {
 
 type Props = {
   data?: any,
-  isOpened?: boolean,
+  isOpened: boolean,
   onClose: Function,
   onHide?: Function,
-  preventBackdropClick?: boolean,
+  preventBackdropClick: boolean,
   render: Function,
 }
 

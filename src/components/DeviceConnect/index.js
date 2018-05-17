@@ -140,8 +140,8 @@ type Props = {
   appOpened: null | 'success' | 'fail',
   currency: CryptoCurrency,
   devices: Device[],
-  deviceSelected: Device | null,
-  onChangeDevice: Function,
+  deviceSelected: ?Device,
+  onChangeDevice: Device => void,
   t: T,
 }
 

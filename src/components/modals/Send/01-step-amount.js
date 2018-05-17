@@ -1,140 +1,110 @@
 // @flow
-
 import React, { Fragment } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
-
 import type { T } from 'types/common'
-
+import type { WalletBridge } from 'bridge/types'
 import Box from 'components/base/Box'
-import CheckBox from 'components/base/CheckBox'
-import { Textarea } from 'components/base/Input'
-import InputCurrency from 'components/base/InputCurrency'
 import Label from 'components/base/Label'
 import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
 import RecipientAddress from 'components/RecipientAddress'
 import RequestAmount from 'components/RequestAmount'
-import Select from 'components/base/Select'
 import SelectAccount from 'components/SelectAccount'
-import Spoiler from 'components/base/Spoiler'
 
-type PropsStepAmount = {
-  account: Account | null,
-  onChange: Function,
-  recipientAddress: string,
-  amount: number,
-  fees: number,
-  isRBF: boolean,
+const AccountField = ({ onChange, value, t }: *) => (
+  <Box flow={1}>
+    <Label>{t('send:steps.amount.selectAccountDebit')}</Label>
+    <SelectAccount onChange={onChange} value={value} />
+  </Box>
+)
+
+const RecipientField = ({ bridge, account, transaction, onChangeTransaction, t }: *) => (
+  <Box flow={1}>
+    <Label>
+      <span>{t('send:steps.amount.recipientAddress')}</span>
+      <LabelInfoTooltip ml={1} text={t('send:steps.amount.recipientAddress')} />
+    </Label>
+    <RecipientAddress
+      withQrCode
+      value={bridge.getTransactionRecipient(account, transaction)}
+      onChange={recipient =>
+        // TODO we should use isRecipientValid & provide a feedback to user
+        onChangeTransaction(bridge.editTransactionRecipient(account, transaction, recipient))
+      }
+    />
+  </Box>
+)
+
+const AmountField = ({ bridge, account, transaction, onChangeTransaction, t }: *) => (
+  <Box flow={1}>
+    <Label>{t('send:steps.amount.amount')}</Label>
+    <RequestAmount
+      withMax={false}
+      account={account}
+      onChange={amount =>
+        onChangeTransaction(bridge.editTransactionAmount(account, transaction, amount))
+      }
+      value={bridge.getTransactionAmount(account, transaction)}
+    />
+  </Box>
+)
+
+type PropsStepAmount<Transaction> = {
   t: T,
+  account: ?Account,
+  bridge: ?WalletBridge<Transaction>,
+  transaction: ?Transaction,
+  onChangeAccount: Account => void,
+  onChangeTransaction: Transaction => void,
 }
 
-function StepAmount(props: PropsStepAmount) {
-  const { onChange, fees, account, recipientAddress, t, amount, isRBF } = props
+function StepAmount({
+  t,
+  account,
+  bridge,
+  transaction,
+  onChangeAccount,
+  onChangeTransaction,
+}: PropsStepAmount<*>) {
+  // TODO need to split each field into a component
+  const FeesField = bridge && bridge.EditFees
+  const AdvancedOptionsField = bridge && bridge.EditAdvancedOptions
 
   return (
     <Box flow={4}>
-      {/* ACCOUNT SELECTION */}
-      <Box flow={1}>
-        <Label>{t('send:steps.amount.selectAccountDebit')}</Label>
-        <SelectAccount onChange={onChange('account')} value={account} />
-      </Box>
+      <AccountField t={t} onChange={onChangeAccount} value={account} />
 
-      {account && (
-        <Fragment>
-          {/* RECIPIENT ADDRESS */}
-          <Box flow={1}>
-            <Label>
-              <span>{t('send:steps.amount.recipientAddress')}</span>
-              <LabelInfoTooltip ml={1} text={t('send:steps.amount.recipientAddress')} />
-            </Label>
-            <RecipientAddress
-              withQrCode
-              value={recipientAddress}
-              onChange={onChange('recipientAddress')}
-            />
-          </Box>
+      {account && bridge && transaction ? (
+        <Fragment key={account.id}>
+          <RecipientField
+            account={account}
+            bridge={bridge}
+            transaction={transaction}
+            onChangeTransaction={onChangeTransaction}
+            t={t}
+          />
 
-          {/* AMOUNT */}
-          <Box flow={1}>
-            <Label>{t('send:steps.amount.amount')}</Label>
-            <RequestAmount
-              max={account.balance - fees}
+          <AmountField
+            account={account}
+            bridge={bridge}
+            transaction={transaction}
+            onChangeTransaction={onChangeTransaction}
+            t={t}
+          />
+
+          {FeesField && (
+            <FeesField account={account} value={transaction} onChange={onChangeTransaction} />
+          )}
+
+          {AdvancedOptionsField && (
+            <AdvancedOptionsField
               account={account}
-              onChange={onChange('amount')}
-              value={amount}
+              value={transaction}
+              onChange={onChangeTransaction}
             />
-          </Box>
-
-          {/* FEES */}
-          <Box flow={1}>
-            <Label>
-              <span>{t('send:steps.amount.fees')}</span>
-              <LabelInfoTooltip ml={1} text={t('send:steps.amount.fees')} />
-            </Label>
-            <Box horizontal flow={5}>
-              <Fees amount={fees} account={account} onChange={value => onChange('fees')(value)} />
-            </Box>
-          </Box>
-
-          {/* ADVANCED OPTIONS */}
-          <Spoiler title="Advanced options">
-            {/* RBF transaction */}
-            <Box horizontal align="center" flow={5}>
-              <Box style={{ width: 200 }}>
-                <Label>
-                  <span>{t('send:steps.amount.useRBF')}</span>
-                  <LabelInfoTooltip ml={1} text={t('send:steps.amount.useRBF')} />
-                </Label>
-              </Box>
-              <Box grow>
-                <CheckBox isChecked={isRBF} onChange={onChange('isRBF')} />
-              </Box>
-            </Box>
-
-            {/* Message */}
-            <Box horizontal align="flex-start" flow={5}>
-              <Box style={{ width: 200 }}>
-                <Label>
-                  <span>{t('send:steps.amount.message')}</span>
-                </Label>
-              </Box>
-              <Box grow>
-                <Textarea />
-              </Box>
-            </Box>
-          </Spoiler>
+          )}
         </Fragment>
-      )}
+      ) : null}
     </Box>
-  )
-}
-
-type PropsFees = {
-  account: Account,
-  amount: number,
-  onChange: Function,
-}
-
-function Fees(props: PropsFees) {
-  const { onChange, account, amount } = props
-  const { units } = account.currency
-
-  return (
-    <Fragment>
-      <Select
-        style={{ width: 156 }}
-        items={[{ key: 'custom', name: 'Custom' }]}
-        value={{ key: 'custom', name: 'Custom' }}
-        renderSelected={item => item.name}
-        onChange={() => onChange(amount)}
-      />
-      <InputCurrency
-        unit={units[0]}
-        units={units}
-        containerProps={{ grow: true }}
-        value={amount}
-        onChange={onChange}
-      />
-    </Fragment>
   )
 }
 

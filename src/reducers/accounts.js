@@ -38,18 +38,15 @@ const handlers: Object = {
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
-    { payload: account }: { payload: Account },
+    { accountId, updater }: { accountId: string, updater: Account => Account },
   ): AccountsState =>
     state.map(existingAccount => {
-      if (existingAccount.id !== account.id) {
+      if (existingAccount.id !== accountId) {
         return existingAccount
       }
-
-      const updatedAccount = {
-        ...existingAccount,
-        ...account,
-      }
-
+      const updatedAccount = updater(existingAccount)
+      // FIXME REMOVE orderAccountsOperations, we really shouldn't do it here.
+      // i'm sure it's unecessary 99% of the time and actually a perf issue
       return orderAccountsOperations(updatedAccount)
     }),
 

@@ -10,7 +10,7 @@ type Props = {
   scannedAccounts: Account[],
   selectedAccounts: Account[],
   existingAccounts: Account[],
-  onToggleAccount: Function,
+  onToggleAccount?: Account => void,
 }
 
 function StepImport(props: Props) {

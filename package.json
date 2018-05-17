@@ -35,11 +35,11 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^4.11.1",
-    "@ledgerhq/hw-app-eth": "^4.7.3",
-    "@ledgerhq/hw-transport": "^4.7.3",
-    "@ledgerhq/hw-transport-node-hid": "^4.7.6",
-    "@ledgerhq/live-common": "^2.2.0-beta.10",
+    "@ledgerhq/hw-app-btc": "^4.12.0",
+    "@ledgerhq/hw-app-eth": "^4.12.0",
+    "@ledgerhq/hw-transport": "^4.12.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.12.0",
+    "@ledgerhq/live-common": "^2.5.0",
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",
@@ -87,6 +87,7 @@
     "styled-components": "^3.2.6",
     "styled-system": "^2.2.1",
     "tippy.js": "^2.5.2",
+    "uncontrollable": "^6.0.0",
     "ws": "^5.1.1",
     "zxcvbn": "^4.4.2"
   },

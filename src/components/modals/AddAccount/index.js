@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
-import { ipcRenderer } from 'electron'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
@@ -13,14 +12,7 @@ import type { Device, T } from 'types/common'
 import { MODAL_ADD_ACCOUNT } from 'config/constants'
 
 import { closeModal } from 'reducers/modals'
-import {
-  canCreateAccount,
-  getAccounts,
-  getArchivedAccounts,
-  decodeAccount,
-} from 'reducers/accounts'
-
-import runJob from 'renderer/runJob'
+import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'
 
 import { addAccount, updateAccount } from 'actions/accounts'
 
@@ -29,6 +21,7 @@ import Breadcrumb from 'components/Breadcrumb'
 import Button from 'components/base/Button'
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
+import { getBridgeForCurrency } from 'bridge'
 
 import StepCurrency from './01-step-currency'
 import StepImport from './03-step-import'
@@ -91,72 +84,38 @@ const INITIAL_STATE = {
 class AddAccountModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
-  componentDidMount() {
-    ipcRenderer.on('msg', this.handleMsgEvent)
-  }
-
-  async componentWillUpdate(nextProps, nextState) {
-    const { fetchingCounterValues, stepIndex } = this.state
-    const { stepIndex: nextStepIndex } = nextState
-
-    if (!fetchingCounterValues && stepIndex === 0 && nextStepIndex === 1) {
-      // TODO: seems shady to do this here..............
-      await this.fetchCounterValues()
-    }
-  }
-
   componentWillUnmount() {
     this.handleReset()
-    ipcRenderer.removeListener('msg', this.handleMsgEvent)
   }
 
-  async startScanAccountsDevice() {
+  scanSubscription: *
+
+  startScanAccountsDevice() {
+    const { existingAccounts, addAccount } = this.props
     const { deviceSelected, currency } = this.state
 
     if (!deviceSelected || !currency) {
       return
     }
-
-    try {
-      // scan every account for given currency and device
-      await runJob({
-        channel: 'accounts',
-        job: 'scan',
-        successResponse: 'accounts.scanAccountsOnDevice.success',
-        errorResponse: 'accounts.scanAccountsOnDevice.fail',
-        data: {
-          devicePath: deviceSelected.path,
-          currencyId: currency.id,
-        },
-      })
-
-      // go to final step
-      this.setState({ stepIndex: 3 })
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  async fetchCounterValues() {
-    const { currency } = this.state
-
-    if (!currency) {
-      return
-    }
-
-    this.setState({
-      fetchingCounterValues: true,
-      stepIndex: 0,
-    })
-
-    // FIXME I don't really understand this step.
-    // also countervalues should not block the app to work.
-    // imagine our api is down...
-    // await fetchCounterValues([currency])
-
-    this.setState({
-      fetchingCounterValues: false,
-      stepIndex: 1,
+    const bridge = getBridgeForCurrency(currency)
+    this.scanSubscription = bridge.scanAccountsOnDevice(currency, deviceSelected.path, {
+      next: account => {
+        if (!existingAccounts.some(a => a.id === account.id)) {
+          addAccount(account)
+          this.setState(state => ({
+            scannedAccounts: [...state.scannedAccounts, account],
+          }))
+        }
+      },
+      complete: () => {
+        // we should be able to interrupt the scan too if you want to select early etc..
+        // like imagine there are way too more accounts to scan, so you are not stuck here.
+        this.setState({ stepIndex: 3 })
+      },
+      error: error => {
+        // TODO what to do ?
+        console.error(error)
+      },
     })
   }
 
@@ -182,26 +141,6 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   _steps = GET_STEPS(this.props.t)
-
-  handleMsgEvent = (e, { data, type }) => {
-    const { addAccount, existingAccounts } = this.props
-
-    if (type === 'accounts.scanAccountsOnDevice.accountScanned') {
-      // create Account from AccountRaw account scanned on device
-      const account = {
-        ...decodeAccount(data),
-        archived: true,
-      }
-
-      // add it to the reducer if needed, archived
-      if (!existingAccounts.find(a => a.id === account.id)) {
-        addAccount(account)
-        this.setState(state => ({
-          scannedAccounts: [...state.scannedAccounts, account],
-        }))
-      }
-    }
-  }
 
   handleChangeDevice = d => this.setState({ deviceSelected: d })
 
@@ -237,6 +176,7 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   handleReset = () => {
     this.setState(INITIAL_STATE)
+    if (this.scanSubscription) this.scanSubscription.unsubscribe()
   }
 
   renderStep() {

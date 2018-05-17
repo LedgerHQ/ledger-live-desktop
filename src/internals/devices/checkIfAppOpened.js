@@ -28,6 +28,14 @@ export default async (
   try {
     const transport: Transport<*> = await CommNodeHid.open(devicePath)
     const btc = new Btc(transport)
+
+    // FIXME code should be moved into a map, otherwise it's going to be too much spaghetti
+    if (currencyId === 'ethereum') {
+      // MOCK
+      send('devices.checkIfAppOpened.success', { devicePath })
+      return
+    }
+
     if (accountPath) {
       const { bitcoinAddress } = await btc.getWalletPublicKey(accountPath, false, segwit)
       if (bitcoinAddress === accountAddress) {
