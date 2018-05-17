@@ -7,7 +7,7 @@ import {
   listCryptoCurrencies,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
 import { createSelector } from 'reselect'
-import type { Selector } from 'reselect'
+import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import type { Settings, CurrencySettings } from 'types/common'

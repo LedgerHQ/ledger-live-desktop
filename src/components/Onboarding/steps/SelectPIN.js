@@ -3,8 +3,8 @@
 import React from 'react'
 
 import Box from 'components/base/Box'
-import IconWriteSeed from 'icons/onboarding/WriteSeed'
 
+import IconSelectPIN from 'icons/onboarding/SelectPIN'
 import {
   Title,
   Description,
@@ -22,41 +22,37 @@ export default (props: StepProps) => {
     {
       key: 'step1',
       icon: <IconInstructionStep>1</IconInstructionStep>,
-      desc: t('onboarding:writeSeed.instructions.step1'),
+      desc: t('onboarding:selectPIN.instructions.step1'),
     },
     {
       key: 'step2',
       icon: <IconInstructionStep>2</IconInstructionStep>,
-      desc: t('onboarding:writeSeed.instructions.step2'),
+      desc: t('onboarding:selectPIN.instructions.step2'),
     },
     {
       key: 'step3',
       icon: <IconInstructionStep>3</IconInstructionStep>,
-      desc: t('onboarding:writeSeed.instructions.step3'),
+      desc: t('onboarding:selectPIN.instructions.step3'),
     },
     {
       key: 'step4',
       icon: <IconInstructionStep>4</IconInstructionStep>,
-      desc: t('onboarding:writeSeed.instructions.step4'),
-    },
-    {
-      key: 'step5',
-      icon: <IconInstructionStep>5</IconInstructionStep>,
-      desc: t('onboarding:writeSeed.instructions.step5'),
+      desc: t('onboarding:selectPIN.instructions.step4'),
     },
   ]
   return (
     <Box sticky>
       <Box grow alignItems="center" justifyContent="center">
         <Box align="center" mb={5}>
-          <Title>{t('onboarding:writeSeed.title')}</Title>
-          <Description style={{ maxWidth: 714 }}>{t('onboarding:writeSeed.desc')}</Description>
+          <Title>{t('onboarding:selectPIN.title')}</Title>
+          <Description style={{ maxWidth: 714 }}>{t('onboarding:selectPIN.desc')}</Description>
         </Box>
         <Box>
           <Inner style={{ width: 760 }}>
-            <Box style={{ width: 260, alignItems: 'center' }} mt={4}>
-              <IconWriteSeed />
+            <Box style={{ width: 260 }} mt={5}>
+              <IconSelectPIN />
             </Box>
+
             <Box shrink grow flow={5}>
               {steps.map(step => <InstructionStep key={step.key} step={step} />)}
             </Box>

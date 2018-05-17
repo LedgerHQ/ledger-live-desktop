@@ -21,8 +21,8 @@ import Box from 'components/base/Box'
 import Start from './steps/Start'
 import InitStep from './steps/Init'
 import OnboardingBreadcrumb from './OnboardingBreadcrumb'
-import ChooseDevice from './steps/ChooseDevice'
-import ChoosePIN from './steps/ChoosePIN'
+import SelectDevice from './steps/SelectDevice'
+import SelectPIN from './steps/SelectPIN'
 import WriteSeed from './steps/WriteSeed'
 import GenuineCheck from './steps/GenuineCheck'
 import SetPassword from './steps/SetPassword'
@@ -31,8 +31,8 @@ import Finish from './steps/Finish'
 
 const STEPS = {
   init: InitStep,
-  chooseDevice: ChooseDevice,
-  choosePIN: ChoosePIN,
+  selectDevice: SelectDevice,
+  selectPIN: SelectPIN,
   writeSeed: WriteSeed,
   genuineCheck: GenuineCheck,
   setPassword: SetPassword,
@@ -128,7 +128,7 @@ class Onboarding extends PureComponent<Props> {
 
 const Container = styled(Box).attrs({
   bg: 'white',
-  p: 5,
+  p: 60,
 })`
   position: fixed;
   top: 0;
@@ -138,6 +138,6 @@ const Container = styled(Box).attrs({
   z-index: 25;
 `
 const StepContainer = styled(Box).attrs({
-  p: 20,
+  p: 40,
 })``
 export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(Onboarding)

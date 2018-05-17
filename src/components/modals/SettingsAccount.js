@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import get from 'lodash/get'
 import { push } from 'react-router-redux'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Unit } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -14,6 +14,7 @@ import { setDataModal, closeModal } from 'reducers/modals'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
+import Select from 'components/base/Select/index'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 import Label from 'components/base/Label'
 
@@ -24,6 +25,7 @@ type State = {
   minConfirmations: number | null,
   editName: boolean,
   nameHovered: boolean,
+  editUnit: boolean,
 }
 
 type Props = {
@@ -47,6 +49,7 @@ const defaultState = {
   accountName: null,
   minConfirmations: null,
   nameHovered: false,
+  editUnit: false,
 }
 
 function hasNoOperations(account: Account) {
@@ -62,7 +65,6 @@ class SettingsAccount extends PureComponent<Props, State> {
     const { accountName, minConfirmations } = this.state
 
     const account = get(data, 'account', {})
-
     return {
       ...account,
       ...(accountName !== null
@@ -146,8 +148,15 @@ class SettingsAccount extends PureComponent<Props, State> {
       ...defaultState,
     })
 
+  handleChangeUnit = (value: Unit, account: Account) => {
+    const { updateAccount, setDataModal } = this.props
+    account = { ...account, unit: value }
+    updateAccount(account)
+    setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
+  }
+
   render() {
-    const { editName, nameHovered } = this.state
+    const { editName, nameHovered, editUnit } = this.state
 
     return (
       <Modal
@@ -155,7 +164,6 @@ class SettingsAccount extends PureComponent<Props, State> {
         onHide={this.handleHide}
         render={({ data, onClose }) => {
           const account = this.getAccount(data)
-
           return (
             <ModalBody onClose={onClose}>
               <ModalTitle>{'Account settings'}</ModalTitle>
@@ -205,12 +213,26 @@ class SettingsAccount extends PureComponent<Props, State> {
                     onChange={this.handleChangeMinConfirmations(account)}
                   />
                 </Box>
+                {editUnit && (
+                  <Box>
+                    <Label>{'Edit Units'}</Label>
+                    <Select
+                      keyProp="code"
+                      onChange={value => this.handleChangeUnit(value, account)}
+                      renderSelected={item => item && item.code}
+                      value={account.unit}
+                      items={account.currency.units}
+                    />
+                  </Box>
+                )}
               </ModalContent>
               <ModalFooter horizontal justify="flex-end" flow={2}>
                 <Button onClick={this.handleArchiveAccount(account)}>
                   {hasNoOperations(account) ? 'Remove account' : 'Archive account'}
                 </Button>
-                <Button primary>Go to account</Button>
+                <Button primary onClick={onClose}>
+                  Go to account
+                </Button>
               </ModalFooter>
             </ModalBody>
           )
