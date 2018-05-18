@@ -36,10 +36,10 @@ profile:
   passwordModalNewPasswordInput: Nouveau mot de passe
   passwordModalRepeatPasswordInput: Répéter mot de passe
   passwordModalSave: Sauvegarder
-  disablePasswordModalTitle: Disable Password
-  disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
-  disablePasswordModalInput: Current password
-  disablePasswordModalSave: Save
+  disablePasswordModalTitle: Désactiver le mot de passe
+  disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. integer non nibh diam.
+  disablePasswordModalInput: Mot de passe actuel
+  disablePasswordModalSave: Sauvegarder
   sync: Synchroniser les comptes
   syncDesc: Lorem ipsum dolor sit amet
   export: Exporter le journal
@@ -47,6 +47,8 @@ profile:
   reset: Réinitialiser l'application
   resetDesc: Lorem ipsum dolor sit amet
   resetButton: Réinitialisation
+  developerMode: Mode développeur
+  developerModeDesc: Rendre visible les applications en développement et les monnaies comme le Bitcoin Testnet
 about:
   faq: FAQ
   faqDesc: Lorem ipsum dolor sit amet

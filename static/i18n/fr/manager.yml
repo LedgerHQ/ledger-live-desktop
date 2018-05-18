@@ -5,6 +5,6 @@ tabs:
 install: Installer
 allApps: Toutes les applications
 plugYourDevice:
-  title: Plug your device
-  desc: Lorem Ipsum is simply dummy text of the printing and typesetting industry’s standard dummy text
-  cta: Plug my device
+  title: Branchez votre appareil
+  desc: Lorem Ipsum est un texte factice utilisé dans le monde de l'impression et de la typographie
+  cta: Brancher mon appareil
