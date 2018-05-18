@@ -4,10 +4,15 @@
 
 import Btc from '@ledgerhq/hw-app-btc'
 
+const coinTypeCurrencyMap = {
+  bitcoin: 0,
+  ethereum: 60,
+  bitcoin_testnet: 1,
+  ethereum_testnet: 1,
+}
+
 export function coinTypeForId(id: string) {
-  if (id === 'bitcoin_testnet') return 1
-  if (id === 'bitcoin') return 0
-  throw new Error('coinTypeForId is a hack and will disappear with libcore')
+  return coinTypeCurrencyMap[id]
 }
 
 export function getPath({
@@ -17,7 +22,7 @@ export function getPath({
 }: {
   currencyId: string,
   account?: any,
-  segwit: boolean,
+  segwit?: boolean,
 }) {
   return `${segwit ? 49 : 44}'/${coinTypeForId(currencyId)}'${
     account !== undefined ? `/${account}'` : ''
