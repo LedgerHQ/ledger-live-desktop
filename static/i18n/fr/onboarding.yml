@@ -26,13 +26,13 @@ selectDevice:
     title: Ledger Blue
     desc: Please replace it with the final wording once it’s done.
 selectPIN:
-  title: Select PIN code
+  title: Entrez un code PIN
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   instructions:
-    step1: Connect your Ledger Nano S to your computer using the supplied micro USB cable.
-    step2: Press both buttons simultaneously as instructed on your Ledger Nano S screen.
-    step3: Select Configure as new device on your Ledger Nano S by pressing the right button, located above the validation icon.
-    step4: Choose a PIN code between 4 and 8 digits long.
+    step1: Connectez votre Ledger Nano S à votre ordinateur en utilisant le cable micro USB fourni.
+    step2: Pressez simultanément les deux boutons comme indiqué sur l'écran de votre Ledger Nano S.
+    step3: Selectionnez Configurer comme un nouvel appareil sur votre Ledger Nano S en pressant le bouton de droite, situé au dessus de l'icône de validation.
+    step4: Choisissez un code PIN de 4 à 8 chiffres.
 writeSeed:
   title: 24-Word Recovery phrase
   desc: The 24 words that constitute your recovery phrase will now be displayed one by one on the Ledger Nano S screen. These 24 words will be displayed only once during this initialization.
