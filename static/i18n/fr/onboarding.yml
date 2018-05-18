@@ -34,11 +34,11 @@ selectPIN:
     step3: Selectionnez Configurer comme un nouvel appareil sur votre Ledger Nano S en pressant le bouton de droite, situé au dessus de l'icône de validation.
     step4: Choisissez un code PIN de 4 à 8 chiffres.
 writeSeed:
-  title: 24-Word Recovery phrase
+  title: Phrase de récupération
   desc: The 24 words that constitute your recovery phrase will now be displayed one by one on the Ledger Nano S screen. These 24 words will be displayed only once during this initialization.
   instructions:
-    step1: Copy the first word (Word \
-    step2: Move to Word \
+    step1: Notez le premier mot (Word \
+    step2: Aller à Word \
     step3: Repeat the process until all 24 words are copied on the Recovery sheet.
     step4: To confirm, use the right or left button to select each of the 24 words in the right order.
     step5: Validate each word by simultaneously pressing both buttons.
