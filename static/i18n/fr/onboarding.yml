@@ -1,7 +1,7 @@
 ---
 start:
   title: Welcome to the new Ledger Live Desktop app.
-  desc: Let’s get started!
+  desc: Commençons !
 init:
   title: Welcome to Ledger Live, the computer companion app to your Ledger device. Please select one of the options below
   newDevice:
