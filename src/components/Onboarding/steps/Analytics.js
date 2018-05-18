@@ -4,29 +4,25 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'components/base/Box'
-import Button from 'components/base/Button'
-import IconAnalytics from 'icons/LockScreen'
+import IconAnalytics from 'icons/onboarding/Analytics'
 import CheckBox from 'components/base/CheckBox'
-import { Title, Description, OnboardingFooter } from '../helperComponents'
+import { Title, Description } from '../helperComponents'
+import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
 export default (props: StepProps) => {
-  const { nextStep, prevStep } = props
+  const { nextStep, prevStep, t } = props
   return (
-    <Box sticky alignItems="center" justifyContent="center">
-      <Box align="center">
-        <Title>This is ANALYTICS screen. 1 line is the maximum</Title>
-        <Description>
-          This is a long text, please replace it with the final wording once it’s done.
-          <br />
-          Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-        </Description>
-        <DeviceIcon>
-          <IconAnalytics size={136} />
+    <Box sticky>
+      <Box grow alignItems="center" justifyContent="center">
+        <Title>{t('onboarding:analytics.title')}</Title>
+        <Description style={{ maxWidth: 714 }}>{t('onboarding:analytics.desc')}</Description>
+        <DeviceIcon style={{ padding: 15 }}>
+          <IconAnalytics />
         </DeviceIcon>
         <Box horizontal flow={2} align="center">
-          <CheckBox isChecked />
+          <CheckBox isChecked={false} />
           <AnalyticsText>
             This is a long text, please replace it with the final wording once it’s done.
             <br />
@@ -42,14 +38,14 @@ export default (props: StepProps) => {
           </AnalyticsText>
         </Box>
       </Box>
-      <OnboardingFooter horizontal align="center" justify="flex-end" flow={2}>
-        <Button small outline onClick={() => prevStep()}>
-          Go Back
-        </Button>
-        <Button small primary onClick={() => nextStep()}>
-          Continue
-        </Button>
-      </OnboardingFooter>
+      <OnboardingFooter
+        horizontal
+        align="center"
+        flow={2}
+        t={t}
+        nextStep={nextStep}
+        prevStep={prevStep}
+      />
     </Box>
   )
 }

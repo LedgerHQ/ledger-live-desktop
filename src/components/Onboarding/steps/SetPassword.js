@@ -7,14 +7,14 @@ import { setEncryptionKey } from 'helpers/db'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import Text from 'components/base/Text'
 
-import IconSetPassword from 'icons/LockScreen'
+import IconSetPassword from 'icons/onboarding/SetPassword'
 import PasswordModal from 'components/SettingsPage/PasswordModal'
+import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
-import { Title, Description, OnboardingFooter } from '../helperComponents'
+import { Title, Description } from '../helperComponents'
 
 type State = {
   isPasswordModalOpened: boolean,
@@ -49,18 +49,16 @@ class SetPassword extends PureComponent<StepProps, State> {
     const { nextStep, prevStep, t } = this.props
     const { isPasswordModalOpened, isPasswordEnabled } = this.state
     return (
-      <Box sticky alignItems="center" justifyContent="center">
-        <Box align="center">
-          <Title>This is SET PASSWORD screen. 1 line is the maximum</Title>
-          <Description>
-            This is a long text, please replace it with the final wording once it’s done.
-            <br />
-            Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-          </Description>
-          <IconSetPassword size={136} />
-          <Button small primary onClick={() => this.handleOpenPasswordModal()}>
-            Set Password
-          </Button>
+      <Box sticky>
+        <Box grow alignItems="center" justifyContent="center">
+          <Title>{t('onboarding:setPassword.title')}</Title>
+          <Description style={{ maxWidth: 714 }}>{t('onboarding:setPassword.desc')}</Description>
+          <IconSetPassword />
+          <Box style={{ paddingTop: 35 }}>
+            <Button small primary onClick={() => this.handleOpenPasswordModal()}>
+              Set Password
+            </Button>
+          </Box>
           {/* we might not be able to re-use what we have currently without modifications
             the title and descriptions are not dynamic, we might need deffirent size as well */}
           {isPasswordModalOpened && (
@@ -74,17 +72,17 @@ class SetPassword extends PureComponent<StepProps, State> {
             />
           )}
           <Box onClick={() => nextStep()} style={{ padding: 15 }}>
-            <Text color="smoke">I do not want to set it up</Text>
+            <Button>Skip this step</Button>
           </Box>
         </Box>
-        <OnboardingFooter horizontal flow={2}>
-          <Button small outline onClick={() => prevStep()}>
-            Go Back
-          </Button>
-          <Button small primary onClick={() => nextStep()}>
-            Continue
-          </Button>
-        </OnboardingFooter>
+        <OnboardingFooter
+          horizontal
+          align="center"
+          flow={2}
+          t={t}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
       </Box>
     )
   }
