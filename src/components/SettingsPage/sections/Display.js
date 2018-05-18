@@ -165,6 +165,7 @@ class TabProfile extends PureComponent<Props, State> {
           <Row title={t('settings:display.region')} desc={t('settings:display.regionDesc')}>
             <Select
               style={{ minWidth: 250 }}
+              small
               onChange={this.handleChangeRegion}
               renderSelected={item => item && item.name}
               value={currentRegion}

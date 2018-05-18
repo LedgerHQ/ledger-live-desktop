@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
+
 import { globalSyncStateSelector } from 'reducers/bridgeSync'
 import { BridgeSyncConsumer } from 'bridge/BridgeSyncContext'
 import CounterValues from 'helpers/countervalues'
 import IconActivity from 'icons/Activity'
-import Box from './base/Box'
+import ItemContainer from './ItemContainer'
 
 const Activity = styled.div`
   background: ${p =>
@@ -20,7 +21,7 @@ const Activity = styled.div`
   bottom: 20px;
   height: 4px;
   position: absolute;
-  right: -2px;
+  right: 8px;
   width: 4px;
   cursor: pointer;
 `
@@ -31,10 +32,10 @@ class ActivityIndicatorUI extends Component<*> {
   render() {
     const { pending, error, onClick } = this.props
     return (
-      <Box justifyContent="center" relative cursor="pointer" onClick={onClick}>
+      <ItemContainer relative onClick={onClick}>
         <IconActivity size={16} />
         <Activity pending={pending} error={error} />
-      </Box>
+      </ItemContainer>
     )
   }
 }
