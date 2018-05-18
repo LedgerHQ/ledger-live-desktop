@@ -2,6 +2,7 @@
 ok: Ok
 confirm: Confirmer
 cancel: Annuler
+continue: Continue
 chooseWalletPlaceholder: Choisir un portefeuille...
 currency: Monnaie
 selectAccount: Sélectionner un compte
@@ -20,7 +21,7 @@ close: Fermer
 eastern: Orientale
 western: Occidentale
 lockScreen:
-  title: Welcome Back
-  subTitle: Your application is locked
-  description: Please enter your password to continue
-  inputPlaceholder: Type your password
+  title: Content de vous revoir
+  subTitle: L'application est verrouillée
+  description: Veuillez entrer votre mot de passe pour continuer
+  inputPlaceholder: Saisissez votre mot de passe
