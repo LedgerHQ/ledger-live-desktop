@@ -41,7 +41,7 @@ if (Object.keys(settings).length !== 0) {
 
 const countervaluesData = db.get('countervalues')
 if (countervaluesData) {
-  store.dispatch(CounterValues.importAction(store.getState()))
+  store.dispatch(CounterValues.importAction(countervaluesData))
 }
 
 const state = store.getState()
