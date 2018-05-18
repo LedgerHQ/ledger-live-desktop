@@ -4,7 +4,7 @@
 // instanciating wallet pool, but we don't need to do each everytime we
 // require ledger-core, only the first time, so, eh.
 
-const core = require('ledger-core')
+const core = require('@ledgerhq/ledger-core')
 
 let instanciated = false
 
