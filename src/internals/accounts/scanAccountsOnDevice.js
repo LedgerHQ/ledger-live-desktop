@@ -15,7 +15,7 @@ import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currenc
 import type Transport from '@ledgerhq/hw-transport'
 
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
-import type { NJSAccount, NJSOperation } from 'ledger-core/src/ledgercore_doc'
+import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
 type Props = {
   devicePath: string,

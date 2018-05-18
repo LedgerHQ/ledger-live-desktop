@@ -5,9 +5,10 @@ import React, { PureComponent } from 'react'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
-import { Title, Description, OnboardingFooter } from '../helperComponents'
+import { Title, Description } from '../helperComponents'
 
 import type { StepProps } from '..'
+import OnboardingFooter from '../OnboardingFooter'
 
 type State = {
   currentDevice: {
@@ -37,46 +38,44 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   render() {
-    const { nextStep, prevStep, jumpStep } = this.props
+    const { nextStep, prevStep, t } = this.props
     const { showDeviceInfo, currentDevice, showError } = this.state
 
     return (
-      <Box sticky alignItems="center" justifyContent="center">
-        <Box align="center">
-          <Title>This is GENUINE CHECK screen. 1 line is the maximum</Title>
-          <Description>
-            This is a long text, please replace it with the final wording once it’s done.
-            <br />
-            Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-          </Description>
+      <Box sticky>
+        <Box grow alignItems="center" justifyContent="center">
+          <Title>{t('onboarding:genuineCheck.title')}</Title>
+          <Description>{t('onboarding:genuineCheck.desc')}</Description>
+          <Box alignItems="center" justifyContent="center">
+            <Title>Coming next week</Title>
+            <Box alignItems="center" justifyContent="center" style={{ padding: '15px' }}>
+              <Button big primary onClick={() => this.handleCheckDevice()}>
+                Check your device!
+              </Button>
+              {showDeviceInfo && (
+                <Box>
+                  <Description>
+                    The manufacturer is <b>{currentDevice.manufacturer}</b>
+                    The release number is <b>{currentDevice.release}</b>
+                  </Description>
+                </Box>
+              )}
+              {showError && (
+                <Box>
+                  <Description color="red">Connect your device please</Description>
+                </Box>
+              )}
+            </Box>
+          </Box>
         </Box>
-        <Button big primary onClick={() => this.handleCheckDevice()}>
-          Check your device!
-        </Button>
-        {showDeviceInfo && (
-          <Box>
-            <Description>
-              The manufacturer is <b>{currentDevice.manufacturer}</b>
-              The release number is <b>{currentDevice.release}</b>
-            </Description>
-          </Box>
-        )}
-        {showError && (
-          <Box>
-            <Description color="red">Connect your device please</Description>
-          </Box>
-        )}
-        <OnboardingFooter horizontal align="center" justify="flex-end" flow={2}>
-          <Button small outline onClick={() => prevStep()}>
-            Go Back
-          </Button>
-          <Button big danger onClick={() => jumpStep('init')}>
-            Test JUMP!
-          </Button>
-          <Button small primary onClick={() => nextStep()}>
-            Continue
-          </Button>
-        </OnboardingFooter>
+        <OnboardingFooter
+          horizontal
+          align="center"
+          flow={2}
+          t={t}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
       </Box>
     )
   }
