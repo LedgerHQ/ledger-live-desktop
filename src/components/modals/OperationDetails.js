@@ -18,7 +18,8 @@ import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 
-import { currencySettingsSelector } from 'reducers/settings'
+import { createStructuredSelector } from 'reselect'
+import { currencySettingsForAccountSelector } from 'reducers/settings'
 
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
@@ -52,8 +53,8 @@ const B = styled(Bar).attrs({
   size: 1,
 })``
 
-const mapStateToProps = (state, props) => ({
-  minConfirmations: currencySettingsSelector(state, props.account.currency).confirmationsNb,
+const mapStateToProps = createStructuredSelector({
+  currencySettings: currencySettingsForAccountSelector,
 })
 
 type Props = {
@@ -62,20 +63,17 @@ type Props = {
   account: Account,
   type: 'from' | 'to',
   onClose: Function,
-  minConfirmations: number,
+  currencySettings: *,
   marketColor: string,
 }
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
-  const { t, type, onClose, minConfirmations, operation, account, marketColor } = props
-  const { id, amount, date } = operation
-
-  // $FlowFixMe YEAH, I know those fields should not be present in operation
-  const { from, to } = operation
+  const { t, type, onClose, operation, account, marketColor, currencySettings } = props
+  const { id, hash, amount, date, senders, recipients } = operation
 
   const { name, unit, currency } = account
   const confirmations = account.blockHeight - operation.blockHeight
-  const isConfirmed = confirmations >= minConfirmations
+  const isConfirmed = confirmations >= currencySettings.minConfirmations
   return (
     <ModalBody onClose={onClose}>
       <ModalTitle>Operation details</ModalTitle>
@@ -84,7 +82,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
           <ConfirmationCheck
             marketColor={marketColor}
             confirmations={confirmations}
-            minConfirmations={minConfirmations}
+            minConfirmations={currencySettings.minConfirmations}
             style={{
               transform: 'scale(2)',
             }}
@@ -101,8 +99,9 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                 color="grey"
                 fontSize={5}
                 date={date}
-                ticker={currency.units[0].code}
+                currency={currency}
                 value={amount}
+                exchange={currencySettings.exchange}
               />
             </Box>
           </Box>
@@ -129,34 +128,18 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         <B />
         <Line>
           <ColLeft>From</ColLeft>
-          <ColRight>
-            {from.map((v, i) => (
-              <CanSelect
-                key={i} // eslint-disable-line react/no-array-index-key
-              >
-                {v}
-              </CanSelect>
-            ))}
-          </ColRight>
+          <ColRight>{senders.map(v => <CanSelect key={v}> {v} </CanSelect>)}</ColRight>
         </Line>
         <B />
         <Line>
           <ColLeft>To</ColLeft>
-          <ColRight>
-            {to.map((v, i) => (
-              <CanSelect
-                key={i} // eslint-disable-line react/no-array-index-key
-              >
-                {v}
-              </CanSelect>
-            ))}
-          </ColRight>
+          <ColRight>{recipients.map(v => <CanSelect key={v}> {v} </CanSelect>)}</ColRight>
         </Line>
         <B />
         <Line>
           <ColLeft>Identifier</ColLeft>
           <ColRight>
-            <CanSelect>{id}</CanSelect>
+            <CanSelect>{hash}</CanSelect>
           </ColRight>
         </Line>
       </ModalContent>

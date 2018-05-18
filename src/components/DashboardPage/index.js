@@ -6,15 +6,14 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import chunk from 'lodash/chunk'
+
 import {
   formatCurrencyUnit,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
-
-import chunk from 'lodash/chunk'
-
 import type { T } from 'types/common'
 
 import { colors } from 'styles/theme'
@@ -93,6 +92,7 @@ class DashboardPage extends PureComponent<Props, State> {
     if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
       this._cacheBalance = data.totalBalance
 
+      // TODO abstract this out in a component
       ipcRenderer.send('touch-bar-update', {
         text: 'Total balance',
         color: colors.wallet,

@@ -6,9 +6,10 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import WarnBox from 'components/WarnBox'
 import { multiline } from 'styles/helpers'
-import DeviceCheckAddress from 'components/DeviceCheckAddress'
+import DeviceSignTransaction from 'components/DeviceSignTransaction'
 import DeviceConfirm from 'components/DeviceConfirm'
 
+import type { WalletBridge } from 'bridge/types'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device, T } from 'types/common'
 
@@ -31,23 +32,27 @@ const Info = styled(Box).attrs({
 type Props = {
   account: ?Account,
   device: ?Device,
+  bridge: ?WalletBridge<*>,
+  transaction: *,
   onValidate: Function,
   t: T,
 }
 
-export default (props: Props) => (
+export default ({ account, device, bridge, transaction, onValidate, t }: Props) => (
   <Container>
-    <WarnBox>{multiline(props.t('send:steps.verification.warning'))}</WarnBox>
-    <Info>{props.t('send:steps.verification.body')}</Info>
-    {// TODO: Actually create a tx
-    // DeviceCheckAddress used as a placeholder in the meantime
-    props.account &&
-      props.device && (
-        <DeviceCheckAddress
-          account={props.account}
-          device={props.device}
-          onCheck={props.onValidate}
-          render={({ isVerified }) => <DeviceConfirm notValid={isVerified === false} />}
+    <WarnBox>{multiline(t('send:steps.verification.warning'))}</WarnBox>
+    <Info>{t('send:steps.verification.body')}</Info>
+    {account &&
+      bridge &&
+      transaction &&
+      device && (
+        <DeviceSignTransaction
+          account={account}
+          device={device}
+          transaction={transaction}
+          bridge={bridge}
+          onSuccess={onValidate}
+          render={({ error }) => <DeviceConfirm notValid={!!error} />}
         />
       )}
   </Container>

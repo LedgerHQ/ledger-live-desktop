@@ -13,9 +13,8 @@ import type { State } from 'reducers'
 
 type OwnProps = {
   // wich market to query
-  // FIXME drop ticker in favor of currency
-  ticker: string,
-  currency?: Currency,
+  currency: Currency,
+  exchange: string,
 
   // when? if not given: take latest
   date?: Date,
@@ -26,28 +25,21 @@ type OwnProps = {
 type Props = OwnProps & {
   // from reducers
   counterValueCurrency: Currency,
-  value: number,
+  value: ?number,
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const { ticker, value, date } = props
-
-  if (ticker) {
-    // FIXME actually ticker should be deprecated, not currency!!
-    console.warn('CounterValue: `currency` should be passed instead of `ticker`') // eslint-disable-line no-console
+  const { currency, value, date, exchange } = props
+  if (__DEV__) {
+    if (!exchange) console.warn('CounterValue: exchange is required')
+    if (!currency) console.warn('CounterValue: currency is required')
   }
-
-  let { currency } = props
-  if (!currency && ticker) {
-    currency = generateFakeCurrency(ticker)
-  }
-
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const counterValue =
-    !counterValueCurrency || !currency
-      ? 0
-      : calculateCounterValueSelector(state)(currency, counterValueCurrency)(value, date)
-
+  const counterValue = calculateCounterValueSelector(state)(
+    currency,
+    counterValueCurrency,
+    exchange,
+  )(value, date)
   return {
     counterValueCurrency,
     value: counterValue,
@@ -57,6 +49,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
 class CounterValue extends PureComponent<Props> {
   render() {
     const { value, counterValueCurrency, date, ...props } = this.props
+    if (!value && value !== 0) return null
     return (
       <FormattedVal
         val={value}
@@ -66,27 +59,6 @@ class CounterValue extends PureComponent<Props> {
         {...props}
       />
     )
-  }
-}
-
-function generateFakeCurrency(ticker) {
-  return {
-    ticker,
-    units: [
-      {
-        code: ticker,
-
-        // unused
-        name: 'fake-unit',
-        magnitude: 0,
-      },
-    ],
-
-    // unused
-    id: '',
-    color: '#000',
-    name: 'fake-coin',
-    scheme: 'bitcoin',
   }
 }
 

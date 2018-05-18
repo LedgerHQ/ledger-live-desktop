@@ -1,22 +1,20 @@
 // @flow
 
+// FIXME this file is spaghetti. we need one file per usecase.
+
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import debug from 'debug'
-import uniqBy from 'lodash/uniqBy'
-import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
-import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY, SYNC_COUNTER_VALUES_DELAY } from 'config/constants'
+import { CHECK_UPDATE_DELAY, SYNC_ACCOUNT_DELAY } from 'config/constants'
 
 import { getAccounts, getAccountById } from 'reducers/accounts'
-import { getCounterValueCode } from 'reducers/settings'
 import { isLocked } from 'reducers/application'
 import { setUpdateStatus } from 'reducers/update'
 
-import { updateCounterValues } from 'actions/counterValues'
 import { updateAccount } from 'actions/accounts'
-import { updateDevices, addDevice, removeDevice } from 'actions/devices'
+import { addDevice, removeDevice } from 'actions/devices'
 
 import i18n from 'renderer/i18n/electron'
 
@@ -36,43 +34,10 @@ type MsgPayload = {
 let syncAccountsInProgress = false
 let syncAccountsTimeout
 
-let syncCounterValuesTimeout
-
 export function sendEvent(channel: string, msgType: string, data: any) {
   ipcRenderer.send(channel, {
     type: msgType,
     data,
-  })
-}
-
-export function runJob({
-  channel,
-  job,
-  successResponse,
-  errorResponse,
-  data,
-}: {
-  channel: string,
-  job: string,
-  successResponse: string,
-  errorResponse: string,
-  data?: any,
-}): Promise<void> {
-  return new Promise((resolve, reject) => {
-    ipcRenderer.send(channel, { type: job, data })
-    ipcRenderer.on('msg', handler)
-    function handler(e, res) {
-      const { type, data } = res
-      if (![successResponse, errorResponse].includes(type)) {
-        return
-      }
-      ipcRenderer.removeListener('msg', handler)
-      if (type === successResponse) {
-        resolve(data)
-      } else if (type === errorResponse) {
-        reject(data)
-      }
-    }
   })
 }
 
@@ -81,47 +46,6 @@ export function sendSyncEvent(channel: string, msgType: string, data: any): any 
     type: msgType,
     data,
   })
-}
-
-export function startSyncAccounts(accounts: Account[]) {
-  d.sync('Sync accounts - start')
-  syncAccountsInProgress = true
-  sendEvent('accounts', 'sync.all', {
-    accounts: accounts.map(account => {
-      const { id, currency, rootPath, addresses, index, operations } = account
-      return {
-        id,
-        currencyId: currency.id,
-        allAddresses: addresses,
-        currentIndex: index,
-        rootPath,
-        operations,
-      }
-    }),
-  })
-}
-
-export function stopSyncAccounts() {
-  d.sync('Sync accounts - stop')
-  syncAccountsInProgress = false
-  clearTimeout(syncAccountsTimeout)
-}
-
-export function startSyncCounterValues(counterValueCode: string, accounts: Account[]) {
-  d.sync('Sync counterValues - start')
-  const currencies: Currency[] = uniqBy(accounts.map(a => a.currency), 'code')
-  const counterValue = getFiatCurrencyByTicker(counterValueCode)
-  sendEvent('msg', 'counterValues.sync', { currencies, counterValue })
-}
-
-export function stopSyncCounterValues() {
-  d.sync('Sync counterValues - stop')
-  clearTimeout(syncCounterValuesTimeout)
-}
-
-export function checkUpdates() {
-  d.update('Update - check')
-  setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_DELAY)
 }
 
 export default ({ store, locked }: { store: Object, locked: boolean }) => {
@@ -186,11 +110,6 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
         },
       },
     },
-    devices: {
-      update: devices => {
-        store.dispatch(updateDevices(devices))
-      },
-    },
     device: {
       add: device => {
         d.device('Device - add')
@@ -199,17 +118,6 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
       remove: device => {
         d.device('Device - remove')
         store.dispatch(removeDevice(device))
-      },
-    },
-    counterValues: {
-      update: counterValues => {
-        store.dispatch(updateCounterValues(counterValues))
-        syncCounterValuesTimeout = setTimeout(() => {
-          const state = store.getState()
-          const accounts = getAccounts(state)
-          const counterValue = getCounterValueCode(state)
-          startSyncCounterValues(counterValue, accounts)
-        }, SYNC_COUNTER_VALUES_DELAY)
       },
     },
     updater: {
@@ -235,15 +143,12 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
   ipcRenderer.send('clean-processes')
 
   // Start detection when we plug/unplug devices
-  sendEvent('usb', 'devices.listen')
+  sendEvent('devices', 'listen')
 
   const state = store.getState()
 
   if (!locked) {
     const accounts = getAccounts(state)
-    const counterValue = getCounterValueCode(state)
-
-    startSyncCounterValues(counterValue, accounts)
 
     // Start accounts sync only if we have accounts
     if (accounts.length > 0 && !DISABLED_SYNC) {
@@ -255,4 +160,33 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     // Start check of eventual updates
     checkUpdates()
   }
+}
+
+export function startSyncAccounts(accounts: Account[]) {
+  d.sync('Sync accounts - start')
+  syncAccountsInProgress = true
+  sendEvent('accounts', 'sync', {
+    accounts: accounts.map(account => {
+      const { id, currency, walletPath, addresses, index, operations } = account
+      return {
+        id,
+        currencyId: currency.id,
+        allAddresses: addresses,
+        currentIndex: index,
+        walletPath,
+        operations,
+      }
+    }),
+  })
+}
+
+export function stopSyncAccounts() {
+  d.sync('Sync accounts - stop')
+  syncAccountsInProgress = false
+  clearTimeout(syncAccountsTimeout)
+}
+
+export function checkUpdates() {
+  d.update('Update - check')
+  setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_DELAY)
 }

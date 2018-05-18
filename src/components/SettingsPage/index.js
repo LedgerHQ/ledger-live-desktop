@@ -9,10 +9,8 @@ import { Switch, Route } from 'react-router'
 import type { RouterHistory, Match, Location } from 'react-router'
 import type { Settings, T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
-import type { FetchCounterValues } from 'actions/counterValues'
 
 import { saveSettings } from 'actions/settings'
-import { fetchCounterValues } from 'actions/counterValues'
 
 import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
@@ -22,17 +20,17 @@ import SectionCurrencies from './sections/Currencies'
 import SectionProfile from './sections/Profile'
 import SectionAbout from './sections/About'
 
+// FIXME this component should not be connected. each single tab should be.
+// maybe even each single settings row should be connected!!
 const mapStateToProps = state => ({
   settings: state.settings,
 })
 
 const mapDispatchToProps = {
-  fetchCounterValues,
   saveSettings,
 }
 
 type Props = {
-  fetchCounterValues: FetchCounterValues,
   history: RouterHistory,
   i18n: Object,
   location: Location,
@@ -99,16 +97,6 @@ class SettingsPage extends PureComponent<Props, State> {
     const url = `${match.url}/${item.key}`
     if (location.pathname !== url) {
       history.push(`${match.url}/${item.key}`)
-    }
-  }
-
-  handleSaveSettings = newSettings => {
-    const { fetchCounterValues, saveSettings, settings } = this.props
-
-    saveSettings(newSettings)
-
-    if (newSettings.counterValue !== settings.counterValue) {
-      fetchCounterValues()
     }
   }
 

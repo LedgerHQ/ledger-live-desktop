@@ -115,7 +115,7 @@ class ReceiveBox extends PureComponent<Props, State> {
     if (currentDevice !== null) {
       sendEvent('usb', 'wallet.verifyAddress', {
         pathDevice: currentDevice.path,
-        path: `${account.rootPath}${account.path}`,
+        path: `${account.walletPath}${account.path}`,
       })
 
       this.setState({

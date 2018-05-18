@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import uncontrollable from 'uncontrollable'
 import styled from 'styled-components'
 import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
 
@@ -39,17 +40,21 @@ const Currency = styled(Box).attrs({
   pr: 1,
 })``
 
+function stopPropagation(e) {
+  e.stopPropagation()
+}
+
 type Props = {
-  onChange: Function,
+  onChange: (number, Unit) => void, // FIXME Unit shouldn't be provided (this is not "standard" onChange)
+  onChangeUnit: Unit => void,
   renderRight: any,
   unit: Unit,
-  units: Array<Unit>,
+  units: Unit[],
   value: number,
   showAllDigits?: boolean,
 }
 
 type State = {
-  unit: Unit,
   isFocused: boolean,
   displayValue: string,
 }
@@ -66,7 +71,6 @@ class InputCurrency extends PureComponent<Props, State> {
   state = {
     isFocused: false,
     displayValue: '',
-    unit: this.props.unit,
   }
 
   componentDidMount() {
@@ -74,17 +78,18 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { value, showAllDigits } = this.props
-    const { unit } = this.state
+    const { value, showAllDigits, unit } = this.props
     const needsToBeReformatted =
-      value !== nextProps.value || showAllDigits !== nextProps.showAllDigits
+      value !== nextProps.value ||
+      showAllDigits !== nextProps.showAllDigits ||
+      unit !== nextProps.unit
     if (needsToBeReformatted) {
       const { isFocused } = this.state
       this.setState({
         displayValue:
           nextProps.value === 0
             ? ''
-            : format(unit, nextProps.value, {
+            : format(nextProps.unit, nextProps.value, {
                 isFocused,
                 showAllDigits: nextProps.showAllDigits,
               }),
@@ -102,8 +107,7 @@ class InputCurrency extends PureComponent<Props, State> {
 
     // forbid multiple 0 at start
     if (v === '' || v.startsWith('00')) {
-      const { onChange } = this.props
-      const { unit } = this.state
+      const { onChange, unit } = this.props
       onChange(0, unit)
       this.setState({ displayValue: '' })
       return
@@ -122,8 +126,7 @@ class InputCurrency extends PureComponent<Props, State> {
   handleFocus = () => this.syncInput({ isFocused: true })
 
   syncInput = ({ isFocused }: { isFocused: boolean }) => {
-    const { value, showAllDigits } = this.props
-    const { unit } = this.state
+    const { value, showAllDigits, unit } = this.props
     this.setState({
       isFocused,
       displayValue:
@@ -132,8 +135,8 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   emitOnChange = (v: string) => {
-    const { onChange } = this.props
-    const { displayValue, unit } = this.state
+    const { onChange, unit } = this.props
+    const { displayValue } = this.state
 
     if (displayValue.toString() !== v.toString()) {
       const satoshiValue = Number(v) * 10 ** unit.magnitude
@@ -141,30 +144,29 @@ class InputCurrency extends PureComponent<Props, State> {
     }
   }
 
+  renderItem = item => item.code
+
+  renderSelected = item => <Currency>{item.code}</Currency>
+
   renderListUnits = () => {
-    const { units, value, showAllDigits } = this.props
-    const { unit, isFocused } = this.state
+    const { units, onChangeUnit, unit } = this.props
+    const { isFocused } = this.state
 
     if (units.length <= 1) {
       return null
     }
 
     return (
-      <Currencies onClick={e => e.stopPropagation()}>
+      <Currencies onClick={stopPropagation}>
         <Select
           bg="lightGraphite"
           keyProp="code"
           flatLeft
-          onChange={item => {
-            this.setState({
-              unit: item,
-              displayValue: format(item, value, { isFocused: false, showAllDigits }),
-            })
-          }}
+          onChange={onChangeUnit}
           items={units}
           value={unit}
-          renderItem={item => item.code}
-          renderSelected={item => <Currency>{item.code}</Currency>}
+          renderItem={this.renderItem}
+          renderSelected={this.renderSelected}
           fakeFocusRight={isFocused}
         />
       </Currencies>
@@ -172,8 +174,8 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   render() {
-    const { renderRight, showAllDigits } = this.props
-    const { displayValue, unit } = this.state
+    const { renderRight, showAllDigits, unit } = this.props
+    const { displayValue } = this.state
 
     return (
       <Input
@@ -190,4 +192,6 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 }
 
-export default InputCurrency
+export default uncontrollable(InputCurrency, {
+  unit: 'onChangeUnit',
+})

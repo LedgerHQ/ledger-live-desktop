@@ -1,11 +1,11 @@
 import c from 'color'
 
-export function enrichData(data, parseTime) {
+export function enrichData(data) {
   return data.map((d, i) => ({
     ...d,
     ref: d,
     index: i,
-    parsedDate: parseTime(d.date),
+    parsedDate: d.date,
   }))
 }
 

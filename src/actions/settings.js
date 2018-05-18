@@ -1,9 +1,8 @@
 // @flow
 
-import db from 'helpers/db'
-
 import type { Dispatch } from 'redux'
 import type { Settings } from 'types/common'
+import type { Currency } from '@ledgerhq/live-common/lib/types'
 
 export type SaveSettings = Settings => { type: string, payload: Settings }
 export const saveSettings: SaveSettings = payload => ({
@@ -11,14 +10,23 @@ export const saveSettings: SaveSettings = payload => ({
   payload,
 })
 
-type FetchSettings = () => (Dispatch<*>) => void
-export const fetchSettings: FetchSettings = () => dispatch => {
-  const settings = db.get('settings')
-  if (Object.keys(settings).length === 0) {
-    return
-  }
+type FetchSettings = (*) => (Dispatch<*>) => void
+export const fetchSettings: FetchSettings = (settings: *) => dispatch => {
   dispatch({
     type: 'FETCH_SETTINGS',
     payload: settings,
   })
 }
+
+type SetExchangePairs = (
+  Array<{
+    from: Currency,
+    to: Currency,
+    exchange: string,
+  }>,
+) => *
+
+export const setExchangePairsAction: SetExchangePairs = pairs => ({
+  type: 'SETTINGS_SET_PAIRS',
+  pairs,
+})

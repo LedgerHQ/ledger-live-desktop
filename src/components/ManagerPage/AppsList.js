@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
-import { runJob } from 'renderer/events'
+import runJob from 'renderer/runJob'
 
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
@@ -74,11 +74,12 @@ class AppsList extends PureComponent<Props, State> {
   _unmounted = false
 
   async fetchList() {
+    console.log(`fetching app list`)
     const appsList =
       CACHED_APPS ||
       (await runJob({
-        channel: 'usb',
-        job: 'manager.listApps',
+        channel: 'manager',
+        job: 'listApps',
         successResponse: 'manager.listAppsSuccess',
         errorResponse: 'manager.listAppsError',
       }))

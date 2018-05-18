@@ -7,7 +7,7 @@ import { createAccountModel } from '@ledgerhq/live-common/lib/models/account'
 import every from 'lodash/every'
 import get from 'lodash/get'
 import reduce from 'lodash/reduce'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
 
 import type { State } from 'reducers'
 
@@ -38,18 +38,15 @@ const handlers: Object = {
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
-    { payload: account }: { payload: Account },
+    { accountId, updater }: { accountId: string, updater: Account => Account },
   ): AccountsState =>
     state.map(existingAccount => {
-      if (existingAccount.id !== account.id) {
+      if (existingAccount.id !== accountId) {
         return existingAccount
       }
-
-      const updatedAccount = {
-        ...existingAccount,
-        ...account,
-      }
-
+      const updatedAccount = updater(existingAccount)
+      // FIXME REMOVE orderAccountsOperations, we really shouldn't do it here.
+      // i'm sure it's unecessary 99% of the time and actually a perf issue
       return orderAccountsOperations(updatedAccount)
     }),
 
@@ -113,6 +110,13 @@ export function getAccountById(state: { accounts: AccountsState }, id: string): 
 
 export function canCreateAccount(state: State): boolean {
   return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
+}
+
+export function decodeAccount(account: AccountRaw): Account {
+  return accountModel.decode({
+    data: account,
+    version: 0, // TODO: should we keep v0 ?
+  })
 }
 
 // Yeah. `any` should be `AccountRaw[]` but it can also be a map

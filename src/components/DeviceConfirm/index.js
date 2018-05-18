@@ -165,14 +165,10 @@ const SVG = (
 
 const DeviceConfirm = (props: Props) => (
   <Wrapper {...props}>
-    {!props.notValid && <PushButton />}
+    {props.notValid ? <PushButton /> : null}
     <Check notValid={props.notValid} />
     {SVG}
   </Wrapper>
 )
-
-DeviceConfirm.defaultProps = {
-  notValid: false,
-}
 
 export default DeviceConfirm

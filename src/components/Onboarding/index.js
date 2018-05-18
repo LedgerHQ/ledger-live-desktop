@@ -7,108 +7,120 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import type { T } from 'types/common'
+import type { OnboardingState } from 'reducers/onboarding'
 
 import { saveSettings } from 'actions/settings'
+import { nextStep, prevStep, jumpStep } from 'reducers/onboarding'
+import { getCurrentDevice } from 'reducers/devices'
+
+// TODO: re-write it without auto lock, fixed width of the password modal, not dynamic titles
+import { unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
-import Button from 'components/base/Button'
 
-const STEPS = [
-  {
-    title: ({ t }) => t('onboarding:step1.title'),
-    render: ({ t }: StepProps) => <Box>{t('onboarding:step1.greetings')}</Box>,
-  },
-  {
-    title: ({ t }) => t('onboarding:step2.title'),
-    render: ({ t }: StepProps) => <Box>{t('onboarding:step2.greetings')}</Box>,
-  },
-  {
-    title: ({ t }) => t('onboarding:step3.title'),
-    render: ({ t }: StepProps) => (
-      <Box>
-        {t('onboarding:step3.greetings')}
-        <Box bg="grey" align="center" justify="center" style={{ width: 200, height: 200 }}>
-          {'step 3 image'}
-        </Box>
-        {t('onboarding:step3.description')}
-      </Box>
-    ),
-  },
-  {
-    title: ({ t }) => t('onboarding:step4.title'),
-    render: ({ t }: StepProps) => <Box>{t('onboarding:step4.greetings')}</Box>,
-  },
-]
+import Start from './steps/Start'
+import InitStep from './steps/Init'
+import OnboardingBreadcrumb from './OnboardingBreadcrumb'
+import SelectDevice from './steps/SelectDevice'
+import SelectPIN from './steps/SelectPIN'
+import WriteSeed from './steps/WriteSeed'
+import GenuineCheck from './steps/GenuineCheck'
+import SetPassword from './steps/SetPassword'
+import Analytics from './steps/Analytics'
+import Finish from './steps/Finish'
+
+const STEPS = {
+  init: InitStep,
+  selectDevice: SelectDevice,
+  selectPIN: SelectPIN,
+  writeSeed: WriteSeed,
+  genuineCheck: GenuineCheck,
+  setPassword: SetPassword,
+  analytics: Analytics,
+  finish: Finish,
+  start: Start,
+}
 
 const mapStateToProps = state => ({
   hasCompletedOnboarding: state.settings.hasCompletedOnboarding,
+  onboarding: state.onboarding,
+  getCurrentDevice: getCurrentDevice(state),
 })
 
 const mapDispatchToProps = {
   saveSettings,
+  nextStep,
+  prevStep,
+  jumpStep,
+  unlock,
 }
 
 type Props = {
   t: T,
   hasCompletedOnboarding: boolean,
   saveSettings: Function,
+  onboarding: OnboardingState,
+  prevStep: Function,
+  nextStep: Function,
+  jumpStep: Function,
+  getCurrentDevice: Function,
+  unlock: Function,
 }
 
-type StepProps = {
+export type StepProps = {
   t: T,
+  prevStep: Function,
+  nextStep: Function,
+  jumpStep: Function,
+  finish: Function,
+  savePassword: Function,
+  getDeviceInfo: Function,
 }
 
-type State = {
-  stepIndex: number,
-}
-
-class Onboarding extends PureComponent<Props, State> {
-  state = {
-    stepIndex: 0,
+class Onboarding extends PureComponent<Props> {
+  getDeviceInfo = () => this.props.getCurrentDevice
+  finish = () => this.props.saveSettings({ hasCompletedOnboarding: true })
+  savePassword = hash => {
+    this.props.saveSettings({
+      password: {
+        isEnabled: hash !== undefined,
+        value: hash,
+      },
+    })
+    this.props.unlock()
   }
 
-  prev = () => this.setState({ stepIndex: Math.max(0, this.state.stepIndex - 1) })
-  next = () => this.setState({ stepIndex: Math.min(STEPS.length - 1, this.state.stepIndex + 1) })
-  finish = () => this.props.saveSettings({ hasCompletedOnboarding: true })
-
   render() {
-    const { hasCompletedOnboarding, t } = this.props
-    const { stepIndex } = this.state
-
+    const { hasCompletedOnboarding, onboarding, prevStep, nextStep, jumpStep, t } = this.props
     if (hasCompletedOnboarding) {
       return null
     }
 
-    const step = STEPS[stepIndex]
+    const StepComponent = STEPS[onboarding.stepName]
+    const step = onboarding.steps[onboarding.stepIndex]
 
-    if (!step) {
+    if (!StepComponent || !step) {
+      console.warn(`You reached an impossible onboarding step.`) // eslint-disable-line
       return null
     }
 
-    const stepProps = {
+    const stepProps: StepProps = {
       t,
+      onboarding,
+      prevStep,
+      nextStep,
+      jumpStep,
+      finish: this.finish,
+      savePassword: this.savePassword,
+      getDeviceInfo: this.getDeviceInfo,
     }
 
     return (
       <Container>
-        <Inner>
-          <Box horizontal flow={2}>
-            <Button primary onClick={this.prev}>
-              {'prev step'}
-            </Button>
-            {stepIndex === STEPS.length - 1 ? (
-              <Button danger onClick={this.finish}>
-                {'finish'}
-              </Button>
-            ) : (
-              <Button primary onClick={this.next}>
-                {'next step'}
-              </Button>
-            )}
-          </Box>
-          <StepTitle>{step.title(stepProps)}</StepTitle>
-          {step.render(stepProps)}
-        </Inner>
+        {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
+        <StepContainer>
+          <StepComponent {...stepProps} />
+        </StepContainer>
       </Container>
     )
   }
@@ -116,30 +128,16 @@ class Onboarding extends PureComponent<Props, State> {
 
 const Container = styled(Box).attrs({
   bg: 'white',
-  p: 6,
-  align: 'center',
-  justify: 'center',
+  p: 60,
 })`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
+  z-index: 25;
 `
-
-const Inner = styled(Box).attrs({
-  bg: 'lightGraphite',
-  p: 4,
-})`
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  height: 400px;
-  width: 400px;
-  border-radius: 3px;
-`
-
-const StepTitle = styled(Box).attrs({
-  fontSize: 8,
+const StepContainer = styled(Box).attrs({
+  p: 40,
 })``
-
 export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(Onboarding)

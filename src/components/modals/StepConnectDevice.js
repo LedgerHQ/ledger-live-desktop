@@ -13,24 +13,31 @@ type Props = {
   account?: ?Account,
   currency?: ?CryptoCurrency,
   deviceSelected?: ?Device,
-  onChangeDevice: Function,
-  onStatusChange: Function,
+  onChangeDevice: Device => void,
+  onStatusChange: string => void,
 }
 
-const StepConnectDevice = (props: Props) => (
+const StepConnectDevice = ({
+  account,
+  currency,
+  accountName,
+  deviceSelected,
+  onChangeDevice,
+  onStatusChange,
+}: Props) => (
   <DeviceMonit
-    account={props.account}
-    currency={props.currency}
-    deviceSelected={props.deviceSelected}
-    onStatusChange={props.onStatusChange}
+    account={account}
+    currency={currency}
+    deviceSelected={deviceSelected}
+    onStatusChange={onStatusChange}
     render={({ currency, appStatus, devices, deviceSelected }) => (
       <DeviceConnect
-        accountName={props.accountName}
+        accountName={accountName}
         currency={currency}
         appOpened={appStatus === 'success' ? 'success' : appStatus === 'fail' ? 'fail' : null}
         devices={devices}
         deviceSelected={deviceSelected}
-        onChangeDevice={props.onChangeDevice}
+        onChangeDevice={onChangeDevice}
       />
     )}
   />

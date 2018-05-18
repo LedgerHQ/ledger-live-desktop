@@ -23,6 +23,11 @@ const textAlign = style({
   cssProperty: 'textAlign',
 })
 
+const cursor = style({
+  prop: 'cursor',
+  cssProperty: 'cursor',
+})
+
 const Box = styled.div`
   ${alignItems};
   ${borderRadius};
@@ -34,6 +39,7 @@ const Box = styled.div`
   ${justifyContent};
   ${space};
   ${textAlign};
+  ${cursor};
 
   display: flex;
   flex-shrink: ${p => (p.noShrink === true ? '0' : p.shrink === true ? '1' : '')};

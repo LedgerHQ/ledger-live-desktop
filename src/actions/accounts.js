@@ -7,10 +7,6 @@ import db from 'helpers/db'
 
 import type { Dispatch } from 'redux'
 
-import { fetchCounterValues } from 'actions/counterValues'
-
-import { startSyncAccounts, startSyncCounterValues } from 'renderer/events'
-
 function sortAccounts(accounts, orderAccounts) {
   const [order, sort] = orderAccounts.split('|')
 
@@ -44,18 +40,10 @@ export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) 
 export type AddAccount = Account => (Function, Function) => void
 export const addAccount: AddAccount = payload => (dispatch, getState) => {
   const {
-    settings: { counterValue, orderAccounts },
-    accounts,
+    settings: { orderAccounts },
   } = getState()
   dispatch({ type: 'ADD_ACCOUNT', payload })
   dispatch(updateOrderAccounts(orderAccounts))
-
-  // Start sync accounts the first time you add an account
-  if (accounts.length === 0) {
-    const accounts = [payload]
-    startSyncCounterValues(counterValue, accounts)
-    startSyncAccounts(accounts)
-  }
 }
 
 export type RemoveAccount = Account => { type: string, payload: Account }
@@ -64,7 +52,7 @@ export const removeAccount: RemoveAccount = payload => ({
   payload,
 })
 
-export type FetchAccounts = () => (Function, Function) => Promise<*, *>
+export type FetchAccounts = () => (Function, Function) => *
 export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
   const {
     settings: { orderAccounts },
@@ -74,17 +62,26 @@ export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
     type: 'SET_ACCOUNTS',
     payload: sortAccounts(accounts, orderAccounts),
   })
-  return dispatch(fetchCounterValues())
 }
 
-export type UpdateAccount = Account => (Function, Function) => void
+export type UpdateAccountWithUpdater = (accountId: string, (Account) => Account) => *
+
+export const updateAccountWithUpdater: UpdateAccountWithUpdater = (accountId, updater) => ({
+  type: 'UPDATE_ACCOUNT',
+  accountId,
+  updater,
+})
+
+export type UpdateAccount = ($Shape<Account>) => (Function, Function) => void
 export const updateAccount: UpdateAccount = payload => (dispatch, getState) => {
   const {
     settings: { orderAccounts },
   } = getState()
   dispatch({
     type: 'UPDATE_ACCOUNT',
-    payload,
+    updater: account => ({ ...account, ...payload }),
+    accountId: payload.id,
   })
   dispatch(updateOrderAccounts(orderAccounts))
+  // TODO should not be here IMO.. feels wrong for perf, probably better to move in reducer too
 }

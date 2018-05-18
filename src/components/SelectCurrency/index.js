@@ -2,12 +2,13 @@
 
 import React from 'react'
 import { translate } from 'react-i18next'
-import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { connect } from 'react-redux'
 
 import noop from 'lodash/noop'
 
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
+import { availableCurrencies } from 'reducers/settings'
 
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Select from 'components/base/Select'
@@ -27,16 +28,23 @@ const renderItem = (currency: CryptoCurrency) => {
   )
 }
 
-const currencies = listCryptoCurrencies().sort((a, b) => a.name.localeCompare(b.name))
-
-type Props = {
+type OwnProps = {
   onChange: Function,
+  currencies?: CryptoCurrency[],
   value?: CryptoCurrency,
   placeholder: string,
   t: T,
 }
 
-const SelectCurrency = ({ onChange, value, t, placeholder, ...props }: Props) => (
+type Props = OwnProps & {
+  currencies: CryptoCurrency[],
+}
+
+const mapStateToProps = (state, props: OwnProps) => ({
+  currencies: props.currencies || availableCurrencies(state),
+})
+
+const SelectCurrency = ({ onChange, value, t, placeholder, currencies, ...props }: Props) => (
   <Select
     {...props}
     value={value}
@@ -55,4 +63,4 @@ SelectCurrency.defaultProps = {
   value: undefined,
 }
 
-export default translate()(SelectCurrency)
+export default translate()(connect(mapStateToProps)(SelectCurrency))

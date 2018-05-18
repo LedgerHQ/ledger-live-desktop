@@ -12,12 +12,12 @@ import events from 'renderer/events'
 
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
-import { initCounterValues } from 'actions/counterValues'
 import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
 
 import db from 'helpers/db'
 import dbMiddleware from 'middlewares/db'
+import CounterValues from 'helpers/countervalues'
 
 import App from 'components/App'
 
@@ -29,14 +29,20 @@ if (process.env.LEDGER_RESET_ALL) {
 
 // Init db with defaults if needed
 db.init('settings', {})
-db.init('counterValues', {})
 
 const history = createHistory()
 const store = createStore({ history, dbMiddleware })
 const rootNode = document.getElementById('app')
 
-store.dispatch(fetchSettings())
-store.dispatch(initCounterValues())
+const settings = db.get('settings')
+if (Object.keys(settings).length !== 0) {
+  store.dispatch(fetchSettings(settings))
+}
+
+const countervaluesData = db.get('countervalues')
+if (countervaluesData) {
+  store.dispatch(CounterValues.importAction(store.getState()))
+}
 
 const state = store.getState()
 const language = getLanguage(state)

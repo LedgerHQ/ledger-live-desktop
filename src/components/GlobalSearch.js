@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 
 import type { T } from 'types/common'
@@ -29,6 +29,7 @@ type State = {
 
 type Props = {
   t: T,
+  isHidden: boolean,
 }
 
 class GlobalSearch extends PureComponent<Props, State> {
@@ -55,21 +56,24 @@ class GlobalSearch extends PureComponent<Props, State> {
     })
 
   render() {
-    const { t } = this.props
+    const { t, isHidden } = this.props
     const { isFocused } = this.state
-
     return (
       <Container isFocused={isFocused}>
-        <Box justifyContent="center" onClick={this.focusInput} pr={2}>
-          <IconSearch size={16} />
-        </Box>
-        <Input
-          placeholder={t('common:search')}
-          innerRef={input => (this._input = input)}
-          onBlur={this.handleBlur}
-          onFocus={this.handleFocus}
-          isFocused={isFocused}
-        />
+        {!isHidden && (
+          <Fragment>
+            <Box justifyContent="center" onClick={this.focusInput} pr={2}>
+              <IconSearch size={16} />
+            </Box>
+            <Input
+              placeholder={t('common:search')}
+              innerRef={input => (this._input = input)}
+              onBlur={this.handleBlur}
+              onFocus={this.handleFocus}
+              isFocused={isFocused}
+            />
+          </Fragment>
+        )}
       </Container>
     )
   }

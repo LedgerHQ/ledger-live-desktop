@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
-import { ipcRenderer } from 'electron'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
@@ -14,16 +13,15 @@ import { MODAL_ADD_ACCOUNT } from 'config/constants'
 
 import { closeModal } from 'reducers/modals'
 import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'
-import { sendEvent } from 'renderer/events'
 
 import { addAccount, updateAccount } from 'actions/accounts'
-import { fetchCounterValues } from 'actions/counterValues'
 
 import Box from 'components/base/Box'
 import Breadcrumb from 'components/Breadcrumb'
 import Button from 'components/base/Button'
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
+import { getBridgeForCurrency } from 'bridge'
 
 import StepCurrency from './01-step-currency'
 import StepImport from './03-step-import'
@@ -36,7 +34,7 @@ const GET_STEPS = t => [
 ]
 
 const mapStateToProps = state => ({
-  accounts: getAccounts(state),
+  existingAccounts: getAccounts(state),
   archivedAccounts: getArchivedAccounts(state),
   canCreateAccount: canCreateAccount(state),
 })
@@ -44,96 +42,80 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   addAccount,
   closeModal,
-  fetchCounterValues,
   updateAccount,
 }
 
 type Props = {
-  accounts: Account[],
+  existingAccounts: Account[],
   addAccount: Function,
   archivedAccounts: Account[],
   canCreateAccount: boolean,
   closeModal: Function,
-  fetchCounterValues: Function,
   t: T,
   updateAccount: Function,
 }
 
 type State = {
-  accountsImport: Object,
+  stepIndex: number,
+
   currency: ?CryptoCurrency,
   deviceSelected: ?Device,
+
+  selectedAccounts: Account[],
+  scannedAccounts: Account[],
+
+  // TODO: what's that.
   fetchingCounterValues: boolean,
-  selectedAccounts: Array<number>,
   appStatus: ?string,
-  stepIndex: number,
 }
 
 const INITIAL_STATE = {
-  accountsImport: {},
+  stepIndex: 0,
   currency: null,
   deviceSelected: null,
-  fetchingCounterValues: false,
+
   selectedAccounts: [],
+  scannedAccounts: [],
+
+  fetchingCounterValues: false,
   appStatus: null,
-  stepIndex: 0,
 }
 
 class AddAccountModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
-  componentDidMount() {
-    ipcRenderer.on('msg', this.handleMsgEvent)
-  }
-
-  async componentWillUpdate(nextProps, nextState) {
-    const { fetchingCounterValues, stepIndex } = this.state
-    const { stepIndex: nextStepIndex } = nextState
-
-    if (!fetchingCounterValues && stepIndex === 0 && nextStepIndex === 1) {
-      await this.fetchCounterValues()
-    }
-  }
-
   componentWillUnmount() {
-    this.killProcess()
-    ipcRenderer.removeListener('msg', this.handleMsgEvent)
-    clearTimeout(this._timeout)
+    this.handleReset()
   }
 
-  importsAccounts() {
-    const { accounts } = this.props
+  scanSubscription: *
+
+  startScanAccountsDevice() {
+    const { existingAccounts, addAccount } = this.props
     const { deviceSelected, currency } = this.state
 
     if (!deviceSelected || !currency) {
       return
     }
-
-    sendEvent('usb', 'wallet.getAccounts', {
-      pathDevice: deviceSelected.path,
-      currencyId: currency.id,
-      currentAccounts: accounts.map(acc => acc.id),
-    })
-  }
-
-  async fetchCounterValues() {
-    const { fetchCounterValues } = this.props
-    const { currency } = this.state
-
-    if (!currency) {
-      return
-    }
-
-    this.setState({
-      fetchingCounterValues: true,
-      stepIndex: 0,
-    })
-
-    await fetchCounterValues([currency])
-
-    this.setState({
-      fetchingCounterValues: false,
-      stepIndex: 1,
+    const bridge = getBridgeForCurrency(currency)
+    this.scanSubscription = bridge.scanAccountsOnDevice(currency, deviceSelected.path, {
+      next: account => {
+        if (!existingAccounts.some(a => a.id === account.id)) {
+          addAccount(account)
+          this.setState(state => ({
+            scannedAccounts: [...state.scannedAccounts, account],
+          }))
+        }
+      },
+      complete: () => {
+        // we should be able to interrupt the scan too if you want to select early etc..
+        // like imagine there are way too more accounts to scan, so you are not stuck here.
+        this.setState({ stepIndex: 3 })
+      },
+      error: error => {
+        // TODO what to do ?
+        console.error(error)
+      },
     })
   }
 
@@ -160,76 +142,26 @@ class AddAccountModal extends PureComponent<Props, State> {
 
   _steps = GET_STEPS(this.props.t)
 
-  handleMsgEvent = (e, { data, type }) => {
-    const { accountsImport, currency } = this.state
-    const { addAccount } = this.props
-
-    if (type === 'wallet.getAccounts.start') {
-      this._pid = data.pid
-    }
-
-    if (type === 'wallet.getAccounts.progress') {
-      this.setState(prev => ({
-        stepIndex: 2,
-        accountsImport: {
-          ...(data !== null
-            ? {
-                [data.id]: {
-                  ...data,
-                  name: `Account ${data.accountIndex + 1}`,
-                },
-              }
-            : {}),
-          ...prev.accountsImport,
-        },
-      }))
-
-      if (currency && data && data.finish) {
-        const { accountIndex, finish, ...account } = data
-        addAccount({
-          ...account,
-          // As data is passed inside electron event system,
-          // dates are converted to their string equivalent
-          //
-          // so, quick & dirty way to put back Date objects
-          operations: account.operations.map(op => ({
-            ...op,
-            date: new Date(op.date),
-          })),
-          name: `Account ${accountIndex + 1}`,
-          archived: true,
-          currency,
-          unit: currency.units[0],
-        })
-      }
-    }
-
-    if (type === 'wallet.getAccounts.success') {
-      this.setState({
-        selectedAccounts: Object.keys(accountsImport).map(k => accountsImport[k].id),
-        stepIndex: 3,
-      })
-    }
-  }
-
   handleChangeDevice = d => this.setState({ deviceSelected: d })
 
-  handleSelectAccount = a => () =>
-    this.setState(prev => ({
-      selectedAccounts: prev.selectedAccounts.includes(a)
-        ? prev.selectedAccounts.filter(x => x !== a)
-        : [a, ...prev.selectedAccounts],
-    }))
+  handleToggleAccount = account => {
+    const { selectedAccounts } = this.state
+    const isSelected = selectedAccounts.find(a => a === account)
+    this.setState({
+      selectedAccounts: isSelected
+        ? selectedAccounts.filter(a => a !== account)
+        : [...selectedAccounts, account],
+    })
+  }
 
   handleChangeCurrency = (currency: CryptoCurrency) => this.setState({ currency })
 
   handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 
   handleImportAccount = () => {
-    const { archivedAccounts, updateAccount, closeModal } = this.props
+    const { updateAccount } = this.props
     const { selectedAccounts } = this.state
-    const accounts = archivedAccounts.filter(a => selectedAccounts.includes(a.id))
-    accounts.forEach(a => updateAccount({ ...a, archived: false }))
+    selectedAccounts.forEach(a => updateAccount({ ...a, archived: false }))
     this.setState({ selectedAccounts: [] })
     closeModal(MODAL_ADD_ACCOUNT)
   }
@@ -243,22 +175,13 @@ class AddAccountModal extends PureComponent<Props, State> {
   }
 
   handleReset = () => {
-    this.killProcess()
-    clearTimeout(this._timeout)
     this.setState(INITIAL_STATE)
+    if (this.scanSubscription) this.scanSubscription.unsubscribe()
   }
 
-  killProcess = () =>
-    sendEvent('msg', 'kill.process', {
-      pid: this._pid,
-    })
-
-  _timeout = undefined
-  _pid = null
-
   renderStep() {
-    const { accounts, archivedAccounts, t } = this.props
-    const { stepIndex, currency, accountsImport, deviceSelected, selectedAccounts } = this.state
+    const { t, existingAccounts } = this.props
+    const { stepIndex, scannedAccounts, currency, deviceSelected, selectedAccounts } = this.state
     const step = this._steps[stepIndex]
     if (!step) {
       return null
@@ -270,31 +193,28 @@ class AddAccountModal extends PureComponent<Props, State> {
     const stepProps = {
       t,
       currency,
+      // STEP CURRENCY
       ...props(stepIndex === 0, {
         onChangeCurrency: this.handleChangeCurrency,
       }),
+      // STEP CONNECT DEVICE
       ...props(stepIndex === 1, {
         deviceSelected,
         onStatusChange: this.handleChangeStatus,
         onChangeDevice: this.handleChangeDevice,
       }),
+      // STEP ACCOUNT IMPORT PROGRESS
       ...props(stepIndex === 2, {
-        accountsImport,
-        importProgress: true,
-      }),
-      ...props(stepIndex === 3, {
-        accountsImport: Object.keys(accountsImport).reduce((result, k) => {
-          const account = accountsImport[k]
-          const existingAccount = accounts.find(a => a.id === account.id)
-          if (!existingAccount || (existingAccount && existingAccount.archived)) {
-            result[account.id] = account
-          }
-          return result
-        }, {}),
-        archivedAccounts: archivedAccounts.filter(a => !accountsImport[a.id]),
-        importProgress: false,
-        onSelectAccount: this.handleSelectAccount,
         selectedAccounts,
+        scannedAccounts,
+        existingAccounts,
+      }),
+      // STEP FINISH AND SELECT ACCOUNTS
+      ...props(stepIndex === 3, {
+        onToggleAccount: this.handleToggleAccount,
+        selectedAccounts,
+        scannedAccounts,
+        existingAccounts,
       }),
     }
 
@@ -311,7 +231,7 @@ class AddAccountModal extends PureComponent<Props, State> {
       case 1:
         onClick = () => {
           this.handleNextStep()
-          this.importsAccounts()
+          this.startScanAccountsDevice()
         }
         break
 

@@ -1,15 +1,18 @@
+import { genStoreState } from '@ledgerhq/live-common/lib/countervalues/mock'
+import {
+  getCryptoCurrencyById,
+  getFiatCurrencyByTicker,
+} from '@ledgerhq/live-common/lib/helpers/currencies'
+
 export default {
-  counterValues: {
-    BTC: {
-      USD: {
-        '2018-01-09': 0.00795978,
-        '2018-03-29': 0.007106619999999999,
-        '2018-03-30': 0.0068537599999999995,
-        '2018-03-31': 0.00694377,
-        '2018-04-01': 0.00683584,
-        '2018-04-02': 0.007061689999999999,
-        latest: 0.00706156,
-      },
+  countervalues: genStoreState([
+    {
+      from: getCryptoCurrencyById('bitcoin'),
+      to: getFiatCurrencyByTicker('USD'),
+      exchange: 'KRAKEN',
+      dateFrom: new Date(2015, 1, 1),
+      dateTo: new Date(),
+      rate: d => 0.007 + 0.003 * Math.max(0, (d / 1e12 + Math.sin(d / 1e9)) / 2),
     },
-  },
+  ]),
 }

@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { createStructuredSelector } from 'reselect'
 import moment from 'moment'
 import noop from 'lodash/noop'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
@@ -11,7 +12,7 @@ import type { Account, Operation as OperationType } from '@ledgerhq/live-common/
 
 import type { T } from 'types/common'
 
-import { currencySettingsSelector, marketIndicatorSelector } from 'reducers/settings'
+import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 import { rgba, getMarketColor } from 'styles/helpers'
 
 import Box from 'components/base/Box'
@@ -21,9 +22,9 @@ import FormattedVal from 'components/base/FormattedVal'
 
 import ConfirmationCheck from './ConfirmationCheck'
 
-const mapStateToProps = (state, props) => ({
-  minConfirmations: currencySettingsSelector(state, props.account.currency).confirmationsNb,
-  marketIndicator: marketIndicatorSelector(state),
+const mapStateToProps = createStructuredSelector({
+  currencySettings: currencySettingsForAccountSelector,
+  marketIndicator: marketIndicatorSelector,
 })
 
 const DATE_COL_SIZE = 100
@@ -49,9 +50,9 @@ const OperationRaw = styled(Box).attrs({
 `
 
 const Address = ({ value }: { value: string }) => {
-    if (!value) {
-      return <Box />
-    }
+  if (!value) {
+    return <Box />
+  }
 
   const addrSize = value.length / 2
 
@@ -101,13 +102,13 @@ const Cell = styled(Box).attrs({
 
 type Props = {
   account: Account,
-  minConfirmations: number,
+  currencySettings: *,
   onAccountClick: Function,
   onOperationClick: Function,
   marketIndicator: string,
   t: T,
   op: OperationType,
-  withAccount?: boolean,
+  withAccount: boolean,
 }
 
 class Operation extends PureComponent<Props> {
@@ -120,7 +121,7 @@ class Operation extends PureComponent<Props> {
   render() {
     const {
       account,
-      minConfirmations,
+      currencySettings,
       onAccountClick,
       onOperationClick,
       t,
@@ -144,7 +145,7 @@ class Operation extends PureComponent<Props> {
         <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
           <ConfirmationCheck
             type={type}
-            minConfirmations={minConfirmations}
+            minConfirmations={currencySettings.minConfirmations}
             confirmations={account.blockHeight - op.blockHeight}
             marketColor={marketColor}
             t={t}
@@ -200,8 +201,9 @@ class Operation extends PureComponent<Props> {
               color="grey"
               fontSize={3}
               date={time.toDate()}
-              ticker={currency.units[0].code}
+              currency={currency}
               value={op.amount}
+              exchange={currencySettings.exchange}
             />
           </Box>
         </Cell>

@@ -6,7 +6,7 @@ import get from 'lodash/get'
 
 import { serializeAccounts, deserializeAccounts } from 'reducers/accounts'
 
-type DBKey = 'settings' | 'accounts' | 'counterValues'
+type DBKey = 'settings' | 'accounts' | 'countervalues'
 
 const encryptionKey = {}
 
@@ -86,7 +86,7 @@ export default {
   },
 
   resetAll: () => {
-    const keys = ['settings', 'accounts', 'counterValues']
+    const keys = ['settings', 'accounts']
     keys.forEach(k => {
       const db = store(k)
       db.clear()

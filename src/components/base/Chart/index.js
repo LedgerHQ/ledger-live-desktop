@@ -113,9 +113,9 @@ class Chart extends PureComponent<Props> {
 
     this.refreshChart = prevProps => {
       const { _node: node, props } = this
-      const { data: raw, color, dateFormat, height, hideAxis, interactive, renderTooltip } = props
+      const { data: raw, color, height, hideAxis, interactive, renderTooltip } = props
 
-      ctx.DATA = enrichData(raw, d3.timeParse(dateFormat))
+      ctx.DATA = enrichData(raw)
 
       // Detect what needs to be updated
       ctx.INVALIDATED = {

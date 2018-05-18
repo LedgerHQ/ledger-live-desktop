@@ -4,12 +4,13 @@ import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
+import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
-import type { Currency, Account, CalculateCounterValue } from '@ledgerhq/live-common/lib/types'
+import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
-import { counterValueCurrencySelector } from 'reducers/settings'
+import { counterValueCurrencySelector, exchangeSettingsForAccountSelector } from 'reducers/settings'
 import { calculateCounterValueSelector, reverseCounterValueSelector } from 'reducers/counterValues'
 
 import InputCurrency from 'components/base/InputCurrency'
@@ -34,10 +35,12 @@ const InputCenter = styled(Box).attrs({
   width: 30px;
 `
 
-const mapStateToProps = state => ({
-  rightCurrency: counterValueCurrencySelector(state),
-  getCounterValue: calculateCounterValueSelector(state),
-  getReverseCounterValue: reverseCounterValueSelector(state),
+const mapStateToProps = createStructuredSelector({
+  exchange: exchangeSettingsForAccountSelector,
+  // $FlowFixMe
+  rightCurrency: counterValueCurrencySelector,
+  getCounterValue: calculateCounterValueSelector,
+  getReverseCounterValue: reverseCounterValueSelector,
 })
 
 type Props = {
@@ -53,6 +56,8 @@ type Props = {
   // change handler
   onChange: number => void,
 
+  exchange: string,
+
   // used to determine the left input unit
   account: Account,
 
@@ -61,8 +66,8 @@ type Props = {
   rightCurrency: Currency,
 
   // used to calculate the opposite field value (right & left)
-  getCounterValue: CalculateCounterValue,
-  getReverseCounterValue: CalculateCounterValue,
+  getCounterValue: *,
+  getReverseCounterValue: *,
 
   // display max button
   withMax: boolean,
@@ -75,28 +80,31 @@ export class RequestAmount extends PureComponent<Props> {
   }
 
   handleClickMax = () => {
-    this.props.onChange(this.props.max)
+    const { max, onChange } = this.props
+    if (isFinite(max)) {
+      onChange(max)
+    }
   }
 
   handleChangeAmount = (changedField: string) => (val: number) => {
-    const { rightCurrency, getReverseCounterValue, account, max, onChange } = this.props
+    const { rightCurrency, getReverseCounterValue, account, max, onChange, exchange } = this.props
     if (changedField === 'left') {
       onChange(val > max ? max : val)
     } else if (changedField === 'right') {
-      const leftVal = getReverseCounterValue(account.currency, rightCurrency)(val)
+      const leftVal = getReverseCounterValue(account.currency, rightCurrency, exchange)(val) || 0
       onChange(leftVal > max ? max : leftVal)
     }
   }
 
   renderInputs(containerProps: Object) {
-    const { value, account, rightCurrency, getCounterValue } = this.props
-    const right = getCounterValue(account.currency, rightCurrency)(value)
+    const { value, account, rightCurrency, getCounterValue, exchange } = this.props
+    const right = getCounterValue(account.currency, rightCurrency, exchange)(value) || 0
     const rightUnit = rightCurrency.units[0]
     return (
       <Box horizontal grow shrink>
         <InputCurrency
           containerProps={containerProps}
-          unit={account.unit}
+          defaultUnit={account.unit}
           value={value}
           onChange={this.handleChangeAmount('left')}
           renderRight={<InputRight>{account.unit.code}</InputRight>}
@@ -104,7 +112,7 @@ export class RequestAmount extends PureComponent<Props> {
         <InputCenter>=</InputCenter>
         <InputCurrency
           containerProps={containerProps}
-          unit={rightUnit}
+          defaultUnit={rightUnit}
           value={right}
           onChange={this.handleChangeAmount('right')}
           renderRight={<InputRight>{rightUnit.code}</InputRight>}

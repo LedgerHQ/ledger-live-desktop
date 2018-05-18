@@ -8,8 +8,6 @@ export type Device = {
   vendorId: string,
 }
 
-export type Devices = Array<Device>
-
 // -------------------- Settings
 
 export type CurrencySettings = {
@@ -22,6 +20,8 @@ export type CurrencySettings = {
   maxConfirmationsNb: number,
 
   transactionFees: number,
+
+  exchange: string,
 }
 
 export type CurrenciesSettings = {

@@ -20,7 +20,7 @@ import IconPieChart from 'icons/PieChart'
 import IconPlus from 'icons/Plus'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
-import IconSettings from 'icons/Settings'
+import IconExchange from 'icons/Exchange'
 
 import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -88,8 +88,8 @@ class SideBar extends PureComponent<Props> {
               <Item icon={<IconManager size={16} />} linkTo="/manager">
                 {t('sidebar:manager')}
               </Item>
-              <Item icon={<IconSettings size={16} />} linkTo="/settings">
-                {t('settings:title')}
+              <Item icon={<IconExchange size={16} />} linkTo="/exchange">
+                {t('sidebar:exchange')}
               </Item>
             </Box>
           </Box>
