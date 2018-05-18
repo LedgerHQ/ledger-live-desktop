@@ -5,7 +5,7 @@ start:
 init:
   title: Bienvenue sur Ledger Live, l'application sur ordinateur pour votre périphérique Ledger. Veuillez selectionner une des options ci-dessous
   newDevice:
-    title: Initialiser votre nouvel appareil Ledger
+    title: Mettre en route votre nouvel appareil Ledger
     desc: Please replace it with the final wording once it’s done.
   restoreDevice:
     title: Restaurer un appareil Ledger
