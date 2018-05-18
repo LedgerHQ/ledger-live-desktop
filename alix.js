@@ -13,7 +13,7 @@ const {
   getWallet,
   syncAccount,
   signTransaction,
-} = require('ledger-core')
+} = require('@ledgerhq/ledger-core')
 
 async function getOrCreateWallet(currencyId) {
   try {

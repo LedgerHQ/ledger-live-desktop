@@ -1456,6 +1456,19 @@
   dependencies:
     events "^2.0.0"
 
+"@ledgerhq/ledger-core@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-1.0.1.tgz#5563e76718f73f270a4d2059cdf616cec3506975"
+  dependencies:
+    "@ledgerhq/hw-app-btc" "^4.7.3"
+    "@ledgerhq/hw-transport-node-hid" "^4.7.6"
+    axios "^0.18.0"
+    babel-runtime "^6.26.0"
+    bindings "^1.3.0"
+    nan "^2.6.2"
+    npm "^5.7.1"
+    prebuild-install "^2.2.2"
+
 "@ledgerhq/live-common@^2.5.0":
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.5.0.tgz#ec9d1d6aac301ab9da7463e601e96a1181290ed5"
@@ -8614,19 +8627,6 @@ lcid@^1.0.0:
 leb@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/leb/-/leb-0.3.0.tgz#32bee9fad168328d6aea8522d833f4180eed1da3"
-
-ledger-core@meriadec/lib-ledger-core-node-bindings#883d7fd:
-  version "1.0.0"
-  resolved "https://codeload.github.com/meriadec/lib-ledger-core-node-bindings/tar.gz/883d7fd7b141acd03d2f69ee2b735cd7e973f2c7"
-  dependencies:
-    "@ledgerhq/hw-app-btc" "^4.7.3"
-    "@ledgerhq/hw-transport-node-hid" "^4.7.6"
-    axios "^0.18.0"
-    babel-runtime "^6.26.0"
-    bindings "^1.3.0"
-    nan "^2.6.2"
-    npm "^5.7.1"
-    prebuild-install "^2.2.2"
 
 left-pad@^1.2.0:
   version "1.3.0"
