@@ -16,6 +16,7 @@ mac:
 
 linux:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
+  category: Finance
   target:
     - target: AppImage
       arch:
