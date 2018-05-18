@@ -1,23 +1,23 @@
 ---
 start:
-  title: Bienvenue sur la nouvelle application Ledger Live.
-  desc: Commençons !
+  title: Welcome to the new Ledger Live Desktop app.
+  desc: Let’s get started!
 init:
-  title: Bienvenue sur Ledger Live, l'application sur ordinateur pour votre périphérique Ledger. Veuillez selectionner une des options ci-dessous
+  title: Welcome to Ledger Live, the computer companion app to your Ledger device. Please select one of the options below
   newDevice:
-    title: Mettre en route votre nouvel appareil Ledger
+    title: Initialize your new Ledger device
     desc: Please replace it with the final wording once it’s done.
   restoreDevice:
-    title: Restaurer un appareil Ledger
+    title: Restore a Ledger device
     desc: Please replace it with the final wording once it’s done.
   initializedDevice:
-    title: J'ai déjà initialisé mon appareil
+    title: I have already initialized my device
     desc: Please replace it with the final wording once it’s done.
   noDevice:
-    title: Vous n'avez pas encore d'appareil Ledger ? Achetez-en un
+    title: Do not have a Ledger device yet? Buy one
     desc: Please replace it with the final wording once it’s done.
 selectDevice:
-  title: Pour commencer, veuillez sélectionner votre appareil
+  title: To get started, select your device
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   ledgerNanoCard:
     title: Ledger Nano S
@@ -26,24 +26,24 @@ selectDevice:
     title: Ledger Blue
     desc: Please replace it with the final wording once it’s done.
 selectPIN:
-  title: Entrez un code PIN
+  title: Select PIN code
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   instructions:
-    step1: Connectez votre Ledger Nano S à votre ordinateur en utilisant le cable micro USB fourni.
-    step2: Pressez simultanément les deux boutons comme indiqué sur l'écran de votre Ledger Nano S.
-    step3: Selectionnez Configurer comme un nouvel appareil sur votre Ledger Nano S en pressant le bouton de droite, situé au dessus de l'icône de validation.
-    step4: Choisissez un code PIN de 4 à 8 chiffres.
+    step1: Connect your Ledger Nano S to your computer using the supplied micro USB cable.
+    step2: Press both buttons simultaneously as instructed on your Ledger Nano S screen.
+    step3: Select Configure as new device on your Ledger Nano S by pressing the right button, located above the validation icon.
+    step4: Choose a PIN code between 4 and 8 digits long.
 writeSeed:
-  title: Phrase de récupération
-  desc: Les 24 mots que constituent votre phrase de récupération vont maintenant être affichés un à un sur l'écran de votre Ledger Nano S. Ces 24 mots ne seront affichés qu'une seule fois durant l'initialisation.
+  title: 24-Word Recovery phrase
+  desc: The 24 words that constitute your recovery phrase will now be displayed one by one on the Ledger Nano S screen. These 24 words will be displayed only once during this initialization.
   instructions:
-    step1: Notez le premier mot (Word \
-    step2: Aller à Word \
-    step3: Réitérez le processus jusqu'à ce que les 24 mots soient copiés sur la fiche de récupération.
-    step4: Pour vérifier, utilisez les boutons droit ou gauche et sélectionnez chacun des 24 mots dans le bon ordre.
-    step5: Validez chaque mot en appuyant simultanément sur les deux boutons.
+    step1: Copy the first word (Word \
+    step2: Move to Word \
+    step3: Repeat the process until all 24 words are copied on the Recovery sheet.
+    step4: To confirm, use the right or left button to select each of the 24 words in the right order.
+    step5: Validate each word by simultaneously pressing both buttons.
 finish:
-  title: Ceci est le titre de l'écran. 1 ligne maximum
+  title: This is the title of the screen. 1 line is the maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-  openAppButton: Ouvrir l'application
-  followUsLabel: Suivez-nous pour ne rien rater
+  openAppButton: Open app
+  followUsLabel: Follow us to stay updated
