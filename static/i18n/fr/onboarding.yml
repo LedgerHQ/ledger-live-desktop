@@ -40,10 +40,10 @@ writeSeed:
     step1: Notez le premier mot (Word \
     step2: Aller à Word \
     step3: Réitérez le processus jusqu'à ce que les 24 mots soient copiés sur la fiche de récupération.
-    step4: To confirm, use the right or left button to select each of the 24 words in the right order.
+    step4: Pour vérifier, utilisez les boutons droit ou gauche et sélectionnez chacun des 24 mots dans le bon ordre.
     step5: Validez chaque mot en appuyant simultanément sur les deux boutons.
 finish:
-  title: This is the title of the screen. 1 line is the maximum
+  title: Ceci est le titre de l'écran. 1 ligne maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   openAppButton: Ouvrir l'application
   followUsLabel: Suivez-nous pour ne rien rater
