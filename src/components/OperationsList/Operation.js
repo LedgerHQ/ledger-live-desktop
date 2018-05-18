@@ -108,7 +108,7 @@ type Props = {
   marketIndicator: string,
   t: T,
   op: OperationType,
-  withAccount?: boolean,
+  withAccount: boolean,
 }
 
 class Operation extends PureComponent<Props> {

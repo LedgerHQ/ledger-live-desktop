@@ -25,8 +25,8 @@ yarn
 # ENV VARIABLES
 # -------------
 
-# Where errors will be tracked
-SENTRY_URL=http://...
+# Where errors will be tracked (you may not want to edit this line)
+# SENTRY_URL=
 
 # OPTIONAL ENV VARIABLES
 # ----------------------
@@ -37,6 +37,9 @@ DEV_TOOLS_MODE=bottom
 
 # Filter debug output
 DEBUG=lwd*,-lwd:syncb
+
+# hide the dev window
+HIDE_DEV_WINDOW=0
 ```
 
 #### Development commands

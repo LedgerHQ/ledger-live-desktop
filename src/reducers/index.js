@@ -14,6 +14,7 @@ import modals from './modals'
 import settings from './settings'
 import update from './update'
 import onboarding from './onboarding'
+import bridgeSync from './bridgeSync'
 
 import type { AccountsState } from './accounts'
 import type { ApplicationState } from './application'
@@ -22,6 +23,7 @@ import type { ModalsState } from './modals'
 import type { SettingsState } from './settings'
 import type { UpdateState } from './update'
 import type { OnboardingState } from './onboarding'
+import type { BridgeSyncState } from './bridgeSync'
 
 export type State = {
   accounts: AccountsState,
@@ -33,6 +35,7 @@ export type State = {
   settings: SettingsState,
   update: UpdateState,
   onboarding: OnboardingState,
+  bridgeSync: BridgeSyncState,
 }
 
 export default combineReducers({
@@ -45,4 +48,5 @@ export default combineReducers({
   settings,
   update,
   onboarding,
+  bridgeSync,
 })

@@ -14,7 +14,7 @@ import { isLocked } from 'reducers/application'
 import { setUpdateStatus } from 'reducers/update'
 
 import { updateAccount } from 'actions/accounts'
-import { updateDevices, addDevice, removeDevice } from 'actions/devices'
+import { addDevice, removeDevice } from 'actions/devices'
 
 import i18n from 'renderer/i18n/electron'
 
@@ -41,71 +41,11 @@ export function sendEvent(channel: string, msgType: string, data: any) {
   })
 }
 
-export function runJob({
-  channel,
-  job,
-  successResponse,
-  errorResponse,
-  data,
-}: {
-  channel: string,
-  job: string,
-  successResponse: string,
-  errorResponse: string,
-  data?: any,
-}): Promise<void> {
-  return new Promise((resolve, reject) => {
-    ipcRenderer.send(channel, { type: job, data })
-    ipcRenderer.on('msg', handler)
-    function handler(e, res) {
-      const { type, data } = res
-      if (![successResponse, errorResponse].includes(type)) {
-        return
-      }
-      ipcRenderer.removeListener('msg', handler)
-      if (type === successResponse) {
-        resolve(data)
-      } else if (type === errorResponse) {
-        reject(data)
-      }
-    }
-  })
-}
-
 export function sendSyncEvent(channel: string, msgType: string, data: any): any {
   return ipcRenderer.sendSync(`${channel}:sync`, {
     type: msgType,
     data,
   })
-}
-
-export function startSyncAccounts(accounts: Account[]) {
-  d.sync('Sync accounts - start')
-  syncAccountsInProgress = true
-  sendEvent('accounts', 'sync.all', {
-    accounts: accounts.map(account => {
-      const { id, currency, rootPath, addresses, index, operations } = account
-      return {
-        id,
-        currencyId: currency.id,
-        allAddresses: addresses,
-        currentIndex: index,
-        rootPath,
-        operations,
-      }
-    }),
-  })
-}
-
-export function stopSyncAccounts() {
-  d.sync('Sync accounts - stop')
-  syncAccountsInProgress = false
-  clearTimeout(syncAccountsTimeout)
-}
-
-export function checkUpdates() {
-  d.update('Update - check')
-  setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_DELAY)
 }
 
 export default ({ store, locked }: { store: Object, locked: boolean }) => {
@@ -170,11 +110,6 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
         },
       },
     },
-    devices: {
-      update: devices => {
-        store.dispatch(updateDevices(devices))
-      },
-    },
     device: {
       add: device => {
         d.device('Device - add')
@@ -208,7 +143,7 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
   ipcRenderer.send('clean-processes')
 
   // Start detection when we plug/unplug devices
-  sendEvent('usb', 'devices.listen')
+  sendEvent('devices', 'listen')
 
   const state = store.getState()
 
@@ -225,4 +160,33 @@ export default ({ store, locked }: { store: Object, locked: boolean }) => {
     // Start check of eventual updates
     checkUpdates()
   }
+}
+
+export function startSyncAccounts(accounts: Account[]) {
+  d.sync('Sync accounts - start')
+  syncAccountsInProgress = true
+  sendEvent('accounts', 'sync', {
+    accounts: accounts.map(account => {
+      const { id, currency, walletPath, addresses, index, operations } = account
+      return {
+        id,
+        currencyId: currency.id,
+        allAddresses: addresses,
+        currentIndex: index,
+        walletPath,
+        operations,
+      }
+    }),
+  })
+}
+
+export function stopSyncAccounts() {
+  d.sync('Sync accounts - stop')
+  syncAccountsInProgress = false
+  clearTimeout(syncAccountsTimeout)
+}
+
+export function checkUpdates() {
+  d.update('Update - check')
+  setTimeout(() => sendEvent('msg', 'updater.init'), CHECK_UPDATE_DELAY)
 }

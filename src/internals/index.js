@@ -17,23 +17,21 @@ function sendEvent(type: string, data: any, options: Object = { kill: true }) {
 }
 
 // $FlowFixMe
-const func = require(`./${FORK_TYPE}`) // eslint-disable-line import/no-dynamic-require
+let handlers = require(`./${FORK_TYPE}`) // eslint-disable-line import/no-dynamic-require
+// handle babel export object syntax
+if (handlers.default) {
+  handlers = handlers.default
+}
 
-const handlers = Object.keys(func).reduce((result, key) => {
-  result[key] = func[key](sendEvent)
-  return result
-}, {})
-
-const onMessage = payload => {
+process.on('message', payload => {
   const { type, data } = payload
   const handler = objectPath.get(handlers, type)
   if (!handler) {
+    console.warn(`No handler found for ${type}`)
     return
   }
-  handler(data)
-}
-
-process.on('message', onMessage)
+  handler(sendEvent, data)
+})
 
 if (__DEV__ || DEV_TOOLS) {
   cpuUsage(cpuPercent =>

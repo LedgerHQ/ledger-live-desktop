@@ -2,15 +2,18 @@
 
 import '@babel/polyfill'
 import { fork } from 'child_process'
-import { BrowserWindow, ipcMain } from 'electron'
+import { BrowserWindow, ipcMain, app } from 'electron'
 import objectPath from 'object-path'
-import { resolve } from 'path'
+import path from 'path'
 
 import cpuUsage from 'helpers/cpuUsage'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
 const { DEV_TOOLS } = process.env
+
+// sqlite files will be located in the app local data folder
+const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
 
 const processes = []
 
@@ -25,14 +28,15 @@ function sendEventToWindow(name, { type, data }) {
   }
 }
 
-function onForkChannel(forkType, callType) {
+function onForkChannel(forkType) {
   return (event: any, payload) => {
     const { type, data } = payload
 
-    let compute = fork(resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), {
+    let compute = fork(path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), {
       env: {
         DEV_TOOLS,
         FORK_TYPE: forkType,
+        LEDGER_LIVE_SQLITE_PATH,
       },
     })
 
@@ -51,12 +55,7 @@ function onForkChannel(forkType, callType) {
       if (options.window) {
         sendEventToWindow(options.window, { type, data })
       } else {
-        if (callType === 'async') {
-          event.sender.send('msg', { type, data })
-        }
-        if (callType === 'sync') {
-          event.returnValue = { type, data }
-        }
+        event.sender.send('msg', { type, data })
       }
       if (options.kill && compute) {
         kill()
@@ -71,8 +70,9 @@ function onForkChannel(forkType, callType) {
 }
 
 // Forwards every `type` messages to another process
-ipcMain.on('usb', onForkChannel('usb', 'async'))
-ipcMain.on('accounts', onForkChannel('accounts', 'async'))
+ipcMain.on('devices', onForkChannel('devices'))
+ipcMain.on('accounts', onForkChannel('accounts'))
+ipcMain.on('manager', onForkChannel('manager'))
 
 ipcMain.on('clean-processes', cleanProcesses)
 
@@ -94,6 +94,7 @@ ipcMain.on('msg', (event: any, payload) => {
   const { type, data } = payload
   const handler = objectPath.get(handlers, type)
   if (!handler) {
+    console.warn(`No handler found for ${type}`)
     return
   }
   const send = (type: string, data: *) => event.sender.send('msg', { type, data })

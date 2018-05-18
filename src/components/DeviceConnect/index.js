@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
-import type { T, Device, Devices } from 'types/common'
+import type { T, Device } from 'types/common'
 
 import noop from 'lodash/noop'
 
@@ -139,9 +139,9 @@ type Props = {
   accountName: null | string,
   appOpened: null | 'success' | 'fail',
   currency: CryptoCurrency,
-  devices: Devices,
-  deviceSelected: Device | null,
-  onChangeDevice: Function,
+  devices: Device[],
+  deviceSelected: ?Device,
+  onChangeDevice: Device => void,
   t: T,
 }
 

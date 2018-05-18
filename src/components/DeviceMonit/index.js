@@ -80,10 +80,11 @@ class DeviceMonit extends PureComponent<Props, State> {
       return
     }
 
-    sendEvent('usb', 'wallet.checkIfAppOpened', {
+    sendEvent('devices', 'checkIfAppOpened', {
       devicePath: currentDevice.path,
       accountPath: account.path,
       accountAddress: account.address,
+      segwit: account.path.startsWith("49'"), // TODO: store segwit info in account
     })
   }
 
@@ -96,12 +97,12 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 
   handleMsgEvent = (e, { type }) => {
-    if (type === 'wallet.checkIfAppOpened.success') {
+    if (type === 'devices.checkIfAppOpened.success') {
       this.handleStatusChange('appOpened')
       clearTimeout(this._timeout)
     }
 
-    if (type === 'wallet.checkIfAppOpened.fail') {
+    if (type === 'devices.checkIfAppOpened.fail') {
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
   }

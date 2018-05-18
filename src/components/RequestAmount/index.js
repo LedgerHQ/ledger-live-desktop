@@ -80,7 +80,10 @@ export class RequestAmount extends PureComponent<Props> {
   }
 
   handleClickMax = () => {
-    this.props.onChange(this.props.max)
+    const { max, onChange } = this.props
+    if (isFinite(max)) {
+      onChange(max)
+    }
   }
 
   handleChangeAmount = (changedField: string) => (val: number) => {
@@ -101,7 +104,7 @@ export class RequestAmount extends PureComponent<Props> {
       <Box horizontal grow shrink>
         <InputCurrency
           containerProps={containerProps}
-          unit={account.unit}
+          defaultUnit={account.unit}
           value={value}
           onChange={this.handleChangeAmount('left')}
           renderRight={<InputRight>{account.unit.code}</InputRight>}
@@ -109,7 +112,7 @@ export class RequestAmount extends PureComponent<Props> {
         <InputCenter>=</InputCenter>
         <InputCurrency
           containerProps={containerProps}
-          unit={rightUnit}
+          defaultUnit={rightUnit}
           value={right}
           onChange={this.handleChangeAmount('right')}
           renderRight={<InputRight>{rightUnit.code}</InputRight>}

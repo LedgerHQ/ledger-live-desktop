@@ -6,7 +6,6 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { withRouter } from 'react-router'
-import { ipcRenderer } from 'electron'
 
 import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
@@ -15,7 +14,6 @@ import { rgba, darken } from 'styles/helpers'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
-import IconActivity from 'icons/Activity'
 import IconDevices from 'icons/Devices'
 import IconLock from 'icons/Lock'
 import IconSettings from 'icons/Settings'
@@ -23,7 +21,7 @@ import IconSettings from 'icons/Settings'
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
 
-import CounterValues from 'helpers/countervalues'
+import ActivityIndicator from './ActivityIndicator'
 
 const Container = styled(Box).attrs({
   px: 6,
@@ -62,22 +60,6 @@ const SettingButtonContainer = styled(Box).attrs({
   }
 `
 
-const Activity = styled.div`
-  background: ${p =>
-    p.progress === true
-      ? p.theme.colors.wallet
-      : p.fail === true
-        ? p.theme.colors.alertRed
-        : p.theme.colors.positiveGreen};
-  border-radius: 50%;
-  bottom: 20px;
-  height: 4px;
-  position: absolute;
-  right: -2px;
-  width: 4px;
-  cursor: pointer;
-`
-
 const mapStateToProps = state => ({
   hasPassword: hasPassword(state),
 })
@@ -94,58 +76,7 @@ type Props = {
   t: T,
 }
 
-type State = {
-  sync: {
-    progress: null | boolean,
-    fail: boolean,
-  },
-}
-
-class TopBar extends PureComponent<Props, State> {
-  state = {
-    sync: {
-      progress: null,
-      fail: false,
-    },
-  }
-
-  componentDidMount() {
-    ipcRenderer.on('msg', this.handleAccountSync)
-  }
-
-  componentWillUnmount() {
-    ipcRenderer.removeListener('msg', this.handleAccountSync)
-  }
-
-  handleAccountSync = (e, { type }) => {
-    if (type === 'accounts.sync.progress') {
-      this.setState({
-        sync: {
-          progress: true,
-          fail: false,
-        },
-      })
-    }
-
-    if (type === 'accounts.sync.fail') {
-      this.setState({
-        sync: {
-          progress: null,
-          fail: true,
-        },
-      })
-    }
-
-    if (type === 'accounts.sync.success') {
-      this.setState({
-        sync: {
-          progress: false,
-          fail: false,
-        },
-      })
-    }
-  }
-
+class TopBar extends PureComponent<Props> {
   handleLock = () => this.props.lock()
 
   navigateToSettings = () => {
@@ -158,7 +89,6 @@ class TopBar extends PureComponent<Props, State> {
   }
   render() {
     const { hasPassword, t } = this.props
-    const { sync } = this.state
 
     return (
       <Container bg="lightGrey" color="graphite">
@@ -168,29 +98,14 @@ class TopBar extends PureComponent<Props, State> {
             <Box justifyContent="center">
               <IconDevices size={16} />
             </Box>
-            <CounterValues.PollingConsumer>
-              {polling => (
-                <Box
-                  justifyContent="center"
-                  relative
-                  cursor="pointer"
-                  onClick={() => polling.poll()}
-                >
-                  <IconActivity size={16} />
-                  <Activity
-                    progress={polling.pending || sync.progress}
-                    fail={polling.error || sync.fail}
-                  />
-                </Box>
-              )}
-            </CounterValues.PollingConsumer>
+            <ActivityIndicator />
             <Box justifyContent="center">
               <Bar />
             </Box>
             <SettingButtonContainer onClick={this.navigateToSettings}>
               <IconSettings size={16} />
             </SettingButtonContainer>
-            {hasPassword && (
+            {hasPassword && ( // FIXME this should be a dedicated component. therefore this component don't need to connect()
               <Fragment>
                 <Box justifyContent="center">
                   <Bar />

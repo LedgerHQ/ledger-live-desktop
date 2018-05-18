@@ -2,11 +2,11 @@
 
 import { handleActions } from 'redux-actions'
 
-import type { Device, Devices } from 'types/common'
+import type { Device } from 'types/common'
 
 export type DevicesState = {
   currentDevice: Device | null,
-  devices: Devices,
+  devices: Device[],
 }
 
 const state: DevicesState = {
@@ -20,11 +20,6 @@ function setCurrentDevice(state) {
 }
 
 const handlers: Object = {
-  UPDATE_DEVICES: (state: DevicesState, { payload: devices }: { payload: Devices }) =>
-    setCurrentDevice({
-      ...state,
-      devices,
-    }),
   ADD_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) =>
     setCurrentDevice({
       ...state,

@@ -40,7 +40,7 @@ stories.add('InputCurrency', () => (
     render={({ value, unit, onChange }) => (
       <InputCurrency
         value={value}
-        unit={unit}
+        defaultUnit={unit}
         units={units}
         onChange={onChange}
         showAllDigits={boolean('showAllDigits', false)}
