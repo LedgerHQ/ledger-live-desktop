@@ -8,16 +8,16 @@ init:
     title: Initialiser votre nouvel appareil Ledger
     desc: Please replace it with the final wording once it’s done.
   restoreDevice:
-    title: Restore a Ledger device
+    title: Restaurer un appareil Ledger
     desc: Please replace it with the final wording once it’s done.
   initializedDevice:
-    title: I have already initialized my device
+    title: J'ai déjà initialisé mon appareil
     desc: Please replace it with the final wording once it’s done.
   noDevice:
-    title: Do not have a Ledger device yet? Buy one
+    title: Vous n'avez pas encore d'appareil Ledger ? Achetez-en un
     desc: Please replace it with the final wording once it’s done.
 selectDevice:
-  title: To get started, select your device
+  title: Pour commencer, veuillez sélectionner votre appareil
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   ledgerNanoCard:
     title: Ledger Nano S
