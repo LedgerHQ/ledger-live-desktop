@@ -14,6 +14,7 @@ import type { Settings, CurrencySettings } from 'types/common'
 import type { State } from 'reducers'
 
 export type SettingsState = {
+  loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
   counterValue: string,
   language: string,
@@ -35,21 +36,6 @@ const localeSplit = window.navigator.language.split('-')
 const language = (localeSplit[0] || 'en').toLowerCase()
 const region = (localeSplit[1] || 'US').toUpperCase()
 
-const defaultState: SettingsState = {
-  hasCompletedOnboarding: false,
-  counterValue: 'USD',
-  language,
-  orderAccounts: 'balance|asc',
-  password: {
-    isEnabled: false,
-    value: '',
-  },
-  marketIndicator: 'western',
-  currenciesSettings: {},
-  region,
-  developerMode: false,
-}
-
 const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
   confirmationsToSpend: 10,
   minConfirmationsToSpend: 10, // FIXME DROP
@@ -65,7 +51,19 @@ const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
 }
 
 const state: SettingsState = {
-  ...defaultState,
+  hasCompletedOnboarding: false,
+  counterValue: 'USD',
+  language,
+  orderAccounts: 'balance|asc',
+  password: {
+    isEnabled: false,
+    value: '',
+  },
+  marketIndicator: 'western',
+  currenciesSettings: {},
+  region,
+  developerMode: false,
+  loaded: false,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
@@ -107,6 +105,7 @@ const handlers: Object = {
   FETCH_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => ({
     ...state,
     ...settings,
+    loaded: true,
   }),
 }
 
@@ -143,6 +142,8 @@ export const localeSelector = (state: State) => {
 }
 
 export const getOrderAccounts = (state: State) => state.settings.orderAccounts
+
+export const areSettingsLoaded = (state: State) => state.settings.loaded
 
 export const currencySettingsSelector = (
   state: State,
