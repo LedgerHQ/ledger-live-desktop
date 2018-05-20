@@ -23,7 +23,6 @@ import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/SideBar'
 import TopBar from 'components/TopBar'
-import UpdateNotifier from 'components/UpdateNotifier'
 
 const Container = styled(GrowScroll).attrs({
   p: 6,
@@ -87,7 +86,6 @@ class Default extends Component<Props> {
 
             <Box shrink grow bg="lightGrey" color="grey" relative>
               <TopBar />
-              <UpdateNotifier />
               <Container innerRef={n => (this._scrollContainer = n)} onScroll={this.handleScroll}>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
