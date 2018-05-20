@@ -3,7 +3,6 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
-import { Motion, spring } from 'react-motion'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -11,6 +10,8 @@ import { getUpdateStatus, getUpdateData } from 'reducers/update'
 import { sendEvent } from 'renderer/events'
 import type { State } from 'reducers'
 import type { UpdateStatus } from 'reducers/update'
+
+import { radii } from 'styles/theme'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -28,18 +29,15 @@ const mapStateToProps = (state: State) => ({
 })
 
 const Container = styled(Box).attrs({
-  p: 1,
+  py: 1,
+  px: 3,
   bg: 'wallet',
   color: 'white',
   style: p => ({
     transform: `translate3d(0, ${p.offset}%, 0)`,
   }),
 })`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
+  border-radius: ${radii[1]}px;
 `
 
 class UpdateNotifier extends PureComponent<Props> {
@@ -57,12 +55,14 @@ class UpdateNotifier extends PureComponent<Props> {
         return (
           <Box horizontal flow={2}>
             <Text fontWeight="bold">{t('update:newVersionReady')}</Text>
-            <Text
-              style={{ cursor: 'pointer' }}
-              onClick={() => sendEvent('msg', 'updater:quitAndInstall')}
-            >
-              {t('update:relaunch')}
-            </Text>
+            <Box ml="auto">
+              <Text
+                style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                onClick={() => sendEvent('msg', 'updater.quitAndInstall')}
+              >
+                {t('update:relaunch')}
+              </Text>
+            </Box>
           </Box>
         )
       default:
@@ -71,18 +71,14 @@ class UpdateNotifier extends PureComponent<Props> {
   }
 
   render() {
-    const { updateStatus } = this.props
+    const { updateStatus, ...props } = this.props
 
     const isToggled = updateStatus === 'downloaded'
-    return (
-      <Motion
-        style={{
-          offset: spring(isToggled ? 0 : -100),
-        }}
-      >
-        {m => <Container offset={m.offset}>{this.renderStatus()}</Container>}
-      </Motion>
-    )
+
+    if (!isToggled) {
+      return null
+    }
+    return <Container {...props}>{this.renderStatus()}</Container>
   }
 }
 

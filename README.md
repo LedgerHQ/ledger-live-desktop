@@ -9,7 +9,16 @@
 
 #### Requirements
 
-Project has been tested under [NodeJS](https://nodejs.org) v9.3.0, with [Yarn](https://yarnpkg.com) v1.3.0 and [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons). You will also need a C++ compiler.
+Project has been tested with
+
+- [NodeJS](https://nodejs.org) v9.3.0
+- [Yarn](https://yarnpkg.com) v1.3.0
+- [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
+- You will also need a C++ compiler
+
+#### Optional
+
+- `Museo Sans` font - for Ledger guys, [follow that link](https://drive.google.com/drive/folders/14R6kGFtx53DuqTyIOjnT7BGogzeyMSzN), download `museosans.zip` and extract it inside the `static/fonts/museosans` directory
 
 #### Setup
 

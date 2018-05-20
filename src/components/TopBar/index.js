@@ -10,7 +10,7 @@ import { withRouter } from 'react-router'
 import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
-import { rgba, darken } from 'styles/helpers'
+import { rgba } from 'styles/helpers'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 
@@ -22,6 +22,7 @@ import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
 
 import ActivityIndicator from './ActivityIndicator'
+import ItemContainer from './ItemContainer'
 
 const Container = styled(Box).attrs({
   px: 6,
@@ -43,21 +44,11 @@ const Inner = styled(Box).attrs({
 `
 
 const Bar = styled.div`
+  margin-left: 5px;
+  margin-right: 5px;
   height: 15px;
   width: 1px;
   background: ${p => p.theme.colors.fog};
-`
-
-const SettingButtonContainer = styled(Box).attrs({
-  px: 4,
-  ml: 0,
-  justifyContent: 'center',
-  cursor: 'pointer',
-})`
-  &:hover > * {
-    color: ${p => darken(p.theme.colors.graphite, 0.15)};
-    cursor: pointer;
-  }
 `
 
 const mapStateToProps = state => ({
@@ -93,26 +84,26 @@ class TopBar extends PureComponent<Props> {
     return (
       <Container bg="lightGrey" color="graphite">
         <Inner>
-          <Box grow horizontal flow={4}>
+          <Box grow horizontal>
             <GlobalSearch t={t} isHidden />
-            <Box justifyContent="center">
+            <ItemContainer justifyContent="center">
               <IconDevices size={16} />
-            </Box>
+            </ItemContainer>
             <ActivityIndicator />
             <Box justifyContent="center">
               <Bar />
             </Box>
-            <SettingButtonContainer onClick={this.navigateToSettings}>
+            <ItemContainer interactive onClick={this.navigateToSettings}>
               <IconSettings size={16} />
-            </SettingButtonContainer>
+            </ItemContainer>
             {hasPassword && ( // FIXME this should be a dedicated component. therefore this component don't need to connect()
               <Fragment>
                 <Box justifyContent="center">
                   <Bar />
                 </Box>
-                <Box justifyContent="center" onClick={this.handleLock}>
+                <ItemContainer interactive justifyContent="center" onClick={this.handleLock}>
                   <IconLock size={16} />
-                </Box>
+                </ItemContainer>
               </Fragment>
             )}
           </Box>

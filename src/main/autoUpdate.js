@@ -1,5 +1,6 @@
 // @flow
 
+import { app, BrowserWindow } from 'electron'
 import { autoUpdater } from 'electron-updater'
 
 type SendFunction = (type: string, data: *) => void
@@ -16,5 +17,16 @@ export default (notify: SendFunction) => {
 }
 
 export function quitAndInstall() {
-  autoUpdater.quitAndInstall()
+  setImmediate(() => {
+    const browserWindows = BrowserWindow.getAllWindows()
+
+    // Fixes quitAndInstall not quitting on macOS, as suggested on
+    // https://github.com/electron-userland/electron-builder/issues/1604#issuecomment-306709572
+    app.removeAllListeners('window-all-closed')
+    browserWindows.forEach(browserWindow => {
+      browserWindow.removeAllListeners('close')
+    })
+
+    autoUpdater.quitAndInstall(false)
+  })
 }
