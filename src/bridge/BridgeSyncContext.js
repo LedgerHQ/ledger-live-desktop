@@ -157,6 +157,8 @@ class Provider extends Component<BridgeSyncProviderOwnProps, BridgeSync> {
     setTimeout(syncLoop, 2 * 1000)
   }
 
+  // TODO we might want to call sync straight away when new accounts got added (it will happen every 10s anyway)
+
   api: BridgeSync
 
   render() {
