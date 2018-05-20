@@ -4,15 +4,11 @@
 
 import Btc from '@ledgerhq/hw-app-btc'
 
-const coinTypeCurrencyMap = {
-  bitcoin: 0,
-  ethereum: 60,
-  bitcoin_testnet: 1,
-  ethereum_testnet: 1,
-}
+import { findCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 export function coinTypeForId(id: string) {
-  return coinTypeCurrencyMap[id]
+  const currency = findCryptoCurrencyById(id)
+  return currency ? currency.coinType : 0
 }
 
 export function getPath({
