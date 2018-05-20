@@ -4,10 +4,11 @@
 
 import Btc from '@ledgerhq/hw-app-btc'
 
+import { findCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+
 export function coinTypeForId(id: string) {
-  if (id === 'bitcoin_testnet') return 1
-  if (id === 'bitcoin') return 0
-  throw new Error('coinTypeForId is a hack and will disappear with libcore')
+  const currency = findCryptoCurrencyById(id)
+  return currency ? currency.coinType : 0
 }
 
 export function getPath({
@@ -17,7 +18,7 @@ export function getPath({
 }: {
   currencyId: string,
   account?: any,
-  segwit: boolean,
+  segwit?: boolean,
 }) {
   return `${segwit ? 49 : 44}'/${coinTypeForId(currencyId)}'${
     account !== undefined ? `/${account}'` : ''

@@ -6,7 +6,7 @@ import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
 import DeviceConnect from 'components/DeviceConnect'
-import DeviceMonit from 'components/DeviceMonitNew'
+import EnsureDeviceApp from 'components/EnsureDeviceApp'
 
 type Props = {
   accountName?: string,
@@ -25,7 +25,7 @@ const StepConnectDevice = ({
   onChangeDevice,
   onStatusChange,
 }: Props) => (
-  <DeviceMonit
+  <EnsureDeviceApp
     account={account}
     currency={currency}
     deviceSelected={deviceSelected}

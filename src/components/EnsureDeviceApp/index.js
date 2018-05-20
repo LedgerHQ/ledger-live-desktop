@@ -43,7 +43,7 @@ const mapStateToProps = (state: StoreState) => ({
   devices: getDevices(state),
 })
 
-class DeviceMonit extends PureComponent<Props, State> {
+class EnsureDeviceApp extends PureComponent<Props, State> {
   state = {
     appStatus: 'progress',
     deviceStatus: this.props.deviceSelected ? 'connected' : 'unconnected',
@@ -110,7 +110,7 @@ class DeviceMonit extends PureComponent<Props, State> {
       }
     }
 
-    sendEvent('devices', 'checkIfAppOpened', {
+    sendEvent('devices', 'ensureDeviceApp', {
       devicePath: deviceSelected.path,
       ...options,
     })
@@ -133,12 +133,12 @@ class DeviceMonit extends PureComponent<Props, State> {
       return
     }
 
-    if (type === 'devices.checkIfAppOpened.success' && deviceSelected.path === data.devicePath) {
+    if (type === 'devices.ensureDeviceApp.success' && deviceSelected.path === data.devicePath) {
       this.handleStatusChange(deviceStatus, 'success')
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
 
-    if (type === 'devices.checkIfAppOpened.fail' && deviceSelected.path === data.devicePath) {
+    if (type === 'devices.ensureDeviceApp.fail' && deviceSelected.path === data.devicePath) {
       this.handleStatusChange(deviceStatus, 'fail')
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
@@ -164,4 +164,4 @@ class DeviceMonit extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps)(DeviceMonit)
+export default connect(mapStateToProps)(EnsureDeviceApp)
