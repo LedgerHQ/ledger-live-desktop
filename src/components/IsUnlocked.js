@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
-import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import type { Settings, T } from 'types/common'
 import IconLockScreen from 'icons/LockScreen'
@@ -15,11 +14,9 @@ import { ErrorMessageInput } from 'components/base/Input'
 
 import get from 'lodash/get'
 
-import { startSyncAccounts, stopSyncAccounts } from 'renderer/events'
 import { setEncryptionKey } from 'helpers/db'
 
 import { fetchAccounts } from 'actions/accounts'
-import { getAccounts } from 'reducers/accounts'
 import { isLocked, unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
@@ -30,7 +27,6 @@ type InputValue = {
 }
 
 type Props = {
-  accounts: Account[],
   children: any,
   fetchAccounts: Function,
   isLocked: boolean,
@@ -44,7 +40,6 @@ type State = {
 }
 
 const mapStateToProps = state => ({
-  accounts: getAccounts(state),
   isLocked: isLocked(state),
   settings: state.settings,
 })
@@ -82,22 +77,6 @@ export const LockScreenDesc = styled(Box).attrs({
 class IsUnlocked extends Component<Props, State> {
   state = {
     ...defaultState,
-  }
-
-  componentWillMount() {
-    if (this.props.isLocked) {
-      stopSyncAccounts()
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.isLocked && !nextProps.isLocked) {
-      startSyncAccounts(nextProps.accounts)
-    }
-
-    if (!this.props.isLocked && nextProps.isLocked) {
-      stopSyncAccounts()
-    }
   }
 
   shouldComponentUpdate(nextProps) {
