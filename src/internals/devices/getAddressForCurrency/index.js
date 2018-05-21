@@ -23,6 +23,6 @@ const all = {
   ethereum_testnet: btc,
 }
 
-const module: Module = (currencyId: string) => all[currencyId] || fallback(currencyId)
+const getAddressForCurrency: Module = (currencyId: string) => all[currencyId] || fallback(currencyId)
 
-export default module
+export default getAddressForCurrency
