@@ -1,21 +1,14 @@
 // @flow
+import axios from 'axios'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
-import { get } from './Ledger'
-
-const mapping = {
-  bch: 'abc',
-}
-const currencyToFeeTicker = (currency: Currency) => {
-  const tickerLowerCase = currency.ticker.toLowerCase()
-  return mapping[tickerLowerCase] || tickerLowerCase
-}
+import { blockchainBaseURL } from './Ledger'
 
 export type Fees = {
   [_: string]: number,
 }
 
 export const getEstimatedFees = async (currency: Currency): Promise<Fees> => {
-  const { data, status } = await get(`blockchain/v2/${currencyToFeeTicker(currency)}/fees`)
+  const { data, status } = await axios.get(`${blockchainBaseURL(currency)}/fees`)
   if (data) {
     return data
   }

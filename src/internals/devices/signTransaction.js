@@ -4,7 +4,7 @@ import invariant from 'invariant'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import type Transport from '@ledgerhq/hw-transport'
 import type { IPCSend } from 'types/electron'
-import getAddressForCurrency from './getAddressForCurrency'
+import signTransactionForCurrency from './signTransactionForCurrency'
 
 export default async (
   send: IPCSend,
@@ -12,25 +12,21 @@ export default async (
     currencyId,
     devicePath,
     path,
-    accountAddress,
-    ...options
+    transaction,
   }: {
     currencyId: string,
     devicePath: string,
     path: string,
-    accountAddress: ?string,
+    transaction: *,
   },
 ) => {
   try {
     invariant(currencyId, 'currencyId "%s" not defined', currencyId)
     const transport: Transport<*> = await CommNodeHid.open(devicePath)
-    const resolver = getAddressForCurrency(currencyId)
-    const { address } = await resolver(transport, currencyId, path, options)
-    if (accountAddress && address !== accountAddress) {
-      throw new Error('Account address is different than device address')
-    }
-    send('devices.ensureDeviceApp.success', { devicePath })
+    const signer = signTransactionForCurrency(currencyId)
+    const res = await signer(transport, currencyId, path, transaction)
+    send('devices.signTransaction.success', res)
   } catch (err) {
-    send('devices.ensureDeviceApp.fail', { devicePath, message: err.message })
+    send('devices.signTransaction.fail')
   }
 }

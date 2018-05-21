@@ -2,6 +2,12 @@
 
 // FIXME this file is spaghetti. we need one file per usecase.
 
+// TODO to improve current state:
+// a sendEventPromise version that returns a promise
+// a sendEventObserver version that takes an observer & return a Subscription
+// both of these implementation should have a unique requestId to ensure there is no collision
+// events should all appear in the promise result / observer msgs as soon as they have this requestId
+
 import { ipcRenderer } from 'electron'
 import objectPath from 'object-path'
 import debug from 'debug'

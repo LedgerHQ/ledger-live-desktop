@@ -4,27 +4,6 @@
 
 import Btc from '@ledgerhq/hw-app-btc'
 
-import { findCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-
-export function coinTypeForId(id: string) {
-  const currency = findCryptoCurrencyById(id)
-  return currency ? currency.coinType : 0
-}
-
-export function getPath({
-  currencyId,
-  account,
-  segwit = true,
-}: {
-  currencyId: string,
-  account?: any,
-  segwit?: boolean,
-}) {
-  return `${segwit ? 49 : 44}'/${coinTypeForId(currencyId)}'${
-    account !== undefined ? `/${account}'` : ''
-  }`
-}
-
 export async function getFreshReceiveAddress({
   currencyId,
   accountIndex,
@@ -53,6 +32,7 @@ export function verifyAddress({
   path: string,
   segwit?: boolean,
 }) {
+  console.warn('DEPRECATED use devices.getAddress with verify option')
   const btc = new Btc(transport)
 
   return btc.getWalletPublicKey(path, true, segwit)

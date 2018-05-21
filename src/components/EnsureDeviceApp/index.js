@@ -3,6 +3,7 @@ import invariant from 'invariant'
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { ipcRenderer } from 'electron'
+import { makeBip44Path } from 'helpers/bip32path'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
@@ -15,7 +16,7 @@ type OwnProps = {
   currency: ?CryptoCurrency,
   deviceSelected: ?Device,
   account: ?Account,
-  onStatusChange?: (DeviceStatus, AppStatus) => void,
+  onStatusChange?: (DeviceStatus, AppStatus, ?string) => void,
   // TODO prefer children function
   render?: ({
     appStatus: AppStatus,
@@ -23,6 +24,7 @@ type OwnProps = {
     devices: Device[],
     deviceSelected: ?Device,
     deviceStatus: DeviceStatus,
+    errorMessage: ?string,
   }) => React$Element<*>,
 }
 
@@ -37,6 +39,7 @@ type AppStatus = 'success' | 'fail' | 'progress'
 type State = {
   deviceStatus: DeviceStatus,
   appStatus: AppStatus,
+  errorMessage: ?string,
 }
 
 const mapStateToProps = (state: StoreState) => ({
@@ -47,6 +50,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
   state = {
     appStatus: 'progress',
     deviceStatus: this.props.deviceSelected ? 'connected' : 'unconnected',
+    errorMessage: null,
   }
 
   componentDidMount() {
@@ -100,16 +104,20 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
     if (account) {
       options = {
         currencyId: account.currency.id,
-        accountPath: account.path,
+        path: account.path,
         accountAddress: account.address,
         segwit: account.path.startsWith("49'"), // TODO: store segwit info in account
       }
     } else if (currency) {
       options = {
         currencyId: currency.id,
+        path: makeBip44Path({ currency }),
       }
+    } else {
+      throw new Error('either currency or account is required')
     }
 
+    // TODO just use getAddress!
     sendEvent('devices', 'ensureDeviceApp', {
       devicePath: deviceSelected.path,
       ...options,
@@ -118,11 +126,11 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
 
   _timeout: *
 
-  handleStatusChange = (deviceStatus, appStatus) => {
+  handleStatusChange = (deviceStatus, appStatus, errorMessage = null) => {
     const { onStatusChange } = this.props
     clearTimeout(this._timeout)
-    this.setState({ deviceStatus, appStatus })
-    onStatusChange && onStatusChange(deviceStatus, appStatus)
+    this.setState({ deviceStatus, appStatus, errorMessage })
+    onStatusChange && onStatusChange(deviceStatus, appStatus, errorMessage)
   }
 
   handleMsgEvent = (e, { type, data }) => {
@@ -139,14 +147,14 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
     }
 
     if (type === 'devices.ensureDeviceApp.fail' && deviceSelected.path === data.devicePath) {
-      this.handleStatusChange(deviceStatus, 'fail')
+      this.handleStatusChange(deviceStatus, 'fail', data.message)
       this._timeout = setTimeout(this.checkAppOpened, 1e3)
     }
   }
 
   render() {
     const { currency, account, devices, deviceSelected, render } = this.props
-    const { appStatus, deviceStatus } = this.state
+    const { appStatus, deviceStatus, errorMessage } = this.state
 
     if (render) {
       const cur = account ? account.currency : currency
@@ -157,6 +165,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
         devices,
         deviceSelected: deviceStatus === 'connected' ? deviceSelected : null,
         deviceStatus,
+        errorMessage,
       })
     }
 

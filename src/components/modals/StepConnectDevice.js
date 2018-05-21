@@ -30,7 +30,7 @@ const StepConnectDevice = ({
     currency={currency}
     deviceSelected={deviceSelected}
     onStatusChange={onStatusChange}
-    render={({ currency, appStatus, devices, deviceSelected }) => (
+    render={({ currency, appStatus, devices, deviceSelected, errorMessage }) => (
       <DeviceConnect
         accountName={accountName}
         currency={currency}
@@ -38,6 +38,7 @@ const StepConnectDevice = ({
         devices={devices}
         deviceSelected={deviceSelected}
         onChangeDevice={onChangeDevice}
+        errorMessage={errorMessage}
       />
     )}
   />

@@ -12,25 +12,21 @@ export default async (
     currencyId,
     devicePath,
     path,
-    accountAddress,
     ...options
   }: {
     currencyId: string,
     devicePath: string,
     path: string,
-    accountAddress: ?string,
+    verify?: boolean,
   },
 ) => {
   try {
     invariant(currencyId, 'currencyId "%s" not defined', currencyId)
     const transport: Transport<*> = await CommNodeHid.open(devicePath)
     const resolver = getAddressForCurrency(currencyId)
-    const { address } = await resolver(transport, currencyId, path, options)
-    if (accountAddress && address !== accountAddress) {
-      throw new Error('Account address is different than device address')
-    }
-    send('devices.ensureDeviceApp.success', { devicePath })
+    const res = await resolver(transport, currencyId, path, options)
+    send('devices.getAddress.success', res)
   } catch (err) {
-    send('devices.ensureDeviceApp.fail', { devicePath, message: err.message })
+    send('devices.getAddress.fail', { message: err.message })
   }
 }

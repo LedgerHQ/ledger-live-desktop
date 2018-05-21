@@ -116,8 +116,6 @@ const LibcoreBridge: WalletBridge<Transaction> = {
     }
   },
 
-  refreshLastOperations: () => Promise.reject(notImplemented),
-
   pullMoreOperations: () => Promise.reject(notImplemented),
 
   isRecipientValid: (currency, recipient) => Promise.resolve(recipient.length > 0),
