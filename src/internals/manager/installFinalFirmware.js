@@ -16,7 +16,7 @@ export default async (send: IPCSend, data: DataType) => {
   try {
     const transport = await CommNodeHid.open(data.devicePath)
     const finalData = buildFinalParams(data.firmware)
-    await createSocketDialog(transport, '/install', finalData)
+    await createSocketDialog(transport, '/update/install', finalData)
     send('device.finalFirmwareInstallSuccess', { success: true })
   } catch (err) {
     send('device.finalFirmwareInstallError', { success: false })

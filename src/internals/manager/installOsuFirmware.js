@@ -16,7 +16,7 @@ export default async (send: IPCSend, data: DataType) => {
   try {
     const transport = await CommNodeHid.open(data.devicePath)
     const osuData = buildOsuParams(data.firmware)
-    await createSocketDialog(transport, '/install', osuData)
+    await createSocketDialog(transport, '/update/install', osuData)
     send('device.osuFirmwareInstallSuccess', { success: true })
   } catch (err) {
     send('device.osuFirmwareInstallError', { success: false })

@@ -1,6 +1,6 @@
 // Socket endpoint
 
-export const BASE_SOCKET_URL = 'ws://api.ledgerwallet.com/update'
+export const BASE_SOCKET_URL = 'ws://api.ledgerwallet.com'
 // If you want to test locally with https://github.com/LedgerHQ/ledger-update-python-api
 // export const BASE_SOCKET_URL = 'ws://localhost:3001/update'
 

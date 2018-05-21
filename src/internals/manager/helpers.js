@@ -72,7 +72,7 @@ export async function installApp(
   transport: Transport<*>,
   { appParams }: { appParams: LedgerScriptParams },
 ): Promise<void> {
-  return createSocketDialog(transport, '/install', appParams)
+  return createSocketDialog(transport, '/update/install', appParams)
 }
 
 /**
@@ -82,7 +82,7 @@ export async function uninstallApp(
   transport: Transport<*>,
   { appParams }: { appParams: LedgerScriptParams },
 ): Promise<void> {
-  return createSocketDialog(transport, '/install', {
+  return createSocketDialog(transport, '/update/install', {
     ...appParams,
     firmware: appParams.delete,
     firmwareKey: appParams.deleteKey,
