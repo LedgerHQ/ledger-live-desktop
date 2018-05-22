@@ -1,16 +1,14 @@
 // @flow
 
 import { PureComponent } from 'react'
-import { ipcRenderer } from 'electron'
-
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
-import { sendEvent } from 'renderer/events'
+import getAddress from 'internals/devices/getAddress'
 
 type Props = {
-  onCheck: Function,
-  render: Function,
+  onCheck: boolean => void,
+  render: ({ isVerified?: ?boolean }) => *,
   account: Account,
   device: Device,
 }
@@ -26,38 +24,39 @@ class CheckAddress extends PureComponent<Props, State> {
 
   componentDidMount() {
     const { device, account } = this.props
-    ipcRenderer.on('msg', this.handleMsgEvent)
     this.verifyAddress({ device, account })
   }
 
-  componentWillUnmount() {
-    ipcRenderer.removeListener('msg', this.handleMsgEvent)
+  componentDidUnmount() {
+    if (this.sub) this.sub.unsubscribe()
   }
 
-  handleMsgEvent = (e: any, { type }: { type: string }) => {
-    const { onCheck } = this.props
+  sub: *
 
-    if (type === 'accounts.verifyAddress.success') {
-      this.setState({
-        isVerified: true,
+  verifyAddress = ({ device, account }: { device: Device, account: Account }) => {
+    this.sub = getAddress
+      .send({
+        currencyId: account.currency.id,
+        devicePath: device.path,
+        path: account.path,
+        segwit: account.isSegwit,
+        verify: true,
       })
-      onCheck(true)
-    }
-
-    if (type === 'accounts.verifyAddress.fail') {
-      this.setState({
-        isVerified: false,
+      .subscribe({
+        next: () => {
+          this.setState({
+            isVerified: true,
+          })
+          this.props.onCheck(true)
+        },
+        error: () => {
+          this.setState({
+            isVerified: false,
+          })
+          this.props.onCheck(false)
+        },
       })
-      onCheck(false)
-    }
   }
-
-  verifyAddress = ({ device, account }: { device: Device, account: Account }) =>
-    sendEvent('accounts', 'verifyAddress', {
-      pathDevice: device.path,
-      path: account.path,
-      segwit: account.path.startsWith("49'"), // TODO: store segwit info in account
-    })
 
   render() {
     const { render } = this.props

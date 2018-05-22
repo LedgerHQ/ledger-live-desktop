@@ -24,13 +24,26 @@ if (handlers.default) {
 }
 
 process.on('message', payload => {
-  const { type, data } = payload
-  const handler = objectPath.get(handlers, type)
-  if (!handler) {
-    console.warn(`No handler found for ${type}`)
-    return
+  console.log(payload)
+  if (payload.data && payload.data.requestId) {
+    const { data, requestId, id } = payload.data
+    // this is the new type of "command" payload!
+    const cmd = (handlers.commands || []).find(cmd => cmd.id === id)
+    if (!cmd) {
+      console.warn(`command ${id} not found`)
+    } else {
+      cmd.exec(data, requestId)
+    }
+  } else {
+    // this will be deprecated!
+    const { type, data } = payload
+    const handler = objectPath.get(handlers, type)
+    if (!handler) {
+      console.warn(`No handler found for ${type}`)
+      return
+    }
+    handler(sendEvent, data)
   }
-  handler(sendEvent, data)
 })
 
 if (__DEV__ || DEV_TOOLS) {

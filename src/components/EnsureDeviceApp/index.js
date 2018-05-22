@@ -2,15 +2,14 @@
 import invariant from 'invariant'
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { ipcRenderer } from 'electron'
 import { makeBip44Path } from 'helpers/bip32path'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
-import { sendEvent } from 'renderer/events'
 import { getDevices } from 'reducers/devices'
 import type { State as StoreState } from 'reducers/index'
+import getAddress from 'internals/devices/getAddress'
 
 type OwnProps = {
   currency: ?CryptoCurrency,
@@ -54,7 +53,6 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    ipcRenderer.on('msg', this.handleMsgEvent)
     if (this.props.deviceSelected !== null) {
       this.checkAppOpened()
     }
@@ -88,21 +86,21 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
   }
 
   componentWillUnmount() {
-    ipcRenderer.removeListener('msg', this.handleMsgEvent)
     clearTimeout(this._timeout)
   }
 
-  checkAppOpened = () => {
+  checkAppOpened = async () => {
     const { deviceSelected, account, currency } = this.props
 
     if (!deviceSelected) {
       return
     }
 
-    let options = null
+    let options
 
     if (account) {
       options = {
+        devicePath: deviceSelected.path,
         currencyId: account.currency.id,
         path: account.path,
         accountAddress: account.address,
@@ -110,6 +108,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       }
     } else if (currency) {
       options = {
+        devicePath: deviceSelected.path,
         currencyId: currency.id,
         path: makeBip44Path({ currency }),
       }
@@ -117,11 +116,17 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       throw new Error('either currency or account is required')
     }
 
-    // TODO just use getAddress!
-    sendEvent('devices', 'ensureDeviceApp', {
-      devicePath: deviceSelected.path,
-      ...options,
-    })
+    try {
+      const { address } = await getAddress.send(options).toPromise()
+      if (account && account.address !== address) {
+        throw new Error('Account address is different than device address')
+      }
+      this.handleStatusChange(this.state.deviceStatus, 'success')
+    } catch (e) {
+      this.handleStatusChange(this.state.deviceStatus, 'fail', e.message)
+    }
+
+    this._timeout = setTimeout(this.checkAppOpened, 1e3)
   }
 
   _timeout: *
@@ -131,25 +136,6 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
     clearTimeout(this._timeout)
     this.setState({ deviceStatus, appStatus, errorMessage })
     onStatusChange && onStatusChange(deviceStatus, appStatus, errorMessage)
-  }
-
-  handleMsgEvent = (e, { type, data }) => {
-    const { deviceStatus } = this.state
-    const { deviceSelected } = this.props
-
-    if (!deviceSelected) {
-      return
-    }
-
-    if (type === 'devices.ensureDeviceApp.success' && deviceSelected.path === data.devicePath) {
-      this.handleStatusChange(deviceStatus, 'success')
-      this._timeout = setTimeout(this.checkAppOpened, 1e3)
-    }
-
-    if (type === 'devices.ensureDeviceApp.fail' && deviceSelected.path === data.devicePath) {
-      this.handleStatusChange(deviceStatus, 'fail', data.message)
-      this._timeout = setTimeout(this.checkAppOpened, 1e3)
-    }
   }
 
   render() {

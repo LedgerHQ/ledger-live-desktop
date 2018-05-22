@@ -1,12 +1,12 @@
 // @flow
 import React from 'react'
-import { ipcRenderer } from 'electron'
-import { sendEvent } from 'renderer/events'
 import EthereumKind from 'components/FeesField/EthereumKind'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
 import { makeBip44Path } from 'helpers/bip32path'
+import getAddressCommand from 'internals/devices/getAddress'
+import signTransactionCommand from 'internals/devices/signTransaction'
 import type { EditProps, WalletBridge } from './types'
 
 // TODO in future it would be neat to support eip55
@@ -62,66 +62,18 @@ const paginateMoreTransactions = async (
   return mergeOps(acc, txs.map(toAccountOperation(account)))
 }
 
-function signTransactionOnDevice(
-  a: Account,
-  t: Transaction,
-  deviceId: string,
-  nonce: string,
-): Promise<string> {
-  const transaction = { ...t, nonce }
-  return new Promise((resolve, reject) => {
-    const unbind = () => {
-      ipcRenderer.removeListener('msg', handleMsgEvent)
-    }
-
-    function handleMsgEvent(e, { data, type }) {
-      if (type === 'devices.signTransaction.success') {
-        unbind()
-        resolve(data)
-      } else if (type === 'devices.signTransaction.fail') {
-        unbind()
-        reject(new Error('failed to get address'))
-      }
-    }
-
-    ipcRenderer.on('msg', handleMsgEvent)
-
-    sendEvent('devices', 'signTransaction', {
-      currencyId: a.currency.id,
-      devicePath: deviceId,
-      path: a.path,
-      transaction,
-    })
-  })
-}
-
 const EthereumBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
     let finished = false
-    const unbind = () => {
+    const unsubscribe = () => {
       finished = true
-      ipcRenderer.removeListener('msg', handleMsgEvent)
     }
     const api = apiForCurrency(currency)
 
-    // FIXME: THIS IS SPAghetti, we need to move to a more robust approach to get an observable with a sendEvent
     // in future ideally what we want is:
     // return mergeMap(addressesObservable, address => fetchAccount(address))
 
-    let index = 0
     let balanceZerosCount = 0
-
-    function pollNextAddress() {
-      sendEvent('devices', 'getAddress', {
-        currencyId: currency.id,
-        devicePath: deviceId,
-        path: makeBip44Path({
-          currency,
-          x: index,
-        }),
-      })
-      index++
-    }
 
     let currentBlockPromise
     function lazyCurrentBlock() {
@@ -131,52 +83,23 @@ const EthereumBridge: WalletBridge<Transaction> = {
       return currentBlockPromise
     }
 
-    async function stepAddress({ address, path }) {
-      try {
-        const balance = await api.getAccountBalance(address)
-        if (finished) return
-        if (balance === 0) {
-          if (balanceZerosCount === 0) {
-            // first zero account will emit one account as opportunity to create a new account..
-            const currentBlock = await lazyCurrentBlock()
-            const accountId = `${currency.id}_${address}`
-            const account: Account = {
-              id: accountId,
-              xpub: '',
-              path,
-              walletPath: String(index),
-              name: 'New Account',
-              isSegwit: false,
-              address,
-              addresses: [address],
-              balance,
-              blockHeight: currentBlock.height,
-              archived: true,
-              index,
-              currency,
-              operations: [],
-              unit: currency.units[0],
-              lastSyncDate: new Date(),
-            }
-            next(account)
-          }
-          balanceZerosCount++
-          // NB we currently stop earlier. in future we shouldn't stop here, just continue & user will stop at the end!
-          // NB (what's the max tho?)
-          unbind()
-          complete()
-        } else {
+    async function stepAddress(
+      index,
+      { address, path },
+    ): { account?: Account, complete?: boolean } {
+      const balance = await api.getAccountBalance(address)
+      if (finished) return {}
+      if (balance === 0) {
+        if (balanceZerosCount === 0) {
+          // first zero account will emit one account as opportunity to create a new account..
           const currentBlock = await lazyCurrentBlock()
-          if (finished) return
-          const { txs } = await api.getTransactions(address)
-          if (finished) return
           const accountId = `${currency.id}_${address}`
           const account: Account = {
             id: accountId,
             xpub: '',
             path,
             walletPath: String(index),
-            name: address.slice(32),
+            name: 'New Account',
             isSegwit: false,
             address,
             addresses: [address],
@@ -189,32 +112,69 @@ const EthereumBridge: WalletBridge<Transaction> = {
             unit: currency.units[0],
             lastSyncDate: new Date(),
           }
-          account.operations = txs.map(toAccountOperation(account))
-          next(account)
-          pollNextAddress()
+          // NB we currently stop earlier. in future we shouldn't stop here, just continue & user will stop at the end!
+          // NB (what's the max tho?)
+          return { account, complete: true }
+        }
+        balanceZerosCount++
+        return { complete: true }
+      }
+
+      const currentBlock = await lazyCurrentBlock()
+      if (finished) return {}
+      const { txs } = await api.getTransactions(address)
+      if (finished) return {}
+      const accountId = `${currency.id}_${address}`
+      const account: Account = {
+        id: accountId,
+        xpub: '',
+        path,
+        walletPath: String(index),
+        name: address.slice(32),
+        isSegwit: false,
+        address,
+        addresses: [address],
+        balance,
+        blockHeight: currentBlock.height,
+        archived: true,
+        index,
+        currency,
+        operations: [],
+        unit: currency.units[0],
+        lastSyncDate: new Date(),
+      }
+      account.operations = txs.map(toAccountOperation(account))
+      return { account }
+    }
+
+    async function main() {
+      try {
+        for (let index = 0; index < 255; index++) {
+          const res = await getAddressCommand
+            .send({
+              currencyId: currency.id,
+              devicePath: deviceId,
+              path: makeBip44Path({
+                currency,
+                x: index,
+              }),
+            })
+            .toPromise()
+          const r = await stepAddress(index, res)
+          if (r.account) next(r.account)
+          if (r.complete) {
+            complete()
+            break
+          }
         }
       } catch (e) {
         error(e)
       }
     }
 
-    function handleMsgEvent(e, { data, type }) {
-      if (type === 'devices.getAddress.success') {
-        stepAddress(data)
-      } else if (type === 'devices.getAddress.fail') {
-        error(new Error(data.message))
-      }
-    }
+    main()
 
-    ipcRenderer.on('msg', handleMsgEvent)
-
-    pollNextAddress()
-
-    return {
-      unsubscribe() {
-        unbind()
-      },
-    }
+    return { unsubscribe }
   },
 
   synchronize({ address, blockHeight, currency }, { next, complete, error }) {
@@ -297,9 +257,20 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   signAndBroadcast: async (a, t, deviceId) => {
     const api = apiForCurrency(a.currency)
+
     const nonce = await api.getAccountNonce(a.address)
-    const transaction = await signTransactionOnDevice(a, t, deviceId, nonce)
+
+    const transaction = await signTransactionCommand
+      .send({
+        currencyId: a.currency.id,
+        devicePath: deviceId,
+        path: a.path,
+        transaction: { ...t, nonce },
+      })
+      .toPromise()
+
     const result = await api.broadcastTransaction(transaction)
+
     return result
   },
 }
