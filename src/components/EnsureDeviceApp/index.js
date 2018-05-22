@@ -2,7 +2,7 @@
 import invariant from 'invariant'
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { makeBip44Path } from 'helpers/bip32path'
+import { standardDerivation } from 'helpers/derivations'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
@@ -110,7 +110,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       options = {
         devicePath: deviceSelected.path,
         currencyId: currency.id,
-        path: makeBip44Path({ currency }),
+        path: standardDerivation({ currency, x: 0, segwit: false }),
       }
     } else {
       throw new Error('either currency or account is required')

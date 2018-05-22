@@ -4,7 +4,7 @@ import EthereumKind from 'components/FeesField/EthereumKind'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
-import { makeBip44Path } from 'helpers/bip32path'
+import { getDerivations } from 'helpers/derivations'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
 import type { EditProps, WalletBridge } from './types'
@@ -30,8 +30,8 @@ const toAccountOperation = (account: Account) => (tx: Tx): Operation => {
     hash: tx.hash,
     address: sending ? tx.to : tx.from,
     amount: (sending ? -1 : 1) * tx.value,
-    blockHeight: tx.block.height,
-    blockHash: tx.block.hash,
+    blockHeight: tx.block && tx.block.height,
+    blockHash: tx.block && tx.block.hash,
     accountId: account.id,
     senders: [tx.from],
     recipients: [tx.to],
@@ -86,37 +86,39 @@ const EthereumBridge: WalletBridge<Transaction> = {
     async function stepAddress(
       index,
       { address, path },
+      isStandard,
     ): { account?: Account, complete?: boolean } {
       const balance = await api.getAccountBalance(address)
       if (finished) return {}
       if (balance === 0) {
-        if (balanceZerosCount === 0) {
-          // first zero account will emit one account as opportunity to create a new account..
-          const currentBlock = await lazyCurrentBlock()
-          const accountId = `${currency.id}_${address}`
-          const account: Account = {
-            id: accountId,
-            xpub: '',
-            path,
-            walletPath: String(index),
-            name: 'New Account',
-            isSegwit: false,
-            address,
-            addresses: [address],
-            balance,
-            blockHeight: currentBlock.height,
-            archived: true,
-            index,
-            currency,
-            operations: [],
-            unit: currency.units[0],
-            lastSyncDate: new Date(),
+        if (isStandard) {
+          if (balanceZerosCount === 0) {
+            // first zero account will emit one account as opportunity to create a new account..
+            const currentBlock = await lazyCurrentBlock()
+            const accountId = `${currency.id}_${address}`
+            const account: Account = {
+              id: accountId,
+              xpub: '',
+              path,
+              walletPath: String(index),
+              name: 'New Account',
+              isSegwit: false,
+              address,
+              addresses: [address],
+              balance,
+              blockHeight: currentBlock.height,
+              archived: true,
+              index,
+              currency,
+              operations: [],
+              unit: currency.units[0],
+              lastSyncDate: new Date(),
+            }
+            return { account, complete: true }
           }
-          // NB we currently stop earlier. in future we shouldn't stop here, just continue & user will stop at the end!
-          // NB (what's the max tho?)
-          return { account, complete: true }
+          balanceZerosCount++
         }
-        balanceZerosCount++
+        // NB for legacy addresses we might not want to stop at first zero but continue forever
         return { complete: true }
       }
 
@@ -149,24 +151,25 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
     async function main() {
       try {
-        for (let index = 0; index < 255; index++) {
-          const res = await getAddressCommand
-            .send({
-              currencyId: currency.id,
-              devicePath: deviceId,
-              path: makeBip44Path({
-                currency,
-                x: index,
-              }),
-            })
-            .toPromise()
-          const r = await stepAddress(index, res)
-          if (r.account) next(r.account)
-          if (r.complete) {
-            complete()
-            break
+        const derivations = getDerivations(currency)
+        const last = derivations[derivations.length - 1]
+        for (const derivation of derivations) {
+          const isStandard = last === derivation
+          for (let index = 0; index < 255; index++) {
+            const path = derivation({ currency, x: index, segwit: false })
+            console.log(path)
+            const res = await getAddressCommand
+              .send({ currencyId: currency.id, devicePath: deviceId, path })
+              .toPromise()
+            const r = await stepAddress(index, res, isStandard)
+            console.log('=>', r.account)
+            if (r.account) next(r.account)
+            if (r.complete) {
+              break
+            }
           }
         }
+        complete()
       } catch (e) {
         error(e)
       }
