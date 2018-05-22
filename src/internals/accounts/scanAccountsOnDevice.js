@@ -56,7 +56,7 @@ export async function getWalletIdentifier({
   isSegwit: boolean,
   currencyId: string,
   devicePath: string,
-}) {
+}): Promise<string> {
   const isVerify = false
   const deviceIdentifiers = await hwApp.getWalletPublicKey(devicePath, isVerify, isSegwit)
   const { publicKey } = deviceIdentifiers
@@ -70,7 +70,13 @@ async function scanAccountsOnDeviceBySegwit({
   onAccountScanned,
   devicePath,
   isSegwit,
-}) {
+}: {
+  hwApp: Object,
+  currencyId: string,
+  onAccountScanned: AccountRaw => void,
+  devicePath: string,
+  isSegwit: boolean,
+}): Promise<AccountRaw[]> {
   // compute wallet identifier
   const WALLET_IDENTIFIER = await getWalletIdentifier({ hwApp, isSegwit, currencyId, devicePath })
 
@@ -94,7 +100,17 @@ async function scanAccountsOnDeviceBySegwit({
   return accounts
 }
 
-async function scanNextAccount(props) {
+async function scanNextAccount(props: {
+  // $FlowFixMe
+  wallet: NJSWallet,
+  hwApp: Object,
+  currencyId: string,
+  accountsCount: number,
+  accountIndex: number,
+  accounts: AccountRaw[],
+  onAccountScanned: AccountRaw => void,
+  isSegwit: boolean,
+}): Promise<AccountRaw[]> {
   const {
     wallet,
     hwApp,
@@ -150,7 +166,11 @@ async function scanNextAccount(props) {
   return scanNextAccount({ ...props, accountIndex: accountIndex + 1 })
 }
 
-async function getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit) {
+async function getOrCreateWallet(
+  WALLET_IDENTIFIER: string,
+  currencyId: string,
+  isSegwit: boolean,
+): NJSWallet {
   // TODO: investigate why importing it on file scope causes trouble
   const core = require('init-ledger-core')()
   try {
@@ -190,7 +210,7 @@ async function buildAccountRaw({
   hwApp: Object,
   // $FlowFixMe
   ops: NJSOperation[],
-}) {
+}): Promise<AccountRaw> {
   const balanceByDay = ops.length
     ? await getBalanceByDaySinceOperation({
         njsAccount,
@@ -309,7 +329,7 @@ async function getBalanceByDaySinceOperation({
   return res
 }
 
-function areSameDay(date1, date2) {
+function areSameDay(date1: Date, date2: Date): boolean {
   return (
     date1.getFullYear() === date2.getFullYear() &&
     date1.getMonth() === date2.getMonth() &&
