@@ -43,7 +43,7 @@ class Wrapper extends Component<any, State> {
         />
 
         <Chart
-          interactive={boolean('interactive', true)}
+          isInteractive={boolean('isInteractive', true)}
           hideAxis={boolean('hideAxis', false)}
           color={color('color', '#5f8ced')}
           data={data.slice(start, stop)}

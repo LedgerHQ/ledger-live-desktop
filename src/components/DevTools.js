@@ -254,26 +254,8 @@ class DevTools extends PureComponent<any, State> {
                         color="#8884d8"
                         height={50}
                         hideAxis
-                        interactive={false}
+                        isInteractive={false}
                       />
-                      {/* <WrapperChart
-                        height={50}
-                        render={({ height, width }) => (
-                          <VictoryArea
-                            data={cpuUsage[k]}
-                            y="value"
-                            style={{
-                              data: {
-                                stroke: '#8884d8',
-                                fill: '#8884d8',
-                              },
-                            }}
-                            height={height}
-                            width={width}
-                            padding={{ top: 10, right: 0, left: 0, bottom: 0 }}
-                          />
-                        )}
-                      /> */}
                     </Box>
                   </Box>
                 ))}

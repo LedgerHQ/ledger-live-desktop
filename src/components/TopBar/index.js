@@ -93,7 +93,7 @@ class TopBar extends PureComponent<Props> {
             <Box justifyContent="center">
               <Bar />
             </Box>
-            <ItemContainer interactive onClick={this.navigateToSettings}>
+            <ItemContainer isInteractive onClick={this.navigateToSettings}>
               <IconSettings size={16} />
             </ItemContainer>
             {hasPassword && ( // FIXME this should be a dedicated component. therefore this component don't need to connect()
@@ -101,7 +101,7 @@ class TopBar extends PureComponent<Props> {
                 <Box justifyContent="center">
                   <Bar />
                 </Box>
-                <ItemContainer interactive justifyContent="center" onClick={this.handleLock}>
+                <ItemContainer isInteractive justifyContent="center" onClick={this.handleLock}>
                   <IconLock size={16} />
                 </ItemContainer>
               </Fragment>
