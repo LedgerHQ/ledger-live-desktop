@@ -218,10 +218,10 @@ async function buildAccountRaw({
 
   // get a bunch of fresh addresses
   const rawAddresses = await njsAccount.getFreshPublicAddresses()
-  // TODO: waiting for libcore
-  const addresses = rawAddresses.map((strAddr, i) => ({
-    str: strAddr,
-    path: `${accountPath}/${i}'`,
+
+  const addresses = rawAddresses.map(njsAddress => ({
+    str: njsAddress.toString(),
+    path: `${accountPath}/${njsAddress.getDerivationPath()}`,
   }))
 
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
