@@ -18,7 +18,7 @@
  *
  *    <Chart
  *      data={data}
- *      interactive       // Handle mouse events, display tooltip etc.
+ *      isInteractive     // Handle mouse events, display tooltip etc.
  *      color="#5f8ced"   // Main color for line, gradient, etc.
  *      height={300}      // Fix height. Width is responsive to container.
  *    />
@@ -56,7 +56,7 @@ export type Props = {
   color?: string, // eslint-disable-line react/no-unused-prop-types
   hideAxis?: boolean, // eslint-disable-line react/no-unused-prop-types
   dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
-  interactive?: boolean, // eslint-disable-line react/no-unused-prop-types
+  isInteractive?: boolean, // eslint-disable-line react/no-unused-prop-types
   renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
 }
 
@@ -67,7 +67,7 @@ class Chart extends PureComponent<Props> {
     height: 400,
     hideAxis: false,
     id: 'chart',
-    interactive: true,
+    isInteractive: true,
     tickXScale: 'month',
     unit: undefined,
   }
@@ -113,7 +113,7 @@ class Chart extends PureComponent<Props> {
 
     this.refreshChart = prevProps => {
       const { _node: node, props } = this
-      const { data: raw, color, height, hideAxis, interactive, renderTooltip } = props
+      const { data: raw, color, height, hideAxis, isInteractive, renderTooltip } = props
 
       ctx.DATA = enrichData(raw)
 
@@ -157,7 +157,7 @@ class Chart extends PureComponent<Props> {
 
       // Mouse handler
       mouseHandler && mouseHandler.remove() // eslint-disable-line no-unused-expressions
-      if (interactive) {
+      if (isInteractive) {
         mouseHandler = handleMouseEvents({
           ctx,
           props,

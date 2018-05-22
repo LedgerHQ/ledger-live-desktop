@@ -31,7 +31,7 @@ function getRenderTickX(selectedTime) {
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, interactive, tickXScale, unit } = props
+  const { hideAxis, isInteractive, tickXScale, unit } = props
 
   const nbTicksX = getTickXCount(tickXScale)
   const renderTickX = getRenderTickX(tickXScale)
@@ -62,7 +62,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
   }
 
   if (INVALIDATED.color) {
-    if (interactive) {
+    if (isInteractive) {
       // Update focus bar colors
       NODES.xBar.attr('stroke', COLORS.focusBar)
       NODES.yBar.attr('stroke', COLORS.focusBar)
@@ -78,7 +78,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
   }
 
   // Hide interactive things
-  if (interactive) {
+  if (isInteractive) {
     NODES.focus.style('opacity', 0)
     NODES.tooltip.style('opacity', 0)
     NODES.xBar.style('opacity', 0)

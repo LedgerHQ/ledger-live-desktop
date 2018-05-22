@@ -86,7 +86,7 @@ const AccountCard = ({
             color={account.currency.color}
             height={52}
             hideAxis
-            interactive={false}
+            isInteractive={false}
             id={`account-chart-${account.id}`}
             unit={account.unit}
           />
