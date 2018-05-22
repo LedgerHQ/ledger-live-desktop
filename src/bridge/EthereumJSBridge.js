@@ -263,7 +263,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice),
 
-  signAndBroadcast: async (a, t, deviceId) => {
+  signAndBroadcast: async ({ account: a, transaction: t, deviceId }) => {
     const api = apiForCurrency(a.currency)
 
     const nonce = await api.getAccountNonce(a.address)
