@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { radii } from 'styles/theme'
 
 import Box from 'components/base/Box'
+import IconWarning from 'icons/onboarding/Warning'
 
 // GENERAL
 export const Title = styled(Box).attrs({
@@ -46,20 +47,18 @@ type StepType = {
   icon: any,
   desc: string,
 }
-export function InstructionStep({ step }: { step: StepType }) {
+export function OptionRow({ step }: { step: StepType }) {
   const { icon, desc } = step
   return (
-    <Box horizontal>
-      <Box justify="center" color="grey" style={{ width: 26 }}>
-        {icon}
-      </Box>
+    <Box horizontal m={2}>
+      <Box justify="center">{icon}</Box>
       <Box ff="Open Sans|Regular" justify="center" fontSize={4} style={{ paddingLeft: 10 }} shrink>
-        <InstructionStepDesc>{desc}</InstructionStepDesc>
+        <OptionRowDesc>{desc}</OptionRowDesc>
       </Box>
     </Box>
   )
 }
-export const InstructionStepDesc = styled(Box).attrs({
+export const OptionRowDesc = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
   textAlign: 'left',
@@ -68,15 +67,41 @@ export const InstructionStepDesc = styled(Box).attrs({
   shrink: 1,
 })``
 
-export const IconInstructionStep = styled(Box).attrs({
-  width: 26,
-  height: 26,
+export const IconOptionRow = styled(Box).attrs({
   ff: 'Rubik|Regular',
-  textAlign: 'center',
-  fontSize: 3,
+  fontSize: 14,
   color: 'wallet',
-})`
-  border-radius: 100%;
-  background: #6490f126;
-  line-height: 2;
-`
+})``
+
+export function DisclaimerBox({ disclaimerNotes }: { disclaimerNotes: any }) {
+  return (
+    <Box
+      shrink
+      grow
+      flow={4}
+      style={{
+        minWidth: 680,
+        backgroundColor: '#ea2e490c',
+        border: 'dashed 1px #ea2e49b3',
+      }}
+    >
+      <Box
+        m={3}
+        style={{
+          position: 'relative',
+        }}
+      >
+        <Box
+          style={{
+            position: 'absolute',
+            top: '0px',
+            right: '0px',
+          }}
+        >
+          <IconWarning />
+        </Box>
+        {disclaimerNotes.map(note => <OptionRow key={note.key} step={note} />)}
+      </Box>
+    </Box>
+  )
+}
