@@ -194,8 +194,16 @@ const EthereumBridge: WalletBridge<Transaction> = {
           next(a => {
             const currentOps = a.operations
             const newOps = txs.map(toAccountOperation(a))
-            if (newOps.length === 0 && currentOps.length === 0) return a
-            if (currentOps[0].id === newOps[0].id) return a
+            const { length: newLength } = newOps
+            const { length } = currentOps
+            if (
+              // still empty
+              (length === 0 && newLength === 0) ||
+              // latest is still same
+              (length > 0 && newLength > 0 && currentOps[0].id === newOps[0].id)
+            ) {
+              return a
+            }
             const operations = mergeOps(currentOps, newOps)
             return {
               ...a,
