@@ -5,8 +5,8 @@ import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
 import { makeBip44Path } from 'helpers/bip32path'
-import getAddressCommand from 'internals/devices/getAddress'
-import signTransactionCommand from 'internals/devices/signTransaction'
+import getAddressCommand from 'commands/getAddress'
+import signTransactionCommand from 'commands/signTransaction'
 import type { EditProps, WalletBridge } from './types'
 
 // TODO in future it would be neat to support eip55

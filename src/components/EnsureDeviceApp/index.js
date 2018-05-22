@@ -9,7 +9,7 @@ import type { Device } from 'types/common'
 
 import { getDevices } from 'reducers/devices'
 import type { State as StoreState } from 'reducers/index'
-import getAddress from 'internals/devices/getAddress'
+import getAddress from 'commands/getAddress'
 
 type OwnProps = {
   currency: ?CryptoCurrency,

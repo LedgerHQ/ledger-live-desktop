@@ -4,7 +4,7 @@ import { PureComponent } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
-import getAddress from 'internals/devices/getAddress'
+import getAddress from 'commands/getAddress'
 
 type Props = {
   onCheck: boolean => void,

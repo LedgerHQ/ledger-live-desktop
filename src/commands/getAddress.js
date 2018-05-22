@@ -3,24 +3,29 @@
 import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
-import signTransactionForCurrency from './signTransactionForCurrency'
+import getAddressForCurrency from 'helpers/getAddressForCurrency'
 
 type Input = {
   currencyId: string,
   devicePath: string,
   path: string,
-  transaction: *,
+  verify?: boolean,
+  segwit?: boolean,
 }
 
-type Result = string
+type Result = {
+  address: string,
+  path: string,
+  publicKey: string,
+}
 
 const cmd: Command<Input, Result> = createCommand(
   'devices',
-  'signTransaction',
-  ({ currencyId, devicePath, path, transaction }) =>
+  'getAddress',
+  ({ currencyId, devicePath, path, ...options }) =>
     fromPromise(
       CommNodeHid.open(devicePath).then(transport =>
-        signTransactionForCurrency(currencyId)(transport, currencyId, path, transaction),
+        getAddressForCurrency(currencyId)(transport, currencyId, path, options),
       ),
     ),
 )

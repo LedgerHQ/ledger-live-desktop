@@ -101,7 +101,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   scanSubscription: *
 
   startScanAccountsDevice() {
-    const { visibleAccounts, addAccount } = this.props
+    const { visibleAccounts } = this.props
     const { deviceSelected, currency } = this.state
 
     if (!deviceSelected || !currency) {
@@ -111,7 +111,6 @@ class AddAccountModal extends PureComponent<Props, State> {
     this.scanSubscription = bridge.scanAccountsOnDevice(currency, deviceSelected.path, {
       next: account => {
         if (!visibleAccounts.some(a => a.id === account.id)) {
-          addAccount(account)
           this.setState(state => ({
             scannedAccounts: [...state.scannedAccounts, account],
           }))
@@ -169,9 +168,9 @@ class AddAccountModal extends PureComponent<Props, State> {
   handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 
   handleImportAccount = () => {
-    const { updateAccount } = this.props
+    const { addAccount } = this.props
     const { selectedAccounts } = this.state
-    selectedAccounts.forEach(a => updateAccount({ ...a, archived: false }))
+    selectedAccounts.forEach(a => addAccount({ ...a, archived: false }))
     this.setState({ selectedAccounts: [] })
     closeModal(MODAL_ADD_ACCOUNT)
     this.props.counterValuesPolling.poll()

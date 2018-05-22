@@ -1,9 +1,9 @@
 // @flow
 import type { Command } from 'helpers/ipc'
 
-import getAddress from './getAddress'
+import getAddress from 'commands/getAddress'
+import signTransaction from 'commands/signTransaction'
 import listen from './listen'
-import signTransaction from './signTransaction'
 
 // TODO port these to commands
 export { listen }
