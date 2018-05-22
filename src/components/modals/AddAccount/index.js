@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
+import { createStructuredSelector } from 'reselect'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
@@ -12,7 +13,12 @@ import type { Device, T } from 'types/common'
 import { MODAL_ADD_ACCOUNT } from 'config/constants'
 
 import { closeModal } from 'reducers/modals'
-import { canCreateAccount, getAccounts, getArchivedAccounts } from 'reducers/accounts'
+import {
+  canCreateAccount,
+  getAccounts,
+  getVisibleAccounts,
+  getArchivedAccounts,
+} from 'reducers/accounts'
 
 import { addAccount, updateAccount } from 'actions/accounts'
 
@@ -34,10 +40,11 @@ const GET_STEPS = t => [
   { label: t('addAccount:steps.importAccounts.title'), Comp: StepImport },
 ]
 
-const mapStateToProps = state => ({
-  existingAccounts: getAccounts(state),
-  archivedAccounts: getArchivedAccounts(state),
-  canCreateAccount: canCreateAccount(state),
+const mapStateToProps = createStructuredSelector({
+  existingAccounts: getAccounts,
+  visibleAccounts: getVisibleAccounts,
+  archivedAccounts: getArchivedAccounts,
+  canCreateAccount,
 })
 
 const mapDispatchToProps = {
@@ -49,6 +56,7 @@ const mapDispatchToProps = {
 type Props = {
   existingAccounts: Account[],
   addAccount: Function,
+  visibleAccounts: Account[],
   archivedAccounts: Account[],
   canCreateAccount: boolean,
   closeModal: Function,
@@ -93,7 +101,7 @@ class AddAccountModal extends PureComponent<Props, State> {
   scanSubscription: *
 
   startScanAccountsDevice() {
-    const { existingAccounts, addAccount } = this.props
+    const { visibleAccounts } = this.props
     const { deviceSelected, currency } = this.state
 
     if (!deviceSelected || !currency) {
@@ -102,8 +110,7 @@ class AddAccountModal extends PureComponent<Props, State> {
     const bridge = getBridgeForCurrency(currency)
     this.scanSubscription = bridge.scanAccountsOnDevice(currency, deviceSelected.path, {
       next: account => {
-        if (!existingAccounts.some(a => a.id === account.id)) {
-          addAccount(account)
+        if (!visibleAccounts.some(a => a.id === account.id)) {
           this.setState(state => ({
             scannedAccounts: [...state.scannedAccounts, account],
           }))
@@ -161,9 +168,9 @@ class AddAccountModal extends PureComponent<Props, State> {
   handleChangeStatus = (deviceStatus, appStatus) => this.setState({ appStatus })
 
   handleImportAccount = () => {
-    const { updateAccount } = this.props
+    const { addAccount } = this.props
     const { selectedAccounts } = this.state
-    selectedAccounts.forEach(a => updateAccount({ ...a, archived: false }))
+    selectedAccounts.forEach(a => addAccount({ ...a, archived: false }))
     this.setState({ selectedAccounts: [] })
     closeModal(MODAL_ADD_ACCOUNT)
     this.props.counterValuesPolling.poll()

@@ -143,6 +143,7 @@ type Props = {
   deviceSelected: ?Device,
   onChangeDevice: Device => void,
   t: T,
+  errorMessage: ?string,
 }
 
 const emitChangeDevice = props => {
@@ -180,7 +181,15 @@ class DeviceConnect extends PureComponent<Props> {
   }
 
   render() {
-    const { deviceSelected, accountName, currency, t, onChangeDevice, devices } = this.props
+    const {
+      deviceSelected,
+      errorMessage,
+      accountName,
+      currency,
+      t,
+      onChangeDevice,
+      devices,
+    } = this.props
 
     const appState = this.getAppState()
 
@@ -250,19 +259,24 @@ class DeviceConnect extends PureComponent<Props> {
             <StepCheck checked={appState.success} hasErrors={appState.fail} />
           </StepContent>
         </Step>
-        {accountName !== null && (
-          <Info hasErrors={appState.fail}>
+
+        {appState.fail ? (
+          <Info hasErrors>
             <Box>
               <IconInfoCircle size={12} />
             </Box>
-            <Box>
-              <Trans i18nKey="deviceConnect:info" parent="div">
-                {'You must use the device associated to the account '}
-                <strong>{accountName}</strong>
-              </Trans>
+            <Box style={{ userSelect: 'text' }}>
+              {accountName ? (
+                <Trans i18nKey="deviceConnect:info" parent="div">
+                  {'You must use the device associated to the account '}
+                  <strong>{accountName}</strong>
+                </Trans>
+              ) : (
+                String(errorMessage || '')
+              )}
             </Box>
           </Info>
-        )}
+        ) : null}
       </Box>
     )
   }

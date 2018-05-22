@@ -14,8 +14,6 @@ const UnsupportedBridge: WalletBridge<*> = {
     return { unsubscribe() {} }
   },
 
-  refreshLastOperations: () => Promise.reject(genericError),
-
   pullMoreOperations: () => Promise.reject(genericError),
 
   isRecipientValid: () => Promise.reject(genericError),

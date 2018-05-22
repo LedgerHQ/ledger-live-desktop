@@ -1,11 +1,8 @@
 // @flow
 
-import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
-
 import type { IPCSend } from 'types/electron'
 
 import scanAccountsOnDevice from './scanAccountsOnDevice'
-import { verifyAddress, getFreshReceiveAddress } from './helpers'
 
 import sync from './sync'
 
@@ -34,37 +31,6 @@ export default {
     } catch (err) {
       console.log(err)
       send('accounts.scanAccountsOnDevice.fail', formatErr(err))
-    }
-  },
-
-  getFreshReceiveAddress: async (
-    send: IPCSend,
-    {
-      currencyId,
-      accountIndex,
-    }: {
-      currencyId: string,
-      accountIndex: number,
-    },
-  ) => {
-    try {
-      const freshAddress = await getFreshReceiveAddress({ currencyId, accountIndex })
-      send('accounts.getFreshReceiveAddress.success', freshAddress)
-    } catch (err) {
-      send('accounts.getFreshReceiveAddress.fail', err)
-    }
-  },
-
-  verifyAddress: async (
-    send: IPCSend,
-    { pathDevice, path }: { pathDevice: string, path: string },
-  ) => {
-    const transport = await CommNodeHid.open(pathDevice)
-    try {
-      await verifyAddress({ transport, path })
-      send('accounts.verifyAddress.success')
-    } catch (err) {
-      send('accounts.verifyAddress.fail')
     }
   },
 }
