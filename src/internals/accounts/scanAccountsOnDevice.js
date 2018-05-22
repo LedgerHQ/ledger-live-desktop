@@ -46,6 +46,24 @@ export default async function scanAccountsOnDevice(props: Props): Promise<Accoun
   return accounts
 }
 
+export async function getWalletIdentifier({
+  hwApp,
+  isSegwit,
+  currencyId,
+  devicePath,
+}: {
+  hwApp: Object,
+  isSegwit: boolean,
+  currencyId: string,
+  devicePath: string,
+}) {
+  const isVerify = false
+  const deviceIdentifiers = await hwApp.getWalletPublicKey(devicePath, isVerify, isSegwit)
+  const { publicKey } = deviceIdentifiers
+  const WALLET_IDENTIFIER = `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
+  return WALLET_IDENTIFIER
+}
+
 async function scanAccountsOnDeviceBySegwit({
   hwApp,
   currencyId,
@@ -54,11 +72,7 @@ async function scanAccountsOnDeviceBySegwit({
   isSegwit,
 }) {
   // compute wallet identifier
-  const isVerify = false
-  const deviceIdentifiers = await hwApp.getWalletPublicKey(devicePath, isVerify, isSegwit)
-  const { publicKey } = deviceIdentifiers
-
-  const WALLET_IDENTIFIER = `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
+  const WALLET_IDENTIFIER = await getWalletIdentifier({ hwApp, isSegwit, currencyId, devicePath })
 
   // retrieve or create the wallet
   const wallet = await getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit)

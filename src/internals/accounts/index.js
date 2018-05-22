@@ -3,11 +3,13 @@
 import type { IPCSend } from 'types/electron'
 
 import scanAccountsOnDevice from './scanAccountsOnDevice'
+import signAndBroadcastTransactionBTCLike from './signAndBroadcastTransaction/btc'
 
 import sync from './sync'
 
 export default {
   sync,
+  signAndBroadcastTransactionBTCLike,
   scan: async (
     send: IPCSend,
     {
@@ -29,7 +31,6 @@ export default {
       })
       send('accounts.scanAccountsOnDevice.success', accounts)
     } catch (err) {
-      console.log(err)
       send('accounts.scanAccountsOnDevice.fail', formatErr(err))
     }
   },
