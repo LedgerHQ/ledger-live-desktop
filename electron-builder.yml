@@ -83,6 +83,5 @@ files:
   - "!node_modules/react-dom/umd{,/**/*}"
   - "!node_modules/react-qr-reader/src{,/**/*}"
   - "!node_modules/react/umd{,/**/*}"
-  - "!node_modules/rxjs{,/**/*}"
   - "!node_modules/source-map/dist{,/**/*}"
   - "!node_modules/styled-components/src{,/**/*}"
