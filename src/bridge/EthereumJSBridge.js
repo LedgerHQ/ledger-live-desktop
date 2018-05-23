@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import EthereumKind from 'components/FeesField/EthereumKind'
+import throttle from 'lodash/throttle'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
@@ -62,6 +63,21 @@ const paginateMoreTransactions = async (
   return mergeOps(acc, txs.map(toAccountOperation(account)))
 }
 
+const fetchCurrentBlock = (perCurrencyId => currency => {
+  if (perCurrencyId[currency.id]) return perCurrencyId[currency.id]
+  const api = apiForCurrency(currency)
+  const f = throttle(
+    () =>
+      api.getCurrentBlock().catch(e => {
+        f.cancel()
+        throw e
+      }),
+    5000,
+  )
+  perCurrencyId[currency.id] = f
+  return f
+})({})
+
 const EthereumBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
     let finished = false
@@ -73,15 +89,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     // in future ideally what we want is:
     // return mergeMap(addressesObservable, address => fetchAccount(address))
 
-    let balanceZerosCount = 0
-
-    let currentBlockPromise
-    function lazyCurrentBlock() {
-      if (!currentBlockPromise) {
-        currentBlockPromise = api.getCurrentBlock()
-      }
-      return currentBlockPromise
-    }
+    let newAccountCount = 0
 
     async function stepAddress(
       index,
@@ -89,13 +97,18 @@ const EthereumBridge: WalletBridge<Transaction> = {
       isStandard,
     ): { account?: Account, complete?: boolean } {
       const balance = await api.getAccountBalance(address)
-      if (finished) return {}
-      if (balance === 0) {
-        // FIXME it should be only if there is no txs instead of balance=0 !
+      if (finished) return { complete: true }
+      const currentBlock = await fetchCurrentBlock(currency)
+      if (finished) return { complete: true }
+      const { txs } = await api.getTransactions(address)
+      if (finished) return { complete: true }
+
+      if (txs.length === 0) {
+        // this is an empty account
         if (isStandard) {
-          if (balanceZerosCount === 0) {
+          if (newAccountCount === 0) {
             // first zero account will emit one account as opportunity to create a new account..
-            const currentBlock = await lazyCurrentBlock()
+            const currentBlock = await fetchCurrentBlock(currency)
             const accountId = `${currency.id}_${address}`
             const account: Account = {
               id: accountId,
@@ -117,17 +130,12 @@ const EthereumBridge: WalletBridge<Transaction> = {
             }
             return { account, complete: true }
           }
-          balanceZerosCount++
+          newAccountCount++
         }
-        // NB for legacy addresses we might not want to stop at first zero but
-        // continue maybe at least for the first 10 addresses
+        // NB for legacy addresses maybe we will continue at least for the first 10 addresses
         return { complete: true }
       }
 
-      const currentBlock = await lazyCurrentBlock()
-      if (finished) return {}
-      const { txs } = await api.getTransactions(address)
-      if (finished) return {}
       const accountId = `${currency.id}_${address}`
       const account: Account = {
         id: accountId,
@@ -185,7 +193,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     const api = apiForCurrency(currency)
     async function main() {
       try {
-        const block = await api.getCurrentBlock()
+        const block = await fetchCurrentBlock(currency)
         if (unsubscribed) return
         if (block.height === blockHeight) {
           complete()
