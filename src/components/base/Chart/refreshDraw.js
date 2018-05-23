@@ -65,9 +65,8 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
     if (isInteractive) {
       // Update focus bar colors
       NODES.xBar.attr('stroke', COLORS.focusBar)
-      NODES.yBar.attr('stroke', COLORS.focusBar)
       // Update dot color
-      NODES.focus.attr('fill', COLORS.focus)
+      NODES.focus.attr('stroke', COLORS.focus)
     }
     // Update gradient color
     NODES.gradientStart.attr('stop-color', COLORS.gradientStart)
@@ -82,7 +81,6 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
     NODES.focus.style('opacity', 0)
     NODES.tooltip.style('opacity', 0)
     NODES.xBar.style('opacity', 0)
-    NODES.yBar.style('opacity', 0)
   }
 
   // Draw axis

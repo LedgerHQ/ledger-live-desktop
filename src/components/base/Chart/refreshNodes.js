@@ -30,16 +30,7 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
     NODES.wrapper
       .append('line')
       .attr('stroke', COLORS.focusBar)
-      .attr('stroke-width', '1px')
-      .attr('stroke-dasharray', '3, 2'),
-  )
-
-  ensure({ onlyIf: isInteractive, NODES, key: 'yBar' }, () =>
-    NODES.wrapper
-      .append('line')
-      .attr('stroke', COLORS.focusBar)
-      .attr('stroke-width', '1px')
-      .attr('stroke-dasharray', '3, 2'),
+      .attr('stroke-width', '1px'),
   )
 
   // Gradient
@@ -98,7 +89,9 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
     NODES.wrapper
       .append('g')
       .append('circle')
-      .attr('fill', COLORS.focus)
+      .attr('fill', 'white')
+      .attr('stroke', COLORS.focus)
+      .attr('stroke-width', 2)
       .attr('r', 4),
   )
 

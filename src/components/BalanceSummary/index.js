@@ -35,7 +35,8 @@ const BalanceSummary = ({
   renderHeader,
   selectedTime,
 }: Props) => {
-  const unit = getFiatCurrencyByTicker(counterValue).units[0]
+  const currency = getFiatCurrencyByTicker(counterValue)
+  const account = accounts.length === 1 ? accounts[0] : null
   return (
     <Card p={0} py={6}>
       <CalculateBalance
@@ -61,21 +62,28 @@ const BalanceSummary = ({
               <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
                 <Chart
                   id={chartId}
+                  account={account}
                   color={chartColor}
                   data={balanceHistory}
                   height={250}
-                  unit={unit}
+                  currency={currency}
                   tickXScale={selectedTime}
-                  renderTooltip={d =>
-                    isAvailable ? (
-                      <FormattedVal
-                        alwaysShowSign={false}
-                        color="white"
-                        showCode
-                        fiat={counterValue}
-                        val={d.value}
-                      />
-                    ) : null
+                  renderTooltip={
+                    isAvailable && !account
+                      ? d => (
+                          <Fragment>
+                            <FormattedVal
+                              alwaysShowSign={false}
+                              fontSize={5}
+                              color="dark"
+                              showCode
+                              fiat={counterValue}
+                              val={d.value}
+                            />
+                            <Box mt="auto">{d.date.toISOString().substr(0, 10)}</Box>
+                          </Fragment>
+                        )
+                      : null
                   }
                 />
               </Box>
