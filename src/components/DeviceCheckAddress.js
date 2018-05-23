@@ -27,6 +27,19 @@ class CheckAddress extends PureComponent<Props, State> {
     this.verifyAddress({ device, account })
   }
 
+  componentWillUnmount() {
+    this._isUnmounted = true
+  }
+
+  _isUnmounted = false
+
+  safeSetState = (...args: *) => {
+    if (this._isUnmounted) {
+      return
+    }
+    this.setState(...args)
+  }
+
   verifyAddress = async ({ device, account }: { device: Device, account: Account }) => {
     try {
       // TODO: this will work only for BTC-like accounts
@@ -49,10 +62,10 @@ class CheckAddress extends PureComponent<Props, State> {
         throw new Error('Confirmed address is different')
       }
 
-      this.setState({ isVerified: true })
+      this.safeSetState({ isVerified: true })
       this.props.onCheck(true)
     } catch (err) {
-      this.setState({ isVerified: false })
+      this.safeSetState({ isVerified: false })
       this.props.onCheck(false)
     }
   }
