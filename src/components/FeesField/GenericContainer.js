@@ -12,7 +12,7 @@ export default translate()(
     <Box flow={1}>
       <Label>
         <span>{t('send:steps.amount.fees')}</span>
-        <LabelInfoTooltip ml={1} text={help} />
+        {help ? <LabelInfoTooltip ml={1} text={help} /> : null}
       </Label>
       <Box horizontal flow={5}>
         {children}
