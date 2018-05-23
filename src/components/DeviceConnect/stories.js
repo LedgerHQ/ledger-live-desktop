@@ -4,9 +4,16 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
+import {
+  getCryptoCurrencyById,
+  listCryptoCurrencies,
+} from '@ledgerhq/live-common/lib/helpers/currencies'
+
+import type { Currency } from '@ledgerhq/live-common/lib/types'
 
 import DeviceConnect from 'components/DeviceConnect'
 
+const currencies = listCryptoCurrencies().map(c => c.id)
 const stories = storiesOf('Components', module)
 
 const devices = [
@@ -34,12 +41,27 @@ const devices = [
 ]
 
 stories.add('DeviceConnect', () => (
-  <DeviceConnect
-    accountName={boolean('withAccount', true) ? text('accountName', 'Test Account') : null}
-    coinType={Number(select('coinType', [0, 1, 145, 156, 2, 3, 5], '0'))}
-    appOpened={select('appOpened', ['', 'success', 'fail'], '')}
-    devices={devices.slice(0, Number(select('devices', [0, 1, 2, 3], '0')))}
-    deviceSelected={devices[select('deviceSelected', ['', 0, 1, 2], '')] || null}
-    onChangeDevice={action('onChangeDevice')}
-  />
+  <Wrapper currencyId={select('currencyId', currencies, 'bitcoin_testnet')}>
+    {({ currency }) => (
+      <DeviceConnect
+        currency={currency}
+        accountName={boolean('withAccount', true) ? text('accountName', 'Test Account') : null}
+        appOpened={select('appOpened', ['', 'success', 'fail'], '')}
+        devices={devices.slice(0, Number(select('devices', [0, 1, 2, 3], '0')))}
+        deviceSelected={devices[select('deviceSelected', ['', 0, 1, 2], '')] || null}
+        onChangeDevice={action('onChangeDevice')}
+      />
+    )}
+  </Wrapper>
 ))
+
+function Wrapper({
+  currencyId,
+  children,
+}: {
+  currencyId: string,
+  children: (props: { currency: Currency }) => any,
+}) {
+  const currency = getCryptoCurrencyById(currencyId)
+  return children({ currency })
+}

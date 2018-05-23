@@ -22,8 +22,13 @@ const mapStateToProps = state => ({
 })
 
 const renderItem = a => {
-  const Icon = getCryptoCurrencyIcon(a)
+  const Icon = getCryptoCurrencyIcon(a.currency)
   const { color } = a.currency
+
+  // FIXME: we need a non-hacky way to handle text ellipsis
+  const nameOuterStyle = { width: 0 }
+  const nameInnerStyle = { overflow: 'hidden', textOverflow: 'ellipsis' }
+
   return (
     <Box grow horizontal alignItems="center" flow={2}>
       {Icon && (
@@ -31,8 +36,8 @@ const renderItem = a => {
           <Icon size={16} />
         </Box>
       )}
-      <Box grow>
-        <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+      <Box grow style={nameOuterStyle} ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+        <Text style={nameInnerStyle} ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {a.name}
         </Text>
       </Box>
