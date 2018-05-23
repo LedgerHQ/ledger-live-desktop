@@ -7,7 +7,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device, T } from 'types/common'
 
 import Box from 'components/base/Box'
-import CurrentAddress from 'components/CurrentAddress'
+import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import DeviceConfirm from 'components/DeviceConfirm'
 import DeviceCheckAddress from 'components/DeviceCheckAddress'
 
@@ -50,7 +50,7 @@ export default (props: Props) => (
       <Fragment>
         <Title>{props.t('receive:steps.confirmAddress.action')}</Title>
         <Text>{props.t('receive:steps.confirmAddress.text')}</Text>
-        {props.account && <CurrentAddress address={props.account.address} />}
+        {props.account && <CurrentAddressForAccount account={props.account} />}
         {props.device &&
           props.account && (
             <Box mb={2} mt={-1}>

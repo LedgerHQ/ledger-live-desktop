@@ -97,12 +97,12 @@ const EthereumBridge: WalletBridge<Transaction> = {
           const account: Account = {
             id: accountId,
             xpub: '',
-            path,
+            path, // FIXME we probably not want the address path in the account.path
             walletPath: String(index),
             name: 'New Account',
             isSegwit: false,
             address,
-            addresses: [address],
+            addresses: [{ str: address, path, }],
             balance,
             blockHeight: currentBlock.height,
             archived: true,
@@ -128,12 +128,12 @@ const EthereumBridge: WalletBridge<Transaction> = {
       const account: Account = {
         id: accountId,
         xpub: '',
-        path,
+            path, // FIXME we probably not want the address path in the account.path
         walletPath: String(index),
         name: address.slice(32),
         isSegwit: false,
         address,
-        addresses: [address],
+        addresses: [{ str: address, path, }],
         balance,
         blockHeight: currentBlock.height,
         archived: true,
@@ -263,7 +263,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice),
 
-  signAndBroadcast: async (a, t, deviceId) => {
+  signAndBroadcast: async ({ account: a, transaction: t, deviceId }) => {
     const api = apiForCurrency(a.currency)
 
     const nonce = await api.getAccountNonce(a.address)
