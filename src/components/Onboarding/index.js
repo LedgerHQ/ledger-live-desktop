@@ -10,7 +10,7 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 
 import { saveSettings } from 'actions/settings'
-import { nextStep, prevStep, jumpStep } from 'reducers/onboarding'
+import { nextStep, prevStep, jumpStep, setGenuineCheckFail } from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
 
 // TODO: re-write it without auto lock, fixed width of the password modal, not dynamic titles
@@ -69,12 +69,14 @@ type Props = {
 
 export type StepProps = {
   t: T,
+  onboarding: OnboardingState,
   prevStep: Function,
   nextStep: Function,
   jumpStep: Function,
   finish: Function,
   savePassword: Function,
   getDeviceInfo: Function,
+  setGenuineCheckFail: Function,
 }
 
 class Onboarding extends PureComponent<Props> {
@@ -107,6 +109,7 @@ class Onboarding extends PureComponent<Props> {
     const stepProps: StepProps = {
       t,
       onboarding,
+      setGenuineCheckFail,
       prevStep,
       nextStep,
       jumpStep,

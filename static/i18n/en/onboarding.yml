@@ -51,6 +51,23 @@ writeSeed:
 genuineCheck:
   title: Check PIN / Seed / Authenticity
   desc: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
+  steps:
+    step1:
+      title: You alone have chosen your PIN code
+      desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
+    step2:
+      title: You alone have initialized your recovery phrase
+      desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
+    step3:
+      title: Your device is a genuine Ledger device
+      desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
+  buttons:
+    genuineCheck: Genuine check
+    contactSupport: Contact Support
+  errorPage:
+    ledgerNano:
+      title: Something is wrong with your Ledger Nano S
+      desc: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
 setPassword:
   title: This is the title of the screen. 1 line is the maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet

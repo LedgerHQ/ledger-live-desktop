@@ -14,8 +14,8 @@ export default (props: StepProps) => {
   const { nextStep, t } = props
 
   return (
-    <Box sticky alignItems="center" justifyContent="center">
-      <Box align="center">
+    <Box sticky pt={150}>
+      <Box grow alignItems="center">
         <Title>{t('onboarding:selectDevice.title')}</Title>
         <Description style={{ maxWidth: 714 }}>{t('onboarding:selectDevice.desc')}</Description>
         <Box>

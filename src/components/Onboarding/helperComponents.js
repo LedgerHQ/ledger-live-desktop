@@ -73,7 +73,7 @@ export const IconOptionRow = styled(Box).attrs({
   color: 'wallet',
 })``
 
-export function DisclaimerBox({ disclaimerNotes }: { disclaimerNotes: any }) {
+export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any }) {
   return (
     <Box
       shrink
@@ -84,6 +84,7 @@ export function DisclaimerBox({ disclaimerNotes }: { disclaimerNotes: any }) {
         backgroundColor: '#ea2e490c',
         border: 'dashed 1px #ea2e49b3',
       }}
+      {...p}
     >
       <Box
         m={3}

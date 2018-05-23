@@ -49,8 +49,8 @@ class SetPassword extends PureComponent<StepProps, State> {
     const { nextStep, prevStep, t } = this.props
     const { isPasswordModalOpened, isPasswordEnabled } = this.state
     return (
-      <Box sticky>
-        <Box grow alignItems="center" justifyContent="center">
+      <Box sticky pt={150}>
+        <Box grow alignItems="center">
           <Title>{t('onboarding:setPassword.title')}</Title>
           <Description style={{ maxWidth: 714 }}>{t('onboarding:setPassword.desc')}</Description>
           <IconSetPassword />

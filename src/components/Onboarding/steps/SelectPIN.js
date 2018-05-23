@@ -62,8 +62,8 @@ export default (props: StepProps) => {
     },
   ]
   return (
-    <Box sticky>
-      <Box grow alignItems="center" justifyContent="center">
+    <Box sticky pt={150}>
+      <Box grow alignItems="center">
         <Box align="center" mb={5}>
           <Title>{t('onboarding:selectPIN.title')}</Title>
           <Description style={{ maxWidth: 527 }}>{t('onboarding:selectPIN.desc')}</Description>
@@ -78,7 +78,7 @@ export default (props: StepProps) => {
               {steps.map(step => <OptionRow key={step.key} step={step} />)}
             </Box>
           </Inner>
-          <DisclaimerBox disclaimerNotes={disclaimerNotes} />
+          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
         </Box>
       </Box>
       <OnboardingFooter
