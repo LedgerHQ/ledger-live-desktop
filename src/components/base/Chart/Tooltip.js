@@ -1,47 +1,37 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
+import styled from 'styled-components'
 
-import type { Unit } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
-import { colors as themeColors } from 'styles/theme'
-import { TooltipContainer } from 'components/base/Tooltip'
+import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
+import Box from 'components/base/Box'
 
 import type { Item } from './types'
 
-/**
- * we use inline style for more perfs, as tooltip may re-render numerous times
- */
-
-const Arrow = () => (
-  <svg
-    style={{
-      display: 'block',
-      position: 'absolute',
-      left: '50%',
-      bottom: 0,
-      marginBottom: -10,
-      transform: 'translate(-50%, 0)',
-    }}
-    viewBox="0 0 14 6.2"
-    width={16}
-    height={16}
-  >
-    <path fill={themeColors.dark} d="m14 0-5.5 5.6c-0.8 0.8-2 0.8-2.8 0l-5.7-5.6" />
-  </svg>
-)
+const Container = styled(Box).attrs({
+  px: 4,
+  py: 3,
+  align: 'center',
+})`
+  background: white;
+  border: 1px solid #d8d8d8;
+  border-radius: 4px;
+  width: 150px;
+  height: 90px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
+`
 
 const Tooltip = ({
-  d,
+  item,
   renderTooltip,
-  fiat,
-  unit,
+  account,
 }: {
-  d: Item,
+  item: Item,
   renderTooltip?: Function,
-  fiat?: string,
-  unit?: Unit,
+  account: Account,
 }) => (
   <div style={{ position: 'relative' }}>
     <div
@@ -51,32 +41,37 @@ const Tooltip = ({
         left: 0,
         transform: `translate3d(-50%, 0, 0)`,
         whiteSpace: 'nowrap',
-        marginBottom: 5,
+        marginBottom: -5,
       }}
     >
-      <TooltipContainer style={{ textAlign: 'center' }}>
+      <Container style={{ textAlign: 'center' }}>
         {renderTooltip ? (
-          renderTooltip(d)
+          renderTooltip(item)
         ) : (
-          <FormattedVal
-            alwaysShowSign={false}
-            color="white"
-            showCode
-            fiat={fiat}
-            unit={unit}
-            val={d.value}
-          />
+          <Fragment>
+            <FormattedVal
+              color="dark"
+              fontSize={5}
+              alwaysShowSign={false}
+              showCode
+              unit={account.currency.units[0]}
+              val={item.value}
+            />
+            <CounterValue
+              account={account}
+              currency={account.currency}
+              value={item.value}
+              disableRounding
+              showCode
+            />
+            <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt="auto">
+              {item.date.toISOString().substr(0, 10)}
+            </Box>
+          </Fragment>
         )}
-      </TooltipContainer>
-      <Arrow />
+      </Container>
     </div>
   </div>
 )
-
-Tooltip.defaultProps = {
-  renderTooltip: undefined,
-  fiat: undefined,
-  unit: undefined,
-}
 
 export default Tooltip
