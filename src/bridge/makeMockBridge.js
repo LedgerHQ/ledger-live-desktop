@@ -146,7 +146,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
     getMaxAmount,
 
-    signAndBroadcast: async (account, t) => {
+    signAndBroadcast: async ({ account, transaction: t }) => {
       const rng = new Prando()
       const op = genOperation(account, account.operations, account.currency, rng)
       op.amount = -t.amount

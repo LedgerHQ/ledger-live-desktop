@@ -24,7 +24,6 @@ if (handlers.default) {
 }
 
 process.on('message', payload => {
-  console.log(payload)
   if (payload.data && payload.data.requestId) {
     const { data, requestId, id } = payload.data
     // this is the new type of "command" payload!

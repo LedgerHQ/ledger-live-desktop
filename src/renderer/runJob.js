@@ -14,7 +14,7 @@ export default function runJob({
   successResponse: string,
   errorResponse: string,
   data?: any,
-}): Promise<void> {
+}): Promise<any> {
   return new Promise((resolve, reject) => {
     ipcRenderer.send(channel, { type: job, data })
     ipcRenderer.on('msg', handler)

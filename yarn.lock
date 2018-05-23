@@ -1473,9 +1473,9 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@^2.7.2":
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.7.2.tgz#abfa71428c186220006d35baca44261a1c3ef9ed"
+"@ledgerhq/live-common@^2.7.5":
+  version "2.7.5"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.7.5.tgz#5434bf2e708aaca471be4ca823e613cf27ba700c"
   dependencies:
     axios "^0.18.0"
     invariant "^2.2.2"
@@ -12051,9 +12051,9 @@ rx@2.3.24:
   version "2.3.24"
   resolved "https://registry.yarnpkg.com/rx/-/rx-2.3.24.tgz#14f950a4217d7e35daa71bbcbe58eff68ea4b2b7"
 
-rxjs-compat@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.2.0.tgz#2eb49cc6ac20d0d7057c6887d1895beaab0966f9"
+rxjs-compat@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/rxjs-compat/-/rxjs-compat-6.1.0.tgz#935059623ee4c167728c9dd03ee6e4468cc5b583"
 
 rxjs@^5.1.1, rxjs@^5.4.2, rxjs@^5.5.2:
   version "5.5.10"

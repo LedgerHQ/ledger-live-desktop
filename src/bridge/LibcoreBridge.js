@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 import { ipcRenderer } from 'electron'
-import { decodeAccount } from 'reducers/accounts'
+
+import { decodeAccount, encodeAccount } from 'reducers/accounts'
 import runJob from 'renderer/runJob'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
@@ -153,7 +154,16 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.feePerByte),
 
-  signAndBroadcast: () => Promise.reject(notImplemented),
+  signAndBroadcast: ({ account, transaction, deviceId }) => {
+    const rawAccount = encodeAccount(account)
+    return runJob({
+      channel: 'accounts',
+      job: 'signAndBroadcastTransactionBTCLike',
+      successResponse: 'accounts.signAndBroadcastTransactionBTCLike.success',
+      errorResponse: 'accounts.signAndBroadcastTransactionBTCLike.fail',
+      data: { account: rawAccount, transaction, deviceId },
+    })
+  },
 }
 
 export default LibcoreBridge

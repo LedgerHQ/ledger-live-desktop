@@ -34,7 +34,7 @@ class DeviceSignTransaction extends PureComponent<Props, State> {
   sign = async () => {
     const { device, account, transaction, bridge, onSuccess } = this.props
     try {
-      const txid = await bridge.signAndBroadcast(account, transaction, device.path)
+      const txid = await bridge.signAndBroadcast({ account, transaction, deviceId: device.path })
       onSuccess(txid)
     } catch (error) {
       this.setState({ error })

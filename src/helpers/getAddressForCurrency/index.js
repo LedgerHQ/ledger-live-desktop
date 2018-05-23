@@ -26,6 +26,7 @@ const all = {
   ethereum_classic_testnet: ethereum,
 }
 
-const getAddressForCurrency: Module = (currencyId: string) => all[currencyId] || fallback(currencyId)
+const getAddressForCurrency: Module = (currencyId: string) =>
+  all[currencyId] || fallback(currencyId)
 
 export default getAddressForCurrency

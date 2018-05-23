@@ -6,7 +6,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
-import CurrentAddress from 'components/CurrentAddress'
+import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import Label from 'components/base/Label'
 import RequestAmount from 'components/RequestAmount'
 
@@ -30,16 +30,17 @@ export default (props: Props) => (
         withMax={false}
       />
     </Box>
-    <CurrentAddress
-      accountName={props.account && props.account.name}
-      address={props.account && props.account.address}
-      addressVerified={props.addressVerified}
-      amount={props.amount}
-      onVerify={props.onVerify}
-      withBadge
-      withFooter
-      withQRCode
-      withVerify={props.addressVerified === false}
-    />
+    {props.account && (
+      <CurrentAddressForAccount
+        account={props.account}
+        addressVerified={props.addressVerified}
+        amount={props.amount}
+        onVerify={props.onVerify}
+        withBadge
+        withFooter
+        withQRCode
+        withVerify={props.addressVerified === false}
+      />
+    )}
   </Box>
 )
