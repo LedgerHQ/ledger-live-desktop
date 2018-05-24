@@ -3,6 +3,7 @@
 export type Item = {
   date: Date,
   value: number,
+  originalValue: number,
 }
 
 type EnrichedItem = {

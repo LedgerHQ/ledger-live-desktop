@@ -4,7 +4,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import type { Account, BalanceHistory } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import { getBalanceHistorySum } from '@ledgerhq/live-common/lib/helpers/account'
 import CounterValues from 'helpers/countervalues'
 import { exchangeSettingsForAccountSelector, counterValueCurrencySelector } from 'reducers/settings'
@@ -16,8 +16,14 @@ type OwnProps = {
   children: Props => *,
 }
 
+type Item = {
+  date: Date,
+  value: number,
+  originalValue: number,
+}
+
 type Props = OwnProps & {
-  balanceHistory: BalanceHistory,
+  balanceHistory: Item[],
   balanceStart: number,
   balanceEnd: number,
   isAvailable: boolean,
@@ -26,10 +32,18 @@ type Props = OwnProps & {
 const mapStateToProps = (state: State, props: OwnProps) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
   let isAvailable = true
+
+  // create array of original values, used to reconciliate
+  // with counter values after calculation
+  const originalValues = []
+
   const balanceHistory = getBalanceHistorySum(
     props.accounts,
     props.daysCount,
     (account, value, date) => {
+      // keep track of original value
+      originalValues.push(value)
+
       const cv = CounterValues.calculateSelector(state, {
         value,
         date,
@@ -43,7 +57,11 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       }
       return cv
     },
+  ).map((item, i) =>
+    // reconciliate balance history with original values
+    ({ ...item, originalValue: originalValues[i] || 0 }),
   )
+
   return {
     isAvailable,
     balanceHistory,
