@@ -3,7 +3,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { radii } from 'styles/theme'
+import { radii, colors } from 'styles/theme'
+
 import type { T } from 'types/common'
 
 import { setGenuineCheckFail } from 'reducers/onboarding'
@@ -76,16 +77,21 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
               </Box>
               {!pinStepPass ? (
-                <ButtonCombo handleStepPass={this.handleStepPass} step="pinStepPass" />
+                <ButtonCombo
+                  handleStepPass={this.handleStepPass}
+                  step="pinStepPass"
+                  disabled={false}
+                  t={this.props.t}
+                />
               ) : (
-                <Box alignItems="center">
+                <Box justify="center" color={colors.wallet} ml={8}>
                   <IconCheck size={16} />
                 </Box>
               )}
             </CardWrapper>
           </Box>
           <Box mt={5}>
-            <CardWrapper>
+            <CardWrapper disabled={!pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>2.</IconOptionRow>
@@ -94,16 +100,21 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
               </Box>
               {!phraseStepPass ? (
-                <ButtonCombo handleStepPass={this.handleStepPass} step="phraseStepPass" />
+                <ButtonCombo
+                  handleStepPass={this.handleStepPass}
+                  step="phraseStepPass"
+                  disabled={!pinStepPass}
+                  t={this.props.t}
+                />
               ) : (
-                <Box justify="center">
-                  <IconCheck size={20} />
+                <Box justify="center" color={colors.wallet} ml={8}>
+                  <IconCheck size={16} />
                 </Box>
               )}
             </CardWrapper>
           </Box>
           <Box mt={5}>
-            <CardWrapper>
+            <CardWrapper disabled={!phraseStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>3.</IconOptionRow>
@@ -111,8 +122,8 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 </Box>
                 <CardDescription>{t('onboarding:genuineCheck.steps.step3.desc')}</CardDescription>
               </Box>
-              <Box justify="center" horizontal mx={4}>
-                <Button big primary>
+              <Box justify="center" horizontal mx={5}>
+                <Button big primary disabled={!phraseStepPass}>
                   {t('onboarding:genuineCheck.buttons.genuineCheck')}
                 </Button>
               </Box>
@@ -134,19 +145,39 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
 export default connect(null, mapDispatchToProps)(GenuineCheck)
 
-export function ButtonCombo({ handleStepPass, step }: { handleStepPass: any, step: string }) {
+export function ButtonCombo({
+  handleStepPass,
+  step,
+  disabled,
+  t,
+}: {
+  handleStepPass: any,
+  step: string,
+  disabled: boolean,
+  t: T,
+}) {
   return (
     <Box justify="center" horizontal style={{ margin: '0 20px' }}>
-      <Button style={{ padding: '0 20px' }} outline onClick={() => handleStepPass(step, true)}>
-        Yes
+      <Button
+        disabled={disabled}
+        style={{ padding: '0 20px' }}
+        outline
+        onClick={() => handleStepPass(step, true)}
+      >
+        {t('common:yes')}
       </Button>
-      <Button style={{ padding: '0 20px' }} outline onClick={() => handleStepPass(step, false)}>
-        No
+      <Button
+        disabled={disabled}
+        style={{ padding: '0 20px' }}
+        outline
+        onClick={() => handleStepPass(step, false)}
+      >
+        {t('common:no')}
       </Button>
     </Box>
   )
 }
-// TODO extract to the separate file
+// TODO extract to a separate file
 export function GenuineCheckFail({
   redoGenuineCheck,
   contactSupport,
@@ -175,7 +206,7 @@ export function GenuineCheckFail({
             redoGenuineCheck()
           }}
         >
-          Back
+          {t('common:back')}
         </Button>
         <Button
           small
@@ -218,7 +249,9 @@ const CardWrapper = styled(Card).attrs({
   horizontal: true,
   p: 5,
 })`
-  border: 1px solid #d8d8d8;
+  border: ${props => (props.disabled ? '1px dashed #d8d8d8' : '1px solid #d8d8d8')};
   max-height: 97px;
   min-width: 620px;
+  background-color: ${props => (props.disabled ? colors.lightGrey : colors.white)};
+  opacity: ${props => (props.disabled ? 0.7 : 1)};
 `
