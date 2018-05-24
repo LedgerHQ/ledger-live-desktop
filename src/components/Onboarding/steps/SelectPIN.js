@@ -8,16 +8,8 @@ import { colors } from 'styles/theme'
 import IconLedgerNanoSelectPIN from 'icons/onboarding/LedgerNanoSelectPIN'
 import IconLedgerBlueSelectPIN from 'icons/onboarding/LedgerBlueSelectPIN'
 import IconChevronRight from 'icons/ChevronRight'
-import IconLedgerBlue from 'icons/onboarding/LedgerBlue'
 
-import {
-  Title,
-  Description,
-  Inner,
-  OptionRow,
-  IconOptionRow,
-  DisclaimerBox,
-} from '../helperComponents'
+import { Title, Inner, OptionRow, IconOptionRow, DisclaimerBox } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
@@ -90,7 +82,6 @@ export default (props: StepProps) => {
         <Box align="center" mt={5}>
           {onboarding.isLedgerNano ? (
             <Fragment>
-              {' '}
               <Inner style={{ width: 680 }}>
                 <Box style={{ width: 260 }} mt={5}>
                   <IconLedgerNanoSelectPIN />
@@ -103,7 +94,6 @@ export default (props: StepProps) => {
             </Fragment>
           ) : (
             <Fragment>
-              {' '}
               <Inner style={{ width: 680 }}>
                 <Box style={{ width: 260, alignItems: 'center' }}>
                   <IconLedgerBlueSelectPIN />
