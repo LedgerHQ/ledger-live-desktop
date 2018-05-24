@@ -17,11 +17,13 @@ export type OnboardingState = {
   stepIndex: number,
   stepName: string, // TODO: specify that the string comes from Steps type
   steps: Step[],
+  isGenuineFail: boolean,
 }
 
 const state: OnboardingState = {
   stepIndex: 0,
   stepName: 'start',
+  isGenuineFail: false,
   steps: [
     {
       name: 'start',
@@ -138,6 +140,10 @@ const handlers = {
     const index = state.steps.indexOf(step)
     return { ...state, stepName: step.name, stepIndex: index }
   },
+  ONBOARDING_SET_GENUINE_CHECK_FAIL: (state, { payload: isGenuineFail }) => ({
+    ...state,
+    isGenuineFail,
+  }),
 }
 
 export default handleActions(handlers, state)
@@ -145,3 +151,4 @@ export default handleActions(handlers, state)
 export const nextStep = createAction('ONBOARDING_NEXT_STEP')
 export const prevStep = createAction('ONBOARDING_PREV_STEP')
 export const jumpStep = createAction('ONBOARDING_JUMP_STEP')
+export const setGenuineCheckFail = createAction('ONBOARDING_SET_GENUINE_CHECK_FAIL')

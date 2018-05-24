@@ -14,8 +14,8 @@ import type { StepProps } from '..'
 export default (props: StepProps) => {
   const { nextStep, prevStep, t } = props
   return (
-    <Box sticky>
-      <Box grow alignItems="center" justifyContent="center">
+    <Box sticky pt={150}>
+      <Box grow alignItems="center">
         <Title>{t('onboarding:analytics.title')}</Title>
         <Description style={{ maxWidth: 714 }}>{t('onboarding:analytics.desc')}</Description>
         <DeviceIcon style={{ padding: 15 }}>

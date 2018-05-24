@@ -18,15 +18,22 @@ type Props = {
 
 function OnboardingBreadcrumb(props: Props) {
   const { onboarding } = props
-  const { stepName } = onboarding
+  const { stepName, isGenuineFail } = onboarding
 
   const filteredSteps = onboarding.steps
     .filter(step => !step.external)
     .map(step => ({ ...step, label: step.label })) // TODO: translate
 
   const stepIndex = findIndex(filteredSteps, s => s.name === stepName)
+  const genuineStepIndex = findIndex(filteredSteps, s => s.name === 'genuineCheck')
 
-  return <Breadcrumb currentStep={stepIndex} items={filteredSteps} />
+  return (
+    <Breadcrumb
+      stepsErrors={isGenuineFail ? [genuineStepIndex] : undefined}
+      currentStep={stepIndex}
+      items={filteredSteps}
+    />
+  )
 }
 
 export default connect(mapStateToProps)(OnboardingBreadcrumb)

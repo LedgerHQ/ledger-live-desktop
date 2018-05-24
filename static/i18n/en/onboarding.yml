@@ -25,25 +25,49 @@ selectDevice:
     title: Ledger Blue
     desc:  Please replace it with the final wording once it’s done.
 selectPIN:
-  title: Select PIN code
+  title: Choose your PIN code
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   instructions:
-    step1: Connect your Ledger Nano S to your computer using the supplied micro USB cable.
-    step2: Press both buttons simultaneously as instructed on your Ledger Nano S screen.
-    step3: Select Configure as new device on your Ledger Nano S by pressing the right button, located above the validation icon.
+    step1: Connect the Ledger Nano S to your computer.
+    step2: Press both buttons simultaneously as instructed on the screen.
+    step3: Press the right button to select Configure as new device.
     step4: Choose a PIN code between 4 and 8 digits long.
+  disclaimer:
+    note1: Choose your own PIN code. This code unlocks your device.
+    note2: An 8-digit PIN code offers an optimum level of security.
+    note3: Never use a device supplied with a PIN code and/or a 24-word recovery phrase.
 writeSeed:
-  title: 24-Word Recovery phrase
-  desc: The 24 words that constitute your recovery phrase will now be displayed one by one on the Ledger Nano S screen. These 24 words will be displayed only once during this initialization.
+  title: Save your recovery phrase
+  desc: Your recovery phrase is formed by 24 words. They will be displayed only once.
   instructions:
-    step1: Copy the first word (Word \#1) in position 1 on the blank Recovery sheet included in the box.
-    step2: Move to Word \#2 by pressing the right button, copy it in position 2 on the Recovery sheet.
-    step3: Repeat the process until all 24 words are copied on the Recovery sheet.
-    step4: To confirm, use the right or left button to select each of the 24 words in the right order.
-    step5: Validate each word by simultaneously pressing both buttons.
+    step1: Copy the first word (Word \#1) in position 1 on the blank Recovery sheet.
+    step2: Press the right button to display Word \#2 and repeat the process until all 24 words are copied on the Recovery sheet.
+    step3: Confirm your recovery phrase press both buttons to validate each word displayed on the screen.
+  disclaimer:
+    note1: Carefully secure your 24 words out of sight.
+    note2: Ledger does not keep any backup of your 24 words.
+    note3: Make sure you are the sole holder of the 24-word recovery phrase.
+    note4: Never use a device supplied with a recovery phrase and/or a PIN code.
 genuineCheck:
   title: Check PIN / Seed / Authenticity
   desc: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
+  steps:
+    step1:
+      title: You alone have chosen your PIN code
+      desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
+    step2:
+      title: You alone have initialized your recovery phrase
+      desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
+    step3:
+      title: Your device is a genuine Ledger device
+      desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
+  buttons:
+    genuineCheck: Genuine check
+    contactSupport: Contact Support
+  errorPage:
+    ledgerNano:
+      title: Something is wrong with your Ledger Nano S
+      desc: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
 setPassword:
   title: This is the title of the screen. 1 line is the maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet

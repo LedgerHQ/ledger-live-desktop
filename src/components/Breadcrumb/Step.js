@@ -27,12 +27,13 @@ const Wrapper = styled(Box).attrs({
 const StepNumber = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'white',
+  color: 'fog',
   bg: p =>
-    ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'fog',
+    ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'white',
   ff: 'Rubik|Regular',
 })`
   border-radius: 50%;
+  border: 1px solid #d8d8d8;
   font-size: 10px;
   height: ${RADIUS}px;
   line-height: 10px;

@@ -1,71 +1,133 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
+import { radii, colors } from 'styles/theme'
 
-import Box from 'components/base/Box'
+import type { T } from 'types/common'
+
+import { setGenuineCheckFail } from 'reducers/onboarding'
+
+import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
+import IconCheck from 'icons/Check'
+import IconLedgerNanoError from 'icons/onboarding/LedgerNanoError'
 
-import { Title, Description } from '../helperComponents'
+import { Title, Description, IconOptionRow } from '../helperComponents'
 
 import type { StepProps } from '..'
 import OnboardingFooter from '../OnboardingFooter'
 
-type State = {
-  currentDevice: {
-    manufacturer: string,
-    release: number,
-  },
-  showDeviceInfo: boolean,
-  showError: boolean,
-}
+const mapDispatchToProps = { setGenuineCheckFail }
 
-// temp checking the release version of the device if connected
+type State = {
+  pinStepPass: boolean | null,
+  phraseStepPass: boolean | null,
+}
 
 class GenuineCheck extends PureComponent<StepProps, State> {
   state = {
-    showDeviceInfo: false,
-    currentDevice: { manufacturer: 'Unknown', release: 0 },
-    showError: false,
+    pinStepPass: null,
+    phraseStepPass: null,
   }
 
-  handleCheckDevice = () => {
-    const currentDeviceInfo = this.props.getDeviceInfo()
-    if (currentDeviceInfo) {
-      this.setState({ showError: false, currentDevice: currentDeviceInfo, showDeviceInfo: true })
-    } else {
-      this.setState({ showError: true })
+  handleStepPass = (step: string, pass: boolean | null) => {
+    this.setState({ [`${step}`]: pass })
+
+    if (typeof pass === 'boolean' && !pass) {
+      this.props.setGenuineCheckFail(true)
     }
   }
 
+  redoGenuineCheck = () => {
+    this.props.setGenuineCheckFail(false)
+  }
+  contactSupport = () => {
+    console.log('contact support coming later')
+  }
+  renderGenuineFail = () => (
+    <GenuineCheckFail
+      redoGenuineCheck={this.redoGenuineCheck}
+      contactSupport={this.contactSupport}
+      t={this.props.t}
+    />
+  )
+
   render() {
-    const { nextStep, prevStep, t } = this.props
-    const { showDeviceInfo, currentDevice, showError } = this.state
+    const { nextStep, prevStep, t, onboarding } = this.props
+    const { pinStepPass, phraseStepPass } = this.state
+
+    if (onboarding.isGenuineFail) {
+      return this.renderGenuineFail()
+    }
 
     return (
-      <Box sticky>
-        <Box grow alignItems="center" justifyContent="center">
+      <Box sticky pt={150}>
+        <Box grow alignItems="center">
           <Title>{t('onboarding:genuineCheck.title')}</Title>
           <Description>{t('onboarding:genuineCheck.desc')}</Description>
-          <Box alignItems="center" justifyContent="center">
-            <Title>Coming next week</Title>
-            <Box alignItems="center" justifyContent="center" style={{ padding: '15px' }}>
-              <Button big primary onClick={() => this.handleCheckDevice()}>
-                Check your device!
-              </Button>
-              {showDeviceInfo && (
-                <Box>
-                  <Description>
-                    The manufacturer is <b>{currentDevice.manufacturer}</b>
-                    The release number is <b>{currentDevice.release}</b>
-                  </Description>
+          <Box mt={5}>
+            <CardWrapper>
+              <Box justify="center">
+                <Box horizontal>
+                  <IconOptionRow>1.</IconOptionRow>
+                  <CardTitle>{t('onboarding:genuineCheck.steps.step1.title')}</CardTitle>
+                </Box>
+                <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
+              </Box>
+              {!pinStepPass ? (
+                <ButtonCombo
+                  handleStepPass={this.handleStepPass}
+                  step="pinStepPass"
+                  disabled={false}
+                  t={this.props.t}
+                />
+              ) : (
+                <Box justify="center" color={colors.wallet} ml={8}>
+                  <IconCheck size={16} />
                 </Box>
               )}
-              {showError && (
-                <Box>
-                  <Description color="red">Connect your device please</Description>
+            </CardWrapper>
+          </Box>
+          <Box mt={5}>
+            <CardWrapper disabled={!pinStepPass}>
+              <Box justify="center">
+                <Box horizontal>
+                  <IconOptionRow>2.</IconOptionRow>
+                  <CardTitle>{t('onboarding:genuineCheck.steps.step2.title')}</CardTitle>
+                </Box>
+                <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
+              </Box>
+              {!phraseStepPass ? (
+                <ButtonCombo
+                  handleStepPass={this.handleStepPass}
+                  step="phraseStepPass"
+                  disabled={!pinStepPass}
+                  t={this.props.t}
+                />
+              ) : (
+                <Box justify="center" color={colors.wallet} ml={8}>
+                  <IconCheck size={16} />
                 </Box>
               )}
-            </Box>
+            </CardWrapper>
+          </Box>
+          <Box mt={5}>
+            <CardWrapper disabled={!phraseStepPass}>
+              <Box justify="center">
+                <Box horizontal>
+                  <IconOptionRow>3.</IconOptionRow>
+                  <CardTitle>{t('onboarding:genuineCheck.steps.step3.title')}</CardTitle>
+                </Box>
+                <CardDescription>{t('onboarding:genuineCheck.steps.step3.desc')}</CardDescription>
+              </Box>
+              <Box justify="center" horizontal mx={5}>
+                <Button big primary disabled={!phraseStepPass}>
+                  {t('onboarding:genuineCheck.buttons.genuineCheck')}
+                </Button>
+              </Box>
+            </CardWrapper>
           </Box>
         </Box>
         <OnboardingFooter
@@ -81,4 +143,115 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 }
 
-export default GenuineCheck
+export default connect(null, mapDispatchToProps)(GenuineCheck)
+
+export function ButtonCombo({
+  handleStepPass,
+  step,
+  disabled,
+  t,
+}: {
+  handleStepPass: any,
+  step: string,
+  disabled: boolean,
+  t: T,
+}) {
+  return (
+    <Box justify="center" horizontal style={{ margin: '0 20px' }}>
+      <Button
+        disabled={disabled}
+        style={{ padding: '0 20px' }}
+        outline
+        onClick={() => handleStepPass(step, true)}
+      >
+        {t('common:yes')}
+      </Button>
+      <Button
+        disabled={disabled}
+        style={{ padding: '0 20px' }}
+        outline
+        onClick={() => handleStepPass(step, false)}
+      >
+        {t('common:no')}
+      </Button>
+    </Box>
+  )
+}
+// TODO extract to a separate file
+export function GenuineCheckFail({
+  redoGenuineCheck,
+  contactSupport,
+  t,
+}: {
+  redoGenuineCheck: () => void,
+  contactSupport: () => void,
+  t: T,
+}) {
+  return (
+    <Box sticky pt={150}>
+      <Box grow alignItems="center">
+        <Title>{t('onboarding:genuineCheck.errorPage.ledgerNano.title')}</Title>
+        <Description style={{ maxWidth: 527 }}>
+          {t('onboarding:genuineCheck.errorPage.ledgerNano.desc')}
+        </Description>
+        <Box style={{ minWidth: 527 }}>
+          <IconLedgerNanoError />
+        </Box>
+      </Box>
+      <Wrapper horizontal>
+        <Button
+          small
+          outline
+          onClick={() => {
+            redoGenuineCheck()
+          }}
+        >
+          {t('common:back')}
+        </Button>
+        <Button
+          small
+          danger
+          onClick={() => {
+            contactSupport()
+          }}
+          ml="auto"
+        >
+          {t('onboarding:genuineCheck.buttons.contactSupport')}
+        </Button>
+      </Wrapper>
+    </Box>
+  )
+}
+export const CardDescription = styled(Box).attrs({
+  ff: 'Open Sans|Regular',
+  fontSize: 4,
+  textAlign: 'left',
+  color: 'grey',
+})`
+  max-width: 400px;
+`
+export const CardTitle = styled(Box).attrs({
+  ff: 'Open Sans|SemiBold',
+  fontSize: 4,
+  textAlign: 'left',
+  pl: 2,
+})``
+
+const Wrapper = styled(Box).attrs({
+  px: 5,
+  py: 3,
+})`
+  border-top: 2px solid ${p => p.theme.colors.lightGrey};
+  border-bottom-left-radius: ${radii[1]}px;
+  border-bottom-right-radius: ${radii[1]}px;
+`
+const CardWrapper = styled(Card).attrs({
+  horizontal: true,
+  p: 5,
+})`
+  border: ${props => (props.disabled ? '1px dashed #d8d8d8' : '1px solid #d8d8d8')};
+  max-height: 97px;
+  min-width: 620px;
+  background-color: ${props => (props.disabled ? colors.lightGrey : colors.white)};
+  opacity: ${props => (props.disabled ? 0.7 : 1)};
+`

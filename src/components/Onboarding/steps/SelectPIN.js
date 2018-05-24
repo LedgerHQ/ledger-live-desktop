@@ -3,14 +3,18 @@
 import React from 'react'
 
 import Box from 'components/base/Box'
+import { colors } from 'styles/theme'
 
 import IconSelectPIN from 'icons/onboarding/SelectPIN'
+import IconChevronRight from 'icons/ChevronRight'
+
 import {
   Title,
   Description,
   Inner,
-  InstructionStep,
-  IconInstructionStep,
+  OptionRow,
+  IconOptionRow,
+  DisclaimerBox,
 } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
@@ -21,42 +25,60 @@ export default (props: StepProps) => {
   const steps = [
     {
       key: 'step1',
-      icon: <IconInstructionStep>1</IconInstructionStep>,
+      icon: <IconOptionRow>1.</IconOptionRow>,
       desc: t('onboarding:selectPIN.instructions.step1'),
     },
     {
       key: 'step2',
-      icon: <IconInstructionStep>2</IconInstructionStep>,
+      icon: <IconOptionRow>2.</IconOptionRow>,
       desc: t('onboarding:selectPIN.instructions.step2'),
     },
     {
       key: 'step3',
-      icon: <IconInstructionStep>3</IconInstructionStep>,
+      icon: <IconOptionRow>3.</IconOptionRow>,
       desc: t('onboarding:selectPIN.instructions.step3'),
     },
     {
       key: 'step4',
-      icon: <IconInstructionStep>4</IconInstructionStep>,
+      icon: <IconOptionRow>4.</IconOptionRow>,
       desc: t('onboarding:selectPIN.instructions.step4'),
     },
   ]
+  const disclaimerNotes = [
+    {
+      key: 'note1',
+      icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+      desc: t('onboarding:selectPIN.disclaimer.note1'),
+    },
+    {
+      key: 'note2',
+      icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+      desc: t('onboarding:selectPIN.disclaimer.note2'),
+    },
+    {
+      key: 'note3',
+      icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+      desc: t('onboarding:selectPIN.disclaimer.note3'),
+    },
+  ]
   return (
-    <Box sticky>
-      <Box grow alignItems="center" justifyContent="center">
+    <Box sticky pt={150}>
+      <Box grow alignItems="center">
         <Box align="center" mb={5}>
           <Title>{t('onboarding:selectPIN.title')}</Title>
-          <Description style={{ maxWidth: 714 }}>{t('onboarding:selectPIN.desc')}</Description>
+          <Description style={{ maxWidth: 527 }}>{t('onboarding:selectPIN.desc')}</Description>
         </Box>
-        <Box>
+        <Box align="center">
           <Inner style={{ width: 760 }}>
             <Box style={{ width: 260 }} mt={5}>
               <IconSelectPIN />
             </Box>
 
-            <Box shrink grow flow={5}>
-              {steps.map(step => <InstructionStep key={step.key} step={step} />)}
+            <Box shrink grow flow={4}>
+              {steps.map(step => <OptionRow key={step.key} step={step} />)}
             </Box>
           </Inner>
+          <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
         </Box>
       </Box>
       <OnboardingFooter
