@@ -122,19 +122,18 @@ const txToOperation = (account: Account) => ({
   outcome: { deliveredAmount, ledgerVersion, timestamp },
   specification: { source, destination },
 }: Tx): Operation => {
-  const sending = source.address === account.address
-  const amount =
-    (sending ? -1 : 1) * (deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0)
-  const op: Operation = {
+  const type = source.address === account.freshAddress ? 'OUT' : 'IN'
+  const value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0
+  const op: $Exact<Operation> = {
     id,
     hash: id,
     accountId: account.id,
-    blockHash: '',
-    address: sending ? destination.address : source.address,
-    amount,
+    type,
+    value,
+    blockHash: null,
     blockHeight: ledgerVersion,
-    senders: [sending ? destination.address : source.address],
-    recipients: [!sending ? destination.address : source.address],
+    senders: [source.address],
+    recipients: [destination.address],
     date: new Date(timestamp),
   }
   return op
@@ -159,9 +158,11 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         const derivations = getDerivations(currency)
         for (const derivation of derivations) {
           for (let index = 0; index < 255; index++) {
-            const path = derivation({ currency, x: index, segwit: false })
+            const freshAddressPath = derivation({ currency, x: index, segwit: false })
+            const path = freshAddressPath
+            // FIXME^ we need the account path, not the address path
             const { address } = await await getAddress
-              .send({ currencyId: currency.id, devicePath: deviceId, path })
+              .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
               .toPromise()
             if (finished) return
 
@@ -176,6 +177,9 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               }
             }
 
+            // fresh address is address. ripple never changes.
+            const freshAddress = address
+
             if (!info) {
               // account does not exist in Ripple server
               // we are generating a new account locally
@@ -183,16 +187,15 @@ const RippleJSBridge: WalletBridge<Transaction> = {
                 id: accountId,
                 xpub: '',
                 path,
-                walletPath: '',
                 name: 'New Account',
-                isSegwit: false,
-                address,
-                addresses: [address],
+                freshAddress,
+                freshAddressPath,
                 balance: 0,
                 blockHeight: maxLedgerVersion,
                 index,
                 currency,
                 operations: [],
+                pendingOperations: [],
                 unit: currency.units[0],
                 archived: true,
                 lastSyncDate: new Date(),
@@ -212,20 +215,19 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             })
             if (finished) return
 
-            const account: Account = {
+            const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
               path,
-              walletPath: '',
               name: address.slice(0, 8),
-              isSegwit: false,
-              address,
-              addresses: [address],
+              freshAddress,
+              freshAddressPath,
               balance,
               blockHeight: maxLedgerVersion,
               index,
               currency,
               operations: [],
+              pendingOperations: [],
               unit: currency.units[0],
               archived: true,
               lastSyncDate: new Date(),
@@ -247,7 +249,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
     return { unsubscribe }
   },
 
-  synchronize({ currency, address, blockHeight }, { next, error, complete }) {
+  synchronize({ currency, freshAddress, blockHeight }, { next, error, complete }) {
     let finished = false
     const unsubscribe = () => {
       finished = true
@@ -266,7 +268,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
         let info
         try {
-          info = await api.getAccountInfo(address)
+          info = await api.getAccountInfo(freshAddress)
         } catch (e) {
           if (e.message !== 'actNotFound') {
             throw e
@@ -282,12 +284,12 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
         const balance = parseAPIValue(info.xrpBalance)
         if (isNaN(balance) || !isFinite(balance)) {
-          throw new Error(`Ripple: invalid balance=${balance} for address ${address}`)
+          throw new Error(`Ripple: invalid balance=${balance} for address ${freshAddress}`)
         }
 
         next(a => ({ ...a, balance }))
 
-        const transactions = await api.getTransactions(address, {
+        const transactions = await api.getTransactions(freshAddress, {
           minLedgerVersion: Math.max(blockHeight, minLedgerVersion),
           maxLedgerVersion,
         })
@@ -362,7 +364,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       const amount = formatAPICurrencyXRP(t.amount)
       const payment = {
         source: {
-          address: a.address,
+          address: a.freshAddress,
           amount,
         },
         destination: {
@@ -375,7 +377,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         fee: formatAPICurrencyXRP(t.fee).value,
       }
 
-      const prepared = await api.preparePayment(a.address, payment, instruction)
+      const prepared = await api.preparePayment(a.freshAddress, payment, instruction)
 
       const transaction = await signTransaction
         .send({

@@ -102,9 +102,9 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       options = {
         devicePath: deviceSelected.path,
         currencyId: account.currency.id,
-        path: account.path,
-        accountAddress: account.address,
-        segwit: account.path.startsWith("49'"), // TODO: store segwit info in account
+        path: account.freshAddressPath,
+        accountAddress: account.freshAddress,
+        segwit: !!account.isSegwit,
       }
     } else if (currency) {
       options = {
@@ -118,7 +118,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
 
     try {
       const { address } = await getAddress.send(options).toPromise()
-      if (account && account.address !== address) {
+      if (account && account.freshAddress !== address) {
         throw new Error('Account address is different than device address')
       }
       this.handleStatusChange(this.state.deviceStatus, 'success')
