@@ -159,9 +159,11 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
-  getTotalSpent: (a, t) => Promise.resolve(t.amount + t.feePerByte),
+  canBeSpent: (a, t) => Promise.resolve(t.amount <= a.balance), // FIXME
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance - t.feePerByte),
+  getTotalSpent: (a, t) => Promise.resolve(t.amount), // FIXME
+
+  getMaxAmount: (a, _t) => Promise.resolve(a.balance), // FIXME
 
   signAndBroadcast: (account, transaction, deviceId) => {
     const rawAccount = encodeAccount(account)
