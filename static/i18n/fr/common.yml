@@ -1,5 +1,7 @@
 ---
 ok: Ok
+yes: true
+no: false
 confirm: Confirmer
 cancel: Annuler
 continue: Continue
