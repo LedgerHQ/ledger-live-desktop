@@ -305,8 +305,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
   // $FlowFixMe
   EditFees,
 
+  // FIXME gasPrice calc is wrong... need to multiply with gasLimit I guess ?
+  canBeSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice <= a.balance),
   getTotalSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice),
-
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice),
 
   signAndBroadcast: async (a, t, deviceId) => {

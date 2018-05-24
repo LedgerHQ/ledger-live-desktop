@@ -84,6 +84,8 @@ export interface WalletBridge<Transaction> {
   // render the whole advanced part of the form
   EditAdvancedOptions?: React$ComponentType<EditProps<Transaction>>;
 
+  canBeSpent(account: Account, transaction: Transaction): Promise<boolean>;
+
   getTotalSpent(account: Account, transaction: Transaction): Promise<number>;
 
   // NB this is not used yet but we'll use it when we have MAX

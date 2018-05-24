@@ -2,6 +2,7 @@
 import React from 'react'
 import bs58check from 'ripple-bs58check'
 import { computeBinaryTransactionHash } from 'ripple-hashes'
+import throttle from 'lodash/throttle'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { getDerivations } from 'helpers/derivations'
 import getAddress from 'commands/getAddress'
@@ -148,6 +149,25 @@ const txToOperation = (account: Account) => ({
   return op
 }
 
+const getServerInfo = (perCurrencyId => currency => {
+  if (perCurrencyId[currency.id]) return perCurrencyId[currency.id]()
+  const f = throttle(async () => {
+    const api = apiForCurrency(currency)
+    try {
+      await api.connect()
+      const res = await api.getServerInfo()
+      return res
+    } catch (e) {
+      f.cancel()
+      throw e
+    } finally {
+      api.disconnect()
+    }
+  }, 60000)
+  perCurrencyId[currency.id] = f
+  return f()
+})({})
+
 const RippleJSBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
     let finished = false
@@ -159,7 +179,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       const api = apiForCurrency(currency)
       try {
         await api.connect()
-        const serverInfo = await api.getServerInfo()
+        const serverInfo = await getServerInfo(currency)
         const ledgers = serverInfo.completeLedgers.split('-')
         const minLedgerVersion = Number(ledgers[0])
         const maxLedgerVersion = Number(ledgers[1])
@@ -269,7 +289,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       try {
         await api.connect()
         if (finished) return
-        const serverInfo = await api.getServerInfo()
+        const serverInfo = await getServerInfo(currency)
         if (finished) return
         const ledgers = serverInfo.completeLedgers.split('-')
         const minLedgerVersion = Number(ledgers[0])
@@ -370,6 +390,11 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   getTransactionRecipient: (a, t) => t.recipient,
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
+
+  canBeSpent: async (a, t) => {
+    const r = await getServerInfo(a.currency)
+    return t.amount + t.fee + parseAPIValue(r.validatedLedger.reserveBaseXRP) <= a.balance
+  },
 
   getTotalSpent: (a, t) => Promise.resolve(t.amount + t.fee),
 
