@@ -3,6 +3,7 @@
 import type Transport from '@ledgerhq/hw-transport'
 import btc from './btc'
 import ethereum from './ethereum'
+import ripple from './ripple'
 
 type Resolver = (
   transport: Transport<*>,
@@ -24,6 +25,8 @@ const all = {
   ethereum_testnet: ethereum,
   ethereum_classic: ethereum,
   ethereum_classic_testnet: ethereum,
+
+  ripple,
 }
 
 const getAddressForCurrency: Module = (currencyId: string) =>

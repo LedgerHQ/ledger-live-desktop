@@ -17,7 +17,7 @@ export type Tx = {
   to: string,
   input: string,
   index: number,
-  block: {
+  block?: {
     hash: string,
     height: number,
     time: string,
