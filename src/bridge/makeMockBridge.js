@@ -4,6 +4,7 @@ import {
   genAddingOperationsInAccount,
   genOperation,
 } from '@ledgerhq/live-common/lib/mock/account'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
 import Prando from 'prando'
 import type { Operation } from '@ledgerhq/live-common/lib/types'
 import type { WalletBridge } from './types'
@@ -53,7 +54,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
             account = { ...account }
             account.blockHeight++
             for (const op of ops) {
-              account.balance += op.amount
+              account.balance += getOperationAmountNumber(op)
             }
             return account
           })
@@ -149,8 +150,10 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
     signAndBroadcast: async (account, t) => {
       const rng = new Prando()
       const op = genOperation(account, account.operations, account.currency, rng)
-      op.amount = -t.amount
-      op.address = t.recipient
+      op.type = 'OUT'
+      op.value = t.amount
+      op.senders = [account.freshAddress]
+      op.recipients = [t.recipient]
       op.blockHeight = account.blockHeight
       op.date = new Date()
       broadcasted[account.id] = (broadcasted[account.id] || []).concat(op)

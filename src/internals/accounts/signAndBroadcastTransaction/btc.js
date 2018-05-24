@@ -37,7 +37,7 @@ export default async function signAndBroadcastTransactionBTCLike(
 
     const WALLET_IDENTIFIER = await getWalletIdentifier({
       hwApp,
-      isSegwit: account.isSegwit,
+      isSegwit: !!account.isSegwit,
       currencyId: account.currencyId,
       devicePath: deviceId,
     })

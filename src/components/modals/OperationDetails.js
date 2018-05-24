@@ -6,6 +6,7 @@ import { shell } from 'electron'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
 
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
@@ -61,18 +62,18 @@ type Props = {
   t: T,
   operation: Operation,
   account: Account,
-  type: 'from' | 'to',
-  onClose: Function,
+  onClose: () => void,
   currencySettings: *,
   marketColor: string,
 }
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
-  const { t, type, onClose, operation, account, marketColor, currencySettings } = props
-  const { id, hash, amount, date, senders, recipients } = operation
+  const { t, onClose, operation, account, marketColor, currencySettings } = props
+  const { id, hash, date, senders, recipients, type } = operation
+  const amount = getOperationAmountNumber(operation)
 
   const { name, unit, currency } = account
-  const confirmations = account.blockHeight - operation.blockHeight
+  const confirmations = operation.blockHeight ? account.blockHeight - operation.blockHeight : 0
   const isConfirmed = confirmations >= currencySettings.minConfirmations
   return (
     <ModalBody onClose={onClose}>

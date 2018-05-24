@@ -53,7 +53,7 @@ function StepConfirmation(props: Props) {
       </span>
       <Title>{t(`${tPrefix}.title`)}</Title>
       <Text>{multiline(t(`${tPrefix}.text`))}</Text>
-      <Text>{txValidated || ''}</Text>
+      <Text style={{ userSelect: 'text' }}>{txValidated || ''}</Text>
     </Container>
   )
 }

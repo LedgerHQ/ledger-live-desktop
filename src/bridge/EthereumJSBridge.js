@@ -24,15 +24,17 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
-const toAccountOperation = (account: Account) => (tx: Tx): Operation => {
-  const sending = account.address.toLowerCase() === tx.from.toLowerCase()
+const toAccountOperation = (account: Account) => (tx: Tx): $Exact<Operation> => {
+  const sending = account.freshAddress.toLowerCase() === tx.from.toLowerCase()
+  const receiving = account.freshAddress.toLowerCase() === tx.to.toLowerCase()
+  const type = sending && receiving ? 'SELF' : sending ? 'OUT' : 'IN'
   return {
     id: tx.hash,
     hash: tx.hash,
-    address: sending ? tx.to : tx.from,
-    amount: (sending ? -1 : 1) * tx.value,
-    blockHeight: (tx.block && tx.block.height) || 0, // FIXME will be optional field
-    blockHash: (tx.block && tx.block.hash) || '', // FIXME will be optional field
+    type,
+    value: tx.value,
+    blockHeight: tx.block && tx.block.height,
+    blockHash: tx.block && tx.block.hash,
     accountId: account.id,
     senders: [tx.from],
     recipients: [tx.to],
@@ -56,7 +58,7 @@ const paginateMoreTransactions = async (
 ): Promise<Operation[]> => {
   const api = apiForCurrency(account.currency)
   const { txs } = await api.getTransactions(
-    account.address,
+    account.freshAddress,
     acc.length ? acc[acc.length - 1].blockHash : undefined,
   )
   if (txs.length === 0) return acc
@@ -93,7 +95,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
     async function stepAddress(
       index,
-      { address, path },
+      { address, path: freshAddressPath },
       isStandard,
     ): { account?: Account, complete?: boolean } {
       const balance = await api.getAccountBalance(address)
@@ -103,6 +105,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
       const { txs } = await api.getTransactions(address)
       if (finished) return { complete: true }
 
+      const path = freshAddressPath // FIXME
+      const freshAddress = address
+
       if (txs.length === 0) {
         // this is an empty account
         if (isStandard) {
@@ -110,21 +115,20 @@ const EthereumBridge: WalletBridge<Transaction> = {
             // first zero account will emit one account as opportunity to create a new account..
             const currentBlock = await fetchCurrentBlock(currency)
             const accountId = `${currency.id}_${address}`
-            const account: Account = {
+            const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
               path, // FIXME we probably not want the address path in the account.path
-              walletPath: String(index),
+              freshAddress,
+              freshAddressPath,
               name: 'New Account',
-              isSegwit: false,
-              address,
-              addresses: [{ str: address, path }],
               balance,
               blockHeight: currentBlock.height,
               archived: true,
               index,
               currency,
               operations: [],
+              pendingOperations: [],
               unit: currency.units[0],
               lastSyncDate: new Date(),
             }
@@ -137,21 +141,20 @@ const EthereumBridge: WalletBridge<Transaction> = {
       }
 
       const accountId = `${currency.id}_${address}`
-      const account: Account = {
+      const account: $Exact<Account> = {
         id: accountId,
         xpub: '',
         path, // FIXME we probably not want the address path in the account.path
-        walletPath: String(index),
+        freshAddress,
+        freshAddressPath,
         name: address.slice(32),
-        isSegwit: false,
-        address,
-        addresses: [{ str: address, path }],
         balance,
         blockHeight: currentBlock.height,
         archived: true,
         index,
         currency,
         operations: [],
+        pendingOperations: [],
         unit: currency.units[0],
         lastSyncDate: new Date(),
       }
@@ -166,9 +169,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
         for (const derivation of derivations) {
           const isStandard = last === derivation
           for (let index = 0; index < 255; index++) {
-            const path = derivation({ currency, x: index, segwit: false })
+            const freshAddressPath = derivation({ currency, x: index, segwit: false })
             const res = await getAddressCommand
-              .send({ currencyId: currency.id, devicePath: deviceId, path })
+              .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
               .toPromise()
             const r = await stepAddress(index, res, isStandard)
             if (r.account) next(r.account)
@@ -188,7 +191,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     return { unsubscribe }
   },
 
-  synchronize({ address, blockHeight, currency }, { next, complete, error }) {
+  synchronize({ freshAddress, blockHeight, currency }, { next, complete, error }) {
     let unsubscribed = false
     const api = apiForCurrency(currency)
     async function main() {
@@ -198,9 +201,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
         if (block.height === blockHeight) {
           complete()
         } else {
-          const balance = await api.getAccountBalance(address)
+          const balance = await api.getAccountBalance(freshAddress)
           if (unsubscribed) return
-          const { txs } = await api.getTransactions(address)
+          const { txs } = await api.getTransactions(freshAddress)
           if (unsubscribed) return
           next(a => {
             const currentOps = a.operations
@@ -277,7 +280,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
   signAndBroadcast: async (a, t, deviceId) => {
     const api = apiForCurrency(a.currency)
 
-    const nonce = await api.getAccountNonce(a.address)
+    const nonce = await api.getAccountNonce(a.freshAddress)
 
     const transaction = await signTransactionCommand
       .send({
