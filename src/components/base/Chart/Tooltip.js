@@ -29,7 +29,7 @@ const Tooltip = ({
 }: {
   item: Item,
   renderTooltip?: Function,
-  account: Account,
+  account?: Account,
 }) => (
   <div style={{ position: 'relative' }}>
     <div
@@ -55,14 +55,16 @@ const Tooltip = ({
               fiat="USD"
               val={item.value}
             />
-            <FormattedVal
-              color="grey"
-              fontSize={3}
-              alwaysShowSign={false}
-              showCode
-              unit={account.unit}
-              val={item.originalValue}
-            />
+            {account && (
+              <FormattedVal
+                color="grey"
+                fontSize={3}
+                alwaysShowSign={false}
+                showCode
+                unit={account.unit}
+                val={item.originalValue}
+              />
+            )}
             <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
               {item.date.toISOString().substr(0, 10)}
             </Box>
