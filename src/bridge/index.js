@@ -1,11 +1,9 @@
 // @flow
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { WalletBridge } from './types'
-import UnsupportedBridge from './UnsupportedBridge'
 import LibcoreBridge from './LibcoreBridge'
 import EthereumJSBridge from './EthereumJSBridge'
-
-const RippleJSBridge = UnsupportedBridge
+import RippleJSBridge from './RippleJSBridge'
 
 export const getBridgeForCurrency = (currency: Currency): WalletBridge<any> => {
   if (currency.id.indexOf('ethereum') === 0) {

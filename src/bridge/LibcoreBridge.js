@@ -154,7 +154,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.feePerByte),
 
-  signAndBroadcast: ({ account, transaction, deviceId }) => {
+  signAndBroadcast: (account, transaction, deviceId) => {
     const rawAccount = encodeAccount(account)
     return runJob({
       channel: 'accounts',

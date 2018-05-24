@@ -11,6 +11,7 @@ steps:
     advancedOptions: Advanced options
     useRBF: Use the RBF transaction
     message: Leave a message (140)
+    rippleTag: Tag
   connectDevice:
     title: Connect device
   verification:
@@ -23,7 +24,7 @@ steps:
     title: Confirmation
     success:
       title: Transaction successfully completed
-      text: You may have to wait few confirmations unitl the transaction appear  
+      text: You may have to wait few confirmations unitl the transaction appear
       cta: View operation details
     error:
       title: Transaction aborted

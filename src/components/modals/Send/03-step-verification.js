@@ -52,7 +52,10 @@ export default ({ account, device, bridge, transaction, onValidate, t }: Props) 
           transaction={transaction}
           bridge={bridge}
           onSuccess={onValidate}
-          render={({ error }) => <DeviceConfirm notValid={!!error} />}
+          render={({ error }) => (
+            // FIXME we really really REALLY should use error for the display. otherwise we are completely blind on error cases..
+            <DeviceConfirm notValid={!!error} />
+          )}
         />
       )}
   </Container>

@@ -98,9 +98,5 @@ export interface WalletBridge<Transaction> {
    * NOTE: in future, when transaction balance is close to account.balance, we could wipe it all at this level...
    * to implement that, we might want to have special logic `account.balance-transaction.amount < dust` but not sure where this should leave (i would say on UI side because we need to inform user visually).
    */
-  signAndBroadcast({
-    account: Account,
-    transaction: Transaction,
-    deviceId: DeviceId,
-  }): Promise<string>;
+  signAndBroadcast(account: Account, transaction: Transaction, deviceId: DeviceId): Promise<string>;
 }
