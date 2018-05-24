@@ -26,10 +26,18 @@ type Props = OwnProps & {
 const mapStateToProps = (state: State, props: OwnProps) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
   let isAvailable = true
+
+  // create array of original values, used to reconciliate
+  // with counter values after calculation
+  const originalValues = []
+
   const balanceHistory = getBalanceHistorySum(
     props.accounts,
     props.daysCount,
     (account, value, date) => {
+      // keep track of original value
+      originalValues.push(value)
+
       const cv = CounterValues.calculateSelector(state, {
         value,
         date,
@@ -44,6 +52,12 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       return cv
     },
   )
+
+  // reconciliate balance history with original values
+  balanceHistory.forEach((item, i) => {
+    item.originalValue = originalValues[i] || 0
+  })
+
   return {
     isAvailable,
     balanceHistory,

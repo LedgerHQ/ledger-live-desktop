@@ -80,7 +80,9 @@ const BalanceSummary = ({
                               fiat={counterValue}
                               val={d.value}
                             />
-                            <Box mt="auto">{d.date.toISOString().substr(0, 10)}</Box>
+                            <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
+                              {d.date.toISOString().substr(0, 10)}
+                            </Box>
                           </Fragment>
                         )
                       : null
