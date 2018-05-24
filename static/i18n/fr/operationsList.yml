@@ -3,8 +3,8 @@ date: Date
 account: Compte
 address: Adresse
 amount: Montant
-from: Fonds reçus
-to: Fonds envoyés
+IN: Fonds reçus
+OUT: Fonds envoyés
 showMore: Voir plus
 confirmed: Confirmée
 notConfirmed: Non confirmée

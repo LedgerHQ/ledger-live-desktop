@@ -14,7 +14,7 @@ import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currenc
 
 import type Transport from '@ledgerhq/hw-transport'
 
-import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
+import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
 type Props = {
@@ -211,6 +211,7 @@ async function buildAccountRaw({
   // $FlowFixMe
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
+  /*
   const balanceByDay = ops.length
     ? await getBalanceByDaySinceOperation({
         njsAccount,
@@ -218,6 +219,7 @@ async function buildAccountRaw({
         core,
       })
     : {}
+    */
 
   const njsBalance = await njsAccount.getBalance()
   const balance = njsBalance.toLong()
@@ -244,23 +246,28 @@ async function buildAccountRaw({
     path: `${accountPath}/${njsAddress.getDerivationPath()}`,
   }))
 
+  if (addresses.length === 0) {
+    throw new Error('no addresses found')
+  }
+
+  const { str: freshAddress, path: freshAddressPath } = addresses[0]
+
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
 
   const rawAccount: AccountRaw = {
-    id: xpub,
+    id: xpub, // FIXME for account id you might want to prepend the crypto currency id to this because it's not gonna be unique.
     xpub,
-    path: accountPath,
-    walletPath,
+    path: walletPath,
     name: `Account ${accountIndex}${isSegwit ? ' (segwit)' : ''}`, // TODO: placeholder name?
     isSegwit,
-    address: bitcoinAddress,
-    addresses,
+    freshAddress,
+    freshAddressPath,
     balance,
     blockHeight,
     archived: false,
     index: accountIndex,
-    balanceByDay,
     operations,
+    pendingOperations: [],
     currencyId,
     unitMagnitude: jsCurrency.units[0].magnitude,
     lastSyncDate: new Date().toISOString(),
@@ -269,31 +276,45 @@ async function buildAccountRaw({
   return rawAccount
 }
 
-function buildOperationRaw({ core, op, xpub }: { core: Object, op: NJSOperation, xpub: string }) {
+function buildOperationRaw({
+  core,
+  op,
+  xpub,
+}: {
+  core: Object,
+  op: NJSOperation,
+  xpub: string,
+}): OperationRaw {
   const id = op.getUid()
   const bitcoinLikeOperation = op.asBitcoinLikeOperation()
   const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
   const hash = bitcoinLikeTransaction.getHash()
   const operationType = op.getOperationType()
-  const absoluteAmount = op.getAmount().toLong()
+  const value = op.getAmount().toLong()
+
+  const OperationTypeMap: { [_: $Keys<typeof core.OPERATION_TYPES>]: OperationType } = {
+    [core.OPERATION_TYPES.SEND]: 'OUT',
+    [core.OPERATION_TYPES.RECEIVE]: 'IN',
+  }
 
   // if transaction is a send, amount becomes negative
-  const amount = operationType === core.OPERATION_TYPES.SEND ? -absoluteAmount : absoluteAmount
+  const type = OperationTypeMap[operationType]
 
   return {
     id,
     hash,
-    address: '',
+    type,
+    value,
     senders: op.getSenders(),
     recipients: op.getRecipients(),
     blockHeight: op.getBlockHeight(),
-    blockHash: '',
+    blockHash: null,
     accountId: xpub,
     date: op.getDate().toISOString(),
-    amount,
   }
 }
 
+/*
 async function getBalanceByDaySinceOperation({
   njsAccount,
   njsOperation,
@@ -336,3 +357,4 @@ function areSameDay(date1: Date, date2: Date): boolean {
     date1.getDate() === date2.getDate()
   )
 }
+*/
