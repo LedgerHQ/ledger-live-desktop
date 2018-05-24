@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
-import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
 import Box from 'components/base/Box'
 
@@ -20,7 +19,6 @@ const Container = styled(Box).attrs({
   border: 1px solid #d8d8d8;
   border-radius: 4px;
   width: 150px;
-  height: 90px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
 `
 
@@ -54,17 +52,18 @@ const Tooltip = ({
               fontSize={5}
               alwaysShowSign={false}
               showCode
-              unit={account.currency.units[0]}
+              fiat="USD"
               val={item.value}
             />
-            <CounterValue
-              account={account}
-              currency={account.currency}
-              value={item.value}
-              disableRounding
+            <FormattedVal
+              color="grey"
+              fontSize={3}
+              alwaysShowSign={false}
               showCode
+              unit={account.unit}
+              val={item.originalValue}
             />
-            <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt="auto">
+            <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
               {item.date.toISOString().substr(0, 10)}
             </Box>
           </Fragment>

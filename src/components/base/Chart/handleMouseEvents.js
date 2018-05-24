@@ -100,7 +100,7 @@ export default function handleMouseEvents({
     NODES.xBar
       .attr('x1', x(d.parsedDate))
       .attr('x2', x(d.parsedDate))
-      .attr('y1', 0)
+      .attr('y1', -30) // ensure that xbar is covered
       .attr('y2', HEIGHT)
   }
 
