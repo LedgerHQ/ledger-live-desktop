@@ -42,7 +42,7 @@
     "@ledgerhq/hw-transport": "^4.12.0",
     "@ledgerhq/hw-transport-node-hid": "^4.12.0",
     "@ledgerhq/ledger-core": "^1.2.0",
-    "@ledgerhq/live-common": "2.8.0-beta.2",
+    "@ledgerhq/live-common": "^2.8.1",
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",

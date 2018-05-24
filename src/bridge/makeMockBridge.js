@@ -152,12 +152,14 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
       const op = genOperation(account, account.operations, account.currency, rng)
       op.type = 'OUT'
       op.value = t.amount
+      op.blockHash = null
+      op.blockHeight = null
       op.senders = [account.freshAddress]
       op.recipients = [t.recipient]
       op.blockHeight = account.blockHeight
       op.date = new Date()
       broadcasted[account.id] = (broadcasted[account.id] || []).concat(op)
-      return op.id
+      return { ...op }
     },
   }
 }

@@ -11,7 +11,7 @@ import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/oper
 
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 
-import type { T } from 'types/common'
+import type { T, CurrencySettings } from 'types/common'
 
 import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 import { rgba, getMarketColor } from 'styles/helpers'
@@ -33,7 +33,7 @@ const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
 const CONFIRMATION_COL_SIZE = 44
 
-const OperationRaw = styled(Box).attrs({
+const OperationRow = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
@@ -103,7 +103,7 @@ const Cell = styled(Box).attrs({
 
 type Props = {
   account: Account,
-  currencySettings: *,
+  currencySettings: CurrencySettings,
   onAccountClick: (account: Account) => void,
   onOperationClick: ({ operation: Operation, account: Account, marketColor: string }) => void,
   marketIndicator: string,
@@ -135,19 +135,26 @@ class OperationComponent extends PureComponent<Props> {
     const Icon = getCryptoCurrencyIcon(account.currency)
     const amount = getOperationAmountNumber(op)
     const isNegative = amount < 0
+    const isOptimistic = op.blockHeight === null
+    const isConfirmed =
+      (op.blockHeight ? account.blockHeight - op.blockHeight : 0) > currencySettings.confirmationsNb
 
     const marketColor = getMarketColor({
       marketIndicator,
       isNegative,
     })
 
+    // FIXME each cell in a component
+
     return (
-      <OperationRaw onClick={() => onOperationClick({ operation: op, account, marketColor })}>
+      <OperationRow
+        style={{ opacity: isOptimistic ? 0.5 : 1 }}
+        onClick={() => onOperationClick({ operation: op, account, marketColor })}
+      >
         <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
           <ConfirmationCheck
             type={op.type}
-            minConfirmations={currencySettings.minConfirmations}
-            confirmations={op.blockHeight ? account.blockHeight - op.blockHeight : 0}
+            isConfirmed={isConfirmed}
             marketColor={marketColor}
             t={t}
           />
@@ -208,7 +215,7 @@ class OperationComponent extends PureComponent<Props> {
             />
           </Box>
         </Cell>
-      </OperationRaw>
+      </OperationRow>
     )
   }
 }

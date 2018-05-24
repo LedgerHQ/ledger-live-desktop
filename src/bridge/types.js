@@ -1,6 +1,6 @@
 // @flow
 
-import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Account, Operation, Currency } from '@ledgerhq/live-common/lib/types'
 
 // a WalletBridge is implemented on renderer side.
 // this is an abstraction on top of libcore / ethereumjs / ripple js / ...
@@ -93,10 +93,18 @@ export interface WalletBridge<Transaction> {
    * finalize the transaction by
    * - signing it with the ledger device
    * - broadcasting it to network
-   * - retrieve and return the id related to this transaction (typically a tx id hash)
+   * - retrieve and return the optimistic Operation that this transaction is likely to create in the future
    *
    * NOTE: in future, when transaction balance is close to account.balance, we could wipe it all at this level...
    * to implement that, we might want to have special logic `account.balance-transaction.amount < dust` but not sure where this should leave (i would say on UI side because we need to inform user visually).
    */
-  signAndBroadcast(account: Account, transaction: Transaction, deviceId: DeviceId): Promise<string>;
+  signAndBroadcast(
+    account: Account,
+    transaction: Transaction,
+    deviceId: DeviceId,
+  ): Promise<Operation>;
+
+  // Implement an optimistic response for signAndBroadcast.
+  // you likely should add the operation in account.pendingOperations but maybe you want to clean it (because maybe some are replaced / cancelled by this one?)
+  addPendingOperation?: (account: Account, optimisticOperation: Operation) => Account;
 }

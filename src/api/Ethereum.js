@@ -1,7 +1,7 @@
 // @flow
 import axios from 'axios'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-import { blockchainBaseURL } from './Ledger'
+import { blockchainBaseURL, userFriendlyError } from './Ledger'
 
 export type Block = { height: number } // TODO more fields actually
 export type Tx = {
@@ -34,7 +34,7 @@ export type API = {
     txs: Tx[],
   }>,
   getCurrentBlock: () => Promise<Block>,
-  getAccountNonce: (address: string) => Promise<string>,
+  getAccountNonce: (address: string) => Promise<number>,
   broadcastTransaction: (signedTransaction: string) => Promise<string>,
   getAccountBalance: (address: string) => Promise<number>,
 }
@@ -44,25 +44,27 @@ export const apiForCurrency = (currency: CryptoCurrency): API => {
 
   return {
     async getTransactions(address, blockHash) {
-      const { data } = await axios.get(`${baseURL}/addresses/${address}/transactions`, {
-        params: { blockHash, noToken: 1 },
-      })
+      const { data } = await userFriendlyError(
+        axios.get(`${baseURL}/addresses/${address}/transactions`, {
+          params: { blockHash, noToken: 1 },
+        }),
+      )
       return data
     },
     async getCurrentBlock() {
-      const { data } = await axios.get(`${baseURL}/blocks/current`)
+      const { data } = await userFriendlyError(axios.get(`${baseURL}/blocks/current`))
       return data
     },
     async getAccountNonce(address) {
-      const { data } = await axios.get(`${baseURL}/addresses/${address}/nonce`)
+      const { data } = await userFriendlyError(axios.get(`${baseURL}/addresses/${address}/nonce`))
       return data[0].nonce
     },
     async broadcastTransaction(tx) {
-      const { data } = await axios.post(`${baseURL}/transactions/send`, { tx })
+      const { data } = await userFriendlyError(axios.post(`${baseURL}/transactions/send`, { tx }))
       return data.result
     },
     async getAccountBalance(address) {
-      const { data } = await axios.get(`${baseURL}/addresses/${address}/balance`)
+      const { data } = await userFriendlyError(axios.get(`${baseURL}/addresses/${address}/balance`))
       return data[0].balance
     },
   }
