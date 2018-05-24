@@ -1,12 +1,14 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import Box from 'components/base/Box'
 import { colors } from 'styles/theme'
 
-import IconSelectPIN from 'icons/onboarding/SelectPIN'
+import IconLedgerNanoSelectPIN from 'icons/onboarding/LedgerNanoSelectPIN'
+import IconLedgerBlueSelectPIN from 'icons/onboarding/LedgerBlueSelectPIN'
 import IconChevronRight from 'icons/ChevronRight'
+import IconLedgerBlue from 'icons/onboarding/LedgerBlue'
 
 import {
   Title,
@@ -21,27 +23,45 @@ import OnboardingFooter from '../OnboardingFooter'
 import type { StepProps } from '..'
 
 export default (props: StepProps) => {
-  const { nextStep, prevStep, t } = props
-  const steps = [
+  const { nextStep, prevStep, t, onboarding } = props
+  const stepsLedgerNano = [
     {
       key: 'step1',
       icon: <IconOptionRow>1.</IconOptionRow>,
-      desc: t('onboarding:selectPIN.instructions.step1'),
+      desc: t('onboarding:selectPIN.instructions.ledgerNano.step1'),
     },
     {
       key: 'step2',
       icon: <IconOptionRow>2.</IconOptionRow>,
-      desc: t('onboarding:selectPIN.instructions.step2'),
+      desc: t('onboarding:selectPIN.instructions.ledgerNano.step2'),
     },
     {
       key: 'step3',
       icon: <IconOptionRow>3.</IconOptionRow>,
-      desc: t('onboarding:selectPIN.instructions.step3'),
+      desc: t('onboarding:selectPIN.instructions.ledgerNano.step3'),
     },
     {
       key: 'step4',
       icon: <IconOptionRow>4.</IconOptionRow>,
-      desc: t('onboarding:selectPIN.instructions.step4'),
+      desc: t('onboarding:selectPIN.instructions.ledgerNano.step4'),
+    },
+  ]
+
+  const stepsLedgerBlue = [
+    {
+      key: 'step1',
+      icon: <IconOptionRow>1.</IconOptionRow>,
+      desc: t('onboarding:selectPIN.instructions.ledgerBlue.step1'),
+    },
+    {
+      key: 'step2',
+      icon: <IconOptionRow>2.</IconOptionRow>,
+      desc: t('onboarding:selectPIN.instructions.ledgerBlue.step2'),
+    },
+    {
+      key: 'step3',
+      icon: <IconOptionRow>3.</IconOptionRow>,
+      desc: t('onboarding:selectPIN.instructions.ledgerBlue.step3'),
     },
   ]
   const disclaimerNotes = [
@@ -66,18 +86,36 @@ export default (props: StepProps) => {
       <Box grow alignItems="center">
         <Box align="center" mb={5}>
           <Title>{t('onboarding:selectPIN.title')}</Title>
-          <Description style={{ maxWidth: 527 }}>{t('onboarding:selectPIN.desc')}</Description>
         </Box>
-        <Box align="center">
-          <Inner style={{ width: 760 }}>
-            <Box style={{ width: 260 }} mt={5}>
-              <IconSelectPIN />
-            </Box>
+        <Box align="center" mt={5}>
+          {onboarding.isLedgerNano ? (
+            <Fragment>
+              {' '}
+              <Inner style={{ width: 680 }}>
+                <Box style={{ width: 260 }} mt={5}>
+                  <IconLedgerNanoSelectPIN />
+                </Box>
 
-            <Box shrink grow flow={4}>
-              {steps.map(step => <OptionRow key={step.key} step={step} />)}
-            </Box>
-          </Inner>
+                <Box shrink grow flow={4}>
+                  {stepsLedgerNano.map(step => <OptionRow key={step.key} step={step} />)}
+                </Box>
+              </Inner>
+            </Fragment>
+          ) : (
+            <Fragment>
+              {' '}
+              <Inner style={{ width: 680 }}>
+                <Box style={{ width: 260, alignItems: 'center' }}>
+                  <IconLedgerBlueSelectPIN />
+                </Box>
+
+                <Box shrink grow flow={4}>
+                  {stepsLedgerBlue.map(step => <OptionRow key={step.key} step={step} />)}
+                </Box>
+              </Inner>
+            </Fragment>
+          )}
+
           <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
         </Box>
       </Box>
