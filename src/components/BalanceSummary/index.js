@@ -36,7 +36,7 @@ const BalanceSummary = ({
   selectedTime,
 }: Props) => {
   const currency = getFiatCurrencyByTicker(counterValue)
-  const account = accounts.length === 1 ? accounts[0] : null
+  const account = accounts.length === 1 ? accounts[0] : undefined
   return (
     <Card p={0} py={6}>
       <CalculateBalance
@@ -85,7 +85,7 @@ const BalanceSummary = ({
                             </Box>
                           </Fragment>
                         )
-                      : null
+                      : undefined
                   }
                 />
               </Box>

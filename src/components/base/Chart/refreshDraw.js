@@ -31,11 +31,11 @@ function getRenderTickX(selectedTime) {
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, isInteractive, tickXScale, unit } = props
+  const { hideAxis, isInteractive, tickXScale, account } = props
 
   const nbTicksX = getTickXCount(tickXScale)
   const renderTickX = getRenderTickX(tickXScale)
-  const renderTickY = t => (unit ? formatShort(unit, t) : t)
+  const renderTickY = t => (account ? formatShort(account.unit, t) : t)
 
   const area = d3
     .area()

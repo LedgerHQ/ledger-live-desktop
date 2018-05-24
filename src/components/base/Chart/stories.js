@@ -15,6 +15,8 @@ const stories = storiesOf('Components/base', module)
 
 const data = generateRandomData(365)
 const currency = getCryptoCurrencyById('bitcoin')
+
+// $FlowFixMe
 const fakeAccount = {
   currency,
 }
@@ -75,9 +77,11 @@ function generateRandomData(n) {
   const data = []
   const chance = new Chance()
   while (!day.isSame(today)) {
+    const value = chance.integer({ min: 0.5e8, max: 1e8 })
     data.push({
       date: day.toDate(),
-      value: chance.integer({ min: 0.5e8, max: 1e8 }),
+      value,
+      originalValue: value,
     })
     day.add(1, 'day')
   }

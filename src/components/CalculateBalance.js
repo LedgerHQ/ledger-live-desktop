@@ -4,7 +4,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 
-import type { Account, BalanceHistory } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import { getBalanceHistorySum } from '@ledgerhq/live-common/lib/helpers/account'
 import CounterValues from 'helpers/countervalues'
 import { exchangeSettingsForAccountSelector, counterValueCurrencySelector } from 'reducers/settings'
@@ -16,8 +16,14 @@ type OwnProps = {
   children: Props => *,
 }
 
+type Item = {
+  date: Date,
+  value: number,
+  originalValue: number,
+}
+
 type Props = OwnProps & {
-  balanceHistory: BalanceHistory,
+  balanceHistory: Item[],
   balanceStart: number,
   balanceEnd: number,
   isAvailable: boolean,
@@ -51,12 +57,10 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       }
       return cv
     },
+  ).map((item, i) =>
+    // reconciliate balance history with original values
+    ({ ...item, originalValue: originalValues[i] || 0 }),
   )
-
-  // reconciliate balance history with original values
-  balanceHistory.forEach((item, i) => {
-    item.originalValue = originalValues[i] || 0
-  })
 
   return {
     isAvailable,
