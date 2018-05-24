@@ -119,6 +119,7 @@ type Tx = {
 
 const txToOperation = (account: Account) => ({
   id,
+  sequence,
   outcome: { deliveredAmount, ledgerVersion, timestamp },
   specification: { source, destination },
 }: Tx): Operation => {
@@ -135,6 +136,7 @@ const txToOperation = (account: Account) => ({
     senders: [source.address],
     recipients: [destination.address],
     date: new Date(timestamp),
+    transactionSequenceNumber: sequence,
   }
   return op
 }
@@ -299,9 +301,18 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         next(a => {
           const newOps = transactions.map(txToOperation(a))
           const operations = mergeOps(a.operations, newOps)
+          const [last] = operations
+          const pendingOperations = a.pendingOperations.filter(
+            o =>
+              last &&
+              last.transactionSequenceNumber &&
+              o.transactionSequenceNumber &&
+              o.transactionSequenceNumber > last.transactionSequenceNumber,
+          )
           return {
             ...a,
             operations,
+            pendingOperations,
             blockHeight: maxLedgerVersion,
             lastSyncDate: new Date(),
           }
@@ -394,11 +405,37 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         throw new Error(submittedPayment.resultMessage)
       }
 
-      return computeBinaryTransactionHash(transaction)
+      const hash = computeBinaryTransactionHash(transaction)
+
+      return {
+        id: `${a.id}-${hash}-OUT`,
+        hash,
+        accountId: a.id,
+        type: 'OUT',
+        value: t.amount,
+        blockHash: null,
+        blockHeight: null,
+        senders: [a.freshAddress],
+        recipients: [t.recipient],
+        date: new Date(),
+        // we probably can't get it so it's a predictive value
+        transactionSequenceNumber:
+          (a.operations.length > 0 ? a.operations[0].transactionSequenceNumber : 0) +
+          a.pendingOperations.length,
+      }
     } finally {
       api.disconnect()
     }
   },
+
+  addPendingOperation: (account, operation) => ({
+    ...account,
+    pendingOperations: [operation].concat(
+      account.pendingOperations.filter(
+        o => o.transactionSequenceNumber === operation.transactionSequenceNumber,
+      ),
+    ),
+  }),
 }
 
 export default RippleJSBridge

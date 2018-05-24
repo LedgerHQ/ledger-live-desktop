@@ -6,12 +6,13 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T, Device } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
 import { getBridgeForCurrency } from 'bridge'
 
 import { getVisibleAccounts } from 'reducers/accounts'
+import { updateAccountWithUpdater } from 'actions/accounts'
 
 import Breadcrumb from 'components/Breadcrumb'
 import { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
@@ -29,6 +30,7 @@ import StepConfirmation from './04-step-confirmation'
 type Props = {
   initialAccount: ?Account,
   onClose: () => void,
+  updateAccountWithUpdater: (string, (Account) => Account) => void,
   accounts: Account[],
   t: T,
 }
@@ -40,7 +42,7 @@ type State<T> = {
   stepIndex: number,
   appStatus: ?string,
   deviceSelected: ?Device,
-  txValidated: ?string,
+  optimisticOperation: ?Operation,
 }
 
 type Step = {
@@ -53,6 +55,10 @@ const mapStateToProps = createStructuredSelector({
   accounts: getVisibleAccounts,
 })
 
+const mapDispatchToProps = {
+  updateAccountWithUpdater,
+}
+
 class SendModalBody extends PureComponent<Props, State<*>> {
   constructor({ t, initialAccount, accounts }: Props) {
     super()
@@ -64,7 +70,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
       txOperation: null,
       appStatus: null,
       deviceSelected: null,
-      txValidated: null,
+      optimisticOperation: null,
       account,
       bridge,
       transaction,
@@ -124,10 +130,17 @@ class SendModalBody extends PureComponent<Props, State<*>> {
     }
   }
 
-  onValidate = (txid: ?string) => {
-    const { stepIndex } = this.state
+  onOperationBroadcasted = (optimisticOperation: Operation) => {
+    const { stepIndex, account, bridge } = this.state
+    if (!account || !bridge) return
+    const { addPendingOperation } = bridge
+    if (addPendingOperation) {
+      this.props.updateAccountWithUpdater(account.id, account =>
+        addPendingOperation(account, optimisticOperation),
+      )
+    }
     this.setState({
-      txValidated: txid,
+      optimisticOperation,
       stepIndex: stepIndex + 1,
     })
   }
@@ -153,7 +166,14 @@ class SendModalBody extends PureComponent<Props, State<*>> {
 
   render() {
     const { t, onClose } = this.props
-    const { stepIndex, account, transaction, bridge, txValidated, deviceSelected } = this.state
+    const {
+      stepIndex,
+      account,
+      transaction,
+      bridge,
+      optimisticOperation,
+      deviceSelected,
+    } = this.state
 
     const step = this.steps[stepIndex]
     if (!step) return null
@@ -195,17 +215,17 @@ class SendModalBody extends PureComponent<Props, State<*>> {
               bridge={bridge}
               transaction={transaction}
               device={deviceSelected}
-              onValidate={this.onValidate}
+              onOperationBroadcasted={this.onOperationBroadcasted}
             />
 
-            <StepConfirmation t={t} txValidated={txValidated} />
+            <StepConfirmation t={t} optimisticOperation={optimisticOperation} />
           </ChildSwitch>
         </ModalContent>
 
         {stepIndex === 3 ? (
           <ConfirmationFooter
             t={t}
-            txValidated={txValidated}
+            optimisticOperation={optimisticOperation}
             onClose={onClose}
             onGoToFirstStep={this.onGoToFirstStep}
           />
@@ -230,4 +250,4 @@ class SendModalBody extends PureComponent<Props, State<*>> {
   }
 }
 
-export default compose(connect(mapStateToProps), translate())(SendModalBody)
+export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(SendModalBody)

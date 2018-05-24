@@ -46,22 +46,18 @@ const WrapperClock = styled(Box).attrs({
 
 const ConfirmationCheck = ({
   marketColor,
-  confirmations,
-  minConfirmations,
+  isConfirmed,
   t,
   type,
   withTooltip,
   ...props
 }: {
   marketColor: string,
-  confirmations: number,
-  minConfirmations: number,
+  isConfirmed: boolean,
   t: T,
   type: OperationType,
   withTooltip?: boolean,
 }) => {
-  const isConfirmed = confirmations >= minConfirmations
-
   const renderContent = () => (
     <Container type={type} isConfirmed={isConfirmed} marketColor={marketColor} {...props}>
       {type === 'IN' ? <IconReceive size={12} /> : <IconSend size={12} />}
