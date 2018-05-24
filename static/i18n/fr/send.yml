@@ -12,6 +12,7 @@ steps:
     advancedOptions: Options avancées
     useRBF: Utiliser la transaction RBF
     message: Laisser un message (140)
+    rippleTag: Tag
   connectDevice:
     title: Connecter l'appareil
   verification:
