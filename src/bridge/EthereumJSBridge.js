@@ -2,6 +2,7 @@
 import React from 'react'
 import EthereumKind from 'components/FeesField/EthereumKind'
 import throttle from 'lodash/throttle'
+import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { apiForCurrency } from 'api/Ethereum'
@@ -25,22 +26,43 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
-const toAccountOperation = (account: Account) => (tx: Tx): $Exact<Operation> => {
-  const sending = account.freshAddress.toLowerCase() === tx.from.toLowerCase()
-  const receiving = account.freshAddress.toLowerCase() === tx.to.toLowerCase()
-  const type = sending && receiving ? 'SELF' : sending ? 'OUT' : 'IN'
-  return {
-    id: `${account.id}-${tx.hash}-${type}`,
-    hash: tx.hash,
-    type,
-    value: tx.value,
-    blockHeight: tx.block && tx.block.height,
-    blockHash: tx.block && tx.block.hash,
-    accountId: account.id,
-    senders: [tx.from],
-    recipients: [tx.to],
-    date: new Date(tx.received_at),
+// in case of a SELF send, 2 ops are returned.
+const txToOps = (account: Account) => (tx: Tx): Operation[] => {
+  const freshAddress = account.freshAddress.toLowerCase()
+  const from = tx.from.toLowerCase()
+  const to = tx.to.toLowerCase()
+  const sending = freshAddress === from
+  const receiving = freshAddress === to
+  const ops = []
+  if (sending) {
+    ops.push({
+      id: `${account.id}-${tx.hash}-OUT`,
+      hash: tx.hash,
+      type: 'OUT',
+      value: tx.value + tx.gas_price * tx.gas_used,
+      blockHeight: tx.block && tx.block.height,
+      blockHash: tx.block && tx.block.hash,
+      accountId: account.id,
+      senders: [tx.from],
+      recipients: [tx.to],
+      date: new Date(tx.received_at),
+    })
   }
+  if (receiving) {
+    ops.push({
+      id: `${account.id}-${tx.hash}-IN`,
+      hash: tx.hash,
+      type: 'IN',
+      value: tx.value,
+      blockHeight: tx.block && tx.block.height,
+      blockHash: tx.block && tx.block.hash,
+      accountId: account.id,
+      senders: [tx.from],
+      recipients: [tx.to],
+      date: new Date(tx.received_at),
+    })
+  }
+  return ops
 }
 
 function isRecipientValid(currency, recipient) {
@@ -63,7 +85,7 @@ const paginateMoreTransactions = async (
     acc.length ? acc[acc.length - 1].blockHash : undefined,
   )
   if (txs.length === 0) return acc
-  return mergeOps(acc, txs.map(toAccountOperation(account)))
+  return mergeOps(acc, flatMap(txs, txToOps(account)))
 }
 
 const fetchCurrentBlock = (perCurrencyId => currency => {
@@ -158,7 +180,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         unit: currency.units[0],
         lastSyncDate: new Date(),
       }
-      account.operations = mergeOps([], txs.map(toAccountOperation(account)))
+      account.operations = mergeOps([], flatMap(txs, txToOps(account)))
       return { account }
     }
 
@@ -209,7 +231,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
           if (unsubscribed) return
           next(a => {
             const currentOps = a.operations
-            const newOps = txs.map(toAccountOperation(a))
+            const newOps = flatMap(txs, txToOps(a))
             const { length: newLength } = newOps
             const { length } = currentOps
             if (

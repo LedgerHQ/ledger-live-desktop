@@ -120,11 +120,18 @@ type Tx = {
 const txToOperation = (account: Account) => ({
   id,
   sequence,
-  outcome: { deliveredAmount, ledgerVersion, timestamp },
+  outcome: { fee, deliveredAmount, ledgerVersion, timestamp },
   specification: { source, destination },
 }: Tx): Operation => {
   const type = source.address === account.freshAddress ? 'OUT' : 'IN'
-  const value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0
+  let value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0
+  if (type === 'OUT') {
+    const feeValue = parseAPIValue(fee)
+    if (!isNaN(feeValue)) {
+      value += feeValue
+    }
+  }
+
   const op: $Exact<Operation> = {
     id,
     hash: id,
