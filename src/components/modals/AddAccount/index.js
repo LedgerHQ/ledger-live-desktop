@@ -28,7 +28,6 @@ import Button from 'components/base/Button'
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
 import { getBridgeForCurrency } from 'bridge'
-import CounterValues from 'helpers/countervalues'
 
 import StepCurrency from './01-step-currency'
 import StepImport from './03-step-import'
@@ -62,7 +61,6 @@ type Props = {
   closeModal: Function,
   t: T,
   updateAccount: Function,
-  counterValuesPolling: *,
 }
 
 type State = {
@@ -173,8 +171,6 @@ class AddAccountModal extends PureComponent<Props, State> {
     selectedAccounts.forEach(a => addAccount({ ...a, archived: false }))
     this.setState({ selectedAccounts: [] })
     closeModal(MODAL_ADD_ACCOUNT)
-    this.props.counterValuesPolling.poll()
-    this.props.counterValuesPolling.flush()
   }
 
   handleNextStep = () => {
@@ -298,17 +294,4 @@ class AddAccountModal extends PureComponent<Props, State> {
     )
   }
 }
-
-// FIXME This is kinda ugly architecture right now.
-// I think we should delegate more work to individual steps
-// e.g. each step is responsible to connect to redux, not at top level.
-
-const AddAccountModalAndCounterValues = props => (
-  <CounterValues.PollingConsumer>
-    {cvPolling => <AddAccountModal counterValuesPolling={cvPolling} {...props} />}
-  </CounterValues.PollingConsumer>
-)
-
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(
-  AddAccountModalAndCounterValues,
-)
+export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(AddAccountModal)
