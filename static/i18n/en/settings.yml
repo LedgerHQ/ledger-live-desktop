@@ -1,18 +1,20 @@
 title: Settings
 tabs:
   display: Display
+  account: Account
   currencies: Currencies
   profile: Profile
   about: About
 display:
-  language: Interface language
-  languageDesc: Lorem ipsum dolor sit amet
-  counterValue: Countervalue
-  counterValueDesc: Lorem ipsum dolor sit amet
+  language: Language
+  languageDesc: Select the language of the application
   region: Region
-  regionDesc: Lorem ipsum dolor sit amet
-  stock: Stock market indicators
-  stockDesc: Lorem ipsum dolor sit amet
+  regionDesc: Select the region in which you’re located. This setting changes the application’s time zone.
+account:
+  baseCurrency: Base currency
+  baseCurrencyDesc: Select the base currency and rate provider used to display your balance and transactions
+  regionalMarketIndicator: Regional market indicator
+  regionalMarketIndicatorDesc: Select Western to display an increasing market value in blue. Select Eastern to display an increase in market value in red. market value in red
 currencies:
   confirmationsToSpend: Confirmations to spend
   confirmationsToSpendDesc: Lorem ipsum dolor sit amet
@@ -30,15 +32,16 @@ profile:
   changePassword: Change password
   passwordModalTitle: Password
   passwordModalSubtitle: Set a password to lock your application
-  passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
+  passwordModalDesc: This password will be required to access your Ledger Live profile. Use uppercase, lowercase, special characters (#, @, !, ?) and numbers for a stronger password
   passwordModalPasswordInput: Current password
   passwordModalNewPasswordInput: New password
-  passwordModalRepeatPasswordInput: Repeat password
+  passwordModalRepeatPasswordInput: Confirm new password
   passwordModalSave: Save
   disablePasswordModalTitle: Disable Password
-  disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
-  disablePasswordModalInput: Current password
-  disablePasswordModalSave: Save
+  disablePasswordModalDesc: A password is highly recommended to protect the confidentiality of your Ledger Live data
+  disablePasswordModalLabel: Enter your password
+  disablePasswordModalInput: Password
+  disablePasswordModalSave: Confirm
   sync: Sync accounts
   syncDesc: Lorem ipsum dolor sit amet
   export: Export logs
