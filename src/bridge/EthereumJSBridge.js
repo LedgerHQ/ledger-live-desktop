@@ -75,19 +75,6 @@ function mergeOps(existing: Operation[], newFetched: Operation[]) {
   return uniqBy(all.sort((a, b) => a.date - b.date), 'id')
 }
 
-const paginateMoreTransactions = async (
-  account: Account,
-  acc: Operation[],
-): Promise<Operation[]> => {
-  const api = apiForCurrency(account.currency)
-  const { txs } = await api.getTransactions(
-    account.freshAddress,
-    acc.length ? acc[acc.length - 1].blockHash : undefined,
-  )
-  if (txs.length === 0) return acc
-  return mergeOps(acc, flatMap(txs, txToOps(account)))
-}
-
 const fetchCurrentBlock = (perCurrencyId => currency => {
   if (perCurrencyId[currency.id]) return perCurrencyId[currency.id]()
   const api = apiForCurrency(currency)
@@ -125,7 +112,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
       if (finished) return { complete: true }
       const currentBlock = await fetchCurrentBlock(currency)
       if (finished) return { complete: true }
-      const { txs } = await api.getTransactions(address)
+      let { txs } = await api.getTransactions(address)
       if (finished) return { complete: true }
 
       const path = freshAddressPath // FIXME
@@ -180,7 +167,17 @@ const EthereumBridge: WalletBridge<Transaction> = {
         unit: currency.units[0],
         lastSyncDate: new Date(),
       }
+      for (let i = 0; i < 50; i++) {
+        const api = apiForCurrency(account.currency)
+        const { block } = txs[txs.length - 1]
+        if (!block) break
+        const next = await api.getTransactions(account.freshAddress, block.hash)
+        if (next.txs.length === 0) break
+        txs = txs.concat(next.txs)
+      }
+      txs.reverse()
       account.operations = mergeOps([], flatMap(txs, txToOps(account)))
+      console.log(account)
       return { account }
     }
 
@@ -213,7 +210,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     return { unsubscribe }
   },
 
-  synchronize({ freshAddress, blockHeight, currency }, { next, complete, error }) {
+  synchronize({ freshAddress, blockHeight, currency, operations }, { next, complete, error }) {
     let unsubscribed = false
     const api = apiForCurrency(currency)
     async function main() {
@@ -223,25 +220,20 @@ const EthereumBridge: WalletBridge<Transaction> = {
         if (block.height === blockHeight) {
           complete()
         } else {
-          const balance = await api.getAccountBalance(freshAddress)
+          const blockHash = operations.length > 0 ? operations[0].blockHash : undefined
+          const { txs } = await api.getTransactions(freshAddress, blockHash)
           if (unsubscribed) return
-          const { txs } = await api.getTransactions(freshAddress)
+          if (txs.length === 0) {
+            complete()
+            return
+          }
+          const balance = await api.getAccountBalance(freshAddress)
           if (unsubscribed) return
           const nonce = await api.getAccountNonce(freshAddress)
           if (unsubscribed) return
           next(a => {
             const currentOps = a.operations
             const newOps = flatMap(txs, txToOps(a))
-            const { length: newLength } = newOps
-            const { length } = currentOps
-            if (
-              // still empty
-              (length === 0 && newLength === 0) ||
-              // latest is still same
-              (length > 0 && newLength > 0 && currentOps[0].id === newOps[0].id)
-            ) {
-              return a
-            }
             const operations = mergeOps(currentOps, newOps)
             const pendingOperations = a.pendingOperations.filter(
               o =>
@@ -273,10 +265,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     }
   },
 
-  pullMoreOperations: async account => {
-    const operations = await paginateMoreTransactions(account, account.operations)
-    return a => ({ ...a, operations })
-  },
+  pullMoreOperations: () => Promise.resolve(a => a), // NOT IMPLEMENTED
 
   isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
 
