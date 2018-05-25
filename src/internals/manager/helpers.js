@@ -1,6 +1,6 @@
 // @flow
 
-import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
+import { withDevice } from 'helpers/deviceAccess'
 import chalk from 'chalk'
 import Websocket from 'ws'
 import qs from 'qs'
@@ -44,6 +44,7 @@ export function createTransportHandler(
     errorResponse: string,
   },
 ) {
+  console.log('DEPRECATED: createTransportHandler use withDevice and commands/*')
   return async function transportHandler({
     devicePath,
     ...params
@@ -51,9 +52,7 @@ export function createTransportHandler(
     devicePath: string,
   }): Promise<void> {
     try {
-      const transport: Transport<*> = await CommNodeHid.open(devicePath)
-      // $FlowFixMe
-      const data = await action(transport, params)
+      const data = await withDevice(devicePath)(transport => action(transport, params))
       send(successResponse, data)
     } catch (err) {
       if (!err) {
