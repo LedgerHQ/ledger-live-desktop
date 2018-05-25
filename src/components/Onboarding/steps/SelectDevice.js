@@ -28,7 +28,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
       <Box sticky pt={150}>
         <Box grow alignItems="center">
           <Title>{t('onboarding:selectDevice.title')}</Title>
-          <Description style={{ maxWidth: 536 }}>{t('onboarding:selectDevice.desc')}</Description>
+          <Description>{t('onboarding:selectDevice.desc')}</Description>
           <Box>
             <Inner>
               <DeviceContainer

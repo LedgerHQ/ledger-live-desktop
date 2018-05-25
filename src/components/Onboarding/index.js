@@ -19,8 +19,7 @@ import {
 } from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
 
-// TODO: re-write it without auto lock, fixed width of the password modal, not dynamic titles
-import { unlock } from 'reducers/application'
+// import { unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
 
@@ -31,7 +30,8 @@ import SelectDevice from './steps/SelectDevice'
 import SelectPIN from './steps/SelectPIN'
 import WriteSeed from './steps/WriteSeed'
 import GenuineCheck from './steps/GenuineCheck'
-import SetPassword from './steps/SetPassword'
+// UNTIL IS NEEDED SET PASSWORD IS COMMENTED OUT
+// import SetPassword from './steps/SetPassword'
 import Analytics from './steps/Analytics'
 import Finish from './steps/Finish'
 
@@ -41,7 +41,7 @@ const STEPS = {
   selectPIN: SelectPIN,
   writeSeed: WriteSeed,
   genuineCheck: GenuineCheck,
-  setPassword: SetPassword,
+  // setPassword: SetPassword,
   analytics: Analytics,
   finish: Finish,
   start: Start,
@@ -58,7 +58,7 @@ const mapDispatchToProps = {
   nextStep,
   prevStep,
   jumpStep,
-  unlock,
+  // unlock,
 }
 
 type Props = {
@@ -80,7 +80,7 @@ export type StepProps = {
   nextStep: Function,
   jumpStep: Function,
   finish: Function,
-  savePassword: Function,
+  // savePassword: Function,
   getDeviceInfo: Function,
   setGenuineCheckFail: Function,
   isLedgerNano: Function,
@@ -89,15 +89,15 @@ export type StepProps = {
 class Onboarding extends PureComponent<Props> {
   getDeviceInfo = () => this.props.getCurrentDevice
   finish = () => this.props.saveSettings({ hasCompletedOnboarding: true })
-  savePassword = hash => {
-    this.props.saveSettings({
-      password: {
-        isEnabled: hash !== undefined,
-        value: hash,
-      },
-    })
-    this.props.unlock()
-  }
+  // savePassword = hash => {
+  //   this.props.saveSettings({
+  //     password: {
+  //       isEnabled: hash !== undefined,
+  //       value: hash,
+  //     },
+  //   })
+  //   this.props.unlock()
+  // }
 
   render() {
     const { hasCompletedOnboarding, onboarding, prevStep, nextStep, jumpStep, t } = this.props
@@ -122,7 +122,7 @@ class Onboarding extends PureComponent<Props> {
       nextStep,
       jumpStep,
       finish: this.finish,
-      savePassword: this.savePassword,
+      // savePassword: this.savePassword,
       getDeviceInfo: this.getDeviceInfo,
     }
 

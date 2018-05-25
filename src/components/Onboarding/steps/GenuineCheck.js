@@ -118,7 +118,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       <Box sticky pt={150}>
         <Box grow alignItems="center">
           <Title>{t('onboarding:genuineCheck.title')}</Title>
-          <Description style={{ maxWidth: 536 }}>{t('onboarding:genuineCheck.desc')}</Description>
+          <Description>{t('onboarding:genuineCheck.desc')}</Description>
           <Box mt={5}>
             <CardWrapper>
               <Box justify="center">
@@ -291,7 +291,7 @@ const CardWrapper = styled(Card).attrs({
   p: 5,
 })`
   max-height: 97px;
-  min-width: 620px;
+  width: 620px;
   border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
