@@ -7,6 +7,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
+import { getTxURL } from 'helpers/explorers'
 
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T, CurrencySettings } from 'types/common'
@@ -69,12 +70,15 @@ type Props = {
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const { t, onClose, operation, account, marketColor, currencySettings } = props
-  const { id, hash, date, senders, recipients, type } = operation
+  const { hash, date, senders, recipients, type } = operation
   const amount = getOperationAmountNumber(operation)
 
   const { name, unit, currency } = account
   const confirmations = operation.blockHeight ? account.blockHeight - operation.blockHeight : 0
   const isConfirmed = confirmations >= currencySettings.confirmationsNb
+
+  const url = getTxURL(account, operation)
+
   return (
     <ModalBody onClose={onClose}>
       <ModalTitle>Operation details</ModalTitle>
@@ -145,12 +149,11 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
       </ModalContent>
       <ModalFooter horizontal justify="flex-end" flow={2}>
         <Button onClick={onClose}>Cancel</Button>
-        <Button
-          primary
-          onClick={() => shell.openExternal(`https://testnet.blockchain.info/tx/${id}`)}
-        >
-          View operation
-        </Button>
+        {url ? (
+          <Button primary onClick={() => shell.openExternal(url)}>
+            View operation
+          </Button>
+        ) : null}
       </ModalFooter>
     </ModalBody>
   )
