@@ -1,9 +1,9 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { radii, colors } from 'styles/theme'
+import { radii } from 'styles/theme'
 
 import type { T } from 'types/common'
 
@@ -11,8 +11,9 @@ import { setGenuineCheckFail } from 'reducers/onboarding'
 
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
-import IconCheck from 'icons/Check'
+import RadioGroup from 'components/base/RadioGroup'
 import IconLedgerNanoError from 'icons/onboarding/LedgerNanoError'
+import IconLedgerBlueError from 'icons/onboarding/LedgerBlueError'
 
 import { Title, Description, IconOptionRow } from '../helperComponents'
 
@@ -24,18 +25,43 @@ const mapDispatchToProps = { setGenuineCheckFail }
 type State = {
   pinStepPass: boolean | null,
   phraseStepPass: boolean | null,
+  cachedPinStepButton: string,
+  cachedPhraseStepButton: string,
 }
 
 class GenuineCheck extends PureComponent<StepProps, State> {
   state = {
     pinStepPass: null,
     phraseStepPass: null,
+    cachedPinStepButton: '',
+    cachedPhraseStepButton: '',
   }
 
-  handleStepPass = (step: string, pass: boolean | null) => {
-    this.setState({ [`${step}`]: pass })
+  getButtonLabel() {
+    const { t } = this.props
+    return [
+      {
+        label: t('common:yes'),
+        key: 'yes',
+        pass: true,
+      },
+      {
+        label: t('common:no'),
+        key: 'no',
+        pass: false,
+      },
+    ]
+  }
 
-    if (typeof pass === 'boolean' && !pass) {
+  handleButtonPass = (item: Object, step: string) => {
+    this.setState({ [`${step}`]: item.pass })
+    if (step === 'pinStepPass') {
+      this.setState({ cachedPinStepButton: item.key })
+    } else {
+      this.setState({ cachedPhraseStepButton: item.key })
+    }
+
+    if (!item.pass) {
       this.props.setGenuineCheckFail(true)
     }
   }
@@ -51,12 +77,13 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       redoGenuineCheck={this.redoGenuineCheck}
       contactSupport={this.contactSupport}
       t={this.props.t}
+      isLedgerNano={this.props.onboarding.isLedgerNano}
     />
   )
 
   render() {
     const { nextStep, prevStep, t, onboarding } = this.props
-    const { pinStepPass, phraseStepPass } = this.state
+    const { pinStepPass, phraseStepPass, cachedPinStepButton, cachedPhraseStepButton } = this.state
 
     if (onboarding.isGenuineFail) {
       return this.renderGenuineFail()
@@ -66,7 +93,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       <Box sticky pt={150}>
         <Box grow alignItems="center">
           <Title>{t('onboarding:genuineCheck.title')}</Title>
-          <Description>{t('onboarding:genuineCheck.desc')}</Description>
+          <Description style={{ maxWidth: 536 }}>{t('onboarding:genuineCheck.desc')}</Description>
           <Box mt={5}>
             <CardWrapper>
               <Box justify="center">
@@ -76,22 +103,16 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 </Box>
                 <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
               </Box>
-              {!pinStepPass ? (
-                <ButtonCombo
-                  handleStepPass={this.handleStepPass}
-                  step="pinStepPass"
-                  disabled={false}
-                  t={this.props.t}
-                />
-              ) : (
-                <Box justify="center" color={colors.wallet} ml={8}>
-                  <IconCheck size={16} />
-                </Box>
-              )}
+              <RadioGroup
+                style={{ margin: '0 30px' }}
+                items={this.getButtonLabel()}
+                activeKey={cachedPinStepButton}
+                onChange={item => this.handleButtonPass(item, 'pinStepPass')}
+              />
             </CardWrapper>
           </Box>
           <Box mt={5}>
-            <CardWrapper disabled={!pinStepPass}>
+            <CardWrapper isDisabled={!pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>2.</IconOptionRow>
@@ -99,22 +120,16 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 </Box>
                 <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
               </Box>
-              {!phraseStepPass ? (
-                <ButtonCombo
-                  handleStepPass={this.handleStepPass}
-                  step="phraseStepPass"
-                  disabled={!pinStepPass}
-                  t={this.props.t}
-                />
-              ) : (
-                <Box justify="center" color={colors.wallet} ml={8}>
-                  <IconCheck size={16} />
-                </Box>
-              )}
+              <RadioGroup
+                style={{ margin: '0 30px' }}
+                items={this.getButtonLabel()}
+                activeKey={cachedPhraseStepButton}
+                onChange={item => this.handleButtonPass(item, 'phraseStepPass')}
+              />
             </CardWrapper>
           </Box>
           <Box mt={5}>
-            <CardWrapper disabled={!phraseStepPass}>
+            <CardWrapper isDisabled={!phraseStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>3.</IconOptionRow>
@@ -145,58 +160,42 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
 export default connect(null, mapDispatchToProps)(GenuineCheck)
 
-export function ButtonCombo({
-  handleStepPass,
-  step,
-  disabled,
-  t,
-}: {
-  handleStepPass: any,
-  step: string,
-  disabled: boolean,
-  t: T,
-}) {
-  return (
-    <Box justify="center" horizontal style={{ margin: '0 20px' }}>
-      <Button
-        disabled={disabled}
-        style={{ padding: '0 20px' }}
-        outline
-        onClick={() => handleStepPass(step, true)}
-      >
-        {t('common:yes')}
-      </Button>
-      <Button
-        disabled={disabled}
-        style={{ padding: '0 20px' }}
-        outline
-        onClick={() => handleStepPass(step, false)}
-      >
-        {t('common:no')}
-      </Button>
-    </Box>
-  )
-}
 // TODO extract to a separate file
 export function GenuineCheckFail({
   redoGenuineCheck,
   contactSupport,
+  isLedgerNano,
   t,
 }: {
   redoGenuineCheck: () => void,
   contactSupport: () => void,
+  isLedgerNano: boolean,
   t: T,
 }) {
   return (
-    <Box sticky pt={150}>
+    <Box sticky pt={250}>
       <Box grow alignItems="center">
-        <Title>{t('onboarding:genuineCheck.errorPage.ledgerNano.title')}</Title>
-        <Description style={{ maxWidth: 527 }}>
-          {t('onboarding:genuineCheck.errorPage.ledgerNano.desc')}
-        </Description>
-        <Box style={{ minWidth: 527 }}>
-          <IconLedgerNanoError />
-        </Box>
+        {isLedgerNano ? (
+          <Fragment>
+            <Title>{t('onboarding:genuineCheck.errorPage.ledgerNano.title')}</Title>
+            <Description style={{ maxWidth: 527 }}>
+              {t('onboarding:genuineCheck.errorPage.ledgerNano.desc')}
+            </Description>
+            <Box style={{ minWidth: 527 }}>
+              <IconLedgerNanoError />
+            </Box>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <Title>{t('onboarding:genuineCheck.errorPage.ledgerBlue.title')}</Title>
+            <Description style={{ maxWidth: 527 }}>
+              {t('onboarding:genuineCheck.errorPage.ledgerBlue.desc')}
+            </Description>
+            <Box style={{ minWidth: 527, alignItems: 'center' }}>
+              <IconLedgerBlueError />
+            </Box>
+          </Fragment>
+        )}
       </Box>
       <Wrapper horizontal>
         <Button
@@ -249,9 +248,10 @@ const CardWrapper = styled(Card).attrs({
   horizontal: true,
   p: 5,
 })`
-  border: ${props => (props.disabled ? '1px dashed #d8d8d8' : '1px solid #d8d8d8')};
   max-height: 97px;
   min-width: 620px;
-  background-color: ${props => (props.disabled ? colors.lightGrey : colors.white)};
-  opacity: ${props => (props.disabled ? 0.7 : 1)};
+  border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
+  pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
+  background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
+  opacity: ${p => (p.isDisabled ? 0.7 : 1)};
 `

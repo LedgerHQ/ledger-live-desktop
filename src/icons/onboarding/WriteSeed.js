@@ -3,195 +3,43 @@
 import React from 'react'
 
 export default () => (
-  <svg width="157" height="144">
-    <defs>
-      <rect id="b" width="42" height="10" y="45" rx="2" />
-      <filter
-        id="a"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="d" width="42" height="10" x="67" y="35" rx="2" />
-      <filter
-        id="c"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="f" width="42" height="10" x="31" y="11" rx="2" />
-      <filter
-        id="e"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="h" width="42" height="10" x="103" rx="2" />
-      <filter
-        id="g"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="j" width="42" height="10" x="104" y="55" rx="2" />
-      <filter
-        id="i"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="l" width="42" height="10" x="31" y="67" rx="2" />
-      <filter
-        id="k"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="n" width="42" height="10" x="11" y="96" rx="2" />
-      <filter
-        id="m"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="p" width="42" height="10" x="109" y="103" rx="2" />
-      <filter
-        id="o"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-      <rect id="r" width="42" height="10" x="78" y="83" rx="2" />
-      <filter
-        id="q"
-        width="123.8%"
-        height="200%"
-        x="-11.9%"
-        y="-40%"
-        filterUnits="objectBoundingBox"
-      >
-        <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1" />
-        <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="1.5" />
-        <feColorMatrix
-          in="shadowBlurOuter1"
-          values="0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 0 0.847058824 0 0 0 1 0"
-        />
-      </filter>
-    </defs>
-    <g fill="none" fillRule="evenodd" transform="translate(3 2)">
-      <circle
-        cx="79"
-        cy="72"
-        r="57"
+  <svg width="145" height="126">
+    <g fill="none" fillRule="evenodd" transform="translate(-1)">
+      <path
         fill="#6490F1"
         fillOpacity=".1"
         stroke="#142533"
-        strokeWidth="2"
+        strokeWidth="1.8"
+        d="M29.105 103.014l19.87-84.34L4.123 34.999a2.7 2.7 0 0 0-1.573 3.566l26.556 64.449zm89.265 1.336L97.73 33.29l44.752 16.288a2.7 2.7 0 0 1 1.49 3.748L118.37 104.35z"
+      />
+      <rect
+        width="88.2"
+        height="106.2"
+        x="29.9"
+        y=".9"
+        fill="#FFF"
+        stroke="#142533"
+        strokeWidth="1.8"
+        rx="3.6"
       />
       <path
         fill="#6490F1"
-        fillRule="nonzero"
-        stroke="#142533"
-        d="M88.63 118.285h-1.07v-6.596c0-4.791-3.846-8.689-8.574-8.689s-8.574 3.898-8.574 8.69v6.595H69.34c-1.844 0-3.339 1.515-3.339 3.384v15.695c0 1.869 1.495 3.384 3.339 3.384h19.292c1.843 0 3.339-1.515 3.339-3.384V121.67c0-1.87-1.495-3.384-3.34-3.384zm-15.22-6.596c0-3.115 2.502-5.649 5.576-5.649 3.072 0 5.573 2.534 5.573 5.65v6.595H73.41v-6.596z"
+        d="M82.969 92.378h23.22a1.81 1.81 0 0 1 0 3.622H82.97a1.81 1.81 0 0 1 0-3.622zm-41.158 0h23.22a1.81 1.81 0 0 1 0 3.622h-23.22a1.81 1.81 0 1 1 0-3.622zm41.158-12.675h23.22a1.81 1.81 0 0 1 0 3.621H82.97a1.81 1.81 0 0 1 0-3.621zm-41.158 0h23.22a1.81 1.81 0 0 1 0 3.621h-23.22a1.81 1.81 0 1 1 0-3.621zm41.158-12.676h23.22a1.81 1.81 0 0 1 0 3.622H82.97a1.81 1.81 0 0 1 0-3.622zm-41.158 0h23.22a1.81 1.81 0 0 1 0 3.622h-23.22a1.81 1.81 0 1 1 0-3.622zm41.158-12.676h23.22a1.81 1.81 0 0 1 0 3.622H82.97a1.81 1.81 0 0 1 0-3.622zm-41.158 0h23.22a1.81 1.81 0 0 1 0 3.622h-23.22a1.81 1.81 0 1 1 0-3.622zm41.158-12.675h23.22a1.81 1.81 0 0 1 0 3.621H82.97a1.81 1.81 0 0 1 0-3.621zm-41.158 0h23.22a1.81 1.81 0 0 1 0 3.621h-23.22a1.81 1.81 0 1 1 0-3.621zM82.969 29h23.22a1.81 1.81 0 0 1 0 3.622H82.97a1.81 1.81 0 0 1 0-3.622zM41.81 29h23.22a1.81 1.81 0 0 1 0 3.622H41.81a1.81 1.81 0 1 1 0-3.622z"
+        opacity=".5"
       />
       <path
         fill="#FFF"
-        d="M80.694 129.345v4.225a1.72 1.72 0 0 1-1.709 1.73 1.72 1.72 0 0 1-1.708-1.73v-4.225a3.08 3.08 0 0 1-1.325-2.54c0-1.698 1.358-3.074 3.033-3.074 1.675 0 3.033 1.377 3.033 3.075a3.083 3.083 0 0 1-1.325 2.54z"
+        fillRule="nonzero"
+        stroke="#6490F1"
+        strokeWidth="2"
+        d="M85.623 57.047a17.987 17.987 0 0 1 6.194 13.596c0 9.92-8.032 17.99-17.909 17.99-9.876 0-17.908-8.07-17.908-17.99a17.986 17.986 0 0 1 6.194-13.596v-3.281C62.194 47.278 67.447 42 73.908 42c6.462 0 11.715 5.278 11.715 11.766v3.28zM73.809 74.193zm.003-.018v4.55a.1.1 0 0 0 .096.102.1.1 0 0 0 .097-.102v-4.55a3.149 3.149 0 0 1-.006-.054l-.088-.899.885-.179a4.505 4.505 0 0 0 3.596-4.42c0-2.493-2.008-4.51-4.484-4.51-2.475 0-4.483 2.018-4.483 4.51a4.505 4.505 0 0 0 3.596 4.42l.885.18-.088.898a3.149 3.149 0 0 1-.006.054zm.196.018a.1.1 0 0 0 0 .004v-.004zm0 .004v-.002zm-7.62-19.876a17.719 17.719 0 0 1 7.52-1.668c2.633 0 5.186.577 7.521 1.668v-.555c0-4.17-3.375-7.562-7.52-7.562-4.146 0-7.521 3.392-7.521 7.562v.555z"
       />
-      <use fill="#000" filter="url(#a)" xlinkHref="#b" />
-      <use fill="#FFF" xlinkHref="#b" />
-      <use fill="#000" filter="url(#c)" xlinkHref="#d" />
-      <use fill="#FFF" xlinkHref="#d" />
-      <use fill="#000" filter="url(#e)" xlinkHref="#f" />
-      <use fill="#FFF" xlinkHref="#f" />
-      <use fill="#000" filter="url(#g)" xlinkHref="#h" />
-      <use fill="#FFF" xlinkHref="#h" />
-      <use fill="#000" filter="url(#i)" xlinkHref="#j" />
-      <use fill="#FFF" xlinkHref="#j" />
-      <use fill="#000" filter="url(#k)" xlinkHref="#l" />
-      <use fill="#FFF" xlinkHref="#l" />
-      <use fill="#000" filter="url(#m)" xlinkHref="#n" />
-      <use fill="#FFF" xlinkHref="#n" />
-      <g>
-        <use fill="#000" filter="url(#o)" xlinkHref="#p" />
-        <use fill="#FFF" xlinkHref="#p" />
-      </g>
-      <g>
-        <use fill="#000" filter="url(#q)" xlinkHref="#r" />
-        <use fill="#FFF" xlinkHref="#r" />
-      </g>
+      {/* <text fill="#142533" fontFamily="MuseoSans-700, Museo Sans" fontSize="5" fontWeight="500">
+        <tspan x="41" y="17">
+          RECOVERY PHRASE
+        </tspan>
+      </text> */}
+      <ellipse cx="75" cy="122.5" fill="#EEE" rx="48" ry="3.5" />
     </g>
   </svg>
 )
