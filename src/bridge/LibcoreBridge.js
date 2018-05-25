@@ -44,7 +44,16 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       switch (msg.type) {
         case 'account.sync.progress': {
           next(a => a)
-          // use next(), to actually emit account updates.....
+          // FIXME TODO: use next(), to actually emit account updates.....
+          // - need to sync the balance
+          // - need to sync block height & block hash
+          // - need to sync operations.
+          // - once all that, need to set lastSyncDate to new Date()
+
+          // - when you implement addPendingOperation you also here need to:
+          //   - if there were pendingOperations that are now in operations, remove them as well.
+          //   - if there are pendingOperations that is older than a threshold (that depends on blockchain speed typically)
+          //     then we probably should trash them out? it's a complex question for UI
           break
         }
         case 'account.sync.fail': {
@@ -150,9 +159,11 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
-  getTotalSpent: (a, t) => Promise.resolve(t.amount + t.feePerByte),
+  canBeSpent: (a, t) => Promise.resolve(t.amount <= a.balance), // FIXME
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance - t.feePerByte),
+  getTotalSpent: (a, t) => Promise.resolve(t.amount), // FIXME
+
+  getMaxAmount: (a, _t) => Promise.resolve(a.balance), // FIXME
 
   signAndBroadcast: (account, transaction, deviceId) => {
     const rawAccount = encodeAccount(account)

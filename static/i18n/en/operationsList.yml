@@ -2,8 +2,8 @@ date: Date
 account: Account
 address: Address
 amount: Amount
-from: Receive funds
-to: Sent funds
+IN: Receive funds
+OUT: Sent funds
 showMore: Show more
 confirmed: Confirmed
 notConfirmed: Not confirmed

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
+import type { Operation } from '@ledgerhq/live-common/lib/types'
 
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
@@ -36,15 +37,17 @@ const Text = styled(Box).attrs({
 `
 
 type Props = {
-  txValidated: ?string,
+  optimisticOperation: ?Operation,
   t: T,
 }
 
 function StepConfirmation(props: Props) {
-  const { t, txValidated } = props
-  const Icon = txValidated ? IconCheckCircle : IconExclamationCircleThin
-  const iconColor = txValidated ? colors.positiveGreen : colors.alertRed
-  const tPrefix = txValidated ? 'send:steps.confirmation.success' : 'send:steps.confirmation.error'
+  const { t, optimisticOperation } = props
+  const Icon = optimisticOperation ? IconCheckCircle : IconExclamationCircleThin
+  const iconColor = optimisticOperation ? colors.positiveGreen : colors.alertRed
+  const tPrefix = optimisticOperation
+    ? 'send:steps.confirmation.success'
+    : 'send:steps.confirmation.error'
 
   return (
     <Container>
@@ -53,7 +56,9 @@ function StepConfirmation(props: Props) {
       </span>
       <Title>{t(`${tPrefix}.title`)}</Title>
       <Text>{multiline(t(`${tPrefix}.text`))}</Text>
-      <Text>{txValidated || ''}</Text>
+      <Text style={{ userSelect: 'text' }}>
+        {optimisticOperation ? optimisticOperation.hash : ''}
+      </Text>
     </Container>
   )
 }

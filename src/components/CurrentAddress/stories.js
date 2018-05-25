@@ -13,7 +13,7 @@ const stories = storiesOf('Components', module)
 stories.add('CurrentAddress', () => (
   <CurrentAddress
     accountName={text('accountName', '')}
-    address={accounts[0].address}
+    address={accounts[0].freshAddress}
     addressVerified={boolean('addressVerified', true)}
     withBadge={boolean('withBadge', false)}
     withFooter={boolean('withFooter', false)}

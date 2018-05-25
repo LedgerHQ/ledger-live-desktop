@@ -2,6 +2,8 @@
 import React from 'react'
 import EthereumKind from 'components/FeesField/EthereumKind'
 import throttle from 'lodash/throttle'
+import flatMap from 'lodash/flatMap'
+import uniqBy from 'lodash/uniqBy'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
@@ -24,20 +26,43 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
-const toAccountOperation = (account: Account) => (tx: Tx): Operation => {
-  const sending = account.address.toLowerCase() === tx.from.toLowerCase()
-  return {
-    id: tx.hash,
-    hash: tx.hash,
-    address: sending ? tx.to : tx.from,
-    amount: (sending ? -1 : 1) * tx.value,
-    blockHeight: (tx.block && tx.block.height) || 0, // FIXME will be optional field
-    blockHash: (tx.block && tx.block.hash) || '', // FIXME will be optional field
-    accountId: account.id,
-    senders: [tx.from],
-    recipients: [tx.to],
-    date: new Date(tx.received_at),
+// in case of a SELF send, 2 ops are returned.
+const txToOps = (account: Account) => (tx: Tx): Operation[] => {
+  const freshAddress = account.freshAddress.toLowerCase()
+  const from = tx.from.toLowerCase()
+  const to = tx.to.toLowerCase()
+  const sending = freshAddress === from
+  const receiving = freshAddress === to
+  const ops = []
+  if (sending) {
+    ops.push({
+      id: `${account.id}-${tx.hash}-OUT`,
+      hash: tx.hash,
+      type: 'OUT',
+      value: tx.value + tx.gas_price * tx.gas_used,
+      blockHeight: tx.block && tx.block.height,
+      blockHash: tx.block && tx.block.hash,
+      accountId: account.id,
+      senders: [tx.from],
+      recipients: [tx.to],
+      date: new Date(tx.received_at),
+    })
   }
+  if (receiving) {
+    ops.push({
+      id: `${account.id}-${tx.hash}-IN`,
+      hash: tx.hash,
+      type: 'IN',
+      value: tx.value,
+      blockHeight: tx.block && tx.block.height,
+      blockHash: tx.block && tx.block.hash,
+      accountId: account.id,
+      senders: [tx.from],
+      recipients: [tx.to],
+      date: new Date(tx.received_at),
+    })
+  }
+  return ops
 }
 
 function isRecipientValid(currency, recipient) {
@@ -45,9 +70,9 @@ function isRecipientValid(currency, recipient) {
 }
 
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
-  const ids = existing.map(o => o.id)
-  const all = existing.concat(newFetched.filter(o => !ids.includes(o.id)))
-  return all.sort((a, b) => a.date - b.date)
+  const ids = newFetched.map(o => o.id)
+  const all = newFetched.concat(existing.filter(o => !ids.includes(o.id)))
+  return uniqBy(all.sort((a, b) => a.date - b.date), 'id')
 }
 
 const paginateMoreTransactions = async (
@@ -56,15 +81,15 @@ const paginateMoreTransactions = async (
 ): Promise<Operation[]> => {
   const api = apiForCurrency(account.currency)
   const { txs } = await api.getTransactions(
-    account.address,
+    account.freshAddress,
     acc.length ? acc[acc.length - 1].blockHash : undefined,
   )
   if (txs.length === 0) return acc
-  return mergeOps(acc, txs.map(toAccountOperation(account)))
+  return mergeOps(acc, flatMap(txs, txToOps(account)))
 }
 
 const fetchCurrentBlock = (perCurrencyId => currency => {
-  if (perCurrencyId[currency.id]) return perCurrencyId[currency.id]
+  if (perCurrencyId[currency.id]) return perCurrencyId[currency.id]()
   const api = apiForCurrency(currency)
   const f = throttle(
     () =>
@@ -75,7 +100,7 @@ const fetchCurrentBlock = (perCurrencyId => currency => {
     5000,
   )
   perCurrencyId[currency.id] = f
-  return f
+  return f()
 })({})
 
 const EthereumBridge: WalletBridge<Transaction> = {
@@ -93,7 +118,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
     async function stepAddress(
       index,
-      { address, path },
+      { address, path: freshAddressPath },
       isStandard,
     ): { account?: Account, complete?: boolean } {
       const balance = await api.getAccountBalance(address)
@@ -103,28 +128,29 @@ const EthereumBridge: WalletBridge<Transaction> = {
       const { txs } = await api.getTransactions(address)
       if (finished) return { complete: true }
 
+      const path = freshAddressPath // FIXME
+      const freshAddress = address
+
       if (txs.length === 0) {
         // this is an empty account
         if (isStandard) {
           if (newAccountCount === 0) {
             // first zero account will emit one account as opportunity to create a new account..
-            const currentBlock = await fetchCurrentBlock(currency)
             const accountId = `${currency.id}_${address}`
-            const account: Account = {
+            const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
               path, // FIXME we probably not want the address path in the account.path
-              walletPath: String(index),
+              freshAddress,
+              freshAddressPath,
               name: 'New Account',
-              isSegwit: false,
-              address,
-              addresses: [{ str: address, path }],
               balance,
               blockHeight: currentBlock.height,
               archived: true,
               index,
               currency,
               operations: [],
+              pendingOperations: [],
               unit: currency.units[0],
               lastSyncDate: new Date(),
             }
@@ -137,25 +163,24 @@ const EthereumBridge: WalletBridge<Transaction> = {
       }
 
       const accountId = `${currency.id}_${address}`
-      const account: Account = {
+      const account: $Exact<Account> = {
         id: accountId,
         xpub: '',
         path, // FIXME we probably not want the address path in the account.path
-        walletPath: String(index),
+        freshAddress,
+        freshAddressPath,
         name: address.slice(32),
-        isSegwit: false,
-        address,
-        addresses: [{ str: address, path }],
         balance,
         blockHeight: currentBlock.height,
         archived: true,
         index,
         currency,
         operations: [],
+        pendingOperations: [],
         unit: currency.units[0],
         lastSyncDate: new Date(),
       }
-      account.operations = txs.map(toAccountOperation(account))
+      account.operations = mergeOps([], flatMap(txs, txToOps(account)))
       return { account }
     }
 
@@ -166,9 +191,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
         for (const derivation of derivations) {
           const isStandard = last === derivation
           for (let index = 0; index < 255; index++) {
-            const path = derivation({ currency, x: index, segwit: false })
+            const freshAddressPath = derivation({ currency, x: index, segwit: false })
             const res = await getAddressCommand
-              .send({ currencyId: currency.id, devicePath: deviceId, path })
+              .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
               .toPromise()
             const r = await stepAddress(index, res, isStandard)
             if (r.account) next(r.account)
@@ -188,7 +213,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     return { unsubscribe }
   },
 
-  synchronize({ address, blockHeight, currency }, { next, complete, error }) {
+  synchronize({ freshAddress, blockHeight, currency }, { next, complete, error }) {
     let unsubscribed = false
     const api = apiForCurrency(currency)
     async function main() {
@@ -198,13 +223,15 @@ const EthereumBridge: WalletBridge<Transaction> = {
         if (block.height === blockHeight) {
           complete()
         } else {
-          const balance = await api.getAccountBalance(address)
+          const balance = await api.getAccountBalance(freshAddress)
           if (unsubscribed) return
-          const { txs } = await api.getTransactions(address)
+          const { txs } = await api.getTransactions(freshAddress)
+          if (unsubscribed) return
+          const nonce = await api.getAccountNonce(freshAddress)
           if (unsubscribed) return
           next(a => {
             const currentOps = a.operations
-            const newOps = txs.map(toAccountOperation(a))
+            const newOps = flatMap(txs, txToOps(a))
             const { length: newLength } = newOps
             const { length } = currentOps
             if (
@@ -216,8 +243,15 @@ const EthereumBridge: WalletBridge<Transaction> = {
               return a
             }
             const operations = mergeOps(currentOps, newOps)
+            const pendingOperations = a.pendingOperations.filter(
+              o =>
+                o.transactionSequenceNumber &&
+                o.transactionSequenceNumber >= nonce &&
+                !operations.some(op => o.hash === op.hash),
+            )
             return {
               ...a,
+              pendingOperations,
               operations,
               balance,
               blockHeight: block.height,
@@ -231,6 +265,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
       }
     }
     main()
+
     return {
       unsubscribe() {
         unsubscribed = true
@@ -270,14 +305,15 @@ const EthereumBridge: WalletBridge<Transaction> = {
   // $FlowFixMe
   EditFees,
 
+  // FIXME gasPrice calc is wrong... need to multiply with gasLimit I guess ?
+  canBeSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice <= a.balance),
   getTotalSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice),
-
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice),
 
   signAndBroadcast: async (a, t, deviceId) => {
     const api = apiForCurrency(a.currency)
 
-    const nonce = await api.getAccountNonce(a.address)
+    const nonce = await api.getAccountNonce(a.freshAddress)
 
     const transaction = await signTransactionCommand
       .send({
@@ -288,10 +324,31 @@ const EthereumBridge: WalletBridge<Transaction> = {
       })
       .toPromise()
 
-    const result = await api.broadcastTransaction(transaction)
+    const hash = await api.broadcastTransaction(transaction)
 
-    return result
+    return {
+      id: `${a.id}-${hash}-OUT`,
+      hash,
+      type: 'OUT',
+      value: t.amount,
+      blockHeight: null,
+      blockHash: null,
+      accountId: a.id,
+      senders: [a.freshAddress],
+      recipients: [t.recipient],
+      transactionSequenceNumber: nonce,
+      date: new Date(),
+    }
   },
+
+  addPendingOperation: (account, operation) => ({
+    ...account,
+    pendingOperations: [operation].concat(
+      account.pendingOperations.filter(
+        o => o.transactionSequenceNumber === operation.transactionSequenceNumber,
+      ),
+    ),
+  }),
 }
 
 export default EthereumBridge

@@ -11,12 +11,5 @@ type Props = {
 
 export default function CurrentAddressForAccount(props: Props) {
   const { account, ...p } = props
-
-  // TODO: handle other cryptos than BTC-like
-  let freshAddress = account.addresses[0]
-  if (!freshAddress) {
-    freshAddress = { str: '', path: '' }
-  }
-
-  return <CurrentAddress accountName={account.name} address={freshAddress.str} {...p} />
+  return <CurrentAddress accountName={account.name} address={account.freshAddress} {...p} />
 }

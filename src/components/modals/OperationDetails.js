@@ -6,9 +6,10 @@ import { shell } from 'electron'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
 
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
-import type { T } from 'types/common'
+import type { T, CurrencySettings } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
 
@@ -61,19 +62,19 @@ type Props = {
   t: T,
   operation: Operation,
   account: Account,
-  type: 'from' | 'to',
-  onClose: Function,
-  currencySettings: *,
+  onClose: () => void,
+  currencySettings: CurrencySettings,
   marketColor: string,
 }
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
-  const { t, type, onClose, operation, account, marketColor, currencySettings } = props
-  const { id, hash, amount, date, senders, recipients } = operation
+  const { t, onClose, operation, account, marketColor, currencySettings } = props
+  const { id, hash, date, senders, recipients, type } = operation
+  const amount = getOperationAmountNumber(operation)
 
   const { name, unit, currency } = account
-  const confirmations = account.blockHeight - operation.blockHeight
-  const isConfirmed = confirmations >= currencySettings.minConfirmations
+  const confirmations = operation.blockHeight ? account.blockHeight - operation.blockHeight : 0
+  const isConfirmed = confirmations >= currencySettings.confirmationsNb
   return (
     <ModalBody onClose={onClose}>
       <ModalTitle>Operation details</ModalTitle>
@@ -81,8 +82,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         <Box alignItems="center" mt={3}>
           <ConfirmationCheck
             marketColor={marketColor}
-            confirmations={confirmations}
-            minConfirmations={currencySettings.minConfirmations}
+            isConfirmed={isConfirmed}
             style={{
               transform: 'scale(2)',
             }}
