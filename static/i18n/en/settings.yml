@@ -36,11 +36,6 @@ profile:
   passwordModalPasswordInput: Current password
   passwordModalNewPasswordInput: New password
   passwordModalRepeatPasswordInput: Confirm new password
-  passwordModalWarning1: very poor
-  passwordModalWarning2: poor
-  passwordModalWarning3: average
-  passwordModalWarning4: strong
-  passwordModalWarning5: very strong
   passwordModalSave: Save
   disablePasswordModalTitle: Disable Password
   disablePasswordModalDesc: A password is highly recommended to protect the confidentiality of your Ledger Live data
