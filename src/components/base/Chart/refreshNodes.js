@@ -10,7 +10,7 @@ const debug = d('Chart')
 
 export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any, props: Props }) {
   const { NODES, COLORS } = ctx
-  const { hideAxis, interactive, id } = props
+  const { hideAxis, isInteractive, id } = props
 
   // Container
 
@@ -26,20 +26,11 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
 
   // Focus bars
 
-  ensure({ onlyIf: interactive, NODES, key: 'xBar' }, () =>
+  ensure({ onlyIf: isInteractive, NODES, key: 'xBar' }, () =>
     NODES.wrapper
       .append('line')
       .attr('stroke', COLORS.focusBar)
-      .attr('stroke-width', '1px')
-      .attr('stroke-dasharray', '3, 2'),
-  )
-
-  ensure({ onlyIf: interactive, NODES, key: 'yBar' }, () =>
-    NODES.wrapper
-      .append('line')
-      .attr('stroke', COLORS.focusBar)
-      .attr('stroke-width', '1px')
-      .attr('stroke-dasharray', '3, 2'),
+      .attr('stroke-width', '1px'),
   )
 
   // Gradient
@@ -84,7 +75,7 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
 
   // Tooltip & focus point
 
-  ensure({ onlyIf: interactive, NODES, key: 'tooltip' }, () =>
+  ensure({ onlyIf: isInteractive, NODES, key: 'tooltip' }, () =>
     d3
       .select(node)
       .append('div')
@@ -94,11 +85,13 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
       .style('pointer-events', 'none'),
   )
 
-  ensure({ onlyIf: interactive, NODES, key: 'focus' }, () =>
+  ensure({ onlyIf: isInteractive, NODES, key: 'focus' }, () =>
     NODES.wrapper
       .append('g')
       .append('circle')
-      .attr('fill', COLORS.focus)
+      .attr('fill', 'white')
+      .attr('stroke', COLORS.focus)
+      .attr('stroke-width', 2)
       .attr('r', 4),
   )
 

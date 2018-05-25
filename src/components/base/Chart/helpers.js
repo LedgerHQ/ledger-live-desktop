@@ -16,7 +16,7 @@ export function generateColors(color) {
     focus: color,
     gradientStart: cColor.fade(0.7),
     gradientStop: cColor.fade(1),
-    focusBar: cColor.fade(0.5),
+    focusBar: '#d8d8d8',
   }
 }
 

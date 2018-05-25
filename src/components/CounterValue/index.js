@@ -49,7 +49,9 @@ const mapStateToProps = (state: State, props: OwnProps) => {
 class CounterValue extends PureComponent<Props> {
   render() {
     const { value, counterValueCurrency, date, ...props } = this.props
-    if (!value && value !== 0) return null
+    if (!value && value !== 0) {
+      return null
+    }
     return (
       <FormattedVal
         val={value}
