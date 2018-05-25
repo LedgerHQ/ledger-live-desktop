@@ -26,13 +26,17 @@ selectDevice:
     title: Ledger Blue
     desc: Please replace it with the final wording once it’s done.
 selectPIN:
-  title: Choose your PIN code
-  desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
+  title: Start initialization & choose your PIN code
   instructions:
-    step1: Connect the Ledger Nano S to your computer.
-    step2: Press both buttons simultaneously as instructed on the screen.
-    step3: Press the right button to select Configure as new device.
-    step4: Choose a PIN code between 4 and 8 digits long.
+    ledgerNano:
+      step1: Connect the Ledger Nano S to your computer.
+      step2: Press both buttons simultaneously as instructed on the screen.
+      step3: Press the right button to select Configure as new device.
+      step4: Choose a PIN code between 4 and 8 digits long.
+    ledgerBlue:
+      step1: Connect the Ledger Blue to your computer.
+      step2: Tap on Configure as new device.
+      step3: Choose a PIN code between 4 and 8 digits long.
   disclaimer:
     note1: Choose your own PIN code. This code unlocks your device.
     note2: An 8-digit PIN code offers an optimum level of security.
@@ -50,31 +54,41 @@ writeSeed:
     note3: Make sure you are the sole holder of the 24-word recovery phrase.
     note4: Never use a device supplied with a recovery phrase and/or a PIN code.
 genuineCheck:
-  title: Check PIN / Seed / Authenticity
+  title: Final security check
   desc: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
   steps:
     step1:
-      title: You alone have chosen your PIN code
+      title: Did you choose your PIN code by yourself?
       desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
     step2:
-      title: You alone have initialized your recovery phrase
+      title: Did you save your recovery phrase by yourself?
       desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
     step3:
-      title: Your device is a genuine Ledger device
+      title: Check if your Ledger device is genuine
       desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
   buttons:
     genuineCheck: Genuine check
+    tryAgain: Check again
     contactSupport: Contact Support
   errorPage:
     ledgerNano:
       title: Something is wrong with your Ledger Nano S
-      desc: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
+      desc: A problem occurred with your Ledger Nano S. Contact Ledger Support to get assistance or go back to the security check.
+    ledgerBlue:
+      title: Something is wrong with your Ledger Blue
+      desc: A problem occurred with your Ledger Blue. Contact Ledger Support to get assistance or go back to the security check.
 setPassword:
-  title: This is the title of the screen. 1 line is the maximum
-  desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
+  title: Choose a password to securely access Ledger Live
+  desc: Use uppercase, lowercase, special characters (
 analytics:
-  title: This is the title of the screen. 1 line is the maximum
+  title: Help Ledger to improve its products and services
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
+  shareDiagnostics:
+    title: Share analytics
+    desc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+  shareData:
+    title: Share analytics
+    desc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
 finish:
   title: This is the title of the screen. 1 line is the maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
