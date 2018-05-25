@@ -77,11 +77,17 @@ genuineCheck:
       title: Something is wrong with your Ledger Blue
       desc: A problem occurred with your Ledger Blue. Contact Ledger Support to get assistance or go back to the security check.
 setPassword:
-  title: This is the title of the screen. 1 line is the maximum
-  desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
+  title: Choose a password to securely access Ledger Live
+  desc: Use uppercase, lowercase, special characters (#, @, !, ?) and numbers for a stronger password.
 analytics:
-  title: This is the title of the screen. 1 line is the maximum
+  title: Help Ledger to improve its products and services
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
+  shareDiagnostics:
+    title: Share analytics
+    desc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+  shareData:
+    title: Share analytics
+    desc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
 finish:
   title: This is the title of the screen. 1 line is the maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet

@@ -4,7 +4,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Box from 'components/base/Box'
-import IconAnalytics from 'icons/onboarding/Analytics'
 import CheckBox from 'components/base/CheckBox'
 import { Title, Description } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
@@ -17,25 +16,31 @@ export default (props: StepProps) => {
     <Box sticky pt={150}>
       <Box grow alignItems="center">
         <Title>{t('onboarding:analytics.title')}</Title>
-        <Description style={{ maxWidth: 714 }}>{t('onboarding:analytics.desc')}</Description>
-        <DeviceIcon style={{ padding: 15 }}>
-          <IconAnalytics />
-        </DeviceIcon>
-        <Box horizontal flow={2} align="center">
-          <CheckBox isChecked={false} />
-          <AnalyticsText>
-            This is a long text, please replace it with the final wording once it’s done.
-            <br />
-            Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-          </AnalyticsText>
-        </Box>
-        <Box horizontal flow={2} align="center">
-          <CheckBox isChecked={false} />
-          <AnalyticsText>
-            This is a long text, please replace it with the final wording once it’s done.
-            <br />
-            Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-          </AnalyticsText>
+        <Description>{t('onboarding:analytics.desc')}</Description>
+
+        <Box mt={5}>
+          <Container>
+            <Box justify="center">
+              <Box horizontal>
+                <AnalyticsTitle>{t('onboarding:analytics.shareDiagnostics.title')}</AnalyticsTitle>
+              </Box>
+              <AnalyticsText>{t('onboarding:analytics.shareDiagnostics.desc')}</AnalyticsText>
+            </Box>
+            <Box alignItems="center" horizontal mx={5}>
+              <CheckBox isChecked={false} />
+            </Box>
+          </Container>
+          <Container>
+            <Box justify="center">
+              <Box horizontal>
+                <AnalyticsTitle>{t('onboarding:analytics.shareDiagnostics.title')}</AnalyticsTitle>
+              </Box>
+              <AnalyticsText>{t('onboarding:analytics.shareDiagnostics.desc')}</AnalyticsText>
+            </Box>
+            <Box alignItems="center" horizontal mx={5}>
+              <CheckBox isChecked={false} />
+            </Box>
+          </Container>
         </Box>
       </Box>
       <OnboardingFooter
@@ -52,17 +57,23 @@ export default (props: StepProps) => {
 
 export const AnalyticsText = styled(Box).attrs({
   ff: 'Open Sans|Regular',
-  fontSize: 4,
+  fontSize: 3,
   textAlign: 'left',
   color: 'smoke',
 })`
-  margin: 10px auto 25px;
-  padding-left: 10px;
+  max-width: 450px;
 `
-const DeviceIcon = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'graphite',
+export const AnalyticsTitle = styled(Box).attrs({
+  ff: 'Open Sans|SemiBold',
+  fontSize: 4,
+  textAlign: 'left',
 })`
-  width: 55px;
+  margin-bottom: 5px;
+`
+const Container = styled(Box).attrs({
+  horizontal: true,
+  p: 5,
+})`
+  max-height: 90px;
+  width: 620px;
 `

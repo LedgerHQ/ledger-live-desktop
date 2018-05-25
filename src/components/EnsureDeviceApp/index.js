@@ -11,16 +11,17 @@ import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
 
 type OwnProps = {
-  currency: ?CryptoCurrency,
+  currency?: ?CryptoCurrency,
   deviceSelected: ?Device,
-  withGenuineCheck: boolean,
-  account: ?Account,
+  withGenuineCheck?: boolean,
+  account?: ?Account,
   onStatusChange?: (DeviceStatus, AppStatus, ?string) => void,
-  onGenuineCheck: (isGenuine: boolean) => void,
+  onGenuineCheck?: (isGenuine: boolean) => void,
   // TODO prefer children function
   render?: ({
     appStatus: AppStatus,
-    currency: CryptoCurrency,
+    genuineCheckStatus: GenuineCheckStatus,
+    currency: ?CryptoCurrency,
     devices: Device[],
     deviceSelected: ?Device,
     deviceStatus: DeviceStatus,
@@ -36,10 +37,13 @@ type DeviceStatus = 'unconnected' | 'connected'
 
 type AppStatus = 'success' | 'fail' | 'progress'
 
+type GenuineCheckStatus = 'success' | 'fail' | 'progress'
+
 type State = {
   deviceStatus: DeviceStatus,
   appStatus: AppStatus,
   errorMessage: ?string,
+  genuineCheckStatus: GenuineCheckStatus,
 }
 
 const mapStateToProps = (state: StoreState) => ({
@@ -51,6 +55,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
     appStatus: 'progress',
     deviceStatus: this.props.deviceSelected ? 'connected' : 'unconnected',
     errorMessage: null,
+    genuineCheckStatus: 'progress',
   }
 
   componentDidMount() {
@@ -163,7 +168,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
     await sleep(1)
     if (!this._unmounted) {
       this.setState({ genuineCheckStatus: 'success' })
-      this.props.onGenuineCheck(true)
+      this.props.onGenuineCheck && this.props.onGenuineCheck(true)
     }
   }
 

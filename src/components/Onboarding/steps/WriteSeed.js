@@ -60,7 +60,7 @@ export default (props: StepProps) => {
       <Box grow alignItems="center">
         <Box align="center" mb={5}>
           <Title>{t('onboarding:writeSeed.title')}</Title>
-          <Description style={{ maxWidth: 714 }}>{t('onboarding:writeSeed.desc')}</Description>
+          <Description>{t('onboarding:writeSeed.desc')}</Description>
         </Box>
         <Box align="center">
           <Inner style={{ width: 760 }}>
