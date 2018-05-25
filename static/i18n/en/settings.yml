@@ -1,18 +1,20 @@
 title: Settings
 tabs:
   display: Display
+  account: Account
   currencies: Currencies
   profile: Profile
   about: About
 display:
   language: Interface language
   languageDesc: Lorem ipsum dolor sit amet
-  counterValue: Countervalue
-  counterValueDesc: Lorem ipsum dolor sit amet
   region: Region
   regionDesc: Lorem ipsum dolor sit amet
-  stock: Stock market indicators
-  stockDesc: Lorem ipsum dolor sit amet
+account:
+  baseCurrency: Base currency
+  baseCurrencyDesc: Select the base currency and rate provider used to display your balance and transactions
+  regionalMarketIndicator: Regional market indicator
+  regionalMarketIndicatorDesc: Select Western to display an increasing market value in blue. Select Eastern to display an increase in market value in red. market value in red. 
 currencies:
   confirmationsToSpend: Confirmations to spend
   confirmationsToSpendDesc: Lorem ipsum dolor sit amet
