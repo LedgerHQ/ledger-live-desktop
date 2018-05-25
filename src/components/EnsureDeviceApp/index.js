@@ -125,11 +125,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
     try {
       if (appOptions) {
         const { address } = await getAddress.send(appOptions).toPromise()
-<<<<<<< HEAD
         if (account && account.freshAddress !== address) {
-=======
-        if (account && account.address !== address) {
->>>>>>> Skeleton for genuine check in onboarding
           throw new Error('Account address is different than device address')
         }
       } else {
