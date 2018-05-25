@@ -1,5 +1,4 @@
 // @flow
-import { ipcRenderer } from 'electron'
 import { Observable } from 'rxjs'
 import uuidv4 from 'uuid/v4'
 
@@ -63,6 +62,7 @@ export class Command<In, A> {
    * const res = await send(data).toPromise()
    */
   send(data: In): Observable<A> {
+    const { ipcRenderer } = require('electron')
     return Observable.create(o => {
       const { channel, type, id } = this
       const requestId: string = uuidv4()
