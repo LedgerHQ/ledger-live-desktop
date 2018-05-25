@@ -35,13 +35,13 @@ export default function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]
     }
 
     // scan segwit AND non-segwit accounts
-    const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
     const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({
       ...commonParams,
       isSegwit: false,
     })
+    const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
 
-    const accounts = [...segwitAccounts, ...nonSegwitAccounts]
+    const accounts = [...nonSegwitAccounts, ...segwitAccounts]
 
     return accounts
   })
@@ -154,15 +154,17 @@ async function scanNextAccount(props: {
     ops,
   })
 
-  // returns if the current index points on an account with no ops
-  if (ops.length === 0) {
-    return accounts
-  }
+  const isEmpty = ops.length === 0
 
   // trigger event
   onAccountScanned(account)
 
   accounts.push(account)
+
+  // returns if the current index points on an account with no ops
+  if (isEmpty) {
+    return accounts
+  }
 
   return scanNextAccount({ ...props, accountIndex: accountIndex + 1 })
 }
@@ -259,7 +261,9 @@ async function buildAccountRaw({
     id: xpub, // FIXME for account id you might want to prepend the crypto currency id to this because it's not gonna be unique.
     xpub,
     path: walletPath,
-    name: `Account ${accountIndex}${isSegwit ? ' (segwit)' : ''}`, // TODO: placeholder name?
+    name: `${operations.length === 0 ? 'New ' : ''}Account ${accountIndex}${
+      isSegwit ? ' (segwit)' : ''
+    }`, // TODO: placeholder name?
     isSegwit,
     freshAddress,
     freshAddressPath,
