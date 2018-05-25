@@ -1,6 +1,6 @@
 // @flow
 
-import type { IPCSend } from 'types/electron'
+// import type { IPCSend } from 'types/electron'
 
 // import { createTransportHandler, uninstallApp } from 'helpers/common'
 
