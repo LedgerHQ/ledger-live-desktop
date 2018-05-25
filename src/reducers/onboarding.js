@@ -18,12 +18,14 @@ export type OnboardingState = {
   stepName: string, // TODO: specify that the string comes from Steps type
   steps: Step[],
   isGenuineFail: boolean,
+  isLedgerNano: boolean,
 }
 
 const state: OnboardingState = {
   stepIndex: 0,
   stepName: 'start',
   isGenuineFail: false,
+  isLedgerNano: true,
   steps: [
     {
       name: 'start',
@@ -79,15 +81,16 @@ const state: OnboardingState = {
         showBreadcrumb: true,
       },
     },
-    {
-      name: 'setPassword',
-      label: 'Set Password',
-      options: {
-        showFooter: false,
-        showBackground: true,
-        showBreadcrumb: true,
-      },
-    },
+    // UNTIL IS NEEDED SET PASSWORD IS COMMENTED OUT
+    // {
+    //   name: 'setPassword',
+    //   label: 'Set Password',
+    //   options: {
+    //     showFooter: false,
+    //     showBackground: true,
+    //     showBreadcrumb: true,
+    //   },
+    // },
     {
       name: 'analytics',
       label: 'Analytics & Bug report',
@@ -144,6 +147,10 @@ const handlers = {
     ...state,
     isGenuineFail,
   }),
+  ONBOARDING_SET_DEVICE_TYPE: (state, { payload: isLedgerNano }) => ({
+    ...state,
+    isLedgerNano,
+  }),
 }
 
 export default handleActions(handlers, state)
@@ -152,3 +159,4 @@ export const nextStep = createAction('ONBOARDING_NEXT_STEP')
 export const prevStep = createAction('ONBOARDING_PREV_STEP')
 export const jumpStep = createAction('ONBOARDING_JUMP_STEP')
 export const setGenuineCheckFail = createAction('ONBOARDING_SET_GENUINE_CHECK_FAIL')
+export const isLedgerNano = createAction('ONBOARDING_SET_DEVICE_TYPE')

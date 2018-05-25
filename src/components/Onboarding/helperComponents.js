@@ -16,8 +16,6 @@ export const Title = styled(Box).attrs({
 })``
 
 export const Description = styled(Box).attrs({
-  width: 714,
-  height: 48,
   ff: 'Museo Sans|Light',
   fontSize: 5,
   lineHeight: 1.5,
@@ -25,6 +23,7 @@ export const Description = styled(Box).attrs({
   color: 'grey',
 })`
   margin: 10px auto 25px;
+  max-width: 550px;
 `
 export const Inner = styled(Box).attrs({
   horizontal: true,

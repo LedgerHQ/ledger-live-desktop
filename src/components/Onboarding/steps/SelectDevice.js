@@ -1,57 +1,78 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+
+import { isLedgerNano } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
+import IconCheckCirle from 'icons/CheckCircle'
 import IconLedgerNano from 'icons/onboarding/LedgerNano'
 import IconLedgerBlue from 'icons/onboarding/LedgerBlue'
 import { Title, Description, Inner } from '../helperComponents'
 
 import type { StepProps } from '..'
 
-export default (props: StepProps) => {
-  const { nextStep, t } = props
+const mapDispatchToProps = { isLedgerNano }
 
-  return (
-    <Box sticky pt={150}>
-      <Box grow alignItems="center">
-        <Title>{t('onboarding:selectDevice.title')}</Title>
-        <Description style={{ maxWidth: 714 }}>{t('onboarding:selectDevice.desc')}</Description>
-        <Box>
-          <Inner>
-            <DeviceContainer onClick={() => nextStep()}>
-              <DeviceIcon>
-                <IconLedgerNano />
-              </DeviceIcon>
-              <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
-              <BlockDescription>
-                {t('onboarding:selectDevice.ledgerNanoCard.desc')}
-              </BlockDescription>
-            </DeviceContainer>
-            <DeviceContainer>
-              <DeviceIcon>
-                <IconLedgerBlue />
-              </DeviceIcon>
-              <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerBlueCard.title')}</BlockTitle>
-              <BlockDescription>
-                {t('onboarding:selectDevice.ledgerBlueCard.desc')}
-              </BlockDescription>
-            </DeviceContainer>
-          </Inner>
+class SelectDevice extends PureComponent<StepProps, {}> {
+  handleIsLedgerNano = (isLedgerNano: boolean) => {
+    this.props.isLedgerNano(isLedgerNano)
+    this.props.nextStep()
+  }
+  render() {
+    const { t, onboarding } = this.props
+
+    return (
+      <Box sticky pt={150}>
+        <Box grow alignItems="center">
+          <Title>{t('onboarding:selectDevice.title')}</Title>
+          <Description>{t('onboarding:selectDevice.desc')}</Description>
+          <Box>
+            <Inner>
+              <DeviceContainer
+                onClick={() => this.handleIsLedgerNano(true)}
+                style={{
+                  position: 'relative',
+                }}
+              >
+                {onboarding.isLedgerNano && <DeviceSelected />}
+                <DeviceIcon>
+                  <IconLedgerNano />
+                </DeviceIcon>
+                <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
+              </DeviceContainer>
+              <DeviceContainer
+                onClick={() => this.handleIsLedgerNano(false)}
+                style={{
+                  position: 'relative',
+                }}
+              >
+                {!onboarding.isLedgerNano && <DeviceSelected />}
+                <DeviceIcon>
+                  <IconLedgerBlue />
+                </DeviceIcon>
+                <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerBlueCard.title')}</BlockTitle>
+              </DeviceContainer>
+            </Inner>
+          </Box>
         </Box>
       </Box>
-    </Box>
-  )
+    )
+  }
 }
+
+export default connect(null, mapDispatchToProps)(SelectDevice)
 
 const DeviceContainer = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
+  position: 'relative',
 })`
   width: 218px;
   height: 204px;
-  border: 1px solid #d8d8d8;
+  border: ${props => `1px solid ${props.theme.colors.fog}`};
   &:hover,
   &:focus {
     opacity: 0.5;
@@ -77,3 +98,16 @@ export const BlockTitle = styled(Box).attrs({
   fontSize: 4,
   textAlign: 'center',
 })``
+export function DeviceSelected() {
+  return (
+    <Box
+      style={{
+        position: 'absolute',
+        top: '10px',
+        right: '10px',
+      }}
+    >
+      <IconCheckCirle size={12} />
+    </Box>
+  )
+}

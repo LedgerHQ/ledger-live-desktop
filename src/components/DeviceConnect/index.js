@@ -17,6 +17,7 @@ import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconInfoCircle from 'icons/InfoCircle'
 import IconLoader from 'icons/Loader'
 import IconUsb from 'icons/Usb'
+import IconHome from 'icons/Home'
 
 import * as IconDevice from 'icons/device'
 
@@ -33,12 +34,14 @@ const Step = styled(Box).attrs({
           ? p.theme.colors.alertRed
           : p.theme.colors.fog};
 `
+
 const StepIcon = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
 })`
   width: 64px;
 `
+
 const StepContent = styled(Box).attrs({
   color: 'dark',
   horizontal: true,
@@ -138,6 +141,8 @@ StepCheck.defaultProps = {
 type Props = {
   accountName: null | string,
   appOpened: null | 'success' | 'fail',
+  genuineCheckStatus: null | 'success' | 'fail',
+  withGenuineCheck: boolean,
   currency: CryptoCurrency,
   devices: Device[],
   deviceSelected: ?Device,
@@ -161,6 +166,7 @@ class DeviceConnect extends PureComponent<Props> {
     devices: [],
     deviceSelected: null,
     onChangeDevice: noop,
+    withGenuineCheck: false,
   }
 
   componentDidMount() {
@@ -171,18 +177,17 @@ class DeviceConnect extends PureComponent<Props> {
     emitChangeDevice(nextProps)
   }
 
-  getAppState() {
-    const { appOpened } = this.props
-
-    return {
-      success: appOpened === 'success',
-      fail: appOpened === 'fail',
-    }
-  }
+  getStepState = stepStatus => ({
+    success: stepStatus === 'success',
+    fail: stepStatus === 'fail',
+  })
 
   render() {
     const {
       deviceSelected,
+      genuineCheckStatus,
+      withGenuineCheck,
+      appOpened,
       errorMessage,
       accountName,
       currency,
@@ -191,7 +196,8 @@ class DeviceConnect extends PureComponent<Props> {
       devices,
     } = this.props
 
-    const appState = this.getAppState()
+    const appState = this.getStepState(appOpened)
+    const genuineCheckState = this.getStepState(genuineCheckStatus)
 
     const hasDevice = devices.length > 0
     const hasMultipleDevices = devices.length > 1
@@ -242,23 +248,65 @@ class DeviceConnect extends PureComponent<Props> {
             </ListDevices>
           )}
         </Step>
+
         <Step validated={appState.success} hasErrors={appState.fail}>
-          <StepContent>
-            <StepIcon>
-              <WrapperIconCurrency>
-                <CryptoCurrencyIcon currency={currency} size={12} />
-              </WrapperIconCurrency>
-            </StepIcon>
-            <Box grow shrink>
-              <Trans i18nKey="deviceConnect:step2.open" parent="div">
-                {'Open '}
-                <strong>{currency.name}</strong>
-                {' App on your device'}
-              </Trans>
-            </Box>
-            <StepCheck checked={appState.success} hasErrors={appState.fail} />
-          </StepContent>
+          {currency ? (
+            <StepContent>
+              <StepIcon>
+                <WrapperIconCurrency>
+                  <CryptoCurrencyIcon currency={currency} size={12} />
+                </WrapperIconCurrency>
+              </StepIcon>
+              <Box grow shrink>
+                <Trans i18nKey="deviceConnect:step2.open" parent="div">
+                  {'Open '}
+                  <strong>{currency.name}</strong>
+                  {' App on your device'}
+                </Trans>
+              </Box>
+              <StepCheck checked={appState.success} hasErrors={appState.fail} />
+            </StepContent>
+          ) : (
+            <StepContent>
+              <StepIcon>
+                <WrapperIconCurrency>
+                  <IconHome size={12} />
+                </WrapperIconCurrency>
+              </StepIcon>
+              <Box grow shrink>
+                <Trans i18nKey="deviceConnect:dashboard.open" parent="div">
+                  {'Go to the '}
+                  <strong>{'dashboard'}</strong>
+                  {' on your device'}
+                </Trans>
+              </Box>
+              <StepCheck checked={appState.success} hasErrors={appState.fail} />
+            </StepContent>
+          )}
         </Step>
+
+        {/*                      GENUINE CHECK                               */}
+        {/*                      -------------                               */}
+
+        {withGenuineCheck && (
+          <Step validated={genuineCheckState.success} hasErrors={genuineCheckState.fail}>
+            <StepContent>
+              <StepIcon>
+                <WrapperIconCurrency>
+                  <IconCheck size={12} />
+                </WrapperIconCurrency>
+              </StepIcon>
+              <Box grow shrink>
+                <Trans i18nKey="deviceConnect:stepGenuine.open" parent="div">
+                  {'Confirm '}
+                  <strong>{'authentication'}</strong>
+                  {' on your device'}
+                </Trans>
+              </Box>
+              <StepCheck checked={genuineCheckState.success} hasErrors={genuineCheckState.fail} />
+            </StepContent>
+          </Step>
+        )}
 
         {appState.fail ? (
           <Info hasErrors>

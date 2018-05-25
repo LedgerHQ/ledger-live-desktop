@@ -106,7 +106,7 @@ class InputPassword extends PureComponent<Props, State> {
         {withStrength && (
           <Fragment>
             <Box flow={1} horizontal>
-              {[0, 1, 2, 3, 4].map(v => (
+              {[0, 1, 2].map(v => (
                 <Strength
                   key={v}
                   warning={passwordStrength <= 1}
