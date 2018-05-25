@@ -31,11 +31,11 @@ function getRenderTickX(selectedTime) {
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, interactive, tickXScale, unit } = props
+  const { hideAxis, isInteractive, tickXScale, account } = props
 
   const nbTicksX = getTickXCount(tickXScale)
   const renderTickX = getRenderTickX(tickXScale)
-  const renderTickY = t => (unit ? formatShort(unit, t) : t)
+  const renderTickY = t => (account ? formatShort(account.unit, t) : t)
 
   const area = d3
     .area()
@@ -62,12 +62,11 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
   }
 
   if (INVALIDATED.color) {
-    if (interactive) {
+    if (isInteractive) {
       // Update focus bar colors
       NODES.xBar.attr('stroke', COLORS.focusBar)
-      NODES.yBar.attr('stroke', COLORS.focusBar)
       // Update dot color
-      NODES.focus.attr('fill', COLORS.focus)
+      NODES.focus.attr('stroke', COLORS.focus)
     }
     // Update gradient color
     NODES.gradientStart.attr('stop-color', COLORS.gradientStart)
@@ -78,11 +77,10 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
   }
 
   // Hide interactive things
-  if (interactive) {
+  if (isInteractive) {
     NODES.focus.style('opacity', 0)
     NODES.tooltip.style('opacity', 0)
     NODES.xBar.style('opacity', 0)
-    NODES.yBar.style('opacity', 0)
   }
 
   // Draw axis

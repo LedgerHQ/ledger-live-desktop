@@ -32,9 +32,16 @@ const mapStateToProps = createStructuredSelector({
   exchange: exchangeSettingsForAccountSelector,
 })
 
-class Footer extends PureComponent<Props, { totalSpent: number }> {
+class Footer extends PureComponent<
+  Props,
+  {
+    totalSpent: number,
+    canBeSpent: boolean,
+  },
+> {
   state = {
     totalSpent: 0,
+    canBeSpent: true,
   }
   componentDidMount() {
     this.resync()
@@ -54,12 +61,13 @@ class Footer extends PureComponent<Props, { totalSpent: number }> {
   async resync() {
     const { account, bridge, transaction } = this.props
     const totalSpent = await bridge.getTotalSpent(account, transaction)
+    const canBeSpent = await bridge.canBeSpent(account, transaction)
     if (this.unmount) return
-    this.setState({ totalSpent })
+    this.setState({ totalSpent, canBeSpent })
   }
   render() {
     const { exchange, account, t, onNext, canNext, showTotal } = this.props
-    const { totalSpent } = this.state
+    const { totalSpent, canBeSpent } = this.state
     return (
       <ModalFooter>
         <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
@@ -69,7 +77,7 @@ class Footer extends PureComponent<Props, { totalSpent: number }> {
               <Box horizontal flow={2} align="center">
                 <FormattedVal
                   disableRounding
-                  color={totalSpent > account.balance ? 'pearl' : 'dark'}
+                  color={!canBeSpent ? 'pearl' : 'dark'}
                   val={totalSpent}
                   unit={account.unit}
                   showCode

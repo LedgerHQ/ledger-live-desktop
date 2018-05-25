@@ -9,12 +9,10 @@
 //
 
 import Btc from '@ledgerhq/hw-app-btc'
-import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
+import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type Transport from '@ledgerhq/hw-transport'
-
-import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
+import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
 type Props = {
@@ -23,27 +21,30 @@ type Props = {
   onAccountScanned: Function,
 }
 
-export default async function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
+export default function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   const { devicePath, currencyId, onAccountScanned } = props
 
-  // instanciate app on device
-  const transport: Transport<*> = await CommNodeHid.open(devicePath)
-  const hwApp = new Btc(transport)
+  return withDevice(devicePath)(async transport => {
+    const hwApp = new Btc(transport)
 
-  const commonParams = {
-    hwApp,
-    currencyId,
-    onAccountScanned,
-    devicePath,
-  }
+    const commonParams = {
+      hwApp,
+      currencyId,
+      onAccountScanned,
+      devicePath,
+    }
 
-  // scan segwit AND non-segwit accounts
-  const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
-  const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: false })
+    // scan segwit AND non-segwit accounts
+    const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({
+      ...commonParams,
+      isSegwit: false,
+    })
+    const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
 
-  const accounts = [...segwitAccounts, ...nonSegwitAccounts]
+    const accounts = [...nonSegwitAccounts, ...segwitAccounts]
 
-  return accounts
+    return accounts
+  })
 }
 
 export async function getWalletIdentifier({
@@ -153,15 +154,17 @@ async function scanNextAccount(props: {
     ops,
   })
 
-  // returns if the current index points on an account with no ops
-  if (ops.length === 0) {
-    return accounts
-  }
+  const isEmpty = ops.length === 0
 
   // trigger event
   onAccountScanned(account)
 
   accounts.push(account)
+
+  // returns if the current index points on an account with no ops
+  if (isEmpty) {
+    return accounts
+  }
 
   return scanNextAccount({ ...props, accountIndex: accountIndex + 1 })
 }
@@ -211,6 +214,7 @@ async function buildAccountRaw({
   // $FlowFixMe
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
+  /*
   const balanceByDay = ops.length
     ? await getBalanceByDaySinceOperation({
         njsAccount,
@@ -218,6 +222,7 @@ async function buildAccountRaw({
         core,
       })
     : {}
+    */
 
   const njsBalance = await njsAccount.getBalance()
   const balance = njsBalance.toLong()
@@ -244,23 +249,30 @@ async function buildAccountRaw({
     path: `${accountPath}/${njsAddress.getDerivationPath()}`,
   }))
 
+  if (addresses.length === 0) {
+    throw new Error('no addresses found')
+  }
+
+  const { str: freshAddress, path: freshAddressPath } = addresses[0]
+
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
 
   const rawAccount: AccountRaw = {
-    id: xpub,
+    id: xpub, // FIXME for account id you might want to prepend the crypto currency id to this because it's not gonna be unique.
     xpub,
-    path: accountPath,
-    walletPath,
-    name: `Account ${accountIndex}${isSegwit ? ' (segwit)' : ''}`, // TODO: placeholder name?
+    path: walletPath,
+    name: `${operations.length === 0 ? 'New ' : ''}Account ${accountIndex}${
+      isSegwit ? ' (segwit)' : ''
+    }`, // TODO: placeholder name?
     isSegwit,
-    address: bitcoinAddress,
-    addresses,
+    freshAddress,
+    freshAddressPath,
     balance,
     blockHeight,
     archived: false,
     index: accountIndex,
-    balanceByDay,
     operations,
+    pendingOperations: [],
     currencyId,
     unitMagnitude: jsCurrency.units[0].magnitude,
     lastSyncDate: new Date().toISOString(),
@@ -269,31 +281,45 @@ async function buildAccountRaw({
   return rawAccount
 }
 
-function buildOperationRaw({ core, op, xpub }: { core: Object, op: NJSOperation, xpub: string }) {
+function buildOperationRaw({
+  core,
+  op,
+  xpub,
+}: {
+  core: Object,
+  op: NJSOperation,
+  xpub: string,
+}): OperationRaw {
   const id = op.getUid()
   const bitcoinLikeOperation = op.asBitcoinLikeOperation()
   const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
   const hash = bitcoinLikeTransaction.getHash()
   const operationType = op.getOperationType()
-  const absoluteAmount = op.getAmount().toLong()
+  const value = op.getAmount().toLong()
+
+  const OperationTypeMap: { [_: $Keys<typeof core.OPERATION_TYPES>]: OperationType } = {
+    [core.OPERATION_TYPES.SEND]: 'OUT',
+    [core.OPERATION_TYPES.RECEIVE]: 'IN',
+  }
 
   // if transaction is a send, amount becomes negative
-  const amount = operationType === core.OPERATION_TYPES.SEND ? -absoluteAmount : absoluteAmount
+  const type = OperationTypeMap[operationType]
 
   return {
     id,
     hash,
-    address: '',
+    type,
+    value,
     senders: op.getSenders(),
     recipients: op.getRecipients(),
     blockHeight: op.getBlockHeight(),
-    blockHash: '',
+    blockHash: null,
     accountId: xpub,
     date: op.getDate().toISOString(),
-    amount,
   }
 }
 
+/*
 async function getBalanceByDaySinceOperation({
   njsAccount,
   njsOperation,
@@ -336,3 +362,4 @@ function areSameDay(date1: Date, date2: Date): boolean {
     date1.getDate() === date2.getDate()
   )
 }
+*/

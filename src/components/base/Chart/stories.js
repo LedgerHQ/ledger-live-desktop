@@ -9,11 +9,17 @@ import { boolean, number } from '@storybook/addon-knobs'
 import { color } from '@storybook/addon-knobs/react'
 
 import Chart from 'components/base/Chart'
+import Box from 'components/base/Box'
 
 const stories = storiesOf('Components/base', module)
 
 const data = generateRandomData(365)
-const unit = getCryptoCurrencyById('bitcoin').units[0]
+const currency = getCryptoCurrencyById('bitcoin')
+
+// $FlowFixMe
+const fakeAccount = {
+  currency,
+}
 
 type State = {
   start: number,
@@ -32,23 +38,31 @@ class Wrapper extends Component<any, State> {
     const { start, stop } = this.state
     return (
       <Fragment>
-        <input type="range" value={start} onChange={this.handleChange('start')} min={0} max={365} />
-        <input
-          type="range"
-          value={stop}
-          style={{ marginLeft: 10 }}
-          onChange={this.handleChange('stop')}
-          min={0}
-          max={365}
-        />
+        <Box mb={8} horizontal>
+          <input
+            type="range"
+            value={start}
+            onChange={this.handleChange('start')}
+            min={0}
+            max={365}
+          />
+          <input
+            type="range"
+            value={stop}
+            style={{ marginLeft: 10 }}
+            onChange={this.handleChange('stop')}
+            min={0}
+            max={365}
+          />
+        </Box>
 
         <Chart
-          interactive={boolean('interactive', true)}
-          hideAxis={boolean('hideAxis', false)}
+          isInteractive={boolean('isInteractive', true)}
+          hideAxis={boolean('hideAxis', true)}
           color={color('color', '#5f8ced')}
           data={data.slice(start, stop)}
           height={number('height', 300)}
-          unit={unit}
+          account={fakeAccount}
         />
       </Fragment>
     )
@@ -63,9 +77,11 @@ function generateRandomData(n) {
   const data = []
   const chance = new Chance()
   while (!day.isSame(today)) {
+    const value = chance.integer({ min: 0.5e8, max: 1e8 })
     data.push({
       date: day.toDate(),
-      value: chance.integer({ min: 0.5e8, max: 1e8 }),
+      value,
+      originalValue: value,
     })
     day.add(1, 'day')
   }

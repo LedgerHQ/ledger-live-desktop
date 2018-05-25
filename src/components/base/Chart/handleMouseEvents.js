@@ -29,7 +29,7 @@ export default function handleMouseEvents({
   renderTooltip?: Function,
 }) {
   const { MARGINS, HEIGHT, WIDTH, NODES, DATA, x, y } = ctx
-  const { hideAxis, unit } = props
+  const { account } = props
 
   const bisectDate = d3.bisector(d => d.parsedDate).left
 
@@ -65,21 +65,15 @@ export default function handleMouseEvents({
     NODES.tooltip
       .style('transition', '100ms cubic-bezier(.61,1,.53,1) opacity')
       .style('opacity', 1)
-      .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, ${y(d.value)}px, 0)`)
+      .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, 0, 0)`)
     NODES.focus.style('opacity', 1)
-    if (!hideAxis) {
-      NODES.xBar.style('opacity', 1)
-      NODES.yBar.style('opacity', 1)
-    }
+    NODES.xBar.style('opacity', 1)
   }
 
   function mouseOut() {
     NODES.tooltip.style('opacity', 0).style('transition', '100ms linear opacity')
     NODES.focus.style('opacity', 0)
-    if (!hideAxis) {
-      NODES.xBar.style('opacity', 0)
-      NODES.yBar.style('opacity', 0)
-    }
+    NODES.xBar.style('opacity', 0)
   }
 
   function mouseMove() {
@@ -97,24 +91,17 @@ export default function handleMouseEvents({
         renderToString(
           <Provider store={createStore({})}>
             <ThemeProvider theme={theme}>
-              <Tooltip unit={unit} renderTooltip={renderTooltip} d={d.ref} />
+              <Tooltip account={account} renderTooltip={renderTooltip} item={d.ref} />
             </ThemeProvider>
           </Provider>,
         ),
       )
-      .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, ${y(d.value)}px, 0)`)
-    if (!hideAxis) {
-      NODES.xBar
-        .attr('x1', x(d.parsedDate))
-        .attr('x2', x(d.parsedDate))
-        .attr('y1', HEIGHT)
-        .attr('y2', y(d.value))
-      NODES.yBar
-        .attr('x1', 0)
-        .attr('x2', x(d.parsedDate))
-        .attr('y1', y(d.value))
-        .attr('y2', y(d.value))
-    }
+      .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, 0, 0)`)
+    NODES.xBar
+      .attr('x1', x(d.parsedDate))
+      .attr('x2', x(d.parsedDate))
+      .attr('y1', -30) // ensure that xbar is covered
+      .attr('y2', HEIGHT)
   }
 
   return node

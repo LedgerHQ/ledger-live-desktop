@@ -42,23 +42,17 @@ class CheckAddress extends PureComponent<Props, State> {
 
   verifyAddress = async ({ device, account }: { device: Device, account: Account }) => {
     try {
-      // TODO: this will work only for BTC-like accounts
-      const freshAddress = account.addresses[0]
-      if (!freshAddress) {
-        throw new Error('Account doesnt have fresh addresses')
-      }
-
       const { address } = await getAddress
         .send({
           currencyId: account.currency.id,
           devicePath: device.path,
-          path: freshAddress.path,
-          segwit: account.isSegwit,
+          path: account.freshAddressPath,
+          segwit: !!account.isSegwit,
           verify: true,
         })
         .toPromise()
 
-      if (address !== freshAddress.str) {
+      if (address !== account.freshAddress) {
         throw new Error('Confirmed address is different')
       }
 

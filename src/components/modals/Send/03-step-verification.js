@@ -10,7 +10,7 @@ import DeviceSignTransaction from 'components/DeviceSignTransaction'
 import DeviceConfirm from 'components/DeviceConfirm'
 
 import type { WalletBridge } from 'bridge/types'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { Device, T } from 'types/common'
 
 const Container = styled(Box).attrs({
@@ -34,11 +34,11 @@ type Props = {
   device: ?Device,
   bridge: ?WalletBridge<*>,
   transaction: *,
-  onValidate: Function,
+  onOperationBroadcasted: (op: Operation) => void,
   t: T,
 }
 
-export default ({ account, device, bridge, transaction, onValidate, t }: Props) => (
+export default ({ account, device, bridge, transaction, onOperationBroadcasted, t }: Props) => (
   <Container>
     <WarnBox>{multiline(t('send:steps.verification.warning'))}</WarnBox>
     <Info>{t('send:steps.verification.body')}</Info>
@@ -51,7 +51,7 @@ export default ({ account, device, bridge, transaction, onValidate, t }: Props) 
           device={device}
           transaction={transaction}
           bridge={bridge}
-          onSuccess={onValidate}
+          onOperationBroadcasted={onOperationBroadcasted}
           render={({ error }) => (
             // FIXME we really really REALLY should use error for the display. otherwise we are completely blind on error cases..
             <DeviceConfirm notValid={!!error} />

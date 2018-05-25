@@ -45,6 +45,7 @@ function stopPropagation(e) {
 }
 
 type Props = {
+  onChangeFocus: boolean => void,
   onChange: (number, Unit) => void, // FIXME Unit shouldn't be provided (this is not "standard" onChange)
   onChangeUnit: Unit => void,
   renderRight: any,
@@ -61,6 +62,7 @@ type State = {
 
 class InputCurrency extends PureComponent<Props, State> {
   static defaultProps = {
+    onChangeFocus: noop,
     onChange: noop,
     renderRight: null,
     units: [],
@@ -122,8 +124,15 @@ class InputCurrency extends PureComponent<Props, State> {
     this.setState({ displayValue: v || '' })
   }
 
-  handleBlur = () => this.syncInput({ isFocused: false })
-  handleFocus = () => this.syncInput({ isFocused: true })
+  handleBlur = () => {
+    this.syncInput({ isFocused: false })
+    this.props.onChangeFocus(false)
+  }
+
+  handleFocus = () => {
+    this.syncInput({ isFocused: true })
+    this.props.onChangeFocus(true)
+  }
 
   syncInput = ({ isFocused }: { isFocused: boolean }) => {
     const { value, showAllDigits, unit } = this.props

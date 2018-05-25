@@ -15,14 +15,21 @@ type Props = {
 }
 
 class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
+  state = {
+    isFocused: false,
+  }
   componentDidUpdate() {
     const { gasPrice, fees, onChange } = this.props
-    if (!gasPrice && fees && fees.gas_price) {
+    const { isFocused } = this.state
+    if (!gasPrice && fees && fees.gas_price && !isFocused) {
       onChange(fees.gas_price) // we want to set the default to gas_price
     }
   }
+  onChangeFocus = isFocused => {
+    this.setState({ isFocused })
+  }
   render() {
-    const { account, gasPrice, onChange, error } = this.props
+    const { account, gasPrice, error, onChange } = this.props
     const { units } = account.currency
     return (
       <GenericContainer error={error} help="Gas">
@@ -32,6 +39,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
           containerProps={{ grow: true }}
           value={gasPrice}
           onChange={onChange}
+          onChangeFocus={this.onChangeFocus}
         />
       </GenericContainer>
     )

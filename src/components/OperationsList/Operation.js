@@ -7,10 +7,11 @@ import { createStructuredSelector } from 'reselect'
 import moment from 'moment'
 import noop from 'lodash/noop'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
 
-import type { Account, Operation as OperationType } from '@ledgerhq/live-common/lib/types'
+import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 
-import type { T } from 'types/common'
+import type { T, CurrencySettings } from 'types/common'
 
 import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 import { rgba, getMarketColor } from 'styles/helpers'
@@ -32,7 +33,7 @@ const ACCOUNT_COL_SIZE = 150
 const AMOUNT_COL_SIZE = 150
 const CONFIRMATION_COL_SIZE = 44
 
-const OperationRaw = styled(Box).attrs({
+const OperationRow = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
@@ -102,16 +103,16 @@ const Cell = styled(Box).attrs({
 
 type Props = {
   account: Account,
-  currencySettings: *,
-  onAccountClick: Function,
-  onOperationClick: Function,
+  currencySettings: CurrencySettings,
+  onAccountClick: (account: Account) => void,
+  onOperationClick: ({ operation: Operation, account: Account, marketColor: string }) => void,
   marketIndicator: string,
   t: T,
-  op: OperationType,
+  op: Operation, // FIXME rename it operation
   withAccount: boolean,
 }
 
-class Operation extends PureComponent<Props> {
+class OperationComponent extends PureComponent<Props> {
   static defaultProps = {
     onAccountClick: noop,
     onOperationClick: noop,
@@ -132,21 +133,28 @@ class Operation extends PureComponent<Props> {
     const { unit, currency } = account
     const time = moment(op.date)
     const Icon = getCryptoCurrencyIcon(account.currency)
-    const isNegative = op.amount < 0
-    const type = !isNegative ? 'from' : 'to'
+    const amount = getOperationAmountNumber(op)
+    const isNegative = amount < 0
+    const isOptimistic = op.blockHeight === null
+    const isConfirmed =
+      (op.blockHeight ? account.blockHeight - op.blockHeight : 0) > currencySettings.confirmationsNb
 
     const marketColor = getMarketColor({
       marketIndicator,
       isNegative,
     })
 
+    // FIXME each cell in a component
+
     return (
-      <OperationRaw onClick={() => onOperationClick({ operation: op, account, type, marketColor })}>
+      <OperationRow
+        style={{ opacity: isOptimistic ? 0.5 : 1 }}
+        onClick={() => onOperationClick({ operation: op, account, marketColor })}
+      >
         <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
           <ConfirmationCheck
-            type={type}
-            minConfirmations={currencySettings.minConfirmations}
-            confirmations={account.blockHeight - op.blockHeight}
+            type={op.type}
+            isConfirmed={isConfirmed}
             marketColor={marketColor}
             t={t}
           />
@@ -154,7 +162,7 @@ class Operation extends PureComponent<Props> {
         <Cell size={DATE_COL_SIZE} justifyContent="space-between" px={3}>
           <Box>
             <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke">
-              {t(`operationsList:${type}`)}
+              {t(`operationsList:${op.type}`)}
             </Box>
             <Hour>{time.format('HH:mm')}</Hour>
           </Box>
@@ -185,31 +193,31 @@ class Operation extends PureComponent<Props> {
             </Cell>
           )}
         <Cell grow shrink style={{ display: 'block' }}>
-          <Address value={op.address} />
+          <Address value={op.type === 'IN' ? op.senders[0] : op.recipients[0]} />
         </Cell>
         <Cell size={AMOUNT_COL_SIZE} justify="flex-end">
           <Box alignItems="flex-end">
             <FormattedVal
-              val={op.amount}
+              val={amount}
               unit={unit}
               showCode
               fontSize={4}
               alwaysShowSign
-              color={op.amount < 0 ? 'smoke' : undefined}
+              color={amount < 0 ? 'smoke' : undefined}
             />
             <CounterValue
               color="grey"
               fontSize={3}
               date={time.toDate()}
               currency={currency}
-              value={op.amount}
+              value={amount}
               exchange={currencySettings.exchange}
             />
           </Box>
         </Cell>
-      </OperationRaw>
+      </OperationRow>
     )
   }
 }
 
-export default connect(mapStateToProps)(Operation)
+export default connect(mapStateToProps)(OperationComponent)

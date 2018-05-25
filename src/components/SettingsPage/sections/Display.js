@@ -10,7 +10,6 @@ import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
 import IconDisplay from 'icons/Display'
 import languageKeys from 'config/languages'
-import CounterValues from 'helpers/countervalues'
 
 import regionsByKey from 'helpers/regions.json'
 
@@ -135,22 +134,15 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('settings:display.counterValue')}
             desc={t('settings:display.counterValueDesc')}
           >
-            <CounterValues.PollingConsumer>
-              {polling => (
-                <Select
-                  style={{ minWidth: 250 }}
-                  small
-                  onChange={item => {
-                    this.handleChangeCounterValue(item)
-                    polling.poll()
-                  }}
-                  itemToString={item => (item ? item.name : '')}
-                  renderSelected={item => item && item.name}
-                  items={fiats}
-                  value={cachedCounterValue}
-                />
-              )}
-            </CounterValues.PollingConsumer>
+            <Select
+              style={{ minWidth: 250 }}
+              small
+              onChange={this.handleChangeCounterValue}
+              itemToString={item => (item ? item.name : '')}
+              renderSelected={item => item && item.name}
+              items={fiats}
+              value={cachedCounterValue}
+            />
           </Row>
           <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
             <Select

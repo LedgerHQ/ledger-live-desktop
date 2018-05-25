@@ -1,11 +1,11 @@
 // @flow
 import { PureComponent } from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
 
 type Props = {
-  onSuccess: (txid: string) => void,
+  onOperationBroadcasted: (op: Operation) => void,
   render: ({ error: ?Error }) => React$Node,
   device: Device,
   account: Account,
@@ -32,10 +32,10 @@ class DeviceSignTransaction extends PureComponent<Props, State> {
   unmount = false
 
   sign = async () => {
-    const { device, account, transaction, bridge, onSuccess } = this.props
+    const { device, account, transaction, bridge, onOperationBroadcasted } = this.props
     try {
-      const txid = await bridge.signAndBroadcast(account, transaction, device.path)
-      onSuccess(txid)
+      const optimisticOperation = await bridge.signAndBroadcast(account, transaction, device.path)
+      onOperationBroadcasted(optimisticOperation)
     } catch (error) {
       console.warn(error)
       this.setState({ error })
