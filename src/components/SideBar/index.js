@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
-import { MODAL_SEND, MODAL_RECEIVE, MODAL_ADD_ACCOUNT } from 'config/constants'
+import { MODAL_SEND, MODAL_RECEIVE } from 'config/constants'
 
 import type { T } from 'types/common'
 
@@ -56,7 +56,6 @@ const PlusBtn = styled(Tabbable).attrs({
 
 type Props = {
   t: T,
-  accounts: Account[],
   openModal: Function,
   updateStatus: UpdateStatus,
 }
@@ -72,7 +71,7 @@ const mapDispatchToProps: Object = {
 
 class SideBar extends PureComponent<Props> {
   render() {
-    const { t, accounts, openModal, updateStatus } = this.props
+    const { t, openModal, updateStatus } = this.props
 
     return (
       <Container bg="white">
@@ -101,35 +100,13 @@ class SideBar extends PureComponent<Props> {
             <CapsSubtitle horizontal alignItems="center">
               <Box grow>{t('sidebar:accounts')}</Box>
               <Tooltip render={() => t('addAccount:title')}>
-                <PlusBtn onClick={() => openModal(MODAL_ADD_ACCOUNT)}>
+                <PlusBtn onClick={() => openModal('importAccounts')}>
                   <IconPlus size={16} />
                 </PlusBtn>
               </Tooltip>
             </CapsSubtitle>
             <GrowScroll pb={4} px={4} flow={2}>
-              {accounts.map(account => {
-                const Icon = getCryptoCurrencyIcon(account.currency)
-                return (
-                  <Item
-                    big
-                    desc={
-                      <FormattedVal
-                        alwaysShowSign={false}
-                        color="graphite"
-                        unit={account.unit}
-                        showCode
-                        val={account.balance || 0}
-                      />
-                    }
-                    iconActiveColor={account.currency.color}
-                    icon={Icon ? <Icon size={16} /> : null}
-                    key={account.id}
-                    linkTo={`/account/${account.id}`}
-                  >
-                    {account.name}
-                  </Item>
-                )
-              })}
+              <AccountsList />
             </GrowScroll>
           </Box>
         </Box>
@@ -138,9 +115,36 @@ class SideBar extends PureComponent<Props> {
   }
 }
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps, null, {
-    pure: false,
-  }),
-  translate(),
-)(SideBar)
+const AccountsList = connect(state => ({
+  accounts: getVisibleAccounts(state),
+}))(({ accounts }: { accounts: Account[] }) => (
+  <Fragment>
+    {accounts.map(account => {
+      const Icon = getCryptoCurrencyIcon(account.currency)
+      return (
+        <Item
+          big
+          desc={
+            <FormattedVal
+              alwaysShowSign={false}
+              color="graphite"
+              unit={account.unit}
+              showCode
+              val={account.balance || 0}
+            />
+          }
+          iconActiveColor={account.currency.color}
+          icon={Icon ? <Icon size={16} /> : null}
+          key={account.id}
+          linkTo={`/account/${account.id}`}
+        >
+          {account.name}
+        </Item>
+      )
+    })}
+  </Fragment>
+))
+
+export default compose(connect(null, mapDispatchToProps, null, { pure: false }), translate())(
+  SideBar,
+)
