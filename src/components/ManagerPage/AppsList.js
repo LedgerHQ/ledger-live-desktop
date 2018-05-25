@@ -4,7 +4,8 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
-import runJob from 'renderer/runJob'
+import listApps from 'commands/listApps'
+import installApp from 'commands/installApp'
 
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
@@ -27,12 +28,6 @@ const ICONS_FALLBACK = {
 }
 
 type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
-
-type jobHandlerOptions = {
-  job: string,
-  successResponse: string,
-  errorResponse: string,
-}
 
 type LedgerApp = {
   name: string,
@@ -74,47 +69,31 @@ class AppsList extends PureComponent<Props, State> {
   _unmounted = false
 
   async fetchAppList() {
-    const appsList =
-      CACHED_APPS ||
-      (await runJob({
-        channel: 'manager',
-        job: 'listApps',
-        successResponse: 'manager.listAppsSuccess',
-        errorResponse: 'manager.listAppsError',
-      }))
+    const appsList = CACHED_APPS || (await listApps.send().toPromise())
     CACHED_APPS = appsList
     if (!this._unmounted) {
       this.setState({ appsList, status: 'idle' })
     }
   }
 
-  createDeviceJobHandler = (options: jobHandlerOptions) => (args: { app: any }) => async () => {
+  handleInstallApp = (args: { app: any }) => async () => {
     const appParams = args.app
     this.setState({ status: 'busy' })
     try {
-      const { job, successResponse, errorResponse } = options
       const {
         device: { path: devicePath },
       } = this.props
       const data = { appParams, devicePath }
-      await runJob({ channel: 'manager', job, successResponse, errorResponse, data })
+      await installApp.send(data).toPromise()
       this.setState({ status: 'success' })
     } catch (err) {
       this.setState({ status: 'error', error: err.message })
     }
   }
 
-  handleInstallApp = this.createDeviceJobHandler({
-    job: 'installApp',
-    successResponse: 'manager.appInstalled',
-    errorResponse: 'manager.appInstallError',
-  })
-
-  handleUninstallApp = this.createDeviceJobHandler({
-    job: 'uninstallApp',
-    successResponse: 'manager.appUninstalled',
-    errorResponse: 'manager.appUninstallError',
-  })
+  handleUninstallApp = (/* args: { app: any } */) => () => {
+    /* TODO */
+  }
 
   handleCloseModal = () => this.setState({ status: 'idle' })
 
@@ -128,8 +107,8 @@ class AppsList extends PureComponent<Props, State> {
             name={c.name}
             version={`Version ${c.version}`}
             icon={ICONS_FALLBACK[c.icon] || c.icon}
-            onInstall={this.handleInstallApp(c)}
-            onUninstall={this.handleUninstallApp(c)}
+            onInstall={() => {}}
+            onUninstall={() => {}}
           />
         ))}
         <Modal

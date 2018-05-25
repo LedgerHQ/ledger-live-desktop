@@ -3,7 +3,7 @@
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 
 import type { IPCSend } from 'types/electron'
-import { createSocketDialog, buildParamsFromFirmware } from './helpers'
+import { createSocketDialog, buildParamsFromFirmware } from 'helpers/common'
 
 type DataType = {
   devicePath: string,

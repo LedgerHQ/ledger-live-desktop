@@ -1,56 +1,47 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
-import { connect } from 'react-redux'
+import React, { Component, Fragment } from 'react'
 import { translate } from 'react-i18next'
-import { compose } from 'redux'
 
-import type { Device, T } from 'types/common'
+import type { T } from 'types/common'
 
-import { getCurrentDevice, getDevices } from 'reducers/devices'
-
-import Pills from 'components/base/Pills'
+// import Pills from 'components/base/Pills'
 
 import AppsList from './AppsList'
-import DeviceInfos from './DeviceInfos'
-import FirmwareUpdate from './FirmwareUpdate'
-
-const mapStateToProps = state => ({
-  device: getCurrentDevice(state),
-  nbDevices: getDevices(state).length,
-})
+// import DeviceInfos from './DeviceInfos'
+// import FirmwareUpdate from './FirmwareUpdate'
+import EnsureDevice from './EnsureDevice'
+import EnsureDashboard from './EnsureDashboard'
+import EnsureGenuine from './EnsureGenuine'
 
 const TABS = [{ key: 'apps', value: 'apps' }, { key: 'device', value: 'device' }]
 
 type Props = {
   t: T,
-  device: Device,
-  nbDevices: number,
 }
 
 type State = {
-  currentTab: 'apps' | 'device',
+  // currentTab: 'apps' | 'device',
 }
 
-class ManagerPage extends PureComponent<Props, State> {
-  state = {
-    currentTab: 'apps',
-  }
+class ManagerPage extends Component<Props, State> {
+  // state = {
+  //   currentTab: 'apps',
+  // }
 
-  componentWillReceiveProps(nextProps) {
-    const { device } = this.props
-    const { currentTab } = this.state
-    if (device && !nextProps.device && currentTab === 'device') {
-      this.setState({ currentTab: 'apps' })
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const { device } = this.props
+  //   const { currentTab } = this.state
+  //   if (device && !nextProps.device && currentTab === 'device') {
+  //     this.setState({ currentTab: 'apps' })
+  //   }
+  // }
 
-  handleTabChange = t => this.setState({ currentTab: t.value })
+  // handleTabChange = t => this.setState({ currentTab: t.value })
 
-  render() {
-    const { device, t, nbDevices } = this.props
-    const { currentTab } = this.state
-    const tabs = TABS.map(i => {
+  createTabs = (device, nbDevices) => {
+    const { t } = this.props
+    return TABS.map(i => {
       let label = t(`manager:tabs.${i.key}`)
       if (i.key === 'device') {
         if (!device) {
@@ -60,19 +51,50 @@ class ManagerPage extends PureComponent<Props, State> {
       }
       return { ...i, label }
     }).filter(Boolean)
+  }
+
+  render() {
+    const { t } = this.props
+    // const { currentTab } = this.state
+
     return (
       <Fragment>
-        <Pills items={tabs} activeKey={currentTab} onChange={this.handleTabChange} mb={6} />
-        {currentTab === 'apps' && (
-          <Fragment>
-            <FirmwareUpdate t={t} device={device} mb={4} />
-            <AppsList device={device} />
-          </Fragment>
-        )}
-        {currentTab === 'device' && <DeviceInfos device={device} />}
+        <EnsureDevice>
+          {device => (
+            <EnsureDashboard device={device}>
+              {deviceInfo => (
+                <Fragment>
+                  {/* <Pills
+                    items={this.createTabs(device, nbDevices)}
+                    activeKey={currentTab}
+                    onChange={this.handleTabChange}
+                    mb={6}
+                  /> */}
+                  {deviceInfo.mcu && <span>bootloader mode</span>}
+                  {deviceInfo.final && <span>osu mode</span>}
+
+                  {!deviceInfo.mcu &&
+                    !deviceInfo.final && (
+                      <EnsureGenuine device={device} t={t}>
+                        {/* <FirmwareUpdate
+                          infos={{
+                            targetId: deviceInfo.targetId,
+                            version: deviceInfo.version,
+                          }}
+                          device={device}
+                          t={t}
+                        /> */}
+                        <AppsList device={device} />
+                      </EnsureGenuine>
+                    )}
+                </Fragment>
+              )}
+            </EnsureDashboard>
+          )}
+        </EnsureDevice>
       </Fragment>
     )
   }
 }
 
-export default compose(translate(), connect(mapStateToProps))(ManagerPage)
+export default translate()(ManagerPage)
