@@ -11,8 +11,8 @@ export default async (
     segwit = true,
     verify = false,
   }: {
-    segwit: boolean,
-    verify: boolean,
+    segwit?: boolean,
+    verify?: boolean,
   },
 ) => {
   const btc = new Btc(transport)

@@ -21,6 +21,11 @@ const all = {
   bitcoin: btc,
   bitcoin_testnet: btc,
 
+  zcash: btc,
+  bitcoin_cash: btc,
+  bitcoin_gold: btc,
+  zencash: btc,
+
   ethereum,
   ethereum_testnet: ethereum,
   ethereum_classic: ethereum,
