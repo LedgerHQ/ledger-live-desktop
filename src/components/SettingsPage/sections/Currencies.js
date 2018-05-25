@@ -15,7 +15,6 @@ import type { Settings, CurrencySettings, T } from 'types/common'
 
 import { counterValueCurrencySelector } from 'reducers/settings'
 import { currenciesSelector } from 'reducers/accounts'
-import CounterValues from 'helpers/countervalues'
 
 import SelectCurrency from 'components/SelectCurrency'
 import StepperNumber from 'components/base/StepperNumber'
@@ -138,21 +137,13 @@ class TabCurrencies extends PureComponent<Props, State> {
         />
         <Body>
           <Row title="Exchange" desc="The exchange to use">
-            <CounterValues.PollingConsumer>
-              {polling => (
-                // TODO move to a dedicated "row" component
-                <ExchangeSelect
-                  from={currency}
-                  to={counterValueCurrency}
-                  exchangeId={exchange}
-                  onChange={exchange => {
-                    this.handleChangeExchange(exchange)
-                    polling.poll()
-                  }}
-                  style={{ minWidth: 200 }}
-                />
-              )}
-            </CounterValues.PollingConsumer>
+            <ExchangeSelect
+              from={currency}
+              to={counterValueCurrency}
+              exchangeId={exchange}
+              onChange={this.handleChangeExchange}
+              style={{ minWidth: 200 }}
+            />
           </Row>
           <Row
             title={t('settings:currencies.confirmationsToSpend')}
