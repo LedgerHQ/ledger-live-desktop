@@ -67,6 +67,7 @@ genuineCheck:
       desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
   buttons:
     genuineCheck: Genuine check
+    tryAgain: Check again
     contactSupport: Contact Support
   errorPage:
     ledgerNano:

@@ -1,5 +1,4 @@
 // @flow
-import invariant from 'invariant'
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { standardDerivation } from 'helpers/derivations'
@@ -14,8 +13,10 @@ import getAddress from 'commands/getAddress'
 type OwnProps = {
   currency: ?CryptoCurrency,
   deviceSelected: ?Device,
+  withGenuineCheck: boolean,
   account: ?Account,
   onStatusChange?: (DeviceStatus, AppStatus, ?string) => void,
+  onGenuineCheck: (isGenuine: boolean) => void,
   // TODO prefer children function
   render?: ({
     appStatus: AppStatus,
@@ -87,19 +88,21 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     clearTimeout(this._timeout)
+    this._unmounted = true
   }
 
   checkAppOpened = async () => {
-    const { deviceSelected, account, currency } = this.props
+    const { deviceSelected, account, currency, withGenuineCheck } = this.props
+    const { appStatus } = this.state
 
     if (!deviceSelected) {
       return
     }
 
-    let options
+    let appOptions
 
     if (account) {
-      options = {
+      appOptions = {
         devicePath: deviceSelected.path,
         currencyId: account.currency.id,
         path: account.path,
@@ -107,21 +110,31 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
         segwit: account.path.startsWith("49'"), // TODO: store segwit info in account
       }
     } else if (currency) {
-      options = {
+      appOptions = {
         devicePath: deviceSelected.path,
         currencyId: currency.id,
         path: standardDerivation({ currency, x: 0, segwit: false }),
       }
-    } else {
-      throw new Error('either currency or account is required')
     }
 
     try {
-      const { address } = await getAddress.send(options).toPromise()
-      if (account && account.address !== address) {
-        throw new Error('Account address is different than device address')
+      if (appOptions) {
+        const { address } = await getAddress.send(appOptions).toPromise()
+        if (account && account.address !== address) {
+          throw new Error('Account address is different than device address')
+        }
+      } else {
+        // TODO: real check if user is on the device dashboard
+        if (!deviceSelected) {
+          throw new Error('No device')
+        }
+        await sleep(1)
       }
       this.handleStatusChange(this.state.deviceStatus, 'success')
+
+      if (withGenuineCheck && appStatus !== 'success') {
+        this.handleGenuineCheck()
+      }
     } catch (e) {
       this.handleStatusChange(this.state.deviceStatus, 'fail', e.message)
     }
@@ -130,27 +143,42 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
   }
 
   _timeout: *
+  _unmounted = false
 
   handleStatusChange = (deviceStatus, appStatus, errorMessage = null) => {
     const { onStatusChange } = this.props
     clearTimeout(this._timeout)
-    this.setState({ deviceStatus, appStatus, errorMessage })
-    onStatusChange && onStatusChange(deviceStatus, appStatus, errorMessage)
+    if (!this._unmounted) {
+      this.setState({ deviceStatus, appStatus, errorMessage })
+      onStatusChange && onStatusChange(deviceStatus, appStatus, errorMessage)
+    }
+  }
+
+  handleGenuineCheck = async () => {
+    // TODO: do a *real* genuine check
+    await sleep(1)
+    if (!this._unmounted) {
+      this.setState({ genuineCheckStatus: 'success' })
+      this.props.onGenuineCheck(true)
+    }
   }
 
   render() {
     const { currency, account, devices, deviceSelected, render } = this.props
-    const { appStatus, deviceStatus, errorMessage } = this.state
+    const { appStatus, deviceStatus, genuineCheckStatus, errorMessage } = this.state
 
     if (render) {
+      // if cur is not provided, we assume we want to check if user is on
+      // the dashboard
       const cur = account ? account.currency : currency
-      invariant(cur, 'currency is either provided or taken from account')
+
       return render({
         appStatus,
         currency: cur,
         devices,
         deviceSelected: deviceStatus === 'connected' ? deviceSelected : null,
         deviceStatus,
+        genuineCheckStatus,
         errorMessage,
       })
     }
@@ -160,3 +188,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
 }
 
 export default connect(mapStateToProps)(EnsureDeviceApp)
+
+async function sleep(s) {
+  return new Promise(resolve => setTimeout(resolve, s * 1e3))
+}
