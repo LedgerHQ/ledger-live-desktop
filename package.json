@@ -90,6 +90,7 @@
     "ripple-lib": "^1.0.0-beta.0",
     "rxjs": "^6.2.0",
     "rxjs-compat": "^6.1.0",
+    "semaphore": "^1.1.0",
     "smooth-scrollbar": "^8.2.7",
     "source-map": "0.7.2",
     "source-map-support": "^0.5.4",

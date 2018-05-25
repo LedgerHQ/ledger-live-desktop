@@ -2,7 +2,7 @@
 
 import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
-import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
+import { withDevice } from 'helpers/deviceAccess'
 import getAddressForCurrency from 'helpers/getAddressForCurrency'
 
 type Input = {
@@ -24,7 +24,7 @@ const cmd: Command<Input, Result> = createCommand(
   'getAddress',
   ({ currencyId, devicePath, path, ...options }) =>
     fromPromise(
-      CommNodeHid.open(devicePath).then(transport =>
+      withDevice(devicePath)(transport =>
         getAddressForCurrency(currencyId)(transport, currencyId, path, options),
       ),
     ),
