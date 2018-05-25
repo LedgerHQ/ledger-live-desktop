@@ -9,10 +9,8 @@
 //
 
 import Btc from '@ledgerhq/hw-app-btc'
-import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
+import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-
-import type Transport from '@ledgerhq/hw-transport'
 
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
@@ -23,27 +21,30 @@ type Props = {
   onAccountScanned: Function,
 }
 
-export default async function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
+export default function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   const { devicePath, currencyId, onAccountScanned } = props
 
-  // instanciate app on device
-  const transport: Transport<*> = await CommNodeHid.open(devicePath)
-  const hwApp = new Btc(transport)
+  return withDevice(devicePath)(async transport => {
+    const hwApp = new Btc(transport)
 
-  const commonParams = {
-    hwApp,
-    currencyId,
-    onAccountScanned,
-    devicePath,
-  }
+    const commonParams = {
+      hwApp,
+      currencyId,
+      onAccountScanned,
+      devicePath,
+    }
 
-  // scan segwit AND non-segwit accounts
-  const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
-  const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: false })
+    // scan segwit AND non-segwit accounts
+    const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
+    const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({
+      ...commonParams,
+      isSegwit: false,
+    })
 
-  const accounts = [...segwitAccounts, ...nonSegwitAccounts]
+    const accounts = [...segwitAccounts, ...nonSegwitAccounts]
 
-  return accounts
+    return accounts
+  })
 }
 
 export async function getWalletIdentifier({
