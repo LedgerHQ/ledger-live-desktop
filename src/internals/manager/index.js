@@ -1,4 +1,7 @@
 // @flow
+import type { Command } from 'helpers/ipc'
+
+import listApps from 'commands/listApps'
 
 /**
  *                                  Manager
@@ -17,6 +20,5 @@
  */
 
 export { default as getMemInfos } from './getMemInfos'
-export { default as installApp } from './installApp'
-export { default as listApps } from './listApps'
-export { default as uninstallApp } from './uninstallApp'
+
+export const commands: Array<Command<any, any>> = [listApps]

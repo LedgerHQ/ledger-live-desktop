@@ -37,6 +37,9 @@ yarn
 # Where errors will be tracked (you may not want to edit this line)
 # SENTRY_URL=
 
+# api base url
+API_BASE_URL=http://...
+
 # OPTIONAL ENV VARIABLES
 # ----------------------
 

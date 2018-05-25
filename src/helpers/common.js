@@ -1,15 +1,11 @@
 // @flow
 
-import { withDevice } from 'helpers/deviceAccess'
 import chalk from 'chalk'
 import Websocket from 'ws'
 import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import type { IPCSend } from 'types/electron'
 import { BASE_SOCKET_URL, APDUS } from './constants'
-
-// TODO: REMOVE FILE WHEN REFACTO IS OVER
 
 type WebsocketType = {
   send: (string, any) => void,
@@ -23,46 +19,37 @@ type Message = {
   data: any,
 }
 
-type LedgerScriptParams = {
+export type LedgerScriptParams = {
   firmware?: string,
   firmwareKey?: string,
   delete?: string,
   deleteKey?: string,
 }
 
+type FirmwareUpdateType = 'osu' | 'final'
+
+// /**
+//  * Install an app on the device
+//  */
+// export async function installApp(
+//   transport: Transport<*>,
+//   { appParams }: { appParams: LedgerScriptParams },
+// ): Promise<void> {
+//   return createSocketDialog(transport, '/update/install', appParams)
+// }
+
 /**
- * Generate handler which create transport with given
- * `devicePath` then call action with it
+ * Uninstall an app on the device
  */
-export function createTransportHandler(
-  send: IPCSend,
-  {
-    action,
-    successResponse,
-    errorResponse,
-  }: {
-    action: (Transport<*>, ...any) => Promise<any>,
-    successResponse: string,
-    errorResponse: string,
-  },
-) {
-  console.log('DEPRECATED: createTransportHandler use withDevice and commands/*')
-  return async function transportHandler({
-    devicePath,
-    ...params
-  }: {
-    devicePath: string,
-  }): Promise<void> {
-    try {
-      const data = await withDevice(devicePath)(transport => action(transport, params))
-      send(successResponse, data)
-    } catch (err) {
-      if (!err) {
-        send(errorResponse, { message: 'Unknown error...' })
-      }
-      send(errorResponse, { message: err.message, stack: err.stack })
-    }
-  }
+export async function uninstallApp(
+  transport: Transport<*>,
+  { appParams }: { appParams: LedgerScriptParams },
+): Promise<void> {
+  return createSocketDialog(transport, '/update/install', {
+    ...appParams,
+    firmware: appParams.delete,
+    firmwareKey: appParams.deleteKey,
+  })
 }
 
 export async function getMemInfos(transport: Transport<*>): Promise<Object> {
@@ -235,3 +222,15 @@ export function logWS(type: string, msg: Message) {
     log(namespace, JSON.stringify(msg), color)
   }
 }
+
+/**
+ * Helpers to build OSU and Final firmware params
+ */
+export const buildParamsFromFirmware = (type: FirmwareUpdateType): Function => (
+  data: any,
+): LedgerScriptParams => ({
+  firmware: data[`${type}_firmware`],
+  firmwareKey: data[`${type}_firmware_key`],
+  perso: data[`${type}_perso`],
+  targetId: data[`${type}_target_id`],
+})
