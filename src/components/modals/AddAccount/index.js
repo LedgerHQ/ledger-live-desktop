@@ -274,6 +274,7 @@ class AddAccountModal extends PureComponent<Props, State> {
       <Modal
         name={MODAL_ADD_ACCOUNT}
         onHide={this.handleReset}
+        preventBackdropClick
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
             <ModalTitle>{t('addAccount:title')}</ModalTitle>

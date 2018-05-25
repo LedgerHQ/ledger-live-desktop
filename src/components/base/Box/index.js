@@ -50,6 +50,13 @@ const Box = styled.div`
   position: ${p => (p.relative ? 'relative' : p.sticky ? 'absolute' : '')};
 
   ${p =>
+    p.selectable &&
+    `
+    user-select: text;
+    cursor: text;
+  `};
+
+  ${p =>
     p.sticky &&
     `
     top: 0;

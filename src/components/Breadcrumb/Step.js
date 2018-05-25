@@ -3,6 +3,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { colors } from 'styles/theme'
+
 import Box from 'components/base/Box'
 
 import IconCheck from 'icons/Check'
@@ -33,7 +35,7 @@ const StepNumber = styled(Box).attrs({
   ff: 'Rubik|Regular',
 })`
   border-radius: 50%;
-  border: 1px solid #d8d8d8;
+  border: 1px solid ${p => (['active', 'valid'].includes(p.status) ? colors.wallet : colors.fog)};
   font-size: 10px;
   height: ${RADIUS}px;
   line-height: 10px;

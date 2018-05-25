@@ -111,7 +111,6 @@ const Info = styled(Box).attrs({
   fontSize: 3,
   horizontal: true,
   ml: 1,
-  pt: 1,
 })`
   strong {
     font-weight: 600;
@@ -310,10 +309,8 @@ class DeviceConnect extends PureComponent<Props> {
 
         {appState.fail ? (
           <Info hasErrors>
-            <Box>
-              <IconInfoCircle size={12} />
-            </Box>
-            <Box style={{ userSelect: 'text' }}>
+            <IconInfoCircle size={12} />
+            <Box shrink selectable>
               {accountName ? (
                 <Trans i18nKey="deviceConnect:info" parent="div">
                   {'You must use the device associated to the account '}
