@@ -6,6 +6,7 @@ import {
   getFiatCurrencyByTicker,
   listCryptoCurrencies,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
+import languages from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency, Account } from '@ledgerhq/live-common/lib/types'
@@ -32,9 +33,13 @@ export type SettingsState = {
 }
 
 /* have to check if available for all OS */
-const localeSplit = window.navigator.language.split('-')
-const language = (localeSplit[0] || 'en').toLowerCase()
-const region = (localeSplit[1] || 'US').toUpperCase()
+const localeSplit = (window.navigator.language || '').split('-')
+let language = (localeSplit[0] || 'en').toLowerCase()
+let region = (localeSplit[1] || 'US').toUpperCase()
+if (!languages.includes(language)) {
+  language = 'en'
+  region = 'US'
+}
 
 const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
   confirmationsToSpend: 10,
