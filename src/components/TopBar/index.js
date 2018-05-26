@@ -13,6 +13,7 @@ import type { T } from 'types/common'
 import { rgba } from 'styles/helpers'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
+import { openModal } from 'reducers/modals'
 
 import IconDevices from 'icons/Devices'
 import IconLock from 'icons/Lock'
@@ -57,6 +58,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   lock,
+  openModal,
 }
 
 type Props = {
@@ -64,8 +66,11 @@ type Props = {
   history: RouterHistory,
   location: Location,
   lock: Function,
+  openModal: string => void,
   t: T,
 }
+
+let settingsClickTimes = []
 
 class TopBar extends PureComponent<Props> {
   handleLock = () => this.props.lock()
@@ -73,6 +78,13 @@ class TopBar extends PureComponent<Props> {
   navigateToSettings = () => {
     const { location, history } = this.props
     const url = '/settings'
+
+    const now = Date.now()
+    settingsClickTimes = settingsClickTimes.filter(t => now - t < 3000).concat(now)
+    if (settingsClickTimes.length === 7) {
+      settingsClickTimes = []
+      this.props.openModal('MODAL_DEBUG')
+    }
 
     if (location.pathname !== url) {
       history.push(url)
