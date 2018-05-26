@@ -26,6 +26,7 @@ const createSteps = ({ t }: { t: T }) => [
     label: t('importAccounts:breadcrumb.informations'),
     component: StepChooseCurrency,
     footer: StepChooseCurrencyFooter,
+    onBack: null,
     hideFooter: false,
   },
   {
@@ -33,6 +34,7 @@ const createSteps = ({ t }: { t: T }) => [
     label: t('importAccounts:breadcrumb.connectDevice'),
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
+    onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
     hideFooter: false,
   },
   {
@@ -40,14 +42,16 @@ const createSteps = ({ t }: { t: T }) => [
     label: t('importAccounts:breadcrumb.import'),
     component: StepImport,
     footer: null,
+    onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
     hideFooter: true,
   },
   {
     id: 'finish',
     label: t('importAccounts:breadcrumb.finish'),
     component: StepFinish,
-    hideFooter: false,
     footer: StepChooseCurrencyFooter,
+    onBack: null,
+    hideFooter: false,
   },
 ]
 
@@ -92,7 +96,11 @@ class ImportAccounts extends PureComponent<Props, State> {
   })
 
   transitionTo = stepId => {
-    this.setState({ stepId })
+    let nextState = { stepId }
+    if (stepId === 'chooseCurrency') {
+      nextState = { ...INITIAL_STATE }
+    }
+    this.setState(nextState)
   }
 
   render() {
@@ -106,7 +114,7 @@ class ImportAccounts extends PureComponent<Props, State> {
       throw new Error(`ImportAccountsModal: step ${stepId} doesn't exists`)
     }
 
-    const { component: StepComponent, footer: StepFooter, hideFooter } = step
+    const { component: StepComponent, footer: StepFooter, hideFooter, onBack } = step
 
     const stepProps: StepProps = {
       t,
@@ -124,7 +132,9 @@ class ImportAccounts extends PureComponent<Props, State> {
         onHide={() => this.setState({ ...INITIAL_STATE })}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle>{t('importAccounts:title')}</ModalTitle>
+            <ModalTitle onBack={onBack ? () => onBack(stepProps) : void 0}>
+              {t('importAccounts:title')}
+            </ModalTitle>
             <ModalContent>
               <Breadcrumb mb={6} currentStep={stepIndex} items={this.STEPS} />
               <StepComponent {...stepProps} />
