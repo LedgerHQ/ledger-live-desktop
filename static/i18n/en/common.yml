@@ -27,7 +27,6 @@ western: Western
 lockScreen:
   title: Welcome Back
   subTitle: Your application is locked
-  description_osx: Enter your password or use Touch ID to unlock your Ledger Live session
   description: Enter your password to unlock your Ledger Live session
   inputPlaceholder: Password
 sync:

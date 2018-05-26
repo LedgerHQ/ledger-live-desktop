@@ -129,8 +129,6 @@ class IsUnlocked extends Component<Props, State> {
               <IconLockScreen size={136} />
               <PageTitle>{t('common:lockScreen.title')}</PageTitle>
               <LockScreenDesc>
-                {t('common:lockScreen.subTitle')}
-                <br />
                 {t('common:lockScreen.description')}
               </LockScreenDesc>
               <Box style={{ minWidth: 230 }}>
