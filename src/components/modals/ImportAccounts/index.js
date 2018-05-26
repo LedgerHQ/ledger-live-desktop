@@ -75,7 +75,6 @@ type State = {
   stepId: StepId,
   isAppOpened: boolean,
   currency: ?Currency,
-  scannedAccounts: [],
 }
 
 const mapStateToProps = state => ({
@@ -86,7 +85,6 @@ const INITIAL_STATE = {
   stepId: 'chooseCurrency',
   isAppOpened: false,
   currency: null,
-  scannedAccounts: [],
 }
 
 class ImportAccounts extends PureComponent<Props, State> {
