@@ -1,3 +1,4 @@
+export Debug from './Debug'
 export AddAccount from './AddAccount'
 export OperationDetails from './OperationDetails'
 export Receive from './Receive'
