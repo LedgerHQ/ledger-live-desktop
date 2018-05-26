@@ -16,7 +16,7 @@ import Breadcrumb from 'components/Breadcrumb'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
-import StepInProgress from './steps/03-step-in-progress'
+import StepImport from './steps/03-step-import'
 import StepFinish from './steps/04-step-finish'
 
 const createSteps = ({ t }: { t: T }) => [
@@ -37,7 +37,7 @@ const createSteps = ({ t }: { t: T }) => [
   {
     id: 'import',
     label: t('importAccounts:breadcrumb.import'),
-    component: StepInProgress,
+    component: StepImport,
     footer: null,
     hideFooter: true,
   },
