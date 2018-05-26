@@ -1,24 +1,44 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
+import { Trans } from 'react-i18next'
 
 import Button from 'components/base/Button'
+import Box from 'components/base/Box'
 import ConnectDevice from 'components/modals/StepConnectDevice'
+import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
 
 import type { StepProps } from '../index'
 
 function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) {
+  if (!currency) {
+    throw new Error('No currency given')
+  }
   return (
-    <ConnectDevice
-      t={t}
-      deviceSelected={currentDevice}
-      currency={currency}
-      onStatusChange={s => {
-        if (s === 'connected') {
-          setState({ isAppOpened: true })
-        }
-      }}
-    />
+    <Fragment>
+      <Box align="center" mb={6}>
+        <CurrencyCircleIcon mb={3} size={40} currency={currency} />
+        <Box ff="Open Sans" fontSize={4} color="dark" textAlign="center" style={{ width: 370 }}>
+          <Trans i18nKey="importAccounts:connectDevice.desc" parent="div">
+            {`You're about to import your `}
+            <strong style={{ fontWeight: 'bold' }}>{`${currency.name} (${
+              currency.ticker
+            })`}</strong>
+            {` account(s) from your Ledger device. Please follow the steps below:`}
+          </Trans>
+        </Box>
+      </Box>
+      <ConnectDevice
+        t={t}
+        deviceSelected={currentDevice}
+        currency={currency}
+        onStatusChange={s => {
+          if (s === 'connected') {
+            setState({ isAppOpened: true })
+          }
+        }}
+      />
+    </Fragment>
   )
 }
 

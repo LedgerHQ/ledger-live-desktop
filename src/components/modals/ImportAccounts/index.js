@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 
 import type { T, Device } from 'types/common'
@@ -129,10 +130,8 @@ class ImportAccounts extends PureComponent<Props, State> {
               <StepComponent {...stepProps} />
             </ModalContent>
             {!hideFooter && (
-              <ModalFooter>
-                <Box horizontal alignItems="center" justifyContent="flex-end">
-                  {StepFooter ? <StepFooter {...stepProps} /> : <Box>footer</Box>}
-                </Box>
+              <ModalFooter horizontal align="center" justify="flex-end" style={{ height: 80 }}>
+                {StepFooter ? <StepFooter {...stepProps} /> : <Box>footer</Box>}
               </ModalFooter>
             )}
           </ModalBody>

@@ -1,9 +1,10 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import SelectCurrency from 'components/SelectCurrency'
 import Button from 'components/base/Button'
+import CurrencyBadge from 'components/base/CurrencyBadge'
 
 import type { StepProps } from '../index'
 
@@ -13,9 +14,12 @@ function StepChooseCurrency({ currency, setState }: StepProps) {
 
 export function StepChooseCurrencyFooter({ transitionTo, currency, t }: StepProps) {
   return (
-    <Button primary disabled={!currency} onClick={() => transitionTo('connectDevice')}>
-      {t('common:next')}
-    </Button>
+    <Fragment>
+      {currency && <CurrencyBadge mr="auto" currency={currency} />}
+      <Button primary disabled={!currency} onClick={() => transitionTo('connectDevice')}>
+        {t('common:next')}
+      </Button>
+    </Fragment>
   )
 }
 
