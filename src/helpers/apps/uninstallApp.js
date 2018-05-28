@@ -1,12 +1,16 @@
 // @flow
 
-// import type { IPCSend } from 'types/electron'
+import type Transport from '@ledgerhq/hw-transport'
 
-// import { createTransportHandler, uninstallApp } from 'helpers/common'
+import { createSocketDialog } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/common'
 
-// export default (send: IPCSend, data: any) =>
-//   createTransportHandler(send, {
-//     action: uninstallApp,
-//     successResponse: 'manager.appUninstalled',
-//     errorResponse: 'manager.appUninstallError',
-//   })(data)
+/**
+ * Install an app on the device
+ */
+export default async function uninstallApp(
+  transport: Transport<*>,
+  { appParams }: { appParams: LedgerScriptParams },
+): Promise<void> {
+  return createSocketDialog(transport, '/update/install', appParams)
+}
