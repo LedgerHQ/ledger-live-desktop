@@ -14,6 +14,8 @@ import type { T } from 'types/common'
 
 import { openModal } from 'reducers/modals'
 import { getVisibleAccounts } from 'reducers/accounts'
+import { getUpdateStatus } from 'reducers/update'
+import type { UpdateStatus } from 'reducers/update'
 
 import IconManager from 'icons/Manager'
 import IconPieChart from 'icons/PieChart'
@@ -56,10 +58,12 @@ type Props = {
   t: T,
   accounts: Account[],
   openModal: Function,
+  updateStatus: UpdateStatus,
 }
 
 const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
+  updateStatus: getUpdateStatus(state),
 })
 
 const mapDispatchToProps: Object = {
@@ -68,7 +72,7 @@ const mapDispatchToProps: Object = {
 
 class SideBar extends PureComponent<Props> {
   render() {
-    const { t, accounts, openModal } = this.props
+    const { t, accounts, openModal, updateStatus } = this.props
 
     return (
       <Container bg="white">
@@ -76,7 +80,7 @@ class SideBar extends PureComponent<Props> {
           <Box flow={4}>
             <CapsSubtitle>{t('sidebar:menu')}</CapsSubtitle>
             <Box px={4} flow={2}>
-              <Item icon={<IconPieChart size={16} />} linkTo="/">
+              <Item icon={<IconPieChart size={16} />} linkTo="/" highlight={updateStatus === 'downloaded'}>
                 {t('dashboard:title')}
               </Item>
               <Item icon={<IconSend size={16} />} modal={MODAL_SEND}>
