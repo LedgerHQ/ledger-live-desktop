@@ -100,6 +100,7 @@ class Input extends PureComponent<Props, State> {
     }
   }
 
+  // FIXME this is a bad idea! this is the behavior of an input. instead renderLeft/renderRight should be pointer-event:none !
   handleClick = () => this._input && this._input.focus()
 
   handleFocus = (e: SyntheticInputEvent<HTMLInputElement>) => {
