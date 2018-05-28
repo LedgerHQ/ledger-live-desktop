@@ -53,7 +53,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, { item
     let items: FeeItem[] = []
     if (fees) {
       for (const key of Object.keys(fees)) {
-        const feePerByte = Math.floor(fees[key] / 1000)
+        const feePerByte = Math.ceil(fees[key] / 1000)
         const blockCount = parseInt(key, 10)
         if (!isNaN(blockCount) && !isNaN(feePerByte)) {
           items.push({ key, blockCount, feePerByte })
