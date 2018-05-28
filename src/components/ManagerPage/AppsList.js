@@ -42,6 +42,7 @@ type LedgerApp = {
 
 type Props = {
   device: Device,
+  targetId: string | number,
   t: T,
 }
 
@@ -69,10 +70,15 @@ class AppsList extends PureComponent<Props, State> {
   _unmounted = false
 
   async fetchAppList() {
-    const appsList = CACHED_APPS || (await listApps.send().toPromise())
-    CACHED_APPS = appsList
-    if (!this._unmounted) {
-      this.setState({ appsList, status: 'idle' })
+    try {
+      const { targetId } = this.props
+      const appsList = CACHED_APPS || (await listApps.send({ targetId }).toPromise())
+      CACHED_APPS = appsList
+      if (!this._unmounted) {
+        this.setState({ appsList, status: 'idle' })
+      }
+    } catch (err) {
+      this.setState({ status: 'error', error: err.message })
     }
   }
 

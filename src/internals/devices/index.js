@@ -15,6 +15,7 @@ import uninstallApp from 'commands/uninstallApp'
 import installOsuFirmware from 'commands/installOsuFirmware'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
+import listApps from 'commands/listApps'
 
 export const commands: Array<Command<any, any>> = [
   getAddress,
@@ -31,4 +32,5 @@ export const commands: Array<Command<any, any>> = [
   installOsuFirmware,
   installFinalFirmware,
   installMcu,
+  listApps,
 ]
