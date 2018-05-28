@@ -2,6 +2,7 @@
 
 import Eth from '@ledgerhq/hw-app-eth'
 import type Transport from '@ledgerhq/hw-transport'
+import eip55 from 'eip55'
 
 export default async (
   transport: Transport<*>,
@@ -10,6 +11,7 @@ export default async (
   { verify = false }: { verify: boolean },
 ) => {
   const eth = new Eth(transport)
-  const { address, publicKey } = await eth.getAddress(path, verify)
-  return { path, address, publicKey }
+  const r = await eth.getAddress(path, verify)
+  const address = eip55.encode(r.address)
+  return { path, address, publicKey: r.publicKey }
 }
