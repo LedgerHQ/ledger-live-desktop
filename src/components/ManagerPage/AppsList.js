@@ -107,8 +107,8 @@ class AppsList extends PureComponent<Props, State> {
             name={c.name}
             version={`Version ${c.version}`}
             icon={ICONS_FALLBACK[c.icon] || c.icon}
-            onInstall={() => {}}
-            onUninstall={() => {}}
+            onInstall={this.handleInstallApp(c)}
+            onUninstall={this.handleUninstallApp()}
           />
         ))}
         <Modal
