@@ -15,7 +15,7 @@ export type Observer<T> = {
 }
 
 export type Subscription = {
-  unsubscribe: () => void,
+  +unsubscribe: () => void,
 }
 
 export type EditProps<Transaction> = {
