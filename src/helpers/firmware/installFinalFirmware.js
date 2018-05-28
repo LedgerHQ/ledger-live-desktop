@@ -1,24 +1,26 @@
 // @flow
 
-import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
+import type Transport from '@ledgerhq/hw-transport'
 
-import type { IPCSend } from 'types/electron'
 import { createSocketDialog, buildParamsFromFirmware } from 'helpers/common'
 
-type DataType = {
-  devicePath: string,
+type Input = {
   firmware: Object,
 }
 
-const buildFinalParams = buildParamsFromFirmware('final')
+type Result = *
 
-export default async (send: IPCSend, data: DataType) => {
+const buildOsuParams = buildParamsFromFirmware('final')
+
+export default async (transport: Transport<*>, data: Input): Result => {
   try {
-    const transport = await CommNodeHid.open(data.devicePath)
-    const finalData = buildFinalParams(data.firmware)
-    await createSocketDialog(transport, '/update/install', finalData)
-    send('device.finalFirmwareInstallSuccess', { success: true })
+    const osuData = buildOsuParams(data.firmware)
+    await createSocketDialog(transport, '/update/install', osuData)
+    return { success: true }
   } catch (err) {
-    send('device.finalFirmwareInstallError', { success: false })
+    const error = Error(err.message)
+    error.stack = err.stack
+    const result = { success: false, error }
+    throw result
   }
 }
