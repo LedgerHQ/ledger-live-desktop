@@ -162,10 +162,6 @@ const handlers = {
     },
   }),
 
-  // ONBOARDING_SET_GENUINE_CHECK_FAIL: (state, { payload: isGenuineFail }) => ({
-  //   ...state,
-  //   isGenuineFail,
-  // }),
   ONBOARDING_SET_DEVICE_TYPE: (state, { payload: isLedgerNano }) => ({
     ...state,
     isLedgerNano,
@@ -177,6 +173,5 @@ export default handleActions(handlers, state)
 export const nextStep = createAction('ONBOARDING_NEXT_STEP')
 export const prevStep = createAction('ONBOARDING_PREV_STEP')
 export const jumpStep = createAction('ONBOARDING_JUMP_STEP')
-// export const setGenuineCheckFail = createAction('ONBOARDING_SET_GENUINE_CHECK_FAIL')
 export const updateGenuineCheck = createAction('UPDATE_GENUINE_CHECK')
 export const isLedgerNano = createAction('ONBOARDING_SET_DEVICE_TYPE')
