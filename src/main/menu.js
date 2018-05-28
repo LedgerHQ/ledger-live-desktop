@@ -45,15 +45,6 @@ const template = [
             __DEV__ || DEV_TOOLS,
             [
               {
-                label: 'App Dev Tools',
-                click() {
-                  const devWindow = BrowserWindow.getAllWindows().find(w => w.name === 'DevWindow')
-                  if (devWindow) {
-                    devWindow.show()
-                  }
-                },
-              },
-              {
                 label: 'Main Window Dev Tools',
                 click() {
                   const mainWindow = BrowserWindow.getAllWindows().find(
