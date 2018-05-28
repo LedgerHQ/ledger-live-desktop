@@ -115,7 +115,6 @@ const EthereumBridge: WalletBridge<Transaction> = {
       let { txs } = await api.getTransactions(address)
       if (finished) return { complete: true }
 
-      const path = freshAddressPath // FIXME
       const freshAddress = address
 
       if (txs.length === 0) {
@@ -127,7 +126,6 @@ const EthereumBridge: WalletBridge<Transaction> = {
             const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
-              path, // FIXME we probably not want the address path in the account.path
               freshAddress,
               freshAddressPath,
               name: 'New Account',
@@ -153,7 +151,6 @@ const EthereumBridge: WalletBridge<Transaction> = {
       const account: $Exact<Account> = {
         id: accountId,
         xpub: '',
-        path, // FIXME we probably not want the address path in the account.path
         freshAddress,
         freshAddressPath,
         name: address.slice(32),
@@ -308,7 +305,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
       .send({
         currencyId: a.currency.id,
         devicePath: deviceId,
-        path: a.path,
+        path: a.freshAddressPath,
         transaction: { ...t, nonce },
       })
       .toPromise()

@@ -188,8 +188,6 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         for (const derivation of derivations) {
           for (let index = 0; index < 255; index++) {
             const freshAddressPath = derivation({ currency, x: index, segwit: false })
-            const path = freshAddressPath
-            // FIXME^ we need the account path, not the address path
             const { address } = await await getAddress
               .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
               .toPromise()
@@ -215,7 +213,6 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               next({
                 id: accountId,
                 xpub: '',
-                path,
                 name: 'New Account',
                 freshAddress,
                 freshAddressPath,
@@ -247,7 +244,6 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
-              path,
               name: address.slice(0, 8),
               freshAddress,
               freshAddressPath,
@@ -426,7 +422,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         .send({
           currencyId: a.currency.id,
           devicePath: deviceId,
-          path: a.path,
+          path: a.freshAddressPath,
           transaction: JSON.parse(prepared.txJSON),
         })
         .toPromise()
