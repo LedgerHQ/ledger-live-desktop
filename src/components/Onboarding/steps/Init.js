@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { shell } from 'electron'
+import { colors } from 'styles/theme'
 
 import styled from 'styled-components'
 import Box, { Card } from 'components/base/Box'
@@ -12,8 +13,6 @@ import IconCheck from 'icons/Check'
 import IconExternalLink from 'icons/ExternalLink'
 import IconChevronRight from 'icons/ChevronRight'
 import { Title } from '../helperComponents'
-
-import { colors } from 'styles/theme'
 
 import type { StepProps } from '..'
 
