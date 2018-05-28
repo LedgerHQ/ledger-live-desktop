@@ -8,10 +8,7 @@ import getFirmwareInfo from 'commands/getFirmwareInfo'
 import getIsGenuine from 'commands/getIsGenuine'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installApp from 'commands/installApp'
-import listen from './listen'
-
-// TODO port these to commands
-export { listen }
+import listenDevices from 'commands/listenDevices'
 
 export const commands: Array<Command<any, any>> = [
   getAddress,
@@ -21,4 +18,5 @@ export const commands: Array<Command<any, any>> = [
   getIsGenuine,
   getLatestFirmwareForDevice,
   installApp,
+  listenDevices,
 ]
