@@ -10,13 +10,7 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 
 import { saveSettings } from 'actions/settings'
-import {
-  nextStep,
-  prevStep,
-  jumpStep,
-  setGenuineCheckFail,
-  isLedgerNano,
-} from 'reducers/onboarding'
+import { nextStep, prevStep, jumpStep, updateGenuineCheck, isLedgerNano } from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
 
 // import { unlock } from 'reducers/application'
@@ -80,9 +74,10 @@ export type StepProps = {
   nextStep: Function,
   jumpStep: Function,
   finish: Function,
+  saveSettings: Function,
   // savePassword: Function,
   getDeviceInfo: Function,
-  setGenuineCheckFail: Function,
+  updateGenuineCheck: Function,
   isLedgerNano: Function,
 }
 
@@ -116,7 +111,7 @@ class Onboarding extends PureComponent<Props> {
     const stepProps: StepProps = {
       t,
       onboarding,
-      setGenuineCheckFail,
+      updateGenuineCheck,
       isLedgerNano,
       prevStep,
       nextStep,
@@ -124,6 +119,7 @@ class Onboarding extends PureComponent<Props> {
       finish: this.finish,
       // savePassword: this.savePassword,
       getDeviceInfo: this.getDeviceInfo,
+      saveSettings,
     }
 
     return (
