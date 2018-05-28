@@ -21,8 +21,17 @@ const cmd: Command<Input, Result> = createCommand(
       scanAccountsOnDevice({
         devicePath,
         currencyId,
-        onAccountScanned: account => o.next(account),
-      }).then(() => o.complete(), e => o.error(e))
+        onAccountScanned: account => {
+          o.next(account)
+        },
+      }).then(
+        () => {
+          o.complete()
+        },
+        e => {
+          o.error(e)
+        },
+      )
 
       function unsubscribe() {
         // FIXME not implemented

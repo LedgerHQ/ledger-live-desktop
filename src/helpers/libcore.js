@@ -18,7 +18,7 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 type Props = {
   devicePath: string,
   currencyId: string,
-  onAccountScanned: AccountRaw => *,
+  onAccountScanned: AccountRaw => void,
 }
 
 export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
