@@ -18,7 +18,7 @@ type Props = {
 
 function OnboardingBreadcrumb(props: Props) {
   const { onboarding } = props
-  const { stepName, isGenuineFail } = onboarding
+  const { stepName, genuine } = onboarding
 
   const filteredSteps = onboarding.steps
     .filter(step => !step.external)
@@ -29,7 +29,7 @@ function OnboardingBreadcrumb(props: Props) {
 
   return (
     <Breadcrumb
-      stepsErrors={isGenuineFail ? [genuineStepIndex] : undefined}
+      stepsErrors={genuine.isGenuineFail ? [genuineStepIndex] : undefined}
       currentStep={stepIndex}
       items={filteredSteps}
     />

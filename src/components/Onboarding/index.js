@@ -14,7 +14,8 @@ import {
   nextStep,
   prevStep,
   jumpStep,
-  setGenuineCheckFail,
+  // setGenuineCheckFail,
+  updateGenuineCheck,
   isLedgerNano,
 } from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
@@ -80,9 +81,11 @@ export type StepProps = {
   nextStep: Function,
   jumpStep: Function,
   finish: Function,
+  saveSettings: Function,
   // savePassword: Function,
   getDeviceInfo: Function,
-  setGenuineCheckFail: Function,
+  // setGenuineCheckFail: Function,
+  updateGenuineCheck: Function,
   isLedgerNano: Function,
 }
 
@@ -116,7 +119,8 @@ class Onboarding extends PureComponent<Props> {
     const stepProps: StepProps = {
       t,
       onboarding,
-      setGenuineCheckFail,
+      // setGenuineCheckFail,
+      updateGenuineCheck,
       isLedgerNano,
       prevStep,
       nextStep,
@@ -124,6 +128,7 @@ class Onboarding extends PureComponent<Props> {
       finish: this.finish,
       // savePassword: this.savePassword,
       getDeviceInfo: this.getDeviceInfo,
+      saveSettings,
     }
 
     return (

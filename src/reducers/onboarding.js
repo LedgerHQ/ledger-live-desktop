@@ -17,14 +17,24 @@ export type OnboardingState = {
   stepIndex: number,
   stepName: string, // TODO: specify that the string comes from Steps type
   steps: Step[],
-  isGenuineFail: boolean,
+  genuine: {
+    pinStepPass: boolean,
+    recoveryStepPass: boolean,
+    isGenuineFail: boolean,
+    isDeviceGenuine: boolean,
+  },
   isLedgerNano: boolean,
 }
 
 const state: OnboardingState = {
   stepIndex: 0,
   stepName: 'start',
-  isGenuineFail: false,
+  genuine: {
+    pinStepPass: false,
+    recoveryStepPass: false,
+    isGenuineFail: false,
+    isDeviceGenuine: false,
+  },
   isLedgerNano: true,
   steps: [
     {
@@ -143,10 +153,19 @@ const handlers = {
     const index = state.steps.indexOf(step)
     return { ...state, stepName: step.name, stepIndex: index }
   },
-  ONBOARDING_SET_GENUINE_CHECK_FAIL: (state, { payload: isGenuineFail }) => ({
+
+  UPDATE_GENUINE_CHECK: (state, { payload: obj }) => ({
     ...state,
-    isGenuineFail,
+    genuine: {
+      ...state.genuine,
+      ...obj,
+    },
   }),
+
+  // ONBOARDING_SET_GENUINE_CHECK_FAIL: (state, { payload: isGenuineFail }) => ({
+  //   ...state,
+  //   isGenuineFail,
+  // }),
   ONBOARDING_SET_DEVICE_TYPE: (state, { payload: isLedgerNano }) => ({
     ...state,
     isLedgerNano,
@@ -158,5 +177,6 @@ export default handleActions(handlers, state)
 export const nextStep = createAction('ONBOARDING_NEXT_STEP')
 export const prevStep = createAction('ONBOARDING_PREV_STEP')
 export const jumpStep = createAction('ONBOARDING_JUMP_STEP')
-export const setGenuineCheckFail = createAction('ONBOARDING_SET_GENUINE_CHECK_FAIL')
+// export const setGenuineCheckFail = createAction('ONBOARDING_SET_GENUINE_CHECK_FAIL')
+export const updateGenuineCheck = createAction('UPDATE_GENUINE_CHECK')
 export const isLedgerNano = createAction('ONBOARDING_SET_DEVICE_TYPE')
