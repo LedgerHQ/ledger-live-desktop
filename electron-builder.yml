@@ -1,6 +1,7 @@
 appId: com.ledger.live
 
-buildDependenciesFromSource: true
+# buildDependenciesFromSource: false
+# npmRebuild: false
 
 protocols:
   name: Ledger Live
