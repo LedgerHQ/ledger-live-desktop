@@ -24,28 +24,19 @@ class Analytics extends PureComponent<StepProps, State> {
     termsConditionsToggle: false,
   }
 
-  handleAnalyticsToggle = isChecked => {
-    console.log('what is isChecked?: ', isChecked)
-    // if (isChecked) {
+  handleAnalyticsToggle = (isChecked: boolean) => {
     this.setState({ analyticsToggle: !this.state.analyticsToggle })
     this.props.saveSettings({
       shareAnalytics: isChecked,
     })
-    // } else {
-    // this.props.saveSettings({
-    //   shareAnalytics: false,
-    // })
-    // }
   }
-  handleTermsToggle = isChecked => {
+  handleTermsToggle = () => {
     this.setState({ termsConditionsToggle: !this.state.termsConditionsToggle })
   }
   render() {
-    const { nextStep, prevStep, t, saveSettings } = this.props
-    console.log('what is saveSettings!!??: ', saveSettings)
+    const { nextStep, prevStep, t } = this.props
     const { analyticsToggle, termsConditionsToggle } = this.state
 
-    console.log('what is analyticsToggle: ', analyticsToggle)
     return (
       <Box sticky pt={150}>
         <Box grow alignItems="center">
