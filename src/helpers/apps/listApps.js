@@ -1,10 +1,23 @@
 // @flow
-
 import axios from 'axios'
+import type Transport from '@ledgerhq/hw-transport'
 
-export default async () => {
+import { getFirmwareInfo } from 'helpers/common'
+
+const { API_BASE_URL } = process.env
+
+export default async (transport: Transport<*>) => {
   try {
+    const { targetId } = await getFirmwareInfo(transport)
+    const { data: deviceData } = await axios.get(
+      `${API_BASE_URL}/device_versions_target_id/${targetId}`,
+    )
     const { data } = await axios.get('https://api.ledgerwallet.com/update/applications')
+
+    if (deviceData.name in data) {
+      return data[deviceData.name]
+    }
+
     return data['nanos-1.4']
   } catch (err) {
     const error = Error(err.message)

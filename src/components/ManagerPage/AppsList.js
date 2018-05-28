@@ -69,10 +69,17 @@ class AppsList extends PureComponent<Props, State> {
   _unmounted = false
 
   async fetchAppList() {
-    const appsList = CACHED_APPS || (await listApps.send().toPromise())
-    CACHED_APPS = appsList
-    if (!this._unmounted) {
-      this.setState({ appsList, status: 'idle' })
+    try {
+      const {
+        device: { path: devicePath },
+      } = this.props
+      const appsList = CACHED_APPS || (await listApps.send({ devicePath }).toPromise())
+      CACHED_APPS = appsList
+      if (!this._unmounted) {
+        this.setState({ appsList, status: 'idle' })
+      }
+    } catch (err) {
+      this.setState({ status: 'error', error: err.message })
     }
   }
 

@@ -1,8 +1,9 @@
 // @flow
 
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { translate } from 'react-i18next'
 
+import type { Node } from 'react'
 import type { T } from 'types/common'
 
 import AppsList from './AppsList'
@@ -16,44 +17,35 @@ type Props = {
   t: T,
 }
 
-type State = {}
+const ManagerPage = ({ t }: Props): Node => (
+  <Fragment>
+    <EnsureDevice>
+      {device => (
+        <EnsureDashboard device={device}>
+          {deviceInfo => (
+            <Fragment>
+              {deviceInfo.mcu && <span>bootloader mode</span>}
+              {deviceInfo.final && <span>osu mode</span>}
 
-class ManagerPage extends Component<Props, State> {
-  render() {
-    const { t } = this.props
-
-    return (
-      <Fragment>
-        <EnsureDevice>
-          {device => (
-            <EnsureDashboard device={device}>
-              {deviceInfo => (
-                <Fragment>
-                  {deviceInfo.mcu && <span>bootloader mode</span>}
-                  {deviceInfo.final && <span>osu mode</span>}
-
-                  {!deviceInfo.mcu &&
-                    !deviceInfo.final && (
-                      <EnsureGenuine device={device} t={t}>
-                        <FirmwareUpdate
-                          infos={{
-                            targetId: deviceInfo.targetId,
-                            version: deviceInfo.version,
-                          }}
-                          device={device}
-                          t={t}
-                        />
-                        <AppsList device={device} />
-                      </EnsureGenuine>
-                    )}
-                </Fragment>
-              )}
-            </EnsureDashboard>
+              {!deviceInfo.mcu &&
+                !deviceInfo.final && (
+                  <EnsureGenuine device={device} t={t}>
+                    <FirmwareUpdate
+                      infos={{
+                        targetId: deviceInfo.targetId,
+                        version: deviceInfo.version,
+                      }}
+                      device={device}
+                      t={t}
+                    />
+                    <AppsList device={device} />
+                  </EnsureGenuine>
+                )}
+            </Fragment>
           )}
-        </EnsureDevice>
-      </Fragment>
-    )
-  }
-}
-
+        </EnsureDashboard>
+      )}
+    </EnsureDevice>
+  </Fragment>
+)
 export default translate()(ManagerPage)
