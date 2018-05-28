@@ -18,6 +18,8 @@ import { setUpdateStatus } from 'reducers/update'
 
 import { addDevice, removeDevice } from 'actions/devices'
 
+import listenDevices from 'commands/listenDevices'
+
 import i18n from 'renderer/i18n/electron'
 
 const d = {
@@ -51,16 +53,6 @@ export default ({ store }: { store: Object, locked: boolean }) => {
     application: {
       changeLanguage: lang => i18n.changeLanguage(lang),
     },
-    device: {
-      add: device => {
-        d.device('Device - add')
-        store.dispatch(addDevice(device))
-      },
-      remove: device => {
-        d.device('Device - remove')
-        store.dispatch(removeDevice(device))
-      },
-    },
     updater: {
       checking: () => store.dispatch(setUpdateStatus('checking')),
       updateAvailable: info => store.dispatch(setUpdateStatus('available', info)),
@@ -70,7 +62,6 @@ export default ({ store }: { store: Object, locked: boolean }) => {
       downloaded: () => store.dispatch(setUpdateStatus('downloaded')),
     },
   }
-
   ipcRenderer.on('msg', (event: any, payload: MsgPayload) => {
     const { type, data } = payload
     const handler = objectPath.get(handlers, type)
@@ -83,8 +74,19 @@ export default ({ store }: { store: Object, locked: boolean }) => {
   // Ensure all sub-processes are killed before creating new ones (dev mode...)
   ipcRenderer.send('clean-processes')
 
-  // Start detection when we plug/unplug devices
-  sendEvent('devices', 'listen')
+  listenDevices.send().subscribe({
+    next: ({ device, type }) => {
+      if (device) {
+        if (type === 'add') {
+          d.device('Device - add')
+          store.dispatch(addDevice(device))
+        } else if (type === 'remove') {
+          d.device('Device - remove')
+          store.dispatch(removeDevice(device))
+        }
+      }
+    },
+  })
 
   if (__PROD__) {
     // Start check of eventual updates
