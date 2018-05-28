@@ -3,12 +3,10 @@
 import objectPath from 'object-path'
 import capitalize from 'lodash/capitalize'
 
-import cpuUsage from 'helpers/cpuUsage'
-
 require('../env')
 require('../init-sentry')
 
-const { DEV_TOOLS, FORK_TYPE } = process.env
+const { FORK_TYPE } = process.env
 
 process.title = `${require('../../package.json').productName} ${capitalize(FORK_TYPE)}`
 
@@ -44,19 +42,3 @@ process.on('message', payload => {
     handler(sendEvent, data)
   }
 })
-
-if (__DEV__ || DEV_TOOLS) {
-  cpuUsage(cpuPercent =>
-    sendEvent(
-      'usage.cpu',
-      {
-        name: FORK_TYPE,
-        value: cpuPercent,
-      },
-      {
-        window: 'DevWindow',
-        kill: false,
-      },
-    ),
-  )
-}
