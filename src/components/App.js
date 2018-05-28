@@ -16,7 +16,6 @@ import Onboarding from 'components/Onboarding'
 
 import ThrowBlock from 'components/ThrowBlock'
 import Default from 'components/layout/Default'
-import Dev from 'components/layout/Dev'
 import Print from 'components/layout/Print'
 import CounterValues from 'helpers/countervalues'
 import { BridgeSyncProvider } from 'bridge/BridgeSyncContext'
@@ -41,7 +40,6 @@ const App = ({
               <Onboarding />
               <ConnectedRouter history={history}>
                 <Switch>
-                  {(__DEV__ || DEV_TOOLS) && <Route path="/dev" component={Dev} />}
                   <Route path="/print" component={Print} />
                   <Route component={Default} />
                 </Switch>

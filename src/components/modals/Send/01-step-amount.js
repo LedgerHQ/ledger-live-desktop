@@ -26,10 +26,18 @@ const RecipientField = ({ bridge, account, transaction, onChangeTransaction, t }
     <RecipientAddress
       withQrCode
       value={bridge.getTransactionRecipient(account, transaction)}
-      onChange={recipient =>
+      onChange={(recipient, { amount, currency }) => {
+        console.log(recipient, amount, currency, account.currency)
         // TODO we should use isRecipientValid & provide a feedback to user
-        onChangeTransaction(bridge.editTransactionRecipient(account, transaction, recipient))
-      }
+        if (currency && currency.scheme !== account.currency.scheme) return false
+        let t = transaction
+        if (amount) {
+          t = bridge.editTransactionAmount(account, t, amount)
+        }
+        t = bridge.editTransactionRecipient(account, t, recipient)
+        onChangeTransaction(t)
+        return true
+      }}
     />
   </Box>
 )

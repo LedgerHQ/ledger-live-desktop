@@ -6,8 +6,6 @@ import { BrowserWindow, ipcMain, app } from 'electron'
 import objectPath from 'object-path'
 import path from 'path'
 
-import cpuUsage from 'helpers/cpuUsage'
-
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
 const { DEV_TOOLS } = process.env
@@ -100,12 +98,3 @@ ipcMain.on('msg', (event: any, payload) => {
   const send = (type: string, data: *) => event.sender.send('msg', { type, data })
   handler(send, data, type)
 })
-
-if (__DEV__ || DEV_TOOLS) {
-  cpuUsage(cpuPercent =>
-    sendEventToWindow('DevWindow', {
-      type: 'usage.cpu',
-      data: { name: 'main', value: cpuPercent },
-    }),
-  )
-}
