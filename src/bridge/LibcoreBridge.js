@@ -1,21 +1,20 @@
 // @flow
 import React from 'react'
-import { ipcRenderer } from 'electron'
-
+import { map } from 'rxjs/operators'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
-import runJob from 'renderer/runJob'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
-import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
+import libcoreScanAccounts from 'commands/libcoreScanAccounts'
+import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
+// import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
 import type { WalletBridge, EditProps } from './types'
 
 const notImplemented = new Error('LibcoreBridge: not implemented')
 
-// TODO for ipcRenderer listeners we should have a concept of requestId because
-// to be able to listen to events that only concerns you
-
-// IMPORTANT: please read ./types.js that specify & document everything
-
-type Transaction = *
+type Transaction = {
+  amount: number,
+  feePerByte: number,
+  recipient: string,
+}
 
 const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   <FeesBitcoinKind
@@ -27,6 +26,8 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
+const EditAdvancedOptions = undefined // Not implemented yet
+/*
 const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
   <AdvancedOptionsBitcoinKind
     isRBF={value.isRBF}
@@ -35,93 +36,32 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
     }}
   />
 )
+*/
 
 const LibcoreBridge: WalletBridge<Transaction> = {
-  synchronize(initialAccount, { next, complete, error }) {
-    const unbind = () => ipcRenderer.removeListener('msg', handleAccountSync)
-
-    function handleAccountSync(e, msg) {
-      switch (msg.type) {
-        case 'account.sync.progress': {
-          next(a => a)
-          // FIXME TODO: use next(), to actually emit account updates.....
-          // - need to sync the balance
-          // - need to sync block height & block hash
-          // - need to sync operations.
-          // - once all that, need to set lastSyncDate to new Date()
-
-          // - when you implement addPendingOperation you also here need to:
-          //   - if there were pendingOperations that are now in operations, remove them as well.
-          //   - if there are pendingOperations that is older than a threshold (that depends on blockchain speed typically)
-          //     then we probably should trash them out? it's a complex question for UI
-          break
-        }
-        case 'account.sync.fail': {
-          unbind()
-          error(new Error('failed')) // TODO more error detail
-          break
-        }
-        case 'account.sync.success': {
-          unbind()
-          complete()
-          break
-        }
-        default:
-      }
-    }
-
-    ipcRenderer.on('msg', handleAccountSync)
-
-    // TODO how to start the sync ?!
-
-    return {
-      unsubscribe() {
-        unbind()
-        console.warn('LibcoreBridge: interrupting synchronization is not supported')
-      },
-    }
+  scanAccountsOnDevice(currency, devicePath, observer) {
+    return libcoreScanAccounts
+      .send({
+        devicePath,
+        currencyId: currency.id,
+      })
+      .pipe(map(decodeAccount))
+      .subscribe(observer)
   },
 
-  scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
-    const unbind = () => ipcRenderer.removeListener('msg', handleMsgEvent)
-
-    function handleMsgEvent(e, { data, type }) {
-      if (type === 'accounts.scanAccountsOnDevice.accountScanned') {
-        next({ ...decodeAccount(data), archived: true })
-      }
-    }
-
-    ipcRenderer.on('msg', handleMsgEvent)
-
-    let unsubscribed
-
-    runJob({
-      channel: 'accounts',
-      job: 'scan',
-      successResponse: 'accounts.scanAccountsOnDevice.success',
-      errorResponse: 'accounts.scanAccountsOnDevice.fail',
-      data: {
-        devicePath: deviceId,
-        currencyId: currency.id,
-      },
-    }).then(
-      () => {
-        if (unsubscribed) return
-        unbind()
-        complete()
-      },
-      e => {
-        if (unsubscribed) return
-        unbind()
-        error(e)
-      },
-    )
-
+  synchronize(_initialAccount, _observer) {
+    // FIXME TODO: use next(), to actually emit account updates.....
+    // - need to sync the balance
+    // - need to sync block height & block hash
+    // - need to sync operations.
+    // - once all that, need to set lastSyncDate to new Date()
+    // - when you implement addPendingOperation you also here need to:
+    //   - if there were pendingOperations that are now in operations, remove them as well.
+    //   - if there are pendingOperations that is older than a threshold (that depends on blockchain speed typically)
+    //     then we probably should trash them out? it's a complex question for UI
     return {
       unsubscribe() {
-        unsubscribed = true
-        unbind()
-        console.warn('LibcoreBridge: interrupting scanAccounts is not implemented') // FIXME
+        console.warn('LibcoreBridge: sync not implemented')
       },
     }
   },
@@ -165,15 +105,20 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   getMaxAmount: (a, _t) => Promise.resolve(a.balance), // FIXME
 
-  signAndBroadcast: (account, transaction, deviceId) => {
-    const rawAccount = encodeAccount(account)
-    return runJob({
-      channel: 'accounts',
-      job: 'signAndBroadcastTransactionBTCLike',
-      successResponse: 'accounts.signAndBroadcastTransactionBTCLike.success',
-      errorResponse: 'accounts.signAndBroadcastTransactionBTCLike.fail',
-      data: { account: rawAccount, transaction, deviceId },
-    })
+  signAndBroadcast: async (account, transaction, deviceId) => {
+    const encodedAccount = encodeAccount(account)
+    const rawOp = await libcoreSignAndBroadcast
+      .send({
+        account: encodedAccount,
+        transaction,
+        deviceId,
+      })
+      .toPromise()
+
+    // quick HACK
+    const [op] = decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations
+
+    return op
   },
 }
 

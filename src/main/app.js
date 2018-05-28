@@ -15,13 +15,7 @@ let mainWindow = null
 
 let forceClose = false
 
-const {
-  UPGRADE_EXTENSIONS,
-  ELECTRON_WEBPACK_WDS_PORT,
-  DEV_TOOLS,
-  DEV_TOOLS_MODE,
-  HIDE_DEV_WINDOW,
-} = process.env
+const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
 
 const devTools = __DEV__ || DEV_TOOLS
 
@@ -204,51 +198,6 @@ function createMainWindow() {
   return window
 }
 
-function createDevWindow() {
-  const MIN_HEIGHT = 500
-  const MIN_WIDTH = 360
-
-  const savedPositions = db.getIn('settings', 'window.DevWindow.positions', null)
-
-  const width = MIN_WIDTH
-  const height = MIN_HEIGHT
-
-  const windowOptions = {
-    ...defaultWindowOptions,
-    ...(savedPositions !== null ? savedPositions : {}),
-    fullscreenable: false,
-    resizable: false,
-    height,
-    minHeight: MIN_HEIGHT,
-    minWidth: MIN_WIDTH,
-    show: false,
-    skipTaskbar: true,
-    title: 'Dev Tools',
-    width,
-  }
-
-  const window = new BrowserWindow(windowOptions)
-
-  window.name = 'DevWindow'
-
-  const url = getDefaultUrl()
-
-  saveWindowSettings(window)
-
-  window.loadURL(`${url}#/dev`)
-
-  window.setMenu(null)
-
-  window.on('close', handleCloseWindow(window))
-
-  window.on('ready-to-show', () => window.show())
-
-  // Don't want to use HTML <title>
-  window.on('page-title-updated', e => e.preventDefault())
-
-  return window
-}
-
 app.on('before-quit', () => {
   forceClose = true
 })
@@ -285,10 +234,6 @@ app.setAsDefaultProtocolClient('ledgerhq')
 app.on('ready', async () => {
   if (__DEV__) {
     await installExtensions()
-  }
-
-  if (devTools && !HIDE_DEV_WINDOW) {
-    createDevWindow()
   }
 
   Menu.setApplicationMenu(menu)

@@ -11,5 +11,5 @@ type Props = {
 
 export default function CurrentAddressForAccount(props: Props) {
   const { account, ...p } = props
-  return <CurrentAddress accountName={account.name} address={account.freshAddress} {...p} />
+  return <CurrentAddress account={account} address={account.freshAddress} {...p} />
 }

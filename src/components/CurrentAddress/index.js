@@ -3,6 +3,8 @@
 import React, { PureComponent } from 'react'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
+import { encodeURIScheme } from '@ledgerhq/live-common/lib/helpers/currencies'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import noop from 'lodash/noop'
 
@@ -111,14 +113,14 @@ const FooterButton = ({
 )
 
 type Props = {
-  accountName?: string,
+  account: Account,
   address: string,
+  amount?: number,
   addressVerified?: boolean,
-  amount?: string,
-  onCopy: Function,
-  onPrint: Function,
-  onShare: Function,
-  onVerify: Function,
+  onCopy: () => void,
+  onPrint: () => void,
+  onShare: () => void,
+  onVerify: () => void,
   t: T,
   withBadge: boolean,
   withFooter: boolean,
@@ -142,7 +144,7 @@ class CurrentAddress extends PureComponent<Props> {
 
   render() {
     const {
-      accountName,
+      account: { name: accountName, currency },
       address,
       addressVerified,
       amount,
@@ -164,7 +166,14 @@ class CurrentAddress extends PureComponent<Props> {
       <Container withQRCode={withQRCode} notValid={notValid} {...props}>
         {withQRCode && (
           <Box mb={4}>
-            <QRCode size={120} data={`bitcoin:${address}${amount ? `?amount=${amount}` : ''}`} />
+            <QRCode
+              size={120}
+              data={encodeURIScheme({
+                address,
+                amount,
+                currency,
+              })}
+            />
           </Box>
         )}
         <Label>
