@@ -83,12 +83,12 @@ setPassword:
 analytics:
   title: Help Ledger to improve its products and services
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
-  shareDiagnostics:
+  shareAnalytics:
     title: Share analytics
     desc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
-  shareData:
-    title: Share analytics
-    desc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+  termsConditions:
+    title: Terms and Conditions
+    desc: Please accept terms and conditions to proceed
 finish:
   title: This is the title of the screen. 1 line is the maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
