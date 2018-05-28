@@ -1,14 +1,10 @@
 // @flow
 import axios from 'axios'
-import type Transport from '@ledgerhq/hw-transport'
-
-import { getFirmwareInfo } from 'helpers/common'
 
 const { API_BASE_URL } = process.env
 
-export default async (transport: Transport<*>) => {
+export default async (targetId: string | number) => {
   try {
-    const { targetId } = await getFirmwareInfo(transport)
     const { data: deviceData } = await axios.get(
       `${API_BASE_URL}/device_versions_target_id/${targetId}`,
     )

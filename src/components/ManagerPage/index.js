@@ -8,7 +8,7 @@ import type { T } from 'types/common'
 
 import AppsList from './AppsList'
 // import DeviceInfos from './DeviceInfos'
-import FirmwareUpdate from './FirmwareUpdate'
+// import FirmwareUpdate from './FirmwareUpdate'
 import EnsureDevice from './EnsureDevice'
 import EnsureDashboard from './EnsureDashboard'
 import EnsureGenuine from './EnsureGenuine'
@@ -30,15 +30,15 @@ const ManagerPage = ({ t }: Props): Node => (
               {!deviceInfo.mcu &&
                 !deviceInfo.final && (
                   <EnsureGenuine device={device} t={t}>
-                    <FirmwareUpdate
+                    {/* <FirmwareUpdate
                       infos={{
                         targetId: deviceInfo.targetId,
                         version: deviceInfo.version,
                       }}
                       device={device}
                       t={t}
-                    />
-                    <AppsList device={device} />
+                    /> */}
+                    <AppsList device={device} targetId={deviceInfo.targetId} />
                   </EnsureGenuine>
                 )}
             </Fragment>
