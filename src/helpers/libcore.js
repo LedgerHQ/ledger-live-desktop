@@ -168,7 +168,6 @@ async function scanNextAccount(props: {
     wallet,
     currencyId,
     core,
-    hwApp,
     ops,
   })
 
@@ -217,7 +216,6 @@ async function buildAccountRaw({
   wallet,
   currencyId,
   core,
-  hwApp,
   accountIndex,
   ops,
 }: {
@@ -236,15 +234,11 @@ async function buildAccountRaw({
   const balance = njsBalance.toLong()
 
   const jsCurrency = getCryptoCurrencyById(currencyId)
-
-  // retrieve xpub
   const { derivations } = await wallet.getAccountCreationInfo(accountIndex)
   const [walletPath, accountPath] = derivations
 
-  const isVerify = false
-  const { bitcoinAddress } = await hwApp.getWalletPublicKey(accountPath, isVerify, isSegwit)
-
-  const xpub = bitcoinAddress
+  // retrieve xpub
+  const xpub = njsAccount.getRestoreKey()
 
   // blockHeight
   const { height: blockHeight } = await njsAccount.getLastBlock()
