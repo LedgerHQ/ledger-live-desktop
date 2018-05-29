@@ -2,3 +2,12 @@
 balance: Balance
 receive: Recevoir
 lastOperations: Dernières opérations
+settings:
+  title: Edit Account
+  accountName:
+    title: Account name
+    desc: Lorem ipsum dolort amet
+    error: Name is required
+  unit:
+    title: Unit
+    desc: Lorem ipsum dolort amet

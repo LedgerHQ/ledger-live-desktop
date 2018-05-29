@@ -2,13 +2,14 @@
 ok: Ok
 yes: true
 no: false
+apply: Apply
 confirm: Confirmer
 cancel: Annuler
 continue: Continue
 chooseWalletPlaceholder: Choisir un portefeuille...
 currency: Monnaie
 selectAccount: Sélectionner un compte
-selectCurrency: Sélectionnez une devise
+selectCurrency: Select a currency
 sortBy: Trier par
 search: Rechercher
 save: Sauvegarder
