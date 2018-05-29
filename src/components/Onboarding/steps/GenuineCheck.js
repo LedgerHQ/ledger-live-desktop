@@ -4,7 +4,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { shell } from 'electron'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { radii } from 'styles/theme'
+import { radii, colors } from 'styles/theme'
 
 import type { T } from 'types/common'
 
@@ -131,7 +131,6 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <IconOptionRow>1.</IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step1.title')}</CardTitle>
                 </Box>
-                <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
               </Box>
               <RadioGroup
                 style={{ margin: '0 30px' }}
@@ -148,7 +147,6 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <IconOptionRow>2.</IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step2.title')}</CardTitle>
                 </Box>
-                <CardDescription>{t('onboarding:genuineCheck.steps.step2.desc')}</CardDescription>
               </Box>
               <RadioGroup
                 style={{ margin: '0 30px' }}
@@ -165,24 +163,24 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <IconOptionRow>3.</IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step3.title')}</CardTitle>
                 </Box>
-                <CardDescription>{t('onboarding:genuineCheck.steps.step3.desc')}</CardDescription>
               </Box>
               <Box justify="center" horizontal mx={5}>
-                <Button
-                  big
-                  primary
-                  disabled={!genuine.recoveryStepPass}
-                  onClick={this.handleOpenGenuineCheckModal}
-                >
-                  {genuine.isDeviceGenuine ? (
-                    <Box horizontal align="center" flow={1}>
-                      <IconCheck size={16} />
-                      <span>{t('onboarding:genuineCheck.buttons.tryAgain')}</span>
-                    </Box>
-                  ) : (
-                    t('onboarding:genuineCheck.buttons.genuineCheck')
-                  )}
-                </Button>
+                {genuine.isDeviceGenuine ? (
+                  <Box horizontal align="center" flow={1} color={colors.wallet}>
+                    <IconCheck size={16} />
+                    <GenuineSuccessText>
+                      {t('onboarding:genuineCheck.isGenuinePassed')}
+                    </GenuineSuccessText>
+                  </Box>
+                ) : (
+                  <Button
+                    primary
+                    disabled={!genuine.recoveryStepPass}
+                    onClick={this.handleOpenGenuineCheckModal}
+                  >
+                    {t('onboarding:genuineCheck.buttons.genuineCheck')}
+                  </Button>
+                )}
               </Box>
             </CardWrapper>
           </Box>
@@ -269,14 +267,10 @@ export function GenuineCheckFail({
     </Box>
   )
 }
-export const CardDescription = styled(Box).attrs({
+export const GenuineSuccessText = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
-  textAlign: 'left',
-  color: 'grey',
-})`
-  max-width: 400px;
-`
+})``
 export const CardTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
@@ -295,8 +289,10 @@ const Wrapper = styled(Box).attrs({
 const CardWrapper = styled(Card).attrs({
   horizontal: true,
   p: 5,
+  flow: 2,
+  justify: 'space-between',
 })`
-  max-height: 97px;
+  height: 97px;
   width: 620px;
   border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};

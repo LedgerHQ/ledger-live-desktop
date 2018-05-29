@@ -27,10 +27,10 @@ type Props = {
 
 const OnboardingFooter = ({ t, nextStep, prevStep, isContinueDisabled, ...props }: Props) => (
   <Wrapper {...props}>
-    <Button small outline onClick={() => prevStep()}>
+    <Button padded outline onClick={() => prevStep()}>
       {t('common:back')}
     </Button>
-    <Button disabled={isContinueDisabled} small primary onClick={() => nextStep()} ml="auto">
+    <Button padded disabled={isContinueDisabled} primary onClick={() => nextStep()} ml="auto">
       {t('common:continue')}
     </Button>
   </Wrapper>
