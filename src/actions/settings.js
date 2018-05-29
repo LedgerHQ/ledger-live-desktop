@@ -1,10 +1,10 @@
 // @flow
 
 import type { Dispatch } from 'redux'
-import type { Settings } from 'types/common'
+import type { SettingsState as Settings } from 'reducers/settings'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 
-export type SaveSettings = Settings => { type: string, payload: Settings }
+export type SaveSettings = Settings => { type: string, payload: $Shape<Settings> }
 export const saveSettings: SaveSettings = payload => ({
   type: 'DB:SAVE_SETTINGS',
   payload,

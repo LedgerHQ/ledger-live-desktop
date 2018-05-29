@@ -6,8 +6,9 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Switch, Route } from 'react-router'
 
+import type { SettingsState as Settings } from 'reducers/settings'
 import type { RouterHistory, Match, Location } from 'react-router'
-import type { Settings, T } from 'types/common'
+import type { T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
 
 import { saveSettings } from 'actions/settings'

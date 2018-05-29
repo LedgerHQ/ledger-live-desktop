@@ -11,36 +11,12 @@ export type Device = {
 // -------------------- Settings
 
 export type CurrencySettings = {
-  confirmationsToSpend: number,
-  minConfirmationsToSpend: number,
-  maxConfirmationsToSpend: number,
-
   confirmationsNb: number,
-  minConfirmationsNb: number,
-  maxConfirmationsNb: number,
-
-  transactionFees: number,
-
   exchange: string,
 }
 
 export type CurrenciesSettings = {
   [id: string]: CurrencySettings,
-}
-
-export type Settings = {
-  hasCompletedOnboarding: boolean,
-  language: string,
-  orderAccounts: string,
-  counterValue: string,
-  password: {
-    isEnabled: boolean,
-    value: string,
-  },
-  marketIndicator: 'eastern' | 'western',
-  currenciesSettings: CurrenciesSettings,
-  region: string,
-  developerMode: boolean,
 }
 
 export type T = (?string, ?Object) => string

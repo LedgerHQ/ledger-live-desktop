@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { remote } from 'electron'
 import bcrypt from 'bcryptjs'
 
-import type { Settings, T } from 'types/common'
+import type { SettingsState } from 'reducers/settings'
+import type { T } from 'types/common'
 
 import { unlock } from 'reducers/application'
 import db, { setEncryptionKey } from 'helpers/db'
@@ -31,7 +32,7 @@ const mapDispatchToProps = {
 
 type Props = {
   t: T,
-  settings: Settings,
+  settings: SettingsState,
   unlock: Function,
   saveSettings: Function,
 }

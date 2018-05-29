@@ -11,10 +11,12 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
-import type { Settings, CurrencySettings, T } from 'types/common'
+import type { T } from 'types/common'
 
-import { counterValueCurrencySelector } from 'reducers/settings'
+import { counterValueCurrencySelector, currencySettingsLocaleSelector } from 'reducers/settings'
+import type { SettingsState } from 'reducers/settings'
 import { currenciesSelector } from 'reducers/accounts'
+import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 
 import SelectCurrency from 'components/SelectCurrency'
 import StepperNumber from 'components/base/StepperNumber'
@@ -29,30 +31,11 @@ import {
   SettingsSectionRow as Row,
 } from '../SettingsSection'
 
-//  .
-// /!\ Please note that this will likely not be like that in the future.
-//     I guess that all currencies should have those settings inside them
-//     instead of using same default for all.
-//
-const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
-  confirmationsToSpend: 10,
-  minConfirmationsToSpend: 10,
-  maxConfirmationsToSpend: 50,
-
-  confirmationsNb: 10,
-  minConfirmationsNb: 10,
-  maxConfirmationsNb: 50,
-
-  transactionFees: 10,
-
-  exchange: '',
-}
-
 type Props = {
   counterValueCurrency: Currency,
   currencies: CryptoCurrency[],
-  settings: Settings,
-  saveSettings: Function,
+  settings: SettingsState,
+  saveSettings: ($Shape<SettingsState>) => void,
   t: T,
 }
 
@@ -70,12 +53,6 @@ class TabCurrencies extends PureComponent<Props, State> {
     currency: this.props.currencies[0],
   }
 
-  getCurrencySettings() {
-    const { settings } = this.props
-    const { currency } = this.state
-    return settings.currenciesSettings[currency.id]
-  }
-
   handleChangeCurrency = (currency: CryptoCurrency) => this.setState({ currency })
 
   handleChangeConfirmationsToSpend = (nb: number) =>
@@ -90,13 +67,12 @@ class TabCurrencies extends PureComponent<Props, State> {
     // FIXME this really should be a dedicated action
     const { settings, saveSettings } = this.props
     const { currency } = this.state
-    const currencySettings = this.getCurrencySettings()
+    const currencySettings = settings.currenciesSettings[currency.id]
     let newCurrenciesSettings = []
     if (!currencySettings) {
       newCurrenciesSettings = {
         ...settings.currenciesSettings,
         [currency.id]: {
-          ...CURRENCY_DEFAULTS_SETTINGS,
           [key]: val,
         },
       }
@@ -115,9 +91,9 @@ class TabCurrencies extends PureComponent<Props, State> {
   render() {
     const { currency } = this.state
     if (!currency) return null // this case means there is no accounts
-    const { t, currencies, counterValueCurrency } = this.props
-    const { confirmationsToSpend, confirmationsNb, exchange } =
-      this.getCurrencySettings() || CURRENCY_DEFAULTS_SETTINGS
+    const { t, currencies, counterValueCurrency, settings } = this.props
+    const { confirmationsNb, exchange } = currencySettingsLocaleSelector(settings, currency)
+    const defaults = currencySettingsDefaults(currency)
     return (
       <Section key={currency.id}>
         <Header
@@ -145,38 +121,20 @@ class TabCurrencies extends PureComponent<Props, State> {
               style={{ minWidth: 200 }}
             />
           </Row>
-          <Row
-            title={t('settings:currencies.confirmationsToSpend')}
-            desc={t('settings:currencies.confirmationsToSpendDesc')}
-          >
-            <StepperNumber
-              min={10}
-              max={40}
-              step={1}
-              onChange={this.handleChangeConfirmationsToSpend}
-              value={confirmationsToSpend}
-            />
-          </Row>
-          <Row
-            title={t('settings:currencies.confirmationsNb')}
-            desc={t('settings:currencies.confirmationsNbDesc')}
-          >
-            <StepperNumber
-              min={10}
-              max={40}
-              step={1}
-              onChange={this.handleChangeConfirmationsNb}
-              value={confirmationsNb}
-            />
-          </Row>
-          <Row
-            title={t('settings:currencies.transactionsFees')}
-            desc={t('settings:currencies.transactionsFeesDesc')}
-          />
-          <Row
-            title={t('settings:currencies.explorer')}
-            desc={t('settings:currencies.explorerDesc')}
-          />
+          {defaults.confirmationsNb ? (
+            <Row
+              title={t('settings:currencies.confirmationsNb')}
+              desc={t('settings:currencies.confirmationsNbDesc')}
+            >
+              <StepperNumber
+                min={defaults.confirmationsNb.min}
+                max={defaults.confirmationsNb.max}
+                step={1}
+                onChange={this.handleChangeConfirmationsNb}
+                value={confirmationsNb}
+              />
+            </Row>
+          ) : null}
         </Body>
       </Section>
     )
