@@ -8,7 +8,7 @@ export default async (
   transport: Transport<*>,
   currencyId: string,
   path: string,
-  { verify = false }: { verify: boolean },
+  { verify = false }: *,
 ) => {
   const eth = new Eth(transport)
   const r = await eth.getAddress(path, verify)
