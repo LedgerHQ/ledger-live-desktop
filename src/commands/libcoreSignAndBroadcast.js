@@ -6,6 +6,7 @@ import { createCommand, Command } from 'helpers/ipc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getWalletIdentifier } from 'helpers/libcore'
 import { fromPromise } from 'rxjs/observable/fromPromise'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 type BitcoinLikeTransaction = {
   amount: number,
@@ -55,7 +56,18 @@ const cmd: Command<Input, Result> = createCommand(
         transactionBuilder.setFeesPerByte(fees)
 
         const builded = await transactionBuilder.build()
-        const signedTransaction = await core.signTransaction(hwApp, builded)
+        const sigHashType = core.helpers.bytesToHex(
+          njsWalletCurrency.bitcoinLikeNetworkParameters.SigHash,
+        )
+
+        const currency = getCryptoCurrencyById(account.currencyId)
+        const signedTransaction = await core.signTransaction({
+          hwApp,
+          transaction: builded,
+          sigHashType,
+          supportsSegwit: currency.supportsSegwit,
+          isSegwit: account.isSegwit,
+        })
 
         const txHash = await njsAccount
           .asBitcoinLikeAccount()
