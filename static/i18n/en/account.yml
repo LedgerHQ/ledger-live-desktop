@@ -1,3 +1,12 @@
 balance: Balance
 receive: Receive
 lastOperations: Last operations
+settings:
+  title: Edit Account
+  accountName:
+    title: Account name
+    desc: Lorem ipsum dolort amet
+    error: Name is required
+  unit:
+    title: Unit
+    desc: Lorem ipsum dolort amet
