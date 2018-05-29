@@ -10,6 +10,7 @@ const txExplorers: CryptoCurrencyConfig<Explorer> = {
   bitcoin_gold: op => `https://btgexplorer.com/tx/${op.hash}`,
   bitcoin_testnet: op => `https://testnet.blockchain.info/tx/${op.hash}`,
   bitcoin: op => `https://blockchain.info/tx/${op.hash}`,
+  litecoin: op => `http://explorer.litecoin.net/tx/${op.hash}`,
   ethereum_testnet: op => `https://ropsten.etherscan.io/tx/${op.hash}`,
   ethereum: op => `https://etherscan.io/tx/${op.hash}`,
   ripple: op => `https://bithomp.com/explorer/${op.hash}`,
@@ -28,7 +29,6 @@ const txExplorers: CryptoCurrencyConfig<Explorer> = {
   digibyte: fallback,
   dash: fallback,
   zencash: fallback,
-  litecoin: fallback,
   ethereum_classic: fallback,
 }
 
