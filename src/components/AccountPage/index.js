@@ -1,18 +1,12 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { ipcRenderer } from 'electron'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
 import styled from 'styled-components'
-import {
-  formatCurrencyUnit,
-  getFiatCurrencyByTicker,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
-
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -21,7 +15,7 @@ import type { T } from 'types/common'
 import { darken } from 'styles/helpers'
 
 import { getAccountById } from 'reducers/accounts'
-import { getCounterValueCode, localeSelector } from 'reducers/settings'
+import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
 import IconControls from 'icons/Controls'
@@ -56,7 +50,7 @@ const ButtonSettings = styled(Button).attrs({
 
 const mapStateToProps = (state, props) => ({
   account: getAccountById(state, props.match.params.id),
-  counterValue: getCounterValueCode(state),
+  counterValue: counterValueCurrencySelector(state),
   settings: localeSelector(state),
 })
 
@@ -65,11 +59,10 @@ const mapDispatchToProps = {
 }
 
 type Props = {
-  counterValue: string,
+  counterValue: Currency,
   t: T,
   account?: Account,
   openModal: Function,
-  locale: string,
 }
 
 type State = {
@@ -81,37 +74,6 @@ class AccountPage extends PureComponent<Props, State> {
   state = {
     selectedTime: 'week',
     daysCount: 7,
-  }
-
-  handleCalculateBalance = data => {
-    const { counterValue, account, locale } = this.props
-
-    if (!account) {
-      return
-    }
-
-    if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
-      this._cacheBalance = data.totalBalance
-
-      ipcRenderer.send('touch-bar-update', {
-        text: account.name,
-        color: account.currency.color,
-        balance: {
-          currency: formatCurrencyUnit(account.unit, account.balance, {
-            showCode: true,
-            locale,
-          }),
-          counterValue: formatCurrencyUnit(
-            getFiatCurrencyByTicker(counterValue).units[0],
-            data.totalBalance,
-            {
-              showCode: true,
-              locale,
-            },
-          ),
-        },
-      })
-    }
   }
 
   handleChangeSelectedTime = item =>
@@ -163,7 +125,6 @@ class AccountPage extends PureComponent<Props, State> {
             chartId={`account-chart-${account.id}`}
             counterValue={counterValue}
             daysCount={daysCount}
-            onCalculate={this.handleCalculateBalance}
             selectedTime={selectedTime}
             renderHeader={({ totalBalance, sinceBalance, refBalance }) => (
               <Box flow={4} mb={2}>
@@ -173,7 +134,7 @@ class AccountPage extends PureComponent<Props, State> {
                       animateTicker
                       alwaysShowSign={false}
                       color="warmGrey"
-                      fiat={counterValue}
+                      unit={counterValue.units[0]}
                       fontSize={6}
                       showCode
                       val={totalBalance}

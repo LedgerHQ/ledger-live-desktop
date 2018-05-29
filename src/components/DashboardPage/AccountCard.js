@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
 import Bar from 'components/base/Bar'
@@ -27,9 +27,9 @@ const AccountCard = ({
   daysCount,
   ...props
 }: {
-  counterValue: string,
+  counterValue: Currency,
   account: Account,
-  onClick?: Function,
+  onClick?: () => void,
   daysCount: number,
 }) => (
   <Wrapper onClick={onClick} {...props}>
@@ -66,7 +66,7 @@ const AccountCard = ({
               {isAvailable ? (
                 <FormattedVal
                   animateTicker
-                  fiat={counterValue}
+                  unit={counterValue.units[0]}
                   val={balanceEnd}
                   alwaysShowSign={false}
                   showCode
@@ -95,9 +95,5 @@ const AccountCard = ({
     </CalculateBalance>
   </Wrapper>
 )
-
-AccountCard.defaultProps = {
-  onClick: undefined,
-}
 
 export default AccountCard

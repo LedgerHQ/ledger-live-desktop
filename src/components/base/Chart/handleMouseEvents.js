@@ -5,6 +5,7 @@ import * as d3 from 'd3'
 import { renderToString } from 'react-dom/server'
 import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
+import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import createStore from 'renderer/createStore'
 
@@ -89,9 +90,15 @@ export default function handleMouseEvents({
     NODES.tooltip
       .html(
         renderToString(
+          // FIXME :o why is this not in React tree. maybe use a portal (native in React now)
           <Provider store={createStore({})}>
             <ThemeProvider theme={theme}>
-              <Tooltip account={account} renderTooltip={renderTooltip} item={d.ref} />
+              <Tooltip
+                account={account}
+                renderTooltip={renderTooltip}
+                item={d.ref}
+                counterValue={getFiatCurrencyByTicker('USD')}
+              />
             </ThemeProvider>
           </Provider>,
         ),

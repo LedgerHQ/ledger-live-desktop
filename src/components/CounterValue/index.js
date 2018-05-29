@@ -55,7 +55,7 @@ class CounterValue extends PureComponent<Props> {
     return (
       <FormattedVal
         val={value}
-        fiat={counterValueCurrency.units[0].code}
+        unit={counterValueCurrency.units[0]}
         showCode
         alwaysShowSign
         {...props}

@@ -9,10 +9,7 @@ import isUndefined from 'lodash/isUndefined'
 import type { Unit } from '@ledgerhq/live-common/lib/types'
 import type { State } from 'reducers'
 
-import {
-  formatCurrencyUnit,
-  findCurrencyByTicker,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import { marketIndicatorSelector, localeSelector } from 'reducers/settings'
 
@@ -42,16 +39,15 @@ I.defaultProps = {
 }
 
 type OwnProps = {
-  alwaysShowSign?: boolean,
-  animateTicker?: boolean,
-  color?: string,
-  disableRounding?: boolean,
-  fiat?: string,
-  isPercent?: boolean,
-  showCode?: boolean,
   unit?: Unit,
   val: number,
+  alwaysShowSign?: boolean,
+  showCode?: boolean,
   withIcon?: boolean,
+  color?: string,
+  animateTicker?: boolean,
+  disableRounding?: boolean,
+  isPercent?: boolean,
 }
 
 const mapStateToProps = (state: State, _props: OwnProps) => ({
@@ -64,13 +60,11 @@ type Props = OwnProps & {
   locale: string,
 }
 
-let _logged
-
 function FormattedVal(props: Props) {
   const {
     animateTicker,
     disableRounding,
-    fiat,
+    unit,
     isPercent,
     alwaysShowSign,
     showCode,
@@ -80,7 +74,7 @@ function FormattedVal(props: Props) {
     color,
     ...p
   } = props
-  let { val, unit } = props
+  let { val } = props
 
   if (isUndefined(val)) {
     throw new Error('FormattedVal require a `val` prop. Received `undefined`')
@@ -91,20 +85,11 @@ function FormattedVal(props: Props) {
   let text = ''
 
   if (isPercent) {
+    // FIXME move out the % feature of this component... totally unrelated to currency & annoying for flow type.
     text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${isNegative ? val * -1 : val} %`
   } else {
-    if (fiat) {
-      if (!_logged) {
-        _logged = true
-        console.warn('FormattedVal: passing fiat prop is deprecated')
-      }
-      const cur = findCurrencyByTicker(fiat)
-      if (cur) {
-        ;[unit] = cur.units
-      }
-    }
     if (!unit) {
-      return ''
+      throw new Error('FormattedVal require a `unit` prop. Received `undefined`')
     }
 
     if (withIcon && isNegative) {
