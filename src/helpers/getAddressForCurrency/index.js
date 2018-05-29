@@ -47,7 +47,7 @@ const all: CryptoCurrencyConfig<Resolver> = {
   pivx: fallback('pivx'),
   peercoin: fallback('peercoin'),
   komodo: fallback('komodo'),
-  hshare: fallback('hshare'),
+  hcash: fallback('hcash'),
   dogecoin: fallback('dogecoin'),
   digibyte: fallback('digibyte'),
   dash: fallback('dash'),

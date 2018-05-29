@@ -23,7 +23,7 @@ const txExplorers: CryptoCurrencyConfig<Explorer> = {
   pivx: fallback,
   peercoin: fallback,
   komodo: fallback,
-  hshare: fallback,
+  hcash: fallback,
   dogecoin: fallback,
   digibyte: fallback,
   dash: fallback,
