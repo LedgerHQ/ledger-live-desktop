@@ -79,13 +79,13 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
       async function job() {
         if (Math.random() > scanAccountDeviceSuccessRate) {
-          await delay(5000)
+          await delay(1000)
           if (!unsubscribed) error(new Error('scan failed'))
           return
         }
         const nbAccountToGen = 3
         for (let i = 0; i < nbAccountToGen && !unsubscribed; i++) {
-          await delay(2000)
+          await delay(500)
           const account = genAccount(String(Math.random()), {
             operationsSize: 0,
             currency,

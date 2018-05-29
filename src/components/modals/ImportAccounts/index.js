@@ -82,9 +82,9 @@ const mapStateToProps = state => ({
 })
 
 const INITIAL_STATE = {
-  stepId: 'chooseCurrency',
+  stepId: 'import',
   isAppOpened: false,
-  currency: null,
+  currency: getCryptoCurrencyById('bitcoin'),
 }
 
 class ImportAccounts extends PureComponent<Props, State> {
