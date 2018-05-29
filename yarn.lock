@@ -1464,9 +1464,9 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@2.12.0":
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.12.0.tgz#7c60cb3d7829a0f55b6763efff96c8f4937b05f2"
+"@ledgerhq/live-common@2.15.0":
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.15.0.tgz#9677c223446c996e5d5f13658fc6af09e966c701"
   dependencies:
     axios "^0.18.0"
     invariant "^2.2.2"
@@ -10846,7 +10846,7 @@ prando@^3.0.1:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/prando/-/prando-3.0.3.tgz#1248d6d3c07e70bd645ef7bdaaa21c35d0d6d2e0"
 
-prebuild-install@^2.2.2:
+prebuild-install@^2.0.0, prebuild-install@^2.2.2:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-2.5.3.tgz#9f65f242782d370296353710e9bc843490c19f69"
   dependencies:
@@ -12259,6 +12259,20 @@ schema-utils@^0.4.0, schema-utils@^0.4.3, schema-utils@^0.4.4, schema-utils@^0.4
 scoped-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/scoped-regex/-/scoped-regex-1.0.0.tgz#a346bb1acd4207ae70bd7c0c7ca9e566b6baddb8"
+
+secp256k1@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/secp256k1/-/secp256k1-3.3.1.tgz#d1d325519db714789c11ec0450d4b9a3aa01eb1a"
+  dependencies:
+    bindings "^1.2.1"
+    bip66 "^1.1.3"
+    bn.js "^4.11.3"
+    create-hash "^1.1.2"
+    drbg.js "^1.0.1"
+    elliptic "^6.2.3"
+    nan "^2.2.1"
+    prebuild-install "^2.0.0"
+    safe-buffer "^5.1.0"
 
 secp256k1@^3.0.1:
   version "3.5.0"

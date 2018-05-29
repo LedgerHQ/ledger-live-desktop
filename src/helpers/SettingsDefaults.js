@@ -1,6 +1,6 @@
 // @flow
 
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrencyConfig, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 type ConfirmationDefaults = {
   confirmationsNb: ?{
@@ -12,7 +12,7 @@ type ConfirmationDefaults = {
 
 // This is approximated to be a 30mn confirmation in number of blocks on blockchains
 // to disable the confirmations feature simply set 0.
-const confirmationsNbPerCoin = {
+const confirmationsNbPerCoin: CryptoCurrencyConfig<number> = {
   bitcoin: 2,
   ethereum: 120,
   ripple: 0,
@@ -25,7 +25,7 @@ const confirmationsNbPerCoin = {
   bitcoin_gold: 2,
   stratis: 12, // FIXME can't grab the block time info anywhere...
   dogecoin: 30,
-  hshare: 12, // FIXME can't grab the block time info anywhere...
+  hcash: 12, // FIXME can't grab the block time info anywhere...
   komodo: 30,
   pivx: 12, // FIXME can't grab the block time info anywhere...
   zencash: 12,

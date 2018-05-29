@@ -126,6 +126,8 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       if (appOptions) {
         const { address } = await getAddress.send(appOptions).toPromise()
         if (account && account.freshAddress !== address) {
+          console.log(account)
+          console.warn(account.freshAddress, address)
           throw new Error('Account address is different than device address')
         }
       } else {

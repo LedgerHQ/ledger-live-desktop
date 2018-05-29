@@ -7,7 +7,7 @@ export default async (
   transport: Transport<*>,
   currencyId: string,
   path: string,
-  { verify = false }: { verify: boolean },
+  { verify = false }: *,
 ) => {
   const xrp = new Xrp(transport)
   const { address, publicKey } = await xrp.getAddress(path, verify)
