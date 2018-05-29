@@ -28,7 +28,7 @@ export type OnboardingState = {
 
 const state: OnboardingState = {
   stepIndex: 0,
-  stepName: 'start',
+  stepName: process.env.SKIP_ONBOARDING ? 'finish' : 'start',
   genuine: {
     pinStepPass: false,
     recoveryStepPass: false,
