@@ -136,7 +136,8 @@ async function scanNextAccount(props: {
     ? await wallet.getAccount(accountIndex)
     : await core.createAccount(wallet, hwApp)
 
-  if (!hasBeenScanned) {
+  const shouldSyncAccount = true // TODO: let's sync everytime. maybe in the future we can optimize.
+  if (shouldSyncAccount) {
     await core.syncAccount(njsAccount)
   }
 
@@ -214,16 +215,6 @@ async function buildAccountRaw({
   // $FlowFixMe
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
-  /*
-  const balanceByDay = ops.length
-    ? await getBalanceByDaySinceOperation({
-        njsAccount,
-        njsOperation: ops[0],
-        core,
-      })
-    : {}
-    */
-
   const njsBalance = await njsAccount.getBalance()
   const balance = njsBalance.toLong()
 
@@ -269,7 +260,7 @@ async function buildAccountRaw({
     freshAddressPath,
     balance,
     blockHeight,
-    archived: true,
+    archived: false,
     index: accountIndex,
     operations,
     pendingOperations: [],
@@ -318,48 +309,3 @@ function buildOperationRaw({
     date: op.getDate().toISOString(),
   }
 }
-
-/*
-async function getBalanceByDaySinceOperation({
-  njsAccount,
-  njsOperation,
-  core,
-}: {
-  njsAccount: NJSAccount,
-  njsOperation: NJSOperation,
-  core: Object,
-}) {
-  const startDate = njsOperation.getDate()
-  // set end date to tomorrow
-  const endDate = new Date()
-  endDate.setDate(endDate.getDate() + 1)
-  const njsBalanceHistory = await njsAccount.getBalanceHistory(
-    startDate.toISOString(),
-    endDate.toISOString(),
-    core.TIME_PERIODS.DAY,
-  )
-  let i = 0
-  const res = {}
-  while (!areSameDay(startDate, endDate)) {
-    const dateSQLFormatted = startDate.toISOString().substr(0, 10)
-    const balanceDay = njsBalanceHistory[i]
-    if (balanceDay) {
-      res[dateSQLFormatted] = njsBalanceHistory[i].toLong()
-    } else {
-      console.warn(`No balance for day ${dateSQLFormatted}. This is a bug.`) // eslint-disable-line no-console
-    }
-    startDate.setDate(startDate.getDate() + 1)
-    i++
-  }
-
-  return res
-}
-
-function areSameDay(date1: Date, date2: Date): boolean {
-  return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
-  )
-}
-*/

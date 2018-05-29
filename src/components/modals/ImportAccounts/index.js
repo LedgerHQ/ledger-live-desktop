@@ -11,6 +11,8 @@ import type { T, Device } from 'types/common'
 
 import { getCurrentDevice } from 'reducers/devices'
 import { getAccounts } from 'reducers/accounts'
+import { addAccount } from 'actions/accounts'
+import { closeModal } from 'reducers/modals'
 
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
 import Box from 'components/base/Box'
@@ -50,9 +52,9 @@ const createSteps = ({ t }: { t: T }) => [
     id: 'finish',
     label: t('importAccounts:breadcrumb.finish'),
     component: StepFinish,
-    footer: StepChooseCurrencyFooter,
+    footer: null,
     onBack: null,
-    hideFooter: false,
+    hideFooter: true,
   },
 ]
 
@@ -85,6 +87,8 @@ export type StepProps = {
   isAppOpened: boolean,
   transitionTo: StepId => void,
   setState: any => void,
+  onClickImport: void => void,
+  onCloseModal: void => void,
 
   // scan process
   scannedAccounts: Account[],
@@ -98,6 +102,11 @@ const mapStateToProps = state => ({
   currentDevice: getCurrentDevice(state),
   existingAccounts: getAccounts(state),
 })
+
+const mapDispatchToProps = {
+  addAccount,
+  closeModal,
+}
 
 const INITIAL_STATE = {
   stepId: 'chooseCurrency',
@@ -119,6 +128,26 @@ class ImportAccounts extends PureComponent<Props, State> {
       nextState = { ...INITIAL_STATE }
     }
     this.setState(nextState)
+  }
+
+  handleClickImport = async () => {
+    const { addAccount } = this.props
+    const { scannedAccounts, checkedAccountsIds } = this.state
+    const accountsIdsMap = checkedAccountsIds.reduce((acc, cur) => {
+      acc[cur] = true
+      return acc
+    }, {})
+    const accountsToImport = scannedAccounts.filter(account => accountsIdsMap[account.id] === true)
+    for (let i = 0; i < accountsToImport.length; i++) {
+      await idleCallback()
+      addAccount(accountsToImport[i])
+    }
+    this.transitionTo('finish')
+  }
+
+  handleCloseModal = () => {
+    const { closeModal } = this.props
+    closeModal('importAccounts')
   }
 
   render() {
@@ -152,6 +181,8 @@ class ImportAccounts extends PureComponent<Props, State> {
       scanStatus,
       err,
       isAppOpened,
+      onClickImport: this.handleClickImport,
+      onCloseModal: this.handleCloseModal,
       transitionTo: this.transitionTo,
       setState: (...args) => this.setState(...args),
     }
@@ -182,4 +213,8 @@ class ImportAccounts extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps), translate())(ImportAccounts)
+export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(ImportAccounts)
+
+function idleCallback() {
+  return new Promise(resolve => window.requestIdleCallback(resolve))
+}

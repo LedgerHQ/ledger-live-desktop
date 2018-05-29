@@ -141,7 +141,7 @@ class StepImport extends PureComponent<StepProps> {
 
         <Box horizontal mt={2}>
           {['error', 'finished'].includes(scanStatus) && (
-            <Button small outline onClick={this.handleRetry}>
+            <Button ml="auto" small outline onClick={this.handleRetry}>
               <Box horizontal flow={2} align="center">
                 <IconExchange size={13} />
                 <span>{'retry'}</span>
@@ -156,8 +156,12 @@ class StepImport extends PureComponent<StepProps> {
 
 export default StepImport
 
-export const StepImportFooter = ({ scanStatus, transitionTo, t }: StepProps) => (
-  <Button primary disabled={scanStatus !== 'finished'} onClick={() => transitionTo('finish')}>
-    {t('common:next')}
+export const StepImportFooter = ({ scanStatus, onClickImport, checkedAccountsIds }: StepProps) => (
+  <Button
+    primary
+    disabled={scanStatus !== 'finished' || checkedAccountsIds.length === 0}
+    onClick={() => onClickImport()}
+  >
+    {'Import accounts'}
   </Button>
 )
