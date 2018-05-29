@@ -145,6 +145,7 @@ const AccountsList = connect(state => ({
   </Fragment>
 ))
 
-export default compose(connect(null, mapDispatchToProps, null, { pure: false }), translate())(
-  SideBar,
-)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps, null, { pure: false }),
+  translate(),
+)(SideBar)
