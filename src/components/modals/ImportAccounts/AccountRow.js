@@ -16,6 +16,7 @@ import IconCheck from 'icons/Check'
 type Props = {
   account: Account,
   isChecked: boolean,
+  isDisabled: boolean,
   onClick: Account => void,
   onAccountUpdate: Account => void,
 }
@@ -69,11 +70,11 @@ export default class AccountRow extends PureComponent<Props, State> {
   _input = null
 
   render() {
-    const { account, isChecked, onClick } = this.props
+    const { account, isChecked, onClick, isDisabled } = this.props
     const { isEditing, accountNameCopy } = this.state
 
     return (
-      <AccountRowContainer onClick={() => onClick(account)}>
+      <AccountRowContainer onClick={() => onClick(account)} isDisabled={isDisabled}>
         <CryptoCurrencyIcon currency={account.currency} size={16} color={account.currency.color} />
         <Box shrink grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {isEditing ? (
@@ -108,7 +109,7 @@ export default class AccountRow extends PureComponent<Props, State> {
           fontSize={4}
           color="grey"
         />
-        <Radio isChecked={isChecked} />
+        <Radio isChecked={isChecked || isDisabled} />
       </AccountRowContainer>
     )
   }
@@ -123,9 +124,12 @@ const AccountRowContainer = styled(Box).attrs({
 })`
   height: 48px;
   border-radius: 4px;
-  cursor: pointer;
+
+  opacity: ${p => (p.isDisabled ? 0.5 : 1)};
+  pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
 
   &:hover {
+    cursor: pointer;
     background-color: ${p => darken(p.theme.colors.lightGrey, 0.015)};
   }
 

@@ -102,7 +102,7 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   render() {
-    const { scanStatus, err, scannedAccounts, checkedAccountsIds } = this.props
+    const { scanStatus, err, scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
 
     return (
       <Box>
@@ -111,11 +111,14 @@ class StepImport extends PureComponent<StepProps> {
         <Box flow={2}>
           {scannedAccounts.map(account => {
             const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
+            const existingAccount = existingAccounts.find(a => a.id === account.id)
+            const isDisabled = existingAccount !== undefined
             return (
               <AccountRow
                 key={account.id}
-                account={account}
+                account={existingAccount || account}
                 isChecked={isChecked}
+                isDisabled={isDisabled}
                 onClick={this.handleToggleAccount}
                 onAccountUpdate={this.handleAccountUpdate}
               />
@@ -153,4 +156,8 @@ class StepImport extends PureComponent<StepProps> {
 
 export default StepImport
 
-export const StepImportFooter = (props: StepProps) => <div>noetuhnoethunot</div>
+export const StepImportFooter = ({ scanStatus, transitionTo, t }: StepProps) => (
+  <Button primary disabled={scanStatus !== 'finished'} onClick={() => transitionTo('finish')}>
+    {t('common:next')}
+  </Button>
+)
