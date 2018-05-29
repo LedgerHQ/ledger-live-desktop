@@ -17,6 +17,7 @@ const AccountField = ({ onChange, value, t }: *) => (
   </Box>
 )
 
+// TODO we should use isRecipientValid & provide a feedback to user
 const RecipientField = ({ bridge, account, transaction, onChangeTransaction, t }: *) => (
   <Box flow={1}>
     <Label>
@@ -26,9 +27,8 @@ const RecipientField = ({ bridge, account, transaction, onChangeTransaction, t }
     <RecipientAddress
       withQrCode
       value={bridge.getTransactionRecipient(account, transaction)}
-      onChange={(recipient, { amount, currency }) => {
-        console.log(recipient, amount, currency, account.currency)
-        // TODO we should use isRecipientValid & provide a feedback to user
+      onChange={(recipient, maybeExtra) => {
+        const { amount, currency } = maybeExtra || {}
         if (currency && currency.scheme !== account.currency.scheme) return false
         let t = transaction
         if (amount) {

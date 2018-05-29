@@ -45,7 +45,7 @@ const BackgroundLayer = styled(Box)`
 type Props = {
   value: string,
   // return false if it can't be changed (invalid info)
-  onChange: (string, { amount?: number, currency?: CryptoCurrency }) => ?boolean,
+  onChange: (string, ?{ amount?: number, currency?: CryptoCurrency }) => ?boolean,
   withQrCode: boolean,
 }
 
