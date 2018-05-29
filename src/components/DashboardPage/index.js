@@ -1,25 +1,19 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
-import { ipcRenderer } from 'electron'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import chunk from 'lodash/chunk'
 
-import {
-  formatCurrencyUnit,
-  getFiatCurrencyByTicker,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
-
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import { colors } from 'styles/theme'
 
 import { getVisibleAccounts } from 'reducers/accounts'
-import { getCounterValueCode, localeSelector } from 'reducers/settings'
+import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
 
 import { updateOrderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
@@ -37,7 +31,7 @@ import AccountsOrder from './AccountsOrder'
 
 const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
-  counterValue: getCounterValueCode(state),
+  counterValue: counterValueCurrencySelector(state),
   locale: localeSelector(state),
 })
 
@@ -51,8 +45,7 @@ type Props = {
   t: T,
   accounts: Account[],
   push: Function,
-  counterValue: string,
-  locale: string,
+  counterValue: Currency,
 }
 
 type State = {
@@ -83,30 +76,6 @@ class DashboardPage extends PureComponent<Props, State> {
     if (nextProps.accounts !== this.props.accounts) {
       this.setState({
         accountsChunk: getAccountsChunk(nextProps.accounts),
-      })
-    }
-  }
-
-  handleCalculateBalance = data => {
-    const { counterValue, locale } = this.props
-
-    if (process.platform === 'darwin' && this._cacheBalance !== data.totalBalance) {
-      this._cacheBalance = data.totalBalance
-
-      // TODO abstract this out in a component
-      ipcRenderer.send('touch-bar-update', {
-        text: 'Total balance',
-        color: colors.wallet,
-        balance: {
-          counterValue: formatCurrencyUnit(
-            getFiatCurrencyByTicker(counterValue).units[0],
-            data.totalBalance,
-            {
-              showCode: true,
-              locale,
-            },
-          ),
-        },
       })
     }
   }
@@ -159,7 +128,6 @@ class DashboardPage extends PureComponent<Props, State> {
         {totalAccounts > 0 && (
           <Fragment>
             <BalanceSummary
-              onCalculate={this.handleCalculateBalance}
               counterValue={counterValue}
               chartId="dashboard-chart"
               chartColor={colors.wallet}

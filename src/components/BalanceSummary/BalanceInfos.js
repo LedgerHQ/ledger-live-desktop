@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import type { Unit } from '@ledgerhq/live-common/lib/types'
+import type { Unit, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
@@ -27,13 +27,12 @@ type BalanceSinceProps = {
 
 type BalanceTotalProps = {
   children?: any,
-  counterValue?: string,
+  unit: Unit,
   totalBalance: number,
-  unit?: Unit,
 }
 
 type Props = {
-  counterValue: string,
+  counterValue: Currency,
 } & BalanceSinceProps
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
@@ -60,7 +59,7 @@ export function BalanceSinceDiff(props: Props) {
       <FormattedVal
         color="dark"
         animateTicker
-        fiat={counterValue}
+        unit={counterValue.units[0]}
         fontSize={7}
         showCode
         val={totalBalance - sinceBalance}
@@ -72,16 +71,15 @@ export function BalanceSinceDiff(props: Props) {
 }
 
 export function BalanceTotal(props: BalanceTotalProps) {
-  const { counterValue, totalBalance, children, unit } = props
+  const { unit, totalBalance, children } = props
   return (
     <Box grow {...props}>
       <FormattedVal
         animateTicker
         color="dark"
-        fiat={counterValue}
+        unit={unit}
         fontSize={8}
         showCode
-        unit={unit}
         val={totalBalance}
       />
       {children}
@@ -90,7 +88,6 @@ export function BalanceTotal(props: BalanceTotalProps) {
 }
 
 BalanceTotal.defaultProps = {
-  counterValue: undefined,
   children: null,
   unit: undefined,
 }
@@ -99,7 +96,7 @@ function BalanceInfos(props: Props) {
   const { t, totalBalance, since, sinceBalance, refBalance, counterValue } = props
   return (
     <Box horizontal alignItems="center" flow={7}>
-      <BalanceTotal counterValue={counterValue} totalBalance={totalBalance}>
+      <BalanceTotal unit={counterValue.units[0]} totalBalance={totalBalance}>
         <Sub>{t('dashboard:totalBalance')}</Sub>
       </BalanceTotal>
       <BalanceSincePercent

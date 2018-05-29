@@ -38,7 +38,7 @@ function StepImport(props: Props) {
               color="warmGrey"
               fontSize={6}
               showCode
-              fiat={account.currency.ticker}
+              unit={account.currency.units[0]}
               val={account.balance}
             />
           </Box>

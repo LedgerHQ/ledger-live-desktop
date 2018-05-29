@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components FormattedVal renders a fiat 1`] = `
-<div
-  className="k45ou1-0 iqaJGf e345n3-0 eoitYS"
-  color="#66be54"
->
-  20.00
-</div>
-`;
-
 exports[`components FormattedVal renders a formatted val 1`] = `
 <div
   className="k45ou1-0 iqaJGf e345n3-0 eoitYS"

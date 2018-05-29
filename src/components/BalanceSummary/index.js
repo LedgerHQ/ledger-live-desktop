@@ -1,8 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
-import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
+import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
@@ -10,8 +9,7 @@ import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
 
 type Props = {
-  onCalculate: Function,
-  counterValue: string,
+  counterValue: Currency,
   chartColor: string,
   chartId: string,
   accounts: Account[],
@@ -31,20 +29,13 @@ const BalanceSummary = ({
   chartId,
   counterValue,
   daysCount,
-  onCalculate,
   renderHeader,
   selectedTime,
 }: Props) => {
-  const currency = getFiatCurrencyByTicker(counterValue)
   const account = accounts.length === 1 ? accounts[0] : undefined
   return (
     <Card p={0} py={6}>
-      <CalculateBalance
-        accounts={accounts}
-        counterValue={counterValue}
-        daysCount={daysCount}
-        onCalculate={onCalculate}
-      >
+      <CalculateBalance accounts={accounts} daysCount={daysCount}>
         {({ isAvailable, balanceHistory, balanceStart, balanceEnd }) =>
           !isAvailable ? null : (
             <Fragment>
@@ -66,7 +57,7 @@ const BalanceSummary = ({
                   color={chartColor}
                   data={balanceHistory}
                   height={250}
-                  currency={currency}
+                  currency={counterValue}
                   tickXScale={selectedTime}
                   renderTooltip={
                     isAvailable && !account
@@ -77,7 +68,7 @@ const BalanceSummary = ({
                               fontSize={5}
                               color="dark"
                               showCode
-                              fiat={counterValue}
+                              unit={counterValue.units[0]}
                               val={d.value}
                             />
                             <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
