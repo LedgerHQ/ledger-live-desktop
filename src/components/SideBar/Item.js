@@ -32,23 +32,35 @@ const Container = styled(Tabbable).attrs({
   ff: 'Open Sans|SemiBold',
   flow: 3,
   horizontal: true,
-  px: 3,
+  pl: 3,
 })`
   cursor: pointer;
   color: ${p => p.theme.colors.dark};
-  opacity: ${p => (p.isActive ? 1 : 0.4)};
   background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
   height: ${p => (p.big ? 50 : 36)}px;
   outline: none;
 
+  .desaturate {
+    opacity: ${p => (p.isActive ? 1 : 0.4)};
+  }
+
   &:hover,
   &:focus {
-    opacity: 1;
+    .desaturate {
+      opacity: 1;
+    }
 
     svg {
       color: ${p => p.theme.colors[p.iconActiveColor] || p.iconActiveColor};
     }
   }
+`
+
+const Bullet = styled.div`
+  background: ${p => p.theme.colors.wallet};
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
 `
 
 type Props = {
@@ -59,6 +71,7 @@ type Props = {
   desc?: string | null,
   icon?: Node | null,
   big?: boolean,
+  highlight?: boolean,
   location: Location,
   push: Function,
   openModal: Function,
@@ -75,6 +88,7 @@ function Item({
   location,
   modal,
   openModal,
+  highlight,
 }: Props) {
   const { pathname } = location
   const isActive = linkTo
@@ -99,8 +113,12 @@ function Item({
             : void 0
       }
     >
-      {icon && <Box color={isActive ? iconActiveColor : void 0}>{icon}</Box>}
-      <Box justifyContent="center">
+      {icon && (
+        <Box color={isActive ? iconActiveColor : void 0} className="desaturate">
+          {icon}
+        </Box>
+      )}
+      <Box justifyContent="center" className="desaturate">
         <Text fontSize={4}>{children}</Text>
         {desc && (
           <Box color="graphite" fontSize={3}>
@@ -108,6 +126,11 @@ function Item({
           </Box>
         )}
       </Box>
+      {highlight && (
+        <Box flex="1" align="flex-end" pr={2}>
+          <Bullet />
+        </Box>
+      )}
     </Container>
   )
 }

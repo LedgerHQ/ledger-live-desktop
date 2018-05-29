@@ -16,6 +16,8 @@ import { radii } from 'styles/theme'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
+import UpdateIcon from 'icons/Update'
+
 import type { T } from 'types/common'
 
 type Props = {
@@ -29,7 +31,7 @@ const mapStateToProps = (state: State) => ({
 })
 
 const Container = styled(Box).attrs({
-  py: 1,
+  py: '8px',
   px: 3,
   bg: 'wallet',
   color: 'white',
@@ -39,6 +41,11 @@ const Container = styled(Box).attrs({
 })`
   border-radius: ${radii[1]}px;
 `
+
+const NotifText = styled(Text).attrs({
+  ff: 'Open Sans|SemiBold',
+  fontSize: 4,
+})``
 
 class UpdateNotifier extends PureComponent<Props> {
   renderStatus() {
@@ -53,15 +60,16 @@ class UpdateNotifier extends PureComponent<Props> {
         return null
       case 'downloaded':
         return (
-          <Box horizontal flow={2}>
-            <Text fontWeight="bold">{t('update:newVersionReady')}</Text>
+          <Box horizontal flow={3}>
+            <UpdateIcon size={16} />
+            <NotifText>{t('update:newVersionReady')}</NotifText>
             <Box ml="auto">
-              <Text
+              <NotifText
                 style={{ cursor: 'pointer', textDecoration: 'underline' }}
                 onClick={() => sendEvent('msg', 'updater.quitAndInstall')}
               >
                 {t('update:relaunch')}
-              </Text>
+              </NotifText>
             </Box>
           </Box>
         )
