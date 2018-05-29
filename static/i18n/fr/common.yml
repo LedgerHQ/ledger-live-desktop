@@ -2,6 +2,7 @@
 ok: Ok
 yes: true
 no: false
+apply: Apply
 confirm: Confirmer
 cancel: Annuler
 continue: Continue
