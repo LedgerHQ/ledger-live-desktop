@@ -64,6 +64,8 @@ export default class AccountRow extends PureComponent<Props, State> {
 
   handleChangeName = accountNameCopy => this.setState({ accountNameCopy })
 
+  handleReset = () => this.setState({ isEditing: false, accountNameCopy: '' })
+
   _input = null
 
   render() {
@@ -81,6 +83,7 @@ export default class AccountRow extends PureComponent<Props, State> {
               onChange={this.handleChangeName}
               onClick={this.handlePreventSubmit}
               onEnter={this.handleSubmitName}
+              onEsc={this.handleReset}
               renderRight={
                 <InputRight onClick={this.handleSubmitName}>
                   <IconCheck size={16} />

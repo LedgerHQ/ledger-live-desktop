@@ -1,9 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import keyBy from 'lodash/keyBy'
-
-import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -16,25 +13,7 @@ import AccountRow from '../AccountRow'
 
 import type { StepProps } from '../index'
 
-type Status = 'scanning' | 'error' | 'finished'
-
-type State = {
-  status: Status,
-  err: ?Error,
-  scannedAccounts: Account[],
-  checkedAccountsIds: string[],
-}
-
-const INITIAL_STATE = {
-  status: 'scanning',
-  err: null,
-  scannedAccounts: [],
-  checkedAccountsIds: [],
-}
-
-class StepImport extends PureComponent<StepProps, State> {
-  state = INITIAL_STATE
-
+class StepImport extends PureComponent<StepProps> {
   componentDidMount() {
     console.log(`starting import...`)
     this.startScanAccountsDevice()
@@ -48,30 +27,37 @@ class StepImport extends PureComponent<StepProps, State> {
   }
 
   startScanAccountsDevice() {
-    const { currency } = this.props
+    const { currency, currentDevice, setState } = this.props
+    try {
+      if (!currency) {
+        throw new Error('No currency to scan')
+      }
 
-    if (!currency) {
-      throw new Error('No currency to scan')
+      if (!currentDevice) {
+        throw new Error('No device')
+      }
+
+      const bridge = getBridgeForCurrency(currency)
+
+      // TODO: use the real device
+      const devicePath = currentDevice.path
+
+      setState({ scanStatus: 'scanning' })
+
+      this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
+        next: account => {
+          const { scannedAccounts } = this.props
+          const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
+          if (!hasAlreadyBeenScanned) {
+            setState({ scannedAccounts: [...scannedAccounts, account] })
+          }
+        },
+        complete: () => setState({ scanStatus: 'finished' }),
+        error: err => setState({ scanStatus: 'error', err }),
+      })
+    } catch (err) {
+      setState({ scanStatus: 'error', err })
     }
-
-    const bridge = getBridgeForCurrency(currency)
-
-    // TODO: use the real device
-    const devicePath = ''
-
-    this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
-      next: account => {
-        const { scannedAccounts } = this.state
-        const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
-        if (!hasAlreadyBeenScanned) {
-          this.setState({ scannedAccounts: [...scannedAccounts, account] })
-        }
-      },
-      complete: () => {
-        this.setState({ status: 'finished' })
-      },
-      error: err => this.setState({ status: 'error', err }),
-    })
   }
 
   handleRetry = () => {
@@ -79,23 +65,33 @@ class StepImport extends PureComponent<StepProps, State> {
       this.scanSubscription.unsubscribe()
       this.scanSubscription = null
     }
-    this.setState(INITIAL_STATE)
+    this.handleResetState()
     this.startScanAccountsDevice()
   }
 
+  handleResetState = () => {
+    const { setState } = this.props
+    setState({
+      scanStatus: 'idle',
+      err: null,
+      scannedAccounts: [],
+      checkedAccountsIds: [],
+    })
+  }
+
   handleToggleAccount = account => {
-    const { checkedAccountsIds } = this.state
+    const { checkedAccountsIds, setState } = this.props
     const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
     if (isChecked) {
-      this.setState({ checkedAccountsIds: checkedAccountsIds.filter(id => id !== account.id) })
+      setState({ checkedAccountsIds: checkedAccountsIds.filter(id => id !== account.id) })
     } else {
-      this.setState({ checkedAccountsIds: [...checkedAccountsIds, account.id] })
+      setState({ checkedAccountsIds: [...checkedAccountsIds, account.id] })
     }
   }
 
   handleAccountUpdate = updatedAccount => {
-    const { scannedAccounts } = this.state
-    this.setState({
+    const { scannedAccounts, setState } = this.props
+    setState({
       scannedAccounts: scannedAccounts.map(account => {
         if (account.id !== updatedAccount.id) {
           return account
@@ -106,11 +102,11 @@ class StepImport extends PureComponent<StepProps, State> {
   }
 
   render() {
-    const { status, err, scannedAccounts, checkedAccountsIds } = this.state
+    const { scanStatus, err, scannedAccounts, checkedAccountsIds } = this.props
 
     return (
       <Box>
-        {err && <Box shrink>{err.toString()}</Box>}
+        {err && <Box shrink>{err.message}</Box>}
 
         <Box flow={2}>
           {scannedAccounts.map(account => {
@@ -125,7 +121,7 @@ class StepImport extends PureComponent<StepProps, State> {
               />
             )
           })}
-          {status === 'scanning' && (
+          {scanStatus === 'scanning' && (
             <Box
               horizontal
               bg="lightGrey"
@@ -141,7 +137,7 @@ class StepImport extends PureComponent<StepProps, State> {
         </Box>
 
         <Box horizontal mt={2}>
-          {['error', 'finished'].includes(status) && (
+          {['error', 'finished'].includes(scanStatus) && (
             <Button small outline onClick={this.handleRetry}>
               <Box horizontal flow={2} align="center">
                 <IconExchange size={13} />
@@ -157,8 +153,4 @@ class StepImport extends PureComponent<StepProps, State> {
 
 export default StepImport
 
-export const StepImportFooter = (props: StepProps) => {
-  return (
-    <div>noetuhnoethunot</div>
-  )
-}
+export const StepImportFooter = (props: StepProps) => <div>noetuhnoethunot</div>

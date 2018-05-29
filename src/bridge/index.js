@@ -1,8 +1,5 @@
 // @flow
 import type { Currency } from '@ledgerhq/live-common/lib/types'
-
-import makeMockBridge from 'bridge/makeMockBridge'
-
 import { WalletBridge } from './types'
 import LibcoreBridge from './LibcoreBridge'
 import EthereumJSBridge from './EthereumJSBridge'
@@ -15,6 +12,5 @@ export const getBridgeForCurrency = (currency: Currency): WalletBridge<any> => {
   if (currency.id === 'ripple') {
     return RippleJSBridge // polyfill js
   }
-  return makeMockBridge({})
   return LibcoreBridge // libcore for the rest
 }

@@ -5,11 +5,12 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T, Device } from 'types/common'
 
 import { getCurrentDevice } from 'reducers/devices'
+import { getAccounts } from 'reducers/accounts'
 
 import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
 import Box from 'components/base/Box'
@@ -19,8 +20,6 @@ import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-ch
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepImport, { StepImportFooter } from './steps/03-step-import'
 import StepFinish from './steps/04-step-finish'
-
-const { getCryptoCurrencyById } = require('@ledgerhq/live-common/lib/helpers/currencies')
 
 const createSteps = ({ t }: { t: T }) => [
   {
@@ -60,9 +59,24 @@ const createSteps = ({ t }: { t: T }) => [
 type Props = {
   t: T,
   currentDevice: ?Device,
+  existingAccounts: Account[],
 }
 
 type StepId = 'chooseCurrency' | 'connectDevice' | 'import' | 'finish'
+
+type ScanStatus = 'idle' | 'scanning' | 'error' | 'finished'
+
+type State = {
+  stepId: StepId,
+  isAppOpened: boolean,
+  currency: ?Currency,
+
+  // scan process
+  scannedAccounts: Account[],
+  checkedAccountsIds: string[],
+  scanStatus: ScanStatus,
+  err: ?Error,
+}
 
 export type StepProps = {
   t: T,
@@ -71,22 +85,26 @@ export type StepProps = {
   isAppOpened: boolean,
   transitionTo: StepId => void,
   setState: any => void,
-}
 
-type State = {
-  stepId: StepId,
-  isAppOpened: boolean,
-  currency: ?Currency,
+  // scan process
+  scannedAccounts: Account[],
+  existingAccounts: Account[],
+  checkedAccountsIds: string[],
+  scanStatus: ScanStatus,
+  err: ?Error,
 }
 
 const mapStateToProps = state => ({
   currentDevice: getCurrentDevice(state),
+  existingAccounts: getAccounts(state),
 })
 
 const INITIAL_STATE = {
-  stepId: 'import',
+  stepId: 'chooseCurrency',
   isAppOpened: false,
-  currency: getCryptoCurrencyById('bitcoin'),
+  currency: null,
+  scannedAccounts: [],
+  checkedAccountsIds: [],
 }
 
 class ImportAccounts extends PureComponent<Props, State> {
@@ -104,8 +122,16 @@ class ImportAccounts extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, currentDevice } = this.props
-    const { stepId, currency, isAppOpened } = this.state
+    const { t, currentDevice, existingAccounts } = this.props
+    const {
+      stepId,
+      currency,
+      isAppOpened,
+      scannedAccounts,
+      checkedAccountsIds,
+      scanStatus,
+      err,
+    } = this.state
 
     const stepIndex = this.STEPS.findIndex(s => s.id === stepId)
     const step = this.STEPS[stepIndex]
@@ -120,6 +146,11 @@ class ImportAccounts extends PureComponent<Props, State> {
       t,
       currency,
       currentDevice,
+      existingAccounts,
+      scannedAccounts,
+      checkedAccountsIds,
+      scanStatus,
+      err,
       isAppOpened,
       transitionTo: this.transitionTo,
       setState: (...args) => this.setState(...args),

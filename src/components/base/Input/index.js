@@ -69,6 +69,7 @@ type Props = {
   onBlur: Function,
   onChange?: Function,
   onEnter?: Function,
+  onEsc?: Function,
   onFocus: Function,
   renderLeft?: any,
   renderRight?: any,
@@ -107,6 +108,11 @@ class Input extends PureComponent<Props, State> {
       const { onEnter } = this.props
       if (onEnter) {
         onEnter(e)
+      }
+    } else if (e.which === 27) {
+      const { onEsc } = this.props
+      if (onEsc) {
+        onEsc(e)
       }
     }
   }

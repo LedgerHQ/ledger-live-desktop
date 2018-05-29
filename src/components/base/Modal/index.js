@@ -164,6 +164,7 @@ export class Modal extends Component<Props> {
         isOpened={isOpened}
         onClose={onClose}
         onHide={onHide}
+        closeOnEsc={!preventBackdropClick}
         motionStyle={(spring, isVisible) => ({
           opacity: spring(isVisible ? 1 : 0, springConfig),
           scale: spring(isVisible ? 1 : 0.95, springConfig),
