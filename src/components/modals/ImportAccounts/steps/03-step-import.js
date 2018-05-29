@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -15,16 +16,16 @@ import type { StepProps } from '../index'
 
 class StepImport extends PureComponent<StepProps> {
   componentDidMount() {
-    console.log(`starting import...`)
     this.startScanAccountsDevice()
   }
 
   componentWillUnmount() {
-    console.log(`stopping import...`)
     if (this.scanSubscription) {
       this.scanSubscription.unsubscribe()
     }
   }
+
+  scanSubscription = null
 
   startScanAccountsDevice() {
     const { currency, currentDevice, setState } = this.props
@@ -79,7 +80,7 @@ class StepImport extends PureComponent<StepProps> {
     })
   }
 
-  handleToggleAccount = account => {
+  handleToggleAccount = (account: Account) => {
     const { checkedAccountsIds, setState } = this.props
     const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
     if (isChecked) {
@@ -89,7 +90,7 @@ class StepImport extends PureComponent<StepProps> {
     }
   }
 
-  handleAccountUpdate = updatedAccount => {
+  handleAccountUpdate = (updatedAccount: Account) => {
     const { scannedAccounts, setState } = this.props
     setState({
       scannedAccounts: scannedAccounts.map(account => {

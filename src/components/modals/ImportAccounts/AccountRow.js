@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { darken } from 'styles/helpers'
 
@@ -32,20 +33,20 @@ export default class AccountRow extends PureComponent<Props, State> {
     accountNameCopy: '',
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     const startedEditing = !prevState.isEditing && this.state.isEditing
     if (startedEditing) {
-      this._input.handleSelectEverything()
+      this._input && this._input.handleSelectEverything()
     }
   }
 
-  handleEditClick = e => {
+  handleEditClick = (e: SyntheticEvent<any>) => {
     this.handlePreventSubmit(e)
     const { account } = this.props
     this.setState({ isEditing: true, accountNameCopy: account.name })
   }
 
-  handleSubmitName = e => {
+  handleSubmitName = (e: SyntheticEvent<any>) => {
     this.handlePreventSubmit(e)
     const { account, onAccountUpdate, isChecked, onClick } = this.props
     const { accountNameCopy } = this.state
@@ -57,13 +58,13 @@ export default class AccountRow extends PureComponent<Props, State> {
     }
   }
 
-  handlePreventSubmit = e => {
+  handlePreventSubmit = (e: SyntheticEvent<any>) => {
     // prevent account row to be submitted
     e.preventDefault()
     e.stopPropagation()
   }
 
-  handleChangeName = accountNameCopy => this.setState({ accountNameCopy })
+  handleChangeName = (accountNameCopy: string) => this.setState({ accountNameCopy })
 
   handleReset = () => this.setState({ isEditing: false, accountNameCopy: '' })
 

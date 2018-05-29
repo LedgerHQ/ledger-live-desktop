@@ -6,6 +6,8 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import IconCheckCircle from 'icons/CheckCircle'
 
+import type { StepProps } from '../index'
+
 function StepFinish({ onCloseModal }: StepProps) {
   return (
     <Box align="center" py={6}>

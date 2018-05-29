@@ -79,7 +79,11 @@ class SideBar extends PureComponent<Props> {
           <Box flow={4}>
             <CapsSubtitle>{t('sidebar:menu')}</CapsSubtitle>
             <Box px={4} flow={2}>
-              <Item icon={<IconPieChart size={16} />} linkTo="/" highlight={updateStatus === 'downloaded'}>
+              <Item
+                icon={<IconPieChart size={16} />}
+                linkTo="/"
+                highlight={updateStatus === 'downloaded'}
+              >
                 {t('dashboard:title')}
               </Item>
               <Item icon={<IconSend size={16} />} modal={MODAL_SEND}>

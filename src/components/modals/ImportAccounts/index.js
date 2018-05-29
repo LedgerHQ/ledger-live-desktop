@@ -62,6 +62,8 @@ type Props = {
   t: T,
   currentDevice: ?Device,
   existingAccounts: Account[],
+  closeModal: string => void,
+  addAccount: Account => void,
 }
 
 type StepId = 'chooseCurrency' | 'connectDevice' | 'import' | 'finish'
@@ -87,7 +89,7 @@ export type StepProps = {
   isAppOpened: boolean,
   transitionTo: StepId => void,
   setState: any => void,
-  onClickImport: void => void,
+  onClickImport: void => Promise<void>,
   onCloseModal: void => void,
 
   // scan process
@@ -114,6 +116,8 @@ const INITIAL_STATE = {
   currency: null,
   scannedAccounts: [],
   checkedAccountsIds: [],
+  err: null,
+  scanStatus: 'idle',
 }
 
 class ImportAccounts extends PureComponent<Props, State> {

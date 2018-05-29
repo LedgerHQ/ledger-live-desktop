@@ -66,8 +66,4 @@ function Radio(props: Props) {
   return <Base {...props} isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} />
 }
 
-Radio.defaultProps = {
-  onChange: null,
-}
-
 export default Radio

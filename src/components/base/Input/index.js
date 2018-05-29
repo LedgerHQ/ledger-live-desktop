@@ -102,7 +102,7 @@ class Input extends PureComponent<Props, State> {
     }
   }
 
-  handleKeyDown = (e: SyntheticInputEvent<HTMLInputElement>) => {
+  handleKeyDown = (e: SyntheticKeyboardEvent<HTMLInputElement>) => {
     // handle enter key
     if (e.which === 13) {
       const { onEnter } = this.props
@@ -137,8 +137,8 @@ class Input extends PureComponent<Props, State> {
   }
 
   handleSelectEverything = () => {
-    this._input.setSelectionRange(0, this._input.value.length)
-    this._input.focus()
+    this._input && this._input.setSelectionRange(0, this._input.value.length)
+    this._input && this._input.focus()
   }
 
   _input = null

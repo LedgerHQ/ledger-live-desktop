@@ -6,7 +6,7 @@ import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 type Props = {
   currency: CryptoCurrency,
   size: number,
-  color: string,
+  color?: string,
 }
 
 class CryptoCurrencyIcon extends PureComponent<Props> {
