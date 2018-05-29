@@ -17,8 +17,10 @@ import Breadcrumb from 'components/Breadcrumb'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
-import StepImport from './steps/03-step-import'
+import StepImport, { StepImportFooter } from './steps/03-step-import'
 import StepFinish from './steps/04-step-finish'
+
+const { getCryptoCurrencyById } = require('@ledgerhq/live-common/lib/helpers/currencies')
 
 const createSteps = ({ t }: { t: T }) => [
   {
@@ -41,9 +43,9 @@ const createSteps = ({ t }: { t: T }) => [
     id: 'import',
     label: t('importAccounts:breadcrumb.import'),
     component: StepImport,
-    footer: null,
+    footer: StepImportFooter,
     onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
-    hideFooter: true,
+    hideFooter: false,
   },
   {
     id: 'finish',

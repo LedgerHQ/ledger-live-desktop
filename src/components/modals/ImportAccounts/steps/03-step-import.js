@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
+import keyBy from 'lodash/keyBy'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
@@ -9,6 +9,10 @@ import { getBridgeForCurrency } from 'bridge'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
+import Spinner from 'components/base/Spinner'
+import IconExchange from 'icons/Exchange'
+
+import AccountRow from '../AccountRow'
 
 import type { StepProps } from '../index'
 
@@ -18,12 +22,14 @@ type State = {
   status: Status,
   err: ?Error,
   scannedAccounts: Account[],
+  checkedAccountsIds: string[],
 }
 
 const INITIAL_STATE = {
   status: 'scanning',
   err: null,
   scannedAccounts: [],
+  checkedAccountsIds: [],
 }
 
 class StepImport extends PureComponent<StepProps, State> {
@@ -36,6 +42,9 @@ class StepImport extends PureComponent<StepProps, State> {
 
   componentWillUnmount() {
     console.log(`stopping import...`)
+    if (this.scanSubscription) {
+      this.scanSubscription.unsubscribe()
+    }
   }
 
   startScanAccountsDevice() {
@@ -66,42 +75,90 @@ class StepImport extends PureComponent<StepProps, State> {
   }
 
   handleRetry = () => {
+    if (this.scanSubscription) {
+      this.scanSubscription.unsubscribe()
+      this.scanSubscription = null
+    }
     this.setState(INITIAL_STATE)
     this.startScanAccountsDevice()
   }
 
+  handleToggleAccount = account => {
+    const { checkedAccountsIds } = this.state
+    const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
+    if (isChecked) {
+      this.setState({ checkedAccountsIds: checkedAccountsIds.filter(id => id !== account.id) })
+    } else {
+      this.setState({ checkedAccountsIds: [...checkedAccountsIds, account.id] })
+    }
+  }
+
+  handleAccountUpdate = updatedAccount => {
+    const { scannedAccounts } = this.state
+    this.setState({
+      scannedAccounts: scannedAccounts.map(account => {
+        if (account.id !== updatedAccount.id) {
+          return account
+        }
+        return updatedAccount
+      }),
+    })
+  }
+
   render() {
-    const { status, err, scannedAccounts } = this.state
+    const { status, err, scannedAccounts, checkedAccountsIds } = this.state
 
     return (
       <Box>
-        {status === 'scanning' && <Box>{'Scanning in progress...'}</Box>}
-        {status === 'finished' && <Box>{'Finished'}</Box>}
-        {['error', 'finished'].includes(status) && (
-          <Button outline onClick={this.handleRetry}>
-            {'retry'}
-          </Button>
-        )}
         {err && <Box shrink>{err.toString()}</Box>}
 
-        <AccountsList>
-          {scannedAccounts.map(account => <AccountRow key={account.id} account={account} />)}
-        </AccountsList>
+        <Box flow={2}>
+          {scannedAccounts.map(account => {
+            const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
+            return (
+              <AccountRow
+                key={account.id}
+                account={account}
+                isChecked={isChecked}
+                onClick={this.handleToggleAccount}
+                onAccountUpdate={this.handleAccountUpdate}
+              />
+            )
+          })}
+          {status === 'scanning' && (
+            <Box
+              horizontal
+              bg="lightGrey"
+              borderRadius={3}
+              px={3}
+              align="center"
+              justify="center"
+              style={{ height: 48 }}
+            >
+              <Spinner color="grey" size={24} />
+            </Box>
+          )}
+        </Box>
+
+        <Box horizontal mt={2}>
+          {['error', 'finished'].includes(status) && (
+            <Button small outline onClick={this.handleRetry}>
+              <Box horizontal flow={2} align="center">
+                <IconExchange size={13} />
+                <span>{'retry'}</span>
+              </Box>
+            </Button>
+          )}
+        </Box>
       </Box>
     )
   }
 }
 
-const AccountsList = styled(Box).attrs({
-  flow: 2,
-})``
-
-const AccountRowContainer = styled(Box).attrs({
-  horizontal: true,
-})``
-
-const AccountRow = ({ account }: { account: Account }) => (
-  <AccountRowContainer>{account.name}</AccountRowContainer>
-)
-
 export default StepImport
+
+export const StepImportFooter = (props: StepProps) => {
+  return (
+    <div>noetuhnoethunot</div>
+  )
+}
