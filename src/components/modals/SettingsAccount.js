@@ -1,59 +1,47 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import get from 'lodash/get'
-import { push } from 'react-router-redux'
-import type { Account, Unit } from '@ledgerhq/live-common/lib/types'
+import { translate } from 'react-i18next'
 
+import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
+import type { T } from 'types/common'
 import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
-import { updateAccount, removeAccount } from 'actions/accounts'
-import { setDataModal, closeModal } from 'reducers/modals'
+import { updateAccount } from 'actions/accounts'
+import { setDataModal } from 'reducers/modals'
 
+import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import Input from 'components/base/Input'
+import Input, { ErrorMessageInput } from 'components/base/Input'
 import Select from 'components/base/Select/index'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
-import Label from 'components/base/Label'
-
-import IconEdit from 'icons/Edit'
 
 type State = {
   accountName: string | null,
-  minConfirmations: number | null,
-  editName: boolean,
-  nameHovered: boolean,
-  editUnit: boolean,
+  accountUnit: Unit | null,
+  accountNameError: boolean,
 }
 
 type Props = {
-  closeModal: Function,
-  push: Function,
-  removeAccount: Function,
   setDataModal: Function,
   updateAccount: Function,
+  t: T,
 }
 
 const mapDispatchToProps = {
-  closeModal,
-  push,
-  removeAccount,
   setDataModal,
   updateAccount,
 }
 
 const defaultState = {
-  editName: false,
   accountName: null,
-  minConfirmations: null,
-  nameHovered: false,
-  editUnit: false,
-}
-
-function hasNoOperations(account: Account) {
-  return get(account, 'operations.length', 0) === 0
+  accountUnit: null,
+  accountNameError: false,
 }
 
 class SettingsAccount extends PureComponent<Props, State> {
@@ -62,9 +50,9 @@ class SettingsAccount extends PureComponent<Props, State> {
   }
 
   getAccount(data: Object) {
-    const { accountName, minConfirmations } = this.state
-
+    const { accountName } = this.state
     const account = get(data, 'account', {})
+
     return {
       ...account,
       ...(accountName !== null
@@ -72,168 +60,101 @@ class SettingsAccount extends PureComponent<Props, State> {
             name: accountName,
           }
         : {}),
-      settings: {
-        ...account.settings,
-        minConfirmations: minConfirmations || account.minConfirmations,
-      },
     }
   }
-
-  handleHoveredName = (state: boolean) => () =>
-    this.setState({
-      nameHovered: state,
-    })
-
-  handleChangeMinConfirmations = account => minConfirmations => {
-    const { updateAccount } = this.props
-    this.setState({ minConfirmations })
-    window.requestAnimationFrame(() => {
-      updateAccount({
-        ...account,
-        minConfirmations: Number(minConfirmations),
-      })
-    })
-  }
-
-  handleEditName = (state: boolean) => () =>
-    this.setState({
-      nameHovered: false,
-      editName: state,
-    })
 
   handleChangeName = (value: string) =>
     this.setState({
       accountName: value,
     })
 
-  handleCancelEditName = (data: Object) => () => {
-    this.handleEditName(false)()
-    this.setState({
-      accountName: get(data, 'account.name', ''),
-    })
-  }
-
-  handleSubmitName = (account: Account) => (e: SyntheticEvent<HTMLFormElement>) => {
+  handleSubmit = (account: Account, onClose: () => void) => (
+    e: SyntheticEvent<HTMLFormElement>,
+  ) => {
     e.preventDefault()
 
     const { updateAccount, setDataModal } = this.props
-    const { accountName } = this.state
+    const { accountName, accountUnit } = this.state
 
     if (accountName !== '') {
+      account = { ...account, unit: accountUnit || account.unit }
       updateAccount(account)
       setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
-
-      this.setState({
-        editName: false,
-      })
-    }
-  }
-
-  handleArchiveAccount = (account: Account) => () => {
-    const { push, closeModal, updateAccount, removeAccount } = this.props
-    const shouldRemove = hasNoOperations(account)
-
-    if (shouldRemove) {
-      removeAccount(account)
+      onClose()
     } else {
-      updateAccount({ ...account, archived: true })
+      this.setState({ accountNameError: true })
     }
-
-    closeModal(MODAL_SETTINGS_ACCOUNT)
-    push('/')
   }
 
-  handleHide = () =>
-    this.setState({
-      ...defaultState,
-    })
+  handleFocus = (name: string) => {
+    switch (name) {
+      case 'accountName':
+        this.setState({ accountNameError: false })
+        break
+      default:
+        break
+    }
+  }
 
-  handleChangeUnit = (value: Unit, account: Account) => {
-    const { updateAccount, setDataModal } = this.props
-    account = { ...account, unit: value }
-    updateAccount(account)
-    setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
+  handleChangeUnit = (value: Unit) => {
+    this.setState({ accountUnit: value })
   }
 
   render() {
-    const { editName, nameHovered, editUnit } = this.state
+    const { accountUnit, accountNameError } = this.state
+    const { t } = this.props
 
     return (
       <Modal
         name={MODAL_SETTINGS_ACCOUNT}
-        onHide={this.handleHide}
         render={({ data, onClose }) => {
           const account = this.getAccount(data)
           return (
             <ModalBody onClose={onClose}>
-              <ModalTitle>{'Account settings'}</ModalTitle>
-              <ModalContent flow={4}>
-                <Box
-                  alignItems="center"
-                  flow={2}
-                  horizontal
-                  onMouseEnter={this.handleHoveredName(true)}
-                  onMouseLeave={this.handleHoveredName(false)}
-                >
-                  <Box>
-                    {editName ? (
-                      <form onSubmit={this.handleSubmitName(account)}>
-                        <Box alignItems="center" horizontal flow={2}>
-                          <Box>
-                            <Input value={account.name} onChange={this.handleChangeName} />
-                          </Box>
-                          <Box flow={2} horizontal>
-                            <Button type="button" onClick={this.handleCancelEditName(data)}>
-                              Cancel
-                            </Button>
-                            <Button type="submit" primary>
-                              Ok
-                            </Button>
-                          </Box>
-                        </Box>
-                      </form>
-                    ) : (
-                      account.name
-                    )}
-                  </Box>
-                  {!editName &&
-                    nameHovered && (
-                      <Box onClick={this.handleEditName(true)} style={{ cursor: 'pointer' }}>
-                        <IconEdit size={16} />
-                      </Box>
-                    )}
-                </Box>
-                <Box>
-                  <Label>{'Minimum confirmations'}</Label>
-                  <Input
-                    type="number"
-                    min={1}
-                    max={100}
-                    value={account.minConfirmations}
-                    onChange={this.handleChangeMinConfirmations(account)}
-                  />
-                </Box>
-                {editUnit && (
-                  <Box>
-                    <Label>{'Edit Units'}</Label>
-                    <Select
-                      keyProp="code"
-                      onChange={value => this.handleChangeUnit(value, account)}
-                      renderSelected={item => item && item.code}
-                      value={account.unit}
-                      items={account.currency.units}
-                    />
-                  </Box>
-                )}
-              </ModalContent>
-              <ModalFooter horizontal justify="flex-end" flow={2}>
-                <Button onClick={this.handleArchiveAccount(account)}>
-                  {hasNoOperations(account) ? 'Remove account' : 'Archive account'}
-                </Button>
-                <Button primary onClick={onClose}>
-                  Go to account
-                </Button>
-              </ModalFooter>
+              <form onSubmit={this.handleSubmit(account, onClose)}>
+                <ModalTitle>{t('account:settings.title')}</ModalTitle>
+                <ModalContent mb={3}>
+                  <Container>
+                    <Box>
+                      <OptionRowTitle>{t('account:settings.accountName.title')}</OptionRowTitle>
+                      <OptionRowDesc>{t('account:settings.accountName.desc')}</OptionRowDesc>
+                    </Box>
+                    <Box>
+                      <Input
+                        value={account.name}
+                        onChange={this.handleChangeName}
+                        renderLeft={<InputLeft currency={account.currency} />}
+                        onFocus={() => this.handleFocus('accountName')}
+                      />
+                      {accountNameError && (
+                        <ErrorMessageInput>
+                          {t('account:settings.accountName.error')}
+                        </ErrorMessageInput>
+                      )}
+                    </Box>
+                  </Container>
+                  <Container>
+                    <Box>
+                      <OptionRowTitle>{t('account:settings.unit.title')}</OptionRowTitle>
+                      <OptionRowDesc>{t('account:settings.unit.desc')}</OptionRowDesc>
+                    </Box>
+                    <Box style={{ width: 180 }}>
+                      <Select
+                        keyProp="code"
+                        onChange={this.handleChangeUnit}
+                        renderSelected={item => item && item.code}
+                        value={accountUnit || account.unit}
+                        items={account.currency.units}
+                      />
+                    </Box>
+                  </Container>
+                </ModalContent>
+                <ModalFooter>
+                  <Button small ml="auto" type="submit" primary>
+                    {t('common:apply')}
+                  </Button>
+                </ModalFooter>
+              </form>
             </ModalBody>
           )
         }}
@@ -242,4 +163,38 @@ class SettingsAccount extends PureComponent<Props, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(SettingsAccount)
+export default compose(connect(null, mapDispatchToProps), translate())(SettingsAccount)
+
+export function InputLeft({ currency }: { currency: Currency }) {
+  return (
+    <Box ml={2} style={{ justifyContent: 'center' }} color={currency.color}>
+      <CryptoCurrencyIcon currency={currency} size={16} />
+    </Box>
+  )
+}
+
+export const Container = styled(Box).attrs({
+  flow: 2,
+  justify: 'space-between',
+  horizontal: true,
+  mb: 3,
+  pb: 4,
+})`
+  border-bottom: 1px solid ${p => p.theme.colors.lightGrey};
+`
+
+export const OptionRowDesc = styled(Box).attrs({
+  ff: 'Open Sans|Regular',
+  fontSize: 3,
+  textAlign: 'left',
+  lineHeight: 1.69,
+  color: 'grey',
+  shrink: 1,
+})``
+export const OptionRowTitle = styled(Box).attrs({
+  ff: 'Open Sans|SemiBold',
+  color: 'black',
+  fontSize: 4,
+  textAlign: 'left',
+  lineHeight: 1.69,
+})``
