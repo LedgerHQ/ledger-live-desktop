@@ -22,6 +22,7 @@ import Defer from 'components/base/Defer'
 
 export { default as ModalBody } from './ModalBody'
 export { default as ConfirmModal } from './ConfirmModal'
+export { default as ModalTitle } from './ModalTitle'
 
 const springConfig = {
   stiffness: 320,
@@ -163,6 +164,7 @@ export class Modal extends Component<Props> {
         isOpened={isOpened}
         onClose={onClose}
         onHide={onHide}
+        closeOnEsc={!preventBackdropClick}
         motionStyle={(spring, isVisible) => ({
           opacity: spring(isVisible ? 1 : 0, springConfig),
           scale: spring(isVisible ? 1 : 0.95, springConfig),
@@ -187,16 +189,6 @@ export class Modal extends Component<Props> {
     )
   }
 }
-
-export const ModalTitle = styled(Box).attrs({
-  alignItems: 'center',
-  color: 'dark',
-  ff: 'Museo Sans|Regular',
-  fontSize: 6,
-  justifyContent: 'center',
-  p: 5,
-  relative: true,
-})``
 
 export const ModalFooter = styled(Box).attrs({
   px: 5,

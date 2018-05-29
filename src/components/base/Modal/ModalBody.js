@@ -67,6 +67,10 @@ const CloseContainer = styled(Box).attrs({
   &:hover {
     color: ${p => p.theme.colors.grey};
   }
+
+  &:active {
+    color: ${p => p.theme.colors.dark};
+  }
 `
 
 const Body = styled(Box).attrs({

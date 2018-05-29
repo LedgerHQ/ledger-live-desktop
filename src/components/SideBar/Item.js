@@ -34,7 +34,7 @@ const Container = styled(Tabbable).attrs({
   horizontal: true,
   pl: 3,
 })`
-  cursor: pointer;
+  cursor: ${p => (p.isActive ? 'default' : 'pointer')};
   color: ${p => p.theme.colors.dark};
   background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
   height: ${p => (p.big ? 50 : 36)}px;

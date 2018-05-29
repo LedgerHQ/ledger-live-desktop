@@ -6,13 +6,14 @@ import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 type Props = {
   currency: CryptoCurrency,
   size: number,
+  color?: string,
 }
 
 class CryptoCurrencyIcon extends PureComponent<Props> {
   render() {
-    const { currency, size } = this.props
+    const { currency, size, color } = this.props
     const IconCurrency = getCryptoCurrencyIcon(currency)
-    return IconCurrency ? <IconCurrency size={size} /> : null
+    return IconCurrency ? <IconCurrency size={size} color={color} /> : null
   }
 }
 

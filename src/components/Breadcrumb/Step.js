@@ -3,6 +3,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { colors } from 'styles/theme'
+
 import Box from 'components/base/Box'
 
 import IconCheck from 'icons/Check'
@@ -27,13 +29,13 @@ const Wrapper = styled(Box).attrs({
 const StepNumber = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'fog',
+  color: p => (['active', 'valid'].includes(p.status) ? 'white' : 'fog'),
   bg: p =>
     ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'white',
   ff: 'Rubik|Regular',
 })`
   border-radius: 50%;
-  border: 1px solid #d8d8d8;
+  border: 1px solid ${p => (['active', 'valid'].includes(p.status) ? colors.wallet : colors.fog)};
   font-size: 10px;
   height: ${RADIUS}px;
   line-height: 10px;

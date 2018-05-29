@@ -66,9 +66,11 @@ export const Textarea = styled.textarea.attrs({
 
 type Props = {
   keepEvent?: boolean,
-  onBlur: Function,
+  onBlur: (SyntheticInputEvent<HTMLInputElement>) => void,
   onChange?: Function,
-  onFocus: Function,
+  onEnter?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onEsc?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onFocus: (SyntheticInputEvent<HTMLInputElement>) => void,
   renderLeft?: any,
   renderRight?: any,
   containerProps?: Object,
@@ -100,6 +102,21 @@ class Input extends PureComponent<Props, State> {
     }
   }
 
+  handleKeyDown = (e: SyntheticKeyboardEvent<HTMLInputElement>) => {
+    // handle enter key
+    if (e.which === 13) {
+      const { onEnter } = this.props
+      if (onEnter) {
+        onEnter(e)
+      }
+    } else if (e.which === 27) {
+      const { onEsc } = this.props
+      if (onEsc) {
+        onEsc(e)
+      }
+    }
+  }
+
   // FIXME this is a bad idea! this is the behavior of an input. instead renderLeft/renderRight should be pointer-event:none !
   handleClick = () => this._input && this._input.focus()
 
@@ -117,6 +134,11 @@ class Input extends PureComponent<Props, State> {
       isFocus: false,
     })
     onBlur(e)
+  }
+
+  handleSelectEverything = () => {
+    this._input && this._input.setSelectionRange(0, this._input.value.length)
+    this._input && this._input.focus()
   }
 
   _input = null
@@ -142,6 +164,7 @@ class Input extends PureComponent<Props, State> {
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
             onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
           />
         </Box>
         {renderRight}
