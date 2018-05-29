@@ -14,7 +14,7 @@ const pairsSelector = createSelector(
     currencies.map(currency => ({
       from: currency,
       to: counterValueCurrency,
-      exchange: currencySettingsSelector(state, currency).exchange,
+      exchange: currencySettingsSelector(state, { currency }).exchange,
     })),
 )
 

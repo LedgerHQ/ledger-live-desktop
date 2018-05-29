@@ -7,7 +7,8 @@ import { compose } from 'redux'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
-import type { Settings, T } from 'types/common'
+import type { SettingsState as Settings } from 'reducers/settings'
+import type { T } from 'types/common'
 import IconLockScreen from 'icons/LockScreen'
 
 import { ErrorMessageInput } from 'components/base/Input'

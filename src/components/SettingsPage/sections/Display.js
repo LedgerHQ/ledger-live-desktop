@@ -4,7 +4,8 @@ import React, { PureComponent } from 'react'
 import moment from 'moment'
 import { listFiatCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
 
-import type { Settings, T } from 'types/common'
+import type { SettingsState as Settings } from 'reducers/settings'
+import type { T } from 'types/common'
 
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'

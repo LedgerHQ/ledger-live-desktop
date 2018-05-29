@@ -10,8 +10,9 @@ import languages from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency, Account } from '@ledgerhq/live-common/lib/types'
+import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 
-import type { Settings, CurrencySettings } from 'types/common'
+import type { CurrencySettings } from 'types/common'
 import type { State } from 'reducers'
 
 export type SettingsState = {
@@ -24,7 +25,7 @@ export type SettingsState = {
     isEnabled: boolean,
     value: string,
   },
-  marketIndicator: string,
+  marketIndicator: 'eastern' | 'western',
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,
   },
@@ -42,21 +43,15 @@ if (!languages.includes(language)) {
   region = 'US'
 }
 
-const CURRENCY_DEFAULTS_SETTINGS: CurrencySettings = {
-  confirmationsToSpend: 10,
-  minConfirmationsToSpend: 10, // FIXME DROP
-  maxConfirmationsToSpend: 50, // FIXME DROP
-
-  confirmationsNb: 10,
-  minConfirmationsNb: 10, // FIXME DROP
-  maxConfirmationsNb: 50, // FIXME DROP
-
-  transactionFees: 10,
-
-  exchange: '',
+const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
+  const defaults = currencySettingsDefaults(crypto)
+  return {
+    confirmationsNb: defaults.confirmationsNb ? defaults.confirmationsNb.def : 0,
+    exchange: '',
+  }
 }
 
-const state: SettingsState = {
+const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: 'USD',
   language,
@@ -105,11 +100,17 @@ const handlers: Object = {
     }
     return copy
   },
-  SAVE_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => ({
+  SAVE_SETTINGS: (
+    state: SettingsState,
+    { payload: settings }: { payload: $Shape<SettingsState> },
+  ) => ({
     ...state,
     ...settings,
   }),
-  FETCH_SETTINGS: (state: SettingsState, { payload: settings }: { payload: Settings }) => ({
+  FETCH_SETTINGS: (
+    state: SettingsState,
+    { payload: settings }: { payload: $Shape<SettingsState> },
+  ) => ({
     ...state,
     ...settings,
     loaded: true,
@@ -152,18 +153,26 @@ export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 
 export const areSettingsLoaded = (state: State) => state.settings.loaded
 
-export const currencySettingsSelector = (
-  state: State,
-  currency: CryptoCurrency,
+export const currencySettingsLocaleSelector = (
+  settings: SettingsState,
+  currency: Currency,
 ): CurrencySettings => {
-  const currencySettings = state.settings.currenciesSettings[currency.id]
-  return { ...CURRENCY_DEFAULTS_SETTINGS, ...currencySettings }
+  const currencySettings = settings.currenciesSettings[currency.id]
+  return { ...defaultsForCurrency(currency), ...currencySettings }
 }
+
+type CSS = Selector<*, { currency: CryptoCurrency }, CurrencySettings>
+
+export const currencySettingsSelector: CSS = createSelector(
+  storeSelector,
+  (_, { currency }) => currency,
+  currencySettingsLocaleSelector,
+)
 
 export const currencySettingsForAccountSelector = (
   state: State,
   { account }: { account: Account },
-) => currencySettingsSelector(state, account.currency)
+) => currencySettingsSelector(state, { currency: account.currency })
 
 type ESFAS = Selector<*, { account: Account }, string>
 export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
@@ -173,4 +182,4 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
 
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 
-export default handleActions(handlers, state)
+export default handleActions(handlers, INITIAL_STATE)
