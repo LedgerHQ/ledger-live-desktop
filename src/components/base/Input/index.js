@@ -66,11 +66,11 @@ export const Textarea = styled.textarea.attrs({
 
 type Props = {
   keepEvent?: boolean,
-  onBlur: Function,
+  onBlur: (SyntheticInputEvent<HTMLInputElement>) => void,
   onChange?: Function,
-  onEnter?: Function,
-  onEsc?: Function,
-  onFocus: Function,
+  onEnter?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onEsc?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onFocus: (SyntheticInputEvent<HTMLInputElement>) => void,
   renderLeft?: any,
   renderRight?: any,
   containerProps?: Object,
