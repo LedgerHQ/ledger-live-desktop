@@ -51,7 +51,7 @@ class FlipTicker extends PureComponent<Props, State> {
     const { height } = this.state
     return (
       <Container innerRef={n => (this._node = n)} {...p}>
-        {value.split('').map((l, i) => (
+        {[...value].map((l, i) => (
           <Box key={i}>
             {!/[0-9]/.test(l) ? (
               l === ' ' ? (
