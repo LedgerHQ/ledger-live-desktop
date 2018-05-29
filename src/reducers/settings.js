@@ -30,6 +30,7 @@ export type SettingsState = {
   },
   region: string,
   developerMode: boolean,
+  shareAnalytics: boolean,
 }
 
 /* have to check if available for all OS */
@@ -69,6 +70,7 @@ const state: SettingsState = {
   region,
   developerMode: false,
   loaded: false,
+  shareAnalytics: false,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {

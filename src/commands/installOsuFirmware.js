@@ -2,8 +2,8 @@
 
 import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
-import { withDevice } from 'helpers/deviceAccess'
 
+import { withDevice } from 'helpers/deviceAccess'
 import installOsuFirmware from 'helpers/firmware/installOsuFirmware'
 
 type Input = {

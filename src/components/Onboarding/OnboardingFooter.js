@@ -22,14 +22,15 @@ type Props = {
   t: T,
   nextStep: () => void,
   prevStep: () => void,
+  isContinueDisabled?: boolean,
 }
 
-const OnboardingFooter = ({ t, nextStep, prevStep, ...props }: Props) => (
+const OnboardingFooter = ({ t, nextStep, prevStep, isContinueDisabled, ...props }: Props) => (
   <Wrapper {...props}>
     <Button small outline onClick={() => prevStep()}>
       {t('common:back')}
     </Button>
-    <Button small primary onClick={() => nextStep()} ml="auto">
+    <Button disabled={isContinueDisabled} small primary onClick={() => nextStep()} ml="auto">
       {t('common:continue')}
     </Button>
   </Wrapper>

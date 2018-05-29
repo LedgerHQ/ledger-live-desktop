@@ -18,10 +18,10 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 type Props = {
   devicePath: string,
   currencyId: string,
-  onAccountScanned: Function,
+  onAccountScanned: AccountRaw => void,
 }
 
-export default function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
+export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   const { devicePath, currencyId, onAccountScanned } = props
 
   return withDevice(devicePath)(async transport => {
@@ -269,7 +269,7 @@ async function buildAccountRaw({
     freshAddressPath,
     balance,
     blockHeight,
-    archived: false,
+    archived: true,
     index: accountIndex,
     operations,
     pendingOperations: [],

@@ -20,8 +20,6 @@ import Print from 'components/layout/Print'
 import CounterValues from 'helpers/countervalues'
 import { BridgeSyncProvider } from 'bridge/BridgeSyncContext'
 
-const { DEV_TOOLS } = process.env
-
 const App = ({
   store,
   history,

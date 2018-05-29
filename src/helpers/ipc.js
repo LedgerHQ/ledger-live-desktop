@@ -41,6 +41,7 @@ export class Command<In, A> {
         })
       },
       error: error => {
+        console.log('exec error:', error)
         send({
           type: `ERROR_${requestId}`,
           data: {

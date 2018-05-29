@@ -1,13 +1,14 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
+import { shell } from 'electron'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { radii } from 'styles/theme'
 
 import type { T } from 'types/common'
 
-import { setGenuineCheckFail } from 'reducers/onboarding'
+import { updateGenuineCheck } from 'reducers/onboarding'
 
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -23,25 +24,25 @@ import { Title, Description, IconOptionRow } from '../helperComponents'
 import type { StepProps } from '..'
 import OnboardingFooter from '../OnboardingFooter'
 
-const mapDispatchToProps = { setGenuineCheckFail }
+const mapDispatchToProps = { updateGenuineCheck }
 
 type State = {
-  pinStepPass: boolean | null,
-  phraseStepPass: boolean | null,
   cachedPinStepButton: string,
-  cachedPhraseStepButton: string,
+  cachedRecoveryStepButton: string,
   isGenuineCheckModalOpened: boolean,
-  isDeviceGenuine: boolean,
+}
+
+const INITIAL_STATE = {
+  cachedPinStepButton: '',
+  cachedRecoveryStepButton: '',
+  isGenuineCheckModalOpened: false,
 }
 
 class GenuineCheck extends PureComponent<StepProps, State> {
   state = {
-    pinStepPass: null,
-    phraseStepPass: null,
-    cachedPinStepButton: '',
-    cachedPhraseStepButton: '',
-    isGenuineCheckModalOpened: false,
-    isDeviceGenuine: false,
+    ...INITIAL_STATE,
+    cachedPinStepButton: this.props.onboarding.genuine.pinStepPass ? 'yes' : '',
+    cachedRecoveryStepButton: this.props.onboarding.genuine.recoveryStepPass ? 'yes' : '',
   }
 
   getButtonLabel() {
@@ -61,15 +62,21 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   handleButtonPass = (item: Object, step: string) => {
-    this.setState({ [`${step}`]: item.pass })
+    this.props.updateGenuineCheck({ [`${step}`]: item.pass })
     if (step === 'pinStepPass') {
       this.setState({ cachedPinStepButton: item.key })
     } else {
-      this.setState({ cachedPhraseStepButton: item.key })
+      this.setState({ cachedRecoveryStepButton: item.key })
     }
 
     if (!item.pass) {
-      this.props.setGenuineCheckFail(true)
+      this.setState(INITIAL_STATE)
+      this.props.updateGenuineCheck({
+        isGenuineFail: true,
+        recoveryStepPass: false,
+        pinStepPass: false,
+        isDeviceGenuine: false,
+      })
     }
   }
 
@@ -79,15 +86,19 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   handleGenuineCheck = async isGenuine => {
     await new Promise(r => setTimeout(r, 1e3)) // let's wait a bit before closing modal
     this.handleCloseGenuineCheckModal()
-    this.setState({ isDeviceGenuine: isGenuine })
+    this.props.updateGenuineCheck({
+      isDeviceGenuine: isGenuine,
+    })
   }
 
   redoGenuineCheck = () => {
-    this.props.setGenuineCheckFail(false)
+    this.props.updateGenuineCheck({ isGenuineFail: false })
   }
 
   contactSupport = () => {
-    console.log('contact support coming later')
+    const contactSupportUrl =
+      'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165'
+    shell.openExternal(contactSupportUrl)
   }
 
   renderGenuineFail = () => (
@@ -101,16 +112,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
   render() {
     const { nextStep, prevStep, t, onboarding } = this.props
-    const {
-      pinStepPass,
-      phraseStepPass,
-      cachedPinStepButton,
-      cachedPhraseStepButton,
-      isGenuineCheckModalOpened,
-      isDeviceGenuine,
-    } = this.state
+    const { genuine } = onboarding
+    const { cachedPinStepButton, cachedRecoveryStepButton, isGenuineCheckModalOpened } = this.state
 
-    if (onboarding.isGenuineFail) {
+    if (genuine.isGenuineFail) {
       return this.renderGenuineFail()
     }
 
@@ -137,7 +142,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             </CardWrapper>
           </Box>
           <Box mt={5}>
-            <CardWrapper isDisabled={!pinStepPass}>
+            <CardWrapper isDisabled={!genuine.pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>2.</IconOptionRow>
@@ -148,13 +153,13 @@ class GenuineCheck extends PureComponent<StepProps, State> {
               <RadioGroup
                 style={{ margin: '0 30px' }}
                 items={this.getButtonLabel()}
-                activeKey={cachedPhraseStepButton}
-                onChange={item => this.handleButtonPass(item, 'phraseStepPass')}
+                activeKey={cachedRecoveryStepButton}
+                onChange={item => this.handleButtonPass(item, 'recoveryStepPass')}
               />
             </CardWrapper>
           </Box>
           <Box mt={5}>
-            <CardWrapper isDisabled={!phraseStepPass}>
+            <CardWrapper isDisabled={!genuine.recoveryStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>3.</IconOptionRow>
@@ -166,10 +171,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 <Button
                   big
                   primary
-                  disabled={!phraseStepPass}
+                  disabled={!genuine.recoveryStepPass}
                   onClick={this.handleOpenGenuineCheckModal}
                 >
-                  {isDeviceGenuine ? (
+                  {genuine.isDeviceGenuine ? (
                     <Box horizontal align="center" flow={1}>
                       <IconCheck size={16} />
                       <span>{t('onboarding:genuineCheck.buttons.tryAgain')}</span>
@@ -189,6 +194,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           t={t}
           nextStep={nextStep}
           prevStep={prevStep}
+          isContinueDisabled={!genuine.isDeviceGenuine}
         />
         <GenuineCheckModal
           isOpened={isGenuineCheckModalOpened}

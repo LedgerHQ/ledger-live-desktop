@@ -1,6 +1,8 @@
 // @flow
 import type { Command } from 'helpers/ipc'
 
+import libcoreScanAccounts from 'commands/libcoreScanAccounts'
+import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import getAddress from 'commands/getAddress'
 import signTransaction from 'commands/signTransaction'
 import getDeviceInfo from 'commands/getDeviceInfo'
@@ -13,6 +15,7 @@ import uninstallApp from 'commands/uninstallApp'
 import installOsuFirmware from 'commands/installOsuFirmware'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
+import listApps from 'commands/listApps'
 
 export const commands: Array<Command<any, any>> = [
   getAddress,
@@ -22,9 +25,12 @@ export const commands: Array<Command<any, any>> = [
   getIsGenuine,
   getLatestFirmwareForDevice,
   installApp,
+  libcoreScanAccounts,
+  libcoreSignAndBroadcast,
   listenDevices,
   uninstallApp,
   installOsuFirmware,
   installFinalFirmware,
   installMcu,
+  listApps,
 ]
