@@ -25,7 +25,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
     const { t, onboarding } = this.props
 
     return (
-      <Box sticky pt={150}>
+      <Box sticky pt={200}>
         <Box grow alignItems="center">
           <Title>{t('onboarding:selectDevice.title')}</Title>
           <Description>{t('onboarding:selectDevice.desc')}</Description>

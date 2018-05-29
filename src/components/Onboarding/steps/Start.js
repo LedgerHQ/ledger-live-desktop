@@ -19,7 +19,7 @@ export default (props: StepProps) => {
           <Title>{t('onboarding:start.title')}</Title>
           <Description>{t('onboarding:start.desc')}</Description>
         </Box>
-        <Button primary onClick={() => jumpStep('init')}>
+        <Button padded primary onClick={() => jumpStep('init')}>
           Get Started
         </Button>
       </Box>
