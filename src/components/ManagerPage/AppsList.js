@@ -6,6 +6,7 @@ import { translate } from 'react-i18next'
 
 import listApps from 'commands/listApps'
 import installApp from 'commands/installApp'
+import uninstallApp from 'commands/uninstallApp'
 
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
@@ -97,8 +98,19 @@ class AppsList extends PureComponent<Props, State> {
     }
   }
 
-  handleUninstallApp = (/* args: { app: any } */) => () => {
-    /* TODO */
+  handleUninstallApp = (args: { app: any }) => async () => {
+    const appParams = args.app
+    this.setState({ status: 'busy' })
+    try {
+      const {
+        device: { path: devicePath },
+      } = this.props
+      const data = { appParams, devicePath }
+      await uninstallApp.send(data).toPromise()
+      this.setState({ status: 'success' })
+    } catch (err) {
+      this.setState({ status: 'error', error: err.message })
+    }
   }
 
   handleCloseModal = () => this.setState({ status: 'idle' })
@@ -114,7 +126,7 @@ class AppsList extends PureComponent<Props, State> {
             version={`Version ${c.version}`}
             icon={ICONS_FALLBACK[c.icon] || c.icon}
             onInstall={this.handleInstallApp(c)}
-            onUninstall={this.handleUninstallApp()}
+            onUninstall={this.handleUninstallApp(c)}
           />
         ))}
         <Modal

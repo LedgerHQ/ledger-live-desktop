@@ -12,5 +12,10 @@ export default async function uninstallApp(
   transport: Transport<*>,
   { appParams }: { appParams: LedgerScriptParams },
 ): Promise<void> {
-  return createSocketDialog(transport, '/update/install', appParams)
+  const params = {
+    ...appParams,
+    firmware: appParams.delete,
+    firmwareKey: appParams.deleteKey,
+  }
+  return createSocketDialog(transport, '/update/install', params)
 }
