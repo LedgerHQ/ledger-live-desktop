@@ -12,7 +12,7 @@ type Input = {
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand('devices', 'getMemInfo', ({ devicePath }) =>
+const cmd: Command<Input, Result> = createCommand('getMemInfo', ({ devicePath }) =>
   fromPromise(withDevice(devicePath)(transport => getMemInfo(transport))),
 )
 

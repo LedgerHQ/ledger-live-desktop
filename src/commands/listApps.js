@@ -11,7 +11,7 @@ type Input = {
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand('devices', 'listApps', ({ targetId }) =>
+const cmd: Command<Input, Result> = createCommand('listApps', ({ targetId }) =>
   fromPromise(listApps(targetId)),
 )
 

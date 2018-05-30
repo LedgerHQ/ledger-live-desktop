@@ -15,11 +15,8 @@ type Input = {
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand(
-  'devices',
-  'installApp',
-  ({ devicePath, ...rest }) =>
-    fromPromise(withDevice(devicePath)(transport => installApp(transport, rest))),
+const cmd: Command<Input, Result> = createCommand('installApp', ({ devicePath, ...rest }) =>
+  fromPromise(withDevice(devicePath)(transport => installApp(transport, rest))),
 )
 
 export default cmd

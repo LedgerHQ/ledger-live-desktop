@@ -19,3 +19,7 @@ export const removeDevice: RemoveDevice = payload => ({
   type: 'REMOVE_DEVICE',
   payload,
 })
+
+export const resetDevices = () => ({
+  type: 'RESET_DEVICES',
+})

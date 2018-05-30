@@ -1,6 +1,8 @@
 // @flow
+
 import type { Command } from 'helpers/ipc'
 
+import getMemInfo from 'commands/getMemInfo'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import getAddress from 'commands/getAddress'
@@ -16,8 +18,13 @@ import installOsuFirmware from 'commands/installOsuFirmware'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
 import listApps from 'commands/listApps'
+import testInterval from 'commands/testInterval'
+import testCrash from 'commands/testCrash'
 
-export const commands: Array<Command<any, any>> = [
+const all: Array<Command<any, any>> = [
+  getMemInfo,
+  libcoreScanAccounts,
+  libcoreSignAndBroadcast,
   getAddress,
   signTransaction,
   getDeviceInfo,
@@ -25,12 +32,20 @@ export const commands: Array<Command<any, any>> = [
   getIsGenuine,
   getLatestFirmwareForDevice,
   installApp,
-  libcoreScanAccounts,
-  libcoreSignAndBroadcast,
   listenDevices,
   uninstallApp,
   installOsuFirmware,
   installFinalFirmware,
   installMcu,
   listApps,
+  testInterval,
+  testCrash,
 ]
+
+all.forEach(cmd => {
+  if (all.some(c => c !== cmd && c.id === cmd.id)) {
+    throw new Error(`duplicate command '${cmd.id}'`)
+  }
+})
+
+export default all

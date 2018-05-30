@@ -19,7 +19,6 @@ type Result = {
 }
 
 const cmd: Command<Input, Result> = createCommand(
-  'devices',
   'installFinalFirmware',
   ({ devicePath, firmware }) =>
     fromPromise(withDevice(devicePath)(transport => installFinalFirmware(transport, firmware))),

@@ -6,7 +6,6 @@ import isEmpty from 'lodash/isEmpty'
 
 import type { Device, T } from 'types/common'
 
-import runJob from 'renderer/runJob'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 
 import Box, { Card } from 'components/base/Box'
@@ -74,20 +73,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
   installFirmware = async () => {
     try {
-      const { latestFirmware } = this.state
-      const {
-        device: { path: devicePath },
-      } = this.props
-      await runJob({
-        channel: 'manager',
-        job: 'installOsuFirmware',
-        successResponse: 'device.osuFirmwareInstallSuccess',
-        errorResponse: 'device.osuFirmwareInstallError',
-        data: {
-          devicePath,
-          firmware: latestFirmware,
-        },
-      })
+      // TODO
     } catch (err) {
       console.log(err)
     }

@@ -20,7 +20,6 @@ type Result = {
 }
 
 const cmd: Command<Input, Result> = createCommand(
-  'devices',
   'getAddress',
   ({ currencyId, devicePath, path, ...options }) =>
     fromPromise(

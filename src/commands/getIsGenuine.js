@@ -8,8 +8,6 @@ import getIsGenuine from 'helpers/devices/getIsGenuine'
 type Input = *
 type Result = boolean
 
-const cmd: Command<Input, Result> = createCommand('devices', 'getIsGenuine', () =>
-  fromPromise(getIsGenuine()),
-)
+const cmd: Command<Input, Result> = createCommand('getIsGenuine', () => fromPromise(getIsGenuine()))
 
 export default cmd

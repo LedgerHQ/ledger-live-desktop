@@ -1,100 +1,89 @@
 // @flow
 
 import '@babel/polyfill'
+import invariant from 'invariant'
 import { fork } from 'child_process'
-import { BrowserWindow, ipcMain, app } from 'electron'
-import objectPath from 'object-path'
+import { ipcMain, app } from 'electron'
+import { ipcMainListenReceiveCommands } from 'helpers/ipc'
 import path from 'path'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
-const { DEV_TOOLS } = process.env
-
 // sqlite files will be located in the app local data folder
 const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
 
-const processes = []
+let internalProcess
 
-function cleanProcesses() {
-  processes.forEach(kill => kill())
-}
-
-function sendEventToWindow(name, { type, data }) {
-  const anotherWindow = BrowserWindow.getAllWindows().find(w => w.name === name)
-  if (anotherWindow) {
-    anotherWindow.webContents.send('msg', { type, data })
+const killInternalProcess = () => {
+  if (internalProcess) {
+    console.log('killing internal process...')
+    internalProcess.kill('SIGINT')
+    internalProcess = null
   }
 }
 
-function onForkChannel(forkType) {
-  return (event: any, payload) => {
-    const { type, data } = payload
+const forkBundlePath = path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`)
 
-    let compute = fork(path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`), {
-      env: {
-        DEV_TOOLS,
-        FORK_TYPE: forkType,
-        LEDGER_LIVE_SQLITE_PATH,
-      },
-    })
-
-    const kill = () => {
-      if (compute) {
-        compute.kill('SIGINT')
-        compute = null
-      }
-    }
-
-    processes.push(kill)
-
-    const onMessage = payload => {
-      const { type, data, options = {} } = payload
-
-      if (options.window) {
-        sendEventToWindow(options.window, { type, data })
-      } else {
-        event.sender.send('msg', { type, data })
-      }
-      if (options.kill && compute) {
-        kill()
-      }
-    }
-
-    compute.on('message', onMessage)
-    compute.send({ type, data })
-
-    process.on('exit', kill)
-  }
+const bootInternalProcess = () => {
+  console.log('booting internal process...')
+  internalProcess = fork(forkBundlePath, {
+    env: { LEDGER_LIVE_SQLITE_PATH },
+  })
+  internalProcess.on('exit', code => {
+    console.log(`Internal process ended with code ${code}`)
+    internalProcess = null
+  })
 }
 
-// Forwards every `type` messages to another process
-ipcMain.on('devices', onForkChannel('devices'))
-ipcMain.on('accounts', onForkChannel('accounts'))
-ipcMain.on('manager', onForkChannel('manager'))
+process.on('exit', () => {
+  killInternalProcess()
+})
 
-ipcMain.on('clean-processes', cleanProcesses)
+ipcMain.on('clean-processes', () => {
+  killInternalProcess()
+})
 
-const handlers = {
-  updater: {
+ipcMainListenReceiveCommands({
+  onUnsubscribe: requestId => {
+    if (!internalProcess) return
+    internalProcess.send({ type: 'command-unsubscribe', requestId })
+  },
+  onCommand: (command, notifyCommandEvent) => {
+    if (!internalProcess) bootInternalProcess()
+    const p = internalProcess
+    invariant(p, 'internalProcess not started !?')
+
+    const handleExit = code => {
+      p.removeListener('message', handleMessage)
+      p.removeListener('exit', handleExit)
+      notifyCommandEvent({
+        type: 'ERROR',
+        requestId: command.requestId,
+        data: { message: `Internal process error (${code})`, name: 'InternalError' },
+      })
+    }
+
+    const handleMessage = payload => {
+      if (payload.requestId !== command.requestId) return
+      notifyCommandEvent(payload)
+      if (payload.type === 'ERROR' || payload.type === 'COMPLETE') {
+        p.removeListener('message', handleMessage)
+        p.removeListener('exit', handleExit)
+      }
+    }
+
+    p.on('exit', handleExit)
+    p.on('message', handleMessage)
+    p.send({ type: 'command', command })
+  },
+})
+
+// TODO move this to "command" pattern
+ipcMain.on('updater', (event, { type, data }) => {
+  const handler = {
     init: setupAutoUpdater,
     quitAndInstall,
-  },
-  kill: {
-    process: (send, { pid }) => {
-      try {
-        process.kill(pid, 'SIGINT')
-      } catch (e) {} // eslint-disable-line no-empty
-    },
-  },
-}
-
-ipcMain.on('msg', (event: any, payload) => {
-  const { type, data } = payload
-  const handler = objectPath.get(handlers, type)
-  if (!handler) {
-    console.warn(`No handler found for ${type}`)
-    return
-  }
-  const send = (type: string, data: *) => event.sender.send('msg', { type, data })
+  }[type]
+  const send = (type: string, data: *) => event.sender.send('updater', { type, data })
   handler(send, data, type)
 })

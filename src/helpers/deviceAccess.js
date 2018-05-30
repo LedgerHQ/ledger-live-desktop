@@ -2,7 +2,6 @@
 import createSemaphore from 'semaphore'
 import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
-import { retry } from './promise'
 
 // all open to device must use openDevice so we can prevent race conditions
 // and guarantee we do one device access at a time. It also will handle the .close()
@@ -13,19 +12,12 @@ type WithDevice = (devicePath: string) => <T>(job: (Transport<*>) => Promise<T>)
 const semaphorePerDevice = {}
 
 export const withDevice: WithDevice = devicePath => {
-  const { FORK_TYPE } = process.env
-  if (FORK_TYPE !== 'devices') {
-    console.warn(
-      `deviceAccess is only expected to be used in process 'devices'. Any other usage may lead to race conditions. (Got: '${FORK_TYPE}')`,
-    )
-  }
-
   const sem =
     semaphorePerDevice[devicePath] || (semaphorePerDevice[devicePath] = createSemaphore(1))
 
   return job =>
     takeSemaphorePromise(sem, async () => {
-      const t = await retry(() => TransportNodeHid.open(devicePath))
+      const t = await TransportNodeHid.open(devicePath)
       try {
         const res = await job(t)
         // $FlowFixMe

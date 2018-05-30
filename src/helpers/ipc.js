@@ -2,118 +2,104 @@
 import { Observable } from 'rxjs'
 import uuidv4 from 'uuid/v4'
 
-type Msg<A> = {
-  type: string,
-  data?: A,
-  options?: *,
-}
-
-function send<A>(msg: Msg<A>) {
-  process.send(msg)
+export function createCommand<In, A>(id: string, impl: In => Observable<A>): Command<In, A> {
+  return new Command(id, impl)
 }
 
 export class Command<In, A> {
-  channel: string
-  type: string
   id: string
   impl: In => Observable<A>
-  constructor(channel: string, type: string, impl: In => Observable<A>) {
-    this.channel = channel
-    this.type = type
-    this.id = `${channel}.${type}`
+
+  constructor(id: string, impl: In => Observable<A>) {
+    this.id = id
     this.impl = impl
   }
 
-  // ~~~ On exec side we can:
-
-  exec(data: In, requestId: string) {
-    return this.impl(data).subscribe({
-      next: (data: A) => {
-        send({
-          type: `NEXT_${requestId}`,
-          data,
-        })
-      },
-      complete: () => {
-        send({
-          type: `COMPLETE_${requestId}`,
-          options: { kill: true },
-        })
-      },
-      error: error => {
-        console.log('exec error:', error)
-        send({
-          type: `ERROR_${requestId}`,
-          data: {
-            name: error && error.name,
-            message: error && error.message,
-          },
-          options: { kill: true },
-        })
-      },
-    })
-  }
-
-  // ~~~ On renderer side we can:
-
   /**
    * Usage example:
-   * sub = send(data).subscribe({ next: ... })
+   * sub = cmd.send(data).subscribe({ next: ... })
    * // or
-   * const res = await send(data).toPromise()
+   * const res = await cmd.send(data).toPromise()
    */
   send(data: In): Observable<A> {
-    const { ipcRenderer } = require('electron')
-    return Observable.create(o => {
-      const { channel, type, id } = this
-      const requestId: string = uuidv4()
-
-      const unsubscribe = () => {
-        ipcRenderer.removeListener('msg', handleMsgEvent)
-      }
-
-      function handleMsgEvent(e, msg: Msg<A>) {
-        switch (msg.type) {
-          case `NEXT_${requestId}`:
-            if (msg.data) {
-              o.next(msg.data)
-            }
-            break
-
-          case `COMPLETE_${requestId}`:
-            o.complete()
-            unsubscribe()
-            break
-
-          case `ERROR_${requestId}`:
-            o.error(msg.data)
-            unsubscribe()
-            break
-
-          default:
-        }
-      }
-
-      ipcRenderer.on('msg', handleMsgEvent)
-
-      ipcRenderer.send(channel, {
-        type,
-        data: {
-          id,
-          data,
-          requestId,
-        },
-      })
-
-      return unsubscribe
-    })
+    return ipcRendererSendCommand(this.id, data)
   }
 }
 
-export function createCommand<In, A>(
-  channel: string,
-  type: string,
-  impl: In => Observable<A>,
-): Command<In, A> {
-  return new Command(channel, type, impl)
+type Msg<A> = {
+  type: 'NEXT' | 'COMPLETE' | 'ERROR',
+  requestId: string,
+  data?: A,
+}
+
+// Implements command message of (Renderer proc -> Main proc)
+function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
+  const { ipcRenderer } = require('electron')
+  return Observable.create(o => {
+    const requestId: string = uuidv4()
+
+    const unsubscribe = () => {
+      ipcRenderer.send('command-unsubscribe', { requestId })
+      ipcRenderer.removeListener('command-event', handleCommandEvent)
+    }
+
+    function handleCommandEvent(e, msg: Msg<A>) {
+      if (requestId !== msg.requestId) return
+      switch (msg.type) {
+        case 'NEXT':
+          if (msg.data) {
+            o.next(msg.data)
+          }
+          break
+
+        case 'COMPLETE':
+          o.complete()
+          ipcRenderer.removeListener('command-event', handleCommandEvent)
+          break
+
+        case 'ERROR':
+          o.error(msg.data)
+          ipcRenderer.removeListener('command-event', handleCommandEvent)
+          break
+
+        default:
+      }
+    }
+
+    ipcRenderer.on('command-event', handleCommandEvent)
+
+    ipcRenderer.send('command', { id, data, requestId })
+
+    return unsubscribe
+  })
+}
+
+// Implements command message of (Main proc -> Renderer proc)
+// (dual of ipcRendererSendCommand)
+export function ipcMainListenReceiveCommands(o: {
+  onUnsubscribe: (requestId: string) => void,
+  onCommand: (
+    command: { id: string, data: *, requestId: string },
+    notifyCommandEvent: (Msg<*>) => void,
+  ) => void,
+}) {
+  const { ipcMain } = require('electron')
+
+  const onCommandUnsubscribe = (event, { requestId }) => {
+    o.onUnsubscribe(requestId)
+  }
+
+  const onCommand = (event, command) => {
+    o.onCommand(command, payload => {
+      event.sender.send('command-event', payload)
+    })
+  }
+
+  ipcMain.on('command-unsubscribe', onCommandUnsubscribe)
+  ipcMain.on('command', onCommand)
+
+  return () => {
+    ipcMain.removeListener('command-unsubscribe', onCommandUnsubscribe)
+    ipcMain.removeListener('command', onCommand)
+  }
 }

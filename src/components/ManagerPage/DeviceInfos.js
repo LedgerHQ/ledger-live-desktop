@@ -2,8 +2,6 @@
 
 import React, { PureComponent } from 'react'
 
-import runJob from 'renderer/runJob'
-
 import Text from 'components/base/Text'
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -30,16 +28,7 @@ class DeviceInfos extends PureComponent<Props, State> {
   handleGetMemInfos = async () => {
     try {
       this.setState({ isLoading: true })
-      const {
-        device: { path: devicePath },
-      } = this.props
-      const memoryInfos = await runJob({
-        channel: 'manager',
-        job: 'getMemInfos',
-        successResponse: 'manager.getMemInfosSuccess',
-        errorResponse: 'manager.getMemInfosError',
-        data: { devicePath },
-      })
+      const memoryInfos = null // TODO
       this.setState({ memoryInfos, isLoading: false })
     } catch (err) {
       this.setState({ isLoading: false })

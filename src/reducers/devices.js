@@ -9,7 +9,7 @@ export type DevicesState = {
   devices: Device[],
 }
 
-const state: DevicesState = {
+const initialState: DevicesState = {
   currentDevice: null,
   devices: [],
 }
@@ -20,6 +20,7 @@ function setCurrentDevice(state) {
 }
 
 const handlers: Object = {
+  RESET_DEVICES: () => initialState,
   ADD_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) =>
     setCurrentDevice({
       ...state,
@@ -49,4 +50,4 @@ export function getDevices(state: { devices: DevicesState }) {
   return state.devices.devices
 }
 
-export default handleActions(handlers, state)
+export default handleActions(handlers, initialState)

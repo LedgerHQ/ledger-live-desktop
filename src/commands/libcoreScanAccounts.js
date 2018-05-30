@@ -13,7 +13,6 @@ type Input = {
 type Result = AccountRaw
 
 const cmd: Command<Input, Result> = createCommand(
-  'devices',
   'libcoreScanAccounts',
   ({ devicePath, currencyId }) =>
     Observable.create(o => {

@@ -12,7 +12,7 @@ type Input = {
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand('devices', 'getFirmwareInfo', data =>
+const cmd: Command<Input, Result> = createCommand('getFirmwareInfo', data =>
   fromPromise(getFirmwareInfo(data)),
 )
 
