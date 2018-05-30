@@ -3,8 +3,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'
 
-// import type { Device, T } from 'types/common'
-import type { Device } from 'types/common'
+import type { Device, T } from 'types/common'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 
@@ -16,7 +15,7 @@ type DeviceInfo = {
 }
 
 type Props = {
-  // t: T,
+  t: T,
   device: Device,
   children: Function,
 }
@@ -75,7 +74,7 @@ class EnsureDashboard extends PureComponent<Props, State> {
 
   render() {
     const { deviceInfo, error } = this.state
-    const { children } = this.props
+    const { children, t } = this.props
 
     if (deviceInfo) {
       return children(deviceInfo)
@@ -84,7 +83,7 @@ class EnsureDashboard extends PureComponent<Props, State> {
     return error ? (
       <Fragment>
         <span>{error.message}</span>
-        <span>Please make sure your device is on the dashboard screen</span>
+        <span>{t('manager:erros:noDashboard')}</span>
       </Fragment>
     ) : null
   }

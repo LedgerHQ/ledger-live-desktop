@@ -9,7 +9,7 @@ type Input = {
   firmware: Object,
 }
 
-type Result = *
+type Result = Promise<{ success: boolean, error?: any }>
 
 const buildOsuParams = buildParamsFromFirmware('osu')
 

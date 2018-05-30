@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
 
-// import type { Device, T } from 'types/common'
-import type { Device } from 'types/common'
+import type { Device, T } from 'types/common'
 
 import { getCurrentDevice, getDevices } from 'reducers/devices'
 
@@ -15,7 +14,7 @@ const mapStateToProps = state => ({
 })
 
 type Props = {
-  // t: T,
+  t: T,
   device: ?Device,
   nbDevices: number,
   children: Function,
@@ -29,8 +28,8 @@ class EnsureDevice extends PureComponent<Props, State> {
   }
 
   render() {
-    const { device, nbDevices, children } = this.props
-    return device ? children(device, nbDevices) : <span>Please connect your device</span>
+    const { device, nbDevices, children, t } = this.props
+    return device ? children(device, nbDevices) : <span>{t('manager:errors.noDevice')}</span>
   }
 }
 

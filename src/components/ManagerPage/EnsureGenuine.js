@@ -4,13 +4,12 @@ import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'
 
 import type { Node } from 'react'
-// import type { Device, T } from 'types/common'
-import type { Device } from 'types/common'
+import type { Device, T } from 'types/common'
 
 import getIsGenuine from 'commands/getIsGenuine'
 
 type Props = {
-  // t: T,
+  t: T,
   device: Device,
   children: Node,
 }
@@ -69,7 +68,7 @@ class EnsureGenuine extends PureComponent<Props, State> {
 
   render() {
     const { error, genuine } = this.state
-    const { children } = this.props
+    const { children, t } = this.props
 
     if (genuine) {
       return children
@@ -78,7 +77,7 @@ class EnsureGenuine extends PureComponent<Props, State> {
     return error ? (
       <Fragment>
         <span>{error.message}</span>
-        <span>You did not approve request on your device or your device is not genuine</span>
+        <span>{t('manager:errors.noGenuine')}</span>
       </Fragment>
     ) : null
   }
