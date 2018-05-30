@@ -16,6 +16,7 @@ import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-com
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
 type Props = {
+  core: Object,
   devicePath: string,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
@@ -24,13 +25,14 @@ type Props = {
 const { SHOW_LEGACY_NEW_ACCOUNT } = process.env
 
 export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
-  const { devicePath, currencyId, onAccountScanned } = props
+  const { devicePath, currencyId, onAccountScanned, core } = props
   const currency = getCryptoCurrencyById(currencyId)
 
   return withDevice(devicePath)(async transport => {
     const hwApp = new Btc(transport)
 
     const commonParams = {
+      core,
       hwApp,
       currencyId,
       onAccountScanned,
@@ -78,6 +80,7 @@ export async function getWalletIdentifier({
 }
 
 async function scanAccountsOnDeviceBySegwit({
+  core,
   hwApp,
   currencyId,
   onAccountScanned,
@@ -96,12 +99,13 @@ async function scanAccountsOnDeviceBySegwit({
   const WALLET_IDENTIFIER = await getWalletIdentifier({ hwApp, isSegwit, currencyId, devicePath })
 
   // retrieve or create the wallet
-  const wallet = await getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit)
+  const wallet = await getOrCreateWallet(core, WALLET_IDENTIFIER, currencyId, isSegwit)
   const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
   // new accounts will be created in sqlite, existing ones will be updated
   const accounts = await scanNextAccount({
+    core,
     wallet,
     hwApp,
     currencyId,
@@ -119,6 +123,7 @@ async function scanAccountsOnDeviceBySegwit({
 async function scanNextAccount(props: {
   // $FlowFixMe
   wallet: NJSWallet,
+  core: Object,
   hwApp: Object,
   currencyId: string,
   accountsCount: number,
@@ -129,6 +134,7 @@ async function scanNextAccount(props: {
   showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
   const {
+    core,
     wallet,
     hwApp,
     currencyId,
@@ -139,9 +145,6 @@ async function scanNextAccount(props: {
     isSegwit,
     showNewAccount,
   } = props
-
-  // TODO: investigate why importing it on file scope causes trouble
-  const core = require('init-ledger-core')()
 
   console.log(`>> Scanning account ${accountIndex} - isSegwit: ${isSegwit.toString()}`) // eslint-disable-line no-console
 
@@ -187,12 +190,11 @@ async function scanNextAccount(props: {
 }
 
 async function getOrCreateWallet(
+  core: Object,
   WALLET_IDENTIFIER: string,
   currencyId: string,
   isSegwit: boolean,
 ): NJSWallet {
-  // TODO: investigate why importing it on file scope causes trouble
-  const core = require('init-ledger-core')()
   try {
     const wallet = await core.getWallet(WALLET_IDENTIFIER)
     return wallet
