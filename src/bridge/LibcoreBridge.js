@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
+import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 // import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
 import type { WalletBridge, EditProps } from './types'
@@ -49,7 +50,24 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       .subscribe(observer)
   },
 
-  synchronize(_initialAccount, _observer) {
+  synchronize(account, { next, complete, error }) {
+    ;(async () => {
+      try {
+        const rawAccount = encodeAccount(account)
+        const rawSyncedAccount = await libcoreSyncAccount.send({ rawAccount }).toPromise()
+        const syncedAccount = decodeAccount(rawSyncedAccount)
+        next(account => ({
+          ...account,
+          balance: syncedAccount.balance,
+          blockHeight: syncedAccount.blockHeight,
+          operations: syncedAccount.operations, // TODO: is a simple replace enough?
+          lastSyncDate: new Date(),
+        }))
+        complete()
+      } catch (e) {
+        error(e)
+      }
+    })()
     // FIXME TODO: use next(), to actually emit account updates.....
     // - need to sync the balance
     // - need to sync block height & block hash
@@ -61,7 +79,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
     //     then we probably should trash them out? it's a complex question for UI
     return {
       unsubscribe() {
-        console.warn('LibcoreBridge: sync not implemented')
+        console.warn('LibcoreBridge: unsub sync not implemented')
       },
     }
   },

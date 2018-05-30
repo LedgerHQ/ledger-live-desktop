@@ -326,3 +326,27 @@ function buildOperationRaw({
     date: op.getDate().toISOString(),
   }
 }
+
+export async function syncAccount({ rawAccount }: { rawAccount: AccountRaw }) {
+  // AWWWWW.. little problem here.
+  //
+  // we need to get account from libcore db. in order to do that we have to:
+  //  1) get wallet using a wallet identifier
+  //  2) get account from wallet using `rawAccount.index`
+  //
+  // Here is the problem: the wallet identifier is currently built like that:
+  // `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
+  //
+  // and to get the `publicKey` we need the device.
+  //
+  // BUT we don't want the device to be required to access ledger-live
+  // SO.. it's a problem.
+  //
+  // Solution 1: store wallet identifier inside the Account (uurgh...)
+  // Solution 2: stop this project
+
+  return {
+    ...rawAccount,
+    balance: 424242424242,
+  }
+}

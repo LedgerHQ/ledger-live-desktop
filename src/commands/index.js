@@ -16,6 +16,7 @@ import isCurrencyAppOpened from 'commands/isCurrencyAppOpened'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
+import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import listApps from 'commands/listApps'
 import listenDevices from 'commands/listenDevices'
 import signTransaction from 'commands/signTransaction'
@@ -39,6 +40,7 @@ const all: Array<Command<any, any>> = [
   libcoreGetVersion,
   libcoreScanAccounts,
   libcoreSignAndBroadcast,
+  libcoreSyncAccount,
   listApps,
   listenDevices,
   signTransaction,
