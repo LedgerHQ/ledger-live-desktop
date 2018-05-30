@@ -27,7 +27,7 @@ const forkBundlePath = path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist
 const bootInternalProcess = () => {
   console.log('booting internal process...')
   internalProcess = fork(forkBundlePath, {
-    env: { LEDGER_LIVE_SQLITE_PATH },
+    env: { ...process.env, LEDGER_LIVE_SQLITE_PATH },
   })
   internalProcess.on('exit', code => {
     console.log(`Internal process ended with code ${code}`)
