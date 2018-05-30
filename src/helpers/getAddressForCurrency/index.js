@@ -18,39 +18,30 @@ type Resolver = (
 
 type Module = (currencyId: string) => Resolver
 
-const fallback: string => Resolver = currencyId => () =>
-  Promise.reject(new Error(`${currencyId} device support not implemented`))
-
 const all: CryptoCurrencyConfig<Resolver> = {
-  bitcoin: btc,
-  bitcoin_testnet: btc,
-
-  litecoin: btc,
-
-  zcash: btc,
   bitcoin_cash: btc,
   bitcoin_gold: btc,
-  zencash: btc,
-
-  ethereum,
-  ethereum_testnet: ethereum,
+  bitcoin_testnet: btc,
+  bitcoin: btc,
+  dash: btc,
+  digibyte: btc,
+  dogecoin: btc,
   ethereum_classic: ethereum,
-
+  ethereum_testnet: ethereum,
+  ethereum,
+  hcash: btc,
+  komodo: btc,
+  litecoin: btc,
+  peercoin: btc,
+  pivx: btc,
+  qtum: btc,
   ripple,
-
-  // TODO port of all these
-  viacoin: fallback('viacoin'),
-  vertcoin: fallback('vertcoin'),
-  stratis: fallback('stratis'),
-  stealthcoin: fallback('stealthcoin'),
-  qtum: fallback('qtum'),
-  pivx: fallback('pivx'),
-  peercoin: fallback('peercoin'),
-  komodo: fallback('komodo'),
-  hcash: fallback('hcash'),
-  dogecoin: fallback('dogecoin'),
-  digibyte: fallback('digibyte'),
-  dash: fallback('dash'),
+  stealthcoin: btc,
+  stratis: btc,
+  vertcoin: btc,
+  viacoin: btc,
+  zcash: btc,
+  zencash: btc,
 }
 
 const getAddressForCurrency: Module = (currencyId: string) => all[currencyId]
