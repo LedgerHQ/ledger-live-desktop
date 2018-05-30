@@ -32,8 +32,8 @@ function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) 
         t={t}
         deviceSelected={currentDevice}
         currency={currency}
-        onStatusChange={s => {
-          if (s === 'connected') {
+        onStatusChange={(deviceStatus, appStatus) => {
+          if (appStatus === 'success') {
             setState({ isAppOpened: true })
           }
         }}

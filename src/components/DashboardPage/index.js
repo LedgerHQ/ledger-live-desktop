@@ -28,6 +28,7 @@ import OperationsList from 'components/OperationsList'
 
 import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
+import EmptyState from './EmptyState'
 
 const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
@@ -109,88 +110,93 @@ class DashboardPage extends PureComponent<Props, State> {
 
     return (
       <Box flow={7}>
-        <UpdateNotifier mt={-5} />
-        <Box horizontal alignItems="flex-end">
-          <Box grow>
-            <Text color="dark" ff="Museo Sans" fontSize={7}>
-              {t(timeFrame)}
-            </Text>
-            <Text color="grey" fontSize={5} ff="Museo Sans|Light">
-              {totalAccounts > 0
-                ? t('dashboard:summary', { count: totalAccounts })
-                : t('dashboard:noAccounts')}
-            </Text>
-          </Box>
+        {totalAccounts > 0 ? (
           <Box>
-            <PillsDaysCount selectedTime={selectedTime} onChange={this.handleChangeSelectedTime} />
-          </Box>
-        </Box>
-        {totalAccounts > 0 && (
-          <Fragment>
-            <BalanceSummary
-              counterValue={counterValue}
-              chartId="dashboard-chart"
-              chartColor={colors.wallet}
-              accounts={accounts}
-              selectedTime={selectedTime}
-              daysCount={daysCount}
-              renderHeader={({ totalBalance, selectedTime, sinceBalance, refBalance }) => (
-                <BalanceInfos
-                  t={t}
-                  counterValue={counterValue}
-                  totalBalance={totalBalance}
-                  since={selectedTime}
-                  sinceBalance={sinceBalance}
-                  refBalance={refBalance}
-                />
-              )}
-            />
-            <Box flow={4}>
-              <Box horizontal alignItems="flex-end">
-                <Text color="dark" ff="Museo Sans" fontSize={6}>
-                  {t('sidebar:accounts')}
+            <UpdateNotifier mt={-5} />
+            <Box horizontal alignItems="flex-end">
+              <Box grow>
+                <Text color="dark" ff="Museo Sans" fontSize={7}>
+                  {t(timeFrame)}
                 </Text>
-                <Box ml="auto" horizontal flow={1}>
-                  <AccountsOrder />
-                </Box>
+                <Text color="grey" fontSize={5} ff="Museo Sans|Light">
+                  {t('dashboard:summary', { count: totalAccounts })}
+                </Text>
               </Box>
-              <Box flow={5}>
-                {accountsChunk.map((accountsByLine, i) => (
-                  <Box
-                    key={i} // eslint-disable-line react/no-array-index-key
-                    horizontal
-                    flow={5}
-                  >
-                    {accountsByLine.map(
-                      (account: any, j) =>
-                        account === null ? (
-                          <Box
-                            key={j} // eslint-disable-line react/no-array-index-key
-                            p={4}
-                            flex={1}
-                          />
-                        ) : (
-                          <AccountCard
-                            counterValue={counterValue}
-                            account={account}
-                            daysCount={daysCount}
-                            key={account.id}
-                            onClick={() => push(`/account/${account.id}`)}
-                          />
-                        ),
-                    )}
-                  </Box>
-                ))}
+              <Box>
+                <PillsDaysCount
+                  selectedTime={selectedTime}
+                  onChange={this.handleChangeSelectedTime}
+                />
               </Box>
             </Box>
-            <OperationsList
-              canShowMore
-              onAccountClick={account => push(`/account/${account.id}`)}
-              accounts={accounts}
-              title={t('dashboard:recentActivity')}
-              withAccount
-            />
-          </Fragment>
+            <Fragment>
+              <BalanceSummary
+                counterValue={counterValue}
+                chartId="dashboard-chart"
+                chartColor={colors.wallet}
+                accounts={accounts}
+                selectedTime={selectedTime}
+                daysCount={daysCount}
+                renderHeader={({ totalBalance, selectedTime, sinceBalance, refBalance }) => (
+                  <BalanceInfos
+                    t={t}
+                    counterValue={counterValue}
+                    totalBalance={totalBalance}
+                    since={selectedTime}
+                    sinceBalance={sinceBalance}
+                    refBalance={refBalance}
+                  />
+                )}
+              />
+              <Box flow={4}>
+                <Box horizontal alignItems="flex-end">
+                  <Text color="dark" ff="Museo Sans" fontSize={6}>
+                    {t('sidebar:accounts')}
+                  </Text>
+                  <Box ml="auto" horizontal flow={1}>
+                    <AccountsOrder />
+                  </Box>
+                </Box>
+                <Box flow={5}>
+                  {accountsChunk.map((accountsByLine, i) => (
+                    <Box
+                      key={i} // eslint-disable-line react/no-array-index-key
+                      horizontal
+                      flow={5}
+                    >
+                      {accountsByLine.map(
+                        (account: any, j) =>
+                          account === null ? (
+                            <Box
+                              key={j} // eslint-disable-line react/no-array-index-key
+                              p={4}
+                              flex={1}
+                            />
+                          ) : (
+                            <AccountCard
+                              counterValue={counterValue}
+                              account={account}
+                              daysCount={daysCount}
+                              key={account.id}
+                              onClick={() => push(`/account/${account.id}`)}
+                            />
+                          ),
+                      )}
+                    </Box>
+                  ))}
+                </Box>
+              </Box>
+              <OperationsList
+                canShowMore
+                onAccountClick={account => push(`/account/${account.id}`)}
+                accounts={accounts}
+                title={t('dashboard:recentActivity')}
+                withAccount
+              />
+            </Fragment>
+          </Box>
+        ) : (
+          <EmptyState />
         )}
       </Box>
     )

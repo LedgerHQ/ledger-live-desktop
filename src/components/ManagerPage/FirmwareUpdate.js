@@ -7,11 +7,12 @@ import isEmpty from 'lodash/isEmpty'
 import type { Device, T } from 'types/common'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
+import installOsuFirmware from 'commands/installOsuFirmware'
 
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
 
-// let CACHED_LATEST_FIRMWARE = null
+let CACHED_LATEST_FIRMWARE = null
 
 type FirmwareInfos = {
   name: string,
@@ -19,7 +20,7 @@ type FirmwareInfos = {
 }
 
 type DeviceInfos = {
-  targetId: number,
+  targetId: number | string,
   version: string,
 }
 
@@ -43,7 +44,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 
   componentDidUpdate() {
-    if (/* !CACHED_LATEST_FIRMWARE || */ isEmpty(this.state.latestFirmware)) {
+    if (!CACHED_LATEST_FIRMWARE || isEmpty(this.state.latestFirmware)) {
       this.fetchLatestFirmware()
     }
   }
@@ -57,23 +58,29 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   fetchLatestFirmware = async () => {
     const { infos } = this.props
     const latestFirmware =
-      // CACHED_LATEST_FIRMWARE ||
-      await getLatestFirmwareForDevice
+      CACHED_LATEST_FIRMWARE ||
+      (await getLatestFirmwareForDevice
         .send({ targetId: infos.targetId, version: infos.version })
-        .toPromise()
+        .toPromise())
     if (
       !isEmpty(latestFirmware) &&
       !isEqual(this.state.latestFirmware, latestFirmware) &&
       !this._unmounting
     ) {
-      // CACHED_LATEST_FIRMWARE = latestFirmware
+      CACHED_LATEST_FIRMWARE = latestFirmware
       this.setState({ latestFirmware })
     }
   }
 
-  installFirmware = async () => {
+  installFirmware = (firmware: FirmwareInfos) => async () => {
     try {
-      // TODO
+      const {
+        device: { path: devicePath },
+      } = this.props
+      const { success } = await installOsuFirmware.send({ devicePath, firmware }).toPromise()
+      if (success) {
+        this.fetchLatestFirmware()
+      }
     } catch (err) {
       console.log(err)
     }
@@ -94,9 +101,9 @@ class FirmwareUpdate extends PureComponent<Props, State> {
         </Box>
         <Card flow={2} {...props}>
           <Box horizontal align="center" flow={2}>
-            <Box ff="Museo Sans">{`Latest firmware: ${latestFirmware.name}`}</Box>
-            <Button outline onClick={this.installFirmware}>
-              {'Install'}
+            <Box ff="Museo Sans">{`${t('manager:latestFirmware')}: ${latestFirmware.name}`}</Box>
+            <Button outline onClick={this.installFirmware(latestFirmware)}>
+              {t('manager:install')}
             </Button>
           </Box>
           <Box

@@ -5,15 +5,18 @@ import React, { Component } from 'react'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
+import Input from 'components/base/Input'
 import EnsureDevice from 'components/ManagerPage/EnsureDevice'
 import { getDerivations } from 'helpers/derivations'
 import getAddress from 'commands/getAddress'
 import testInterval from 'commands/testInterval'
 import testCrash from 'commands/testCrash'
+import testApdu from 'commands/testApdu'
 
 class Debug extends Component<*, *> {
   state = {
     logs: [],
+    apdu: '',
   }
 
   onStartPeriod = (period: number) => () => {
@@ -62,6 +65,12 @@ class Debug extends Component<*, *> {
   }
   periodSubs = []
 
+  runApdu = (device: *) => () => {
+    testApdu
+      .send({ devicePath: device.path, apduHex: this.state.apdu })
+      .subscribe(o => this.log(o.responseHex), e => this.error(e))
+  }
+
   log = (txt: string) => {
     this.setState(({ logs }) => ({ logs: logs.concat({ txt, type: 'log' }) }))
   }
@@ -103,6 +112,22 @@ class Debug extends Component<*, *> {
                   </Button>
                   <Button onClick={this.cancelAllPeriods}>Cancel</Button>
                 </Box>
+                <EnsureDevice>
+                  {device => (
+                    <Box horizontal style={{ padding: 10 }}>
+                      <Box grow>
+                        <Input
+                          placeholder="APDU hex ( e.g. E016000000 )"
+                          value={this.state.apdu}
+                          onChange={apdu => this.setState({ apdu })}
+                        />
+                      </Box>
+                      <Button onClick={this.runApdu(device)} primary>
+                        RUN
+                      </Button>
+                    </Box>
+                  )}
+                </EnsureDevice>
               </Box>
               <Box
                 style={{
