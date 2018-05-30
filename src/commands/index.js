@@ -18,6 +18,7 @@ import installOsuFirmware from 'commands/installOsuFirmware'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
 import listApps from 'commands/listApps'
+import testApdu from 'commands/testApdu'
 import testInterval from 'commands/testInterval'
 import testCrash from 'commands/testCrash'
 
@@ -38,6 +39,7 @@ const all: Array<Command<any, any>> = [
   installFinalFirmware,
   installMcu,
   listApps,
+  testApdu,
   testInterval,
   testCrash,
 ]
