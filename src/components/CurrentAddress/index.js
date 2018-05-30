@@ -14,13 +14,11 @@ import { rgba } from 'styles/helpers'
 
 import Box from 'components/base/Box'
 import CopyToClipboard from 'components/base/CopyToClipboard'
-import Print from 'components/base/Print'
 import QRCode from 'components/base/QRCode'
 
 import IconCheck from 'icons/Check'
 import IconCopy from 'icons/Copy'
 import IconInfoCircle from 'icons/InfoCircle'
-import IconPrint from 'icons/Print'
 import IconShare from 'icons/Share'
 import IconShield from 'icons/Shield'
 
@@ -212,16 +210,6 @@ class CurrentAddress extends PureComponent<Props> {
               data={address}
               render={copy => (
                 <FooterButton icon={<IconCopy size={16} />} label="Copy" onClick={copy} />
-              )}
-            />
-            <Print
-              data={{ address, amount, accountName }}
-              render={(print, isLoading) => (
-                <FooterButton
-                  icon={<IconPrint size={16} />}
-                  label={isLoading ? '...' : 'Print'}
-                  onClick={print}
-                />
               )}
             />
             <FooterButton icon={<IconShare size={16} />} label="Share" onClick={onShare} />
