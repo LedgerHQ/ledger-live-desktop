@@ -1,7 +1,6 @@
 // @flow
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { standardDerivation } from 'helpers/derivations'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
@@ -9,6 +8,7 @@ import type { Device } from 'types/common'
 import { getDevices } from 'reducers/devices'
 import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
+import isCurrencyAppOpened from 'commands/isCurrencyAppOpened'
 
 type OwnProps = {
   currency?: ?CryptoCurrency,
@@ -50,6 +50,8 @@ const mapStateToProps = (state: StoreState) => ({
   devices: getDevices(state),
 })
 
+// TODO we want to split into <EnsureDeviceCurrency/> and <EnsureDeviceAccount/>
+// and minimize the current codebase AF
 class EnsureDeviceApp extends PureComponent<Props, State> {
   state = {
     appStatus: 'progress',
@@ -104,39 +106,39 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       return
     }
 
-    let appOptions
-
-    if (account) {
-      appOptions = {
-        devicePath: deviceSelected.path,
-        currencyId: account.currency.id,
-        path: account.freshAddressPath,
-        accountAddress: account.freshAddress,
-        segwit: !!account.isSegwit,
-      }
-    } else if (currency) {
-      appOptions = {
-        devicePath: deviceSelected.path,
-        currencyId: currency.id,
-        path: standardDerivation({ currency, x: 0, segwit: false }),
-      }
-    }
-
     try {
-      if (appOptions) {
-        const { address } = await getAddress.send(appOptions).toPromise()
-        if (account && account.freshAddress !== address) {
-          console.log(account)
-          console.warn(account.freshAddress, address)
+      if (account) {
+        const { address } = await getAddress
+          .send({
+            devicePath: deviceSelected.path,
+            currencyId: account.currency.id,
+            path: account.freshAddressPath,
+            segwit: !!account.isSegwit,
+          })
+          .toPromise()
+        const { freshAddress } = account
+        if (account && freshAddress !== address) {
+          console.warn({ freshAddress, address })
           throw new Error('Account address is different than device address')
+        }
+      } else if (currency) {
+        const pass = await isCurrencyAppOpened
+          .send({
+            devicePath: deviceSelected.path,
+            currencyId: currency.id,
+          })
+          .toPromise()
+        if (!pass) {
+          throw new Error(`${currency.name} app is not opened on the device`)
         }
       } else {
         // TODO: real check if user is on the device dashboard
         if (!deviceSelected) {
           throw new Error('No device')
         }
-        await sleep(1)
+        await sleep(1) // WTF
       }
+
       this.handleStatusChange(this.state.deviceStatus, 'success')
 
       if (withGenuineCheck && appStatus !== 'success') {
