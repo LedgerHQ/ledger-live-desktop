@@ -23,7 +23,6 @@ type Input = {
 type Result = $Exact<OperationRaw>
 
 const cmd: Command<Input, Result> = createCommand(
-  'devices',
   'libcoreSignAndBroadcast',
   ({ account, transaction, deviceId }) => {
     // TODO: investigate why importing it on file scope causes trouble

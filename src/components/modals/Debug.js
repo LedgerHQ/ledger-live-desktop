@@ -8,10 +8,24 @@ import Box from 'components/base/Box'
 import EnsureDevice from 'components/ManagerPage/EnsureDevice'
 import { getDerivations } from 'helpers/derivations'
 import getAddress from 'commands/getAddress'
+import testInterval from 'commands/testInterval'
+import testCrash from 'commands/testCrash'
 
 class Debug extends Component<*, *> {
   state = {
     logs: [],
+  }
+
+  onStartPeriod = (period: number) => () => {
+    this.periodSubs.push(
+      testInterval.send(period).subscribe(n => this.log(`interval ${n}`), this.error),
+    )
+  }
+
+  onCrash = () => {
+    testCrash.send().subscribe({
+      error: this.error,
+    })
   }
 
   onClickStressDevice = (device: *) => async () => {
@@ -42,6 +56,12 @@ class Debug extends Component<*, *> {
     this.setState({ logs: [] })
   }
 
+  cancelAllPeriods = () => {
+    this.periodSubs.forEach(s => s.unsubscribe())
+    this.periodSubs = []
+  }
+  periodSubs = []
+
   log = (txt: string) => {
     this.setState(({ logs }) => ({ logs: logs.concat({ txt, type: 'log' }) }))
   }
@@ -60,17 +80,30 @@ class Debug extends Component<*, *> {
         onHide={this.onHide}
         render={({ onClose }: *) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle>DEBUG utils</ModalTitle>
+            <ModalTitle>developer internal tools</ModalTitle>
             <ModalContent>
-              <EnsureDevice>
-                {device => (
-                  <Box horizontal style={{ padding: 20 }}>
-                    <Button onClick={this.onClickStressDevice(device)} primary>
-                      Stress getAddress (BTC)
-                    </Button>
-                  </Box>
-                )}
-              </EnsureDevice>
+              <Box style={{ height: 60, overflow: 'auto' }}>
+                <Box horizontal style={{ padding: 10 }}>
+                  <EnsureDevice>
+                    {device => (
+                      <Button onClick={this.onClickStressDevice(device)} primary>
+                        Stress getAddress (BTC)
+                      </Button>
+                    )}
+                  </EnsureDevice>
+                </Box>
+                <Box horizontal style={{ padding: 10 }}>
+                  <Button onClick={this.onCrash} danger>
+                    crash process
+                  </Button>
+                </Box>
+                <Box horizontal style={{ padding: 10 }}>
+                  <Button onClick={this.onStartPeriod(1000)} primary>
+                    interval(1s)
+                  </Button>
+                  <Button onClick={this.cancelAllPeriods}>Cancel</Button>
+                </Box>
+              </Box>
               <Box
                 style={{
                   padding: '20px 10px',
@@ -92,6 +125,14 @@ class Debug extends Component<*, *> {
                   </Box>
                 ))}
               </Box>
+              <Button
+                style={{ position: 'absolute', right: 30, bottom: 28 }}
+                onClick={() => {
+                  this.setState({ logs: [] })
+                }}
+              >
+                Clear
+              </Button>
             </ModalContent>
           </ModalBody>
         )}

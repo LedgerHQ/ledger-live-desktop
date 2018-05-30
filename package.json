@@ -64,7 +64,6 @@
     "invariant": "^2.2.4",
     "lodash": "^4.17.5",
     "moment": "^2.22.1",
-    "object-path": "^0.11.4",
     "qrcode": "^1.2.0",
     "qrcode-reader": "^1.0.4",
     "qs": "^6.5.1",

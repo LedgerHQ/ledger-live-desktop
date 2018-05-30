@@ -15,7 +15,6 @@ type Input = {
 type Result = string
 
 const cmd: Command<Input, Result> = createCommand(
-  'devices',
   'signTransaction',
   ({ currencyId, devicePath, path, transaction }) =>
     fromPromise(

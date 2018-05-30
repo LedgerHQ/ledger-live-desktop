@@ -15,11 +15,8 @@ type Input = {
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand(
-  'devices',
-  'uninstallApp',
-  ({ devicePath, ...rest }) =>
-    fromPromise(withDevice(devicePath)(transport => uninstallApp(transport, rest))),
+const cmd: Command<Input, Result> = createCommand('uninstallApp', ({ devicePath, ...rest }) =>
+  fromPromise(withDevice(devicePath)(transport => uninstallApp(transport, rest))),
 )
 
 export default cmd

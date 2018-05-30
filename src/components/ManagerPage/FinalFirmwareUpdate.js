@@ -4,8 +4,6 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import type { Device, T } from 'types/common'
 
-// import runJob from 'renderer/runJob'
-
 import Box, { Card } from 'components/base/Box'
 // import Button from 'components/base/Button'
 
@@ -36,28 +34,6 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 
   _unmounting = false
-
-  // handleInstallFinalFirmware = async () => {
-  //   try {
-  //     const { latestFirmware } = this.state
-  //     this.setState(state => ({ ...state, installing: true }))
-  //     const {
-  //       device: { path: devicePath },
-  //     } = this.props
-  //     await runJob({
-  //       channel: 'manager',
-  //       job: 'installFinalFirmware',
-  //       successResponse: 'device.finalFirmwareInstallSuccess',
-  //       errorResponse: 'device.finalFirmwareInstallError',
-  //       data: {
-  //         devicePath,
-  //         firmware: latestFirmware,
-  //       },
-  //     })
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
 
   render() {
     const { t, ...props } = this.props

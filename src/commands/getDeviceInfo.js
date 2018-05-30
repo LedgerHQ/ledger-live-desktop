@@ -17,7 +17,7 @@ type Result = {
   mcu: boolean,
 }
 
-const cmd: Command<Input, Result> = createCommand('devices', 'getDeviceInfo', ({ devicePath }) =>
+const cmd: Command<Input, Result> = createCommand('getDeviceInfo', ({ devicePath }) =>
   fromPromise(withDevice(devicePath)(transport => getDeviceInfo(transport))),
 )
 

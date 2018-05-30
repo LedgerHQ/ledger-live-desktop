@@ -21,8 +21,6 @@ import installMcu from 'helpers/firmware/installMcu'
 type Input = *
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand('devices', 'installMcu', () =>
-  fromPromise(installMcu()),
-)
+const cmd: Command<Input, Result> = createCommand('installMcu', () => fromPromise(installMcu()))
 
 export default cmd
