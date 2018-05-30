@@ -11,12 +11,7 @@ type Input = {
   firmware: Object,
 }
 
-type Result = {
-  targetId: number | string,
-  version: string,
-  final: boolean,
-  mcu: boolean,
-}
+type Result = *
 
 const cmd: Command<Input, Result> = createCommand(
   'installOsuFirmware',
