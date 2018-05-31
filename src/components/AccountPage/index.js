@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -18,7 +18,7 @@ import { getAccountById } from 'reducers/accounts'
 import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
-import IconControls from 'icons/Controls'
+import IconAccountSettings from 'icons/AccountSettings'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 
@@ -35,6 +35,7 @@ import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
 
 import AccountHeader from './AccountHeader'
+import EmptyStateAccount from './EmptyStateAccount'
 
 const ButtonSettings = styled(Button).attrs({
   small: true,
@@ -99,78 +100,89 @@ class AccountPage extends PureComponent<Props, State> {
         <Box horizontal mb={5}>
           <AccountHeader account={account} />
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
-            <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconSend size={12} />
-                <Box>{t('send:title')}</Box>
-              </Box>
-            </Button>
-            <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
-              <Box horizontal flow={1} alignItems="center">
-                <IconReceive size={12} />
-                <Box>{t('receive:title')}</Box>
-              </Box>
-            </Button>
+            {account.operations.length > 0 && (
+              <Fragment>
+                <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
+                  <Box horizontal flow={1} alignItems="center">
+                    <IconSend size={12} />
+                    <Box>{t('send:title')}</Box>
+                  </Box>
+                </Button>
+
+                <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
+                  <Box horizontal flow={1} alignItems="center">
+                    <IconReceive size={12} />
+                    <Box>{t('receive:title')}</Box>
+                  </Box>
+                </Button>
+              </Fragment>
+            )}
             <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
               <Box align="center">
-                <IconControls size={16} />
+                <IconAccountSettings size={16} />
               </Box>
             </ButtonSettings>
           </Box>
         </Box>
-        <Box mb={7}>
-          <BalanceSummary
-            accounts={[account]}
-            chartColor={account.currency.color}
-            chartId={`account-chart-${account.id}`}
-            counterValue={counterValue}
-            daysCount={daysCount}
-            selectedTime={selectedTime}
-            renderHeader={({ totalBalance, sinceBalance, refBalance }) => (
-              <Box flow={4} mb={2}>
-                <Box horizontal>
-                  <BalanceTotal totalBalance={account.balance} unit={account.unit}>
-                    <FormattedVal
-                      animateTicker
-                      alwaysShowSign={false}
-                      color="warmGrey"
-                      unit={counterValue.units[0]}
-                      fontSize={6}
-                      showCode
-                      val={totalBalance}
-                    />
-                  </BalanceTotal>
-                  <Box>
-                    <PillsDaysCount
-                      selectedTime={selectedTime}
-                      onChange={this.handleChangeSelectedTime}
-                    />
+        {account.operations.length > 0 ? (
+          <Fragment>
+            <Box mb={7}>
+              <BalanceSummary
+                accounts={[account]}
+                chartColor={account.currency.color}
+                chartId={`account-chart-${account.id}`}
+                counterValue={counterValue}
+                daysCount={daysCount}
+                selectedTime={selectedTime}
+                renderHeader={({ totalBalance, sinceBalance, refBalance }) => (
+                  <Box flow={4} mb={2}>
+                    <Box horizontal>
+                      <BalanceTotal totalBalance={account.balance} unit={account.unit}>
+                        <FormattedVal
+                          animateTicker
+                          alwaysShowSign={false}
+                          color="warmGrey"
+                          unit={counterValue.units[0]}
+                          fontSize={6}
+                          showCode
+                          val={totalBalance}
+                        />
+                      </BalanceTotal>
+                      <Box>
+                        <PillsDaysCount
+                          selectedTime={selectedTime}
+                          onChange={this.handleChangeSelectedTime}
+                        />
+                      </Box>
+                    </Box>
+                    <Box horizontal justifyContent="center" flow={7}>
+                      <BalanceSincePercent
+                        t={t}
+                        alignItems="center"
+                        totalBalance={totalBalance}
+                        sinceBalance={sinceBalance}
+                        refBalance={refBalance}
+                        since={selectedTime}
+                      />
+                      <BalanceSinceDiff
+                        t={t}
+                        counterValue={counterValue}
+                        alignItems="center"
+                        totalBalance={totalBalance}
+                        sinceBalance={sinceBalance}
+                        refBalance={refBalance}
+                        since={selectedTime}
+                      />
+                    </Box>
                   </Box>
-                </Box>
-                <Box horizontal justifyContent="center" flow={7}>
-                  <BalanceSincePercent
-                    t={t}
-                    alignItems="center"
-                    totalBalance={totalBalance}
-                    sinceBalance={sinceBalance}
-                    refBalance={refBalance}
-                    since={selectedTime}
-                  />
-                  <BalanceSinceDiff
-                    t={t}
-                    counterValue={counterValue}
-                    alignItems="center"
-                    totalBalance={totalBalance}
-                    sinceBalance={sinceBalance}
-                    refBalance={refBalance}
-                    since={selectedTime}
-                  />
-                </Box>
-              </Box>
-            )}
-          />
-        </Box>
-        <OperationsList account={account} title={t('account:lastOperations')} />
+                )}
+              />
+            </Box>
+            <OperationsList account={account} title={t('account:lastOperations')} />
+          </Fragment>
+        ) : (
+          <EmptyStateAccount account={account} />
+        )}
       </Box>
     )
   }

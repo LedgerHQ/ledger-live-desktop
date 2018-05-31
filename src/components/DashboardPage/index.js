@@ -108,6 +108,9 @@ class DashboardPage extends PureComponent<Props, State> {
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
+    const displayOperationsHelper = (account: Account) => account.operations.length > 0
+    const displayOperations = accounts.some(displayOperationsHelper)
+
     return (
       <Box flow={7}>
         {totalAccounts > 0 ? (
@@ -186,13 +189,15 @@ class DashboardPage extends PureComponent<Props, State> {
                   ))}
                 </Box>
               </Box>
-              <OperationsList
-                canShowMore
-                onAccountClick={account => push(`/account/${account.id}`)}
-                accounts={accounts}
-                title={t('dashboard:recentActivity')}
-                withAccount
-              />
+              {displayOperations && (
+                <OperationsList
+                  canShowMore
+                  onAccountClick={account => push(`/account/${account.id}`)}
+                  accounts={accounts}
+                  title={t('dashboard:recentActivity')}
+                  withAccount
+                />
+              )}
             </Fragment>
           </Fragment>
         ) : (
