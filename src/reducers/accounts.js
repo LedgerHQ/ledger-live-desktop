@@ -50,8 +50,10 @@ const handlers: Object = {
       return orderAccountsOperations(updatedAccount)
     }),
 
-  REMOVE_ACCOUNT: (state: AccountsState, { payload: account }: { payload: Account }) =>
-    state.filter(acc => acc.id !== account.id),
+  REMOVE_ACCOUNT: (
+    state: AccountsState,
+    { payload: account }: { payload: Account },
+  ): AccountsState => state.filter(acc => acc.id !== account.id),
 }
 
 // Selectors

@@ -4,6 +4,7 @@ no: No
 apply: Apply
 confirm: Confirm
 cancel: Cancel
+delete: Delete
 continue: Continue
 chooseWalletPlaceholder: Choose a wallet...
 currency: Currency
