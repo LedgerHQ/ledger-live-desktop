@@ -8,6 +8,7 @@ import { getBridgeForCurrency } from 'bridge'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Spinner from 'components/base/Spinner'
+import FakeLink from 'components/base/FakeLink'
 import IconExchange from 'icons/Exchange'
 
 import AccountRow from '../AccountRow'
@@ -102,12 +103,25 @@ class StepImport extends PureComponent<StepProps> {
     })
   }
 
+  handleToggleSelectAll = () => {
+    const { scannedAccounts, setState } = this.props
+    setState({ checkedAccountsIds: scannedAccounts.map(a => a.id) })
+  }
+
   render() {
     const { scanStatus, err, scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
 
     return (
       <Box>
         {err && <Box shrink>{err.message}</Box>}
+
+        {!!scannedAccounts.length && (
+          <Box horizontal justify="flex-end" mb={2}>
+            <FakeLink onClick={this.handleToggleSelectAll} fontSize={3}>
+              {'Select all'}
+            </FakeLink>
+          </Box>
+        )}
 
         <Box flow={2}>
           {scannedAccounts.map(account => {
@@ -142,10 +156,10 @@ class StepImport extends PureComponent<StepProps> {
 
         <Box horizontal mt={2}>
           {['error', 'finished'].includes(scanStatus) && (
-            <Button ml="auto" small outline onClick={this.handleRetry}>
+            <Button small outline onClick={this.handleRetry}>
               <Box horizontal flow={2} align="center">
                 <IconExchange size={13} />
-                <span>{'retry'}</span>
+                <span>{'retry sync'}</span>
               </Box>
             </Button>
           )}
