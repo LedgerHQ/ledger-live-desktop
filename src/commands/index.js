@@ -2,46 +2,48 @@
 
 import type { Command } from 'helpers/ipc'
 
-import getMemInfo from 'commands/getMemInfo'
-import libcoreScanAccounts from 'commands/libcoreScanAccounts'
-import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import getAddress from 'commands/getAddress'
-import signTransaction from 'commands/signTransaction'
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getFirmwareInfo from 'commands/getFirmwareInfo'
 import getIsGenuine from 'commands/getIsGenuine'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
+import getMemInfo from 'commands/getMemInfo'
 import installApp from 'commands/installApp'
-import listenDevices from 'commands/listenDevices'
-import uninstallApp from 'commands/uninstallApp'
-import installOsuFirmware from 'commands/installOsuFirmware'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
+import installOsuFirmware from 'commands/installOsuFirmware'
+import libcoreGetVersion from 'commands/libcoreGetVersion'
+import libcoreScanAccounts from 'commands/libcoreScanAccounts'
+import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import listApps from 'commands/listApps'
+import listenDevices from 'commands/listenDevices'
+import signTransaction from 'commands/signTransaction'
 import testApdu from 'commands/testApdu'
-import testInterval from 'commands/testInterval'
 import testCrash from 'commands/testCrash'
+import testInterval from 'commands/testInterval'
+import uninstallApp from 'commands/uninstallApp'
 
 const all: Array<Command<any, any>> = [
-  getMemInfo,
-  libcoreScanAccounts,
-  libcoreSignAndBroadcast,
   getAddress,
-  signTransaction,
   getDeviceInfo,
   getFirmwareInfo,
   getIsGenuine,
   getLatestFirmwareForDevice,
+  getMemInfo,
   installApp,
-  listenDevices,
-  uninstallApp,
-  installOsuFirmware,
   installFinalFirmware,
   installMcu,
+  installOsuFirmware,
+  libcoreGetVersion,
+  libcoreScanAccounts,
+  libcoreSignAndBroadcast,
   listApps,
+  listenDevices,
+  signTransaction,
   testApdu,
-  testInterval,
   testCrash,
+  testInterval,
+  uninstallApp,
 ]
 
 all.forEach(cmd => {
