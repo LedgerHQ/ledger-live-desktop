@@ -2,7 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import { i } from 'helpers/staticPath'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'

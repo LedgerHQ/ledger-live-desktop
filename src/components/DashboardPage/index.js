@@ -108,9 +108,7 @@ class DashboardPage extends PureComponent<Props, State> {
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
-    const displayOperationsHelper = (account: Account) => {
-      return account.operations.length > 0
-    }
+    const displayOperationsHelper = (account: Account) => account.operations.length > 0
     const displayOperations = accounts.some(displayOperationsHelper)
 
     return (
