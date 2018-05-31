@@ -34,7 +34,13 @@ const handlers: Object = {
   ADD_ACCOUNT: (
     state: AccountsState,
     { payload: account }: { payload: Account },
-  ): AccountsState => [...state, orderAccountsOperations(account)],
+  ): AccountsState => {
+    if (state.some(a => a.id === account.id)) {
+      console.warn('ADD_ACCOUNT attempt for an account that already exists!', account.id)
+      return state
+    }
+    return [...state, orderAccountsOperations(account)]
+  },
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
