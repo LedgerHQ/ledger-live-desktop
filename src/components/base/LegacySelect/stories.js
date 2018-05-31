@@ -5,10 +5,10 @@ import { storiesOf } from '@storybook/react'
 import { boolean } from '@storybook/addon-knobs'
 
 import Box from 'components/base/Box'
-import Select from 'components/base/Select'
+import LegacySelect from 'components/base/LegacySelect'
 import Text from 'components/base/Text'
 
-const stories = storiesOf('Components/base/Select', module)
+const stories = storiesOf('Components/base/LegacySelect', module)
 
 const itemsChessPlayers = [
   { key: 'aleksandr-grichtchouk', name: 'Aleksandr Grichtchouk' },
@@ -57,7 +57,7 @@ class Wrapper extends PureComponent<any, State> {
 stories.add('basic', () => (
   <Wrapper>
     {onChange => (
-      <Select
+      <LegacySelect
         disabled={boolean('disabled', false)}
         placeholder="Choose a chess player..."
         items={itemsChessPlayers}
@@ -69,7 +69,7 @@ stories.add('basic', () => (
 ))
 
 stories.add('searchable', () => (
-  <Select
+  <LegacySelect
     placeholder="Choose a chess player..."
     items={itemsChessPlayers}
     searchable
@@ -95,7 +95,7 @@ const itemsColors = [
 ]
 
 stories.add('custom render', () => (
-  <Select
+  <LegacySelect
     placeholder="Choose a color..."
     items={itemsColors}
     highlight

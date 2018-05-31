@@ -10,7 +10,7 @@ import isNaN from 'lodash/isNaN'
 
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
-import Select from 'components/base/Select'
+import Select from 'components/base/LegacySelect'
 
 import type { Unit } from '@ledgerhq/live-common/lib/types'
 

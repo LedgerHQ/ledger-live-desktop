@@ -11,7 +11,7 @@ import type { T } from 'types/common'
 import { availableCurrencies } from 'reducers/settings'
 
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
-import Select from 'components/base/Select'
+import Select from 'components/base/LegacySelect'
 import Box from 'components/base/Box'
 
 const renderItem = (currency: CryptoCurrency) => {

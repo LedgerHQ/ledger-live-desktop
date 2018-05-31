@@ -7,7 +7,7 @@ import { listFiatCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 
-import Select from 'components/base/Select'
+import Select from 'components/base/LegacySelect'
 import RadioGroup from 'components/base/RadioGroup'
 import IconDisplay from 'icons/Display'
 import languageKeys from 'config/languages'

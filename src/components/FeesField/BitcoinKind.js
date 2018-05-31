@@ -5,7 +5,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import styled from 'styled-components'
 
 import InputCurrency from 'components/base/InputCurrency'
-import Select from 'components/base/Select'
+import Select from 'components/base/LegacySelect'
 import type { Fees } from 'api/Fees'
 import WithFeesAPI from '../WithFeesAPI'
 import GenericContainer from './GenericContainer'

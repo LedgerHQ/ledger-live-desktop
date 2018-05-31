@@ -12,7 +12,7 @@ import type { T } from 'types/common'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 
-import Select from 'components/base/Select'
+import Select from 'components/base/LegacySelect'
 import FormattedVal from 'components/base/FormattedVal'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'

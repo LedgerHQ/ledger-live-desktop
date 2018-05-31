@@ -144,7 +144,7 @@ const renderSelectedItem = ({ selectedItem, renderSelected, placeholder }: any) 
     <Text color="fog">{placeholder}</Text>
   )
 
-class Select extends PureComponent<Props> {
+class LegacySelect extends PureComponent<Props> {
   static defaultProps = {
     bg: undefined,
     disabled: false,
@@ -340,4 +340,4 @@ class Select extends PureComponent<Props> {
   }
 }
 
-export default Select
+export default LegacySelect

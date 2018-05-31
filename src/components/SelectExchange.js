@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { Exchange } from '@ledgerhq/live-common/lib/countervalues/types'
-import Select from 'components/base/Select'
+import Select from 'components/base/LegacySelect'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import CounterValues from 'helpers/countervalues'
