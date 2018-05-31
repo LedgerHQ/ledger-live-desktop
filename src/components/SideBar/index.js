@@ -58,6 +58,7 @@ type Props = {
   t: T,
   openModal: Function,
   updateStatus: UpdateStatus,
+  accounts: Account[],
 }
 
 const mapStateToProps = state => ({
@@ -71,7 +72,7 @@ const mapDispatchToProps: Object = {
 
 class SideBar extends PureComponent<Props> {
   render() {
-    const { t, openModal, updateStatus } = this.props
+    const { t, openModal, updateStatus, accounts } = this.props
 
     return (
       <Container bg="white">
@@ -110,7 +111,11 @@ class SideBar extends PureComponent<Props> {
               </Tooltip>
             </CapsSubtitle>
             <GrowScroll pb={4} px={4} flow={2}>
-              <AccountsList />
+              {accounts.length > 0 ? (
+                <AccountsList />
+              ) : (
+                <NoAccountsText>{t('emptyState:sidebar.text')}</NoAccountsText>
+              )}
             </GrowScroll>
           </Box>
         </Box>
@@ -153,3 +158,11 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps, null, { pure: false }),
   translate(),
 )(SideBar)
+
+export const NoAccountsText = styled(Box).attrs({
+  ff: 'Open Sans|Regular',
+  fontSize: 3,
+  color: p => p.theme.colors.grey,
+  shrink: true,
+  mt: 3,
+})``

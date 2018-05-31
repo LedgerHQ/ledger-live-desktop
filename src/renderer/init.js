@@ -6,6 +6,7 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
 import moment from 'moment'
+import { delay } from 'helpers/promise'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
@@ -14,6 +15,7 @@ import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
 import { getLanguage } from 'reducers/settings'
+import libcoreGetVersion from 'commands/libcoreGetVersion'
 
 import db from 'helpers/db'
 import dbMiddleware from 'middlewares/db'
@@ -57,6 +59,9 @@ function r(Comp) {
 }
 
 async function init() {
+  // FIXME IMO init() really should only be for window. any other case is a hack!
+  const isMainWindow = remote.getCurrentWindow().name === 'MainWindow'
+
   if (!locked) {
     // Init accounts with defaults if needed
     db.init('accounts', [])
@@ -67,9 +72,19 @@ async function init() {
   r(<App store={store} history={history} language={language} />)
 
   // Only init events on MainWindow
-  if (remote.getCurrentWindow().name === 'MainWindow') {
+  if (isMainWindow) {
     events({ store, locked })
+
+    const libcoreVersion = await Promise.race([
+      libcoreGetVersion.send().toPromise(),
+      delay(10000).then(() => Promise.reject(new Error("timeout: can't load libcore"))),
+    ])
+    console.log('libcore', libcoreVersion)
   }
 }
 
-init()
+init().catch(e => {
+  // for now we make the app crash instead of pending forever. later we can render the error OR try to recover, but probably this is unrecoverable cases.
+  console.error(e)
+  process.exit(1)
+})

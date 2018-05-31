@@ -4,7 +4,13 @@ tabs:
   device: Mon appareil
 install: Installer
 allApps: Toutes les applications
+firmwareUpdate: Firmware update
+latestFirmware: Latest firmware
 plugYourDevice:
   title: Plug your device
   desc: Lorem Ipsum is simply dummy text of the printing and typesetting industry’s standard dummy text
   cta: Plug my device
+errors:
+  noDevice: Please make sur your device is connected
+  noDashboard: Please make sure your device is on the dashboard screen
+  noGenuine: You did not approve request on your device or your device is not genuine
