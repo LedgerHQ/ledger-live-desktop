@@ -19,6 +19,7 @@ const txExplorers: CryptoCurrencyConfig<Explorer> = {
   litecoin: op => `http://explorer.litecoin.net/tx/${op.hash}`,
   peercoin: op => `https://explorer.peercoin.net/tx/${op.hash}`,
   pivx: () => null, // FIXME can't find a reliable/official explorer
+  posw: () => null, // FIXME can't find a reliable/official explorer
   qtum: op => `https://explorer.qtum.org/tx/${op.hash}`,
   ripple: op => `https://bithomp.com/explorer/${op.hash}`,
   stealthcoin: () => null, // FIXME can't find a reliable/official explorer
