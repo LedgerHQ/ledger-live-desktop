@@ -5,14 +5,13 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
-import noop from 'lodash/noop'
-
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
+import type { Option } from 'components/base/Select'
 
 import { getVisibleAccounts } from 'reducers/accounts'
 
-import Select from 'components/base/LegacySelect'
+import Select from 'components/base/Select'
 import FormattedVal from 'components/base/FormattedVal'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -21,9 +20,10 @@ const mapStateToProps = state => ({
   accounts: getVisibleAccounts(state),
 })
 
-const renderItem = a => {
-  const Icon = getCryptoCurrencyIcon(a.currency)
-  const { color } = a.currency
+const renderOption = a => {
+  const { data: account } = a
+  const Icon = getCryptoCurrencyIcon(account.currency)
+  const { color } = account.currency
 
   // FIXME: we need a non-hacky way to handle text ellipsis
   const nameOuterStyle = { width: 0 }
@@ -38,11 +38,11 @@ const renderItem = a => {
       )}
       <Box grow style={nameOuterStyle} ff="Open Sans|SemiBold" color="dark" fontSize={4}>
         <Text style={nameInnerStyle} ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-          {a.name}
+          {account.name}
         </Text>
       </Box>
       <Box>
-        <FormattedVal color="grey" val={a.balance} unit={a.unit} showCode />
+        <FormattedVal color="grey" val={account.balance} unit={account.unit} showCode />
       </Box>
     </Box>
   )
@@ -50,28 +50,27 @@ const renderItem = a => {
 
 type Props = {
   accounts: Account[],
-  onChange?: () => Account | void,
-  value?: Account | null,
+  onChange: Option => void,
+  value: ?Account,
   t: T,
 }
 
-const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => (
-  <Select
-    {...props}
-    value={value && accounts.find(a => value && a.id === value.id)}
-    renderSelected={renderItem}
-    renderItem={renderItem}
-    keyProp="id"
-    items={accounts.sort((a, b) => (a.name < b.name ? -1 : 1))}
-    placeholder={t('common:selectAccount')}
-    fontSize={4}
-    onChange={onChange}
-  />
-)
-
-RawSelectAccount.defaultProps = {
-  onChange: noop,
-  value: undefined,
+const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => {
+  const options = accounts
+    .sort((a, b) => (a.name < b.name ? -1 : 1))
+    .map(a => ({ ...a, value: a.id, label: a.name }))
+  const selectedOption = value ? options.find(o => o.value === value.id) : null
+  return (
+    <Select
+      {...props}
+      value={selectedOption}
+      options={options}
+      renderValue={renderOption}
+      renderOption={renderOption}
+      placeholder={t('common:selectAccount')}
+      onChange={onChange}
+    />
+  )
 }
 
 export const SelectAccount = translate()(RawSelectAccount)
