@@ -11,7 +11,7 @@ import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
-import { updateAccount } from 'actions/accounts'
+import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
 
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
@@ -30,6 +30,7 @@ type State = {
 type Props = {
   setDataModal: Function,
   updateAccount: Function,
+  removeAccount: Function,
   t: T,
   onClose: () => void,
   data: any,
@@ -38,6 +39,7 @@ type Props = {
 const mapDispatchToProps = {
   setDataModal,
   updateAccount,
+  removeAccount,
 }
 
 const defaultState = {
@@ -104,6 +106,12 @@ class HelperComp extends PureComponent<Props, State> {
     this.setState({ accountUnit: value })
   }
 
+  handleRemoveAccount = (account: Account) => {
+    const { removeAccount } = this.props
+    removeAccount(account)
+    this.props.onClose()
+  }
+
   render() {
     const { accountUnit, accountNameError } = this.state
     const { t, onClose, data } = this.props
@@ -149,7 +157,10 @@ class HelperComp extends PureComponent<Props, State> {
               </Box>
             </Container>
           </ModalContent>
-          <ModalFooter>
+          <ModalFooter horizontal>
+            <Button small danger type="button" onClick={() => this.handleRemoveAccount(account)}>
+              {t('common:delete')}
+            </Button>
             <Button small ml="auto" type="submit" primary>
               {t('common:apply')}
             </Button>
