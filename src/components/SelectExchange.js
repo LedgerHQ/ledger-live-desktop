@@ -2,18 +2,11 @@
 import React, { Component } from 'react'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { Exchange } from '@ledgerhq/live-common/lib/countervalues/types'
-import Select from 'components/base/LegacySelect'
-import Box from 'components/base/Box'
+
+import Select from 'components/base/Select'
+import Spinner from 'components/base/Spinner'
 import Text from 'components/base/Text'
 import CounterValues from 'helpers/countervalues'
-
-const renderItem = ex => (
-  <Box grow horizontal alignItems="center" flow={2}>
-    <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-      {ex.name}
-    </Text>
-  </Box>
-)
 
 class ExchangeSelect extends Component<
   {
@@ -82,27 +75,24 @@ class ExchangeSelect extends Component<
   }
 
   render() {
-    const { onChange, exchangeId, style } = this.props
+    const { onChange, exchangeId, style, ...props } = this.props
     const { exchanges, error } = this.state
+
+    const options = exchanges ? exchanges.map(e => ({ value: e.id, label: e.name, ...e })) : []
+
     return exchanges && exchanges.length > 0 ? (
       <Select
-        style={style}
-        value={exchanges.find(e => e.id === exchangeId)}
-        renderSelected={renderItem}
-        renderItem={renderItem}
-        keyProp="id"
-        items={exchanges}
-        fontSize={4}
+        value={options.find(e => e.id === exchangeId)}
+        options={options}
         onChange={onChange}
+        {...props}
       />
     ) : error ? (
       <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
         Failed to load.
       </Text>
     ) : (
-      <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-        Loading...
-      </Text>
+      <Spinner color="grey" size={24} />
     )
   }
 }

@@ -3,13 +3,22 @@
 import { colors } from 'styles/theme'
 import { ff } from 'styles/helpers'
 
-export default ({ width, minWidth }: { width: number, minWidth: number }) => ({
+export default ({
+  width,
+  minWidth,
+  small,
+}: {
+  width: number,
+  minWidth: number,
+  small: boolean,
+}) => ({
   control: (styles: Object, { isFocused }: Object) => ({
     ...styles,
     width,
     minWidth,
     ...ff('Open Sans|SemiBold'),
-    height: 40,
+    height: small ? 34 : 40,
+    minHeight: 'unset',
     backgroundColor: 'white',
     cursor: 'pointer',
     ...(isFocused
@@ -60,6 +69,6 @@ export default ({ width, minWidth }: { width: number, minWidth: number }) => ({
   }),
   container: (styles: Object) => ({
     ...styles,
-    fontSize: 13,
+    fontSize: small ? 12 : 13,
   }),
 })

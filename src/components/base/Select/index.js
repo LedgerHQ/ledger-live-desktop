@@ -18,11 +18,12 @@ type Props = {
   renderValue: Option => Node,
 
   // optional
-  placeholder?: string,
-  isClearable?: boolean,
-  isDisabled?: boolean,
-  isLoading?: boolean,
-  isSearchable?: boolean,
+  placeholder: string,
+  isClearable: boolean,
+  isDisabled: boolean,
+  isLoading: boolean,
+  isSearchable: boolean,
+  small: boolean,
   width: number,
   minWidth: number,
 }
@@ -54,6 +55,7 @@ class Select extends Component<Props> {
       renderValue,
       width,
       minWidth,
+      small,
       ...props
     } = this.props
 
@@ -64,7 +66,7 @@ class Select extends Component<Props> {
         classNamePrefix="select"
         options={options}
         components={createRenderers({ renderOption, renderValue })}
-        styles={createStyles({ width, minWidth })}
+        styles={createStyles({ width, minWidth, small })}
         placeholder={placeholder}
         isDisabled={isDisabled}
         isLoading={isLoading}

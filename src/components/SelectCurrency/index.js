@@ -33,13 +33,13 @@ const SelectCurrency = ({ onChange, value, t, placeholder, currencies, ...props 
   const options = currencies ? currencies.map(c => ({ ...c, value: c.id, label: c.name })) : []
   return (
     <Select
-      {...props}
       value={value}
       renderOption={renderOption}
       renderValue={renderOption}
       options={options}
       placeholder={placeholder || t('common:selectCurrency')}
       onChange={onChange}
+      {...props}
     />
   )
 }
