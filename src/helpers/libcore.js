@@ -21,8 +21,11 @@ type Props = {
   onAccountScanned: AccountRaw => void,
 }
 
+const { SHOW_LEGACY_NEW_ACCOUNT } = process.env
+
 export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   const { devicePath, currencyId, onAccountScanned } = props
+  const currency = getCryptoCurrencyById(currencyId)
 
   return withDevice(devicePath)(async transport => {
     const hwApp = new Btc(transport)
@@ -34,16 +37,25 @@ export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
       devicePath,
     }
 
-    // scan segwit AND non-segwit accounts
+    let allAccounts = []
+
     const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({
       ...commonParams,
+      showNewAccount: !!SHOW_LEGACY_NEW_ACCOUNT || !currency.supportsSegwit,
       isSegwit: false,
     })
-    const segwitAccounts = await scanAccountsOnDeviceBySegwit({ ...commonParams, isSegwit: true })
+    allAccounts = allAccounts.concat(nonSegwitAccounts)
 
-    const accounts = [...nonSegwitAccounts, ...segwitAccounts]
+    if (currency.supportsSegwit) {
+      const segwitAccounts = await scanAccountsOnDeviceBySegwit({
+        ...commonParams,
+        showNewAccount: true,
+        isSegwit: true,
+      })
+      allAccounts = allAccounts.concat(segwitAccounts)
+    }
 
-    return accounts
+    return allAccounts
   })
 }
 
@@ -71,12 +83,14 @@ async function scanAccountsOnDeviceBySegwit({
   onAccountScanned,
   devicePath,
   isSegwit,
+  showNewAccount,
 }: {
   hwApp: Object,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
   devicePath: string,
   isSegwit: boolean,
+  showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
   // compute wallet identifier
   const WALLET_IDENTIFIER = await getWalletIdentifier({ hwApp, isSegwit, currencyId, devicePath })
@@ -96,6 +110,7 @@ async function scanAccountsOnDeviceBySegwit({
     accounts: [],
     onAccountScanned,
     isSegwit,
+    showNewAccount,
   })
 
   return accounts
@@ -111,6 +126,7 @@ async function scanNextAccount(props: {
   accounts: AccountRaw[],
   onAccountScanned: AccountRaw => void,
   isSegwit: boolean,
+  showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
   const {
     wallet,
@@ -121,6 +137,7 @@ async function scanNextAccount(props: {
     accounts,
     onAccountScanned,
     isSegwit,
+    showNewAccount,
   } = props
 
   // TODO: investigate why importing it on file scope causes trouble
@@ -157,10 +174,10 @@ async function scanNextAccount(props: {
 
   const isEmpty = ops.length === 0
 
-  // trigger event
-  onAccountScanned(account)
-
-  accounts.push(account)
+  if (!isEmpty || showNewAccount) {
+    onAccountScanned(account)
+    accounts.push(account)
+  }
 
   // returns if the current index points on an account with no ops
   if (isEmpty) {
@@ -247,14 +264,18 @@ async function buildAccountRaw({
   const { str: freshAddress, path: freshAddressPath } = addresses[0]
 
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
+  const currency = getCryptoCurrencyById(currencyId)
+
+  const name =
+    operations.length === 0
+      ? `New Account ${currency.supportsSegwit && !isSegwit ? ' (legacy)' : ''}`
+      : `Account ${accountIndex}`
 
   const rawAccount: AccountRaw = {
     id: xpub, // FIXME for account id you might want to prepend the crypto currency id to this because it's not gonna be unique.
     xpub,
     path: walletPath,
-    name: `${operations.length === 0 ? 'New ' : ''}Account ${accountIndex}${
-      isSegwit ? ' (segwit)' : ''
-    }`, // TODO: placeholder name?
+    name,
     isSegwit,
     freshAddress,
     freshAddressPath,
