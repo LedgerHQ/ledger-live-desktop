@@ -114,6 +114,7 @@ class TabCurrencies extends PureComponent<Props, State> {
         <Body>
           <Row title="Exchange" desc="The exchange to use">
             <ExchangeSelect
+              small
               from={currency}
               to={counterValueCurrency}
               exchangeId={exchange}
