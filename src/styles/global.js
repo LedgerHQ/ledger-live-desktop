@@ -103,6 +103,24 @@ injectGlobal`
     fill: ${colors.dark};
   }
 
+  .select__control:hover, .select__control-is-focused {
+    border-color: ${colors.fog};
+  }
+
+  .select__single-value {
+    color: inherit !important;
+    right: 0;
+    left: 15px;
+  }
+
+  .select__placeholder {
+    color ${colors.fog} !important;
+  }
+
+  .select__option:active {
+    background: ${colors.lightGrey} !important;
+  }
+
   ::selection {
     background: ${rgba(colors.wallet, 0.1)};
   }
