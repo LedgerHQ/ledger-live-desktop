@@ -103,8 +103,8 @@ class TabCurrencies extends PureComponent<Props, State> {
           renderRight={
             // TODO this should only be the subset of currencies of the app
             <SelectCurrency
-              style={{ minWidth: 200 }}
               small
+              minWidth={200}
               value={currency}
               onChange={this.handleChangeCurrency}
               currencies={currencies}
@@ -118,7 +118,7 @@ class TabCurrencies extends PureComponent<Props, State> {
               to={counterValueCurrency}
               exchangeId={exchange}
               onChange={this.handleChangeExchange}
-              style={{ minWidth: 200 }}
+              minWidth={200}
             />
           </Row>
           {defaults.confirmationsNb ? (
