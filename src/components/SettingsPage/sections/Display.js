@@ -23,16 +23,16 @@ import {
 
 const regions = Object.keys(regionsByKey).map(key => {
   const [language, region] = key.split('-')
-  return { key, language, region, name: regionsByKey[key] }
+  return { value: key, language, region, label: regionsByKey[key] }
 })
 
 const fiats = listFiatCurrencies()
   .map(f => f.units[0])
   // For now we take first unit, in the future we'll need to figure out something else
   .map(fiat => ({
-    key: fiat.code,
+    value: fiat.code,
+    label: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
     fiat,
-    name: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
   }))
 
 type Props = {
@@ -79,7 +79,7 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
-  handleChangeLanguage = ({ key: languageKey }: *) => {
+  handleChangeLanguage = ({ value: languageKey }: *) => {
     const { i18n, saveSettings } = this.props
     this.setState({ cachedLanguageKey: languageKey })
     window.requestIdleCallback(() => {
@@ -117,11 +117,15 @@ class TabProfile extends PureComponent<Props, State> {
       cachedRegion,
     } = this.state
 
-    const languages = languageKeys.map(key => ({ key, name: t(`language:${key}`) }))
-    const currentLanguage = languages.find(l => l.key === cachedLanguageKey)
+    const languages = languageKeys.map(key => ({ value: key, label: t(`language:${key}`) }))
+    const currentLanguage = languages.find(l => l.value === cachedLanguageKey)
     const regionsFiltered = regions.filter(({ language }) => cachedLanguageKey === language)
     const currentRegion =
       regionsFiltered.find(({ region }) => cachedRegion === region) || regionsFiltered[0]
+
+    const cvOption = cachedCounterValue
+      ? fiats.find(f => f.value === cachedCounterValue.value)
+      : null
 
     return (
       <Section>
@@ -136,33 +140,34 @@ class TabProfile extends PureComponent<Props, State> {
             desc={t('settings:display.counterValueDesc')}
           >
             <Select
-              style={{ minWidth: 250 }}
               small
+              minWidth={250}
               onChange={this.handleChangeCounterValue}
               itemToString={item => (item ? item.name : '')}
               renderSelected={item => item && item.name}
-              items={fiats}
-              value={cachedCounterValue}
+              options={fiats}
+              value={cvOption}
             />
           </Row>
           <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
             <Select
-              style={{ minWidth: 250 }}
               small
+              minWidth={250}
+              isSearchable={false}
               onChange={this.handleChangeLanguage}
               renderSelected={item => item && item.name}
               value={currentLanguage}
-              items={languages}
+              options={languages}
             />
           </Row>
           <Row title={t('settings:display.region')} desc={t('settings:display.regionDesc')}>
             <Select
-              style={{ minWidth: 250 }}
               small
+              minWidth={250}
               onChange={this.handleChangeRegion}
               renderSelected={item => item && item.name}
               value={currentRegion}
-              items={regionsFiltered}
+              options={regionsFiltered}
             />
           </Row>
           <Row title={t('settings:display.stock')} desc={t('settings:display.stockDesc')}>

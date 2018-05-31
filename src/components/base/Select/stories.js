@@ -6,27 +6,68 @@ import { boolean } from '@storybook/addon-knobs'
 
 import Box from 'components/base/Box'
 import Select from 'components/base/Select'
-import Text from 'components/base/Text'
 
 const stories = storiesOf('Components/base/Select', module)
 
 const itemsChessPlayers = [
-  { key: 'aleksandr-grichtchouk', name: 'Aleksandr Grichtchouk' },
-  { key: 'fabiano-caruana', name: 'Fabiano Caruana' },
-  { key: 'garry-kasparov', name: 'Garry Kasparov' },
-  { key: 'hikaru-nakamura', name: 'Hikaru Nakamura' },
-  { key: 'levon-aronian', name: 'Levon Aronian' },
-  { key: 'magnus-carlsen', name: 'Magnus Carlsen' },
-  { key: 'maxime-vachier-lagrave', name: 'Maxime Vachier-Lagrave' },
-  { key: 'shakhriyar-mamedyarov', name: 'Shakhriyar Mamedyarov' },
-  { key: 'veselin-topalov', name: 'Veselin Topalov' },
-  { key: 'viswanathan-anand', name: 'Viswanathan Anand' },
-  { key: 'vladimir-kramnik', name: 'Vladimir Kramnik' },
+  { value: 'aleksandr-grichtchouk', label: 'Aleksandr Grichtchouk' },
+  { value: 'fabiano-caruana', label: 'Fabiano Caruana' },
+  { value: 'garry-kasparov', label: 'Garry Kasparov' },
+  { value: 'hikaru-nakamura', label: 'Hikaru Nakamura' },
+  { value: 'levon-aronian', label: 'Levon Aronian' },
+  { value: 'magnus-carlsen', label: 'Magnus Carlsen' },
+  { value: 'maxime-vachier-lagrave', label: 'Maxime Vachier-Lagrave' },
+  { value: 'shakhriyar-mamedyarov', label: 'Shakhriyar Mamedyarov' },
+  { value: 'veselin-topalov', label: 'Veselin Topalov' },
+  { value: 'viswanathan-anand', label: 'Viswanathan Anand' },
+  { value: 'vladimir-kramnik', label: 'Vladimir Kramnik' },
 ]
 
 type State = {
   item: Object | null,
 }
+
+stories.add('basic', () => (
+  <Wrapper>
+    {onChange => (
+      <Select
+        disabled={boolean('disabled', false)}
+        placeholder="Choose a chess player..."
+        options={itemsChessPlayers}
+        renderSelected={item => item.name}
+        onChange={onChange}
+      />
+    )}
+  </Wrapper>
+))
+
+const itemsColors = [
+  { value: 'absolute zero', label: 'Absolute Zero', color: '#0048BA' },
+  { value: 'acid green', label: 'Acid Green', color: '#B0BF1A' },
+  { value: 'aero', label: 'Aero', color: '#7CB9E8' },
+  { value: 'aero blue', label: 'Aero Blue', color: '#C9FFE5' },
+  { value: 'african violet', label: 'African Violet', color: '#B284BE' },
+  { value: 'air force blue (usaf)', label: 'Air Force Blue (USAF)', color: '#00308F' },
+  { value: 'air superiority blue', label: 'Air Superiority Blue', color: '#72A0C1' },
+]
+
+stories.add('custom render', () => (
+  <Wrapper>
+    {onChange => (
+      <Select
+        placeholder="Choose a color..."
+        options={itemsColors}
+        onChange={onChange}
+        renderOption={item => (
+          <Box horizontal flow={2}>
+            <Box bg={item.data.color} style={{ width: 20, height: 20 }} />
+            <span>{item.label}</span>
+          </Box>
+        )}
+      />
+    )}
+  </Wrapper>
+))
 
 class Wrapper extends PureComponent<any, State> {
   state = {
@@ -53,65 +94,3 @@ class Wrapper extends PureComponent<any, State> {
     )
   }
 }
-
-stories.add('basic', () => (
-  <Wrapper>
-    {onChange => (
-      <Select
-        disabled={boolean('disabled', false)}
-        placeholder="Choose a chess player..."
-        items={itemsChessPlayers}
-        renderSelected={item => item.name}
-        onChange={onChange}
-      />
-    )}
-  </Wrapper>
-))
-
-stories.add('searchable', () => (
-  <Select
-    placeholder="Choose a chess player..."
-    items={itemsChessPlayers}
-    searchable
-    highlight
-    fuseOptions={{ keys: ['name'] }}
-    itemToString={item => (item ? item.name : '')}
-    renderHighlight={(text, key) => (
-      <Text key={key} fontWeight="bold">
-        {text}
-      </Text>
-    )}
-  />
-))
-
-const itemsColors = [
-  { key: 'absolute zero', name: 'Absolute Zero', color: '#0048BA' },
-  { key: 'acid green', name: 'Acid Green', color: '#B0BF1A' },
-  { key: 'aero', name: 'Aero', color: '#7CB9E8' },
-  { key: 'aero blue', name: 'Aero Blue', color: '#C9FFE5' },
-  { key: 'african violet', name: 'African Violet', color: '#B284BE' },
-  { key: 'air force blue (usaf)', name: 'Air Force Blue (USAF)', color: '#00308F' },
-  { key: 'air superiority blue', name: 'Air Superiority Blue', color: '#72A0C1' },
-]
-
-stories.add('custom render', () => (
-  <Select
-    placeholder="Choose a color..."
-    items={itemsColors}
-    highlight
-    searchable
-    fuseOptions={{ keys: ['name', 'color'] }}
-    itemToString={item => (item ? item.name : '')}
-    renderHighlight={(text, key) => (
-      <Text key={key} fontWeight="bold">
-        {text}
-      </Text>
-    )}
-    renderItem={item => (
-      <Box horizontal flow={2}>
-        <Box bg={item.color} style={{ width: 20, height: 20 }} />
-        <span>{item.name_highlight || item.name}</span>
-      </Box>
-    )}
-  />
-))
