@@ -14,6 +14,7 @@ import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
 
+import Spoiler from 'components/base/Spoiler'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -34,6 +35,10 @@ type Props = {
   t: T,
   onClose: () => void,
   data: any,
+}
+
+function onClickSelectAll(e) {
+  e.target.select()
 }
 
 const mapDispatchToProps = {
@@ -118,6 +123,14 @@ class HelperComp extends PureComponent<Props, State> {
 
     const account = this.getAccount(data)
 
+    const usefulData = {
+      xpub: account.xpub || undefined,
+      path: account.path,
+      index: account.index,
+      freshAddressPath: account.freshAddressPath,
+      id: account.id,
+    }
+
     return (
       <ModalBody onClose={onClose}>
         <form onSubmit={this.handleSubmit(account, onClose)}>
@@ -156,6 +169,21 @@ class HelperComp extends PureComponent<Props, State> {
                 />
               </Box>
             </Container>
+            <Spoiler title="Advanced logs">
+              <textarea
+                style={{
+                  userSelect: 'text',
+                  backgroundColor: '#eee',
+                  color: '#000',
+                  fontFamily: 'monospace',
+                  fontSize: '10px',
+                  height: 200,
+                  outline: 'none',
+                }}
+                onClick={onClickSelectAll}
+                value={JSON.stringify(usefulData, null, 2)}
+              />
+            </Spoiler>
           </ModalContent>
           <ModalFooter horizontal>
             <Button small danger type="button" onClick={() => this.handleRemoveAccount(account)}>
