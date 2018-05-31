@@ -64,13 +64,13 @@ class EmptyState extends PureComponent<Props, *> {
   }
 }
 
-const Title = styled(Box).attrs({
+export const Title = styled(Box).attrs({
   ff: 'Museo Sans|Regular',
   fontSize: 6,
   color: p => p.theme.colors.dark,
 })``
 
-const Description = styled(Box).attrs({
+export const Description = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
   color: p => p.theme.colors.graphite,
