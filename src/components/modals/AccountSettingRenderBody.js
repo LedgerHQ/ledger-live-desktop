@@ -109,6 +109,7 @@ class HelperComp extends PureComponent<Props, State> {
   handleRemoveAccount = (account: Account) => {
     const { removeAccount } = this.props
     removeAccount(account)
+    this.props.onClose()
   }
 
   render() {
@@ -157,7 +158,7 @@ class HelperComp extends PureComponent<Props, State> {
             </Container>
           </ModalContent>
           <ModalFooter horizontal>
-            <Button small danger type="button" onClick={e => this.handleRemoveAccount(account)}>
+            <Button small danger type="button" onClick={() => this.handleRemoveAccount(account)}>
               {t('common:delete')}
             </Button>
             <Button small ml="auto" type="submit" primary>
