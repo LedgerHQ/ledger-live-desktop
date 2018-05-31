@@ -28,7 +28,7 @@ const confirmationsNbPerCoin: CryptoCurrencyConfig<number> = {
   litecoin: 6,
   peercoin: 4,
   pivx: 12, // FIXME can't grab the block time info anywhere...
-  posw: 28,
+  poswallet: 28,
   qtum: 15,
   ripple: 0,
   stealthcoin: 12, // FIXME can't grab the block time info anywhere...

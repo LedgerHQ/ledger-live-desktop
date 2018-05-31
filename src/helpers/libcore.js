@@ -266,10 +266,10 @@ async function buildAccountRaw({
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
   const currency = getCryptoCurrencyById(currencyId)
 
-  const name =
-    operations.length === 0
-      ? `New Account ${currency.supportsSegwit && !isSegwit ? ' (legacy)' : ''}`
-      : `Account ${accountIndex}`
+  let name = operations.length === 0 ? `New Account` : `Account ${accountIndex}`
+  if (currency.supportsSegwit && !isSegwit) {
+    name += ' (legacy)'
+  }
 
   const rawAccount: AccountRaw = {
     id: xpub, // FIXME for account id you might want to prepend the crypto currency id to this because it's not gonna be unique.
