@@ -17,7 +17,7 @@
     "postinstall": "bash ./scripts/postinstall.sh",
     "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
     "publish-storybook": "bash ./scripts/publish-storybook.sh",
-    "release": "yarn compile && build",
+    "release": "bash ./scripts/release.sh",
     "start": "bash ./scripts/start.sh",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
     "trans": "node scripts/trans"
