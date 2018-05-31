@@ -34,6 +34,7 @@ const all: CryptoCurrencyConfig<Resolver> = {
   litecoin: btc,
   peercoin: btc,
   pivx: btc,
+  posw: btc,
   qtum: btc,
   ripple,
   stealthcoin: btc,
