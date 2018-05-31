@@ -12,6 +12,7 @@ import installApp from 'commands/installApp'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
 import installOsuFirmware from 'commands/installOsuFirmware'
+import isCurrencyAppOpened from 'commands/isCurrencyAppOpened'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
@@ -34,6 +35,7 @@ const all: Array<Command<any, any>> = [
   installFinalFirmware,
   installMcu,
   installOsuFirmware,
+  isCurrencyAppOpened,
   libcoreGetVersion,
   libcoreScanAccounts,
   libcoreSignAndBroadcast,
