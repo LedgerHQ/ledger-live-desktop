@@ -10,12 +10,12 @@ import type { T, Device } from 'types/common'
 import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
+import Spinner from 'components/base/Spinner'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 
 import IconCheck from 'icons/Check'
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconInfoCircle from 'icons/InfoCircle'
-import IconLoader from 'icons/Loader'
 import IconUsb from 'icons/Usb'
 import IconHome from 'icons/Home'
 
@@ -128,7 +128,7 @@ const StepCheck = ({ checked, hasErrors }: { checked: boolean, hasErrors?: boole
         <IconExclamationCircle size={16} />
       </Box>
     ) : (
-      <IconLoader size={16} />
+      <Spinner size={16} />
     )}
   </Box>
 )
