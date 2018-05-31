@@ -111,7 +111,7 @@ class DashboardPage extends PureComponent<Props, State> {
     return (
       <Box flow={7}>
         {totalAccounts > 0 ? (
-          <Box>
+          <Fragment>
             <UpdateNotifier mt={-5} />
             <Box horizontal alignItems="flex-end">
               <Box grow>
@@ -194,7 +194,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 withAccount
               />
             </Fragment>
-          </Box>
+          </Fragment>
         ) : (
           <EmptyState />
         )}
