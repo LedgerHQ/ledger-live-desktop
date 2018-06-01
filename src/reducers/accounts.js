@@ -4,26 +4,12 @@ import { createSelector } from 'reselect'
 import { handleActions } from 'redux-actions'
 import { createAccountModel } from '@ledgerhq/live-common/lib/models/account'
 
-import every from 'lodash/every'
-import get from 'lodash/get'
-import reduce from 'lodash/reduce'
 import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
-
-import type { State } from 'reducers'
 
 export type AccountsState = Account[]
 const state: AccountsState = []
 
 const accountModel = createAccountModel()
-
-function orderAccountsOperations(account: Account) {
-  const { operations } = account
-  operations.sort((a, b) => b.date - a.date)
-  return {
-    ...account,
-    operations,
-  }
-}
 
 const handlers: Object = {
   SET_ACCOUNTS: (
@@ -39,7 +25,7 @@ const handlers: Object = {
       console.warn('ADD_ACCOUNT attempt for an account that already exists!', account.id)
       return state
     }
-    return [...state, orderAccountsOperations(account)]
+    return [...state, account]
   },
 
   UPDATE_ACCOUNT: (
@@ -50,10 +36,7 @@ const handlers: Object = {
       if (existingAccount.id !== accountId) {
         return existingAccount
       }
-      const updatedAccount = updater(existingAccount)
-      // FIXME REMOVE orderAccountsOperations, we really shouldn't do it here.
-      // i'm sure it's unecessary 99% of the time and actually a perf issue
-      return orderAccountsOperations(updatedAccount)
+      return updater(existingAccount)
     }),
 
   REMOVE_ACCOUNT: (
@@ -88,18 +71,6 @@ export const accountSelector = createSelector(
 
 // TODO remove deprecated selectors
 
-export function getTotalBalance(state: { accounts: AccountsState }) {
-  // TODO we will have it using utility functions
-  return reduce(
-    state.accounts,
-    (result, account) => {
-      result += get(account, 'balance', 0)
-      return result
-    },
-    0,
-  )
-}
-
 export function getAccounts(state: { accounts: AccountsState }): Account[] {
   return state.accounts
 }
@@ -116,14 +87,10 @@ export function getAccountById(state: { accounts: AccountsState }, id: string): 
   return getAccounts(state).find(account => account.id === id)
 }
 
-export function canCreateAccount(state: State): boolean {
-  return every(getAccounts(state), a => get(a, 'operations.length', 0) > 0)
-}
-
 export function decodeAccount(account: AccountRaw): Account {
   return accountModel.decode({
     data: account,
-    version: 0, // TODO: should we keep v0 ?
+    version: accountModel.version,
   })
 }
 
@@ -134,6 +101,7 @@ export function encodeAccount(account: Account): AccountRaw {
 // Yeah. `any` should be `AccountRaw[]` but it can also be a map
 // of wrapped accounts. And as flow is apparently incapable of doing
 // such a simple thing, let's put any, right? I don't care.
+// FIXME: no it shouldn't. the purpose of DataModel is to contain the version, it's the only way we can run the migration functions
 export function serializeAccounts(accounts: any): Account[] {
   // ensure that accounts are always wrapped in data key
   if (accounts && accounts.length && !accounts[0].data) {
@@ -147,6 +115,7 @@ export function deserializeAccounts(accounts: Account[]) {
     // as account can be passed by main process, the Date types
     // can be converted to string. we ensure here that we have real
     // date
+    // FIXME Account shouldn't be passed by main process. only AccountRaw should be!
     if (typeof account.lastSyncDate === 'string') {
       account.lastSyncDate = new Date(account.lastSyncDate)
     }
