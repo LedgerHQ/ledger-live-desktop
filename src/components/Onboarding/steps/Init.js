@@ -3,6 +3,7 @@
 import React from 'react'
 import { shell } from 'electron'
 import { colors } from 'styles/theme'
+import { rgba } from 'styles/helpers'
 
 import styled from 'styled-components'
 import Box, { Card } from 'components/base/Box'
@@ -23,28 +24,24 @@ export default (props: StepProps) => {
       key: 'newDevice',
       icon: <IconAdd size={16} />,
       title: t('onboarding:init.newDevice.title'),
-      desc: t('onboarding:init.newDevice.desc'),
       onClick: () => nextStep(),
     },
     {
       key: 'restoreDevice',
       icon: <IconRecover size={16} />,
       title: t('onboarding:init.restoreDevice.title'),
-      desc: t('onboarding:init.restoreDevice.desc'),
       onClick: () => jumpStep('choosePIN'),
     },
     {
       key: 'initializedDevice',
       icon: <IconCheck size={16} />,
       title: t('onboarding:init.initializedDevice.title'),
-      desc: t('onboarding:init.initializedDevice.desc'),
       onClick: () => jumpStep('choosePIN'),
     },
     {
       key: 'noDevice',
       icon: <IconExternalLink size={16} />,
       title: t('onboarding:init.noDevice.title'),
-      desc: t('onboarding:init.noDevice.desc'),
       onClick: () => shell.openExternal('https://www.ledger.fr/'),
     },
   ]
@@ -55,7 +52,7 @@ export default (props: StepProps) => {
         <Box color="wallet">
           <IconUser size={36} />
         </Box>
-        <Box style={{ padding: 20, maxWidth: 650 }}>
+        <Box p={4} style={{ maxWidth: 550 }} textAlign="center">
           <Title>{t('onboarding:init.title')}</Title>
         </Box>
         <Box mt={5} flow={5}>
@@ -68,13 +65,12 @@ export default (props: StepProps) => {
 
 type CardType = {
   icon: any,
-  desc: any,
   title: any,
   onClick: Function,
 }
 
 export function OptionFlowCard({ card }: { card: CardType }) {
-  const { icon, desc, title, onClick } = card
+  const { icon, title, onClick } = card
   return (
     <Card
       horizontal
@@ -87,12 +83,13 @@ export function OptionFlowCard({ card }: { card: CardType }) {
       }}
       onClick={onClick}
     >
-      <Box justify="center" style={{ width: 50, color: colors.wallet }}>
-        {icon}
+      <Box justify="center" style={{ color: colors.wallet }}>
+        <Container mr={4} justify="center">
+          {icon}
+        </Container>
       </Box>
       <Box ff="Open Sans|Regular" justify="center" fontSize={4} grow>
         <CardTitle>{title}</CardTitle>
-        <CardDescription>{desc}</CardDescription>
       </Box>
       <Box justify="center" color="grey">
         <IconChevronRight size={22} />
@@ -101,14 +98,16 @@ export function OptionFlowCard({ card }: { card: CardType }) {
   )
 }
 
-export const CardDescription = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
-  fontSize: 4,
-  textAlign: 'left',
-  color: 'grey',
-})``
 export const CardTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'left',
 })``
+
+const Container = styled(Box).attrs({})`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(100, 144, 241, 0.1);
+  text-align: -webkit-center;
+`
