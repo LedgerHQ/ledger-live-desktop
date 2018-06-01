@@ -1,13 +1,5 @@
 // @flow
 
-//                          Scan accounts on device
-//                          -----------------------
-//
-//                                _   ,--()
-//                               ( )-'-.------|>
-//                                "     `--[]
-//
-
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'

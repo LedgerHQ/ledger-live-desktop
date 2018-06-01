@@ -63,8 +63,8 @@ const cmd: Command<Input, Result> = createCommand(
           const signedTransaction = await core.signTransaction({
             hwApp,
             transaction: builded,
-            sigHashType,
-            supportsSegwit: currency.supportsSegwit,
+            sigHashType: `0x${sigHashType}`,
+            supportsSegwit: !!currency.supportsSegwit,
             isSegwit: account.isSegwit,
           })
 
