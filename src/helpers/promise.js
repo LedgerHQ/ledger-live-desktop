@@ -20,8 +20,9 @@ export function retry<A>(f: () => Promise<A>, options?: $Shape<typeof defaults>)
       return result
     }
     // In case of failure, wait the interval, retry the action
-    return result.catch(() =>
-      delay(interval).then(() => rec(remainingTry - 1, interval * intervalMultiplicator)),
-    )
+    return result.catch(e => {
+      console.warn('Promise#retry', e)
+      return delay(interval).then(() => rec(remainingTry - 1, interval * intervalMultiplicator))
+    })
   }
 }

@@ -14,9 +14,20 @@ const Container = styled(Box).attrs({
 })`
   background: ${p => p.theme.colors.white};
   border-radius: ${p => p.theme.radii[1]}px;
-  border: 1px solid ${p => (p.isFocus ? p.theme.colors.wallet : p.theme.colors.fog)};
+  border: 1px solid
+    ${p =>
+      p.error ? p.theme.colors.pearl : p.isFocus ? p.theme.colors.wallet : p.theme.colors.fog};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: ${p => (p.small ? '34' : '40')}px;
+  position: relative;
+`
+
+const ErrorDisplay = styled(Box)`
+  position: absolute;
+  bottom: -20px;
+  left: 0px;
+  font-size: 12px;
+  color: ${p => p.theme.colors.pearl};
 `
 
 const Base = styled.input.attrs({
@@ -74,6 +85,7 @@ type Props = {
   renderLeft?: any,
   renderRight?: any,
   containerProps?: Object,
+  error?: string | boolean,
   small?: boolean,
 }
 
@@ -145,7 +157,7 @@ class Input extends PureComponent<Props, State> {
 
   render() {
     const { isFocus } = this.state
-    const { renderLeft, renderRight, containerProps, small } = this.props
+    const { renderLeft, renderRight, containerProps, small, error } = this.props
 
     return (
       <Container
@@ -154,6 +166,7 @@ class Input extends PureComponent<Props, State> {
         shrink
         {...containerProps}
         small={small}
+        error={error}
       >
         {renderLeft}
         <Box px={3} grow shrink>
@@ -166,6 +179,7 @@ class Input extends PureComponent<Props, State> {
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
           />
+          {error && typeof error === 'string' ? <ErrorDisplay>{error}</ErrorDisplay> : null}
         </Box>
         {renderRight}
       </Container>

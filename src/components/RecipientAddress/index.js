@@ -77,12 +77,13 @@ class RecipientAddress extends PureComponent<Props, State> {
   }
 
   render() {
-    const { onChange, withQrCode, value } = this.props
+    const { onChange, withQrCode, value, ...rest } = this.props
     const { qrReaderOpened } = this.state
 
     return (
       <Box relative justifyContent="center">
         <Input
+          {...rest}
           value={value}
           withQrCode={withQrCode}
           onChange={onChange}

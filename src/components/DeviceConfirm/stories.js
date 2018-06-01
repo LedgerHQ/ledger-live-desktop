@@ -8,4 +8,4 @@ import DeviceConfirm from 'components/DeviceConfirm'
 
 const stories = storiesOf('Components', module)
 
-stories.add('DeviceConfirm', () => <DeviceConfirm notValid={boolean('notValid', false)} />)
+stories.add('DeviceConfirm', () => <DeviceConfirm error={boolean('notValid', false)} />)

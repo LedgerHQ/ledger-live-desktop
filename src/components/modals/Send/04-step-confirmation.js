@@ -8,6 +8,7 @@ import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Box from 'components/base/Box'
 import { multiline } from 'styles/helpers'
 import { colors } from 'styles/theme'
+import { formatError } from 'helpers/errors'
 
 import type { T } from 'types/common'
 
@@ -39,10 +40,11 @@ const Text = styled(Box).attrs({
 type Props = {
   optimisticOperation: ?Operation,
   t: T,
+  error: ?Error,
 }
 
 function StepConfirmation(props: Props) {
-  const { t, optimisticOperation } = props
+  const { t, optimisticOperation, error } = props
   const Icon = optimisticOperation ? IconCheckCircle : IconExclamationCircleThin
   const iconColor = optimisticOperation ? colors.positiveGreen : colors.alertRed
   const tPrefix = optimisticOperation
@@ -55,7 +57,9 @@ function StepConfirmation(props: Props) {
         <Icon size={43} />
       </span>
       <Title>{t(`${tPrefix}.title`)}</Title>
-      <Text>{multiline(t(`${tPrefix}.text`))}</Text>
+      <Text style={{ userSelect: 'text' }}>
+        {optimisticOperation ? multiline(t(`${tPrefix}.text`)) : error ? formatError(error) : null}
+      </Text>
       <Text style={{ userSelect: 'text' }}>
         {optimisticOperation ? optimisticOperation.hash : ''}
       </Text>

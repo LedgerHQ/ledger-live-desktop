@@ -39,6 +39,7 @@ process.on('message', m => {
           type: 'ERROR',
           requestId,
           data: {
+            ...error,
             name: error && error.name,
             message: error && error.message,
           },

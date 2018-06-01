@@ -4,57 +4,9 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
 import Box from 'components/base/Box'
-import Label from 'components/base/Label'
-import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
-import RecipientAddress from 'components/RecipientAddress'
-import RequestAmount from 'components/RequestAmount'
-import SelectAccount from 'components/SelectAccount'
-
-const AccountField = ({ onChange, value, t }: *) => (
-  <Box flow={1}>
-    <Label>{t('send:steps.amount.selectAccountDebit')}</Label>
-    <SelectAccount onChange={onChange} value={value} />
-  </Box>
-)
-
-// TODO we should use isRecipientValid & provide a feedback to user
-const RecipientField = ({ bridge, account, transaction, onChangeTransaction, t }: *) => (
-  <Box flow={1}>
-    <Label>
-      <span>{t('send:steps.amount.recipientAddress')}</span>
-      <LabelInfoTooltip ml={1} text={t('send:steps.amount.recipientAddress')} />
-    </Label>
-    <RecipientAddress
-      withQrCode
-      value={bridge.getTransactionRecipient(account, transaction)}
-      onChange={(recipient, maybeExtra) => {
-        const { amount, currency } = maybeExtra || {}
-        if (currency && currency.scheme !== account.currency.scheme) return false
-        let t = transaction
-        if (amount) {
-          t = bridge.editTransactionAmount(account, t, amount)
-        }
-        t = bridge.editTransactionRecipient(account, t, recipient)
-        onChangeTransaction(t)
-        return true
-      }}
-    />
-  </Box>
-)
-
-const AmountField = ({ bridge, account, transaction, onChangeTransaction, t }: *) => (
-  <Box flow={1}>
-    <Label>{t('send:steps.amount.amount')}</Label>
-    <RequestAmount
-      withMax={false}
-      account={account}
-      onChange={amount =>
-        onChangeTransaction(bridge.editTransactionAmount(account, transaction, amount))
-      }
-      value={bridge.getTransactionAmount(account, transaction)}
-    />
-  </Box>
-)
+import AccountField from './AccountField'
+import RecipientField from './RecipientField'
+import AmountField from './AmountField'
 
 type PropsStepAmount<Transaction> = {
   t: T,

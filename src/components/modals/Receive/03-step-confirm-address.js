@@ -44,7 +44,7 @@ export default (props: Props) => (
       <Fragment>
         <Title>{props.t('receive:steps.confirmAddress.error.title')}</Title>
         <Text mb={5}>{props.t('receive:steps.confirmAddress.error.text')}</Text>
-        <DeviceConfirm notValid />
+        <DeviceConfirm error />
       </Fragment>
     ) : (
       <Fragment>
@@ -58,7 +58,7 @@ export default (props: Props) => (
                 account={props.account}
                 device={props.device}
                 onCheck={props.onCheck}
-                render={({ isVerified }) => <DeviceConfirm notValid={isVerified === false} />}
+                render={({ isVerified }) => <DeviceConfirm error={isVerified === false} />}
               />
             </Box>
           )}

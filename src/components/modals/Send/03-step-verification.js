@@ -35,10 +35,21 @@ type Props = {
   bridge: ?WalletBridge<*>,
   transaction: *,
   onOperationBroadcasted: (op: Operation) => void,
+  onError: (e: Error) => void,
+  hasError: boolean,
   t: T,
 }
 
-export default ({ account, device, bridge, transaction, onOperationBroadcasted, t }: Props) => (
+export default ({
+  account,
+  device,
+  bridge,
+  transaction,
+  onOperationBroadcasted,
+  t,
+  onError,
+  hasError,
+}: Props) => (
   <Container>
     <WarnBox>{multiline(t('send:steps.verification.warning'))}</WarnBox>
     <Info>{t('send:steps.verification.body')}</Info>
@@ -52,11 +63,10 @@ export default ({ account, device, bridge, transaction, onOperationBroadcasted, 
           transaction={transaction}
           bridge={bridge}
           onOperationBroadcasted={onOperationBroadcasted}
-          render={({ error }) => (
-            // FIXME we really really REALLY should use error for the display. otherwise we are completely blind on error cases..
-            <DeviceConfirm notValid={!!error} />
-          )}
-        />
+          onError={onError}
+        >
+          <DeviceConfirm error={hasError} />
+        </DeviceSignTransaction>
       )}
   </Container>
 )
