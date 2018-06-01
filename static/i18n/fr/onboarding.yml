@@ -3,7 +3,7 @@ start:
   title: Welcome to the new Ledger Live Desktop app.
   desc: Let’s get started!
 init:
-  title: Welcome to Ledger Live, the computer companion app to your Ledger device. Please select one of the options below
+  title: Welcome to Ledger Live, the computer companion app to your Ledger device
   newDevice:
     title: Initialize your new Ledger device
     desc: Please replace it with the final wording once it’s done.
