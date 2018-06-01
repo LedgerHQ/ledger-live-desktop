@@ -50,6 +50,8 @@ type Props = {
   // left value (always the one which is returned)
   value: number,
 
+  canBeSpent: boolean,
+
   // max left value
   max: number,
 
@@ -76,6 +78,7 @@ type Props = {
 export class RequestAmount extends PureComponent<Props> {
   static defaultProps = {
     max: Infinity,
+    canBeSpent: true,
     withMax: true,
   }
 
@@ -97,12 +100,13 @@ export class RequestAmount extends PureComponent<Props> {
   }
 
   renderInputs(containerProps: Object) {
-    const { value, account, rightCurrency, getCounterValue, exchange } = this.props
+    const { value, account, rightCurrency, getCounterValue, exchange, canBeSpent } = this.props
     const right = getCounterValue(account.currency, rightCurrency, exchange)(value) || 0
     const rightUnit = rightCurrency.units[0]
     return (
       <Box horizontal grow shrink>
         <InputCurrency
+          error={canBeSpent ? null : 'Not enough balance'}
           containerProps={containerProps}
           defaultUnit={account.unit}
           value={value}

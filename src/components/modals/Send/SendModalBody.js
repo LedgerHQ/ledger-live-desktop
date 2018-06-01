@@ -43,6 +43,7 @@ type State<T> = {
   appStatus: ?string,
   deviceSelected: ?Device,
   optimisticOperation: ?Operation,
+  error: ?Error,
 }
 
 type Step = {
@@ -74,6 +75,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
       account,
       bridge,
       transaction,
+      error: null,
     }
 
     this.steps = [
@@ -97,7 +99,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
       },
       {
         label: t('send:steps.confirmation.title'),
-        prevStep: 1,
+        prevStep: 0,
       },
     ]
   }
@@ -142,7 +144,18 @@ class SendModalBody extends PureComponent<Props, State<*>> {
     this.setState({
       optimisticOperation,
       stepIndex: stepIndex + 1,
+      error: null,
     })
+  }
+
+  onOperationError = (error: Error) => {
+    // $FlowFixMe
+    if (error.statusCode === 0x6985) {
+      // User denied on device
+      this.setState({ error })
+    } else {
+      this.setState({ error, stepIndex: 3 })
+    }
   }
 
   onChangeAccount = account => {
@@ -159,7 +172,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
   }
 
   onGoToFirstStep = () => {
-    this.setState({ stepIndex: 0 })
+    this.setState({ stepIndex: 0, error: null })
   }
 
   steps: Step[]
@@ -173,6 +186,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
       bridge,
       optimisticOperation,
       deviceSelected,
+      error,
     } = this.state
 
     const step = this.steps[stepIndex]
@@ -216,9 +230,11 @@ class SendModalBody extends PureComponent<Props, State<*>> {
               transaction={transaction}
               device={deviceSelected}
               onOperationBroadcasted={this.onOperationBroadcasted}
+              onError={this.onOperationError}
+              hasError={!!error}
             />
 
-            <StepConfirmation t={t} optimisticOperation={optimisticOperation} />
+            <StepConfirmation t={t} optimisticOperation={optimisticOperation} error={error} />
           </ChildSwitch>
         </ModalContent>
 

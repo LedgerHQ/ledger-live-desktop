@@ -23,17 +23,17 @@ const pulseAnimation = p => keyframes`
 `
 
 const Wrapper = styled(Box).attrs({
-  color: p => (p.notValid ? 'alertRed' : 'wallet'),
+  color: p => (p.error ? 'alertRed' : 'wallet'),
   relative: true,
 })`
-  padding-top: ${p => (p.notValid ? 0 : 30)}px;
+  padding-top: ${p => (p.error ? 0 : 30)}px;
   transition: color ease-in-out 0.1s;
 `
 
 const WrapperIcon = styled(Box)`
-  color: ${p => (p.notValid ? p.theme.colors.alertRed : p.theme.colors.positiveGreen)};
+  color: ${p => (p.error ? p.theme.colors.alertRed : p.theme.colors.positiveGreen)};
   position: absolute;
-  left: ${p => (p.notValid ? 152 : 193)}px;
+  left: ${p => (p.error ? 152 : 193)}px;
   bottom: 16px;
 
   svg {
@@ -41,9 +41,9 @@ const WrapperIcon = styled(Box)`
   }
 `
 
-const Check = ({ notValid }: { notValid: boolean }) => (
-  <WrapperIcon notValid={notValid}>
-    {notValid ? <IconCross size={10} /> : <IconCheck size={10} />}
+const Check = ({ error }: { error: * }) => (
+  <WrapperIcon error={error}>
+    {error ? <IconCross size={10} /> : <IconCheck size={10} />}
   </WrapperIcon>
 )
 
@@ -74,7 +74,7 @@ const PushButton = styled(Box)`
 `
 
 type Props = {
-  notValid: boolean,
+  error: *,
 }
 
 const SVG = (
@@ -165,8 +165,8 @@ const SVG = (
 
 const DeviceConfirm = (props: Props) => (
   <Wrapper {...props}>
-    {props.notValid ? <PushButton /> : null}
-    <Check notValid={props.notValid} />
+    {!props.error ? <PushButton /> : null}
+    <Check error={props.error} />
     {SVG}
   </Wrapper>
 )

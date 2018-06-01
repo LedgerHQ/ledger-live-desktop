@@ -1,5 +1,6 @@
 // @flow
 import axios from 'axios'
+import { retry } from 'helpers/promise'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { blockchainBaseURL, userFriendlyError } from './Ledger'
 
@@ -52,19 +53,25 @@ export const apiForCurrency = (currency: CryptoCurrency): API => {
       return data
     },
     async getCurrentBlock() {
-      const { data } = await userFriendlyError(axios.get(`${baseURL}/blocks/current`))
+      const { data } = await userFriendlyError(retry(() => axios.get(`${baseURL}/blocks/current`)))
       return data
     },
     async getAccountNonce(address) {
-      const { data } = await userFriendlyError(axios.get(`${baseURL}/addresses/${address}/nonce`))
+      const { data } = await userFriendlyError(
+        retry(() => axios.get(`${baseURL}/addresses/${address}/nonce`)),
+      )
       return data[0].nonce
     },
     async broadcastTransaction(tx) {
-      const { data } = await userFriendlyError(axios.post(`${baseURL}/transactions/send`, { tx }))
+      const { data } = await userFriendlyError(
+        retry(() => axios.post(`${baseURL}/transactions/send`, { tx })),
+      )
       return data.result
     },
     async getAccountBalance(address) {
-      const { data } = await userFriendlyError(axios.get(`${baseURL}/addresses/${address}/balance`))
+      const { data } = await userFriendlyError(
+        retry(() => axios.get(`${baseURL}/addresses/${address}/balance`)),
+      )
       return data[0].balance
     },
   }

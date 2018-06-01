@@ -54,7 +54,7 @@ class Footer extends PureComponent<
       this.resync()
     }
   }
-  async componentWillUnmount() {
+  componentWillUnmount() {
     this.unmount = true
   }
   unmount = false
@@ -77,7 +77,7 @@ class Footer extends PureComponent<
               <Box horizontal flow={2} align="center">
                 <FormattedVal
                   disableRounding
-                  color={!canBeSpent ? 'pearl' : 'dark'}
+                  color="dark"
                   val={totalSpent}
                   unit={account.unit}
                   showCode
@@ -94,6 +94,7 @@ class Footer extends PureComponent<
                     color="grey"
                     fontSize={3}
                     showCode
+                    alwaysShowSign={false}
                   />
                   <Text ff="Rubik" fontSize={3}>
                     {')'}
@@ -102,7 +103,7 @@ class Footer extends PureComponent<
               </Box>
             </Box>
           )}
-          <Button primary onClick={onNext} disabled={!canNext}>
+          <Button primary onClick={onNext} disabled={!canNext || !canBeSpent}>
             {'Next'}
           </Button>
         </Box>

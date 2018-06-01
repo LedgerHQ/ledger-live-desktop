@@ -5,23 +5,16 @@ import type { Device } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
 
 type Props = {
+  children: *,
   onOperationBroadcasted: (op: Operation) => void,
-  render: ({ error: ?Error }) => React$Node,
+  onError: Error => void,
   device: Device,
   account: Account,
   bridge: WalletBridge<*>,
   transaction: *,
 }
 
-type State = {
-  error: ?Error,
-}
-
-class DeviceSignTransaction extends PureComponent<Props, State> {
-  state = {
-    error: null,
-  }
-
+class DeviceSignTransaction extends PureComponent<Props> {
   componentDidMount() {
     this.sign()
   }
@@ -32,20 +25,17 @@ class DeviceSignTransaction extends PureComponent<Props, State> {
   unmount = false
 
   sign = async () => {
-    const { device, account, transaction, bridge, onOperationBroadcasted } = this.props
+    const { device, account, transaction, bridge, onOperationBroadcasted, onError } = this.props
     try {
       const optimisticOperation = await bridge.signAndBroadcast(account, transaction, device.path)
       onOperationBroadcasted(optimisticOperation)
     } catch (error) {
-      console.warn(error)
-      this.setState({ error })
+      onError(error)
     }
   }
 
   render() {
-    const { render } = this.props
-    const { error } = this.state
-    return render({ error })
+    return this.props.children
   }
 }
 

@@ -20,6 +20,8 @@ type OwnProps = {
   date?: Date,
 
   value: number,
+
+  alwaysShowSign?: boolean,
 }
 
 type Props = OwnProps & {
@@ -47,8 +49,11 @@ const mapStateToProps = (state: State, props: OwnProps) => {
 }
 
 class CounterValue extends PureComponent<Props> {
+  static defaultProps = {
+    alwaysShowSign: true, // FIXME this shouldn't be true by default
+  }
   render() {
-    const { value, counterValueCurrency, date, ...props } = this.props
+    const { value, counterValueCurrency, date, alwaysShowSign, ...props } = this.props
     if (!value && value !== 0) {
       return null
     }
@@ -57,7 +62,7 @@ class CounterValue extends PureComponent<Props> {
         val={value}
         unit={counterValueCurrency.units[0]}
         showCode
-        alwaysShowSign
+        alwaysShowSign={alwaysShowSign}
         {...props}
       />
     )
