@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
@@ -59,6 +60,9 @@ const BalanceSummary = ({
                   height={250}
                   currency={counterValue}
                   tickXScale={selectedTime}
+                  renderTickY={(val, account) =>
+                    account ? formatCurrencyUnit(account.unit, val) : val
+                  }
                   renderTooltip={
                     isAvailable && !account
                       ? d => (

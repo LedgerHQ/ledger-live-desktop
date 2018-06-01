@@ -2,7 +2,6 @@
 
 import * as d3 from 'd3'
 import moment from 'moment'
-import { formatShort } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import { colors as themeColors } from 'styles/theme'
 
@@ -31,11 +30,10 @@ function getRenderTickX(selectedTime) {
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, isInteractive, tickXScale, account } = props
+  const { hideAxis, isInteractive, tickXScale, account, renderTickY } = props
 
   const nbTicksX = getTickXCount(tickXScale)
   const renderTickX = getRenderTickX(tickXScale)
-  const renderTickY = t => (account ? formatShort(account.unit, t) : t)
 
   const area = d3
     .area()
@@ -89,7 +87,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
       d3
         .axisLeft(y)
         .ticks(3)
-        .tickFormat(val => (renderTickY ? renderTickY(val) : val)),
+        .tickFormat(val => (renderTickY && account ? renderTickY(val, account) : val)),
     )
     NODES.axisBot.call(
       d3

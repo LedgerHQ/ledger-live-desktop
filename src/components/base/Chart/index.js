@@ -36,6 +36,7 @@
 import React, { PureComponent } from 'react'
 import * as d3 from 'd3'
 import noop from 'lodash/noop'
+import { formatShort } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
@@ -58,6 +59,7 @@ export type Props = {
   dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
   isInteractive?: boolean, // eslint-disable-line react/no-unused-prop-types
   renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
+  renderTickY?: (t: number, account: Account) => mixed, // eslint-disable-line react/no-unused-prop-types
 }
 
 class Chart extends PureComponent<Props> {
@@ -69,6 +71,8 @@ class Chart extends PureComponent<Props> {
     id: 'chart',
     isInteractive: true,
     tickXScale: 'month',
+    renderTickY: (t: number, account: Account): mixed =>
+      account ? formatShort(account.unit, t) : t,
   }
 
   componentDidMount() {
