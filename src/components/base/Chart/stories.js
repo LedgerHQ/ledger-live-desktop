@@ -62,7 +62,7 @@ class Wrapper extends Component<any, State> {
           color={color('color', '#5f8ced')}
           data={data.slice(start, stop)}
           height={number('height', 300)}
-          account={fakeAccount}
+          unit={fakeAccount.unit}
         />
       </Fragment>
     )

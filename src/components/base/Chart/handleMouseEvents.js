@@ -30,7 +30,6 @@ export default function handleMouseEvents({
   renderTooltip?: Function,
 }) {
   const { MARGINS, HEIGHT, WIDTH, NODES, DATA, x, y } = ctx
-  const { account } = props
 
   const bisectDate = d3.bisector(d => d.parsedDate).left
 
@@ -94,7 +93,7 @@ export default function handleMouseEvents({
           <Provider store={createStore({})}>
             <ThemeProvider theme={theme}>
               <Tooltip
-                account={account}
+                unit={props.unit}
                 renderTooltip={renderTooltip}
                 item={d.ref}
                 counterValue={getFiatCurrencyByTicker('USD')}

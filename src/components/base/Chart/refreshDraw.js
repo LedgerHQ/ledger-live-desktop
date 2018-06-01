@@ -30,7 +30,7 @@ function getRenderTickX(selectedTime) {
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, isInteractive, tickXScale, account, renderTickY } = props
+  const { hideAxis, isInteractive, tickXScale, renderTickY } = props
 
   const nbTicksX = getTickXCount(tickXScale)
   const renderTickX = getRenderTickX(tickXScale)
@@ -87,7 +87,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
       d3
         .axisLeft(y)
         .ticks(3)
-        .tickFormat(val => renderTickY(val, account)),
+        .tickFormat(renderTickY),
     )
     NODES.axisBot.call(
       d3
