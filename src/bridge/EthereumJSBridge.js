@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
-import EthereumKind from 'components/FeesField/EthereumKind'
+import FeesField from 'components/FeesField/EthereumKind'
+import AdvancedOptions from 'components/AdvancedOptions/EthereumKind'
 import throttle from 'lodash/throttle'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
@@ -14,15 +15,29 @@ import type { EditProps, WalletBridge } from './types'
 
 // TODO in future it would be neat to support eip55
 
-type Transaction = *
+type Transaction = {
+  amount: number,
+  recipient: string,
+  gasPrice: number,
+  gasLimit: number,
+}
 
 const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
-  <EthereumKind
+  <FeesField
     onChange={gasPrice => {
       onChange({ ...value, gasPrice })
     }}
     gasPrice={value.gasPrice}
     account={account}
+  />
+)
+
+const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
+  <AdvancedOptions
+    gasLimit={value.gasLimit}
+    onChange={gasLimit => {
+      onChange({ ...value, gasLimit })
+    }}
   />
 )
 
@@ -269,6 +284,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     amount: 0,
     recipient: '',
     gasPrice: 0,
+    gasLimit: 0x5208,
   }),
 
   editTransactionAmount: (account, t, amount) => ({
@@ -290,10 +306,12 @@ const EthereumBridge: WalletBridge<Transaction> = {
   // $FlowFixMe
   EditFees,
 
-  // FIXME gasPrice calc is wrong... need to multiply with gasLimit I guess ?
-  canBeSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice <= a.balance),
-  getTotalSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice),
-  getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice),
+  // $FlowFixMe
+  EditAdvancedOptions,
+
+  canBeSpent: (a, t) => Promise.resolve(t.amount <= a.balance),
+  getTotalSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice * t.gasLimit),
+  getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice * t.gasLimit),
 
   signAndBroadcast: async (a, t, deviceId) => {
     const api = apiForCurrency(a.currency)
