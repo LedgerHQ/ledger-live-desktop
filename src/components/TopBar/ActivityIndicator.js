@@ -18,12 +18,11 @@ const Activity = styled.div`
         ? p.theme.colors.alertRed
         : p.theme.colors.positiveGreen};
   border-radius: 50%;
-  bottom: 20px;
-  height: 4px;
+  bottom: 23px;
   position: absolute;
-  right: 8px;
-  width: 4px;
-  cursor: pointer;
+  left: -5px;
+  width: 12px;
+  height: 12px;
 `
 
 const mapStateToProps = createStructuredSelector({ globalSyncState: globalSyncStateSelector })
@@ -32,7 +31,7 @@ class ActivityIndicatorUI extends Component<*> {
   render() {
     const { pending, error, onClick } = this.props
     return (
-      <ItemContainer relative onClick={onClick}>
+      <ItemContainer cursor="pointer" relative onClick={onClick}>
         <IconActivity size={16} />
         <Activity pending={pending} error={error} />
       </ItemContainer>

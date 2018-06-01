@@ -51,6 +51,11 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   },
 
   synchronize(account, { next, complete, error }) {
+    // FIXME TODO:
+    // - when you implement addPendingOperation you also here need to:
+    //   - if there were pendingOperations that are now in operations, remove them as well.
+    //   - if there are pendingOperations that is older than a threshold (that depends on blockchain speed typically)
+    //     then we probably should trash them out? it's a complex question for UI
     ;(async () => {
       try {
         const rawAccount = encodeAccount(account)
@@ -68,15 +73,6 @@ const LibcoreBridge: WalletBridge<Transaction> = {
         error(e)
       }
     })()
-    // FIXME TODO: use next(), to actually emit account updates.....
-    // - need to sync the balance
-    // - need to sync block height & block hash
-    // - need to sync operations.
-    // - once all that, need to set lastSyncDate to new Date()
-    // - when you implement addPendingOperation you also here need to:
-    //   - if there were pendingOperations that are now in operations, remove them as well.
-    //   - if there are pendingOperations that is older than a threshold (that depends on blockchain speed typically)
-    //     then we probably should trash them out? it's a complex question for UI
     return {
       unsubscribe() {
         console.warn('LibcoreBridge: unsub sync not implemented')

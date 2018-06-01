@@ -8,14 +8,15 @@ import { syncAccount } from 'helpers/libcore'
 import withLibcore from 'helpers/withLibcore'
 
 type Input = {
-  core: Object,
   rawAccount: AccountRaw,
 }
 
 type Result = AccountRaw
 
 const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', ({ rawAccount }) =>
-  fromPromise(withLibcore(core => syncAccount({ rawAccount, core }))),
+  fromPromise(
+    withLibcore((core, njsWalletPool) => syncAccount({ rawAccount, core, njsWalletPool })),
+  ),
 )
 
 export default cmd

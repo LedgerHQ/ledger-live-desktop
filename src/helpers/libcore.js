@@ -7,6 +7,8 @@ import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currenc
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
+import * as accountId from 'helpers/accountId'
+
 type Props = {
   core: Object,
   devicePath: string,
@@ -80,6 +82,7 @@ async function scanAccountsOnDeviceBySegwit({
   isSegwit,
   showNewAccount,
 }: {
+  core: Object,
   hwApp: Object,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
@@ -137,8 +140,6 @@ async function scanNextAccount(props: {
     isSegwit,
     showNewAccount,
   } = props
-
-  console.log(`>> Scanning account ${accountIndex} - isSegwit: ${isSegwit.toString()}`) // eslint-disable-line no-console
 
   // create account only if account has not been scanned yet
   // if it has already been created, we just need to get it, and sync it
@@ -220,7 +221,6 @@ async function buildAccountRaw({
   currencyId: string,
   accountIndex: number,
   core: Object,
-  hwApp: Object,
   // $FlowFixMe
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
@@ -260,7 +260,7 @@ async function buildAccountRaw({
   }
 
   const rawAccount: AccountRaw = {
-    id: xpub, // FIXME for account id you might want to prepend the crypto currency id to this because it's not gonna be unique.
+    id: accountId.encode({ type: 'libcore', xpub, walletName: wallet.getName() }),
     xpub,
     path: walletPath,
     name,
@@ -319,26 +319,38 @@ function buildOperationRaw({
   }
 }
 
-export async function syncAccount({ rawAccount }: { rawAccount: AccountRaw }) {
-  // AWWWWW.. little problem here.
-  //
-  // we need to get account from libcore db. in order to do that we have to:
-  //  1) get wallet using a wallet identifier
-  //  2) get account from wallet using `rawAccount.index`
-  //
-  // Here is the problem: the wallet identifier is currently built like that:
-  // `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
-  //
-  // and to get the `publicKey` we need the device.
-  //
-  // BUT we don't want the device to be required to access ledger-live
-  // SO.. it's a problem.
-  //
-  // Solution 1: store wallet identifier inside the Account (uurgh...)
-  // Solution 2: stop this project
+export async function syncAccount({
+  rawAccount,
+  core,
+  njsWalletPool,
+}: {
+  core: Object,
+  rawAccount: AccountRaw,
+  njsWalletPool: Object,
+}) {
+  const decodedAccountId = accountId.decode(rawAccount.id)
+  const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
+  const njsAccount = await njsWallet.getAccount(rawAccount.index)
 
-  return {
-    ...rawAccount,
-    balance: 424242424242,
-  }
+  await core.syncAccount(njsAccount)
+
+  const query = njsAccount.queryOperations()
+  const ops = await query.complete().execute()
+  const njsBalance = await njsAccount.getBalance()
+
+  const syncedRawAccount = await buildAccountRaw({
+    njsAccount,
+    isSegwit: rawAccount.isSegwit === true,
+    accountIndex: rawAccount.index,
+    wallet: njsWallet,
+    currencyId: rawAccount.currencyId,
+    core,
+    ops,
+  })
+
+  syncedRawAccount.balance = njsBalance.toLong()
+
+  console.log(`Synced account [${syncedRawAccount.name}]: ${syncedRawAccount.balance}`)
+
+  return syncedRawAccount
 }
