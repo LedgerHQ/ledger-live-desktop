@@ -178,7 +178,7 @@ class AccountPage extends PureComponent<Props, State> {
                 )}
               />
             </Box>
-            <OperationsList account={account} title={t('account:lastOperations')} />
+            <OperationsList canShowMore account={account} title={t('account:lastOperations')} />
           </Fragment>
         ) : (
           <EmptyStateAccount account={account} />
