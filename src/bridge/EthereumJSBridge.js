@@ -174,7 +174,6 @@ const EthereumBridge: WalletBridge<Transaction> = {
       }
       txs.reverse()
       account.operations = mergeOps([], flatMap(txs, txToOps(account)))
-      console.log(account)
       return { account }
     }
 

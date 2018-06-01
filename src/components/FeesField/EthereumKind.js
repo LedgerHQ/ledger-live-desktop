@@ -34,7 +34,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
     return (
       <GenericContainer error={error} help="Gas">
         <InputCurrency
-          defaultUnit={units[1]}
+          defaultUnit={units.length > 1 ? units[1] : units[0]}
           units={units}
           containerProps={{ grow: true }}
           value={gasPrice}

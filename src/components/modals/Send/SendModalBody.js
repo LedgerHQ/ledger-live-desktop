@@ -127,6 +127,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
       this.setState({
         appStatus: null,
         deviceSelected: null,
+        error: null,
         stepIndex: step.prevStep,
       })
     }
