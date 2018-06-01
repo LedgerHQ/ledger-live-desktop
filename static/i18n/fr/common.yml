@@ -5,6 +5,7 @@ no: false
 apply: Apply
 confirm: Confirmer
 cancel: Annuler
+delete: Delete
 continue: Continue
 chooseWalletPlaceholder: Choisir un portefeuille...
 currency: Monnaie
