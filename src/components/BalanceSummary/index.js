@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import { formatShort } from '@ledgerhq/live-common/lib/helpers/currencies'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
@@ -53,12 +54,13 @@ const BalanceSummary = ({
               <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
                 <Chart
                   id={chartId}
-                  account={account}
+                  unit={account ? account.unit : null}
                   color={chartColor}
                   data={balanceHistory}
                   height={250}
                   currency={counterValue}
                   tickXScale={selectedTime}
+                  renderTickY={val => formatShort(counterValue.units[0], val)}
                   renderTooltip={
                     isAvailable && !account
                       ? d => (

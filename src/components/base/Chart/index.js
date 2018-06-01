@@ -36,8 +36,7 @@
 import React, { PureComponent } from 'react'
 import * as d3 from 'd3'
 import noop from 'lodash/noop'
-
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
 
 import refreshNodes from './refreshNodes'
 import refreshDraw from './refreshDraw'
@@ -48,8 +47,7 @@ import type { Data } from './types'
 
 export type Props = {
   data: Data, // eslint-disable-line react/no-unused-prop-types
-  account?: Account, // eslint-disable-line react/no-unused-prop-types
-
+  unit?: ?Unit, // eslint-disable-line react/no-unused-prop-types
   id?: string, // eslint-disable-line react/no-unused-prop-types
   height?: number,
   tickXScale: string, // eslint-disable-line react/no-unused-prop-types
@@ -58,6 +56,7 @@ export type Props = {
   dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
   isInteractive?: boolean, // eslint-disable-line react/no-unused-prop-types
   renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
+  renderTickY: (t: number) => string | number, // eslint-disable-line react/no-unused-prop-types
 }
 
 class Chart extends PureComponent<Props> {
@@ -69,6 +68,7 @@ class Chart extends PureComponent<Props> {
     id: 'chart',
     isInteractive: true,
     tickXScale: 'month',
+    renderTickY: (t: *) => t,
   }
 
   componentDidMount() {

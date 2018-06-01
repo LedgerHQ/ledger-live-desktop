@@ -3,7 +3,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
-import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Unit, Currency } from '@ledgerhq/live-common/lib/types'
 
 import FormattedVal from 'components/base/FormattedVal'
 import Box from 'components/base/Box'
@@ -25,12 +25,12 @@ const Container = styled(Box).attrs({
 const Tooltip = ({
   item,
   renderTooltip,
-  account,
+  unit,
   counterValue,
 }: {
   item: Item,
   renderTooltip?: Function,
-  account?: Account,
+  unit?: ?Unit,
   counterValue: Currency,
 }) => (
   <div style={{ position: 'relative' }}>
@@ -57,13 +57,13 @@ const Tooltip = ({
               unit={counterValue.units[0]}
               val={item.value}
             />
-            {account && (
+            {unit && (
               <FormattedVal
                 color="grey"
                 fontSize={3}
                 alwaysShowSign={false}
                 showCode
-                unit={account.unit}
+                unit={unit}
                 val={item.originalValue}
               />
             )}
