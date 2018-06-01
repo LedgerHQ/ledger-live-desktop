@@ -37,10 +37,6 @@ type Props = {
   data: any,
 }
 
-function onClickSelectAll(e) {
-  e.target.select()
-}
-
 const mapDispatchToProps = {
   setDataModal,
   updateAccount,
@@ -173,14 +169,16 @@ class HelperComp extends PureComponent<Props, State> {
               <textarea
                 style={{
                   userSelect: 'text',
-                  backgroundColor: '#eee',
+                  border: '1px dashed #f9f9f9',
+                  marginTop: '20px',
+                  backgroundColor: '#f9f9f9',
                   color: '#000',
                   fontFamily: 'monospace',
                   fontSize: '10px',
                   height: 200,
                   outline: 'none',
+                  padding: '20px',
                 }}
-                onClick={onClickSelectAll}
                 value={JSON.stringify(usefulData, null, 2)}
               />
             </Spoiler>

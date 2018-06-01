@@ -66,31 +66,39 @@ type Props = {
   openModal: Function,
   t: T,
   withAccount?: boolean,
-  nbToShow: number,
   title?: string,
 }
 
-export class OperationsList extends PureComponent<Props> {
+type State = {
+  nbToShow: number,
+}
+
+const initialState = {
+  nbToShow: 20,
+}
+export class OperationsList extends PureComponent<Props, State> {
   static defaultProps = {
     onAccountClick: noop,
     withAccount: false,
     canShowMore: false,
-    nbToShow: 20,
   }
+
+  state = initialState
 
   handleClickOperation = (data: Object) => this.props.openModal(MODAL_OPERATION_DETAILS, data)
 
+  // TODO: convert of async/await if fetching with the api
+  fetchMoreOperations = () => {
+    this.setState({ nbToShow: this.state.nbToShow + 20 })
+  }
+
   render() {
-    const {
-      account,
-      accounts,
-      canShowMore,
-      nbToShow,
-      onAccountClick,
-      t,
-      title,
-      withAccount,
-    } = this.props
+    const { account, accounts, canShowMore, onAccountClick, t, title, withAccount } = this.props
+    const { nbToShow } = this.state
+
+    const totalOperations = accounts
+      ? accounts.reduce((a, b) => +a + +b.operations.length, 0)
+      : account.operations.length
 
     if (!account && !accounts) {
       console.warn('Preventing render OperationsList because not received account or accounts') // eslint-disable-line no-console
@@ -139,12 +147,13 @@ export class OperationsList extends PureComponent<Props> {
               </Box>
             )
           })}
-          {canShowMore && (
-            <ShowMore>
-              <span>{t('operationsList:showMore')}</span>
-              <IconAngleDown size={12} />
-            </ShowMore>
-          )}
+          {canShowMore &&
+            totalOperations > nbToShow && (
+              <ShowMore onClick={this.fetchMoreOperations}>
+                <span>{t('operationsList:showMore')}</span>
+                <IconAngleDown size={12} />
+              </ShowMore>
+            )}
         </Box>
       </Defer>
     )
