@@ -91,7 +91,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
             currency,
           })
           account.unit = currency.units[0]
-          account.archived = true
+          account.archived = false
           if (!unsubscribed) next(account)
         }
         if (!unsubscribed) complete()
