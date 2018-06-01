@@ -87,7 +87,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
       d3
         .axisLeft(y)
         .ticks(3)
-        .tickFormat(val => (renderTickY && account ? renderTickY(val, account) : val)),
+        .tickFormat(val => renderTickY(val, account)),
     )
     NODES.axisBot.call(
       d3

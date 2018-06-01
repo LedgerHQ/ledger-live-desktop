@@ -61,7 +61,9 @@ const BalanceSummary = ({
                   currency={counterValue}
                   tickXScale={selectedTime}
                   renderTickY={(val, account) =>
-                    account ? formatCurrencyUnit(account.unit, val) : val
+                    account
+                      ? formatCurrencyUnit(account.unit, val)
+                      : formatCurrencyUnit(counterValue.units[0], val)
                   }
                   renderTooltip={
                     isAvailable && !account

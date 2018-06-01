@@ -59,7 +59,7 @@ export type Props = {
   dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
   isInteractive?: boolean, // eslint-disable-line react/no-unused-prop-types
   renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
-  renderTickY?: (t: number, account: Account) => mixed, // eslint-disable-line react/no-unused-prop-types
+  renderTickY?: (t: number, account: ?Account) => mixed, // eslint-disable-line react/no-unused-prop-types
 }
 
 class Chart extends PureComponent<Props> {
@@ -72,7 +72,7 @@ class Chart extends PureComponent<Props> {
     isInteractive: true,
     tickXScale: 'month',
     renderTickY: (t: number, account: Account): mixed =>
-      account ? formatShort(account.unit, t) : t,
+      account ? formatShort(account.unit, t) : '',
   }
 
   componentDidMount() {
