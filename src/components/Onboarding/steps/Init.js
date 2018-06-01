@@ -3,7 +3,6 @@
 import React from 'react'
 import { shell } from 'electron'
 import { colors } from 'styles/theme'
-import { rgba } from 'styles/helpers'
 
 import styled from 'styled-components'
 import Box, { Card } from 'components/base/Box'
