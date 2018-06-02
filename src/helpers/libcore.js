@@ -332,7 +332,8 @@ export async function syncAccount({
   const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
   const njsAccount = await njsWallet.getAccount(rawAccount.index)
 
-  await core.syncAccount(njsAccount)
+  const unsub = await core.syncAccount(njsAccount)
+  unsub()
 
   const query = njsAccount.queryOperations()
   const ops = await query.complete().execute()
