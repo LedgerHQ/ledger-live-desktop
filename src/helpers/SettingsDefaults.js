@@ -46,7 +46,7 @@ export const currencySettingsDefaults = (currency: CryptoCurrency): Confirmation
       ? {
           min: 1,
           def: confirmationsNbDef,
-          max: 100,
+          max: 2 * confirmationsNbDef,
         }
       : null,
   }
