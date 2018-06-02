@@ -14,7 +14,7 @@ import type { T } from 'types/common'
 
 import { darken } from 'styles/helpers'
 
-import { getAccountById } from 'reducers/accounts'
+import { accountSelector } from 'reducers/accounts'
 import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
@@ -50,7 +50,7 @@ const ButtonSettings = styled(Button).attrs({
 `
 
 const mapStateToProps = (state, props) => ({
-  account: getAccountById(state, props.match.params.id),
+  account: accountSelector(state, { accountId: props.match.params.id }),
   counterValue: counterValueCurrencySelector(state),
   settings: localeSelector(state),
 })

@@ -4,13 +4,14 @@ import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import { createStructuredSelector } from 'reselect'
 
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T, Device } from 'types/common'
 
 import { getCurrentDevice } from 'reducers/devices'
-import { getAccounts } from 'reducers/accounts'
+import { accountsSelector } from 'reducers/accounts'
 import { addAccount } from 'actions/accounts'
 import { closeModal } from 'reducers/modals'
 
@@ -100,9 +101,9 @@ export type StepProps = {
   err: ?Error,
 }
 
-const mapStateToProps = state => ({
-  currentDevice: getCurrentDevice(state),
-  existingAccounts: getAccounts(state),
+const mapStateToProps = createStructuredSelector({
+  currentDevice: getCurrentDevice,
+  existingAccounts: accountsSelector,
 })
 
 const mapDispatchToProps = {

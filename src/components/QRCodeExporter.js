@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 
 import { connect } from 'react-redux'
 import type { State } from 'reducers'
-import { getVisibleAccounts } from 'reducers/accounts'
+import { accountsSelector } from 'reducers/accounts'
 import QRCode from './base/QRCode'
 
 // encode the app state to export into an array of chunks for the mobile app to understand.
@@ -15,7 +15,7 @@ function makeChunks(state: State): Array<string> {
   const desktopVersion = __APP_VERSION__
   const data = [
     ['meta', chunksFormatVersion, 'desktop', desktopVersion],
-    ...getVisibleAccounts(state).map(account => [
+    ...accountsSelector(state).map(account => [
       'account',
       account.id,
       account.name,

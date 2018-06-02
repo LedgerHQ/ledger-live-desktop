@@ -254,7 +254,6 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               operations: [],
               pendingOperations: [],
               unit: currency.units[0],
-              archived: false,
               lastSyncDate: new Date(),
             }
             account.operations = transactions.map(txToOperation(account))

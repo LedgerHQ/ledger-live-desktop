@@ -11,7 +11,7 @@ import type { T, Device } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
 import { getBridgeForCurrency } from 'bridge'
 
-import { getVisibleAccounts } from 'reducers/accounts'
+import { accountsSelector } from 'reducers/accounts'
 import { updateAccountWithUpdater } from 'actions/accounts'
 
 import Breadcrumb from 'components/Breadcrumb'
@@ -53,7 +53,7 @@ type Step = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  accounts: getVisibleAccounts,
+  accounts: accountsSelector,
 })
 
 const mapDispatchToProps = {

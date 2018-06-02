@@ -4,20 +4,21 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
+import { createStructuredSelector } from 'reselect'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import type { Option } from 'components/base/Select'
 
-import { getVisibleAccounts } from 'reducers/accounts'
+import { accountsSelector } from 'reducers/accounts'
 
 import Select from 'components/base/Select'
 import FormattedVal from 'components/base/FormattedVal'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
-const mapStateToProps = state => ({
-  accounts: getVisibleAccounts(state),
+const mapStateToProps = createStructuredSelector({
+  accounts: accountsSelector,
 })
 
 const renderOption = a => {
