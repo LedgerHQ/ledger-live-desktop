@@ -6,13 +6,14 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import chunk from 'lodash/chunk'
+import { createStructuredSelector } from 'reselect'
 
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import { colors } from 'styles/theme'
 
-import { getVisibleAccounts } from 'reducers/accounts'
+import { accountsSelector } from 'reducers/accounts'
 import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
 
 import { updateOrderAccounts } from 'actions/accounts'
@@ -30,10 +31,10 @@ import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 import EmptyState from './EmptyState'
 
-const mapStateToProps = state => ({
-  accounts: getVisibleAccounts(state),
-  counterValue: counterValueCurrencySelector(state),
-  locale: localeSelector(state),
+const mapStateToProps = createStructuredSelector({
+  accounts: accountsSelector,
+  counterValue: counterValueCurrencySelector,
+  locale: localeSelector,
 })
 
 const mapDispatchToProps = {

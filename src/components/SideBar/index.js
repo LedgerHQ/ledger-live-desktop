@@ -13,7 +13,7 @@ import { MODAL_SEND, MODAL_RECEIVE } from 'config/constants'
 import type { T } from 'types/common'
 
 import { openModal } from 'reducers/modals'
-import { getVisibleAccounts } from 'reducers/accounts'
+import { accountsSelector } from 'reducers/accounts'
 import { getUpdateStatus } from 'reducers/update'
 import type { UpdateStatus } from 'reducers/update'
 
@@ -62,7 +62,7 @@ type Props = {
 }
 
 const mapStateToProps = state => ({
-  accounts: getVisibleAccounts(state),
+  accounts: accountsSelector(state),
   updateStatus: getUpdateStatus(state),
 })
 
@@ -125,7 +125,7 @@ class SideBar extends PureComponent<Props> {
 }
 
 const AccountsList = connect(state => ({
-  accounts: getVisibleAccounts(state),
+  accounts: accountsSelector(state),
 }))(({ accounts }: { accounts: Account[] }) => (
   <Fragment>
     {accounts.map(account => {

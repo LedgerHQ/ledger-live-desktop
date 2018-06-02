@@ -51,15 +51,7 @@ export function accountsSelector(state: { accounts: AccountsState }): Account[] 
   return state.accounts
 }
 
-export const archivedAccountsSelector = createSelector(accountsSelector, accounts =>
-  accounts.filter(acc => acc.archived),
-)
-
-export const visibleAccountsSelector = createSelector(accountsSelector, accounts =>
-  accounts.filter(acc => !acc.archived),
-)
-
-export const currenciesSelector = createSelector(visibleAccountsSelector, accounts =>
+export const currenciesSelector = createSelector(accountsSelector, accounts =>
   [...new Set(accounts.map(a => a.currency))].sort((a, b) => a.name.localeCompare(b.name)),
 )
 
@@ -68,24 +60,6 @@ export const accountSelector = createSelector(
   (_, { accountId }: { accountId: string }) => accountId,
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 )
-
-// TODO remove deprecated selectors
-
-export function getAccounts(state: { accounts: AccountsState }): Account[] {
-  return state.accounts
-}
-
-export function getArchivedAccounts(state: { accounts: AccountsState }): Account[] {
-  return state.accounts.filter(acc => acc.archived === true)
-}
-
-export function getVisibleAccounts(state: { accounts: AccountsState }): Account[] {
-  return getAccounts(state).filter(account => account.archived !== true)
-}
-
-export function getAccountById(state: { accounts: AccountsState }, id: string): ?Account {
-  return getAccounts(state).find(account => account.id === id)
-}
 
 export function decodeAccount(account: AccountRaw): Account {
   return accountModel.decode({

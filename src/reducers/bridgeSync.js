@@ -3,7 +3,7 @@
 import { createSelector } from 'reselect'
 import { handleActions } from 'redux-actions'
 import type { State } from 'reducers'
-import { getAccounts } from './accounts'
+import { accountsSelector } from './accounts'
 
 export type AsyncState = {
   pending: boolean,
@@ -62,7 +62,7 @@ export const pullMoreStateLocalSelector = (
 ) => bridgeSync.pullMores[accountId] || nothingState
 
 export const globalSyncStateSelector = createSelector(
-  getAccounts,
+  accountsSelector,
   bridgeSyncSelector,
   (accounts, bridgeSync) => {
     const globalSyncState: AsyncState = {
