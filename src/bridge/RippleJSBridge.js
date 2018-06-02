@@ -55,7 +55,7 @@ function isRecipientValid(currency, recipient) {
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
   const ids = existing.map(o => o.id)
   const all = existing.concat(newFetched.filter(o => !ids.includes(o.id)))
-  return all.sort((a, b) => a.date - b.date)
+  return all.sort((a, b) => b.date - a.date)
 }
 
 type Tx = {

@@ -87,7 +87,7 @@ function isRecipientValid(currency, recipient) {
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
   const ids = newFetched.map(o => o.id)
   const all = newFetched.concat(existing.filter(o => !ids.includes(o.id)))
-  return uniqBy(all.sort((a, b) => a.date - b.date), 'id')
+  return uniqBy(all.sort((a, b) => b.date - a.date), 'id')
 }
 
 const fetchCurrentBlock = (perCurrencyId => currency => {
