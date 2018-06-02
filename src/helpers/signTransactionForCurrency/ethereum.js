@@ -27,6 +27,7 @@ export default async (
     nonce: string,
     recipient: string,
     gasPrice: number,
+    gasLimit: number,
     amount: number,
   },
 ) => {
@@ -34,11 +35,10 @@ export default async (
 
   const chainId = getNetworkId(currencyId)
   if (!chainId) throw new Error(`chainId not found for currency=${currencyId}`)
-  const gasLimit = '0x5208' // cost of a simple send
   const tx = new EthereumTx({
     nonce: t.nonce,
     gasPrice: `0x${t.gasPrice.toString(16)}`,
-    gasLimit,
+    gasLimit: `0x${t.gasLimit.toString(16)}`,
     to: t.recipient,
     value: `0x${t.amount.toString(16)}`,
     chainId,

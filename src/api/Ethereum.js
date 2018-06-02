@@ -46,31 +46,35 @@ export const apiForCurrency = (currency: CryptoCurrency): API => {
   return {
     async getTransactions(address, blockHash) {
       const { data } = await userFriendlyError(
-        axios.get(`${baseURL}/addresses/${address}/transactions`, {
-          params: { blockHash, noToken: 1 },
-        }),
+        retry(
+          () =>
+            axios.get(`${baseURL}/addresses/${address}/transactions`, {
+              params: { blockHash, noToken: 1 },
+            }),
+          { maxRetry: 3 },
+        ),
       )
       return data
     },
     async getCurrentBlock() {
-      const { data } = await userFriendlyError(retry(() => axios.get(`${baseURL}/blocks/current`)))
+      const { data } = await userFriendlyError(
+        retry(() => axios.get(`${baseURL}/blocks/current`), { maxRetry: 3 }),
+      )
       return data
     },
     async getAccountNonce(address) {
       const { data } = await userFriendlyError(
-        retry(() => axios.get(`${baseURL}/addresses/${address}/nonce`)),
+        retry(() => axios.get(`${baseURL}/addresses/${address}/nonce`), { maxRetry: 3 }),
       )
       return data[0].nonce
     },
     async broadcastTransaction(tx) {
-      const { data } = await userFriendlyError(
-        retry(() => axios.post(`${baseURL}/transactions/send`, { tx })),
-      )
+      const { data } = await userFriendlyError(axios.post(`${baseURL}/transactions/send`, { tx }))
       return data.result
     },
     async getAccountBalance(address) {
       const { data } = await userFriendlyError(
-        retry(() => axios.get(`${baseURL}/addresses/${address}/balance`)),
+        retry(() => axios.get(`${baseURL}/addresses/${address}/balance`), { maxRetry: 3 }),
       )
       return data[0].balance
     },
