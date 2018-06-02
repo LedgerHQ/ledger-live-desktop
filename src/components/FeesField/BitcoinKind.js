@@ -5,7 +5,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import styled from 'styled-components'
 
 import InputCurrency from 'components/base/InputCurrency'
-import Select from 'components/base/LegacySelect'
+import Select from 'components/base/Select'
 import type { Fees } from 'api/Fees'
 import WithFeesAPI from '../WithFeesAPI'
 import GenericContainer from './GenericContainer'
@@ -18,7 +18,8 @@ type Props = {
 }
 
 type FeeItem = {
-  key: string,
+  label: string,
+  value: string,
   blockCount: number,
   feePerByte: number,
 }
@@ -38,77 +39,84 @@ const blockCountNameConvention = {
 }
 
 const customItem = {
-  key: 'custom',
+  label: 'Custom',
+  value: 'custom',
   blockCount: 0,
   feePerByte: 0,
 }
 
-class FeesField extends Component<Props & { fees?: Fees, error?: Error }, { items: FeeItem[] }> {
+class FeesField extends Component<
+  Props & { fees?: Fees, error?: Error },
+  { isFocused: boolean, items: FeeItem[], selectedItem: FeeItem },
+> {
   state = {
     items: [customItem],
+    selectedItem: customItem,
+    isFocused: false,
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    const { fees } = nextProps
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { fees, feePerByte } = nextProps
     let items: FeeItem[] = []
     if (fees) {
       for (const key of Object.keys(fees)) {
         const feePerByte = Math.ceil(fees[key] / 1000)
         const blockCount = parseInt(key, 10)
         if (!isNaN(blockCount) && !isNaN(feePerByte)) {
-          items.push({ key, blockCount, feePerByte })
+          items.push({
+            blockCount,
+            label: blockCountNameConvention[blockCount] || `${blockCount} blocks`,
+            feePerByte,
+            value: key,
+          })
         }
       }
       items = items.sort((a, b) => a.blockCount - b.blockCount)
     }
     items.push(customItem)
-    return { items }
+    const selectedItem =
+      prevState.selectedItem.feePerByte === feePerByte
+        ? prevState.selectedItem
+        : items.find(f => f.feePerByte === feePerByte) || items[items.length - 1]
+    return { items, selectedItem }
   }
 
   componentDidUpdate() {
     const { feePerByte, fees, onChange } = this.props
-    const { items } = this.state
-    if (fees && !feePerByte) {
+    const { items, isFocused } = this.state
+    if (fees && !feePerByte && !isFocused) {
       // initialize with the median
       onChange(items[Math.floor(items.length / 2)].feePerByte)
     }
   }
 
-  onSelectChange = fee => {
-    const { onChange } = this.props
-    if (fee.feePerByte) onChange(fee.feePerByte)
+  onChangeFocus = isFocused => {
+    this.setState({ isFocused })
   }
 
-  renderItem = (item: FeeItem) =>
-    item.blockCount
-      ? blockCountNameConvention[item.blockCount] || `${item.blockCount} blocks`
-      : 'Custom'
+  onSelectChange = selectedItem => {
+    const { onChange } = this.props
+    this.setState({ selectedItem })
+    if (selectedItem.feePerByte) onChange(selectedItem.feePerByte)
+  }
 
   render() {
     const { account, feePerByte, error, onChange } = this.props
-    const { items } = this.state
+    const { items, selectedItem } = this.state
     const { units } = account.currency
-
-    const item = items.find(f => f.feePerByte === feePerByte) || items[items.length - 1]
 
     const satoshi = units[units.length - 1]
 
     return (
       <GenericContainer error={error} help="fee per byte">
-        <Select
-          style={{ width: 156 }}
-          items={items}
-          value={item}
-          renderSelected={this.renderItem}
-          renderItem={this.renderItem}
-          onChange={this.onSelectChange}
-        />
+        <Select width={156} options={items} value={selectedItem} onChange={this.onSelectChange} />
         <InputCurrency
           defaultUnit={satoshi}
           units={units}
           containerProps={{ grow: true }}
           value={feePerByte}
           onChange={onChange}
+          onChangeFocus={this.onChangeFocus}
           renderRight={<InputRight>{satoshi.code} per Byte</InputRight>}
         />
       </GenericContainer>
