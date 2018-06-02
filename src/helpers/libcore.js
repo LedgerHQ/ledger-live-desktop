@@ -251,6 +251,8 @@ async function buildAccountRaw({
 
   const { str: freshAddress, path: freshAddressPath } = addresses[0]
 
+  ops.sort((a, b) => b.getDate() - a.getDate())
+
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
   const currency = getCryptoCurrencyById(currencyId)
 
