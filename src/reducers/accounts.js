@@ -45,6 +45,13 @@ const handlers: Object = {
     state: AccountsState,
     { payload: account }: { payload: Account },
   ): AccountsState => state.filter(acc => acc.id !== account.id),
+
+  CLEAN_ACCOUNTS_CACHE: (state: AccountsState): AccountsState =>
+    state.map(acc => ({
+      ...acc,
+      operations: [],
+      pendingOperations: [],
+    })),
 }
 
 // Selectors

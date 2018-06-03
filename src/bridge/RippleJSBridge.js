@@ -126,8 +126,8 @@ const txToOperation = (account: Account) => ({
 }: Tx): Operation => {
   const type = source.address === account.freshAddress ? 'OUT' : 'IN'
   let value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0
+  const feeValue = parseAPIValue(fee)
   if (type === 'OUT') {
-    const feeValue = parseAPIValue(fee)
     if (!isNaN(feeValue)) {
       value += feeValue
     }
@@ -139,6 +139,7 @@ const txToOperation = (account: Account) => ({
     accountId: account.id,
     type,
     value,
+    fee: feeValue,
     blockHash: null,
     blockHeight: ledgerVersion,
     senders: [source.address],
@@ -193,7 +194,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               .toPromise()
             if (finished) return
 
-            const accountId = `${currency.id}_${address}`
+            const accountId = `ripplejs:${currency.id}:${address}`
 
             let info
             try {
@@ -440,6 +441,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         accountId: a.id,
         type: 'OUT',
         value: t.amount,
+        fee: t.fee,
         blockHash: null,
         blockHeight: null,
         senders: [a.freshAddress],

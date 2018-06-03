@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
 import uniq from 'lodash/uniq'
 import { connect } from 'react-redux'
 import { shell } from 'electron'
@@ -71,7 +71,7 @@ type Props = {
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const { t, onClose, operation, account, marketColor, currencySettings } = props
-  const { hash, date, senders, recipients, type } = operation
+  const { hash, date, senders, recipients, type, fee } = operation
   const amount = getOperationAmountNumber(operation)
 
   const { name, unit, currency } = account
@@ -132,6 +132,17 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
           </ColRight>
         </Line>
         <B />
+        {fee ? (
+          <Fragment>
+            <Line>
+              <ColLeft>Fees</ColLeft>
+              <ColRight>
+                <FormattedVal unit={unit} showCode val={fee} />
+              </ColRight>
+            </Line>
+            <B />
+          </Fragment>
+        ) : null}
         <Line>
           <ColLeft>From</ColLeft>
           <ColRight>{uniqSenders.map(v => <CanSelect key={v}>{v}</CanSelect>)}</ColRight>

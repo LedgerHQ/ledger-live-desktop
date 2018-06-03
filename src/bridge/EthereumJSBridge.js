@@ -49,12 +49,14 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
   const sending = freshAddress === from
   const receiving = freshAddress === to
   const ops = []
+  const fee = tx.gas_price * tx.gas_used
   if (sending) {
     ops.push({
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
-      value: tx.value + tx.gas_price * tx.gas_used,
+      value: tx.value,
+      fee,
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
       accountId: account.id,
@@ -69,6 +71,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       hash: tx.hash,
       type: 'IN',
       value: tx.value,
+      fee,
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
       accountId: account.id,
@@ -131,13 +134,13 @@ const EthereumBridge: WalletBridge<Transaction> = {
       if (finished) return { complete: true }
 
       const freshAddress = address
+      const accountId = `ethereumjs:${currency.id}:${address}`
 
       if (txs.length === 0) {
         // this is an empty account
         if (isStandard) {
           if (newAccountCount === 0) {
             // first zero account will emit one account as opportunity to create a new account..
-            const accountId = `${currency.id}_${address}`
             const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
@@ -161,7 +164,6 @@ const EthereumBridge: WalletBridge<Transaction> = {
         return { complete: true }
       }
 
-      const accountId = `${currency.id}_${address}`
       const account: $Exact<Account> = {
         id: accountId,
         xpub: '',
@@ -332,6 +334,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
       hash,
       type: 'OUT',
       value: t.amount,
+      fee: t.gasPrice * t.gasLimit,
       blockHeight: null,
       blockHash: null,
       accountId: a.id,
