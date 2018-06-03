@@ -37,9 +37,7 @@ const store = createStore({ history, dbMiddleware })
 const rootNode = document.getElementById('app')
 
 const settings = db.get('settings')
-if (Object.keys(settings).length !== 0) {
-  store.dispatch(fetchSettings(settings))
-}
+store.dispatch(fetchSettings(settings))
 
 const countervaluesData = db.get('countervalues')
 if (countervaluesData) {
