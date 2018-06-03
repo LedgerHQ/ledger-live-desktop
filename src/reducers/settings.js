@@ -63,7 +63,7 @@ const INITIAL_STATE: SettingsState = {
   marketIndicator: 'western',
   currenciesSettings: {},
   region,
-  developerMode: false,
+  developerMode: !!process.env.__DEV__,
   loaded: false,
   shareAnalytics: false,
 }
@@ -106,6 +106,7 @@ const handlers: Object = {
   ) => ({
     ...state,
     ...settings,
+    developerMode: settings.developerMode || !!process.env.__DEV__,
   }),
   FETCH_SETTINGS: (
     state: SettingsState,
@@ -113,6 +114,7 @@ const handlers: Object = {
   ) => ({
     ...state,
     ...settings,
+    developerMode: settings.developerMode || !!process.env.__DEV__,
     loaded: true,
   }),
 }

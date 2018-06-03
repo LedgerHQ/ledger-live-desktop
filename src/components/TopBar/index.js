@@ -15,7 +15,6 @@ import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
-import IconDevices from 'icons/Devices'
 import IconLock from 'icons/Lock'
 import IconSettings from 'icons/Settings'
 
@@ -98,9 +97,6 @@ class TopBar extends PureComponent<Props> {
         <Inner>
           <Box grow horizontal>
             <GlobalSearch t={t} isHidden />
-            <ItemContainer justifyContent="center">
-              <IconDevices size={16} />
-            </ItemContainer>
             <ActivityIndicator />
             <Box justifyContent="center">
               <Bar />

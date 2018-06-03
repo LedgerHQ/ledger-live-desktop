@@ -4,6 +4,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
@@ -124,9 +125,17 @@ class SideBar extends PureComponent<Props> {
   }
 }
 
-const AccountsList = connect(state => ({
-  accounts: accountsSelector(state),
-}))(({ accounts }: { accounts: Account[] }) => (
+const AccountsList = compose(
+  withRouter,
+  connect(
+    state => ({
+      accounts: accountsSelector(state),
+    }),
+    null,
+    null,
+    { pure: false },
+  ),
+)(({ accounts }: { accounts: Account[] }) => (
   <Fragment>
     {accounts.map(account => {
       const Icon = getCryptoCurrencyIcon(account.currency)
@@ -155,6 +164,7 @@ const AccountsList = connect(state => ({
 ))
 
 export default compose(
+  withRouter,
   connect(mapStateToProps, mapDispatchToProps, null, { pure: false }),
   translate(),
 )(SideBar)

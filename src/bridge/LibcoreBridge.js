@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
+import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 // import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
 import type { WalletBridge, EditProps } from './types'
@@ -49,19 +50,34 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       .subscribe(observer)
   },
 
-  synchronize(_initialAccount, _observer) {
-    // FIXME TODO: use next(), to actually emit account updates.....
-    // - need to sync the balance
-    // - need to sync block height & block hash
-    // - need to sync operations.
-    // - once all that, need to set lastSyncDate to new Date()
+  synchronize(account, { next, complete, error }) {
+    // FIXME TODO:
     // - when you implement addPendingOperation you also here need to:
     //   - if there were pendingOperations that are now in operations, remove them as well.
     //   - if there are pendingOperations that is older than a threshold (that depends on blockchain speed typically)
     //     then we probably should trash them out? it's a complex question for UI
+    ;(async () => {
+      try {
+        const rawAccount = encodeAccount(account)
+        const rawSyncedAccount = await libcoreSyncAccount.send({ rawAccount }).toPromise()
+        const syncedAccount = decodeAccount(rawSyncedAccount)
+        next(account => ({
+          ...account,
+          freshAddress: syncedAccount.freshAddress,
+          freshAddressPath: syncedAccount.freshAddressPath,
+          balance: syncedAccount.balance,
+          blockHeight: syncedAccount.blockHeight,
+          operations: syncedAccount.operations, // TODO: is a simple replace enough?
+          lastSyncDate: new Date(),
+        }))
+        complete()
+      } catch (e) {
+        error(e)
+      }
+    })()
     return {
       unsubscribe() {
-        console.warn('LibcoreBridge: sync not implemented')
+        console.warn('LibcoreBridge: unsub sync not implemented')
       },
     }
   },
