@@ -2,7 +2,7 @@
 
 import db from 'helpers/db'
 
-import { getAccounts } from 'reducers/accounts'
+import { accountsSelector } from 'reducers/accounts'
 import { settingsExportSelector, areSettingsLoaded } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
 
@@ -11,7 +11,7 @@ export default store => next => action => {
     const [, type] = action.type.split(':')
     store.dispatch({ type, payload: action.payload })
     const state = store.getState()
-    db.set('accounts', getAccounts(state))
+    db.set('accounts', accountsSelector(state))
     // ^ TODO ultimately we'll do same for accounts to drop DB: pattern
   } else {
     const oldState = store.getState()
