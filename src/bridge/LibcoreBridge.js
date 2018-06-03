@@ -63,6 +63,8 @@ const LibcoreBridge: WalletBridge<Transaction> = {
         const syncedAccount = decodeAccount(rawSyncedAccount)
         next(account => ({
           ...account,
+          freshAddress: syncedAccount.freshAddress,
+          freshAddressPath: syncedAccount.freshAddressPath,
           balance: syncedAccount.balance,
           blockHeight: syncedAccount.blockHeight,
           operations: syncedAccount.operations, // TODO: is a simple replace enough?
