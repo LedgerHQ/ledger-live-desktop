@@ -7,7 +7,7 @@ import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currenc
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
-import * as accountId from 'helpers/accountId'
+import * as accountIdHelper from 'helpers/accountId'
 
 type Props = {
   core: Object,
@@ -262,7 +262,7 @@ async function buildAccountRaw({
   }
 
   const rawAccount: AccountRaw = {
-    id: accountId.encode({ type: 'libcore', xpub, walletName: wallet.getName() }),
+    id: accountIdHelper.encode({ type: 'libcore', xpub, walletName: wallet.getName() }),
     xpub,
     path: walletPath,
     name,
@@ -321,6 +321,19 @@ function buildOperationRaw({
   }
 }
 
+export async function getNJSAccount({
+  account,
+  njsWalletPool,
+}: {
+  accountId: string,
+  njsWalletPool: any,
+}) {
+  const decodedAccountId = accountIdHelper.decode(account.id)
+  const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
+  const njsAccount = await njsWallet.getAccount(account.index)
+  return njsAccount
+}
+
 export async function syncAccount({
   rawAccount,
   core,
@@ -330,7 +343,7 @@ export async function syncAccount({
   rawAccount: AccountRaw,
   njsWalletPool: Object,
 }) {
-  const decodedAccountId = accountId.decode(rawAccount.id)
+  const decodedAccountId = accountIdHelper.decode(rawAccount.id)
   const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
   const njsAccount = await njsWallet.getAccount(rawAccount.index)
 
