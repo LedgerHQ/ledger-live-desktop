@@ -22,7 +22,7 @@ type SetExchangePairs = (
   Array<{
     from: Currency,
     to: Currency,
-    exchange: string,
+    exchange: ?string,
   }>,
 ) => *
 

@@ -5,11 +5,13 @@ import { connect } from 'react-redux'
 import { remote } from 'electron'
 import bcrypt from 'bcryptjs'
 
+import { cleanAccountsCache } from 'actions/accounts'
+import { unlock } from 'reducers/application' // FIXME should be in actions
+import db, { setEncryptionKey } from 'helpers/db'
+import { delay } from 'helpers/promise'
+
 import type { SettingsState } from 'reducers/settings'
 import type { T } from 'types/common'
-
-import { unlock } from 'reducers/application'
-import db, { setEncryptionKey } from 'helpers/db'
 
 import CheckBox from 'components/base/CheckBox'
 import Box from 'components/base/Box'
@@ -28,6 +30,7 @@ import {
 
 const mapDispatchToProps = {
   unlock,
+  cleanAccountsCache,
 }
 
 type Props = {
@@ -35,10 +38,12 @@ type Props = {
   settings: SettingsState,
   unlock: Function,
   saveSettings: Function,
+  cleanAccountsCache: () => *,
 }
 
 type State = {
   isHardResetModalOpened: boolean,
+  isSoftResetModalOpened: boolean,
   isPasswordModalOpened: boolean,
   isDisablePasswordModalOpened: boolean,
 }
@@ -46,6 +51,7 @@ type State = {
 class TabProfile extends PureComponent<Props, State> {
   state = {
     isHardResetModalOpened: false,
+    isSoftResetModalOpened: false,
     isPasswordModalOpened: false,
     isDisablePasswordModalOpened: false,
   }
@@ -65,12 +71,22 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
+  handleOpenSoftResetModal = () => this.setState({ isSoftResetModalOpened: true })
+  handleCloseSoftResetModal = () => this.setState({ isSoftResetModalOpened: false })
   handleOpenHardResetModal = () => this.setState({ isHardResetModalOpened: true })
   handleCloseHardResetModal = () => this.setState({ isHardResetModalOpened: false })
   handleOpenPasswordModal = () => this.setState({ isPasswordModalOpened: true })
   handleClosePasswordModal = () => this.setState({ isPasswordModalOpened: false })
   handleDisablePassowrd = () => this.setState({ isDisablePasswordModalOpened: true })
   handleCloseDisablePasswordModal = () => this.setState({ isDisablePasswordModalOpened: false })
+
+  handleSoftReset = async () => {
+    this.props.cleanAccountsCache()
+    await delay(500)
+    db.cleanCache()
+    remote.app.relaunch()
+    remote.app.exit()
+  }
 
   handleHardReset = () => {
     db.resetAll()
@@ -105,6 +121,7 @@ class TabProfile extends PureComponent<Props, State> {
   render() {
     const { t, settings } = this.props
     const {
+      isSoftResetModalOpened,
       isHardResetModalOpened,
       isPasswordModalOpened,
       isDisablePasswordModalOpened,
@@ -134,12 +151,34 @@ class TabProfile extends PureComponent<Props, State> {
           >
             <CheckBox isChecked={settings.developerMode} onChange={this.handleDeveloperMode} />
           </Row>
-          <Row title={t('settings:profile.reset')} desc={t('settings:profile.resetDesc')}>
+          <Row
+            title={t('settings:profile.softResetTitle')}
+            desc={t('settings:profile.softResetDesc')}
+          >
+            <Button primary onClick={this.handleOpenSoftResetModal}>
+              {t('settings:profile.softReset')}
+            </Button>
+          </Row>
+          <Row
+            title={t('settings:profile.hardResetTitle')}
+            desc={t('settings:profile.hardResetDesc')}
+          >
             <Button danger onClick={this.handleOpenHardResetModal}>
-              {t('settings:profile.resetButton')}
+              {t('settings:profile.hardReset')}
             </Button>
           </Row>
         </Body>
+
+        <ConfirmModal
+          isDanger
+          isOpened={isSoftResetModalOpened}
+          onClose={this.handleCloseSoftResetModal}
+          onReject={this.handleCloseSoftResetModal}
+          onConfirm={this.handleSoftReset}
+          title={t('settings:softResetModal.title')}
+          subTitle={t('settings:softResetModal.subTitle')}
+          desc={t('settings:softResetModal.desc')}
+        />
 
         <ConfirmModal
           isDanger

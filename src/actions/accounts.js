@@ -85,3 +85,5 @@ export const updateAccount: UpdateAccount = payload => (dispatch, getState) => {
   dispatch(updateOrderAccounts(orderAccounts))
   // TODO should not be here IMO.. feels wrong for perf, probably better to move in reducer too
 }
+
+export const cleanAccountsCache = () => ({ type: 'CLEAN_ACCOUNTS_CACHE' })

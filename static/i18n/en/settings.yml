@@ -43,9 +43,12 @@ profile:
   syncDesc: Lorem ipsum dolor sit amet
   export: Export logs
   exportDesc: Lorem ipsum dolor sit amet
-  reset: Reset application
-  resetDesc: Lorem ipsum dolor sit amet
-  resetButton: Hard reset
+  softResetTitle: Clean application cache
+  softResetDesc: Lorem ipsum dolor sit amet
+  softReset: Clean cache
+  hardResetTitle: Reset application
+  hardResetDesc: Lorem ipsum dolor sit amet
+  hardReset: Hard reset
   developerMode: Developer Mode
   developerModeDesc: Enable visibility of developer apps & currencies like Bitcoin Testnet
 about:
@@ -57,5 +60,9 @@ about:
   termsDesc: Lorem ipsum dolor sit amet
 hardResetModal:
   title: Hard reset
+  subTitle: Are you sure houston?
+  desc: Lorem ipsum dolor sit amet
+softResetModal:
+  title: Clean application cache
   subTitle: Are you sure houston?
   desc: Lorem ipsum dolor sit amet

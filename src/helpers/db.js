@@ -85,8 +85,17 @@ export default {
     return val
   },
 
+  cleanCache: () => {
+    // Only remove cache store
+    const keys = ['countervalues']
+    keys.forEach(k => {
+      const db = store(k)
+      db.clear()
+    })
+  },
+
   resetAll: () => {
-    const keys = ['settings', 'accounts']
+    const keys = ['settings', 'accounts', 'countervalues']
     keys.forEach(k => {
       const db = store(k)
       db.clear()

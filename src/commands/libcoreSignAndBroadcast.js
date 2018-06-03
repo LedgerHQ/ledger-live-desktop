@@ -78,6 +78,7 @@ const cmd: Command<Input, Result> = createCommand(
           hash: txHash,
           type: 'OUT',
           value: amount,
+          fee: 0,
           blockHash: null,
           blockHeight: null,
           senders: [account.freshAddress],
