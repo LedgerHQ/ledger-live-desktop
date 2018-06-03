@@ -10,7 +10,7 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 import * as accountIdHelper from 'helpers/accountId'
 
 type Props = {
-  core: Object,
+  core: *,
   devicePath: string,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
@@ -82,7 +82,7 @@ async function scanAccountsOnDeviceBySegwit({
   isSegwit,
   showNewAccount,
 }: {
-  core: Object,
+  core: *,
   hwApp: Object,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
@@ -118,7 +118,7 @@ async function scanAccountsOnDeviceBySegwit({
 async function scanNextAccount(props: {
   // $FlowFixMe
   wallet: NJSWallet,
-  core: Object,
+  core: *,
   hwApp: Object,
   currencyId: string,
   accountsCount: number,
@@ -183,7 +183,7 @@ async function scanNextAccount(props: {
 }
 
 async function getOrCreateWallet(
-  core: Object,
+  core: *,
   WALLET_IDENTIFIER: string,
   currencyId: string,
   isSegwit: boolean,
@@ -220,7 +220,7 @@ async function buildAccountRaw({
   wallet: NJSWallet,
   currencyId: string,
   accountIndex: number,
-  core: Object,
+  core: *,
   // $FlowFixMe
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
@@ -262,7 +262,12 @@ async function buildAccountRaw({
   }
 
   const rawAccount: AccountRaw = {
-    id: accountIdHelper.encode({ type: 'libcore', xpub, walletName: wallet.getName() }),
+    id: accountIdHelper.encode({
+      type: 'libcore',
+      version: '1',
+      xpub,
+      walletName: wallet.getName(),
+    }),
     xpub,
     path: walletPath,
     name,
@@ -288,7 +293,7 @@ function buildOperationRaw({
   op,
   xpub,
 }: {
-  core: Object,
+  core: *,
   op: NJSOperation,
   xpub: string,
 }): OperationRaw {
@@ -322,15 +327,15 @@ function buildOperationRaw({
 }
 
 export async function getNJSAccount({
-  account,
+  accountRaw,
   njsWalletPool,
 }: {
-  accountId: string,
-  njsWalletPool: any,
+  accountRaw: AccountRaw,
+  njsWalletPool: *,
 }) {
-  const decodedAccountId = accountIdHelper.decode(account.id)
+  const decodedAccountId = accountIdHelper.decode(accountRaw.id)
   const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
-  const njsAccount = await njsWallet.getAccount(account.index)
+  const njsAccount = await njsWallet.getAccount(accountRaw.index)
   return njsAccount
 }
 
@@ -339,9 +344,9 @@ export async function syncAccount({
   core,
   njsWalletPool,
 }: {
-  core: Object,
+  core: *,
   rawAccount: AccountRaw,
-  njsWalletPool: Object,
+  njsWalletPool: *,
 }) {
   const decodedAccountId = accountIdHelper.decode(rawAccount.id)
   const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)

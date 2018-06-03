@@ -4,6 +4,7 @@ import type { AccountRaw, OperationRaw } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import type Transport from '@ledgerhq/hw-transport'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
@@ -42,7 +43,19 @@ const cmd: Command<Input, Result> = createCommand(
     ),
 )
 
-export async function doSignAndBroadcast({ account, transaction, deviceId, core, transport }) {
+export async function doSignAndBroadcast({
+  account,
+  transaction,
+  deviceId,
+  core,
+  transport,
+}: {
+  account: AccountRaw,
+  transaction: BitcoinLikeTransaction,
+  deviceId: string,
+  core: *,
+  transport: Transport<*>,
+}) {
   const hwApp = new Btc(transport)
 
   const WALLET_IDENTIFIER = await getWalletIdentifier({
