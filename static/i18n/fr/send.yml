@@ -13,6 +13,7 @@ steps:
     useRBF: Utiliser la transaction RBF
     message: Laisser un message (140)
     rippleTag: Tag
+    ethereumGasLimit: Gas limit
   connectDevice:
     title: Connecter l'appareil
   verification:

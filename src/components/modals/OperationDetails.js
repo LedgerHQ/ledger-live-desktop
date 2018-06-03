@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import uniq from 'lodash/uniq'
 import { connect } from 'react-redux'
 import { shell } from 'electron'
 import { translate } from 'react-i18next'
@@ -78,6 +79,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const isConfirmed = confirmations >= currencySettings.confirmationsNb
 
   const url = getTxURL(account, operation)
+  const uniqSenders = uniq(senders)
 
   return (
     <ModalBody onClose={onClose}>
@@ -143,7 +145,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         ) : null}
         <Line>
           <ColLeft>From</ColLeft>
-          <ColRight>{senders.map(v => <CanSelect key={v}> {v} </CanSelect>)}</ColRight>
+          <ColRight>{uniqSenders.map(v => <CanSelect key={v}>{v}</CanSelect>)}</ColRight>
         </Line>
         <B />
         <Line>

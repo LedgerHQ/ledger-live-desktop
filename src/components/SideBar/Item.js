@@ -3,7 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { compose } from 'redux'
-import { matchPath, withRouter } from 'react-router'
+import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 
@@ -91,13 +91,7 @@ function Item({
   highlight,
 }: Props) {
   const { pathname } = location
-  const isActive = linkTo
-    ? linkTo === '/'
-      ? linkTo === pathname
-      : matchPath(pathname, {
-          path: linkTo,
-        })
-    : false
+  const isActive = linkTo === pathname
   return (
     <Container
       big={big}

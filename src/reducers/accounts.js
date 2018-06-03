@@ -30,7 +30,9 @@ const handlers: Object = {
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
-    { accountId, updater }: { accountId: string, updater: Account => Account },
+    {
+      payload: { accountId, updater },
+    }: { payload: { accountId: string, updater: Account => Account } },
   ): AccountsState =>
     state.map(existingAccount => {
       if (existingAccount.id !== accountId) {

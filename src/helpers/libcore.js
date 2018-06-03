@@ -1,13 +1,5 @@
 // @flow
 
-//                          Scan accounts on device
-//                          -----------------------
-//
-//                                _   ,--()
-//                               ( )-'-.------|>
-//                                "     `--[]
-//
-
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
@@ -15,7 +7,10 @@ import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currenc
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
+import * as accountIdHelper from 'helpers/accountId'
+
 type Props = {
+  core: *,
   devicePath: string,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
@@ -24,13 +19,14 @@ type Props = {
 const { SHOW_LEGACY_NEW_ACCOUNT } = process.env
 
 export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
-  const { devicePath, currencyId, onAccountScanned } = props
+  const { devicePath, currencyId, onAccountScanned, core } = props
   const currency = getCryptoCurrencyById(currencyId)
 
   return withDevice(devicePath)(async transport => {
     const hwApp = new Btc(transport)
 
     const commonParams = {
+      core,
       hwApp,
       currencyId,
       onAccountScanned,
@@ -78,6 +74,7 @@ export async function getWalletIdentifier({
 }
 
 async function scanAccountsOnDeviceBySegwit({
+  core,
   hwApp,
   currencyId,
   onAccountScanned,
@@ -85,6 +82,7 @@ async function scanAccountsOnDeviceBySegwit({
   isSegwit,
   showNewAccount,
 }: {
+  core: *,
   hwApp: Object,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
@@ -96,12 +94,13 @@ async function scanAccountsOnDeviceBySegwit({
   const WALLET_IDENTIFIER = await getWalletIdentifier({ hwApp, isSegwit, currencyId, devicePath })
 
   // retrieve or create the wallet
-  const wallet = await getOrCreateWallet(WALLET_IDENTIFIER, currencyId, isSegwit)
+  const wallet = await getOrCreateWallet(core, WALLET_IDENTIFIER, currencyId, isSegwit)
   const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
   // new accounts will be created in sqlite, existing ones will be updated
   const accounts = await scanNextAccount({
+    core,
     wallet,
     hwApp,
     currencyId,
@@ -119,6 +118,7 @@ async function scanAccountsOnDeviceBySegwit({
 async function scanNextAccount(props: {
   // $FlowFixMe
   wallet: NJSWallet,
+  core: *,
   hwApp: Object,
   currencyId: string,
   accountsCount: number,
@@ -129,6 +129,7 @@ async function scanNextAccount(props: {
   showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
   const {
+    core,
     wallet,
     hwApp,
     currencyId,
@@ -139,11 +140,6 @@ async function scanNextAccount(props: {
     isSegwit,
     showNewAccount,
   } = props
-
-  // TODO: investigate why importing it on file scope causes trouble
-  const core = require('init-ledger-core')()
-
-  console.log(`>> Scanning account ${accountIndex} - isSegwit: ${isSegwit.toString()}`) // eslint-disable-line no-console
 
   // create account only if account has not been scanned yet
   // if it has already been created, we just need to get it, and sync it
@@ -168,7 +164,6 @@ async function scanNextAccount(props: {
     wallet,
     currencyId,
     core,
-    hwApp,
     ops,
   })
 
@@ -188,12 +183,11 @@ async function scanNextAccount(props: {
 }
 
 async function getOrCreateWallet(
+  core: *,
   WALLET_IDENTIFIER: string,
   currencyId: string,
   isSegwit: boolean,
 ): NJSWallet {
-  // TODO: investigate why importing it on file scope causes trouble
-  const core = require('init-ledger-core')()
   try {
     const wallet = await core.getWallet(WALLET_IDENTIFIER)
     return wallet
@@ -217,7 +211,6 @@ async function buildAccountRaw({
   wallet,
   currencyId,
   core,
-  hwApp,
   accountIndex,
   ops,
 }: {
@@ -227,8 +220,7 @@ async function buildAccountRaw({
   wallet: NJSWallet,
   currencyId: string,
   accountIndex: number,
-  core: Object,
-  hwApp: Object,
+  core: *,
   // $FlowFixMe
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
@@ -236,15 +228,11 @@ async function buildAccountRaw({
   const balance = njsBalance.toLong()
 
   const jsCurrency = getCryptoCurrencyById(currencyId)
-
-  // retrieve xpub
   const { derivations } = await wallet.getAccountCreationInfo(accountIndex)
   const [walletPath, accountPath] = derivations
 
-  const isVerify = false
-  const { bitcoinAddress } = await hwApp.getWalletPublicKey(accountPath, isVerify, isSegwit)
-
-  const xpub = bitcoinAddress
+  // retrieve xpub
+  const xpub = njsAccount.getRestoreKey()
 
   // blockHeight
   const { height: blockHeight } = await njsAccount.getLastBlock()
@@ -263,6 +251,8 @@ async function buildAccountRaw({
 
   const { str: freshAddress, path: freshAddressPath } = addresses[0]
 
+  ops.sort((a, b) => b.getDate() - a.getDate())
+
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
   const currency = getCryptoCurrencyById(currencyId)
 
@@ -272,7 +262,12 @@ async function buildAccountRaw({
   }
 
   const rawAccount: AccountRaw = {
-    id: xpub, // FIXME for account id you might want to prepend the crypto currency id to this because it's not gonna be unique.
+    id: accountIdHelper.encode({
+      type: 'libcore',
+      version: '1',
+      xpub,
+      walletName: wallet.getName(),
+    }),
     xpub,
     path: walletPath,
     name,
@@ -298,7 +293,7 @@ function buildOperationRaw({
   op,
   xpub,
 }: {
-  core: Object,
+  core: *,
   op: NJSOperation,
   xpub: string,
 }): OperationRaw {
@@ -331,4 +326,54 @@ function buildOperationRaw({
     accountId: xpub,
     date: op.getDate().toISOString(),
   }
+}
+
+export async function getNJSAccount({
+  accountRaw,
+  njsWalletPool,
+}: {
+  accountRaw: AccountRaw,
+  njsWalletPool: *,
+}) {
+  const decodedAccountId = accountIdHelper.decode(accountRaw.id)
+  const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
+  const njsAccount = await njsWallet.getAccount(accountRaw.index)
+  return njsAccount
+}
+
+export async function syncAccount({
+  rawAccount,
+  core,
+  njsWalletPool,
+}: {
+  core: *,
+  rawAccount: AccountRaw,
+  njsWalletPool: *,
+}) {
+  const decodedAccountId = accountIdHelper.decode(rawAccount.id)
+  const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
+  const njsAccount = await njsWallet.getAccount(rawAccount.index)
+
+  const unsub = await core.syncAccount(njsAccount)
+  unsub()
+
+  const query = njsAccount.queryOperations()
+  const ops = await query.complete().execute()
+  const njsBalance = await njsAccount.getBalance()
+
+  const syncedRawAccount = await buildAccountRaw({
+    njsAccount,
+    isSegwit: rawAccount.isSegwit === true,
+    accountIndex: rawAccount.index,
+    wallet: njsWallet,
+    currencyId: rawAccount.currencyId,
+    core,
+    ops,
+  })
+
+  syncedRawAccount.balance = njsBalance.toLong()
+
+  console.log(`Synced account [${syncedRawAccount.name}]: ${syncedRawAccount.balance}`)
+
+  return syncedRawAccount
 }
