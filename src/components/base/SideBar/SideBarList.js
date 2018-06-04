@@ -17,11 +17,12 @@ type Props = {
   activeValue?: string,
   scroll?: boolean,
   titleRight?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
+  emptyText?: string,
 }
 
 class SideBarList extends PureComponent<Props> {
   render() {
-    const { items, title, activeValue, scroll, titleRight, ...props } = this.props
+    const { items, title, activeValue, scroll, titleRight, emptyText, ...props } = this.props
     const ListWrapper = scroll ? GrowScroll : Box
     return (
       <Fragment>
@@ -34,15 +35,21 @@ class SideBarList extends PureComponent<Props> {
             <Space of={20} />
           </Fragment>
         )}
-        <ListWrapper flow={2} px={3} fontSize={3} {...props}>
-          {items.map(item => {
-            const itemProps = {
-              item,
-              isActive: item.isActive || (!!activeValue && activeValue === item.value),
-            }
-            return <SideBarListItem key={item.value} {...itemProps} />
-          })}
-        </ListWrapper>
+        {items.length > 0 ? (
+          <ListWrapper flow={2} px={3} fontSize={3} {...props}>
+            {items.map(item => {
+              const itemProps = {
+                item,
+                isActive: item.isActive || (!!activeValue && activeValue === item.value),
+              }
+              return <SideBarListItem key={item.value} {...itemProps} />
+            })}
+          </ListWrapper>
+        ) : emptyText ? (
+          <Box px={4} ff="Open Sans|Regular" fontSize={3} color="grey">
+            {emptyText}
+          </Box>
+        ) : null}
       </Fragment>
     )
   }

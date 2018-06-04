@@ -145,6 +145,7 @@ class MainSideBar extends PureComponent<Props> {
             </PlusWrapper>
           }
           items={accountsItems}
+          emptyText={t('emptyState:sidebar.text')}
         />
       </Box>
     )
