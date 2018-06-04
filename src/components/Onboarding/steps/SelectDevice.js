@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { rgba } from 'styles/helpers'
 
 import { isLedgerNano } from 'reducers/onboarding'
 
@@ -11,7 +12,6 @@ import IconCheckCirle from 'icons/Check'
 import IconLedgerNano from 'icons/illustrations/LedgerNano'
 import IconLedgerBlue from 'icons/illustrations/LedgerBlue'
 import { Title, Inner } from '../helperComponents'
-import { rgba } from 'styles/helpers'
 
 import type { StepProps } from '..'
 

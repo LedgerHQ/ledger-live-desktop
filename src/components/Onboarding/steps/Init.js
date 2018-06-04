@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { colors } from 'styles/theme'
 
 import styled from 'styled-components'
+import { flowType } from 'reducers/onboarding'
 import Box, { Card } from 'components/base/Box'
 import IconUser from 'icons/User'
 import IconPlus from 'icons/Plus'
@@ -15,15 +16,13 @@ import IconExternalLink from 'icons/ExternalLink'
 import IconChevronRight from 'icons/ChevronRight'
 import { Title } from '../helperComponents'
 
-import { flowType } from 'reducers/onboarding'
-
 import type { StepProps } from '..'
 
 const mapDispatchToProps = { flowType }
 
 class Init extends PureComponent<StepProps, *> {
   render() {
-    const { nextStep, jumpStep, t } = this.props
+    const { nextStep, t } = this.props
 
     const optionCards = [
       {
@@ -107,7 +106,7 @@ export function OptionFlowCard({ card }: { card: CardType }) {
   )
 }
 
-const InitCardContainer = styled(Box).attrs({
+const InitCardContainer = styled(Card).attrs({
   p: 3,
   horizontal: true,
   borderRadius: '4px',
