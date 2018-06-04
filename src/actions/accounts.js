@@ -1,50 +1,14 @@
 // @flow
 
-import sortBy from 'lodash/sortBy'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import db from 'helpers/db'
 
-import type { Dispatch } from 'redux'
-
-function sortAccounts(accounts, orderAccounts) {
-  const [order, sort] = orderAccounts.split('|')
-
-  const accountsSorted = sortBy(accounts, a => {
-    if (order === 'balance') {
-      return a.balance
-    }
-
-    return a[order]
-  })
-
-  if (sort === 'asc') {
-    accountsSorted.reverse()
-  }
-
-  return accountsSorted
-}
-
-export type UpdateOrderAccounts = string => (Dispatch<*>, Function) => void
-export const updateOrderAccounts: UpdateOrderAccounts = (orderAccounts: string) => (
-  dispatch,
-  getState,
-) => {
-  const { accounts } = getState()
-  dispatch({
-    type: 'DB:SET_ACCOUNTS',
-    payload: sortAccounts(accounts, orderAccounts),
-  })
-}
-
-export type AddAccount = Account => (Function, Function) => void
-export const addAccount: AddAccount = payload => (dispatch, getState) => {
-  const {
-    settings: { orderAccounts },
-  } = getState()
-  dispatch({ type: 'ADD_ACCOUNT', payload })
-  dispatch(updateOrderAccounts(orderAccounts))
-}
+export type AddAccount = Account => *
+export const addAccount: AddAccount = payload => ({
+  type: 'ADD_ACCOUNT',
+  payload,
+})
 
 export type RemoveAccount = Account => { type: string, payload: Account }
 export const removeAccount: RemoveAccount = payload => ({
@@ -52,16 +16,19 @@ export const removeAccount: RemoveAccount = payload => ({
   payload,
 })
 
-export type FetchAccounts = () => (Function, Function) => *
-export const fetchAccounts: FetchAccounts = () => (dispatch, getState) => {
-  const {
-    settings: { orderAccounts },
-  } = getState()
+export type ReorderAccounts = (string[]) => { type: string, payload: string[] }
+export const reorderAccounts: ReorderAccounts = payload => ({
+  type: 'DB:REORDER_ACCOUNTS',
+  payload,
+})
+
+export type FetchAccounts = () => *
+export const fetchAccounts: FetchAccounts = () => {
   const accounts = db.get('accounts')
-  dispatch({
+  return {
     type: 'SET_ACCOUNTS',
-    payload: sortAccounts(accounts, orderAccounts),
-  })
+    payload: accounts,
+  }
 }
 
 export type UpdateAccountWithUpdater = (accountId: string, (Account) => Account) => *
@@ -71,20 +38,13 @@ export const updateAccountWithUpdater: UpdateAccountWithUpdater = (accountId, up
   payload: { accountId, updater },
 })
 
-export type UpdateAccount = ($Shape<Account>) => (Function, Function) => void
-export const updateAccount: UpdateAccount = payload => (dispatch, getState) => {
-  const {
-    settings: { orderAccounts },
-  } = getState()
-  dispatch({
-    type: 'DB:UPDATE_ACCOUNT',
-    payload: {
-      updater: account => ({ ...account, ...payload }),
-      accountId: payload.id,
-    },
-  })
-  dispatch(updateOrderAccounts(orderAccounts))
-  // TODO should not be here IMO.. feels wrong for perf, probably better to move in reducer too
-}
+export type UpdateAccount = ($Shape<Account>) => *
+export const updateAccount: UpdateAccount = payload => ({
+  type: 'DB:UPDATE_ACCOUNT',
+  payload: {
+    updater: account => ({ ...account, ...payload }),
+    accountId: payload.id,
+  },
+})
 
 export const cleanAccountsCache = () => ({ type: 'CLEAN_ACCOUNTS_CACHE' })

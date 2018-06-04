@@ -1,17 +1,20 @@
 // @flow
 
 import React, { Component } from 'react'
+import sortBy from 'lodash/sortBy'
 import styled from 'styled-components'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
 import { getOrderAccounts } from 'reducers/settings'
-
-import { updateOrderAccounts } from 'actions/accounts'
+import { createStructuredSelector } from 'reselect'
+import { reorderAccounts } from 'actions/accounts'
+import { accountsSelector } from 'reducers/accounts'
 import { saveSettings } from 'actions/settings'
 
 import BoldToggle from 'components/base/BoldToggle'
@@ -23,6 +26,24 @@ import IconAngleDown from 'icons/AngleDown'
 import IconArrowDown from 'icons/ArrowDown'
 import IconArrowUp from 'icons/ArrowUp'
 
+function sortAccounts(accounts: Account[], orderAccounts: string) {
+  const [order, sort] = orderAccounts.split('|')
+
+  const accountsSorted = sortBy(accounts, a => {
+    if (order === 'balance') {
+      return a.balance
+    }
+
+    return a[order]
+  })
+
+  if (sort === 'asc') {
+    accountsSorted.reverse()
+  }
+
+  return accountsSorted
+}
+
 const OrderIcon = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
@@ -31,20 +52,22 @@ const OrderIcon = styled(Box).attrs({
   opacity: ${p => (p.isActive ? 1 : 0)};
 `
 
-const mapStateToProps = state => ({
-  orderAccounts: getOrderAccounts(state),
+const mapStateToProps = createStructuredSelector({
+  orderAccounts: getOrderAccounts,
+  accounts: accountsSelector,
 })
 
 const mapDispatchToProps = {
-  updateOrderAccounts,
+  reorderAccounts,
   saveSettings,
 }
 
 type Props = {
   t: T,
   orderAccounts: string,
-  updateOrderAccounts: Function,
-  saveSettings: Function,
+  accounts: Account[],
+  reorderAccounts: (string[]) => *,
+  saveSettings: (*) => *,
 }
 
 type State = {
@@ -62,10 +85,10 @@ class AccountsOrder extends Component<Props, State> {
 
   setAccountOrder = debounce(
     order => {
-      const { updateOrderAccounts, saveSettings } = this.props
+      const { saveSettings } = this.props
       this.setState({ cachedValue: order }, () => {
         window.requestIdleCallback(() => {
-          updateOrderAccounts(order)
+          this.props.reorderAccounts(sortAccounts(this.props.accounts, order).map(a => a.id))
           saveSettings({ orderAccounts: order })
         })
       })
