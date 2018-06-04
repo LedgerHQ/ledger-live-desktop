@@ -47,17 +47,20 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
       if (requestId !== msg.requestId) return
       switch (msg.type) {
         case 'NEXT':
+          console.log('<= COMMAND next', msg)
           if (msg.data) {
             o.next(msg.data)
           }
           break
 
         case 'COMPLETE':
+          console.log('<= COMMAND complete', msg)
           o.complete()
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
 
         case 'ERROR':
+          console.warn('<= COMMAND error', msg)
           o.error(msg.data)
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
@@ -69,6 +72,8 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
     ipcRenderer.on('command-event', handleCommandEvent)
 
     ipcRenderer.send('command', { id, data, requestId })
+
+    console.log('=> COMMAND', { id, data, requestId })
 
     return unsubscribe
   })

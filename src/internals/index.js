@@ -9,7 +9,6 @@ process.title = 'Internal'
 const subscriptions = {}
 
 process.on('message', m => {
-  console.log(m)
   if (m.type === 'command') {
     const { data, requestId, id } = m.command
     const cmd = commands.find(cmd => cmd.id === id)
@@ -56,4 +55,4 @@ process.on('message', m => {
   }
 })
 
-console.log('Internal process is ready!')
+console.log('Internal process is up!')
