@@ -6,7 +6,6 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
 import moment from 'moment'
-import { delay } from 'helpers/promise'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
@@ -73,10 +72,7 @@ async function init() {
   if (isMainWindow) {
     events({ store, locked })
 
-    const libcoreVersion = await Promise.race([
-      libcoreGetVersion.send().toPromise(),
-      delay(10000).then(() => Promise.reject(new Error("timeout: can't load libcore"))),
-    ])
+    const libcoreVersion = await libcoreGetVersion.send().toPromise()
     console.log('libcore', libcoreVersion)
   }
 }
