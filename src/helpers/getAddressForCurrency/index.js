@@ -1,5 +1,6 @@
 // @flow
 
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import invariant from 'invariant'
 import type Transport from '@ledgerhq/hw-transport'
 import bitcoin from './btc'
@@ -8,7 +9,7 @@ import ripple from './ripple'
 
 type Resolver = (
   transport: Transport<*>,
-  currencyId: string,
+  currency: CryptoCurrency,
   path: string,
   options: {
     segwit?: boolean,
@@ -16,18 +17,16 @@ type Resolver = (
   },
 ) => Promise<{ address: string, path: string, publicKey: string }>
 
-type Module = (currencyId: string) => Resolver
-
-const perFamily = {
+const perFamily: { [_: string]: Resolver } = {
   bitcoin,
   ethereum,
   ripple,
 }
 
-const getAddressForCurrency: Module = (currencyId: string) => {
-  const getAddress = perFamily[currencyId]
-  invariant(getAddress, `getAddress not implemented for ${currencyId}`)
-  return getAddress
+const proxy: Resolver = (transport, currency, path, options) => {
+  const getAddress = perFamily[currency.family]
+  invariant(getAddress, `getAddress not implemented for ${currency.id}`)
+  return getAddress(transport, currency, path, options)
 }
 
-export default getAddressForCurrency
+export default proxy

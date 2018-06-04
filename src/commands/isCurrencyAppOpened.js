@@ -26,9 +26,9 @@ const cmd: Command<Input, Result> = createCommand(
 
         // First, we check if the app can derivates on the currency
         try {
-          await getAddress(currencyId)(
+          await getAddress(
             transport,
-            currencyId,
+            currency,
             standardDerivation({ currency, segwit: false, x: 0 }),
             { segwit: false },
           )

@@ -1,12 +1,13 @@
 // @flow
 
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import Eth from '@ledgerhq/hw-app-eth'
 import type Transport from '@ledgerhq/hw-transport'
 import eip55 from 'eip55'
 
 export default async (
   transport: Transport<*>,
-  currencyId: string,
+  currency: CryptoCurrency,
   path: string,
   { verify = false }: *,
 ) => {

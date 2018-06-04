@@ -1,5 +1,6 @@
 // @flow
 
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 import { withDevice } from 'helpers/deviceAccess'
@@ -24,7 +25,7 @@ const cmd: Command<Input, Result> = createCommand(
   ({ currencyId, devicePath, path, ...options }) =>
     fromPromise(
       withDevice(devicePath)(transport =>
-        getAddressForCurrency(currencyId)(transport, currencyId, path, options),
+        getAddressForCurrency(transport, getCryptoCurrencyById(currencyId), path, options),
       ),
     ),
 )

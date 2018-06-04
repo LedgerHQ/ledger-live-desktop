@@ -1,11 +1,12 @@
 // @flow
 
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import type Transport from '@ledgerhq/hw-transport'
 
 export default async (
   transport: Transport<*>,
-  currencyId: string,
+  currency: CryptoCurrency,
   path: string,
   {
     segwit = true,
