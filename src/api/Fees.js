@@ -1,4 +1,5 @@
 // @flow
+import invariant from 'invariant'
 import axios from 'axios'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { blockchainBaseURL, userFriendlyError } from './Ledger'
@@ -8,7 +9,9 @@ export type Fees = {
 }
 
 export const getEstimatedFees = async (currency: Currency): Promise<Fees> => {
-  const { data, status } = await userFriendlyError(axios.get(`${blockchainBaseURL(currency)}/fees`))
+  const baseURL = blockchainBaseURL(currency)
+  invariant(baseURL, `Fees for ${currency.id} are not supported`)
+  const { data, status } = await userFriendlyError(axios.get(`${baseURL}/fees`))
   if (data) {
     return data
   }
