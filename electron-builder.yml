@@ -13,6 +13,8 @@ mac:
     - zip
 
 linux:
+  asarUnpack:
+    - node_modules/@ledgerhq/ledger-core
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
   category: Finance
   target:

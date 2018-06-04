@@ -20,7 +20,7 @@ const staticPath =
  * note: `i` for `image` (using `img` was confusing when using with <img /> tag)
  */
 export function i(path: string): string {
-  return `/images/${path}`
+  return isRunningInAsar ? `${staticPath}/images/${path}` : `/images/${path}`
 }
 
 export default staticPath
