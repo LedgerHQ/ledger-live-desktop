@@ -89,6 +89,8 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
 
     if (prevDeviceSelected !== deviceSelected) {
       this.handleStatusChange('connected', 'progress')
+      // TODO: refacto to more generic/global way
+      clearTimeout(this._timeout)
       this._timeout = setTimeout(this.checkAppOpened, 250)
     }
   }
@@ -148,7 +150,10 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       this.handleStatusChange(this.state.deviceStatus, 'fail', e.message)
     }
 
-    this._timeout = setTimeout(this.checkAppOpened, 1e3)
+    // TODO: refacto to more generic/global way
+    if (!this._unmounted) {
+      this._timeout = setTimeout(this.checkAppOpened, 1e3)
+    }
   }
 
   _timeout: *
