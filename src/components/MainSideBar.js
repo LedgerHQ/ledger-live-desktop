@@ -28,7 +28,7 @@ import FormattedVal from 'components/base/FormattedVal'
 
 import IconManager from 'icons/Manager'
 import IconPieChart from 'icons/PieChart'
-import IconPlus from 'icons/Plus'
+import IconCirclePlus from 'icons/CirclePlus'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
@@ -141,7 +141,7 @@ class MainSideBar extends PureComponent<Props> {
           title={t('sidebar:accounts')}
           titleRight={
             <PlusWrapper onClick={() => openModal('importAccounts')}>
-              <IconPlus size={16} />
+              <IconCirclePlus size={16} />
             </PlusWrapper>
           }
           items={accountsItems}

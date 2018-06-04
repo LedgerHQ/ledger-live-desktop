@@ -15,8 +15,8 @@ import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
 
-import IconLedgerNanoError from 'icons/onboarding/LedgerNanoError'
-import IconLedgerBlueError from 'icons/onboarding/LedgerBlueError'
+import IconLedgerNanoError from 'icons/illustrations/LedgerNanoError'
+import IconLedgerBlueError from 'icons/illustrations/LedgerBlueError'
 import IconCheck from 'icons/Check'
 
 import { Title, Description, IconOptionRow } from '../helperComponents'

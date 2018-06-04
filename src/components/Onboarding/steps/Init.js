@@ -1,66 +1,88 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { shell } from 'electron'
+import { connect } from 'react-redux'
 import { colors } from 'styles/theme'
 
 import styled from 'styled-components'
 import Box, { Card } from 'components/base/Box'
 import IconUser from 'icons/User'
-import IconAdd from 'icons/Plus'
+import IconPlus from 'icons/Plus'
 import IconRecover from 'icons/Recover'
 import IconCheck from 'icons/Check'
 import IconExternalLink from 'icons/ExternalLink'
 import IconChevronRight from 'icons/ChevronRight'
 import { Title } from '../helperComponents'
 
+import { flowType } from 'reducers/onboarding'
+
 import type { StepProps } from '..'
 
-export default (props: StepProps) => {
-  const { nextStep, jumpStep, t } = props
-  const optionCards = [
-    {
-      key: 'newDevice',
-      icon: <IconAdd size={16} />,
-      title: t('onboarding:init.newDevice.title'),
-      onClick: () => nextStep(),
-    },
-    {
-      key: 'restoreDevice',
-      icon: <IconRecover size={16} />,
-      title: t('onboarding:init.restoreDevice.title'),
-      onClick: () => jumpStep('choosePIN'),
-    },
-    {
-      key: 'initializedDevice',
-      icon: <IconCheck size={16} />,
-      title: t('onboarding:init.initializedDevice.title'),
-      onClick: () => jumpStep('choosePIN'),
-    },
-    {
-      key: 'noDevice',
-      icon: <IconExternalLink size={16} />,
-      title: t('onboarding:init.noDevice.title'),
-      onClick: () => shell.openExternal('https://www.ledger.fr/'),
-    },
-  ]
+const mapDispatchToProps = { flowType }
 
-  return (
-    <Box sticky alignItems="center" justifyContent="center">
-      <Box align="center">
-        <Box color="wallet">
-          <IconUser size={36} />
-        </Box>
-        <Box p={4} style={{ maxWidth: 550 }} textAlign="center">
-          <Title>{t('onboarding:init.title')}</Title>
-        </Box>
-        <Box mt={5} flow={5}>
-          {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
+class Init extends PureComponent<StepProps, *> {
+  render() {
+    const { nextStep, jumpStep, t } = this.props
+
+    const optionCards = [
+      {
+        key: 'newDevice',
+        icon: <IconPlus size={16} />,
+        title: t('onboarding:init.newDevice.title'),
+        onClick: () => {
+          nextStep()
+          this.props.flowType('newDevice')
+        },
+      },
+      {
+        key: 'restoreDevice',
+        icon: <IconRecover size={16} />,
+        title: t('onboarding:init.restoreDevice.title'),
+        onClick: () => {
+          nextStep()
+          this.props.flowType('restoreDevice')
+        },
+      },
+      {
+        key: 'initializedDevice',
+        icon: <IconCheck size={16} />,
+        title: t('onboarding:init.initializedDevice.title'),
+        onClick: () => {
+          nextStep()
+          this.props.flowType('initializedDevice')
+        },
+      },
+      {
+        key: 'noDevice',
+        icon: <IconExternalLink size={16} />,
+        title: t('onboarding:init.noDevice.title'),
+        onClick: () => {
+          shell.openExternal('https://www.ledger.fr/')
+          this.props.flowType('noDevice')
+        },
+      },
+    ]
+
+    return (
+      <Box sticky alignItems="center" justifyContent="center">
+        <Box align="center">
+          <Box color="wallet">
+            <IconUser size={36} />
+          </Box>
+          <Box p={4}>
+            <Title>{t('onboarding:init.title')}</Title>
+          </Box>
+          <Box mt={5} flow={5}>
+            {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
+          </Box>
         </Box>
       </Box>
-    </Box>
-  )
+    )
+  }
 }
+
+export default connect(null, mapDispatchToProps)(Init)
 
 type CardType = {
   icon: any,
@@ -71,31 +93,29 @@ type CardType = {
 export function OptionFlowCard({ card }: { card: CardType }) {
   const { icon, title, onClick } = card
   return (
-    <Card
-      horizontal
-      p={5}
-      style={{
-        cursor: 'pointer',
-        border: 'solid 1px #d8d8d8',
-        minWidth: '533px',
-        maxHeight: '80px',
-      }}
-      onClick={onClick}
-    >
+    <InitCardContainer onClick={onClick}>
       <Box justify="center" style={{ color: colors.wallet }}>
-        <Container mr={4} justify="center">
-          {icon}
-        </Container>
+        <InitIconContainer justify="center">{icon}</InitIconContainer>
       </Box>
-      <Box ff="Open Sans|Regular" justify="center" fontSize={4} grow>
+      <Box justify="center" grow>
         <CardTitle>{title}</CardTitle>
       </Box>
-      <Box justify="center" color="grey">
-        <IconChevronRight size={22} />
+      <Box justify="center" mx={4} my={3}>
+        <IconChevronRight style={{ color: colors.grey }} size={22} />
       </Box>
-    </Card>
+    </InitCardContainer>
   )
 }
+
+const InitCardContainer = styled(Box).attrs({
+  p: 3,
+  horizontal: true,
+  borderRadius: '4px',
+})`
+  border: 1px solid ${p => p.theme.colors.fog};
+  width: 550px;
+  height: 70px;
+`
 
 export const CardTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
@@ -103,7 +123,10 @@ export const CardTitle = styled(Box).attrs({
   textAlign: 'left',
 })``
 
-const Container = styled(Box).attrs({})`
+const InitIconContainer = styled(Box).attrs({
+  mx: 4,
+  my: 3,
+})`
   width: 40px;
   height: 40px;
   border-radius: 50%;

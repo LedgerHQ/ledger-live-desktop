@@ -3,7 +3,7 @@
 import React from 'react'
 
 import Box from 'components/base/Box'
-import IconWriteSeed from 'icons/onboarding/WriteSeed'
+import IconWriteSeed from 'icons/illustrations/WriteSeed'
 import IconChevronRight from 'icons/ChevronRight'
 import { colors } from 'styles/theme'
 
@@ -37,6 +37,11 @@ export default (props: StepProps) => {
       icon: <IconOptionRow>3.</IconOptionRow>,
       desc: t('onboarding:writeSeed.instructions.step3'),
     },
+    {
+      key: 'step4',
+      icon: <IconOptionRow>4.</IconOptionRow>,
+      desc: t('onboarding:writeSeed.instructions.step4'),
+    },
   ]
   const disclaimerNotes = [
     {
@@ -54,20 +59,25 @@ export default (props: StepProps) => {
       icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
       desc: t('onboarding:writeSeed.disclaimer.note3'),
     },
+    {
+      key: 'note4',
+      icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
+      desc: t('onboarding:writeSeed.disclaimer.note4'),
+    },
   ]
   return (
-    <Box sticky pt={150}>
+    <Box sticky pt={170}>
       <Box grow alignItems="center">
-        <Box align="center" mb={5}>
+        <Box mb={3}>
           <Title>{t('onboarding:writeSeed.title')}</Title>
           <Description>{t('onboarding:writeSeed.desc')}</Description>
         </Box>
         <Box align="center">
           <Inner style={{ width: 760 }}>
-            <Box style={{ width: 260, alignItems: 'center' }}>
+            <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
               <IconWriteSeed />
             </Box>
-            <Box shrink grow flow={4}>
+            <Box shrink flow={2} m={0}>
               {steps.map(step => <OptionRow key={step.key} step={step} />)}
             </Box>
           </Inner>

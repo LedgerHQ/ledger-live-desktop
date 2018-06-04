@@ -1,6 +1,5 @@
 start:
-  title: Welcome to the new Ledger Live Desktop app.
-  desc: Let’s get started!
+  title: Welcome to Ledger Live
 init:
   title: Welcome to Ledger Live, the computer companion app to your Ledger device
   newDevice:
@@ -17,7 +16,6 @@ init:
     desc: Please replace it with the final wording once it’s done.
 selectDevice:
   title: To get started, select your device
-  desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   ledgerNanoCard:
     title: Ledger Nano S
     desc: Please replace it with the final wording once it’s done.
@@ -47,6 +45,7 @@ writeSeed:
     step1: Copy the first word (Word \#1) in position 1 on the blank Recovery sheet.
     step2: Press the right button to display Word \#2 and repeat the process until all 24 words are copied on the Recovery sheet.
     step3: Confirm your recovery phrase press both buttons to validate each word displayed on the screen.
+    step4: Repeat the process until the last word.
   disclaimer:
     note1: Carefully secure your 24 words out of sight.
     note2: Ledger does not keep any backup of your 24 words.

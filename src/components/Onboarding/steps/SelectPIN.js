@@ -5,8 +5,8 @@ import React, { Fragment } from 'react'
 import Box from 'components/base/Box'
 import { colors } from 'styles/theme'
 
-import IconLedgerNanoSelectPIN from 'icons/onboarding/LedgerNanoSelectPIN'
-import IconLedgerBlueSelectPIN from 'icons/onboarding/LedgerBlueSelectPIN'
+import IconLedgerNanoSelectPIN from 'icons/illustrations/LedgerNanoSelectPIN'
+import IconLedgerBlueSelectPIN from 'icons/illustrations/LedgerBlueSelectPIN'
 import IconChevronRight from 'icons/ChevronRight'
 
 import { Title, Inner, OptionRow, IconOptionRow, DisclaimerBox } from '../helperComponents'
@@ -14,6 +14,7 @@ import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
+// TODO: adjust for different wording based on the flow type when we have wording
 export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
   const stepsLedgerNano = [
@@ -74,16 +75,14 @@ export default (props: StepProps) => {
     },
   ]
   return (
-    <Box sticky pt={150}>
+    <Box sticky pt={170}>
       <Box grow alignItems="center">
-        <Box align="center" mb={5}>
-          <Title>{t('onboarding:selectPIN.title')}</Title>
-        </Box>
-        <Box align="center" mt={5}>
+        <Title>{t('onboarding:selectPIN.title')}</Title>
+        <Box align="center" mt={7}>
           {onboarding.isLedgerNano ? (
             <Fragment>
-              <Inner style={{ width: 680 }}>
-                <Box style={{ width: 260 }} mt={5}>
+              <Inner style={{ width: 700 }}>
+                <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }} mt={5}>
                   <IconLedgerNanoSelectPIN />
                 </Box>
 
@@ -94,8 +93,8 @@ export default (props: StepProps) => {
             </Fragment>
           ) : (
             <Fragment>
-              <Inner style={{ width: 680 }}>
-                <Box style={{ width: 260, alignItems: 'center' }}>
+              <Inner style={{ width: 700 }}>
+                <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }} mt={2}>
                   <IconLedgerBlueSelectPIN />
                 </Box>
 
@@ -105,7 +104,6 @@ export default (props: StepProps) => {
               </Inner>
             </Fragment>
           )}
-
           <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
         </Box>
       </Box>
