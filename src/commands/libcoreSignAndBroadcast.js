@@ -85,6 +85,9 @@ export async function doSignAndBroadcast({
     njsWalletCurrency.bitcoinLikeNetworkParameters.SigHash,
   )
 
+  const hasTimestamp = njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
+  // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
+
   const currency = getCryptoCurrencyById(account.currencyId)
   const signedTransaction = await core.signTransaction({
     hwApp,
@@ -92,6 +95,7 @@ export async function doSignAndBroadcast({
     sigHashType: parseInt(sigHashType, 16).toString(),
     supportsSegwit: !!currency.supportsSegwit,
     isSegwit: account.isSegwit,
+    hasTimestamp,
   })
 
   const txHash = await njsAccount.asBitcoinLikeAccount().broadcastRawTransaction(signedTransaction)
