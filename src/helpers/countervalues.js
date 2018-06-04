@@ -39,6 +39,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
 }
 
 const CounterValues = createCounterValues({
+  log: (...args) => console.log('CounterValues:', ...args),
   getAPIBaseURL: () => 'https://ledger-countervalue-poc.herokuapp.com',
   storeSelector: state => state.countervalues,
   pairsSelector,
