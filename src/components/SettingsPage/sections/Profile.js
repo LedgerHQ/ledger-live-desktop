@@ -84,14 +84,13 @@ class TabProfile extends PureComponent<Props, State> {
     this.props.cleanAccountsCache()
     await delay(500)
     db.cleanCache()
-    remote.app.relaunch()
-    remote.app.exit()
+    remote.getCurrentWindow().webContents.reload()
   }
 
-  handleHardReset = () => {
+  handleHardReset = async () => {
     db.resetAll()
-    remote.app.relaunch()
-    remote.app.exit()
+    await delay(500)
+    remote.getCurrentWindow().webContents.reload()
   }
 
   handleChangePasswordCheck = isChecked => {
