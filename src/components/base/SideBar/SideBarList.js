@@ -31,7 +31,7 @@ class SideBarList extends PureComponent<Props> {
               {title}
               {!!titleRight && <Box ml="auto">{titleRight}</Box>}
             </SideBarListTitle>
-            <Space of={10} />
+            <Space of={20} />
           </Fragment>
         )}
         <ListWrapper flow={2} px={3} fontSize={3} {...props}>

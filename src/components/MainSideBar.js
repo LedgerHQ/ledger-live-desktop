@@ -133,12 +133,12 @@ class MainSideBar extends PureComponent<Props> {
 
     return (
       <Box bg="white" style={{ width: 230 }}>
-        <Space of={60} />
-        <SideBarList items={navigationItems} />
+        <Space of={70} />
+        <SideBarList title={t('sidebar:menu')} items={navigationItems} />
         <Space of={40} />
         <SideBarList
           scroll
-          title={t('sidebar:menu')}
+          title={t('sidebar:accounts')}
           titleRight={
             <PlusWrapper onClick={() => openModal('importAccounts')}>
               <IconPlus size={16} />
