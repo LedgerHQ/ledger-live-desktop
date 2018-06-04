@@ -21,7 +21,7 @@ import SettingsPage from 'components/SettingsPage'
 
 import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
-import SideBar from 'components/SideBar'
+import SideBar from 'components/MainSideBar'
 import TopBar from 'components/TopBar'
 
 const Container = styled(GrowScroll).attrs({
