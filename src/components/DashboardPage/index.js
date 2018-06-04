@@ -16,7 +16,7 @@ import { colors } from 'styles/theme'
 import { accountsSelector } from 'reducers/accounts'
 import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
 
-import { updateOrderAccounts } from 'actions/accounts'
+import { reorderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
 import UpdateNotifier from 'components/UpdateNotifier'
@@ -39,7 +39,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   push,
-  updateOrderAccounts,
+  reorderAccounts,
   saveSettings,
 }
 
