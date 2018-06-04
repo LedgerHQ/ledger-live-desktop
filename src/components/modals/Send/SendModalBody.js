@@ -242,6 +242,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
         {stepIndex === 3 ? (
           <ConfirmationFooter
             t={t}
+            account={account}
             optimisticOperation={optimisticOperation}
             onClose={onClose}
             onGoToFirstStep={this.onGoToFirstStep}

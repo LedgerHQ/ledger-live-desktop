@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
-import { getTxURL } from 'helpers/explorers'
+import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
 
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T, CurrencySettings } from 'types/common'
@@ -78,7 +78,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const confirmations = operation.blockHeight ? account.blockHeight - operation.blockHeight : 0
   const isConfirmed = confirmations >= currencySettings.confirmationsNb
 
-  const url = getTxURL(account, operation)
+  const url = getAccountOperationExplorer(account, operation)
   const uniqSenders = uniq(senders)
 
   return (

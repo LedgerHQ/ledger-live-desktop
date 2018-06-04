@@ -42,7 +42,9 @@ export type API = {
 
 export const apiForCurrency = (currency: CryptoCurrency): API => {
   const baseURL = blockchainBaseURL(currency)
-
+  if (!baseURL) {
+    throw new Error(`ledger API not available for currency ${currency.id}`)
+  }
   return {
     async getTransactions(address, blockHash) {
       const { data } = await userFriendlyError(
