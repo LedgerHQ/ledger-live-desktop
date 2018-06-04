@@ -37,6 +37,7 @@ const blockCountNameConvention = {
   '3': 'Standard', // (normal confirmation)',
   '6': 'Low', // (slow confirmation)',
 }
+const defaultBlockCount = 3
 
 const customItem = {
   label: 'Custom',
@@ -86,7 +87,9 @@ class FeesField extends Component<
     const { items, isFocused } = this.state
     if (fees && !feePerByte && !isFocused) {
       // initialize with the median
-      onChange(items[Math.floor(items.length / 2)].feePerByte)
+      const feePerByte = (items.find(item => item.blockCount === defaultBlockCount) || items[0])
+        .feePerByte
+      onChange(feePerByte)
     }
   }
 
