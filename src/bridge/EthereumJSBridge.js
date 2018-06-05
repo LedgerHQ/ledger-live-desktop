@@ -234,7 +234,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
           complete()
         } else {
           operations = operations.filter(
-            o => !o.blockHeight || blockHeight - o.blockHeight < SAFE_REORG_THRESHOLD,
+            // only keep operations that have enough confirmations
+            o => o.blockHeight && blockHeight - o.blockHeight > SAFE_REORG_THRESHOLD,
           )
           const blockHash = operations.length > 0 ? operations[0].blockHash : undefined
           const { txs } = await api.getTransactions(freshAddress, blockHash)
