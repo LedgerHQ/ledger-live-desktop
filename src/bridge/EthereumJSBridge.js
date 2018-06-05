@@ -240,6 +240,11 @@ const EthereumBridge: WalletBridge<Transaction> = {
           const { txs } = await api.getTransactions(freshAddress, blockHash)
           if (unsubscribed) return
           if (txs.length === 0) {
+            next(a => ({
+              ...a,
+              blockHeight: block.height,
+              lastSyncDate: new Date(),
+            }))
             complete()
             return
           }
