@@ -93,6 +93,8 @@ function mergeOps(existing: Operation[], newFetched: Operation[]) {
   return uniqBy(all.sort((a, b) => b.date - a.date), 'id')
 }
 
+const SAFE_REORG_THRESHOLD = 80
+
 const fetchCurrentBlock = (perCurrencyId => currency => {
   if (perCurrencyId[currency.id]) return perCurrencyId[currency.id]()
   const api = apiForCurrency(currency)
@@ -231,10 +233,18 @@ const EthereumBridge: WalletBridge<Transaction> = {
         if (block.height === blockHeight) {
           complete()
         } else {
+          operations = operations.filter(
+            o => !o.blockHeight || blockHeight - o.blockHeight < SAFE_REORG_THRESHOLD,
+          )
           const blockHash = operations.length > 0 ? operations[0].blockHash : undefined
           const { txs } = await api.getTransactions(freshAddress, blockHash)
           if (unsubscribed) return
           if (txs.length === 0) {
+            next(a => ({
+              ...a,
+              blockHeight: block.height,
+              lastSyncDate: new Date(),
+            }))
             complete()
             return
           }

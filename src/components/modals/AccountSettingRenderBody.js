@@ -167,6 +167,7 @@ class HelperComp extends PureComponent<Props, State> {
             </Container>
             <Spoiler title="Advanced logs">
               <textarea
+                readOnly
                 style={{
                   userSelect: 'text',
                   border: '1px dashed #f9f9f9',
