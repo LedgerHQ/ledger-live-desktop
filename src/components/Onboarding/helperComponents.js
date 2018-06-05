@@ -4,16 +4,17 @@ import styled from 'styled-components'
 import { radii } from 'styles/theme'
 
 import Box from 'components/base/Box'
-import IconWarning from 'icons/onboarding/Warning'
+import IconWarning from 'icons/Shield'
 
 // GENERAL
 export const Title = styled(Box).attrs({
-  width: 267,
-  height: 27,
   ff: 'Museo Sans|Regular',
   fontSize: 7,
   color: 'dark',
-})``
+})`
+  max-width: 550px;
+  text-align: center;
+`
 
 export const Description = styled(Box).attrs({
   ff: 'Museo Sans|Light',
@@ -23,7 +24,7 @@ export const Description = styled(Box).attrs({
   color: 'grey',
 })`
   margin: 10px auto 25px;
-  max-width: 550px;
+  max-width: 570px;
 `
 export const Inner = styled(Box).attrs({
   horizontal: true,
@@ -49,9 +50,9 @@ type StepType = {
 export function OptionRow({ step }: { step: StepType }) {
   const { icon, desc } = step
   return (
-    <Box horizontal m={2}>
+    <Box horizontal m={'7px'} style={{ minWidth: 420 }}>
       <Box justify="center">{icon}</Box>
-      <Box ff="Open Sans|Regular" justify="center" fontSize={4} style={{ paddingLeft: 10 }} shrink>
+      <Box justify="center" shrink>
         <OptionRowDesc>{desc}</OptionRowDesc>
       </Box>
     </Box>
@@ -61,9 +62,9 @@ export const OptionRowDesc = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
   textAlign: 'left',
-  lineHeight: 1.69,
   color: 'smoke',
-  shrink: 1,
+  grow: true,
+  pl: 3,
 })``
 
 export const IconOptionRow = styled(Box).attrs({
@@ -74,34 +75,30 @@ export const IconOptionRow = styled(Box).attrs({
 
 export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any }) {
   return (
-    <Box
-      shrink
-      grow
-      flow={4}
-      style={{
-        minWidth: 680,
-        backgroundColor: '#ea2e490c',
-        border: 'dashed 1px #ea2e49b3',
-      }}
-      {...p}
-    >
-      <Box
-        m={3}
-        style={{
-          position: 'relative',
-        }}
-      >
-        <Box
-          style={{
-            position: 'absolute',
-            top: '0px',
-            right: '0px',
-          }}
-        >
+    <DisclaimerBoxContainer {...p}>
+      <Box m={3} relative>
+        <DisclaimerBoxIconContainer>
           <IconWarning />
-        </Box>
+        </DisclaimerBoxIconContainer>
         {disclaimerNotes.map(note => <OptionRow key={note.key} step={note} />)}
       </Box>
-    </Box>
+    </DisclaimerBoxContainer>
   )
 }
+
+const DisclaimerBoxContainer = styled(Box).attrs({
+  shrink: 1,
+  grow: true,
+  borderRadius: '4px',
+  bg: '#f9f9f980',
+})`
+  min-width: 680px;
+  border: 1px dashed ${p => p.theme.colors.fog};
+`
+const DisclaimerBoxIconContainer = styled(Box).attrs({
+  color: p => p.theme.colors.alertRed,
+})`
+  position: absolute;
+  top: 0;
+  right: 0;
+`
