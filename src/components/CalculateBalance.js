@@ -51,18 +51,15 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       originalValues.push(value)
       const fromExchange = exchangeSettingsForAccountSelector(state, { account })
 
-      const cv =
-        fromExchange &&
-        counterValueExchange &&
-        CounterValues.calculateWithIntermediarySelector(state, {
-          value,
-          date,
-          from: account.currency,
-          fromExchange,
-          intermediary: intermediaryCurrency,
-          toExchange: counterValueExchange,
-          to: counterValueCurrency,
-        })
+      const cv = CounterValues.calculateWithIntermediarySelector(state, {
+        value,
+        date,
+        from: account.currency,
+        fromExchange,
+        intermediary: intermediaryCurrency,
+        toExchange: counterValueExchange,
+        to: counterValueCurrency,
+      })
       if (!cv && cv !== 0) {
         isAvailable = false
         return 0

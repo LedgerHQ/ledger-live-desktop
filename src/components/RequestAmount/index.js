@@ -80,8 +80,6 @@ const mapStateToProps = (state: State, props: OwnProps) => {
   const fromExchange = currencySettingsSelector(state, { currency }).exchange
   const toExchange = counterValueExchangeSelector(state)
   const getCounterValue = value =>
-    fromExchange &&
-    toExchange &&
     CounterValues.calculateWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
@@ -92,8 +90,6 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     })
 
   const getReverseCounterValue = value =>
-    fromExchange &&
-    toExchange &&
     CounterValues.reverseWithIntermediarySelector(state, {
       from: currency,
       fromExchange,

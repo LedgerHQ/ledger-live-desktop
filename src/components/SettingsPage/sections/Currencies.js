@@ -110,19 +110,21 @@ class TabCurrencies extends PureComponent<Props, State> {
           }
         />
         <Body>
-          <Row
-            title={`Exchange (${currency.ticker}${intermediaryCurrency.ticker})`}
-            desc="The exchange to use"
-          >
-            <ExchangeSelect
-              small
-              from={currency}
-              to={intermediaryCurrency}
-              exchangeId={exchange}
-              onChange={this.handleChangeExchange}
-              minWidth={200}
-            />
-          </Row>
+          {currency !== intermediaryCurrency ? (
+            <Row
+              title={`Exchange (${currency.ticker}${intermediaryCurrency.ticker})`}
+              desc="The exchange to use"
+            >
+              <ExchangeSelect
+                small
+                from={currency}
+                to={intermediaryCurrency}
+                exchangeId={exchange}
+                onChange={this.handleChangeExchange}
+                minWidth={200}
+              />
+            </Row>
+          ) : null}
           {defaults.confirmationsNb ? (
             <Row
               title={t('settings:currencies.confirmationsNb')}

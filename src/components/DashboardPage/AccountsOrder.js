@@ -82,14 +82,12 @@ const accountsBtcBalanceSelector = createSelector(
     accounts.map(account => {
       const { exchange } = currencySettingsForAccountSelector(state, { account })
       return (
-        (exchange &&
-          CounterValues.calculateSelector(state, {
-            from: account.currency,
-            to: intermediaryCurrency,
-            exchange,
-            value: account.balance,
-          })) ||
-        0
+        CounterValues.calculateSelector(state, {
+          from: account.currency,
+          to: intermediaryCurrency,
+          exchange,
+          value: account.balance,
+        }) || 0
       )
     }),
 )
