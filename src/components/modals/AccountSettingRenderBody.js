@@ -54,7 +54,7 @@ class HelperComp extends PureComponent<Props, State> {
     ...defaultState,
   }
 
-  getAccount(data: Object) {
+  getAccount(data: Object): Account {
     const { accountName } = this.state
     const account = get(data, 'account', {})
 
@@ -121,10 +121,10 @@ class HelperComp extends PureComponent<Props, State> {
 
     const usefulData = {
       xpub: account.xpub || undefined,
-      path: account.path,
       index: account.index,
       freshAddressPath: account.freshAddressPath,
       id: account.id,
+      blockHeight: account.blockHeight,
     }
 
     return (
