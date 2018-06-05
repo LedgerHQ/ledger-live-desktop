@@ -5,7 +5,6 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import chunk from 'lodash/chunk'
 import { createStructuredSelector } from 'reselect'
 
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
@@ -51,36 +50,17 @@ type Props = {
 }
 
 type State = {
-  accountsChunk: Array<Array<?Account>>,
   selectedTime: string,
   daysCount: number,
 }
 
-const ACCOUNTS_BY_LINE = 3
-
-const getAccountsChunk = accounts => {
-  // create shallow copy of accounts, to be mutated
-  const listAccounts = [...accounts]
-
-  while (listAccounts.length % ACCOUNTS_BY_LINE !== 0) listAccounts.push(null)
-
-  return chunk(listAccounts, ACCOUNTS_BY_LINE)
-}
-
 class DashboardPage extends PureComponent<Props, State> {
   state = {
-    accountsChunk: getAccountsChunk(this.props.accounts),
     selectedTime: 'week',
     daysCount: 7,
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.accounts !== this.props.accounts) {
-      this.setState({
-        accountsChunk: getAccountsChunk(nextProps.accounts),
-      })
-    }
-  }
+  onAccountClick = account => this.props.push(`/account/${account.id}`)
 
   handleGreeting = () => {
     const localTimeHour = new Date().getHours()
@@ -104,8 +84,8 @@ class DashboardPage extends PureComponent<Props, State> {
   _cacheBalance = null
 
   render() {
-    const { push, accounts, t, counterValue } = this.props
-    const { accountsChunk, selectedTime, daysCount } = this.state
+    const { accounts, t, counterValue } = this.props
+    const { selectedTime, daysCount } = this.state
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
@@ -161,31 +141,24 @@ class DashboardPage extends PureComponent<Props, State> {
                     <AccountsOrder />
                   </Box>
                 </Box>
-                <Box flow={5}>
-                  {accountsChunk.map((accountsByLine, i) => (
-                    <Box
-                      key={i} // eslint-disable-line react/no-array-index-key
-                      horizontal
-                      flow={5}
-                    >
-                      {accountsByLine.map(
-                        (account: any, j) =>
-                          account === null ? (
-                            <Box
-                              key={j} // eslint-disable-line react/no-array-index-key
-                              p={4}
-                              flex={1}
-                            />
-                          ) : (
-                            <AccountCard
-                              counterValue={counterValue}
-                              account={account}
-                              daysCount={daysCount}
-                              key={account.id}
-                              onClick={() => push(`/account/${account.id}`)}
-                            />
-                          ),
-                      )}
+                <Box
+                  horizontal
+                  flexWrap="wrap"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  style={{ margin: '0 -16px' }}
+                >
+                  {accounts.concat(Array(3 - accounts.length % 3).fill(null)).map((account, i) => (
+                    <Box key={account ? account.id : `placeholder_${i}`} flex="33%" p={16}>
+                      {account ? (
+                        <AccountCard
+                          key={account.id}
+                          counterValue={counterValue}
+                          account={account}
+                          daysCount={daysCount}
+                          onClick={this.onAccountClick}
+                        />
+                      ) : null}
                     </Box>
                   ))}
                 </Box>
@@ -193,7 +166,7 @@ class DashboardPage extends PureComponent<Props, State> {
               {displayOperations && (
                 <OperationsList
                   canShowMore
-                  onAccountClick={account => push(`/account/${account.id}`)}
+                  onAccountClick={this.onAccountClick}
                   accounts={accounts}
                   title={t('dashboard:recentActivity')}
                   withAccount

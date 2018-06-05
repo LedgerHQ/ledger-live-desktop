@@ -8,6 +8,7 @@ import {
   boxShadow,
   color,
   flex,
+  flexWrap,
   fontSize,
   justifyContent,
   space,
@@ -34,6 +35,7 @@ const Box = styled.div`
   ${boxShadow};
   ${color};
   ${flex};
+  ${flexWrap};
   ${fontFamily};
   ${fontSize};
   ${justifyContent};
