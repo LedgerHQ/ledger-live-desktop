@@ -12,7 +12,7 @@ class ExchangeSelect extends Component<
   {
     from: Currency,
     to: Currency,
-    exchangeId: string,
+    exchangeId: ?string,
     onChange: (?Exchange) => void,
     style?: *,
   },

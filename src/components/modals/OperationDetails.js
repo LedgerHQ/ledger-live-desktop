@@ -107,7 +107,6 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                 date={date}
                 currency={currency}
                 value={amount}
-                exchange={currencySettings.exchange}
               />
             </Box>
           </Box>

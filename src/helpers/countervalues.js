@@ -4,18 +4,28 @@ import { createSelector } from 'reselect'
 import createCounterValues from '@ledgerhq/live-common/lib/countervalues'
 import { setExchangePairsAction } from 'actions/settings'
 import { currenciesSelector } from 'reducers/accounts'
-import { counterValueCurrencySelector, currencySettingsSelector } from 'reducers/settings'
+import {
+  counterValueCurrencySelector,
+  counterValueExchangeSelector,
+  currencySettingsSelector,
+  intermediaryCurrency,
+} from 'reducers/settings'
 
 const pairsSelector = createSelector(
   currenciesSelector,
   counterValueCurrencySelector,
+  counterValueExchangeSelector,
   state => state,
-  (currencies, counterValueCurrency, state) =>
-    currencies.map(currency => ({
-      from: currency,
-      to: counterValueCurrency,
-      exchange: currencySettingsSelector(state, { currency }).exchange,
-    })),
+  (currencies, counterValueCurrency, counterValueExchange, state) =>
+    [
+      { from: intermediaryCurrency, to: counterValueCurrency, exchange: counterValueExchange },
+    ].concat(
+      currencies.map(currency => ({
+        from: currency,
+        to: intermediaryCurrency,
+        exchange: currencySettingsSelector(state, { currency }).exchange,
+      })),
+    ),
 )
 
 const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
@@ -39,7 +49,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
 }
 
 const CounterValues = createCounterValues({
-  log: (...args) => console.log('CounterValues:', ...args),
+  log: (...args) => console.log('CounterValues:', ...args), // eslint-disable-line no-console
   getAPIBaseURL: () => 'https://ledger-countervalue-poc.herokuapp.com',
   storeSelector: state => state.countervalues,
   pairsSelector,

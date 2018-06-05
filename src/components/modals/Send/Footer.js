@@ -2,9 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
-import { createStructuredSelector } from 'reselect'
-import { connect } from 'react-redux'
-import { exchangeSettingsForAccountSelector } from 'reducers/settings'
 
 import type { T } from 'types/common'
 
@@ -23,14 +20,9 @@ type Props = {
   bridge: WalletBridge<*>,
   transaction: *,
   onNext: () => void,
-  canNext: boolean,
+  canNext: ?boolean,
   showTotal: boolean,
-  exchange: string,
 }
-
-const mapStateToProps = createStructuredSelector({
-  exchange: exchangeSettingsForAccountSelector,
-})
 
 class Footer extends PureComponent<
   Props,
@@ -46,7 +38,7 @@ class Footer extends PureComponent<
   componentDidMount() {
     this.resync()
   }
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(nextProps: Props) {
     if (
       nextProps.account !== this.props.account ||
       nextProps.transaction !== this.props.transaction
@@ -66,7 +58,7 @@ class Footer extends PureComponent<
     this.setState({ totalSpent, canBeSpent })
   }
   render() {
-    const { exchange, account, t, onNext, canNext, showTotal } = this.props
+    const { account, t, onNext, canNext, showTotal } = this.props
     const { totalSpent, canBeSpent } = this.state
     return (
       <ModalFooter>
@@ -87,7 +79,6 @@ class Footer extends PureComponent<
                     {'('}
                   </Text>
                   <CounterValue
-                    exchange={exchange}
                     currency={account.currency}
                     value={totalSpent}
                     disableRounding
@@ -112,4 +103,4 @@ class Footer extends PureComponent<
   }
 }
 
-export default connect(mapStateToProps)(Footer)
+export default Footer

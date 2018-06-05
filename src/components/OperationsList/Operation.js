@@ -211,7 +211,6 @@ class OperationComponent extends PureComponent<Props> {
               date={time.toDate()}
               currency={currency}
               value={amount}
-              exchange={currencySettings.exchange}
             />
           </Box>
         </Cell>

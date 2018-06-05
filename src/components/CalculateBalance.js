@@ -7,7 +7,12 @@ import { connect } from 'react-redux'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { getBalanceHistorySum } from '@ledgerhq/live-common/lib/helpers/account'
 import CounterValues from 'helpers/countervalues'
-import { exchangeSettingsForAccountSelector, counterValueCurrencySelector } from 'reducers/settings'
+import {
+  exchangeSettingsForAccountSelector,
+  counterValueCurrencySelector,
+  counterValueExchangeSelector,
+  intermediaryCurrency,
+} from 'reducers/settings'
 import type { State } from 'reducers'
 
 type OwnProps = {
@@ -31,6 +36,7 @@ type Props = OwnProps & {
 
 const mapStateToProps = (state: State, props: OwnProps) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
+  const counterValueExchange = counterValueExchangeSelector(state)
   let isAvailable = true
 
   // create array of original values, used to reconciliate
@@ -43,14 +49,20 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     (account, value, date) => {
       // keep track of original value
       originalValues.push(value)
+      const fromExchange = exchangeSettingsForAccountSelector(state, { account })
 
-      const cv = CounterValues.calculateSelector(state, {
-        value,
-        date,
-        to: counterValueCurrency,
-        from: account.currency,
-        exchange: exchangeSettingsForAccountSelector(state, { account }),
-      })
+      const cv =
+        fromExchange &&
+        counterValueExchange &&
+        CounterValues.calculateWithIntermediarySelector(state, {
+          value,
+          date,
+          from: account.currency,
+          fromExchange,
+          intermediary: intermediaryCurrency,
+          toExchange: counterValueExchange,
+          to: counterValueCurrency,
+        })
       if (!cv && cv !== 0) {
         isAvailable = false
         return 0

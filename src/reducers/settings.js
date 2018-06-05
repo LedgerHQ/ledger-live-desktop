@@ -3,6 +3,7 @@
 import { handleActions } from 'redux-actions'
 import {
   findCurrencyByTicker,
+  getCryptoCurrencyById,
   getFiatCurrencyByTicker,
   listCryptoCurrencies,
 } from '@ledgerhq/live-common/lib/helpers/currencies'
@@ -15,10 +16,13 @@ import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 import type { CurrencySettings } from 'types/common'
 import type { State } from 'reducers'
 
+export const intermediaryCurrency = getCryptoCurrencyById('bitcoin')
+
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
   counterValue: string,
+  counterValueExchange: ?string,
   language: string,
   orderAccounts: string,
   password: {
@@ -55,6 +59,7 @@ const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: 'USD',
+  counterValueExchange: null,
   language,
   orderAccounts: 'balance|asc',
   password: {
@@ -93,11 +98,13 @@ const handlers: Object = {
     copy.currenciesSettings = { ...copy.currenciesSettings }
     for (const { to, from, exchange } of pairs) {
       const fromCrypto = asCryptoCurrency(from)
-      if (to === counterValueCurrency && fromCrypto) {
+      if (fromCrypto && to === intermediaryCurrency) {
         copy.currenciesSettings[fromCrypto.id] = {
           ...copy.currenciesSettings[fromCrypto.id],
           exchange,
         }
+      } else if (from === intermediaryCurrency && to === counterValueCurrency) {
+        copy.counterValueExchange = exchange
       }
     }
     return copy
@@ -131,12 +138,19 @@ export const hasPassword = (state: State): boolean => state.settings.password.is
 
 export const getCounterValueCode = (state: State) => state.settings.counterValue
 
-const counterValueCurrencyLocalSelector = (state: SettingsState): Currency =>
+export const counterValueCurrencyLocalSelector = (state: SettingsState): Currency =>
   findCurrencyByTicker(state.counterValue) || getFiatCurrencyByTicker('USD')
 
 export const counterValueCurrencySelector = createSelector(
   storeSelector,
   counterValueCurrencyLocalSelector,
+)
+
+export const counterValueExchangeLocalSelector = (s: SettingsState) => s.counterValueExchange
+
+export const counterValueExchangeSelector = createSelector(
+  storeSelector,
+  counterValueExchangeLocalSelector,
 )
 
 export const developerModeSelector = (state: State): boolean => state.settings.developerMode
@@ -167,9 +181,11 @@ export const currencySettingsLocaleSelector = (
 
 type CSS = Selector<*, { currency: CryptoCurrency }, CurrencySettings>
 
+export const currencyPropExtractor = (_: *, { currency }: *) => currency
+
 export const currencySettingsSelector: CSS = createSelector(
   storeSelector,
-  (_, { currency }) => currency,
+  currencyPropExtractor,
   currencySettingsLocaleSelector,
 )
 
@@ -178,7 +194,7 @@ export const currencySettingsForAccountSelector = (
   { account }: { account: Account },
 ) => currencySettingsSelector(state, { currency: account.currency })
 
-type ESFAS = Selector<*, { account: Account }, string>
+type ESFAS = Selector<*, { account: Account }, ?string>
 export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
   currencySettingsForAccountSelector,
   settings => settings.exchange,

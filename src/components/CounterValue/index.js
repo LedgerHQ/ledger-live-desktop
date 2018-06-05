@@ -4,8 +4,13 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 
-import { counterValueCurrencySelector } from 'reducers/settings'
-import { calculateCounterValueSelector } from 'reducers/counterValues'
+import {
+  counterValueCurrencySelector,
+  currencySettingsSelector,
+  counterValueExchangeSelector,
+  intermediaryCurrency,
+} from 'reducers/settings'
+import CounterValues from 'helpers/countervalues'
 
 import FormattedVal from 'components/base/FormattedVal'
 
@@ -14,7 +19,6 @@ import type { State } from 'reducers'
 type OwnProps = {
   // wich market to query
   currency: Currency,
-  exchange: string,
 
   // when? if not given: take latest
   date?: Date,
@@ -31,17 +35,23 @@ type Props = OwnProps & {
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const { currency, value, date, exchange } = props
-  if (__DEV__) {
-    if (!exchange) console.warn('CounterValue: exchange is required')
-    if (!currency) console.warn('CounterValue: currency is required')
-  }
+  const { currency, value, date } = props
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const counterValue = calculateCounterValueSelector(state)(
-    currency,
-    counterValueCurrency,
-    exchange,
-  )(value, date)
+  const fromExchange = currencySettingsSelector(state, { currency }).exchange
+  const toExchange = counterValueExchangeSelector(state)
+  const counterValue =
+    fromExchange &&
+    toExchange &&
+    CounterValues.calculateWithIntermediarySelector(state, {
+      from: currency,
+      fromExchange,
+      intermediary: intermediaryCurrency,
+      toExchange,
+      to: counterValueCurrency,
+      value,
+      date,
+    })
+
   return {
     counterValueCurrency,
     value: counterValue,

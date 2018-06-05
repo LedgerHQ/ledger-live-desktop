@@ -10,10 +10,10 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
-import { counterValueCurrencySelector, currencySettingsLocaleSelector } from 'reducers/settings'
+import { intermediaryCurrency, currencySettingsLocaleSelector } from 'reducers/settings'
 import type { SettingsState } from 'reducers/settings'
 import { currenciesSelector } from 'reducers/accounts'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
@@ -32,7 +32,6 @@ import {
 } from '../SettingsSection'
 
 type Props = {
-  counterValueCurrency: Currency,
   currencies: CryptoCurrency[],
   settings: SettingsState,
   saveSettings: ($Shape<SettingsState>) => void,
@@ -44,7 +43,6 @@ type State = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  counterValueCurrency: counterValueCurrencySelector,
   currencies: currenciesSelector,
 })
 
@@ -61,7 +59,7 @@ class TabCurrencies extends PureComponent<Props, State> {
   handleChangeConfirmationsNb = (nb: number) => this.updateCurrencySettings('confirmationsNb', nb)
 
   handleChangeExchange = exchange =>
-    this.updateCurrencySettings('exchange', exchange ? exchange.id : '')
+    this.updateCurrencySettings('exchange', exchange ? exchange.id : null)
 
   updateCurrencySettings = (key: string, val: *) => {
     // FIXME this really should be a dedicated action
@@ -91,7 +89,7 @@ class TabCurrencies extends PureComponent<Props, State> {
   render() {
     const { currency } = this.state
     if (!currency) return null // this case means there is no accounts
-    const { t, currencies, counterValueCurrency, settings } = this.props
+    const { t, currencies, settings } = this.props
     const { confirmationsNb, exchange } = currencySettingsLocaleSelector(settings, currency)
     const defaults = currencySettingsDefaults(currency)
     return (
@@ -112,11 +110,14 @@ class TabCurrencies extends PureComponent<Props, State> {
           }
         />
         <Body>
-          <Row title="Exchange" desc="The exchange to use">
+          <Row
+            title={`Exchange (${currency.ticker}${intermediaryCurrency.ticker})`}
+            desc="The exchange to use"
+          >
             <ExchangeSelect
               small
               from={currency}
-              to={counterValueCurrency}
+              to={intermediaryCurrency}
               exchangeId={exchange}
               onChange={this.handleChangeExchange}
               minWidth={200}
