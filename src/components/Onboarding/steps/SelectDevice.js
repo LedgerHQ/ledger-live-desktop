@@ -3,14 +3,15 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { rgba } from 'styles/helpers'
 
 import { isLedgerNano } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
-import IconCheckCirle from 'icons/CheckCircle'
-import IconLedgerNano from 'icons/onboarding/LedgerNano'
-import IconLedgerBlue from 'icons/onboarding/LedgerBlue'
-import { Title, Description, Inner } from '../helperComponents'
+import IconCheckCirle from 'icons/Check'
+import IconLedgerNano from 'icons/illustrations/LedgerNano'
+import IconLedgerBlue from 'icons/illustrations/LedgerBlue'
+import { Title, Inner } from '../helperComponents'
 
 import type { StepProps } from '..'
 
@@ -19,7 +20,9 @@ const mapDispatchToProps = { isLedgerNano }
 class SelectDevice extends PureComponent<StepProps, {}> {
   handleIsLedgerNano = (isLedgerNano: boolean) => {
     this.props.isLedgerNano(isLedgerNano)
-    this.props.nextStep()
+    this.props.onboarding.flowType === 'initializedDevice'
+      ? this.props.jumpStep('genuineCheck')
+      : this.props.nextStep()
   }
   render() {
     const { t, onboarding } = this.props
@@ -28,32 +31,27 @@ class SelectDevice extends PureComponent<StepProps, {}> {
       <Box sticky pt={200}>
         <Box grow alignItems="center">
           <Title>{t('onboarding:selectDevice.title')}</Title>
-          <Description>{t('onboarding:selectDevice.desc')}</Description>
-          <Box>
+          <Box mt={7}>
             <Inner>
               <DeviceContainer
+                isActive={onboarding.isLedgerNano}
                 onClick={() => this.handleIsLedgerNano(true)}
-                style={{
-                  position: 'relative',
-                }}
               >
                 {onboarding.isLedgerNano && <DeviceSelected />}
                 <DeviceIcon>
                   <IconLedgerNano />
                 </DeviceIcon>
-                <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
+                <BlockTitle>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
               </DeviceContainer>
               <DeviceContainer
+                isActive={!onboarding.isLedgerNano}
                 onClick={() => this.handleIsLedgerNano(false)}
-                style={{
-                  position: 'relative',
-                }}
               >
                 {!onboarding.isLedgerNano && <DeviceSelected />}
                 <DeviceIcon>
                   <IconLedgerBlue />
                 </DeviceIcon>
-                <BlockTitle pb={3}>{t('onboarding:selectDevice.ledgerBlueCard.title')}</BlockTitle>
+                <BlockTitle>{t('onboarding:selectDevice.ledgerBlueCard.title')}</BlockTitle>
               </DeviceContainer>
             </Inner>
           </Box>
@@ -68,46 +66,51 @@ export default connect(null, mapDispatchToProps)(SelectDevice)
 const DeviceContainer = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
-  position: 'relative',
+  relative: true,
 })`
   width: 218px;
   height: 204px;
-  border: ${props => `1px solid ${props.theme.colors.fog}`};
-  &:hover,
-  &:focus {
-    opacity: 0.5;
+  border: ${props => `1px solid ${props.theme.colors[props.isActive ? 'wallet' : 'fog']}`};
+  &:hover {
     cursor: pointer;
+    background: ${p => rgba(p.theme.colors.wallet, 0.04)};
   }
 `
 const DeviceIcon = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'graphite',
 })`
   width: 55px;
-  min-height: 80px;
+  height: 80px;
 `
-export const BlockDescription = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
-  fontSize: 4,
-  textAlign: 'center',
-  color: 'grey',
-})``
+
 export const BlockTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'center',
+  pt: 3,
 })``
 export function DeviceSelected() {
   return (
-    <Box
+    <SelectDeviceIconWrapper
       style={{
         position: 'absolute',
         top: '10px',
         right: '10px',
       }}
     >
-      <IconCheckCirle size={12} />
-    </Box>
+      <IconCheckCirle size={10} />
+    </SelectDeviceIconWrapper>
   )
 }
+
+const SelectDeviceIconWrapper = styled(Box).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'white',
+  bg: 'wallet',
+})`
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+`

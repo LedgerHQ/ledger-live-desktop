@@ -10,7 +10,14 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 
 import { saveSettings } from 'actions/settings'
-import { nextStep, prevStep, jumpStep, updateGenuineCheck, isLedgerNano } from 'reducers/onboarding'
+import {
+  nextStep,
+  prevStep,
+  jumpStep,
+  updateGenuineCheck,
+  isLedgerNano,
+  flowType,
+} from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
 
 // import { unlock } from 'reducers/application'
@@ -21,8 +28,8 @@ import Start from './steps/Start'
 import InitStep from './steps/Init'
 import OnboardingBreadcrumb from './OnboardingBreadcrumb'
 import SelectDevice from './steps/SelectDevice'
-import SelectPIN from './steps/SelectPIN'
-import WriteSeed from './steps/WriteSeed'
+import SelectPIN from './steps/SelectPIN/index'
+import WriteSeed from './steps/WriteSeed/index'
 import GenuineCheck from './steps/GenuineCheck'
 // UNTIL IS NEEDED SET PASSWORD IS COMMENTED OUT
 // import SetPassword from './steps/SetPassword'
@@ -79,6 +86,7 @@ export type StepProps = {
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
   isLedgerNano: Function,
+  flowType: Function,
 }
 
 class Onboarding extends PureComponent<Props> {
@@ -113,6 +121,7 @@ class Onboarding extends PureComponent<Props> {
       onboarding,
       updateGenuineCheck,
       isLedgerNano,
+      flowType,
       prevStep,
       nextStep,
       jumpStep,

@@ -5,19 +5,18 @@ import React from 'react'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
-import IconGetStarted from 'icons/onboarding/GetStartedLogo'
+import IconGetStarted from 'icons/illustrations/GetStartedLogo'
 import type { StepProps } from '..'
-import { Title, Description } from '../helperComponents'
+import { Title } from '../helperComponents'
 
 export default (props: StepProps) => {
   const { jumpStep, t } = props
   return (
-    <Box sticky alignItems="center" justifyContent="center">
-      <Box align="center" alignItems="center">
+    <Box sticky justifyContent="center">
+      <Box alignItems="center">
         <IconGetStarted />
-        <Box style={{ paddingTop: '20px' }}>
+        <Box my={4}>
           <Title>{t('onboarding:start.title')}</Title>
-          <Description>{t('onboarding:start.desc')}</Description>
         </Box>
         <Button padded primary onClick={() => jumpStep('init')}>
           Get Started

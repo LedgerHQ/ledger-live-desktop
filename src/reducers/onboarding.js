@@ -24,6 +24,7 @@ export type OnboardingState = {
     isDeviceGenuine: boolean,
   },
   isLedgerNano: boolean,
+  flowType: string,
 }
 
 const state: OnboardingState = {
@@ -36,6 +37,7 @@ const state: OnboardingState = {
     isDeviceGenuine: false,
   },
   isLedgerNano: true,
+  flowType: '',
   steps: [
     {
       name: 'start',
@@ -161,7 +163,10 @@ const handlers = {
       ...obj,
     },
   }),
-
+  ONBOARDING_SET_FLOW_TYPE: (state, { payload: flowType }) => ({
+    ...state,
+    flowType,
+  }),
   ONBOARDING_SET_DEVICE_TYPE: (state, { payload: isLedgerNano }) => ({
     ...state,
     isLedgerNano,
@@ -175,3 +180,4 @@ export const prevStep = createAction('ONBOARDING_PREV_STEP')
 export const jumpStep = createAction('ONBOARDING_JUMP_STEP')
 export const updateGenuineCheck = createAction('UPDATE_GENUINE_CHECK')
 export const isLedgerNano = createAction('ONBOARDING_SET_DEVICE_TYPE')
+export const flowType = createAction('ONBOARDING_SET_FLOW_TYPE')
