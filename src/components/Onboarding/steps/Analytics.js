@@ -17,13 +17,20 @@ const mapDispatchToProps = { saveSettings }
 type State = {
   analyticsToggle: boolean,
   termsConditionsToggle: boolean,
+  sentryLogsToggle: boolean,
 }
 class Analytics extends PureComponent<StepProps, State> {
   state = {
     analyticsToggle: false,
     termsConditionsToggle: false,
+    sentryLogsToggle: false,
   }
-
+  handleSentryLogsToggle = (isChecked: boolean) => {
+    this.setState({ sentryLogsToggle: !this.state.sentryLogsToggle })
+    this.props.saveSettings({
+      sentryLogs: isChecked,
+    })
+  }
   handleAnalyticsToggle = (isChecked: boolean) => {
     this.setState({ analyticsToggle: !this.state.analyticsToggle })
     this.props.saveSettings({
@@ -35,15 +42,25 @@ class Analytics extends PureComponent<StepProps, State> {
   }
   render() {
     const { nextStep, prevStep, t } = this.props
-    const { analyticsToggle, termsConditionsToggle } = this.state
+    const { analyticsToggle, termsConditionsToggle, sentryLogsToggle } = this.state
 
     return (
-      <Box sticky pt={150}>
+      <Box sticky pt={170}>
         <Box grow alignItems="center">
           <Title>{t('onboarding:analytics.title')}</Title>
           <Description>{t('onboarding:analytics.desc')}</Description>
-
           <Box mt={5}>
+            <Container>
+              <Box justify="center" style={{ width: 450 }}>
+                <Box horizontal>
+                  <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
+                </Box>
+                <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
+              </Box>
+              <Box alignItems="center" horizontal mx={5}>
+                <CheckBox isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
+              </Box>
+            </Container>
             <Container>
               <Box justify="center" style={{ width: 450 }}>
                 <Box horizontal>
@@ -101,8 +118,5 @@ export const AnalyticsTitle = styled(Box).attrs({
 `
 const Container = styled(Box).attrs({
   horizontal: true,
-  p: 5,
-})`
-  max-height: 90px;
-  width: 620px;
-`
+  p: 3,
+})``

@@ -32,6 +32,7 @@ export type SettingsState = {
   region: string,
   developerMode: boolean,
   shareAnalytics: boolean,
+  sentryLogs: boolean,
 }
 
 /* have to check if available for all OS */
@@ -66,6 +67,7 @@ const INITIAL_STATE: SettingsState = {
   developerMode: !!process.env.__DEV__,
   loaded: false,
   shareAnalytics: false,
+  sentryLogs: false,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {

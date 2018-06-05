@@ -3,11 +3,10 @@ import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
 import { colors } from 'styles/theme'
 
-import Box from 'components/base/Box'
-
 import type { T } from 'types/common'
-import IconWriteSeed from 'icons/illustrations/WriteSeed'
 
+import Box from 'components/base/Box'
+import IconWriteSeed from 'icons/illustrations/WriteSeed'
 import IconChevronRight from 'icons/ChevronRight'
 
 import {
@@ -17,13 +16,13 @@ import {
   DisclaimerBox,
   OptionRow,
   Inner,
-} from './helperComponents'
+} from '../../helperComponents'
 
 type Props = {
   t: T,
 }
 
-class WriteSeedRestore extends PureComponent<Props, *> {
+class WriteSeedNano extends PureComponent<Props, *> {
   render() {
     const { t } = this.props
 
@@ -31,22 +30,17 @@ class WriteSeedRestore extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>1.</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step1'),
+        desc: t('onboarding:writeSeed.nano.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>2.</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step2'),
+        desc: t('onboarding:writeSeed.nano.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>3.</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step3'),
-      },
-      {
-        key: 'step4',
-        icon: <IconOptionRow>4.</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step4'),
+        desc: t('onboarding:writeSeed.nano.step3'),
       },
     ]
     const disclaimerNotes = [
@@ -75,8 +69,8 @@ class WriteSeedRestore extends PureComponent<Props, *> {
     return (
       <Fragment>
         <Box mb={3}>
-          <Title>{t('onboarding:writeSeed.restore.title')}</Title>
-          <Description>{t('onboarding:writeSeed.restore.desc')}</Description>
+          <Title>{t('onboarding:writeSeed.nano.title')}</Title>
+          <Description>{t('onboarding:writeSeed.nano.desc')}</Description>
         </Box>
         <Box align="center">
           <Inner style={{ width: 760 }}>
@@ -94,4 +88,4 @@ class WriteSeedRestore extends PureComponent<Props, *> {
   }
 }
 
-export default translate()(WriteSeedRestore)
+export default translate()(WriteSeedNano)

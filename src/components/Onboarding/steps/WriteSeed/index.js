@@ -4,13 +4,13 @@ import React from 'react'
 
 import Box from 'components/base/Box'
 
-import OnboardingFooter from '../OnboardingFooter'
+import OnboardingFooter from '../../OnboardingFooter'
 
-import WriteSeedNano from '../WriteSeedNano'
-import WriteSeedBlue from '../WriteSeedBlue'
-import WriteSeedRestore from '../WriteSeedRestore'
+import WriteSeedNano from './WriteSeedNano'
+import WriteSeedBlue from './WriteSeedBlue'
+import WriteSeedRestore from './WriteSeedRestore'
 
-import type { StepProps } from '..'
+import type { StepProps } from '../..'
 
 export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
