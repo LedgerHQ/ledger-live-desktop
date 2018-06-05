@@ -4,9 +4,16 @@ import React, { PureComponent } from 'react'
 import moment from 'moment'
 import { listFiatCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
 
+import {
+  intermediaryCurrency,
+  counterValueCurrencyLocalSelector,
+  counterValueExchangeLocalSelector,
+} from 'reducers/settings'
+
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 
+import ExchangeSelect from 'components/SelectExchange'
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
 import IconDisplay from 'icons/Display'
@@ -108,14 +115,20 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
+  handleChangeExchange = (exchange: *) =>
+    this.props.saveSettings({ counterValueExchange: exchange ? exchange.id : null })
+
   render() {
-    const { t } = this.props
+    const { t, settings } = this.props
     const {
       cachedMarketIndicator,
       cachedLanguageKey,
       cachedCounterValue,
       cachedRegion,
     } = this.state
+
+    const counterValueCurrency = counterValueCurrencyLocalSelector(settings)
+    const counterValueExchange = counterValueExchangeLocalSelector(settings)
 
     const languages = languageKeys.map(key => ({ value: key, label: t(`language:${key}`) }))
     const currentLanguage = languages.find(l => l.value === cachedLanguageKey)
@@ -147,6 +160,19 @@ class TabProfile extends PureComponent<Props, State> {
               renderSelected={item => item && item.name}
               options={fiats}
               value={cvOption}
+            />
+          </Row>
+          <Row
+            title={`Exchange (${intermediaryCurrency.ticker}${counterValueCurrency.ticker})`}
+            desc="The exchange to use for countervalue conversion"
+          >
+            <ExchangeSelect
+              small
+              from={intermediaryCurrency}
+              to={counterValueCurrency}
+              exchangeId={counterValueExchange}
+              onChange={this.handleChangeExchange}
+              minWidth={200}
             />
           </Row>
           <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
