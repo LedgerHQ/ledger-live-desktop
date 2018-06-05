@@ -1,18 +1,21 @@
 // @flow
 
 import React, { Component } from 'react'
-import sortBy from 'lodash/sortBy'
 import styled from 'styled-components'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
-import debounce from 'lodash/debounce'
 import type { Account } from '@ledgerhq/live-common/lib/types'
+import CounterValues from 'helpers/countervalues'
 
 import type { T } from 'types/common'
 
-import { getOrderAccounts } from 'reducers/settings'
-import { createStructuredSelector } from 'reselect'
+import {
+  getOrderAccounts,
+  intermediaryCurrency,
+  currencySettingsForAccountSelector,
+} from 'reducers/settings'
+import { createStructuredSelector, createSelector } from 'reselect'
 import { reorderAccounts } from 'actions/accounts'
 import { accountsSelector } from 'reducers/accounts'
 import { saveSettings } from 'actions/settings'
@@ -26,22 +29,42 @@ import IconAngleDown from 'icons/AngleDown'
 import IconArrowDown from 'icons/ArrowDown'
 import IconArrowUp from 'icons/ArrowUp'
 
-function sortAccounts(accounts: Account[], orderAccounts: string) {
+type Props = {
+  t: T,
+  orderAccounts: string,
+  accounts: Account[],
+  accountsBtcBalance: number[], // eslint-disable-line
+  reorderAccounts: (string[]) => *,
+  saveSettings: (*) => *,
+}
+
+type SortMethod = 'name' | 'balance'
+
+const sortMethod: { [_: SortMethod]: (Account[], Props) => string[] } = {
+  balance: (accounts, { accountsBtcBalance }: Props) =>
+    accounts
+      .map((a, i) => [a.id, accountsBtcBalance[i]])
+      .sort((a, b) => a[1] - b[1])
+      .map(o => o[0]),
+
+  name: accounts =>
+    accounts
+      .slice(0)
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map(a => a.id),
+}
+
+function sortAccounts(accounts: Account[], orderAccounts: string, props: Props) {
   const [order, sort] = orderAccounts.split('|')
-
-  const accountsSorted = sortBy(accounts, a => {
-    if (order === 'balance') {
-      return a.balance
+  if (order === 'name' || order === 'balance') {
+    const ids = sortMethod[order](accounts, props)
+    if (sort === 'asc') {
+      ids.reverse()
     }
-
-    return a[order]
-  })
-
-  if (sort === 'asc') {
-    accountsSorted.reverse()
+    return ids
   }
-
-  return accountsSorted
+  console.warn(`sortAccounts not implemented for ${orderAccounts}`)
+  return null
 }
 
 const OrderIcon = styled(Box).attrs({
@@ -52,9 +75,29 @@ const OrderIcon = styled(Box).attrs({
   opacity: ${p => (p.isActive ? 1 : 0)};
 `
 
+const accountsBtcBalanceSelector = createSelector(
+  accountsSelector,
+  state => state,
+  (accounts, state) =>
+    accounts.map(account => {
+      const { exchange } = currencySettingsForAccountSelector(state, { account })
+      return (
+        (exchange &&
+          CounterValues.calculateSelector(state, {
+            from: account.currency,
+            to: intermediaryCurrency,
+            exchange,
+            value: account.balance,
+          })) ||
+        0
+      )
+    }),
+)
+
 const mapStateToProps = createStructuredSelector({
   orderAccounts: getOrderAccounts,
   accounts: accountsSelector,
+  accountsBtcBalance: accountsBtcBalanceSelector,
 })
 
 const mapDispatchToProps = {
@@ -62,74 +105,53 @@ const mapDispatchToProps = {
   saveSettings,
 }
 
-type Props = {
-  t: T,
-  orderAccounts: string,
-  accounts: Account[],
-  reorderAccounts: (string[]) => *,
-  saveSettings: (*) => *,
-}
+class AccountsOrder extends Component<Props> {
+  onStateChange = ({ selectedItem: item }) => {
+    if (!item) {
+      return
+    }
+    const currentAccountOrder = this.getCurrentValue()
+    const [accountOrder] = item.key.split('|')
 
-type State = {
-  cachedValue: string | null,
-}
+    const order =
+      currentAccountOrder === accountOrder ? this.getReverseOrder() : this.getCurrentOrder()
 
-class AccountsOrder extends Component<Props, State> {
-  state = {
-    cachedValue: null,
+    this.setAccountOrder(`${accountOrder}|${order}`)
   }
 
-  componentWillMount() {
-    this.setState({ cachedValue: this.props.orderAccounts })
+  setAccountOrder = order => {
+    const { saveSettings, reorderAccounts } = this.props
+    const maybeIds = sortAccounts(this.props.accounts, order, this.props)
+    if (maybeIds) {
+      reorderAccounts(maybeIds)
+      saveSettings({ orderAccounts: order })
+    }
   }
-
-  setAccountOrder = debounce(
-    order => {
-      const { saveSettings } = this.props
-      this.setState({ cachedValue: order }, () => {
-        window.requestIdleCallback(() => {
-          this.props.reorderAccounts(sortAccounts(this.props.accounts, order).map(a => a.id))
-          saveSettings({ orderAccounts: order })
-        })
-      })
-    },
-    250,
-    {
-      leading: true,
-    },
-  )
 
   getCurrentOrder = () => {
-    const { cachedValue } = this.state
-
-    if (cachedValue !== null) {
-      return cachedValue.split('|')[1]
+    const { orderAccounts } = this.props
+    if (orderAccounts !== null) {
+      return orderAccounts.split('|')[1]
     }
-
     return 'desc'
   }
 
   getCurrentValue = () => {
-    const { cachedValue } = this.state
-
-    if (cachedValue !== null) {
-      return cachedValue.split('|')[0]
+    const { orderAccounts } = this.props
+    if (orderAccounts !== null) {
+      return orderAccounts.split('|')[0]
     }
-
     return null
   }
 
   getReverseOrder = () => {
     const currentOrder = this.getCurrentOrder()
-
     return currentOrder === 'desc' ? 'asc' : 'desc'
   }
 
   getSortItems = () => {
     const { t } = this.props
-
     const currentOrder = this.getCurrentOrder()
-
     return [
       {
         key: 'name',
@@ -139,10 +161,6 @@ class AccountsOrder extends Component<Props, State> {
         key: 'balance',
         label: t('accountsOrder:balance'),
       },
-      {
-        key: 'type',
-        label: t('accountsOrder:type'),
-      },
     ].map(item => ({
       ...item,
       key: `${item.key}|${currentOrder}`,
@@ -151,7 +169,6 @@ class AccountsOrder extends Component<Props, State> {
 
   renderItem = ({ item, isHighlighted, isActive }) => {
     const [, order] = item.key.split('|')
-
     return (
       <DropDownItem
         alignItems="center"
@@ -172,8 +189,7 @@ class AccountsOrder extends Component<Props, State> {
   }
 
   render() {
-    const { t } = this.props
-    const { cachedValue } = this.state
+    const { t, orderAccounts } = this.props
 
     const sortItems = this.getSortItems()
 
@@ -184,21 +200,8 @@ class AccountsOrder extends Component<Props, State> {
         horizontal
         items={sortItems}
         renderItem={this.renderItem}
-        keepOpenOnChange
-        onStateChange={({ selectedItem: item }) => {
-          if (!item) {
-            return
-          }
-
-          const currentAccountOrder = this.getCurrentValue()
-          const [accountOrder] = item.key.split('|')
-
-          const order =
-            currentAccountOrder === accountOrder ? this.getReverseOrder() : this.getCurrentOrder()
-
-          this.setAccountOrder(`${accountOrder}|${order}`)
-        }}
-        value={sortItems.find(item => item.key === cachedValue)}
+        onStateChange={this.onStateChange}
+        value={sortItems.find(item => item.key === orderAccounts)}
       >
         <Text ff="Open Sans|SemiBold" fontSize={4}>
           {t('common:sortBy')}
