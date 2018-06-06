@@ -34,7 +34,6 @@ type Props = {
   account: ?Account,
   addressVerified: ?boolean,
   device: ?Device,
-  onCheck: Function,
   t: T,
 }
 
@@ -55,10 +54,7 @@ export default (props: Props) => (
           props.account && (
             <Box mb={2} mt={-1}>
               <DeviceCheckAddress
-                account={props.account}
-                device={props.device}
-                onCheck={props.onCheck}
-                render={({ isVerified }) => <DeviceConfirm error={isVerified === false} />}
+                render={() => <DeviceConfirm error={props.addressVerified === false} />}
               />
             </Box>
           )}
