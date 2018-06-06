@@ -37,6 +37,7 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
   const { ipcRenderer } = require('electron')
   return Observable.create(o => {
     const requestId: string = uuidv4()
+    const startTime = Date.now()
 
     const unsubscribe = () => {
       ipcRenderer.send('command-unsubscribe', { requestId })
@@ -47,20 +48,20 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
       if (requestId !== msg.requestId) return
       switch (msg.type) {
         case 'NEXT':
-          console.log('<= COMMAND next', msg)
+          console.log(`● CMD ${id}`, msg.data)
           if (msg.data) {
             o.next(msg.data)
           }
           break
 
         case 'COMPLETE':
-          console.log('<= COMMAND complete', msg)
+          console.log(`✔ CMD ${id} finished in ${(Date.now() - startTime).toFixed(0)}ms`)
           o.complete()
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
 
         case 'ERROR':
-          console.warn('<= COMMAND error', msg)
+          console.warn(`✖ CMD ${id} error`, msg.data)
           o.error(msg.data)
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
@@ -73,7 +74,7 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
 
     ipcRenderer.send('command', { id, data, requestId })
 
-    console.log('=> COMMAND', { id, data, requestId })
+    console.log(`CMD ${id}.send(`, data, ')')
 
     return unsubscribe
   })
