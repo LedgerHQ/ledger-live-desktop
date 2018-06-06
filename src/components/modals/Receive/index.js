@@ -8,6 +8,8 @@ import type { T, Device } from 'types/common'
 
 import { MODAL_RECEIVE } from 'config/constants'
 
+import getAddress from 'commands/getAddress'
+
 import Box from 'components/base/Box'
 import Breadcrumb from 'components/Breadcrumb'
 import Button from 'components/base/Button'
@@ -108,6 +110,11 @@ class ReceiveModal extends PureComponent<Props, State> {
       return
     }
     this.setState({ stepIndex: stepIndex + 1 })
+
+    // TODO: do that better
+    if (stepIndex === 1) {
+      this.verifyAddress()
+    }
   }
 
   handlePrevStep = () => {
@@ -154,11 +161,15 @@ class ReceiveModal extends PureComponent<Props, State> {
     }
   }
 
-  handleRetryCheckAddress = () =>
+  handleRetryCheckAddress = () => {
     this.setState({
       addressVerified: null,
       stepsErrors: [],
     })
+
+    // TODO: do that better
+    this.verifyAddress()
+  }
 
   handleChangeAmount = amount => this.setState({ amount })
 
@@ -179,6 +190,33 @@ class ReceiveModal extends PureComponent<Props, State> {
       stepsDisabled: [1, 2],
       stepIndex: this._steps.length - 1, // last step
     })
+
+  verifyAddress = async () => {
+    const { account, deviceSelected: device } = this.state
+    try {
+      if (account && device) {
+        const { address } = await getAddress
+          .send({
+            currencyId: account.currency.id,
+            devicePath: device.path,
+            path: account.freshAddressPath,
+            segwit: !!account.isSegwit,
+            verify: true,
+          })
+          .toPromise()
+
+        if (address !== account.freshAddress) {
+          throw new Error('Confirmed address is different')
+        }
+
+        this.setState({ addressVerified: true, stepIndex: 3 })
+      } else {
+        this.setState({ addressVerified: false })
+      }
+    } catch (err) {
+      this.setState({ addressVerified: false })
+    }
+  }
 
   renderStep = () => {
     const { account, amount, addressVerified, deviceSelected, stepIndex } = this.state
