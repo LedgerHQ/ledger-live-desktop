@@ -13,6 +13,7 @@ import {
 } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
 import { accountsSelector } from 'reducers/accounts'
+import { SYNC_BOOT_DELAY, SYNC_INTERVAL } from 'config/constants'
 import { getBridgeForCurrency } from '.'
 
 // Unify the synchronization management for bridges with the redux store
@@ -153,9 +154,9 @@ class Provider extends Component<BridgeSyncProviderOwnProps, BridgeSync> {
       } catch (e) {
         logger.error('sync issues', e)
       }
-      setTimeout(syncLoop, 10 * 1000)
+      setTimeout(syncLoop, SYNC_INTERVAL)
     }
-    setTimeout(syncLoop, 2 * 1000)
+    setTimeout(syncLoop, SYNC_BOOT_DELAY)
   }
 
   // TODO we might want to call sync straight away when new accounts got added (it will happen every 10s anyway)
