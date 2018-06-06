@@ -9,7 +9,6 @@ import type { Device, T } from 'types/common'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import DeviceConfirm from 'components/DeviceConfirm'
-import DeviceCheckAddress from 'components/DeviceCheckAddress'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -51,13 +50,7 @@ export default (props: Props) => (
         <Text>{props.t('receive:steps.confirmAddress.text')}</Text>
         {props.account && <CurrentAddressForAccount account={props.account} />}
         {props.device &&
-          props.account && (
-            <Box mb={2} mt={-1}>
-              <DeviceCheckAddress
-                render={() => <DeviceConfirm error={props.addressVerified === false} />}
-              />
-            </Box>
-          )}
+          props.account && <DeviceConfirm mb={2} mt={-1} error={props.addressVerified === false} />}
       </Fragment>
     )}
   </Container>
