@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { compose } from 'redux'
@@ -63,7 +64,7 @@ function sortAccounts(accounts: Account[], orderAccounts: string, props: Props) 
     }
     return ids
   }
-  console.warn(`sortAccounts not implemented for ${orderAccounts}`)
+  logger.warn(`sortAccounts not implemented for ${orderAccounts}`)
   return null
 }
 
@@ -220,4 +221,10 @@ class AccountsOrder extends Component<Props> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(AccountsOrder)
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(AccountsOrder)

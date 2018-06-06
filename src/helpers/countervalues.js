@@ -10,6 +10,7 @@ import {
   currencySettingsSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
+import logger from 'logger'
 
 const pairsSelector = createSelector(
   currenciesSelector,
@@ -49,7 +50,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
 }
 
 const CounterValues = createCounterValues({
-  log: (...args) => console.log('CounterValues:', ...args), // eslint-disable-line no-console
+  log: (...args) => logger.log('CounterValues:', ...args),
   getAPIBaseURL: () => 'https://ledger-countervalue-poc.herokuapp.com',
   storeSelector: state => state.countervalues,
   pairsSelector,

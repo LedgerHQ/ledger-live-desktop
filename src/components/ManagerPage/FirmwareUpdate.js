@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import React, { PureComponent } from 'react'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
@@ -82,7 +83,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
         this.fetchLatestFirmware()
       }
     } catch (err) {
-      console.log(err)
+      logger.log(err)
     }
   }
 

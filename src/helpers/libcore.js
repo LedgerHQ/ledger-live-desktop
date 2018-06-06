@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
@@ -216,12 +217,10 @@ async function buildAccountRaw({
 }: {
   njsAccount: NJSAccount,
   isSegwit: boolean,
-  // $FlowFixMe
   wallet: NJSWallet,
   currencyId: string,
   accountIndex: number,
   core: *,
-  // $FlowFixMe
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
   const njsBalance = await njsAccount.getBalance()
@@ -373,7 +372,7 @@ export async function syncAccount({
 
   syncedRawAccount.balance = njsBalance.toLong()
 
-  console.log(`Synced account [${syncedRawAccount.name}]: ${syncedRawAccount.balance}`)
+  logger.log(`Synced account [${syncedRawAccount.name}]: ${syncedRawAccount.balance}`)
 
   return syncedRawAccount
 }

@@ -1,6 +1,7 @@
 // @flow
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import logger from 'logger'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
@@ -125,7 +126,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
           .toPromise()
         const { freshAddress } = account
         if (account && freshAddress !== address) {
-          console.warn({ freshAddress, address })
+          logger.warn({ freshAddress, address })
           throw new Error('Account address is different than device address')
         }
       } else if (currency) {

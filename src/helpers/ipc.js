@@ -1,4 +1,5 @@
 // @flow
+import logger from 'logger'
 import { Observable } from 'rxjs'
 import uuidv4 from 'uuid/v4'
 
@@ -48,20 +49,20 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
       if (requestId !== msg.requestId) return
       switch (msg.type) {
         case 'NEXT':
-          console.log(`● CMD ${id}`, msg.data)
+          logger.log(`● CMD ${id}`, msg.data)
           if (msg.data) {
             o.next(msg.data)
           }
           break
 
         case 'COMPLETE':
-          console.log(`✔ CMD ${id} finished in ${(Date.now() - startTime).toFixed(0)}ms`)
+          logger.log(`✔ CMD ${id} finished in ${(Date.now() - startTime).toFixed(0)}ms`)
           o.complete()
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
 
         case 'ERROR':
-          console.warn(`✖ CMD ${id} error`, msg.data)
+          logger.warn(`✖ CMD ${id} error`, msg.data)
           o.error(msg.data)
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
@@ -74,7 +75,7 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
 
     ipcRenderer.send('command', { id, data, requestId })
 
-    console.log(`CMD ${id}.send(`, data, ')')
+    logger.log(`CMD ${id}.send(`, data, ')')
 
     return unsubscribe
   })

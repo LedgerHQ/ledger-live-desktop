@@ -5,6 +5,7 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createHashHistory'
 import type { HashHistory } from 'history'
+import logger from 'middlewares/logger'
 
 import reducers from 'reducers'
 
@@ -19,7 +20,7 @@ export default ({ state, history, dbMiddleware }: Props) => {
   if (!history) {
     history = createHistory()
   }
-  const middlewares = [routerMiddleware(history), thunk]
+  const middlewares = [routerMiddleware(history), thunk, logger]
   if (dbMiddleware) {
     middlewares.push(dbMiddleware)
   }

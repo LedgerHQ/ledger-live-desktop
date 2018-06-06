@@ -1,5 +1,6 @@
 // @flow
 import type { Currency } from '@ledgerhq/live-common/lib/types'
+import logger from 'logger'
 
 const BASE_URL = process.env.LEDGER_REST_API_BASE || 'https://api.ledgerwallet.com/'
 
@@ -20,13 +21,13 @@ export const userFriendlyError = <A>(p: Promise<A>): Promise<A> =>
                 throw new Error(message)
               }
             } catch (e) {
-              console.log(e)
+              logger.warn("can't parse server result", e)
             }
           }
           throw new Error(msg)
         }
       }
-      console.log('Ledger API: HTTP status', error.response.status, 'data: ', error.response.data)
+      logger.log('Ledger API: HTTP status', error.response.status, 'data: ', error.response.data)
       throw new Error('A problem occurred with Ledger Servers. Please try again later.')
     } else if (error.request) {
       // The request was made but no response was received

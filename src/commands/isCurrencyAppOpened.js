@@ -43,7 +43,6 @@ const cmd: Command<Input, Result> = createCommand(
           // in case of ETH / XRP, the address derivation is enough
           return true
         } catch (e) {
-          console.log(e)
           // if anything failed, it does not pass
           return false
         }

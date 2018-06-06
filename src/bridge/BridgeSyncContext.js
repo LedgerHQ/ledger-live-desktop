@@ -1,4 +1,5 @@
 // @flow
+import logger from 'logger'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import type { Account } from '@ledgerhq/live-common/lib/types'
@@ -150,7 +151,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, BridgeSync> {
       try {
         await this.api.syncAll()
       } catch (e) {
-        console.error('sync issues', e)
+        logger.error('sync issues', e)
       }
       setTimeout(syncLoop, 10 * 1000)
     }
@@ -170,6 +171,9 @@ class Provider extends Component<BridgeSyncProviderOwnProps, BridgeSync> {
   }
 }
 
-export const BridgeSyncProvider = connect(mapStateToProps, actions)(Provider)
+export const BridgeSyncProvider = connect(
+  mapStateToProps,
+  actions,
+)(Provider)
 
 export const BridgeSyncConsumer = BridgeSyncContext.Consumer

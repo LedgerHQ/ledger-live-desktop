@@ -6,6 +6,7 @@ import { fork } from 'child_process'
 import { ipcMain, app } from 'electron'
 import { ipcMainListenReceiveCommands } from 'helpers/ipc'
 import path from 'path'
+import logger from 'logger'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
@@ -16,7 +17,7 @@ let internalProcess
 
 const killInternalProcess = () => {
   if (internalProcess) {
-    console.log('killing internal process...')
+    logger.log('killing internal process...')
     internalProcess.kill('SIGINT')
     internalProcess = null
   }
@@ -25,12 +26,12 @@ const killInternalProcess = () => {
 const forkBundlePath = path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`)
 
 const bootInternalProcess = () => {
-  console.log('booting internal process...')
+  logger.log('booting internal process...')
   internalProcess = fork(forkBundlePath, {
     env: { ...process.env, LEDGER_LIVE_SQLITE_PATH },
   })
   internalProcess.on('exit', code => {
-    console.log(`Internal process ended with code ${code}`)
+    logger.warn(`Internal process ended with code ${code}`)
     internalProcess = null
   })
 }

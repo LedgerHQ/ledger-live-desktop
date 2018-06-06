@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import QrCode from 'qrcode-reader'
+import logger from 'logger'
 
 export default class QRCodeCameraPickerCanvas extends Component<
   {
@@ -88,7 +89,7 @@ export default class QRCodeCameraPickerCanvas extends Component<
             try {
               video.play()
             } catch (e) {
-              console.error(e)
+              logger.error(e)
             }
             let lastCheck = 0
             let raf

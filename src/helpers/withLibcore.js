@@ -1,6 +1,7 @@
 // @flow
 
 import invariant from 'invariant'
+import logger from 'logger'
 
 const core = require('@ledgerhq/ledger-core')
 
@@ -23,7 +24,7 @@ export default function withLibcore<A>(job: Job<A>): Promise<A> {
   const p = queue.then(() => job(core, walletPool))
 
   queue = p.catch(e => {
-    console.warn(`withLibCore: Error in job`, e)
+    logger.warn(`withLibCore: Error in job`, e)
   })
 
   return p

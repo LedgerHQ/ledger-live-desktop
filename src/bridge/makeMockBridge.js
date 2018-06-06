@@ -1,4 +1,5 @@
 // @flow
+import logger from 'logger'
 import {
   genAccount,
   genAddingOperationsInAccount,
@@ -45,7 +46,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
       const accountId = initialAccount.id
       if (syncTimeouts[accountId]) {
         // this is just for tests. we'll assume impl don't need to handle race condition on this function.
-        console.warn('synchronize was called multiple pending time for same accounts!!!')
+        logger.warn('synchronize was called multiple pending time for same accounts!!!')
       }
       syncTimeouts[accountId] = setTimeout(() => {
         if (Math.random() < syncSuccessRate) {

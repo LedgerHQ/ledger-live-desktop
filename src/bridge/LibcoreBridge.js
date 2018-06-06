@@ -1,4 +1,5 @@
 // @flow
+import logger from 'logger'
 import React from 'react'
 import { map } from 'rxjs/operators'
 import type { Account } from '@ledgerhq/live-common/lib/types'
@@ -93,7 +94,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
     })()
     return {
       unsubscribe() {
-        console.warn('LibcoreBridge: unsub sync not implemented')
+        logger.warn('LibcoreBridge: unsub sync not implemented')
       },
     }
   },
