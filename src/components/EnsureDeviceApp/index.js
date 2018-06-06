@@ -10,6 +10,9 @@ import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
 import isCurrencyAppOpened from 'commands/isCurrencyAppOpened'
 
+const CHECK_APP_INTERVAL_WHEN_INVALID = 300
+const CHECK_APP_INTERVAL_WHEN_VALID = 1000
+
 type OwnProps = {
   currency?: ?CryptoCurrency,
   deviceSelected: ?Device,
@@ -108,6 +111,8 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       return
     }
 
+    let isSuccess = true
+
     try {
       if (account) {
         const { address } = await getAddress
@@ -148,11 +153,15 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
       }
     } catch (e) {
       this.handleStatusChange(this.state.deviceStatus, 'fail', e.message)
+      isSuccess = false
     }
 
     // TODO: refacto to more generic/global way
     if (!this._unmounted) {
-      this._timeout = setTimeout(this.checkAppOpened, 1e3)
+      this._timeout = setTimeout(
+        this.checkAppOpened,
+        isSuccess ? CHECK_APP_INTERVAL_WHEN_VALID : CHECK_APP_INTERVAL_WHEN_INVALID,
+      )
     }
   }
 
