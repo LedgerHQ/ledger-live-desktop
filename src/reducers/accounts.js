@@ -59,9 +59,7 @@ const handlers: Object = {
 
 // Selectors
 
-export function accountsSelector(state: { accounts: AccountsState }): Account[] {
-  return state.accounts
-}
+export const accountsSelector = (state: { accounts: AccountsState }): Account[] => state.accounts
 
 export const currenciesSelector = createSelector(accountsSelector, accounts =>
   [...new Set(accounts.map(a => a.currency))].sort((a, b) => a.name.localeCompare(b.name)),
@@ -73,41 +71,16 @@ export const accountSelector = createSelector(
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 )
 
-export function decodeAccount(account: AccountRaw): Account {
-  return accountModel.decode({
+export const decodeAccount = (account: AccountRaw): Account =>
+  accountModel.decode({
     data: account,
     version: accountModel.version,
   })
-}
 
-export function encodeAccount(account: Account): AccountRaw {
-  return accountModel.encode(account).data
-}
+export const encodeAccount = (account: Account): AccountRaw => accountModel.encode(account).data
 
-// Yeah. `any` should be `AccountRaw[]` but it can also be a map
-// of wrapped accounts. And as flow is apparently incapable of doing
-// such a simple thing, let's put any, right? I don't care.
-// FIXME: no it shouldn't. the purpose of DataModel is to contain the version, it's the only way we can run the migration functions
-export function serializeAccounts(accounts: any): Account[] {
-  // ensure that accounts are always wrapped in data key
-  if (accounts && accounts.length && !accounts[0].data) {
-    accounts = accounts.map(account => ({ data: account }))
-  }
-  return accounts ? accounts.map(accountModel.decode) : []
-}
+export const decodeAccountsModel = (raws: *) => (raws || []).map(accountModel.decode)
 
-export function deserializeAccounts(accounts: Account[]) {
-  return accounts.map(account => {
-    // as account can be passed by main process, the Date types
-    // can be converted to string. we ensure here that we have real
-    // date
-    // FIXME Account shouldn't be passed by main process. only AccountRaw should be!
-    if (typeof account.lastSyncDate === 'string') {
-      account.lastSyncDate = new Date(account.lastSyncDate)
-    }
-
-    return accountModel.encode(account)
-  })
-}
+export const encodeAccountsModel = (accounts: *) => (accounts || []).map(accountModel.encode)
 
 export default handleActions(handlers, state)
