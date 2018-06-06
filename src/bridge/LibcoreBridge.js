@@ -6,7 +6,6 @@ import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
-// import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
 import type { WalletBridge, EditProps } from './types'
 
 const notImplemented = new Error('LibcoreBridge: not implemented')
@@ -27,8 +26,8 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
-const EditAdvancedOptions = undefined // Not implemented yet
 /*
+import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
 const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
   <AdvancedOptionsBitcoinKind
     isRBF={value.isRBF}
@@ -107,11 +106,9 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  // $FlowFixMe why?
   EditFees,
 
-  // $FlowFixMe why?
-  EditAdvancedOptions,
+  // EditAdvancedOptions,
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 

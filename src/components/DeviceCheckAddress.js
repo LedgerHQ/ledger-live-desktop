@@ -33,13 +33,6 @@ class CheckAddress extends PureComponent<Props, State> {
 
   _isUnmounted = false
 
-  safeSetState = (...args: *) => {
-    if (this._isUnmounted) {
-      return
-    }
-    this.setState(...args)
-  }
-
   verifyAddress = async ({ device, account }: { device: Device, account: Account }) => {
     try {
       const { address } = await getAddress
@@ -56,10 +49,16 @@ class CheckAddress extends PureComponent<Props, State> {
         throw new Error('Confirmed address is different')
       }
 
-      this.safeSetState({ isVerified: true })
+      if (this._isUnmounted) {
+        return
+      }
+      this.setState({ isVerified: true })
       this.props.onCheck(true)
     } catch (err) {
-      this.safeSetState({ isVerified: false })
+      if (this._isUnmounted) {
+        return
+      }
+      this.setState({ isVerified: false })
       this.props.onCheck(false)
     }
   }
