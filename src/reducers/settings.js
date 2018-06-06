@@ -76,7 +76,6 @@ const INITIAL_STATE: SettingsState = {
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
-  // $FlowFixMe
   return 'id' in c ? c : null
 }
 
@@ -98,12 +97,15 @@ const handlers: Object = {
     copy.currenciesSettings = { ...copy.currenciesSettings }
     for (const { to, from, exchange } of pairs) {
       const fromCrypto = asCryptoCurrency(from)
-      if (fromCrypto && to === intermediaryCurrency) {
+      if (fromCrypto && to.ticker === intermediaryCurrency.ticker) {
         copy.currenciesSettings[fromCrypto.id] = {
           ...copy.currenciesSettings[fromCrypto.id],
           exchange,
         }
-      } else if (from === intermediaryCurrency && to === counterValueCurrency) {
+      } else if (
+        from.ticker === intermediaryCurrency.ticker &&
+        to.ticker === counterValueCurrency.ticker
+      ) {
         copy.counterValueExchange = exchange
       }
     }

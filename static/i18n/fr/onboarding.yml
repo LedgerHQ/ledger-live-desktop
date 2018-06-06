@@ -1,7 +1,6 @@
 ---
 start:
-  title: Welcome to the new Ledger Live Desktop app.
-  desc: Let’s get started!
+  title: Welcome to Ledger Live
 init:
   title: Welcome to Ledger Live, the computer companion app to your Ledger device
   newDevice:
@@ -18,7 +17,6 @@ init:
     desc: Please replace it with the final wording once it’s done.
 selectDevice:
   title: To get started, select your device
-  desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
   ledgerNanoCard:
     title: Ledger Nano S
     desc: Please replace it with the final wording once it’s done.
@@ -42,12 +40,25 @@ selectPIN:
     note2: An 8-digit PIN code offers an optimum level of security.
     note3: Never use a device supplied with a PIN code and/or a 24-word recovery phrase.
 writeSeed:
-  title: Save your recovery phrase
-  desc: Your recovery phrase is formed by 24 words. They will be displayed only once.
-  instructions:
+  restore:
+    title: Save your recovery phrase
+    desc: Your recovery phrase is formed by 24 words. They will be displayed only once.
+    step1: Press the right button to select the length of your recovery phrase. Press both buttons to confirm.
+    step2: Select the first letters of Word \
+    step3: Select Word \
+    step4: Repeat the process until the last word.
+  nano:
+    title: Save your recovery phrase
+    desc: Your recovery phrase is formed by 24 words. They will be displayed only once.
     step1: Copy the first word (Word \
     step2: Press the right button to display Word \
     step3: Confirm your recovery phrase press both buttons to validate each word displayed on the screen.
+  blue:
+    title: Save your recovery phrase
+    desc: Your recovery phrase is formed by 24 words. They will be displayed only once.
+    step1: Copy each word of the recovery phrase on the blank Recovery sheet. Make sure to copy the words in the same order.
+    step2: Tap NEXT to display the following words. Tap PREVIOUS to go back.
+    step3: Enter the requested words to confirm your recovery phrase.
   disclaimer:
     note1: Carefully secure your 24 words out of sight.
     note2: Ledger does not keep any backup of your 24 words.
@@ -89,6 +100,9 @@ analytics:
   termsConditions:
     title: Terms and Conditions
     desc: Please accept terms and conditions to proceed
+  sentryLogs:
+    title: Sentry Logs
+    desc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
 finish:
   title: This is the title of the screen. 1 line is the maximum
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet

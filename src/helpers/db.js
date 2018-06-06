@@ -4,7 +4,7 @@ import Store from 'electron-store'
 import set from 'lodash/set'
 import get from 'lodash/get'
 
-import { serializeAccounts, deserializeAccounts } from 'reducers/accounts'
+import { decodeAccountsModel, encodeAccountsModel } from 'reducers/accounts'
 
 type DBKey = 'settings' | 'accounts' | 'countervalues'
 
@@ -23,17 +23,20 @@ export function setEncryptionKey(key: DBKey, value?: string) {
   encryptionKey[key] = value
 }
 
-function middleware(type, key, data: any) {
-  if (key === 'accounts') {
-    if (type === 'get') {
-      data = serializeAccounts(data)
-    }
+const transforms = {
+  get: {
+    accounts: decodeAccountsModel,
+  },
+  set: {
+    accounts: encodeAccountsModel,
+  },
+}
 
-    if (type === 'set') {
-      data = deserializeAccounts(data)
-    }
+function middleware(type: 'get' | 'set', key: string, data: any) {
+  const t = transforms[type][key]
+  if (t) {
+    data = t(data)
   }
-
   return data
 }
 
