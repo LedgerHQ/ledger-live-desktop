@@ -11,8 +11,7 @@ import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
 import isCurrencyAppOpened from 'commands/isCurrencyAppOpened'
 
-const CHECK_APP_INTERVAL_WHEN_INVALID = 300
-const CHECK_APP_INTERVAL_WHEN_VALID = 1000
+import { CHECK_APP_INTERVAL_WHEN_VALID, CHECK_APP_INTERVAL_WHEN_INVALID } from 'config/constants'
 
 type OwnProps = {
   currency?: ?CryptoCurrency,
