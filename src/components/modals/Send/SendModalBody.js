@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import invariant from 'invariant'
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
@@ -162,7 +163,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
         return null
       }
       if (!this.steps[stepIndex].canNext(state)) {
-        console.warn('tried to next step without a valid state!', state, stepIndex)
+        logger.warn('tried to next step without a valid state!', state, stepIndex)
         return null
       }
       stepIndex++
