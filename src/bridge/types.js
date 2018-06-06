@@ -79,10 +79,10 @@ export interface WalletBridge<Transaction> {
   isValidTransaction(account: Account, transaction: Transaction): boolean;
 
   // render the whole Fees section of the form
-  EditFees?: React$ComponentType<EditProps<Transaction>>;
+  EditFees?: *; // React$ComponentType<EditProps<Transaction>>;
 
   // render the whole advanced part of the form
-  EditAdvancedOptions?: React$ComponentType<EditProps<Transaction>>;
+  EditAdvancedOptions?: *; // React$ComponentType<EditProps<Transaction>>;
 
   canBeSpent(account: Account, transaction: Transaction): Promise<boolean>;
 

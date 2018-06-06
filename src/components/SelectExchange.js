@@ -22,6 +22,12 @@ class ExchangeSelect extends Component<
     error: ?Error,
   },
 > {
+  state = {
+    prevFromTo: '', // eslint-disable-line
+    exchanges: null,
+    error: null,
+  }
+
   static getDerivedStateFromProps(nextProps: *, prevState: *) {
     const fromTo = `${nextProps.from.ticker}/${nextProps.to.ticker}`
     if (fromTo !== prevState.prevFromTo) {
@@ -31,12 +37,6 @@ class ExchangeSelect extends Component<
       }
     }
     return null
-  }
-
-  state = {
-    prevFromTo: '', // eslint-disable-line
-    exchanges: null,
-    error: null,
   }
 
   componentDidMount() {

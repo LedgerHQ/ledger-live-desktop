@@ -377,10 +377,8 @@ const RippleJSBridge: WalletBridge<Transaction> = {
     recipient,
   }),
 
-  // $FlowFixMe
   EditFees,
 
-  // $FlowFixMe
   EditAdvancedOptions,
 
   getTransactionRecipient: (a, t) => t.recipient,
