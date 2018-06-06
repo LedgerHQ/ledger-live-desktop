@@ -105,7 +105,7 @@ export async function doSignAndBroadcast({
     id: txHash,
     hash: txHash,
     type: 'OUT',
-    value: amount,
+    value: transaction.amount,
     fee: 0,
     blockHash: null,
     blockHeight: null,

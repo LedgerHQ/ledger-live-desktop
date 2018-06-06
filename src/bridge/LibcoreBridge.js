@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { map } from 'rxjs/operators'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
@@ -61,15 +62,31 @@ const LibcoreBridge: WalletBridge<Transaction> = {
         const rawAccount = encodeAccount(account)
         const rawSyncedAccount = await libcoreSyncAccount.send({ rawAccount }).toPromise()
         const syncedAccount = decodeAccount(rawSyncedAccount)
-        next(account => ({
-          ...account,
-          freshAddress: syncedAccount.freshAddress,
-          freshAddressPath: syncedAccount.freshAddressPath,
-          balance: syncedAccount.balance,
-          blockHeight: syncedAccount.blockHeight,
-          operations: syncedAccount.operations, // TODO: is a simple replace enough?
-          lastSyncDate: new Date(),
-        }))
+        next(account => {
+          const accountOps = account.operations
+          const syncedOps = syncedAccount.operations
+          const patch: $Shape<Account> = {
+            freshAddress: syncedAccount.freshAddress,
+            freshAddressPath: syncedAccount.freshAddressPath,
+            balance: syncedAccount.balance,
+            blockHeight: syncedAccount.blockHeight,
+            lastSyncDate: new Date(),
+          }
+
+          const hasChanged =
+            accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
+            (accountOps.length > 0 && syncedOps.length > 0 && accountOps[0].id !== syncedOps[0].id) // if same size, only check if the last item has changed.
+
+          if (hasChanged) {
+            patch.operations = syncedAccount.operations
+            patch.pendingOperations = [] // For now, we assume a change will clean the pendings.
+          }
+
+          return {
+            ...account,
+            ...patch,
+          }
+        })
         complete()
       } catch (e) {
         error(e)
@@ -136,6 +153,11 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
     return op
   },
+
+  addPendingOperation: (account, operation) => ({
+    ...account,
+    pendingOperations: [operation].concat(account.pendingOperations),
+  }),
 }
 
 export default LibcoreBridge
