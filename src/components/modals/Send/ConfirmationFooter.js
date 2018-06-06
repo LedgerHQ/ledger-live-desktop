@@ -9,37 +9,42 @@ import type { T } from 'types/common'
 
 export default ({
   t,
+  error,
   account,
   optimisticOperation,
   onClose,
   onGoToFirstStep,
 }: {
   t: T,
+  error: ?Error,
   account: ?Account,
   optimisticOperation: ?Operation,
   onClose: () => void,
   onGoToFirstStep: () => void,
-}) => (
-  <ModalFooter horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-    <Button onClick={onClose}>{t('common:close')}</Button>
-    {optimisticOperation ? (
-      // TODO: actually go to operations details
-      <Button
-        onClick={() => {
-          const url = account && getAccountOperationExplorer(account, optimisticOperation)
-          if (url) {
-            shell.openExternal(url)
-          }
-          onClose()
-        }}
-        primary
-      >
-        {t('send:steps.confirmation.success.cta')}
-      </Button>
-    ) : (
-      <Button onClick={onGoToFirstStep} primary>
-        {t('send:steps.confirmation.error.cta')}
-      </Button>
-    )}
-  </ModalFooter>
-)
+}) => {
+  const url =
+    optimisticOperation && account && getAccountOperationExplorer(account, optimisticOperation)
+  return (
+    <ModalFooter horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+      <Button onClick={onClose}>{t('common:close')}</Button>
+      {optimisticOperation ? (
+        // TODO: actually go to operations details
+        url ? (
+          <Button
+            onClick={() => {
+              shell.openExternal(url)
+              onClose()
+            }}
+            primary
+          >
+            {t('send:steps.confirmation.success.cta')}
+          </Button>
+        ) : null
+      ) : error ? (
+        <Button onClick={onGoToFirstStep} primary>
+          {t('send:steps.confirmation.error.cta')}
+        </Button>
+      ) : null}
+    </ModalFooter>
+  )
+}

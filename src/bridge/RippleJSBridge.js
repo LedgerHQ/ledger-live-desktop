@@ -1,4 +1,5 @@
 // @flow
+import { Observable } from 'rxjs'
 import React from 'react'
 import bs58check from 'ripple-bs58check'
 import { computeBinaryTransactionHash } from 'ripple-hashes'
@@ -42,6 +43,70 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
     }}
   />
 )
+
+async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }) {
+  const api = apiForCurrency(a.currency)
+  try {
+    await api.connect()
+    const amount = formatAPICurrencyXRP(t.amount)
+    const payment = {
+      source: {
+        address: a.freshAddress,
+        amount,
+      },
+      destination: {
+        address: t.recipient,
+        minAmount: amount,
+        tag: t.tag,
+      },
+    }
+    const instruction = {
+      fee: formatAPICurrencyXRP(t.fee).value,
+    }
+
+    const prepared = await api.preparePayment(a.freshAddress, payment, instruction)
+
+    const transaction = await signTransaction
+      .send({
+        currencyId: a.currency.id,
+        devicePath: deviceId,
+        path: a.freshAddressPath,
+        transaction: JSON.parse(prepared.txJSON),
+      })
+      .toPromise()
+
+    if (!isCancelled()) {
+      onSigned()
+      const submittedPayment = await api.submit(transaction)
+
+      if (submittedPayment.resultCode !== 'tesSUCCESS') {
+        throw new Error(submittedPayment.resultMessage)
+      }
+
+      const hash = computeBinaryTransactionHash(transaction)
+
+      onOperationBroadcasted({
+        id: `${a.id}-${hash}-OUT`,
+        hash,
+        accountId: a.id,
+        type: 'OUT',
+        value: t.amount,
+        fee: t.fee,
+        blockHash: null,
+        blockHeight: null,
+        senders: [a.freshAddress],
+        recipients: [t.recipient],
+        date: new Date(),
+        // we probably can't get it so it's a predictive value
+        transactionSequenceNumber:
+          (a.operations.length > 0 ? a.operations[0].transactionSequenceNumber : 0) +
+          a.pendingOperations.length,
+      })
+    }
+  } finally {
+    api.disconnect()
+  }
+}
 
 function isRecipientValid(currency, recipient) {
   try {
@@ -394,66 +459,28 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.fee),
 
-  signAndBroadcast: async (a, t, deviceId) => {
-    const api = apiForCurrency(a.currency)
-    try {
-      await api.connect()
-      const amount = formatAPICurrencyXRP(t.amount)
-      const payment = {
-        source: {
-          address: a.freshAddress,
-          amount,
+  signAndBroadcast: (a, t, deviceId) =>
+    Observable.create(o => {
+      let cancelled = false
+      const isCancelled = () => cancelled
+      const onSigned = () => {
+        o.next({ type: 'signed' })
+      }
+      const onOperationBroadcasted = operation => {
+        o.next({ type: 'broadcasted', operation })
+      }
+      signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }).then(
+        () => {
+          o.complete()
         },
-        destination: {
-          address: t.recipient,
-          minAmount: amount,
-          tag: t.tag,
+        e => {
+          o.error(e)
         },
+      )
+      return () => {
+        cancelled = true
       }
-      const instruction = {
-        fee: formatAPICurrencyXRP(t.fee).value,
-      }
-
-      const prepared = await api.preparePayment(a.freshAddress, payment, instruction)
-
-      const transaction = await signTransaction
-        .send({
-          currencyId: a.currency.id,
-          devicePath: deviceId,
-          path: a.freshAddressPath,
-          transaction: JSON.parse(prepared.txJSON),
-        })
-        .toPromise()
-
-      const submittedPayment = await api.submit(transaction)
-
-      if (submittedPayment.resultCode !== 'tesSUCCESS') {
-        throw new Error(submittedPayment.resultMessage)
-      }
-
-      const hash = computeBinaryTransactionHash(transaction)
-
-      return {
-        id: `${a.id}-${hash}-OUT`,
-        hash,
-        accountId: a.id,
-        type: 'OUT',
-        value: t.amount,
-        fee: t.fee,
-        blockHash: null,
-        blockHeight: null,
-        senders: [a.freshAddress],
-        recipients: [t.recipient],
-        date: new Date(),
-        // we probably can't get it so it's a predictive value
-        transactionSequenceNumber:
-          (a.operations.length > 0 ? a.operations[0].transactionSequenceNumber : 0) +
-          a.pendingOperations.length,
-      }
-    } finally {
-      api.disconnect()
-    }
-  },
+    }),
 
   addPendingOperation: (account, operation) => ({
     ...account,

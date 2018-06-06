@@ -1,4 +1,5 @@
 // @flow
+import { Observable } from 'rxjs'
 import {
   genAccount,
   genAddingOperationsInAccount,
@@ -149,20 +150,22 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
     getMaxAmount,
 
-    signAndBroadcast: async (account, t) => {
-      const rng = new Prando()
-      const op = genOperation(account, account.operations, account.currency, rng)
-      op.type = 'OUT'
-      op.value = t.amount
-      op.blockHash = null
-      op.blockHeight = null
-      op.senders = [account.freshAddress]
-      op.recipients = [t.recipient]
-      op.blockHeight = account.blockHeight
-      op.date = new Date()
-      broadcasted[account.id] = (broadcasted[account.id] || []).concat(op)
-      return { ...op }
-    },
+    signAndBroadcast: (account, t) =>
+      Observable.create(o => {
+        const rng = new Prando()
+        const op = genOperation(account, account.operations, account.currency, rng)
+        op.type = 'OUT'
+        op.value = t.amount
+        op.blockHash = null
+        op.blockHeight = null
+        op.senders = [account.freshAddress]
+        op.recipients = [t.recipient]
+        op.blockHeight = account.blockHeight
+        op.date = new Date()
+        broadcasted[account.id] = (broadcasted[account.id] || []).concat(op)
+        o.next({ type: 'signed' })
+        o.next({ type: 'broadcasted', operation: { ...op } })
+      }),
   }
 }
 

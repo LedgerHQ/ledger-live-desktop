@@ -1,5 +1,6 @@
 // @flow
 
+import type { Observable } from 'rxjs'
 import type { Account, Operation, Currency } from '@ledgerhq/live-common/lib/types'
 
 // a WalletBridge is implemented on renderer side.
@@ -104,7 +105,7 @@ export interface WalletBridge<Transaction> {
     account: Account,
     transaction: Transaction,
     deviceId: DeviceId,
-  ): Promise<Operation>;
+  ): Observable<{ type: 'signed' } | { type: 'broadcasted', operation: Operation }>;
 
   // Implement an optimistic response for signAndBroadcast.
   // you likely should add the operation in account.pendingOperations but maybe you want to clean it (because maybe some are replaced / cancelled by this one?)

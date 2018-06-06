@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from 'invariant'
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -27,6 +28,8 @@ import StepAmount from './01-step-amount'
 import StepVerification from './03-step-verification'
 import StepConfirmation from './04-step-confirmation'
 
+const noop = () => {}
+
 type Props = {
   initialAccount: ?Account,
   onClose: () => void,
@@ -48,7 +51,9 @@ type State<T> = {
 
 type Step = {
   label: string,
-  canNext?: (State<*>) => boolean,
+  canNext: (State<*>) => boolean,
+  canPrev: (State<*>) => boolean,
+  canClose: (State<*>) => boolean,
   prevStep?: number,
 }
 
@@ -81,6 +86,8 @@ class SendModalBody extends PureComponent<Props, State<*>> {
     this.steps = [
       {
         label: t('send:steps.amount.title'),
+        canClose: () => true,
+        canPrev: () => false,
         canNext: ({ bridge, account, transaction }) =>
           bridge && account && transaction
             ? bridge.isValidTransaction(account, transaction)
@@ -88,28 +95,83 @@ class SendModalBody extends PureComponent<Props, State<*>> {
       },
       {
         label: t('send:steps.connectDevice.title'),
+        canClose: () => true,
         canNext: ({ deviceSelected, appStatus }) =>
           deviceSelected !== null && appStatus === 'success',
         prevStep: 0,
+        canPrev: () => true,
       },
       {
         label: t('send:steps.verification.title'),
+        canClose: ({ error }) => !!error,
         canNext: () => true,
+        canPrev: ({ error }) => !!error,
         prevStep: 1,
       },
       {
         label: t('send:steps.confirmation.title'),
         prevStep: 0,
+        canClose: () => true,
+        canPrev: () => true,
+        canNext: () => false,
       },
     ]
   }
 
+  componentWillUnmount() {
+    const { signTransactionSub } = this
+    if (signTransactionSub) {
+      signTransactionSub.unsubscribe()
+    }
+  }
+
+  signTransactionSub: *
+
+  signTransaction = async () => {
+    const { deviceSelected, account, transaction, bridge } = this.state
+    invariant(
+      deviceSelected && account && transaction && bridge,
+      'signTransaction invalid conditions',
+    )
+    this.signTransactionSub = bridge
+      .signAndBroadcast(account, transaction, deviceSelected.path)
+      .subscribe({
+        next: e => {
+          switch (e.type) {
+            case 'signed': {
+              this.onSigned()
+              break
+            }
+            case 'broadcasted': {
+              this.onOperationBroadcasted(e.operation)
+              break
+            }
+            default:
+          }
+        },
+        error: error => {
+          this.onOperationError(error)
+        },
+      })
+  }
+
   onNextStep = () =>
-    this.setState(({ stepIndex }) => {
+    this.setState(state => {
+      let { stepIndex, error } = state
       if (stepIndex >= this.steps.length - 1) {
         return null
       }
-      return { stepIndex: stepIndex + 1 }
+      if (!this.steps[stepIndex].canNext(state)) {
+        console.warn('tried to next step without a valid state!', state, stepIndex)
+        return null
+      }
+      stepIndex++
+      if (stepIndex < 2) {
+        error = null
+      } else if (stepIndex === 2) {
+        this.signTransaction()
+      }
+      return { stepIndex, error }
     })
 
   onChangeDevice = (deviceSelected: ?Device) => {
@@ -133,8 +195,14 @@ class SendModalBody extends PureComponent<Props, State<*>> {
     }
   }
 
+  onSigned = () => {
+    this.setState({
+      stepIndex: 3,
+    })
+  }
+
   onOperationBroadcasted = (optimisticOperation: Operation) => {
-    const { stepIndex, account, bridge } = this.state
+    const { account, bridge } = this.state
     if (!account || !bridge) return
     const { addPendingOperation } = bridge
     if (addPendingOperation) {
@@ -144,7 +212,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
     }
     this.setState({
       optimisticOperation,
-      stepIndex: stepIndex + 1,
+      stepIndex: 3,
       error: null,
     })
   }
@@ -179,7 +247,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
   steps: Step[]
 
   render() {
-    const { t, onClose } = this.props
+    const { t } = this.props
     const {
       stepIndex,
       account,
@@ -192,8 +260,13 @@ class SendModalBody extends PureComponent<Props, State<*>> {
 
     const step = this.steps[stepIndex]
     if (!step) return null
-    const canNext = step.canNext && step.canNext(this.state)
-    const canPrev = 'prevStep' in step
+    const canClose = step.canClose(this.state)
+    const canNext = step.canNext(this.state)
+    const canPrev = step.canPrev(this.state)
+    let { onClose } = this.props
+    if (!canClose) {
+      onClose = noop
+    }
 
     return (
       <ModalBody onClose={onClose}>
@@ -242,6 +315,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
         {stepIndex === 3 ? (
           <ConfirmationFooter
             t={t}
+            error={error}
             account={account}
             optimisticOperation={optimisticOperation}
             onClose={onClose}
@@ -268,4 +342,10 @@ class SendModalBody extends PureComponent<Props, State<*>> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(SendModalBody)
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(SendModalBody)
