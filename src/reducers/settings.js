@@ -76,7 +76,6 @@ const INITIAL_STATE: SettingsState = {
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
-  // $FlowFixMe
   return 'id' in c ? c : null
 }
 
