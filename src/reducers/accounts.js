@@ -3,6 +3,7 @@
 import { createSelector } from 'reselect'
 import { handleActions } from 'redux-actions'
 import { createAccountModel } from '@ledgerhq/live-common/lib/models/account'
+import logger from 'logger'
 
 import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
 
@@ -25,7 +26,7 @@ const handlers: Object = {
     { payload: account }: { payload: Account },
   ): AccountsState => {
     if (state.some(a => a.id === account.id)) {
-      console.warn('ADD_ACCOUNT attempt for an account that already exists!', account.id)
+      logger.warn('ADD_ACCOUNT attempt for an account that already exists!', account.id)
       return state
     }
     return [...state, account]

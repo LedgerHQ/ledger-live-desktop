@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import React from 'react'
 import { remote } from 'electron'
 import { render } from 'react-dom'
@@ -73,12 +74,24 @@ async function init() {
     events({ store, locked })
 
     const libcoreVersion = await libcoreGetVersion.send().toPromise()
-    console.log('libcore', libcoreVersion)
+    logger.log('libcore', libcoreVersion)
+
+    // DOM elements can have a data-role that identify the UI entity
+    // and that allow us to track interactions with this.
+    window.addEventListener('click', ({ target }) => {
+      const { dataset } = target
+      if (dataset) {
+        const { role, roledata } = dataset
+        if (role) {
+          logger.onClickElement(role, roledata)
+        }
+      }
+    })
   }
 }
 
 init().catch(e => {
   // for now we make the app crash instead of pending forever. later we can render the error OR try to recover, but probably this is unrecoverable cases.
-  console.error(e)
+  logger.error(e)
   process.exit(1)
 })

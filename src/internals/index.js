@@ -1,5 +1,6 @@
 // @flow
 import commands from 'commands'
+import logger from 'logger'
 
 require('../env')
 require('../init-sentry')
@@ -13,7 +14,7 @@ process.on('message', m => {
     const { data, requestId, id } = m.command
     const cmd = commands.find(cmd => cmd.id === id)
     if (!cmd) {
-      console.warn(`command ${id} not found`)
+      logger.warn(`command ${id} not found`)
       return
     }
     subscriptions[requestId] = cmd.impl(data).subscribe({
@@ -32,7 +33,7 @@ process.on('message', m => {
         })
       },
       error: error => {
-        console.warn('Command error:', error)
+        logger.warn('Command error:', error)
         delete subscriptions[requestId]
         process.send({
           type: 'ERROR',
@@ -55,4 +56,4 @@ process.on('message', m => {
   }
 })
 
-console.log('Internal process is up!')
+logger.log('Internal process is up!')

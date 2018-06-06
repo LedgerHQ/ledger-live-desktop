@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -42,7 +43,7 @@ class GenuineCheck extends PureComponent<Props, State> {
             withGenuineCheck
             onGenuineCheck={onGenuineCheck}
             onStatusChange={status => {
-              console.log(`status changed to ${status}`)
+              logger.log(`status changed to ${status}`)
             }}
             render={({ appStatus, genuineCheckStatus, deviceSelected, errorMessage }) => (
               <DeviceConnect
@@ -68,4 +69,7 @@ class GenuineCheck extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps), translate())(GenuineCheck)
+export default compose(
+  connect(mapStateToProps),
+  translate(),
+)(GenuineCheck)

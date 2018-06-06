@@ -24,11 +24,17 @@ export type Props = {
 class SideBarListItem extends PureComponent<Props> {
   render() {
     const {
-      item: { icon: Icon, label, desc, iconActiveColor, hasNotif, onClick },
+      item: { icon: Icon, label, desc, iconActiveColor, hasNotif, onClick, value },
       isActive,
     } = this.props
     return (
-      <Container isActive={isActive} iconActiveColor={iconActiveColor} onClick={onClick}>
+      <Container
+        data-role="side-bar-item"
+        data-roledata={value}
+        isActive={isActive}
+        iconActiveColor={iconActiveColor}
+        onClick={onClick}
+      >
         {!!Icon && <Icon size={16} />}
         <Box grow shrink>
           {typeof label === 'function' ? (

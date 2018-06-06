@@ -1,4 +1,5 @@
 // @flow
+import logger from 'logger'
 import { RippleAPI } from 'ripple-lib'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import {
@@ -18,7 +19,7 @@ export const apiForCurrency = (currency: CryptoCurrency) => {
     server: apiEndpoint[currency.id],
   })
   api.on('error', (errorCode, errorMessage) => {
-    console.warn(`Ripple API error: ${errorCode}: ${errorMessage}`)
+    logger.warn(`Ripple API error: ${errorCode}: ${errorMessage}`)
   })
   return api
 }
@@ -33,7 +34,7 @@ export const parseAPICurrencyObject = ({
   value: string,
 }) => {
   if (currency !== 'XRP') {
-    console.warn(`RippleJS: attempt to parse unknown currency ${currency}`)
+    logger.warn(`RippleJS: attempt to parse unknown currency ${currency}`)
     return 0
   }
   return parseAPIValue(value)

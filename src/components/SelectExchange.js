@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { Exchange } from '@ledgerhq/live-common/lib/countervalues/types'
+import logger from 'logger'
 
 import Select from 'components/base/Select'
 import Spinner from 'components/base/Spinner'
@@ -67,7 +68,7 @@ class ExchangeSelect extends Component<
         this.setState({ exchanges })
       }
     } catch (error) {
-      console.error(error)
+      logger.error(error)
       if (!this._unmounted && this._loadId === _loadId) {
         this.setState({ error })
       }

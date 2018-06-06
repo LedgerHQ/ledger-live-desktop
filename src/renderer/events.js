@@ -9,6 +9,7 @@
 // events should all appear in the promise result / observer msgs as soon as they have this requestId
 
 import 'commands'
+import logger from 'logger'
 
 import { ipcRenderer } from 'electron'
 import debug from 'debug'
@@ -64,12 +65,12 @@ export default ({ store }: { store: Object, locked: boolean }) => {
         }
       },
       error => {
-        console.warn('listenDevices error', error)
+        logger.warn('listenDevices error', error)
         store.dispatch(resetDevices())
         syncDevices()
       },
       () => {
-        console.warn('listenDevices ended unexpectedly. restarting')
+        logger.warn('listenDevices ended unexpectedly. restarting')
         store.dispatch(resetDevices())
         syncDevices()
       },

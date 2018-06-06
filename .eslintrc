@@ -43,7 +43,7 @@
     "no-return-assign": 0,
     "no-shadow": 0,
     "no-underscore-dangle": 0,
-    "no-console": [1, { "allow": [ "warn", "error" ] }],
+    "no-console": 2,
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "vars": "all", "args": "after-used", "ignoreRestSiblings": true }],
     "no-use-before-define": 0,
     "no-restricted-syntax": 0,

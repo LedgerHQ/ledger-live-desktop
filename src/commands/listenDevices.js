@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import { createCommand } from 'helpers/ipc'
 import { Observable } from 'rxjs'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
@@ -16,7 +17,7 @@ const cmd = createCommand('listenDevices', () =>
           case 'add': {
             const pendingRemove = pendingRemovePerPath[e.descriptor]
             if (pendingRemove) {
-              console.warn(`Skipping remove/add usb event for ${e.descriptor}`)
+              logger.warn(`Skipping remove/add usb event for ${e.descriptor}`)
               // there where a recent "remove" event, we don't emit add because we didn't emit "remove" yet.
               clearTimeout(pendingRemove)
               delete pendingRemovePerPath[e.descriptor]
