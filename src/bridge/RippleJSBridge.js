@@ -310,7 +310,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
-              name: address.slice(0, 8),
+              name: `Account ${index}`,
               freshAddress,
               freshAddressPath,
               balance,

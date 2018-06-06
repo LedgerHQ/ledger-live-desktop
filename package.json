@@ -36,11 +36,11 @@
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^4.12.0",
-    "@ledgerhq/hw-app-eth": "^4.12.0",
-    "@ledgerhq/hw-app-xrp": "^4.12.0",
-    "@ledgerhq/hw-transport": "^4.12.0",
-    "@ledgerhq/hw-transport-node-hid": "^4.12.0",
+    "@ledgerhq/hw-app-btc": "^4.13.0",
+    "@ledgerhq/hw-app-eth": "^4.13.0",
+    "@ledgerhq/hw-app-xrp": "^4.13.0",
+    "@ledgerhq/hw-transport": "^4.13.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.13.0",
     "@ledgerhq/ledger-core": "1.4.5",
     "@ledgerhq/live-common": "2.29.0",
     "axios": "^0.18.0",
