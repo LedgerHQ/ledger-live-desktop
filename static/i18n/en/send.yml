@@ -31,3 +31,5 @@ steps:
     error:
       title: Transaction error
       cta: Retry operation
+    pending:
+      title: Broadcasting transaction...

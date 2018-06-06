@@ -1,4 +1,5 @@
 // @flow
+import { Observable } from 'rxjs'
 import type { WalletBridge } from './types'
 
 const genericError = new Error('UnsupportedBridge')
@@ -36,7 +37,10 @@ const UnsupportedBridge: WalletBridge<*> = {
 
   getMaxAmount: () => Promise.resolve(0),
 
-  signAndBroadcast: () => Promise.reject(genericError),
+  signAndBroadcast: () =>
+    Observable.create(o => {
+      o.error(genericError)
+    }),
 }
 
 export default UnsupportedBridge

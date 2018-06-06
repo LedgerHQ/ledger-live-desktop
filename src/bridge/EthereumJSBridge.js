@@ -1,4 +1,5 @@
 // @flow
+import { Observable } from 'rxjs'
 import React from 'react'
 import FeesField from 'components/FeesField/EthereumKind'
 import AdvancedOptions from 'components/AdvancedOptions/EthereumKind'
@@ -91,6 +92,49 @@ function mergeOps(existing: Operation[], newFetched: Operation[]) {
   const ids = newFetched.map(o => o.id)
   const all = newFetched.concat(existing.filter(o => !ids.includes(o.id)))
   return uniqBy(all.sort((a, b) => b.date - a.date), 'id')
+}
+
+const signAndBroadcast = async ({
+  a,
+  t,
+  deviceId,
+  isCancelled,
+  onSigned,
+  onOperationBroadcasted,
+}) => {
+  const api = apiForCurrency(a.currency)
+
+  const nonce = await api.getAccountNonce(a.freshAddress)
+
+  const transaction = await signTransactionCommand
+    .send({
+      currencyId: a.currency.id,
+      devicePath: deviceId,
+      path: a.freshAddressPath,
+      transaction: { ...t, nonce },
+    })
+    .toPromise()
+
+  if (!isCancelled()) {
+    onSigned()
+
+    const hash = await api.broadcastTransaction(transaction)
+
+    onOperationBroadcasted({
+      id: `${a.id}-${hash}-OUT`,
+      hash,
+      type: 'OUT',
+      value: t.amount,
+      fee: t.gasPrice * t.gasLimit,
+      blockHeight: null,
+      blockHash: null,
+      accountId: a.id,
+      senders: [a.freshAddress],
+      recipients: [t.recipient],
+      transactionSequenceNumber: nonce,
+      date: new Date(),
+    })
+  }
 }
 
 const SAFE_REORG_THRESHOLD = 80
@@ -324,37 +368,28 @@ const EthereumBridge: WalletBridge<Transaction> = {
   getTotalSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice * t.gasLimit),
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice * t.gasLimit),
 
-  signAndBroadcast: async (a, t, deviceId) => {
-    const api = apiForCurrency(a.currency)
-
-    const nonce = await api.getAccountNonce(a.freshAddress)
-
-    const transaction = await signTransactionCommand
-      .send({
-        currencyId: a.currency.id,
-        devicePath: deviceId,
-        path: a.freshAddressPath,
-        transaction: { ...t, nonce },
-      })
-      .toPromise()
-
-    const hash = await api.broadcastTransaction(transaction)
-
-    return {
-      id: `${a.id}-${hash}-OUT`,
-      hash,
-      type: 'OUT',
-      value: t.amount,
-      fee: t.gasPrice * t.gasLimit,
-      blockHeight: null,
-      blockHash: null,
-      accountId: a.id,
-      senders: [a.freshAddress],
-      recipients: [t.recipient],
-      transactionSequenceNumber: nonce,
-      date: new Date(),
-    }
-  },
+  signAndBroadcast: (a, t, deviceId) =>
+    Observable.create(o => {
+      let cancelled = false
+      const isCancelled = () => cancelled
+      const onSigned = () => {
+        o.next({ type: 'signed' })
+      }
+      const onOperationBroadcasted = operation => {
+        o.next({ type: 'broadcasted', operation })
+      }
+      signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }).then(
+        () => {
+          o.complete()
+        },
+        e => {
+          o.error(e)
+        },
+      )
+      return () => {
+        cancelled = true
+      }
+    }),
 
   addPendingOperation: (account, operation) => ({
     ...account,
