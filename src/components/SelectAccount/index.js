@@ -57,9 +57,7 @@ type Props = {
 }
 
 const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => {
-  const options = accounts
-    .sort((a, b) => (a.name < b.name ? -1 : 1))
-    .map(a => ({ ...a, value: a.id, label: a.name }))
+  const options = accounts.map(a => ({ ...a, value: a.id, label: a.name }))
   const selectedOption = value ? options.find(o => o.value === value.id) : null
   return (
     <Select

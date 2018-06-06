@@ -18,6 +18,9 @@ type Transaction = {
   recipient: string,
 }
 
+const decodeOperation = (encodedAccount, rawOp) =>
+  decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations[0]
+
 const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   <FeesBitcoinKind
     onChange={feePerByte => {
@@ -136,20 +139,27 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   getMaxAmount: (a, _t) => Promise.resolve(a.balance), // FIXME
 
-  signAndBroadcast: async (account, transaction, deviceId) => {
+  signAndBroadcast: (account, transaction, deviceId) => {
     const encodedAccount = encodeAccount(account)
-    const rawOp = await libcoreSignAndBroadcast
+    return libcoreSignAndBroadcast
       .send({
         account: encodedAccount,
         transaction,
         deviceId,
       })
-      .toPromise()
-
-    // quick HACK
-    const [op] = decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations
-
-    return op
+      .pipe(
+        map(e => {
+          switch (e.type) {
+            case 'broadcasted':
+              return {
+                type: 'broadcasted',
+                operation: decodeOperation(encodedAccount, e.operation),
+              }
+            default:
+              return e
+          }
+        }),
+      )
   },
 
   addPendingOperation: (account, operation) => ({

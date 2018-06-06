@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import type { Operation } from '@ledgerhq/live-common/lib/types'
 
+import Spinner from 'components/base/Spinner'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Box from 'components/base/Box'
@@ -45,11 +46,17 @@ type Props = {
 
 function StepConfirmation(props: Props) {
   const { t, optimisticOperation, error } = props
-  const Icon = optimisticOperation ? IconCheckCircle : IconExclamationCircleThin
-  const iconColor = optimisticOperation ? colors.positiveGreen : colors.alertRed
+  const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
+  const iconColor = optimisticOperation
+    ? colors.positiveGreen
+    : error
+      ? colors.alertRed
+      : colors.grey
   const tPrefix = optimisticOperation
     ? 'send:steps.confirmation.success'
-    : 'send:steps.confirmation.error'
+    : error
+      ? 'send:steps.confirmation.error'
+      : 'send:steps.confirmation.pending'
 
   return (
     <Container>
