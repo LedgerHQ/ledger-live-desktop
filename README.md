@@ -12,8 +12,8 @@
 Project has been tested with
 
 - [NodeJS](https://nodejs.org) v9.3.0
-- [Yarn](https://yarnpkg.com) v1.3.0
-- [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
+- [Yarn](https://github.com/yarnpkg/yarn/releases/) v1.3.0
+- [Python](https://www.python.org/downloads/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
 - You will also need a C++ compiler
 
 #### Optional
@@ -22,13 +22,22 @@ Project has been tested with
 
 #### Setup
 
-1.  Install dependencies
 
+1.  Clone the ledger-live-desktop 
+
+- ```git clone https://github.com/LedgerHQ/ledger-live-desktop.git```
+- ```cd ledger-live-desktop```
+
+2. Install yarn and other dependencies
+
+- ```curl -o- -L https://yarnpkg.com/install.sh | bash ```
+
+3. Run yarn
 ```bash
 yarn
 ```
 
-2.  Create `.env` file
+4.  Create `.env` file
 
 ```bash
 # ENV VARIABLES
