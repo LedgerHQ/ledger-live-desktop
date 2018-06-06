@@ -96,7 +96,7 @@ export function serializeAccounts(accounts: any): Account[] {
   return accounts ? accounts.map(accountModel.decode) : []
 }
 
-export function deserializeAccounts(accounts: Account[]) {
+export function deserializeAccounts(accounts: Account[]): Array<any> {
   return accounts.map(account => {
     // as account can be passed by main process, the Date types
     // can be converted to string. we ensure here that we have real

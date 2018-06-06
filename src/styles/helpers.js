@@ -55,7 +55,7 @@ export const fontFace = ({
   }
 `
 
-export const multiline = (str: string) =>
+export const multiline = (str: string): React$Node[] =>
   str.split('\n').map(line => <p key={uniqueId()}>{line}</p>)
 
 export function getMarketColor({

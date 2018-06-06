@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import { storiesOf } from '@storybook/react'
 import { genAccount } from '@ledgerhq/live-common/lib/mock/account'
 
@@ -8,7 +9,7 @@ import { SelectAccount } from 'components/SelectAccount'
 
 const stories = storiesOf('Components', module)
 
-export const accounts = [...Array(20)].map((_, i) => genAccount(i))
+export const accounts: Account[] = [...Array(20)].map((_, i) => genAccount(i))
 
 class Wrapper extends Component<any, any> {
   state = {
