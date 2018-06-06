@@ -42,7 +42,7 @@ export type UpdateAccount = ($Shape<Account>) => *
 export const updateAccount: UpdateAccount = payload => ({
   type: 'DB:UPDATE_ACCOUNT',
   payload: {
-    updater: account => ({ ...account, ...payload }),
+    updater: (account: Account) => ({ ...account, ...payload }),
     accountId: payload.id,
   },
 })
