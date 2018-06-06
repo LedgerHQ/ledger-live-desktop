@@ -215,7 +215,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         xpub: '',
         freshAddress,
         freshAddressPath,
-        name: address.slice(32),
+        name: `Account ${index}`,
         balance,
         blockHeight: currentBlock.height,
         index,
