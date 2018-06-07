@@ -155,5 +155,6 @@
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.14",
     "yaml-loader": "^0.5.0"
-  }
+  },
+  "private": true
 }
