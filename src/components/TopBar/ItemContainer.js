@@ -2,19 +2,30 @@
 
 import styled from 'styled-components'
 
-import Box from 'components/base/Box'
+import { rgba } from 'styles/helpers'
 
-export default styled(Box).attrs({
-  px: 2,
+import { Tabbable } from 'components/base/Box'
+
+export default styled(Tabbable).attrs({
+  px: 3,
   ml: 0,
-  justifyContent: 'center',
-  cursor: p => (p.isInteractive ? 'pointer' : 'default'),
+  alignItems: 'center',
+  cursor: p => (p.isDisabled ? 'default' : 'pointer'),
+  horizontal: true,
 })`
-  opacity: 0.7;
+  min-height: 40px;
+  border: 1px dashed transparent;
+
   &:hover {
-    opacity: ${p => (p.isInteractive ? 0.85 : 0.7)};
+    color: ${p => (p.isDisabled ? '' : p.theme.colors.wallet)};
+    background: ${p => (p.isDisabled ? '' : rgba(p.theme.colors.wallet, 0.05))};
   }
+
   &:active {
-    opacity: ${p => (p.isInteractive ? 1 : 0.7)};
+    background: ${p => (p.isDisabled ? '' : rgba(p.theme.colors.wallet, 0.1))};
+  }
+
+  &:focus {
+    outline: none;
   }
 `
