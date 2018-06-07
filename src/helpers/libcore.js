@@ -10,6 +10,8 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 
 import * as accountIdHelper from 'helpers/accountId'
 
+import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
+
 type Props = {
   core: *,
   devicePath: string,
@@ -255,10 +257,14 @@ async function buildAccountRaw({
   const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
   const currency = getCryptoCurrencyById(currencyId)
 
-  let name = operations.length === 0 ? `New Account` : `Account ${accountIndex}`
-  if (currency.supportsSegwit && !isSegwit) {
-    name += ' (legacy)'
-  }
+  const name =
+    operations.length === 0
+      ? getNewAccountPlaceholderName(currency, accountIndex)
+      : getAccountPlaceholderName(
+          currency,
+          accountIndex,
+          (currency.supportsSegwit && !isSegwit) || false,
+        )
 
   const rawAccount: AccountRaw = {
     id: accountIdHelper.encode({

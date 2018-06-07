@@ -12,6 +12,7 @@ import type { Tx } from 'api/Ethereum'
 import { getDerivations } from 'helpers/derivations'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
+import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
 import type { EditProps, WalletBridge } from './types'
 
 // TODO in future it would be neat to support eip55
@@ -192,7 +193,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
               xpub: '',
               freshAddress,
               freshAddressPath,
-              name: 'New Account',
+              name: getNewAccountPlaceholderName(currency, index),
               balance,
               blockHeight: currentBlock.height,
               index,
@@ -215,7 +216,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         xpub: '',
         freshAddress,
         freshAddressPath,
-        name: `Account ${index}`,
+        name: getAccountPlaceholderName(currency, index, !isStandard),
         balance,
         blockHeight: currentBlock.height,
         index,
