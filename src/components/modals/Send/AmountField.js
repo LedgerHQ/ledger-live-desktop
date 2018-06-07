@@ -30,8 +30,13 @@ class AmountField extends Component<*, { canBeSpent: boolean }> {
     this.setState({ canBeSpent })
   }
 
+  onChange = (amount: number) => {
+    const { bridge, account, transaction, onChangeTransaction } = this.props
+    onChangeTransaction(bridge.editTransactionAmount(account, transaction, amount))
+  }
+
   render() {
-    const { bridge, account, transaction, onChangeTransaction, t } = this.props
+    const { bridge, account, transaction, t } = this.props
     const { canBeSpent } = this.state
     return (
       <Box flow={1}>
@@ -40,9 +45,7 @@ class AmountField extends Component<*, { canBeSpent: boolean }> {
           withMax={false}
           account={account}
           canBeSpent={canBeSpent}
-          onChange={amount =>
-            onChangeTransaction(bridge.editTransactionAmount(account, transaction, amount))
-          }
+          onChange={this.onChange}
           value={bridge.getTransactionAmount(account, transaction)}
         />
       </Box>
