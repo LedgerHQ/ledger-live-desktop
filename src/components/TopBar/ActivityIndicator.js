@@ -20,39 +20,48 @@ import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconCheckCircle from 'icons/CheckCircle'
 import ItemContainer from './ItemContainer'
 
-const DISPLAY_SUCCESS_TIME = 2 * 1000
-
 const mapStateToProps = createStructuredSelector({ globalSyncState: globalSyncStateSelector })
 
-type Props = { isPending: boolean, isError: boolean, onClick: void => void, t: T }
-type State = { hasClicked: boolean, displaySuccess: boolean }
+type Props = {
+  // FIXME: eslint should see that it is used in static method
+  isGlobalSyncStatePending: boolean, // eslint-disable-line react/no-unused-prop-types
+
+  isPending: boolean,
+  isError: boolean,
+  onClick: void => void,
+  t: T,
+}
+
+type State = {
+  hasClicked: boolean,
+  isGlobalSyncStatePending: boolean,
+  isFirstSync: boolean,
+}
 
 class ActivityIndicatorInner extends Component<Props, State> {
   state = {
     hasClicked: false,
-    displaySuccess: false,
-  }
+    isFirstSync: true,
 
-  _timeout = null
+    // FIXME: eslint should see that it is used in static method
+    isGlobalSyncStatePending: false, // eslint-disable-line react/no-unused-state
+  }
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    if (prevState.hasClicked && !nextProps.isPending) {
-      return { hasClicked: false, displaySuccess: !nextProps.isError }
+    const nextState = {
+      ...prevState,
+      isGlobalSyncStatePending: nextProps.isGlobalSyncStatePending,
     }
 
-    return null
-  }
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    if (!prevState.displaySuccess && this.state.displaySuccess) {
-      if (this._timeout) {
-        clearTimeout(this._timeout)
-      }
-      this._timeout = setTimeout(
-        () => this.setState({ displaySuccess: false }),
-        DISPLAY_SUCCESS_TIME,
-      )
+    if (prevState.hasClicked && !nextProps.isGlobalSyncStatePending) {
+      nextState.hasClicked = false
     }
+
+    if (prevState.isGlobalSyncStatePending && !nextProps.isGlobalSyncStatePending) {
+      nextState.isFirstSync = false
+    }
+
+    return nextState
   }
 
   handleRefresh = () => {
@@ -63,51 +72,51 @@ class ActivityIndicatorInner extends Component<Props, State> {
 
   render() {
     const { isPending, isError, t } = this.props
-    const { hasClicked, displaySuccess } = this.state
-    const isDisabled = hasClicked || displaySuccess || isError
+    const { hasClicked, isFirstSync } = this.state
+    const isDisabled = hasClicked || isError
+    const isRotating = isPending && (hasClicked || isFirstSync)
+
     return (
       <ItemContainer isDisabled={isDisabled} onClick={isDisabled ? undefined : this.handleRefresh}>
         <Rotating
           size={16}
-          isRotating={isPending && hasClicked}
-          color={isError ? 'alertRed' : displaySuccess ? 'positiveGreen' : undefined}
+          isRotating={isRotating}
+          color={isError ? 'alertRed' : isRotating ? undefined : 'positiveGreen'}
         >
           {isError ? (
             <IconExclamationCircle size={16} />
-          ) : displaySuccess ? (
-            <IconCheckCircle size={16} />
-          ) : (
+          ) : isRotating ? (
             <IconRefresh size={16} />
+          ) : (
+            <IconCheckCircle size={16} />
           )}
         </Rotating>
-        {(displaySuccess || isError || (isPending && hasClicked)) && (
-          <Box
-            ml={2}
-            ff="Open Sans|SemiBold"
-            color={isError ? 'alertRed' : undefined}
-            fontSize={4}
-            horizontal
-            align="center"
-          >
-            {displaySuccess ? (
-              t('common:sync.upToDate')
-            ) : isError ? (
-              <Fragment>
-                <Box>{t('common:sync.error')}</Box>
-                <Box
-                  ml={2}
-                  cursor="pointer"
-                  style={{ textDecoration: 'underline', pointerEvents: 'all' }}
-                  onClick={this.handleRefresh}
-                >
-                  {t('common:sync.refresh')}
-                </Box>
-              </Fragment>
-            ) : (
-              t('common:sync.syncing')
-            )}
-          </Box>
-        )}
+        <Box
+          ml={2}
+          ff="Open Sans|SemiBold"
+          color={isError ? 'alertRed' : undefined}
+          fontSize={4}
+          horizontal
+          align="center"
+        >
+          {isRotating ? (
+            t('common:sync.syncing')
+          ) : isError ? (
+            <Fragment>
+              <Box>{t('common:sync.error')}</Box>
+              <Box
+                ml={2}
+                cursor="pointer"
+                style={{ textDecoration: 'underline', pointerEvents: 'all' }}
+                onClick={this.handleRefresh}
+              >
+                {t('common:sync.refresh')}
+              </Box>
+            </Fragment>
+          ) : (
+            t('common:sync.upToDate')
+          )}
+        </Box>
       </ItemContainer>
     )
   }
@@ -124,6 +133,7 @@ const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState
             <ActivityIndicatorInner
               t={t}
               isPending={isPending}
+              isGlobalSyncStatePending={globalSyncState.pending}
               isError={!!isError && !isPending}
               onClick={() => {
                 cvPolling.poll()
