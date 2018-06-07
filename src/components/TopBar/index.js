@@ -10,7 +10,6 @@ import { withRouter } from 'react-router'
 import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
-import { rgba } from 'styles/helpers'
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
@@ -40,7 +39,7 @@ const Inner = styled(Box).attrs({
   grow: true,
   flow: 4,
 })`
-  border-bottom: 1px solid ${p => rgba(p.theme.colors.black, 0.15)};
+  border-bottom: 1px solid ${p => p.theme.colors.fog};
 `
 
 const Bar = styled.div`
@@ -121,6 +120,11 @@ class TopBar extends PureComponent<Props> {
   }
 }
 
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps), translate())(
-  TopBar,
-)
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(TopBar)

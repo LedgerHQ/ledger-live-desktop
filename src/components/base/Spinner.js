@@ -15,16 +15,17 @@ const rotate = keyframes`
   }
 `
 
-const Container = styled(Box)`
+export const Rotating = styled(Box)`
   width: ${p => p.size}px;
   height: ${p => p.size}px;
-  animation: ${rotate} 1.5s linear infinite;
+  animation: ${p => (p.isRotating === false ? 'none' : `${rotate} 1.5s linear infinite`)};
+  transition: 100ms linear transform;
 `
 
 export default function Spinner({ size, ...props }: { size: number }) {
   return (
-    <Container size={size} {...props}>
+    <Rotating size={size} {...props}>
       <IconLoader size={size} />
-    </Container>
+    </Rotating>
   )
 }

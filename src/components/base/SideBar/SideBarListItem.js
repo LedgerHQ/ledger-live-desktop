@@ -75,9 +75,9 @@ const Container = styled(Tabbable).attrs({
     opacity: ${p => (p.isActive ? 1 : 0.7)};
   }
 
-  border: 1px dashed rgba(0, 0, 0, 0);
+  border: 1px dashed transparent;
   &:focus {
-    border: 1px dashed rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2);
     outline: none;
   }
 
