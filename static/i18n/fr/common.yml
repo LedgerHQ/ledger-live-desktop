@@ -29,3 +29,8 @@ lockScreen:
   subTitle: Your application is locked
   description: Please enter your password to continue
   inputPlaceholder: Type your password
+sync:
+  syncing: Syncing...
+  upToDate: Up to date
+  error: Sync error.
+  refresh: Refresh
