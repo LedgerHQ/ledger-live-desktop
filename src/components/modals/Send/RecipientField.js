@@ -45,8 +45,21 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
     this.setState({ isValid })
   }
 
+  onChange = (recipient: string, maybeExtra: ?Object) => {
+    const { bridge, account, transaction, onChangeTransaction } = this.props
+    const { amount, currency } = maybeExtra || {}
+    if (currency && currency.scheme !== account.currency.scheme) return false
+    let t = transaction
+    if (amount) {
+      t = bridge.editTransactionAmount(account, t, amount)
+    }
+    t = bridge.editTransactionRecipient(account, t, recipient)
+    onChangeTransaction(t)
+    return true
+  }
+
   render() {
-    const { bridge, account, transaction, onChangeTransaction, t } = this.props
+    const { bridge, account, transaction, t } = this.props
     const { isValid } = this.state
     const value = bridge.getTransactionRecipient(account, transaction)
     return (
@@ -59,17 +72,7 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
           withQrCode
           error={!value || isValid ? null : `This is not a valid ${account.currency.name} address`}
           value={value}
-          onChange={(recipient, maybeExtra) => {
-            const { amount, currency } = maybeExtra || {}
-            if (currency && currency.scheme !== account.currency.scheme) return false
-            let t = transaction
-            if (amount) {
-              t = bridge.editTransactionAmount(account, t, amount)
-            }
-            t = bridge.editTransactionRecipient(account, t, recipient)
-            onChangeTransaction(t)
-            return true
-          }}
+          onChange={this.onChange}
         />
       </Box>
     )
