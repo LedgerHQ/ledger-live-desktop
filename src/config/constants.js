@@ -1,6 +1,6 @@
 // @flow
 
-export const SYNC_BOOT_DELAY = 5 * 1000
+export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_INTERVAL = 30 * 1000
 export const CHECK_APP_INTERVAL_WHEN_INVALID = 600
 export const CHECK_APP_INTERVAL_WHEN_VALID = 1200

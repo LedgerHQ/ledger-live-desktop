@@ -38,6 +38,7 @@ const Inner = styled(Box).attrs({
   horizontal: true,
   grow: true,
   flow: 4,
+  align: 'center',
 })`
   border-bottom: 1px solid ${p => p.theme.colors.fog};
 `
