@@ -16,6 +16,7 @@ import {
 } from 'api/Ripple'
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
+import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
 import type { WalletBridge, EditProps } from './types'
 
 type Transaction = {
@@ -279,7 +280,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               next({
                 id: accountId,
                 xpub: '',
-                name: 'New Account',
+                name: getNewAccountPlaceholderName(currency, index),
                 freshAddress,
                 freshAddressPath,
                 balance: 0,
@@ -310,7 +311,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
-              name: `Account ${index}`,
+              name: getAccountPlaceholderName(currency, index),
               freshAddress,
               freshAddressPath,
               balance,
