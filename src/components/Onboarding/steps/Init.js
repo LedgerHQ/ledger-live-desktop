@@ -27,7 +27,7 @@ class Init extends PureComponent<StepProps, *> {
     const optionCards = [
       {
         key: 'newDevice',
-        icon: <IconPlus size={16} />,
+        icon: <IconPlus size={20} />,
         title: t('onboarding:init.newDevice.title'),
         onClick: () => {
           nextStep()
@@ -36,7 +36,7 @@ class Init extends PureComponent<StepProps, *> {
       },
       {
         key: 'restoreDevice',
-        icon: <IconRecover size={16} />,
+        icon: <IconRecover size={20} />,
         title: t('onboarding:init.restoreDevice.title'),
         onClick: () => {
           nextStep()
@@ -45,7 +45,7 @@ class Init extends PureComponent<StepProps, *> {
       },
       {
         key: 'initializedDevice',
-        icon: <IconCheck size={16} />,
+        icon: <IconCheck size={20} />,
         title: t('onboarding:init.initializedDevice.title'),
         onClick: () => {
           nextStep()
@@ -54,7 +54,7 @@ class Init extends PureComponent<StepProps, *> {
       },
       {
         key: 'noDevice',
-        icon: <IconExternalLink size={16} />,
+        icon: <IconExternalLink size={20} />,
         title: t('onboarding:init.noDevice.title'),
         onClick: () => {
           shell.openExternal('https://www.ledger.fr/')
@@ -64,15 +64,15 @@ class Init extends PureComponent<StepProps, *> {
     ]
 
     return (
-      <Box sticky alignItems="center" justifyContent="center">
-        <Box align="center">
+      <Box sticky pt={130}>
+        <Box align="center" justifyContent="center">
           <Box color="wallet">
             <IconUser size={36} />
           </Box>
-          <Box p={4}>
+          <Box m={5} style={{ maxWidth: 480 }}>
             <Title>{t('onboarding:init.title')}</Title>
           </Box>
-          <Box mt={5} flow={5}>
+          <Box pt={4} flow={4}>
             {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
           </Box>
         </Box>
@@ -102,21 +102,25 @@ export function OptionFlowCard({ card }: { card: CardType }) {
       <Box justify="center" grow>
         <CardTitle>{title}</CardTitle>
       </Box>
-      <Box justify="center" mx={4} my={3}>
-        <IconChevronRight style={{ color: colors.grey }} size={22} />
+      <Box justify="center" mx={1} my={4}>
+        <IconChevronRight style={{ color: colors.grey }} size={16} />
       </Box>
     </InitCardContainer>
   )
 }
 
-const InitCardContainer = styled(Card).attrs({
+const InitCardContainer = styled(Box).attrs({
   p: 3,
   horizontal: true,
   borderRadius: '4px',
 })`
   border: 1px solid ${p => p.theme.colors.fog};
-  width: 550px;
+  width: 530px;
   height: 70px;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+  }
 `
 
 export const CardTitle = styled(Box).attrs({
@@ -126,12 +130,8 @@ export const CardTitle = styled(Box).attrs({
 })``
 
 const InitIconContainer = styled(Box).attrs({
-  mx: 4,
-  my: 3,
+  ml: 3,
+  mr: 4,
 })`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(100, 144, 241, 0.1);
   text-align: -webkit-center;
 `

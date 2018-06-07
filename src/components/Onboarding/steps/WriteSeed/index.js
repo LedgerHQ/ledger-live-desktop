@@ -16,8 +16,8 @@ export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
 
   return (
-    <Box sticky pt={170}>
-      <Box grow alignItems="center">
+    <Box sticky pt={50}>
+      <Box grow alignItems="center" justifyContent="center">
         {onboarding.flowType === 'restoreDevice' ? (
           <WriteSeedRestore />
         ) : onboarding.isLedgerNano ? (

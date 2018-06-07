@@ -295,8 +295,8 @@ const CardWrapper = styled(Card).attrs({
   flow: 2,
   justify: 'space-between',
 })`
-  height: 97px;
-  width: 620px;
+  width: 550px;
+  height: 70px;
   border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
