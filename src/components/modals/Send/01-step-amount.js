@@ -33,6 +33,33 @@ function StepAmount({
     <Box flow={4}>
       <AccountField t={t} onChange={onChangeAccount} value={account} />
 
+      {/* HACK HACK HACK WTF */}
+      <div hidden>
+        {account &&
+          bridge &&
+          transaction && (
+            <RecipientField
+              account={account}
+              bridge={bridge}
+              transaction={transaction}
+              onChangeTransaction={onChangeTransaction}
+              t={t}
+            />
+          )}
+        {account &&
+          bridge &&
+          transaction && (
+            <AmountField
+              account={account}
+              bridge={bridge}
+              transaction={transaction}
+              onChangeTransaction={onChangeTransaction}
+              t={t}
+            />
+          )}
+      </div>
+      {/* HACK HACK HACK WTF */}
+
       {account && bridge && transaction ? (
         <Fragment key={account.id}>
           <RecipientField
