@@ -19,7 +19,6 @@ import QRCode from 'components/base/QRCode'
 import IconCheck from 'icons/Check'
 import IconCopy from 'icons/Copy'
 import IconInfoCircle from 'icons/InfoCircle'
-import IconShare from 'icons/Share'
 import IconShield from 'icons/Shield'
 
 const Container = styled(Box).attrs({
@@ -64,6 +63,8 @@ const Label = styled(Box).attrs({
 `
 
 const Footer = styled(Box).attrs({
+  justify: 'center',
+  flow: 4,
   horizontal: true,
   mt: 4,
 })`
@@ -82,12 +83,16 @@ const FooterButtonWrapper = styled(Box).attrs({
   width: 55px;
 
   &:hover {
-    background-color: rgba(100, 144, 241, 0.1);
+    background-color: ${p => rgba(p.theme.colors.wallet, 0.1)};
     color: ${p => p.theme.colors.dark};
 
     svg {
       color: ${p => p.theme.colors.wallet};
     }
+  }
+
+  &:active {
+    background-color: ${p => rgba(p.theme.colors.wallet, 0.15)};
   }
 `
 
@@ -100,7 +105,7 @@ const FooterButton = ({
   label: string,
   onClick: Function,
 }) => (
-  <Box grow alignItems="center" justifyContent="center">
+  <Box alignItems="center" justifyContent="center">
     <FooterButtonWrapper onClick={onClick}>
       {icon}
       <Box fontSize={3} ff="Museo Sans|Bold" mt={1}>
@@ -203,16 +208,13 @@ class CurrentAddress extends PureComponent<Props> {
         )}
         {withFooter && (
           <Footer>
-            {withVerify && (
-              <FooterButton icon={<IconCheck size={16} />} label="Verify" onClick={onVerify} />
-            )}
+            <FooterButton icon={<IconCheck size={16} />} label="Verify" onClick={onVerify} />
             <CopyToClipboard
               data={address}
               render={copy => (
                 <FooterButton icon={<IconCopy size={16} />} label="Copy" onClick={copy} />
               )}
             />
-            <FooterButton icon={<IconShare size={16} />} label="Share" onClick={onShare} />
           </Footer>
         )}
       </Container>

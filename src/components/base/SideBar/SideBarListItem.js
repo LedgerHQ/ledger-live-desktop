@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import Box, { Tabbable } from 'components/base/Box'
+import { rgba } from 'styles/helpers'
 
 export type Item = {
   value: string,
@@ -62,29 +63,27 @@ const Container = styled(Tabbable).attrs({
   py: 2,
 })`
   cursor: ${p => (p.isActive ? 'default' : 'pointer')};
-  color: ${p => p.theme.colors.dark};
+  color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
   background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
-
-  opacity: ${p => (p.isActive ? 1 : 0.4)};
 
   &:active {
     background: ${p => p.theme.colors.lightGrey};
   }
 
   &:hover {
-    opacity: ${p => (p.isActive ? 1 : 0.7)};
+    color: ${p => p.theme.colors.dark};
   }
 
-  border: 1px dashed transparent;
+  border: 1px solid transparent;
   &:focus {
-    border-color: rgba(0, 0, 0, 0.2);
     outline: none;
+    border-color: ${p => rgba(p.theme.colors.wallet, 0.3)};
   }
 
   ${p => {
     const iconActiveColor = p.theme.colors[p.iconActiveColor] || p.iconActiveColor
     return `
-      svg { color: ${p.isActive ? iconActiveColor : ''}; }
+      svg { color: ${p.isActive ? iconActiveColor : p.theme.colors.grey}; }
       &:hover svg { color: ${iconActiveColor}; }
     `
   }};

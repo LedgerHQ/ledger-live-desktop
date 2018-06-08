@@ -13,6 +13,7 @@ import {
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 
+import Box from 'components/base/Box'
 import ExchangeSelect from 'components/SelectExchange'
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
@@ -152,29 +153,30 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('settings:display.counterValue')}
             desc={t('settings:display.counterValueDesc')}
           >
-            <Select
-              small
-              minWidth={250}
-              onChange={this.handleChangeCounterValue}
-              itemToString={item => (item ? item.name : '')}
-              renderSelected={item => item && item.name}
-              options={fiats}
-              value={cvOption}
-            />
+            <Box horizontal flow={2}>
+              <Select
+                small
+                minWidth={250}
+                onChange={this.handleChangeCounterValue}
+                itemToString={item => (item ? item.name : '')}
+                renderSelected={item => item && item.name}
+                options={fiats}
+                value={cvOption}
+              />
+              <ExchangeSelect
+                small
+                from={intermediaryCurrency}
+                to={counterValueCurrency}
+                exchangeId={counterValueExchange}
+                onChange={this.handleChangeExchange}
+                minWidth={150}
+              />
+            </Box>
           </Row>
           <Row
             title={`Exchange (${intermediaryCurrency.ticker}${counterValueCurrency.ticker})`}
             desc="The exchange to use for countervalue conversion"
-          >
-            <ExchangeSelect
-              small
-              from={intermediaryCurrency}
-              to={counterValueCurrency}
-              exchangeId={counterValueExchange}
-              onChange={this.handleChangeExchange}
-              minWidth={200}
-            />
-          </Row>
+          />
           <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
             <Select
               small

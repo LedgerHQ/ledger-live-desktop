@@ -90,7 +90,6 @@ const Cell = styled(Box).attrs({
 type Props = {
   account: Account,
   currencySettings: CurrencySettings,
-  onAccountClick: (account: Account) => void,
   onOperationClick: ({ operation: Operation, account: Account, marketColor: string }) => void,
   marketIndicator: string,
   t: T,
@@ -100,7 +99,6 @@ type Props = {
 
 class OperationComponent extends PureComponent<Props> {
   static defaultProps = {
-    onAccountClick: noop,
     onOperationClick: noop,
     withAccount: false,
   }
@@ -109,7 +107,6 @@ class OperationComponent extends PureComponent<Props> {
     const {
       account,
       currencySettings,
-      onAccountClick,
       onOperationClick,
       t,
       op,
@@ -164,10 +161,6 @@ class OperationComponent extends PureComponent<Props> {
               horizontal
               flow={2}
               style={{ cursor: 'pointer' }}
-              onClick={e => {
-                e.stopPropagation()
-                onAccountClick(account)
-              }}
             >
               <Box
                 alignItems="center"

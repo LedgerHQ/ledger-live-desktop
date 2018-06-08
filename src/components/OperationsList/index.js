@@ -13,7 +13,6 @@ import {
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
-import noop from 'lodash/noop'
 import keyBy from 'lodash/keyBy'
 
 import type { T } from 'types/common'
@@ -62,7 +61,6 @@ type Props = {
   account: Account,
   accounts: Account[],
   canShowMore: boolean,
-  onAccountClick?: Function,
   openModal: Function,
   t: T,
   withAccount?: boolean,
@@ -78,7 +76,6 @@ const initialState = {
 }
 export class OperationsList extends PureComponent<Props, State> {
   static defaultProps = {
-    onAccountClick: noop,
     withAccount: false,
     canShowMore: false,
   }
@@ -93,7 +90,7 @@ export class OperationsList extends PureComponent<Props, State> {
   }
 
   render() {
-    const { account, accounts, canShowMore, onAccountClick, t, title, withAccount } = this.props
+    const { account, accounts, canShowMore, t, title, withAccount } = this.props
     const { nbToShow } = this.state
 
     const totalOperations = accounts
@@ -135,7 +132,6 @@ export class OperationsList extends PureComponent<Props, State> {
                       <Operation
                         account={account}
                         key={op.id}
-                        onAccountClick={onAccountClick}
                         onOperationClick={this.handleClickOperation}
                         op={op}
                         t={t}
