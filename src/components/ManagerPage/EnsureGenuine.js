@@ -1,36 +1,36 @@
 // @flow
-import React, { PureComponent, Fragment } from 'react'
-import { translate } from 'react-i18next'
+import { PureComponent } from 'react'
 import isEqual from 'lodash/isEqual'
 
 import type { Node } from 'react'
-import type { Device, T } from 'types/common'
+import type { Device } from 'types/common'
 
 import getIsGenuine from 'commands/getIsGenuine'
 
+type Error = {
+  message: string,
+  stack: string,
+}
+
 type Props = {
-  t: T,
-  device: Device,
-  children: Node,
+  device: ?Device,
+  children: (isGenuine: ?boolean, error: ?Error) => Node,
 }
 
 type State = {
-  genuine: boolean,
-  error: ?{
-    message: string,
-    stack: string,
-  },
+  genuine: ?boolean,
+  error: ?Error,
 }
 
 class EnsureGenuine extends PureComponent<Props, State> {
   static defaultProps = {
-    children: null,
+    children: () => null,
     firmwareInfo: null,
   }
 
   state = {
     error: null,
-    genuine: false,
+    genuine: null,
   }
 
   componentDidMount() {
@@ -68,19 +68,10 @@ class EnsureGenuine extends PureComponent<Props, State> {
 
   render() {
     const { error, genuine } = this.state
-    const { children, t } = this.props
+    const { children } = this.props
 
-    if (genuine) {
-      return children
-    }
-
-    return error ? (
-      <Fragment>
-        <span>{error.message}</span>
-        <span>{t('manager:errors.noGenuine')}</span>
-      </Fragment>
-    ) : null
+    return children(genuine, error)
   }
 }
 
-export default translate()(EnsureGenuine)
+export default EnsureGenuine

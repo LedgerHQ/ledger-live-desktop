@@ -10,6 +10,7 @@ import { getDevices } from 'reducers/devices'
 import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
 import isCurrencyAppOpened from 'commands/isCurrencyAppOpened'
+import isDashboardOpen from 'commands/isDashboardOpen'
 
 import { CHECK_APP_INTERVAL_WHEN_VALID, CHECK_APP_INTERVAL_WHEN_INVALID } from 'config/constants'
 
@@ -139,11 +140,11 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
           throw new Error(`${currency.name} app is not opened on the device`)
         }
       } else {
-        // TODO: real check if user is on the device dashboard
-        if (!deviceSelected) {
-          throw new Error('No device')
+        const isDashboard = isDashboardOpen.send({ devicePath: deviceSelected.path }).toPromise()
+
+        if (!isDashboard) {
+          throw new Error(`dashboard is not opened`)
         }
-        await sleep(1) // WTF
       }
 
       this.handleStatusChange(this.state.deviceStatus, 'success')

@@ -1,9 +1,9 @@
 // @flow
-import React, { PureComponent, Fragment } from 'react'
-import { translate } from 'react-i18next'
+import { PureComponent } from 'react'
 import isEqual from 'lodash/isEqual'
 
-import type { Device, T } from 'types/common'
+import type { Node } from 'react'
+import type { Device } from 'types/common'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 
@@ -14,18 +14,19 @@ type DeviceInfo = {
   mcu: boolean,
 }
 
+type Error = {
+  message: string,
+  stack: string,
+}
+
 type Props = {
-  t: T,
-  device: Device,
-  children: Function,
+  device: ?Device,
+  children: (deviceInfo: ?DeviceInfo, error: ?Error) => Node,
 }
 
 type State = {
   deviceInfo: ?DeviceInfo,
-  error: ?{
-    message: string,
-    stack: string,
-  },
+  error: ?Error,
 }
 
 class EnsureDashboard extends PureComponent<Props, State> {
@@ -74,19 +75,10 @@ class EnsureDashboard extends PureComponent<Props, State> {
 
   render() {
     const { deviceInfo, error } = this.state
-    const { children, t } = this.props
+    const { children } = this.props
 
-    if (deviceInfo) {
-      return children(deviceInfo)
-    }
-
-    return error ? (
-      <Fragment>
-        <span>{error.message}</span>
-        <span>{t('manager:erros:noDashboard')}</span>
-      </Fragment>
-    ) : null
+    return children(deviceInfo, error)
   }
 }
 
-export default translate()(EnsureDashboard)
+export default EnsureDashboard

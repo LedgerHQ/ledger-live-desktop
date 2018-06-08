@@ -6,27 +6,29 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
+import Trash from 'icons/Trash'
+
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 
 const Container = styled(Box).attrs({
-  align: 'center',
+  horizontal: true,
   m: 3,
   p: 4,
   boxShadow: 0,
+  borderRadius: 4,
   flow: 3,
 })`
-  width: 156px;
-  height: 186px;
+  width: 342px;
   background: white;
   line-height: normal;
 `
 
 const AppIcon = styled.img`
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 36px;
+  height: 36px;
 `
 
 const AppName = styled(Box).attrs({
@@ -36,7 +38,6 @@ const AppName = styled(Box).attrs({
 })`
   display: block;
   width: 115px;
-  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -48,16 +49,16 @@ type Props = {
   version: string,
   icon: string,
   onInstall: Function,
-  // onUninstall: Function,
+  onUninstall: Function,
 }
 
 function ManagerApp(props: Props) {
-  const { name, version, icon, onInstall, t } = props
+  const { name, version, icon, onInstall, onUninstall, t } = props
   const iconUrl = `https://api.ledgerwallet.com/update/assets/icons/${icon}`
   return (
     <Container>
       <AppIcon src={iconUrl} />
-      <Box align="center">
+      <Box flex="1">
         <AppName>{name}</AppName>
         <Text ff="Open Sans|Regular" fontSize={3} color="grey">
           {version}
@@ -65,6 +66,9 @@ function ManagerApp(props: Props) {
       </Box>
       <Button outline onClick={onInstall}>
         {t('manager:install')}
+      </Button>
+      <Button outline onClick={onUninstall} outlineColor="grey">
+        <Trash size={16} fill="grey" />
       </Button>
     </Container>
   )

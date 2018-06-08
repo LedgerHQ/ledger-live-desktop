@@ -37,12 +37,22 @@ const buttonStyles = {
   outline: {
     default: p => `
       background: transparent;
-      border: 1px solid ${p.theme.colors.wallet};
-      color: ${p.theme.colors.wallet};
+      border: 1px solid ${
+        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet
+      };
+      color: ${
+        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet
+      };
     `,
     active: p => `
-      color: ${darken(p.theme.colors.wallet, 0.1)};
-      border-color: ${darken(p.theme.colors.wallet, 0.1)};
+      color: ${darken(
+        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
+        0.1,
+      )};
+      border-color: ${darken(
+        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
+        0.1,
+      )};
     `,
   },
   outlineGrey: {

@@ -12,6 +12,7 @@ import installOsuFirmware from 'commands/installOsuFirmware'
 
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
+import Text from 'components/base/Text'
 
 let CACHED_LATEST_FIRMWARE = null
 
@@ -97,12 +98,11 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
     return (
       <Box flow={4} {...props}>
-        <Box color="dark" ff="Museo Sans" fontSize={6}>
-          {t('manager:firmwareUpdate')}
-        </Box>
         <Card flow={2} {...props}>
           <Box horizontal align="center" flow={2}>
-            <Box ff="Museo Sans">{`${t('manager:latestFirmware')}: ${latestFirmware.name}`}</Box>
+            <Text ff="Open Sans|Regular" fontSize={4}>{`${t('manager:latestFirmware')}: ${
+              latestFirmware.name
+            }`}</Text>
             <Button outline onClick={this.installFirmware(latestFirmware)}>
               {t('manager:install')}
             </Button>
