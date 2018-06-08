@@ -2,7 +2,6 @@
 
 import React, { Fragment, Component } from 'react'
 import { compose } from 'redux'
-import { ipcRenderer } from 'electron'
 import styled from 'styled-components'
 import { Route, withRouter } from 'react-router'
 import { translate } from 'react-i18next'
@@ -37,12 +36,6 @@ type Props = {
 class Default extends Component<Props> {
   componentDidMount() {
     window.requestAnimationFrame(() => (this._timeout = setTimeout(() => window.onAppReady(), 300)))
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (process.platform === 'darwin' && nextProps.location !== this.props.location) {
-      ipcRenderer.send('touch-bar-update', { clear: true })
-    }
   }
 
   componentDidUpdate(prevProps) {
