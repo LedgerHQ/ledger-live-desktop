@@ -2,14 +2,16 @@ tabs:
   apps: Apps
   device: My device
 install: Install
-allApps: All apps
+allApps: Apps
+title: Manager
+subtitle: Get all your apps here
 firmwareUpdate: Firmware update
-latestFirmware: Latest firmware
+latestFirmware: Firmware
 plugYourDevice:
   title: Plug your device
-  desc: Lorem Ipsum is simply dummy text of the printing and typesetting industry’s standard dummy text
+  desc: Please connect your Ledger device and follow the steps below to access the manager
   cta: Plug my device
 errors:
-  noDevice: Please make sur your device is connected
-  noDashboard: Please make sure your device is on the dashboard screen
-  noGenuine: You did not approve request on your device or your device is not genuine
+  noDevice: Please make sur your device is connected (TEMPLATE NEEDED)
+  noDashboard: Please make sure your device is on the dashboard screen (TEMPLATED NEEDED)
+  noGenuine: You did not approve request on your device or your device is not genuine (TEMPLATE NEEDED)

@@ -13,7 +13,7 @@ type Input = *
 type Result = *
 
 const cmd: Command<Input, Result> = createCommand('listApps', () =>
-  /* { targetId } */ fromPromise(listApps()),
+  /* { targetId } */ fromPromise(listApps(/* targetId */)),
 )
 
 export default cmd

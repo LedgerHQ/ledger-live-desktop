@@ -14,6 +14,7 @@ import Modal, { ModalBody } from 'components/base/Modal'
 import type { Device, T } from 'types/common'
 
 import ManagerApp from './ManagerApp'
+import AppSearchBar from './AppSearchBar'
 
 const List = styled(Box).attrs({
   horizontal: true,
@@ -72,7 +73,7 @@ class AppsList extends PureComponent<Props, State> {
 
   async fetchAppList() {
     try {
-      // const { targetId } = this.props
+      // const { targetId } = this.props // TODO: REUSE THIS WHEN SERVER IS UP
       const appsList = CACHED_APPS || (await listApps.send().toPromise())
       CACHED_APPS = appsList
       if (!this._unmounted) {
@@ -116,19 +117,25 @@ class AppsList extends PureComponent<Props, State> {
   handleCloseModal = () => this.setState({ status: 'idle' })
 
   renderList() {
-    const { status, error } = this.state
+    const { status, error, appsList } = this.state
     return (
-      <List>
-        {this.state.appsList.map(c => (
-          <ManagerApp
-            key={`${c.name}_${c.version}_${c.bolos_version.min}`}
-            name={c.name}
-            version={`Version ${c.version}`}
-            icon={ICONS_FALLBACK[c.icon] || c.icon}
-            onInstall={this.handleInstallApp(c)}
-            onUninstall={this.handleUninstallApp(c)}
-          />
-        ))}
+      <Box>
+        <AppSearchBar list={appsList}>
+          {items => (
+            <List>
+              {items.map(c => (
+                <ManagerApp
+                  key={`${c.name}_${c.version}_${c.bolos_version.min}`}
+                  name={c.name}
+                  version={`Version ${c.version}`}
+                  icon={ICONS_FALLBACK[c.icon] || c.icon}
+                  onInstall={this.handleInstallApp(c)}
+                  onUninstall={this.handleUninstallApp(c)}
+                />
+              ))}
+            </List>
+          )}
+        </AppSearchBar>
         <Modal
           isOpened={status !== 'idle' && status !== 'loading'}
           render={() => (
@@ -150,7 +157,7 @@ class AppsList extends PureComponent<Props, State> {
             </ModalBody>
           )}
         />
-      </List>
+      </Box>
     )
   }
 
@@ -159,7 +166,7 @@ class AppsList extends PureComponent<Props, State> {
     return (
       <Box flow={6}>
         <Box>
-          <Box mb={4} color="dark" ff="Museo Sans" fontSize={6}>
+          <Box mb={4} color="dark" ff="Museo Sans" fontSize={5}>
             {t('manager:allApps')}
           </Box>
           {this.renderList()}

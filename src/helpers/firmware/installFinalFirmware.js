@@ -4,17 +4,14 @@ import type Transport from '@ledgerhq/hw-transport'
 
 import { createSocketDialog, buildParamsFromFirmware } from 'helpers/common'
 
-type Input = {
-  firmware: Object,
-}
-
+type Input = Object
 type Result = *
 
 const buildOsuParams = buildParamsFromFirmware('final')
 
-export default async (transport: Transport<*>, data: Input): Result => {
+export default async (transport: Transport<*>, firmware: Input): Result => {
   try {
-    const osuData = buildOsuParams(data.firmware)
+    const osuData = buildOsuParams(firmware)
     await createSocketDialog(transport, '/update/install', osuData)
     return { success: true }
   } catch (err) {
