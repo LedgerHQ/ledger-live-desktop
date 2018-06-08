@@ -128,7 +128,7 @@
     "concurrently": "^3.5.1",
     "dotenv": "^5.0.1",
     "electron": "1.8.7",
-    "electron-builder": "^20.9.0",
+    "electron-builder": "20.14.7",
     "electron-devtools-installer": "^2.2.3",
     "electron-rebuild": "^1.7.3",
     "electron-webpack": "^2.1.0",
