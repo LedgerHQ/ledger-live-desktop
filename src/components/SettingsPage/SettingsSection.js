@@ -62,7 +62,7 @@ export function SettingsSectionHeader({
         <Box ff="Museo Sans|Regular" color="dark">
           {title}
         </Box>
-        <Box ff="Open Sans" fontSize={3}>
+        <Box ff="Open Sans" fontSize={3} mt={1}>
           {desc}
         </Box>
       </Box>
@@ -101,11 +101,11 @@ export function SettingsSectionRow({
 }) {
   return (
     <SettingsSectionRowContainer onClick={onClick}>
-      <Box grow>
+      <Box grow shrink>
         <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {title}
         </Box>
-        <Box ff="Open Sans" fontSize={3} color="grey">
+        <Box ff="Open Sans" fontSize={3} color="grey" mt={1} mr={1}>
           {desc}
         </Box>
       </Box>

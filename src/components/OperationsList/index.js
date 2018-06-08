@@ -13,7 +13,6 @@ import {
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
-import noop from 'lodash/noop'
 import keyBy from 'lodash/keyBy'
 
 import type { T } from 'types/common'

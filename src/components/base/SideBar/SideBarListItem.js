@@ -63,7 +63,7 @@ const Container = styled(Tabbable).attrs({
   py: 2,
 })`
   cursor: ${p => (p.isActive ? 'default' : 'pointer')};
-  color: ${p => p.theme.colors.smoke};
+  color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
   background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
 
   &:active {

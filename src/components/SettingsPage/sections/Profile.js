@@ -118,7 +118,7 @@ class TabProfile extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, settings } = this.props
+    const { t, settings, saveSettings } = this.props
     const {
       isSoftResetModalOpened,
       isHardResetModalOpened,
@@ -149,6 +149,21 @@ class TabProfile extends PureComponent<Props, State> {
             desc={t('settings:profile.developerModeDesc')}
           >
             <CheckBox isChecked={settings.developerMode} onChange={this.handleDeveloperMode} />
+          </Row>
+          <Row
+            title={t('settings:profile.reportErrors')}
+            desc={t('settings:profile.reportErrorsDesc')}
+          >
+            <CheckBox
+              isChecked={settings.sentryLogs}
+              onChange={sentryLogs => saveSettings({ sentryLogs })}
+            />
+          </Row>
+          <Row title={t('settings:profile.analytics')} desc={t('settings:profile.analyticsDesc')}>
+            <CheckBox
+              isChecked={settings.shareAnalytics}
+              onChange={shareAnalytics => saveSettings({ shareAnalytics })}
+            />
           </Row>
           <Row
             title={t('settings:profile.softResetTitle')}

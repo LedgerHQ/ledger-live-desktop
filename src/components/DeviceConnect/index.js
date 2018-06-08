@@ -202,7 +202,7 @@ class DeviceConnect extends PureComponent<Props> {
     const hasMultipleDevices = devices.length > 1
 
     return (
-      <Box flow={4}>
+      <Box flow={4} ff="Open Sans">
         <Step validated={hasDevice}>
           <StepContent>
             <StepIcon>
