@@ -160,4 +160,10 @@ export class OperationsList extends PureComponent<Props, State> {
   }
 }
 
-export default compose(translate(), connect(null, mapDispatchToProps))(OperationsList)
+export default compose(
+  translate(),
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+)(OperationsList)

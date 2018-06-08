@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
-import moment from 'moment'
 import noop from 'lodash/noop'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
@@ -17,10 +16,10 @@ import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'red
 import { rgba, getMarketColor } from 'styles/helpers'
 
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
 
+import OperationDate from './OperationDate'
 import ConfirmationCheck from './ConfirmationCheck'
 
 const mapStateToProps = createStructuredSelector({
@@ -79,19 +78,6 @@ const AddressEllipsis = styled.div`
   white-space: nowrap;
 `
 
-const Day = styled(Text).attrs({
-  color: 'dark',
-  fontSize: 3,
-  ff: 'Open Sans',
-})`
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-`
-
-const Hour = styled(Day).attrs({
-  color: 'grey',
-})``
-
 const Cell = styled(Box).attrs({
   px: 4,
   horizontal: true,
@@ -131,7 +117,6 @@ class OperationComponent extends PureComponent<Props> {
       marketIndicator,
     } = this.props
     const { unit, currency } = account
-    const time = moment(op.date)
     const Icon = getCryptoCurrencyIcon(account.currency)
     const amount = getOperationAmountNumber(op)
     const isNegative = amount < 0
@@ -149,7 +134,11 @@ class OperationComponent extends PureComponent<Props> {
     return (
       <OperationRow
         style={{ opacity: isOptimistic ? 0.5 : 1 }}
-        onClick={() => onOperationClick({ operation: op, account, marketColor })}
+        onClick={() => {
+          // FIXME why passing down marketColor !? we should retrieve from store / ..
+          // it should just be onOperationClick(operation)
+          onOperationClick({ operation: op, account, marketColor })
+        }}
       >
         <Cell size={CONFIRMATION_COL_SIZE} align="center" justify="flex-start">
           <ConfirmationCheck
@@ -164,7 +153,7 @@ class OperationComponent extends PureComponent<Props> {
             <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke">
               {t(`operationsList:${op.type}`)}
             </Box>
-            <Hour>{time.format('HH:mm')}</Hour>
+            <OperationDate date={op.date} />
           </Box>
         </Cell>
         {withAccount &&
@@ -208,7 +197,7 @@ class OperationComponent extends PureComponent<Props> {
             <CounterValue
               color="grey"
               fontSize={3}
-              date={time.toDate()}
+              date={op.date}
               currency={currency}
               value={amount}
             />
