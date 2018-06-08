@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 
+import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
+
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T, Device } from 'types/common'
@@ -199,6 +201,7 @@ class ImportAccounts extends PureComponent<Props, State> {
         onHide={() => this.setState({ ...INITIAL_STATE })}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
+            <SyncSkipUnderPriority priority={100} />
             <ModalTitle onBack={onBack ? () => onBack(stepProps) : void 0}>
               {t('importAccounts:title')}
             </ModalTitle>
@@ -218,7 +221,13 @@ class ImportAccounts extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(ImportAccounts)
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(ImportAccounts)
 
 function idleCallback() {
   return new Promise(resolve => window.requestIdleCallback(resolve))

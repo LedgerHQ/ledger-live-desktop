@@ -268,69 +268,68 @@ const EthereumBridge: WalletBridge<Transaction> = {
     return { unsubscribe }
   },
 
-  synchronize({ freshAddress, blockHeight, currency, operations }, { next, complete, error }) {
-    let unsubscribed = false
-    const api = apiForCurrency(currency)
-    async function main() {
-      try {
-        const block = await fetchCurrentBlock(currency)
-        if (unsubscribed) return
-        if (block.height === blockHeight) {
-          complete()
-        } else {
-          const filterConfirmedOperations = o =>
-            o.blockHeight && blockHeight - o.blockHeight > SAFE_REORG_THRESHOLD
+  synchronize: ({ freshAddress, blockHeight, currency, operations }) =>
+    Observable.create(o => {
+      let unsubscribed = false
+      const api = apiForCurrency(currency)
+      async function main() {
+        try {
+          const block = await fetchCurrentBlock(currency)
+          if (unsubscribed) return
+          if (block.height === blockHeight) {
+            o.complete()
+          } else {
+            const filterConfirmedOperations = o =>
+              o.blockHeight && blockHeight - o.blockHeight > SAFE_REORG_THRESHOLD
 
-          operations = operations.filter(filterConfirmedOperations)
-          const blockHash = operations.length > 0 ? operations[0].blockHash : undefined
-          const { txs } = await api.getTransactions(freshAddress, blockHash)
-          if (unsubscribed) return
-          if (txs.length === 0) {
-            next(a => ({
-              ...a,
-              blockHeight: block.height,
-              lastSyncDate: new Date(),
-            }))
-            complete()
-            return
-          }
-          const balance = await api.getAccountBalance(freshAddress)
-          if (unsubscribed) return
-          const nonce = await api.getAccountNonce(freshAddress)
-          if (unsubscribed) return
-          next(a => {
-            const currentOps = a.operations.filter(filterConfirmedOperations)
-            const newOps = flatMap(txs, txToOps(a))
-            const operations = mergeOps(currentOps, newOps)
-            const pendingOperations = a.pendingOperations.filter(
-              o =>
-                o.transactionSequenceNumber &&
-                o.transactionSequenceNumber >= nonce &&
-                !operations.some(op => o.hash === op.hash),
-            )
-            return {
-              ...a,
-              pendingOperations,
-              operations,
-              balance,
-              blockHeight: block.height,
-              lastSyncDate: new Date(),
+            operations = operations.filter(filterConfirmedOperations)
+            const blockHash = operations.length > 0 ? operations[0].blockHash : undefined
+            const { txs } = await api.getTransactions(freshAddress, blockHash)
+            if (unsubscribed) return
+            if (txs.length === 0) {
+              o.next(a => ({
+                ...a,
+                blockHeight: block.height,
+                lastSyncDate: new Date(),
+              }))
+              o.complete()
+              return
             }
-          })
-          complete()
+            const balance = await api.getAccountBalance(freshAddress)
+            if (unsubscribed) return
+            const nonce = await api.getAccountNonce(freshAddress)
+            if (unsubscribed) return
+            o.next(a => {
+              const currentOps = a.operations.filter(filterConfirmedOperations)
+              const newOps = flatMap(txs, txToOps(a))
+              const operations = mergeOps(currentOps, newOps)
+              const pendingOperations = a.pendingOperations.filter(
+                o =>
+                  o.transactionSequenceNumber &&
+                  o.transactionSequenceNumber >= nonce &&
+                  !operations.some(op => o.hash === op.hash),
+              )
+              return {
+                ...a,
+                pendingOperations,
+                operations,
+                balance,
+                blockHeight: block.height,
+                lastSyncDate: new Date(),
+              }
+            })
+            o.complete()
+          }
+        } catch (e) {
+          o.error(e)
         }
-      } catch (e) {
-        error(e)
       }
-    }
-    main()
+      main()
 
-    return {
-      unsubscribe() {
+      return () => {
         unsubscribed = true
-      },
-    }
-  },
+      }
+    }),
 
   pullMoreOperations: () => Promise.resolve(a => a), // NOT IMPLEMENTED
 
@@ -359,10 +358,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
-  // $FlowFixMe
   EditFees,
 
-  // $FlowFixMe
   EditAdvancedOptions,
 
   canBeSpent: (a, t) => Promise.resolve(t.amount <= a.balance),

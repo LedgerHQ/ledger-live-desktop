@@ -16,11 +16,15 @@ import { getBridgeForCurrency } from 'bridge'
 import { accountsSelector } from 'reducers/accounts'
 import { updateAccountWithUpdater } from 'actions/accounts'
 
+import PollCounterValuesOnMount from 'components/PollCounterValuesOnMount'
+
 import Breadcrumb from 'components/Breadcrumb'
 import { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
 import PrevButton from 'components/modals/PrevButton'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
 import ChildSwitch from 'components/base/ChildSwitch'
+import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
+import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
 
 import Footer from './Footer'
 import ConfirmationFooter from './ConfirmationFooter'
@@ -271,6 +275,10 @@ class SendModalBody extends PureComponent<Props, State<*>> {
 
     return (
       <ModalBody onClose={onClose}>
+        <PollCounterValuesOnMount />
+        <SyncSkipUnderPriority priority={80} />
+        {account && <SyncOneAccountOnMount priority={81} accountId={account.id} />}
+
         <ModalTitle>
           {canPrev && <PrevButton onClick={this.onPrevStep} />}
           {t('send:title')}

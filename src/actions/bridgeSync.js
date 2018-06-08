@@ -6,9 +6,3 @@ export const setAccountSyncState = (accountId: string, state: AsyncState) => ({
   accountId,
   state,
 })
-
-export const setAccountPullMoreState = (accountId: string, state: AsyncState) => ({
-  type: 'SET_ACCOUNT_PULL_MORE_STATE',
-  accountId,
-  state,
-})

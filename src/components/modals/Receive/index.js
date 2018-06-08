@@ -9,6 +9,8 @@ import type { T, Device } from 'types/common'
 import { MODAL_RECEIVE } from 'config/constants'
 
 import getAddress from 'commands/getAddress'
+import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
+import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
 
 import Box from 'components/base/Box'
 import Breadcrumb from 'components/Breadcrumb'
@@ -300,7 +302,7 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { stepsErrors, stepsDisabled, stepIndex } = this.state
+    const { stepsErrors, stepsDisabled, stepIndex, account } = this.state
 
     const canClose = this.canClose()
     const canPrev = this.canPrev()
@@ -313,6 +315,8 @@ class ReceiveModal extends PureComponent<Props, State> {
         preventBackdropClick={!canClose}
         render={({ onClose }) => (
           <ModalBody onClose={canClose ? onClose : undefined}>
+            <SyncSkipUnderPriority priority={9} />
+            {account && <SyncOneAccountOnMount priority={10} accountId={account.id} />}
             <ModalTitle>
               {canPrev && <PrevButton onClick={this.handlePrevStep} />}
               {t('receive:title')}

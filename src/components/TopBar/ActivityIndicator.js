@@ -124,7 +124,7 @@ class ActivityIndicatorInner extends Component<Props, State> {
 
 const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState, t: T }) => (
   <BridgeSyncConsumer>
-    {bridgeSync => (
+    {setSyncBehavior => (
       <CounterValues.PollingConsumer>
         {cvPolling => {
           const isPending = cvPolling.pending || globalSyncState.pending
@@ -137,7 +137,7 @@ const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState
               isError={!!isError && !isPending}
               onClick={() => {
                 cvPolling.poll()
-                bridgeSync.syncAll()
+                setSyncBehavior({ type: 'SYNC_ALL_ACCOUNTS', priority: 5 })
               }}
             />
           )

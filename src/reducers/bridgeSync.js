@@ -12,12 +12,10 @@ export type AsyncState = {
 
 export type BridgeSyncState = {
   syncs: { [accountId: string]: AsyncState },
-  pullMores: { [accountId: string]: AsyncState },
 }
 
-const state: BridgeSyncState = {
+const initialState: BridgeSyncState = {
   syncs: {},
-  pullMores: {},
 }
 
 const handlers: Object = {
@@ -33,16 +31,6 @@ const handlers: Object = {
       [action.accountId]: action.state,
     },
   }),
-
-  SET_ACCOUNT_PULL_MORE_STATE: (
-    state: BridgeSyncState,
-    action: { accountId: string, state: AsyncState },
-  ) => ({
-    pullMores: {
-      ...state.pullMores,
-      [action.accountId]: action.state,
-    },
-  }),
 }
 
 // Selectors
@@ -55,11 +43,6 @@ export const syncStateLocalSelector = (
   bridgeSync: BridgeSyncState,
   { accountId }: { accountId: string },
 ) => bridgeSync.syncs[accountId] || nothingState
-
-export const pullMoreStateLocalSelector = (
-  bridgeSync: BridgeSyncState,
-  { accountId }: { accountId: string },
-) => bridgeSync.pullMores[accountId] || nothingState
 
 export const globalSyncStateSelector = createSelector(
   accountsSelector,
@@ -78,4 +61,4 @@ export const globalSyncStateSelector = createSelector(
   },
 )
 
-export default handleActions(handlers, state)
+export default handleActions(handlers, initialState)

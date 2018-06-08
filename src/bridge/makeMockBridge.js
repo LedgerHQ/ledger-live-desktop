@@ -43,38 +43,37 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
   const syncTimeouts = {}
 
   return {
-    synchronize(initialAccount, { error, next, complete }) {
-      const accountId = initialAccount.id
-      if (syncTimeouts[accountId]) {
-        // this is just for tests. we'll assume impl don't need to handle race condition on this function.
-        logger.warn('synchronize was called multiple pending time for same accounts!!!')
-      }
-      syncTimeouts[accountId] = setTimeout(() => {
-        if (Math.random() < syncSuccessRate) {
-          const ops = broadcasted[accountId] || []
-          broadcasted[accountId] = []
-          next(account => {
-            account = { ...account }
-            account.blockHeight++
-            for (const op of ops) {
-              account.balance += getOperationAmountNumber(op)
-            }
-            return account
-          })
-          complete()
-        } else {
-          error(new Error('Sync Failed'))
+    synchronize: initialAccount =>
+      Observable.create(o => {
+        const accountId = initialAccount.id
+        if (syncTimeouts[accountId]) {
+          // this is just for tests. we'll assume impl don't need to handle race condition on this function.
+          logger.warn('synchronize was called multiple pending time for same accounts!!!')
         }
-        syncTimeouts[accountId] = null
-      }, 20000)
+        syncTimeouts[accountId] = setTimeout(() => {
+          if (Math.random() < syncSuccessRate) {
+            const ops = broadcasted[accountId] || []
+            broadcasted[accountId] = []
+            o.next(account => {
+              account = { ...account }
+              account.blockHeight++
+              for (const op of ops) {
+                account.balance += getOperationAmountNumber(op)
+              }
+              return account
+            })
+            o.complete()
+          } else {
+            o.error(new Error('Sync Failed'))
+          }
+          syncTimeouts[accountId] = null
+        }, 20000)
 
-      return {
-        unsubscribe() {
+        return () => {
           clearTimeout(syncTimeouts[accountId])
           syncTimeouts[accountId] = null
-        },
-      }
-    },
+        }
+      }),
 
     scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
       let unsubscribed = false
