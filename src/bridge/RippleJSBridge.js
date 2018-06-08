@@ -340,85 +340,86 @@ const RippleJSBridge: WalletBridge<Transaction> = {
     return { unsubscribe }
   },
 
-  synchronize({ currency, freshAddress, blockHeight }, { next, error, complete }) {
-    let finished = false
-    const unsubscribe = () => {
-      finished = true
-    }
-
-    async function main() {
-      const api = apiForCurrency(currency)
-      try {
-        await api.connect()
-        if (finished) return
-        const serverInfo = await getServerInfo(currency)
-        if (finished) return
-        const ledgers = serverInfo.completeLedgers.split('-')
-        const minLedgerVersion = Number(ledgers[0])
-        const maxLedgerVersion = Number(ledgers[1])
-
-        let info
-        try {
-          info = await api.getAccountInfo(freshAddress)
-        } catch (e) {
-          if (e.message !== 'actNotFound') {
-            throw e
-          }
-        }
-        if (finished) return
-
-        if (!info) {
-          // account does not exist, we have nothing to sync
-          complete()
-          return
-        }
-
-        const balance = parseAPIValue(info.xrpBalance)
-        if (isNaN(balance) || !isFinite(balance)) {
-          throw new Error(`Ripple: invalid balance=${balance} for address ${freshAddress}`)
-        }
-
-        next(a => ({ ...a, balance }))
-
-        const transactions = await api.getTransactions(freshAddress, {
-          minLedgerVersion: Math.max(blockHeight, minLedgerVersion),
-          maxLedgerVersion,
-        })
-
-        if (finished) return
-
-        next(a => {
-          const newOps = transactions.map(txToOperation(a))
-          const operations = mergeOps(a.operations, newOps)
-          const [last] = operations
-          const pendingOperations = a.pendingOperations.filter(
-            o =>
-              last &&
-              last.transactionSequenceNumber &&
-              o.transactionSequenceNumber &&
-              o.transactionSequenceNumber > last.transactionSequenceNumber,
-          )
-          return {
-            ...a,
-            operations,
-            pendingOperations,
-            blockHeight: maxLedgerVersion,
-            lastSyncDate: new Date(),
-          }
-        })
-
-        complete()
-      } catch (e) {
-        error(e)
-      } finally {
-        api.disconnect()
+  synchronize: ({ currency, freshAddress, blockHeight }) =>
+    Observable.create(o => {
+      let finished = false
+      const unsubscribe = () => {
+        finished = true
       }
-    }
 
-    main()
+      async function main() {
+        const api = apiForCurrency(currency)
+        try {
+          await api.connect()
+          if (finished) return
+          const serverInfo = await getServerInfo(currency)
+          if (finished) return
+          const ledgers = serverInfo.completeLedgers.split('-')
+          const minLedgerVersion = Number(ledgers[0])
+          const maxLedgerVersion = Number(ledgers[1])
 
-    return { unsubscribe }
-  },
+          let info
+          try {
+            info = await api.getAccountInfo(freshAddress)
+          } catch (e) {
+            if (e.message !== 'actNotFound') {
+              throw e
+            }
+          }
+          if (finished) return
+
+          if (!info) {
+            // account does not exist, we have nothing to sync
+            o.complete()
+            return
+          }
+
+          const balance = parseAPIValue(info.xrpBalance)
+          if (isNaN(balance) || !isFinite(balance)) {
+            throw new Error(`Ripple: invalid balance=${balance} for address ${freshAddress}`)
+          }
+
+          o.next(a => ({ ...a, balance }))
+
+          const transactions = await api.getTransactions(freshAddress, {
+            minLedgerVersion: Math.max(blockHeight, minLedgerVersion),
+            maxLedgerVersion,
+          })
+
+          if (finished) return
+
+          o.next(a => {
+            const newOps = transactions.map(txToOperation(a))
+            const operations = mergeOps(a.operations, newOps)
+            const [last] = operations
+            const pendingOperations = a.pendingOperations.filter(
+              o =>
+                last &&
+                last.transactionSequenceNumber &&
+                o.transactionSequenceNumber &&
+                o.transactionSequenceNumber > last.transactionSequenceNumber,
+            )
+            return {
+              ...a,
+              operations,
+              pendingOperations,
+              blockHeight: maxLedgerVersion,
+              lastSyncDate: new Date(),
+            }
+          })
+
+          o.complete()
+        } catch (e) {
+          o.error(e)
+        } finally {
+          api.disconnect()
+        }
+      }
+
+      main()
+
+      return unsubscribe
+    }),
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 

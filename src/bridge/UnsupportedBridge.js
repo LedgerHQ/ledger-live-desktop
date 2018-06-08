@@ -5,10 +5,10 @@ import type { WalletBridge } from './types'
 const genericError = new Error('UnsupportedBridge')
 
 const UnsupportedBridge: WalletBridge<*> = {
-  synchronize(initialAccount, { error }) {
-    Promise.resolve(genericError).then(error)
-    return { unsubscribe() {} }
-  },
+  synchronize: () =>
+    Observable.create(o => {
+      o.error(genericError)
+    }),
 
   scanAccountsOnDevice(currency, deviceId, { error }) {
     Promise.resolve(genericError).then(error)

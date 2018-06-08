@@ -7,6 +7,7 @@ import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
 import styled from 'styled-components'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -97,6 +98,7 @@ class AccountPage extends PureComponent<Props, State> {
     return (
       // Force re-render account page, for avoid animation
       <Box key={account.id}>
+        <SyncOneAccountOnMount priority={10} accountId={account.id} />
         <Box horizontal mb={5}>
           <AccountHeader account={account} />
           <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>

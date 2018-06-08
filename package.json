@@ -43,6 +43,7 @@
     "@ledgerhq/hw-transport-node-hid": "^4.13.0",
     "@ledgerhq/ledger-core": "1.4.5",
     "@ledgerhq/live-common": "2.29.0",
+    "async": "^2.6.1",
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "bcryptjs": "^2.4.3",

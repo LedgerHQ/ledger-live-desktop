@@ -32,6 +32,7 @@ export interface WalletBridge<Transaction> {
   // observer is an Observer of Account object. Account are expected to be `archived` by default because we want to import all and opt-in on what account to use.
   // the scan can stop once all accounts are discovered.
   // the function returns a Subscription and you MUST stop everything if it is unsubscribed.
+  // TODO return Observable
   scanAccountsOnDevice(
     currency: Currency,
     deviceId: DeviceId,
@@ -46,7 +47,7 @@ export interface WalletBridge<Transaction> {
   // operations if there are new ones (prepended), balance, blockHeight, ...
   // the synchronize can stop once everything is up to date. it is the user side responsability to start it again.
   // we should be able to interrupt the Subscription but we'll leave this usecase for later. if you don't support interruption, please `console.warn`
-  synchronize(initialAccount: Account, observer: Observer<(Account) => Account>): Subscription;
+  synchronize(initialAccount: Account): Observable<(Account) => Account>;
 
   // for a given account, UI wants to load more operations in the account.operations
   // if you can't do it or there is no more things to load, just return account,
