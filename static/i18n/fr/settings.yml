@@ -52,6 +52,10 @@ profile:
   hardReset: Hard reset
   developerMode: Developer Mode
   developerModeDesc: Enable visibility of developer apps & currencies like Bitcoin Testnet
+  analytics: Share analytics
+  analyticsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+  reportErrors: Sentry Logs
+  reportErrorsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
 about:
   faq: FAQ
   faqDesc: Lorem ipsum dolor sit amet
