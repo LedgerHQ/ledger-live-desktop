@@ -19,6 +19,9 @@ jobs:
           name: Lint
           command: yarn lint
       - run:
+          name: Prettier
+          command: ./node_modules/.bin/prettier -l "{src,webpack,.storybook}/**/*.js"
+      - run:
           name: Flow
           command: yarn flow --quiet
       - run:
