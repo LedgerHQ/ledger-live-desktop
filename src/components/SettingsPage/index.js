@@ -130,4 +130,10 @@ class SettingsPage extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(SettingsPage)
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(SettingsPage)

@@ -54,4 +54,10 @@ class EmptyStateAccount extends PureComponent<Props, *> {
   }
 }
 
-export default compose(connect(null, mapDispatchToProps), translate())(EmptyStateAccount)
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(EmptyStateAccount)

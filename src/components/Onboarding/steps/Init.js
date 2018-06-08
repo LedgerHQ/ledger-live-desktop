@@ -81,7 +81,10 @@ class Init extends PureComponent<StepProps, *> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Init)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Init)
 
 type CardType = {
   icon: any,

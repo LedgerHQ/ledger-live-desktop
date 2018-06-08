@@ -90,4 +90,10 @@ class UpdateNotifier extends PureComponent<Props> {
   }
 }
 
-export default compose(connect(mapStateToProps, null), translate())(UpdateNotifier)
+export default compose(
+  connect(
+    mapStateToProps,
+    null,
+  ),
+  translate(),
+)(UpdateNotifier)

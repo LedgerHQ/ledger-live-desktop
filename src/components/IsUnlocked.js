@@ -169,8 +169,13 @@ class IsUnlocked extends Component<Props, State> {
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps, null, {
-    pure: false,
-  }),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    null,
+    {
+      pure: false,
+    },
+  ),
   translate(),
 )(IsUnlocked)

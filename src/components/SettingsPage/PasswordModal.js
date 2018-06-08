@@ -151,4 +151,7 @@ class PasswordModal extends PureComponent<Props, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(PasswordModal)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(PasswordModal)

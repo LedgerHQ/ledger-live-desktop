@@ -156,4 +156,10 @@ const Container = styled(Box).attrs({
 const StepContainer = styled(Box).attrs({
   p: 40,
 })``
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(Onboarding)
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(Onboarding)

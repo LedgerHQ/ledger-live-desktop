@@ -29,7 +29,7 @@ const Step = styled(Box).attrs({
 export default function MemInfos(props: { memoryInfos: MemoryInfos }) {
   const { memoryInfos: infos } = props
   const totalSize = infos.applicationsSize + infos.systemSize
-  const appPercent = infos.applicationsSize * 100 / totalSize
+  const appPercent = (infos.applicationsSize * 100) / totalSize
   return (
     <Container>
       <Step c="wallet" percent={appPercent}>{`${Math.round(

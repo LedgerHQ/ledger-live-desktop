@@ -204,4 +204,7 @@ export const ModalContent = styled(Box).attrs({
   pb: 5,
 })``
 
-export default connect(mapStateToProps, mapDispatchToProps)(Modal)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Modal)

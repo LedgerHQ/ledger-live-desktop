@@ -77,4 +77,10 @@ export const Description = styled(Box).attrs({
 })`
   margin: 10px auto 25px;
 `
-export default compose(connect(null, mapDispatchToProps), translate())(EmptyState)
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(EmptyState)

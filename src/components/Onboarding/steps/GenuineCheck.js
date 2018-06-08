@@ -204,7 +204,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(GenuineCheck)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(GenuineCheck)
 
 // TODO extract to a separate file
 export function GenuineCheckFail({
