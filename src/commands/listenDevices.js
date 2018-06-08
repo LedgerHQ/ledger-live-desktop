@@ -4,8 +4,7 @@ import logger from 'logger'
 import { createCommand } from 'helpers/ipc'
 import { Observable } from 'rxjs'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
-
-const DEBOUNCE_REMOVE_DEVICE_EVENT = 500
+import { DEVICE_DISCONNECT_DEBOUNCE } from 'config/constants'
 
 const cmd = createCommand('listenDevices', () =>
   Observable.create(o => {
@@ -35,7 +34,7 @@ const cmd = createCommand('listenDevices', () =>
             pendingRemovePerPath[e.descriptor] = setTimeout(() => {
               delete pendingRemovePerPath[e.descriptor]
               o.next(e)
-            }, DEBOUNCE_REMOVE_DEVICE_EVENT)
+            }, DEVICE_DISCONNECT_DEBOUNCE)
             break
           }
           default:
