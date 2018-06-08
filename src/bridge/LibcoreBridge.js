@@ -1,5 +1,4 @@
 // @flow
-import logger from 'logger'
 import React from 'react'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
@@ -101,7 +100,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       })()
       return {
         unsubscribe() {
-          logger.warn('LibcoreBridge: unsub sync not implemented')
+          // LibcoreBridge: unsub sync not currently implemented
         },
       }
     }),
