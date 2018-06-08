@@ -198,7 +198,13 @@ class HelperComp extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(null, mapDispatchToProps), translate())(HelperComp)
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(HelperComp)
 
 export function InputLeft({ currency }: { currency: Currency }) {
   return (

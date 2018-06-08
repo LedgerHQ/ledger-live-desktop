@@ -54,7 +54,7 @@ const Bar = styled.div`
   }
 `
 
-const indexToPurcent = (index, itemsLength) => 100 - 100 / (itemsLength - 1) * parseInt(index, 10)
+const indexToPurcent = (index, itemsLength) => 100 - (100 / (itemsLength - 1)) * parseInt(index, 10)
 
 type Props = {
   currentStep: number | string,

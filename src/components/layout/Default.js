@@ -101,4 +101,7 @@ class Default extends Component<Props> {
   }
 }
 
-export default compose(withRouter, translate())(Default)
+export default compose(
+  withRouter,
+  translate(),
+)(Default)

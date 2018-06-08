@@ -61,7 +61,10 @@ class SelectDevice extends PureComponent<StepProps, {}> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(SelectDevice)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(SelectDevice)
 
 const DeviceContainer = styled(Box).attrs({
   alignItems: 'center',

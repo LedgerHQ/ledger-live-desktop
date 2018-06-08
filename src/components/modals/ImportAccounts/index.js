@@ -218,7 +218,13 @@ class ImportAccounts extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(ImportAccounts)
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(ImportAccounts)
 
 function idleCallback() {
   return new Promise(resolve => window.requestIdleCallback(resolve))

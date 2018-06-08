@@ -15,7 +15,7 @@ export const currencySettingsDefaults = ({
 }: CryptoCurrency): ConfirmationDefaults => {
   let confirmationsNb
   if (blockAvgTime) {
-    const def = Math.ceil(30 * 60 / blockAvgTime) // 30 min approx validation
+    const def = Math.ceil((30 * 60) / blockAvgTime) // 30 min approx validation
     confirmationsNb = { min: 1, def, max: 2 * def }
   }
   return {

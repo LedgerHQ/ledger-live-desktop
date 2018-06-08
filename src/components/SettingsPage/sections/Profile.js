@@ -212,4 +212,7 @@ class TabProfile extends PureComponent<Props, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(TabProfile)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(TabProfile)

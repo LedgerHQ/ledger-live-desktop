@@ -99,7 +99,10 @@ class Analytics extends PureComponent<StepProps, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Analytics)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Analytics)
 
 export const AnalyticsText = styled(Box).attrs({
   ff: 'Open Sans|Regular',

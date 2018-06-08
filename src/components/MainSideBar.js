@@ -169,5 +169,12 @@ const PlusWrapper = styled(Tabbable).attrs({
   }
 `
 
-const decorate = compose(withRouter, translate(), connect(mapStateToProps, mapDispatchToProps))
+const decorate = compose(
+  withRouter,
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)
 export default decorate(MainSideBar)

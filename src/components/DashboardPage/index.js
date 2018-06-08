@@ -148,19 +148,21 @@ class DashboardPage extends PureComponent<Props, State> {
                   alignItems="center"
                   style={{ margin: '0 -16px' }}
                 >
-                  {accounts.concat(Array(3 - accounts.length % 3).fill(null)).map((account, i) => (
-                    <Box key={account ? account.id : `placeholder_${i}`} flex="33%" p={16}>
-                      {account ? (
-                        <AccountCard
-                          key={account.id}
-                          counterValue={counterValue}
-                          account={account}
-                          daysCount={daysCount}
-                          onClick={this.onAccountClick}
-                        />
-                      ) : null}
-                    </Box>
-                  ))}
+                  {accounts
+                    .concat(Array(3 - (accounts.length % 3)).fill(null))
+                    .map((account, i) => (
+                      <Box key={account ? account.id : `placeholder_${i}`} flex="33%" p={16}>
+                        {account ? (
+                          <AccountCard
+                            key={account.id}
+                            counterValue={counterValue}
+                            account={account}
+                            daysCount={daysCount}
+                            onClick={this.onAccountClick}
+                          />
+                        ) : null}
+                      </Box>
+                    ))}
                 </Box>
               </Box>
               {displayOperations && (
@@ -182,4 +184,10 @@ class DashboardPage extends PureComponent<Props, State> {
   }
 }
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), translate())(DashboardPage)
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(DashboardPage)

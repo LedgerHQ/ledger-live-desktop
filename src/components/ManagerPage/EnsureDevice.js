@@ -33,4 +33,7 @@ class EnsureDevice extends PureComponent<Props, State> {
   }
 }
 
-export default compose(translate(), connect(mapStateToProps))(EnsureDevice)
+export default compose(
+  translate(),
+  connect(mapStateToProps),
+)(EnsureDevice)

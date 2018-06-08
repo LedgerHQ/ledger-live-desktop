@@ -179,4 +179,7 @@ export class RequestAmount extends PureComponent<Props> {
   }
 }
 
-export default compose(connect(mapStateToProps), translate())(RequestAmount)
+export default compose(
+  connect(mapStateToProps),
+  translate(),
+)(RequestAmount)
