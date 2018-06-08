@@ -107,7 +107,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
         canClose: ({ error }) => !!error,
         canNext: () => true,
         canPrev: ({ error }) => !!error,
-        prevStep: 1,
+        prevStep: 0,
       },
       {
         label: t('send:steps.confirmation.title'),
