@@ -63,10 +63,8 @@ class SelectPINnano extends PureComponent<Props, *> {
     return (
       <Box align="center" mt={3}>
         <Inner style={{ width: 700 }}>
-          <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }} mt={5}>
-            <IconLedgerNanoSelectPIN />
-          </Box>
-          <Box shrink grow flow={4}>
+          <IconLedgerNanoSelectPIN />
+          <Box shrink grow flow={4} style={{ marginLeft: 40 }}>
             {stepsLedgerNano.map(step => <OptionRow key={step.key} step={step} />)}
           </Box>
         </Inner>

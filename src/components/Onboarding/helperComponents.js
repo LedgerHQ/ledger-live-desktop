@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { radii } from 'styles/theme'
 
 import Box from 'components/base/Box'
-import IconWarning from 'icons/Shield'
+import IconSensitiveOperationShield from 'icons/illustrations/SensitiveOperationShield'
 
 // GENERAL
 export const Title = styled(Box).attrs({
@@ -64,7 +64,7 @@ export const OptionRowDesc = styled(Box).attrs({
   textAlign: 'left',
   color: 'smoke',
   grow: true,
-  pl: 3,
+  pl: 2,
 })``
 
 export const IconOptionRow = styled(Box).attrs({
@@ -78,7 +78,7 @@ export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any 
     <DisclaimerBoxContainer {...p}>
       <Box m={3} relative>
         <DisclaimerBoxIconContainer>
-          <IconWarning />
+          <IconSensitiveOperationShield />
         </DisclaimerBoxIconContainer>
         {disclaimerNotes.map(note => <OptionRow key={note.key} step={note} />)}
       </Box>
@@ -92,7 +92,7 @@ const DisclaimerBoxContainer = styled(Box).attrs({
   borderRadius: '4px',
   bg: '#f9f9f980',
 })`
-  min-width: 680px;
+  min-width: 620px;
   border: 1px dashed ${p => p.theme.colors.fog};
 `
 const DisclaimerBoxIconContainer = styled(Box).attrs({

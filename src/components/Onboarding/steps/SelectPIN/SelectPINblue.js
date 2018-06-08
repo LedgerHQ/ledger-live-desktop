@@ -58,11 +58,11 @@ class SelectPIN extends PureComponent<Props, *> {
 
     return (
       <Box align="center">
-        <Inner style={{ width: 700 }}>
-          <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }} mt={2}>
+        <Inner style={{ width: 550 }}>
+          <Box style={{ width: 180, justifyContent: 'center', alignItems: 'center' }}>
             <IconLedgerBlueSelectPIN />
           </Box>
-          <Box mt={4}>
+          <Box>
             <Box shrink grow flow={4}>
               {stepsLedgerBlue.map(step => <OptionRow key={step.key} step={step} />)}
             </Box>

@@ -45,6 +45,17 @@ const buttonStyles = {
       border-color: ${darken(p.theme.colors.wallet, 0.1)};
     `,
   },
+  outlineGrey: {
+    default: p => `
+      background: transparent;
+      border: 1px solid ${p.theme.colors.grey};
+      color: ${p.theme.colors.grey};
+    `,
+    active: p => `
+      color: ${darken(p.theme.colors.grey, 0.1)};
+      border-color: ${darken(p.theme.colors.grey, 0.1)};
+    `,
+  },
   icon: {
     default: () => `
       font-size: ${fontSize[3]}px;

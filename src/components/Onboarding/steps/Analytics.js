@@ -45,41 +45,35 @@ class Analytics extends PureComponent<StepProps, State> {
     const { analyticsToggle, termsConditionsToggle, sentryLogsToggle } = this.state
 
     return (
-      <Box sticky pt={170}>
-        <Box grow alignItems="center">
+      <Box sticky pt={50}>
+        <Box grow alignItems="center" justifyContent="center">
           <Title>{t('onboarding:analytics.title')}</Title>
           <Description>{t('onboarding:analytics.desc')}</Description>
           <Box mt={5}>
             <Container>
-              <Box justify="center" style={{ width: 450 }}>
-                <Box horizontal>
-                  <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
-                </Box>
+              <Box>
+                <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
                 <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
               </Box>
-              <Box alignItems="center" horizontal mx={5}>
+              <Box justifyContent="center">
                 <CheckBox isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
               </Box>
             </Container>
             <Container>
-              <Box justify="center" style={{ width: 450 }}>
-                <Box horizontal>
-                  <AnalyticsTitle>{t('onboarding:analytics.shareAnalytics.title')}</AnalyticsTitle>
-                </Box>
+              <Box>
+                <AnalyticsTitle>{t('onboarding:analytics.shareAnalytics.title')}</AnalyticsTitle>
                 <AnalyticsText>{t('onboarding:analytics.shareAnalytics.desc')}</AnalyticsText>
               </Box>
-              <Box alignItems="center" horizontal mx={5}>
+              <Box justifyContent="center">
                 <CheckBox isChecked={analyticsToggle} onChange={this.handleAnalyticsToggle} />
               </Box>
             </Container>
             <Container>
-              <Box justify="center" style={{ width: 450 }}>
-                <Box horizontal>
-                  <AnalyticsTitle>{t('onboarding:analytics.termsConditions.title')}</AnalyticsTitle>
-                </Box>
+              <Box>
+                <AnalyticsTitle>{t('onboarding:analytics.termsConditions.title')}</AnalyticsTitle>
                 <AnalyticsText>{t('onboarding:analytics.termsConditions.desc')}</AnalyticsText>
               </Box>
-              <Box alignItems="center" horizontal mx={5}>
+              <Box justifyContent="center">
                 <CheckBox isChecked={termsConditionsToggle} onChange={this.handleTermsToggle} />
               </Box>
             </Container>
@@ -110,7 +104,7 @@ export const AnalyticsText = styled(Box).attrs({
   textAlign: 'left',
   color: 'smoke',
 })`
-  max-width: 450px;
+  max-width: 400px;
 `
 export const AnalyticsTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
@@ -122,4 +116,7 @@ export const AnalyticsTitle = styled(Box).attrs({
 const Container = styled(Box).attrs({
   horizontal: true,
   p: 3,
-})``
+})`
+  width: 550px;
+  justify-content: space-between;
+`

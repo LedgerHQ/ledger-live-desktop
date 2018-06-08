@@ -15,8 +15,8 @@ export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
 
   return (
-    <Box sticky pt={170}>
-      <Box grow alignItems="center">
+    <Box sticky pt={50}>
+      <Box grow alignItems="center" justifyContent="center">
         <Title>{t('onboarding:selectPIN.title')}</Title>
         <Box align="center" mt={7}>
           {onboarding.isLedgerNano ? <SelectPINnano /> : <SelectPINblue />}

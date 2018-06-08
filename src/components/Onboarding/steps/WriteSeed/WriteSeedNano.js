@@ -72,12 +72,13 @@ class WriteSeedNano extends PureComponent<Props, *> {
           <Title>{t('onboarding:writeSeed.nano.title')}</Title>
           <Description>{t('onboarding:writeSeed.nano.desc')}</Description>
         </Box>
-        <Box align="center">
-          <Inner style={{ width: 760 }}>
-            <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
+        <Box align="center" mt={3}>
+          <Inner style={{ width: 700 }}>
+            <Box style={{ width: 300 }} justifyContent="center" alignItems="center">
               <IconWriteSeed />
             </Box>
-            <Box shrink flow={2} m={0}>
+
+            <Box shrink grow flow={4}>
               {steps.map(step => <OptionRow key={step.key} step={step} />)}
             </Box>
           </Inner>

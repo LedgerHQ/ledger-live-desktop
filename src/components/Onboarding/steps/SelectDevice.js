@@ -12,6 +12,7 @@ import IconCheckCirle from 'icons/Check'
 import IconLedgerNano from 'icons/illustrations/LedgerNano'
 import IconLedgerBlue from 'icons/illustrations/LedgerBlue'
 import { Title, Inner } from '../helperComponents'
+import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
@@ -20,18 +21,16 @@ const mapDispatchToProps = { isLedgerNano }
 class SelectDevice extends PureComponent<StepProps, {}> {
   handleIsLedgerNano = (isLedgerNano: boolean) => {
     this.props.isLedgerNano(isLedgerNano)
-    this.props.onboarding.flowType === 'initializedDevice'
-      ? this.props.jumpStep('genuineCheck')
-      : this.props.nextStep()
   }
   render() {
-    const { t, onboarding } = this.props
-
+    const { t, onboarding, nextStep, prevStep, jumpStep } = this.props
     return (
-      <Box sticky pt={200}>
-        <Box grow alignItems="center">
-          <Title>{t('onboarding:selectDevice.title')}</Title>
-          <Box mt={7}>
+      <Box sticky>
+        <Box grow alignItems="center" justifyContent="center">
+          <Box m={5}>
+            <Title>{t('onboarding:selectDevice.title')}</Title>
+          </Box>
+          <Box pt={4}>
             <Inner>
               <DeviceContainer
                 isActive={onboarding.isLedgerNano}
@@ -44,10 +43,10 @@ class SelectDevice extends PureComponent<StepProps, {}> {
                 <BlockTitle>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
               </DeviceContainer>
               <DeviceContainer
-                isActive={!onboarding.isLedgerNano}
+                isActive={!onboarding.isLedgerNano && onboarding.isLedgerNano !== null}
                 onClick={() => this.handleIsLedgerNano(false)}
               >
-                {!onboarding.isLedgerNano && <DeviceSelected />}
+                {!onboarding.isLedgerNano && onboarding.isLedgerNano !== null && <DeviceSelected />}
                 <DeviceIcon>
                   <IconLedgerBlue />
                 </DeviceIcon>
@@ -56,6 +55,16 @@ class SelectDevice extends PureComponent<StepProps, {}> {
             </Inner>
           </Box>
         </Box>
+        <OnboardingFooter
+          horizontal
+          flow={2}
+          t={t}
+          nextStep={nextStep}
+          prevStep={prevStep}
+          jumpStep={jumpStep}
+          isContinueDisabled={onboarding.isLedgerNano === null}
+          jumpTo={onboarding.flowType === 'initializedDevice' ? 'genuineCheck' : undefined}
+        />
       </Box>
     )
   }
@@ -70,6 +79,7 @@ const DeviceContainer = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
   relative: true,
+  borderRadius: '4px',
 })`
   width: 218px;
   height: 204px;

@@ -23,7 +23,7 @@ export type OnboardingState = {
     isGenuineFail: boolean,
     isDeviceGenuine: boolean,
   },
-  isLedgerNano: boolean,
+  isLedgerNano: boolean | null,
   flowType: string,
 }
 
@@ -36,7 +36,7 @@ const state: OnboardingState = {
     isGenuineFail: false,
     isDeviceGenuine: false,
   },
-  isLedgerNano: true,
+  isLedgerNano: null,
   flowType: '',
   steps: [
     {
