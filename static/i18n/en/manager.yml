@@ -3,6 +3,8 @@ tabs:
   device: My device
 install: Install
 allApps: Apps
+apps:
+  help: To update an app, you have to uninstall the app and re install it.
 title: Manager
 subtitle: Get all your apps here
 firmwareUpdate: Firmware update

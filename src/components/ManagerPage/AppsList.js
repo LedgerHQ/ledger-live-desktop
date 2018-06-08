@@ -10,6 +10,8 @@ import uninstallApp from 'commands/uninstallApp'
 
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
+import Tooltip from 'components/base/Tooltip'
+import ExclamationCircle from 'icons/ExclamationCircle'
 
 import type { Device, T } from 'types/common'
 
@@ -166,8 +168,19 @@ class AppsList extends PureComponent<Props, State> {
     return (
       <Box flow={6}>
         <Box>
-          <Box mb={4} color="dark" ff="Museo Sans" fontSize={5}>
-            {t('manager:allApps')}
+          <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal>
+            <span>{t('manager:allApps')}</span>
+            <span>
+              <Tooltip
+                render={() => (
+                  <Box ff="Open Sans|SemiBold" fontSize={2}>
+                    {t('manager:apps.help')}
+                  </Box>
+                )}
+              >
+                <ExclamationCircle size={12} />
+              </Tooltip>
+            </span>
           </Box>
           {this.renderList()}
         </Box>
