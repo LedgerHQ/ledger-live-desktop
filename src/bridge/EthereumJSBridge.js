@@ -37,7 +37,7 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
 const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
   <AdvancedOptions
     gasLimit={value.gasLimit}
-    onChange={gasLimit => {
+    onChangeGasLimit={gasLimit => {
       onChange({ ...value, gasLimit })
     }}
   />
