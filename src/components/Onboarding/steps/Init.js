@@ -7,7 +7,7 @@ import { colors } from 'styles/theme'
 
 import styled from 'styled-components'
 import { flowType } from 'reducers/onboarding'
-import Box, { Card } from 'components/base/Box'
+import Box from 'components/base/Box'
 import IconUser from 'icons/User'
 import IconPlus from 'icons/Plus'
 import IconRecover from 'icons/Recover'

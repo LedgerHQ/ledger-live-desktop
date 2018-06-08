@@ -37,7 +37,7 @@ const OnboardingFooter = ({
   ...props
 }: Props) => (
   <Wrapper {...props}>
-    <Button padded outline onClick={() => prevStep()}>
+    <Button padded outlineGrey onClick={() => prevStep()}>
       {t('common:back')}
     </Button>
     <Button

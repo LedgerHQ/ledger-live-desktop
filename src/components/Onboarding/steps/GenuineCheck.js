@@ -120,8 +120,8 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     }
 
     return (
-      <Box sticky pt={150}>
-        <Box grow alignItems="center">
+      <Box sticky pt={50}>
+        <Box grow alignItems="center" justifyContent="center">
           <Title>{t('onboarding:genuineCheck.title')}</Title>
           <Description>{t('onboarding:genuineCheck.desc')}</Description>
           <Box mt={5}>
@@ -132,15 +132,16 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <CardTitle>{t('onboarding:genuineCheck.steps.step1.title')}</CardTitle>
                 </Box>
               </Box>
-              <RadioGroup
-                style={{ margin: '0 30px' }}
-                items={this.getButtonLabel()}
-                activeKey={cachedPinStepButton}
-                onChange={item => this.handleButtonPass(item, 'pinStepPass')}
-              />
+              <Box justify="center">
+                <RadioGroup
+                  items={this.getButtonLabel()}
+                  activeKey={cachedPinStepButton}
+                  onChange={item => this.handleButtonPass(item, 'pinStepPass')}
+                />
+              </Box>
             </CardWrapper>
           </Box>
-          <Box mt={5}>
+          <Box mt={3}>
             <CardWrapper isDisabled={!genuine.pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
@@ -148,15 +149,16 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <CardTitle>{t('onboarding:genuineCheck.steps.step2.title')}</CardTitle>
                 </Box>
               </Box>
-              <RadioGroup
-                style={{ margin: '0 30px' }}
-                items={this.getButtonLabel()}
-                activeKey={cachedRecoveryStepButton}
-                onChange={item => this.handleButtonPass(item, 'recoveryStepPass')}
-              />
+              <Box justify="center">
+                <RadioGroup
+                  items={this.getButtonLabel()}
+                  activeKey={cachedRecoveryStepButton}
+                  onChange={item => this.handleButtonPass(item, 'recoveryStepPass')}
+                />
+              </Box>
             </CardWrapper>
           </Box>
-          <Box mt={5}>
+          <Box mt={3}>
             <CardWrapper isDisabled={!genuine.recoveryStepPass}>
               <Box justify="center">
                 <Box horizontal>
@@ -164,7 +166,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <CardTitle>{t('onboarding:genuineCheck.steps.step3.title')}</CardTitle>
                 </Box>
               </Box>
-              <Box justify="center" horizontal mx={5}>
+              <Box justify="center">
                 {genuine.isDeviceGenuine ? (
                   <Box horizontal align="center" flow={1} color={colors.wallet}>
                     <IconCheck size={16} />
@@ -218,29 +220,27 @@ export function GenuineCheckFail({
 }: {
   redoGenuineCheck: () => void,
   contactSupport: () => void,
-  isLedgerNano: boolean,
+  isLedgerNano: boolean | null,
   t: T,
 }) {
   return (
-    <Box sticky pt={250}>
-      <Box grow alignItems="center">
+    <Box sticky pt={50}>
+      <Box grow alignItems="center" justifyContent="center">
         {isLedgerNano ? (
           <Fragment>
             <Title>{t('onboarding:genuineCheck.errorPage.ledgerNano.title')}</Title>
-            <Description style={{ maxWidth: 527 }}>
-              {t('onboarding:genuineCheck.errorPage.ledgerNano.desc')}
-            </Description>
-            <Box style={{ minWidth: 527 }}>
+            <Description>{t('onboarding:genuineCheck.errorPage.ledgerNano.desc')}</Description>
+            <Box style={{ width: 550 }} mt={5} ml={100}>
               <IconLedgerNanoError />
             </Box>
           </Fragment>
         ) : (
           <Fragment>
             <Title>{t('onboarding:genuineCheck.errorPage.ledgerBlue.title')}</Title>
-            <Description style={{ maxWidth: 527 }}>
+            <Description pb={5}>
               {t('onboarding:genuineCheck.errorPage.ledgerBlue.desc')}
             </Description>
-            <Box style={{ minWidth: 527, alignItems: 'center' }}>
+            <Box alignItems="center">
               <IconLedgerBlueError />
             </Box>
           </Fragment>
@@ -248,7 +248,7 @@ export function GenuineCheckFail({
       </Box>
       <Wrapper horizontal>
         <Button
-          small
+          padded
           outline
           onClick={() => {
             redoGenuineCheck()
@@ -257,7 +257,7 @@ export function GenuineCheckFail({
           {t('common:back')}
         </Button>
         <Button
-          small
+          padded
           danger
           onClick={() => {
             contactSupport()
@@ -292,11 +292,10 @@ const Wrapper = styled(Box).attrs({
 const CardWrapper = styled(Card).attrs({
   horizontal: true,
   p: 5,
-  flow: 2,
   justify: 'space-between',
 })`
-  width: 550px;
-  height: 70px;
+  width: 580px;
+  height: 74px;
   border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};

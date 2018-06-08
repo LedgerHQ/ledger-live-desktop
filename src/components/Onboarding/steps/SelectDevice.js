@@ -7,12 +7,12 @@ import { rgba } from 'styles/helpers'
 
 import { isLedgerNano } from 'reducers/onboarding'
 
-import OnboardingFooter from '../OnboardingFooter'
 import Box from 'components/base/Box'
 import IconCheckCirle from 'icons/Check'
 import IconLedgerNano from 'icons/illustrations/LedgerNano'
 import IconLedgerBlue from 'icons/illustrations/LedgerBlue'
 import { Title, Inner } from '../helperComponents'
+import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
@@ -24,7 +24,6 @@ class SelectDevice extends PureComponent<StepProps, {}> {
   }
   render() {
     const { t, onboarding, nextStep, prevStep, jumpStep } = this.props
-    console.log('wewee: ', onboarding.isLedgerNano)
     return (
       <Box sticky>
         <Box grow alignItems="center" justifyContent="center">

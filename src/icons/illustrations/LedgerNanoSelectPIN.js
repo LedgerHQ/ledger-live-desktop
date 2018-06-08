@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+
 export default () => (
   <svg width="260" height="129">
     <defs>
