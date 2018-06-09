@@ -5,6 +5,7 @@ import type { AccountRaw, OperationRaw } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { isSegwitAccount } from 'helpers/bip32'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
@@ -158,7 +159,7 @@ export async function doSignAndBroadcast({
 
     const WALLET_IDENTIFIER = await getWalletIdentifier({
       hwApp,
-      isSegwit: !!account.isSegwit,
+      isSegwit: isSegwitAccount(account),
       currencyId: account.currencyId,
       devicePath: deviceId,
     })
@@ -197,7 +198,7 @@ export async function doSignAndBroadcast({
       transaction: builded,
       sigHashType: parseInt(sigHashType, 16),
       supportsSegwit: !!currency.supportsSegwit,
-      isSegwit: !!account.isSegwit,
+      isSegwit: isSegwitAccount(account),
       hasTimestamp,
     })
   })
