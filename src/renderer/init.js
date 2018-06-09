@@ -2,7 +2,7 @@
 
 import logger from 'logger'
 import React from 'react'
-import { remote } from 'electron'
+import { remote, webFrame } from 'electron'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
@@ -71,6 +71,8 @@ async function init() {
 
   // Only init events on MainWindow
   if (isMainWindow) {
+    webFrame.setVisualZoomLevelLimits(1, 1)
+
     events({ store, locked })
 
     const libcoreVersion = await libcoreGetVersion.send().toPromise()
