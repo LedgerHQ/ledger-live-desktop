@@ -15,7 +15,7 @@ import { setAccountSyncState } from 'actions/bridgeSync'
 import { bridgeSyncSelector, syncStateLocalSelector } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
 import { accountsSelector } from 'reducers/accounts'
-import { SYNC_BOOT_DELAY, SYNC_ALL_INTERVAL } from 'config/constants'
+import { SYNC_BOOT_DELAY, SYNC_ALL_INTERVAL, SYNC_MAX_CONCURRENT } from 'config/constants'
 import { getBridgeForCurrency } from '.'
 
 type BridgeSyncProviderProps = {
@@ -87,7 +87,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
       })
     }
 
-    const syncQueue = priorityQueue(synchronize, 2)
+    const syncQueue = priorityQueue(synchronize, SYNC_MAX_CONCURRENT)
 
     let skipUnderPriority: number = -1
 
