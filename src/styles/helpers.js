@@ -26,9 +26,10 @@ export const lighten = (c: string, a: number) =>
 export const ff = (v: string) => {
   const [font, type = 'Regular'] = v.split('|')
   const { style, weight } = fontFamilies[font][type]
+  const fallback = fontFamilies[font]['fallback'] || 'Arial'
 
   return {
-    fontFamily: font,
+    fontFamily: `${font}, ${fallback}`,
     fontWeight: weight,
     fontStyle: style,
   }
