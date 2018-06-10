@@ -7,6 +7,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T, Device } from 'types/common'
 
 import { MODAL_RECEIVE } from 'config/constants'
+import { isSegwitAccount } from 'helpers/bip32'
 
 import getAddress from 'commands/getAddress'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
@@ -202,7 +203,7 @@ class ReceiveModal extends PureComponent<Props, State> {
             currencyId: account.currency.id,
             devicePath: device.path,
             path: account.freshAddressPath,
-            segwit: !!account.isSegwit,
+            segwit: isSegwitAccount(account),
             verify: true,
           })
           .toPromise()

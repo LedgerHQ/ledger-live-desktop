@@ -8,6 +8,7 @@ import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currenc
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
+import { isSegwitAccount } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
 
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
@@ -368,7 +369,7 @@ export async function syncAccount({
 
   const syncedRawAccount = await buildAccountRaw({
     njsAccount,
-    isSegwit: rawAccount.isSegwit === true,
+    isSegwit: isSegwitAccount(rawAccount),
     accountIndex: rawAccount.index,
     wallet: njsWallet,
     currencyId: rawAccount.currencyId,

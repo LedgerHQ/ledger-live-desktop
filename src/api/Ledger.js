@@ -11,14 +11,14 @@ export const userFriendlyError = <A>(p: Promise<A>): Promise<A> =>
       // that falls out of the range of 2xx
       const { data } = error.response
       if (data && typeof data.error === 'string') {
-        const msg = data.error || data.message
+        let msg = data.error || data.message
         if (typeof msg === 'string') {
           const m = msg.match(/^JsDefined\((.*)\)$/)
           if (m) {
             try {
               const { message } = JSON.parse(m[1])
               if (typeof message === 'string') {
-                throw new Error(message)
+                msg = message
               }
             } catch (e) {
               logger.warn("can't parse server result", e)
@@ -28,7 +28,7 @@ export const userFriendlyError = <A>(p: Promise<A>): Promise<A> =>
         }
       }
       logger.log('Ledger API: HTTP status', error.response.status, 'data: ', error.response.data)
-      throw new Error('A problem occurred with Ledger Servers. Please try again later.')
+      throw new Error('A problem occurred with Ledger API. Please try again later.')
     } else if (error.request) {
       // The request was made but no response was received
       // `error.request` is an instance of XMLHttpRequest in the browser and an instance of

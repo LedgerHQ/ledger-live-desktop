@@ -2,6 +2,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import logger from 'logger'
+import { isSegwitAccount } from 'helpers/bip32'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
@@ -121,7 +122,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
             devicePath: deviceSelected.path,
             currencyId: account.currency.id,
             path: account.freshAddressPath,
-            segwit: !!account.isSegwit,
+            segwit: isSegwitAccount(account),
           })
           .toPromise()
         const { freshAddress } = account

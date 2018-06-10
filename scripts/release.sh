@@ -7,6 +7,11 @@ if [ -z "$GH_TOKEN" ]; then
   exit 1
 fi
 
+if [ ! -d "static/fonts/museosans" ]; then
+  echo "static/fonts/museosans is required for a release" >&2
+  exit 1
+fi
+
 if ! git diff-index --quiet HEAD --; then
   echo "you have uncommitted local changes!" >&2
   exit 1
