@@ -2,7 +2,7 @@
 
 exports[`components FormattedVal renders a formatted val 1`] = `
 <div
-  className="k45ou1-0 iqaJGf e345n3-0 ghfAOi"
+  className="k45ou1-0 iqaJGf e345n3-0 cbufQL"
   color="#66be54"
 >
   4
@@ -11,7 +11,7 @@ exports[`components FormattedVal renders a formatted val 1`] = `
 
 exports[`components FormattedVal renders a percent 1`] = `
 <div
-  className="k45ou1-0 iqaJGf e345n3-0 ghfAOi"
+  className="k45ou1-0 iqaJGf e345n3-0 cbufQL"
   color="#66be54"
 >
   30 %
@@ -20,7 +20,7 @@ exports[`components FormattedVal renders a percent 1`] = `
 
 exports[`components FormattedVal shows code 1`] = `
 <div
-  className="k45ou1-0 iqaJGf e345n3-0 ghfAOi"
+  className="k45ou1-0 iqaJGf e345n3-0 cbufQL"
   color="#66be54"
 >
   BTC 4
@@ -29,7 +29,7 @@ exports[`components FormattedVal shows code 1`] = `
 
 exports[`components FormattedVal shows sign 1`] = `
 <div
-  className="k45ou1-0 iqaJGf e345n3-0 ghfAOi"
+  className="k45ou1-0 iqaJGf e345n3-0 cbufQL"
   color="#66be54"
 >
   + 4
@@ -38,7 +38,7 @@ exports[`components FormattedVal shows sign 1`] = `
 
 exports[`components FormattedVal shows sign 2`] = `
 <div
-  className="k45ou1-0 iqaJGf e345n3-0 dBXPqF"
+  className="k45ou1-0 iqaJGf e345n3-0 eZFsmG"
   color="#ea2e49"
 >
   - 4
