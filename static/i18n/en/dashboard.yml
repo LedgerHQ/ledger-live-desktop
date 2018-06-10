@@ -3,8 +3,8 @@ greeting:
   morning: "Good Morning!"
   evening: "Good Evening!"
   afternoon: "Good Afternoon!"
-summary: here is the summary of your account
-summary_plural: 'here is the summary of your {{count}} accounts'
-noAccounts: no accounts
+summary: Here is the summary of your account
+summary_plural: 'Here is the summary of your {{count}} accounts'
+noAccounts: No accounts
 recentActivity: Recent activity
 totalBalance: Total balance
