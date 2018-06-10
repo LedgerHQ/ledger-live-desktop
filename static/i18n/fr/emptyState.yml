@@ -1,6 +1,6 @@
 ---
 sidebar:
-  text: You don’t have any account for the moment. Press the + button to create an account
+  text: You don’t have any accounts at the moment. Press the + button to create an account
 dashboard:
   title: This is a title, use it with caution
   desc: Please create a new account or recover an old account from your Ledger device.
