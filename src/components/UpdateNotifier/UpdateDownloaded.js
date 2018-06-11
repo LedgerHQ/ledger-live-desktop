@@ -47,7 +47,7 @@ const NotifText = styled(Text).attrs({
   fontSize: 4,
 })``
 
-class UpdateNotifier extends PureComponent<Props> {
+class UpdateDownloaded extends PureComponent<Props> {
   renderStatus() {
     const { updateStatus, t } = this.props
     switch (updateStatus) {
@@ -96,4 +96,4 @@ export default compose(
     null,
   ),
   translate(),
-)(UpdateNotifier)
+)(UpdateDownloaded)
