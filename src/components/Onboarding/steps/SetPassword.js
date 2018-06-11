@@ -2,31 +2,26 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import bcrypt from 'bcryptjs'
-import { colors } from 'styles/theme'
+import { colors, radii } from 'styles/theme'
 import styled from 'styled-components'
-import { radii } from 'styles/theme'
 
 import { setEncryptionKey } from 'helpers/db'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
-import PasswordModal from 'components/SettingsPage/PasswordModal'
-import OnboardingFooter from '../OnboardingFooter'
 import IconChevronRight from 'icons/ChevronRight'
-import { ErrorMessageInput } from 'components/base/Input'
 
 import PasswordForm from '../../SettingsPage/PasswordForm'
 import type { StepProps } from '..'
 
-import { Title, Description, DisclaimerBox, Inner } from '../helperComponents'
+import { Title, Description, DisclaimerBox } from '../helperComponents'
 
 type State = {
   currentPassword: string,
   newPassword: string,
   confirmPassword: string,
   incorrectPassword: boolean,
-  submitError: boolean,
 }
 
 const INITIAL_STATE = {
@@ -34,7 +29,6 @@ const INITIAL_STATE = {
   newPassword: '',
   confirmPassword: '',
   incorrectPassword: false,
-  submitError: false,
 }
 
 class SetPassword extends PureComponent<StepProps, State> {
@@ -45,15 +39,15 @@ class SetPassword extends PureComponent<StepProps, State> {
       e.preventDefault()
     }
     if (!this.isValid()) {
-      this.setState({ submitError: true })
       return
     }
     const { newPassword } = this.state
-    const { nextStep } = this.props
+    const { nextStep, savePassword } = this.props
 
     setEncryptionKey('accounts', newPassword)
     const hash = newPassword ? bcrypt.hashSync(newPassword, 8) : undefined
-    this.props.savePassword(hash)
+    savePassword(hash)
+    this.handleReset()
     nextStep()
   }
 
@@ -68,18 +62,12 @@ class SetPassword extends PureComponent<StepProps, State> {
 
   isValid = () => {
     const { newPassword, confirmPassword } = this.state
-    return newPassword === confirmPassword ? true : false
+    return newPassword === confirmPassword
   }
 
   render() {
-    const { nextStep, prevStep, t, savePassword, settings } = this.props
-    const {
-      newPassword,
-      currentPassword,
-      incorrectPassword,
-      confirmPassword,
-      submitError,
-    } = this.state
+    const { nextStep, prevStep, t, settings } = this.props
+    const { newPassword, currentPassword, incorrectPassword, confirmPassword } = this.state
 
     const isPasswordEnabled = settings.password.isEnabled === true
 
@@ -87,17 +75,17 @@ class SetPassword extends PureComponent<StepProps, State> {
       {
         key: 'note1',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note1'),
+        desc: t('onboarding:setPassword.disclaimer.note1'),
       },
       {
         key: 'note2',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note2'),
+        desc: t('onboarding:setPassword.disclaimer.note2'),
       },
       {
         key: 'note3',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note3'),
+        desc: t('onboarding:setPassword.disclaimer.note3'),
       },
     ]
 
@@ -119,15 +107,12 @@ class SetPassword extends PureComponent<StepProps, State> {
                 currentPassword={currentPassword}
                 confirmPassword={confirmPassword}
                 incorrectPassword={incorrectPassword}
+                isValid={this.isValid}
                 onChange={this.handleInputChange}
                 t={t}
               />
-              {!this.isValid() && (
-                <ErrorMessageInput style={{ width: 300 }}>
-                  {t('password:errorMessageNotMatchingPassword')}
-                </ErrorMessageInput>
-              )}
-              <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
+
+              <DisclaimerBox mt={7} disclaimerNotes={disclaimerNotes} />
             </Box>
           </Fragment>
         </Box>
@@ -138,7 +123,7 @@ class SetPassword extends PureComponent<StepProps, State> {
           </Button>
           <Box horizontal ml="auto">
             <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
-              Skip This Step
+              {t('common:skipThisStep')}
             </Button>
             <Button
               padded

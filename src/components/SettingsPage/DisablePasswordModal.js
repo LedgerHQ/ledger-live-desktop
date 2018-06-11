@@ -7,7 +7,6 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
 import Label from 'components/base/Label'
-import { ErrorMessageInput } from 'components/base/Input'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
 import type { T } from 'types/common'
@@ -30,6 +29,7 @@ const INITIAL_STATE = {
   incorrectPassword: false,
 }
 
+// TODO: combine with the refactored password form
 class DisablePasswordModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
@@ -71,44 +71,41 @@ class DisablePasswordModal extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <form onSubmit={this.disablePassword}>
             <ModalBody onClose={onClose}>
-              <ModalTitle>{t('settings:profile.disablePasswordModalTitle')}</ModalTitle>
+              <ModalTitle>{t('password:disablePassword.title')}</ModalTitle>
               <ModalContent>
                 <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
-                  {t('settings:profile.disablePasswordModalDesc')}
+                  {t('password:disablePassword.desc')}
                   <Box px={7} mt={4} flow={3}>
                     {isPasswordEnabled && (
                       <Box flow={1}>
                         <Label htmlFor="password">
-                          {t('settings:profile.disablePasswordModalInput')}
+                          {t('password:inputFields.currentPassword.label')}
                         </Label>
                         <InputPassword
                           autoFocus
                           type="password"
-                          placeholder={t('settings:profile.disablePasswordModalInput')}
+                          placeholder={t('password:inputFields.currentPassword.placeholder')}
                           id="password"
                           onChange={this.handleInputChange('currentPassword')}
                           value={currentPassword}
+                          error={incorrectPassword && t('password:errorMessageIncorrectPassword')}
                         />
-                        {incorrectPassword && (
-                          <ErrorMessageInput>
-                            {t('password:errorMessageIncorrectPassword')}
-                          </ErrorMessageInput>
-                        )}
                       </Box>
                     )}
                   </Box>
                 </Box>
               </ModalContent>
               <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-                <Button type="button" onClick={onClose}>
+                <Button type="button" padded onClick={onClose}>
                   {t('common:cancel')}
                 </Button>
                 <Button
                   primary
+                  padded
                   onClick={this.disablePassword}
                   disabled={!currentPassword && !incorrectPassword}
                 >
-                  {t('settings:profile.disablePasswordModalSave')}
+                  {t('common:save')}
                 </Button>
               </ModalFooter>
             </ModalBody>

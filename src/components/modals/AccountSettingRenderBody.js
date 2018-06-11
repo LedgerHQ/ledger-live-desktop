@@ -18,7 +18,7 @@ import Spoiler from 'components/base/Spoiler'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import Input, { ErrorMessageInput } from 'components/base/Input'
+import Input from 'components/base/Input'
 import Select from 'components/base/LegacySelect'
 import { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 
@@ -143,10 +143,8 @@ class HelperComp extends PureComponent<Props, State> {
                   onChange={this.handleChangeName}
                   renderLeft={<InputLeft currency={account.currency} />}
                   onFocus={e => this.handleFocus(e, 'accountName')}
+                  error={accountNameError && t('account:settings.accountName.error')}
                 />
-                {accountNameError && (
-                  <ErrorMessageInput>{t('account:settings.accountName.error')}</ErrorMessageInput>
-                )}
               </Box>
             </Container>
             <Container>

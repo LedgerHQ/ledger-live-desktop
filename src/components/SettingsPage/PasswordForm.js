@@ -1,26 +1,22 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
-import { connect } from 'react-redux'
-import bcrypt from 'bcryptjs'
+import React, { PureComponent } from 'react'
 
 import Box from 'components/base/Box'
-import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
 import Label from 'components/base/Label'
-import { ErrorMessageInput } from 'components/base/Input'
 
 import type { T } from 'types/common'
 
 type Props = {
   t: T,
   isPasswordEnabled: boolean,
-
   currentPassword: string,
   newPassword: string,
   confirmPassword: string,
   incorrectPassword: boolean,
   onSubmit: Function,
+  isValid: () => boolean,
   onChange: Function,
 }
 
@@ -33,54 +29,55 @@ class PasswordForm extends PureComponent<Props> {
       newPassword,
       incorrectPassword,
       confirmPassword,
+      isValid,
       onChange,
       onSubmit,
     } = this.props
-
+    // TODO: adjust design to separate 3 fields
     return (
       <form onSubmit={onSubmit}>
         <Box px={7} mt={4} flow={3}>
           {isPasswordEnabled && (
-            <Box flow={1}>
-              <Label htmlFor="currentPassword">{t('password:currentPassword.label')}</Label>
+            <Box flow={1} mb={5}>
+              <Label htmlFor="currentPassword">
+                {t('password:inputFields.currentPassword.label')}
+              </Label>
               <InputPassword
                 autoFocus
-                type="password"
-                placeholder={t('password:currentPassword.placeholder')}
+                placeholder={t('password:inputFields.currentPassword.placeholder')}
                 id="currentPassword"
                 onChange={onChange('currentPassword')}
                 value={currentPassword}
+                error={incorrectPassword && t('password:errorMessageIncorrectPassword')}
               />
-              {incorrectPassword && (
-                <ErrorMessageInput>{t('password:errorMessageIncorrectPassword')}</ErrorMessageInput>
-              )}
             </Box>
           )}
           <Box flow={1}>
-            {isPasswordEnabled && (
-              <Label htmlFor="newPassword">{t('password:newPassword.label')}</Label>
-            )}
+            <Label htmlFor="newPassword">{t('password:inputFields.newPassword.label')}</Label>
             <InputPassword
               style={{ mt: 4, width: 240 }}
-              autoFocus
-              placeholder={t('password:newPassword.placeholder')}
+              autoFocus={!isPasswordEnabled}
+              placeholder={t('password:inputFields.newPassword.placeholder')}
               id="newPassword"
               onChange={onChange('newPassword')}
               value={newPassword}
-              // withStrength
             />
           </Box>
           <Box flow={1}>
-            {isPasswordEnabled && (
-              <Label htmlFor="confirmPassword">{t('password:confirmPassword.label')}</Label>
-            )}
+            <Label htmlFor="confirmPassword">
+              {t('password:inputFields.confirmPassword.label')}
+            </Label>
             <InputPassword
               style={{ width: 240 }}
-              placeholder={t('password:confirmPassword.placeholder')}
+              placeholder={t('password:inputFields.confirmPassword.placeholder')}
               id="confirmPassword"
               onChange={onChange('confirmPassword')}
               value={confirmPassword}
-              // withStrength
+              error={
+                !isValid() &&
+                confirmPassword.length > 0 &&
+                t('password:errorMessageNotMatchingPassword')
+              }
             />
           </Box>
         </Box>
