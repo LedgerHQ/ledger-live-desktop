@@ -2,14 +2,18 @@
 
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import semver from 'semver'
 
 import { openModal } from 'reducers/modals'
-import { MODAL_RELEASES_NOTES } from 'config/constants'
 import { lastUsedVersionSelector } from 'reducers/settings'
+import { saveSettings } from 'actions/settings'
+import { MODAL_RELEASES_NOTES } from 'config/constants'
+
 import type { State } from 'reducers'
 
 type Props = {
   openModal: Function,
+  saveSettings: Function,
   lastUsedVersion: string,
 }
 
@@ -19,14 +23,18 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = {
   openModal,
+  saveSettings,
 }
 
 class UpdateInstalled extends PureComponent<Props> {
   componentDidMount() {
-    const { lastUsedVersion, openModal } = this.props
+    const { lastUsedVersion, openModal, saveSettings } = this.props
     const currentVersion = __APP_VERSION__
 
-    openModal(MODAL_RELEASES_NOTES, `${lastUsedVersion} -> ${currentVersion}`)
+    if (semver.gt(currentVersion, lastUsedVersion)) {
+      openModal(MODAL_RELEASES_NOTES, `${lastUsedVersion} -> ${currentVersion}`)
+      saveSettings({ lastUsedVersion: currentVersion })
+    }
   }
 
   render() {
