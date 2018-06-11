@@ -53,7 +53,6 @@ class ManagerPage extends PureComponent<Props, State> {
               version: deviceInfo.version,
             }}
             device={device}
-            t={t}
           />
         </Box>
         <Box>

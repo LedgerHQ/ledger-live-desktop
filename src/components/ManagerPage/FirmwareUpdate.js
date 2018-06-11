@@ -1,21 +1,22 @@
 // @flow
-
-import logger from 'logger'
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
+import invariant from 'invariant'
+import logger from 'logger'
 
-import type { Device, T } from 'types/common'
+import type { Device } from 'types/common'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installOsuFirmware from 'commands/installOsuFirmware'
 
 import Box, { Card } from 'components/base/Box'
-import Button from 'components/base/Button'
 import Text from 'components/base/Text'
 
 import NanoS from 'icons/device/NanoS'
 import CheckFull from 'icons/CheckFull'
+
+import UpdateFirmwareButton from './UpdateFirmwareButton'
 
 let CACHED_LATEST_FIRMWARE = null
 
@@ -30,7 +31,6 @@ type DeviceInfos = {
 }
 
 type Props = {
-  t: T,
   device: Device,
   infos: DeviceInfos,
 }
@@ -38,26 +38,6 @@ type Props = {
 type State = {
   latestFirmware: ?FirmwareInfos,
 }
-
-const UpdateButton = ({
-  t,
-  firmware,
-  installFirmware,
-}: {
-  t: T,
-  firmware: ?FirmwareInfos,
-  installFirmware: (firmware: FirmwareInfos) => *,
-}) =>
-  firmware ? (
-    <Fragment>
-      <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
-        {t('manager:latestFirmware', { version: firmware.name })}
-      </Text>
-      <Button primary onClick={installFirmware(firmware)}>
-        {t('manager:installFirmware')}
-      </Button>
-    </Fragment>
-  ) : null
 
 class FirmwareUpdate extends PureComponent<Props, State> {
   state = {
@@ -97,12 +77,16 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     }
   }
 
-  installFirmware = (firmware: FirmwareInfos) => async () => {
+  installFirmware = async () => {
     try {
+      const { latestFirmware } = this.state
+      invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
       const {
         device: { path: devicePath },
       } = this.props
-      const { success } = await installOsuFirmware.send({ devicePath, firmware }).toPromise()
+      const { success } = await installOsuFirmware
+        .send({ devicePath, firmware: latestFirmware })
+        .toPromise()
       if (success) {
         this.fetchLatestFirmware()
       }
@@ -112,7 +96,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, infos } = this.props
+    const { infos } = this.props
     const { latestFirmware } = this.state
 
     return (
@@ -134,7 +118,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               Firmware {infos.version}
             </Text>
           </Box>
-          <UpdateButton t={t} firmware={latestFirmware} installFirmware={this.installFirmware} />
+          <UpdateFirmwareButton firmware={latestFirmware} installFirmware={this.installFirmware} />
         </Box>
       </Card>
     )
