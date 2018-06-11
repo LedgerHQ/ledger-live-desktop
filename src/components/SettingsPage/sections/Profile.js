@@ -13,6 +13,7 @@ import { delay } from 'helpers/promise'
 import type { SettingsState } from 'reducers/settings'
 import type { T } from 'types/common'
 
+import ExportLogsBtn from 'components/ExportLogsBtn'
 import CheckBox from 'components/base/CheckBox'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -180,6 +181,9 @@ class TabProfile extends PureComponent<Props, State> {
             <Button danger onClick={this.handleOpenHardResetModal}>
               {t('settings:profile.hardReset')}
             </Button>
+          </Row>
+          <Row title={t('settings:exportLogs.title')} desc={t('settings:exportLogs.desc')}>
+            <ExportLogsBtn />
           </Row>
         </Body>
 
