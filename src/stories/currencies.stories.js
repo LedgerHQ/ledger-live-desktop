@@ -2,7 +2,7 @@
 
 import React, { Fragment } from 'react'
 import { storiesOf } from '@storybook/react'
-import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'

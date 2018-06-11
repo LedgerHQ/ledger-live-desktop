@@ -4,10 +4,8 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { boolean, select, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
-import {
-  getCryptoCurrencyById,
-  listCryptoCurrencies,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { listCryptoCurrencies } from 'config/cryptocurrencies'
 
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 
