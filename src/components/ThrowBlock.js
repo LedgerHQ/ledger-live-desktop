@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { shell, remote } from 'electron'
@@ -8,6 +9,7 @@ import qs from 'querystring'
 import { rgba } from 'styles/helpers'
 import db from 'helpers/db'
 
+import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
@@ -43,6 +45,7 @@ class ThrowBlock extends PureComponent<Props, State> {
   }
 
   componentDidCatch(error: Error) {
+    logger.error(error)
     this.setState({ error })
   }
 
@@ -83,9 +86,10 @@ ${error.stack}
             <Button primary onClick={this.handleRestart}>
               {'Restart app'}
             </Button>
-            <Button primary onClick={this.handleReset}>
+            <Button danger onClick={this.handleReset}>
               {'Reset app files'}
             </Button>
+            <ExportLogsBtn />
             <Button primary onClick={this.handleCreateIssue}>
               {'Create ticket'}
             </Button>
