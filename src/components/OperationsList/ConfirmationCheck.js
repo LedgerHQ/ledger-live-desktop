@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import type { OperationType } from '@ledgerhq/live-common/lib/types'
@@ -16,6 +16,11 @@ import IconSend from 'icons/Send'
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
 
+const border = p =>
+  p.isConfirmed
+    ? 0
+    : `1px solid ${p.type === 'IN' ? p.marketColor : rgba(p.theme.colors.grey, 0.2)}`
+
 const Container = styled(Box).attrs({
   bg: p =>
     p.isConfirmed ? rgba(p.type === 'IN' ? p.marketColor : p.theme.colors.grey, 0.2) : 'none',
@@ -23,10 +28,7 @@ const Container = styled(Box).attrs({
   align: 'center',
   justify: 'center',
 })`
-  border: ${p =>
-    !p.isConfirmed
-      ? `1px solid ${p.type === 'IN' ? p.marketColor : rgba(p.theme.colors.grey, 0.2)}`
-      : 0};
+  border: ${border};
   border-radius: 50%;
   position: relative;
   height: 24px;
@@ -44,46 +46,38 @@ const WrapperClock = styled(Box).attrs({
   padding: 1px;
 `
 
-const ConfirmationCheck = ({
-  marketColor,
-  isConfirmed,
-  t,
-  type,
-  withTooltip,
-  ...props
-}: {
+class ConfirmationCheck extends PureComponent<{
   marketColor: string,
   isConfirmed: boolean,
   t: T,
   type: OperationType,
   withTooltip?: boolean,
-}) => {
-  const renderContent = () => (
-    <Container type={type} isConfirmed={isConfirmed} marketColor={marketColor} {...props}>
-      {type === 'IN' ? <IconReceive size={12} /> : <IconSend size={12} />}
-      {!isConfirmed && (
-        <WrapperClock>
-          <IconClock size={10} />
-        </WrapperClock>
-      )}
-    </Container>
-  )
+}> {
+  static defaultProps = {
+    withTooltip: true,
+  }
 
-  return withTooltip ? (
-    <Tooltip
-      render={() =>
-        isConfirmed ? t('operationsList:confirmed') : t('operationsList:notConfirmed')
-      }
-    >
-      {renderContent()}
-    </Tooltip>
-  ) : (
-    renderContent()
-  )
-}
+  renderTooltip = () => {
+    const { t, isConfirmed } = this.props
+    return t(isConfirmed ? 'operationsList:confirmed' : 'operationsList:notConfirmed')
+  }
 
-ConfirmationCheck.defaultProps = {
-  withTooltip: true,
+  render() {
+    const { marketColor, isConfirmed, t, type, withTooltip, ...props } = this.props
+
+    const content = (
+      <Container type={type} isConfirmed={isConfirmed} marketColor={marketColor} {...props}>
+        {type === 'IN' ? <IconReceive size={12} /> : <IconSend size={12} />}
+        {!isConfirmed && (
+          <WrapperClock>
+            <IconClock size={10} />
+          </WrapperClock>
+        )}
+      </Container>
+    )
+
+    return withTooltip ? <Tooltip render={this.renderTooltip}>{content}</Tooltip> : content
+  }
 }
 
 export default ConfirmationCheck

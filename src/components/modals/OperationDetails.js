@@ -14,6 +14,7 @@ import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T, CurrencySettings } from 'types/common'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
+import { getMarketColor } from 'styles/helpers'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -21,8 +22,9 @@ import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 
-import { createStructuredSelector } from 'reselect'
-import { currencySettingsForAccountSelector } from 'reducers/settings'
+import { createStructuredSelector, createSelector } from 'reselect'
+import { accountSelector } from 'reducers/accounts'
+import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
@@ -56,25 +58,47 @@ const B = styled(Bar).attrs({
   size: 1,
 })``
 
+const operationSelector = createSelector(
+  accountSelector,
+  (_, { operationId }) => operationId,
+  (account, operationId) => {
+    if (!account) return null
+    const operation = account.operations.find(op => op.id === operationId)
+    return operation
+  },
+)
+
 const mapStateToProps = createStructuredSelector({
-  currencySettings: currencySettingsForAccountSelector,
+  marketIndicator: marketIndicatorSelector,
+  account: accountSelector,
+  operation: operationSelector,
+  currencySettings: createSelector(
+    state => state,
+    accountSelector,
+    (state, account) => (account ? currencySettingsForAccountSelector(state, { account }) : null),
+  ),
 })
 
 type Props = {
   t: T,
-  operation: Operation,
-  account: Account,
+  operation: ?Operation,
+  account: ?Account,
+  currencySettings: ?CurrencySettings,
   onClose: () => void,
-  currencySettings: CurrencySettings,
-  marketColor: string,
+  marketIndicator: *,
 }
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
-  const { t, onClose, operation, account, marketColor, currencySettings } = props
+  const { t, onClose, operation, account, currencySettings, marketIndicator } = props
+  if (!operation || !account || !currencySettings) return null
   const { hash, date, senders, recipients, type, fee } = operation
-  const amount = getOperationAmountNumber(operation)
-
   const { name, unit, currency } = account
+  const amount = getOperationAmountNumber(operation)
+  const isNegative = operation.type === 'OUT'
+  const marketColor = getMarketColor({
+    marketIndicator,
+    isNegative,
+  })
   const confirmations = operation.blockHeight ? account.blockHeight - operation.blockHeight : 0
   const isConfirmed = confirmations >= currencySettings.confirmationsNb
 
@@ -173,10 +197,8 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
 
 type ModalRenderProps = {
   data: {
-    account: Account,
-    operation: Operation,
-    type: 'from' | 'to',
-    marketColor: string,
+    account: string,
+    operation: string,
   },
   onClose: Function,
 }
@@ -186,17 +208,7 @@ const OperationDetailsWrapper = ({ t }: { t: T }) => (
     name={MODAL_OPERATION_DETAILS}
     render={(props: ModalRenderProps) => {
       const { data, onClose } = props
-      const { operation, account, type, marketColor } = data
-      return (
-        <OperationDetails
-          t={t}
-          operation={operation}
-          account={account}
-          type={type}
-          onClose={onClose}
-          marketColor={marketColor}
-        />
-      )
+      return <OperationDetails t={t} {...data} onClose={onClose} />
     }}
   />
 )
