@@ -20,43 +20,39 @@ import libcoreGetVersion from 'commands/libcoreGetVersion'
 import db from 'helpers/db'
 import dbMiddleware from 'middlewares/db'
 import CounterValues from 'helpers/countervalues'
+import hardReset from 'helpers/hardReset'
 
 import App from 'components/App'
 
 import 'styles/global'
 
-if (process.env.LEDGER_RESET_ALL) {
-  db.resetAll()
-}
-
-// Init db with defaults if needed
-db.init('settings', {})
-
-const history = createHistory()
-const store = createStore({ history, dbMiddleware })
 const rootNode = document.getElementById('app')
 
-const settings = db.get('settings')
-store.dispatch(fetchSettings(settings))
-
-const countervaluesData = db.get('countervalues')
-if (countervaluesData) {
-  store.dispatch(CounterValues.importAction(countervaluesData))
-}
-
-const state = store.getState()
-const language = getLanguage(state)
-const locked = isLocked(state)
-
-moment.locale(language)
-
-function r(Comp) {
-  if (rootNode) {
-    render(<AppContainer>{Comp}</AppContainer>, rootNode)
-  }
-}
-
 async function init() {
+  if (process.env.LEDGER_RESET_ALL) {
+    await hardReset()
+  }
+
+  // Init db with defaults if needed
+  db.init('settings', {})
+
+  const history = createHistory()
+  const store = createStore({ history, dbMiddleware })
+
+  const settings = db.get('settings')
+  store.dispatch(fetchSettings(settings))
+
+  const countervaluesData = db.get('countervalues')
+  if (countervaluesData) {
+    store.dispatch(CounterValues.importAction(countervaluesData))
+  }
+
+  const state = store.getState()
+  const language = getLanguage(state)
+  const locked = isLocked(state)
+
+  moment.locale(language)
+
   // FIXME IMO init() really should only be for window. any other case is a hack!
   const isMainWindow = remote.getCurrentWindow().name === 'MainWindow'
 
@@ -89,6 +85,12 @@ async function init() {
         }
       }
     })
+  }
+}
+
+function r(Comp) {
+  if (rootNode) {
+    render(<AppContainer>{Comp}</AppContainer>, rootNode)
   }
 }
 

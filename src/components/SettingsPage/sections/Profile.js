@@ -9,6 +9,7 @@ import { cleanAccountsCache } from 'actions/accounts'
 import { unlock } from 'reducers/application' // FIXME should be in actions
 import db, { setEncryptionKey } from 'helpers/db'
 import { delay } from 'helpers/promise'
+import hardReset from 'helpers/hardReset'
 
 import type { SettingsState } from 'reducers/settings'
 import type { T } from 'types/common'
@@ -47,6 +48,7 @@ type State = {
   isSoftResetModalOpened: boolean,
   isPasswordModalOpened: boolean,
   isDisablePasswordModalOpened: boolean,
+  isHardResetting: boolean,
 }
 
 class TabProfile extends PureComponent<Props, State> {
@@ -55,6 +57,7 @@ class TabProfile extends PureComponent<Props, State> {
     isSoftResetModalOpened: false,
     isPasswordModalOpened: false,
     isDisablePasswordModalOpened: false,
+    isHardResetting: false,
   }
 
   setPassword = password => {
@@ -89,9 +92,13 @@ class TabProfile extends PureComponent<Props, State> {
   }
 
   handleHardReset = async () => {
-    db.resetAll()
-    await delay(500)
-    remote.getCurrentWindow().webContents.reload()
+    this.setState({ isHardResetting: true })
+    try {
+      await hardReset()
+      remote.getCurrentWindow().webContents.reloadIgnoringCache()
+    } catch (err) {
+      this.setState({ isHardResetting: false })
+    }
   }
 
   handleChangePasswordCheck = isChecked => {
@@ -125,6 +132,7 @@ class TabProfile extends PureComponent<Props, State> {
       isHardResetModalOpened,
       isPasswordModalOpened,
       isDisablePasswordModalOpened,
+      isHardResetting,
     } = this.state
     const isPasswordEnabled = settings.password.isEnabled === true
     return (
@@ -200,6 +208,7 @@ class TabProfile extends PureComponent<Props, State> {
 
         <ConfirmModal
           isDanger
+          isLoading={isHardResetting}
           isOpened={isHardResetModalOpened}
           onClose={this.handleCloseHardResetModal}
           onReject={this.handleCloseHardResetModal}
