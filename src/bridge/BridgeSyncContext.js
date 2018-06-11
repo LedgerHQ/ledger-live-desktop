@@ -7,6 +7,8 @@ import logger from 'logger'
 import shuffle from 'lodash/shuffle'
 import React, { Component } from 'react'
 import priorityQueue from 'async/priorityQueue'
+import { animationFrameScheduler } from 'rxjs'
+import { subscribeOn } from 'rxjs/operators/subscribeOn'
 import { connect } from 'react-redux'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { createStructuredSelector } from 'reselect'
@@ -72,7 +74,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
       this.props.setAccountSyncState(accountId, { pending: true, error: null })
 
       // TODO use Subscription to unsubscribe at relevant time
-      bridge.synchronize(account).subscribe({
+      subscribeOn(animationFrameScheduler)(bridge.synchronize(account)).subscribe({
         next: accountUpdater => {
           this.props.updateAccountWithUpdater(accountId, accountUpdater)
         },
