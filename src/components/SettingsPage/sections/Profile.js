@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { remote } from 'electron'
 import bcrypt from 'bcryptjs'
 
+import libcoreHardReset from 'commands/libcoreHardReset'
 import { cleanAccountsCache } from 'actions/accounts'
 import { unlock } from 'reducers/application' // FIXME should be in actions
 import db, { setEncryptionKey } from 'helpers/db'
@@ -47,6 +48,7 @@ type State = {
   isSoftResetModalOpened: boolean,
   isPasswordModalOpened: boolean,
   isDisablePasswordModalOpened: boolean,
+  isHardResetting: boolean,
 }
 
 class TabProfile extends PureComponent<Props, State> {
@@ -55,6 +57,7 @@ class TabProfile extends PureComponent<Props, State> {
     isSoftResetModalOpened: false,
     isPasswordModalOpened: false,
     isDisablePasswordModalOpened: false,
+    isHardResetting: false,
   }
 
   setPassword = password => {
@@ -89,9 +92,17 @@ class TabProfile extends PureComponent<Props, State> {
   }
 
   handleHardReset = async () => {
-    db.resetAll()
-    await delay(500)
-    remote.getCurrentWindow().webContents.reload()
+    this.setState({ isHardResetting: true })
+    try {
+      // TODO: wait for the libcoreHardReset to be finished
+      // actually, libcore doesnt goes back to js thread
+      await Promise.race([libcoreHardReset.send().toPromise(), delay(500)])
+      db.resetAll()
+      await delay(500)
+      remote.getCurrentWindow().webContents.reload()
+    } catch (err) {
+      this.setState({ isHardResetting: false })
+    }
   }
 
   handleChangePasswordCheck = isChecked => {
@@ -125,6 +136,7 @@ class TabProfile extends PureComponent<Props, State> {
       isHardResetModalOpened,
       isPasswordModalOpened,
       isDisablePasswordModalOpened,
+      isHardResetting,
     } = this.state
     const isPasswordEnabled = settings.password.isEnabled === true
     return (
@@ -200,6 +212,7 @@ class TabProfile extends PureComponent<Props, State> {
 
         <ConfirmModal
           isDanger
+          isLoading={isHardResetting}
           isOpened={isHardResetModalOpened}
           onClose={this.handleCloseHardResetModal}
           onReject={this.handleCloseHardResetModal}
