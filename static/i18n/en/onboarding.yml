@@ -88,8 +88,12 @@ genuineCheck:
       title: Something is wrong with your Ledger Blue
       desc: A problem occurred with your Ledger Blue. Contact Ledger Support to get assistance or go back to the security check.
 setPassword:
-  title: Choose a password to securely access Ledger Live
-  desc: Use uppercase, lowercase, special characters (#, @, !, ?) and numbers for a stronger password.
+  title: Protect your privacy (optional)
+  desc: Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
+  disclaimer:
+    note1: Make sure to remember your password and do not share it.
+    note2: Losing your password requires resetting Ledger Live and re-adding accounts.
+    note3: Loss of password doesn’t affect your crypto-assets.
 analytics:
   title: Help Ledger to improve its products and services
   desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor ipsum amet
