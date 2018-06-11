@@ -39,6 +39,26 @@ type State = {
   latestFirmware: ?FirmwareInfos,
 }
 
+const UpdateButton = ({
+  t,
+  firmware,
+  installFirmware,
+}: {
+  t: T,
+  firmware: ?FirmwareInfos,
+  installFirmware: (firmware: FirmwareInfos) => *,
+}) =>
+  firmware ? (
+    <Fragment>
+      <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
+        {t('manager:latestFirmware', { version: firmware.name })}
+      </Text>
+      <Button primary onClick={installFirmware(firmware)}>
+        {t('manager:installFirmware')}
+      </Button>
+    </Fragment>
+  ) : null
+
 class FirmwareUpdate extends PureComponent<Props, State> {
   state = {
     latestFirmware: null,
@@ -114,26 +134,8 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               Firmware {infos.version}
             </Text>
           </Box>
-          {latestFirmware && (
-            <Fragment>
-              <Text
-                ff="Open Sans|Regular"
-                fontSize={4}
-                style={{ marginLeft: 'auto', marginRight: 15 }}
-              >
-                {t('manager:latestFirmware', { version: latestFirmware.name })}
-              </Text>
-              <Button primary onClick={this.installFirmware(latestFirmware)}>
-                {t('manager:installFirmware')}
-              </Button>
-            </Fragment>
-          )}
+          <UpdateButton t={t} firmware={latestFirmware} installFirmware={this.installFirmware} />
         </Box>
-        {/* <Box
-          fontSize={3}
-          style={{ whiteSpace: 'pre' }}
-          dangerouslySetInnerHTML={{ __html: latestFirmware.notes }}
-        /> */}
       </Card>
     )
   }
