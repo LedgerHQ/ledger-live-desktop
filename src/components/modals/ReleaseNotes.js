@@ -1,5 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react'
+
 import { MODAL_RELEASES_NOTES } from 'config/constants'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
 

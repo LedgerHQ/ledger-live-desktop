@@ -37,6 +37,7 @@ export type SettingsState = {
   developerMode: boolean,
   shareAnalytics: boolean,
   sentryLogs: boolean,
+  lastUsedVersion: string,
 }
 
 /* have to check if available for all OS */
@@ -73,6 +74,7 @@ const INITIAL_STATE: SettingsState = {
   loaded: false,
   shareAnalytics: false,
   sentryLogs: false,
+  lastUsedVersion: __APP_VERSION__,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
@@ -156,6 +158,8 @@ export const counterValueExchangeSelector = createSelector(
 )
 
 export const developerModeSelector = (state: State): boolean => state.settings.developerMode
+
+export const lastUsedVersionSelector = (state: State): string => state.settings.lastUsedVersion
 
 export const availableCurrencies = createSelector(developerModeSelector, listCryptoCurrencies)
 
