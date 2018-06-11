@@ -93,16 +93,15 @@ const state: OnboardingState = {
         showBreadcrumb: true,
       },
     },
-    // UNTIL IS NEEDED SET PASSWORD IS COMMENTED OUT
-    // {
-    //   name: 'setPassword',
-    //   label: 'Set Password',
-    //   options: {
-    //     showFooter: false,
-    //     showBackground: true,
-    //     showBreadcrumb: true,
-    //   },
-    // },
+    {
+      name: 'setPassword',
+      label: 'Set Password',
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: true,
+      },
+    },
     {
       name: 'analytics',
       label: 'Analytics & Bug report',

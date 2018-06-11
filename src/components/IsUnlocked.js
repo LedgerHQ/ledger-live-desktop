@@ -11,8 +11,6 @@ import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 import IconLockScreen from 'icons/LockScreen'
 
-import { ErrorMessageInput } from 'components/base/Input'
-
 import get from 'lodash/get'
 
 import { setEncryptionKey } from 'helpers/db'
@@ -119,21 +117,13 @@ class IsUnlocked extends Component<Props, State> {
     }
   }
 
-  handleFocusInput = () => {
-    if (this._input && this._input !== null) {
-      this._input.focus()
-    }
-  }
-
-  _input: ?HTMLInputElement
-
   render() {
     const { inputValue, incorrectPassword } = this.state
     const { isLocked, t } = this.props
 
     if (isLocked) {
       return (
-        <Box sticky alignItems="center" justifyContent="center" onClick={this.handleFocusInput}>
+        <Box sticky alignItems="center" justifyContent="center">
           <form onSubmit={this.handleSubmit}>
             <Box align="center">
               <IconLockScreen size={136} />
@@ -146,17 +136,12 @@ class IsUnlocked extends Component<Props, State> {
               <Box style={{ minWidth: 230 }}>
                 <InputPassword
                   autoFocus
-                  innerRef={(n: any) => (this._input = n)}
                   placeholder={t('common:lockScreen.inputPlaceholder')}
                   type="password"
                   onChange={this.handleChangeInput('password')}
                   value={inputValue.password}
+                  error={incorrectPassword && t('password:errorMessageIncorrectPassword')}
                 />
-                {incorrectPassword && (
-                  <ErrorMessageInput>
-                    {t('password:errorMessageIncorrectPassword')}
-                  </ErrorMessageInput>
-                )}
               </Box>
             </Box>
           </form>

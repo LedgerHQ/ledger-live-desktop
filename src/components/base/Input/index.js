@@ -48,13 +48,6 @@ const Base = styled.input.attrs({
   }
 `
 
-export const ErrorMessageInput = styled(Box).attrs({
-  alignItems: 'flex-start',
-  color: 'alertRed',
-  ff: 'Open Sans|SemiBold',
-  fontSize: 3,
-})``
-
 export const Textarea = styled.textarea.attrs({
   p: 2,
   fontSize: 4,

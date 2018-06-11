@@ -8,6 +8,7 @@ import styled from 'styled-components'
 
 import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
+import type { SettingsState } from 'reducers/settings'
 
 import { saveSettings } from 'actions/settings'
 import {
@@ -20,7 +21,7 @@ import {
 } from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
 
-// import { unlock } from 'reducers/application'
+import { unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
 
@@ -31,8 +32,7 @@ import SelectDevice from './steps/SelectDevice'
 import SelectPIN from './steps/SelectPIN/index'
 import WriteSeed from './steps/WriteSeed/index'
 import GenuineCheck from './steps/GenuineCheck'
-// UNTIL IS NEEDED SET PASSWORD IS COMMENTED OUT
-// import SetPassword from './steps/SetPassword'
+import SetPassword from './steps/SetPassword'
 import Analytics from './steps/Analytics'
 import Finish from './steps/Finish'
 
@@ -42,7 +42,7 @@ const STEPS = {
   selectPIN: SelectPIN,
   writeSeed: WriteSeed,
   genuineCheck: GenuineCheck,
-  // setPassword: SetPassword,
+  setPassword: SetPassword,
   analytics: Analytics,
   finish: Finish,
   start: Start,
@@ -51,6 +51,7 @@ const STEPS = {
 const mapStateToProps = state => ({
   hasCompletedOnboarding: state.settings.hasCompletedOnboarding,
   onboarding: state.onboarding,
+  settings: state.settings,
   getCurrentDevice: getCurrentDevice(state),
 })
 
@@ -59,7 +60,7 @@ const mapDispatchToProps = {
   nextStep,
   prevStep,
   jumpStep,
-  // unlock,
+  unlock,
 }
 
 type Props = {
@@ -67,6 +68,7 @@ type Props = {
   hasCompletedOnboarding: boolean,
   saveSettings: Function,
   onboarding: OnboardingState,
+  settings: SettingsState,
   prevStep: Function,
   nextStep: Function,
   jumpStep: Function,
@@ -77,12 +79,13 @@ type Props = {
 export type StepProps = {
   t: T,
   onboarding: OnboardingState,
+  settings: SettingsState,
   prevStep: Function,
   nextStep: Function,
   jumpStep: Function,
   finish: Function,
   saveSettings: Function,
-  // savePassword: Function,
+  savePassword: Function,
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
   isLedgerNano: Function,
@@ -92,18 +95,26 @@ export type StepProps = {
 class Onboarding extends PureComponent<Props> {
   getDeviceInfo = () => this.props.getCurrentDevice
   finish = () => this.props.saveSettings({ hasCompletedOnboarding: true })
-  // savePassword = hash => {
-  //   this.props.saveSettings({
-  //     password: {
-  //       isEnabled: hash !== undefined,
-  //       value: hash,
-  //     },
-  //   })
-  //   this.props.unlock()
-  // }
+  savePassword = hash => {
+    this.props.saveSettings({
+      password: {
+        isEnabled: hash !== undefined,
+        value: hash,
+      },
+    })
+    this.props.unlock()
+  }
 
   render() {
-    const { hasCompletedOnboarding, onboarding, prevStep, nextStep, jumpStep, t } = this.props
+    const {
+      hasCompletedOnboarding,
+      onboarding,
+      prevStep,
+      nextStep,
+      jumpStep,
+      settings,
+      t,
+    } = this.props
     if (hasCompletedOnboarding) {
       return null
     }
@@ -119,6 +130,7 @@ class Onboarding extends PureComponent<Props> {
     const stepProps: StepProps = {
       t,
       onboarding,
+      settings,
       updateGenuineCheck,
       isLedgerNano,
       flowType,
@@ -126,7 +138,7 @@ class Onboarding extends PureComponent<Props> {
       nextStep,
       jumpStep,
       finish: this.finish,
-      // savePassword: this.savePassword,
+      savePassword: this.savePassword,
       getDeviceInfo: this.getDeviceInfo,
       saveSettings,
     }

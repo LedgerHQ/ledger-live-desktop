@@ -2,8 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
-import { saveSettings } from 'actions/settings'
 
 import Box from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
@@ -12,19 +10,21 @@ import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
-const mapDispatchToProps = { saveSettings }
-
 type State = {
   analyticsToggle: boolean,
   termsConditionsToggle: boolean,
   sentryLogsToggle: boolean,
 }
+
+const INITIAL_STATE = {
+  analyticsToggle: false,
+  termsConditionsToggle: false,
+  sentryLogsToggle: false,
+}
+
 class Analytics extends PureComponent<StepProps, State> {
-  state = {
-    analyticsToggle: false,
-    termsConditionsToggle: false,
-    sentryLogsToggle: false,
-  }
+  state = INITIAL_STATE
+
   handleSentryLogsToggle = (isChecked: boolean) => {
     this.setState({ sentryLogsToggle: !this.state.sentryLogsToggle })
     this.props.saveSettings({
@@ -40,8 +40,15 @@ class Analytics extends PureComponent<StepProps, State> {
   handleTermsToggle = () => {
     this.setState({ termsConditionsToggle: !this.state.termsConditionsToggle })
   }
+
+  handleNavBack = () => {
+    const { savePassword, prevStep } = this.props
+    savePassword(undefined)
+    prevStep()
+  }
+
   render() {
-    const { nextStep, prevStep, t } = this.props
+    const { nextStep, t } = this.props
     const { analyticsToggle, termsConditionsToggle, sentryLogsToggle } = this.state
 
     return (
@@ -85,7 +92,7 @@ class Analytics extends PureComponent<StepProps, State> {
           flow={2}
           t={t}
           nextStep={nextStep}
-          prevStep={prevStep}
+          prevStep={this.handleNavBack}
           isContinueDisabled={!termsConditionsToggle}
         />
       </Box>
@@ -93,10 +100,7 @@ class Analytics extends PureComponent<StepProps, State> {
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(Analytics)
+export default Analytics
 
 export const AnalyticsText = styled(Box).attrs({
   ff: 'Open Sans|Regular',

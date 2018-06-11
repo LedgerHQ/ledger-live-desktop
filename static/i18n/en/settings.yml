@@ -23,22 +23,9 @@ currencies:
   explorer: Blockchain explorer
   explorerDesc: Lorem ipsum dolor sit amet
 profile:
-  username: Username
-  usernameDesc: Lorem ipsum dolor sit amet
   password: Password
   passwordDesc: Lorem ipsum dolor sit amet
   changePassword: Change password
-  passwordModalTitle: Password
-  passwordModalSubtitle: Set a password to lock your application
-  passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
-  passwordModalPasswordInput: Current password
-  passwordModalNewPasswordInput: New password
-  passwordModalRepeatPasswordInput: Repeat password
-  passwordModalSave: Save
-  disablePasswordModalTitle: Disable Password
-  disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
-  disablePasswordModalInput: Current password
-  disablePasswordModalSave: Save
   sync: Sync accounts
   syncDesc: Lorem ipsum dolor sit amet
   export: Export logs
