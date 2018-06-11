@@ -22,8 +22,6 @@ type Props = {
   t: T,
   nextStep: () => void,
   prevStep: () => void,
-  jumpStep?: string => void,
-  jumpTo?: string,
   isContinueDisabled?: boolean,
 }
 
@@ -32,21 +30,14 @@ const OnboardingFooter = ({
   nextStep,
   prevStep,
   isContinueDisabled,
-  jumpStep,
-  jumpTo,
+
   ...props
 }: Props) => (
   <Wrapper {...props}>
     <Button padded outlineGrey onClick={() => prevStep()}>
       {t('common:back')}
     </Button>
-    <Button
-      padded
-      disabled={isContinueDisabled}
-      primary
-      onClick={() => (jumpTo && jumpStep ? jumpStep(jumpTo) : nextStep())}
-      ml="auto"
-    >
+    <Button padded disabled={isContinueDisabled} primary onClick={() => nextStep()} ml="auto">
       {t('common:continue')}
     </Button>
   </Wrapper>
