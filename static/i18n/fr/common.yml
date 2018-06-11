@@ -7,6 +7,7 @@ confirm: Confirmer
 cancel: Annuler
 delete: Delete
 continue: Continue
+skipThisStep: Skip This Step
 chooseWalletPlaceholder: Choisir un portefeuille...
 currency: Monnaie
 selectAccount: Sélectionner un compte

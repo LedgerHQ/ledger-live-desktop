@@ -24,22 +24,9 @@ currencies:
   explorer: Explorateur de blockchain
   explorerDesc: Lorem ipsum dolor sit amet
 profile:
-  username: Nom d'utilisateur
-  usernameDesc: Lorem ipsum dolor sit amet
   password: Mot de passe
   passwordDesc: Lorem ipsum dolor sit amet
   changePassword: Changer le mot de passe
-  passwordModalTitle: Mot de passe
-  passwordModalSubtitle: Définir un mot de passe pour verrouiller votre application
-  passwordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. integer non nibh diam.
-  passwordModalPasswordInput: Mot de passe actuel
-  passwordModalNewPasswordInput: Nouveau mot de passe
-  passwordModalRepeatPasswordInput: Répéter mot de passe
-  passwordModalSave: Sauvegarder
-  disablePasswordModalTitle: Disable Password
-  disablePasswordModalDesc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
-  disablePasswordModalInput: Current password
-  disablePasswordModalSave: Save
   sync: Synchroniser les comptes
   syncDesc: Lorem ipsum dolor sit amet
   export: Exporter le journal
@@ -52,6 +39,10 @@ profile:
   hardReset: Hard reset
   developerMode: Developer Mode
   developerModeDesc: Enable visibility of developer apps & currencies like Bitcoin Testnet
+  analytics: Share analytics
+  analyticsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+  reportErrors: Sentry Logs
+  reportErrorsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
 about:
   faq: FAQ
   faqDesc: Lorem ipsum dolor sit amet
@@ -67,3 +58,7 @@ softResetModal:
   title: Clean application cache
   subTitle: Are you sure houston?
   desc: Lorem ipsum dolor sit amet
+exportLogs:
+  title: Export Logs
+  desc: Export Logs
+  btn: Export Logs
