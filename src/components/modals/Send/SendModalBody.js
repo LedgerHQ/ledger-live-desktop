@@ -300,7 +300,6 @@ class SendModalBody extends PureComponent<Props, State<*>> {
             <StepConnectDevice
               t={t}
               account={account}
-              accountName={account && account.name}
               deviceSelected={deviceSelected}
               onChangeDevice={this.onChangeDevice}
               onStatusChange={this.onChangeStatus}

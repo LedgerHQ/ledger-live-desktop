@@ -9,7 +9,6 @@ import DeviceConnect from 'components/DeviceConnect'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
 
 type Props = {
-  accountName?: string,
   account?: ?Account,
   currency?: ?CryptoCurrency,
   deviceSelected?: ?Device,
@@ -20,7 +19,6 @@ type Props = {
 const StepConnectDevice = ({
   account,
   currency,
-  accountName,
   deviceSelected,
   onChangeDevice,
   onStatusChange,
@@ -32,7 +30,6 @@ const StepConnectDevice = ({
     onStatusChange={onStatusChange}
     render={({ currency, appStatus, devices, deviceSelected, errorMessage }) => (
       <DeviceConnect
-        accountName={accountName}
         currency={currency}
         appOpened={appStatus === 'success' ? 'success' : appStatus === 'fail' ? 'fail' : null}
         devices={devices}

@@ -2,6 +2,7 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import logger from 'logger'
+import invariant from 'invariant'
 import { isSegwitAccount } from 'helpers/bip32'
 
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
@@ -10,7 +11,7 @@ import type { Device } from 'types/common'
 import { getDevices } from 'reducers/devices'
 import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
-import isCurrencyAppOpened from 'commands/isCurrencyAppOpened'
+import { standardDerivation } from 'helpers/derivations'
 import isDashboardOpen from 'commands/isDashboardOpen'
 
 import { CHECK_APP_INTERVAL_WHEN_VALID, CHECK_APP_INTERVAL_WHEN_INVALID } from 'config/constants'
@@ -116,31 +117,42 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
     let isSuccess = true
 
     try {
-      if (account) {
+      if (account || currency) {
+        const cur = account ? account.currency : currency
+        invariant(cur, 'currency is available')
         const { address } = await getAddress
           .send({
             devicePath: deviceSelected.path,
-            currencyId: account.currency.id,
-            path: account.freshAddressPath,
-            segwit: isSegwitAccount(account),
+            currencyId: cur.id,
+            path: account
+              ? account.freshAddressPath
+              : standardDerivation({ currency: cur, segwit: false, x: 0 }),
+            segwit: account ? isSegwitAccount(account) : false,
           })
           .toPromise()
-        const { freshAddress } = account
-        if (account && freshAddress !== address) {
-          logger.warn({ freshAddress, address })
-          throw new Error('Account address is different than device address')
-        }
-      } else if (currency) {
-        const pass = await isCurrencyAppOpened
-          .send({
-            devicePath: deviceSelected.path,
-            currencyId: currency.id,
+          .catch(e => {
+            if (
+              e &&
+              (e.name === 'TransportStatusError' ||
+                // we don't want these error to appear (caused by usb disconnect..)
+                e.message === 'could not read from HID device' ||
+                e.message === 'Cannot write to HID device')
+            ) {
+              logger.log(e)
+              throw new Error(`You must open application ‘${cur.name}’ on the device`)
+            }
+            throw e
           })
-          .toPromise()
-        if (!pass) {
-          throw new Error(`${currency.name} app is not opened on the device`)
+
+        if (account) {
+          const { freshAddress } = account
+          if (account && freshAddress !== address) {
+            logger.warn({ freshAddress, address })
+            throw new Error(`You must use the device associated to the account ‘${account.name}’`)
+          }
         }
       } else {
+        // FIXME REMOVE THIS ! should use EnsureDashboard dedicated component.
         const isDashboard = isDashboardOpen.send({ devicePath: deviceSelected.path }).toPromise()
 
         if (!isDashboard) {

@@ -138,7 +138,6 @@ StepCheck.defaultProps = {
 }
 
 type Props = {
-  accountName: null | string,
   appOpened: null | 'success' | 'fail',
   genuineCheckStatus: null | 'success' | 'fail',
   withGenuineCheck: boolean,
@@ -188,7 +187,6 @@ class DeviceConnect extends PureComponent<Props> {
       withGenuineCheck,
       appOpened,
       errorMessage,
-      accountName,
       currency,
       t,
       onChangeDevice,
@@ -311,14 +309,7 @@ class DeviceConnect extends PureComponent<Props> {
           <Info hasErrors>
             <IconInfoCircle size={12} />
             <Box shrink selectable>
-              {accountName ? (
-                <Trans i18nKey="deviceConnect:info" parent="div">
-                  {'You must use the device associated to the account '}
-                  <strong>{accountName}</strong>
-                </Trans>
-              ) : (
-                String(errorMessage || '')
-              )}
+              {String(errorMessage || '')}
             </Box>
           </Info>
         ) : null}

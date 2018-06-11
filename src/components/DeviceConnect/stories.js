@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { boolean, select, text } from '@storybook/addon-knobs'
+import { select } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import {
   getCryptoCurrencyById,
@@ -45,7 +45,6 @@ stories.add('DeviceConnect', () => (
     {({ currency }) => (
       <DeviceConnect
         currency={currency}
-        accountName={boolean('withAccount', true) ? text('accountName', 'Test Account') : null}
         appOpened={select('appOpened', ['', 'success', 'fail'], '')}
         devices={devices.slice(0, Number(select('devices', [0, 1, 2, 3], '0')))}
         deviceSelected={devices[select('deviceSelected', ['', 0, 1, 2], '')] || null}
