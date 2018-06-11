@@ -6,8 +6,9 @@ import { space, fontSize, fontWeight, color } from 'styled-system'
 import noop from 'lodash/noop'
 
 import { darken, lighten } from 'styles/helpers'
-
 import fontFamily from 'styles/styled/fontFamily'
+
+import Spinner from 'components/base/Spinner'
 
 const buttonStyles = {
   primary: {
@@ -73,6 +74,14 @@ const buttonStyles = {
       padding-right: ${space[1]}px;
     `,
   },
+  isLoading: {
+    default: () => `
+      padding-left: 40px;
+      padding-right: 40px;
+      pointer-events: none;
+      opacity: 0.7;
+    `,
+  },
 }
 
 function getStyles(props, state) {
@@ -127,14 +136,15 @@ type Props = {
   onClick?: Function,
   small?: boolean,
   padded?: boolean,
+  isLoading?: boolean,
 }
 
 const Button = (props: Props) => {
-  const { onClick, children, disabled } = props
-
+  const { onClick, children, disabled, isLoading } = props
+  const isClickDisabled = disabled || isLoading
   return (
-    <Base {...props} onClick={disabled ? undefined : onClick}>
-      {children}
+    <Base {...props} onClick={isClickDisabled ? undefined : onClick}>
+      {isLoading ? <Spinner size={16} /> : children}
     </Base>
   )
 }

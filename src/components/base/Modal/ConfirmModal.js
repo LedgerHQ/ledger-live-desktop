@@ -21,6 +21,7 @@ type Props = {
   onReject: Function,
   onConfirm: Function,
   t: T,
+  isLoading?: boolean,
 }
 
 class ConfirmModal extends PureComponent<Props> {
@@ -35,6 +36,7 @@ class ConfirmModal extends PureComponent<Props> {
       isDanger,
       onReject,
       onConfirm,
+      isLoading,
       t,
       ...props
     } = this.props
@@ -44,9 +46,10 @@ class ConfirmModal extends PureComponent<Props> {
     return (
       <Modal
         isOpened={isOpened}
+        preventBackdropClick={isLoading}
         {...props}
         render={({ onClose }) => (
-          <ModalBody onClose={onClose}>
+          <ModalBody onClose={isLoading ? undefined : onClose}>
             <ModalTitle>{title}</ModalTitle>
             <ModalContent>
               {subTitle && (
@@ -59,8 +62,13 @@ class ConfirmModal extends PureComponent<Props> {
               </Box>
             </ModalContent>
             <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-              <Button onClick={onReject}>{realCancelText}</Button>
-              <Button onClick={onConfirm} primary={!isDanger} danger={isDanger}>
+              {!isLoading && <Button onClick={onReject}>{realCancelText}</Button>}
+              <Button
+                onClick={onConfirm}
+                primary={!isDanger}
+                danger={isDanger}
+                isLoading={isLoading}
+              >
                 {realConfirmText}
               </Button>
             </ModalFooter>
