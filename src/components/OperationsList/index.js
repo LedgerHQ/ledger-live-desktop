@@ -2,7 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import moment from 'moment'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
@@ -11,7 +10,7 @@ import {
   groupAccountsOperationsByDay,
 } from '@ledgerhq/live-common/lib/helpers/account'
 
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Operation, Account } from '@ledgerhq/live-common/lib/types'
 
 import keyBy from 'lodash/keyBy'
 
@@ -27,15 +26,8 @@ import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 import Defer from 'components/base/Defer'
 
-import Operation from './Operation'
-
-const calendarOpts = {
-  sameDay: 'LL – [Today]',
-  nextDay: 'LL – [Tomorrow]',
-  lastDay: 'LL – [Yesterday]',
-  lastWeek: 'LL',
-  sameElse: 'LL',
-}
+import SectionTitle from './SectionTitle'
+import OperationC from './Operation'
 
 const ShowMore = styled(Box).attrs({
   horizontal: true,
@@ -82,7 +74,11 @@ export class OperationsList extends PureComponent<Props, State> {
 
   state = initialState
 
-  handleClickOperation = (data: Object) => this.props.openModal(MODAL_OPERATION_DETAILS, data)
+  handleClickOperation = (operation: Operation, account: Account) =>
+    this.props.openModal(MODAL_OPERATION_DETAILS, {
+      operationId: operation.id,
+      accountId: account.id,
+    })
 
   // TODO: convert of async/await if fetching with the api
   fetchMoreOperations = () => {
@@ -92,10 +88,6 @@ export class OperationsList extends PureComponent<Props, State> {
   render() {
     const { account, accounts, canShowMore, t, title, withAccount } = this.props
     const { nbToShow } = this.state
-
-    const totalOperations = accounts
-      ? accounts.reduce((a, b) => +a + +b.operations.length, 0)
-      : account.operations.length
 
     if (!account && !accounts) {
       console.warn('Preventing render OperationsList because not received account or accounts') // eslint-disable-line no-console
@@ -115,36 +107,31 @@ export class OperationsList extends PureComponent<Props, State> {
               {title}
             </Text>
           )}
-          {groupedOperations.sections.map(group => {
-            const d = moment(group.day)
-            return (
-              <Box flow={2} key={group.day.toISOString()}>
-                <Box ff="Open Sans|SemiBold" fontSize={4} color="grey">
-                  {d.calendar(null, calendarOpts)}
-                </Box>
-                <Card p={0}>
-                  {group.data.map(op => {
-                    const account = accountsMap[op.accountId]
-                    if (!account) {
-                      return null
-                    }
-                    return (
-                      <Operation
-                        account={account}
-                        key={op.id}
-                        onOperationClick={this.handleClickOperation}
-                        op={op}
-                        t={t}
-                        withAccount={withAccount}
-                      />
-                    )
-                  })}
-                </Card>
-              </Box>
-            )
-          })}
+          {groupedOperations.sections.map(group => (
+            <Box flow={2} key={group.day.toISOString()}>
+              <SectionTitle day={group.day} />
+              <Card p={0}>
+                {group.data.map(operation => {
+                  const account = accountsMap[operation.accountId]
+                  if (!account) {
+                    return null
+                  }
+                  return (
+                    <OperationC
+                      operation={operation}
+                      account={account}
+                      key={operation.id}
+                      onOperationClick={this.handleClickOperation}
+                      t={t}
+                      withAccount={withAccount}
+                    />
+                  )
+                })}
+              </Card>
+            </Box>
+          ))}
           {canShowMore &&
-            totalOperations > nbToShow && (
+            !groupedOperations.completed && (
               <ShowMore onClick={this.fetchMoreOperations}>
                 <span>{t('operationsList:showMore')}</span>
                 <IconAngleDown size={12} />

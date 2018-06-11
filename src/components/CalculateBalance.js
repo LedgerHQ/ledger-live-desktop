@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/no-unused-prop-types */
 
-import { PureComponent } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
@@ -79,7 +79,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
   }
 }
 
-class CalculateBalance extends PureComponent<Props> {
+class CalculateBalance extends Component<Props> {
   render() {
     const { children } = this.props
     return children(this.props)
