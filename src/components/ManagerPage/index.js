@@ -34,8 +34,36 @@ type State = {
 }
 
 class ManagerPage extends PureComponent<Props, State> {
-  render(): Node {
+  renderDashboard = (device: Device, deviceInfo: DeviceInfo) => {
     const { t } = this.props
+    return (
+      <Box flow={4}>
+        <Box>
+          <Text ff="Museo Sans|Regular" fontSize={7} color="black">
+            {t('manager:title')}
+          </Text>
+          <Text ff="Museo Sans|Light" fontSize={5}>
+            {t('manager:subtitle')}
+          </Text>
+        </Box>
+        <Box mt={7}>
+          <FirmwareUpdate
+            infos={{
+              targetId: deviceInfo.targetId,
+              version: deviceInfo.version,
+            }}
+            device={device}
+            t={t}
+          />
+        </Box>
+        <Box>
+          <AppsList device={device} targetId={deviceInfo.targetId} />
+        </Box>
+      </Box>
+    )
+  }
+
+  render(): Node {
     return (
       <Workflow
         renderError={(dashboardError: ?Error, genuineError: ?Error) => {
@@ -49,31 +77,7 @@ class ManagerPage extends PureComponent<Props, State> {
         renderMcuUpdate={(deviceInfo: DeviceInfo) => (
           <p>FLASH MCU (TEMPLATE + ACTION WIP) {deviceInfo.mcu}</p>
         )}
-        renderDashboard={(device: Device, deviceInfo: DeviceInfo) => (
-          <Box flow={4}>
-            <Box>
-              <Text ff="Museo Sans|Regular" fontSize={7} color="black">
-                {t('manager:title')}
-              </Text>
-              <Text ff="Museo Sans|Light" fontSize={5}>
-                {t('manager:subtitle')}
-              </Text>
-            </Box>
-            <Box mt={7}>
-              <FirmwareUpdate
-                infos={{
-                  targetId: deviceInfo.targetId,
-                  version: deviceInfo.version,
-                }}
-                device={device}
-                t={t}
-              />
-            </Box>
-            <Box>
-              <AppsList device={device} targetId={deviceInfo.targetId} />
-            </Box>
-          </Box>
-        )}
+        renderDashboard={this.renderDashboard}
       />
     )
   }

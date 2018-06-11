@@ -1,7 +1,7 @@
 // @flow
 
 import logger from 'logger'
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 
@@ -13,6 +13,9 @@ import installOsuFirmware from 'commands/installOsuFirmware'
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
+
+import NanoS from 'icons/device/NanoS'
+import CheckFull from 'icons/CheckFull'
 
 let CACHED_LATEST_FIRMWARE = null
 
@@ -35,6 +38,26 @@ type Props = {
 type State = {
   latestFirmware: ?FirmwareInfos,
 }
+
+const UpdateButton = ({
+  t,
+  firmware,
+  installFirmware,
+}: {
+  t: T,
+  firmware: ?FirmwareInfos,
+  installFirmware: (firmware: FirmwareInfos) => *,
+}) =>
+  firmware ? (
+    <Fragment>
+      <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
+        {t('manager:latestFirmware', { version: firmware.name })}
+      </Text>
+      <Button primary onClick={installFirmware(firmware)}>
+        {t('manager:installFirmware')}
+      </Button>
+    </Fragment>
+  ) : null
 
 class FirmwareUpdate extends PureComponent<Props, State> {
   state = {
@@ -89,31 +112,31 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, ...props } = this.props
+    const { t, infos } = this.props
     const { latestFirmware } = this.state
 
-    if (!latestFirmware) {
-      return null
-    }
-
     return (
-      <Box flow={4} {...props}>
-        <Card flow={2} {...props}>
-          <Box horizontal align="center" flow={2}>
-            <Text ff="Open Sans|Regular" fontSize={4}>{`${t('manager:latestFirmware')}: ${
-              latestFirmware.name
-            }`}</Text>
-            <Button outline onClick={this.installFirmware(latestFirmware)}>
-              {t('manager:install')}
-            </Button>
+      <Card px={4} py={25}>
+        <Box horizontal align="center" flow={2}>
+          <Box color="dark">
+            <NanoS size={30} />
           </Box>
-          <Box
-            fontSize={3}
-            style={{ whiteSpace: 'pre' }}
-            dangerouslySetInnerHTML={{ __html: latestFirmware.notes }}
-          />
-        </Card>
-      </Box>
+          <Box>
+            <Box horizontal align="center">
+              <Text ff="Open Sans|SemiBold" fontSize={4} color="dark">
+                Ledger Nano S
+              </Text>
+              <Box color="wallet" style={{ marginLeft: 10 }}>
+                <CheckFull size={13} color="wallet" />
+              </Box>
+            </Box>
+            <Text ff="Open Sans|SemiBold" fontSize={2}>
+              Firmware {infos.version}
+            </Text>
+          </Box>
+          <UpdateButton t={t} firmware={latestFirmware} installFirmware={this.installFirmware} />
+        </Box>
+      </Card>
     )
   }
 }

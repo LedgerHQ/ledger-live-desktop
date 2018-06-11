@@ -1,6 +1,10 @@
 // @flow
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
+import { color, fontSize, space } from 'styled-system'
+import fontFamily from 'styles/styled/fontFamily'
+
+import { ff } from 'styles/helpers'
 
 import Box from 'components/base/Box'
 import Search from 'components/base/Search'
@@ -40,16 +44,26 @@ const SearchBarWrapper = styled(Box).attrs({
   padding: 0 13px;
 `
 
-const Input = styled.input`
-  width: 100%;
+const Input = styled.input.attrs({
+  ff: 'Open Sans|SemiBold',
+  color: 'dark',
+  mx: 3,
+  fontSize: 4,
+})`
+  ${space};
+  ${fontFamily};
+  ${fontSize};
+  ${color};
+
   border: 0;
-  margin: 0 13px;
   flex: 1;
   outline: none;
   background: transparent;
-  color: black;
-  font-family: 'Open Sans';
-  font-weight: 600;
+
+  &::placeholder {
+    color: ${p => p.theme.colors.fog};
+    ${() => ff('Open Sans|Regular')};
+  }
 `
 
 class AppSearchBar extends PureComponent<Props, State> {
@@ -86,6 +100,7 @@ class AppSearchBar extends PureComponent<Props, State> {
             onChange={this.handleChange}
             onFocus={this.handleFocus(true)}
             onBlur={this.handleFocus(false)}
+            placeholder={'Search app'}
           />
           {!!query && <CrossIcon size={16} cursor="pointer" onClick={this.reset} />}
         </SearchBarWrapper>
