@@ -2,7 +2,7 @@
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
 
-const { API_BASE_URL } = process.env
+import { API_BASE_URL } from 'helpers/constants'
 
 type Input = {
   version: string,
