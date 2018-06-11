@@ -22,8 +22,17 @@ class SelectDevice extends PureComponent<StepProps, {}> {
   handleIsLedgerNano = (isLedgerNano: boolean) => {
     this.props.isLedgerNano(isLedgerNano)
   }
+
+  handleContinue = () => {
+    const { nextStep, jumpStep, onboarding } = this.props
+    if (onboarding.flowType === 'initializedDevice') {
+      jumpStep('genuineCheck')
+    } else {
+      nextStep()
+    }
+  }
   render() {
-    const { t, onboarding, nextStep, prevStep, jumpStep } = this.props
+    const { t, onboarding, prevStep } = this.props
     return (
       <Box sticky>
         <Box grow alignItems="center" justifyContent="center">
@@ -59,11 +68,9 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           horizontal
           flow={2}
           t={t}
-          nextStep={nextStep}
+          nextStep={this.handleContinue}
           prevStep={prevStep}
-          jumpStep={jumpStep}
           isContinueDisabled={onboarding.isLedgerNano === null}
-          jumpTo={onboarding.flowType === 'initializedDevice' ? 'genuineCheck' : undefined}
         />
       </Box>
     )
