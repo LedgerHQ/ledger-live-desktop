@@ -93,7 +93,6 @@ const state: OnboardingState = {
         showBreadcrumb: true,
       },
     },
-    // UNTIL IS NEEDED SET PASSWORD IS COMMENTED OUT
     {
       name: 'setPassword',
       label: 'Set Password',

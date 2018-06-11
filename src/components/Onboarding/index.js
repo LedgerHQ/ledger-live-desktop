@@ -32,7 +32,6 @@ import SelectDevice from './steps/SelectDevice'
 import SelectPIN from './steps/SelectPIN/index'
 import WriteSeed from './steps/WriteSeed/index'
 import GenuineCheck from './steps/GenuineCheck'
-// UNTIL IS NEEDED SET PASSWORD IS COMMENTED OUT
 import SetPassword from './steps/SetPassword'
 import Analytics from './steps/Analytics'
 import Finish from './steps/Finish'
