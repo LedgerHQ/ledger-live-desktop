@@ -5,11 +5,11 @@ import { connect } from 'react-redux'
 import { remote } from 'electron'
 import bcrypt from 'bcryptjs'
 
-import libcoreHardReset from 'commands/libcoreHardReset'
 import { cleanAccountsCache } from 'actions/accounts'
 import { unlock } from 'reducers/application' // FIXME should be in actions
 import db, { setEncryptionKey } from 'helpers/db'
 import { delay } from 'helpers/promise'
+import hardReset from 'helpers/hardReset'
 
 import type { SettingsState } from 'reducers/settings'
 import type { T } from 'types/common'
@@ -94,12 +94,8 @@ class TabProfile extends PureComponent<Props, State> {
   handleHardReset = async () => {
     this.setState({ isHardResetting: true })
     try {
-      // TODO: wait for the libcoreHardReset to be finished
-      // actually, libcore doesnt goes back to js thread
-      await Promise.race([libcoreHardReset.send().toPromise(), delay(500)])
-      db.resetAll()
-      await delay(500)
-      remote.getCurrentWindow().webContents.reload()
+      await hardReset()
+      remote.getCurrentWindow().webContents.reloadIgnoringCache()
     } catch (err) {
       this.setState({ isHardResetting: false })
     }

@@ -6,8 +6,16 @@ import { accountsSelector } from 'reducers/accounts'
 import { settingsExportSelector, areSettingsLoaded } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
 
+let DB_MIDDLEWARE_ENABLED = true
+
+// ability to temporary disable the db middleware from outside
+export const disable = (ms = 1000) => {
+  DB_MIDDLEWARE_ENABLED = false
+  setTimeout(() => (DB_MIDDLEWARE_ENABLED = true), ms)
+}
+
 export default store => next => action => {
-  if (action.type.startsWith('DB:')) {
+  if (DB_MIDDLEWARE_ENABLED && action.type.startsWith('DB:')) {
     const [, type] = action.type.split(':')
     store.dispatch({ type, payload: action.payload })
     const state = store.getState()
