@@ -5,7 +5,6 @@
 import React, { PureComponent } from 'react'
 import Scrollbar from 'react-smooth-scrollbar'
 import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar'
-import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
 
@@ -13,42 +12,55 @@ type Props = {
   children: any,
   full: boolean,
   maxHeight?: number,
-  onUpdate: Function,
-  onScroll: Function,
+  onUpdate?: (*) => void,
+  onScroll?: () => void,
 }
 
+// TODO this component is the source of junky scroll experience. need better solution ASAP
 class GrowScroll extends PureComponent<Props> {
   static defaultProps = {
     full: false,
-    onUpdate: noop,
-    onScroll: noop,
   }
 
   componentDidMount() {
-    this.handleUpdate(this.props)
-
-    if (this._scrollbar) {
-      this._scrollbar.addListener(this.props.onScroll)
+    const { onUpdate, onScroll } = this.props
+    const { _scrollbar } = this
+    if (_scrollbar) {
+      if (onUpdate) {
+        onUpdate(_scrollbar)
+      }
+      if (onScroll) {
+        _scrollbar.addListener(this.onScroll)
+      }
     }
   }
 
   componentWillUnmount() {
-    if (this._scrollbar) {
-      this._scrollbar.removeListener(this.props.onScroll)
+    const { onScroll } = this.props
+    const { _scrollbar } = this
+    if (_scrollbar && onScroll) {
+      _scrollbar.removeListener(this.onScroll)
     }
   }
 
   componenDidUpdate() {
-    this.handleUpdate(this.props)
-  }
-
-  handleUpdate = (props: Props) => {
-    if (this._scrollbar) {
-      props.onUpdate(this._scrollbar)
+    const { onUpdate } = this.props
+    const { _scrollbar } = this
+    if (_scrollbar && onUpdate) {
+      onUpdate(_scrollbar)
     }
   }
 
-  _scrollbar = undefined
+  onScroll = () => {
+    const { onScroll } = this.props
+    if (onScroll) onScroll()
+  }
+
+  onRef = (ref: ?Scrollbar) => {
+    this._scrollbar = ref && ref.scrollbar
+  }
+
+  _scrollbar: *
 
   render() {
     const { onUpdate, children, maxHeight, full, ...props } = this.props
@@ -79,7 +91,7 @@ class GrowScroll extends PureComponent<Props> {
                   top: 0,
                 }),
           }}
-          ref={r => r && (this._scrollbar = r.scrollbar)}
+          ref={this.onRef}
         >
           <Box {...props}>{children}</Box>
         </Scrollbar>
