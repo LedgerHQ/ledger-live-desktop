@@ -37,12 +37,6 @@ class UpdateInstalled extends PureComponent<Props> {
     }
   }
 
-  showModal = ({ data }) => {
-    const { openModal } = this.props
-
-    openModal(MODAL_RELEASES_NOTES, data)
-  }
-
   render() {
     return null
   }

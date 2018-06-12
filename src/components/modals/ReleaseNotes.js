@@ -21,6 +21,7 @@ type Props = {
 
 type State = {
   markdown: ?string,
+  loading: boolean,
 }
 
 const Notes = styled(Box).attrs({
@@ -150,14 +151,11 @@ const Title = styled(Text).attrs({
 class ReleaseNotes extends PureComponent<Props, State> {
   state = {
     markdown: null,
+    loading: false,
   }
 
-  render() {
-    const { t } = this.props
-    const renderBody = ({ data, onClose }) => {
-      const version = data
-      const { markdown } = this.state
-
+  fetchNotes = version => {
+    if (!this.state.loading) {
       axios
         .get(`https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`)
         .then(response => {
@@ -165,24 +163,40 @@ class ReleaseNotes extends PureComponent<Props, State> {
 
           this.setState({
             markdown: body,
+            loading: false,
           })
         })
+    }
+  }
 
-      const content = markdown ? (
-        <Notes>
-          <Title>{t('releaseNotes:version', { versionNb: version })}</Title>
-          <ReactMarkdown>{markdown}</ReactMarkdown>
-        </Notes>
-      ) : (
-        <Box horizontal alignItems="center">
-          <Spinner
-            size={32}
-            style={{
-              margin: 'auto',
-            }}
-          />
-        </Box>
-      )
+  render() {
+    const { t } = this.props
+    const renderBody = ({ data, onClose }) => {
+      const version = data
+      const { markdown } = this.state
+      let content
+
+      if (!markdown) {
+        this.fetchNotes(version)
+
+        content = (
+          <Box horizontal alignItems="center">
+            <Spinner
+              size={32}
+              style={{
+                margin: 'auto',
+              }}
+            />
+          </Box>
+        )
+      } else {
+        content = (
+          <Notes>
+            <Title>{t('releaseNotes:version', { versionNb: version })}</Title>
+            <ReactMarkdown>{markdown}</ReactMarkdown>
+          </Notes>
+        )
+      }
 
       return (
         <ModalBody onClose={onClose}>
