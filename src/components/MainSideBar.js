@@ -17,10 +17,13 @@ import type { UpdateStatus } from 'reducers/update'
 
 import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
 
+import { rgba } from 'styles/helpers'
+
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { getUpdateStatus } from 'reducers/update'
 
+import Tooltip from 'components/base/Tooltip'
 import { SideBarList } from 'components/base/SideBar'
 import Box, { Tabbable } from 'components/base/Box'
 import Space from 'components/base/Space'
@@ -140,9 +143,11 @@ class MainSideBar extends PureComponent<Props> {
           scroll
           title={t('sidebar:accounts')}
           titleRight={
-            <PlusWrapper onClick={() => openModal('importAccounts')}>
-              <IconCirclePlus size={16} />
-            </PlusWrapper>
+            <Tooltip render={() => t('importAccounts:title')}>
+              <PlusWrapper onClick={() => openModal('importAccounts')}>
+                <IconCirclePlus size={16} />
+              </PlusWrapper>
+            </Tooltip>
           }
           items={accountsItems}
           emptyText={t('emptyState:sidebar.text')}
@@ -157,15 +162,15 @@ const PlusWrapper = styled(Tabbable).attrs({
   cursor: 'pointer',
   borderRadius: 1,
 })`
-  opacity: 0.4;
+  color: ${p => p.theme.colors.smoke};
   &:hover {
-    opacity: 1;
+    color: ${p => p.theme.colors.dark};
   }
 
-  border: 1px dashed rgba(0, 0, 0, 0);
+  border: 1px solid transparent;
   &:focus {
-    border: 1px dashed rgba(0, 0, 0, 0.2);
     outline: none;
+    border-color: ${p => rgba(p.theme.colors.wallet, 0.3)};
   }
 `
 

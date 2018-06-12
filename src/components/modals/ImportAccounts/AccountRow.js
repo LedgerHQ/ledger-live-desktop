@@ -17,7 +17,7 @@ import IconCheck from 'icons/Check'
 type Props = {
   account: Account,
   isChecked: boolean,
-  isDisabled: boolean,
+  isDisabled?: boolean,
   onClick: Account => void,
   onAccountUpdate: Account => void,
 }
@@ -110,7 +110,7 @@ export default class AccountRow extends PureComponent<Props, State> {
           fontSize={4}
           color="grey"
         />
-        <Radio isChecked={isChecked || isDisabled} />
+        <Radio isChecked={isChecked || !!isDisabled} />
       </AccountRowContainer>
     )
   }
