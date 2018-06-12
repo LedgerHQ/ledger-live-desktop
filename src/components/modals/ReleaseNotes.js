@@ -14,7 +14,121 @@ const Notes = styled(Box).attrs({
   fontSize: 4,
   color: 'smoke',
   flow: 4,
-})``
+})`
+  ul,
+  ol {
+    padding-left: 20px;
+  }
+
+  p {
+    margin: 1em 0;
+  }
+
+  code,
+  pre {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  }
+
+  code {
+    padding: 0.2em 0.4em;
+    font-size: 0.9em;
+    background-color: ${p => p.theme.colors.lightGrey};
+    border-radius: 3px;
+  }
+
+  pre {
+    word-wrap: normal;
+
+    code {
+      word-break: normal;
+      white-space: pre;
+      background: transparent;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: ${p => p.theme.colors.dark};
+    font-weight: bold;
+  }
+
+  h1 {
+    margin: 0.67em 0;
+    font-size: 1.17em;
+  }
+
+  h2 {
+    margin: 0.83em 0;
+  }
+
+  h3 {
+    margin: 1em 0;
+    font-size: 0.83em;
+  }
+
+  h4 {
+    margin: 1.33em 0;
+    font-size: 0.67em;
+  }
+
+  h5 {
+    margin: 1.67em 0;
+    font-size: 0.67em;
+  }
+
+  h6 {
+    margin: 2.33em 0;
+    font-size: 0.67em;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  hr {
+    height: 1px;
+    border: none;
+    background-color: ${p => p.theme.colors.fog};
+  }
+
+  blockquote {
+    padding: 0 1em;
+    border-left: 0.25em solid #dfe2e5;
+  }
+
+  table {
+    width: 100%;
+    overflow: auto;
+    border-collapse: collapse;
+
+    th {
+      font-weight: bold;
+    }
+
+    th,
+    td {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #c6cbd1;
+    }
+
+    tr:nth-child(2n) {
+      background-color: #f6f8fa;
+    }
+  }
+
+  input[type='checkbox'] {
+    margin-right: 0.5em;
+  }
+`
 
 const Title = styled(Text).attrs({
   ff: 'Museo Sans',
