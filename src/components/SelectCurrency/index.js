@@ -14,7 +14,7 @@ import Select from 'components/base/Select'
 import Box from 'components/base/Box'
 
 type OwnProps = {
-  onChange: Option => void,
+  onChange: (?Option) => void,
   currencies?: CryptoCurrency[],
   value?: CryptoCurrency,
   placeholder: string,

@@ -11,7 +11,7 @@ type Props = {
   // required
   value: ?Option,
   options: Option[],
-  onChange: Option => void,
+  onChange: (?Option) => void,
 
   // custom renders
   renderOption: Option => Node,
