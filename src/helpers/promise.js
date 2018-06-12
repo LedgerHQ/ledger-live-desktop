@@ -1,6 +1,7 @@
 // @flow
-import logger from 'logger'
 // small utilities for Promises
+
+import logger from 'logger'
 
 export const delay = (ms: number): Promise<void> => new Promise(f => setTimeout(f, ms))
 
@@ -21,7 +22,7 @@ export function retry<A>(f: () => Promise<A>, options?: $Shape<typeof defaults>)
     }
     // In case of failure, wait the interval, retry the action
     return result.catch(e => {
-      logger.warn('Promise#retry', e)
+      logger.warn('retry failed', e.message)
       return delay(interval).then(() => rec(remainingTry - 1, interval * intervalMultiplicator))
     })
   }

@@ -1,8 +1,7 @@
 // @flow
-import axios from 'axios'
-import { retry } from 'helpers/promise'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-import { blockchainBaseURL, userFriendlyError } from './Ledger'
+import network from './network'
+import { blockchainBaseURL } from './Ledger'
 
 export type Block = { height: number } // TODO more fields actually
 export type Tx = {
@@ -47,37 +46,40 @@ export const apiForCurrency = (currency: CryptoCurrency): API => {
   }
   return {
     async getTransactions(address, blockHash) {
-      const { data } = await userFriendlyError(
-        retry(
-          () =>
-            axios.get(`${baseURL}/addresses/${address}/transactions`, {
-              params: { blockHash, noToken: 1 },
-            }),
-          { maxRetry: 3 },
-        ),
-      )
+      const { data } = await network({
+        method: 'GET',
+        url: `${baseURL}/addresses/${address}/transactions`,
+        params: { blockHash, noToken: 1 },
+      })
       return data
     },
     async getCurrentBlock() {
-      const { data } = await userFriendlyError(
-        retry(() => axios.get(`${baseURL}/blocks/current`), { maxRetry: 3 }),
-      )
+      const { data } = await network({
+        method: 'GET',
+        url: `${baseURL}/blocks/current`,
+      })
       return data
     },
     async getAccountNonce(address) {
-      const { data } = await userFriendlyError(
-        retry(() => axios.get(`${baseURL}/addresses/${address}/nonce`), { maxRetry: 3 }),
-      )
+      const { data } = await network({
+        method: 'GET',
+        url: `${baseURL}/addresses/${address}/nonce`,
+      })
       return data[0].nonce
     },
     async broadcastTransaction(tx) {
-      const { data } = await userFriendlyError(axios.post(`${baseURL}/transactions/send`, { tx }))
+      const { data } = await network({
+        method: 'POST',
+        url: `${baseURL}/transactions/send`,
+        data: { tx },
+      })
       return data.result
     },
     async getAccountBalance(address) {
-      const { data } = await userFriendlyError(
-        retry(() => axios.get(`${baseURL}/addresses/${address}/balance`), { maxRetry: 3 }),
-      )
+      const { data } = await network({
+        method: 'GET',
+        url: `${baseURL}/addresses/${address}/balance`,
+      })
       return data[0].balance
     },
   }
