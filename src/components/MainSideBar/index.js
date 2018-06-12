@@ -74,66 +74,57 @@ class MainSideBar extends PureComponent<Props> {
     const { t, accounts, location, updateStatus } = this.props
     const { pathname } = location
 
-    const navigationItems = [
-      {
-        key: 'dashboard',
-        label: t('dashboard:title'),
-        icon: IconPieChart,
-        iconActiveColor: 'wallet',
-        onClick: this.handleClickDashboard,
-        isActive: pathname === '/',
-        hasNotif: updateStatus === 'downloaded',
-      },
-      {
-        key: 'send',
-        label: t('send:title'),
-        icon: IconSend,
-        iconActiveColor: 'wallet',
-        onClick: this.handleOpenSendModal,
-      },
-      {
-        key: 'receive',
-        label: t('receive:title'),
-        icon: IconReceive,
-        iconActiveColor: 'wallet',
-        onClick: this.handleOpenReceiveModal,
-      },
-      {
-        key: 'manager',
-        label: t('sidebar:manager'),
-        icon: IconManager,
-        iconActiveColor: 'wallet',
-        onClick: this.handleClickManager,
-        isActive: pathname === '/manager',
-      },
-      {
-        key: 'exchange',
-        label: t('sidebar:exchange'),
-        icon: IconExchange,
-        iconActiveColor: 'wallet',
-        onClick: this.handleClickExchange,
-        isActive: pathname === '/exchange',
-      },
-    ]
+    const addAccountButton = (
+      <AddAccountButton
+        tooltipText={t('importAccounts:title')}
+        onClick={this.handleOpenImportModal}
+      />
+    )
 
     return (
       <Box bg="white" style={{ width: 230 }}>
         <Space of={70} />
         <SideBarList title={t('sidebar:menu')}>
-          {navigationItems.map(item => <SideBarListItem key={item.key} {...item} />)}
+          <SideBarListItem
+            label={t('dashboard:title')}
+            icon={IconPieChart}
+            iconActiveColor={'wallet'}
+            onClick={this.handleClickDashboard}
+            isActive={pathname === '/'}
+            hasNotif={updateStatus === 'downloaded'}
+          />
+          <SideBarListItem
+            label={t('send:title')}
+            icon={IconSend}
+            iconActiveColor={'wallet'}
+            onClick={this.handleOpenSendModal}
+          />
+          <SideBarListItem
+            label={t('receive:title')}
+            icon={IconReceive}
+            iconActiveColor={'wallet'}
+            onClick={this.handleOpenReceiveModal}
+          />
+          <SideBarListItem
+            label={t('sidebar:manager')}
+            icon={IconManager}
+            iconActiveColor={'wallet'}
+            onClick={this.handleClickManager}
+            isActive={pathname === '/manager'}
+          />
+          <SideBarListItem
+            label={t('sidebar:exchange')}
+            icon={IconExchange}
+            iconActiveColor={'wallet'}
+            onClick={this.handleClickExchange}
+            isActive={pathname === '/exchange'}
+          />
         </SideBarList>
-
         <Space of={40} />
-
         <SideBarList
           scroll
           title={t('sidebar:accounts')}
-          titleRight={
-            <AddAccountButton
-              tooltipText={t('importAccounts:title')}
-              onClick={this.handleOpenImportModal}
-            />
-          }
+          titleRight={addAccountButton}
           emptyText={t('emptyState:sidebar.text')}
         >
           {accounts.map(account => (
