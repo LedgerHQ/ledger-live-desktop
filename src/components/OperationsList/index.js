@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -9,9 +9,6 @@ import {
   groupAccountOperationsByDay,
   groupAccountsOperationsByDay,
 } from '@ledgerhq/live-common/lib/helpers/account'
-import IconReceive from 'icons/Receive'
-import IconSend from 'icons/Send'
-import Button from 'components/base/Button'
 
 import type { Operation, Account } from '@ledgerhq/live-common/lib/types'
 
