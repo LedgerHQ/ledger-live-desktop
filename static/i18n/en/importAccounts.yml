@@ -1,6 +1,16 @@
-title: Import accounts
+title: Add accounts
 breadcrumb:
   informations: Informations
   connectDevice: Connect device
   import: Import
   finish: End
+accountToImportSubtitle: Account to import
+accountToImportSubtitle_plural: 'Accounts to import ({{count}})'
+selectAll: Select all
+unselectAll: Unselect all
+createNewAccount: Create new account
+retrySync: Retry sync
+cta:
+  create: 'Create account'
+  import: 'Import account'
+  import_plural: 'Import accounts'

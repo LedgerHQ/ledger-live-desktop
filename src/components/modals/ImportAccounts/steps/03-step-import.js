@@ -1,7 +1,9 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 import type { Account } from '@ledgerhq/live-common/lib/types'
+import uniq from 'lodash/uniq'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -48,10 +50,18 @@ class StepImport extends PureComponent<StepProps> {
 
       this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
         next: account => {
-          const { scannedAccounts } = this.props
+          const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
+          const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
+          const isNewAccount = account.operations.length === 0
           if (!hasAlreadyBeenScanned) {
-            setState({ scannedAccounts: [...scannedAccounts, account] })
+            setState({
+              scannedAccounts: [...scannedAccounts, account],
+              checkedAccountsIds:
+                !hasAlreadyBeenImported && !isNewAccount
+                  ? uniq([...checkedAccountsIds, account.id])
+                  : checkedAccountsIds,
+            })
           }
         },
         complete: () => setState({ scanStatus: 'finished' }),
@@ -103,63 +113,125 @@ class StepImport extends PureComponent<StepProps> {
     })
   }
 
-  handleToggleSelectAll = () => {
+  handleSelectAll = () => {
     const { scannedAccounts, setState } = this.props
-    setState({ checkedAccountsIds: scannedAccounts.map(a => a.id) })
+    setState({
+      checkedAccountsIds: scannedAccounts.filter(a => a.operations.length > 0).map(a => a.id),
+    })
   }
 
+  handleUnselectAll = () => this.props.setState({ checkedAccountsIds: [] })
+
   render() {
-    const { scanStatus, err, scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
+    const { scanStatus, err, scannedAccounts, checkedAccountsIds, existingAccounts, t } = this.props
+
+    const importableAccounts = scannedAccounts.filter(acc => {
+      if (acc.operations.length <= 0) {
+        return false
+      }
+      return existingAccounts.find(a => a.id === acc.id) === undefined
+    })
+
+    const creatableAccounts = scannedAccounts.filter(acc => {
+      if (acc.operations.length > 0) {
+        return false
+      }
+      return existingAccounts.find(a => a.id === acc.id) === undefined
+    })
+
+    const isAllSelected = scannedAccounts.filter(acc => acc.operations.length > 0).every(acc => {
+      const isChecked = !!checkedAccountsIds.find(id => acc.id === id)
+      const isImported = !!existingAccounts.find(a => acc.id === a.id)
+      return isChecked || isImported
+    })
 
     return (
       <Box>
         {err && <Box shrink>{err.message}</Box>}
 
-        {!!scannedAccounts.length && (
-          <Box horizontal justify="flex-end" mb={2}>
-            <FakeLink onClick={this.handleToggleSelectAll} fontSize={3}>
-              {'Select all'}
-            </FakeLink>
-          </Box>
-        )}
+        <Box flow={5}>
+          {(!!importableAccounts.length || scanStatus === 'scanning') && (
+            <Box>
+              {!!importableAccounts.length && (
+                <Box horizontal mb={3} align="center">
+                  <Box
+                    ff="Open Sans|Bold"
+                    color="dark"
+                    fontSize={2}
+                    style={{ textTransform: 'uppercase' }}
+                  >
+                    {t('importAccounts:accountToImportSubtitle', {
+                      count: importableAccounts.length,
+                    })}
+                  </Box>
+                  <FakeLink
+                    ml="auto"
+                    onClick={isAllSelected ? this.handleUnselectAll : this.handleSelectAll}
+                    fontSize={3}
+                  >
+                    {isAllSelected
+                      ? t('importAccounts:unselectAll')
+                      : t('importAccounts:selectAll')}
+                  </FakeLink>
+                </Box>
+              )}
 
-        <Box flow={2}>
-          {scannedAccounts.map(account => {
-            const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
-            const existingAccount = existingAccounts.find(a => a.id === account.id)
-            const isDisabled = existingAccount !== undefined
-            return (
+              <Box flow={2}>
+                {importableAccounts.map(account => {
+                  const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
+                  const existingAccount = existingAccounts.find(a => a.id === account.id)
+                  const isDisabled = existingAccount !== undefined
+                  return (
+                    <AccountRow
+                      key={account.id}
+                      account={existingAccount || account}
+                      isChecked={isChecked}
+                      isDisabled={isDisabled}
+                      onClick={this.handleToggleAccount}
+                      onAccountUpdate={this.handleAccountUpdate}
+                    />
+                  )
+                })}
+
+                {scanStatus === 'scanning' && (
+                  <LoadingRow>
+                    <Spinner color="grey" size={16} />
+                  </LoadingRow>
+                )}
+              </Box>
+            </Box>
+          )}
+
+          {creatableAccounts.length > 0 && (
+            <Box>
+              <Box horizontal mb={3} align="center">
+                <Box
+                  ff="Open Sans|Bold"
+                  color="dark"
+                  fontSize={2}
+                  style={{ textTransform: 'uppercase' }}
+                >
+                  {t('importAccounts:createNewAccount')}
+                </Box>
+              </Box>
               <AccountRow
-                key={account.id}
-                account={existingAccount || account}
-                isChecked={isChecked}
-                isDisabled={isDisabled}
+                account={creatableAccounts[0]}
+                isChecked={
+                  checkedAccountsIds.find(id => id === creatableAccounts[0].id) !== undefined
+                }
                 onClick={this.handleToggleAccount}
                 onAccountUpdate={this.handleAccountUpdate}
               />
-            )
-          })}
-          {scanStatus === 'scanning' && (
-            <Box
-              horizontal
-              bg="lightGrey"
-              borderRadius={3}
-              px={3}
-              align="center"
-              justify="center"
-              style={{ height: 48 }}
-            >
-              <Spinner color="grey" size={24} />
             </Box>
           )}
         </Box>
 
         <Box horizontal mt={2}>
-          {['error', 'finished'].includes(scanStatus) && (
+          {['error'].includes(scanStatus) && (
             <Button small outline onClick={this.handleRetry}>
               <Box horizontal flow={2} align="center">
                 <IconExchange size={13} />
-                <span>{'retry sync'}</span>
+                <span>{t('importAccounts:retrySync')}</span>
               </Box>
             </Button>
           )}
@@ -171,12 +243,55 @@ class StepImport extends PureComponent<StepProps> {
 
 export default StepImport
 
-export const StepImportFooter = ({ scanStatus, onClickImport, checkedAccountsIds }: StepProps) => (
-  <Button
-    primary
-    disabled={scanStatus !== 'finished' || checkedAccountsIds.length === 0}
-    onClick={() => onClickImport()}
-  >
-    {'Import accounts'}
-  </Button>
-)
+export const LoadingRow = styled(Box).attrs({
+  horizontal: true,
+  borderRadius: 1,
+  px: 3,
+  align: 'center',
+  justify: 'center',
+})`
+  height: 48px;
+  border: 1px dashed ${p => p.theme.colors.fog};
+`
+
+export const StepImportFooter = ({
+  scanStatus,
+  onClickImport,
+  checkedAccountsIds,
+  scannedAccounts,
+  t,
+}: StepProps) => {
+  const willCreateAccount = checkedAccountsIds.some(id => {
+    const account = scannedAccounts.find(a => a.id === id)
+    return account && account.operations.length === 0
+  })
+
+  const willImportAccounts = checkedAccountsIds.some(id => {
+    const account = scannedAccounts.find(a => a.id === id)
+    return account && account.operations.length > 0
+  })
+
+  const importedAccountsCount = checkedAccountsIds.filter(id => {
+    const account = scannedAccounts.find(acc => acc.id === id)
+    return account && account.operations.length > 0
+  }).length
+
+  const ctaWording =
+    willCreateAccount && willImportAccounts
+      ? `${t('importAccounts:cta.create')} / ${t('importAccounts:cta.import', {
+          count: importedAccountsCount,
+        })}`
+      : willCreateAccount
+        ? t('importAccounts:cta.create')
+        : t('importAccounts:cta.import', { count: importedAccountsCount })
+
+  return (
+    <Button
+      primary
+      disabled={scanStatus !== 'finished' || checkedAccountsIds.length === 0}
+      onClick={() => onClickImport()}
+    >
+      {ctaWording}
+    </Button>
+  )
+}

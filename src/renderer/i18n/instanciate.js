@@ -3,6 +3,7 @@ import i18n from 'i18next'
 const commonConfig = {
   fallbackLng: 'en',
   debug: false,
+  compatibilityJSON: 'v2',
   react: {
     wait: process.env.NODE_ENV !== 'test',
   },
