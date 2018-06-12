@@ -54,35 +54,32 @@ const Notes = styled(Box).attrs({
   h6 {
     color: ${p => p.theme.colors.dark};
     font-weight: bold;
+    margin-top: 24px;
+    margin-bottom: 16px;
   }
 
   h1 {
-    margin: 0.67em 0;
-    font-size: 1.17em;
+    padding-bottom: 0.3em;
+    font-size: 1.33em;
   }
 
   h2 {
-    margin: 0.83em 0;
+    padding-bottom: 0.3em;
+    font-size: 1.25em;
   }
 
   h3 {
-    margin: 1em 0;
-    font-size: 0.83em;
+    font-size: 1em;
   }
 
   h4 {
-    margin: 1.33em 0;
-    font-size: 0.67em;
+    font-size: 0.875em;
   }
 
-  h5 {
-    margin: 1.67em 0;
-    font-size: 0.67em;
-  }
-
+  h5,
   h6 {
-    margin: 2.33em 0;
-    font-size: 0.67em;
+    font-size: 0.85em;
+    color: #6a737d;
   }
 
   img {
