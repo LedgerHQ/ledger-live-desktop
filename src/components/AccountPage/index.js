@@ -180,7 +180,7 @@ class AccountPage extends PureComponent<Props, State> {
                 )}
               />
             </Box>
-            <OperationsList canShowMore account={account} title={t('account:lastOperations')} />
+            <OperationsList account={account} title={t('account:lastOperations')} />
           </Fragment>
         ) : (
           <EmptyStateAccount account={account} />

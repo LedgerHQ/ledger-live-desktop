@@ -167,7 +167,6 @@ class DashboardPage extends PureComponent<Props, State> {
               </Box>
               {displayOperations && (
                 <OperationsList
-                  canShowMore
                   onAccountClick={this.onAccountClick}
                   accounts={accounts}
                   title={t('dashboard:recentActivity')}
