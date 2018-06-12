@@ -73,6 +73,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-i18next": "^7.7.0",
+    "react-markdown": "^3.3.2",
     "react-mortal": "^3.2.0",
     "react-motion": "^0.5.2",
     "react-redux": "^5.0.7",
