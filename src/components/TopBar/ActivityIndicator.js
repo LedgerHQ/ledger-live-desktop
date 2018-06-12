@@ -100,21 +100,21 @@ class ActivityIndicatorInner extends Component<Props, State> {
           align="center"
         >
           {isRotating ? (
-            t('common:sync.syncing')
+            t('app:common.sync.syncing')
           ) : isError ? (
             <Fragment>
-              <Box>{t('common:sync.error')}</Box>
+              <Box>{t('app:common.sync.error')}</Box>
               <Box
                 ml={2}
                 cursor="pointer"
                 style={{ textDecoration: 'underline', pointerEvents: 'all' }}
                 onClick={this.handleRefresh}
               >
-                {t('common:sync.refresh')}
+                {t('app:common.sync.refresh')}
               </Box>
             </Fragment>
           ) : (
-            t('common:sync.upToDate')
+            t('app:common.sync.upToDate')
           )}
         </Box>
       </ItemContainer>

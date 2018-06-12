@@ -220,7 +220,7 @@ class DeviceConnect extends PureComponent<Props> {
           {hasMultipleDevices && (
             <ListDevices>
               <Box color="graphite" fontSize={3}>
-                {t('deviceConnect:step1.choose', { count: devices.length })}
+                {t('app:deviceConnect.step1.choose', { count: devices.length })}
               </Box>
               <Box flow={2}>
                 {devices.map(d => {

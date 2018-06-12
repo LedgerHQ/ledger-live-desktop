@@ -65,7 +65,7 @@ class Footer extends PureComponent<
         <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
           {showTotal && (
             <Box grow>
-              <Label>{t('send:totalSpent')}</Label>
+              <Label>{t('app:send.totalSpent')}</Label>
               <Box horizontal flow={2} align="center">
                 <FormattedVal
                   disableRounding

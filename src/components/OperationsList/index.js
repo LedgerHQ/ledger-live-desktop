@@ -139,7 +139,7 @@ export class OperationsList extends PureComponent<Props, State> {
           ))}
           {!groupedOperations.completed ? (
             <ShowMore onClick={this.fetchMoreOperations}>
-              <span>{t('operationsList:showMore')}</span>
+              <span>{t('app:common.showMore')}</span>
               <IconAngleDown size={12} />
             </ShowMore>
           ) : (

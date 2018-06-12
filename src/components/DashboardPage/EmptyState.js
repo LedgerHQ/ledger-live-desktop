@@ -43,8 +43,8 @@ class EmptyState extends PureComponent<Props, *> {
           height="157"
         />
         <Box mt={5} alignItems="center">
-          <Title>{t('emptyState:dashboard.title')}</Title>
-          <Description>{t('emptyState:dashboard.desc')}</Description>
+          <Title>{t('app:emptyState.dashboard.title')}</Title>
+          <Description>{t('app:emptyState.dashboard.desc')}</Description>
           <Box mt={3} horizontal justifyContent="space-around" style={{ width: 300 }}>
             <Button
               padded
@@ -52,10 +52,10 @@ class EmptyState extends PureComponent<Props, *> {
               style={{ width: 120 }}
               onClick={() => openModal('importAccounts')}
             >
-              {t('emptyState:dashboard.buttons.addAccount')}
+              {t('app:emptyState.dashboard.buttons.addAccount')}
             </Button>
             <Button padded primary style={{ width: 120 }} onClick={this.handleInstallApp}>
-              {t('emptyState:dashboard.buttons.installApp')}
+              {t('app:emptyState.dashboard.buttons.installApp')}
             </Button>
           </Box>
         </Box>

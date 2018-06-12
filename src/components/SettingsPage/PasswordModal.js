@@ -83,20 +83,20 @@ class PasswordModal extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
             {isPasswordEnabled ? (
-              <ModalTitle>{t('password:changePassword.title')}</ModalTitle>
+              <ModalTitle>{t('app:password.changePassword.title')}</ModalTitle>
             ) : (
-              <ModalTitle>{t('password:setPassword.title')}</ModalTitle>
+              <ModalTitle>{t('app:password.setPassword.title')}</ModalTitle>
             )}
             <ModalContent>
               <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
                 {isPasswordEnabled
-                  ? t('password:changePassword.subTitle')
-                  : t('password:setPassword.subTitle')}
+                  ? t('app:password.changePassword.subTitle')
+                  : t('app:password.setPassword.subTitle')}
               </Box>
               <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
                 {isPasswordEnabled
-                  ? t('password:changePassword.desc')
-                  : t('password:setPassword.desc')}
+                  ? t('app:password.changePassword.desc')
+                  : t('app:password.setPassword.desc')}
               </Box>
               <PasswordForm
                 onSubmit={this.handleSave}
@@ -112,7 +112,7 @@ class PasswordModal extends PureComponent<Props, State> {
             </ModalContent>
             <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
               <Button type="button" padded onClick={onClose}>
-                {t('common:cancel')}
+                {t('app:common.cancel')}
               </Button>
               <Button
                 padded
@@ -120,7 +120,7 @@ class PasswordModal extends PureComponent<Props, State> {
                 onClick={this.handleSave}
                 disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
               >
-                {t('common:save')}
+                {t('app:common.save')}
               </Button>
             </ModalFooter>
           </ModalBody>

@@ -26,7 +26,7 @@ export default ({
     optimisticOperation && account && getAccountOperationExplorer(account, optimisticOperation)
   return (
     <ModalFooter horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-      <Button onClick={onClose}>{t('common:close')}</Button>
+      <Button onClick={onClose}>{t('app:common.close')}</Button>
       {optimisticOperation ? (
         // TODO: actually go to operations details
         url ? (
@@ -37,12 +37,12 @@ export default ({
             }}
             primary
           >
-            {t('send:steps.confirmation.success.cta')}
+            {t('app:send.steps.confirmation.success.cta')}
           </Button>
         ) : null
       ) : error ? (
         <Button onClick={onGoToFirstStep} primary>
-          {t('send:steps.confirmation.error.cta')}
+          {t('app:send.steps.confirmation.error.cta')}
         </Button>
       ) : null}
     </ModalFooter>

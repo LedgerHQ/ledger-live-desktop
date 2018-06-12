@@ -40,24 +40,24 @@ class PasswordForm extends PureComponent<Props> {
           {isPasswordEnabled && (
             <Box flow={1} mb={5}>
               <Label htmlFor="currentPassword">
-                {t('password:inputFields.currentPassword.label')}
+                {t('app:password.inputFields.currentPassword.label')}
               </Label>
               <InputPassword
                 autoFocus
-                placeholder={t('password:inputFields.currentPassword.placeholder')}
+                placeholder={t('app:password.inputFields.currentPassword.placeholder')}
                 id="currentPassword"
                 onChange={onChange('currentPassword')}
                 value={currentPassword}
-                error={incorrectPassword && t('password:errorMessageIncorrectPassword')}
+                error={incorrectPassword && t('app:password.errorMessageIncorrectPassword')}
               />
             </Box>
           )}
           <Box flow={1}>
-            <Label htmlFor="newPassword">{t('password:inputFields.newPassword.label')}</Label>
+            <Label htmlFor="newPassword">{t('app:password.inputFields.newPassword.label')}</Label>
             <InputPassword
               style={{ mt: 4, width: 240 }}
               autoFocus={!isPasswordEnabled}
-              placeholder={t('password:inputFields.newPassword.placeholder')}
+              placeholder={t('app:password.inputFields.newPassword.placeholder')}
               id="newPassword"
               onChange={onChange('newPassword')}
               value={newPassword}
@@ -65,18 +65,18 @@ class PasswordForm extends PureComponent<Props> {
           </Box>
           <Box flow={1}>
             <Label htmlFor="confirmPassword">
-              {t('password:inputFields.confirmPassword.label')}
+              {t('app:password.inputFields.confirmPassword.label')}
             </Label>
             <InputPassword
               style={{ width: 240 }}
-              placeholder={t('password:inputFields.confirmPassword.placeholder')}
+              placeholder={t('app:password.inputFields.confirmPassword.placeholder')}
               id="confirmPassword"
               onChange={onChange('confirmPassword')}
               value={confirmPassword}
               error={
                 !isValid() &&
                 confirmPassword.length > 0 &&
-                t('password:errorMessageNotMatchingPassword')
+                t('app:password.errorMessageNotMatchingPassword')
               }
             />
           </Box>

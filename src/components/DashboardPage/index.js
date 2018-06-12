@@ -104,7 +104,7 @@ class DashboardPage extends PureComponent<Props, State> {
                   {t(timeFrame)}
                 </Text>
                 <Text color="grey" fontSize={5} ff="Museo Sans|Light">
-                  {t('dashboard:summary', { count: totalAccounts })}
+                  {t('app:dashboard.summary', { count: totalAccounts })}
                 </Text>
               </Box>
               <Box>
@@ -136,7 +136,7 @@ class DashboardPage extends PureComponent<Props, State> {
               <Box flow={4}>
                 <Box horizontal alignItems="flex-end">
                   <Text color="dark" ff="Museo Sans" fontSize={6}>
-                    {t('sidebar:accounts')}
+                    {t('app:sidebar.accounts')}
                   </Text>
                   <Box ml="auto" horizontal flow={1}>
                     <AccountsOrder />
@@ -170,7 +170,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 <OperationsList
                   onAccountClick={this.onAccountClick}
                   accounts={accounts}
-                  title={t('dashboard:recentActivity')}
+                  title={t('app:dashboard.recentActivity')}
                   withAccount
                 />
               )}

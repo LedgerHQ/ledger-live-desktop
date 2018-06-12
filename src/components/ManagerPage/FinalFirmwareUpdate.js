@@ -41,7 +41,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     return (
       <Box flow={4} {...props}>
         <Box color="dark" ff="Museo Sans" fontSize={6}>
-          {t('manager:firmwareUpdate')}
+          {t('app:manager.firmwareUpdate')}
         </Box>
         <Card flow={2} {...props}>
           <Box horizontal align="center" flow={2} />

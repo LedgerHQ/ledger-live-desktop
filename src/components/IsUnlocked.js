@@ -127,20 +127,20 @@ class IsUnlocked extends Component<Props, State> {
           <form onSubmit={this.handleSubmit}>
             <Box align="center">
               <IconLockScreen size={136} />
-              <PageTitle>{t('common:lockScreen.title')}</PageTitle>
+              <PageTitle>{t('app:common.lockScreen.title')}</PageTitle>
               <LockScreenDesc>
-                {t('common:lockScreen.subTitle')}
+                {t('app:common.lockScreen.subTitle')}
                 <br />
-                {t('common:lockScreen.description')}
+                {t('app:common.lockScreen.description')}
               </LockScreenDesc>
               <Box style={{ minWidth: 230 }}>
                 <InputPassword
                   autoFocus
-                  placeholder={t('common:lockScreen.inputPlaceholder')}
+                  placeholder={t('app:common.lockScreen.inputPlaceholder')}
                   type="password"
                   onChange={this.handleChangeInput('password')}
                   value={inputValue.password}
-                  error={incorrectPassword && t('password:errorMessageIncorrectPassword')}
+                  error={incorrectPassword && t('app:password.errorMessageIncorrectPassword')}
                 />
               </Box>
             </Box>

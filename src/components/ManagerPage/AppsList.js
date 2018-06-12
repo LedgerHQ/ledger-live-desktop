@@ -169,12 +169,12 @@ class AppsList extends PureComponent<Props, State> {
       <Box flow={6}>
         <Box>
           <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal>
-            <span>{t('manager:allApps')}</span>
+            <span>{t('app:manager.allApps')}</span>
             <span>
               <Tooltip
                 render={() => (
                   <Box ff="Open Sans|SemiBold" fontSize={2}>
-                    {t('manager:apps.help')}
+                    {t('app:manager.apps.help')}
                   </Box>
                 )}
               >

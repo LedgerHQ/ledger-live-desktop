@@ -154,11 +154,11 @@ class AccountsOrder extends Component<Props> {
     return [
       {
         key: 'name',
-        label: t('accountsOrder:name'),
+        label: t('app:dashboard.accountsOrder.name'),
       },
       {
         key: 'balance',
-        label: t('accountsOrder:balance'),
+        label: t('app:dashboard.accountsOrder.balance'),
       },
     ].map(item => ({
       ...item,
@@ -203,7 +203,7 @@ class AccountsOrder extends Component<Props> {
         value={sortItems.find(item => item.key === orderAccounts)}
       >
         <Text ff="Open Sans|SemiBold" fontSize={4}>
-          {t('common:sortBy')}
+          {t('app:common.sortBy')}
         </Text>
         <Box
           alignItems="center"
@@ -213,7 +213,9 @@ class AccountsOrder extends Component<Props> {
           fontSize={4}
           horizontal
         >
-          <Text color="dark">{t(`accountsOrder:${this.getCurrentValue() || 'balance'}`)}</Text>
+          <Text color="dark">
+            {t(`app:dashboard.accountsOrder.${this.getCurrentValue() || 'balance'}`)}
+          </Text>
           <IconAngleDown size={16} />
         </Box>
       </DropDown>

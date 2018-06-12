@@ -41,8 +41,8 @@ class ConfirmModal extends PureComponent<Props> {
       ...props
     } = this.props
 
-    const realConfirmText = confirmText || t('common:confirm')
-    const realCancelText = cancelText || t('common:cancel')
+    const realConfirmText = confirmText || t('app:common.confirm')
+    const realCancelText = cancelText || t('app:common.cancel')
     return (
       <Modal
         isOpened={isOpened}

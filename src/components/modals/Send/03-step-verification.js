@@ -33,8 +33,8 @@ type Props = {
 
 export default ({ t, hasError }: Props) => (
   <Container>
-    <WarnBox>{multiline(t('send:steps.verification.warning'))}</WarnBox>
-    <Info>{t('send:steps.verification.body')}</Info>
+    <WarnBox>{multiline(t('app:send.steps.verification.warning'))}</WarnBox>
+    <Info>{t('app:send.steps.verification.body')}</Info>
     <DeviceConfirm error={hasError} />
   </Container>
 )

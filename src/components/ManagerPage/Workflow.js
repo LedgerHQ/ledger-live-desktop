@@ -156,10 +156,10 @@ class Workflow extends PureComponent<Props, State> {
                           color="black"
                           style={{ marginBottom: 10 }}
                         >
-                          {t('manager:plugYourDevice:title')}
+                          {t('app:manager.plugYourDevice:title')}
                         </Text>
                         <Text ff="Museo Sans|Light" fontSize={5} color="grey" align="center">
-                          {t('manager:plugYourDevice:desc')}
+                          {t('app:manager.plugYourDevice:desc')}
                         </Text>
                       </Box>
                       <Box flow={4} style={{ maxWidth: 460, padding: '60px 10px 0' }}>

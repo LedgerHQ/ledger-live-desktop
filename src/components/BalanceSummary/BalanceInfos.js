@@ -47,7 +47,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
         fontSize={7}
         withIcon
       />
-      <Sub>{t(`time:since.${since}`)}</Sub>
+      <Sub>{t(`app:time.since.${since}`)}</Sub>
     </Box>
   )
 }
@@ -65,7 +65,7 @@ export function BalanceSinceDiff(props: Props) {
         val={totalBalance - sinceBalance}
         withIcon
       />
-      <Sub>{t(`time:since.${since}`)}</Sub>
+      <Sub>{t(`app:time.since.${since}`)}</Sub>
     </Box>
   )
 }
@@ -97,7 +97,7 @@ function BalanceInfos(props: Props) {
   return (
     <Box horizontal alignItems="center" flow={7}>
       <BalanceTotal unit={counterValue.units[0]} totalBalance={totalBalance}>
-        <Sub>{t('dashboard:totalBalance')}</Sub>
+        <Sub>{t('app:dashboard.totalBalance')}</Sub>
       </BalanceTotal>
       <BalanceSincePercent
         alignItems="flex-end"

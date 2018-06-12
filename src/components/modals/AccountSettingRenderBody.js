@@ -141,12 +141,12 @@ class HelperComp extends PureComponent<Props, State> {
     return (
       <ModalBody onClose={onClose}>
         <form onSubmit={this.handleSubmit(account, onClose)}>
-          <ModalTitle>{t('account:settings.title')}</ModalTitle>
+          <ModalTitle>{t('app:account.settings.title')}</ModalTitle>
           <ModalContent mb={3}>
             <Container>
               <Box>
-                <OptionRowTitle>{t('account:settings.accountName.title')}</OptionRowTitle>
-                <OptionRowDesc>{t('account:settings.accountName.desc')}</OptionRowDesc>
+                <OptionRowTitle>{t('app:account.settings.accountName.title')}</OptionRowTitle>
+                <OptionRowDesc>{t('app:account.settings.accountName.desc')}</OptionRowDesc>
               </Box>
               <Box>
                 <Input
@@ -154,14 +154,14 @@ class HelperComp extends PureComponent<Props, State> {
                   onChange={this.handleChangeName}
                   renderLeft={<InputLeft currency={account.currency} />}
                   onFocus={e => this.handleFocus(e, 'accountName')}
-                  error={accountNameError && t('account:settings.accountName.error')}
+                  error={accountNameError && t('app:account.settings.accountName.error')}
                 />
               </Box>
             </Container>
             <Container>
               <Box>
-                <OptionRowTitle>{t('account:settings.unit.title')}</OptionRowTitle>
-                <OptionRowDesc>{t('account:settings.unit.desc')}</OptionRowDesc>
+                <OptionRowTitle>{t('app:account.settings.unit.title')}</OptionRowTitle>
+                <OptionRowDesc>{t('app:account.settings.unit.desc')}</OptionRowDesc>
               </Box>
               <Box style={{ width: 180 }}>
                 <Select
@@ -195,10 +195,10 @@ class HelperComp extends PureComponent<Props, State> {
           </ModalContent>
           <ModalFooter horizontal>
             <Button small danger type="button" onClick={this.handleOpenRemoveAccountModal}>
-              {t('common:delete')}
+              {t('app:common.delete')}
             </Button>
             <Button small ml="auto" type="submit" primary>
-              {t('common:apply')}
+              {t('app:common.apply')}
             </Button>
           </ModalFooter>
         </form>
@@ -208,9 +208,9 @@ class HelperComp extends PureComponent<Props, State> {
           onClose={this.handleCloseRemoveAccountModal}
           onReject={this.handleCloseRemoveAccountModal}
           onConfirm={() => this.handleRemoveAccount(account)}
-          title={t('settings:removeAccountModal.title')}
-          subTitle={t('settings:removeAccountModal.subTitle')}
-          desc={t('settings:removeAccountModal.desc')}
+          title={t('app:settings.removeAccountModal.title')}
+          subTitle={t('app:settings.removeAccountModal.subTitle')}
+          desc={t('app:settings.removeAccountModal.desc')}
         />
       </ModalBody>
     )

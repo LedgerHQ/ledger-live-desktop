@@ -66,7 +66,7 @@ const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => 
       options={options}
       renderValue={renderOption}
       renderOption={renderOption}
-      placeholder={t('common:selectAccount')}
+      placeholder={t('app:common.selectAccount')}
       onChange={onChange}
     />
   )

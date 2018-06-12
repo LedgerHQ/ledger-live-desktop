@@ -187,7 +187,7 @@ class CurrentAddress extends PureComponent<Props> {
                 <strong>{accountName}</strong>
               </Trans>
             ) : (
-              t('currentAddress:label')
+              t('app:currentAddress')
             )}
           </Box>
           <IconInfoCircle size={12} />

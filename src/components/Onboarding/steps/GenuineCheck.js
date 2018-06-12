@@ -49,12 +49,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     const { t } = this.props
     return [
       {
-        label: t('common:yes'),
+        label: t('app:common.yes'),
         key: 'yes',
         pass: true,
       },
       {
-        label: t('common:no'),
+        label: t('app:common.no'),
         key: 'no',
         pass: false,
       },
@@ -254,7 +254,7 @@ export function GenuineCheckFail({
             redoGenuineCheck()
           }}
         >
-          {t('common:back')}
+          {t('app:common.back')}
         </Button>
         <Button
           padded

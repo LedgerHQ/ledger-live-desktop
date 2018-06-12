@@ -27,7 +27,7 @@ export function StepChooseCurrencyFooter({ transitionTo, currency, t }: StepProp
     <Fragment>
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       <Button primary disabled={!currency} onClick={() => transitionTo('connectDevice')}>
-        {t('common:next')}
+        {t('app:common.next')}
       </Button>
     </Fragment>
   )

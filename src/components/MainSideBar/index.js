@@ -77,7 +77,7 @@ class MainSideBar extends PureComponent<Props> {
 
     const addAccountButton = (
       <AddAccountButton
-        tooltipText={t('importAccounts:title')}
+        tooltipText={t('app:importAccounts.title')}
         onClick={this.handleOpenImportModal}
       />
     )
@@ -86,9 +86,9 @@ class MainSideBar extends PureComponent<Props> {
       <Box relative bg="white" style={{ width: 230 }}>
         <GrowScroll>
           <Space of={70} />
-          <SideBarList title={t('sidebar:menu')}>
+          <SideBarList title={t('app:sidebar.menu')}>
             <SideBarListItem
-              label={t('dashboard:title')}
+              label={t('app:dashboard.title')}
               icon={IconPieChart}
               iconActiveColor={'wallet'}
               onClick={this.handleClickDashboard}
@@ -96,26 +96,26 @@ class MainSideBar extends PureComponent<Props> {
               hasNotif={updateStatus === 'downloaded'}
             />
             <SideBarListItem
-              label={t('send:title')}
+              label={t('app:send.title')}
               icon={IconSend}
               iconActiveColor={'wallet'}
               onClick={this.handleOpenSendModal}
             />
             <SideBarListItem
-              label={t('receive:title')}
+              label={t('app:receive.title')}
               icon={IconReceive}
               iconActiveColor={'wallet'}
               onClick={this.handleOpenReceiveModal}
             />
             <SideBarListItem
-              label={t('sidebar:manager')}
+              label={t('app:sidebar.manager')}
               icon={IconManager}
               iconActiveColor={'wallet'}
               onClick={this.handleClickManager}
               isActive={pathname === '/manager'}
             />
             <SideBarListItem
-              label={t('sidebar:exchange')}
+              label={t('app:sidebar.exchange')}
               icon={IconExchange}
               iconActiveColor={'wallet'}
               onClick={this.handleClickExchange}
@@ -124,9 +124,9 @@ class MainSideBar extends PureComponent<Props> {
           </SideBarList>
           <Space of={40} />
           <SideBarList
-            title={t('sidebar:accounts', { count: accounts.length })}
+            title={t('app:sidebar.accounts', { count: accounts.length })}
             titleRight={addAccountButton}
-            emptyText={t('emptyState:sidebar.text')}
+            emptyText={t('app:emptyState.sidebar.text')}
           >
             {accounts.map(account => (
               <AccountListItem
