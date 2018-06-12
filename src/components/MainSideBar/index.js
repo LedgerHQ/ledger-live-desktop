@@ -1,13 +1,11 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
-import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
 import type { Location } from 'react-router'
 import type { Account } from '@ledgerhq/live-common/lib/types'
@@ -17,24 +15,22 @@ import type { UpdateStatus } from 'reducers/update'
 
 import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
 
-import { rgba } from 'styles/helpers'
-
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { getUpdateStatus } from 'reducers/update'
 
-import Tooltip from 'components/base/Tooltip'
-import { SideBarList } from 'components/base/SideBar'
-import Box, { Tabbable } from 'components/base/Box'
+import { SideBarList, SideBarListItem } from 'components/base/SideBar'
+import Box from 'components/base/Box'
 import Space from 'components/base/Space'
-import FormattedVal from 'components/base/FormattedVal'
 
 import IconManager from 'icons/Manager'
 import IconPieChart from 'icons/PieChart'
-import IconCirclePlus from 'icons/CirclePlus'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
+
+import AccountListItem from './AccountListItem'
+import AddAccountButton from './AddAccountButton'
 
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
@@ -56,7 +52,7 @@ type Props = {
 }
 
 class MainSideBar extends PureComponent<Props> {
-  push(to: string) {
+  push = (to: string) => {
     const { push } = this.props
     const {
       location: { pathname },
@@ -67,112 +63,92 @@ class MainSideBar extends PureComponent<Props> {
     push(to)
   }
 
+  handleClickDashboard = () => this.push('/')
+  handleOpenSendModal = () => this.props.openModal(MODAL_SEND)
+  handleOpenReceiveModal = () => this.props.openModal(MODAL_RECEIVE)
+  handleClickManager = () => this.push('/manager')
+  handleClickExchange = () => this.push('/exchange')
+  handleOpenImportModal = () => this.props.openModal('importAccounts')
+
   render() {
-    const { t, accounts, openModal, location, updateStatus } = this.props
+    const { t, accounts, location, updateStatus } = this.props
     const { pathname } = location
 
     const navigationItems = [
       {
-        value: 'dashboard',
+        key: 'dashboard',
         label: t('dashboard:title'),
         icon: IconPieChart,
         iconActiveColor: 'wallet',
-        onClick: () => this.push('/'),
+        onClick: this.handleClickDashboard,
         isActive: pathname === '/',
         hasNotif: updateStatus === 'downloaded',
       },
       {
-        value: 'send',
+        key: 'send',
         label: t('send:title'),
         icon: IconSend,
         iconActiveColor: 'wallet',
-        onClick: () => openModal(MODAL_SEND),
+        onClick: this.handleOpenSendModal,
       },
       {
-        value: 'receive',
+        key: 'receive',
         label: t('receive:title'),
         icon: IconReceive,
         iconActiveColor: 'wallet',
-        onClick: () => openModal(MODAL_RECEIVE),
+        onClick: this.handleOpenReceiveModal,
       },
       {
-        value: 'manager',
+        key: 'manager',
         label: t('sidebar:manager'),
         icon: IconManager,
         iconActiveColor: 'wallet',
-        onClick: () => this.push('/manager'),
+        onClick: this.handleClickManager,
         isActive: pathname === '/manager',
       },
       {
-        value: 'exchange',
+        key: 'exchange',
         label: t('sidebar:exchange'),
         icon: IconExchange,
         iconActiveColor: 'wallet',
-        onClick: () => this.push('/exchange'),
+        onClick: this.handleClickExchange,
         isActive: pathname === '/exchange',
       },
     ]
 
-    const accountsItems = accounts.map(account => {
-      const accountURL = `/account/${account.id}`
-      return {
-        value: account.id,
-        label: account.name,
-        desc: () => (
-          <FormattedVal
-            alwaysShowSign={false}
-            color="graphite"
-            unit={account.unit}
-            showCode
-            val={account.balance || 0}
-          />
-        ),
-        iconActiveColor: account.currency.color,
-        icon: getCryptoCurrencyIcon(account.currency),
-        onClick: () => this.push(accountURL),
-        isActive: pathname === accountURL,
-      }
-    })
-
     return (
       <Box bg="white" style={{ width: 230 }}>
         <Space of={70} />
-        <SideBarList title={t('sidebar:menu')} items={navigationItems} />
+        <SideBarList title={t('sidebar:menu')}>
+          {navigationItems.map(item => <SideBarListItem key={item.key} {...item} />)}
+        </SideBarList>
+
         <Space of={40} />
+
         <SideBarList
           scroll
           title={t('sidebar:accounts')}
           titleRight={
-            <Tooltip render={() => t('importAccounts:title')}>
-              <PlusWrapper onClick={() => openModal('importAccounts')}>
-                <IconCirclePlus size={16} />
-              </PlusWrapper>
-            </Tooltip>
+            <AddAccountButton
+              tooltipText={t('importAccounts:title')}
+              onClick={this.handleOpenImportModal}
+            />
           }
-          items={accountsItems}
           emptyText={t('emptyState:sidebar.text')}
-        />
+        >
+          {accounts.map(account => (
+            <AccountListItem
+              key={account.id}
+              account={account}
+              push={this.push}
+              isActive={pathname === `/account/${account.id}`}
+            />
+          ))}
+        </SideBarList>
       </Box>
     )
   }
 }
-
-const PlusWrapper = styled(Tabbable).attrs({
-  p: 1,
-  cursor: 'pointer',
-  borderRadius: 1,
-})`
-  color: ${p => p.theme.colors.smoke};
-  &:hover {
-    color: ${p => p.theme.colors.dark};
-  }
-
-  border: 1px solid transparent;
-  &:focus {
-    outline: none;
-    border-color: ${p => rgba(p.theme.colors.wallet, 0.3)};
-  }
-`
 
 const decorate = compose(
   withRouter,
