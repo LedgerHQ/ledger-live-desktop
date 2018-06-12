@@ -66,7 +66,13 @@ const initialState = {
   nbToShow: 20,
 }
 
-const footerPlaceholder = null // TODO figure out with design what we want here
+const footerPlaceholder = (
+  <Box p={4} align="center">
+    <Text ff="Open Sans" fontSize={3}>
+      No more operations
+    </Text>
+  </Box>
+)
 
 export class OperationsList extends PureComponent<Props, State> {
   static defaultProps = {

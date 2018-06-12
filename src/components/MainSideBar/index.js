@@ -124,7 +124,7 @@ class MainSideBar extends PureComponent<Props> {
           </SideBarList>
           <Space of={40} />
           <SideBarList
-            title={t('sidebar:accounts')}
+            title={t('sidebar:accounts', { count: accounts.length })}
             titleRight={addAccountButton}
             emptyText={t('emptyState:sidebar.text')}
           >

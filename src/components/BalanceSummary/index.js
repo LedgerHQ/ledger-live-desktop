@@ -35,7 +35,7 @@ const BalanceSummary = ({
 }: Props) => {
   const account = accounts.length === 1 ? accounts[0] : undefined
   return (
-    <Card p={0} py={6}>
+    <Card p={0} py={5}>
       <CalculateBalance accounts={accounts} daysCount={daysCount}>
         {({ isAvailable, balanceHistory, balanceStart, balanceEnd }) =>
           !isAvailable ? null : (
@@ -57,7 +57,7 @@ const BalanceSummary = ({
                   unit={account ? account.unit : null}
                   color={chartColor}
                   data={balanceHistory}
-                  height={250}
+                  height={200}
                   currency={counterValue}
                   tickXScale={selectedTime}
                   renderTickY={val => formatShort(counterValue.units[0], val)}

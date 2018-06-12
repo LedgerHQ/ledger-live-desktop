@@ -65,7 +65,7 @@ const defaultWindowOptions = {
 }
 
 function createMainWindow() {
-  const MIN_HEIGHT = 768
+  const MIN_HEIGHT = 720
   const MIN_WIDTH = 1024
 
   const savedDimensions = db.getIn('settings', 'window.MainWindow.dimensions', {})

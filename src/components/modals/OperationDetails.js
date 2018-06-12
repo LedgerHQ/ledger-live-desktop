@@ -160,7 +160,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             <Line>
               <ColLeft>Fees</ColLeft>
               <ColRight>
-                <FormattedVal unit={unit} showCode val={fee} />
+                <FormattedVal unit={unit} showCode val={fee} color="dark" />
               </ColRight>
             </Line>
             <B />
