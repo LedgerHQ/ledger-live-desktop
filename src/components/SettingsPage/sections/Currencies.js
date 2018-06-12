@@ -145,5 +145,4 @@ class TabCurrencies extends PureComponent<Props, State> {
   }
 }
 
-// $FlowFixMe not sure what's wrong
 export default connect(mapStateToProps)(TabCurrencies)
