@@ -21,6 +21,7 @@ import { getUpdateStatus } from 'reducers/update'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
 
 import IconManager from 'icons/Manager'
@@ -82,60 +83,62 @@ class MainSideBar extends PureComponent<Props> {
     )
 
     return (
-      <Box bg="white" style={{ width: 230 }}>
-        <Space of={70} />
-        <SideBarList title={t('sidebar:menu')}>
-          <SideBarListItem
-            label={t('dashboard:title')}
-            icon={IconPieChart}
-            iconActiveColor={'wallet'}
-            onClick={this.handleClickDashboard}
-            isActive={pathname === '/'}
-            hasNotif={updateStatus === 'downloaded'}
-          />
-          <SideBarListItem
-            label={t('send:title')}
-            icon={IconSend}
-            iconActiveColor={'wallet'}
-            onClick={this.handleOpenSendModal}
-          />
-          <SideBarListItem
-            label={t('receive:title')}
-            icon={IconReceive}
-            iconActiveColor={'wallet'}
-            onClick={this.handleOpenReceiveModal}
-          />
-          <SideBarListItem
-            label={t('sidebar:manager')}
-            icon={IconManager}
-            iconActiveColor={'wallet'}
-            onClick={this.handleClickManager}
-            isActive={pathname === '/manager'}
-          />
-          <SideBarListItem
-            label={t('sidebar:exchange')}
-            icon={IconExchange}
-            iconActiveColor={'wallet'}
-            onClick={this.handleClickExchange}
-            isActive={pathname === '/exchange'}
-          />
-        </SideBarList>
-        <Space of={40} />
-        <SideBarList
-          scroll
-          title={t('sidebar:accounts')}
-          titleRight={addAccountButton}
-          emptyText={t('emptyState:sidebar.text')}
-        >
-          {accounts.map(account => (
-            <AccountListItem
-              key={account.id}
-              account={account}
-              push={this.push}
-              isActive={pathname === `/account/${account.id}`}
+      <Box relative bg="white" style={{ width: 230 }}>
+        <GrowScroll>
+          <Space of={70} />
+          <SideBarList title={t('sidebar:menu')}>
+            <SideBarListItem
+              label={t('dashboard:title')}
+              icon={IconPieChart}
+              iconActiveColor={'wallet'}
+              onClick={this.handleClickDashboard}
+              isActive={pathname === '/'}
+              hasNotif={updateStatus === 'downloaded'}
             />
-          ))}
-        </SideBarList>
+            <SideBarListItem
+              label={t('send:title')}
+              icon={IconSend}
+              iconActiveColor={'wallet'}
+              onClick={this.handleOpenSendModal}
+            />
+            <SideBarListItem
+              label={t('receive:title')}
+              icon={IconReceive}
+              iconActiveColor={'wallet'}
+              onClick={this.handleOpenReceiveModal}
+            />
+            <SideBarListItem
+              label={t('sidebar:manager')}
+              icon={IconManager}
+              iconActiveColor={'wallet'}
+              onClick={this.handleClickManager}
+              isActive={pathname === '/manager'}
+            />
+            <SideBarListItem
+              label={t('sidebar:exchange')}
+              icon={IconExchange}
+              iconActiveColor={'wallet'}
+              onClick={this.handleClickExchange}
+              isActive={pathname === '/exchange'}
+            />
+          </SideBarList>
+          <Space of={40} />
+          <SideBarList
+            title={t('sidebar:accounts')}
+            titleRight={addAccountButton}
+            emptyText={t('emptyState:sidebar.text')}
+          >
+            {accounts.map(account => (
+              <AccountListItem
+                key={account.id}
+                account={account}
+                push={this.push}
+                isActive={pathname === `/account/${account.id}`}
+              />
+            ))}
+          </SideBarList>
+          <Space of={15} />
+        </GrowScroll>
       </Box>
     )
   }
