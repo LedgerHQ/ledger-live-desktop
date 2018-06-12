@@ -1,10 +1,9 @@
 // @flow
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
+import { API_BASE_URL } from 'helpers/constants'
 
 import getFirmwareInfo from './getFirmwareInfo'
-
-const { API_BASE_URL } = process.env
 
 type Input = {
   targetId: string | number,
