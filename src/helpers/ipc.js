@@ -28,7 +28,7 @@ export class Command<In, A> {
 }
 
 type Msg<A> = {
-  type: 'NEXT' | 'COMPLETE' | 'ERROR',
+  type: 'cmd.NEXT' | 'cmd.COMPLETE' | 'cmd.ERROR',
   requestId: string,
   data?: A,
 }
@@ -48,20 +48,20 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
     function handleCommandEvent(e, msg: Msg<A>) {
       if (requestId !== msg.requestId) return
       switch (msg.type) {
-        case 'NEXT':
+        case 'cmd.NEXT':
           logger.log(`● CMD ${id}`, msg.data)
           if (msg.data) {
             o.next(msg.data)
           }
           break
 
-        case 'COMPLETE':
+        case 'cmd.COMPLETE':
           logger.log(`✔ CMD ${id} finished in ${(Date.now() - startTime).toFixed(0)}ms`)
           o.complete()
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
 
-        case 'ERROR':
+        case 'cmd.ERROR':
           logger.warn(`✖ CMD ${id} error`, msg.data)
           o.error(msg.data)
           ipcRenderer.removeListener('command-event', handleCommandEvent)
