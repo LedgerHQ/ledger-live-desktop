@@ -1,5 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react'
+import { translate } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 
@@ -9,6 +10,12 @@ import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'compone
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+
+import type { T } from 'types/common'
+
+type Props = {
+  t: T,
+}
 
 const Notes = styled(Box).attrs({
   ff: 'Open Sans',
@@ -134,23 +141,24 @@ const Title = styled(Text).attrs({
   color: 'dark',
 })``
 
-class ReleaseNotes extends PureComponent<*, *> {
+class ReleaseNotes extends PureComponent<Props, *> {
   render() {
+    const { t } = this.props
     const renderBody = ({ data, onClose }) => {
       const { name, body: markdown } = data
 
       return (
         <ModalBody onClose={onClose}>
-          <ModalTitle>Release Notes</ModalTitle>
+          <ModalTitle>{t('releaseNotes:title')}</ModalTitle>
           <ModalContent>
             <Notes>
-              <Title>Version {name}</Title>
+              <Title>{t('releaseNotes:version', { versionNb: name })}</Title>
               <ReactMarkdown>{markdown}</ReactMarkdown>
             </Notes>
           </ModalContent>
           <ModalFooter horizontal justifyContent="flex-end">
             <Button onClick={onClose} primary>
-              Continue
+              {t('common:continue')}
             </Button>
           </ModalFooter>
         </ModalBody>
@@ -161,4 +169,4 @@ class ReleaseNotes extends PureComponent<*, *> {
   }
 }
 
-export default ReleaseNotes
+export default translate()(ReleaseNotes)
