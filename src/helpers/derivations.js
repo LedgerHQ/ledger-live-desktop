@@ -11,9 +11,12 @@ const ethLegacyMEW: Derivation = ({ x }) => `44'/60'/0'/${x}`
 
 const etcLegacyMEW: Derivation = ({ x }) => `44'/60'/160720'/${x}`
 
+const rippleLegacy: Derivation = ({ x }) => `44'/144'/0'/${x}'`
+
 const legacyDerivations = {
   ethereum: [ethLegacyMEW],
   ethereum_classic: [etcLegacyMEW],
+  ripple: [rippleLegacy],
 }
 
 export const standardDerivation: Derivation = ({ currency, segwit, x }) => {
