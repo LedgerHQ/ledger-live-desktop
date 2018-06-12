@@ -89,6 +89,10 @@ class DashboardPage extends PureComponent<Props, State> {
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
+    let dashboardSummary = 'dashboard:noAccounts'
+    if (totalAccounts == 1) { dashboardSummary = "dashboard:summary"; } else
+    if (totalAccounts > 1) { dashboardSummary = "dashboard:summary_plural"; }
+
     const displayOperationsHelper = (account: Account) => account.operations.length > 0
     const displayOperations = accounts.some(displayOperationsHelper)
 
@@ -103,7 +107,7 @@ class DashboardPage extends PureComponent<Props, State> {
                   {t(timeFrame)}
                 </Text>
                 <Text color="grey" fontSize={5} ff="Museo Sans|Light">
-                  {t('dashboard:summary', { count: totalAccounts })}
+                  {t(dashboardSummary, { count: totalAccounts })}
                 </Text>
               </Box>
               <Box>
