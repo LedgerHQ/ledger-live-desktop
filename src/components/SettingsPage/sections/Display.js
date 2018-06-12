@@ -2,7 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import moment from 'moment'
-import { listFiatCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
 
 import {
   intermediaryCurrency,
@@ -34,15 +33,6 @@ const regions = Object.keys(regionsByKey).map(key => {
   return { value: key, language, region, label: regionsByKey[key] }
 })
 
-const fiats = listFiatCurrencies()
-  .map(f => f.units[0])
-  // For now we take first unit, in the future we'll need to figure out something else
-  .map(fiat => ({
-    value: fiat.code,
-    label: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
-    fiat,
-  }))
-
 type Props = {
   t: T,
   settings: Settings,
@@ -51,43 +41,17 @@ type Props = {
 }
 
 type State = {
-  cachedMarketIndicator: string,
   cachedLanguageKey: string,
-  cachedCounterValue: ?Object,
   cachedRegion: string,
 }
 
 class TabProfile extends PureComponent<Props, State> {
   state = {
-    cachedMarketIndicator: this.props.settings.marketIndicator,
     cachedLanguageKey: this.props.settings.language,
-    cachedCounterValue: fiats.find(fiat => fiat.fiat.code === this.props.settings.counterValue),
     cachedRegion: this.props.settings.region,
   }
 
-  getMarketIndicators() {
-    const { t } = this.props
-    return [
-      {
-        label: t('common:eastern'),
-        key: 'eastern',
-      },
-      {
-        label: t('common:western'),
-        key: 'western',
-      },
-    ]
-  }
-
-  handleChangeCounterValue = (item: Object) => {
-    const { saveSettings } = this.props
-    this.setState({ cachedCounterValue: item.fiat })
-    window.requestIdleCallback(() => {
-      saveSettings({ counterValue: item.fiat.code })
-    })
-  }
-
-  handleChangeLanguage = ({ value: languageKey }: *) => {
+  handleChangeLanguage = ({ key: languageKey }: *) => {
     const { i18n, saveSettings } = this.props
     this.setState({ cachedLanguageKey: languageKey })
     window.requestIdleCallback(() => {
@@ -105,31 +69,12 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
-  handleChangeMarketIndicator = (item: Object) => {
-    const { saveSettings } = this.props
-    const marketIndicator = item.key
-    this.setState({
-      cachedMarketIndicator: marketIndicator,
-    })
-    window.requestIdleCallback(() => {
-      saveSettings({ marketIndicator })
-    })
-  }
-
-  handleChangeExchange = (exchange: *) =>
-    this.props.saveSettings({ counterValueExchange: exchange ? exchange.id : null })
-
   render() {
     const { t, settings } = this.props
     const {
-      cachedMarketIndicator,
       cachedLanguageKey,
-      cachedCounterValue,
       cachedRegion,
     } = this.state
-
-    const counterValueCurrency = counterValueCurrencyLocalSelector(settings)
-    const counterValueExchange = counterValueExchangeLocalSelector(settings)
 
     const languages = languageKeys.map(key => ({ value: key, label: t(`language:${key}`) }))
     const currentLanguage = languages.find(l => l.value === cachedLanguageKey)
@@ -149,34 +94,6 @@ class TabProfile extends PureComponent<Props, State> {
           desc="Lorem ipsum dolor sit amet"
         />
         <Body>
-          <Row
-            title={t('settings:display.counterValue')}
-            desc={t('settings:display.counterValueDesc')}
-          >
-            <Box horizontal flow={2}>
-              <Select
-                small
-                minWidth={250}
-                onChange={this.handleChangeCounterValue}
-                itemToString={item => (item ? item.name : '')}
-                renderSelected={item => item && item.name}
-                options={fiats}
-                value={cvOption}
-              />
-              <ExchangeSelect
-                small
-                from={intermediaryCurrency}
-                to={counterValueCurrency}
-                exchangeId={counterValueExchange}
-                onChange={this.handleChangeExchange}
-                minWidth={150}
-              />
-            </Box>
-          </Row>
-          <Row
-            title={`Exchange (${intermediaryCurrency.ticker}${counterValueCurrency.ticker})`}
-            desc="The exchange to use for countervalue conversion"
-          />
           <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
             <Select
               small
@@ -196,13 +113,6 @@ class TabProfile extends PureComponent<Props, State> {
               renderSelected={item => item && item.name}
               value={currentRegion}
               options={regionsFiltered}
-            />
-          </Row>
-          <Row title={t('settings:display.stock')} desc={t('settings:display.stockDesc')}>
-            <RadioGroup
-              items={this.getMarketIndicators()}
-              activeKey={cachedMarketIndicator}
-              onChange={this.handleChangeMarketIndicator}
             />
           </Row>
         </Body>

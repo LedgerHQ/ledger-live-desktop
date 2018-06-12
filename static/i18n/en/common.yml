@@ -27,8 +27,8 @@ western: Western
 lockScreen:
   title: Welcome Back
   subTitle: Your application is locked
-  description: Please enter your password to continue
-  inputPlaceholder: Type your password
+  description: Enter your password to unlock your Ledger Live session
+  inputPlaceholder: Password
 sync:
   syncing: Syncing...
   upToDate: Up to date
