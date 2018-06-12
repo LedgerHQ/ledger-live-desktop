@@ -4,8 +4,9 @@ import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 
 import { MODAL_RELEASES_NOTES } from 'config/constants'
-import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
 
+import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
@@ -147,6 +148,11 @@ class ReleaseNotes extends PureComponent<*, *> {
               <ReactMarkdown>{markdown}</ReactMarkdown>
             </Notes>
           </ModalContent>
+          <ModalFooter horizontal justifyContent="flex-end">
+            <Button onClick={onClose} primary>
+              Continue
+            </Button>
+          </ModalFooter>
         </ModalBody>
       )
     }
