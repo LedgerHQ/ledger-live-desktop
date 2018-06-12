@@ -7,7 +7,6 @@ import Box, { Tabbable } from 'components/base/Box'
 import { rgba } from 'styles/helpers'
 
 export type Item = {
-  value: string,
   label: string | (Props => React$Element<any>),
   desc?: Props => any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
@@ -18,20 +17,22 @@ export type Item = {
 }
 
 export type Props = {
-  item: Item,
-  isActive: boolean,
+  label: string | (Props => React$Element<any>),
+  desc?: Props => any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
+  icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
+  iconActiveColor: ?string,
+  hasNotif?: boolean,
+  isActive?: boolean,
+  onClick?: void => void,
+  isActive?: boolean,
 }
 
 class SideBarListItem extends PureComponent<Props> {
   render() {
-    const {
-      item: { icon: Icon, label, desc, iconActiveColor, hasNotif, onClick, value },
-      isActive,
-    } = this.props
+    const { icon: Icon, label, desc, iconActiveColor, hasNotif, onClick, isActive } = this.props
     return (
       <Container
         data-role="side-bar-item"
-        data-roledata={value}
         isActive={isActive}
         iconActiveColor={iconActiveColor}
         onClick={onClick}
