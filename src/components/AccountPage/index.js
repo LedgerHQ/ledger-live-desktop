@@ -74,8 +74,8 @@ type State = {
 
 class AccountPage extends PureComponent<Props, State> {
   state = {
-    selectedTime: 'week',
-    daysCount: 7,
+    selectedTime: 'month',
+    daysCount: 30,
   }
 
   handleChangeSelectedTime = item =>
