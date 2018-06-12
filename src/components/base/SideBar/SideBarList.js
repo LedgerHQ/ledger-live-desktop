@@ -1,28 +1,23 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 
 import GrowScroll from 'components/base/GrowScroll'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 
-import SideBarListItem from './SideBarListItem'
-
-import type { Item } from './SideBarListItem'
-
 type Props = {
-  items: Item[],
+  children: any,
   title?: Node | string,
-  activeValue?: string,
   scroll?: boolean,
   titleRight?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   emptyText?: string,
 }
 
-class SideBarList extends PureComponent<Props> {
+class SideBarList extends Component<Props> {
   render() {
-    const { items, title, activeValue, scroll, titleRight, emptyText, ...props } = this.props
+    const { children, title, scroll, titleRight, emptyText, ...props } = this.props
     const ListWrapper = scroll ? GrowScroll : Box
     return (
       <Fragment>
@@ -35,15 +30,9 @@ class SideBarList extends PureComponent<Props> {
             <Space of={20} />
           </Fragment>
         )}
-        {items.length > 0 ? (
+        {children ? (
           <ListWrapper flow={2} px={3} fontSize={3} {...props}>
-            {items.map(item => {
-              const itemProps = {
-                item,
-                isActive: item.isActive || (!!activeValue && activeValue === item.value),
-              }
-              return <SideBarListItem key={item.value} {...itemProps} />
-            })}
+            {children}
           </ListWrapper>
         ) : emptyText ? (
           <Box px={4} ff="Open Sans|Regular" fontSize={3} color="grey">
