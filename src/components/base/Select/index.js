@@ -40,6 +40,9 @@ class Select extends Component<Props> {
     if (action === 'select-option') {
       onChange(value)
     }
+    if (action === 'pop-value') {
+      onChange(null)
+    }
   }
 
   render() {
@@ -73,10 +76,10 @@ class Select extends Component<Props> {
         isClearable={isClearable}
         isSearchable={isSearchable}
         blurInputOnSelect={false}
-        onChange={this.handleChange}
         backspaceRemovesValue
         menuShouldBlockScroll
         {...props}
+        onChange={this.handleChange}
       />
     )
   }
