@@ -56,8 +56,9 @@ type State = {
 
 class DashboardPage extends PureComponent<Props, State> {
   state = {
-    selectedTime: 'week',
-    daysCount: 7,
+    // save to user preference?
+    selectedTime: 'month',
+    daysCount: 30,
   }
 
   onAccountClick = account => this.props.push(`/account/${account.id}`)
