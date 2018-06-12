@@ -30,7 +30,9 @@ const mapStateToProps = (state, props: OwnProps) => ({
 })
 
 const SelectCurrency = ({ onChange, value, t, placeholder, currencies, ...props }: Props) => {
-  const options = currencies ? currencies.map(c => ({ ...c, value: c.id, label: c.name })) : []
+  const options = currencies
+    ? currencies.map(c => ({ ...c, value: c.id, label: c.name, currency: c }))
+    : []
   return (
     <Select
       value={value}
@@ -38,7 +40,7 @@ const SelectCurrency = ({ onChange, value, t, placeholder, currencies, ...props 
       renderValue={renderOption}
       options={options}
       placeholder={placeholder || t('common:selectCurrency')}
-      onChange={onChange}
+      onChange={item => onChange(item ? item.currency : null)}
       {...props}
     />
   )
