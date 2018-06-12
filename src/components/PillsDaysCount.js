@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
@@ -9,7 +9,7 @@ import Pills from 'components/base/Pills'
 
 type Props = {
   selectedTime: string,
-  onChange: Function,
+  onChange: ({ key: string, value: *, label: string }) => void,
   t: T,
 }
 
@@ -19,18 +19,20 @@ const itemsTimes = [
   { key: 'year', value: 365 },
 ]
 
-function PillsDaysCount(props: Props) {
-  const { selectedTime, onChange, t } = props
-  return (
-    <Pills
-      items={itemsTimes.map(item => ({
-        ...item,
-        label: t(`time:${item.key}`),
-      }))}
-      activeKey={selectedTime}
-      onChange={onChange}
-    />
-  )
+class PillsDaysCount extends PureComponent<Props> {
+  render() {
+    const { selectedTime, onChange, t } = this.props
+    return (
+      <Pills
+        items={itemsTimes.map(item => ({
+          ...item,
+          label: t(`time:${item.key}`),
+        }))}
+        activeKey={selectedTime}
+        onChange={onChange}
+      />
+    )
+  }
 }
 
 export default translate()(PillsDaysCount)
