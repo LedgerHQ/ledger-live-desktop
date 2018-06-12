@@ -8,6 +8,8 @@ import type { T } from 'types/common'
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
 
+// TODO: NOT IN USE, REMOVE
+
 type Props = {
   t: T,
 }

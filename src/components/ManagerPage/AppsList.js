@@ -4,6 +4,8 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
+import type { Device, T } from 'types/common'
+
 import listApps from 'commands/listApps'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
@@ -11,9 +13,10 @@ import uninstallApp from 'commands/uninstallApp'
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
-import ExclamationCircle from 'icons/ExclamationCircle'
+import Text from 'components/base/Text'
 
-import type { Device, T } from 'types/common'
+import ExclamationCircle from 'icons/ExclamationCircle'
+import Update from 'icons/Update'
 
 import ManagerApp from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
@@ -142,8 +145,11 @@ class AppsList extends PureComponent<Props, State> {
           isOpened={status !== 'idle' && status !== 'loading'}
           render={() => (
             <ModalBody p={6} align="center" justify="center" style={{ height: 300 }}>
+              <Update size={30} />
               {status === 'busy' ? (
-                <Box>{'Loading...'}</Box>
+                <Box>
+                  <Text />
+                </Box>
               ) : status === 'error' ? (
                 <Box>
                   <div>{'error happened'}</div>

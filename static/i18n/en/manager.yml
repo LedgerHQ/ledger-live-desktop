@@ -1,0 +1,21 @@
+tabs:
+  apps: Apps
+  device: My device
+apps:
+  install: Install
+  all: Apps
+  help: To update an app, you have to uninstall the app and re install it.
+firmware:
+  update: Update firmware
+  updateTitle: Firmware update
+  latest: A new firmware {{version}} is available
+title: Manager
+subtitle: Get all your apps here
+device:
+  title: Plug your device
+  desc: Please connect your Ledger device and follow the steps below to access the manager
+  cta: Plug my device
+errors:
+  noDevice: Please make sur your device is connected (TEMPLATE NEEDED)
+  noDashboard: Please make sure your device is on the dashboard screen (TEMPLATED NEEDED)
+  noGenuine: You did not approve request on your device or your device is not genuine (TEMPLATE NEEDED)
