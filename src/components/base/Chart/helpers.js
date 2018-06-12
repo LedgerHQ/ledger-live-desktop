@@ -25,7 +25,7 @@ export function generateMargins(hideAxis) {
     top: hideAxis ? 5 : 10,
     bottom: hideAxis ? 5 : 30,
     right: hideAxis ? 5 : 40,
-    left: hideAxis ? 5 : 80,
+    left: hideAxis ? 5 : 70,
   }
 
   // FIXME: Forced to "use" margins here to prevent babel/uglify to believe

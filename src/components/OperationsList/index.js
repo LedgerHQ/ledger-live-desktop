@@ -52,8 +52,7 @@ const mapDispatchToProps = {
 type Props = {
   account: Account,
   accounts: Account[],
-  canShowMore: boolean,
-  openModal: Function,
+  openModal: (string, Object) => *,
   t: T,
   withAccount?: boolean,
   title?: string,
@@ -66,10 +65,18 @@ type State = {
 const initialState = {
   nbToShow: 20,
 }
+
+const footerPlaceholder = (
+  <Box p={4} align="center">
+    <Text ff="Open Sans" fontSize={3}>
+      No more operations
+    </Text>
+  </Box>
+)
+
 export class OperationsList extends PureComponent<Props, State> {
   static defaultProps = {
     withAccount: false,
-    canShowMore: false,
   }
 
   state = initialState
@@ -86,7 +93,7 @@ export class OperationsList extends PureComponent<Props, State> {
   }
 
   render() {
-    const { account, accounts, canShowMore, t, title, withAccount } = this.props
+    const { account, accounts, t, title, withAccount } = this.props
     const { nbToShow } = this.state
 
     if (!account && !accounts) {
@@ -130,13 +137,14 @@ export class OperationsList extends PureComponent<Props, State> {
               </Card>
             </Box>
           ))}
-          {canShowMore &&
-            !groupedOperations.completed && (
-              <ShowMore onClick={this.fetchMoreOperations}>
-                <span>{t('operationsList:showMore')}</span>
-                <IconAngleDown size={12} />
-              </ShowMore>
-            )}
+          {!groupedOperations.completed ? (
+            <ShowMore onClick={this.fetchMoreOperations}>
+              <span>{t('operationsList:showMore')}</span>
+              <IconAngleDown size={12} />
+            </ShowMore>
+          ) : (
+            footerPlaceholder
+          )}
         </Box>
       </Defer>
     )

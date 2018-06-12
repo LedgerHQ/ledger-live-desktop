@@ -1,8 +1,11 @@
 // @flow
 
 import invariant from 'invariant'
+import network from 'api/network'
 
 const core = require('@ledgerhq/ledger-core')
+
+core.setHttpQueryImplementation(network)
 
 let walletPoolInstance: ?Object = null
 

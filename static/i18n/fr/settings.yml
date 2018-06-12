@@ -58,6 +58,10 @@ softResetModal:
   title: Clean application cache
   subTitle: Are you sure houston?
   desc: Lorem ipsum dolor sit amet
+removeAccountModal:
+  title: Delete this account
+  subTitle: Are you sure houston?
+  desc: Lorem ipsum dolor sit amet
 exportLogs:
   title: Export Logs
   desc: Export Logs

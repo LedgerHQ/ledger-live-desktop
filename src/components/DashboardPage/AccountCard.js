@@ -41,7 +41,7 @@ class AccountCard extends PureComponent<{
             </Box>
             <Box>
               <Box style={{ textTransform: 'uppercase' }} fontSize={0} color="graphite">
-                {account.unit.code}
+                {account.currency.name}
               </Box>
               <Box fontSize={4} color="dark">
                 {account.name}

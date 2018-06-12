@@ -2,9 +2,8 @@
 
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { select } from '@storybook/addon-knobs'
 
-import { SideBarList } from 'components/base/SideBar'
+import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
 
 import IconAccountSettings from 'icons/AccountSettings'
@@ -17,26 +16,27 @@ const stories = storiesOf('Components/base/SideBar', module)
 
 const SIDEBAR_ITEMS = [
   {
-    value: 'first',
+    key: 'first',
     label: 'First',
     icon: IconAccountSettings,
     iconActiveColor: '#ffae35',
   },
   {
-    value: 'second',
+    key: 'second',
     label: 'Second',
     icon: IconPrint,
     iconActiveColor: '#0ebdcd',
+    isActive: true,
   },
   {
-    value: 'third',
+    key: 'third',
     label: 'Third very very very very long text very long text very long',
     icon: IconControls,
     iconActiveColor: '#27a2db',
     hasNotif: true,
   },
   {
-    value: 'fourth',
+    key: 'fourth',
     label: () => (
       <Box>
         {'custom'}
@@ -47,7 +47,7 @@ const SIDEBAR_ITEMS = [
     iconActiveColor: '#3ca569',
   },
   {
-    value: 'fifth',
+    key: 'fifth',
     label: 'Fifth',
     icon: IconExclamationCircle,
     iconActiveColor: '#0e76aa',
@@ -55,8 +55,7 @@ const SIDEBAR_ITEMS = [
 ]
 
 stories.add('SideBarList', () => (
-  <SideBarList
-    items={SIDEBAR_ITEMS}
-    activeValue={select('activeValue', [...SIDEBAR_ITEMS.map(i => i.value), null], 'third')}
-  />
+  <SideBarList>
+    {SIDEBAR_ITEMS.map(item => <SideBarListItem key={item.key} {...item} />)}
+  </SideBarList>
 ))

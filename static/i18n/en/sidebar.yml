@@ -1,4 +1,4 @@
 menu: Menu
-accounts: Accounts
+accounts: Accounts ({{count}})
 manager: Manager
 exchange: Exchange

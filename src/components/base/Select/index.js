@@ -11,7 +11,7 @@ type Props = {
   // required
   value: ?Option,
   options: Option[],
-  onChange: Option => void,
+  onChange: (?Option) => void,
 
   // custom renders
   renderOption: Option => Node,
@@ -39,6 +39,9 @@ class Select extends Component<Props> {
     const { onChange } = this.props
     if (action === 'select-option') {
       onChange(value)
+    }
+    if (action === 'pop-value') {
+      onChange(null)
     }
   }
 
@@ -73,10 +76,10 @@ class Select extends Component<Props> {
         isClearable={isClearable}
         isSearchable={isSearchable}
         blurInputOnSelect={false}
-        onChange={this.handleChange}
         backspaceRemovesValue
         menuShouldBlockScroll
         {...props}
+        onChange={this.handleChange}
       />
     )
   }
