@@ -90,7 +90,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
 
     this.steps = [
       {
-        label: t('send:steps.amount.title'),
+        label: t('app:send.steps.amount.title'),
         canClose: () => true,
         canPrev: () => false,
         canNext: ({ bridge, account, transaction }) =>
@@ -99,7 +99,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
             : false,
       },
       {
-        label: t('send:steps.connectDevice.title'),
+        label: t('app:send.steps.connectDevice.title'),
         canClose: () => true,
         canNext: ({ deviceSelected, appStatus }) =>
           deviceSelected !== null && appStatus === 'success',
@@ -107,14 +107,14 @@ class SendModalBody extends PureComponent<Props, State<*>> {
         canPrev: () => true,
       },
       {
-        label: t('send:steps.verification.title'),
+        label: t('app:send.steps.verification.title'),
         canClose: ({ error }) => !!error,
         canNext: () => true,
         canPrev: ({ error }) => !!error,
         prevStep: 0,
       },
       {
-        label: t('send:steps.confirmation.title'),
+        label: t('app:send.steps.confirmation.title'),
         prevStep: 0,
         canClose: () => true,
         canPrev: () => true,
@@ -281,7 +281,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
 
         <ModalTitle>
           {canPrev && <PrevButton onClick={this.onPrevStep} />}
-          {t('send:title')}
+          {t('app:send.title')}
         </ModalTitle>
 
         <ModalContent>

@@ -18,7 +18,7 @@ export default translate()(({ gasLimit, onChangeGasLimit, t }: Props) => (
     <Box horizontal align="center" flow={5}>
       <Box style={{ width: 200 }}>
         <Label>
-          <span>{t('send:steps.amount.ethereumGasLimit')}</span>
+          <span>{t('app:send.steps.amount.ethereumGasLimit')}</span>
         </Label>
       </Box>
       <Box grow>

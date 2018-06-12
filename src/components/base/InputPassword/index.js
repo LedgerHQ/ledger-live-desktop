@@ -116,7 +116,7 @@ class InputPassword extends PureComponent<Props, State> {
             </Box>
             {hasValue && (
               <Warning passwordStrength={passwordStrength}>
-                {t(`password:warning_${passwordStrength}`)}
+                {t(`app:password.warning_${passwordStrength}`)}
               </Warning>
             )}
           </Fragment>

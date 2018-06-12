@@ -30,7 +30,7 @@ export default function ExchangeCard({ t, card }: { t: T, card: CardType }) {
       <Box shrink ff="Open Sans|Regular" fontSize={4} flow={3}>
         <Box>{desc}</Box>
         <Box horizontal align="center" color="wallet" flow={1}>
-          <FakeLink>{t('exchange:visitWebsite')}</FakeLink>
+          <FakeLink>{t('app:exchange.visitWebsite')}</FakeLink>
           <ExternalLinkIcon size={14} />
         </Box>
       </Box>

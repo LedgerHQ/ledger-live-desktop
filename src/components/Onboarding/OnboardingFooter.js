@@ -35,10 +35,10 @@ const OnboardingFooter = ({
 }: Props) => (
   <Wrapper {...props}>
     <Button padded outlineGrey onClick={() => prevStep()}>
-      {t('common:back')}
+      {t('app:common.back')}
     </Button>
     <Button padded disabled={isContinueDisabled} primary onClick={() => nextStep()} ml="auto">
-      {t('common:continue')}
+      {t('app:common.continue')}
     </Button>
   </Wrapper>
 )

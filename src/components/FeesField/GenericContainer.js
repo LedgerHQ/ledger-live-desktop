@@ -11,7 +11,7 @@ export default translate()(
   ({ help, children, t }: { help: string, children: React$Node, t: * }) => (
     <Box flow={1}>
       <Label>
-        <span>{t('send:steps.amount.fees')}</span>
+        <span>{t('app:send.steps.amount.fees')}</span>
         {help ? <LabelInfoTooltip ml={1} text={help} /> : null}
       </Label>
       <Box horizontal flow={5}>

@@ -160,7 +160,7 @@ class StepImport extends PureComponent<StepProps> {
                     fontSize={2}
                     style={{ textTransform: 'uppercase' }}
                   >
-                    {t('importAccounts:accountToImportSubtitle', {
+                    {t('app:importAccounts.accountToImportSubtitle', {
                       count: importableAccounts.length,
                     })}
                   </Box>
@@ -170,8 +170,8 @@ class StepImport extends PureComponent<StepProps> {
                     fontSize={3}
                   >
                     {isAllSelected
-                      ? t('importAccounts:unselectAll')
-                      : t('importAccounts:selectAll')}
+                      ? t('app:importAccounts.unselectAll')
+                      : t('app:importAccounts.selectAll')}
                   </FakeLink>
                 </Box>
               )}
@@ -211,7 +211,7 @@ class StepImport extends PureComponent<StepProps> {
                   fontSize={2}
                   style={{ textTransform: 'uppercase' }}
                 >
-                  {t('importAccounts:createNewAccount')}
+                  {t('app:importAccounts.createNewAccount')}
                 </Box>
               </Box>
               <AccountRow
@@ -231,7 +231,7 @@ class StepImport extends PureComponent<StepProps> {
             <Button small outline onClick={this.handleRetry}>
               <Box horizontal flow={2} align="center">
                 <IconExchange size={13} />
-                <span>{t('importAccounts:retrySync')}</span>
+                <span>{t('app:importAccounts.retrySync')}</span>
               </Box>
             </Button>
           )}
@@ -278,12 +278,12 @@ export const StepImportFooter = ({
 
   const ctaWording =
     willCreateAccount && willImportAccounts
-      ? `${t('importAccounts:cta.create')} / ${t('importAccounts:cta.import', {
+      ? `${t('app:importAccounts.cta.create')} / ${t('app:importAccounts.cta.import', {
           count: importedAccountsCount,
         })}`
       : willCreateAccount
-        ? t('importAccounts:cta.create')
-        : t('importAccounts:cta.import', { count: importedAccountsCount })
+        ? t('app:importAccounts.cta.create')
+        : t('app:importAccounts.cta.import', { count: importedAccountsCount })
 
   return (
     <Button

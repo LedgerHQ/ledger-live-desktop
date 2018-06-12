@@ -19,12 +19,12 @@ function PlugYourDevice(props: Props) {
       <Box align="center" style={{ width: 365 }}>
         <Box mb={5}>hey</Box>
         <Box textAlign="center" mb={1} ff="Museo Sans|Regular" color="dark" fontSize={6}>
-          {t('manager:plugYourDevice.title')}
+          {t('app:manager.plugYourDevice.title')}
         </Box>
         <Box textAlign="center" mb={5} ff="Open Sans|Regular" color="smoke" fontSize={4}>
-          {t('manager:plugYourDevice.desc')}
+          {t('app:manager.plugYourDevice.desc')}
         </Box>
-        <Button primary>{t('manager:plugYourDevice.cta')}</Button>
+        <Button primary>{t('app:manager.plugYourDevice.cta')}</Button>
       </Box>
     </Card>
   )

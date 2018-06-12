@@ -65,7 +65,7 @@ function ManagerApp(props: Props) {
         </Text>
       </Box>
       <Button outline onClick={onInstall}>
-        {t('manager:installApps')}
+        {t('app:manager.installApps')}
       </Button>
       <Button outline onClick={onUninstall} outlineColor="grey">
         <Trash size={16} fill="grey" />

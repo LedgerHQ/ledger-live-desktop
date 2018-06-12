@@ -29,7 +29,7 @@ import StepFinish from './steps/04-step-finish'
 const createSteps = ({ t }: { t: T }) => [
   {
     id: 'chooseCurrency',
-    label: t('importAccounts:breadcrumb.informations'),
+    label: t('app:importAccounts.breadcrumb.informations'),
     component: StepChooseCurrency,
     footer: StepChooseCurrencyFooter,
     onBack: null,
@@ -37,7 +37,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'connectDevice',
-    label: t('importAccounts:breadcrumb.connectDevice'),
+    label: t('app:importAccounts.breadcrumb.connectDevice'),
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
@@ -45,7 +45,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'import',
-    label: t('importAccounts:breadcrumb.import'),
+    label: t('app:importAccounts.breadcrumb.import'),
     component: StepImport,
     footer: StepImportFooter,
     onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
@@ -53,7 +53,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'finish',
-    label: t('importAccounts:breadcrumb.finish'),
+    label: t('app:importAccounts.breadcrumb.finish'),
     component: StepFinish,
     footer: null,
     onBack: null,
@@ -203,7 +203,7 @@ class ImportAccounts extends PureComponent<Props, State> {
           <ModalBody onClose={onClose}>
             <SyncSkipUnderPriority priority={100} />
             <ModalTitle onBack={onBack ? () => onBack(stepProps) : void 0}>
-              {t('importAccounts:title')}
+              {t('app:importAccounts.title')}
             </ModalTitle>
             <ModalContent>
               <Breadcrumb mb={6} currentStep={stepIndex} items={this.STEPS} />

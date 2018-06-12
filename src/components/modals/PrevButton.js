@@ -29,7 +29,7 @@ const PrevButton = ({ t, ...props }: Props) => (
   <Wrapper {...props}>
     <Box horizontal alignItems="center">
       <IconAngleLeft size={16} />
-      {t('common:back')}
+      {t('app:common.back')}
     </Box>
   </Wrapper>
 )

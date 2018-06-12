@@ -65,8 +65,8 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
     return (
       <Box flow={1}>
         <Label>
-          <span>{t('send:steps.amount.recipientAddress')}</span>
-          <LabelInfoTooltip ml={1} text={t('send:steps.amount.recipientAddress')} />
+          <span>{t('app:send.steps.amount.recipientAddress')}</span>
+          <LabelInfoTooltip ml={1} text={t('app:send.steps.amount.recipientAddress')} />
         </Label>
         <RecipientAddress
           withQrCode

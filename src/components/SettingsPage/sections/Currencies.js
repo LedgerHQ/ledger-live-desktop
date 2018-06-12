@@ -96,7 +96,7 @@ class TabCurrencies extends PureComponent<Props, State> {
       <Section key={currency.id}>
         <Header
           icon={<IconCurrencies size={16} />}
-          title={t('settings:tabs.currencies')}
+          title={t('app:settings.tabs.currencies')}
           desc="Lorem ipsum dolor sit amet"
           renderRight={
             // TODO this should only be the subset of currencies of the app
@@ -127,8 +127,8 @@ class TabCurrencies extends PureComponent<Props, State> {
           ) : null}
           {defaults.confirmationsNb ? (
             <Row
-              title={t('settings:currencies.confirmationsNb')}
-              desc={t('settings:currencies.confirmationsNbDesc')}
+              title={t('app:settings.currencies.confirmationsNb')}
+              desc={t('app:settings.currencies.confirmationsNbDesc')}
             >
               <StepperNumber
                 min={defaults.confirmationsNb.min}

@@ -192,7 +192,7 @@ class ReleaseNotes extends PureComponent<Props, State> {
       } else {
         content = (
           <Notes>
-            <Title>{t('releaseNotes:version', { versionNb: version })}</Title>
+            <Title>{t('app:releaseNotes.version', { versionNb: version })}</Title>
             <ReactMarkdown>{markdown}</ReactMarkdown>
           </Notes>
         )
@@ -200,11 +200,11 @@ class ReleaseNotes extends PureComponent<Props, State> {
 
       return (
         <ModalBody onClose={onClose}>
-          <ModalTitle>{t('releaseNotes:title')}</ModalTitle>
+          <ModalTitle>{t('app:releaseNotes.title')}</ModalTitle>
           <ModalContent>{content}</ModalContent>
           <ModalFooter horizontal justifyContent="flex-end">
             <Button onClick={onClose} primary>
-              {t('common:continue')}
+              {t('app:common.continue')}
             </Button>
           </ModalFooter>
         </ModalBody>

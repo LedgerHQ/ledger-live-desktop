@@ -56,7 +56,7 @@ function ModalTitle({
       {onBack && (
         <Back onClick={onBack}>
           <IconAngleLeft size={16} />
-          {t('common:back')}
+          {t('app:common.back')}
         </Back>
       )}
       {children}

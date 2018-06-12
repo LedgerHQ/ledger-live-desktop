@@ -40,7 +40,7 @@ class ExchangePage extends PureComponent<Props> {
     return (
       <Box>
         <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={4}>
-          {t('exchange:title')}
+          {t('app:exchange.title')}
         </Box>
         <Box flow={5}>{cards.map(card => <ExchangeCard key={card.key} t={t} card={card} />)}</Box>
       </Box>

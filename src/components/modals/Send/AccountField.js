@@ -6,7 +6,7 @@ import SelectAccount from 'components/SelectAccount'
 
 const AccountField = ({ onChange, value, t }: *) => (
   <Box flow={1}>
-    <Label>{t('send:steps.amount.selectAccountDebit')}</Label>
+    <Label>{t('app:send.steps.amount.selectAccountDebit')}</Label>
     <SelectAccount onChange={onChange} value={value} />
   </Box>
 )

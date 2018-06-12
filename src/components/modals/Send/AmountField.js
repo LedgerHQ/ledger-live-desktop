@@ -40,7 +40,7 @@ class AmountField extends Component<*, { canBeSpent: boolean }> {
     const { canBeSpent } = this.state
     return (
       <Box flow={1}>
-        <Label>{t('send:steps.amount.amount')}</Label>
+        <Label>{t('app:send.steps.amount.amount')}</Label>
         <RequestAmount
           withMax={false}
           account={account}

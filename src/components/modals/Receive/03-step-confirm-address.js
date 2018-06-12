@@ -40,14 +40,14 @@ export default (props: Props) => (
   <Container>
     {props.addressVerified === false ? (
       <Fragment>
-        <Title>{props.t('receive:steps.confirmAddress.error.title')}</Title>
-        <Text mb={5}>{props.t('receive:steps.confirmAddress.error.text')}</Text>
+        <Title>{props.t('app:receive.steps.confirmAddress.error.title')}</Title>
+        <Text mb={5}>{props.t('app:receive.steps.confirmAddress.error.text')}</Text>
         <DeviceConfirm error />
       </Fragment>
     ) : (
       <Fragment>
-        <Title>{props.t('receive:steps.confirmAddress.action')}</Title>
-        <Text>{props.t('receive:steps.confirmAddress.text')}</Text>
+        <Title>{props.t('app:receive.steps.confirmAddress.action')}</Title>
+        <Text>{props.t('app:receive.steps.confirmAddress.text')}</Text>
         {props.account && <CurrentAddressForAccount account={props.account} />}
         {props.device &&
           props.account && <DeviceConfirm mb={2} mt={-1} error={props.addressVerified === false} />}

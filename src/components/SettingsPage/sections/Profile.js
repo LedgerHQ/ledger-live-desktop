@@ -139,58 +139,64 @@ class TabProfile extends PureComponent<Props, State> {
       <Section>
         <Header
           icon={<IconUser size={16} />}
-          title={t('settings:tabs.profile')}
+          title={t('app:settings.tabs.profile')}
           desc="Lorem ipsum dolor sit amet"
         />
         <Body>
-          <Row title={t('settings:profile.password')} desc={t('settings:profile.passwordDesc')}>
+          <Row
+            title={t('app:settings.profile.password')}
+            desc={t('app:settings.profile.passwordDesc')}
+          >
             <Box horizontal flow={2} align="center">
               {isPasswordEnabled && (
                 <Button onClick={this.handleOpenPasswordModal}>
-                  {t('settings:profile.changePassword')}
+                  {t('app:settings.profile.changePassword')}
                 </Button>
               )}
               <CheckBox isChecked={isPasswordEnabled} onChange={this.handleChangePasswordCheck} />
             </Box>
           </Row>
           <Row
-            title={t('settings:profile.developerMode')}
-            desc={t('settings:profile.developerModeDesc')}
+            title={t('app:settings.profile.developerMode')}
+            desc={t('app:settings.profile.developerModeDesc')}
           >
             <CheckBox isChecked={settings.developerMode} onChange={this.handleDeveloperMode} />
           </Row>
           <Row
-            title={t('settings:profile.reportErrors')}
-            desc={t('settings:profile.reportErrorsDesc')}
+            title={t('app:settings.profile.reportErrors')}
+            desc={t('app:settings.profile.reportErrorsDesc')}
           >
             <CheckBox
               isChecked={settings.sentryLogs}
               onChange={sentryLogs => saveSettings({ sentryLogs })}
             />
           </Row>
-          <Row title={t('settings:profile.analytics')} desc={t('settings:profile.analyticsDesc')}>
+          <Row
+            title={t('app:settings.profile.analytics')}
+            desc={t('app:settings.profile.analyticsDesc')}
+          >
             <CheckBox
               isChecked={settings.shareAnalytics}
               onChange={shareAnalytics => saveSettings({ shareAnalytics })}
             />
           </Row>
           <Row
-            title={t('settings:profile.softResetTitle')}
-            desc={t('settings:profile.softResetDesc')}
+            title={t('app:settings.profile.softResetTitle')}
+            desc={t('app:settings.profile.softResetDesc')}
           >
             <Button primary onClick={this.handleOpenSoftResetModal}>
-              {t('settings:profile.softReset')}
+              {t('app:settings.profile.softReset')}
             </Button>
           </Row>
           <Row
-            title={t('settings:profile.hardResetTitle')}
-            desc={t('settings:profile.hardResetDesc')}
+            title={t('app:settings.profile.hardResetTitle')}
+            desc={t('app:settings.profile.hardResetDesc')}
           >
             <Button danger onClick={this.handleOpenHardResetModal}>
-              {t('settings:profile.hardReset')}
+              {t('app:settings.profile.hardReset')}
             </Button>
           </Row>
-          <Row title={t('settings:exportLogs.title')} desc={t('settings:exportLogs.desc')}>
+          <Row title={t('app:settings.exportLogs.title')} desc={t('app:settings.exportLogs.desc')}>
             <ExportLogsBtn />
           </Row>
         </Body>
@@ -201,9 +207,9 @@ class TabProfile extends PureComponent<Props, State> {
           onClose={this.handleCloseSoftResetModal}
           onReject={this.handleCloseSoftResetModal}
           onConfirm={this.handleSoftReset}
-          title={t('settings:softResetModal.title')}
-          subTitle={t('settings:softResetModal.subTitle')}
-          desc={t('settings:softResetModal.desc')}
+          title={t('app:settings.softResetModal.title')}
+          subTitle={t('app:settings.softResetModal.subTitle')}
+          desc={t('app:settings.softResetModal.desc')}
         />
 
         <ConfirmModal
@@ -213,9 +219,9 @@ class TabProfile extends PureComponent<Props, State> {
           onClose={this.handleCloseHardResetModal}
           onReject={this.handleCloseHardResetModal}
           onConfirm={this.handleHardReset}
-          title={t('settings:hardResetModal.title')}
-          subTitle={t('settings:hardResetModal.subTitle')}
-          desc={t('settings:hardResetModal.desc')}
+          title={t('app:settings.hardResetModal.title')}
+          subTitle={t('app:settings.hardResetModal.subTitle')}
+          desc={t('app:settings.hardResetModal.desc')}
         />
 
         <PasswordModal

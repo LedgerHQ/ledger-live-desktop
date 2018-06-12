@@ -28,28 +28,28 @@ class SectionAbout extends PureComponent<Props> {
       <Section>
         <Header
           icon={<IconHelp size={16} />}
-          title={t('settings:tabs.about')}
+          title={t('app:settings.tabs.about')}
           desc="Lorem ipsum dolor sit amet"
         />
         <Body>
           <Row
             onClick={this.handleOpenLink('https://support.ledgerwallet.com/hc/en-us')}
-            title={t('settings:about.faq')}
-            desc={t('settings:about.faqDesc')}
+            title={t('app:settings.about.faq')}
+            desc={t('app:settings.about.faqDesc')}
           >
             <IconExternalLink size={16} />
           </Row>
           <Row
             onClick={this.handleOpenLink('https://support.ledgerwallet.com/hc/en-us/requests/new')}
-            title={t('settings:about.contactUs')}
-            desc={t('settings:about.contactUsDesc')}
+            title={t('app:settings.about.contactUs')}
+            desc={t('app:settings.about.contactUsDesc')}
           >
             <IconExternalLink size={16} />
           </Row>
           <Row
             onClick={this.handleOpenLink('https://www.ledgerwallet.com/terms')}
-            title={t('settings:about.terms')}
-            desc={t('settings:about.termsDesc')}
+            title={t('app:settings.about.terms')}
+            desc={t('app:settings.about.termsDesc')}
           >
             <IconExternalLink size={16} />
           </Row>

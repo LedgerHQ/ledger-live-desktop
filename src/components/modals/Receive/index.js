@@ -40,10 +40,10 @@ type State = {
 }
 
 const GET_STEPS = t => [
-  { label: t('receive:steps.chooseAccount.title'), Comp: StepAccount },
-  { label: t('receive:steps.connectDevice.title'), Comp: StepConnectDevice },
-  { label: t('receive:steps.confirmAddress.title'), Comp: StepConfirmAddress },
-  { label: t('receive:steps.receiveFunds.title'), Comp: StepReceiveFunds },
+  { label: t('app:receive.steps.chooseAccount.title'), Comp: StepAccount },
+  { label: t('app:receive.steps.connectDevice.title'), Comp: StepConnectDevice },
+  { label: t('app:receive.steps.confirmAddress.title'), Comp: StepConfirmAddress },
+  { label: t('app:receive.steps.receiveFunds.title'), Comp: StepReceiveFunds },
 ]
 
 const INITIAL_STATE = {
@@ -272,7 +272,7 @@ class ReceiveModal extends PureComponent<Props, State> {
         props = {
           primary: true,
           onClick: this.handleRetryCheckAddress,
-          children: t('common:retry'),
+          children: t('app:common.retry'),
         }
         break
       default:
@@ -281,7 +281,7 @@ class ReceiveModal extends PureComponent<Props, State> {
           primary: true,
           disabled: !this.canNext(),
           onClick,
-          children: t('common:next'),
+          children: t('app:common.next'),
         }
     }
 
@@ -289,12 +289,12 @@ class ReceiveModal extends PureComponent<Props, State> {
       <Fragment>
         {stepIndex === 1 && (
           <Button onClick={this.handleSkipStep} fontSize={4}>
-            {t('receive:steps.connectDevice.withoutDevice')}
+            {t('app:receive.steps.connectDevice.withoutDevice')}
           </Button>
         )}
         {stepIndex === 2 &&
           addressVerified === false && (
-            <Button fontSize={4}>{t('receive:steps.confirmAddress.support')}</Button>
+            <Button fontSize={4}>{t('app:receive.steps.confirmAddress.support')}</Button>
           )}
         <Button {...props} />
       </Fragment>
@@ -320,7 +320,7 @@ class ReceiveModal extends PureComponent<Props, State> {
             {account && <SyncOneAccountOnMount priority={10} accountId={account.id} />}
             <ModalTitle>
               {canPrev && <PrevButton onClick={this.handlePrevStep} />}
-              {t('receive:title')}
+              {t('app:receive.title')}
             </ModalTitle>
             <ModalContent>
               <Breadcrumb

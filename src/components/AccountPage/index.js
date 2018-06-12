@@ -107,14 +107,14 @@ class AccountPage extends PureComponent<Props, State> {
                 <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
                   <Box horizontal flow={1} alignItems="center">
                     <IconSend size={12} />
-                    <Box>{t('send:title')}</Box>
+                    <Box>{t('app:send.title')}</Box>
                   </Box>
                 </Button>
 
                 <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
                   <Box horizontal flow={1} alignItems="center">
                     <IconReceive size={12} />
-                    <Box>{t('receive:title')}</Box>
+                    <Box>{t('app:receive.title')}</Box>
                   </Box>
                 </Button>
               </Fragment>
@@ -180,7 +180,7 @@ class AccountPage extends PureComponent<Props, State> {
                 )}
               />
             </Box>
-            <OperationsList account={account} title={t('account:lastOperations')} />
+            <OperationsList account={account} title={t('app:account.lastOperations')} />
           </Fragment>
         ) : (
           <EmptyStateAccount account={account} />

@@ -149,7 +149,9 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
           <ColLeft>Status</ColLeft>
           <ColRight color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
             <Box>
-              {isConfirmed ? t('operationDetails:confirmed') : t('operationDetails:notConfirmed')}
+              {isConfirmed
+                ? t('app:operationDetails.confirmed')
+                : t('app:operationDetails.notConfirmed')}
             </Box>
             <Box>{`(${confirmations})`}</Box>
           </ColRight>

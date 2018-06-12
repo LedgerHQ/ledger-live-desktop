@@ -22,7 +22,7 @@ type Props = {
 export default (props: Props) => (
   <Box flow={5}>
     <Box flow={1}>
-      <Label>{props.t('receive:steps.receiveFunds.label')}</Label>
+      <Label>{props.t('app:receive.steps.receiveFunds.label')}</Label>
       <RequestAmount
         account={props.account}
         onChange={props.onChangeAmount}

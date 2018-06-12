@@ -119,11 +119,11 @@ class SetPassword extends PureComponent<StepProps, State> {
 
         <CustomFooter>
           <Button padded outlineGrey onClick={() => prevStep()}>
-            {t('common:back')}
+            {t('app:common.back')}
           </Button>
           <Box horizontal ml="auto">
             <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
-              {t('common:skipThisStep')}
+              {t('app:common.skipThisStep')}
             </Button>
             <Button
               padded
@@ -131,7 +131,7 @@ class SetPassword extends PureComponent<StepProps, State> {
               disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
               primary
             >
-              {t('common:continue')}
+              {t('app:common.continue')}
             </Button>
           </Box>
         </CustomFooter>

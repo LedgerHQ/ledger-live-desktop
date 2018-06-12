@@ -36,7 +36,7 @@ class GenuineCheck extends PureComponent<Props, State> {
 
     return (
       <ModalBody onClose={onClose}>
-        <ModalTitle>{t('genuinecheck:modal.title')}</ModalTitle>
+        <ModalTitle>{t('app:genuinecheck.modal.title')}</ModalTitle>
         <ModalContent>
           <EnsureDeviceApp
             deviceSelected={currentDevice}

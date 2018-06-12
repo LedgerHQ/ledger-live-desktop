@@ -69,11 +69,11 @@ class TabProfile extends PureComponent<Props, State> {
     const { t } = this.props
     return [
       {
-        label: t('common:eastern'),
+        label: t('app:common.eastern'),
         key: 'eastern',
       },
       {
-        label: t('common:western'),
+        label: t('app:common.western'),
         key: 'western',
       },
     ]
@@ -145,13 +145,13 @@ class TabProfile extends PureComponent<Props, State> {
       <Section>
         <Header
           icon={<IconDisplay size={16} />}
-          title={t('settings:tabs.display')}
+          title={t('app:settings.tabs.display')}
           desc="Lorem ipsum dolor sit amet"
         />
         <Body>
           <Row
-            title={t('settings:display.counterValue')}
-            desc={t('settings:display.counterValueDesc')}
+            title={t('app:settings.display.counterValue')}
+            desc={t('app:settings.display.counterValueDesc')}
           >
             <Box horizontal flow={2}>
               <Select
@@ -177,7 +177,10 @@ class TabProfile extends PureComponent<Props, State> {
             title={`Exchange (${intermediaryCurrency.ticker}${counterValueCurrency.ticker})`}
             desc="The exchange to use for countervalue conversion"
           />
-          <Row title={t('settings:display.language')} desc={t('settings:display.languageDesc')}>
+          <Row
+            title={t('app:settings.display.language')}
+            desc={t('app:settings.display.languageDesc')}
+          >
             <Select
               small
               minWidth={250}
@@ -188,7 +191,7 @@ class TabProfile extends PureComponent<Props, State> {
               options={languages}
             />
           </Row>
-          <Row title={t('settings:display.region')} desc={t('settings:display.regionDesc')}>
+          <Row title={t('app:settings.display.region')} desc={t('app:settings.display.regionDesc')}>
             <Select
               small
               minWidth={250}
@@ -198,7 +201,7 @@ class TabProfile extends PureComponent<Props, State> {
               options={regionsFiltered}
             />
           </Row>
-          <Row title={t('settings:display.stock')} desc={t('settings:display.stockDesc')}>
+          <Row title={t('app:settings.display.stock')} desc={t('app:settings.display.stockDesc')}>
             <RadioGroup
               items={this.getMarketIndicators()}
               activeKey={cachedMarketIndicator}

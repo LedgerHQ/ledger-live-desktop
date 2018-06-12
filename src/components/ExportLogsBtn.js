@@ -51,7 +51,7 @@ class ExportLogsBtn extends Component<{
     const { t } = this.props
     return (
       <Button primary onClick={this.handleExportLogs}>
-        {t('settings:exportLogs.btn')}
+        {t('app:settings.exportLogs.btn')}
       </Button>
     )
   }
