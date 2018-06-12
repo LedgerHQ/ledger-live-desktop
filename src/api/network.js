@@ -4,19 +4,23 @@ import { GET_CALLS_RETRY, GET_CALLS_TIMEOUT } from 'config/constants'
 import { userFriendlyError } from 'api/Ledger'
 import { retry } from 'helpers/promise'
 
-const doRequest = axios // TODO later introduce a way to run it in renderer based on a env, we will diverge this implementation
-
-export default (arg: Object) => {
+let implementation = (arg: Object) => {
   let promise
   if (arg.method === 'GET') {
     if (!('timeout' in arg)) {
       arg.timeout = GET_CALLS_TIMEOUT
     }
-    promise = retry(() => doRequest(arg), {
+    promise = retry(() => axios(arg), {
       maxRetry: GET_CALLS_RETRY,
     })
   } else {
-    promise = doRequest(arg)
+    promise = axios(arg)
   }
   return userFriendlyError(promise)
 }
+
+export const setImplementation = (impl: *) => {
+  implementation = impl
+}
+
+export default (arg: Object) => implementation(arg)

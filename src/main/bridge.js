@@ -10,6 +10,8 @@ import logger from 'logger'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
+import { getMainWindow } from './app'
+
 // sqlite files will be located in the app local data folder
 const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
 
@@ -30,6 +32,7 @@ const bootInternalProcess = () => {
   internalProcess = fork(forkBundlePath, {
     env: { ...process.env, LEDGER_LIVE_SQLITE_PATH },
   })
+  internalProcess.on('message', handleGlobalInternalMessage)
   internalProcess.on('exit', code => {
     logger.warn(`Internal process ended with code ${code}`)
     internalProcess = null
@@ -58,7 +61,7 @@ ipcMainListenReceiveCommands({
       p.removeListener('message', handleMessage)
       p.removeListener('exit', handleExit)
       notifyCommandEvent({
-        type: 'ERROR',
+        type: 'cmd.ERROR',
         requestId: command.requestId,
         data: { message: `Internal process error (${code})`, name: 'InternalError' },
       })
@@ -67,7 +70,7 @@ ipcMainListenReceiveCommands({
     const handleMessage = payload => {
       if (payload.requestId !== command.requestId) return
       notifyCommandEvent(payload)
-      if (payload.type === 'ERROR' || payload.type === 'COMPLETE') {
+      if (payload.type === 'cmd.ERROR' || payload.type === 'cmd.COMPLETE') {
         p.removeListener('message', handleMessage)
         p.removeListener('exit', handleExit)
       }
@@ -77,6 +80,26 @@ ipcMainListenReceiveCommands({
     p.on('message', handleMessage)
     p.send({ type: 'command', command })
   },
+})
+
+function handleGlobalInternalMessage(payload) {
+  if (payload.type === 'executeHttpQueryOnRenderer') {
+    const win = getMainWindow && getMainWindow()
+    if (!win) {
+      logger.warn("can't executeHttpQueryOnRenderer because no renderer")
+      return
+    }
+    win.webContents.send('executeHttpQuery', {
+      id: payload.id,
+      networkArg: payload.networkArg,
+    })
+  }
+}
+
+ipcMain.on('executeHttpQueryPayload', (event, payload) => {
+  const p = internalProcess
+  if (!p) return
+  p.send({ type: 'executeHttpQueryPayload', payload })
 })
 
 // TODO move this to "command" pattern

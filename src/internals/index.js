@@ -1,11 +1,38 @@
 // @flow
 import commands from 'commands'
 import logger from 'logger'
+import uuid from 'uuid/v4'
+import { setImplementation } from 'api/network'
 
 require('../env')
 require('../init-sentry')
 
 process.title = 'Internal'
+
+const defers = {}
+
+if (process.env.DEBUG_NETWORK) {
+  setImplementation(networkArg => {
+    const id = uuid()
+    return new Promise((resolve, reject) => {
+      process.send({
+        type: 'executeHttpQueryOnRenderer',
+        networkArg,
+        id,
+      })
+      defers[id] = {
+        resolve: r => {
+          resolve(r)
+          delete defers[id]
+        },
+        reject: e => {
+          reject(e)
+          delete defers[id]
+        },
+      }
+    })
+  })
+}
 
 const subscriptions = {}
 
@@ -20,7 +47,7 @@ process.on('message', m => {
     subscriptions[requestId] = cmd.impl(data).subscribe({
       next: data => {
         process.send({
-          type: 'NEXT',
+          type: 'cmd.NEXT',
           requestId,
           data,
         })
@@ -28,7 +55,7 @@ process.on('message', m => {
       complete: () => {
         delete subscriptions[requestId]
         process.send({
-          type: 'COMPLETE',
+          type: 'cmd.COMPLETE',
           requestId,
         })
       },
@@ -36,7 +63,7 @@ process.on('message', m => {
         logger.warn('Command error:', error)
         delete subscriptions[requestId]
         process.send({
-          type: 'ERROR',
+          type: 'cmd.ERROR',
           requestId,
           data: {
             ...error,
@@ -52,6 +79,18 @@ process.on('message', m => {
     if (sub) {
       sub.unsubscribe()
       delete subscriptions[requestId]
+    }
+  } else if (m.type === 'executeHttpQueryPayload') {
+    const { payload } = m
+    const defer = defers[payload.id]
+    if (!defer) {
+      logger.warn('executeHttpQueryPayload: no defer found')
+      return
+    }
+    if (payload.type === 'success') {
+      defer.resolve(payload.result)
+    } else {
+      defer.reject(payload.error)
     }
   }
 })

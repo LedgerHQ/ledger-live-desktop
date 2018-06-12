@@ -9,6 +9,8 @@ import db from 'helpers/db'
 // necessary to prevent win from being garbage collected
 let mainWindow = null
 
+export const getMainWindow = () => mainWindow
+
 let forceClose = false
 
 const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env

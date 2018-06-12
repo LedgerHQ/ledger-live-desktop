@@ -10,6 +10,7 @@
 
 import 'commands'
 import logger from 'logger'
+import network from 'api/network'
 
 import { ipcRenderer } from 'electron'
 import debug from 'debug'
@@ -78,6 +79,17 @@ export default ({ store }: { store: Object, locked: boolean }) => {
   }
 
   syncDevices()
+
+  ipcRenderer.on('executeHttpQuery', (event: any, { networkArg, id }) => {
+    network(networkArg).then(
+      result => {
+        ipcRenderer.send('executeHttpQueryPayload', { type: 'success', id, result })
+      },
+      error => {
+        ipcRenderer.send('executeHttpQueryPayload', { type: 'error', id, error })
+      },
+    )
+  })
 
   if (__PROD__) {
     // TODO move this to "command" pattern
