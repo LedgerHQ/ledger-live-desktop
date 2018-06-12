@@ -20,12 +20,19 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Select from 'components/base/LegacySelect'
-import { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
+import {
+  ModalBody,
+  ModalTitle,
+  ModalFooter,
+  ModalContent,
+  ConfirmModal,
+} from 'components/base/Modal'
 
 type State = {
   accountName: string | null,
   accountUnit: Unit | null,
   accountNameError: boolean,
+  isRemoveAccountModalOpen: boolean,
 }
 
 type Props = {
@@ -47,6 +54,7 @@ const defaultState = {
   accountName: null,
   accountUnit: null,
   accountNameError: false,
+  isRemoveAccountModalOpen: false,
 }
 
 class HelperComp extends PureComponent<Props, State> {
@@ -106,15 +114,18 @@ class HelperComp extends PureComponent<Props, State> {
   handleChangeUnit = (value: Unit) => {
     this.setState({ accountUnit: value })
   }
+  handleOpenRemoveAccountModal = () => this.setState({ isRemoveAccountModalOpen: true })
+  handleCloseRemoveAccountModal = () => this.setState({ isRemoveAccountModalOpen: false })
 
   handleRemoveAccount = (account: Account) => {
-    const { removeAccount } = this.props
+    const { removeAccount, onClose } = this.props
     removeAccount(account)
-    this.props.onClose()
+    this.setState({ isRemoveAccountModalOpen: false })
+    onClose()
   }
 
   render() {
-    const { accountUnit, accountNameError } = this.state
+    const { accountUnit, accountNameError, isRemoveAccountModalOpen } = this.state
     const { t, onClose, data } = this.props
 
     const account = this.getAccount(data)
@@ -183,7 +194,7 @@ class HelperComp extends PureComponent<Props, State> {
             </Spoiler>
           </ModalContent>
           <ModalFooter horizontal>
-            <Button small danger type="button" onClick={() => this.handleRemoveAccount(account)}>
+            <Button small danger type="button" onClick={this.handleOpenRemoveAccountModal}>
               {t('common:delete')}
             </Button>
             <Button small ml="auto" type="submit" primary>
@@ -191,6 +202,16 @@ class HelperComp extends PureComponent<Props, State> {
             </Button>
           </ModalFooter>
         </form>
+        <ConfirmModal
+          isDanger
+          isOpened={isRemoveAccountModalOpen}
+          onClose={this.handleCloseRemoveAccountModal}
+          onReject={this.handleCloseRemoveAccountModal}
+          onConfirm={() => this.handleRemoveAccount(account)}
+          title={t('settings:removeAccountModal.title')}
+          subTitle={t('settings:removeAccountModal.subTitle')}
+          desc={t('settings:removeAccountModal.desc')}
+        />
       </ModalBody>
     )
   }
