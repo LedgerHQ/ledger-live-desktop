@@ -2,7 +2,6 @@
 
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import semver from 'semver'
 
 import { openModal } from 'reducers/modals'
@@ -29,18 +28,13 @@ const mapDispatchToProps = {
 
 class UpdateInstalled extends PureComponent<Props> {
   componentDidMount() {
-    const { lastUsedVersion, saveSettings } = this.props
+    const { lastUsedVersion, saveSettings, openModal } = this.props
     const currentVersion = __APP_VERSION__
 
-    // if (semver.gt(currentVersion, lastUsedVersion)) {
-    axios
-      .get(
-        `https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${currentVersion}`,
-      )
-      .then(this.showModal)
-
-    saveSettings({ lastUsedVersion: currentVersion })
-    // }
+    if (semver.gt(currentVersion, lastUsedVersion)) {
+      openModal(MODAL_RELEASES_NOTES, currentVersion)
+      saveSettings({ lastUsedVersion: currentVersion })
+    }
   }
 
   showModal = ({ data }) => {

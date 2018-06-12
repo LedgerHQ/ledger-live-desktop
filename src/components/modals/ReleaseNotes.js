@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
+import axios from 'axios'
 
 import { MODAL_RELEASES_NOTES } from 'config/constants'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
@@ -10,11 +11,16 @@ import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'compone
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import Spinner from 'components/base/Spinner'
 
 import type { T } from 'types/common'
 
 type Props = {
   t: T,
+}
+
+type State = {
+  markdown: ?string,
 }
 
 const Notes = styled(Box).attrs({
@@ -141,21 +147,47 @@ const Title = styled(Text).attrs({
   color: 'dark',
 })``
 
-class ReleaseNotes extends PureComponent<Props, *> {
+class ReleaseNotes extends PureComponent<Props, State> {
+  state = {
+    markdown: null,
+  }
+
   render() {
     const { t } = this.props
     const renderBody = ({ data, onClose }) => {
-      const { name, body: markdown } = data
+      const version = data
+      const { markdown } = this.state
+
+      axios
+        .get(`https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`)
+        .then(response => {
+          const { body } = response.data
+
+          this.setState({
+            markdown: body,
+          })
+        })
+
+      const content = markdown ? (
+        <Notes>
+          <Title>{t('releaseNotes:version', { versionNb: version })}</Title>
+          <ReactMarkdown>{markdown}</ReactMarkdown>
+        </Notes>
+      ) : (
+        <Box horizontal alignItems="center">
+          <Spinner
+            size={32}
+            style={{
+              margin: 'auto',
+            }}
+          />
+        </Box>
+      )
 
       return (
         <ModalBody onClose={onClose}>
           <ModalTitle>{t('releaseNotes:title')}</ModalTitle>
-          <ModalContent>
-            <Notes>
-              <Title>{t('releaseNotes:version', { versionNb: name })}</Title>
-              <ReactMarkdown>{markdown}</ReactMarkdown>
-            </Notes>
-          </ModalContent>
+          <ModalContent>{content}</ModalContent>
           <ModalFooter horizontal justifyContent="flex-end">
             <Button onClick={onClose} primary>
               {t('common:continue')}
