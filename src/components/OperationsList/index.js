@@ -66,14 +66,6 @@ const initialState = {
   nbToShow: 20,
 }
 
-const footerPlaceholder = (
-  <Box p={4} align="center">
-    <Text ff="Open Sans" fontSize={3}>
-      No more operations
-    </Text>
-  </Box>
-)
-
 export class OperationsList extends PureComponent<Props, State> {
   static defaultProps = {
     withAccount: false,
@@ -143,7 +135,11 @@ export class OperationsList extends PureComponent<Props, State> {
               <IconAngleDown size={12} />
             </ShowMore>
           ) : (
-            footerPlaceholder
+            <Box p={4} align="center">
+              <Text ff="Open Sans" fontSize={3}>
+                {t('app:operationList.noMoreOperations')}
+              </Text>
+            </Box>
           )}
         </Box>
       </Defer>

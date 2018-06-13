@@ -140,7 +140,7 @@ class TabProfile extends PureComponent<Props, State> {
         <Header
           icon={<IconUser size={16} />}
           title={t('app:settings.tabs.profile')}
-          desc="Lorem ipsum dolor sit amet"
+          desc={t('app:settings.display.desc')}
         />
         <Body>
           <Row

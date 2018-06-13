@@ -41,17 +41,17 @@ class SectionAbout extends PureComponent<Props> {
         <Header
           icon={<IconHelp size={16} />}
           title={t('app:settings.tabs.about')}
-          desc="Lorem ipsum dolor sit amet"
+          desc={t('app:settings.about.desc')}
         />
         <Body>
-          <Row title="Version" desc={version}>
+          <Row title={t('app:settings.about.version')} desc={version}>
             <Button
               primary
               onClick={() => {
                 openModal(MODAL_RELEASES_NOTES, version)
               }}
             >
-              Show release notes
+              {t('app:settings.about.releaseNotesBtn')}
             </Button>
           </Row>
           <Row

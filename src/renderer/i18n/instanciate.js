@@ -9,6 +9,12 @@ const commonConfig = {
   },
 }
 
+const highlightPostProcessor = {
+  type: 'postProcessor',
+  name: 'highlight',
+  process: value => `!!${value}!!`,
+}
+
 function addPluralRule(i18n) {
   i18n.services.pluralResolver.addRule('en', {
     numbers: [0, 1, 'plural'],
@@ -18,10 +24,19 @@ function addPluralRule(i18n) {
 }
 
 export function createWithBackend(backend, backendOpts) {
-  i18n.use(backend).init({
+  const config = {
     ...commonConfig,
     ...backendOpts,
-  })
+  }
+
+  if (process.env.HIGHLIGHT_I18N) {
+    config.postProcess = 'highlight'
+  }
+
+  i18n
+    .use(backend)
+    .use(highlightPostProcessor)
+    .init(config)
   return addPluralRule(i18n)
 }
 
