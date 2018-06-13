@@ -49,6 +49,7 @@ class ActivityIndicatorInner extends Component<Props, State> {
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const nextState = {
+      ...prevState,
       isGlobalSyncStatePending: nextProps.isGlobalSyncStatePending,
     }
 
