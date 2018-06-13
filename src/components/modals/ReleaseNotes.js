@@ -157,7 +157,7 @@ class ReleaseNotes extends PureComponent<Props, State> {
   fetchNotes = version => {
     if (!this.state.loading) {
       this.setState({
-        loading: true
+        loading: true,
       })
 
       axios
