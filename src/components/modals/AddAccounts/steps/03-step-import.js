@@ -7,6 +7,7 @@ import uniq from 'lodash/uniq'
 import { getBridgeForCurrency } from 'bridge'
 
 import Box from 'components/base/Box'
+import CurrencyBadge from 'components/base/CurrencyBadge'
 import Button from 'components/base/Button'
 import AccountsList from 'components/base/AccountsList'
 import IconExchange from 'icons/Exchange'
@@ -202,6 +203,7 @@ export const StepImportFooter = ({
   onCloseModal,
   checkedAccountsIds,
   scannedAccounts,
+  currency,
   t,
 }: StepProps) => {
   const willCreateAccount = checkedAccountsIds.some(id => {
@@ -236,8 +238,11 @@ export const StepImportFooter = ({
   const onClick = willClose ? onCloseModal : onClickAdd
 
   return (
-    <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
-      {ctaWording}
-    </Button>
+    <Fragment>
+      {currency && <CurrencyBadge mr="auto" currency={currency} />}
+      <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
+        {ctaWording}
+      </Button>
+    </Fragment>
   )
 }
