@@ -73,7 +73,7 @@ const INITIAL_STATE: SettingsState = {
   developerMode: !!process.env.__DEV__,
   loaded: false,
   shareAnalytics: false,
-  sentryLogs: false,
+  sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
 }
 
@@ -214,5 +214,6 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
 )
 
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
+export const sentryLogsBooleanSelector = (state: State) => state.settings.sentryLogs
 
 export default handleActions(handlers, INITIAL_STATE)

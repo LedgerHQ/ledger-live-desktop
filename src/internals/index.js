@@ -3,13 +3,17 @@ import commands from 'commands'
 import logger from 'logger'
 import uuid from 'uuid/v4'
 import { setImplementation } from 'api/network'
+import sentry from 'sentry/node'
 
 require('../env')
-require('../init-sentry')
 
 process.title = 'Internal'
 
 const defers = {}
+
+let sentryEnabled = process.env.INITIAL_SENTRY_ENABLED || false
+
+sentry(() => sentryEnabled, process.env.SENTRY_USER_ID)
 
 if (process.env.DEBUG_NETWORK) {
   setImplementation(networkArg => {
@@ -92,6 +96,9 @@ process.on('message', m => {
     } else {
       defer.reject(payload.error)
     }
+  } else if (m.type === 'sentryLogsChanged') {
+    const { payload } = m
+    sentryEnabled = payload.value
   }
 })
 
