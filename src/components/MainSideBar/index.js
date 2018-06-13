@@ -100,12 +100,14 @@ class MainSideBar extends PureComponent<Props> {
               icon={IconSend}
               iconActiveColor={'wallet'}
               onClick={this.handleOpenSendModal}
+              disabled={accounts.length === 0}
             />
             <SideBarListItem
               label={t('app:receive.title')}
               icon={IconReceive}
               iconActiveColor={'wallet'}
               onClick={this.handleOpenReceiveModal}
+              disabled={accounts.length === 0}
             />
             <SideBarListItem
               label={t('app:sidebar.manager')}
@@ -137,7 +139,7 @@ class MainSideBar extends PureComponent<Props> {
               />
             ))}
           </SideBarList>
-          <Space of={15} />
+          <Space of={30} />
         </GrowScroll>
       </Box>
     )
