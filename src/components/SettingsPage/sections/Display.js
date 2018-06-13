@@ -174,10 +174,6 @@ class TabProfile extends PureComponent<Props, State> {
             </Box>
           </Row>
           <Row
-            title={`Exchange (${intermediaryCurrency.ticker}${counterValueCurrency.ticker})`}
-            desc="The exchange to use for countervalue conversion"
-          />
-          <Row
             title={t('app:settings.display.language')}
             desc={t('app:settings.display.languageDesc')}
           >
