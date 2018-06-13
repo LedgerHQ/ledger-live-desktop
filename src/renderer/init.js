@@ -14,8 +14,7 @@ import events from 'renderer/events'
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
-import { getLanguage } from 'reducers/settings'
-import { sentryLogsBooleanSelector } from 'reducers/settings'
+import { getLanguage, sentryLogsBooleanSelector } from 'reducers/settings'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 
 import db from 'helpers/db'
@@ -23,7 +22,7 @@ import dbMiddleware from 'middlewares/db'
 import CounterValues from 'helpers/countervalues'
 import hardReset from 'helpers/hardReset'
 
-import sentry from 'renderer/sentry/browser'
+import sentry from 'sentry/browser'
 import App from 'components/App'
 
 import 'styles/global'

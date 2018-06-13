@@ -7,6 +7,8 @@ import { ipcMain, app } from 'electron'
 import { ipcMainListenReceiveCommands } from 'helpers/ipc'
 import path from 'path'
 import logger from 'logger'
+import sentry from 'sentry/node'
+import user from 'helpers/user'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 
@@ -16,6 +18,11 @@ import { getMainWindow } from './app'
 const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
 
 let internalProcess
+
+let sentryEnabled = false
+const userId = user().id
+
+sentry(() => sentryEnabled, userId)
 
 const killInternalProcess = () => {
   if (internalProcess) {
@@ -30,7 +37,12 @@ const forkBundlePath = path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist
 const bootInternalProcess = () => {
   logger.log('booting internal process...')
   internalProcess = fork(forkBundlePath, {
-    env: { ...process.env, LEDGER_LIVE_SQLITE_PATH },
+    env: {
+      ...process.env,
+      LEDGER_LIVE_SQLITE_PATH,
+      INITIAL_SENTRY_ENABLED: sentryEnabled,
+      SENTRY_USER_ID: userId,
+    },
   })
   internalProcess.on('message', handleGlobalInternalMessage)
   internalProcess.on('exit', code => {
@@ -100,6 +112,13 @@ ipcMain.on('executeHttpQueryPayload', (event, payload) => {
   const p = internalProcess
   if (!p) return
   p.send({ type: 'executeHttpQueryPayload', payload })
+})
+
+ipcMain.on('sentryLogsChanged', (event, payload) => {
+  sentryEnabled = payload.value
+  const p = internalProcess
+  if (!p) return
+  p.send({ type: 'sentryLogsChanged', payload })
 })
 
 // TODO move this to "command" pattern
