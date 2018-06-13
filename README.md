@@ -37,11 +37,14 @@ yarn
 # Where errors will be tracked (you may not want to edit this line)
 # SENTRY_URL=
 
-# api base url
-API_BASE_URL=http://...
-
 # OPTIONAL ENV VARIABLES
 # ----------------------
+
+# API base url, fallback to our API if not set
+API_BASE_URL=http://...
+
+# Setup device debug mode
+DEBUG_DEVICE=0
 
 # Developer tools position (used only in dev)
 # can be one of: right, bottom, undocked, detach

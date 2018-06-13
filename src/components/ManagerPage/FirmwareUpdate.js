@@ -1,11 +1,12 @@
 // @flow
 import React, { PureComponent } from 'react'
+import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import invariant from 'invariant'
 import logger from 'logger'
 
-import type { Device } from 'types/common'
+import type { Device, T } from 'types/common'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installOsuFirmware from 'commands/installOsuFirmware'
@@ -31,6 +32,7 @@ type DeviceInfos = {
 }
 
 type Props = {
+  t: T,
   device: Device,
   infos: DeviceInfos,
 }
@@ -96,7 +98,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 
   render() {
-    const { infos } = this.props
+    const { infos, t } = this.props
     const { latestFirmware } = this.state
 
     return (
@@ -115,7 +117,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               </Box>
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>
-              Firmware {infos.version}
+              {t('app:manager.firmware.installed', { version: infos.version })}
             </Text>
           </Box>
           <UpdateFirmwareButton firmware={latestFirmware} installFirmware={this.installFirmware} />
@@ -125,4 +127,4 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 }
 
-export default FirmwareUpdate
+export default translate()(FirmwareUpdate)

@@ -8,6 +8,8 @@ import type { T } from 'types/common'
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
 
+// TODO: NOT IN USE, REMOVE
+
 type Props = {
   t: T,
 }
@@ -19,12 +21,12 @@ function PlugYourDevice(props: Props) {
       <Box align="center" style={{ width: 365 }}>
         <Box mb={5}>hey</Box>
         <Box textAlign="center" mb={1} ff="Museo Sans|Regular" color="dark" fontSize={6}>
-          {t('app:manager.plugYourDevice.title')}
+          {t('app:manager.device.title')}
         </Box>
         <Box textAlign="center" mb={5} ff="Open Sans|Regular" color="smoke" fontSize={4}>
-          {t('app:manager.plugYourDevice.desc')}
+          {t('app:manager.device.desc')}
         </Box>
-        <Button primary>{t('app:manager.plugYourDevice.cta')}</Button>
+        <Button primary>{t('app:manager.device.cta')}</Button>
       </Box>
     </Card>
   )

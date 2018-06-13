@@ -52,8 +52,7 @@ type Props = {
   onUninstall: Function,
 }
 
-function ManagerApp(props: Props) {
-  const { name, version, icon, onInstall, onUninstall, t } = props
+function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
   const iconUrl = `https://api.ledgerwallet.com/update/assets/icons/${icon}`
   return (
     <Container>
@@ -65,7 +64,7 @@ function ManagerApp(props: Props) {
         </Text>
       </Box>
       <Button outline onClick={onInstall}>
-        {t('app:manager.installApps')}
+        {t('app:manager.apps.install')}
       </Button>
       <Button outline onClick={onUninstall} outlineColor="grey">
         <Trash size={16} fill="grey" />
