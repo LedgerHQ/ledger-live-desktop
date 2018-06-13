@@ -35,8 +35,8 @@ const mapStateToProps: Function = (
   const data = getModalData(state, name)
   const modalOpened = isOpened || (name && isModalOpened(state, name))
 
-  if (onBeforeOpen) {
-    onBeforeOpen({ data, isOpened: modalOpened })
+  if (onBeforeOpen && modalOpened) {
+    onBeforeOpen({ data })
   }
 
   return {
