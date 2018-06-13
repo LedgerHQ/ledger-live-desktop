@@ -137,7 +137,7 @@ class MainSideBar extends PureComponent<Props> {
               />
             ))}
           </SideBarList>
-          <Space of={15} />
+          <Space of={30} />
         </GrowScroll>
       </Box>
     )
