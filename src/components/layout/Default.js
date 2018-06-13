@@ -63,6 +63,8 @@ class Default extends Component<Props> {
             <ModalComponent key={name} />
           ))}
 
+          <div id="sticky-back-to-top-root" />
+
           <Box grow horizontal bg="white">
             <SideBar />
 

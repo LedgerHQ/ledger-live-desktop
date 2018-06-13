@@ -25,6 +25,7 @@ import Box from 'components/base/Box'
 import PillsDaysCount from 'components/PillsDaysCount'
 import Text from 'components/base/Text'
 import OperationsList from 'components/OperationsList'
+import StickyBackToTop from 'components/StickyBackToTop'
 
 import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
@@ -174,6 +175,7 @@ class DashboardPage extends PureComponent<Props, State> {
                   withAccount
                 />
               )}
+              <StickyBackToTop />
             </Fragment>
           </Fragment>
         ) : (
