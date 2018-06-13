@@ -280,10 +280,14 @@ class SendModal extends Component<Props, State<*>> {
         preventBackdropClick={!canClose}
         render={({ onClose }) => (
           <ModalBody
-            onClose={() => {
-              this.handleReset()
-              onClose()
-            }}
+            onClose={
+              canClose
+                ? () => {
+                    this.handleReset()
+                    onClose()
+                  }
+                : undefined
+            }
           >
             <PollCounterValuesOnMount />
             <SyncSkipUnderPriority priority={80} />
