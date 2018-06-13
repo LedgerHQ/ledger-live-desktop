@@ -19,7 +19,6 @@ const PlusWrapper = styled(Tabbable).attrs({
     color: ${p => p.theme.colors.dark};
   }
 
-  border: 1px solid transparent;
   &:focus {
     outline: none;
     border-color: ${p => rgba(p.theme.colors.wallet, 0.3)};

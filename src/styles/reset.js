@@ -7,6 +7,7 @@ module.exports = `* {
   color: inherit;
   user-select: none;
   min-width: 0;
+  outline: none;
 
   /* it will surely make problem in the future... to be inspected. */
   /* ;_; */

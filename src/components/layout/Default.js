@@ -26,6 +26,7 @@ import TopBar from 'components/TopBar'
 const Container = styled(GrowScroll).attrs({
   p: 6,
 })`
+  outline: none;
   padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[7]}px;
 `
 
@@ -40,7 +41,12 @@ class Default extends Component<Props> {
 
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      if (this._scrollContainer) {
+      const canScroll =
+        this._scrollContainer &&
+        this._scrollContainer._scrollbar &&
+        this._scrollContainer._scrollbar.scrollTo
+      if (canScroll) {
+        // $FlowFixMe already checked this._scrollContainer
         this._scrollContainer._scrollbar.scrollTo(0, 0)
       }
     }
@@ -70,7 +76,7 @@ class Default extends Component<Props> {
 
             <Box shrink grow bg="lightGrey" color="grey" relative>
               <TopBar />
-              <Container innerRef={n => (this._scrollContainer = n)}>
+              <Container innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
                 <Route path="/manager" component={ManagerPage} />

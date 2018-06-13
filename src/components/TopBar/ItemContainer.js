@@ -15,7 +15,6 @@ export default styled(Tabbable).attrs({
   borderRadius: 1,
 })`
   height: 40px;
-  border: 1px dashed transparent;
 
   &:hover {
     color: ${p => (p.isDisabled ? '' : p.theme.colors.dark)};
@@ -24,9 +23,5 @@ export default styled(Tabbable).attrs({
 
   &:active {
     background: ${p => (p.isDisabled ? '' : rgba(p.theme.colors.fog, 0.3))};
-  }
-
-  &:focus {
-    outline: none;
   }
 `

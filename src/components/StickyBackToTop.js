@@ -50,6 +50,7 @@ class StickyBackToTop extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
+    if (!this.context.getScrollbar) return
     this.context.getScrollbar(scrollbar => {
       const listener = () => {
         const { scrollTop } = scrollbar

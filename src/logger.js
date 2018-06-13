@@ -49,6 +49,7 @@ const makeSerializableLog = (o: mixed) => {
 
 const logClicks = !__DEV__ || process.env.DEBUG_CLICK_ELEMENT
 const logRedux = !__DEV__ || process.env.DEBUG_ACTION
+const logTabkey = __DEV__ || process.env.DEBUG_TAB_KEY
 
 export default {
   // tracks the user interactions (click, input focus/blur, what else?)
@@ -75,6 +76,18 @@ export default {
       console.log(`⚛️ ${action.type}`, action)
     }
     addLog('action', `⚛️ ${action.type}`, action)
+  },
+
+  // tracks keyboard events
+  onTabKey: (activeElement: ?HTMLElement) => {
+    if (!activeElement) return
+    const { classList, tagName } = activeElement
+    const displayEl = `${tagName.toLowerCase()}${classList.length ? ` ${classList.item(0)}` : ''}`
+    const msg = `⇓ <TAB> - active element ${displayEl}`
+    if (logTabkey) {
+      console.log(msg)
+    }
+    addLog('keydown', msg)
   },
 
   // General functions in case the hooks don't apply
