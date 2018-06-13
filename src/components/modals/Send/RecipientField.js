@@ -14,6 +14,7 @@ type Props<Transaction> = {
   bridge: WalletBridge<Transaction>,
   transaction: Transaction,
   onChangeTransaction: Transaction => void,
+  autoFocus?: boolean,
 }
 
 class RecipientField<Transaction> extends Component<Props<Transaction>, { isValid: boolean }> {
@@ -59,7 +60,7 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
   }
 
   render() {
-    const { bridge, account, transaction, t } = this.props
+    const { bridge, account, transaction, t, autoFocus } = this.props
     const { isValid } = this.state
     const value = bridge.getTransactionRecipient(account, transaction)
     return (
@@ -69,6 +70,7 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
           <LabelInfoTooltip ml={1} text={t('app:send.steps.amount.recipientAddress')} />
         </Label>
         <RecipientAddress
+          autoFocus={autoFocus}
           withQrCode
           error={!value || isValid ? null : `This is not a valid ${account.currency.name} address`}
           value={value}

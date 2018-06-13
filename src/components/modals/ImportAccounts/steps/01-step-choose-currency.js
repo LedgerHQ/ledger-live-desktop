@@ -12,6 +12,7 @@ import type { StepProps } from '../index'
 function StepChooseCurrency({ currency, setState }: StepProps) {
   return (
     <SelectCurrency
+      autoFocus
       onChange={currency => {
         setState({
           currency: isArray(currency) && currency.length === 0 ? null : currency,
