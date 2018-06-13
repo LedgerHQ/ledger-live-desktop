@@ -28,6 +28,15 @@ import 'styles/global'
 
 const rootNode = document.getElementById('app')
 
+// Github like focus style:
+// - focus states are not visible by default
+// - first time user hit tab, enable global tab to see focus states
+let IS_GLOBAL_TAB_ENABLED = false
+const TAB_KEY = 9
+
+export const isGlobalTabEnabled = () => IS_GLOBAL_TAB_ENABLED
+export const enableGlobalTab = () => (IS_GLOBAL_TAB_ENABLED = true)
+
 async function init() {
   if (process.env.LEDGER_RESET_ALL) {
     await hardReset()
@@ -76,6 +85,23 @@ async function init() {
 
     // DOM elements can have a data-role that identify the UI entity
     // and that allow us to track interactions with this.
+    window.addEventListener('click', ({ target }) => {
+      const { dataset } = target
+      if (dataset) {
+        const { role, roledata } = dataset
+        if (role) {
+          logger.onClickElement(role, roledata)
+        }
+      }
+    })
+
+    window.addEventListener('keydown', (e: SyntheticKeyboardEvent<any>) => {
+      if (e.which === TAB_KEY) {
+        if (!isGlobalTabEnabled()) enableGlobalTab()
+        logger.onTabKey(document.activeElement)
+      }
+    })
+
     window.addEventListener('click', ({ target }) => {
       const { dataset } = target
       if (dataset) {

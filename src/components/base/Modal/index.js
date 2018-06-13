@@ -16,7 +16,7 @@ import { radii } from 'styles/theme'
 
 import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
-import Box, { Tabbable } from 'components/base/Box'
+import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Defer from 'components/base/Defer'
 
@@ -75,7 +75,7 @@ const Backdrop = styled(Box).attrs({
   position: fixed;
 `
 
-const Wrapper = styled(Tabbable).attrs({
+const Wrapper = styled(Box).attrs({
   bg: 'transparent',
   flow: 4,
   style: p => ({
@@ -107,10 +107,11 @@ class Pure extends Component<any> {
 type Props = {
   data?: any,
   isOpened: boolean,
-  onClose: Function,
+  onClose?: Function,
   onHide?: Function,
   preventBackdropClick: boolean,
   render: Function,
+  refocusWhenChange?: string,
 }
 
 export class Modal extends Component<Props> {
@@ -133,17 +134,14 @@ export class Modal extends Component<Props> {
   componentDidUpdate(prevProps: Props) {
     const didOpened = this.props.isOpened && !prevProps.isOpened
     const didClose = !this.props.isOpened && prevProps.isOpened
+    const shouldFocus = didOpened || this.props.refocusWhenChange !== prevProps.refocusWhenChange
     if (didOpened) {
       // Store a reference to the last active element, to restore it after
       // modal close
       this._lastFocusedElement = document.activeElement
-
-      // Forced to use findDOMNode here, because innerRef is giving a proxied component
-      const domWrapper = findDOMNode(this._wrapper) // eslint-disable-line react/no-find-dom-node
-
-      if (domWrapper instanceof HTMLDivElement) {
-        domWrapper.focus()
-      }
+    }
+    if (shouldFocus) {
+      this.focusWrapper()
     }
 
     if (didClose) {
@@ -155,6 +153,15 @@ export class Modal extends Component<Props> {
 
   _wrapper = null
   _lastFocusedElement = null
+
+  focusWrapper = () => {
+    // Forced to use findDOMNode here, because innerRef is giving a proxied component
+    const domWrapper = findDOMNode(this._wrapper) // eslint-disable-line react/no-find-dom-node
+
+    if (domWrapper instanceof HTMLDivElement) {
+      domWrapper.focus()
+    }
+  }
 
   render() {
     const { preventBackdropClick, isOpened, onHide, render, data, onClose } = this.props
@@ -175,6 +182,7 @@ export class Modal extends Component<Props> {
             <Backdrop op={m.opacity} />
             <GrowScroll alignItems="center" full py={8}>
               <Wrapper
+                tabIndex={-1}
                 op={m.opacity}
                 scale={m.scale}
                 innerRef={n => (this._wrapper = n)}

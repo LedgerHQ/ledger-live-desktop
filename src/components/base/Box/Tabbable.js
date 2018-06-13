@@ -1,52 +1,61 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
+import styled from 'styled-components'
+
+import { isGlobalTabEnabled } from 'renderer/init'
+import { rgba } from 'styles/helpers'
 
 import Box from './index'
 
-// Github like focus style:
-// - focus states are not visible by default
-// - first time user hit tab, enable global tab to see focus states
-const __IS_GLOBAL_TAB_ENABLED__ = false
+const KEY_ENTER = 13
 
-export default class Tabbable extends PureComponent<
-  any,
-  {
-    isFocused: boolean,
-  },
+export const focusedShadowStyle = `
+  0 0 0 1px ${rgba('#0a84ff', 0.5)} inset,
+  0 0 0 1px ${rgba('#0a84ff', 0.3)},
+  0 0 0 4px rgba(10, 132, 255, 0.1)
+`
+
+const Raw = styled(Box)`
+  &:focus {
+    outline: none;
+    box-shadow: ${p => (p.isFocused && !p.unstyled ? focusedShadowStyle : 'none')};
+  }
+`
+
+export default class Tabbable extends Component<
+  { disabled?: boolean, unstyled?: boolean, onClick?: any => void },
+  { isFocused: boolean },
 > {
   state = {
     isFocused: false,
   }
 
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeydown)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeydown)
-  }
-
   handleFocus = () => {
-    if (!__IS_GLOBAL_TAB_ENABLED__) return
-    this.setState({ isFocused: true })
+    if (isGlobalTabEnabled()) {
+      this.setState({ isFocused: true })
+    }
   }
 
   handleBlur = () => this.setState({ isFocused: false })
 
-  handleKeydown = (e: SyntheticKeyboardEvent<any>) => {
-    if ((e.which === 13 || e.which === 32) && this.state.isFocused && this.props.onClick) {
-      this.props.onClick(e)
-    }
+  handleKeyPress = (e: SyntheticKeyboardEvent<*>) => {
+    const { isFocused } = this.state
+    const { onClick } = this.props
+    const canPress = e.which === KEY_ENTER && isGlobalTabEnabled() && isFocused
+    if (canPress && onClick) onClick(e)
   }
 
   render() {
     const { disabled } = this.props
+    const { isFocused } = this.state
     return (
-      <Box
+      <Raw
         tabIndex={disabled ? undefined : 0}
+        isFocused={isFocused}
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
+        onKeyPress={this.handleKeyPress}
         {...this.props}
       />
     )

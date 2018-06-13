@@ -56,7 +56,7 @@ export function SettingsSectionHeader({
   renderRight?: any,
 }) {
   return (
-    <SettingsSectionHeaderContainer>
+    <SettingsSectionHeaderContainer tabIndex={-1}>
       <RoundIconContainer mr={3}>{icon}</RoundIconContainer>
       <Box grow>
         <Box ff="Museo Sans|Regular" color="dark">
@@ -100,7 +100,7 @@ export function SettingsSectionRow({
   onClick?: ?Function,
 }) {
   return (
-    <SettingsSectionRowContainer onClick={onClick}>
+    <SettingsSectionRowContainer onClick={onClick} tabIndex={-1}>
       <Box grow shrink>
         <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {title}

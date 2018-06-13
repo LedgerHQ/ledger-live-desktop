@@ -196,7 +196,7 @@ class ImportAccounts extends PureComponent<Props, State> {
     return (
       <Modal
         name="importAccounts"
-        preventBackdropClick
+        refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>

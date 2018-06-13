@@ -5,12 +5,21 @@ import styled from 'styled-components'
 import { space, fontSize, fontWeight, color } from 'styled-system'
 import noop from 'lodash/noop'
 
-import { darken, lighten } from 'styles/helpers'
+import { darken, lighten, rgba } from 'styles/helpers'
 import fontFamily from 'styles/styled/fontFamily'
+import { focusedShadowStyle } from 'components/base/Box/Tabbable'
 
 import Spinner from 'components/base/Spinner'
 
 const buttonStyles = {
+  default: {
+    default: noop,
+    active: noop,
+    hover: noop,
+    focus: () => `
+      box-shadow: ${focusedShadowStyle};
+    `,
+  },
   primary: {
     default: p => `
       background: ${p.disabled ? `${p.theme.colors.lightFog} !important` : p.theme.colors.wallet};
@@ -22,6 +31,12 @@ const buttonStyles = {
     active: p => `
        background: ${darken(p.theme.colors.wallet, 0.1)};
      `,
+    focus: p => `
+      box-shadow:
+        0 0 0 1px ${darken(p.theme.colors.wallet, 0.3)} inset,
+        0 0 0 1px ${rgba(p.theme.colors.wallet, 0.5)},
+        0 0 0 4px ${rgba(p.theme.colors.wallet, 0.3)};
+    `,
   },
   danger: {
     default: p => `
@@ -34,6 +49,12 @@ const buttonStyles = {
     active: p => `
       background: ${darken(p.theme.colors.alertRed, 0.1)};
      `,
+    focus: p => `
+      box-shadow:
+        0 0 0 1px ${darken(p.theme.colors.alertRed, 0.3)} inset,
+        0 0 0 1px ${rgba(p.theme.colors.alertRed, 0.5)},
+        0 0 0 4px ${rgba(p.theme.colors.alertRed, 0.3)};
+    `,
   },
   outline: {
     default: p => `
@@ -86,6 +107,10 @@ const buttonStyles = {
 
 function getStyles(props, state) {
   let output = ``
+  const defaultStyle = buttonStyles.default[state]
+  if (defaultStyle) {
+    output += defaultStyle(props) || ''
+  }
   for (const s in buttonStyles) {
     if (buttonStyles.hasOwnProperty(s) && props[s] === true) {
       const style = buttonStyles[s][state]
@@ -124,6 +149,9 @@ const Base = styled.button.attrs({
   }
   &:active {
     ${p => getStyles(p, 'active')};
+  }
+  &:focus {
+    ${p => getStyles(p, 'focus')};
   }
 `
 

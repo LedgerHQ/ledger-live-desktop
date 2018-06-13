@@ -6,7 +6,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { darken } from 'styles/helpers'
 
-import Box from 'components/base/Box'
+import Box, { Tabbable } from 'components/base/Box'
 import Radio from 'components/base/Radio'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import FormattedVal from 'components/base/FormattedVal'
@@ -116,7 +116,7 @@ export default class AccountRow extends PureComponent<Props, State> {
   }
 }
 
-const AccountRowContainer = styled(Box).attrs({
+const AccountRowContainer = styled(Tabbable).attrs({
   horizontal: true,
   align: 'center',
   bg: 'lightGrey',

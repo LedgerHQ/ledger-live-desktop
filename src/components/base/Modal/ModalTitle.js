@@ -20,6 +20,7 @@ const Container = styled(Box).attrs({
 })``
 
 const Back = styled(Box).attrs({
+  unstyled: true,
   horizontal: true,
   align: 'center',
   color: 'grey',
@@ -39,6 +40,13 @@ const Back = styled(Box).attrs({
   &:active {
     color: ${p => p.theme.colors.dark};
   }
+
+  span {
+    border-bottom: 1px dashed transparent;
+  }
+  &:focus span {
+    border-bottom-color: inherit;
+  }
 `
 
 function ModalTitle({
@@ -56,7 +64,7 @@ function ModalTitle({
       {onBack && (
         <Back onClick={onBack}>
           <IconAngleLeft size={16} />
-          {t('app:common.back')}
+          <span>{t('app:common.back')}</span>
         </Back>
       )}
       {children}

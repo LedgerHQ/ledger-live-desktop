@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import Box, { Tabbable } from 'components/base/Box'
-import { rgba } from 'styles/helpers'
 
 export type Props = {
   label: string | (Props => React$Element<any>),
@@ -75,12 +74,6 @@ const Container = styled(Tabbable).attrs({
 
   &:hover {
     color: ${p => !p.disabled && p.theme.colors.dark};
-  }
-
-  border: 1px solid transparent;
-  &:focus {
-    outline: none;
-    border-color: ${p => rgba(p.theme.colors.wallet, 0.3)};
   }
 
   ${p => {

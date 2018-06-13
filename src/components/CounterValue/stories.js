@@ -12,5 +12,5 @@ const stories = storiesOf('Components', module)
 const currency = getCryptoCurrencyById('bitcoin')
 
 stories.add('CounterValue', () => (
-  <CounterValue exchange="KRAKEN" currency={currency} value={number('value', 100000000)} />
+  <CounterValue currency={currency} value={number('value', 100000000)} />
 ))

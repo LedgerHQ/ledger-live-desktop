@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/no-multi-comp */
 
 import React, { PureComponent } from 'react'
 import { shell } from 'electron'
@@ -9,6 +10,7 @@ import type { T } from 'types/common'
 import IconHelp from 'icons/Help'
 import IconExternalLink from 'icons/ExternalLink'
 import Button from 'components/base/Button'
+import { Tabbable } from 'components/base/Box'
 
 import { openModal } from 'reducers/modals'
 import { MODAL_RELEASES_NOTES } from 'config/constants'
@@ -29,8 +31,29 @@ const mapDispatchToProps = {
   openModal,
 }
 
+const ITEMS = [
+  {
+    key: 'faq',
+    title: t => t('app:settings.about.faq'),
+    desc: t => t('app:settings.about.faqDesc'),
+    url: 'https://support.ledgerwallet.com/hc/en-us',
+  },
+  {
+    key: 'contact',
+    title: t => t('app:settings.about.contactUs'),
+    desc: t => t('app:settings.about.contactUsDesc'),
+    url: 'https://support.ledgerwallet.com/hc/en-us/requests/new',
+  },
+  {
+    key: 'terms',
+    title: t => t('app:settings.about.terms'),
+    desc: t => t('app:settings.about.termsDesc'),
+    url: 'https://www.ledgerwallet.com/terms',
+  },
+]
+
 class SectionAbout extends PureComponent<Props> {
-  handleOpenLink = (url: string) => () => shell.openExternal(url)
+  handleOpenLink = (url: string) => shell.openExternal(url)
 
   render() {
     const { t, openModal } = this.props
@@ -54,29 +77,37 @@ class SectionAbout extends PureComponent<Props> {
               {t('app:settings.about.releaseNotesBtn')}
             </Button>
           </Row>
-          <Row
-            onClick={this.handleOpenLink('https://support.ledgerwallet.com/hc/en-us')}
-            title={t('app:settings.about.faq')}
-            desc={t('app:settings.about.faqDesc')}
-          >
-            <IconExternalLink size={16} />
-          </Row>
-          <Row
-            onClick={this.handleOpenLink('https://support.ledgerwallet.com/hc/en-us/requests/new')}
-            title={t('app:settings.about.contactUs')}
-            desc={t('app:settings.about.contactUsDesc')}
-          >
-            <IconExternalLink size={16} />
-          </Row>
-          <Row
-            onClick={this.handleOpenLink('https://www.ledgerwallet.com/terms')}
-            title={t('app:settings.about.terms')}
-            desc={t('app:settings.about.termsDesc')}
-          >
-            <IconExternalLink size={16} />
-          </Row>
+          {ITEMS.map(item => (
+            <AboutRowItem
+              key={item.key}
+              title={item.title(t)}
+              desc={item.desc(t)}
+              url={item.url}
+              onClick={this.handleOpenLink}
+            />
+          ))}
         </Body>
       </Section>
+    )
+  }
+}
+
+class AboutRowItem extends PureComponent<{
+  onClick: string => void,
+  url: string,
+  title: string,
+  desc: string,
+  url: string,
+}> {
+  render() {
+    const { onClick, title, desc, url } = this.props
+    const boundOnClick = () => onClick(url)
+    return (
+      <Row onClick={boundOnClick} title={title} desc={desc}>
+        <Tabbable p={2} borderRadius={1} onClick={boundOnClick}>
+          <IconExternalLink size={16} />
+        </Tabbable>
+      </Row>
     )
   }
 }
