@@ -174,7 +174,6 @@ class TabProfile extends PureComponent<Props, State> {
             </Box>
           </Row>
           <Row
-          <Row
             title={t('app:settings.display.language')}
             desc={t('app:settings.display.languageDesc')}
           >
