@@ -74,7 +74,7 @@ const INITIAL_STATE: SettingsState = {
   loaded: false,
   shareAnalytics: false,
   sentryLogs: false,
-  lastUsedVersion: '0.1.0-alpha.7', // Temp hack to show release notes on update to alpha 8, should ne replaced by __APP_VERSION__
+  lastUsedVersion: __APP_VERSION__,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {

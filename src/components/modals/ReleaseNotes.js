@@ -156,6 +156,10 @@ class ReleaseNotes extends PureComponent<Props, State> {
 
   fetchNotes = version => {
     if (!this.state.loading) {
+      this.setState({
+        loading: true,
+      })
+
       axios
         .get(`https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`)
         .then(response => {
