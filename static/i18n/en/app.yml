@@ -75,6 +75,8 @@ account:
       desc: Lorem ipsum dolort amet
 dashboard:
   title: Dashboard
+  accounts:
+    title: Accounts ({{count}})
   greeting:
     morning: "Good Morning!"
     evening: "Good Evening!"

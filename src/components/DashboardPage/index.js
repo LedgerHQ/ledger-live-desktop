@@ -137,7 +137,7 @@ class DashboardPage extends PureComponent<Props, State> {
               <Box flow={4}>
                 <Box horizontal alignItems="flex-end">
                   <Text color="dark" ff="Museo Sans" fontSize={6}>
-                    {t('app:sidebar.accounts')}
+                    {t('app:dashboard.accounts.title', { count: accounts.length })}
                   </Text>
                   <Box ml="auto" horizontal flow={1}>
                     <AccountsOrder />
