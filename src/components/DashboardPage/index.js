@@ -69,11 +69,11 @@ class DashboardPage extends PureComponent<Props, State> {
     const evening_breakpoint = 17
 
     if (localTimeHour >= afternoon_breakpoint && localTimeHour < evening_breakpoint) {
-      return 'dashboard:greeting.afternoon'
+      return 'app:dashboard.greeting.afternoon'
     } else if (localTimeHour >= evening_breakpoint) {
-      return 'dashboard:greeting.evening'
+      return 'app:dashboard.greeting.evening'
     }
-    return 'dashboard:greeting.morning'
+    return 'app:dashboard.greeting.morning'
   }
 
   handleChangeSelectedTime = item =>
