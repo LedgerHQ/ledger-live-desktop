@@ -32,6 +32,7 @@ import IconExchange from 'icons/Exchange'
 
 import AccountListItem from './AccountListItem'
 import AddAccountButton from './AddAccountButton'
+import TopGradient from './TopGradient'
 
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
@@ -84,6 +85,7 @@ class MainSideBar extends PureComponent<Props> {
 
     return (
       <Box relative bg="white" style={{ width: 230 }}>
+        <TopGradient />
         <GrowScroll>
           <Space of={70} />
           <SideBarList title={t('app:sidebar.menu')}>
