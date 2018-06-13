@@ -49,16 +49,12 @@ class ActivityIndicatorInner extends Component<Props, State> {
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const nextState = {
-      ...prevState,
       isGlobalSyncStatePending: nextProps.isGlobalSyncStatePending,
-    }
-
-    if (prevState.hasClicked && !nextProps.isGlobalSyncStatePending) {
-      nextState.hasClicked = false
     }
 
     if (prevState.isGlobalSyncStatePending && !nextProps.isGlobalSyncStatePending) {
       nextState.isFirstSync = false
+      nextState.hasClicked = false
     }
 
     return nextState
@@ -92,7 +88,7 @@ class ActivityIndicatorInner extends Component<Props, State> {
           )}
         </Rotating>
         <Box
-          ml={2}
+          ml={1}
           ff="Open Sans|SemiBold"
           color={isError ? 'alertRed' : undefined}
           fontSize={4}
