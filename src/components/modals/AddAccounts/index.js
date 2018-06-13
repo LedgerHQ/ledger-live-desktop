@@ -130,9 +130,10 @@ class AddAccounts extends PureComponent<Props, State> {
   })
 
   transitionTo = stepId => {
+    const { currency } = this.state
     let nextState = { stepId }
     if (stepId === 'chooseCurrency') {
-      nextState = { ...INITIAL_STATE }
+      nextState = { ...INITIAL_STATE, currency }
     }
     this.setState(nextState)
   }

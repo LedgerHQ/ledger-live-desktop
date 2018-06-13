@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { isGlobalTabEnabled } from 'renderer/init'
+import { isGlobalTabEnabled } from 'config/global-tab'
 import { rgba } from 'styles/helpers'
 
 import Box from './Box'
