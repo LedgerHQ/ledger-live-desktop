@@ -55,13 +55,13 @@ class ModalBody extends PureComponent<Props, State> {
 }
 
 const CloseContainer = styled(Box).attrs({
-  p: 2,
+  p: 4,
   color: 'fog',
 })`
   cursor: pointer;
   position: absolute;
-  top: 25px;
-  right: 10px;
+  top: 0;
+  right: 0;
   z-index: 1;
 
   &:hover {
