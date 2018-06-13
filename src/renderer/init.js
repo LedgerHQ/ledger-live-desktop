@@ -11,6 +11,8 @@ import moment from 'moment'
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
+import { enableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
+
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
@@ -29,14 +31,7 @@ import 'styles/global'
 
 const rootNode = document.getElementById('app')
 
-// Github like focus style:
-// - focus states are not visible by default
-// - first time user hit tab, enable global tab to see focus states
-let IS_GLOBAL_TAB_ENABLED = false
 const TAB_KEY = 9
-
-export const isGlobalTabEnabled = () => IS_GLOBAL_TAB_ENABLED
-export const enableGlobalTab = () => (IS_GLOBAL_TAB_ENABLED = true)
 
 async function init() {
   if (process.env.LEDGER_RESET_ALL) {

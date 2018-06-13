@@ -11,6 +11,7 @@
     "__PRINT_MODE__": false,
     "__GLOBAL_STYLES__": false,
     "__APP_VERSION__": false,
+    "__STORYBOOK_ENV__": false,
     "__static": false,
     "window": false,
     "document": false,

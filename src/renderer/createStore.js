@@ -6,7 +6,6 @@ import thunk from 'redux-thunk'
 import createHistory from 'history/createHashHistory'
 import type { HashHistory } from 'history'
 import logger from 'middlewares/logger'
-import sentry from 'middlewares/sentry'
 import reducers from 'reducers'
 
 type Props = {
@@ -20,7 +19,10 @@ export default ({ state, history, dbMiddleware }: Props) => {
   if (!history) {
     history = createHistory()
   }
-  const middlewares = [routerMiddleware(history), thunk, logger, sentry]
+  const middlewares = [routerMiddleware(history), thunk, logger]
+  if (!__STORYBOOK_ENV__) {
+    middlewares.push(require('middlewares/sentry').default)
+  }
   if (dbMiddleware) {
     middlewares.push(dbMiddleware)
   }
