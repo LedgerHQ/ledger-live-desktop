@@ -53,10 +53,10 @@ function StepConfirmation(props: Props) {
       ? colors.alertRed
       : colors.grey
   const tPrefix = optimisticOperation
-    ? 'send:steps.confirmation.success'
+    ? 'app:send.steps.confirmation.success'
     : error
-      ? 'send:steps.confirmation.error'
-      : 'send:steps.confirmation.pending'
+      ? 'app:send.steps.confirmation.error'
+      : 'app:send.steps.confirmation.pending'
 
   return (
     <Container>

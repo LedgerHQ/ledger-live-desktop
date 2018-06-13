@@ -59,7 +59,7 @@ class ConfirmationCheck extends PureComponent<{
 
   renderTooltip = () => {
     const { t, isConfirmed } = this.props
-    return t(isConfirmed ? 'operationsList:confirmed' : 'operationsList:notConfirmed')
+    return t(isConfirmed ? 'app:operationDetails.confirmed' : 'app:operationDetails.notConfirmed')
   }
 
   render() {

@@ -26,7 +26,7 @@ class PillsDaysCount extends PureComponent<Props> {
       <Pills
         items={itemsTimes.map(item => ({
           ...item,
-          label: t(`time:${item.key}`),
+          label: t(`app:time.${item.key}`),
         }))}
         activeKey={selectedTime}
         onChange={onChange}
