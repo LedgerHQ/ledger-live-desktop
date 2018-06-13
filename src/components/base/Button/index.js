@@ -11,7 +11,9 @@ import { focusedShadowStyle } from 'components/base/Box/Tabbable'
 
 import Spinner from 'components/base/Spinner'
 
-const buttonStyles = {
+type Style = any // FIXME
+
+const buttonStyles: { [_: string]: Style } = {
   default: {
     default: noop,
     active: noop,

@@ -12,5 +12,6 @@ const stories = storiesOf('Components', module)
 const currency = getCryptoCurrencyById('bitcoin')
 
 stories.add('CounterValue', () => (
+  // $FlowFixMe
   <CounterValue currency={currency} value={number('value', 100000000)} />
 ))

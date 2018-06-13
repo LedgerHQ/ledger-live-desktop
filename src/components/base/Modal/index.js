@@ -28,11 +28,26 @@ const springConfig = {
   stiffness: 320,
 }
 
-const mapStateToProps: Function = (
-  state,
-  { name, isOpened, onBeforeOpen }: { name: string, isOpened?: boolean, onBeforeOpen: Function },
-): * => {
-  const data = getModalData(state, name)
+type OwnProps = {
+  name?: string, // eslint-disable-line
+  isOpened?: boolean,
+  onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
+  onClose?: () => void,
+  onHide?: () => void,
+  preventBackdropClick?: boolean,
+  render: Function,
+  refocusWhenChange?: string,
+}
+
+type Props = OwnProps & {
+  isOpened?: boolean,
+  data?: any,
+} & {
+  onClose?: () => void,
+}
+
+const mapStateToProps = (state, { name, isOpened, onBeforeOpen }: OwnProps): * => {
+  const data = getModalData(state, name || '')
   const modalOpened = isOpened || (name && isModalOpened(state, name))
 
   if (onBeforeOpen && modalOpened) {
@@ -40,12 +55,12 @@ const mapStateToProps: Function = (
   }
 
   return {
-    isOpened: modalOpened,
+    isOpened: !!modalOpened,
     data,
   }
 }
 
-const mapDispatchToProps: Function = (dispatch, { name, onClose = noop }): * => ({
+const mapDispatchToProps = (dispatch: *, { name, onClose = noop }: OwnProps): * => ({
   onClose: name
     ? () => {
         dispatch(closeModal(name))
@@ -104,21 +119,9 @@ class Pure extends Component<any> {
   }
 }
 
-type Props = {
-  data?: any,
-  isOpened: boolean,
-  onClose?: Function,
-  onHide?: Function,
-  preventBackdropClick: boolean,
-  render: Function,
-  refocusWhenChange?: string,
-}
-
 export class Modal extends Component<Props> {
   static defaultProps = {
-    data: undefined,
     isOpened: false,
-    onClose: noop,
     onHide: noop,
     preventBackdropClick: false,
   }

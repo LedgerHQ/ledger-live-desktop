@@ -20,7 +20,7 @@ class TabProfile extends PureComponent<*, *> {
     this.setState({ qrcodeMobileExportModal: false })
   }
 
-  renderQRCodeModal = ({ onClose }: *) => (
+  renderQRCodeModal = ({ onClose }: any) => (
     <ModalBody onClose={onClose} justify="center" align="center">
       <ModalTitle>{'QRCode Mobile Export'}</ModalTitle>
       <ModalContent flow={4}>

@@ -79,9 +79,10 @@ export default {
   },
 
   // tracks keyboard events
-  onTabKey: activeElement => {
+  onTabKey: (activeElement: ?HTMLElement) => {
+    if (!activeElement) return
     const { classList, tagName } = activeElement
-    const displayEl = `${tagName.toLowerCase()}${classList.length ? ` ${classList[0]}` : ''}`
+    const displayEl = `${tagName.toLowerCase()}${classList.length ? ` ${classList.item(0)}` : ''}`
     const msg = `⇓ <TAB> - active element ${displayEl}`
     if (logTabkey) {
       console.log(msg)
