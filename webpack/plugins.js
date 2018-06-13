@@ -12,7 +12,7 @@ module.exports = type => {
       __GLOBAL_STYLES__: JSON.stringify(__GLOBAL_STYLES__),
       __DEV__,
       __PROD__,
-      __SENTRY_URL__: SENTRY_URL,
+      __SENTRY_URL__: JSON.stringify(SENTRY_URL || null),
       'process.env.NODE_ENV': JSON.stringify(__ENV__),
     }),
   ]
