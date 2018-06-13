@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { Exchange } from '@ledgerhq/live-common/lib/countervalues/types'
 import logger from 'logger'
@@ -8,6 +9,7 @@ import Select from 'components/base/Select'
 import Spinner from 'components/base/Spinner'
 import Text from 'components/base/Text'
 import CounterValues from 'helpers/countervalues'
+import type { T } from 'types/common'
 
 class ExchangeSelect extends Component<
   {
@@ -16,6 +18,7 @@ class ExchangeSelect extends Component<
     exchangeId: ?string,
     onChange: (?Exchange) => void,
     style?: *,
+    t: T,
   },
   {
     prevFromTo: string,
@@ -76,7 +79,7 @@ class ExchangeSelect extends Component<
   }
 
   render() {
-    const { onChange, exchangeId, style, ...props } = this.props
+    const { onChange, exchangeId, style, t, ...props } = this.props
     const { exchanges, error } = this.state
 
     const options = exchanges ? exchanges.map(e => ({ value: e.id, label: e.name, ...e })) : []
@@ -90,7 +93,7 @@ class ExchangeSelect extends Component<
       />
     ) : error ? (
       <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-        Failed to load.
+        {t('app:common.error.load')}
       </Text>
     ) : (
       <Spinner color="grey" size={24} />
@@ -98,4 +101,4 @@ class ExchangeSelect extends Component<
   }
 }
 
-export default ExchangeSelect
+export default translate()(ExchangeSelect)

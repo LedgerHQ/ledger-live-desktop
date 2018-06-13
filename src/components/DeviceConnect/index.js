@@ -207,12 +207,9 @@ class DeviceConnect extends PureComponent<Props> {
               <IconUsb size={36} />
             </StepIcon>
             <Box grow shrink>
-              <Trans i18nKey="deviceConnect:step1.connect" parent="div">
-                {'Connect your '}
-                <strong>Ledger device</strong>
-                {' to your computer and enter your '}
-                <strong>PIN code</strong>
-                {' on your device'}
+              <Trans i18nKey="app:deviceConnect.step1.connect" parent="div">
+                Connect your <strong>Ledger device</strong> to your computer and enter your{' '}
+                <strong>PIN code</strong> on your device
               </Trans>
             </Box>
             <StepCheck checked={hasDevice} />
