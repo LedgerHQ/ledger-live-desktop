@@ -13,7 +13,7 @@
     "test": "jest",
     "flow": "flow",
     "lint": "eslint src webpack .storybook",
-    "ci": "yarn lint && yarn flow && yarn prettier && yarn test",
+    "ci": "yarn lint && yarn flow && yarn prettier",
     "postinstall": "bash ./scripts/postinstall.sh",
     "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
     "publish-storybook": "bash ./scripts/publish-storybook.sh",

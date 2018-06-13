@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { isGlobalTabEnabled } from 'renderer/init'
 import { rgba } from 'styles/helpers'
 
-import Box from './index'
+import Box from './Box'
 
 const KEY_ENTER = 13
 

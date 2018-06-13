@@ -14,7 +14,7 @@ jobs:
       - checkout
       - run:
           name: Dependencies
-          command: yarn
+          command: SKIP_REBUILD=1 yarn
       - run:
           name: Lint
           command: yarn lint
@@ -24,9 +24,9 @@ jobs:
       - run:
           name: Flow
           command: yarn flow --quiet
-      - run:
-          name: Test
-          command: yarn test
+      # - run:
+      #     name: Test
+      #     command: yarn test
       # - run:
       #     name: Build
       #     command: yarn dist:dir

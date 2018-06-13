@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Text from 'components/base/Text'
-import Box from './index'
+import Box from './Box'
 
 const RawCard = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 1 })``
 
