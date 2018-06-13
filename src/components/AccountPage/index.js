@@ -8,12 +8,13 @@ import { Redirect } from 'react-router'
 import styled from 'styled-components'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
+import Tooltip from 'components/base/Tooltip'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
 import type { T } from 'types/common'
 
-import { darken } from 'styles/helpers'
+import { rgba } from 'styles/helpers'
 
 import { accountSelector } from 'reducers/accounts'
 import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
@@ -29,7 +30,7 @@ import {
   BalanceSinceDiff,
   BalanceSincePercent,
 } from 'components/BalanceSummary/BalanceInfos'
-import Box from 'components/base/Box'
+import Box, { Tabbable } from 'components/base/Box'
 import Button from 'components/base/Button'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
@@ -39,15 +40,22 @@ import StickyBackToTop from 'components/StickyBackToTop'
 import AccountHeader from './AccountHeader'
 import EmptyStateAccount from './EmptyStateAccount'
 
-const ButtonSettings = styled(Button).attrs({
-  small: true,
+const ButtonSettings = styled(Tabbable).attrs({
+  cursor: 'pointer',
+  align: 'center',
+  justify: 'center',
+  borderRadius: 1,
 })`
-  border: 2px solid ${p => p.theme.colors.grey};
-  width: 30px;
-  padding: 0;
+  width: 40px;
+  height: 40px;
+
+  &:hover {
+    color: ${p => (p.disabled ? '' : p.theme.colors.dark)};
+    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.2))};
+  }
 
   &:active {
-    border: 2px solid ${p => darken(p.theme.colors.grey, 0.2)};
+    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.3))};
   }
 `
 
@@ -120,11 +128,13 @@ class AccountPage extends PureComponent<Props, State> {
                 </Button>
               </Fragment>
             )}
-            <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
-              <Box align="center">
-                <IconAccountSettings size={16} />
-              </Box>
-            </ButtonSettings>
+            <Tooltip render={() => t('app:account.settings.title')}>
+              <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
+                <Box align="center">
+                  <IconAccountSettings size={16} />
+                </Box>
+              </ButtonSettings>
+            </Tooltip>
           </Box>
         </Box>
         {account.operations.length > 0 ? (
