@@ -177,12 +177,19 @@ export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 
 export const areSettingsLoaded = (state: State) => state.settings.loaded
 
+// TODO: avoid this memoize hack (i thought reselect was doing it for us)
+const __memoizedCurrencySettingsLocaleValues = {}
 export const currencySettingsLocaleSelector = (
   settings: SettingsState,
   currency: Currency,
 ): CurrencySettings => {
+  if (__memoizedCurrencySettingsLocaleValues[currency.id]) {
+    return __memoizedCurrencySettingsLocaleValues[currency.id]
+  }
   const currencySettings = settings.currenciesSettings[currency.id]
-  return { ...defaultsForCurrency(currency), ...currencySettings }
+  const val = { ...defaultsForCurrency(currency), ...currencySettings }
+  __memoizedCurrencySettingsLocaleValues[currency.id] = val
+  return val
 }
 
 type CSS = Selector<*, { currency: CryptoCurrency }, CurrencySettings>
