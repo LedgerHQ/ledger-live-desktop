@@ -34,6 +34,7 @@ import Button from 'components/base/Button'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
+import StickyBackToTop from 'components/StickyBackToTop'
 
 import AccountHeader from './AccountHeader'
 import EmptyStateAccount from './EmptyStateAccount'
@@ -181,6 +182,7 @@ class AccountPage extends PureComponent<Props, State> {
               />
             </Box>
             <OperationsList account={account} title={t('app:account.lastOperations')} />
+            <StickyBackToTop />
           </Fragment>
         ) : (
           <EmptyStateAccount account={account} />

@@ -72,6 +72,7 @@ const Box = styled.div`
     margin-left: ${p => (p.horizontal && p.flow ? `${p.theme.space[p.flow]}px` : '')};
   }
 `
+// ^FIXME this `> * + * happen for all Box but we only need it when we do "grids".. which is not often. margin should be made explicit on user land.
 
 const RawCard = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 1 })``
 
