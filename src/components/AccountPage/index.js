@@ -108,9 +108,9 @@ class AccountPage extends PureComponent<Props, State> {
       // Force re-render account page, for avoid animation
       <Box key={account.id}>
         <SyncOneAccountOnMount priority={10} accountId={account.id} />
-        <Box horizontal mb={5}>
+        <Box horizontal mb={5} flow={4}>
           <AccountHeader account={account} />
-          <Box horizontal alignItems="center" justifyContent="flex-end" grow flow={2}>
+          <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
             {account.operations.length > 0 && (
               <Fragment>
                 <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
