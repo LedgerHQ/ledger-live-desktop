@@ -27,10 +27,10 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
   <Box flow={4}>
     <Box>
       <Text ff="Museo Sans|Regular" fontSize={7} color="black">
-        {t('manager:title')}
+        {t('app:manager.title')}
       </Text>
       <Text ff="Museo Sans|Light" fontSize={5}>
-        {t('manager:subtitle')}
+        {t('app:manager.subtitle')}
       </Text>
     </Box>
     <Box mt={7}>

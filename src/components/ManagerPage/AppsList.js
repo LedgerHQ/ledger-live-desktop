@@ -14,9 +14,12 @@ import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
+import Progress from 'components/base/Progress'
 
 import ExclamationCircle from 'icons/ExclamationCircle'
 import Update from 'icons/Update'
+import Trash from 'icons/Trash'
+import CheckCircle from 'icons/CheckCircle'
 
 import ManagerApp from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
@@ -35,6 +38,7 @@ const ICONS_FALLBACK = {
 }
 
 type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
+type Mode = '' | 'installing' | 'uninstalling'
 
 type LedgerApp = {
   name: string,
@@ -57,6 +61,8 @@ type State = {
   status: Status,
   error: string | null,
   appsList: LedgerApp[],
+  app: string,
+  mode: Mode,
 }
 
 class AppsList extends PureComponent<Props, State> {
@@ -64,6 +70,8 @@ class AppsList extends PureComponent<Props, State> {
     status: 'loading',
     error: null,
     appsList: [],
+    app: '',
+    mode: '',
   }
 
   componentDidMount() {
@@ -89,40 +97,87 @@ class AppsList extends PureComponent<Props, State> {
     }
   }
 
-  handleInstallApp = (args: { app: any }) => async () => {
-    const appParams = args.app
-    this.setState({ status: 'busy' })
+  handleInstallApp = (args: { app: any, name: string }) => async () => {
+    const { app: appParams, name } = args
+    this.setState({ status: 'busy', app: name, mode: 'installing' })
     try {
       const {
         device: { path: devicePath },
       } = this.props
       const data = { appParams, devicePath }
       await installApp.send(data).toPromise()
-      this.setState({ status: 'success' })
+      this.setState({ status: 'success', app: '' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message })
+      this.setState({ status: 'error', error: err.message, app: '', mode: '' })
     }
   }
 
-  handleUninstallApp = (args: { app: any }) => async () => {
-    const appParams = args.app
-    this.setState({ status: 'busy' })
+  handleUninstallApp = (args: { app: any, name: string }) => async () => {
+    const { app: appParams, name } = args
+    this.setState({ status: 'busy', app: name, mode: 'uninstalling' })
     try {
       const {
         device: { path: devicePath },
       } = this.props
       const data = { appParams, devicePath }
       await uninstallApp.send(data).toPromise()
-      this.setState({ status: 'success' })
+      this.setState({ status: 'success', app: '' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message })
+      this.setState({ status: 'error', error: err.message, app: '', mode: '' })
     }
   }
 
-  handleCloseModal = () => this.setState({ status: 'idle' })
+  handleCloseModal = () => this.setState({ status: 'idle', mode: '' })
+
+  renderModal = () => {
+    const { t } = this.props
+    const { app, status, error, mode } = this.state
+
+    return (
+      <Modal
+        isOpened={status !== 'idle' && status !== 'loading'}
+        render={() => (
+          <ModalBody p={6} align="center" justify="center" style={{ height: 300 }}>
+            {status === 'busy' || status === 'idle' ? (
+              <Box align="center" justify="center" flow={3}>
+                {mode === 'installing' ? <Update size={30} /> : <Trash size={30} />}
+                <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+                  {t(`app:manager.apps.${mode}`, { app })}
+                </Text>
+                <Box my={5} style={{ width: 250 }}>
+                  <Progress style={{ width: '100%' }} infinite />
+                </Box>
+              </Box>
+            ) : status === 'error' ? (
+              <Box align="center" justify="center" flow={3}>
+                <div>{'error happened'}</div>
+                {error}
+                <button onClick={this.handleCloseModal}>close</button>
+              </Box>
+            ) : status === 'success' ? (
+              <Box align="center" justify="center" flow={3}>
+                <Box color="positiveGreen">
+                  <CheckCircle size={30} />
+                </Box>
+                <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+                  {t(
+                    `app:manager.apps.${
+                      mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'
+                    }`,
+                    { app },
+                  )}
+                </Text>
+                <button onClick={this.handleCloseModal}>close</button>
+              </Box>
+            ) : null}
+          </ModalBody>
+        )}
+      />
+    )
+  }
 
   renderList() {
-    const { status, error, appsList } = this.state
+    const { appsList } = this.state
     return (
       <Box>
         <AppSearchBar list={appsList}>
@@ -141,30 +196,7 @@ class AppsList extends PureComponent<Props, State> {
             </List>
           )}
         </AppSearchBar>
-        <Modal
-          isOpened={status !== 'idle' && status !== 'loading'}
-          render={() => (
-            <ModalBody p={6} align="center" justify="center" style={{ height: 300 }}>
-              <Update size={30} />
-              {status === 'busy' ? (
-                <Box>
-                  <Text />
-                </Box>
-              ) : status === 'error' ? (
-                <Box>
-                  <div>{'error happened'}</div>
-                  {error}
-                  <button onClick={this.handleCloseModal}>close</button>
-                </Box>
-              ) : status === 'success' ? (
-                <Box>
-                  {'success'}
-                  <button onClick={this.handleCloseModal}>close</button>
-                </Box>
-              ) : null}
-            </ModalBody>
-          )}
-        />
+        {this.renderModal()}
       </Box>
     )
   }
@@ -175,7 +207,7 @@ class AppsList extends PureComponent<Props, State> {
       <Box flow={6}>
         <Box>
           <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal>
-            <span>{t('app:manager.allApps')}</span>
+            <span>{t('app:manager.apps.all')}</span>
             <span>
               <Tooltip
                 render={() => (

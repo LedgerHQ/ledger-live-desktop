@@ -111,10 +111,10 @@ const WorkflowDefault = ({ device, deviceInfo, dashboardError, isGenuine, t }: P
         style={{ marginBottom: 30, maxWidth: 362, width: '100%' }}
       />
       <Text ff="Museo Sans|Regular" fontSize={7} color="black" style={{ marginBottom: 10 }}>
-        {t('manager:device.title')}
+        {t('app:manager.device.title')}
       </Text>
       <Text ff="Museo Sans|Light" fontSize={5} color="grey" align="center">
-        {t('manager:device.desc')}
+        {t('app:manager.device.desc')}
       </Text>
     </Box>
     <Box flow={4} style={{ maxWidth: 460, padding: '60px 10px 0' }}>

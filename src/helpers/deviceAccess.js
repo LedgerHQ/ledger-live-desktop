@@ -19,6 +19,7 @@ export const withDevice: WithDevice = devicePath => {
   return job =>
     takeSemaphorePromise(sem, async () => {
       const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
+      if (process.env.DEBUG_DEVICE) t.setDebugMode(true)
       try {
         const res = await job(t)
         // $FlowFixMe
