@@ -6,20 +6,11 @@ import styled from 'styled-components'
 import Box, { Tabbable } from 'components/base/Box'
 import { rgba } from 'styles/helpers'
 
-export type Item = {
-  label: string | (Props => React$Element<any>),
-  desc?: Props => any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
-  icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
-  iconActiveColor: ?string,
-  hasNotif?: boolean,
-  isActive?: boolean,
-  onClick?: void => void,
-}
-
 export type Props = {
   label: string | (Props => React$Element<any>),
   desc?: Props => any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
+  disabled?: boolean,
   iconActiveColor: ?string,
   hasNotif?: boolean,
   isActive?: boolean,
@@ -29,13 +20,23 @@ export type Props = {
 
 class SideBarListItem extends PureComponent<Props> {
   render() {
-    const { icon: Icon, label, desc, iconActiveColor, hasNotif, onClick, isActive } = this.props
+    const {
+      icon: Icon,
+      label,
+      desc,
+      iconActiveColor,
+      hasNotif,
+      onClick,
+      isActive,
+      disabled,
+    } = this.props
     return (
       <Container
         data-role="side-bar-item"
-        isActive={isActive}
+        isActive={!disabled && isActive}
         iconActiveColor={iconActiveColor}
-        onClick={onClick}
+        onClick={disabled ? null : onClick}
+        disabled={disabled}
       >
         {!!Icon && <Icon size={16} />}
         <Box grow shrink>
@@ -63,16 +64,17 @@ const Container = styled(Tabbable).attrs({
   px: 3,
   py: 2,
 })`
-  cursor: ${p => (p.isActive ? 'default' : 'pointer')};
+  cursor: ${p => (p.disabled || p.isActive ? 'default' : 'pointer')};
   color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
   background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
+  opacity: ${p => (p.disabled ? 0.5 : 1)};
 
   &:active {
-    background: ${p => p.theme.colors.lightGrey};
+    background: ${p => !p.disabled && p.theme.colors.lightGrey};
   }
 
   &:hover {
-    color: ${p => p.theme.colors.dark};
+    color: ${p => !p.disabled && p.theme.colors.dark};
   }
 
   border: 1px solid transparent;
@@ -83,9 +85,10 @@ const Container = styled(Tabbable).attrs({
 
   ${p => {
     const iconActiveColor = p.theme.colors[p.iconActiveColor] || p.iconActiveColor
+    const color = p.isActive ? iconActiveColor : p.theme.colors.grey
     return `
-      svg { color: ${p.isActive ? iconActiveColor : p.theme.colors.grey}; }
-      &:hover svg { color: ${iconActiveColor}; }
+      svg { color: ${color}; }
+      &:hover svg { color: ${p.disabled ? color : iconActiveColor}; }
     `
   }};
 `
