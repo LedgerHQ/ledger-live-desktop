@@ -2,11 +2,9 @@
 
 require('../env')
 
-const { SENTRY_URL } = process.env
-
 export default (Raven: any, shouldSendCallback: () => boolean, userId: string) => {
-  if (!SENTRY_URL) return
-  let r = Raven.config(SENTRY_URL, {
+  if (!__SENTRY_URL__) return
+  let r = Raven.config(__SENTRY_URL__, {
     captureUnhandledRejections: true,
     allowSecretKey: true,
     release: __APP_VERSION__,
