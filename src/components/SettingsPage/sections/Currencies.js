@@ -97,7 +97,7 @@ class TabCurrencies extends PureComponent<Props, State> {
         <Header
           icon={<IconCurrencies size={16} />}
           title={t('app:settings.tabs.currencies')}
-          desc="Lorem ipsum dolor sit amet"
+          desc={t('app:settings.currencies.desc')}
           renderRight={
             // TODO this should only be the subset of currencies of the app
             <SelectCurrency
@@ -112,8 +112,10 @@ class TabCurrencies extends PureComponent<Props, State> {
         <Body>
           {currency !== intermediaryCurrency ? (
             <Row
-              title={`Exchange (${currency.ticker}${intermediaryCurrency.ticker})`}
-              desc="The exchange to use"
+              title={t('app:settings.display.exchange', {
+                ticker: `${currency.ticker}${intermediaryCurrency.ticker}`,
+              })}
+              desc={t('app:settings.currencies.exchangeDesc')}
             >
               <ExchangeSelect
                 small

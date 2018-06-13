@@ -107,7 +107,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
 
   return (
     <ModalBody onClose={onClose}>
-      <ModalTitle>Operation details</ModalTitle>
+      <ModalTitle>{t('app:operationDetails.title')}</ModalTitle>
       <ModalContent flow={4}>
         <Box alignItems="center" mt={3}>
           <ConfirmationCheck
@@ -136,17 +136,17 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
           </Box>
         </Box>
         <Line mt={4}>
-          <ColLeft>Acccount</ColLeft>
+          <ColLeft>{t('app:operationDetails.account')}</ColLeft>
           <ColRight>{name}</ColRight>
         </Line>
         <B />
         <Line>
-          <ColLeft>Date</ColLeft>
+          <ColLeft>{t('app:operationDetails.date')}</ColLeft>
           <ColRight>{moment(date).format('LLL')}</ColRight>
         </Line>
         <B />
         <Line>
-          <ColLeft>Status</ColLeft>
+          <ColLeft>{t('app:operationDetails.status')}</ColLeft>
           <ColRight color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
             <Box>
               {isConfirmed
@@ -160,7 +160,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         {fee ? (
           <Fragment>
             <Line>
-              <ColLeft>Fees</ColLeft>
+              <ColLeft>{t('app:operationDetails.fees')}</ColLeft>
               <ColRight>
                 <FormattedVal unit={unit} showCode val={fee} color="dark" />
               </ColRight>
@@ -169,27 +169,27 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
           </Fragment>
         ) : null}
         <Line>
-          <ColLeft>From</ColLeft>
+          <ColLeft>{t('app:operationDetails.from')}</ColLeft>
           <ColRight>{uniqSenders.map(v => <CanSelect key={v}>{v}</CanSelect>)}</ColRight>
         </Line>
         <B />
         <Line>
-          <ColLeft>To</ColLeft>
+          <ColLeft>{t('app:operationDetails.to')}</ColLeft>
           <ColRight>{recipients.map(v => <CanSelect key={v}> {v} </CanSelect>)}</ColRight>
         </Line>
         <B />
         <Line>
-          <ColLeft>Identifier</ColLeft>
+          <ColLeft>{t('app:operationDetails.identifier')}</ColLeft>
           <ColRight>
             <CanSelect>{hash}</CanSelect>
           </ColRight>
         </Line>
       </ModalContent>
       <ModalFooter horizontal justify="flex-end" flow={2}>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose}>{t('app:common.cancel')}</Button>
         {url ? (
           <Button primary onClick={() => shell.openExternal(url)}>
-            View operation
+            {t('app:operationDetails.viewOperation')}
           </Button>
         ) : null}
       </ModalFooter>

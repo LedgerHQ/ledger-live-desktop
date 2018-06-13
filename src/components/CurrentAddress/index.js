@@ -182,12 +182,12 @@ class CurrentAddress extends PureComponent<Props> {
         <Label>
           <Box>
             {accountName ? (
-              <Trans i18nKey="currentAddress:labelFrom" parent="div">
-                {'Address from '}
+              <Trans i18nKey="app:currentAddress.for" parent="div">
+                {'Address for '}
                 <strong>{accountName}</strong>
               </Trans>
             ) : (
-              t('app:currentAddress')
+              t('app:currentAddress.title')
             )}
           </Box>
           <IconInfoCircle size={12} />
@@ -201,8 +201,7 @@ class CurrentAddress extends PureComponent<Props> {
               <IconShield height={32} width={28} />
             </Box>
             <Box shrink fontSize={12} color={notValid ? 'alertRed' : 'dark'} ff="Open Sans">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit velit egestas leo
-              tincidunt
+              {t('app:currentAddress.message')}
             </Box>
           </Box>
         )}

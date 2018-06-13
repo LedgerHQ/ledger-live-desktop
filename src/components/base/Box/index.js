@@ -121,7 +121,15 @@ export class Tabbable extends PureComponent<any, TabbableState> {
   }
 
   render() {
-    return <Box tabIndex={0} onFocus={this.handleFocus} onBlur={this.handleBlur} {...this.props} />
+    const { disabled } = this.props
+    return (
+      <Box
+        tabIndex={disabled ? undefined : 0}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+        {...this.props}
+      />
+    )
   }
 }
 

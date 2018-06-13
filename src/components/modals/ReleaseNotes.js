@@ -21,7 +21,6 @@ type Props = {
 
 type State = {
   markdown: ?string,
-  loading: boolean,
 }
 
 const Notes = styled(Box).attrs({
@@ -151,24 +150,37 @@ const Title = styled(Text).attrs({
 class ReleaseNotes extends PureComponent<Props, State> {
   state = {
     markdown: null,
-    loading: false,
   }
 
+  loading = false
+
   fetchNotes = version => {
-    if (!this.state.loading) {
-      this.setState({
-        loading: true,
-      })
+    if (!this.loading) {
+      this.loading = true
 
       axios
         .get(`https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`)
         .then(response => {
           const { body } = response.data
 
-          this.setState({
-            markdown: body,
-            loading: false,
-          })
+          this.setState(
+            {
+              markdown: body,
+            },
+            () => {
+              this.loading = false
+            },
+          )
+        })
+        .catch(() => {
+          this.setState(
+            {
+              markdown: this.props.t('app:common.error.load'),
+            },
+            () => {
+              this.loading = false
+            },
+          )
         })
     }
   }
@@ -180,7 +192,7 @@ class ReleaseNotes extends PureComponent<Props, State> {
       const { markdown } = this.state
       let content
 
-      if (!markdown) {
+      if (markdown === null) {
         this.fetchNotes(version)
 
         content = (

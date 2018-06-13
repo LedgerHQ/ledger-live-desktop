@@ -1,5 +1,6 @@
 start:
   title: Welcome to Ledger Live
+  startBtn: Get Started
 init:
   title: Welcome to Ledger Live, the computer companion app to your Ledger device
   newDevice:
