@@ -13,7 +13,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import type { UpdateStatus } from 'reducers/update'
 
-import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
+import { MODAL_RECEIVE, MODAL_SEND, MODAL_ADD_ACCOUNTS } from 'config/constants'
 
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
@@ -70,7 +70,7 @@ class MainSideBar extends PureComponent<Props> {
   handleOpenReceiveModal = () => this.props.openModal(MODAL_RECEIVE)
   handleClickManager = () => this.push('/manager')
   handleClickExchange = () => this.push('/exchange')
-  handleOpenImportModal = () => this.props.openModal('importAccounts')
+  handleOpenImportModal = () => this.props.openModal(MODAL_ADD_ACCOUNTS)
 
   render() {
     const { t, accounts, location, updateStatus } = this.props
@@ -78,7 +78,7 @@ class MainSideBar extends PureComponent<Props> {
 
     const addAccountButton = (
       <AddAccountButton
-        tooltipText={t('app:importAccounts.title')}
+        tooltipText={t('app:addAccounts.title')}
         onClick={this.handleOpenImportModal}
       />
     )

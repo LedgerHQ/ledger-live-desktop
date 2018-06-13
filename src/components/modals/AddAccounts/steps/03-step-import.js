@@ -160,7 +160,7 @@ class StepImport extends PureComponent<StepProps> {
                     fontSize={2}
                     style={{ textTransform: 'uppercase' }}
                   >
-                    {t('app:importAccounts.accountToImportSubtitle', {
+                    {t('app:addAccounts.accountToImportSubtitle', {
                       count: importableAccounts.length,
                     })}
                   </Box>
@@ -170,8 +170,8 @@ class StepImport extends PureComponent<StepProps> {
                     fontSize={3}
                   >
                     {isAllSelected
-                      ? t('app:importAccounts.unselectAll')
-                      : t('app:importAccounts.selectAll')}
+                      ? t('app:addAccounts.unselectAll')
+                      : t('app:addAccounts.selectAll')}
                   </FakeLink>
                 </Box>
               )}
@@ -211,7 +211,7 @@ class StepImport extends PureComponent<StepProps> {
                   fontSize={2}
                   style={{ textTransform: 'uppercase' }}
                 >
-                  {t('app:importAccounts.createNewAccount')}
+                  {t('app:addAccounts.createNewAccount')}
                 </Box>
               </Box>
               <AccountRow
@@ -231,7 +231,7 @@ class StepImport extends PureComponent<StepProps> {
             <Button small outline onClick={this.handleRetry}>
               <Box horizontal flow={2} align="center">
                 <IconExchange size={13} />
-                <span>{t('app:importAccounts.retrySync')}</span>
+                <span>{t('app:addAccounts.retrySync')}</span>
               </Box>
             </Button>
           )}
@@ -256,7 +256,7 @@ export const LoadingRow = styled(Box).attrs({
 
 export const StepImportFooter = ({
   scanStatus,
-  onClickImport,
+  onClickAdd,
   checkedAccountsIds,
   scannedAccounts,
   t,
@@ -266,30 +266,30 @@ export const StepImportFooter = ({
     return account && account.operations.length === 0
   })
 
-  const willImportAccounts = checkedAccountsIds.some(id => {
+  const willAddAccounts = checkedAccountsIds.some(id => {
     const account = scannedAccounts.find(a => a.id === id)
     return account && account.operations.length > 0
   })
 
-  const importedAccountsCount = checkedAccountsIds.filter(id => {
+  const addedAccountsCount = checkedAccountsIds.filter(id => {
     const account = scannedAccounts.find(acc => acc.id === id)
     return account && account.operations.length > 0
   }).length
 
   const ctaWording =
-    willCreateAccount && willImportAccounts
-      ? `${t('app:importAccounts.cta.create')} / ${t('app:importAccounts.cta.import', {
-          count: importedAccountsCount,
+    willCreateAccount && willAddAccounts
+      ? `${t('app:addAccounts.cta.create')} / ${t('app:addAccounts.cta.import', {
+          count: addedAccountsCount,
         })}`
       : willCreateAccount
-        ? t('app:importAccounts.cta.create')
-        : t('app:importAccounts.cta.import', { count: importedAccountsCount })
+        ? t('app:addAccounts.cta.create')
+        : t('app:addAccounts.cta.import', { count: addedAccountsCount })
 
   return (
     <Button
       primary
       disabled={scanStatus !== 'finished' || checkedAccountsIds.length === 0}
-      onClick={() => onClickImport()}
+      onClick={() => onClickAdd()}
     >
       {ctaWording}
     </Button>
