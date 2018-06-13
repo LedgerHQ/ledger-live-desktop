@@ -37,6 +37,8 @@ common:
     upToDate: Up to date
     error: Sync error.
     refresh: Refresh
+  error:
+    load: Unable to load
 operation:
   type:
     IN: Receive funds
@@ -90,10 +92,14 @@ dashboard:
   accountsOrder:
     name: Alphabetic
     balance: Balance
-currentAddress: Current address
+currentAddress:
+  title: Current address
+  for: Address for
+  message: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit velit egestas leo tincidunt
 deviceConnect:
   step1:
     choose: "We detected {{count}} devices connected, please select one:"
+    connect: Connect your <1>Ledger device</1> to your computer and enter your <3>PIN code</3> on your device
 emptyState:
   sidebar:
     text: You don’t have any accounts at the moment. Press the + button to create an account
@@ -106,6 +112,8 @@ emptyState:
 exchange:
   title: Exchange
   visitWebsite: Visit website
+  coinhouse: Lorem ipsum
+  shapeshift: Ipsum lorem
 genuinecheck:
   modal:
     title: Genuine check, bro
@@ -127,8 +135,19 @@ importAccounts:
     import: 'Import account'
     import_plural: 'Import accounts'
 operationDetails:
+  title: Operation details
+  account: Account
+  date: Date
+  status: Status
   confirmed: Confirmed
   notConfirmed: Not confirmed
+  fees: Fees
+  from: From
+  to: To
+  identifier: Identifier
+  viewOperation: View operation
+operationList:
+  noMoreOperations: No more operations
 manager:
   tabs:
     apps: Apps
@@ -217,15 +236,21 @@ settings:
     profile: Profile
     about: About
   display:
+    desc: Lorem ipsum dolor sit amet
     language: Interface language
     languageDesc: Lorem ipsum dolor sit amet
     counterValue: Countervalue
     counterValueDesc: Lorem ipsum dolor sit amet
+    exchange: Exchange ({{ticker}})
+    exchangeDesc: The exchange to use for countervalue conversion
     region: Region
     regionDesc: Lorem ipsum dolor sit amet
     stock: Stock market indicators
     stockDesc: Lorem ipsum dolor sit amet
   currencies:
+    desc: Lorem ipsum dolor sit amet
+    exchange: Exchange ({{ticker}})
+    exchangeDesc: The exchange to use for countervalue conversion
     confirmationsToSpend: Confirmations to spend
     confirmationsToSpendDesc: Lorem ipsum dolor sit amet
     confirmationsNb: Number of confirmations
@@ -235,6 +260,7 @@ settings:
     explorer: Blockchain explorer
     explorerDesc: Lorem ipsum dolor sit amet
   profile:
+    desc: Lorem ipsum dolor sit amet
     password: Password
     passwordDesc: Lorem ipsum dolor sit amet
     changePassword: Change password
@@ -255,6 +281,9 @@ settings:
     reportErrors: Sentry Logs
     reportErrorsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
   about:
+    desc: Lorem ipsum dolor sit amet
+    version: Version
+    releaseNotesBtn: Show release notes
     faq: FAQ
     faqDesc: Lorem ipsum dolor sit amet
     contactUs: Contact us
