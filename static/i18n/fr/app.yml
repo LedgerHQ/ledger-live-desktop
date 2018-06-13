@@ -152,16 +152,23 @@ manager:
   tabs:
     apps: Apps
     device: My device
-  installApps: Install
-  installFirmware: Update firmware
-  allApps: Apps
   apps:
+    install: Install
+    all: Apps
+    installing: 'Installing {{app}}...'
+    uninstalling: 'Uninstalling {{app}}...'
+    installSuccess: '{{app}} app successfully installed'
+    uninstallSuccess: '{{app}} app successfully uninstalled'
+    alreadyInstalled: '{{app}} app is already installed'
     help: To update an app, you have to uninstall the app and re install it.
+  firmware:
+    installed: 'Firmware {{version}}'
+    update: Update firmware
+    updateTitle: Firmware update
+    latest: 'A new firmware {{version}} is available'
   title: Manager
   subtitle: Get all your apps here
-  firmwareUpdate: Firmware update
-  latestFirmware: A new firmware {{version}} is available
-  plugYourDevice:
+  device:
     title: Plug your device
     desc: Please connect your Ledger device and follow the steps below to access the manager
     cta: Plug my device
