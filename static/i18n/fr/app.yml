@@ -1,0 +1,311 @@
+---
+common:
+  ok: Okay
+  yes: true
+  no: false
+  apply: Apply
+  confirm: Confirm
+  cancel: Cancel
+  delete: Delete
+  continue: Continue
+  skipThisStep: Skip This Step
+  chooseWalletPlaceholder: Choose a wallet...
+  currency: Currency
+  selectAccount: Select an account
+  selectCurrency: Select a currency
+  sortBy: Sort by
+  search: Search
+  save: Save
+  password: Password
+  editProfile: Edit profile
+  lockApplication: Lock application
+  showMore: Show more
+  max: Max
+  next: Next
+  back: Back
+  retry: Retry
+  close: Close
+  eastern: Eastern
+  western: Western
+  lockScreen:
+    title: Welcome Back
+    subTitle: Your application is locked
+    description: Please enter your password to continue
+    inputPlaceholder: Type your password
+  sync:
+    syncing: Syncing...
+    upToDate: Up to date
+    error: Sync error.
+    refresh: Refresh
+operation:
+  type:
+    IN: Receive funds
+    OUT: Sent funds
+time:
+  day: Day
+  week: Week
+  month: Month
+  year: Year
+  since:
+    day: since a day
+    week: since a week
+    month: since a month
+    year: since a year
+sidebar:
+  menu: Menu
+  accounts: Accounts ({{count}})
+  manager: Manager
+  exchange: Exchange
+account:
+  balance: Balance
+  receive: Receive
+  lastOperations: Last operations
+  emptyState:
+    title: This is a title, use it with caution
+    desc: Please create a new account or recover an old account from your Ledger device.
+    buttons:
+      receiveFunds: Receive Funds
+  settings:
+    title: Edit Account
+    accountName:
+      title: Account name
+      desc: Lorem ipsum dolort amet
+      error: Name is required
+    unit:
+      title: Unit
+      desc: Lorem ipsum dolort amet
+dashboard:
+  title: Dashboard
+  accounts:
+    title: Accounts ({{count}})
+  greeting:
+    morning: "Good Morning!"
+    evening: "Good Evening!"
+    afternoon: "Good Afternoon!"
+  summary: here is the summary of your account
+  summary_plural: 'here is the summary of your {{count}} accounts'
+  noAccounts: no accounts
+  recentActivity: Recent activity
+  totalBalance: Total balance
+  accountsOrder:
+    name: Alphabetic
+    balance: Balance
+currentAddress: Current address
+deviceConnect:
+  step1:
+    choose: "We detected {{count}} devices connected, please select one:"
+emptyState:
+  sidebar:
+    text: You don’t have any accounts at the moment. Press the + button to create an account
+  dashboard:
+    title: This is a title, use it with caution
+    desc: Please create a new account or recover an old account from your Ledger device.
+    buttons:
+      addAccount: Add Account
+      installApp: Install App
+exchange:
+  title: Exchange
+  visitWebsite: Visit website
+genuinecheck:
+  modal:
+    title: Genuine check, bro
+importAccounts:
+  title: Add accounts
+  breadcrumb:
+    informations: Informations
+    connectDevice: Connect device
+    import: Import
+    finish: End
+  accountToImportSubtitle: Account to import
+  accountToImportSubtitle_plural: 'Accounts to import ({{count}})'
+  selectAll: Select all
+  unselectAll: Unselect all
+  createNewAccount: Create new account
+  retrySync: Retry sync
+  cta:
+    create: 'Create account'
+    import: 'Import account'
+    import_plural: 'Import accounts'
+operationDetails:
+  confirmed: Confirmed
+  notConfirmed: Not confirmed
+manager:
+  tabs:
+    apps: Apps
+    device: My device
+  installApps: Install
+  installFirmware: Update firmware
+  allApps: Apps
+  apps:
+    help: To update an app, you have to uninstall the app and re install it.
+  title: Manager
+  subtitle: Get all your apps here
+  firmwareUpdate: Firmware update
+  latestFirmware: A new firmware {{version}} is available
+  plugYourDevice:
+    title: Plug your device
+    desc: Please connect your Ledger device and follow the steps below to access the manager
+    cta: Plug my device
+  errors:
+    noDevice: Please make sur your device is connected (TEMPLATE NEEDED)
+    noDashboard: Please make sure your device is on the dashboard screen (TEMPLATED NEEDED)
+    noGenuine: You did not approve request on your device or your device is not genuine (TEMPLATE NEEDED)
+receive:
+  title: Receive funds
+  steps:
+    chooseAccount:
+      title: Choose Account
+      label: Account
+    connectDevice:
+      title: Connect Device
+      withoutDevice: I don't have my device
+    confirmAddress:
+      title: Confirm Address
+      action: Confirm address on device
+      text: To receive funds, confirm the address on your device.
+      support: Contact Support
+      error:
+        title: Houston, we have a problem!
+        text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
+    receiveFunds:
+      title: Receive Funds
+      label: Amount (Optional)
+send:
+  title: Send funds
+  totalSpent: Total spent
+  steps:
+    amount:
+      title: Informations
+      selectAccountDebit: Select an account to debit
+      recipientAddress: Recipient address
+      amount: Amount
+      max: Max
+      fees: Fees
+      advancedOptions: Advanced options
+      useRBF: Use the RBF transaction
+      message: Leave a message (140)
+      rippleTag: Tag
+      ethereumGasLimit: Gas limit
+    connectDevice:
+      title: Connect device
+    verification:
+      title: Verification
+      warning: |
+        You are about to validate a transaction.
+        Be careful, we strongly recommand you to verify that the informations on your Ledger device are correct.
+      body: Once you have checked everything is ok, you can validate securely the transaction on your device.
+    confirmation:
+      title: Confirmation
+      success:
+        title: Transaction successfully broadcasted
+        text: |
+          with the following transaction id:
+        cta: View operation details
+      error:
+        title: Transaction error
+        cta: Retry operation
+      pending:
+        title: Broadcasting transaction...
+releaseNotes:
+  title: Release notes
+  version: Version {{versionNb}}
+settings:
+  title: Settings
+  tabs:
+    display: Display
+    currencies: Currencies
+    profile: Profile
+    about: About
+  display:
+    language: Interface language
+    languageDesc: Lorem ipsum dolor sit amet
+    counterValue: Countervalue
+    counterValueDesc: Lorem ipsum dolor sit amet
+    region: Region
+    regionDesc: Lorem ipsum dolor sit amet
+    stock: Stock market indicators
+    stockDesc: Lorem ipsum dolor sit amet
+  currencies:
+    confirmationsToSpend: Confirmations to spend
+    confirmationsToSpendDesc: Lorem ipsum dolor sit amet
+    confirmationsNb: Number of confirmations
+    confirmationsNbDesc: Lorem ipsum dolor sit amet
+    transactionsFees: Transactions fees
+    transactionsFeesDesc: Lorem ipsum dolor sit amet
+    explorer: Blockchain explorer
+    explorerDesc: Lorem ipsum dolor sit amet
+  profile:
+    password: Password
+    passwordDesc: Lorem ipsum dolor sit amet
+    changePassword: Change password
+    sync: Sync accounts
+    syncDesc: Lorem ipsum dolor sit amet
+    export: Export logs
+    exportDesc: Lorem ipsum dolor sit amet
+    softResetTitle: Clean application cache
+    softResetDesc: Lorem ipsum dolor sit amet
+    softReset: Clean cache
+    hardResetTitle: Reset application
+    hardResetDesc: Lorem ipsum dolor sit amet
+    hardReset: Hard reset
+    developerMode: Developer Mode
+    developerModeDesc: Enable visibility of developer apps & currencies like Bitcoin Testnet
+    analytics: Share analytics
+    analyticsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+    reportErrors: Sentry Logs
+    reportErrorsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+  about:
+    faq: FAQ
+    faqDesc: Lorem ipsum dolor sit amet
+    contactUs: Contact us
+    contactUsDesc: Lorem ipsum dolor sit amet
+    terms: Terms and Privacy policy
+    termsDesc: Lorem ipsum dolor sit amet
+  hardResetModal:
+    title: Hard reset
+    subTitle: Are you sure houston?
+    desc: Lorem ipsum dolor sit amet
+  softResetModal:
+    title: Clean application cache
+    subTitle: Are you sure houston?
+    desc: Lorem ipsum dolor sit amet
+  removeAccountModal:
+    title: Delete this account
+    subTitle: Are you sure houston?
+    desc: Lorem ipsum dolor sit amet
+  exportLogs:
+    title: Export Logs
+    desc: Export Logs
+    btn: Export Logs
+password:
+  warning_0: Warning 0
+  warning_1: Warning 1
+  warning_2: Warning 2
+  warning_3: Warning 3
+  warning_4: Warning 4
+  errorMessageIncorrectPassword: The password you entered is incorrect.
+  errorMessageNotMatchingPassword: Passwords don't match.
+  inputFields:
+    newPassword:
+      label: Password
+      placeholder: Password
+    confirmPassword:
+      label: Confirm Password
+      placeholder: Confirm Password
+    currentPassword:
+      label: Current Password
+      placeholder: Current Password
+  changePassword:
+    title: Edit Password
+    subTitle: Change your password
+    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
+  setPassword:
+    title: Set Password
+    subTitle: Set a password to lock your application
+    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
+  disablePassword:
+    title: Disable Password
+    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
+update:
+  newVersionReady: A new update is available.
+  relaunch: Update now
