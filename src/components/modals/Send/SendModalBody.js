@@ -20,7 +20,6 @@ import PollCounterValuesOnMount from 'components/PollCounterValuesOnMount'
 
 import Breadcrumb from 'components/Breadcrumb'
 import { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
-import PrevButton from 'components/modals/PrevButton'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
 import ChildSwitch from 'components/base/ChildSwitch'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
@@ -279,8 +278,7 @@ class SendModalBody extends PureComponent<Props, State<*>> {
         <SyncSkipUnderPriority priority={80} />
         {account && <SyncOneAccountOnMount priority={81} accountId={account.id} />}
 
-        <ModalTitle>
-          {canPrev && <PrevButton onClick={this.onPrevStep} />}
+        <ModalTitle onBack={canPrev ? this.onPrevStep : undefined}>
           {t('app:send.title')}
         </ModalTitle>
 

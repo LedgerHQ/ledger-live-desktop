@@ -63,6 +63,7 @@ function StepAmount({
       {account && bridge && transaction ? (
         <Fragment key={account.id}>
           <RecipientField
+            autoFocus
             account={account}
             bridge={bridge}
             transaction={transaction}

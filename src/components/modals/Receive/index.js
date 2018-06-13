@@ -17,7 +17,6 @@ import Box from 'components/base/Box'
 import Breadcrumb from 'components/Breadcrumb'
 import Button from 'components/base/Button'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
-import PrevButton from 'components/modals/PrevButton'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
 
 import StepAccount from './01-step-account'
@@ -318,8 +317,7 @@ class ReceiveModal extends PureComponent<Props, State> {
           <ModalBody onClose={canClose ? onClose : undefined}>
             <SyncSkipUnderPriority priority={9} />
             {account && <SyncOneAccountOnMount priority={10} accountId={account.id} />}
-            <ModalTitle>
-              {canPrev && <PrevButton onClick={this.handlePrevStep} />}
+            <ModalTitle onBack={canPrev ? this.handlePrevStep : undefined}>
               {t('app:receive.title')}
             </ModalTitle>
             <ModalContent>

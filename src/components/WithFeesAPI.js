@@ -21,13 +21,17 @@ export default class WithFeesAPI extends Component<
   componentDidMount() {
     this.load()
   }
+  componentWillUnmount() {
+    this._unmounted = true
+  }
+  _unmounted = false
   async load() {
     const { currency } = this.props
     try {
       const fees = await getEstimatedFees(currency)
-      this.setState({ error: null, fees })
+      if (!this._unmounted) this.setState({ error: null, fees })
     } catch (error) {
-      this.setState({ error, fees: null })
+      if (!this._unmounted) this.setState({ error, fees: null })
     }
   }
   render() {

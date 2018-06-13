@@ -1,10 +1,10 @@
 // @flow
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { MODAL_SEND } from 'config/constants'
 import Modal from 'components/base/Modal'
 import SendModalBody from './SendModalBody'
 
-class SendModal extends PureComponent<{}> {
+class SendModal extends Component<void> {
   render() {
     return (
       <Modal

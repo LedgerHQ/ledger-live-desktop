@@ -18,6 +18,6 @@ type Props = {
 export default (props: Props) => (
   <Box flow={1}>
     <Label>{props.t('app:receive.steps.chooseAccount.label')}</Label>
-    <SelectAccount onChange={props.onChangeAccount} value={props.account} />
+    <SelectAccount autoFocus onChange={props.onChangeAccount} value={props.account} />
   </Box>
 )

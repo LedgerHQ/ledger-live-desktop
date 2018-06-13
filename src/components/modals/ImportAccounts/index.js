@@ -70,7 +70,6 @@ type Props = {
 }
 
 type StepId = 'chooseCurrency' | 'connectDevice' | 'import' | 'finish'
-
 type ScanStatus = 'idle' | 'scanning' | 'error' | 'finished'
 
 type State = {
