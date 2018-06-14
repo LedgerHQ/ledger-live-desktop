@@ -118,7 +118,7 @@ const WorkflowDefault = ({ device, deviceInfo, errors, isGenuine, t }: Props) =>
         {t('app:manager.device.desc')}
       </Text>
     </Box>
-    <Box flow={4} style={{ maxWidth: 460, padding: '60px 10px 0' }}>
+    <Box flow={4} style={{ maxWidth: 460, padding: '60px 10px 0' }} ff="Open Sans|Regular">
       {/* DEVICE CHECK */}
       <Step validated={!!device}>
         <StepContent>

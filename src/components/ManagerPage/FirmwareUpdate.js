@@ -102,7 +102,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     const { latestFirmware } = this.state
 
     return (
-      <Card px={4} py={25}>
+      <Card p={4}>
         <Box horizontal align="center" flow={2}>
           <Box color="dark">
             <NanoS size={30} />
