@@ -10,7 +10,7 @@ import { isSegwitAccount } from 'helpers/bip32'
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
 import { withDevice } from 'helpers/deviceAccess'
-import { getWalletIdentifier } from 'helpers/libcore'
+import * as accountIdHelper from 'helpers/accountId'
 
 type BitcoinLikeTransaction = {
   amount: number,
@@ -156,15 +156,8 @@ export async function doSignAndBroadcast({
 
   const signedTransaction = await withDevice(deviceId)(async transport => {
     const hwApp = new Btc(transport)
-
-    const WALLET_IDENTIFIER = await getWalletIdentifier({
-      hwApp,
-      isSegwit: isSegwitAccount(account),
-      currencyId: account.currencyId,
-      devicePath: deviceId,
-    })
-
-    const njsWallet = await core.getWallet(WALLET_IDENTIFIER)
+    const { walletName } = accountIdHelper.decode(account.id)
+    const njsWallet = await core.getWallet(walletName)
     if (isCancelled()) return null
     njsAccount = await njsWallet.getAccount(account.index)
     if (isCancelled()) return null
