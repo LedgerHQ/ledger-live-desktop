@@ -13,8 +13,12 @@ import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
 import { standardDerivation } from 'helpers/derivations'
 import isDashboardOpen from 'commands/isDashboardOpen'
+import createCustomErrorClass from 'helpers/createCustomErrorClass'
 
 import { CHECK_APP_INTERVAL_WHEN_VALID, CHECK_APP_INTERVAL_WHEN_INVALID } from 'config/constants'
+
+export const WrongAppOpened = createCustomErrorClass('WrongAppOpened')
+export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 
 type OwnProps = {
   currency?: ?CryptoCurrency,
@@ -31,7 +35,7 @@ type OwnProps = {
     devices: Device[],
     deviceSelected: ?Device,
     deviceStatus: DeviceStatus,
-    errorMessage: ?string,
+    error: ?Error,
   }) => React$Element<*>,
 }
 
@@ -48,7 +52,7 @@ type GenuineCheckStatus = 'success' | 'fail' | 'progress'
 type State = {
   deviceStatus: DeviceStatus,
   appStatus: AppStatus,
-  errorMessage: ?string,
+  error: ?Error,
   genuineCheckStatus: GenuineCheckStatus,
 }
 
@@ -62,7 +66,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
   state = {
     appStatus: 'progress',
     deviceStatus: this.props.deviceSelected ? 'connected' : 'unconnected',
-    errorMessage: null,
+    error: null,
     genuineCheckStatus: 'progress',
   }
 
@@ -139,7 +143,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
                 e.message === 'Cannot write to HID device')
             ) {
               logger.log(e)
-              throw new Error(`You must open application ‘${cur.name}’ on the device`)
+              throw new WrongAppOpened(`WrongAppOpened ${cur.id}`, { currencyName: cur.name })
             }
             throw e
           })
@@ -148,10 +152,13 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
           const { freshAddress } = account
           if (account && freshAddress !== address) {
             logger.warn({ freshAddress, address })
-            throw new Error(`You must use the device associated to the account ‘${account.name}’`)
+            throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
+              accountName: account.name,
+            })
           }
         }
       } else {
+        logger.warn('EnsureDeviceApp for using dashboard is DEPRECATED !!!')
         // FIXME REMOVE THIS ! should use EnsureDashboard dedicated component.
         const isDashboard = isDashboardOpen.send({ devicePath: deviceSelected.path }).toPromise()
 
@@ -166,7 +173,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
         this.handleGenuineCheck()
       }
     } catch (e) {
-      this.handleStatusChange(this.state.deviceStatus, 'fail', e.message)
+      this.handleStatusChange(this.state.deviceStatus, 'fail', e)
       isSuccess = false
     }
 
@@ -182,12 +189,12 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
   _timeout: *
   _unmounted = false
 
-  handleStatusChange = (deviceStatus, appStatus, errorMessage = null) => {
+  handleStatusChange = (deviceStatus, appStatus, error = null) => {
     const { onStatusChange } = this.props
     clearTimeout(this._timeout)
     if (!this._unmounted) {
-      this.setState({ deviceStatus, appStatus, errorMessage })
-      onStatusChange && onStatusChange(deviceStatus, appStatus, errorMessage)
+      this.setState({ deviceStatus, appStatus, error })
+      onStatusChange && onStatusChange(deviceStatus, appStatus, error)
     }
   }
 
@@ -202,7 +209,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
 
   render() {
     const { currency, account, devices, deviceSelected, render } = this.props
-    const { appStatus, deviceStatus, genuineCheckStatus, errorMessage } = this.state
+    const { appStatus, deviceStatus, genuineCheckStatus, error } = this.state
 
     if (render) {
       // if cur is not provided, we assume we want to check if user is on
@@ -216,7 +223,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
         deviceSelected: deviceStatus === 'connected' ? deviceSelected : null,
         deviceStatus,
         genuineCheckStatus,
-        errorMessage,
+        error,
       })
     }
 

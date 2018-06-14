@@ -8,6 +8,7 @@ import noop from 'lodash/noop'
 import fontFamily from 'styles/styled/fontFamily'
 
 import Box from 'components/base/Box'
+import TranslatedError from 'components/TranslatedError'
 
 const Container = styled(Box).attrs({
   horizontal: true,
@@ -172,7 +173,11 @@ class Input extends PureComponent<Props, State> {
             onChange={this.handleChange}
             onKeyDown={this.handleKeyDown}
           />
-          {error && typeof error === 'string' ? <ErrorDisplay>{error}</ErrorDisplay> : null}
+          {error ? (
+            <ErrorDisplay>
+              <TranslatedError error={error} />
+            </ErrorDisplay>
+          ) : null}
         </Box>
         {renderRight}
       </Container>

@@ -3,6 +3,7 @@
 // it handles automatically re-calling synchronize
 // this is an even high abstraction than the bridge
 
+import invariant from 'invariant'
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
 import React, { Component } from 'react'
@@ -65,7 +66,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         return
       }
       const account = this.props.accounts.find(a => a.id === accountId)
-      if (!account) throw new Error('account not found')
+      invariant(account, 'account not found')
 
       const bridge = getBridgeForCurrency(account.currency)
 
