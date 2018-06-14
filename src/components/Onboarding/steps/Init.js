@@ -64,8 +64,8 @@ class Init extends PureComponent<StepProps, *> {
     ]
 
     return (
-      <Box sticky pt={130}>
-        <Box align="center" justifyContent="center">
+      <Box sticky justifyContent="center">
+        <Box align="center">
           <Box color="wallet">
             <IconUser size={36} />
           </Box>
@@ -117,6 +117,7 @@ const InitCardContainer = styled(Box).attrs({
   border: 1px solid ${p => p.theme.colors.fog};
   width: 530px;
   height: 70px;
+  transition: all ease-in-out 0.2s;
   &:hover {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);

@@ -32,6 +32,11 @@ export const Inner = styled(Box).attrs({
   flow: 4,
 })``
 
+export const FixedTopContainer = styled(Box).attrs({
+  sticky: true,
+  mt: 170,
+  backgroundColor: 'red',
+})``
 // FOOTER
 export const OnboardingFooter = styled(Box).attrs({
   px: 5,

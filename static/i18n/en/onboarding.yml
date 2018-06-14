@@ -44,14 +44,14 @@ writeSeed:
     title: Save your recovery phrase
     desc: Your recovery phrase is formed by 24 words. They will be displayed only once.
     step1: Press the right button to select the length of your recovery phrase. Press both buttons to confirm.
-    step2: Select the first letters of Word \#1 by pressing the right or left button. Press both buttons to confirm each letter.
-    step3: Select Word \#1 from the suggested words. Press both buttons to continue.
+    step2: 'Select the first letters of Word #1 by pressing the right or left button. Press both buttons to confirm each letter.'
+    step3: 'Select Word #1 from the suggested words. Press both buttons to continue.'
     step4: Repeat the process until the last word.
   nano:
     title: Save your recovery phrase
     desc: Your recovery phrase is formed by 24 words. They will be displayed only once.
-    step1: Copy the first word (Word \#1) in position 1 on the blank Recovery sheet.
-    step2: Press the right button to display Word \#2 and repeat the process until all 24 words are copied on the Recovery sheet.
+    step1: 'Copy the first word (Word #1) in position 1 on the blank Recovery sheet.'
+    step2: 'Press the right button to display Word #2 and repeat the process until all 24 words are copied on the Recovery sheet.'
     step3: Confirm your recovery phrase press both buttons to validate each word displayed on the screen.
   blue:
     title: Save your recovery phrase

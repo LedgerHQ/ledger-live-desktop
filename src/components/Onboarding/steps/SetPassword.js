@@ -15,7 +15,7 @@ import IconChevronRight from 'icons/ChevronRight'
 import PasswordForm from '../../SettingsPage/PasswordForm'
 import type { StepProps } from '..'
 
-import { Title, Description, DisclaimerBox } from '../helperComponents'
+import { Title, Description, DisclaimerBox, FixedTopContainer } from '../helperComponents'
 
 type State = {
   currentPassword: string,
@@ -90,10 +90,10 @@ class SetPassword extends PureComponent<StepProps, State> {
     ]
 
     return (
-      <Box sticky pt={50}>
-        <Box grow alignItems="center" justify="center">
+      <FixedTopContainer>
+        <Box grow alignItems="center">
           <Fragment>
-            <Box mb={3} alignItems="center">
+            <Box alignItems="center">
               <Title>{t('onboarding:setPassword.title')}</Title>
               <Description style={{ maxWidth: 620 }}>
                 {t('onboarding:setPassword.desc')}
@@ -135,7 +135,7 @@ class SetPassword extends PureComponent<StepProps, State> {
             </Button>
           </Box>
         </CustomFooter>
-      </Box>
+      </FixedTopContainer>
     )
   }
 }
