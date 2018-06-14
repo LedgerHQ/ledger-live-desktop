@@ -19,6 +19,7 @@ import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
+import Tooltip from 'components/base/Tooltip'
 
 import ActivityIndicator from './ActivityIndicator'
 import ItemContainer from './ItemContainer'
@@ -101,9 +102,11 @@ class TopBar extends PureComponent<Props> {
             <Box justifyContent="center">
               <Bar />
             </Box>
-            <ItemContainer isInteractive onClick={this.navigateToSettings}>
-              <IconSettings size={16} />
-            </ItemContainer>
+            <Tooltip render={() => t('app:settings.title')}>
+              <ItemContainer isInteractive onClick={this.navigateToSettings}>
+                <IconSettings size={16} />
+              </ItemContainer>
+            </Tooltip>
             {hasPassword && ( // FIXME this should be a dedicated component. therefore this component don't need to connect()
               <Fragment>
                 <Box justifyContent="center">

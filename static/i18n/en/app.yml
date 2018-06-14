@@ -116,7 +116,7 @@ exchange:
 genuinecheck:
   modal:
     title: Genuine check, bro
-importAccounts:
+addAccounts:
   title: Add accounts
   breadcrumb:
     informations: Informations

@@ -110,7 +110,7 @@ export default class AccountRow extends PureComponent<Props, State> {
           fontSize={4}
           color="grey"
         />
-        <Radio isChecked={isChecked || !!isDisabled} />
+        <Radio disabled isChecked={isChecked || !!isDisabled} />
       </AccountRowContainer>
     )
   }

@@ -18,6 +18,7 @@ import fontFamily from 'styles/styled/fontFamily'
 
 export const styledTextAlign = style({ prop: 'textAlign', cssProperty: 'textAlign' })
 export const styledCursor = style({ prop: 'cursor', cssProperty: 'cursor' })
+export const styledTextTransform = style({ prop: 'textTransform', cssProperty: 'textTransform' })
 
 export default styled.div`
   ${alignItems};
@@ -32,6 +33,7 @@ export default styled.div`
   ${space};
   ${styledTextAlign};
   ${styledCursor};
+  ${styledTextTransform};
 
   display: flex;
   flex-shrink: ${p => (p.noShrink === true ? '0' : p.shrink === true ? '1' : '')};

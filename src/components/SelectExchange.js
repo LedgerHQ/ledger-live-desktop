@@ -6,12 +6,11 @@ import type { Exchange } from '@ledgerhq/live-common/lib/countervalues/types'
 import logger from 'logger'
 
 import Select from 'components/base/Select'
-import Spinner from 'components/base/Spinner'
 import Text from 'components/base/Text'
 import CounterValues from 'helpers/countervalues'
 import type { T } from 'types/common'
 
-class ExchangeSelect extends Component<
+class SelectExchange extends Component<
   {
     from: Currency,
     to: Currency,
@@ -84,21 +83,20 @@ class ExchangeSelect extends Component<
 
     const options = exchanges ? exchanges.map(e => ({ value: e.id, label: e.name, ...e })) : []
 
-    return exchanges && exchanges.length > 0 ? (
-      <Select
-        value={options.find(e => e.id === exchangeId)}
-        options={options}
-        onChange={onChange}
-        {...props}
-      />
-    ) : error ? (
+    return error ? (
       <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
         {t('app:common.error.load')}
       </Text>
     ) : (
-      <Spinner color="grey" size={24} />
+      <Select
+        value={options.find(e => e.id === exchangeId)}
+        options={options}
+        onChange={onChange}
+        isLoading={options.length === 0}
+        {...props}
+      />
     )
   }
 }
 
-export default translate()(ExchangeSelect)
+export default translate()(SelectExchange)

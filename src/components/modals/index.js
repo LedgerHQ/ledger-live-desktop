@@ -1,5 +1,5 @@
 export Debug from './Debug'
-export ImportAccounts from './ImportAccounts'
+export AddAccounts from './AddAccounts'
 export OperationDetails from './OperationDetails'
 export Receive from './Receive'
 export Send from './Send'

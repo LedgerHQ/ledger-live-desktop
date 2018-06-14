@@ -3,7 +3,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const pkg = require('../package.json')
 require('../src/globals')
 
-const { BUNDLE_ANALYZER, SENTRY_URL } = process.env
+const { BUNDLE_ANALYZER, SENTRY_URL, STORYBOOK_ENV } = process.env
 
 module.exports = type => {
   const plugins = [
@@ -13,6 +13,7 @@ module.exports = type => {
       __DEV__,
       __PROD__,
       __SENTRY_URL__: JSON.stringify(SENTRY_URL || null),
+      __STORYBOOK_ENV__: JSON.stringify(STORYBOOK_ENV),
       'process.env.NODE_ENV': JSON.stringify(__ENV__),
     }),
   ]

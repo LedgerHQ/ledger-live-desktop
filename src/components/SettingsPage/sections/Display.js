@@ -14,7 +14,7 @@ import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
-import ExchangeSelect from 'components/SelectExchange'
+import SelectExchange from 'components/SelectExchange'
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
 import IconDisplay from 'icons/Display'
@@ -163,7 +163,7 @@ class TabProfile extends PureComponent<Props, State> {
                 options={fiats}
                 value={cvOption}
               />
-              <ExchangeSelect
+              <SelectExchange
                 small
                 from={intermediaryCurrency}
                 to={counterValueCurrency}

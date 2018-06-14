@@ -8,6 +8,8 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { push } from 'react-router-redux'
 
+import { MODAL_ADD_ACCOUNTS } from 'config/constants'
+
 import { openModal } from 'reducers/modals'
 import type { T } from 'types/common'
 
@@ -50,7 +52,7 @@ class EmptyState extends PureComponent<Props, *> {
               padded
               primary
               style={{ width: 120 }}
-              onClick={() => openModal('importAccounts')}
+              onClick={() => openModal(MODAL_ADD_ACCOUNTS)}
             >
               {t('app:emptyState.dashboard.buttons.addAccount')}
             </Button>

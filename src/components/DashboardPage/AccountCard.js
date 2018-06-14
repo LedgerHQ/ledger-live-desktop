@@ -10,6 +10,7 @@ import Bar from 'components/base/Bar'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
+import Ellipsis from 'components/base/Ellipsis'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import DeltaChange from '../DeltaChange'
 
@@ -39,13 +40,13 @@ class AccountCard extends PureComponent<{
             >
               <CryptoCurrencyIcon currency={account.currency} size={20} />
             </Box>
-            <Box>
+            <Box grow>
               <Box style={{ textTransform: 'uppercase' }} fontSize={0} color="graphite">
                 {account.currency.name}
               </Box>
-              <Box fontSize={4} color="dark">
+              <Ellipsis fontSize={4} color="dark">
                 {account.name}
-              </Box>
+              </Ellipsis>
             </Box>
           </Box>
           <Bar size={1} color="fog" />
