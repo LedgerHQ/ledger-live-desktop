@@ -20,7 +20,8 @@ export default function ExchangeCard({ t, card }: { t: T, card: CardType }) {
   return (
     <Card
       horizontal
-      p={5}
+      py={5}
+      px={6}
       style={{ cursor: 'pointer' }}
       onClick={() => shell.openExternal(card.url)}
     >

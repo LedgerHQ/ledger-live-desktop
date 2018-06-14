@@ -30,7 +30,7 @@ class SideBarList extends Component<Props> {
             <Space of={20} />
           </Fragment>
         )}
-        {children ? (
+        {children && children.length ? (
           <ListWrapper flow={2} px={3} fontSize={3} {...props}>
             {children}
           </ListWrapper>
