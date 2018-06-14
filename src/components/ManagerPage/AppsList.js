@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/jsx-no-literals */ // FIXME
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
