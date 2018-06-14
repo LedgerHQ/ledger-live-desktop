@@ -152,49 +152,46 @@ export async function doSignAndBroadcast({
   onSigned: () => void,
   onOperationBroadcasted: (optimisticOp: $Exact<OperationRaw>) => void,
 }): Promise<void> {
-  let njsAccount
+  const { walletName } = accountIdHelper.decode(account.id)
+  const njsWallet = await core.getWallet(walletName)
+  if (isCancelled()) return
+  const njsAccount = await njsWallet.getAccount(account.index)
+  if (isCancelled()) return
+  const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
+  const njsWalletCurrency = njsWallet.getCurrency()
+  const amount = core.createAmount(njsWalletCurrency, transaction.amount)
+  const fees = core.createAmount(njsWalletCurrency, transaction.feePerByte)
+  const transactionBuilder = bitcoinLikeAccount.buildTransaction()
 
-  const signedTransaction = await withDevice(deviceId)(async transport => {
-    const hwApp = new Btc(transport)
-    const { walletName } = accountIdHelper.decode(account.id)
-    const njsWallet = await core.getWallet(walletName)
-    if (isCancelled()) return null
-    njsAccount = await njsWallet.getAccount(account.index)
-    if (isCancelled()) return null
-    const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
-    const njsWalletCurrency = njsWallet.getCurrency()
-    const amount = core.createAmount(njsWalletCurrency, transaction.amount)
-    const fees = core.createAmount(njsWalletCurrency, transaction.feePerByte)
-    const transactionBuilder = bitcoinLikeAccount.buildTransaction()
+  // TODO: check if is valid address. if not, it will fail silently on invalid
 
-    // TODO: check if is valid address. if not, it will fail silently on invalid
+  transactionBuilder.sendToAddress(amount, transaction.recipient)
+  // TODO: don't use hardcoded value for sequence (and first also maybe)
+  transactionBuilder.pickInputs(0, 0xffffff)
+  transactionBuilder.setFeesPerByte(fees)
 
-    transactionBuilder.sendToAddress(amount, transaction.recipient)
-    // TODO: don't use hardcoded value for sequence (and first also maybe)
-    transactionBuilder.pickInputs(0, 0xffffff)
-    transactionBuilder.setFeesPerByte(fees)
+  const builded = await transactionBuilder.build()
+  if (isCancelled()) return
+  const sigHashType = Buffer.from(njsWalletCurrency.bitcoinLikeNetworkParameters.SigHash).toString(
+    'hex',
+  )
 
-    const builded = await transactionBuilder.build()
-    if (isCancelled()) return null
-    const sigHashType = Buffer.from(
-      njsWalletCurrency.bitcoinLikeNetworkParameters.SigHash,
-    ).toString('hex')
+  const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
+  // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
 
-    const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
-    // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
+  const currency = getCryptoCurrencyById(account.currencyId)
 
-    const currency = getCryptoCurrencyById(account.currencyId)
-
-    return signTransaction({
-      hwApp,
+  const signedTransaction = await withDevice(deviceId)(async transport =>
+    signTransaction({
+      hwApp: new Btc(transport),
       currencyId: account.currencyId,
       transaction: builded,
       sigHashType: parseInt(sigHashType, 16),
       supportsSegwit: !!currency.supportsSegwit,
       isSegwit: isSegwitAccount(account),
       hasTimestamp,
-    })
-  })
+    }),
+  )
 
   if (!signedTransaction || isCancelled() || !njsAccount) return
   onSigned()
