@@ -45,7 +45,7 @@ class GenuineCheck extends PureComponent<Props, State> {
             onStatusChange={status => {
               logger.log(`status changed to ${status}`)
             }}
-            render={({ appStatus, genuineCheckStatus, deviceSelected, errorMessage }) => (
+            render={({ appStatus, genuineCheckStatus, deviceSelected, error }) => (
               <DeviceConnect
                 appOpened={
                   appStatus === 'success' ? 'success' : appStatus === 'fail' ? 'fail' : null
@@ -54,7 +54,7 @@ class GenuineCheck extends PureComponent<Props, State> {
                 genuineCheckStatus={genuineCheckStatus}
                 devices={reducedDevicesList}
                 deviceSelected={deviceSelected}
-                errorMessage={errorMessage}
+                error={error}
               />
             )}
           />

@@ -4,6 +4,9 @@ import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import type Transport from '@ledgerhq/hw-transport'
 import getBitcoinLikeInfo from '../devices/getBitcoinLikeInfo'
+import createCustomErrorClass from '../createCustomErrorClass'
+
+const BtcUnmatchedApp = createCustomErrorClass('BtcUnmatchedApp')
 
 export default async (
   transport: Transport<*>,
@@ -24,7 +27,9 @@ export default async (
   if (bitcoinLikeInfo) {
     const { P2SH, P2PKH } = await getBitcoinLikeInfo(transport)
     if (P2SH !== bitcoinLikeInfo.P2SH || P2PKH !== bitcoinLikeInfo.P2PKH) {
-      throw new Error(`You must open application ‘${currency.name}’ on the device`)
+      throw new BtcUnmatchedApp(`BtcUnmatchedApp ${currency.id}`, {
+        currencyName: currency.name,
+      })
     }
   }
 

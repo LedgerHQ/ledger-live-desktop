@@ -68,6 +68,7 @@ account:
       receiveFunds: Receive Funds
   settings:
     title: Edit Account
+    advancedLogs: Advanced logs
     accountName:
       title: Account name
       desc: Lorem ipsum dolort amet
@@ -93,7 +94,7 @@ dashboard:
     balance: Balance
 currentAddress:
   title: Current address
-  for: Address for
+  for: Address for <1><0>{{accountName}}</0></1>
   message: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit velit egestas leo tincidunt
 deviceConnect:
   step1:

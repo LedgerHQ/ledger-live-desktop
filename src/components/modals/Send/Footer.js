@@ -95,7 +95,7 @@ class Footer extends PureComponent<
             </Box>
           )}
           <Button primary onClick={onNext} disabled={!canNext || !canBeSpent}>
-            {'Next'}
+            {t('app:common.next')}
           </Button>
         </Box>
       </ModalFooter>

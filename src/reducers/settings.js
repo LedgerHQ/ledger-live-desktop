@@ -72,7 +72,7 @@ const INITIAL_STATE: SettingsState = {
   region,
   developerMode: !!process.env.__DEV__,
   loaded: false,
-  shareAnalytics: false,
+  shareAnalytics: true,
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
 }
@@ -119,7 +119,6 @@ const handlers: Object = {
   ) => ({
     ...state,
     ...settings,
-    developerMode: settings.developerMode || !!process.env.__DEV__,
   }),
   FETCH_SETTINGS: (
     state: SettingsState,
@@ -127,7 +126,6 @@ const handlers: Object = {
   ) => ({
     ...state,
     ...settings,
-    developerMode: settings.developerMode || !!process.env.__DEV__,
     loaded: true,
   }),
 }

@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from 'invariant'
 import React, { PureComponent, Fragment } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
@@ -30,13 +31,8 @@ class StepImport extends PureComponent<StepProps> {
   startScanAccountsDevice() {
     const { currency, currentDevice, setState } = this.props
     try {
-      if (!currency) {
-        throw new Error('No currency to scan')
-      }
-
-      if (!currentDevice) {
-        throw new Error('No device')
-      }
+      invariant(currency, 'No currency to scan')
+      invariant(currentDevice, 'No device')
 
       const bridge = getBridgeForCurrency(currency)
 

@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from 'invariant'
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -173,9 +174,7 @@ class AddAccounts extends PureComponent<Props, State> {
     const stepIndex = this.STEPS.findIndex(s => s.id === stepId)
     const step = this.STEPS[stepIndex]
 
-    if (!step) {
-      throw new Error(`AddAccountsModal: step ${stepId} doesn't exists`)
-    }
+    invariant(step, `AddAccountsModal: step ${stepId} doesn't exists`)
 
     const { component: StepComponent, footer: StepFooter, hideFooter, onBack } = step
 

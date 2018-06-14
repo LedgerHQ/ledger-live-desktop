@@ -1,8 +1,11 @@
 // @flow
 import invariant from 'invariant'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
+import createCustomErrorClass from 'helpers/createCustomErrorClass'
 import { blockchainBaseURL } from './Ledger'
 import network from './network'
+
+const FeeEstimationFailed = createCustomErrorClass('FeeEstimationFailed')
 
 export type Fees = {
   [_: string]: number,
@@ -15,5 +18,5 @@ export const getEstimatedFees = async (currency: Currency): Promise<Fees> => {
   if (data) {
     return data
   }
-  throw new Error(`fee estimation failed. status=${status}`)
+  throw new FeeEstimationFailed(`FeeEstimationFailed ${status}`, { httpStatus: status })
 }

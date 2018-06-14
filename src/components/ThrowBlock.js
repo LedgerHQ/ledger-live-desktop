@@ -12,6 +12,7 @@ import db from 'helpers/db'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
+import TranslatedError from './TranslatedError'
 
 type Props = {
   children: any,
@@ -81,7 +82,9 @@ ${error.stack}
     if (error) {
       return (
         <Container>
-          <Inner>{`Error: ${error.message}`}</Inner>
+          <Inner>
+            <TranslatedError error={error} />
+          </Inner>
           <Box horizontal flow={2}>
             <Button primary onClick={this.handleRestart}>
               {'Restart app'}

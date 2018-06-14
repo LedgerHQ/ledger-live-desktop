@@ -28,14 +28,14 @@ const StepConnectDevice = ({
     currency={currency}
     deviceSelected={deviceSelected}
     onStatusChange={onStatusChange}
-    render={({ currency, appStatus, devices, deviceSelected, errorMessage }) => (
+    render={({ currency, appStatus, devices, deviceSelected, error }) => (
       <DeviceConnect
         currency={currency}
         appOpened={appStatus === 'success' ? 'success' : appStatus === 'fail' ? 'fail' : null}
         devices={devices}
         deviceSelected={deviceSelected}
         onChangeDevice={onChangeDevice}
-        errorMessage={errorMessage}
+        error={error}
       />
     )}
   />

@@ -21,6 +21,9 @@ import InputCurrency from 'components/base/InputCurrency'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import type { State } from 'reducers'
+import createCustomErrorClass from 'helpers/createCustomErrorClass'
+
+const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 const InputRight = styled(Box).attrs({
   ff: 'Rubik',
@@ -145,7 +148,7 @@ export class RequestAmount extends PureComponent<Props> {
     return (
       <Box horizontal grow shrink>
         <InputCurrency
-          error={canBeSpent ? null : 'Not enough balance'}
+          error={canBeSpent ? null : new NotEnoughBalance()}
           containerProps={containerProps}
           defaultUnit={account.unit}
           value={value}
