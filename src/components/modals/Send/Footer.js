@@ -76,7 +76,7 @@ class Footer extends PureComponent<
                 />
                 <Box horizontal align="center">
                   <Text ff="Rubik" fontSize={3}>
-                    {'('}
+                    {'(' /* eslint-disable-line react/jsx-no-literals */}
                   </Text>
                   <CounterValue
                     currency={account.currency}
@@ -88,7 +88,7 @@ class Footer extends PureComponent<
                     alwaysShowSign={false}
                   />
                   <Text ff="Rubik" fontSize={3}>
-                    {')'}
+                    {')' /* eslint-disable-line react/jsx-no-literals */}
                   </Text>
                 </Box>
               </Box>

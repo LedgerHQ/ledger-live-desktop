@@ -18,6 +18,7 @@ function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) 
     <Fragment>
       <Box align="center" mb={6}>
         <CurrencyCircleIcon mb={3} size={40} currency={currency} />
+        {/* eslint-disable react/jsx-no-literals */}
         <Box ff="Open Sans" fontSize={4} color="dark" textAlign="center" style={{ width: 370 }}>
           <Trans i18nKey="app:addAccounts.connectDevice.desc" parent="div">
             {`You're about to import your `}
@@ -27,6 +28,7 @@ function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) 
             {` account(s) from your Ledger device. Please follow the steps below:`}
           </Trans>
         </Box>
+        {/* eslint-enable react/jsx-no-literals */}
       </Box>
       <ConnectDevice
         t={t}

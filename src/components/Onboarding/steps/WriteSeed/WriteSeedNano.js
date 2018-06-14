@@ -29,17 +29,17 @@ class WriteSeedNano extends PureComponent<Props, *> {
     const steps = [
       {
         key: 'step1',
-        icon: <IconOptionRow>1.</IconOptionRow>,
+        icon: <IconOptionRow>1.</IconOptionRow> /* eslint-disable-line react/jsx-no-literals */,
         desc: t('onboarding:writeSeed.nano.step1'),
       },
       {
         key: 'step2',
-        icon: <IconOptionRow>2.</IconOptionRow>,
+        icon: <IconOptionRow>2.</IconOptionRow> /* eslint-disable-line react/jsx-no-literals */,
         desc: t('onboarding:writeSeed.nano.step2'),
       },
       {
         key: 'step3',
-        icon: <IconOptionRow>3.</IconOptionRow>,
+        icon: <IconOptionRow>3.</IconOptionRow> /* eslint-disable-line react/jsx-no-literals */,
         desc: t('onboarding:writeSeed.nano.step3'),
       },
     ]

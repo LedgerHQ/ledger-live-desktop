@@ -200,6 +200,7 @@ class DeviceConnect extends PureComponent<Props> {
     const hasDevice = devices.length > 0
     const hasMultipleDevices = devices.length > 1
 
+    /* eslint-disable react/jsx-no-literals */
     return (
       <Box flow={4} ff="Open Sans">
         <Step validated={hasDevice}>

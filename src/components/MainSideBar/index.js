@@ -92,38 +92,40 @@ class MainSideBar extends PureComponent<Props> {
             <SideBarListItem
               label={t('app:dashboard.title')}
               icon={IconPieChart}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
-              isActive={pathname === '/'}
-              hasNotif={updateStatus === 'downloaded'}
+              isActive={pathname === '/'} /* eslint-disable-line react/jsx-no-literals */
+              hasNotif={
+                updateStatus === 'downloaded' /* eslint-disable-line react/jsx-no-literals */
+              }
             />
             <SideBarListItem
               label={t('app:send.title')}
               icon={IconSend}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleOpenSendModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
               label={t('app:receive.title')}
               icon={IconReceive}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleOpenReceiveModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
               label={t('app:sidebar.manager')}
               icon={IconManager}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleClickManager}
-              isActive={pathname === '/manager'}
+              isActive={pathname === '/manager'} /* eslint-disable-line react/jsx-no-literals */
             />
             <SideBarListItem
               label={t('app:sidebar.exchange')}
               icon={IconExchange}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleClickExchange}
-              isActive={pathname === '/exchange'}
+              isActive={pathname === '/exchange'} /* eslint-disable-line react/jsx-no-literals */
             />
           </SideBarList>
           <Space of={40} />
@@ -137,7 +139,10 @@ class MainSideBar extends PureComponent<Props> {
                 key={account.id}
                 account={account}
                 push={this.push}
-                isActive={pathname === `/account/${account.id}`}
+                isActive={
+                  pathname ===
+                  `/account/${account.id}` /* eslint-disable-line react/jsx-no-literals */
+                }
               />
             ))}
           </SideBarList>

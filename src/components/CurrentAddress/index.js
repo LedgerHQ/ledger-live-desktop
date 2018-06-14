@@ -183,6 +183,7 @@ class CurrentAddress extends PureComponent<Props> {
           <Box>
             {accountName ? (
               <Trans i18nKey="app:currentAddress.for" parent="div">
+                {/* eslint-disable-line react/jsx-no-literals */}
                 Address for <strong>{accountName}</strong>
               </Trans>
             ) : (

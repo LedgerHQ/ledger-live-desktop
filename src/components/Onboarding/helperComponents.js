@@ -50,7 +50,7 @@ type StepType = {
 export function OptionRow({ step }: { step: StepType }) {
   const { icon, desc } = step
   return (
-    <Box horizontal m={'7px'} style={{ minWidth: 420 }}>
+    <Box horizontal m="7px" style={{ minWidth: 420 }}>
       <Box justify="center">{icon}</Box>
       <Box justify="center" shrink>
         <OptionRowDesc>{desc}</OptionRowDesc>

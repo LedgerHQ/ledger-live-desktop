@@ -128,7 +128,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>1.</IconOptionRow>
+                  <IconOptionRow>1.</IconOptionRow>{/* eslint-disable-line react/jsx-no-literals */}
                   <CardTitle>{t('onboarding:genuineCheck.steps.step1.title')}</CardTitle>
                 </Box>
               </Box>
@@ -145,7 +145,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper isDisabled={!genuine.pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>2.</IconOptionRow>
+                  <IconOptionRow>2.</IconOptionRow>{/* eslint-disable-line react/jsx-no-literals */}
                   <CardTitle>{t('onboarding:genuineCheck.steps.step2.title')}</CardTitle>
                 </Box>
               </Box>
@@ -162,7 +162,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper isDisabled={!genuine.recoveryStepPass}>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>3.</IconOptionRow>
+                  <IconOptionRow>3.</IconOptionRow>{/* eslint-disable-line react/jsx-no-literals */}
                   <CardTitle>{t('onboarding:genuineCheck.steps.step3.title')}</CardTitle>
                 </Box>
               </Box>

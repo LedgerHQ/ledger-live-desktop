@@ -13,6 +13,7 @@ import FormattedVal from 'components/base/FormattedVal'
 import Input from 'components/base/Input'
 import IconEdit from 'icons/Edit'
 import IconCheck from 'icons/Check'
+import type { T } from 'types/common'
 
 type Props = {
   account: Account,
@@ -20,6 +21,7 @@ type Props = {
   isDisabled?: boolean,
   onClick: Account => void,
   onAccountUpdate: Account => void,
+  t: T
 }
 
 type State = {
@@ -71,7 +73,7 @@ export default class AccountRow extends PureComponent<Props, State> {
   _input = null
 
   render() {
-    const { account, isChecked, onClick, isDisabled } = this.props
+    const { account, isChecked, onClick, isDisabled, t } = this.props
     const { isEditing, accountNameCopy } = this.state
 
     return (
@@ -100,7 +102,7 @@ export default class AccountRow extends PureComponent<Props, State> {
         {!isEditing && (
           <Edit onClick={this.handleEditClick}>
             <IconEdit size={13} />
-            <span>{'edit name'}</span>
+            <span>{t('app:addAccounts.editName')}</span>
           </Edit>
         )}
         <FormattedVal

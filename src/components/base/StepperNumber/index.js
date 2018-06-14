@@ -140,9 +140,10 @@ class StepperNumber extends PureComponent<Props, State> {
     const isMin = this.isMin(value)
     const isMax = this.isMax(value)
 
+    /* eslint-disable react/jsx-no-literals */
     return (
       <Container>
-        <Btn onMouseDown={!isMin ? this.handleMouseDown('decrement') : undefined} disabled={isMin}>
+        <Btn onMouseDown={!isMin ? this.handleMouseDown('decrement') : undefined} disabled={isMin}> 
           -
         </Btn>
         <Num>{value}</Num>

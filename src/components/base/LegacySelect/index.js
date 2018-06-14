@@ -4,6 +4,9 @@ import React, { PureComponent } from 'react'
 import Downshift from 'downshift'
 import styled from 'styled-components'
 import { space } from 'styled-system'
+import { translate } from 'react-i18next'
+
+import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
@@ -33,6 +36,7 @@ type Props = {
   value?: *,
   disabled: boolean,
   small?: boolean,
+  t: T,
 }
 
 const Container = styled(Box).attrs({ relative: true, color: 'graphite' })``
@@ -163,7 +167,7 @@ class LegacySelect extends PureComponent<Props> {
   _children = {}
 
   renderItems = (items: Array<Object>, selectedItem: any, downshiftProps: Object) => {
-    const { renderItem, maxHeight, keyProp } = this.props
+    const { renderItem, maxHeight, keyProp, t } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
     const selectedItemIndex = items.indexOf(selectedItem)
@@ -228,7 +232,7 @@ class LegacySelect extends PureComponent<Props> {
           </GrowScroll>
         ) : (
           <Box>
-            <Item>{'No results'}</Item>
+            <Item>{t('app:error.noResults')}</Item>
           </Box>
         )}
       </Dropdown>
@@ -340,4 +344,4 @@ class LegacySelect extends PureComponent<Props> {
   }
 }
 
-export default LegacySelect
+export default translate()(LegacySelect)
