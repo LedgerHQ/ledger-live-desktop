@@ -10,7 +10,7 @@ import { isSegwitAccount } from 'helpers/bip32'
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
 import { withDevice } from 'helpers/deviceAccess'
-import { getWalletIdentifier } from 'helpers/libcore'
+import * as accountIdHelper from 'helpers/accountId'
 
 type BitcoinLikeTransaction = {
   amount: number,
@@ -152,56 +152,46 @@ export async function doSignAndBroadcast({
   onSigned: () => void,
   onOperationBroadcasted: (optimisticOp: $Exact<OperationRaw>) => void,
 }): Promise<void> {
-  let njsAccount
+  const { walletName } = accountIdHelper.decode(account.id)
+  const njsWallet = await core.getWallet(walletName)
+  if (isCancelled()) return
+  const njsAccount = await njsWallet.getAccount(account.index)
+  if (isCancelled()) return
+  const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
+  const njsWalletCurrency = njsWallet.getCurrency()
+  const amount = core.createAmount(njsWalletCurrency, transaction.amount)
+  const fees = core.createAmount(njsWalletCurrency, transaction.feePerByte)
+  const transactionBuilder = bitcoinLikeAccount.buildTransaction()
 
-  const signedTransaction = await withDevice(deviceId)(async transport => {
-    const hwApp = new Btc(transport)
+  // TODO: check if is valid address. if not, it will fail silently on invalid
 
-    const WALLET_IDENTIFIER = await getWalletIdentifier({
-      hwApp,
-      isSegwit: isSegwitAccount(account),
-      currencyId: account.currencyId,
-      devicePath: deviceId,
-    })
+  transactionBuilder.sendToAddress(amount, transaction.recipient)
+  // TODO: don't use hardcoded value for sequence (and first also maybe)
+  transactionBuilder.pickInputs(0, 0xffffff)
+  transactionBuilder.setFeesPerByte(fees)
 
-    const njsWallet = await core.getWallet(WALLET_IDENTIFIER)
-    if (isCancelled()) return null
-    njsAccount = await njsWallet.getAccount(account.index)
-    if (isCancelled()) return null
-    const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
-    const njsWalletCurrency = njsWallet.getCurrency()
-    const amount = core.createAmount(njsWalletCurrency, transaction.amount)
-    const fees = core.createAmount(njsWalletCurrency, transaction.feePerByte)
-    const transactionBuilder = bitcoinLikeAccount.buildTransaction()
+  const builded = await transactionBuilder.build()
+  if (isCancelled()) return
+  const sigHashType = Buffer.from(njsWalletCurrency.bitcoinLikeNetworkParameters.SigHash).toString(
+    'hex',
+  )
 
-    // TODO: check if is valid address. if not, it will fail silently on invalid
+  const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
+  // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
 
-    transactionBuilder.sendToAddress(amount, transaction.recipient)
-    // TODO: don't use hardcoded value for sequence (and first also maybe)
-    transactionBuilder.pickInputs(0, 0xffffff)
-    transactionBuilder.setFeesPerByte(fees)
+  const currency = getCryptoCurrencyById(account.currencyId)
 
-    const builded = await transactionBuilder.build()
-    if (isCancelled()) return null
-    const sigHashType = Buffer.from(
-      njsWalletCurrency.bitcoinLikeNetworkParameters.SigHash,
-    ).toString('hex')
-
-    const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
-    // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
-
-    const currency = getCryptoCurrencyById(account.currencyId)
-
-    return signTransaction({
-      hwApp,
+  const signedTransaction = await withDevice(deviceId)(async transport =>
+    signTransaction({
+      hwApp: new Btc(transport),
       currencyId: account.currencyId,
       transaction: builded,
       sigHashType: parseInt(sigHashType, 16),
       supportsSegwit: !!currency.supportsSegwit,
       isSegwit: isSegwitAccount(account),
       hasTimestamp,
-    })
-  })
+    }),
+  )
 
   if (!signedTransaction || isCancelled() || !njsAccount) return
   onSigned()
