@@ -25,13 +25,16 @@ type Props = {
   renderDefault: (
     device: ?Device,
     deviceInfo: ?DeviceInfo,
-    dashboardError: ?Error,
     isGenuine: ?boolean,
+    error: {
+      dashboardError: ?Error,
+      genuineError: ?Error,
+    },
   ) => Node,
   renderMcuUpdate: (deviceInfo: DeviceInfo) => Node,
   renderFinalUpdate: (deviceInfo: DeviceInfo) => Node,
   renderDashboard: (device: Device, deviceInfo: DeviceInfo) => Node,
-  renderError: (dashboardError: ?Error, genuineError: ?Error) => Node,
+  renderError?: (dashboardError: ?Error, genuineError: ?Error) => Node,
 }
 type State = {}
 
@@ -52,14 +55,12 @@ class Workflow extends PureComponent<Props, State> {
               <EnsureGenuine device={device}>
                 {(isGenuine: ?boolean, genuineError: ?Error) => {
                   if (dashboardError || genuineError) {
-                    return renderError ? (
-                      renderError(dashboardError, genuineError)
-                    ) : (
-                      <div>
-                        {dashboardError && <span>{dashboardError.message}</span>}
-                        {genuineError && <span>{genuineError.message}</span>}
-                      </div>
-                    )
+                    return renderError
+                      ? renderError(dashboardError, genuineError)
+                      : renderDefault(device, deviceInfo, isGenuine, {
+                          genuineError,
+                          dashboardError,
+                        })
                   }
 
                   if (deviceInfo && deviceInfo.mcu) {
@@ -74,7 +75,10 @@ class Workflow extends PureComponent<Props, State> {
                     return renderDashboard(device, deviceInfo)
                   }
 
-                  return renderDefault(device, deviceInfo, dashboardError, isGenuine)
+                  return renderDefault(device, deviceInfo, isGenuine, {
+                    genuineError,
+                    dashboardError,
+                  })
                 }}
               </EnsureGenuine>
             )}
