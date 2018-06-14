@@ -18,12 +18,13 @@ function parseValue(value) {
   return value.toString().replace(/,/g, '.')
 }
 
-function format(unit: Unit, value: number, { isFocused, showAllDigits }) {
+function format(unit: Unit, value: number, { isFocused, showAllDigits, subMagnitude }) {
   // FIXME do we need locale for the input too ?
   return formatCurrencyUnit(unit, value, {
     useGrouping: !isFocused,
     disableRounding: true,
     showAllDigits: !!showAllDigits && !isFocused,
+    subMagnitude: value < 1 ? subMagnitude : 0,
   })
 }
 
@@ -53,6 +54,7 @@ type Props = {
   units: Unit[],
   value: number,
   showAllDigits?: boolean,
+  subMagnitude: number,
 }
 
 type State = {
@@ -68,6 +70,7 @@ class InputCurrency extends PureComponent<Props, State> {
     units: [],
     value: 0,
     showAllDigits: false,
+    subMagnitude: 0,
   }
 
   state = {
@@ -94,6 +97,7 @@ class InputCurrency extends PureComponent<Props, State> {
             : format(nextProps.unit, nextProps.value, {
                 isFocused,
                 showAllDigits: nextProps.showAllDigits,
+                subMagnitude: nextProps.subMagnitude,
               }),
       })
     }
@@ -135,11 +139,13 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   syncInput = ({ isFocused }: { isFocused: boolean }) => {
-    const { value, showAllDigits, unit } = this.props
+    const { value, showAllDigits, subMagnitude, unit } = this.props
     this.setState({
       isFocused,
       displayValue:
-        value === '' || value === 0 ? '' : format(unit, value, { isFocused, showAllDigits }),
+        value === '' || value === 0
+          ? ''
+          : format(unit, value, { isFocused, showAllDigits, subMagnitude }),
     })
   }
 
@@ -183,7 +189,7 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   render() {
-    const { renderRight, showAllDigits, unit } = this.props
+    const { renderRight, showAllDigits, unit, subMagnitude } = this.props
     const { displayValue } = this.state
 
     return (
@@ -195,7 +201,7 @@ class InputCurrency extends PureComponent<Props, State> {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         renderRight={renderRight || this.renderListUnits()}
-        placeholder={format(unit, 0, { isFocused: false, showAllDigits })}
+        placeholder={format(unit, 0, { isFocused: false, showAllDigits, subMagnitude })}
       />
     )
   }
