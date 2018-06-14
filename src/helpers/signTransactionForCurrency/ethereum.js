@@ -1,4 +1,5 @@
 // @flow
+import invariant from 'invariant'
 import Eth from '@ledgerhq/hw-app-eth'
 import type Transport from '@ledgerhq/hw-transport'
 import EthereumTx from 'ethereumjs-tx'
@@ -34,7 +35,7 @@ export default async (
   // First, we need to create a partial tx and send to the device
 
   const chainId = getNetworkId(currencyId)
-  if (!chainId) throw new Error(`chainId not found for currency=${currencyId}`)
+  invariant(chainId, `chainId not found for currency=${currencyId}`)
   const tx = new EthereumTx({
     nonce: t.nonce,
     gasPrice: `0x${t.gasPrice.toString(16)}`,
@@ -57,11 +58,10 @@ export default async (
   tx.s = Buffer.from(result.s, 'hex')
   const signedChainId = Math.floor((tx.v[0] - 35) / 2) // EIP155: v should be chain_id * 2 + {35, 36}
   const validChainId = chainId & 0xff // eslint-disable-line no-bitwise
-  if (signedChainId !== validChainId) {
-    throw new Error(
-      `Invalid chainId signature returned. Expected: ${chainId}, Got: ${signedChainId}`,
-    )
-  }
+  invariant(
+    signedChainId === validChainId,
+    `Invalid chainId signature returned. Expected: ${chainId}, Got: ${signedChainId}`,
+  )
 
   // Finally, we can send the transaction string to broadcast
   return `0x${tx.serialize().toString('hex')}`

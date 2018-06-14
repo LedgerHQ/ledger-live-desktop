@@ -12,6 +12,7 @@ import noop from 'lodash/noop'
 import Box from 'components/base/Box'
 import Spinner from 'components/base/Spinner'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
+import TranslatedError from 'components/TranslatedError'
 
 import IconCheck from 'icons/Check'
 import IconExclamationCircle from 'icons/ExclamationCircle'
@@ -146,7 +147,7 @@ type Props = {
   deviceSelected: ?Device,
   onChangeDevice: Device => void,
   t: T,
-  errorMessage: ?string,
+  error: ?Error,
 }
 
 const emitChangeDevice = props => {
@@ -186,7 +187,7 @@ class DeviceConnect extends PureComponent<Props> {
       genuineCheckStatus,
       withGenuineCheck,
       appOpened,
-      errorMessage,
+      error,
       currency,
       t,
       onChangeDevice,
@@ -306,7 +307,7 @@ class DeviceConnect extends PureComponent<Props> {
           <Info hasErrors>
             <IconInfoCircle size={12} />
             <Box shrink selectable>
-              {String(errorMessage || '')}
+              <TranslatedError error={error} />
             </Box>
           </Info>
         ) : null}

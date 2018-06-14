@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import type { Operation } from '@ledgerhq/live-common/lib/types'
+import type { T } from 'types/common'
 
 import Spinner from 'components/base/Spinner'
 import IconCheckCircle from 'icons/CheckCircle'
@@ -9,9 +10,7 @@ import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Box from 'components/base/Box'
 import { multiline } from 'styles/helpers'
 import { colors } from 'styles/theme'
-import { formatError } from 'helpers/errors'
-
-import type { T } from 'types/common'
+import TranslatedError from '../../TranslatedError'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -65,7 +64,11 @@ function StepConfirmation(props: Props) {
       </span>
       <Title>{t(`${tPrefix}.title`)}</Title>
       <Text style={{ userSelect: 'text' }}>
-        {optimisticOperation ? multiline(t(`${tPrefix}.text`)) : error ? formatError(error) : null}
+        {optimisticOperation ? (
+          multiline(t(`${tPrefix}.text`))
+        ) : error ? (
+          <TranslatedError error={error} />
+        ) : null}
       </Text>
       <Text style={{ userSelect: 'text' }}>
         {optimisticOperation ? optimisticOperation.hash : ''}

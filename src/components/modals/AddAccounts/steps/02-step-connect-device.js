@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from 'invariant'
 import React, { Fragment } from 'react'
 import { Trans } from 'react-i18next'
 
@@ -11,9 +12,8 @@ import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
 import type { StepProps } from '../index'
 
 function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) {
-  if (!currency) {
-    throw new Error('No currency given')
-  }
+  invariant(currency, 'No currency given')
+
   return (
     <Fragment>
       <Box align="center" mb={6}>

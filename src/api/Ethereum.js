@@ -1,7 +1,10 @@
 // @flow
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import createCustomErrorClass from 'helpers/createCustomErrorClass'
 import network from './network'
 import { blockchainBaseURL } from './Ledger'
+
+export const LedgerAPINotAvailable = createCustomErrorClass('LedgerAPINotAvailable')
 
 export type Block = { height: number } // TODO more fields actually
 export type Tx = {
@@ -42,7 +45,9 @@ export type API = {
 export const apiForCurrency = (currency: CryptoCurrency): API => {
   const baseURL = blockchainBaseURL(currency)
   if (!baseURL) {
-    throw new Error(`ledger API not available for currency ${currency.id}`)
+    throw new LedgerAPINotAvailable(`LedgerAPINotAvailable ${currency.id}`, {
+      currencyName: currency.name,
+    })
   }
   return {
     async getTransactions(address, blockHash) {

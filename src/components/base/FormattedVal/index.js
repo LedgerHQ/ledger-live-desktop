@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from 'invariant'
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
@@ -76,9 +77,7 @@ function FormattedVal(props: Props) {
   } = props
   let { val } = props
 
-  if (isUndefined(val)) {
-    throw new Error('FormattedVal require a `val` prop. Received `undefined`')
-  }
+  invariant(!isUndefined(val), 'FormattedVal require a `val` prop. Received `undefined`')
 
   const isNegative = val < 0
 
@@ -88,9 +87,7 @@ function FormattedVal(props: Props) {
     // FIXME move out the % feature of this component... totally unrelated to currency & annoying for flow type.
     text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${isNegative ? val * -1 : val} %`
   } else {
-    if (!unit) {
-      throw new Error('FormattedVal require a `unit` prop. Received `undefined`')
-    }
+    invariant(unit, 'FormattedVal require a `unit` prop. Received `undefined`')
 
     if (withIcon && isNegative) {
       val *= -1

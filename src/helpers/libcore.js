@@ -10,8 +10,11 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 
 import { isSegwitAccount } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
+import createCustomErrorClass from './createCustomErrorClass'
 
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
+
+const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 
 type Props = {
   core: *,
@@ -248,7 +251,7 @@ async function buildAccountRaw({
   }))
 
   if (addresses.length === 0) {
-    throw new Error('no addresses found')
+    throw new NoAddressesFound()
   }
 
   const { str: freshAddress, path: freshAddressPath } = addresses[0]

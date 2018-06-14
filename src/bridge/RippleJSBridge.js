@@ -1,4 +1,5 @@
 // @flow
+import invariant from 'invariant'
 import { Observable } from 'rxjs'
 import React from 'react'
 import bs58check from 'ripple-bs58check'
@@ -298,9 +299,10 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
             if (finished) return
             const balance = parseAPIValue(info.xrpBalance)
-            if (isNaN(balance) || !isFinite(balance)) {
-              throw new Error(`Ripple: invalid balance=${balance} for address ${address}`)
-            }
+            invariant(
+              !isNaN(balance) && isFinite(balance),
+              `Ripple: invalid balance=${balance} for address ${address}`,
+            )
 
             const transactions = await api.getTransactions(address, {
               minLedgerVersion,
@@ -375,9 +377,10 @@ const RippleJSBridge: WalletBridge<Transaction> = {
           }
 
           const balance = parseAPIValue(info.xrpBalance)
-          if (isNaN(balance) || !isFinite(balance)) {
-            throw new Error(`Ripple: invalid balance=${balance} for address ${freshAddress}`)
-          }
+          invariant(
+            !isNaN(balance) && isFinite(balance),
+            `Ripple: invalid balance=${balance} for address ${freshAddress}`,
+          )
 
           o.next(a => ({ ...a, balance }))
 

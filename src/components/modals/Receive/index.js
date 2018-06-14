@@ -18,6 +18,7 @@ import Breadcrumb from 'components/Breadcrumb'
 import Button from 'components/base/Button'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
 import StepConnectDevice from 'components/modals/StepConnectDevice'
+import { WrongDeviceForAccount } from 'components/EnsureDeviceApp'
 
 import StepAccount from './01-step-account'
 import StepConfirmAddress from './03-step-confirm-address'
@@ -208,7 +209,9 @@ class ReceiveModal extends PureComponent<Props, State> {
           .toPromise()
 
         if (address !== account.freshAddress) {
-          throw new Error('Confirmed address is different')
+          throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
+            accountName: account.name,
+          })
         }
 
         this.setState({ addressVerified: true, stepIndex: 3 })

@@ -1,5 +1,6 @@
 // @flow
 
+import invariant from 'invariant'
 import type { Command } from 'helpers/ipc'
 
 import getAddress from 'commands/getAddress'
@@ -53,9 +54,7 @@ const all: Array<Command<any, any>> = [
 ]
 
 all.forEach(cmd => {
-  if (all.some(c => c !== cmd && c.id === cmd.id)) {
-    throw new Error(`duplicate command '${cmd.id}'`)
-  }
+  invariant(!all.some(c => c !== cmd && c.id === cmd.id), `duplicate command '${cmd.id}'`)
 })
 
 export default all
