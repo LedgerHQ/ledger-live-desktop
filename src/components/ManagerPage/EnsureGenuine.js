@@ -12,8 +12,14 @@ type Error = {
   stack: string,
 }
 
+type DeviceInfos = {
+  targetId: number | string,
+  version: string,
+}
+
 type Props = {
   device: ?Device,
+  infos: ?DeviceInfos,
   children: (isGenuine: ?boolean, error: ?Error) => Node,
 }
 
@@ -49,12 +55,15 @@ class EnsureGenuine extends PureComponent<Props, State> {
   _unmounting = false
 
   async checkIsGenuine() {
-    const { device } = this.props
-    if (device && !this._checking) {
+    const { device, infos } = this.props
+    if (device && infos && !this._checking) {
       this._checking = true
       try {
-        const isGenuine = await getIsGenuine.send().toPromise()
-        if (!this.state.genuine || this.state.error) {
+        const res = await getIsGenuine
+          .send({ devicePath: device.path, targetId: infos.targetId })
+          .toPromise()
+        const isGenuine = res === '0000'
+        if ((!this.state.genuine || this.state.error) && isGenuine) {
           !this._unmounting && this.setState({ genuine: isGenuine, error: null })
         }
       } catch (err) {

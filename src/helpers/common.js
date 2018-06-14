@@ -5,7 +5,7 @@ import Websocket from 'ws'
 import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import { BASE_SOCKET_URL, APDUS } from './constants'
+import { BASE_SOCKET_URL, APDUS, BASE_SOCKET_URL_TEMP } from './constants'
 
 type WebsocketType = {
   send: (string, any) => void,
@@ -24,33 +24,10 @@ export type LedgerScriptParams = {
   firmwareKey?: string,
   delete?: string,
   deleteKey?: string,
+  targetId?: string | number,
 }
 
 type FirmwareUpdateType = 'osu' | 'final'
-
-// /**
-//  * Install an app on the device
-//  */
-// export async function installApp(
-//   transport: Transport<*>,
-//   { appParams }: { appParams: LedgerScriptParams },
-// ): Promise<void> {
-//   return createSocketDialog(transport, '/update/install', appParams)
-// }
-
-/**
- * Uninstall an app on the device
- */
-export async function uninstallApp(
-  transport: Transport<*>,
-  { appParams }: { appParams: LedgerScriptParams },
-): Promise<void> {
-  return createSocketDialog(transport, '/update/install', {
-    ...appParams,
-    firmware: appParams.delete,
-    firmwareKey: appParams.deleteKey,
-  })
-}
 
 export async function getMemInfos(transport: Transport<*>): Promise<Object> {
   const { targetId } = await getFirmwareInfo(transport)
@@ -119,11 +96,14 @@ export async function createSocketDialog(
   transport: Transport<*>,
   endpoint: string,
   params: LedgerScriptParams,
+  temp: boolean = false,
 ) {
   return new Promise(async (resolve, reject) => {
     try {
       let lastData
-      const url = `${BASE_SOCKET_URL}${endpoint}?${qs.stringify(params)}`
+      const url = `${temp ? BASE_SOCKET_URL_TEMP : BASE_SOCKET_URL}${endpoint}?${qs.stringify(
+        params,
+      )}`
 
       log('WS CONNECTING', url)
       const ws: WebsocketType = new Websocket(url)
@@ -142,6 +122,8 @@ export async function createSocketDialog(
           success: msg => {
             if (msg.data) {
               lastData = msg.data
+            } else if (msg.result) {
+              lastData = msg.result
             }
           },
           error: msg => {
