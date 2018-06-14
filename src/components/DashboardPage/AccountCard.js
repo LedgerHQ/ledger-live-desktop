@@ -89,7 +89,7 @@ class AccountCard extends PureComponent<{
                 height={52}
                 hideAxis
                 isInteractive={false}
-                id={`account-chart-${account.id}`} /* eslint-disable-line react/jsx-no-literals */
+                id={`account-chart-${account.id}`}
                 unit={account.unit}
               />
             </Box>

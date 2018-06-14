@@ -160,16 +160,18 @@ class StepImport extends PureComponent<StepProps> {
             onUpdateAccount={this.handleUpdateAccount}
             onSelectAll={this.handleSelectAll}
             onUnselectAll={this.handleUnselectAll}
-            isLoading={scanStatus === 'scanning'} /* eslint-disable-line react/jsx-no-literals */
+            isLoading={scanStatus === 'scanning'}
           />
           <AccountsList
-            title={t('app:addAccounts.createNewAccount.title')}
-            emptyText={t('app:addAccounts.createNewAccount.noOperationOnLastAccount')}
+            title={t('app:addAccounts.createNewAccount')}
+            emptyText={
+              'You cannot create a new account because your last account has no operations'
+            }
             accounts={creatableAccounts}
             checkedIds={checkedAccountsIds}
             onToggleAccount={this.handleToggleAccount}
             onUpdateAccount={this.handleUpdateAccount}
-            isLoading={scanStatus === 'scanning'} /* eslint-disable-line react/jsx-no-literals */
+            isLoading={scanStatus === 'scanning'}
           />
         </Box>
 
@@ -234,7 +236,7 @@ export const StepImportFooter = ({
   return (
     <Fragment>
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
-      <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}> {/* eslint-disable-line react/jsx-no-literals */}
+      <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
         {ctaWording}
       </Button>
     </Fragment>

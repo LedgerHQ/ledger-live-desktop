@@ -94,10 +94,8 @@ class MainSideBar extends PureComponent<Props> {
               icon={IconPieChart}
               iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
-              isActive={pathname === '/'} /* eslint-disable-line react/jsx-no-literals */
-              hasNotif={
-                updateStatus === 'downloaded' /* eslint-disable-line react/jsx-no-literals */
-              }
+              isActive={pathname === '/'}
+              hasNotif={updateStatus === 'downloaded'}
             />
             <SideBarListItem
               label={t('app:send.title')}
@@ -118,14 +116,14 @@ class MainSideBar extends PureComponent<Props> {
               icon={IconManager}
               iconActiveColor="wallet"
               onClick={this.handleClickManager}
-              isActive={pathname === '/manager'} /* eslint-disable-line react/jsx-no-literals */
+              isActive={pathname === '/manager'}
             />
             <SideBarListItem
               label={t('app:sidebar.exchange')}
               icon={IconExchange}
               iconActiveColor="wallet"
               onClick={this.handleClickExchange}
-              isActive={pathname === '/exchange'} /* eslint-disable-line react/jsx-no-literals */
+              isActive={pathname === '/exchange'}
             />
           </SideBarList>
           <Space of={40} />
@@ -139,10 +137,7 @@ class MainSideBar extends PureComponent<Props> {
                 key={account.id}
                 account={account}
                 push={this.push}
-                isActive={
-                  pathname ===
-                  `/account/${account.id}` /* eslint-disable-line react/jsx-no-literals */
-                }
+                isActive={pathname === `/account/${account.id}`}
               />
             ))}
           </SideBarList>

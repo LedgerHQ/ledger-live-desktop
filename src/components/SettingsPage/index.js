@@ -121,11 +121,7 @@ class SettingsPage extends PureComponent<Props, State> {
         <Pills mb={4} items={this._items} activeKey={tab.key} onChange={this.handleChangeTab} />
         <Switch>
           {this._items.map(i => (
-            <Route
-              key={i.key}
-              path={`${match.url}/${i.key}`} /* eslint-disable-line react/jsx-no-literals */
-              render={i.value && i.value(props)}
-            />
+            <Route key={i.key} path={`${match.url}/${i.key}`} render={i.value && i.value(props)} />
           ))}
           <Route render={defaultItem.value && defaultItem.value(props)} />
         </Switch>

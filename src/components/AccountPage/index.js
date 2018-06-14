@@ -143,7 +143,7 @@ class AccountPage extends PureComponent<Props, State> {
               <BalanceSummary
                 accounts={[account]}
                 chartColor={account.currency.color}
-                chartId={`account-chart-${account.id}`} /* eslint-disable-line react/jsx-no-literals */
+                chartId={`account-chart-${account.id}`}
                 counterValue={counterValue}
                 daysCount={daysCount}
                 selectedTime={selectedTime}

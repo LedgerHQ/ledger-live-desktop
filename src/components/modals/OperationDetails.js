@@ -153,7 +153,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                 ? t('app:operationDetails.confirmed')
                 : t('app:operationDetails.notConfirmed')}
             </Box>
-            <Box>{`(${confirmations})`}</Box> {/* eslint-disable-line react/jsx-no-literals */}
+            <Box>{`(${confirmations})`}</Box>
           </ColRight>
         </Line>
         <B />

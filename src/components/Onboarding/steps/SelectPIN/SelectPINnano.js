@@ -23,22 +23,22 @@ class SelectPINnano extends PureComponent<Props, *> {
     const stepsLedgerNano = [
       {
         key: 'step1',
-        icon: <IconOptionRow>1.</IconOptionRow> /* eslint-disable-line react/jsx-no-literals */,
+        icon: <IconOptionRow>{'1.'}</IconOptionRow>,
         desc: t('onboarding:selectPIN.instructions.ledgerNano.step1'),
       },
       {
         key: 'step2',
-        icon: <IconOptionRow>2.</IconOptionRow> /* eslint-disable-line react/jsx-no-literals */,
+        icon: <IconOptionRow>{'2.'}</IconOptionRow>,
         desc: t('onboarding:selectPIN.instructions.ledgerNano.step2'),
       },
       {
         key: 'step3',
-        icon: <IconOptionRow>3.</IconOptionRow> /* eslint-disable-line react/jsx-no-literals */,
+        icon: <IconOptionRow>{'3.'}</IconOptionRow>,
         desc: t('onboarding:selectPIN.instructions.ledgerNano.step3'),
       },
       {
         key: 'step4',
-        icon: <IconOptionRow>4.</IconOptionRow> /* eslint-disable-line react/jsx-no-literals */,
+        icon: <IconOptionRow>{'4.'}</IconOptionRow>,
         desc: t('onboarding:selectPIN.instructions.ledgerNano.step4'),
       },
     ]

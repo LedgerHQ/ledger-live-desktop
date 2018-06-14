@@ -29,17 +29,17 @@ class WriteSeedBlue extends PureComponent<Props, *> {
     const steps = [
       {
         key: 'step1',
-        icon: <IconOptionRow>1.</IconOptionRow>, /* eslint-disable-line react/jsx-no-literals */
+        icon: <IconOptionRow>{'1.'}</IconOptionRow>,
         desc: t('onboarding:writeSeed.blue.step1'),
       },
       {
         key: 'step2',
-        icon: <IconOptionRow>2.</IconOptionRow>, /* eslint-disable-line react/jsx-no-literals */
+        icon: <IconOptionRow>{'2.'}</IconOptionRow>,
         desc: t('onboarding:writeSeed.blue.step2'),
       },
       {
         key: 'step3',
-        icon: <IconOptionRow>3.</IconOptionRow>, /* eslint-disable-line react/jsx-no-literals */
+        icon: <IconOptionRow>{'3.'}</IconOptionRow>,
         desc: t('onboarding:writeSeed.blue.step3'),
       },
     ]
