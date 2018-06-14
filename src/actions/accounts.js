@@ -24,6 +24,7 @@ export const reorderAccounts: ReorderAccounts = payload => ({
 
 export type FetchAccounts = () => *
 export const fetchAccounts: FetchAccounts = () => {
+  db.init('accounts', []) // FIXME the "init" pattern to drop imo. a simple get()||[] is enough
   const accounts = db.get('accounts')
   return {
     type: 'SET_ACCOUNTS',

@@ -17,8 +17,9 @@ import debug from 'debug'
 
 import { CHECK_UPDATE_DELAY } from 'config/constants'
 
+import { hasPassword } from 'reducers/settings'
+import { lock } from 'reducers/application'
 import { setUpdateStatus } from 'reducers/update'
-
 import { addDevice, removeDevice, resetDevices } from 'actions/devices'
 
 import listenDevices from 'commands/listenDevices'
@@ -43,7 +44,7 @@ export function sendEvent(channel: string, msgType: string, data: any) {
 }
 
 let syncDeviceSub
-export default ({ store }: { store: Object, locked: boolean }) => {
+export default ({ store }: { store: Object }) => {
   // Ensure all sub-processes are killed before creating new ones (dev mode...)
   ipcRenderer.send('clean-processes')
 
@@ -79,6 +80,12 @@ export default ({ store }: { store: Object, locked: boolean }) => {
   }
 
   syncDevices()
+
+  ipcRenderer.on('lock', () => {
+    if (hasPassword(store.getState())) {
+      store.dispatch(lock())
+    }
+  })
 
   ipcRenderer.on('executeHttpQuery', (event: any, { networkArg, id }) => {
     network(networkArg).then(

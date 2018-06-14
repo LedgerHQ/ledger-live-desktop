@@ -29,7 +29,7 @@ const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) 
 const handleCloseWindow = w => e => {
   if (!forceClose) {
     e.preventDefault()
-
+    w.webContents.send('lock')
     if (w !== null) {
       w.hide()
     }
