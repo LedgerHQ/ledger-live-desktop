@@ -11,7 +11,7 @@ import moment from 'moment'
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
-import { enableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
+import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
 
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
@@ -81,6 +81,10 @@ async function init() {
         if (!isGlobalTabEnabled()) enableGlobalTab()
         logger.onTabKey(document.activeElement)
       }
+    })
+
+    window.addEventListener('click', () => {
+      if (isGlobalTabEnabled()) disableGlobalTab()
     })
   }
 }
