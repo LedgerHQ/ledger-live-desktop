@@ -3,6 +3,9 @@
 import React, { Component } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import styled from 'styled-components'
+import { translate } from 'react-i18next'
+
+import type { T } from 'types/common'
 
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
@@ -15,6 +18,7 @@ type Props = {
   account: Account,
   feePerByte: number,
   onChange: number => void,
+  t: T,
 }
 
 type FeeItem = {
@@ -104,14 +108,14 @@ class FeesField extends Component<
   }
 
   render() {
-    const { account, feePerByte, error, onChange } = this.props
+    const { account, feePerByte, error, onChange, t } = this.props
     const { items, selectedItem } = this.state
     const { units } = account.currency
 
     const satoshi = units[units.length - 1]
 
     return (
-      <GenericContainer error={error} help="fee per byte">
+      <GenericContainer error={error} help={t('app:send.steps.amount.unitPerByte')}>
         <Select width={156} options={items} value={selectedItem} onChange={this.onSelectChange} />
         <InputCurrency
           defaultUnit={satoshi}
@@ -120,18 +124,22 @@ class FeesField extends Component<
           value={feePerByte}
           onChange={onChange}
           onChangeFocus={this.onChangeFocus}
-          renderRight={<InputRight>{satoshi.code} per Byte</InputRight>}
+          renderRight={
+            <InputRight>
+              {t('app:send.steps.amount.unitPerByte', { unit: satoshi.code })}
+            </InputRight>
+          }
         />
       </GenericContainer>
     )
   }
 }
 
-export default (props: Props) => (
+export default translate()((props: Props) => (
   <WithFeesAPI
     currency={props.account.currency}
     renderError={error => <FeesField {...props} error={error} />}
     renderLoading={() => <FeesField {...props} />}
     render={fees => <FeesField {...props} fees={fees} />}
   />
-)
+))

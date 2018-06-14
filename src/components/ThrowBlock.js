@@ -5,9 +5,12 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { shell, remote } from 'electron'
 import qs from 'querystring'
+import { translate } from 'react-i18next'
 
 import { rgba } from 'styles/helpers'
 import db from 'helpers/db'
+
+import type { T } from 'types/common'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
@@ -16,6 +19,7 @@ import TranslatedError from './TranslatedError'
 
 type Props = {
   children: any,
+  t: T,
 }
 
 type State = {
@@ -79,6 +83,7 @@ ${error.stack}
 
   render() {
     const { error } = this.state
+    const { t } = this.props
     if (error) {
       return (
         <Container>
@@ -87,14 +92,14 @@ ${error.stack}
           </Inner>
           <Box horizontal flow={2}>
             <Button primary onClick={this.handleRestart}>
-              {'Restart app'}
+              {t('app:crash.restart')}
             </Button>
             <Button danger onClick={this.handleReset}>
-              {'Reset app files'}
+              {t('app:crash.reset')}
             </Button>
             <ExportLogsBtn />
             <Button primary onClick={this.handleCreateIssue}>
-              {'Create ticket'}
+              {t('app:crash.createTicket')}
             </Button>
           </Box>
         </Container>
@@ -104,4 +109,4 @@ ${error.stack}
   }
 }
 
-export default ThrowBlock
+export default translate()(ThrowBlock)

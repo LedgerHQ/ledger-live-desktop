@@ -211,7 +211,7 @@ class AddAccounts extends PureComponent<Props, State> {
             </ModalContent>
             {!hideFooter && (
               <ModalFooter horizontal align="center" justify="flex-end" style={{ height: 80 }}>
-                {StepFooter ? <StepFooter {...stepProps} /> : <Box>footer</Box>}
+                {StepFooter ? <StepFooter {...stepProps} /> : <Box />}
               </ModalFooter>
             )}
           </ModalBody>

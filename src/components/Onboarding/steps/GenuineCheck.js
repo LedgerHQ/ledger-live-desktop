@@ -134,7 +134,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>1.</IconOptionRow>
+                  <IconOptionRow>{'1.'}</IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step1.title')}</CardTitle>
                 </Box>
               </Box>
@@ -151,7 +151,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper isDisabled={!genuine.pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>2.</IconOptionRow>
+                  <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>
+                    {'2.'}
+                  </IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step2.title')}</CardTitle>
                 </Box>
               </Box>
@@ -171,7 +173,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
-                    3.
+                    {'3.'}
                   </IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step3.title')}</CardTitle>
                 </Box>

@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable react/jsx-no-literals */ // FIXME
+
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'

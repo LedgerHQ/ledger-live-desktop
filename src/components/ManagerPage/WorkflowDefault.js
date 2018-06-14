@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable react/jsx-no-literals */ // FIXME
+
 import React from 'react'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'

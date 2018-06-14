@@ -67,6 +67,7 @@ const AccountsList = ({
               isChecked={checkedIds.find(id => id === account.id) !== undefined}
               onClick={onToggleAccount}
               onAccountUpdate={onUpdateAccount}
+              t={t}
             />
           ))}
           {isLoading && (
