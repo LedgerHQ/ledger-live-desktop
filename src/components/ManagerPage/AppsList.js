@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/jsx-no-literals */ // FIXME
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
@@ -13,12 +13,13 @@ import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 
 import Box from 'components/base/Box'
-import Modal, { ModalBody } from 'components/base/Modal'
+import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
 import Progress from 'components/base/Progress'
 import Spinner from 'components/base/Spinner'
 import Button from 'components/base/Button'
+import Space from 'components/base/Space'
 
 import ExclamationCircle from 'icons/ExclamationCircle'
 import Update from 'icons/Update'
@@ -131,42 +132,60 @@ class AppsList extends PureComponent<Props, State> {
       <Modal
         isOpened={status !== 'idle' && status !== 'loading'}
         render={() => (
-          <ModalBody p={6} align="center" justify="center" style={{ height: 300 }}>
+          <ModalBody align="center" justify="center" style={{ height: 300 }}>
             {status === 'busy' || status === 'idle' ? (
-              <Box align="center" justify="center" flow={3}>
-                {mode === 'installing' ? <Update size={30} /> : <Trash size={30} />}
-                <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-                  {t(`app:manager.apps.${mode}`, { app })}
-                </Text>
-                <Box my={5} style={{ width: 250 }}>
-                  <Progress style={{ width: '100%' }} infinite />
-                </Box>
-              </Box>
+              <Fragment>
+                <ModalTitle>
+                  {mode === 'installing' ? <Update size={30} /> : <Trash size={30} />}
+                </ModalTitle>
+                <ModalContent>
+                  <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+                    {t(`app:manager.apps.${mode}`, { app })}
+                  </Text>
+                  <Box mt={6}>
+                    <Progress style={{ width: '100%' }} infinite />
+                  </Box>
+                </ModalContent>
+              </Fragment>
             ) : status === 'error' ? (
-              <Box align="center" justify="center" flow={3}>
-                <div>{'error happened'}</div>
-                {error}
-                <Button primary onClick={this.handleCloseModal}>
-                  close
-                </Button>
-              </Box>
+              <Fragment>
+                <ModalContent grow align="center" justify="center">
+                  <Box color="alertRed">
+                    <ExclamationCircle size={44} />
+                  </Box>
+                  <Box color="dark" mt={3} fontSize={6}>
+                    {error}
+                  </Box>
+                </ModalContent>
+                <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
+                  <Button primary onClick={this.handleCloseModal}>
+                    close
+                  </Button>
+                </ModalFooter>
+              </Fragment>
             ) : status === 'success' ? (
-              <Box align="center" justify="center" flow={3}>
-                <Box color="positiveGreen">
-                  <CheckCircle size={30} />
-                </Box>
-                <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-                  {t(
-                    `app:manager.apps.${
-                      mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'
-                    }`,
-                    { app },
-                  )}
-                </Text>
-                <Button primary onClick={this.handleCloseModal}>
-                  close
-                </Button>
-              </Box>
+              <Fragment>
+                <ModalTitle>
+                  <Box color="positiveGreen">
+                    <CheckCircle size={30} />
+                  </Box>
+                </ModalTitle>
+                <ModalContent>
+                  <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+                    {t(
+                      `app:manager.apps.${
+                        mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'
+                      }`,
+                      { app },
+                    )}
+                  </Text>
+                </ModalContent>
+                <ModalFooter horizontal justifyContent="flex-end">
+                  <Button primary onClick={this.handleCloseModal}>
+                    close
+                  </Button>
+                </ModalFooter>
+              </Fragment>
             ) : null}
           </ModalBody>
         )}
