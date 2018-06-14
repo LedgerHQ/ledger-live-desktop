@@ -10,7 +10,7 @@ import type { T } from 'types/common'
 
 import { updateGenuineCheck } from 'reducers/onboarding'
 
-import Box, { Card } from 'components/base/Box'
+import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
