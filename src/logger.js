@@ -49,27 +49,10 @@ const makeSerializableLog = (o: mixed) => {
 
 const logCmds = !__DEV__ || process.env.DEBUG_COMMANDS
 const logDb = !__DEV__ || process.env.DEBUG_DB
-const logClicks = !__DEV__ || process.env.DEBUG_CLICK_ELEMENT
 const logRedux = !__DEV__ || process.env.DEBUG_ACTION
 const logTabkey = !__DEV__ || process.env.DEBUG_TAB_KEY
 
 export default {
-  // tracks the user interactions (click, input focus/blur, what else?)
-
-  onClickElement: (role: string, roleData: ?Object) => {
-    const label = `👆 ${role}`
-    if (roleData) {
-      if (logClicks) {
-        console.log(label, roleData)
-      }
-      addLog('click', label, roleData)
-    } else {
-      if (logClicks) {
-        console.log(label)
-      }
-      addLog('click', label, roleData)
-    }
-  },
 
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
     if (logCmds) {

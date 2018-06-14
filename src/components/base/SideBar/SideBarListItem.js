@@ -31,7 +31,6 @@ class SideBarListItem extends PureComponent<Props> {
     } = this.props
     return (
       <Container
-        data-role="side-bar-item"
         isActive={!disabled && isActive}
         iconActiveColor={iconActiveColor}
         onClick={disabled ? null : onClick}
