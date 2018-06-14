@@ -160,7 +160,10 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('app:settings.profile.developerMode')}
             desc={t('app:settings.profile.developerModeDesc')}
           >
-            <CheckBox isChecked={settings.developerMode} onChange={this.handleDeveloperMode} />
+            <CheckBox
+              isChecked={settings.developerMode}
+              onChange={developerMode => saveSettings({ developerMode })}
+            />
           </Row>
           <Row
             title={t('app:settings.profile.reportErrors')}

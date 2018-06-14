@@ -2,13 +2,16 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-
+import { connect } from 'react-redux'
+import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
 import { Title, Description } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
+
+const mapDispatchToProps = { saveSettings }
 
 type State = {
   analyticsToggle: boolean,
@@ -17,9 +20,9 @@ type State = {
 }
 
 const INITIAL_STATE = {
-  analyticsToggle: false,
+  analyticsToggle: true,
   termsConditionsToggle: false,
-  sentryLogsToggle: false,
+  sentryLogsToggle: true,
 }
 
 class Analytics extends PureComponent<StepProps, State> {
@@ -100,7 +103,10 @@ class Analytics extends PureComponent<StepProps, State> {
   }
 }
 
-export default Analytics
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Analytics)
 
 export const AnalyticsText = styled(Box).attrs({
   ff: 'Open Sans|Regular',
