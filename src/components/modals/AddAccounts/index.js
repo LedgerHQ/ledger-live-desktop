@@ -10,6 +10,7 @@ import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
+import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import type { T, Device } from 'types/common'
 
 import { getCurrentDevice } from 'reducers/devices'
@@ -29,7 +30,7 @@ import StepFinish from './steps/04-step-finish'
 const createSteps = ({ t }: { t: T }) => [
   {
     id: 'chooseCurrency',
-    label: t('app:importAccounts.breadcrumb.informations'),
+    label: t('app:addAccounts.breadcrumb.informations'),
     component: StepChooseCurrency,
     footer: StepChooseCurrencyFooter,
     onBack: null,
@@ -37,7 +38,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'connectDevice',
-    label: t('app:importAccounts.breadcrumb.connectDevice'),
+    label: t('app:addAccounts.breadcrumb.connectDevice'),
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
@@ -45,7 +46,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'import',
-    label: t('app:importAccounts.breadcrumb.import'),
+    label: t('app:addAccounts.breadcrumb.import'),
     component: StepImport,
     footer: StepImportFooter,
     onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
@@ -53,7 +54,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'finish',
-    label: t('app:importAccounts.breadcrumb.finish'),
+    label: t('app:addAccounts.breadcrumb.finish'),
     component: StepFinish,
     footer: null,
     onBack: null,
@@ -91,7 +92,7 @@ export type StepProps = {
   isAppOpened: boolean,
   transitionTo: StepId => void,
   setState: any => void,
-  onClickImport: void => Promise<void>,
+  onClickAdd: void => Promise<void>,
   onCloseModal: void => void,
 
   // scan process
@@ -122,38 +123,39 @@ const INITIAL_STATE = {
   scanStatus: 'idle',
 }
 
-class ImportAccounts extends PureComponent<Props, State> {
+class AddAccounts extends PureComponent<Props, State> {
   state = INITIAL_STATE
   STEPS = createSteps({
     t: this.props.t,
   })
 
   transitionTo = stepId => {
+    const { currency } = this.state
     let nextState = { stepId }
     if (stepId === 'chooseCurrency') {
-      nextState = { ...INITIAL_STATE }
+      nextState = { ...INITIAL_STATE, currency }
     }
     this.setState(nextState)
   }
 
-  handleClickImport = async () => {
+  handleClickAdd = async () => {
     const { addAccount } = this.props
     const { scannedAccounts, checkedAccountsIds } = this.state
     const accountsIdsMap = checkedAccountsIds.reduce((acc, cur) => {
       acc[cur] = true
       return acc
     }, {})
-    const accountsToImport = scannedAccounts.filter(account => accountsIdsMap[account.id] === true)
-    for (let i = 0; i < accountsToImport.length; i++) {
+    const accountsToAdd = scannedAccounts.filter(account => accountsIdsMap[account.id] === true)
+    for (let i = 0; i < accountsToAdd.length; i++) {
       await idleCallback()
-      addAccount(accountsToImport[i])
+      addAccount(accountsToAdd[i])
     }
     this.transitionTo('finish')
   }
 
   handleCloseModal = () => {
     const { closeModal } = this.props
-    closeModal('importAccounts')
+    closeModal(MODAL_ADD_ACCOUNTS)
   }
 
   render() {
@@ -172,7 +174,7 @@ class ImportAccounts extends PureComponent<Props, State> {
     const step = this.STEPS[stepIndex]
 
     if (!step) {
-      throw new Error(`ImportAccountsModal: step ${stepId} doesn't exists`)
+      throw new Error(`AddAccountsModal: step ${stepId} doesn't exists`)
     }
 
     const { component: StepComponent, footer: StepFooter, hideFooter, onBack } = step
@@ -187,7 +189,7 @@ class ImportAccounts extends PureComponent<Props, State> {
       scanStatus,
       err,
       isAppOpened,
-      onClickImport: this.handleClickImport,
+      onClickAdd: this.handleClickAdd,
       onCloseModal: this.handleCloseModal,
       transitionTo: this.transitionTo,
       setState: (...args) => this.setState(...args),
@@ -195,14 +197,14 @@ class ImportAccounts extends PureComponent<Props, State> {
 
     return (
       <Modal
-        name="importAccounts"
+        name={MODAL_ADD_ACCOUNTS}
         refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
             <SyncSkipUnderPriority priority={100} />
             <ModalTitle onBack={onBack ? () => onBack(stepProps) : void 0}>
-              {t('app:importAccounts.title')}
+              {t('app:addAccounts.title')}
             </ModalTitle>
             <ModalContent>
               <Breadcrumb mb={6} currentStep={stepIndex} items={this.STEPS} />
@@ -226,7 +228,7 @@ export default compose(
     mapDispatchToProps,
   ),
   translate(),
-)(ImportAccounts)
+)(AddAccounts)
 
 function idleCallback() {
   return new Promise(resolve => window.requestIdleCallback(resolve))

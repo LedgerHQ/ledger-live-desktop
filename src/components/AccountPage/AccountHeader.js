@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import Box from 'components/base/Box'
+import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
 import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
 
@@ -22,7 +23,7 @@ const AccountName = styled(Text).attrs({
   ff: 'Museo Sans',
   fontSize: 7,
 })`
-  line-height: 1;
+  line-height: 1.1;
 `
 
 type Props = {
@@ -33,13 +34,15 @@ class AccountHeader extends PureComponent<Props> {
   render() {
     const { account } = this.props
     return (
-      <Box horizontal align="center" flow={2}>
+      <Box horizontal align="center" flow={2} grow>
         <Box color={account.currency.color}>
           <CryptoCurrencyIcon currency={account.currency} size={24} />
         </Box>
-        <Box>
+        <Box grow>
           <CurName>{account.currency.name}</CurName>
-          <AccountName>{account.name}</AccountName>
+          <AccountName>
+            <Ellipsis>{account.name}</Ellipsis>
+          </AccountName>
         </Box>
       </Box>
     )

@@ -1,7 +1,5 @@
 // @flow
 
-import { rgba } from 'styles/helpers'
-
 export const space = [0, 5, 10, 15, 20, 30, 40, 50, 70]
 export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32]
 export const radii = [0, 4]
@@ -95,7 +93,6 @@ export default {
     topBarHeight: 58,
     sideBarWidth: 230,
   },
-  focusBoxShadow: `${rgba(colors.wallet, 0.2)} 0 2px 5px`,
   radii,
   fontFamilies,
   fontSizes,

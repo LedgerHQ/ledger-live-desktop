@@ -40,12 +40,12 @@ class EmptyStateAccount extends PureComponent<Props, *> {
           height="89"
         />
         <Box mt={5} alignItems="center">
-          <Title>{t('account:emptyState.title')}</Title>
-          <Description>{t('account:emptyState.desc')}</Description>
+          <Title>{t('app:account.emptyState.title')}</Title>
+          <Description>{t('app:account.emptyState.desc')}</Description>
           <Button mt={3} padded primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
             <Box horizontal flow={1} alignItems="center">
               <IconReceive size={12} />
-              <Box>{t('account:emptyState.buttons.receiveFunds')}</Box>
+              <Box>{t('app:account.emptyState.buttons.receiveFunds')}</Box>
             </Box>
           </Button>
         </Box>

@@ -70,11 +70,11 @@ class ActivityIndicatorInner extends Component<Props, State> {
   render() {
     const { isPending, isError, t } = this.props
     const { hasClicked, isFirstSync } = this.state
-    const isDisabled = hasClicked || isError
+    const isDisabled = isFirstSync || hasClicked || isError
     const isRotating = isPending && (hasClicked || isFirstSync)
 
     return (
-      <ItemContainer isDisabled={isDisabled} onClick={isDisabled ? undefined : this.handleRefresh}>
+      <ItemContainer disabled={isDisabled} onClick={isDisabled ? undefined : this.handleRefresh}>
         <Rotating
           size={16}
           isRotating={isRotating}

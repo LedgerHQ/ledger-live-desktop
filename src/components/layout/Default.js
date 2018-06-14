@@ -23,8 +23,8 @@ import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/MainSideBar'
 import TopBar from 'components/TopBar'
 
-const Container = styled(GrowScroll).attrs({
-  p: 6,
+const Main = styled(GrowScroll).attrs({
+  px: 6,
 })`
   outline: none;
   padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[7]}px;
@@ -76,13 +76,13 @@ class Default extends Component<Props> {
 
             <Box shrink grow bg="lightGrey" color="grey" relative>
               <TopBar />
-              <Container innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
+              <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
                 <Route path="/" exact component={DashboardPage} />
                 <Route path="/settings" component={SettingsPage} />
                 <Route path="/manager" component={ManagerPage} />
                 <Route path="/exchange" component={ExchangePage} />
                 <Route path="/account/:id" component={AccountPage} />
-              </Container>
+              </Main>
             </Box>
           </Box>
         </IsUnlocked>

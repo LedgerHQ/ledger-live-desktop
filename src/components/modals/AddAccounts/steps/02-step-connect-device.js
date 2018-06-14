@@ -19,7 +19,7 @@ function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) 
       <Box align="center" mb={6}>
         <CurrencyCircleIcon mb={3} size={40} currency={currency} />
         <Box ff="Open Sans" fontSize={4} color="dark" textAlign="center" style={{ width: 370 }}>
-          <Trans i18nKey="importAccounts:connectDevice.desc" parent="div">
+          <Trans i18nKey="app:addAccounts.connectDevice.desc" parent="div">
             {`You're about to import your `}
             <strong style={{ fontWeight: 'bold' }}>{`${currency.name} (${
               currency.ticker

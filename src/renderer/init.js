@@ -11,6 +11,8 @@ import moment from 'moment'
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
+import { enableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
+
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
@@ -29,14 +31,7 @@ import 'styles/global'
 
 const rootNode = document.getElementById('app')
 
-// Github like focus style:
-// - focus states are not visible by default
-// - first time user hit tab, enable global tab to see focus states
-let IS_GLOBAL_TAB_ENABLED = false
 const TAB_KEY = 9
-
-export const isGlobalTabEnabled = () => IS_GLOBAL_TAB_ENABLED
-export const enableGlobalTab = () => (IS_GLOBAL_TAB_ENABLED = true)
 
 async function init() {
   if (process.env.LEDGER_RESET_ALL) {
@@ -59,18 +54,14 @@ async function init() {
 
   const state = store.getState()
   const language = getLanguage(state)
-  const locked = isLocked(state)
-  sentry(() => sentryLogsBooleanSelector(store.getState()))
-
   moment.locale(language)
+
+  sentry(() => sentryLogsBooleanSelector(store.getState()))
 
   // FIXME IMO init() really should only be for window. any other case is a hack!
   const isMainWindow = remote.getCurrentWindow().name === 'MainWindow'
 
-  if (!locked) {
-    // Init accounts with defaults if needed
-    db.init('accounts', [])
-
+  if (!isLocked(store.getState())) {
     await store.dispatch(fetchAccounts())
   }
 
@@ -80,37 +71,15 @@ async function init() {
   if (isMainWindow) {
     webFrame.setVisualZoomLevelLimits(1, 1)
 
-    events({ store, locked })
+    events({ store })
 
     const libcoreVersion = await libcoreGetVersion.send().toPromise()
     logger.log('libcore', libcoreVersion)
-
-    // DOM elements can have a data-role that identify the UI entity
-    // and that allow us to track interactions with this.
-    window.addEventListener('click', ({ target }) => {
-      const { dataset } = target
-      if (dataset) {
-        const { role, roledata } = dataset
-        if (role) {
-          logger.onClickElement(role, roledata)
-        }
-      }
-    })
 
     window.addEventListener('keydown', (e: SyntheticKeyboardEvent<any>) => {
       if (e.which === TAB_KEY) {
         if (!isGlobalTabEnabled()) enableGlobalTab()
         logger.onTabKey(document.activeElement)
-      }
-    })
-
-    window.addEventListener('click', ({ target }) => {
-      const { dataset } = target
-      if (dataset) {
-        const { role, roledata } = dataset
-        if (role) {
-          logger.onClickElement(role, roledata)
-        }
       }
     })
   }

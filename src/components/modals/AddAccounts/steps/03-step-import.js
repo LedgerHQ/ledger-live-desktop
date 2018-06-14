@@ -1,19 +1,16 @@
 // @flow
 
-import React, { PureComponent } from 'react'
-import styled from 'styled-components'
+import React, { PureComponent, Fragment } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
 
 import { getBridgeForCurrency } from 'bridge'
 
 import Box from 'components/base/Box'
+import CurrencyBadge from 'components/base/CurrencyBadge'
 import Button from 'components/base/Button'
-import Spinner from 'components/base/Spinner'
-import FakeLink from 'components/base/FakeLink'
+import AccountsList from 'components/base/AccountsList'
 import IconExchange from 'icons/Exchange'
-
-import AccountRow from '../AccountRow'
 
 import type { StepProps } from '../index'
 
@@ -101,7 +98,7 @@ class StepImport extends PureComponent<StepProps> {
     }
   }
 
-  handleAccountUpdate = (updatedAccount: Account) => {
+  handleUpdateAccount = (updatedAccount: Account) => {
     const { scannedAccounts, setState } = this.props
     setState({
       scannedAccounts: scannedAccounts.map(account => {
@@ -123,7 +120,15 @@ class StepImport extends PureComponent<StepProps> {
   handleUnselectAll = () => this.props.setState({ checkedAccountsIds: [] })
 
   render() {
-    const { scanStatus, err, scannedAccounts, checkedAccountsIds, existingAccounts, t } = this.props
+    const {
+      scanStatus,
+      currency,
+      err,
+      scannedAccounts,
+      checkedAccountsIds,
+      existingAccounts,
+      t,
+    } = this.props
 
     const importableAccounts = scannedAccounts.filter(acc => {
       if (acc.operations.length <= 0) {
@@ -139,126 +144,66 @@ class StepImport extends PureComponent<StepProps> {
       return existingAccounts.find(a => a.id === acc.id) === undefined
     })
 
-    const isAllSelected = scannedAccounts.filter(acc => acc.operations.length > 0).every(acc => {
-      const isChecked = !!checkedAccountsIds.find(id => acc.id === id)
-      const isImported = !!existingAccounts.find(a => acc.id === a.id)
-      return isChecked || isImported
+    const importableAccountsListTitle = t('app:addAccounts.accountToImportSubtitle', {
+      count: importableAccounts.length,
     })
 
+    const importableAccountsEmpty = `We didnt find any ${
+      currency ? ` ${currency.name}}` : ''
+    } account to import.`
+
     return (
-      <Box>
-        {err && <Box shrink>{err.message}</Box>}
-
+      <Fragment>
         <Box flow={5}>
-          {(!!importableAccounts.length || scanStatus === 'scanning') && (
-            <Box>
-              {!!importableAccounts.length && (
-                <Box horizontal mb={3} align="center">
-                  <Box
-                    ff="Open Sans|Bold"
-                    color="dark"
-                    fontSize={2}
-                    style={{ textTransform: 'uppercase' }}
-                  >
-                    {t('app:importAccounts.accountToImportSubtitle', {
-                      count: importableAccounts.length,
-                    })}
-                  </Box>
-                  <FakeLink
-                    ml="auto"
-                    onClick={isAllSelected ? this.handleUnselectAll : this.handleSelectAll}
-                    fontSize={3}
-                  >
-                    {isAllSelected
-                      ? t('app:importAccounts.unselectAll')
-                      : t('app:importAccounts.selectAll')}
-                  </FakeLink>
-                </Box>
-              )}
-
-              <Box flow={2}>
-                {importableAccounts.map(account => {
-                  const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
-                  const existingAccount = existingAccounts.find(a => a.id === account.id)
-                  const isDisabled = existingAccount !== undefined
-                  return (
-                    <AccountRow
-                      key={account.id}
-                      account={existingAccount || account}
-                      isChecked={isChecked}
-                      isDisabled={isDisabled}
-                      onClick={this.handleToggleAccount}
-                      onAccountUpdate={this.handleAccountUpdate}
-                    />
-                  )
-                })}
-
-                {scanStatus === 'scanning' && (
-                  <LoadingRow>
-                    <Spinner color="grey" size={16} />
-                  </LoadingRow>
-                )}
-              </Box>
-            </Box>
-          )}
-
-          {creatableAccounts.length > 0 && (
-            <Box>
-              <Box horizontal mb={3} align="center">
-                <Box
-                  ff="Open Sans|Bold"
-                  color="dark"
-                  fontSize={2}
-                  style={{ textTransform: 'uppercase' }}
-                >
-                  {t('app:importAccounts.createNewAccount')}
-                </Box>
-              </Box>
-              <AccountRow
-                account={creatableAccounts[0]}
-                isChecked={
-                  checkedAccountsIds.find(id => id === creatableAccounts[0].id) !== undefined
-                }
-                onClick={this.handleToggleAccount}
-                onAccountUpdate={this.handleAccountUpdate}
-              />
-            </Box>
-          )}
+          <AccountsList
+            title={importableAccountsListTitle}
+            emptyText={importableAccountsEmpty}
+            accounts={importableAccounts}
+            checkedIds={checkedAccountsIds}
+            onToggleAccount={this.handleToggleAccount}
+            onUpdateAccount={this.handleUpdateAccount}
+            onSelectAll={this.handleSelectAll}
+            onUnselectAll={this.handleUnselectAll}
+            isLoading={scanStatus === 'scanning'}
+          />
+          <AccountsList
+            title={t('app:addAccounts.createNewAccount')}
+            emptyText={
+              'You cannot create a new account because your last account has no operations'
+            }
+            accounts={creatableAccounts}
+            checkedIds={checkedAccountsIds}
+            onToggleAccount={this.handleToggleAccount}
+            onUpdateAccount={this.handleUpdateAccount}
+            isLoading={scanStatus === 'scanning'}
+          />
         </Box>
 
-        <Box horizontal mt={2}>
-          {['error'].includes(scanStatus) && (
+        {err && (
+          <Box shrink>
+            {err.message}
             <Button small outline onClick={this.handleRetry}>
               <Box horizontal flow={2} align="center">
                 <IconExchange size={13} />
-                <span>{t('app:importAccounts.retrySync')}</span>
+                <span>{t('app:addAccounts.retrySync')}</span>
               </Box>
             </Button>
-          )}
-        </Box>
-      </Box>
+          </Box>
+        )}
+      </Fragment>
     )
   }
 }
 
 export default StepImport
 
-export const LoadingRow = styled(Box).attrs({
-  horizontal: true,
-  borderRadius: 1,
-  px: 3,
-  align: 'center',
-  justify: 'center',
-})`
-  height: 48px;
-  border: 1px dashed ${p => p.theme.colors.fog};
-`
-
 export const StepImportFooter = ({
   scanStatus,
-  onClickImport,
+  onClickAdd,
+  onCloseModal,
   checkedAccountsIds,
   scannedAccounts,
+  currency,
   t,
 }: StepProps) => {
   const willCreateAccount = checkedAccountsIds.some(id => {
@@ -266,32 +211,38 @@ export const StepImportFooter = ({
     return account && account.operations.length === 0
   })
 
-  const willImportAccounts = checkedAccountsIds.some(id => {
+  const willAddAccounts = checkedAccountsIds.some(id => {
     const account = scannedAccounts.find(a => a.id === id)
     return account && account.operations.length > 0
   })
 
-  const importedAccountsCount = checkedAccountsIds.filter(id => {
+  const addedAccountsCount = checkedAccountsIds.filter(id => {
     const account = scannedAccounts.find(acc => acc.id === id)
     return account && account.operations.length > 0
   }).length
 
   const ctaWording =
-    willCreateAccount && willImportAccounts
-      ? `${t('app:importAccounts.cta.create')} / ${t('app:importAccounts.cta.import', {
-          count: importedAccountsCount,
-        })}`
-      : willCreateAccount
-        ? t('app:importAccounts.cta.create')
-        : t('app:importAccounts.cta.import', { count: importedAccountsCount })
+    scanStatus === 'scanning'
+      ? t('app:common.sync.syncing')
+      : willCreateAccount && willAddAccounts
+        ? `${t('app:addAccounts.cta.create')} / ${t('app:addAccounts.cta.import', {
+            count: addedAccountsCount,
+          })}`
+        : willCreateAccount
+          ? t('app:addAccounts.cta.create')
+          : willAddAccounts
+            ? t('app:addAccounts.cta.import', { count: addedAccountsCount })
+            : t('app:common.close')
+
+  const willClose = !willCreateAccount && !willAddAccounts
+  const onClick = willClose ? onCloseModal : onClickAdd
 
   return (
-    <Button
-      primary
-      disabled={scanStatus !== 'finished' || checkedAccountsIds.length === 0}
-      onClick={() => onClickImport()}
-    >
-      {ctaWording}
-    </Button>
+    <Fragment>
+      {currency && <CurrencyBadge mr="auto" currency={currency} />}
+      <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
+        {ctaWording}
+      </Button>
+    </Fragment>
   )
 }

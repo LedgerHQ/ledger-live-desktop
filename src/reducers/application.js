@@ -4,7 +4,9 @@ import { handleActions, createAction } from 'redux-actions'
 
 import { hasPassword } from 'reducers/settings'
 
-export type ApplicationState = {}
+export type ApplicationState = {
+  isLocked?: boolean,
+}
 
 const state: ApplicationState = {}
 
@@ -15,7 +17,7 @@ const handlers = {
   }),
 }
 
-// Actions
+// Actions // FIXME why isn't this in actions/*
 
 export const unlock = createAction('APPLICATION_SET_DATA', () => ({ isLocked: false }))
 export const lock = createAction('APPLICATION_SET_DATA', () => ({ isLocked: true }))
@@ -23,6 +25,7 @@ export const lock = createAction('APPLICATION_SET_DATA', () => ({ isLocked: true
 // Selectors
 
 export const isLocked = (state: Object) =>
+  // FIXME why!?
   state.application.isLocked === undefined ? hasPassword(state) : state.application.isLocked
 
 // Exporting reducer

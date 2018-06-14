@@ -79,6 +79,9 @@ const mapStateToProps = (state: State, props: OwnProps) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
   const fromExchange = currencySettingsSelector(state, { currency }).exchange
   const toExchange = counterValueExchangeSelector(state)
+
+  // FIXME this make the component not working with "Pure". is there a way we can calculate here whatever needs to be?
+  // especially the value comes from props!
   const getCounterValue = value =>
     CounterValues.calculateWithIntermediarySelector(state, {
       from: currency,
@@ -87,8 +90,8 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       toExchange,
       to: counterValueCurrency,
       value,
+      disableRounding: true,
     })
-
   const getReverseCounterValue = value =>
     CounterValues.reverseWithIntermediarySelector(state, {
       from: currency,
@@ -130,10 +133,15 @@ export class RequestAmount extends PureComponent<Props> {
     }
   }
 
+  onLeftChange = this.handleChangeAmount('left')
+  onRightChange = this.handleChangeAmount('right')
+
   renderInputs(containerProps: Object) {
+    // TODO move this inlined into render() for less spaghetti
     const { value, account, rightCurrency, getCounterValue, canBeSpent } = this.props
     const right = getCounterValue(value) || 0
     const rightUnit = rightCurrency.units[0]
+    // FIXME: no way InputCurrency pure can work here. inlined InputRight (should be static func?), inline containerProps object..
     return (
       <Box horizontal grow shrink>
         <InputCurrency
@@ -141,7 +149,7 @@ export class RequestAmount extends PureComponent<Props> {
           containerProps={containerProps}
           defaultUnit={account.unit}
           value={value}
-          onChange={this.handleChangeAmount('left')}
+          onChange={this.onLeftChange}
           renderRight={<InputRight>{account.unit.code}</InputRight>}
         />
         <InputCenter>=</InputCenter>
@@ -149,9 +157,10 @@ export class RequestAmount extends PureComponent<Props> {
           containerProps={containerProps}
           defaultUnit={rightUnit}
           value={right}
-          onChange={this.handleChangeAmount('right')}
+          onChange={this.onRightChange}
           renderRight={<InputRight>{rightUnit.code}</InputRight>}
           showAllDigits
+          subMagnitude={3}
         />
       </Box>
     )

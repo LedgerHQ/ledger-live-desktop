@@ -10,18 +10,19 @@ export default styled(Tabbable).attrs({
   px: 3,
   ml: 0,
   alignItems: 'center',
-  cursor: p => (p.isDisabled ? 'default' : 'pointer'),
+  cursor: p => (p.disabled ? 'default' : 'pointer'),
   horizontal: true,
   borderRadius: 1,
 })`
   height: 40px;
+  pointer-events: ${p => (p.disabled ? 'none' : 'unset')};
 
   &:hover {
-    color: ${p => (p.isDisabled ? '' : p.theme.colors.dark)};
-    background: ${p => (p.isDisabled ? '' : rgba(p.theme.colors.fog, 0.2))};
+    color: ${p => (p.disabled ? '' : p.theme.colors.dark)};
+    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.2))};
   }
 
   &:active {
-    background: ${p => (p.isDisabled ? '' : rgba(p.theme.colors.fog, 0.3))};
+    background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.3))};
   }
 `
