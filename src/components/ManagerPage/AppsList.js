@@ -15,6 +15,7 @@ import Modal, { ModalBody } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
 import Progress from 'components/base/Progress'
+import Spinner from 'components/base/Spinner'
 
 import ExclamationCircle from 'icons/ExclamationCircle'
 import Update from 'icons/Update'
@@ -178,7 +179,7 @@ class AppsList extends PureComponent<Props, State> {
 
   renderList() {
     const { appsList } = this.state
-    return (
+    return appsList.length > 0 ? (
       <Box>
         <AppSearchBar list={appsList}>
           {items => (
@@ -197,6 +198,10 @@ class AppsList extends PureComponent<Props, State> {
           )}
         </AppSearchBar>
         {this.renderModal()}
+      </Box>
+    ) : (
+      <Box align="center" justify="center">
+        <Spinner size={50} />
       </Box>
     )
   }
