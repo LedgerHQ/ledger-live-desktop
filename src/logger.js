@@ -53,7 +53,6 @@ const logRedux = !__DEV__ || process.env.DEBUG_ACTION
 const logTabkey = !__DEV__ || process.env.DEBUG_TAB_KEY
 
 export default {
-
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
     if (logCmds) {
       switch (type) {
