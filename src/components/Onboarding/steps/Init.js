@@ -1,7 +1,6 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { shell } from 'electron'
 import { connect } from 'react-redux'
 import { colors } from 'styles/theme'
 
@@ -22,7 +21,7 @@ const mapDispatchToProps = { flowType }
 
 class Init extends PureComponent<StepProps, *> {
   render() {
-    const { nextStep, t } = this.props
+    const { t, flowType, jumpStep } = this.props
 
     const optionCards = [
       {
@@ -30,8 +29,8 @@ class Init extends PureComponent<StepProps, *> {
         icon: <IconPlus size={20} />,
         title: t('onboarding:init.newDevice.title'),
         onClick: () => {
-          nextStep()
-          this.props.flowType('newDevice')
+          jumpStep('selectDevice')
+          flowType('newDevice')
         },
       },
       {
@@ -39,8 +38,8 @@ class Init extends PureComponent<StepProps, *> {
         icon: <IconRecover size={20} />,
         title: t('onboarding:init.restoreDevice.title'),
         onClick: () => {
-          nextStep()
-          this.props.flowType('restoreDevice')
+          jumpStep('selectDevice')
+          flowType('restoreDevice')
         },
       },
       {
@@ -48,8 +47,8 @@ class Init extends PureComponent<StepProps, *> {
         icon: <IconCheck size={20} />,
         title: t('onboarding:init.initializedDevice.title'),
         onClick: () => {
-          nextStep()
-          this.props.flowType('initializedDevice')
+          jumpStep('selectDevice')
+          flowType('initializedDevice')
         },
       },
       {
@@ -57,15 +56,15 @@ class Init extends PureComponent<StepProps, *> {
         icon: <IconExternalLink size={20} />,
         title: t('onboarding:init.noDevice.title'),
         onClick: () => {
-          shell.openExternal('https://www.ledger.fr/')
-          this.props.flowType('noDevice')
+          jumpStep('noDevice')
+          flowType('noDevice')
         },
       },
     ]
 
     return (
-      <Box sticky pt={130}>
-        <Box align="center" justifyContent="center">
+      <Box sticky justifyContent="center">
+        <Box align="center">
           <Box color="wallet">
             <IconUser size={36} />
           </Box>
@@ -117,6 +116,7 @@ const InitCardContainer = styled(Box).attrs({
   border: 1px solid ${p => p.theme.colors.fog};
   width: 530px;
   height: 70px;
+  transition: all ease-in-out 0.2s;
   &:hover {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);

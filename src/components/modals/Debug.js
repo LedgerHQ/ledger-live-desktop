@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/jsx-no-literals */
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import last from 'lodash/last'
 import React, { Component } from 'react'

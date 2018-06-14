@@ -143,11 +143,11 @@ class StepperNumber extends PureComponent<Props, State> {
     return (
       <Container>
         <Btn onMouseDown={!isMin ? this.handleMouseDown('decrement') : undefined} disabled={isMin}>
-          -
+          {'-'}
         </Btn>
         <Num>{value}</Num>
         <Btn onMouseDown={!isMax ? this.handleMouseDown('increment') : undefined} disabled={isMax}>
-          +
+          {'+'}
         </Btn>
       </Container>
     )

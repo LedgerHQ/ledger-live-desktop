@@ -92,7 +92,7 @@ class MainSideBar extends PureComponent<Props> {
             <SideBarListItem
               label={t('app:dashboard.title')}
               icon={IconPieChart}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
               isActive={pathname === '/'}
               hasNotif={updateStatus === 'downloaded'}
@@ -100,28 +100,28 @@ class MainSideBar extends PureComponent<Props> {
             <SideBarListItem
               label={t('app:send.title')}
               icon={IconSend}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleOpenSendModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
               label={t('app:receive.title')}
               icon={IconReceive}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleOpenReceiveModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
               label={t('app:sidebar.manager')}
               icon={IconManager}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleClickManager}
               isActive={pathname === '/manager'}
             />
             <SideBarListItem
               label={t('app:sidebar.exchange')}
               icon={IconExchange}
-              iconActiveColor={'wallet'}
+              iconActiveColor="wallet"
               onClick={this.handleClickExchange}
               isActive={pathname === '/exchange'}
             />

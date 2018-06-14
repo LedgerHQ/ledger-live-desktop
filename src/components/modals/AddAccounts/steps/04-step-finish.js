@@ -8,15 +8,15 @@ import IconCheckCircle from 'icons/CheckCircle'
 
 import type { StepProps } from '../index'
 
-function StepFinish({ onCloseModal }: StepProps) {
+function StepFinish({ onCloseModal, t }: StepProps) {
   return (
     <Box align="center" py={6}>
       <Box color="positiveGreen" mb={4}>
         <IconCheckCircle size={40} />
       </Box>
-      <Box mb={4}>{'Great success!'}</Box>
+      <Box mb={4}>{t('app:addAccounts.success')}</Box>
       <Button primary onClick={onCloseModal}>
-        {'Close'}
+        {t('app:common.close')}
       </Button>
     </Box>
   )

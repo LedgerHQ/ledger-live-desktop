@@ -12,6 +12,7 @@ import type { T } from 'types/common'
 import type { SaveSettings } from 'actions/settings'
 
 import { saveSettings } from 'actions/settings'
+import { accountsSelector } from 'reducers/accounts'
 
 import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
@@ -25,6 +26,7 @@ import SectionAbout from './sections/About'
 // maybe even each single settings row should be connected!!
 const mapStateToProps = state => ({
   settings: state.settings,
+  accountsCount: accountsSelector(state).length,
 })
 
 const mapDispatchToProps = {
@@ -38,6 +40,7 @@ type Props = {
   match: Match,
   saveSettings: SaveSettings,
   settings: Settings,
+  accountsCount: number,
   t: T,
 }
 
@@ -102,7 +105,7 @@ class SettingsPage extends PureComponent<Props, State> {
   }
 
   render() {
-    const { match, settings, t, i18n, saveSettings } = this.props
+    const { match, settings, t, i18n, saveSettings, accountsCount } = this.props
     const { tab } = this.state
     const props = {
       t,
@@ -112,15 +115,16 @@ class SettingsPage extends PureComponent<Props, State> {
     }
 
     const defaultItem = this._items[0]
+    const items = this._items.filter(item => item.key !== 'currencies' || accountsCount > 0)
 
     return (
       <Box>
         <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={5}>
           {t('app:settings.title')}
         </Box>
-        <Pills mb={4} items={this._items} activeKey={tab.key} onChange={this.handleChangeTab} />
+        <Pills mb={4} items={items} activeKey={tab.key} onChange={this.handleChangeTab} />
         <Switch>
-          {this._items.map(i => (
+          {items.map(i => (
             <Route key={i.key} path={`${match.url}/${i.key}`} render={i.value && i.value(props)} />
           ))}
           <Route render={defaultItem.value && defaultItem.value(props)} />

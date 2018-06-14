@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable react/jsx-no-literals */ // FIXME
+
 import React from 'react'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
@@ -8,7 +10,6 @@ import type { Device, T } from 'types/common'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
-import Space from 'components/base/Space'
 import Text from 'components/base/Text'
 import Spinner from 'components/base/Spinner'
 
@@ -97,13 +98,15 @@ type Props = {
   t: T,
   device: ?Device,
   deviceInfo: ?DeviceInfo,
-  dashboardError: ?Error,
+  errors: {
+    dashboardError: ?Error,
+    genuineError: ?Error,
+  },
   isGenuine: boolean,
 }
 
-const WorkflowDefault = ({ device, deviceInfo, dashboardError, isGenuine, t }: Props) => (
-  <Box align="center">
-    <Space of={152} />
+const WorkflowDefault = ({ device, deviceInfo, errors, isGenuine, t }: Props) => (
+  <Box align="center" justify="center" sticky>
     <Box align="center" style={{ maxWidth: 460, padding: '0 10px' }}>
       <img
         src={i('logos/connectDevice.png')}
@@ -117,7 +120,7 @@ const WorkflowDefault = ({ device, deviceInfo, dashboardError, isGenuine, t }: P
         {t('app:manager.device.desc')}
       </Text>
     </Box>
-    <Box flow={4} style={{ maxWidth: 460, padding: '60px 10px 0' }}>
+    <Box flow={4} style={{ maxWidth: 460, padding: '60px 10px 0' }} ff="Open Sans|Regular">
       {/* DEVICE CHECK */}
       <Step validated={!!device}>
         <StepContent>
@@ -138,7 +141,7 @@ const WorkflowDefault = ({ device, deviceInfo, dashboardError, isGenuine, t }: P
       </Step>
 
       {/* DASHBOARD CHECK */}
-      <Step validated={!!device && !!deviceInfo} hasErrors={!!device && !!dashboardError}>
+      <Step validated={!!device && !!deviceInfo} hasErrors={!!device && !!errors.dashboardError}>
         <StepContent>
           <StepIcon>
             <WrapperIconCurrency>
@@ -152,14 +155,21 @@ const WorkflowDefault = ({ device, deviceInfo, dashboardError, isGenuine, t }: P
               {' on your device'}
             </Trans>
           </Box>
-          <StepCheck checked={!!device && !!deviceInfo} hasErrors={!!device && !!dashboardError} />
+          <StepCheck
+            checked={!!device && !!deviceInfo}
+            hasErrors={!!device && !!errors.dashboardError}
+          />
         </StepContent>
       </Step>
 
       {/* GENUINE CHECK */}
       <Step
-        validated={(!!device && !isNull(isGenuine) && isGenuine) || undefined}
-        hasErrors={(!!device && !isNull(isGenuine) && !isGenuine) || undefined}
+        validated={
+          (!!device && !isNull(isGenuine) && isGenuine && !errors.genuineError) || undefined
+        }
+        hasErrors={
+          (!!device && !isNull(isGenuine) && !isGenuine) || errors.genuineError || undefined
+        }
       >
         <StepContent>
           <StepIcon>

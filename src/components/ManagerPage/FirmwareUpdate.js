@@ -1,4 +1,6 @@
 // @flow
+/* eslint-disable react/jsx-no-literals */ // FIXME
+
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'
@@ -102,7 +104,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     const { latestFirmware } = this.state
 
     return (
-      <Card px={4} py={25}>
+      <Card p={4}>
         <Box horizontal align="center" flow={2}>
           <Box color="dark">
             <NanoS size={30} />

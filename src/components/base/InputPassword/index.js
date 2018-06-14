@@ -14,6 +14,7 @@ import Box from 'components/base/Box'
 import Input from 'components/base/Input'
 
 import IconEye from 'icons/Eye'
+import IconEyeOff from 'icons/EyeOff'
 
 const InputRight = styled(Box).attrs({
   color: 'grey',
@@ -99,7 +100,7 @@ class InputPassword extends PureComponent<Props, State> {
           onChange={this.handleChange}
           renderRight={
             <InputRight onClick={this.toggleInputType}>
-              <IconEye size={16} />
+              {inputType === 'password' ? <IconEye size={16} /> : <IconEyeOff size={16} />}
             </InputRight>
           }
         />

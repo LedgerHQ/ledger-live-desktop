@@ -155,7 +155,7 @@ export class RequestAmount extends PureComponent<Props> {
           onChange={this.onLeftChange}
           renderRight={<InputRight>{account.unit.code}</InputRight>}
         />
-        <InputCenter>=</InputCenter>
+        <InputCenter>{'='}</InputCenter>
         <InputCurrency
           containerProps={containerProps}
           defaultUnit={rightUnit}

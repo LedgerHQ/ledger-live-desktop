@@ -42,6 +42,13 @@ const SearchBarWrapper = styled(Box).attrs({
   margin: 0 0 20px 0;
   background-color: white;
   padding: 0 13px;
+
+  ${p =>
+    p.focused
+      ? `
+    border: 1px solid #6490f1;
+  `
+      : 'border: 1px solid white;'};
 `
 
 const Input = styled.input.attrs({
@@ -91,7 +98,7 @@ class AppSearchBar extends PureComponent<Props, State> {
 
     return (
       <Box>
-        <SearchBarWrapper align="center">
+        <SearchBarWrapper align="center" focused={focused}>
           <SearchIcon size={16} style={{ color }} />
           <Input
             innerRef={c => (this.input = c)}

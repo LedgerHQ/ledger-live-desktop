@@ -38,6 +38,7 @@ common:
     refresh: Refresh
   error:
     load: Unable to load
+    noResults: No results
 operation:
   type:
     IN: Receive funds
@@ -112,8 +113,9 @@ emptyState:
 exchange:
   title: Exchange
   visitWebsite: Visit website
-  coinhouse: Lorem ipsum
-  shapeshift: Ipsum lorem
+  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store cryptoassets.'
+  changelly: 'Changelly is a popular instant cryptocurrency exchange with 100+ coins and tokens listed.'
+  coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital currency, anywhere in the world.'
 genuinecheck:
   modal:
     title: Genuine check, bro
@@ -128,7 +130,11 @@ addAccounts:
   accountToImportSubtitle_plural: 'Accounts to import ({{count}})'
   selectAll: Select all
   unselectAll: Unselect all
-  createNewAccount: Create new account
+  editName: Edit name
+  success: Great success!
+  createNewAccount:
+    title: Create new account
+    noOperationOnLastAccount: You cannot create a new account because your last account has no operations
   retrySync: Retry sync
   cta:
     create: 'Create account'
@@ -212,6 +218,8 @@ send:
       message: Leave a message (140)
       rippleTag: Tag
       ethereumGasLimit: Gas limit
+      unitPerByte: '{{unit}} per byte'
+      feePerByte: Fee per byte
     connectDevice:
       title: Connect device
     verification:
@@ -345,3 +353,7 @@ password:
 update:
   newVersionReady: A new update is available.
   relaunch: Update now
+crash:
+  restart: Restart app
+  reset: Reset app files
+  createTicket: Create ticket

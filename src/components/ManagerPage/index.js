@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/jsx-no-literals */ // FIXME
 
 import React from 'react'
 
@@ -24,11 +25,6 @@ type Error = {
 function ManagerPage(): Node {
   return (
     <Workflow
-      renderError={(dashboardError: ?Error, genuineError: ?Error) => {
-        if (dashboardError) return <span>Dashboard Error: {dashboardError.message}</span>
-        if (genuineError) return <span>Genuine Error: {genuineError.message}</span>
-        return <span>Error</span>
-      }}
       renderFinalUpdate={(deviceInfo: DeviceInfo) => (
         <p>UPDATE FINAL FIRMARE (TEMPLATE + ACTION WIP) {deviceInfo.final}</p>
       )}
@@ -41,13 +37,16 @@ function ManagerPage(): Node {
       renderDefault={(
         device: ?Device,
         deviceInfo: ?DeviceInfo,
-        dashboardError: ?Error,
         isGenuine: ?boolean,
+        errors: {
+          dashboardError: ?Error,
+          genuineError: ?Error,
+        },
       ) => (
         <WorkflowDefault
           device={device}
           deviceInfo={deviceInfo}
-          dashboardError={dashboardError}
+          errors={errors}
           isGenuine={isGenuine}
         />
       )}
