@@ -47,10 +47,41 @@ const makeSerializableLog = (o: mixed) => {
   return String(o)
 }
 
+const logCmds = !__DEV__ || process.env.DEBUG_COMMANDS
+const logDb = !__DEV__ || process.env.DEBUG_DB
 const logRedux = !__DEV__ || process.env.DEBUG_ACTION
-const logTabkey = __DEV__ || process.env.DEBUG_TAB_KEY
+const logTabkey = !__DEV__ || process.env.DEBUG_TAB_KEY
 
 export default {
+  onCmd: (type: string, id: string, spentTime: number, data?: any) => {
+    if (logCmds) {
+      switch (type) {
+        case 'cmd.START':
+          console.log(`CMD ${id}.send(`, data, ')')
+          break
+        case 'cmd.NEXT':
+          console.log(`● CMD ${id}`, data)
+          break
+        case 'cmd.COMPLETE':
+          console.log(`✔ CMD ${id} finished in ${spentTime.toFixed(0)}ms`)
+          break
+        case 'cmd.ERROR':
+          console.warn(`✖ CMD ${id} error`, data)
+          break
+        default:
+      }
+    }
+    addLog('cmd', type, id, spentTime, data)
+  },
+
+  onDB: (way: 'read' | 'write' | 'clear', name: string, obj: ?Object) => {
+    const msg = `📁 ${way} ${name}:`
+    if (logDb) {
+      console.log(msg, obj)
+    }
+    addLog('db', msg)
+  },
+
   // tracks Redux actions (NB not all actions are serializable)
 
   onReduxAction: (action: Object) => {
