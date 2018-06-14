@@ -113,8 +113,9 @@ emptyState:
 exchange:
   title: Exchange
   visitWebsite: Visit website
-  coinhouse: Lorem ipsum
-  shapeshift: Ipsum lorem
+  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store cryptoassets.'
+  changelly: 'Changelly is a popular instant cryptocurrency exchange with 100+ coins and tokens listed.'
+  coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital currency, anywhere in the world.'
 genuinecheck:
   modal:
     title: Genuine check, bro
