@@ -16,6 +16,11 @@ import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accou
 
 const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 
+export function isValidAddress(core: *, currency: *, address: string): boolean {
+  const addr = new core.NJSAddress(address, currency)
+  return addr.isValid(address, currency)
+}
+
 type Props = {
   core: *,
   devicePath: string,
