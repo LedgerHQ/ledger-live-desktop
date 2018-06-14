@@ -14,7 +14,7 @@ type Props = {
 }
 
 export default translate()(({ gasLimit, onChangeGasLimit, t }: Props) => (
-  <Spoiler title="Advanced options">
+  <Spoiler title={t('app:send.steps.amount.advancedOptions')}>
     <Box horizontal align="center" flow={5}>
       <Box style={{ width: 200 }}>
         <Label>
