@@ -1,0 +1,18 @@
+---
+RangeError:
+  - message
+Error:
+  - message
+LedgerAPIErrorWithMessage:
+  - message
+TransportStatusError:
+  - message
+FeeEstimationFailed: 'fee estimation failed (status: {{status}})'
+NotEnoughBalance: 'Not enough balance'
+BtcUnmatchedApp: 'You must open application ‘{{currencyName}}’ on the device'
+WrongAppOpened: 'You must open application ‘{{currencyName}}’ on the device'
+WrongDeviceForAccount: 'You must use the device associated to the account ‘{{accountName}}’'
+LedgerAPINotAvailable: 'Ledger API is not available for currency {{currencyName}}'
+LedgerAPIError: 'A problem occurred with Ledger API. Please try again later. (HTTP {{status}})'
+NetworkDown: 'Your internet connection seems down. Please try again later.'
+NoAddressesFound: 'No accounts found'
