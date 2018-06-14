@@ -1,6 +1,7 @@
 // @flow
 import React from 'react'
 import { Observable } from 'rxjs'
+import LRU from 'lru-cache'
 import { map } from 'rxjs/operators'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
@@ -8,6 +9,8 @@ import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
+import libcoreGetFees from 'commands/libcoreGetFees'
+import libcoreValidAddress from 'commands/libcoreValidAddress'
 import type { WalletBridge, EditProps } from './types'
 
 const notImplemented = new Error('LibcoreBridge: not implemented')
@@ -42,6 +45,38 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
   />
 )
 */
+
+const recipientValidLRU = LRU({ max: 100 })
+
+const isRecipientValid = (currency, recipient): Promise<boolean> => {
+  const key = `${currency.id}_${recipient}`
+  let promise = recipientValidLRU.get(key)
+  if (promise) return promise
+  promise = libcoreValidAddress
+    .send({
+      address: recipient,
+      currencyId: currency.id,
+    })
+    .toPromise()
+  recipientValidLRU.set(key, promise)
+  return promise
+}
+
+const feesLRU = LRU({ max: 100 })
+
+const getFees = async (a, transaction) => {
+  const isValid = await isRecipientValid(a.currency, transaction.recipient)
+  if (!isValid) return null
+  const key = `${a.id}_${transaction.amount}_${transaction.recipient}_${transaction.feePerByte}`
+  let promise = feesLRU.get(key)
+  if (promise) return promise
+  promise = libcoreGetFees
+    .send({ accountId: a.id, accountIndex: a.index, transaction })
+    .toPromise()
+    .then(r => r.totalFees)
+  feesLRU.set(key, promise)
+  return promise
+}
 
 const LibcoreBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, devicePath, observer) {
@@ -107,7 +142,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.reject(notImplemented),
 
-  isRecipientValid: (currency, recipient) => Promise.resolve(recipient.length > 0),
+  isRecipientValid,
 
   createTransaction: () => ({
     amount: 0,
@@ -136,14 +171,23 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
-  canBeSpent: (a, t) => Promise.resolve(t.amount <= a.balance), // FIXME
+  canBeSpent: (a, t) =>
+    getFees(a, t)
+      .then(fees => fees !== null)
+      .catch(() => false),
 
-  getTotalSpent: (a, t) => Promise.resolve(t.amount), // FIXME
+  getTotalSpent: (a, t) =>
+    getFees(a, t)
+      .then(totalFees => t.amount + (totalFees || 0))
+      .catch(() => 0),
 
-  getMaxAmount: (a, _t) => Promise.resolve(a.balance), // FIXME
+  getMaxAmount: (a, t) =>
+    getFees(a, t)
+      .catch(() => 0)
+      .then(totalFees => a.balance - (totalFees || 0)),
 
   signAndBroadcast: (account, transaction, deviceId) => {
-    const encodedAccount = encodeAccount(account)
+    const encodedAccount = encodeAccount(account) // FIXME no need to send the whole account over the threads
     return libcoreSignAndBroadcast
       .send({
         account: encodedAccount,
