@@ -54,6 +54,7 @@
     "react/jsx-curly-brace-presence": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-no-target-blank": 0,
+    "react/jsx-no-literals": [1, {"noStrings": true}],
     "react/prefer-stateless-function": 0,
     "react/require-default-props": 0,
     "react/sort-comp": [1, {
@@ -73,4 +74,10 @@
       "onlyFilesWithFlowAnnotation": true,
     }
   },
+  "overrides": [{
+    "files": [ "*stories.js" ],
+    "rules": {
+      "react/jsx-no-literals": 0
+    }
+  }]
 }
