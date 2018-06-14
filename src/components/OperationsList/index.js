@@ -36,7 +36,7 @@ const ShowMore = styled(Box).attrs({
   fontSize: 3,
   justify: 'center',
   align: 'center',
-  p: 4,
+  p: 6,
   color: 'wallet',
 })`
   cursor: pointer;
@@ -135,7 +135,7 @@ export class OperationsList extends PureComponent<Props, State> {
               <IconAngleDown size={12} />
             </ShowMore>
           ) : (
-            <Box p={4} align="center">
+            <Box p={6} align="center">
               <Text ff="Open Sans" fontSize={3}>
                 {t('app:operationList.noMoreOperations')}
               </Text>
