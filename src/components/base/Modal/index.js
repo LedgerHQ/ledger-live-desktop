@@ -90,6 +90,15 @@ const Backdrop = styled(Box).attrs({
   position: fixed;
 `
 
+const NonClickableHeadArea = styled.div`
+  position: fixed;
+  height: 48px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+`
+
 const Wrapper = styled(Box).attrs({
   bg: 'transparent',
   flow: 4,
@@ -117,6 +126,10 @@ class Pure extends Component<any> {
 
     return <Defer>{render({ data, onClose })}</Defer>
   }
+}
+
+function stopPropagation(e) {
+  e.stopPropagation()
 }
 
 export class Modal extends Component<Props> {
@@ -183,13 +196,14 @@ export class Modal extends Component<Props> {
         {(m, isVisible, isAnimated) => (
           <Container isVisible={isVisible} onClick={preventBackdropClick ? undefined : onClose}>
             <Backdrop op={m.opacity} />
+            <NonClickableHeadArea onClick={stopPropagation} />
             <GrowScroll alignItems="center" full py={8}>
               <Wrapper
                 tabIndex={-1}
                 op={m.opacity}
                 scale={m.scale}
                 innerRef={n => (this._wrapper = n)}
-                onClick={e => e.stopPropagation()}
+                onClick={stopPropagation}
               >
                 <Pure isAnimated={isAnimated} render={render} data={data} onClose={onClose} />
               </Wrapper>
