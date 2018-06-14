@@ -14,13 +14,14 @@ import Button from 'components/base/Button'
 
 const Container = styled(Box).attrs({
   horizontal: true,
-  m: 3,
+  my: 2,
+  mx: 3,
   p: 4,
   boxShadow: 0,
   borderRadius: 4,
-  flow: 3,
+  flow: 2,
 })`
-  width: 342px;
+  width: calc(50% - 30px);
   background: white;
   line-height: normal;
 `
@@ -37,7 +38,6 @@ const AppName = styled(Box).attrs({
   color: 'dark',
 })`
   display: block;
-  width: 115px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -57,8 +57,8 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
   return (
     <Container>
       <AppIcon src={iconUrl} />
-      <Box flex="1">
-        <AppName>{name}</AppName>
+      <Box flex="1" ml={3}>
+        <AppName flex={1}>{name}</AppName>
         <Text ff="Open Sans|Regular" fontSize={3} color="grey">
           {version}
         </Text>
