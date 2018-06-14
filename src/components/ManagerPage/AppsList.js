@@ -15,6 +15,8 @@ import Modal, { ModalBody } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
 import Progress from 'components/base/Progress'
+import Spinner from 'components/base/Spinner'
+import Button from 'components/base/Button'
 
 import ExclamationCircle from 'icons/ExclamationCircle'
 import Update from 'icons/Update'
@@ -38,7 +40,7 @@ const ICONS_FALLBACK = {
 }
 
 type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
-type Mode = '' | 'installing' | 'uninstalling'
+type Mode = 'home' | 'installing' | 'uninstalling'
 
 type LedgerApp = {
   name: string,
@@ -71,7 +73,7 @@ class AppsList extends PureComponent<Props, State> {
     error: null,
     appsList: [],
     app: '',
-    mode: '',
+    mode: 'home',
   }
 
   componentDidMount() {
@@ -108,7 +110,7 @@ class AppsList extends PureComponent<Props, State> {
       await installApp.send(data).toPromise()
       this.setState({ status: 'success', app: '' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message, app: '', mode: '' })
+      this.setState({ status: 'error', error: err.message, app: '', mode: 'home' })
     }
   }
 
@@ -123,11 +125,11 @@ class AppsList extends PureComponent<Props, State> {
       await uninstallApp.send(data).toPromise()
       this.setState({ status: 'success', app: '' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message, app: '', mode: '' })
+      this.setState({ status: 'error', error: err.message, app: '', mode: 'home' })
     }
   }
 
-  handleCloseModal = () => this.setState({ status: 'idle', mode: '' })
+  handleCloseModal = () => this.setState({ status: 'idle', mode: 'home' })
 
   renderModal = () => {
     const { t } = this.props
@@ -152,7 +154,9 @@ class AppsList extends PureComponent<Props, State> {
               <Box align="center" justify="center" flow={3}>
                 <div>{'error happened'}</div>
                 {error}
-                <button onClick={this.handleCloseModal}>close</button>
+                <Button primary onClick={this.handleCloseModal}>
+                  close
+                </Button>
               </Box>
             ) : status === 'success' ? (
               <Box align="center" justify="center" flow={3}>
@@ -167,7 +171,9 @@ class AppsList extends PureComponent<Props, State> {
                     { app },
                   )}
                 </Text>
-                <button onClick={this.handleCloseModal}>close</button>
+                <Button primary onClick={this.handleCloseModal}>
+                  close
+                </Button>
               </Box>
             ) : null}
           </ModalBody>
@@ -178,7 +184,7 @@ class AppsList extends PureComponent<Props, State> {
 
   renderList() {
     const { appsList } = this.state
-    return (
+    return appsList.length > 0 ? (
       <Box>
         <AppSearchBar list={appsList}>
           {items => (
@@ -197,6 +203,10 @@ class AppsList extends PureComponent<Props, State> {
           )}
         </AppSearchBar>
         {this.renderModal()}
+      </Box>
+    ) : (
+      <Box align="center" justify="center">
+        <Spinner size={50} />
       </Box>
     )
   }

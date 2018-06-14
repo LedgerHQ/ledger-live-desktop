@@ -32,12 +32,19 @@ export const Inner = styled(Box).attrs({
   flow: 4,
 })``
 
+export const FixedTopContainer = styled(Box).attrs({
+  sticky: true,
+  mt: 170,
+  backgroundColor: 'red',
+})``
 // FOOTER
-export const OnboardingFooter = styled(Box).attrs({
+
+export const OnboardingFooterWrapper = styled(Box).attrs({
   px: 5,
   py: 3,
+  horizontal: true,
 })`
-  border-top: 2px solid ${p => p.theme.colors.lightGrey};
+  border-top: 2px solid ${p => p.theme.colors.lightFog};
   border-bottom-left-radius: ${radii[1]}px;
   border-bottom-right-radius: ${radii[1]}px;
 `

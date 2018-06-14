@@ -34,10 +34,9 @@ export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
 
     const commonParams = {
       core,
-      hwApp,
       currencyId,
       onAccountScanned,
-      devicePath,
+      hwApp,
     }
 
     let allAccounts = []
@@ -62,22 +61,16 @@ export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   })
 }
 
-export async function getWalletIdentifier({
-  hwApp,
-  isSegwit,
+function encodeWalletName({
+  publicKey,
   currencyId,
-  devicePath,
+  isSegwit,
 }: {
-  hwApp: Object,
-  isSegwit: boolean,
+  publicKey: string,
   currencyId: string,
-  devicePath: string,
-}): Promise<string> {
-  const isVerify = false
-  const deviceIdentifiers = await hwApp.getWalletPublicKey(devicePath, isVerify, isSegwit)
-  const { publicKey } = deviceIdentifiers
-  const WALLET_IDENTIFIER = `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
-  return WALLET_IDENTIFIER
+  isSegwit: boolean,
+}) {
+  return `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
 }
 
 async function scanAccountsOnDeviceBySegwit({
@@ -85,7 +78,6 @@ async function scanAccountsOnDeviceBySegwit({
   hwApp,
   currencyId,
   onAccountScanned,
-  devicePath,
   isSegwit,
   showNewAccount,
 }: {
@@ -93,15 +85,19 @@ async function scanAccountsOnDeviceBySegwit({
   hwApp: Object,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
-  devicePath: string,
-  isSegwit: boolean,
+  isSegwit: boolean, // FIXME all segwit to change to 'purpose'
   showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
-  // compute wallet identifier
-  const WALLET_IDENTIFIER = await getWalletIdentifier({ hwApp, isSegwit, currencyId, devicePath })
+  const { coinType } = getCryptoCurrencyById(currencyId)
+  const { publicKey } = await hwApp.getWalletPublicKey(
+    `${isSegwit ? '49' : '44'}'/${coinType}'`,
+    false,
+    isSegwit,
+  )
+  const walletName = encodeWalletName({ publicKey, currencyId, isSegwit })
 
   // retrieve or create the wallet
-  const wallet = await getOrCreateWallet(core, WALLET_IDENTIFIER, currencyId, isSegwit)
+  const wallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit)
   const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app

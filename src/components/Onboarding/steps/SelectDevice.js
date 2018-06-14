@@ -11,7 +11,7 @@ import Box from 'components/base/Box'
 import IconCheckCirle from 'icons/Check'
 import IconLedgerNano from 'icons/illustrations/LedgerNano'
 import IconLedgerBlue from 'icons/illustrations/LedgerBlue'
-import { Title, Inner } from '../helperComponents'
+import { Title, Inner, FixedTopContainer } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
@@ -32,11 +32,11 @@ class SelectDevice extends PureComponent<StepProps, {}> {
     }
   }
   render() {
-    const { t, onboarding, prevStep } = this.props
+    const { t, onboarding, jumpStep } = this.props
     return (
-      <Box sticky>
-        <Box grow alignItems="center" justifyContent="center">
-          <Box m={5}>
+      <FixedTopContainer>
+        <Box grow alignItems="center">
+          <Box mb={5}>
             <Title>{t('onboarding:selectDevice.title')}</Title>
           </Box>
           <Box pt={4}>
@@ -66,13 +66,12 @@ class SelectDevice extends PureComponent<StepProps, {}> {
         </Box>
         <OnboardingFooter
           horizontal
-          flow={2}
           t={t}
           nextStep={this.handleContinue}
-          prevStep={prevStep}
+          prevStep={() => jumpStep('init')}
           isContinueDisabled={onboarding.isLedgerNano === null}
         />
-      </Box>
+      </FixedTopContainer>
     )
   }
 }

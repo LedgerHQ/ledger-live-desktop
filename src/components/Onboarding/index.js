@@ -27,6 +27,7 @@ import Box from 'components/base/Box'
 
 import Start from './steps/Start'
 import InitStep from './steps/Init'
+import NoDeviceStep from './steps/NoDevice'
 import OnboardingBreadcrumb from './OnboardingBreadcrumb'
 import SelectDevice from './steps/SelectDevice'
 import SelectPIN from './steps/SelectPIN/index'
@@ -46,6 +47,7 @@ const STEPS = {
   analytics: Analytics,
   finish: Finish,
   start: Start,
+  noDevice: NoDeviceStep,
 }
 
 const mapStateToProps = state => ({

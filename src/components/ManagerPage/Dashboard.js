@@ -33,7 +33,7 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
         {t('app:manager.subtitle')}
       </Text>
     </Box>
-    <Box mt={7}>
+    <Box mt={5}>
       <FirmwareUpdate
         infos={{
           targetId: deviceInfo.targetId,
@@ -42,7 +42,7 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
         device={device}
       />
     </Box>
-    <Box>
+    <Box mt={5}>
       <AppsList device={device} targetId={deviceInfo.targetId} />
     </Box>
   </Box>

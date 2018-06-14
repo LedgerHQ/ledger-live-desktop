@@ -4,13 +4,13 @@ import React, { PureComponent, Fragment } from 'react'
 import { shell } from 'electron'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { radii, colors } from 'styles/theme'
+import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
 
 import { updateGenuineCheck } from 'reducers/onboarding'
 
-import Box, { Card } from 'components/base/Box'
+import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
@@ -19,7 +19,13 @@ import IconLedgerNanoError from 'icons/illustrations/LedgerNanoError'
 import IconLedgerBlueError from 'icons/illustrations/LedgerBlueError'
 import IconCheck from 'icons/Check'
 
-import { Title, Description, IconOptionRow } from '../helperComponents'
+import {
+  Title,
+  Description,
+  IconOptionRow,
+  FixedTopContainer,
+  OnboardingFooterWrapper,
+} from '../helperComponents'
 
 import type { StepProps } from '..'
 import OnboardingFooter from '../OnboardingFooter'
@@ -120,8 +126,8 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     }
 
     return (
-      <Box sticky pt={50}>
-        <Box grow alignItems="center" justifyContent="center">
+      <FixedTopContainer>
+        <Box grow alignItems="center">
           <Title>{t('onboarding:genuineCheck.title')}</Title>
           <Description>{t('onboarding:genuineCheck.desc')}</Description>
           <Box mt={5}>
@@ -145,16 +151,18 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper isDisabled={!genuine.pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>{'2.'}</IconOptionRow>
+                  <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>{'2.'}</IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step2.title')}</CardTitle>
                 </Box>
               </Box>
               <Box justify="center">
-                <RadioGroup
-                  items={this.getButtonLabel()}
-                  activeKey={cachedRecoveryStepButton}
-                  onChange={item => this.handleButtonPass(item, 'recoveryStepPass')}
-                />
+                {genuine.pinStepPass && (
+                  <RadioGroup
+                    items={this.getButtonLabel()}
+                    activeKey={cachedRecoveryStepButton}
+                    onChange={item => this.handleButtonPass(item, 'recoveryStepPass')}
+                  />
+                )}
               </Box>
             </CardWrapper>
           </Box>
@@ -162,28 +170,32 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper isDisabled={!genuine.recoveryStepPass}>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>{'3.'}</IconOptionRow>
+                  <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
+                    {'3.'}
+                  </IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step3.title')}</CardTitle>
                 </Box>
               </Box>
-              <Box justify="center">
-                {genuine.isDeviceGenuine ? (
-                  <Box horizontal align="center" flow={1} color={colors.wallet}>
-                    <IconCheck size={16} />
-                    <GenuineSuccessText>
-                      {t('onboarding:genuineCheck.isGenuinePassed')}
-                    </GenuineSuccessText>
-                  </Box>
-                ) : (
-                  <Button
-                    primary
-                    disabled={!genuine.recoveryStepPass}
-                    onClick={this.handleOpenGenuineCheckModal}
-                  >
-                    {t('onboarding:genuineCheck.buttons.genuineCheck')}
-                  </Button>
-                )}
-              </Box>
+              {genuine.recoveryStepPass && (
+                <Box justify="center">
+                  {genuine.isDeviceGenuine ? (
+                    <Box horizontal align="center" flow={1} color={colors.wallet}>
+                      <IconCheck size={16} />
+                      <GenuineSuccessText>
+                        {t('onboarding:genuineCheck.isGenuinePassed')}
+                      </GenuineSuccessText>
+                    </Box>
+                  ) : (
+                    <Button
+                      primary
+                      disabled={!genuine.recoveryStepPass}
+                      onClick={this.handleOpenGenuineCheckModal}
+                    >
+                      {t('onboarding:genuineCheck.buttons.genuineCheck')}
+                    </Button>
+                  )}
+                </Box>
+              )}
             </CardWrapper>
           </Box>
         </Box>
@@ -201,7 +213,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           onClose={this.handleCloseGenuineCheckModal}
           onGenuineCheck={this.handleGenuineCheck}
         />
-      </Box>
+      </FixedTopContainer>
     )
   }
 }
@@ -246,27 +258,14 @@ export function GenuineCheckFail({
           </Fragment>
         )}
       </Box>
-      <Wrapper horizontal>
-        <Button
-          padded
-          outline
-          onClick={() => {
-            redoGenuineCheck()
-          }}
-        >
+      <OnboardingFooterWrapper>
+        <Button padded outlineGrey onClick={() => redoGenuineCheck()}>
           {t('app:common.back')}
         </Button>
-        <Button
-          padded
-          danger
-          onClick={() => {
-            contactSupport()
-          }}
-          ml="auto"
-        >
+        <Button padded danger onClick={() => contactSupport()} ml="auto">
           {t('onboarding:genuineCheck.buttons.contactSupport')}
         </Button>
-      </Wrapper>
+      </OnboardingFooterWrapper>
     </Box>
   )
 }
@@ -281,23 +280,22 @@ export const CardTitle = styled(Box).attrs({
   pl: 2,
 })``
 
-const Wrapper = styled(Box).attrs({
-  px: 5,
-  py: 3,
-})`
-  border-top: 2px solid ${p => p.theme.colors.lightGrey};
-  border-bottom-left-radius: ${radii[1]}px;
-  border-bottom-right-radius: ${radii[1]}px;
-`
-const CardWrapper = styled(Card).attrs({
+const CardWrapper = styled(Box).attrs({
   horizontal: true,
   p: 5,
+  borderRadius: '4px',
   justify: 'space-between',
 })`
   width: 580px;
   height: 74px;
+  transition: all ease-in-out 0.2s;
+  color: ${p => (p.isDisabled ? p.theme.colors.grey : p.theme.colors.black)};
   border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
   opacity: ${p => (p.isDisabled ? 0.7 : 1)};
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+  }
 `

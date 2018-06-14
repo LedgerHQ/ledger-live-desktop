@@ -58,6 +58,15 @@ const state: OnboardingState = {
       },
     },
     {
+      name: 'noDevice',
+      external: true,
+      options: {
+        showFooter: false,
+        showBackground: true,
+        showBreadcrumb: false,
+      },
+    },
+    {
       name: 'selectDevice',
       label: 'Select Device',
       options: {

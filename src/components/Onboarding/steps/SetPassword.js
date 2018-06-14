@@ -2,8 +2,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import bcrypt from 'bcryptjs'
-import { colors, radii } from 'styles/theme'
-import styled from 'styled-components'
+import { colors } from 'styles/theme'
 
 import { setEncryptionKey } from 'helpers/db'
 
@@ -15,7 +14,13 @@ import IconChevronRight from 'icons/ChevronRight'
 import PasswordForm from '../../SettingsPage/PasswordForm'
 import type { StepProps } from '..'
 
-import { Title, Description, DisclaimerBox } from '../helperComponents'
+import {
+  Title,
+  Description,
+  DisclaimerBox,
+  FixedTopContainer,
+  OnboardingFooterWrapper,
+} from '../helperComponents'
 
 type State = {
   currentPassword: string,
@@ -90,10 +95,10 @@ class SetPassword extends PureComponent<StepProps, State> {
     ]
 
     return (
-      <Box sticky pt={50}>
-        <Box grow alignItems="center" justify="center">
+      <FixedTopContainer>
+        <Box grow alignItems="center">
           <Fragment>
-            <Box mb={3} alignItems="center">
+            <Box alignItems="center">
               <Title>{t('onboarding:setPassword.title')}</Title>
               <Description style={{ maxWidth: 620 }}>
                 {t('onboarding:setPassword.desc')}
@@ -117,7 +122,7 @@ class SetPassword extends PureComponent<StepProps, State> {
           </Fragment>
         </Box>
 
-        <CustomFooter>
+        <OnboardingFooterWrapper>
           <Button padded outlineGrey onClick={() => prevStep()}>
             {t('app:common.back')}
           </Button>
@@ -134,21 +139,10 @@ class SetPassword extends PureComponent<StepProps, State> {
               {t('app:common.continue')}
             </Button>
           </Box>
-        </CustomFooter>
-      </Box>
+        </OnboardingFooterWrapper>
+      </FixedTopContainer>
     )
   }
 }
 
 export default SetPassword
-
-const CustomFooter = styled(Box).attrs({
-  px: 5,
-  py: 3,
-  horizontal: true,
-  align: 'center',
-})`
-  border-top: 1px solid ${p => p.theme.colors.lightFog};
-  border-bottom-left-radius: ${radii[1]}px;
-  border-bottom-right-radius: ${radii[1]}px;
-`

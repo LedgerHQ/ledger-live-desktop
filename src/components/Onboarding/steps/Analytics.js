@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
-import { Title, Description } from '../helperComponents'
+import { Title, Description, FixedTopContainer } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
@@ -15,13 +15,11 @@ const mapDispatchToProps = { saveSettings }
 
 type State = {
   analyticsToggle: boolean,
-  termsConditionsToggle: boolean,
   sentryLogsToggle: boolean,
 }
 
 const INITIAL_STATE = {
   analyticsToggle: true,
-  termsConditionsToggle: false,
   sentryLogsToggle: true,
 }
 
@@ -40,9 +38,6 @@ class Analytics extends PureComponent<StepProps, State> {
       shareAnalytics: isChecked,
     })
   }
-  handleTermsToggle = () => {
-    this.setState({ termsConditionsToggle: !this.state.termsConditionsToggle })
-  }
 
   handleNavBack = () => {
     const { savePassword, prevStep } = this.props
@@ -52,11 +47,11 @@ class Analytics extends PureComponent<StepProps, State> {
 
   render() {
     const { nextStep, t } = this.props
-    const { analyticsToggle, termsConditionsToggle, sentryLogsToggle } = this.state
+    const { analyticsToggle, sentryLogsToggle } = this.state
 
     return (
-      <Box sticky pt={50}>
-        <Box grow alignItems="center" justifyContent="center">
+      <FixedTopContainer>
+        <Box grow alignItems="center">
           <Title>{t('onboarding:analytics.title')}</Title>
           <Description>{t('onboarding:analytics.desc')}</Description>
           <Box mt={5}>
@@ -78,15 +73,6 @@ class Analytics extends PureComponent<StepProps, State> {
                 <CheckBox isChecked={analyticsToggle} onChange={this.handleAnalyticsToggle} />
               </Box>
             </Container>
-            <Container>
-              <Box>
-                <AnalyticsTitle>{t('onboarding:analytics.termsConditions.title')}</AnalyticsTitle>
-                <AnalyticsText>{t('onboarding:analytics.termsConditions.desc')}</AnalyticsText>
-              </Box>
-              <Box justifyContent="center">
-                <CheckBox isChecked={termsConditionsToggle} onChange={this.handleTermsToggle} />
-              </Box>
-            </Container>
           </Box>
         </Box>
         <OnboardingFooter
@@ -96,9 +82,8 @@ class Analytics extends PureComponent<StepProps, State> {
           t={t}
           nextStep={nextStep}
           prevStep={this.handleNavBack}
-          isContinueDisabled={!termsConditionsToggle}
         />
-      </Box>
+      </FixedTopContainer>
     )
   }
 }
