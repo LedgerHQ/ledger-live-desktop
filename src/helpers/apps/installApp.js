@@ -12,5 +12,5 @@ export default async function installApp(
   transport: Transport<*>,
   { appParams }: { appParams: LedgerScriptParams },
 ): Promise<void> {
-  return createSocketDialog(transport, '/update/install', appParams)
+  return createSocketDialog(transport, '/install', appParams)
 }
