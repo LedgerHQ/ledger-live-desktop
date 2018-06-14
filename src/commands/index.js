@@ -14,11 +14,13 @@ import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
 import installOsuFirmware from 'commands/installOsuFirmware'
 import isDashboardOpen from 'commands/isDashboardOpen'
+import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreHardReset from 'commands/libcoreHardReset'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
+import libcoreValidAddress from 'commands/libcoreValidAddress'
 import listApps from 'commands/listApps'
 import listenDevices from 'commands/listenDevices'
 import signTransaction from 'commands/signTransaction'
@@ -39,11 +41,13 @@ const all: Array<Command<any, any>> = [
   installMcu,
   installOsuFirmware,
   isDashboardOpen,
+  libcoreGetFees,
   libcoreGetVersion,
   libcoreHardReset,
   libcoreScanAccounts,
   libcoreSignAndBroadcast,
   libcoreSyncAccount,
+  libcoreValidAddress,
   listApps,
   listenDevices,
   signTransaction,
