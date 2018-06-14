@@ -39,8 +39,8 @@ const socialMedia = [
 export default (props: StepProps) => {
   const { finish, t } = props
   return (
-    <Box sticky pt={200}>
-      <Box grow alignItems="center">
+    <Box sticky justifyContent="center">
+      <Box alignItems="center">
         <Box color="positiveGreen">
           <IconCheckCircle size={44} />
         </Box>

@@ -15,6 +15,14 @@ init:
   noDevice:
     title: Do not have a Ledger device yet?
     desc: Please replace it with the final wording once it’s done.
+noDevice:
+  title: Do not have a Ledger device yet?
+  buyNew:
+    title: Buy a Ledger device
+  trackOrder:
+    title: Track your order
+  learnMore:
+    title: Learn about Ledger Live
 selectDevice:
   title: To get started, select your device
   ledgerNanoCard:

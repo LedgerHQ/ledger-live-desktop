@@ -32,7 +32,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
     }
   }
   render() {
-    const { t, onboarding, prevStep } = this.props
+    const { t, onboarding, jumpStep } = this.props
     return (
       <FixedTopContainer>
         <Box grow alignItems="center">
@@ -68,7 +68,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           horizontal
           t={t}
           nextStep={this.handleContinue}
-          prevStep={prevStep}
+          prevStep={() => jumpStep('init')}
           isContinueDisabled={onboarding.isLedgerNano === null}
         />
       </FixedTopContainer>

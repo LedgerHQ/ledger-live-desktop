@@ -4,7 +4,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { shell } from 'electron'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { radii, colors } from 'styles/theme'
+import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
 
@@ -19,7 +19,13 @@ import IconLedgerNanoError from 'icons/illustrations/LedgerNanoError'
 import IconLedgerBlueError from 'icons/illustrations/LedgerBlueError'
 import IconCheck from 'icons/Check'
 
-import { Title, Description, IconOptionRow, FixedTopContainer } from '../helperComponents'
+import {
+  Title,
+  Description,
+  IconOptionRow,
+  FixedTopContainer,
+  OnboardingFooterWrapper,
+} from '../helperComponents'
 
 import type { StepProps } from '..'
 import OnboardingFooter from '../OnboardingFooter'
@@ -145,7 +151,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper isDisabled={!genuine.pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>2.</IconOptionRow>
+                  <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>2.</IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step2.title')}</CardTitle>
                 </Box>
               </Box>
@@ -164,7 +170,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             <CardWrapper isDisabled={!genuine.recoveryStepPass}>
               <Box justify="center">
                 <Box horizontal>
-                  <IconOptionRow>3.</IconOptionRow>
+                  <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
+                    3.
+                  </IconOptionRow>
                   <CardTitle>{t('onboarding:genuineCheck.steps.step3.title')}</CardTitle>
                 </Box>
               </Box>
@@ -250,27 +258,14 @@ export function GenuineCheckFail({
           </Fragment>
         )}
       </Box>
-      <Wrapper horizontal>
-        <Button
-          padded
-          outlineGrey
-          onClick={() => {
-            redoGenuineCheck()
-          }}
-        >
+      <OnboardingFooterWrapper>
+        <Button padded outlineGrey onClick={() => redoGenuineCheck()}>
           {t('app:common.back')}
         </Button>
-        <Button
-          padded
-          danger
-          onClick={() => {
-            contactSupport()
-          }}
-          ml="auto"
-        >
+        <Button padded danger onClick={() => contactSupport()} ml="auto">
           {t('onboarding:genuineCheck.buttons.contactSupport')}
         </Button>
-      </Wrapper>
+      </OnboardingFooterWrapper>
     </Box>
   )
 }
@@ -285,14 +280,6 @@ export const CardTitle = styled(Box).attrs({
   pl: 2,
 })``
 
-const Wrapper = styled(Box).attrs({
-  px: 5,
-  py: 3,
-})`
-  border-top: 2px solid ${p => p.theme.colors.lightGrey};
-  border-bottom-left-radius: ${radii[1]}px;
-  border-bottom-right-radius: ${radii[1]}px;
-`
 const CardWrapper = styled(Box).attrs({
   horizontal: true,
   p: 5,
@@ -302,6 +289,7 @@ const CardWrapper = styled(Box).attrs({
   width: 580px;
   height: 74px;
   transition: all ease-in-out 0.2s;
+  color: ${p => (p.isDisabled ? p.theme.colors.grey : p.theme.colors.black)};
   border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
