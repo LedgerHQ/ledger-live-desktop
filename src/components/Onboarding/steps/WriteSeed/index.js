@@ -9,15 +9,15 @@ import OnboardingFooter from '../../OnboardingFooter'
 import WriteSeedNano from './WriteSeedNano'
 import WriteSeedBlue from './WriteSeedBlue'
 import WriteSeedRestore from './WriteSeedRestore'
-
+import { FixedTopContainer } from '../../helperComponents'
 import type { StepProps } from '../..'
 
 export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
 
   return (
-    <Box sticky pt={50}>
-      <Box grow alignItems="center" justifyContent="center">
+    <FixedTopContainer>
+      <Box grow alignItems="center">
         {onboarding.flowType === 'restoreDevice' ? (
           <WriteSeedRestore />
         ) : onboarding.isLedgerNano ? (
@@ -34,6 +34,6 @@ export default (props: StepProps) => {
         nextStep={nextStep}
         prevStep={prevStep}
       />
-    </Box>
+    </FixedTopContainer>
   )
 }
