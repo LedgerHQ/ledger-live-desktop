@@ -174,7 +174,7 @@ class HelperComp extends PureComponent<Props, State> {
                 />
               </Box>
             </Container>
-            <Spoiler title="Advanced logs">
+            <Spoiler title={t('app:account.settings.advancedLogs')}>
               <textarea
                 readOnly
                 style={{
