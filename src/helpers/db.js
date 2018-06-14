@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import Store from 'electron-store'
 import set from 'lodash/set'
 import get from 'lodash/get'
@@ -54,37 +55,31 @@ export default {
   get: (key: DBKey, defaults: any): any => {
     const db = store(key)
     const data = db.get('data', defaults)
+    logger.onDB('read', key, data)
     return middleware('get', key, data)
   },
 
   set: (key: DBKey, val: any) => {
     const db = store(key)
-
     val = middleware('set', key, val)
-
+    logger.onDB('write', key, val)
     db.set('data', val)
-
     return val
   },
 
   getIn: (key: DBKey, path: string, defaultValue: any) => {
     const db = store(key)
-
     let data = db.get('data')
     data = middleware('get', key, data)
-
     return get(data, path, defaultValue)
   },
 
   setIn: (key: DBKey, path: string, val: any) => {
     const db = store(key)
     const data = db.get('data')
-
     val = middleware('set', key, val)
     set(data, path, val)
-
     db.set('data', data)
-
     return val
   },
 
@@ -93,6 +88,7 @@ export default {
     const keys = ['countervalues']
     keys.forEach(k => {
       const db = store(k)
+      logger.onDB('clear', k)
       db.clear()
     })
   },
@@ -101,6 +97,7 @@ export default {
     const keys = ['settings', 'accounts', 'countervalues']
     keys.forEach(k => {
       const db = store(k)
+      logger.onDB('clear', k)
       db.clear()
     })
   },

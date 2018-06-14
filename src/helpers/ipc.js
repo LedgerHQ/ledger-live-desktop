@@ -47,22 +47,20 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
 
     function handleCommandEvent(e, msg: Msg<A>) {
       if (requestId !== msg.requestId) return
+      logger.onCmd(msg.type, id, Date.now() - startTime, msg.data)
       switch (msg.type) {
         case 'cmd.NEXT':
-          logger.log(`● CMD ${id}`, msg.data)
           if (msg.data) {
             o.next(msg.data)
           }
           break
 
         case 'cmd.COMPLETE':
-          logger.log(`✔ CMD ${id} finished in ${(Date.now() - startTime).toFixed(0)}ms`)
           o.complete()
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
 
         case 'cmd.ERROR':
-          logger.warn(`✖ CMD ${id} error`, msg.data)
           o.error(msg.data)
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
@@ -75,7 +73,7 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
 
     ipcRenderer.send('command', { id, data, requestId })
 
-    logger.log(`CMD ${id}.send(`, data, ')')
+    logger.onCmd('cmd.START', id, 0, data)
 
     return unsubscribe
   })
