@@ -18,7 +18,7 @@ type Props = {
   account: Account,
   feePerByte: number,
   onChange: number => void,
-  t: T
+  t: T,
 }
 
 type FeeItem = {
@@ -124,7 +124,11 @@ class FeesField extends Component<
           value={feePerByte}
           onChange={onChange}
           onChangeFocus={this.onChangeFocus}
-          renderRight={<InputRight>{t('app:send.steps.amount.unitPerByte', { unit: satoshi.code })}</InputRight>}
+          renderRight={
+            <InputRight>
+              {t('app:send.steps.amount.unitPerByte', { unit: satoshi.code })}
+            </InputRight>
+          }
         />
       </GenericContainer>
     )

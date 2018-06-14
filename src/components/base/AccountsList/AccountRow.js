@@ -21,7 +21,7 @@ type Props = {
   isDisabled?: boolean,
   onClick: Account => void,
   onAccountUpdate: Account => void,
-  t: T
+  t: T,
 }
 
 type State = {

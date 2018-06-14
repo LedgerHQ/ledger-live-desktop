@@ -19,7 +19,7 @@ import TranslatedError from './TranslatedError'
 
 type Props = {
   children: any,
-  t: T
+  t: T,
 }
 
 type State = {
