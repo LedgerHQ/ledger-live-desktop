@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { remote } from 'electron'
 import bcrypt from 'bcryptjs'
 
@@ -19,6 +20,7 @@ import CheckBox from 'components/base/CheckBox'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import { ConfirmModal } from 'components/base/Modal'
+import IconTriangleWarning from 'icons/TriangleWarning'
 import IconUser from 'icons/User'
 import PasswordModal from '../PasswordModal'
 import DisablePasswordModal from '../DisablePasswordModal'
@@ -125,6 +127,12 @@ class TabProfile extends PureComponent<Props, State> {
     })
   }
 
+  hardResetIconRender = () => (
+    <IconWrapperCircle color="alertRed">
+      <IconTriangleWarning width={23} height={21} />
+    </IconWrapperCircle>
+  )
+
   render() {
     const { t, settings, saveSettings } = this.props
     const {
@@ -223,8 +231,8 @@ class TabProfile extends PureComponent<Props, State> {
           onReject={this.handleCloseHardResetModal}
           onConfirm={this.handleHardReset}
           title={t('app:settings.hardResetModal.title')}
-          subTitle={t('app:settings.hardResetModal.subTitle')}
           desc={t('app:settings.hardResetModal.desc')}
+          renderIcon={this.hardResetIconRender}
         />
 
         <PasswordModal
@@ -253,3 +261,13 @@ export default connect(
   null,
   mapDispatchToProps,
 )(TabProfile)
+
+// TODO: need a helper file for common styles across the app
+const IconWrapperCircle = styled(Box).attrs({})`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ea2e4919;
+  text-align: -webkit-center;
+  justify-content: center;
+`

@@ -139,10 +139,10 @@ class IsUnlocked extends Component<Props, State> {
     }
   }
   hardResetIconRender = () => (
-      <IconWrapperCircle color="alertRed">
-        <IconTriangleWarning width={23} height={21} />
-      </IconWrapperCircle>
-    )
+    <IconWrapperCircle color="alertRed">
+      <IconTriangleWarning width={23} height={21} />
+    </IconWrapperCircle>
+  )
   render() {
     const { inputValue, incorrectPassword, isHardResetting, isHardResetModalOpened } = this.state
     const { isLocked, t } = this.props
@@ -166,11 +166,7 @@ class IsUnlocked extends Component<Props, State> {
                   type="password"
                   onChange={this.handleChangeInput('password')}
                   value={inputValue.password}
-                  error={
-                    incorrectPassword &&
-                    inputValue.password.length &&
-                    t('app:password.errorMessageIncorrectPassword')
-                  }
+                  error={incorrectPassword && t('app:password.errorMessageIncorrectPassword')}
                 />
               </Box>
               <Button type="button" mt={3} small onClick={this.handleOpenHardResetModal}>
