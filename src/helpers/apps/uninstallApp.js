@@ -17,5 +17,5 @@ export default async function uninstallApp(
     firmware: appParams.delete,
     firmwareKey: appParams.deleteKey,
   }
-  return createSocketDialog(transport, '/update/install', params)
+  return createSocketDialog(transport, '/install', params)
 }

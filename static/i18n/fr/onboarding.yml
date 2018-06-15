@@ -75,7 +75,8 @@ writeSeed:
     note4: Never use a device supplied with a recovery phrase and/or a PIN code.
 genuineCheck:
   title: Final security check
-  desc: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
+  descNano: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
+  descBlue: Your Ledger Blue should now display Your device is now ready. Before getting started, please confirm that
   steps:
     step1:
       title: Did you choose your PIN code by yourself?

@@ -198,7 +198,7 @@ class ReceiveModal extends PureComponent<Props, State> {
         })
       } else {
         this.setState({
-          account: accounts[0]
+          account: accounts[0],
         })
       }
     }

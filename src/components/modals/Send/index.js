@@ -15,6 +15,7 @@ import { getBridgeForCurrency } from 'bridge'
 
 import { accountsSelector } from 'reducers/accounts'
 import { updateAccountWithUpdater } from 'actions/accounts'
+import createCustomErrorClass from 'helpers/createCustomErrorClass'
 
 import { MODAL_SEND } from 'config/constants'
 import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
@@ -31,6 +32,8 @@ import ConfirmationFooter from './ConfirmationFooter'
 import StepAmount from './01-step-amount'
 import StepVerification from './03-step-verification'
 import StepConfirmation from './04-step-confirmation'
+
+export const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice')
 
 type Props = {
   updateAccountWithUpdater: (string, (Account) => Account) => void,
@@ -226,14 +229,11 @@ class SendModal extends Component<Props, State<*>> {
     })
   }
 
-  onOperationError = (error: Error) => {
-    // $FlowFixMe
-    if (error.statusCode === 0x6985) {
-      // User denied on device
-      this.setState({ error })
-    } else {
-      this.setState({ error, stepIndex: 3 })
-    }
+  onOperationError = (error: *) => {
+    this.setState({
+      error: error.statusCode === 0x6985 ? new UserRefusedOnDevice() : error,
+      stepIndex: 3,
+    })
   }
 
   onChangeAccount = account => {

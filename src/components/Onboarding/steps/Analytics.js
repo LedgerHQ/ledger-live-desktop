@@ -19,7 +19,7 @@ type State = {
 }
 
 const INITIAL_STATE = {
-  analyticsToggle: true,
+  analyticsToggle: false,
   sentryLogsToggle: true,
 }
 

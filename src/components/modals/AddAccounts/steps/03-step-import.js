@@ -160,7 +160,9 @@ class StepImport extends PureComponent<StepProps> {
       count: importableAccounts.length,
     })
 
-    const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', { currencyName: currency ? ` ${currency.name}}` : ''})
+    const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', {
+      currencyName: currency ? ` ${currency.name}}` : '',
+    })
 
     return (
       <Fragment>

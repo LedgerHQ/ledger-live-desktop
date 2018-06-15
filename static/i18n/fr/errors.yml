@@ -16,3 +16,4 @@ LedgerAPINotAvailable: 'Ledger API is not available for currency {{currencyName}
 LedgerAPIError: 'A problem occurred with Ledger API. Please try again later. (HTTP {{status}})'
 NetworkDown: 'Your internet connection seems down. Please try again later.'
 NoAddressesFound: 'No accounts found'
+UserRefusedOnDevice: Transaction have been aborted

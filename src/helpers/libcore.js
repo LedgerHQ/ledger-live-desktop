@@ -312,7 +312,7 @@ function buildOperationRaw({
   const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
   const hash = bitcoinLikeTransaction.getHash()
   const operationType = op.getOperationType()
-  const value = op.getAmount().toLong()
+  let value = op.getAmount().toLong()
   const fee = op.getFees().toLong()
 
   const OperationTypeMap: { [_: $Keys<typeof core.OPERATION_TYPES>]: OperationType } = {
@@ -322,6 +322,10 @@ function buildOperationRaw({
 
   // if transaction is a send, amount becomes negative
   const type = OperationTypeMap[operationType]
+
+  if (type === 'OUT') {
+    value += fee
+  }
 
   return {
     id,
