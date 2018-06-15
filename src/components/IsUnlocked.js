@@ -138,13 +138,11 @@ class IsUnlocked extends Component<Props, State> {
       this.setState({ isHardResetting: false })
     }
   }
-  hardResetIconRender = () => {
-    return (
+  hardResetIconRender = () => (
       <IconWrapperCircle color="alertRed">
         <IconTriangleWarning width={23} height={21} />
       </IconWrapperCircle>
     )
-  }
   render() {
     const { inputValue, incorrectPassword, isHardResetting, isHardResetModalOpened } = this.state
     const { isLocked, t } = this.props
