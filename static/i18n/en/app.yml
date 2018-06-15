@@ -131,6 +131,9 @@ addAccounts:
   selectAll: Select all
   unselectAll: Unselect all
   editName: Edit name
+  newAccount: New account
+  legacyAccount: '{{accountName}} (legacy)'
+  noAccountToImport: We didnt find any {{currencyName}}} account to import.
   success: Great success!
   createNewAccount:
     title: Create new account
