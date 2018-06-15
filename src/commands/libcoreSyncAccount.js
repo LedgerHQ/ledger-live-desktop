@@ -14,9 +14,7 @@ type Input = {
 type Result = AccountRaw
 
 const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', ({ rawAccount }) =>
-  fromPromise(
-    withLibcore((core, njsWalletPool) => syncAccount({ rawAccount, core, njsWalletPool })),
-  ),
+  fromPromise(withLibcore(core => syncAccount({ rawAccount, core }))),
 )
 
 export default cmd

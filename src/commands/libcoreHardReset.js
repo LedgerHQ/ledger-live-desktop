@@ -6,9 +6,9 @@ import withLibcore from 'helpers/withLibcore'
 
 const cmd = createCommand('libcoreHardReset', () =>
   Observable.create(o => {
-    withLibcore(async (core, njsWalletPool) => {
+    withLibcore(async core => {
       try {
-        njsWalletPool.eraseDataSince(new Date(0))
+        core.getPoolInstance().eraseDataSince(new Date(0))
         o.complete()
       } catch (e) {
         o.error(e)

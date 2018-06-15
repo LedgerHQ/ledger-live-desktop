@@ -15,7 +15,7 @@ const cmd: Command<Input, boolean> = createCommand(
   ({ currencyId, address }) =>
     fromPromise(
       withLibcore(async core => {
-        const currency = await core.getCurrency(currencyId)
+        const currency = await core.getPoolInstance().getCurrency(currencyId)
         return isValidAddress(core, currency, address)
       }),
     ),

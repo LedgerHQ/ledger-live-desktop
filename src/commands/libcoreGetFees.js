@@ -33,14 +33,20 @@ const cmd: Command<Input, Result> = createCommand(
 
       withLibcore(async core => {
         const { walletName } = accountIdHelper.decode(accountId)
-        const njsWallet = await core.getWallet(walletName)
+        const njsWallet = await core.getPoolInstance().getWallet(walletName)
         if (isCancelled()) return
         const njsAccount = await njsWallet.getAccount(accountIndex)
         if (isCancelled()) return
         const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
         const njsWalletCurrency = njsWallet.getCurrency()
-        const amount = core.createAmount(njsWalletCurrency, transaction.amount)
-        const feesPerByte = core.createAmount(njsWalletCurrency, transaction.feePerByte)
+        const amount = new core.NJSAmount(njsWalletCurrency, transaction.amount).fromLong(
+          njsWalletCurrency,
+          transaction.amount,
+        )
+        const feesPerByte = new core.NJSAmount(njsWalletCurrency, transaction.feePerByte).fromLong(
+          njsWalletCurrency,
+          transaction.feePerByte,
+        )
         const transactionBuilder = bitcoinLikeAccount.buildTransaction()
         if (!isValidAddress(core, njsWalletCurrency, transaction.recipient)) {
           // FIXME this is a bug in libcore. later it will probably check this and we can remove this check
