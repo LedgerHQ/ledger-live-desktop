@@ -62,8 +62,10 @@ class UpdateDownloaded extends PureComponent<Props> {
         return (
           <Box horizontal flow={3}>
             <UpdateIcon size={16} />
-            <NotifText>{t('app:update.newVersionReady')}</NotifText>
-            <Box ml="auto">
+            <Box grow>
+              <NotifText>{t('app:update.newVersionReady')}</NotifText>
+            </Box>
+            <Box>
               <NotifText
                 style={{ cursor: 'pointer', textDecoration: 'underline' }}
                 onClick={() => sendEvent('updater', 'quitAndInstall')}
