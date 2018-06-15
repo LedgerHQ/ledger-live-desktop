@@ -27,14 +27,13 @@ const Info = styled(Box).attrs({
 `
 
 type Props = {
-  hasError: boolean,
   t: T,
 }
 
-export default ({ t, hasError }: Props) => (
+export default ({ t }: Props) => (
   <Container>
     <WarnBox>{multiline(t('app:send.steps.verification.warning'))}</WarnBox>
     <Info>{t('app:send.steps.verification.body')}</Info>
-    <DeviceConfirm error={hasError} />
+    <DeviceConfirm />
   </Container>
 )

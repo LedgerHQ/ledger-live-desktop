@@ -41,7 +41,7 @@ const WrapperIcon = styled(Box)`
   }
 `
 
-const Check = ({ error }: { error: * }) => (
+const Check = ({ error }: { error?: boolean }) => (
   <WrapperIcon error={error}>
     {error ? <IconCross size={10} /> : <IconCheck size={10} />}
   </WrapperIcon>
@@ -74,7 +74,7 @@ const PushButton = styled(Box)`
 `
 
 type Props = {
-  error: *,
+  error?: boolean,
 }
 
 const SVG = (
