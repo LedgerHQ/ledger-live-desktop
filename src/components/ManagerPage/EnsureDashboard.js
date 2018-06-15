@@ -42,6 +42,7 @@ class EnsureDashboard extends PureComponent<Props, State> {
 
   componentDidMount() {
     this.checkForDashboard()
+    this._interval = setInterval(this.checkForDashboard, 1000)
   }
 
   componentDidUpdate() {
@@ -50,12 +51,14 @@ class EnsureDashboard extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     this._unmounting = true
+    clearInterval(this._interval)
   }
 
   _checking = false
   _unmounting = false
+  _interval: *
 
-  async checkForDashboard() {
+  checkForDashboard = async () => {
     const { device } = this.props
     if (device && !this._checking) {
       this._checking = true
