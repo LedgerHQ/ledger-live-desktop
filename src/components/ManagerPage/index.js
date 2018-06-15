@@ -6,8 +6,8 @@ import React from 'react'
 import type { Node } from 'react'
 import type { Device } from 'types/common'
 
-import Workflow from './Workflow'
-import WorkflowDefault from './WorkflowDefault'
+import Workflow from 'components/Workflow/Workflow'
+import WorkflowDefault from 'components/Workflow/WorkflowDefault'
 import Dashboard from './Dashboard'
 
 type DeviceInfo = {
