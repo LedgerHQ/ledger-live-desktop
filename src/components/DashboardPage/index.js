@@ -95,93 +95,95 @@ class DashboardPage extends PureComponent<Props, State> {
     const displayOperations = accounts.some(displayOperationsHelper)
 
     return (
-      <Box flow={7}>
-        {totalAccounts > 0 ? (
-          <Fragment>
-            <UpdateNotifier mt={-5} />
-            <Box horizontal alignItems="flex-end">
-              <Box grow>
-                <Text color="dark" ff="Museo Sans" fontSize={7}>
-                  {t(timeFrame)}
-                </Text>
-                <Text color="grey" fontSize={5} ff="Museo Sans|Light">
-                  {t('app:dashboard.summary', { count: totalAccounts })}
-                </Text>
-              </Box>
-              <Box>
-                <PillsDaysCount
-                  selectedTime={selectedTime}
-                  onChange={this.handleChangeSelectedTime}
-                />
-              </Box>
-            </Box>
+      <Fragment>
+        <UpdateNotifier />
+        <Box flow={7}>
+          {totalAccounts > 0 ? (
             <Fragment>
-              <BalanceSummary
-                counterValue={counterValue}
-                chartId="dashboard-chart"
-                chartColor={colors.wallet}
-                accounts={accounts}
-                selectedTime={selectedTime}
-                daysCount={daysCount}
-                renderHeader={({ totalBalance, selectedTime, sinceBalance, refBalance }) => (
-                  <BalanceInfos
-                    t={t}
-                    counterValue={counterValue}
-                    totalBalance={totalBalance}
-                    since={selectedTime}
-                    sinceBalance={sinceBalance}
-                    refBalance={refBalance}
-                  />
-                )}
-              />
-              <Box flow={4}>
-                <Box horizontal alignItems="flex-end">
-                  <Text color="dark" ff="Museo Sans" fontSize={6}>
-                    {t('app:dashboard.accounts.title', { count: accounts.length })}
+              <Box horizontal alignItems="flex-end">
+                <Box grow>
+                  <Text color="dark" ff="Museo Sans" fontSize={7}>
+                    {t(timeFrame)}
                   </Text>
-                  <Box ml="auto" horizontal flow={1}>
-                    <AccountsOrder />
+                  <Text color="grey" fontSize={5} ff="Museo Sans|Light">
+                    {t('app:dashboard.summary', { count: totalAccounts })}
+                  </Text>
+                </Box>
+                <Box>
+                  <PillsDaysCount
+                    selectedTime={selectedTime}
+                    onChange={this.handleChangeSelectedTime}
+                  />
+                </Box>
+              </Box>
+              <Fragment>
+                <BalanceSummary
+                  counterValue={counterValue}
+                  chartId="dashboard-chart"
+                  chartColor={colors.wallet}
+                  accounts={accounts}
+                  selectedTime={selectedTime}
+                  daysCount={daysCount}
+                  renderHeader={({ totalBalance, selectedTime, sinceBalance, refBalance }) => (
+                    <BalanceInfos
+                      t={t}
+                      counterValue={counterValue}
+                      totalBalance={totalBalance}
+                      since={selectedTime}
+                      sinceBalance={sinceBalance}
+                      refBalance={refBalance}
+                    />
+                  )}
+                />
+                <Box flow={4}>
+                  <Box horizontal alignItems="flex-end">
+                    <Text color="dark" ff="Museo Sans" fontSize={6}>
+                      {t('app:dashboard.accounts.title', { count: accounts.length })}
+                    </Text>
+                    <Box ml="auto" horizontal flow={1}>
+                      <AccountsOrder />
+                    </Box>
+                  </Box>
+                  <Box
+                    horizontal
+                    flexWrap="wrap"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    style={{ margin: '0 -16px' }}
+                  >
+                    {accounts
+                      .concat(Array(3 - (accounts.length % 3)).fill(null))
+                      .map((account, i) => (
+                        <Box key={account ? account.id : `placeholder_${i}`} flex="33%" p={16}>
+                          {account ? (
+                            <AccountCard
+                              key={account.id}
+                              counterValue={counterValue}
+                              account={account}
+                              daysCount={daysCount}
+                              onClick={this.onAccountClick}
+                            />
+                          ) : null}
+                        </Box>
+                      ))}
                   </Box>
                 </Box>
-                <Box
-                  horizontal
-                  flexWrap="wrap"
-                  justifyContent="flex-start"
-                  alignItems="center"
-                  style={{ margin: '0 -16px' }}
-                >
-                  {accounts
-                    .concat(Array(3 - (accounts.length % 3)).fill(null))
-                    .map((account, i) => (
-                      <Box key={account ? account.id : `placeholder_${i}`} flex="33%" p={16}>
-                        {account ? (
-                          <AccountCard
-                            key={account.id}
-                            counterValue={counterValue}
-                            account={account}
-                            daysCount={daysCount}
-                            onClick={this.onAccountClick}
-                          />
-                        ) : null}
-                      </Box>
-                    ))}
-                </Box>
-              </Box>
-              {displayOperations && (
-                <OperationsList
-                  onAccountClick={this.onAccountClick}
-                  accounts={accounts}
-                  title={t('app:dashboard.recentActivity')}
-                  withAccount
-                />
-              )}
-              <StickyBackToTop />
+                {displayOperations && (
+                  <OperationsList
+                    onAccountClick={this.onAccountClick}
+                    accounts={accounts}
+                    title={t('app:dashboard.recentActivity')}
+                    withAccount
+                  />
+                )}
+                <StickyBackToTop />
+              </Fragment>
             </Fragment>
-          </Fragment>
-        ) : (
-          <EmptyState />
-        )}
-      </Box>
+          ) : (
+            <EmptyState />
+          )}
+        </Box>
+      </Fragment>
     )
   }
 }
