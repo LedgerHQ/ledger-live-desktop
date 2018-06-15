@@ -1,7 +1,12 @@
 // @flow
 
 import React, { Fragment, PureComponent } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import { createStructuredSelector } from 'reselect'
+
+import { accountsSelector } from 'reducers/accounts'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T, Device } from 'types/common'
@@ -26,6 +31,7 @@ import StepReceiveFunds from './04-step-receive-funds'
 
 type Props = {
   t: T,
+  accounts: Account[],
 }
 
 type State = {
@@ -56,6 +62,10 @@ const INITIAL_STATE = {
   stepsDisabled: [],
   stepsErrors: [],
 }
+
+const mapStateToProps = createStructuredSelector({
+  accounts: accountsSelector,
+})
 
 class ReceiveModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
@@ -178,11 +188,19 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   handleBeforeOpenModal = ({ data }) => {
     const { account } = this.state
-    if (data && data.account && !account) {
-      this.setState({
-        account: data.account,
-        stepIndex: 1,
-      })
+    const { accounts } = this.props
+
+    if (!account) {
+      if (data && data.account) {
+        this.setState({
+          account: data.account,
+          stepIndex: 1,
+        })
+      } else {
+        this.setState({
+          account: accounts[0]
+        })
+      }
     }
   }
 
@@ -348,4 +366,7 @@ class ReceiveModal extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(ReceiveModal)
+export default compose(
+  connect(mapStateToProps),
+  translate(),
+)(ReceiveModal)
