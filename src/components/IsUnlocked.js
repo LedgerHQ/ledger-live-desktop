@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { remote } from 'electron'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
@@ -14,12 +15,15 @@ import IconLockScreen from 'icons/LockScreen'
 import get from 'lodash/get'
 
 import { setEncryptionKey } from 'helpers/db'
+import hardReset from 'helpers/hardReset'
 
 import { fetchAccounts } from 'actions/accounts'
 import { isLocked, unlock } from 'reducers/application'
 
 import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
+import Button from './base/Button/index'
+import ConfirmModal from './base/Modal/ConfirmModal'
 
 type InputValue = {
   password: string,
@@ -36,6 +40,8 @@ type Props = {
 type State = {
   inputValue: InputValue,
   incorrectPassword: boolean,
+  isHardResetting: boolean,
+  isHardResetModalOpened: boolean,
 }
 
 const mapStateToProps = state => ({
@@ -53,6 +59,8 @@ const defaultState = {
     password: '',
   },
   incorrectPassword: false,
+  isHardResetting: false,
+  isHardResetModalOpened: false,
 }
 
 export const PageTitle = styled(Box).attrs({
@@ -96,6 +104,7 @@ class IsUnlocked extends Component<Props, State> {
         ...prev.inputValue,
         [key]: value,
       },
+      incorrectPassword: false,
     }))
 
   handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
@@ -117,8 +126,21 @@ class IsUnlocked extends Component<Props, State> {
     }
   }
 
+  handleOpenHardResetModal = () => this.setState({ isHardResetModalOpened: true })
+  handleCloseHardResetModal = () => this.setState({ isHardResetModalOpened: false })
+
+  handleHardReset = async () => {
+    this.setState({ isHardResetting: true })
+    try {
+      await hardReset()
+      remote.getCurrentWindow().webContents.reloadIgnoringCache()
+    } catch (err) {
+      this.setState({ isHardResetting: false })
+    }
+  }
+
   render() {
-    const { inputValue, incorrectPassword } = this.state
+    const { inputValue, incorrectPassword, isHardResetting, isHardResetModalOpened } = this.state
     const { isLocked, t } = this.props
 
     if (isLocked) {
@@ -140,11 +162,29 @@ class IsUnlocked extends Component<Props, State> {
                   type="password"
                   onChange={this.handleChangeInput('password')}
                   value={inputValue.password}
-                  error={incorrectPassword && t('app:password.errorMessageIncorrectPassword')}
+                  error={
+                    incorrectPassword &&
+                    inputValue.password.length &&
+                    t('app:password.errorMessageIncorrectPassword')
+                  }
                 />
               </Box>
+              <Button type="button" mt={3} small onClick={this.handleOpenHardResetModal}>
+                {t('app:common.lockScreen.lostPassword')}
+              </Button>
             </Box>
           </form>
+          <ConfirmModal
+            isDanger
+            isLoading={isHardResetting}
+            isOpened={isHardResetModalOpened}
+            onClose={this.handleCloseHardResetModal}
+            onReject={this.handleCloseHardResetModal}
+            onConfirm={this.handleHardReset}
+            title={t('app:settings.hardResetModal.title')}
+            subTitle={t('app:settings.hardResetModal.subTitle')}
+            desc={t('app:settings.hardResetModal.desc')}
+          />
         </Box>
       )
     }
