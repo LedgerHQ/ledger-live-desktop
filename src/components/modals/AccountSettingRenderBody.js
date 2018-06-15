@@ -151,6 +151,7 @@ class HelperComp extends PureComponent<Props, State> {
               <Box>
                 <Input
                   value={account.name}
+                  maxLength={30}
                   onChange={this.handleChangeName}
                   renderLeft={<InputLeft currency={account.currency} />}
                   onFocus={e => this.handleFocus(e, 'accountName')}

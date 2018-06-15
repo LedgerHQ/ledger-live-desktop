@@ -129,7 +129,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       <FixedTopContainer>
         <Box grow alignItems="center">
           <Title>{t('onboarding:genuineCheck.title')}</Title>
-          <Description>{t('onboarding:genuineCheck.desc')}</Description>
+          {onboarding.isLedgerNano ? (
+            <Description>{t('onboarding:genuineCheck.descNano')}</Description>
+          ) : (
+            <Description>{t('onboarding:genuineCheck.descBlue')}</Description>
+          )}
+
           <Box mt={5}>
             <CardWrapper>
               <Box justify="center">

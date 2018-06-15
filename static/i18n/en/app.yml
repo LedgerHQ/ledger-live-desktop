@@ -31,6 +31,7 @@ common:
     subTitle: Your application is locked
     description: Please enter your password to continue
     inputPlaceholder: Type your password
+    lostPassword: I lost my password
   sync:
     syncing: Syncing...
     upToDate: Up to date
@@ -118,7 +119,7 @@ exchange:
   coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital currency, anywhere in the world.'
 genuinecheck:
   modal:
-    title: Genuine check, bro
+    title: Genuine check
 addAccounts:
   title: Add accounts
   breadcrumb:
@@ -306,9 +307,8 @@ settings:
     terms: Terms and Privacy policy
     termsDesc: Lorem ipsum dolor sit amet
   hardResetModal:
-    title: Hard reset
-    subTitle: Are you sure houston?
-    desc: Lorem ipsum dolor sit amet
+    title: Reset Ledger Live
+    desc: Resetting will erase all Ledger Live data stored on your computer, including your profile, accounts, transaction history and application settings. The keys to access your crypto assets in the blockchain remain secure on your Ledger device.
   softResetModal:
     title: Clean application cache
     subTitle: Are you sure houston?

@@ -14,8 +14,9 @@ type Props = {
   isOpened: boolean,
   isDanger: boolean,
   title: string,
-  subTitle: string,
+  subTitle?: string,
   desc: string,
+  renderIcon?: Function,
   confirmText?: string,
   cancelText?: string,
   onReject: Function,
@@ -37,6 +38,7 @@ class ConfirmModal extends PureComponent<Props> {
       onReject,
       onConfirm,
       isLoading,
+      renderIcon,
       t,
       ...props
     } = this.props
@@ -55,6 +57,11 @@ class ConfirmModal extends PureComponent<Props> {
               {subTitle && (
                 <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
                   {subTitle}
+                </Box>
+              )}
+              {renderIcon && (
+                <Box justifyContent="center" alignItems="center" mt={4} mb={3}>
+                  {renderIcon()}
                 </Box>
               )}
               <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center">
