@@ -96,9 +96,9 @@ class DashboardPage extends PureComponent<Props, State> {
 
     return (
       <Box flow={7}>
+        <UpdateNotifier mt={-5} />
         {totalAccounts > 0 ? (
           <Fragment>
-            <UpdateNotifier mt={-5} />
             <Box horizontal alignItems="flex-end">
               <Box grow>
                 <Text color="dark" ff="Museo Sans" fontSize={7}>

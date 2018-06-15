@@ -48,6 +48,9 @@ class EmptyState extends PureComponent<Props, *> {
           <Title>{t('app:emptyState.dashboard.title')}</Title>
           <Description>{t('app:emptyState.dashboard.desc')}</Description>
           <Box mt={3} horizontal justifyContent="space-around" style={{ width: 300 }}>
+            <Button padded primary style={{ width: 120 }} onClick={this.handleInstallApp}>
+              {t('app:emptyState.dashboard.buttons.installApp')}
+            </Button>
             <Button
               padded
               primary
@@ -55,9 +58,6 @@ class EmptyState extends PureComponent<Props, *> {
               onClick={() => openModal(MODAL_ADD_ACCOUNTS)}
             >
               {t('app:emptyState.dashboard.buttons.addAccount')}
-            </Button>
-            <Button padded primary style={{ width: 120 }} onClick={this.handleInstallApp}>
-              {t('app:emptyState.dashboard.buttons.installApp')}
             </Button>
           </Box>
         </Box>
