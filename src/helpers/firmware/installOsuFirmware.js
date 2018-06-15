@@ -13,7 +13,7 @@ const buildOsuParams = buildParamsFromFirmware('osu')
 export default async (transport: Transport<*>, firmware: Input): Result => {
   try {
     const osuData = buildOsuParams(firmware)
-    await createSocketDialog(transport, '/update/install', osuData)
+    await createSocketDialog(transport, '/install', osuData)
     return { success: true }
   } catch (err) {
     const error = Error(err.message)
