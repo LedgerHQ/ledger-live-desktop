@@ -175,7 +175,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
     !t.amount
       ? Promise.resolve(true)
       : getFees(a, t)
-          .then(fees => fees !== null)
+          .then(() => true)
           .catch(() => false),
 
   getTotalSpent: (a, t) =>
