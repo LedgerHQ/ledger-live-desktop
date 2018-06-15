@@ -14,10 +14,6 @@ import Select from 'components/base/LegacySelect'
 
 import type { Unit } from '@ledgerhq/live-common/lib/types'
 
-function parseValue(value) {
-  return value.toString().replace(/,/g, '.')
-}
-
 function format(unit: Unit, value: number, { isFocused, showAllDigits, subMagnitude }) {
   // FIXME do we need locale for the input too ?
   return formatCurrencyUnit(unit, value, {
@@ -104,7 +100,9 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   handleChange = (v: string) => {
-    v = parseValue(v)
+    // FIXME this is to refactor. this is hacky and don't cover everything..
+
+    v = v.toString().replace(/,/g, '.')
 
     // allow to type directly `.` in input to have `0.`
     if (v.startsWith('.')) {
@@ -120,7 +118,8 @@ class InputCurrency extends PureComponent<Props, State> {
     }
 
     // Check if value is valid Number
-    if (isNaN(Number(v))) {
+    const asNumber = parseFloat(v)
+    if (isNaN(asNumber) || !isFinite(asNumber) || asNumber < 0) {
       return
     }
 
