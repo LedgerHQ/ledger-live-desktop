@@ -48,7 +48,7 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
 
 const recipientValidLRU = LRU({ max: 100 })
 
-const isRecipientValid = (currency, recipient): Promise<boolean> => {
+const isRecipientValid = (currency, recipient) => {
   const key = `${currency.id}_${recipient}`
   let promise = recipientValidLRU.get(key)
   if (promise) return promise
@@ -172,14 +172,18 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
   canBeSpent: (a, t) =>
-    getFees(a, t)
-      .then(fees => fees !== null)
-      .catch(() => false),
+    !t.amount
+      ? Promise.resolve(true)
+      : getFees(a, t)
+          .then(() => true)
+          .catch(() => false),
 
   getTotalSpent: (a, t) =>
-    getFees(a, t)
-      .then(totalFees => t.amount + (totalFees || 0))
-      .catch(() => 0),
+    !t.amount
+      ? Promise.resolve(0)
+      : getFees(a, t)
+          .then(totalFees => t.amount + (totalFees || 0))
+          .catch(() => 0),
 
   getMaxAmount: (a, t) =>
     getFees(a, t)
