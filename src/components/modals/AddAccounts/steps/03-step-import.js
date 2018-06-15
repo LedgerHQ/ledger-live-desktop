@@ -163,10 +163,8 @@ class StepImport extends PureComponent<StepProps> {
             isLoading={scanStatus === 'scanning'}
           />
           <AccountsList
-            title={t('app:addAccounts.createNewAccount')}
-            emptyText={
-              'You cannot create a new account because your last account has no operations'
-            }
+            title={t('app:addAccounts.createNewAccount.title')}
+            emptyText={t('app:addAccounts.createNewAccount.noOperationOnLastAccount')}
             accounts={creatableAccounts}
             checkedIds={checkedAccountsIds}
             onToggleAccount={this.handleToggleAccount}
