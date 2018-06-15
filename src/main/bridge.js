@@ -27,12 +27,17 @@ sentry(() => sentryEnabled, userId)
 const killInternalProcess = () => {
   if (internalProcess) {
     logger.log('killing internal process...')
+    internalProcess.removeListener('exit', handleExit)
     internalProcess.kill('SIGINT')
     internalProcess = null
   }
 }
 
 const forkBundlePath = path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`)
+const handleExit = code => {
+  logger.warn(`Internal process ended with code ${code}`)
+  internalProcess = null
+}
 
 const bootInternalProcess = () => {
   logger.log('booting internal process...')
@@ -45,10 +50,7 @@ const bootInternalProcess = () => {
     },
   })
   internalProcess.on('message', handleGlobalInternalMessage)
-  internalProcess.on('exit', code => {
-    logger.warn(`Internal process ended with code ${code}`)
-    internalProcess = null
-  })
+  internalProcess.on('exit', handleExit)
 }
 
 process.on('exit', () => {
