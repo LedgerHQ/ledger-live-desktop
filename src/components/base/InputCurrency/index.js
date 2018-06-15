@@ -43,7 +43,7 @@ const sanitizeValueString = (
       display += '.'
     }
   }
-  for (let i = decimals; i < unit.magnitude; ++i) {
+  for (let i = Math.max(0, decimals); i < unit.magnitude; ++i) {
     value += '0'
   }
   if (!value) value = '0'
