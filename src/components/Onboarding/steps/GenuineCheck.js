@@ -87,13 +87,14 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   handleOpenGenuineCheckModal = () => this.setState({ isGenuineCheckModalOpened: true })
-  handleCloseGenuineCheckModal = () => this.setState({ isGenuineCheckModalOpened: false })
+  handleCloseGenuineCheckModal = (cb?: Function) =>
+    this.setState(state => ({ ...state, isGenuineCheckModalOpened: false }), () => cb && cb())
 
-  handleGenuineCheck = async isGenuine => {
-    await new Promise(r => setTimeout(r, 1e3)) // let's wait a bit before closing modal
-    this.handleCloseGenuineCheckModal()
-    this.props.updateGenuineCheck({
-      isDeviceGenuine: isGenuine,
+  handleGenuineCheck = isGenuine => {
+    this.handleCloseGenuineCheckModal(() => {
+      this.props.updateGenuineCheck({
+        isDeviceGenuine: isGenuine,
+      })
     })
   }
 

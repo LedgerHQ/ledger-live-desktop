@@ -2,7 +2,6 @@
 import { PureComponent } from 'react'
 import isEqual from 'lodash/isEqual'
 
-import type { Node } from 'react'
 import type { Device } from 'types/common'
 
 import getIsGenuine from 'commands/getIsGenuine'
@@ -20,7 +19,7 @@ type DeviceInfos = {
 type Props = {
   device: ?Device,
   infos: ?DeviceInfos,
-  children: (isGenuine: ?boolean, error: ?Error) => Node,
+  children: (isGenuine: ?boolean, error: ?Error) => *,
 }
 
 type State = {

@@ -22,6 +22,8 @@ import IconHome from 'icons/Home'
 
 import * as IconDevice from 'icons/device'
 
+// TODO: CHECK IF COMPONENT CAN BE REMOVED
+
 const Step = styled(Box).attrs({
   borderRadius: 1,
   justifyContent: 'center',
@@ -147,7 +149,10 @@ type Props = {
   deviceSelected: ?Device,
   onChangeDevice: Device => void,
   t: T,
-  error: ?Error,
+  errors: ?{
+    genuineError: ?Error,
+    dashboardError: ?Error,
+  },
 }
 
 const emitChangeDevice = props => {
@@ -187,7 +192,7 @@ class DeviceConnect extends PureComponent<Props> {
       genuineCheckStatus,
       withGenuineCheck,
       appOpened,
-      error,
+      errors,
       currency,
       t,
       onChangeDevice,
@@ -304,11 +309,11 @@ class DeviceConnect extends PureComponent<Props> {
           </Step>
         )}
 
-        {appState.fail ? (
+        {errors && (errors.genuineError || errors.dashboardError) ? (
           <Info hasErrors>
             <IconInfoCircle size={12} />
             <Box shrink selectable>
-              <TranslatedError error={error} />
+              <TranslatedError error={errors.genuineError || errors.dashboardError} />
             </Box>
           </Info>
         ) : null}

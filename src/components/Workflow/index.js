@@ -31,9 +31,10 @@ type Props = {
       genuineError: ?Error,
     },
   ) => Node,
-  renderMcuUpdate: (deviceInfo: DeviceInfo) => Node,
-  renderFinalUpdate: (deviceInfo: DeviceInfo) => Node,
-  renderDashboard: (device: Device, deviceInfo: DeviceInfo) => Node,
+  renderMcuUpdate?: (deviceInfo: DeviceInfo) => Node,
+  renderFinalUpdate?: (deviceInfo: DeviceInfo) => Node,
+  renderDashboard?: (device: Device, deviceInfo: DeviceInfo, isGenuine: boolean) => Node,
+  onGenuineCheck?: (isGenuine: boolean) => void,
   renderError?: (dashboardError: ?Error, genuineError: ?Error) => Node,
 }
 type State = {}
@@ -46,6 +47,7 @@ class Workflow extends PureComponent<Props, State> {
       renderMcuUpdate,
       renderError,
       renderDefault,
+      onGenuineCheck,
     } = this.props
     return (
       <EnsureDevice>
@@ -63,16 +65,18 @@ class Workflow extends PureComponent<Props, State> {
                         })
                   }
 
-                  if (deviceInfo && deviceInfo.mcu) {
+                  if (deviceInfo && deviceInfo.mcu && renderMcuUpdate) {
                     return renderMcuUpdate(deviceInfo)
                   }
 
-                  if (deviceInfo && deviceInfo.final) {
+                  if (deviceInfo && deviceInfo.final && renderFinalUpdate) {
                     return renderFinalUpdate(deviceInfo)
                   }
 
                   if (isGenuine && deviceInfo && device && !dashboardError && !genuineError) {
-                    return renderDashboard(device, deviceInfo)
+                    if (onGenuineCheck) onGenuineCheck(isGenuine)
+
+                    if (renderDashboard) return renderDashboard(device, deviceInfo, isGenuine)
                   }
 
                   return renderDefault(device, deviceInfo, isGenuine, {
