@@ -37,6 +37,7 @@ type OwnProps = {
   preventBackdropClick?: boolean,
   render: Function,
   refocusWhenChange?: string,
+  width?: string,
 }
 
 type Props = OwnProps & {
@@ -108,7 +109,7 @@ const Wrapper = styled(Box).attrs({
   }),
 })`
   outline: none;
-  width: 500px;
+  width: ${p => (p.width ? p.width : '500px')};
   z-index: 2;
 `
 
@@ -180,7 +181,7 @@ export class Modal extends Component<Props> {
   }
 
   render() {
-    const { preventBackdropClick, isOpened, onHide, render, data, onClose } = this.props
+    const { preventBackdropClick, isOpened, onHide, render, data, onClose, width } = this.props
 
     return (
       <Mortal
@@ -204,6 +205,7 @@ export class Modal extends Component<Props> {
                 scale={m.scale}
                 innerRef={n => (this._wrapper = n)}
                 onClick={stopPropagation}
+                width={width}
               >
                 <Pure isAnimated={isAnimated} render={render} data={data} onClose={onClose} />
               </Wrapper>

@@ -28,6 +28,22 @@ class StepImport extends PureComponent<StepProps> {
 
   scanSubscription = null
 
+  translateName(account: Account) {
+    const { t } = this.props
+    let { name } = account
+
+    if (name === 'New Account') {
+      name = t('app:addAccounts.newAccount')
+    } else if (name.indexOf('legacy') !== -1) {
+      name = t('app:addAccounts.legacyAccount', { accountName: name.replace(' (legacy)', '') })
+    }
+
+    return {
+      ...account,
+      name,
+    }
+  }
+
   startScanAccountsDevice() {
     const { currency, currentDevice, setState } = this.props
     try {
@@ -49,7 +65,7 @@ class StepImport extends PureComponent<StepProps> {
           const isNewAccount = account.operations.length === 0
           if (!hasAlreadyBeenScanned) {
             setState({
-              scannedAccounts: [...scannedAccounts, account],
+              scannedAccounts: [...scannedAccounts, this.translateName(account)],
               checkedAccountsIds:
                 !hasAlreadyBeenImported && !isNewAccount
                   ? uniq([...checkedAccountsIds, account.id])
@@ -144,9 +160,9 @@ class StepImport extends PureComponent<StepProps> {
       count: importableAccounts.length,
     })
 
-    const importableAccountsEmpty = `We didnt find any ${
-      currency ? ` ${currency.name}}` : ''
-    } account to import.`
+    const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', {
+      currencyName: currency ? ` ${currency.name}}` : '',
+    })
 
     return (
       <Fragment>

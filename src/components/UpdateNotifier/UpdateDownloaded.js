@@ -35,6 +35,7 @@ const Container = styled(Box).attrs({
   px: 3,
   bg: 'wallet',
   color: 'white',
+  mt: '-35px',
   style: p => ({
     transform: `translate3d(0, ${p.offset}%, 0)`,
   }),
@@ -62,8 +63,10 @@ class UpdateDownloaded extends PureComponent<Props> {
         return (
           <Box horizontal flow={3}>
             <UpdateIcon size={16} />
-            <NotifText>{t('app:update.newVersionReady')}</NotifText>
-            <Box ml="auto">
+            <Box grow>
+              <NotifText>{t('app:update.newVersionReady')}</NotifText>
+            </Box>
+            <Box>
               <NotifText
                 style={{ cursor: 'pointer', textDecoration: 'underline' }}
                 onClick={() => sendEvent('updater', 'quitAndInstall')}

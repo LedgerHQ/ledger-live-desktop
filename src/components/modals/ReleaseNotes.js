@@ -233,7 +233,7 @@ class ReleaseNotes extends PureComponent<Props, State> {
       )
     }
 
-    return <Modal name={MODAL_RELEASES_NOTES} render={renderBody} />
+    return <Modal name={MODAL_RELEASES_NOTES} render={renderBody} width="600px" />
   }
 }
 
