@@ -9,7 +9,7 @@ const intFromEnv = (key: string, def: number) => {
 export const GET_CALLS_TIMEOUT = intFromEnv('GET_CALLS_TIMEOUT', 30 * 1000)
 export const GET_CALLS_RETRY = intFromEnv('GET_CALLS_RETRY', 2)
 
-export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 2)
+export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 6)
 export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_ALL_INTERVAL = 60 * 1000
 
