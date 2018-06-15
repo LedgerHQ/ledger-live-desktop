@@ -11,7 +11,7 @@ import { translate } from 'react-i18next'
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 import IconLockScreen from 'icons/LockScreen'
-
+import IconTriangleWarning from 'icons/TriangleWarning'
 import get from 'lodash/get'
 
 import { setEncryptionKey } from 'helpers/db'
@@ -138,7 +138,13 @@ class IsUnlocked extends Component<Props, State> {
       this.setState({ isHardResetting: false })
     }
   }
-
+  hardResetIconRender = () => {
+    return (
+      <IconWrapperCircle color="alertRed">
+        <IconTriangleWarning width={23} height={21} />
+      </IconWrapperCircle>
+    )
+  }
   render() {
     const { inputValue, incorrectPassword, isHardResetting, isHardResetModalOpened } = this.state
     const { isLocked, t } = this.props
@@ -182,8 +188,8 @@ class IsUnlocked extends Component<Props, State> {
             onReject={this.handleCloseHardResetModal}
             onConfirm={this.handleHardReset}
             title={t('app:settings.hardResetModal.title')}
-            subTitle={t('app:settings.hardResetModal.subTitle')}
             desc={t('app:settings.hardResetModal.desc')}
+            renderIcon={this.hardResetIconRender}
           />
         </Box>
       )
@@ -204,3 +210,12 @@ export default compose(
   ),
   translate(),
 )(IsUnlocked)
+
+const IconWrapperCircle = styled(Box).attrs({})`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ea2e4919;
+  text-align: -webkit-center;
+  justify-content: center;
+`
