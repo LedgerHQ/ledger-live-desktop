@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Box from 'components/base/Box'
-import ArrowUp from 'icons/ArrowUp'
+import AngleUp from 'icons/AngleUp'
 
 const Container = styled(Box)`
   position: fixed;
@@ -85,7 +85,7 @@ class StickyBackToTop extends PureComponent<Props, State> {
     if (!el) return null
     return ReactDOM.createPortal(
       <Container align="center" justify="center" visible={visible} onClick={this.onClick}>
-        <ArrowUp size={16} />
+        <AngleUp size={20} />
       </Container>,
       el,
     )
