@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -10,6 +10,7 @@ import type { T } from 'types/common'
 import type { AsyncState } from 'reducers/bridgeSync'
 
 import { globalSyncStateSelector } from 'reducers/bridgeSync'
+import { hasAccountsSelector } from 'reducers/accounts'
 import { BridgeSyncConsumer } from 'bridge/BridgeSyncContext'
 import CounterValues from 'helpers/countervalues'
 
@@ -20,7 +21,10 @@ import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconCheckCircle from 'icons/CheckCircle'
 import ItemContainer from './ItemContainer'
 
-const mapStateToProps = createStructuredSelector({ globalSyncState: globalSyncStateSelector })
+const mapStateToProps = createStructuredSelector({
+  globalSyncState: globalSyncStateSelector,
+  hasAccounts: hasAccountsSelector,
+})
 
 type Props = {
   // FIXME: eslint should see that it is used in static method
@@ -28,8 +32,9 @@ type Props = {
 
   isPending: boolean,
   isError: boolean,
-  onClick: void => void,
   t: T,
+  cvPoll: *,
+  setSyncBehavior: *,
 }
 
 type State = {
@@ -38,7 +43,7 @@ type State = {
   isFirstSync: boolean,
 }
 
-class ActivityIndicatorInner extends Component<Props, State> {
+class ActivityIndicatorInner extends PureComponent<Props, State> {
   state = {
     hasClicked: false,
     isFirstSync: true,
@@ -61,10 +66,14 @@ class ActivityIndicatorInner extends Component<Props, State> {
     return nextState
   }
 
+  onClick = () => {
+    this.props.cvPoll()
+    this.props.setSyncBehavior({ type: 'SYNC_ALL_ACCOUNTS', priority: 5 })
+  }
+
   handleRefresh = () => {
-    const { onClick } = this.props
     this.setState({ hasClicked: true })
-    onClick()
+    this.onClick()
   }
 
   render() {
@@ -119,30 +128,37 @@ class ActivityIndicatorInner extends Component<Props, State> {
   }
 }
 
-const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState, t: T }) => (
-  <BridgeSyncConsumer>
-    {setSyncBehavior => (
-      <CounterValues.PollingConsumer>
-        {cvPolling => {
-          const isPending = cvPolling.pending || globalSyncState.pending
-          const isError = cvPolling.error || globalSyncState.error
-          return (
-            <ActivityIndicatorInner
-              t={t}
-              isPending={isPending}
-              isGlobalSyncStatePending={globalSyncState.pending}
-              isError={!!isError && !isPending}
-              onClick={() => {
-                cvPolling.poll()
-                setSyncBehavior({ type: 'SYNC_ALL_ACCOUNTS', priority: 5 })
-              }}
-            />
-          )
-        }}
-      </CounterValues.PollingConsumer>
-    )}
-  </BridgeSyncConsumer>
-)
+const ActivityIndicator = ({
+  globalSyncState,
+  hasAccounts,
+  t,
+}: {
+  globalSyncState: AsyncState,
+  hasAccounts: boolean,
+  t: T,
+}) =>
+  !hasAccounts ? null : (
+    <BridgeSyncConsumer>
+      {setSyncBehavior => (
+        <CounterValues.PollingConsumer>
+          {cvPolling => {
+            const isPending = cvPolling.pending || globalSyncState.pending
+            const isError = cvPolling.error || globalSyncState.error
+            return (
+              <ActivityIndicatorInner
+                t={t}
+                isPending={isPending}
+                isGlobalSyncStatePending={globalSyncState.pending}
+                isError={!!isError && !isPending}
+                cvPoll={cvPolling.poll}
+                setSyncBehavior={setSyncBehavior}
+              />
+            )
+          }}
+        </CounterValues.PollingConsumer>
+      )}
+    </BridgeSyncConsumer>
+  )
 
 export default compose(
   translate(),

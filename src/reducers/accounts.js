@@ -62,6 +62,8 @@ const handlers: Object = {
 
 export const accountsSelector = (state: { accounts: AccountsState }): Account[] => state.accounts
 
+export const hasAccountsSelector = createSelector(accountsSelector, accounts => accounts.length > 0)
+
 export const currenciesSelector = createSelector(accountsSelector, accounts =>
   [...new Set(accounts.map(a => a.currency))].sort((a, b) => a.name.localeCompare(b.name)),
 )
