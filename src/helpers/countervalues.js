@@ -18,15 +18,17 @@ const pairsSelector = createSelector(
   counterValueExchangeSelector,
   state => state,
   (currencies, counterValueCurrency, counterValueExchange, state) =>
-    [
-      { from: intermediaryCurrency, to: counterValueCurrency, exchange: counterValueExchange },
-    ].concat(
-      currencies.filter(c => c.ticker !== intermediaryCurrency.ticker).map(currency => ({
-        from: currency,
-        to: intermediaryCurrency,
-        exchange: currencySettingsSelector(state, { currency }).exchange,
-      })),
-    ),
+    currencies.length === 0
+      ? []
+      : [
+          { from: intermediaryCurrency, to: counterValueCurrency, exchange: counterValueExchange },
+        ].concat(
+          currencies.filter(c => c.ticker !== intermediaryCurrency.ticker).map(currency => ({
+            from: currency,
+            to: intermediaryCurrency,
+            exchange: currencySettingsSelector(state, { currency }).exchange,
+          })),
+        ),
 )
 
 const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
