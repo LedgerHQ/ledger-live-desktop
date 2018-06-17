@@ -8,6 +8,7 @@
     "__TEST__": false,
     "__PROD__": false,
     "__SENTRY_URL__": false,
+    "__GIT_REVISION__": false,
     "__PRINT_MODE__": false,
     "__GLOBAL_STYLES__": false,
     "__APP_VERSION__": false,
