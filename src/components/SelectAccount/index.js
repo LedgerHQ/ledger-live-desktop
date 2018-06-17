@@ -56,14 +56,16 @@ type Props = {
   t: T,
 }
 
+const getOptionValue = account => account.id
+
 const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => {
-  const options = accounts.map(a => ({ ...a, value: a.id, label: a.name }))
-  const selectedOption = value ? options.find(o => o.value === value.id) : null
+  const selectedOption = value ? accounts.find(o => o.id === value.id) : null
   return (
     <Select
       {...props}
       value={selectedOption}
-      options={options}
+      options={accounts}
+      getOptionValue={getOptionValue}
       renderValue={renderOption}
       renderOption={renderOption}
       placeholder={t('app:common.selectAccount')}

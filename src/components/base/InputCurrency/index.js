@@ -9,9 +9,11 @@ import noop from 'lodash/noop'
 
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
-import Select from 'components/base/LegacySelect'
+import Select from 'components/base/Select'
 
 import type { Unit } from '@ledgerhq/live-common/lib/types'
+
+const unitGetOptionValue = unit => unit.magnitude
 
 // TODO move this back to live common
 const numbers = '0123456789'
@@ -64,14 +66,8 @@ const Currencies = styled(Box)`
   position: relative;
   top: -1px;
   right: -1px;
+  width: 100px;
 `
-
-const Currency = styled(Box).attrs({
-  color: 'grey',
-  fontSize: 2,
-  pl: 2,
-  pr: 1,
-})``
 
 function stopPropagation(e) {
   e.stopPropagation()
@@ -167,9 +163,9 @@ class InputCurrency extends PureComponent<Props, State> {
     })
   }
 
-  renderItem = item => item.code
+  renderOption = item => item.data.code
 
-  renderSelected = item => <Currency>{item.code}</Currency>
+  renderValue = item => item.data.code
 
   renderListUnits = () => {
     const { units, onChangeUnit, unit } = this.props
@@ -182,14 +178,12 @@ class InputCurrency extends PureComponent<Props, State> {
     return (
       <Currencies onClick={stopPropagation}>
         <Select
-          bg="lightGraphite"
-          keyProp="code"
-          flatLeft
           onChange={onChangeUnit}
-          items={units}
+          options={units}
           value={unit}
-          renderItem={this.renderItem}
-          renderSelected={this.renderSelected}
+          getOptionValue={unitGetOptionValue}
+          renderOption={this.renderOption}
+          renderValue={this.renderValue}
           fakeFocusRight={isFocused}
         />
       </Currencies>
