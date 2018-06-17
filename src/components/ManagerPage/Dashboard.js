@@ -24,7 +24,7 @@ type Props = {
 }
 
 const Dashboard = ({ device, deviceInfo, t }: Props) => (
-  <Box flow={4}>
+  <Box flow={4} pb={8}>
     <Box>
       <Text ff="Museo Sans|Regular" fontSize={7} color="black">
         {t('app:manager.title')}
