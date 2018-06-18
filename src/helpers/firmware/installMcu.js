@@ -1,6 +1,7 @@
 // @flow
-import type Transport from '@ledgerhq/hw-transport'
 import qs from 'qs'
+import type Transport from '@ledgerhq/hw-transport'
+
 import { MANAGER_API_URL } from 'helpers/constants'
 import { createDeviceSocket } from 'helpers/socket'
 

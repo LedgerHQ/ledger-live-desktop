@@ -1,8 +1,10 @@
 // @flow
-
+import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import { createSocketDialog } from 'helpers/common'
+import { BASE_SOCKET_URL } from 'helpers/constants'
+import { createDeviceSocket } from 'helpers/socket'
+
 import type { LedgerScriptParams } from 'helpers/common'
 
 /**
@@ -17,5 +19,6 @@ export default async function uninstallApp(
     firmware: appParams.delete,
     firmwareKey: appParams.deleteKey,
   }
-  return createSocketDialog(transport, '/install', params)
+  const url = `${BASE_SOCKET_URL}/install?${qs.stringify(params)}`
+  return createDeviceSocket(transport, url).toPromise()
 }

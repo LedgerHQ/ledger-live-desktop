@@ -1,12 +1,16 @@
 // @flow
+import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
-import { createSocketDialog } from 'helpers/common'
-import { SKIP_GENUINE } from 'config/constants'
+import { SKIP_GENUINE, MANAGER_API_BASE } from 'config/constants'
+
+import { createDeviceSocket } from 'helpers/socket'
 
 export default async (
   transport: Transport<*>,
-  { targetId }: { targetId: string | number },
-): Promise<string> =>
-  SKIP_GENUINE
+  params: { targetId: string | number },
+): Promise<string> => {
+  const url = `${MANAGER_API_BASE}/genuine?${qs.stringify(params)}`
+  return SKIP_GENUINE
     ? new Promise(resolve => setTimeout(() => resolve('0000'), 1000))
-    : createSocketDialog(transport, '/genuine', { targetId }, true)
+    : createDeviceSocket(transport, url).toPromise()
+}

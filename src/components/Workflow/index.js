@@ -53,6 +53,7 @@ class Workflow extends PureComponent<Props, State> {
         {(device: Device) => (
           <EnsureDashboard device={device}>
             {(deviceInfo: ?DeviceInfo, dashboardError: ?Error) => {
+              console.log('deviceInfo', deviceInfo)
 
               if (deviceInfo && deviceInfo.mcu && renderMcuUpdate) {
                 return renderMcuUpdate(device, deviceInfo)
