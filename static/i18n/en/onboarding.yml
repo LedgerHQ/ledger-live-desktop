@@ -2,7 +2,7 @@ start:
   title: Welcome to Ledger Live
   startBtn: Get Started
 init:
-  title: Welcome to Ledger Live, the computer companion app to your Ledger device
+  title: Welcome to the Ledger Live companion app
   newDevice:
     title: Initialize your new Ledger device
     desc: Please replace it with the final wording once it’s done.
