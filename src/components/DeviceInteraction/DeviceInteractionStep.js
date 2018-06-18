@@ -110,26 +110,21 @@ class DeviceInteractionStep extends PureComponent<
   handleSuccess = (res: any) => {
     const { onSuccess, step, isError } = this.props
     if (isError) return
-    this.safeSetState({ status: 'idle' })
+    this.setState({ status: 'idle' })
     onSuccess(res, step)
   }
 
   handleFail = (e: Error) => {
     const { onFail, step } = this.props
-    this.safeSetState({ status: 'idle' })
+    this.setState({ status: 'idle' })
     onFail(e, step)
-  }
-
-  safeSetState = (...args: any) => {
-    if (this._unmounted) return
-    this.setState(...args)
   }
 
   run = async () => {
     const { step, data } = this.props
 
     if (this.__IS_MOUNTED__THX_FOR_REMOVING_COMPONENTWILLMOUNT__) {
-      this.safeSetState({ status: 'running' })
+      this.setState({ status: 'running' })
     }
 
     if (!step.run) {
@@ -141,6 +136,7 @@ class DeviceInteractionStep extends PureComponent<
 
       // $FlowFixMe JUST TESTED THE `run` 6 LINES BEFORE!!!
       const res = (await step.run(data)) || {}
+      if (this._unmounted) return
 
       if (step.minMs) {
         const d2 = Date.now()
@@ -148,11 +144,13 @@ class DeviceInteractionStep extends PureComponent<
         if (d2 - d1 < step.minMs) {
           // $FlowFixMe nice type checking
           await delay(step.minMs - (d2 - d1))
+          if (this._unmounted) return
         }
       }
       if (res.promise) {
         this._unsubscribe = res.unsubscribe
         const realRes = await res.promise
+        if (this._unmounted) return
         this.handleSuccess(realRes)
       } else {
         this.handleSuccess(res)
@@ -162,7 +160,7 @@ class DeviceInteractionStep extends PureComponent<
     }
   }
 
-  cancel = () => this.safeSetState({ status: 'idle' })
+  cancel = () => this.setState({ status: 'idle' })
 
   render() {
     const {

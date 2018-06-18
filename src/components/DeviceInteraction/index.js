@@ -57,14 +57,15 @@ class DeviceInteraction extends PureComponent<
       if (!waitBeforeSuccess) {
         onSuccess && onSuccess(data)
       }
-      this.safeSetState({ isSuccess: true, data, showSuccess: !waitBeforeSuccess })
+      this.setState({ isSuccess: true, data, showSuccess: !waitBeforeSuccess })
       if (waitBeforeSuccess) {
         await delay(waitBeforeSuccess)
+        if (this._unmounted) return
         onSuccess && onSuccess(data)
-        this.safeSetState({ showSuccess: true })
+        this.setState({ showSuccess: true })
       }
     } else {
-      this.safeSetState({ stepIndex: stepIndex + 1, data })
+      this.setState({ stepIndex: stepIndex + 1, data })
     }
   }
 
@@ -75,12 +76,7 @@ class DeviceInteraction extends PureComponent<
     if (!isCurrentStep) {
       return
     }
-    this.safeSetState({ error })
-  }
-
-  safeSetState = (...args: any) => {
-    if (this._unmounted) return
-    this.setState(...args)
+    this.setState({ error })
   }
 
   render() {
