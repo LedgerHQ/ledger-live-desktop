@@ -92,9 +92,14 @@ class HelperComp extends PureComponent<Props, State> {
 
     const { updateAccount, setDataModal } = this.props
     const { accountName, accountUnit } = this.state
+    const sanitizedAccountName = accountName ? accountName.replace(/\s+/g, ' ').trim() : null
 
-    if (accountName !== '') {
-      account = { ...account, unit: accountUnit || account.unit }
+    if (account.name || sanitizedAccountName) {
+      account = {
+        ...account,
+        unit: accountUnit || account.unit,
+        name: sanitizedAccountName || account.name,
+      }
       updateAccount(account)
       setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
       onClose()
