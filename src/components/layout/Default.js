@@ -39,15 +39,8 @@ type Props = {
 
 class Default extends Component<Props> {
   componentDidMount() {
-    const kbShortcut = event => {
-      if (event.ctrlKey && event.key === 'l') {
-        this.props.i18n.reloadResources()
-      }
-    }
-
     window.requestAnimationFrame(() => (this._timeout = setTimeout(() => window.onAppReady(), 300)))
-    window.removeEventListener('keydown', kbShortcut) // Prevents adding multiple listeners when hot reloading
-    window.addEventListener('keydown', kbShortcut)
+    window.addEventListener('keydown', this.kbShortcut)
   }
 
   componentDidUpdate(prevProps) {
@@ -65,6 +58,13 @@ class Default extends Component<Props> {
 
   componentWillUnmount() {
     clearTimeout(this._timeout)
+    window.removeEventListener('keydown', this.kbShortcut) // Prevents adding multiple listeners when hot reloading
+  }
+
+  kbShortcut = event => {
+    if (event.ctrlKey && event.key === 'l') {
+      this.props.i18n.reloadResources()
+    }
   }
 
   _timeout = undefined
