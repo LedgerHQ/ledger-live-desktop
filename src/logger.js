@@ -51,6 +51,7 @@ const logCmds = !__DEV__ || process.env.DEBUG_COMMANDS
 const logDb = !__DEV__ || process.env.DEBUG_DB
 const logRedux = !__DEV__ || process.env.DEBUG_ACTION
 const logTabkey = !__DEV__ || process.env.DEBUG_TAB_KEY
+const logLibcore = !__DEV__ || process.env.DEBUG_LIBCORE
 
 export default {
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
@@ -101,6 +102,13 @@ export default {
       console.log(msg)
     }
     addLog('keydown', msg)
+  },
+
+  libcore: (level: string, msg: string) => {
+    if (logLibcore) {
+      console.log(`🛠 ${level}: ${msg}`)
+    }
+    addLog('action', `🛠 ${level}: ${msg}`)
   },
 
   // General functions in case the hooks don't apply

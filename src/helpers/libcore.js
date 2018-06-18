@@ -123,6 +123,58 @@ async function scanAccountsOnDeviceBySegwit({
   return accounts
 }
 
+const hexToBytes = str => Array.from(Buffer.from(str, 'hex'))
+
+const createAccount = async (wallet, hwApp) => {
+  const accountCreationInfos = await wallet.getNextAccountCreationInfo()
+  await accountCreationInfos.derivations.reduce(
+    (promise, derivation) =>
+      promise.then(async () => {
+        const { publicKey, chainCode } = await hwApp.getWalletPublicKey(derivation)
+        accountCreationInfos.publicKeys.push(hexToBytes(publicKey))
+        accountCreationInfos.chainCodes.push(hexToBytes(chainCode))
+      }),
+    Promise.resolve(),
+  )
+  return wallet.newAccountWithInfo(accountCreationInfos)
+}
+
+function createEventReceiver(core, cb) {
+  return new core.NJSEventReceiver({
+    onEvent: event => cb(event),
+  })
+}
+
+function subscribeToEventBus(core, eventBus, receiver) {
+  eventBus.subscribe(core.getSerialExecutionContext('main'), receiver)
+}
+
+const coreSyncAccount = (core, account) =>
+  new Promise((resolve, reject) => {
+    const eventReceiver = createEventReceiver(core, e => {
+      const code = e.getCode()
+      if (code === core.EVENT_CODE.UNDEFINED || code === core.EVENT_CODE.SYNCHRONIZATION_FAILED) {
+        const payload = e.getPayload()
+        const message = (
+          (payload && payload.getString('EV_SYNC_ERROR_MESSAGE')) ||
+          'Sync failed'
+        ).replace(' (EC_PRIV_KEY_INVALID_FORMAT)', '')
+        reject(new Error(message))
+        return
+      }
+      if (
+        code === core.EVENT_CODE.SYNCHRONIZATION_SUCCEED ||
+        code === core.EVENT_CODE.SYNCHRONIZATION_SUCCEED_ON_PREVIOUSLY_EMPTY_ACCOUNT
+      ) {
+        resolve(() => {
+          eventBus.unsubscribe(eventReceiver)
+        })
+      }
+    })
+    const eventBus = account.synchronize()
+    subscribeToEventBus(core, eventBus, eventReceiver)
+  })
+
 async function scanNextAccount(props: {
   // $FlowFixMe
   wallet: NJSWallet,
@@ -155,11 +207,11 @@ async function scanNextAccount(props: {
 
   const njsAccount = hasBeenScanned
     ? await wallet.getAccount(accountIndex)
-    : await core.createAccount(wallet, hwApp)
+    : await createAccount(wallet, hwApp)
 
   const shouldSyncAccount = true // TODO: let's sync everytime. maybe in the future we can optimize.
   if (shouldSyncAccount) {
-    await core.syncAccount(njsAccount)
+    await coreSyncAccount(core, njsAccount)
   }
 
   const query = njsAccount.queryOperations()
@@ -190,25 +242,38 @@ async function scanNextAccount(props: {
   return scanNextAccount({ ...props, accountIndex: accountIndex + 1 })
 }
 
+const createWalletConfig = (core, configMap = {}) => {
+  const config = new core.NJSDynamicObject()
+  for (const i in configMap) {
+    if (configMap.hasOwnProperty(i)) {
+      config.putString(i, configMap[i])
+    }
+  }
+  return config
+}
+
 async function getOrCreateWallet(
   core: *,
   WALLET_IDENTIFIER: string,
   currencyId: string,
   isSegwit: boolean,
 ): NJSWallet {
+  const pool = core.getPoolInstance()
   try {
-    const wallet = await core.getWallet(WALLET_IDENTIFIER)
+    const wallet = await pool.getWallet(WALLET_IDENTIFIER)
     return wallet
   } catch (err) {
-    const currency = await core.getCurrency(currencyId)
+    const currency = await pool.getCurrency(currencyId)
     const walletConfig = isSegwit
       ? {
           KEYCHAIN_ENGINE: 'BIP49_P2SH',
           KEYCHAIN_DERIVATION_SCHEME: "49'/<coin_type>'/<account>'/<node>/<address>",
         }
       : undefined
-    const njsWalletConfig = core.createWalletConfig(walletConfig)
-    const wallet = await core.createWallet(WALLET_IDENTIFIER, currency, njsWalletConfig)
+    const njsWalletConfig = createWalletConfig(core, walletConfig)
+    const wallet = await core
+      .getPoolInstance()
+      .createWallet(WALLET_IDENTIFIER, currency, njsWalletConfig)
     return wallet
   }
 }
@@ -342,33 +407,12 @@ function buildOperationRaw({
   }
 }
 
-export async function getNJSAccount({
-  accountRaw,
-  njsWalletPool,
-}: {
-  accountRaw: AccountRaw,
-  njsWalletPool: *,
-}) {
-  const decodedAccountId = accountIdHelper.decode(accountRaw.id)
-  const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
-  const njsAccount = await njsWallet.getAccount(accountRaw.index)
-  return njsAccount
-}
-
-export async function syncAccount({
-  rawAccount,
-  core,
-  njsWalletPool,
-}: {
-  core: *,
-  rawAccount: AccountRaw,
-  njsWalletPool: *,
-}) {
+export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: AccountRaw }) {
   const decodedAccountId = accountIdHelper.decode(rawAccount.id)
-  const njsWallet = await njsWalletPool.getWallet(decodedAccountId.walletName)
+  const njsWallet = await core.getPoolInstance().getWallet(decodedAccountId.walletName)
   const njsAccount = await njsWallet.getAccount(rawAccount.index)
 
-  const unsub = await core.syncAccount(njsAccount)
+  const unsub = await coreSyncAccount(core, njsAccount)
   unsub()
 
   const query = njsAccount.queryOperations()

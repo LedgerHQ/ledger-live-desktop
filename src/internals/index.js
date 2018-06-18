@@ -48,8 +48,11 @@ process.on('message', m => {
       logger.warn(`command ${id} not found`)
       return
     }
+    const startTime = Date.now()
+    logger.onCmd('cmd.START', id, 0, data)
     subscriptions[requestId] = cmd.impl(data).subscribe({
       next: data => {
+        logger.onCmd('cmd.NEXT', id, Date.now() - startTime, data)
         process.send({
           type: 'cmd.NEXT',
           requestId,
@@ -58,6 +61,7 @@ process.on('message', m => {
       },
       complete: () => {
         delete subscriptions[requestId]
+        logger.onCmd('cmd.COMPLETE', id, Date.now() - startTime)
         process.send({
           type: 'cmd.COMPLETE',
           requestId,
@@ -66,6 +70,7 @@ process.on('message', m => {
       error: error => {
         logger.warn('Command error:', error)
         delete subscriptions[requestId]
+        logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
         process.send({
           type: 'cmd.ERROR',
           requestId,
