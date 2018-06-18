@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ReactSelect from 'react-select'
 import { translate } from 'react-i18next'
 
@@ -34,7 +34,7 @@ export type Option = {
   data: any,
 }
 
-class Select extends Component<Props> {
+class Select extends PureComponent<Props> {
   handleChange = (value, { action }) => {
     const { onChange } = this.props
     if (action === 'select-option') {

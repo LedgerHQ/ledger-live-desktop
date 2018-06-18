@@ -19,7 +19,8 @@ import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
-import Select from 'components/base/LegacySelect'
+import Select from 'components/base/Select'
+
 import {
   ModalBody,
   ModalTitle,
@@ -43,6 +44,9 @@ type Props = {
   onClose: () => void,
   data: any,
 }
+
+const unitGetOptionValue = unit => unit.magnitude
+const renderUnitItemCode = item => item.data.code
 
 const mapDispatchToProps = {
   setDataModal,
@@ -166,12 +170,12 @@ class HelperComp extends PureComponent<Props, State> {
               </Box>
               <Box style={{ width: 180 }}>
                 <Select
-                  keyProp="code"
                   onChange={this.handleChangeUnit}
-                  renderSelected={item => item && item.code}
-                  renderItem={item => item && item.code}
+                  getOptionValue={unitGetOptionValue}
+                  renderValue={renderUnitItemCode}
+                  renderOption={renderUnitItemCode}
                   value={accountUnit || account.unit}
-                  items={account.currency.units}
+                  options={account.currency.units}
                 />
               </Box>
             </Container>
