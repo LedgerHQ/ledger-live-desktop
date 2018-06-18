@@ -32,11 +32,15 @@ const Main = styled(GrowScroll).attrs({
 
 type Props = {
   location: Location,
+  i18n: {
+    reloadResources: Function,
+  },
 }
 
 class Default extends Component<Props> {
   componentDidMount() {
     window.requestAnimationFrame(() => (this._timeout = setTimeout(() => window.onAppReady(), 300)))
+    window.addEventListener('keydown', this.kbShortcut)
   }
 
   componentDidUpdate(prevProps) {
@@ -54,6 +58,13 @@ class Default extends Component<Props> {
 
   componentWillUnmount() {
     clearTimeout(this._timeout)
+    window.removeEventListener('keydown', this.kbShortcut) // Prevents adding multiple listeners when hot reloading
+  }
+
+  kbShortcut = event => {
+    if (event.ctrlKey && event.key === 'l') {
+      this.props.i18n.reloadResources()
+    }
   }
 
   _timeout = undefined
