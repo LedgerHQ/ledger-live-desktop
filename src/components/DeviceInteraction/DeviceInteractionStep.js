@@ -178,8 +178,8 @@ class DeviceInteractionStep extends PureComponent<
     } = this.props
 
     const { status } = this.state
-
     const title = typeof step.title === 'function' ? step.title(data) : step.title || '[UNTITLED]'
+    const { render: CustomRender } = step
 
     return (
       <DeviceInteractionStepContainer
@@ -196,13 +196,13 @@ class DeviceInteractionStep extends PureComponent<
             {title}
           </Box>
           {step.desc && step.desc}
-          {step.render && (
-            <Box>
-              {step.render(
-                { onSuccess: this.handleSuccess, onFail: this.handleFail, onRetry },
-                data,
-              )}
-            </Box>
+          {CustomRender && (
+            <CustomRender
+              onSuccess={this.handleSuccess}
+              onFail={this.handleFail}
+              onRetry={onRetry}
+              data={data}
+            />
           )}
           {isError && error && <ErrorDescContainer error={error} onRetry={onRetry} mt={2} />}
         </Box>

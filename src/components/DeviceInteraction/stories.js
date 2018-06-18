@@ -30,7 +30,6 @@ class Wrapper extends React.Component<any> {
   render() {
     return (
       <Fragment>
-        <pre>{'each interaction have 20% chance of fail'}</pre>
         <button style={{ marginBottom: 40 }} onClick={this.handleReset}>
           {'reset'}
         </button>
