@@ -1,10 +1,10 @@
 // @flow
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Box from 'components/base/Box'
 import AngleUp from 'icons/AngleUp'
+import { GrowScrollContext } from './base/GrowScroll'
 
 const Container = styled(Box)`
   position: fixed;
@@ -29,6 +29,7 @@ const Container = styled(Box)`
 
 type Props = {
   scrollThreshold: number,
+  getGrowScroll: () => { scrollContainer: ?HTMLDivElement },
 }
 
 type State = {
@@ -36,11 +37,6 @@ type State = {
 }
 
 class StickyBackToTop extends PureComponent<Props, State> {
-  static contextTypes = {
-    // FIXME when we move to "real" scroll container, potential solution (instead of context): http://greweb.me/2016/09/relay-scrolling-connections/
-    getScrollbar: PropTypes.func,
-  }
-
   static defaultProps = {
     scrollThreshold: 800,
   }
@@ -50,10 +46,10 @@ class StickyBackToTop extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    if (!this.context.getScrollbar) return
-    this.context.getScrollbar(scrollbar => {
+    const { scrollContainer } = this.props.getGrowScroll()
+    if (scrollContainer) {
       const listener = () => {
-        const { scrollTop } = scrollbar
+        const { scrollTop } = scrollContainer
         const visible = scrollTop > this.props.scrollThreshold
         this.setState(previous => {
           if (previous.visible !== visible) {
@@ -62,9 +58,9 @@ class StickyBackToTop extends PureComponent<Props, State> {
           return null
         })
       }
-      scrollbar.addListener(listener)
-      this.releaseListener = () => scrollbar.removeListener(listener)
-    })
+      scrollContainer.addEventListener('scroll', listener)
+      this.releaseListener = () => scrollContainer.addEventListener('scroll', listener)
+    }
   }
 
   componentWillUnmount() {
@@ -72,9 +68,11 @@ class StickyBackToTop extends PureComponent<Props, State> {
   }
 
   onClick = () => {
-    this.context.getScrollbar(scrollbar => {
-      scrollbar.scrollTo(0, 0, 400)
-    })
+    const { scrollContainer } = this.props.getGrowScroll()
+    if (scrollContainer) {
+      // $FlowFixMe seems to be missing in flow
+      scrollContainer.scrollTo(0, 0)
+    }
   }
 
   releaseListener = () => {}
@@ -92,4 +90,8 @@ class StickyBackToTop extends PureComponent<Props, State> {
   }
 }
 
-export default StickyBackToTop
+export default (props: { scrollThreshold?: number }) => (
+  <GrowScrollContext.Consumer>
+    {getGrowScroll => <StickyBackToTop {...props} getGrowScroll={getGrowScroll} />}
+  </GrowScrollContext.Consumer>
+)

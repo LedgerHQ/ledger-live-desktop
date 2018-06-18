@@ -40,6 +40,7 @@ export default styled.div`
   flex-grow: ${p => (p.grow === true ? '1' : p.grow || '')};
   flex-direction: ${p => (p.horizontal ? 'row' : 'column')};
 
+  overflow: ${p => p.overflow};
   overflow-y: ${p => (p.scroll === true ? 'auto' : '')};
   position: ${p => (p.relative ? 'relative' : p.sticky ? 'absolute' : '')};
 

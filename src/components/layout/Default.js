@@ -74,7 +74,7 @@ class Default extends Component<Props> {
           <Box grow horizontal bg="white">
             <SideBar />
 
-            <Box shrink grow bg="lightGrey" color="grey" relative>
+            <Box shrink grow bg="lightGrey" color="grey" overflow="hidden" relative>
               <TopBar />
               <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
                 <Route path="/" exact component={DashboardPage} />
