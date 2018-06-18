@@ -5,7 +5,7 @@
 
 :warning: Disclaimer: this project is under active development. Use at your own risks.
 
-<img src="/static/docs/images/ledgerLogo.png" width="200"/>
+<img src="/static/docs/ledgerLogo.png" width="200"/>
 
 > Ledger Live Desktop is a new generation Ledger Wallet application build with React, Redux and Electron to run natively on the web. The main goal of the app is to provide our users with a single wallet for all crypto currencies supported by our devices. To learn more check out [Ledger](https://www.ledgerwallet.com/?utm_source=redirection&utm_medium=variable)
 
@@ -14,7 +14,7 @@
 From one side Ledger Desktop app connected to the Blockchain via the in-house written C++ library - LibCore and from the other it communicates to the Ledger Hardware Device to securely sign all transactions.
 
 <p align="center">
- <img src="/static/docs/images/architecture.jpg" width="550" heigth="300"/>
+ <img src="/static/docs/architecture.jpg" width="550"/>
 </p>
 
 ## Setup
