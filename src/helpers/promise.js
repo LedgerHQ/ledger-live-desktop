@@ -28,7 +28,7 @@ export function retry<A>(f: () => Promise<A>, options?: $Shape<typeof defaults>)
   }
 }
 
-export function createCancelablePolling(pollingMs, job) {
+export function createCancelablePolling(pollingMs: number, job: any => Promise<any>) {
   let isUnsub = false
   const unsubscribe = () => (isUnsub = true)
   const getUnsub = () => isUnsub
