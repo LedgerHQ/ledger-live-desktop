@@ -4,9 +4,15 @@
 
 import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
+import { BASE_SOCKET_URL, BASE_SOCKET_URL_SECURE } from 'config/constants'
 import { createDeviceSocket } from './socket'
 
-import { BASE_SOCKET_URL, APDUS, MANAGER_API_URL } from './constants'
+const APDUS = {
+  GET_FIRMWARE: [0xe0, 0x01, 0x00, 0x00],
+  // we dont have common call that works inside app & dashboard
+  // TODO: this should disappear.
+  GET_FIRMWARE_FALLBACK: [0xe0, 0xc4, 0x00, 0x00],
+}
 
 export type LedgerScriptParams = {
   firmware?: string,
@@ -35,7 +41,9 @@ export async function createSocketDialog(
   managerUrl: boolean = false,
 ): Promise<string> {
   console.warn('DEPRECATED createSocketDialog: use createDeviceSocket') // eslint-disable-line
-  const url = `${managerUrl ? MANAGER_API_URL : BASE_SOCKET_URL}${endpoint}?${qs.stringify(params)}`
+  const url = `${managerUrl ? BASE_SOCKET_URL_SECURE : BASE_SOCKET_URL}${endpoint}?${qs.stringify(
+    params,
+  )}`
   return createDeviceSocket(transport, url).toPromise()
 }
 

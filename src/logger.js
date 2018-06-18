@@ -9,6 +9,15 @@
  * - for analytics in the future
  */
 
+import {
+  DEBUG_COMMANDS,
+  DEBUG_DB,
+  DEBUG_ACTION,
+  DEBUG_TAB_KEY,
+  DEBUG_LIBCORE,
+  DEBUG_WS,
+} from 'config/constants'
+
 const logs = []
 
 const MAX_LOG_LENGTH = 500
@@ -47,12 +56,12 @@ const makeSerializableLog = (o: mixed) => {
   return String(o)
 }
 
-const logCmds = !__DEV__ || process.env.DEBUG_COMMANDS
-const logDb = !__DEV__ || process.env.DEBUG_DB
-const logRedux = !__DEV__ || process.env.DEBUG_ACTION
-const logTabkey = !__DEV__ || process.env.DEBUG_TAB_KEY
-const logLibcore = !__DEV__ || process.env.DEBUG_LIBCORE
-const logWS = !__DEV__ || process.env.DEBUG_WS
+const logCmds = !__DEV__ || DEBUG_COMMANDS
+const logDb = !__DEV__ || DEBUG_DB
+const logRedux = !__DEV__ || DEBUG_ACTION
+const logTabkey = !__DEV__ || DEBUG_TAB_KEY
+const logLibcore = !__DEV__ || DEBUG_LIBCORE
+const logWS = !__DEV__ || DEBUG_WS
 
 export default {
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
