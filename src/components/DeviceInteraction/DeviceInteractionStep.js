@@ -162,11 +162,7 @@ class DeviceInteractionStep extends PureComponent<
     }
   }
 
-  cancel = () => {
-    const { step } = this.props
-    console.log(`cancelling ${step.id}`) // eslint-disable-line no-console
-    this.safeSetState({ status: 'idle' })
-  }
+  cancel = () => this.safeSetState({ status: 'idle' })
 
   render() {
     const {
