@@ -92,7 +92,7 @@ class Debug extends Component<*, *> {
           <ModalBody onClose={onClose}>
             <ModalTitle>developer internal tools</ModalTitle>
             <ModalContent>
-              <Box>
+              <Box style={{ height: 60, overflow: 'auto' }}>
                 <Box horizontal style={{ padding: 10 }}>
                   <EnsureDevice>
                     {device => (
