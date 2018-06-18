@@ -16,14 +16,14 @@ import {
 
 export type Step = {
   id: string,
-  title: string | (any => string),
-  desc: any,
-  icon: React$Element<*> | null,
-  run?: any => Promise<any> | { promise: Promise<any>, unsubscribe: void => any },
+  title: string | (Object => string),
+  desc?: string | React$Node,
+  icon: React$Node,
+  run?: Object => Promise<any> | { promise: Promise<any>, unsubscribe: void => any },
   render?: (
-    { onSuccess: any => any, onFail: any => any, onRetry: any => any },
+    { onSuccess: Object => any, onFail: Error => void, onRetry: void => void },
     any,
-  ) => React$Element<*>,
+  ) => React$Node,
   minMs?: number,
 }
 
