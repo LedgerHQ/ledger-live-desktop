@@ -5,75 +5,54 @@
 
 :warning: Disclaimer: this project is under active development. Use at your own risks.
 
-## Installation
+<img src="/static/docs/images/ledgerLogo.png" width="200"/>
 
-#### Requirements
+> Ledger Live Desktop is a new generation Ledger Wallet application build with React, Redux and Electron to run natively on the web. The main goal of the app is to provide our users with a single wallet for all crypto currencies supported by our devices. To learn more check out [Ledger](https://www.ledgerwallet.com/?utm_source=redirection&utm_medium=variable)
 
-Project has been tested with
+## Architecture
 
-- [NodeJS](https://nodejs.org) v9.3.0
-- [Yarn](https://yarnpkg.com) v1.3.0
+From one side Ledger Desktop app connected to the Blockchain via the in-house written C++ library - LibCore and from the other it communicates to the Ledger Hardware Device to securely sign all transactions.
+
+<p align="center">
+ <img src="/static/docs/images/architecture.jpg" width="550" heigth="300"/>
+</p>
+
+## Setup
+
+### Requirements
+
+- [NodeJS](https://nodejs.org) LTS
+- [Yarn](https://yarnpkg.com) LTS
 - [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
 - You will also need a C++ compiler
 
-#### Optional
+### Optional
 
-- `Museo Sans` font - for Ledger guys, [follow that link](https://drive.google.com/drive/folders/14R6kGFtx53DuqTyIOjnT7BGogzeyMSzN), download `museosans.zip` and extract it inside the `static/fonts/museosans` directory
+- In the application we use `Museo Sans` font. To include it in the app, you need to have a zip file `museosans.zip` which you should extract and place inside the `static/fonts/museosans` directory
 
-#### Setup
+## Install
 
-1.  Install dependencies
+1.  Clone or fork the repo
+
+```bash
+git clone git@github.com:LedgerHQ/ledger-live-desktop.git
+```
+
+2.  Install dependencies
 
 ```bash
 yarn
 ```
 
-2.  Create `.env` file
+## Run
+
+Launch the app
 
 ```bash
-# ENV VARIABLES
-# -------------
-
-# Where errors will be tracked (you may not want to edit this line)
-# SENTRY_URL=
-
-# OPTIONAL ENV VARIABLES
-# ----------------------
-
-# API base url, fallback to our API if not set
-API_BASE_URL=http://...
-
-# Setup device debug mode
-DEBUG_DEVICE=0
-
-# Developer tools position (used only in dev)
-# can be one of: right, bottom, undocked, detach
-DEV_TOOLS_MODE=bottom
-
-# Filter debug output
-DEBUG=lwd*,-lwd:syncb
-
-# hide the dev window
-HIDE_DEV_WINDOW=0
-```
-
-#### Development commands
-
-```bash
-# Launch the app
 yarn start
-
-# Launch the storybook
-yarn storybook
-
-# Code quality checks
-yarn lint                # launch eslint
-yarn prettier            # launch prettier
-yarn flow                # launch flow
-yarn test                # launch unit tests
 ```
 
-#### Building from source
+## Build
 
 ```bash
 # Build & package the whole app
@@ -83,3 +62,54 @@ yarn dist
 ```
 
 **Note:** Use `yarn dist:dir` to speed up the process: it will skip the packaging step. Handy for debugging builds. You can also use `BUNDLE_ANALYZER=1 yarn dist:dir` to generate [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) report.
+
+---
+
+## Config (optional helpers)
+
+### Create a .env file
+
+```bash
+SENTRY_URL=...        # Edit this line if you want to send errors to your sentry account
+
+API_BASE_URL=http://...      # API base url, fallback to our API if not set
+
+DEBUG_DEVICE=0       # Setup device debug mode
+
+DEV_TOOLS_MODE=bottom     # Developer tools position (used only in dev). Options: right, bottom, undocked, detach
+
+DEBUG=lwd*,-lwd:syncb  # Filter debug output
+
+HIDE_DEV_WINDOW=0    # hide the dev window
+
+SKIP_ONBOARDING=1    # To skip the onboarding
+```
+
+### Launch storybook
+
+```bash
+yarn storybook
+```
+
+### Run code quality checks
+
+```bash
+yarn lint                # launch eslint
+yarn prettier            # launch prettier
+yarn flow                # launch flow
+yarn test                # launch unit tests
+```
+
+### Programmaically reset hard the app
+
+Stop the app and to clean accounts, settings, etc, run
+
+```bash
+rm -rf ~/Library/Application\ Support/Electron/
+```
+
+## Additional Info on tools used in the app
+
+- Sentry - error-tracking software, [learn more](https://sentry.io/welcome/)
+- Storybook - UI development environment, [learn more](https://storybook.js.org/)
+- U2F - We use a custom transport encapsulation to pass instructions to the hardware device with U2F protocol. [Learn more about U2F](https://en.wikipedia.org/wiki/Universal_2nd_Factor)
