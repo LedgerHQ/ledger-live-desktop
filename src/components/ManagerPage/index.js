@@ -6,8 +6,8 @@ import React from 'react'
 import type { Node } from 'react'
 import type { Device } from 'types/common'
 
-import Workflow from './Workflow'
-import WorkflowDefault from './WorkflowDefault'
+import Workflow from 'components/Workflow'
+import WorkflowWithIcon from 'components/Workflow/WorkflowWithIcon'
 import Dashboard from './Dashboard'
 
 type DeviceInfo = {
@@ -43,7 +43,7 @@ function ManagerPage(): Node {
           genuineError: ?Error,
         },
       ) => (
-        <WorkflowDefault
+        <WorkflowWithIcon
           device={device}
           deviceInfo={deviceInfo}
           errors={errors}

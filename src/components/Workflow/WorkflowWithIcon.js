@@ -105,7 +105,7 @@ type Props = {
   isGenuine: boolean,
 }
 
-const WorkflowDefault = ({ device, deviceInfo, errors, isGenuine, t }: Props) => (
+const WorkflowWithIcon = ({ device, deviceInfo, errors, isGenuine, t }: Props) => (
   <Box align="center" justify="center" sticky>
     <Box align="center" style={{ maxWidth: 460, padding: '0 10px' }}>
       <img
@@ -194,4 +194,4 @@ const WorkflowDefault = ({ device, deviceInfo, errors, isGenuine, t }: Props) =>
   </Box>
 )
 
-export default translate()(WorkflowDefault)
+export default translate()(WorkflowWithIcon)
