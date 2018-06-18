@@ -8,6 +8,7 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
     captureUnhandledRejections: true,
     allowSecretKey: true,
     release: __APP_VERSION__,
+    tags: { git_commit: __GIT_REVISION__ },
     environment: __DEV__ ? 'development' : 'production',
     shouldSendCallback,
   })

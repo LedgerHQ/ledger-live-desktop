@@ -30,7 +30,9 @@ class ExportLogsBtn extends Component<{
     const reportJSON = JSON.stringify(report)
     const path = remote.dialog.showSaveDialog({
       title: 'Export logs',
-      defaultPath: `ledger_export_${moment().format('YYYY-MM-DD_HHmmss')}.json`,
+      defaultPath: `ledgerlive-export-${moment().format(
+        'YYYY.MM.DD-HH.mm.ss',
+      )}-${__GIT_REVISION__ || 'unversionned'}.json`,
       filters: [
         {
           name: 'All Files',
