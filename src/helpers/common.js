@@ -1,16 +1,11 @@
 // @flow
 
 import chalk from 'chalk'
-import Websocket from 'ws'
 import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
+import { createDeviceSocket } from './socket'
 
 import { BASE_SOCKET_URL, APDUS, MANAGER_API_URL } from './constants'
-
-type WebsocketType = {
-  send: (string, any) => void,
-  on: (string, Function) => void,
-}
 
 type Message = {
   nonce: number,
@@ -36,59 +31,6 @@ export async function getMemInfos(transport: Transport<*>): Promise<Object> {
 }
 
 /**
- * Send data through ws
- */
-function socketSend(ws: WebsocketType, msg: Message) {
-  logWS('SEND', msg)
-  const strMsg = JSON.stringify(msg)
-  ws.send(strMsg)
-}
-
-/**
- * Exchange data on transport
- */
-export async function exchange(
-  ws: WebsocketType,
-  transport: Transport<*>,
-  msg: Message,
-): Promise<void> {
-  const { data, nonce } = msg
-  const r: Buffer = await transport.exchange(Buffer.from(data, 'hex'))
-  const status = r.slice(r.length - 2)
-  const buffer = r.slice(0, r.length - 2)
-  const strStatus = status.toString('hex')
-  socketSend(ws, {
-    nonce,
-    response: strStatus === '9000' ? 'success' : 'error',
-    data: buffer.toString('hex'),
-  })
-}
-
-/**
- * Bulk update on transport
- */
-export async function bulk(ws: WebsocketType, transport: Transport<*>, msg: Message) {
-  const { data, nonce } = msg
-
-  // Execute all apdus and collect last status
-  let lastStatus = null
-  for (const apdu of data) {
-    const r: Buffer = await transport.exchange(Buffer.from(apdu, 'hex'))
-    lastStatus = r.slice(r.length - 2)
-  }
-  if (!lastStatus) {
-    throw new Error('No status collected from bulk')
-  }
-
-  const strStatus = lastStatus.toString('hex')
-  socketSend(ws, {
-    nonce,
-    response: strStatus === '9000' ? 'success' : 'error',
-    data: strStatus === '9000' ? '' : strStatus,
-  })
-}
-
-/**
  * Open socket connection with firmware api, and init a dialog
  * with the device
  */
@@ -98,55 +40,9 @@ export async function createSocketDialog(
   params: LedgerScriptParams,
   managerUrl: boolean = false,
 ) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      let lastData
-      const url = `${managerUrl ? MANAGER_API_URL : BASE_SOCKET_URL}${endpoint}?${qs.stringify(
-        params,
-      )}`
-
-      log('WS CONNECTING', url)
-      const ws: WebsocketType = new Websocket(url)
-
-      ws.on('open', () => log('WS CONNECTED'))
-
-      ws.on('close', () => {
-        log('WS CLOSED')
-        resolve(lastData)
-      })
-
-      ws.on('message', async rawMsg => {
-        const handlers = {
-          exchange: msg => exchange(ws, transport, msg),
-          bulk: msg => bulk(ws, transport, msg),
-          success: msg => {
-            if (msg.data) {
-              lastData = msg.data
-            } else if (msg.result) {
-              lastData = msg.result
-            }
-          },
-          error: msg => {
-            log('WS ERROR', ':(')
-            throw new Error(msg.data)
-          },
-        }
-        try {
-          const msg = JSON.parse(rawMsg)
-          if (!(msg.query in handlers)) {
-            throw new Error(`Cannot handle msg of type ${msg.query}`)
-          }
-          logWS('RECEIVE', msg)
-          await handlers[msg.query](msg)
-        } catch (err) {
-          log('ERROR', err.toString())
-          reject(err)
-        }
-      })
-    } catch (err) {
-      reject(err)
-    }
-  })
+  console.warn('DEPRECATED createSocketDialog: use createDeviceSocket') // eslint-disable-line
+  const url = `${managerUrl ? MANAGER_API_URL : BASE_SOCKET_URL}${endpoint}?${qs.stringify(params)}`
+  return createDeviceSocket(transport, url).toPromise()
 }
 
 /**
