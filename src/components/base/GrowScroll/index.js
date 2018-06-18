@@ -1,116 +1,79 @@
 // @flow
 
-/* eslint-disable class-methods-use-this */
-
 import React, { PureComponent } from 'react'
-import Scrollbar from 'react-smooth-scrollbar'
-import SmoothScrollbar, { ScrollbarPlugin } from 'smooth-scrollbar'
-
 import Box from 'components/base/Box'
 
 type Props = {
   children: any,
   full: boolean,
   maxHeight?: number,
-  onUpdate?: (*) => void,
-  onScroll?: () => void,
 }
 
-// TODO this component is the source of junky scroll experience. need better solution ASAP
+export const GrowScrollContext = React.createContext()
+
 class GrowScroll extends PureComponent<Props> {
   static defaultProps = {
     full: false,
   }
 
-  componentDidMount() {
-    const { onUpdate, onScroll } = this.props
-    const { _scrollbar } = this
-    if (_scrollbar) {
-      if (onUpdate) {
-        onUpdate(_scrollbar)
-      }
-      if (onScroll) {
-        _scrollbar.addListener(this.onScroll)
-      }
-    }
+  scrollContainer: ?HTMLDivElement
+
+  onScrollContainerRef = (scrollContainer: ?HTMLDivElement) => {
+    this.scrollContainer = scrollContainer
   }
 
-  componentWillUnmount() {
-    const { onScroll } = this.props
-    const { _scrollbar } = this
-    if (_scrollbar && onScroll) {
-      _scrollbar.removeListener(this.onScroll)
-    }
-  }
-
-  componenDidUpdate() {
-    const { onUpdate } = this.props
-    const { _scrollbar } = this
-    if (_scrollbar && onUpdate) {
-      onUpdate(_scrollbar)
-    }
-  }
-
-  onScroll = () => {
-    const { onScroll } = this.props
-    if (onScroll) onScroll()
-  }
-
-  onRef = (ref: ?Scrollbar) => {
-    this._scrollbar = ref && ref.scrollbar
-  }
-
-  _scrollbar: *
+  valueProvider = () => ({
+    scrollContainer: this.scrollContainer,
+  })
 
   render() {
-    const { onUpdate, children, maxHeight, full, ...props } = this.props
+    const { children, maxHeight, full, ...props } = this.props
+
+    const rootStyles = {
+      overflow: 'hidden',
+      ...(full
+        ? {
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+          }
+        : {
+            display: 'flex',
+            flex: 1,
+            positoin: 'relative',
+          }),
+    }
+
+    const scrollContainerStyles = {
+      overflowY: 'auto',
+      marginRight: `-80px`,
+      paddingRight: `80px`,
+      ...(maxHeight
+        ? {
+            maxHeight,
+          }
+        : {
+            bottom: 0,
+            left: 0,
+            position: 'absolute',
+            right: 0,
+            top: 0,
+          }),
+    }
 
     return (
-      <Box
-        {...(full
-          ? {
-              sticky: true,
-            }
-          : {
-              grow: true,
-              relative: true,
-            })}
-      >
-        <Scrollbar
-          damping={1}
-          style={{
-            ...(maxHeight
-              ? {
-                  maxHeight,
-                }
-              : {
-                  bottom: 0,
-                  left: 0,
-                  position: 'absolute',
-                  right: 0,
-                  top: 0,
-                }),
-          }}
-          ref={this.onRef}
-        >
-          <Box {...props}>{children}</Box>
-        </Scrollbar>
-      </Box>
+      <div style={rootStyles}>
+        <div style={scrollContainerStyles} ref={this.onScrollContainerRef}>
+          <Box {...props}>
+            <GrowScrollContext.Provider value={this.valueProvider}>
+              {children}
+            </GrowScrollContext.Provider>
+          </Box>
+        </div>
+      </div>
     )
   }
 }
-
-SmoothScrollbar.use(
-  class DisableXScroll extends ScrollbarPlugin {
-    static pluginName = 'disableXScroll'
-
-    transformDelta(delta) {
-      return {
-        x: 0,
-        y: delta.y,
-      }
-    }
-  },
-)
 
 export default GrowScroll
