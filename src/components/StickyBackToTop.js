@@ -69,6 +69,8 @@ class StickyBackToTop extends PureComponent<Props, State> {
     this.releaseListener()
   }
 
+  _unmounted = false
+
   onClick = () => {
     const { scrollContainer } = this.props.getGrowScroll()
     if (scrollContainer) {
