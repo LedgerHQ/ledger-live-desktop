@@ -1,5 +1,6 @@
 // @flow
 
+import { SKIP_ONBOARDING } from 'config/constants'
 import { handleActions, createAction } from 'redux-actions'
 
 type Step = {
@@ -29,7 +30,7 @@ export type OnboardingState = {
 
 const state: OnboardingState = {
   stepIndex: 0,
-  stepName: process.env.SKIP_ONBOARDING ? 'finish' : 'start',
+  stepName: SKIP_ONBOARDING ? 'finish' : 'start',
   genuine: {
     pinStepPass: false,
     recoveryStepPass: false,

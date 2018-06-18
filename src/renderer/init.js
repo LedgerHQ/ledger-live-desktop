@@ -11,6 +11,7 @@ import moment from 'moment'
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
+import { LEDGER_RESET_ALL } from 'config/constants'
 import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
 
 import { fetchAccounts } from 'actions/accounts'
@@ -34,7 +35,7 @@ const rootNode = document.getElementById('app')
 const TAB_KEY = 9
 
 async function init() {
-  if (process.env.LEDGER_RESET_ALL) {
+  if (LEDGER_RESET_ALL) {
     await hardReset()
   }
 

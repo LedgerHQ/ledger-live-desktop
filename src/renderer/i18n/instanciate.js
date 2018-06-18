@@ -1,3 +1,4 @@
+import { HIGHLIGHT_I18N } from 'config/constants'
 import i18n from 'i18next'
 
 const commonConfig = {
@@ -29,7 +30,7 @@ export function createWithBackend(backend, backendOpts) {
     ...backendOpts,
   }
 
-  if (process.env.HIGHLIGHT_I18N) {
+  if (HIGHLIGHT_I18N) {
     config.postProcess = 'highlight'
   }
 
