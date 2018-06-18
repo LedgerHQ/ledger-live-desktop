@@ -118,7 +118,7 @@ class SettingsPage extends PureComponent<Props, State> {
     const items = this._items.filter(item => item.key !== 'currencies' || accountsCount > 0)
 
     return (
-      <Box>
+      <Box pb={4}>
         <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={5}>
           {t('app:settings.title')}
         </Box>
