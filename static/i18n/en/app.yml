@@ -360,3 +360,4 @@ crash:
   restart: Restart app
   reset: Reset app files
   createTicket: Create ticket
+testMe: Just a dummy string to test language file reloading

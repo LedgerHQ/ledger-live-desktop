@@ -3,6 +3,7 @@
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import last from 'lodash/last'
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
@@ -82,8 +83,14 @@ class Debug extends Component<*, *> {
     }))
   }
 
+  reloadTranslations = () => {
+    const { i18n } = this.props
+    i18n.reloadResources()
+  }
+
   render() {
     const { logs } = this.state
+    const { t } = this.props
     return (
       <Modal
         name="MODAL_DEBUG"
@@ -92,7 +99,7 @@ class Debug extends Component<*, *> {
           <ModalBody onClose={onClose}>
             <ModalTitle>developer internal tools</ModalTitle>
             <ModalContent>
-              <Box style={{ height: 60, overflow: 'auto' }}>
+              <Box>
                 <Box horizontal style={{ padding: 10 }}>
                   <EnsureDevice>
                     {device => (
@@ -112,6 +119,12 @@ class Debug extends Component<*, *> {
                     interval(1s)
                   </Button>
                   <Button onClick={this.cancelAllPeriods}>Cancel</Button>
+                </Box>
+                <Box horizontal style={{ padding: 10 }}>
+                  <Button onClick={this.reloadTranslations} primary>
+                    Reload translations
+                  </Button>
+                  <Box style={{ padding: 10 }}>{t('app:testMe')}</Box>
                 </Box>
                 <EnsureDevice>
                   {device => (
@@ -167,4 +180,4 @@ class Debug extends Component<*, *> {
   }
 }
 
-export default Debug
+export default translate()(Debug)
