@@ -31,8 +31,8 @@ type Props = {
       genuineError: ?Error,
     },
   ) => Node,
-  renderMcuUpdate?: (deviceInfo: DeviceInfo) => Node,
-  renderFinalUpdate?: (deviceInfo: DeviceInfo) => Node,
+  renderMcuUpdate?: (device: Device, deviceInfo: DeviceInfo) => Node,
+  renderFinalUpdate?: (device: Device, deviceInfo: DeviceInfo) => Node,
   renderDashboard?: (device: Device, deviceInfo: DeviceInfo, isGenuine: boolean) => Node,
   renderError?: (dashboardError: ?Error, genuineError: ?Error) => Node,
 }
@@ -52,37 +52,42 @@ class Workflow extends PureComponent<Props, State> {
       <EnsureDevice>
         {(device: Device) => (
           <EnsureDashboard device={device}>
-            {(deviceInfo: ?DeviceInfo, dashboardError: ?Error) => (
-              <EnsureGenuine device={device} infos={deviceInfo}>
-                {(isGenuine: ?boolean, genuineError: ?Error) => {
-                  if (dashboardError || genuineError) {
-                    return renderError
-                      ? renderError(dashboardError, genuineError)
-                      : renderDefault(device, deviceInfo, isGenuine, {
-                          genuineError,
-                          dashboardError,
-                        })
-                  }
+            {(deviceInfo: ?DeviceInfo, dashboardError: ?Error) => {
 
-                  if (deviceInfo && deviceInfo.mcu && renderMcuUpdate) {
-                    return renderMcuUpdate(deviceInfo)
-                  }
+              if (deviceInfo && deviceInfo.mcu && renderMcuUpdate) {
+                return renderMcuUpdate(device, deviceInfo)
+              }
 
-                  if (deviceInfo && deviceInfo.final && renderFinalUpdate) {
-                    return renderFinalUpdate(deviceInfo)
-                  }
+              if (deviceInfo && deviceInfo.final && renderFinalUpdate) {
+                return renderFinalUpdate(device, deviceInfo)
+              }
 
-                  if (isGenuine && deviceInfo && device && !dashboardError && !genuineError) {
-                    if (renderDashboard) return renderDashboard(device, deviceInfo, isGenuine)
-                  }
+              return (
+                <EnsureGenuine device={device} infos={deviceInfo}>
+                  {(isGenuine: ?boolean, genuineError: ?Error) => {
+                    if (dashboardError || genuineError) {
+                      return renderError
+                        ? renderError(dashboardError, genuineError)
+                        : renderDefault(device, deviceInfo, isGenuine, {
+                            genuineError,
+                            dashboardError,
+                          })
+                    }
 
-                  return renderDefault(device, deviceInfo, isGenuine, {
-                    genuineError,
-                    dashboardError,
-                  })
-                }}
-              </EnsureGenuine>
-            )}
+                    if (isGenuine && deviceInfo && device && !dashboardError && !genuineError) {
+                      if (onGenuineCheck) onGenuineCheck(isGenuine)
+
+                      if (renderDashboard) return renderDashboard(device, deviceInfo, isGenuine)
+                    }
+
+                    return renderDefault(device, deviceInfo, isGenuine, {
+                      genuineError,
+                      dashboardError,
+                    })
+                  }}
+                </EnsureGenuine>
+              )
+            }}
           </EnsureDashboard>
         )}
       </EnsureDevice>

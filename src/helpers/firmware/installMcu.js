@@ -1,8 +1,15 @@
 // @flow
+import type Transport from '@ledgerhq/hw-transport'
+import qs from 'qs'
+import { MANAGER_API_URL } from 'helpers/constants'
+import { createDeviceSocket } from 'helpers/socket'
 
-type Result = Promise<boolean>
+type Result = Promise<*>
 
-// TODO: IMPLEMENTATION FOR FLASHING FIRMWARE
-// GETTING APDUS FROM SERVER
-// SEND THE APDUS TO DEVICE
-export default async (): Result => new Promise(resolve => resolve(true))
+export default async (
+  transport: Transport<*>,
+  params: { targetId: string | number, version: string },
+): Result => {
+  const url = `${MANAGER_API_URL}/mcu?${qs.stringify(params)}`
+  return createDeviceSocket(transport, url).toPromise()
+}
