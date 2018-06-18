@@ -105,6 +105,8 @@ DEVICE_DISCONNECT_DEBOUNCE=500
 
 ### Launch storybook
 
+We use [storybook](https://storybook.js.org/) for UI development.
+
 ```bash
 yarn storybook
 ```
@@ -126,8 +128,38 @@ Stop the app and to clean accounts, settings, etc, run
 rm -rf ~/Library/Application\ Support/Electron/
 ```
 
-## Additional Info on tools used in the app
+## File structure
 
-- Sentry - error-tracking software, [learn more](https://sentry.io/welcome/)
-- Storybook - UI development environment, [learn more](https://storybook.js.org/)
-- U2F - We use a custom transport encapsulation to pass instructions to the hardware device with U2F protocol. [Learn more about U2F](https://en.wikipedia.org/wiki/Universal_2nd_Factor)
+```
+.
+├── dist : output folder generate by the build
+├── scripts : commands (for building, releasing,...)
+├── src
+│   ├── internals : code that run on the 'internal' thread.
+│   ├── main : code that run on the 'main' thread.
+│   ├── renderer : code that run on the 'renderer' thread
+│   ├── components : all the React components
+|       └── modals : sub levels for the modals
+│   ├── api : related to HTTP APIs
+│   ├── bridge : an abstraction on top of blockchains apis (libcore / js impls)
+│   ├── commands : an abstraction to run code over the internal thread
+│   ├── icons : all the icons of our app, as React components.
+│   ├── config : contains the constants,...
+│   ├── helpers : generic folder for our business logic (might be reorganized in the future)
+│   ├── middlewares : redux middlewares
+│   ├── actions : redux actions
+│   ├── reducers : redux reducers
+│   ├── sentry : for our bug tracker
+│   ├── stories : for storybook
+│   ├── styles : theme
+│   ├── logger.js : abstraction for all our console.log s
+│   └── types : global flow types
+├── static
+│   ├── docs
+│   ├── fonts
+│   ├── i18n
+│   ├── images
+│   └── videos
+├── webpack : build configuration
+└── yarn.lock
+```
