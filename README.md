@@ -67,22 +67,40 @@ yarn dist
 
 ## Config (optional helpers)
 
-### Create a .env file
+### Environment variables
+
+(you can use a .env or export environment variables)
 
 ```bash
-SENTRY_URL=...        # Edit this line if you want to send errors to your sentry account
+DEV_TOOLS_MODE=bottom # devtools position Options: right, bottom, undocked, detach
+HIDE_DEV_WINDOW=0
 
-API_BASE_URL=http://...      # API base url, fallback to our API if not set
+## flags for development purpose
+DEBUG_DEVICE=1
+DEBUG_NETWORK=1
+DEBUG_COMMANDS=1
+DEBUG_DB=1
+DEBUG_ACTION=1
+DEBUG_TAB_KEY=1
+DEBUG_LIBCORE=1
+DEBUG_WS=1
+LEDGER_RESET_ALL=1
+LEDGER_DEBUG_ALL_LANGS=1
+SKIP_GENUINE=1
+SKIP_ONBOARDING=1
+SHOW_LEGACY_NEW_ACCOUNT=1
+HIGHLIGHT_I18N=1
 
-DEBUG_DEVICE=0       # Setup device debug mode
-
-DEV_TOOLS_MODE=bottom     # Developer tools position (used only in dev). Options: right, bottom, undocked, detach
-
-DEBUG=lwd*,-lwd:syncb  # Filter debug output
-
-HIDE_DEV_WINDOW=0    # hide the dev window
-
-SKIP_ONBOARDING=1    # To skip the onboarding
+## constants
+GET_CALLS_TIMEOUT=30000
+GET_CALLS_RETRY=2
+SYNC_MAX_CONCURRENT=6
+SYNC_BOOT_DELAY=2000
+SYNC_ALL_INTERVAL=60000
+CHECK_APP_INTERVAL_WHEN_INVALID=600
+CHECK_APP_INTERVAL_WHEN_VALID=1200
+CHECK_UPDATE_DELAY=5000
+DEVICE_DISCONNECT_DEBOUNCE=500
 ```
 
 ### Launch storybook
