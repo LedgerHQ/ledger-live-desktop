@@ -24,7 +24,7 @@ class TranslatedError extends PureComponent<Props> {
       return translation
     }
     logger.warn('TranslatedError: no transation!', error.name, error)
-    return error.message || error.name || ''
+    return error.message || error.name || t('errors:generic')
   }
 }
 
