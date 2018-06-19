@@ -90,10 +90,28 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   handleCloseGenuineCheckModal = (cb?: Function) =>
     this.setState(state => ({ ...state, isGenuineCheckModalOpened: false }), () => cb && cb())
 
-  handleGenuineCheck = isGenuine => {
+  handleGenuineCheckPass = () => {
     this.handleCloseGenuineCheckModal(() => {
       this.props.updateGenuineCheck({
-        isDeviceGenuine: isGenuine,
+        isDeviceGenuine: true,
+        genuineCheckUnavailable: null,
+      })
+    })
+  }
+  handleGenuineCheckFailed = () => {
+    this.handleCloseGenuineCheckModal(() => {
+      this.props.updateGenuineCheck({
+        isDeviceGenuine: false,
+        genuineCheckUnavailable: null,
+      })
+    })
+  }
+
+  handleGenuineCheckUnavailable = error => {
+    this.handleCloseGenuineCheckModal(() => {
+      this.props.updateGenuineCheck({
+        isDeviceGenuine: false,
+        genuineCheckUnavailable: error,
       })
     })
   }
@@ -219,7 +237,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         <GenuineCheckModal
           isOpened={isGenuineCheckModalOpened}
           onClose={this.handleCloseGenuineCheckModal}
-          onGenuineCheck={this.handleGenuineCheck}
+          onGenuineCheckPass={this.handleGenuineCheckPass}
+          onGenuineCheckFailed={this.handleGenuineCheckFailed}
+          onGenuineCheckUnavailable={this.handleGenuineCheckUnavailable}
         />
       </FixedTopContainer>
     )
