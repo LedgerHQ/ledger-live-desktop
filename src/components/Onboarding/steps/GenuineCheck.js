@@ -225,18 +225,18 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                       </GenuineSuccessText>
                     </Box>
                   ) : genuine.genuineCheckUnavailable ? (
-                    <Box horizontal align="center" flow={1} color={colors.alertRed}>
-                      <IconCross size={16} />
-                      <Box ff="Open Sans|Regular" fontSize={4} style={{ maxWidth: '200px' }}>
-                        <TranslatedError error={genuine.genuineCheckUnavailable} />
-                        <FakeLink
-                          color="alertRed"
-                          underline
-                          onClick={this.handleOpenGenuineCheckModal}
-                        >
-                          {t('app:common.retry')}
-                        </FakeLink>
+                    <Box align="center" flow={1} color={colors.alertRed}>
+                      <Box horizontal justify="center">
+                        <Box justifyContent="center">
+                          <IconCross size={12} />
+                        </Box>
+                        <Box ff="Open Sans|Regular" fontSize={2} ml={1}>
+                          <TranslatedError error={genuine.genuineCheckUnavailable} />
+                        </Box>
                       </Box>
+                      <FakeLink ff="Open Sans|Regular" fontSize={4} underline onClick={nextStep}>
+                        {t('app:common.skipThisStep')}
+                      </FakeLink>
                     </Box>
                   ) : (
                     <Button
