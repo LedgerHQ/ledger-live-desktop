@@ -258,12 +258,12 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         for (const derivation of derivations) {
           for (let index = 0; index < 255; index++) {
             const freshAddressPath = derivation({ currency, x: index, segwit: false })
-            const { address } = await await getAddress
+            const { address, publicKey } = await await getAddress
               .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
               .toPromise()
             if (finished) return
 
-            const accountId = `ripplejs:${currency.id}:${address}`
+            const accountId = `ripplejs:${currency.id}:${address}:${publicKey}`
 
             let info
             try {
