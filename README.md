@@ -5,75 +5,54 @@
 
 :warning: Disclaimer: this project is under active development. Use at your own risks.
 
-## Installation
+<img src="/static/docs/ledgerLogo.png" width="200"/>
 
-#### Requirements
+> Ledger Live Desktop is a new generation Ledger Wallet application build with React, Redux and Electron to run natively on the web. The main goal of the app is to provide our users with a single wallet for all crypto currencies supported by our devices. To learn more check out [Ledger](https://www.ledgerwallet.com/?utm_source=redirection&utm_medium=variable)
 
-Project has been tested with
+## Architecture
 
-- [NodeJS](https://nodejs.org) v9.3.0
-- [Yarn](https://yarnpkg.com) v1.3.0
+From one side Ledger Desktop app connected to the Blockchain via the in-house written C++ library - LibCore and from the other it communicates to the Ledger Hardware Device to securely sign all transactions.
+
+<p align="center">
+ <img src="/static/docs/architecture.jpg" width="550"/>
+</p>
+
+## Setup
+
+### Requirements
+
+- [NodeJS](https://nodejs.org) LTS
+- [Yarn](https://yarnpkg.com) LTS
 - [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
 - You will also need a C++ compiler
 
-#### Optional
+### Optional
 
-- `Museo Sans` font - for Ledger guys, [follow that link](https://drive.google.com/drive/folders/14R6kGFtx53DuqTyIOjnT7BGogzeyMSzN), download `museosans.zip` and extract it inside the `static/fonts/museosans` directory
+- In the application we use `Museo Sans` font. To include it in the app, you need to have a zip file `museosans.zip` which you should extract and place inside the `static/fonts/museosans` directory
 
-#### Setup
+## Install
 
-1.  Install dependencies
+1.  Clone or fork the repo
+
+```bash
+git clone git@github.com:LedgerHQ/ledger-live-desktop.git
+```
+
+2.  Install dependencies
 
 ```bash
 yarn
 ```
 
-2.  Create `.env` file
+## Run
+
+Launch the app
 
 ```bash
-# ENV VARIABLES
-# -------------
-
-# Where errors will be tracked (you may not want to edit this line)
-# SENTRY_URL=
-
-# OPTIONAL ENV VARIABLES
-# ----------------------
-
-# API base url, fallback to our API if not set
-API_BASE_URL=http://...
-
-# Setup device debug mode
-DEBUG_DEVICE=0
-
-# Developer tools position (used only in dev)
-# can be one of: right, bottom, undocked, detach
-DEV_TOOLS_MODE=bottom
-
-# Filter debug output
-DEBUG=lwd*,-lwd:syncb
-
-# hide the dev window
-HIDE_DEV_WINDOW=0
-```
-
-#### Development commands
-
-```bash
-# Launch the app
 yarn start
-
-# Launch the storybook
-yarn storybook
-
-# Code quality checks
-yarn lint                # launch eslint
-yarn prettier            # launch prettier
-yarn flow                # launch flow
-yarn test                # launch unit tests
 ```
 
-#### Building from source
+## Build
 
 ```bash
 # Build & package the whole app
@@ -83,3 +62,104 @@ yarn dist
 ```
 
 **Note:** Use `yarn dist:dir` to speed up the process: it will skip the packaging step. Handy for debugging builds. You can also use `BUNDLE_ANALYZER=1 yarn dist:dir` to generate [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) report.
+
+---
+
+## Config (optional helpers)
+
+### Environment variables
+
+(you can use a .env or export environment variables)
+
+```bash
+DEV_TOOLS_MODE=bottom # devtools position Options: right, bottom, undocked, detach
+HIDE_DEV_WINDOW=0
+
+## flags for development purpose
+DEBUG_DEVICE=1
+DEBUG_NETWORK=1
+DEBUG_COMMANDS=1
+DEBUG_DB=1
+DEBUG_ACTION=1
+DEBUG_TAB_KEY=1
+DEBUG_LIBCORE=1
+DEBUG_WS=1
+LEDGER_RESET_ALL=1
+LEDGER_DEBUG_ALL_LANGS=1
+SKIP_GENUINE=1
+SKIP_ONBOARDING=1
+SHOW_LEGACY_NEW_ACCOUNT=1
+HIGHLIGHT_I18N=1
+
+## constants
+GET_CALLS_TIMEOUT=30000
+GET_CALLS_RETRY=2
+SYNC_MAX_CONCURRENT=6
+SYNC_BOOT_DELAY=2000
+SYNC_ALL_INTERVAL=60000
+CHECK_APP_INTERVAL_WHEN_INVALID=600
+CHECK_APP_INTERVAL_WHEN_VALID=1200
+CHECK_UPDATE_DELAY=5000
+DEVICE_DISCONNECT_DEBOUNCE=500
+```
+
+### Launch storybook
+
+We use [storybook](https://storybook.js.org/) for UI development.
+
+```bash
+yarn storybook
+```
+
+### Run code quality checks
+
+```bash
+yarn lint                # launch eslint
+yarn prettier            # launch prettier
+yarn flow                # launch flow
+yarn test                # launch unit tests
+```
+
+### Programmaically reset hard the app
+
+Stop the app and to clean accounts, settings, etc, run
+
+```bash
+rm -rf ~/Library/Application\ Support/Electron/
+```
+
+## File structure
+
+```
+.
+├── dist : output folder generate by the build
+├── scripts : commands (for building, releasing,...)
+├── src
+│   ├── internals : code that run on the 'internal' thread.
+│   ├── main : code that run on the 'main' thread.
+│   ├── renderer : code that run on the 'renderer' thread
+│   ├── components : all the React components
+|       └── modals : sub levels for the modals
+│   ├── api : related to HTTP APIs
+│   ├── bridge : an abstraction on top of blockchains apis (libcore / js impls)
+│   ├── commands : an abstraction to run code over the internal thread
+│   ├── icons : all the icons of our app, as React components.
+│   ├── config : contains the constants,...
+│   ├── helpers : generic folder for our business logic (might be reorganized in the future)
+│   ├── middlewares : redux middlewares
+│   ├── actions : redux actions
+│   ├── reducers : redux reducers
+│   ├── sentry : for our bug tracker
+│   ├── stories : for storybook
+│   ├── styles : theme
+│   ├── logger.js : abstraction for all our console.log s
+│   └── types : global flow types
+├── static
+│   ├── docs
+│   ├── fonts
+│   ├── i18n
+│   ├── images
+│   └── videos
+├── webpack : build configuration
+└── yarn.lock
+```

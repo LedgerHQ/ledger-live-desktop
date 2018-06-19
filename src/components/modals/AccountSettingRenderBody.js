@@ -14,6 +14,8 @@ import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
 
+import { getBridgeForCurrency } from 'bridge'
+
 import Spoiler from 'components/base/Spoiler'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
@@ -30,9 +32,11 @@ import {
 } from 'components/base/Modal'
 
 type State = {
-  accountName: string | null,
-  accountUnit: Unit | null,
+  accountName: ?string,
+  accountUnit: ?Unit,
+  endpointConfig: ?string,
   accountNameError: boolean,
+  endpointConfigError: ?Error,
   isRemoveAccountModalOpen: boolean,
 }
 
@@ -44,6 +48,8 @@ type Props = {
   onClose: () => void,
   data: any,
 }
+
+const canConfigureEndpointConfig = account => account.currency.id === 'ripple'
 
 const unitGetOptionValue = unit => unit.magnitude
 const renderUnitItemCode = item => item.data.code
@@ -57,7 +63,9 @@ const mapDispatchToProps = {
 const defaultState = {
   accountName: null,
   accountUnit: null,
+  endpointConfig: null,
   accountNameError: false,
+  endpointConfigError: null,
   isRemoveAccountModalOpen: false,
 }
 
@@ -66,7 +74,12 @@ class HelperComp extends PureComponent<Props, State> {
     ...defaultState,
   }
 
+  componentWillUnmount() {
+    this.handleChangeEndpointConfig_id++
+  }
+
   getAccount(data: Object): Account {
+    // FIXME this should be a selector
     const { accountName } = this.state
     const account = get(data, 'account', {})
 
@@ -77,6 +90,31 @@ class HelperComp extends PureComponent<Props, State> {
             name: accountName,
           }
         : {}),
+    }
+  }
+
+  handleChangeEndpointConfig_id = 0
+  handleChangeEndpointConfig = async (endpointConfig: string) => {
+    const bridge = getBridgeForCurrency(this.getAccount(this.props.data).currency)
+    this.handleChangeEndpointConfig_id++
+    const { handleChangeEndpointConfig_id } = this
+    this.setState({
+      endpointConfig,
+      endpointConfigError: null,
+    })
+    try {
+      if (bridge.validateEndpointConfig) {
+        await bridge.validateEndpointConfig(endpointConfig)
+      }
+      if (handleChangeEndpointConfig_id === this.handleChangeEndpointConfig_id) {
+        this.setState({
+          endpointConfigError: null,
+        })
+      }
+    } catch (endpointConfigError) {
+      if (handleChangeEndpointConfig_id === this.handleChangeEndpointConfig_id) {
+        this.setState({ endpointConfigError })
+      }
     }
   }
 
@@ -91,10 +129,18 @@ class HelperComp extends PureComponent<Props, State> {
     e.preventDefault()
 
     const { updateAccount, setDataModal } = this.props
-    const { accountName, accountUnit } = this.state
+    const { accountName, accountUnit, endpointConfig, endpointConfigError } = this.state
+    const sanitizedAccountName = accountName ? accountName.replace(/\s+/g, ' ').trim() : null
 
-    if (accountName !== '') {
-      account = { ...account, unit: accountUnit || account.unit }
+    if (account.name || sanitizedAccountName) {
+      account = {
+        ...account,
+        unit: accountUnit || account.unit,
+        name: sanitizedAccountName || account.name,
+      }
+      if (endpointConfig && !endpointConfigError) {
+        account.endpointConfig = endpointConfig
+      }
       updateAccount(account)
       setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
       onClose()
@@ -118,7 +164,9 @@ class HelperComp extends PureComponent<Props, State> {
   handleChangeUnit = (value: Unit) => {
     this.setState({ accountUnit: value })
   }
+
   handleOpenRemoveAccountModal = () => this.setState({ isRemoveAccountModalOpen: true })
+
   handleCloseRemoveAccountModal = () => this.setState({ isRemoveAccountModalOpen: false })
 
   handleRemoveAccount = (account: Account) => {
@@ -129,10 +177,17 @@ class HelperComp extends PureComponent<Props, State> {
   }
 
   render() {
-    const { accountUnit, accountNameError, isRemoveAccountModalOpen } = this.state
+    const {
+      accountUnit,
+      endpointConfig,
+      accountNameError,
+      isRemoveAccountModalOpen,
+      endpointConfigError,
+    } = this.state
     const { t, onClose, data } = this.props
 
     const account = this.getAccount(data)
+    const bridge = getBridgeForCurrency(account.currency)
 
     const usefulData = {
       xpub: account.xpub || undefined,
@@ -179,6 +234,29 @@ class HelperComp extends PureComponent<Props, State> {
                 />
               </Box>
             </Container>
+            {canConfigureEndpointConfig(account) ? (
+              <Container>
+                <Box>
+                  <OptionRowTitle>{t('app:account.settings.endpointConfig.title')}</OptionRowTitle>
+                  <OptionRowDesc>{t('app:account.settings.endpointConfig.desc')}</OptionRowDesc>
+                </Box>
+                <Box>
+                  <Input
+                    value={
+                      endpointConfig ||
+                      account.endpointConfig ||
+                      (bridge.getDefaultEndpointConfig && bridge.getDefaultEndpointConfig()) ||
+                      ''
+                    }
+                    onChange={this.handleChangeEndpointConfig}
+                    onFocus={e => this.handleFocus(e, 'endpointConfig')}
+                    error={
+                      endpointConfigError ? t('app:account.settings.endpointConfig.error') : false
+                    }
+                  />
+                </Box>
+              </Container>
+            ) : null}
             <Spoiler title={t('app:account.settings.advancedLogs')}>
               <textarea
                 readOnly

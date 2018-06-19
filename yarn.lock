@@ -1515,9 +1515,9 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@2.30.0":
-  version "2.30.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.30.0.tgz#c46fbb1fef3347b6ae9a693bfc4f792c20c9ee9b"
+"@ledgerhq/live-common@2.31.0":
+  version "2.31.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.31.0.tgz#0f599a1e23b64d9ed74a845d3a9c82f0696f1df3"
   dependencies:
     axios "^0.18.0"
     invariant "^2.2.2"
@@ -12807,6 +12807,10 @@ smart-buffer@^1.0.13:
 smart-buffer@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.1.tgz#07ea1ca8d4db24eb4cac86537d7d18995221ace3"
+
+smoothscroll-polyfill@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.3.tgz#94e5f2d604efcceb53f23ff0380d7ea7280d4bff"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

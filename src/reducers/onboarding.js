@@ -1,5 +1,6 @@
 // @flow
 
+import { SKIP_ONBOARDING } from 'config/constants'
 import { handleActions, createAction } from 'redux-actions'
 
 type Step = {
@@ -22,6 +23,7 @@ export type OnboardingState = {
     recoveryStepPass: boolean,
     isGenuineFail: boolean,
     isDeviceGenuine: boolean,
+    genuineCheckUnavailable: ?Error,
   },
   isLedgerNano: boolean | null,
   flowType: string,
@@ -29,12 +31,13 @@ export type OnboardingState = {
 
 const state: OnboardingState = {
   stepIndex: 0,
-  stepName: process.env.SKIP_ONBOARDING ? 'finish' : 'start',
+  stepName: SKIP_ONBOARDING ? 'finish' : 'start',
   genuine: {
     pinStepPass: false,
     recoveryStepPass: false,
     isGenuineFail: false,
     isDeviceGenuine: false,
+    genuineCheckUnavailable: null,
   },
   isLedgerNano: null,
   flowType: '',

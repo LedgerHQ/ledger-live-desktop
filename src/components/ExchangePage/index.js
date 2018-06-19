@@ -41,7 +41,7 @@ class ExchangePage extends PureComponent<Props> {
     ]
 
     return (
-      <Box>
+      <Box pb={6}>
         <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={5}>
           {t('app:exchange.title')}
         </Box>

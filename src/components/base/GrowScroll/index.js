@@ -41,12 +41,12 @@ class GrowScroll extends PureComponent<Props> {
         : {
             display: 'flex',
             flex: 1,
-            positoin: 'relative',
+            position: 'relative',
           }),
     }
 
     const scrollContainerStyles = {
-      overflowY: 'auto',
+      overflowY: 'scroll',
       marginRight: `-80px`,
       paddingRight: `80px`,
       ...(maxHeight

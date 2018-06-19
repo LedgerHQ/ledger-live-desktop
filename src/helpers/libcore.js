@@ -4,6 +4,7 @@ import logger from 'logger'
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { SHOW_LEGACY_NEW_ACCOUNT } from 'config/constants'
 
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
@@ -27,8 +28,6 @@ type Props = {
   currencyId: string,
   onAccountScanned: AccountRaw => void,
 }
-
-const { SHOW_LEGACY_NEW_ACCOUNT } = process.env
 
 export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   const { devicePath, currencyId, onAccountScanned, core } = props

@@ -11,7 +11,7 @@ import type { LedgerScriptParams } from 'helpers/common'
 export default async function uninstallApp(
   transport: Transport<*>,
   { appParams }: { appParams: LedgerScriptParams },
-): Promise<void> {
+): Promise<*> {
   const params = {
     ...appParams,
     firmware: appParams.delete,

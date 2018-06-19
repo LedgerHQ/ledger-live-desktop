@@ -29,12 +29,22 @@ class AccountCell extends PureComponent<Props> {
         <Box alignItems="center" justifyContent="center" style={{ color: currency.color }}>
           {Icon && <Icon size={16} />}
         </Box>
-        <Box ff="Open Sans|SemiBold" fontSize={3} color="dark">
-          {accountName}
-        </Box>
+        <AccountNameEllipsis>{accountName}</AccountNameEllipsis>
       </Cell>
     )
   }
 }
 
 export default AccountCell
+
+const AccountNameEllipsis = styled(Box).attrs({
+  ff: 'Open Sans|SemiBold',
+  fontSize: 3,
+  color: 'dark',
+  flexShrink: 1,
+})`
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`

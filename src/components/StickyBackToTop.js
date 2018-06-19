@@ -2,9 +2,12 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
+import smoothscroll from 'smoothscroll-polyfill'
 import Box from 'components/base/Box'
 import AngleUp from 'icons/AngleUp'
 import { GrowScrollContext } from './base/GrowScroll'
+
+smoothscroll.polyfill()
 
 const Container = styled(Box)`
   position: fixed;
@@ -49,6 +52,7 @@ class StickyBackToTop extends PureComponent<Props, State> {
     const { scrollContainer } = this.props.getGrowScroll()
     if (scrollContainer) {
       const listener = () => {
+        if (this._unmounted) return
         const { scrollTop } = scrollContainer
         const visible = scrollTop > this.props.scrollThreshold
         this.setState(previous => {
@@ -59,19 +63,22 @@ class StickyBackToTop extends PureComponent<Props, State> {
         })
       }
       scrollContainer.addEventListener('scroll', listener)
-      this.releaseListener = () => scrollContainer.addEventListener('scroll', listener)
+      this.releaseListener = () => scrollContainer.removeEventListener('scroll', listener)
     }
   }
 
   componentWillUnmount() {
+    this._unmounted = true
     this.releaseListener()
   }
+
+  _unmounted = false
 
   onClick = () => {
     const { scrollContainer } = this.props.getGrowScroll()
     if (scrollContainer) {
       // $FlowFixMe seems to be missing in flow
-      scrollContainer.scrollTo(0, 0)
+      scrollContainer.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 

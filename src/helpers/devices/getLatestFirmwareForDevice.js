@@ -1,7 +1,7 @@
 // @flow
 import axios from 'axios'
 import isEmpty from 'lodash/isEmpty'
-import { API_BASE_URL } from 'helpers/constants'
+import { MANAGER_API_BASE } from 'config/constants'
 
 import getFirmwareInfo from './getFirmwareInfo'
 
@@ -17,11 +17,11 @@ export default async (data: Input) => {
 
     // Get device infos from targetId
     const { data: deviceVersion } = await axios.get(
-      `${API_BASE_URL}/device_versions_target_id/${data.targetId}`,
+      `${MANAGER_API_BASE}/device_versions_target_id/${data.targetId}`,
     )
 
     // Fetch next possible firmware
-    const { data: serverData } = await axios.post(`${API_BASE_URL}/get_latest_firmware`, {
+    const { data: serverData } = await axios.post(`${MANAGER_API_BASE}/get_latest_firmware`, {
       current_se_firmware_version: seFirmwareVersion.id,
       device_version: deviceVersion.id,
       providers: [1],

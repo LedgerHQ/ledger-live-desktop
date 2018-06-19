@@ -14,10 +14,10 @@ type Props = {
   chartColor: string,
   chartId: string,
   accounts: Account[],
-  selectedTime: string,
+  selectedTimeRange: string,
   daysCount: number,
   renderHeader?: ({
-    selectedTime: *,
+    selectedTimeRange: *,
     totalBalance: number,
     sinceBalance: number,
     refBalance: number,
@@ -31,7 +31,7 @@ const BalanceSummary = ({
   counterValue,
   daysCount,
   renderHeader,
-  selectedTime,
+  selectedTimeRange,
 }: Props) => {
   const account = accounts.length === 1 ? accounts[0] : undefined
   return (
@@ -43,7 +43,7 @@ const BalanceSummary = ({
               {renderHeader ? (
                 <Box px={6}>
                   {renderHeader({
-                    selectedTime,
+                    selectedTimeRange,
                     // FIXME refactor these
                     totalBalance: balanceEnd,
                     sinceBalance: balanceStart,
@@ -59,7 +59,7 @@ const BalanceSummary = ({
                   data={balanceHistory}
                   height={200}
                   currency={counterValue}
-                  tickXScale={selectedTime}
+                  tickXScale={selectedTimeRange}
                   renderTickY={val => formatShort(counterValue.units[0], val)}
                   renderTooltip={
                     isAvailable && !account

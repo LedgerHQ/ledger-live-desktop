@@ -2,6 +2,7 @@
 import createSemaphore from 'semaphore'
 import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
+import { DEBUG_DEVICE } from 'config/constants'
 import { retry } from './promise'
 
 // all open to device must use openDevice so we can prevent race conditions
@@ -20,7 +21,7 @@ export const withDevice: WithDevice = devicePath => {
     takeSemaphorePromise(sem, async () => {
       const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
 
-      if (process.env.DEBUG_DEVICE > 0) t.setDebugMode(true)
+      if (DEBUG_DEVICE) t.setDebugMode(true)
       try {
         const res = await job(t)
         // $FlowFixMe

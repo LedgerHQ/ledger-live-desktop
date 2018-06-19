@@ -111,4 +111,7 @@ export interface WalletBridge<Transaction> {
   // Implement an optimistic response for signAndBroadcast.
   // you likely should add the operation in account.pendingOperations but maybe you want to clean it (because maybe some are replaced / cancelled by this one?)
   addPendingOperation?: (account: Account, optimisticOperation: Operation) => Account;
+
+  getDefaultEndpointConfig?: () => string;
+  validateEndpointConfig?: (endpointConfig: string) => Promise<void>;
 }

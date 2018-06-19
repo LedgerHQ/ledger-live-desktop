@@ -20,6 +20,7 @@ import {
   DisclaimerBox,
   FixedTopContainer,
   OnboardingFooterWrapper,
+  StepContainerInner,
 } from '../helperComponents'
 
 type State = {
@@ -96,7 +97,7 @@ class SetPassword extends PureComponent<StepProps, State> {
 
     return (
       <FixedTopContainer>
-        <Box grow alignItems="center">
+        <StepContainerInner>
           <Fragment>
             <Box alignItems="center">
               <Title>{t('onboarding:setPassword.title')}</Title>
@@ -120,7 +121,7 @@ class SetPassword extends PureComponent<StepProps, State> {
               <DisclaimerBox mt={7} disclaimerNotes={disclaimerNotes} />
             </Box>
           </Fragment>
-        </Box>
+        </StepContainerInner>
 
         <OnboardingFooterWrapper>
           <Button padded outlineGrey onClick={() => prevStep()}>

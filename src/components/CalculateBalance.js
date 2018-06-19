@@ -79,7 +79,12 @@ const mapStateToProps = (state: State, props: OwnProps) => {
   }
 }
 
+const hash = ({ balanceHistory, balanceEnd }) => `${balanceHistory.length}_${balanceEnd}`
+
 class CalculateBalance extends Component<Props> {
+  shouldComponentUpdate(nextProps) {
+    return hash(nextProps) !== hash(this.props)
+  }
   render() {
     const { children } = this.props
     return children(this.props)

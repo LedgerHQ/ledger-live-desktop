@@ -11,19 +11,23 @@ import type { T } from 'types/common'
 import { updateGenuineCheck } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
+import FakeLink from 'components/base/FakeLink'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
+import TranslatedError from 'components/TranslatedError'
 
 import IconLedgerNanoError from 'icons/illustrations/LedgerNanoError'
 import IconLedgerBlueError from 'icons/illustrations/LedgerBlueError'
 import IconCheck from 'icons/Check'
+import IconCross from 'icons/Cross'
 
 import {
   Title,
   Description,
   IconOptionRow,
   FixedTopContainer,
+  StepContainerInner,
   OnboardingFooterWrapper,
 } from '../helperComponents'
 
@@ -88,12 +92,39 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
   handleOpenGenuineCheckModal = () => this.setState({ isGenuineCheckModalOpened: true })
   handleCloseGenuineCheckModal = (cb?: Function) =>
-    this.setState(state => ({ ...state, isGenuineCheckModalOpened: false }), () => cb && cb())
+    this.setState(
+      state => ({ ...state, isGenuineCheckModalOpened: false }),
+      () => {
+        // FIXME: meh
+        if (cb && typeof cb === 'function') {
+          cb()
+        }
+      },
+    )
 
-  handleGenuineCheck = isGenuine => {
+  handleGenuineCheckPass = () => {
     this.handleCloseGenuineCheckModal(() => {
       this.props.updateGenuineCheck({
-        isDeviceGenuine: isGenuine,
+        isDeviceGenuine: true,
+        genuineCheckUnavailable: null,
+      })
+    })
+  }
+  handleGenuineCheckFailed = () => {
+    this.handleCloseGenuineCheckModal(() => {
+      this.props.updateGenuineCheck({
+        isGenuineFail: true,
+        isDeviceGenuine: false,
+        genuineCheckUnavailable: null,
+      })
+    })
+  }
+
+  handleGenuineCheckUnavailable = error => {
+    this.handleCloseGenuineCheckModal(() => {
+      this.props.updateGenuineCheck({
+        isDeviceGenuine: false,
+        genuineCheckUnavailable: error,
       })
     })
   }
@@ -128,7 +159,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
     return (
       <FixedTopContainer>
-        <Box grow alignItems="center">
+        <StepContainerInner>
           <Title>{t('onboarding:genuineCheck.title')}</Title>
           {onboarding.isLedgerNano ? (
             <Description>{t('onboarding:genuineCheck.descNano')}</Description>
@@ -193,6 +224,20 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                         {t('onboarding:genuineCheck.isGenuinePassed')}
                       </GenuineSuccessText>
                     </Box>
+                  ) : genuine.genuineCheckUnavailable ? (
+                    <Box horizontal align="center" flow={1} color={colors.alertRed}>
+                      <IconCross size={16} />
+                      <Box ff="Open Sans|Regular" fontSize={4} style={{ maxWidth: '200px' }}>
+                        <TranslatedError error={genuine.genuineCheckUnavailable} />
+                        <FakeLink
+                          color="alertRed"
+                          underline
+                          onClick={this.handleOpenGenuineCheckModal}
+                        >
+                          {t('app:common.retry')}
+                        </FakeLink>
+                      </Box>
+                    </Box>
                   ) : (
                     <Button
                       primary
@@ -206,7 +251,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
               )}
             </CardWrapper>
           </Box>
-        </Box>
+        </StepContainerInner>
         <OnboardingFooter
           horizontal
           align="center"
@@ -219,7 +264,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         <GenuineCheckModal
           isOpened={isGenuineCheckModalOpened}
           onClose={this.handleCloseGenuineCheckModal}
-          onGenuineCheck={this.handleGenuineCheck}
+          onGenuineCheckPass={this.handleGenuineCheckPass}
+          onGenuineCheckFailed={this.handleGenuineCheckFailed}
+          onGenuineCheckUnavailable={this.handleGenuineCheckUnavailable}
         />
       </FixedTopContainer>
     )
@@ -281,6 +328,7 @@ export const GenuineSuccessText = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
 })``
+
 export const CardTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
@@ -303,7 +351,6 @@ const CardWrapper = styled(Box).attrs({
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
   opacity: ${p => (p.isDisabled ? 0.7 : 1)};
   &:hover {
-    cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
   }
 `
