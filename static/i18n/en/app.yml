@@ -161,7 +161,6 @@ operationDetails:
   identifier: Hash
   viewOperation: View operation
   showMore: See {{recipients}} more
-  showLess: See Less
 operationList:
   noMoreOperations: No more operations
 manager:
