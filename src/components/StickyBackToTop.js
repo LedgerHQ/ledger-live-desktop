@@ -2,10 +2,10 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
+import smoothscroll from 'smoothscroll-polyfill'
 import Box from 'components/base/Box'
 import AngleUp from 'icons/AngleUp'
 import { GrowScrollContext } from './base/GrowScroll'
-import smoothscroll from 'smoothscroll-polyfill'
 
 smoothscroll.polyfill()
 
