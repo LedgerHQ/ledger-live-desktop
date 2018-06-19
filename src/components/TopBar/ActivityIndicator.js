@@ -10,7 +10,6 @@ import type { T } from 'types/common'
 import type { AsyncState } from 'reducers/bridgeSync'
 
 import { globalSyncStateSelector } from 'reducers/bridgeSync'
-import { hasAccountsSelector } from 'reducers/accounts'
 import { BridgeSyncConsumer } from 'bridge/BridgeSyncContext'
 import CounterValues from 'helpers/countervalues'
 
@@ -23,7 +22,6 @@ import ItemContainer from './ItemContainer'
 
 const mapStateToProps = createStructuredSelector({
   globalSyncState: globalSyncStateSelector,
-  hasAccounts: hasAccountsSelector,
 })
 
 type Props = {
@@ -128,37 +126,28 @@ class ActivityIndicatorInner extends PureComponent<Props, State> {
   }
 }
 
-const ActivityIndicator = ({
-  globalSyncState,
-  hasAccounts,
-  t,
-}: {
-  globalSyncState: AsyncState,
-  hasAccounts: boolean,
-  t: T,
-}) =>
-  !hasAccounts ? null : (
-    <BridgeSyncConsumer>
-      {setSyncBehavior => (
-        <CounterValues.PollingConsumer>
-          {cvPolling => {
-            const isPending = cvPolling.pending || globalSyncState.pending
-            const isError = cvPolling.error || globalSyncState.error
-            return (
-              <ActivityIndicatorInner
-                t={t}
-                isPending={isPending}
-                isGlobalSyncStatePending={globalSyncState.pending}
-                isError={!!isError && !isPending}
-                cvPoll={cvPolling.poll}
-                setSyncBehavior={setSyncBehavior}
-              />
-            )
-          }}
-        </CounterValues.PollingConsumer>
-      )}
-    </BridgeSyncConsumer>
-  )
+const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState, t: T }) => (
+  <BridgeSyncConsumer>
+    {setSyncBehavior => (
+      <CounterValues.PollingConsumer>
+        {cvPolling => {
+          const isPending = cvPolling.pending || globalSyncState.pending
+          const isError = cvPolling.error || globalSyncState.error
+          return (
+            <ActivityIndicatorInner
+              t={t}
+              isPending={isPending}
+              isGlobalSyncStatePending={globalSyncState.pending}
+              isError={!!isError && !isPending}
+              cvPoll={cvPolling.poll}
+              setSyncBehavior={setSyncBehavior}
+            />
+          )
+        }}
+      </CounterValues.PollingConsumer>
+    )}
+  </BridgeSyncConsumer>
+)
 
 export default compose(
   translate(),

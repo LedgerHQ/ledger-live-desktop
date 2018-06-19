@@ -129,11 +129,9 @@ class AccountPage extends PureComponent<Props> {
             )}
             <Tooltip render={() => t('app:account.settings.title')}>
               <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
-                <Button small outlineGrey>
-                  <Box justifyContent="center">
-                    <IconAccountSettings size={16} />
-                  </Box>
-                </Button>
+                <Box justifyContent="center">
+                  <IconAccountSettings size={16} />
+                </Box>
               </ButtonSettings>
             </Tooltip>
           </Box>

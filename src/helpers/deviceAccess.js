@@ -18,7 +18,7 @@ export const withDevice: WithDevice = devicePath => {
     semaphorePerDevice[devicePath] || (semaphorePerDevice[devicePath] = createSemaphore(1))
 
   return job =>
-    takeSemaphorePromise(sem, async () => {
+    takeSemaphorePromise(sem, devicePath, async () => {
       const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
 
       if (DEBUG_DEVICE) t.setDebugMode(true)
@@ -32,17 +32,32 @@ export const withDevice: WithDevice = devicePath => {
     })
 }
 
-function takeSemaphorePromise<T>(sem, f: () => Promise<T>): Promise<T> {
+function takeSemaphorePromise<T>(sem, devicePath, f: () => Promise<T>): Promise<T> {
   return new Promise((resolve, reject) => {
     sem.take(() => {
+      process.send({
+        type: 'setDeviceBusy',
+        busy: true,
+        devicePath,
+      })
       f().then(
         r => {
           sem.leave()
           resolve(r)
+          process.send({
+            type: 'setDeviceBusy',
+            busy: false,
+            devicePath,
+          })
         },
         e => {
           sem.leave()
           reject(e)
+          process.send({
+            type: 'setDeviceBusy',
+            busy: false,
+            devicePath,
+          })
         },
       )
     })

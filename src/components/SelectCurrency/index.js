@@ -40,6 +40,9 @@ const SelectCurrency = ({ onChange, value, t, placeholder, currencies, ...props 
       renderValue={renderOption}
       options={options}
       placeholder={placeholder || t('app:common.selectCurrency')}
+      noOptionsMessage={({ inputValue }: { inputValue: string }) =>
+        t('app:common.selectCurrencyNoOption', { currencyName: inputValue })
+      }
       onChange={item => onChange(item ? item.currency : null)}
       {...props}
     />
