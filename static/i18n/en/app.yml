@@ -27,6 +27,7 @@ common:
   next: Next
   back: Back
   retry: Retry
+  stop: Stop
   close: Close
   eastern: Eastern
   western: Western
@@ -143,7 +144,6 @@ addAccounts:
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
   noAccountToImport: We didnt find any {{currencyName}} account to import.
-  cancelSync: Stop synchronization
   success: Great success!
   createNewAccount:
     title: Create new account

@@ -298,7 +298,7 @@ export const StepImportFooter = ({
       )}
       {scanStatus === 'scanning' && (
         <Button mr={2} onClick={() => setState({ scanStatus: 'finished' })}>
-          {t('app:addAccounts.cancelSync')}
+          {t('app:common.stop')}
         </Button>
       )}
       <Button
