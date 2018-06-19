@@ -56,12 +56,25 @@ const BalanceSummary = ({
               <Chart
                 id={chartId}
                 unit={account ? account.unit : null}
-                color={!isAvailable ? 'transparent' : chartColor}
-                data={balanceHistory}
+                color={!isAvailable ? '#eee' : chartColor}
+                data={
+                  isAvailable
+                    ? balanceHistory
+                    : balanceHistory.map(i => ({
+                        ...i,
+                        value:
+                          10000 *
+                          (1 +
+                          0.1 * Math.sin(i.date * Math.cos(i.date)) + // random-ish
+                            0.5 * Math.cos(i.date / 2000000000 + Math.sin(i.date / 1000000000))), // general curve trend
+                      }))
+                }
                 height={200}
                 currency={counterValue}
                 tickXScale={selectedTimeRange}
-                renderTickY={val => formatShort(counterValue.units[0], val)}
+                renderTickY={
+                  isAvailable ? val => formatShort(counterValue.units[0], val) : () => ''
+                }
                 isInteractive={isAvailable}
                 renderTooltip={
                   isAvailable && !account
