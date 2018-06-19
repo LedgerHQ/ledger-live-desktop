@@ -161,7 +161,7 @@ class StepImport extends PureComponent<StepProps> {
     })
 
     const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', {
-      currencyName: currency ? ` ${currency.name}}` : '',
+      currencyName: currency ? ` ${currency.name}` : '',
     })
 
     return (
