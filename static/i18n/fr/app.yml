@@ -79,6 +79,10 @@ account:
     unit:
       title: Unit
       desc: Lorem ipsum dolort amet
+    endpointConfig:
+      title: Node
+      desc: The API node to use
+      error: Invalid endpoint
 dashboard:
   title: Dashboard
   accounts:
