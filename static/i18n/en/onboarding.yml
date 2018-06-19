@@ -87,7 +87,6 @@ genuineCheck:
       title: Check if your Ledger device is genuine
       desc: This is a long text, please replace it with the final wording once it’s done. Lorem ipsum dolor amet ledger lorem dolor
   isGenuinePassed: Your Nano S is genuine
-  isGenuineUnavailable: Server problem
   buttons:
     genuineCheck: Genuine check
     contactSupport: Contact Support

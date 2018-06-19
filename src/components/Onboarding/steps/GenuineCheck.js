@@ -15,6 +15,7 @@ import FakeLink from 'components/base/FakeLink'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
+import TranslatedError from 'components/TranslatedError'
 
 import IconLedgerNanoError from 'icons/illustrations/LedgerNanoError'
 import IconLedgerBlueError from 'icons/illustrations/LedgerBlueError'
@@ -226,8 +227,8 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   ) : genuine.genuineCheckUnavailable ? (
                     <Box horizontal align="center" flow={1} color={colors.alertRed}>
                       <IconCross size={16} />
-                      <Box ff="Open Sans|Regular" fontSize={4}>
-                        {t('onboarding:genuineCheck.isGenuineUnavailable')}
+                      <Box ff="Open Sans|Regular" fontSize={4} style={{ maxWidth: '200px' }}>
+                        <TranslatedError error={genuine.genuineCheckUnavailable} />
                         <FakeLink
                           color="alertRed"
                           underline
