@@ -30,6 +30,7 @@ const Back = styled(Box).attrs({
 })`
   cursor: pointer;
   position: absolute;
+  line-height: 1;
   top: 0;
   left: 0;
 
