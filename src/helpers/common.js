@@ -16,10 +16,14 @@ const APDUS = {
 
 export type LedgerScriptParams = {
   firmware?: string,
-  firmwareKey?: string,
+  firmware_key?: string,
   delete?: string,
-  deleteKey?: string,
+  delete_key?: string,
   targetId?: string | number,
+  name: string,
+  version: string,
+  icon: string,
+  app?: number,
 }
 
 type FirmwareUpdateType = 'osu' | 'final'

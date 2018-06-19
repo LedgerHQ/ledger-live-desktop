@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
 import type { Device, T } from 'types/common'
+import type { LedgerScriptParams } from 'helpers/common'
 
 import listApps from 'commands/listApps'
 import installApp from 'commands/installApp'
@@ -43,27 +44,17 @@ const ICONS_FALLBACK = {
 type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
 type Mode = 'home' | 'installing' | 'uninstalling'
 
-type LedgerApp = {
-  name: string,
-  version: string,
-  icon: string,
-  app: Object,
-  bolos_version: {
-    min: number,
-    max: number,
-  },
-}
-
 type Props = {
   device: Device,
   targetId: string | number,
   t: T,
+  version: string,
 }
 
 type State = {
   status: Status,
   error: string | null,
-  appsList: LedgerApp[],
+  appsList: LedgerScriptParams[] | Array<*>,
   app: string,
   mode: Mode,
 }
@@ -89,8 +80,8 @@ class AppsList extends PureComponent<Props, State> {
 
   async fetchAppList() {
     try {
-      const { targetId } = this.props
-      const appsList = CACHED_APPS || (await listApps.send({ targetId }).toPromise())
+      const { targetId, version } = this.props
+      const appsList = CACHED_APPS || (await listApps.send({ targetId, version }).toPromise())
       CACHED_APPS = appsList
       if (!this._unmounted) {
         this.setState({ appsList, status: 'idle' })
@@ -100,14 +91,14 @@ class AppsList extends PureComponent<Props, State> {
     }
   }
 
-  handleInstallApp = (args: { app: any, name: string }) => async () => {
-    const { app: appParams, name } = args
-    this.setState({ status: 'busy', app: name, mode: 'installing' })
+  handleInstallApp = (app: LedgerScriptParams) => async () => {
+    this.setState({ status: 'busy', app: app.name, mode: 'installing' })
     try {
       const {
         device: { path: devicePath },
+        targetId,
       } = this.props
-      const data = { appParams, devicePath }
+      const data = { app, devicePath, targetId }
       await installApp.send(data).toPromise()
       this.setState({ status: 'success', app: '' })
     } catch (err) {
@@ -115,14 +106,14 @@ class AppsList extends PureComponent<Props, State> {
     }
   }
 
-  handleUninstallApp = (args: { app: any, name: string }) => async () => {
-    const { app: appParams, name } = args
-    this.setState({ status: 'busy', app: name, mode: 'uninstalling' })
+  handleUninstallApp = (app: LedgerScriptParams) => async () => {
+    this.setState({ status: 'busy', app: app.name, mode: 'uninstalling' })
     try {
       const {
         device: { path: devicePath },
+        targetId,
       } = this.props
-      const data = { appParams, devicePath }
+      const data = { app, devicePath, targetId }
       await uninstallApp.send(data).toPromise()
       this.setState({ status: 'success', app: '' })
     } catch (err) {
@@ -192,7 +183,7 @@ class AppsList extends PureComponent<Props, State> {
             <List>
               {items.map(c => (
                 <ManagerApp
-                  key={`${c.name}_${c.version}_${c.bolos_version.min}`}
+                  key={`${c.name}_${c.version}`}
                   name={c.name}
                   version={`Version ${c.version}`}
                   icon={ICONS_FALLBACK[c.icon] || c.icon}

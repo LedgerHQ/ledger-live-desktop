@@ -9,14 +9,17 @@ import installApp from 'helpers/apps/installApp'
 import type { LedgerScriptParams } from 'helpers/common'
 
 type Input = {
-  appParams: LedgerScriptParams,
+  app: LedgerScriptParams,
   devicePath: string,
+  targetId: string | number,
 }
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand('installApp', ({ devicePath, ...rest }) =>
-  fromPromise(withDevice(devicePath)(transport => installApp(transport, rest))),
+const cmd: Command<Input, Result> = createCommand(
+  'installApp',
+  ({ devicePath, targetId, ...app }) =>
+    fromPromise(withDevice(devicePath)(transport => installApp(transport, targetId, app))),
 )
 
 export default cmd

@@ -34,16 +34,16 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
       </Text>
     </Box>
     <Box mt={5}>
-      <FirmwareUpdate
+      {/* <FirmwareUpdate
         infos={{
           targetId: deviceInfo.targetId,
           version: deviceInfo.version,
         }}
         device={device}
-      />
+      /> */}
     </Box>
     <Box mt={5}>
-      <AppsList device={device} targetId={deviceInfo.targetId} />
+      <AppsList device={device} targetId={deviceInfo.targetId} version={deviceInfo.version} />
     </Box>
   </Box>
 )

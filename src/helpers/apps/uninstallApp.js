@@ -2,7 +2,7 @@
 import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import { BASE_SOCKET_URL } from 'helpers/constants'
+import { BASE_SOCKET_URL_SECURE } from 'config/constants'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { LedgerScriptParams } from 'helpers/common'
@@ -12,13 +12,15 @@ import type { LedgerScriptParams } from 'helpers/common'
  */
 export default async function uninstallApp(
   transport: Transport<*>,
-  { appParams }: { appParams: LedgerScriptParams },
+  targetId: string | number,
+  { app }: { app: LedgerScriptParams },
 ): Promise<*> {
   const params = {
-    ...appParams,
-    firmware: appParams.delete,
-    firmwareKey: appParams.deleteKey,
+    targetId,
+    ...app,
+    firmware: app.delete,
+    firmwareKey: app.delete_key,
   }
-  const url = `${BASE_SOCKET_URL}/install?${qs.stringify(params)}`
+  const url = `${BASE_SOCKET_URL_SECURE}/install?${qs.stringify(params)}`
   return createDeviceSocket(transport, url).toPromise()
 }

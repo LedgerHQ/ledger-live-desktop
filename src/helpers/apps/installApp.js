@@ -2,7 +2,7 @@
 import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import { BASE_SOCKET_URL } from 'helpers/constants'
+import { BASE_SOCKET_URL_SECURE } from 'config/constants'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { LedgerScriptParams } from 'helpers/common'
@@ -12,8 +12,14 @@ import type { LedgerScriptParams } from 'helpers/common'
  */
 export default async function installApp(
   transport: Transport<*>,
-  { appParams }: { appParams: LedgerScriptParams },
+  targetId: string | number,
+  { app }: { app: LedgerScriptParams },
 ): Promise<*> {
-  const url = `${BASE_SOCKET_URL}/install?${qs.stringify(appParams)}`
+  const params = {
+    targetId,
+    ...app,
+    firmwareKey: app.firmware_key,
+  }
+  const url = `${BASE_SOCKET_URL_SECURE}/install?${qs.stringify(params)}`
   return createDeviceSocket(transport, url).toPromise()
 }
