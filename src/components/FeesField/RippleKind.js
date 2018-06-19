@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
-import { apiForCurrency, parseAPIValue } from 'api/Ripple'
+import { apiForEndpointConfig, parseAPIValue } from 'api/Ripple'
 import InputCurrency from 'components/base/InputCurrency'
 import GenericContainer from './GenericContainer'
 
@@ -24,7 +24,7 @@ class FeesField extends Component<Props, State> {
     this.sync()
   }
   async sync() {
-    const api = apiForCurrency(this.props.account.currency)
+    const api = apiForEndpointConfig(this.props.account.endpointConfig)
     try {
       await api.connect()
       const info = await api.getServerInfo()
