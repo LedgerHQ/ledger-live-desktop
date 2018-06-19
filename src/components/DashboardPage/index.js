@@ -13,7 +13,13 @@ import type { T } from 'types/common'
 import { colors } from 'styles/theme'
 
 import { accountsSelector } from 'reducers/accounts'
-import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
+import {
+  counterValueCurrencySelector,
+  localeSelector,
+  selectedTimeRangeSelector,
+  timeRangeDaysByKey,
+} from 'reducers/settings'
+import type { TimeRange } from 'reducers/settings'
 
 import { reorderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
@@ -35,6 +41,7 @@ const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
   counterValue: counterValueCurrencySelector,
   locale: localeSelector,
+  selectedTimeRange: selectedTimeRangeSelector,
 })
 
 const mapDispatchToProps = {
@@ -48,20 +55,11 @@ type Props = {
   accounts: Account[],
   push: Function,
   counterValue: Currency,
+  selectedTimeRange: TimeRange,
+  saveSettings: ({ selectedTimeRange: TimeRange }) => *,
 }
 
-type State = {
-  selectedTime: string,
-  daysCount: number,
-}
-
-class DashboardPage extends PureComponent<Props, State> {
-  state = {
-    // save to user preference?
-    selectedTime: 'month',
-    daysCount: 30,
-  }
-
+class DashboardPage extends PureComponent<Props> {
   onAccountClick = account => this.props.push(`/account/${account.id}`)
 
   handleGreeting = () => {
@@ -77,17 +75,15 @@ class DashboardPage extends PureComponent<Props, State> {
     return 'app:dashboard.greeting.morning'
   }
 
-  handleChangeSelectedTime = item =>
-    this.setState({
-      selectedTime: item.key,
-      daysCount: item.value,
-    })
+  handleChangeSelectedTime = item => {
+    this.props.saveSettings({ selectedTimeRange: item.key })
+  }
 
   _cacheBalance = null
 
   render() {
-    const { accounts, t, counterValue } = this.props
-    const { selectedTime, daysCount } = this.state
+    const { accounts, t, counterValue, selectedTimeRange } = this.props
+    const daysCount = timeRangeDaysByKey[selectedTimeRange]
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
 
@@ -111,7 +107,7 @@ class DashboardPage extends PureComponent<Props, State> {
                 </Box>
                 <Box>
                   <PillsDaysCount
-                    selectedTime={selectedTime}
+                    selected={selectedTimeRange}
                     onChange={this.handleChangeSelectedTime}
                   />
                 </Box>
@@ -122,14 +118,14 @@ class DashboardPage extends PureComponent<Props, State> {
                   chartId="dashboard-chart"
                   chartColor={colors.wallet}
                   accounts={accounts}
-                  selectedTime={selectedTime}
+                  selectedTimeRange={selectedTimeRange}
                   daysCount={daysCount}
-                  renderHeader={({ totalBalance, selectedTime, sinceBalance, refBalance }) => (
+                  renderHeader={({ totalBalance, selectedTimeRange, sinceBalance, refBalance }) => (
                     <BalanceInfos
                       t={t}
                       counterValue={counterValue}
                       totalBalance={totalBalance}
-                      since={selectedTime}
+                      since={selectedTimeRange}
                       sinceBalance={sinceBalance}
                       refBalance={refBalance}
                     />

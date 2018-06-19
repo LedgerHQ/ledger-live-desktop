@@ -24,8 +24,8 @@ const RENDER_TICK_X = {
   default: 'MMM D',
 }
 
-function getRenderTickX(selectedTime) {
-  return t => moment(t).format(RENDER_TICK_X[selectedTime] || RENDER_TICK_X.default)
+function getRenderTickX(selectedTimeRange) {
+  return t => moment(t).format(RENDER_TICK_X[selectedTimeRange] || RENDER_TICK_X.default)
 }
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
