@@ -16,8 +16,15 @@ import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
 
+import { saveSettings } from 'actions/settings'
 import { accountSelector } from 'reducers/accounts'
-import { counterValueCurrencySelector, localeSelector } from 'reducers/settings'
+import {
+  counterValueCurrencySelector,
+  localeSelector,
+  selectedTimeRangeSelector,
+  timeRangeDaysByKey,
+} from 'reducers/settings'
+import type { TimeRange } from 'reducers/settings'
 import { openModal } from 'reducers/modals'
 
 import IconAccountSettings from 'icons/AccountSettings'
@@ -63,10 +70,12 @@ const mapStateToProps = (state, props) => ({
   account: accountSelector(state, { accountId: props.match.params.id }),
   counterValue: counterValueCurrencySelector(state),
   settings: localeSelector(state),
+  selectedTimeRange: selectedTimeRangeSelector(state),
 })
 
 const mapDispatchToProps = {
   openModal,
+  saveSettings,
 }
 
 type Props = {
@@ -74,30 +83,20 @@ type Props = {
   t: T,
   account?: Account,
   openModal: Function,
+  saveSettings: ({ selectedTimeRange: TimeRange }) => *,
+  selectedTimeRange: TimeRange,
 }
 
-type State = {
-  selectedTime: string,
-  daysCount: number,
-}
-
-class AccountPage extends PureComponent<Props, State> {
-  state = {
-    selectedTime: 'month',
-    daysCount: 30,
+class AccountPage extends PureComponent<Props> {
+  handleChangeSelectedTime = item => {
+    this.props.saveSettings({ selectedTimeRange: item.key })
   }
-
-  handleChangeSelectedTime = item =>
-    this.setState({
-      selectedTime: item.key,
-      daysCount: item.value,
-    })
 
   _cacheBalance = null
 
   render() {
-    const { account, openModal, t, counterValue } = this.props
-    const { selectedTime, daysCount } = this.state
+    const { account, openModal, t, counterValue, selectedTimeRange } = this.props
+    const daysCount = timeRangeDaysByKey[selectedTimeRange]
 
     // Don't even throw if we jumped in wrong account route
     if (!account) {
@@ -148,7 +147,7 @@ class AccountPage extends PureComponent<Props, State> {
                 chartId={`account-chart-${account.id}`}
                 counterValue={counterValue}
                 daysCount={daysCount}
-                selectedTime={selectedTime}
+                selectedTimeRange={selectedTimeRange}
                 renderHeader={({ totalBalance, sinceBalance, refBalance }) => (
                   <Box flow={4} mb={2}>
                     <Box horizontal>
@@ -165,7 +164,7 @@ class AccountPage extends PureComponent<Props, State> {
                       </BalanceTotal>
                       <Box>
                         <PillsDaysCount
-                          selectedTime={selectedTime}
+                          selected={selectedTimeRange}
                           onChange={this.handleChangeSelectedTime}
                         />
                       </Box>
@@ -177,7 +176,7 @@ class AccountPage extends PureComponent<Props, State> {
                         totalBalance={totalBalance}
                         sinceBalance={sinceBalance}
                         refBalance={refBalance}
-                        since={selectedTime}
+                        since={selectedTimeRange}
                       />
                       <BalanceSinceDiff
                         t={t}
@@ -186,7 +185,7 @@ class AccountPage extends PureComponent<Props, State> {
                         totalBalance={totalBalance}
                         sinceBalance={sinceBalance}
                         refBalance={refBalance}
-                        since={selectedTime}
+                        since={selectedTimeRange}
                       />
                     </Box>
                   </Box>

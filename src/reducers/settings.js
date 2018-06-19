@@ -18,6 +18,14 @@ import type { State } from 'reducers'
 
 export const intermediaryCurrency = getCryptoCurrencyById('bitcoin')
 
+export const timeRangeDaysByKey = {
+  week: 7,
+  month: 30,
+  year: 365,
+}
+
+export type TimeRange = $Keys<typeof timeRangeDaysByKey>
+
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
@@ -29,6 +37,7 @@ export type SettingsState = {
     isEnabled: boolean,
     value: string,
   },
+  selectedTimeRange: TimeRange,
   marketIndicator: 'eastern' | 'western',
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,
@@ -67,6 +76,7 @@ const INITIAL_STATE: SettingsState = {
     isEnabled: false,
     value: '',
   },
+  selectedTimeRange: 'month',
   marketIndicator: 'western',
   currenciesSettings: {},
   region,
@@ -207,5 +217,6 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
 
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsBooleanSelector = (state: State) => state.settings.sentryLogs
+export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
 
 export default handleActions(handlers, INITIAL_STATE)
