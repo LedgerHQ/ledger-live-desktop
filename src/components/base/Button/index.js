@@ -16,8 +16,12 @@ type Style = any // FIXME
 const buttonStyles: { [_: string]: Style } = {
   default: {
     default: noop,
-    active: noop,
-    hover: noop,
+    active: p => `
+      background: ${rgba(p.theme.colors.fog, 0.3)};
+    `,
+    hover: p => `
+      background: ${rgba(p.theme.colors.fog, 0.2)};
+    `,
     focus: () => `
       box-shadow: ${focusedShadowStyle};
     `,
