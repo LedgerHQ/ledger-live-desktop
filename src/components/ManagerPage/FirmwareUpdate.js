@@ -119,7 +119,9 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               </Box>
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>
-              {t('app:manager.firmware.installed', { version: infos.version })}
+              {t('app:manager.firmware.installed', {
+                version: infos.version,
+              })}
             </Text>
           </Box>
           <UpdateFirmwareButton firmware={latestFirmware} installFirmware={this.installFirmware} />

@@ -18,11 +18,14 @@ type Props = {
   installFirmware: () => void,
 }
 
+const getCleanVersion = (input: string): string =>
+  input.endsWith('-osu') ? input.replace('-osu', '') : input
+
 const UpdateFirmwareButton = ({ t, firmware, installFirmware }: Props) =>
   firmware ? (
     <Fragment>
       <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
-        {t('app:manager.firmware.latest', { version: firmware.name })}
+        {t('app:manager.firmware.latest', { version: getCleanVersion(firmware.name) })}
       </Text>
       <Button primary onClick={installFirmware}>
         {t('app:manager.firmware.update')}
