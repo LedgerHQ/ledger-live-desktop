@@ -5,6 +5,9 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import AngleUp from 'icons/AngleUp'
 import { GrowScrollContext } from './base/GrowScroll'
+import smoothscroll from 'smoothscroll-polyfill'
+
+smoothscroll.polyfill()
 
 const Container = styled(Box)`
   position: fixed;
@@ -75,7 +78,7 @@ class StickyBackToTop extends PureComponent<Props, State> {
     const { scrollContainer } = this.props.getGrowScroll()
     if (scrollContainer) {
       // $FlowFixMe seems to be missing in flow
-      scrollContainer.scrollTo(0, 0)
+      scrollContainer.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 

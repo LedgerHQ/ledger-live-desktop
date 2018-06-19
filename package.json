@@ -96,6 +96,7 @@
     "secp256k1": "3.3.1",
     "semaphore": "^1.1.0",
     "semver": "^5.5.0",
+    "smoothscroll-polyfill": "^0.4.3",
     "source-map": "0.7.3",
     "source-map-support": "^0.5.4",
     "styled-components": "^3.3.2",
