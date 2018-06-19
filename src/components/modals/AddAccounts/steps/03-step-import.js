@@ -8,6 +8,7 @@ import uniq from 'lodash/uniq'
 import { getBridgeForCurrency } from 'bridge'
 
 import Box from 'components/base/Box'
+import FakeLink from 'components/base/FakeLink'
 import CurrencyBadge from 'components/base/CurrencyBadge'
 import Button from 'components/base/Button'
 import AccountsList from 'components/base/AccountsList'
@@ -20,13 +21,26 @@ class StepImport extends PureComponent<StepProps> {
     this.startScanAccountsDevice()
   }
 
-  componentWillUnmount() {
-    if (this.scanSubscription) {
-      this.scanSubscription.unsubscribe()
+  componentDidUpdate(prevProps: StepProps) {
+    // handle case when we click on stop sync
+    if (prevProps.scanStatus !== 'finished' && this.props.scanStatus === 'finished') {
+      this.unsub()
     }
   }
 
+  componentWillUnmount() {
+    this.unsub()
+  }
+
   scanSubscription = null
+  _unsubscribed = false
+
+  unsub = () => {
+    if (this.scanSubscription && !this._unsubscribed) {
+      this.scanSubscription.unsubscribe()
+      this._unsubscribed = true
+    }
+  }
 
   translateName(account: Account) {
     const { t } = this.props
@@ -142,6 +156,8 @@ class StepImport extends PureComponent<StepProps> {
       t,
     } = this.props
 
+    const currencyName = currency ? currency.name : ''
+
     const importableAccounts = scannedAccounts.filter(acc => {
       if (acc.operations.length <= 0) {
         return false
@@ -160,9 +176,8 @@ class StepImport extends PureComponent<StepProps> {
       count: importableAccounts.length,
     })
 
-    const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', {
-      currencyName: currency ? ` ${currency.name}` : '',
-    })
+    const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', { currencyName })
+    const hasAlreadyEmptyAccount = scannedAccounts.some(a => a.operations.length === 0)
 
     return (
       <Fragment>
@@ -180,7 +195,11 @@ class StepImport extends PureComponent<StepProps> {
           />
           <AccountsList
             title={t('app:addAccounts.createNewAccount.title')}
-            emptyText={t('app:addAccounts.createNewAccount.noOperationOnLastAccount')}
+            emptyText={
+              hasAlreadyEmptyAccount
+                ? t('app:addAccounts.createNewAccount.noOperationOnLastAccount')
+                : t('app:addAccounts.createNewAccount.noAccountToCreate', { currencyName })
+            }
             accounts={creatableAccounts}
             checkedIds={checkedAccountsIds}
             onToggleAccount={this.handleToggleAccount}
@@ -208,6 +227,7 @@ class StepImport extends PureComponent<StepProps> {
 export default StepImport
 
 export const StepImportFooter = ({
+  setState,
   scanStatus,
   onClickAdd,
   onCloseModal,
@@ -246,12 +266,16 @@ export const StepImportFooter = ({
 
   const willClose = !willCreateAccount && !willAddAccounts
   const onClick = willClose ? onCloseModal : onClickAdd
-  const hasCheckedAccounts = !!checkedAccountsIds.length
 
   return (
     <Fragment>
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
-      <Button primary disabled={!hasCheckedAccounts} onClick={onClick}>
+      {scanStatus === 'scanning' && (
+        <FakeLink mr={2} fontSize={3} onClick={() => setState({ scanStatus: 'finished' })}>
+          {t('app:addAccounts.cancelSync')}
+        </FakeLink>
+      )}
+      <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
         {ctaWording}
       </Button>
     </Fragment>
