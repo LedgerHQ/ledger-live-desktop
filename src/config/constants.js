@@ -20,6 +20,8 @@ export const GET_CALLS_RETRY = intFromEnv('GET_CALLS_RETRY', 2)
 export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 6)
 export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_ALL_INTERVAL = 60 * 1000
+export const GENUINE_TIMEOUT = intFromEnv('GENUINE_TIMEOUT', 60 * 1000)
+export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 30 * 1000)
 
 export const CHECK_APP_INTERVAL_WHEN_INVALID = 600
 export const CHECK_APP_INTERVAL_WHEN_VALID = 1200
