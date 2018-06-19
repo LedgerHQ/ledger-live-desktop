@@ -17,12 +17,12 @@ type State = {
 }
 
 const Title = styled(Text).attrs({
-  ff: 'Museo Sans|Bold',
-  fontSize: 2,
-  color: 'dark',
+  ff: p => (p.ff ? p.ff : 'Museo Sans|Bold'),
+  fontSize: p => (p.fontSize ? p.fontSize : 2),
+  color: p => (p.color ? p.color : 'dark'),
   tabIndex: 0,
 })`
-  text-transform: uppercase;
+  text-transform: ${p => (!p.textTransform ? 'auto' : 'uppercase')};
   letter-spacing: 1px;
   cursor: pointer;
   outline: none;
@@ -41,15 +41,17 @@ class Spoiler extends PureComponent<Props, State> {
   toggle = () => this.setState({ isOpened: !this.state.isOpened })
 
   render() {
-    const { title, children } = this.props
+    const { title, children, ...p } = this.props
     const { isOpened } = this.state
     return (
       <Fragment>
-        <Box horizontal flow={1} color="dark" align="center">
+        <Box horizontal flow={1} color="dark" align="center" {...p}>
           <IconContainer isOpened={isOpened}>
             <IconChevronRight size={12} />
           </IconContainer>
-          <Title onClick={this.toggle}>{title}</Title>
+          <Title {...p} onClick={this.toggle}>
+            {title}
+          </Title>
         </Box>
         {isOpened && children}
       </Fragment>
