@@ -26,6 +26,7 @@ import {
   Description,
   IconOptionRow,
   FixedTopContainer,
+  StepContainerInner,
   OnboardingFooterWrapper,
 } from '../helperComponents'
 
@@ -157,7 +158,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
     return (
       <FixedTopContainer>
-        <Box grow alignItems="center">
+        <StepContainerInner>
           <Title>{t('onboarding:genuineCheck.title')}</Title>
           {onboarding.isLedgerNano ? (
             <Description>{t('onboarding:genuineCheck.descNano')}</Description>
@@ -249,7 +250,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
               )}
             </CardWrapper>
           </Box>
-        </Box>
+        </StepContainerInner>
         <OnboardingFooter
           horizontal
           align="center"

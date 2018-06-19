@@ -11,7 +11,7 @@ import Box from 'components/base/Box'
 import IconCheckCirle from 'icons/Check'
 import IconLedgerNano from 'icons/illustrations/LedgerNano'
 import IconLedgerBlue from 'icons/illustrations/LedgerBlue'
-import { Title, Inner, FixedTopContainer } from '../helperComponents'
+import { Title, Inner, FixedTopContainer, StepContainerInner } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
@@ -35,7 +35,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
     const { t, onboarding, jumpStep } = this.props
     return (
       <FixedTopContainer>
-        <Box grow alignItems="center">
+        <StepContainerInner>
           <Box mb={5}>
             <Title>{t('onboarding:selectDevice.title')}</Title>
           </Box>
@@ -63,7 +63,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
               </DeviceContainer>
             </Inner>
           </Box>
-        </Box>
+        </StepContainerInner>
         <OnboardingFooter
           horizontal
           t={t}
