@@ -11,6 +11,7 @@ import type { T } from 'types/common'
 import { updateGenuineCheck } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
+import FakeLink from 'components/base/FakeLink'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
@@ -18,6 +19,7 @@ import GenuineCheckModal from 'components/GenuineCheckModal'
 import IconLedgerNanoError from 'icons/illustrations/LedgerNanoError'
 import IconLedgerBlueError from 'icons/illustrations/LedgerBlueError'
 import IconCheck from 'icons/Check'
+import IconCross from 'icons/Cross'
 
 import {
   Title,
@@ -88,7 +90,15 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
   handleOpenGenuineCheckModal = () => this.setState({ isGenuineCheckModalOpened: true })
   handleCloseGenuineCheckModal = (cb?: Function) =>
-    this.setState(state => ({ ...state, isGenuineCheckModalOpened: false }), () => cb && cb())
+    this.setState(
+      state => ({ ...state, isGenuineCheckModalOpened: false }),
+      () => {
+        // FIXME: meh
+        if (cb && typeof cb === 'function') {
+          cb()
+        }
+      },
+    )
 
   handleGenuineCheckPass = () => {
     this.handleCloseGenuineCheckModal(() => {
@@ -101,6 +111,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   handleGenuineCheckFailed = () => {
     this.handleCloseGenuineCheckModal(() => {
       this.props.updateGenuineCheck({
+        isGenuineFail: true,
         isDeviceGenuine: false,
         genuineCheckUnavailable: null,
       })
@@ -211,6 +222,20 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                         {t('onboarding:genuineCheck.isGenuinePassed')}
                       </GenuineSuccessText>
                     </Box>
+                  ) : genuine.genuineCheckUnavailable ? (
+                    <Box horizontal align="center" flow={1} color={colors.alertRed}>
+                      <IconCross size={16} />
+                      <Box ff="Open Sans|Regular" fontSize={4}>
+                        {t('onboarding:genuineCheck.isGenuineUnavailable')}
+                        <FakeLink
+                          color="alertRed"
+                          underline
+                          onClick={this.handleOpenGenuineCheckModal}
+                        >
+                          {t('app:common.retry')}
+                        </FakeLink>
+                      </Box>
+                    </Box>
                   ) : (
                     <Button
                       primary
@@ -301,6 +326,7 @@ export const GenuineSuccessText = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
 })``
+
 export const CardTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
@@ -323,7 +349,6 @@ const CardWrapper = styled(Box).attrs({
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
   opacity: ${p => (p.isDisabled ? 0.7 : 1)};
   &:hover {
-    cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
   }
 `

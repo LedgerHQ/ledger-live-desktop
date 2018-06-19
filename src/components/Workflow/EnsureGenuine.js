@@ -61,13 +61,14 @@ class EnsureGenuine extends PureComponent<Props, State> {
         const res = await getIsGenuine
           .send({ devicePath: device.path, targetId: infos.targetId })
           .toPromise()
+        if (this._unmounting) return
         const isGenuine = res === '0000'
-        if ((!this.state.genuine || this.state.error) && isGenuine) {
-          !this._unmounting && this.setState({ genuine: isGenuine, error: null })
+        if (!this.state.genuine || this.state.error) {
+          this.setState({ genuine: isGenuine, error: null })
         }
       } catch (err) {
         if (!isEqual(this.state.error, err)) {
-          !this._unmounting && this.setState({ genuine: false, error: err })
+          this.setState({ genuine: null, error: err })
         }
       }
       this._checking = false
