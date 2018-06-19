@@ -158,8 +158,10 @@ operationDetails:
   fees: Fees
   from: From
   to: To
-  identifier: Identifier
+  identifier: Hash
   viewOperation: View operation
+  showMore: See {{recipients}} more
+  showLess: See Less
 operationList:
   noMoreOperations: No more operations
 manager:
