@@ -246,11 +246,12 @@ export const StepImportFooter = ({
 
   const willClose = !willCreateAccount && !willAddAccounts
   const onClick = willClose ? onCloseModal : onClickAdd
+  const hasCheckedAccounts = !!checkedAccountsIds.length
 
   return (
     <Fragment>
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
-      <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
+      <Button primary disabled={!hasCheckedAccounts} onClick={onClick}>
         {ctaWording}
       </Button>
     </Fragment>
