@@ -1,7 +1,8 @@
-RangeError: {{message}}
-Error: {{message}}
-LedgerAPIErrorWithMessage: {{message}}
-TransportStatusError: {{message}}
+generic: An error occurred
+RangeError: '{{message}}'
+Error: '{{message}}'
+LedgerAPIErrorWithMessage: '{{message}}'
+TransportStatusError: '{{message}}'
 FeeEstimationFailed: 'fee estimation failed (status: {{status}})'
 NotEnoughBalance: 'Not enough balance'
 BtcUnmatchedApp: 'You must open application ‘{{currencyName}}’ on the device'

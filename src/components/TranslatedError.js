@@ -4,6 +4,7 @@
 // - an error can have parameters, to use them, just use field of the Error object, that's what we give to `t()`
 // - returned value is intentially not styled (is universal). wrap this in whatever you need
 
+import logger from 'logger'
 import { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
@@ -18,7 +19,12 @@ class TranslatedError extends PureComponent<Props> {
     const { t, error } = this.props
     if (!error) return null
     if (typeof error === 'string') return error
-    return t(`errors:${error.name}`, error)
+    const translation = t(`errors:${error.name}`, error)
+    if (translation) {
+      return translation
+    }
+    logger.warn('TranslatedError: no transation!', error.name, error)
+    return error.message || error.name || t('errors:generic')
   }
 }
 

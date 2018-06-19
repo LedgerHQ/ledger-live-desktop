@@ -119,7 +119,7 @@ export class OperationsList extends PureComponent<Props, State> {
                     <OperationC
                       operation={operation}
                       account={account}
-                      key={operation.id}
+                      key={`${account.id}_${operation.id}`}
                       onOperationClick={this.handleClickOperation}
                       t={t}
                       withAccount={withAccount}
