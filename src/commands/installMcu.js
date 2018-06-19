@@ -9,14 +9,15 @@ import installMcu from 'helpers/firmware/installMcu'
 type Input = {
   devicePath: string,
   targetId: string | number,
+  version: string,
 }
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand('installMcu', ({ devicePath, targetId }) =>
-  fromPromise(
-    withDevice(devicePath)(transport => installMcu(transport, { targetId, version: '1.5' })),
-  ),
+const cmd: Command<Input, Result> = createCommand(
+  'installMcu',
+  ({ devicePath, targetId, version }) =>
+    fromPromise(withDevice(devicePath)(transport => installMcu(transport, { targetId, version }))),
 )
 
 export default cmd

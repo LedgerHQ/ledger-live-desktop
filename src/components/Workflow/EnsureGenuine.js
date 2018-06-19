@@ -61,7 +61,7 @@ class EnsureGenuine extends PureComponent<Props, State> {
       this._checking = true
       try {
         const res = await getIsGenuine
-          .send({ devicePath: device.path, targetId: infos.targetId })
+          .send({ devicePath: device.path, targetId: infos.targetId, version: infos.version })
           .pipe(timeout(GENUINE_TIMEOUT))
           .toPromise()
         if (this._unmounting) return

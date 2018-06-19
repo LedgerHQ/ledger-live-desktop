@@ -25,23 +25,30 @@ class FlashMcu extends PureComponent<Props, State> {
     flashing: false,
   }
 
-  componentDidMount() {
-    this.flasMCU()
-  }
-
-  flasMCU = async () => {
+  flashMCU = async () => {
     const { device, deviceInfo } = this.props
     const { flashing } = this.state
 
     if (!flashing) {
-      this.setState(state => ({ ...state, flashing: true }))
-      await installMcu.send({ devicePath: device.path, targetId: deviceInfo.targetId }).toPromise()
-      this.setState(state => ({ ...state, flashing: false }))
+      this.setState({ flashing: true })
+      await installMcu
+        .send({
+          devicePath: device.path,
+          targetId: deviceInfo.targetId,
+          version: deviceInfo.version,
+        })
+        .toPromise()
+      this.setState({ flashing: false })
     }
   }
 
   render() {
-    return <div>Flashing MCU</div>
+    return (
+      <div>
+        <h1>Flashing MCU</h1>
+        <button onClick={this.flashMCU}>flash</button>
+      </div>
+    )
   }
 }
 

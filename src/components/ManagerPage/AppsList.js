@@ -175,8 +175,8 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   renderList() {
-    const { appsList } = this.state
-    return appsList.length > 0 ? (
+    const { appsList, status } = this.state
+    return status === 'idle' ? (
       <Box>
         <AppSearchBar list={appsList}>
           {items => (
