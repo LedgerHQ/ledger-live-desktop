@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { radii } from 'styles/theme'
 
 import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
 import IconSensitiveOperationShield from 'icons/illustrations/SensitiveOperationShield'
 
 // GENERAL
@@ -15,6 +16,8 @@ export const Title = styled(Box).attrs({
   max-width: 550px;
   text-align: center;
 `
+
+export const StepContainerInner = styled(GrowScroll).attrs({ pb: 6, align: 'center' })``
 
 export const Description = styled(Box).attrs({
   ff: 'Museo Sans|Light',

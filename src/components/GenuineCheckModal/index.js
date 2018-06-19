@@ -19,9 +19,6 @@ type Props = {
 type State = {}
 
 class GenuineCheckStatus extends PureComponent<*> {
-  componentDidMount() {
-    this.sideEffect()
-  }
   componentDidUpdate() {
     this.sideEffect()
   }
@@ -33,7 +30,7 @@ class GenuineCheckStatus extends PureComponent<*> {
       onGenuineCheckFailed,
       onGenuineCheckUnavailable,
     } = this.props
-    if (isGenuine !== undefined) {
+    if (isGenuine !== null) {
       if (isGenuine) {
         onGenuineCheckPass()
       } else {

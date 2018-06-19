@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
-import { Title, Description, FixedTopContainer } from '../helperComponents'
+import { Title, Description, FixedTopContainer, StepContainerInner } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
@@ -51,7 +51,7 @@ class Analytics extends PureComponent<StepProps, State> {
 
     return (
       <FixedTopContainer>
-        <Box grow alignItems="center">
+        <StepContainerInner>
           <Title>{t('onboarding:analytics.title')}</Title>
           <Description>{t('onboarding:analytics.desc')}</Description>
           <Box mt={5}>
@@ -74,7 +74,7 @@ class Analytics extends PureComponent<StepProps, State> {
               </Box>
             </Container>
           </Box>
-        </Box>
+        </StepContainerInner>
         <OnboardingFooter
           horizontal
           align="center"
