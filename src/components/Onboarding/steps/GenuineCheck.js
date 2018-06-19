@@ -82,10 +82,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     if (!item.pass) {
       this.setState(INITIAL_STATE)
       this.props.updateGenuineCheck({
-        isGenuineFail: true,
-        recoveryStepPass: false,
+        displayErrorScreen: true,
         pinStepPass: false,
+        recoveryStepPass: false,
+        isGenuineFail: false,
         isDeviceGenuine: false,
+        genuineCheckUnavailable: null,
       })
     }
   }
@@ -116,6 +118,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         isGenuineFail: true,
         isDeviceGenuine: false,
         genuineCheckUnavailable: null,
+        displayErrorScreen: true,
       })
     })
   }
@@ -125,12 +128,13 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       this.props.updateGenuineCheck({
         isDeviceGenuine: false,
         genuineCheckUnavailable: error,
+        displayErrorScreen: false,
       })
     })
   }
 
   redoGenuineCheck = () => {
-    this.props.updateGenuineCheck({ isGenuineFail: false })
+    this.props.updateGenuineCheck({ displayErrorScreen: false })
   }
 
   contactSupport = () => {
@@ -153,7 +157,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     const { genuine } = onboarding
     const { cachedPinStepButton, cachedRecoveryStepButton, isGenuineCheckModalOpened } = this.state
 
-    if (genuine.isGenuineFail) {
+    if (genuine.displayErrorScreen) {
       return this.renderGenuineFail()
     }
 
@@ -226,6 +230,14 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                     </Box>
                   ) : genuine.genuineCheckUnavailable ? (
                     <Box align="center" flow={1} color={colors.alertRed}>
+                      <FakeLink
+                        ff="Open Sans|Regular"
+                        fontSize={4}
+                        underline
+                        onClick={this.handleOpenGenuineCheckModal}
+                      >
+                        {t('app:common.retry')}
+                      </FakeLink>
                       <Box horizontal justify="center">
                         <Box justifyContent="center">
                           <IconCross size={12} />
@@ -234,9 +246,6 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                           <TranslatedError error={genuine.genuineCheckUnavailable} />
                         </Box>
                       </Box>
-                      <FakeLink ff="Open Sans|Regular" fontSize={4} underline onClick={nextStep}>
-                        {t('app:common.skipThisStep')}
-                      </FakeLink>
                     </Box>
                   ) : (
                     <Button
@@ -252,15 +261,37 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             </CardWrapper>
           </Box>
         </StepContainerInner>
-        <OnboardingFooter
-          horizontal
-          align="center"
-          flow={2}
-          t={t}
-          nextStep={nextStep}
-          prevStep={prevStep}
-          isContinueDisabled={!genuine.isDeviceGenuine}
-        />
+        {genuine.genuineCheckUnavailable ? (
+          <OnboardingFooterWrapper>
+            <Button padded outlineGrey onClick={() => prevStep()}>
+              {t('app:common.back')}
+            </Button>
+            <Box horizontal ml="auto">
+              <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
+                {t('app:common.skipThisStep')}
+              </Button>
+              <Button
+                padded
+                onClick={nextStep}
+                isContinueDisabled={genuine.genuineCheckUnavailable}
+                primary
+              >
+                {t('app:common.continue')}
+              </Button>
+            </Box>
+          </OnboardingFooterWrapper>
+        ) : (
+          <OnboardingFooter
+            horizontal
+            align="center"
+            flow={2}
+            t={t}
+            nextStep={nextStep}
+            prevStep={prevStep}
+            isContinueDisabled={!genuine.isDeviceGenuine}
+          />
+        )}
+
         <GenuineCheckModal
           isOpened={isGenuineCheckModalOpened}
           onClose={this.handleCloseGenuineCheckModal}
