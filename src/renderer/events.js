@@ -15,7 +15,9 @@ import network from 'api/network'
 import { ipcRenderer } from 'electron'
 import debug from 'debug'
 
-import { CHECK_UPDATE_DELAY } from 'config/constants'
+import { CHECK_UPDATE_DELAY, DISABLE_ACTIVITY_INDICATORS } from 'config/constants'
+import { onSetDeviceBusy } from 'components/DeviceBusyIndicator'
+import { onSetLibcoreBusy } from 'components/LibcoreBusyIndicator'
 
 import { hasPassword } from 'reducers/settings'
 import { lock } from 'reducers/application'
@@ -87,7 +89,7 @@ export default ({ store }: { store: Object }) => {
     }
   })
 
-  ipcRenderer.on('executeHttpQuery', (event: any, { networkArg, id }) => {
+  ipcRenderer.on('executeHttpQueryOnRenderer', (event: any, { networkArg, id }) => {
     network(networkArg).then(
       result => {
         ipcRenderer.send('executeHttpQueryPayload', { type: 'success', id, result })
@@ -97,6 +99,16 @@ export default ({ store }: { store: Object }) => {
       },
     )
   })
+
+  if (!DISABLE_ACTIVITY_INDICATORS) {
+    ipcRenderer.on('setLibcoreBusy', (event: any, { busy }) => {
+      onSetLibcoreBusy(busy)
+    })
+
+    ipcRenderer.on('setDeviceBusy', (event: any, { busy, devicePath }) => {
+      onSetDeviceBusy(devicePath, busy)
+    })
+  }
 
   if (__PROD__) {
     // TODO move this to "command" pattern

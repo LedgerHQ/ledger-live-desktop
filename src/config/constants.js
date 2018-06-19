@@ -59,6 +59,7 @@ export const SKIP_GENUINE = boolFromEnv('SKIP_GENUINE')
 export const SKIP_ONBOARDING = boolFromEnv('SKIP_ONBOARDING')
 export const SHOW_LEGACY_NEW_ACCOUNT = boolFromEnv('SHOW_LEGACY_NEW_ACCOUNT')
 export const HIGHLIGHT_I18N = boolFromEnv('HIGHLIGHT_I18N')
+export const DISABLE_ACTIVITY_INDICATORS = boolFromEnv('DISABLE_ACTIVITY_INDICATORS')
 
 // Other constants
 

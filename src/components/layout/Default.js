@@ -17,6 +17,8 @@ import DashboardPage from 'components/DashboardPage'
 import ManagerPage from 'components/ManagerPage'
 import ExchangePage from 'components/ExchangePage'
 import SettingsPage from 'components/SettingsPage'
+import LibcoreBusyIndicator from 'components/LibcoreBusyIndicator'
+import DeviceBusyIndicator from 'components/DeviceBusyIndicator'
 
 import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
@@ -96,6 +98,9 @@ class Default extends Component<Props> {
               </Main>
             </Box>
           </Box>
+
+          <LibcoreBusyIndicator />
+          <DeviceBusyIndicator />
         </IsUnlocked>
       </Fragment>
     )
