@@ -21,6 +21,7 @@ type Props = {
     totalBalance: number,
     sinceBalance: number,
     refBalance: number,
+    isAvailable: boolean,
   }) => *,
 }
 
@@ -37,54 +38,67 @@ const BalanceSummary = ({
   return (
     <Card p={0} py={5}>
       <CalculateBalance accounts={accounts} daysCount={daysCount}>
-        {({ isAvailable, balanceHistory, balanceStart, balanceEnd }) =>
-          !isAvailable ? null : (
-            <Fragment>
-              {renderHeader ? (
-                <Box px={6}>
-                  {renderHeader({
-                    selectedTimeRange,
-                    // FIXME refactor these
-                    totalBalance: balanceEnd,
-                    sinceBalance: balanceStart,
-                    refBalance: balanceStart,
-                  })}
-                </Box>
-              ) : null}
-              <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
-                <Chart
-                  id={chartId}
-                  unit={account ? account.unit : null}
-                  color={chartColor}
-                  data={balanceHistory}
-                  height={200}
-                  currency={counterValue}
-                  tickXScale={selectedTimeRange}
-                  renderTickY={val => formatShort(counterValue.units[0], val)}
-                  renderTooltip={
-                    isAvailable && !account
-                      ? d => (
-                          <Fragment>
-                            <FormattedVal
-                              alwaysShowSign={false}
-                              fontSize={5}
-                              color="dark"
-                              showCode
-                              unit={counterValue.units[0]}
-                              val={d.value}
-                            />
-                            <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-                              {d.date.toISOString().substr(0, 10)}
-                            </Box>
-                          </Fragment>
-                        )
-                      : undefined
-                  }
-                />
+        {({ isAvailable, balanceHistory, balanceStart, balanceEnd }) => (
+          <Fragment>
+            {renderHeader ? (
+              <Box px={6}>
+                {renderHeader({
+                  isAvailable,
+                  selectedTimeRange,
+                  // FIXME refactor these
+                  totalBalance: balanceEnd,
+                  sinceBalance: balanceStart,
+                  refBalance: balanceStart,
+                })}
               </Box>
-            </Fragment>
-          )
-        }
+            ) : null}
+            <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
+              <Chart
+                id={chartId}
+                unit={account ? account.unit : null}
+                color={!isAvailable ? '#eee' : chartColor}
+                data={
+                  isAvailable
+                    ? balanceHistory
+                    : balanceHistory.map(i => ({
+                        ...i,
+                        value:
+                          10000 *
+                          (1 +
+                          0.1 * Math.sin(i.date * Math.cos(i.date)) + // random-ish
+                            0.5 * Math.cos(i.date / 2000000000 + Math.sin(i.date / 1000000000))), // general curve trend
+                      }))
+                }
+                height={200}
+                currency={counterValue}
+                tickXScale={selectedTimeRange}
+                renderTickY={
+                  isAvailable ? val => formatShort(counterValue.units[0], val) : () => ''
+                }
+                isInteractive={isAvailable}
+                renderTooltip={
+                  isAvailable && !account
+                    ? d => (
+                        <Fragment>
+                          <FormattedVal
+                            alwaysShowSign={false}
+                            fontSize={5}
+                            color="dark"
+                            showCode
+                            unit={counterValue.units[0]}
+                            val={d.value}
+                          />
+                          <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
+                            {d.date.toISOString().substr(0, 10)}
+                          </Box>
+                        </Fragment>
+                      )
+                    : undefined
+                }
+              />
+            </Box>
+          </Fragment>
+        )}
       </CalculateBalance>
     </Card>
   )

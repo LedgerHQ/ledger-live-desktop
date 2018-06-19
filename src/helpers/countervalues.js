@@ -1,6 +1,7 @@
 // @flow
 
 import { createSelector } from 'reselect'
+import { LEDGER_COUNTERVALUES_API } from 'config/constants'
 import createCounterValues from '@ledgerhq/live-common/lib/countervalues'
 import { setExchangePairsAction } from 'actions/settings'
 import { currenciesSelector } from 'reducers/accounts'
@@ -53,7 +54,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
 
 const CounterValues = createCounterValues({
   log: (...args) => logger.log('CounterValues:', ...args),
-  getAPIBaseURL: () => 'https://ledger-countervalue-poc.herokuapp.com',
+  getAPIBaseURL: () => LEDGER_COUNTERVALUES_API,
   storeSelector: state => state.countervalues,
   pairsSelector,
   setExchangePairsAction,
