@@ -29,6 +29,10 @@ export const DEVICE_DISCONNECT_DEBOUNCE = intFromEnv('LEDGER_DEVICE_DISCONNECT_D
 
 // Endpoints...
 
+export const LEDGER_COUNTERVALUES_API = stringFromEnv(
+  'LEDGER_COUNTERVALUES_API',
+  'https://ledger-countervalue-poc.herokuapp.com',
+)
 export const LEDGER_REST_API_BASE = stringFromEnv(
   'LEDGER_REST_API_BASE',
   'https://api.ledgerwallet.com/',
