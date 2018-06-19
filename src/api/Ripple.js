@@ -1,7 +1,6 @@
 // @flow
 import logger from 'logger'
 import { RippleAPI } from 'ripple-lib'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import {
   parseCurrencyUnit,
   getCryptoCurrencyById,
@@ -10,14 +9,11 @@ import {
 
 const rippleUnit = getCryptoCurrencyById('ripple').units[0]
 
-const apiEndpoint = {
-  ripple: 'wss://s1.ripple.com',
-}
+export const defaultEndpoint = 'wss://s2.ripple.com'
 
-export const apiForCurrency = (currency: CryptoCurrency) => {
-  const api = new RippleAPI({
-    server: apiEndpoint[currency.id],
-  })
+export const apiForEndpointConfig = (endpointConfig: ?string = null) => {
+  const server = endpointConfig || defaultEndpoint
+  const api = new RippleAPI({ server })
   api.on('error', (errorCode, errorMessage) => {
     logger.warn(`Ripple API error: ${errorCode}: ${errorMessage}`)
   })

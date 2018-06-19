@@ -10,7 +10,8 @@ import { getDerivations } from 'helpers/derivations'
 import getAddress from 'commands/getAddress'
 import signTransaction from 'commands/signTransaction'
 import {
-  apiForCurrency,
+  apiForEndpointConfig,
+  defaultEndpoint,
   parseAPIValue,
   parseAPICurrencyObject,
   formatAPICurrencyXRP,
@@ -47,7 +48,7 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
 )
 
 async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }) {
-  const api = apiForCurrency(a.currency)
+  const api = apiForEndpointConfig(a.endpointConfig)
   try {
     await api.connect()
     const amount = formatAPICurrencyXRP(t.amount)
@@ -217,10 +218,11 @@ const txToOperation = (account: Account) => ({
   return op
 }
 
-const getServerInfo = (perCurrencyId => currency => {
-  if (perCurrencyId[currency.id]) return perCurrencyId[currency.id]()
+const getServerInfo = (map => endpointConfig => {
+  if (!endpointConfig) endpointConfig = ''
+  if (map[endpointConfig]) return map[endpointConfig]()
   const f = throttle(async () => {
-    const api = apiForCurrency(currency)
+    const api = apiForEndpointConfig(endpointConfig)
     try {
       await api.connect()
       const res = await api.getServerInfo()
@@ -232,7 +234,7 @@ const getServerInfo = (perCurrencyId => currency => {
       api.disconnect()
     }
   }, 60000)
-  perCurrencyId[currency.id] = f
+  map[endpointConfig] = f
   return f()
 })({})
 
@@ -244,10 +246,10 @@ const RippleJSBridge: WalletBridge<Transaction> = {
     }
 
     async function main() {
-      const api = apiForCurrency(currency)
+      const api = apiForEndpointConfig()
       try {
         await api.connect()
-        const serverInfo = await getServerInfo(currency)
+        const serverInfo = await getServerInfo()
         const ledgers = serverInfo.completeLedgers.split('-')
         const minLedgerVersion = Number(ledgers[0])
         const maxLedgerVersion = Number(ledgers[1])
@@ -342,7 +344,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
     return { unsubscribe }
   },
 
-  synchronize: ({ currency, freshAddress, blockHeight }) =>
+  synchronize: ({ endpointConfig, freshAddress, blockHeight }) =>
     Observable.create(o => {
       let finished = false
       const unsubscribe = () => {
@@ -350,11 +352,11 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       }
 
       async function main() {
-        const api = apiForCurrency(currency)
+        const api = apiForEndpointConfig(endpointConfig)
         try {
           await api.connect()
           if (finished) return
-          const serverInfo = await getServerInfo(currency)
+          const serverInfo = await getServerInfo(endpointConfig)
           if (finished) return
           const ledgers = serverInfo.completeLedgers.split('-')
           const minLedgerVersion = Number(ledgers[0])
@@ -456,7 +458,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
   canBeSpent: async (a, t) => {
-    const r = await getServerInfo(a.currency)
+    const r = await getServerInfo(a.endpointConfig)
     return t.amount + t.fee + parseAPIValue(r.validatedLedger.reserveBaseXRP) <= a.balance
   },
 
@@ -495,6 +497,13 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       ),
     ),
   }),
+
+  getDefaultEndpointConfig: () => defaultEndpoint,
+
+  validateEndpointConfig: async endpointConfig => {
+    const api = apiForEndpointConfig(endpointConfig)
+    await api.connect()
+  },
 }
 
 export default RippleJSBridge
