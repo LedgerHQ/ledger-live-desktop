@@ -270,12 +270,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
               <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
                 {t('app:common.skipThisStep')}
               </Button>
-              <Button
-                padded
-                onClick={nextStep}
-                isContinueDisabled={genuine.genuineCheckUnavailable}
-                primary
-              >
+              <Button padded onClick={nextStep} disabled primary>
                 {t('app:common.continue')}
               </Button>
             </Box>
