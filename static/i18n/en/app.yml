@@ -11,7 +11,11 @@ common:
   chooseWalletPlaceholder: Choose a wallet...
   currency: Currency
   selectAccount: Select an account
+  selectAccountNoOption: 'No account matching "{{accountName}}"'
   selectCurrency: Select a currency
+  selectCurrencyNoOption: 'No currency matching "{{currencyName}}"'
+  selectExchange: Select an exchange
+  selectExchangeNoOption: 'No exchange matching "{{exchangeName}}"'
   sortBy: Sort by
   search: Search
   save: Save
