@@ -37,12 +37,10 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   scanSubscription = null
-  _unsubscribed = false
 
   unsub = () => {
-    if (this.scanSubscription && !this._unsubscribed) {
+    if (this.scanSubscription) {
       this.scanSubscription.unsubscribe()
-      this._unsubscribed = true
     }
   }
 
@@ -63,6 +61,7 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   startScanAccountsDevice() {
+    this.unsub()
     const { currency, currentDevice, setState } = this.props
     try {
       invariant(currency, 'No currency to scan')
@@ -75,12 +74,8 @@ class StepImport extends PureComponent<StepProps> {
 
       setState({ scanStatus: 'scanning' })
 
-      this._unsubscribed = false
       this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
         next: account => {
-          // FIXME: this is called even if we unsubscribed
-          if (this._unsubscribed) return
-
           const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
           const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
@@ -95,16 +90,8 @@ class StepImport extends PureComponent<StepProps> {
             })
           }
         },
-        complete: () => {
-          // FIXME: this is called even if we unsubscribed
-          if (this._unsubscribed) return
-          setState({ scanStatus: 'finished' })
-        },
-        error: err => {
-          // FIXME: this is called even if we unsubscribed
-          if (this._unsubscribed) return
-          setState({ scanStatus: 'error', err })
-        },
+        complete: () => setState({ scanStatus: 'finished' }),
+        error: err => setState({ scanStatus: 'error', err }),
       })
     } catch (err) {
       setState({ scanStatus: 'error', err })
@@ -112,10 +99,7 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   handleRetry = () => {
-    if (this.scanSubscription) {
-      this.scanSubscription.unsubscribe()
-      this.scanSubscription = null
-    }
+    this.unsub()
     this.handleResetState()
     this.startScanAccountsDevice()
   }
