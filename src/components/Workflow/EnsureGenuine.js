@@ -1,7 +1,9 @@
 // @flow
+import { timeout } from 'rxjs/operators/timeout'
 import { PureComponent } from 'react'
 import isEqual from 'lodash/isEqual'
 
+import { GENUINE_TIMEOUT } from 'config/constants'
 import type { Device } from 'types/common'
 
 import getIsGenuine from 'commands/getIsGenuine'
@@ -60,6 +62,7 @@ class EnsureGenuine extends PureComponent<Props, State> {
       try {
         const res = await getIsGenuine
           .send({ devicePath: device.path, targetId: infos.targetId })
+          .pipe(timeout(GENUINE_TIMEOUT))
           .toPromise()
         if (this._unmounting) return
         const isGenuine = res === '0000'
