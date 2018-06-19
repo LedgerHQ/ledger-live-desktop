@@ -17,3 +17,8 @@ LedgerAPIError: 'A problem occurred with Ledger API. Please try again later. (HT
 NetworkDown: 'Your internet connection seems down. Please try again later.'
 NoAddressesFound: 'No accounts found'
 UserRefusedOnDevice: Transaction have been aborted
+WebsocketConnectionError: An error occurred with the socket connection
+WebsocketConnectionFailed: Failed to establish a socket connection
+DeviceSocketFail: Device socket failure
+DeviceSocketNoBulkStatus: Device socket failure (bulk)
+DeviceSocketNoHandler: Device socket failure (handler {{query}})
