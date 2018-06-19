@@ -8,11 +8,10 @@ import uniq from 'lodash/uniq'
 import { getBridgeForCurrency } from 'bridge'
 
 import Box from 'components/base/Box'
-import FakeLink from 'components/base/FakeLink'
 import CurrencyBadge from 'components/base/CurrencyBadge'
 import Button from 'components/base/Button'
 import AccountsList from 'components/base/AccountsList'
-import IconExchange from 'icons/Exchange'
+import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 
 import type { StepProps } from '../index'
 
@@ -25,6 +24,11 @@ class StepImport extends PureComponent<StepProps> {
     // handle case when we click on stop sync
     if (prevProps.scanStatus !== 'finished' && this.props.scanStatus === 'finished') {
       this.unsub()
+    }
+
+    // handle case when we click on retry sync
+    if (prevProps.scanStatus !== 'scanning' && this.props.scanStatus === 'scanning') {
+      this.startScanAccountsDevice()
     }
   }
 
@@ -71,8 +75,12 @@ class StepImport extends PureComponent<StepProps> {
 
       setState({ scanStatus: 'scanning' })
 
+      this._unsubscribed = false
       this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
         next: account => {
+          // FIXME: this is called even if we unsubscribed
+          if (this._unsubscribed) return
+
           const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
           const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
@@ -87,8 +95,16 @@ class StepImport extends PureComponent<StepProps> {
             })
           }
         },
-        complete: () => setState({ scanStatus: 'finished' }),
-        error: err => setState({ scanStatus: 'error', err }),
+        complete: () => {
+          // FIXME: this is called even if we unsubscribed
+          if (this._unsubscribed) return
+          setState({ scanStatus: 'finished' })
+        },
+        error: err => {
+          // FIXME: this is called even if we unsubscribed
+          if (this._unsubscribed) return
+          setState({ scanStatus: 'error', err })
+        },
       })
     } catch (err) {
       setState({ scanStatus: 'error', err })
@@ -145,6 +161,17 @@ class StepImport extends PureComponent<StepProps> {
 
   handleUnselectAll = () => this.props.setState({ checkedAccountsIds: [] })
 
+  renderError() {
+    const { err, t } = this.props
+    invariant(err, 'Trying to render inexisting error')
+    return (
+      <Box style={{ height: 200 }} align="center" justify="center" color="alertRed">
+        <IconExclamationCircleThin size={43} />
+        <Box mt={4}>{t('app:addAccounts.somethingWentWrong')}</Box>
+      </Box>
+    )
+  }
+
   render() {
     const {
       scanStatus,
@@ -155,6 +182,10 @@ class StepImport extends PureComponent<StepProps> {
       existingAccounts,
       t,
     } = this.props
+
+    if (err) {
+      return this.renderError()
+    }
 
     const currencyName = currency ? currency.name : ''
 
@@ -208,17 +239,7 @@ class StepImport extends PureComponent<StepProps> {
           />
         </Box>
 
-        {err && (
-          <Box shrink>
-            {err.message}
-            <Button small outline onClick={this.handleRetry}>
-              <Box horizontal flow={2} align="center">
-                <IconExchange size={13} />
-                <span>{t('app:addAccounts.retrySync')}</span>
-              </Box>
-            </Button>
-          </Box>
-        )}
+        {err && <Box shrink>{err.message}</Box>}
       </Fragment>
     )
   }
@@ -270,12 +291,21 @@ export const StepImportFooter = ({
   return (
     <Fragment>
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
-      {scanStatus === 'scanning' && (
-        <FakeLink mr={2} fontSize={3} onClick={() => setState({ scanStatus: 'finished' })}>
-          {t('app:addAccounts.cancelSync')}
-        </FakeLink>
+      {scanStatus === 'error' && (
+        <Button mr={2} onClick={() => setState({ scanStatus: 'scanning', err: null })}>
+          {t('app:common.retry')}
+        </Button>
       )}
-      <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
+      {scanStatus === 'scanning' && (
+        <Button mr={2} onClick={() => setState({ scanStatus: 'finished' })}>
+          {t('app:addAccounts.cancelSync')}
+        </Button>
+      )}
+      <Button
+        primary
+        disabled={scanStatus !== 'finished' && scanStatus !== 'error'}
+        onClick={onClick}
+      >
         {ctaWording}
       </Button>
     </Fragment>

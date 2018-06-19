@@ -149,7 +149,7 @@ addAccounts:
     title: Create new account
     noOperationOnLastAccount: You cannot create a new account because your last account has no operations
     noAccountToCreate: We didnt find any {{currencyName}} account to create.
-  retrySync: Retry sync
+  somethingWentWrong: Something went wrong during synchronization.
   cta:
     create: 'Create account'
     import: 'Import account'
