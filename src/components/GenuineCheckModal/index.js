@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
@@ -11,14 +11,47 @@ import WorkflowDefault from 'components/Workflow/WorkflowDefault'
 
 type Props = {
   t: T,
-  onGenuineCheck: (isGenuine: boolean) => void,
+  onGenuineCheckPass: () => void,
+  onGenuineCheckFailed: () => void,
+  onGenuineCheckUnavailable: Error => void,
 }
 
 type State = {}
 
+class GenuineCheckStatus extends PureComponent<*> {
+  componentDidMount() {
+    this.sideEffect()
+  }
+  componentDidUpdate() {
+    this.sideEffect()
+  }
+  sideEffect() {
+    const {
+      isGenuine,
+      error,
+      onGenuineCheckPass,
+      onGenuineCheckFailed,
+      onGenuineCheckUnavailable,
+    } = this.props
+    if (isGenuine !== undefined) {
+      if (isGenuine) {
+        onGenuineCheckPass()
+      } else {
+        onGenuineCheckFailed()
+      }
+    } else if (error) {
+      onGenuineCheckUnavailable(error)
+    }
+  }
+  render() {
+    return null
+  }
+}
+
+/* eslint-disable react/no-multi-comp */
 class GenuineCheck extends PureComponent<Props, State> {
   renderBody = ({ onClose }) => {
-    const { t, onGenuineCheck } = this.props
+    const { t, onGenuineCheckPass, onGenuineCheckFailed, onGenuineCheckUnavailable } = this.props
 
     // TODO: use the real devices list. for now we force choosing only
     // the current device because we don't handle multi device in MVP
@@ -28,14 +61,22 @@ class GenuineCheck extends PureComponent<Props, State> {
         <ModalTitle>{t('app:genuinecheck.modal.title')}</ModalTitle>
         <ModalContent>
           <Workflow
-            onGenuineCheck={isGenuine => onGenuineCheck(isGenuine)}
             renderDefault={(device, deviceInfo, isGenuine, errors) => (
-              <WorkflowDefault
-                device={device}
-                deviceInfo={deviceInfo}
-                isGenuine={isGenuine}
-                errors={errors} // TODO: FIX ERRORS
-              />
+              <Fragment>
+                <GenuineCheckStatus
+                  isGenuine={isGenuine}
+                  error={errors.genuineError}
+                  onGenuineCheckPass={onGenuineCheckPass}
+                  onGenuineCheckFailed={onGenuineCheckFailed}
+                  onGenuineCheckUnavailable={onGenuineCheckUnavailable}
+                />
+                <WorkflowDefault
+                  device={device}
+                  deviceInfo={deviceInfo}
+                  isGenuine={isGenuine}
+                  errors={errors} // TODO: FIX ERRORS
+                />
+              </Fragment>
             )}
           />
         </ModalContent>

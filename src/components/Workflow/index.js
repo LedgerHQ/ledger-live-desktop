@@ -34,11 +34,11 @@ type Props = {
   renderMcuUpdate?: (deviceInfo: DeviceInfo) => Node,
   renderFinalUpdate?: (deviceInfo: DeviceInfo) => Node,
   renderDashboard?: (device: Device, deviceInfo: DeviceInfo, isGenuine: boolean) => Node,
-  onGenuineCheck?: (isGenuine: boolean) => void,
   renderError?: (dashboardError: ?Error, genuineError: ?Error) => Node,
 }
 type State = {}
 
+// In future, move to meri's approach; this code is way too much specific
 class Workflow extends PureComponent<Props, State> {
   render() {
     const {
@@ -47,7 +47,6 @@ class Workflow extends PureComponent<Props, State> {
       renderMcuUpdate,
       renderError,
       renderDefault,
-      onGenuineCheck,
     } = this.props
     return (
       <EnsureDevice>
@@ -74,8 +73,6 @@ class Workflow extends PureComponent<Props, State> {
                   }
 
                   if (isGenuine && deviceInfo && device && !dashboardError && !genuineError) {
-                    if (onGenuineCheck) onGenuineCheck(isGenuine)
-
                     if (renderDashboard) return renderDashboard(device, deviceInfo, isGenuine)
                   }
 
