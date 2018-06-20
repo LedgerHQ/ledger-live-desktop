@@ -368,6 +368,8 @@ update:
   newVersionReady: A new update is available.
   relaunch: Update now
 crash:
+  oops: Oops, something went wrong.
+  uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart app
-  reset: Reset app files
-  createTicket: Create ticket
+  reset: Hard reset
+  createTicket: Create issue
