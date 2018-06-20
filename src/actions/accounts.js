@@ -6,7 +6,7 @@ import db from 'helpers/db'
 
 export type AddAccount = Account => *
 export const addAccount: AddAccount = payload => ({
-  type: 'ADD_ACCOUNT',
+  type: 'DB:ADD_ACCOUNT',
   payload,
 })
 
