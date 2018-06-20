@@ -1,18 +1,19 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
 import { shell, remote } from 'electron'
 import qs from 'querystring'
 import { translate } from 'react-i18next'
 
-import { rgba } from 'styles/helpers'
-import db from 'helpers/db'
+import { i } from 'helpers/staticPath'
+import hardReset from 'helpers/hardReset'
 
 import type { T } from 'types/common'
 
+import Spoiler from 'components/base/Spoiler'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
+import Space from 'components/base/Space'
 import Button from 'components/base/Button'
 import TranslatedError from './TranslatedError'
 
@@ -23,25 +24,11 @@ type Props = {
   children?: *,
 }
 
-const Container = styled(Box).attrs({
-  grow: true,
-  align: 'center',
-  justify: 'center',
-  bg: 'lightGraphite',
-  color: 'alertRed',
-  ff: 'Museo Sans|Bold',
-  flow: 2,
-})``
+class RenderError extends PureComponent<Props, { isHardResetting: boolean }> {
+  state = {
+    isHardResetting: false,
+  }
 
-const Inner = styled(Box).attrs({
-  p: 2,
-  bg: p => rgba(p.theme.colors.alertRed, 0.05),
-  borderRadius: 1,
-})`
-  border: ${p => `1px solid ${rgba(p.theme.colors.alertRed, 0.1)}`};
-`
-
-class RenderError extends PureComponent<Props> {
   handleCreateIssue = () => {
     const { error } = this.props
     if (!error) {
@@ -60,38 +47,85 @@ ${error.stack}
   }
 
   handleRestart = () => {
-    remote.app.relaunch()
-    remote.app.exit()
+    remote.getCurrentWindow().webContents.reloadIgnoringCache()
   }
 
-  handleReset = () => {
-    db.resetAll()
-    this.handleRestart()
+  handleHardReset = async () => {
+    this.setState({ isHardResetting: true })
+    try {
+      await hardReset()
+      remote.getCurrentWindow().webContents.reloadIgnoringCache()
+    } catch (err) {
+      this.setState({ isHardResetting: false })
+    }
   }
 
   render() {
     const { error, t, disableExport, children } = this.props
+    const { isHardResetting } = this.state
     return (
-      <Container>
-        <Inner>
-          <TranslatedError error={error} />
-        </Inner>
+      <Box align="center" grow>
+        <Space of={100} />
+        <img alt="" src={i('crash-screen.svg')} width={380} />
+        <Space of={40} />
+        <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
+          {t('app:crash.oops')}
+        </Box>
+        <Space of={15} />
+        <Box
+          style={{ width: 500 }}
+          textAlign="center"
+          ff="Open Sans|Regular"
+          color="smoke"
+          fontSize={4}
+        >
+          {t('app:crash.uselessText')}
+        </Box>
+        <Space of={30} />
         <Box horizontal flow={2}>
           <Button primary onClick={this.handleRestart}>
             {t('app:crash.restart')}
-          </Button>
-          <Button danger onClick={this.handleReset}>
-            {t('app:crash.reset')}
           </Button>
           {!disableExport ? <ExportLogsBtn /> : null}
           <Button primary onClick={this.handleCreateIssue}>
             {t('app:crash.createTicket')}
           </Button>
+          <Button danger onClick={this.handleHardReset} isLoading={isHardResetting}>
+            {t('app:crash.reset')}
+          </Button>
         </Box>
+        <Space of={20} />
+        <Spoiler color="wallet" title={t('app:crash.showError')}>
+          <ErrContainer>
+            <TranslatedError error={error} />
+          </ErrContainer>
+        </Spoiler>
+        <Space of={10} />
+        <Spoiler color="wallet" title={t('app:crash.showDetails')}>
+          <ErrContainer>{error.stack}</ErrContainer>
+        </Spoiler>
+        <Space of={100} />
         {children}
-      </Container>
+      </Box>
     )
   }
 }
+
+const ErrContainer = ({ children }: { children: any }) => (
+  <pre
+    style={{
+      marginTop: 10,
+      maxWidth: '80%',
+      overflow: 'auto',
+      fontSize: 10,
+      fontFamily: 'monospace',
+      background: 'rgba(0, 0, 0, 0.05)',
+      cursor: 'text',
+      userSelect: 'text',
+    }}
+  >
+    {children}
+  </pre>
+)
 
 export default translate()(RenderError)
