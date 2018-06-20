@@ -1,6 +1,6 @@
 ---
 common:
-  ok: Okay
+  ok: OK
   yes: true
   no: false
   apply: Apply
@@ -8,7 +8,7 @@ common:
   cancel: Cancel
   delete: Delete
   continue: Continue
-  skipThisStep: Skip This Step
+  skipThisStep: Skip this step
   chooseWalletPlaceholder: Choose a wallet...
   currency: Currency
   selectAccount: Select an account
@@ -22,7 +22,7 @@ common:
   save: Save
   password: Password
   editProfile: Edit profile
-  lockApplication: Lock application
+  lockApplication: Lock Ledger Live
   showMore: Show more
   max: Max
   next: Next
@@ -90,7 +90,7 @@ account:
       desc: The API node to use
       error: Invalid endpoint
 dashboard:
-  title: Dashboard
+  title: Portfolio
   accounts:
     title: Accounts ({{count}})
   greeting:
@@ -112,7 +112,8 @@ currentAddress:
 deviceConnect:
   step1:
     choose: "We detected {{count}} devices connected, please select one:"
-    connect: Connect your <1>Ledger device</1> to your computer and enter your <3>PIN code</3> on your device
+    connect: Connect and unlock your <1>Ledger device</1>
+    dashboard:
 emptyState:
   sidebar:
     text: You don’t have any accounts at the moment. Press the + button to create an account
