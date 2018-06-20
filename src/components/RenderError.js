@@ -10,11 +10,12 @@ import hardReset from 'helpers/hardReset'
 
 import type { T } from 'types/common'
 
+import Spoiler from 'components/base/Spoiler'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Button from 'components/base/Button'
-// import TranslatedError from './TranslatedError'
+import TranslatedError from './TranslatedError'
 
 type Props = {
   error: Error,
@@ -60,10 +61,11 @@ ${error.stack}
   }
 
   render() {
-    const { t, disableExport, children } = this.props
+    const { error, t, disableExport, children } = this.props
     const { isHardResetting } = this.state
     return (
-      <Box align="center" justify="center" grow>
+      <Box align="center" grow>
+        <Space of={100} />
         <img alt="" src={i('crash-screen.svg')} width={380} />
         <Space of={40} />
         <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
@@ -92,11 +94,38 @@ ${error.stack}
             {t('app:crash.createTicket')}
           </Button>
         </Box>
+        <Space of={20} />
+        <Spoiler color="wallet" title={t('app:crash.showError')}>
+          <ErrContainer>
+            <TranslatedError error={error} />
+          </ErrContainer>
+        </Spoiler>
+        <Space of={10} />
+        <Spoiler color="wallet" title={t('app:crash.showDetails')}>
+          <ErrContainer>{error.stack}</ErrContainer>
+        </Spoiler>
+        <Space of={100} />
         {children}
       </Box>
     )
   }
 }
-// <TranslatedError error={error} />
+
+const ErrContainer = ({ children }: { children: any }) => (
+  <pre
+    style={{
+      marginTop: 10,
+      maxWidth: '80%',
+      overflow: 'auto',
+      fontSize: 10,
+      fontFamily: 'monospace',
+      background: 'rgba(0, 0, 0, 0.05)',
+      cursor: 'text',
+      userSelect: 'text',
+    }}
+  >
+    {children}
+  </pre>
+)
 
 export default translate()(RenderError)

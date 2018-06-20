@@ -373,3 +373,5 @@ crash:
   restart: Restart app
   reset: Hard reset
   createTicket: Create issue
+  showDetails: Show details
+  showError: Show error
