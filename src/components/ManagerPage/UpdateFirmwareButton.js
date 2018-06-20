@@ -6,6 +6,7 @@ import type { T } from 'types/common'
 
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
+import { getCleanVersion } from 'components/ManagerPage/FirmwareUpdate'
 
 type FirmwareInfos = {
   name: string,
@@ -17,9 +18,6 @@ type Props = {
   firmware: ?FirmwareInfos,
   installFirmware: () => void,
 }
-
-const getCleanVersion = (input: string): string =>
-  input.endsWith('-osu') ? input.replace('-osu', '') : input
 
 const UpdateFirmwareButton = ({ t, firmware, installFirmware }: Props) =>
   firmware ? (

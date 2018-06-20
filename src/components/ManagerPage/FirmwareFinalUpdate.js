@@ -2,7 +2,11 @@
 
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
+import logger from 'logger'
+
 import type { Device, T } from 'types/common'
+
+import installFinalFirmware from 'commands/installFinalFirmware'
 
 import Box, { Card } from 'components/base/Box'
 // import Button from 'components/base/Button'
@@ -18,15 +22,9 @@ type Props = {
   infos: DeviceInfos,
 }
 
-type State = {
-  // latestFirmware: ?FirmwareInfos,
-}
+type State = {}
 
-class FirmwareUpdate extends PureComponent<Props, State> {
-  state = {
-    // latestFirmware: null,
-  }
-
+class FirmwareFinalUpdate extends PureComponent<Props, State> {
   componentDidMount() {}
 
   componentWillUnmount() {
@@ -34,6 +32,20 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 
   _unmounting = false
+
+  installFinalFirmware = async () => {
+    try {
+      const { device, infos } = this.props
+      const { success } = await installFinalFirmware
+        .send({ devicePath: device.path, targetId: infos.targetId, version: infos.version })
+        .toPromise()
+      if (success) {
+        this.setState()
+      }
+    } catch (err) {
+      logger.log(err)
+    }
+  }
 
   render() {
     const { t, ...props } = this.props
@@ -51,4 +63,4 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(FirmwareUpdate)
+export default translate()(FirmwareFinalUpdate)
