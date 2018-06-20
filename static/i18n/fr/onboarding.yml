@@ -34,32 +34,46 @@ selectDevice:
   ledgerBlueCard:
     title: Ledger Blue
 selectPIN:
-  title: Start initialization - Choose your PIN code
-  instructions:
-    ledgerNano:
-      step1: Connect the Ledger Nano S to your computer.
-      step2: Press both buttons simultaneously as instructed on the screen.
-      step3: Press the right button to select Configure as new device?.
-      step4: 'Choose a PIN code between 4 and 8 digits long. Then select the checkmark (✓).'
-    ledgerBlue:
-      step1: Connect the Ledger Blue to your computer.
-      step2: Tap on Configure as new device.
-      step3: Choose a PIN code between 4 and 8 digits long.
   disclaimer:
     note1: Choose your own PIN code. This code will unlock your device.
     note2: An 8-digit PIN code offers an optimum level of security.
     note3: Never use a device supplied with a PIN code or a 24-word recovery phrase.
+  initialize:
+    title: Start initialization - Choose your PIN code
+    instructions:
+      nano:
+        step1: Connect the Ledger Nano S to your computer.
+        step2: Press both buttons simultaneously as instructed on the screen.
+        step3: Press the right button to select Configure as new device?.
+        step4: 'Choose a PIN code between 4 and 8 digits long. Then select the checkmark (✓).'
+      blue:
+        step1: Connect the Ledger Blue to your computer.
+        step2: Tap on Configure as new device.
+        step3: Choose a PIN code between 4 and 8 digits long.
+  restore:
+    title: Start restoration - Choose your PIN code
+    instructions:
+      nano:
+        step1: Connect the Ledger Nano S to your computer.
+        step2: Press both buttons simultaneously as instructed on the screen.
+        step3: Press the left button to cancel Initialize as new device?. Press the right button to select Restore configuration?.
+        step4: 'Choose a PIN code between 4 and 8 digits long. Then select the checkmark (✓).'
+      blue:
+        step1: Connect the Ledger Blue to your computer.
+        step2: Tap on Restore configuration.
+        step3: Choose a PIN code between 4 and 8 digits long.
 writeSeed:
-  title: Save your recovery phrase
-  desc: Your device will generate a recovery phrase of 24 words, displayed only once.
-  nano:
-    step1: 'Copy the word displayed below Word #1 in position 1 on a blank Recovery sheet.'
-    step2: 'Press the right button to display Word #2 and repeat the process until all 24 words are copied on the Recovery sheet.'
-    step3: 'Confirm your recovery phrase: select each requested word and press both buttons to validate it.'
-  blue:
-    step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order.
-    step2: Tap Next to move to the next words. Repeat the process until the Confirmation screen appears.
-    step3: Type each requested word to confirm your recovery phrase.
+  initialize:
+    title: Save your recovery phrase
+    desc: Your device will generate a recovery phrase of 24 words, displayed only once.
+    nano:
+      step1: 'Copy the word displayed below Word #1 in position 1 on a blank Recovery sheet.'
+      step2: 'Press the right button to display Word #2 and repeat the process until all 24 words are copied on the Recovery sheet.'
+      step3: 'Confirm your recovery phrase: select each requested word and press both buttons to validate it.'
+    blue:
+      step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order.
+      step2: Tap Next to move to the next words. Repeat the process until the Confirmation screen appears.
+      step3: Type each requested word to confirm your recovery phrase.
   restore:
     title: Enter your recovery phrase
     desc: Copy the 24-word recovery phrase from your Recovery sheet on your device.
@@ -68,7 +82,7 @@ writeSeed:
       step2: 'Select the first letters of Word #1 by pressing the right or left button. Press both buttons to confirm each letter.'
       step3: 'Select Word #1 from the suggested words. Press both buttons to continue.'
       step4: Repeat the process until the last word.
-    ledgerBlue:
+    blue:
       step1: Select the length of your recovery phrase.
       step2: Type the first word of your recovery phrase. Select the word when it appears.
       step3: Repeat the process until the last word.
@@ -80,17 +94,15 @@ writeSeed:
 genuineCheck:
   title: Final security check
   descNano: Your Ledger Nano S should now display Your device is now ready. Before getting started, please confirm that
-  descBlue:
-  steps:
-    step1:
-      title: Did you choose your PIN code by yourself?
-    step2:
-      title: Did you save your recovery phrase by yourself?
-      desc:
-    step3:
-      title: Check if your Ledger device is genuine
-      desc:
-  isGenuinePassed: 'Genuine'
+  descBlue: Your Ledger Blue should now display Your device is now ready. Before getting started, please confirm that
+  descRestore: Before getting started, please confirm that
+  step1:
+    title: Did you choose your PIN code by yourself?
+  step2:
+    title: Did you save your recovery phrase by yourself?
+  step3:
+    title: Check if your Ledger device is genuine
+  isGenuinePassed: Your device is genuine
   buttons:
     genuineCheck: Genuine check
     contactSupport: Ledger Support
