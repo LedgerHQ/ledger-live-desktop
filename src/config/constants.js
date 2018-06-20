@@ -33,7 +33,7 @@ export const DEVICE_DISCONNECT_DEBOUNCE = intFromEnv('LEDGER_DEVICE_DISCONNECT_D
 
 export const LEDGER_COUNTERVALUES_API = stringFromEnv(
   'LEDGER_COUNTERVALUES_API',
-  'https://ledger-countervalue-poc.herokuapp.com',
+  'https://beta.manager.live.ledger.fr/countervalues',
 )
 export const LEDGER_REST_API_BASE = stringFromEnv(
   'LEDGER_REST_API_BASE',
