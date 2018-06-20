@@ -43,6 +43,7 @@ common:
     upToDate: Up to date
     error: Sync error.
     refresh: Refresh
+    ago: Synced {{time}}
   error:
     load: Unable to load
     noResults: No results
@@ -369,6 +370,10 @@ update:
   newVersionReady: A new update is available.
   relaunch: Update now
 crash:
+  oops: Oops, something went wrong.
+  uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart app
-  reset: Reset app files
-  createTicket: Create ticket
+  reset: Hard reset
+  createTicket: Create issue
+  showDetails: Show details
+  showError: Show error
