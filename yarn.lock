@@ -9322,6 +9322,10 @@ meant@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/meant/-/meant-1.0.1.tgz#66044fea2f23230ec806fb515efea29c44d2115d"
 
+measure-scrollbar@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/measure-scrollbar/-/measure-scrollbar-1.1.0.tgz#986890d22866255ec5b212480f097c55a82d1231"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"

@@ -10,7 +10,7 @@ const innerStyle = { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: '
 export default ({ children, canSelect, ...p }: { children: any, canSelect: * }) => (
   <Box grow horizontal>
     <Box grow {...p} style={outerStyle}>
-      <Text style={{ ...innerStyle, 'user-select': canSelect ? 'text' : 'none' }}>{children}</Text>
+      <Text style={{ ...innerStyle, userSelect: canSelect ? 'text' : 'none' }}>{children}</Text>
     </Box>
   </Box>
 )
