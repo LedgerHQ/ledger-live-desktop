@@ -7,10 +7,14 @@
 
       <%= __GLOBAL_STYLES__ %>
 
+      body {
+        background: #f9f9f9;
+      }
+
       #preload {
         -webkit-app-region: drag;
         align-items: center;
-        background: white;
+        background: #f9f9f9;
         bottom: 0;
         display: none;
         flex-direction: column;
@@ -20,35 +24,37 @@
         position: fixed;
         right: 0;
         top: 0;
-        transition: opacity 0.4s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
         z-index: 100;
       }
 
       #preload .logo {
-        height: 100px;
-        width: 100px;
-        animation: logo 4s infinite 1s;
+        height: 80px;
+        width: 80px;
+        animation: logo 4s infinite 0.5s;
         transform-origin: 50% 50%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
       }
 
       @keyframes logo {
-        from, to {
+        0% {
           transform: rotate(0deg);
         }
-        10% {
-          transform: rotate(0deg);
+        20% {
+          transform: rotate(360deg);
         }
         30% {
           transform: rotate(360deg);
         }
-        40% {
-          transform: rotate(360deg);
+        50% {
+          transform: rotate(720deg);
         }
         60% {
           transform: rotate(720deg);
         }
-        70% {
-          transform: rotate(720deg);
+        100% {
+          transform: rotate(0deg);
         }
       }
 
@@ -73,6 +79,7 @@ const { name } = remote.getCurrentWindow()
 
 const preloadEl = document.getElementById('preload')
 const appEl = document.getElementById('app')
+const logoEl = preloadEl.querySelector('.logo')
 
 const initApp = (options = {}) => {
   const { force = false } = options
@@ -87,6 +94,9 @@ const initApp = (options = {}) => {
 }
 
 if (name === 'MainWindow') {
+  setTimeout(() => {
+    logoEl.style.opacity = 1
+  }, 50)
   preloadEl.style.display = 'flex'
   const startTime = Date.now()
   const PRELOAD_WAIT_TIME_MIN = 2000
