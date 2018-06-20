@@ -7,10 +7,14 @@
 
       <%= __GLOBAL_STYLES__ %>
 
+      body {
+        background: #f9f9f9;
+      }
+
       #preload {
         -webkit-app-region: drag;
         align-items: center;
-        background: white;
+        background: #f9f9f9;
         bottom: 0;
         display: none;
         flex-direction: column;
@@ -20,13 +24,38 @@
         position: fixed;
         right: 0;
         top: 0;
-        transition: opacity 0.4s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
         z-index: 100;
       }
 
-      #preload video {
-        height: 144px;
-        width: 256px;
+      #preload .logo {
+        height: 80px;
+        width: 80px;
+        animation: logo 4s infinite 0.5s;
+        transform-origin: 50% 50%;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      @keyframes logo {
+        0% {
+          transform: rotate(0deg);
+        }
+        20% {
+          transform: rotate(360deg);
+        }
+        30% {
+          transform: rotate(360deg);
+        }
+        50% {
+          transform: rotate(720deg);
+        }
+        60% {
+          transform: rotate(720deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
       }
 
     </style>
@@ -41,45 +70,43 @@
   </head>
   <body>
     <div id="preload">
-      <video autoplay loop muted src="<%= __DEV__ ? '.' : '../static' %>/videos/loader.mp4" />
+      <img class="logo" src="<%= __DEV__ ? '.' : '../static' %>/images/ledgerlive-logo.svg" alt="" />
     </div>
     <div id="app"></div>
     <script>
-      const { remote } = require('electron')
-      const { name } = remote.getCurrentWindow()
+    const { remote } = require('electron')
+const { name } = remote.getCurrentWindow()
 
-      const preloadEl = document.getElementById('preload')
-      const appEl = document.getElementById('app')
+const preloadEl = document.getElementById('preload')
+const appEl = document.getElementById('app')
+const logoEl = preloadEl.querySelector('.logo')
 
-      const initApp = (options = {}) => {
-        const { force = false } = options
+const initApp = (options = {}) => {
+  const { force = false } = options
 
-        if (force) {
-          preloadEl.remove()
-        } else {
-          preloadEl.style.opacity = 0
+  if (force) {
+    preloadEl.remove()
+  } else {
+    preloadEl.style.opacity = 0
 
-          preloadEl.addEventListener('transitionend', () => preloadEl.remove())
-        }
-      }
+    preloadEl.addEventListener('transitionend', () => preloadEl.remove())
+  }
+}
 
-      if (name === 'MainWindow') {
-        preloadEl.style.display = 'flex'
-
-        let waitTime = 0
-
-        const PRELOAD_WAIT_TIME_MIN = 2e3
-        const interval = setInterval(() => (waitTime += 250), 250)
-
-        window.onAppReady = () => {
-          const delay = PRELOAD_WAIT_TIME_MIN - waitTime
-
-          clearInterval(interval)
-          setTimeout(initApp, delay > 0 ? delay : 1)
-        }
-      } else {
-        initApp({ force: true })
-      }
-    </script>
+if (name === 'MainWindow') {
+  setTimeout(() => {
+    logoEl.style.opacity = 1
+  }, 50)
+  preloadEl.style.display = 'flex'
+  const startTime = Date.now()
+  const PRELOAD_WAIT_TIME_MIN = 2000
+  window.onAppReady = () => {
+    const delay = Math.max(0, PRELOAD_WAIT_TIME_MIN - (Date.now() - startTime))
+    setTimeout(initApp, delay)
+  }
+} else {
+  initApp({ force: true })
+}
+</script>
   </body>
 </html>

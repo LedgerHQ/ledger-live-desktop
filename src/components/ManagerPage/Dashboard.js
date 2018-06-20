@@ -43,7 +43,7 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
       />
     </Box>
     <Box mt={5}>
-      <AppsList device={device} targetId={deviceInfo.targetId} />
+      <AppsList device={device} targetId={deviceInfo.targetId} version={deviceInfo.version} />
     </Box>
   </Box>
 )

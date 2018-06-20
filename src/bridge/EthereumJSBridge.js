@@ -170,7 +170,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
     async function stepAddress(
       index,
-      { address, path: freshAddressPath },
+      { address, path: freshAddressPath, publicKey },
       isStandard,
     ): { account?: Account, complete?: boolean } {
       const balance = await api.getAccountBalance(address)
@@ -181,7 +181,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
       if (finished) return { complete: true }
 
       const freshAddress = address
-      const accountId = `ethereumjs:${currency.id}:${address}`
+      const accountId = `ethereumjs:${currency.id}:${address}:${publicKey}`
 
       if (txs.length === 0) {
         // this is an empty account

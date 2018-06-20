@@ -6,7 +6,7 @@ import db from 'helpers/db'
 
 export type AddAccount = Account => *
 export const addAccount: AddAccount = payload => ({
-  type: 'ADD_ACCOUNT',
+  type: 'DB:ADD_ACCOUNT',
   payload,
 })
 
@@ -48,4 +48,4 @@ export const updateAccount: UpdateAccount = payload => ({
   },
 })
 
-export const cleanAccountsCache = () => ({ type: 'CLEAN_ACCOUNTS_CACHE' })
+export const cleanAccountsCache = () => ({ type: 'DB:CLEAN_ACCOUNTS_CACHE' })

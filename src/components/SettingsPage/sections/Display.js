@@ -169,7 +169,7 @@ class TabProfile extends PureComponent<Props, State> {
                 to={counterValueCurrency}
                 exchangeId={counterValueExchange}
                 onChange={this.handleChangeExchange}
-                minWidth={150}
+                minWidth={200}
               />
             </Box>
           </Row>

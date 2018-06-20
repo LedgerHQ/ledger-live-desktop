@@ -5,7 +5,7 @@ import type { Command } from 'helpers/ipc'
 
 import getAddress from 'commands/getAddress'
 import getDeviceInfo from 'commands/getDeviceInfo'
-import getFirmwareInfo from 'commands/getFirmwareInfo'
+import getCurrentFirmware from 'commands/getCurrentFirmware'
 import getIsGenuine from 'commands/getIsGenuine'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import getMemInfo from 'commands/getMemInfo'
@@ -32,7 +32,7 @@ import uninstallApp from 'commands/uninstallApp'
 const all: Array<Command<any, any>> = [
   getAddress,
   getDeviceInfo,
-  getFirmwareInfo,
+  getCurrentFirmware,
   getIsGenuine,
   getLatestFirmwareForDevice,
   getMemInfo,

@@ -10,6 +10,8 @@ import logger from 'logger'
 
 import type { Device, T } from 'types/common'
 
+import type { LedgerScriptParams } from 'helpers/common'
+
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installOsuFirmware from 'commands/installOsuFirmware'
 
@@ -23,11 +25,6 @@ import UpdateFirmwareButton from './UpdateFirmwareButton'
 
 let CACHED_LATEST_FIRMWARE = null
 
-type FirmwareInfos = {
-  name: string,
-  notes: string,
-}
-
 type DeviceInfos = {
   targetId: number | string,
   version: string,
@@ -40,7 +37,7 @@ type Props = {
 }
 
 type State = {
-  latestFirmware: ?FirmwareInfos,
+  latestFirmware: ?LedgerScriptParams,
 }
 
 class FirmwareUpdate extends PureComponent<Props, State> {
@@ -84,12 +81,13 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   installFirmware = async () => {
     try {
       const { latestFirmware } = this.state
+      const { infos } = this.props
       invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
       const {
         device: { path: devicePath },
       } = this.props
       const { success } = await installOsuFirmware
-        .send({ devicePath, firmware: latestFirmware })
+        .send({ devicePath, firmware: latestFirmware, targetId: infos.targetId })
         .toPromise()
       if (success) {
         this.fetchLatestFirmware()
@@ -119,7 +117,9 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               </Box>
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>
-              {t('app:manager.firmware.installed', { version: infos.version })}
+              {t('app:manager.firmware.installed', {
+                version: infos.version,
+              })}
             </Text>
           </Box>
           <UpdateFirmwareButton firmware={latestFirmware} installFirmware={this.installFirmware} />

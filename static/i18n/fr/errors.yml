@@ -1,12 +1,10 @@
 ---
-RangeError:
-  - message
-Error:
-  - message
-LedgerAPIErrorWithMessage:
-  - message
-TransportStatusError:
-  - message
+generic: An error occurred
+RangeError: '{{message}}'
+Error: '{{message}}'
+LedgerAPIErrorWithMessage: '{{message}}'
+TransportStatusError: '{{message}}'
+TimeoutError: 'Timeout reached'
 FeeEstimationFailed: 'fee estimation failed (status: {{status}})'
 NotEnoughBalance: 'Not enough balance'
 BtcUnmatchedApp: 'You must open application ‘{{currencyName}}’ on the device'
@@ -22,3 +20,4 @@ WebsocketConnectionFailed: Failed to establish a socket connection
 DeviceSocketFail: Device socket failure
 DeviceSocketNoBulkStatus: Device socket failure (bulk)
 DeviceSocketNoHandler: Device socket failure (handler {{query}})
+LatestMCUInstalledError: The latest MCU is already installed on the Device

@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
+import LRU from 'lru-cache'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { Exchange } from '@ledgerhq/live-common/lib/countervalues/types'
 import logger from 'logger'
@@ -9,6 +10,18 @@ import Select from 'components/base/Select'
 import Text from 'components/base/Text'
 import CounterValues from 'helpers/countervalues'
 import type { T } from 'types/common'
+
+const cache = LRU({ max: 100 })
+
+const getExchanges = (from: Currency, to: Currency) => {
+  const key = `${from.ticker}_${to.ticker}`
+  let promise = cache.get(key)
+  if (promise) return promise
+  promise = CounterValues.fetchExchangesForPair(from, to)
+  promise.catch(() => cache.del(key)) // if it's a failure, we don't want to keep the cache
+  cache.set(key, promise)
+  return promise
+}
 
 class SelectExchange extends Component<
   {
@@ -65,7 +78,7 @@ class SelectExchange extends Component<
     const { _loadId } = this
     const { from, to } = this.props
     try {
-      const exchanges = await CounterValues.fetchExchangesForPair(from, to)
+      const exchanges = await getExchanges(from, to)
       if (!this._unmounted && this._loadId === _loadId) {
         this.setState({ exchanges })
       }
@@ -93,6 +106,10 @@ class SelectExchange extends Component<
         options={options}
         onChange={onChange}
         isLoading={options.length === 0}
+        placeholder={t('app:common.selectExchange')}
+        noOptionsMessage={({ inputValue }) =>
+          t('app:common.selectExchangeNoOption', { exchangeName: inputValue })
+        }
         {...props}
       />
     )

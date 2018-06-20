@@ -97,16 +97,19 @@ ipcMainListenReceiveCommands({
 })
 
 function handleGlobalInternalMessage(payload) {
-  if (payload.type === 'executeHttpQueryOnRenderer') {
-    const win = getMainWindow && getMainWindow()
-    if (!win) {
-      logger.warn("can't executeHttpQueryOnRenderer because no renderer")
-      return
+  switch (payload.type) {
+    case 'setLibcoreBusy':
+    case 'setDeviceBusy':
+    case 'executeHttpQueryOnRenderer': {
+      const win = getMainWindow && getMainWindow()
+      if (!win) {
+        logger.warn(`can't ${payload.type} because no renderer`)
+        return
+      }
+      win.webContents.send(payload.type, payload)
+      break
     }
-    win.webContents.send('executeHttpQuery', {
-      id: payload.id,
-      networkArg: payload.networkArg,
-    })
+    default:
   }
 }
 

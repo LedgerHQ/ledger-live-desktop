@@ -1,39 +1,38 @@
 // @flow
 import axios from 'axios'
-import isEmpty from 'lodash/isEmpty'
-import { MANAGER_API_BASE } from 'config/constants'
+import { GET_LATEST_FIRMWARE } from 'helpers/urls'
 
-import getFirmwareInfo from './getFirmwareInfo'
+import getCurrentFirmware from './getCurrentFirmware'
+import getDeviceVersion from './getDeviceVersion'
 
 type Input = {
-  targetId: string | number,
   version: string,
+  targetId: string | number,
 }
 
-export default async (data: Input) => {
+export default async (input: Input) => {
   try {
-    // Get firmware infos with firmware name and device version
-    const seFirmwareVersion = await getFirmwareInfo(data)
-
+    const provider = 1
+    const { targetId, version } = input
     // Get device infos from targetId
-    const { data: deviceVersion } = await axios.get(
-      `${MANAGER_API_BASE}/device_versions_target_id/${data.targetId}`,
-    )
+    const deviceVersion = await getDeviceVersion(targetId)
+
+    // Get firmware infos with firmware name and device version
+    const seFirmwareVersion = await getCurrentFirmware({ version, deviceId: deviceVersion.id })
 
     // Fetch next possible firmware
-    const { data: serverData } = await axios.post(`${MANAGER_API_BASE}/get_latest_firmware`, {
-      current_se_firmware_version: seFirmwareVersion.id,
+    const { data } = await axios.post(GET_LATEST_FIRMWARE, {
+      current_se_firmware_final_version: seFirmwareVersion.id,
       device_version: deviceVersion.id,
-      providers: [1],
+      provider,
     })
 
-    const { se_firmware_version } = serverData
-
-    if (!isEmpty(se_firmware_version)) {
-      return se_firmware_version
+    if (data.result === 'null') {
+      return null
     }
 
-    return null
+    const { se_firmware_osu_version } = data
+    return se_firmware_osu_version
   } catch (err) {
     const error = Error(err.message)
     error.stack = err.stack

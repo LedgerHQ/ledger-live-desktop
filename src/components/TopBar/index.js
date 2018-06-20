@@ -12,6 +12,7 @@ import type { T } from 'types/common'
 
 import { lock } from 'reducers/application'
 import { hasPassword } from 'reducers/settings'
+import { hasAccountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
 import IconLock from 'icons/Lock'
@@ -54,6 +55,7 @@ const Bar = styled.div`
 
 const mapStateToProps = state => ({
   hasPassword: hasPassword(state),
+  hasAccounts: hasAccountsSelector(state),
 })
 
 const mapDispatchToProps = {
@@ -63,6 +65,7 @@ const mapDispatchToProps = {
 
 type Props = {
   hasPassword: boolean,
+  hasAccounts: boolean,
   history: RouterHistory,
   location: Location,
   lock: Function,
@@ -91,17 +94,21 @@ class TopBar extends PureComponent<Props> {
     }
   }
   render() {
-    const { hasPassword, t } = this.props
+    const { hasPassword, hasAccounts, t } = this.props
 
     return (
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal>
             <GlobalSearch t={t} isHidden />
-            <ActivityIndicator />
-            <Box justifyContent="center">
-              <Bar />
-            </Box>
+            {hasAccounts && (
+              <Fragment>
+                <ActivityIndicator />
+                <Box justifyContent="center">
+                  <Bar />
+                </Box>
+              </Fragment>
+            )}
             <Tooltip render={() => t('app:settings.title')}>
               <ItemContainer isInteractive onClick={this.navigateToSettings}>
                 <IconSettings size={16} />

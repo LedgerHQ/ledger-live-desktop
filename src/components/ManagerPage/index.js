@@ -9,6 +9,7 @@ import type { Device } from 'types/common'
 import Workflow from 'components/Workflow'
 import WorkflowWithIcon from 'components/Workflow/WorkflowWithIcon'
 import Dashboard from './Dashboard'
+import FlashMcu from './FlashMcu'
 
 type DeviceInfo = {
   targetId: number | string,
@@ -25,11 +26,11 @@ type Error = {
 function ManagerPage(): Node {
   return (
     <Workflow
-      renderFinalUpdate={(deviceInfo: DeviceInfo) => (
+      renderFinalUpdate={(device: Device, deviceInfo: DeviceInfo) => (
         <p>UPDATE FINAL FIRMARE (TEMPLATE + ACTION WIP) {deviceInfo.final}</p>
       )}
-      renderMcuUpdate={(deviceInfo: DeviceInfo) => (
-        <p>FLASH MCU (TEMPLATE + ACTION WIP) {deviceInfo.mcu}</p>
+      renderMcuUpdate={(device: Device, deviceInfo: DeviceInfo) => (
+        <FlashMcu device={device} deviceInfo={deviceInfo} />
       )}
       renderDashboard={(device: Device, deviceInfo: DeviceInfo) => (
         <Dashboard device={device} deviceInfo={deviceInfo} />

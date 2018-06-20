@@ -9,6 +9,7 @@ import type { T } from 'types/common'
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import DeltaChange from '../DeltaChange'
+import { PlaceholderLine } from '../Placeholder'
 
 const Sub = styled(Box).attrs({
   ff: 'Open Sans',
@@ -22,12 +23,14 @@ type BalanceSinceProps = {
   totalBalance: number,
   sinceBalance: number,
   refBalance: number,
+  isAvailable: boolean,
   t: T,
 }
 
 type BalanceTotalProps = {
   children?: any,
   unit: Unit,
+  isAvailable: boolean,
   totalBalance: number,
 }
 
@@ -36,53 +39,73 @@ type Props = {
 } & BalanceSinceProps
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
-  const { t, totalBalance, sinceBalance, refBalance, since, ...otherProps } = props
+  const { t, totalBalance, sinceBalance, refBalance, since, isAvailable, ...otherProps } = props
   return (
     <Box {...otherProps}>
-      <DeltaChange
-        from={refBalance}
-        to={totalBalance}
-        color="dark"
-        animateTicker
-        fontSize={7}
-        withIcon
-      />
-      <Sub>{t(`app:time.since.${since}`)}</Sub>
+      {!isAvailable ? (
+        <PlaceholderLine width={100} />
+      ) : (
+        <DeltaChange
+          from={refBalance}
+          to={totalBalance}
+          color="dark"
+          animateTicker
+          fontSize={7}
+          withIcon
+        />
+      )}
+      {!isAvailable ? (
+        <PlaceholderLine dark width={60} />
+      ) : (
+        <Sub>{t(`app:time.since.${since}`)}</Sub>
+      )}
     </Box>
   )
 }
 
 export function BalanceSinceDiff(props: Props) {
-  const { t, totalBalance, sinceBalance, since, counterValue, ...otherProps } = props
+  const { t, totalBalance, sinceBalance, since, counterValue, isAvailable, ...otherProps } = props
   return (
     <Box {...otherProps}>
-      <FormattedVal
-        color="dark"
-        animateTicker
-        unit={counterValue.units[0]}
-        fontSize={7}
-        showCode
-        val={totalBalance - sinceBalance}
-        withIcon
-      />
-      <Sub>{t(`app:time.since.${since}`)}</Sub>
+      {!isAvailable ? (
+        <PlaceholderLine width={100} />
+      ) : (
+        <FormattedVal
+          color="dark"
+          animateTicker
+          unit={counterValue.units[0]}
+          fontSize={7}
+          showCode
+          val={totalBalance - sinceBalance}
+          withIcon
+        />
+      )}
+      {!isAvailable ? (
+        <PlaceholderLine dark width={60} />
+      ) : (
+        <Sub>{t(`app:time.since.${since}`)}</Sub>
+      )}
     </Box>
   )
 }
 
 export function BalanceTotal(props: BalanceTotalProps) {
-  const { unit, totalBalance, children } = props
+  const { unit, totalBalance, isAvailable, children } = props
   return (
     <Box grow {...props}>
-      <FormattedVal
-        animateTicker
-        color="dark"
-        unit={unit}
-        fontSize={8}
-        showCode
-        val={totalBalance}
-      />
-      {children}
+      {!isAvailable ? (
+        <PlaceholderLine width={150} />
+      ) : (
+        <FormattedVal
+          animateTicker
+          color="dark"
+          unit={unit}
+          fontSize={8}
+          showCode
+          val={totalBalance}
+        />
+      )}
+      {!isAvailable ? <PlaceholderLine dark width={50} /> : children}
     </Box>
   )
 }
@@ -93,16 +116,21 @@ BalanceTotal.defaultProps = {
 }
 
 function BalanceInfos(props: Props) {
-  const { t, totalBalance, since, sinceBalance, refBalance, counterValue } = props
+  const { t, totalBalance, since, sinceBalance, refBalance, isAvailable, counterValue } = props
   return (
     <Box horizontal alignItems="center" flow={7}>
-      <BalanceTotal unit={counterValue.units[0]} totalBalance={totalBalance}>
+      <BalanceTotal
+        unit={counterValue.units[0]}
+        isAvailable={isAvailable}
+        totalBalance={totalBalance}
+      >
         <Sub>{t('app:dashboard.totalBalance')}</Sub>
       </BalanceTotal>
       <BalanceSincePercent
         alignItems="flex-end"
         totalBalance={totalBalance}
         sinceBalance={sinceBalance}
+        isAvailable={isAvailable}
         refBalance={refBalance}
         since={since}
         t={t}
@@ -110,6 +138,7 @@ function BalanceInfos(props: Props) {
       <BalanceSinceDiff
         counterValue={counterValue}
         alignItems="flex-end"
+        isAvailable={isAvailable}
         totalBalance={totalBalance}
         sinceBalance={sinceBalance}
         refBalance={refBalance}

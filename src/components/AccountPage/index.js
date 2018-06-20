@@ -129,11 +129,9 @@ class AccountPage extends PureComponent<Props> {
             )}
             <Tooltip render={() => t('app:account.settings.title')}>
               <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
-                <Button small outlineGrey>
-                  <Box justifyContent="center">
-                    <IconAccountSettings size={16} />
-                  </Box>
-                </Button>
+                <Box justifyContent="center">
+                  <IconAccountSettings size={16} />
+                </Box>
               </ButtonSettings>
             </Tooltip>
           </Box>
@@ -148,10 +146,14 @@ class AccountPage extends PureComponent<Props> {
                 counterValue={counterValue}
                 daysCount={daysCount}
                 selectedTimeRange={selectedTimeRange}
-                renderHeader={({ totalBalance, sinceBalance, refBalance }) => (
+                renderHeader={({ isAvailable, totalBalance, sinceBalance, refBalance }) => (
                   <Box flow={4} mb={2}>
                     <Box horizontal>
-                      <BalanceTotal totalBalance={account.balance} unit={account.unit}>
+                      <BalanceTotal
+                        isAvailable={isAvailable}
+                        totalBalance={account.balance}
+                        unit={account.unit}
+                      >
                         <FormattedVal
                           animateTicker
                           alwaysShowSign={false}
@@ -171,6 +173,7 @@ class AccountPage extends PureComponent<Props> {
                     </Box>
                     <Box horizontal justifyContent="center" flow={7}>
                       <BalanceSincePercent
+                        isAvailable={isAvailable}
                         t={t}
                         alignItems="center"
                         totalBalance={totalBalance}
@@ -179,6 +182,7 @@ class AccountPage extends PureComponent<Props> {
                         since={selectedTimeRange}
                       />
                       <BalanceSinceDiff
+                        isAvailable={isAvailable}
                         t={t}
                         counterValue={counterValue}
                         alignItems="center"

@@ -256,14 +256,15 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
         const derivations = getDerivations(currency)
         for (const derivation of derivations) {
+          const legacy = derivation !== derivations[derivations.length - 1]
           for (let index = 0; index < 255; index++) {
             const freshAddressPath = derivation({ currency, x: index, segwit: false })
-            const { address } = await await getAddress
+            const { address, publicKey } = await await getAddress
               .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
               .toPromise()
             if (finished) return
 
-            const accountId = `ripplejs:${currency.id}:${address}`
+            const accountId = `ripplejs:${currency.id}:${address}:${publicKey}`
 
             let info
             try {
@@ -280,22 +281,24 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             if (!info) {
               // account does not exist in Ripple server
               // we are generating a new account locally
-              next({
-                id: accountId,
-                xpub: '',
-                name: getNewAccountPlaceholderName(currency, index),
-                freshAddress,
-                freshAddressPath,
-                balance: 0,
-                blockHeight: maxLedgerVersion,
-                index,
-                currency,
-                operations: [],
-                pendingOperations: [],
-                unit: currency.units[0],
-                archived: false,
-                lastSyncDate: new Date(),
-              })
+              if (!legacy) {
+                next({
+                  id: accountId,
+                  xpub: '',
+                  name: getNewAccountPlaceholderName(currency, index),
+                  freshAddress,
+                  freshAddressPath,
+                  balance: 0,
+                  blockHeight: maxLedgerVersion,
+                  index,
+                  currency,
+                  operations: [],
+                  pendingOperations: [],
+                  unit: currency.units[0],
+                  archived: false,
+                  lastSyncDate: new Date(),
+                })
+              }
               break
             }
 
@@ -315,7 +318,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             const account: $Exact<Account> = {
               id: accountId,
               xpub: '',
-              name: getAccountPlaceholderName(currency, index),
+              name: getAccountPlaceholderName(currency, index, legacy),
               freshAddress,
               freshAddressPath,
               balance,
