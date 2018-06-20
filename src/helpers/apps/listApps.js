@@ -1,20 +1,24 @@
 // @flow
 import axios from 'axios'
 
-import { MANAGER_API_BASE } from 'config/constants'
+import { APPLICATIONS_BY_DEVICE } from 'helpers/urls'
+import getDeviceVersion from 'helpers/devices/getDeviceVersion'
+import getCurrentFirmware from 'helpers/devices/getCurrentFirmware'
 
-export default async (targetId: string | number) => {
+export default async (targetId: string | number, version: string) => {
   try {
-    const { data: deviceData } = await axios.get(
-      `${MANAGER_API_BASE}/device_versions_target_id/${targetId}`,
-    )
-    const { data } = await axios.get('https://api.ledgerwallet.com/update/applications')
-
-    if (deviceData.name in data) {
-      return data[deviceData.name]
+    const provider = 1
+    const deviceData = await getDeviceVersion(targetId)
+    const firmwareData = await getCurrentFirmware({ deviceId: deviceData.id, version })
+    const params = {
+      provider,
+      current_se_firmware_final_version: firmwareData.id,
+      device_version: deviceData.id,
     }
-
-    return data['nanos-1.4']
+    const {
+      data: { application_versions },
+    } = await axios.post(APPLICATIONS_BY_DEVICE, params)
+    return application_versions.length > 0 ? application_versions : []
   } catch (err) {
     const error = Error(err.message)
     error.stack = err.stack

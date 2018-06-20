@@ -1,18 +1,16 @@
 // @flow
-
 import type Transport from '@ledgerhq/hw-transport'
 
-import { createSocketDialog, buildParamsFromFirmware } from 'helpers/common'
+import { WS_INSTALL } from 'helpers/urls'
+import { createDeviceSocket } from 'helpers/socket'
 
 type Input = Object
 type Result = *
 
-const buildOsuParams = buildParamsFromFirmware('final')
-
 export default async (transport: Transport<*>, firmware: Input): Result => {
   try {
-    const osuData = buildOsuParams(firmware)
-    await createSocketDialog(transport, '/install', osuData)
+    const url = WS_INSTALL(firmware)
+    await createDeviceSocket(transport, url).toPromise()
     return { success: true }
   } catch (err) {
     const error = Error(err.message)

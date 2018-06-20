@@ -6,17 +6,22 @@ import { fromPromise } from 'rxjs/observable/fromPromise'
 import { withDevice } from 'helpers/deviceAccess'
 import installOsuFirmware from 'helpers/firmware/installOsuFirmware'
 
+import type { LedgerScriptParams } from 'helpers/common'
+
 type Input = {
   devicePath: string,
-  firmware: Object,
+  targetId: string | number,
+  firmware: LedgerScriptParams,
 }
 
 type Result = *
 
 const cmd: Command<Input, Result> = createCommand(
   'installOsuFirmware',
-  ({ devicePath, firmware }) =>
-    fromPromise(withDevice(devicePath)(transport => installOsuFirmware(transport, firmware))),
+  ({ devicePath, firmware, targetId }) =>
+    fromPromise(
+      withDevice(devicePath)(transport => installOsuFirmware(transport, targetId, firmware)),
+    ),
 )
 
 export default cmd

@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { color, fontSize, space } from 'styled-system'
 import fontFamily from 'styles/styled/fontFamily'
 
+import type { LedgerScriptParams } from 'helpers/common'
+
 import { ff } from 'styles/helpers'
 
 import Box from 'components/base/Box'
@@ -12,20 +14,9 @@ import Search from 'components/base/Search'
 import SearchIcon from 'icons/Search'
 import CrossIcon from 'icons/Cross'
 
-type LedgerApp = {
-  name: string,
-  version: string,
-  icon: string,
-  app: Object,
-  bolos_version: {
-    min: number,
-    max: number,
-  },
-}
-
 type Props = {
-  list: Array<LedgerApp>,
-  children: (list: Array<LedgerApp>) => React$Node,
+  list: Array<LedgerScriptParams>,
+  children: (list: Array<LedgerScriptParams>) => React$Node,
 }
 
 type State = {
