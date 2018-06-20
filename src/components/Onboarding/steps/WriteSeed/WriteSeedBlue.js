@@ -69,8 +69,8 @@ class WriteSeedBlue extends PureComponent<Props, *> {
     return (
       <Fragment>
         <Box mb={3}>
-          <Title>{t('onboarding:writeSeed.blue.title')}</Title>
-          <Description>{t('onboarding:writeSeed.blue.desc')}</Description>
+          <Title>{t('onboarding:writeSeed.title')}</Title>
+          <Description>{t('onboarding:writeSeed.desc')}</Description>
         </Box>
         <Box align="center">
           <Inner style={{ width: 760 }}>
