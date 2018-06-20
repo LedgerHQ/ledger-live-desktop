@@ -1,3 +1,7 @@
+//                         This is a work in progress
+//             The goal is to provide a cli which allow interact
+//                with device & libcore for faster iterations
+
 require('babel-polyfill')
 require('babel-register')
 
