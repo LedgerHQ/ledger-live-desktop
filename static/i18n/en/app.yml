@@ -42,6 +42,7 @@ common:
     upToDate: Up to date
     error: Sync error.
     refresh: Refresh
+    ago: Synced {{time}}
   error:
     load: Unable to load
     noResults: No results

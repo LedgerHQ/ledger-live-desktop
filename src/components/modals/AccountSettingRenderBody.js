@@ -22,6 +22,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Select from 'components/base/Select'
+import SyncAgo from 'components/SyncAgo'
 
 import {
   ModalBody,
@@ -258,12 +259,12 @@ class HelperComp extends PureComponent<Props, State> {
               </Container>
             ) : null}
             <Spoiler title={t('app:account.settings.advancedLogs')}>
+              <SyncAgo date={account.lastSyncDate} />
               <textarea
                 readOnly
                 style={{
                   userSelect: 'text',
                   border: '1px dashed #f9f9f9',
-                  marginTop: '20px',
                   backgroundColor: '#f9f9f9',
                   color: '#000',
                   fontFamily: 'monospace',
