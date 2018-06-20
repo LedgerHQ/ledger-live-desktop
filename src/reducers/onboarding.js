@@ -73,7 +73,7 @@ const state: OnboardingState = {
     },
     {
       name: 'selectDevice',
-      label: 'Select Device',
+      label: 'onboarding:breadcrumb.selectDevice',
       options: {
         showFooter: false,
         showBackground: true,
@@ -82,7 +82,7 @@ const state: OnboardingState = {
     },
     {
       name: 'selectPIN',
-      label: 'Select PIN',
+      label: 'onboarding:breadcrumb.selectPIN',
       options: {
         showFooter: false,
         showBackground: true,
@@ -91,7 +91,7 @@ const state: OnboardingState = {
     },
     {
       name: 'writeSeed',
-      label: 'Write Seed',
+      label: 'onboarding:breadcrumb.writeSeed',
       options: {
         showFooter: false,
         showBackground: true,
@@ -100,7 +100,7 @@ const state: OnboardingState = {
     },
     {
       name: 'genuineCheck',
-      label: 'Genuine Check',
+      label: 'onboarding:breadcrumb.genuineCheck',
       options: {
         showFooter: false,
         showBackground: true,
@@ -109,7 +109,7 @@ const state: OnboardingState = {
     },
     {
       name: 'setPassword',
-      label: 'Set Password',
+      label: 'onboarding:breadcrumb.setPassword',
       options: {
         showFooter: false,
         showBackground: true,
@@ -118,7 +118,7 @@ const state: OnboardingState = {
     },
     {
       name: 'analytics',
-      label: 'Analytics & Bug report',
+      label: 'onboarding:breadcrumb.analytics',
       options: {
         showFooter: false,
         showBackground: true,

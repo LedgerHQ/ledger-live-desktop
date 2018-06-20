@@ -3,6 +3,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import findIndex from 'lodash/findIndex'
+import { translate } from 'react-i18next'
 
 import type { OnboardingState } from 'reducers/onboarding'
 
@@ -14,15 +15,16 @@ const mapStateToProps = state => ({
 
 type Props = {
   onboarding: OnboardingState,
+  t: *,
 }
 
 function OnboardingBreadcrumb(props: Props) {
-  const { onboarding } = props
+  const { onboarding, t } = props
   const { stepName, genuine } = onboarding
 
   const filteredSteps = onboarding.steps
     .filter(step => !step.external)
-    .map(step => ({ ...step, label: step.label })) // TODO: translate
+    .map(step => ({ ...step, label: t(step.label) })) // TODO: translate
 
   const stepIndex = findIndex(filteredSteps, s => s.name === stepName)
   const genuineStepIndex = findIndex(filteredSteps, s => s.name === 'genuineCheck')
@@ -36,4 +38,4 @@ function OnboardingBreadcrumb(props: Props) {
   )
 }
 
-export default connect(mapStateToProps)(OnboardingBreadcrumb)
+export default translate()(connect(mapStateToProps)(OnboardingBreadcrumb))
