@@ -56,7 +56,7 @@ writeSeed:
     step1: 'Copy the word displayed below Word #1 in position 1 on a blank Recovery sheet.'
     step2: 'Press the right button to display Word #2 and repeat the process until all 24 words are copied on the Recovery sheet.'
     step3: 'Confirm your recovery phrase: select each requested word and press both buttons to validate it.'
-  ledgerBlue:
+  blue:
     step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order.
     step2: Tap Next to move to the next words. Repeat the process until the Confirmation screen appears.
     step3: Type each requested word to confirm your recovery phrase.
