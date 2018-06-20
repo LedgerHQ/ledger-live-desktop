@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 const Indicator = styled.div`
-  opacity: ${p => (p.busy ? 0.2 : 0)};
+  opacity: ${p => (p.busy ? 0.1 : 0)};
   width: 6px;
   height: 6px;
   border-radius: 3px;
