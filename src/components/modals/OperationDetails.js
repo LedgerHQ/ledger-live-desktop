@@ -1,7 +1,6 @@
 // @flow
 
-import React, { Fragment } from 'react'
-import uniq from 'lodash/uniq'
+import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { shell } from 'electron'
 import { translate } from 'react-i18next'
@@ -17,16 +16,19 @@ import { MODAL_OPERATION_DETAILS } from 'config/constants'
 import { getMarketColor } from 'styles/helpers'
 
 import Box from 'components/base/Box'
-import Spoiler from 'components/base/Spoiler'
+import GradientBox from 'components/GradientBox'
+import GrowScroll from 'components/base/GrowScroll'
 import Button from 'components/base/Button'
 import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
+import Text from 'components/base/Text'
 
 import { createStructuredSelector, createSelector } from 'reselect'
 import { accountSelector } from 'reducers/accounts'
 import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 
+import IconChevronRight from 'icons/ChevronRight'
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 import Ellipsis from '../base/Ellipsis'
@@ -102,91 +104,93 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const isConfirmed = confirmations >= currencySettings.confirmationsNb
 
   const url = getAccountOperationExplorer(account, operation)
-  const uniqSenders = uniq(senders)
 
   return (
     <ModalBody onClose={onClose}>
       <ModalTitle>{t('app:operationDetails.title')}</ModalTitle>
-      <ModalContent flow={3}>
-        <Box alignItems="center" mt={1}>
-          <ConfirmationCheck
-            marketColor={marketColor}
-            isConfirmed={isConfirmed}
-            style={{
-              transform: 'scale(1.5)',
-            }}
-            t={t}
-            type={type}
-            withTooltip={false}
-          />
-          <Box my={4} alignItems="center">
-            <Box>
-              <FormattedVal unit={unit} alwaysShowSign showCode val={amount} fontSize={6} />
-            </Box>
-            <Box mt={1}>
-              <CounterValue
-                color="grey"
-                fontSize={5}
-                date={date}
-                currency={currency}
-                value={amount}
+      <ModalContent style={{ height: 500 }} mx={-5} pb={0}>
+        <GrowScroll px={5} pb={8}>
+          <Box flow={3}>
+            <Box alignItems="center" mt={1}>
+              <ConfirmationCheck
+                marketColor={marketColor}
+                isConfirmed={isConfirmed}
+                style={{
+                  transform: 'scale(1.5)',
+                }}
+                t={t}
+                type={type}
+                withTooltip={false}
               />
+              <Box my={4} alignItems="center">
+                <Box>
+                  <FormattedVal unit={unit} alwaysShowSign showCode val={amount} fontSize={7} />
+                </Box>
+                <Box mt={1}>
+                  <CounterValue
+                    color="grey"
+                    fontSize={5}
+                    date={date}
+                    currency={currency}
+                    value={amount}
+                  />
+                </Box>
+              </Box>
+            </Box>
+            <Box horizontal flow={2}>
+              <Box flex={1}>
+                <OpDetailsTitle>{t('app:operationDetails.account')}</OpDetailsTitle>
+                <OpDetailsData>{name}</OpDetailsData>
+              </Box>
+              <Box flex={1}>
+                <OpDetailsTitle>{t('app:operationDetails.date')}</OpDetailsTitle>
+                <OpDetailsData>{moment(date).format('LLL')}</OpDetailsData>
+              </Box>
+            </Box>
+            <B />
+            <Box horizontal flow={2}>
+              <Box flex={1}>
+                <OpDetailsTitle>{t('app:operationDetails.fees')}</OpDetailsTitle>
+                {fee ? (
+                  <Fragment>
+                    <OpDetailsData>
+                      <FormattedVal unit={unit} showCode val={fee} color="dark" />
+                    </OpDetailsData>
+                  </Fragment>
+                ) : null}
+              </Box>
+              <Box flex={1}>
+                <OpDetailsTitle>{t('app:operationDetails.status')}</OpDetailsTitle>
+                <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal>
+                  <Box>
+                    {isConfirmed
+                      ? t('app:operationDetails.confirmed')
+                      : t('app:operationDetails.notConfirmed')}
+                  </Box>
+                  <Box>{`(${confirmations})`}</Box>
+                </OpDetailsData>
+              </Box>
+            </Box>
+            <B />
+            <Box>
+              <OpDetailsTitle>{t('app:operationDetails.identifier')}</OpDetailsTitle>
+              <OpDetailsData>
+                <Ellipsis canSelect>{hash}</Ellipsis>
+              </OpDetailsData>
+            </Box>
+            <B />
+            <Box>
+              <OpDetailsTitle>{t('app:operationDetails.from')}</OpDetailsTitle>
+              <Recipients recipients={senders} t={t} />
+            </Box>
+            <B />
+            <Box>
+              <OpDetailsTitle>{t('app:operationDetails.to')}</OpDetailsTitle>
+              <Recipients recipients={recipients} t={t} />
             </Box>
           </Box>
-        </Box>
-        <Box horizontal flow={2}>
-          <Box flex={1}>
-            <OpDetailsTitle>{t('app:operationDetails.account')}</OpDetailsTitle>
-            <OpDetailsData>{name}</OpDetailsData>
-          </Box>
-          <Box flex={1}>
-            <OpDetailsTitle>{t('app:operationDetails.date')}</OpDetailsTitle>
-            <OpDetailsData>{moment(date).format('LLL')}</OpDetailsData>
-          </Box>
-        </Box>
-        <B />
-        <Box horizontal flow={2}>
-          <Box flex={1}>
-            <OpDetailsTitle>{t('app:operationDetails.fees')}</OpDetailsTitle>
-            {fee ? (
-              <Fragment>
-                <OpDetailsData>
-                  <FormattedVal unit={unit} showCode val={fee} color="dark" />
-                </OpDetailsData>
-              </Fragment>
-            ) : null}
-          </Box>
-          <Box flex={1}>
-            <OpDetailsTitle>{t('app:operationDetails.status')}</OpDetailsTitle>
-            <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal>
-              <Box>
-                {isConfirmed
-                  ? t('app:operationDetails.confirmed')
-                  : t('app:operationDetails.notConfirmed')}
-              </Box>
-              <Box>{`(${confirmations})`}</Box>
-            </OpDetailsData>
-          </Box>
-        </Box>
-        <B />
-        <Box>
-          <OpDetailsTitle>{t('app:operationDetails.from')}</OpDetailsTitle>
-          <OpDetailsData>{uniqSenders.map(v => <CanSelect key={v}>{v}</CanSelect>)}</OpDetailsData>
-        </Box>
-        <B />
-        <Box>
-          <OpDetailsTitle>{t('app:operationDetails.to')}</OpDetailsTitle>
-          <RenderRecipients recipients={recipients} t={t} />
-        </Box>
-        <B />
-        <Box>
-          <OpDetailsTitle>{t('app:operationDetails.identifier')}</OpDetailsTitle>
-          <OpDetailsData>
-            <CanSelect>
-              <Ellipsis>{hash}</Ellipsis>
-            </CanSelect>
-          </OpDetailsData>
-        </Box>
+        </GrowScroll>
+        <GradientBox />
       </ModalContent>
 
       <ModalFooter horizontal justify="flex-end" flow={2}>
@@ -194,7 +198,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
           {t('app:common.cancel')}
         </Button>
         {url ? (
-          <Button ml="auto" primary padded onClick={() => shell.openExternal(url)}>
+          <Button primary padded onClick={() => shell.openExternal(url)}>
             {t('app:operationDetails.viewOperation')}
           </Button>
         ) : null}
@@ -223,31 +227,63 @@ const OperationDetailsWrapper = ({ t }: { t: T }) => (
 
 export default translate()(OperationDetailsWrapper)
 
-export function RenderRecipients({ recipients, t }: { recipients: *, t: T }) {
-  // Hardcoded for now
-  const numToShow = 2
-  return (
-    <Box>
-      <OpDetailsData>
-        {recipients
-          .slice(0, numToShow)
-          .map(recipient => <CanSelect key={recipient}>{recipient}</CanSelect>)}
-      </OpDetailsData>
-      {recipients.length > numToShow && (
-        <Spoiler
-          title={t('app:operationDetails.showMore', { recipients: recipients.length - numToShow })}
-          color="wallet"
-          ff="Open Sans|SemiBold"
-          fontSize={4}
-          mt={1}
-        >
+const More = styled(Text).attrs({
+  ff: p => (p.ff ? p.ff : 'Museo Sans|Bold'),
+  fontSize: p => (p.fontSize ? p.fontSize : 2),
+  color: p => (p.color ? p.color : 'dark'),
+  tabIndex: 0,
+})`
+  text-transform: ${p => (!p.textTransform ? 'auto' : 'uppercase')};
+  cursor: pointer;
+  outline: none;
+`
+
+export class Recipients extends Component<{ recipients: Array<*>, t: T }, *> {
+  state = {
+    showMore: false,
+  }
+  onClick = () => {
+    this.setState(({ showMore }) => ({ showMore: !showMore }))
+  }
+  render() {
+    const { recipients, t } = this.props
+    const { showMore } = this.state
+    // Hardcoded for now
+    const numToShow = 2
+    const shouldShowMore = recipients.length > 3
+    return (
+      <Box>
+        <OpDetailsData>
+          {(shouldShowMore ? recipients.slice(0, numToShow) : recipients).map(recipient => (
+            <CanSelect key={recipient}>{recipient}</CanSelect>
+          ))}
+        </OpDetailsData>
+        {shouldShowMore &&
+          !showMore && (
+            <Box onClick={this.onClick} py={1}>
+              <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+                <IconChevronRight size={12} style={{ marginRight: 5 }} />
+                {t('app:operationDetails.showMore', { recipients: recipients.length - numToShow })}
+              </More>
+            </Box>
+          )}
+        {showMore && (
           <OpDetailsData>
             {recipients
               .slice(numToShow)
               .map(recipient => <CanSelect key={recipient}>{recipient}</CanSelect>)}
           </OpDetailsData>
-        </Spoiler>
-      )}
-    </Box>
-  )
+        )}
+        {shouldShowMore &&
+          showMore && (
+            <Box onClick={this.onClick} py={1}>
+              <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+                <IconChevronRight size={12} style={{ marginRight: 5 }} />
+                {t('app:operationDetails.showLess')}
+              </More>
+            </Box>
+          )}
+      </Box>
+    )
+  }
 }

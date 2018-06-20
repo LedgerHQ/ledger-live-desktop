@@ -7,10 +7,10 @@ import Text from 'components/base/Text'
 const outerStyle = { width: 0 }
 const innerStyle = { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }
 
-export default ({ children, ...p }: { children: any }) => (
+export default ({ children, canSelect, ...p }: { children: any, canSelect: * }) => (
   <Box grow horizontal>
     <Box grow {...p} style={outerStyle}>
-      <Text style={innerStyle}>{children}</Text>
+      <Text style={{ ...innerStyle, 'user-select': canSelect ? 'text' : 'none' }}>{children}</Text>
     </Box>
   </Box>
 )

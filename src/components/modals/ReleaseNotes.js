@@ -13,6 +13,7 @@ import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Text from 'components/base/Text'
 import Spinner from 'components/base/Spinner'
+import GradientBox from 'components/GradientBox'
 
 import type { T } from 'types/common'
 
@@ -218,7 +219,7 @@ class ReleaseNotes extends PureComponent<Props, State> {
       return (
         <ModalBody onClose={onClose}>
           <ModalTitle>{t('app:releaseNotes.title')}</ModalTitle>
-          <ModalContent style={{ height: 400 }} mx={-5} pb={0}>
+          <ModalContent style={{ height: 500 }} mx={-5} pb={0}>
             <GrowScroll px={5} pb={8}>
               {content}
             </GrowScroll>
@@ -236,16 +237,5 @@ class ReleaseNotes extends PureComponent<Props, State> {
     return <Modal name={MODAL_RELEASES_NOTES} render={renderBody} />
   }
 }
-
-const GradientBox = styled.div`
-  width: 100%;
-  height: 60px;
-  position: absolute;
-  bottom: 68px;
-  left: 0;
-  right: 0;
-  background: linear-gradient(rgba(255, 255, 255, 0), #ffffff 70%);
-  z-index: 2;
-`
 
 export default translate()(ReleaseNotes)
