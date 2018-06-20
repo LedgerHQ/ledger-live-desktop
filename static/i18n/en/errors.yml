@@ -20,3 +20,4 @@ DeviceSocketFail: Device socket failure
 DeviceSocketNoBulkStatus: Device socket failure (bulk)
 DeviceSocketNoHandler: Device socket failure (handler {{query}})
 LatestMCUInstalledError: The latest MCU is already installed on the Device
+HardResetFail: Hard reset failure
