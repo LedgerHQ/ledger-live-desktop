@@ -8,7 +8,7 @@ const Indicator = styled.div`
   border-radius: 3px;
   background-color: black;
   position: fixed;
-  bottom: 4px;
+  top: 4px;
   right: 4px;
   z-index: 999;
 `
