@@ -86,12 +86,12 @@ ${error.stack}
           <Button primary onClick={this.handleRestart}>
             {t('app:crash.restart')}
           </Button>
-          <Button danger onClick={this.handleHardReset} isLoading={isHardResetting}>
-            {t('app:crash.reset')}
-          </Button>
           {!disableExport ? <ExportLogsBtn /> : null}
           <Button primary onClick={this.handleCreateIssue}>
             {t('app:crash.createTicket')}
+          </Button>
+          <Button danger onClick={this.handleHardReset} isLoading={isHardResetting}>
+            {t('app:crash.reset')}
           </Button>
         </Box>
         <Space of={20} />
