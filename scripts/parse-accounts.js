@@ -1,6 +1,6 @@
-// Utility to human-read the accounts.json file
-// You have to pass it in parameter, because the location
-// differ depending on the OS.
+//                Utility to human-read the accounts.json file
+//           You have to pass it in parameter, because the location
+//                        differ depending on the OS.
 
 const {
   formatCurrencyUnit,
