@@ -27,6 +27,7 @@ import hardReset from 'helpers/hardReset'
 
 import sentry from 'sentry/browser'
 import App from 'components/App'
+import AppError from 'components/AppError'
 
 import 'styles/global'
 
@@ -99,5 +100,5 @@ function r(Comp) {
 init().catch(e => {
   // for now we make the app crash instead of pending forever. later we can render the error OR try to recover, but probably this is unrecoverable cases.
   logger.error(e)
-  process.exit(1)
+  r(<AppError error={e} language="en" />)
 })
