@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import Box from 'components/base/Box'
+import measureScrollbar from 'measure-scrollbar/commonjs'
 
 type Props = {
   children: any,
@@ -10,6 +11,8 @@ type Props = {
 }
 
 export const GrowScrollContext = React.createContext()
+
+const scrollbarWidth = measureScrollbar()
 
 class GrowScroll extends PureComponent<Props> {
   static defaultProps = {
@@ -47,7 +50,7 @@ class GrowScroll extends PureComponent<Props> {
 
     const scrollContainerStyles = {
       overflowY: 'scroll',
-      marginRight: `-80px`,
+      marginRight: `-${80 + scrollbarWidth}px`,
       paddingRight: `80px`,
       ...(maxHeight
         ? {
