@@ -82,7 +82,7 @@ const state: OnboardingState = {
     },
     {
       name: 'selectPIN',
-      label: 'onboarding:breadcrumb.SelectPIN',
+      label: 'onboarding:breadcrumb.selectPIN',
       options: {
         showFooter: false,
         showBackground: true,
