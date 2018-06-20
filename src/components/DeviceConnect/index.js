@@ -204,7 +204,7 @@ class DeviceConnect extends PureComponent<Props> {
 
     const hasDevice = devices.length > 0
     const hasMultipleDevices = devices.length > 1
-
+    // TODO: place custom wording in trans tags into yml file
     /* eslint-disable react/jsx-no-literals */
     return (
       <Box flow={4} ff="Open Sans">
@@ -215,8 +215,7 @@ class DeviceConnect extends PureComponent<Props> {
             </StepIcon>
             <Box grow shrink>
               <Trans i18nKey="app:deviceConnect.step1.connect" parent="div">
-                Connect your <strong>Ledger device</strong> to your computer and enter your{' '}
-                <strong>PIN code</strong> on your device
+                Connect and unlock your <strong>Ledger device</strong>
               </Trans>
             </Box>
             <StepCheck checked={hasDevice} />
@@ -260,9 +259,9 @@ class DeviceConnect extends PureComponent<Props> {
               </StepIcon>
               <Box grow shrink>
                 <Trans i18nKey="deviceConnect:step2.open" parent="div">
-                  {'Open '}
+                  {'Open the '}
                   <strong>{currency.name}</strong>
-                  {' App on your device'}
+                  {' app on your device'}
                 </Trans>
               </Box>
               <StepCheck checked={appState.success} hasErrors={appState.fail} />
@@ -275,8 +274,8 @@ class DeviceConnect extends PureComponent<Props> {
                 </WrapperIconCurrency>
               </StepIcon>
               <Box grow shrink>
-                <Trans i18nKey="deviceConnect:dashboard.open" parent="div">
-                  {'Go to the '}
+                <Trans i18nKey="app:dashboard.open" parent="div">
+                  {'Navigate to the '}
                   <strong>{'dashboard'}</strong>
                   {' on your device'}
                 </Trans>
@@ -299,8 +298,8 @@ class DeviceConnect extends PureComponent<Props> {
               </StepIcon>
               <Box grow shrink>
                 <Trans i18nKey="deviceConnect:stepGenuine.open" parent="div">
-                  {'Confirm '}
-                  <strong>{'authentication'}</strong>
+                  {'Allow the '}
+                  <strong>{'Ledger Manager'}</strong>
                   {' on your device'}
                 </Trans>
               </Box>
