@@ -7,7 +7,7 @@ function MAIN {
 
 function GET_HASH_PATH {
   HASH_NAME=$1
-  echo "./node_modules/.cache/LEDGER_HASH_$HASH_NAME"
+  echo "./node_modules/.cache/LEDGER_HASH_$HASH_NAME.hash"
 }
 
 function GET_HASH {
