@@ -24,6 +24,7 @@ import Button from 'components/base/Button'
 import NanoS from 'icons/device/NanoS'
 import CheckFull from 'icons/CheckFull'
 
+import { PreventDeviceChangeRecheck } from '../Workflow/EnsureDevice'
 import UpdateFirmwareButton from './UpdateFirmwareButton'
 
 let CACHED_LATEST_FIRMWARE = null
@@ -150,7 +151,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
   render() {
     const { infos, t } = this.props
-    const { latestFirmware } = this.state
+    const { latestFirmware, modal } = this.state
 
     return (
       <Card p={4}>
@@ -178,6 +179,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
             installFirmware={this.handleInstallModal}
           />
         </Box>
+        {modal !== 'closed' ? <PreventDeviceChangeRecheck /> : null}
         {this.renderModal()}
       </Card>
     )

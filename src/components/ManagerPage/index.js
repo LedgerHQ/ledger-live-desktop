@@ -3,7 +3,6 @@
 
 import React, { PureComponent } from 'react'
 
-import type { Node } from 'react'
 import type { Device } from 'types/common'
 
 import Workflow from 'components/Workflow'
