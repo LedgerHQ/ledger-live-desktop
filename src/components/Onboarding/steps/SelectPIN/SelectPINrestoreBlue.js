@@ -24,17 +24,17 @@ class SelectPINrestoreBlue extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.instructions.ledgerBlue.step1'),
+        desc: t('onboarding:selectPIN.restore.instructions.blue.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.instructions.ledgerBlue.step2'),
+        desc: t('onboarding:selectPIN.restore.instructions.blue.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.instructions.ledgerBlue.step3'),
+        desc: t('onboarding:selectPIN.restore.instructions.blue.step3'),
       },
     ]
 

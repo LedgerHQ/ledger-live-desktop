@@ -7,6 +7,7 @@ import Box from 'components/base/Box'
 
 import type { T } from 'types/common'
 import IconWriteSeed from 'icons/illustrations/WriteSeed'
+import type { OnboardingState } from 'reducers/onboarding'
 
 import IconChevronRight from 'icons/ChevronRight'
 
@@ -21,32 +22,50 @@ import {
 
 type Props = {
   t: T,
+  onboarding: OnboardingState,
 }
 
 class WriteSeedRestore extends PureComponent<Props, *> {
   render() {
-    const { t } = this.props
+    const { t, onboarding } = this.props
 
-    const steps = [
+    const stepsNano = [
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step1'),
+        desc: t('onboarding:writeSeed.restore.nano.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step2'),
+        desc: t('onboarding:writeSeed.restore.nano.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step3'),
+        desc: t('onboarding:writeSeed.restore.nano.step3'),
       },
       {
         key: 'step4',
         icon: <IconOptionRow>{'4.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.step4'),
+        desc: t('onboarding:writeSeed.restore.nano.step4'),
+      },
+    ]
+    const stepsBlue = [
+      {
+        key: 'step1',
+        icon: <IconOptionRow>{'1.'}</IconOptionRow>,
+        desc: t('onboarding:writeSeed.restore.blue.step1'),
+      },
+      {
+        key: 'step2',
+        icon: <IconOptionRow>{'2.'}</IconOptionRow>,
+        desc: t('onboarding:writeSeed.restore.blue.step2'),
+      },
+      {
+        key: 'step3',
+        icon: <IconOptionRow>{'3.'}</IconOptionRow>,
+        desc: t('onboarding:writeSeed.restore.blue.step3'),
       },
     ]
     const disclaimerNotes = [
@@ -83,9 +102,15 @@ class WriteSeedRestore extends PureComponent<Props, *> {
             <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
               <IconWriteSeed />
             </Box>
-            <Box shrink flow={2} m={0}>
-              {steps.map(step => <OptionRow key={step.key} step={step} />)}
-            </Box>
+            {onboarding.isLedgerNano ? (
+              <Box shrink flow={2} m={0}>
+                {stepsNano.map(step => <OptionRow key={step.key} step={step} />)}
+              </Box>
+            ) : (
+              <Box shrink flow={2} m={0}>
+                {stepsBlue.map(step => <OptionRow key={step.key} step={step} />)}
+              </Box>
+            )}
           </Inner>
           <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
         </Box>

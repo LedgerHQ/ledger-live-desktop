@@ -30,17 +30,17 @@ class WriteSeedNano extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.nano.step1'),
+        desc: t('onboarding:writeSeed.initialize.nano.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.nano.step2'),
+        desc: t('onboarding:writeSeed.initialize.nano.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.nano.step3'),
+        desc: t('onboarding:writeSeed.initialize.nano.step3'),
       },
     ]
     const disclaimerNotes = [
@@ -69,8 +69,8 @@ class WriteSeedNano extends PureComponent<Props, *> {
     return (
       <Fragment>
         <Box mb={3}>
-          <Title>{t('onboarding:writeSeed.title')}</Title>
-          <Description>{t('onboarding:writeSeed.desc')}</Description>
+          <Title>{t('onboarding:writeSeed.initialize.title')}</Title>
+          <Description>{t('onboarding:writeSeed.initialize.desc')}</Description>
         </Box>
         <Box align="center" mt={3}>
           <Inner style={{ width: 700 }}>
