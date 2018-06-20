@@ -20,8 +20,10 @@ import Progress from 'components/base/Progress'
 import Spinner from 'components/base/Spinner'
 import Button from 'components/base/Button'
 import Space from 'components/base/Space'
+import TranslatedError from '../TranslatedError'
 
 import ExclamationCircle from 'icons/ExclamationCircle'
+import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Update from 'icons/Update'
 import Trash from 'icons/Trash'
 import CheckCircle from 'icons/CheckCircle'
@@ -54,7 +56,7 @@ type Props = {
 
 type State = {
   status: Status,
-  error: string | null,
+  error: ?Error,
   appsList: LedgerScriptParams[] | Array<*>,
   app: string,
   mode: Mode,
@@ -88,7 +90,7 @@ class AppsList extends PureComponent<Props, State> {
         this.setState({ appsList, status: 'idle' })
       }
     } catch (err) {
-      this.setState({ status: 'error', error: err.message })
+      this.setState({ status: 'error', error: err })
     }
   }
 
@@ -103,7 +105,7 @@ class AppsList extends PureComponent<Props, State> {
       await installApp.send(data).toPromise()
       this.setState({ status: 'success', app: '' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message, app: '', mode: 'home' })
+      this.setState({ status: 'error', error: err, app: '', mode: 'home' })
     }
   }
 
@@ -118,7 +120,7 @@ class AppsList extends PureComponent<Props, State> {
       await uninstallApp.send(data).toPromise()
       this.setState({ status: 'success', app: '' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message, app: '', mode: 'home' })
+      this.setState({ status: 'error', error: err, app: '', mode: 'home' })
     }
   }
 
@@ -127,7 +129,7 @@ class AppsList extends PureComponent<Props, State> {
   renderModal = () => {
     const { t } = this.props
     const { app, status, error, mode } = this.state
-
+    console.log('what is error?? : ', error)
     return (
       <Modal
         isOpened={status !== 'idle' && status !== 'loading'}
@@ -136,7 +138,15 @@ class AppsList extends PureComponent<Props, State> {
             {status === 'busy' || status === 'idle' ? (
               <Fragment>
                 <ModalTitle>
-                  {mode === 'installing' ? <Update size={30} /> : <Trash size={30} />}
+                  {mode === 'installing' ? (
+                    <Box color="grey">
+                      <Update size={30} />
+                    </Box>
+                  ) : (
+                    <Box color="grey">
+                      <Trash size={30} />
+                    </Box>
+                  )}
                 </ModalTitle>
                 <ModalContent>
                   <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
@@ -149,40 +159,52 @@ class AppsList extends PureComponent<Props, State> {
               </Fragment>
             ) : status === 'error' ? (
               <Fragment>
-                <ModalContent grow align="center" justify="center">
+                <ModalContent grow align="center" justify="center" mt={3}>
                   <Box color="alertRed">
-                    <ExclamationCircle size={44} />
+                    <ExclamationCircleThin size={44} />
                   </Box>
-                  <Box color="dark" mt={3} fontSize={6}>
-                    {error}
+                  <Box
+                    color="black"
+                    mt={4}
+                    fontSize={6}
+                    ff="Museo Sans|Regular"
+                    textAlign="center"
+                    style={{ maxWidth: 350 }}
+                  >
+                    <TranslatedError error={error} />
                   </Box>
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
-                  <Button primary onClick={this.handleCloseModal}>
-                    close
+                  <Button primary padded onClick={this.handleCloseModal}>
+                    {t('app:common.close')}
                   </Button>
                 </ModalFooter>
               </Fragment>
             ) : status === 'success' ? (
               <Fragment>
-                <ModalTitle>
+                <ModalContent grow align="center" justify="center" mt={3}>
                   <Box color="positiveGreen">
-                    <CheckCircle size={30} />
+                    <CheckCircle size={44} />
                   </Box>
-                </ModalTitle>
-                <ModalContent>
-                  <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+                  <Box
+                    color="black"
+                    mt={4}
+                    fontSize={6}
+                    ff="Museo Sans|Regular"
+                    textAlign="center"
+                    style={{ maxWidth: 350 }}
+                  >
                     {t(
                       `app:manager.apps.${
                         mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'
                       }`,
                       { app },
                     )}
-                  </Text>
+                  </Box>
                 </ModalContent>
-                <ModalFooter horizontal justifyContent="flex-end">
-                  <Button primary onClick={this.handleCloseModal}>
-                    close
+                <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
+                  <Button primary padded onClick={this.handleCloseModal}>
+                    {t('app:common.close')}
                   </Button>
                 </ModalFooter>
               </Fragment>
