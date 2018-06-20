@@ -19,6 +19,7 @@ import ExchangePage from 'components/ExchangePage'
 import SettingsPage from 'components/SettingsPage'
 import LibcoreBusyIndicator from 'components/LibcoreBusyIndicator'
 import DeviceBusyIndicator from 'components/DeviceBusyIndicator'
+import TriggerAppReady from 'components/TriggerAppReady'
 
 import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
@@ -41,7 +42,6 @@ type Props = {
 
 class Default extends Component<Props> {
   componentDidMount() {
-    window.requestAnimationFrame(() => (this._timeout = setTimeout(() => window.onAppReady(), 300)))
     window.addEventListener('keydown', this.kbShortcut)
   }
 
@@ -59,7 +59,6 @@ class Default extends Component<Props> {
   }
 
   componentWillUnmount() {
-    clearTimeout(this._timeout)
     window.removeEventListener('keydown', this.kbShortcut) // Prevents adding multiple listeners when hot reloading
   }
 
@@ -69,12 +68,12 @@ class Default extends Component<Props> {
     }
   }
 
-  _timeout = undefined
   _scrollContainer = null
 
   render() {
     return (
       <Fragment>
+        <TriggerAppReady />
         {process.platform === 'darwin' && <AppRegionDrag />}
 
         <IsUnlocked>
