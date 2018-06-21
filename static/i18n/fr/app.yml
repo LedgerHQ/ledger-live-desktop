@@ -36,7 +36,7 @@ common:
     title: Welcome back
     subTitle: Ledger Live is locked
     description: Enter your password to continue
-    inputPlaceholder:
+    inputPlaceholder: Type your password
     lostPassword: I lost my password
   sync:
     syncing: Synchronizing...
