@@ -17,7 +17,7 @@ import { Rotating } from 'components/base/Spinner'
 import Tooltip from 'components/base/Tooltip'
 import TranslatedError from 'components/TranslatedError'
 import Box from 'components/base/Box'
-import IconRefresh from 'icons/Refresh'
+import IconLoader from 'icons/Loader'
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconCheckCircle from 'icons/CheckCircle'
 import ItemContainer from './ItemContainer'
@@ -88,18 +88,18 @@ class ActivityIndicatorInner extends PureComponent<Props, State> {
         <Rotating
           size={16}
           isRotating={isRotating}
-          color={isError ? 'alertRed' : isRotating ? undefined : 'positiveGreen'}
+          color={isError ? 'alertRed' : isRotating ? 'grey' : 'positiveGreen'}
         >
           {isError ? (
             <IconExclamationCircle size={16} />
           ) : isRotating ? (
-            <IconRefresh size={16} />
+            <IconLoader size={16} />
           ) : (
             <IconCheckCircle size={16} />
           )}
         </Rotating>
         <Box
-          ml={1}
+          ml={isRotating ? 2 : 1}
           ff="Open Sans|SemiBold"
           color={isError ? 'alertRed' : undefined}
           fontSize={4}
