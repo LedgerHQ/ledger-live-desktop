@@ -20,6 +20,7 @@ import SettingsPage from 'components/SettingsPage'
 import LibcoreBusyIndicator from 'components/LibcoreBusyIndicator'
 import DeviceBusyIndicator from 'components/DeviceBusyIndicator'
 import TriggerAppReady from 'components/TriggerAppReady'
+import ExportLogsBtn from 'components/ExportLogsBtn'
 
 import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
@@ -75,6 +76,7 @@ class Default extends Component<Props> {
       <Fragment>
         <TriggerAppReady />
         {process.platform === 'darwin' && <AppRegionDrag />}
+        <ExportLogsBtn hookToShortcut />
 
         <IsUnlocked>
           {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
