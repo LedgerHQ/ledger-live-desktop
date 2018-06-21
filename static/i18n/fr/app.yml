@@ -1,6 +1,6 @@
 ---
 common:
-  ok: Okay
+  ok: OK
   yes: true
   no: false
   apply: Apply
@@ -8,12 +8,12 @@ common:
   cancel: Cancel
   delete: Delete
   continue: Continue
-  skipThisStep: Skip This Step
+  skipThisStep: Skip this step
   chooseWalletPlaceholder: Choose a wallet...
   currency: Currency
   selectAccount: Select an account
   selectAccountNoOption: 'No account matching "{{accountName}}"'
-  selectCurrency: Select a currency
+  selectCurrency: Choose a crypto asset
   selectCurrencyNoOption: 'No currency matching "{{currencyName}}"'
   selectExchange: Select an exchange
   selectExchangeNoOption: 'No exchange matching "{{exchangeName}}"'
@@ -22,7 +22,7 @@ common:
   save: Save
   password: Password
   editProfile: Edit profile
-  lockApplication: Lock application
+  lockApplication: Lock Ledger Live
   showMore: Show more
   max: Max
   next: Next
@@ -33,15 +33,15 @@ common:
   eastern: Eastern
   western: Western
   lockScreen:
-    title: Welcome Back
-    subTitle: Your application is locked
-    description: Please enter your password to continue
-    inputPlaceholder: Type your password
+    title: Welcome back
+    subTitle: Ledger Live is locked
+    description: Enter your password to continue
+    inputPlaceholder:
     lostPassword: I lost my password
   sync:
-    syncing: Syncing...
+    syncing: Synchronizing...
     upToDate: Up to date
-    error: Sync error.
+    error: Synchronization error
     refresh: Refresh
     ago: Synced {{time}}
   error:
@@ -49,8 +49,8 @@ common:
     noResults: No results
 operation:
   type:
-    IN: Receive funds
-    OUT: Sent funds
+    IN: Received
+    OUT: Sent
 time:
   day: Day
   week: Week
@@ -71,57 +71,61 @@ account:
   receive: Receive
   lastOperations: Last operations
   emptyState:
-    title: This is a title, use it with caution
-    desc: Please create a new account or recover an old account from your Ledger device.
+    title: No funds yet?
+    desc: Make sure the <1><0>{{currency}}</0></1> app is installed to receive funds.
     buttons:
-      receiveFunds: Receive Funds
+      receiveFunds: Receive funds
   settings:
-    title: Edit Account
+    title: Edit account
     advancedLogs: Advanced logs
     accountName:
       title: Account name
-      desc: Lorem ipsum dolort amet
-      error: Name is required
+      desc: Describe this account.
+      error: An account name is required.
     unit:
       title: Unit
-      desc: Lorem ipsum dolort amet
+      desc: Choose the unit to display.
     endpointConfig:
       title: Node
       desc: The API node to use
       error: Invalid endpoint
 dashboard:
-  title: Dashboard
+  title: Portfolio
+  emptyAccountTile:
+    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    createAccount: Create Account
   accounts:
     title: Accounts ({{count}})
   greeting:
-    morning: "Good Morning!"
-    evening: "Good Evening!"
-    afternoon: "Good Afternoon!"
-  summary: here is the summary of your account
-  summary_plural: 'here is the summary of your {{count}} accounts'
-  noAccounts: no accounts
+    morning: "Good morning"
+    evening: "Good evening"
+    afternoon: "Good afternoon"
+  summary: "Here's the summary of your account."
+  summary_plural: "Here's the summary of your {{count}} accounts."
+  noAccounts: No accounts yet
   recentActivity: Recent activity
   totalBalance: Total balance
   accountsOrder:
-    name: Alphabetic
-    balance: Balance
+    name: name
+    balance: balance
 currentAddress:
   title: Current address
   for: Address for <1><0>{{accountName}}</0></1>
-  message: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit velit egestas leo tincidunt
+  message: Your receive address has not been confirmed on your Ledger device. Verify the address for optimal security.
 deviceConnect:
   step1:
-    choose: "We detected {{count}} devices connected, please select one:"
-    connect: Connect your <1>Ledger device</1> to your computer and enter your <3>PIN code</3> on your device
+    choose: "We detected {{count}} connected devices, please select one:"
+    connect: Connect and unlock your <1>Ledger device</1>
+    dashboard: test
 emptyState:
   sidebar:
-    text: You don’t have any accounts at the moment. Press the + button to create an account
+    text: Press the + button to add an account to your portfolio.
   dashboard:
-    title: This is a title, use it with caution
-    desc: Please create a new account or recover an old account from your Ledger device.
+    title: 'Let’s set up your portfolio!'
+    desc: Open the Manager to install apps on your device or add accounts if your device already has apps installed.
     buttons:
-      addAccount: Add Account
-      installApp: Install App
+      addAccount: Add accounts
+      installApp: Open Manager
 exchange:
   title: Exchange
   visitWebsite: Visit website
@@ -134,28 +138,28 @@ genuinecheck:
 addAccounts:
   title: Add accounts
   breadcrumb:
-    informations: Informations
+    informations: Choose asset
     connectDevice: Connect device
-    import: Import
-    finish: End
-  accountToImportSubtitle: Account to import
-  accountToImportSubtitle_plural: 'Accounts to import ({{count}})'
+    import: Select accounts
+    finish: Confirmation
+  accountToImportSubtitle: Select existing accounts
+  accountToImportSubtitle_plural: 'Select ({{count}}) existing accounts'
   selectAll: Select all
-  unselectAll: Unselect all
+  unselectAll: Deselect all
   editName: Edit name
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
-  noAccountToImport: We didnt find any {{currencyName}} account to import.
-  success: Great success!
+  noAccountToImport: All {{currencyName}} accounts found are already in your portfolio.
+  success: Account successfully added to your portfolio.
   createNewAccount:
     title: Create new account
-    noOperationOnLastAccount: You cannot create a new account because your last account has no operations
-    noAccountToCreate: We didnt find any {{currencyName}} account to create.
-  somethingWentWrong: Something went wrong during synchronization.
+    noOperationOnLastAccount: 'You have to receive funds on {{accountName}} before you can create a new account.'
+    noAccountToCreate: No {{currencyName}} account was found to create.
+  somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
-    create: 'Create account'
-    import: 'Import account'
-    import_plural: 'Import accounts'
+    create: 'Add account'
+    import: 'Add account'
+    import_plural: 'Add accounts'
 operationDetails:
   title: Operation details
   account: Account
@@ -166,11 +170,12 @@ operationDetails:
   fees: Fees
   from: From
   to: To
-  identifier: Hash
-  viewOperation: View operation
-  showMore: See {{recipients}} more
+  identifier: Transaction ID
+  viewOperation: View in explorer
+  showMore: Show {{recipients}} more
+  showLess: Show less
 operationList:
-  noMoreOperations: No more operations
+  noMoreOperations: That's all!
 manager:
   tabs:
     apps: Apps
@@ -183,48 +188,52 @@ manager:
     installSuccess: '{{app}} app successfully installed'
     uninstallSuccess: '{{app}} app successfully uninstalled'
     alreadyInstalled: '{{app}} app is already installed'
-    help: To update an app, you have to uninstall the app and re install it.
+    help: Remove and reinstall to update apps
   firmware:
-    installed: 'Firmware {{version}}'
+    installed: 'Firmware version {{version}}'
     update: Update firmware
     updateTitle: Firmware update
-    latest: 'A new firmware {{version}} is available'
+    continue: Continue update
+    latest: 'Firmware version {{version}} is available.'
+    disclaimerTitle: 'You are about to install the latest <1><0>firmware {{version}}</0></1>'
+    disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
+    disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
   title: Manager
-  subtitle: Get all your apps here
+  subtitle: Install apps or update your device.
   device:
-    title: Plug your device
-    desc: Please connect your Ledger device and follow the steps below to access the manager
-    cta: Plug my device
+    title: Connect your device
+    desc: Follow the steps below to use the Manager
+    cta: Connect my device
   errors:
-    noDevice: Please make sur your device is connected (TEMPLATE NEEDED)
-    noDashboard: Please make sure your device is on the dashboard screen (TEMPLATED NEEDED)
-    noGenuine: You did not approve request on your device or your device is not genuine (TEMPLATE NEEDED)
+    noDevice: No device is connected (TEMPLATE NEEDED)
+    noDashboard: Navigate to the dashboard on your device (TEMPLATED NEEDED)
+    noGenuine: Allow the Manager to continue (TEMPLATE NEEDED)
 receive:
   title: Receive funds
   steps:
     chooseAccount:
-      title: Choose Account
+      title: Choose account
       label: Account
     connectDevice:
-      title: Connect Device
-      withoutDevice: I don't have my device
+      title: Connect device
+      withoutDevice: Proceed without device
     confirmAddress:
-      title: Confirm Address
+      title: Confirm address
       action: Confirm address on device
       text: To receive funds, confirm the address on your device.
-      support: Contact Support
+      support: Ledger Support
       error:
-        title: Houston, we have a problem!
-        text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
+        title: Receive address rejected
+        text: Please try again or request Ledger Support assistance when in doubt.
     receiveFunds:
-      title: Receive Funds
-      label: Amount (Optional)
+      title: Receive funds
+      label: Amount (optional)
 send:
   title: Send funds
-  totalSpent: Total spent
+  totalSpent: Total
   steps:
     amount:
-      title: Informations
+      title: Create payment
       selectAccountDebit: Select an account to debit
       recipientAddress: Recipient address
       amount: Amount
@@ -236,25 +245,24 @@ send:
       rippleTag: Tag
       ethereumGasLimit: Gas limit
       unitPerByte: '{{unit}} per byte'
-      feePerByte: Fee per byte
+      feePerByte: Fees per byte
     connectDevice:
       title: Connect device
     verification:
       title: Verification
       warning: |
-        You are about to validate a transaction.
-        Be careful, we strongly recommand you to verify that the informations on your Ledger device are correct.
-      body: Once you have checked everything is ok, you can validate securely the transaction on your device.
+        Carefully verify the transaction details on your device. Press the left button on your device to cancel.
+      body: Press the right button to confirm the transaction.
     confirmation:
       title: Confirmation
       success:
-        title: Transaction successfully broadcasted
+        title: Transaction sent
         text: |
-          with the following transaction id:
+          The transaction has been signed and sent to the network. Your account balance will update once the blockchain has confirmed the transaction. It has the following Transaction ID:
         cta: View operation details
       error:
-        title: Transaction error
-        cta: Retry operation
+        title: Transaction canceled
+        cta: Retry
       pending:
         title: Broadcasting transaction...
 releaseNotes:
@@ -266,73 +274,73 @@ settings:
     display: Display
     currencies: Currencies
     profile: Profile
-    about: About
+    about: Help
   display:
-    desc: Lorem ipsum dolor sit amet
-    language: Interface language
-    languageDesc: Lorem ipsum dolor sit amet
-    counterValue: Countervalue
-    counterValueDesc: Lorem ipsum dolor sit amet
-    exchange: Exchange ({{ticker}})
-    exchangeDesc: The exchange to use for countervalue conversion
+    desc:
+    language: Language
+    languageDesc: Choose the language to display.
+    counterValue: Base currency
+    counterValueDesc: Choose the currency to display next to your balance and operations.
+    exchange: Rate provider ({{ticker}})
+    exchangeDesc: Choose the provider of the base currency exchange rates.
     region: Region
-    regionDesc: Lorem ipsum dolor sit amet
-    stock: Stock market indicators
-    stockDesc: Lorem ipsum dolor sit amet
+    regionDesc: Choose the region in which you’re located to set the application’s time zone.
+    stock: Regional market indicator
+    stockDesc: Choose Western to display an increase in market value in blue. Choose Eastern to display an increase in market value in red.
   currencies:
-    desc: Lorem ipsum dolor sit amet
-    exchange: Exchange ({{ticker}})
-    exchangeDesc: The exchange to use for countervalue conversion
-    confirmationsToSpend: Confirmations to spend
-    confirmationsToSpendDesc: Lorem ipsum dolor sit amet
+    desc: Select a cryptocurrency to edit its settings.
+    exchange: Rate provider ({{ticker}})
+    exchangeDesc: Choose the provider of the base currency exchange rates.
+    confirmationsToSpend: Number of confirmations required to spend
+    confirmationsToSpendDesc: Set the number of confirmations required for your funds to be spendable.
     confirmationsNb: Number of confirmations
-    confirmationsNbDesc: Lorem ipsum dolor sit amet
-    transactionsFees: Transactions fees
-    transactionsFeesDesc: Lorem ipsum dolor sit amet
+    confirmationsNbDesc: Set the number of blocks a transaction needs to be included in to consider it as confirmed.
+    transactionsFees: Default transaction fees
+    transactionsFeesDesc: Select your default transaction fees. The higher the fee, the quicker the transaction will be processed.
     explorer: Blockchain explorer
-    explorerDesc: Lorem ipsum dolor sit amet
+    explorerDesc: Which service to use to look up an operation in the blockchain.
   profile:
-    desc: Lorem ipsum dolor sit amet
-    password: Password
-    passwordDesc: Lorem ipsum dolor sit amet
+    desc:
+    password: Data encryption
+    passwordDesc: Enhance your privacy. Set a password to encrypt Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
     changePassword: Change password
-    sync: Sync accounts
-    syncDesc: Lorem ipsum dolor sit amet
+    sync: Synchronize accounts
+    syncDesc: Resynchronize your accounts with the blockchain.
     export: Export logs
-    exportDesc: Lorem ipsum dolor sit amet
-    softResetTitle: Clean application cache
-    softResetDesc: Lorem ipsum dolor sit amet
-    softReset: Clean cache
-    hardResetTitle: Reset application
-    hardResetDesc: Lorem ipsum dolor sit amet
-    hardReset: Hard reset
-    developerMode: Developer Mode
-    developerModeDesc: Enable visibility of developer apps & currencies like Bitcoin Testnet
-    analytics: Share analytics
-    analyticsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
-    reportErrors: Sentry Logs
-    reportErrorsDesc: Help Ledger improve its products and services by automatically sending diagnostics and usage data.
+    exportDesc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
+    softResetTitle: Clear cache
+    softResetDesc: Clear the Ledger Live cache to force resynchronization with the blockchain.
+    softReset: Clear
+    hardResetTitle: Reset Ledger Live
+    hardResetDesc: Erase all Ledger Live data stored on your computer, including your profile, accounts, transaction history and settings. The private keys that manage your crypto assets remain secure on your Ledger device.
+    hardReset: Reset
+    developerMode: Developer mode
+    developerModeDesc: Show developer apps in the Manager.
+    analytics: Analytics
+    analyticsDesc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
+    reportErrors: Usage and diagnostics
+    reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
   about:
-    desc: Lorem ipsum dolor sit amet
-    version: Version
+    desc:
+    version: Ledger Live version
     releaseNotesBtn: Show release notes
-    faq: FAQ
-    faqDesc: Lorem ipsum dolor sit amet
+    faq: Ledger Support
+    faqDesc: A problem? Learn about Ledger Live, Ledger devices, supported crypto assets and apps.
     contactUs: Contact us
-    contactUsDesc: Lorem ipsum dolor sit amet
-    terms: Terms and Privacy policy
-    termsDesc: Lorem ipsum dolor sit amet
+    contactUsDesc: Need help? Request assistance from Ledger Support by email or chat.
+    terms: '--- Terms and Privacy policy ---'
+    termsDesc: '--- Check with Legal ---'
   hardResetModal:
     title: Reset Ledger Live
     desc: Resetting will erase all Ledger Live data stored on your computer, including your profile, accounts, transaction history and application settings. The keys to access your crypto assets in the blockchain remain secure on your Ledger device.
   softResetModal:
-    title: Clean application cache
-    subTitle: Are you sure houston?
-    desc: Lorem ipsum dolor sit amet
+    title: Clear cache
+    subTitle: Are you sure?
+    desc: Clearing the Ledger Live cache forces resynchronization with the blockchain.
   removeAccountModal:
-    title: Delete this account
-    subTitle: Are you sure houston?
-    desc: Lorem ipsum dolor sit amet
+    title: Remove account
+    subTitle: Are you sure?
+    desc: The account will no longer be included in your portfolio. Accounts can always be re-added.
   exportLogs:
     title: Export Logs
     desc: Export Logs
@@ -348,32 +356,32 @@ password:
   inputFields:
     newPassword:
       label: Password
-      placeholder: Password
+      placeholder:
     confirmPassword:
-      label: Confirm Password
-      placeholder: Confirm Password
+      label: Confirm password
+      placeholder:
     currentPassword:
-      label: Current Password
-      placeholder: Current Password
+      label: Current password
+      placeholder:
   changePassword:
-    title: Edit Password
+    title: Data encryption
     subTitle: Change your password
-    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
+    desc: Make sure to remember your password. Losing your password requires resetting Ledger Live and re-adding accounts.
   setPassword:
-    title: Set Password
-    subTitle: Set a password to lock your application
-    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
+    title: Enable data encryption
+    subTitle: Set a password
+    desc: Make sure to remember your password. Losing your password requires resetting Ledger Live and re-adding accounts.
   disablePassword:
-    title: Disable Password
-    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam.
+    title: Disable data encryption
+    desc: Ledger Live data will be stored unencrypted on your computer. This includes account names, balances, transactions and public addresses.
 update:
   newVersionReady: A new update is available.
   relaunch: Update now
 crash:
-  oops: Oops, something went wrong.
+  oops: Oops, something went wrong
   uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
-  restart: Restart app
+  restart: Restart
   reset: Hard reset
-  createTicket: Create issue
+  createTicket: Ledger Support
   showDetails: Show details
   showError: Show error
