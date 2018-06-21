@@ -1502,9 +1502,9 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/ledger-core@2.0.0-rc.1":
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.1.tgz#0b31f7d2c693b9c11d4093dbb0896f13c33bf141"
+"@ledgerhq/ledger-core@2.0.0-rc.3":
+  version "2.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.3.tgz#21b04239e9ba6b7fdcb89958eea8ad47a4a28a88"
   dependencies:
     "@ledgerhq/hw-app-btc" "^4.7.3"
     "@ledgerhq/hw-transport-node-hid" "^4.7.6"
@@ -9322,6 +9322,10 @@ meant@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/meant/-/meant-1.0.1.tgz#66044fea2f23230ec806fb515efea29c44d2115d"
 
+measure-scrollbar@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/measure-scrollbar/-/measure-scrollbar-1.1.0.tgz#986890d22866255ec5b212480f097c55a82d1231"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -11548,6 +11552,13 @@ react-is@^16.3.1:
 react-is@^16.4.1:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.1.tgz#d624c4650d2c65dbd52c72622bbf389435d9776e"
+
+react-key-handler@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-key-handler/-/react-key-handler-1.0.1.tgz#1fc0f4f4855f506a192c2cbe9fe8cb78fc553191"
+  dependencies:
+    exenv "^1.2.0"
+    prop-types "^15.5.7"
 
 react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.4:
   version "3.0.4"

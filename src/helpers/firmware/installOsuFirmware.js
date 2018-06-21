@@ -22,9 +22,7 @@ export default async (
     const url = WS_INSTALL(params)
     await createDeviceSocket(transport, url).toPromise()
     return { success: true }
-  } catch (err) {
-    const error = Error(err.message)
-    error.stack = err.stack
+  } catch (error) {
     const result = { success: false, error }
     throw result
   }

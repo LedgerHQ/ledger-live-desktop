@@ -1,22 +1,25 @@
-generic: An error occurred
+generic: Oops, an unknown error occurred. Please try again or contact Ledger Support.
 RangeError: '{{message}}'
 Error: '{{message}}'
 LedgerAPIErrorWithMessage: '{{message}}'
 TransportStatusError: '{{message}}'
-TimeoutError: 'Timeout reached'
-FeeEstimationFailed: 'fee estimation failed (status: {{status}})'
-NotEnoughBalance: 'Not enough balance'
-BtcUnmatchedApp: 'You must open application ‘{{currencyName}}’ on the device'
-WrongAppOpened: 'You must open application ‘{{currencyName}}’ on the device'
-WrongDeviceForAccount: 'You must use the device associated to the account ‘{{accountName}}’'
-LedgerAPINotAvailable: 'Ledger API is not available for currency {{currencyName}}'
-LedgerAPIError: 'A problem occurred with Ledger API. Please try again later. (HTTP {{status}})'
-NetworkDown: 'Your internet connection seems down. Please try again later.'
-NoAddressesFound: 'No accounts found'
-UserRefusedOnDevice: Transaction have been aborted
-WebsocketConnectionError: An error occurred with the socket connection
-WebsocketConnectionFailed: Failed to establish a socket connection
-DeviceSocketFail: Device socket failure
-DeviceSocketNoBulkStatus: Device socket failure (bulk)
-DeviceSocketNoHandler: Device socket failure (handler {{query}})
-LatestMCUInstalledError: The latest MCU is already installed on the Device
+TimeoutError: 'The request timed out. Please try again or contact Ledger Support.'
+FeeEstimationFailed: 'The fee could not be estimated. Please try again or set a custom fee (status: {{status}})'
+NotEnoughBalance: 'The account has insufficient funds to proceed.'
+BtcUnmatchedApp: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
+WrongAppOpened: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
+WrongDeviceForAccount: 'Use the device associated with the account ‘{{accountName}}’.'
+LedgerAPINotAvailable: 'The Ledger API is not available for {{currencyName}}. Please check status.ledger.fr.'
+LedgerAPIError: 'A problem occurred with the Ledger API. Please try again later. (HTTP {{status}})'
+NetworkDown: 'Your internet connection seems down. Please try again.'
+NoAddressesFound: 'No accounts were found.'
+UserRefusedOnDevice: Please try again or request Ledger Support assistance when in doubt.
+WebsocketConnectionError: An error occurred with the websocket connection. Please try again or contact Ledger Support.
+WebsocketConnectionFailed: Oops, could not establish a websocket connection. Please try again or contact Ledger Support.
+DeviceSocketFail: Oops. a device socket failure occurred. Please try again or contact Ledger Support.
+DeviceSocketNoBulkStatus: Oops, the device socket failed (bulk). Please try again or contact Ledger Support.
+DeviceSocketNoHandler: Oops, the device socket failed (handler {{query}}). Please try again or contact Ledger Support.
+LatestMCUInstalledError: The MCU on the device is already up to date.
+HardResetFail: Could not reset Ledger Live. Please try again or contact Ledger Support.
+CannotUninstall: Cannot uninstall app
+CannotInstall: Cannot install app

@@ -13,7 +13,6 @@ export default async (
 ): Result => {
   const { version } = args
   const nextVersion = await getNextMCU(version)
-
   const params = {
     targetId: args.targetId,
     version: nextVersion.name,

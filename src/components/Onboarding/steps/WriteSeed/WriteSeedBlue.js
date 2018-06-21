@@ -30,17 +30,17 @@ class WriteSeedBlue extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.blue.step1'),
+        desc: t('onboarding:writeSeed.initialize.blue.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.blue.step2'),
+        desc: t('onboarding:writeSeed.initialize.blue.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.blue.step3'),
+        desc: t('onboarding:writeSeed.initialize.blue.step3'),
       },
     ]
     const disclaimerNotes = [
@@ -69,8 +69,8 @@ class WriteSeedBlue extends PureComponent<Props, *> {
     return (
       <Fragment>
         <Box mb={3}>
-          <Title>{t('onboarding:writeSeed.title')}</Title>
-          <Description>{t('onboarding:writeSeed.desc')}</Description>
+          <Title>{t('onboarding:writeSeed.initialize.title')}</Title>
+          <Description>{t('onboarding:writeSeed.initialize.desc')}</Description>
         </Box>
         <Box align="center">
           <Inner style={{ width: 760 }}>

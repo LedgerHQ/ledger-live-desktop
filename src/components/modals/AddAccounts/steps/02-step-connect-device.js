@@ -20,11 +20,11 @@ function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) 
         <CurrencyCircleIcon mb={3} size={40} currency={currency} />
         <Box ff="Open Sans" fontSize={4} color="dark" textAlign="center" style={{ width: 370 }}>
           <Trans i18nKey="app:addAccounts.connectDevice.desc" parent="div">
-            {`You're about to import your `}
+            {`Follow the steps below to add `}
             <strong style={{ fontWeight: 'bold' }}>{`${currency.name} (${
               currency.ticker
             })`}</strong>
-            {` account(s) from your Ledger device. Please follow the steps below:`}
+            {` accounts from your Ledger device.`}
           </Trans>
         </Box>
       </Box>

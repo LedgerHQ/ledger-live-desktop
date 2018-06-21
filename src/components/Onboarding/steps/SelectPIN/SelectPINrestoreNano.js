@@ -6,7 +6,7 @@ import { colors } from 'styles/theme'
 import Box from 'components/base/Box'
 
 import type { T } from 'types/common'
-import IconLedgerBlueSelectPIN from 'icons/illustrations/LedgerBlueSelectPIN'
+import IconLedgerNanoSelectPIN from 'icons/illustrations/LedgerNanoSelectPIN'
 
 import IconChevronRight from 'icons/ChevronRight'
 
@@ -16,28 +16,32 @@ type Props = {
   t: T,
 }
 
-class SelectPIN extends PureComponent<Props, *> {
+class SelectPINrestoreNano extends PureComponent<Props, *> {
   render() {
     const { t } = this.props
 
-    const stepsLedgerBlue = [
+    const stepsLedgerNano = [
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.initialize.instructions.blue.step1'),
+        desc: t('onboarding:selectPIN.restore.instructions.nano.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.initialize.instructions.blue.step2'),
+        desc: t('onboarding:selectPIN.restore.instructions.nano.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.initialize.instructions.blue.step3'),
+        desc: t('onboarding:selectPIN.restore.instructions.nano.step3'),
+      },
+      {
+        key: 'step4',
+        icon: <IconOptionRow>{'4.'}</IconOptionRow>,
+        desc: t('onboarding:selectPIN.restore.instructions.nano.step4'),
       },
     ]
-
     const disclaimerNotes = [
       {
         key: 'note1',
@@ -57,15 +61,11 @@ class SelectPIN extends PureComponent<Props, *> {
     ]
 
     return (
-      <Box align="center">
-        <Inner style={{ width: 550 }}>
-          <Box style={{ width: 180, justifyContent: 'center', alignItems: 'center' }}>
-            <IconLedgerBlueSelectPIN />
-          </Box>
-          <Box>
-            <Box shrink grow flow={4}>
-              {stepsLedgerBlue.map(step => <OptionRow key={step.key} step={step} />)}
-            </Box>
+      <Box align="center" mt={3}>
+        <Inner style={{ width: 700 }}>
+          <IconLedgerNanoSelectPIN />
+          <Box shrink grow flow={4} style={{ marginLeft: 40 }}>
+            {stepsLedgerNano.map(step => <OptionRow key={step.key} step={step} />)}
           </Box>
         </Inner>
         <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />
@@ -74,4 +74,4 @@ class SelectPIN extends PureComponent<Props, *> {
   }
 }
 
-export default translate()(SelectPIN)
+export default translate()(SelectPINrestoreNano)

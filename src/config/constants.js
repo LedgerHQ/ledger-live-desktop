@@ -19,21 +19,21 @@ export const GET_CALLS_RETRY = intFromEnv('GET_CALLS_RETRY', 2)
 
 export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 6)
 export const SYNC_BOOT_DELAY = 2 * 1000
-export const SYNC_ALL_INTERVAL = 60 * 1000
-export const GENUINE_TIMEOUT = intFromEnv('GENUINE_TIMEOUT', 60 * 1000)
+export const SYNC_ALL_INTERVAL = 120 * 1000
+export const GENUINE_TIMEOUT = intFromEnv('GENUINE_TIMEOUT', 120 * 1000)
 export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 30 * 1000)
 
 export const CHECK_APP_INTERVAL_WHEN_INVALID = 600
 export const CHECK_APP_INTERVAL_WHEN_VALID = 1200
 export const CHECK_UPDATE_DELAY = 5e3
 
-export const DEVICE_DISCONNECT_DEBOUNCE = intFromEnv('LEDGER_DEVICE_DISCONNECT_DEBOUNCE', 500)
+export const DEVICE_DISCONNECT_DEBOUNCE = intFromEnv('LEDGER_DEVICE_DISCONNECT_DEBOUNCE', 1000)
 
 // Endpoints...
 
 export const LEDGER_COUNTERVALUES_API = stringFromEnv(
   'LEDGER_COUNTERVALUES_API',
-  'https://ledger-countervalue-poc.herokuapp.com',
+  'https://beta.manager.live.ledger.fr/countervalues',
 )
 export const LEDGER_REST_API_BASE = stringFromEnv(
   'LEDGER_REST_API_BASE',
@@ -66,6 +66,8 @@ export const SKIP_ONBOARDING = boolFromEnv('SKIP_ONBOARDING')
 export const SHOW_LEGACY_NEW_ACCOUNT = boolFromEnv('SHOW_LEGACY_NEW_ACCOUNT')
 export const HIGHLIGHT_I18N = boolFromEnv('HIGHLIGHT_I18N')
 export const DISABLE_ACTIVITY_INDICATORS = boolFromEnv('DISABLE_ACTIVITY_INDICATORS')
+export const EXPERIMENTAL_CENTER_MODAL = boolFromEnv('EXPERIMENTAL_CENTER_MODAL')
+export const EXPERIMENTAL_FIRMWARE_UPDATE = boolFromEnv('EXPERIMENTAL_FIRMWARE_UPDATE')
 
 // Other constants
 

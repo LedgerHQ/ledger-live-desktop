@@ -17,7 +17,7 @@ import type { StepProps } from '../index'
 
 class StepImport extends PureComponent<StepProps> {
   componentDidMount() {
-    this.startScanAccountsDevice()
+    this.props.setState({ scanStatus: 'scanning' })
   }
 
   componentDidUpdate(prevProps: StepProps) {
@@ -72,9 +72,7 @@ class StepImport extends PureComponent<StepProps> {
       // TODO: use the real device
       const devicePath = currentDevice.path
 
-      setState({ scanStatus: 'scanning' })
-
-      this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
+      this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath).subscribe({
         next: account => {
           const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
@@ -192,7 +190,7 @@ class StepImport extends PureComponent<StepProps> {
     })
 
     const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', { currencyName })
-    const hasAlreadyEmptyAccount = scannedAccounts.some(a => a.operations.length === 0)
+    const alreadyEmptyAccount = scannedAccounts.find(a => a.operations.length === 0)
 
     return (
       <Fragment>
@@ -211,8 +209,10 @@ class StepImport extends PureComponent<StepProps> {
           <AccountsList
             title={t('app:addAccounts.createNewAccount.title')}
             emptyText={
-              hasAlreadyEmptyAccount
-                ? t('app:addAccounts.createNewAccount.noOperationOnLastAccount')
+              alreadyEmptyAccount
+                ? t('app:addAccounts.createNewAccount.noOperationOnLastAccount', {
+                    accountName: alreadyEmptyAccount.name,
+                  })
                 : t('app:addAccounts.createNewAccount.noAccountToCreate', { currencyName })
             }
             accounts={creatableAccounts}

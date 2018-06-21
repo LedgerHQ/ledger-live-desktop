@@ -24,22 +24,22 @@ class SelectPINnano extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.instructions.ledgerNano.step1'),
+        desc: t('onboarding:selectPIN.initialize.instructions.nano.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.instructions.ledgerNano.step2'),
+        desc: t('onboarding:selectPIN.initialize.instructions.nano.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.instructions.ledgerNano.step3'),
+        desc: t('onboarding:selectPIN.initialize.instructions.nano.step3'),
       },
       {
         key: 'step4',
         icon: <IconOptionRow>{'4.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.instructions.ledgerNano.step4'),
+        desc: t('onboarding:selectPIN.initialize.instructions.nano.step4'),
       },
     ]
     const disclaimerNotes = [

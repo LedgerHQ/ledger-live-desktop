@@ -14,9 +14,11 @@ const wsURLBuilder = (endpoint: string) => (params?: Object) =>
 // const wsURLBuilderProxy = (endpoint: string) => (params?: Object) =>
 //   `ws://manager.ledger.fr:3501/${endpoint}${params ? `?${qs.stringify(params)}` : ''}`
 
+export const GET_FINAL_FIRMWARE: string = managerUrlbuilder('firmware_final_versions')
 export const GET_DEVICE_VERSION: string = managerUrlbuilder('get_device_version')
 export const APPLICATIONS_BY_DEVICE: string = managerUrlbuilder('get_apps')
 export const GET_CURRENT_FIRMWARE: string = managerUrlbuilder('get_firmware_version')
+export const GET_CURRENT_OSU: string = managerUrlbuilder('get_osu_version')
 export const GET_LATEST_FIRMWARE: string = managerUrlbuilder('get_latest_firmware')
 export const GET_NEXT_MCU: string = managerUrlbuilder('mcu_versions_bootloader')
 

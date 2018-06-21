@@ -1,9 +1,8 @@
 // @flow
-/* eslint-disable react/jsx-no-literals */ // FIXME
+/* eslint-disable react/jsx-no-literals */ // FIXME: remove
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 
-import type { Node } from 'react'
 import type { Device } from 'types/common'
 
 import Workflow from 'components/Workflow'
@@ -23,36 +22,38 @@ type Error = {
   stack: string,
 }
 
-function ManagerPage(): Node {
-  return (
-    <Workflow
-      renderFinalUpdate={(device: Device, deviceInfo: DeviceInfo) => (
-        <p>UPDATE FINAL FIRMARE (TEMPLATE + ACTION WIP) {deviceInfo.final}</p>
-      )}
-      renderMcuUpdate={(device: Device, deviceInfo: DeviceInfo) => (
-        <FlashMcu device={device} deviceInfo={deviceInfo} />
-      )}
-      renderDashboard={(device: Device, deviceInfo: DeviceInfo) => (
-        <Dashboard device={device} deviceInfo={deviceInfo} />
-      )}
-      renderDefault={(
-        device: ?Device,
-        deviceInfo: ?DeviceInfo,
-        isGenuine: ?boolean,
-        errors: {
-          dashboardError: ?Error,
-          genuineError: ?Error,
-        },
-      ) => (
-        <WorkflowWithIcon
-          device={device}
-          deviceInfo={deviceInfo}
-          errors={errors}
-          isGenuine={isGenuine}
-        />
-      )}
-    />
-  )
+class ManagerPage extends PureComponent<*, *> {
+  render() {
+    return (
+      <Workflow
+        renderFinalUpdate={(device: Device, deviceInfo: DeviceInfo) => (
+          <p>UPDATE FINAL FIRMARE (TEMPLATE + ACTION WIP) {deviceInfo.final}</p>
+        )}
+        renderMcuUpdate={(device: Device, deviceInfo: DeviceInfo) => (
+          <FlashMcu device={device} deviceInfo={deviceInfo} />
+        )}
+        renderDashboard={(device: Device, deviceInfo: DeviceInfo) => (
+          <Dashboard device={device} deviceInfo={deviceInfo} />
+        )}
+        renderDefault={(
+          device: ?Device,
+          deviceInfo: ?DeviceInfo,
+          isGenuine: ?boolean,
+          errors: {
+            dashboardError: ?Error,
+            genuineError: ?Error,
+          },
+        ) => (
+          <WorkflowWithIcon
+            device={device}
+            deviceInfo={deviceInfo}
+            errors={errors}
+            isGenuine={isGenuine}
+          />
+        )}
+      />
+    )
+  }
 }
 
 export default ManagerPage

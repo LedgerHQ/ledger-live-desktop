@@ -239,113 +239,114 @@ const getServerInfo = (map => endpointConfig => {
 })({})
 
 const RippleJSBridge: WalletBridge<Transaction> = {
-  scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
-    let finished = false
-    const unsubscribe = () => {
-      finished = true
-    }
-
-    async function main() {
-      const api = apiForEndpointConfig()
-      try {
-        await api.connect()
-        const serverInfo = await getServerInfo()
-        const ledgers = serverInfo.completeLedgers.split('-')
-        const minLedgerVersion = Number(ledgers[0])
-        const maxLedgerVersion = Number(ledgers[1])
-
-        const derivations = getDerivations(currency)
-        for (const derivation of derivations) {
-          const legacy = derivation !== derivations[derivations.length - 1]
-          for (let index = 0; index < 255; index++) {
-            const freshAddressPath = derivation({ currency, x: index, segwit: false })
-            const { address, publicKey } = await await getAddress
-              .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
-              .toPromise()
-            if (finished) return
-
-            const accountId = `ripplejs:${currency.id}:${address}:${publicKey}`
-
-            let info
-            try {
-              info = await api.getAccountInfo(address)
-            } catch (e) {
-              if (e.message !== 'actNotFound') {
-                throw e
-              }
-            }
-
-            // fresh address is address. ripple never changes.
-            const freshAddress = address
-
-            if (!info) {
-              // account does not exist in Ripple server
-              // we are generating a new account locally
-              if (!legacy) {
-                next({
-                  id: accountId,
-                  xpub: '',
-                  name: getNewAccountPlaceholderName(currency, index),
-                  freshAddress,
-                  freshAddressPath,
-                  balance: 0,
-                  blockHeight: maxLedgerVersion,
-                  index,
-                  currency,
-                  operations: [],
-                  pendingOperations: [],
-                  unit: currency.units[0],
-                  archived: false,
-                  lastSyncDate: new Date(),
-                })
-              }
-              break
-            }
-
-            if (finished) return
-            const balance = parseAPIValue(info.xrpBalance)
-            invariant(
-              !isNaN(balance) && isFinite(balance),
-              `Ripple: invalid balance=${balance} for address ${address}`,
-            )
-
-            const transactions = await api.getTransactions(address, {
-              minLedgerVersion,
-              maxLedgerVersion,
-            })
-            if (finished) return
-
-            const account: $Exact<Account> = {
-              id: accountId,
-              xpub: '',
-              name: getAccountPlaceholderName(currency, index, legacy),
-              freshAddress,
-              freshAddressPath,
-              balance,
-              blockHeight: maxLedgerVersion,
-              index,
-              currency,
-              operations: [],
-              pendingOperations: [],
-              unit: currency.units[0],
-              lastSyncDate: new Date(),
-            }
-            account.operations = transactions.map(txToOperation(account))
-            next(account)
-          }
-        }
-        complete()
-      } catch (e) {
-        error(e)
-      } finally {
-        api.disconnect()
+  scanAccountsOnDevice: (currency, deviceId) =>
+    Observable.create(o => {
+      let finished = false
+      const unsubscribe = () => {
+        finished = true
       }
-    }
 
-    main()
+      async function main() {
+        const api = apiForEndpointConfig()
+        try {
+          await api.connect()
+          const serverInfo = await getServerInfo()
+          const ledgers = serverInfo.completeLedgers.split('-')
+          const minLedgerVersion = Number(ledgers[0])
+          const maxLedgerVersion = Number(ledgers[1])
 
-    return { unsubscribe }
-  },
+          const derivations = getDerivations(currency)
+          for (const derivation of derivations) {
+            const legacy = derivation !== derivations[derivations.length - 1]
+            for (let index = 0; index < 255; index++) {
+              const freshAddressPath = derivation({ currency, x: index, segwit: false })
+              const { address, publicKey } = await await getAddress
+                .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
+                .toPromise()
+              if (finished) return
+
+              const accountId = `ripplejs:${currency.id}:${address}:${publicKey}`
+
+              let info
+              try {
+                info = await api.getAccountInfo(address)
+              } catch (e) {
+                if (e.message !== 'actNotFound') {
+                  throw e
+                }
+              }
+
+              // fresh address is address. ripple never changes.
+              const freshAddress = address
+
+              if (!info) {
+                // account does not exist in Ripple server
+                // we are generating a new account locally
+                if (!legacy) {
+                  o.next({
+                    id: accountId,
+                    xpub: '',
+                    name: getNewAccountPlaceholderName(currency, index),
+                    freshAddress,
+                    freshAddressPath,
+                    balance: 0,
+                    blockHeight: maxLedgerVersion,
+                    index,
+                    currency,
+                    operations: [],
+                    pendingOperations: [],
+                    unit: currency.units[0],
+                    archived: false,
+                    lastSyncDate: new Date(),
+                  })
+                }
+                break
+              }
+
+              if (finished) return
+              const balance = parseAPIValue(info.xrpBalance)
+              invariant(
+                !isNaN(balance) && isFinite(balance),
+                `Ripple: invalid balance=${balance} for address ${address}`,
+              )
+
+              const transactions = await api.getTransactions(address, {
+                minLedgerVersion,
+                maxLedgerVersion,
+              })
+              if (finished) return
+
+              const account: $Exact<Account> = {
+                id: accountId,
+                xpub: '',
+                name: getAccountPlaceholderName(currency, index, legacy),
+                freshAddress,
+                freshAddressPath,
+                balance,
+                blockHeight: maxLedgerVersion,
+                index,
+                currency,
+                operations: [],
+                pendingOperations: [],
+                unit: currency.units[0],
+                lastSyncDate: new Date(),
+              }
+              account.operations = transactions.map(txToOperation(account))
+              o.next(account)
+            }
+          }
+          o.complete()
+        } catch (e) {
+          o.error(e)
+        } finally {
+          api.disconnect()
+        }
+      }
+
+      main()
+
+      return unsubscribe
+    }),
 
   synchronize: ({ endpointConfig, freshAddress, blockHeight }) =>
     Observable.create(o => {

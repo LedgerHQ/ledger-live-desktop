@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import Mortal from 'react-mortal'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
+import { EXPERIMENTAL_CENTER_MODAL } from 'config/constants'
 
 import { rgba } from 'styles/helpers'
 import { radii } from 'styles/theme'
@@ -133,6 +134,18 @@ function stopPropagation(e) {
   e.stopPropagation()
 }
 
+const wrap = EXPERIMENTAL_CENTER_MODAL
+  ? children => (
+      <Box alignItems="center" justifyContent="center" grow>
+        {children}
+      </Box>
+    )
+  : children => (
+      <GrowScroll alignItems="center" full pt={8}>
+        {children}
+      </GrowScroll>
+    )
+
 export class Modal extends Component<Props> {
   static defaultProps = {
     isOpened: false,
@@ -198,7 +211,7 @@ export class Modal extends Component<Props> {
           <Container isVisible={isVisible} onClick={preventBackdropClick ? undefined : onClose}>
             <Backdrop op={m.opacity} />
             <NonClickableHeadArea onClick={stopPropagation} />
-            <GrowScroll alignItems="center" full py={8}>
+            {wrap(
               <Wrapper
                 tabIndex={-1}
                 op={m.opacity}
@@ -208,8 +221,8 @@ export class Modal extends Component<Props> {
                 width={width}
               >
                 <Pure isAnimated={isAnimated} render={render} data={data} onClose={onClose} />
-              </Wrapper>
-            </GrowScroll>
+              </Wrapper>,
+            )}
           </Container>
         )}
       </Mortal>

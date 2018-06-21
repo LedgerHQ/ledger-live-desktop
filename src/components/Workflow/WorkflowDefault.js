@@ -111,8 +111,7 @@ const WorkflowDefault = ({ device, deviceInfo, errors, isGenuine }: Props) => (
         </StepIcon>
         <Box grow shrink>
           <Trans i18nKey="app:deviceConnect.step1.connect" parent="div">
-            Connect your <strong>Ledger device</strong> to your computer and enter your{' '}
-            <strong>PIN code</strong> on your device
+            Connect and unlock your <strong>Ledger device</strong> <strong />
           </Trans>
         </Box>
         <StepCheck checked={!!device} />
@@ -128,7 +127,7 @@ const WorkflowDefault = ({ device, deviceInfo, errors, isGenuine }: Props) => (
         </StepIcon>
         <Box grow shrink>
           <Trans i18nKey="deviceConnect:dashboard.open" parent="div">
-            {'Go to the '}
+            {'Navigate to the '}
             <strong>{'dashboard'}</strong>
             {' on your device'}
           </Trans>
@@ -155,8 +154,8 @@ const WorkflowDefault = ({ device, deviceInfo, errors, isGenuine }: Props) => (
         </StepIcon>
         <Box grow shrink>
           <Trans i18nKey="deviceConnect:stepGenuine.open" parent="div">
-            {'Confirm '}
-            <strong>{'authentication'}</strong>
+            {'Allow the '}
+            <strong>{'Ledger Manager'}</strong>
             {' on your device'}
           </Trans>
         </Box>

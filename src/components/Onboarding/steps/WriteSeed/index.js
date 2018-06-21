@@ -19,7 +19,7 @@ export default (props: StepProps) => {
     <FixedTopContainer>
       <Box grow alignItems="center">
         {onboarding.flowType === 'restoreDevice' ? (
-          <WriteSeedRestore />
+          <WriteSeedRestore onboarding={onboarding} />
         ) : onboarding.isLedgerNano ? (
           <WriteSeedNano />
         ) : (

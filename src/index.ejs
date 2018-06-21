@@ -33,8 +33,6 @@
         width: 80px;
         animation: logo 4s infinite 0.5s;
         transform-origin: 50% 50%;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
       }
 
       @keyframes logo {
@@ -42,16 +40,16 @@
           transform: rotate(0deg);
         }
         20% {
-          transform: rotate(360deg);
+          transform: rotate(-360deg);
         }
         30% {
-          transform: rotate(360deg);
+          transform: rotate(-360deg);
         }
         50% {
-          transform: rotate(720deg);
+          transform: rotate(-720deg);
         }
         60% {
-          transform: rotate(720deg);
+          transform: rotate(-720deg);
         }
         100% {
           transform: rotate(0deg);
@@ -94,12 +92,9 @@ const initApp = (options = {}) => {
 }
 
 if (name === 'MainWindow') {
-  setTimeout(() => {
-    logoEl.style.opacity = 1
-  }, 50)
   preloadEl.style.display = 'flex'
   const startTime = Date.now()
-  const PRELOAD_WAIT_TIME_MIN = 2000
+  const PRELOAD_WAIT_TIME_MIN = 3000
   window.onAppReady = () => {
     const delay = Math.max(0, PRELOAD_WAIT_TIME_MIN - (Date.now() - startTime))
     setTimeout(initApp, delay)

@@ -16,7 +16,7 @@ type Props = {
   t: T,
 }
 
-class SelectPIN extends PureComponent<Props, *> {
+class SelectPINrestoreBlue extends PureComponent<Props, *> {
   render() {
     const { t } = this.props
 
@@ -24,17 +24,17 @@ class SelectPIN extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.initialize.instructions.blue.step1'),
+        desc: t('onboarding:selectPIN.restore.instructions.blue.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.initialize.instructions.blue.step2'),
+        desc: t('onboarding:selectPIN.restore.instructions.blue.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.initialize.instructions.blue.step3'),
+        desc: t('onboarding:selectPIN.restore.instructions.blue.step3'),
       },
     ]
 
@@ -74,4 +74,4 @@ class SelectPIN extends PureComponent<Props, *> {
   }
 }
 
-export default translate()(SelectPIN)
+export default translate()(SelectPINrestoreBlue)

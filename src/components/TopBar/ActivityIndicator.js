@@ -14,6 +14,8 @@ import { BridgeSyncConsumer } from 'bridge/BridgeSyncContext'
 import CounterValues from 'helpers/countervalues'
 
 import { Rotating } from 'components/base/Spinner'
+import Tooltip from 'components/base/Tooltip'
+import TranslatedError from 'components/TranslatedError'
 import Box from 'components/base/Box'
 import IconRefresh from 'icons/Refresh'
 import IconExclamationCircle from 'icons/ExclamationCircle'
@@ -28,6 +30,7 @@ type Props = {
   // FIXME: eslint should see that it is used in static method
   isGlobalSyncStatePending: boolean, // eslint-disable-line react/no-unused-prop-types
 
+  error: ?Error,
   isPending: boolean,
   isError: boolean,
   t: T,
@@ -75,12 +78,12 @@ class ActivityIndicatorInner extends PureComponent<Props, State> {
   }
 
   render() {
-    const { isPending, isError, t } = this.props
+    const { isPending, isError, error, t } = this.props
     const { hasClicked, isFirstSync } = this.state
     const isDisabled = isError || (isPending && (isFirstSync || hasClicked))
     const isRotating = isPending && (hasClicked || isFirstSync)
 
-    return (
+    const content = (
       <ItemContainer disabled={isDisabled} onClick={isDisabled ? undefined : this.handleRefresh}>
         <Rotating
           size={16}
@@ -123,6 +126,23 @@ class ActivityIndicatorInner extends PureComponent<Props, State> {
         </Box>
       </ItemContainer>
     )
+
+    if (error) {
+      return (
+        <Tooltip
+          tooltipBg="alertRed"
+          render={() => (
+            <Box fontSize={4} p={2} style={{ maxWidth: 250 }}>
+              <TranslatedError error={error} />
+            </Box>
+          )}
+        >
+          {content}
+        </Tooltip>
+      )
+    }
+
+    return content
   }
 }
 
@@ -132,13 +152,14 @@ const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState
       <CounterValues.PollingConsumer>
         {cvPolling => {
           const isPending = cvPolling.pending || globalSyncState.pending
-          const isError = cvPolling.error || globalSyncState.error
+          const isError = !isPending && (cvPolling.error || globalSyncState.error)
           return (
             <ActivityIndicatorInner
               t={t}
               isPending={isPending}
               isGlobalSyncStatePending={globalSyncState.pending}
-              isError={!!isError && !isPending}
+              isError={!!isError}
+              error={isError ? globalSyncState.error : null}
               cvPoll={cvPolling.poll}
               setSyncBehavior={setSyncBehavior}
             />

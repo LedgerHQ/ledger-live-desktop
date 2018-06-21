@@ -6,6 +6,18 @@ import { BASE_SOCKET_URL_SECURE } from 'config/constants'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { LedgerScriptParams } from 'helpers/common'
+import createCustomErrorClass from '../createCustomErrorClass'
+
+const CannotUninstall = createCustomErrorClass('CannotUninstall')
+
+function remapError(promise) {
+  return promise.catch((e: Error) => {
+    if (e.message.endsWith('6a83')) {
+      throw new CannotUninstall()
+    }
+    throw e
+  })
+}
 
 /**
  * Install an app on the device
@@ -22,5 +34,5 @@ export default async function uninstallApp(
     firmwareKey: app.delete_key,
   }
   const url = `${BASE_SOCKET_URL_SECURE}/install?${qs.stringify(params)}`
-  return createDeviceSocket(transport, url).toPromise()
+  return remapError(createDeviceSocket(transport, url).toPromise())
 }
