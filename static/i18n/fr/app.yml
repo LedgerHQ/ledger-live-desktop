@@ -40,7 +40,7 @@ common:
     lostPassword: I lost my password
   sync:
     syncing: Synchronizing...
-    upToDate: Up to date
+    upToDate: Live
     error: Synchronization error
     refresh: Refresh
     ago: Synced {{time}}
@@ -72,9 +72,9 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No funds yet?
-    desc: Receive funds in this account by using your Ledger device with the [cryptocurrency] app installed.
+    desc: Make sure the [cryptocurrency] app is installed to receive funds.
     buttons:
-      receiveFunds: Receive Funds
+      receiveFunds: Receive funds
   settings:
     title: Edit account
     advancedLogs: Advanced logs
@@ -91,6 +91,9 @@ account:
       error: Invalid endpoint
 dashboard:
   title: Portfolio
+  emptyAccountTile:
+    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    createAccount: Create Account
   accounts:
     title: Accounts ({{count}})
   greeting:
@@ -108,10 +111,10 @@ dashboard:
 currentAddress:
   title: Current address
   for: Address for <1><0>{{accountName}}</0></1>
-  message: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit velit egestas leo tincidunt
+  message: Your receive address has not been confirmed on your Ledger device. Verify the address for optimal security.
 deviceConnect:
   step1:
-    choose: "We detected {{count}} devices connected, please select one:"
+    choose: "We detected {{count}} connected devices, please select one:"
     connect: Connect and unlock your <1>Ledger device</1>
     dashboard: test
 emptyState:
@@ -146,11 +149,11 @@ addAccounts:
   editName: Edit name
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
-  noAccountToImport: No {{currencyName}} account was found.
-  success: Accounts have been added to your portfolio.
+  noAccountToImport: All {{currencyName}} accounts found are already in your portfolio.
+  success: Account successfully added to your portfolio.
   createNewAccount:
     title: Create new account
-    noOperationOnLastAccount: Receive funds on your previous account before creating a new one.
+    noOperationOnLastAccount: 'You have to receive funds on {{accountName}} before you can create a new account.'
     noAccountToCreate: No {{currencyName}} account was found to create.
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
@@ -185,21 +188,21 @@ manager:
     installSuccess: '{{app}} app successfully installed'
     uninstallSuccess: '{{app}} app successfully uninstalled'
     alreadyInstalled: '{{app}} app is already installed'
-    help: To update an app, you have to uninstall the app and re install it.
+    help: Remove and reinstall to update apps
   firmware:
-    installed: 'Firmware {{version}}'
+    installed: 'Firmware version {{version}}'
     update: Update firmware
     updateTitle: Firmware update
     continue: Continue update
-    latest: 'A new firmware {{version}} is available'
+    latest: 'Firmware version {{version}} is available.'
     disclaimerTitle: 'You are about to install the latest <1><0>firmware {{version}}</0></1>'
     disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
     disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
   title: Manager
-  subtitle: Get all your apps here
+  subtitle: Install apps or update your device.
   device:
     title: Connect your device
-    desc: Follow the steps below to connect your device
+    desc: Follow the steps below to use the Manager
     cta: Connect my device
   errors:
     noDevice: No device is connected (TEMPLATE NEEDED)
@@ -213,24 +216,24 @@ receive:
       label: Account
     connectDevice:
       title: Connect device
-      withoutDevice: I don't have my device
+      withoutDevice: Proceed without device
     confirmAddress:
       title: Confirm address
       action: Confirm address on device
       text: To receive funds, confirm the address on your device.
-      support: Contact Support
+      support: Ledger Support
       error:
-        title: Houston, we have a problem!
-        text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non nibh diam. In eget ipsum arcu donec finibus
+        title: Receive address rejected
+        text: Please try again or request Ledger Support assistance when in doubt.
     receiveFunds:
-      title: Receive Funds
-      label: Amount (Optional)
+      title: Receive funds
+      label: Amount (optional)
 send:
   title: Send funds
-  totalSpent: Total spent
+  totalSpent: Total
   steps:
     amount:
-      title: Informations
+      title: Create payment
       selectAccountDebit: Select an account to debit
       recipientAddress: Recipient address
       amount: Amount
@@ -242,25 +245,24 @@ send:
       rippleTag: Tag
       ethereumGasLimit: Gas limit
       unitPerByte: '{{unit}} per byte'
-      feePerByte: Fee per byte
+      feePerByte: Fees per byte
     connectDevice:
       title: Connect device
     verification:
       title: Verification
       warning: |
-        You are about to validate a transaction.
-        Be careful, we strongly recommend you to verify that the informations on your Ledger device are correct.
-      body: Once you have checked everything is ok, you can validate securely the transaction on your device.
+        Carefully verify the transaction details on your device. Press the left button on your device to cancel.
+      body: Press the right button to confirm the transaction.
     confirmation:
       title: Confirmation
       success:
-        title: Transaction successfully broadcasted
+        title: Transaction sent
         text: |
-          with the following transaction id:
+          The transaction has been signed and sent to the network. Your account balance will update once the blockchain has confirmed the transaction. It has the following Transaction ID:
         cta: View operation details
       error:
-        title: Transaction error
-        cta: Retry operation
+        title: Transaction canceled
+        cta: Retry
       pending:
         title: Broadcasting transaction...
 releaseNotes:
@@ -286,13 +288,13 @@ settings:
     stock: Regional market indicator
     stockDesc: Choose Western to display an increase in market value in blue. Choose Eastern to display an increase in market value in red.
   currencies:
-    desc: Select a cryptocurrency to edit its settings
+    desc: Select a cryptocurrency to edit its settings.
     exchange: Rate provider ({{ticker}})
     exchangeDesc: Choose the provider of the base currency exchange rates.
     confirmationsToSpend: Number of confirmations required to spend
-    confirmationsToSpendDesc: Select the number of confirmations required for your funds to be spendable.
+    confirmationsToSpendDesc: Set the number of confirmations required for your funds to be spendable.
     confirmationsNb: Number of confirmations
-    confirmationsNbDesc: Select the number of blocks a transaction needs to be included in to consider it as confirmed.
+    confirmationsNbDesc: Set the number of blocks a transaction needs to be included in to consider it as confirmed.
     transactionsFees: Default transaction fees
     transactionsFeesDesc: Select your default transaction fees. The higher the fee, the quicker the transaction will be processed.
     explorer: Blockchain explorer
