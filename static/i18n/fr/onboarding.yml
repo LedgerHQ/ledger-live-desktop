@@ -101,7 +101,7 @@ genuineCheck:
   step2:
     title: Did you save your recovery phrase by yourself?
   step3:
-    title: Check if your Ledger device is genuine
+    title: Do you have a genuine Ledger device?
   isGenuinePassed: Your device is genuine
   buttons:
     genuineCheck: Genuine check
@@ -119,7 +119,7 @@ setPassword:
   disclaimer:
     note1: Make sure to remember your password. Do not share it.
     note2: Losing your password requires resetting Ledger Live and re-adding accounts.
-    note3: Resetting Ledger Live does not affect your crypto-assets.
+    note3: Resetting Ledger Live does not affect your crypto assets.
     password: Password
     confirmPassword: Confirm password
     skipThisStep: Skip this step
@@ -128,12 +128,12 @@ analytics:
   desc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
   shareAnalytics:
     title: Share usage data
-    desc: Enable analytics of anonymous data to help Ledger improve its user's experience. This includes the operating system, language, firmware versions and the number of added accounts.
+    desc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
   sentryLogs:
     title: Report bugs
     desc: Automatically send bug reports to help Ledger developers diagnose issues and improve Ledger Live performance.
 finish:
-  title: 'Ready for launch!'
-  desc: The value of crypto assets can go up or down. Balances shown in your portfolio may involve double conversions and are for indicative purposes only!
+  title: Welcome to Ledger Live
+  desc: The unified crypto portfolio, backed by the security of your Ledger device.
   openAppButton: Launch
-  followUsLabel:
+  followUsLabel: Follow us
