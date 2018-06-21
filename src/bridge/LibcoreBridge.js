@@ -79,14 +79,13 @@ const getFees = async (a, transaction) => {
 }
 
 const LibcoreBridge: WalletBridge<Transaction> = {
-  scanAccountsOnDevice(currency, devicePath, observer) {
+  scanAccountsOnDevice(currency, devicePath) {
     return libcoreScanAccounts
       .send({
         devicePath,
         currencyId: currency.id,
       })
       .pipe(map(decodeAccount))
-      .subscribe(observer)
   },
 
   synchronize: account =>

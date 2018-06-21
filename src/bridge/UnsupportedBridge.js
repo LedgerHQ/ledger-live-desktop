@@ -10,10 +10,10 @@ const UnsupportedBridge: WalletBridge<*> = {
       o.error(genericError)
     }),
 
-  scanAccountsOnDevice(currency, deviceId, { error }) {
-    Promise.resolve(genericError).then(error)
-    return { unsubscribe() {} }
-  },
+  scanAccountsOnDevice: () =>
+    Observable.create(o => {
+      o.error(genericError)
+    }),
 
   pullMoreOperations: () => Promise.reject(genericError),
 
