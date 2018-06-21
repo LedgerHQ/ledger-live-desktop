@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { i } from 'helpers/staticPath'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 
 import { openModal } from 'reducers/modals'
 import type { T } from 'types/common'
@@ -13,6 +13,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import { MODAL_RECEIVE } from 'config/constants'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import { Title, Description } from 'components/DashboardPage/EmptyState'
 import IconReceive from 'icons/Receive'
@@ -30,7 +31,6 @@ type Props = {
 class EmptyStateAccount extends PureComponent<Props, *> {
   render() {
     const { t, account, openModal } = this.props
-
     return (
       <Box mt={7} alignItems="center">
         <img
@@ -41,7 +41,15 @@ class EmptyStateAccount extends PureComponent<Props, *> {
         />
         <Box mt={5} alignItems="center">
           <Title>{t('app:account.emptyState.title')}</Title>
-          <Description>{t('app:account.emptyState.desc')}</Description>
+          <Description>
+            <Trans i18nKey="app:account.emptyState.desc">
+              Make sure the
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {account.currency.name}
+              </Text>
+              app is installed to receive funds.
+            </Trans>
+          </Description>
           <Button mt={3} padded primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
             <Box horizontal flow={1} alignItems="center">
               <IconReceive size={12} />
