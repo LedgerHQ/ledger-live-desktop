@@ -53,8 +53,9 @@ type Props = {
 
 type State = {
   status: Status,
-  error: string | null,
-  appsList: LedgerScriptParams[] | Array<*>,
+  error: ?Error,
+  appsList: LedgerScriptParams[],
+  appsLoaded: boolean,
   app: string,
   mode: Mode,
 }
@@ -64,6 +65,7 @@ class AppsList extends PureComponent<Props, State> {
     status: 'loading',
     error: null,
     appsList: [],
+    appsLoaded: false,
     app: '',
     mode: 'home',
   }
@@ -84,7 +86,7 @@ class AppsList extends PureComponent<Props, State> {
       const appsList = CACHED_APPS || (await listApps.send({ targetId, version }).toPromise())
       CACHED_APPS = appsList
       if (!this._unmounted) {
-        this.setState({ appsList, status: 'idle' })
+        this.setState({ appsList, status: 'idle', appsLoaded: true })
       }
     } catch (err) {
       this.setState({ status: 'error', error: err.message })
@@ -100,9 +102,9 @@ class AppsList extends PureComponent<Props, State> {
       } = this.props
       const data = { app, devicePath, targetId }
       await installApp.send(data).toPromise()
-      this.setState({ status: 'success', app: '' })
+      this.setState({ status: 'success' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message, app: '', mode: 'home' })
+      this.setState({ status: 'error', error: err, mode: 'home' })
     }
   }
 
@@ -126,7 +128,6 @@ class AppsList extends PureComponent<Props, State> {
   renderModal = () => {
     const { t } = this.props
     const { app, status, error, mode } = this.state
-
     return (
       <Modal
         isOpened={status !== 'idle' && status !== 'loading'}
@@ -175,8 +176,8 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   renderList() {
-    const { appsList, status } = this.state
-    return status === 'idle' ? (
+    const { appsList, appsLoaded } = this.state
+    return appsLoaded ? (
       <Box>
         <AppSearchBar list={appsList}>
           {items => (
