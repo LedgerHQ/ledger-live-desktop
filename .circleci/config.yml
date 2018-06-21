@@ -12,9 +12,18 @@ jobs:
         - gh-pages
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
-          name: Dependencies
-          command: SKIP_REBUILD=1 yarn
+          name: Install Dependencies
+          command: bash scripts/install-ci-deps.sh
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: v1-yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
       - run:
           name: Lint
           command: yarn lint
