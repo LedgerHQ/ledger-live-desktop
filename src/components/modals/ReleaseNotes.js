@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
-import axios from 'axios'
+import network from 'api/network'
 
 import { MODAL_RELEASES_NOTES } from 'config/constants'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
@@ -160,8 +160,10 @@ class ReleaseNotes extends PureComponent<Props, State> {
     if (!this.loading) {
       this.loading = true
 
-      axios
-        .get(`https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`)
+      network({
+        method: 'GET',
+        url: `https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`,
+      })
         .then(response => {
           const { body } = response.data
 
