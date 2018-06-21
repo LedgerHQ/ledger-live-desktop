@@ -20,7 +20,7 @@ export const Title = styled(Box).attrs({
 export const StepContainerInner = styled(GrowScroll).attrs({ pb: 6, align: 'center' })``
 
 export const Description = styled(Box).attrs({
-  ff: 'Museo Sans|Light',
+  ff: 'Museo Sans|Regular',
   fontSize: 5,
   lineHeight: 1.5,
   textAlign: 'center',
@@ -28,7 +28,6 @@ export const Description = styled(Box).attrs({
 })`
   margin: 10px auto 25px;
   max-width: 600px;
-  font-weight: 500;
 `
 
 export const Inner = styled(Box).attrs({

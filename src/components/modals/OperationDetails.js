@@ -109,7 +109,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
     <ModalBody onClose={onClose}>
       <ModalTitle>{t('app:operationDetails.title')}</ModalTitle>
       <ModalContent style={{ height: 500 }} mx={-5} pb={0}>
-        <GrowScroll px={5} pb={8}>
+        <GrowScroll px={5} pt={1} pb={8}>
           <Box flow={3}>
             <Box alignItems="center" mt={1}>
               <ConfirmationCheck
