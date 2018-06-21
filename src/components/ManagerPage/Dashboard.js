@@ -2,6 +2,7 @@
 import React from 'react'
 import { translate } from 'react-i18next'
 
+import { EXPERIMENTAL_FIRMWARE_UPDATE } from 'config/constants'
 import type { T, Device } from 'types/common'
 
 import Box from 'components/base/Box'
@@ -34,13 +35,15 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
       </Text>
     </Box>
     <Box mt={5}>
-      <FirmwareUpdate
-        infos={{
-          targetId: deviceInfo.targetId,
-          version: deviceInfo.version,
-        }}
-        device={device}
-      />
+      {EXPERIMENTAL_FIRMWARE_UPDATE ? (
+        <FirmwareUpdate
+          infos={{
+            targetId: deviceInfo.targetId,
+            version: deviceInfo.version,
+          }}
+          device={device}
+        />
+      ) : null}
     </Box>
     <Box mt={5}>
       <AppsList device={device} targetId={deviceInfo.targetId} version={deviceInfo.version} />

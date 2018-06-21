@@ -1,5 +1,5 @@
 // @flow
-import axios from 'axios'
+import network from 'api/network'
 
 import { GET_NEXT_MCU } from 'helpers/urls'
 import createCustomErrorClass from 'helpers/createCustomErrorClass'
@@ -8,8 +8,12 @@ const LatestMCUInstalledError = createCustomErrorClass('LatestMCUInstalledError'
 
 export default async (bootloaderVersion: string): Promise<*> => {
   try {
-    const { data } = await axios.post(GET_NEXT_MCU, {
-      bootloader_version: bootloaderVersion,
+    const { data } = await network({
+      method: 'POST',
+      url: GET_NEXT_MCU,
+      data: {
+        bootloader_version: bootloaderVersion,
+      },
     })
 
     // FIXME: nextVersion will not be able to "default" when Error

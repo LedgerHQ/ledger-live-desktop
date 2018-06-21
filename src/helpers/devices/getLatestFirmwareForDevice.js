@@ -1,5 +1,5 @@
 // @flow
-import axios from 'axios'
+import network from 'api/network'
 import { GET_LATEST_FIRMWARE } from 'helpers/urls'
 
 import getCurrentFirmware from './getCurrentFirmware'
@@ -21,10 +21,14 @@ export default async (input: Input) => {
     const seFirmwareVersion = await getCurrentFirmware({ version, deviceId: deviceVersion.id })
 
     // Fetch next possible firmware
-    const { data } = await axios.post(GET_LATEST_FIRMWARE, {
-      current_se_firmware_final_version: seFirmwareVersion.id,
-      device_version: deviceVersion.id,
-      provider,
+    const { data } = await network({
+      method: 'POST',
+      url: GET_LATEST_FIRMWARE,
+      data: {
+        current_se_firmware_final_version: seFirmwareVersion.id,
+        device_version: deviceVersion.id,
+        provider,
+      },
     })
 
     if (data.result === 'null') {

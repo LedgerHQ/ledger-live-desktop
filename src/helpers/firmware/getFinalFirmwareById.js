@@ -1,15 +1,8 @@
 // @flow
-import axios from 'axios'
-
+import network from 'api/network'
 import { GET_FINAL_FIRMWARE } from 'helpers/urls'
 
 export default async (id: number) => {
-  try {
-    const { data } = await axios.get(`${GET_FINAL_FIRMWARE}/${id}`)
-    return data
-  } catch (err) {
-    const error = Error(err.message)
-    error.stack = err.stack
-    throw err
-  }
+  const { data } = await network({ method: 'GET', url: `${GET_FINAL_FIRMWARE}/${id}` })
+  return data
 }

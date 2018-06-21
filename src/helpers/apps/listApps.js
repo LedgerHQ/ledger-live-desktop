@@ -1,5 +1,5 @@
 // @flow
-import axios from 'axios'
+import network from 'api/network'
 
 import { APPLICATIONS_BY_DEVICE } from 'helpers/urls'
 import getDeviceVersion from 'helpers/devices/getDeviceVersion'
@@ -17,7 +17,7 @@ export default async (targetId: string | number, version: string) => {
     }
     const {
       data: { application_versions },
-    } = await axios.post(APPLICATIONS_BY_DEVICE, params)
+    } = await network({ method: 'POST', url: APPLICATIONS_BY_DEVICE, data: params })
     return application_versions.length > 0 ? application_versions : []
   } catch (err) {
     const error = Error(err.message)
