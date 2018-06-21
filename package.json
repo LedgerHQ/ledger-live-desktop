@@ -7,9 +7,9 @@
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
-    "compile": "bash ./scripts/dist.sh",
+    "compile": "bash ./scripts/compile.sh",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
-    "dist": "yarn compile && electron-builder",
+    "dist": "bash ./scripts/dist.sh",
     "test": "jest",
     "flow": "flow",
     "lint": "eslint src webpack .storybook",

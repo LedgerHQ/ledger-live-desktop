@@ -57,7 +57,7 @@ function REBUILD_ELECTRON_NATIVE_DEPS {
     echo "> Electron native deps are up to date. Skipping"
   else
     echo "> Installing electron native deps"
-    electron-builder install-app-deps
+    DEBUG=electron-builder electron-builder install-app-deps
     SET_HASH 'package.json' $PACKAGE_JSON_HASH
   fi
 }
