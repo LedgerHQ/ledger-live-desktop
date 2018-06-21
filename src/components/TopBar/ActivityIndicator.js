@@ -88,7 +88,7 @@ class ActivityIndicatorInner extends PureComponent<Props, State> {
         <Rotating
           size={16}
           isRotating={isRotating}
-          color={isError ? 'alertRed' : isRotating ? undefined : 'positiveGreen'}
+          color={isError ? 'alertRed' : isRotating ? 'grey' : 'positiveGreen'}
         >
           {isError ? (
             <IconExclamationCircle size={16} />
