@@ -20,15 +20,17 @@ export const TooltipContainer = ({
   children,
   innerRef,
   style,
+  tooltipBg,
 }: {
   children: any,
   innerRef?: Function,
   style?: Object,
+  tooltipBg?: string,
 }) => (
   <div
     ref={innerRef}
     style={{
-      background: colors.dark,
+      background: colors[tooltipBg || 'dark'],
       borderRadius: 4,
       color: 'white',
       fontFamily: 'Open Sans',
@@ -51,6 +53,7 @@ type Props = {
   offset?: Array<number>,
   children: any,
   render: Function,
+  tooltipBg?: string,
 }
 
 class Tooltip extends PureComponent<Props> {
@@ -59,7 +62,7 @@ class Tooltip extends PureComponent<Props> {
   }
 
   componentDidMount() {
-    const { offset } = this.props
+    const { offset, tooltipBg } = this.props
 
     if (this._node && this._template) {
       tippy(this._node, {
@@ -76,7 +79,9 @@ class Tooltip extends PureComponent<Props> {
       if (this._node && this._node._tippy) {
         this._node._tippy.popper.querySelector('.tippy-roundarrow').innerHTML = `
           <svg viewBox="0 0 24 8">
-            <path d="M5 8l5.5-5.6c.8-.8 2-.8 2.8 0L19 8" />
+            <path${
+              tooltipBg ? ` fill="${colors[tooltipBg]}"` : ''
+            } d="M5 8l5.5-5.6c.8-.8 2-.8 2.8 0L19 8" />
           </svg>`
       }
     }
@@ -86,12 +91,14 @@ class Tooltip extends PureComponent<Props> {
   _template = undefined
 
   render() {
-    const { children, render, ...props } = this.props
+    const { children, render, tooltipBg, ...props } = this.props
 
     return (
       <Container innerRef={n => (this._node = n)} {...props}>
         <Template>
-          <TooltipContainer innerRef={n => (this._template = n)}>{render()}</TooltipContainer>
+          <TooltipContainer tooltipBg={tooltipBg} innerRef={n => (this._template = n)}>
+            {render()}
+          </TooltipContainer>
         </Template>
         {children}
       </Container>
