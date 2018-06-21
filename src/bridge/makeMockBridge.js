@@ -75,7 +75,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
         }
       }),
 
-    scanAccountsOnDevice: (currency, deviceId) =>
+    scanAccountsOnDevice: currency =>
       Observable.create(o => {
         let unsubscribed = false
 
