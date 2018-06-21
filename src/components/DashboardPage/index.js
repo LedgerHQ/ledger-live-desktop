@@ -30,12 +30,12 @@ import UpdateNotifier from 'components/UpdateNotifier'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
-import IconEmptyAccountTile from 'icons/illustrations/EmptyAccountTile'
+import { i } from 'helpers/staticPath'
 import PillsDaysCount from 'components/PillsDaysCount'
 import Text from 'components/base/Text'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
-import Button from '../base/Button/index'
+import Button from 'components/base/Button'
 import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 import EmptyState from './EmptyState'
@@ -90,6 +90,7 @@ class DashboardPage extends PureComponent<Props> {
     const { accounts, t, counterValue, selectedTimeRange, openModal } = this.props
     const daysCount = timeRangeDaysByKey[selectedTimeRange]
     const timeFrame = this.handleGreeting()
+    const imagePath = i('empty-account-tile.svg')
     const totalAccounts = accounts.length
     const displayOperationsHelper = (account: Account) => account.operations.length > 0
     const displayOperations = accounts.some(displayOperationsHelper)
@@ -181,12 +182,12 @@ class DashboardPage extends PureComponent<Props> {
                               />
                             ) : (
                               <Wrapper>
-                                <IconEmptyAccountTile />
+                                <img alt="" src={imagePath} />
                                 <Box
                                   ff="Open Sans"
                                   fontSize={3}
                                   color="graphite"
-                                  pb={3}
+                                  pb={2}
                                   textAlign="center"
                                 >
                                   {t('app:dashboard.emptyAccountTile.desc')}
