@@ -17,8 +17,10 @@ NoAddressesFound: 'No accounts found'
 UserRefusedOnDevice: Transaction have been aborted
 WebsocketConnectionError: An error occurred with the socket connection
 WebsocketConnectionFailed: Failed to establish a socket connection
-DeviceSocketFail: Device socket failure
+DeviceSocketFail: 'Device socket failure ({{message}})'
 DeviceSocketNoBulkStatus: Device socket failure (bulk)
 DeviceSocketNoHandler: Device socket failure (handler {{query}})
 LatestMCUInstalledError: The latest MCU is already installed on the Device
 HardResetFail: Hard reset failure
+CannotUninstall: Cannot uninstall app
+CannotInstall: Cannot install app
