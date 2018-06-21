@@ -29,7 +29,7 @@ const Wrapper = styled(Box).attrs({
 const StepNumber = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
-  color: p => (['active', 'valid'].includes(p.status) ? 'white' : 'fog'),
+  color: p => (['active', 'valid', 'error'].includes(p.status) ? 'white' : 'fog'),
   bg: p =>
     ['active', 'valid'].includes(p.status) ? 'wallet' : p.status === 'error' ? 'alertRed' : 'white',
   ff: 'Rubik|Regular',

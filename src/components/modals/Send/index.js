@@ -57,6 +57,7 @@ type Step = {
   canNext: (State<*>) => boolean,
   canPrev: (State<*>) => boolean,
   canClose: (State<*>) => boolean,
+  hasError: (State<*>) => boolean,
   prevStep?: number,
 }
 
@@ -91,6 +92,7 @@ class SendModal extends Component<Props, State<*>> {
           bridge && account && transaction
             ? bridge.isValidTransaction(account, transaction)
             : false,
+        hasError: () => false,
       },
       {
         label: t('app:send.steps.connectDevice.title'),
@@ -99,6 +101,7 @@ class SendModal extends Component<Props, State<*>> {
           deviceSelected !== null && appStatus === 'success',
         prevStep: 0,
         canPrev: () => true,
+        hasError: () => false,
       },
       {
         label: t('app:send.steps.verification.title'),
@@ -106,6 +109,7 @@ class SendModal extends Component<Props, State<*>> {
         canNext: () => true,
         canPrev: ({ error }) => !!error,
         prevStep: 0,
+        hasError: ({ error }) => (error && error.name === 'UserRefusedOnDevice') || false,
       },
       {
         label: t('app:send.steps.confirmation.title'),
@@ -113,6 +117,7 @@ class SendModal extends Component<Props, State<*>> {
         canClose: () => true,
         canPrev: () => true,
         canNext: () => false,
+        hasError: ({ error }) => (error && error.name !== 'UserRefusedOnDevice') || false,
       },
     ]
   }
@@ -273,6 +278,13 @@ class SendModal extends Component<Props, State<*>> {
     const canNext = step.canNext(this.state)
     const canPrev = step.canPrev(this.state)
 
+    const stepsErrors = []
+    this.steps.forEach((s, i) => {
+      if (s.hasError(this.state)) {
+        stepsErrors.push(i)
+      }
+    })
+
     return (
       <Modal
         name={MODAL_SEND}
@@ -290,7 +302,13 @@ class SendModal extends Component<Props, State<*>> {
             </ModalTitle>
 
             <ModalContent>
-              <Breadcrumb t={t} mb={6} currentStep={stepIndex} items={this.steps} />
+              <Breadcrumb
+                t={t}
+                mb={6}
+                currentStep={stepIndex}
+                stepsErrors={stepsErrors}
+                items={this.steps}
+              />
 
               <ChildSwitch index={stepIndex}>
                 <StepAmount
