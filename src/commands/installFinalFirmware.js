@@ -8,20 +8,18 @@ import installFinalFirmware from 'helpers/firmware/installFinalFirmware'
 
 type Input = {
   devicePath: string,
-  firmware: Object,
+  targetId: string | number,
+  version: string,
 }
 
 type Result = {
-  targetId: number | string,
-  version: string,
-  final: boolean,
-  mcu: boolean,
+  success: boolean,
 }
 
 const cmd: Command<Input, Result> = createCommand(
   'installFinalFirmware',
-  ({ devicePath, firmware }) =>
-    fromPromise(withDevice(devicePath)(transport => installFinalFirmware(transport, firmware))),
+  ({ devicePath, ...rest }) =>
+    fromPromise(withDevice(devicePath)(transport => installFinalFirmware(transport, { ...rest }))),
 )
 
 export default cmd
