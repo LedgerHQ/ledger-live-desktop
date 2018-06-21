@@ -7,6 +7,19 @@ import { createDeviceSocket } from 'helpers/socket'
 
 import type { LedgerScriptParams } from 'helpers/common'
 
+import createCustomErrorClass from '../createCustomErrorClass'
+
+const CannotInstall = createCustomErrorClass('CannotInstall')
+
+function remapError(promise) {
+  return promise.catch((e: Error) => {
+    if (e.message.endsWith('6982')) {
+      throw new CannotInstall()
+    }
+    throw e
+  })
+}
+
 /**
  * Install an app on the device
  */
@@ -21,5 +34,5 @@ export default async function installApp(
     firmwareKey: app.firmware_key,
   }
   const url = `${BASE_SOCKET_URL_SECURE}/install?${qs.stringify(params)}`
-  return createDeviceSocket(transport, url).toPromise()
+  return remapError(createDeviceSocket(transport, url).toPromise())
 }
