@@ -75,6 +75,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-i18next": "^7.7.0",
+    "react-key-handler": "^1.0.1",
     "react-markdown": "^3.3.2",
     "react-mortal": "^3.2.0",
     "react-motion": "^0.5.2",

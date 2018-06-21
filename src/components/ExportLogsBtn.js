@@ -6,6 +6,7 @@ import { webFrame, remote } from 'electron'
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
+import KeyHandler from 'react-key-handler'
 import { createStructuredSelector, createSelector } from 'reselect'
 import { accountsSelector, encodeAccountsModel } from 'reducers/accounts'
 import { storeSelector as settingsSelector } from 'reducers/settings'
@@ -20,6 +21,7 @@ class ExportLogsBtn extends Component<{
   t: *,
   settings: *,
   accounts: *,
+  hookToShortcut?: boolean,
 }> {
   handleExportLogs = () => {
     const { accounts, settings } = this.props
@@ -49,9 +51,17 @@ class ExportLogsBtn extends Component<{
     }
   }
 
+  onKeyHandle = e => {
+    if (e.ctrlKey) {
+      this.handleExportLogs()
+    }
+  }
+
   render() {
-    const { t } = this.props
-    return (
+    const { t, hookToShortcut } = this.props
+    return hookToShortcut ? (
+      <KeyHandler keyValue="e" onKeyHandle={this.onKeyHandle} />
+    ) : (
       <Button primary onClick={this.handleExportLogs}>
         {t('app:settings.exportLogs.btn')}
       </Button>
