@@ -4,15 +4,17 @@ import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { push } from 'react-router-redux'
 import { createStructuredSelector } from 'reselect'
-
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import { colors } from 'styles/theme'
 
 import { accountsSelector } from 'reducers/accounts'
+import { openModal } from 'reducers/modals'
+import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import {
   counterValueCurrencySelector,
   localeSelector,
@@ -28,6 +30,9 @@ import UpdateNotifier from 'components/UpdateNotifier'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
+import IconEmptyAccountTile from 'icons/illustrations/EmptyAccountTile'
+import Button from '../base/Button/index'
+import Card from '../base/Box/Card'
 import PillsDaysCount from 'components/PillsDaysCount'
 import Text from 'components/base/Text'
 import OperationsList from 'components/OperationsList'
@@ -48,6 +53,7 @@ const mapDispatchToProps = {
   push,
   reorderAccounts,
   saveSettings,
+  openModal,
 }
 
 type Props = {
@@ -57,6 +63,7 @@ type Props = {
   counterValue: Currency,
   selectedTimeRange: TimeRange,
   saveSettings: ({ selectedTimeRange: TimeRange }) => *,
+  openModal: string => void,
 }
 
 class DashboardPage extends PureComponent<Props> {
@@ -82,11 +89,10 @@ class DashboardPage extends PureComponent<Props> {
   _cacheBalance = null
 
   render() {
-    const { accounts, t, counterValue, selectedTimeRange } = this.props
+    const { accounts, t, counterValue, selectedTimeRange, openModal } = this.props
     const daysCount = timeRangeDaysByKey[selectedTimeRange]
     const timeFrame = this.handleGreeting()
     const totalAccounts = accounts.length
-
     const displayOperationsHelper = (account: Account) => account.operations.length > 0
     const displayOperations = accounts.some(displayOperationsHelper)
 
@@ -155,17 +161,43 @@ class DashboardPage extends PureComponent<Props> {
                     style={{ margin: '0 -16px' }}
                   >
                     {accounts
-                      .concat(Array(3 - (accounts.length % 3)).fill(null))
+                      .concat(
+                        Array(3 - (accounts.length % 3))
+                          .fill(null)
+                          .map((_, i) => i === 0),
+                      )
                       .map((account, i) => (
-                        <Box key={account ? account.id : `placeholder_${i}`} flex="33%" p={16}>
+                        <Box
+                          key={typeof account === 'object' ? account.id : `placeholder_${i}`}
+                          flex="33%"
+                          p={16}
+                        >
                           {account ? (
-                            <AccountCard
-                              key={account.id}
-                              counterValue={counterValue}
-                              account={account}
-                              daysCount={daysCount}
-                              onClick={this.onAccountClick}
-                            />
+                            typeof account === 'object' ? (
+                              <AccountCard
+                                key={account.id}
+                                counterValue={counterValue}
+                                account={account}
+                                daysCount={daysCount}
+                                onClick={this.onAccountClick}
+                              />
+                            ) : (
+                              <Wrapper>
+                                <IconEmptyAccountTile />
+                                <Box
+                                  ff="Open Sans"
+                                  fontSize={3}
+                                  color="grey"
+                                  pb={2}
+                                  textAlign="center"
+                                >
+                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                </Box>
+                                <Button primary onClick={() => openModal(MODAL_ADD_ACCOUNTS)}>
+                                  Create account
+                                </Button>
+                              </Wrapper>
+                            )
                           ) : null}
                         </Box>
                       ))}
@@ -198,3 +230,12 @@ export default compose(
   ),
   translate(),
 )(DashboardPage)
+
+const Wrapper = styled(Box).attrs({
+  p: 4,
+  flex: 1,
+  alignItems: 'center',
+})`
+  border: 1px dashed ${p => p.theme.colors.fog};
+  border-radius: 4px;
+`
