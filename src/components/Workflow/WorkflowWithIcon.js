@@ -131,9 +131,6 @@ const WorkflowWithIcon = ({ device, deviceInfo, errors, isGenuine, t }: Props) =
             <Trans i18nKey="deviceConnect:step1.connect" parent="div">
               {'Connect and unlock your '}
               <strong>Ledger device</strong>
-              {''}
-              <strong />
-              {''}
             </Trans>
           </Box>
           <StepCheck checked={!!device} />

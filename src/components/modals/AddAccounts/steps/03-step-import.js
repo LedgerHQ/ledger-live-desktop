@@ -192,7 +192,7 @@ class StepImport extends PureComponent<StepProps> {
     })
 
     const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', { currencyName })
-    const hasAlreadyEmptyAccount = scannedAccounts.some(a => a.operations.length === 0)
+    const alreadyEmptyAccount = scannedAccounts.find(a => a.operations.length === 0)
 
     return (
       <Fragment>
@@ -211,8 +211,10 @@ class StepImport extends PureComponent<StepProps> {
           <AccountsList
             title={t('app:addAccounts.createNewAccount.title')}
             emptyText={
-              hasAlreadyEmptyAccount
-                ? t('app:addAccounts.createNewAccount.noOperationOnLastAccount')
+              alreadyEmptyAccount
+                ? t('app:addAccounts.createNewAccount.noOperationOnLastAccount', {
+                    accountName: alreadyEmptyAccount.name,
+                  })
                 : t('app:addAccounts.createNewAccount.noAccountToCreate', { currencyName })
             }
             accounts={creatableAccounts}

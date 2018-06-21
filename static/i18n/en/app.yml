@@ -157,7 +157,7 @@ addAccounts:
 # success_plural: Accounts successfully added to your portfolio.
   createNewAccount:
     title: Create new account
-    noOperationOnLastAccount: 'You have to receive funds on [ACCOUNT  NAME]{{accountName}} before you can create a new account.'
+    noOperationOnLastAccount: 'You have to receive funds on {{accountName}} before you can create a new account.'
     noAccountToCreate: No {{currencyName}} account was found to create.
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
@@ -189,7 +189,7 @@ manager:
     all: Apps
     installing: 'Installing {{app}}...'
     uninstalling: 'Uninstalling {{app}}...'
-    installSuccess: '{{app}} app successful0ly installed'
+    installSuccess: '{{app}} app successfully installed'
     uninstallSuccess: '{{app}} app successfully uninstalled'
     alreadyInstalled: '{{app}} app is already installed'
     help: Remove and reinstall to update apps
