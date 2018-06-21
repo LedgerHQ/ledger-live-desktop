@@ -11,6 +11,7 @@ import type { LedgerScriptParams } from 'helpers/common'
 import listApps from 'commands/listApps'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
+import TranslatedError from 'components/TranslatedError'
 
 import Box from 'components/base/Box'
 import Modal, { ModalBody } from 'components/base/Modal'
@@ -89,7 +90,7 @@ class AppsList extends PureComponent<Props, State> {
         this.setState({ appsList, status: 'idle', appsLoaded: true })
       }
     } catch (err) {
-      this.setState({ status: 'error', error: err.message })
+      this.setState({ status: 'error', error: err })
     }
   }
 
@@ -119,7 +120,7 @@ class AppsList extends PureComponent<Props, State> {
       await uninstallApp.send(data).toPromise()
       this.setState({ status: 'success', app: '' })
     } catch (err) {
-      this.setState({ status: 'error', error: err.message, app: '', mode: 'home' })
+      this.setState({ status: 'error', error: err, app: '', mode: 'home' })
     }
   }
 
@@ -145,8 +146,7 @@ class AppsList extends PureComponent<Props, State> {
               </Box>
             ) : status === 'error' ? (
               <Box align="center" justify="center" flow={3}>
-                <div>{'error happened'}</div>
-                {error}
+                <TranslatedError error={error} />
                 <Button primary onClick={this.handleCloseModal}>
                   close
                 </Button>
