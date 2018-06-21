@@ -16,6 +16,7 @@ const stringFromEnv = (key: string, def: string): string => process.env[key] || 
 
 export const GET_CALLS_TIMEOUT = intFromEnv('GET_CALLS_TIMEOUT', 30 * 1000)
 export const GET_CALLS_RETRY = intFromEnv('GET_CALLS_RETRY', 2)
+export const LISTEN_DEVICES_POLLING_INTERVAL = intFromEnv('LISTEN_DEVICES_POLLING_INTERVAL', 100)
 
 export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 1)
 export const SYNC_BOOT_DELAY = 2 * 1000
