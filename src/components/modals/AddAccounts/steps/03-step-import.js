@@ -17,7 +17,7 @@ import type { StepProps } from '../index'
 
 class StepImport extends PureComponent<StepProps> {
   componentDidMount() {
-    this.startScanAccountsDevice()
+    this.props.setState({ scanStatus: 'scanning' })
   }
 
   componentDidUpdate(prevProps: StepProps) {
@@ -71,8 +71,6 @@ class StepImport extends PureComponent<StepProps> {
 
       // TODO: use the real device
       const devicePath = currentDevice.path
-
-      setState({ scanStatus: 'scanning' })
 
       this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
         next: account => {
