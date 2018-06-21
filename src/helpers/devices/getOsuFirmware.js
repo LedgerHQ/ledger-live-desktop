@@ -1,5 +1,5 @@
 // @flow
-import axios from 'axios'
+import network from 'api/network'
 
 import { GET_CURRENT_OSU } from 'helpers/urls'
 
@@ -8,19 +8,16 @@ type Input = {
   deviceId: string | number,
 }
 
-let error
 export default async (input: Input): Promise<*> => {
-  try {
-    const provider = 1
-    const { data } = await axios.post(GET_CURRENT_OSU, {
+  const provider = 1
+  const { data } = await network({
+    method: 'POST',
+    url: GET_CURRENT_OSU,
+    data: {
       device_version: input.deviceId,
       version_name: input.version,
       provider,
-    })
-    return data
-  } catch (err) {
-    error = Error(err.message)
-    error.stack = err.stack
-    throw error
-  }
+    },
+  })
+  return data
 }

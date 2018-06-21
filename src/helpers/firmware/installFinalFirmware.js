@@ -30,9 +30,7 @@ export default async (transport: Transport<*>, app: Input): Result => {
     const url = WS_INSTALL(params)
     await createDeviceSocket(transport, url).toPromise()
     return { success: true }
-  } catch (err) {
-    const error = Error(err.message)
-    error.stack = err.stack
+  } catch (error) {
     const result = { success: false, error }
     throw result
   }
