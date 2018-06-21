@@ -24,7 +24,7 @@ function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) 
             <strong style={{ fontWeight: 'bold' }}>{`${currency.name} (${
               currency.ticker
             })`}</strong>
-            {` account(s) from your Ledger device.`}
+            {` accounts from your Ledger device.`}
           </Trans>
         </Box>
       </Box>

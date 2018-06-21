@@ -129,11 +129,11 @@ const WorkflowWithIcon = ({ device, deviceInfo, errors, isGenuine, t }: Props) =
           </StepIcon>
           <Box grow shrink>
             <Trans i18nKey="deviceConnect:step1.connect" parent="div">
-              {'Connect your '}
+              {'Connect and unlock your '}
               <strong>Ledger device</strong>
-              {' to your computer and enter your '}
-              <strong>PIN code</strong>
-              {' on your device'}
+              {''}
+              <strong />
+              {''}
             </Trans>
           </Box>
           <StepCheck checked={!!device} />
@@ -150,7 +150,7 @@ const WorkflowWithIcon = ({ device, deviceInfo, errors, isGenuine, t }: Props) =
           </StepIcon>
           <Box grow shrink>
             <Trans i18nKey="deviceConnect:dashboard.open" parent="div">
-              {'Go to the '}
+              {'Navigate to the '}
               <strong>{'dashboard'}</strong>
               {' on your device'}
             </Trans>
@@ -179,8 +179,8 @@ const WorkflowWithIcon = ({ device, deviceInfo, errors, isGenuine, t }: Props) =
           </StepIcon>
           <Box grow shrink>
             <Trans i18nKey="deviceConnect:stepGenuine.open" parent="div">
-              {'Confirm '}
-              <strong>{'authentication'}</strong>
+              {'Allow the '}
+              <strong>{'Ledger Manager'}</strong>
               {' on your device'}
             </Trans>
           </Box>
