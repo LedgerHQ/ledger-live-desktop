@@ -190,7 +190,11 @@ manager:
     installed: 'Firmware {{version}}'
     update: Update firmware
     updateTitle: Firmware update
+    continue: Continue update
     latest: 'A new firmware {{version}} is available'
+    disclaimerTitle: 'You are about to install the latest <1><0>firmware {{version}}</0></1>'
+    disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
+    disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
   title: Manager
   subtitle: Get all your apps here
   device:
