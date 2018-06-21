@@ -94,6 +94,9 @@ account:
       error: Invalid endpoint
 dashboard:
   title: Portfolio
+  emptyAccountTile:
+    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    createAccount: Create Account
   accounts:
     title: Accounts ({{count}})
   greeting:
