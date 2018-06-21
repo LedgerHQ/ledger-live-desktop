@@ -7,12 +7,12 @@ import { colors } from 'styles/theme'
 import styled from 'styled-components'
 import { flowType } from 'reducers/onboarding'
 import Box from 'components/base/Box'
-import IconUser from 'icons/User'
 import IconPlus from 'icons/Plus'
 import IconRecover from 'icons/Recover'
 import IconCheck from 'icons/Check'
 import IconExternalLink from 'icons/ExternalLink'
 import IconChevronRight from 'icons/ChevronRight'
+import { i } from 'helpers/staticPath'
 import { Title } from '../helperComponents'
 
 import type { StepProps } from '..'
@@ -66,7 +66,7 @@ class Init extends PureComponent<StepProps, *> {
       <Box sticky justifyContent="center">
         <Box align="center">
           <Box color="wallet">
-            <IconUser size={36} />
+            <img alt="" src={i('ledgerlive-logo.svg')} width={50} height={50} />
           </Box>
           <Box m={5} style={{ maxWidth: 480 }}>
             <Title>{t('onboarding:init.title')}</Title>

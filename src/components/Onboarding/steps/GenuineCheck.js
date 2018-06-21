@@ -355,7 +355,9 @@ export function GenuineCheckFail({
 export const GenuineSuccessText = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
-})``
+})`
+  font-weight: 600;
+`
 
 export const CardTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',

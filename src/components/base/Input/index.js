@@ -28,6 +28,7 @@ const ErrorDisplay = styled(Box)`
   bottom: -20px;
   left: 0px;
   font-size: 12px;
+  white-space: nowrap;
   color: ${p => p.theme.colors.pearl};
 `
 

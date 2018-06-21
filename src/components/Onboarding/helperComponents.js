@@ -27,8 +27,10 @@ export const Description = styled(Box).attrs({
   color: 'grey',
 })`
   margin: 10px auto 25px;
-  max-width: 570px;
+  max-width: 600px;
+  font-weight: 500;
 `
+
 export const Inner = styled(Box).attrs({
   horizontal: true,
   grow: true,
