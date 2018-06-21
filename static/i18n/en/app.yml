@@ -39,7 +39,7 @@ common:
     lostPassword: I lost my password
   sync:
     syncing: Synchronizing...
-    upToDate: Live
+    upToDate: Up to date
     error: Synchronization error
     refresh: Refresh
     ago: Synced {{time}}
@@ -75,7 +75,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No funds yet?
-    desc: Make sure the [cryptocurrency] app is installed to receive funds. # replace [cryptocurrency] and make it bold
+    desc: Make sure the <1><0>{{currency}}</0></1> app is installed to receive funds. # replace [cryptocurrency] and make it bold
     buttons:
       receiveFunds: Receive funds
   settings:

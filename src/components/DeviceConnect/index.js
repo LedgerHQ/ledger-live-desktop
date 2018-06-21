@@ -131,7 +131,7 @@ const StepCheck = ({ checked, hasErrors }: { checked: boolean, hasErrors?: boole
         <IconExclamationCircle size={16} />
       </Box>
     ) : (
-      <Spinner size={16} />
+      <Spinner color="grey" size={16} />
     )}
   </Box>
 )
