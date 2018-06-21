@@ -156,117 +156,118 @@ const fetchCurrentBlock = (perCurrencyId => currency => {
 })({})
 
 const EthereumBridge: WalletBridge<Transaction> = {
-  scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
-    let finished = false
-    const unsubscribe = () => {
-      finished = true
-    }
-    const api = apiForCurrency(currency)
-
-    // in future ideally what we want is:
-    // return mergeMap(addressesObservable, address => fetchAccount(address))
-
-    let newAccountCount = 0
-
-    async function stepAddress(
-      index,
-      { address, path: freshAddressPath, publicKey },
-      isStandard,
-    ): { account?: Account, complete?: boolean } {
-      const balance = await api.getAccountBalance(address)
-      if (finished) return { complete: true }
-      const currentBlock = await fetchCurrentBlock(currency)
-      if (finished) return { complete: true }
-      let { txs } = await api.getTransactions(address)
-      if (finished) return { complete: true }
-
-      const freshAddress = address
-      const accountId = `ethereumjs:${currency.id}:${address}:${publicKey}`
-
-      if (txs.length === 0) {
-        // this is an empty account
-        if (isStandard) {
-          if (newAccountCount === 0) {
-            // first zero account will emit one account as opportunity to create a new account..
-            const account: $Exact<Account> = {
-              id: accountId,
-              xpub: '',
-              freshAddress,
-              freshAddressPath,
-              name: getNewAccountPlaceholderName(currency, index),
-              balance,
-              blockHeight: currentBlock.height,
-              index,
-              currency,
-              operations: [],
-              pendingOperations: [],
-              unit: currency.units[0],
-              lastSyncDate: new Date(),
-            }
-            return { account, complete: true }
-          }
-          newAccountCount++
-        }
-        // NB for legacy addresses maybe we will continue at least for the first 10 addresses
-        return { complete: true }
+  scanAccountsOnDevice: (currency, deviceId) =>
+    Observable.create(o => {
+      let finished = false
+      const unsubscribe = () => {
+        finished = true
       }
+      const api = apiForCurrency(currency)
 
-      const account: $Exact<Account> = {
-        id: accountId,
-        xpub: '',
-        freshAddress,
-        freshAddressPath,
-        name: getAccountPlaceholderName(currency, index, !isStandard),
-        balance,
-        blockHeight: currentBlock.height,
+      // in future ideally what we want is:
+      // return mergeMap(addressesObservable, address => fetchAccount(address))
+
+      let newAccountCount = 0
+
+      async function stepAddress(
         index,
-        currency,
-        operations: [],
-        pendingOperations: [],
-        unit: currency.units[0],
-        lastSyncDate: new Date(),
-      }
-      for (let i = 0; i < 50; i++) {
-        const api = apiForCurrency(account.currency)
-        const { block } = txs[txs.length - 1]
-        if (!block) break
-        const next = await api.getTransactions(account.freshAddress, block.hash)
-        if (next.txs.length === 0) break
-        txs = txs.concat(next.txs)
-      }
-      txs.reverse()
-      account.operations = mergeOps([], flatMap(txs, txToOps(account)))
-      return { account }
-    }
+        { address, path: freshAddressPath, publicKey },
+        isStandard,
+      ): { account?: Account, complete?: boolean } {
+        const balance = await api.getAccountBalance(address)
+        if (finished) return { complete: true }
+        const currentBlock = await fetchCurrentBlock(currency)
+        if (finished) return { complete: true }
+        let { txs } = await api.getTransactions(address)
+        if (finished) return { complete: true }
 
-    async function main() {
-      try {
-        const derivations = getDerivations(currency)
-        const last = derivations[derivations.length - 1]
-        for (const derivation of derivations) {
-          const isStandard = last === derivation
-          for (let index = 0; index < 255; index++) {
-            const freshAddressPath = derivation({ currency, x: index, segwit: false })
-            const res = await getAddressCommand
-              .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
-              .toPromise()
-            const r = await stepAddress(index, res, isStandard)
-            if (r.account) next(r.account)
-            if (r.complete) {
-              break
+        const freshAddress = address
+        const accountId = `ethereumjs:${currency.id}:${address}:${publicKey}`
+
+        if (txs.length === 0) {
+          // this is an empty account
+          if (isStandard) {
+            if (newAccountCount === 0) {
+              // first zero account will emit one account as opportunity to create a new account..
+              const account: $Exact<Account> = {
+                id: accountId,
+                xpub: '',
+                freshAddress,
+                freshAddressPath,
+                name: getNewAccountPlaceholderName(currency, index),
+                balance,
+                blockHeight: currentBlock.height,
+                index,
+                currency,
+                operations: [],
+                pendingOperations: [],
+                unit: currency.units[0],
+                lastSyncDate: new Date(),
+              }
+              return { account, complete: true }
+            }
+            newAccountCount++
+          }
+          // NB for legacy addresses maybe we will continue at least for the first 10 addresses
+          return { complete: true }
+        }
+
+        const account: $Exact<Account> = {
+          id: accountId,
+          xpub: '',
+          freshAddress,
+          freshAddressPath,
+          name: getAccountPlaceholderName(currency, index, !isStandard),
+          balance,
+          blockHeight: currentBlock.height,
+          index,
+          currency,
+          operations: [],
+          pendingOperations: [],
+          unit: currency.units[0],
+          lastSyncDate: new Date(),
+        }
+        for (let i = 0; i < 50; i++) {
+          const api = apiForCurrency(account.currency)
+          const { block } = txs[txs.length - 1]
+          if (!block) break
+          const next = await api.getTransactions(account.freshAddress, block.hash)
+          if (next.txs.length === 0) break
+          txs = txs.concat(next.txs)
+        }
+        txs.reverse()
+        account.operations = mergeOps([], flatMap(txs, txToOps(account)))
+        return { account }
+      }
+
+      async function main() {
+        try {
+          const derivations = getDerivations(currency)
+          const last = derivations[derivations.length - 1]
+          for (const derivation of derivations) {
+            const isStandard = last === derivation
+            for (let index = 0; index < 255; index++) {
+              const freshAddressPath = derivation({ currency, x: index, segwit: false })
+              const res = await getAddressCommand
+                .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
+                .toPromise()
+              const r = await stepAddress(index, res, isStandard)
+              if (r.account) o.next(r.account)
+              if (r.complete) {
+                break
+              }
             }
           }
+          o.complete()
+        } catch (e) {
+          o.error(e)
         }
-        complete()
-      } catch (e) {
-        error(e)
       }
-    }
 
-    main()
+      main()
 
-    return { unsubscribe }
-  },
+      return unsubscribe
+    }),
 
   synchronize: ({ freshAddress, blockHeight, currency, operations }) =>
     Observable.create(o => {

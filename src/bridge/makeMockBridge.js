@@ -75,36 +75,37 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
         }
       }),
 
-    scanAccountsOnDevice(currency, deviceId, { next, complete, error }) {
-      let unsubscribed = false
+    scanAccountsOnDevice: (currency, deviceId) =>
+      Observable.create(o => {
+        let unsubscribed = false
 
-      async function job() {
-        if (Math.random() > scanAccountDeviceSuccessRate) {
-          await delay(1000)
-          if (!unsubscribed) error(new Error('scan failed'))
-          return
+        async function job() {
+          if (Math.random() > scanAccountDeviceSuccessRate) {
+            await delay(1000)
+            if (!unsubscribed) o.error(new Error('scan failed'))
+            return
+          }
+          const nbAccountToGen = 3
+          for (let i = 0; i < nbAccountToGen && !unsubscribed; i++) {
+            await delay(500)
+            const account = genAccount(String(Math.random()), {
+              operationsSize: 0,
+              currency,
+            })
+            account.unit = currency.units[0]
+            if (!unsubscribed) o.next(account)
+          }
+          if (!unsubscribed) o.complete()
         }
-        const nbAccountToGen = 3
-        for (let i = 0; i < nbAccountToGen && !unsubscribed; i++) {
-          await delay(500)
-          const account = genAccount(String(Math.random()), {
-            operationsSize: 0,
-            currency,
-          })
-          account.unit = currency.units[0]
-          if (!unsubscribed) next(account)
+
+        job()
+
+        return {
+          unsubscribe() {
+            unsubscribed = true
+          },
         }
-        if (!unsubscribed) complete()
-      }
-
-      job()
-
-      return {
-        unsubscribe() {
-          unsubscribed = true
-        },
-      }
-    },
+      }),
 
     pullMoreOperations: async (_accountId, _desiredCount) => {
       await delay(1000)

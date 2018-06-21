@@ -72,7 +72,7 @@ class StepImport extends PureComponent<StepProps> {
       // TODO: use the real device
       const devicePath = currentDevice.path
 
-      this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath, {
+      this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath).subscribe({
         next: account => {
           const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)

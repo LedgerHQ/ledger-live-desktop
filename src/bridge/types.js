@@ -33,11 +33,7 @@ export interface WalletBridge<Transaction> {
   // the scan can stop once all accounts are discovered.
   // the function returns a Subscription and you MUST stop everything if it is unsubscribed.
   // TODO return Observable
-  scanAccountsOnDevice(
-    currency: Currency,
-    deviceId: DeviceId,
-    observer: Observer<Account>,
-  ): Subscription;
+  scanAccountsOnDevice(currency: Currency, deviceId: DeviceId): Observable<Account>;
 
   // synchronize an account. meaning updating the account object with latest state.
   // function receives the initialAccount object so you can actually know what the user side currently have
