@@ -10,7 +10,7 @@ import { translate } from 'react-i18next'
 
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
-import IconLockScreen from 'icons/LockScreen'
+import { i } from 'helpers/staticPath'
 import IconTriangleWarning from 'icons/TriangleWarning'
 import get from 'lodash/get'
 
@@ -152,7 +152,18 @@ class IsUnlocked extends Component<Props, State> {
         <Box sticky alignItems="center" justifyContent="center">
           <form onSubmit={this.handleSubmit}>
             <Box align="center">
-              <IconLockScreen size={136} />
+              <div
+                style={{
+                  padding: 14,
+                  backgroundColor: 'white',
+                  borderRadius: 80,
+                  fontSize: 0,
+                  marginBottom: 40,
+                  boxShadow: '0 2px 23px 0 rgba(0, 0, 0, 0.08)',
+                }}
+              >
+                <img alt="" src={i('ledgerlive-logo.svg')} width={50} height={50} />
+              </div>
               <PageTitle>{t('app:common.lockScreen.title')}</PageTitle>
               <LockScreenDesc>
                 {t('app:common.lockScreen.subTitle')}

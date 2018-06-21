@@ -24,7 +24,7 @@ const Container = styled(Box).attrs({
 const Title = styled(Box).attrs({
   ff: 'Museo Sans',
   fontSize: 5,
-  mt: 4,
+  mt: 2,
 })`
   text-align: center;
 `

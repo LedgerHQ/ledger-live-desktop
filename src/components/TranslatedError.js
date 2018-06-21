@@ -19,9 +19,11 @@ class TranslatedError extends PureComponent<Props> {
     const { t, error } = this.props
     if (!error) return null
     if (typeof error === 'string') return error
-    const translation = t(`errors:${error.name}`, error)
-    if (translation) {
-      return translation
+    if (error.name) {
+      const translation = t(`errors:${error.name}`, error)
+      if (translation) {
+        return translation
+      }
     }
     logger.warn(`TranslatedError: no translation for '${error.name}'`, error)
     return error.message || error.name || t('errors:generic')

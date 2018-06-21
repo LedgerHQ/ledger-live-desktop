@@ -84,6 +84,7 @@ const SettingsSectionRowContainer = styled(Box).attrs({
   horizontal: true,
   align: 'center',
   relative: true,
+  justifyContent: 'space-between',
 })`
   cursor: ${p => (p.onClick ? 'pointer' : '')};
 `
@@ -101,7 +102,7 @@ export function SettingsSectionRow({
 }) {
   return (
     <SettingsSectionRowContainer onClick={onClick} tabIndex={-1}>
-      <Box grow shrink>
+      <Box grow shrink style={{ marginRight: '20%' }}>
         <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {title}
         </Box>

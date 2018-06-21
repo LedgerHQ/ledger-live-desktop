@@ -153,7 +153,7 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('app:settings.display.counterValue')}
             desc={t('app:settings.display.counterValueDesc')}
           >
-            <Box horizontal flow={2}>
+            <Box flow={2}>
               <Select
                 small
                 minWidth={250}
