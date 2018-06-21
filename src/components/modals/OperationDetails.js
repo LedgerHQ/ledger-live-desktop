@@ -61,10 +61,12 @@ const B = styled(Bar).attrs({
 const operationSelector = createSelector(
   accountSelector,
   (_, { operationId }) => operationId,
-  (account, operationId) => {
+  (account: Account, operationId: string): ?Operation => {
     if (!account) return null
-    const operation = account.operations.find(op => op.id === operationId)
-    return operation
+    const maybeOp = account.operations.find(op => op.id === operationId)
+    if (maybeOp) return maybeOp
+    const maybeOpPending = account.pendingOperations.find(op => op.id === operationId)
+    return maybeOpPending
   },
 )
 
