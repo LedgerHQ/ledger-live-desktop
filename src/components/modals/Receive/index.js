@@ -61,6 +61,8 @@ const INITIAL_STATE = {
   stepIndex: 0,
   stepsDisabled: [],
   stepsErrors: [],
+  // FIXME the two above can be derivated from other info (if we keep error etc)
+  // we can get rid of it after a big refactoring (see how done in Send)
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -232,12 +234,12 @@ class ReceiveModal extends PureComponent<Props, State> {
           })
         }
 
-        this.setState({ addressVerified: true, stepIndex: 3 })
+        this.handleCheckAddress(true)
       } else {
-        this.setState({ addressVerified: false })
+        this.handleCheckAddress(false)
       }
     } catch (err) {
-      this.setState({ addressVerified: false })
+      this.handleCheckAddress(false)
     }
   }
 
