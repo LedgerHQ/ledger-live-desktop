@@ -31,13 +31,11 @@ import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
 import IconEmptyAccountTile from 'icons/illustrations/EmptyAccountTile'
-import Button from '../base/Button/index'
-import Card from '../base/Box/Card'
 import PillsDaysCount from 'components/PillsDaysCount'
 import Text from 'components/base/Text'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
-
+import Button from '../base/Button/index'
 import AccountCard from './AccountCard'
 import AccountsOrder from './AccountsOrder'
 import EmptyState from './EmptyState'
@@ -187,14 +185,14 @@ class DashboardPage extends PureComponent<Props> {
                                 <Box
                                   ff="Open Sans"
                                   fontSize={3}
-                                  color="grey"
-                                  pb={2}
+                                  color="graphite"
+                                  pb={3}
                                   textAlign="center"
                                 >
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                  {t('app:dashboard.emptyAccountTile.desc')}
                                 </Box>
                                 <Button primary onClick={() => openModal(MODAL_ADD_ACCOUNTS)}>
-                                  Create account
+                                  {t('app:dashboard.emptyAccountTile.createAccount')}
                                 </Button>
                               </Wrapper>
                             )

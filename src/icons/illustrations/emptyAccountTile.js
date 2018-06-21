@@ -3,7 +3,7 @@
 import React from 'react'
 
 export default () => (
-  <svg width="224" height="94">
+  <svg width="224" height="85">
     <defs>
       <rect id="b" x="20" y="12" width="142" height="40" rx="4" />
       <filter
@@ -49,7 +49,7 @@ export default () => (
         id="g"
       />
     </defs>
-    <g fill="none" fill-rule="evenodd">
+    <g fill="none" fillRule="evenodd">
       <g transform="translate(21 2)">
         <use fill="#000" filter="url(#a)" xlinkHref="#b" />
         <use fill="#FFF" xlinkHref="#b" />
@@ -64,7 +64,7 @@ export default () => (
         <rect fill="#999" x="39" y="13" width="120" height="5" rx="2.5" />
         <rect fill="#D8D8D8" x="39" y="23" width="70" height="5" rx="2.5" />
         <g transform="translate(17 13)">
-          <use fill="#FCB653" fill-rule="nonzero" xlinkHref="#g" />
+          <use fill="#FCB653" fillRule="nonzero" xlinkHref="#g" />
         </g>
       </g>
     </g>
