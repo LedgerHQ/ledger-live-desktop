@@ -180,9 +180,9 @@ manager:
     all: Apps
     installing: 'Installing {{app}}...'
     uninstalling: 'Uninstalling {{app}}...'
-    installSuccess: '{{app}} app successfully installed'
-    uninstallSuccess: '{{app}} app successfully uninstalled'
-    alreadyInstalled: '{{app}} app is already installed'
+    installSuccess: '{{app}} is now installed on your Ledger device.'
+    uninstallSuccess: '{{app}} has been uninstalled from your Ledger device.'
+    alreadyInstalled: '{{app}} is already installed on your Ledger device.'
     help: To update an app, you have to uninstall the app and re install it.
   firmware:
     installed: 'Firmware {{version}}'

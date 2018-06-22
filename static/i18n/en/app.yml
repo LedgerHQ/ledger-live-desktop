@@ -33,7 +33,7 @@ common:
   western: Western
   lockScreen:
     title: Welcome back
-    subTitle: Ledger Live is locked
+    subTitle:
     description: Enter your password to continue
     inputPlaceholder:
     lostPassword: I lost my password
@@ -189,9 +189,9 @@ manager:
     all: Apps
     installing: 'Installing {{app}}...'
     uninstalling: 'Uninstalling {{app}}...'
-    installSuccess: '{{app}} app successfully installed'
-    uninstallSuccess: '{{app}} app successfully uninstalled'
-    alreadyInstalled: '{{app}} app is already installed'
+    installSuccess: '{{app}} is now installed on your device.'
+    uninstallSuccess: '{{app}} has been uninstalled from your device.'
+    alreadyInstalled: '{{app}} is already installed on your device.'
     help: Remove and reinstall to update apps
   firmware:
     installed: 'Firmware version {{version}}'
@@ -220,7 +220,7 @@ receive:
       label: Account
     connectDevice:
       title: Connect device
-      withoutDevice: Proceed without device
+      withoutDevice: Receive without device
     confirmAddress:
       title: Confirm address
       action: Confirm address on device
@@ -244,7 +244,7 @@ send:
       max: Max
       fees: Fees
       advancedOptions: Advanced options
-      useRBF: Use the RBF transaction
+      useRBF: Use the RBF transaction.
       message: Leave a message (140)
       rippleTag: Tag
       ethereumGasLimit: Gas limit
@@ -255,7 +255,9 @@ send:
     verification:
       title: Verification
       warning: |
-        Carefully verify the transaction details on your device. Press the left button on your device to cancel.
+        Carefully verify the transaction details displayed one by one on your device before you proceed.
+      # blue
+      # nano
       body: Press the right button to confirm the transaction.
     confirmation:
       title: Confirmation
@@ -302,14 +304,14 @@ settings:
     transactionsFees: Default transaction fees
     transactionsFeesDesc: Select your default transaction fees. The higher the fee, the quicker the transaction will be processed.
     explorer: Blockchain explorer
-    explorerDesc: Which service to use to look up an operation in the blockchain.
+    explorerDesc: Choose which explorer is used to look up the operation details in the blockchain.
   profile:
     desc:
     password: Data encryption
     passwordDesc: Enhance your privacy. Set a password to encrypt Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
     changePassword: Change password
     sync: Synchronize accounts
-    syncDesc: Resynchronize your accounts with the blockchain.
+    syncDesc: Resynchronize your accounts with the network.
     export: Export logs
     exportDesc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
     softResetTitle: Clear cache
@@ -340,15 +342,15 @@ settings:
   softResetModal:
     title: Clear cache
     subTitle: Are you sure?
-    desc: Clearing the Ledger Live cache forces resynchronization with the blockchain.
+    desc: Clearing the Ledger Live cache forces network resynchronization.
   removeAccountModal:
     title: Remove account
     subTitle: Are you sure?
     desc: The account will no longer be included in your portfolio. Accounts can always be re-added.
   exportLogs:
-    title: Export Logs
-    desc: Export Logs
-    btn: Export Logs
+    title: Export logs
+    desc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
+    btn: Export
 password:
   warning_0: Warning 0
   warning_1: Warning 1
@@ -385,7 +387,7 @@ crash:
   oops: Oops, something went wrong
   uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart
-  reset: Hard reset
+  reset: Reset
   createTicket: Ledger Support
   showDetails: Show details
   showError: Show error
