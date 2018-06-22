@@ -7,12 +7,7 @@ import type { Device } from 'types/common'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 
-type DeviceInfo = {
-  targetId: number | string,
-  version: string,
-  final: boolean,
-  mcu: boolean,
-}
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 type Error = {
   message: string,

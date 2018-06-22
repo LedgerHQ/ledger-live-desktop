@@ -15,7 +15,8 @@ type Error = {
 
 type DeviceInfos = {
   targetId: number | string,
-  version: string,
+  seVersion: string,
+  providerName: string,
 }
 
 type Props = {
@@ -60,8 +61,15 @@ class EnsureGenuine extends PureComponent<Props, State> {
     if (device && infos && !this._checking) {
       this._checking = true
       try {
+        const versionName = `${infos.seVersion}${
+          infos.providerName ? `-${infos.providerName}` : ''
+        }`
         const res = await getIsGenuine
-          .send({ devicePath: device.path, targetId: infos.targetId, version: infos.version })
+          .send({
+            devicePath: device.path,
+            targetId: infos.targetId,
+            version: versionName,
+          })
           .pipe(timeout(GENUINE_TIMEOUT))
           .toPromise()
         if (this._unmounting) return

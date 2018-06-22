@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import type { Node } from 'react'
 import type { Device } from 'types/common'
@@ -8,13 +9,6 @@ import type { Device } from 'types/common'
 import EnsureDevice from './EnsureDevice'
 import EnsureDashboard from './EnsureDashboard'
 import EnsureGenuine from './EnsureGenuine'
-
-type DeviceInfo = {
-  targetId: number | string,
-  version: string,
-  final: boolean,
-  mcu: boolean,
-}
 
 type Error = {
   message: string,
@@ -55,11 +49,11 @@ class Workflow extends PureComponent<Props, State> {
         {(device: Device) => (
           <EnsureDashboard device={device}>
             {(deviceInfo: ?DeviceInfo, dashboardError: ?Error) => {
-              if (deviceInfo && deviceInfo.mcu && renderMcuUpdate) {
+              if (deviceInfo && deviceInfo.isBootloader && renderMcuUpdate) {
                 return renderMcuUpdate(device, deviceInfo)
               }
 
-              if (deviceInfo && deviceInfo.final && renderFinalUpdate) {
+              if (deviceInfo && deviceInfo.isOSU && renderFinalUpdate) {
                 return renderFinalUpdate(device, deviceInfo)
               }
 

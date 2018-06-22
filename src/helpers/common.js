@@ -32,9 +32,20 @@ export async function getFirmwareInfo(transport: Transport<*>) {
     const data = byteArray.slice(0, byteArray.length - 2)
     const targetIdStr = Buffer.from(data.slice(0, 4))
     const targetId = targetIdStr.readUIntBE(0, 4)
-    const versionLength = data[4]
-    const version = Buffer.from(data.slice(5, 5 + versionLength)).toString()
-    return { targetId, version }
+    const seVersionLength = data[4]
+    const seVersion = Buffer.from(data.slice(5, 5 + seVersionLength)).toString()
+    const flagsLength = data[5 + seVersionLength]
+    const flags = Buffer.from(
+      data.slice(5 + seVersionLength + 1, 5 + seVersionLength + 1 + flagsLength),
+    ).toString()
+    const mcuVersionLength = data[5 + seVersionLength + 1 + flagsLength]
+    const mcuVersion = Buffer.from(
+      data.slice(
+        7 + seVersionLength + flagsLength,
+        7 + seVersionLength + flagsLength + mcuVersionLength,
+      ),
+    ).toString()
+    return { targetId, seVersion, flags, mcuVersion }
   } catch (err) {
     const error = new Error(err.message)
     error.stack = err.stack

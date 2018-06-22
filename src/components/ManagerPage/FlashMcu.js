@@ -4,12 +4,7 @@ import React, { PureComponent } from 'react'
 import type { Device } from 'types/common'
 import installMcu from 'commands/installMcu'
 
-type DeviceInfo = {
-  targetId: number | string,
-  version: string,
-  final: boolean,
-  mcu: boolean,
-}
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 type Props = {
   device: Device,
@@ -35,7 +30,7 @@ class FlashMcu extends PureComponent<Props, State> {
         .send({
           devicePath: device.path,
           targetId: deviceInfo.targetId,
-          version: deviceInfo.version,
+          version: deviceInfo.seVersion,
         })
         .toPromise()
       this.setState({ flashing: false })
