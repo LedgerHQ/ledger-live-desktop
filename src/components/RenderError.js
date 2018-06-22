@@ -37,15 +37,6 @@ class RenderError extends PureComponent<
   handleOpenHardResetModal = () => this.setState({ isHardResetModalOpened: true })
   handleCloseHardResetModal = () => this.setState({ isHardResetModalOpened: false })
 
-  handleHardReset = async () => {
-    this.setState({ isHardResetting: true })
-    try {
-      await hardReset()
-      remote.getCurrentWindow().webContents.reloadIgnoringCache()
-    } catch (err) {
-      this.setState({ isHardResetting: false })
-    }
-  }
   hardResetIconRender = () => (
     <IconWrapperCircle color="alertRed">
       <IconTriangleWarning width={23} height={21} />
