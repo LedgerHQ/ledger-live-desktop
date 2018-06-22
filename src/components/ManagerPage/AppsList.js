@@ -37,8 +37,6 @@ const List = styled(Box).attrs({
   flex-wrap: wrap;
 `
 
-let CACHED_APPS = null
-
 const ICONS_FALLBACK = {
   bitcoin_testnet: 'bitcoin',
 }
@@ -85,8 +83,7 @@ class AppsList extends PureComponent<Props, State> {
   async fetchAppList() {
     try {
       const { targetId, version } = this.props
-      const appsList = CACHED_APPS || (await listApps.send({ targetId, version }).toPromise())
-      CACHED_APPS = appsList
+      const appsList = await listApps.send({ targetId, version }).toPromise()
       if (!this._unmounted) {
         this.setState({ appsList, status: 'idle', appsLoaded: true })
       }
