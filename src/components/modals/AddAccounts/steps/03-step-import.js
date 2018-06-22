@@ -12,6 +12,7 @@ import CurrencyBadge from 'components/base/CurrencyBadge'
 import Button from 'components/base/Button'
 import AccountsList from 'components/base/AccountsList'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
+import TranslatedError from '../../../TranslatedError'
 
 import type { StepProps } from '../index'
 
@@ -150,6 +151,9 @@ class StepImport extends PureComponent<StepProps> {
       <Box style={{ height: 200 }} align="center" justify="center" color="alertRed">
         <IconExclamationCircleThin size={43} />
         <Box mt={4}>{t('app:addAccounts.somethingWentWrong')}</Box>
+        <Box mt={4}>
+          <TranslatedError error={err} />
+        </Box>
       </Box>
     )
   }
