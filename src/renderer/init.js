@@ -98,7 +98,6 @@ function r(Comp) {
 }
 
 init().catch(e => {
-  // for now we make the app crash instead of pending forever. later we can render the error OR try to recover, but probably this is unrecoverable cases.
-  logger.error(e)
+  logger.critical(e)
   r(<AppError error={e} language="en" />)
 })

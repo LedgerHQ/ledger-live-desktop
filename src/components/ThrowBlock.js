@@ -17,7 +17,7 @@ class ThrowBlock extends PureComponent<Props, State> {
   }
 
   componentDidCatch(error: Error) {
-    logger.error(error)
+    logger.critical(error)
     this.setState({ error })
   }
 

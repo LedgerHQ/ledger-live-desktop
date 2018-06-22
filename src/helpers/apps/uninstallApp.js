@@ -8,14 +8,20 @@ import { createDeviceSocket } from 'helpers/socket'
 import type { LedgerScriptParams } from 'helpers/common'
 import createCustomErrorClass from '../createCustomErrorClass'
 
-const CannotUninstall = createCustomErrorClass('CannotUninstall')
+const ManagerUnexpectedError = createCustomErrorClass('ManagerUnexpectedError')
+const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+const ManagerUninstallBTCDep = createCustomErrorClass('ManagerUninstallBTCDep')
 
 function remapError(promise) {
   return promise.catch((e: Error) => {
-    if (e.message.endsWith('6a83')) {
-      throw new CannotUninstall()
+    switch (true) {
+      case e.message.endsWith('6982'):
+        throw new ManagerDeviceLockedError()
+      case e.message.endsWith('6a83'):
+        throw new ManagerUninstallBTCDep()
+      default:
+        throw new ManagerUnexpectedError(e.message, { msg: e.message })
     }
-    throw e
   })
 }
 

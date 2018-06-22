@@ -9,14 +9,26 @@ import type { LedgerScriptParams } from 'helpers/common'
 
 import createCustomErrorClass from '../createCustomErrorClass'
 
-const CannotInstall = createCustomErrorClass('CannotInstall')
+const ManagerUnexpectedError = createCustomErrorClass('ManagerUnexpected')
+const ManagerNotEnoughSpaceError = createCustomErrorClass('ManagerNotEnoughSpace')
+const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+const ManagerAppAlreadyInstalledError = createCustomErrorClass('ManagerAppAlreadyInstalled')
+const ManagerAppRelyOnBTCError = createCustomErrorClass('ManagerAppRelyOnBTC')
 
 function remapError(promise) {
   return promise.catch((e: Error) => {
-    if (e.message.endsWith('6982')) {
-      throw new CannotInstall()
+    switch (true) {
+      case e.message.endsWith('6982'):
+        throw new ManagerDeviceLockedError()
+      case e.message.endsWith('6a84') || e.message.endsWith('6a85'):
+        throw new ManagerNotEnoughSpaceError()
+      case e.message.endsWith('6a80') || e.message.endsWith('6a81'):
+        throw new ManagerAppAlreadyInstalledError()
+      case e.message.endsWith('6a83'):
+        throw new ManagerAppRelyOnBTCError()
+      default:
+        throw new ManagerUnexpectedError(e.message, { msg: e.message })
     }
-    throw e
   })
 }
 
