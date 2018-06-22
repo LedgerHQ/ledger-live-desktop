@@ -10,12 +10,10 @@ import hardReset from 'helpers/hardReset'
 
 import type { T } from 'types/common'
 
-import Spoiler from 'components/base/Spoiler'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Button from 'components/base/Button'
-import TranslatedError from './TranslatedError'
 
 type Props = {
   error: Error,
@@ -94,17 +92,23 @@ ${error.stack}
             {t('app:crash.reset')}
           </Button>
         </Box>
-        <Space of={20} />
-        <Spoiler color="wallet" title={t('app:crash.showError')}>
+        <Box my={6}>
           <ErrContainer>
-            <TranslatedError error={error} />
+            <strong>{String(error)}</strong>
+            <div>{error.stack || 'no stacktrace'}</div>
           </ErrContainer>
-        </Spoiler>
-        <Space of={10} />
-        <Spoiler color="wallet" title={t('app:crash.showDetails')}>
-          <ErrContainer>{error.stack}</ErrContainer>
-        </Spoiler>
-        <Space of={100} />
+        </Box>
+        <pre
+          style={{
+            position: 'fixed',
+            bottom: 8,
+            left: 8,
+            opacity: 0.2,
+            fontSize: 10,
+          }}
+        >
+          {__APP_VERSION__}
+        </pre>
         {children}
       </Box>
     )
@@ -114,14 +118,14 @@ ${error.stack}
 const ErrContainer = ({ children }: { children: any }) => (
   <pre
     style={{
-      marginTop: 10,
-      maxWidth: '80%',
+      margin: 'auto',
+      maxWidth: '80vw',
       overflow: 'auto',
       fontSize: 10,
       fontFamily: 'monospace',
-      background: 'rgba(0, 0, 0, 0.05)',
       cursor: 'text',
       userSelect: 'text',
+      opacity: 0.3,
     }}
   >
     {children}
