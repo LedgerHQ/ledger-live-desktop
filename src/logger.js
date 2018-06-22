@@ -134,13 +134,29 @@ export default {
     console.log(...args)
     addLog('log', ...args)
   },
+
   warn: (...args: any) => {
     console.warn(...args)
     addLog('warn', ...args)
   },
+
   error: (...args: any) => {
     console.error(...args)
     addLog('error', ...args)
+  },
+
+  critical: (error: Error) => {
+    addLog('critical', error)
+    console.error(error)
+    try {
+      if (typeof window !== 'undefined') {
+        require('sentry/browser').captureException(error)
+      } else {
+        require('sentry/node').captureException(error)
+      }
+    } catch (e) {
+      console.warn("Can't send to sentry", error, e)
+    }
   },
 
   exportLogs: (): Array<{ type: string, date: Date, args: Array<any> }> =>
