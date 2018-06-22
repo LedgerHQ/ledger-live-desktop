@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import logger from 'logger'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import type { Device, T } from 'types/common'
 
@@ -11,15 +12,10 @@ import installFinalFirmware from 'commands/installFinalFirmware'
 import Box, { Card } from 'components/base/Box'
 // import Button from 'components/base/Button'
 
-type DeviceInfos = {
-  targetId: number,
-  version: string,
-}
-
 type Props = {
   t: T,
   device: Device,
-  infos: DeviceInfos,
+  deviceInfo: DeviceInfo,
 }
 
 type State = {}
@@ -35,9 +31,9 @@ class FirmwareFinalUpdate extends PureComponent<Props, State> {
 
   installFinalFirmware = async () => {
     try {
-      const { device, infos } = this.props
+      const { device, deviceInfo } = this.props
       const { success } = await installFinalFirmware
-        .send({ devicePath: device.path, targetId: infos.targetId, version: infos.version })
+        .send({ devicePath: device.path, deviceInfo })
         .toPromise()
       if (success) {
         this.setState()
