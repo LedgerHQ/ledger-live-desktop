@@ -14,6 +14,7 @@ import type { LedgerScriptParams } from 'helpers/common'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installOsuFirmware from 'commands/installOsuFirmware'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -32,17 +33,12 @@ let CACHED_LATEST_FIRMWARE = null
 export const getCleanVersion = (input: string): string =>
   input.endsWith('-osu') ? input.replace('-osu', '') : input
 
-type DeviceInfos = {
-  targetId: number | string,
-  version: string,
-}
-
 type ModalStatus = 'closed' | 'disclaimer' | 'installing' | 'error' | 'success'
 
 type Props = {
   t: T,
   device: Device,
-  infos: DeviceInfos,
+  deviceInfo: DeviceInfo,
 }
 
 type State = {
@@ -73,12 +69,9 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   _unmounting = false
 
   fetchLatestFirmware = async () => {
-    const { infos } = this.props
+    const { deviceInfo } = this.props
     const latestFirmware =
-      CACHED_LATEST_FIRMWARE ||
-      (await getLatestFirmwareForDevice
-        .send({ targetId: infos.targetId, version: infos.version })
-        .toPromise())
+      CACHED_LATEST_FIRMWARE || (await getLatestFirmwareForDevice.send(deviceInfo).toPromise())
     if (
       !isEmpty(latestFirmware) &&
       !isEqual(this.state.latestFirmware, latestFirmware) &&
@@ -92,14 +85,14 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   installFirmware = async () => {
     try {
       const { latestFirmware } = this.state
-      const { infos } = this.props
+      const { deviceInfo } = this.props
       invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
       const {
         device: { path: devicePath },
       } = this.props
       this.setState({ modal: 'installing' })
       const { success } = await installOsuFirmware
-        .send({ devicePath, firmware: latestFirmware, targetId: infos.targetId })
+        .send({ devicePath, firmware: latestFirmware, targetId: deviceInfo.targetId })
         .toPromise()
       if (success) {
         this.fetchLatestFirmware()
@@ -150,7 +143,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   }
 
   render() {
-    const { infos, t } = this.props
+    const { deviceInfo, t } = this.props
     const { latestFirmware, modal } = this.state
 
     return (
@@ -170,7 +163,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>
               {t('app:manager.firmware.installed', {
-                version: infos.version,
+                version: deviceInfo.fullVersion,
               })}
             </Text>
           </Box>

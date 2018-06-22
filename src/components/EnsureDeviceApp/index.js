@@ -159,7 +159,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
         }
       } else {
         logger.warn('EnsureDeviceApp for using dashboard is DEPRECATED !!!')
-        // FIXME REMOVE THIS ! should use EnsureDashboard dedicated component.
+        // TODO: FIXME REMOVE THIS ! should use EnsureDashboard dedicated component.
         const isDashboard = isDashboardOpen.send({ devicePath: deviceSelected.path }).toPromise()
 
         if (!isDashboard) {

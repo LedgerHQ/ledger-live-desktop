@@ -58,7 +58,7 @@ class Workflow extends PureComponent<Props, State> {
               }
 
               return (
-                <EnsureGenuine device={device} infos={deviceInfo}>
+                <EnsureGenuine device={device} deviceInfo={deviceInfo}>
                   {(isGenuine: ?boolean, genuineError: ?Error) => {
                     if (dashboardError || genuineError) {
                       return renderError

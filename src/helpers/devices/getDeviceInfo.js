@@ -12,6 +12,8 @@ export type DeviceInfo = {
   mcuVersion: string,
   isOSU: boolean,
   providerName: string,
+  providerId: number,
+  fullVersion: string,
 }
 
 const DETECT_CLUBCOIN = [
@@ -164,6 +166,13 @@ const DETECT_CLUBCOIN = [
   ],
 ]
 
+const PROVIDERS = {
+  '': 1,
+  das: 2,
+  club: 3,
+  shitcoins: 4,
+}
+
 export default async (transport: Transport<*>): Promise<DeviceInfo> => {
   const res = await getFirmwareInfo(transport)
   let { seVersion } = res
@@ -181,9 +190,11 @@ export default async (transport: Transport<*>): Promise<DeviceInfo> => {
   const parsedVersion = seVersion.match(/[0-9]+.[0-9]+(.[0-9]+)?(-[a-z]+)?(-osu)?/) || []
   const isOSU = typeof parsedVersion[5] !== 'undefined'
   const providerName = parsedVersion[4] || ''
+  const providerId = PROVIDERS[providerName]
   const isBootloader = targetId === 0x01000001
   const majMin = parsedVersion[1]
   const patch = parsedVersion[2] || '.0'
+  const fullVersion = `${seVersion}${providerName ? `-${providerName}` : ''}`
   return {
     targetId,
     seVersion: majMin + patch,
@@ -191,6 +202,8 @@ export default async (transport: Transport<*>): Promise<DeviceInfo> => {
     mcuVersion,
     isBootloader,
     providerName,
+    providerId,
     flags,
+    fullVersion,
   }
 }

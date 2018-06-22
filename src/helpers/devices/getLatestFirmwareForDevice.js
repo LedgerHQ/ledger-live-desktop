@@ -1,24 +1,22 @@
 // @flow
 import network from 'api/network'
 import { GET_LATEST_FIRMWARE } from 'helpers/urls'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import getCurrentFirmware from './getCurrentFirmware'
 import getDeviceVersion from './getDeviceVersion'
 
-type Input = {
-  version: string,
-  targetId: string | number,
-}
-
-export default async (input: Input) => {
+export default async (deviceInfo: DeviceInfo) => {
   try {
-    const provider = 1
-    const { targetId, version } = input
     // Get device infos from targetId
-    const deviceVersion = await getDeviceVersion(targetId)
+    const deviceVersion = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
 
     // Get firmware infos with firmware name and device version
-    const seFirmwareVersion = await getCurrentFirmware({ version, deviceId: deviceVersion.id })
+    const seFirmwareVersion = await getCurrentFirmware({
+      fullVersion: deviceInfo.fullVersion,
+      deviceId: deviceVersion.id,
+      provider: deviceInfo.providerId,
+    })
 
     // Fetch next possible firmware
     const { data } = await network({
@@ -27,7 +25,7 @@ export default async (input: Input) => {
       data: {
         current_se_firmware_final_version: seFirmwareVersion.id,
         device_version: deviceVersion.id,
-        provider,
+        provider: deviceInfo.providerId,
       },
     })
 
