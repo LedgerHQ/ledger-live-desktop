@@ -22,10 +22,10 @@ DeviceSocketNoHandler: Oops, device connection failed (handler {{query}}). Pleas
 LatestMCUInstalledError: MCU on device already up to date.
 HardResetFail: Reset failed. Please try again.
 
-ManagerAPIsFail: Our services are currently unavailable. Please try again later.
-ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again later.
-ManagerNotEnoughSpace: Not enough room left on your device. Please uninstall some apps and try again.
+ManagerAPIsFail: Services are unavailable. Please try again.
+ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again.
+ManagerNotEnoughSpace: Not enough storage on device. Uninstall some apps and try again.
 ManagerDeviceLocked: Device is locked
 ManagerAppAlreadyInstalled: App is already installed
-ManagerAppRelyOnBTC: You must install Bitcoin application first
-ManagerUninstallBTCDep: You must uninstall other altcoins first
+ManagerAppRelyOnBTC: First install the Bitcoin app
+ManagerUninstallBTCDep: Other apps depend on Bitcoin, uninstall those first
