@@ -26,6 +26,7 @@ const supported: CryptoCurrencyIds[] = [
   'viacoin',
   'stealthcoin',
   'poswallet',
+  'clubcoin',
   'bitcoin_testnet',
 ]
 
