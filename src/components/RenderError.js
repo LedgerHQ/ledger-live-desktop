@@ -14,8 +14,8 @@ import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Button from 'components/base/Button'
+import ConfirmModal from 'components/base/Modal/ConfirmModal'
 import IconTriangleWarning from 'icons/TriangleWarning'
-import ConfirmModal from './base/Modal/ConfirmModal'
 import { IconWrapperCircle } from './SettingsPage/sections/Profile'
 
 type Props = {
