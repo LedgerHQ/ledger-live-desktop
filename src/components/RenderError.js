@@ -14,7 +14,6 @@ import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Button from 'components/base/Button'
-import TranslatedError from './TranslatedError'
 
 type Props = {
   error: Error,
@@ -95,12 +94,21 @@ ${error.stack}
         </Box>
         <Box my={6}>
           <ErrContainer>
-            <strong>
-              <TranslatedError error={error} />
-            </strong>
-            <div>{error.stack}</div>
+            <strong>{String(error)}</strong>
+            <div>{error.stack || 'no stacktrace'}</div>
           </ErrContainer>
         </Box>
+        <pre
+          style={{
+            position: 'fixed',
+            bottom: 8,
+            left: 8,
+            opacity: 0.2,
+            fontSize: 10,
+          }}
+        >
+          {__APP_VERSION__}
+        </pre>
         {children}
       </Box>
     )
