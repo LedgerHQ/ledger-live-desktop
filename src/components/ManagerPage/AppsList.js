@@ -21,7 +21,7 @@ import Spinner from 'components/base/Spinner'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
 
-import ExclamationCircle from 'icons/ExclamationCircle'
+import IconInfoCircle from 'icons/InfoCircle'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Update from 'icons/Update'
 import Trash from 'icons/Trash'
@@ -246,19 +246,19 @@ class AppsList extends PureComponent<Props, State> {
     return (
       <Box flow={6}>
         <Box>
-          <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal>
-            <span>{t('app:manager.apps.all')}</span>
-            <span>
-              <Tooltip
-                render={() => (
-                  <Box ff="Open Sans|SemiBold" fontSize={2}>
-                    {t('app:manager.apps.help')}
-                  </Box>
-                )}
-              >
-                <ExclamationCircle size={12} />
-              </Tooltip>
-            </span>
+          <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal align="center">
+            <span style={{ lineHeight: 1 }}>{t('app:manager.apps.all')}</span>
+            <Tooltip
+              render={() => (
+                <Box ff="Open Sans|SemiBold" fontSize={2}>
+                  {t('app:manager.apps.help')}
+                </Box>
+              )}
+            >
+              <Box color="grey">
+                <IconInfoCircle size={12} />
+              </Box>
+            </Tooltip>
           </Box>
           {this.renderList()}
         </Box>
