@@ -4,7 +4,9 @@ import logger from 'logger'
 import { createCommand } from 'helpers/ipc'
 import { Observable } from 'rxjs'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
-import { DEVICE_DISCONNECT_DEBOUNCE } from 'config/constants'
+import { DEVICE_DISCONNECT_DEBOUNCE, LISTEN_DEVICES_POLLING_INTERVAL } from 'config/constants'
+
+CommNodeHid.setListenDevicesPollingInterval(LISTEN_DEVICES_POLLING_INTERVAL)
 
 const cmd = createCommand('listenDevices', () =>
   Observable.create(o => {
