@@ -2,11 +2,11 @@
 import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
 import { colors } from 'styles/theme'
+import { i } from 'helpers/staticPath'
 
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
-import IconWriteSeed from 'icons/illustrations/WriteSeed'
 import IconChevronRight from 'icons/ChevronRight'
 
 import {
@@ -75,7 +75,7 @@ class WriteSeedBlue extends PureComponent<Props, *> {
         <Box align="center">
           <Inner style={{ width: 760 }}>
             <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
-              <IconWriteSeed />
+              <img alt="" src={i('write-seed-onb.svg')} />
             </Box>
             <Box shrink flow={2} m={0}>
               {steps.map(step => <OptionRow key={step.key} step={step} />)}

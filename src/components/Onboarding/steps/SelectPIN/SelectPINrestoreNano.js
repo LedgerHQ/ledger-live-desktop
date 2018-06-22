@@ -2,11 +2,11 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import { colors } from 'styles/theme'
+import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 
 import type { T } from 'types/common'
-import IconLedgerNanoSelectPIN from 'icons/illustrations/LedgerNanoSelectPIN'
 
 import IconChevronRight from 'icons/ChevronRight'
 
@@ -63,7 +63,7 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
     return (
       <Box align="center" mt={3}>
         <Inner style={{ width: 700 }}>
-          <IconLedgerNanoSelectPIN />
+          <img alt="" src={i('select-pin-nano-onb.svg')} />
           <Box shrink grow flow={4} style={{ marginLeft: 40 }}>
             {stepsLedgerNano.map(step => <OptionRow key={step.key} step={step} />)}
           </Box>
