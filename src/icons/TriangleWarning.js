@@ -10,7 +10,7 @@ const path = (
 )
 
 export default ({ height, width, ...p }: { height: number, width: number }) => (
-  <svg viewBox="0 0 19 17" height={height} width={width} {...p}>
+  <svg viewBox="0 0 17 17" height={height} width={width} {...p}>
     {path}
   </svg>
 )

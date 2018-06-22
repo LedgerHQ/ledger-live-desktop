@@ -263,7 +263,7 @@ export default connect(
 )(TabProfile)
 
 // TODO: need a helper file for common styles across the app
-const IconWrapperCircle = styled(Box).attrs({})`
+export const IconWrapperCircle = styled(Box).attrs({})`
   width: 50px;
   height: 50px;
   border-radius: 50%;

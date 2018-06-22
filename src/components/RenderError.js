@@ -14,6 +14,9 @@ import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Button from 'components/base/Button'
+import IconTriangleWarning from 'icons/TriangleWarning'
+import ConfirmModal from './base/Modal/ConfirmModal'
+import { IconWrapperCircle } from './SettingsPage/sections/Profile'
 
 type Props = {
   error: Error,
@@ -22,10 +25,32 @@ type Props = {
   children?: *,
 }
 
-class RenderError extends PureComponent<Props, { isHardResetting: boolean }> {
+class RenderError extends PureComponent<
+  Props,
+  { isHardResetting: boolean, isHardResetModalOpened: boolean },
+> {
   state = {
     isHardResetting: false,
+    isHardResetModalOpened: false,
   }
+
+  handleOpenHardResetModal = () => this.setState({ isHardResetModalOpened: true })
+  handleCloseHardResetModal = () => this.setState({ isHardResetModalOpened: false })
+
+  handleHardReset = async () => {
+    this.setState({ isHardResetting: true })
+    try {
+      await hardReset()
+      remote.getCurrentWindow().webContents.reloadIgnoringCache()
+    } catch (err) {
+      this.setState({ isHardResetting: false })
+    }
+  }
+  hardResetIconRender = () => (
+    <IconWrapperCircle color="alertRed">
+      <IconTriangleWarning width={23} height={21} />
+    </IconWrapperCircle>
+  )
 
   handleCreateIssue = () => {
     const { error } = this.props
@@ -60,7 +85,7 @@ ${error.stack}
 
   render() {
     const { error, t, disableExport, children } = this.props
-    const { isHardResetting } = this.state
+    const { isHardResetting, isHardResetModalOpened } = this.state
     return (
       <Box align="center" grow>
         <Space of={100} />
@@ -88,10 +113,21 @@ ${error.stack}
           <Button primary onClick={this.handleCreateIssue}>
             {t('app:crash.createTicket')}
           </Button>
-          <Button danger onClick={this.handleHardReset} isLoading={isHardResetting}>
+          <Button danger onClick={this.handleOpenHardResetModal}>
             {t('app:crash.reset')}
           </Button>
         </Box>
+        <ConfirmModal
+          isDanger
+          isLoading={isHardResetting}
+          isOpened={isHardResetModalOpened}
+          onClose={this.handleCloseHardResetModal}
+          onReject={this.handleCloseHardResetModal}
+          onConfirm={this.handleHardReset}
+          title={t('app:settings.hardResetModal.title')}
+          desc={t('app:settings.hardResetModal.desc')}
+          renderIcon={this.hardResetIconRender}
+        />
         <Box my={6}>
           <ErrContainer>
             <strong>{String(error)}</strong>
