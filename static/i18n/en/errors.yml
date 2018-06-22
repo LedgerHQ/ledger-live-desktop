@@ -3,23 +3,23 @@ RangeError: '{{message}}'
 Error: '{{message}}'
 LedgerAPIErrorWithMessage: '{{message}}'
 TransportStatusError: '{{message}}'
-TimeoutError: 'The request timed out. Please try again or contact Ledger Support.'
-FeeEstimationFailed: 'The fee could not be estimated. Please try again or set a custom fee (status: {{status}})'
-NotEnoughBalance: 'The account has insufficient funds to proceed.'
+TimeoutError: 'The request timed out.'
+FeeEstimationFailed: 'Fee estimation error. Try again or set a custom fee (status: {{status}})'
+NotEnoughBalance: 'Insufficient funds to proceed.'
 BtcUnmatchedApp: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
 WrongAppOpened: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
 WrongDeviceForAccount: 'Use the device associated with the account ‘{{accountName}}’.'
-LedgerAPINotAvailable: 'The Ledger API is not available for {{currencyName}}. Please check status.ledger.fr.'
-LedgerAPIError: 'A problem occurred with the Ledger API. Please try again later. (HTTP {{status}})'
-NetworkDown: 'Your internet connection seems down. Please try again.'
+LedgerAPINotAvailable: 'Ledger API not available for {{currencyName}}.'
+LedgerAPIError: 'Ledger API error. Try again later. (HTTP {{status}})'
+NetworkDown: 'Your internet connection seems down.'
 NoAddressesFound: 'No accounts were found.'
-UserRefusedOnDevice: Please try again or request Ledger Support assistance when in doubt.
-WebsocketConnectionError: An error occurred with the websocket connection. Please try again or contact Ledger Support.
-WebsocketConnectionFailed: Oops, could not establish a websocket connection. Please try again or contact Ledger Support.
-DeviceSocketFail: Oops. a device socket failure occurred. Please try again or contact Ledger Support.
-DeviceSocketNoBulkStatus: Oops, the device socket failed (bulk). Please try again or contact Ledger Support.
-DeviceSocketNoHandler: Oops, the device socket failed (handler {{query}}). Please try again or contact Ledger Support.
-LatestMCUInstalledError: The MCU on the device is already up to date.
-HardResetFail: Could not reset Ledger Live. Please try again or contact Ledger Support.
-CannotUninstall: Cannot uninstall app
-CannotInstall: Cannot install app
+UserRefusedOnDevice: Transaction refused on device.
+WebsocketConnectionError: Oops, device connection failed. Please try again. [web-err]
+WebsocketConnectionFailed: Oops, device connection failed. Please try again. [web-fail]
+DeviceSocketFail: Oops, device connection failed. Please try again. [device-fail]
+DeviceSocketNoBulkStatus: Oops, device connection failed. Please try again [bulk].
+DeviceSocketNoHandler: Oops, device connection failed (handler {{query}}). Please try again.
+LatestMCUInstalledError: MCU on device already up to date.
+HardResetFail: Reset failed. Please try again.
+CannotUninstall: Cannot uninstall app.
+CannotInstall: Not enough room left on your device. Please uninstall some apps and try again.
