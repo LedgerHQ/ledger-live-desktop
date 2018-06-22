@@ -1,23 +1,26 @@
 ---
-generic: An error occurred
+generic: Oops, an unknown error occurred. Please try again or contact Ledger Support.
 RangeError: '{{message}}'
 Error: '{{message}}'
 LedgerAPIErrorWithMessage: '{{message}}'
 TransportStatusError: '{{message}}'
-TimeoutError: 'Timeout reached'
-FeeEstimationFailed: 'fee estimation failed (status: {{status}})'
-NotEnoughBalance: 'Not enough balance'
-BtcUnmatchedApp: 'You must open application ‘{{currencyName}}’ on the device'
-WrongAppOpened: 'You must open application ‘{{currencyName}}’ on the device'
-WrongDeviceForAccount: 'You must use the device associated to the account ‘{{accountName}}’'
-LedgerAPINotAvailable: 'Ledger API is not available for currency {{currencyName}}'
-LedgerAPIError: 'A problem occurred with Ledger API. Please try again later. (HTTP {{status}})'
-NetworkDown: 'Your internet connection seems down. Please try again later.'
-NoAddressesFound: 'No accounts found'
-UserRefusedOnDevice: Transaction have been aborted
-WebsocketConnectionError: An error occurred with the socket connection
-WebsocketConnectionFailed: Failed to establish a socket connection
-DeviceSocketFail: Device socket failure
-DeviceSocketNoBulkStatus: Device socket failure (bulk)
-DeviceSocketNoHandler: Device socket failure (handler {{query}})
-LatestMCUInstalledError: The latest MCU is already installed on the Device
+TimeoutError: 'The request timed out.'
+FeeEstimationFailed: 'Fee estimation error. Try again or set a custom fee (status: {{status}})'
+NotEnoughBalance: 'Insufficient funds to proceed.'
+BtcUnmatchedApp: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
+WrongAppOpened: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
+WrongDeviceForAccount: 'Use the device associated with the account ‘{{accountName}}’.'
+LedgerAPINotAvailable: 'Ledger API not available for {{currencyName}}.'
+LedgerAPIError: 'Ledger API error. Try again later. (HTTP {{status}})'
+NetworkDown: 'Your internet connection seems down.'
+NoAddressesFound: 'No accounts were found.'
+UserRefusedOnDevice: Transaction refused on device.
+WebsocketConnectionError: Oops, device connection failed. Please try again. [web-err]
+WebsocketConnectionFailed: Oops, device connection failed. Please try again. [web-fail]
+DeviceSocketFail: Oops, device connection failed. Please try again. [device-fail]
+DeviceSocketNoBulkStatus: Oops, device connection failed. Please try again [bulk].
+DeviceSocketNoHandler: Oops, device connection failed (handler {{query}}). Please try again.
+LatestMCUInstalledError: MCU on device already up to date.
+HardResetFail: Reset failed. Please try again.
+CannotUninstall: Cannot uninstall app.
+CannotInstall: Not enough room left on your device. Please uninstall some apps and try again.

@@ -48,13 +48,13 @@ class EmptyState extends PureComponent<Props, *> {
           <Title>{t('app:emptyState.dashboard.title')}</Title>
           <Description>{t('app:emptyState.dashboard.desc')}</Description>
           <Box mt={3} horizontal justifyContent="space-around" style={{ width: 300 }}>
-            <Button padded primary style={{ width: 120 }} onClick={this.handleInstallApp}>
+            <Button padded primary style={{ minWidth: 120 }} onClick={this.handleInstallApp}>
               {t('app:emptyState.dashboard.buttons.installApp')}
             </Button>
             <Button
               padded
               primary
-              style={{ width: 120 }}
+              style={{ minWidth: 120 }}
               onClick={() => openModal(MODAL_ADD_ACCOUNTS)}
             >
               {t('app:emptyState.dashboard.buttons.addAccount')}
@@ -78,6 +78,7 @@ export const Description = styled(Box).attrs({
   color: p => p.theme.colors.graphite,
 })`
   margin: 10px auto 25px;
+  display: block;
 `
 export default compose(
   connect(

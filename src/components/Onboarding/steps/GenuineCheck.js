@@ -353,7 +353,7 @@ export function GenuineCheckFail({
   )
 }
 export const GenuineSuccessText = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
+  ff: 'Open Sans|SemiBold',
   fontSize: 4,
 })``
 

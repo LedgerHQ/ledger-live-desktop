@@ -11,14 +11,14 @@ const rotate = keyframes`
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: rotate(-360deg);
   }
 `
 
 export const Rotating = styled(Box)`
   width: ${p => p.size}px;
   height: ${p => p.size}px;
-  animation: ${p => (p.isRotating === false ? 'none' : `${rotate} 1.5s linear infinite`)};
+  animation: ${p => (p.isRotating === false ? 'none' : `${rotate} 1s linear infinite`)};
   transition: 100ms linear transform;
 `
 

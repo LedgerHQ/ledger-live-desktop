@@ -61,10 +61,12 @@ const B = styled(Bar).attrs({
 const operationSelector = createSelector(
   accountSelector,
   (_, { operationId }) => operationId,
-  (account, operationId) => {
+  (account: Account, operationId: string): ?Operation => {
     if (!account) return null
-    const operation = account.operations.find(op => op.id === operationId)
-    return operation
+    const maybeOp = account.operations.find(op => op.id === operationId)
+    if (maybeOp) return maybeOp
+    const maybeOpPending = account.pendingOperations.find(op => op.id === operationId)
+    return maybeOpPending
   },
 )
 
@@ -109,7 +111,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
     <ModalBody onClose={onClose}>
       <ModalTitle>{t('app:operationDetails.title')}</ModalTitle>
       <ModalContent style={{ height: 500 }} mx={-5} pb={0}>
-        <GrowScroll px={5} pb={8}>
+        <GrowScroll px={5} pt={1} pb={8}>
           <Box flow={3}>
             <Box alignItems="center" mt={1}>
               <ConfirmationCheck

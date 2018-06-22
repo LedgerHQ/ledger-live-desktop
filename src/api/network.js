@@ -19,16 +19,20 @@ const userFriendlyError = <A>(p: Promise<A>): Promise<A> =>
         let msg = data.error || data.message
         if (typeof msg === 'string') {
           const m = msg.match(/^JsDefined\((.*)\)$/)
-          if (m) {
-            try {
-              const { message } = JSON.parse(m[1])
-              if (typeof message === 'string') {
-                msg = message
-              }
-            } catch (e) {
-              logger.warn("can't parse server result", e)
+          const innerPart = m ? m[1] : msg
+          try {
+            const r = JSON.parse(innerPart)
+            let message = r.error
+            if (typeof message === 'object') {
+              message = message.message
             }
+            if (typeof message === 'string') {
+              msg = message
+            }
+          } catch (e) {
+            logger.warn("can't parse server result", e)
           }
+
           if (msg && msg[0] !== '<') {
             throw new LedgerAPIErrorWithMessage(msg)
           }

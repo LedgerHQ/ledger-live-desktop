@@ -56,7 +56,7 @@ const BalanceSummary = ({
               <Chart
                 id={chartId}
                 unit={account ? account.unit : null}
-                color={!isAvailable ? '#eee' : chartColor}
+                color={!isAvailable ? 'rgba(0,0,0,0.04)' : chartColor}
                 data={
                   isAvailable
                     ? balanceHistory
