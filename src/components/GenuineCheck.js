@@ -26,6 +26,13 @@ type Props = {
   device: ?Device,
 }
 
+// TODO: use the exported DeviceInfo type when merged
+type DeviceInfo = {
+  devicePath: string,
+  targetId: string | number,
+  version: string,
+}
+
 const usbIcon = <IconUsb size={36} />
 
 const mapStateToProps = state => ({
@@ -48,7 +55,13 @@ class GenuineCheck extends PureComponent<Props> {
         .toPromise(),
     )
 
-  checkGenuineInteractionHandler = async ({ device, infos }: { device: Device }) => {
+  checkGenuineInteractionHandler = async ({
+    device,
+    infos,
+  }: {
+    device: Device,
+    infos: DeviceInfo,
+  }) => {
     const res = await getIsGenuine
       .send({ devicePath: device.path, targetId: infos.targetId, version: infos.version })
       .pipe(timeout(GENUINE_TIMEOUT))

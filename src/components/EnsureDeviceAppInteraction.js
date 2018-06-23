@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
+import invariant from 'invariant'
 import { connect } from 'react-redux'
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
@@ -24,7 +25,7 @@ const mapStateToProps = state => ({
 
 class EnsureDeviceAppInteraction extends Component<{
   device: ?Device,
-  account?: Account,
+  account?: ?Account,
   currency?: ?CryptoCurrency,
 }> {
   connectInteractionHandler = () =>
@@ -37,6 +38,7 @@ class EnsureDeviceAppInteraction extends Component<{
     const { account, currency } = this.props
     return createCancelablePolling(500, async () => {
       const cur = account ? account.currency : currency
+      invariant(cur, 'No currency given')
       const { address } = await getAddress
         .send({
           devicePath: device.path,
@@ -54,13 +56,14 @@ class EnsureDeviceAppInteraction extends Component<{
   renderOpenAppTitle = ({ device }) => {
     const { account, currency } = this.props
     const cur = account ? account.currency : currency
+    invariant(cur, 'No currency given')
     return `Open the ${cur.name} app on your ${device ? `${device.product} ` : 'device'}`
   }
 
   render() {
     const { account, currency, ...props } = this.props
     const cur = account ? account.currency : currency
-    const Icon = getCryptoCurrencyIcon(cur)
+    const Icon = cur ? getCryptoCurrencyIcon(cur) : null
     return (
       <DeviceInteraction
         steps={[
