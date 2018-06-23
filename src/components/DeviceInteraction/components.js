@@ -61,6 +61,7 @@ export const IconContainer = ({ children }: { children: any }) => (
 )
 
 const SpinnerContainerWrapper = styled.div`
+  color: ${p => p.theme.colors.grey};
   position: absolute;
   top: 0;
   left: 0;

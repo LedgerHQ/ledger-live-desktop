@@ -22,6 +22,7 @@ class DeviceInteraction extends PureComponent<
   {
     steps: Step[],
     onSuccess?: any => void,
+    onFail?: any => void,
     renderSuccess?: any => any,
     waitBeforeSuccess?: number,
   },
@@ -70,13 +71,14 @@ class DeviceInteraction extends PureComponent<
   }
 
   handleFail = (error: Error, step: Step) => {
-    const { steps } = this.props
+    const { steps, onFail } = this.props
     const { stepIndex } = this.state
     const isCurrentStep = step === steps[stepIndex]
     if (!isCurrentStep) {
       return
     }
     this.setState({ error })
+    onFail && onFail(error)
   }
 
   render() {

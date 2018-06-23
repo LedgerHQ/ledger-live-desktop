@@ -131,6 +131,7 @@ class DeviceInteractionStep extends PureComponent<
       return
     }
 
+
     try {
       const d1 = Date.now()
 
