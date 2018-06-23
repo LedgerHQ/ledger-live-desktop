@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
 import { createCancelablePolling } from 'helpers/promise'
@@ -24,7 +24,8 @@ const mapStateToProps = state => ({
 
 class EnsureDeviceAppInteraction extends Component<{
   device: ?Device,
-  account: Account,
+  account?: Account,
+  currency?: ?CryptoCurrency,
 }> {
   connectInteractionHandler = () =>
     createCancelablePolling(500, () => {
@@ -33,15 +34,16 @@ class EnsureDeviceAppInteraction extends Component<{
     })
 
   openAppInteractionHandler = ({ device }) => {
-    const { account } = this.props
+    const { account, currency } = this.props
     return createCancelablePolling(500, async () => {
+      const cur = account ? account.currency : currency
       const { address } = await getAddress
         .send({
           devicePath: device.path,
-          currencyId: account.currency.id,
+          currencyId: cur.id,
           path: account
             ? account.freshAddressPath
-            : standardDerivation({ currency: account.currency, segwit: false, x: 0 }),
+            : standardDerivation({ currency: cur, segwit: false, x: 0 }),
           segwit: account ? isSegwitAccount(account) : false,
         })
         .toPromise()
@@ -50,15 +52,15 @@ class EnsureDeviceAppInteraction extends Component<{
   }
 
   renderOpenAppTitle = ({ device }) => {
-    const { account } = this.props
-    return `Open the ${account.currency.name} app on your ${
-      device ? `${device.product} ` : 'device'
-    }`
+    const { account, currency } = this.props
+    const cur = account ? account.currency : currency
+    return `Open the ${cur.name} app on your ${device ? `${device.product} ` : 'device'}`
   }
 
   render() {
-    const { account, ...props } = this.props
-    const Icon = getCryptoCurrencyIcon(account.currency)
+    const { account, currency, ...props } = this.props
+    const cur = account ? account.currency : currency
+    const Icon = getCryptoCurrencyIcon(cur)
     return (
       <DeviceInteraction
         steps={[
