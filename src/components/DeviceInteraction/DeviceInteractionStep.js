@@ -180,6 +180,7 @@ class DeviceInteractionStep extends PureComponent<
     const { status } = this.state
     const title = typeof step.title === 'function' ? step.title(data) : step.title || '[UNTITLED]'
     const { render: CustomRender } = step
+    const isRunning = status === 'running'
 
     return (
       <DeviceInteractionStepContainer
@@ -191,7 +192,7 @@ class DeviceInteractionStep extends PureComponent<
         isError={isError}
       >
         <IconContainer>{step.icon}</IconContainer>
-        <Box py={4} pr={4} justify="center" grow shrink>
+        <Box py={4} justify="center" grow shrink>
           <Box color={isActive && !isSuccess ? 'dark' : ''} ff="Open Sans|SemiBold">
             {title}
           </Box>
@@ -207,10 +208,11 @@ class DeviceInteractionStep extends PureComponent<
           {isError && error && <ErrorDescContainer error={error} onRetry={onRetry} mt={2} />}
         </Box>
 
-        {isError && <ErrorContainer />}
-
-        <SuccessContainer isVisible={isSuccess} />
-        <SpinnerContainer isVisible={status === 'running'} isPassed={isPassed} isError={isError} />
+        <div style={{ width: 70, position: 'relative', overflow: 'hidden', pointerEvents: 'none' }}>
+          <SpinnerContainer isVisible={isRunning} isPassed={isPassed} isError={isError} />
+          <ErrorContainer isVisible={isError} />
+          <SuccessContainer isVisible={isSuccess} />
+        </div>
       </DeviceInteractionStepContainer>
     )
   }

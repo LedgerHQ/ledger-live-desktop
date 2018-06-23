@@ -60,86 +60,47 @@ export const IconContainer = ({ children }: { children: any }) => (
   </Box>
 )
 
-const SpinnerContainerWrapper = styled(Box).attrs({
-  justify: 'center',
-  color: 'dark',
-  align: 'center',
-})`
+const SpinnerContainerWrapper = styled.div`
   position: absolute;
-  top: 0px;
-  right: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  padding-left: 15px;
-  overflow: hidden;
-  pointer-events: none;
-`
-
-const SpinnerContainerInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 0;
-  border-left: none;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  transition: 750ms cubic-bezier(0.62, 0.28, 0.39, 0.94);
+  transition: 350ms cubic-bezier(0.62, 0.28, 0.39, 0.94);
   transition-property: transform opacity;
-  opacity: ${p => (p.isVisible && !p.isPassed ? 1 : 0)};
-  transform: translate3d(0, ${p => (p.isPassed || p.isError ? -40 : 0)}px, 0);
-  color: grey;
+  opacity: ${p => (p.isVisible ? 1 : 0)};
+  transform: translate3d(0, ${p => (!p.isVisible ? -40 : 0)}px, 0);
 `
 
-export const SpinnerContainer = ({
-  isVisible,
-  isPassed,
-  isError,
-}: {
-  isVisible: boolean,
-  isPassed: boolean,
-  isError: boolean,
-}) => (
-  <SpinnerContainerWrapper>
-    <SpinnerContainerInner isVisible={isVisible} isPassed={isPassed} isError={isError}>
-      <Spinner size={24} />
-    </SpinnerContainerInner>
+export const SpinnerContainer = ({ isVisible }: { isVisible: boolean }) => (
+  <SpinnerContainerWrapper isVisible={isVisible}>
+    <Spinner size={16} />
   </SpinnerContainerWrapper>
 )
 
-const SuccessContainerInner = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 0;
-  border-left: none;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  transition: 350ms cubic-bezier(0.62, 0.28, 0.39, 0.94);
-  transition-property: transform opacity;
-  transition-delay: 180ms;
-  opacity: ${p => (p.isVisible ? 1 : 0)};
-  transform: translate3d(0, ${p => (p.isVisible ? 0 : 40)}px, 0);
+const SuccessContainerWrapper = styled(SpinnerContainerWrapper)`
+  color: ${p => p.theme.colors.wallet};
+  transform: translate3d(0, ${p => (!p.isVisible ? 40 : 0)}px, 0);
 `
 
 export const SuccessContainer = ({ isVisible }: { isVisible: boolean }) => (
-  <Box p={4} color="wallet" align="center" justify="center" pl={0} overflow="hidden">
-    <SuccessContainerInner isVisible={isVisible}>
-      <IconCheck size={16} />
-    </SuccessContainerInner>
-  </Box>
+  <SuccessContainerWrapper isVisible={isVisible}>
+    <IconCheck size={16} />
+  </SuccessContainerWrapper>
 )
 
-export const ErrorContainer = () => (
-  <Box
-    p={4}
-    color="alertRed"
-    align="center"
-    justify="center"
-    pl={0}
-    sticky
-    style={{ left: 'auto' }}
-  >
+const ErrorContainerWrapper = styled(SpinnerContainerWrapper)`
+  color: ${p => p.theme.colors.alertRed};
+  transform: translate3d(0, ${p => (!p.isVisible ? 40 : 0)}px, 0);
+`
+
+export const ErrorContainer = ({ isVisible }: { isVisible: boolean }) => (
+  <ErrorContainerWrapper isVisible={isVisible}>
     <IconCross size={16} />
-  </Box>
+  </ErrorContainerWrapper>
 )
 
 const ErrorRetryContainer = styled(Box).attrs({
