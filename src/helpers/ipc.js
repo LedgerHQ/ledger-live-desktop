@@ -2,6 +2,7 @@
 import logger from 'logger'
 import { Observable } from 'rxjs'
 import uuidv4 from 'uuid/v4'
+import { deserializeError } from './errors'
 
 export function createCommand<In, A>(id: string, impl: In => Observable<A>): Command<In, A> {
   return new Command(id, impl)
@@ -60,10 +61,12 @@ function ipcRendererSendCommand<In, A>(id: string, data: In): Observable<A> {
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
 
-        case 'cmd.ERROR':
-          o.error(msg.data)
+        case 'cmd.ERROR': {
+          const error = deserializeError(msg.data)
+          o.error(error)
           ipcRenderer.removeListener('command-event', handleCommandEvent)
           break
+        }
 
         default:
       }

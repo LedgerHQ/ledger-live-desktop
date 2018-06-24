@@ -1,6 +1,6 @@
 // @flow
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 import network from './network'
 import { blockchainBaseURL } from './Ledger'
 

@@ -13,7 +13,7 @@ import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
 import { standardDerivation } from 'helpers/derivations'
 import isDashboardOpen from 'commands/isDashboardOpen'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 
 import { CHECK_APP_INTERVAL_WHEN_VALID, CHECK_APP_INTERVAL_WHEN_INVALID } from 'config/constants'
 

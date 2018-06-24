@@ -5,7 +5,7 @@ import logger from 'logger'
 import Websocket from 'ws'
 import type Transport from '@ledgerhq/hw-transport'
 import { Observable } from 'rxjs'
-import createCustomErrorClass from './createCustomErrorClass'
+import { createCustomErrorClass } from './errors'
 
 const WebsocketConnectionError = createCustomErrorClass('WebsocketConnectionError')
 const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnectionFailed')

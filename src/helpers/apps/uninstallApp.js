@@ -6,7 +6,7 @@ import { BASE_SOCKET_URL_SECURE } from 'config/constants'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { LedgerScriptParams } from 'helpers/common'
-import createCustomErrorClass from '../createCustomErrorClass'
+import { createCustomErrorClass } from '../errors'
 
 const ManagerUnexpectedError = createCustomErrorClass('ManagerUnexpectedError')
 const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')

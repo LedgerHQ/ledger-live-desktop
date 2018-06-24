@@ -7,7 +7,7 @@ import { createDeviceSocket } from 'helpers/socket'
 
 import type { LedgerScriptParams } from 'helpers/common'
 
-import createCustomErrorClass from '../createCustomErrorClass'
+import { createCustomErrorClass } from '../errors'
 
 const ManagerUnexpectedError = createCustomErrorClass('ManagerUnexpected')
 const ManagerNotEnoughSpaceError = createCustomErrorClass('ManagerNotEnoughSpace')

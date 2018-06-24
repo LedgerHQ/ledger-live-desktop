@@ -5,7 +5,7 @@ import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
 import * as accountIdHelper from 'helpers/accountId'
 import { isValidAddress } from 'helpers/libcore'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 
 const InvalidAddress = createCustomErrorClass('InvalidAddress')
 
