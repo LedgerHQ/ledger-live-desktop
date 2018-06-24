@@ -29,3 +29,5 @@ ManagerDeviceLocked: Device is locked
 ManagerAppAlreadyInstalled: App is already installed
 ManagerAppRelyOnBTC: You must install Bitcoin application first
 ManagerUninstallBTCDep: You must uninstall other altcoins first
+
+DeviceNotGenuine: Device is not genuine

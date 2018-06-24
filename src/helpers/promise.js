@@ -31,3 +31,27 @@ export function retry<A>(f: () => Promise<A>, options?: $Shape<typeof defaults>)
 export function idleCallback() {
   return new Promise(resolve => window.requestIdleCallback(resolve))
 }
+
+export function createCancelablePolling(
+  job: any => Promise<any>,
+  { pollingInterval = 500 }: { pollingInterval: number } = {},
+) {
+  let isUnsub = false
+  const unsubscribe = () => (isUnsub = true)
+  const getUnsub = () => isUnsub
+  const promise = new Promise(resolve => {
+    async function poll() {
+      try {
+        const res = await job()
+        if (getUnsub()) return
+        resolve(res)
+      } catch (err) {
+        await delay(pollingInterval)
+        if (getUnsub()) return
+        poll()
+      }
+    }
+    poll()
+  })
+  return { unsubscribe, promise }
+}
