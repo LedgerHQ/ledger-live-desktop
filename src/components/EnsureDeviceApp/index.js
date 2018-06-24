@@ -36,7 +36,7 @@ type OwnProps = {
     deviceSelected: ?Device,
     deviceStatus: DeviceStatus,
     error: ?Error,
-  }) => React$Element<*>,
+  }) => React$Node,
 }
 
 type Props = OwnProps & {
