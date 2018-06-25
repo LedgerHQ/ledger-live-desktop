@@ -5,40 +5,29 @@ import React from 'react'
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
-import DeviceConnect from 'components/DeviceConnect'
-import EnsureDeviceApp from 'components/EnsureDeviceApp'
+import EnsureDeviceAppInteraction from 'components/EnsureDeviceAppInteraction'
 
 type Props = {
   account?: ?Account,
   currency?: ?CryptoCurrency,
-  deviceSelected?: ?Device,
   onChangeDevice?: Device => void,
-  onStatusChange: string => void,
+  onStatusChange: (string, string) => void,
 }
 
-const StepConnectDevice = ({
-  account,
-  currency,
-  deviceSelected,
-  onChangeDevice,
-  onStatusChange,
-}: Props) => (
-  <EnsureDeviceApp
-    account={account}
-    currency={currency}
-    deviceSelected={deviceSelected}
-    onStatusChange={onStatusChange}
-    render={({ currency, appStatus, devices, deviceSelected, error }) => (
-      <DeviceConnect
-        currency={currency}
-        appOpened={appStatus === 'success' ? 'success' : appStatus === 'fail' ? 'fail' : null}
-        devices={devices}
-        deviceSelected={deviceSelected}
-        onChangeDevice={onChangeDevice}
-        error={error}
-      />
-    )}
-  />
-)
+const StepConnectDevice = ({ account, currency, onChangeDevice, onStatusChange }: Props) =>
+  account || currency ? (
+    <EnsureDeviceAppInteraction
+      account={account}
+      currency={currency}
+      waitBeforeSuccess={500}
+      onSuccess={({ device }) => {
+        // TODO: remove those non-nense callbacks
+        if (onChangeDevice) {
+          onChangeDevice(device)
+        }
+        onStatusChange('success', 'success')
+      }}
+    />
+  ) : null
 
 export default StepConnectDevice
