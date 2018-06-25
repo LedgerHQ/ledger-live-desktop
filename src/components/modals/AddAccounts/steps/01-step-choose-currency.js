@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import isArray from 'lodash/isArray'
 
 import SelectCurrency from 'components/SelectCurrency'
 import Button from 'components/base/Button'
@@ -9,15 +8,11 @@ import CurrencyBadge from 'components/base/CurrencyBadge'
 
 import type { StepProps } from '../index'
 
-function StepChooseCurrency({ currency, setState }: StepProps) {
+function StepChooseCurrency({ currency, setCurrency }: StepProps) {
   return (
     <SelectCurrency
       autoFocus
-      onChange={currency => {
-        setState({
-          currency: isArray(currency) && currency.length === 0 ? null : currency,
-        })
-      }}
+      onChange={setCurrency}
       value={currency}
     />
   )

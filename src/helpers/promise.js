@@ -27,3 +27,7 @@ export function retry<A>(f: () => Promise<A>, options?: $Shape<typeof defaults>)
     })
   }
 }
+
+export function idleCallback() {
+  return new Promise(resolve => window.requestIdleCallback(resolve))
+}

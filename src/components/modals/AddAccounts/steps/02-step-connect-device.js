@@ -11,7 +11,7 @@ import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
 
 import type { StepProps } from '../index'
 
-function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) {
+function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
   invariant(currency, 'No currency given')
 
   return (
@@ -30,11 +30,11 @@ function StepConnectDevice({ t, currency, currentDevice, setState }: StepProps) 
       </Box>
       <ConnectDevice
         t={t}
-        deviceSelected={currentDevice}
+        deviceSelected={device}
         currency={currency}
         onStatusChange={(deviceStatus, appStatus) => {
           if (appStatus === 'success') {
-            setState({ isAppOpened: true })
+            setAppOpened(true)
           }
         }}
       />
