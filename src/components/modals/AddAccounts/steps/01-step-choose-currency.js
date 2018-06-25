@@ -9,13 +9,7 @@ import CurrencyBadge from 'components/base/CurrencyBadge'
 import type { StepProps } from '../index'
 
 function StepChooseCurrency({ currency, setCurrency }: StepProps) {
-  return (
-    <SelectCurrency
-      autoFocus
-      onChange={setCurrency}
-      value={currency}
-    />
-  )
+  return <SelectCurrency autoFocus onChange={setCurrency} value={currency} />
 }
 
 export function StepChooseCurrencyFooter({ transitionTo, currency, t }: StepProps) {
