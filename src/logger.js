@@ -148,14 +148,16 @@ export default {
   critical: (error: Error) => {
     addLog('critical', error)
     console.error(error)
-    try {
-      if (typeof window !== 'undefined') {
-        require('sentry/browser').captureException(error)
-      } else {
-        require('sentry/node').captureException(error)
+    if (!process.env.STORYBOOK_ENV) {
+      try {
+        if (typeof window !== 'undefined') {
+          require('sentry/browser').captureException(error)
+        } else {
+          require('sentry/node').captureException(error)
+        }
+      } catch (e) {
+        console.warn("Can't send to sentry", error, e)
       }
-    } catch (e) {
-      console.warn("Can't send to sentry", error, e)
     }
   },
 
