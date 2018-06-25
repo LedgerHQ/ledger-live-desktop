@@ -74,7 +74,9 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
         for (const apdu of data) {
           const r: Buffer = await transport.exchange(Buffer.from(apdu, 'hex'))
           lastStatus = r.slice(r.length - 2)
+          if (lastStatus.toString('hex') !== '9000') break
         }
+
         if (!lastStatus) {
           throw new DeviceSocketNoBulkStatus()
         }
