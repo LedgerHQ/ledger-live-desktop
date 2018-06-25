@@ -30,21 +30,32 @@ export async function getFirmwareInfo(transport: Transport<*>) {
     const res = await transport.send(...APDUS.GET_FIRMWARE)
     const byteArray = [...res]
     const data = byteArray.slice(0, byteArray.length - 2)
+    console.log('data', data)
     const targetIdStr = Buffer.from(data.slice(0, 4))
     const targetId = targetIdStr.readUIntBE(0, 4)
+    console.log(targetId)
     const seVersionLength = data[4]
     const seVersion = Buffer.from(data.slice(5, 5 + seVersionLength)).toString()
+    console.log('seversion', seVersion)
     const flagsLength = data[5 + seVersionLength]
+    console.log('flagel', flagsLength)
     const flags = Buffer.from(
       data.slice(5 + seVersionLength + 1, 5 + seVersionLength + 1 + flagsLength),
     ).toString()
+    console.log('flags', flags)
+
     const mcuVersionLength = data[5 + seVersionLength + 1 + flagsLength]
-    const mcuVersion = Buffer.from(
+    let mcuVersion = Buffer.from(
       data.slice(
         7 + seVersionLength + flagsLength,
         7 + seVersionLength + flagsLength + mcuVersionLength,
       ),
-    ).toString()
+    )
+    if (mcuVersion[mcuVersion.length - 1] === 0) {
+      mcuVersion = mcuVersion.slice(0, mcuVersion.length - 1)
+    }
+    mcuVersion = mcuVersion.toString()
+    console.log('mcu', mcuVersion)
     return { targetId, seVersion, flags, mcuVersion }
   } catch (err) {
     const error = new Error(err.message)
