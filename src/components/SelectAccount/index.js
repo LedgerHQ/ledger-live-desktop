@@ -43,7 +43,13 @@ const renderOption = a => {
         </Text>
       </Box>
       <Box>
-        <FormattedVal color="grey" val={account.balance} unit={account.unit} showCode />
+        <FormattedVal
+          color="grey"
+          val={account.balance}
+          unit={account.unit}
+          showCode
+          disableRounding
+        />
       </Box>
     </Box>
   )
