@@ -243,7 +243,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                         <Box justifyContent="center">
                           <IconCross size={12} />
                         </Box>
-                        <Box ff="Open Sans|Regular" fontSize={2} ml={1}>
+                        <Box ff="Open Sans|Regular" style={{ maxWidth: 150 }} fontSize={2} ml={1}>
                           <TranslatedError error={genuine.genuineCheckUnavailable} />
                         </Box>
                       </Box>
