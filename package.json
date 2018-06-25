@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "compile": "bash ./scripts/compile.sh",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "dist:dir": "bash ./scripts/dist-dir.sh",
     "dist": "bash ./scripts/dist.sh",
     "test": "jest",
     "flow": "flow",
