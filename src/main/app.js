@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow, Menu, screen } from 'electron'
 import debounce from 'lodash/debounce'
+import { MIN_HEIGHT, MIN_WIDTH } from 'config/constants'
 
 import menu from 'main/menu'
 import db from 'helpers/db'
@@ -67,9 +68,6 @@ const defaultWindowOptions = {
 }
 
 function createMainWindow() {
-  const MIN_HEIGHT = 768
-  const MIN_WIDTH = 1024
-
   const savedDimensions = db.getIn('settings', 'window.MainWindow.dimensions', {})
   const savedPositions = db.getIn('settings', 'window.MainWindow.positions', null)
 
