@@ -1477,8 +1477,8 @@
     bip32-path "0.4.2"
 
 "@ledgerhq/hw-transport-node-hid@^4.13.0":
-  version "4.15.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.15.0.tgz#d25b1839230509235782884a5be3d56e791dad26"
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.16.0.tgz#de8d7ffd37e01c77aed566d8c534fe3937c3c35c"
   dependencies:
     "@ledgerhq/hw-transport" "^4.15.0"
     node-hid "^0.7.2"
