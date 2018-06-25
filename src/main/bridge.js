@@ -11,6 +11,7 @@ import sentry from 'sentry/node'
 import user from 'helpers/user'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
+import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
 
@@ -49,6 +50,7 @@ const bootInternalProcess = () => {
       SENTRY_USER_ID: userId,
     },
   })
+  setInternalProcessPID(internalProcess.pid)
   internalProcess.on('message', handleGlobalInternalMessage)
   internalProcess.on('exit', handleExit)
 }
