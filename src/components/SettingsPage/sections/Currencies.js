@@ -112,7 +112,7 @@ class TabCurrencies extends PureComponent<Props, State> {
         <Body>
           {currency !== intermediaryCurrency ? (
             <Row
-              title={t('app:settings.display.exchange', {
+              title={t('app:settings.currencies.exchange', {
                 ticker: `${currency.ticker}${intermediaryCurrency.ticker}`,
               })}
               desc={t('app:settings.currencies.exchangeDesc')}
