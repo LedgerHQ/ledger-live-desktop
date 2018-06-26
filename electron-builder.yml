@@ -1,5 +1,4 @@
 appId: com.ledger.live
-npmRebuild: false
 
 protocols:
   name: Ledger Live
@@ -36,16 +35,17 @@ win:
     - target: nsis
       arch:
         - x64
-        - ia32
     - target: zip
       arch:
         - x64
-        - ia32
 
 nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
+  installerIcon: build/windows/installer.ico
+  installerSidebar: build/windows/installerSidebar.bmp
+  uninstallerSidebar: build/windows/uninstallerSidebar.bmp
 
 files:
   # Include files
