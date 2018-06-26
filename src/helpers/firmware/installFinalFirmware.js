@@ -1,5 +1,6 @@
 // @flow
 import type Transport from '@ledgerhq/hw-transport'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import { WS_INSTALL } from 'helpers/urls'
 import { createDeviceSocket } from 'helpers/socket'
@@ -7,22 +8,17 @@ import getDeviceVersion from 'helpers/devices/getDeviceVersion'
 import getOsuFirmware from 'helpers/devices/getOsuFirmware'
 import getFinalFirmwareById from './getFinalFirmwareById'
 
-type Input = {
-  targetId: number | string,
-  version: string,
-}
 type Result = *
 
-export default async (transport: Transport<*>, app: Input): Result => {
+export default async (transport: Transport<*>, deviceInfo: DeviceInfo): Result => {
   try {
-    const { targetId, version } = app
-    const device = await getDeviceVersion(targetId)
-    const firmware = await getOsuFirmware({ deviceId: device.id, version })
+    const device = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
+    const firmware = await getOsuFirmware({ deviceId: device.id, version: deviceInfo.fullVersion })
     const { next_se_firmware_final_version } = firmware
     const nextFirmware = await getFinalFirmwareById(next_se_firmware_final_version)
 
     const params = {
-      targetId,
+      targetId: deviceInfo.targetId,
       ...nextFirmware,
       firmwareKey: nextFirmware.firmware_key,
     }

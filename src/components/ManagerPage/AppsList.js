@@ -48,7 +48,8 @@ type Props = {
   device: Device,
   targetId: string | number,
   t: T,
-  version: string,
+  fullVersion: string,
+  provider: number,
 }
 
 type State = {
@@ -82,8 +83,8 @@ class AppsList extends PureComponent<Props, State> {
 
   async fetchAppList() {
     try {
-      const { targetId, version } = this.props
-      const appsList = await listApps.send({ targetId, version }).toPromise()
+      const { targetId, fullVersion, provider } = this.props
+      const appsList = await listApps.send({ targetId, fullVersion, provider }).toPromise()
       if (!this._unmounted) {
         this.setState({ appsList, status: 'idle', appsLoaded: true })
       }

@@ -5,6 +5,7 @@ import isEqual from 'lodash/isEqual'
 
 import { GENUINE_TIMEOUT } from 'config/constants'
 import type { Device } from 'types/common'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import getIsGenuine from 'commands/getIsGenuine'
 
@@ -13,14 +14,9 @@ type Error = {
   stack: string,
 }
 
-type DeviceInfos = {
-  targetId: number | string,
-  version: string,
-}
-
 type Props = {
   device: ?Device,
-  infos: ?DeviceInfos,
+  deviceInfo: ?DeviceInfo,
   children: (isGenuine: ?boolean, error: ?Error) => *,
 }
 
@@ -56,12 +52,15 @@ class EnsureGenuine extends PureComponent<Props, State> {
   _unmounting = false
 
   async checkIsGenuine() {
-    const { device, infos } = this.props
-    if (device && infos && !this._checking) {
+    const { device, deviceInfo } = this.props
+    if (device && deviceInfo && !this._checking) {
       this._checking = true
       try {
         const res = await getIsGenuine
-          .send({ devicePath: device.path, targetId: infos.targetId, version: infos.version })
+          .send({
+            devicePath: device.path,
+            deviceInfo,
+          })
           .pipe(timeout(GENUINE_TIMEOUT))
           .toPromise()
         if (this._unmounting) return

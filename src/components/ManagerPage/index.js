@@ -4,18 +4,12 @@
 import React, { PureComponent } from 'react'
 
 import type { Device } from 'types/common'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Workflow from 'components/Workflow'
 import WorkflowWithIcon from 'components/Workflow/WorkflowWithIcon'
 import Dashboard from './Dashboard'
 import FlashMcu from './FlashMcu'
-
-type DeviceInfo = {
-  targetId: number | string,
-  version: string,
-  final: boolean,
-  mcu: boolean,
-}
 
 type Error = {
   message: string,
@@ -27,7 +21,7 @@ class ManagerPage extends PureComponent<*, *> {
     return (
       <Workflow
         renderFinalUpdate={(device: Device, deviceInfo: DeviceInfo) => (
-          <p>UPDATE FINAL FIRMARE (TEMPLATE + ACTION WIP) {deviceInfo.final}</p>
+          <p>UPDATE FINAL FIRMARE (TEMPLATE + ACTION WIP) {deviceInfo.isOSU}</p>
         )}
         renderMcuUpdate={(device: Device, deviceInfo: DeviceInfo) => (
           <FlashMcu device={device} deviceInfo={deviceInfo} />

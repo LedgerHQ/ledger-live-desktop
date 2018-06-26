@@ -5,11 +5,14 @@ import { APPLICATIONS_BY_DEVICE } from 'helpers/urls'
 import getDeviceVersion from 'helpers/devices/getDeviceVersion'
 import getCurrentFirmware from 'helpers/devices/getCurrentFirmware'
 
-export default async (targetId: string | number, version: string) => {
+export default async (targetId: string | number, fullVersion: string, provider: number) => {
   try {
-    const provider = 1
-    const deviceData = await getDeviceVersion(targetId)
-    const firmwareData = await getCurrentFirmware({ deviceId: deviceData.id, version })
+    const deviceData = await getDeviceVersion(targetId, provider)
+    const firmwareData = await getCurrentFirmware({
+      deviceId: deviceData.id,
+      fullVersion,
+      provider,
+    })
     const params = {
       provider,
       current_se_firmware_final_version: firmwareData.id,
