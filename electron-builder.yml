@@ -43,6 +43,9 @@ nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
+  installerIcon: build/windows/installer.ico
+  installerSidebar: build/windows/installerSidebar.bmp
+  uninstallerSidebar: build/windows/uninstallerSidebar.bmp
 
 files:
   # Include files
