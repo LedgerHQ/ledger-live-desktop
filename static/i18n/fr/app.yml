@@ -41,6 +41,7 @@ common:
   sync:
     syncing: Synchronizing...
     upToDate: Up to date
+    outdated: Outdated
     error: Synchronization error
     refresh: Refresh
     ago: Synced {{time}}
