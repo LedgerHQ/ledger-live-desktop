@@ -53,7 +53,7 @@ class EmptyState extends PureComponent<Props, *> {
             </Button>
             <Button
               padded
-              primary
+              outline
               style={{ minWidth: 120 }}
               onClick={() => openModal(MODAL_ADD_ACCOUNTS)}
             >
@@ -79,6 +79,7 @@ export const Description = styled(Box).attrs({
 })`
   margin: 10px auto 25px;
   display: block;
+  text-align: center;
 `
 export default compose(
   connect(
