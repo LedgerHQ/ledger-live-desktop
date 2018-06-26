@@ -1,5 +1,4 @@
 appId: com.ledger.live
-npmRebuild: false
 
 protocols:
   name: Ledger Live
@@ -36,11 +35,9 @@ win:
     - target: nsis
       arch:
         - x64
-        - ia32
     - target: zip
       arch:
         - x64
-        - ia32
 
 nsis:
   oneClick: false
