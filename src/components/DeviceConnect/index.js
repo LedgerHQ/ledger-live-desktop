@@ -149,10 +149,7 @@ type Props = {
   deviceSelected: ?Device,
   onChangeDevice: Device => void,
   t: T,
-  errors: ?{
-    genuineError: ?Error,
-    dashboardError: ?Error,
-  },
+  error: ?Error,
 }
 
 const emitChangeDevice = props => {
@@ -192,7 +189,7 @@ class DeviceConnect extends PureComponent<Props> {
       genuineCheckStatus,
       withGenuineCheck,
       appOpened,
-      errors,
+      error,
       currency,
       t,
       onChangeDevice,
@@ -308,11 +305,11 @@ class DeviceConnect extends PureComponent<Props> {
           </Step>
         )}
 
-        {errors && (errors.genuineError || errors.dashboardError) ? (
+        {error ? (
           <Info hasErrors>
             <IconInfoCircle size={12} />
             <Box shrink selectable>
-              <TranslatedError error={errors.genuineError || errors.dashboardError} />
+              <TranslatedError error={error} />
             </Box>
           </Info>
         ) : null}

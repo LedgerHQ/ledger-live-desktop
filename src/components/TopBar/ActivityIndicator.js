@@ -38,16 +38,24 @@ type Props = {
   setSyncBehavior: *,
 }
 
-class ActivityIndicatorInner extends PureComponent<Props> {
+class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: number }> {
+  state = {
+    lastClickTime: 0,
+  }
+
   onClick = () => {
     this.props.cvPoll()
     this.props.setSyncBehavior({ type: 'SYNC_ALL_ACCOUNTS', priority: 5 })
+    this.lastClickTime = Date.now()
+    this.setState({ lastClickTime: Date.now() })
   }
 
   render() {
     const { isUpToDate, isPending, isError, error, t } = this.props
-    const isDisabled = isError || isPending
-    const isRotating = isPending
+    const { lastClickTime } = this.state
+    const isUserClick = Date.now() - lastClickTime < 1000
+    const isRotating = isPending && (!isUpToDate || isUserClick)
+    const isDisabled = isError || isRotating
 
     const content = (
       <ItemContainer disabled={isDisabled} onClick={isDisabled ? undefined : this.onClick}>
