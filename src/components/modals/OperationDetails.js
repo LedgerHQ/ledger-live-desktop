@@ -126,7 +126,14 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               />
               <Box my={4} alignItems="center">
                 <Box>
-                  <FormattedVal unit={unit} alwaysShowSign showCode val={amount} fontSize={7} />
+                  <FormattedVal
+                    unit={unit}
+                    alwaysShowSign
+                    showCode
+                    val={amount}
+                    fontSize={7}
+                    disableRounding
+                  />
                 </Box>
                 <Box mt={1}>
                   <CounterValue

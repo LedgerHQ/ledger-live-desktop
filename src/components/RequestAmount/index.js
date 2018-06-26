@@ -21,7 +21,7 @@ import InputCurrency from 'components/base/InputCurrency'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import type { State } from 'reducers'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 
 const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 

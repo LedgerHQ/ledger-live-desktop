@@ -150,12 +150,14 @@ class AccountPage extends PureComponent<Props> {
                   <Box flow={4} mb={2}>
                     <Box horizontal>
                       <BalanceTotal
+                        showCryptoEvenIfNotAvailable
                         isAvailable={isAvailable}
                         totalBalance={account.balance}
                         unit={account.unit}
                       >
                         <FormattedVal
                           animateTicker
+                          disableRounding
                           alwaysShowSign={false}
                           color="warmGrey"
                           unit={counterValue.units[0]}

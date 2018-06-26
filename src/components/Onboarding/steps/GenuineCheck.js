@@ -5,6 +5,7 @@ import { shell } from 'electron'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { colors } from 'styles/theme'
+import { i } from 'helpers/staticPath'
 
 import type { T } from 'types/common'
 
@@ -17,8 +18,6 @@ import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
 import TranslatedError from 'components/TranslatedError'
 
-import IconLedgerNanoError from 'icons/illustrations/LedgerNanoError'
-import IconLedgerBlueError from 'icons/illustrations/LedgerBlueError'
 import IconCheck from 'icons/Check'
 import IconCross from 'icons/Cross'
 
@@ -325,8 +324,8 @@ export function GenuineCheckFail({
           <Fragment>
             <Title>{t('onboarding:genuineCheck.errorPage.ledgerNano.title')}</Title>
             <Description>{t('onboarding:genuineCheck.errorPage.ledgerNano.desc')}</Description>
-            <Box style={{ width: 550 }} mt={5} ml={100}>
-              <IconLedgerNanoError />
+            <Box mt={5} mr={7}>
+              <img alt="" src={i('nano-error-onb.svg')} />
             </Box>
           </Fragment>
         ) : (
@@ -336,7 +335,7 @@ export function GenuineCheckFail({
               {t('onboarding:genuineCheck.errorPage.ledgerBlue.desc')}
             </Description>
             <Box alignItems="center">
-              <IconLedgerBlueError />
+              <img alt="" src={i('blue-error-onb.svg')} />
             </Box>
           </Fragment>
         )}

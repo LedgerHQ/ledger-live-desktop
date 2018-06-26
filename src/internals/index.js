@@ -5,6 +5,7 @@ import uuid from 'uuid/v4'
 import { setImplementation } from 'api/network'
 import sentry from 'sentry/node'
 import { DEBUG_NETWORK } from 'config/constants'
+import { serializeError } from 'helpers/errors'
 
 require('../env')
 
@@ -75,11 +76,7 @@ process.on('message', m => {
         process.send({
           type: 'cmd.ERROR',
           requestId,
-          data: {
-            ...error,
-            name: error && error.name,
-            message: error && error.message,
-          },
+          data: serializeError(error),
         })
       },
     })

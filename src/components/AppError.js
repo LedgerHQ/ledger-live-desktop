@@ -13,7 +13,7 @@ import RenderError from './RenderError'
 const App = ({ language, error }: { error: Error, language: string }) => (
   <I18nextProvider i18n={i18n} initialLanguage={language}>
     <ThemeProvider theme={theme}>
-      <RenderError disableExport error={error}>
+      <RenderError withoutAppData error={error}>
         <TriggerAppReady />
       </RenderError>
     </ThemeProvider>

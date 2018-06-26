@@ -11,7 +11,7 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 
 import { isSegwitAccount } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
-import createCustomErrorClass from './createCustomErrorClass'
+import { createCustomErrorClass } from './errors'
 
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
 

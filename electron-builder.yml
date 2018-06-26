@@ -28,6 +28,10 @@ linux:
 
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
+  certificateSubjectName: Ledger SAS
+  certificateSha1: 7dd9acb2ef0402883c65901ebbafd06e5293d391
+  signingHashAlgorithms:
+    - sha256
   target:
     - target: nsis
       arch:

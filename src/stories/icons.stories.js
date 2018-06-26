@@ -6,7 +6,7 @@ import Box from 'components/base/Box'
 
 const stories = storiesOf('Common', module)
 
-const req = require.context('../icons', true, /^((?!illustrations).)*\.js$/)
+const req = require.context('../icons', true, /.js$/)
 const icons = req
   .keys()
   .map(file => {

@@ -2,7 +2,7 @@
 import invariant from 'invariant'
 import LRU from 'lru-cache'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 import { blockchainBaseURL } from './Ledger'
 import network from './network'
 

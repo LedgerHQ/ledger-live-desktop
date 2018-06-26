@@ -5,7 +5,7 @@ import { radii } from 'styles/theme'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
-import IconSensitiveOperationShield from 'icons/illustrations/SensitiveOperationShield'
+import IconSensitiveOperationShield from 'icons/SensitiveOperationShield'
 
 // GENERAL
 export const Title = styled(Box).attrs({

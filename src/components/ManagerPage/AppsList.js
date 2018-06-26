@@ -117,7 +117,7 @@ class AppsList extends PureComponent<Props, State> {
       } = this.props
       const data = { app, devicePath, targetId }
       await uninstallApp.send(data).toPromise()
-      this.setState({ status: 'success', app: '' })
+      this.setState({ status: 'success' })
     } catch (err) {
       this.setState({ status: 'error', error: err, app: '', mode: 'home' })
     }

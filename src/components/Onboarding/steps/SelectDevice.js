@@ -3,14 +3,15 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { i } from 'helpers/staticPath'
+
 import { rgba } from 'styles/helpers'
 
 import { isLedgerNano } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
 import IconCheckCirle from 'icons/Check'
-import IconLedgerNano from 'icons/illustrations/LedgerNano'
-import IconLedgerBlue from 'icons/illustrations/LedgerBlue'
+
 import { Title, Inner, FixedTopContainer, StepContainerInner } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
@@ -47,7 +48,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
               >
                 {onboarding.isLedgerNano && <DeviceSelected />}
                 <DeviceIcon>
-                  <IconLedgerNano />
+                  <img alt="" src={i('ledger-nano-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
               </DeviceContainer>
@@ -57,7 +58,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
               >
                 {!onboarding.isLedgerNano && onboarding.isLedgerNano !== null && <DeviceSelected />}
                 <DeviceIcon>
-                  <IconLedgerBlue />
+                  <img alt="" src={i('ledger-blue-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{t('onboarding:selectDevice.ledgerBlueCard.title')}</BlockTitle>
               </DeviceContainer>

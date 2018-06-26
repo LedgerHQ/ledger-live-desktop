@@ -2,11 +2,11 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import { colors } from 'styles/theme'
+import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 
 import type { T } from 'types/common'
-import IconLedgerBlueSelectPIN from 'icons/illustrations/LedgerBlueSelectPIN'
 
 import IconChevronRight from 'icons/ChevronRight'
 
@@ -60,7 +60,7 @@ class SelectPIN extends PureComponent<Props, *> {
       <Box align="center">
         <Inner style={{ width: 550 }}>
           <Box style={{ width: 180, justifyContent: 'center', alignItems: 'center' }}>
-            <IconLedgerBlueSelectPIN />
+            <img alt="" src={i('select-pin-blue-onb.svg')} />
           </Box>
           <Box>
             <Box shrink grow flow={4}>

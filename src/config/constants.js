@@ -12,6 +12,11 @@ const boolFromEnv = (key: string): boolean => {
 
 const stringFromEnv = (key: string, def: string): string => process.env[key] || def
 
+// Size
+
+export const MIN_HEIGHT = intFromEnv('LEDGER_MIN_HEIGHT', 768)
+export const MIN_WIDTH = intFromEnv('LEDGER_MIN_WIDTH', 1024)
+
 // time and delays...
 
 export const GET_CALLS_TIMEOUT = intFromEnv('GET_CALLS_TIMEOUT', 30 * 1000)
