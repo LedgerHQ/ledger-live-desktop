@@ -28,6 +28,7 @@ export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_ALL_INTERVAL = 120 * 1000
 export const GENUINE_TIMEOUT = intFromEnv('GENUINE_TIMEOUT', 120 * 1000)
 export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 30 * 1000)
+export const OUTDATED_CONSIDERED_DELAY = intFromEnv('OUTDATED_CONSIDERED_DELAY', 5 * 60 * 1000)
 
 export const CHECK_APP_INTERVAL_WHEN_INVALID = 600
 export const CHECK_APP_INTERVAL_WHEN_VALID = 1200
@@ -65,6 +66,7 @@ export const DEBUG_ACTION = boolFromEnv('DEBUG_ACTION')
 export const DEBUG_TAB_KEY = boolFromEnv('DEBUG_TAB_KEY')
 export const DEBUG_LIBCORE = boolFromEnv('DEBUG_LIBCORE')
 export const DEBUG_WS = boolFromEnv('DEBUG_WS')
+export const DEBUG_SYNC = boolFromEnv('DEBUG_SYNC')
 export const LEDGER_RESET_ALL = boolFromEnv('LEDGER_RESET_ALL')
 export const LEDGER_DEBUG_ALL_LANGS = boolFromEnv('LEDGER_DEBUG_ALL_LANGS')
 export const SKIP_GENUINE = boolFromEnv('SKIP_GENUINE')

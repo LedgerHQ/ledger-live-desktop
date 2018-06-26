@@ -10,6 +10,7 @@ import type { T } from 'types/common'
 import type { AsyncState } from 'reducers/bridgeSync'
 
 import { globalSyncStateSelector } from 'reducers/bridgeSync'
+import { isUpToDateSelector } from 'reducers/accounts'
 import { BridgeSyncConsumer } from 'bridge/BridgeSyncContext'
 import CounterValues from 'helpers/countervalues'
 
@@ -24,78 +25,45 @@ import ItemContainer from './ItemContainer'
 
 const mapStateToProps = createStructuredSelector({
   globalSyncState: globalSyncStateSelector,
+  isUpToDate: isUpToDateSelector,
 })
 
 type Props = {
-  // FIXME: eslint should see that it is used in static method
-  isGlobalSyncStatePending: boolean, // eslint-disable-line react/no-unused-prop-types
-
   error: ?Error,
   isPending: boolean,
   isError: boolean,
+  isUpToDate: boolean,
   t: T,
   cvPoll: *,
   setSyncBehavior: *,
 }
 
-type State = {
-  hasClicked: boolean,
-  isGlobalSyncStatePending: boolean,
-  isFirstSync: boolean,
-}
-
-class ActivityIndicatorInner extends PureComponent<Props, State> {
-  state = {
-    hasClicked: false,
-    isFirstSync: true,
-
-    // FIXME: eslint should see that it is used in static method
-    isGlobalSyncStatePending: false, // eslint-disable-line react/no-unused-state
-  }
-
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    const nextState = {
-      ...prevState,
-      isGlobalSyncStatePending: nextProps.isGlobalSyncStatePending,
-    }
-
-    if (prevState.isGlobalSyncStatePending && !nextProps.isGlobalSyncStatePending) {
-      nextState.isFirstSync = false
-      nextState.hasClicked = false
-    }
-
-    return nextState
-  }
-
+class ActivityIndicatorInner extends PureComponent<Props> {
   onClick = () => {
     this.props.cvPoll()
     this.props.setSyncBehavior({ type: 'SYNC_ALL_ACCOUNTS', priority: 5 })
   }
 
-  handleRefresh = () => {
-    this.setState({ hasClicked: true })
-    this.onClick()
-  }
-
   render() {
-    const { isPending, isError, error, t } = this.props
-    const { hasClicked, isFirstSync } = this.state
-    const isDisabled = isError || (isPending && (isFirstSync || hasClicked))
-    const isRotating = isPending && (hasClicked || isFirstSync)
+    const { isUpToDate, isPending, isError, error, t } = this.props
+    const isDisabled = isError || isPending
+    const isRotating = isPending
 
     const content = (
-      <ItemContainer disabled={isDisabled} onClick={isDisabled ? undefined : this.handleRefresh}>
+      <ItemContainer disabled={isDisabled} onClick={isDisabled ? undefined : this.onClick}>
         <Rotating
           size={16}
           isRotating={isRotating}
-          color={isError ? 'alertRed' : isRotating ? 'grey' : 'positiveGreen'}
+          color={isError ? 'alertRed' : isRotating ? 'grey' : isUpToDate ? 'positiveGreen' : 'grey'}
         >
           {isError ? (
             <IconExclamationCircle size={16} />
           ) : isRotating ? (
             <IconLoader size={16} />
-          ) : (
+          ) : isUpToDate ? (
             <IconCheckCircle size={16} />
+          ) : (
+            <IconExclamationCircle size={16} />
           )}
         </Rotating>
         <Box
@@ -115,19 +83,21 @@ class ActivityIndicatorInner extends PureComponent<Props, State> {
                 ml={2}
                 cursor="pointer"
                 style={{ textDecoration: 'underline', pointerEvents: 'all' }}
-                onClick={this.handleRefresh}
+                onClick={this.onClick}
               >
                 {t('app:common.sync.refresh')}
               </Box>
             </Fragment>
-          ) : (
+          ) : isUpToDate ? (
             t('app:common.sync.upToDate')
+          ) : (
+            t('app:common.sync.outdated')
           )}
         </Box>
       </ItemContainer>
     )
 
-    if (error) {
+    if (isError && error) {
       return (
         <Tooltip
           tooltipBg="alertRed"
@@ -146,7 +116,15 @@ class ActivityIndicatorInner extends PureComponent<Props, State> {
   }
 }
 
-const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState, t: T }) => (
+const ActivityIndicator = ({
+  globalSyncState,
+  t,
+  isUpToDate,
+}: {
+  globalSyncState: AsyncState,
+  t: T,
+  isUpToDate: boolean,
+}) => (
   <BridgeSyncConsumer>
     {setSyncBehavior => (
       <CounterValues.PollingConsumer>
@@ -156,9 +134,9 @@ const ActivityIndicator = ({ globalSyncState, t }: { globalSyncState: AsyncState
           return (
             <ActivityIndicatorInner
               t={t}
+              isUpToDate={isUpToDate}
               isPending={isPending}
-              isGlobalSyncStatePending={globalSyncState.pending}
-              isError={!!isError}
+              isError={!!isError && !isUpToDate} // we only show error if it's not up to date. this hide a bit error that happen from time to time
               error={isError ? globalSyncState.error : null}
               cvPoll={cvPolling.poll}
               setSyncBehavior={setSyncBehavior}
