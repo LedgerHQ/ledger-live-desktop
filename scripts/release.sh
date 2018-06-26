@@ -21,4 +21,4 @@ fi
 # TODO check if local git HEAD is EXACTLY our remote master HEAD
 
 yarn compile
-build
+DEBUG=electron-builder yarn run electron-builder build --publish always
