@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
+import ConfettiParty from 'components/ConfettiParty'
 
 import IconCheckCircle from 'icons/CheckCircle'
 import IconSocialTwitter from 'icons/Twitter'
@@ -14,6 +15,16 @@ import IconSocialGithub from 'icons/Github'
 
 import type { StepProps } from '..'
 import { Title, Description } from '../helperComponents'
+
+const ConfettiLayer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+`
 
 const socialMedia = [
   {
@@ -40,6 +51,9 @@ export default (props: StepProps) => {
   const { finish, t } = props
   return (
     <Box sticky justifyContent="center">
+      <ConfettiLayer>
+        <ConfettiParty />
+      </ConfettiLayer>
       <Box alignItems="center">
         <Box color="positiveGreen">
           <IconCheckCircle size={44} />
