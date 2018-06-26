@@ -1,25 +1,19 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { shell } from 'electron'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { colors } from 'styles/theme'
-import { i } from 'helpers/staticPath'
-
-import type { T } from 'types/common'
 
 import { updateGenuineCheck } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
-import FakeLink from 'components/base/FakeLink'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
-import TranslatedError from 'components/TranslatedError'
 
 import IconCheck from 'icons/Check'
-import IconCross from 'icons/Cross'
 
 import {
   Title,
@@ -27,11 +21,17 @@ import {
   IconOptionRow,
   FixedTopContainer,
   StepContainerInner,
-  OnboardingFooterWrapper,
-} from '../helperComponents'
+  GenuineCheckCardWrapper,
+} from '../../helperComponents'
 
-import type { StepProps } from '..'
-import OnboardingFooter from '../OnboardingFooter'
+import { GenuineCheckErrorPage } from './GenuineCheckErrorPage'
+import {
+  GenuineCheckUnavailableFooter,
+  GenuineCheckUnavailableMessage,
+} from './GenuineCheckUnavailable'
+import OnboardingFooter from '../../OnboardingFooter'
+
+import type { StepProps } from '../..'
 
 const mapDispatchToProps = { updateGenuineCheck }
 
@@ -143,7 +143,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   renderGenuineFail = () => (
-    <GenuineCheckFail
+    <GenuineCheckErrorPage
       redoGenuineCheck={this.redoGenuineCheck}
       contactSupport={this.contactSupport}
       t={this.props.t}
@@ -173,7 +173,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             </Description>
           )}
           <Box mt={5}>
-            <CardWrapper>
+            <GenuineCheckCardWrapper>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>{'1.'}</IconOptionRow>
@@ -187,10 +187,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   onChange={item => this.handleButtonPass(item, 'pinStepPass')}
                 />
               </Box>
-            </CardWrapper>
+            </GenuineCheckCardWrapper>
           </Box>
           <Box mt={3}>
-            <CardWrapper isDisabled={!genuine.pinStepPass}>
+            <GenuineCheckCardWrapper isDisabled={!genuine.pinStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>
@@ -208,10 +208,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   />
                 )}
               </Box>
-            </CardWrapper>
+            </GenuineCheckCardWrapper>
           </Box>
           <Box mt={3}>
-            <CardWrapper isDisabled={!genuine.recoveryStepPass}>
+            <GenuineCheckCardWrapper isDisabled={!genuine.recoveryStepPass}>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
@@ -225,29 +225,16 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   {genuine.isDeviceGenuine ? (
                     <Box horizontal align="center" flow={1} color={colors.wallet}>
                       <IconCheck size={16} />
-                      <GenuineSuccessText>
+                      <Box ff="Open Sans|SemiBold" fontSize={4}>
                         {t('onboarding:genuineCheck.isGenuinePassed')}
-                      </GenuineSuccessText>
-                    </Box>
-                  ) : genuine.genuineCheckUnavailable ? (
-                    <Box align="center" flow={1} color={colors.alertRed}>
-                      <FakeLink
-                        ff="Open Sans|Regular"
-                        fontSize={4}
-                        underline
-                        onClick={this.handleOpenGenuineCheckModal}
-                      >
-                        {t('app:common.retry')}
-                      </FakeLink>
-                      <Box horizontal justify="center">
-                        <Box justifyContent="center">
-                          <IconCross size={12} />
-                        </Box>
-                        <Box ff="Open Sans|Regular" fontSize={2} ml={1}>
-                          <TranslatedError error={genuine.genuineCheckUnavailable} />
-                        </Box>
                       </Box>
                     </Box>
+                  ) : genuine.genuineCheckUnavailable ? (
+                    <GenuineCheckUnavailableMessage
+                      handleOpenGenuineCheckModal={this.handleOpenGenuineCheckModal}
+                      onboarding={onboarding}
+                      t={t}
+                    />
                   ) : (
                     <Button
                       primary
@@ -259,28 +246,13 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   )}
                 </Box>
               )}
-            </CardWrapper>
+            </GenuineCheckCardWrapper>
           </Box>
         </StepContainerInner>
         {genuine.genuineCheckUnavailable ? (
-          <OnboardingFooterWrapper>
-            <Button padded outlineGrey onClick={() => prevStep()}>
-              {t('app:common.back')}
-            </Button>
-            <Box horizontal ml="auto">
-              <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
-                {t('app:common.skipThisStep')}
-              </Button>
-              <Button padded onClick={nextStep} disabled primary>
-                {t('app:common.continue')}
-              </Button>
-            </Box>
-          </OnboardingFooterWrapper>
+          <GenuineCheckUnavailableFooter nextStep={nextStep} prevStep={prevStep} t={t} />
         ) : (
           <OnboardingFooter
-            horizontal
-            align="center"
-            flow={2}
             t={t}
             nextStep={nextStep}
             prevStep={prevStep}
@@ -305,79 +277,9 @@ export default connect(
   mapDispatchToProps,
 )(GenuineCheck)
 
-// TODO extract to a separate file
-export function GenuineCheckFail({
-  redoGenuineCheck,
-  contactSupport,
-  isLedgerNano,
-  t,
-}: {
-  redoGenuineCheck: () => void,
-  contactSupport: () => void,
-  isLedgerNano: boolean | null,
-  t: T,
-}) {
-  return (
-    <Box sticky pt={50}>
-      <Box grow alignItems="center" justifyContent="center">
-        {isLedgerNano ? (
-          <Fragment>
-            <Title>{t('onboarding:genuineCheck.errorPage.ledgerNano.title')}</Title>
-            <Description>{t('onboarding:genuineCheck.errorPage.ledgerNano.desc')}</Description>
-            <Box mt={5} mr={7}>
-              <img alt="" src={i('nano-error-onb.svg')} />
-            </Box>
-          </Fragment>
-        ) : (
-          <Fragment>
-            <Title>{t('onboarding:genuineCheck.errorPage.ledgerBlue.title')}</Title>
-            <Description pb={5}>
-              {t('onboarding:genuineCheck.errorPage.ledgerBlue.desc')}
-            </Description>
-            <Box alignItems="center">
-              <img alt="" src={i('blue-error-onb.svg')} />
-            </Box>
-          </Fragment>
-        )}
-      </Box>
-      <OnboardingFooterWrapper>
-        <Button padded outlineGrey onClick={() => redoGenuineCheck()}>
-          {t('app:common.back')}
-        </Button>
-        <Button padded danger onClick={() => contactSupport()} ml="auto">
-          {t('onboarding:genuineCheck.buttons.contactSupport')}
-        </Button>
-      </OnboardingFooterWrapper>
-    </Box>
-  )
-}
-export const GenuineSuccessText = styled(Box).attrs({
-  ff: 'Open Sans|SemiBold',
-  fontSize: 4,
-})``
-
 export const CardTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'left',
   pl: 2,
 })``
-
-const CardWrapper = styled(Box).attrs({
-  horizontal: true,
-  p: 5,
-  borderRadius: '4px',
-  justify: 'space-between',
-})`
-  width: 580px;
-  height: 74px;
-  transition: all ease-in-out 0.2s;
-  color: ${p => (p.isDisabled ? p.theme.colors.grey : p.theme.colors.black)};
-  border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
-  pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
-  background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
-  opacity: ${p => (p.isDisabled ? 0.7 : 1)};
-  &:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
-  }
-`

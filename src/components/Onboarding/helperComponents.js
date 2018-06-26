@@ -113,3 +113,23 @@ const DisclaimerBoxIconContainer = styled(Box).attrs({
   top: 0;
   right: 0;
 `
+
+// GENUINE CHECK
+export const GenuineCheckCardWrapper = styled(Box).attrs({
+  horizontal: true,
+  p: 5,
+  borderRadius: '4px',
+  justify: 'space-between',
+})`
+  width: 580px;
+  height: 74px;
+  transition: all ease-in-out 0.2s;
+  color: ${p => (p.isDisabled ? p.theme.colors.grey : p.theme.colors.black)};
+  border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
+  pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
+  background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
+  opacity: ${p => (p.isDisabled ? 0.7 : 1)};
+  &:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
+  }
+`
