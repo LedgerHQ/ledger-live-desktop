@@ -3,6 +3,7 @@
 import logger from 'logger'
 import invariant from 'invariant'
 import network from 'api/network'
+import { serializeError } from './errors'
 
 const lib = require('@ledgerhq/ledger-core')
 
@@ -96,7 +97,7 @@ const NJSHttpClient = new lib.NJSHttpClient({
       r.complete(urlConnection, null)
     } catch (err) {
       const urlConnection = createHttpConnection(res, err.message)
-      r.complete(urlConnection, { code: 0, message: err.message })
+      r.complete(urlConnection, { code: 0, message: JSON.stringify(serializeError(err)) })
     }
   },
 })

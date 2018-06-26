@@ -11,8 +11,7 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 
 import { isSegwitAccount } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
-import { createCustomErrorClass } from './errors'
-
+import { createCustomErrorClass, deserializeError } from './errors'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
 
 const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
@@ -158,7 +157,11 @@ const coreSyncAccount = (core, account) =>
           (payload && payload.getString('EV_SYNC_ERROR_MESSAGE')) ||
           'Sync failed'
         ).replace(' (EC_PRIV_KEY_INVALID_FORMAT)', '')
-        reject(new Error(message))
+        try {
+          reject(deserializeError(JSON.parse(message)))
+        } catch (e) {
+          reject(message)
+        }
         return
       }
       if (
