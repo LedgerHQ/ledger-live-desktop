@@ -26,7 +26,7 @@ noDevice:
   trackOrder:
     title: Track your order
   learnMore:
-    title: Learn about Ledger Live
+    title: Learn about Ledger
 selectDevice:
   title: Select your device
   ledgerNanoCard:
@@ -35,9 +35,9 @@ selectDevice:
     title: Ledger Blue
 selectPIN:
   disclaimer:
-    note1: Choose your own PIN code. This code will unlock your device.
-    note2: An 8-digit PIN code offers an optimum level of security.
-    note3:   Never use a device supplied with a PIN code or a 24-word recovery phrase.
+    note1: Choose your own PIN code. This code will unlock your device #remove dot - dotted line should be in red. Increase size of the hand (+50%?)
+    note2: An 8-digit PIN code offers an optimum level of security
+    note3:   Never use a device supplied with a PIN code or a 24-word recovery phrase
   initialize:
     title: Choose your PIN code
     instructions:
@@ -87,10 +87,10 @@ writeSeed:
       step2: Type the first word of your recovery phrase. Select the word when it appears.
       step3: Repeat the process until the last word.
   disclaimer:
-    note1: Carefully secure your 24-word recovery phrase out of sight.
-    note2: Make sure you are the sole holder of your recovery phrase.
-    note3: Ledger does not keep any backup of your recovery phrase.
-    note4: Never use a device supplied with a recovery phrase or a PIN code.
+    note1: Carefully secure your 24-word recovery phrase out of sight
+    note2: Make sure you are the sole holder of your recovery phrase
+    note3: Ledger does not keep any backup of your recovery phrase
+    note4: Never use a device supplied with a recovery phrase or a PIN code
 genuineCheck:
   title: Security checklist
   descNano: Before getting started, please confirm
@@ -101,7 +101,7 @@ genuineCheck:
   step2:
     title: Did you save your recovery phrase by yourself?
   step3:
-    title: Do you have a genuine Ledger device?
+    title: Is your Ledger device genuine?
   isGenuinePassed: Your device is genuine
   buttons:
     genuineCheck: Check now
@@ -109,10 +109,10 @@ genuineCheck:
   errorPage:
     ledgerNano:
       title: Oops, something went wrong...
-      desc: Go back to the security checklist or request Ledger Support assistance.
+      desc: Go back to the security checklist or request Ledger Support assistance
     ledgerBlue:
       title: Oops, something went wrong...
-      desc: Go back to the security checklist or request Ledger Support assistance.
+      desc: Go back to the security checklist or request Ledger Support assistance
 setPassword:
   title: Encrypt Ledger Live data
   desc: Set a password to encrypt Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
@@ -131,7 +131,7 @@ analytics:
     desc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
   sentryLogs:
     title: Report bugs
-    desc: Automatically send reports to help Ledger fix bugs.
+    desc: Automatically send reports to help Ledger fix bugs
 finish:
   title: Your device is ready!
   desc: Proceed to your porfolio and start adding your accounts...

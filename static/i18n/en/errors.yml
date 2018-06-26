@@ -10,7 +10,7 @@ BtcUnmatchedApp: 'Open the ‘{{currencyName}}’ app on your Ledger device to p
 WrongAppOpened: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
 WrongDeviceForAccount: 'Use the device associated with the account ‘{{accountName}}’.'
 LedgerAPINotAvailable: 'Ledger API not available for {{currencyName}}.'
-LedgerAPIError: 'Ledger API error. Try again later. (HTTP {{status}})'
+LedgerAPIError: 'Ledger API error. Try again. (HTTP {{status}})'
 NetworkDown: 'Your internet connection seems down.'
 NoAddressesFound: 'No accounts were found.'
 UserRefusedOnDevice: Transaction refused on device.
