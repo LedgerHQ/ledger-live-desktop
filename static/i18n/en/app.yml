@@ -76,7 +76,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Make sure the <1><0>{{currency}}</0></1> app is installed to receive crypto assets # replace [cryptocurrency] and make it bold
+    desc: Receive in this accoung with the the <1><0>{{currency}}</0></1> app in the Manager
     buttons:
       receiveFunds: Receive
   settings:
@@ -213,7 +213,7 @@ manager:
     noDashboard: Navigate to the dashboard on your device (TEMPLATED NEEDED)
     noGenuine: Allow the Manager to continue (TEMPLATE NEEDED)
 receive:
-  title: Receive crypto assets
+  title: Receive
   steps:
     chooseAccount:
       title: Choose account
@@ -233,7 +233,7 @@ receive:
       title: Receive crypto assets
       label: Amount (optional)
 send:
-  title: Send crypto assets
+  title: Send
   totalSpent: Total
   steps:
     amount:
