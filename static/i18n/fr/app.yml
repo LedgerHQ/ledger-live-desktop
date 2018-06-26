@@ -122,8 +122,8 @@ emptyState:
   sidebar:
     text: Press the + button to add an account to your portfolio.
   dashboard:
-    title: 'Let’s set up your portfolio!'
-    desc: Open the Manager to install apps on your device or add accounts if your device already has apps installed.
+    title: 'Add accounts to your portfolio'
+    desc: Your portfolio has no accounts the first time Ledger Live is launched. Open the Manager to install apps on your Ledger device before you start adding accounts to your portfolio.
     buttons:
       addAccount: Add accounts
       installApp: Open Manager
@@ -139,7 +139,7 @@ genuinecheck:
 addAccounts:
   title: Add accounts
   breadcrumb:
-    informations: Choose asset
+    informations: Crypto asset
     connectDevice: Connect device
     import: Select accounts
     finish: Confirmation
@@ -158,9 +158,8 @@ addAccounts:
     noAccountToCreate: No {{currencyName}} account was found to create.
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
-    create: 'Add account'
-    import: 'Add account'
-    import_plural: 'Add accounts'
+    add: 'Add account'
+    add_plural: 'Add accounts'
 operationDetails:
   title: Operation details
   account: Account
