@@ -46,7 +46,6 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
   onClick = () => {
     this.props.cvPoll()
     this.props.setSyncBehavior({ type: 'SYNC_ALL_ACCOUNTS', priority: 5 })
-    this.lastClickTime = Date.now()
     this.setState({ lastClickTime: Date.now() })
   }
 
