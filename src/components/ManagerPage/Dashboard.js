@@ -3,19 +3,13 @@ import React from 'react'
 import { translate } from 'react-i18next'
 
 import type { T, Device } from 'types/common'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 
 import AppsList from './AppsList'
 import FirmwareUpdate from './FirmwareUpdate'
-
-type DeviceInfo = {
-  targetId: number | string,
-  version: string,
-  final: boolean,
-  mcu: boolean,
-}
 
 type Props = {
   t: T,
@@ -37,7 +31,12 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
       <FirmwareUpdate deviceInfo={deviceInfo} device={device} />
     </Box>
     <Box mt={5}>
-      <AppsList device={device} targetId={deviceInfo.targetId} version={deviceInfo.version} />
+      <AppsList
+        device={device}
+        targetId={deviceInfo.targetId}
+        provider={deviceInfo.providerId}
+        fullVersion={deviceInfo.fullVersion}
+      />
     </Box>
   </Box>
 )
