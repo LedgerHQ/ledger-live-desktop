@@ -12,9 +12,12 @@ import Breadcrumb from 'components/Breadcrumb'
 type Props = {
   t: T,
   title: string,
+  steps: Step[],
   initialStepId: string,
   onClose: void => void,
-  steps: Step[],
+  onStepChange?: Step => void,
+  disabledSteps?: number[],
+  errorSteps?: number[],
   children: any,
 }
 
@@ -23,7 +26,8 @@ export type Step = {
   label: string,
   component: StepProps => React$Node,
   footer: StepProps => React$Node,
-  preventClose?: boolean,
+  shouldRenderFooter?: StepProps => boolean,
+  shouldPreventClose?: boolean | (StepProps => boolean),
   onBack?: StepProps => void,
 }
 
@@ -41,10 +45,20 @@ class Stepper extends PureComponent<Props, State> {
     stepId: this.props.initialStepId,
   }
 
-  transitionTo = stepId => this.setState({ stepId })
+  transitionTo = stepId => {
+    const { onStepChange, steps } = this.props
+    this.setState({ stepId })
+    if (onStepChange) {
+      const stepIndex = steps.findIndex(s => s.id === stepId)
+      const step = steps[stepIndex]
+      if (step) {
+        onStepChange(step)
+      }
+    }
+  }
 
   render() {
-    const { t, steps, title, onClose, children, ...props } = this.props
+    const { t, steps, title, onClose, disabledSteps, errorSteps, children, ...props } = this.props
     const { stepId } = this.state
 
     const stepIndex = steps.findIndex(s => s.id === stepId)
@@ -52,7 +66,13 @@ class Stepper extends PureComponent<Props, State> {
 
     invariant(step, `Stepper: step ${stepId} doesn't exists`)
 
-    const { component: StepComponent, footer: StepFooter, onBack, preventClose } = step
+    const {
+      component: StepComponent,
+      footer: StepFooter,
+      onBack,
+      shouldPreventClose,
+      shouldRenderFooter,
+    } = step
 
     const stepProps: StepProps = {
       t,
@@ -60,15 +80,29 @@ class Stepper extends PureComponent<Props, State> {
       ...props,
     }
 
+    const renderFooter =
+      !!StepFooter && (shouldRenderFooter === undefined || shouldRenderFooter(stepProps))
+
+    const preventClose =
+      typeof shouldPreventClose === 'function'
+        ? shouldPreventClose(stepProps)
+        : !!shouldPreventClose
+
     return (
       <ModalBody onClose={preventClose ? undefined : onClose}>
         <ModalTitle onBack={onBack ? () => onBack(stepProps) : undefined}>{title}</ModalTitle>
         <ModalContent>
-          <Breadcrumb mb={6} currentStep={stepIndex} items={steps} />
+          <Breadcrumb
+            mb={6}
+            currentStep={stepIndex}
+            items={steps}
+            stepsDisabled={disabledSteps}
+            stepsErrors={errorSteps}
+          />
           <StepComponent {...stepProps} />
           {children}
         </ModalContent>
-        {StepFooter && (
+        {renderFooter && (
           <ModalFooter horizontal align="center" justify="flex-end">
             <StepFooter {...stepProps} />
           </ModalFooter>

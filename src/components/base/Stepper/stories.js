@@ -27,7 +27,7 @@ const steps: Step[] = [
   {
     id: 'second',
     label: 'second step',
-    preventClose: true,
+    shouldPreventClose: true,
     onBack: ({ transitionTo }: StepProps) => transitionTo('first'),
     component: () => <div>second step (you cant close on this one)</div>,
     footer: ({ transitionTo }: StepProps) => (
