@@ -19,15 +19,24 @@ const mapStateToProps = createStructuredSelector({
 
 class ExportLogsBtn extends Component<{
   t: *,
-  settings: *,
-  accounts: *,
+  settings: ?*,
+  accounts: ?*,
   hookToShortcut?: boolean,
 }> {
   handleExportLogs = () => {
     const { accounts, settings } = this.props
     const logs = logger.exportLogs()
     const resourceUsage = webFrame.getResourceUsage()
-    const report = { resourceUsage, logs, accounts, settings, date: new Date() }
+    const report = {
+      resourceUsage,
+      logs,
+      accounts,
+      settings,
+      date: new Date(),
+      release: __APP_VERSION__,
+      git_commit: __GIT_REVISION__,
+      environment: __DEV__ ? 'development' : 'production',
+    }
     console.log(report) // eslint-disable-line no-console
     const reportJSON = JSON.stringify(report)
     const path = remote.dialog.showSaveDialog({
@@ -69,4 +78,10 @@ class ExportLogsBtn extends Component<{
   }
 }
 
-export default translate()(connect(mapStateToProps)(ExportLogsBtn))
+const WithAppData = connect(mapStateToProps)(ExportLogsBtn)
+const WithoutAppData = ExportLogsBtn
+
+const ExportLogsBtnDispatcher = ({ withAppData, ...rest }: *) =>
+  withAppData ? <WithAppData {...rest} /> : <WithoutAppData {...rest} />
+
+export default translate()(ExportLogsBtnDispatcher)

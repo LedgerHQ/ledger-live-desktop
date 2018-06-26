@@ -8,8 +8,8 @@ type Result = boolean
 
 export default async (transport: Transport<*>): Promise<Result> => {
   try {
-    const { targetId, version } = await getFirmwareInfo(transport)
-    if (targetId && version) {
+    const { targetId, seVersion } = await getFirmwareInfo(transport)
+    if (targetId && seVersion) {
       return true
     }
 

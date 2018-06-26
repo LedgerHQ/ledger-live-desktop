@@ -7,13 +7,15 @@ import listApps from 'helpers/apps/listApps'
 
 type Input = {
   targetId: string | number,
-  version: string,
+  fullVersion: string,
+  provider: number,
 }
 
 type Result = *
 
-const cmd: Command<Input, Result> = createCommand('listApps', ({ targetId, version }) =>
-  fromPromise(listApps(targetId, version)),
+const cmd: Command<Input, Result> = createCommand(
+  'listApps',
+  ({ targetId, fullVersion, provider }) => fromPromise(listApps(targetId, fullVersion, provider)),
 )
 
 export default cmd

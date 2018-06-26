@@ -18,18 +18,22 @@ import type { StepProps } from '../index'
 
 class StepImport extends PureComponent<StepProps> {
   componentDidMount() {
-    this.props.setState({ scanStatus: 'scanning' })
+    this.props.setScanStatus('scanning')
   }
 
   componentDidUpdate(prevProps: StepProps) {
-    // handle case when we click on stop sync
-    if (prevProps.scanStatus !== 'finished' && this.props.scanStatus === 'finished') {
-      this.unsub()
-    }
+    const didStartScan = prevProps.scanStatus !== 'scanning' && this.props.scanStatus === 'scanning'
+    const didFinishScan =
+      prevProps.scanStatus !== 'finished' && this.props.scanStatus === 'finished'
 
     // handle case when we click on retry sync
-    if (prevProps.scanStatus !== 'scanning' && this.props.scanStatus === 'scanning') {
+    if (didStartScan) {
       this.startScanAccountsDevice()
+    }
+
+    // handle case when we click on stop sync
+    if (didFinishScan) {
+      this.unsub()
     }
   }
 
@@ -63,15 +67,15 @@ class StepImport extends PureComponent<StepProps> {
 
   startScanAccountsDevice() {
     this.unsub()
-    const { currency, currentDevice, setState } = this.props
+    const { currency, device, setScanStatus, setScannedAccounts } = this.props
     try {
       invariant(currency, 'No currency to scan')
-      invariant(currentDevice, 'No device')
+      invariant(device, 'No device')
 
       const bridge = getBridgeForCurrency(currency)
 
       // TODO: use the real device
-      const devicePath = currentDevice.path
+      const devicePath = device.path
 
       this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath).subscribe({
         next: account => {
@@ -80,7 +84,7 @@ class StepImport extends PureComponent<StepProps> {
           const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
           const isNewAccount = account.operations.length === 0
           if (!hasAlreadyBeenScanned) {
-            setState({
+            setScannedAccounts({
               scannedAccounts: [...scannedAccounts, this.translateName(account)],
               checkedAccountsIds:
                 !hasAlreadyBeenImported && !isNewAccount
@@ -89,43 +93,33 @@ class StepImport extends PureComponent<StepProps> {
             })
           }
         },
-        complete: () => setState({ scanStatus: 'finished' }),
-        error: err => setState({ scanStatus: 'error', err }),
+        complete: () => setScanStatus('finished'),
+        error: err => setScanStatus('error', err),
       })
     } catch (err) {
-      setState({ scanStatus: 'error', err })
+      setScanStatus('error', err)
     }
   }
 
   handleRetry = () => {
     this.unsub()
-    this.handleResetState()
+    this.props.resetScanState()
     this.startScanAccountsDevice()
   }
 
-  handleResetState = () => {
-    const { setState } = this.props
-    setState({
-      scanStatus: 'idle',
-      err: null,
-      scannedAccounts: [],
-      checkedAccountsIds: [],
-    })
-  }
-
   handleToggleAccount = (account: Account) => {
-    const { checkedAccountsIds, setState } = this.props
+    const { checkedAccountsIds, setScannedAccounts } = this.props
     const isChecked = checkedAccountsIds.find(id => id === account.id) !== undefined
     if (isChecked) {
-      setState({ checkedAccountsIds: checkedAccountsIds.filter(id => id !== account.id) })
+      setScannedAccounts({ checkedAccountsIds: checkedAccountsIds.filter(id => id !== account.id) })
     } else {
-      setState({ checkedAccountsIds: [...checkedAccountsIds, account.id] })
+      setScannedAccounts({ checkedAccountsIds: [...checkedAccountsIds, account.id] })
     }
   }
 
   handleUpdateAccount = (updatedAccount: Account) => {
-    const { scannedAccounts, setState } = this.props
-    setState({
+    const { scannedAccounts, setScannedAccounts } = this.props
+    setScannedAccounts({
       scannedAccounts: scannedAccounts.map(account => {
         if (account.id !== updatedAccount.id) {
           return account
@@ -136,19 +130,26 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   handleSelectAll = () => {
-    const { scannedAccounts, setState } = this.props
-    setState({
+    const { scannedAccounts, setScannedAccounts } = this.props
+    setScannedAccounts({
       checkedAccountsIds: scannedAccounts.filter(a => a.operations.length > 0).map(a => a.id),
     })
   }
 
-  handleUnselectAll = () => this.props.setState({ checkedAccountsIds: [] })
+  handleUnselectAll = () => this.props.setScannedAccounts({ checkedAccountsIds: [] })
 
   renderError() {
     const { err, t } = this.props
     invariant(err, 'Trying to render inexisting error')
     return (
-      <Box style={{ height: 200 }} align="center" justify="center" color="alertRed">
+      <Box
+        style={{ height: 200 }}
+        px={5}
+        textAlign="center"
+        align="center"
+        justify="center"
+        color="alertRed"
+      >
         <IconExclamationCircleThin size={43} />
         <Box mt={4}>{t('app:addAccounts.somethingWentWrong')}</Box>
         <Box mt={4}>
@@ -236,7 +237,8 @@ class StepImport extends PureComponent<StepProps> {
 export default StepImport
 
 export const StepImportFooter = ({
-  setState,
+  transitionTo,
+  setScanStatus,
   scanStatus,
   onClickAdd,
   onCloseModal,
@@ -274,18 +276,23 @@ export const StepImportFooter = ({
             : t('app:common.close')
 
   const willClose = !willCreateAccount && !willAddAccounts
-  const onClick = willClose ? onCloseModal : onClickAdd
+  const onClick = willClose
+    ? onCloseModal
+    : async () => {
+        await onClickAdd()
+        transitionTo('finish')
+      }
 
   return (
     <Fragment>
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       {scanStatus === 'error' && (
-        <Button mr={2} onClick={() => setState({ scanStatus: 'scanning', err: null })}>
+        <Button mr={2} onClick={() => setScanStatus('scanning')}>
           {t('app:common.retry')}
         </Button>
       )}
       {scanStatus === 'scanning' && (
-        <Button mr={2} onClick={() => setState({ scanStatus: 'finished' })}>
+        <Button mr={2} onClick={() => setScanStatus('finished')}>
           {t('app:common.stop')}
         </Button>
       )}

@@ -3,13 +3,13 @@
 import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 import { withDevice } from 'helpers/deviceAccess'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import installFinalFirmware from 'helpers/firmware/installFinalFirmware'
 
 type Input = {
   devicePath: string,
-  targetId: string | number,
-  version: string,
+  deviceInfo: DeviceInfo,
 }
 
 type Result = {
@@ -18,8 +18,8 @@ type Result = {
 
 const cmd: Command<Input, Result> = createCommand(
   'installFinalFirmware',
-  ({ devicePath, ...rest }) =>
-    fromPromise(withDevice(devicePath)(transport => installFinalFirmware(transport, { ...rest }))),
+  ({ devicePath, deviceInfo }) =>
+    fromPromise(withDevice(devicePath)(transport => installFinalFirmware(transport, deviceInfo))),
 )
 
 export default cmd

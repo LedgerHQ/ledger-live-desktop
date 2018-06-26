@@ -15,7 +15,7 @@ export default async (input: Input): Promise<*> => {
     url: GET_CURRENT_OSU,
     data: {
       device_version: input.deviceId,
-      version_name: input.version,
+      version_name: `${input.version}-osu`,
       provider,
     },
   })

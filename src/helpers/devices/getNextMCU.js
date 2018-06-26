@@ -2,7 +2,7 @@
 import network from 'api/network'
 
 import { GET_NEXT_MCU } from 'helpers/urls'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 
 const LatestMCUInstalledError = createCustomErrorClass('LatestMCUInstalledError')
 

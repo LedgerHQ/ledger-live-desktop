@@ -41,6 +41,7 @@ common:
   sync:
     syncing: Synchronizing...
     upToDate: Up to date
+    outdated: Outdated
     error: Synchronization error
     refresh: Refresh
     ago: Synced {{time}}
@@ -280,9 +281,7 @@ settings:
     language: Language
     languageDesc: Choose the language to display.
     counterValue: Base currency
-    counterValueDesc: Choose the currency to display next to your balance and operations.
-    exchange: Rate provider ({{ticker}})
-    exchangeDesc: Choose the provider of the base currency exchange rates.
+    counterValueDesc: Choose the currency to display next to your balance and operations. An exchange is used (via BTC pair).
     region: Region
     regionDesc: Choose the region in which you’re located to set the application’s time zone.
     stock: Regional market indicator
@@ -290,7 +289,7 @@ settings:
   currencies:
     desc: Select a cryptocurrency to edit its settings.
     exchange: Rate provider ({{ticker}})
-    exchangeDesc: Choose the provider of the base currency exchange rates.
+    exchangeDesc: Choose the provider of the base currency exchange rates (via BTC).
     confirmationsToSpend: Number of confirmations required to spend
     confirmationsToSpendDesc: Set the number of confirmations required for your funds to be spendable.
     confirmationsNb: Number of confirmations
@@ -315,7 +314,7 @@ settings:
     hardResetDesc: Erase all Ledger Live data stored on your computer, including your profile, accounts, transaction history and settings. The private keys that manage your crypto assets remain secure on your Ledger device.
     hardReset: Reset
     developerMode: Developer mode
-    developerModeDesc: Show developer apps in the Manager.
+    developerModeDesc: Show developer apps in the Manager and enable testnet currencies.
     analytics: Analytics
     analyticsDesc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
     reportErrors: Usage and diagnostics

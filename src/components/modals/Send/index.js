@@ -15,7 +15,7 @@ import { getBridgeForCurrency } from 'bridge'
 
 import { accountsSelector } from 'reducers/accounts'
 import { updateAccountWithUpdater } from 'actions/accounts'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 
 import { MODAL_SEND } from 'config/constants'
 import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'

@@ -13,7 +13,7 @@ import type { State as StoreState } from 'reducers/index'
 import getAddress from 'commands/getAddress'
 import { standardDerivation } from 'helpers/derivations'
 import isDashboardOpen from 'commands/isDashboardOpen'
-import createCustomErrorClass from 'helpers/createCustomErrorClass'
+import { createCustomErrorClass } from 'helpers/errors'
 
 import { CHECK_APP_INTERVAL_WHEN_VALID, CHECK_APP_INTERVAL_WHEN_INVALID } from 'config/constants'
 
@@ -36,7 +36,7 @@ type OwnProps = {
     deviceSelected: ?Device,
     deviceStatus: DeviceStatus,
     error: ?Error,
-  }) => React$Element<*>,
+  }) => React$Node,
 }
 
 type Props = OwnProps & {
@@ -159,7 +159,7 @@ class EnsureDeviceApp extends PureComponent<Props, State> {
         }
       } else {
         logger.warn('EnsureDeviceApp for using dashboard is DEPRECATED !!!')
-        // FIXME REMOVE THIS ! should use EnsureDashboard dedicated component.
+        // TODO: FIXME REMOVE THIS ! should use EnsureDashboard dedicated component.
         const isDashboard = isDashboardOpen.send({ devicePath: deviceSelected.path }).toPromise()
 
         if (!isDashboard) {

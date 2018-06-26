@@ -1,11 +1,11 @@
 // @flow
 
 import React from 'react'
+import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
-import IconGetStarted from 'icons/illustrations/GetStartedLogo'
 import type { StepProps } from '..'
 import { Title } from '../helperComponents'
 
@@ -14,7 +14,7 @@ export default (props: StepProps) => {
   return (
     <Box sticky justifyContent="center">
       <Box alignItems="center">
-        <IconGetStarted />
+        <img alt="" src={i('get-started-onb.svg')} />
         <Box my={4}>
           <Title>{t('onboarding:start.title')}</Title>
         </Box>

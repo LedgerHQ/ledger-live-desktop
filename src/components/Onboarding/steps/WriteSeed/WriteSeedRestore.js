@@ -2,11 +2,11 @@
 import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
 import { colors } from 'styles/theme'
+import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 
 import type { T } from 'types/common'
-import IconWriteSeed from 'icons/illustrations/WriteSeed'
 import type { OnboardingState } from 'reducers/onboarding'
 
 import IconChevronRight from 'icons/ChevronRight'
@@ -100,7 +100,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
         <Box align="center">
           <Inner style={{ width: 760 }}>
             <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
-              <IconWriteSeed />
+              <img alt="" src={i('write-seed-onb.svg')} />
             </Box>
             {onboarding.isLedgerNano ? (
               <Box shrink flow={2} m={0}>

@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Box, { Tabbable } from 'components/base/Box'
 
 export type Props = {
-  label: string | (Props => React$Element<any>),
+  label: string | (Props => React$Node),
   desc?: Props => any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   disabled?: boolean,

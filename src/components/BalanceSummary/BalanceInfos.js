@@ -32,6 +32,7 @@ type BalanceTotalProps = {
   unit: Unit,
   isAvailable: boolean,
   totalBalance: number,
+  showCryptoEvenIfNotAvailable?: boolean,
 }
 
 type Props = {
@@ -90,10 +91,10 @@ export function BalanceSinceDiff(props: Props) {
 }
 
 export function BalanceTotal(props: BalanceTotalProps) {
-  const { unit, totalBalance, isAvailable, children } = props
+  const { unit, totalBalance, isAvailable, showCryptoEvenIfNotAvailable, children } = props
   return (
     <Box grow {...props}>
-      {!isAvailable ? (
+      {!isAvailable && !showCryptoEvenIfNotAvailable ? (
         <PlaceholderLine width={150} />
       ) : (
         <FormattedVal
@@ -101,6 +102,7 @@ export function BalanceTotal(props: BalanceTotalProps) {
           color="dark"
           unit={unit}
           fontSize={8}
+          disableRounding
           showCode
           val={totalBalance}
         />

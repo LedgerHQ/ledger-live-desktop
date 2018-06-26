@@ -2,16 +2,22 @@
 
 import { app, BrowserWindow, Menu, screen } from 'electron'
 import debounce from 'lodash/debounce'
+import { MIN_HEIGHT, MIN_WIDTH } from 'config/constants'
 
 import menu from 'main/menu'
 import db from 'helpers/db'
+
+import { setMainProcessPID, terminateAllTheThings } from './terminator'
+
+setMainProcessPID(process.pid)
 
 // necessary to prevent win from being garbage collected
 let mainWindow = null
 
 export const getMainWindow = () => mainWindow
 
-let forceClose = false
+// TODO put back OSX close behavior
+// let forceClose = false
 
 const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
 
@@ -26,15 +32,16 @@ const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) 
   }
 }
 
-const handleCloseWindow = w => e => {
-  if (!forceClose) {
-    e.preventDefault()
-    w.webContents.send('lock')
-    if (w !== null) {
-      w.hide()
-    }
-  }
-}
+// TODO put back OSX close behavior
+// const handleCloseWindow = w => e => {
+//   if (!forceClose) {
+//     e.preventDefault()
+//     w.webContents.send('lock')
+//     if (w !== null) {
+//       w.hide()
+//     }
+//   }
+// }
 
 const getDefaultUrl = () =>
   __DEV__ ? `http://localhost:${ELECTRON_WEBPACK_WDS_PORT || ''}` : `file://${__dirname}/index.html`
@@ -67,9 +74,6 @@ const defaultWindowOptions = {
 }
 
 function createMainWindow() {
-  const MIN_HEIGHT = 768
-  const MIN_WIDTH = 1024
-
   const savedDimensions = db.getIn('settings', 'window.MainWindow.dimensions', {})
   const savedPositions = db.getIn('settings', 'window.MainWindow.positions', null)
 
@@ -109,7 +113,9 @@ function createMainWindow() {
 
   window.loadURL(url)
 
-  window.on('close', handleCloseWindow(window))
+  // TODO put back OSX close behavior
+  // window.on('close', handleCloseWindow(window))
+  window.on('close', terminateAllTheThings)
 
   window.on('ready-to-show', () => {
     window.show()
@@ -128,9 +134,10 @@ function createMainWindow() {
   return window
 }
 
-app.on('before-quit', () => {
-  forceClose = true
-})
+// TODO put back OSX close behavior
+// app.on('before-quit', () => {
+//   forceClose = true
+// })
 
 app.on('window-all-closed', () => {
   // On macOS it is common for applications to stay open

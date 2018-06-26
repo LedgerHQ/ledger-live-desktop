@@ -1,6 +1,5 @@
 // @flow
 
-import invariant from 'invariant'
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -13,59 +12,66 @@ import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import type { T, Device } from 'types/common'
+import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
 
+import { idleCallback } from 'helpers/promise'
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
 import { addAccount } from 'actions/accounts'
 import { closeModal } from 'reducers/modals'
 
-import Modal, { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
-import Box from 'components/base/Box'
-import Breadcrumb from 'components/Breadcrumb'
+import Modal from 'components/base/Modal'
+import Stepper from 'components/base/Stepper'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepImport, { StepImportFooter } from './steps/03-step-import'
 import StepFinish from './steps/04-step-finish'
 
-const createSteps = ({ t }: { t: T }) => [
-  {
-    id: 'chooseCurrency',
-    label: t('app:addAccounts.breadcrumb.informations'),
-    component: StepChooseCurrency,
-    footer: StepChooseCurrencyFooter,
-    onBack: null,
-    hideFooter: false,
-  },
-  {
-    id: 'connectDevice',
-    label: t('app:addAccounts.breadcrumb.connectDevice'),
-    component: StepConnectDevice,
-    footer: StepConnectDeviceFooter,
-    onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
-    hideFooter: false,
-  },
-  {
-    id: 'import',
-    label: t('app:addAccounts.breadcrumb.import'),
-    component: StepImport,
-    footer: StepImportFooter,
-    onBack: ({ transitionTo }: StepProps) => transitionTo('chooseCurrency'),
-    hideFooter: false,
-  },
-  {
-    id: 'finish',
-    label: t('app:addAccounts.breadcrumb.finish'),
-    component: StepFinish,
-    footer: null,
-    onBack: null,
-    hideFooter: true,
-  },
-]
+const createSteps = ({ t }: { t: T }) => {
+  const onBack = ({ transitionTo, resetScanState }: StepProps) => {
+    resetScanState()
+    transitionTo('chooseCurrency')
+  }
+  return [
+    {
+      id: 'chooseCurrency',
+      label: t('app:addAccounts.breadcrumb.informations'),
+      component: StepChooseCurrency,
+      footer: StepChooseCurrencyFooter,
+      onBack: null,
+      hideFooter: false,
+    },
+    {
+      id: 'connectDevice',
+      label: t('app:addAccounts.breadcrumb.connectDevice'),
+      component: StepConnectDevice,
+      footer: StepConnectDeviceFooter,
+      onBack,
+      hideFooter: false,
+    },
+    {
+      id: 'import',
+      label: t('app:addAccounts.breadcrumb.import'),
+      component: StepImport,
+      footer: StepImportFooter,
+      onBack,
+      hideFooter: false,
+    },
+    {
+      id: 'finish',
+      label: t('app:addAccounts.breadcrumb.finish'),
+      component: StepFinish,
+      footer: null,
+      onBack: null,
+      hideFooter: true,
+    },
+  ]
+}
 
 type Props = {
   t: T,
-  currentDevice: ?Device,
+  device: ?Device,
   existingAccounts: Account[],
   closeModal: string => void,
   addAccount: Account => void,
@@ -75,37 +81,39 @@ type StepId = 'chooseCurrency' | 'connectDevice' | 'import' | 'finish'
 type ScanStatus = 'idle' | 'scanning' | 'error' | 'finished'
 
 type State = {
-  stepId: StepId,
+  // TODO: I'm sure there will be always StepId and ScanStatus given,
+  // but I struggle making flow understand it. So I put string as fallback
+  stepId: StepId | string,
+  scanStatus: ScanStatus | string,
+
   isAppOpened: boolean,
   currency: ?Currency,
-
-  // scan process
   scannedAccounts: Account[],
   checkedAccountsIds: string[],
-  scanStatus: ScanStatus,
   err: ?Error,
 }
 
-export type StepProps = {
+export type StepProps = DefaultStepProps & {
   t: T,
   currency: ?Currency,
-  currentDevice: ?Device,
+  device: ?Device,
   isAppOpened: boolean,
-  transitionTo: StepId => void,
-  setState: any => void,
-  onClickAdd: void => Promise<void>,
-  onCloseModal: void => void,
-
-  // scan process
   scannedAccounts: Account[],
   existingAccounts: Account[],
   checkedAccountsIds: string[],
   scanStatus: ScanStatus,
   err: ?Error,
+  onClickAdd: void => Promise<void>,
+  onCloseModal: void => void,
+  resetScanState: void => void,
+  setCurrency: (?Currency) => void,
+  setAppOpened: boolean => void,
+  setScanStatus: (ScanStatus, ?Error) => string,
+  setScannedAccounts: ({ scannedAccounts?: Account[], checkedAccountsIds?: string[] }) => void,
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentDevice: getCurrentDevice,
+  device: getCurrentDevice,
   existingAccounts: accountsSelector,
 })
 
@@ -126,18 +134,7 @@ const INITIAL_STATE = {
 
 class AddAccounts extends PureComponent<Props, State> {
   state = INITIAL_STATE
-  STEPS = createSteps({
-    t: this.props.t,
-  })
-
-  transitionTo = stepId => {
-    const { currency } = this.state
-    let nextState = { stepId }
-    if (stepId === 'chooseCurrency') {
-      nextState = { ...INITIAL_STATE, currency }
-    }
-    this.setState(nextState)
-  }
+  STEPS = createSteps({ t: this.props.t })
 
   handleClickAdd = async () => {
     const { addAccount } = this.props
@@ -151,16 +148,43 @@ class AddAccounts extends PureComponent<Props, State> {
       await idleCallback()
       addAccount(accountsToAdd[i])
     }
-    this.transitionTo('finish')
   }
 
-  handleCloseModal = () => {
-    const { closeModal } = this.props
-    closeModal(MODAL_ADD_ACCOUNTS)
+  handleCloseModal = () => this.props.closeModal(MODAL_ADD_ACCOUNTS)
+  handleStepChange = (step: Step) => this.setState({ stepId: step.id })
+
+  handleSetCurrency = (currency: ?Currency) => this.setState({ currency })
+
+  handleSetScanStatus = (scanStatus: string, err: ?Error = null) => {
+    this.setState({ scanStatus, err })
   }
+
+  handleSetScannedAccounts = ({
+    checkedAccountsIds,
+    scannedAccounts,
+  }: {
+    checkedAccountsIds: string[],
+    scannedAccounts: Account[],
+  }) => {
+    this.setState({
+      ...(checkedAccountsIds ? { checkedAccountsIds } : {}),
+      ...(scannedAccounts ? { scannedAccounts } : {}),
+    })
+  }
+
+  handleResetScanState = () => {
+    this.setState({
+      scanStatus: 'idle',
+      err: null,
+      scannedAccounts: [],
+      checkedAccountsIds: [],
+    })
+  }
+
+  handleSetAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
 
   render() {
-    const { t, currentDevice, existingAccounts } = this.props
+    const { t, device, existingAccounts } = this.props
     const {
       stepId,
       currency,
@@ -171,17 +195,9 @@ class AddAccounts extends PureComponent<Props, State> {
       err,
     } = this.state
 
-    const stepIndex = this.STEPS.findIndex(s => s.id === stepId)
-    const step = this.STEPS[stepIndex]
-
-    invariant(step, `AddAccountsModal: step ${stepId} doesn't exists`)
-
-    const { component: StepComponent, footer: StepFooter, hideFooter, onBack } = step
-
-    const stepProps: StepProps = {
-      t,
+    const addtionnalProps = {
       currency,
-      currentDevice,
+      device,
       existingAccounts,
       scannedAccounts,
       checkedAccountsIds,
@@ -190,8 +206,11 @@ class AddAccounts extends PureComponent<Props, State> {
       isAppOpened,
       onClickAdd: this.handleClickAdd,
       onCloseModal: this.handleCloseModal,
-      transitionTo: this.transitionTo,
-      setState: (...args) => this.setState(...args),
+      setScanStatus: this.handleSetScanStatus,
+      setCurrency: this.handleSetCurrency,
+      setScannedAccounts: this.handleSetScannedAccounts,
+      resetScanState: this.handleResetScanState,
+      setAppOpened: this.handleSetAppOpened,
     }
 
     return (
@@ -200,21 +219,16 @@ class AddAccounts extends PureComponent<Props, State> {
         refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}
         render={({ onClose }) => (
-          <ModalBody onClose={onClose}>
+          <Stepper
+            title={t('app:addAccounts.title')}
+            initialStepId="chooseCurrency"
+            onStepChange={this.handleStepChange}
+            onClose={onClose}
+            steps={this.STEPS}
+            {...addtionnalProps}
+          >
             <SyncSkipUnderPriority priority={100} />
-            <ModalTitle onBack={onBack ? () => onBack(stepProps) : void 0}>
-              {t('app:addAccounts.title')}
-            </ModalTitle>
-            <ModalContent>
-              <Breadcrumb mb={6} currentStep={stepIndex} items={this.STEPS} />
-              <StepComponent {...stepProps} />
-            </ModalContent>
-            {!hideFooter && (
-              <ModalFooter horizontal align="center" justify="flex-end" style={{ height: 80 }}>
-                {StepFooter ? <StepFooter {...stepProps} /> : <Box />}
-              </ModalFooter>
-            )}
-          </ModalBody>
+          </Stepper>
         )}
       />
     )
@@ -228,7 +242,3 @@ export default compose(
   ),
   translate(),
 )(AddAccounts)
-
-function idleCallback() {
-  return new Promise(resolve => window.requestIdleCallback(resolve))
-}

@@ -23,7 +23,10 @@ export const GET_LATEST_FIRMWARE: string = managerUrlbuilder('get_latest_firmwar
 export const GET_NEXT_MCU: string = managerUrlbuilder('mcu_versions_bootloader')
 
 export const WS_INSTALL: (arg: LedgerScriptParams) => string = wsURLBuilder('install')
-export const WS_GENUINE: (arg: { targetId: string | number }) => string = wsURLBuilder('genuine')
+export const WS_GENUINE: (arg: {
+  targetId: string | number,
+  perso: string,
+}) => string = wsURLBuilder('genuine')
 export const WS_MCU: (arg: { targetId: string | number, version: string }) => string = wsURLBuilder(
   'mcu',
 )
