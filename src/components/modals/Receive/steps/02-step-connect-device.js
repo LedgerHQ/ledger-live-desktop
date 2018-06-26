@@ -4,13 +4,13 @@ import React from 'react'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import EnsureDeviceAppInteraction from 'components/EnsureDeviceAppInteraction'
+import EnsureDeviceApp from 'components/EnsureDeviceApp'
 
 import type { StepProps } from '../index'
 
 export default function StepConnectDevice({ account, onChangeAppOpened }: StepProps) {
   return (
-    <EnsureDeviceAppInteraction
+    <EnsureDeviceApp
       account={account}
       waitBeforeSuccess={200}
       onSuccess={() => onChangeAppOpened(true)}

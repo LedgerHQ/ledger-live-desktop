@@ -5,7 +5,7 @@ import React from 'react'
 import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Device } from 'types/common'
 
-import EnsureDeviceAppInteraction from 'components/EnsureDeviceAppInteraction'
+import EnsureDeviceApp from 'components/EnsureDeviceApp'
 
 type Props = {
   account?: ?Account,
@@ -16,7 +16,7 @@ type Props = {
 
 const StepConnectDevice = ({ account, currency, onChangeDevice, onStatusChange }: Props) =>
   account || currency ? (
-    <EnsureDeviceAppInteraction
+    <EnsureDeviceApp
       account={account}
       currency={currency}
       waitBeforeSuccess={500}
