@@ -35,9 +35,9 @@ selectDevice:
     title: Ledger Blue
 selectPIN:
   disclaimer:
-    note1: Choose your own PIN code. This code will unlock your device #remove dot - dotted line should be in red. Increase size of the hand (+50%?)
-    note2: An 8-digit PIN code offers an optimum level of security
-    note3:   Never use a device supplied with a PIN code or a 24-word recovery phrase
+    note1: 'Choose your own PIN code: this code will unlock your device.' # dotted line should be in red. Increase size of the hand (+50%?)
+    note2: An 8-digit PIN code offers an optimum level of security.
+    note3:   Never use a device supplied with a PIN code or a 24-word recovery phrase.
   initialize:
     title: Choose your PIN code
     instructions:
@@ -45,13 +45,13 @@ selectPIN:
         step1: Connect the Ledger Nano S to your computer.
         step2: Press both buttons simultaneously as instructed on the screen.
         step3: Press the right button to select Configure as new device?. # <bold>Configure as new device?<bold>.
-        step4: 'Choose a PIN code between 4 and 8 digits long followed by the checkmark (✓).'
+        step4: 'Choose a PIN code between 4 and 8 digits long, followed by the checkmark (✓).'
       blue:
         step1: Connect the Ledger Blue to your computer.
         step2: Tap on Configure as new device.
         step3: Choose a PIN code between 4 and 8 digits long.
   restore:
-    title: Start restoration - Choose your PIN code
+    title: Choose your PIN code
     instructions:
       nano:
         step1: Connect the Ledger Nano S to your computer.
@@ -87,10 +87,10 @@ writeSeed:
       step2: Type the first word of your recovery phrase. Select the word when it appears.
       step3: Repeat the process until the last word.
   disclaimer:
-    note1: Carefully secure your 24-word recovery phrase out of sight
-    note2: Make sure you are the sole holder of your recovery phrase
-    note3: Ledger does not keep any backup of your recovery phrase
-    note4: Never use a device supplied with a recovery phrase or a PIN code
+    note1: Carefully secure your 24-word recovery phrase out of sight.
+    note2: Make sure you are the sole holder of your recovery phrase.
+    note3: Ledger does not keep any backup of your recovery phrase.
+    note4: Never use a device supplied with a recovery phrase or a PIN code.
 genuineCheck:
   title: Security checklist
   descNano: Before getting started, please confirm
