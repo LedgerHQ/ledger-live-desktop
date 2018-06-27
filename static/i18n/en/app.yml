@@ -318,7 +318,7 @@ settings: # Always ensure descriptions carry full stops (.)
     softResetDesc: Clear the Ledger Live cache to force resynchronization with the blockchain.
     softReset: Clear
     hardResetTitle: Reset Ledger Live
-    hardResetDesc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assetsin the blockchain remain secure on your Ledger device and on your Recovery sheet.
+    hardResetDesc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
     hardReset: Reset
     developerMode: Developer mode
     developerModeDesc: Show developer apps in the Manager and enable testnet apps.
