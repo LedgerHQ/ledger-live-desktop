@@ -1,17 +1,13 @@
+<!-- Description of what the PR does go here... screenshot might be good if appropriate -->
+
 ### Type
 
 <!-- e.g. Bug Fix, Feature, Code Quality Improvement, UI Polish... -->
 
 ### Context
 
-<!-- e.g. GitHub issue #45 -->
+<!-- e.g. GitHub issue #45 / contextual discussion -->
 
-### Description
+### Testing / Affected part
 
-<!-- e.g. Adding genuine check to the onboarding -->
-
-<!-- add screenshots if appropriate -->
-
-### Testing
-
-<!-- e.g. Clear db, add special env variable.. -->
+<!-- Which part of the app is affected? What to do to test it, any special thing to do? -->
