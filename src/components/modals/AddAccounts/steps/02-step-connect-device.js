@@ -4,6 +4,7 @@ import invariant from 'invariant'
 import React, { Fragment } from 'react'
 import { Trans } from 'react-i18next'
 
+import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import ConnectDevice from 'components/modals/StepConnectDevice'
@@ -16,6 +17,7 @@ function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
 
   return (
     <Fragment>
+      <TrackPage category="AddAccounts" name="Step2" />
       <Box align="center" mb={6}>
         <CurrencyCircleIcon mb={3} size={40} currency={currency} />
         <Box ff="Open Sans" fontSize={4} color="dark" textAlign="center" style={{ width: 370 }}>

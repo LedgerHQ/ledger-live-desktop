@@ -8,6 +8,7 @@ import { createStructuredSelector } from 'reselect'
 
 import { accountsSelector } from 'reducers/accounts'
 
+import Track from 'analytics/Track'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T, Device } from 'types/common'
 
@@ -22,10 +23,10 @@ import Box from 'components/base/Box'
 import Breadcrumb from 'components/Breadcrumb'
 import Button from 'components/base/Button'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
-import StepConnectDevice from 'components/modals/StepConnectDevice'
 import { WrongDeviceForAccount } from 'components/EnsureDeviceApp'
 
 import StepAccount from './01-step-account'
+import StepConnectDevice from './02-step-connect-device'
 import StepConfirmAddress from './03-step-confirm-address'
 import StepReceiveFunds from './04-step-receive-funds'
 
@@ -338,6 +339,7 @@ class ReceiveModal extends PureComponent<Props, State> {
         preventBackdropClick={!canClose}
         render={({ onClose }) => (
           <ModalBody onClose={canClose ? onClose : undefined}>
+            <Track onUnmount event="CloseModalReceive" />
             <SyncSkipUnderPriority priority={9} />
             {account && <SyncOneAccountOnMount priority={10} accountId={account.id} />}
             <ModalTitle onBack={canPrev ? this.handlePrevStep : undefined}>

@@ -15,6 +15,7 @@ import hardReset from 'helpers/hardReset'
 import type { SettingsState } from 'reducers/settings'
 import type { T } from 'types/common'
 
+import TrackPage from 'analytics/TrackPage'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import CheckBox from 'components/base/CheckBox'
 import Box from 'components/base/Box'
@@ -145,6 +146,7 @@ class TabProfile extends PureComponent<Props, State> {
     const isPasswordEnabled = settings.password.isEnabled === true
     return (
       <Section>
+        <TrackPage category="Settings" name="Profile" />
         <Header
           icon={<IconUser size={16} />}
           title={t('app:settings.tabs.profile')}

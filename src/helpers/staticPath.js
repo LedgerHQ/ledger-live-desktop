@@ -14,13 +14,15 @@ const staticPath =
         ? `${__dirname}/../../static`
         : 'static'
 
+export function getPath(path: string): string {
+  return isRunningInAsar ? `${staticPath}/${path}` : `/${path}`
+}
+
 /**
  * Returns resolved static path for given image path
  *
  * note: `i` for `image` (using `img` was confusing when using with <img /> tag)
  */
-export function i(path: string): string {
-  return isRunningInAsar ? `${staticPath}/images/${path}` : `/images/${path}`
-}
+export const i = (path: string): string => getPath(`images/${path}`)
 
 export default staticPath

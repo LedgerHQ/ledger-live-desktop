@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import type { Operation } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
+import TrackPage from 'analytics/TrackPage'
 import Spinner from 'components/base/Spinner'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
@@ -59,6 +60,7 @@ function StepConfirmation(props: Props) {
 
   return (
     <Container>
+      <TrackPage category="Send" name="Step4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>

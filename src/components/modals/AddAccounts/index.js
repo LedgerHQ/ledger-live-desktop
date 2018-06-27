@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 
+import Track from 'analytics/Track'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
@@ -227,6 +228,7 @@ class AddAccounts extends PureComponent<Props, State> {
             steps={this.STEPS}
             {...addtionnalProps}
           >
+            <Track onUnmount event="CloseModalAddAccounts" />
             <SyncSkipUnderPriority priority={100} />
           </Stepper>
         )}

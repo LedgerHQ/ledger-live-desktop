@@ -18,6 +18,7 @@ import type { SettingsState } from 'reducers/settings'
 import { currenciesSelector } from 'reducers/accounts'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 
+import TrackPage from 'analytics/TrackPage'
 import SelectCurrency from 'components/SelectCurrency'
 import StepperNumber from 'components/base/StepperNumber'
 import ExchangeSelect from 'components/SelectExchange'
@@ -94,6 +95,7 @@ class TabCurrencies extends PureComponent<Props, State> {
     const defaults = currencySettingsDefaults(currency)
     return (
       <Section key={currency.id}>
+        <TrackPage category="Settings" name="Currencies" />
         <Header
           icon={<IconCurrencies size={16} />}
           title={t('app:settings.tabs.currencies')}

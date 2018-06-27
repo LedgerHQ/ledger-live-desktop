@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
+import uniq from 'lodash/uniq'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -26,6 +27,7 @@ import type { TimeRange } from 'reducers/settings'
 import { reorderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
+import TrackPage from 'analytics/TrackPage'
 import UpdateNotifier from 'components/UpdateNotifier'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
@@ -92,12 +94,18 @@ class DashboardPage extends PureComponent<Props> {
     const timeFrame = this.handleGreeting()
     const imagePath = i('empty-account-tile.svg')
     const totalAccounts = accounts.length
+    const totalCurrencies = uniq(accounts.map(a => a.currency.id)).length
+    const totalOperations = accounts.reduce((sum, a) => sum + a.operations.length, 0)
     const displayOperationsHelper = (account: Account) => account.operations.length > 0
     const displayOperations = accounts.some(displayOperationsHelper)
 
     return (
       <Fragment>
         <UpdateNotifier />
+        <TrackPage
+          category="Portfolio"
+          properties={{ totalAccounts, totalOperations, totalCurrencies }}
+        />
         <Box flow={7}>
           {totalAccounts > 0 ? (
             <Fragment>
