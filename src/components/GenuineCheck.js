@@ -63,16 +63,13 @@ class GenuineCheck extends PureComponent<Props> {
 
   checkGenuineInteractionHandler = async ({
     device,
-    infos,
+    deviceInfo,
   }: {
     device: Device,
-    infos: DeviceInfo,
+    deviceInfo: DeviceInfo,
   }) => {
     const res = await getIsGenuine
-      .send({
-        devicePath: device.path,
-        deviceInfo: infos,
-      })
+      .send({ devicePath: device.path, deviceInfo })
       .pipe(timeout(GENUINE_TIMEOUT))
       .toPromise()
     const isGenuine = res === '0000'
@@ -106,7 +103,7 @@ class GenuineCheck extends PureComponent<Props> {
         run: this.connectInteractionHandler,
       },
       {
-        id: 'infos',
+        id: 'deviceInfo',
         title: (
           <Trans i18nKey="deviceConnect:dashboard.open" parent="div">
             {'Navigate to the '}
