@@ -12,17 +12,17 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 
-const Container = styled(Box).attrs({
+export const Container = styled(Box).attrs({
   horizontal: true,
   my: 2,
   mx: 3,
   p: 4,
-  boxShadow: 0,
+  bg: 'white',
+  boxShadow: p => (p.noShadow ? -1 : 0),
   borderRadius: 4,
   flow: 2,
 })`
   width: calc(50% - 30px);
-  background: white;
   line-height: normal;
 `
 
