@@ -20,7 +20,7 @@
     "release": "bash ./scripts/release.sh",
     "start": "bash ./scripts/start.sh",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
-    "trans": "node scripts/trans"
+    "reset-files": "bash ./scripts/reset-files.sh"
   },
   "electronWebpack": {
     "title": true,
