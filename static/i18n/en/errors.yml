@@ -27,5 +27,7 @@ ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again.
 ManagerNotEnoughSpace: Not enough storage on device. Uninstall some apps and try again.
 ManagerDeviceLocked: Device is locked
 ManagerAppAlreadyInstalled: App is already installed
-ManagerAppRelyOnBTC: First install the Bitcoin app
-ManagerUninstallBTCDep: Other apps depend on Bitcoin, uninstall those first
+ManagerAppRelyOnBTC: You must install Bitcoin application first
+ManagerUninstallBTCDep: You must uninstall other altcoins first
+
+DeviceNotGenuine: Device is not genuine
