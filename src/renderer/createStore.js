@@ -22,6 +22,7 @@ export default ({ state, history, dbMiddleware }: Props) => {
   const middlewares = [routerMiddleware(history), thunk, logger]
   if (!process.env.STORYBOOK_ENV) {
     middlewares.push(require('middlewares/sentry').default)
+    middlewares.push(require('middlewares/analytics').default)
   }
   if (dbMiddleware) {
     middlewares.push(dbMiddleware)

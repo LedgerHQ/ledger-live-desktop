@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
+import Track from 'analytics/Track'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T, Device } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
@@ -21,7 +22,6 @@ import { MODAL_SEND } from 'config/constants'
 import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
 import PollCounterValuesOnMount from 'components/PollCounterValuesOnMount'
 import Breadcrumb from 'components/Breadcrumb'
-import StepConnectDevice from 'components/modals/StepConnectDevice'
 import ChildSwitch from 'components/base/ChildSwitch'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
@@ -30,6 +30,7 @@ import Footer from './Footer'
 import ConfirmationFooter from './ConfirmationFooter'
 
 import StepAmount from './01-step-amount'
+import StepConnectDevice from './02-step-connect-device'
 import StepVerification from './03-step-verification'
 import StepConfirmation from './04-step-confirmation'
 
@@ -293,6 +294,7 @@ class SendModal extends Component<Props, State<*>> {
         onClose={canClose ? this.handleReset : undefined}
         render={({ onClose }) => (
           <ModalBody onClose={canClose ? onClose : undefined}>
+            <Track onUnmount event="CloseModalSend" />
             <PollCounterValuesOnMount />
             <SyncSkipUnderPriority priority={80} />
             {account && <SyncOneAccountOnMount priority={81} accountId={account.id} />}

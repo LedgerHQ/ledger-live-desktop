@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
 import Tooltip from 'components/base/Tooltip'
+import TrackPage from 'analytics/TrackPage'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -106,6 +107,13 @@ class AccountPage extends PureComponent<Props> {
     return (
       // Force re-render account page, for avoid animation
       <Box key={account.id}>
+        <TrackPage
+          category="Account"
+          properties={{
+            currency: account.currency.id,
+            operationsLength: account.operations.length,
+          }}
+        />
         <SyncOneAccountOnMount priority={10} accountId={account.id} />
         <Box horizontal mb={5} flow={4}>
           <AccountHeader account={account} />

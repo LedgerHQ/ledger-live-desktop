@@ -14,6 +14,7 @@ import { Tabbable } from 'components/base/Box'
 
 import { openModal } from 'reducers/modals'
 import { MODAL_RELEASES_NOTES } from 'config/constants'
+import TrackPage from 'analytics/TrackPage'
 
 import {
   SettingsSection as Section,
@@ -61,6 +62,7 @@ class SectionAbout extends PureComponent<Props> {
 
     return (
       <Section>
+        <TrackPage category="Settings" name="About" />
         <Header
           icon={<IconHelp size={16} />}
           title={t('app:settings.tabs.about')}

@@ -17,7 +17,7 @@ import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/gl
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
-import { getLanguage, sentryLogsBooleanSelector } from 'reducers/settings'
+import { languageSelector, sentryLogsBooleanSelector } from 'reducers/settings'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 
 import db from 'helpers/db'
@@ -55,7 +55,7 @@ async function init() {
   }
 
   const state = store.getState()
-  const language = getLanguage(state)
+  const language = languageSelector(state)
   moment.locale(language)
 
   sentry(() => sentryLogsBooleanSelector(store.getState()))

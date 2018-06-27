@@ -2,6 +2,7 @@
 
 import React, { Fragment } from 'react'
 
+import TrackPage from 'analytics/TrackPage'
 import SelectCurrency from 'components/SelectCurrency'
 import Button from 'components/base/Button'
 import CurrencyBadge from 'components/base/CurrencyBadge'
@@ -15,6 +16,7 @@ function StepChooseCurrency({ currency, setCurrency }: StepProps) {
 export function StepChooseCurrencyFooter({ transitionTo, currency, t }: StepProps) {
   return (
     <Fragment>
+      <TrackPage category="AddAccounts" name="Step1" />
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       <Button primary disabled={!currency} onClick={() => transitionTo('connectDevice')}>
         {t('app:common.next')}

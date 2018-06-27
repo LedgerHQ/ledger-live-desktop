@@ -25,6 +25,7 @@ import IconAngleDown from 'icons/AngleDown'
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 import Defer from 'components/base/Defer'
+import Track from 'analytics/Track'
 
 import SectionTitle from './SectionTitle'
 import OperationC from './Operation'
@@ -129,6 +130,19 @@ export class OperationsList extends PureComponent<Props, State> {
               </Card>
             </Box>
           ))}
+          {groupedOperations.completed ? (
+            <Track
+              onMount
+              event="OperationsListEndReached"
+              properties={{
+                totalSections: groupedOperations.sections.length,
+                totalOperations: groupedOperations.sections.reduce(
+                  (sum, s) => sum + s.data.length,
+                  0,
+                ),
+              }}
+            />
+          ) : null}
           {!groupedOperations.completed ? (
             <ShowMore onClick={this.fetchMoreOperations}>
               <span>{t('app:common.showMore')}</span>

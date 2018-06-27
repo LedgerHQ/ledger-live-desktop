@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -8,6 +8,7 @@ import { createStructuredSelector } from 'reselect'
 
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
+import Track from 'analytics/Track'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_RECEIVE } from 'config/constants'
@@ -182,18 +183,21 @@ class ReceiveModal extends PureComponent<Props, State> {
         preventBackdropClick={isModalLocked}
         onBeforeOpen={this.handleBeforeOpenModal}
         render={({ onClose }) => (
-          <Stepper
-            title={t('app:receive.title')}
-            initialStepId={stepId}
-            onStepChange={this.handleStepChange}
-            onClose={onClose}
-            steps={this.STEPS}
-            disabledSteps={disabledSteps}
-            errorSteps={errorSteps}
-            {...addtionnalProps}
-          >
-            <SyncSkipUnderPriority priority={100} />
-          </Stepper>
+          <Fragment>
+            <Track onUnmount event="CloseModalReceive" />
+            <Stepper
+              title={t('app:receive.title')}
+              initialStepId={stepId}
+              onStepChange={this.handleStepChange}
+              onClose={onClose}
+              steps={this.STEPS}
+              disabledSteps={disabledSteps}
+              errorSteps={errorSteps}
+              {...addtionnalProps}
+            >
+              <SyncSkipUnderPriority priority={100} />
+            </Stepper>
+          </Fragment>
         )}
       />
     )

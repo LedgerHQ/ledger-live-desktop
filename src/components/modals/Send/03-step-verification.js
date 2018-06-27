@@ -3,6 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import WarnBox from 'components/WarnBox'
 import { multiline } from 'styles/helpers'
@@ -32,6 +33,7 @@ type Props = {
 
 export default ({ t }: Props) => (
   <Container>
+    <TrackPage category="Send" name="Step3" />
     <WarnBox>{multiline(t('app:send.steps.verification.warning'))}</WarnBox>
     <Info>{t('app:send.steps.verification.body')}</Info>
     <DeviceConfirm />

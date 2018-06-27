@@ -3,6 +3,7 @@
 import invariant from 'invariant'
 import React, { PureComponent } from 'react'
 
+import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
@@ -33,6 +34,7 @@ export default class StepReceiveFunds extends PureComponent<StepProps, State> {
     invariant(account, 'No account given')
     return (
       <Box flow={5}>
+        <TrackPage category="Receive" name="Step4" />
         <Box flow={1}>
           <Label>{t('app:receive.steps.receiveFunds.label')}</Label>
           <RequestAmount

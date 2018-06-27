@@ -14,7 +14,7 @@ common:
   selectAccount: Select an account
   selectAccountNoOption: 'No account matching "{{accountName}}"'
   selectCurrency: Choose a crypto asset
-  selectCurrencyNoOption: 'No currency matching "{{currencyName}}"'
+  selectCurrencyNoOption: 'No crypto asset matching "{{currencyName}}"'
   selectExchange: Select an exchange
   selectExchangeNoOption: 'No exchange matching "{{exchangeName}}"'
   sortBy: Sort by

@@ -14,6 +14,7 @@ type Props = {
   onStatusChange: (string, string) => void,
 }
 
+// FIXME why is that in modal !?
 const StepConnectDevice = ({ account, currency, onChangeDevice, onStatusChange }: Props) =>
   account || currency ? (
     <EnsureDeviceApp

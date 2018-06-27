@@ -13,14 +13,14 @@ common:
   selectAccount: Select an account
   selectAccountNoOption: 'No account matching "{{accountName}}"'
   selectCurrency: Choose a crypto asset
-  selectCurrencyNoOption: 'No currency matching "{{currencyName}}"'
+  selectCurrencyNoOption: 'No crypto asset "{{currencyName}}"'
   selectExchange: Select an exchange
   selectExchangeNoOption: 'No exchange matching "{{exchangeName}}"'
   sortBy: Sort by
   search: Search
   save: Save
   password: Password
-  editProfile: Edit profile
+  editProfile: Preferences
   lockApplication: Lock Ledger Live
   showMore: Show more
   max: Max
@@ -61,10 +61,10 @@ time:
   month: Month
   year: Year
   since:
-    day: since a day
-    week: since a week
-    month: since a month
-    year: since a year
+    day: past day
+    week: past week
+    month: past month
+    year: past year
 sidebar:
   menu: Menu
   accounts: Accounts ({{count}})
@@ -75,20 +75,20 @@ account:
   receive: Receive
   lastOperations: Last operations
   emptyState:
-    title: No funds yet?
-    desc: Make sure the <1><0>{{currency}}</0></1> app is installed to receive funds. # replace [cryptocurrency] and make it bold
+    title: No crypto assets yet?
+    desc: Ensure the <1><0>{{currency}}</0></1> app is installed and start receiving
     buttons:
-      receiveFunds: Receive funds
+      receiveFunds: Receive
   settings:
     title: Edit account
     advancedLogs: Advanced logs
     accountName:
       title: Account name
-      desc: Describe this account.
-      error: An account name is required.
+      desc: Describe this account
+      error: An account name is required
     unit:
       title: Unit
-      desc: Choose the unit to display.
+      desc: Choose the unit to display
     endpointConfig:
       title: Node
       desc: The API node to use
@@ -96,16 +96,16 @@ account:
 dashboard:
   title: Portfolio
   emptyAccountTile:
-    desc: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    createAccount: Create Account
+    desc: Add accounts to manage more crypto assets
+    createAccount: Add account
   accounts:
     title: Accounts ({{count}})
   greeting:
     morning: "Good morning"
     evening: "Good evening"
     afternoon: "Good afternoon"
-  summary: "Here's the summary of your account."
-  summary_plural: "Here's the summary of your {{count}} accounts."
+  summary: "Here's the summary of your account"
+  summary_plural: "Here's the summary of your {{count}} accounts"
   noAccounts: No accounts yet
   recentActivity: Recent activity
   totalBalance: Total balance
@@ -115,15 +115,15 @@ dashboard:
 currentAddress:
   title: Current address
   for: Address for <1><0>{{accountName}}</0></1>
-  message: Your receive address has not been confirmed on your Ledger device. Verify the address for optimal security.
+  message: Your receive address has not been confirmed on your Ledger device. Please verify the address for optimal security.
 deviceConnect:
   step1:
     choose: "We detected {{count}} connected devices, please select one:"
     connect: Connect and unlock your <1>Ledger device</1> # remove key: <3>PIN code</3>
-    dashboard: test
+    dashboard: Not used. # This key is not used. Still managed in JS.
 emptyState:
   sidebar:
-    text: Press the + button to add an account to your portfolio.
+    text: Press the + button to add an account to your portfolio
   dashboard:
     title: 'Add accounts to your portfolio'
     desc: Your portfolio has no accounts the first time Ledger Live is launched. Open the Manager to install apps on your Ledger device before you start adding accounts to your portfolio.
@@ -133,9 +133,9 @@ emptyState:
 exchange:
   title: Exchange
   visitWebsite: Visit website
-  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store cryptoassets.'
-  changelly: 'Changelly is a popular instant cryptocurrency exchange with 100+ coins and tokens listed.'
-  coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital currency, anywhere in the world.'
+  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
+  changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
+  coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.'
 genuinecheck:
   modal:
     title: Genuine check
@@ -153,13 +153,13 @@ addAccounts:
   editName: Edit name
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
-  noAccountToImport: All {{currencyName}} accounts found are already in your portfolio.
-  success: Account successfully added to your portfolio.
+  noAccountToImport: No existing {{currencyName}} accounts to add
+  success: Account added to your portfolio
 # success_plural: Accounts successfully added to your portfolio.
   createNewAccount:
     title: Create new account
-    noOperationOnLastAccount: 'You have to receive funds on {{accountName}} before you can create a new account.'
-    noAccountToCreate: No {{currencyName}} account was found to create.
+    noOperationOnLastAccount: 'You have to receive crypto assets on {{accountName}} before you can create a new account.'
+    noAccountToCreate: No {{currencyName}} account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
     add: 'Add account'
@@ -189,21 +189,21 @@ manager:
     all: Apps
     installing: 'Installing {{app}}...'
     uninstalling: 'Uninstalling {{app}}...'
-    installSuccess: '{{app}} is now installed on your device.'
-    uninstallSuccess: '{{app}} has been uninstalled from your device.'
-    alreadyInstalled: '{{app}} is already installed on your device.'
+    installSuccess: '{{app}} is now installed on your device'
+    uninstallSuccess: '{{app}} has been uninstalled from your device'
+    alreadyInstalled: '{{app}} is already installed on your device'
     help: Remove and reinstall to update apps
   firmware:
     installed: 'Firmware version {{version}}'
     update: Update firmware
     updateTitle: Firmware update
     continue: Continue update
-    latest: 'Firmware version {{version}} is available.'
+    latest: 'Firmware version {{version}} is available'
     disclaimerTitle: 'You are about to install the latest <1><0>firmware {{version}}</0></1>'
     disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
     disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
   title: Manager
-  subtitle: Install apps or update your device.
+  subtitle: Select apps to use on your device
   device:
     title: Connect your device
     desc: Follow the steps below to use the Manager
@@ -213,7 +213,7 @@ manager:
     noDashboard: Navigate to the dashboard on your device (TEMPLATED NEEDED)
     noGenuine: Allow the Manager to continue (TEMPLATE NEEDED)
 receive:
-  title: Receive funds
+  title: Receive
   steps:
     chooseAccount:
       title: Choose account
@@ -224,27 +224,27 @@ receive:
     confirmAddress:
       title: Confirm address
       action: Confirm address on device
-      text: To receive funds, confirm the address on your device.
+      text: To receive crypto assets, confirm the address on your device
       support: Ledger Support
       error:
         title: Receive address rejected
-        text: Please try again or request Ledger Support assistance when in doubt.
+        text: Please try again or contact Support when in doubt
     receiveFunds:
-      title: Receive funds
+      title: Receive crypto assets
       label: Amount (optional)
 send:
-  title: Send funds
+  title: Send
   totalSpent: Total
   steps:
     amount:
-      title: Create payment
+      title: Send crypto assets
       selectAccountDebit: Select an account to debit
       recipientAddress: Recipient address # can't control the tooltip!
       amount: Amount
       max: Max
       fees: Fees
       advancedOptions: Advanced options
-      useRBF: Use the RBF transaction.
+      useRBF: Use a replace-by-fee transaction
       message: Leave a message (140)
       rippleTag: Tag
       ethereumGasLimit: Gas limit
@@ -258,7 +258,7 @@ send:
         Carefully verify the transaction details displayed one by one on your device before you proceed.
       # blue
       # nano
-      body: Press the right button to confirm the transaction.
+      body: Press the right button to confirm the transaction
     confirmation:
       title: Confirmation
       success:
@@ -274,7 +274,7 @@ send:
 releaseNotes:
   title: Release notes
   version: Version {{versionNb}}
-settings:
+settings: # Always ensure descriptions carry full stops (.)
   title: Settings
   tabs:
     display: Display
@@ -282,29 +282,31 @@ settings:
     profile: Profile
     about: Help
   display:
-    desc:
-    language: Language
-    languageDesc: Choose the language to display.
+    desc: Control Ledger Live's appearance.
+    language: Display language
+    languageDesc: Set the language displayed in Ledger Live.
     counterValue: Base currency
-    counterValueDesc: Choose the currency to display next to your balance and operations. An exchange is used (via BTC pair).
+    counterValueDesc: Choose the currency to display next to your balance and operations.
+    exchange: Rate provider ({{ticker}})
+    exchangeDesc: Choose the provider of the exchange rate between Bitcoin and your selected base currency.
     region: Region
-    regionDesc: Choose the region in which you’re located to set the application’s time zone.
+    regionDesc: Choose the region in which you’re located to set the Ledger Live's time zone.
     stock: Regional market indicator
     stockDesc: Choose Western to display an increase in market value in blue. Choose Eastern to display an increase in market value in red.
   currencies:
-    desc: Select a cryptocurrency to edit its settings.
+    desc: Select a crypto asset to edit its settings.
     exchange: Rate provider ({{ticker}})
-    exchangeDesc: Choose the provider of the base currency exchange rates (via BTC).
+    exchangeDesc: Choose the provider of the rate between the selected crypto asset and Bitcoin. This intermediary calculation enables the calculation of your balance in your base currency, for indicative purposes only.
     confirmationsToSpend: Number of confirmations required to spend
-    confirmationsToSpendDesc: Set the number of confirmations required for your funds to be spendable. # A higher number of confirmations decreases the probability that a transaction is rejected.
+    confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable. # A higher number of confirmations decreases the probability that a transaction is rejected.
     confirmationsNb: Number of confirmations
-    confirmationsNbDesc: Set the number of blocks a transaction needs to be included in to consider it as confirmed. # A higher number of confirmations increases the certainty that a transaction cannot be reversed.
+    confirmationsNbDesc: Set the number of network confirmations for a transaction to be marked as confirmed. # A higher number of confirmations increases the certainty that a transaction cannot be reversed.
     transactionsFees: Default transaction fees
-    transactionsFeesDesc: Select your default transaction fees. The higher the fee, the quicker the transaction will be processed.
+    transactionsFeesDesc: Select your default transaction fees. The higher the fee, the faster the transaction will be processed.
     explorer: Blockchain explorer
     explorerDesc: Choose which explorer is used to look up the operation details in the blockchain.
   profile:
-    desc:
+    desc: Set the preferences for your profile.
     password: Data encryption
     passwordDesc: Enhance your privacy. Set a password to encrypt Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
     changePassword: Change password
@@ -316,16 +318,16 @@ settings:
     softResetDesc: Clear the Ledger Live cache to force resynchronization with the blockchain.
     softReset: Clear
     hardResetTitle: Reset Ledger Live
-    hardResetDesc: Erase all Ledger Live data stored on your computer, including your profile, accounts, transaction history and settings. The private keys that manage your crypto assets remain secure on your Ledger device.
+    hardResetDesc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
     hardReset: Reset
     developerMode: Developer mode
-    developerModeDesc: Show developer apps in the Manager and enable testnet currencies.
+    developerModeDesc: Show developer apps in the Manager and enable testnet apps.
     analytics: Analytics
     analyticsDesc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
     reportErrors: Usage and diagnostics
     reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
   about:
-    desc:
+    desc: Learn about Ledger Live features or get help.
     version: Ledger Live version
     releaseNotesBtn: Show release notes # Close button instead of continue.
     faq: Ledger Support
@@ -336,35 +338,35 @@ settings:
     termsDesc: --- Check with Legal ---
   hardResetModal:
     title: Reset Ledger Live
-    desc: Resetting will erase all Ledger Live data stored on your computer, including your profile, accounts, transaction history and application settings. The keys to access your crypto assets in the blockchain remain secure on your Ledger device.
+    desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
   softResetModal:
     title: Clear cache
     subTitle: Are you sure?
-    desc: Clearing the Ledger Live cache forces network resynchronization.
+    desc: Clearing the Ledger Live cache forces network resynchronization
   removeAccountModal:
     title: Remove account
     subTitle: Are you sure?
-    desc: The account will no longer be included in your portfolio. Accounts can always be re-added.
+    desc: The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added.
   exportLogs:
     title: Export logs
     desc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
     btn: Export
 password:
-  warning_0: Warning 0
-  warning_1: Warning 1
-  warning_2: Warning 2
-  warning_3: Warning 3
-  warning_4: Warning 4
-  errorMessageIncorrectPassword: The password you entered is incorrect.
-  errorMessageNotMatchingPassword: Passwords don't match.
+  warning_0: Very weak
+  warning_1: Weak
+  warning_2: Medium
+  warning_3: Strong
+  warning_4: Very strong
+  errorMessageIncorrectPassword: The password you entered is incorrect
+  errorMessageNotMatchingPassword: Passwords don't match
   inputFields:
     newPassword:
       label: Password
-      placeholder:
+      placeholder: #remove
     confirmPassword:
       label: Confirm password
-      placeholder:
-    currentPassword:
+      placeholder: #remove
+    currentPassword: #remove
       label: Current password
       placeholder:
   changePassword:
@@ -379,7 +381,7 @@ password:
     title: Disable data encryption
     desc: Ledger Live data will be stored unencrypted on your computer. This includes account names, balances, transactions and public addresses.
 update:
-  newVersionReady: A new update is available.
+  newVersionReady: A new update is available
   relaunch: Update now
 crash:
   oops: Oops, something went wrong

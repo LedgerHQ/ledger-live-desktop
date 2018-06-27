@@ -7,6 +7,7 @@ import React, { Fragment, PureComponent } from 'react'
 import getAddress from 'commands/getAddress'
 import { isSegwitAccount } from 'helpers/bip32'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import DeviceConfirm from 'components/DeviceConfirm'
@@ -52,6 +53,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
     invariant(device, 'No device given')
     return (
       <Container>
+        <TrackPage category="Receive" name="Step3" />
         {isAddressVerified === false ? (
           <Fragment>
             <Title>{t('app:receive.steps.confirmAddress.error.title')}</Title>
