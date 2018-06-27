@@ -71,13 +71,7 @@ type State = {
 }
 
 const LoadingApp = () => (
-  <FakeManagerAppContainer
-    bg="rgba(0, 0, 0, 0.06)"
-    noShadow
-    align="center"
-    justify="center"
-    style={{ height: 90 }}
-  >
+  <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>
     <Spinner size={16} color="rgba(0, 0, 0, 0.3)" />
   </FakeManagerAppContainer>
 )
