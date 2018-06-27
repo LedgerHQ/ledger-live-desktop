@@ -8,6 +8,6 @@
 
 <!-- e.g. GitHub issue #45 / contextual discussion -->
 
-### Testing / Affected part
+### Parts of the app affected / Test plan
 
 <!-- Which part of the app is affected? What to do to test it, any special thing to do? -->
