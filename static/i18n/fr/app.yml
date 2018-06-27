@@ -202,12 +202,12 @@ manager:
   subtitle: Select apps to use on your device
   device:
     title: Connect your device
-    desc: Follow the steps below to use the Manager
+    desc: 'Follow the steps below to use the device Manager'
     cta: Connect my device
   errors:
     noDevice: No device is connected (TEMPLATE NEEDED)
     noDashboard: Navigate to the dashboard on your device (TEMPLATED NEEDED)
-    noGenuine: Allow the Manager to continue (TEMPLATE NEEDED)
+    noGenuine: Allow Manager to continue (TEMPLATE NEEDED)
 receive:
   title: Receive
   steps:
@@ -276,7 +276,7 @@ settings:
     profile: Profile
     about: Help
   display:
-    desc: Control Ledger Live's appearance.
+    desc: Unneeded description
     language: Display language
     languageDesc: Set the language displayed in Ledger Live.
     counterValue: Base currency
