@@ -33,7 +33,7 @@ class SideBarListItem extends PureComponent<Props> {
       <Container
         isActive={!disabled && isActive}
         iconActiveColor={iconActiveColor}
-        onClick={disabled ? null : onClick}
+        onClick={disabled ? undefined : onClick}
         disabled={disabled}
       >
         {!!Icon && <Icon size={16} />}
@@ -62,8 +62,7 @@ const Container = styled(Tabbable).attrs({
   px: 3,
   py: 2,
 })`
-  cursor: ${p => (p.disabled || p.isActive ? 'default' : 'pointer')};
-  pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
+  cursor: ${p => (p.disabled ? 'not-allowed' : p.isActive ? 'default' : 'pointer')};
   color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
   background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
   opacity: ${p => (p.disabled ? 0.5 : 1)};
