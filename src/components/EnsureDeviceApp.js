@@ -12,6 +12,7 @@ import getAddress from 'commands/getAddress'
 import { createCancelablePolling } from 'helpers/promise'
 import { standardDerivation } from 'helpers/derivations'
 import { isSegwitAccount } from 'helpers/bip32'
+import { BtcUnmatchedApp } from 'helpers/getAddressForCurrency/btc'
 
 import DeviceInteraction from 'components/DeviceInteraction'
 import Text from 'components/base/Text'
@@ -45,44 +46,31 @@ class EnsureDeviceApp extends Component<{
     })
 
   openAppInteractionHandler = ({ device }) =>
-    createCancelablePolling(async () => {
-      const { account, currency } = this.props
-      const cur = account ? account.currency : currency
-      invariant(cur, 'No currency given')
-      const { address } = await getAddress
-        .send({
-          devicePath: device.path,
-          currencyId: cur.id,
-          path: account
-            ? account.freshAddressPath
-            : standardDerivation({ currency: cur, segwit: false, x: 0 }),
-          segwit: account ? isSegwitAccount(account) : false,
-        })
-        .toPromise()
-        .catch(e => {
-          if (
-            e &&
-            (e.name === 'TransportStatusError' ||
-              // we don't want these error to appear (caused by usb disconnect..)
-              e.message === 'could not read from HID device' ||
-              e.message === 'Cannot write to HID device')
-          ) {
-            throw new WrongAppOpened(`WrongAppOpened ${cur.id}`, { currencyName: cur.name })
+    createCancelablePolling(
+      async () => {
+        const { account, currency: _currency } = this.props
+        const currency = account ? account.currency : _currency
+        invariant(currency, 'No currency given')
+        const address = await getAddressFromAccountOrCurrency(device, account, currency)
+        if (account) {
+          const { freshAddress } = account
+          if (account && freshAddress !== address) {
+            logger.warn({ freshAddress, address })
+            throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
+              accountName: account.name,
+            })
           }
-          throw e
-        })
-
-      if (account) {
-        const { freshAddress } = account
-        if (account && freshAddress !== address) {
-          logger.warn({ freshAddress, address })
-          throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
-            accountName: account.name,
-          })
         }
-      }
-      return address
-    })
+        return address
+      },
+      {
+        shouldThrow: (err: Error) => {
+          const isWrongApp = err instanceof BtcUnmatchedApp
+          const isWrongDevice = err instanceof WrongDeviceForAccount
+          return isWrongApp || isWrongDevice
+        },
+      },
+    )
 
   renderOpenAppTitle = () => {
     const { account, currency } = this.props
@@ -103,6 +91,7 @@ class EnsureDeviceApp extends Component<{
     const Icon = cur ? getCryptoCurrencyIcon(cur) : null
     return (
       <DeviceInteraction
+        shouldRenderRetry
         steps={[
           {
             id: 'device',
@@ -126,6 +115,20 @@ class EnsureDeviceApp extends Component<{
       />
     )
   }
+}
+
+async function getAddressFromAccountOrCurrency(device, account, currency) {
+  const { address } = await getAddress
+    .send({
+      devicePath: device.path,
+      currencyId: currency.id,
+      path: account
+        ? account.freshAddressPath
+        : standardDerivation({ currency, segwit: false, x: 0 }),
+      segwit: account ? isSegwitAccount(account) : false,
+    })
+    .toPromise()
+  return address
 }
 
 export default connect(mapStateToProps)(EnsureDeviceApp)
