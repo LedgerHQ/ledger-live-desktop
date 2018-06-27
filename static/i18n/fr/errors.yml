@@ -11,7 +11,7 @@ BtcUnmatchedApp: 'Open the ‘{{currencyName}}’ app on your Ledger device to p
 WrongAppOpened: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
 WrongDeviceForAccount: 'Use the device associated with the account ‘{{accountName}}’.'
 LedgerAPINotAvailable: 'Ledger API not available for {{currencyName}}.'
-LedgerAPIError: 'Ledger API error. Try again later. (HTTP {{status}})'
+LedgerAPIError: 'Ledger API error. Try again. (HTTP {{status}})'
 NetworkDown: 'Your internet connection seems down.'
 NoAddressesFound: 'No accounts were found.'
 UserRefusedOnDevice: Transaction refused on device.
@@ -22,10 +22,11 @@ DeviceSocketNoBulkStatus: Oops, device connection failed. Please try again [bulk
 DeviceSocketNoHandler: Oops, device connection failed (handler {{query}}). Please try again.
 LatestMCUInstalledError: MCU on device already up to date.
 HardResetFail: Reset failed. Please try again.
-ManagerAPIsFail: Our services are currently unavailable. Please try again later.
-ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again later.
-ManagerNotEnoughSpace: Not enough room left on your device. Please uninstall some apps and try again.
+ManagerAPIsFail: Services are unavailable. Please try again.
+ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again.
+ManagerNotEnoughSpace: Not enough storage on device. Uninstall some apps and try again.
 ManagerDeviceLocked: Device is locked
 ManagerAppAlreadyInstalled: App is already installed
 ManagerAppRelyOnBTC: You must install Bitcoin application first
 ManagerUninstallBTCDep: You must uninstall other altcoins first
+DeviceNotGenuine: Device is not genuine
