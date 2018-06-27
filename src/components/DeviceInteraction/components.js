@@ -92,6 +92,8 @@ export const ErrorContainer = ({ isVisible }: { isVisible: boolean }) => (
 )
 
 const ErrorRetryContainer = styled(Box).attrs({
+  bg: rgba(colors.alertRed, 0.1),
+  borderRadius: 1,
   grow: 1,
   color: 'alertRed',
   cursor: 'pointer',
@@ -118,6 +120,7 @@ export const ErrorDescContainer = ({
 }) => (
   <Box
     pl={0}
+    fontSize={3}
     color="alertRed"
     align="flex-start"
     justify="center"
@@ -126,7 +129,7 @@ export const ErrorDescContainer = ({
     }}
     {...p}
   >
-    <Box horizontal bg={rgba(colors.alertRed, 0.1)} borderRadius={1}>
+    <Box horizontal>
       <Box p={1} pl={2}>
         {error.message || 'Failed'}
       </Box>

@@ -101,7 +101,7 @@ class GenuineCheck extends PureComponent<Props> {
   }
 
   render() {
-    const { onSuccess } = this.props
+    const { onSuccess, ...props } = this.props
     const steps = [
       {
         id: 'device',
@@ -146,6 +146,7 @@ class GenuineCheck extends PureComponent<Props> {
         steps={steps}
         onSuccess={onSuccess}
         onFail={this.handleFail}
+        {...props}
       />
     )
   }

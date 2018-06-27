@@ -1,40 +1,43 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import styled from 'styled-components'
 
 import { delay } from 'helpers/promise'
 
 import Box from 'components/base/Box'
+import Space from 'components/base/Space'
+
 import DeviceInteractionStep from './DeviceInteractionStep'
 
 import type { Step } from './DeviceInteractionStep'
 
+import { ErrorDescContainer } from './components'
+
+type Props = {
+  steps: Step[],
+  onSuccess?: any => void,
+  onFail?: any => void,
+  waitBeforeSuccess?: number,
+
+  // when true and there is an error, display the error + retry button
+  shouldRenderRetry?: boolean,
+}
+
+type State = {
+  stepIndex: number,
+  isSuccess: boolean,
+  error: ?Error,
+  data: Object,
+}
+
 const INITIAL_STATE = {
   stepIndex: 0,
   isSuccess: false,
-  showSuccess: false,
   error: null,
   data: {},
 }
 
-class DeviceInteraction extends PureComponent<
-  {
-    steps: Step[],
-    onSuccess?: any => void,
-    onFail?: any => void,
-    renderSuccess?: any => any,
-    waitBeforeSuccess?: number,
-  },
-  {
-    stepIndex: number,
-    isSuccess: boolean,
-    // used to be able to display the last check for a small amount of time
-    showSuccess: boolean,
-    error: ?Error,
-    data: Object,
-  },
-> {
+class DeviceInteraction extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
   componentWillUnmount() {
@@ -58,12 +61,11 @@ class DeviceInteraction extends PureComponent<
       if (!waitBeforeSuccess) {
         onSuccess && onSuccess(data)
       }
-      this.setState({ isSuccess: true, data, showSuccess: !waitBeforeSuccess })
+      this.setState({ isSuccess: true, data })
       if (waitBeforeSuccess) {
         await delay(waitBeforeSuccess)
         if (this._unmounted) return
         onSuccess && onSuccess(data)
-        this.setState({ showSuccess: true })
       }
     } else {
       this.setState({ stepIndex: stepIndex + 1, data })
@@ -82,39 +84,40 @@ class DeviceInteraction extends PureComponent<
   }
 
   render() {
-    const { steps, renderSuccess, waitBeforeSuccess: _waitBeforeSuccess, ...props } = this.props
-    const { stepIndex, error, isSuccess, data, showSuccess } = this.state
+    const { steps, shouldRenderRetry, ...props } = this.props
+    const { stepIndex, error, isSuccess, data } = this.state
 
     return (
-      <DeviceInteractionContainer {...props}>
-        {isSuccess && showSuccess && renderSuccess
-          ? renderSuccess(data)
-          : steps.map((step, i) => {
-              const isError = !!error && i === stepIndex
-              return (
-                <DeviceInteractionStep
-                  key={step.id}
-                  step={step}
-                  error={isError ? error : null}
-                  isError={isError}
-                  isFirst={i === 0}
-                  isLast={i === steps.length - 1}
-                  isPrecedentActive={i === stepIndex - 1}
-                  isActive={i === stepIndex}
-                  isPassed={i < stepIndex}
-                  isSuccess={i < stepIndex || (i === stepIndex && isSuccess)}
-                  onSuccess={this.handleSuccess}
-                  onFail={this.handleFail}
-                  onRetry={this.reset}
-                  data={data}
-                />
-              )
-            })}
-      </DeviceInteractionContainer>
+      <Box {...props}>
+        {steps.map((step, i) => {
+          const isError = !!error && i === stepIndex
+          return (
+            <DeviceInteractionStep
+              key={step.id}
+              step={step}
+              isError={isError}
+              isFirst={i === 0}
+              isLast={i === steps.length - 1}
+              isPrecedentActive={i === stepIndex - 1}
+              isActive={i === stepIndex}
+              isPassed={i < stepIndex}
+              isSuccess={i < stepIndex || (i === stepIndex && isSuccess)}
+              onSuccess={this.handleSuccess}
+              onFail={this.handleFail}
+              data={data}
+            />
+          )
+        })}
+        {error &&
+          shouldRenderRetry && (
+            <Box align="flex-end">
+              <Space of={0} />
+              <ErrorDescContainer error={error} onRetry={this.reset} mt={2} />
+            </Box>
+          )}
+      </Box>
     )
   }
 }
-
-const DeviceInteractionContainer = styled(Box).attrs({})``
 
 export default DeviceInteraction

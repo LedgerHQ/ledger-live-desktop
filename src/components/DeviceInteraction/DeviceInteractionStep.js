@@ -10,7 +10,6 @@ import {
   SpinnerContainer,
   IconContainer,
   SuccessContainer,
-  ErrorDescContainer,
   ErrorContainer,
 } from './components'
 
@@ -20,10 +19,7 @@ export type Step = {
   desc?: React$Node,
   icon: React$Node,
   run?: Object => Promise<any> | { promise: Promise<any>, unsubscribe: void => any },
-  render?: (
-    { onSuccess: Object => any, onFail: Error => void, onRetry: void => void },
-    any,
-  ) => React$Node,
+  render?: ({ onSuccess: Object => any, onFail: Error => void }, any) => React$Node,
   minMs?: number,
 }
 
@@ -38,10 +34,8 @@ type Props = {
   isSuccess: boolean,
   isPassed: boolean,
   step: Step,
-  error: ?Error,
   onSuccess: (any, Step) => any,
   onFail: (Error, Step) => any,
-  onRetry: void => any,
   data: any,
 }
 
@@ -66,13 +60,13 @@ class DeviceInteractionStep extends PureComponent<
   }
 
   componentDidUpdate(prevProps: Props) {
-    const { isActive, error } = this.props
+    const { isActive, isError } = this.props
     const { status } = this.state
 
     const didActivated = isActive && !prevProps.isActive
     const didDeactivated = !isActive && prevProps.isActive
     const stillActivated = isActive && prevProps.isActive
-    const didResetError = !error && !!prevProps.error
+    const didResetError = !isError && !!prevProps.isError
 
     if (didActivated && status !== 'running') {
       this.run()
@@ -163,8 +157,6 @@ class DeviceInteractionStep extends PureComponent<
       isError,
       isPassed,
       step,
-      error,
-      onRetry,
       data,
     } = this.props
 
@@ -191,14 +183,8 @@ class DeviceInteractionStep extends PureComponent<
           )}
           {step.desc && step.desc}
           {CustomRender && (
-            <CustomRender
-              onSuccess={this.handleSuccess}
-              onFail={this.handleFail}
-              onRetry={onRetry}
-              data={data}
-            />
+            <CustomRender onSuccess={this.handleSuccess} onFail={this.handleFail} data={data} />
           )}
-          {isError && error && <ErrorDescContainer error={error} onRetry={onRetry} mt={2} />}
         </Box>
 
         <div style={{ width: 70, position: 'relative', overflow: 'hidden', pointerEvents: 'none' }}>

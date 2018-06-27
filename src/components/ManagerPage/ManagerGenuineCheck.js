@@ -21,7 +21,8 @@ class ManagerGenuineCheck extends PureComponent<Props> {
   render() {
     const { t, onSuccess } = this.props
     return (
-      <Box align="center" justify="center" sticky style={{ marginRight: 80 }}>
+      <Box align="center">
+        <Space of={60} />
         <Box align="center" style={{ maxWidth: 460 }}>
           <img
             src={i('logos/connectDevice.png')}
@@ -36,15 +37,7 @@ class ManagerGenuineCheck extends PureComponent<Props> {
           </Text>
         </Box>
         <Space of={40} />
-        <GenuineCheck
-          onSuccess={onSuccess}
-          onFail={() => {
-            console.log(`fail`)
-          }}
-          onUnavailable={() => {
-            console.log(`unavailable`)
-          }}
-        />
+        <GenuineCheck shouldRenderRetry onSuccess={onSuccess} />
       </Box>
     )
   }

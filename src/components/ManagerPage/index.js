@@ -22,9 +22,11 @@ type State = {
 class ManagerPage extends PureComponent<Props, State> {
   state = {
     isGenuine: null,
+    device: null,
+    deviceInfo: null,
   }
 
-  handleSuccessGenuine = ({ device, deviceInfo }) => {
+  handleSuccessGenuine = ({ device, deviceInfo }: { device: Device, deviceInfo: DeviceInfo }) => {
     this.setState({ isGenuine: true, device, deviceInfo })
   }
 
