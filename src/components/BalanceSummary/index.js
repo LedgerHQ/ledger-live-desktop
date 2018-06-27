@@ -35,6 +35,7 @@ const BalanceSummary = ({
   selectedTimeRange,
 }: Props) => {
   const account = accounts.length === 1 ? accounts[0] : undefined
+  // FIXME This nesting 😱
   return (
     <Card p={0} py={5}>
       <CalculateBalance accounts={accounts} daysCount={daysCount}>
