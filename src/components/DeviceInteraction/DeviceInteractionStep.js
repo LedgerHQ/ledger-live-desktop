@@ -55,23 +55,14 @@ class DeviceInteractionStep extends PureComponent<
     data: {},
   }
 
-  constructor(props: Props) {
-    super(props)
-    const { isFirst } = this.props
-    if (isFirst) {
-      // cf: __IS_MOUNTED__THX_FOR_REMOVING_COMPONENTWILLMOUNT__
-      this.state.status = 'running'
-
-      this.run()
-    }
-  }
-
   state = {
-    status: 'idle',
+    status: this.props.isFirst ? 'running' : 'idle',
   }
 
   componentDidMount() {
-    this.__IS_MOUNTED__THX_FOR_REMOVING_COMPONENTWILLMOUNT__ = true
+    if (this.props.isFirst) {
+      this.run()
+    }
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -103,7 +94,6 @@ class DeviceInteractionStep extends PureComponent<
     this._unmounted = true
   }
 
-  __IS_MOUNTED__THX_FOR_REMOVING_COMPONENTWILLMOUNT__ = false
   _unsubscribe = null
   _unmounted = false
 
@@ -122,8 +112,9 @@ class DeviceInteractionStep extends PureComponent<
 
   run = async () => {
     const { step, data } = this.props
+    const { status } = this.state
 
-    if (this.__IS_MOUNTED__THX_FOR_REMOVING_COMPONENTWILLMOUNT__) {
+    if (status !== 'running') {
       this.setState({ status: 'running' })
     }
 
