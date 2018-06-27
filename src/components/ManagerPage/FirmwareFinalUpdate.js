@@ -10,7 +10,7 @@ import type { Device, T } from 'types/common'
 import installFinalFirmware from 'commands/installFinalFirmware'
 
 import Box, { Card } from 'components/base/Box'
-// import Button from 'components/base/Button'
+import Button from 'components/base/Button'
 
 type Props = {
   t: T,
@@ -33,7 +33,10 @@ class FirmwareFinalUpdate extends PureComponent<Props, State> {
     try {
       const { device, deviceInfo } = this.props
       const { success } = await installFinalFirmware
-        .send({ devicePath: device.path, deviceInfo })
+        .send({
+          devicePath: device.path,
+          deviceInfo,
+        })
         .toPromise()
       if (success) {
         this.setState()
@@ -52,7 +55,9 @@ class FirmwareFinalUpdate extends PureComponent<Props, State> {
           {t('app:manager.firmware.update')}
         </Box>
         <Card flow={2} {...props}>
-          <Box horizontal align="center" flow={2} />
+          <Box horizontal align="center" flow={2}>
+            <Button onClick={this.installFinalFirmware}>Install Final Firmware</Button>
+          </Box>
         </Card>
       </Box>
     )

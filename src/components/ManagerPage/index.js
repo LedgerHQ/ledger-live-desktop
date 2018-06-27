@@ -7,7 +7,6 @@ import type { Device } from 'types/common'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Dashboard from './Dashboard'
-// import FlashMcu from './FlashMcu'
 
 import ManagerGenuineCheck from './ManagerGenuineCheck'
 
