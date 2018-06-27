@@ -49,6 +49,7 @@ export type StepProps = DefaultStepProps & {
   closeModal: void => void,
   isAppOpened: boolean,
   isAddressVerified: ?boolean,
+  onRetry: void => void,
   onSkipConfirm: void => void,
   onResetSkip: void => void,
   onChangeAccount: (?Account) => void,
@@ -121,6 +122,7 @@ class ReceiveModal extends PureComponent<Props, State> {
     }
   }
 
+  handleRetry = () => this.setState({ isAddressVerified: null, errorSteps: [] })
   handleReset = () => this.setState({ ...INITIAL_STATE })
   handleCloseModal = () => this.props.closeModal(MODAL_RECEIVE)
   handleStepChange = step => this.setState({ stepId: step.id })
@@ -166,6 +168,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       isAppOpened,
       isAddressVerified,
       closeModal: this.handleCloseModal,
+      onRetry: this.handleRetry,
       onSkipConfirm: this.handleSkipConfirm,
       onResetSkip: this.handleResetSkip,
       onChangeAccount: this.handleChangeAccount,

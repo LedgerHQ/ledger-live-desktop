@@ -73,9 +73,23 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
   }
 }
 
-export function StepConfirmAddressFooter({ t }: StepProps) {
+export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps) {
   // This will be displayed only if user rejected address
-  return <Button>{t('app:receive.steps.confirmAddress.support')}</Button>
+  return (
+    <Fragment>
+      <Button>{t('app:receive.steps.confirmAddress.support')}</Button>
+      <Button
+        ml={2}
+        primary
+        onClick={() => {
+          onRetry()
+          transitionTo('device')
+        }}
+      >
+        {t('app:common.retry')}
+      </Button>
+    </Fragment>
+  )
 }
 
 const Container = styled(Box).attrs({
