@@ -109,10 +109,8 @@ class AccountPage extends PureComponent<Props> {
       <Box key={account.id}>
         <TrackPage
           category="Account"
-          properties={{
-            currency: account.currency.id,
-            operationsLength: account.operations.length,
-          }}
+          currency={account.currency.id}
+          operationsLength={account.operations.length}
         />
         <SyncOneAccountOnMount priority={10} accountId={account.id} />
         <Box horizontal mb={5} flow={4}>

@@ -1,3 +1,4 @@
+import logger from 'logger'
 import { PureComponent } from 'react'
 import { track } from './segment'
 
@@ -6,9 +7,11 @@ class Track extends PureComponent<{
   onUnmount?: boolean,
   onUpdate?: boolean,
   event: string,
-  properties?: Object,
 }> {
   componentDidMount() {
+    if (typeof this.props.event !== 'string') {
+      logger.warn('analytics Track: invalid event=', this.props.event)
+    }
     if (this.props.onMount) this.track()
   }
   componentDidUpdate() {
@@ -18,7 +21,7 @@ class Track extends PureComponent<{
     if (this.props.onUnmount) this.track()
   }
   track = () => {
-    const { event, properties } = this.props
+    const { event, onMount, onUnmount, onUpdate, ...properties } = this.props
     track(event, properties)
   }
   render() {
