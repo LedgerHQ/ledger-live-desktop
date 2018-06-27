@@ -24,11 +24,18 @@ const logs = []
 const MAX_LOG_LENGTH = 500
 const MAX_LOG_JSON_THRESHOLD = 2000
 
+const anonymousMode = !__DEV__
+
 function addLog(type, ...args) {
   logs.push({ type, date: new Date(), args })
   if (logs.length > MAX_LOG_LENGTH) {
     logs.shift()
   }
+}
+
+function anonymizeURL(url) {
+  if (!anonymousMode) return url
+  return url.replace(/\/addresses\/[^/]+/g, '/addresses/<HIDDEN>')
 }
 
 const makeSerializableLog = (o: mixed) => {
@@ -87,10 +94,10 @@ export default {
     addLog('cmd', type, id, spentTime, data)
   },
 
-  onDB: (way: 'read' | 'write' | 'clear', name: string, obj: ?Object) => {
-    const msg = `📁  ${way} ${name}:`
+  onDB: (way: 'read' | 'write' | 'clear', name: string) => {
+    const msg = `📁  ${way} ${name}`
     if (logDb) {
-      console.log(msg, obj)
+      console.log(msg)
     }
     addLog('db', msg)
   },
@@ -131,7 +138,7 @@ export default {
   },
 
   network: ({ method, url }: { method: string, url: string }) => {
-    const log = `➡📡  ${method} ${url}`
+    const log = `➡📡  ${method} ${anonymizeURL(url)}`
     if (logNetwork) {
       console.log(log)
     }
@@ -149,7 +156,9 @@ export default {
     status: number,
     responseTime: number,
   }) => {
-    const log = `✔📡  HTTP ${status} ${method} ${url} – finished in ${responseTime.toFixed(0)}ms`
+    const log = `✔📡  HTTP ${status} ${method} ${anonymizeURL(
+      url,
+    )} – finished in ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
       console.log(log)
     }
@@ -169,9 +178,9 @@ export default {
     error: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  HTTP ${status} ${method} ${url} – ${error} – failed after ${responseTime.toFixed(
-      0,
-    )}ms`
+    const log = `✖📡  HTTP ${status} ${method} ${anonymizeURL(
+      url,
+    )} – ${error} – failed after ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
       console.log(log)
     }
@@ -187,7 +196,9 @@ export default {
     url: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  NETWORK DOWN – ${method} ${url} – after ${responseTime.toFixed(0)}ms`
+    const log = `✖📡  NETWORK DOWN – ${method} ${anonymizeURL(url)} – after ${responseTime.toFixed(
+      0,
+    )}ms`
     if (logNetwork) {
       console.log(log)
     }
