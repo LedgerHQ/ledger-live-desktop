@@ -6,7 +6,7 @@ import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 import type { Node } from 'react'
 import type { Device } from 'types/common'
 
-import EnsureDevice from './EnsureDevice'
+import EnsureDevice from 'components/EnsureDevice'
 import EnsureDashboard from './EnsureDashboard'
 import EnsureGenuine from './EnsureGenuine'
 

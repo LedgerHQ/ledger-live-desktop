@@ -26,7 +26,8 @@ class ManagerPage extends PureComponent<Props, State> {
     deviceInfo: null,
   }
 
-  handleSuccessGenuine = ({ device, deviceInfo }: { device: Device, deviceInfo: DeviceInfo }) => {
+  // prettier-ignore
+  handleSuccessGenuine = ({ device, deviceInfo }: { device: Device, deviceInfo: DeviceInfo }) => { // eslint-disable-line react/no-unused-prop-types
     this.setState({ isGenuine: true, device, deviceInfo })
   }
 
