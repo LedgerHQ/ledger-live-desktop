@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react'
 import Animated from 'animated/lib/targets/react-dom'
 
@@ -13,7 +14,7 @@ class Confetti extends PureComponent<
     delta: [number, number],
   },
   {
-    value: *,
+    progress: Animated.Value,
   },
 > {
   state = {

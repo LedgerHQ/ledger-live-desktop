@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 import { shell } from 'electron'
 import styled from 'styled-components'
 import { i } from 'helpers/staticPath'
@@ -48,39 +48,63 @@ const socialMedia = [
   },
 ]
 
-export default (props: StepProps) => {
-  const { finish, t } = props
-  return (
-    <Box sticky justifyContent="center">
-      <ConfettiLayer>
-        <ConfettiParty />
-      </ConfettiLayer>
-      <Box alignItems="center">
-        <Box style={{ position: 'relative' }}>
-          <LiveLogo
-            style={{ width: 64, height: 64 }}
-            icon={<img alt="" src={i('ledgerlive-logo.svg')} width={40} height={40} />}
-          />
-          <Box color="positiveGreen" style={{ position: 'absolute', right: 0, bottom: 0 }}>
-            <IconCheckFull size={18} />
+export default class Finish extends Component<StepProps, *> {
+  state = { emit: false }
+  onMouseUp = () => this.setState({ emit: false })
+  onMouseDown = () => {
+    this.setState({ emit: true })
+  }
+  onMouseLeave = () => {
+    this.setState({ emit: false })
+  }
+  render() {
+    const { finish, t } = this.props
+    const { emit } = this.state
+    return (
+      <Box sticky justifyContent="center">
+        <ConfettiLayer>
+          <ConfettiParty emit={emit} />
+        </ConfettiLayer>
+        <Box alignItems="center">
+          <Box
+            style={{ position: 'relative' }}
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
+            onMouseLeave={this.onMouseLeave}
+          >
+            <LiveLogo
+              style={{ width: 64, height: 64 }}
+              icon={
+                <img
+                  draggable="false"
+                  alt=""
+                  src={i('ledgerlive-logo.svg')}
+                  width={40}
+                  height={40}
+                />
+              }
+            />
+            <Box color="positiveGreen" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+              <IconCheckFull size={18} />
+            </Box>
+          </Box>
+
+          <Box pt={5} align="center">
+            <Title>{t('onboarding:finish.title')}</Title>
+            <Description>{t('onboarding:finish.desc')}</Description>
+          </Box>
+          <Box p={5}>
+            <Button primary padded onClick={() => finish()}>
+              {t('onboarding:finish.openAppButton')}
+            </Button>
+          </Box>
+          <Box horizontal mt={3} flow={5} color="grey">
+            {socialMedia.map(socMed => <SocialMediaBox key={socMed.key} socMed={socMed} />)}
           </Box>
         </Box>
-
-        <Box pt={5} align="center">
-          <Title>{t('onboarding:finish.title')}</Title>
-          <Description>{t('onboarding:finish.desc')}</Description>
-        </Box>
-        <Box p={5}>
-          <Button primary padded onClick={() => finish()}>
-            {t('onboarding:finish.openAppButton')}
-          </Button>
-        </Box>
-        <Box horizontal mt={3} flow={5} color="grey">
-          {socialMedia.map(socMed => <SocialMediaBox key={socMed.key} socMed={socMed} />)}
-        </Box>
       </Box>
-    </Box>
-  )
+    )
+  }
 }
 
 type SocMed = {
