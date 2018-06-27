@@ -1,22 +1,17 @@
+## What is the type of this PR?
 
-## What is the type of this PR 
+<!-- e.g. Bug Fix, Feature, Code Quality Improvement, UI Polish... -->
 
-e.g. Bug Fix, Feature, Code Quality Improvement, UI Polish...
+## Any background context and/or relevant tickets/issues you want to provide with?
+
+<!-- e.g. GitHub issue #45 -->
 
 ## Short description on what this PR suppose to do?
 
-e.g. Adding genuine check to the onboarding
+<!-- e.g. Adding genuine check to the onboarding -->
 
 ## Any special conditions required for testing?
 
-e.g. Clear db, add special env variable..
-
-## Any background context you want to provide?
-
-e.g. @gre worked on this previously, another requirement was added
-
-## What are the relevant tickets/issues?
-
-e.g. GitHub issue #45
+<!-- e.g. Clear db, add special env variable.. -->
 
 ## Screenshots (if appropriate)
