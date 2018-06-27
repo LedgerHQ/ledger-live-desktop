@@ -1,17 +1,17 @@
-## Type
+### Type
 
 <!-- e.g. Bug Fix, Feature, Code Quality Improvement, UI Polish... -->
 
-## Context
+### Context
 
 <!-- e.g. GitHub issue #45 -->
 
-## Description
+### Description
 
 <!-- e.g. Adding genuine check to the onboarding -->
 
-## Testing
+<!-- add screenshots if appropriate -->
+
+### Testing
 
 <!-- e.g. Clear db, add special env variable.. -->
-
-## Screenshots (if appropriate)
