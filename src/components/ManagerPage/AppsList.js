@@ -18,6 +18,7 @@ import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 
 import Box from 'components/base/Box'
+import Space from 'components/base/Space'
 import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
@@ -32,7 +33,7 @@ import Update from 'icons/Update'
 import Trash from 'icons/Trash'
 import CheckCircle from 'icons/CheckCircle'
 
-import ManagerApp from './ManagerApp'
+import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
 
 const mapStateToProps = state => ({
@@ -68,6 +69,14 @@ type State = {
   app: string,
   mode: Mode,
 }
+
+const LoadingApp = () => (
+  <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>
+    <Spinner size={16} color="rgba(0, 0, 0, 0.3)" />
+  </FakeManagerAppContainer>
+)
+
+const loadingApp = <LoadingApp />
 
 class AppsList extends PureComponent<Props, State> {
   state = {
@@ -242,7 +251,7 @@ class AppsList extends PureComponent<Props, State> {
 
   renderList() {
     const { filteredAppVersionsList, appsLoaded } = this.state
-    return appsLoaded ? (
+    return (
       <Box>
         <AppSearchBar list={filteredAppVersionsList}>
           {items => (
@@ -261,10 +270,22 @@ class AppsList extends PureComponent<Props, State> {
           )}
         </AppSearchBar>
         {this.renderModal()}
-      </Box>
-    ) : (
-      <Box align="center" justify="center">
-        <Spinner size={50} />
+        {!appsLoaded && (
+          <Fragment>
+            <Space of={30} />
+            <List>
+              {loadingApp}
+              {loadingApp}
+              {loadingApp}
+              {loadingApp}
+              {loadingApp}
+              {loadingApp}
+              {loadingApp}
+              {loadingApp}
+              {loadingApp}
+            </List>
+          </Fragment>
+        )}
       </Box>
     )
   }
