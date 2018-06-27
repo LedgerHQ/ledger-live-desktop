@@ -16,6 +16,7 @@ type Props = {
   onStatusChange: string => void,
 }
 
+// FIXME why is that in modal !?
 const StepConnectDevice = ({
   account,
   currency,

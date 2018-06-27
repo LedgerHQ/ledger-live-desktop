@@ -5,6 +5,7 @@ import React from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import Label from 'components/base/Label'
@@ -21,6 +22,7 @@ type Props = {
 
 export default (props: Props) => (
   <Box flow={5}>
+    <TrackPage category="Receive" name="Step4" />
     <Box flow={1}>
       <Label>{props.t('app:receive.steps.receiveFunds.label')}</Label>
       <RequestAmount

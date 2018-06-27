@@ -3,6 +3,7 @@ import React, { Fragment } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import AccountField from './AccountField'
 import RecipientField from './RecipientField'
@@ -31,6 +32,8 @@ function StepAmount({
 
   return (
     <Box flow={4}>
+      <TrackPage category="Send" name="Step1" />
+
       <AccountField t={t} onChange={onChangeAccount} value={account} />
 
       {/* HACK HACK HACK WTF */}

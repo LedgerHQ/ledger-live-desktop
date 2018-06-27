@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { Device, T } from 'types/common'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import DeviceConfirm from 'components/DeviceConfirm'
@@ -38,6 +39,7 @@ type Props = {
 
 export default (props: Props) => (
   <Container>
+    <TrackPage category="Receive" name="Step3" />
     {props.addressVerified === false ? (
       <Fragment>
         <Title>{props.t('app:receive.steps.confirmAddress.error.title')}</Title>

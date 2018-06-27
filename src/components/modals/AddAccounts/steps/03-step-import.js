@@ -7,6 +7,7 @@ import uniq from 'lodash/uniq'
 
 import { getBridgeForCurrency } from 'bridge'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import CurrencyBadge from 'components/base/CurrencyBadge'
 import Button from 'components/base/Button'
@@ -199,6 +200,7 @@ class StepImport extends PureComponent<StepProps> {
 
     return (
       <Fragment>
+        <TrackPage category="AddAccounts" name="Step3" />
         <Box flow={5}>
           <AccountsList
             title={importableAccountsListTitle}

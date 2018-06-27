@@ -58,6 +58,7 @@ export const BASE_SOCKET_URL_SECURE = stringFromEnv(
 
 // Flags
 
+export const DEBUG_ANALYTICS = boolFromEnv('DEBUG_ANALYTICS')
 export const DEBUG_DEVICE = boolFromEnv('DEBUG_DEVICE')
 export const DEBUG_NETWORK = boolFromEnv('DEBUG_NETWORK')
 export const DEBUG_COMMANDS = boolFromEnv('DEBUG_COMMANDS')
