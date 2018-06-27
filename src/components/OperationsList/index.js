@@ -134,13 +134,11 @@ export class OperationsList extends PureComponent<Props, State> {
             <Track
               onMount
               event="OperationsListEndReached"
-              properties={{
-                totalSections: groupedOperations.sections.length,
-                totalOperations: groupedOperations.sections.reduce(
-                  (sum, s) => sum + s.data.length,
-                  0,
-                ),
-              }}
+              totalSections={groupedOperations.sections.length}
+              totalOperations={groupedOperations.sections.reduce(
+                (sum, s) => sum + s.data.length,
+                0,
+              )}
             />
           ) : null}
           {!groupedOperations.completed ? (
