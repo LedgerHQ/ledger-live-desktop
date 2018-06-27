@@ -17,6 +17,7 @@ import {
   DEBUG_TAB_KEY,
   DEBUG_LIBCORE,
   DEBUG_WS,
+  DEBUG_ANALYTICS,
 } from 'config/constants'
 
 const logs = []
@@ -71,6 +72,7 @@ const logTabkey = !__DEV__ || DEBUG_TAB_KEY
 const logLibcore = !__DEV__ || DEBUG_LIBCORE
 const logWS = !__DEV__ || DEBUG_WS
 const logNetwork = !__DEV__ || DEBUG_NETWORK
+const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 
 export default {
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
@@ -203,6 +205,34 @@ export default {
       console.log(log)
     }
     addLog('network-down', log)
+  },
+
+  analyticsStart: (id: string) => {
+    if (logAnalytics) {
+      console.log(`△ start() with user id ${id}`)
+    }
+    addLog('anaytics-start', id)
+  },
+
+  analyticsStop: () => {
+    if (logAnalytics) {
+      console.log(`△ stop()`)
+    }
+    addLog('anaytics-stop')
+  },
+
+  analyticsTrack: (event: string, properties: ?Object) => {
+    if (logAnalytics) {
+      console.log(`△ track ${event}`, properties)
+    }
+    addLog('anaytics-track', `${event}`)
+  },
+
+  analyticsPage: (category: string, name: ?string, properties: ?Object) => {
+    if (logAnalytics) {
+      console.log(`△ page ${category} ${name || ''}`, properties)
+    }
+    addLog('anaytics-page', `${category} ${name || ''}`)
   },
 
   // General functions in case the hooks don't apply
