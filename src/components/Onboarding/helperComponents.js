@@ -52,6 +52,20 @@ export const OnboardingFooterWrapper = styled(Box).attrs({
   border-bottom-left-radius: ${radii[1]}px;
   border-bottom-right-radius: ${radii[1]}px;
 `
+// LIVE LOGO
+export function LiveLogo({ icon, ...p }: { icon: any }) {
+  return <LiveLogoContainer {...p}>{icon}</LiveLogoContainer>
+}
+export const LiveLogoContainer = styled(Box).attrs({
+  borderRadius: '50%',
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
+  box-shadow: 0 2px 24px 0 #00000014;
+  width: ${p => (p.width ? p.width : 80)}
+  height: ${p => (p.height ? p.height : 80)}
+
+`
 
 // INSTRUCTION LIST
 type StepType = {
