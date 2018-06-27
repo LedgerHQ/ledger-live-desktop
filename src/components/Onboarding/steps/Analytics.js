@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
+import TrackPage from 'analytics/TrackPage'
 import { Title, Description, FixedTopContainer, StepContainerInner } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
@@ -19,7 +20,7 @@ type State = {
 }
 
 const INITIAL_STATE = {
-  analyticsToggle: false,
+  analyticsToggle: true,
   sentryLogsToggle: true,
 }
 
@@ -46,11 +47,17 @@ class Analytics extends PureComponent<StepProps, State> {
   }
 
   render() {
-    const { nextStep, t } = this.props
+    const { nextStep, t, onboarding } = this.props
     const { analyticsToggle, sentryLogsToggle } = this.state
 
     return (
       <FixedTopContainer>
+        <TrackPage
+          category="Onboarding"
+          name="Analytics"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
         <StepContainerInner>
           <Title>{t('onboarding:analytics.title')}</Title>
           <Description>{t('onboarding:analytics.desc')}</Description>

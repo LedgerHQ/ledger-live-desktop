@@ -9,6 +9,7 @@ import { colors } from 'styles/theme'
 import { updateGenuineCheck } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
@@ -91,7 +92,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     }
   }
 
-  handleOpenGenuineCheckModal = () => this.setState({ isGenuineCheckModalOpened: true })
+  handleOpenGenuineCheckModal = () => {
+    this.setState({ isGenuineCheckModalOpened: true })
+  }
   handleCloseGenuineCheckModal = (cb?: Function) =>
     this.setState(
       state => ({ ...state, isGenuineCheckModalOpened: false }),
@@ -147,7 +150,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       redoGenuineCheck={this.redoGenuineCheck}
       contactSupport={this.contactSupport}
       t={this.props.t}
-      isLedgerNano={this.props.onboarding.isLedgerNano}
+      onboarding={this.props.onboarding}
     />
   )
 
@@ -161,6 +164,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
     return (
       <FixedTopContainer>
+        <TrackPage
+          category="Onboarding"
+          name="Genuine Check"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
         <StepContainerInner>
           <Title>{t('onboarding:genuineCheck.title')}</Title>
           {onboarding.flowType === 'restoreDevice' ? (
@@ -250,7 +259,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           </Box>
         </StepContainerInner>
         {genuine.genuineCheckUnavailable ? (
-          <GenuineCheckUnavailableFooter nextStep={nextStep} prevStep={prevStep} t={t} />
+          <GenuineCheckUnavailableFooter
+            nextStep={nextStep}
+            prevStep={prevStep}
+            t={t}
+            onboarding={onboarding}
+          />
         ) : (
           <OnboardingFooter
             t={t}

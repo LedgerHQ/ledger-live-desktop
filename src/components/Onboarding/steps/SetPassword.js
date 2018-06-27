@@ -8,6 +8,7 @@ import { setEncryptionKey } from 'helpers/db'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
+import TrackPage from 'analytics/TrackPage'
 
 import IconChevronRight from 'icons/ChevronRight'
 
@@ -72,7 +73,7 @@ class SetPassword extends PureComponent<StepProps, State> {
   }
 
   render() {
-    const { nextStep, prevStep, t, settings } = this.props
+    const { nextStep, prevStep, t, settings, onboarding } = this.props
     const { newPassword, currentPassword, incorrectPassword, confirmPassword } = this.state
 
     const isPasswordEnabled = settings.password.isEnabled === true
@@ -97,6 +98,12 @@ class SetPassword extends PureComponent<StepProps, State> {
 
     return (
       <FixedTopContainer>
+        <TrackPage
+          category="Onboarding"
+          name="Set Password"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
         <StepContainerInner>
           <Fragment>
             <Box alignItems="center">

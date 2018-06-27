@@ -3,6 +3,7 @@
 import React from 'react'
 
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
 
 import { Title, FixedTopContainer } from '../../helperComponents'
 import OnboardingFooter from '../../OnboardingFooter'
@@ -18,6 +19,12 @@ export default (props: StepProps) => {
 
   return (
     <FixedTopContainer>
+      <TrackPage
+        category="Onboarding"
+        name="Choose PIN"
+        flowType={onboarding.flowType}
+        deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+      />
       {onboarding.flowType === 'restoreDevice' ? (
         <Box grow alignItems="center">
           <Title>{t('onboarding:selectPIN.restore.title')}</Title>

@@ -8,6 +8,7 @@ import { i } from 'helpers/staticPath'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ConfettiParty from 'components/ConfettiParty'
+import TrackPage from 'analytics/TrackPage'
 
 import IconCheckFull from 'icons/CheckFull'
 import IconSocialTwitter from 'icons/Twitter'
@@ -58,10 +59,16 @@ export default class Finish extends Component<StepProps, *> {
     this.setState({ emit: false })
   }
   render() {
-    const { finish, t } = this.props
+    const { finish, t, onboarding } = this.props
     const { emit } = this.state
     return (
       <Box sticky justifyContent="center">
+        <TrackPage
+          category="Onboarding"
+          name="Finish"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
         <ConfettiLayer>
           <ConfettiParty emit={emit} />
         </ConfettiLayer>
