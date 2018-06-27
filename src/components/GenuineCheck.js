@@ -130,7 +130,7 @@ class GenuineCheck extends PureComponent<Props> {
         id: 'isGenuine',
         title: (
           <Trans i18nKey="deviceConnect:stepGenuine.open" parent="div">
-            {'Allow the '}
+            {'Allow '}
             <Bold>{'Ledger Manager'}</Bold>
             {' on your device'}
           </Trans>
