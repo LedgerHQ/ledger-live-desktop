@@ -1,12 +1,13 @@
 // @flow
 import React, { PureComponent, Fragment } from 'react'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 import IconChevronRight from 'icons/ChevronRight'
 
 import {
@@ -30,12 +31,32 @@ class WriteSeedNano extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.initialize.nano.step1'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding:writeSeed.initialize.nano.step1">
+              Copy the word displayed below
+              <Text ff="Open Sans|SemiBold" color="dark">
+                Word #1
+              </Text>
+              in position 1 on a blank Recovery sheet.
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.initialize.nano.step2'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding:writeSeed.initialize.nano.step2">
+              Press the right button to display
+              <Text ff="Open Sans|SemiBold" color="dark">
+                Word #2
+              </Text>
+              and repeat the process until all 24 words are copied on the Recovery sheet.
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step3',

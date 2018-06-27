@@ -58,11 +58,11 @@ type StepType = {
   icon: any,
   desc: string,
 }
-export function OptionRow({ step }: { step: StepType }) {
+export function OptionRow({ step, ...p }: { step: StepType }) {
   const { icon, desc } = step
   return (
     <Box horizontal m="7px" style={{ minWidth: 420 }}>
-      <Box justify="center">{icon}</Box>
+      <Box {...p}>{icon}</Box>
       <Box justify="center" shrink>
         <OptionRowDesc>{desc}</OptionRowDesc>
       </Box>
@@ -91,7 +91,7 @@ export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any 
         <DisclaimerBoxIconContainer>
           <IconSensitiveOperationShield />
         </DisclaimerBoxIconContainer>
-        {disclaimerNotes.map(note => <OptionRow key={note.key} step={note} />)}
+        {disclaimerNotes.map(note => <OptionRow justify="center" key={note.key} step={note} />)}
       </Box>
     </DisclaimerBoxContainer>
   )
