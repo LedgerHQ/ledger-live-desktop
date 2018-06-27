@@ -35,7 +35,8 @@ const Container = styled(Box).attrs({
   px: 3,
   bg: 'wallet',
   color: 'white',
-  mt: '-35px',
+  mt: '-50px',
+  mb: '35px',
   style: p => ({
     transform: `translate3d(0, ${p.offset}%, 0)`,
   }),

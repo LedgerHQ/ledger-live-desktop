@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 function GET_HASH_PATH {
   HASH_NAME=$1
