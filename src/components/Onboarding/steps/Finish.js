@@ -59,7 +59,7 @@ export default (props: StepProps) => {
         <Box style={{ position: 'relative' }}>
           <LiveLogo
             style={{ width: 64, height: 64 }}
-            icon={<img src={i('ledgerlive-logo.svg')} width={40} height={40} />}
+            icon={<img alt="" src={i('ledgerlive-logo.svg')} width={40} height={40} />}
           />
           <Box color="positiveGreen" style={{ position: 'absolute', right: 0, bottom: 0 }}>
             <IconCheckFull size={18} />

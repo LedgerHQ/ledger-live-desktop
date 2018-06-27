@@ -50,7 +50,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         <Box grow alignItems="center">
           <LiveLogo
             style={{ width: 64, height: 64 }}
-            icon={<img src={i('ledgerlive-logo.svg')} width={40} height={40} />}
+            icon={<img src={i('ledgerlive-logo.svg')} alt="" width={40} height={40} />}
           />
           <Box m={5} style={{ maxWidth: 480 }}>
             <Title>{t('onboarding:noDevice.title')}</Title>

@@ -16,7 +16,7 @@ export default (props: StepProps) => {
       <Box alignItems="center">
         <LiveLogo
           style={{ width: 80, height: 80 }}
-          icon={<img src={i('ledgerlive-logo.svg')} width={50} height={50} />}
+          icon={<img src={i('ledgerlive-logo.svg')} alt="" width={50} height={50} />}
         />
         <Box my={5}>
           <Title>{t('onboarding:start.title')}</Title>
