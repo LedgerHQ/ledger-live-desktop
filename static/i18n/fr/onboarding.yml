@@ -27,7 +27,7 @@ noDevice:
   trackOrder:
     title: Track your order
   learnMore:
-    title: Learn about Ledger Live
+    title: Learn about Ledger
 selectDevice:
   title: Select your device
   ledgerNanoCard:
@@ -36,7 +36,7 @@ selectDevice:
     title: Ledger Blue
 selectPIN:
   disclaimer:
-    note1: Choose your own PIN code. This code will unlock your device.
+    note1: 'Choose your own PIN code: this code will unlock your device.'
     note2: An 8-digit PIN code offers an optimum level of security.
     note3: Never use a device supplied with a PIN code or a 24-word recovery phrase.
   initialize:
@@ -46,13 +46,13 @@ selectPIN:
         step1: Connect the Ledger Nano S to your computer.
         step2: Press both buttons simultaneously as instructed on the screen.
         step3: Press the right button to select Configure as new device?.
-        step4: 'Choose a PIN code between 4 and 8 digits long followed by the checkmark (✓).'
+        step4: 'Choose a PIN code between 4 and 8 digits long, followed by the checkmark (✓).'
       blue:
         step1: Connect the Ledger Blue to your computer.
         step2: Tap on Configure as new device.
         step3: Choose a PIN code between 4 and 8 digits long.
   restore:
-    title: Start restoration - Choose your PIN code
+    title: Choose your PIN code
     instructions:
       nano:
         step1: Connect the Ledger Nano S to your computer.
@@ -102,7 +102,7 @@ genuineCheck:
   step2:
     title: Did you save your recovery phrase by yourself?
   step3:
-    title: Do you have a genuine Ledger device?
+    title: Is your Ledger device genuine?
   isGenuinePassed: Your device is genuine
   buttons:
     genuineCheck: Check now
@@ -110,10 +110,10 @@ genuineCheck:
   errorPage:
     ledgerNano:
       title: Oops, something went wrong...
-      desc: Go back to the security checklist or request Ledger Support assistance.
+      desc: Go back to the security checklist or request Ledger Support assistance
     ledgerBlue:
       title: Oops, something went wrong...
-      desc: Go back to the security checklist or request Ledger Support assistance.
+      desc: Go back to the security checklist or request Ledger Support assistance
 setPassword:
   title: Encrypt Ledger Live data
   desc: Set a password to encrypt Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
@@ -132,7 +132,7 @@ analytics:
     desc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
   sentryLogs:
     title: Report bugs
-    desc: Automatically send reports to help Ledger fix bugs.
+    desc: Automatically send reports to help Ledger fix bugs
 finish:
   title: Your device is ready!
   desc: Proceed to your porfolio and start adding your accounts...
