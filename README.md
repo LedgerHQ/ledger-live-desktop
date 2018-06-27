@@ -120,12 +120,14 @@ yarn flow                # launch flow
 yarn test                # launch unit tests
 ```
 
-### Programmaically reset hard the app
-
-Stop the app and to clean accounts, settings, etc, run
+### Programmatically reset app files
 
 ```bash
-rm -rf ~/Library/Application\ Support/Electron/
+# clear the dev electron user data directory
+# it remove sqlite db, accounts, settings
+# useful to start from a fresh state
+
+yarn reset-files
 ```
 
 ## File structure

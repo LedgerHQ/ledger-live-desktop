@@ -25,7 +25,7 @@ import Button from 'components/base/Button'
 import NanoS from 'icons/device/NanoS'
 import CheckFull from 'icons/CheckFull'
 
-import { PreventDeviceChangeRecheck } from '../Workflow/EnsureDevice'
+import { PreventDeviceChangeRecheck } from 'components/EnsureDevice'
 import UpdateFirmwareButton from './UpdateFirmwareButton'
 
 let CACHED_LATEST_FIRMWARE = null

@@ -263,9 +263,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         <GenuineCheckModal
           isOpened={isGenuineCheckModalOpened}
           onClose={this.handleCloseGenuineCheckModal}
-          onGenuineCheckPass={this.handleGenuineCheckPass}
-          onGenuineCheckFailed={this.handleGenuineCheckFailed}
-          onGenuineCheckUnavailable={this.handleGenuineCheckUnavailable}
+          onSuccess={this.handleGenuineCheckPass}
+          onFail={this.handleGenuineCheckFailed}
+          onUnavailable={this.handleGenuineCheckUnavailable}
         />
       </FixedTopContainer>
     )

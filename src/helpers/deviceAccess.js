@@ -4,6 +4,7 @@ import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { DEBUG_DEVICE } from 'config/constants'
 import { retry } from './promise'
+import { createCustomErrorClass } from './errors'
 
 // all open to device must use openDevice so we can prevent race conditions
 // and guarantee we do one device access at a time. It also will handle the .close()
@@ -12,6 +13,16 @@ import { retry } from './promise'
 type WithDevice = (devicePath: string) => <T>(job: (Transport<*>) => Promise<T>) => Promise<T>
 
 const semaphorePerDevice = {}
+
+const DisconnectedDevice = createCustomErrorClass('DisconnectedDevice')
+
+const remapError = <T>(p: Promise<T>): Promise<T> =>
+  p.catch(e => {
+    if (e && e.message && e.message.indexOf('HID') >= 0) {
+      throw new DisconnectedDevice(e.message)
+    }
+    throw e
+  })
 
 export const withDevice: WithDevice = devicePath => {
   const sem =
@@ -23,7 +34,7 @@ export const withDevice: WithDevice = devicePath => {
 
       if (DEBUG_DEVICE) t.setDebugMode(true)
       try {
-        const res = await job(t)
+        const res = await remapError(job(t))
         // $FlowFixMe
         return res
       } finally {

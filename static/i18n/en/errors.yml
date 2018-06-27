@@ -1,30 +1,32 @@
-generic: Oops, an unknown error occurred. Please try again or contact Ledger Support.
-RangeError: '{{message}}'
-Error: '{{message}}'
-LedgerAPIErrorWithMessage: '{{message}}'
-TransportStatusError: '{{message}}'
-TimeoutError: 'The request timed out.'
-FeeEstimationFailed: 'Fee estimation error. Try again or set a custom fee (status: {{status}})'
-NotEnoughBalance: 'Insufficient funds to proceed.'
 BtcUnmatchedApp: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
-WrongAppOpened: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
-WrongDeviceForAccount: 'Use the device associated with the account ‘{{accountName}}’.'
-LedgerAPINotAvailable: 'Ledger API not available for {{currencyName}}.'
-LedgerAPIError: 'Ledger API error. Try again. (HTTP {{status}})'
-NetworkDown: 'Your internet connection seems down.'
-NoAddressesFound: 'No accounts were found.'
-UserRefusedOnDevice: Transaction refused on device.
-WebsocketConnectionError: Oops, device connection failed. Please try again. [web-err]
-WebsocketConnectionFailed: Oops, device connection failed. Please try again. [web-fail]
+DeviceNotGenuine: Device is not genuine
 DeviceSocketFail: Oops, device connection failed. Please try again. [device-fail]
 DeviceSocketNoBulkStatus: Oops, device connection failed. Please try again [bulk].
 DeviceSocketNoHandler: Oops, device connection failed (handler {{query}}). Please try again.
-LatestMCUInstalledError: MCU on device already up to date.
+DisconnectedDevice: 'The device was disconnected.'
+Error: '{{message}}'
+FeeEstimationFailed: 'Fee estimation error. Try again or set a custom fee (status: {{status}})'
+generic: Oops, an unknown error occurred. Please try again or contact Ledger Support.
 HardResetFail: Reset failed. Please try again.
+LatestMCUInstalledError: MCU on device already up to date.
+LedgerAPIError: 'Ledger API error. Try again. (HTTP {{status}})'
+LedgerAPIErrorWithMessage: '{{message}}'
+LedgerAPINotAvailable: 'Ledger API not available for {{currencyName}}.'
 ManagerAPIsFail: Services are unavailable. Please try again.
-ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again.
-ManagerNotEnoughSpace: Not enough storage on device. Uninstall some apps and try again.
-ManagerDeviceLocked: Device is locked
 ManagerAppAlreadyInstalled: App is already installed
-ManagerAppRelyOnBTC: First install the Bitcoin app
-ManagerUninstallBTCDep: Other apps depend on Bitcoin, uninstall those first
+ManagerAppRelyOnBTC: You must install Bitcoin application first
+ManagerDeviceLocked: Device is locked
+ManagerNotEnoughSpace: Not enough storage on device. Uninstall some apps and try again.
+ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again.
+ManagerUninstallBTCDep: You must uninstall other altcoins first
+NetworkDown: 'Your internet connection seems down.'
+NoAddressesFound: 'No accounts were found.'
+NotEnoughBalance: 'Insufficient funds to proceed.'
+RangeError: '{{message}}'
+TimeoutError: 'The request timed out.'
+TransportStatusError: '{{message}}'
+UserRefusedOnDevice: Transaction refused on device.
+WebsocketConnectionError: Oops, device connection failed. Please try again. [web-err]
+WebsocketConnectionFailed: Oops, device connection failed. Please try again. [web-fail]
+WrongAppOpened: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
+WrongDeviceForAccount: 'Use the device associated with the account ‘{{accountName}}’.'

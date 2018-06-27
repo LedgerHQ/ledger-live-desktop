@@ -32,6 +32,7 @@ type Props = OwnProps & {
   balanceStart: number,
   balanceEnd: number,
   isAvailable: boolean,
+  hash: string,
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
@@ -71,19 +72,20 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     ({ ...item, originalValue: originalValues[i] || 0 }),
   )
 
+  const balanceEnd = balanceHistory[balanceHistory.length - 1].value
+
   return {
     isAvailable,
     balanceHistory,
     balanceStart: balanceHistory[0].value,
-    balanceEnd: balanceHistory[balanceHistory.length - 1].value,
+    balanceEnd,
+    hash: `${balanceHistory.length}_${balanceEnd}`,
   }
 }
 
-const hash = ({ balanceHistory, balanceEnd }) => `${balanceHistory.length}_${balanceEnd}`
-
 class CalculateBalance extends Component<Props> {
   shouldComponentUpdate(nextProps) {
-    return hash(nextProps) !== hash(this.props)
+    return nextProps.hash !== this.props.hash
   }
   render() {
     const { children } = this.props

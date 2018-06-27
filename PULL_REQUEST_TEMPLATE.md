@@ -1,17 +1,13 @@
-## What is the type of this PR?
+<!-- Description of what the PR does go here... screenshot might be good if appropriate -->
+
+### Type
 
 <!-- e.g. Bug Fix, Feature, Code Quality Improvement, UI Polish... -->
 
-## Any background context and/or relevant tickets/issues you want to provide with?
+### Context
 
-<!-- e.g. GitHub issue #45 -->
+<!-- e.g. GitHub issue #45 / contextual discussion -->
 
-## Short description on what this PR suppose to do?
+### Parts of the app affected / Test plan
 
-<!-- e.g. Adding genuine check to the onboarding -->
-
-## Any special conditions required for testing?
-
-<!-- e.g. Clear db, add special env variable.. -->
-
-## Screenshots (if appropriate)
+<!-- Which part of the app is affected? What to do to test it, any special thing to do? -->
