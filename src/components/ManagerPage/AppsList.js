@@ -4,11 +4,16 @@
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
-
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import type { Device, T } from 'types/common'
 import type { LedgerScriptParams } from 'helpers/common'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
+import { developerModeSelector } from 'reducers/settings'
 
 import listApps from 'commands/listApps'
+import listAppVersions from 'commands/listAppVersions'
+
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 
@@ -30,6 +35,10 @@ import CheckCircle from 'icons/CheckCircle'
 import ManagerApp from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
 
+const mapStateToProps = state => ({
+  isDevMode: developerModeSelector(state),
+})
+
 const List = styled(Box).attrs({
   horizontal: true,
   m: -3,
@@ -46,16 +55,15 @@ type Mode = 'home' | 'installing' | 'uninstalling'
 
 type Props = {
   device: Device,
-  targetId: string | number,
+  deviceInfo: DeviceInfo,
   t: T,
-  fullVersion: string,
-  provider: number,
+  isDevMode: boolean,
 }
 
 type State = {
   status: Status,
   error: ?Error,
-  appsList: LedgerScriptParams[],
+  filteredAppVersionsList: LedgerScriptParams[],
   appsLoaded: boolean,
   app: string,
   mode: Mode,
@@ -65,7 +73,7 @@ class AppsList extends PureComponent<Props, State> {
   state = {
     status: 'loading',
     error: null,
-    appsList: [],
+    filteredAppVersionsList: [],
     appsLoaded: false,
     app: '',
     mode: 'home',
@@ -81,12 +89,31 @@ class AppsList extends PureComponent<Props, State> {
 
   _unmounted = false
 
+  filterAppVersions = (applicationsList, compatibleAppVersionsList) => {
+    if (!this.props.isDevMode) {
+      return compatibleAppVersionsList.filter(
+        version => applicationsList.find(e => e.id === version.app).category !== 2,
+      )
+    }
+    return applicationsList
+  }
+
   async fetchAppList() {
     try {
-      const { targetId, fullVersion, provider } = this.props
-      const appsList = await listApps.send({ targetId, fullVersion, provider }).toPromise()
+      const { deviceInfo } = this.props
+      const applicationsList = await listApps.send({}).toPromise()
+      const compatibleAppVersionsList = await listAppVersions.send(deviceInfo).toPromise()
+      const filteredAppVersionsList = this.filterAppVersions(
+        applicationsList,
+        compatibleAppVersionsList,
+      )
+
       if (!this._unmounted) {
-        this.setState({ appsList, status: 'idle', appsLoaded: true })
+        this.setState({
+          status: 'idle',
+          filteredAppVersionsList,
+          appsLoaded: true,
+        })
       }
     } catch (err) {
       this.setState({ status: 'error', error: err })
@@ -98,9 +125,9 @@ class AppsList extends PureComponent<Props, State> {
     try {
       const {
         device: { path: devicePath },
-        targetId,
+        deviceInfo,
       } = this.props
-      const data = { app, devicePath, targetId }
+      const data = { app, devicePath, targetId: deviceInfo.targetId }
       await installApp.send(data).toPromise()
       this.setState({ status: 'success' })
     } catch (err) {
@@ -113,9 +140,9 @@ class AppsList extends PureComponent<Props, State> {
     try {
       const {
         device: { path: devicePath },
-        targetId,
+        deviceInfo,
       } = this.props
-      const data = { app, devicePath, targetId }
+      const data = { app, devicePath, targetId: deviceInfo.targetId }
       await uninstallApp.send(data).toPromise()
       this.setState({ status: 'success' })
     } catch (err) {
@@ -214,10 +241,10 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   renderList() {
-    const { appsList, appsLoaded } = this.state
+    const { filteredAppVersionsList, appsLoaded } = this.state
     return appsLoaded ? (
       <Box>
-        <AppSearchBar list={appsList}>
+        <AppSearchBar list={filteredAppVersionsList}>
           {items => (
             <List>
               {items.map(c => (
@@ -268,4 +295,7 @@ class AppsList extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(AppsList)
+export default compose(
+  translate(),
+  connect(mapStateToProps),
+)(AppsList)

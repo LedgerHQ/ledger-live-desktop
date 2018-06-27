@@ -22,6 +22,8 @@ import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
 import listApps from 'commands/listApps'
+import listAppVersions from 'commands/listAppVersions'
+import listCategories from 'commands/listCategories'
 import listenDevices from 'commands/listenDevices'
 import signTransaction from 'commands/signTransaction'
 import testApdu from 'commands/testApdu'
@@ -49,6 +51,8 @@ const all: Array<Command<any, any>> = [
   libcoreSyncAccount,
   libcoreValidAddress,
   listApps,
+  listAppVersions,
+  listCategories,
   listenDevices,
   signTransaction,
   testApdu,
