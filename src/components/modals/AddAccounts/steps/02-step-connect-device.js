@@ -12,7 +12,7 @@ import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
 import type { StepProps } from '../index'
 
 function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
-  invariant(currency, 'No currency given')
+  invariant(currency, 'No crypto asset given')
 
   return (
     <Fragment>
