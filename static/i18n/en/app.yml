@@ -76,7 +76,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Receive in this accoung with the the <1><0>{{currency}}</0></1> app in the Manager
+    desc: Ensure the <1><0>{{currency}}</0></1> app is installed and start receiving
     buttons:
       receiveFunds: Receive
   settings:
@@ -133,9 +133,9 @@ emptyState:
 exchange:
   title: Exchange
   visitWebsite: Visit website
-  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store cryptoassets.'
-  changelly: 'Changelly is a popular instant cryptocurrency exchange with 100+ coins and tokens listed.'
-  coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital currency, anywhere in the world.'
+  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
+  changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
+  coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.'
 genuinecheck:
   modal:
     title: Genuine check
@@ -274,7 +274,7 @@ send:
 releaseNotes:
   title: Release notes
   version: Version {{versionNb}}
-settings:
+settings: # Always ensure descriptions carry full stops (.)
   title: Settings
   tabs:
     display: Display
@@ -282,21 +282,21 @@ settings:
     profile: Profile
     about: Help
   display:
-    desc:
+    desc: Control Ledger Live's appearance.
     language: Display language
     languageDesc: Set the language displayed in Ledger Live.
     counterValue: Base currency
     counterValueDesc: Choose the currency to display next to your balance and operations.
     exchange: Rate provider ({{ticker}})
-    exchangeDesc: Choose the provider of the base currency exchange rates
+    exchangeDesc: Choose the provider of the exchange rate between Bitcoin and your selected base currency.
     region: Region
     regionDesc: Choose the region in which you’re located to set the Ledger Live's time zone.
     stock: Regional market indicator
     stockDesc: Choose Western to display an increase in market value in blue. Choose Eastern to display an increase in market value in red.
   currencies:
-    desc: Select a cryptocurrency to edit its settings
+    desc: Select a crypto asset to edit its settings.
     exchange: Rate provider ({{ticker}})
-    exchangeDesc: Choose the provider of the base currency exchange rates
+    exchangeDesc: Choose the provider of the rate between the selected crypto asset and Bitcoin. This intermediary calculation enables the calculation of your balance in your base currency, for indicative purposes only.
     confirmationsToSpend: Number of confirmations required to spend
     confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable. # A higher number of confirmations decreases the probability that a transaction is rejected.
     confirmationsNb: Number of confirmations
@@ -306,28 +306,28 @@ settings:
     explorer: Blockchain explorer
     explorerDesc: Choose which explorer is used to look up the operation details in the blockchain.
   profile:
-    desc:
+    desc: Set the preferences for your profile.
     password: Data encryption
     passwordDesc: Enhance your privacy. Set a password to encrypt Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
     changePassword: Change password
     sync: Synchronize accounts
-    syncDesc: Resynchronize your accounts with the network
+    syncDesc: Resynchronize your accounts with the network.
     export: Export logs
-    exportDesc: Exporting Ledger Live logs may be necessary for troubleshooting purposes
+    exportDesc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
     softResetTitle: Clear cache
-    softResetDesc: Clear the Ledger Live cache to force resynchronization with the blockchain
+    softResetDesc: Clear the Ledger Live cache to force resynchronization with the blockchain.
     softReset: Clear
     hardResetTitle: Reset Ledger Live
-    hardResetDesc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and preferences. The private keys that manage your crypto assets remain secure on your Ledger device.
+    hardResetDesc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assetsin the blockchain remain secure on your Ledger device and on your Recovery sheet.
     hardReset: Reset
     developerMode: Developer mode
-    developerModeDesc: Show developer apps in the Manager
+    developerModeDesc: Show developer apps in the Manager and enable testnet apps.
     analytics: Analytics
     analyticsDesc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
     reportErrors: Usage and diagnostics
     reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
   about:
-    desc:
+    desc: Learn about Ledger Live features or get help.
     version: Ledger Live version
     releaseNotesBtn: Show release notes # Close button instead of continue.
     faq: Ledger Support
@@ -338,7 +338,7 @@ settings:
     termsDesc: --- Check with Legal ---
   hardResetModal:
     title: Reset Ledger Live
-    desc: Resetting will erase all Ledger Live data stored on your computer, including your profile, accounts, transaction history and application settings. The keys to access your crypto assets in the blockchain remain secure on your Ledger device.
+    desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
   softResetModal:
     title: Clear cache
     subTitle: Are you sure?
@@ -349,7 +349,7 @@ settings:
     desc: The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added.
   exportLogs:
     title: Export logs
-    desc: Exporting Ledger Live logs may be necessary for troubleshooting purposes
+    desc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
     btn: Export
 password:
   warning_0: Very weak
