@@ -99,6 +99,7 @@ class DeviceInteraction extends PureComponent<Props, State> {
               isActive={i === stepIndex}
               isPassed={i < stepIndex}
               isSuccess={i < stepIndex || (i === stepIndex && isSuccess)}
+              isFinished={isSuccess}
               onSuccess={this.handleSuccess}
               onFail={this.handleFail}
               data={data}

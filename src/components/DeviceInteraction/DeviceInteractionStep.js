@@ -29,6 +29,7 @@ type Props = {
   isFirst: boolean,
   isLast: boolean,
   isActive: boolean,
+  isFinished: boolean,
   isPrecedentActive: boolean,
   isError: boolean,
   isSuccess: boolean,
@@ -152,6 +153,7 @@ class DeviceInteractionStep extends PureComponent<
       isFirst,
       isLast,
       isActive,
+      isFinished,
       isPrecedentActive,
       isSuccess,
       isError,
@@ -169,6 +171,7 @@ class DeviceInteractionStep extends PureComponent<
       <DeviceInteractionStepContainer
         isFirst={isFirst}
         isLast={isLast}
+        isFinished={isFinished}
         isSuccess={isSuccess}
         isActive={isActive}
         isPrecedentActive={isPrecedentActive}

@@ -27,7 +27,7 @@ export const DeviceInteractionStepContainer = styled(Box).attrs({
   min-height: 80px;
   border: 1px solid ${p => p.theme.colors.fog};
   border-color: ${p =>
-    p.isError ? p.theme.colors.alertRed : p.isActive ? p.theme.colors.wallet : ''};
+    p.isError ? p.theme.colors.alertRed : p.isActive && !p.isFinished ? p.theme.colors.wallet : ''};
   border-top-color: ${p => (p.isFirst || p.isActive ? '' : 'transparent')};
   border-bottom-color: ${p => (p.isPrecedentActive ? 'transparent' : '')};
   border-bottom-left-radius: ${p => (p.isLast ? `${radii[1]}px` : 0)};
