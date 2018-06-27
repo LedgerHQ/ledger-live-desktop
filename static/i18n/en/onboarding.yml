@@ -44,11 +44,11 @@ selectPIN:
       nano:
         step1: Connect the Ledger Nano S to your computer.
         step2: Press both buttons simultaneously as instructed on the screen.
-        step3: Press the right button to select Configure as new device?. # <bold>Configure as new device?<bold>.
+        step3: Press the right button to select <1><0>Configure as new device?</0></1>
         step4: 'Choose a PIN code between 4 and 8 digits long, followed by the checkmark (✓).'
       blue:
         step1: Connect the Ledger Blue to your computer.
-        step2: Tap on Configure as new device.
+        step2: Tap on <1><0>Configure as new device.</0></1>
         step3: Choose a PIN code between 4 and 8 digits long.
   restore:
     title: Choose your PIN code
@@ -56,31 +56,31 @@ selectPIN:
       nano:
         step1: Connect the Ledger Nano S to your computer.
         step2: Press both buttons simultaneously as instructed on the screen.
-        step3: Press the left button to cancel Initialize as new device?. Press the right button to select Restore configuration?. #  <bold>Initialize as new device?</bold>  <bold>Restore configuration?</bold>.
+        step3: Press the left button to cancel <1><0>Initialize as new device?</0></1> Press the right button to select <3><0>Restore configuration?</0></3>
         step4: 'Choose a PIN code between 4 and 8 digits long followed by the checkmark (✓).'
       blue:
         step1: Connect the Ledger Blue to your computer.
-        step2: Tap on Restore configuration. # <bold>Restore configuration</bold>.
+        step2: Tap on <1><0>Restore configuration</0></1>.
         step3: Choose a PIN code between 4 and 8 digits long.
 writeSeed:
   initialize:
     title: Save your recovery phrase
     desc: Your device will generate a recovery phrase of 24 words, displayed only once.
     nano:
-      step1: 'Copy the word displayed below Word #1 in position 1 on a blank Recovery sheet.' # <bold>Word #1</bold> <italic>Recovery sheet</italic>
-      step2: 'Press the right button to display Word #2 and repeat the process until all 24 words are copied on the Recovery sheet.' # <bold>Word #2</bold> <italic>Recovery sheet</italic>
+      step1: 'Copy the word displayed below <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.'
+      step2: 'Press the right button to display <1><0>Word #2</0></1> and repeat the process until all 24 words are copied on the Recovery sheet.' #<italic>Recovery sheet</italic>
       step3: 'Confirm your recovery phrase: select each requested word and press both buttons to validate it.'
     blue:
       step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order. # <i>Recovery sheet</i>
-      step2: Tap Next to move to the next words. Repeat the process until the Confirmation screen appears. # <bold>Next</bold> <bold>Confirmation</bold>
+      step2: Tap <1><0>Next</0></1> to move to the next words. Repeat the process until the <3><0>Confirmation</0></3> screen appears.
       step3: Type each requested word to confirm your recovery phrase.
   restore:
     title: Enter your recovery phrase
     desc: Copy the 24-word recovery phrase from your Recovery sheet on your device.
     nano:
       step1: Select the length of your recovery phrase. Press both buttons to continue.
-      step2: 'Select the first letters of Word #1 by pressing the right or left button. Press both buttons to confirm each letter.' # <bold>Word #1</bold>
-      step3: 'Select Word #1 from the suggested words. Press both buttons to continue.'  # <bold>Word #1</bold>
+      step2: 'Select the first letters of <1><0>Word #1</0></1> by pressing the right or left button. Press both buttons to confirm each letter.'
+      step3: 'Select <1><0>Word #1</0></1> from the suggested words. Press both buttons to continue.'
       step4: Repeat the process until the last word.
     blue:
       step1: Select the length of your recovery phrase.

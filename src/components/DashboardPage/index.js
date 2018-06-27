@@ -104,7 +104,9 @@ class DashboardPage extends PureComponent<Props> {
         <UpdateNotifier />
         <TrackPage
           category="Portfolio"
-          properties={{ totalAccounts, totalOperations, totalCurrencies }}
+          totalAccounts={totalAccounts}
+          totalOperations={totalOperations}
+          totalCurrencies={totalCurrencies}
         />
         <Box flow={7}>
           {totalAccounts > 0 ? (

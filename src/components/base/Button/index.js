@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { space, fontSize, fontWeight, color } from 'styled-system'
 import noop from 'lodash/noop'
+import { track } from 'analytics/segment'
 
 import { darken, lighten, rgba } from 'styles/helpers'
 import fontFamily from 'styles/styled/fontFamily'
@@ -171,13 +172,24 @@ type Props = {
   small?: boolean,
   padded?: boolean,
   isLoading?: boolean,
+  event?: string,
+  eventProperties?: Object,
 }
 
 const Button = (props: Props) => {
-  const { onClick, children, disabled, isLoading } = props
+  const { disabled } = props
+  const { onClick, children, isLoading, event, eventProperties, ...rest } = props
   const isClickDisabled = disabled || isLoading
+  const onClickHandler = e => {
+    if (onClick) {
+      if (event) {
+        track(event, eventProperties)
+      }
+      onClick(e)
+    }
+  }
   return (
-    <Base {...props} onClick={isClickDisabled ? undefined : onClick}>
+    <Base {...rest} onClick={isClickDisabled ? undefined : onClickHandler}>
       {isLoading ? <Spinner size={16} /> : children}
     </Base>
   )

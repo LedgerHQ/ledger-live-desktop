@@ -3,18 +3,19 @@
 import React from 'react'
 import { shell } from 'electron'
 import styled from 'styled-components'
+import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ConfettiParty from 'components/ConfettiParty'
 
-import IconCheckCircle from 'icons/CheckCircle'
+import IconCheckFull from 'icons/CheckFull'
 import IconSocialTwitter from 'icons/Twitter'
 import IconSocialReddit from 'icons/Reddit'
 import IconSocialGithub from 'icons/Github'
 
 import type { StepProps } from '..'
-import { Title, Description } from '../helperComponents'
+import { Title, Description, LiveLogo } from '../helperComponents'
 
 const ConfettiLayer = styled.div`
   position: absolute;
@@ -55,9 +56,16 @@ export default (props: StepProps) => {
         <ConfettiParty />
       </ConfettiLayer>
       <Box alignItems="center">
-        <Box color="positiveGreen">
-          <IconCheckCircle size={44} />
+        <Box style={{ position: 'relative' }}>
+          <LiveLogo
+            style={{ width: 64, height: 64 }}
+            icon={<img alt="" src={i('ledgerlive-logo.svg')} width={40} height={40} />}
+          />
+          <Box color="positiveGreen" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+            <IconCheckFull size={18} />
+          </Box>
         </Box>
+
         <Box pt={5} align="center">
           <Title>{t('onboarding:finish.title')}</Title>
           <Description>{t('onboarding:finish.desc')}</Description>

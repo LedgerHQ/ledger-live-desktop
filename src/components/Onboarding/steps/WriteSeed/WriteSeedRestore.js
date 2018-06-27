@@ -1,10 +1,11 @@
 // @flow
 import React, { PureComponent, Fragment } from 'react'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 
 import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
@@ -38,12 +39,32 @@ class WriteSeedRestore extends PureComponent<Props, *> {
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.nano.step2'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding:writeSeed.restore.nano.step2">
+              {'Select the first letters of'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Word #1'}
+              </Text>
+              {'by pressing the right or left button. Press both buttons to confirm each letter.'}
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.nano.step3'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding:writeSeed.restore.nano.step3">
+              {'Select'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Word #1'}
+              </Text>
+              {'from the suggested words. Press both buttons to continue.'}
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step4',

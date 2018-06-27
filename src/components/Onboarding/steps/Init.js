@@ -13,7 +13,7 @@ import IconCheck from 'icons/Check'
 import IconExternalLink from 'icons/ExternalLink'
 import IconChevronRight from 'icons/ChevronRight'
 import { i } from 'helpers/staticPath'
-import { Title } from '../helperComponents'
+import { Title, LiveLogo } from '../helperComponents'
 
 import type { StepProps } from '..'
 
@@ -65,9 +65,10 @@ class Init extends PureComponent<StepProps, *> {
     return (
       <Box sticky justifyContent="center">
         <Box align="center">
-          <Box color="wallet">
-            <img alt="" src={i('ledgerlive-logo.svg')} width={50} height={50} />
-          </Box>
+          <LiveLogo
+            style={{ width: 64, height: 64 }}
+            icon={<img src={i('ledgerlive-logo.svg')} alt="" width={40} height={40} />}
+          />
           <Box m={5} style={{ maxWidth: 480 }}>
             <Title>{t('onboarding:init.title')}</Title>
           </Box>

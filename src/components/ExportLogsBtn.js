@@ -71,7 +71,7 @@ class ExportLogsBtn extends Component<{
     return hookToShortcut ? (
       <KeyHandler keyValue="e" onKeyHandle={this.onKeyHandle} />
     ) : (
-      <Button primary onClick={this.handleExportLogs}>
+      <Button primary event="ExportLogs" onClick={this.handleExportLogs}>
         {t('app:settings.exportLogs.btn')}
       </Button>
     )

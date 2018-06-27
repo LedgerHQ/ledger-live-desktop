@@ -1,9 +1,9 @@
 import { PureComponent } from 'react'
 import { page } from './segment'
 
-class TrackPage extends PureComponent<{ category: string, name?: string, properties?: Object }> {
+class TrackPage extends PureComponent<{ category: string, name?: string }> {
   componentDidMount() {
-    const { category, name, properties } = this.props
+    const { category, name, ...properties } = this.props
     page(category, name, properties)
   }
   render() {
