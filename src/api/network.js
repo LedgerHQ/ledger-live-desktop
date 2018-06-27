@@ -9,12 +9,13 @@ export const LedgerAPIErrorWithMessage = createCustomErrorClass('LedgerAPIErrorW
 export const LedgerAPIError = createCustomErrorClass('LedgerAPIError')
 export const NetworkDown = createCustomErrorClass('NetworkDown')
 
-const userFriendlyError = <A>(p: Promise<A>): Promise<A> =>
+const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime }): Promise<A> =>
   p.catch(error => {
+    let errorToThrow
     if (error.response) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
-      const { data } = error.response
+      const { data, status } = error.response
       if (data && typeof data.error === 'string') {
         let msg = data.error || data.message
         if (typeof msg === 'string') {
@@ -32,19 +33,28 @@ const userFriendlyError = <A>(p: Promise<A>): Promise<A> =>
           } catch (e) {
             logger.warn("can't parse server result", e)
           }
-
           if (msg && msg[0] !== '<') {
-            throw new LedgerAPIErrorWithMessage(msg)
+            errorToThrow = new LedgerAPIErrorWithMessage(msg)
           }
         }
       }
-      const { status } = error.response
-      logger.log('Ledger API: HTTP status', status, 'data: ', error.response.data)
-      throw new LedgerAPIError(`LedgerAPIError ${status}`, { status })
+      if (!errorToThrow) {
+        errorToThrow = new LedgerAPIError(`LedgerAPIError ${status}`, { status })
+      }
+      logger.networkError({
+        status,
+        url,
+        method,
+        error: errorToThrow.message,
+        responseTime: Date.now() - startTime,
+      })
+      throw errorToThrow
     } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
+      logger.networkDown({
+        url,
+        method,
+        responseTime: Date.now() - startTime,
+      })
       throw new NetworkDown()
     }
     throw error
@@ -62,7 +72,20 @@ let implementation = (arg: Object) => {
   } else {
     promise = axios(arg)
   }
-  return userFriendlyError(promise)
+  const meta = {
+    url: arg.url,
+    method: arg.method,
+    startTime: Date.now(),
+  }
+  logger.network(meta)
+  promise.then(response => {
+    logger.networkSucceed({
+      ...meta,
+      status: response.status,
+      responseTime: Date.now() - meta.startTime,
+    })
+  })
+  return userFriendlyError(promise, meta)
 }
 
 export const setImplementation = (impl: *) => {

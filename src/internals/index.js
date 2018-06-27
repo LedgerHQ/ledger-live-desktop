@@ -4,7 +4,7 @@ import logger from 'logger'
 import uuid from 'uuid/v4'
 import { setImplementation } from 'api/network'
 import sentry from 'sentry/node'
-import { DEBUG_NETWORK } from 'config/constants'
+import { EXPERIMENTAL_HTTP_ON_RENDERER } from 'config/constants'
 import { serializeError } from 'helpers/errors'
 
 require('../env')
@@ -17,7 +17,7 @@ let sentryEnabled = process.env.INITIAL_SENTRY_ENABLED || false
 
 sentry(() => sentryEnabled, process.env.SENTRY_USER_ID)
 
-if (DEBUG_NETWORK) {
+if (EXPERIMENTAL_HTTP_ON_RENDERER) {
   setImplementation(networkArg => {
     const id = uuid()
     return new Promise((resolve, reject) => {
