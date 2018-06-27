@@ -7,6 +7,7 @@ import Tooltip from 'components/base/Tooltip'
 import { radii, colors } from 'styles/theme'
 import { rgba } from 'styles/helpers'
 
+import TranslatedError from 'components/TranslatedError'
 import Box from 'components/base/Box'
 import Spinner from 'components/base/Spinner'
 import IconCheck from 'icons/Check'
@@ -131,7 +132,7 @@ export const ErrorDescContainer = ({
   >
     <Box horizontal>
       <Box p={1} pl={2}>
-        {error.message || 'Failed'}
+        <TranslatedError error={error} />
       </Box>
       <Tooltip render={() => 'Retry'} style={{ display: 'flex', alignItems: 'center' }}>
         <ErrorRetryContainer onClick={onRetry}>
