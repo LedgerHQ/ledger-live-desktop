@@ -45,6 +45,14 @@ const mapStateToProps = state => ({
 
 const Bold = props => <Text ff="Open Sans|Bold" {...props} />
 
+// to speed up genuine check, cache result by device id
+const GENUINITY_CACHE = {}
+const getDeviceId = (device: Device) => device.path
+const setDeviceGenuinity = (device: Device, isGenuine: boolean) =>
+  (GENUINITY_CACHE[getDeviceId(device)] = isGenuine)
+const getDeviceGenuinity = (device: Device): ?boolean =>
+  GENUINITY_CACHE[getDeviceId(device)] || null
+
 class GenuineCheck extends PureComponent<Props> {
   connectInteractionHandler = () =>
     createCancelablePolling(() => {
@@ -68,6 +76,9 @@ class GenuineCheck extends PureComponent<Props> {
     device: Device,
     deviceInfo: DeviceInfo,
   }) => {
+    if (getDeviceGenuinity(device) === true) {
+      return true
+    }
     const res = await getIsGenuine
       .send({ devicePath: device.path, deviceInfo })
       .pipe(timeout(GENUINE_TIMEOUT))
@@ -76,6 +87,7 @@ class GenuineCheck extends PureComponent<Props> {
     if (!isGenuine) {
       return Promise.reject(new Error('Device not genuine')) // TODO: use custom error class
     }
+    setDeviceGenuinity(device, true)
     return Promise.resolve(true)
   }
 
