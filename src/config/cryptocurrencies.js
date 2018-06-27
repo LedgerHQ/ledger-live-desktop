@@ -31,5 +31,7 @@ const supported: CryptoCurrencyIds[] = [
 ]
 
 export const listCryptoCurrencies = memoize((withDevCrypto?: boolean) =>
-  listCC(withDevCrypto).filter(c => supported.includes(c.id)),
+  listCC(withDevCrypto)
+    .filter(c => supported.includes(c.id))
+    .sort((a, b) => a.name.localeCompare(b.name)),
 )

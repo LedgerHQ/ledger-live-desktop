@@ -257,23 +257,14 @@ export const StepImportFooter = ({
     return account && account.operations.length > 0
   })
 
-  const addedAccountsCount = checkedAccountsIds.filter(id => {
-    const account = scannedAccounts.find(acc => acc.id === id)
-    return account && account.operations.length > 0
-  }).length
+  const count = checkedAccountsIds.length
 
   const ctaWording =
     scanStatus === 'scanning'
       ? t('app:common.sync.syncing')
-      : willCreateAccount && willAddAccounts
-        ? `${t('app:addAccounts.cta.create')} / ${t('app:addAccounts.cta.import', {
-            count: addedAccountsCount,
-          })}`
-        : willCreateAccount
-          ? t('app:addAccounts.cta.create')
-          : willAddAccounts
-            ? t('app:addAccounts.cta.import', { count: addedAccountsCount })
-            : t('app:common.close')
+      : willCreateAccount || willAddAccounts
+        ? t('app:addAccounts.cta.add', { count })
+        : t('app:common.close')
 
   const willClose = !willCreateAccount && !willAddAccounts
   const onClick = willClose

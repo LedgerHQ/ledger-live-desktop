@@ -97,6 +97,7 @@ export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any 
   )
 }
 
+// Not enough styled as a warning
 const DisclaimerBoxContainer = styled(Box).attrs({
   shrink: 1,
   grow: true,

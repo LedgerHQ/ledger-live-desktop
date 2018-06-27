@@ -58,15 +58,14 @@ export default (props: StepProps) => {
         <Box color="positiveGreen">
           <IconCheckCircle size={44} />
         </Box>
-        <Box pt={5} align="center" mb={5}>
+        <Box pt={5} align="center">
           <Title>{t('onboarding:finish.title')}</Title>
           <Description>{t('onboarding:finish.desc')}</Description>
         </Box>
-        <Button primary padded onClick={() => finish()}>
-          {t('onboarding:finish.openAppButton')}
-        </Button>
-        <Box alignItems="center" mt={7}>
-          <FollowUsDesc>{t('onboarding:finish.followUsLabel')}</FollowUsDesc>
+        <Box p={5}>
+          <Button primary padded onClick={() => finish()}>
+            {t('onboarding:finish.openAppButton')}
+          </Button>
         </Box>
         <Box horizontal mt={3} flow={5} color="grey">
           {socialMedia.map(socMed => <SocialMediaBox key={socMed.key} socMed={socMed} />)}
