@@ -2,17 +2,17 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import Tooltip from 'components/base/Tooltip'
 
-import { radii, colors } from 'styles/theme'
+import { radii } from 'styles/theme'
 import { rgba } from 'styles/helpers'
 
 import TranslatedError from 'components/TranslatedError'
 import Box from 'components/base/Box'
+import FakeLink from 'components/base/FakeLink'
 import Spinner from 'components/base/Spinner'
 import IconCheck from 'icons/Check'
 import IconCross from 'icons/Cross'
-import IconRecover from 'icons/Recover'
+import IconExclamationCircle from 'icons/ExclamationCircle'
 
 export const DeviceInteractionStepContainer = styled(Box).attrs({
   horizontal: true,
@@ -92,25 +92,6 @@ export const ErrorContainer = ({ isVisible }: { isVisible: boolean }) => (
   </ErrorContainerWrapper>
 )
 
-const ErrorRetryContainer = styled(Box).attrs({
-  bg: rgba(colors.alertRed, 0.1),
-  borderRadius: 1,
-  grow: 1,
-  color: 'alertRed',
-  cursor: 'pointer',
-  p: 1,
-  align: 'center',
-  justify: 'center',
-  overflow: 'hidden',
-})`
-  &:hover {
-    background-color: ${() => rgba(colors.alertRed, 0.1)};
-  }
-  &:active {
-    background-color: ${() => rgba(colors.alertRed, 0.15)};
-  }
-`
-
 export const ErrorDescContainer = ({
   error,
   onRetry,
@@ -119,26 +100,13 @@ export const ErrorDescContainer = ({
   error: Error,
   onRetry: void => void,
 }) => (
-  <Box
-    pl={0}
-    fontSize={3}
-    color="alertRed"
-    align="flex-start"
-    justify="center"
-    style={{
-      cursor: 'text',
-    }}
-    {...p}
-  >
-    <Box horizontal>
-      <Box p={1} pl={2}>
-        <TranslatedError error={error} />
-      </Box>
-      <Tooltip render={() => 'Retry'} style={{ display: 'flex', alignItems: 'center' }}>
-        <ErrorRetryContainer onClick={onRetry}>
-          <IconRecover size={12} />
-        </ErrorRetryContainer>
-      </Tooltip>
+  <Box horizontal fontSize={3} color="alertRed" align="center" cursor="text" {...p}>
+    <IconExclamationCircle size={16} />
+    <Box ml={1}>
+      <TranslatedError error={error} />
     </Box>
+    <FakeLink ml={1} underline color="alertRed" onClick={onRetry}>
+      {'Retry'}
+    </FakeLink>
   </Box>
 )

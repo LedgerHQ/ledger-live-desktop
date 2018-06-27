@@ -5,13 +5,10 @@ import React, { PureComponent } from 'react'
 import { delay } from 'helpers/promise'
 
 import Box from 'components/base/Box'
-import Space from 'components/base/Space'
-
 import DeviceInteractionStep from './DeviceInteractionStep'
+import { ErrorDescContainer } from './components'
 
 import type { Step } from './DeviceInteractionStep'
-
-import { ErrorDescContainer } from './components'
 
 type Props = {
   steps: Step[],
@@ -109,12 +106,7 @@ class DeviceInteraction extends PureComponent<Props, State> {
           )
         })}
         {error &&
-          shouldRenderRetry && (
-            <Box align="flex-end">
-              <Space of={0} />
-              <ErrorDescContainer error={error} onRetry={this.reset} mt={2} />
-            </Box>
-          )}
+          shouldRenderRetry && <ErrorDescContainer error={error} onRetry={this.reset} mt={2} />}
       </Box>
     )
   }
