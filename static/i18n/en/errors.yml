@@ -21,7 +21,6 @@ DeviceSocketNoBulkStatus: Oops, device connection failed. Please try again [bulk
 DeviceSocketNoHandler: Oops, device connection failed (handler {{query}}). Please try again.
 LatestMCUInstalledError: MCU on device already up to date.
 HardResetFail: Reset failed. Please try again.
-
 ManagerAPIsFail: Services are unavailable. Please try again.
 ManagerUnexpected: Unexpected error occurred ({{msg}}). Please try again.
 ManagerNotEnoughSpace: Not enough storage on device. Uninstall some apps and try again.

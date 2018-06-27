@@ -176,7 +176,7 @@ const WorkflowWithIcon = ({ device, deviceInfo, errors, isGenuine, t }: Props) =
           </StepIcon>
           <Box grow shrink>
             <Trans i18nKey="deviceConnect:stepGenuine.open" parent="div">
-              {'Allow the '}
+              {'Allow '}
               <strong>{'Ledger Manager'}</strong>
               {' on your device'}
             </Trans>
