@@ -34,11 +34,11 @@ class WriteSeedNano extends PureComponent<Props, *> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding:writeSeed.initialize.nano.step1">
-              Copy the word displayed below
+              {'Copy the word displayed below'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Word #1
+                {'Word #1'}
               </Text>
-              in position 1 on a blank Recovery sheet.
+              {'in position 1 on a blank Recovery sheet.'}
             </Trans>
           </Box>
         ),
@@ -49,11 +49,11 @@ class WriteSeedNano extends PureComponent<Props, *> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding:writeSeed.initialize.nano.step2">
-              Press the right button to display
+              {'Press the right button to display'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Word #2
+                {'Word #2'}
               </Text>
-              and repeat the process until all 24 words are copied on the Recovery sheet.
+              {'and repeat the process until all 24 words are copied on the Recovery sheet.'}
             </Trans>
           </Box>
         ),

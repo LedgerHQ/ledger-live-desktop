@@ -33,9 +33,9 @@ class SelectPINrestoreBlue extends PureComponent<Props, *> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding:selectPIN.restore.instructions.blue.step2">
-              Tap on
+              {'Tap on'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Restore configuration
+                {'Restore configuration'}
               </Text>
             </Trans>
           </Box>

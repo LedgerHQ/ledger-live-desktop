@@ -38,13 +38,13 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding:selectPIN.restore.instructions.nano.step3">
-              Press the left button to cancel
+              {'Press the left button to cancel'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Initialize as new device?
+                {'Initialize as new device?'}
               </Text>
-              Press the right button to select
+              {'Press the right button to select'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Restore configuration?
+                {'Restore configuration?'}
               </Text>
             </Trans>
           </Box>

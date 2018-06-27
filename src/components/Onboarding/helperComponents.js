@@ -56,7 +56,7 @@ export const OnboardingFooterWrapper = styled(Box).attrs({
 // INSTRUCTION LIST
 type StepType = {
   icon: any,
-  desc: string,
+  desc: any,
 }
 export function OptionRow({ step, ...p }: { step: StepType }) {
   const { icon, desc } = step

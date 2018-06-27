@@ -33,9 +33,9 @@ class SelectPIN extends PureComponent<Props, *> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding:selectPIN.initialize.instructions.blue.step2">
-              Tap on
+              {'Tap on'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Configure as new device
+                {'Configure as new device'}
               </Text>
             </Trans>
           </Box>

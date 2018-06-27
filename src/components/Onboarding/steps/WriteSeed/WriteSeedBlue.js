@@ -39,15 +39,15 @@ class WriteSeedBlue extends PureComponent<Props, *> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding:writeSeed.initialize.blue.step2">
-              Tap
+              {'Tap'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Next
+                {'Next'}
               </Text>
-              to move to the next words. Repeat the process until the
+              {'to move to the next words. Repeat the process until the'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                Confirmation
+                {'Confirmation'}
               </Text>
-              screen appears.
+              {'screen appears.'}
             </Trans>
           </Box>
         ),
