@@ -122,7 +122,7 @@ class ReceiveModal extends PureComponent<Props, State> {
     }
   }
 
-  handleRetry = () => this.setState({ isAddressVerified: null, errorSteps: [] })
+  handleRetry = () => this.setState({ isAddressVerified: null, isAppOpened: false, errorSteps: [] })
   handleReset = () => this.setState({ ...INITIAL_STATE })
   handleCloseModal = () => this.props.closeModal(MODAL_RECEIVE)
   handleStepChange = step => this.setState({ stepId: step.id })
