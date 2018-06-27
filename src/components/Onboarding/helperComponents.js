@@ -52,17 +52,31 @@ export const OnboardingFooterWrapper = styled(Box).attrs({
   border-bottom-left-radius: ${radii[1]}px;
   border-bottom-right-radius: ${radii[1]}px;
 `
+// LIVE LOGO
+export function LiveLogo({ icon, ...p }: { icon: any }) {
+  return <LiveLogoContainer {...p}>{icon}</LiveLogoContainer>
+}
+export const LiveLogoContainer = styled(Box).attrs({
+  borderRadius: '50%',
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
+  box-shadow: 0 2px 24px 0 #00000014;
+  width: ${p => (p.width ? p.width : 80)}
+  height: ${p => (p.height ? p.height : 80)}
+
+`
 
 // INSTRUCTION LIST
 type StepType = {
   icon: any,
-  desc: string,
+  desc: any,
 }
-export function OptionRow({ step }: { step: StepType }) {
+export function OptionRow({ step, ...p }: { step: StepType }) {
   const { icon, desc } = step
   return (
     <Box horizontal m="7px" style={{ minWidth: 420 }}>
-      <Box justify="center">{icon}</Box>
+      <Box {...p}>{icon}</Box>
       <Box justify="center" shrink>
         <OptionRowDesc>{desc}</OptionRowDesc>
       </Box>
@@ -91,7 +105,7 @@ export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any 
         <DisclaimerBoxIconContainer>
           <IconSensitiveOperationShield />
         </DisclaimerBoxIconContainer>
-        {disclaimerNotes.map(note => <OptionRow key={note.key} step={note} />)}
+        {disclaimerNotes.map(note => <OptionRow justify="center" key={note.key} step={note} />)}
       </Box>
     </DisclaimerBoxContainer>
   )

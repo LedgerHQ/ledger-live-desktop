@@ -40,8 +40,8 @@ class FlashMcu extends PureComponent<Props, State> {
   render() {
     return (
       <div>
-        <h1>Flashing MCU</h1>
-        <button onClick={this.flashMCU}>flash</button>
+        <h1>{'Flashing MCU'}</h1>
+        <button onClick={this.flashMCU}>{'flash'}</button>
       </div>
     )
   }
