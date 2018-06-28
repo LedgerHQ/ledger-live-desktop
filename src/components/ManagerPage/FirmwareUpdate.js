@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/jsx-no-literals */ // FIXME
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
@@ -14,6 +14,8 @@ import type { LedgerScriptParams } from 'helpers/common'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installOsuFirmware from 'commands/installOsuFirmware'
+import installFinalFirmware from 'commands/installFinalFirmware'
+import installMcu from 'commands/installMcu'
 import DisclaimerModal from 'components/modals/UpdateFirmware/Disclaimer'
 import UpdateModal from 'components/modals/UpdateFirmware'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
@@ -40,7 +42,7 @@ type Props = {
 }
 
 type State = {
-  latestFirmware: ?LedgerScriptParams,
+  latestFirmware: ?LedgerScriptParams & ?{ shouldUpdateMcu: boolean },
   modal: ModalStatus,
 }
 
@@ -78,24 +80,40 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     }
   }
 
-  installFirmware = async () => {
+  installOsuFirmware = async () => {
     try {
       const { latestFirmware } = this.state
-      const { deviceInfo } = this.props
-      invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
       const {
+        deviceInfo,
         device: { path: devicePath },
       } = this.props
+      invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
+
       this.setState({ modal: 'install' })
       const { success } = await installOsuFirmware
         .send({ devicePath, firmware: latestFirmware, targetId: deviceInfo.targetId })
         .toPromise()
-      if (success) {
-        this.fetchLatestFirmware()
-      }
+      return success
     } catch (err) {
       logger.log(err)
+      throw err
     }
+  }
+
+  installFinalFirmware = async () => {
+    try {
+      const { device } = this.props
+      const { success } = await installFinalFirmware.send({ devicePath: device.path }).toPromise()
+      return success
+    } catch (err) {
+      logger.log(err)
+      throw err
+    }
+  }
+
+  flashMCU = async () => {
+    const { device } = this.props
+    await installMcu.send({ devicePath: device.path }).toPromise()
   }
 
   handleCloseModal = () => this.setState({ modal: 'closed' })
@@ -130,19 +148,27 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               })}
             </Text>
           </Box>
-          <UpdateFirmwareButton
-            firmware={latestFirmware}
-            installFirmware={this.handleDisclaimerModal}
-          />
+          <UpdateFirmwareButton firmware={latestFirmware} onClick={this.handleDisclaimerModal} />
         </Box>
         {modal !== 'closed' ? <PreventDeviceChangeRecheck /> : null}
-        <DisclaimerModal
-          firmware={latestFirmware}
-          status={modal}
-          goToNextStep={this.handleInstallModal}
-          onClose={this.handleCloseModal}
-        />
-        <UpdateModal status={modal} onClose={this.handleCloseModal} firmware={latestFirmware} />
+        {latestFirmware && (
+          <Fragment>
+            <DisclaimerModal
+              firmware={latestFirmware}
+              status={modal}
+              goToNextStep={this.handleInstallModal}
+              onClose={this.handleCloseModal}
+            />
+            <UpdateModal
+              status={modal}
+              onClose={this.handleCloseModal}
+              firmware={latestFirmware}
+              installOsuFirmware={this.installOsuFirmware}
+              installFinalFirmware={this.installFinalFirmware}
+              flashMCU={this.flashMCU}
+            />
+          </Fragment>
+        )}
       </Card>
     )
   }

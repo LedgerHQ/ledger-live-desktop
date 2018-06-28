@@ -1,11 +1,10 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
-import Button from 'components/base/Button'
 import DeviceConfirm from 'components/DeviceConfirm'
 
 import type { StepProps } from '../'
@@ -46,27 +45,41 @@ const Ellipsis = styled.span`
   width: 100%;
 `
 
-// TODO: Change to class component and add osu firmware install
-function StepOSUInstaller({ t, firmware }: StepProps) {
-  return (
-    <Container>
-      <Title>{t('app:manager.modal.confirmIdentifier')}</Title>
-      <Text ff="Open Sans|Regular" align="center" color="smoke">
-        {t('app:manager.modal.confirmIdentifierText')}
-      </Text>
-      <Box mx={7} mt={5}>
-        <Text ff="Open Sans|SemiBold" align="center" color="smoke">
-          {t('app:manager.modal.identifier')}
+class StepOSUInstaller extends PureComponent<StepProps, *> {
+  componentDidMount() {
+    this.install()
+  }
+
+  install = async () => {
+    const { installOsuFirmware, transitionTo } = this.props
+    const success = await installOsuFirmware()
+    if (success) {
+      transitionTo('updateMCU')
+    }
+  }
+
+  render() {
+    const { t, firmware } = this.props
+    return (
+      <Container>
+        <Title>{t('app:manager.modal.confirmIdentifier')}</Title>
+        <Text ff="Open Sans|Regular" align="center" color="smoke">
+          {t('app:manager.modal.confirmIdentifierText')}
         </Text>
-        <Address>
-          <Ellipsis>{firmware && firmware.hash}</Ellipsis>
-        </Address>
-      </Box>
-      <Box mt={5}>
-        <DeviceConfirm />
-      </Box>
-    </Container>
-  )
+        <Box mx={7} mt={5}>
+          <Text ff="Open Sans|SemiBold" align="center" color="smoke">
+            {t('app:manager.modal.identifier')}
+          </Text>
+          <Address>
+            <Ellipsis>{firmware && firmware.hash}</Ellipsis>
+          </Address>
+        </Box>
+        <Box mt={5}>
+          <DeviceConfirm />
+        </Box>
+      </Container>
+    )
+  }
 }
 
 export default StepOSUInstaller

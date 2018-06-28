@@ -3,6 +3,9 @@ import network from 'api/network'
 import { GET_LATEST_FIRMWARE } from 'helpers/urls'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
+import getFinalFirmwareById from 'helpers/firmware/getFinalFirmwareById'
+import getMcus from 'helpers/firmware/getMcus'
+
 import getCurrentFirmware from './getCurrentFirmware'
 import getDeviceVersion from './getDeviceVersion'
 
@@ -34,7 +37,23 @@ export default async (deviceInfo: DeviceInfo) => {
     }
 
     const { se_firmware_osu_version } = data
-    return se_firmware_osu_version
+    const { next_se_firmware_final_version } = se_firmware_osu_version
+    const seFirmwareFinalVersion = await getFinalFirmwareById(next_se_firmware_final_version)
+
+    const mcus = await getMcus()
+
+    const currentMcuVersionId = mcus
+      .filter(mcu => mcu.name === deviceInfo.mcuVersion)
+      .map(mcu => mcu.id)
+
+    if (!seFirmwareFinalVersion.mcu_versions.includes(...currentMcuVersionId)) {
+      return {
+        ...se_firmware_osu_version,
+        shouldUpdateMcu: true,
+      }
+    }
+
+    return { ...se_firmware_osu_version, shouldUpdateMcu: false }
   } catch (err) {
     const error = Error(err.message)
     error.stack = err.stack

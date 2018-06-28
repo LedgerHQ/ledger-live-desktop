@@ -3,6 +3,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { translate, Trans } from 'react-i18next'
+import ReactMarkdown from 'react-markdown'
 
 import type { T } from 'types/common'
 
@@ -11,10 +12,11 @@ import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import GrowScroll from 'components/base/GrowScroll'
 import GradientBox from 'components/GradientBox'
-
-import { getCleanVersion } from 'components/ManagerPage/FirmwareUpdate'
+import { Notes } from 'components/modals/ReleaseNotes'
 
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
+
+import { getCleanVersion } from 'components/ManagerPage/FirmwareUpdate'
 
 type FirmwareInfos = {
   name: string,
@@ -58,9 +60,9 @@ class DisclaimerModal extends PureComponent<Props, State> {
               </ModalContent>
               <ModalContent style={{ height: 250, width: '100%' }}>
                 <GrowScroll>
-                  <Text ff="Open Sans|Regular" fontSize={4} color="graphite">
-                    {firmware.notes}
-                  </Text>
+                  <Notes>
+                    <ReactMarkdown>{firmware.notes}</ReactMarkdown>
+                  </Notes>
                 </GrowScroll>
                 <GradientBox />
               </ModalContent>

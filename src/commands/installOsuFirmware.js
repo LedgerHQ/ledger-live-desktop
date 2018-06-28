@@ -11,7 +11,7 @@ import type { LedgerScriptParams } from 'helpers/common'
 type Input = {
   devicePath: string,
   targetId: string | number,
-  firmware: LedgerScriptParams,
+  firmware: LedgerScriptParams & { shouldUpdateMcu: boolean },
 }
 
 type Result = *

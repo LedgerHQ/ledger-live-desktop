@@ -18,16 +18,16 @@ type FirmwareInfos = {
 type Props = {
   t: T,
   firmware: ?FirmwareInfos,
-  installFirmware: () => void,
+  onClick: () => void,
 }
 
-const UpdateFirmwareButton = ({ t, firmware, installFirmware }: Props) =>
+const UpdateFirmwareButton = ({ t, firmware, onClick }: Props) =>
   firmware ? (
     <Fragment>
       <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
         {t('app:manager.firmware.latest', { version: getCleanVersion(firmware.name) })}
       </Text>
-      <Button primary onClick={installFirmware}>
+      <Button primary onClick={onClick}>
         {t('app:manager.firmware.update')}
       </Button>
     </Fragment>

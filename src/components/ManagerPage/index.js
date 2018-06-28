@@ -40,10 +40,6 @@ class ManagerPage extends PureComponent<Props, State> {
     invariant(device, 'Inexistant device considered genuine')
     invariant(deviceInfo, 'Inexistant device infos for genuine device')
 
-    // TODO
-    // renderFinalUpdate
-    // renderMcuUpdate
-
     return <Dashboard device={device} deviceInfo={deviceInfo} />
   }
 }
