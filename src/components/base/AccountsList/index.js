@@ -18,8 +18,8 @@ class AccountsList extends Component<
     editedNames: { [accountId: string]: string },
     setAccountName?: (Account, string) => void,
     onToggleAccount?: Account => void,
-    onSelectAll?: () => void,
-    onUnselectAll?: () => void,
+    onSelectAll?: (Account[]) => void,
+    onUnselectAll?: (Account[]) => void,
     title?: string,
     emptyText?: string,
     autoFocusFirstInput?: boolean,
@@ -35,6 +35,14 @@ class AccountsList extends Component<
   }
   toggleCollapse = () => {
     this.setState(({ collapsed }) => ({ collapsed: !collapsed }))
+  }
+  onSelectAll = () => {
+    const { accounts, onSelectAll } = this.props
+    if (onSelectAll) onSelectAll(accounts)
+  }
+  onUnselectAll = () => {
+    const { accounts, onUnselectAll } = this.props
+    if (onUnselectAll) onUnselectAll(accounts)
   }
   render() {
     const {
@@ -76,7 +84,7 @@ class AccountsList extends Component<
             {withToggleAll && (
               <FakeLink
                 ml="auto"
-                onClick={isAllSelected ? onUnselectAll : onSelectAll}
+                onClick={isAllSelected ? this.onUnselectAll : this.onSelectAll}
                 fontSize={3}
                 style={{ lineHeight: '10px' }}
               >

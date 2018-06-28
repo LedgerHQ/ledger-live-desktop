@@ -132,14 +132,19 @@ class StepImport extends PureComponent<StepProps> {
     }
   }
 
-  handleSelectAll = () => {
-    const { scannedAccounts, setScannedAccounts } = this.props
+  handleSelectAll = (accountsToSelect: Account[]) => {
+    const { setScannedAccounts, checkedAccountsIds } = this.props
     setScannedAccounts({
-      checkedAccountsIds: scannedAccounts.filter(a => a.operations.length > 0).map(a => a.id),
+      checkedAccountsIds: uniq(checkedAccountsIds.concat(accountsToSelect.map(a => a.id))),
     })
   }
 
-  handleUnselectAll = () => this.props.setScannedAccounts({ checkedAccountsIds: [] })
+  handleUnselectAll = (accountsToRemove: Account[]) => {
+    const { setScannedAccounts, checkedAccountsIds } = this.props
+    setScannedAccounts({
+      checkedAccountsIds: checkedAccountsIds.filter(id => !accountsToRemove.some(a => id === a.id)),
+    })
+  }
 
   renderError() {
     const { err, t } = this.props
