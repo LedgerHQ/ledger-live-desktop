@@ -16,6 +16,7 @@ import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import installOsuFirmware from 'commands/installOsuFirmware'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
+import Tooltip from 'components/base/Tooltip'
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
@@ -158,7 +159,9 @@ class FirmwareUpdate extends PureComponent<Props, State> {
                 Ledger Nano S
               </Text>
               <Box color="wallet" style={{ marginLeft: 10 }}>
-                <CheckFull size={13} color="wallet" />
+                <Tooltip render={() => t('app:manager.yourDeviceIsGenuine')}>
+                  <CheckFull size={13} color="wallet" />
+                </Tooltip>
               </Box>
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>

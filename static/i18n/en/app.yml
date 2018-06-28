@@ -181,6 +181,7 @@ operationDetails:
 operationList:
   noMoreOperations: That's all!
 manager:
+  yourDeviceIsGenuine: Your device is genuine
   tabs:
     apps: Apps
     device: My device
