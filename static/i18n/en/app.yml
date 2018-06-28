@@ -31,6 +31,10 @@ common:
   close: Close
   eastern: Eastern
   western: Western
+  reverify: Re-verify
+  verify: Verify
+  copy: Copy
+  addressCopied: Address copied!
   lockScreen:
     title: Welcome back
     subTitle:

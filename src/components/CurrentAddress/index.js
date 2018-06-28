@@ -16,7 +16,7 @@ import Box from 'components/base/Box'
 import CopyToClipboard from 'components/base/CopyToClipboard'
 import QRCode from 'components/base/QRCode'
 
-import IconCheck from 'icons/Check'
+import IconRecheck from 'icons/Recover'
 import IconCopy from 'icons/Copy'
 import IconInfoCircle from 'icons/InfoCircle'
 import IconShield from 'icons/Shield'
@@ -27,25 +27,33 @@ const Container = styled(Box).attrs({
   bg: p =>
     p.withQRCode ? (p.notValid ? rgba(p.theme.colors.alertRed, 0.02) : 'lightGrey') : 'transparent',
   py: 4,
-  px: 7,
+  px: 5,
 })`
   border: ${p => (p.notValid ? `1px dashed ${rgba(p.theme.colors.alertRed, 0.5)}` : 'none')};
 `
 
 const Address = styled(Box).attrs({
-  bg: p => (p.notValid ? 'transparent' : p.withQRCode ? 'white' : 'lightGrey'),
+  bg: 'white',
   borderRadius: 1,
   color: 'dark',
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   mt: 2,
-  px: p => (p.notValid ? 0 : 4),
-  py: p => (p.notValid ? 0 : 3),
+  px: 4,
+  py: 3,
+  relative: true,
 })`
-  border: ${p => (p.notValid ? 'none' : `1px dashed ${p.theme.colors.fog}`)};
+  border: ${p => `1px dashed ${p.theme.colors.fog}`};
   cursor: text;
   user-select: text;
 `
+
+const CopyFeedback = styled(Box).attrs({
+  sticky: true,
+  bg: 'white',
+  align: 'center',
+  justify: 'center',
+})``
 
 const Label = styled(Box).attrs({
   alignItems: 'center',
@@ -77,10 +85,11 @@ const FooterButtonWrapper = styled(Box).attrs({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: 1,
+  px: 2,
 })`
+  line-height: 1;
   cursor: pointer;
   height: 55px;
-  width: 55px;
 
   &:hover {
     background-color: ${p => rgba(p.theme.colors.wallet, 0.1)};
@@ -131,7 +140,7 @@ type Props = {
   withVerify: boolean,
 }
 
-class CurrentAddress extends PureComponent<Props> {
+class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
   static defaultProps = {
     addressVerified: null,
     amount: null,
@@ -144,6 +153,12 @@ class CurrentAddress extends PureComponent<Props> {
     withQRCode: false,
     withVerify: false,
   }
+
+  state = {
+    copyFeedback: false,
+  }
+
+  _isUnmounted = false
 
   render() {
     const {
@@ -162,6 +177,8 @@ class CurrentAddress extends PureComponent<Props> {
       withVerify,
       ...props
     } = this.props
+
+    const { copyFeedback } = this.state
 
     const notValid = addressVerified === false
 
@@ -193,6 +210,7 @@ class CurrentAddress extends PureComponent<Props> {
           <IconInfoCircle size={12} />
         </Label>
         <Address withQRCode={withQRCode} notValid={notValid}>
+          {copyFeedback && <CopyFeedback>{t('app:common.addressCopied')}</CopyFeedback>}
           {address}
         </Address>
         {withBadge && (
@@ -207,11 +225,26 @@ class CurrentAddress extends PureComponent<Props> {
         )}
         {withFooter && (
           <Footer>
-            <FooterButton icon={<IconCheck size={16} />} label="Verify" onClick={onVerify} />
+            <FooterButton
+              icon={<IconRecheck size={16} />}
+              label={notValid ? t('app:common.verify') : t('app:common.reverify')}
+              onClick={onVerify}
+            />
             <CopyToClipboard
               data={address}
               render={copy => (
-                <FooterButton icon={<IconCopy size={16} />} label="Copy" onClick={copy} />
+                <FooterButton
+                  icon={<IconCopy size={16} />}
+                  label={t('app:common.copy')}
+                  onClick={() => {
+                    this.setState({ copyFeedback: true })
+                    setTimeout(() => {
+                      if (this._isUnmounted) return
+                      this.setState({ copyFeedback: false })
+                    }, 1e3)
+                    copy()
+                  }}
+                />
               )}
             />
           </Footer>
