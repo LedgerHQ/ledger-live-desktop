@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -187,21 +187,19 @@ class ReceiveModal extends PureComponent<Props, State> {
         preventBackdropClick={isModalLocked}
         onBeforeOpen={this.handleBeforeOpenModal}
         render={({ onClose }) => (
-          <Fragment>
+          <Stepper
+            title={t('app:receive.title')}
+            initialStepId={stepId}
+            onStepChange={this.handleStepChange}
+            onClose={onClose}
+            steps={this.STEPS}
+            disabledSteps={disabledSteps}
+            errorSteps={errorSteps}
+            {...addtionnalProps}
+          >
             <Track onUnmount event="CloseModalReceive" />
-            <Stepper
-              title={t('app:receive.title')}
-              initialStepId={stepId}
-              onStepChange={this.handleStepChange}
-              onClose={onClose}
-              steps={this.STEPS}
-              disabledSteps={disabledSteps}
-              errorSteps={errorSteps}
-              {...addtionnalProps}
-            >
-              <SyncSkipUnderPriority priority={100} />
-            </Stepper>
-          </Fragment>
+            <SyncSkipUnderPriority priority={100} />
+          </Stepper>
         )}
       />
     )
