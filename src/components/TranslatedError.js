@@ -12,21 +12,24 @@ import type { T } from 'types/common'
 type Props = {
   error: ?Error,
   t: T,
+  field: 'title' | 'description',
 }
 
 class TranslatedError extends PureComponent<Props> {
+  static defaultProps = {
+    field: 'title',
+  }
   render() {
-    const { t, error } = this.props
+    const { t, error, field } = this.props
     if (!error) return null
     if (typeof error === 'string') return error
     if (error.name) {
-      const translation = t(`errors:${error.name}`, error)
-      if (translation) {
-        return translation
-      }
+      const translation = t(`errors:${error.name}.${field}`, error)
+      // FIXME in case the error don't exist in t we should not return and fallback code after. I just don't know how to check this. FIXME
+      return translation
     }
     logger.warn(`TranslatedError: no translation for '${error.name}'`, error)
-    return error.message || error.name || t('errors:generic')
+    return error.message || error.name || t(`errors:generic.${field}`)
   }
 }
 

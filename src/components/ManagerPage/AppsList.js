@@ -205,7 +205,17 @@ class AppsList extends PureComponent<Props, State> {
                     textAlign="center"
                     style={{ maxWidth: 350 }}
                   >
-                    <TranslatedError error={error} />
+                    <TranslatedError error={error} field="title" />
+                  </Box>
+                  <Box
+                    color="graphite"
+                    mt={4}
+                    fontSize={6}
+                    ff="Open Sans"
+                    textAlign="center"
+                    style={{ maxWidth: 350 }}
+                  >
+                    <TranslatedError error={error} field="description" />
                   </Box>
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
