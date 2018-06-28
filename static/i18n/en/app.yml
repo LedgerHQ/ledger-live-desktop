@@ -236,15 +236,15 @@ receive:
   title: Receive
   steps:
     chooseAccount:
-      title: Choose account
-      label: Account
+      title: Account
+      label: Account to credit
     connectDevice:
       title: Connect device
-      withoutDevice: Receive without device
+      withoutDevice: Don't have your device?
     confirmAddress:
       title: Confirm address
       action: Confirm address on device
-      text: To receive crypto assets, confirm the address on your device
+      text: Verify that the address below matches the address displayed on your device
       support: Ledger Support
       error:
         title: Receive address rejected
@@ -254,15 +254,15 @@ receive:
       label: Amount (optional)
 send:
   title: Send
-  totalSpent: Total
+  totalSpent: Total to debit
   steps:
     amount:
-      title: Send crypto assets
+      title: Details
       selectAccountDebit: Select an account to debit
       recipientAddress: Recipient address # can't control the tooltip!
       amount: Amount
       max: Max
-      fees: Fees
+      fees: Network fees
       advancedOptions: Advanced options
       useRBF: Use a replace-by-fee transaction
       message: Leave a message (140)
@@ -275,16 +275,14 @@ send:
     verification:
       title: Verification
       warning: |
-        Carefully verify the transaction details displayed one by one on your device before you proceed.
-      # blue
-      # nano
-      body: Press the right button to confirm the transaction
+        Carefully verify all transaction details now displayed on your device screen
+      body: Once verified, press the right button to confirm and sign the transaction
     confirmation:
       title: Confirmation
       success:
         title: Transaction sent
         text: |
-          The transaction has been signed and sent to the network. Your account balance will update once the blockchain has confirmed the transaction. It has the following Transaction ID:
+          The transaction has been signed and sent to the network. Your account balance will update once the the transaction is confirmed by the network.
         cta: View operation details
       error:
         title: Transaction canceled
