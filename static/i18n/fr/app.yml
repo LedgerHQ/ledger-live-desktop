@@ -32,6 +32,10 @@ common:
   close: Close
   eastern: Eastern
   western: Western
+  reverify: Re-verify
+  verify: Verify
+  copy: Copy
+  addressCopied: Address copied!
   lockScreen:
     title: Welcome back
     subTitle:
@@ -143,21 +147,23 @@ addAccounts:
     connectDevice: Connect device
     import: Select accounts
     finish: Confirmation
-  accountToImportSubtitle: Select existing accounts
-  accountToImportSubtitle_plural: 'Select ({{count}}) existing accounts'
-  selectAll: Select all
-  unselectAll: Deselect all
+  accountAlreadyImportedSubtitle: Already in portfolio
+  accountToImportSubtitle: 'Select account'
+  accountToImportSubtitle_plural: 'Select accounts'
+  selectAll: Select all ({{count}})
+  unselectAll: Deselect all ({{count}})
   editName: Edit name
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
   noAccountToImport: No existing {{currencyName}} accounts to add
   success: Account added to your portfolio
   createNewAccount:
-    title: Create new account
-    noOperationOnLastAccount: 'You have to receive crypto assets on {{accountName}} before you can create a new account.'
-    noAccountToCreate: No {{currencyName}} account was found to create
+    title: Create a new account
+    noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
+    noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
+    addMore: 'Add more'
     add: 'Add account'
     add_plural: 'Add accounts'
 operationDetails:
@@ -168,6 +174,7 @@ operationDetails:
   confirmed: Confirmed
   notConfirmed: Not confirmed
   fees: Fees
+  noFees: No fee
   from: From
   to: To
   identifier: Transaction ID
@@ -177,18 +184,19 @@ operationDetails:
 operationList:
   noMoreOperations: That's all!
 manager:
+  yourDeviceIsGenuine: Your device is genuine
   tabs:
     apps: Apps
     device: My device
   apps:
     install: Install
-    all: Apps
+    all: App catalog
     installing: 'Installing {{app}}...'
     uninstalling: 'Uninstalling {{app}}...'
     installSuccess: '{{app}} is now installed on your device'
     uninstallSuccess: '{{app}} has been uninstalled from your device'
     alreadyInstalled: '{{app}} is already installed on your device'
-    help: Remove and reinstall to update apps
+    help: Check on your device to see which apps are already installed
   firmware:
     installed: 'Firmware version {{version}}'
     update: Update firmware
@@ -199,7 +207,7 @@ manager:
     disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
     disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
   title: Manager
-  subtitle: Select apps to use on your device
+  subtitle: Install or uninstall apps on your device
   device:
     title: Connect your device
     desc: 'Follow the steps below to use the device Manager'
