@@ -33,7 +33,7 @@ export function GenuineCheckUnavailableFooter({
         <Button
           padded
           disabled={false}
-          event="Skip Genuine Check Onboarding"
+          event="Onboarding Skip Genuine Check"
           onClick={() => nextStep()}
           mx={2}
         >
@@ -64,7 +64,7 @@ export function GenuineCheckUnavailableMessage({
         underline
         onClick={() => {
           handleOpenGenuineCheckModal()
-          track('Genuine Check Unavailable Retry', {
+          track('Genuine Check Retry', {
             flowType: onboarding.flowType,
             deviceType: onboarding.isLedgerNano ? 'Nano S' : 'Blue',
           })
