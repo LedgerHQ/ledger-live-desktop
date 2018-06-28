@@ -5,16 +5,17 @@ const intFromEnv = (key: string, def: number): number => {
   if (!isNaN(v)) return parseInt(v, 10)
   return def
 }
-const boolFromEnv = (key: string): boolean => {
+const boolFromEnv = (key: string, def: boolean = false): boolean => {
   const v = process.env[key]
-  return (v && v !== '0' && v !== 'false') || false
+  if (typeof v === 'string') return !(v === '0' || v === 'false')
+  return def
 }
 
 const stringFromEnv = (key: string, def: string): string => process.env[key] || def
 
 // Size
 
-export const MIN_HEIGHT = intFromEnv('LEDGER_MIN_HEIGHT', 768)
+export const MIN_HEIGHT = intFromEnv('LEDGER_MIN_HEIGHT', 700)
 export const MIN_WIDTH = intFromEnv('LEDGER_MIN_WIDTH', 1024)
 
 // time and delays...
