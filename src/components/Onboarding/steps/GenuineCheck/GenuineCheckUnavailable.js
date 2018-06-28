@@ -11,7 +11,6 @@ import IconCross from 'icons/Cross'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
-import Track from 'analytics/Track'
 import { track } from 'analytics/segment'
 
 import { OnboardingFooterWrapper } from '../../helperComponents'
@@ -20,12 +19,10 @@ export function GenuineCheckUnavailableFooter({
   prevStep,
   nextStep,
   t,
-  onboarding,
 }: {
   prevStep: () => void,
   nextStep: () => void,
   t: T,
-  onboarding: OnboardingState,
 }) {
   return (
     <OnboardingFooterWrapper>
@@ -66,11 +63,11 @@ export function GenuineCheckUnavailableMessage({
         fontSize={4}
         underline
         onClick={() => {
-          handleOpenGenuineCheckModal(),
-            track('Genuine Check Unavailable Retry', {
-              flowType: onboarding.flowType,
-              deviceType: onboarding.isLedgerNano ? 'Nano S' : 'Blue',
-            })
+          handleOpenGenuineCheckModal()
+          track('Genuine Check Unavailable Retry', {
+            flowType: onboarding.flowType,
+            deviceType: onboarding.isLedgerNano ? 'Nano S' : 'Blue',
+          })
         }}
       >
         {t('app:common.retry')}

@@ -259,12 +259,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           </Box>
         </StepContainerInner>
         {genuine.genuineCheckUnavailable ? (
-          <GenuineCheckUnavailableFooter
-            nextStep={nextStep}
-            prevStep={prevStep}
-            t={t}
-            onboarding={onboarding}
-          />
+          <GenuineCheckUnavailableFooter nextStep={nextStep} prevStep={prevStep} t={t} />
         ) : (
           <OnboardingFooter
             t={t}

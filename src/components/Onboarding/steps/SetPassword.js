@@ -140,7 +140,6 @@ class SetPassword extends PureComponent<StepProps, State> {
               event="Skip Password Onboarding"
               onClick={() => nextStep()}
               disabled={false}
-              onClick={() => nextStep()}
               mx={2}
             >
               {t('app:common.skipThisStep')}
