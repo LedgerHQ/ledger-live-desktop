@@ -66,8 +66,6 @@ writeSeed:
   initialize:
     title: Save your recovery phrase
     desc: Your device will generate a 24-word recovery phrase to back up your private keys
-    #Save the 24-word recovery phrase on your device to back up your private keys
-        # Your device will generate a 24-word recovery phrase to back up your private keys
     nano:
       step1: 'Copy the word displayed below <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.'
       step2: 'Press the right button to display <1><0>Word #2</0></1> and repeat the process until all 24 words are copied on the Recovery sheet.' #<italic>Recovery sheet</italic>
