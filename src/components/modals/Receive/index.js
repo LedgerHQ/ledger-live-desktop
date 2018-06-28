@@ -54,7 +54,7 @@ export type StepProps = DefaultStepProps & {
   onResetSkip: void => void,
   onChangeAccount: (?Account) => void,
   onChangeAppOpened: boolean => void,
-  onChangeAddressVerified: ?boolean => void,
+  onChangeAddressVerified: (?boolean) => void,
 }
 
 const createSteps = ({ t }: { t: T }) => [
