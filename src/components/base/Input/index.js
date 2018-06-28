@@ -15,12 +15,18 @@ const Container = styled(Box).attrs({
 })`
   background: ${p => p.theme.colors.white};
   border-radius: ${p => p.theme.radii[1]}px;
-  border: 1px solid
-    ${p =>
-      p.error ? p.theme.colors.pearl : p.isFocus ? p.theme.colors.wallet : p.theme.colors.fog};
+  border-width: 1px;
+  border-style: solid;
+  border-color: ${p =>
+    p.error ? p.theme.colors.pearl : p.isFocus ? p.theme.colors.wallet : p.theme.colors.fog};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: ${p => (p.small ? '34' : '40')}px;
   position: relative;
+
+  &:not(:hover) {
+    background: ${p => (!p.isFocus && p.editInPlace ? 'transparent' : undefined)};
+    border-color: ${p => (!p.isFocus && p.editInPlace ? 'transparent' : undefined)};
+  }
 `
 
 const ErrorDisplay = styled(Box)`
@@ -44,6 +50,7 @@ const Base = styled.input.attrs({
   outline: none;
   padding: 0;
   width: 100%;
+  background: none;
 
   &::placeholder {
     color: ${p => p.theme.colors.fog};
@@ -82,6 +89,7 @@ type Props = {
   containerProps?: Object,
   error?: string | boolean,
   small?: boolean,
+  editInPlace?: boolean,
 }
 
 type State = {
@@ -152,7 +160,7 @@ class Input extends PureComponent<Props, State> {
 
   render() {
     const { isFocus } = this.state
-    const { renderLeft, renderRight, containerProps, small, error } = this.props
+    const { renderLeft, renderRight, containerProps, editInPlace, small, error } = this.props
 
     return (
       <Container
@@ -162,6 +170,7 @@ class Input extends PureComponent<Props, State> {
         {...containerProps}
         small={small}
         error={error}
+        editInPlace={editInPlace}
       >
         {renderLeft}
         <Box px={3} grow shrink>

@@ -1,6 +1,8 @@
 // @flow
 
 import invariant from 'invariant'
+import styled from 'styled-components'
+import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
@@ -14,8 +16,22 @@ import Button from 'components/base/Button'
 import AccountsList from 'components/base/AccountsList'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import TranslatedError from '../../../TranslatedError'
+import Spinner from '../../../base/Spinner'
+import Text from '../../../base/Text'
 
 import type { StepProps } from '../index'
+
+const LoadingRow = styled(Box).attrs({
+  horizontal: true,
+  borderRadius: 1,
+  px: 3,
+  align: 'center',
+  justify: 'center',
+  mt: 1,
+})`
+  height: 48px;
+  border: 1px dashed ${p => p.theme.colors.grey};
+`
 
 class StepImport extends PureComponent<StepProps> {
   componentDidMount() {
@@ -118,26 +134,19 @@ class StepImport extends PureComponent<StepProps> {
     }
   }
 
-  handleUpdateAccount = (updatedAccount: Account) => {
-    const { scannedAccounts, setScannedAccounts } = this.props
+  handleSelectAll = (accountsToSelect: Account[]) => {
+    const { setScannedAccounts, checkedAccountsIds } = this.props
     setScannedAccounts({
-      scannedAccounts: scannedAccounts.map(account => {
-        if (account.id !== updatedAccount.id) {
-          return account
-        }
-        return updatedAccount
-      }),
+      checkedAccountsIds: uniq(checkedAccountsIds.concat(accountsToSelect.map(a => a.id))),
     })
   }
 
-  handleSelectAll = () => {
-    const { scannedAccounts, setScannedAccounts } = this.props
+  handleUnselectAll = (accountsToRemove: Account[]) => {
+    const { setScannedAccounts, checkedAccountsIds } = this.props
     setScannedAccounts({
-      checkedAccountsIds: scannedAccounts.filter(a => a.operations.length > 0).map(a => a.id),
+      checkedAccountsIds: checkedAccountsIds.filter(id => !accountsToRemove.some(a => id === a.id)),
     })
   }
-
-  handleUnselectAll = () => this.props.setScannedAccounts({ checkedAccountsIds: [] })
 
   renderError() {
     const { err, t } = this.props
@@ -168,66 +177,111 @@ class StepImport extends PureComponent<StepProps> {
       scannedAccounts,
       checkedAccountsIds,
       existingAccounts,
+      setAccountName,
+      editedNames,
       t,
     } = this.props
 
     if (err) {
+      // TODO prefer rendering a component
       return this.renderError()
     }
 
     const currencyName = currency ? currency.name : ''
 
-    const importableAccounts = scannedAccounts.filter(acc => {
-      if (acc.operations.length <= 0) {
-        return false
+    const importedAccounts = []
+    const importableAccounts = []
+    const creatableAccounts = []
+    let alreadyEmptyAccount
+    scannedAccounts.forEach(acc => {
+      const existingAccount = existingAccounts.find(a => a.id === acc.id)
+      const empty = acc.operations.length === 0
+      if (existingAccount) {
+        importedAccounts.push(existingAccount)
+        if (empty) {
+          alreadyEmptyAccount = existingAccount
+        }
+      } else if (empty) {
+        creatableAccounts.push(acc)
+      } else {
+        importableAccounts.push(acc)
       }
-      return existingAccounts.find(a => a.id === acc.id) === undefined
-    })
-
-    const creatableAccounts = scannedAccounts.filter(acc => {
-      if (acc.operations.length > 0) {
-        return false
-      }
-      return existingAccounts.find(a => a.id === acc.id) === undefined
     })
 
     const importableAccountsListTitle = t('app:addAccounts.accountToImportSubtitle', {
       count: importableAccounts.length,
     })
 
+    const importedAccountsListTitle = t('app:addAccounts.accountAlreadyImportedSubtitle', {
+      count: importableAccounts.length,
+    })
+
     const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', { currencyName })
-    const alreadyEmptyAccount = scannedAccounts.find(a => a.operations.length === 0)
+
+    const shouldShowNew = scanStatus !== 'scanning'
 
     return (
       <Fragment>
         <TrackPage category="AddAccounts" name="Step3" />
-        <Box flow={5}>
-          <AccountsList
-            title={importableAccountsListTitle}
-            emptyText={importableAccountsEmpty}
-            accounts={importableAccounts}
-            checkedIds={checkedAccountsIds}
-            onToggleAccount={this.handleToggleAccount}
-            onUpdateAccount={this.handleUpdateAccount}
-            onSelectAll={this.handleSelectAll}
-            onUnselectAll={this.handleUnselectAll}
-            isLoading={scanStatus === 'scanning'}
-          />
-          <AccountsList
-            title={t('app:addAccounts.createNewAccount.title')}
-            emptyText={
-              alreadyEmptyAccount
-                ? t('app:addAccounts.createNewAccount.noOperationOnLastAccount', {
-                    accountName: alreadyEmptyAccount.name,
-                  })
-                : t('app:addAccounts.createNewAccount.noAccountToCreate', { currencyName })
-            }
-            accounts={creatableAccounts}
-            checkedIds={checkedAccountsIds}
-            onToggleAccount={this.handleToggleAccount}
-            onUpdateAccount={this.handleUpdateAccount}
-            isLoading={scanStatus === 'scanning'}
-          />
+        <Box mt={-4}>
+          {importedAccounts.length === 0 ? null : (
+            <AccountsList
+              title={importedAccountsListTitle}
+              accounts={importedAccounts}
+              editedNames={editedNames}
+              collapsible
+            />
+          )}
+          {importableAccounts.length === 0 ? null : (
+            <AccountsList
+              title={importableAccountsListTitle}
+              emptyText={importableAccountsEmpty}
+              accounts={importableAccounts}
+              checkedIds={checkedAccountsIds}
+              onToggleAccount={this.handleToggleAccount}
+              setAccountName={setAccountName}
+              editedNames={editedNames}
+              onSelectAll={this.handleSelectAll}
+              onUnselectAll={this.handleUnselectAll}
+              autoFocusFirstInput
+            />
+          )}
+          {!shouldShowNew ? null : (
+            <AccountsList
+              autoFocusFirstInput={importableAccounts.length === 0}
+              title={t('app:addAccounts.createNewAccount.title')}
+              emptyText={
+                alreadyEmptyAccount ? (
+                  <Trans
+                    i18nKey="app:addAccounts.createNewAccount.noOperationOnLastAccount"
+                    parent="div"
+                  >
+                    {' '}
+                    <Text ff="Open Sans|SemiBold" color="dark">
+                      {alreadyEmptyAccount.name}
+                    </Text>{' '}
+                  </Trans>
+                ) : (
+                  <Trans i18nKey="app:addAccounts.createNewAccount.noAccountToCreate" parent="div">
+                    {' '}
+                    <Text ff="Open Sans|SemiBold" color="dark">
+                      {currencyName}
+                    </Text>{' '}
+                  </Trans>
+                )
+              }
+              accounts={creatableAccounts}
+              checkedIds={checkedAccountsIds}
+              onToggleAccount={this.handleToggleAccount}
+              setAccountName={setAccountName}
+              editedNames={editedNames}
+            />
+          )}
+          {scanStatus === 'scanning' ? (
+            <LoadingRow>
+              <Spinner color="grey" size={16} />
+            </LoadingRow>
+          ) : null}
         </Box>
 
         {err && <Box shrink>{err.message}</Box>}
@@ -264,9 +318,7 @@ export const StepImportFooter = ({
   const ctaWording =
     scanStatus === 'scanning'
       ? t('app:common.sync.syncing')
-      : willCreateAccount || willAddAccounts
-        ? t('app:addAccounts.cta.add', { count })
-        : t('app:common.close')
+      : t('app:addAccounts.cta.add', { count })
 
   const willClose = !willCreateAccount && !willAddAccounts
   const onClick = willClose
@@ -291,7 +343,10 @@ export const StepImportFooter = ({
       )}
       <Button
         primary
-        disabled={scanStatus !== 'finished' && scanStatus !== 'error'}
+        disabled={
+          (scanStatus !== 'finished' && scanStatus !== 'error') ||
+          !(willCreateAccount || willAddAccounts)
+        }
         onClick={onClick}
       >
         {ctaWording}
