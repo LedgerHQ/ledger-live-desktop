@@ -14,7 +14,7 @@
 From one side Ledger Desktop app connected to the Blockchain via the in-house written C++ library - LibCore and from the other it communicates to the Ledger Hardware Device to securely sign all transactions.
 
 <p align="center">
- <img src="/static/docs/architecture.jpg" width="550"/>
+ <img src="/static/docs/architecture.png" width="550"/>
 </p>
 
 ## Setup
