@@ -25,7 +25,7 @@ import Stepper from 'components/base/Stepper'
 import StepAccount, { StepAccountFooter } from './steps/01-step-account'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepConfirmAddress, { StepConfirmAddressFooter } from './steps/03-step-confirm-address'
-import StepReceiveFunds, { StepReceiveFundsFooter } from './steps/04-step-receive-funds'
+import StepReceiveFunds from './steps/04-step-receive-funds'
 
 type Props = {
   t: T,
@@ -54,7 +54,7 @@ export type StepProps = DefaultStepProps & {
   onResetSkip: void => void,
   onChangeAccount: (?Account) => void,
   onChangeAppOpened: boolean => void,
-  onChangeAddressVerified: boolean => void,
+  onChangeAddressVerified: (?boolean) => void,
 }
 
 const createSteps = ({ t }: { t: T }) => [
@@ -83,7 +83,6 @@ const createSteps = ({ t }: { t: T }) => [
     id: 'receive',
     label: t('app:receive.steps.receiveFunds.title'),
     component: StepReceiveFunds,
-    footer: StepReceiveFundsFooter,
   },
 ]
 
@@ -131,6 +130,8 @@ class ReceiveModal extends PureComponent<Props, State> {
   handleChangeAddressVerified = (isAddressVerified: boolean) => {
     if (isAddressVerified) {
       this.setState({ isAddressVerified })
+    } else if (isAddressVerified === null) {
+      this.setState({ isAddressVerified: null, errorSteps: [] })
     } else {
       const confirmStepIndex = this.STEPS.findIndex(step => step.id === 'confirm')
       if (confirmStepIndex > -1) {

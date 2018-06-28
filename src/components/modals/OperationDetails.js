@@ -16,6 +16,7 @@ import { MODAL_OPERATION_DETAILS } from 'config/constants'
 import { getMarketColor } from 'styles/helpers'
 
 import Box from 'components/base/Box'
+import CopyToClipboard from 'components/base/CopyToClipboard'
 import GradientBox from 'components/GradientBox'
 import GrowScroll from 'components/base/GrowScroll'
 import Button from 'components/base/Button'
@@ -28,6 +29,7 @@ import { createStructuredSelector, createSelector } from 'reselect'
 import { accountSelector } from 'reducers/accounts'
 import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 
+import IconCopy from 'icons/Copy'
 import IconChevronRight from 'icons/ChevronRight'
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
@@ -43,11 +45,37 @@ const OpDetailsTitle = styled(Box).attrs({
   letter-spacing: 2px;
 `
 
+const CopyBtn = styled(Box).attrs({
+  horizontal: true,
+  flow: 1,
+  align: 'center',
+  color: 'wallet',
+  cursor: 'pointer',
+  ff: 'Open Sans|SemiBold',
+})`
+  background: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding-left: 20px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff 20%);
+`
+
 const OpDetailsData = styled(Box).attrs({
   ff: 'Open Sans',
   color: 'smoke',
   fontSize: 4,
-})``
+  relative: true,
+})`
+  ${CopyBtn} {
+    display: none;
+  }
+
+  &:hover ${CopyBtn} {
+    display: flex;
+  }
+`
 
 const CanSelect = styled.div`
   user-select: text;
@@ -166,11 +194,13 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                       <FormattedVal unit={unit} showCode val={fee} color="dark" />
                     </OpDetailsData>
                   </Fragment>
-                ) : null}
+                ) : (
+                  <OpDetailsData>{t('app:operationDetails.noFees')}</OpDetailsData>
+                )}
               </Box>
               <Box flex={1}>
                 <OpDetailsTitle>{t('app:operationDetails.status')}</OpDetailsTitle>
-                <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal>
+                <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
                   <Box>
                     {isConfirmed
                       ? t('app:operationDetails.confirmed')
@@ -185,6 +215,16 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               <OpDetailsTitle>{t('app:operationDetails.identifier')}</OpDetailsTitle>
               <OpDetailsData>
                 <Ellipsis canSelect>{hash}</Ellipsis>
+
+                <CopyToClipboard
+                  data={hash}
+                  render={copy => (
+                    <CopyBtn onClick={copy}>
+                      <IconCopy size={16} />
+                      <span>{t('app:common.copy')}</span>
+                    </CopyBtn>
+                  )}
+                />
               </OpDetailsData>
             </Box>
             <B />

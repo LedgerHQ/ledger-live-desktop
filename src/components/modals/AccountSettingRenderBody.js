@@ -206,6 +206,7 @@ class HelperComp extends PureComponent<Props, State> {
               </Box>
               <Box>
                 <Input
+                  containerProps={{ style: { width: 230 } }}
                   value={account.name}
                   maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
@@ -220,7 +221,7 @@ class HelperComp extends PureComponent<Props, State> {
                 <OptionRowTitle>{t('app:account.settings.unit.title')}</OptionRowTitle>
                 <OptionRowDesc>{t('app:account.settings.unit.desc')}</OptionRowDesc>
               </Box>
-              <Box style={{ width: 180 }}>
+              <Box style={{ width: 230 }}>
                 <Select
                   onChange={this.handleChangeUnit}
                   getOptionValue={unitGetOptionValue}
@@ -254,7 +255,7 @@ class HelperComp extends PureComponent<Props, State> {
                 </Box>
               </Container>
             ) : null}
-            <Spoiler title={t('app:account.settings.advancedLogs')}>
+            <Spoiler textTransform title={t('app:account.settings.advancedLogs')}>
               <SyncAgo date={account.lastSyncDate} />
               <textarea
                 readOnly
@@ -274,10 +275,10 @@ class HelperComp extends PureComponent<Props, State> {
             </Spoiler>
           </ModalContent>
           <ModalFooter horizontal>
-            <Button small danger type="button" onClick={this.handleOpenRemoveAccountModal}>
+            <Button padded danger type="button" onClick={this.handleOpenRemoveAccountModal}>
               {t('app:common.delete')}
             </Button>
-            <Button small ml="auto" type="submit" primary>
+            <Button padded ml="auto" type="submit" primary>
               {t('app:common.apply')}
             </Button>
           </ModalFooter>

@@ -4,7 +4,6 @@ import invariant from 'invariant'
 import React, { PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
-import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
@@ -23,6 +22,7 @@ export default class StepReceiveFunds extends PureComponent<StepProps, State> {
 
   handleChangeAmount = (amount: number) => this.setState({ amount })
   handleGoPrev = () => {
+    this.props.onChangeAddressVerified(null)
     this.props.onChangeAppOpened(false)
     this.props.onResetSkip()
     this.props.transitionTo('device')
@@ -57,12 +57,4 @@ export default class StepReceiveFunds extends PureComponent<StepProps, State> {
       </Box>
     )
   }
-}
-
-export function StepReceiveFundsFooter({ t, closeModal }: StepProps) {
-  return (
-    <Button primary onClick={closeModal}>
-      {t('app:common.close')}
-    </Button>
-  )
 }

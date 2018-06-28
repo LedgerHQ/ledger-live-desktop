@@ -31,6 +31,10 @@ common:
   close: Close
   eastern: Eastern
   western: Western
+  reverify: Re-verify
+  verify: Verify
+  copy: Copy
+  addressCopied: Address copied!
   lockScreen:
     title: Welcome back
     subTitle:
@@ -174,6 +178,7 @@ operationDetails:
   confirmed: Confirmed
   notConfirmed: Not confirmed
   fees: Fees
+  noFees: No fee
   from: From
   to: To
   identifier: Transaction ID
@@ -183,6 +188,7 @@ operationDetails:
 operationList:
   noMoreOperations: That's all!
 manager:
+  yourDeviceIsGenuine: Your device is genuine
   tabs:
     apps: Apps
     device: My device

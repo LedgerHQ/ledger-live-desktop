@@ -1,11 +1,12 @@
 // @flow
 
-import React from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { space, fontSize, fontWeight, color } from 'styled-system'
 import noop from 'lodash/noop'
 import { track } from 'analytics/segment'
 
+import { isGlobalTabEnabled } from 'config/global-tab'
 import { darken, lighten, rgba } from 'styles/helpers'
 import fontFamily from 'styles/styled/fontFamily'
 import { focusedShadowStyle } from 'components/base/Box/Tabbable'
@@ -16,21 +17,28 @@ type Style = any // FIXME
 
 const buttonStyles: { [_: string]: Style } = {
   default: {
-    default: noop,
+    default: p => `
+      box-shadow: ${p.isFocused ? focusedShadowStyle : ''}
+    `,
     active: p => `
       background: ${rgba(p.theme.colors.fog, 0.3)};
     `,
     hover: p => `
       background: ${rgba(p.theme.colors.fog, 0.2)};
     `,
-    focus: () => `
-      box-shadow: ${focusedShadowStyle};
-    `,
   },
   primary: {
     default: p => `
       background: ${p.disabled ? `${p.theme.colors.lightFog} !important` : p.theme.colors.wallet};
       color: ${p.disabled ? p.theme.colors.grey : p.theme.colors.white};
+      box-shadow: ${
+        p.isFocused
+          ? `
+          0 0 0 1px ${darken(p.theme.colors.wallet, 0.3)} inset,
+          0 0 0 1px ${rgba(p.theme.colors.wallet, 0.5)},
+          0 0 0 4px ${rgba(p.theme.colors.wallet, 0.3)};`
+          : ''
+      }
     `,
     hover: p => `
        background: ${lighten(p.theme.colors.wallet, 0.05)};
@@ -38,17 +46,20 @@ const buttonStyles: { [_: string]: Style } = {
     active: p => `
        background: ${darken(p.theme.colors.wallet, 0.1)};
      `,
-    focus: p => `
-      box-shadow:
-        0 0 0 1px ${darken(p.theme.colors.wallet, 0.3)} inset,
-        0 0 0 1px ${rgba(p.theme.colors.wallet, 0.5)},
-        0 0 0 4px ${rgba(p.theme.colors.wallet, 0.3)};
-    `,
   },
   danger: {
     default: p => `
       background: ${p.disabled ? `${p.theme.colors.lightFog} !important` : p.theme.colors.alertRed};
       color: ${p.disabled ? p.theme.colors.grey : p.theme.colors.white};
+      box-shadow: ${
+        p.isFocused
+          ? `
+          0 0 0 1px ${darken(p.theme.colors.alertRed, 0.3)} inset,
+          0 0 0 1px ${rgba(p.theme.colors.alertRed, 0.5)},
+          0 0 0 4px ${rgba(p.theme.colors.alertRed, 0.3)};
+        `
+          : ''
+      }
     `,
     hover: p => `
       background: ${lighten(p.theme.colors.alertRed, 0.1)};
@@ -56,12 +67,6 @@ const buttonStyles: { [_: string]: Style } = {
     active: p => `
       background: ${darken(p.theme.colors.alertRed, 0.1)};
      `,
-    focus: p => `
-      box-shadow:
-        0 0 0 1px ${darken(p.theme.colors.alertRed, 0.3)} inset,
-        0 0 0 1px ${rgba(p.theme.colors.alertRed, 0.5)},
-        0 0 0 4px ${rgba(p.theme.colors.alertRed, 0.3)};
-    `,
   },
   outline: {
     default: p => `
@@ -114,16 +119,20 @@ const buttonStyles: { [_: string]: Style } = {
 
 function getStyles(props, state) {
   let output = ``
-  const defaultStyle = buttonStyles.default[state]
-  if (defaultStyle) {
-    output += defaultStyle(props) || ''
-  }
+  let hasModifier = false
   for (const s in buttonStyles) {
     if (buttonStyles.hasOwnProperty(s) && props[s] === true) {
       const style = buttonStyles[s][state]
       if (style) {
+        hasModifier = true
         output += style(props)
       }
+    }
+  }
+  if (!hasModifier) {
+    const defaultStyle = buttonStyles.default[state]
+    if (defaultStyle) {
+      output += defaultStyle(props) || ''
     }
   }
   return output
@@ -176,34 +185,59 @@ type Props = {
   eventProperties?: Object,
 }
 
-const Button = (props: Props) => {
-  const { disabled } = props
-  const { onClick, children, isLoading, event, eventProperties, ...rest } = props
-  const isClickDisabled = disabled || isLoading
-  const onClickHandler = e => {
-    if (onClick) {
-      if (event) {
-        track(event, eventProperties)
-      }
-      onClick(e)
+class Button extends PureComponent<
+  Props,
+  {
+    isFocused: boolean,
+  },
+> {
+  static defaultProps = {
+    onClick: noop,
+    primary: false,
+    small: false,
+    padded: false,
+    danger: false,
+  }
+
+  state = {
+    isFocused: false,
+  }
+
+  handleFocus = () => {
+    if (isGlobalTabEnabled()) {
+      this.setState({ isFocused: true })
     }
   }
-  return (
-    <Base {...rest} onClick={isClickDisabled ? undefined : onClickHandler}>
-      {isLoading ? <Spinner size={16} /> : children}
-    </Base>
-  )
-}
 
-Button.defaultProps = {
-  children: undefined,
-  disabled: undefined,
-  icon: undefined,
-  onClick: noop,
-  primary: false,
-  small: false,
-  padded: false,
-  danger: false,
+  handleBlur = () => {
+    this.setState({ isFocused: false })
+  }
+
+  render() {
+    const { isFocused } = this.state
+    const { disabled } = this.props
+    const { onClick, children, isLoading, event, eventProperties, ...rest } = this.props
+    const isClickDisabled = disabled || isLoading
+    const onClickHandler = e => {
+      if (onClick) {
+        if (event) {
+          track(event, eventProperties)
+        }
+        onClick(e)
+      }
+    }
+    return (
+      <Base
+        {...rest}
+        onClick={isClickDisabled ? undefined : onClickHandler}
+        isFocused={isFocused}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+      >
+        {isLoading ? <Spinner size={16} /> : children}
+      </Base>
+    )
+  }
 }
 
 export default Button
