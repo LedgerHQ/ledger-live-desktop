@@ -5,6 +5,7 @@ import React from 'react'
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
 
+import GrowScroll from 'components/base/GrowScroll'
 import { Title, FixedTopContainer } from '../../helperComponents'
 import OnboardingFooter from '../../OnboardingFooter'
 import SelectPINnano from './SelectPINnano'
@@ -19,27 +20,29 @@ export default (props: StepProps) => {
 
   return (
     <FixedTopContainer>
-      <TrackPage
-        category="Onboarding"
-        name="Choose PIN"
-        flowType={onboarding.flowType}
-        deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
-      />
-      {onboarding.flowType === 'restoreDevice' ? (
-        <Box grow alignItems="center">
-          <Title>{t('onboarding:selectPIN.restore.title')}</Title>
-          <Box align="center" mt={7}>
-            {onboarding.isLedgerNano ? <SelectPINrestoreNano /> : <SelectPINrestoreBlue />}
+      <GrowScroll pb={7}>
+        <TrackPage
+          category="Onboarding"
+          name="Choose PIN"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
+        {onboarding.flowType === 'restoreDevice' ? (
+          <Box grow alignItems="center">
+            <Title>{t('onboarding:selectPIN.restore.title')}</Title>
+            <Box align="center" mt={7}>
+              {onboarding.isLedgerNano ? <SelectPINrestoreNano /> : <SelectPINrestoreBlue />}
+            </Box>
           </Box>
-        </Box>
-      ) : (
-        <Box grow alignItems="center">
-          <Title>{t('onboarding:selectPIN.initialize.title')}</Title>
-          <Box align="center" mt={7}>
-            {onboarding.isLedgerNano ? <SelectPINnano /> : <SelectPINblue />}
+        ) : (
+          <Box grow alignItems="center">
+            <Title>{t('onboarding:selectPIN.initialize.title')}</Title>
+            <Box align="center" mt={7}>
+              {onboarding.isLedgerNano ? <SelectPINnano /> : <SelectPINblue />}
+            </Box>
           </Box>
-        </Box>
-      )}
+        )}
+      </GrowScroll>
       <OnboardingFooter horizontal flow={2} t={t} nextStep={nextStep} prevStep={prevStep} />
     </FixedTopContainer>
   )
