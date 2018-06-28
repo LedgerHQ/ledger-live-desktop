@@ -104,7 +104,7 @@ class AppsList extends PureComponent<Props, State> {
         version => applicationsList.find(e => e.id === version.app).category !== 2,
       )
     }
-    return applicationsList
+    return compatibleAppVersionsList
   }
 
   async fetchAppList() {
