@@ -3,6 +3,7 @@
 import React from 'react'
 
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
 
 import OnboardingFooter from '../../OnboardingFooter'
 
@@ -17,6 +18,12 @@ export default (props: StepProps) => {
 
   return (
     <FixedTopContainer>
+      <TrackPage
+        category="Onboarding"
+        name="Recovery Phase"
+        flowType={onboarding.flowType}
+        deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+      />
       <Box grow alignItems="center">
         {onboarding.flowType === 'restoreDevice' ? (
           <WriteSeedRestore onboarding={onboarding} />

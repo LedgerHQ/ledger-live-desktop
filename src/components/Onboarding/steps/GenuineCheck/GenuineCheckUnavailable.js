@@ -11,6 +11,7 @@ import IconCross from 'icons/Cross'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
+import { track } from 'analytics/segment'
 
 import { OnboardingFooterWrapper } from '../../helperComponents'
 
@@ -29,7 +30,13 @@ export function GenuineCheckUnavailableFooter({
         {t('app:common.back')}
       </Button>
       <Box horizontal ml="auto">
-        <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
+        <Button
+          padded
+          disabled={false}
+          event="Onboarding Skip Genuine Check"
+          onClick={() => nextStep()}
+          mx={2}
+        >
           {t('app:common.skipThisStep')}
         </Button>
         <Button padded onClick={nextStep} disabled primary>
@@ -51,7 +58,18 @@ export function GenuineCheckUnavailableMessage({
 }) {
   return (
     <Box align="center" flow={1} color={colors.alertRed}>
-      <FakeLink ff="Open Sans|Regular" fontSize={4} underline onClick={handleOpenGenuineCheckModal}>
+      <FakeLink
+        ff="Open Sans|Regular"
+        fontSize={4}
+        underline
+        onClick={() => {
+          handleOpenGenuineCheckModal()
+          track('Genuine Check Retry', {
+            flowType: onboarding.flowType,
+            deviceType: onboarding.isLedgerNano ? 'Nano S' : 'Blue',
+          })
+        }}
+      >
         {t('app:common.retry')}
       </FakeLink>
       <Box horizontal justify="center">

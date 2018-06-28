@@ -5,6 +5,7 @@ import { shell } from 'electron'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
 import IconCart from 'icons/Cart'
 import IconTruck from 'icons/Truck'
 import IconInfoCircle from 'icons/InfoCircle'
@@ -47,6 +48,7 @@ class NoDevice extends PureComponent<StepProps, *> {
 
     return (
       <Box sticky pt={130}>
+        <TrackPage category="Onboarding" name="No Device" />
         <Box grow alignItems="center">
           <LiveLogo
             style={{ width: 64, height: 64 }}

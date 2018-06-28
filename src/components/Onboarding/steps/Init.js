@@ -7,6 +7,7 @@ import { colors } from 'styles/theme'
 import styled from 'styled-components'
 import { flowType } from 'reducers/onboarding'
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
 import IconPlus from 'icons/Plus'
 import IconRecover from 'icons/Recover'
 import IconCheck from 'icons/Check'
@@ -64,6 +65,7 @@ class Init extends PureComponent<StepProps, *> {
 
     return (
       <Box sticky justifyContent="center">
+        <TrackPage category="Onboarding" name="Init" />
         <Box align="center">
           <LiveLogo
             style={{ width: 64, height: 64 }}
