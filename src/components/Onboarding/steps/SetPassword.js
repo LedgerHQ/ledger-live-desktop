@@ -135,7 +135,14 @@ class SetPassword extends PureComponent<StepProps, State> {
             {t('app:common.back')}
           </Button>
           <Box horizontal ml="auto">
-            <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
+            <Button
+              padded
+              event="Skip Password Onboarding"
+              onClick={() => nextStep()}
+              disabled={false}
+              onClick={() => nextStep()}
+              mx={2}
+            >
               {t('app:common.skipThisStep')}
             </Button>
             <Button

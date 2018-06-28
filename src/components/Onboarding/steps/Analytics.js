@@ -7,6 +7,7 @@ import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
 import TrackPage from 'analytics/TrackPage'
+import Track from 'analytics/Track'
 import { Title, Description, FixedTopContainer, StepContainerInner } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
@@ -68,6 +69,14 @@ class Analytics extends PureComponent<StepProps, State> {
                 <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
+                <Track
+                  onUpdate
+                  event={
+                    sentryLogsToggle
+                      ? 'Sentry Logs Enabled Onboarding'
+                      : 'Sentry Logs Disabled Onboarding'
+                  }
+                />
                 <CheckBox isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
               </Box>
             </Container>
@@ -77,6 +86,14 @@ class Analytics extends PureComponent<StepProps, State> {
                 <AnalyticsText>{t('onboarding:analytics.shareAnalytics.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
+                <Track
+                  onUpdate
+                  event={
+                    analyticsToggle
+                      ? 'Analytics Enabled Onboarding'
+                      : 'Analytics Disabled Onboarding'
+                  }
+                />
                 <CheckBox isChecked={analyticsToggle} onChange={this.handleAnalyticsToggle} />
               </Box>
             </Container>

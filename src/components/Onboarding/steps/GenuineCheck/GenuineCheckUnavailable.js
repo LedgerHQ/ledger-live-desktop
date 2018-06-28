@@ -36,7 +36,7 @@ export function GenuineCheckUnavailableFooter({
         <Button
           padded
           disabled={false}
-          event="Skip Genuine Check"
+          event="Skip Genuine Check Onboarding"
           onClick={() => nextStep()}
           mx={2}
         >

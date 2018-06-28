@@ -192,7 +192,10 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('app:settings.profile.analytics')}
             desc={t('app:settings.profile.analyticsDesc')}
           >
-            <Track onUpdate event={settings.sentryLogs ? 'SentryEnabled' : 'SentryDisabled'} />
+            <Track
+              onUpdate
+              event={settings.shareAnalytics ? 'AnalyticsEnabled' : 'AnalyticsDisabled'}
+            />
             <CheckBox
               isChecked={settings.shareAnalytics}
               onChange={shareAnalytics => saveSettings({ shareAnalytics })}
