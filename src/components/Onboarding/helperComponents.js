@@ -27,7 +27,7 @@ export const Description = styled(Box).attrs({
   color: 'grey',
 })`
   margin: 10px auto 25px;
-  max-width: 600px;
+  max-width: 640px;
 `
 
 export const Inner = styled(Box).attrs({
