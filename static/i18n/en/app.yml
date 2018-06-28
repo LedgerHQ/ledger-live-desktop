@@ -146,10 +146,11 @@ addAccounts:
     connectDevice: Connect device
     import: Select accounts
     finish: Confirmation
-  accountToImportSubtitle: Select existing accounts
-  accountToImportSubtitle_plural: 'Select ({{count}}) existing accounts'
-  selectAll: Select all
-  unselectAll: Deselect all
+  accountAlreadyImportedSubtitle: Already imported
+  accountToImportSubtitle: Import existing accounts
+  accountToImportSubtitle_plural: 'Select existing accounts'
+  selectAll: Select all ({{count}})
+  unselectAll: Deselect all ({{count}})
   editName: Edit name
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
@@ -157,11 +158,12 @@ addAccounts:
   success: Account added to your portfolio
 # success_plural: Accounts successfully added to your portfolio.
   createNewAccount:
-    title: Create new account
+    title: Create a new account
     noOperationOnLastAccount: 'You have to receive crypto assets on {{accountName}} before you can create a new account.'
     noAccountToCreate: No {{currencyName}} account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
+    addMore: 'Add more'
     add: 'Add account'
     add_plural: 'Add accounts'
 operationDetails:

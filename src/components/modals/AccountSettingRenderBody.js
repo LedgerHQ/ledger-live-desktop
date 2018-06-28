@@ -9,7 +9,8 @@ import { translate } from 'react-i18next'
 
 import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
-import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
+import { MODAL_SETTINGS_ACCOUNT, MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
+import { validateNameEdition } from 'helpers/accountName'
 
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
@@ -131,23 +132,18 @@ class HelperComp extends PureComponent<Props, State> {
 
     const { updateAccount, setDataModal } = this.props
     const { accountName, accountUnit, endpointConfig, endpointConfigError } = this.state
-    const sanitizedAccountName = accountName ? accountName.replace(/\s+/g, ' ').trim() : null
-
-    if (account.name || sanitizedAccountName) {
-      account = {
-        ...account,
-        unit: accountUnit || account.unit,
-        name: sanitizedAccountName || account.name,
-      }
-      if (endpointConfig && !endpointConfigError) {
-        account.endpointConfig = endpointConfig
-      }
-      updateAccount(account)
-      setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
-      onClose()
-    } else {
-      this.setState({ accountNameError: true })
+    const name = validateNameEdition(account, accountName)
+    account = {
+      ...account,
+      unit: accountUnit || account.unit,
+      name,
     }
+    if (endpointConfig && !endpointConfigError) {
+      account.endpointConfig = endpointConfig
+    }
+    updateAccount(account)
+    setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
+    onClose()
   }
 
   handleFocus = (e: any, name: string) => {
@@ -211,7 +207,7 @@ class HelperComp extends PureComponent<Props, State> {
               <Box>
                 <Input
                   value={account.name}
-                  maxLength={30}
+                  maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
                   renderLeft={<InputLeft currency={account.currency} />}
                   onFocus={e => this.handleFocus(e, 'accountName')}

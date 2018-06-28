@@ -9,17 +9,22 @@ import IconCheckCircle from 'icons/CheckCircle'
 
 import type { StepProps } from '../index'
 
-function StepFinish({ onCloseModal, t }: StepProps) {
+function StepFinish({ onCloseModal, onGoStep1, t }: StepProps) {
   return (
     <Box align="center" py={6}>
       <TrackPage category="AddAccounts" name="Step4" />
-      <Box color="positiveGreen" mb={4}>
+      <Box color="positiveGreen">
         <IconCheckCircle size={40} />
       </Box>
-      <Box mb={4}>{t('app:addAccounts.success')}</Box>
-      <Button primary onClick={onCloseModal}>
-        {t('app:common.close')}
-      </Button>
+      <Box p={4}>{t('app:addAccounts.success')}</Box>
+      <Box horizontal>
+        <Button mr={2} outline onClick={onGoStep1}>
+          {t('app:addAccounts.cta.addMore')}
+        </Button>
+        <Button primary onClick={onCloseModal}>
+          {t('app:common.close')}
+        </Button>
+      </Box>
     </Box>
   )
 }
