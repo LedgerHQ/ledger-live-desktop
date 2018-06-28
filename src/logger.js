@@ -17,6 +17,7 @@ import {
   DEBUG_TAB_KEY,
   DEBUG_LIBCORE,
   DEBUG_WS,
+  DEBUG_ANALYTICS,
 } from 'config/constants'
 
 const logs = []
@@ -24,11 +25,18 @@ const logs = []
 const MAX_LOG_LENGTH = 500
 const MAX_LOG_JSON_THRESHOLD = 2000
 
+const anonymousMode = !__DEV__
+
 function addLog(type, ...args) {
   logs.push({ type, date: new Date(), args })
   if (logs.length > MAX_LOG_LENGTH) {
     logs.shift()
   }
+}
+
+function anonymizeURL(url) {
+  if (!anonymousMode) return url
+  return url.replace(/\/addresses\/[^/]+/g, '/addresses/<HIDDEN>')
 }
 
 const makeSerializableLog = (o: mixed) => {
@@ -64,6 +72,7 @@ const logTabkey = !__DEV__ || DEBUG_TAB_KEY
 const logLibcore = !__DEV__ || DEBUG_LIBCORE
 const logWS = !__DEV__ || DEBUG_WS
 const logNetwork = !__DEV__ || DEBUG_NETWORK
+const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 
 export default {
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
@@ -87,10 +96,10 @@ export default {
     addLog('cmd', type, id, spentTime, data)
   },
 
-  onDB: (way: 'read' | 'write' | 'clear', name: string, obj: ?Object) => {
-    const msg = `📁  ${way} ${name}:`
+  onDB: (way: 'read' | 'write' | 'clear', name: string) => {
+    const msg = `📁  ${way} ${name}`
     if (logDb) {
-      console.log(msg, obj)
+      console.log(msg)
     }
     addLog('db', msg)
   },
@@ -131,7 +140,7 @@ export default {
   },
 
   network: ({ method, url }: { method: string, url: string }) => {
-    const log = `➡📡  ${method} ${url}`
+    const log = `➡📡  ${method} ${anonymizeURL(url)}`
     if (logNetwork) {
       console.log(log)
     }
@@ -149,7 +158,9 @@ export default {
     status: number,
     responseTime: number,
   }) => {
-    const log = `✔📡  HTTP ${status} ${method} ${url} – finished in ${responseTime.toFixed(0)}ms`
+    const log = `✔📡  HTTP ${status} ${method} ${anonymizeURL(
+      url,
+    )} – finished in ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
       console.log(log)
     }
@@ -169,9 +180,9 @@ export default {
     error: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  HTTP ${status} ${method} ${url} – ${error} – failed after ${responseTime.toFixed(
-      0,
-    )}ms`
+    const log = `✖📡  HTTP ${status} ${method} ${anonymizeURL(
+      url,
+    )} – ${error} – failed after ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
       console.log(log)
     }
@@ -187,11 +198,41 @@ export default {
     url: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  NETWORK DOWN – ${method} ${url} – after ${responseTime.toFixed(0)}ms`
+    const log = `✖📡  NETWORK DOWN – ${method} ${anonymizeURL(url)} – after ${responseTime.toFixed(
+      0,
+    )}ms`
     if (logNetwork) {
       console.log(log)
     }
     addLog('network-down', log)
+  },
+
+  analyticsStart: (id: string) => {
+    if (logAnalytics) {
+      console.log(`△ start() with user id ${id}`)
+    }
+    addLog('anaytics-start', id)
+  },
+
+  analyticsStop: () => {
+    if (logAnalytics) {
+      console.log(`△ stop()`)
+    }
+    addLog('anaytics-stop')
+  },
+
+  analyticsTrack: (event: string, properties: ?Object) => {
+    if (logAnalytics) {
+      console.log(`△ track ${event}`, properties)
+    }
+    addLog('anaytics-track', `${event}`)
+  },
+
+  analyticsPage: (category: string, name: ?string, properties: ?Object) => {
+    if (logAnalytics) {
+      console.log(`△ page ${category} ${name || ''}`, properties)
+    }
+    addLog('anaytics-page', `${category} ${name || ''}`)
   },
 
   // General functions in case the hooks don't apply

@@ -55,14 +55,14 @@ export default {
   get: (key: DBKey, defaults: any): any => {
     const db = store(key)
     const data = db.get('data', defaults)
-    logger.onDB('read', key, data)
+    logger.onDB('read', key)
     return middleware('get', key, data)
   },
 
   set: (key: DBKey, val: any) => {
     const db = store(key)
     val = middleware('set', key, val)
-    logger.onDB('write', key, val)
+    logger.onDB('write', key)
     db.set('data', val)
     return val
   },

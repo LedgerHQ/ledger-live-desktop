@@ -4,7 +4,6 @@ import uuid from 'uuid/v4'
 import logger from 'logger'
 import invariant from 'invariant'
 import user from 'helpers/user'
-import { DEBUG_ANALYTICS } from 'config/constants'
 import { langAndRegionSelector } from 'reducers/settings'
 import { getSystemLocale } from 'helpers/systemLocale'
 import { load } from './inject-in-window'
@@ -32,13 +31,14 @@ const getContext = store => {
 let storeInstance // is the redux store. it's also used as a flag to know if analytics is on or off.
 
 export const start = (store: *) => {
+  const { id } = user()
+  logger.analyticsStart(id)
   storeInstance = store
   const { analytics } = window
   if (typeof analytics === 'undefined') {
     logger.error('analytics is not available')
     return
   }
-  const { id } = user()
   load()
   analytics.identify(
     id,
@@ -47,12 +47,10 @@ export const start = (store: *) => {
       context: getContext(store),
     },
   )
-  if (DEBUG_ANALYTICS) {
-    logger.log(`analytics: start() with user id ${id}`)
-  }
 }
 
 export const stop = () => {
+  logger.analyticsStop()
   storeInstance = null
   const { analytics } = window
   if (typeof analytics === 'undefined') {
@@ -60,12 +58,10 @@ export const stop = () => {
     return
   }
   analytics.reset()
-  if (DEBUG_ANALYTICS) {
-    logger.log(`analytics: stop()`)
-  }
 }
 
 export const track = (event: string, properties: ?Object) => {
+  logger.analyticsTrack(event, properties)
   if (!storeInstance) {
     return
   }
@@ -77,12 +73,10 @@ export const track = (event: string, properties: ?Object) => {
   analytics.track(event, properties, {
     context: getContext(storeInstance),
   })
-  if (DEBUG_ANALYTICS) {
-    logger.log(`analytics: track(${event},`, properties)
-  }
 }
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
+  logger.analyticsPage(category, name, properties)
   if (!storeInstance) {
     return
   }
@@ -94,7 +88,4 @@ export const page = (category: string, name: ?string, properties: ?Object) => {
   analytics.page(category, name, properties, {
     context: getContext(storeInstance),
   })
-  if (DEBUG_ANALYTICS) {
-    logger.log(`analytics: page(${category}, ${name || ''},`, properties)
-  }
 }
