@@ -146,9 +146,9 @@ addAccounts:
     connectDevice: Connect device
     import: Select accounts
     finish: Confirmation
-  accountAlreadyImportedSubtitle: Already imported
-  accountToImportSubtitle: Import existing accounts
-  accountToImportSubtitle_plural: 'Select existing accounts'
+  accountAlreadyImportedSubtitle: Already in portfolio
+  accountToImportSubtitle: 'Select account'
+  accountToImportSubtitle_plural: 'Select accounts'
   selectAll: Select all ({{count}})
   unselectAll: Deselect all ({{count}})
   editName: Edit name
