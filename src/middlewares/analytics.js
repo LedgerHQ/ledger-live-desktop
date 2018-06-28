@@ -1,5 +1,5 @@
 import { shareAnalyticsSelector } from 'reducers/settings'
-import { start, stop, track } from 'analytics/segment'
+import { start, stop } from 'analytics/segment'
 
 let isAnalyticsStarted = false
 
