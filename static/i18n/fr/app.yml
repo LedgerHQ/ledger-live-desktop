@@ -184,13 +184,13 @@ manager:
     device: My device
   apps:
     install: Install
-    all: Apps
+    all: App catalog
     installing: 'Installing {{app}}...'
     uninstalling: 'Uninstalling {{app}}...'
     installSuccess: '{{app}} is now installed on your device'
     uninstallSuccess: '{{app}} has been uninstalled from your device'
     alreadyInstalled: '{{app}} is already installed on your device'
-    help: Remove and reinstall to update apps
+    help: Check on your device to see which apps are already installed
   firmware:
     installed: 'Firmware version {{version}}'
     update: Update firmware
@@ -201,7 +201,7 @@ manager:
     disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
     disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
   title: Manager
-  subtitle: Select apps to use on your device
+  subtitle: Install or uninstall apps on your device
   device:
     title: Connect your device
     desc: 'Follow the steps below to use the device Manager'
