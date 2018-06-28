@@ -275,6 +275,7 @@ class StepImport extends PureComponent<StepProps> {
               onToggleAccount={this.handleToggleAccount}
               setAccountName={setAccountName}
               editedNames={editedNames}
+              hideAmount
             />
           )}
           {scanStatus === 'scanning' ? (

@@ -24,6 +24,7 @@ class AccountsList extends Component<
     emptyText?: string,
     autoFocusFirstInput?: boolean,
     collapsible?: boolean,
+    hideAmount?: boolean,
     t: T,
   },
   {
@@ -57,6 +58,7 @@ class AccountsList extends Component<
       emptyText,
       autoFocusFirstInput,
       collapsible,
+      hideAmount,
       t,
     } = this.props
     const { collapsed } = this.state
@@ -106,6 +108,7 @@ class AccountsList extends Component<
                 isChecked={!checkedIds || checkedIds.find(id => id === account.id) !== undefined}
                 onToggleAccount={onToggleAccount}
                 onEditName={setAccountName}
+                hideAmount={hideAmount}
                 accountName={
                   typeof editedNames[account.id] === 'string'
                     ? editedNames[account.id]

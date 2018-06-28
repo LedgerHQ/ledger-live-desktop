@@ -21,6 +21,7 @@ type Props = {
   accountName: string,
   onToggleAccount?: (Account, boolean) => void,
   onEditName?: (Account, string) => void,
+  hideAmount?: boolean,
 }
 
 export default class AccountRow extends PureComponent<Props> {
@@ -59,7 +60,15 @@ export default class AccountRow extends PureComponent<Props> {
   _input = null
 
   render() {
-    const { account, isChecked, onEditName, accountName, isDisabled, autoFocusInput } = this.props
+    const {
+      account,
+      isChecked,
+      onEditName,
+      accountName,
+      isDisabled,
+      autoFocusInput,
+      hideAmount,
+    } = this.props
     return (
       <AccountRowContainer
         isDisabled={isDisabled}
@@ -84,13 +93,15 @@ export default class AccountRow extends PureComponent<Props> {
             <div style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{accountName}</div>
           )}
         </Box>
-        <FormattedVal
-          val={account.balance}
-          unit={account.unit}
-          showCode
-          fontSize={4}
-          color="grey"
-        />
+        {!hideAmount ? (
+          <FormattedVal
+            val={account.balance}
+            unit={account.unit}
+            showCode
+            fontSize={4}
+            color="grey"
+          />
+        ) : null}
         {!isDisabled ? (
           <Radio disabled isChecked={isChecked || !!isDisabled} />
         ) : (
