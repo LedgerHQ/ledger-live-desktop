@@ -194,7 +194,9 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                       <FormattedVal unit={unit} showCode val={fee} color="dark" />
                     </OpDetailsData>
                   </Fragment>
-                ) : null}
+                ) : (
+                  <OpDetailsData>{t('app:operationDetails.noFees')}</OpDetailsData>
+                )}
               </Box>
               <Box flex={1}>
                 <OpDetailsTitle>{t('app:operationDetails.status')}</OpDetailsTitle>
