@@ -7,6 +7,7 @@ import { colors } from 'styles/theme'
 import styled from 'styled-components'
 import { flowType } from 'reducers/onboarding'
 import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
 import TrackPage from 'analytics/TrackPage'
 import IconPlus from 'icons/Plus'
 import IconRecover from 'icons/Recover'
@@ -64,7 +65,7 @@ class Init extends PureComponent<StepProps, *> {
     ]
 
     return (
-      <Box sticky justifyContent="center">
+      <GrowScroll full justifyContent="center" py={7}>
         <TrackPage category="Onboarding" name="Init" />
         <Box align="center">
           <LiveLogo
@@ -78,7 +79,7 @@ class Init extends PureComponent<StepProps, *> {
             {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
           </Box>
         </Box>
-      </Box>
+      </GrowScroll>
     )
   }
 }
