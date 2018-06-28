@@ -85,7 +85,7 @@ class GenuineCheck extends PureComponent<Props> {
       .toPromise()
     const isGenuine = res === '0000'
     if (!isGenuine) {
-      return Promise.reject(new Error('Device not genuine')) // TODO: use custom error class
+      return Promise.reject(new DeviceNotGenuineError())
     }
     setDeviceGenuinity(device, true)
     return Promise.resolve(true)
@@ -142,11 +142,11 @@ class GenuineCheck extends PureComponent<Props> {
 
     return (
       <DeviceInteraction
+        {...props}
         waitBeforeSuccess={500}
         steps={steps}
         onSuccess={onSuccess}
         onFail={this.handleFail}
-        {...props}
       />
     )
   }
