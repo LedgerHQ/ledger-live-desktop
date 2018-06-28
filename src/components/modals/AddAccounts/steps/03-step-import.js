@@ -2,6 +2,7 @@
 
 import invariant from 'invariant'
 import styled from 'styled-components'
+import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
@@ -16,6 +17,7 @@ import AccountsList from 'components/base/AccountsList'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import TranslatedError from '../../../TranslatedError'
 import Spinner from '../../../base/Spinner'
+import Text from '../../../base/Text'
 
 import type { StepProps } from '../index'
 
@@ -249,11 +251,24 @@ class StepImport extends PureComponent<StepProps> {
               autoFocusFirstInput={importableAccounts.length === 0}
               title={t('app:addAccounts.createNewAccount.title')}
               emptyText={
-                alreadyEmptyAccount
-                  ? t('app:addAccounts.createNewAccount.noOperationOnLastAccount', {
-                      accountName: alreadyEmptyAccount.name,
-                    })
-                  : t('app:addAccounts.createNewAccount.noAccountToCreate', { currencyName })
+                alreadyEmptyAccount ? (
+                  <Trans
+                    i18nKey="app:addAccounts.createNewAccount.noOperationOnLastAccount"
+                    parent="div"
+                  >
+                    {' '}
+                    <Text ff="Open Sans|SemiBold" color="dark">
+                      {alreadyEmptyAccount.name}
+                    </Text>{' '}
+                  </Trans>
+                ) : (
+                  <Trans i18nKey="app:addAccounts.createNewAccount.noAccountToCreate" parent="div">
+                    {' '}
+                    <Text ff="Open Sans|SemiBold" color="dark">
+                      {currencyName}
+                    </Text>{' '}
+                  </Trans>
+                )
               }
               accounts={creatableAccounts}
               checkedIds={checkedAccountsIds}

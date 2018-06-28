@@ -159,8 +159,8 @@ addAccounts:
 # success_plural: Accounts successfully added to your portfolio.
   createNewAccount:
     title: Create a new account
-    noOperationOnLastAccount: 'You have to receive crypto assets on {{accountName}} before you can create a new account.'
-    noAccountToCreate: No {{currencyName}} account was found to create
+    noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
+    noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
     addMore: 'Add more'
