@@ -1,99 +1,127 @@
 // @flow
 
-import React from 'react'
-import styled from 'styled-components'
+import React, { Component } from 'react'
 import { translate } from 'react-i18next'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import Box from 'components/base/Box'
 import FakeLink from 'components/base/FakeLink'
-import Spinner from 'components/base/Spinner'
 import type { T } from 'types/common'
+import { SpoilerIcon } from '../Spoiler'
 
 import AccountRow from './AccountRow'
 
-const AccountsList = ({
-  accounts,
-  checkedIds,
-  onToggleAccount,
-  onUpdateAccount,
-  onSelectAll,
-  onUnselectAll,
-  isLoading,
-  title,
-  emptyText,
-  t,
-}: {
-  accounts: Account[],
-  checkedIds: string[],
-  onToggleAccount: Account => void,
-  onUpdateAccount: Account => void,
-  onSelectAll: () => void,
-  onUnselectAll: () => void,
-  isLoading?: boolean,
-  title?: string,
-  emptyText?: string,
-  t: T,
-}) => {
-  const withToggleAll = !!onSelectAll && !!onUnselectAll && accounts.length > 1
-  const isAllSelected = accounts.every(acc => !!checkedIds.find(id => acc.id === id))
-  return (
-    <Box flow={3}>
-      {(title || withToggleAll) && (
-        <Box horizontal align="center">
-          {title && (
-            <Box ff="Open Sans|Bold" color="dark" fontSize={2} textTransform="uppercase">
-              {title}
-            </Box>
-          )}
-          {withToggleAll && (
-            <FakeLink
-              ml="auto"
-              onClick={isAllSelected ? onUnselectAll : onSelectAll}
-              fontSize={3}
-              style={{ lineHeight: '10px' }}
-            >
-              {isAllSelected ? t('app:addAccounts.unselectAll') : t('app:addAccounts.selectAll')}
-            </FakeLink>
-          )}
-        </Box>
-      )}
-      {accounts.length || isLoading ? (
-        <Box flow={2}>
-          {accounts.map(account => (
-            <AccountRow
-              key={account.id}
-              account={account}
-              isChecked={checkedIds.find(id => id === account.id) !== undefined}
-              onClick={onToggleAccount}
-              onAccountUpdate={onUpdateAccount}
-              t={t}
-            />
-          ))}
-          {isLoading && (
-            <LoadingRow>
-              <Spinner color="grey" size={16} />
-            </LoadingRow>
-          )}
-        </Box>
-      ) : emptyText && !isLoading ? (
-        <Box ff="Open Sans|Regular" fontSize={3}>
-          {emptyText}
-        </Box>
-      ) : null}
-    </Box>
-  )
+class AccountsList extends Component<
+  {
+    accounts: Account[],
+    checkedIds?: string[],
+    editedNames: { [accountId: string]: string },
+    setAccountName?: (Account, string) => void,
+    onToggleAccount?: Account => void,
+    onSelectAll?: (Account[]) => void,
+    onUnselectAll?: (Account[]) => void,
+    title?: string,
+    emptyText?: string,
+    autoFocusFirstInput?: boolean,
+    collapsible?: boolean,
+    t: T,
+  },
+  {
+    collapsed: boolean,
+  },
+> {
+  state = {
+    collapsed: false,
+  }
+  toggleCollapse = () => {
+    this.setState(({ collapsed }) => ({ collapsed: !collapsed }))
+  }
+  onSelectAll = () => {
+    const { accounts, onSelectAll } = this.props
+    if (onSelectAll) onSelectAll(accounts)
+  }
+  onUnselectAll = () => {
+    const { accounts, onUnselectAll } = this.props
+    if (onUnselectAll) onUnselectAll(accounts)
+  }
+  render() {
+    const {
+      accounts,
+      checkedIds,
+      onToggleAccount,
+      editedNames,
+      setAccountName,
+      onSelectAll,
+      onUnselectAll,
+      title,
+      emptyText,
+      autoFocusFirstInput,
+      collapsible,
+      t,
+    } = this.props
+    const { collapsed } = this.state
+    const withToggleAll = !!onSelectAll && !!onUnselectAll && accounts.length > 1
+    const isAllSelected =
+      !checkedIds || accounts.every(acc => !!checkedIds.find(id => acc.id === id))
+    return (
+      <Box flow={3} mt={4}>
+        {(title || withToggleAll) && (
+          <Box horizontal align="center">
+            {title && (
+              <Box
+                horizontal
+                ff="Open Sans|Bold"
+                color="dark"
+                fontSize={2}
+                textTransform="uppercase"
+                cursor={collapsible ? 'pointer' : undefined}
+                onClick={collapsible ? this.toggleCollapse : undefined}
+              >
+                {collapsible ? <SpoilerIcon isOpened={!collapsed} mr={1} /> : null}
+                {title}
+              </Box>
+            )}
+            {withToggleAll && (
+              <FakeLink
+                ml="auto"
+                onClick={isAllSelected ? this.onUnselectAll : this.onSelectAll}
+                fontSize={3}
+                style={{ lineHeight: '10px' }}
+              >
+                {isAllSelected
+                  ? t('app:addAccounts.unselectAll', { count: accounts.length })
+                  : t('app:addAccounts.selectAll', { count: accounts.length })}
+              </FakeLink>
+            )}
+          </Box>
+        )}
+        {collapsed ? null : accounts.length ? (
+          <Box flow={2}>
+            {accounts.map((account, i) => (
+              <AccountRow
+                key={account.id}
+                account={account}
+                autoFocusInput={i === 0 && autoFocusFirstInput}
+                isDisabled={!onToggleAccount || !checkedIds}
+                isChecked={!checkedIds || checkedIds.find(id => id === account.id) !== undefined}
+                onToggleAccount={onToggleAccount}
+                onEditName={setAccountName}
+                accountName={
+                  typeof editedNames[account.id] === 'string'
+                    ? editedNames[account.id]
+                    : account.name
+                }
+              />
+            ))}
+          </Box>
+        ) : emptyText ? (
+          <Box ff="Open Sans|Regular" fontSize={3}>
+            {emptyText}
+          </Box>
+        ) : null}
+      </Box>
+    )
+  }
 }
-
-const LoadingRow = styled(Box).attrs({
-  horizontal: true,
-  borderRadius: 1,
-  px: 3,
-  align: 'center',
-  justify: 'center',
-})`
-  height: 48px;
-  border: 1px dashed ${p => p.theme.colors.grey};
-`
 
 export default translate()(AccountsList)

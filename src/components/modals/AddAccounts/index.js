@@ -23,6 +23,7 @@ import { closeModal } from 'reducers/modals'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
+import { validateNameEdition } from 'helpers/accountName'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
@@ -91,7 +92,9 @@ type State = {
   currency: ?Currency,
   scannedAccounts: Account[],
   checkedAccountsIds: string[],
+  editedNames: { [_: string]: string },
   err: ?Error,
+  reset: number,
 }
 
 export type StepProps = DefaultStepProps & {
@@ -104,12 +107,15 @@ export type StepProps = DefaultStepProps & {
   checkedAccountsIds: string[],
   scanStatus: ScanStatus,
   err: ?Error,
-  onClickAdd: void => Promise<void>,
-  onCloseModal: void => void,
-  resetScanState: void => void,
+  onClickAdd: () => Promise<void>,
+  onGoStep1: () => void,
+  onCloseModal: () => void,
+  resetScanState: () => void,
   setCurrency: (?Currency) => void,
   setAppOpened: boolean => void,
   setScanStatus: (ScanStatus, ?Error) => string,
+  setAccountName: (Account, string) => void,
+  editedNames: { [_: string]: string },
   setScannedAccounts: ({ scannedAccounts?: Account[], checkedAccountsIds?: string[] }) => void,
 }
 
@@ -129,8 +135,10 @@ const INITIAL_STATE = {
   currency: null,
   scannedAccounts: [],
   checkedAccountsIds: [],
+  editedNames: {},
   err: null,
   scanStatus: 'idle',
+  reset: 0,
 }
 
 class AddAccounts extends PureComponent<Props, State> {
@@ -139,15 +147,16 @@ class AddAccounts extends PureComponent<Props, State> {
 
   handleClickAdd = async () => {
     const { addAccount } = this.props
-    const { scannedAccounts, checkedAccountsIds } = this.state
+    const { scannedAccounts, checkedAccountsIds, editedNames } = this.state
     const accountsIdsMap = checkedAccountsIds.reduce((acc, cur) => {
       acc[cur] = true
       return acc
     }, {})
     const accountsToAdd = scannedAccounts.filter(account => accountsIdsMap[account.id] === true)
-    for (let i = 0; i < accountsToAdd.length; i++) {
+    for (const account of accountsToAdd) {
       await idleCallback()
-      addAccount(accountsToAdd[i])
+      const name = validateNameEdition(account, editedNames[account.id])
+      addAccount({ ...account, name })
     }
   }
 
@@ -158,6 +167,12 @@ class AddAccounts extends PureComponent<Props, State> {
 
   handleSetScanStatus = (scanStatus: string, err: ?Error = null) => {
     this.setState({ scanStatus, err })
+  }
+
+  handleSetAccountName = (account: Account, name: string) => {
+    this.setState(({ editedNames }) => ({
+      editedNames: { ...editedNames, [account.id]: name },
+    }))
   }
 
   handleSetScannedAccounts = ({
@@ -184,6 +199,10 @@ class AddAccounts extends PureComponent<Props, State> {
 
   handleSetAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
 
+  onGoStep1 = () => {
+    this.setState(({ reset }) => ({ ...INITIAL_STATE, reset: reset + 1 }))
+  }
+
   render() {
     const { t, device, existingAccounts } = this.props
     const {
@@ -194,9 +213,11 @@ class AddAccounts extends PureComponent<Props, State> {
       checkedAccountsIds,
       scanStatus,
       err,
+      editedNames,
+      reset,
     } = this.state
 
-    const addtionnalProps = {
+    const stepperProps = {
       currency,
       device,
       existingAccounts,
@@ -212,6 +233,9 @@ class AddAccounts extends PureComponent<Props, State> {
       setScannedAccounts: this.handleSetScannedAccounts,
       resetScanState: this.handleResetScanState,
       setAppOpened: this.handleSetAppOpened,
+      setAccountName: this.handleSetAccountName,
+      onGoStep1: this.onGoStep1,
+      editedNames,
     }
 
     return (
@@ -221,12 +245,13 @@ class AddAccounts extends PureComponent<Props, State> {
         onHide={() => this.setState({ ...INITIAL_STATE })}
         render={({ onClose }) => (
           <Stepper
+            key={reset} // THIS IS A HACK because stepper is not controllable. FIXME
             title={t('app:addAccounts.title')}
             initialStepId="chooseCurrency"
             onStepChange={this.handleStepChange}
             onClose={onClose}
             steps={this.STEPS}
-            {...addtionnalProps}
+            {...stepperProps}
           >
             <Track onUnmount event="CloseModalAddAccounts" />
             <SyncSkipUnderPriority priority={100} />

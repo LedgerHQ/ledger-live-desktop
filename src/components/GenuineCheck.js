@@ -5,13 +5,14 @@ import { timeout } from 'rxjs/operators/timeout'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate, Trans } from 'react-i18next'
+import { delay, createCancelablePolling } from 'helpers/promise'
 
+import logger from 'logger'
 import type { T, Device } from 'types/common'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
-import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT } from 'config/constants'
+import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT, GENUINE_CACHE_DELAY } from 'config/constants'
 
-import { createCancelablePolling } from 'helpers/promise'
 import { getCurrentDevice } from 'reducers/devices'
 import { createCustomErrorClass } from 'helpers/errors'
 
@@ -46,12 +47,7 @@ const mapStateToProps = state => ({
 const Bold = props => <Text ff="Open Sans|Bold" {...props} />
 
 // to speed up genuine check, cache result by device id
-const GENUINITY_CACHE = {}
-const getDeviceId = (device: Device) => device.path
-const setDeviceGenuinity = (device: Device, isGenuine: boolean) =>
-  (GENUINITY_CACHE[getDeviceId(device)] = isGenuine)
-const getDeviceGenuinity = (device: Device): ?boolean =>
-  GENUINITY_CACHE[getDeviceId(device)] || null
+const genuineDevices = new WeakSet()
 
 class GenuineCheck extends PureComponent<Props> {
   connectInteractionHandler = () =>
@@ -76,7 +72,9 @@ class GenuineCheck extends PureComponent<Props> {
     device: Device,
     deviceInfo: DeviceInfo,
   }) => {
-    if (getDeviceGenuinity(device) === true) {
+    if (genuineDevices.has(device)) {
+      logger.log("genuine was already checked. don't check again")
+      await delay(GENUINE_CACHE_DELAY)
       return true
     }
     const res = await getIsGenuine
@@ -85,10 +83,10 @@ class GenuineCheck extends PureComponent<Props> {
       .toPromise()
     const isGenuine = res === '0000'
     if (!isGenuine) {
-      return Promise.reject(new DeviceNotGenuineError())
+      throw new DeviceNotGenuineError()
     }
-    setDeviceGenuinity(device, true)
-    return Promise.resolve(true)
+    genuineDevices.add(device)
+    return true
   }
 
   handleFail = (err: Error) => {
