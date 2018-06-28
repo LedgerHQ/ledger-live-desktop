@@ -31,24 +31,32 @@ const nextConfetti = (mode: ?string) =>
         id: id++,
         shape: shapes[Math.floor(shapes.length * Math.random())],
         initialRotation: 360 * Math.random(),
-        initialYPercent: -0.15 * Math.random(),
+        initialYPercent: -0.04 + -0.25 * Math.random(),
         initialXPercent: 0.2 + 0.6 * Math.random(),
         initialScale: 1,
         rotations: 8 * Math.random() - 4,
-        delta: [(Math.random() - 0.5) * 600, 300 + 300 * Math.random()],
-        duration: 6000 + 5000 * Math.random(),
+        delta: [(Math.random() - 0.5) * 1500, 500 + 500 * Math.random()],
+        duration: 12000 + 8000 * Math.random(),
       }
 
 class ConfettiParty extends PureComponent<{ emit: boolean }, { confettis: Array<Object> }> {
   state = {
     // $FlowFixMe
-    confettis: Array(64)
+    confettis: Array(100)
       .fill(null)
       .map(nextConfetti),
   }
 
   componentDidMount() {
     this.setEmit(this.props.emit)
+    this.initialTimeout = setTimeout(() => {
+      clearInterval(this.initialInterval)
+    }, 10000)
+    this.initialInterval = setInterval(() => {
+      this.setState(({ confettis }) => ({
+        confettis: confettis.slice(confettis.length > 200 ? 1 : 0).concat(nextConfetti()),
+      }))
+    }, 100)
   }
 
   componentDidUpdate(prevProps: *) {
@@ -59,6 +67,8 @@ class ConfettiParty extends PureComponent<{ emit: boolean }, { confettis: Array<
 
   componentWillUnmount() {
     this.setEmit(false)
+    clearInterval(this.initialInterval)
+    clearTimeout(this.initialTimeout)
   }
 
   setEmit(on: boolean) {
@@ -73,6 +83,8 @@ class ConfettiParty extends PureComponent<{ emit: boolean }, { confettis: Array<
     }
   }
   interval: *
+  initialInterval: *
+  initialTimeout: *
 
   render() {
     const { confettis } = this.state
