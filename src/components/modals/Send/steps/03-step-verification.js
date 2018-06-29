@@ -59,7 +59,6 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
             }
             case 'broadcasted': {
               onOperationBroadcasted(e.operation)
-              transitionTo('confirmation')
               break
             }
             default:
