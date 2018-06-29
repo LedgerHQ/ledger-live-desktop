@@ -83,7 +83,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Ensure the <1><0>{{currency}}</0></1> app is installed and start receiving
+    desc: Make sure the <1><0>{{currency}}</0></1> app is installed and start receiving
     buttons:
       receiveFunds: Receive
   settings:
@@ -353,11 +353,12 @@ settings: # Always ensure descriptions carry full stops (.)
     version: Ledger Live version
     releaseNotesBtn: Show release notes # Close button instead of continue.
     faq: Ledger Support
-    faqDesc: A problem? Learn about Ledger Live, Ledger devices, supported crypto assets and apps.
+    faqDesc: A problem? Get help with Ledger Live, Ledger devices, supported crypto assets and apps.
     terms: Terms and conditions
     termsDesc: By using Ledger Live you are deemed to have accepted our terms and conditions.
     #privacy: Privacy policy
     #privacyDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
+    #privacyURL: 'https://www.ledgerwallet.com/privacy-policy'
   hardResetModal:
     title: Reset Ledger Live
     desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
