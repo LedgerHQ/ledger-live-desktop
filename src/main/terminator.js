@@ -15,7 +15,6 @@
 //                                           \  \       \ |     | /        /
 //                                            \  \      \        /
 
-let MAIN_PROCESS_PID: ?number = null
 let INTERNAL_PROCESS_PID: ?number = null
 
 function kill(processType, pid) {
@@ -23,10 +22,8 @@ function kill(processType, pid) {
   process.kill(pid, 'SIGTERM')
 }
 
-exports.setMainProcessPID = (pid: number) => (MAIN_PROCESS_PID = pid)
 exports.setInternalProcessPID = (pid: number) => (INTERNAL_PROCESS_PID = pid)
 
 exports.terminateAllTheThings = () => {
   if (INTERNAL_PROCESS_PID) kill('internal', INTERNAL_PROCESS_PID)
-  if (MAIN_PROCESS_PID) kill('main', MAIN_PROCESS_PID)
 }
