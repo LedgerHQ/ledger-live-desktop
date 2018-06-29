@@ -312,7 +312,7 @@ settings: # Always ensure descriptions carry full stops (.)
     region: Region
     regionDesc: Choose the region in which you’re located to set the Ledger Live's time zone.
     stock: Regional market indicator
-    stockDesc: Choose Western to display an increase in market value in blue. Choose Eastern to display an increase in market value in red.
+    stockDesc: Choose Western to display an increase in market value in green. Choose Eastern to display an increase in market value in red.
   currencies:
     desc: Select a crypto asset to edit its settings.
     exchange: Rate provider ({{ticker}})
