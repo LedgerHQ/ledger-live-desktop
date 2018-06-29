@@ -18,8 +18,8 @@ DisconnectedDevice:
   title: 'The device was disconnected.'
   description: ''
 Error:
-  title: 'Oops, an error occurred.'
-  description: '{{message}}'
+  title: '{{message}}'
+  description: 'Something went wrong. Please contact our support.'
 FeeEstimationFailed:
   title: 'Fee estimation error. Try again or set a custom fee (status: {{status}})'
   description: ''
