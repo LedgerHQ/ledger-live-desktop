@@ -1,129 +1,148 @@
 // @flow
 
-import logger from 'logger'
+import React, { PureComponent } from 'react'
 import invariant from 'invariant'
-import React, { Component } from 'react'
-import { translate } from 'react-i18next'
-import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
-
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
-import type { T, Device } from 'types/common'
-import type { WalletBridge } from 'bridge/types'
+
+import { createCustomErrorClass } from 'helpers/errors'
+import Track from 'analytics/Track'
+import { updateAccountWithUpdater } from 'actions/accounts'
+import { MODAL_SEND } from 'config/constants'
 import { getBridgeForCurrency } from 'bridge'
 
+import type { WalletBridge } from 'bridge/types'
+import type { T, Device } from 'types/common'
+import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
+
+import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
-import { updateAccountWithUpdater } from 'actions/accounts'
-import { createCustomErrorClass } from 'helpers/errors'
+import { closeModal, openModal } from 'reducers/modals'
 
-import { MODAL_SEND } from 'config/constants'
-import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
-import PollCounterValuesOnMount from 'components/PollCounterValuesOnMount'
-import Breadcrumb from 'components/Breadcrumb'
-import StepConnectDevice from 'components/modals/StepConnectDevice'
-import ChildSwitch from 'components/base/ChildSwitch'
+import Modal from 'components/base/Modal'
+import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
-import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
 
-import Footer from './Footer'
-import ConfirmationFooter from './ConfirmationFooter'
+import StepAmount, { StepAmountFooter } from './steps/01-step-amount'
+import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
+import StepVerification from './steps/03-step-verification'
+import StepConfirmation, { StepConfirmationFooter } from './steps/04-step-confirmation'
 
-import StepAmount from './01-step-amount'
-import StepVerification from './03-step-verification'
-import StepConfirmation from './04-step-confirmation'
-
-export const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice')
+const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice')
 
 type Props = {
-  updateAccountWithUpdater: (string, (Account) => Account) => void,
-  accounts: Account[],
   t: T,
+  device: ?Device,
+  accounts: Account[],
+  closeModal: string => void,
+  openModal: (string, any) => void,
+  updateAccountWithUpdater: (string, (Account) => Account) => void,
 }
 
-type State<T> = {
+type State<Transaction> = {
+  stepId: string,
   account: ?Account,
-  transaction: ?T,
-  bridge: ?WalletBridge<T>,
-  stepIndex: number,
-  appStatus: ?string,
-  deviceSelected: ?Device,
+  bridge: ?WalletBridge<Transaction>,
+  transaction: ?Transaction,
   optimisticOperation: ?Operation,
+  isAppOpened: boolean,
+  amount: number,
   error: ?Error,
 }
 
-type Step = {
-  label: string,
-  canNext: (State<*>) => boolean,
-  canPrev: (State<*>) => boolean,
-  canClose: (State<*>) => boolean,
-  hasError: (State<*>) => boolean,
-  prevStep?: number,
+export type StepProps<Transaction> = DefaultStepProps & {
+  device: ?Device,
+  account: ?Account,
+  bridge: ?WalletBridge<Transaction>,
+  transaction: ?Transaction,
+  error: ?Error,
+  optimisticOperation: ?Operation,
+  closeModal: void => void,
+  openModal: (string, any) => void,
+  isAppOpened: boolean,
+  onChangeAccount: (?Account) => void,
+  onChangeAppOpened: boolean => void,
+  onChangeTransaction: Transaction => void,
+  onTransactionError: Error => void,
+  onOperationBroadcasted: Operation => void,
+  onRetry: void => void,
+  signTransaction: ({ transitionTo: string => void }) => void,
 }
 
+const createSteps = ({ t }: { t: T }) => [
+  {
+    id: 'amount',
+    label: t('app:send.steps.amount.title'),
+    component: StepAmount,
+    footer: StepAmountFooter,
+  },
+  {
+    id: 'device',
+    label: t('app:send.steps.connectDevice.title'),
+    component: StepConnectDevice,
+    footer: StepConnectDeviceFooter,
+    onBack: ({ transitionTo }) => transitionTo('amount'),
+  },
+  {
+    id: 'verification',
+    label: t('app:send.steps.verification.title'),
+    component: StepVerification,
+    shouldPreventClose: true,
+  },
+  {
+    id: 'confirmation',
+    label: t('app:send.steps.confirmation.title'),
+    component: StepConfirmation,
+    footer: StepConfirmationFooter,
+    onBack: ({ transitionTo, onRetry }) => {
+      onRetry()
+      transitionTo('amount')
+    },
+  },
+]
+
 const mapStateToProps = createStructuredSelector({
+  device: getCurrentDevice,
   accounts: accountsSelector,
 })
 
 const mapDispatchToProps = {
+  closeModal,
+  openModal,
   updateAccountWithUpdater,
 }
 
 const INITIAL_STATE = {
-  stepIndex: 0,
-  appStatus: null,
-  deviceSelected: null,
-  optimisticOperation: null,
+  stepId: 'amount',
+  amount: 0,
   account: null,
   bridge: null,
   transaction: null,
   error: null,
+  optimisticOperation: null,
+  isAppOpened: false,
 }
 
-class SendModal extends Component<Props, State<*>> {
-  constructor({ t }: Props) {
-    super()
-    this.steps = [
-      {
-        label: t('app:send.steps.amount.title'),
-        canClose: () => true,
-        canPrev: () => false,
-        canNext: ({ bridge, account, transaction }) =>
-          bridge && account && transaction
-            ? bridge.isValidTransaction(account, transaction)
-            : false,
-        hasError: () => false,
-      },
-      {
-        label: t('app:send.steps.connectDevice.title'),
-        canClose: () => true,
-        canNext: ({ deviceSelected, appStatus }) =>
-          deviceSelected !== null && appStatus === 'success',
-        prevStep: 0,
-        canPrev: () => true,
-        hasError: () => false,
-      },
-      {
-        label: t('app:send.steps.verification.title'),
-        canClose: ({ error }) => !!error,
-        canNext: () => true,
-        canPrev: ({ error }) => !!error,
-        prevStep: 0,
-        hasError: ({ error }) => (error && error.name === 'UserRefusedOnDevice') || false,
-      },
-      {
-        label: t('app:send.steps.confirmation.title'),
-        prevStep: 0,
-        canClose: () => true,
-        canPrev: () => true,
-        canNext: () => false,
-        hasError: ({ error }) => (error && error.name !== 'UserRefusedOnDevice') || false,
-      },
-    ]
+class SendModal extends PureComponent<Props, State<*>> {
+  state = INITIAL_STATE
+
+  componentWillUnmount() {
+    if (this._signTransactionSub) {
+      this._signTransactionSub.unsubscribe()
+    }
   }
 
-  state = INITIAL_STATE
-  signTransactionSub: *
+  STEPS = createSteps({ t: this.props.t })
+  _signTransactionSub = null
+  _isUnmounted = false
+
+  handleReset = () => this.setState({ ...INITIAL_STATE })
+
+  handleCloseModal = () => this.props.closeModal(MODAL_SEND)
+  handleStepChange = step => this.setState({ stepId: step.id })
 
   handleBeforeOpenModal = ({ data }) => {
     const { account } = this.state
@@ -136,239 +155,127 @@ class SendModal extends Component<Props, State<*>> {
     }
   }
 
-  handleReset = () => {
-    const { signTransactionSub } = this
-    if (signTransactionSub) {
-      signTransactionSub.unsubscribe()
+  handleChangeAccount = (account: Account) => {
+    if (account !== this.state.account) {
+      const bridge = getBridgeForCurrency(account.currency)
+      const transaction = bridge.createTransaction(account)
+      this.setState({ account, bridge, transaction })
     }
-    this.setState(INITIAL_STATE)
   }
 
-  signTransaction = async () => {
-    const { deviceSelected, account, transaction, bridge } = this.state
-    invariant(
-      deviceSelected && account && transaction && bridge,
-      'signTransaction invalid conditions',
-    )
-    this.signTransactionSub = bridge
-      .signAndBroadcast(account, transaction, deviceSelected.path)
+  handleChangeAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
+  handleChangeTransaction = transaction => this.setState({ transaction })
+  handleRetry = () => {
+    this.setState({
+      error: null,
+      optimisticOperation: null,
+      isAppOpened: false,
+    })
+  }
+
+  handleTransactionError = (error: Error) => {
+    const stepVerificationIndex = this.STEPS.findIndex(step => step.id === 'verification')
+    if (stepVerificationIndex === -1) return
+    this.setState({ error })
+  }
+
+  handleOperationBroadcasted = (optimisticOperation: Operation) => {
+    const { account, bridge } = this.state
+    const { updateAccountWithUpdater } = this.props
+    if (!account || !bridge) return
+    const { addPendingOperation } = bridge
+    if (addPendingOperation) {
+      updateAccountWithUpdater(account.id, account =>
+        addPendingOperation(account, optimisticOperation),
+      )
+    }
+    this.setState({ optimisticOperation, error: null })
+  }
+
+  handleSignTransaction = async ({ transitionTo }: { transitionTo: string => void }) => {
+    const { device } = this.props
+    const { account, transaction, bridge } = this.state
+
+    invariant(device && account && transaction && bridge, 'signTransaction invalid conditions')
+
+    this._signTransactionSub = bridge
+      .signAndBroadcast(account, transaction, device.path)
       .subscribe({
         next: e => {
           switch (e.type) {
             case 'signed': {
-              this.onSigned()
+              if (this._isUnmounted) return
+              transitionTo('confirmation')
               break
             }
             case 'broadcasted': {
-              this.onOperationBroadcasted(e.operation)
+              this.handleOperationBroadcasted(e.operation)
               break
             }
             default:
           }
         },
-        error: error => {
-          this.onOperationError(error)
+        error: err => {
+          const error = err.statusCode === 0x6985 ? new UserRefusedOnDevice() : err
+          this.handleTransactionError(error)
+          transitionTo('confirmation')
         },
       })
   }
 
-  onNextStep = () =>
-    this.setState(state => {
-      let { stepIndex, error } = state
-      if (stepIndex >= this.steps.length - 1) {
-        return null
-      }
-      if (!this.steps[stepIndex].canNext(state)) {
-        logger.warn('tried to next step without a valid state!', state, stepIndex)
-        return null
-      }
-      stepIndex++
-      if (stepIndex < 2) {
-        error = null
-      } else if (stepIndex === 2) {
-        this.signTransaction()
-      }
-      return { stepIndex, error }
-    })
-
-  onChangeDevice = (deviceSelected: ?Device) => {
-    this.setState({ deviceSelected })
-  }
-
-  onChangeStatus = (deviceStatus: ?string, appStatus: ?string) => {
-    this.setState({ appStatus })
-  }
-
-  onPrevStep = () => {
-    const { stepIndex } = this.state
-    const step = this.steps[stepIndex]
-    if (step && 'prevStep' in step) {
-      this.setState({
-        appStatus: null,
-        deviceSelected: null,
-        error: null,
-        stepIndex: step.prevStep,
-      })
-    }
-  }
-
-  onSigned = () => {
-    this.setState({
-      stepIndex: 3,
-    })
-  }
-
-  onOperationBroadcasted = (optimisticOperation: Operation) => {
-    const { account, bridge } = this.state
-    if (!account || !bridge) return
-    const { addPendingOperation } = bridge
-    if (addPendingOperation) {
-      this.props.updateAccountWithUpdater(account.id, account =>
-        addPendingOperation(account, optimisticOperation),
-      )
-    }
-    this.setState({
-      optimisticOperation,
-      stepIndex: 3,
-      error: null,
-    })
-  }
-
-  onOperationError = (error: *) => {
-    this.setState({
-      error: error.statusCode === 0x6985 ? new UserRefusedOnDevice() : error,
-      stepIndex: 3,
-    })
-  }
-
-  onChangeAccount = account => {
-    const bridge = getBridgeForCurrency(account.currency)
-    this.setState({
-      account,
-      bridge,
-      transaction: bridge.createTransaction(account),
-    })
-  }
-
-  onChangeTransaction = transaction => {
-    this.setState({ transaction })
-  }
-
-  onGoToFirstStep = () => {
-    this.setState({ stepIndex: 0, error: null })
-  }
-
-  steps: Step[]
   render() {
-    const { t } = this.props
+    const { t, device, openModal } = this.props
     const {
-      stepIndex,
+      stepId,
       account,
-      transaction,
+      isAppOpened,
       bridge,
+      transaction,
       optimisticOperation,
-      deviceSelected,
       error,
     } = this.state
 
-    const step = this.steps[stepIndex]
-    if (!step) return null
+    const addtionnalProps = {
+      device,
+      account,
+      bridge,
+      transaction,
+      isAppOpened,
+      error,
+      optimisticOperation,
+      openModal,
+      closeModal: this.handleCloseModal,
+      onChangeAccount: this.handleChangeAccount,
+      onChangeAppOpened: this.handleChangeAppOpened,
+      onChangeTransaction: this.handleChangeTransaction,
+      onRetry: this.handleRetry,
+      signTransaction: this.handleSignTransaction,
+    }
 
-    const canClose = step.canClose(this.state)
-    const canNext = step.canNext(this.state)
-    const canPrev = step.canPrev(this.state)
+    const errorSteps = error ? [error instanceof UserRefusedOnDevice ? 2 : 3] : []
 
-    const stepsErrors = []
-    this.steps.forEach((s, i) => {
-      if (s.hasError(this.state)) {
-        stepsErrors.push(i)
-      }
-    })
+    const isModalLocked = stepId === 'verification'
 
     return (
       <Modal
         name={MODAL_SEND}
+        refocusWhenChange={stepId}
+        onHide={this.handleReset}
+        preventBackdropClick={isModalLocked}
         onBeforeOpen={this.handleBeforeOpenModal}
-        preventBackdropClick={!canClose}
-        onClose={canClose ? this.handleReset : undefined}
         render={({ onClose }) => (
-          <ModalBody onClose={canClose ? onClose : undefined}>
-            <PollCounterValuesOnMount />
-            <SyncSkipUnderPriority priority={80} />
-            {account && <SyncOneAccountOnMount priority={81} accountId={account.id} />}
-
-            <ModalTitle onBack={canPrev ? this.onPrevStep : undefined}>
-              {t('app:send.title')}
-            </ModalTitle>
-
-            <ModalContent>
-              <Breadcrumb
-                t={t}
-                mb={6}
-                currentStep={stepIndex}
-                stepsErrors={stepsErrors}
-                items={this.steps}
-              />
-
-              <ChildSwitch index={stepIndex}>
-                <StepAmount
-                  t={t}
-                  account={account}
-                  bridge={bridge}
-                  transaction={transaction}
-                  onChangeAccount={this.onChangeAccount}
-                  onChangeTransaction={this.onChangeTransaction}
-                />
-
-                <StepConnectDevice
-                  t={t}
-                  account={account}
-                  deviceSelected={deviceSelected}
-                  onChangeDevice={this.onChangeDevice}
-                  onStatusChange={this.onChangeStatus}
-                />
-
-                <StepVerification
-                  t={t}
-                  account={account}
-                  bridge={bridge}
-                  transaction={transaction}
-                  device={deviceSelected}
-                  onOperationBroadcasted={this.onOperationBroadcasted}
-                  onError={this.onOperationError}
-                  hasError={!!error}
-                />
-
-                <StepConfirmation t={t} optimisticOperation={optimisticOperation} error={error} />
-              </ChildSwitch>
-            </ModalContent>
-
-            {stepIndex === 3 ? (
-              <ConfirmationFooter
-                t={t}
-                error={error}
-                account={account}
-                optimisticOperation={optimisticOperation}
-                onClose={onClose}
-                onGoToFirstStep={this.onGoToFirstStep}
-              />
-            ) : (
-              account &&
-              bridge &&
-              transaction &&
-              stepIndex < 2 && (
-                <Footer
-                  canNext={canNext}
-                  onNext={this.onNextStep}
-                  account={account}
-                  bridge={bridge}
-                  transaction={transaction}
-                  showTotal={stepIndex === 0}
-                  t={t}
-                />
-              )
-            )}
-          </ModalBody>
+          <Stepper
+            title={t('app:send.title')}
+            initialStepId={stepId}
+            onStepChange={this.handleStepChange}
+            onClose={onClose}
+            steps={this.STEPS}
+            errorSteps={errorSteps}
+            {...addtionnalProps}
+          >
+            <SyncSkipUnderPriority priority={100} />
+            <Track onUnmount event="CloseModalSend" />
+          </Stepper>
         )}
       />
     )

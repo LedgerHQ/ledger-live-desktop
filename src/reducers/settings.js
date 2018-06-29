@@ -12,6 +12,7 @@ import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency, Account } from '@ledgerhq/live-common/lib/types'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
+import { getSystemLocale } from 'helpers/systemLocale'
 
 import type { CurrencySettings } from 'types/common'
 import type { State } from 'reducers'
@@ -31,7 +32,8 @@ export type SettingsState = {
   hasCompletedOnboarding: boolean,
   counterValue: string,
   counterValueExchange: ?string,
-  language: string,
+  language: ?string,
+  region: ?string,
   orderAccounts: string,
   password: {
     isEnabled: boolean,
@@ -42,20 +44,10 @@ export type SettingsState = {
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,
   },
-  region: string,
   developerMode: boolean,
   shareAnalytics: boolean,
   sentryLogs: boolean,
   lastUsedVersion: string,
-}
-
-/* have to check if available for all OS */
-const localeSplit = (window.navigator.language || '').split('-')
-let language = (localeSplit[0] || 'en').toLowerCase()
-let region = (localeSplit[1] || 'US').toUpperCase()
-if (!languages.includes(language)) {
-  language = 'en'
-  region = 'US'
 }
 
 const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
@@ -70,7 +62,8 @@ const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: 'USD',
   counterValueExchange: null,
-  language,
+  language: null,
+  region: null,
   orderAccounts: 'balance|asc',
   password: {
     isEnabled: false,
@@ -79,10 +72,9 @@ const INITIAL_STATE: SettingsState = {
   selectedTimeRange: 'month',
   marketIndicator: 'western',
   currenciesSettings: {},
-  region,
   developerMode: !!process.env.__DEV__,
   loaded: false,
-  shareAnalytics: false,
+  shareAnalytics: true,
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
 }
@@ -171,15 +163,27 @@ export const lastUsedVersionSelector = (state: State): string => state.settings.
 
 export const availableCurrencies = createSelector(developerModeSelector, listCryptoCurrencies)
 
-export const getLanguage = (state: State) => state.settings.language
-
-export const localeSelector = (state: State) => {
-  const { language, region } = state.settings
-  if (!region) {
-    return language || 'en'
+export const langAndRegionSelector = (state: State): { language: string, region: ?string } => {
+  let { language, region } = state.settings
+  if (language && languages.includes(language)) {
+    return { language, region }
   }
-  return `${language || 'en'}-${region}`
+  const locale = getSystemLocale()
+  language = locale.language
+  region = locale.region
+  if (!language || !languages.includes(language)) {
+    language = 'en'
+    region = 'US'
+  }
+  return { language, region }
 }
+
+export const languageSelector = createSelector(langAndRegionSelector, o => o.language)
+
+export const localeSelector = createSelector(
+  langAndRegionSelector,
+  ({ language, region }) => (region ? `${language}-${region}` : language),
+)
 
 export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 
@@ -217,6 +221,7 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
 
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsBooleanSelector = (state: State) => state.settings.sentryLogs
+export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
 
 export default handleActions(handlers, INITIAL_STATE)

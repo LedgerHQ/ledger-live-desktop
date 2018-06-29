@@ -27,7 +27,7 @@ export const Description = styled(Box).attrs({
   color: 'grey',
 })`
   margin: 10px auto 25px;
-  max-width: 600px;
+  max-width: 640px;
 `
 
 export const Inner = styled(Box).attrs({
@@ -52,17 +52,31 @@ export const OnboardingFooterWrapper = styled(Box).attrs({
   border-bottom-left-radius: ${radii[1]}px;
   border-bottom-right-radius: ${radii[1]}px;
 `
+// LIVE LOGO
+export function LiveLogo({ icon, ...p }: { icon: any }) {
+  return <LiveLogoContainer {...p}>{icon}</LiveLogoContainer>
+}
+export const LiveLogoContainer = styled(Box).attrs({
+  borderRadius: '50%',
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
+  background-color: white;
+  box-shadow: 0 2px 24px 0 #00000014;
+  width: ${p => (p.width ? p.width : 80)}
+  height: ${p => (p.height ? p.height : 80)}
+`
 
 // INSTRUCTION LIST
 type StepType = {
   icon: any,
-  desc: string,
+  desc: any,
 }
-export function OptionRow({ step }: { step: StepType }) {
+export function OptionRow({ step, ...p }: { step: StepType }) {
   const { icon, desc } = step
   return (
     <Box horizontal m="7px" style={{ minWidth: 420 }}>
-      <Box justify="center">{icon}</Box>
+      <Box {...p}>{icon}</Box>
       <Box justify="center" shrink>
         <OptionRowDesc>{desc}</OptionRowDesc>
       </Box>
@@ -91,12 +105,13 @@ export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any 
         <DisclaimerBoxIconContainer>
           <IconSensitiveOperationShield />
         </DisclaimerBoxIconContainer>
-        {disclaimerNotes.map(note => <OptionRow key={note.key} step={note} />)}
+        {disclaimerNotes.map(note => <OptionRow justify="center" key={note.key} step={note} />)}
       </Box>
     </DisclaimerBoxContainer>
   )
 }
 
+// Not enough styled as a warning
 const DisclaimerBoxContainer = styled(Box).attrs({
   shrink: 1,
   grow: true,
@@ -125,7 +140,10 @@ export const GenuineCheckCardWrapper = styled(Box).attrs({
   height: 74px;
   transition: all ease-in-out 0.2s;
   color: ${p => (p.isDisabled ? p.theme.colors.grey : p.theme.colors.black)};
-  border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
+  border: ${p =>
+    `1px ${p.isDisabled ? 'dashed' : 'solid'} ${
+      p.isError ? p.theme.colors.alertRed : p.theme.colors.fog
+    }`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
   opacity: ${p => (p.isDisabled ? 0.7 : 1)};

@@ -1,12 +1,13 @@
 // @flow
 import React, { PureComponent, Fragment } from 'react'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 import IconChevronRight from 'icons/ChevronRight'
 
 import {
@@ -35,7 +36,21 @@ class WriteSeedBlue extends PureComponent<Props, *> {
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.initialize.blue.step2'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding:writeSeed.initialize.blue.step2">
+              {'Tap'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Next'}
+              </Text>
+              {'to move to the next words. Repeat the process until the'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Confirmation'}
+              </Text>
+              {'screen appears.'}
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step3',

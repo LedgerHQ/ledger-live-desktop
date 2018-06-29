@@ -7,13 +7,15 @@ import { colors } from 'styles/theme'
 import styled from 'styled-components'
 import { flowType } from 'reducers/onboarding'
 import Box from 'components/base/Box'
+import GrowScroll from 'components/base/GrowScroll'
+import TrackPage from 'analytics/TrackPage'
 import IconPlus from 'icons/Plus'
 import IconRecover from 'icons/Recover'
 import IconCheck from 'icons/Check'
 import IconExternalLink from 'icons/ExternalLink'
 import IconChevronRight from 'icons/ChevronRight'
 import { i } from 'helpers/staticPath'
-import { Title } from '../helperComponents'
+import { Title, LiveLogo } from '../helperComponents'
 
 import type { StepProps } from '..'
 
@@ -63,11 +65,13 @@ class Init extends PureComponent<StepProps, *> {
     ]
 
     return (
-      <Box sticky justifyContent="center">
+      <GrowScroll full justifyContent="center" py={7}>
+        <TrackPage category="Onboarding" name="Init" />
         <Box align="center">
-          <Box color="wallet">
-            <img alt="" src={i('ledgerlive-logo.svg')} width={50} height={50} />
-          </Box>
+          <LiveLogo
+            style={{ width: 64, height: 64 }}
+            icon={<img src={i('ledgerlive-logo.svg')} alt="" width={40} height={40} />}
+          />
           <Box m={5} style={{ maxWidth: 480 }}>
             <Title>{t('onboarding:init.title')}</Title>
           </Box>
@@ -75,7 +79,7 @@ class Init extends PureComponent<StepProps, *> {
             {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
           </Box>
         </Box>
-      </Box>
+      </GrowScroll>
     )
   }
 }

@@ -9,7 +9,8 @@ import { translate } from 'react-i18next'
 
 import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
-import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
+import { MODAL_SETTINGS_ACCOUNT, MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
+import { validateNameEdition } from 'helpers/accountName'
 
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
@@ -131,23 +132,18 @@ class HelperComp extends PureComponent<Props, State> {
 
     const { updateAccount, setDataModal } = this.props
     const { accountName, accountUnit, endpointConfig, endpointConfigError } = this.state
-    const sanitizedAccountName = accountName ? accountName.replace(/\s+/g, ' ').trim() : null
-
-    if (account.name || sanitizedAccountName) {
-      account = {
-        ...account,
-        unit: accountUnit || account.unit,
-        name: sanitizedAccountName || account.name,
-      }
-      if (endpointConfig && !endpointConfigError) {
-        account.endpointConfig = endpointConfig
-      }
-      updateAccount(account)
-      setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
-      onClose()
-    } else {
-      this.setState({ accountNameError: true })
+    const name = validateNameEdition(account, accountName)
+    account = {
+      ...account,
+      unit: accountUnit || account.unit,
+      name,
     }
+    if (endpointConfig && !endpointConfigError) {
+      account.endpointConfig = endpointConfig
+    }
+    updateAccount(account)
+    setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
+    onClose()
   }
 
   handleFocus = (e: any, name: string) => {
@@ -210,10 +206,11 @@ class HelperComp extends PureComponent<Props, State> {
               </Box>
               <Box>
                 <Input
+                  autoFocus
+                  containerProps={{ style: { width: 230 } }}
                   value={account.name}
-                  maxLength={30}
+                  maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
-                  renderLeft={<InputLeft currency={account.currency} />}
                   onFocus={e => this.handleFocus(e, 'accountName')}
                   error={accountNameError && t('app:account.settings.accountName.error')}
                 />
@@ -224,7 +221,7 @@ class HelperComp extends PureComponent<Props, State> {
                 <OptionRowTitle>{t('app:account.settings.unit.title')}</OptionRowTitle>
                 <OptionRowDesc>{t('app:account.settings.unit.desc')}</OptionRowDesc>
               </Box>
-              <Box style={{ width: 180 }}>
+              <Box style={{ width: 230 }}>
                 <Select
                   onChange={this.handleChangeUnit}
                   getOptionValue={unitGetOptionValue}
@@ -258,7 +255,7 @@ class HelperComp extends PureComponent<Props, State> {
                 </Box>
               </Container>
             ) : null}
-            <Spoiler title={t('app:account.settings.advancedLogs')}>
+            <Spoiler textTransform title={t('app:account.settings.advancedLogs')}>
               <SyncAgo date={account.lastSyncDate} />
               <textarea
                 readOnly
@@ -278,10 +275,10 @@ class HelperComp extends PureComponent<Props, State> {
             </Spoiler>
           </ModalContent>
           <ModalFooter horizontal>
-            <Button small danger type="button" onClick={this.handleOpenRemoveAccountModal}>
+            <Button padded danger type="button" onClick={this.handleOpenRemoveAccountModal}>
               {t('app:common.delete')}
             </Button>
-            <Button small ml="auto" type="submit" primary>
+            <Button padded ml="auto" type="submit" primary>
               {t('app:common.apply')}
             </Button>
           </ModalFooter>

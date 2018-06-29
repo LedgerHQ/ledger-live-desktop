@@ -12,17 +12,17 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 
-const Container = styled(Box).attrs({
+export const Container = styled(Box).attrs({
   horizontal: true,
   my: 2,
   mx: 3,
   p: 4,
-  boxShadow: 0,
+  bg: 'white',
+  boxShadow: p => (p.noShadow ? -1 : 0),
   borderRadius: 4,
   flow: 2,
 })`
   width: calc(50% - 30px);
-  background: white;
   line-height: normal;
 `
 
@@ -63,10 +63,27 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
           {version}
         </Text>
       </Box>
-      <Button outline onClick={onInstall}>
+      <Button
+        outline
+        onClick={onInstall}
+        event={'Manager Install Click'}
+        eventProperties={{
+          appName: name,
+          appVersion: version,
+        }}
+      >
         {t('app:manager.apps.install')}
       </Button>
-      <Button outline onClick={onUninstall} outlineColor="grey">
+      <Button
+        outline
+        onClick={onUninstall}
+        event={'Manager Uninstall Click'}
+        eventProperties={{
+          appName: name,
+          appVersion: version,
+        }}
+        outlineColor="grey"
+      >
         <Trash size={16} fill="grey" />
       </Button>
     </Container>

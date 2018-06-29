@@ -7,6 +7,7 @@ import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import TrackPage from 'analytics/TrackPage'
 
 import AppsList from './AppsList'
 import FirmwareUpdate from './FirmwareUpdate'
@@ -19,6 +20,7 @@ type Props = {
 
 const Dashboard = ({ device, deviceInfo, t }: Props) => (
   <Box flow={4} pb={8}>
+    <TrackPage category="Manager" name="Dashboard" />
     <Box>
       <Text ff="Museo Sans|Regular" fontSize={7} color="black">
         {t('app:manager.title')}
@@ -31,12 +33,7 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
       <FirmwareUpdate deviceInfo={deviceInfo} device={device} />
     </Box>
     <Box mt={5}>
-      <AppsList
-        device={device}
-        targetId={deviceInfo.targetId}
-        provider={deviceInfo.providerId}
-        fullVersion={deviceInfo.fullVersion}
-      />
+      <AppsList device={device} deviceInfo={deviceInfo} />
     </Box>
   </Box>
 )

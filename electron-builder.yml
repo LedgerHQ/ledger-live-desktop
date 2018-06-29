@@ -27,6 +27,7 @@ linux:
 
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
+  icon: build/windows/app.ico
   certificateSubjectName: Ledger SAS
   certificateSha1: 7dd9acb2ef0402883c65901ebbafd06e5293d391
   signingHashAlgorithms:
@@ -45,6 +46,7 @@ nsis:
   allowToChangeInstallationDirectory: true
   installerIcon: build/windows/installer.ico
   installerSidebar: build/windows/installerSidebar.bmp
+  uninstallerIcon: build/windows/uninstaller.ico
   uninstallerSidebar: build/windows/uninstallerSidebar.bmp
 
 files:

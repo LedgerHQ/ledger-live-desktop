@@ -1,52 +1,46 @@
 // @flow
-/* eslint-disable react/jsx-no-literals */ // FIXME: remove
 
 import React, { PureComponent } from 'react'
+import invariant from 'invariant'
 
 import type { Device } from 'types/common'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
-import Workflow from 'components/Workflow'
-import WorkflowWithIcon from 'components/Workflow/WorkflowWithIcon'
 import Dashboard from './Dashboard'
-import FlashMcu from './FlashMcu'
 
-type Error = {
-  message: string,
-  stack: string,
+import ManagerGenuineCheck from './ManagerGenuineCheck'
+
+type Props = {}
+
+type State = {
+  isGenuine: ?boolean,
+  device: ?Device,
+  deviceInfo: ?DeviceInfo,
 }
 
-class ManagerPage extends PureComponent<*, *> {
+class ManagerPage extends PureComponent<Props, State> {
+  state = {
+    isGenuine: null,
+    device: null,
+    deviceInfo: null,
+  }
+
+  // prettier-ignore
+  handleSuccessGenuine = ({ device, deviceInfo }: { device: Device, deviceInfo: DeviceInfo }) => { // eslint-disable-line react/no-unused-prop-types
+    this.setState({ isGenuine: true, device, deviceInfo })
+  }
+
   render() {
-    return (
-      <Workflow
-        renderFinalUpdate={(device: Device, deviceInfo: DeviceInfo) => (
-          <p>UPDATE FINAL FIRMARE (TEMPLATE + ACTION WIP) {deviceInfo.isOSU}</p>
-        )}
-        renderMcuUpdate={(device: Device, deviceInfo: DeviceInfo) => (
-          <FlashMcu device={device} deviceInfo={deviceInfo} />
-        )}
-        renderDashboard={(device: Device, deviceInfo: DeviceInfo) => (
-          <Dashboard device={device} deviceInfo={deviceInfo} />
-        )}
-        renderDefault={(
-          device: ?Device,
-          deviceInfo: ?DeviceInfo,
-          isGenuine: ?boolean,
-          errors: {
-            dashboardError: ?Error,
-            genuineError: ?Error,
-          },
-        ) => (
-          <WorkflowWithIcon
-            device={device}
-            deviceInfo={deviceInfo}
-            errors={errors}
-            isGenuine={isGenuine}
-          />
-        )}
-      />
-    )
+    const { isGenuine, device, deviceInfo } = this.state
+
+    if (!isGenuine) {
+      return <ManagerGenuineCheck onSuccess={this.handleSuccessGenuine} />
+    }
+
+    invariant(device, 'Inexistant device considered genuine')
+    invariant(deviceInfo, 'Inexistant device infos for genuine device')
+
+    return <Dashboard device={device} deviceInfo={deviceInfo} />
   }
 }
 

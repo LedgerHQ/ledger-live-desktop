@@ -15,6 +15,8 @@ import hardReset from 'helpers/hardReset'
 import type { SettingsState } from 'reducers/settings'
 import type { T } from 'types/common'
 
+import Track from 'analytics/Track'
+import TrackPage from 'analytics/TrackPage'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import CheckBox from 'components/base/CheckBox'
 import Box from 'components/base/Box'
@@ -145,6 +147,7 @@ class TabProfile extends PureComponent<Props, State> {
     const isPasswordEnabled = settings.password.isEnabled === true
     return (
       <Section>
+        <TrackPage category="Settings" name="Profile" />
         <Header
           icon={<IconUser size={16} />}
           title={t('app:settings.tabs.profile')}
@@ -155,6 +158,7 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('app:settings.profile.password')}
             desc={t('app:settings.profile.passwordDesc')}
           >
+            <Track onUpdate event={isPasswordEnabled ? 'PasswordEnabled' : 'PasswordDisabled'} />
             <Box horizontal flow={2} align="center">
               {isPasswordEnabled && (
                 <Button onClick={this.handleOpenPasswordModal}>
@@ -165,18 +169,10 @@ class TabProfile extends PureComponent<Props, State> {
             </Box>
           </Row>
           <Row
-            title={t('app:settings.profile.developerMode')}
-            desc={t('app:settings.profile.developerModeDesc')}
-          >
-            <CheckBox
-              isChecked={settings.developerMode}
-              onChange={developerMode => saveSettings({ developerMode })}
-            />
-          </Row>
-          <Row
             title={t('app:settings.profile.reportErrors')}
             desc={t('app:settings.profile.reportErrorsDesc')}
           >
+            <Track onUpdate event={settings.sentryLogs ? 'SentryEnabled' : 'SentryDisabled'} />
             <CheckBox
               isChecked={settings.sentryLogs}
               onChange={sentryLogs => saveSettings({ sentryLogs })}
@@ -186,29 +182,43 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('app:settings.profile.analytics')}
             desc={t('app:settings.profile.analyticsDesc')}
           >
+            <Track
+              onUpdate
+              event={settings.shareAnalytics ? 'AnalyticsEnabled' : 'AnalyticsDisabled'}
+            />
             <CheckBox
               isChecked={settings.shareAnalytics}
               onChange={shareAnalytics => saveSettings({ shareAnalytics })}
             />
           </Row>
           <Row
+            title={t('app:settings.profile.developerMode')}
+            desc={t('app:settings.profile.developerModeDesc')}
+          >
+            <Track onUpdate event={settings.developerMode ? 'DevModeEnabled' : 'DevModeDisabled'} />
+            <CheckBox
+              isChecked={settings.developerMode}
+              onChange={developerMode => saveSettings({ developerMode })}
+            />
+          </Row>
+          <Row
             title={t('app:settings.profile.softResetTitle')}
             desc={t('app:settings.profile.softResetDesc')}
           >
-            <Button primary onClick={this.handleOpenSoftResetModal}>
+            <Button primary onClick={this.handleOpenSoftResetModal} event="ClearCacheIntent">
               {t('app:settings.profile.softReset')}
             </Button>
+          </Row>
+          <Row title={t('app:settings.exportLogs.title')} desc={t('app:settings.exportLogs.desc')}>
+            <ExportLogsBtn />
           </Row>
           <Row
             title={t('app:settings.profile.hardResetTitle')}
             desc={t('app:settings.profile.hardResetDesc')}
           >
-            <Button danger onClick={this.handleOpenHardResetModal}>
+            <Button danger onClick={this.handleOpenHardResetModal} event="HardResetIntent">
               {t('app:settings.profile.hardReset')}
             </Button>
-          </Row>
-          <Row title={t('app:settings.exportLogs.title')} desc={t('app:settings.exportLogs.desc')}>
-            <ExportLogsBtn />
           </Row>
         </Body>
 
@@ -230,6 +240,7 @@ class TabProfile extends PureComponent<Props, State> {
           onClose={this.handleCloseHardResetModal}
           onReject={this.handleCloseHardResetModal}
           onConfirm={this.handleHardReset}
+          confirmText={t('app:common.reset')}
           title={t('app:settings.hardResetModal.title')}
           desc={t('app:settings.hardResetModal.desc')}
           renderIcon={this.hardResetIconRender}

@@ -1,5 +1,9 @@
+// @flow
 import React, { PureComponent } from 'react'
 import Animated from 'animated/lib/targets/react-dom'
+import Easing from 'animated/lib/Easing'
+
+const easing = Easing.bezier(0.0, 0.3, 1, 1)
 
 class Confetti extends PureComponent<
   {
@@ -13,7 +17,7 @@ class Confetti extends PureComponent<
     delta: [number, number],
   },
   {
-    value: *,
+    progress: Animated.Value,
   },
 > {
   state = {
@@ -24,6 +28,7 @@ class Confetti extends PureComponent<
     Animated.timing(this.state.progress, {
       toValue: 1,
       duration,
+      easing,
     }).start()
   }
   render() {

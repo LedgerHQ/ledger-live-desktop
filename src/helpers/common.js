@@ -20,6 +20,7 @@ export type LedgerScriptParams = {
   version: string,
   icon: string,
   app?: number,
+  hash?: string,
 }
 
 /**
@@ -50,6 +51,16 @@ export async function getFirmwareInfo(transport: Transport<*>) {
       mcuVersion = mcuVersion.slice(0, mcuVersion.length - 1)
     }
     mcuVersion = mcuVersion.toString()
+
+    if (!seVersionLength) {
+      return {
+        targetId,
+        seVersion: '0.0.0',
+        flags: '',
+        mcuVersion: '',
+      }
+    }
+
     return { targetId, seVersion, flags, mcuVersion }
   } catch (err) {
     const error = new Error(err.message)

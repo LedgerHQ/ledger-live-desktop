@@ -41,16 +41,16 @@ class EmptyStateAccount extends PureComponent<Props, *> {
         />
         <Box mt={5} alignItems="center">
           <Title>{t('app:account.emptyState.title')}</Title>
-          <Description>
+          <Description mt={3} style={{ display: 'block' }}>
             <Trans i18nKey="app:account.emptyState.desc">
-              Make sure the
+              {'Make sure the'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {account.currency.name}
               </Text>
-              app is installed to receive funds.
+              {'app is installed to receive funds.'}
             </Trans>
           </Description>
-          <Button mt={3} padded primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
+          <Button mt={5} padded primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
             <Box horizontal flow={1} alignItems="center">
               <IconReceive size={12} />
               <Box>{t('app:account.emptyState.buttons.receiveFunds')}</Box>

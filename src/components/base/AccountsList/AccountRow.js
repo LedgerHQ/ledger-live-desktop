@@ -11,108 +11,102 @@ import Radio from 'components/base/Radio'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import FormattedVal from 'components/base/FormattedVal'
 import Input from 'components/base/Input'
-import IconEdit from 'icons/Edit'
-import IconCheck from 'icons/Check'
-import type { T } from 'types/common'
+import { MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
 
 type Props = {
   account: Account,
   isChecked: boolean,
   isDisabled?: boolean,
-  onClick: Account => void,
-  onAccountUpdate: Account => void,
-  t: T,
+  autoFocusInput?: boolean,
+  accountName: string,
+  onToggleAccount?: (Account, boolean) => void,
+  onEditName?: (Account, string) => void,
+  hideAmount?: boolean,
 }
 
-type State = {
-  isEditing: boolean,
-  accountNameCopy: string,
-}
-
-export default class AccountRow extends PureComponent<Props, State> {
-  state = {
-    isEditing: false,
-    accountNameCopy: '',
-  }
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    const startedEditing = !prevState.isEditing && this.state.isEditing
-    if (startedEditing) {
-      this._input && this._input.handleSelectEverything()
-    }
-  }
-
-  handleEditClick = (e: SyntheticEvent<any>) => {
-    this.handlePreventSubmit(e)
-    const { account } = this.props
-    this.setState({ isEditing: true, accountNameCopy: account.name })
-  }
-
-  handleSubmitName = (e: SyntheticEvent<any>) => {
-    this.handlePreventSubmit(e)
-    const { account, onAccountUpdate, isChecked, onClick } = this.props
-    const { accountNameCopy } = this.state
-    const updatedAccount = { ...account, name: accountNameCopy }
-    this.setState({ isEditing: false, accountNameCopy: '' })
-    onAccountUpdate(updatedAccount)
-    if (!isChecked) {
-      onClick(updatedAccount)
-    }
-  }
-
-  handlePreventSubmit = (e: SyntheticEvent<any>) => {
-    // prevent account row to be submitted
+export default class AccountRow extends PureComponent<Props> {
+  handlePreventSubmit = (e: SyntheticEvent<*>) => {
     e.preventDefault()
     e.stopPropagation()
   }
 
-  handleChangeName = (accountNameCopy: string) => this.setState({ accountNameCopy })
+  onToggleAccount = () => {
+    const { onToggleAccount, account, isChecked } = this.props
+    if (onToggleAccount) onToggleAccount(account, !isChecked)
+  }
 
-  handleReset = () => this.setState({ isEditing: false, accountNameCopy: '' })
+  handleChangeName = (name: string) => {
+    const { onEditName, account } = this.props
+    if (onEditName) onEditName(account, name)
+  }
+
+  onClickInput = (e: SyntheticEvent<*>) => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  onFocus = (e: *) => {
+    e.target.select()
+  }
+  onBlur = (e: *) => {
+    const { onEditName, account } = this.props
+    const { value } = e.target
+    if (!value && onEditName) {
+      // don't leave an empty input on blur
+      onEditName(account, account.name)
+    }
+  }
 
   _input = null
 
   render() {
-    const { account, isChecked, onClick, isDisabled, t } = this.props
-    const { isEditing, accountNameCopy } = this.state
-
+    const {
+      account,
+      isChecked,
+      onEditName,
+      accountName,
+      isDisabled,
+      autoFocusInput,
+      hideAmount,
+    } = this.props
     return (
-      <AccountRowContainer onClick={() => onClick(account)} isDisabled={isDisabled}>
+      <AccountRowContainer
+        isDisabled={isDisabled}
+        onClick={isDisabled ? null : this.onToggleAccount}
+      >
         <CryptoCurrencyIcon currency={account.currency} size={16} color={account.currency.color} />
         <Box shrink grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-          {isEditing ? (
+          {onEditName ? (
             <Input
-              containerProps={{ style: { width: 260 } }}
-              value={accountNameCopy}
+              containerProps={{ style: { width: 200 } }}
+              value={accountName}
               onChange={this.handleChangeName}
-              onClick={this.handlePreventSubmit}
-              onEnter={this.handleSubmitName}
-              onEsc={this.handleReset}
-              renderRight={
-                <InputRight onClick={this.handleSubmitName}>
-                  <IconCheck size={16} />
-                </InputRight>
-              }
-              ref={input => (this._input = input)}
+              onClick={this.onClickInput}
+              onEnter={this.handlePreventSubmit}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
+              maxLength={MAX_ACCOUNT_NAME_SIZE}
+              editInPlace
+              autoFocus={autoFocusInput}
             />
           ) : (
-            <div style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{account.name}</div>
+            <div style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{accountName}</div>
           )}
         </Box>
-        {!isEditing && (
-          <Edit onClick={this.handleEditClick}>
-            <IconEdit size={13} />
-            <span>{t('app:addAccounts.editName')}</span>
-          </Edit>
+        {!hideAmount ? (
+          <FormattedVal
+            val={account.balance}
+            unit={account.unit}
+            showCode
+            fontSize={4}
+            color="grey"
+          />
+        ) : null}
+        {!isDisabled ? (
+          <Radio disabled isChecked={isChecked || !!isDisabled} />
+        ) : (
+          <div style={{ width: 20 }} />
         )}
-        <FormattedVal
-          val={account.balance}
-          unit={account.unit}
-          showCode
-          fontSize={4}
-          color="grey"
-        />
-        <Radio disabled isChecked={isChecked || !!isDisabled} />
       </AccountRowContainer>
     )
   }
@@ -139,31 +133,4 @@ const AccountRowContainer = styled(Tabbable).attrs({
   &:active {
     background-color: ${p => darken(p.theme.colors.lightGrey, 0.03)};
   }
-`
-
-const Edit = styled(Box).attrs({
-  color: 'wallet',
-  fontSize: 3,
-  horizontal: true,
-  align: 'center',
-  flow: 1,
-  py: 1,
-})`
-  display: none;
-  ${AccountRowContainer}:hover & {
-    display: flex;
-  }
-  &:hover {
-    text-decoration: underline;
-  }
-`
-
-const InputRight = styled(Box).attrs({
-  bg: 'wallet',
-  color: 'white',
-  align: 'center',
-  justify: 'center',
-  shrink: 0,
-})`
-  width: 40px;
 `

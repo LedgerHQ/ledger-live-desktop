@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
+import uniq from 'lodash/uniq'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -26,6 +27,7 @@ import type { TimeRange } from 'reducers/settings'
 import { reorderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
+import TrackPage from 'analytics/TrackPage'
 import UpdateNotifier from 'components/UpdateNotifier'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
@@ -92,12 +94,20 @@ class DashboardPage extends PureComponent<Props> {
     const timeFrame = this.handleGreeting()
     const imagePath = i('empty-account-tile.svg')
     const totalAccounts = accounts.length
+    const totalCurrencies = uniq(accounts.map(a => a.currency.id)).length
+    const totalOperations = accounts.reduce((sum, a) => sum + a.operations.length, 0)
     const displayOperationsHelper = (account: Account) => account.operations.length > 0
     const displayOperations = accounts.some(displayOperationsHelper)
 
     return (
       <Fragment>
         <UpdateNotifier />
+        <TrackPage
+          category="Portfolio"
+          totalAccounts={totalAccounts}
+          totalOperations={totalOperations}
+          totalCurrencies={totalCurrencies}
+        />
         <Box flow={7}>
           {totalAccounts > 0 ? (
             <Fragment>
@@ -182,13 +192,17 @@ class DashboardPage extends PureComponent<Props> {
                               />
                             ) : (
                               <Wrapper>
-                                <img alt="" src={imagePath} />
+                                <Box mt={2}>
+                                  <img alt="" src={imagePath} />
+                                </Box>
                                 <Box
                                   ff="Open Sans"
                                   fontSize={3}
-                                  color="graphite"
+                                  color="grey"
                                   pb={2}
+                                  mt={3}
                                   textAlign="center"
+                                  style={{ maxWidth: 150 }}
                                 >
                                   {t('app:dashboard.emptyAccountTile.desc')}
                                 </Box>
@@ -237,4 +251,5 @@ const Wrapper = styled(Box).attrs({
 })`
   border: 1px dashed ${p => p.theme.colors.fog};
   border-radius: 4px;
+  height: 215px;
 `

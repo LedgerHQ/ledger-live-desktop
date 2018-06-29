@@ -116,6 +116,7 @@ ${error.stack}
           onClose={this.handleCloseHardResetModal}
           onReject={this.handleCloseHardResetModal}
           onConfirm={this.handleHardReset}
+          confirmText={t('app:common.reset')}
           title={t('app:settings.hardResetModal.title')}
           desc={t('app:settings.hardResetModal.desc')}
           renderIcon={this.hardResetIconRender}

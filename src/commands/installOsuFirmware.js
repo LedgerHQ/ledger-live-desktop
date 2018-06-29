@@ -6,12 +6,12 @@ import { fromPromise } from 'rxjs/observable/fromPromise'
 import { withDevice } from 'helpers/deviceAccess'
 import installOsuFirmware from 'helpers/firmware/installOsuFirmware'
 
-import type { LedgerScriptParams } from 'helpers/common'
+import type { Firmware } from 'components/modals/UpdateFirmware'
 
 type Input = {
   devicePath: string,
   targetId: string | number,
-  firmware: LedgerScriptParams,
+  firmware: Firmware,
 }
 
 type Result = *

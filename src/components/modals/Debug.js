@@ -7,7 +7,7 @@ import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Moda
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
-import EnsureDevice from 'components/Workflow/EnsureDevice'
+import EnsureDevice from 'components/EnsureDevice'
 import { getDerivations } from 'helpers/derivations'
 import getAddress from 'commands/getAddress'
 import testInterval from 'commands/testInterval'

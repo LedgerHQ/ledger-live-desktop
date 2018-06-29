@@ -1,6 +1,7 @@
 // @flow
 /* eslint-disable no-continue */
 
+// TODO we need to centralize the error in one place. so all are recorded
 const errorClasses = {}
 
 export const createCustomErrorClass = (name: string): Class<any> => {
@@ -21,7 +22,22 @@ export const createCustomErrorClass = (name: string): Class<any> => {
 // inspired from https://github.com/programble/errio/blob/master/index.js
 export const deserializeError = (object: mixed): Error => {
   if (typeof object === 'object' && object) {
-    const constructor = (typeof object.name === 'string' && errorClasses[object.name]) || Error
+    try {
+      // $FlowFixMe FIXME HACK
+      const msg = JSON.parse(object.message)
+      if (msg.message && msg.name) {
+        object = msg
+      }
+    } catch (e) {
+      // nothing
+    }
+    const constructor =
+      object.name === 'Error'
+        ? Error
+        : typeof object.name === 'string'
+          ? errorClasses[object.name] || createCustomErrorClass(object.name)
+          : Error
+
     const error = Object.create(constructor.prototype)
     for (const prop in object) {
       if (object.hasOwnProperty(prop)) {

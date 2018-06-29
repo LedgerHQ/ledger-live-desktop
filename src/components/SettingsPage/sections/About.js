@@ -14,6 +14,7 @@ import { Tabbable } from 'components/base/Box'
 
 import { openModal } from 'reducers/modals'
 import { MODAL_RELEASES_NOTES } from 'config/constants'
+import TrackPage from 'analytics/TrackPage'
 
 import {
   SettingsSection as Section,
@@ -39,12 +40,6 @@ const ITEMS = [
     url: 'https://support.ledgerwallet.com/hc/en-us',
   },
   {
-    key: 'contact',
-    title: t => t('app:settings.about.contactUs'),
-    desc: t => t('app:settings.about.contactUsDesc'),
-    url: 'https://support.ledgerwallet.com/hc/en-us/requests/new',
-  },
-  {
     key: 'terms',
     title: t => t('app:settings.about.terms'),
     desc: t => t('app:settings.about.termsDesc'),
@@ -61,6 +56,7 @@ class SectionAbout extends PureComponent<Props> {
 
     return (
       <Section>
+        <TrackPage category="Settings" name="About" />
         <Header
           icon={<IconHelp size={16} />}
           title={t('app:settings.tabs.about')}
@@ -103,9 +99,9 @@ class AboutRowItem extends PureComponent<{
     const { onClick, title, desc, url } = this.props
     const boundOnClick = () => onClick(url)
     return (
-      <Row onClick={boundOnClick} title={title} desc={desc}>
+      <Row title={title} desc={desc}>
         <Tabbable p={2} borderRadius={1} onClick={boundOnClick}>
-          <IconExternalLink size={16} />
+          <IconExternalLink style={{ cursor: 'pointer' }} size={16} />
         </Tabbable>
       </Row>
     )

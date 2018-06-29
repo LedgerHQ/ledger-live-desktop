@@ -10,6 +10,8 @@ import { rgba } from 'styles/helpers'
 import { isLedgerNano } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
+
 import IconCheckCirle from 'icons/Check'
 
 import { Title, Inner, FixedTopContainer, StepContainerInner } from '../helperComponents'
@@ -36,6 +38,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
     const { t, onboarding, jumpStep } = this.props
     return (
       <FixedTopContainer>
+        <TrackPage category="Onboarding" name="Select Device" flowType={onboarding.flowType} />
         <StepContainerInner>
           <Box mb={5}>
             <Title>{t('onboarding:selectDevice.title')}</Title>

@@ -13,7 +13,7 @@ import {
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 
-import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
 import SelectExchange from 'components/SelectExchange'
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
@@ -52,9 +52,9 @@ type Props = {
 
 type State = {
   cachedMarketIndicator: string,
-  cachedLanguageKey: string,
+  cachedLanguageKey: ?string,
   cachedCounterValue: ?Object,
-  cachedRegion: string,
+  cachedRegion: ?string,
 }
 
 class TabProfile extends PureComponent<Props, State> {
@@ -131,9 +131,12 @@ class TabProfile extends PureComponent<Props, State> {
     const counterValueCurrency = counterValueCurrencyLocalSelector(settings)
     const counterValueExchange = counterValueExchangeLocalSelector(settings)
 
-    const languages = languageKeys.map(key => ({ value: key, label: t(`language:${key}`) }))
-    const currentLanguage = languages.find(l => l.value === cachedLanguageKey)
+    const languages = [{ value: null, label: t(`language:system`) }].concat(
+      languageKeys.map(key => ({ value: key, label: t(`language:${key}`) })),
+    )
     const regionsFiltered = regions.filter(({ language }) => cachedLanguageKey === language)
+
+    const currentLanguage = languages.find(l => l.value === cachedLanguageKey)
     const currentRegion =
       regionsFiltered.find(({ region }) => cachedRegion === region) || regionsFiltered[0]
 
@@ -143,6 +146,7 @@ class TabProfile extends PureComponent<Props, State> {
 
     return (
       <Section>
+        <TrackPage category="Settings" name="Display" />
         <Header
           icon={<IconDisplay size={16} />}
           title={t('app:settings.tabs.display')}
@@ -153,16 +157,27 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('app:settings.display.counterValue')}
             desc={t('app:settings.display.counterValueDesc')}
           >
-            <Box flow={2}>
-              <Select
-                small
-                minWidth={250}
-                onChange={this.handleChangeCounterValue}
-                itemToString={item => (item ? item.name : '')}
-                renderSelected={item => item && item.name}
-                options={fiats}
-                value={cvOption}
-              />
+            <Select
+              small
+              minWidth={250}
+              onChange={this.handleChangeCounterValue}
+              itemToString={item => (item ? item.name : '')}
+              renderSelected={item => item && item.name}
+              options={fiats}
+              value={cvOption}
+            />
+          </Row>
+          {counterValueCurrency ? (
+            <Row
+              title={t('app:settings.display.exchange', {
+                ticker: counterValueCurrency.ticker,
+                fiat: counterValueCurrency.name,
+              })}
+              desc={t('app:settings.display.exchangeDesc', {
+                fiat: counterValueCurrency.name,
+                ticker: counterValueCurrency.ticker,
+              })}
+            >
               <SelectExchange
                 small
                 from={intermediaryCurrency}
@@ -171,8 +186,8 @@ class TabProfile extends PureComponent<Props, State> {
                 onChange={this.handleChangeExchange}
                 minWidth={200}
               />
-            </Box>
-          </Row>
+            </Row>
+          ) : null}
           <Row
             title={t('app:settings.display.language')}
             desc={t('app:settings.display.languageDesc')}
@@ -187,16 +202,21 @@ class TabProfile extends PureComponent<Props, State> {
               options={languages}
             />
           </Row>
-          <Row title={t('app:settings.display.region')} desc={t('app:settings.display.regionDesc')}>
-            <Select
-              small
-              minWidth={250}
-              onChange={this.handleChangeRegion}
-              renderSelected={item => item && item.name}
-              value={currentRegion}
-              options={regionsFiltered}
-            />
-          </Row>
+          {regionsFiltered.length === 0 ? null : (
+            <Row
+              title={t('app:settings.display.region')}
+              desc={t('app:settings.display.regionDesc')}
+            >
+              <Select
+                small
+                minWidth={250}
+                onChange={this.handleChangeRegion}
+                renderSelected={item => item && item.name}
+                value={currentRegion}
+                options={regionsFiltered}
+              />
+            </Row>
+          )}
           <Row title={t('app:settings.display.stock')} desc={t('app:settings.display.stockDesc')}>
             <RadioGroup
               items={this.getMarketIndicators()}

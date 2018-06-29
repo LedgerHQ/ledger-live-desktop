@@ -9,10 +9,12 @@ import { colors } from 'styles/theme'
 import { updateGenuineCheck } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
 
+import IconCross from 'icons/Cross'
 import IconCheck from 'icons/Check'
 
 import {
@@ -91,7 +93,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     }
   }
 
-  handleOpenGenuineCheckModal = () => this.setState({ isGenuineCheckModalOpened: true })
+  handleOpenGenuineCheckModal = () => {
+    this.setState({ isGenuineCheckModalOpened: true })
+  }
   handleCloseGenuineCheckModal = (cb?: Function) =>
     this.setState(
       state => ({ ...state, isGenuineCheckModalOpened: false }),
@@ -147,7 +151,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       redoGenuineCheck={this.redoGenuineCheck}
       contactSupport={this.contactSupport}
       t={this.props.t}
-      isLedgerNano={this.props.onboarding.isLedgerNano}
+      onboarding={this.props.onboarding}
     />
   )
 
@@ -161,6 +165,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
 
     return (
       <FixedTopContainer>
+        <TrackPage
+          category="Onboarding"
+          name="Genuine Check"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
         <StepContainerInner>
           <Title>{t('onboarding:genuineCheck.title')}</Title>
           {onboarding.flowType === 'restoreDevice' ? (
@@ -211,7 +221,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             </GenuineCheckCardWrapper>
           </Box>
           <Box mt={3}>
-            <GenuineCheckCardWrapper isDisabled={!genuine.recoveryStepPass}>
+            <GenuineCheckCardWrapper
+              isDisabled={!genuine.recoveryStepPass}
+              isError={genuine.genuineCheckUnavailable}
+            >
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
@@ -230,11 +243,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                       </Box>
                     </Box>
                   ) : genuine.genuineCheckUnavailable ? (
-                    <GenuineCheckUnavailableMessage
-                      handleOpenGenuineCheckModal={this.handleOpenGenuineCheckModal}
-                      onboarding={onboarding}
-                      t={t}
-                    />
+                    <Box color="alertRed">
+                      <IconCross size={16} />
+                    </Box>
                   ) : (
                     <Button
                       primary
@@ -247,6 +258,15 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 </Box>
               )}
             </GenuineCheckCardWrapper>
+            {genuine.genuineCheckUnavailable && (
+              <Box mt={4}>
+                <GenuineCheckUnavailableMessage
+                  handleOpenGenuineCheckModal={this.handleOpenGenuineCheckModal}
+                  onboarding={onboarding}
+                  t={t}
+                />
+              </Box>
+            )}
           </Box>
         </StepContainerInner>
         {genuine.genuineCheckUnavailable ? (
@@ -263,9 +283,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         <GenuineCheckModal
           isOpened={isGenuineCheckModalOpened}
           onClose={this.handleCloseGenuineCheckModal}
-          onGenuineCheckPass={this.handleGenuineCheckPass}
-          onGenuineCheckFailed={this.handleGenuineCheckFailed}
-          onGenuineCheckUnavailable={this.handleGenuineCheckUnavailable}
+          onSuccess={this.handleGenuineCheckPass}
+          onFail={this.handleGenuineCheckFailed}
+          onUnavailable={this.handleGenuineCheckUnavailable}
         />
       </FixedTopContainer>
     )

@@ -1,10 +1,11 @@
 // @flow
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 
 import type { T } from 'types/common'
 
@@ -29,7 +30,16 @@ class SelectPIN extends PureComponent<Props, *> {
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:selectPIN.initialize.instructions.blue.step2'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding:selectPIN.initialize.instructions.blue.step2">
+              {'Tap on'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Configure as new device'}
+              </Text>
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step3',

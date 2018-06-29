@@ -6,7 +6,7 @@ import type Transport from '@ledgerhq/hw-transport'
 import getBitcoinLikeInfo from '../devices/getBitcoinLikeInfo'
 import { createCustomErrorClass } from '../errors'
 
-const BtcUnmatchedApp = createCustomErrorClass('BtcUnmatchedApp')
+export const BtcUnmatchedApp = createCustomErrorClass('BtcUnmatchedApp')
 
 export default async (
   transport: Transport<*>,

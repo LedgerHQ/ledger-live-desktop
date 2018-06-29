@@ -15,13 +15,13 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           keys:
-            - v1-yarn-packages-{{ checksum "yarn.lock" }}
+            - v2-yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
           command: bash scripts/install-ci-deps.sh
       - save_cache:
           name: Save Yarn Package Cache
-          key: v1-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v2-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules/
       - run:

@@ -23,6 +23,7 @@ import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
 import Text from 'components/base/Text'
+import CopyWithFeedback from 'components/base/CopyWithFeedback'
 
 import { createStructuredSelector, createSelector } from 'reselect'
 import { accountSelector } from 'reducers/accounts'
@@ -43,14 +44,32 @@ const OpDetailsTitle = styled(Box).attrs({
   letter-spacing: 2px;
 `
 
+const GradientHover = styled(Box).attrs({
+  align: 'center',
+  color: 'wallet',
+})`
+  background: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding-left: 20px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff 20%);
+`
+
 const OpDetailsData = styled(Box).attrs({
   ff: 'Open Sans',
   color: 'smoke',
   fontSize: 4,
-})``
+  relative: true,
+})`
+  ${GradientHover} {
+    display: none;
+  }
 
-const CanSelect = styled.div`
-  user-select: text;
+  &:hover ${GradientHover} {
+    display: flex;
+  }
 `
 
 const B = styled(Bar).attrs({
@@ -127,6 +146,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               <Box my={4} alignItems="center">
                 <Box>
                   <FormattedVal
+                    color={amount < 0 ? 'smoke' : undefined}
                     unit={unit}
                     alwaysShowSign
                     showCode
@@ -163,14 +183,16 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                 {fee ? (
                   <Fragment>
                     <OpDetailsData>
-                      <FormattedVal unit={unit} showCode val={fee} color="dark" />
+                      <FormattedVal unit={unit} showCode val={fee} color="smoke" />
                     </OpDetailsData>
                   </Fragment>
-                ) : null}
+                ) : (
+                  <OpDetailsData>{t('app:operationDetails.noFees')}</OpDetailsData>
+                )}
               </Box>
               <Box flex={1}>
                 <OpDetailsTitle>{t('app:operationDetails.status')}</OpDetailsTitle>
-                <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal>
+                <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
                   <Box>
                     {isConfirmed
                       ? t('app:operationDetails.confirmed')
@@ -185,6 +207,9 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               <OpDetailsTitle>{t('app:operationDetails.identifier')}</OpDetailsTitle>
               <OpDetailsData>
                 <Ellipsis canSelect>{hash}</Ellipsis>
+                <GradientHover>
+                  <CopyWithFeedback text={hash} />
+                </GradientHover>
               </OpDetailsData>
             </Box>
             <B />
@@ -202,16 +227,13 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         <GradientBox />
       </ModalContent>
 
-      <ModalFooter horizontal justify="flex-end" flow={2}>
-        <Button padded onClick={onClose}>
-          {t('app:common.cancel')}
-        </Button>
-        {url ? (
+      {url && (
+        <ModalFooter horizontal justify="flex-end" flow={2}>
           <Button primary padded onClick={() => shell.openExternal(url)}>
             {t('app:operationDetails.viewOperation')}
           </Button>
-        ) : null}
-      </ModalFooter>
+        </ModalFooter>
+      )}
     </ModalBody>
   )
 })
@@ -262,11 +284,14 @@ export class Recipients extends Component<{ recipients: Array<*>, t: T }, *> {
     const shouldShowMore = recipients.length > 3
     return (
       <Box>
-        <OpDetailsData>
-          {(shouldShowMore ? recipients.slice(0, numToShow) : recipients).map(recipient => (
-            <CanSelect key={recipient}>{recipient}</CanSelect>
-          ))}
-        </OpDetailsData>
+        {(shouldShowMore ? recipients.slice(0, numToShow) : recipients).map(recipient => (
+          <OpDetailsData key={recipient}>
+            {recipient}
+            <GradientHover>
+              <CopyWithFeedback text={recipient} />
+            </GradientHover>
+          </OpDetailsData>
+        ))}
         {shouldShowMore &&
           !showMore && (
             <Box onClick={this.onClick} py={1}>
@@ -276,13 +301,10 @@ export class Recipients extends Component<{ recipients: Array<*>, t: T }, *> {
               </More>
             </Box>
           )}
-        {showMore && (
-          <OpDetailsData>
-            {recipients
-              .slice(numToShow)
-              .map(recipient => <CanSelect key={recipient}>{recipient}</CanSelect>)}
-          </OpDetailsData>
-        )}
+        {showMore &&
+          recipients
+            .slice(numToShow)
+            .map(recipient => <OpDetailsData key={recipient}>{recipient}</OpDetailsData>)}
         {shouldShowMore &&
           showMore && (
             <Box onClick={this.onClick} py={1}>

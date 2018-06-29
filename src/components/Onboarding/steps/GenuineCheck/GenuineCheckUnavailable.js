@@ -7,10 +7,11 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 
 import FakeLink from 'components/base/FakeLink'
-import IconCross from 'icons/Cross'
+import IconExclamationCircle from 'icons/ExclamationCircle'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
+import { track } from 'analytics/segment'
 
 import { OnboardingFooterWrapper } from '../../helperComponents'
 
@@ -29,7 +30,13 @@ export function GenuineCheckUnavailableFooter({
         {t('app:common.back')}
       </Button>
       <Box horizontal ml="auto">
-        <Button padded disabled={false} onClick={() => nextStep()} mx={2}>
+        <Button
+          padded
+          disabled={false}
+          event="Onboarding Skip Genuine Check"
+          onClick={() => nextStep()}
+          mx={2}
+        >
           {t('app:common.skipThisStep')}
         </Button>
         <Button padded onClick={nextStep} disabled primary>
@@ -50,18 +57,33 @@ export function GenuineCheckUnavailableMessage({
   onboarding: OnboardingState,
 }) {
   return (
-    <Box align="center" flow={1} color={colors.alertRed}>
-      <FakeLink ff="Open Sans|Regular" fontSize={4} underline onClick={handleOpenGenuineCheckModal}>
+    <Box
+      horizontal
+      align="center"
+      flow={2}
+      color={colors.alertRed}
+      ff="Open Sans|SemiBold"
+      fontSize={4}
+    >
+      <IconExclamationCircle size={16} />
+      <span>
+        <TranslatedError error={onboarding.genuine.genuineCheckUnavailable} />
+      </span>
+      <FakeLink
+        color="alertRed"
+        ff="Open Sans|SemiBold"
+        fontSize={4}
+        underline
+        onClick={() => {
+          handleOpenGenuineCheckModal()
+          track('Genuine Check Retry', {
+            flowType: onboarding.flowType,
+            deviceType: onboarding.isLedgerNano ? 'Nano S' : 'Blue',
+          })
+        }}
+      >
         {t('app:common.retry')}
       </FakeLink>
-      <Box horizontal justify="center">
-        <Box justifyContent="center">
-          <IconCross size={12} />
-        </Box>
-        <Box ff="Open Sans|Regular" style={{ maxWidth: 150 }} fontSize={2} ml={1}>
-          <TranslatedError error={onboarding.genuine.genuineCheckUnavailable} />
-        </Box>
-      </Box>
     </Box>
   )
 }

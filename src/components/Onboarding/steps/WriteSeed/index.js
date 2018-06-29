@@ -3,9 +3,11 @@
 import React from 'react'
 
 import Box from 'components/base/Box'
+import TrackPage from 'analytics/TrackPage'
+
+import GrowScroll from 'components/base/GrowScroll'
 
 import OnboardingFooter from '../../OnboardingFooter'
-
 import WriteSeedNano from './WriteSeedNano'
 import WriteSeedBlue from './WriteSeedBlue'
 import WriteSeedRestore from './WriteSeedRestore'
@@ -17,15 +19,23 @@ export default (props: StepProps) => {
 
   return (
     <FixedTopContainer>
-      <Box grow alignItems="center">
-        {onboarding.flowType === 'restoreDevice' ? (
-          <WriteSeedRestore onboarding={onboarding} />
-        ) : onboarding.isLedgerNano ? (
-          <WriteSeedNano />
-        ) : (
-          <WriteSeedBlue />
-        )}
-      </Box>
+      <GrowScroll pb={7}>
+        <TrackPage
+          category="Onboarding"
+          name="Recovery Phase"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
+        <Box grow alignItems="center">
+          {onboarding.flowType === 'restoreDevice' ? (
+            <WriteSeedRestore onboarding={onboarding} />
+          ) : onboarding.isLedgerNano ? (
+            <WriteSeedNano />
+          ) : (
+            <WriteSeedBlue />
+          )}
+        </Box>
+      </GrowScroll>
       <OnboardingFooter
         horizontal
         align="center"

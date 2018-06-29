@@ -1,20 +1,22 @@
 // @flow
 
-import React from 'react'
+import React, { Component } from 'react'
 import { shell } from 'electron'
 import styled from 'styled-components'
+import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ConfettiParty from 'components/ConfettiParty'
+import TrackPage from 'analytics/TrackPage'
 
-import IconCheckCircle from 'icons/CheckCircle'
+import IconCheckFull from 'icons/CheckFull'
 import IconSocialTwitter from 'icons/Twitter'
 import IconSocialReddit from 'icons/Reddit'
 import IconSocialGithub from 'icons/Github'
 
 import type { StepProps } from '..'
-import { Title, Description } from '../helperComponents'
+import { Title, Description, LiveLogo } from '../helperComponents'
 
 const ConfettiLayer = styled.div`
   position: absolute;
@@ -47,33 +49,69 @@ const socialMedia = [
   },
 ]
 
-export default (props: StepProps) => {
-  const { finish, t } = props
-  return (
-    <Box sticky justifyContent="center">
-      <ConfettiLayer>
-        <ConfettiParty />
-      </ConfettiLayer>
-      <Box alignItems="center">
-        <Box color="positiveGreen">
-          <IconCheckCircle size={44} />
-        </Box>
-        <Box pt={5} align="center" mb={5}>
-          <Title>{t('onboarding:finish.title')}</Title>
-          <Description>{t('onboarding:finish.desc')}</Description>
-        </Box>
-        <Button primary padded onClick={() => finish()}>
-          {t('onboarding:finish.openAppButton')}
-        </Button>
-        <Box alignItems="center" mt={7}>
-          <FollowUsDesc>{t('onboarding:finish.followUsLabel')}</FollowUsDesc>
-        </Box>
-        <Box horizontal mt={3} flow={5} color="grey">
-          {socialMedia.map(socMed => <SocialMediaBox key={socMed.key} socMed={socMed} />)}
+export default class Finish extends Component<StepProps, *> {
+  state = { emit: false }
+  onMouseUp = () => this.setState({ emit: false })
+  onMouseDown = () => {
+    this.setState({ emit: true })
+  }
+  onMouseLeave = () => {
+    this.setState({ emit: false })
+  }
+  render() {
+    const { finish, t, onboarding } = this.props
+    const { emit } = this.state
+    return (
+      <Box sticky justifyContent="center">
+        <TrackPage
+          category="Onboarding"
+          name="Finish"
+          flowType={onboarding.flowType}
+          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        />
+        <ConfettiLayer>
+          <ConfettiParty emit={emit} />
+        </ConfettiLayer>
+        <Box alignItems="center">
+          <Box
+            style={{ position: 'relative' }}
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
+            onMouseLeave={this.onMouseLeave}
+          >
+            <LiveLogo
+              style={{ width: 64, height: 64 }}
+              icon={
+                <img
+                  draggable="false"
+                  alt=""
+                  src={i('ledgerlive-logo.svg')}
+                  width={40}
+                  height={40}
+                />
+              }
+            />
+            <Box color="positiveGreen" style={{ position: 'absolute', right: 0, bottom: 0 }}>
+              <IconCheckFull size={18} />
+            </Box>
+          </Box>
+
+          <Box pt={5} align="center">
+            <Title>{t('onboarding:finish.title')}</Title>
+            <Description>{t('onboarding:finish.desc')}</Description>
+          </Box>
+          <Box p={5}>
+            <Button primary padded onClick={() => finish()}>
+              {t('onboarding:finish.openAppButton')}
+            </Button>
+          </Box>
+          <Box horizontal mt={3} flow={5} color="grey">
+            {socialMedia.map(socMed => <SocialMediaBox key={socMed.key} socMed={socMed} />)}
+          </Box>
         </Box>
       </Box>
-    </Box>
-  )
+    )
+  }
 }
 
 type SocMed = {
