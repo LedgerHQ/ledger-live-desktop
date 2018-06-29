@@ -47,7 +47,7 @@ function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
 export function StepConnectDeviceFooter({ t, transitionTo, isAppOpened }: StepProps) {
   return (
     <Button primary disabled={!isAppOpened} onClick={() => transitionTo('import')}>
-      {t('app:common.next')}
+      {t('app:common.continue')}
     </Button>
   )
 }

@@ -23,7 +23,7 @@ export default function StepAccount({ t, account, onChangeAccount }: StepProps) 
 export function StepAccountFooter({ t, transitionTo, account }: StepProps) {
   return (
     <Button disabled={!account} primary onClick={() => transitionTo('device')}>
-      {t('app:common.next')}
+      {t('app:common.continue')}
     </Button>
   )
 }

@@ -179,7 +179,7 @@ export class StepAmountFooter extends PureComponent<
           </Box>
         </Box>
         <Button disabled={!canBeSpent || !canNext} primary onClick={() => transitionTo('device')}>
-          {t('app:common.next')}
+          {t('app:common.continue')}
         </Button>
       </Fragment>
     )

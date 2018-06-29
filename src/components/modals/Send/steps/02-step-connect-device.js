@@ -24,7 +24,7 @@ export default function StepConnectDevice({ account, onChangeAppOpened }: StepPr
 export function StepConnectDeviceFooter({ t, transitionTo, isAppOpened }: StepProps<*>) {
   return (
     <Button disabled={!isAppOpened} primary onClick={() => transitionTo('verification')}>
-      {t('app:common.next')}
+      {t('app:common.continue')}
     </Button>
   )
 }
