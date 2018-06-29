@@ -14,7 +14,6 @@ import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 
 import TrackPage from 'analytics/TrackPage'
-import Box from 'components/base/Box'
 import SelectExchange from 'components/SelectExchange'
 import Select from 'components/base/Select'
 import RadioGroup from 'components/base/RadioGroup'
