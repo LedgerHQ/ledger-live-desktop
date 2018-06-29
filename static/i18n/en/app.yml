@@ -304,7 +304,7 @@ settings: # Always ensure descriptions carry full stops (.)
     profile: Profile
     about: Help
   display:
-    desc: Unneeded description # Remove this, it controls multiple settings tabs and is not required.
+    desc: Change settings that affect Ledger Live in general.
     language: Display language
     languageDesc: Set the language displayed in Ledger Live.
     counterValue: Countervalue

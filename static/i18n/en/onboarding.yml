@@ -71,7 +71,7 @@ writeSeed:
       step2: 'Press the right button to display <1><0>Word #2</0></1> and repeat the process until all 24 words are copied on the Recovery sheet.' #<italic>Recovery sheet</italic>
       step3: 'Confirm your recovery phrase: select each requested word and press both buttons to validate it.'
     blue:
-      step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order. # <i>Recovery sheet</i>
+      step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order.
       step2: Tap <1><0>Next</0></1> to move to the next words. Repeat the process until the <3><0>Confirmation</0></3> screen appears.
       step3: Type each requested word to confirm your recovery phrase.
   restore:

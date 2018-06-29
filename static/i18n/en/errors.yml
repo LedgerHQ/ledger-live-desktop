@@ -1,12 +1,12 @@
 # the error codes are alphabetically sorted
 BtcUnmatchedApp:
-  title: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
-  description: ''
+  title: 'Wrong device app'
+  description: 'Open the ‘{{currencyName}}’ app on your device'
 DeviceNotGenuine:
-  title: Device is not genuine
+  title: Device seems not genuine
   description: ''
 DeviceSocketFail:
-  title: Oops, device connection failed. Please try again. [device-fail]
+  title: Oops, device connection failed. Please try again.
   description: ''
 DeviceSocketNoBulkStatus:
   title: Oops, device connection failed. Please try again [bulk].
