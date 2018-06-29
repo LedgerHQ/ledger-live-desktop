@@ -55,19 +55,18 @@ export default function StepConfirmation({ t, optimisticOperation, error }: Step
     : error
       ? 'app:send.steps.confirmation.error'
       : 'app:send.steps.confirmation.pending'
+
+  const translatedErrTitle = error ? <TranslatedError error={error} /> || '' : ''
+  const translatedErrDesc = error ? <TranslatedError error={error} field="description" /> || '' : ''
   return (
     <Container>
       <TrackPage category="Send" name="Step4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
-      <Title>{t(`${tPrefix}.title`)}</Title>
+      <Title>{translatedErrTitle || t(`${tPrefix}.title`)}</Title>
       <Text style={{ userSelect: 'text' }} color="smoke">
-        {optimisticOperation ? (
-          multiline(t(`${tPrefix}.text`))
-        ) : error ? (
-          <TranslatedError error={error} />
-        ) : null}
+        {optimisticOperation ? multiline(t(`${tPrefix}.text`)) : error ? translatedErrDesc : null}
       </Text>
     </Container>
   )
