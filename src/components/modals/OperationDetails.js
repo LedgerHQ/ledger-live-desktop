@@ -243,16 +243,13 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         <GradientBox />
       </ModalContent>
 
-      <ModalFooter horizontal justify="flex-end" flow={2}>
-        <Button padded onClick={onClose}>
-          {t('app:common.cancel')}
-        </Button>
-        {url ? (
+      {url && (
+        <ModalFooter horizontal justify="flex-end" flow={2}>
           <Button primary padded onClick={() => shell.openExternal(url)}>
             {t('app:operationDetails.viewOperation')}
           </Button>
-        ) : null}
-      </ModalFooter>
+        </ModalFooter>
+      )}
     </ModalBody>
   )
 })

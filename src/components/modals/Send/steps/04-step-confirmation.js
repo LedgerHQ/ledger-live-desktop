@@ -1,10 +1,10 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import { shell } from 'electron'
 import styled from 'styled-components'
 import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
 
+import { MODAL_OPERATION_DETAILS } from 'config/constants'
 import { colors } from 'styles/theme'
 import { multiline } from 'styles/helpers'
 
@@ -83,6 +83,7 @@ export function StepConfirmationFooter({
   onRetry,
   optimisticOperation,
   error,
+  openModal,
   closeModal,
 }: StepProps<*>) {
   const url =
@@ -96,8 +97,13 @@ export function StepConfirmationFooter({
           <Button
             ml={2}
             onClick={() => {
-              shell.openExternal(url)
               closeModal()
+              if (account && optimisticOperation) {
+                openModal(MODAL_OPERATION_DETAILS, {
+                  operationId: optimisticOperation.id,
+                  accountId: account.id,
+                })
+              }
             }}
             primary
           >
