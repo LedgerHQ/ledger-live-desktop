@@ -1,50 +1,43 @@
 // @flow
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
-import type { T } from 'types/common'
+import type { T, Device } from 'types/common'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
-import Button from 'components/base/Button'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
 import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
 import type { LedgerScriptParams } from 'helpers/common'
 
-import StepOSUInstaller from './steps/01-step-osu-installer'
 import StepFullFirmwareInstall from './steps/01-step-install-full-firmware'
 import StepFlashMcu from './steps/02-step-flash-mcu'
 import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmation'
 
+export type Firmware = LedgerScriptParams & { shouldUpdateMcu: boolean }
+
 export type StepProps = DefaultStepProps & {
-  firmware: ?LedgerScriptParams,
+  firmware: Firmware,
   onCloseModal: () => void,
-  installOsuFirmware: () => void,
-  installFinalFirmware: () => void,
-  flashMcu: () => void,
+  installOsuFirmware: (device: Device) => void,
+  installFinalFirmware: (device: Device) => void,
+  flashMCU: (device: Device) => void,
 }
 
 type StepId = 'idCheck' | 'updateMCU' | 'finish'
 
-function DebugFooter({
-  transitionTo,
-  where,
-}: {
-  where: string,
-  transitionTo: (where: string) => void,
-}) {
-  return <Button onClick={() => transitionTo(where)}>{where}</Button>
-}
+const createSteps = ({ t, firmware }: { t: T, firmware: Firmware }): Array<*> => {
+  const updateStep = {
+    id: 'idCheck',
+    label: t('app:manager.modal.steps.idCheck'),
+    component: StepFullFirmwareInstall,
+    footer: null,
+    onBack: null,
+    hideFooter: true,
+  }
 
-const createSteps = ({
-  t,
-  firmware,
-}: {
-  t: T,
-  firmware: LedgerScriptParams & { shouldUpdateMcu: boolean },
-}): Array<*> => {
   const finalStep = {
     id: 'finish',
     label: t('app:addAccounts.breadcrumb.finish'),
@@ -54,58 +47,35 @@ const createSteps = ({
     hideFooter: false,
   }
 
-  if (firmware.shouldUpdateMcu) {
-    return [
-      {
-        id: 'idCheck',
-        label: t('app:manager.modal.steps.idCheck'),
-        component: StepOSUInstaller,
-        footer: ({ firmware, ...props }: StepProps) => (
-          <DebugFooter firmware={firmware} {...props} where="updateMCU" />
-        ),
-        onBack: null,
-        hideFooter: false,
-      },
-      {
-        id: 'updateMCU',
-        label: t('app:manager.modal.steps.updateMCU'),
-        component: StepFlashMcu,
-        footer: ({ firmware, ...props }: StepProps) => (
-          <Fragment>
-            <DebugFooter firmware={firmware} {...props} where="idCheck" />
-            <DebugFooter firmware={firmware} {...props} where="finish" />
-          </Fragment>
-        ),
-        onBack: null,
-        hideFooter: false,
-      },
-      finalStep,
-    ]
+  const mcuStep = {
+    id: 'updateMCU',
+    label: t('app:manager.modal.steps.updateMCU'),
+    component: StepFlashMcu,
+    footer: null,
+    onBack: null,
+    hideFooter: true,
   }
 
-  return [
-    {
-      id: 'idCheck',
-      label: t('app:manager.modal.steps.idCheck'),
-      component: StepFullFirmwareInstall,
-      footer: ({ firmware, ...props }: StepProps) => (
-        <DebugFooter firmware={firmware} {...props} where="finish" />
-      ),
-      onBack: null,
-      hideFooter: false,
-    },
-    finalStep,
-  ]
+  const steps = [updateStep]
+
+  if (firmware.shouldUpdateMcu) {
+    steps.push(mcuStep)
+  }
+
+  steps.push(finalStep)
+
+  return steps
 }
 
 type Props = {
   t: T,
   status: ModalStatus,
   onClose: () => void,
-  firmware: LedgerScriptParams & { shouldUpdateMcu: boolean },
-  installOsuFirmware: () => void,
-  installFinalFirmware: () => void,
-  flashMcu: () => void,
+  firmware: Firmware,
+  installOsuFirmware: (device: Device) => void,
+  installFinalFirmware: (device: Device) => void,
+  flashMCU: (device: Device) => void,
+  stepId: StepId | string,
 }
 
 type State = {
@@ -113,8 +83,12 @@ type State = {
 }
 
 class UpdateModal extends PureComponent<Props, State> {
-  state = {
+  static defaultProps = {
     stepId: 'idCheck',
+  }
+
+  state = {
+    stepId: this.props.stepId,
   }
 
   STEPS = createSteps({ t: this.props.t, firmware: this.props.firmware })

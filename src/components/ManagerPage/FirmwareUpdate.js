@@ -37,7 +37,6 @@ export type ModalStatus = 'closed' | 'disclaimer' | 'install' | 'error' | 'succe
 
 type Props = {
   t: T,
-  device: Device,
   deviceInfo: DeviceInfo,
 }
 
@@ -80,18 +79,15 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     }
   }
 
-  installOsuFirmware = async () => {
+  installOsuFirmware = async (device: Device) => {
     try {
       const { latestFirmware } = this.state
-      const {
-        deviceInfo,
-        device: { path: devicePath },
-      } = this.props
+      const { deviceInfo } = this.props
       invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
 
       this.setState({ modal: 'install' })
       const { success } = await installOsuFirmware
-        .send({ devicePath, firmware: latestFirmware, targetId: deviceInfo.targetId })
+        .send({ devicePath: device.path, firmware: latestFirmware, targetId: deviceInfo.targetId })
         .toPromise()
       return success
     } catch (err) {
@@ -100,9 +96,8 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     }
   }
 
-  installFinalFirmware = async () => {
+  installFinalFirmware = async (device: Device) => {
     try {
-      const { device } = this.props
       const { success } = await installFinalFirmware.send({ devicePath: device.path }).toPromise()
       return success
     } catch (err) {
@@ -111,8 +106,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     }
   }
 
-  flashMCU = async () => {
-    const { device } = this.props
+  flashMCU = async (device: Device) => {
     await installMcu.send({ devicePath: device.path }).toPromise()
   }
 

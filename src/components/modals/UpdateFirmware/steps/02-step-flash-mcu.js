@@ -64,7 +64,8 @@ class StepFlashMcu extends PureComponent<Props, State> {
   }
 
   componentWillUnmount() {
-    this._unsubConnect()
+    if (this._unsubConnect) this._unsubConnect()
+    if (this._unsubDeviceInfo) this._unsubDeviceInfo()
   }
 
   waitForDeviceInBootloader = () => {
@@ -86,14 +87,38 @@ class StepFlashMcu extends PureComponent<Props, State> {
     return promise
   }
 
-  install = async () => {
-    await this.waitForDeviceInBootloader()
-    const { flashMcu, installFinalFirmware, transitionTo } = this.props
-    this.setState({ installing: true })
-    await flashMcu()
-    const finalSuccess = await installFinalFirmware()
+  getDeviceInfo = () => {
+    const { unsubscribe, promise } = createCancelablePolling(async () => {
+      const { device } = this.props
+      if (!device) {
+        throw new Error('No device')
+      }
+      const deviceInfo = await getDeviceInfo
+        .send({ devicePath: device.path })
+        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
+        .toPromise()
+      return { device, deviceInfo }
+    })
+    this._unsubDeviceInfo = unsubscribe
+    return promise
+  }
 
-    if (finalSuccess) {
+  flash = async () => {
+    await this.waitForDeviceInBootloader()
+    const { flashMCU, device } = this.props
+    if (device) {
+      this.setState({ installing: true })
+      await flashMCU(device)
+    }
+  }
+
+  install = async () => {
+    const { transitionTo } = this.props
+    this.flash()
+    const deviceInfo = await this.getDeviceInfo()
+    if (deviceInfo.isBootloader) {
+      this.flash()
+    } else {
       transitionTo('finish')
     }
   }
@@ -140,6 +165,7 @@ class StepFlashMcu extends PureComponent<Props, State> {
   }
 
   _unsubConnect: *
+  _unsubDeviceInfo: *
 
   render() {
     const { t } = this.props

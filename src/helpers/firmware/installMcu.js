@@ -9,7 +9,8 @@ import getDeviceInfo from 'helpers/devices/getDeviceInfo'
 type Result = Promise<*>
 
 export default async (transport: Transport<*>): Result => {
-  const { seVersion: version, targetId } = await getDeviceInfo(transport)
+  const deviceInfo = await getDeviceInfo(transport)
+  const { seVersion: version, targetId } = deviceInfo
   const nextVersion = await getNextMCU(version)
   const params = {
     targetId,
