@@ -49,7 +49,6 @@ type State<Transaction> = {
   transaction: ?Transaction,
   optimisticOperation: ?Operation,
   isAppOpened: boolean,
-  errorSteps: number[],
   amount: number,
   error: ?Error,
 }
@@ -125,7 +124,6 @@ const INITIAL_STATE = {
   error: null,
   optimisticOperation: null,
   isAppOpened: false,
-  errorSteps: [],
 }
 
 class SendModal extends PureComponent<Props, State<*>> {
@@ -170,7 +168,6 @@ class SendModal extends PureComponent<Props, State<*>> {
   handleRetry = () => {
     this.setState({
       error: null,
-      errorSteps: [],
       optimisticOperation: null,
       isAppOpened: false,
     })
@@ -179,7 +176,7 @@ class SendModal extends PureComponent<Props, State<*>> {
   handleTransactionError = (error: Error) => {
     const stepVerificationIndex = this.STEPS.findIndex(step => step.id === 'verification')
     if (stepVerificationIndex === -1) return
-    this.setState({ error, errorSteps: [stepVerificationIndex] })
+    this.setState({ error })
   }
 
   handleOperationBroadcasted = (optimisticOperation: Operation) => {
@@ -232,7 +229,6 @@ class SendModal extends PureComponent<Props, State<*>> {
       stepId,
       account,
       isAppOpened,
-      errorSteps,
       bridge,
       transaction,
       optimisticOperation,
@@ -255,6 +251,8 @@ class SendModal extends PureComponent<Props, State<*>> {
       onRetry: this.handleRetry,
       signTransaction: this.handleSignTransaction,
     }
+
+    const errorSteps = error ? [error instanceof UserRefusedOnDevice ? 2 : 3] : []
 
     const isModalLocked = stepId === 'verification'
 
