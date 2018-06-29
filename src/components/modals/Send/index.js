@@ -49,7 +49,6 @@ type State<Transaction> = {
   transaction: ?Transaction,
   optimisticOperation: ?Operation,
   isAppOpened: boolean,
-  disabledSteps: number[],
   errorSteps: number[],
   amount: number,
   error: ?Error,
@@ -126,12 +125,10 @@ const INITIAL_STATE = {
   error: null,
   optimisticOperation: null,
   isAppOpened: false,
-  disabledSteps: [],
   errorSteps: [],
 }
 
 class SendModal extends PureComponent<Props, State<*>> {
-
   state = INITIAL_STATE
 
   componentWillUnmount() {
@@ -170,7 +167,14 @@ class SendModal extends PureComponent<Props, State<*>> {
 
   handleChangeAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
   handleChangeTransaction = transaction => this.setState({ transaction })
-  handleRetry = () => this.setState({ error: null, errorSteps: [] })
+  handleRetry = () => {
+    this.setState({
+      error: null,
+      errorSteps: [],
+      optimisticOperation: null,
+      isAppOpened: false,
+    })
+  }
 
   handleTransactionError = (error: Error) => {
     const stepVerificationIndex = this.STEPS.findIndex(step => step.id === 'verification')
@@ -228,7 +232,6 @@ class SendModal extends PureComponent<Props, State<*>> {
       stepId,
       account,
       isAppOpened,
-      disabledSteps,
       errorSteps,
       bridge,
       transaction,
@@ -269,7 +272,6 @@ class SendModal extends PureComponent<Props, State<*>> {
             onStepChange={this.handleStepChange}
             onClose={onClose}
             steps={this.STEPS}
-            disabledSteps={disabledSteps}
             errorSteps={errorSteps}
             {...addtionnalProps}
           >
