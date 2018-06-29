@@ -18,7 +18,7 @@ DisconnectedDevice:
   title: 'The device was disconnected.'
   description: ''
 Error: # as this is a generic unhandled error i think it's ok to have a generic title. but keep description to {{message}}
-  title: 'Oops, an error occurred'
+  title: 'Oops, an error occurred.'
   description: '{{message}}'
 FeeEstimationFailed:
   title: 'Fee estimation error. Try again or set a custom fee (status: {{status}})'

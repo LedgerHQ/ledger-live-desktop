@@ -7,7 +7,7 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 
 import FakeLink from 'components/base/FakeLink'
-import IconCross from 'icons/Cross'
+import IconExclamationCircle from 'icons/ExclamationCircle'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
@@ -57,9 +57,21 @@ export function GenuineCheckUnavailableMessage({
   onboarding: OnboardingState,
 }) {
   return (
-    <Box align="center" flow={1} color={colors.alertRed}>
+    <Box
+      horizontal
+      align="center"
+      flow={2}
+      color={colors.alertRed}
+      ff="Open Sans|SemiBold"
+      fontSize={4}
+    >
+      <IconExclamationCircle size={16} />
+      <span>
+        <TranslatedError error={onboarding.genuine.genuineCheckUnavailable} />
+      </span>
       <FakeLink
-        ff="Open Sans|Regular"
+        color="alertRed"
+        ff="Open Sans|SemiBold"
         fontSize={4}
         underline
         onClick={() => {
@@ -72,14 +84,6 @@ export function GenuineCheckUnavailableMessage({
       >
         {t('app:common.retry')}
       </FakeLink>
-      <Box horizontal justify="center">
-        <Box justifyContent="center">
-          <IconCross size={12} />
-        </Box>
-        <Box ff="Open Sans|Regular" style={{ maxWidth: 150 }} fontSize={2} ml={1}>
-          <TranslatedError error={onboarding.genuine.genuineCheckUnavailable} />
-        </Box>
-      </Box>
     </Box>
   )
 }

@@ -14,6 +14,7 @@ import Button from 'components/base/Button'
 import RadioGroup from 'components/base/RadioGroup'
 import GenuineCheckModal from 'components/GenuineCheckModal'
 
+import IconCross from 'icons/Cross'
 import IconCheck from 'icons/Check'
 
 import {
@@ -220,7 +221,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
             </GenuineCheckCardWrapper>
           </Box>
           <Box mt={3}>
-            <GenuineCheckCardWrapper isDisabled={!genuine.recoveryStepPass}>
+            <GenuineCheckCardWrapper
+              isDisabled={!genuine.recoveryStepPass}
+              isError={genuine.genuineCheckUnavailable}
+            >
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
@@ -239,11 +243,9 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                       </Box>
                     </Box>
                   ) : genuine.genuineCheckUnavailable ? (
-                    <GenuineCheckUnavailableMessage
-                      handleOpenGenuineCheckModal={this.handleOpenGenuineCheckModal}
-                      onboarding={onboarding}
-                      t={t}
-                    />
+                    <Box color="alertRed">
+                      <IconCross size={16} />
+                    </Box>
                   ) : (
                     <Button
                       primary
@@ -256,6 +258,15 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                 </Box>
               )}
             </GenuineCheckCardWrapper>
+            {genuine.genuineCheckUnavailable && (
+              <Box mt={4}>
+                <GenuineCheckUnavailableMessage
+                  handleOpenGenuineCheckModal={this.handleOpenGenuineCheckModal}
+                  onboarding={onboarding}
+                  t={t}
+                />
+              </Box>
+            )}
           </Box>
         </StepContainerInner>
         {genuine.genuineCheckUnavailable ? (
