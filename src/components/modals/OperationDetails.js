@@ -155,6 +155,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               <Box my={4} alignItems="center">
                 <Box>
                   <FormattedVal
+                    color={amount < 0 ? 'smoke' : undefined}
                     unit={unit}
                     alwaysShowSign
                     showCode
