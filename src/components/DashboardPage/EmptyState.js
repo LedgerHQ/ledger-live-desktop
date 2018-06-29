@@ -46,8 +46,10 @@ class EmptyState extends PureComponent<Props, *> {
         />
         <Box mt={5} alignItems="center">
           <Title>{t('app:emptyState.dashboard.title')}</Title>
-          <Description>{t('app:emptyState.dashboard.desc')}</Description>
-          <Box mt={3} horizontal justifyContent="space-around" style={{ width: 300 }}>
+          <Description mt={3} style={{ maxWidth: 600 }}>
+            {t('app:emptyState.dashboard.desc')}
+          </Description>
+          <Box mt={5} horizontal style={{ width: 300 }} flow={3} justify="center">
             <Button padded primary style={{ minWidth: 120 }} onClick={this.handleInstallApp}>
               {t('app:emptyState.dashboard.buttons.installApp')}
             </Button>
@@ -76,11 +78,9 @@ export const Description = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,
   color: p => p.theme.colors.graphite,
-})`
-  margin: 10px auto 25px;
-  display: block;
-  text-align: center;
-`
+  textAlign: 'center',
+})``
+
 export default compose(
   connect(
     null,

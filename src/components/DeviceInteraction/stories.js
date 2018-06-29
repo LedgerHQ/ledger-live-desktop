@@ -34,6 +34,7 @@ class Wrapper extends React.Component<any> {
           {'reset'}
         </button>
         <DeviceInteraction
+          shouldRenderRetry
           ref={n => (this._ref = n)}
           steps={[
             {

@@ -140,7 +140,10 @@ export const GenuineCheckCardWrapper = styled(Box).attrs({
   height: 74px;
   transition: all ease-in-out 0.2s;
   color: ${p => (p.isDisabled ? p.theme.colors.grey : p.theme.colors.black)};
-  border: ${p => `1px ${p.isDisabled ? 'dashed' : 'solid'} ${p.theme.colors.fog}`};
+  border: ${p =>
+    `1px ${p.isDisabled ? 'dashed' : 'solid'} ${
+      p.isError ? p.theme.colors.alertRed : p.theme.colors.fog
+    }`};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
   background-color: ${p => (p.isDisabled ? p.theme.colors.lightGrey : p.theme.colors.white)};
   opacity: ${p => (p.isDisabled ? 0.7 : 1)};

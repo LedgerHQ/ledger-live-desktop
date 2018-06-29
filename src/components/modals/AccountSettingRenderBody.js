@@ -206,11 +206,11 @@ class HelperComp extends PureComponent<Props, State> {
               </Box>
               <Box>
                 <Input
+                  autoFocus
                   containerProps={{ style: { width: 230 } }}
                   value={account.name}
                   maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
-                  renderLeft={<InputLeft currency={account.currency} />}
                   onFocus={e => this.handleFocus(e, 'accountName')}
                   error={accountNameError && t('app:account.settings.accountName.error')}
                 />

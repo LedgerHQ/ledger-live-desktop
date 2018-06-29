@@ -21,6 +21,7 @@ common:
   save: Save
   password: Password
   editProfile: Preferences
+  lock: Lock
   lockApplication: Lock Ledger Live
   showMore: Show more
   max: Max
@@ -35,6 +36,7 @@ common:
   reverify: Re-verify
   verify: Verify
   copy: Copy
+  copied: Copied!
   addressCopied: Address copied!
   lockScreen:
     title: Welcome back
