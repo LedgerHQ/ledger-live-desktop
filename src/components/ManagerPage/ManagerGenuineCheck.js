@@ -11,6 +11,7 @@ import GenuineCheck from 'components/GenuineCheck'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Text from 'components/base/Text'
+import TrackPage from 'analytics/TrackPage'
 
 type Props = {
   t: T,
@@ -22,6 +23,7 @@ class ManagerGenuineCheck extends PureComponent<Props> {
     const { t, onSuccess } = this.props
     return (
       <Box align="center">
+        <TrackPage category="Manager" name="Genuine Check" />
         <Space of={60} />
         <Box align="center" style={{ maxWidth: 460 }}>
           <img

@@ -26,6 +26,7 @@ import Progress from 'components/base/Progress'
 import Spinner from 'components/base/Spinner'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
+import TrackPage from 'analytics/TrackPage'
 
 import IconInfoCircle from 'icons/InfoCircle'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
@@ -193,6 +194,12 @@ class AppsList extends PureComponent<Props, State> {
               </Fragment>
             ) : status === 'error' ? (
               <Fragment>
+                <TrackPage
+                  category="Manager"
+                  name="Error Modal"
+                  error={error && error.name}
+                  app={app}
+                />
                 <ModalContent grow align="center" justify="center" mt={3}>
                   <Box color="alertRed">
                     <ExclamationCircleThin size={44} />

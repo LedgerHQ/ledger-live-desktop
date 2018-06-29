@@ -27,7 +27,14 @@ const UpdateFirmwareButton = ({ t, firmware, onClick }: Props) =>
       <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
         {t('app:manager.firmware.latest', { version: getCleanVersion(firmware.name) })}
       </Text>
-      <Button primary onClick={onClick}>
+      <Button
+        primary
+        onClick={onClick}
+        event={'Manager Firmware Update Click'}
+        eventProperties={{
+          firmwareName: firmware.name,
+        }}
+      >
         {t('app:manager.firmware.update')}
       </Button>
     </Fragment>

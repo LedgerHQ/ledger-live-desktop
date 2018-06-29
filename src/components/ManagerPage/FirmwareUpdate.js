@@ -124,7 +124,6 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   render() {
     const { deviceInfo, t } = this.props
     const { latestFirmware, modal } = this.state
-
     return (
       <Card p={4}>
         <Box horizontal align="center" flow={2}>

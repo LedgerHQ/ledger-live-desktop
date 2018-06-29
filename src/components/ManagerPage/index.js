@@ -9,6 +9,7 @@ import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 import Dashboard from './Dashboard'
 
 import ManagerGenuineCheck from './ManagerGenuineCheck'
+import TrackPage from 'analytics/TrackPage'
 
 type Props = {}
 
