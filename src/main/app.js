@@ -12,9 +12,7 @@ import {
 import menu from 'main/menu'
 import db from 'helpers/db'
 
-import { setMainProcessPID, terminateAllTheThings } from './terminator'
-
-setMainProcessPID(process.pid)
+import { terminateAllTheThings } from './terminator'
 
 // necessary to prevent win from being garbage collected
 let mainWindow = null
