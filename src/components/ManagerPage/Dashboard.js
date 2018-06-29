@@ -20,7 +20,7 @@ type Props = {
 
 const Dashboard = ({ device, deviceInfo, t }: Props) => (
   <Box flow={4} pb={8}>
-    <TrackPage category="Manager" name="Genuine Check" />
+    <TrackPage category="Manager" name="Dashboard" />
     <Box>
       <Text ff="Museo Sans|Regular" fontSize={7} color="black">
         {t('app:manager.title')}
