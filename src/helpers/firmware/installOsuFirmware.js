@@ -4,7 +4,7 @@ import type Transport from '@ledgerhq/hw-transport'
 import { WS_INSTALL } from 'helpers/urls'
 import { createDeviceSocket } from 'helpers/socket'
 
-import type { LedgerScriptParams } from 'helpers/common'
+import type { Firmware } from 'components/modals/UpdateFirmware'
 
 import { createCustomErrorClass } from '../errors'
 
@@ -30,7 +30,7 @@ type Result = Promise<{ success: boolean, error?: any }>
 export default async (
   transport: Transport<*>,
   targetId: string | number,
-  firmware: LedgerScriptParams & { shouldUpdateMcu: boolean },
+  firmware: Firmware,
 ): Result => {
   try {
     const params = {
