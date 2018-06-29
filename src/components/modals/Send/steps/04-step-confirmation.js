@@ -62,15 +62,12 @@ export default function StepConfirmation({ t, optimisticOperation, error }: Step
         <Icon size={43} />
       </span>
       <Title>{t(`${tPrefix}.title`)}</Title>
-      <Text style={{ userSelect: 'text' }}>
+      <Text style={{ userSelect: 'text' }} color="smoke">
         {optimisticOperation ? (
           multiline(t(`${tPrefix}.text`))
         ) : error ? (
           <TranslatedError error={error} />
         ) : null}
-      </Text>
-      <Text style={{ userSelect: 'text' }}>
-        {optimisticOperation ? optimisticOperation.hash : ''}
       </Text>
     </Container>
   )
