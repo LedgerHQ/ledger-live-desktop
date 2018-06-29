@@ -107,7 +107,7 @@ class DeviceInteraction extends PureComponent<Props, State> {
           )
         })}
         {error &&
-          shouldRenderRetry && <ErrorDescContainer error={error} onRetry={this.reset} mt={2} />}
+          shouldRenderRetry && <ErrorDescContainer error={error} onRetry={this.reset} mt={4} />}
       </Box>
     )
   }

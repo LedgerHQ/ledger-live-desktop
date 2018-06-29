@@ -100,12 +100,21 @@ export const ErrorDescContainer = ({
   error: Error,
   onRetry: void => void,
 }) => (
-  <Box horizontal fontSize={3} color="alertRed" align="center" cursor="text" {...p}>
+  <Box
+    horizontal
+    fontSize={3}
+    color="alertRed"
+    align="center"
+    cursor="text"
+    ff="Open Sans|SemiBold"
+    style={{ maxWidth: 500 }}
+    {...p}
+  >
     <IconExclamationCircle size={16} />
-    <Box ml={1}>
+    <Box ml={2} mr={1} shrink grow style={{ maxWidth: 300 }}>
       <TranslatedError error={error} />
     </Box>
-    <FakeLink ml={1} underline color="alertRed" onClick={onRetry}>
+    <FakeLink ml="auto" underline color="alertRed" onClick={onRetry}>
       {'Retry'}
     </FakeLink>
   </Box>
