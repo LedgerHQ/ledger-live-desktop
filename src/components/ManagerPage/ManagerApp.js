@@ -63,10 +63,27 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
           {version}
         </Text>
       </Box>
-      <Button outline onClick={onInstall}>
+      <Button
+        outline
+        onClick={onInstall}
+        event={'Manager Install Click'}
+        eventProperties={{
+          appName: name,
+          appVersion: version,
+        }}
+      >
         {t('app:manager.apps.install')}
       </Button>
-      <Button outline onClick={onUninstall} outlineColor="grey">
+      <Button
+        outline
+        onClick={onUninstall}
+        event={'Manager Uninstall Click'}
+        eventProperties={{
+          appName: name,
+          appVersion: version,
+        }}
+        outlineColor="grey"
+      >
         <Trash size={16} fill="grey" />
       </Button>
     </Container>
