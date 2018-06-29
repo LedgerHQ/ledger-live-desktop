@@ -35,6 +35,7 @@ common:
   reverify: Re-verify
   verify: Verify
   copy: Copy
+  copied: Copied!
   addressCopied: Address copied!
   lockScreen:
     title: Welcome back
