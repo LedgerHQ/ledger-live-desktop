@@ -283,7 +283,7 @@ send:
       success:
         title: Transaction sent
         text: |
-          The transaction has been signed and sent to the network. Your account balance will update once the the transaction is confirmed by the network.
+          The transaction has been signed and sent to the network. Your account balance will update once the blockchain has confirmed the transaction.
         cta: View operation details
       error:
         title: Transaction canceled

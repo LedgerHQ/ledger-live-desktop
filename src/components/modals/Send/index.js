@@ -20,7 +20,7 @@ import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
-import { closeModal } from 'reducers/modals'
+import { closeModal, openModal } from 'reducers/modals'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
@@ -38,6 +38,7 @@ type Props = {
   device: ?Device,
   accounts: Account[],
   closeModal: string => void,
+  openModal: (string, any) => void,
   updateAccountWithUpdater: (string, (Account) => Account) => void,
 }
 
@@ -48,7 +49,6 @@ type State<Transaction> = {
   transaction: ?Transaction,
   optimisticOperation: ?Operation,
   isAppOpened: boolean,
-  disabledSteps: number[],
   errorSteps: number[],
   amount: number,
   error: ?Error,
@@ -62,6 +62,7 @@ export type StepProps<Transaction> = DefaultStepProps & {
   error: ?Error,
   optimisticOperation: ?Operation,
   closeModal: void => void,
+  openModal: (string, any) => void,
   isAppOpened: boolean,
   onChangeAccount: (?Account) => void,
   onChangeAppOpened: boolean => void,
@@ -111,6 +112,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   closeModal,
+  openModal,
   updateAccountWithUpdater,
 }
 
@@ -123,21 +125,21 @@ const INITIAL_STATE = {
   error: null,
   optimisticOperation: null,
   isAppOpened: false,
-  disabledSteps: [],
   errorSteps: [],
 }
 
 class SendModal extends PureComponent<Props, State<*>> {
   state = INITIAL_STATE
-  STEPS = createSteps({ t: this.props.t })
-  _signTransactionSub = null
-  _isUnmounted = false
 
   componentWillUnmount() {
     if (this._signTransactionSub) {
       this._signTransactionSub.unsubscribe()
     }
   }
+
+  STEPS = createSteps({ t: this.props.t })
+  _signTransactionSub = null
+  _isUnmounted = false
 
   handleReset = () => this.setState({ ...INITIAL_STATE })
 
@@ -165,7 +167,14 @@ class SendModal extends PureComponent<Props, State<*>> {
 
   handleChangeAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
   handleChangeTransaction = transaction => this.setState({ transaction })
-  handleRetry = () => this.setState({ error: null, errorSteps: [] })
+  handleRetry = () => {
+    this.setState({
+      error: null,
+      errorSteps: [],
+      optimisticOperation: null,
+      isAppOpened: false,
+    })
+  }
 
   handleTransactionError = (error: Error) => {
     const stepVerificationIndex = this.STEPS.findIndex(step => step.id === 'verification')
@@ -218,12 +227,11 @@ class SendModal extends PureComponent<Props, State<*>> {
   }
 
   render() {
-    const { t, device } = this.props
+    const { t, device, openModal } = this.props
     const {
       stepId,
       account,
       isAppOpened,
-      disabledSteps,
       errorSteps,
       bridge,
       transaction,
@@ -239,6 +247,7 @@ class SendModal extends PureComponent<Props, State<*>> {
       isAppOpened,
       error,
       optimisticOperation,
+      openModal,
       closeModal: this.handleCloseModal,
       onChangeAccount: this.handleChangeAccount,
       onChangeAppOpened: this.handleChangeAppOpened,
@@ -263,7 +272,6 @@ class SendModal extends PureComponent<Props, State<*>> {
             onStepChange={this.handleStepChange}
             onClose={onClose}
             steps={this.STEPS}
-            disabledSteps={disabledSteps}
             errorSteps={errorSteps}
             {...addtionnalProps}
           >

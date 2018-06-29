@@ -155,6 +155,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               <Box my={4} alignItems="center">
                 <Box>
                   <FormattedVal
+                    color={amount < 0 ? 'smoke' : undefined}
                     unit={unit}
                     alwaysShowSign
                     showCode
@@ -242,16 +243,13 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
         <GradientBox />
       </ModalContent>
 
-      <ModalFooter horizontal justify="flex-end" flow={2}>
-        <Button padded onClick={onClose}>
-          {t('app:common.cancel')}
-        </Button>
-        {url ? (
+      {url && (
+        <ModalFooter horizontal justify="flex-end" flow={2}>
           <Button primary padded onClick={() => shell.openExternal(url)}>
             {t('app:operationDetails.viewOperation')}
           </Button>
-        ) : null}
-      </ModalFooter>
+        </ModalFooter>
+      )}
     </ModalBody>
   )
 })

@@ -1,10 +1,10 @@
 // @flow
 
 import React, { Fragment } from 'react'
-import { shell } from 'electron'
 import styled from 'styled-components'
 import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
 
+import { MODAL_OPERATION_DETAILS } from 'config/constants'
 import { colors } from 'styles/theme'
 import { multiline } from 'styles/helpers'
 
@@ -55,22 +55,18 @@ export default function StepConfirmation({ t, optimisticOperation, error }: Step
     : error
       ? 'app:send.steps.confirmation.error'
       : 'app:send.steps.confirmation.pending'
+
+  const translatedErrTitle = error ? <TranslatedError error={error} /> || '' : ''
+  const translatedErrDesc = error ? <TranslatedError error={error} field="description" /> || '' : ''
   return (
     <Container>
       <TrackPage category="Send" name="Step4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
-      <Title>{t(`${tPrefix}.title`)}</Title>
-      <Text style={{ userSelect: 'text' }}>
-        {optimisticOperation ? (
-          multiline(t(`${tPrefix}.text`))
-        ) : error ? (
-          <TranslatedError error={error} />
-        ) : null}
-      </Text>
-      <Text style={{ userSelect: 'text' }}>
-        {optimisticOperation ? optimisticOperation.hash : ''}
+      <Title>{translatedErrTitle || t(`${tPrefix}.title`)}</Title>
+      <Text style={{ userSelect: 'text' }} color="smoke">
+        {optimisticOperation ? multiline(t(`${tPrefix}.text`)) : error ? translatedErrDesc : null}
       </Text>
     </Container>
   )
@@ -83,6 +79,7 @@ export function StepConfirmationFooter({
   onRetry,
   optimisticOperation,
   error,
+  openModal,
   closeModal,
 }: StepProps<*>) {
   const url =
@@ -96,8 +93,13 @@ export function StepConfirmationFooter({
           <Button
             ml={2}
             onClick={() => {
-              shell.openExternal(url)
               closeModal()
+              if (account && optimisticOperation) {
+                openModal(MODAL_OPERATION_DETAILS, {
+                  operationId: optimisticOperation.id,
+                  accountId: account.id,
+                })
+              }
             }}
             primary
           >
