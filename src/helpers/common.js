@@ -20,6 +20,7 @@ export type LedgerScriptParams = {
   version: string,
   icon: string,
   app?: number,
+  hash?: string,
 }
 
 /**

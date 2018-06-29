@@ -21,6 +21,7 @@ export const GET_CURRENT_FIRMWARE: string = managerUrlbuilder('get_firmware_vers
 export const GET_CURRENT_OSU: string = managerUrlbuilder('get_osu_version')
 export const GET_LATEST_FIRMWARE: string = managerUrlbuilder('get_latest_firmware')
 export const GET_NEXT_MCU: string = managerUrlbuilder('mcu_versions_bootloader')
+export const GET_MCUS: string = managerUrlbuilder('mcu_versions')
 export const GET_CATEGORIES: string = managerUrlbuilder('categories')
 export const GET_APPLICATIONS: string = managerUrlbuilder('applications')
 

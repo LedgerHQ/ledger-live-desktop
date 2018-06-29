@@ -25,7 +25,7 @@ type State = {
   markdown: ?string,
 }
 
-const Notes = styled(Box).attrs({
+export const Notes = styled(Box).attrs({
   ff: 'Open Sans',
   fontSize: 4,
   color: 'smoke',

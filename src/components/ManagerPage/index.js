@@ -7,7 +7,6 @@ import type { Device } from 'types/common'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Dashboard from './Dashboard'
-// import FlashMcu from './FlashMcu'
 
 import ManagerGenuineCheck from './ManagerGenuineCheck'
 
@@ -40,10 +39,6 @@ class ManagerPage extends PureComponent<Props, State> {
 
     invariant(device, 'Inexistant device considered genuine')
     invariant(deviceInfo, 'Inexistant device infos for genuine device')
-
-    // TODO
-    // renderFinalUpdate
-    // renderMcuUpdate
 
     return <Dashboard device={device} deviceInfo={deviceInfo} />
   }
