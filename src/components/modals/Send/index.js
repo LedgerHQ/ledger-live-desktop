@@ -1,12 +1,14 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import invariant from 'invariant'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 
+import { createCustomErrorClass } from 'helpers/errors'
 import Track from 'analytics/Track'
 import { updateAccountWithUpdater } from 'actions/accounts'
 import { MODAL_SEND } from 'config/constants'
@@ -28,6 +30,8 @@ import StepAmount, { StepAmountFooter } from './steps/01-step-amount'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepVerification from './steps/03-step-verification'
 import StepConfirmation, { StepConfirmationFooter } from './steps/04-step-confirmation'
+
+const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice')
 
 type Props = {
   t: T,
@@ -65,6 +69,7 @@ export type StepProps<Transaction> = DefaultStepProps & {
   onTransactionError: Error => void,
   onOperationBroadcasted: Operation => void,
   onRetry: void => void,
+  signTransaction: ({ transitionTo: string => void }) => void,
 }
 
 const createSteps = ({ t }: { t: T }) => [
@@ -125,6 +130,14 @@ const INITIAL_STATE = {
 class SendModal extends PureComponent<Props, State<*>> {
   state = INITIAL_STATE
   STEPS = createSteps({ t: this.props.t })
+  _signTransactionSub = null
+  _isUnmounted = false
+
+  componentWillUnmount() {
+    if (this._signTransactionSub) {
+      this._signTransactionSub.unsubscribe()
+    }
+  }
 
   handleReset = () => this.setState({ ...INITIAL_STATE })
 
@@ -173,6 +186,37 @@ class SendModal extends PureComponent<Props, State<*>> {
     this.setState({ optimisticOperation, error: null })
   }
 
+  handleSignTransaction = async ({ transitionTo }: { transitionTo: string => void }) => {
+    const { device } = this.props
+    const { account, transaction, bridge } = this.state
+
+    invariant(device && account && transaction && bridge, 'signTransaction invalid conditions')
+
+    this._signTransactionSub = bridge
+      .signAndBroadcast(account, transaction, device.path)
+      .subscribe({
+        next: e => {
+          switch (e.type) {
+            case 'signed': {
+              if (this._isUnmounted) return
+              transitionTo('confirmation')
+              break
+            }
+            case 'broadcasted': {
+              this.handleOperationBroadcasted(e.operation)
+              break
+            }
+            default:
+          }
+        },
+        error: err => {
+          const error = err.statusCode === 0x6985 ? new UserRefusedOnDevice() : err
+          this.handleTransactionError(error)
+          transitionTo('confirmation')
+        },
+      })
+  }
+
   render() {
     const { t, device } = this.props
     const {
@@ -199,9 +243,8 @@ class SendModal extends PureComponent<Props, State<*>> {
       onChangeAccount: this.handleChangeAccount,
       onChangeAppOpened: this.handleChangeAppOpened,
       onChangeTransaction: this.handleChangeTransaction,
-      onTransactionError: this.handleTransactionError,
       onRetry: this.handleRetry,
-      onOperationBroadcasted: this.handleOperationBroadcasted,
+      signTransaction: this.handleSignTransaction,
     }
 
     const isModalLocked = stepId === 'verification'
