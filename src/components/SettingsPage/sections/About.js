@@ -105,9 +105,9 @@ class AboutRowItem extends PureComponent<{
     const { onClick, title, desc, url } = this.props
     const boundOnClick = () => onClick(url)
     return (
-      <Row onClick={boundOnClick} title={title} desc={desc}>
+      <Row title={title} desc={desc}>
         <Tabbable p={2} borderRadius={1} onClick={boundOnClick}>
-          <IconExternalLink size={16} />
+          <IconExternalLink style={{ cursor: 'pointer' }} size={16} />
         </Tabbable>
       </Row>
     )
