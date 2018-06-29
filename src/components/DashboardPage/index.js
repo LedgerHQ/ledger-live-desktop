@@ -192,13 +192,17 @@ class DashboardPage extends PureComponent<Props> {
                               />
                             ) : (
                               <Wrapper>
-                                <img alt="" src={imagePath} />
+                                <Box mt={2}>
+                                  <img alt="" src={imagePath} />
+                                </Box>
                                 <Box
                                   ff="Open Sans"
                                   fontSize={3}
-                                  color="graphite"
+                                  color="grey"
                                   pb={2}
+                                  mt={3}
                                   textAlign="center"
+                                  style={{ maxWidth: 150 }}
                                 >
                                   {t('app:dashboard.emptyAccountTile.desc')}
                                 </Box>
@@ -247,4 +251,5 @@ const Wrapper = styled(Box).attrs({
 })`
   border: 1px dashed ${p => p.theme.colors.fog};
   border-radius: 4px;
+  height: 215px;
 `

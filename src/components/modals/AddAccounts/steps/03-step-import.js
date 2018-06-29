@@ -213,7 +213,7 @@ class StepImport extends PureComponent<StepProps> {
     })
 
     const importedAccountsListTitle = t('app:addAccounts.accountAlreadyImportedSubtitle', {
-      count: importableAccounts.length,
+      count: importedAccounts.length,
     })
 
     const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', { currencyName })
@@ -224,14 +224,6 @@ class StepImport extends PureComponent<StepProps> {
       <Fragment>
         <TrackPage category="AddAccounts" name="Step3" />
         <Box mt={-4}>
-          {importedAccounts.length === 0 ? null : (
-            <AccountsList
-              title={importedAccountsListTitle}
-              accounts={importedAccounts}
-              editedNames={editedNames}
-              collapsible
-            />
-          )}
           {importableAccounts.length === 0 ? null : (
             <AccountsList
               title={importableAccountsListTitle}
@@ -276,6 +268,14 @@ class StepImport extends PureComponent<StepProps> {
               setAccountName={setAccountName}
               editedNames={editedNames}
               hideAmount
+            />
+          )}
+          {importedAccounts.length === 0 ? null : (
+            <AccountsList
+              title={importedAccountsListTitle}
+              accounts={importedAccounts}
+              editedNames={editedNames}
+              collapsible
             />
           )}
           {scanStatus === 'scanning' ? (
