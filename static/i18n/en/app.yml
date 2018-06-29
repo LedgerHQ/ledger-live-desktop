@@ -73,7 +73,7 @@ sidebar:
   menu: Menu
   accounts: Accounts ({{count}})
   manager: Manager
-  exchange: Exchange
+  exchange: Exchanges
 account:
   balance: Balance
   receive: Receive
@@ -111,14 +111,14 @@ dashboard:
   summary: "Here's the summary of your account"
   summary_plural: "Here's the summary of your {{count}} accounts"
   noAccounts: No accounts yet
-  recentActivity: Recent activity
+  recentActivity: Last operations
   totalBalance: Total balance
   accountsOrder:
     name: name
     balance: balance
 currentAddress:
   title: Current address
-  for: Address for <1><0>{{accountName}}</0></1>
+  for: Address for account <1><0>{{accountName}}</0></1>
   message: Your receive address has not been confirmed on your Ledger device. Please verify the address for optimal security.
 deviceConnect:
   step1:
@@ -135,9 +135,10 @@ emptyState:
       addAccount: Add accounts
       installApp: Open Manager
 exchange:
-  title: Exchange
+  title: Exchanges
+  desc: Try a selection of exchange services offered by our sponsors
   visitWebsite: Visit website
-  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
+  coinhouse: 'Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
   changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
   coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.'
 genuinecheck:
@@ -147,8 +148,8 @@ addAccounts:
   title: Add accounts
   breadcrumb:
     informations: Crypto asset
-    connectDevice: Connect device
-    import: Select accounts
+    connectDevice: Device
+    import: Accounts
     finish: Confirmation
   accountAlreadyImportedSubtitle: Already in portfolio
   accountToImportSubtitle: 'Select account'
@@ -186,7 +187,7 @@ operationDetails:
   showMore: Show {{recipients}} more
   showLess: Show less
 operationList:
-  noMoreOperations: That's all!
+  noMoreOperations: That's all
 manager:
   yourDeviceIsGenuine: Your device is genuine
   tabs:
@@ -239,18 +240,18 @@ receive:
       title: Account
       label: Account to credit
     connectDevice:
-      title: Connect device
+      title: Device
       withoutDevice: Don't have your device?
     confirmAddress:
-      title: Confirm address
+      title: Verification
       action: Confirm address on device
       text: Verify that the address below matches the address displayed on your device
-      support: Ledger Support
+      support: Contact us
       error:
         title: Receive address rejected
         text: Please try again or contact Support when in doubt
     receiveFunds:
-      title: Receive crypto assets
+      title: Receive
       label: Amount (optional)
 send:
   title: Send
@@ -271,7 +272,7 @@ send:
       unitPerByte: '{{unit}} per byte'
       feePerByte: Fees per byte
     connectDevice:
-      title: Connect device
+      title: Device
     verification:
       title: Verification
       warning: |
@@ -352,8 +353,10 @@ settings: # Always ensure descriptions carry full stops (.)
     faqDesc: A problem? Learn about Ledger Live, Ledger devices, supported crypto assets and apps.
     contactUs: Contact us
     contactUsDesc: Need help? Request assistance from Ledger Support by email or chat.
-    terms: --- Terms and Privacy policy ---
-    termsDesc: --- Check with Legal ---
+    terms: Terms and conditions
+    termsDesc: By using Ledger Live you are deemed to have accepted our terms and conditions.
+    #privacy: Privacy policy
+    #termsDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
   hardResetModal:
     title: Reset Ledger Live
     desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
