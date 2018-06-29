@@ -200,12 +200,24 @@ manager:
   firmware:
     installed: 'Firmware version {{version}}'
     update: Update firmware
-    updateTitle: Firmware update
     continue: Continue update
     latest: 'Firmware version {{version}} is available'
     disclaimerTitle: 'You are about to install the latest <1><0>firmware {{version}}</0></1>'
     disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
     disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
+  modal:
+    steps:
+      idCheck: Identifier check
+      updateMCU: Update MCU
+      confirm: Confirmation
+    confirmIdentifier: Confirm identifier
+    confirmIdentifierText: Please confirm identifier on your Device. Be sure the identifier is the same as below
+    identifier: Identifier
+    mcuTitle: Updating MCU
+    mcuFirst: Unplug your device from your computer
+    mcuSecond: Press and hold left button and plug your device until the processing screen appears
+    successTitle: Firmware has been updated with success
+    successText: You can now re-install your applications on your device
   title: Manager
   subtitle: Install or uninstall apps on your device
   device:
