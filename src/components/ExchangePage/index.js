@@ -26,13 +26,13 @@ const cards = [
   },
   {
     key: 'changelly',
-    id: 'coinhouse',
+    id: 'changelly',
     url: 'https://changelly.com/?ref_id=aac789605a01',
     logo: <ChangellyLogo width={150} />,
   },
   {
     key: 'coinmama',
-    id: 'coinhouse',
+    id: 'coinmama',
     url: 'http://go.coinmama.com/visit/?bta=51801&nci=5343',
     logo: <CoinmamaLogo width={150} />,
   },
@@ -44,8 +44,11 @@ class ExchangePage extends PureComponent<Props> {
     return (
       <Box pb={6}>
         <TrackPage category="Exchange" />
-        <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={5}>
+        <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={3}>
           {t('app:exchange.title')}
+        </Box>
+        <Box ff="Museo Sans|Light" color="grey" fontSize={5} mb={5}>
+          {t('app:exchange.desc')}
         </Box>
         <Box flow={5}>{cards.map(card => <ExchangeCard key={card.key} t={t} card={card} />)}</Box>
       </Box>

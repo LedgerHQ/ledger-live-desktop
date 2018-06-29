@@ -102,7 +102,7 @@ export function SettingsSectionRow({
 }) {
   return (
     <SettingsSectionRowContainer onClick={onClick} tabIndex={-1}>
-      <Box grow shrink style={{ marginRight: '20%' }}>
+      <Box grow shrink style={{ marginRight: '10%' }}>
         <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {title}
         </Box>
