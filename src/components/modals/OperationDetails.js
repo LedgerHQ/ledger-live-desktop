@@ -183,7 +183,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                 {fee ? (
                   <Fragment>
                     <OpDetailsData>
-                      <FormattedVal unit={unit} showCode val={fee} color="dark" />
+                      <FormattedVal unit={unit} showCode val={fee} color="smoke" />
                     </OpDetailsData>
                   </Fragment>
                 ) : (
