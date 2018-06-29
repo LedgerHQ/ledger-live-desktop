@@ -119,9 +119,11 @@ class TopBar extends PureComponent<Props> {
                 <Box justifyContent="center">
                   <Bar />
                 </Box>
-                <ItemContainer isInteractive justifyContent="center" onClick={this.handleLock}>
-                  <IconLock size={16} />
-                </ItemContainer>
+                <Tooltip render={() => t('app:common.lock')}>
+                  <ItemContainer isInteractive justifyContent="center" onClick={this.handleLock}>
+                    <IconLock size={16} />
+                  </ItemContainer>
+                </Tooltip>
               </Fragment>
             )}
           </Box>
