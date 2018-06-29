@@ -357,7 +357,7 @@ settings: # Always ensure descriptions carry full stops (.)
     terms: Terms and conditions
     termsDesc: By using Ledger Live you are deemed to have accepted our terms and conditions.
     #privacy: Privacy policy
-    #termsDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
+    #privacyDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
   hardResetModal:
     title: Reset Ledger Live
     desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
