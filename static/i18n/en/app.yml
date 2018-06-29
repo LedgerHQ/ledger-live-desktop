@@ -150,9 +150,9 @@ addAccounts:
     connectDevice: Connect device
     import: Select accounts
     finish: Confirmation
-  accountAlreadyImportedSubtitle: Already in portfolio
-  accountToImportSubtitle: 'Select account'
-  accountToImportSubtitle_plural: 'Select accounts'
+  accountAlreadyImportedSubtitle: '{{count}} Already in portfolio'
+  accountToImportSubtitle: 'Add existing account'
+  accountToImportSubtitle_plural: 'Add existing accounts'
   selectAll: Select all ({{count}})
   unselectAll: Deselect all ({{count}})
   editName: Edit name
@@ -162,7 +162,7 @@ addAccounts:
   success: Account added to your portfolio
 # success_plural: Accounts successfully added to your portfolio.
   createNewAccount:
-    title: Create a new account
+    title: Add a new account
     noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
@@ -257,7 +257,7 @@ send:
   totalSpent: Total
   steps:
     amount:
-      title: Send crypto assets
+      title: crypto assets
       selectAccountDebit: Select an account to debit
       recipientAddress: Recipient address # can't control the tooltip!
       amount: Amount
