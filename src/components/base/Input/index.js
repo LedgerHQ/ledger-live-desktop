@@ -160,7 +160,15 @@ class Input extends PureComponent<Props, State> {
 
   render() {
     const { isFocus } = this.state
-    const { renderLeft, renderRight, containerProps, editInPlace, small, error } = this.props
+    const {
+      renderLeft,
+      renderRight,
+      containerProps,
+      editInPlace,
+      small,
+      error,
+      ...props
+    } = this.props
 
     return (
       <Container
@@ -175,7 +183,7 @@ class Input extends PureComponent<Props, State> {
         {renderLeft}
         <Box px={3} grow shrink>
           <Base
-            {...this.props}
+            {...props}
             small={small}
             innerRef={n => (this._input = n)}
             onFocus={this.handleFocus}

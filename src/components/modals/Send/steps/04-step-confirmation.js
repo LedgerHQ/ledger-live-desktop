@@ -1,17 +1,22 @@
 // @flow
-import React from 'react'
+
+import React, { Fragment } from 'react'
+import { shell } from 'electron'
 import styled from 'styled-components'
-import type { Operation } from '@ledgerhq/live-common/lib/types'
-import type { T } from 'types/common'
+import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
+
+import { colors } from 'styles/theme'
+import { multiline } from 'styles/helpers'
 
 import TrackPage from 'analytics/TrackPage'
+import Box from 'components/base/Box'
+import Button from 'components/base/Button'
 import Spinner from 'components/base/Spinner'
+import TranslatedError from 'components/TranslatedError'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
-import Box from 'components/base/Box'
-import { multiline } from 'styles/helpers'
-import { colors } from 'styles/theme'
-import TranslatedError from '../../TranslatedError'
+
+import type { StepProps } from '../index'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -38,14 +43,7 @@ const Text = styled(Box).attrs({
   text-align: center;
 `
 
-type Props = {
-  optimisticOperation: ?Operation,
-  t: T,
-  error: ?Error,
-}
-
-function StepConfirmation(props: Props) {
-  const { t, optimisticOperation, error } = props
+export default function StepConfirmation({ t, optimisticOperation, error }: StepProps<*>) {
   const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
   const iconColor = optimisticOperation
     ? colors.positiveGreen
@@ -57,7 +55,6 @@ function StepConfirmation(props: Props) {
     : error
       ? 'app:send.steps.confirmation.error'
       : 'app:send.steps.confirmation.pending'
-
   return (
     <Container>
       <TrackPage category="Send" name="Step4" />
@@ -79,4 +76,46 @@ function StepConfirmation(props: Props) {
   )
 }
 
-export default StepConfirmation
+export function StepConfirmationFooter({
+  t,
+  transitionTo,
+  account,
+  onRetry,
+  optimisticOperation,
+  error,
+  closeModal,
+}: StepProps<*>) {
+  const url =
+    optimisticOperation && account && getAccountOperationExplorer(account, optimisticOperation)
+  return (
+    <Fragment>
+      <Button onClick={closeModal}>{t('app:common.close')}</Button>
+      {optimisticOperation ? (
+        // TODO: actually go to operations details
+        url ? (
+          <Button
+            ml={2}
+            onClick={() => {
+              shell.openExternal(url)
+              closeModal()
+            }}
+            primary
+          >
+            {t('app:send.steps.confirmation.success.cta')}
+          </Button>
+        ) : null
+      ) : error ? (
+        <Button
+          ml={2}
+          primary
+          onClick={() => {
+            onRetry()
+            transitionTo('amount')
+          }}
+        >
+          {t('app:send.steps.confirmation.error.cta')}
+        </Button>
+      ) : null}
+    </Fragment>
+  )
+}
