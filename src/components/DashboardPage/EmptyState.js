@@ -40,7 +40,7 @@ class EmptyState extends PureComponent<Props, *> {
       <Box mt={7} alignItems="center">
         <img
           alt="emptyState Dashboard logo"
-          src={i('logos/emptyStateDashboard.png')}
+          src={i('empty-state-dashboard.svg')}
           width="413"
           height="157"
         />
