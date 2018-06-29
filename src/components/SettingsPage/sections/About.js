@@ -40,12 +40,6 @@ const ITEMS = [
     url: 'https://support.ledgerwallet.com/hc/en-us',
   },
   {
-    key: 'contact',
-    title: t => t('app:settings.about.contactUs'),
-    desc: t => t('app:settings.about.contactUsDesc'),
-    url: 'https://support.ledgerwallet.com/hc/en-us/requests/new',
-  },
-  {
     key: 'terms',
     title: t => t('app:settings.about.terms'),
     desc: t => t('app:settings.about.termsDesc'),

@@ -169,16 +169,6 @@ class TabProfile extends PureComponent<Props, State> {
             </Box>
           </Row>
           <Row
-            title={t('app:settings.profile.developerMode')}
-            desc={t('app:settings.profile.developerModeDesc')}
-          >
-            <Track onUpdate event={settings.developerMode ? 'DevModeEnabled' : 'DevModeDisabled'} />
-            <CheckBox
-              isChecked={settings.developerMode}
-              onChange={developerMode => saveSettings({ developerMode })}
-            />
-          </Row>
-          <Row
             title={t('app:settings.profile.reportErrors')}
             desc={t('app:settings.profile.reportErrorsDesc')}
           >
@@ -202,12 +192,25 @@ class TabProfile extends PureComponent<Props, State> {
             />
           </Row>
           <Row
+            title={t('app:settings.profile.developerMode')}
+            desc={t('app:settings.profile.developerModeDesc')}
+          >
+            <Track onUpdate event={settings.developerMode ? 'DevModeEnabled' : 'DevModeDisabled'} />
+            <CheckBox
+              isChecked={settings.developerMode}
+              onChange={developerMode => saveSettings({ developerMode })}
+            />
+          </Row>
+          <Row
             title={t('app:settings.profile.softResetTitle')}
             desc={t('app:settings.profile.softResetDesc')}
           >
             <Button primary onClick={this.handleOpenSoftResetModal} event="ClearCacheIntent">
               {t('app:settings.profile.softReset')}
             </Button>
+          </Row>
+          <Row title={t('app:settings.exportLogs.title')} desc={t('app:settings.exportLogs.desc')}>
+            <ExportLogsBtn />
           </Row>
           <Row
             title={t('app:settings.profile.hardResetTitle')}
@@ -216,9 +219,6 @@ class TabProfile extends PureComponent<Props, State> {
             <Button danger onClick={this.handleOpenHardResetModal} event="HardResetIntent">
               {t('app:settings.profile.hardReset')}
             </Button>
-          </Row>
-          <Row title={t('app:settings.exportLogs.title')} desc={t('app:settings.exportLogs.desc')}>
-            <ExportLogsBtn />
           </Row>
         </Body>
 
@@ -240,6 +240,7 @@ class TabProfile extends PureComponent<Props, State> {
           onClose={this.handleCloseHardResetModal}
           onReject={this.handleCloseHardResetModal}
           onConfirm={this.handleHardReset}
+          confirmText={t('app:common.reset')}
           title={t('app:settings.hardResetModal.title')}
           desc={t('app:settings.hardResetModal.desc')}
           renderIcon={this.hardResetIconRender}

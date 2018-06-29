@@ -158,16 +158,27 @@ class TabProfile extends PureComponent<Props, State> {
             title={t('app:settings.display.counterValue')}
             desc={t('app:settings.display.counterValueDesc')}
           >
-            <Box flow={2}>
-              <Select
-                small
-                minWidth={250}
-                onChange={this.handleChangeCounterValue}
-                itemToString={item => (item ? item.name : '')}
-                renderSelected={item => item && item.name}
-                options={fiats}
-                value={cvOption}
-              />
+            <Select
+              small
+              minWidth={250}
+              onChange={this.handleChangeCounterValue}
+              itemToString={item => (item ? item.name : '')}
+              renderSelected={item => item && item.name}
+              options={fiats}
+              value={cvOption}
+            />
+          </Row>
+          {counterValueCurrency ? (
+            <Row
+              title={t('app:settings.display.exchange', {
+                ticker: counterValueCurrency.ticker,
+                fiat: counterValueCurrency.name,
+              })}
+              desc={t('app:settings.display.exchangeDesc', {
+                fiat: counterValueCurrency.name,
+                ticker: counterValueCurrency.ticker,
+              })}
+            >
               <SelectExchange
                 small
                 from={intermediaryCurrency}
@@ -176,8 +187,8 @@ class TabProfile extends PureComponent<Props, State> {
                 onChange={this.handleChangeExchange}
                 minWidth={200}
               />
-            </Box>
-          </Row>
+            </Row>
+          ) : null}
           <Row
             title={t('app:settings.display.language')}
             desc={t('app:settings.display.languageDesc')}
