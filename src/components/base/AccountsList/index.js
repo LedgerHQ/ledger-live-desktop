@@ -32,7 +32,7 @@ class AccountsList extends Component<
   },
 > {
   state = {
-    collapsed: false,
+    collapsed: !!this.props.collapsible,
   }
   toggleCollapse = () => {
     this.setState(({ collapsed }) => ({ collapsed: !collapsed }))

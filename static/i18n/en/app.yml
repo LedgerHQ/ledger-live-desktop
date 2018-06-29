@@ -73,7 +73,7 @@ sidebar:
   menu: Menu
   accounts: Accounts ({{count}})
   manager: Manager
-  exchange: Exchange
+  exchange: Exchanges
 account:
   balance: Balance
   receive: Receive
@@ -111,14 +111,14 @@ dashboard:
   summary: "Here's the summary of your account"
   summary_plural: "Here's the summary of your {{count}} accounts"
   noAccounts: No accounts yet
-  recentActivity: Recent activity
+  recentActivity: Last operations
   totalBalance: Total balance
   accountsOrder:
     name: name
     balance: balance
 currentAddress:
   title: Current address
-  for: Address for <1><0>{{accountName}}</0></1>
+  for: Address for account <1><0>{{accountName}}</0></1>
   message: Your receive address has not been confirmed on your Ledger device. Please verify the address for optimal security.
 deviceConnect:
   step1:
@@ -135,9 +135,10 @@ emptyState:
       addAccount: Add accounts
       installApp: Open Manager
 exchange:
-  title: Exchange
+  title: Exchanges
+  desc: Try a selection of exchange services offered by our sponsors
   visitWebsite: Visit website
-  coinhouse: 'Coinhouse is the trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
+  coinhouse: 'Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
   changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
   coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.'
 genuinecheck:
@@ -147,12 +148,12 @@ addAccounts:
   title: Add accounts
   breadcrumb:
     informations: Crypto asset
-    connectDevice: Connect device
-    import: Select accounts
+    connectDevice: Device
+    import: Accounts
     finish: Confirmation
-  accountAlreadyImportedSubtitle: Already in portfolio
-  accountToImportSubtitle: 'Select account'
-  accountToImportSubtitle_plural: 'Select accounts'
+  accountAlreadyImportedSubtitle: '{{count}} Already in portfolio'
+  accountToImportSubtitle: 'Add existing account'
+  accountToImportSubtitle_plural: 'Add existing accounts'
   selectAll: Select all ({{count}})
   unselectAll: Deselect all ({{count}})
   editName: Edit name
@@ -162,7 +163,7 @@ addAccounts:
   success: Account added to your portfolio
 # success_plural: Accounts successfully added to your portfolio.
   createNewAccount:
-    title: Create a new account
+    title: Add a new account
     noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
@@ -186,7 +187,7 @@ operationDetails:
   showMore: Show {{recipients}} more
   showLess: Show less
 operationList:
-  noMoreOperations: That's all!
+  noMoreOperations: That's all
 manager:
   yourDeviceIsGenuine: Your device is genuine
   tabs:
@@ -236,33 +237,33 @@ receive:
   title: Receive
   steps:
     chooseAccount:
-      title: Choose account
-      label: Account
+      title: Account
+      label: Account to credit
     connectDevice:
-      title: Connect device
-      withoutDevice: Receive without device
+      title: Device
+      withoutDevice: Don't have your device?
     confirmAddress:
-      title: Confirm address
+      title: Verification
       action: Confirm address on device
-      text: To receive crypto assets, confirm the address on your device
-      support: Ledger Support
+      text: Verify that the address below matches the address displayed on your device
+      support: Contact us
       error:
         title: Receive address rejected
         text: Please try again or contact Support when in doubt
     receiveFunds:
-      title: Receive crypto assets
+      title: Receive
       label: Amount (optional)
 send:
   title: Send
-  totalSpent: Total
+  totalSpent: Total to debit
   steps:
     amount:
-      title: Send crypto assets
+      title: crypto assets
       selectAccountDebit: Select an account to debit
       recipientAddress: Recipient address # can't control the tooltip!
       amount: Amount
       max: Max
-      fees: Fees
+      fees: Network fees
       advancedOptions: Advanced options
       useRBF: Use a replace-by-fee transaction
       message: Leave a message (140)
@@ -271,14 +272,12 @@ send:
       unitPerByte: '{{unit}} per byte'
       feePerByte: Fees per byte
     connectDevice:
-      title: Connect device
+      title: Device
     verification:
       title: Verification
       warning: |
-        Carefully verify the transaction details displayed one by one on your device before you proceed.
-      # blue
-      # nano
-      body: Press the right button to confirm the transaction
+        Carefully verify all transaction details now displayed on your device screen
+      body: Once verified, press the right button to confirm and sign the transaction
     confirmation:
       title: Confirmation
       success:
@@ -312,7 +311,7 @@ settings: # Always ensure descriptions carry full stops (.)
     region: Region
     regionDesc: Choose the region in which you’re located to set the Ledger Live's time zone.
     stock: Regional market indicator
-    stockDesc: Choose Western to display an increase in market value in blue. Choose Eastern to display an increase in market value in red.
+    stockDesc: Choose Western to display an increase in market value in green. Choose Eastern to display an increase in market value in red.
   currencies:
     desc: Select a crypto asset to edit its settings.
     exchange: Rate provider ({{ticker}})
@@ -354,8 +353,10 @@ settings: # Always ensure descriptions carry full stops (.)
     faqDesc: A problem? Learn about Ledger Live, Ledger devices, supported crypto assets and apps.
     contactUs: Contact us
     contactUsDesc: Need help? Request assistance from Ledger Support by email or chat.
-    terms: --- Terms and Privacy policy ---
-    termsDesc: --- Check with Legal ---
+    terms: Terms and conditions
+    termsDesc: By using Ledger Live you are deemed to have accepted our terms and conditions.
+    #privacy: Privacy policy
+    #termsDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
   hardResetModal:
     title: Reset Ledger Live
     desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
