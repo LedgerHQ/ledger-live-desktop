@@ -27,7 +27,6 @@ import Text from 'components/base/Text'
 import NanoS from 'icons/device/NanoS'
 import CheckFull from 'icons/CheckFull'
 
-import { PreventDeviceChangeRecheck } from 'components/EnsureDevice'
 import UpdateFirmwareButton from './UpdateFirmwareButton'
 
 export const getCleanVersion = (input: string): string =>
@@ -143,7 +142,6 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           </Box>
           <UpdateFirmwareButton firmware={latestFirmware} onClick={this.handleDisclaimerModal} />
         </Box>
-        {modal !== 'closed' ? <PreventDeviceChangeRecheck /> : null}
         {latestFirmware && (
           <Fragment>
             <DisclaimerModal

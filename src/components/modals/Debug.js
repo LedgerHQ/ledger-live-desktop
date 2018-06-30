@@ -1,18 +1,23 @@
 // @flow
 /* eslint-disable react/jsx-no-literals */
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import last from 'lodash/last'
-import React, { Component } from 'react'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
+import { getCurrentDevice } from 'reducers/devices'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
-import EnsureDevice from 'components/EnsureDevice'
 import { getDerivations } from 'helpers/derivations'
 import getAddress from 'commands/getAddress'
 import testInterval from 'commands/testInterval'
 import testCrash from 'commands/testCrash'
 import testApdu from 'commands/testApdu'
+import ping from 'commands/ping'
+import libcoreGetVersion from 'commands/libcoreGetVersion'
+import SyncSkipUnderPriority from '../SyncSkipUnderPriority'
 
 class Debug extends Component<*, *> {
   state = {
@@ -37,18 +42,13 @@ class Debug extends Component<*, *> {
       const currency = getCryptoCurrencyById('bitcoin')
       const derivation = last(getDerivations(currency))
       for (let x = 0; x < 20; x++) {
-        const obj = {
-          path: derivation({ currency, segwit: true, x }),
-          currencyId: currency.id,
-          devicePath: device.path,
-        }
-
-        // we start one in parallel just to stress device even more. this test race condition!
-        getAddress.send(obj)
-        getAddress.send(obj)
-
-        const { address, path } = await getAddress.send(obj).toPromise()
-
+        const { address, path } = await getAddress
+          .send({
+            path: derivation({ currency, segwit: true, x }),
+            currencyId: currency.id,
+            devicePath: device.path,
+          })
+          .toPromise()
         this.log(`derivated ${path} = ${address}`)
       }
     } catch (e) {
@@ -72,6 +72,38 @@ class Debug extends Component<*, *> {
       .subscribe(o => this.log(o.responseHex), e => this.error(e))
   }
 
+  benchmark = (device: *) => async () => {
+    const run = async (name, job) => {
+      const before = window.performance.now()
+      const res = await job()
+      const after = window.performance.now()
+      this.log(
+        `benchmark: ${Math.round((after - before) * 100) / 100}ms: ${name} => ${String(res)}`,
+      )
+    }
+
+    await run('ping process', () => ping.send().toPromise())
+    await run('libcore version', () =>
+      libcoreGetVersion
+        .send()
+        .toPromise()
+        .then(o => o.stringVersion),
+    )
+    const currency = getCryptoCurrencyById('bitcoin')
+    const derivation = last(getDerivations(currency))
+    const obj = {
+      path: derivation({ currency, segwit: true, x: 0 }),
+      currencyId: currency.id,
+      devicePath: device.path,
+    }
+    await run('getAddress', () =>
+      getAddress
+        .send(obj)
+        .toPromise()
+        .then(o => o.address),
+    )
+  }
+
   log = (txt: string) => {
     this.setState(({ logs }) => ({ logs: logs.concat({ txt, type: 'log' }) }))
   }
@@ -83,6 +115,7 @@ class Debug extends Component<*, *> {
   }
 
   render() {
+    const { device } = this.props
     const { logs } = this.state
     return (
       <Modal
@@ -90,18 +123,24 @@ class Debug extends Component<*, *> {
         onHide={this.onHide}
         render={({ onClose }: *) => (
           <ModalBody onClose={onClose}>
+            <SyncSkipUnderPriority priority={99999999} />
             <ModalTitle>developer internal tools</ModalTitle>
             <ModalContent>
               <Box style={{ height: 60, overflow: 'auto' }}>
-                <Box horizontal style={{ padding: 10 }}>
-                  <EnsureDevice>
-                    {device => (
-                      <Button onClick={this.onClickStressDevice(device)} primary>
-                        Stress getAddress (BTC)
-                      </Button>
-                    )}
-                  </EnsureDevice>
-                </Box>
+                {device && (
+                  <Box horizontal style={{ padding: 10 }}>
+                    <Button onClick={this.benchmark(device)} primary>
+                      Benchmark
+                    </Button>
+                  </Box>
+                )}
+                {device && (
+                  <Box horizontal style={{ padding: 10 }}>
+                    <Button onClick={this.onClickStressDevice(device)} primary>
+                      Derivate BTC addresses
+                    </Button>
+                  </Box>
+                )}
                 <Box horizontal style={{ padding: 10 }}>
                   <Button onClick={this.onCrash} danger>
                     crash process
@@ -113,22 +152,20 @@ class Debug extends Component<*, *> {
                   </Button>
                   <Button onClick={this.cancelAllPeriods}>Cancel</Button>
                 </Box>
-                <EnsureDevice>
-                  {device => (
-                    <Box horizontal style={{ padding: 10 }}>
-                      <Box grow>
-                        <Input
-                          placeholder="APDU hex ( e.g. E016000000 )"
-                          value={this.state.apdu}
-                          onChange={apdu => this.setState({ apdu })}
-                        />
-                      </Box>
-                      <Button onClick={this.runApdu(device)} primary>
-                        RUN
-                      </Button>
-                    </Box>
-                  )}
-                </EnsureDevice>
+                device && (
+                <Box horizontal style={{ padding: 10 }}>
+                  <Box grow>
+                    <Input
+                      placeholder="APDU hex ( e.g. E016000000 )"
+                      value={this.state.apdu}
+                      onChange={apdu => this.setState({ apdu })}
+                    />
+                  </Box>
+                  <Button onClick={this.runApdu(device)} primary>
+                    RUN
+                  </Button>
+                </Box>
+                )
               </Box>
               <Box
                 style={{
@@ -167,4 +204,8 @@ class Debug extends Component<*, *> {
   }
 }
 
-export default Debug
+export default connect(
+  createStructuredSelector({
+    device: getCurrentDevice,
+  }),
+)(Debug)
