@@ -112,13 +112,15 @@ export class StepAmountFooter extends PureComponent<
   }
 
   componentWillUnmount() {
-    this._isUnmounted = true
+    this.syncId++
   }
 
-  _isUnmounted = false
+  syncId = 0
 
   async resync() {
     const { account, bridge, transaction } = this.props
+
+    const syncId = ++this.syncId
 
     if (!account || !transaction || !bridge) {
       return
@@ -128,9 +130,9 @@ export class StepAmountFooter extends PureComponent<
 
     try {
       const totalSpent = await bridge.getTotalSpent(account, transaction)
-      if (this._isUnmounted) return
+      if (syncId !== this.syncId) return
       const canBeSpent = await bridge.canBeSpent(account, transaction)
-      if (this._isUnmounted) return
+      if (syncId !== this.syncId) return
       this.setState({ totalSpent, canBeSpent, isSyncing: false })
     } catch (err) {
       this.setState({ isSyncing: false })
