@@ -70,12 +70,12 @@ class ResetButton extends PureComponent<Props, State> {
   }
 }
 
-export const IconWrapperCircle = styled(Box).attrs({})`
+export const IconWrapperCircle = styled(Box)`
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background: #ea2e4919;
-  text-align: -webkit-center;
+  text-align: center;
   justify-content: center;
 `
 

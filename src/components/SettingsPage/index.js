@@ -13,7 +13,6 @@ import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
 import SectionDisplay from './sections/Display'
 import SectionCurrencies from './sections/Currencies'
-import SectionProfile from './sections/Profile'
 import SectionAbout from './sections/About'
 import SectionTools from './sections/Tools'
 
@@ -47,11 +46,6 @@ class SettingsPage extends PureComponent<Props, State> {
         key: 'currencies',
         label: props.t('app:settings.tabs.currencies'),
         value: SectionCurrencies,
-      },
-      {
-        key: 'profile',
-        label: props.t('app:settings.tabs.profile'),
-        value: SectionProfile,
       },
       {
         key: 'about',

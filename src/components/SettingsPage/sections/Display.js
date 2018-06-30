@@ -7,6 +7,7 @@ import { createSelector } from 'reselect'
 import { langAndRegionSelector, counterValueCurrencySelector } from 'reducers/settings'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
+import { EXPERIMENTAL_MARKET_INDICATOR_SETTINGS } from 'config/constants'
 
 import IconDisplay from 'icons/Display'
 import TrackPage from 'analytics/TrackPage'
@@ -15,6 +16,10 @@ import LanguageSelect from '../LanguageSelect'
 import CounterValueSelect from '../CounterValueSelect'
 import CounterValueExchangeSelect from '../CounterValueExchangeSelect'
 import RegionSelect from '../RegionSelect'
+import DisablePasswordButton from '../DisablePasswordButton'
+import DevModeButton from '../DevModeButton'
+import SentryLogsButton from '../SentryLogsButton'
+import ShareAnalyticsButton from '../ShareAnalyticsButton'
 
 import {
   SettingsSection as Section,
@@ -74,8 +79,36 @@ class TabGeneral extends PureComponent<Props> {
               <RegionSelect />
             </Row>
           )}
-          <Row title={t('app:settings.display.stock')} desc={t('app:settings.display.stockDesc')}>
-            <MarketIndicatorRadio />
+
+          {EXPERIMENTAL_MARKET_INDICATOR_SETTINGS ? (
+            <Row title={t('app:settings.display.stock')} desc={t('app:settings.display.stockDesc')}>
+              <MarketIndicatorRadio />
+            </Row>
+          ) : null}
+
+          <Row
+            title={t('app:settings.profile.password')}
+            desc={t('app:settings.profile.passwordDesc')}
+          >
+            <DisablePasswordButton />
+          </Row>
+          <Row
+            title={t('app:settings.profile.reportErrors')}
+            desc={t('app:settings.profile.reportErrorsDesc')}
+          >
+            <SentryLogsButton />
+          </Row>
+          <Row
+            title={t('app:settings.profile.analytics')}
+            desc={t('app:settings.profile.analyticsDesc')}
+          >
+            <ShareAnalyticsButton />
+          </Row>
+          <Row
+            title={t('app:settings.profile.developerMode')}
+            desc={t('app:settings.profile.developerModeDesc')}
+          >
+            <DevModeButton />
           </Row>
         </Body>
       </Section>

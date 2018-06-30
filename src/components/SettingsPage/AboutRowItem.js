@@ -9,7 +9,6 @@ export default class AboutRowItem extends PureComponent<{
   url: string,
   title: string,
   desc: string,
-  url: string,
 }> {
   onClick = () => shell.openExternal(this.props.url)
 

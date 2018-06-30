@@ -5,6 +5,10 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
+
+import ExportLogsBtn from 'components/ExportLogsBtn'
+import CleanButton from '../CleanButton'
+import ResetButton from '../ResetButton'
 import ReleaseNotesButton from '../ReleaseNotesButton'
 import AboutRowItem from '../AboutRowItem'
 
@@ -37,6 +41,22 @@ class SectionAbout extends PureComponent<Props> {
         <Body>
           <Row title={t('app:settings.about.version')} desc={version}>
             <ReleaseNotesButton />
+          </Row>
+
+          <Row
+            title={t('app:settings.profile.softResetTitle')}
+            desc={t('app:settings.profile.softResetDesc')}
+          >
+            <CleanButton />
+          </Row>
+          <Row
+            title={t('app:settings.profile.hardResetTitle')}
+            desc={t('app:settings.profile.hardResetDesc')}
+          >
+            <ResetButton />
+          </Row>
+          <Row title={t('app:settings.exportLogs.title')} desc={t('app:settings.exportLogs.desc')}>
+            <ExportLogsBtn />
           </Row>
 
           <AboutRowItem
