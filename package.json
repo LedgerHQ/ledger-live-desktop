@@ -32,7 +32,6 @@
     }
   },
   "resolutions": {
-    "uglify-es": "3.3.7",
     "webpack-sources": "1.0.1"
   },
   "dependencies": {
@@ -157,7 +156,6 @@
     "prettier": "^1.13.5",
     "react-hot-loader": "^4.3.2",
     "react-test-renderer": "^16.4.1",
-    "uglifyjs-webpack-plugin": "^1.2.6",
     "webpack": "^4.6.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.14",
