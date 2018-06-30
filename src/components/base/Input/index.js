@@ -151,9 +151,12 @@ class Input extends PureComponent<Props, State> {
     onBlur(e)
   }
 
-  handleSelectEverything = () => {
-    this._input && this._input.setSelectionRange(0, this._input.value.length)
-    this._input && this._input.focus()
+  select = () => {
+    const { _input } = this
+    if (_input) {
+      _input.select()
+      _input.focus()
+    }
   }
 
   _input = null
