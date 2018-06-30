@@ -29,6 +29,7 @@ const ConfettiLayer = styled.div`
 `
 
 const socialMedia = [
+  // FIXME it should just be vdom in place
   {
     key: 'twitter',
     url: 'https://twitter.com/LedgerHQ',
@@ -37,7 +38,7 @@ const socialMedia = [
   },
   {
     key: 'github',
-    url: 'https://github.com/LedgerHQ',
+    url: 'https://github.com/LedgerHQ/ledger-live-desktop',
     icon: <IconSocialGithub size={24} />,
     onClick: url => shell.openExternal(url),
   },
