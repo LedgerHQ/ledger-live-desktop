@@ -25,7 +25,7 @@ export default translate()(({ gasLimit, onChangeGasLimit, t }: Props) => (
         <Input
           value={gasLimit}
           onChange={str => {
-            const gasLimit = parseInt(str, 10)
+            const gasLimit = parseInt(str || 0, 10)
             if (!isNaN(gasLimit) && isFinite(gasLimit)) onChangeGasLimit(gasLimit)
             else onChangeGasLimit(0x5208)
           }}
