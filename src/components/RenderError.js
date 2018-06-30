@@ -17,7 +17,9 @@ import Space from 'components/base/Space'
 import Button from 'components/base/Button'
 import ConfirmModal from 'components/base/Modal/ConfirmModal'
 import IconTriangleWarning from 'icons/TriangleWarning'
-import { IconWrapperCircle } from './SettingsPage/sections/Profile'
+
+// SERIOUSLY plz refactor to use <ResetButton>
+import { IconWrapperCircle } from './SettingsPage/ResetButton'
 
 type Props = {
   error: Error,

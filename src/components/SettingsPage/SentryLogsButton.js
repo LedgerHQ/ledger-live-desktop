@@ -1,0 +1,39 @@
+// @flow
+
+import React, { Fragment, PureComponent } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { setSentryLogs } from 'actions/settings'
+import { sentryLogsSelector } from 'reducers/settings'
+import Track from 'analytics/Track'
+import CheckBox from 'components/base/CheckBox'
+
+const mapStateToProps = createStructuredSelector({
+  sentryLogs: sentryLogsSelector,
+})
+
+const mapDispatchToProps = {
+  setSentryLogs,
+}
+
+type Props = {
+  sentryLogs: boolean,
+  setSentryLogs: boolean => void,
+}
+
+class SentryLogsButton extends PureComponent<Props> {
+  render() {
+    const { sentryLogs, setSentryLogs } = this.props
+    return (
+      <Fragment>
+        <Track onUpdate event={sentryLogs ? 'SentryEnabled' : 'SentryDisabled'} />
+        <CheckBox isChecked={sentryLogs} onChange={setSentryLogs} />
+      </Fragment>
+    )
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SentryLogsButton)

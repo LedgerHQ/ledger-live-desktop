@@ -4,11 +4,22 @@ import type { Dispatch } from 'redux'
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 
-export type SaveSettings = Settings => { type: string, payload: $Shape<Settings> }
+export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> }
+
 export const saveSettings: SaveSettings = payload => ({
   type: 'DB:SAVE_SETTINGS',
   payload,
 })
+
+export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode })
+export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs })
+export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics })
+export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator })
+export const setCounterValue = (counterValue: string) => saveSettings({ counterValue })
+export const setLanguage = (language: ?string) => saveSettings({ language })
+export const setRegion = (region: ?string) => saveSettings({ region })
+export const setCounterValueExchange = (counterValueExchange: ?string) =>
+  saveSettings({ counterValueExchange })
 
 type FetchSettings = (*) => (Dispatch<*>) => void
 export const fetchSettings: FetchSettings = (settings: *) => dispatch => {
