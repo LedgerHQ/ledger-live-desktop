@@ -223,5 +223,7 @@ export const marketIndicatorSelector = (state: State) => state.settings.marketIn
 export const sentryLogsBooleanSelector = (state: State) => state.settings.sentryLogs
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
+export const hasCompletedOnboardingSelector = (state: State) =>
+  state.settings.hasCompletedOnboarding
 
 export default handleActions(handlers, INITIAL_STATE)
