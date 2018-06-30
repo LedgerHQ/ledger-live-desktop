@@ -5,6 +5,7 @@ import { compose } from 'redux'
 import styled from 'styled-components'
 import { Route, withRouter } from 'react-router'
 import { translate } from 'react-i18next'
+import { SYNC_PENDING_INTERVAL } from 'config/constants'
 
 import type { Location } from 'react-router'
 
@@ -26,6 +27,7 @@ import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/MainSideBar'
 import TopBar from 'components/TopBar'
+import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 
 const Main = styled(GrowScroll).attrs({
   px: 6,
@@ -82,6 +84,8 @@ class Default extends Component<Props> {
           {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
             <ModalComponent key={name} />
           ))}
+
+          <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
 
           <div id="sticky-back-to-top-root" />
 
