@@ -1,8 +1,7 @@
 // @flow
-/* eslint-disable react/jsx-no-literals */ // FIXME
 
 import React, { PureComponent } from 'react'
-
+import { translate } from 'react-i18next'
 import Box, { Card } from 'components/base/Box'
 import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
 import Button from 'components/base/Button'
@@ -53,4 +52,4 @@ class TabProfile extends PureComponent<*, *> {
   }
 }
 
-export default TabProfile
+export default translate()(TabProfile)
