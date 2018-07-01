@@ -190,6 +190,16 @@ class InputCurrency extends PureComponent<Props, State> {
     )
   }
 
+  select = () => {
+    // TODO we should fowardRef so InputCurrency ref is on Input
+    this.input && this.input.select()
+  }
+
+  input: ?Input
+  onRef = (input: ?Input) => {
+    this.input = input
+  }
+
   render() {
     const { renderRight, showAllDigits, unit, subMagnitude } = this.props
     const { displayValue } = this.state
@@ -198,6 +208,7 @@ class InputCurrency extends PureComponent<Props, State> {
       <Input
         {...this.props}
         ff="Rubik"
+        ref={this.onRef}
         value={displayValue}
         onChange={this.handleChange}
         onFocus={this.handleFocus}

@@ -23,11 +23,17 @@ class FeesField extends Component<Props, State> {
   componentDidMount() {
     this.sync()
   }
+  componentWillUnmount() {
+    this.syncId++
+  }
+  syncId = 0
   async sync() {
     const api = apiForEndpointConfig(this.props.account.endpointConfig)
+    const syncId = ++this.syncId
     try {
       await api.connect()
       const info = await api.getServerInfo()
+      if (syncId !== this.syncId) return
       const serverFee = parseAPIValue(info.validatedLedger.baseFeeXRP)
       if (!this.props.fee) {
         this.props.onChange(serverFee)
