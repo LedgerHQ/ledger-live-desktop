@@ -67,16 +67,16 @@ NetworkDown:
   description: Please check your internet connection.
 NoAddressesFound:
   title: Sorry, no accounts found
-  description:  # Missing context
+  description: Something went wrong with address calculation, try again or contact Ledger Support.
 NotEnoughBalance:
   title: Oops, not enough balance
   description: Make sure the account to debit has sufficient balance
 RangeError:
-  title: '{{message}}' # Missing context
+  title: '{{message}}'
   description:
 TimeoutError:
   title: Oops, a time out occurred
-  description: It took too long for the server to respond. #Retry / check status?
+  description: It took too long for the server to respond.
 TransportStatusError:
   title: '{{message}}'
   description:
