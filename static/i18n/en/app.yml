@@ -310,7 +310,7 @@ settings: # Always ensure descriptions carry full stops (.)
     counterValue: Countervalue
     counterValueDesc: Choose the currency to display next to your balance and operations.
     exchange: Rate provider
-    exchangeDesc: Choose the provider of the exchange rate from Bitcoin to {{fiat}}.
+    exchangeDesc: Choose the provider of the exchange rate from Bitcoin to {{fiat}}. Crypto assets are first converted to a Bitcoin countervalue, before they're converted to {{fiat}} (crypto asset → BTC → {{fiat}}).
     region: Region
     regionDesc: Choose the region in which you’re located to set the Ledger Live's time zone.
     stock: Regional market indicator
@@ -318,7 +318,7 @@ settings: # Always ensure descriptions carry full stops (.)
   currencies:
     desc: Select a crypto asset to edit its settings.
     exchange: Rate provider ({{ticker}} → BTC)
-    exchangeDesc: Choose the provider of the rate between {{currencyName}} and Bitcoin. This intermediary calculation enables the calculation of your balance in your base currency, for indicative purposes only.
+    exchangeDesc: Choose the provider of the rate between {{currencyName}} and Bitcoin. The indicative total value of your portfolio is calculated by converting your {{currencyName}} to Bitcoin, which is then converted to your base currency.
     confirmationsToSpend: Number of confirmations required to spend
     confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable. # A higher number of confirmations decreases the probability that a transaction is rejected.
     confirmationsNb: Number of confirmations
