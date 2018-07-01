@@ -24,7 +24,7 @@ module.exports = () => ({
     [
       require('babel-plugin-styled-components'),
       {
-        displayName: NODE_ENV === 'development',
+        displayName: true,
         ssr: __TEST__,
       },
     ],
