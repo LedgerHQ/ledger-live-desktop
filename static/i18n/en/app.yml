@@ -83,7 +83,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Ensure the <1><0>{{currency}}</0></1> app is installed and start receiving
+    desc: Make sure the <1><0>{{currency}}</0></1> app is installed and start receiving
     buttons:
       receiveFunds: Receive
   settings:
@@ -304,13 +304,13 @@ settings: # Always ensure descriptions carry full stops (.)
     profile: Profile
     about: Help
   display:
-    desc: Unneeded description # Remove this, it controls multiple settings tabs and is not required.
+    desc: Change settings that affect Ledger Live in general.
     language: Display language
     languageDesc: Set the language displayed in Ledger Live.
     counterValue: Countervalue
     counterValueDesc: Choose the currency to display next to your balance and operations.
     exchange: Rate provider
-    exchangeDesc: Choose the provider of the exchange rate from Bitcoin to {{fiat}}.
+    exchangeDesc: Choose the provider of the exchange rate from Bitcoin to {{fiat}}. Crypto assets are first converted to a Bitcoin countervalue, before they're converted to {{fiat}} (crypto asset → BTC → {{fiat}}).
     region: Region
     regionDesc: Choose the region in which you’re located to set the Ledger Live's time zone.
     stock: Regional market indicator
@@ -318,7 +318,7 @@ settings: # Always ensure descriptions carry full stops (.)
   currencies:
     desc: Select a crypto asset to edit its settings.
     exchange: Rate provider ({{ticker}} → BTC)
-    exchangeDesc: Choose the provider of the rate between {{currencyName}} and Bitcoin. This intermediary calculation enables the calculation of your balance in your base currency, for indicative purposes only.
+    exchangeDesc: Choose the provider of the rate between {{currencyName}} and Bitcoin. The indicative total value of your portfolio is calculated by converting your {{currencyName}} to Bitcoin, which is then converted to your base currency.
     confirmationsToSpend: Number of confirmations required to spend
     confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable. # A higher number of confirmations decreases the probability that a transaction is rejected.
     confirmationsNb: Number of confirmations
@@ -353,11 +353,12 @@ settings: # Always ensure descriptions carry full stops (.)
     version: Ledger Live version
     releaseNotesBtn: Show release notes # Close button instead of continue.
     faq: Ledger Support
-    faqDesc: A problem? Learn about Ledger Live, Ledger devices, supported crypto assets and apps.
+    faqDesc: A problem? Get help with Ledger Live, Ledger devices, supported crypto assets and apps.
     terms: Terms and conditions
     termsDesc: By using Ledger Live you are deemed to have accepted our terms and conditions.
     #privacy: Privacy policy
-    #termsDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
+    #privacyDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
+    #privacyURL: 'https://www.ledgerwallet.com/privacy-policy'
   hardResetModal:
     title: Reset Ledger Live
     desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
