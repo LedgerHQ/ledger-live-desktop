@@ -75,6 +75,7 @@ class Select extends PureComponent<Props> {
         isLoading={isLoading}
         isClearable={isClearable}
         isSearchable={isSearchable}
+        menuPlacement="auto"
         blurInputOnSelect={false}
         backspaceRemovesValue
         menuShouldBlockScroll
