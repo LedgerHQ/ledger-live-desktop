@@ -45,6 +45,7 @@ export type BehaviorAction =
   | { type: 'BACKGROUND_TICK' }
   | { type: 'SET_SKIP_UNDER_PRIORITY', priority: number }
   | { type: 'SYNC_ONE_ACCOUNT', accountId: string, priority: number }
+  | { type: 'SYNC_SOME_ACCOUNTS', accountIds: string[], priority: number }
   | { type: 'SYNC_ALL_ACCOUNTS', priority: number }
 
 export type Sync = (action: BehaviorAction) => void
@@ -64,7 +65,6 @@ const actions = {
 class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
   constructor() {
     super()
-
     const synchronize = (accountId: string, next: () => void) => {
       const state = syncStateLocalSelector(this.props.bridgeSync, { accountId })
       if (state.pending) {
@@ -104,6 +104,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
     const schedule = (ids: string[], priority: number) => {
       if (priority < skipUnderPriority) return
       // by convention we remove concurrent tasks with same priority
+      // FIXME this is somehow a hack. ideally we should just dedup the account ids in the pending queue...
       syncQueue.remove(o => priority === o.priority)
       syncQueue.push(ids, -priority)
     }
@@ -130,6 +131,10 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
 
       SYNC_ONE_ACCOUNT: ({ accountId, priority }) => {
         schedule([accountId], priority)
+      },
+
+      SYNC_SOME_ACCOUNTS: ({ accountIds, priority }) => {
+        schedule(accountIds, priority)
       },
     }
 
