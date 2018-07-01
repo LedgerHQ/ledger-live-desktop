@@ -36,7 +36,7 @@ LedgerAPIError:
   title: 'Sorry, try again (API HTTP {{status}})'
   description: Interacting with Ledger's API server went wrong. Please retry.
 LedgerAPIErrorWithMessage:
-  title: 'Oops, {{message}})'
+  title: 'Oops, {{message}}'
   description: Please retry or contact Ledger Support.
 LedgerAPINotAvailable:
   title: Sorry, {{currencyName}} services unavailable
