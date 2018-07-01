@@ -46,8 +46,8 @@ common:
     lostPassword: I lost my password
   sync:
     syncing: Synchronizing...
-    upToDate: Up to date
-    outdated: Outdated
+    upToDate: Synchronized
+    outdated: Paused
     error: Synchronization error
     refresh: Refresh
     ago: Synced {{time}}
