@@ -1,7 +1,7 @@
 # the error codes are alphabetically sorted
 BtcUnmatchedApp:
-  title: 'That's the wrong app'
-  description: 'Open the ‘{{currencyName}}’ app on your device'
+  title: That's the wrong app
+  description: Open the ‘{{currencyName}}’ app on your device
 DeviceNotGenuine:
   title: Possibly not genuine
   description: 'Request Ledger Support assistance.'
@@ -10,88 +10,88 @@ DeviceSocketFail:
   description: 'Some connection failed, so please try again.'
 DeviceSocketNoBulkStatus:
   title: Oops, try again
-  description: 'Some connection failed, so please try again.'
+  description: Some connection failed, so please try again.
 DeviceSocketNoHandler:
   title: Oops, try again
-  description: 'Some connection failed, so please try again.'
+  description: Some connection failed, so please try again.
 DisconnectedDevice:
-  title: 'Oops, device was disconnected'
-  description: 'The connection to the device was lost, so please try again.'
+  title: Oops, device was disconnected
+  description: The connection to the device was lost, so please try again.
 Error: # as this is a generic unhandled error i think it's ok to have a generic title. but keep description to {{message}}
   title: '{{message}}'
-  description: 'Something went wrong. Please retry or contact us.'
+  description: Something went wrong. Please retry or contact us.
 FeeEstimationFailed:
-  title: 'Sorry, fee estimation failed
+  title: Sorry, fee estimation failed
   description: 'Try setting a custom fee (status: {{status}})'
 generic:
   title: Sorry, that's an unexpected bug
-  description: 'Please retry or contact Ledger Support.'
+  description: Please retry or contact Ledger Support.
 HardResetFail:
   title: Oops, could not reset
-  description: 'Please retry or contact Ledger Support.'
+  description: Please retry or contact Ledger Support.
 LatestMCUInstalledError:
   title: Oops, nothing to update
-  description: 'Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device.'
+  description: Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device.
 LedgerAPIError:
   title: 'Sorry, try again (API HTTP {{status}})'
-  description: 'Interacting with Ledger's API server went wrong. Please retry.'
+  description: Interacting with Ledger's API server went wrong. Please retry.
 LedgerAPIErrorWithMessage:
-  title: 'Oops, that's unexpected (API: {{message}})'
-  description: 'Please retry or contact Ledger Support.'
+  title: 'Oops, {{message}})'
+  description: Please retry or contact Ledger Support.
 LedgerAPINotAvailable:
-  title: 'Sorry, {{currencyName}} services unavailable'
-  description: 'Please retry or contact Ledger Support.'
+  title: Sorry, {{currencyName}} services unavailable
+  description: Please retry or contact Ledger Support.
 ManagerAPIsFail:
-  title: 'Oops, Manager services unavailable.'
-  description: 'Please check the network status.' #link to status.ledger.fr ?
+  title: Oops, Manager services unavailable.
+  description: Please check the network status. #link to status.ledger.fr ?
 ManagerAppAlreadyInstalled:
-  title: Oops, that's already installed. # include {{currencyName}}
-  description: 'Check your device to see which apps are already installed.'
+   title: Oops, that's already installed. # include {{currencyName}}
+   description: Check your device to see which apps are already installed.
 ManagerAppRelyOnBTC:
-  title: 'Bitcoin app required'
-  description: 'Install the Bitcoin app before installing this app.' # include {{currencyName}}
+  title: Bitcoin app required
+  description: Install the Bitcoin app before installing this app. # include {{currencyName}}
 ManagerDeviceLocked:
   title: Please unlock your device
-  description: 'You're device was locked. Please unlock it.'
+  description: Your device was locked. Please unlock it.
 ManagerNotEnoughSpace:
-  title: Sorry, insufficient device storage.
+  title: Sorry, insufficient device storage
   description: Uninstall some apps to increase available storage and try again.
 ManagerUnexpectedError:
-  title: That's unexpected (Manager: {{msg}})
+  title: That's unexpected ({{msg}}) #(Manager: {{msg}})
   description: Please try again.
 ManagerUninstallBTCDep:
-  title: 'Sorry, Bitcoin is required' # include {{currencyName}}
-  description: 'First uninstall apps that depend on Bitcoin.'
+  title: Sorry, Bitcoin is required # include {{currencyName}}
+  description: First uninstall apps that depend on Bitcoin.
 NetworkDown:
-  title: 'Oops, internet seems down'
-  description: 'Please check your internet connection.'
+  title: Oops, internet seems down
+  description: Please check your internet connection.
 NoAddressesFound:
-  title: 'Sorry, no accounts found'
-  description: '' # Missing context
+  title: Sorry, no accounts found
+  description:  # Missing context
 NotEnoughBalance:
-  title: 'Oops, not enough balance'
-  description: 'Make sure the account to debit has sufficient balance'
+  title: Oops, not enough balance
+  description: Make sure the account to debit has sufficient balance
 RangeError:
   title: '{{message}}' # Missing context
-  description: ''
+  description:
 TimeoutError:
-  title: 'Oops, a time out occurred'
-  description: 'It took too long for the server to respond.' #Retry / check status?
+  title: Oops, a time out occurred
+  description: It took too long for the server to respond. #Retry / check status?
 TransportStatusError:
   title: '{{message}}'
-  description: ''
+  description:
 UserRefusedOnDevice:
   title: Transaction refused on device
-  description: 'Please retry or contact Ledger Support in case of doubt.'
+  description: Please retry or contact Ledger Support in case of doubt.
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
-  description: '' #context
+  description:  #context
 WebsocketConnectionFailed:
   title: Sorry, try again (websocket failed).
-  description: ''
+  description:
 WrongAppOpened:
-  title: 'Please open the ‘{{currencyName}}’ app'
-  description: 'The wrong app was opened on your device. Please retry.'
+  title: Please open the ‘{{currencyName}}’ app
+  description: The wrong app was opened on your device. Please retry.
 WrongDeviceForAccount:
-  title: 'Oops, wrong device for ‘{{accountName}}’.'
-  description: 'The connected device is not associated with the account you selected. Please connect the right device.'
+  title: Oops, wrong device for ‘{{accountName}}’.
+  description: The connected device is not associated with the account you selected. Please connect the right device.
