@@ -27,7 +27,7 @@ export const DeviceInteractionStepContainer = styled(Box).attrs({
   min-height: 80px;
   border: 1px solid ${p => p.theme.colors.fog};
   border-color: ${p =>
-    p.isError ? p.theme.colors.alertRed : p.isActive && !p.isFinished ? p.theme.colors.wallet : ''};
+    p.isError ? p.theme.colors.alertRed : p.isActive || p.isSuccess ? p.theme.colors.wallet : ''};
   border-top-color: ${p => (p.isFirst || p.isActive ? '' : 'transparent')};
   border-bottom-color: ${p => (p.isPrecedentActive ? 'transparent' : '')};
   border-bottom-left-radius: ${p => (p.isLast ? `${radii[1]}px` : 0)};
@@ -42,8 +42,22 @@ export const DeviceInteractionStepContainer = styled(Box).attrs({
       : 'none'};
 `
 
-export const IconContainer = ({ children }: { children: any }) => (
-  <Box align="center" justify="center" style={{ width: 70 }}>
+export const IconContainer = ({
+  children,
+  isTransparent,
+}: {
+  children: any,
+  isTransparent: boolean,
+}) => (
+  <Box
+    align="center"
+    justify="center"
+    color="dark"
+    style={{
+      width: 70,
+      opacity: isTransparent ? 0.5 : 1,
+    }}
+  >
     {children}
   </Box>
 )
@@ -58,10 +72,10 @@ const SpinnerContainerWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 350ms cubic-bezier(0.62, 0.28, 0.39, 0.94);
+  transition: 300ms cubic-bezier(0.62, 0.28, 0.39, 0.94);
   transition-property: transform opacity;
   opacity: ${p => (p.isVisible ? 1 : 0)};
-  transform: translate3d(0, ${p => (!p.isVisible ? -40 : 0)}px, 0);
+  transform: translate3d(0, ${p => (!p.isVisible ? -20 : 0)}px, 0);
 `
 
 export const SpinnerContainer = ({ isVisible }: { isVisible: boolean }) => (
@@ -72,7 +86,7 @@ export const SpinnerContainer = ({ isVisible }: { isVisible: boolean }) => (
 
 const SuccessContainerWrapper = styled(SpinnerContainerWrapper)`
   color: ${p => p.theme.colors.wallet};
-  transform: translate3d(0, ${p => (!p.isVisible ? 40 : 0)}px, 0);
+  transform: translate3d(0, ${p => (!p.isVisible ? 20 : 0)}px, 0);
 `
 
 export const SuccessContainer = ({ isVisible }: { isVisible: boolean }) => (
@@ -83,7 +97,7 @@ export const SuccessContainer = ({ isVisible }: { isVisible: boolean }) => (
 
 const ErrorContainerWrapper = styled(SpinnerContainerWrapper)`
   color: ${p => p.theme.colors.alertRed};
-  transform: translate3d(0, ${p => (!p.isVisible ? 40 : 0)}px, 0);
+  transform: translate3d(0, ${p => (!p.isVisible ? 20 : 0)}px, 0);
 `
 
 export const ErrorContainer = ({ isVisible }: { isVisible: boolean }) => (

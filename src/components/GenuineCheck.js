@@ -24,7 +24,7 @@ import Text from 'components/base/Text'
 
 import IconUsb from 'icons/Usb'
 import IconHome from 'icons/Home'
-import IconEye from 'icons/Eye'
+import IconGenuineCheck from 'icons/GenuineCheck'
 
 const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
 
@@ -36,9 +36,9 @@ type Props = {
   device: ?Device,
 }
 
-const usbIcon = <IconUsb size={36} />
+const usbIcon = <IconUsb size={26} />
 const homeIcon = <IconHome size={24} />
-const eyeIcon = <IconEye size={24} />
+const genuineCheckIcon = <IconGenuineCheck size={24} />
 
 const mapStateToProps = state => ({
   device: getCurrentDevice(state),
@@ -133,7 +133,7 @@ class GenuineCheck extends PureComponent<Props> {
             {' on your device'}
           </Trans>
         ),
-        icon: eyeIcon,
+        icon: genuineCheckIcon,
         run: this.checkGenuineInteractionHandler,
       },
     ]
