@@ -107,18 +107,14 @@ genuineCheck:
     genuineCheck: Check now
     contactSupport: Contact us
   errorPage:
-    ledgerNano:
-      title: Oops, something went wrong...
-        #PIN: Didn't choose your own PIN code?
-        #recoveryPhrase: Didn't save your own recovery phrase?
-        #Genuine: Oops, your device does not seem genuine...
-      desc: Go back to the security checklist or request Ledger Support assistance
-        #PIN: Never use a device supplied with a PIN code. If your device was provided with a PIN code, please contact us.
-        #recoveryPhrase: Only save a recovery phrase that is displayed on your device. Please contact us in case of doubt. Otherwise, go back to the security checklist.
-        #Genuine: Your device did not pass the authenticity test required to connect to Ledger’s secure server. Please contact Ledger Support to get assistance.
-    ledgerBlue:
-      title: Oops, something went wrong...
-      desc: Go back to the security checklist or request Ledger Support assistance
+    title:
+      pinFailed: "Didn't choose your own PIN code?"
+      recoveryPhraseFailed: "Didn't save your own recovery phrase?"
+      isGenuineFail: Oops, your device does not seem genuine...
+    desc:
+      pinFailed: Never use a device supplied with a PIN code. If your device was provided with a PIN code, please contact us.
+      recoveryPhraseFailed: Only save a recovery phrase that is displayed on your device. Please contact us in case of doubt. Otherwise, go back to the security checklist.
+      isGenuineFail: Your device did not pass the authenticity test required to connect to Ledger’s secure server. Please contact Ledger Support to get assistance.
 setPassword:
   title: Password lock (optional)
   desc: Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.
