@@ -407,3 +407,8 @@ crash:
   createTicket: Ledger Support
   showDetails: Show details
   showError: Show error
+disclaimerModal:
+  title: Trade Safely
+  desc_1: Before sending and receiving crypto assets, educate yourself to make informed decisions. Crypto assets are volatile and the prices can go up and down. Carefully evaluate your trading goals and the financial risk you are willing to take.
+  desc_2: Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or rely on opinions of licensed experts.
+  cta: Got it
