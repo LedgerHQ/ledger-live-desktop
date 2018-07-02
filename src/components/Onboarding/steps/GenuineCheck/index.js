@@ -26,7 +26,7 @@ import {
   GenuineCheckCardWrapper,
 } from '../../helperComponents'
 
-import { GenuineCheckErrorPage } from './GenuineCheckErrorPage'
+import GenuineCheckErrorPage from './GenuineCheckErrorPage'
 import {
   GenuineCheckUnavailableFooter,
   GenuineCheckUnavailableMessage,
@@ -81,14 +81,8 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     }
 
     if (!item.pass) {
-      this.setState(INITIAL_STATE)
       this.props.updateGenuineCheck({
         displayErrorScreen: true,
-        pinStepPass: false,
-        recoveryStepPass: false,
-        isGenuineFail: false,
-        isDeviceGenuine: false,
-        genuineCheckUnavailable: null,
       })
     }
   }
@@ -137,7 +131,15 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   redoGenuineCheck = () => {
-    this.props.updateGenuineCheck({ displayErrorScreen: false })
+    this.setState(INITIAL_STATE)
+    this.props.updateGenuineCheck({
+      displayErrorScreen: false,
+      pinStepPass: false,
+      recoveryStepPass: false,
+      isGenuineFail: false,
+      isDeviceGenuine: false,
+      genuineCheckUnavailable: null,
+    })
   }
 
   contactSupport = () => {
