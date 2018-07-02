@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import { setShareAnalytics } from 'actions/settings'
 import { shareAnalyticsSelector } from 'reducers/settings'
 import Track from 'analytics/Track'
-import CheckBox from 'components/base/CheckBox'
+import Switch from 'components/base/Switch'
 
 const mapStateToProps = createStructuredSelector({
   shareAnalytics: shareAnalyticsSelector,
@@ -26,7 +26,7 @@ class ShareAnalytics extends PureComponent<Props> {
     return (
       <Fragment>
         <Track onUpdate event={shareAnalytics ? 'AnalyticsEnabled' : 'AnalyticsDisabled'} />
-        <CheckBox isChecked={shareAnalytics} onChange={setShareAnalytics} />
+        <Switch isChecked={shareAnalytics} onChange={setShareAnalytics} />
       </Fragment>
     )
   }

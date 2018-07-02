@@ -37,7 +37,7 @@ type Props = {
   onChange?: Function,
 }
 
-function CheckBox(props: Props) {
+function Switch(props: Props) {
   const { isChecked, onChange, ...p } = props
   return (
     <Base isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} {...p}>
@@ -46,8 +46,8 @@ function CheckBox(props: Props) {
   )
 }
 
-CheckBox.defaultProps = {
+Switch.defaultProps = {
   onChange: noop,
 }
 
-export default CheckBox
+export default Switch

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
-import CheckBox from 'components/base/CheckBox'
+import Switch from 'components/base/Switch'
 import TrackPage from 'analytics/TrackPage'
 import Track from 'analytics/Track'
 import { Title, Description, FixedTopContainer, StepContainerInner } from '../helperComponents'
@@ -77,7 +77,7 @@ class Analytics extends PureComponent<StepProps, State> {
                       : 'Sentry Logs Disabled Onboarding'
                   }
                 />
-                <CheckBox isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
+                <Switch isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
               </Box>
             </Container>
             <Container>
@@ -94,7 +94,7 @@ class Analytics extends PureComponent<StepProps, State> {
                       : 'Analytics Disabled Onboarding'
                   }
                 />
-                <CheckBox isChecked={analyticsToggle} onChange={this.handleAnalyticsToggle} />
+                <Switch isChecked={analyticsToggle} onChange={this.handleAnalyticsToggle} />
               </Box>
             </Container>
           </Box>

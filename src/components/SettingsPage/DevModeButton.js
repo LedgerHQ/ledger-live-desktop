@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { setDeveloperMode } from 'actions/settings'
 import { developerModeSelector } from 'reducers/settings'
 import Track from 'analytics/Track'
-import CheckBox from 'components/base/CheckBox'
+import Switch from 'components/base/Switch'
 
 const mapStateToProps = createStructuredSelector({
   developerMode: developerModeSelector,
@@ -27,7 +27,7 @@ class DevModeButton extends PureComponent<Props> {
     return (
       <Fragment>
         <Track onUpdate event={developerMode ? 'DevModeEnabled' : 'DevModeDisabled'} />
-        <CheckBox isChecked={developerMode} onChange={setDeveloperMode} />
+        <Switch isChecked={developerMode} onChange={setDeveloperMode} />
       </Fragment>
     )
   }

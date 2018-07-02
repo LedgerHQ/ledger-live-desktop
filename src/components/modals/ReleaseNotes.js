@@ -138,7 +138,7 @@ export const Notes = styled(Box).attrs({
     }
   }
 
-  input[type='checkbox'] {
+  input[type='Switch'] {
     margin-right: 0.5em;
   }
 `
