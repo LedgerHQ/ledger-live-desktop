@@ -229,7 +229,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
 
       {url && (
         <ModalFooter horizontal justify="flex-end" flow={2}>
-          <Button primary padded onClick={() => shell.openExternal(url)}>
+          <Button primary onClick={() => shell.openExternal(url)}>
             {t('app:operationDetails.viewOperation')}
           </Button>
         </ModalFooter>

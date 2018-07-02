@@ -37,7 +37,7 @@ class TabProfile extends PureComponent<*, *> {
     return (
       <Card flow={3}>
         <Box horizontal>
-          <Button onClick={this.onQRCodeMobileExport} primary>
+          <Button small onClick={this.onQRCodeMobileExport} primary>
             QRCode Mobile Export
           </Button>
 

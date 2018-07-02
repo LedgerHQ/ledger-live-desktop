@@ -96,7 +96,7 @@ class DisablePasswordButton extends PureComponent<Props, State> {
 
         <Box horizontal flow={2} align="center">
           {isPasswordEnabled && (
-            <Button onClick={this.handleOpenPasswordModal}>
+            <Button small onClick={this.handleOpenPasswordModal}>
               {t('app:settings.profile.changePassword')}
             </Button>
           )}

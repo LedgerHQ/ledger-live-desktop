@@ -226,7 +226,7 @@ class AppsList extends PureComponent<Props, State> {
                   </Box>
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
-                  <Button primary padded onClick={this.handleCloseModal}>
+                  <Button primary onClick={this.handleCloseModal}>
                     {t('app:common.close')}
                   </Button>
                 </ModalFooter>
@@ -254,7 +254,7 @@ class AppsList extends PureComponent<Props, State> {
                   </Box>
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
-                  <Button primary padded onClick={this.handleCloseModal}>
+                  <Button primary onClick={this.handleCloseModal}>
                     {t('app:common.close')}
                   </Button>
                 </ModalFooter>

@@ -26,12 +26,11 @@ export function GenuineCheckUnavailableFooter({
 }) {
   return (
     <OnboardingFooterWrapper>
-      <Button padded outlineGrey onClick={() => prevStep()}>
+      <Button outlineGrey onClick={() => prevStep()}>
         {t('app:common.back')}
       </Button>
       <Box horizontal ml="auto">
         <Button
-          padded
           disabled={false}
           event="Onboarding Skip Genuine Check"
           onClick={() => nextStep()}
@@ -39,7 +38,7 @@ export function GenuineCheckUnavailableFooter({
         >
           {t('app:common.skipThisStep')}
         </Button>
-        <Button padded onClick={nextStep} disabled primary>
+        <Button onClick={nextStep} disabled primary>
           {t('app:common.continue')}
         </Button>
       </Box>

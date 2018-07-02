@@ -275,10 +275,10 @@ class HelperComp extends PureComponent<Props, State> {
             </Spoiler>
           </ModalContent>
           <ModalFooter horizontal>
-            <Button padded danger type="button" onClick={this.handleOpenRemoveAccountModal}>
+            <Button danger type="button" onClick={this.handleOpenRemoveAccountModal}>
               {t('app:common.delete')}
             </Button>
-            <Button padded ml="auto" type="submit" primary>
+            <Button ml="auto" type="submit" primary>
               {t('app:common.apply')}
             </Button>
           </ModalFooter>

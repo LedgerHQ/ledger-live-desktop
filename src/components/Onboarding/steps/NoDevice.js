@@ -65,7 +65,7 @@ class NoDevice extends PureComponent<StepProps, *> {
           </Box>
         </GrowScroll>
         <OnboardingFooterWrapper>
-          <Button padded outlineGrey onClick={() => prevStep()} mr="auto">
+          <Button outlineGrey onClick={() => prevStep()} mr="auto">
             {t('app:common.back')}
           </Button>
         </OnboardingFooterWrapper>
