@@ -31,8 +31,8 @@ const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
 type Props = {
   t: T,
   onSuccess: void => void,
-  onFail: Error => void,
-  onUnavailable: Error => void,
+  onFail?: Error => void,
+  onUnavailable?: Error => void,
   device: ?Device,
 }
 
@@ -92,9 +92,9 @@ class GenuineCheck extends PureComponent<Props> {
   handleFail = (err: Error) => {
     const { onFail, onUnavailable } = this.props
     if (err instanceof DeviceNotGenuineError) {
-      onFail(err)
+      onFail && onFail(err)
     } else {
-      onUnavailable(err)
+      onUnavailable && onUnavailable(err)
     }
   }
 
