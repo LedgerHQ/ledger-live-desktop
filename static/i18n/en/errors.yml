@@ -99,5 +99,5 @@ WrongDeviceForAccount:
   title: Oops, wrong device for ‘{{accountName}}’.
   description: The connected device is not associated with the account you selected. Please connect the right device.
 DeviceAppVerifyNotSupported:
-  title: Open Manager to update firmware
+  title: Open Manager to update this App
   description: The app verification is not supported
