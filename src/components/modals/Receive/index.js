@@ -114,7 +114,7 @@ class ReceiveModal extends PureComponent<Props, State> {
 
     if (!account) {
       if (data && data.account) {
-        this.setState({ account: data.account })
+        this.setState({ account: data.account, stepId: 'device' })
       } else {
         this.setState({ account: accounts[0] })
       }
