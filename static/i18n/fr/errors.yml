@@ -78,8 +78,8 @@ TimeoutError:
   title: Oops, a time out occurred
   description: It took too long for the server to respond.
 TransportStatusError:
-  title: '{{message}}'
-  description:
+  title: 'Something went wrong. Please replug your device.'
+  description: '{{message}}'
 UserRefusedOnDevice:
   title: Transaction refused on device
   description: Please retry or contact Ledger Support in case of doubt.
