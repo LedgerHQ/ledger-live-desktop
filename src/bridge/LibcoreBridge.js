@@ -52,6 +52,7 @@ const isRecipientValid = (currency, recipient) => {
   const key = `${currency.id}_${recipient}`
   let promise = recipientValidLRU.get(key)
   if (promise) return promise
+  if (!recipient) return Promise.resolve(false)
   promise = libcoreValidAddress
     .send({
       address: recipient,
