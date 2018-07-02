@@ -78,11 +78,14 @@ TimeoutError:
   title: Oops, a time out occurred
   description: It took too long for the server to respond.
 TransportStatusError:
-  title: '{{message}}'
-  description:
+  title: 'Something went wrong. Please replug your device.'
+  description: '{{message}}'
 UserRefusedOnDevice:
   title: Transaction refused on device
   description: Please retry or contact Ledger Support in case of doubt.
+UserRefusedAddress:
+  title: Receive address rejected
+  description: Please try again or contact Support
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
   description:
@@ -95,3 +98,6 @@ WrongAppOpened:
 WrongDeviceForAccount:
   title: Oops, wrong device for ‘{{accountName}}’.
   description: The connected device is not associated with the account you selected. Please connect the right device.
+DeviceAppVerifyNotSupported:
+  title: Open Manager to update this App
+  description: The app verification is not supported
