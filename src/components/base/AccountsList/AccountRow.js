@@ -7,7 +7,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import { darken } from 'styles/helpers'
 
 import Box, { Tabbable } from 'components/base/Box'
-import Radio from 'components/base/Radio'
+import CheckBox from 'components/base/CheckBox'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import FormattedVal from 'components/base/FormattedVal'
 import Input from 'components/base/Input'
@@ -103,7 +103,7 @@ export default class AccountRow extends PureComponent<Props> {
           />
         ) : null}
         {!isDisabled ? (
-          <Radio disabled isChecked={isChecked || !!isDisabled} />
+          <CheckBox disabled isChecked={isChecked || !!isDisabled} />
         ) : (
           <div style={{ width: 20 }} />
         )}
