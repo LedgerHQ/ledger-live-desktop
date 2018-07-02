@@ -28,7 +28,7 @@ type OwnProps = {
   totalBalance: number,
   sinceBalance: number,
   refBalance: number,
-  accountId: string, // eslint-disable-line
+  accountId: string,
 }
 
 type Props = OwnProps & {
@@ -57,6 +57,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
   render() {
     const {
       account,
+      accountId,
       t,
       counterValue,
       selectedTimeRange,
@@ -76,6 +77,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             unit={account.unit}
           >
             <FormattedVal
+              key={accountId}
               animateTicker
               disableRounding
               alwaysShowSign={false}

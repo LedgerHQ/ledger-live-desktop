@@ -21,10 +21,17 @@ type Props = {
 function OnboardingBreadcrumb(props: Props) {
   const { onboarding, t } = props
   const { stepName, genuine } = onboarding
+  const isInitializedFlow = onboarding.flowType === 'initializedDevice'
 
-  const filteredSteps = onboarding.steps
+  const regularFilteredSteps = onboarding.steps
     .filter(step => !step.external)
-    .map(step => ({ ...step, label: t(step.label) })) // TODO: translate
+    .map(step => ({ ...step, label: t(step.label) }))
+
+  const alreadyInitializedSteps = onboarding.steps
+    .filter(step => !step.external && step.name !== 'writeSeed' && step.name !== 'selectPIN')
+    .map(step => ({ ...step, label: t(step.label) }))
+
+  const filteredSteps = isInitializedFlow ? alreadyInitializedSteps : regularFilteredSteps
 
   const stepIndex = findIndex(filteredSteps, s => s.name === stepName)
   const genuineStepIndex = findIndex(filteredSteps, s => s.name === 'genuineCheck')
