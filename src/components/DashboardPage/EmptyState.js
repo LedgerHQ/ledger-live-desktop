@@ -50,15 +50,10 @@ class EmptyState extends PureComponent<Props, *> {
             {t('app:emptyState.dashboard.desc')}
           </Description>
           <Box mt={5} horizontal style={{ width: 300 }} flow={3} justify="center">
-            <Button padded primary style={{ minWidth: 120 }} onClick={this.handleInstallApp}>
+            <Button primary style={{ minWidth: 120 }} onClick={this.handleInstallApp}>
               {t('app:emptyState.dashboard.buttons.installApp')}
             </Button>
-            <Button
-              padded
-              outline
-              style={{ minWidth: 120 }}
-              onClick={() => openModal(MODAL_ADD_ACCOUNTS)}
-            >
+            <Button outline style={{ minWidth: 120 }} onClick={() => openModal(MODAL_ADD_ACCOUNTS)}>
               {t('app:emptyState.dashboard.buttons.addAccount')}
             </Button>
           </Box>

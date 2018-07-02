@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { setSentryLogs } from 'actions/settings'
 import { sentryLogsSelector } from 'reducers/settings'
 import Track from 'analytics/Track'
-import CheckBox from 'components/base/CheckBox'
+import Switch from 'components/base/Switch'
 
 const mapStateToProps = createStructuredSelector({
   sentryLogs: sentryLogsSelector,
@@ -27,7 +27,7 @@ class SentryLogsButton extends PureComponent<Props> {
     return (
       <Fragment>
         <Track onUpdate event={sentryLogs ? 'SentryEnabled' : 'SentryDisabled'} />
-        <CheckBox isChecked={sentryLogs} onChange={setSentryLogs} />
+        <Switch isChecked={sentryLogs} onChange={setSentryLogs} />
       </Fragment>
     )
   }

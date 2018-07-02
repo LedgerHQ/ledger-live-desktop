@@ -100,14 +100,14 @@ ${error.stack}
         </Box>
         <Space of={30} />
         <Box horizontal flow={2}>
-          <Button primary onClick={this.handleRestart}>
+          <Button small primary onClick={this.handleRestart}>
             {t('app:crash.restart')}
           </Button>
           <ExportLogsBtn withoutAppData={withoutAppData} />
-          <Button primary onClick={this.handleCreateIssue}>
+          <Button small primary onClick={this.handleCreateIssue}>
             {t('app:crash.createTicket')}
           </Button>
-          <Button danger onClick={this.handleOpenHardResetModal}>
+          <Button small danger onClick={this.handleOpenHardResetModal}>
             {t('app:crash.reset')}
           </Button>
         </Box>

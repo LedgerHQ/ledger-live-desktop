@@ -13,7 +13,7 @@ import { storeSelector } from 'reducers/settings'
 import type { SettingsState } from 'reducers/settings'
 import { unlock } from 'reducers/application' // FIXME should be in actions
 import Track from 'analytics/Track'
-import CheckBox from 'components/base/CheckBox'
+import Switch from 'components/base/Switch'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import PasswordModal from './PasswordModal'
@@ -96,11 +96,11 @@ class DisablePasswordButton extends PureComponent<Props, State> {
 
         <Box horizontal flow={2} align="center">
           {isPasswordEnabled && (
-            <Button onClick={this.handleOpenPasswordModal}>
+            <Button small onClick={this.handleOpenPasswordModal}>
               {t('app:settings.profile.changePassword')}
             </Button>
           )}
-          <CheckBox isChecked={isPasswordEnabled} onChange={this.handleChangePasswordCheck} />
+          <Switch isChecked={isPasswordEnabled} onChange={this.handleChangePasswordCheck} />
         </Box>
 
         <PasswordModal

@@ -45,7 +45,7 @@ class CleanButton extends PureComponent<Props, State> {
     const { opened } = this.state
     return (
       <Fragment>
-        <Button primary onClick={this.open} event="ClearCacheIntent">
+        <Button small primary onClick={this.open} event="ClearCacheIntent">
           {t('app:settings.profile.softReset')}
         </Button>
 

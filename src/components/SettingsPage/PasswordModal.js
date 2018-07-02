@@ -111,11 +111,11 @@ class PasswordModal extends PureComponent<Props, State> {
               />
             </ModalContent>
             <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-              <Button type="button" padded onClick={onClose}>
+              <Button small type="Button small" onClick={onClose}>
                 {t('app:common.cancel')}
               </Button>
               <Button
-                padded
+                small
                 primary
                 onClick={this.handleSave}
                 disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}

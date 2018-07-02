@@ -26,6 +26,7 @@ class ReleaseNotesButton extends PureComponent<Props> {
     const version = __APP_VERSION__
     return (
       <Button
+        small
         primary
         onClick={() => {
           openModal(MODAL_RELEASES_NOTES, version)

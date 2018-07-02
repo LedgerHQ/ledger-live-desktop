@@ -28,7 +28,7 @@ import { validateNameEdition } from 'helpers/accountName'
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepImport, { StepImportFooter } from './steps/03-step-import'
-import StepFinish from './steps/04-step-finish'
+import StepFinish, { StepFinishFooter } from './steps/04-step-finish'
 
 const createSteps = ({ t }: { t: T }) => {
   const onBack = ({ transitionTo, resetScanState }: StepProps) => {
@@ -64,7 +64,7 @@ const createSteps = ({ t }: { t: T }) => {
       id: 'finish',
       label: t('app:addAccounts.breadcrumb.finish'),
       component: StepFinish,
-      footer: null,
+      footer: StepFinishFooter,
       onBack: null,
       hideFooter: true,
     },

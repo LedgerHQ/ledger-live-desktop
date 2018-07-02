@@ -102,7 +102,7 @@ export default class Finish extends Component<StepProps, *> {
             <Description>{t('onboarding:finish.desc')}</Description>
           </Box>
           <Box p={5}>
-            <Button primary padded onClick={() => finish()}>
+            <Button primary onClick={() => finish()}>
               {t('onboarding:finish.openAppButton')}
             </Button>
           </Box>
