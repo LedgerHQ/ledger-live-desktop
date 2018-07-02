@@ -38,6 +38,14 @@ class Wrapper extends React.Component<any> {
           ref={n => (this._ref = n)}
           steps={[
             {
+              id: 'deviceOpen',
+              title: ({ deviceConnect: device }) =>
+                `Open the Bitcoin application on your ${device ? `${device.name} ` : ''}device`,
+              desc: 'To be able to retriev your Bitcoins',
+              icon: mockIcon,
+              run: () => new Promise(resolve => setTimeout(resolve, 1 * 1000)),
+            },
+            {
               id: 'deviceConnect',
               title: 'Connect your device',
               icon: <IconUsb size={36} />,
@@ -57,14 +65,6 @@ class Wrapper extends React.Component<any> {
                   </Box>
                 </Box>
               ),
-            },
-            {
-              id: 'deviceOpen',
-              title: ({ deviceConnect: device }) =>
-                `Open the Bitcoin application on your ${device ? `${device.name} ` : ''}device`,
-              desc: 'To be able to retriev your Bitcoins',
-              icon: mockIcon,
-              run: () => new Promise(resolve => setTimeout(resolve, 1 * 1000)),
             },
             {
               id: 'check',
