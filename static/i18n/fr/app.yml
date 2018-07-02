@@ -160,7 +160,10 @@ addAccounts:
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
   noAccountToImport: No existing {{currencyName}} accounts to add
-  success: Account added to your portfolio
+  success: Account successfully added to your portfolio
+  success_plural: Accounts successfully added to your portfolio
+  successDescription: Your account have been created.
+  successDescription_plural: Your accounts have been created.
   createNewAccount:
     title: Add a new account
     noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
@@ -246,9 +249,6 @@ receive:
       action: Confirm address on device
       text: Verify that the address below matches the address displayed on your device
       support: Contact us
-      error:
-        title: Receive address rejected
-        text: Please try again or contact Support when in doubt
     receiveFunds:
       title: Receive
       label: Amount (optional)
