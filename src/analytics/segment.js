@@ -3,12 +3,16 @@
 import uuid from 'uuid/v4'
 import logger from 'logger'
 import invariant from 'invariant'
-import user from 'helpers/user'
 import { langAndRegionSelector } from 'reducers/settings'
 import { getSystemLocale } from 'helpers/systemLocale'
 import { load } from './inject-in-window'
 
 invariant(typeof window !== 'undefined', 'analytics/segment must be called on renderer thread')
+
+let user = null
+if (!process.env.STORYBOOK_ENV) {
+  user = require('helpers/user').default
+}
 
 const sessionId = uuid()
 
@@ -31,6 +35,7 @@ const getContext = store => {
 let storeInstance // is the redux store. it's also used as a flag to know if analytics is on or off.
 
 export const start = (store: *) => {
+  if (!user) return
   const { id } = user()
   logger.analyticsStart(id)
   storeInstance = store
