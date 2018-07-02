@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
-import logger from 'logger'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
@@ -40,16 +39,12 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
   async resync() {
     const { account, bridge, transaction } = this.props
     const syncId = ++this.syncId
-    try {
-      const isValid = await bridge.isRecipientValid(
-        account.currency,
-        bridge.getTransactionRecipient(account, transaction),
-      )
-      if (syncId !== this.syncId) return
-      this.setState({ isValid })
-    } catch (err) {
-      logger.warn(`Can't check if recipient is valid`, err)
-    }
+    const isValid = await bridge.isRecipientValid(
+      account.currency,
+      bridge.getTransactionRecipient(account, transaction),
+    )
+    if (syncId !== this.syncId) return
+    this.setState({ isValid })
   }
 
   onChange = (recipient: string, maybeExtra: ?Object) => {
