@@ -68,8 +68,7 @@ class AccountPage extends PureComponent<Props> {
     }
 
     return (
-      // `key` forces re-render account page when going an another account (skip animations)
-      <Box key={account.id}>
+      <Box>
         <TrackPage
           category="Account"
           currency={account.currency.id}
