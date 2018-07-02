@@ -122,7 +122,7 @@ const NJSLogPrinter = new lib.NJSLogPrinter({
   printWarning: message => logger.libcore('Warning', message),
   printApdu: message => logger.libcore('Apdu', message),
   printCriticalError: message => logger.libcore('CriticalError', message),
-  getContext: () => NJSThreadDispatcher.getMainExecutionContext(),
+  getContext: () => new lib.NJSExecutionContext(NJSExecutionContextImpl),
 })
 
 const NJSRandomNumberGenerator = new lib.NJSRandomNumberGenerator({
