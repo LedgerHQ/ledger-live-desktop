@@ -24,7 +24,6 @@ import IconAngleDown from 'icons/AngleDown'
 
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
-import Defer from 'components/base/Defer'
 import Track from 'analytics/Track'
 
 import SectionTitle from './SectionTitle'
@@ -100,61 +99,56 @@ export class OperationsList extends PureComponent<Props, State> {
     const accountsMap = accounts ? keyBy(accounts, 'id') : { [account.id]: account }
 
     return (
-      <Defer>
-        <Box flow={4}>
-          {title && (
-            <Text color="dark" ff="Museo Sans" fontSize={6}>
-              {title}
+      <Box flow={4}>
+        {title && (
+          <Text color="dark" ff="Museo Sans" fontSize={6}>
+            {title}
+          </Text>
+        )}
+        {groupedOperations.sections.map(group => (
+          <Box flow={2} key={group.day.toISOString()}>
+            <SectionTitle day={group.day} />
+            <Card p={0}>
+              {group.data.map(operation => {
+                const account = accountsMap[operation.accountId]
+                if (!account) {
+                  return null
+                }
+                return (
+                  <OperationC
+                    operation={operation}
+                    account={account}
+                    key={`${account.id}_${operation.id}`}
+                    onOperationClick={this.handleClickOperation}
+                    t={t}
+                    withAccount={withAccount}
+                  />
+                )
+              })}
+            </Card>
+          </Box>
+        ))}
+        {groupedOperations.completed ? (
+          <Track
+            onMount
+            event="OperationsListEndReached"
+            totalSections={groupedOperations.sections.length}
+            totalOperations={groupedOperations.sections.reduce((sum, s) => sum + s.data.length, 0)}
+          />
+        ) : null}
+        {!groupedOperations.completed ? (
+          <ShowMore onClick={this.fetchMoreOperations}>
+            <span>{t('app:common.showMore')}</span>
+            <IconAngleDown size={12} />
+          </ShowMore>
+        ) : (
+          <Box p={6} align="center">
+            <Text ff="Open Sans" fontSize={3}>
+              {t('app:operationList.noMoreOperations')}
             </Text>
-          )}
-          {groupedOperations.sections.map(group => (
-            <Box flow={2} key={group.day.toISOString()}>
-              <SectionTitle day={group.day} />
-              <Card p={0}>
-                {group.data.map(operation => {
-                  const account = accountsMap[operation.accountId]
-                  if (!account) {
-                    return null
-                  }
-                  return (
-                    <OperationC
-                      operation={operation}
-                      account={account}
-                      key={`${account.id}_${operation.id}`}
-                      onOperationClick={this.handleClickOperation}
-                      t={t}
-                      withAccount={withAccount}
-                    />
-                  )
-                })}
-              </Card>
-            </Box>
-          ))}
-          {groupedOperations.completed ? (
-            <Track
-              onMount
-              event="OperationsListEndReached"
-              totalSections={groupedOperations.sections.length}
-              totalOperations={groupedOperations.sections.reduce(
-                (sum, s) => sum + s.data.length,
-                0,
-              )}
-            />
-          ) : null}
-          {!groupedOperations.completed ? (
-            <ShowMore onClick={this.fetchMoreOperations}>
-              <span>{t('app:common.showMore')}</span>
-              <IconAngleDown size={12} />
-            </ShowMore>
-          ) : (
-            <Box p={6} align="center">
-              <Text ff="Open Sans" fontSize={3}>
-                {t('app:operationList.noMoreOperations')}
-              </Text>
-            </Box>
-          )}
-        </Box>
-      </Defer>
+          </Box>
+        )}
+      </Box>
     )
   }
 }
