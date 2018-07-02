@@ -83,6 +83,9 @@ TransportStatusError:
 UserRefusedOnDevice:
   title: Transaction refused on device
   description: Please retry or contact Ledger Support in case of doubt.
+UserRefusedAddress:
+  title: Receive address rejected
+  description: Please try again or contact Support
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
   description:  #context
@@ -95,3 +98,6 @@ WrongAppOpened:
 WrongDeviceForAccount:
   title: Oops, wrong device for ‘{{accountName}}’.
   description: The connected device is not associated with the account you selected. Please connect the right device.
+DeviceAppVerifyNotSupported:
+  title: Open Manager to update firmware
+  description: The app verification is not supported

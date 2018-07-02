@@ -75,7 +75,7 @@ export const IconWrapperCircle = styled(Box)`
   height: 50px;
   border-radius: 50%;
   background: #ea2e4919;
-  text-align: center;
+  align-items: center;
   justify-content: center;
 `
 
