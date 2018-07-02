@@ -136,7 +136,7 @@ emptyState:
       installApp: Open Manager
 exchange:
   title: Exchanges
-  desc: Try a selection of exchange services offered by our sponsors
+  desc: Try a few exchange services we've selected for you
   visitWebsite: Visit website
   coinhouse: 'Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
   changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
@@ -160,7 +160,10 @@ addAccounts:
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
   noAccountToImport: No existing {{currencyName}} accounts to add
-  success: Account added to your portfolio
+  success: Account successfully added to your portfolio
+  success_plural: Accounts successfully added to your portfolio
+  successDescription: Your account have been created.
+  successDescription_plural: Your accounts have been created.
   createNewAccount:
     title: Add a new account
     noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
@@ -246,9 +249,6 @@ receive:
       action: Confirm address on device
       text: Verify that the address below matches the address displayed on your device
       support: Contact us
-      error:
-        title: Receive address rejected
-        text: Please try again or contact Support when in doubt
     receiveFunds:
       title: Receive
       label: Amount (optional)
@@ -291,7 +291,7 @@ send:
         title: Broadcasting transaction...
 releaseNotes:
   title: Release notes
-  version: Version {{versionNb}}
+  version: Ledger Live {{versionNb}}
 settings:
   title: Settings
   tabs:
@@ -306,7 +306,7 @@ settings:
     counterValue: Countervalue
     counterValueDesc: Choose the currency to display next to your balance and operations.
     exchange: Rate provider
-    exchangeDesc: Choose the provider of the exchange rate from Bitcoin to {{fiat}}. Crypto assets are first converted to a Bitcoin countervalue, before they're converted to {{fiat}} (crypto asset → BTC → {{fiat}}).
+    exchangeDesc: Choose the provider of the exchange rate from Bitcoin to {{fiat}}. The value of crypto assets is first calculated in Bitcoin, before being converted to {{fiat}} (crypto asset → BTC → {{fiat}}).
     region: Region
     regionDesc: Choose the region in which you’re located to set the Ledger Live's time zone.
     stock: Regional market indicator
@@ -336,7 +336,7 @@ settings:
     softResetDesc: Clear the Ledger Live cache to force resynchronization with the blockchain.
     softReset: Clear
     hardResetTitle: Reset Ledger Live
-    hardResetDesc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
+    hardResetDesc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings.
     hardReset: Reset
     developerMode: Developer mode
     developerModeDesc: Show developer apps in the Manager and enable testnet apps.
@@ -346,8 +346,8 @@ settings:
     reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
   about:
     desc: Learn about Ledger Live features or get help.
-    version: Ledger Live version
-    releaseNotesBtn: Show release notes
+    version: Version
+    releaseNotesBtn: Details
     faq: Ledger Support
     faqDesc: A problem? Get help with Ledger Live, Ledger devices, supported crypto assets and apps.
     terms: Terms and conditions
@@ -407,3 +407,8 @@ crash:
   createTicket: Ledger Support
   showDetails: Show details
   showError: Show error
+disclaimerModal:
+  title: Trade safely
+  desc_1: Before sending and receiving crypto assets, educate yourself to make informed decisions. Crypto assets are volatile and the prices can go up and down. Carefully evaluate your trading goals and the financial risk you are willing to take.
+  desc_2: Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or rely on opinions of reliable experts.
+  cta: Got it
