@@ -41,6 +41,7 @@ type State = {
   isAddressVerified: ?boolean,
   disabledSteps: number[],
   errorSteps: number[],
+  verifyAddressError: ?Error,
 }
 
 export type StepProps = DefaultStepProps & {
@@ -49,12 +50,13 @@ export type StepProps = DefaultStepProps & {
   closeModal: void => void,
   isAppOpened: boolean,
   isAddressVerified: ?boolean,
+  verifyAddressError: ?Error,
   onRetry: void => void,
   onSkipConfirm: void => void,
   onResetSkip: void => void,
   onChangeAccount: (?Account) => void,
   onChangeAppOpened: boolean => void,
-  onChangeAddressVerified: (?boolean) => void,
+  onChangeAddressVerified: (?boolean, ?Error) => void,
 }
 
 const createSteps = ({ t }: { t: T }) => [
@@ -102,6 +104,7 @@ const INITIAL_STATE = {
   isAddressVerified: null,
   disabledSteps: [],
   errorSteps: [],
+  verifyAddressError: null,
 }
 
 class ReceiveModal extends PureComponent<Props, State> {
@@ -127,16 +130,17 @@ class ReceiveModal extends PureComponent<Props, State> {
   handleStepChange = step => this.setState({ stepId: step.id })
   handleChangeAccount = (account: ?Account) => this.setState({ account })
   handleChangeAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
-  handleChangeAddressVerified = (isAddressVerified: boolean) => {
+  handleChangeAddressVerified = (isAddressVerified: boolean, err: ?Error) => {
     if (isAddressVerified) {
-      this.setState({ isAddressVerified })
+      this.setState({ isAddressVerified, verifyAddressError: err })
     } else if (isAddressVerified === null) {
-      this.setState({ isAddressVerified: null, errorSteps: [] })
+      this.setState({ isAddressVerified: null, errorSteps: [], verifyAddressError: err })
     } else {
       const confirmStepIndex = this.STEPS.findIndex(step => step.id === 'confirm')
       if (confirmStepIndex > -1) {
         this.setState({
           isAddressVerified,
+          verifyAddressError: err,
           errorSteps: [confirmStepIndex],
         })
       }
@@ -161,6 +165,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       isAddressVerified,
       disabledSteps,
       errorSteps,
+      verifyAddressError,
     } = this.state
 
     const addtionnalProps = {
@@ -168,6 +173,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       account,
       isAppOpened,
       isAddressVerified,
+      verifyAddressError,
       closeModal: this.handleCloseModal,
       onRetry: this.handleRetry,
       onSkipConfirm: this.handleSkipConfirm,

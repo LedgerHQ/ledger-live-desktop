@@ -250,9 +250,6 @@ receive:
       action: Confirm address on device
       text: Verify that the address below matches the address displayed on your device
       support: Contact us
-      error:
-        title: Receive address rejected
-        text: Please try again or contact Support when in doubt
     receiveFunds:
       title: Receive
       label: Amount (optional)
