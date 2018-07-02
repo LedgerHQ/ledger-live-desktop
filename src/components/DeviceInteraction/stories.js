@@ -22,7 +22,7 @@ const MockIcon = styled.div`
   border-radius: 50%;
 `
 
-const mockIcon = <MockIcon size={36} />
+const mockIcon = <MockIcon size={26} />
 
 class Wrapper extends React.Component<any> {
   _ref = null
@@ -48,8 +48,7 @@ class Wrapper extends React.Component<any> {
             {
               id: 'deviceConnect',
               title: 'Connect your device',
-              icon: <IconUsb size={36} />,
-              desc: 'If you dont connect your device, we wont be able to read on it',
+              icon: <IconUsb size={26} />,
               render: ({ onSuccess, onFail }) => (
                 <Box p={2} bg="lightGrey" mt={2} borderRadius={1}>
                   <Box horizontal flow={2}>
