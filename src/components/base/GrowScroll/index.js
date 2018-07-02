@@ -52,6 +52,8 @@ class GrowScroll extends PureComponent<Props> {
       overflowY: 'scroll',
       marginRight: `-${80 + scrollbarWidth}px`,
       paddingRight: `80px`,
+      display: 'flex',
+      flexDirection: 'column',
       ...(maxHeight
         ? {
             maxHeight,
@@ -68,7 +70,7 @@ class GrowScroll extends PureComponent<Props> {
     return (
       <div style={rootStyles}>
         <div style={scrollContainerStyles} ref={this.onScrollContainerRef}>
-          <Box {...props}>
+          <Box grow {...props}>
             <GrowScrollContext.Provider value={this.valueProvider}>
               {children}
             </GrowScrollContext.Provider>
