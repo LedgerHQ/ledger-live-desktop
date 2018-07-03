@@ -11,13 +11,13 @@ type Props = {
   children: any,
   title?: Node | string,
   scroll?: boolean,
-  titleRight?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
-  emptyText?: string,
+  titleRight?: any,
+  emptyState?: any,
 }
 
 class SideBarList extends Component<Props> {
   render() {
-    const { children, title, scroll, titleRight, emptyText, ...props } = this.props
+    const { children, title, scroll, titleRight, emptyState, ...props } = this.props
     const ListWrapper = scroll ? GrowScroll : Box
     return (
       <Fragment>
@@ -34,9 +34,9 @@ class SideBarList extends Component<Props> {
           <ListWrapper flow={2} px={3} fontSize={3} {...props}>
             {children}
           </ListWrapper>
-        ) : emptyText ? (
+        ) : emptyState ? (
           <Box px={4} ff="Open Sans|Regular" fontSize={3} color="grey">
-            {emptyText}
+            {emptyState}
           </Box>
         ) : null}
       </Fragment>

@@ -221,7 +221,7 @@ class ReleaseNotes extends PureComponent<Props, State> {
       return (
         <ModalBody onClose={onClose}>
           <ModalTitle>{t('app:releaseNotes.title')}</ModalTitle>
-          <ModalContent style={{ height: 500 }} mx={-5} pb={0}>
+          <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
             <GrowScroll px={5} pb={8}>
               {content}
             </GrowScroll>

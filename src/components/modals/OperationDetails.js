@@ -129,7 +129,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   return (
     <ModalBody onClose={onClose}>
       <ModalTitle>{t('app:operationDetails.title')}</ModalTitle>
-      <ModalContent style={{ height: 500 }} mx={-5} pb={0}>
+      <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
         <GrowScroll px={5} pt={1} pb={8}>
           <Box flow={3}>
             <Box alignItems="center" mt={1}>

@@ -22,7 +22,7 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
   <Box flow={4} pb={8}>
     <TrackPage category="Manager" name="Dashboard" />
     <Box>
-      <Text ff="Museo Sans|Regular" fontSize={7} color="black">
+      <Text ff="Museo Sans|Regular" fontSize={7} color="dark">
         {t('app:manager.title')}
       </Text>
       <Text ff="Museo Sans|Light" fontSize={5}>

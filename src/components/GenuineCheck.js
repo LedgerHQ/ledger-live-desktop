@@ -24,7 +24,7 @@ import Text from 'components/base/Text'
 
 import IconUsb from 'icons/Usb'
 import IconHome from 'icons/Home'
-import IconGenuineCheck from 'icons/GenuineCheck'
+import IconCheck from 'icons/Check'
 
 const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
 
@@ -36,15 +36,15 @@ type Props = {
   device: ?Device,
 }
 
-const usbIcon = <IconUsb size={26} />
-const homeIcon = <IconHome size={24} />
-const genuineCheckIcon = <IconGenuineCheck size={24} />
+const usbIcon = <IconUsb size={16} />
+const homeIcon = <IconHome size={16} />
+const genuineCheckIcon = <IconCheck size={16} />
 
 const mapStateToProps = state => ({
   device: getCurrentDevice(state),
 })
 
-const Bold = props => <Text ff="Open Sans|Bold" {...props} />
+const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
 
 // to speed up genuine check, cache result by device id
 const genuineDevices = new WeakSet()

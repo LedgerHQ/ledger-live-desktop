@@ -31,7 +31,7 @@ class ManagerGenuineCheck extends PureComponent<Props> {
             alt="connect your device"
             style={{ marginBottom: 30, maxWidth: 362, width: '100%' }}
           />
-          <Text ff="Museo Sans|Regular" fontSize={7} color="black" style={{ marginBottom: 10 }}>
+          <Text ff="Museo Sans|Regular" fontSize={7} color="dark" style={{ marginBottom: 10 }}>
             {t('app:manager.device.title')}
           </Text>
           <Text ff="Museo Sans|Light" fontSize={5} color="grey" align="center">

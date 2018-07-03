@@ -58,8 +58,8 @@ class DisclaimerModal extends PureComponent<Props, State> {
                   {t('app:manager.firmware.disclaimerAppReinstall')}
                 </Text>
               </ModalContent>
-              <ModalContent style={{ height: 250, width: '100%' }}>
-                <GrowScroll>
+              <ModalContent relative pb={0} style={{ height: 250, width: '100%' }}>
+                <GrowScroll pb={5}>
                   <Notes>
                     <ReactMarkdown>{firmware.notes}</ReactMarkdown>
                   </Notes>
