@@ -27,7 +27,7 @@ import { getCurrentDevice } from 'reducers/devices'
 export const WrongAppOpened = createCustomErrorClass('WrongAppOpened')
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 
-const usbIcon = <IconUsb size={30} />
+const usbIcon = <IconUsb size={18} />
 const Bold = props => <Text ff="Open Sans|Bold" {...props} />
 
 const mapStateToProps = state => ({
@@ -107,7 +107,7 @@ class EnsureDeviceApp extends Component<{
           {
             id: 'address',
             title: this.renderOpenAppTitle,
-            icon: Icon ? <Icon size={30} /> : null,
+            icon: Icon ? <Icon size={18} /> : null,
             run: this.openAppInteractionHandler,
           },
         ]}

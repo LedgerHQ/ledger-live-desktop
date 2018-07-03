@@ -12,6 +12,7 @@ import Spinner from 'components/base/Spinner'
 import IconCheck from 'icons/Check'
 import IconCross from 'icons/Cross'
 import IconExclamationCircle from 'icons/ExclamationCircle'
+import IconSmoothBorders from 'icons/SmoothBorders'
 
 export const DeviceInteractionStepContainer = styled(Box).attrs({
   horizontal: true,
@@ -34,6 +35,19 @@ export const DeviceInteractionStepContainer = styled(Box).attrs({
   border-top-right-radius: ${p => (p.isFirst ? `${radii[1]}px` : 0)};
 `
 
+const AbsCenter = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const smoothBorders = <IconSmoothBorders size={28} />
+
 export const IconContainer = ({
   children,
   isTransparent,
@@ -42,15 +56,15 @@ export const IconContainer = ({
   isTransparent: boolean,
 }) => (
   <Box
-    align="center"
-    justify="center"
+    relative
     color="dark"
     style={{
       width: 70,
       opacity: isTransparent ? 0.5 : 1,
     }}
   >
-    {children}
+    <AbsCenter>{smoothBorders}</AbsCenter>
+    <AbsCenter>{children}</AbsCenter>
   </Box>
 )
 
