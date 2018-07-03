@@ -1,13 +1,8 @@
 // @flow
-/* eslint-disable no-console */
 
-/**
- * IDEA:
- * logger is an alternative to use for console.log that will be used for many purposes:
- * - provide useful data for debugging during dev (idea is to have opt-in env var)
- * - enabled in prod to provide useful data to debug when sending to Sentry
- * - for analytics in the future
- */
+import winston from 'winston'
+import Transport from 'winston-transport'
+import resolveLogsDirectory, { RotatingLogFileParameters } from 'helpers/resolveLogsDirectory'
 
 import {
   DEBUG_NETWORK,
@@ -20,49 +15,81 @@ import {
   DEBUG_ANALYTICS,
 } from 'config/constants'
 
-const logs = []
+require('winston-daily-rotate-file')
 
-const MAX_LOG_LENGTH = 500
-const MAX_LOG_JSON_THRESHOLD = 2000
+let pname = '?'
+
+const { format } = winston
+const { combine, json, timestamp } = format
+
+const pinfo = format(info => {
+  info.pname = pname
+  return info
+})
+
+const transports = [
+  new winston.transports.DailyRotateFile({
+    dirname: resolveLogsDirectory(),
+    ...RotatingLogFileParameters,
+  }),
+]
+
+if (process.env.NODE_ENV !== 'production' || process.env.LOGS_IN_CONSOLE) {
+  let consoleT
+  if (typeof window === 'undefined') {
+    // on Node we want a concise logger
+    consoleT = new winston.transports.Console({
+      format: format.simple(),
+    })
+  } else {
+    // On Browser we want to preserve direct usage of console with the "expandable" objects
+    const SPLAT = Symbol.for('splat')
+    class CustomConsole extends Transport {
+      log(info, callback) {
+        setImmediate(() => {
+          this.emit('logged', info)
+        })
+        const rest = info[SPLAT]
+        /* eslint-disable no-console */
+        if (info.level === 'error') {
+          if (rest) {
+            console.error(info.message, ...rest)
+          } else {
+            console.error(info.message)
+          }
+        } else if (info.level === 'warn') {
+          if (rest) {
+            console.warn(info.message, ...rest)
+          } else {
+            console.warn(info.message)
+          }
+        } else {
+          if (rest) {
+            console.log(info.message, ...rest)
+          } else {
+            console.log(info.message)
+          }
+        }
+        /* eslint-enable no-console */
+        callback()
+      }
+    }
+    consoleT = new CustomConsole()
+  }
+  transports.push(consoleT)
+}
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: combine(pinfo(), timestamp(), json()),
+  transports,
+})
 
 const anonymousMode = !__DEV__
-
-function addLog(type, ...args) {
-  logs.push({ type, date: new Date(), args })
-  if (logs.length > MAX_LOG_LENGTH) {
-    logs.shift()
-  }
-}
 
 function anonymizeURL(url) {
   if (!anonymousMode) return url
   return url.replace(/\/addresses\/[^/]+/g, '/addresses/<HIDDEN>')
-}
-
-const makeSerializableLog = (o: mixed) => {
-  if (typeof o === 'string') return o
-  if (typeof o === 'number') return o
-  if (typeof o === 'object' && o) {
-    try {
-      const json = JSON.stringify(o)
-      if (json.length < MAX_LOG_JSON_THRESHOLD) {
-        return o
-      }
-      // try to make a one level object on the same principle
-      const oneLevel = {}
-      Object.keys(o).forEach(key => {
-        // $FlowFixMe
-        oneLevel[key] = makeSerializableLog(o[key])
-      })
-      const json2 = JSON.stringify(oneLevel)
-      if (json2.length < MAX_LOG_JSON_THRESHOLD) {
-        return oneLevel
-      }
-    } catch (e) {
-      // This is not serializable so we will just stringify it
-    }
-  }
-  return String(o)
 }
 
 const logCmds = !__DEV__ || DEBUG_COMMANDS
@@ -75,42 +102,43 @@ const logNetwork = !__DEV__ || DEBUG_NETWORK
 const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 
 export default {
+  setProcessShortName: (processShortName: string) => {
+    pname = processShortName
+  },
+
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
     if (logCmds) {
       switch (type) {
         case 'cmd.START':
-          console.log(`CMD ${id}.send(`, data, ')')
+          logger.log('info', 'info', `CMD ${id}.send()`, { type, data })
           break
         case 'cmd.NEXT':
-          console.log(`● CMD ${id}`, data)
+          logger.log('info', `● CMD ${id}`, { type, data })
           break
         case 'cmd.COMPLETE':
-          console.log(`✔ CMD ${id} finished in ${spentTime.toFixed(0)}ms`)
+          logger.log('info', `✔ CMD ${id} finished in ${spentTime.toFixed(0)}ms`, { type })
           break
         case 'cmd.ERROR':
-          console.warn(`✖ CMD ${id} error`, data)
+          logger.log('warn', `✖ CMD ${id} error`, { type, data })
           break
         default:
       }
     }
-    addLog('cmd', type, id, spentTime, data)
   },
 
   onDB: (way: 'read' | 'write' | 'clear', name: string) => {
     const msg = `📁  ${way} ${name}`
     if (logDb) {
-      console.log(msg)
+      logger.log('info', msg, { type: 'db' })
     }
-    addLog('db', msg)
   },
 
   // tracks Redux actions (NB not all actions are serializable)
 
   onReduxAction: (action: Object) => {
     if (logRedux) {
-      console.log(`⚛️  ${action.type}`, action)
+      logger.log('info', `⚛️  ${action.type}`, { type: 'action', action })
     }
-    addLog('action', `⚛️  ${action.type}`, action)
   },
 
   // tracks keyboard events
@@ -120,31 +148,27 @@ export default {
     const displayEl = `${tagName.toLowerCase()}${classList.length ? ` ${classList.item(0)}` : ''}`
     const msg = `⇓ <TAB> - active element ${displayEl}`
     if (logTabkey) {
-      console.log(msg)
+      logger.log('info', msg, { type: 'keydown' })
     }
-    addLog('keydown', msg)
   },
 
   websocket: (type: string, msg: *) => {
     if (logWS) {
-      console.log(`~ ${type}:`, msg)
+      logger.log('info', `~ ${type}:`, msg, { type: 'ws' })
     }
-    addLog('ws', `~ ${type}`, msg)
   },
 
   libcore: (level: string, msg: string) => {
     if (logLibcore) {
-      console.log(`🛠  ${level}: ${msg}`)
+      logger.log('info', `🛠  ${level}: ${msg}`, { type: 'libcore' })
     }
-    addLog('action', `🛠  ${level}: ${msg}`)
   },
 
   network: ({ method, url }: { method: string, url: string }) => {
     const log = `➡📡  ${method} ${anonymizeURL(url)}`
     if (logNetwork) {
-      console.log(log)
+      logger.log('info', log, { type: 'network' })
     }
-    addLog('network', log)
   },
 
   networkSucceed: ({
@@ -162,9 +186,8 @@ export default {
       url,
     )} – finished in ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
-      console.log(log)
+      logger.log('info', log, { type: 'network-response' })
     }
-    addLog('network-response', log)
   },
 
   networkError: ({
@@ -184,9 +207,8 @@ export default {
       url,
     )} – ${error} – failed after ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
-      console.log(log)
+      logger.log('info', log, { type: 'network-error', status, method })
     }
-    addLog('network-error', log)
   },
 
   networkDown: ({
@@ -202,59 +224,50 @@ export default {
       0,
     )}ms`
     if (logNetwork) {
-      console.log(log)
+      logger.log('info', log, { type: 'network-down' })
     }
-    addLog('network-down', log)
   },
 
   analyticsStart: (id: string) => {
     if (logAnalytics) {
-      console.log(`△ start() with user id ${id}`)
+      logger.log('info', `△ start() with user id ${id}`, { type: 'anaytics-start', id })
     }
-    addLog('anaytics-start', id)
   },
 
   analyticsStop: () => {
     if (logAnalytics) {
-      console.log(`△ stop()`)
+      logger.log('info', `△ stop()`, { type: 'anaytics-stop' })
     }
-    addLog('anaytics-stop')
   },
 
   analyticsTrack: (event: string, properties: ?Object) => {
     if (logAnalytics) {
-      console.log(`△ track ${event}`, properties)
+      logger.log('info', `△ track ${event}`, { type: 'anaytics-track', properties })
     }
-    addLog('anaytics-track', `${event}`)
   },
 
   analyticsPage: (category: string, name: ?string, properties: ?Object) => {
     if (logAnalytics) {
-      console.log(`△ page ${category} ${name || ''}`, properties)
+      logger.log('info', `△ page ${category} ${name || ''}`, { type: 'anaytics-page', properties })
     }
-    addLog('anaytics-page', `${category} ${name || ''}`)
   },
 
   // General functions in case the hooks don't apply
 
   log: (...args: any) => {
-    console.log(...args)
-    addLog('log', ...args)
+    logger.log('info', ...args)
   },
 
   warn: (...args: any) => {
-    console.warn(...args)
-    addLog('warn', ...args)
+    logger.log('warn', ...args)
   },
 
   error: (...args: any) => {
-    console.error(...args)
-    addLog('error', ...args)
+    logger.log('error', ...args)
   },
 
   critical: (error: Error) => {
-    addLog('critical', error)
-    console.error(error)
+    logger.log('error', error)
     if (!process.env.STORYBOOK_ENV) {
       try {
         if (typeof window !== 'undefined') {
@@ -263,15 +276,8 @@ export default {
           require('sentry/node').captureException(error)
         }
       } catch (e) {
-        console.warn("Can't send to sentry", error, e)
+        logger.log('warn', "Can't send to sentry", error, e)
       }
     }
   },
-
-  exportLogs: (): Array<{ type: string, date: Date, args: Array<any> }> =>
-    logs.map(({ type, date, args }) => ({
-      type,
-      date,
-      args: args.map(makeSerializableLog),
-    })),
 }

@@ -51,6 +51,7 @@
     "no-restricted-syntax": 0,
     "no-prototype-builtins": 0,
     "no-void": 0,
+    "no-lonely-if": 0,
     "react/forbid-prop-types": 0,
     "react/jsx-curly-brace-presence": 0,
     "react/jsx-filename-extension": 0,

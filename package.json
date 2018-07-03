@@ -106,6 +106,9 @@
     "tippy.js": "^2.5.2",
     "uncontrollable": "^6.0.0",
     "uuid": "^3.2.1",
+    "winston": "^3.0.0",
+    "winston-daily-rotate-file": "^3.2.3",
+    "winston-transport": "^4.2.0",
     "ws": "^5.1.1",
     "zxcvbn": "^4.4.2"
   },

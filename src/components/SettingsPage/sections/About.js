@@ -5,6 +5,7 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
+import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import CleanButton from '../CleanButton'
@@ -55,7 +56,10 @@ class SectionAbout extends PureComponent<Props> {
           >
             <ResetButton />
           </Row>
-          <Row title={t('app:settings.exportLogs.title')} desc={t('app:settings.exportLogs.desc')}>
+          <Row
+            title={t('app:settings.exportLogs.title')}
+            desc={t('app:settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
+          >
             <ExportLogsBtn />
           </Row>
 
