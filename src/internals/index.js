@@ -11,6 +11,14 @@ require('../env')
 
 process.title = 'Internal'
 
+process.on('uncaughtException', err => {
+  process.send({
+    type: 'uncaughtException',
+    error: serializeError(err),
+  })
+  process.exit(1)
+})
+
 const defers = {}
 
 let sentryEnabled = process.env.INITIAL_SENTRY_ENABLED || false
