@@ -81,10 +81,6 @@ class DeviceInteraction extends PureComponent<Props, State> {
     onFail && onFail(error)
   }
 
-  handleTimeoutClick = () => {
-    const { onTimeoutClick } = this.props
-    onTimeoutClick && onTimeoutClick()
-  }
   render() {
     const { steps, shouldRenderRetry, ...props } = this.props
     const { stepIndex, error, isSuccess, data } = this.state
@@ -107,7 +103,6 @@ class DeviceInteraction extends PureComponent<Props, State> {
               isFinished={isSuccess}
               onSuccess={this.handleSuccess}
               onFail={this.handleFail}
-              onTimeoutClick={this.handleTimeoutClick}
               data={data}
             />
           )

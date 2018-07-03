@@ -5,9 +5,6 @@ BtcUnmatchedApp:
 DeviceNotGenuine:
   title: Possibly not genuine
   description: 'Request Ledger Support assistance.'
-TimeoutGenuineError:
-  title: It is taking too long
-  description: 'Feel free to skip this step'
 DeviceSocketFail:
   title: Oops, try again
   description: 'Some connection failed, so please try again.'

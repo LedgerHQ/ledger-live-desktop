@@ -8,7 +8,6 @@ import { rgba } from 'styles/helpers'
 
 import TranslatedError from 'components/TranslatedError'
 import Box from 'components/base/Box'
-import Button from '../base/Button/index'
 import FakeLink from 'components/base/FakeLink'
 import Spinner from 'components/base/Spinner'
 import IconCheck from 'icons/Check'
@@ -105,23 +104,6 @@ export const ErrorContainer = ({ isVisible }: { isVisible: boolean }) => (
   <ErrorContainerWrapper isVisible={isVisible}>
     <IconCross size={16} />
   </ErrorContainerWrapper>
-)
-
-export const TimeoutContainer = ({ onTimeoutClick }: { onTimeoutClick: () => void }) => (
-  <Box
-    horizontal
-    fontSize={3}
-    color="alertRed"
-    align="center"
-    cursor="text"
-    ff="Open Sans|SemiBold"
-    style={{ maxWidth: 500 }}
-  >
-    <IconExclamationCircle size={16} />
-    <FakeLink ml={2} mr={1} underline color="alertRed" onClick={onTimeoutClick}>
-      {'Skip it'}
-    </FakeLink>
-  </Box>
 )
 
 export const ErrorDescContainer = ({
