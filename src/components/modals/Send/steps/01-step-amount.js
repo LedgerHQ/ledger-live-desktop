@@ -20,6 +20,7 @@ export default ({
   t,
   account,
   bridge,
+  openedFromAccount,
   transaction,
   onChangeAccount,
   onChangeTransaction,
@@ -35,14 +36,14 @@ export default ({
     <Box flow={4}>
       <Box flow={1}>
         <Label>{t('app:send.steps.amount.selectAccountDebit')}</Label>
-        <SelectAccount onChange={onChangeAccount} value={account} />
+        <SelectAccount autoFocus={!openedFromAccount} onChange={onChangeAccount} value={account} />
       </Box>
 
       {account &&
         bridge &&
         transaction && (
           <RecipientField
-            autoFocus
+            autoFocus={openedFromAccount}
             account={account}
             bridge={bridge}
             transaction={transaction}
