@@ -3,6 +3,7 @@
 import winston from 'winston'
 import Transport from 'winston-transport'
 import resolveLogsDirectory, { RotatingLogFileParameters } from 'helpers/resolveLogsDirectory'
+import anonymizer from 'helpers/anonymizer'
 
 import {
   DEBUG_NETWORK,
@@ -85,13 +86,6 @@ const logger = winston.createLogger({
   transports,
 })
 
-const anonymousMode = !__DEV__
-
-function anonymizeURL(url) {
-  if (!anonymousMode) return url
-  return url.replace(/\/addresses\/[^/]+/g, '/addresses/<HIDDEN>')
-}
-
 const logCmds = !__DEV__ || DEBUG_COMMANDS
 const logDb = !__DEV__ || DEBUG_DB
 const logRedux = !__DEV__ || DEBUG_ACTION
@@ -165,7 +159,7 @@ export default {
   },
 
   network: ({ method, url }: { method: string, url: string }) => {
-    const log = `➡📡  ${method} ${anonymizeURL(url)}`
+    const log = `➡📡  ${method} ${anonymizer.url(url)}`
     if (logNetwork) {
       logger.log('info', log, { type: 'network' })
     }
@@ -182,7 +176,7 @@ export default {
     status: number,
     responseTime: number,
   }) => {
-    const log = `✔📡  HTTP ${status} ${method} ${anonymizeURL(
+    const log = `✔📡  HTTP ${status} ${method} ${anonymizer.url(
       url,
     )} – finished in ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
@@ -203,7 +197,7 @@ export default {
     error: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  HTTP ${status} ${method} ${anonymizeURL(
+    const log = `✖📡  HTTP ${status} ${method} ${anonymizer.url(
       url,
     )} – ${error} – failed after ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
@@ -220,9 +214,9 @@ export default {
     url: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  NETWORK DOWN – ${method} ${anonymizeURL(url)} – after ${responseTime.toFixed(
-      0,
-    )}ms`
+    const log = `✖📡  NETWORK DOWN – ${method} ${anonymizer.url(
+      url,
+    )} – after ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
       logger.log('info', log, { type: 'network-down' })
     }
