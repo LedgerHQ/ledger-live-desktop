@@ -50,7 +50,7 @@ if (process.env.NODE_ENV !== 'production' || process.env.LOGS_IN_CONSOLE) {
           this.emit('logged', info)
         })
         const rest = info[SPLAT]
-        /* eslint-disable no-console */
+        /* eslint-disable no-console, no-lonely-if */
         if (info.level === 'error') {
           if (rest) {
             console.error(info.message, ...rest)
@@ -70,7 +70,7 @@ if (process.env.NODE_ENV !== 'production' || process.env.LOGS_IN_CONSOLE) {
             console.log(info.message)
           }
         }
-        /* eslint-enable no-console */
+        /* eslint-enable */
         callback()
       }
     }
