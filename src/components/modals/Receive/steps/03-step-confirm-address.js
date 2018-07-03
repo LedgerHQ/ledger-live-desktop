@@ -4,52 +4,16 @@ import invariant from 'invariant'
 import styled from 'styled-components'
 import React, { Fragment, PureComponent } from 'react'
 
-import getAddress from 'commands/getAddress'
-import { isSegwitAccount } from 'helpers/bip32'
-
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import DeviceConfirm from 'components/DeviceConfirm'
-import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
-import { WrongDeviceForAccount } from 'components/EnsureDeviceApp'
-
 import type { StepProps } from '../index'
 import TranslatedError from '../../../TranslatedError'
 
 export default class StepConfirmAddress extends PureComponent<StepProps> {
-  componentDidMount() {
-    this.confirmAddress()
-  }
-
-  confirmAddress = async () => {
-    const { account, device, onChangeAddressVerified, transitionTo } = this.props
-    invariant(account, 'No account given')
-    invariant(device, 'No device given')
-    try {
-      const params = {
-        currencyId: account.currency.id,
-        devicePath: device.path,
-        path: account.freshAddressPath,
-        segwit: isSegwitAccount(account),
-        verify: true,
-      }
-      const { address } = await getAddress.send(params).toPromise()
-
-      if (address !== account.freshAddress) {
-        throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
-          accountName: account.name,
-        })
-      }
-      onChangeAddressVerified(true)
-      transitionTo('receive')
-    } catch (err) {
-      onChangeAddressVerified(false, err)
-    }
-  }
-
   render() {
-    const { t, device, account, isAddressVerified, verifyAddressError } = this.props
+    const { t, device, account, isAddressVerified, verifyAddressError, transitionTo } = this.props
     invariant(account, 'No account given')
     invariant(device, 'No device given')
     return (
@@ -68,9 +32,13 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
         ) : (
           <Fragment>
             <Title>{t('app:receive.steps.confirmAddress.action')}</Title>
-            <Text>{t('app:receive.steps.confirmAddress.text')}</Text>
-            <CurrentAddressForAccount account={account} />
-            <DeviceConfirm mb={2} mt={-1} error={isAddressVerified === false} />
+            <Text>
+              {t('app:receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
+            </Text>
+            <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
+              {t('app:buttons.displayAddressOnDevice')}
+            </Button>
+            <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
           </Fragment>
         )}
       </Container>
@@ -101,7 +69,8 @@ const Container = styled(Box).attrs({
   alignItems: 'center',
   fontSize: 4,
   color: 'dark',
-  px: 7,
+  px: 5,
+  mb: 2,
 })``
 
 const Title = styled(Box).attrs({

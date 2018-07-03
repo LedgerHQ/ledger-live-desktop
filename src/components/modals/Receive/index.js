@@ -40,7 +40,6 @@ type State = {
   isAppOpened: boolean,
   isAddressVerified: ?boolean,
   disabledSteps: number[],
-  errorSteps: number[],
   verifyAddressError: ?Error,
 }
 
@@ -76,15 +75,16 @@ const createSteps = ({ t }: { t: T }) => [
   {
     id: 'confirm',
     label: t('app:receive.steps.confirmAddress.title'),
-    component: StepConfirmAddress,
     footer: StepConfirmAddressFooter,
+    component: StepConfirmAddress,
+    onBack: ({ transitionTo }: StepProps) => transitionTo('device'),
     shouldRenderFooter: ({ isAddressVerified }: StepProps) => isAddressVerified === false,
-    shouldPreventClose: ({ isAddressVerified }: StepProps) => isAddressVerified === null,
   },
   {
     id: 'receive',
     label: t('app:receive.steps.receiveFunds.title'),
     component: StepReceiveFunds,
+    shouldPreventClose: ({ isAddressVerified }: StepProps) => isAddressVerified === null,
   },
 ]
 
@@ -103,7 +103,6 @@ const INITIAL_STATE = {
   isAppOpened: false,
   isAddressVerified: null,
   disabledSteps: [],
-  errorSteps: [],
   verifyAddressError: null,
 }
 
@@ -124,35 +123,38 @@ class ReceiveModal extends PureComponent<Props, State> {
     }
   }
 
-  handleRetry = () => this.setState({ isAddressVerified: null, isAppOpened: false, errorSteps: [] })
+  handleRetry = () =>
+    this.setState({
+      verifyAddressError: null,
+      isAddressVerified: null,
+      isAppOpened: false,
+    })
+
   handleReset = () => this.setState({ ...INITIAL_STATE })
+
   handleCloseModal = () => this.props.closeModal(MODAL_RECEIVE)
+
   handleStepChange = step => this.setState({ stepId: step.id })
+
   handleChangeAccount = (account: ?Account) => this.setState({ account })
+
   handleChangeAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
+
   handleChangeAddressVerified = (isAddressVerified: boolean, err: ?Error) => {
-    if (isAddressVerified) {
-      this.setState({ isAddressVerified, verifyAddressError: err })
-    } else if (isAddressVerified === null) {
-      this.setState({ isAddressVerified: null, errorSteps: [], verifyAddressError: err })
-    } else {
-      const confirmStepIndex = this.STEPS.findIndex(step => step.id === 'confirm')
-      if (confirmStepIndex > -1) {
-        this.setState({
-          isAddressVerified,
-          verifyAddressError: err,
-          errorSteps: [confirmStepIndex],
-        })
-      }
-    }
+    this.setState({ isAddressVerified, verifyAddressError: err })
   }
 
   handleResetSkip = () => this.setState({ disabledSteps: [] })
+
   handleSkipConfirm = () => {
     const connectStepIndex = this.STEPS.findIndex(step => step.id === 'device')
     const confirmStepIndex = this.STEPS.findIndex(step => step.id === 'confirm')
     if (confirmStepIndex > -1 && connectStepIndex > -1) {
-      this.setState({ disabledSteps: [connectStepIndex, confirmStepIndex] })
+      this.setState({
+        isAddressVerified: false,
+        verifyAddressError: null,
+        disabledSteps: [connectStepIndex, confirmStepIndex],
+      })
     }
   }
 
@@ -164,7 +166,6 @@ class ReceiveModal extends PureComponent<Props, State> {
       isAppOpened,
       isAddressVerified,
       disabledSteps,
-      errorSteps,
       verifyAddressError,
     } = this.state
 
@@ -182,6 +183,10 @@ class ReceiveModal extends PureComponent<Props, State> {
       onChangeAppOpened: this.handleChangeAppOpened,
       onChangeAddressVerified: this.handleChangeAddressVerified,
     }
+
+    const errorSteps = verifyAddressError
+      ? [verifyAddressError.name === 'UserRefusedAddress' ? 2 : 3]
+      : []
 
     const isModalLocked = stepId === 'confirm' && isAddressVerified === null
 

@@ -75,6 +75,7 @@ const PushButton = styled(Box)`
 
 type Props = {
   error?: boolean,
+  withoutPushDisplay?: boolean,
 }
 
 const SVG = (
@@ -165,7 +166,7 @@ const SVG = (
 
 const DeviceConfirm = (props: Props) => (
   <Wrapper {...props}>
-    {!props.error ? <PushButton /> : null}
+    {!props.error && !props.withoutPushDisplay ? <PushButton /> : null}
     <Check error={props.error} />
     {SVG}
   </Wrapper>
