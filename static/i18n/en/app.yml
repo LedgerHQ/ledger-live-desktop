@@ -333,8 +333,6 @@ settings: # Always ensure descriptions carry full stops (.)
     changePassword: Change password
     sync: Synchronize accounts
     syncDesc: Resynchronize your accounts with the network.
-    export: Export logs
-    exportDesc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
     softResetTitle: Clear cache
     softResetDesc: Clear the Ledger Live cache to force resynchronization with the blockchain.
     softReset: Clear
@@ -371,7 +369,7 @@ settings: # Always ensure descriptions carry full stops (.)
     desc: The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added.
   exportLogs:
     title: Export logs
-    desc: Exporting Ledger Live logs may be necessary for troubleshooting purposes.
+    desc: 'Exporting Ledger Live logs may be necessary for troubleshooting purposes.'
     btn: Export
 password:
   warning_0: Very weak

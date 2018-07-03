@@ -7,6 +7,8 @@ import sentry from 'sentry/node'
 import { EXPERIMENTAL_HTTP_ON_RENDERER } from 'config/constants'
 import { serializeError } from 'helpers/errors'
 
+logger.setProcessShortName('internal')
+
 require('../env')
 
 process.title = 'Ledger Live Internal'

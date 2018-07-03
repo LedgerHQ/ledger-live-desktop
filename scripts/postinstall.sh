@@ -18,7 +18,7 @@ function INSTALL_FLOW_TYPED {
     echo "> Installing flow-typed defs"
     flow-typed install -s --overwrite
     echo "> Removing broken flow definitions"
-    rm flow-typed/npm/{react-i18next_v7.x.x.js,styled-components_v3.x.x.js,redux_*}
+    rm flow-typed/npm/{react-i18next_v7.x.x.js,styled-components_v3.x.x.js,redux_*,winston*}
     SET_HASH 'flow-typed' $LATEST_FLOW_TYPED_COMMIT_HASH
   fi
 }
