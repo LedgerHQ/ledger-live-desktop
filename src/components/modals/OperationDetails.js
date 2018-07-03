@@ -23,7 +23,12 @@ import GrowScroll from 'components/base/GrowScroll'
 import Button from 'components/base/Button'
 import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
-import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
+import Modal, {
+  ModalBody,
+  ModalTitle,
+  ModalFooter,
+  ModalContent,
+} from 'components/base/LegacyModal'
 import Text from 'components/base/Text'
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
 

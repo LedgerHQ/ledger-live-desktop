@@ -14,7 +14,7 @@ import GradientBox from 'components/GradientBox'
 import TranslatedError from 'components/TranslatedError'
 import TrackPage from 'analytics/TrackPage'
 import Markdown, { Notes } from 'components/base/Markdown'
-import { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/LegacyModal'
 
 import type { T } from 'types/common'
 

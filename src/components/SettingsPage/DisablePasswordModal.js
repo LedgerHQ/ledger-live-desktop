@@ -8,7 +8,13 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
 import Label from 'components/base/Label'
-import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
+import {
+  Modal,
+  ModalContent,
+  ModalBody,
+  ModalTitle,
+  ModalFooter,
+} from 'components/base/LegacyModal'
 
 import type { T } from 'types/common'
 

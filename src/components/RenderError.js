@@ -16,7 +16,7 @@ import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Button from 'components/base/Button'
-import ConfirmModal from 'components/base/Modal/ConfirmModal'
+import ConfirmModal from 'components/base/LegacyModal/ConfirmModal'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import IconTriangleWarning from 'icons/TriangleWarning'
 

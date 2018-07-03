@@ -7,7 +7,12 @@ import type { T } from 'types/common'
 
 import { MODAL_DISCLAIMER } from 'config/constants'
 
-import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import Modal, {
+  ModalBody,
+  ModalTitle,
+  ModalContent,
+  ModalFooter,
+} from 'components/base/LegacyModal'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import { HandShield } from 'components/WarnBox'
