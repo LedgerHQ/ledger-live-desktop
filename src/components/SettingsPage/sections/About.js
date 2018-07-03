@@ -40,7 +40,7 @@ class SectionAbout extends PureComponent<Props> {
         />
 
         <Body>
-          <Row title={t('app:settings.about.version')} desc={version}>
+          <Row title={t('app:settings.about.version')} desc={`Ledger Live ${version}`}>
             <ReleaseNotesButton />
           </Row>
 

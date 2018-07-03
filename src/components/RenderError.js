@@ -136,7 +136,7 @@ ${error.stack || 'no stacktrace'}`}</ErrContainer>
             fontSize: 10,
           }}
         >
-          {__APP_VERSION__}
+          {`Ledger Live ${__APP_VERSION__}`}
         </pre>
         {children}
       </Box>
