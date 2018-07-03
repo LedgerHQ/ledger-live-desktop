@@ -26,7 +26,7 @@ import {
   GenuineCheckCardWrapper,
 } from '../../helperComponents'
 
-import { GenuineCheckErrorPage } from './GenuineCheckErrorPage'
+import GenuineCheckErrorPage from './GenuineCheckErrorPage'
 import {
   GenuineCheckUnavailableFooter,
   GenuineCheckUnavailableMessage,
@@ -81,14 +81,8 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     }
 
     if (!item.pass) {
-      this.setState(INITIAL_STATE)
       this.props.updateGenuineCheck({
         displayErrorScreen: true,
-        pinStepPass: false,
-        recoveryStepPass: false,
-        isGenuineFail: false,
-        isDeviceGenuine: false,
-        genuineCheckUnavailable: null,
       })
     }
   }
@@ -137,13 +131,26 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   redoGenuineCheck = () => {
-    this.props.updateGenuineCheck({ displayErrorScreen: false })
+    this.setState(INITIAL_STATE)
+    this.props.updateGenuineCheck({
+      displayErrorScreen: false,
+      pinStepPass: false,
+      recoveryStepPass: false,
+      isGenuineFail: false,
+      isDeviceGenuine: false,
+      genuineCheckUnavailable: null,
+    })
   }
 
   contactSupport = () => {
     const contactSupportUrl =
       'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165'
     shell.openExternal(contactSupportUrl)
+  }
+
+  handlePrevStep = () => {
+    const { prevStep, onboarding, jumpStep } = this.props
+    onboarding.flowType === 'initializedDevice' ? jumpStep('selectDevice') : prevStep()
   }
 
   renderGenuineFail = () => (
@@ -275,7 +282,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           <OnboardingFooter
             t={t}
             nextStep={nextStep}
-            prevStep={prevStep}
+            prevStep={this.handlePrevStep}
             isContinueDisabled={!genuine.isDeviceGenuine}
           />
         )}

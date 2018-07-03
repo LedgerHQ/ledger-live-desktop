@@ -7,16 +7,21 @@ import { ipcMain, app } from 'electron'
 import { ipcMainListenReceiveCommands } from 'helpers/ipc'
 import path from 'path'
 import logger from 'logger'
-import sentry from 'sentry/node'
+import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
+import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
+import { deserializeError } from 'helpers/errors'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
 
+logger.setProcessShortName('main')
+
 // sqlite files will be located in the app local data folder
 const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
+const LEDGER_LOGS_DIRECTORY = process.env.LEDGER_LOGS_DIRECTORY || resolveLogsDirectory()
 
 let internalProcess
 
@@ -45,6 +50,7 @@ const bootInternalProcess = () => {
   internalProcess = fork(forkBundlePath, {
     env: {
       ...process.env,
+      LEDGER_LOGS_DIRECTORY,
       LEDGER_LIVE_SQLITE_PATH,
       INITIAL_SENTRY_ENABLED: sentryEnabled,
       SENTRY_USER_ID: userId,
@@ -100,6 +106,11 @@ ipcMainListenReceiveCommands({
 
 function handleGlobalInternalMessage(payload) {
   switch (payload.type) {
+    case 'uncaughtException': {
+      const err = deserializeError(payload.error)
+      captureException(err)
+      break
+    }
     case 'setLibcoreBusy':
     case 'setDeviceBusy':
     case 'executeHttpQueryOnRenderer': {

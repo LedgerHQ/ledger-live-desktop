@@ -20,13 +20,14 @@ class AmountField extends Component<*, { canBeSpent: boolean }> {
     }
   }
   componentWillUnmount() {
-    this.unmount = true
+    this.syncId++
   }
-  unmount = false
+  syncId = 0
   async resync() {
     const { account, bridge, transaction } = this.props
+    const syncId = ++this.syncId
     const canBeSpent = await bridge.canBeSpent(account, transaction)
-    if (this.unmount) return
+    if (this.syncId !== syncId) return
     this.setState({ canBeSpent })
   }
 

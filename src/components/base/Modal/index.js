@@ -19,7 +19,6 @@ import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
-import Defer from 'components/base/Defer'
 
 export { default as ModalBody } from './ModalBody'
 export { default as ConfirmModal } from './ConfirmModal'
@@ -126,7 +125,7 @@ class Pure extends Component<any> {
   render() {
     const { data, onClose, render } = this.props
 
-    return <Defer>{render({ data, onClose })}</Defer>
+    return render({ data, onClose })
   }
 }
 

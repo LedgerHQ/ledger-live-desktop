@@ -17,7 +17,7 @@ import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/gl
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { isLocked } from 'reducers/application'
-import { languageSelector, sentryLogsBooleanSelector } from 'reducers/settings'
+import { languageSelector, sentryLogsSelector } from 'reducers/settings'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 
 import db from 'helpers/db'
@@ -30,6 +30,8 @@ import App from 'components/App'
 import AppError from 'components/AppError'
 
 import 'styles/global'
+
+logger.setProcessShortName('renderer')
 
 const rootNode = document.getElementById('app')
 
@@ -58,7 +60,7 @@ async function init() {
   const language = languageSelector(state)
   moment.locale(language)
 
-  sentry(() => sentryLogsBooleanSelector(store.getState()))
+  sentry(() => sentryLogsSelector(store.getState()))
 
   // FIXME IMO init() really should only be for window. any other case is a hack!
   const isMainWindow = remote.getCurrentWindow().name === 'MainWindow'

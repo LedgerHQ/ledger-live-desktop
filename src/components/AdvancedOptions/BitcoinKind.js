@@ -3,7 +3,7 @@ import React from 'react'
 import { translate } from 'react-i18next'
 
 import Box from 'components/base/Box'
-import CheckBox from 'components/base/CheckBox'
+import Switch from 'components/base/Switch'
 import Label from 'components/base/Label'
 import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
 import Spoiler from 'components/base/Spoiler'
@@ -24,7 +24,7 @@ export default translate()(({ isRBF, onChangeRBF, t }: Props) => (
         </Label>
       </Box>
       <Box grow>
-        <CheckBox isChecked={isRBF} onChange={onChangeRBF} />
+        <Switch isChecked={isRBF} onChange={onChangeRBF} />
       </Box>
     </Box>
 

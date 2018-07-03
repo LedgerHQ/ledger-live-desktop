@@ -140,9 +140,9 @@ function getStyles(props, state) {
 
 const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
-  fontSize: p => p.fontSize || 3,
-  px: p => (p.padded ? 4 : 2),
-  py: p => (p.padded ? 2 : 0),
+  fontSize: p => p.fontSize || (!p.small ? 4 : 3),
+  px: p => (!p.small ? 4 : 3),
+  py: p => (!p.small ? 2 : 0),
   color: 'grey',
   bg: 'transparent',
 })`
@@ -154,7 +154,7 @@ const Base = styled.button.attrs({
   border: none;
   border-radius: ${p => p.theme.radii[1]}px;
   cursor: ${p => (p.disabled ? 'default' : 'pointer')};
-  height: ${p => (p.small ? 30 : p.padded ? 40 : 36)}px;
+  height: ${p => (p.small ? 34 : 40)}px;
   pointer-events: ${p => (p.disabled ? 'none' : '')};
   outline: none;
 
@@ -179,7 +179,6 @@ type Props = {
   disabled?: boolean,
   onClick?: Function,
   small?: boolean,
-  padded?: boolean,
   isLoading?: boolean,
   event?: string,
   eventProperties?: Object,
@@ -195,7 +194,6 @@ class Button extends PureComponent<
     onClick: noop,
     primary: false,
     small: false,
-    padded: false,
     danger: false,
   }
 

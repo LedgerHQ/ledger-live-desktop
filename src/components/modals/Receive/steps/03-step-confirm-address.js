@@ -15,6 +15,7 @@ import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import { WrongDeviceForAccount } from 'components/EnsureDeviceApp'
 
 import type { StepProps } from '../index'
+import TranslatedError from '../../../TranslatedError'
 
 export default class StepConfirmAddress extends PureComponent<StepProps> {
   componentDidMount() {
@@ -43,12 +44,12 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
       onChangeAddressVerified(true)
       transitionTo('receive')
     } catch (err) {
-      onChangeAddressVerified(false)
+      onChangeAddressVerified(false, err)
     }
   }
 
   render() {
-    const { t, device, account, isAddressVerified } = this.props
+    const { t, device, account, isAddressVerified, verifyAddressError } = this.props
     invariant(account, 'No account given')
     invariant(device, 'No device given')
     return (
@@ -56,8 +57,12 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
         <TrackPage category="Receive" name="Step3" />
         {isAddressVerified === false ? (
           <Fragment>
-            <Title>{t('app:receive.steps.confirmAddress.error.title')}</Title>
-            <Text mb={5}>{t('app:receive.steps.confirmAddress.error.text')}</Text>
+            <Title>
+              <TranslatedError error={verifyAddressError} />
+            </Title>
+            <Text mb={5}>
+              <TranslatedError error={verifyAddressError} field="description" />
+            </Text>
             <DeviceConfirm error />
           </Fragment>
         ) : (

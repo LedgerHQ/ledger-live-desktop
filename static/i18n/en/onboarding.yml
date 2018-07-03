@@ -71,7 +71,7 @@ writeSeed:
       step2: 'Press the right button to display <1><0>Word #2</0></1> and repeat the process until all 24 words are copied on the Recovery sheet.' #<italic>Recovery sheet</italic>
       step3: 'Confirm your recovery phrase: select each requested word and press both buttons to validate it.'
     blue:
-      step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order. # <i>Recovery sheet</i>
+      step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order.
       step2: Tap <1><0>Next</0></1> to move to the next words. Repeat the process until the <3><0>Confirmation</0></3> screen appears.
       step3: Type each requested word to confirm your recovery phrase.
   restore:
@@ -107,18 +107,14 @@ genuineCheck:
     genuineCheck: Check now
     contactSupport: Contact us
   errorPage:
-    ledgerNano:
-      title: Oops, something went wrong...
-        #PIN: Didn't choose your own PIN code?
-        #recoveryPhrase: Didn't save your own recovery phrase?
-        #Genuine: Oops, your device does not seem genuine...
-      desc: Go back to the security checklist or request Ledger Support assistance
-        #PIN: Never use a device supplied with a PIN code. If your device was provided with a PIN code, please contact us.
-        #recoveryPhrase: Only save a recovery phrase that is displayed on your device. Please contact us in case of doubt. Otherwise, go back to the security checklist.
-        #Genuine: Your device did not pass the authenticity test required to connect to Ledger’s secure server. Please contact Ledger Support to get assistance.
-    ledgerBlue:
-      title: Oops, something went wrong...
-      desc: Go back to the security checklist or request Ledger Support assistance
+    title:
+      pinFailed: "Didn't choose your own PIN code?"
+      recoveryPhraseFailed: "Didn't save your own recovery phrase?"
+      isGenuineFail: Oops, your device does not seem genuine...
+    desc:
+      pinFailed: Never use a device supplied with a PIN code. If your device was provided with a PIN code, please contact us.
+      recoveryPhraseFailed: Only save a recovery phrase that is displayed on your device. Please contact us in case of doubt. Otherwise, go back to the security checklist.
+      isGenuineFail: Your device did not pass the authenticity test required to connect to Ledger’s secure server. Please contact Ledger Support to get assistance.
 setPassword:
   title: Password lock (optional)
   desc: Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.

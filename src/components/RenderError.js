@@ -17,7 +17,9 @@ import Space from 'components/base/Space'
 import Button from 'components/base/Button'
 import ConfirmModal from 'components/base/Modal/ConfirmModal'
 import IconTriangleWarning from 'icons/TriangleWarning'
-import { IconWrapperCircle } from './SettingsPage/sections/Profile'
+
+// SERIOUSLY plz refactor to use <ResetButton>
+import { IconWrapperCircle } from './SettingsPage/ResetButton'
 
 type Props = {
   error: Error,
@@ -98,14 +100,14 @@ ${error.stack}
         </Box>
         <Space of={30} />
         <Box horizontal flow={2}>
-          <Button primary onClick={this.handleRestart}>
+          <Button small primary onClick={this.handleRestart}>
             {t('app:crash.restart')}
           </Button>
           <ExportLogsBtn withoutAppData={withoutAppData} />
-          <Button primary onClick={this.handleCreateIssue}>
+          <Button small primary onClick={this.handleCreateIssue}>
             {t('app:crash.createTicket')}
           </Button>
-          <Button danger onClick={this.handleOpenHardResetModal}>
+          <Button small danger onClick={this.handleOpenHardResetModal}>
             {t('app:crash.reset')}
           </Button>
         </Box>

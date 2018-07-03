@@ -22,7 +22,7 @@ const MockIcon = styled.div`
   border-radius: 50%;
 `
 
-const mockIcon = <MockIcon size={36} />
+const mockIcon = <MockIcon size={26} />
 
 class Wrapper extends React.Component<any> {
   _ref = null
@@ -38,10 +38,17 @@ class Wrapper extends React.Component<any> {
           ref={n => (this._ref = n)}
           steps={[
             {
+              id: 'deviceOpen',
+              title: ({ deviceConnect: device }) =>
+                `Open the Bitcoin application on your ${device ? `${device.name} ` : ''}device`,
+              desc: 'To be able to retriev your Bitcoins',
+              icon: mockIcon,
+              run: () => new Promise(resolve => setTimeout(resolve, 1 * 1000)),
+            },
+            {
               id: 'deviceConnect',
               title: 'Connect your device',
-              icon: <IconUsb size={36} />,
-              desc: 'If you dont connect your device, we wont be able to read on it',
+              icon: <IconUsb size={26} />,
               render: ({ onSuccess, onFail }) => (
                 <Box p={2} bg="lightGrey" mt={2} borderRadius={1}>
                   <Box horizontal flow={2}>
@@ -57,14 +64,6 @@ class Wrapper extends React.Component<any> {
                   </Box>
                 </Box>
               ),
-            },
-            {
-              id: 'deviceOpen',
-              title: ({ deviceConnect: device }) =>
-                `Open the Bitcoin application on your ${device ? `${device.name} ` : ''}device`,
-              desc: 'To be able to retriev your Bitcoins',
-              icon: mockIcon,
-              run: () => new Promise(resolve => setTimeout(resolve, 1 * 1000)),
             },
             {
               id: 'check',

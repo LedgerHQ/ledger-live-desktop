@@ -33,16 +33,17 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
     }
   }
   componentWillUnmount() {
-    this.unmount = true
+    this.syncId++
   }
-  unmount = false
+  syncId = 0
   async resync() {
     const { account, bridge, transaction } = this.props
+    const syncId = ++this.syncId
     const isValid = await bridge.isRecipientValid(
       account.currency,
       bridge.getTransactionRecipient(account, transaction),
     )
-    if (this.unmount) return
+    if (syncId !== this.syncId) return
     this.setState({ isValid })
   }
 

@@ -50,7 +50,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
               {'app is installed to receive funds.'}
             </Trans>
           </Description>
-          <Button mt={5} padded primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
+          <Button mt={5} primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
             <Box horizontal flow={1} alignItems="center">
               <IconReceive size={12} />
               <Box>{t('app:account.emptyState.buttons.receiveFunds')}</Box>

@@ -20,6 +20,7 @@ export default ({
   t,
   account,
   bridge,
+  openedFromAccount,
   transaction,
   onChangeAccount,
   onChangeTransaction,
@@ -35,14 +36,14 @@ export default ({
     <Box flow={4}>
       <Box flow={1}>
         <Label>{t('app:send.steps.amount.selectAccountDebit')}</Label>
-        <SelectAccount onChange={onChangeAccount} value={account} />
+        <SelectAccount autoFocus={!openedFromAccount} onChange={onChangeAccount} value={account} />
       </Box>
 
       {account &&
         bridge &&
         transaction && (
           <RecipientField
-            autoFocus
+            autoFocus={openedFromAccount}
             account={account}
             bridge={bridge}
             transaction={transaction}
@@ -112,13 +113,15 @@ export class StepAmountFooter extends PureComponent<
   }
 
   componentWillUnmount() {
-    this._isUnmounted = true
+    this.syncId++
   }
 
-  _isUnmounted = false
+  syncId = 0
 
   async resync() {
     const { account, bridge, transaction } = this.props
+
+    const syncId = ++this.syncId
 
     if (!account || !transaction || !bridge) {
       return
@@ -128,9 +131,9 @@ export class StepAmountFooter extends PureComponent<
 
     try {
       const totalSpent = await bridge.getTotalSpent(account, transaction)
-      if (this._isUnmounted) return
+      if (syncId !== this.syncId) return
       const canBeSpent = await bridge.canBeSpent(account, transaction)
-      if (this._isUnmounted) return
+      if (syncId !== this.syncId) return
       this.setState({ totalSpent, canBeSpent, isSyncing: false })
     } catch (err) {
       this.setState({ isSyncing: false })

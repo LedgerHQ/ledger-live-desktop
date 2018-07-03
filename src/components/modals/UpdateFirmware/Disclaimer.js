@@ -67,7 +67,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
                 <GradientBox />
               </ModalContent>
               <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
-                <Button primary padded onClick={goToNextStep}>
+                <Button primary onClick={goToNextStep}>
                   {t('app:manager.firmware.continue')}
                 </Button>
               </ModalFooter>

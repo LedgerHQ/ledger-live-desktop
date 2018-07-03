@@ -10,7 +10,9 @@ import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 import type { SettingsState } from 'reducers/settings'
 
+import { MODAL_DISCLAIMER, MODAL_DISCLAIMER_DELAY } from 'config/constants'
 import { saveSettings } from 'actions/settings'
+import { openModal } from 'reducers/modals'
 import {
   nextStep,
   prevStep,
@@ -23,7 +25,9 @@ import { getCurrentDevice } from 'reducers/devices'
 
 import { unlock } from 'reducers/application'
 
+import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
+import TriggerAppReady from '../TriggerAppReady'
 
 import Start from './steps/Start'
 import InitStep from './steps/Init'
@@ -63,6 +67,7 @@ const mapDispatchToProps = {
   prevStep,
   jumpStep,
   unlock,
+  openModal,
 }
 
 type Props = {
@@ -76,6 +81,7 @@ type Props = {
   jumpStep: Function,
   getCurrentDevice: Function,
   unlock: Function,
+  openModal: string => void,
 }
 
 export type StepProps = {
@@ -96,7 +102,12 @@ export type StepProps = {
 
 class Onboarding extends PureComponent<Props> {
   getDeviceInfo = () => this.props.getCurrentDevice
-  finish = () => this.props.saveSettings({ hasCompletedOnboarding: true })
+  finish = () => {
+    this.props.saveSettings({ hasCompletedOnboarding: true })
+    setTimeout(() => {
+      this.props.openModal(MODAL_DISCLAIMER)
+    }, MODAL_DISCLAIMER_DELAY)
+  }
   savePassword = hash => {
     this.props.saveSettings({
       password: {
@@ -147,6 +158,9 @@ class Onboarding extends PureComponent<Props> {
 
     return (
       <Container>
+        <TriggerAppReady />
+        <ExportLogsBtn hookToShortcut />
+
         {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
         <StepContainer>
           <StepComponent {...stepProps} />

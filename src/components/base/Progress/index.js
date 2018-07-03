@@ -6,10 +6,17 @@ import Box from 'components/base/Box'
 
 const inifiteAnimation = keyframes`
   0% {
-    left: 0
+    left: -18%;
+    width: 20%;
   }
+
+  50% {
+    left: 98%;
+  }
+
   100% {
-    left: 102%
+    left: -18%;
+    width: 20%;
   }
 `
 
@@ -45,7 +52,7 @@ const Progression = styled(Bar).attrs({
   ${p =>
     p.infinite
       ? `
-    animation: 1000ms ${inifiteAnimation} ease-out infinite;
+    animation: ${p.timing}ms ${inifiteAnimation} infinite;
     `
       : `
     animation: ${p.timing}ms ${fillInAnimation} ease-out;
@@ -70,7 +77,7 @@ class Progress extends Component<Props, State> {
 
   render() {
     const { infinite, color, timing } = this.props
-    const styles = infinite ? { width: '20%' } : { width: '100%' }
+    const styles = infinite ? { width: '0%' } : { width: '100%' }
     return (
       <Bar>
         <Progression infinite={infinite} color={color} style={styles} timing={timing} />

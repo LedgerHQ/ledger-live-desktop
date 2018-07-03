@@ -1,97 +1,106 @@
 ---
 BtcUnmatchedApp:
-  title: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
-  description: ''
+  title: That's the wrong app
+  description: Open the ‘{{currencyName}}’ app on your device
 DeviceNotGenuine:
-  title: Device is not genuine
-  description: ''
+  title: Possibly not genuine
+  description: 'Request Ledger Support assistance.'
 DeviceSocketFail:
-  title: Oops, device connection failed. Please try again. [device-fail]
-  description: ''
+  title: Oops, try again
+  description: 'Some connection failed, so please try again.'
 DeviceSocketNoBulkStatus:
-  title: Oops, device connection failed. Please try again [bulk].
-  description: ''
+  title: Oops, try again
+  description: Some connection failed, so please try again.
 DeviceSocketNoHandler:
-  title: Oops, device connection failed (handler {{query}}). Please try again.
-  description: ''
+  title: Oops, try again
+  description: Some connection failed, so please try again.
 DisconnectedDevice:
-  title: 'The device was disconnected.'
-  description: ''
+  title: Oops, device was disconnected
+  description: The connection to the device was lost, so please try again.
 Error:
-  title: 'Oops, an error occurred.'
-  description: '{{message}}'
-FeeEstimationFailed:
-  title: 'Fee estimation error. Try again or set a custom fee (status: {{status}})'
-  description: ''
-generic:
-  title: Oops, an unknown error occurred. Please try again or contact Ledger Support.
-  description: ''
-HardResetFail:
-  title: Reset failed. Please try again.
-  description: ''
-LatestMCUInstalledError:
-  title: MCU on device already up to date.
-  description: ''
-LedgerAPIError:
-  title: 'Ledger API error. Try again. (HTTP {{status}})'
-  description: ''
-LedgerAPIErrorWithMessage:
   title: '{{message}}'
-  description: ''
+  description: Something went wrong. Please retry or contact us.
+FeeEstimationFailed:
+  title: Sorry, fee estimation failed
+  description: 'Try setting a custom fee (status: {{status}})'
+generic:
+  title: Sorry, that's an unexpected bug
+  description: Please retry or contact Ledger Support.
+HardResetFail:
+  title: Oops, could not reset
+  description: Please retry or contact Ledger Support.
+LatestMCUInstalledError:
+  title: Oops, nothing to update
+  description: Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device.
+LedgerAPIError:
+  title: 'Sorry, try again (API HTTP {{status}})'
+  description: Interacting with Ledger's API server went wrong. Please retry.
+LedgerAPIErrorWithMessage:
+  title: 'Oops, {{message}}'
+  description: Please retry or contact Ledger Support.
 LedgerAPINotAvailable:
-  title: 'Ledger API not available for {{currencyName}}.'
-  description: ''
+  title: Sorry, {{currencyName}} services unavailable
+  description: Please retry or contact Ledger Support.
 ManagerAPIsFail:
-  title: Services are unavailable. Please try again.
-  description: ''
+  title: Oops, Manager services unavailable.
+  description: Please check the network status.
 ManagerAppAlreadyInstalled:
-  title: App is already installed
-  description: ''
+  title: Oops, that's already installed.
+  description: Check your device to see which apps are already installed.
 ManagerAppRelyOnBTC:
-  title: You must install Bitcoin application first
-  description: ''
+  title: Bitcoin app required
+  description: Install the Bitcoin app before installing this app.
 ManagerDeviceLocked:
-  title: Device is locked
-  description: ''
+  title: Please unlock your device
+  description: Your device was locked. Please unlock it.
 ManagerNotEnoughSpace:
-  title: Not enough storage on device
-  description: Uninstall some apps and try again.
+  title: Sorry, insufficient device storage
+  description: Uninstall some apps to increase available storage and try again.
 ManagerUnexpectedError:
-  title: Unexpected error occurred ({{msg}})
+  title: That's unexpected ({{msg}})
   description: Please try again.
 ManagerUninstallBTCDep:
-  title: You must uninstall other altcoins first
-  description: ''
+  title: Sorry, Bitcoin is required
+  description: First uninstall apps that depend on Bitcoin.
 NetworkDown:
-  title: 'Your internet connection seems down.'
-  description: ''
+  title: Oops, internet seems down
+  description: Please check your internet connection.
 NoAddressesFound:
-  title: 'No accounts were found.'
-  description: ''
+  title: Sorry, no accounts found
+  description: Something went wrong with address calculation, try again or contact Ledger Support.
 NotEnoughBalance:
-  title: 'Insufficient funds to proceed.'
-  description: ''
+  title: Oops, not enough balance
+  description: Make sure the account to debit has sufficient balance
 RangeError:
   title: '{{message}}'
-  description: ''
+  description:
 TimeoutError:
-  title: 'The request timed out.'
-  description: ''
+  title: Oops, a time out occurred
+  description: It took too long for the server to respond.
+TransportError:
+  title: 'Something went wrong. Please replug your device.'
+  description: '{{message}}'
 TransportStatusError:
-  title: '{{message}}'
-  description: ''
+  title: 'Something went wrong. Please replug your device.'
+  description: '{{message}}'
 UserRefusedOnDevice:
-  title: Transaction refused on device.
-  description: ''
+  title: Transaction refused on device
+  description: Please retry or contact Ledger Support in case of doubt.
+UserRefusedAddress:
+  title: Receive address rejected
+  description: Please try again or contact Support
 WebsocketConnectionError:
-  title: Oops, device connection failed. Please try again. [web-err]
-  description: ''
+  title: Sorry, try again (websocket error).
+  description:
 WebsocketConnectionFailed:
-  title: Oops, device connection failed. Please try again. [web-fail]
-  description: ''
+  title: Sorry, try again (websocket failed).
+  description:
 WrongAppOpened:
-  title: 'Open the ‘{{currencyName}}’ app on your Ledger device to proceed.'
-  description: ''
+  title: Please open the ‘{{currencyName}}’ app
+  description: The wrong app was opened on your device. Please retry.
 WrongDeviceForAccount:
-  title: 'Use the device associated with the account ‘{{accountName}}’.'
-  description: ''
+  title: Oops, wrong device for ‘{{accountName}}’.
+  description: The connected device is not associated with the account you selected. Please connect the right device.
+DeviceAppVerifyNotSupported:
+  title: Open Manager to update this App
+  description: The app verification is not supported

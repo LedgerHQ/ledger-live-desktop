@@ -1,8 +1,7 @@
 // @flow
-/* eslint-disable react/jsx-no-literals */ // FIXME
 
 import React, { PureComponent } from 'react'
-
+import { translate } from 'react-i18next'
 import Box, { Card } from 'components/base/Box'
 import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
 import Button from 'components/base/Button'
@@ -38,7 +37,7 @@ class TabProfile extends PureComponent<*, *> {
     return (
       <Card flow={3}>
         <Box horizontal>
-          <Button onClick={this.onQRCodeMobileExport} primary>
+          <Button small onClick={this.onQRCodeMobileExport} primary>
             QRCode Mobile Export
           </Button>
 
@@ -53,4 +52,4 @@ class TabProfile extends PureComponent<*, *> {
   }
 }
 
-export default TabProfile
+export default translate()(TabProfile)

@@ -9,4 +9,5 @@ export default async function hardReset() {
   disableDBMiddleware()
   db.resetAll()
   await delay(500)
+  window.location.href = ''
 }

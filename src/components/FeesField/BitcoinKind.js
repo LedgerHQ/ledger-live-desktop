@@ -50,10 +50,9 @@ const customItem = {
   feePerByte: 0,
 }
 
-class FeesField extends Component<
-  Props & { fees?: Fees, error?: Error },
-  { isFocused: boolean, items: FeeItem[], selectedItem: FeeItem },
-> {
+type State = { isFocused: boolean, items: FeeItem[], selectedItem: FeeItem }
+
+class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State> {
   state = {
     items: [customItem],
     selectedItem: customItem,
@@ -103,9 +102,20 @@ class FeesField extends Component<
 
   onSelectChange = selectedItem => {
     const { onChange } = this.props
-    this.setState({ selectedItem })
-    if (selectedItem.feePerByte) onChange(selectedItem.feePerByte)
+    const patch: $Shape<State> = { selectedItem }
+    if (selectedItem.feePerByte) {
+      onChange(selectedItem.feePerByte)
+    } else {
+      const { input } = this
+      if (!selectedItem.feePerByte && input.current) {
+        patch.isFocused = true
+        input.current.select()
+      }
+    }
+    this.setState(patch)
   }
+
+  input = React.createRef()
 
   render() {
     const { account, feePerByte, error, onChange, t } = this.props
@@ -118,6 +128,7 @@ class FeesField extends Component<
       <GenericContainer error={error} help={t('app:send.steps.amount.unitPerByte')}>
         <Select width={156} options={items} value={selectedItem} onChange={this.onSelectChange} />
         <InputCurrency
+          ref={this.input}
           defaultUnit={satoshi}
           units={units}
           containerProps={{ grow: true }}

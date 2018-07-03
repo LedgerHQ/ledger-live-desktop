@@ -1,35 +1,32 @@
 // @flow
 
 import React from 'react'
-import noop from 'lodash/noop'
 import styled from 'styled-components'
 
+import Check from 'icons/Check'
 import { Tabbable } from 'components/base/Box'
 
 const Base = styled(Tabbable).attrs({
-  bg: p => (p.isChecked ? 'wallet' : 'lightFog'),
-  horizontal: true,
+  relative: true,
   align: 'center',
+  justifyContent: 'center',
 })`
-  backround: red;
-  width: 50px;
-  height: 26px;
-  border-radius: 13px;
-  transition: 250ms linear background-color;
-  cursor: pointer;
+  outline: none;
+  border-radius: 4px;
+  background-color: ${p => (p.isChecked ? p.theme.colors.wallet : p.theme.colors.white)};
+  border: 1px solid;
+  border-color: ${p => (p.isChecked ? p.theme.colors.wallet : p.theme.colors.fog)};
+  color: ${p => p.theme.colors.white};
+  height: 18px;
+  width: 18px;
+  transition: all ease-in-out 0.1s;
   &:focus {
-    outline: none;
+    box-shadow: 0 0 4px 1px ${p => p.theme.colors.wallet};
+    border-color: ${p => p.theme.colors.wallet};
   }
-`
-
-const Ball = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
-  transition: 250ms ease-in-out transform;
-  transform: translate3d(${p => (p.isChecked ? '27px' : '3px')}, 0, 0);
+  &:hover {
+    border-color: ${p => p.theme.colors.wallet};
+  }
 `
 
 type Props = {
@@ -38,16 +35,12 @@ type Props = {
 }
 
 function CheckBox(props: Props) {
-  const { isChecked, onChange, ...p } = props
+  const { isChecked, onChange } = props
   return (
-    <Base isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} {...p}>
-      <Ball isChecked={isChecked} />
+    <Base {...props} isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)}>
+      <Check size={12} />
     </Base>
   )
-}
-
-CheckBox.defaultProps = {
-  onChange: noop,
 }
 
 export default CheckBox

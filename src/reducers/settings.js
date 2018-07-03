@@ -27,6 +27,8 @@ export const timeRangeDaysByKey = {
 
 export type TimeRange = $Keys<typeof timeRangeDaysByKey>
 
+export type { CurrencySettings }
+
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
@@ -163,10 +165,12 @@ export const lastUsedVersionSelector = (state: State): string => state.settings.
 
 export const availableCurrencies = createSelector(developerModeSelector, listCryptoCurrencies)
 
-export const langAndRegionSelector = (state: State): { language: string, region: ?string } => {
+export const langAndRegionSelector = (
+  state: State,
+): { language: string, region: ?string, useSystem: boolean } => {
   let { language, region } = state.settings
   if (language && languages.includes(language)) {
-    return { language, region }
+    return { language, region, useSystem: false }
   }
   const locale = getSystemLocale()
   language = locale.language
@@ -175,7 +179,7 @@ export const langAndRegionSelector = (state: State): { language: string, region:
     language = 'en'
     region = 'US'
   }
-  return { language, region }
+  return { language, region, useSystem: true }
 }
 
 export const languageSelector = createSelector(langAndRegionSelector, o => o.language)
@@ -220,8 +224,10 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
 )
 
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
-export const sentryLogsBooleanSelector = (state: State) => state.settings.sentryLogs
+export const sentryLogsSelector = (state: State) => state.settings.sentryLogs
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
+export const hasCompletedOnboardingSelector = (state: State) =>
+  state.settings.hasCompletedOnboarding
 
 export default handleActions(handlers, INITIAL_STATE)

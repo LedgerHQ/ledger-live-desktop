@@ -98,12 +98,12 @@ class DisablePasswordModal extends PureComponent<Props, State> {
                 </Box>
               </ModalContent>
               <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-                <Button type="button" padded onClick={onClose}>
+                <Button small type="Button small" onClick={onClose}>
                   {t('app:common.cancel')}
                 </Button>
                 <Button
+                  small
                   primary
-                  padded
                   onClick={this.disablePassword}
                   disabled={!currentPassword && !incorrectPassword}
                 >
