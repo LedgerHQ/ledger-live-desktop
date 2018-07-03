@@ -134,6 +134,7 @@ class GenuineCheck extends PureComponent<Props> {
           </Trans>
         ),
         icon: genuineCheckIcon,
+        timeout: 30000,
         run: this.checkGenuineInteractionHandler,
       },
     ]

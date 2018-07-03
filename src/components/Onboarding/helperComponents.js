@@ -13,7 +13,6 @@ export const Title = styled(Box).attrs({
   fontSize: 7,
   color: 'dark',
 })`
-  max-width: 550px;
   text-align: center;
 `
 

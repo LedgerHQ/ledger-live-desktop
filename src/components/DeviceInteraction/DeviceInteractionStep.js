@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 
 import Box from 'components/base/Box'
 import { delay } from 'helpers/promise'
+import { createCustomErrorClass } from 'helpers/errors'
 
 import {
   DeviceInteractionStepContainer,
@@ -17,6 +18,7 @@ export type Step = {
   id: string,
   title?: React$Node | (Object => React$Node),
   desc?: React$Node,
+  timeout?: number,
   icon: React$Node,
   run?: Object => Promise<any> | { promise: Promise<any>, unsubscribe: void => any },
   render?: ({ onSuccess: Object => any, onFail: Error => void }, any) => React$Node,
@@ -39,6 +41,8 @@ type Props = {
   onFail: (Error, Step) => any,
   data: any,
 }
+
+const TimeoutError = createCustomErrorClass('TimeoutError')
 
 class DeviceInteractionStep extends PureComponent<
   Props,
@@ -120,8 +124,21 @@ class DeviceInteractionStep extends PureComponent<
     try {
       const d1 = Date.now()
 
-      // $FlowFixMe JUST TESTED THE `run` 6 LINES BEFORE!!!
-      const res = (await step.run(data)) || {}
+      let res
+
+      if (step.timeout) {
+        const timeoutPromise = new Promise(r => setTimeout(() => r('timeout'), step.timeout))
+        // $FlowFixMe
+        const jobPromise = step.run(data)
+        res = await Promise.race([jobPromise, timeoutPromise])
+        if (res === 'timeout') {
+          throw new TimeoutError()
+        }
+      } else {
+        // $FlowFixMe
+        res = (await step.run(data)) || {}
+      }
+
       if (this._unmounted) return
 
       if (step.minMs) {
@@ -189,7 +206,6 @@ class DeviceInteractionStep extends PureComponent<
             <CustomRender onSuccess={this.handleSuccess} onFail={this.handleFail} data={data} />
           )}
         </Box>
-
         <div style={{ width: 70, position: 'relative', overflow: 'hidden', pointerEvents: 'none' }}>
           <SpinnerContainer isVisible={isRunning} isPassed={isPassed} isError={isError} />
           <ErrorContainer isVisible={isError} />
