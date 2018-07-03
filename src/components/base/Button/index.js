@@ -36,7 +36,7 @@ const buttonStyles: { [_: string]: Style } = {
           ? `
           0 0 0 1px ${darken(p.theme.colors.wallet, 0.3)} inset,
           0 0 0 1px ${rgba(p.theme.colors.wallet, 0.5)},
-          0 0 0 4px ${rgba(p.theme.colors.wallet, 0.3)};`
+          0 0 0 3px ${rgba(p.theme.colors.wallet, 0.3)};`
           : ''
       }
     `,
@@ -56,7 +56,7 @@ const buttonStyles: { [_: string]: Style } = {
           ? `
           0 0 0 1px ${darken(p.theme.colors.alertRed, 0.3)} inset,
           0 0 0 1px ${rgba(p.theme.colors.alertRed, 0.5)},
-          0 0 0 4px ${rgba(p.theme.colors.alertRed, 0.3)};
+          0 0 0 3px ${rgba(p.theme.colors.alertRed, 0.3)};
         `
           : ''
       }
@@ -80,10 +80,17 @@ const buttonStyles: { [_: string]: Style } = {
         box-shadow: ${
           p.isFocused
             ? `
-            0 0 0 1px ${darken(c, 0.3)} inset,
-            0 0 0 4px ${rgba(c, 0.3)};`
+            0 0 0 3px ${rgba(c, 0.3)};`
             : ''
         }
+      `
+    },
+    hover: p => {
+      const c = p.outlineColor
+        ? p.theme.colors[p.outlineColor] || p.outlineColor
+        : p.theme.colors.wallet
+      return `
+        background: ${rgba(c, 0.1)};
       `
     },
     active: p => `
