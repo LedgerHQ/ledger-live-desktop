@@ -11,7 +11,15 @@ logger.setProcessShortName('internal')
 
 require('../env')
 
-process.title = 'Internal'
+process.title = 'Ledger Live Internal'
+
+process.on('uncaughtException', err => {
+  process.send({
+    type: 'uncaughtException',
+    error: serializeError(err),
+  })
+  process.exit(1)
+})
 
 const defers = {}
 
@@ -105,6 +113,10 @@ process.on('message', m => {
     const { payload } = m
     sentryEnabled = payload.value
   }
+})
+
+process.on('disconnect', () => {
+  process.exit(0)
 })
 
 logger.log('Internal process is up!')

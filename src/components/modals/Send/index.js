@@ -44,6 +44,7 @@ type Props = {
 
 type State<Transaction> = {
   stepId: string,
+  openedFromAccount: boolean,
   account: ?Account,
   bridge: ?WalletBridge<Transaction>,
   transaction: ?Transaction,
@@ -54,6 +55,7 @@ type State<Transaction> = {
 }
 
 export type StepProps<Transaction> = DefaultStepProps & {
+  openedFromAccount: boolean,
   device: ?Device,
   account: ?Account,
   bridge: ?WalletBridge<Transaction>,
@@ -118,6 +120,7 @@ const mapDispatchToProps = {
 const INITIAL_STATE = {
   stepId: 'amount',
   amount: 0,
+  openedFromAccount: false,
   account: null,
   bridge: null,
   transaction: null,
@@ -151,7 +154,12 @@ class SendModal extends PureComponent<Props, State<*>> {
       const account = (data && data.account) || accounts[0]
       const bridge = account ? getBridgeForCurrency(account.currency) : null
       const transaction = bridge ? bridge.createTransaction(account) : null
-      this.setState({ account, bridge, transaction })
+      this.setState({
+        openedFromAccount: !!(data && data.account),
+        account,
+        bridge,
+        transaction,
+      })
     }
   }
 
@@ -227,6 +235,7 @@ class SendModal extends PureComponent<Props, State<*>> {
     const { t, device, openModal } = this.props
     const {
       stepId,
+      openedFromAccount,
       account,
       isAppOpened,
       bridge,
@@ -237,6 +246,7 @@ class SendModal extends PureComponent<Props, State<*>> {
 
     const addtionnalProps = {
       device,
+      openedFromAccount,
       account,
       bridge,
       transaction,
