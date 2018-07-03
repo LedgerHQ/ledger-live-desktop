@@ -46,13 +46,7 @@ const Address = styled(Box).attrs({
   cursor: text;
   user-select: text;
   width: 325px;
-`
-
-const Ellipsis = styled.span`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
+  text-align: center;
 `
 
 type Props = StepProps & {
@@ -69,7 +63,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.install()
+    // this.install()
   }
 
   componentWillUnmount() {
@@ -123,6 +117,18 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     }
   }
 
+  formatHashName = (hash: string): string[] => {
+    if (!hash) {
+      return []
+    }
+
+    const length = hash.length
+    const half = Math.ceil(length / 2)
+    const start = hash.slice(0, half)
+    const end = hash.slice(half)
+    return [start, end]
+  }
+
   renderBody = () => {
     const { installing } = this.state
     const { t, firmware } = this.props
@@ -141,7 +147,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
             {t('app:manager.modal.identifier')}
           </Text>
           <Address>
-            <Ellipsis>{firmware && firmware.hash}</Ellipsis>
+            {firmware && firmware.hash && this.formatHashName(firmware.hash).join('\n')}
           </Address>
         </Box>
         <Box mt={5}>

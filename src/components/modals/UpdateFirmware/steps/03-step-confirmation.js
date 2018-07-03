@@ -31,7 +31,7 @@ function StepConfirmation({ t }: StepProps) {
         <CheckCircle size={44} />
       </Box>
       <Title>{t('app:manager.modal.successTitle')}</Title>
-      <Box mt={2} mb={8}>
+      <Box mt={2} mb={5}>
         <Text ff="Open Sans|Regular" fontSize={4} color="graphite">
           {t('app:manager.modal.successText')}
         </Text>

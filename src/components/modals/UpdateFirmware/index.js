@@ -116,6 +116,7 @@ class UpdateModal extends PureComponent<Props, State> {
         preventBackdropClick={stepId !== 'finish'}
         render={() => (
           <Stepper
+            onStepChange={this.handleStepChange}
             title={t('app:manager.firmware.update')}
             initialStepId={stepId}
             steps={this.STEPS}
