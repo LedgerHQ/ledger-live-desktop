@@ -402,7 +402,7 @@ crash:
   uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart
   reset: Reset
-  createTicket: Ledger Support
+  createTicket: Contact us
   showDetails: Show details
   showError: Show error
 disclaimerModal:
