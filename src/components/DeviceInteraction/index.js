@@ -15,6 +15,7 @@ type Props = {
   onSuccess?: any => void,
   onFail?: any => void,
   waitBeforeSuccess?: number,
+  onTimeoutClick?: () => void,
 
   // when true and there is an error, display the error + retry button
   shouldRenderRetry?: boolean,
@@ -80,6 +81,10 @@ class DeviceInteraction extends PureComponent<Props, State> {
     onFail && onFail(error)
   }
 
+  handleTimeoutClick = () => {
+    const { onTimeoutClick } = this.props
+    onTimeoutClick && onTimeoutClick()
+  }
   render() {
     const { steps, shouldRenderRetry, ...props } = this.props
     const { stepIndex, error, isSuccess, data } = this.state
@@ -102,6 +107,7 @@ class DeviceInteraction extends PureComponent<Props, State> {
               isFinished={isSuccess}
               onSuccess={this.handleSuccess}
               onFail={this.handleFail}
+              onTimeoutClick={this.handleTimeoutClick}
               data={data}
             />
           )

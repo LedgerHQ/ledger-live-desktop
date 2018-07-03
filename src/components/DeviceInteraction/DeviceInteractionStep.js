@@ -11,12 +11,14 @@ import {
   IconContainer,
   SuccessContainer,
   ErrorContainer,
+  TimeoutContainer,
 } from './components'
 
 export type Step = {
   id: string,
   title?: React$Node | (Object => React$Node),
   desc?: React$Node,
+  timeout?: number,
   icon: React$Node,
   run?: Object => Promise<any> | { promise: Promise<any>, unsubscribe: void => any },
   render?: ({ onSuccess: Object => any, onFail: Error => void }, any) => React$Node,
@@ -37,6 +39,7 @@ type Props = {
   step: Step,
   onSuccess: (any, Step) => any,
   onFail: (Error, Step) => any,
+  onTimeoutClick: () => any,
   data: any,
 }
 
@@ -44,6 +47,7 @@ class DeviceInteractionStep extends PureComponent<
   Props,
   {
     status: Status,
+    isTimedOut: boolean,
   },
 > {
   static defaultProps = {
@@ -52,6 +56,7 @@ class DeviceInteractionStep extends PureComponent<
 
   state = {
     status: this.props.isFirst ? 'running' : 'idle',
+    isTimedOut: false,
   }
 
   componentDidMount() {
@@ -81,8 +86,10 @@ class DeviceInteractionStep extends PureComponent<
       this.cancel()
     }
   }
-
+  timeoutFunc: *
   componentWillUnmount() {
+    clearTimeout(this.timeoutFunc)
+
     if (this._unsubscribe) {
       this._unsubscribe()
     }
@@ -104,10 +111,24 @@ class DeviceInteractionStep extends PureComponent<
     this.setState({ status: 'idle' })
     onFail(e, step)
   }
+  handleTimeoutClick = () => {
+    console.log('tryong to handle')
+    this.setState({ isTimedOut: true })
+  }
 
   run = async () => {
     const { step, data } = this.props
-    const { status } = this.state
+    const { status, isTimedOut } = this.state
+
+    clearTimeout(this.timeoutFunc)
+    if (step.timeout) {
+      this.timeoutFunc = setTimeout(() => {
+        if (this.state.status === 'idle') {
+          return
+        }
+        return this.handleTimeoutClick()
+      }, step.timeout)
+    }
 
     if (status !== 'running') {
       this.setState({ status: 'running' })
@@ -146,7 +167,10 @@ class DeviceInteractionStep extends PureComponent<
     }
   }
 
-  cancel = () => this.setState({ status: 'idle' })
+  cancel = () => {
+    this.setState({ status: 'idle' })
+    clearTimeout(this.timeoutFunc)
+  }
 
   render() {
     const {
@@ -160,9 +184,10 @@ class DeviceInteractionStep extends PureComponent<
       isPassed,
       step,
       data,
+      onTimeoutClick,
     } = this.props
 
-    const { status } = this.state
+    const { status, isTimedOut } = this.state
     const title = typeof step.title === 'function' ? step.title(data) : step.title
     const { render: CustomRender } = step
     const isRunning = status === 'running'
@@ -189,7 +214,7 @@ class DeviceInteractionStep extends PureComponent<
             <CustomRender onSuccess={this.handleSuccess} onFail={this.handleFail} data={data} />
           )}
         </Box>
-
+        {isTimedOut && <TimeoutContainer onTimeoutClick={onTimeoutClick} />}
         <div style={{ width: 70, position: 'relative', overflow: 'hidden', pointerEvents: 'none' }}>
           <SpinnerContainer isVisible={isRunning} isPassed={isPassed} isError={isError} />
           <ErrorContainer isVisible={isError} />
