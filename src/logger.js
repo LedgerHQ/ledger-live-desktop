@@ -34,7 +34,7 @@ const transports = [
   }),
 ]
 
-if (process.env.NODE_ENV !== 'production' || process.env.LOGS_IN_CONSOLE) {
+if (process.env.NODE_ENV !== 'production' || process.env.DEV_TOOLS) {
   let consoleT
   if (typeof window === 'undefined') {
     // on Node we want a concise logger

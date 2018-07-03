@@ -21,6 +21,7 @@ class ExportLogsBtn extends Component<{
       release: __APP_VERSION__,
       git_commit: __GIT_REVISION__,
       environment: __DEV__ ? 'development' : 'production',
+      userAgent: window.navigator.userAgent,
     })
     const path = remote.dialog.showSaveDialog({
       title: 'Export logs',
