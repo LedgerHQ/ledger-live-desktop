@@ -27,7 +27,6 @@ import IconHome from 'icons/Home'
 import IconGenuineCheck from 'icons/GenuineCheck'
 
 const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
-const TimeoutGenuineError = createCustomErrorClass('TimeoutGenuineError')
 
 type Props = {
   t: T,
@@ -88,9 +87,6 @@ class GenuineCheck extends PureComponent<Props> {
     }
     genuineDevices.add(device)
     return true
-  }
-  handleTimeoutClick = () => {
-    this.handleFail(new TimeoutGenuineError())
   }
 
   handleFail = (err: Error) => {

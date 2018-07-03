@@ -15,7 +15,6 @@ type Props = {
   onSuccess?: any => void,
   onFail?: any => void,
   waitBeforeSuccess?: number,
-  onTimeoutClick?: () => void,
 
   // when true and there is an error, display the error + retry button
   shouldRenderRetry?: boolean,
