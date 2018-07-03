@@ -8,12 +8,17 @@ import Box from 'components/base/Box'
 import Switch from 'components/base/Switch'
 import TrackPage from 'analytics/TrackPage'
 import Track from 'analytics/Track'
+import { openModal } from 'reducers/modals'
+import { MODAL_REPORT_BUGS, MODAL_TECHNICAL_DATA } from 'config/constants'
+import ReportBugs from '../../modals/ReportBugs'
+import TechnicalData from '../../modals/TechnicalData'
+import FakeLink from '../../base/FakeLink'
 import { Title, Description, FixedTopContainer, StepContainerInner } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
-const mapDispatchToProps = { saveSettings }
+const mapDispatchToProps = { saveSettings, openModal }
 
 type State = {
   analyticsToggle: boolean,
@@ -46,7 +51,12 @@ class Analytics extends PureComponent<StepProps, State> {
     savePassword(undefined)
     prevStep()
   }
-
+  handleBugsModal = () => {
+    this.props.openModal(MODAL_REPORT_BUGS)
+  }
+  handleTechnicalDataModal = () => {
+    this.props.openModal(MODAL_TECHNICAL_DATA)
+  }
   render() {
     const { nextStep, t, onboarding } = this.props
     const { analyticsToggle, sentryLogsToggle } = this.state
@@ -65,7 +75,19 @@ class Analytics extends PureComponent<StepProps, State> {
           <Box mt={5}>
             <Container>
               <Box>
-                <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
+                <Box horizontal mb={2}>
+                  <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
+                  <FakeLink
+                    style={{ textDecoration: 'underline' }}
+                    fontSize={3}
+                    color="smoke"
+                    ml={2}
+                    onClick={this.handleBugsModal}
+                  >
+                    {t('app:common.learnMore')}
+                  </FakeLink>
+                  <ReportBugs />
+                </Box>
                 <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
@@ -82,7 +104,19 @@ class Analytics extends PureComponent<StepProps, State> {
             </Container>
             <Container>
               <Box>
-                <AnalyticsTitle>{t('onboarding:analytics.shareAnalytics.title')}</AnalyticsTitle>
+                <Box horizontal mb={2}>
+                  <AnalyticsTitle>{t('onboarding:analytics.shareAnalytics.title')}</AnalyticsTitle>
+                  <FakeLink
+                    style={{ textDecoration: 'underline' }}
+                    fontSize={3}
+                    color="smoke"
+                    ml={2}
+                    onClick={this.handleTechnicalDataModal}
+                  >
+                    {t('app:common.learnMore')}
+                  </FakeLink>
+                </Box>
+                <TechnicalData />
                 <AnalyticsText>{t('onboarding:analytics.shareAnalytics.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
@@ -129,9 +163,7 @@ export const AnalyticsTitle = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   textAlign: 'left',
-})`
-  margin-bottom: 5px;
-`
+})``
 const Container = styled(Box).attrs({
   horizontal: true,
   p: 3,

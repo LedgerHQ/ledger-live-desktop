@@ -96,6 +96,7 @@ export type StepProps = {
   savePassword: Function,
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
+  openModal: string => void,
   isLedgerNano: Function,
   flowType: Function,
 }
@@ -145,6 +146,7 @@ class Onboarding extends PureComponent<Props> {
       onboarding,
       settings,
       updateGenuineCheck,
+      openModal,
       isLedgerNano,
       flowType,
       prevStep,

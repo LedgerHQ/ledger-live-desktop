@@ -32,7 +32,7 @@ export type OnboardingState = {
 
 const state: OnboardingState = {
   stepIndex: 0, // FIXME is this used at all? dup with stepName?
-  stepName: SKIP_ONBOARDING ? 'analytics' : 'start',
+  stepName: 'analytics',
   genuine: {
     pinStepPass: false,
     recoveryStepPass: false,

@@ -134,9 +134,27 @@ analytics:
   sentryLogs:
     title: Report bugs
     desc: Automatically send reports to help Ledger fix bugs
-  # mandatoryContextual:
-    # title: Technical data
-    # desc: Ledger will automatically collect technical information to help improve user experience. This information is fully anonymized.
+    mandatoryContextual:
+      item1: Page visits
+      item2: Actions (send, receive, logout)
+      item3: Clicks
+      item4: Redirections to webpages
+      item5: Scrolled to end of page
+      item6: Install/Uninstall
+      item7: Number of accounts, currencies and operations
+      item8: Overall and page session duration
+      item9: Device product ID
+      item10: Device firmware and app versions
+  technicalData:
+     title: Report bugs
+     desc: Automatically send reports to help Ledger fix bugs
+     mandatoryContextual:
+       item1: Active unique users
+       item2: OS name
+       item3: OS versions
+       item4: Ledger Live application version
+       item5: App Language/Region
+       item6: OS Language/Region
 finish:
   title: Your device is ready!
   desc: Proceed to your portfolio and start adding your accounts...
