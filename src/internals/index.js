@@ -9,7 +9,7 @@ import { serializeError } from 'helpers/errors'
 
 require('../env')
 
-process.title = 'Internal'
+process.title = 'Ledger Live Internal'
 
 process.on('uncaughtException', err => {
   process.send({
@@ -111,6 +111,10 @@ process.on('message', m => {
     const { payload } = m
     sentryEnabled = payload.value
   }
+})
+
+process.on('disconnect', () => {
+  process.exit(0)
 })
 
 logger.log('Internal process is up!')
