@@ -205,7 +205,7 @@ class AppsList extends PureComponent<Props, State> {
                     <ExclamationCircleThin size={44} />
                   </Box>
                   <Box
-                    color="black"
+                    color="dark"
                     mt={4}
                     fontSize={6}
                     ff="Museo Sans|Regular"
@@ -238,7 +238,7 @@ class AppsList extends PureComponent<Props, State> {
                     <CheckCircle size={44} />
                   </Box>
                   <Box
-                    color="black"
+                    color="dark"
                     mt={4}
                     fontSize={6}
                     ff="Museo Sans|Regular"
