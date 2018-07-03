@@ -15,6 +15,7 @@ import type { UpdateStatus } from 'reducers/update'
 
 import { MODAL_RECEIVE, MODAL_SEND, MODAL_ADD_ACCOUNTS } from 'config/constants'
 
+import { i } from 'helpers/staticPath'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { getUpdateStatus } from 'reducers/update'
@@ -64,6 +65,13 @@ class MainSideBar extends PureComponent<Props> {
     }
     push(to)
   }
+
+  ADD_ACCOUNT_EMPTY_STATE = (
+    <Box relative>
+      <img style={{ position: 'absolute', top: 0, right: 5 }} alt="" src={i('arrow-add.svg')} />
+      {this.props.t('app:emptyState.sidebar.text')}
+    </Box>
+  )
 
   handleClickDashboard = () => this.push('/')
   handleOpenSendModal = () => this.props.openModal(MODAL_SEND)
@@ -130,7 +138,7 @@ class MainSideBar extends PureComponent<Props> {
           <SideBarList
             title={t('app:sidebar.accounts', { count: accounts.length })}
             titleRight={addAccountButton}
-            emptyText={t('app:emptyState.sidebar.text')}
+            emptyState={this.ADD_ACCOUNT_EMPTY_STATE}
           >
             {accounts.map(account => (
               <AccountListItem
