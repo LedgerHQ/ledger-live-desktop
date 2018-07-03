@@ -7,8 +7,9 @@ import { ipcMain, app } from 'electron'
 import { ipcMainListenReceiveCommands } from 'helpers/ipc'
 import path from 'path'
 import logger from 'logger'
-import sentry from 'sentry/node'
+import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
+import { deserializeError } from 'helpers/errors'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 import { setInternalProcessPID } from './terminator'
@@ -100,6 +101,11 @@ ipcMainListenReceiveCommands({
 
 function handleGlobalInternalMessage(payload) {
   switch (payload.type) {
+    case 'uncaughtException': {
+      const err = deserializeError(payload.error)
+      captureException(err)
+      break
+    }
     case 'setLibcoreBusy':
     case 'setDeviceBusy':
     case 'executeHttpQueryOnRenderer': {
