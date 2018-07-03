@@ -77,6 +77,9 @@ RangeError:
 TimeoutError:
   title: Oops, a time out occurred
   description: It took too long for the server to respond.
+TransportError:
+  title: 'Something went wrong. Please replug your device.'
+  description: '{{message}}'
 TransportStatusError:
   title: 'Something went wrong. Please replug your device.'
   description: '{{message}}'
