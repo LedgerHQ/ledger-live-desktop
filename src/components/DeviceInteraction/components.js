@@ -4,7 +4,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { radii } from 'styles/theme'
-import { rgba } from 'styles/helpers'
 
 import TranslatedError from 'components/TranslatedError'
 import Box from 'components/base/Box'
@@ -18,7 +17,6 @@ export const DeviceInteractionStepContainer = styled(Box).attrs({
   horizontal: true,
   ff: 'Open Sans',
   fontSize: 3,
-  bg: 'white',
   color: 'graphite',
 })`
   position: relative;
@@ -27,19 +25,13 @@ export const DeviceInteractionStepContainer = styled(Box).attrs({
   min-height: 80px;
   border: 1px solid ${p => p.theme.colors.fog};
   border-color: ${p =>
-    p.isError ? p.theme.colors.alertRed : p.isActive || p.isSuccess ? p.theme.colors.wallet : ''};
+    p.isError ? p.theme.colors.alertRed : p.isActive && !p.isFinished ? p.theme.colors.wallet : ''};
   border-top-color: ${p => (p.isFirst || p.isActive ? '' : 'transparent')};
   border-bottom-color: ${p => (p.isPrecedentActive ? 'transparent' : '')};
   border-bottom-left-radius: ${p => (p.isLast ? `${radii[1]}px` : 0)};
   border-bottom-right-radius: ${p => (p.isLast ? `${radii[1]}px` : 0)};
   border-top-left-radius: ${p => (p.isFirst ? `${radii[1]}px` : 0)};
   border-top-right-radius: ${p => (p.isFirst ? `${radii[1]}px` : 0)};
-  box-shadow: ${p =>
-    p.isActive && !p.isSuccess
-      ? `
-    ${rgba(p.isError ? p.theme.colors.alertRed : p.theme.colors.wallet, 0.2)} 0 0 3px 2px
-  `
-      : 'none'};
 `
 
 export const IconContainer = ({
