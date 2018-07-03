@@ -7,6 +7,7 @@ import { i } from 'helpers/staticPath'
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import TrackPage from 'analytics/TrackPage'
+import { urls } from 'config/support'
 import IconCart from 'icons/Cart'
 import IconTruck from 'icons/Truck'
 import IconInfoCircle from 'icons/InfoCircle'
@@ -26,7 +27,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconCart size={20} />,
         title: t('onboarding:noDevice.buyNew.title'),
         onClick: () => {
-          shell.openExternal('https://www.ledgerwallet.com/')
+          shell.openExternal(urls.noDeviceBuyNew)
         },
       },
       {
@@ -34,7 +35,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconTruck size={20} />,
         title: t('onboarding:noDevice.trackOrder.title'),
         onClick: () => {
-          shell.openExternal('http://order.ledgerwallet.com/')
+          shell.openExternal(urls.noDeviceTrackOrder)
         },
       },
       {
@@ -42,7 +43,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconInfoCircle size={20} />,
         title: t('onboarding:noDevice.learnMore.title'),
         onClick: () => {
-          shell.openExternal('https://www.ledgerwallet.com/')
+          shell.openExternal(urls.noDeviceLearnMore)
         },
       },
     ]
