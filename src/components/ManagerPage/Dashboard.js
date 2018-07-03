@@ -33,7 +33,9 @@ const Dashboard = ({ device, deviceInfo, t }: Props) => (
       <FirmwareUpdate deviceInfo={deviceInfo} device={device} />
     </Box>
     <Box mt={5}>
-      <AppsList device={device} deviceInfo={deviceInfo} />
+      {deviceInfo.isOSU || deviceInfo.isBootloader ? null : (
+        <AppsList device={device} deviceInfo={deviceInfo} />
+      )}
     </Box>
   </Box>
 )

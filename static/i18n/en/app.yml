@@ -225,12 +225,15 @@ manager:
       idCheck: Identifier check
       updateMCU: Update MCU
       confirm: Confirmation
+    installing: Installing firmware
+    flashing: Installing MCU
     confirmIdentifier: Confirm identifier
     confirmIdentifierText: Please confirm identifier on your Device. Be sure the identifier is the same as below
     identifier: Identifier
     mcuTitle: Updating MCU
     mcuFirst: Unplug your device from your computer
     mcuSecond: Press and hold left button and plug your device until the processing screen appears
+    mcuPin: If asked on device, please enter your pin code to finish the process
     successTitle: Firmware has been updated with success
     successText: You can now re-install your applications on your device
   title: Manager

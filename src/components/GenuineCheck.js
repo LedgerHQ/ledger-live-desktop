@@ -30,9 +30,9 @@ const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
 
 type Props = {
   t: T,
-  onSuccess: void => void,
   onFail?: Error => void,
   onUnavailable?: Error => void,
+  onSuccess: (*) => void,
   device: ?Device,
 }
 
@@ -72,6 +72,11 @@ class GenuineCheck extends PureComponent<Props> {
     device: Device,
     deviceInfo: DeviceInfo,
   }) => {
+    if (deviceInfo.isOSU || deviceInfo.isBootloader) {
+      logger.log('device is in update mode. skipping genuine')
+      return true
+    }
+
     if (genuineDevices.has(device)) {
       logger.log("genuine was already checked. don't check again")
       await delay(GENUINE_CACHE_DELAY)
