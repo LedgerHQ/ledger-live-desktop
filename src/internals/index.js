@@ -109,4 +109,12 @@ process.on('disconnect', () => {
   process.exit(0)
 })
 
+process.on('uncaughtException', err => {
+  process.send({
+    type: 'uncaughtException',
+    error: serializeError(err),
+  })
+  process.exit(1)
+})
+
 logger.log('Internal process is up!')
