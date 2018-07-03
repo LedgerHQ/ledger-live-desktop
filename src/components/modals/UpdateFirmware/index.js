@@ -4,7 +4,7 @@ import { translate } from 'react-i18next'
 
 import type { T, Device } from 'types/common'
 
-import Modal from 'components/base/Modal'
+import Modal from 'components/base/LegacyModal'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 

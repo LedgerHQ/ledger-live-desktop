@@ -21,7 +21,7 @@ import { accountsSelector } from 'reducers/accounts'
 import { addAccount } from 'actions/accounts'
 import { closeModal } from 'reducers/modals'
 
-import Modal from 'components/base/Modal'
+import Modal from 'components/base/LegacyModal'
 import Stepper from 'components/base/Stepper'
 import { validateNameEdition } from 'helpers/accountName'
 

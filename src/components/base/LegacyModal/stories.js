@@ -12,13 +12,13 @@ import {
   ModalContent,
   ModalFooter,
   ConfirmModal,
-} from 'components/base/Modal'
+} from 'components/base/LegacyModal'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 
 const stories = storiesOf('Components/base', module)
 
-stories.add('Modal', () => (
+stories.add('LegacyModal', () => (
   <Modal
     isOpened={boolean('isOpened', true)}
     render={({ onClose }) => (

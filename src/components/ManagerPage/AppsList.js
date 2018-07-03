@@ -18,7 +18,12 @@ import uninstallApp from 'commands/uninstallApp'
 
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
-import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal, {
+  ModalBody,
+  ModalFooter,
+  ModalTitle,
+  ModalContent,
+} from 'components/base/LegacyModal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
 import Progress from 'components/base/Progress'

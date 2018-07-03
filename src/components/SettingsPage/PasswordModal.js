@@ -8,7 +8,13 @@ import db from 'helpers/db'
 import { PasswordIncorrectError } from 'config/errors'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
+import {
+  Modal,
+  ModalContent,
+  ModalBody,
+  ModalTitle,
+  ModalFooter,
+} from 'components/base/LegacyModal'
 
 import PasswordForm from './PasswordForm'
 

@@ -5,7 +5,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import Box, { Card } from 'components/base/Box'
-import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
+import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/LegacyModal'
 import Button from 'components/base/Button'
 import QRCodeExporter from 'components/QRCodeExporter'
 
