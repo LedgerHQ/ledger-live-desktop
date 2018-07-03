@@ -31,10 +31,14 @@ class Debug extends Component<*, *> {
     )
   }
 
-  onCrash = () => {
+  onInternalCrash = () => {
     testCrash.send().subscribe({
       error: this.error,
     })
+  }
+
+  onCrashHere = () => {
+    throw new Error('CrashTest')
   }
 
   onClickStressDevice = (device: *) => async () => {
@@ -142,8 +146,11 @@ class Debug extends Component<*, *> {
                   </Box>
                 )}
                 <Box horizontal style={{ padding: 10 }}>
-                  <Button onClick={this.onCrash} danger>
-                    crash process
+                  <Button mr={2} onClick={this.onInternalCrash} danger>
+                    crash internal
+                  </Button>
+                  <Button onClick={this.onCrashHere} danger>
+                    crash here
                   </Button>
                 </Box>
                 <Box horizontal style={{ padding: 10 }}>
