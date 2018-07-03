@@ -15,9 +15,9 @@ import CurrencyBadge from 'components/base/CurrencyBadge'
 import Button from 'components/base/Button'
 import AccountsList from 'components/base/AccountsList'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
-import TranslatedError from '../../../TranslatedError'
-import Spinner from '../../../base/Spinner'
-import Text from '../../../base/Text'
+import TranslatedError from 'components/TranslatedError'
+import Spinner from 'components/base/Spinner'
+import Text from 'components/base/Text'
 
 import type { StepProps } from '../index'
 
@@ -281,6 +281,9 @@ class StepImport extends PureComponent<StepProps> {
           {scanStatus === 'scanning' ? (
             <LoadingRow>
               <Spinner color="grey" size={16} />
+              <Box ml={2} ff="Open Sans|Regular" color="grey" fontSize={4}>
+                {t('app:common.sync.syncing')}
+              </Box>
             </LoadingRow>
           ) : null}
         </Box>
