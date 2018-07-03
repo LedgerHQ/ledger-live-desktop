@@ -44,7 +44,7 @@ const OpDetailsTitle = styled(Box).attrs({
   letter-spacing: 2px;
 `
 
-const GradientHover = styled(Box).attrs({
+export const GradientHover = styled(Box).attrs({
   align: 'center',
   color: 'wallet',
 })`

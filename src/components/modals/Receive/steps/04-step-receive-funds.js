@@ -4,24 +4,50 @@ import invariant from 'invariant'
 import React, { PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
+import getAddress from 'commands/getAddress'
+import { isSegwitAccount } from 'helpers/bip32'
 import Box from 'components/base/Box'
-import Label from 'components/base/Label'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
-import RequestAmount from 'components/RequestAmount'
+import { WrongDeviceForAccount } from 'components/EnsureDeviceApp'
 
-import type { StepProps } from '../index'
+import type { StepProps } from '..'
 
-type State = {
-  amount: number,
-}
-
-export default class StepReceiveFunds extends PureComponent<StepProps, State> {
-  state = {
-    amount: 0,
+export default class StepReceiveFunds extends PureComponent<StepProps> {
+  componentDidMount() {
+    if (this.props.isAddressVerified === null) {
+      this.confirmAddress()
+    }
   }
 
-  handleChangeAmount = (amount: number) => this.setState({ amount })
+  confirmAddress = async () => {
+    const { account, device, onChangeAddressVerified, transitionTo } = this.props
+    invariant(account, 'No account given')
+    invariant(device, 'No device given')
+    try {
+      const params = {
+        currencyId: account.currency.id,
+        devicePath: device.path,
+        path: account.freshAddressPath,
+        segwit: isSegwitAccount(account),
+        verify: true,
+      }
+      const { address } = await getAddress.send(params).toPromise()
+
+      if (address !== account.freshAddress) {
+        throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
+          accountName: account.name,
+        })
+      }
+      onChangeAddressVerified(true)
+      transitionTo('receive')
+    } catch (err) {
+      onChangeAddressVerified(false, err)
+      this.props.transitionTo('confirm')
+    }
+  }
+
   handleGoPrev = () => {
+    // FIXME this is not a good practice at all. it triggers tons of setState. these are even concurrent setState potentially in future React :o
     this.props.onChangeAddressVerified(null)
     this.props.onChangeAppOpened(false)
     this.props.onResetSkip()
@@ -29,30 +55,18 @@ export default class StepReceiveFunds extends PureComponent<StepProps, State> {
   }
 
   render() {
-    const { t, account, isAddressVerified } = this.props
-    const { amount } = this.state
+    const { account, isAddressVerified } = this.props
     invariant(account, 'No account given')
     return (
       <Box flow={5}>
         <TrackPage category="Receive" name="Step4" />
-        <Box flow={1}>
-          <Label>{t('app:receive.steps.receiveFunds.label')}</Label>
-          <RequestAmount
-            account={account}
-            onChange={this.handleChangeAmount}
-            value={amount}
-            withMax={false}
-          />
-        </Box>
         <CurrentAddressForAccount
           account={account}
-          addressVerified={isAddressVerified === true}
-          amount={amount}
+          isAddressVerified={isAddressVerified}
           onVerify={this.handleGoPrev}
           withBadge
           withFooter
           withQRCode
-          withVerify={isAddressVerified !== true}
         />
       </Box>
     )
