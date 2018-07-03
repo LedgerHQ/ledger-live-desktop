@@ -6,6 +6,7 @@ import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
 import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
+import { urls } from 'config/support'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import CleanButton from '../CleanButton'
@@ -66,13 +67,13 @@ class SectionAbout extends PureComponent<Props> {
           <AboutRowItem
             title={t('app:settings.about.faq')}
             desc={t('app:settings.about.faqDesc')}
-            url="https://support.ledgerwallet.com/hc/en-us"
+            url={urls.faq}
           />
 
           <AboutRowItem
             title={t('app:settings.about.terms')}
             desc={t('app:settings.about.termsDesc')}
-            url="https://www.ledgerwallet.com/terms"
+            url={urls.terms}
           />
         </Body>
       </Section>
