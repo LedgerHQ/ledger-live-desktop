@@ -18,6 +18,8 @@ import DashboardPage from 'components/DashboardPage'
 import ManagerPage from 'components/ManagerPage'
 import ExchangePage from 'components/ExchangePage'
 import SettingsPage from 'components/SettingsPage'
+import KeyboardContent from 'components/KeyboardContent'
+import PerfIndicator from 'components/PerfIndicator'
 import LibcoreBusyIndicator from 'components/LibcoreBusyIndicator'
 import DeviceBusyIndicator from 'components/DeviceBusyIndicator'
 import TriggerAppReady from 'components/TriggerAppReady'
@@ -106,6 +108,9 @@ class Default extends Component<Props> {
 
           <LibcoreBusyIndicator />
           <DeviceBusyIndicator />
+          <KeyboardContent sequence="BJBJBJ">
+            <PerfIndicator />
+          </KeyboardContent>
         </IsUnlocked>
       </Fragment>
     )
