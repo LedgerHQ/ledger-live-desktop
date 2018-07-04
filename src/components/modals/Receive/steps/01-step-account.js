@@ -13,7 +13,7 @@ import type { StepProps } from '../index'
 export default function StepAccount({ t, account, onChangeAccount }: StepProps) {
   return (
     <Box flow={1}>
-      <TrackPage category="Receive" name="Step1" />
+      <TrackPage category="Receive Flow" name="Step 1" />
       <Label>{t('app:receive.steps.chooseAccount.label')}</Label>
       <SelectAccount autoFocus onChange={onChangeAccount} value={account} />
     </Box>
