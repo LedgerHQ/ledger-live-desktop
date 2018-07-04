@@ -37,8 +37,8 @@ common:
   verify: Verify
   copy: Copy
   copyAddress: Copy address
-  copied: Copied!
-  addressCopied: Address copied!
+  copied: Copied
+  addressCopied: Address copied
   lockScreen:
     title: Welcome back
     subTitle:
@@ -56,7 +56,7 @@ common:
     load: Unable to load
     noResults: No results
 buttons:
-  displayAddressOnDevice: Display address on device
+  displayAddressOnDevice: Verify
 operation:
   type:
     IN: Received
@@ -125,9 +125,9 @@ dashboard:
 currentAddress:
   title: Current address
   for: Address for account <1><0>{{accountName}}</0></1>
-  messageIfUnverified: Please verify the address for optimal security.
-  messageIfAccepted: You can now use your {{currencyName}} address if it matches the one displayed on your Ledger device.
-  messageIfSkipped: Your receive address has not been confirmed on your Ledger device. Please verify your {{currencyName}} address for optimal security.
+  messageIfUnverified: Verify the address on your device for optimal security. Press the right button to confirm.
+  messageIfAccepted: "{{currencyName}} address confirmed on your device. Carefully verify when you copy and paste it."
+  messageIfSkipped: 'Your receive address has not been confirmed on your Ledger device. Please verify your {{currencyName}} address for optimal security.'
 deviceConnect:
   step1:
     choose: "We detected {{count}} connected devices, please select one:"
@@ -159,7 +159,7 @@ addAccounts:
     connectDevice: Device
     import: Accounts
     finish: Confirmation
-  accountAlreadyImportedSubtitle: '{{count}} Already in portfolio'
+  accountAlreadyImportedSubtitle: 'Accounts already in portfolio ({{count}})'
   accountToImportSubtitle: 'Add existing account'
   accountToImportSubtitle_plural: 'Add existing accounts'
   selectAll: Select all ({{count}})
@@ -170,11 +170,11 @@ addAccounts:
   noAccountToImport: No existing {{currencyName}} accounts to add
   success: Account successfully added to your portfolio
   success_plural: Accounts successfully added to your portfolio
-  successDescription: Your account have been created.
+  successDescription: Your account has been created.
   successDescription_plural: Your accounts have been created.
   createNewAccount:
     title: Add a new account
-    noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
+    noOperationOnLastAccount: "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account."
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
@@ -254,8 +254,8 @@ receive:
       withoutDevice: Don't have your device?
     confirmAddress:
       title: Verification
-      action: Confirm address on device
-      text: To receive cryptoassets, confirm the address on your device. Click the button below to reveal your {{currencyName}} address.
+      action: Verify address on device
+      text: A {{currencyName}} receive address will be displayed on your device. Carefully verify that it matches the address on your computer.
       support: Contact us
     receiveFunds:
       title: Receive
