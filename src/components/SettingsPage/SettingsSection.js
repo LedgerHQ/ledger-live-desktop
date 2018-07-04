@@ -24,8 +24,8 @@ const RoundIconContainer = styled(Box).attrs({
   bg: p => rgba(p.theme.colors.wallet, 0.2),
   color: 'wallet',
 })`
-  height: 30px;
-  width: 30px;
+  height: 34px;
+  width: 34px;
   border-radius: 50%;
 `
 
