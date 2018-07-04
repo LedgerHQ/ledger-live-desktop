@@ -3,8 +3,11 @@
 import uuid from 'uuid/v4'
 import logger from 'logger'
 import invariant from 'invariant'
-import { langAndRegionSelector } from 'reducers/settings'
 import { getSystemLocale } from 'helpers/systemLocale'
+import { langAndRegionSelector, shareAnalyticsSelector } from 'reducers/settings'
+import { getCurrentDevice } from 'reducers/devices'
+import type { State } from 'reducers'
+
 import { load } from './inject-in-window'
 
 invariant(typeof window !== 'undefined', 'analytics/segment must be called on renderer thread')
@@ -21,9 +24,15 @@ const getContext = _store => ({
 })
 
 const extraProperties = store => {
-  const state = store.getState()
+  const state: State = store.getState()
   const { language, region } = langAndRegionSelector(state)
   const systemLocale = getSystemLocale()
+  const device = getCurrentDevice(state)
+  const deviceInfo = device && {
+    productId: device.productId,
+    product: device.product,
+    vendorId: device.vendorId,
+  }
   return {
     appVersion: __APP_VERSION__,
     language,
@@ -32,6 +41,7 @@ const extraProperties = store => {
     systemLanguage: systemLocale.language,
     systemRegion: systemLocale.region,
     sessionId,
+    ...deviceInfo,
   }
 }
 
@@ -66,7 +76,7 @@ export const stop = () => {
 
 export const track = (event: string, properties: ?Object) => {
   logger.analyticsTrack(event, properties)
-  if (!storeInstance) {
+  if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
     return
   }
   const { analytics } = window
@@ -88,7 +98,7 @@ export const track = (event: string, properties: ?Object) => {
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
   logger.analyticsPage(category, name, properties)
-  if (!storeInstance) {
+  if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
     return
   }
   const { analytics } = window

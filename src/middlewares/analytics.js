@@ -1,18 +1,18 @@
-import { shareAnalyticsSelector } from 'reducers/settings'
-import { start, stop } from 'analytics/segment'
+// @flow
+
+import { hasCompletedOnboardingSelector } from 'reducers/settings'
+import { start } from 'analytics/segment'
+import type { State } from 'reducers'
 
 let isAnalyticsStarted = false
 
-export default store => next => action => {
+export default (store: *) => (next: *) => (action: *) => {
   next(action)
-  const state = store.getState()
-  const shareAnalytics = shareAnalyticsSelector(state)
-  if (shareAnalytics !== isAnalyticsStarted) {
-    isAnalyticsStarted = shareAnalytics
-    if (shareAnalytics) {
-      start(store)
-    } else {
-      stop()
-    }
+  const state: State = store.getState()
+  const hasCompletedOnboarding = hasCompletedOnboardingSelector(state)
+
+  if (hasCompletedOnboarding && !isAnalyticsStarted) {
+    isAnalyticsStarted = true
+    start(store)
   }
 }
