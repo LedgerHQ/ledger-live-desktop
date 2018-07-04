@@ -7,7 +7,9 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
+import TranslatedError from 'components/TranslatedError'
 import CheckCircle from 'icons/CheckCircle'
+import Cross from 'icons/Cross'
 
 import type { StepProps } from '../'
 
@@ -25,7 +27,21 @@ const Title = styled(Box).attrs({
   font-weight: 500;
 `
 
-function StepConfirmation({ t }: StepProps) {
+function StepConfirmation({ t, error }: StepProps) {
+  if (error) {
+    return (
+      <Container>
+        <Box mx={7} color="alertRed" my={4}>
+          <Cross size={44} />
+        </Box>
+        <Title>
+          <TranslatedError error={error} />
+        </Title>
+        <Box mx={7} />
+      </Container>
+    )
+  }
+
   return (
     <Container>
       <TrackPage category="Manager" name="FirmwareConfirmation" />

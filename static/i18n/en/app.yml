@@ -227,8 +227,7 @@ manager:
       idCheck: Identifier check
       updateMCU: Update MCU
       confirm: Confirmation
-    installing: Installing firmware
-    flashing: Installing MCU
+    installing: Firmware updating...
     confirmIdentifier: Confirm identifier
     confirmIdentifierText: Please confirm identifier on your Device. Be sure the identifier is the same as below
     identifier: Identifier

@@ -102,26 +102,25 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
 
     this.setState({ modal: 'install' })
-    const { success } = await installOsuFirmware
+    const result = await installOsuFirmware
       .send({ devicePath: device.path, firmware: latestFirmware, targetId: deviceInfo.targetId })
       .toPromise()
-    return success
+
+    return result
   }
 
-  installFinalFirmware = async (device: Device) => {
-    const { success } = await installFinalFirmware.send({ devicePath: device.path }).toPromise()
-    return success
-  }
+  installFinalFirmware = (device: Device) =>
+    installFinalFirmware.send({ devicePath: device.path }).toPromise()
 
-  flashMCU = async (device: Device) => {
-    await installMcu.send({ devicePath: device.path }).toPromise()
-  }
+  flashMCU = async (device: Device) => installMcu.send({ devicePath: device.path }).toPromise()
 
   handleCloseModal = () => this.setState({ modal: 'closed' })
 
   handleDisclaimerModal = () => this.setState({ modal: 'disclaimer' })
   handleInstallModal = (stepId: StepId = 'idCheck', shouldFlash?: boolean) =>
     this.setState({ modal: 'install', stepId, shouldFlash, ready: true })
+
+  handleDisclairmerNext = () => this.setState({ modal: 'install' })
 
   render() {
     const { deviceInfo, t } = this.props
@@ -157,7 +156,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
             <DisclaimerModal
               firmware={latestFirmware}
               status={modal}
-              goToNextStep={this.handleInstallModal}
+              goToNextStep={this.handleDisclairmerNext}
               onClose={this.handleCloseModal}
             />
             <UpdateModal

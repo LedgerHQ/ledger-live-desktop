@@ -62,7 +62,7 @@ ManagerDeviceLocked:
 ManagerNotEnoughSpace:
   title: Sorry, insufficient device storage
   description: Uninstall some apps to increase available storage and try again.
-ManagerUnexpectedError:
+ManagerUnexpected:
   title: That's unexpected ({{msg}}) #(Manager: {{msg}})
   description: Please try again.
 ManagerUninstallBTCDep:

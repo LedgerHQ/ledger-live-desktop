@@ -14,11 +14,12 @@ import { createCancelablePolling, delay } from 'helpers/promise'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
-import Progress from 'components/base/Progress'
 import DeviceConfirm from 'components/DeviceConfirm'
 
 import type { Device } from 'types/common'
 import type { StepProps } from '../'
+
+import Installing from '../Installing'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -95,26 +96,35 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
       firmware,
       shouldFlashMcu,
       transitionTo,
+      setError,
     } = this.props
     const { device, deviceInfo } = await this.ensureDevice()
 
-    // When device is connected, if in OSU, install Final Firmware
-    if (deviceInfo.isOSU) {
-      this.setState({ installing: true })
-      await installFinalFirmware(device)
-      transitionTo('finish')
-    } else {
-      await installOsuFirmware(device)
-      this.setState({ installing: true })
-      if (this._unsubConnect) this._unsubConnect()
-      if ((firmware && firmware.shouldFlashMcu) || shouldFlashMcu) {
-        delay(1000)
-        transitionTo('updateMCU')
-      } else {
-        const { device: freshDevice } = await this.ensureDevice()
-        await installFinalFirmware(freshDevice)
+    if (deviceInfo.isBootloader) {
+      transitionTo('updateMCU')
+    }
+
+    try {
+      if (deviceInfo.isOSU) {
+        this.setState({ installing: true })
+        await installFinalFirmware(device)
         transitionTo('finish')
+      } else {
+        await installOsuFirmware(device)
+        this.setState({ installing: true })
+        if (this._unsubConnect) this._unsubConnect()
+        if ((firmware && firmware.shouldFlashMcu) || shouldFlashMcu) {
+          delay(1000)
+          transitionTo('updateMCU')
+        } else {
+          const { device: freshDevice } = await this.ensureDevice()
+          await installFinalFirmware(freshDevice)
+          transitionTo('finish')
+        }
       }
+    } catch (error) {
+      setError(error)
+      transitionTo('finish')
     }
   }
 
@@ -135,9 +145,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     const { t, firmware } = this.props
 
     return installing ? (
-      <Box mx={7} mt={5} style={{ width: '100%' }}>
-        <Progress infinite />
-      </Box>
+      <Installing />
     ) : (
       <Fragment>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
@@ -165,11 +173,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     const { t } = this.props
     return (
       <Container>
-        <Title>
-          {installing
-            ? t('app:manager.modal.installing')
-            : t('app:manager.modal.confirmIdentifier')}
-        </Title>
+        <Title>{installing ? '' : t('app:manager.modal.confirmIdentifier')}</Title>
         <TrackPage category="Manager" name="InstallFirmware" />
         {this.renderBody()}
       </Container>
