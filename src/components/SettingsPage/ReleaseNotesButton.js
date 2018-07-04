@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import { connect } from 'react-redux'
 import { openModal } from 'reducers/modals'
 import { MODAL_RELEASES_NOTES } from 'config/constants'
@@ -19,7 +19,7 @@ const mapDispatchToProps = {
 }
 
 class ReleaseNotesButton extends PureComponent<Props> {
-  handleOpenLink = (url: string) => shell.openExternal(url)
+  handleOpenLink = (url: string) => openURL(url)
 
   render() {
     const { t, openModal } = this.props

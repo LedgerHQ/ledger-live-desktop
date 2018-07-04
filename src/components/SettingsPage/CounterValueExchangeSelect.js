@@ -11,6 +11,7 @@ import {
 import { setCounterValueExchange } from 'actions/settings'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import SelectExchange from 'components/SelectExchange'
+import Track from 'analytics/Track'
 
 type Props = {
   counterValueCurrency: Currency,
@@ -25,20 +26,19 @@ class CounterValueExchangeSelect extends PureComponent<Props> {
   render() {
     const { counterValueCurrency, counterValueExchange } = this.props
 
-    return (
+    return counterValueCurrency ? (
       <Fragment>
-        {counterValueCurrency ? (
-          <SelectExchange
-            small
-            from={intermediaryCurrency}
-            to={counterValueCurrency}
-            exchangeId={counterValueExchange}
-            onChange={this.handleChangeExchange}
-            minWidth={200}
-          />
-        ) : null}
+        <Track onUpdate event="CounterValueExchangeSelect" exchangeId={counterValueExchange} />
+        <SelectExchange
+          small
+          from={intermediaryCurrency}
+          to={counterValueCurrency}
+          exchangeId={counterValueExchange}
+          onChange={this.handleChangeExchange}
+          minWidth={200}
+        />
       </Fragment>
-    )
+    ) : null
   }
 }
 

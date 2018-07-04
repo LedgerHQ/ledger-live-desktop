@@ -186,6 +186,7 @@ class IsUnlocked extends Component<Props, State> {
             </Box>
           </form>
           <ConfirmModal
+            analyticsName="HardReset"
             isDanger
             isLoading={isHardResetting}
             isOpened={isHardResetModalOpened}

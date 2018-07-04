@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import smoothscroll from 'smoothscroll-polyfill'
+import { track } from 'analytics/segment'
 import Box from 'components/base/Box'
 import AngleUp from 'icons/AngleUp'
 import { GrowScrollContext } from './base/GrowScroll'
@@ -79,6 +80,7 @@ class StickyBackToTop extends PureComponent<Props, State> {
     if (scrollContainer) {
       // $FlowFixMe seems to be missing in flow
       scrollContainer.scrollTo({ top: 0, behavior: 'smooth' })
+      track('ScrollBackToTop')
     }
   }
 

@@ -3,6 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
@@ -27,6 +28,7 @@ const Title = styled(Box).attrs({
 function StepConfirmation({ t }: StepProps) {
   return (
     <Container>
+      <TrackPage category="Manager" name="FirmwareConfirmation" />
       <Box mx={7} color="positiveGreen" my={4}>
         <CheckCircle size={44} />
       </Box>

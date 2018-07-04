@@ -8,6 +8,7 @@ import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setCounterValue } from 'actions/settings'
 import { counterValueCurrencySelector } from 'reducers/settings'
 import Select from 'components/base/Select'
+import Track from 'analytics/Track'
 
 const fiats = listFiatCurrencies()
   .map(f => f.units[0])
@@ -35,7 +36,7 @@ class CounterValueSelect extends PureComponent<Props> {
 
     return (
       <Fragment>
-        {/* TODO Track */}
+        <Track onUpdate event="CounterValueSelect" counterValue={cvOption && cvOption.value} />
         <Select
           small
           minWidth={250}

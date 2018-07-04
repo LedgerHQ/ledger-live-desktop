@@ -14,6 +14,7 @@ import GrowScroll from 'components/base/GrowScroll'
 import Text from 'components/base/Text'
 import Spinner from 'components/base/Spinner'
 import GradientBox from 'components/GradientBox'
+import TrackPage from 'analytics/TrackPage'
 
 import type { T } from 'types/common'
 
@@ -220,6 +221,7 @@ class ReleaseNotes extends PureComponent<Props, State> {
 
       return (
         <ModalBody onClose={onClose}>
+          <TrackPage category="Modal" name="ReleaseNotes" />
           <ModalTitle>{t('app:releaseNotes.title')}</ModalTitle>
           <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
             <GrowScroll px={5} pb={8}>

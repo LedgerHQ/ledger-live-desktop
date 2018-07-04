@@ -8,6 +8,7 @@ import { langAndRegionSelector, counterValueCurrencySelector } from 'reducers/se
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
+import Track from 'analytics/Track'
 import regionsByKey from 'helpers/regions.json'
 import Select from 'components/base/Select'
 
@@ -39,6 +40,7 @@ class RegionSelect extends PureComponent<Props> {
 
     return (
       <Fragment>
+        <Track onUpdate event="RegionSelectChange" currentRegion={currentRegion.region} />
         <Select
           small
           minWidth={250}

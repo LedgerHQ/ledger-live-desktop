@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import IconExternalLink from 'icons/ExternalLink'
 import { Tabbable } from 'components/base/Box'
 import { SettingsSectionRow } from './SettingsSection'
@@ -10,7 +10,7 @@ export default class AboutRowItem extends PureComponent<{
   title: string,
   desc: string,
 }> {
-  onClick = () => shell.openExternal(this.props.url)
+  onClick = () => openURL(this.props.url)
 
   render() {
     const { title, desc } = this.props

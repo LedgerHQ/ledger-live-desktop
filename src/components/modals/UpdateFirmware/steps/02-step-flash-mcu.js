@@ -11,6 +11,7 @@ import { getCurrentDevice } from 'reducers/devices'
 import { createCancelablePolling } from 'helpers/promise'
 import getDeviceInfo from 'commands/getDeviceInfo'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Progress from 'components/base/Progress'
@@ -186,6 +187,7 @@ class StepFlashMcu extends PureComponent<Props, State> {
         <Title>
           {installing ? t('app:manager.modal.flashing') : t('app:manager.modal.mcuTitle')}
         </Title>
+        <TrackPage category="Manager" name="FlashMCU" />
         {this.renderBody()}
       </Container>
     )

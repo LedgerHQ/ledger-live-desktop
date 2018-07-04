@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { setLanguage } from 'actions/settings'
 import { langAndRegionSelector } from 'reducers/settings'
 import languageKeys from 'config/languages'
+import Track from 'analytics/Track'
 import Select from 'components/base/Select'
 
 type Props = {
@@ -37,6 +38,11 @@ class LanguageSelect extends PureComponent<Props> {
       : this.languages.find(l => l.value === language)
     return (
       <Fragment>
+        <Track
+          onUpdate
+          event="LanguageSelect"
+          currentRegion={currentLanguage && currentLanguage.value}
+        />
         <Select
           small
           minWidth={250}

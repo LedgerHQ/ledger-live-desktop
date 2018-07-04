@@ -13,6 +13,7 @@ import Button from 'components/base/Button'
 import GrowScroll from 'components/base/GrowScroll'
 import GradientBox from 'components/GradientBox'
 import { Notes } from 'components/modals/ReleaseNotes'
+import TrackPage from 'analytics/TrackPage'
 
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
 
@@ -42,6 +43,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
         onClose={onClose}
         render={({ onClose }) => (
           <ModalBody onClose={onClose} grow align="center" justify="center" mt={3}>
+            <TrackPage category="Manager" name="DisclaimerModal" />
             <Fragment>
               <ModalTitle>{t('app:manager.firmware.update')}</ModalTitle>
               <ModalContent>
