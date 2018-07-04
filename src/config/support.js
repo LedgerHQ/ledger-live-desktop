@@ -9,6 +9,7 @@ export const urls = {
   noDeviceBuyNew: 'https://www.ledgerwallet.com/',
   noDeviceTrackOrder: 'https://order.ledgerwallet.com/',
   noDeviceLearnMore: 'https://www.ledgerwallet.com/',
+  managerHelpRequest: 'https://support.ledgerwallet.com/hc/en-us/articles/360006523674 ',
   genuineCheckContactSupport:
     'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
   // feesMoreInfo: 'https://www.ledgerwallet.com/',
