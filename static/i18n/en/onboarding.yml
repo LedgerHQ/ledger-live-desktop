@@ -131,9 +131,6 @@ analytics:
   shareAnalytics:
     title: Share usage data
     desc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
-  sentryLogs:
-    title: Report bugs
-    desc: Automatically send reports to help Ledger fix bugs
     mandatoryContextual:
       item1: Page visits
       item2: Actions (send, receive, logout)
@@ -145,10 +142,15 @@ analytics:
       item8: Overall and page session duration
       item9: Device product ID
       item10: Device firmware and app versions
+  sentryLogs:
+    title: Report bugs
+    desc: Automatically send reports to help Ledger fix bugs
   technicalData:
-     title: Report bugs
-     desc: Automatically send reports to help Ledger fix bugs
+     title: Technical data *
+     desc: Ledger will automatically collect technical information to help improve user experience. This information is fully anonymized.
+     mandatoryText: '* mandatory'
      mandatoryContextual:
+       title: Technical data
        item1: Active unique users
        item2: OS name
        item3: OS versions

@@ -3,82 +3,75 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 
-import { MODAL_REPORT_BUGS } from 'config/constants'
+import { MODAL_SHARE_ANALYTICS } from 'config/constants'
 import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
 
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
 
 import type { T } from 'types/common'
-
-const Title = styled(Text).attrs({
-  ff: 'Museo Sans',
-  fontSize: 5,
-  color: 'dark',
-})``
 
 type Props = {
   t: T,
 }
-class ReportBugs extends PureComponent<Props, *> {
+class ShareAnalytics extends PureComponent<Props, *> {
   render() {
     const { t } = this.props
-    const steps = [
+    const items = [
       {
         key: 'item1',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item1'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item1'),
       },
       {
         key: 'item2',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item2'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item2'),
       },
       {
         key: 'item3',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item3'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item3'),
       },
       {
         key: 'item4',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item4'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item4'),
       },
       {
         key: 'item5',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item5'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item5'),
       },
       {
         key: 'item6',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item6'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item6'),
       },
       {
         key: 'item7',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item7'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item7'),
       },
       {
         key: 'item8',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item8'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item8'),
       },
       {
         key: 'item9',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item9'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item9'),
       },
       {
         key: 'item10',
-        desc: t('onboarding:analytics.sentryLogs.mandatoryContextual.item10'),
+        desc: t('onboarding:analytics.shareAnalytics.mandatoryContextual.item10'),
       },
     ]
     return (
       <Modal
-        name={MODAL_REPORT_BUGS}
+        name={MODAL_SHARE_ANALYTICS}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle>{t('onboarding:analytics.sentryLogs.title')}</ModalTitle>
-            <InlineDesc>{t('onboarding:analytics.sentryLogs.desc')}</InlineDesc>
+            <ModalTitle>{t('onboarding:analytics.shareAnalytics.title')}</ModalTitle>
+            <InlineDesc>{t('onboarding:analytics.shareAnalytics.desc')}</InlineDesc>
             <ModalContent mx={5}>
-              <Ul>{steps.map(step => <li key={step.key}>{step.desc}</li>)}</Ul>
+              <Ul>{items.map(item => <li key={item.key}>{item.desc}</li>)}</Ul>
             </ModalContent>
             <ModalFooter horizontal justifyContent="flex-end">
               <Button onClick={onClose} primary>
-                Close
+                {t('app:common.close')}
               </Button>
             </ModalFooter>
           </ModalBody>
@@ -88,7 +81,7 @@ class ReportBugs extends PureComponent<Props, *> {
   }
 }
 
-export default translate()(ReportBugs)
+export default translate()(ShareAnalytics)
 
 export const Ul = styled.ul.attrs({
   ff: 'Open Sans|Regular',

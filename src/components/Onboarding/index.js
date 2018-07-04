@@ -96,7 +96,7 @@ export type StepProps = {
   savePassword: Function,
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
-  openModal: string => void,
+  openModal: Function,
   isLedgerNano: Function,
   flowType: Function,
 }
