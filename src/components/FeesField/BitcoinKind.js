@@ -125,7 +125,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State>
     const satoshi = units[units.length - 1]
 
     return (
-      <GenericContainer error={error} help={t('app:send.steps.amount.unitPerByte')}>
+      <GenericContainer error={error}>
         <Select width={156} options={items} value={selectedItem} onChange={this.onSelectChange} />
         <InputCurrency
           ref={this.input}

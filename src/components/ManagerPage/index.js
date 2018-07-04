@@ -2,6 +2,8 @@
 
 import React, { PureComponent } from 'react'
 import invariant from 'invariant'
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/support'
 
 import type { Device } from 'types/common'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
@@ -30,6 +32,10 @@ class ManagerPage extends PureComponent<Props, State> {
     this.setState({ isGenuine: true, device, deviceInfo })
   }
 
+  handleHelpRequest = () => {
+    openURL(urls.managerHelpRequest)
+  }
+
   render() {
     const { isGenuine, device, deviceInfo } = this.state
 
@@ -40,7 +46,13 @@ class ManagerPage extends PureComponent<Props, State> {
     invariant(device, 'Inexistant device considered genuine')
     invariant(deviceInfo, 'Inexistant device infos for genuine device')
 
-    return <Dashboard device={device} deviceInfo={deviceInfo} />
+    return (
+      <Dashboard
+        device={device}
+        deviceInfo={deviceInfo}
+        handleHelpRequest={this.handleHelpRequest}
+      />
+    )
   }
 }
 
