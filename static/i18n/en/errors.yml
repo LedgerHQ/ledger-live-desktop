@@ -89,6 +89,9 @@ TransportError:
 TransportStatusError:
   title: 'Something went wrong. Please replug your device.'
   description: '{{message}}'
+UserRefusedFirmwareUpdate:
+  title: Firmware update refused on device
+  description: Please retry or contact Ledger Support
 UserRefusedOnDevice:
   title: Transaction refused on device
   description: Please retry or contact Ledger Support in case of doubt.

@@ -156,7 +156,9 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
             {t('app:manager.modal.identifier')}
           </Text>
           <Address>
-            {firmware && firmware.hash && this.formatHashName(firmware.hash).join('\n')}
+            {firmware &&
+              firmware.hash &&
+              this.formatHashName(firmware.hash.toUpperCase()).join('\n')}
           </Address>
         </Box>
         <Box mt={5}>

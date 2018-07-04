@@ -10,10 +10,13 @@ import { createCustomErrorClass } from '../errors'
 
 const ManagerNotEnoughSpaceError = createCustomErrorClass('ManagerNotEnoughSpace')
 const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+const UserRefusedFirmwareUpdate = createCustomErrorClass('UserRefusedFirmwareUpdate')
 
 function remapError(promise) {
   return promise.catch((e: Error) => {
     switch (true) {
+      case e.message.endsWith('6985'):
+        throw new UserRefusedFirmwareUpdate()
       case e.message.endsWith('6982'):
         throw new ManagerDeviceLockedError()
       case e.message.endsWith('6a84') || e.message.endsWith('6a85'):
