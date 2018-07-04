@@ -1,5 +1,6 @@
 // @flow
 
+import { remote } from 'electron'
 import React, { Fragment, Component } from 'react'
 import { compose } from 'redux'
 import styled from 'styled-components'
@@ -70,6 +71,8 @@ class Default extends Component<Props> {
   kbShortcut = event => {
     if (event.ctrlKey && event.key === 'l') {
       this.props.i18n.reloadResources()
+    } else if ((event.ctrlKey || event.metaKey) && event.key === 'r') {
+      remote.getCurrentWindow().webContents.reload()
     }
   }
 
