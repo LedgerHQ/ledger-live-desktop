@@ -6,7 +6,8 @@ export const getAccountPlaceholderName = (
   c: CryptoCurrency,
   index: number,
   isLegacy: boolean = false,
-) => `${c.name} ${index + 1}${isLegacy ? ' (legacy)' : ''}`
+  isUnsplit: boolean = false,
+) => `${c.name} ${index + 1}${isLegacy ? ' (legacy)' : ''}${isUnsplit ? ' (unsplit)' : ''}`
 
 export const getNewAccountPlaceholderName = getAccountPlaceholderName // same naming
 // export const getNewAccountPlaceholderName = (_c: CryptoCurrency, _index: number) => `New Account`

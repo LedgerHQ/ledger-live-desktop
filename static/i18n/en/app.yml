@@ -168,6 +168,8 @@ addAccounts:
   editName: Edit name
   newAccount: New account
   legacyAccount: '{{accountName}} (legacy)'
+  legacyUnsplitAccount: '{{accountName}} (legacy) (unsplit)'
+  unsplitAccount: '{{accountName}} (unsplit)'
   noAccountToImport: No existing {{currencyName}} accounts to add
   success: Account successfully added to your portfolio
   success_plural: Accounts successfully added to your portfolio

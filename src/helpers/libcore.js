@@ -9,12 +9,22 @@ import { SHOW_LEGACY_NEW_ACCOUNT } from 'config/constants'
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
-import { isSegwitAccount } from 'helpers/bip32'
+import { isSegwitAccount, isUnsplitAccount } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
 import { createCustomErrorClass, deserializeError } from './errors'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
 
 const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
+
+// TODO: put that info inside currency itself
+const SPLITTED_CURRENCIES = {
+  bitcoin_cash: {
+    coinType: 0,
+  },
+  bitcoin_gold: {
+    coinType: 0,
+  },
+}
 
 export function isValidAddress(core: *, currency: *, address: string): boolean {
   const addr = new core.NJSAddress(address, currency)
@@ -48,6 +58,7 @@ export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
       ...commonParams,
       showNewAccount: !!SHOW_LEGACY_NEW_ACCOUNT || !currency.supportsSegwit,
       isSegwit: false,
+      isUnsplit: false,
     })
     allAccounts = allAccounts.concat(nonSegwitAccounts)
 
@@ -56,8 +67,30 @@ export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
         ...commonParams,
         showNewAccount: true,
         isSegwit: true,
+        isUnsplit: false,
       })
       allAccounts = allAccounts.concat(segwitAccounts)
+    }
+
+    // TODO: put that info inside currency itself
+    if (currencyId in SPLITTED_CURRENCIES) {
+      const splittedAccounts = await scanAccountsOnDeviceBySegwit({
+        ...commonParams,
+        isSegwit: false,
+        showNewAccount: false,
+        isUnsplit: true,
+      })
+      allAccounts = allAccounts.concat(splittedAccounts)
+
+      if (currency.supportsSegwit) {
+        const segwitAccounts = await scanAccountsOnDeviceBySegwit({
+          ...commonParams,
+          showNewAccount: false,
+          isUnsplit: true,
+          isSegwit: true,
+        })
+        allAccounts = allAccounts.concat(segwitAccounts)
+      }
     }
 
     return allAccounts
@@ -68,12 +101,15 @@ function encodeWalletName({
   publicKey,
   currencyId,
   isSegwit,
+  isUnsplit,
 }: {
   publicKey: string,
   currencyId: string,
   isSegwit: boolean,
+  isUnsplit: boolean,
 }) {
-  return `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}`
+  const splitConfig = isUnsplit ? SPLITTED_CURRENCIES[currencyId] || null : null
+  return `${publicKey}__${currencyId}${isSegwit ? '_segwit' : ''}${splitConfig ? '_unsplit' : ''}`
 }
 
 async function scanAccountsOnDeviceBySegwit({
@@ -82,6 +118,7 @@ async function scanAccountsOnDeviceBySegwit({
   currencyId,
   onAccountScanned,
   isSegwit,
+  isUnsplit,
   showNewAccount,
 }: {
   core: *,
@@ -90,17 +127,20 @@ async function scanAccountsOnDeviceBySegwit({
   onAccountScanned: AccountRaw => void,
   isSegwit: boolean, // FIXME all segwit to change to 'purpose'
   showNewAccount: boolean,
+  isUnsplit: boolean,
 }): Promise<AccountRaw[]> {
-  const { coinType } = getCryptoCurrencyById(currencyId)
-  const { publicKey } = await hwApp.getWalletPublicKey(
-    `${isSegwit ? '49' : '44'}'/${coinType}'`,
-    false,
-    isSegwit,
-  )
-  const walletName = encodeWalletName({ publicKey, currencyId, isSegwit })
+  const customOpts =
+    isUnsplit && SPLITTED_CURRENCIES[currencyId] ? SPLITTED_CURRENCIES[currencyId] : null
+  const { coinType } = customOpts ? customOpts.coinType : getCryptoCurrencyById(currencyId)
+
+  const path = `${isSegwit ? '49' : '44'}'/${coinType}'`
+
+  const { publicKey } = await hwApp.getWalletPublicKey(path, false, isSegwit)
+
+  const walletName = encodeWalletName({ publicKey, currencyId, isSegwit, isUnsplit })
 
   // retrieve or create the wallet
-  const wallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit)
+  const wallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
   const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
@@ -115,6 +155,7 @@ async function scanAccountsOnDeviceBySegwit({
     accounts: [],
     onAccountScanned,
     isSegwit,
+    isUnsplit,
     showNewAccount,
   })
 
@@ -188,6 +229,7 @@ async function scanNextAccount(props: {
   accounts: AccountRaw[],
   onAccountScanned: AccountRaw => void,
   isSegwit: boolean,
+  isUnsplit: boolean,
   showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
   const {
@@ -200,6 +242,7 @@ async function scanNextAccount(props: {
     accounts,
     onAccountScanned,
     isSegwit,
+    isUnsplit,
     showNewAccount,
   } = props
 
@@ -222,6 +265,7 @@ async function scanNextAccount(props: {
   const account = await buildAccountRaw({
     njsAccount,
     isSegwit,
+    isUnsplit,
     accountIndex,
     wallet,
     currencyId,
@@ -259,6 +303,7 @@ async function getOrCreateWallet(
   WALLET_IDENTIFIER: string,
   currencyId: string,
   isSegwit: boolean,
+  isUnsplit: boolean,
 ): NJSWallet {
   const pool = core.getPoolInstance()
   try {
@@ -266,12 +311,18 @@ async function getOrCreateWallet(
     return wallet
   } catch (err) {
     const currency = await pool.getCurrency(currencyId)
+    const splitConfig = isUnsplit ? SPLITTED_CURRENCIES[currencyId] || null : null
+    const coinType = splitConfig ? splitConfig.coinType : '<coin_type>'
     const walletConfig = isSegwit
       ? {
           KEYCHAIN_ENGINE: 'BIP49_P2SH',
-          KEYCHAIN_DERIVATION_SCHEME: "49'/<coin_type>'/<account>'/<node>/<address>",
+          KEYCHAIN_DERIVATION_SCHEME: `49'/${coinType}'/<account>'/<node>/<address>`,
         }
-      : undefined
+      : splitConfig
+        ? {
+            KEYCHAIN_DERIVATION_SCHEME: `44'/${coinType}'/<account>'/<node>/<address>`,
+          }
+        : undefined
     const njsWalletConfig = createWalletConfig(core, walletConfig)
     const wallet = await core
       .getPoolInstance()
@@ -283,6 +334,7 @@ async function getOrCreateWallet(
 async function buildAccountRaw({
   njsAccount,
   isSegwit,
+  isUnsplit,
   wallet,
   currencyId,
   core,
@@ -291,6 +343,7 @@ async function buildAccountRaw({
 }: {
   njsAccount: NJSAccount,
   isSegwit: boolean,
+  isUnsplit: boolean,
   wallet: NJSWallet,
   currencyId: string,
   accountIndex: number,
@@ -336,6 +389,7 @@ async function buildAccountRaw({
           currency,
           accountIndex,
           (currency.supportsSegwit && !isSegwit) || false,
+          isUnsplit,
         )
 
   const rawAccount: AccountRaw = {
@@ -411,6 +465,8 @@ function buildOperationRaw({
 
 export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: AccountRaw }) {
   const decodedAccountId = accountIdHelper.decode(rawAccount.id)
+  const isSegwit = isSegwitAccount(rawAccount)
+  const isUnsplit = isUnsplitAccount(rawAccount, SPLITTED_CURRENCIES[rawAccount.currencyId])
   let njsWallet
   try {
     njsWallet = await core.getPoolInstance().getWallet(decodedAccountId.walletName)
@@ -420,7 +476,8 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
       core,
       decodedAccountId.walletName,
       rawAccount.currencyId,
-      isSegwitAccount(rawAccount),
+      isSegwit,
+      isUnsplit,
     )
   }
 
@@ -443,7 +500,8 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
 
   const syncedRawAccount = await buildAccountRaw({
     njsAccount,
-    isSegwit: isSegwitAccount(rawAccount),
+    isSegwit,
+    isUnsplit,
     accountIndex: rawAccount.index,
     wallet: njsWallet,
     currencyId: rawAccount.currencyId,
