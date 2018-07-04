@@ -7,7 +7,7 @@ import get from 'lodash/get'
 
 import { decodeAccountsModel, encodeAccountsModel } from 'reducers/accounts'
 
-type DBKey = 'settings' | 'accounts' | 'countervalues' | 'user'
+type DBKey = 'settings' | 'accounts' | 'countervalues' | 'user' | 'migrations'
 
 const encryptionKey = {}
 

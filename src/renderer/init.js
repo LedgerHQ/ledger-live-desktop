@@ -7,6 +7,7 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
 import moment from 'moment'
+import { runMigrations } from 'migrations'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
@@ -41,6 +42,8 @@ async function init() {
   if (LEDGER_RESET_ALL) {
     await hardReset()
   }
+
+  await runMigrations()
 
   // Init db with defaults if needed
   db.init('settings', {})
