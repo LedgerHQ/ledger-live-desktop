@@ -22,6 +22,7 @@ logger.setProcessShortName('main')
 // sqlite files will be located in the app local data folder
 const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
 const LEDGER_LOGS_DIRECTORY = process.env.LEDGER_LOGS_DIRECTORY || resolveLogsDirectory()
+const LEDGER_CONFIG_DIRECTORY = app.getPath('userData')
 
 let internalProcess
 
@@ -51,6 +52,7 @@ const bootInternalProcess = () => {
     env: {
       ...process.env,
       LEDGER_LOGS_DIRECTORY,
+      LEDGER_CONFIG_DIRECTORY,
       LEDGER_LIVE_SQLITE_PATH,
       INITIAL_SENTRY_ENABLED: sentryEnabled,
       SENTRY_USER_ID: userId,

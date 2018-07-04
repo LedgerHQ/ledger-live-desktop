@@ -42,27 +42,7 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
         }
       }
 
-      if (data.exception && typeof data.exception === 'object') {
-        const { exception } = data
-        if (Array.isArray(exception.values)) {
-          const { values } = exception
-          for (const value of values) {
-            if (value && typeof value === 'object') {
-              const { stacktrace } = value
-              if (stacktrace && typeof stacktrace === 'object') {
-                if (Array.isArray(stacktrace.frames)) {
-                  const { frames } = stacktrace
-                  for (const frame of frames) {
-                    if (frame && typeof frame === 'object' && typeof frame.filename === 'string') {
-                      frame.filename = anonymizer.filepath(frame.filename)
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      anonymizer.filepathRecursiveReplacer(data)
 
       console.log('Sentry=>', data) // eslint-disable-line
       return data
