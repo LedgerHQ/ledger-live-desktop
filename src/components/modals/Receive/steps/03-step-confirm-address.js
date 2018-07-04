@@ -47,11 +47,11 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
   }
 }
 
-export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps) {
+export function StepConfirmAddressFooter({ t, transitionTo, onRetry, contactUs }: StepProps) {
   // This will be displayed only if user rejected address
   return (
     <Fragment>
-      <Button event="Receive Flow Step 3 Contact Us Clicked">
+      <Button onClick={contactUs} event="Receive Flow Step 3 Contact Us Clicked">
         {t('app:receive.steps.confirmAddress.support')}
       </Button>
       <Button
