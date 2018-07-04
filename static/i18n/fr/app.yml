@@ -10,6 +10,7 @@ common:
   continue: Continue
   learnMore: Learn More
   skipThisStep: Skip this step
+  needHelp: Need help?
   chooseWalletPlaceholder: Choose a wallet...
   currency: Currency
   selectAccount: Select an account
