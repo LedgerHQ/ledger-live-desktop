@@ -34,14 +34,7 @@ const Dashboard = ({ device, deviceInfo, t, handleHelpRequest }: Props) => (
           {t('app:manager.subtitle')}
         </Text>
         <ContainerToHover>
-          <FakeLink
-            mr={1}
-            underline
-            color="grey"
-            ff="Museo Sans|Light"
-            fontSize={4}
-            onClick={handleHelpRequest}
-          >
+          <FakeLink mr={1} underline color="grey" fontSize={4} onClick={handleHelpRequest}>
             {t('app:common.needHelp')}
           </FakeLink>
           <IconExternalLink size={14} />
