@@ -5,6 +5,7 @@ import React from 'react'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
+import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../index'
 
@@ -26,7 +27,9 @@ export function StepConnectDeviceFooter({
 }: StepProps) {
   return (
     <Box horizontal flow={2}>
+      <TrackPage category="Receive Flow" name="Step 2" />
       <Button
+        event="Receive Flow Without Device Clicked"
         onClick={() => {
           onSkipConfirm()
           transitionTo('receive')

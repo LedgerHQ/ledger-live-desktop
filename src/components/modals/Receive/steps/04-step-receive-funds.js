@@ -59,7 +59,7 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
     invariant(account, 'No account given')
     return (
       <Box flow={5}>
-        <TrackPage category="Receive" name="Step4" />
+        <TrackPage category="Receive Flow" name="Step 4" />
         <CurrentAddressForAccount
           account={account}
           isAddressVerified={isAddressVerified}

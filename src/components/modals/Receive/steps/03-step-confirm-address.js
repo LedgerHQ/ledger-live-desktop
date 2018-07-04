@@ -18,9 +18,10 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
     invariant(device, 'No device given')
     return (
       <Container>
-        <TrackPage category="Receive" name="Step3" />
+        <TrackPage category="Receive Flow" name="Step 3" />
         {isAddressVerified === false ? (
           <Fragment>
+            <TrackPage category="Receive Flow" name="Step 3 Address Not Verified Error" />
             <Title>
               <TranslatedError error={verifyAddressError} />
             </Title>
@@ -46,14 +47,17 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
   }
 }
 
-export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps) {
+export function StepConfirmAddressFooter({ t, transitionTo, onRetry, contactUs }: StepProps) {
   // This will be displayed only if user rejected address
   return (
     <Fragment>
-      <Button>{t('app:receive.steps.confirmAddress.support')}</Button>
+      <Button onClick={contactUs} event="Receive Flow Step 3 Contact Us Clicked">
+        {t('app:receive.steps.confirmAddress.support')}
+      </Button>
       <Button
         ml={2}
         primary
+        event="Receive Flow Step 3 Retry Clicked"
         onClick={() => {
           onRetry()
           transitionTo('device')
