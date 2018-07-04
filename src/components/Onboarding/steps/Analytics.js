@@ -26,7 +26,7 @@ type State = {
 }
 
 const INITIAL_STATE = {
-  analyticsToggle: true,
+  analyticsToggle: false,
   sentryLogsToggle: true,
 }
 
@@ -75,21 +75,26 @@ class Analytics extends PureComponent<StepProps, State> {
           <Box mt={5}>
             <Container>
               <Box>
-                <Box mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
+                <Box horizontal mb={1}>
+                  <AnalyticsTitle>{t('onboarding:analytics.technicalData.title')}</AnalyticsTitle>
+                  <FakeLink
+                    underline
+                    fontSize={3}
+                    color="smoke"
+                    ml={2}
+                    onClick={this.handleTechnicalDataModal}
+                  >
+                    {t('app:common.learnMore')}
+                  </FakeLink>
                 </Box>
-                <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
+                <TechnicalData />
+                <AnalyticsText>{t('onboarding:analytics.technicalData.desc')}</AnalyticsText>
+                <MandatoryText>
+                  {t('onboarding:analytics.technicalData.mandatoryText')}
+                </MandatoryText>
               </Box>
               <Box justifyContent="center">
-                <Track
-                  onUpdate
-                  event={
-                    sentryLogsToggle
-                      ? 'Sentry Logs Enabled Onboarding'
-                      : 'Sentry Logs Disabled Onboarding'
-                  }
-                />
-                <Switch isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
+                <Switch disabled isChecked />
               </Box>
             </Container>
             <Container>
@@ -123,26 +128,21 @@ class Analytics extends PureComponent<StepProps, State> {
             </Container>
             <Container>
               <Box>
-                <Box horizontal mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.technicalData.title')}</AnalyticsTitle>
-                  <FakeLink
-                    underline
-                    fontSize={3}
-                    color="smoke"
-                    ml={2}
-                    onClick={this.handleTechnicalDataModal}
-                  >
-                    {t('app:common.learnMore')}
-                  </FakeLink>
+                <Box mb={1}>
+                  <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
                 </Box>
-                <TechnicalData />
-                <AnalyticsText>{t('onboarding:analytics.technicalData.desc')}</AnalyticsText>
-                <MandatoryText>
-                  {t('onboarding:analytics.technicalData.mandatoryText')}
-                </MandatoryText>
+                <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
-                <Switch disabled isChecked />
+                <Track
+                  onUpdate
+                  event={
+                    sentryLogsToggle
+                      ? 'Sentry Logs Enabled Onboarding'
+                      : 'Sentry Logs Disabled Onboarding'
+                  }
+                />
+                <Switch isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
               </Box>
             </Container>
           </Box>
