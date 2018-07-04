@@ -64,6 +64,8 @@ export type StepProps = DefaultStepProps & {
   installFinalFirmware: (device: Device) => void,
   flashMCU: (device: Device) => void,
   shouldFlashMcu: boolean,
+  error: ?Error,
+  setError: Error => void,
 }
 
 export type StepId = 'idCheck' | 'updateMCU' | 'finish'
@@ -82,11 +84,15 @@ type Props = {
 
 type State = {
   stepId: StepId | string,
+  error: ?Error,
+  nonce: number,
 }
 
 class UpdateModal extends PureComponent<Props, State> {
   state = {
     stepId: this.props.stepId,
+    error: null,
+    nonce: 0,
   }
 
   STEPS = createSteps({
@@ -96,26 +102,34 @@ class UpdateModal extends PureComponent<Props, State> {
       : this.props.shouldFlashMcu,
   })
 
+  setError = (e: Error) => this.setState({ error: e })
+
+  handleReset = () => this.setState({ stepId: 'idCheck', error: null, nonce: this.state.nonce++ })
+
   handleStepChange = (step: Step) => this.setState({ stepId: step.id })
 
   render(): React$Node {
     const { status, t, firmware, onClose, ...props } = this.props
-    const { stepId } = this.state
+    const { stepId, error, nonce } = this.state
 
     const additionalProps = {
       firmware,
+      error,
       onCloseModal: onClose,
+      setError: this.setError,
       ...props,
     }
 
     return (
       <Modal
         onClose={onClose}
+        onHide={this.handleReset}
         isOpened={status === 'install'}
         refocusWhenChange={stepId}
-        preventBackdropClick={stepId !== 'finish'}
+        preventBackdropClick={stepId !== 'finish' && !error}
         render={() => (
           <Stepper
+            key={nonce}
             onStepChange={this.handleStepChange}
             title={t('app:manager.firmware.update')}
             initialStepId={stepId}

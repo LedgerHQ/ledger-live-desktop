@@ -10,7 +10,6 @@ import getOsuFirmware from 'helpers/devices/getOsuFirmware'
 import getDeviceInfo from 'helpers/devices/getDeviceInfo'
 import getFinalFirmwareById from './getFinalFirmwareById'
 
-const ManagerUnexpectedError = createCustomErrorClass('ManagerUnexpected')
 const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
 
 function remapSocketError(promise) {
@@ -19,7 +18,7 @@ function remapSocketError(promise) {
       case e.message.endsWith('6982'):
         throw new ManagerDeviceLockedError()
       default:
-        throw new ManagerUnexpectedError(e.message, { msg: e.message })
+        throw e
     }
   })
 }
@@ -48,7 +47,6 @@ export default async (transport: Transport<*>): Result => {
     await remapSocketError(createDeviceSocket(transport, url).toPromise())
     return { success: true }
   } catch (error) {
-    const result = { success: false, error }
-    throw result
+    throw error
   }
 }

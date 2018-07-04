@@ -8,19 +8,21 @@ import type { Firmware } from 'components/modals/UpdateFirmware'
 
 import { createCustomErrorClass } from '../errors'
 
-const ManagerUnexpectedError = createCustomErrorClass('ManagerUnexpected')
 const ManagerNotEnoughSpaceError = createCustomErrorClass('ManagerNotEnoughSpace')
 const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+const UserRefusedFirmwareUpdate = createCustomErrorClass('UserRefusedFirmwareUpdate')
 
 function remapError(promise) {
   return promise.catch((e: Error) => {
     switch (true) {
+      case e.message.endsWith('6985'):
+        throw new UserRefusedFirmwareUpdate()
       case e.message.endsWith('6982'):
         throw new ManagerDeviceLockedError()
       case e.message.endsWith('6a84') || e.message.endsWith('6a85'):
         throw new ManagerNotEnoughSpaceError()
       default:
-        throw new ManagerUnexpectedError(e.message, { msg: e.message })
+        throw e
     }
   })
 }
@@ -43,7 +45,6 @@ export default async (
     await remapError(createDeviceSocket(transport, url).toPromise())
     return { success: true }
   } catch (error) {
-    const result = { success: false, error }
-    throw result
+    throw error
   }
 }

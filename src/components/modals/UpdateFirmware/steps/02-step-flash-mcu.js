@@ -14,11 +14,12 @@ import getDeviceInfo from 'commands/getDeviceInfo'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
-import Progress from 'components/base/Progress'
 
 import type { Device } from 'types/common'
 
 import type { StepProps } from '../'
+
+import Installing from '../Installing'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -116,13 +117,19 @@ class StepFlashMcu extends PureComponent<Props, State> {
   }
 
   install = async () => {
-    const { transitionTo, installFinalFirmware } = this.props
+    const { transitionTo, installFinalFirmware, setError } = this.props
     const { deviceInfo, device } = await this.getDeviceInfo()
-    if (deviceInfo.isBootloader) {
-      await this.flash()
-      this.install()
-    } else if (deviceInfo.isOSU) {
-      await installFinalFirmware(device)
+
+    try {
+      if (deviceInfo.isBootloader) {
+        await this.flash()
+        this.install()
+      } else if (deviceInfo.isOSU) {
+        await installFinalFirmware(device)
+        transitionTo('finish')
+      }
+    } catch (error) {
+      setError(error)
       transitionTo('finish')
     }
   }
@@ -137,16 +144,7 @@ class StepFlashMcu extends PureComponent<Props, State> {
     const { t } = this.props
 
     return installing ? (
-      <Fragment>
-        <Box mx={7} style={{ width: '100%' }}>
-          <Progress infinite />
-        </Box>
-        <Box mx={7} mt={4}>
-          <Text ff="Open Sans|Regular" align="center" color="smoke">
-            {t('app:manager.modal.mcuPin')}
-          </Text>
-        </Box>
-      </Fragment>
+      <Installing />
     ) : (
       <Fragment>
         <Box mx={7}>
@@ -184,9 +182,7 @@ class StepFlashMcu extends PureComponent<Props, State> {
     const { installing } = this.state
     return (
       <Container>
-        <Title>
-          {installing ? t('app:manager.modal.flashing') : t('app:manager.modal.mcuTitle')}
-        </Title>
+        <Title>{installing ? '' : t('app:manager.modal.mcuTitle')}</Title>
         <TrackPage category="Manager" name="FlashMCU" />
         {this.renderBody()}
       </Container>
