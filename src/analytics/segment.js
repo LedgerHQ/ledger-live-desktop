@@ -30,8 +30,6 @@ const extraProperties = store => {
   const device = getCurrentDevice(state)
   const deviceInfo = device && {
     productId: device.productId,
-    product: device.product,
-    vendorId: device.vendorId,
   }
   return {
     appVersion: __APP_VERSION__,
