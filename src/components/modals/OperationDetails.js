@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import moment from 'moment'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
 import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
+import uniq from 'lodash/uniq'
 
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T, CurrencySettings } from 'types/common'
@@ -125,6 +126,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const isConfirmed = confirmations >= currencySettings.confirmationsNb
 
   const url = getAccountOperationExplorer(account, operation)
+  const uniqueSenders = uniq(senders)
 
   return (
     <ModalBody onClose={onClose}>
@@ -215,7 +217,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             <B />
             <Box>
               <OpDetailsTitle>{t('app:operationDetails.from')}</OpDetailsTitle>
-              <Recipients recipients={senders} t={t} />
+              <Recipients recipients={uniqueSenders} t={t} />
             </Box>
             <B />
             <Box>
