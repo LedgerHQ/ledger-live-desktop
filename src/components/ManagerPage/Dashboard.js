@@ -10,7 +10,7 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import IconExternalLink from 'icons/ExternalLink'
 import TrackPage from 'analytics/TrackPage'
-import FakeLink from '../base/FakeLink'
+import FakeLink from 'components/base/FakeLink'
 
 import AppsList from './AppsList'
 import FirmwareUpdate from './FirmwareUpdate'
