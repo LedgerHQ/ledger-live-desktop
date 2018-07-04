@@ -217,12 +217,12 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             <B />
             <Box>
               <OpDetailsTitle>{t('app:operationDetails.from')}</OpDetailsTitle>
-              <Recipients recipients={uniqueSenders} t={t} />
+              <DataList lines={uniqueSenders} t={t} />
             </Box>
             <B />
             <Box>
               <OpDetailsTitle>{t('app:operationDetails.to')}</OpDetailsTitle>
-              <Recipients recipients={recipients} t={t} />
+              <DataList lines={recipients} t={t} />
             </Box>
           </Box>
         </GrowScroll>
@@ -271,7 +271,7 @@ const More = styled(Text).attrs({
   outline: none;
 `
 
-export class Recipients extends Component<{ recipients: Array<*>, t: T }, *> {
+export class DataList extends Component<{ lines: string[], t: T }, *> {
   state = {
     showMore: false,
   }
@@ -279,18 +279,18 @@ export class Recipients extends Component<{ recipients: Array<*>, t: T }, *> {
     this.setState(({ showMore }) => ({ showMore: !showMore }))
   }
   render() {
-    const { recipients, t } = this.props
+    const { lines, t } = this.props
     const { showMore } = this.state
     // Hardcoded for now
     const numToShow = 2
-    const shouldShowMore = recipients.length > 3
+    const shouldShowMore = lines.length > 3
     return (
       <Box>
-        {(shouldShowMore ? recipients.slice(0, numToShow) : recipients).map(recipient => (
-          <OpDetailsData key={recipient}>
-            {recipient}
+        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(line => (
+          <OpDetailsData key={line}>
+            {line}
             <GradientHover>
-              <CopyWithFeedback text={recipient} />
+              <CopyWithFeedback text={line} />
             </GradientHover>
           </OpDetailsData>
         ))}
@@ -299,14 +299,12 @@ export class Recipients extends Component<{ recipients: Array<*>, t: T }, *> {
             <Box onClick={this.onClick} py={1}>
               <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
                 <IconChevronRight size={12} style={{ marginRight: 5 }} />
-                {t('app:operationDetails.showMore', { recipients: recipients.length - numToShow })}
+                {t('app:operationDetails.showMore', { recipients: lines.length - numToShow })}
               </More>
             </Box>
           )}
         {showMore &&
-          recipients
-            .slice(numToShow)
-            .map(recipient => <OpDetailsData key={recipient}>{recipient}</OpDetailsData>)}
+          lines.slice(numToShow).map(line => <OpDetailsData key={line}>{line}</OpDetailsData>)}
         {shouldShowMore &&
           showMore && (
             <Box onClick={this.onClick} py={1}>
