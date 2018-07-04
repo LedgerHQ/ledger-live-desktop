@@ -76,7 +76,7 @@ const INITIAL_STATE: SettingsState = {
   currenciesSettings: {},
   developerMode: !!process.env.__DEV__,
   loaded: false,
-  shareAnalytics: true,
+  shareAnalytics: false,
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
 }
