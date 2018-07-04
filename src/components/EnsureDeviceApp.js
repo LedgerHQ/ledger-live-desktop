@@ -79,7 +79,7 @@ class EnsureDeviceApp extends Component<{
     return (
       <Trans i18nKey="deviceConnect:step2.open" parent="div">
         {'Open the '}
-        <strong>{cur.name}</strong>
+        <Bold>{cur.name}</Bold>
         {' app on your device'}
       </Trans>
     )

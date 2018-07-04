@@ -22,9 +22,8 @@ class ManagerGenuineCheck extends PureComponent<Props> {
   render() {
     const { t, onSuccess } = this.props
     return (
-      <Box align="center">
+      <Box align="center" py={7}>
         <TrackPage category="Manager" name="Genuine Check" />
-        <Space of={60} />
         <Box align="center" style={{ maxWidth: 460 }}>
           <img
             src={i('logos/connectDevice.png')}
