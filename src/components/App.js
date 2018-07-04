@@ -12,10 +12,8 @@ import theme from 'styles/theme'
 
 import i18n from 'renderer/i18n/electron'
 
-import OnboardingOrElse from 'components/OnboardingOrElse'
 import ThrowBlock from 'components/ThrowBlock'
 import Default from 'components/layout/Default'
-import Print from 'components/layout/Print'
 import CounterValues from 'helpers/countervalues'
 import { BridgeSyncProvider } from 'bridge/BridgeSyncContext'
 
@@ -34,14 +32,11 @@ const App = ({
         <I18nextProvider i18n={i18n} initialLanguage={language}>
           <ThemeProvider theme={theme}>
             <ThrowBlock>
-              <OnboardingOrElse>
-                <ConnectedRouter history={history}>
-                  <Switch>
-                    <Route path="/print" component={Print} />
-                    <Route component={Default} />
-                  </Switch>
-                </ConnectedRouter>
-              </OnboardingOrElse>
+              <ConnectedRouter history={history}>
+                <Switch>
+                  <Route component={Default} />
+                </Switch>
+              </ConnectedRouter>
             </ThrowBlock>
           </ThemeProvider>
         </I18nextProvider>

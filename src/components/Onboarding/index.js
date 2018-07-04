@@ -25,9 +25,7 @@ import { getCurrentDevice } from 'reducers/devices'
 
 import { unlock } from 'reducers/application'
 
-import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
-import TriggerAppReady from '../TriggerAppReady'
 
 import Start from './steps/Start'
 import InitStep from './steps/Init'
@@ -160,9 +158,6 @@ class Onboarding extends PureComponent<Props> {
 
     return (
       <Container>
-        <TriggerAppReady />
-        <ExportLogsBtn hookToShortcut />
-
         {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
         <StepContainer>
           <StepComponent {...stepProps} />
