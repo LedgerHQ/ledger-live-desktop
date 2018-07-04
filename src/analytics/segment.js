@@ -16,12 +16,15 @@ if (!process.env.STORYBOOK_ENV) {
 
 const sessionId = uuid()
 
-const getContext = store => {
+const getContext = _store => ({
+  ip: '0.0.0.0',
+})
+
+const extraProperties = store => {
   const state = store.getState()
   const { language, region } = langAndRegionSelector(state)
   const systemLocale = getSystemLocale()
   return {
-    ip: '0.0.0.0',
     appVersion: __APP_VERSION__,
     language,
     region,
@@ -45,13 +48,9 @@ export const start = (store: *) => {
     return
   }
   load()
-  analytics.identify(
-    id,
-    {},
-    {
-      context: getContext(store),
-    },
-  )
+  analytics.identify(id, extraProperties(store), {
+    context: getContext(store),
+  })
 }
 
 export const stop = () => {
@@ -75,9 +74,16 @@ export const track = (event: string, properties: ?Object) => {
     logger.error('analytics is not available')
     return
   }
-  analytics.track(event, properties, {
-    context: getContext(storeInstance),
-  })
+  analytics.track(
+    event,
+    {
+      ...extraProperties(storeInstance),
+      ...properties,
+    },
+    {
+      context: getContext(storeInstance),
+    },
+  )
 }
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
@@ -90,7 +96,15 @@ export const page = (category: string, name: ?string, properties: ?Object) => {
     logger.error('analytics is not available')
     return
   }
-  analytics.page(category, name, properties, {
-    context: getContext(storeInstance),
-  })
+  analytics.page(
+    category,
+    name,
+    {
+      ...extraProperties(storeInstance),
+      ...properties,
+    },
+    {
+      context: getContext(storeInstance),
+    },
+  )
 }
