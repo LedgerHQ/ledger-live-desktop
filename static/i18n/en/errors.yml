@@ -88,7 +88,7 @@ UserRefusedOnDevice:
   description: Please retry or contact Ledger Support in case of doubt.
 UserRefusedAddress:
   title: Receive address rejected
-  description: Please try again or contact Support
+  description: Please try again or contact Ledger Support
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
   description:  #context
