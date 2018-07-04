@@ -8,6 +8,7 @@ import { urls } from 'config/support'
 import Box from 'components/base/Box'
 import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
 import RecipientAddress from 'components/RecipientAddress'
+import { track } from 'analytics/segment'
 
 type Props<Transaction> = {
   t: T,
@@ -63,6 +64,7 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
 
   handleRecipientAddressHelp = () => {
     openURL(urls.recipientAddressInfo)
+    track('Send Flow Recipient Address Help Requested')
   }
   render() {
     const { bridge, account, transaction, t, autoFocus } = this.props

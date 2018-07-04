@@ -2,15 +2,13 @@
 
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
-import type { T } from 'types/common'
-import TrackPage from 'analytics/TrackPage'
-import IconHelp from 'icons/Help'
-import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
-import { urls } from 'config/support'
 
-import ExportLogsBtn from 'components/ExportLogsBtn'
-import CleanButton from '../CleanButton'
-import ResetButton from '../ResetButton'
+import type { T } from 'types/common'
+
+import TrackPage from 'analytics/TrackPage'
+import { urls } from 'config/support'
+import IconLoader from 'icons/Loader'
+
 import ReleaseNotesButton from '../ReleaseNotesButton'
 import AboutRowItem from '../AboutRowItem'
 
@@ -25,7 +23,7 @@ type Props = {
   t: T,
 }
 
-class SectionAbout extends PureComponent<Props> {
+class SectionHelp extends PureComponent<Props> {
   render() {
     const { t } = this.props
     const version = __APP_VERSION__
@@ -35,44 +33,19 @@ class SectionAbout extends PureComponent<Props> {
         <TrackPage category="Settings" name="About" />
 
         <Header
-          icon={<IconHelp size={16} />}
+          icon={<IconLoader size={16} />}
           title={t('app:settings.tabs.about')}
           desc={t('app:settings.about.desc')}
         />
 
         <Body>
-          <Row title={t('app:settings.about.version')} desc={`Ledger Live ${version}`}>
+          <Row title={t('app:settings.help.version')} desc={`Ledger Live ${version}`}>
             <ReleaseNotesButton />
           </Row>
 
-          <Row
-            title={t('app:settings.profile.softResetTitle')}
-            desc={t('app:settings.profile.softResetDesc')}
-          >
-            <CleanButton />
-          </Row>
-          <Row
-            title={t('app:settings.profile.hardResetTitle')}
-            desc={t('app:settings.profile.hardResetDesc')}
-          >
-            <ResetButton />
-          </Row>
-          <Row
-            title={t('app:settings.exportLogs.title')}
-            desc={t('app:settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
-          >
-            <ExportLogsBtn />
-          </Row>
-
           <AboutRowItem
-            title={t('app:settings.about.faq')}
-            desc={t('app:settings.about.faqDesc')}
-            url={urls.faq}
-          />
-
-          <AboutRowItem
-            title={t('app:settings.about.terms')}
-            desc={t('app:settings.about.termsDesc')}
+            title={t('app:settings.help.terms')}
+            desc={t('app:settings.help.termsDesc')}
             url={urls.terms}
           />
         </Body>
@@ -81,4 +54,4 @@ class SectionAbout extends PureComponent<Props> {
   }
 }
 
-export default translate()(SectionAbout)
+export default translate()(SectionHelp)

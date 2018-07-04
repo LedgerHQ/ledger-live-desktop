@@ -33,7 +33,7 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
     const { t } = this.props
     return (
       <Container>
-        <TrackPage category="Send" name="Step3" />
+        <TrackPage category="Send Flow" name="Step 3" />
         <WarnBox>{multiline(t('app:send.steps.verification.warning'))}</WarnBox>
         <Info>{t('app:send.steps.verification.body')}</Info>
         <DeviceConfirm />

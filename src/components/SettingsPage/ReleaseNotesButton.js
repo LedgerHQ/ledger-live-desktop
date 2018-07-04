@@ -32,7 +32,7 @@ class ReleaseNotesButton extends PureComponent<Props> {
           openModal(MODAL_RELEASES_NOTES, version)
         }}
       >
-        {t('app:settings.about.releaseNotesBtn')}
+        {t('app:settings.help.releaseNotesBtn')}
       </Button>
     )
   }
