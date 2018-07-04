@@ -11,7 +11,7 @@ import type { StepProps } from '../index'
 export default function StepConnectDevice({ account, onChangeAppOpened }: StepProps<*>) {
   return (
     <Fragment>
-      <TrackPage category="Send" name="Step2" />
+      <TrackPage category="Send Flow" name="Step 2" />
       <EnsureDeviceApp
         account={account}
         waitBeforeSuccess={200}

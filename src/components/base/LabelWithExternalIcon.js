@@ -8,7 +8,7 @@ import Box from 'components/base/Box'
 import IconExternalLink from 'icons/ExternalLink'
 
 // can add more dynamic options if needed
-export function LabelWithExternalIcon({ onClick, label }: { onClick: () => void, label: string }) {
+export function LabelWithExternalIcon({ onClick, label }: { onClick: ?() => void, label: string }) {
   return (
     <LabelWrapper onClick={onClick}>
       <span>{label}</span>

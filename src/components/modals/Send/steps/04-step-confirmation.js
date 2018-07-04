@@ -60,7 +60,7 @@ export default function StepConfirmation({ t, optimisticOperation, error }: Step
   const translatedErrDesc = error ? <TranslatedError error={error} field="description" /> || '' : ''
   return (
     <Container>
-      <TrackPage category="Send" name="Step4" />
+      <TrackPage category="Send Flow" name="Step 4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
@@ -88,10 +88,10 @@ export function StepConfirmationFooter({
     <Fragment>
       <Button onClick={closeModal}>{t('app:common.close')}</Button>
       {optimisticOperation ? (
-        // TODO: actually go to operations details
         url ? (
           <Button
             ml={2}
+            event="Send Flow Step 4 View OpD Clicked"
             onClick={() => {
               closeModal()
               if (account && optimisticOperation) {
