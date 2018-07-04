@@ -63,7 +63,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    // this.install()
+    this.install()
   }
 
   componentWillUnmount() {
