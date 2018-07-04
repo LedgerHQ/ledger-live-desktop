@@ -20,7 +20,7 @@ const StepConnectDevice = ({ account, currency, onChangeDevice, onStatusChange }
     <EnsureDeviceApp
       account={account}
       currency={currency}
-      waitBeforeSuccess={500}
+      waitBeforeSuccess={200}
       onSuccess={({ device }) => {
         // TODO: remove those non-nense callbacks
         if (onChangeDevice) {
