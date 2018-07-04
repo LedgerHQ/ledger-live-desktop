@@ -411,8 +411,28 @@ function buildOperationRaw({
 
 export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: AccountRaw }) {
   const decodedAccountId = accountIdHelper.decode(rawAccount.id)
-  const njsWallet = await core.getPoolInstance().getWallet(decodedAccountId.walletName)
-  const njsAccount = await njsWallet.getAccount(rawAccount.index)
+  let njsWallet
+  try {
+    njsWallet = await core.getPoolInstance().getWallet(decodedAccountId.walletName)
+  } catch (e) {
+    logger.warn(`Have to reimport the account... (${e})`)
+    njsWallet = await getOrCreateWallet(
+      core,
+      decodedAccountId.walletName,
+      rawAccount.currencyId,
+      isSegwitAccount(rawAccount),
+    )
+  }
+
+  let njsAccount
+  try {
+    njsAccount = await njsWallet.getAccount(rawAccount.index)
+  } catch (e) {
+    logger.warn(`Have to recreate the account... (${e.message})`)
+    const extendedInfos = await njsWallet.getExtendedKeyAccountCreationInfo(rawAccount.index)
+    extendedInfos.extendedKeys.push(decodedAccountId.xpub)
+    njsAccount = await njsWallet.newAccountWithExtendedKeyInfo(extendedInfos)
+  }
 
   const unsub = await coreSyncAccount(core, njsAccount)
   unsub()

@@ -17,7 +17,13 @@ DeviceSocketNoHandler:
 DisconnectedDevice:
   title: Oops, device was disconnected
   description: The connection to the device was lost, so please try again.
-Error: # as this is a generic unhandled error i think it's ok to have a generic title. but keep description to {{message}}
+Error:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
+TypeError:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
+ReferenceError:
   title: '{{message}}'
   description: Something went wrong. Please retry or contact us.
 FeeEstimationFailed:
