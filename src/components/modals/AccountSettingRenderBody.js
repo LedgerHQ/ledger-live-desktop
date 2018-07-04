@@ -17,6 +17,7 @@ import { setDataModal } from 'reducers/modals'
 
 import { getBridgeForCurrency } from 'bridge'
 
+import TrackPage from 'analytics/TrackPage'
 import Spoiler from 'components/base/Spoiler'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
@@ -197,6 +198,7 @@ class HelperComp extends PureComponent<Props, State> {
     return (
       <ModalBody onClose={onClose}>
         <form onSubmit={this.handleSubmit(account, onClose)}>
+          <TrackPage category="Modal" name="AccountSettings" />
           <ModalTitle>{t('app:account.settings.title')}</ModalTitle>
           <ModalContent mb={3}>
             <Container>
@@ -275,15 +277,21 @@ class HelperComp extends PureComponent<Props, State> {
             </Spoiler>
           </ModalContent>
           <ModalFooter horizontal>
-            <Button danger type="button" onClick={this.handleOpenRemoveAccountModal}>
+            <Button
+              event="OpenAccountDelete"
+              danger
+              type="button"
+              onClick={this.handleOpenRemoveAccountModal}
+            >
               {t('app:common.delete')}
             </Button>
-            <Button ml="auto" type="submit" primary>
+            <Button event="DoneEditingAccount" ml="auto" type="submit" primary>
               {t('app:common.apply')}
             </Button>
           </ModalFooter>
         </form>
         <ConfirmModal
+          analyticsName="RemoveAccount"
           isDanger
           isOpened={isRemoveAccountModalOpen}
           onClose={this.handleCloseRemoveAccountModal}

@@ -1,8 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { shell } from 'electron'
-import { track } from 'analytics/segment'
+import { openURL } from 'helpers/linking'
 
 import type { T } from 'types/common'
 
@@ -19,8 +18,7 @@ type CardType = {
 export default class ExchangeCard extends PureComponent<{ t: T, card: CardType }> {
   onClick = () => {
     const { card } = this.props
-    shell.openExternal(card.url)
-    track('VisitExchange', { id: card.id, url: card.url })
+    openURL(card.url, 'VisitExchange', { id: card.id })
   }
   render() {
     const {

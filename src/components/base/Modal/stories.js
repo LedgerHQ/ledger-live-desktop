@@ -36,6 +36,7 @@ stories.add('Modal', () => (
 
 stories.add('ConfirmModal', () => (
   <ConfirmModal
+    categoryName=""
     isOpened
     isDanger={boolean('isDanger', false)}
     title={text('title', 'Hard reset')}

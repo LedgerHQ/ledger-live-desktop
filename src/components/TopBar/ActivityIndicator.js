@@ -9,6 +9,7 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import type { AsyncState } from 'reducers/bridgeSync'
 
+import { track } from 'analytics/segment'
 import { globalSyncStateSelector } from 'reducers/bridgeSync'
 import { isUpToDateSelector } from 'reducers/accounts'
 import { BridgeSyncConsumer } from 'bridge/BridgeSyncContext'
@@ -47,6 +48,7 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
     this.props.cvPoll()
     this.props.setSyncBehavior({ type: 'SYNC_ALL_ACCOUNTS', priority: 5 })
     this.setState({ lastClickTime: Date.now() })
+    track('SyncRefreshClick')
   }
 
   render() {

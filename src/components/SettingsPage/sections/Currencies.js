@@ -44,7 +44,7 @@ class TabCurrencies extends PureComponent<Props, State> {
     const { t, currencies } = this.props
     return (
       <Section key={currency.id}>
-        <TrackPage category="Settings" name="Currencies" />
+        <TrackPage category="Settings" name="Currencies" currencyId={currency.id} />
         <Header
           icon={<IconCurrencies size={16} />}
           title={t('app:settings.tabs.currencies')}

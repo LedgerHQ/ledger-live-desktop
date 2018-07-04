@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import styled from 'styled-components'
 import { i } from 'helpers/staticPath'
 import { urls } from 'config/support'
@@ -35,19 +35,19 @@ const socialMedia = [
     key: 'twitter',
     url: urls.twitter,
     icon: <IconSocialTwitter size={24} />,
-    onClick: url => shell.openExternal(url),
+    onClick: url => openURL(url),
   },
   {
     key: 'github',
     url: urls.github,
     icon: <IconSocialGithub size={24} />,
-    onClick: url => shell.openExternal(url),
+    onClick: url => openURL(url),
   },
   {
     key: 'reddit',
     url: urls.reddit,
     icon: <IconSocialReddit size={24} />,
-    onClick: url => shell.openExternal(url),
+    onClick: url => openURL(url),
   },
 ]
 

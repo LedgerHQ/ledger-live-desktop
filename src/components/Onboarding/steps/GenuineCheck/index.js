@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { colors } from 'styles/theme'
@@ -144,7 +144,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   contactSupport = () => {
-    shell.openExternal(urls.genuineCheckContactSupport)
+    openURL(urls.genuineCheckContactSupport)
   }
 
   handlePrevStep = () => {

@@ -11,6 +11,7 @@ import getDeviceInfo from 'commands/getDeviceInfo'
 import { getCurrentDevice } from 'reducers/devices'
 import { createCancelablePolling, delay } from 'helpers/promise'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Progress from 'components/base/Progress'
@@ -169,6 +170,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
             ? t('app:manager.modal.installing')
             : t('app:manager.modal.confirmIdentifier')}
         </Title>
+        <TrackPage category="Manager" name="InstallFirmware" />
         {this.renderBody()}
       </Container>
     )

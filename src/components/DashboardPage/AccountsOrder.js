@@ -21,6 +21,7 @@ import { reorderAccounts } from 'actions/accounts'
 import { accountsSelector } from 'reducers/accounts'
 import { saveSettings } from 'actions/settings'
 
+import Track from 'analytics/Track'
 import BoldToggle from 'components/base/BoldToggle'
 import Box from 'components/base/Box'
 import DropDown, { DropDownItem } from 'components/base/DropDown'
@@ -202,6 +203,7 @@ class AccountsOrder extends Component<Props> {
         onStateChange={this.onStateChange}
         value={sortItems.find(item => item.key === orderAccounts)}
       >
+        <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
         <Text ff="Open Sans|SemiBold" fontSize={4}>
           {t('app:common.sortBy')}
         </Text>

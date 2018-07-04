@@ -1,11 +1,12 @@
 // @flow
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react'
 import { translate } from 'react-i18next'
 import LRU from 'lru-cache'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { Exchange } from '@ledgerhq/live-common/lib/countervalues/types'
 import logger from 'logger'
 
+import Track from 'analytics/Track'
 import Select from 'components/base/Select'
 import Text from 'components/base/Text'
 import CounterValues from 'helpers/countervalues'
@@ -91,27 +92,37 @@ class SelectExchange extends Component<
   }
 
   render() {
-    const { onChange, exchangeId, style, t, ...props } = this.props
+    const { onChange, exchangeId, style, t, from, to, ...props } = this.props
     const { exchanges, error } = this.state
 
     const options = exchanges ? exchanges.map(e => ({ value: e.id, label: e.name, ...e })) : []
+    const value = options.find(e => e.id === exchangeId)
 
     return error ? (
       <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
         {t('app:common.error.load')}
       </Text>
     ) : (
-      <Select
-        value={options.find(e => e.id === exchangeId)}
-        options={options}
-        onChange={onChange}
-        isLoading={options.length === 0}
-        placeholder={t('app:common.selectExchange')}
-        noOptionsMessage={({ inputValue }) =>
-          t('app:common.selectExchangeNoOption', { exchangeName: inputValue })
-        }
-        {...props}
-      />
+      <Fragment>
+        <Track
+          onUpdate
+          event="SelectExchange"
+          exchangeName={value && value.id}
+          fromCurrency={from.ticker}
+          toCurrency={to.ticker}
+        />
+        <Select
+          value={value}
+          options={options}
+          onChange={onChange}
+          isLoading={options.length === 0}
+          placeholder={t('app:common.selectExchange')}
+          noOptionsMessage={({ inputValue }) =>
+            t('app:common.selectExchangeNoOption', { exchangeName: inputValue })
+          }
+          {...props}
+        />
+      </Fragment>
     )
   }
 }

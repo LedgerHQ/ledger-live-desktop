@@ -2,13 +2,14 @@
 
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
 import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
 
+import TrackPage from 'analytics/TrackPage'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T, CurrencySettings } from 'types/common'
 
@@ -128,6 +129,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
 
   return (
     <ModalBody onClose={onClose}>
+      <TrackPage category="Modal" name="OperationDetails" />
       <ModalTitle>{t('app:operationDetails.title')}</ModalTitle>
       <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
         <GrowScroll px={5} pt={1} pb={8}>
@@ -229,7 +231,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
 
       {url && (
         <ModalFooter horizontal justify="flex-end" flow={2}>
-          <Button primary onClick={() => shell.openExternal(url)}>
+          <Button primary onClick={() => openURL(url)}>
             {t('app:operationDetails.viewOperation')}
           </Button>
         </ModalFooter>

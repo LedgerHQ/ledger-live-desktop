@@ -5,6 +5,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
+import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 
@@ -23,6 +24,7 @@ type Props = {
   onConfirm: Function,
   t: T,
   isLoading?: boolean,
+  analyticsName: string,
 }
 
 class ConfirmModal extends PureComponent<Props> {
@@ -40,6 +42,7 @@ class ConfirmModal extends PureComponent<Props> {
       isLoading,
       renderIcon,
       t,
+      analyticsName,
       ...props
     } = this.props
 
@@ -52,6 +55,7 @@ class ConfirmModal extends PureComponent<Props> {
         {...props}
         render={({ onClose }) => (
           <ModalBody onClose={isLoading ? undefined : onClose}>
+            <TrackPage category="Modal" name={analyticsName} />
             <ModalTitle>{title}</ModalTitle>
             <ModalContent>
               {subTitle && (

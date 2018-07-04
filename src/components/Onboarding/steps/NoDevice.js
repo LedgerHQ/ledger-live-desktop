@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
@@ -27,7 +27,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconCart size={20} />,
         title: t('onboarding:noDevice.buyNew.title'),
         onClick: () => {
-          shell.openExternal(urls.noDeviceBuyNew)
+          openURL(urls.noDeviceBuyNew)
         },
       },
       {
@@ -35,7 +35,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconTruck size={20} />,
         title: t('onboarding:noDevice.trackOrder.title'),
         onClick: () => {
-          shell.openExternal(urls.noDeviceTrackOrder)
+          openURL(urls.noDeviceTrackOrder)
         },
       },
       {
@@ -43,7 +43,7 @@ class NoDevice extends PureComponent<StepProps, *> {
         icon: <IconInfoCircle size={20} />,
         title: t('onboarding:noDevice.learnMore.title'),
         onClick: () => {
-          shell.openExternal(urls.noDeviceLearnMore)
+          openURL(urls.noDeviceLearnMore)
         },
       },
     ]
