@@ -5,7 +5,7 @@ import { handleActions } from 'redux-actions'
 import type { Device } from 'types/common'
 
 export type DevicesState = {
-  currentDevice: Device | null,
+  currentDevice: ?Device,
   devices: Device[],
 }
 
@@ -31,9 +31,7 @@ const handlers: Object = {
   REMOVE_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) => ({
     ...state,
     currentDevice:
-      state.currentDevice !== null && state.currentDevice.path === device.path
-        ? null
-        : state.currentDevice,
+      state.currentDevice && state.currentDevice.path === device.path ? null : state.currentDevice,
     devices: state.devices.filter(d => d.path !== device.path),
   }),
   SET_CURRENT_DEVICE: (state: DevicesState, { payload: currentDevice }: { payload: Device }) => ({
