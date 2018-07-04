@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import type { WalletBridge } from 'bridge/types'
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/support'
 import Box from 'components/base/Box'
-import Label from 'components/base/Label'
-import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
+import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
 import RecipientAddress from 'components/RecipientAddress'
 
 type Props<Transaction> = {
@@ -60,16 +61,19 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
     return true
   }
 
+  handleRecipientAddressHelp = () => {
+    openURL(urls.recipientAddressInfo)
+  }
   render() {
     const { bridge, account, transaction, t, autoFocus } = this.props
     const { isValid } = this.state
     const value = bridge.getTransactionRecipient(account, transaction)
     return (
       <Box flow={1}>
-        <Label>
-          <span>{t('app:send.steps.amount.recipientAddress')}</span>
-          <LabelInfoTooltip ml={1} text={t('app:send.steps.amount.recipientAddress')} />
-        </Label>
+        <LabelWithExternalIcon
+          onClick={this.handleRecipientAddressHelp}
+          label={t('app:send.steps.amount.recipientAddress')}
+        />
         <RecipientAddress
           autoFocus={autoFocus}
           withQrCode

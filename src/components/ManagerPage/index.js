@@ -33,7 +33,6 @@ class ManagerPage extends PureComponent<Props, State> {
   }
 
   handleHelpRequest = () => {
-    console.log('we are trying')
     openURL(urls.managerHelpRequest)
   }
 

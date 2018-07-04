@@ -12,5 +12,6 @@ export const urls = {
   managerHelpRequest: 'https://support.ledgerwallet.com/hc/en-us/articles/360006523674 ',
   genuineCheckContactSupport:
     'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
-  // feesMoreInfo: 'https://www.ledgerwallet.com/',
+  feesMoreInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006535873',
+  recipientAddressInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006433934',
 }

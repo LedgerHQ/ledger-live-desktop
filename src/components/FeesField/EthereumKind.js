@@ -32,7 +32,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
     const { account, gasPrice, error, onChange } = this.props
     const { units } = account.currency
     return (
-      <GenericContainer error={error} help="Gas">
+      <GenericContainer error={error}>
         <InputCurrency
           defaultUnit={units.length > 1 ? units[1] : units[0]}
           units={units}
