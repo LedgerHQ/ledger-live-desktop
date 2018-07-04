@@ -9,7 +9,7 @@ import { DEVICE_INFOS_TIMEOUT } from 'config/constants'
 import getDeviceInfo from 'commands/getDeviceInfo'
 
 import { getCurrentDevice } from 'reducers/devices'
-import { createCancelablePolling } from 'helpers/promise'
+import { createCancelablePolling, delay } from 'helpers/promise'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
@@ -46,13 +46,7 @@ const Address = styled(Box).attrs({
   cursor: text;
   user-select: text;
   width: 325px;
-`
-
-const Ellipsis = styled.span`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
+  text-align: center;
 `
 
 type Props = StepProps & {
@@ -69,7 +63,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    this.install()
+    // this.install()
   }
 
   componentWillUnmount() {
@@ -94,55 +88,66 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   install = async () => {
-    const { installOsuFirmware, installFinalFirmware } = this.props
+    const {
+      installOsuFirmware,
+      installFinalFirmware,
+      firmware,
+      shouldFlashMcu,
+      transitionTo,
+    } = this.props
     const { device, deviceInfo } = await this.ensureDevice()
+
+    // When device is connected, if in OSU, install Final Firmware
     if (deviceInfo.isOSU) {
       this.setState({ installing: true })
-      const finalSuccess = await installFinalFirmware(device)
-      if (finalSuccess) this.transitionTo()
-    }
-
-    const success = await installOsuFirmware(device)
-    if (success) {
+      await installFinalFirmware(device)
+      transitionTo('finish')
+    } else {
+      await installOsuFirmware(device)
       this.setState({ installing: true })
       if (this._unsubConnect) this._unsubConnect()
-      const { device: cleanDevice } = await this.ensureDevice()
-      const finalSuccess = await installFinalFirmware(cleanDevice)
-      if (finalSuccess) {
-        this.transitionTo()
+      if ((firmware && firmware.shouldFlashMcu) || shouldFlashMcu) {
+        delay(1000)
+        transitionTo('updateMCU')
+      } else {
+        const { device: freshDevice } = await this.ensureDevice()
+        await installFinalFirmware(freshDevice)
+        transitionTo('finish')
       }
     }
   }
 
-  transitionTo = () => {
-    const { firmware, transitionTo } = this.props
-    if (firmware.shouldUpdateMcu) {
-      transitionTo('updateMCU')
-    } else {
-      transitionTo('finish')
+  formatHashName = (hash: string): string[] => {
+    if (!hash) {
+      return []
     }
+
+    const length = hash.length
+    const half = Math.ceil(length / 2)
+    const start = hash.slice(0, half)
+    const end = hash.slice(half)
+    return [start, end]
   }
 
   renderBody = () => {
     const { installing } = this.state
-    const { firmware, t } = this.props
+    const { t, firmware } = this.props
 
-    if (installing) {
-      return (
-        <Box mx={7}>
-          <Progress infinite style={{ width: '100%' }} />
-        </Box>
-      )
-    }
-
-    return (
+    return installing ? (
+      <Box mx={7} mt={5} style={{ width: '100%' }}>
+        <Progress infinite />
+      </Box>
+    ) : (
       <Fragment>
+        <Text ff="Open Sans|Regular" align="center" color="smoke">
+          {t('app:manager.modal.confirmIdentifierText')}
+        </Text>
         <Box mx={7} mt={5}>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('app:manager.modal.identifier')}
           </Text>
           <Address>
-            <Ellipsis>{firmware && firmware.hash}</Ellipsis>
+            {firmware && firmware.hash && this.formatHashName(firmware.hash).join('\n')}
           </Address>
         </Box>
         <Box mt={5}>
@@ -155,13 +160,15 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   _unsubConnect: *
 
   render() {
+    const { installing } = this.state
     const { t } = this.props
     return (
       <Container>
-        <Title>{t('app:manager.modal.confirmIdentifier')}</Title>
-        <Text ff="Open Sans|Regular" align="center" color="smoke">
-          {t('app:manager.modal.confirmIdentifierText')}
-        </Text>
+        <Title>
+          {installing
+            ? t('app:manager.modal.installing')
+            : t('app:manager.modal.confirmIdentifier')}
+        </Title>
         {this.renderBody()}
       </Container>
     )

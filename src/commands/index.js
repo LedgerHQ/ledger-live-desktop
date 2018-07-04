@@ -26,6 +26,7 @@ import listAppVersions from 'commands/listAppVersions'
 import listCategories from 'commands/listCategories'
 import listenDevices from 'commands/listenDevices'
 import ping from 'commands/ping'
+import shouldFlashMcu from 'commands/shouldFlashMcu'
 import signTransaction from 'commands/signTransaction'
 import testApdu from 'commands/testApdu'
 import testCrash from 'commands/testCrash'
@@ -56,6 +57,7 @@ const all: Array<Command<any, any>> = [
   listCategories,
   listenDevices,
   ping,
+  shouldFlashMcu,
   signTransaction,
   testApdu,
   testCrash,

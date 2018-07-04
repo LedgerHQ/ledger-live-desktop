@@ -38,7 +38,7 @@ export default async (
       ...firmware,
       firmwareKey: firmware.firmware_key,
     }
-    delete params.shouldUpdateMcu
+    delete params.shouldFlashMcu
     const url = WS_INSTALL(params)
     await remapError(createDeviceSocket(transport, url).toPromise())
     return { success: true }

@@ -71,7 +71,7 @@ type State = {}
 class Progress extends Component<Props, State> {
   static defaultProps = {
     infinite: false,
-    timing: 3000,
+    timing: 2500,
     color: 'wallet',
   }
 
