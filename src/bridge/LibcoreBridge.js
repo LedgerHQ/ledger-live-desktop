@@ -105,6 +105,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
             const accountOps = account.operations
             const syncedOps = syncedAccount.operations
             const patch: $Shape<Account> = {
+              id: syncedAccount.id,
               freshAddress: syncedAccount.freshAddress,
               freshAddressPath: syncedAccount.freshAddressPath,
               balance: syncedAccount.balance,
@@ -116,7 +117,8 @@ const LibcoreBridge: WalletBridge<Transaction> = {
               accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
               (accountOps.length > 0 &&
                 syncedOps.length > 0 &&
-                accountOps[0].id !== syncedOps[0].id) // if same size, only check if the last item has changed.
+                (accountOps[0].accountId !== syncedOps[0].accountId ||
+                  accountOps[0].id !== syncedOps[0].id)) // if same size, only check if the last item has changed.
 
             if (hasChanged) {
               patch.operations = syncedAccount.operations
