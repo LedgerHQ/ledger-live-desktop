@@ -8,6 +8,7 @@ common:
   cancel: Cancel
   delete: Delete
   continue: Continue
+  learnMore: Learn More
   skipThisStep: Skip this step
   chooseWalletPlaceholder: Choose a wallet...
   currency: Currency
@@ -37,8 +38,9 @@ common:
   reverify: Re-verify
   verify: Verify
   copy: Copy
-  copied: Copied!
-  addressCopied: Address copied!
+  copyAddress: Copy address
+  copied: Copied
+  addressCopied: Address copied
   lockScreen:
     title: Welcome back
     subTitle:
@@ -55,6 +57,8 @@ common:
   error:
     load: Unable to load
     noResults: No results
+buttons:
+  displayAddressOnDevice: Verify
 operation:
   type:
     IN: Received
@@ -119,7 +123,9 @@ dashboard:
 currentAddress:
   title: Current address
   for: Address for account <1><0>{{accountName}}</0></1>
-  message: Your receive address has not been confirmed on your Ledger device. Please verify the address for optimal security.
+  messageIfUnverified: Verify the address on your device for optimal security. Press the right button to confirm.
+  messageIfAccepted: "{{currencyName}} address confirmed on your device. Carefully verify when you copy and paste it."
+  messageIfSkipped: 'Your receive address has not been confirmed on your Ledger device. Please verify your {{currencyName}} address for optimal security.'
 deviceConnect:
   step1:
     choose: "We detected {{count}} connected devices, please select one:"
@@ -151,7 +157,7 @@ addAccounts:
     connectDevice: Device
     import: Accounts
     finish: Confirmation
-  accountAlreadyImportedSubtitle: '{{count}} Already in portfolio'
+  accountAlreadyImportedSubtitle: 'Accounts already in portfolio ({{count}})'
   accountToImportSubtitle: 'Add existing account'
   accountToImportSubtitle_plural: 'Add existing accounts'
   selectAll: Select all ({{count}})
@@ -162,11 +168,11 @@ addAccounts:
   noAccountToImport: No existing {{currencyName}} accounts to add
   success: Account successfully added to your portfolio
   success_plural: Accounts successfully added to your portfolio
-  successDescription: Your account have been created.
+  successDescription: Your account has been created.
   successDescription_plural: Your accounts have been created.
   createNewAccount:
     title: Add a new account
-    noOperationOnLastAccount: 'You have to receive crypto assets on <1><0>{{accountName}}</0></1> before you can create a new account.'
+    noOperationOnLastAccount: "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account."
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
   somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
@@ -217,12 +223,15 @@ manager:
       idCheck: Identifier check
       updateMCU: Update MCU
       confirm: Confirmation
+    installing: Installing firmware
+    flashing: Installing MCU
     confirmIdentifier: Confirm identifier
     confirmIdentifierText: Please confirm identifier on your Device. Be sure the identifier is the same as below
     identifier: Identifier
     mcuTitle: Updating MCU
     mcuFirst: Unplug your device from your computer
     mcuSecond: Press and hold left button and plug your device until the processing screen appears
+    mcuPin: If asked on device, please enter your pin code to finish the process
     successTitle: Firmware has been updated with success
     successText: You can now re-install your applications on your device
   title: Manager
@@ -246,8 +255,8 @@ receive:
       withoutDevice: Don't have your device?
     confirmAddress:
       title: Verification
-      action: Confirm address on device
-      text: Verify that the address below matches the address displayed on your device
+      action: Verify address on device
+      text: A {{currencyName}} receive address will be displayed on your device. Carefully verify that it matches the address on your computer.
       support: Contact us
     receiveFunds:
       title: Receive
@@ -408,5 +417,5 @@ crash:
 disclaimerModal:
   title: Trade safely
   desc_1: Before sending and receiving crypto assets, educate yourself to make informed decisions. Crypto assets are volatile and the prices can go up and down. Carefully evaluate your trading goals and the financial risk you are willing to take.
-  desc_2: Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or rely on opinions of reliable experts.
+  desc_2: Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or consult with reliable experts.
   cta: Got it
