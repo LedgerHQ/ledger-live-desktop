@@ -24,7 +24,7 @@ import LibcoreBusyIndicator from 'components/LibcoreBusyIndicator'
 import DeviceBusyIndicator from 'components/DeviceBusyIndicator'
 import TriggerAppReady from 'components/TriggerAppReady'
 import ExportLogsBtn from 'components/ExportLogsBtn'
-
+import OnboardingOrElse from 'components/OnboardingOrElse'
 import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/MainSideBar'
@@ -82,36 +82,38 @@ class Default extends Component<Props> {
         {process.platform === 'darwin' && <AppRegionDrag />}
         <ExportLogsBtn hookToShortcut />
 
-        <IsUnlocked>
-          {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
-            <ModalComponent key={name} />
-          ))}
+        <OnboardingOrElse>
+          <IsUnlocked>
+            {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
+              <ModalComponent key={name} />
+            ))}
 
-          <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
+            <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
 
-          <div id="sticky-back-to-top-root" />
+            <div id="sticky-back-to-top-root" />
 
-          <Box grow horizontal bg="white">
-            <SideBar />
+            <Box grow horizontal bg="white">
+              <SideBar />
 
-            <Box shrink grow bg="lightGrey" color="grey" overflow="hidden" relative>
-              <TopBar />
-              <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
-                <Route path="/" exact component={DashboardPage} />
-                <Route path="/settings" component={SettingsPage} />
-                <Route path="/manager" component={ManagerPage} />
-                <Route path="/exchange" component={ExchangePage} />
-                <Route path="/account/:id" component={AccountPage} />
-              </Main>
+              <Box shrink grow bg="lightGrey" color="grey" overflow="hidden" relative>
+                <TopBar />
+                <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
+                  <Route path="/" exact component={DashboardPage} />
+                  <Route path="/settings" component={SettingsPage} />
+                  <Route path="/manager" component={ManagerPage} />
+                  <Route path="/exchange" component={ExchangePage} />
+                  <Route path="/account/:id" component={AccountPage} />
+                </Main>
+              </Box>
             </Box>
-          </Box>
 
-          <LibcoreBusyIndicator />
-          <DeviceBusyIndicator />
-          <KeyboardContent sequence="BJBJBJ">
-            <PerfIndicator />
-          </KeyboardContent>
-        </IsUnlocked>
+            <LibcoreBusyIndicator />
+            <DeviceBusyIndicator />
+            <KeyboardContent sequence="BJBJBJ">
+              <PerfIndicator />
+            </KeyboardContent>
+          </IsUnlocked>
+        </OnboardingOrElse>
       </Fragment>
     )
   }
