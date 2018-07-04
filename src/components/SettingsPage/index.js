@@ -13,7 +13,7 @@ import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
 import SectionDisplay from './sections/Display'
 import SectionCurrencies from './sections/Currencies'
-import SectionAbout from './sections/About'
+import SectionHelp from './sections/Help'
 import SectionTools from './sections/Tools'
 
 const mapStateToProps = state => ({
@@ -48,9 +48,9 @@ class SettingsPage extends PureComponent<Props, State> {
         value: SectionCurrencies,
       },
       {
-        key: 'about',
-        label: props.t('app:settings.tabs.about'),
-        value: SectionAbout,
+        key: 'help',
+        label: props.t('app:settings.tabs.help'),
+        value: SectionHelp,
       },
     ]
 

@@ -310,7 +310,7 @@ settings: # Always ensure descriptions carry full stops (.)
     display: General
     currencies: Currencies
     profile: Profile
-    about: Help
+    help: Help
   display:
     desc: Change settings that affect Ledger Live in general.
     language: Display language
@@ -354,7 +354,7 @@ settings: # Always ensure descriptions carry full stops (.)
     analyticsDesc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
     reportErrors: Report bugs
     reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
-  about:
+  help:
     desc: Learn about Ledger Live features or get help.
     version: Version
     releaseNotesBtn: Details # Close button instead of continue.

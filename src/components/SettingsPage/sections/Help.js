@@ -25,23 +25,23 @@ type Props = {
   t: T,
 }
 
-class SectionAbout extends PureComponent<Props> {
+class SectionHelp extends PureComponent<Props> {
   render() {
     const { t } = this.props
     const version = __APP_VERSION__
 
     return (
       <Section>
-        <TrackPage category="Settings" name="About" />
+        <TrackPage category="Settings" name="Help" />
 
         <Header
           icon={<IconHelp size={16} />}
-          title={t('app:settings.tabs.about')}
-          desc={t('app:settings.about.desc')}
+          title={t('app:settings.tabs.help')}
+          desc={t('app:settings.help.desc')}
         />
 
         <Body>
-          <Row title={t('app:settings.about.version')} desc={`Ledger Live ${version}`}>
+          <Row title={t('app:settings.help.version')} desc={`Ledger Live ${version}`}>
             <ReleaseNotesButton />
           </Row>
 
@@ -65,14 +65,14 @@ class SectionAbout extends PureComponent<Props> {
           </Row>
 
           <AboutRowItem
-            title={t('app:settings.about.faq')}
-            desc={t('app:settings.about.faqDesc')}
+            title={t('app:settings.help.faq')}
+            desc={t('app:settings.help.faqDesc')}
             url={urls.faq}
           />
 
           <AboutRowItem
-            title={t('app:settings.about.terms')}
-            desc={t('app:settings.about.termsDesc')}
+            title={t('app:settings.help.terms')}
+            desc={t('app:settings.help.termsDesc')}
             url={urls.terms}
           />
         </Body>
@@ -81,4 +81,4 @@ class SectionAbout extends PureComponent<Props> {
   }
 }
 
-export default translate()(SectionAbout)
+export default translate()(SectionHelp)
