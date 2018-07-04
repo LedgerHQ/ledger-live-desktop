@@ -34,6 +34,7 @@ import Update from 'icons/Update'
 import Trash from 'icons/Trash'
 import CheckCircle from 'icons/CheckCircle'
 
+import { FreezeDeviceChangeEvents } from './HookDeviceChange'
 import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
 
@@ -170,6 +171,7 @@ class AppsList extends PureComponent<Props, State> {
         isOpened={status !== 'idle' && status !== 'loading'}
         render={() => (
           <ModalBody align="center" justify="center" style={{ height: 300 }}>
+            <FreezeDeviceChangeEvents />
             {status === 'busy' || status === 'idle' ? (
               <Fragment>
                 <ModalTitle>
