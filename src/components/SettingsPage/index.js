@@ -14,6 +14,7 @@ import Box from 'components/base/Box'
 import SectionDisplay from './sections/Display'
 import SectionCurrencies from './sections/Currencies'
 import SectionHelp from './sections/Help'
+import SectionAbout from './sections/About'
 import SectionTools from './sections/Tools'
 
 const mapStateToProps = state => ({
@@ -46,6 +47,11 @@ class SettingsPage extends PureComponent<Props, State> {
         key: 'currencies',
         label: props.t('app:settings.tabs.currencies'),
         value: SectionCurrencies,
+      },
+      {
+        key: 'about',
+        label: props.t('app:settings.tabs.about'),
+        value: SectionAbout,
       },
       {
         key: 'help',

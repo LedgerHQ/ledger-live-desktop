@@ -11,7 +11,6 @@ import { urls } from 'config/support'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
-import ReleaseNotesButton from '../ReleaseNotesButton'
 import AboutRowItem from '../AboutRowItem'
 
 import {
@@ -28,7 +27,6 @@ type Props = {
 class SectionHelp extends PureComponent<Props> {
   render() {
     const { t } = this.props
-    const version = __APP_VERSION__
 
     return (
       <Section>
@@ -41,10 +39,6 @@ class SectionHelp extends PureComponent<Props> {
         />
 
         <Body>
-          <Row title={t('app:settings.help.version')} desc={`Ledger Live ${version}`}>
-            <ReleaseNotesButton />
-          </Row>
-
           <Row
             title={t('app:settings.profile.softResetTitle')}
             desc={t('app:settings.profile.softResetDesc')}
@@ -68,12 +62,6 @@ class SectionHelp extends PureComponent<Props> {
             title={t('app:settings.help.faq')}
             desc={t('app:settings.help.faqDesc')}
             url={urls.faq}
-          />
-
-          <AboutRowItem
-            title={t('app:settings.help.terms')}
-            desc={t('app:settings.help.termsDesc')}
-            url={urls.terms}
           />
         </Body>
       </Section>
