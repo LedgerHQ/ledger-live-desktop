@@ -74,7 +74,7 @@ const Container = styled(Box).attrs({
 })``
 
 const Title = styled(Box).attrs({
-  ff: 'Museo Sans|Regular',
+  ff: 'Open Sans|SemiBold',
   fontSize: 6,
   mb: 1,
 })``
