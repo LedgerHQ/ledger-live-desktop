@@ -70,10 +70,21 @@ class StepImport extends PureComponent<StepProps> {
     const { t } = this.props
     let { name } = account
 
+    const isLegacy = name.indexOf('legacy') !== -1
+    const isUnsplit = name.indexOf('unsplit') !== -1
+
     if (name === 'New Account') {
       name = t('app:addAccounts.newAccount')
-    } else if (name.indexOf('legacy') !== -1) {
-      name = t('app:addAccounts.legacyAccount', { accountName: name.replace(' (legacy)', '') })
+    } else if (isLegacy) {
+      if (isUnsplit) {
+        name = t('app:addAccounts.legacyUnsplitAccount', {
+          accountName: name.replace(' (legacy)', '').replace(' (unsplit)', ''),
+        })
+      } else {
+        name = t('app:addAccounts.legacyAccount', { accountName: name.replace(' (legacy)', '') })
+      }
+    } else if (isUnsplit) {
+      name = t('app:addAccounts.unsplitAccount', { accountName: name.replace(' (unsplit)', '') })
     }
 
     return {
