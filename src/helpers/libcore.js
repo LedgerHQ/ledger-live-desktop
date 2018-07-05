@@ -428,7 +428,6 @@ function buildOperationRaw({
   op: NJSOperation,
   xpub: string,
 }): OperationRaw {
-  const id = op.getUid()
   const bitcoinLikeOperation = op.asBitcoinLikeOperation()
   const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
   const hash = bitcoinLikeTransaction.getHash()
@@ -448,6 +447,8 @@ function buildOperationRaw({
     value += fee
   }
 
+  const id = `${xpub}-${hash}-${type}`
+
   return {
     id,
     hash,
@@ -458,7 +459,7 @@ function buildOperationRaw({
     recipients: op.getRecipients(),
     blockHeight: op.getBlockHeight(),
     blockHash: null,
-    accountId: xpub,
+    accountId: xpub, // FIXME accountId: xpub  !?
     date: op.getDate().toISOString(),
   }
 }

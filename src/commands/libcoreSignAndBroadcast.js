@@ -210,7 +210,7 @@ export async function doSignAndBroadcast({
 
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
   onOperationBroadcasted({
-    id: txHash,
+    id: `${account.xpub}-${txHash}-OUT`,
     hash: txHash,
     type: 'OUT',
     value: transaction.amount,
