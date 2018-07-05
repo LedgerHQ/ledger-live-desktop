@@ -120,7 +120,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   handleInstallModal = (stepId: StepId = 'idCheck', shouldFlash?: boolean) =>
     this.setState({ modal: 'install', stepId, shouldFlash, ready: true })
 
-  handleDisclairmerNext = () => this.setState({ modal: 'install' })
+  handleDisclaimerNext = () => this.setState({ modal: 'install' })
 
   render() {
     const { deviceInfo, t } = this.props
@@ -156,7 +156,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
             <DisclaimerModal
               firmware={latestFirmware}
               status={modal}
-              goToNextStep={this.handleDisclairmerNext}
+              goToNextStep={this.handleDisclaimerNext}
               onClose={this.handleCloseModal}
             />
             <UpdateModal
