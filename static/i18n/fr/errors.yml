@@ -5,6 +5,9 @@ BtcUnmatchedApp:
 DeviceNotGenuine:
   title: Possibly not genuine
   description: 'Request Ledger Support assistance.'
+DeviceGenuineSocketEarlyClose:
+  title: Sorry, try again (genuine-close)
+  description:
 DeviceSocketFail:
   title: Oops, try again
   description: 'Some connection failed, so please try again.'
