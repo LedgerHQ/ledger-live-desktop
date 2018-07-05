@@ -3,14 +3,14 @@
 source scripts/hash-utils.sh
 
 function MAIN {
-  if ! $CI; then
+  if [ "$CI" != "1" ]; then
     REBUILD_ELECTRON_NATIVE_DEPS
   fi
   INSTALL_FLOW_TYPED
 }
 
 function INSTALL_FLOW_TYPED {
-  LATEST_FLOW_TYPED_COMMIT_HASH=`curl --silent --header "Accept: application/vnd.github.VERSION.sha" https://api.github.com/repos/flowtype/flow-typed/commits/master`
+  LATEST_FLOW_TYPED_COMMIT_HASH=`curl --silent --header "Accept: application/vnd.github.VERSION.sha" https://api.github.com/repositories/42698429/commits/master`
   CURRENT_FLOW_TYPED_HASH=`GET_HASH 'flow-typed'`
   if [ "$LATEST_FLOW_TYPED_COMMIT_HASH" == "$CURRENT_FLOW_TYPED_HASH" ]; then
     echo "> Flow-typed definitions are up to date. Skipping"
