@@ -3,8 +3,11 @@
 import uuid from 'uuid/v4'
 import logger from 'logger'
 import invariant from 'invariant'
-import { langAndRegionSelector } from 'reducers/settings'
 import { getSystemLocale } from 'helpers/systemLocale'
+import { langAndRegionSelector, shareAnalyticsSelector } from 'reducers/settings'
+import { getCurrentDevice } from 'reducers/devices'
+import type { State } from 'reducers'
+
 import { load } from './inject-in-window'
 
 invariant(typeof window !== 'undefined', 'analytics/segment must be called on renderer thread')
@@ -16,12 +19,19 @@ if (!process.env.STORYBOOK_ENV) {
 
 const sessionId = uuid()
 
-const getContext = store => {
-  const state = store.getState()
+const getContext = _store => ({
+  ip: '0.0.0.0',
+})
+
+const extraProperties = store => {
+  const state: State = store.getState()
   const { language, region } = langAndRegionSelector(state)
   const systemLocale = getSystemLocale()
+  const device = getCurrentDevice(state)
+  const deviceInfo = device && {
+    productId: device.productId,
+  }
   return {
-    ip: '0.0.0.0',
     appVersion: __APP_VERSION__,
     language,
     region,
@@ -29,6 +39,7 @@ const getContext = store => {
     systemLanguage: systemLocale.language,
     systemRegion: systemLocale.region,
     sessionId,
+    ...deviceInfo,
   }
 }
 
@@ -45,13 +56,9 @@ export const start = (store: *) => {
     return
   }
   load()
-  analytics.identify(
-    id,
-    {},
-    {
-      context: getContext(store),
-    },
-  )
+  analytics.identify(id, extraProperties(store), {
+    context: getContext(store),
+  })
 }
 
 export const stop = () => {
@@ -67,7 +74,7 @@ export const stop = () => {
 
 export const track = (event: string, properties: ?Object) => {
   logger.analyticsTrack(event, properties)
-  if (!storeInstance) {
+  if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
     return
   }
   const { analytics } = window
@@ -75,14 +82,21 @@ export const track = (event: string, properties: ?Object) => {
     logger.error('analytics is not available')
     return
   }
-  analytics.track(event, properties, {
-    context: getContext(storeInstance),
-  })
+  analytics.track(
+    event,
+    {
+      ...extraProperties(storeInstance),
+      ...properties,
+    },
+    {
+      context: getContext(storeInstance),
+    },
+  )
 }
 
 export const page = (category: string, name: ?string, properties: ?Object) => {
   logger.analyticsPage(category, name, properties)
-  if (!storeInstance) {
+  if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
     return
   }
   const { analytics } = window
@@ -90,7 +104,15 @@ export const page = (category: string, name: ?string, properties: ?Object) => {
     logger.error('analytics is not available')
     return
   }
-  analytics.page(category, name, properties, {
-    context: getContext(storeInstance),
-  })
+  analytics.page(
+    category,
+    name,
+    {
+      ...extraProperties(storeInstance),
+      ...properties,
+    },
+    {
+      context: getContext(storeInstance),
+    },
+  )
 }

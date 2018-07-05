@@ -10,6 +10,7 @@ import FormattedVal from 'components/base/FormattedVal'
 import Text from 'components/base/Text'
 import CounterValue from 'components/CounterValue'
 import Spinner from 'components/base/Spinner'
+import TrackPage from 'analytics/TrackPage'
 
 import RecipientField from '../fields/RecipientField'
 import AmountField from '../fields/AmountField'
@@ -34,6 +35,7 @@ export default ({
 
   return (
     <Box flow={4}>
+      <TrackPage category="Send Flow" name="Step 1" />
       <Box flow={1}>
         <Label>{t('app:send.steps.amount.selectAccountDebit')}</Label>
         <SelectAccount autoFocus={!openedFromAccount} onChange={onChangeAccount} value={account} />

@@ -6,13 +6,14 @@ import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
 import invariant from 'invariant'
-import logger from 'logger'
 
 import type { Device, T } from 'types/common'
 
 import type { LedgerScriptParams } from 'helpers/common'
+import type { StepId } from 'components/modals/UpdateFirmware'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
+import shouldFlashMcu from 'commands/shouldFlashMcu'
 import installOsuFirmware from 'commands/installOsuFirmware'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
@@ -25,6 +26,7 @@ import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 
 import NanoS from 'icons/device/NanoS'
+import Blue from 'icons/device/Blue'
 import CheckFull from 'icons/CheckFull'
 
 import UpdateFirmwareButton from './UpdateFirmwareButton'
@@ -37,26 +39,36 @@ export type ModalStatus = 'closed' | 'disclaimer' | 'install' | 'error' | 'succe
 type Props = {
   t: T,
   deviceInfo: DeviceInfo,
+  device: Device,
 }
 
 type State = {
-  latestFirmware: ?LedgerScriptParams & ?{ shouldUpdateMcu: boolean },
+  latestFirmware: ?LedgerScriptParams & ?{ shouldFlashMcu: boolean },
   modal: ModalStatus,
+  stepId: ?StepId,
+  shouldFlash: boolean,
+  ready: boolean,
 }
 
+const intializeState = ({ deviceInfo }): State => ({
+  latestFirmware: null,
+  modal: 'closed',
+  stepId: deviceInfo.isBootloader ? 'updateMCU' : 'idCheck',
+  shouldFlash: false,
+  ready: false,
+})
+
 class FirmwareUpdate extends PureComponent<Props, State> {
-  state = {
-    latestFirmware: null,
-    modal: 'closed',
-  }
+  state = intializeState(this.props)
 
   componentDidMount() {
-    this.fetchLatestFirmware()
-  }
-
-  componentDidUpdate() {
-    if (isEmpty(this.state.latestFirmware)) {
+    const { deviceInfo } = this.props
+    if (!deviceInfo.isOSU && !deviceInfo.isBootloader) {
       this.fetchLatestFirmware()
+    } else if (deviceInfo.isOSU) {
+      this.shouldFlashMcu()
+    } else if (deviceInfo.isBootloader) {
+      this.handleInstallModal('updateMCU', true)
     }
   }
 
@@ -74,61 +86,61 @@ class FirmwareUpdate extends PureComponent<Props, State> {
       !isEqual(this.state.latestFirmware, latestFirmware) &&
       !this._unmounting
     ) {
-      this.setState({ latestFirmware })
+      this.setState({ latestFirmware, ready: true })
+    }
+  }
+
+  shouldFlashMcu = async () => {
+    const { deviceInfo } = this.props
+    const shouldFlash = await shouldFlashMcu.send(deviceInfo).toPromise()
+    if (!this._unmounting) {
+      this.setState({ shouldFlash, modal: 'install', stepId: 'idCheck', ready: true })
     }
   }
 
   installOsuFirmware = async (device: Device) => {
-    try {
-      const { latestFirmware } = this.state
-      const { deviceInfo } = this.props
-      invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
+    const { latestFirmware } = this.state
+    const { deviceInfo } = this.props
+    invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
 
-      this.setState({ modal: 'install' })
-      const { success } = await installOsuFirmware
-        .send({ devicePath: device.path, firmware: latestFirmware, targetId: deviceInfo.targetId })
-        .toPromise()
-      return success
-    } catch (err) {
-      logger.log(err)
-      throw err
-    }
+    this.setState({ modal: 'install' })
+    const result = await installOsuFirmware
+      .send({ devicePath: device.path, firmware: latestFirmware, targetId: deviceInfo.targetId })
+      .toPromise()
+
+    return result
   }
 
-  installFinalFirmware = async (device: Device) => {
-    try {
-      const { success } = await installFinalFirmware.send({ devicePath: device.path }).toPromise()
-      return success
-    } catch (err) {
-      logger.log(err)
-      throw err
-    }
-  }
+  installFinalFirmware = (device: Device) =>
+    installFinalFirmware.send({ devicePath: device.path }).toPromise()
 
-  flashMCU = async (device: Device) => {
-    await installMcu.send({ devicePath: device.path }).toPromise()
-  }
+  flashMCU = async (device: Device) => installMcu.send({ devicePath: device.path }).toPromise()
 
   handleCloseModal = () => this.setState({ modal: 'closed' })
 
   handleDisclaimerModal = () => this.setState({ modal: 'disclaimer' })
-  handleInstallModal = () => this.setState({ modal: 'install' })
+  handleInstallModal = (stepId: StepId = 'idCheck', shouldFlash?: boolean) =>
+    this.setState({ modal: 'install', stepId, shouldFlash, ready: true })
+
+  handleDisclaimerNext = () => this.setState({ modal: 'install' })
 
   render() {
-    const { deviceInfo, t } = this.props
-    const { latestFirmware, modal } = this.state
+    const { deviceInfo, t, device } = this.props
+    const { latestFirmware, modal, stepId, shouldFlash, ready } = this.state
     return (
       <Card p={4}>
         <Box horizontal align="center" flow={2}>
           <Box color="dark">
-            <NanoS size={30} />
+            {device.product === 'Blue' ? <Blue size={30} /> : <NanoS size={30} />}
           </Box>
           <Box>
             <Box horizontal align="center">
               <Text ff="Open Sans|SemiBold" fontSize={4} color="dark">
-                Ledger Nano S
+                {device.product === 'Blue'
+                  ? t('app:manager.firmware.titleBlue')
+                  : t('app:manager.firmware.titleNano')}
               </Text>
-              <Box color="wallet" style={{ marginLeft: 10 }}>
+              <Box color="wallet" ml={2}>
                 <Tooltip render={() => t('app:manager.yourDeviceIsGenuine')}>
                   <CheckFull size={13} color="wallet" />
                 </Tooltip>
@@ -142,24 +154,26 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           </Box>
           <UpdateFirmwareButton firmware={latestFirmware} onClick={this.handleDisclaimerModal} />
         </Box>
-        {latestFirmware && (
+        {ready ? (
           <Fragment>
             <DisclaimerModal
               firmware={latestFirmware}
               status={modal}
-              goToNextStep={this.handleInstallModal}
+              goToNextStep={this.handleDisclaimerNext}
               onClose={this.handleCloseModal}
             />
             <UpdateModal
               status={modal}
+              stepId={stepId}
               onClose={this.handleCloseModal}
               firmware={latestFirmware}
+              shouldFlashMcu={shouldFlash}
               installOsuFirmware={this.installOsuFirmware}
               installFinalFirmware={this.installFinalFirmware}
               flashMCU={this.flashMCU}
             />
           </Fragment>
-        )}
+        ) : null}
       </Card>
     )
   }

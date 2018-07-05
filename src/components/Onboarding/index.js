@@ -25,9 +25,7 @@ import { getCurrentDevice } from 'reducers/devices'
 
 import { unlock } from 'reducers/application'
 
-import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
-import TriggerAppReady from '../TriggerAppReady'
 
 import Start from './steps/Start'
 import InitStep from './steps/Init'
@@ -96,6 +94,7 @@ export type StepProps = {
   savePassword: Function,
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
+  openModal: Function,
   isLedgerNano: Function,
   flowType: Function,
 }
@@ -145,6 +144,7 @@ class Onboarding extends PureComponent<Props> {
       onboarding,
       settings,
       updateGenuineCheck,
+      openModal,
       isLedgerNano,
       flowType,
       prevStep,
@@ -158,9 +158,6 @@ class Onboarding extends PureComponent<Props> {
 
     return (
       <Container>
-        <TriggerAppReady />
-        <ExportLogsBtn hookToShortcut />
-
         {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
         <StepContainer>
           <StepComponent {...stepProps} />

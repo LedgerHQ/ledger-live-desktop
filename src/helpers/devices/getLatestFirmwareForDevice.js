@@ -49,11 +49,11 @@ export default async (deviceInfo: DeviceInfo) => {
     if (!seFirmwareFinalVersion.mcu_versions.includes(...currentMcuVersionId)) {
       return {
         ...se_firmware_osu_version,
-        shouldUpdateMcu: true,
+        shouldFlashMcu: true,
       }
     }
 
-    return { ...se_firmware_osu_version, shouldUpdateMcu: false }
+    return { ...se_firmware_osu_version, shouldFlashMcu: false }
   } catch (err) {
     const error = Error(err.message)
     error.stack = err.stack

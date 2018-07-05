@@ -5,6 +5,9 @@ const commonConfig = {
   fallbackLng: 'en',
   debug: false,
   compatibilityJSON: 'v2',
+  interpolation: {
+    escapeValue: false, // not needed for react!!
+  },
   react: {
     wait: process.env.NODE_ENV !== 'test',
   },

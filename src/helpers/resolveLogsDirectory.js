@@ -15,7 +15,6 @@ export default resolveLogsDirectory
 export const RotatingLogFileParameters = {
   filename: 'application-%DATE%.log',
   datePattern: 'YYYY-MM-DD',
-  zippedArchive: true,
   maxSize: '20m',
   maxFiles: '14d',
 }

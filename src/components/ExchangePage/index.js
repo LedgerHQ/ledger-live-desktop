@@ -44,13 +44,13 @@ class ExchangePage extends PureComponent<Props> {
     return (
       <Box pb={6}>
         <TrackPage category="Exchange" />
-        <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={3}>
+        <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
           {t('app:exchange.title')}
         </Box>
-        <Box ff="Museo Sans|Light" color="grey" fontSize={5} mb={5}>
+        <Box ff="Museo Sans|Light" fontSize={5} mb={5}>
           {t('app:exchange.desc')}
         </Box>
-        <Box flow={5}>{cards.map(card => <ExchangeCard key={card.key} t={t} card={card} />)}</Box>
+        <Box flow={3}>{cards.map(card => <ExchangeCard key={card.key} t={t} card={card} />)}</Box>
       </Box>
     )
   }

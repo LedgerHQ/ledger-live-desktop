@@ -12,23 +12,12 @@ import type { StepProps as DefaultStepProps, Step } from 'components/base/Steppe
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
 import type { LedgerScriptParams } from 'helpers/common'
 
+import { FreezeDeviceChangeEvents } from '../../ManagerPage/HookDeviceChange'
 import StepFullFirmwareInstall from './steps/01-step-install-full-firmware'
 import StepFlashMcu from './steps/02-step-flash-mcu'
 import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmation'
 
-export type Firmware = LedgerScriptParams & { shouldUpdateMcu: boolean }
-
-export type StepProps = DefaultStepProps & {
-  firmware: Firmware,
-  onCloseModal: () => void,
-  installOsuFirmware: (device: Device) => void,
-  installFinalFirmware: (device: Device) => void,
-  flashMCU: (device: Device) => void,
-}
-
-type StepId = 'idCheck' | 'updateMCU' | 'finish'
-
-const createSteps = ({ t, firmware }: { t: T, firmware: Firmware }): Array<*> => {
+const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): Array<*> => {
   const updateStep = {
     id: 'idCheck',
     label: t('app:manager.modal.steps.idCheck'),
@@ -58,7 +47,7 @@ const createSteps = ({ t, firmware }: { t: T, firmware: Firmware }): Array<*> =>
 
   const steps = [updateStep]
 
-  if (firmware.shouldUpdateMcu) {
+  if (shouldFlashMcu) {
     steps.push(mcuStep)
   }
 
@@ -67,11 +56,27 @@ const createSteps = ({ t, firmware }: { t: T, firmware: Firmware }): Array<*> =>
   return steps
 }
 
+export type Firmware = LedgerScriptParams & { shouldFlashMcu: boolean }
+
+export type StepProps = DefaultStepProps & {
+  firmware: Firmware,
+  onCloseModal: () => void,
+  installOsuFirmware: (device: Device) => void,
+  installFinalFirmware: (device: Device) => void,
+  flashMCU: (device: Device) => void,
+  shouldFlashMcu: boolean,
+  error: ?Error,
+  setError: Error => void,
+}
+
+export type StepId = 'idCheck' | 'updateMCU' | 'finish'
+
 type Props = {
   t: T,
   status: ModalStatus,
   onClose: () => void,
   firmware: Firmware,
+  shouldFlashMcu: boolean,
   installOsuFirmware: (device: Device) => void,
   installFinalFirmware: (device: Device) => void,
   flashMCU: (device: Device) => void,
@@ -80,44 +85,59 @@ type Props = {
 
 type State = {
   stepId: StepId | string,
+  error: ?Error,
+  nonce: number,
 }
 
 class UpdateModal extends PureComponent<Props, State> {
-  static defaultProps = {
-    stepId: 'idCheck',
-  }
-
   state = {
     stepId: this.props.stepId,
+    error: null,
+    nonce: 0,
   }
 
-  STEPS = createSteps({ t: this.props.t, firmware: this.props.firmware })
+  STEPS = createSteps({
+    t: this.props.t,
+    shouldFlashMcu: this.props.firmware
+      ? this.props.firmware.shouldFlashMcu
+      : this.props.shouldFlashMcu,
+  })
+
+  setError = (e: Error) => this.setState({ error: e })
+
+  handleReset = () => this.setState({ stepId: 'idCheck', error: null, nonce: this.state.nonce++ })
 
   handleStepChange = (step: Step) => this.setState({ stepId: step.id })
 
   render(): React$Node {
     const { status, t, firmware, onClose, ...props } = this.props
-    const { stepId } = this.state
+    const { stepId, error, nonce } = this.state
 
     const additionalProps = {
       firmware,
+      error,
       onCloseModal: onClose,
+      setError: this.setError,
       ...props,
     }
 
     return (
       <Modal
         onClose={onClose}
+        onHide={this.handleReset}
         isOpened={status === 'install'}
         refocusWhenChange={stepId}
-        preventBackdropClick={false}
+        preventBackdropClick={stepId !== 'finish' && !error}
         render={() => (
           <Stepper
+            key={nonce}
+            onStepChange={this.handleStepChange}
             title={t('app:manager.firmware.update')}
-            initialStepId="idCheck"
+            initialStepId={stepId}
             steps={this.STEPS}
             {...additionalProps}
           >
+            <FreezeDeviceChangeEvents />
             <SyncSkipUnderPriority priority={100} />
           </Stepper>
         )}

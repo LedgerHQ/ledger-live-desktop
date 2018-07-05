@@ -18,18 +18,17 @@ import QRCode from 'components/base/QRCode'
 
 import IconRecheck from 'icons/Recover'
 import IconCopy from 'icons/Copy'
-import IconInfoCircle from 'icons/InfoCircle'
 import IconShield from 'icons/Shield'
 
 const Container = styled(Box).attrs({
   borderRadius: 1,
   alignItems: 'center',
-  bg: p =>
-    p.withQRCode ? (p.notValid ? rgba(p.theme.colors.alertRed, 0.02) : 'lightGrey') : 'transparent',
-  py: 4,
-  px: 5,
+  bg: p => (p.isAddressVerified === false ? rgba(p.theme.colors.alertRed, 0.02) : 'lightGrey'),
+  p: 6,
+  pb: 4,
 })`
-  border: ${p => (p.notValid ? `1px dashed ${rgba(p.theme.colors.alertRed, 0.5)}` : 'none')};
+  border: ${p =>
+    p.isAddressVerified === false ? `1px dashed ${rgba(p.theme.colors.alertRed, 0.5)}` : 'none'};
 `
 
 const Address = styled(Box).attrs({
@@ -46,6 +45,8 @@ const Address = styled(Box).attrs({
   border: ${p => `1px dashed ${p.theme.colors.fog}`};
   cursor: text;
   user-select: text;
+  text-align: center;
+  min-width: 320px;
 `
 
 const CopyFeedback = styled(Box).attrs({
@@ -66,7 +67,6 @@ const Label = styled(Box).attrs({
   strong {
     color: ${p => p.theme.colors.dark};
     font-weight: 600;
-    border-bottom: 1px dashed ${p => p.theme.colors.dark};
   }
 `
 
@@ -127,31 +127,17 @@ const FooterButton = ({
 type Props = {
   account: Account,
   address: string,
-  amount?: number,
-  addressVerified?: boolean,
+  isAddressVerified?: boolean,
   onCopy: () => void,
-  onPrint: () => void,
-  onShare: () => void,
   onVerify: () => void,
   t: T,
-  withBadge: boolean,
-  withFooter: boolean,
-  withQRCode: boolean,
-  withVerify: boolean,
 }
 
 class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
   static defaultProps = {
     addressVerified: null,
-    amount: null,
     onCopy: noop,
-    onPrint: noop,
-    onShare: noop,
     onVerify: noop,
-    withBadge: false,
-    withFooter: false,
-    withQRCode: false,
-    withVerify: false,
   }
 
   state = {
@@ -164,38 +150,28 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
     const {
       account: { name: accountName, currency },
       address,
-      addressVerified,
-      amount,
       onCopy,
-      onPrint,
-      onShare,
       onVerify,
+      isAddressVerified,
       t,
-      withBadge,
-      withFooter,
-      withQRCode,
-      withVerify,
       ...props
     } = this.props
 
+    const currencyName = currency.name
+
     const { copyFeedback } = this.state
 
-    const notValid = addressVerified === false
-
     return (
-      <Container withQRCode={withQRCode} notValid={notValid} {...props}>
-        {withQRCode && (
-          <Box mb={4}>
-            <QRCode
-              size={120}
-              data={encodeURIScheme({
-                address,
-                amount,
-                currency,
-              })}
-            />
-          </Box>
-        )}
+      <Container isAddressVerified={isAddressVerified} {...props}>
+        <Box mb={4}>
+          <QRCode
+            size={120}
+            data={encodeURIScheme({
+              address,
+              currency,
+            })}
+          />
+        </Box>
         <Label>
           <Box>
             {accountName ? (
@@ -207,48 +183,56 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
               t('app:currentAddress.title')
             )}
           </Box>
-          <IconInfoCircle size={12} />
         </Label>
-        <Address withQRCode={withQRCode} notValid={notValid}>
+        <Address>
           {copyFeedback && <CopyFeedback>{t('app:common.addressCopied')}</CopyFeedback>}
           {address}
         </Address>
-        {withBadge && (
-          <Box horizontal flow={2} mt={2} alignItems="center">
-            <Box color={notValid ? 'alertRed' : 'wallet'}>
-              <IconShield height={32} width={28} />
-            </Box>
-            <Box shrink fontSize={12} color={notValid ? 'alertRed' : 'dark'} ff="Open Sans">
-              {t('app:currentAddress.message')}
-            </Box>
+        <Box horizontal flow={2} mt={2} alignItems="center" style={{ maxWidth: 320 }}>
+          <Box color={isAddressVerified === false ? 'alertRed' : 'wallet'}>
+            <IconShield height={32} width={28} />
           </Box>
-        )}
-        {withFooter && (
-          <Footer>
+          <Box
+            shrink
+            fontSize={12}
+            color={isAddressVerified === false ? 'alertRed' : 'dark'}
+            ff="Open Sans"
+          >
+            {isAddressVerified === null
+              ? t('app:currentAddress.messageIfUnverified', { currencyName })
+              : isAddressVerified
+                ? t('app:currentAddress.messageIfAccepted', { currencyName })
+                : t('app:currentAddress.messageIfSkipped', { currencyName })}
+          </Box>
+        </Box>
+        <Footer>
+          {isAddressVerified !== null ? (
             <FooterButton
               icon={<IconRecheck size={16} />}
-              label={notValid ? t('app:common.verify') : t('app:common.reverify')}
+              label={
+                isAddressVerified === false ? t('app:common.verify') : t('app:common.reverify')
+              }
               onClick={onVerify}
             />
-            <CopyToClipboard
-              data={address}
-              render={copy => (
-                <FooterButton
-                  icon={<IconCopy size={16} />}
-                  label={t('app:common.copy')}
-                  onClick={() => {
-                    this.setState({ copyFeedback: true })
-                    setTimeout(() => {
-                      if (this._isUnmounted) return
-                      this.setState({ copyFeedback: false })
-                    }, 1e3)
-                    copy()
-                  }}
-                />
-              )}
-            />
-          </Footer>
-        )}
+          ) : null}
+          <CopyToClipboard
+            data={address}
+            render={copy => (
+              <FooterButton
+                icon={<IconCopy size={16} />}
+                label={t('app:common.copyAddress')}
+                onClick={() => {
+                  this.setState({ copyFeedback: true })
+                  setTimeout(() => {
+                    if (this._isUnmounted) return
+                    this.setState({ copyFeedback: false })
+                  }, 1e3)
+                  copy()
+                }}
+              />
+            )}
+          />
+        </Footer>
       </Container>
     )
   }

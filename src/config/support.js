@@ -1,0 +1,20 @@
+// @flow
+
+export const urls = {
+  twitter: 'https://twitter.com/LedgerHQ',
+  github: 'https://github.com/LedgerHQ/ledger-live-desktop',
+  reddit: 'https://www.reddit.com/r/ledgerwallet/',
+  faq: 'https://support.ledgerwallet.com/hc/en-us',
+  terms: 'https://www.ledgerwallet.com/terms',
+  noDeviceBuyNew: 'https://www.ledgerwallet.com/',
+  noDeviceTrackOrder: 'https://order.ledgerwallet.com/',
+  noDeviceLearnMore: 'https://www.ledgerwallet.com/',
+  managerHelpRequest: 'https://support.ledgerwallet.com/hc/en-us/articles/360006523674 ',
+  genuineCheckContactSupport:
+    'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
+  feesMoreInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006535873',
+  recipientAddressInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006433934',
+  // should join and generalize naming for the same urls once defined
+  receiveFlowContactSupport:
+    'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
+}

@@ -24,27 +24,28 @@ import Text from 'components/base/Text'
 
 import IconUsb from 'icons/Usb'
 import IconHome from 'icons/Home'
-import IconGenuineCheck from 'icons/GenuineCheck'
+import IconCheck from 'icons/Check'
 
 const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
+const DeviceGenuineSocketEarlyClose = createCustomErrorClass('DeviceGenuineSocketEarlyClose')
 
 type Props = {
   t: T,
-  onSuccess: void => void,
   onFail?: Error => void,
   onUnavailable?: Error => void,
+  onSuccess: (*) => void,
   device: ?Device,
 }
 
-const usbIcon = <IconUsb size={26} />
-const homeIcon = <IconHome size={24} />
-const genuineCheckIcon = <IconGenuineCheck size={24} />
+const usbIcon = <IconUsb size={16} />
+const homeIcon = <IconHome size={16} />
+const genuineCheckIcon = <IconCheck size={16} />
 
 const mapStateToProps = state => ({
   device: getCurrentDevice(state),
 })
 
-const Bold = props => <Text ff="Open Sans|Bold" {...props} />
+const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
 
 // to speed up genuine check, cache result by device id
 const genuineDevices = new WeakSet()
@@ -72,15 +73,30 @@ class GenuineCheck extends PureComponent<Props> {
     device: Device,
     deviceInfo: DeviceInfo,
   }) => {
+    if (deviceInfo.isOSU || deviceInfo.isBootloader) {
+      logger.log('device is in update mode. skipping genuine')
+      return true
+    }
+
     if (genuineDevices.has(device)) {
       logger.log("genuine was already checked. don't check again")
       await delay(GENUINE_CACHE_DELAY)
       return true
     }
+
+    const beforeDate = Date.now()
+
     const res = await getIsGenuine
       .send({ devicePath: device.path, deviceInfo })
       .pipe(timeout(GENUINE_TIMEOUT))
       .toPromise()
+
+    logger.log(`genuine check resulted ${res} after ${(Date.now() - beforeDate) / 1000}s`, {
+      deviceInfo,
+    })
+    if (!res) {
+      throw new DeviceGenuineSocketEarlyClose()
+    }
     const isGenuine = res === '0000'
     if (!isGenuine) {
       throw new DeviceNotGenuineError()

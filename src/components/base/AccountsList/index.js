@@ -86,6 +86,7 @@ class AccountsList extends Component<
             {withToggleAll && (
               <FakeLink
                 ml="auto"
+                ff="Museo Sans|Regular"
                 onClick={isAllSelected ? this.onUnselectAll : this.onSelectAll}
                 fontSize={3}
                 style={{ lineHeight: '10px' }}

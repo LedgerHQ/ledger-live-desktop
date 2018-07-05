@@ -25,6 +25,7 @@ import IconAngleDown from 'icons/AngleDown'
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 import Track from 'analytics/Track'
+import { track } from 'analytics/segment'
 
 import SectionTitle from './SectionTitle'
 import OperationC from './Operation'
@@ -81,6 +82,7 @@ export class OperationsList extends PureComponent<Props, State> {
 
   // TODO: convert of async/await if fetching with the api
   fetchMoreOperations = () => {
+    track('FetchMoreOperations')
     this.setState({ nbToShow: this.state.nbToShow + 20 })
   }
 

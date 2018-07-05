@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Component } from 'react'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import styled from 'styled-components'
 import { i } from 'helpers/staticPath'
+import { urls } from 'config/support'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -32,21 +33,21 @@ const socialMedia = [
   // FIXME it should just be vdom in place
   {
     key: 'twitter',
-    url: 'https://twitter.com/LedgerHQ',
+    url: urls.twitter,
     icon: <IconSocialTwitter size={24} />,
-    onClick: url => shell.openExternal(url),
+    onClick: url => openURL(url),
   },
   {
     key: 'github',
-    url: 'https://github.com/LedgerHQ/ledger-live-desktop',
+    url: urls.github,
     icon: <IconSocialGithub size={24} />,
-    onClick: url => shell.openExternal(url),
+    onClick: url => openURL(url),
   },
   {
     key: 'reddit',
-    url: 'https://www.reddit.com/r/ledgerwallet/',
+    url: urls.reddit,
     icon: <IconSocialReddit size={24} />,
-    onClick: url => shell.openExternal(url),
+    onClick: url => openURL(url),
   },
 ]
 

@@ -49,6 +49,7 @@ class ResetButton extends PureComponent<Props, State> {
         </Button>
 
         <ConfirmModal
+          analyticsName="HardReset"
           isDanger
           isLoading={pending}
           isOpened={opened}

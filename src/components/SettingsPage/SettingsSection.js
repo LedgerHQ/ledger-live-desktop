@@ -24,8 +24,8 @@ const RoundIconContainer = styled(Box).attrs({
   bg: p => rgba(p.theme.colors.wallet, 0.2),
   color: 'wallet',
 })`
-  height: 30px;
-  width: 30px;
+  height: 34px;
+  width: 34px;
   border-radius: 50%;
 `
 
@@ -106,7 +106,7 @@ export function SettingsSectionRow({
         <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {title}
         </Box>
-        <Box ff="Open Sans" fontSize={3} color="grey" mt={1} mr={1}>
+        <Box ff="Open Sans" fontSize={3} color="grey" mt={1} mr={1} style={{ maxWidth: 520 }}>
           {desc}
         </Box>
       </Box>

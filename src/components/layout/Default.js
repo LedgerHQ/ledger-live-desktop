@@ -1,5 +1,6 @@
 // @flow
 
+import { remote } from 'electron'
 import React, { Fragment, Component } from 'react'
 import { compose } from 'redux'
 import styled from 'styled-components'
@@ -18,11 +19,13 @@ import DashboardPage from 'components/DashboardPage'
 import ManagerPage from 'components/ManagerPage'
 import ExchangePage from 'components/ExchangePage'
 import SettingsPage from 'components/SettingsPage'
+import KeyboardContent from 'components/KeyboardContent'
+import PerfIndicator from 'components/PerfIndicator'
 import LibcoreBusyIndicator from 'components/LibcoreBusyIndicator'
 import DeviceBusyIndicator from 'components/DeviceBusyIndicator'
 import TriggerAppReady from 'components/TriggerAppReady'
 import ExportLogsBtn from 'components/ExportLogsBtn'
-
+import OnboardingOrElse from 'components/OnboardingOrElse'
 import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/MainSideBar'
@@ -68,6 +71,8 @@ class Default extends Component<Props> {
   kbShortcut = event => {
     if (event.ctrlKey && event.key === 'l') {
       this.props.i18n.reloadResources()
+    } else if ((event.ctrlKey || event.metaKey) && event.key === 'r') {
+      remote.getCurrentWindow().webContents.reload()
     }
   }
 
@@ -80,33 +85,38 @@ class Default extends Component<Props> {
         {process.platform === 'darwin' && <AppRegionDrag />}
         <ExportLogsBtn hookToShortcut />
 
-        <IsUnlocked>
-          {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
-            <ModalComponent key={name} />
-          ))}
+        <OnboardingOrElse>
+          <IsUnlocked>
+            {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
+              <ModalComponent key={name} />
+            ))}
 
-          <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
+            <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
 
-          <div id="sticky-back-to-top-root" />
+            <div id="sticky-back-to-top-root" />
 
-          <Box grow horizontal bg="white">
-            <SideBar />
+            <Box grow horizontal bg="white">
+              <SideBar />
 
-            <Box shrink grow bg="lightGrey" color="grey" overflow="hidden" relative>
-              <TopBar />
-              <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
-                <Route path="/" exact component={DashboardPage} />
-                <Route path="/settings" component={SettingsPage} />
-                <Route path="/manager" component={ManagerPage} />
-                <Route path="/exchange" component={ExchangePage} />
-                <Route path="/account/:id" component={AccountPage} />
-              </Main>
+              <Box shrink grow bg="lightGrey" color="grey" overflow="hidden" relative>
+                <TopBar />
+                <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
+                  <Route path="/" exact component={DashboardPage} />
+                  <Route path="/settings" component={SettingsPage} />
+                  <Route path="/manager" component={ManagerPage} />
+                  <Route path="/exchange" component={ExchangePage} />
+                  <Route path="/account/:id" component={AccountPage} />
+                </Main>
+              </Box>
             </Box>
-          </Box>
 
-          <LibcoreBusyIndicator />
-          <DeviceBusyIndicator />
-        </IsUnlocked>
+            <LibcoreBusyIndicator />
+            <DeviceBusyIndicator />
+            <KeyboardContent sequence="BJBJBJ">
+              <PerfIndicator />
+            </KeyboardContent>
+          </IsUnlocked>
+        </OnboardingOrElse>
       </Fragment>
     )
   }

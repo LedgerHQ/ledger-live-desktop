@@ -15,8 +15,9 @@ const Base = styled(Tabbable).attrs({
   width: 50px;
   height: 26px;
   border-radius: 13px;
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
   transition: 250ms linear background-color;
-  cursor: pointer;
+  cursor: ${p => (p.disabled ? 'cursor' : 'pointer')};
   &:focus {
     outline: none;
   }

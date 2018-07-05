@@ -22,16 +22,15 @@ class ManagerGenuineCheck extends PureComponent<Props> {
   render() {
     const { t, onSuccess } = this.props
     return (
-      <Box align="center">
+      <Box align="center" py={7}>
         <TrackPage category="Manager" name="Genuine Check" />
-        <Space of={60} />
         <Box align="center" style={{ maxWidth: 460 }}>
           <img
             src={i('logos/connectDevice.png')}
             alt="connect your device"
             style={{ marginBottom: 30, maxWidth: 362, width: '100%' }}
           />
-          <Text ff="Museo Sans|Regular" fontSize={7} color="black" style={{ marginBottom: 10 }}>
+          <Text ff="Museo Sans|Regular" fontSize={7} color="dark" style={{ marginBottom: 10 }}>
             {t('app:manager.device.title')}
           </Text>
           <Text ff="Museo Sans|Light" fontSize={5} color="grey" align="center">

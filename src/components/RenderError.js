@@ -2,7 +2,8 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { shell, remote } from 'electron'
+import { openURL } from 'helpers/linking'
+import { remote } from 'electron'
 import qs from 'querystring'
 import { translate } from 'react-i18next'
 
@@ -60,7 +61,7 @@ ${error.stack}
 \`\`\`
 `,
     })
-    shell.openExternal(`https://github.com/LedgerHQ/ledger-live-desktop/issues/new?${q}`)
+    openURL(`https://github.com/LedgerHQ/ledger-live-desktop/issues/new?${q}`)
   }
 
   handleRestart = () => {
@@ -112,6 +113,7 @@ ${error.stack}
           </Button>
         </Box>
         <ConfirmModal
+          analyticsName="HardReset"
           isDanger
           isLoading={isHardResetting}
           isOpened={isHardResetModalOpened}

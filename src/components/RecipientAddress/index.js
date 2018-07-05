@@ -11,6 +11,7 @@ import { radii } from 'styles/theme'
 import QRCodeCameraPickerCanvas from 'components/QRCodeCameraPickerCanvas'
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
+import { track } from 'analytics/segment'
 
 import IconQrCode from 'icons/QrCode'
 
@@ -64,10 +65,13 @@ class RecipientAddress extends PureComponent<Props, State> {
     qrReaderOpened: false,
   }
 
-  handleClickQrCode = () =>
+  handleClickQrCode = () => {
+    const { qrReaderOpened } = this.state
     this.setState(prev => ({
       qrReaderOpened: !prev.qrReaderOpened,
     }))
+    !qrReaderOpened ? track('Send Flow QR Code Opened') : track('Send Flow QR Code Closed')
+  }
 
   handleOnPick = (code: string) => {
     const { address, ...rest } = decodeURIScheme(code)

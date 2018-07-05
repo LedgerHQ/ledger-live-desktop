@@ -16,8 +16,8 @@ export default async (bootloaderVersion: string): Promise<*> => {
       },
     })
 
-    // FIXME: nextVersion will not be able to "default" when Error
-    // handling is standardize on the API side
+    // FIXME: nextVersion will not be able to "default" when
+    // Error handling is standardize on the API side
     if (data === 'default' || !data.name) {
       throw new LatestMCUInstalledError('there is no next mcu version to install')
     }

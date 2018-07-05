@@ -1,10 +1,11 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { shell } from 'electron'
+import { openURL } from 'helpers/linking'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { colors } from 'styles/theme'
+import { urls } from 'config/support'
 
 import { updateGenuineCheck } from 'reducers/onboarding'
 
@@ -143,9 +144,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   contactSupport = () => {
-    const contactSupportUrl =
-      'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165'
-    shell.openExternal(contactSupportUrl)
+    openURL(urls.genuineCheckContactSupport)
   }
 
   handlePrevStep = () => {

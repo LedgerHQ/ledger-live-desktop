@@ -20,6 +20,12 @@ DisconnectedDevice:
 Error:
   title: '{{message}}'
   description: Something went wrong. Please retry or contact us.
+TypeError:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
+ReferenceError:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
 FeeEstimationFailed:
   title: Sorry, fee estimation failed
   description: 'Try setting a custom fee (status: {{status}})'
@@ -56,7 +62,7 @@ ManagerDeviceLocked:
 ManagerNotEnoughSpace:
   title: Sorry, insufficient device storage
   description: Uninstall some apps to increase available storage and try again.
-ManagerUnexpectedError:
+ManagerUnexpected:
   title: That's unexpected ({{msg}})
   description: Please try again.
 ManagerUninstallBTCDep:
@@ -83,12 +89,15 @@ TransportError:
 TransportStatusError:
   title: 'Something went wrong. Please replug your device.'
   description: '{{message}}'
+UserRefusedFirmwareUpdate:
+  title: Firmware update refused on device
+  description: Please retry or contact Ledger Support
 UserRefusedOnDevice:
   title: Transaction refused on device
   description: Please retry or contact Ledger Support in case of doubt.
 UserRefusedAddress:
   title: Receive address rejected
-  description: Please try again or contact Support
+  description: Please try again or contact Ledger Support
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
   description:

@@ -190,6 +190,7 @@ class AddAccounts extends PureComponent<Props, State> {
 
   handleResetScanState = () => {
     this.setState({
+      isAppOpened: false,
       scanStatus: 'idle',
       err: null,
       scannedAccounts: [],

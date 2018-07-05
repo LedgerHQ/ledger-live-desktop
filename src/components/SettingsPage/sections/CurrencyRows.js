@@ -12,6 +12,7 @@ import type { SettingsState, CurrencySettings } from 'reducers/settings'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 import StepperNumber from 'components/base/StepperNumber'
 import ExchangeSelect from 'components/SelectExchange'
+import Track from 'analytics/Track'
 
 import { SettingsSectionRow as Row } from '../SettingsSection'
 
@@ -87,6 +88,7 @@ class CurrencyRows extends PureComponent<Props> {
             title={t('app:settings.currencies.confirmationsNb')}
             desc={t('app:settings.currencies.confirmationsNbDesc')}
           >
+            <Track onUpdate event="ConfirmationsNb" confirmationsNb={confirmationsNb} />
             <StepperNumber
               min={defaults.confirmationsNb.min}
               max={defaults.confirmationsNb.max}

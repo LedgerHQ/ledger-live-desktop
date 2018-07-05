@@ -11,13 +11,15 @@ import { getCurrentDevice } from 'reducers/devices'
 import { createCancelablePolling } from 'helpers/promise'
 import getDeviceInfo from 'commands/getDeviceInfo'
 
+import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
-import Progress from 'components/base/Progress'
 
 import type { Device } from 'types/common'
 
 import type { StepProps } from '../'
+
+import Installing from '../Installing'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -68,25 +70,6 @@ class StepFlashMcu extends PureComponent<Props, State> {
     if (this._unsubDeviceInfo) this._unsubDeviceInfo()
   }
 
-  waitForDeviceInBootloader = () => {
-    const { unsubscribe, promise } = createCancelablePolling(async () => {
-      const { device } = this.props
-      if (!device) {
-        throw new Error('No device')
-      }
-      const deviceInfo = await getDeviceInfo
-        .send({ devicePath: device.path })
-        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
-        .toPromise()
-      if (!deviceInfo.isBootloader) {
-        throw new Error('Device is not in bootloader')
-      }
-      return { device, deviceInfo }
-    })
-    this._unsubConnect = unsubscribe
-    return promise
-  }
-
   getDeviceInfo = () => {
     const { unsubscribe, promise } = createCancelablePolling(async () => {
       const { device } = this.props
@@ -97,9 +80,30 @@ class StepFlashMcu extends PureComponent<Props, State> {
         .send({ devicePath: device.path })
         .pipe(timeout(DEVICE_INFOS_TIMEOUT))
         .toPromise()
+
       return { device, deviceInfo }
     })
     this._unsubDeviceInfo = unsubscribe
+    return promise
+  }
+
+  waitForDeviceInBootloader = () => {
+    const { unsubscribe, promise } = createCancelablePolling(async () => {
+      const { device } = this.props
+      if (!device) {
+        throw new Error('No device')
+      }
+      const deviceInfo = await getDeviceInfo
+        .send({ devicePath: device.path })
+        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
+        .toPromise()
+
+      if (!deviceInfo.isBootloader) {
+        throw new Error('Device is not in bootloader')
+      }
+      return { device, deviceInfo }
+    })
+    this._unsubConnect = unsubscribe
     return promise
   }
 
@@ -113,29 +117,35 @@ class StepFlashMcu extends PureComponent<Props, State> {
   }
 
   install = async () => {
-    const { transitionTo } = this.props
-    this.flash()
-    const deviceInfo = await this.getDeviceInfo()
-    if (deviceInfo.isBootloader) {
-      this.flash()
-    } else {
+    const { transitionTo, installFinalFirmware, setError } = this.props
+    const { deviceInfo, device } = await this.getDeviceInfo()
+
+    try {
+      if (deviceInfo.isBootloader) {
+        await this.flash()
+        this.install()
+      } else if (deviceInfo.isOSU) {
+        await installFinalFirmware(device)
+        transitionTo('finish')
+      }
+    } catch (error) {
+      setError(error)
       transitionTo('finish')
     }
+  }
+
+  firstFlash = async () => {
+    await this.flash()
+    this.install()
   }
 
   renderBody = () => {
     const { installing } = this.state
     const { t } = this.props
 
-    if (installing) {
-      return (
-        <Box mx={7}>
-          <Progress infinite style={{ width: '100%' }} />
-        </Box>
-      )
-    }
-
-    return (
+    return installing ? (
+      <Installing />
+    ) : (
       <Fragment>
         <Box mx={7}>
           <Text ff="Open Sans|Regular" align="center" color="smoke">
@@ -169,9 +179,11 @@ class StepFlashMcu extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
+    const { installing } = this.state
     return (
       <Container>
-        <Title>{t('app:manager.modal.mcuTitle')}</Title>
+        <Title>{installing ? '' : t('app:manager.modal.mcuTitle')}</Title>
+        <TrackPage category="Manager" name="FlashMCU" />
         {this.renderBody()}
       </Container>
     )
