@@ -26,6 +26,7 @@ import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
 
 import NanoS from 'icons/device/NanoS'
+import Blue from 'icons/device/Blue'
 import CheckFull from 'icons/CheckFull'
 
 import UpdateFirmwareButton from './UpdateFirmwareButton'
@@ -38,6 +39,7 @@ export type ModalStatus = 'closed' | 'disclaimer' | 'install' | 'error' | 'succe
 type Props = {
   t: T,
   deviceInfo: DeviceInfo,
+  device: Device,
 }
 
 type State = {
@@ -123,21 +125,22 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   handleDisclaimerNext = () => this.setState({ modal: 'install' })
 
   render() {
-    const { deviceInfo, t } = this.props
+    const { deviceInfo, t, device } = this.props
     const { latestFirmware, modal, stepId, shouldFlash, ready } = this.state
-
     return (
       <Card p={4}>
         <Box horizontal align="center" flow={2}>
           <Box color="dark">
-            <NanoS size={30} />
+            {device.product === 'Blue' ? <Blue size={30} /> : <NanoS size={30} />}
           </Box>
           <Box>
             <Box horizontal align="center">
               <Text ff="Open Sans|SemiBold" fontSize={4} color="dark">
-                Ledger Nano S
+                {device.product === 'Blue'
+                  ? t('app:manager.firmware.titleBlue')
+                  : t('app:manager.firmware.titleNano')}
               </Text>
-              <Box color="wallet" style={{ marginLeft: 10 }}>
+              <Box color="wallet" ml={2}>
                 <Tooltip render={() => t('app:manager.yourDeviceIsGenuine')}>
                   <CheckFull size={13} color="wallet" />
                 </Tooltip>
