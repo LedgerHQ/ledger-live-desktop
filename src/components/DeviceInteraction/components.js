@@ -19,7 +19,6 @@ export const DeviceInteractionStepContainer = styled(Box).attrs({
   ff: 'Open Sans',
   fontSize: 3,
   color: 'graphite',
-  bg: p => (p.isActive && !p.isFinished ? 'white' : ''),
 })`
   position: relative;
   z-index: ${p => (p.isActive ? 1 : '')};

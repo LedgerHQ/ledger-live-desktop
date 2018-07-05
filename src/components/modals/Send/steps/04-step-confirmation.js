@@ -86,7 +86,6 @@ export function StepConfirmationFooter({
     optimisticOperation && account && getAccountOperationExplorer(account, optimisticOperation)
   return (
     <Fragment>
-      <Button onClick={closeModal}>{t('app:common.close')}</Button>
       {optimisticOperation ? (
         url ? (
           <Button
