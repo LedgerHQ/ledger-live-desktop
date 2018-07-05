@@ -82,10 +82,17 @@ class GenuineCheck extends PureComponent<Props> {
       await delay(GENUINE_CACHE_DELAY)
       return true
     }
+
+    const beforeDate = Date.now()
+
     const res = await getIsGenuine
       .send({ devicePath: device.path, deviceInfo })
       .pipe(timeout(GENUINE_TIMEOUT))
       .toPromise()
+
+    logger.log(`genuine check resulted ${res} after ${(Date.now() - beforeDate) / 1000}s`, {
+      deviceInfo,
+    })
     const isGenuine = res === '0000'
     if (!isGenuine) {
       throw new DeviceNotGenuineError()
