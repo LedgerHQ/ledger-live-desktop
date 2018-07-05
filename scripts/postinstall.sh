@@ -4,7 +4,7 @@
 source scripts/hash-utils.sh
 
 function MAIN {
-  if ! $CI; then
+  if [ "$CI" != "1" ]; then
     REBUILD_ELECTRON_NATIVE_DEPS
   fi
   INSTALL_FLOW_TYPED
