@@ -29,7 +29,7 @@ function filepathRecursiveReplacer(obj: mixed) {
       }
     } else {
       for (const k in obj) {
-        if (obj.hasOwnProperty(k)) {
+        if (typeof obj.hasOwnProperty === 'function' && obj.hasOwnProperty(k)) {
           const value = obj[k]
           if (typeof value === 'string') {
             obj[k] = filepathReplace(value)
