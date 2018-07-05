@@ -17,6 +17,17 @@ import { terminateAllTheThings } from './terminator'
 // necessary to prevent win from being garbage collected
 let mainWindow = null
 
+const isSecondInstance = app.makeSingleInstance(() => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore()
+    mainWindow.focus()
+  }
+})
+
+if (isSecondInstance) {
+  app.quit()
+}
+
 export const getMainWindow = () => mainWindow
 
 // TODO put back OSX close behavior
