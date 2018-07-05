@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shellcheck disable=SC1091
-source scripts/hash-utils.sh
+source scripts/helpers/hash.sh
 
 PACKAGE_JSON_HASH=$(md5sum package.json | cut -d ' ' -f 1)
 CACHED_PACKAGE_JSON_HASH=$(GET_HASH 'package.json')

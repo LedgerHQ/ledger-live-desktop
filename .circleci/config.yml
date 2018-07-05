@@ -15,7 +15,7 @@ jobs:
             - v2-yarn-packages-{{ checksum "yarn.lock" }}
       - run:
           name: Install Dependencies
-          command: bash scripts/install-ci-deps.sh
+          command: bash scripts/legacy/install-ci-deps.sh
       - save_cache:
           name: Save Yarn Package Cache
           key: v2-yarn-packages-{{ checksum "yarn.lock" }}

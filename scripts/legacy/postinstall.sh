@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shellcheck disable=SC1091
-source scripts/hash-utils.sh
+source scripts/helpers/hash.sh
 
 function MAIN {
   if [ "$CI" != "1" ]; then
