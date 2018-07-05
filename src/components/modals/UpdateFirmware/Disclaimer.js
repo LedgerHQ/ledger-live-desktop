@@ -3,7 +3,6 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { translate, Trans } from 'react-i18next'
-import ReactMarkdown from 'react-markdown'
 
 import type { T } from 'types/common'
 
@@ -12,7 +11,7 @@ import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import GrowScroll from 'components/base/GrowScroll'
 import GradientBox from 'components/GradientBox'
-import { Notes } from 'components/modals/ReleaseNotes'
+import Markdown, { Notes } from 'components/base/Markdown'
 import TrackPage from 'analytics/TrackPage'
 
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
@@ -63,7 +62,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
               <ModalContent relative pb={0} style={{ height: 250, width: '100%' }}>
                 <GrowScroll pb={5}>
                   <Notes>
-                    <ReactMarkdown>{firmware.notes}</ReactMarkdown>
+                    <Markdown>{firmware.notes}</Markdown>
                   </Notes>
                 </GrowScroll>
                 <GradientBox />
