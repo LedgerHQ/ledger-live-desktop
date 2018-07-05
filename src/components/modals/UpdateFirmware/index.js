@@ -12,6 +12,7 @@ import type { StepProps as DefaultStepProps, Step } from 'components/base/Steppe
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
 import type { LedgerScriptParams } from 'helpers/common'
 
+import { FreezeDeviceChangeEvents } from '../../ManagerPage/HookDeviceChange'
 import StepFullFirmwareInstall from './steps/01-step-install-full-firmware'
 import StepFlashMcu from './steps/02-step-flash-mcu'
 import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmation'
@@ -136,6 +137,7 @@ class UpdateModal extends PureComponent<Props, State> {
             steps={this.STEPS}
             {...additionalProps}
           >
+            <FreezeDeviceChangeEvents />
             <SyncSkipUnderPriority priority={100} />
           </Stepper>
         )}
