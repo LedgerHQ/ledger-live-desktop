@@ -1,6 +1,6 @@
 // @flow
 
-import { app, BrowserWindow, Menu, screen } from 'electron'
+import { app, globalShortcut, BrowserWindow, Menu, screen } from 'electron'
 import debounce from 'lodash/debounce'
 import {
   MIN_HEIGHT,
@@ -14,8 +14,55 @@ import db from 'helpers/db'
 
 import { terminateAllTheThings } from './terminator'
 
-// necessary to prevent win from being garbage collected
-let mainWindow = null
+const IS_MAC = process.platform === 'darwin'
+
+const nestedWinParams = { isDarwinForceQuit: false }
+let mainWindow
+
+// make it a single instance by closing other instances
+const shouldQuitBecauseAppIsAnotherInstance = app.makeSingleInstance(() => {
+  // the callback: only called only for first instance
+  // we want to show it, when the other starts to try another
+  if (mainWindow) {
+    showApp()
+
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore()
+    }
+
+    mainWindow.focus()
+  }
+})
+
+function showApp() {
+  showOrFocus(mainWindow)
+}
+
+function quitAppNow() {
+  app.isQuiting = true
+  app.quit()
+}
+
+function showOrFocus(passedWin) {
+  // default to main win
+  const win = passedWin || mainWindow
+
+  // sometimes when starting a second instance we get here although we don't want to
+  if (!win) {
+    return
+  }
+
+  if (win.isVisible()) {
+    win.focus()
+  } else {
+    win.show()
+  }
+
+  // focus window afterwards always
+  setTimeout(() => {
+    win.focus()
+  }, 60)
+}
 
 export const getMainWindow = () => mainWindow
 
@@ -34,17 +81,6 @@ const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) 
     y: Math.ceil(bounds.y + (bounds.height - height) / 2),
   }
 }
-
-// TODO put back OSX close behavior
-// const handleCloseWindow = w => e => {
-//   if (!forceClose) {
-//     e.preventDefault()
-//     w.webContents.send('lock')
-//     if (w !== null) {
-//       w.hide()
-//     }
-//   }
-// }
 
 const getDefaultUrl = () =>
   __DEV__ ? `http://localhost:${ELECTRON_WEBPACK_WDS_PORT || ''}` : `file://${__dirname}/index.html`
@@ -116,9 +152,21 @@ function createMainWindow() {
 
   window.loadURL(url)
 
-  // TODO put back OSX close behavior
-  // window.on('close', handleCloseWindow(window))
-  window.on('close', terminateAllTheThings)
+  window.on('close', event => {
+    // handle darwin
+    if (IS_MAC) {
+      if (!nestedWinParams.isDarwinForceQuit) {
+        event.preventDefault()
+        mainWindow.hide()
+      }
+    } else if (!app.isQuiting) {
+      event.preventDefault()
+      mainWindow.hide()
+    } else {
+      app.quit()
+      terminateAllTheThings()
+    }
+  })
 
   window.on('ready-to-show', () => {
     window.show()
@@ -137,46 +185,53 @@ function createMainWindow() {
   return window
 }
 
-// TODO put back OSX close behavior
-// app.on('before-quit', () => {
-//   forceClose = true
-// })
+if (shouldQuitBecauseAppIsAnotherInstance) {
+  quitAppNow()
+} else {
+  app.on('window-all-closed', () => {
+    // On macOS it is common for applications to stay open
+    // until the user explicitly quits
+    if (process.platform !== 'darwin') {
+      app.quit()
+    }
+  })
 
-app.on('window-all-closed', () => {
-  // On macOS it is common for applications to stay open
-  // until the user explicitly quits
-  if (process.platform !== 'darwin') {
-    app.quit()
+  app.on('before-quit', () => {
+    // handle darwin
+    if (IS_MAC) {
+      nestedWinParams.isDarwinForceQuit = true
+    }
+
+    // un-register all shortcuts.
+    globalShortcut.unregisterAll()
+  })
+
+  app.on('activate', () => {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+      createMainWindow()
+    } else {
+      showApp()
+    }
+  })
+
+  const installExtensions = async () => {
+    const installer = require('electron-devtools-installer')
+    const forceDownload = !!UPGRADE_EXTENSIONS
+    const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS']
+    return Promise.all(
+      extensions.map(name => installer.default(installer[name], forceDownload)),
+    ).catch(console.log) // eslint-disable-line
   }
-})
 
-app.on('activate', () => {
-  // On macOS it is common to re-create a window
-  // even after all windows have been closed
-  if (mainWindow === null) {
+  app.setAsDefaultProtocolClient('ledgerhq')
+
+  app.on('ready', async () => {
+    if (__DEV__) {
+      await installExtensions()
+    }
+    Menu.setApplicationMenu(menu)
     mainWindow = createMainWindow()
-  } else {
-    mainWindow.show()
-  }
-})
-
-const installExtensions = async () => {
-  const installer = require('electron-devtools-installer')
-  const forceDownload = !!UPGRADE_EXTENSIONS
-  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS']
-  return Promise.all(
-    extensions.map(name => installer.default(installer[name], forceDownload)),
-  ).catch(console.log) // eslint-disable-line
+  })
 }
-
-app.setAsDefaultProtocolClient('ledgerhq')
-
-app.on('ready', async () => {
-  if (__DEV__) {
-    await installExtensions()
-  }
-
-  Menu.setApplicationMenu(menu)
-
-  mainWindow = createMainWindow()
-})
