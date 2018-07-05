@@ -77,15 +77,17 @@ class Analytics extends PureComponent<StepProps, State> {
               <Box>
                 <Box horizontal mb={1}>
                   <AnalyticsTitle>{t('onboarding:analytics.technicalData.title')}</AnalyticsTitle>
-                  <FakeLink
-                    underline
-                    fontSize={3}
-                    color="smoke"
-                    ml={2}
-                    onClick={this.handleTechnicalDataModal}
-                  >
-                    {t('app:common.learnMore')}
-                  </FakeLink>
+                  <LearnMoreWrapper>
+                    <FakeLink
+                      underline
+                      fontSize={3}
+                      color="smoke"
+                      ml={2}
+                      onClick={this.handleTechnicalDataModal}
+                    >
+                      {t('app:common.learnMore')}
+                    </FakeLink>
+                  </LearnMoreWrapper>
                 </Box>
                 <TechnicalData />
                 <AnalyticsText>{t('onboarding:analytics.technicalData.desc')}</AnalyticsText>
@@ -101,15 +103,17 @@ class Analytics extends PureComponent<StepProps, State> {
               <Box>
                 <Box horizontal mb={1}>
                   <AnalyticsTitle>{t('onboarding:analytics.shareAnalytics.title')}</AnalyticsTitle>
-                  <FakeLink
-                    style={{ textDecoration: 'underline' }}
-                    fontSize={3}
-                    color="smoke"
-                    ml={2}
-                    onClick={this.handleShareAnalyticsModal}
-                  >
-                    {t('app:common.learnMore')}
-                  </FakeLink>
+                  <LearnMoreWrapper>
+                    <FakeLink
+                      style={{ textDecoration: 'underline' }}
+                      fontSize={3}
+                      color="smoke"
+                      ml={2}
+                      onClick={this.handleShareAnalyticsModal}
+                    >
+                      {t('app:common.learnMore')}
+                    </FakeLink>
+                  </LearnMoreWrapper>
                   <ShareAnalytics />
                 </Box>
                 <AnalyticsText>{t('onboarding:analytics.shareAnalytics.desc')}</AnalyticsText>
@@ -191,4 +195,9 @@ const Container = styled(Box).attrs({
 })`
   width: 550px;
   justify-content: space-between;
+`
+const LearnMoreWrapper = styled(Box).attrs({})`
+  ${FakeLink}:hover {
+    color: ${p => p.theme.colors.wallet};
+  }
 `
