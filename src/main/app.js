@@ -30,9 +30,6 @@ if (isSecondInstance) {
 
 export const getMainWindow = () => mainWindow
 
-// TODO put back OSX close behavior
-// let forceClose = false
-
 const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
 
 const devTools = __DEV__ || DEV_TOOLS
@@ -45,17 +42,6 @@ const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) 
     y: Math.ceil(bounds.y + (bounds.height - height) / 2),
   }
 }
-
-// TODO put back OSX close behavior
-// const handleCloseWindow = w => e => {
-//   if (!forceClose) {
-//     e.preventDefault()
-//     w.webContents.send('lock')
-//     if (w !== null) {
-//       w.hide()
-//     }
-//   }
-// }
 
 const getDefaultUrl = () =>
   __DEV__ ? `http://localhost:${ELECTRON_WEBPACK_WDS_PORT || ''}` : `file://${__dirname}/index.html`
@@ -127,8 +113,6 @@ function createMainWindow() {
 
   window.loadURL(url)
 
-  // TODO put back OSX close behavior
-  // window.on('close', handleCloseWindow(window))
   window.on('close', terminateAllTheThings)
 
   window.on('ready-to-show', () => {
@@ -148,25 +132,12 @@ function createMainWindow() {
   return window
 }
 
-// TODO put back OSX close behavior
-// app.on('before-quit', () => {
-//   forceClose = true
-// })
-
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications to stay open
-  // until the user explicitly quits
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit()
 })
 
 app.on('activate', () => {
-  // On macOS it is common to re-create a window
-  // even after all windows have been closed
-  if (mainWindow === null) {
-    mainWindow = createMainWindow()
-  } else {
+  if (mainWindow) {
     mainWindow.show()
   }
 })
