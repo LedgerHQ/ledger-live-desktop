@@ -31,9 +31,6 @@
       "webpackConfig": "./webpack/main.config.js"
     }
   },
-  "resolutions": {
-    "webpack-sources": "1.0.1"
-  },
   "dependencies": {
     "@ledgerhq/hw-app-btc": "4.20.0",
     "@ledgerhq/hw-app-eth": "^4.14.0",
