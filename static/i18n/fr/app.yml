@@ -215,6 +215,8 @@ manager:
     help: Check on your device to see which apps are already installed
   firmware:
     installed: 'Firmware version {{version}}'
+    titleNano: Ledger Nano S
+    titleBlue: Ledger Blue
     update: Update firmware
     continue: Continue update
     latest: 'Firmware version {{version}} is available'
@@ -226,8 +228,7 @@ manager:
       idCheck: Identifier check
       updateMCU: Update MCU
       confirm: Confirmation
-    installing: Installing firmware
-    flashing: Installing MCU
+    installing: Firmware updating...
     confirmIdentifier: Confirm identifier
     confirmIdentifierText: Please confirm identifier on your Device. Be sure the identifier is the same as below
     identifier: Identifier
