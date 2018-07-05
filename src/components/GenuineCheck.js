@@ -27,6 +27,7 @@ import IconHome from 'icons/Home'
 import IconCheck from 'icons/Check'
 
 const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
+const DeviceGenuineSocketEarlyClose = createCustomErrorClass('DeviceGenuineSocketEarlyClose')
 
 type Props = {
   t: T,
@@ -93,6 +94,9 @@ class GenuineCheck extends PureComponent<Props> {
     logger.log(`genuine check resulted ${res} after ${(Date.now() - beforeDate) / 1000}s`, {
       deviceInfo,
     })
+    if (!res) {
+      throw new DeviceGenuineSocketEarlyClose()
+    }
     const isGenuine = res === '0000'
     if (!isGenuine) {
       throw new DeviceNotGenuineError()
