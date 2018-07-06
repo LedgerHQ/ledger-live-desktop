@@ -32,7 +32,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
     extraInitialTransactionProps,
     getTotalSpent,
     getMaxAmount,
-    canBeSpent,
+    checkCanBeSpent,
   } = {
     ...defaultOpts,
     ...opts,
@@ -145,7 +145,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
     isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
-    canBeSpent,
+    checkCanBeSpent,
 
     getTotalSpent,
 

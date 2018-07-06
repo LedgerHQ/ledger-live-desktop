@@ -31,7 +31,7 @@ const UnsupportedBridge: WalletBridge<*> = {
 
   getTransactionRecipient: () => '',
 
-  canBeSpent: () => Promise.resolve(false),
+  checkCanBeSpent: () => Promise.resolve(),
 
   getTotalSpent: () => Promise.resolve(0),
 

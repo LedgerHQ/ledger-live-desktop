@@ -11,7 +11,11 @@ import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
+import { createCustomErrorClass } from 'helpers/errors'
 import type { WalletBridge, EditProps } from './types'
+
+const NOT_ENOUGH_FUNDS = 52
+const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 const notImplemented = new Error('LibcoreBridge: not implemented')
 
@@ -65,10 +69,13 @@ const isRecipientValid = (currency, recipient) => {
 
 const feesLRU = LRU({ max: 100 })
 
+const getFeesKey = (a, t) =>
+  `${a.id}_${a.blockHeight || 0}_${t.amount}_${t.recipient}_${t.feePerByte}`
+
 const getFees = async (a, transaction) => {
   const isValid = await isRecipientValid(a.currency, transaction.recipient)
   if (!isValid) return null
-  const key = `${a.id}_${transaction.amount}_${transaction.recipient}_${transaction.feePerByte}`
+  const key = getFeesKey(a, transaction)
   let promise = feesLRU.get(key)
   if (promise) return promise
   promise = libcoreGetFees
@@ -78,6 +85,19 @@ const getFees = async (a, transaction) => {
   feesLRU.set(key, promise)
   return promise
 }
+
+const checkCanBeSpent = (a, t) =>
+  !t.amount
+    ? Promise.resolve()
+    : getFees(a, t)
+        .then(() => {})
+        .catch(e => {
+          if (e.code === NOT_ENOUGH_FUNDS) {
+            throw new NotEnoughBalance()
+          }
+          feesLRU.del(getFeesKey(a, t))
+          throw e
+        })
 
 const LibcoreBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, devicePath) {
@@ -173,12 +193,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
-  canBeSpent: (a, t) =>
-    !t.amount
-      ? Promise.resolve(true)
-      : getFees(a, t)
-          .then(() => true)
-          .catch(() => false),
+  checkCanBeSpent,
 
   getTotalSpent: (a, t) =>
     !t.amount
