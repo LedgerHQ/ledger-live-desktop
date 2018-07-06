@@ -23,6 +23,12 @@ DisconnectedDevice:
 Error:
   title: '{{message}}'
   description: Something went wrong. Please retry or contact us.
+"Invariant Violation":
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
+InternalError:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
 TypeError:
   title: '{{message}}'
   description: Something went wrong. Please retry or contact us.
