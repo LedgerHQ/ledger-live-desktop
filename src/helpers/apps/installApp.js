@@ -2,7 +2,7 @@
 import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import { BASE_SOCKET_URL_SECURE } from 'config/constants'
+import { BASE_SOCKET_URL } from 'config/constants'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { LedgerScriptParams } from 'helpers/common'
@@ -44,6 +44,6 @@ export default async function installApp(
     ...app,
     firmwareKey: app.firmware_key,
   }
-  const url = `${BASE_SOCKET_URL_SECURE}/install?${qs.stringify(params)}`
+  const url = `${BASE_SOCKET_URL}/install?${qs.stringify(params)}`
   return remapError(createDeviceSocket(transport, url).toPromise())
 }

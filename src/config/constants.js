@@ -53,11 +53,8 @@ export const MANAGER_API_BASE = stringFromEnv(
   'MANAGER_API_BASE',
   'https://beta.manager.live.ledger.fr/api',
 )
-export const BASE_SOCKET_URL = stringFromEnv('BASE_SOCKET_URL', 'ws://api.ledgerwallet.com/update')
-export const BASE_SOCKET_URL_SECURE = stringFromEnv(
-  'BASE_SOCKET_URL',
-  'wss://api.ledgerwallet.com/update',
-)
+
+export const BASE_SOCKET_URL = stringFromEnv('BASE_SOCKET_URL', 'wss://api.ledgerwallet.com/update')
 
 // Flags
 
