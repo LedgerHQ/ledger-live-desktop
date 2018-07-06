@@ -58,6 +58,7 @@ export default ({
         bridge &&
         transaction && (
           <AmountField
+            key={account.id}
             account={account}
             bridge={bridge}
             transaction={transaction}
