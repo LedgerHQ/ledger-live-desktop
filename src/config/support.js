@@ -17,4 +17,5 @@ export const urls = {
   // should join and generalize naming for the same urls once defined
   receiveFlowContactSupport:
     'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
+  privacyPolicy: 'https://www.ledgerwallet.com/privacy-policy',
 }
