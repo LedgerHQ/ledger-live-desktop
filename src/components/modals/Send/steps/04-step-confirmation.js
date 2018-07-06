@@ -2,7 +2,6 @@
 
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
-import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
 import { colors } from 'styles/theme'
@@ -82,29 +81,25 @@ export function StepConfirmationFooter({
   openModal,
   closeModal,
 }: StepProps<*>) {
-  const url =
-    optimisticOperation && account && getAccountOperationExplorer(account, optimisticOperation)
   return (
     <Fragment>
       {optimisticOperation ? (
-        url ? (
-          <Button
-            ml={2}
-            event="Send Flow Step 4 View OpD Clicked"
-            onClick={() => {
-              closeModal()
-              if (account && optimisticOperation) {
-                openModal(MODAL_OPERATION_DETAILS, {
-                  operationId: optimisticOperation.id,
-                  accountId: account.id,
-                })
-              }
-            }}
-            primary
-          >
-            {t('app:send.steps.confirmation.success.cta')}
-          </Button>
-        ) : null
+        <Button
+          ml={2}
+          event="Send Flow Step 4 View OpD Clicked"
+          onClick={() => {
+            closeModal()
+            if (account && optimisticOperation) {
+              openModal(MODAL_OPERATION_DETAILS, {
+                operationId: optimisticOperation.id,
+                accountId: account.id,
+              })
+            }
+          }}
+          primary
+        >
+          {t('app:send.steps.confirmation.success.cta')}
+        </Button>
       ) : error ? (
         <Button
           ml={2}
