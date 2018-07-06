@@ -48,6 +48,12 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('app:settings.help.termsDesc')}
             url={urls.terms}
           />
+
+          <AboutRowItem
+            title={t('app:settings.help.privacy')}
+            desc={t('app:settings.help.privacyDesc')}
+            url={urls.privacyPolicy}
+          />
         </Body>
       </Section>
     )
