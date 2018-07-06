@@ -220,27 +220,27 @@ manager:
     installed: 'Firmware version {{version}}'
     titleNano: Ledger Nano S
     titleBlue: Ledger Blue
-    update: Update firmware
-    continue: Continue update
+    update: Update
+    continue: Continue
     latest: 'Firmware version {{version}} is available'
-    disclaimerTitle: 'You are about to install the latest <1><0>firmware {{version}}</0></1>'
-    disclaimerAppDelete: Please note that all the apps installed on your device will be deleted.
-    disclaimerAppReinstall: You will be able to re-install your apps after the firmware update
+    disclaimerTitle: 'You are about to install <1><0>firmware version {{version}}</0></1>'
+    disclaimerAppDelete: Apps installed on your device have to re-installed after the update.
+    disclaimerAppReinstall: "This does not affect your crypto assets in the blockchain."
   modal:
     steps:
-      idCheck: Identifier check
-      updateMCU: Update MCU
+      idCheck: Identifier
+      updateMCU: MCU update
       confirm: Confirmation
     installing: Firmware updating...
-    confirmIdentifier: Confirm identifier
-    confirmIdentifierText: Please confirm identifier on your Device. Be sure the identifier is the same as below
+    confirmIdentifier: Verify the identifier
+    confirmIdentifierText: Verify that the identifier on your device is the same as the identifier below. Press the right button to confirm.
     identifier: Identifier
     mcuTitle: Updating MCU
-    mcuFirst: Unplug your device from your computer
-    mcuSecond: Press and hold left button and plug your device until the processing screen appears
+    mcuFirst: Disconnect the USB cable from your device
+    mcuSecond: Press the left button and hold it while you reconnect the USB cable until the processing screen appears
     mcuPin: If asked on device, please enter your pin code to finish the process
-    successTitle: Firmware has been updated with success
-    successText: You can now re-install your applications on your device
+    successTitle: Firmware updated
+    successText: You may re-install the apps on your device
   title: Manager
   subtitle: Install or uninstall apps on your device
   device:
