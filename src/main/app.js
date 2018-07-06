@@ -11,6 +11,7 @@ import {
 
 import menu from 'main/menu'
 import db from 'helpers/db'
+import { i } from 'helpers/staticPath'
 
 import { terminateAllTheThings } from './terminator'
 
@@ -65,6 +66,9 @@ const saveWindowSettings = window => {
 }
 
 const defaultWindowOptions = {
+  // see https://github.com/electron-userland/electron-builder/issues/2269
+  icon: i('browser-window-icon-512x512.png'),
+
   backgroundColor: '#fff',
   webPreferences: {
     devTools,

@@ -8,7 +8,6 @@ import { createDeviceSocket } from 'helpers/socket'
 import type { LedgerScriptParams } from 'helpers/common'
 import { createCustomErrorClass } from '../errors'
 
-const ManagerUnexpectedError = createCustomErrorClass('ManagerUnexpectedError')
 const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
 const ManagerUninstallBTCDep = createCustomErrorClass('ManagerUninstallBTCDep')
 
@@ -20,7 +19,7 @@ function remapError(promise) {
       case e.message.endsWith('6a83'):
         throw new ManagerUninstallBTCDep()
       default:
-        throw new ManagerUnexpectedError(e.message, { msg: e.message })
+        throw e
     }
   })
 }

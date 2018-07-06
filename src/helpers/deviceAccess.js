@@ -22,17 +22,26 @@ const mapError = e => {
 
 let queue = Promise.resolve()
 
+let busy = false
+
+TransportNodeHid.setListenDevicesPollingSkip(() => busy)
+
 export const withDevice: WithDevice = devicePath => job => {
   const p = queue.then(async () => {
-    const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
-    if (DEBUG_DEVICE) {
-      t.setDebugMode(true)
-    }
+    busy = true
     try {
-      const res = await job(t).catch(mapError)
-      return res
+      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
+      if (DEBUG_DEVICE) {
+        t.setDebugMode(true)
+      }
+      try {
+        const res = await job(t).catch(mapError)
+        return res
+      } finally {
+        await t.close()
+      }
     } finally {
-      await t.close()
+      busy = false
     }
   })
 

@@ -13,8 +13,9 @@ const fs = require('fs')
 
 const MAX_RANDOM = 2684869021
 
-// increment this number to "clear" sqlite db (it will use another path :D)
-const DB_VERSION = 1
+const core = new lib.NJSLedgerCore()
+const stringVersion = core.getStringVersion()
+const sqlitePrefix = `v${stringVersion.split('.')[0]}`
 
 const bytesArrayToString = (bytesArray = []) => Buffer.from(bytesArray).toString()
 
@@ -151,15 +152,15 @@ const instanciateWalletPool = ({ dbPath }) => {
   const NJSPathResolver = new lib.NJSPathResolver({
     resolveLogFilePath: pathToResolve => {
       const hash = pathToResolve.replace(/\//g, '__')
-      return path.resolve(dbPath, `./log_file_${DB_VERSION}_${hash}`)
+      return path.resolve(dbPath, `./log_file_${sqlitePrefix}_${hash}`)
     },
     resolvePreferencesPath: pathToResolve => {
       const hash = pathToResolve.replace(/\//g, '__')
-      return path.resolve(dbPath, `./preferences_${DB_VERSION}_${hash}`)
+      return path.resolve(dbPath, `./preferences_${sqlitePrefix}_${hash}`)
     },
     resolveDatabasePath: pathToResolve => {
       const hash = pathToResolve.replace(/\//g, '__')
-      return path.resolve(dbPath, `./database_${DB_VERSION}_${hash}`)
+      return path.resolve(dbPath, `./database_${sqlitePrefix}_${hash}`)
     },
   })
 

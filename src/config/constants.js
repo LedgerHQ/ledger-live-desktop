@@ -31,7 +31,7 @@ export const GENUINE_CACHE_DELAY = intFromEnv('GENUINE_CACHE_DELAY', 1000)
 export const GENUINE_TIMEOUT = intFromEnv('GENUINE_TIMEOUT', 120 * 1000)
 export const GET_CALLS_RETRY = intFromEnv('GET_CALLS_RETRY', 2)
 export const GET_CALLS_TIMEOUT = intFromEnv('GET_CALLS_TIMEOUT', 30 * 1000)
-export const LISTEN_DEVICES_POLLING_INTERVAL = intFromEnv('LISTEN_DEVICES_POLLING_INTERVAL', 100)
+export const LISTEN_DEVICES_POLLING_INTERVAL = intFromEnv('LISTEN_DEVICES_POLLING_INTERVAL', 1000)
 export const OUTDATED_CONSIDERED_DELAY = intFromEnv('OUTDATED_CONSIDERED_DELAY', 5 * 60 * 1000)
 export const SYNC_ALL_INTERVAL = 120 * 1000
 export const SYNC_BOOT_DELAY = 2 * 1000
@@ -47,7 +47,7 @@ export const LEDGER_COUNTERVALUES_API = stringFromEnv(
 )
 export const LEDGER_REST_API_BASE = stringFromEnv(
   'LEDGER_REST_API_BASE',
-  'https://api.ledgerwallet.com/',
+  'https://explorers.api.live.ledger.com/',
 )
 export const MANAGER_API_BASE = stringFromEnv(
   'MANAGER_API_BASE',

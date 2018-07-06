@@ -48,9 +48,9 @@ class DisclaimerModal extends PureComponent<Props, State> {
               <ModalContent>
                 <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
                   <Trans i18nKey="app:manager.firmware.disclaimerTitle">
-                    You are about to install the latest
+                    You are about to install
                     <Text ff="Open Sans|SemiBold" color="dark">
-                      {`firmware ${firmware ? getCleanVersion(firmware.name) : ''}`}
+                      {`firmware version ${firmware ? getCleanVersion(firmware.name) : ''}`}
                     </Text>
                   </Trans>
                 </Text>

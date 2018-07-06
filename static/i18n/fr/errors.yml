@@ -5,6 +5,9 @@ BtcUnmatchedApp:
 DeviceNotGenuine:
   title: Possibly not genuine
   description: 'Request Ledger Support assistance.'
+DeviceGenuineSocketEarlyClose:
+  title: Sorry, try again (genuine-close)
+  description:
 DeviceSocketFail:
   title: Oops, try again
   description: 'Some connection failed, so please try again.'
@@ -62,9 +65,6 @@ ManagerDeviceLocked:
 ManagerNotEnoughSpace:
   title: Sorry, insufficient device storage
   description: Uninstall some apps to increase available storage and try again.
-ManagerUnexpected:
-  title: That's unexpected ({{msg}})
-  description: Please try again.
 ManagerUninstallBTCDep:
   title: Sorry, Bitcoin is required
   description: First uninstall apps that depend on Bitcoin.

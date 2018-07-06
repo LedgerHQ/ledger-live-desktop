@@ -208,13 +208,15 @@ export async function doSignAndBroadcast({
     .asBitcoinLikeAccount()
     .broadcastRawTransaction(Array.from(Buffer.from(signedTransaction, 'hex')))
 
+  const fee = builded.getFees().toLong()
+
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
   onOperationBroadcasted({
     id: `${account.xpub}-${txHash}-OUT`,
     hash: txHash,
     type: 'OUT',
-    value: transaction.amount,
-    fee: 0,
+    value: transaction.amount + fee,
+    fee,
     blockHash: null,
     blockHeight: null,
     senders: [account.freshAddress],

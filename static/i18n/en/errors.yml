@@ -23,6 +23,12 @@ DisconnectedDevice:
 Error:
   title: '{{message}}'
   description: Something went wrong. Please retry or contact us.
+"Invariant Violation":
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
+InternalError:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
 TypeError:
   title: '{{message}}'
   description: Something went wrong. Please retry or contact us.
@@ -65,9 +71,6 @@ ManagerDeviceLocked:
 ManagerNotEnoughSpace:
   title: Sorry, insufficient device storage
   description: Uninstall some apps to increase available storage and try again.
-ManagerUnexpected:
-  title: That's unexpected ({{msg}}) #(Manager: {{msg}})
-  description: Please try again.
 ManagerUninstallBTCDep:
   title: Sorry, Bitcoin is required # include {{currencyName}}
   description: First uninstall apps that depend on Bitcoin.
