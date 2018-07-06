@@ -127,6 +127,8 @@ class StepFlashMcu extends PureComponent<Props, State> {
       } else if (deviceInfo.isOSU) {
         await installFinalFirmware(device)
         transitionTo('finish')
+      } else {
+        transitionTo('finish')
       }
     } catch (error) {
       setError(error)
