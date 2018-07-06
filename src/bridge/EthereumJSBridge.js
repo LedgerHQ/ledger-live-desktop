@@ -13,7 +13,10 @@ import { getDerivations } from 'helpers/derivations'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
+import { createCustomErrorClass } from 'helpers/errors'
 import type { EditProps, WalletBridge } from './types'
+
+const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 // TODO in future it would be neat to support eip55
 
@@ -363,7 +366,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   EditAdvancedOptions,
 
-  canBeSpent: (a, t) => Promise.resolve(t.amount <= a.balance),
+  checkCanBeSpent: (a, t) =>
+    t.amount <= a.balance ? Promise.resolve() : Promise.reject(new NotEnoughBalance()),
   getTotalSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice * t.gasLimit),
   getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice * t.gasLimit),
 
