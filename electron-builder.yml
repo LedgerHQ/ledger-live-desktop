@@ -12,6 +12,9 @@ mac:
     - dmg
     - zip
 
+appImage:
+  systemIntegration: doNotAsk
+
 linux:
   asarUnpack:
     - node_modules/@ledgerhq/ledger-core
@@ -19,9 +22,6 @@ linux:
   category: Finance
   target:
     - target: AppImage
-      arch:
-        - x64
-    - target: tar.gz
       arch:
         - x64
 

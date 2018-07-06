@@ -11,6 +11,7 @@ import {
 
 import menu from 'main/menu'
 import db from 'helpers/db'
+import { i } from 'helpers/staticPath'
 
 import { terminateAllTheThings } from './terminator'
 
@@ -65,6 +66,11 @@ const saveWindowSettings = window => {
 }
 
 const defaultWindowOptions = {
+  // Linux require window to have icon to be correctly displayed
+  // in docks, when using <C-tab>, etc.
+  // see https://github.com/electron-userland/electron-builder/issues/2269<Paste>
+  icon: i('linux-app-icon-512x512.png'),
+
   backgroundColor: '#fff',
   webPreferences: {
     devTools,
