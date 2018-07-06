@@ -1,7 +1,7 @@
 // @flow
 import qs from 'qs'
 
-import { MANAGER_API_BASE, BASE_SOCKET_URL_SECURE } from 'config/constants'
+import { MANAGER_API_BASE, BASE_SOCKET_URL } from 'config/constants'
 import type { LedgerScriptParams } from 'helpers/common'
 
 const urlBuilder = (base: string) => (endpoint: string): string => `${base}/${endpoint}`
@@ -9,7 +9,7 @@ const urlBuilder = (base: string) => (endpoint: string): string => `${base}/${en
 const managerUrlbuilder = urlBuilder(MANAGER_API_BASE)
 
 const wsURLBuilder = (endpoint: string) => (params?: Object) =>
-  `${BASE_SOCKET_URL_SECURE}/${endpoint}${params ? `?${qs.stringify(params)}` : ''}`
+  `${BASE_SOCKET_URL}/${endpoint}${params ? `?${qs.stringify(params)}` : ''}`
 
 // const wsURLBuilderProxy = (endpoint: string) => (params?: Object) =>
 //   `ws://manager.ledger.fr:3501/${endpoint}${params ? `?${qs.stringify(params)}` : ''}`

@@ -18,9 +18,14 @@ function Installing({ t }: Props) {
       <Box mx={7} align="center">
         <Spinner color="fog" size={44} />
       </Box>
-      <Box mx={7} mt={4} mb={7}>
+      <Box mx={7} mt={4} mb={2}>
         <Text ff="Museo Sans|Regular" align="center" color="dark" fontSize={6}>
           {t('app:manager.modal.installing')}
+        </Text>
+      </Box>
+      <Box mx={7} mt={4} mb={7}>
+        <Text ff="Open Sans|Regular" align="center" color="graphite" fontSize={4}>
+          {t('app:manager.modal.mcuPin')}
         </Text>
       </Box>
     </Fragment>

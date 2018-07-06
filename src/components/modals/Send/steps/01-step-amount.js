@@ -58,6 +58,7 @@ export default ({
         bridge &&
         transaction && (
           <AmountField
+            key={account.id}
             account={account}
             bridge={bridge}
             transaction={transaction}
@@ -134,7 +135,9 @@ export class StepAmountFooter extends PureComponent<
     try {
       const totalSpent = await bridge.getTotalSpent(account, transaction)
       if (syncId !== this.syncId) return
-      const canBeSpent = await bridge.canBeSpent(account, transaction)
+      const canBeSpent = await bridge
+        .checkCanBeSpent(account, transaction)
+        .then(() => true, () => false)
       if (syncId !== this.syncId) return
       this.setState({ totalSpent, canBeSpent, isSyncing: false })
     } catch (err) {

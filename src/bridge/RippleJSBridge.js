@@ -19,7 +19,10 @@ import {
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
+import { createCustomErrorClass } from 'helpers/errors'
 import type { WalletBridge, EditProps } from './types'
+
+const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 type Transaction = {
   amount: number,
@@ -461,9 +464,12 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
 
-  canBeSpent: async (a, t) => {
+  checkCanBeSpent: async (a, t) => {
     const r = await getServerInfo(a.endpointConfig)
-    return t.amount + t.fee + parseAPIValue(r.validatedLedger.reserveBaseXRP) <= a.balance
+    if (t.amount + t.fee + parseAPIValue(r.validatedLedger.reserveBaseXRP) <= a.balance) {
+      return
+    }
+    throw new NotEnoughBalance()
   },
 
   getTotalSpent: (a, t) => Promise.resolve(t.amount + t.fee),

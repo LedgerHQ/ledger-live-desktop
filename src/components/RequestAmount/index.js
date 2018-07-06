@@ -21,9 +21,6 @@ import InputCurrency from 'components/base/InputCurrency'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import type { State } from 'reducers'
-import { createCustomErrorClass } from 'helpers/errors'
-
-const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 const InputRight = styled(Box).attrs({
   ff: 'Rubik',
@@ -50,7 +47,7 @@ type OwnProps = {
   // left value (always the one which is returned)
   value: number,
 
-  canBeSpent: boolean,
+  canBeSpentError: ?Error,
 
   // max left value
   max: number,
@@ -141,14 +138,14 @@ export class RequestAmount extends PureComponent<Props> {
 
   renderInputs(containerProps: Object) {
     // TODO move this inlined into render() for less spaghetti
-    const { value, account, rightCurrency, getCounterValue, canBeSpent } = this.props
+    const { value, account, rightCurrency, getCounterValue, canBeSpentError } = this.props
     const right = getCounterValue(value) || 0
     const rightUnit = rightCurrency.units[0]
     // FIXME: no way InputCurrency pure can work here. inlined InputRight (should be static func?), inline containerProps object..
     return (
       <Box horizontal grow shrink>
         <InputCurrency
-          error={canBeSpent ? null : new NotEnoughBalance()}
+          error={canBeSpentError}
           containerProps={containerProps}
           defaultUnit={account.unit}
           value={value}

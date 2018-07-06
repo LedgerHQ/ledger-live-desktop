@@ -51,7 +51,7 @@ export default {
       .replace(/\/addresses\/[^/]+/g, '/addresses/<HIDDEN>')
       .replace(/blockHash=[^&]+/g, 'blockHash=<HIDDEN>'),
 
-  appURI: (uri: string): string => uri.replace(/account\/[^/]/g, 'account/<HIDDEN>'),
+  appURI: (uri: string): string => uri.replace(/account\/[^/]+/g, 'account/<HIDDEN>'),
 
   filepath: filepathReplace,
 

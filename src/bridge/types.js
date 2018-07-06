@@ -82,7 +82,7 @@ export interface WalletBridge<Transaction> {
   // render the whole advanced part of the form
   EditAdvancedOptions?: *; // React$ComponentType<EditProps<Transaction>>;
 
-  canBeSpent(account: Account, transaction: Transaction): Promise<boolean>;
+  checkCanBeSpent(account: Account, transaction: Transaction): Promise<void>;
 
   getTotalSpent(account: Account, transaction: Transaction): Promise<number>;
 
