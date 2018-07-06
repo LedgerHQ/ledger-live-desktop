@@ -4,6 +4,7 @@ import { GET_CALLS_RETRY, GET_CALLS_TIMEOUT } from 'config/constants'
 import { retry } from 'helpers/promise'
 import logger from 'logger'
 import { createCustomErrorClass } from 'helpers/errors'
+import anonymizer from 'helpers/anonymizer'
 
 export const LedgerAPIErrorWithMessage = createCustomErrorClass('LedgerAPIErrorWithMessage')
 export const LedgerAPIError = createCustomErrorClass('LedgerAPIError')
@@ -34,12 +35,20 @@ const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime }): Promis
             logger.warn("can't parse server result", e)
           }
           if (msg && msg[0] !== '<') {
-            errorToThrow = new LedgerAPIErrorWithMessage(msg)
+            errorToThrow = new LedgerAPIErrorWithMessage(msg, {
+              status,
+              url: anonymizer.url(url),
+              method,
+            })
           }
         }
       }
       if (!errorToThrow) {
-        errorToThrow = new LedgerAPIError(`LedgerAPIError ${status}`, { status })
+        errorToThrow = new LedgerAPIError(`LedgerAPIError ${status}`, {
+          status,
+          url: anonymizer.url(url),
+          method,
+        })
       }
       logger.networkError({
         status,
