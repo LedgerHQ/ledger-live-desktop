@@ -16,25 +16,28 @@ function filepathReplace(path: string) {
   return path.replace(cwd, '.').replace(configDir, '$USER_DATA')
 }
 
-function filepathRecursiveReplacer(obj: mixed) {
+function filepathRecursiveReplacer(obj: mixed, seen: Array<*>) {
   if (obj && typeof obj === 'object') {
+    seen.push(obj)
     if (Array.isArray(obj)) {
       for (let i = 0; i < obj.length; i++) {
         const item = obj[i]
+        if (seen.indexOf(item) !== -1) return
         if (typeof item === 'string') {
           obj[i] = filepathReplace(item)
         } else {
-          filepathRecursiveReplacer(item)
+          filepathRecursiveReplacer(item, seen)
         }
       }
     } else {
       for (const k in obj) {
         if (typeof obj.hasOwnProperty === 'function' && obj.hasOwnProperty(k)) {
           const value = obj[k]
+          if (seen.indexOf(value) !== -1) return
           if (typeof value === 'string') {
             obj[k] = filepathReplace(value)
           } else {
-            filepathRecursiveReplacer(obj[k])
+            filepathRecursiveReplacer(obj[k], seen)
           }
         }
       }
@@ -52,5 +55,5 @@ export default {
 
   filepath: filepathReplace,
 
-  filepathRecursiveReplacer,
+  filepathRecursiveReplacer: (obj: mixed) => filepathRecursiveReplacer(obj, []),
 }
