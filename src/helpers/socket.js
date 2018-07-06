@@ -25,7 +25,7 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
     try {
       ws = new Websocket(url)
     } catch (err) {
-      o.error(new WebsocketConnectionFailed(err.message))
+      o.error(new WebsocketConnectionFailed(err.message, { url }))
       return () => {}
     }
     invariant(ws, 'websocket is available')
@@ -36,7 +36,7 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
 
     ws.on('error', e => {
       logger.websocket('ERROR', e)
-      o.error(new WebsocketConnectionError(e.message))
+      o.error(new WebsocketConnectionError(e.message, { url }))
     })
 
     ws.on('close', () => {
@@ -98,7 +98,7 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
 
       error: msg => {
         logger.websocket('ERROR', msg.data)
-        throw new DeviceSocketFail(msg.data)
+        throw new DeviceSocketFail(msg.data, { url })
       },
     }
 
@@ -108,6 +108,7 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
         if (!(msg.query in handlers)) {
           throw new DeviceSocketNoHandler(`Cannot handle msg of type ${msg.query}`, {
             query: msg.query,
+            url,
           })
         }
         logger.websocket('RECEIVE', msg)
