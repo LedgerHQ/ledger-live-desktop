@@ -242,7 +242,7 @@ manager:
   subtitle: Install or uninstall apps on your device
   device:
     title: Connect your device
-    desc: 'Follow the steps below to use the device Manager'
+    desc: 'Follow the steps below to open the Manager'
     cta: Connect my device
   errors:
     noDevice: No device is connected (TEMPLATE NEEDED)
