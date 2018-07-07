@@ -1521,9 +1521,9 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/ledger-core@2.0.0-rc.3":
-  version "2.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.3.tgz#21b04239e9ba6b7fdcb89958eea8ad47a4a28a88"
+"@ledgerhq/ledger-core@2.0.0-rc.4":
+  version "2.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.4.tgz#0ec80a763c666658bea94bd38b86aa90d5a24906"
   dependencies:
     "@ledgerhq/hw-app-btc" "^4.7.3"
     "@ledgerhq/hw-transport-node-hid" "^4.7.6"
