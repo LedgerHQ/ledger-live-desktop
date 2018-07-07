@@ -1,9 +1,6 @@
-# Ledger Live - Desktop
+# Ledger Live (desktop) [![CircleCI](https://circleci.com/gh/LedgerHQ/ledger-live-desktop.svg?style=svg)](https://circleci.com/gh/LedgerHQ/ledger-live-desktop)
 
-[![CircleCI](https://circleci.com/gh/LedgerHQ/ledger-live-desktop.svg?style=svg)](https://circleci.com/gh/LedgerHQ/ledger-live-desktop)
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
-
-:warning: Disclaimer: this project is under active development. Use at your own risks.
 
 <img src="/static/docs/ledgerLogo.png" width="200"/>
 
@@ -16,6 +13,13 @@ From one side Ledger Desktop app connected to the Blockchain via the in-house wr
 <p align="center">
  <img src="/static/docs/architecture.png" width="550"/>
 </p>
+
+**Related repositories:**
+
+- [ledgerjs](https://github.com/LedgerHQ/ledgerjs)
+- [live-common](https://github.com/LedgerHQ/ledger-live-common)
+- [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings)
+- [ledger-core](https://github.com/LedgerHQ/lib-ledger-core)
 
 ## Setup
 
