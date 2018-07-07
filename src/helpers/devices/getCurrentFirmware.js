@@ -9,22 +9,15 @@ type Input = {
   provider: number,
 }
 
-let error
 export default async (input: Input): Promise<*> => {
-  try {
-    const { data } = await network({
-      method: 'POST',
-      url: GET_CURRENT_FIRMWARE,
-      data: {
-        device_version: input.deviceId,
-        version_name: input.fullVersion,
-        provider: input.provider,
-      },
-    })
-    return data
-  } catch (err) {
-    error = Error(err.message)
-    error.stack = err.stack
-    throw error
-  }
+  const { data } = await network({
+    method: 'POST',
+    url: GET_CURRENT_FIRMWARE,
+    data: {
+      device_version: input.deviceId,
+      version_name: input.fullVersion,
+      provider: input.provider,
+    },
+  })
+  return data
 }
