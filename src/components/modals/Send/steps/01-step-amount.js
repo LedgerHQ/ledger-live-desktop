@@ -2,6 +2,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 
+import logger from 'logger'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Label from 'components/base/Label'
@@ -92,14 +93,14 @@ export class StepAmountFooter extends PureComponent<
   StepProps<*>,
   {
     totalSpent: number,
-    canBeSpent: boolean,
+    canNext: boolean,
     isSyncing: boolean,
   },
 > {
   state = {
     isSyncing: false,
     totalSpent: 0,
-    canBeSpent: true,
+    canNext: false,
   }
 
   componentDidMount() {
@@ -127,6 +128,7 @@ export class StepAmountFooter extends PureComponent<
     const syncId = ++this.syncId
 
     if (!account || !transaction || !bridge) {
+      this.setState({ canNext: false, isSyncing: false })
       return
     }
 
@@ -135,21 +137,26 @@ export class StepAmountFooter extends PureComponent<
     try {
       const totalSpent = await bridge.getTotalSpent(account, transaction)
       if (syncId !== this.syncId) return
+      const isRecipientValid = await bridge.isRecipientValid(
+        account.currency,
+        bridge.getTransactionRecipient(account, transaction),
+      )
+      if (syncId !== this.syncId) return
       const canBeSpent = await bridge
         .checkCanBeSpent(account, transaction)
         .then(() => true, () => false)
       if (syncId !== this.syncId) return
-      this.setState({ totalSpent, canBeSpent, isSyncing: false })
+      const canNext = isRecipientValid && canBeSpent
+      this.setState({ totalSpent, canNext, isSyncing: false })
     } catch (err) {
-      this.setState({ isSyncing: false })
+      logger.critical(err)
+      this.setState({ totalSpent: 0, canNext: false, isSyncing: false })
     }
   }
 
   render() {
-    const { t, transitionTo, account, transaction, bridge } = this.props
-    const { totalSpent, canBeSpent, isSyncing } = this.state
-    const canNext =
-      account && transaction && bridge && bridge.isValidTransaction(account, transaction)
+    const { t, transitionTo, account } = this.props
+    const { isSyncing, totalSpent, canNext } = this.state
     return (
       <Fragment>
         <Box grow>
@@ -186,7 +193,7 @@ export class StepAmountFooter extends PureComponent<
             {isSyncing && <Spinner size={10} />}
           </Box>
         </Box>
-        <Button disabled={!canBeSpent || !canNext} primary onClick={() => transitionTo('device')}>
+        <Button disabled={!canNext} primary onClick={() => transitionTo('device')}>
           {t('app:common.continue')}
         </Button>
       </Fragment>
