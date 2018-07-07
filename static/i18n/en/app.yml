@@ -137,7 +137,7 @@ deviceConnect:
     dashboard: Not used. # This key is not used. Still managed in JS.
 emptyState:
   sidebar:
-    text: Press the + button to add an account to your portfolio
+    text: Press this button to add accounts to your portfolio
   dashboard:
     title: 'Add accounts to your portfolio'
     desc: Your portfolio has no accounts the first time Ledger Live is launched. Open the Manager to install apps on your Ledger device before you start adding accounts to your portfolio.
