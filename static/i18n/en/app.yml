@@ -273,7 +273,7 @@ send:
   totalSpent: Total to debit
   steps:
     amount:
-      title: crypto assets
+      title: Details
       selectAccountDebit: Select an account to debit
       recipientAddress: Recipient address # can't control the tooltip!
       amount: Amount
@@ -360,7 +360,7 @@ settings: # Always ensure descriptions carry full stops (.)
     reportErrors: Report bugs
     reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
   about:
-    desc: Learn about Ledger Live features
+    desc: Information about Ledger Live, terms and conditions, and privacy policy.
   help:
     desc: Learn about Ledger Live features or get help.
     version: Version
@@ -370,7 +370,7 @@ settings: # Always ensure descriptions carry full stops (.)
     terms: Terms and conditions
     termsDesc: By using Ledger Live you are deemed to have accepted our terms and conditions.
     privacy: Privacy policy
-    privacyDesc: Refer to our privacy policy to learn what personal data we collect, and why and how we use it.
+    privacyDesc: Refer to our privacy policy to learn what personal data we collect, why and how we use it.
   hardResetModal:
     title: Reset Ledger Live
     desc: Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.
