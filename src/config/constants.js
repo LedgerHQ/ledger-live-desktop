@@ -47,7 +47,7 @@ export const LEDGER_COUNTERVALUES_API = stringFromEnv(
 )
 export const LEDGER_REST_API_BASE = stringFromEnv(
   'LEDGER_REST_API_BASE',
-  'https://explorers.api.live.ledger.com/',
+  'https://explorers.api.live.ledger.com',
 )
 export const MANAGER_API_BASE = stringFromEnv(
   'MANAGER_API_BASE',
