@@ -1534,9 +1534,9 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@2.31.0":
-  version "2.31.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.31.0.tgz#0f599a1e23b64d9ed74a845d3a9c82f0696f1df3"
+"@ledgerhq/live-common@^2.32.0":
+  version "2.32.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.32.0.tgz#6c2108d58ec44335077d87442a6418e0ec4d3372"
   dependencies:
     axios "^0.18.0"
     invariant "^2.2.2"
