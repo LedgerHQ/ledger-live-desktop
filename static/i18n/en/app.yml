@@ -7,7 +7,7 @@ common:
   cancel: Cancel
   delete: Delete
   continue: Continue
-  learnMore: Learn More
+  learnMore: Learn more
   skipThisStep: Skip this step
   needHelp: Need help?
   chooseWalletPlaceholder: Choose a wallet...
