@@ -1,23 +1,16 @@
 # Ledger Live (desktop) [![CircleCI](https://circleci.com/gh/LedgerHQ/ledger-live-desktop.svg?style=svg)](https://circleci.com/gh/LedgerHQ/ledger-live-desktop) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
 
-<img src="/static/docs/ledgerLogo.png" width="200"/>
-
 > Ledger Live Desktop is a new generation Ledger Wallet application build with React, Redux and Electron to run natively on the web. The main goal of the app is to provide our users with a single wallet for all crypto currencies supported by our devices. To learn more check out [Ledger](https://www.ledgerwallet.com/?utm_source=redirection&utm_medium=variable)
+
+<!-- screenshot of the app here -->
 
 ## Architecture
 
-From one side Ledger Desktop app connected to the Blockchain via the in-house written C++ library - LibCore and from the other it communicates to the Ledger Hardware Device to securely sign all transactions.
+Ledger Live uses [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) C++ library to deal with blockchains (sync, broadcast,..) via [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings). It communicates to Ledger hardware wallet devices (Nano S / Blue) to verify address and sign transactions with [ledgerjs](https://github.com/LedgerHQ/ledgerjs). Some logic is shared with [live-common](https://github.com/LedgerHQ/ledger-live-common).
 
 <p align="center">
  <img src="/static/docs/architecture.png" width="550"/>
 </p>
-
-**Related repositories:**
-
-- [ledgerjs](https://github.com/LedgerHQ/ledgerjs)
-- [live-common](https://github.com/LedgerHQ/ledger-live-common)
-- [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings)
-- [ledger-core](https://github.com/LedgerHQ/lib-ledger-core)
 
 ## Setup
 
