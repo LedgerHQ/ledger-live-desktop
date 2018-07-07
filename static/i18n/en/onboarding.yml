@@ -144,7 +144,7 @@ analytics:
       item10: Device firmware and app versions
   sentryLogs:
     title: Report bugs
-    desc: Automatically send reports to help Ledger fix bugs
+    desc: Automatically send reports to help Ledger fix bugs.
   technicalData:
      title: Technical data *
      desc: Ledger will automatically collect technical information to get basic feedback on usage. This information is anonymous and does not contain personal data.
