@@ -21,3 +21,4 @@ about: Report a bug in Ledger Live Desktop or a regression.
 #### Steps to reproduce the behavior
 
 <!-- explain steps in detail so we can easily reproduce on our side -->
+<!-- Alternatively provide a screenshot / gif -->
