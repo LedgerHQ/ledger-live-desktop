@@ -19,6 +19,7 @@ common:
   selectCurrencyNoOption: 'No crypto asset "{{currencyName}}"'
   selectExchange: Select an exchange
   selectExchangeNoOption: 'No exchange matching "{{exchangeName}}"'
+  selectExchangeNoOptionAtAll: 'No exchange found'
   sortBy: Sort by
   search: Search
   save: Save

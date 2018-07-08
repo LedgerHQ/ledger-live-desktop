@@ -37,12 +37,14 @@ class SelectExchange extends Component<
     prevFromTo: string,
     exchanges: ?(Exchange[]),
     error: ?Error,
+    isLoading: boolean,
   },
 > {
   state = {
     prevFromTo: '', // eslint-disable-line
     exchanges: null,
     error: null,
+    isLoading: false,
   }
 
   static getDerivedStateFromProps(nextProps: *, prevState: *) {
@@ -75,25 +77,25 @@ class SelectExchange extends Component<
   async _load() {
     this._loadId++
     if (this._unmounted) return
-    this.setState({ exchanges: [] })
+    this.setState({ exchanges: [], isLoading: true })
     const { _loadId } = this
     const { from, to } = this.props
     try {
       const exchanges = await getExchanges(from, to)
       if (!this._unmounted && this._loadId === _loadId) {
-        this.setState({ exchanges })
+        this.setState({ exchanges, isLoading: false })
       }
     } catch (error) {
       logger.error(error)
       if (!this._unmounted && this._loadId === _loadId) {
-        this.setState({ error })
+        this.setState({ error, isLoading: false })
       }
     }
   }
 
   render() {
     const { onChange, exchangeId, style, t, from, to, ...props } = this.props
-    const { exchanges, error } = this.state
+    const { exchanges, error, isLoading } = this.state
 
     const options = exchanges ? exchanges.map(e => ({ value: e.id, label: e.name, ...e })) : []
     const value = options.find(e => e.id === exchangeId)
@@ -115,10 +117,12 @@ class SelectExchange extends Component<
           value={value}
           options={options}
           onChange={onChange}
-          isLoading={options.length === 0}
+          isLoading={isLoading}
           placeholder={t('app:common.selectExchange')}
           noOptionsMessage={({ inputValue }) =>
-            t('app:common.selectExchangeNoOption', { exchangeName: inputValue })
+            inputValue
+              ? t('app:common.selectExchangeNoOption', { exchangeName: inputValue })
+              : t('app:common.selectExchangeNoOptionAtAll')
           }
           {...props}
         />
