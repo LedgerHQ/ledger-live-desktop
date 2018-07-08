@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import moment from 'moment'
 import { formatShort } from '@ledgerhq/live-common/lib/helpers/currencies'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
@@ -90,7 +91,7 @@ const BalanceSummary = ({
                             val={d.value}
                           />
                           <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-                            {d.date.toISOString().substr(0, 10)}
+                            {moment(d.date).format('L')}
                           </Box>
                         </Fragment>
                       )
