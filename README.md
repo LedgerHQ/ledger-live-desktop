@@ -27,23 +27,15 @@ Ledger Live is an hybrid desktop application built with Electron, React, Redux, 
 
 ## Install
 
-1.  Clone or fork the repo
-
 ```bash
-git clone git@github.com:LedgerHQ/ledger-live-desktop.git
-```
-
-2.  Install dependencies
-
-```bash
+# install dependencies
 yarn
 ```
 
 ## Run
 
-Launch the app
-
 ```bash
+# launch the app
 yarn start
 ```
 
