@@ -79,6 +79,10 @@ export const Notes = styled(Box).attrs({
     color: #6a737d;
   }
 
+  strong {
+    font-weight: bold;
+  }
+
   img {
     max-width: 100%;
   }
