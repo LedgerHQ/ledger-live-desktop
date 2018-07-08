@@ -13,6 +13,7 @@ import type { Location } from 'react-router'
 import * as modals from 'components/modals'
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
+import Track from 'analytics/Track'
 
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
@@ -84,6 +85,7 @@ class Default extends Component<Props> {
         <TriggerAppReady />
         {process.platform === 'darwin' && <AppRegionDrag />}
         <ExportLogsBtn hookToShortcut />
+        <Track onMount event="App Starts" />
 
         <OnboardingOrElse>
           <IsUnlocked>
