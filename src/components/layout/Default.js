@@ -31,6 +31,7 @@ import AppRegionDrag from 'components/AppRegionDrag'
 import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/MainSideBar'
 import TopBar from 'components/TopBar'
+import SyncBackground from 'components/SyncBackground'
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 
 const Main = styled(GrowScroll).attrs({
@@ -94,6 +95,7 @@ class Default extends Component<Props> {
             ))}
 
             <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
+            <SyncBackground />
 
             <div id="sticky-back-to-top-root" />
 

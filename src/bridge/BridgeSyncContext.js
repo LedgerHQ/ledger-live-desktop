@@ -17,12 +17,7 @@ import { setAccountSyncState } from 'actions/bridgeSync'
 import { bridgeSyncSelector, syncStateLocalSelector } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
 import { accountsSelector } from 'reducers/accounts'
-import {
-  SYNC_BOOT_DELAY,
-  SYNC_ALL_INTERVAL,
-  SYNC_MAX_CONCURRENT,
-  SYNC_TIMEOUT,
-} from 'config/constants'
+import { SYNC_MAX_CONCURRENT, SYNC_TIMEOUT } from 'config/constants'
 import { getBridgeForCurrency } from '.'
 
 type BridgeSyncProviderProps = {
@@ -151,19 +146,6 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
     this.api = sync
   }
 
-  componentDidMount() {
-    const syncLoop = async () => {
-      this.api({ type: 'BACKGROUND_TICK' })
-      this.syncTimeout = setTimeout(syncLoop, SYNC_ALL_INTERVAL)
-    }
-    this.syncTimeout = setTimeout(syncLoop, SYNC_BOOT_DELAY)
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.syncTimeout)
-  }
-
-  syncTimeout: *
   api: Sync
 
   render() {
