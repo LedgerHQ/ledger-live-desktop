@@ -13,8 +13,13 @@ import { load } from './inject-in-window'
 invariant(typeof window !== 'undefined', 'analytics/segment must be called on renderer thread')
 
 let user = null
+let osType = '?'
+let osVersion = '?'
 if (!process.env.STORYBOOK_ENV) {
   user = require('helpers/user').default
+  const os = require('os')
+  osType = os.type()
+  osVersion = os.release()
 }
 
 const sessionId = uuid()
@@ -38,6 +43,8 @@ const extraProperties = store => {
     environment: __DEV__ ? 'development' : 'production',
     systemLanguage: systemLocale.language,
     systemRegion: systemLocale.region,
+    osType,
+    osVersion,
     sessionId,
     ...deviceInfo,
   }
