@@ -72,9 +72,9 @@ export const stop = () => {
   analytics.reset()
 }
 
-export const track = (event: string, properties: ?Object) => {
+export const track = (event: string, properties: ?Object, mandatory: ?boolean) => {
   logger.analyticsTrack(event, properties)
-  if (!storeInstance || !shareAnalyticsSelector(storeInstance.getState())) {
+  if (!storeInstance || (!mandatory && !shareAnalyticsSelector(storeInstance.getState()))) {
     return
   }
   const { analytics } = window

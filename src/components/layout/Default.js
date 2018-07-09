@@ -85,7 +85,7 @@ class Default extends Component<Props> {
         <TriggerAppReady />
         {process.platform === 'darwin' && <AppRegionDrag />}
         <ExportLogsBtn hookToShortcut />
-        <Track onMount event="App Starts" />
+        <Track mandatory onMount event="App Starts" />
 
         <OnboardingOrElse>
           <IsUnlocked>
