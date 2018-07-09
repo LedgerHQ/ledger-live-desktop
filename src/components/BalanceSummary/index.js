@@ -91,7 +91,7 @@ const BalanceSummary = ({
                             val={d.value}
                           />
                           <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-                            {moment(d.date).format('L')}
+                            {moment(d.date).format('LL')}
                           </Box>
                         </Fragment>
                       )
