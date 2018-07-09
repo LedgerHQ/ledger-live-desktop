@@ -9,7 +9,7 @@ type Derivation = ({
 
 const ethLegacyMEW: Derivation = ({ x }) => `44'/60'/0'/${x}`
 
-const etcLegacyMEW: Derivation = ({ x }) => `44'/60'/160720'/${x}`
+const etcLegacyMEW: Derivation = ({ x }) => `44'/60'/160720'/${x}'/0`
 
 const rippleLegacy: Derivation = ({ x }) => `44'/144'/0'/${x}'`
 
