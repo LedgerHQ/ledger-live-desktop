@@ -2,14 +2,16 @@
 
 > Ledger Live is a new generation wallet desktop application providing a unique interface to maintain multiple cryptocurrencies for your Ledger Nano S / Blue. Manage your device, create accounts, receive and send cryptoassets, [...and many more](https://www.ledgerwallet.com/#LINK_TO_ANNOUNCEMENT).
 
-<!-- screenshot of the app here -->
+<p align="center">
+ <img src="/docs/screenshot.png" width="550"/>
+</p>
 
 ## Architecture
 
 Ledger Live is an hybrid desktop application built with Electron, React, Redux, RxJS,.. and highly optimized with [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) C++ library to deal with blockchains (sync, broadcast,..) via [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings). It communicates to Ledger hardware wallet devices (Nano S / Blue) to verify address and sign transactions with [ledgerjs](https://github.com/LedgerHQ/ledgerjs). Some logic is shared with [live-common](https://github.com/LedgerHQ/ledger-live-common).
 
 <p align="center">
- <img src="/static/docs/architecture.png" width="550"/>
+ <img src="/docs/architecture.png" width="550"/>
 </p>
 
 ## Setup
