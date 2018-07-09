@@ -7,6 +7,7 @@ class Track extends PureComponent<{
   onUnmount?: boolean,
   onUpdate?: boolean,
   event: string,
+  mandatory?: boolean,
 }> {
   componentDidMount() {
     if (typeof this.props.event !== 'string') {
@@ -21,8 +22,8 @@ class Track extends PureComponent<{
     if (this.props.onUnmount) this.track()
   }
   track = () => {
-    const { event, onMount, onUnmount, onUpdate, ...properties } = this.props
-    track(event, properties)
+    const { event, onMount, onUnmount, onUpdate, mandatory, ...properties } = this.props
+    track(event, properties, mandatory)
   }
   render() {
     return null
