@@ -35,6 +35,8 @@ type Props = OwnProps & {
   hash: string,
 }
 
+const DAY_MS = 24 * 60 * 60 * 1000
+
 const mapStateToProps = (state: State, props: OwnProps) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
   const counterValueExchange = counterValueExchangeSelector(state)
@@ -71,6 +73,23 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     // reconciliate balance history with original values
     ({ ...item, originalValue: originalValues[i] || 0 }),
   )
+
+  // Handle case when we have two dates for the same day: the historical and latest ones
+  // let's swap values and pop out the last, so we have only one point for today and
+  // it contains the latest value
+  //
+  // see https://github.com/LedgerHQ/ledger-live-desktop/issues/917
+  //
+  if (balanceHistory.length > 1) {
+    const lastDateTime = balanceHistory[balanceHistory.length - 1].date.getTime()
+    const beforeLastDateTime = balanceHistory[balanceHistory.length - 2].date.getTime()
+    const delta = lastDateTime - beforeLastDateTime
+    if (delta < DAY_MS) {
+      balanceHistory[balanceHistory.length - 2].value =
+        balanceHistory[balanceHistory.length - 1].value
+      balanceHistory.pop()
+    }
+  }
 
   const balanceEnd = balanceHistory[balanceHistory.length - 1].value
 
