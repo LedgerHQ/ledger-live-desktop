@@ -15,7 +15,7 @@ const rippleLegacy: Derivation = ({ x }) => `44'/144'/0'/${x}'`
 
 const legacyDerivations = {
   ethereum: [ethLegacyMEW],
-  ethereum_classic: [etcLegacyMEW],
+  ethereum_classic: [ethLegacyMEW, etcLegacyMEW],
   ripple: [rippleLegacy],
 }
 
