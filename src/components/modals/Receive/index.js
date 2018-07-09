@@ -194,7 +194,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       ? [verifyAddressError.name === 'UserRefusedAddress' ? 2 : 3]
       : []
 
-    const isModalLocked = stepId === 'confirm' && isAddressVerified === null
+    const isModalLocked = stepId === 'receive' && isAddressVerified === null
 
     return (
       <Modal
