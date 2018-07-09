@@ -1521,9 +1521,9 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/ledger-core@2.0.0-rc.3":
-  version "2.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.3.tgz#21b04239e9ba6b7fdcb89958eea8ad47a4a28a88"
+"@ledgerhq/ledger-core@2.0.0-rc.4":
+  version "2.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.4.tgz#0ec80a763c666658bea94bd38b86aa90d5a24906"
   dependencies:
     "@ledgerhq/hw-app-btc" "^4.7.3"
     "@ledgerhq/hw-transport-node-hid" "^4.7.6"
@@ -1534,9 +1534,9 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@2.31.0":
-  version "2.31.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.31.0.tgz#0f599a1e23b64d9ed74a845d3a9c82f0696f1df3"
+"@ledgerhq/live-common@^2.32.0":
+  version "2.32.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.32.0.tgz#6c2108d58ec44335077d87442a6418e0ec4d3372"
   dependencies:
     axios "^0.18.0"
     invariant "^2.2.2"

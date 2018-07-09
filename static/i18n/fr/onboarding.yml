@@ -133,19 +133,19 @@ analytics:
     title: Share analytics
     desc: Enable analytics to help Ledger understand how to improve the user experience.
     mandatoryContextual:
-      item1: Page visits
-      item2: Actions (send, receive, logout)
+      item1: In-app page visits
+      item2: Actions (send, receive, lock)
       item3: Clicks
       item4: Redirections to webpages
       item5: Scrolled to end of page
       item6: Install/Uninstall
       item7: Number of accounts, currencies and operations
       item8: Overall and page session duration
-      item9: Device product ID
-      item10: Device firmware and app versions
+      item9: Type of Ledger device
+      item10: Device firmware and app version numbers
   sentryLogs:
     title: Report bugs
-    desc: Automatically send reports to help Ledger fix bugs
+    desc: Automatically send reports to help Ledger fix bugs.
   technicalData:
     title: Technical data *
     desc: Ledger will automatically collect technical information to get basic feedback on usage. This information is anonymous and does not contain personal data.
@@ -156,7 +156,7 @@ analytics:
       item2: OS name and version
       item3: Ledger Live version
       item4: Application language or region
-      item5: OS Language/Region
+      item5: OS language or region
 finish:
   title: Your device is ready!
   desc: Proceed to your portfolio and start adding your accounts...

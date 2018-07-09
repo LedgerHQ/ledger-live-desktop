@@ -43,15 +43,15 @@ export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 30 * 1000)
 
 export const LEDGER_COUNTERVALUES_API = stringFromEnv(
   'LEDGER_COUNTERVALUES_API',
-  'https://beta.manager.live.ledger.fr/countervalues',
+  'https://countervalues.api.live.ledger.com',
 )
 export const LEDGER_REST_API_BASE = stringFromEnv(
   'LEDGER_REST_API_BASE',
-  'https://explorers.api.live.ledger.com/',
+  'https://explorers.api.live.ledger.com',
 )
 export const MANAGER_API_BASE = stringFromEnv(
   'MANAGER_API_BASE',
-  'https://beta.manager.live.ledger.fr/api',
+  'https://manager.api.live.ledger.com/api',
 )
 
 export const BASE_SOCKET_URL = stringFromEnv('BASE_SOCKET_URL', 'wss://api.ledgerwallet.com/update')

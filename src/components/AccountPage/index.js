@@ -82,7 +82,7 @@ class AccountPage extends PureComponent<Props> {
           <AccountHeaderActions account={account} />
         </Box>
 
-        {account.operations.length > 0 ? (
+        {account.operations.length > 0 || account.balance > 0 ? (
           <Fragment>
             <Box mb={7}>
               <BalanceSummary

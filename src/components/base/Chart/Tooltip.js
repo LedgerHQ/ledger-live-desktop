@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import moment from 'moment'
 import styled from 'styled-components'
 
 import type { Unit, Currency } from '@ledgerhq/live-common/lib/types'
@@ -68,7 +69,7 @@ const Tooltip = ({
               />
             )}
             <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-              {item.date.toISOString().substr(0, 10)}
+              {moment(item.date).format('LL')}
             </Box>
           </Fragment>
         )}

@@ -351,7 +351,12 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       return unsubscribe
     }),
 
-  synchronize: ({ endpointConfig, freshAddress, blockHeight }) =>
+  synchronize: ({
+    endpointConfig,
+    freshAddress,
+    blockHeight,
+    operations: { length: currentOpsLength },
+  }) =>
     Observable.create(o => {
       let finished = false
       const unsubscribe = () => {
@@ -394,7 +399,10 @@ const RippleJSBridge: WalletBridge<Transaction> = {
           o.next(a => ({ ...a, balance }))
 
           const transactions = await api.getTransactions(freshAddress, {
-            minLedgerVersion: Math.max(blockHeight, minLedgerVersion),
+            minLedgerVersion: Math.max(
+              currentOpsLength === 0 ? 0 : blockHeight, // if there is no ops, it might be after a clear and we prefer to pull from the oldest possible history
+              minLedgerVersion,
+            ),
             maxLedgerVersion,
           })
 
