@@ -68,8 +68,8 @@ class MainSideBar extends PureComponent<Props> {
 
   ADD_ACCOUNT_EMPTY_STATE = (
     <Box relative>
-      <img style={{ position: 'absolute', top: 0, right: 5 }} alt="" src={i('arrow-add.svg')} />
-      {this.props.t('app:emptyState.sidebar.text')}
+      <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
+      <Box pr={3}>{this.props.t('app:emptyState.sidebar.text')}</Box>
     </Box>
   )
 
