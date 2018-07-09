@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { openURL } from 'helpers/linking'
 import styled from 'styled-components'
 import { i } from 'helpers/staticPath'
-import { urls } from 'config/support'
+import { urls } from 'config/urls'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
