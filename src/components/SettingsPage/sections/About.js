@@ -6,7 +6,7 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 
 import TrackPage from 'analytics/TrackPage'
-import { urls } from 'config/support'
+import { urls } from 'config/urls'
 import IconLoader from 'icons/Loader'
 
 import ReleaseNotesButton from '../ReleaseNotesButton'

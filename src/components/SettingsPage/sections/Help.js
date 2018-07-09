@@ -6,7 +6,7 @@ import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
 import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
-import { urls } from 'config/support'
+import { urls } from 'config/urls'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import CleanButton from '../CleanButton'

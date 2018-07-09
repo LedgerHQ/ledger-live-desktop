@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
+import { urls } from 'config/urls'
 
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
@@ -12,6 +13,8 @@ import ExchangeCard from './ExchangeCard'
 import CoinhouseLogo from './logos/coinhouse'
 import ChangellyLogo from './logos/changelly'
 import CoinmamaLogo from './logos/bigmama'
+import SimplexLogo from './logos/simplex'
+import PaybisLogo from './logos/paybis'
 
 type Props = {
   t: T,
@@ -21,20 +24,32 @@ const cards = [
   {
     key: 'coinhouse',
     id: 'coinhouse',
-    url: 'https://www.coinhouse.com/r/157530',
+    url: urls.coinbase,
     logo: <CoinhouseLogo width={150} />,
   },
   {
     key: 'changelly',
     id: 'changelly',
-    url: 'https://changelly.com/?ref_id=aac789605a01',
+    url: urls.changelly,
     logo: <ChangellyLogo width={150} />,
   },
   {
     key: 'coinmama',
     id: 'coinmama',
-    url: 'http://go.coinmama.com/visit/?bta=51801&nci=5343',
+    url: urls.coinmama,
     logo: <CoinmamaLogo width={150} />,
+  },
+  {
+    key: 'simplex',
+    id: 'simplex',
+    url: urls.simplex,
+    logo: <SimplexLogo width={160} height={57} />,
+  },
+  {
+    key: 'paybis',
+    id: 'paybis',
+    url: urls.paybis,
+    logo: <PaybisLogo width={150} height={57} />,
   },
 ]
 

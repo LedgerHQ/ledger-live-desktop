@@ -3,7 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
 import { openURL } from 'helpers/linking'
-import { urls } from 'config/support'
+import { urls } from 'config/urls'
 
 import type { Device } from 'types/common'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
