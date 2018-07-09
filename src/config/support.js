@@ -7,7 +7,7 @@ export const urls = {
   faq: 'https://support.ledgerwallet.com/hc/en-us',
   terms: 'https://www.ledgerwallet.com/terms',
   noDeviceBuyNew: 'https://www.ledgerwallet.com/',
-  noDeviceTrackOrder: 'https://order.ledgerwallet.com/',
+  noDeviceTrackOrder: 'http://order.ledgerwallet.com/',
   noDeviceLearnMore: 'https://www.ledgerwallet.com/',
   managerHelpRequest: 'https://support.ledgerwallet.com/hc/en-us/articles/360006523674 ',
   genuineCheckContactSupport:
