@@ -18,6 +18,9 @@ export const urls = {
   recipientAddressInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006433934',
   privacyPolicy: 'https://www.ledgerwallet.com/privacy-policy',
 
+  githubIssues:
+    'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aopen+is%3Aissue+label%3Abug',
+
   // Exchanges
   coinbase: 'https://www.coinhouse.com/r/157530',
   changelly: 'https://changelly.com/?ref_id=aac789605a01',

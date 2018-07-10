@@ -4,9 +4,9 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { openURL } from 'helpers/linking'
 import { remote } from 'electron'
-import qs from 'querystring'
 import { translate } from 'react-i18next'
 
+import { urls } from 'config/urls'
 import { i } from 'helpers/staticPath'
 import hardReset from 'helpers/hardReset'
 
@@ -47,21 +47,12 @@ class RenderError extends PureComponent<
     </IconWrapperCircle>
   )
 
-  handleCreateIssue = () => {
-    const { error } = this.props
-    if (!error) {
-      return
-    }
-    const q = qs.stringify({
-      title: `Error: ${error.message}`,
-      body: `Error was thrown:
+  github = () => {
+    openURL(urls.githubIssues)
+  }
 
-\`\`\`
-${error.stack}
-\`\`\`
-`,
-    })
-    openURL(`https://github.com/LedgerHQ/ledger-live-desktop/issues/new?${q}`)
+  contact = () => {
+    openURL(urls.contactSupport)
   }
 
   handleRestart = () => {
@@ -105,8 +96,11 @@ ${error.stack}
             {t('app:crash.restart')}
           </Button>
           <ExportLogsBtn withoutAppData={withoutAppData} />
-          <Button small primary onClick={this.handleCreateIssue}>
-            {t('app:crash.createTicket')}
+          <Button small primary onClick={this.contact}>
+            {t('app:crash.support')}
+          </Button>
+          <Button small primary onClick={this.github}>
+            {t('app:crash.github')}
           </Button>
           <Button small danger onClick={this.handleOpenHardResetModal}>
             {t('app:crash.reset')}
