@@ -94,6 +94,23 @@ async function init() {
       if (isGlobalTabEnabled()) disableGlobalTab()
     })
   }
+  document.addEventListener(
+    'dragover',
+    (event: Event) => {
+      event.preventDefault()
+      return false
+    },
+    false,
+  )
+
+  document.addEventListener(
+    'drop',
+    (event: Event) => {
+      event.preventDefault()
+      return false
+    },
+    false,
+  )
 }
 
 function r(Comp) {
