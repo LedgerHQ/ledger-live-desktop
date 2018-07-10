@@ -10,7 +10,6 @@ mac:
   category: public.app-category.wallet
   target:
     - dmg
-    - zip
 
 appImage:
   systemIntegration: doNotAsk
@@ -34,9 +33,6 @@ win:
     - sha256
   target:
     - target: nsis
-      arch:
-        - x64
-    - target: zip
       arch:
         - x64
 
