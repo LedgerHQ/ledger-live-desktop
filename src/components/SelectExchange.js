@@ -106,13 +106,15 @@ class SelectExchange extends Component<
       </Text>
     ) : (
       <Fragment>
-        <Track
-          onUpdate
-          event="SelectExchange"
-          exchangeName={value && value.id}
-          fromCurrency={from.ticker}
-          toCurrency={to.ticker}
-        />
+        {exchanges ? (
+          <Track
+            onUpdate
+            event="SelectExchange"
+            exchangeName={value && value.id}
+            fromCurrency={from.ticker}
+            toCurrency={to.ticker}
+          />
+        ) : null}
         <Select
           value={value}
           options={options}

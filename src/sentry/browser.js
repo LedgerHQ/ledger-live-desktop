@@ -11,3 +11,7 @@ export default (shouldSendCallback: () => boolean) => {
 export const captureException = (e: Error) => {
   Raven.captureException(e)
 }
+
+export const captureBreadcrumb = (o: *) => {
+  Raven.captureBreadcrumb(o)
+}
