@@ -1,3 +1,8 @@
+# this error is used when we don't want specific wording or as fallback
+generic:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
+
 # the error codes are alphabetically sorted
 BtcUnmatchedApp:
   title: That's the wrong app
@@ -20,27 +25,9 @@ DeviceSocketNoHandler:
 DisconnectedDevice:
   title: Oops, device was disconnected
   description: The connection to the device was lost, so please try again.
-Error:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-"Invariant Violation":
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-InternalError:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-TypeError:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-ReferenceError:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
 FeeEstimationFailed:
   title: Sorry, fee estimation failed
   description: 'Try setting a custom fee (status: {{status}})'
-generic:
-  title: Sorry, that's an unexpected bug
-  description: Please retry or contact Ledger Support.
 HardResetFail:
   title: Oops, could not reset
   description: Please retry or contact Ledger Support.
@@ -83,9 +70,6 @@ NoAddressesFound:
 NotEnoughBalance:
   title: Oops, not enough balance
   description: Make sure the account to debit has sufficient balance
-RangeError:
-  title: '{{message}}'
-  description:
 TimeoutError:
   title: Oops, a time out occurred
   description: It took too long for the server to respond.
