@@ -45,7 +45,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
             <Trans i18nKey="app:account.emptyState.desc">
               {'Make sure the'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {account.currency.name}
+                {account.currency.managerAppName}
               </Text>
               {'app is installed to receive funds.'}
             </Trans>
