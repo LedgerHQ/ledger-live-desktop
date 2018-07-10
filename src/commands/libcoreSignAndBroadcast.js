@@ -19,12 +19,14 @@ type BitcoinLikeTransaction = {
 }
 
 type Input = {
-  account: AccountRaw,
+  account: AccountRaw, // FIXME there is no reason we send the whole AccountRaw
   transaction: BitcoinLikeTransaction,
   deviceId: string,
 }
 
 type Result = { type: 'signed' } | { type: 'broadcasted', operation: OperationRaw }
+
+// FIXME this command should be unified with 'signTransaction' command
 
 const cmd: Command<Input, Result> = createCommand(
   'libcoreSignAndBroadcast',

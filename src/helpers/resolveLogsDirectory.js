@@ -1,7 +1,7 @@
 // @flow
 
+import fs from 'fs'
 import path from 'path'
-import moment from 'moment'
 
 const resolveLogsDirectory = () => {
   const { LEDGER_LOGS_DIRECTORY } = process.env
@@ -12,18 +12,17 @@ const resolveLogsDirectory = () => {
 
 export default resolveLogsDirectory
 
-export const RotatingLogFileParameters = {
-  filename: 'application-%DATE%.log',
-  datePattern: 'YYYY-MM-DD',
-  maxSize: '20m',
-  maxFiles: '14d',
-}
-
 export const getCurrentLogFile = () =>
-  path.resolve(
-    resolveLogsDirectory(),
-    RotatingLogFileParameters.filename.replace(
-      '%DATE%',
-      moment().format(RotatingLogFileParameters.datePattern),
-    ),
-  )
+  new Promise((resolve, reject) => {
+    const dir = resolveLogsDirectory()
+    fs.readdir(dir, (err, files) => {
+      if (err) {
+        reject(err)
+      } else {
+        // last file is always the most up to date log. file will rotate.
+        const last = files[files.length - 1]
+        if (!last) reject(new Error('no logs'))
+        else resolve(path.resolve(dir, last))
+      }
+    })
+  })

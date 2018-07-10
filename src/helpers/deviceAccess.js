@@ -1,7 +1,7 @@
 // @flow
+import logger from 'logger'
 import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
-import { DEBUG_DEVICE } from 'config/constants'
 import { retry } from './promise'
 import { createCustomErrorClass } from './errors'
 
@@ -31,9 +31,7 @@ export const withDevice: WithDevice = devicePath => job => {
     busy = true
     try {
       const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
-      if (DEBUG_DEVICE) {
-        t.setDebugMode(true)
-      }
+      t.setDebugMode(logger.apdu)
       try {
         const res = await job(t).catch(mapError)
         return res
