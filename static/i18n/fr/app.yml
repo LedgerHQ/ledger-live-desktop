@@ -423,7 +423,8 @@ crash:
   uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart
   reset: Reset
-  createTicket: Contact us
+  support: Contact Support
+  github: GitHub
   showDetails: Show details
   showError: Show error
 disclaimerModal:
