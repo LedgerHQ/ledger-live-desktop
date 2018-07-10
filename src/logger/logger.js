@@ -2,10 +2,11 @@
 
 import winston from 'winston'
 import Transport from 'winston-transport'
-import resolveLogsDirectory, { RotatingLogFileParameters } from 'helpers/resolveLogsDirectory'
+import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
 import anonymizer from 'helpers/anonymizer'
 
 import {
+  DEBUG_DEVICE,
   DEBUG_NETWORK,
   DEBUG_COMMANDS,
   DEBUG_DB,
@@ -31,7 +32,11 @@ const pinfo = format(info => {
 const transports = [
   new winston.transports.DailyRotateFile({
     dirname: resolveLogsDirectory(),
-    ...RotatingLogFileParameters,
+    zippedArchive: true,
+    filename: 'application-%DATE%.log',
+    datePattern: 'YYYY-MM-DD',
+    maxSize: '20m',
+    maxFiles: '14d',
   }),
 ]
 
@@ -108,6 +113,16 @@ const logLibcore = !__DEV__ || DEBUG_LIBCORE
 const logWS = !__DEV__ || DEBUG_WS
 const logNetwork = !__DEV__ || DEBUG_NETWORK
 const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
+const logApdu = !__DEV__ || DEBUG_DEVICE
+
+const blacklistTooVerboseCommandInput = ['libcoreSyncAccount', 'libcoreSignAndBroadcast']
+const blacklistTooVerboseCommandResponse = [
+  'libcoreSyncAccount',
+  'libcoreScanAccounts',
+  'listApps',
+  'listAppVersions',
+  'listCategories',
+]
 
 export default {
   setProcessShortName: (processShortName: string) => {
@@ -120,10 +135,19 @@ export default {
     if (logCmds) {
       switch (type) {
         case 'cmd.START':
-          logger.log('info', 'info', `CMD ${id}.send()`, { type, data })
+          logger.log(
+            'info',
+            'info',
+            `CMD ${id}.send()`,
+            blacklistTooVerboseCommandInput.includes(id) ? { type } : { type, data },
+          )
           break
         case 'cmd.NEXT':
-          logger.log('info', `● CMD ${id}`, { type, data })
+          logger.log(
+            'info',
+            `● CMD ${id}`,
+            blacklistTooVerboseCommandResponse.includes(id) ? { type } : { type, data },
+          )
           break
         case 'cmd.COMPLETE':
           logger.log('info', `✔ CMD ${id} finished in ${spentTime.toFixed(0)}ms`, { type })
@@ -155,7 +179,7 @@ export default {
 
   onReduxAction: (action: Object) => {
     if (logRedux) {
-      logger.log('info', `⚛️  ${action.type}`, { type: 'action', action })
+      logger.log('info', `⚛️  ${action.type}`, { type: 'action' })
     }
   },
 
@@ -167,6 +191,12 @@ export default {
     const msg = `⇓ <TAB> - active element ${displayEl}`
     if (logTabkey) {
       logger.log('info', msg, { type: 'keydown' })
+    }
+  },
+
+  apdu: (log: string) => {
+    if (logApdu) {
+      logger.log('info', log, { type: 'apdu' })
     }
   },
 
@@ -202,9 +232,7 @@ export default {
   }) => {
     const anonymURL = anonymizer.url(url)
 
-    const log = `✔📡  HTTP ${status} ${method} ${anonymURL} – finished in ${responseTime.toFixed(
-      0,
-    )}ms`
+    const log = `✔📡  HTTP ${status} ${method} ${url} – finished in ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
       logger.log('info', log, { type: 'network-response' })
     }
@@ -229,7 +257,7 @@ export default {
     responseTime: number,
   }) => {
     const anonymURL = anonymizer.url(url)
-    const log = `✖📡  HTTP ${status} ${method} ${anonymURL} – ${error} – failed after ${responseTime.toFixed(
+    const log = `✖📡  HTTP ${status} ${method} ${url} – ${error} – failed after ${responseTime.toFixed(
       0,
     )}ms`
     if (logNetwork) {
@@ -251,9 +279,7 @@ export default {
     url: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  NETWORK DOWN – ${method} ${anonymizer.url(
-      url,
-    )} – after ${responseTime.toFixed(0)}ms`
+    const log = `✖📡  NETWORK DOWN – ${method} ${url} – after ${responseTime.toFixed(0)}ms`
     if (logNetwork) {
       logger.log('info', log, { type: 'network-down' })
     }

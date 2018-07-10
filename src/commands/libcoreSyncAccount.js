@@ -8,7 +8,7 @@ import { syncAccount } from 'helpers/libcore'
 import withLibcore from 'helpers/withLibcore'
 
 type Input = {
-  rawAccount: AccountRaw,
+  rawAccount: AccountRaw, // FIXME there is no reason we send the whole AccountRaw
 }
 
 type Result = AccountRaw
