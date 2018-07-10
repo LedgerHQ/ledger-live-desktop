@@ -149,6 +149,8 @@ exchange:
   coinhouse: 'Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
   changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
   coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.'
+  simplex: 'Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.'
+  paybis: 'it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.'
 genuinecheck:
   modal:
     title: Genuine check
@@ -178,7 +180,6 @@ addAccounts:
     title: Add a new account
     noOperationOnLastAccount: "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account."
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
-  somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
     addMore: 'Add more'
     add: 'Add account'
@@ -421,7 +422,8 @@ crash:
   uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart
   reset: Reset
-  createTicket: Contact us
+  support: Contact Support
+  github: GitHub
   showDetails: Show details
   showError: Show error
 disclaimerModal:
