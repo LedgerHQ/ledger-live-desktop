@@ -183,7 +183,6 @@ addAccounts:
     title: Add a new account
     noOperationOnLastAccount: "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account."
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
-  somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
     addMore: 'Add more'
     add: 'Add account'

@@ -160,7 +160,7 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   renderError() {
-    const { err, t } = this.props
+    const { err } = this.props
     invariant(err, 'Trying to render inexisting error')
     return (
       <Box
@@ -172,9 +172,11 @@ class StepImport extends PureComponent<StepProps> {
         color="alertRed"
       >
         <IconExclamationCircleThin size={43} />
-        <Box mt={4}>{t('app:addAccounts.somethingWentWrong')}</Box>
         <Box mt={4}>
-          <TranslatedError error={err} />
+          <TranslatedError error={err} field="title" />
+        </Box>
+        <Box mt={4}>
+          <TranslatedError error={err} field="description" />
         </Box>
       </Box>
     )
