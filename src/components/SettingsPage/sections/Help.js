@@ -39,6 +39,11 @@ class SectionHelp extends PureComponent<Props> {
         />
 
         <Body>
+          <AboutRowItem
+            title={t('app:settings.help.faq')}
+            desc={t('app:settings.help.faqDesc')}
+            url={urls.faq}
+          />
           <Row
             title={t('app:settings.profile.softResetTitle')}
             desc={t('app:settings.profile.softResetDesc')}
@@ -46,23 +51,17 @@ class SectionHelp extends PureComponent<Props> {
             <CleanButton />
           </Row>
           <Row
-            title={t('app:settings.profile.hardResetTitle')}
-            desc={t('app:settings.profile.hardResetDesc')}
-          >
-            <ResetButton />
-          </Row>
-          <Row
             title={t('app:settings.exportLogs.title')}
             desc={t('app:settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
           >
             <ExportLogsBtn />
           </Row>
-
-          <AboutRowItem
-            title={t('app:settings.help.faq')}
-            desc={t('app:settings.help.faqDesc')}
-            url={urls.faq}
-          />
+          <Row
+            title={t('app:settings.profile.hardResetTitle')}
+            desc={t('app:settings.profile.hardResetDesc')}
+          >
+            <ResetButton />
+          </Row>
         </Body>
       </Section>
     )
