@@ -35,6 +35,20 @@ const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE
 
 const devTools = __DEV__ || DEV_TOOLS
 
+// context menu - see #978
+require('electron-context-menu')({
+  showInspectElement: __DEV__ || DEV_TOOLS,
+  showCopyImageAddress: false,
+  // TODO: i18n for labels
+  labels: {
+    cut: 'Cut',
+    copy: 'Copy',
+    paste: 'Paste',
+    copyLink: 'Copy Link',
+    inspect: 'Inspect element',
+  },
+})
+
 const getWindowPosition = (height, width, display = screen.getPrimaryDisplay()) => {
   const { bounds } = display
 
