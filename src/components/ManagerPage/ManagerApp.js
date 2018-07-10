@@ -30,6 +30,7 @@ const AppIcon = styled.img`
   display: block;
   width: 36px;
   height: 36px;
+  pointer-events: none;
 `
 
 const AppName = styled(Box).attrs({
