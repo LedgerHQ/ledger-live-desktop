@@ -1,4 +1,5 @@
 // @flow
+import logger from 'logger'
 import anonymizer from 'helpers/anonymizer'
 /* eslint-disable no-continue */
 
@@ -10,35 +11,32 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
     captureUnhandledRejections: true,
     allowSecretKey: true,
     release: __APP_VERSION__,
-    tags: { git_commit: __GIT_REVISION__ },
+    tags: {
+      git_commit: __GIT_REVISION__,
+    },
     environment: __DEV__ ? 'development' : 'production',
     shouldSendCallback,
+    autoBreadcrumbs: {
+      xhr: false, // it is track anonymously from logger
+      console: false, // we don't track because not anonymized
+      dom: false, // user interactions like clicks. it's too cryptic to be exploitable.
+      location: false, // we don't really need location change because we use trackpage
+      sentry: true,
+    },
+    extra: {
+      process: logger.getProcessShortName(),
+    },
     dataCallback: (data: mixed) => {
       // We are mutating the data to anonymize everything.
 
       if (typeof data !== 'object' || !data) return data
 
       delete data.server_name // hides the user machine name
+
       if (typeof data.request === 'object' && data.request) {
         const { request } = data
         if (typeof request.url === 'string') {
           request.url = anonymizer.appURI(request.url)
-        }
-      }
-
-      if (data.breadcrumbs && typeof data.breadcrumbs === 'object') {
-        const { breadcrumbs } = data
-        if (Array.isArray(breadcrumbs.values)) {
-          const { values } = breadcrumbs
-          for (const b of values) {
-            if (!b || typeof b !== 'object') continue
-            if (b.category === 'xhr' && b.data && typeof b.data === 'object') {
-              const { data } = b
-              if (typeof data.url === 'string') {
-                data.url = anonymizer.url(data.url)
-              }
-            }
-          }
         }
       }
 

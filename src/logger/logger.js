@@ -86,6 +86,20 @@ const logger = winston.createLogger({
   transports,
 })
 
+const captureBreadcrumb = (breadcrumb: any) => {
+  if (!process.env.STORYBOOK_ENV) {
+    try {
+      if (typeof window !== 'undefined') {
+        require('sentry/browser').captureBreadcrumb(breadcrumb)
+      } else {
+        require('sentry/node').captureBreadcrumb(breadcrumb)
+      }
+    } catch (e) {
+      logger.log('warn', "Can't captureBreadcrumb", e)
+    }
+  }
+}
+
 const logCmds = !__DEV__ || DEBUG_COMMANDS
 const logDb = !__DEV__ || DEBUG_DB
 const logRedux = !__DEV__ || DEBUG_ACTION
@@ -100,6 +114,8 @@ export default {
     pname = processShortName
   },
 
+  getProcessShortName: () => pname,
+
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
     if (logCmds) {
       switch (type) {
@@ -111,9 +127,17 @@ export default {
           break
         case 'cmd.COMPLETE':
           logger.log('info', `✔ CMD ${id} finished in ${spentTime.toFixed(0)}ms`, { type })
+          captureBreadcrumb({
+            category: 'command',
+            message: `✔ ${id}`,
+          })
           break
         case 'cmd.ERROR':
           logger.log('warn', `✖ CMD ${id} error`, { type, data })
+          captureBreadcrumb({
+            category: 'command',
+            message: `✖ ${id}`,
+          })
           break
         default:
       }
@@ -176,12 +200,19 @@ export default {
     status: number,
     responseTime: number,
   }) => {
-    const log = `✔📡  HTTP ${status} ${method} ${anonymizer.url(
-      url,
-    )} – finished in ${responseTime.toFixed(0)}ms`
+    const anonymURL = anonymizer.url(url)
+
+    const log = `✔📡  HTTP ${status} ${method} ${anonymURL} – finished in ${responseTime.toFixed(
+      0,
+    )}ms`
     if (logNetwork) {
       logger.log('info', log, { type: 'network-response' })
     }
+    captureBreadcrumb({
+      category: 'network',
+      message: 'network success',
+      data: { url: anonymURL, status, method, responseTime },
+    })
   },
 
   networkError: ({
@@ -197,12 +228,18 @@ export default {
     error: string,
     responseTime: number,
   }) => {
-    const log = `✖📡  HTTP ${status} ${method} ${anonymizer.url(
-      url,
-    )} – ${error} – failed after ${responseTime.toFixed(0)}ms`
+    const anonymURL = anonymizer.url(url)
+    const log = `✖📡  HTTP ${status} ${method} ${anonymURL} – ${error} – failed after ${responseTime.toFixed(
+      0,
+    )}ms`
     if (logNetwork) {
       logger.log('info', log, { type: 'network-error', status, method })
     }
+    captureBreadcrumb({
+      category: 'network',
+      message: 'network error',
+      data: { url: anonymURL, status, method, responseTime },
+    })
   },
 
   networkDown: ({
@@ -220,6 +257,10 @@ export default {
     if (logNetwork) {
       logger.log('info', log, { type: 'network-down' })
     }
+    captureBreadcrumb({
+      category: 'network',
+      message: 'network down',
+    })
   },
 
   analyticsStart: (id: string) => {
@@ -238,12 +279,23 @@ export default {
     if (logAnalytics) {
       logger.log('info', `△ track ${event}`, { type: 'anaytics-track', properties })
     }
+    captureBreadcrumb({
+      category: 'track',
+      message: event,
+      data: properties,
+    })
   },
 
   analyticsPage: (category: string, name: ?string, properties: ?Object) => {
+    const message = name ? `${category} ${name}` : category
     if (logAnalytics) {
-      logger.log('info', `△ page ${category} ${name || ''}`, { type: 'anaytics-page', properties })
+      logger.log('info', `△ page ${message}`, { type: 'anaytics-page', properties })
     }
+    captureBreadcrumb({
+      category: 'page',
+      message,
+      data: properties,
+    })
   },
 
   // General functions in case the hooks don't apply
