@@ -77,7 +77,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
 
     if (notes) {
       return notes.map(note => (
-        <Notes>
+        <Notes mb={6}>
           <Title>{t('app:releaseNotes.version', { versionNb: note.tag_name })}</Title>
           <Markdow>{note.body}</Markdow>
         </Notes>
