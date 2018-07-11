@@ -22,7 +22,7 @@ export const urls = {
     'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aopen+is%3Aissue+label%3Abug',
 
   // Exchanges
-  coinbase: 'https://www.coinhouse.com/r/157530',
+  coinhouse: 'https://www.coinhouse.com/r/157530',
   changelly: 'https://changelly.com/?ref_id=aac789605a01',
   coinmama: 'http://go.coinmama.com/visit/?bta=51801&nci=5343',
   simplex: 'https://www.simplex.com/',
