@@ -86,7 +86,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Make sure the <1><0>{{currency}}</0></1> app is installed and start receiving
+    desc: Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving
     buttons:
       receiveFunds: Receive
   settings:
@@ -133,6 +133,8 @@ deviceConnect:
     choose: "We detected {{count}} connected devices, please select one:"
     connect: Connect and unlock your <1>Ledger device</1>
     dashboard: Not used.
+  step2:
+    open: 'Open the <1><0>{{managerAppName}}</0></1> app on your device'
 emptyState:
   sidebar:
     text: Press this button to add accounts to your portfolio
@@ -223,7 +225,7 @@ manager:
     continue: Continue
     latest: 'Firmware version {{version}} is available'
     disclaimerTitle: 'You are about to install <1><0>firmware version {{version}}</0></1>'
-    disclaimerAppDelete: Apps installed on your device have to re-installed after the update.
+    disclaimerAppDelete: Apps installed on your device have to be re-installed after the update.
     disclaimerAppReinstall: "This does not affect your crypto assets in the blockchain."
   modal:
     steps:
