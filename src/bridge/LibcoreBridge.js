@@ -28,8 +28,6 @@ type Transaction = {
 const decodeOperation = (encodedAccount, rawOp) =>
   decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations[0]
 
-const hadSomeNullBlockHeight = ops => ops.some(op => op.blockHeight === null)
-
 const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   <FeesBitcoinKind
     onChange={feePerByte => {
@@ -137,11 +135,11 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
             const hasChanged =
               accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
-              hadSomeNullBlockHeight(accountOps) || // a bit berzerk, but in the future we will want to patch ops 1 by 1
               (accountOps.length > 0 &&
                 syncedOps.length > 0 &&
                 (accountOps[0].accountId !== syncedOps[0].accountId ||
-                  accountOps[0].id !== syncedOps[0].id)) // if same size, only check if the last item has changed.
+                accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
+                  accountOps[0].blockHeight !== syncedOps[0].blockHeight))
 
             if (hasChanged) {
               patch.operations = syncedAccount.operations
