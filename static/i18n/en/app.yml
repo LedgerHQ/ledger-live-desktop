@@ -228,7 +228,7 @@ manager:
     continue: Continue
     latest: 'Firmware version {{version}} is available'
     disclaimerTitle: 'You are about to install <1><0>firmware version {{version}}</0></1>'
-    disclaimerAppDelete: Apps installed on your device have to re-installed after the update.
+    disclaimerAppDelete: Apps installed on your device have to be re-installed after the update.
     disclaimerAppReinstall: "This does not affect your crypto assets in the blockchain."
   modal:
     steps:
