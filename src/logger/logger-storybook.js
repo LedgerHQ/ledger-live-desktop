@@ -1,7 +1,6 @@
 const noop = () => {}
 
 module.exports = {
-  setProcessShortName: noop,
   onCmd: noop,
   onDB: noop,
   onReduxAction: noop,

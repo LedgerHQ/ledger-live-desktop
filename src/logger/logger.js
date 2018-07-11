@@ -4,6 +4,7 @@ import winston from 'winston'
 import Transport from 'winston-transport'
 import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
 import anonymizer from 'helpers/anonymizer'
+import pname from 'helpers/pname'
 
 import {
   DEBUG_DEVICE,
@@ -19,8 +20,6 @@ import {
 
 require('winston-daily-rotate-file')
 
-let pname = '?'
-
 const { format } = winston
 const { combine, json, timestamp } = format
 
@@ -29,16 +28,49 @@ const pinfo = format(info => {
   return info
 })
 
-const transports = [
-  new winston.transports.DailyRotateFile({
+function createDailyRotateFile(processName) {
+  return new winston.transports.DailyRotateFile({
     dirname: resolveLogsDirectory(),
+    json: true,
     zippedArchive: true,
-    filename: 'application-%DATE%.log',
+    filename: `ledger-live-${processName}-%DATE%.log`,
     datePattern: 'YYYY-MM-DD',
-    maxSize: '20m',
+    maxSize: '10m',
     maxFiles: '14d',
-  }),
-]
+  })
+}
+
+const transports = [createDailyRotateFile(pname)]
+
+const queryLogs = (processName: string) =>
+  new Promise((resolve, reject) => {
+    const dailyRotateFile = createDailyRotateFile(processName)
+    const options = {
+      from: new Date() - 60 * 60 * 1000,
+      until: new Date(),
+      limit: 100,
+      start: 0,
+      order: 'desc',
+    }
+    dailyRotateFile.query(options, (err, result) => {
+      if (err) {
+        reject(err)
+        return
+      }
+      resolve(result)
+    })
+  })
+
+const queryAllLogs = async () => {
+  const internal = await queryLogs('internal')
+  const main = await queryLogs('main')
+  const renderer = await queryLogs('renderer')
+  const all = internal
+    .concat(main)
+    .concat(renderer)
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+  return all
+}
 
 if (process.env.NODE_ENV !== 'production' || process.env.DEV_TOOLS) {
   let consoleT
@@ -125,12 +157,6 @@ const blacklistTooVerboseCommandResponse = [
 ]
 
 export default {
-  setProcessShortName: (processShortName: string) => {
-    pname = processShortName
-  },
-
-  getProcessShortName: () => pname,
-
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
     if (logCmds) {
       switch (type) {
@@ -352,4 +378,6 @@ export default {
       }
     }
   },
+
+  queryAllLogs,
 }
