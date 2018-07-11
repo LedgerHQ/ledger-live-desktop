@@ -89,7 +89,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Make sure the <1><0>{{currency}}</0></1> app is installed and start receiving
+    desc: Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving
     buttons:
       receiveFunds: Receive
   settings:
@@ -136,6 +136,8 @@ deviceConnect:
     choose: "We detected {{count}} connected devices, please select one:"
     connect: Connect and unlock your <1>Ledger device</1> # remove key: <3>PIN code</3>
     dashboard: Not used. # This key is not used. Still managed in JS.
+  step2:
+    open: 'Open the <1><0>{{managerAppName}}</0></1> app on your device'
 emptyState:
   sidebar:
     text: Press this button to add accounts to your portfolio

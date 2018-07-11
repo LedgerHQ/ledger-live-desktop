@@ -1535,8 +1535,8 @@
     prebuild-install "^2.2.2"
 
 "@ledgerhq/live-common@^2.32.0":
-  version "2.33.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.33.0.tgz#07ea0244c6afb7892cf04b466ae23807aad8b509"
+  version "2.34.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.34.0.tgz#436ec0816c37f6aabcbca807090f152f1bd3b785"
   dependencies:
     axios "^0.18.0"
     invariant "^2.2.2"

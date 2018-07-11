@@ -6,7 +6,7 @@ generic:
 # the error codes are alphabetically sorted
 BtcUnmatchedApp:
   title: That's the wrong app
-  description: Open the ‘{{currencyName}}’ app on your device
+  description: Open the ‘{{managerAppName}}’ app on your device
 DeviceNotGenuine:
   title: Possibly not genuine
   description: 'Request Ledger Support assistance.'
@@ -94,9 +94,6 @@ WebsocketConnectionError:
 WebsocketConnectionFailed:
   title: Sorry, try again (websocket failed).
   description:
-WrongAppOpened:
-  title: Please open the ‘{{currencyName}}’ app
-  description: The wrong app was opened on your device. Please retry.
 WrongDeviceForAccount:
   title: Oops, wrong device for ‘{{accountName}}’.
   description: The connected device is not associated with the account you selected. Please connect the right device.
