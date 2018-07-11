@@ -1,12 +1,9 @@
 version: 2
 
-docker_defaults: &docker_defaults
-  docker:
-    - image: circleci/node:9.5
-
 jobs:
   build:
-    <<: *docker_defaults
+    docker:
+      - image: circleci/node:8.11.3-stretch-browsers
     branches:
       ignore:
         - gh-pages
