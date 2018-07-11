@@ -176,6 +176,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         index,
         { address, path: freshAddressPath, publicKey },
         isStandard,
+        mandatoryCount,
       ): { account?: Account, complete?: boolean } {
         const balance = await api.getAccountBalance(address)
         if (finished) return { complete: true }
@@ -210,6 +211,10 @@ const EthereumBridge: WalletBridge<Transaction> = {
               return { account, complete: true }
             }
             newAccountCount++
+          }
+
+          if (index < mandatoryCount) {
+            return {}
           }
           // NB for legacy addresses maybe we will continue at least for the first 10 addresses
           return { complete: true }
@@ -254,7 +259,13 @@ const EthereumBridge: WalletBridge<Transaction> = {
               const res = await getAddressCommand
                 .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
                 .toPromise()
-              const r = await stepAddress(index, res, isStandard)
+              const r = await stepAddress(
+                index,
+                res,
+                isStandard,
+                // $FlowFixMe i know i know, not part of function
+                derivation.mandatoryCount || 0,
+              )
               if (r.account) o.next(r.account)
               if (r.complete) {
                 break

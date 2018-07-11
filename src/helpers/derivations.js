@@ -8,6 +8,7 @@ type Derivation = ({
 }) => string
 
 const ethLegacyMEW: Derivation = ({ x }) => `44'/60'/0'/${x}`
+ethLegacyMEW.mandatoryCount = 5
 
 const etcLegacyMEW: Derivation = ({ x }) => `44'/60'/160720'/${x}'/0`
 
