@@ -11,6 +11,7 @@ export const Notes = styled(Box).attrs({
   fontSize: 4,
   color: 'smoke',
   flow: 4,
+  mb: 6,
 })`
   ul,
   ol {
