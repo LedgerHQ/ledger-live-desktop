@@ -32,8 +32,6 @@ import AppError from 'components/AppError'
 
 import 'styles/global'
 
-logger.setProcessShortName('renderer')
-
 const rootNode = document.getElementById('app')
 
 const TAB_KEY = 9

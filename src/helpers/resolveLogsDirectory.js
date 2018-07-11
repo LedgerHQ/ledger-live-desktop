@@ -1,6 +1,5 @@
 // @flow
 
-import fs from 'fs'
 import path from 'path'
 
 const resolveLogsDirectory = () => {
@@ -11,18 +10,3 @@ const resolveLogsDirectory = () => {
 }
 
 export default resolveLogsDirectory
-
-export const getCurrentLogFile = () =>
-  new Promise((resolve, reject) => {
-    const dir = resolveLogsDirectory()
-    fs.readdir(dir, (err, files) => {
-      if (err) {
-        reject(err)
-      } else {
-        // last file is always the most up to date log. file will rotate.
-        const last = files[files.length - 1]
-        if (!last) reject(new Error('no logs'))
-        else resolve(path.resolve(dir, last))
-      }
-    })
-  })

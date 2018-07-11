@@ -17,8 +17,6 @@ import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
 
-logger.setProcessShortName('main')
-
 // sqlite files will be located in the app local data folder
 const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
 const LEDGER_LOGS_DIRECTORY = process.env.LEDGER_LOGS_DIRECTORY || resolveLogsDirectory()
@@ -51,6 +49,7 @@ const bootInternalProcess = () => {
   internalProcess = fork(forkBundlePath, {
     env: {
       ...process.env,
+      IS_INTERNAL_PROCESS: 1,
       LEDGER_LOGS_DIRECTORY,
       LEDGER_CONFIG_DIRECTORY,
       LEDGER_LIVE_SQLITE_PATH,

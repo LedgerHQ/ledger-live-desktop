@@ -6,22 +6,17 @@ import { webFrame, remote } from 'electron'
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
 import KeyHandler from 'react-key-handler'
-import { getCurrentLogFile } from 'helpers/resolveLogsDirectory'
 import Button from './base/Button'
 
-function copyFile(source, target) {
-  const rd = fs.createReadStream(source)
-  const wr = fs.createWriteStream(target)
+function writeToFile(file, data) {
   return new Promise((resolve, reject) => {
-    rd.on('error', reject)
-    wr.on('error', reject)
-    wr.on('finish', resolve)
-    rd.pipe(wr)
-  }).catch(error => {
-    // $FlowFixMe
-    rd.destroy()
-    wr.end()
-    throw error
+    fs.writeFile(file, data, error => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve()
+      }
+    })
   })
 }
 
@@ -30,9 +25,7 @@ class ExportLogsBtn extends Component<{
   hookToShortcut?: boolean,
 }> {
   export = async () => {
-    const srcLogFile = await getCurrentLogFile()
     const resourceUsage = webFrame.getResourceUsage()
-    const ext = srcLogFile.match(/[.]log[.]gz$/) ? 'log.gz' : 'log'
     logger.log('exportLogsMeta', {
       resourceUsage,
       release: __APP_VERSION__,
@@ -44,16 +37,18 @@ class ExportLogsBtn extends Component<{
       title: 'Export logs',
       defaultPath: `ledgerlive-export-${moment().format(
         'YYYY.MM.DD-HH.mm.ss',
-      )}-${__GIT_REVISION__ || 'unversionned'}.${ext}`,
+      )}-${__GIT_REVISION__ || 'unversionned'}.json`,
       filters: [
         {
           name: 'All Files',
-          extensions: [ext],
+          extensions: ['json'],
         },
       ],
     })
     if (path) {
-      await copyFile(srcLogFile, path)
+      const logs = await logger.queryAllLogs()
+      const json = JSON.stringify(logs)
+      await writeToFile(path, json)
     }
   }
 

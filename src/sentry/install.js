@@ -1,5 +1,5 @@
 // @flow
-import logger from 'logger'
+import pname from 'helpers/pname'
 import anonymizer from 'helpers/anonymizer'
 /* eslint-disable no-continue */
 
@@ -24,7 +24,7 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
       sentry: true,
     },
     extra: {
-      process: logger.getProcessShortName(),
+      process: pname,
     },
     dataCallback: (data: mixed) => {
       // We are mutating the data to anonymize everything.
