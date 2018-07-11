@@ -19,7 +19,7 @@ export const urls = {
   privacyPolicy: 'https://www.ledgerwallet.com/privacy-policy',
 
   githubIssues:
-    'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aopen+is%3Aissue+label%3Abug',
+    'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc',
 
   // Exchanges
   coinhouse: 'https://www.coinhouse.com/r/157530',
