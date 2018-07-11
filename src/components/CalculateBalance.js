@@ -79,7 +79,9 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     balanceHistory,
     balanceStart: balanceHistory[0].value,
     balanceEnd,
-    hash: `${balanceHistory.length}_${balanceEnd}_${isAvailable.toString()}`,
+    hash: `${props.accounts.length > 0 ? props.accounts[0].id : ''}_${
+      balanceHistory.length
+    }_${balanceEnd}_${isAvailable.toString()}`,
   }
 }
 
