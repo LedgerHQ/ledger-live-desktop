@@ -364,7 +364,13 @@ export default {
     logger.log('error', ...args)
   },
 
-  critical: (error: Error) => {
+  critical: (error: Error, context?: string) => {
+    if (context) {
+      captureBreadcrumb({
+        category: 'context',
+        message: context,
+      })
+    }
     logger.log('error', error)
     if (!process.env.STORYBOOK_ENV) {
       try {

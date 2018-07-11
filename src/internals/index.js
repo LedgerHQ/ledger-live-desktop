@@ -16,7 +16,10 @@ process.on('uncaughtException', err => {
     type: 'uncaughtException',
     error: serializeError(err),
   })
-  process.exit(1)
+  // FIXME we should ideally do this:
+  // process.exit(1)
+  // but for now, until we kill all exceptions:
+  logger.critical(err, 'uncaughtException')
 })
 
 const defers = {}
