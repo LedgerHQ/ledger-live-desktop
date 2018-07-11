@@ -100,3 +100,5 @@ WrongDeviceForAccount:
 DeviceAppVerifyNotSupported:
   title: Open Manager to update this App
   description: The app verification is not supported
+InvalidAddress:
+  title: 'This is not a valid {{currencyName}} address'

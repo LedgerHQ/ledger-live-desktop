@@ -24,7 +24,10 @@ class TranslatedError extends PureComponent<Props> {
     if (!error) return null
     if (typeof error !== 'object') {
       // this case should not happen (it is supposed to be a ?Error)
-      logger.critical(error)
+      logger.critical(`TranslatedError invalid usage: ${String(error)}`)
+      if (typeof error === 'string') {
+        return error // TMP in case still used somewhere
+      }
       return null
     }
     if (error.name) {
