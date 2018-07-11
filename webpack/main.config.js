@@ -9,6 +9,9 @@ const config = {
   module: {
     rules,
   },
+  optimization: {
+    minimize: false,
+  },
 }
 
 module.exports = config

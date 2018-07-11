@@ -47,4 +47,8 @@ module.exports = webpackMain().then(config => ({
   },
 
   plugins: [...plugins('internals'), ...config.plugins],
+
+  optimization: {
+    minimize: false,
+  },
 }))

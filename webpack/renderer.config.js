@@ -15,7 +15,7 @@ const config = {
     historyApiFallback: true,
   },
   optimization: {
-    minimizer: [],
+    minimize: false,
   },
 }
 
