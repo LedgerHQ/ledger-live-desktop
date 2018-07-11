@@ -48,6 +48,7 @@ import type { Data } from './types'
 export type Props = {
   data: Data, // eslint-disable-line react/no-unused-prop-types
   unit?: ?Unit, // eslint-disable-line react/no-unused-prop-types
+  cvCode?: string, // eslint-disable-line react/no-unused-prop-types
   id?: string, // eslint-disable-line react/no-unused-prop-types
   height?: number,
   tickXScale: string, // eslint-disable-line react/no-unused-prop-types
