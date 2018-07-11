@@ -87,7 +87,7 @@ type Props = {
   renderLeft?: any,
   renderRight?: any,
   containerProps?: Object,
-  error?: string | boolean,
+  error?: ?Error | boolean,
   small?: boolean,
   editInPlace?: boolean,
 }
