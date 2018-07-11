@@ -96,7 +96,7 @@ export default function handleMouseEvents({
                 unit={props.unit}
                 renderTooltip={renderTooltip}
                 item={d.ref}
-                counterValue={getFiatCurrencyByTicker('USD')}
+                counterValue={getFiatCurrencyByTicker(props.cvCode || 'USD')}
               />
             </ThemeProvider>
           </Provider>,
