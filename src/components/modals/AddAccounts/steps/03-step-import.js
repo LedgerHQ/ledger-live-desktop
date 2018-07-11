@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import invariant from 'invariant'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
@@ -122,7 +123,10 @@ class StepImport extends PureComponent<StepProps> {
           }
         },
         complete: () => setScanStatus('finished'),
-        error: err => setScanStatus('error', err),
+        error: err => {
+          logger.critical(err)
+          setScanStatus('error', err)
+        },
       })
     } catch (err) {
       setScanStatus('error', err)
