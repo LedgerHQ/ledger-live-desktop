@@ -24,7 +24,7 @@ const cards = [
   {
     key: 'coinhouse',
     id: 'coinhouse',
-    url: urls.coinbase,
+    url: urls.coinhouse,
     logo: <CoinhouseLogo width={150} />,
   },
   {
