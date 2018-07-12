@@ -45,13 +45,13 @@ LedgerAPINotAvailable:
   description: Please retry or contact Ledger Support.
 ManagerAPIsFail:
   title: Oops, Manager services unavailable.
-  description: Please check the network status. #link to status.ledger.fr ?
+  description: Please check the network status.
 ManagerAppAlreadyInstalled:
-   title: Oops, that's already installed. # include {{currencyName}}
+   title: Oops, that's already installed.
    description: Check your device to see which apps are already installed.
 ManagerAppRelyOnBTC:
   title: Bitcoin app required
-  description: Install the Bitcoin app before installing this app. # include {{currencyName}}
+  description: Install the Bitcoin app before installing this app.
 ManagerDeviceLocked:
   title: Please unlock your device
   description: Your device was locked. Please unlock it.
@@ -59,7 +59,7 @@ ManagerNotEnoughSpace:
   title: Sorry, insufficient device storage
   description: Uninstall some apps to increase available storage and try again.
 ManagerUninstallBTCDep:
-  title: Sorry, Bitcoin is required # include {{currencyName}}
+  title: Sorry, Bitcoin is required
   description: First uninstall apps that depend on Bitcoin.
 NetworkDown:
   title: Oops, internet seems down
@@ -90,7 +90,7 @@ UserRefusedAddress:
   description: Please try again or contact Ledger Support
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
-  description:  #context
+  description: 
 WebsocketConnectionFailed:
   title: Sorry, try again (websocket failed).
   description:

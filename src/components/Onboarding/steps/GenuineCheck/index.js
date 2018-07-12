@@ -61,12 +61,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     const { t } = this.props
     return [
       {
-        label: t('app:common.yes'),
+        label: t('app:common.labelYes'),
         key: 'yes',
         pass: true,
       },
       {
-        label: t('app:common.no'),
+        label: t('app:common.labelNo'),
         key: 'no',
         pass: false,
       },
