@@ -1,6 +1,6 @@
 common:
-  labelYes: Yes
-  labelNo: No
+  labelYes: 'Yes'
+  labelNo: 'No'
   ok: OK
   apply: Apply
   confirm: Confirm
