@@ -1,8 +1,8 @@
 ---
 common:
-  ok: OK
   labelYes: true
   labelNo: false
+  ok: OK
   apply: Apply
   confirm: Confirm
   cancel: Cancel
