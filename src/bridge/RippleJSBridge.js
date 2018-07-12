@@ -192,9 +192,11 @@ type Tx = {
 const txToOperation = (account: Account) => ({
   id,
   sequence,
+  type: txType,
   outcome: { fee, deliveredAmount, ledgerVersion, timestamp },
   specification: { source, destination },
-}: Tx): Operation => {
+}: Tx): ?Operation => {
+  if (txType === 'trustline') return null
   const type = source.address === account.freshAddress ? 'OUT' : 'IN'
   let value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0
   const feeValue = parseAPIValue(fee)
@@ -334,7 +336,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
                 unit: currency.units[0],
                 lastSyncDate: new Date(),
               }
-              account.operations = transactions.map(txToOperation(account))
+              account.operations = transactions.map(txToOperation(account)).filter(Boolean)
               o.next(account)
             }
           }
