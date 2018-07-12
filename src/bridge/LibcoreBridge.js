@@ -138,7 +138,8 @@ const LibcoreBridge: WalletBridge<Transaction> = {
               (accountOps.length > 0 &&
                 syncedOps.length > 0 &&
                 (accountOps[0].accountId !== syncedOps[0].accountId ||
-                  accountOps[0].id !== syncedOps[0].id)) // if same size, only check if the last item has changed.
+                accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
+                  accountOps[0].blockHeight !== syncedOps[0].blockHeight))
 
             if (hasChanged) {
               patch.operations = syncedAccount.operations
