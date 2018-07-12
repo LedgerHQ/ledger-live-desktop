@@ -32,23 +32,22 @@ function createDailyRotateFile(processName) {
   return new winston.transports.DailyRotateFile({
     dirname: resolveLogsDirectory(),
     json: true,
-    zippedArchive: true,
     filename: `ledger-live-${processName}-%DATE%.log`,
     datePattern: 'YYYY-MM-DD',
-    maxSize: '10m',
-    maxFiles: '14d',
+    maxSize: '20m',
+    maxFiles: '7d',
   })
 }
 
 const transports = [createDailyRotateFile(pname)]
 
-const queryLogs = (processName: string) =>
+const queryLogs = (processName: string, date: Date) =>
   new Promise((resolve, reject) => {
     const dailyRotateFile = createDailyRotateFile(processName)
     const options = {
-      from: new Date() - 60 * 60 * 1000,
-      until: new Date(),
-      limit: 100,
+      from: date - 10 * 60 * 1000,
+      until: date,
+      limit: 500,
       start: 0,
       order: 'desc',
     }
@@ -61,10 +60,10 @@ const queryLogs = (processName: string) =>
     })
   })
 
-const queryAllLogs = async () => {
-  const internal = await queryLogs('internal')
-  const main = await queryLogs('main')
-  const renderer = await queryLogs('renderer')
+const queryAllLogs = async (date: Date = new Date()) => {
+  const internal = await queryLogs('internal', date)
+  const main = await queryLogs('main', date)
+  const renderer = await queryLogs('renderer', date)
   const all = internal
     .concat(main)
     .concat(renderer)

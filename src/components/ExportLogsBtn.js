@@ -33,6 +33,7 @@ class ExportLogsBtn extends Component<{
       environment: __DEV__ ? 'development' : 'production',
       userAgent: window.navigator.userAgent,
     })
+    const date = new Date() // we don't want all the logs that happen after the Export was pressed ^^
     const path = remote.dialog.showSaveDialog({
       title: 'Export logs',
       defaultPath: `ledgerlive-export-${moment().format(
@@ -46,7 +47,7 @@ class ExportLogsBtn extends Component<{
       ],
     })
     if (path) {
-      const logs = await logger.queryAllLogs()
+      const logs = await logger.queryAllLogs(date)
       const json = JSON.stringify(logs)
       await writeToFile(path, json)
     }
