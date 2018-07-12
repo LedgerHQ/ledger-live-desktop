@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
-
+import semver from 'semver'
 import network from 'api/network'
 
 import Button from 'components/base/Button'
@@ -24,7 +24,8 @@ type Props = {
 }
 
 type State = {
-  markdown: ?string,
+  notes: *,
+  error: ?Error,
 }
 
 const Title = styled(Text).attrs({
@@ -35,7 +36,8 @@ const Title = styled(Text).attrs({
 
 class ReleaseNotesBody extends PureComponent<Props, State> {
   state = {
-    markdown: null,
+    notes: null,
+    error: null,
   }
 
   componentDidMount() {
@@ -45,33 +47,46 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
 
   fetchNotes = async (version: string) => {
     try {
-      const {
-        data: { body },
-      } = await network({
+      const { data } = await network({
         method: 'GET',
-        url: `https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`,
+        url: 'https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases',
+        // `https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`,
       })
-      if (body) {
-        this.setState({ markdown: body })
-      } else {
-        this.setState({ markdown: this.props.t('app:common.error.load') })
-      }
+      const v = semver.parse(version)
+      if (!v) throw new Error(`can't parse semver ${version}`)
+      const notes = data.filter(
+        d =>
+          semver.gte(
+            d.tag_name,
+            v.prerelease.length
+              ? `${v.major}.${v.minor}.${v.patch}-${v.prerelease[0]}`
+              : `${v.major}.${v.minor}.0`,
+          ) && semver.lte(d.tag_name, version),
+      )
+      this.setState({ notes })
     } catch (error) {
-      this.setState({ markdown: this.props.t('app:common.error.load') })
+      this.setState({ error })
     }
   }
 
   renderContent = () => {
-    const { markdown } = this.state
+    const { error, notes } = this.state
     const { t } = this.props
 
     const { version } = this.props
 
-    if (markdown) {
+    if (notes) {
+      return notes.map(note => (
+        <Notes mb={6}>
+          <Title>{t('app:releaseNotes.version', { versionNb: note.tag_name })}</Title>
+          <Markdow>{note.body}</Markdow>
+        </Notes>
+      ))
+    } else if (error) {
       return (
         <Notes>
           <Title>{t('app:releaseNotes.version', { versionNb: version })}</Title>
-          <Markdow>{markdown}</Markdow>
+          <Markdow>{t('app:common.error.load')}</Markdow>
         </Notes>
       )
     }
