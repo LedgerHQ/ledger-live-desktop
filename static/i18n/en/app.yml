@@ -1,7 +1,7 @@
 common:
   ok: OK
-  yes: Yes
-  no: No
+  labelYes: Yes
+  labelNo: No
   apply: Apply
   confirm: Confirm
   cancel: Cancel
@@ -63,11 +63,7 @@ buttons:
 operation:
   type:
     IN: Received
-#      conf: Received
-#      unconf: Receiving...
     OUT: Sent
-#      conf: Sent
-#      unconf: Sending...
 time:
   day: Day
   week: Week
@@ -134,8 +130,7 @@ currentAddress:
 deviceConnect:
   step1:
     choose: "We detected {{count}} connected devices, please select one:"
-    connect: Connect and unlock your <1>Ledger device</1> # remove key: <3>PIN code</3>
-    dashboard: Not used. # This key is not used. Still managed in JS.
+    connect: Connect and unlock your <1>Ledger device</1>
   step2:
     open: 'Open the <1><0>{{managerAppName}}</0></1> app on your device'
 emptyState:
@@ -279,7 +274,7 @@ send:
     amount:
       title: Details
       selectAccountDebit: Select an account to debit
-      recipientAddress: Recipient address # can't control the tooltip!
+      recipientAddress: Recipient address
       amount: Amount
       max: Max
       fees: Network fees
@@ -312,7 +307,7 @@ send:
 releaseNotes:
   title: Release notes
   version: Ledger Live {{versionNb}}
-settings: # Always ensure descriptions carry full stops (.)
+settings:
   title: Settings
   tabs:
     display: General
@@ -337,9 +332,9 @@ settings: # Always ensure descriptions carry full stops (.)
     exchange: Rate provider ({{ticker}} → BTC)
     exchangeDesc: Choose the provider of the rate between {{currencyName}} and Bitcoin. The indicative total value of your portfolio is calculated by converting your {{currencyName}} to Bitcoin, which is then converted to your base currency.
     confirmationsToSpend: Number of confirmations required to spend
-    confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable. # A higher number of confirmations decreases the probability that a transaction is rejected.
+    confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable.
     confirmationsNb: Number of confirmations
-    confirmationsNbDesc: Set the number of network confirmations for a transaction to be marked as confirmed. # A higher number of confirmations increases the certainty that a transaction cannot be reversed.
+    confirmationsNbDesc: Set the number of network confirmations for a transaction to be marked as confirmed.
     transactionsFees: Default transaction fees
     transactionsFeesDesc: Select your default transaction fees. The higher the fee, the faster the transaction will be processed.
     explorer: Blockchain explorer
@@ -368,7 +363,7 @@ settings: # Always ensure descriptions carry full stops (.)
   help:
     desc: Learn about Ledger Live features or get help.
     version: Version
-    releaseNotesBtn: Details # Close button instead of continue.
+    releaseNotesBtn: Details
     faq: Ledger Support
     faqDesc: A problem? Get help with Ledger Live, Ledger devices, supported crypto assets and apps.
     terms: Terms and conditions
@@ -401,13 +396,10 @@ password:
   inputFields:
     newPassword:
       label: New password
-      placeholder: #remove
     confirmPassword:
       label: Confirm password
-      placeholder: #remove
-    currentPassword: #remove
+    currentPassword:
       label: Current password
-      placeholder:
   changePassword:
     title: Password lock
     subTitle: Change your password

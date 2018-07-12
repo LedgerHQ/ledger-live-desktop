@@ -35,7 +35,7 @@ selectDevice:
     title: Ledger Blue
 selectPIN:
   disclaimer:
-    note1: 'Choose your own PIN code, this code will unlock your device.' # dotted line should be in red. Increase size of the hand (+50%?)
+    note1: 'Choose your own PIN code, this code will unlock your device.'
     note2: An 8-digit PIN code offers an optimum level of security.
     note3: Never use a device supplied with a PIN code or a 24-word recovery phrase.
   initialize:
@@ -68,7 +68,7 @@ writeSeed:
     desc: Your device will generate a 24-word recovery phrase to back up your private keys
     nano:
       step1: 'Copy the word displayed below <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.'
-      step2: 'Press the right button to display <1><0>Word #2</0></1> and repeat the process until all 24 words are copied on the Recovery sheet.' #<italic>Recovery sheet</italic>
+      step2: 'Press the right button to display <1><0>Word #2</0></1> and repeat the process until all 24 words are copied on the Recovery sheet.'
       step3: 'Confirm your recovery phrase: select each requested word and press both buttons to validate it.'
     blue:
       step1: Copy each word of the recovery phrase on a blank Recovery sheet. Copy the words in the same order.
@@ -146,21 +146,17 @@ analytics:
     title: Report bugs
     desc: Automatically send reports to help Ledger fix bugs.
   technicalData:
-     title: Technical data *
-     desc: Ledger will automatically collect technical information to get basic feedback on usage. This information is anonymous and does not contain personal data.
-     mandatoryText: '* mandatory'
-     mandatoryContextual:
-       title: Technical data
-       item1: Anonymous unique application ID
-       item2: OS name and version
-       item3: Ledger Live version
-       item4: Application language or region
-       item5: OS language or region
+    title: Technical data *
+    desc: Ledger will automatically collect technical information to get basic feedback on usage. This information is anonymous and does not contain personal data.
+    mandatoryText: '* mandatory'
+    mandatoryContextual:
+      title: Technical data
+      item1: Anonymous unique application ID
+      item2: OS name and version
+      item3: Ledger Live version
+      item4: Application language or region
+      item5: OS language or region
 finish:
   title: Your device is ready!
   desc: Proceed to your portfolio and start adding your accounts...
   openAppButton: Open Ledger Live
-  #tooltip:
-    # twitter: Twitter
-    # github: GitHub
-    # reddit: Reddit
