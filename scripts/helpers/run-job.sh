@@ -3,6 +3,11 @@
 # shellcheck disable=SC1091
 source scripts/helpers/format.sh
 
+operatingSystem=$(uname -s)
+if [ "$operatingSystem" != Linux* ] && [ "$operatingSystem" != Darwin* ]; then
+  operatingSystem="Windows"
+fi
+
 function runJob {
 
   job=$1
@@ -10,6 +15,15 @@ function runJob {
   successMsg=$3
   errMsg=$4
   logLevel=$5
+
+  # let's absolutely don't take care of this fake os
+  if [ "$operatingSystem" == "Windows" ]; then
+    local tmpScript=$(mktemp)
+    echo $job > "$tmpScript"
+    bash "$tmpScript"
+    rm "$tmpScript"
+    return $?
+  fi
 
   tmpErrFile=$(mktemp)
 

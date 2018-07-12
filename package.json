@@ -7,19 +7,19 @@
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
-    "postinstall": "./scripts/postinstall.sh",
-    "start": "./scripts/start.sh",
-    "release": "./scripts/release.sh",
-    "dist": "./scripts/dist.sh",
-    "dist:dir": "./scripts/dist-dir.sh",
-    "compile": "./scripts/compile.sh",
+    "postinstall": "bash ./scripts/postinstall.sh",
+    "start": "bash ./scripts/start.sh",
+    "release": "bash ./scripts/release.sh",
+    "dist": "bash ./scripts/dist.sh",
+    "dist:dir": "bash ./scripts/dist-dir.sh",
+    "compile": "bash ./scripts/compile.sh",
     "lint": "eslint src webpack .storybook",
     "flow": "flow",
     "prettier": "prettier --write \"{src,webpack,.storybook,static/i18n}/**/*.{js,json}\"",
     "ci": "yarn lint && yarn flow && yarn prettier",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
-    "publish-storybook": "./scripts/legacy/publish-storybook.sh",
-    "reset-files": "./scripts/legacy/reset-files.sh"
+    "publish-storybook": "bash ./scripts/legacy/publish-storybook.sh",
+    "reset-files": "bash ./scripts/legacy/reset-files.sh"
   },
   "electronWebpack": {
     "title": true,
