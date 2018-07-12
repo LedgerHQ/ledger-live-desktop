@@ -13,6 +13,7 @@ import OpenUserDataDirectoryBtn from 'components/OpenUserDataDirectoryBtn'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
 import AboutRowItem from '../AboutRowItem'
+import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
 
 import {
   SettingsSection as Section,
@@ -68,6 +69,12 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('app:settings.profile.hardResetDesc')}
           >
             <ResetButton />
+          </Row>
+          <Row
+            title={t('app:settings.profile.launchOnboarding')}
+            desc={t('app:settings.profile.launchOnboardingDesc')}
+          >
+            <LaunchOnboardingBtn />
           </Row>
         </Body>
       </Section>

@@ -20,7 +20,7 @@ type Props = {
 
 function OnboardingBreadcrumb(props: Props) {
   const { onboarding, t } = props
-  const { stepName, genuine } = onboarding
+  const { stepName, genuine, onboardingRelaunched } = onboarding
   const isInitializedFlow = onboarding.flowType === 'initializedDevice'
 
   const regularFilteredSteps = onboarding.steps
@@ -28,10 +28,23 @@ function OnboardingBreadcrumb(props: Props) {
     .map(step => ({ ...step, label: t(step.label) }))
 
   const alreadyInitializedSteps = onboarding.steps
-    .filter(step => !step.external && step.name !== 'writeSeed' && step.name !== 'selectPIN')
+    .filter(step => !step.external && !step.options.alreadyInitSkip)
     .map(step => ({ ...step, label: t(step.label) }))
 
-  const filteredSteps = isInitializedFlow ? alreadyInitializedSteps : regularFilteredSteps
+  const onboardingRelaunchedSteps = onboarding.steps
+    .filter(
+      step =>
+        isInitializedFlow
+          ? !step.options.alreadyInitSkip && !step.external && !step.options.relaunchSkip
+          : !step.external && !step.options.relaunchSkip,
+    )
+    .map(step => ({ ...step, label: t(step.label) }))
+
+  const filteredSteps = onboardingRelaunched
+    ? onboardingRelaunchedSteps
+    : isInitializedFlow
+      ? alreadyInitializedSteps
+      : regularFilteredSteps
 
   const stepIndex = findIndex(filteredSteps, s => s.name === stepName)
   const genuineStepIndex = findIndex(filteredSteps, s => s.name === 'genuineCheck')

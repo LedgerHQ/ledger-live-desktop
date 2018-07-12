@@ -8,9 +8,9 @@ type Step = {
   external?: boolean,
   label?: string,
   options: {
-    showFooter: boolean,
-    showBackground: boolean,
     showBreadcrumb: boolean,
+    relaunchSkip?: boolean,
+    alreadyInitSkip?: boolean,
   },
 }
 
@@ -28,9 +28,10 @@ export type OnboardingState = {
   },
   isLedgerNano: boolean | null,
   flowType: string,
+  onboardingRelaunched?: false,
 }
 
-const state: OnboardingState = {
+const initialState: OnboardingState = {
   stepIndex: 0, // FIXME is this used at all? dup with stepName?
   stepName: SKIP_ONBOARDING ? 'analytics' : 'start',
   genuine: {
@@ -48,8 +49,6 @@ const state: OnboardingState = {
       name: 'start',
       external: true,
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: false,
       },
     },
@@ -57,8 +56,6 @@ const state: OnboardingState = {
       name: 'init',
       external: true,
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: false,
       },
     },
@@ -66,8 +63,6 @@ const state: OnboardingState = {
       name: 'noDevice',
       external: true,
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: false,
       },
     },
@@ -75,8 +70,6 @@ const state: OnboardingState = {
       name: 'selectDevice',
       label: 'onboarding:breadcrumb.selectDevice',
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: true,
       },
     },
@@ -84,8 +77,6 @@ const state: OnboardingState = {
       name: 'selectPIN',
       label: 'onboarding:breadcrumb.selectPIN',
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: true,
       },
     },
@@ -93,44 +84,38 @@ const state: OnboardingState = {
       name: 'writeSeed',
       label: 'onboarding:breadcrumb.writeSeed',
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: true,
+        alreadyInitSkip: true,
       },
     },
     {
       name: 'genuineCheck',
       label: 'onboarding:breadcrumb.genuineCheck',
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: true,
+        alreadyInitSkip: true,
       },
     },
     {
       name: 'setPassword',
       label: 'onboarding:breadcrumb.setPassword',
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: true,
+        relaunchSkip: true,
       },
     },
     {
       name: 'analytics',
       label: 'onboarding:breadcrumb.analytics',
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: true,
+        relaunchSkip: true,
       },
     },
     {
       name: 'finish',
       external: true,
       options: {
-        showFooter: false,
-        showBackground: true,
         showBreadcrumb: false,
       },
     },
@@ -149,7 +134,7 @@ const handlers = {
     }
     return { ...state, stepName: state.steps[index + 1].name, stepIndex: index + 1 }
   },
-  ONBOARDING_PREV_STEP: state => {
+  ONBOARDING_PREV_STEP: (state: OnboardingState) => {
     const step = state.steps.find(step => step.name === state.stepName)
     if (!step) {
       return state
@@ -160,7 +145,7 @@ const handlers = {
     }
     return { ...state, stepName: state.steps[index - 1].name, stepIndex: index - 1 }
   },
-  ONBOARDING_JUMP_STEP: (state, { payload: stepName }) => {
+  ONBOARDING_JUMP_STEP: (state: OnboardingState, { payload: stepName }) => {
     const step = state.steps.find(step => step.name === stepName)
     if (!step) {
       return state
@@ -169,25 +154,30 @@ const handlers = {
     return { ...state, stepName: step.name, stepIndex: index }
   },
 
-  UPDATE_GENUINE_CHECK: (state, { payload: obj }) => ({
+  UPDATE_GENUINE_CHECK: (state: OnboardingState, { payload: obj }) => ({
     ...state,
     genuine: {
       ...state.genuine,
       ...obj,
     },
   }),
-  ONBOARDING_SET_FLOW_TYPE: (state, { payload: flowType }) => ({
+  ONBOARDING_SET_FLOW_TYPE: (state: OnboardingState, { payload: flowType }) => ({
     ...state,
     flowType,
   }),
-  ONBOARDING_SET_DEVICE_TYPE: (state, { payload: isLedgerNano }) => ({
+  ONBOARDING_SET_DEVICE_TYPE: (state: OnboardingState, { payload: isLedgerNano }) => ({
     ...state,
     isLedgerNano,
   }),
+  ONBOARDING_RELAUNCH: (
+    state: OnboardingState,
+    { payload: onboardingRelaunched }: { payload: $Shape<OnboardingState> },
+  ) => ({ ...initialState, ...onboardingRelaunched }),
 }
 
-export default handleActions(handlers, state)
+export default handleActions(handlers, initialState)
 
+export const relaunchOnboarding = createAction('ONBOARDING_RELAUNCH')
 export const nextStep = createAction('ONBOARDING_NEXT_STEP')
 export const prevStep = createAction('ONBOARDING_PREV_STEP')
 export const jumpStep = createAction('ONBOARDING_JUMP_STEP')

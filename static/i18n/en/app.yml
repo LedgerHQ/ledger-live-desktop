@@ -359,6 +359,8 @@ settings:
     analyticsDesc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
     reportErrors: Report bugs
     reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
+    launchOnboarding: Onboarding
+    launchOnboardingDesc: Launch again the onboarding to add a new device to the Ledger Live application
   about:
     desc: Information about Ledger Live, terms and conditions, and privacy policy.
   help:
