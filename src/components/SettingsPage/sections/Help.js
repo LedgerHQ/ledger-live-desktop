@@ -9,6 +9,7 @@ import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
 import { urls } from 'config/urls'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
+import OpenUserDataDirectoryBtn from 'components/OpenUserDataDirectoryBtn'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
 import AboutRowItem from '../AboutRowItem'
@@ -55,6 +56,12 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('app:settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
           >
             <ExportLogsBtn />
+          </Row>
+          <Row
+            title={t('app:settings.openUserDataDirectory.title')}
+            desc={t('app:settings.openUserDataDirectory.desc')}
+          >
+            <OpenUserDataDirectoryBtn />
           </Row>
           <Row
             title={t('app:settings.profile.hardResetTitle')}

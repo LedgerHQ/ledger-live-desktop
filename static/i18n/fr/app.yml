@@ -382,6 +382,10 @@ settings:
     title: Remove account
     subTitle: Are you sure?
     desc: The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added.
+  openUserDataDirectory:
+    title: 'Open user data directory'
+    desc: 'Open the user data directory'
+    btn: 'Open'
   exportLogs:
     title: Export logs
     desc: 'Exporting Ledger Live logs may be necessary for troubleshooting purposes.'
