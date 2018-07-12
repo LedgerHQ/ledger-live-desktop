@@ -64,7 +64,7 @@
     <script>
       <% if (htmlWebpackPlugin.options.nodeModules) { %>
         require('module').globalPaths.push(
-          '<%= htmlWebpackPlugin.options.nodeModules %>'.replace(/\\/g, '\\\\'),
+          '<%= htmlWebpackPlugin.options.nodeModules.replace(/\\/g, "\\\\") %>',
         )
       <% } %>
       require('source-map-support/source-map-support.js').install()
