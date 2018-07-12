@@ -1,8 +1,8 @@
 ---
 common:
   ok: OK
-  labelYes: Yes
-  labelNo: No
+  labelYes: true
+  labelNo: false
   apply: Apply
   confirm: Confirm
   cancel: Cancel
@@ -132,7 +132,6 @@ deviceConnect:
   step1:
     choose: "We detected {{count}} connected devices, please select one:"
     connect: Connect and unlock your <1>Ledger device</1>
-    dashboard: Not used.
   step2:
     open: 'Open the <1><0>{{managerAppName}}</0></1> app on your device'
 emptyState:
@@ -398,13 +397,10 @@ password:
   inputFields:
     newPassword:
       label: New password
-      placeholder:
     confirmPassword:
       label: Confirm password
-      placeholder:
     currentPassword:
       label: Current password
-      placeholder:
   changePassword:
     title: Password lock
     subTitle: Change your password

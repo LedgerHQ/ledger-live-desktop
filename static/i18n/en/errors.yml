@@ -1,9 +1,7 @@
-# this error is used when we don't want specific wording or as fallback
+---
 generic:
   title: '{{message}}'
   description: Something went wrong. Please retry or contact us.
-
-# the error codes are alphabetically sorted
 BtcUnmatchedApp:
   title: That's the wrong app
   description: Open the ‘{{managerAppName}}’ app on your device
@@ -47,8 +45,8 @@ ManagerAPIsFail:
   title: Oops, Manager services unavailable.
   description: Please check the network status.
 ManagerAppAlreadyInstalled:
-   title: Oops, that's already installed.
-   description: Check your device to see which apps are already installed.
+  title: Oops, that's already installed.
+  description: Check your device to see which apps are already installed.
 ManagerAppRelyOnBTC:
   title: Bitcoin app required
   description: Install the Bitcoin app before installing this app.
@@ -90,7 +88,7 @@ UserRefusedAddress:
   description: Please try again or contact Ledger Support
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
-  description: 
+  description:
 WebsocketConnectionFailed:
   title: Sorry, try again (websocket failed).
   description:
