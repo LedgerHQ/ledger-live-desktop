@@ -29,10 +29,8 @@ fi
 yarn compile
 
 runJob \
+  "DEBUG=electron-builder electron-builder build --publish always" \
   "building, packaging and publishing app..." \
   "app built, packaged and published successfully" \
   "failed to build app" \
-  "verbose" \
-<<EOF
-DEBUG=electron-builder electron-builder build --publish always
-EOF
+  "verbose"

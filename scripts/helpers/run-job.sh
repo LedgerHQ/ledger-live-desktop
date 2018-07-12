@@ -5,14 +5,14 @@ source scripts/helpers/format.sh
 
 function runJob {
 
-  progressMsg=$1
-  successMsg=$2
-  errMsg=$3
-  logLevel=$4
+  job=$1
+  progressMsg=$2
+  successMsg=$3
+  errMsg=$4
+  logLevel=$5
 
   tmpErrFile=$(mktemp)
 
-  job=$(</dev/stdin)
   formatProgress "$progressMsg"
 
   if [ "$logLevel" == "verbose" ]; then

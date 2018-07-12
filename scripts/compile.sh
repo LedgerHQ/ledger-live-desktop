@@ -19,25 +19,19 @@ formatEnvVar 'SENTRY_URL'
 echo
 
 runJob \
+  "rm -rf dist" \
   "clearing dist..." \
   "dist cleared" \
-  "failed to clear dist" \
-<<EOF
-rm -rf dist
-EOF
+  "failed to clear dist"
 
 runJob \
+  "NODE_ENV=production yarn run webpack-cli --mode production --config webpack/internals.config.js" \
   "building internal bundle..." \
   "internal bundle built" \
-  "failed to build internal bundle" \
-<<EOF
-NODE_ENV=production yarn run webpack-cli --mode production --config webpack/internals.config.js
-EOF
+  "failed to build internal bundle"
 
 runJob \
+  "NODE_ENV=production yarn run electron-webpack" \
   "building main & renderer bundles..." \
   "main & renderer bundles built" \
-  "failed to build main & renderer bundles" \
-<<EOF
-NODE_ENV=production yarn run electron-webpack
-EOF
+  "failed to build main & renderer bundles"

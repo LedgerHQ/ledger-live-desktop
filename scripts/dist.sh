@@ -14,32 +14,26 @@ source scripts/helpers/display-env.sh
 #   - https://github.com/electron-userland/electron-builder/issues/2269
 if [[ $(uname) == 'Linux' ]]; then
   runJob \
+    "mv build/icon.png /tmp" \
     "dirty fix to handle linux icon..." \
     "successfully applied dirty fix to handle linux icon" \
-    "failed to apply dirty fix to handle linux icon" \
-<<EOF
-mv build/icon.png /tmp
-EOF
+    "failed to apply dirty fix to handle linux icon"
 fi
 
 yarn compile
 
 runJob \
+  "DEBUG=electron-builder electron-builder" \
   "building and packaging app..." \
   "app built and packaged successfully" \
   "failed to build app" \
-  "verbose" \
-<<EOF
-DEBUG=electron-builder electron-builder
-EOF
+  "verbose"
 
 # hilarious fix continuation: put back the icon where it was
 if [[ $(uname) == 'Linux' ]]; then
   runJob \
+    "mv /tmp/icon.png build" \
     "cleaning dirty fix to handle linux icon..." \
     "successfully applied clean dirty fix to handle linux icon" \
-    "failed to apply clean dirty fix to handle linux icon" \
-<<EOF
-mv /tmp/icon.png build
-EOF
+    "failed to apply clean dirty fix to handle linux icon"
 fi

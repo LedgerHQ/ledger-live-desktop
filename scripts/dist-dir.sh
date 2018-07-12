@@ -11,10 +11,8 @@ source scripts/helpers/display-env.sh
 yarn compile
 
 runJob \
+  "DEBUG=electron-builder electron-builder --dir -c.compression=store -c.mac.identity=null" \
   "building app..." \
   "app built successfully" \
   "failed to build app" \
-  "verbose" \
-<<EOF
-DEBUG=electron-builder electron-builder --dir -c.compression=store -c.mac.identity=null
-EOF
+  "verbose"

@@ -47,27 +47,29 @@ function main {
 
 function installFlowTyped {
   runJob \
+    "flow-typed install -s --overwrite" \
     "Installing flow-typed definitions..." \
     "Installed flow-typed definitions" \
-    "Failed installing flow-typed definitions" \
-  <<EOF
-  flow-typed install -s --overwrite
-EOF
-  rm flow-typed/npm/{react-i18next_v7.x.x.js,styled-components_v3.x.x.js,redux_*,winston*}
-  formatSuccess "Removed broken flow-typed definitions"
+    "Failed installing flow-typed definitions"
+
+  runJob \
+    "rm flow-typed/npm/{react-i18next_v7.x.x.js,styled-components_v3.x.x.js,redux_*,winston*}" \
+    "Removing broken flow-typed definitions" \
+    "Removed broken flow-typed definitions" \
+    "Failed removing broken flow-typed definitions"
+
   setHash flow-typed "$latestFlowTypedCommitHash"
-  formatSuccess "Installed flow-typed definitions"
+
+  formatSuccess "installed flow-typed definitions"
 }
 
 function rebuildElectronNativeDeps {
   runJob \
+    "DEBUG=electron-builder electron-builder install-app-deps" \
     "Building native electron dependencies..." \
     "Successfully builded native modules for electron" \
     "Build failed" \
-    "verbose" \
-  <<EOF
-  DEBUG=electron-builder electron-builder install-app-deps
-EOF
+    "verbose"
   setHash yarn.lock "$(getYarnHash)"
 }
 
