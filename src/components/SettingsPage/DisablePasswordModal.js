@@ -84,7 +84,6 @@ class DisablePasswordModal extends PureComponent<Props, State> {
                         <InputPassword
                           autoFocus
                           type="password"
-                          placeholder={t('app:password.inputFields.currentPassword.placeholder')}
                           id="password"
                           onChange={this.handleInputChange('currentPassword')}
                           value={currentPassword}
