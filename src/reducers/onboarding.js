@@ -44,6 +44,7 @@ const initialState: OnboardingState = {
   },
   isLedgerNano: null,
   flowType: '',
+  onboardingRelaunched: false,
   steps: [
     {
       name: 'start',
