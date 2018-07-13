@@ -13,6 +13,7 @@ import OpenUserDataDirectoryBtn from 'components/OpenUserDataDirectoryBtn'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
 import AboutRowItem from '../AboutRowItem'
+import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
 
 import {
   SettingsSection as Section,
@@ -56,6 +57,12 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('app:settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
           >
             <ExportLogsBtn />
+          </Row>
+          <Row
+            title={t('app:settings.profile.launchOnboarding')}
+            desc={t('app:settings.profile.launchOnboardingDesc')}
+          >
+            <LaunchOnboardingBtn />
           </Row>
           <Row
             title={t('app:settings.openUserDataDirectory.title')}

@@ -151,7 +151,10 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     const { prevStep, onboarding, jumpStep } = this.props
     onboarding.flowType === 'initializedDevice' ? jumpStep('selectDevice') : prevStep()
   }
-
+  handleNextStep = () => {
+    const { onboarding, jumpStep, nextStep } = this.props
+    onboarding.onboardingRelaunched ? jumpStep('finish') : nextStep()
+  }
   renderGenuineFail = () => (
     <GenuineCheckErrorPage
       redoGenuineCheck={this.redoGenuineCheck}
@@ -280,7 +283,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         ) : (
           <OnboardingFooter
             t={t}
-            nextStep={nextStep}
+            nextStep={this.handleNextStep}
             prevStep={this.handlePrevStep}
             isContinueDisabled={!genuine.isDeviceGenuine}
           />
