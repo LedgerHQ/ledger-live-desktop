@@ -59,6 +59,12 @@ class SectionHelp extends PureComponent<Props> {
             <ExportLogsBtn />
           </Row>
           <Row
+            title={t('app:settings.profile.launchOnboarding')}
+            desc={t('app:settings.profile.launchOnboardingDesc')}
+          >
+            <LaunchOnboardingBtn />
+          </Row>
+          <Row
             title={t('app:settings.openUserDataDirectory.title')}
             desc={t('app:settings.openUserDataDirectory.desc')}
           >
@@ -69,12 +75,6 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('app:settings.profile.hardResetDesc')}
           >
             <ResetButton />
-          </Row>
-          <Row
-            title={t('app:settings.profile.launchOnboarding')}
-            desc={t('app:settings.profile.launchOnboardingDesc')}
-          >
-            <LaunchOnboardingBtn />
           </Row>
         </Body>
       </Section>

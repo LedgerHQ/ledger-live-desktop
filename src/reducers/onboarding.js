@@ -28,11 +28,11 @@ export type OnboardingState = {
   },
   isLedgerNano: boolean | null,
   flowType: string,
-  onboardingRelaunched?: false,
+  onboardingRelaunched?: boolean,
 }
 
 const initialState: OnboardingState = {
-  stepIndex: 0, // FIXME is this used at all? dup with stepName?
+  stepIndex: 0,
   stepName: SKIP_ONBOARDING ? 'analytics' : 'start',
   genuine: {
     pinStepPass: false,
@@ -78,6 +78,7 @@ const initialState: OnboardingState = {
       label: 'onboarding:breadcrumb.selectPIN',
       options: {
         showBreadcrumb: true,
+        alreadyInitSkip: true,
       },
     },
     {
@@ -93,7 +94,6 @@ const initialState: OnboardingState = {
       label: 'onboarding:breadcrumb.genuineCheck',
       options: {
         showBreadcrumb: true,
-        alreadyInitSkip: true,
       },
     },
     {
