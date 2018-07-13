@@ -31,11 +31,11 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
     invariant(ws, 'websocket is available')
 
     ws.on('open', () => {
-      logger.websocket('OPENED', url)
+      logger.websocket('OPENED', { url })
     })
 
     ws.on('error', e => {
-      logger.websocket('ERROR', e)
+      logger.websocket('ERROR', { message: e.message, stack: e.stack })
       o.error(new WebsocketConnectionError(e.message, { url }))
     })
 
@@ -97,7 +97,7 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
       },
 
       error: msg => {
-        logger.websocket('ERROR', msg.data)
+        logger.websocket('ERROR', { data: msg.data })
         throw new DeviceSocketFail(msg.data, { url })
       },
     }
@@ -114,7 +114,7 @@ export const createDeviceSocket = (transport: Transport<*>, url: string) =>
         logger.websocket('RECEIVE', msg)
         await handlers[msg.query](msg)
       } catch (err) {
-        logger.websocket('ERROR', err.toString())
+        logger.websocket('ERROR', { message: err.message, stack: err.stack })
         o.error(err)
       }
     }

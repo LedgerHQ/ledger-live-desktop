@@ -47,7 +47,7 @@ const queryLogs = (processName: string, date: Date) =>
     const options = {
       from: date - 10 * 60 * 1000,
       until: date,
-      limit: 500,
+      limit: 2000,
       start: 0,
       order: 'desc',
     }
@@ -117,7 +117,7 @@ if (process.env.NODE_ENV !== 'production' || process.env.DEV_TOOLS) {
 }
 
 const logger = winston.createLogger({
-  level: 'info',
+  level: 'debug',
   format: combine(pinfo(), timestamp(), json()),
   transports,
 })
@@ -162,7 +162,6 @@ export default {
         case 'cmd.START':
           logger.log(
             'info',
-            'info',
             `CMD ${id}.send()`,
             blacklistTooVerboseCommandInput.includes(id) ? { type } : { type, data },
           )
@@ -196,7 +195,7 @@ export default {
   onDB: (way: 'read' | 'write' | 'clear', name: string) => {
     const msg = `📁  ${way} ${name}`
     if (logDb) {
-      logger.log('info', msg, { type: 'db' })
+      logger.log('debug', msg, { type: 'db' })
     }
   },
 
@@ -204,7 +203,7 @@ export default {
 
   onReduxAction: (action: Object) => {
     if (logRedux) {
-      logger.log('info', `⚛️  ${action.type}`, { type: 'action' })
+      logger.log('debug', `⚛️  ${action.type}`, { type: 'action' })
     }
   },
 
@@ -215,25 +214,25 @@ export default {
     const displayEl = `${tagName.toLowerCase()}${classList.length ? ` ${classList.item(0)}` : ''}`
     const msg = `⇓ <TAB> - active element ${displayEl}`
     if (logTabkey) {
-      logger.log('info', msg, { type: 'keydown' })
+      logger.log('debug', msg, { type: 'keydown' })
     }
   },
 
   apdu: (log: string) => {
     if (logApdu) {
-      logger.log('info', log, { type: 'apdu' })
+      logger.log('debug', log, { type: 'apdu' })
     }
   },
 
-  websocket: (type: string, msg: *) => {
+  websocket: (type: string, obj?: Object) => {
     if (logWS) {
-      logger.log('info', `~ ${type}:`, msg, { type: 'ws' })
+      logger.log('debug', `~ ${type}`, { ...obj, type: 'ws' })
     }
   },
 
   libcore: (level: string, msg: string) => {
     if (logLibcore) {
-      logger.log('info', `🛠  ${level}: ${msg}`, { type: 'libcore' })
+      logger.log(level.toLowerCase(), `🛠  ${msg}`, { type: 'libcore' })
     }
   },
 
@@ -370,7 +369,11 @@ export default {
         message: context,
       })
     }
-    logger.log('error', error)
+    // $FlowFixMe
+    logger.log('error', error.message, {
+      stack: error.stack,
+      ...error,
+    })
     if (!process.env.STORYBOOK_ENV) {
       try {
         if (typeof window !== 'undefined') {
