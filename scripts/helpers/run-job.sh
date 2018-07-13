@@ -4,22 +4,27 @@
 source scripts/helpers/format.sh
 
 operatingSystem=$(uname -s)
-if [ "$operatingSystem" != Linux* ] && [ "$operatingSystem" != Darwin* ]; then
+if [ "$operatingSystem" != "Linux" ] && [ "$operatingSystem" != "Darwin" ]; then
   operatingSystem="Windows"
 fi
 
 function runJob {
 
-  job=$1
-  progressMsg=$2
-  successMsg=$3
-  errMsg=$4
-  logLevel=$5
+  local job=$1
+  local progressMsg=$2
+  local successMsg=$3
+  local errMsg=$4
+  local logLevel=$5
+
+  local tmpScript
+  local tmpErrFile
+  local childPid
+  local returnCode
 
   # let's absolutely don't take care of this fake os
   if [ "$operatingSystem" == "Windows" ]; then
-    local tmpScript=$(mktemp)
-    echo $job > "$tmpScript"
+    tmpScript=$(mktemp)
+    echo "$job" > "$tmpScript"
     bash "$tmpScript"
     rm "$tmpScript"
     return $?
