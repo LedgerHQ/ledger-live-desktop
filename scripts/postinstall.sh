@@ -59,8 +59,6 @@ function installFlowTyped {
     "Failed removing broken flow-typed definitions"
 
   setHash flow-typed "$latestFlowTypedCommitHash"
-
-  formatSuccess "installed flow-typed definitions"
 }
 
 function rebuildElectronNativeDeps {
