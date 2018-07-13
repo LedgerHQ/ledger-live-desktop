@@ -1,5 +1,6 @@
 // @flow
 import logger from 'logger'
+import throttle from 'lodash/throttle'
 import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { retry } from './promise'
@@ -26,10 +27,19 @@ let busy = false
 
 TransportNodeHid.setListenDevicesPollingSkip(() => busy)
 
+const refreshBusyUIState = throttle(() => {
+  process.send({
+    type: 'setDeviceBusy',
+    busy,
+  })
+}, 100)
+
 export const withDevice: WithDevice = devicePath => job => {
   const p = queue.then(async () => {
     busy = true
+    refreshBusyUIState()
     try {
+      // FIXME: remove this retry
       const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
       t.setDebugMode(logger.apdu)
       try {
@@ -40,6 +50,7 @@ export const withDevice: WithDevice = devicePath => job => {
       }
     } finally {
       busy = false
+      refreshBusyUIState()
     }
   })
 

@@ -105,8 +105,8 @@ export default ({ store }: { store: Object }) => {
       onSetLibcoreBusy(busy)
     })
 
-    ipcRenderer.on('setDeviceBusy', (event: any, { busy, devicePath }) => {
-      onSetDeviceBusy(devicePath, busy)
+    ipcRenderer.on('setDeviceBusy', (event: any, { busy }) => {
+      onSetDeviceBusy(busy)
     })
   }
 
