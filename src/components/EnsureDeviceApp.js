@@ -85,11 +85,12 @@ class EnsureDeviceApp extends Component<{
   }
 
   render() {
-    const { account, currency, ...props } = this.props
+    const { account, currency, device, ...props } = this.props
     const cur = account ? account.currency : currency
     const Icon = cur ? getCryptoCurrencyIcon(cur) : null
     return (
       <DeviceInteraction
+        key={device ? device.path : null}
         shouldRenderRetry
         steps={[
           {
