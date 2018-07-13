@@ -47,7 +47,6 @@ type State = {
 }
 
 type Props = {
-  maxLength: number,
   onChange: Function,
   t: T,
   value: string,
@@ -58,7 +57,6 @@ class InputPassword extends PureComponent<Props, State> {
   static defaultProps = {
     onChange: noop,
     value: '',
-    maxLength: 20,
   }
 
   state = {
@@ -86,7 +84,7 @@ class InputPassword extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, value, maxLength, withStrength } = this.props
+    const { t, value, withStrength } = this.props
     const { passwordStrength, inputType } = this.state
 
     const hasValue = value.trim() !== ''
@@ -96,7 +94,6 @@ class InputPassword extends PureComponent<Props, State> {
         <Input
           {...this.props}
           type={inputType}
-          maxLength={maxLength}
           onChange={this.handleChange}
           renderRight={
             <InputRight onClick={this.toggleInputType}>

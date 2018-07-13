@@ -14,7 +14,8 @@ export default async function withLibcore<A>(job: Job<A>): Promise<A> {
         busy: true,
       })
     }
-    return job(core)
+    const res = await job(core)
+    return res
   } finally {
     if (--counter === 0) {
       process.send({

@@ -45,45 +45,36 @@ export default ({
       {account &&
         bridge &&
         transaction && (
-          <RecipientField
-            autoFocus={openedFromAccount}
-            account={account}
-            bridge={bridge}
-            transaction={transaction}
-            onChangeTransaction={onChangeTransaction}
-            t={t}
-          />
-        )}
+          <Fragment key={account.id}>
+            <RecipientField
+              autoFocus={openedFromAccount}
+              account={account}
+              bridge={bridge}
+              transaction={transaction}
+              onChangeTransaction={onChangeTransaction}
+              t={t}
+            />
 
-      {account &&
-        bridge &&
-        transaction && (
-          <AmountField
-            key={account.id}
-            account={account}
-            bridge={bridge}
-            transaction={transaction}
-            onChangeTransaction={onChangeTransaction}
-            t={t}
-          />
-        )}
+            <AmountField
+              account={account}
+              bridge={bridge}
+              transaction={transaction}
+              onChangeTransaction={onChangeTransaction}
+              t={t}
+            />
 
-      {account &&
-        bridge &&
-        transaction &&
-        FeesField && (
-          <FeesField account={account} value={transaction} onChange={onChangeTransaction} />
-        )}
+            {FeesField && (
+              <FeesField account={account} value={transaction} onChange={onChangeTransaction} />
+            )}
 
-      {account &&
-        bridge &&
-        transaction &&
-        AdvancedOptionsField && (
-          <AdvancedOptionsField
-            account={account}
-            value={transaction}
-            onChange={onChangeTransaction}
-          />
+            {AdvancedOptionsField && (
+              <AdvancedOptionsField
+                account={account}
+                value={transaction}
+                onChange={onChangeTransaction}
+              />
+            )}
+          </Fragment>
         )}
     </Box>
   )

@@ -1,7 +1,10 @@
-# the error codes are alphabetically sorted
+---
+generic:
+  title: '{{message}}'
+  description: Something went wrong. Please retry or contact us.
 BtcUnmatchedApp:
   title: That's the wrong app
-  description: Open the ‘{{currencyName}}’ app on your device
+  description: Open the ‘{{managerAppName}}’ app on your device
 DeviceNotGenuine:
   title: Possibly not genuine
   description: 'Request Ledger Support assistance.'
@@ -20,27 +23,9 @@ DeviceSocketNoHandler:
 DisconnectedDevice:
   title: Oops, device was disconnected
   description: The connection to the device was lost, so please try again.
-Error:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-"Invariant Violation":
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-InternalError:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-TypeError:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
-ReferenceError:
-  title: '{{message}}'
-  description: Something went wrong. Please retry or contact us.
 FeeEstimationFailed:
   title: Sorry, fee estimation failed
   description: 'Try setting a custom fee (status: {{status}})'
-generic:
-  title: Sorry, that's an unexpected bug
-  description: Please retry or contact Ledger Support.
 HardResetFail:
   title: Oops, could not reset
   description: Please retry or contact Ledger Support.
@@ -58,13 +43,13 @@ LedgerAPINotAvailable:
   description: Please retry or contact Ledger Support.
 ManagerAPIsFail:
   title: Oops, Manager services unavailable.
-  description: Please check the network status. #link to status.ledger.fr ?
+  description: Please check the network status.
 ManagerAppAlreadyInstalled:
-   title: Oops, that's already installed. # include {{currencyName}}
-   description: Check your device to see which apps are already installed.
+  title: Oops, that's already installed.
+  description: Check your device to see which apps are already installed.
 ManagerAppRelyOnBTC:
   title: Bitcoin app required
-  description: Install the Bitcoin app before installing this app. # include {{currencyName}}
+  description: Install the Bitcoin app before installing this app.
 ManagerDeviceLocked:
   title: Please unlock your device
   description: Your device was locked. Please unlock it.
@@ -72,7 +57,7 @@ ManagerNotEnoughSpace:
   title: Sorry, insufficient device storage
   description: Uninstall some apps to increase available storage and try again.
 ManagerUninstallBTCDep:
-  title: Sorry, Bitcoin is required # include {{currencyName}}
+  title: Sorry, Bitcoin is required
   description: First uninstall apps that depend on Bitcoin.
 NetworkDown:
   title: Oops, internet seems down
@@ -83,9 +68,6 @@ NoAddressesFound:
 NotEnoughBalance:
   title: Oops, not enough balance
   description: Make sure the account to debit has sufficient balance
-RangeError:
-  title: '{{message}}'
-  description:
 TimeoutError:
   title: Oops, a time out occurred
   description: It took too long for the server to respond.
@@ -106,16 +88,15 @@ UserRefusedAddress:
   description: Please try again or contact Ledger Support
 WebsocketConnectionError:
   title: Sorry, try again (websocket error).
-  description:  #context
+  description:
 WebsocketConnectionFailed:
   title: Sorry, try again (websocket failed).
   description:
-WrongAppOpened:
-  title: Please open the ‘{{currencyName}}’ app
-  description: The wrong app was opened on your device. Please retry.
 WrongDeviceForAccount:
   title: Oops, wrong device for ‘{{accountName}}’.
   description: The connected device is not associated with the account you selected. Please connect the right device.
 DeviceAppVerifyNotSupported:
   title: Open Manager to update this App
   description: The app verification is not supported
+InvalidAddress:
+  title: 'This is not a valid {{currencyName}} address'

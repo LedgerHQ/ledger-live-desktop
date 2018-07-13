@@ -7,8 +7,6 @@ import sentry from 'sentry/node'
 import { EXPERIMENTAL_HTTP_ON_RENDERER } from 'config/constants'
 import { serializeError } from 'helpers/errors'
 
-logger.setProcessShortName('internal')
-
 require('../env')
 
 process.title = 'Ledger Live Internal'
@@ -18,7 +16,10 @@ process.on('uncaughtException', err => {
     type: 'uncaughtException',
     error: serializeError(err),
   })
-  process.exit(1)
+  // FIXME we should ideally do this:
+  // process.exit(1)
+  // but for now, until we kill all exceptions:
+  logger.critical(err, 'uncaughtException')
 })
 
 const defers = {}

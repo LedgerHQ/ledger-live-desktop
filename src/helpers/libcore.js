@@ -36,65 +36,63 @@ type Props = {
   devicePath: string,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
+  isUnsubscribed: () => boolean,
 }
 
-export function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
-  const { devicePath, currencyId, onAccountScanned, core } = props
+export async function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
+  const { devicePath, currencyId, onAccountScanned, core, isUnsubscribed } = props
   const currency = getCryptoCurrencyById(currencyId)
 
-  return withDevice(devicePath)(async transport => {
-    const hwApp = new Btc(transport)
+  const commonParams = {
+    core,
+    currencyId,
+    onAccountScanned,
+    devicePath,
+    isUnsubscribed,
+  }
 
-    const commonParams = {
-      core,
-      currencyId,
-      onAccountScanned,
-      hwApp,
-    }
+  let allAccounts = []
 
-    let allAccounts = []
+  const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({
+    ...commonParams,
+    showNewAccount: !!SHOW_LEGACY_NEW_ACCOUNT || !currency.supportsSegwit,
+    isSegwit: false,
+    isUnsplit: false,
+  })
+  allAccounts = allAccounts.concat(nonSegwitAccounts)
 
-    const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({
+  if (currency.supportsSegwit) {
+    const segwitAccounts = await scanAccountsOnDeviceBySegwit({
       ...commonParams,
-      showNewAccount: !!SHOW_LEGACY_NEW_ACCOUNT || !currency.supportsSegwit,
-      isSegwit: false,
+      showNewAccount: true,
+      isSegwit: true,
       isUnsplit: false,
     })
-    allAccounts = allAccounts.concat(nonSegwitAccounts)
+    allAccounts = allAccounts.concat(segwitAccounts)
+  }
+
+  // TODO: put that info inside currency itself
+  if (currencyId in SPLITTED_CURRENCIES) {
+    const splittedAccounts = await scanAccountsOnDeviceBySegwit({
+      ...commonParams,
+      isSegwit: false,
+      showNewAccount: false,
+      isUnsplit: true,
+    })
+    allAccounts = allAccounts.concat(splittedAccounts)
 
     if (currency.supportsSegwit) {
       const segwitAccounts = await scanAccountsOnDeviceBySegwit({
         ...commonParams,
-        showNewAccount: true,
+        showNewAccount: false,
+        isUnsplit: true,
         isSegwit: true,
-        isUnsplit: false,
       })
       allAccounts = allAccounts.concat(segwitAccounts)
     }
+  }
 
-    // TODO: put that info inside currency itself
-    if (currencyId in SPLITTED_CURRENCIES) {
-      const splittedAccounts = await scanAccountsOnDeviceBySegwit({
-        ...commonParams,
-        isSegwit: false,
-        showNewAccount: false,
-        isUnsplit: true,
-      })
-      allAccounts = allAccounts.concat(splittedAccounts)
-
-      if (currency.supportsSegwit) {
-        const segwitAccounts = await scanAccountsOnDeviceBySegwit({
-          ...commonParams,
-          showNewAccount: false,
-          isUnsplit: true,
-          isSegwit: true,
-        })
-        allAccounts = allAccounts.concat(segwitAccounts)
-      }
-    }
-
-    return allAccounts
-  })
+  return allAccounts
 }
 
 function encodeWalletName({
@@ -114,17 +112,19 @@ function encodeWalletName({
 
 async function scanAccountsOnDeviceBySegwit({
   core,
-  hwApp,
+  devicePath,
   currencyId,
   onAccountScanned,
+  isUnsubscribed,
   isSegwit,
   isUnsplit,
   showNewAccount,
 }: {
   core: *,
-  hwApp: Object,
+  devicePath: string,
   currencyId: string,
   onAccountScanned: AccountRaw => void,
+  isUnsubscribed: () => boolean,
   isSegwit: boolean, // FIXME all segwit to change to 'purpose'
   showNewAccount: boolean,
   isUnsplit: boolean,
@@ -135,7 +135,11 @@ async function scanAccountsOnDeviceBySegwit({
 
   const path = `${isSegwit ? '49' : '44'}'/${coinType}'`
 
-  const { publicKey } = await hwApp.getWalletPublicKey(path, false, isSegwit)
+  const { publicKey } = await withDevice(devicePath)(async transport =>
+    new Btc(transport).getWalletPublicKey(path, false, isSegwit),
+  )
+
+  if (isUnsubscribed()) return []
 
   const walletName = encodeWalletName({ publicKey, currencyId, isSegwit, isUnsplit })
 
@@ -148,7 +152,7 @@ async function scanAccountsOnDeviceBySegwit({
   const accounts = await scanNextAccount({
     core,
     wallet,
-    hwApp,
+    devicePath,
     currencyId,
     accountsCount,
     accountIndex: 0,
@@ -157,6 +161,7 @@ async function scanAccountsOnDeviceBySegwit({
     isSegwit,
     isUnsplit,
     showNewAccount,
+    isUnsubscribed,
   })
 
   return accounts
@@ -164,12 +169,14 @@ async function scanAccountsOnDeviceBySegwit({
 
 const hexToBytes = str => Array.from(Buffer.from(str, 'hex'))
 
-const createAccount = async (wallet, hwApp) => {
+const createAccount = async (wallet, devicePath) => {
   const accountCreationInfos = await wallet.getNextAccountCreationInfo()
   await accountCreationInfos.derivations.reduce(
     (promise, derivation) =>
       promise.then(async () => {
-        const { publicKey, chainCode } = await hwApp.getWalletPublicKey(derivation)
+        const { publicKey, chainCode } = await withDevice(devicePath)(async transport =>
+          new Btc(transport).getWalletPublicKey(derivation),
+        )
         accountCreationInfos.publicKeys.push(hexToBytes(publicKey))
         accountCreationInfos.chainCodes.push(hexToBytes(chainCode))
       }),
@@ -222,7 +229,7 @@ async function scanNextAccount(props: {
   // $FlowFixMe
   wallet: NJSWallet,
   core: *,
-  hwApp: Object,
+  devicePath: string,
   currencyId: string,
   accountsCount: number,
   accountIndex: number,
@@ -231,11 +238,12 @@ async function scanNextAccount(props: {
   isSegwit: boolean,
   isUnsplit: boolean,
   showNewAccount: boolean,
+  isUnsubscribed: () => boolean,
 }): Promise<AccountRaw[]> {
   const {
     core,
     wallet,
-    hwApp,
+    devicePath,
     currencyId,
     accountsCount,
     accountIndex,
@@ -244,6 +252,7 @@ async function scanNextAccount(props: {
     isSegwit,
     isUnsplit,
     showNewAccount,
+    isUnsubscribed,
   } = props
 
   // create account only if account has not been scanned yet
@@ -252,12 +261,16 @@ async function scanNextAccount(props: {
 
   const njsAccount = hasBeenScanned
     ? await wallet.getAccount(accountIndex)
-    : await createAccount(wallet, hwApp)
+    : await createAccount(wallet, devicePath)
+
+  if (isUnsubscribed()) return []
 
   const shouldSyncAccount = true // TODO: let's sync everytime. maybe in the future we can optimize.
   if (shouldSyncAccount) {
     await coreSyncAccount(core, njsAccount)
   }
+
+  if (isUnsubscribed()) return []
 
   const query = njsAccount.queryOperations()
   const ops = await query.complete().execute()
@@ -272,6 +285,8 @@ async function scanNextAccount(props: {
     core,
     ops,
   })
+
+  if (isUnsubscribed()) return []
 
   const isEmpty = ops.length === 0
 

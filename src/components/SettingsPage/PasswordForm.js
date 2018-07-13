@@ -44,7 +44,6 @@ class PasswordForm extends PureComponent<Props> {
               </Label>
               <InputPassword
                 autoFocus
-                placeholder={t('app:password.inputFields.currentPassword.placeholder')}
                 id="currentPassword"
                 onChange={onChange('currentPassword')}
                 value={currentPassword}
@@ -57,7 +56,6 @@ class PasswordForm extends PureComponent<Props> {
             <InputPassword
               style={{ mt: 4, width: 240 }}
               autoFocus={!isPasswordEnabled}
-              placeholder={t('app:password.inputFields.newPassword.placeholder')}
               id="newPassword"
               onChange={onChange('newPassword')}
               value={newPassword}
@@ -69,7 +67,6 @@ class PasswordForm extends PureComponent<Props> {
             </Label>
             <InputPassword
               style={{ width: 240 }}
-              placeholder={t('app:password.inputFields.confirmPassword.placeholder')}
               id="confirmPassword"
               onChange={onChange('confirmPassword')}
               value={confirmPassword}

@@ -73,6 +73,7 @@ const BalanceSummary = ({
                 }
                 height={200}
                 currency={counterValue}
+                cvCode={counterValue.ticker}
                 tickXScale={selectedTimeRange}
                 renderTickY={
                   isAvailable ? val => formatShort(counterValue.units[0], val) : () => ''

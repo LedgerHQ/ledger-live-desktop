@@ -214,7 +214,7 @@ class HelperComp extends PureComponent<Props, State> {
                   maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
                   onFocus={e => this.handleFocus(e, 'accountName')}
-                  error={accountNameError && t('app:account.settings.accountName.error')}
+                  error={accountNameError && new Error(t('app:account.settings.accountName.error'))}
                 />
               </Box>
             </Container>
@@ -251,7 +251,9 @@ class HelperComp extends PureComponent<Props, State> {
                     onChange={this.handleChangeEndpointConfig}
                     onFocus={e => this.handleFocus(e, 'endpointConfig')}
                     error={
-                      endpointConfigError ? t('app:account.settings.endpointConfig.error') : false
+                      endpointConfigError
+                        ? new Error(t('app:account.settings.endpointConfig.error'))
+                        : null
                     }
                   />
                 </Box>

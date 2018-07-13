@@ -1,11 +1,13 @@
+---
 common:
+  labelYes: 'Yes'
+  labelNo: 'No'
   ok: OK
-  yes: Yes
-  no: No
   apply: Apply
   confirm: Confirm
   cancel: Cancel
   delete: Delete
+  launch: Launch
   continue: Continue
   learnMore: Learn more
   skipThisStep: Skip this step
@@ -63,11 +65,7 @@ buttons:
 operation:
   type:
     IN: Received
-#      conf: Received
-#      unconf: Receiving...
     OUT: Sent
-#      conf: Sent
-#      unconf: Sending...
 time:
   day: Day
   week: Week
@@ -89,7 +87,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Make sure the <1><0>{{currency}}</0></1> app is installed and start receiving
+    desc: Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving
     buttons:
       receiveFunds: Receive
   settings:
@@ -134,8 +132,9 @@ currentAddress:
 deviceConnect:
   step1:
     choose: "We detected {{count}} connected devices, please select one:"
-    connect: Connect and unlock your <1>Ledger device</1> # remove key: <3>PIN code</3>
-    dashboard: Not used. # This key is not used. Still managed in JS.
+    connect: Connect and unlock your <1>Ledger device</1>
+  step2:
+    open: 'Open the <1><0>{{managerAppName}}</0></1> app on your device'
 emptyState:
   sidebar:
     text: Press this button to add accounts to your portfolio
@@ -152,6 +151,8 @@ exchange:
   coinhouse: 'Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
   changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
   coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.'
+  simplex: 'Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.'
+  paybis: 'it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.'
 genuinecheck:
   modal:
     title: Genuine check
@@ -181,7 +182,6 @@ addAccounts:
     title: Add a new account
     noOperationOnLastAccount: "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account."
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
-  somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
     addMore: 'Add more'
     add: 'Add account'
@@ -225,7 +225,7 @@ manager:
     continue: Continue
     latest: 'Firmware version {{version}} is available'
     disclaimerTitle: 'You are about to install <1><0>firmware version {{version}}</0></1>'
-    disclaimerAppDelete: Apps installed on your device have to re-installed after the update.
+    disclaimerAppDelete: Apps installed on your device have to be re-installed after the update.
     disclaimerAppReinstall: "This does not affect your crypto assets in the blockchain."
   modal:
     steps:
@@ -276,7 +276,7 @@ send:
     amount:
       title: Details
       selectAccountDebit: Select an account to debit
-      recipientAddress: Recipient address # can't control the tooltip!
+      recipientAddress: Recipient address
       amount: Amount
       max: Max
       fees: Network fees
@@ -309,7 +309,7 @@ send:
 releaseNotes:
   title: Release notes
   version: Ledger Live {{versionNb}}
-settings: # Always ensure descriptions carry full stops (.)
+settings:
   title: Settings
   tabs:
     display: General
@@ -334,9 +334,9 @@ settings: # Always ensure descriptions carry full stops (.)
     exchange: Rate provider ({{ticker}} → BTC)
     exchangeDesc: Choose the provider of the rate between {{currencyName}} and Bitcoin. The indicative total value of your portfolio is calculated by converting your {{currencyName}} to Bitcoin, which is then converted to your base currency.
     confirmationsToSpend: Number of confirmations required to spend
-    confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable. # A higher number of confirmations decreases the probability that a transaction is rejected.
+    confirmationsToSpendDesc: Set the number of network confirmations required for your crypto assets to be spendable.
     confirmationsNb: Number of confirmations
-    confirmationsNbDesc: Set the number of network confirmations for a transaction to be marked as confirmed. # A higher number of confirmations increases the certainty that a transaction cannot be reversed.
+    confirmationsNbDesc: Set the number of network confirmations for a transaction to be marked as confirmed.
     transactionsFees: Default transaction fees
     transactionsFeesDesc: Select your default transaction fees. The higher the fee, the faster the transaction will be processed.
     explorer: Blockchain explorer
@@ -360,12 +360,14 @@ settings: # Always ensure descriptions carry full stops (.)
     analyticsDesc: Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.
     reportErrors: Report bugs
     reportErrorsDesc: Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.
+    launchOnboarding: Onboarding
+    launchOnboardingDesc: Launch again the onboarding to add a new device to the Ledger Live application
   about:
     desc: Information about Ledger Live, terms and conditions, and privacy policy.
   help:
     desc: Learn about Ledger Live features or get help.
     version: Version
-    releaseNotesBtn: Details # Close button instead of continue.
+    releaseNotesBtn: Details
     faq: Ledger Support
     faqDesc: A problem? Get help with Ledger Live, Ledger devices, supported crypto assets and apps.
     terms: Terms and conditions
@@ -383,6 +385,10 @@ settings: # Always ensure descriptions carry full stops (.)
     title: Remove account
     subTitle: Are you sure?
     desc: The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added.
+  openUserDataDirectory:
+    title: 'Open user data directory'
+    desc: 'Open the user data directory'
+    btn: 'Open'
   exportLogs:
     title: Export logs
     desc: 'Exporting Ledger Live logs may be necessary for troubleshooting purposes.'
@@ -398,13 +404,10 @@ password:
   inputFields:
     newPassword:
       label: New password
-      placeholder: #remove
     confirmPassword:
       label: Confirm password
-      placeholder: #remove
-    currentPassword: #remove
+    currentPassword:
       label: Current password
-      placeholder:
   changePassword:
     title: Password lock
     subTitle: Change your password
@@ -424,7 +427,8 @@ crash:
   uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart
   reset: Reset
-  createTicket: Contact us
+  support: Contact Support
+  github: GitHub
   showDetails: Show details
   showError: Show error
 disclaimerModal:

@@ -1,5 +1,6 @@
 // @flow
 
+import logger from 'logger'
 import invariant from 'invariant'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
@@ -122,7 +123,10 @@ class StepImport extends PureComponent<StepProps> {
           }
         },
         complete: () => setScanStatus('finished'),
-        error: err => setScanStatus('error', err),
+        error: err => {
+          logger.critical(err)
+          setScanStatus('error', err)
+        },
       })
     } catch (err) {
       setScanStatus('error', err)
@@ -160,7 +164,7 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   renderError() {
-    const { err, t } = this.props
+    const { err } = this.props
     invariant(err, 'Trying to render inexisting error')
     return (
       <Box
@@ -172,9 +176,11 @@ class StepImport extends PureComponent<StepProps> {
         color="alertRed"
       >
         <IconExclamationCircleThin size={43} />
-        <Box mt={4}>{t('app:addAccounts.somethingWentWrong')}</Box>
         <Box mt={4}>
-          <TranslatedError error={err} />
+          <TranslatedError error={err} field="title" />
+        </Box>
+        <Box mt={4}>
+          <TranslatedError error={err} field="description" />
         </Box>
       </Box>
     )

@@ -1,7 +1,6 @@
 // @flow
 
 import path from 'path'
-import moment from 'moment'
 
 const resolveLogsDirectory = () => {
   const { LEDGER_LOGS_DIRECTORY } = process.env
@@ -11,19 +10,3 @@ const resolveLogsDirectory = () => {
 }
 
 export default resolveLogsDirectory
-
-export const RotatingLogFileParameters = {
-  filename: 'application-%DATE%.log',
-  datePattern: 'YYYY-MM-DD',
-  maxSize: '20m',
-  maxFiles: '14d',
-}
-
-export const getCurrentLogFile = () =>
-  path.resolve(
-    resolveLogsDirectory(),
-    RotatingLogFileParameters.filename.replace(
-      '%DATE%',
-      moment().format(RotatingLogFileParameters.datePattern),
-    ),
-  )

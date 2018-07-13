@@ -5,7 +5,7 @@ import { openURL } from 'helpers/linking'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { colors } from 'styles/theme'
-import { urls } from 'config/support'
+import { urls } from 'config/urls'
 
 import { updateGenuineCheck } from 'reducers/onboarding'
 
@@ -61,12 +61,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     const { t } = this.props
     return [
       {
-        label: t('app:common.yes'),
+        label: t('app:common.labelYes'),
         key: 'yes',
         pass: true,
       },
       {
-        label: t('app:common.no'),
+        label: t('app:common.labelNo'),
         key: 'no',
         pass: false,
       },
@@ -144,14 +144,17 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   }
 
   contactSupport = () => {
-    openURL(urls.genuineCheckContactSupport)
+    openURL(urls.contactSupport)
   }
 
   handlePrevStep = () => {
     const { prevStep, onboarding, jumpStep } = this.props
     onboarding.flowType === 'initializedDevice' ? jumpStep('selectDevice') : prevStep()
   }
-
+  handleNextStep = () => {
+    const { onboarding, jumpStep, nextStep } = this.props
+    onboarding.onboardingRelaunched ? jumpStep('finish') : nextStep()
+  }
   renderGenuineFail = () => (
     <GenuineCheckErrorPage
       redoGenuineCheck={this.redoGenuineCheck}
@@ -280,7 +283,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         ) : (
           <OnboardingFooter
             t={t}
-            nextStep={nextStep}
+            nextStep={this.handleNextStep}
             prevStep={this.handlePrevStep}
             isContinueDisabled={!genuine.isDeviceGenuine}
           />

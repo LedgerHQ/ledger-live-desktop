@@ -13,7 +13,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_RECEIVE } from 'config/constants'
 import { openURL } from 'helpers/linking'
-import { urls } from 'config/support'
+import { urls } from 'config/urls'
 import type { T, Device } from 'types/common'
 import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 
@@ -133,7 +133,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       isAppOpened: false,
     })
   handleContactUs = () => {
-    openURL(urls.receiveFlowContactSupport)
+    openURL(urls.contactSupport)
   }
   handleReset = () => this.setState({ ...INITIAL_STATE })
 

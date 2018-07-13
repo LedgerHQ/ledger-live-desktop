@@ -22,14 +22,24 @@ class TranslatedError extends PureComponent<Props> {
   render() {
     const { t, error, field } = this.props
     if (!error) return null
-    if (typeof error === 'string') return error
-    if (error.name) {
-      const translation = t(`errors:${error.name}.${field}`, error)
-      // FIXME in case the error don't exist in t we should not return and fallback code after. I just don't know how to check this. FIXME
-      return translation
+    if (typeof error !== 'object') {
+      // this case should not happen (it is supposed to be a ?Error)
+      logger.critical(`TranslatedError invalid usage: ${String(error)}`)
+      if (typeof error === 'string') {
+        return error // TMP in case still used somewhere
+      }
+      return null
     }
-    logger.warn(`TranslatedError: no translation for '${error.name}'`, error)
-    return error.message || error.name || t(`errors:generic.${field}`)
+    // $FlowFixMe
+    const arg: Object = Object.assign({ message: error.message }, error)
+    if (error.name) {
+      const translation = t(`errors:${error.name}.${field}`, arg)
+      if (translation !== `${error.name}.${field}`) {
+        // It is translated
+        return translation
+      }
+    }
+    return t(`errors:generic.${field}`, arg)
   }
 }
 

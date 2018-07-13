@@ -69,7 +69,9 @@ const Tooltip = ({
               />
             )}
             <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-              {moment(item.date).format('LL')}
+              {moment(item.date)
+                .add(1, 'second')
+                .format('LL')}
             </Box>
           </Fragment>
         )}

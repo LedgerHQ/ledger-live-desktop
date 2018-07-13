@@ -6,12 +6,14 @@ import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
 import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
-import { urls } from 'config/support'
+import { urls } from 'config/urls'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
+import OpenUserDataDirectoryBtn from 'components/OpenUserDataDirectoryBtn'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
 import AboutRowItem from '../AboutRowItem'
+import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
 
 import {
   SettingsSection as Section,
@@ -39,6 +41,11 @@ class SectionHelp extends PureComponent<Props> {
         />
 
         <Body>
+          <AboutRowItem
+            title={t('app:settings.help.faq')}
+            desc={t('app:settings.help.faqDesc')}
+            url={urls.faq}
+          />
           <Row
             title={t('app:settings.profile.softResetTitle')}
             desc={t('app:settings.profile.softResetDesc')}
@@ -46,23 +53,29 @@ class SectionHelp extends PureComponent<Props> {
             <CleanButton />
           </Row>
           <Row
-            title={t('app:settings.profile.hardResetTitle')}
-            desc={t('app:settings.profile.hardResetDesc')}
-          >
-            <ResetButton />
-          </Row>
-          <Row
             title={t('app:settings.exportLogs.title')}
             desc={t('app:settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
           >
             <ExportLogsBtn />
           </Row>
-
-          <AboutRowItem
-            title={t('app:settings.help.faq')}
-            desc={t('app:settings.help.faqDesc')}
-            url={urls.faq}
-          />
+          <Row
+            title={t('app:settings.profile.launchOnboarding')}
+            desc={t('app:settings.profile.launchOnboardingDesc')}
+          >
+            <LaunchOnboardingBtn />
+          </Row>
+          <Row
+            title={t('app:settings.openUserDataDirectory.title')}
+            desc={t('app:settings.openUserDataDirectory.desc')}
+          >
+            <OpenUserDataDirectoryBtn />
+          </Row>
+          <Row
+            title={t('app:settings.profile.hardResetTitle')}
+            desc={t('app:settings.profile.hardResetDesc')}
+          >
+            <ResetButton />
+          </Row>
         </Body>
       </Section>
     )

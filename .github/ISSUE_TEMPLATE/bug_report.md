@@ -7,8 +7,8 @@ about: Report a bug in Ledger Live Desktop or a regression.
 
 <!-- Precise the app version (Settings > About or bottom-left corner on a crash screen) -->
 
-- Ledger Live **version_here**
-- Platform: **windows OR mac OR linux**
+- tested on Ledger Live **version_here**
+- Platform and version: **e.g. Mac 10.13.5 / Windows 10 / ..**
 
 #### Expected behavior
 

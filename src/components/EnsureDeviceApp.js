@@ -24,7 +24,6 @@ import type { Device } from 'types/common'
 import { createCustomErrorClass } from 'helpers/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
-export const WrongAppOpened = createCustomErrorClass('WrongAppOpened')
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 
 const usbIcon = <IconUsb size={16} />
@@ -77,20 +76,21 @@ class EnsureDeviceApp extends Component<{
     const cur = account ? account.currency : currency
     invariant(cur, 'No currency given')
     return (
-      <Trans i18nKey="deviceConnect:step2.open" parent="div">
+      <Trans i18nKey="app:deviceConnect.step2.open" parent="div">
         {'Open the '}
-        <Bold>{cur.name}</Bold>
+        <Bold>{cur.managerAppName}</Bold>
         {' app on your device'}
       </Trans>
     )
   }
 
   render() {
-    const { account, currency, ...props } = this.props
+    const { account, currency, device, ...props } = this.props
     const cur = account ? account.currency : currency
     const Icon = cur ? getCryptoCurrencyIcon(cur) : null
     return (
       <DeviceInteraction
+        key={device ? device.path : null}
         shouldRenderRetry
         steps={[
           {

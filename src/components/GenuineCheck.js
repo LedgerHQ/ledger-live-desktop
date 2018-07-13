@@ -115,7 +115,7 @@ class GenuineCheck extends PureComponent<Props> {
   }
 
   render() {
-    const { onSuccess, ...props } = this.props
+    const { onSuccess, device, ...props } = this.props
     const steps = [
       {
         id: 'device',
@@ -156,6 +156,7 @@ class GenuineCheck extends PureComponent<Props> {
 
     return (
       <DeviceInteraction
+        key={device ? device.path : null}
         {...props}
         waitBeforeSuccess={500}
         steps={steps}

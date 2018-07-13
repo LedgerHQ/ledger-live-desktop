@@ -27,9 +27,7 @@ export default async (
   if (bitcoinLikeInfo) {
     const { P2SH, P2PKH } = await getBitcoinLikeInfo(transport)
     if (P2SH !== bitcoinLikeInfo.P2SH || P2PKH !== bitcoinLikeInfo.P2PKH) {
-      throw new BtcUnmatchedApp(`BtcUnmatchedApp ${currency.id}`, {
-        currencyName: currency.name,
-      })
+      throw new BtcUnmatchedApp(`BtcUnmatchedApp ${currency.id}`, currency)
     }
   }
 

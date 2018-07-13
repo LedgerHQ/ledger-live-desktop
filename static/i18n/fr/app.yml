@@ -1,8 +1,8 @@
 ---
 common:
+  labelYes: 'Yes'
+  labelNo: 'No'
   ok: OK
-  yes: true
-  no: false
   apply: Apply
   confirm: Confirm
   cancel: Cancel
@@ -86,7 +86,7 @@ account:
   lastOperations: Last operations
   emptyState:
     title: No crypto assets yet?
-    desc: Make sure the <1><0>{{currency}}</0></1> app is installed and start receiving
+    desc: Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving
     buttons:
       receiveFunds: Receive
   settings:
@@ -132,7 +132,8 @@ deviceConnect:
   step1:
     choose: "We detected {{count}} connected devices, please select one:"
     connect: Connect and unlock your <1>Ledger device</1>
-    dashboard: Not used.
+  step2:
+    open: 'Open the <1><0>{{managerAppName}}</0></1> app on your device'
 emptyState:
   sidebar:
     text: Press this button to add accounts to your portfolio
@@ -149,6 +150,8 @@ exchange:
   coinhouse: 'Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.'
   changelly: 'Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.'
   coinmama: 'Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.'
+  simplex: 'Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.'
+  paybis: 'it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.'
 genuinecheck:
   modal:
     title: Genuine check
@@ -178,7 +181,6 @@ addAccounts:
     title: Add a new account
     noOperationOnLastAccount: "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account."
     noAccountToCreate: No <1><0>{{currencyName}}</0></1> account was found to create
-  somethingWentWrong: Something went wrong during synchronization, please try again.
   cta:
     addMore: 'Add more'
     add: 'Add account'
@@ -222,7 +224,7 @@ manager:
     continue: Continue
     latest: 'Firmware version {{version}} is available'
     disclaimerTitle: 'You are about to install <1><0>firmware version {{version}}</0></1>'
-    disclaimerAppDelete: Apps installed on your device have to re-installed after the update.
+    disclaimerAppDelete: Apps installed on your device have to be re-installed after the update.
     disclaimerAppReinstall: "This does not affect your crypto assets in the blockchain."
   modal:
     steps:
@@ -380,6 +382,10 @@ settings:
     title: Remove account
     subTitle: Are you sure?
     desc: The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added.
+  openUserDataDirectory:
+    title: 'Open user data directory'
+    desc: 'Open the user data directory'
+    btn: 'Open'
   exportLogs:
     title: Export logs
     desc: 'Exporting Ledger Live logs may be necessary for troubleshooting purposes.'
@@ -395,13 +401,10 @@ password:
   inputFields:
     newPassword:
       label: New password
-      placeholder:
     confirmPassword:
       label: Confirm password
-      placeholder:
     currentPassword:
       label: Current password
-      placeholder:
   changePassword:
     title: Password lock
     subTitle: Change your password
@@ -421,7 +424,8 @@ crash:
   uselessText: You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.
   restart: Restart
   reset: Reset
-  createTicket: Contact us
+  support: Contact Support
+  github: GitHub
   showDetails: Show details
   showError: Show error
 disclaimerModal:

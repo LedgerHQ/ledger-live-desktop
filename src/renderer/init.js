@@ -32,8 +32,6 @@ import AppError from 'components/AppError'
 
 import 'styles/global'
 
-logger.setProcessShortName('renderer')
-
 const rootNode = document.getElementById('app')
 
 const TAB_KEY = 9
@@ -94,6 +92,23 @@ async function init() {
       if (isGlobalTabEnabled()) disableGlobalTab()
     })
   }
+  document.addEventListener(
+    'dragover',
+    (event: Event) => {
+      event.preventDefault()
+      return false
+    },
+    false,
+  )
+
+  document.addEventListener(
+    'drop',
+    (event: Event) => {
+      event.preventDefault()
+      return false
+    },
+    false,
+  )
 }
 
 function r(Comp) {
