@@ -17,6 +17,7 @@ const cmd: Command<Input, Result> = createCommand(
   'libcoreScanAccounts',
   ({ devicePath, currencyId }) =>
     Observable.create(o => {
+      let unsubscribed = false
       // TODO scanAccountsOnDevice should directly return a Observable so we just have to pass-in
       withLibcore(core =>
         scanAccountsOnDevice({
@@ -26,6 +27,7 @@ const cmd: Command<Input, Result> = createCommand(
           onAccountScanned: account => {
             o.next(account)
           },
+          isUnsubscribed: () => unsubscribed,
         }).then(
           () => {
             o.complete()
@@ -37,7 +39,7 @@ const cmd: Command<Input, Result> = createCommand(
       )
 
       function unsubscribe() {
-        // FIXME not implemented
+        unsubscribed = true
       }
 
       return unsubscribe

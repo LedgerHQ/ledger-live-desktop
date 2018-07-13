@@ -14,10 +14,10 @@ const Indicator = styled.div`
 `
 
 // NB this is done like this to be extremely performant. we don't want redux for this..
-const perPaths = {}
+let globalBusy = false
 const instances = []
-export const onSetDeviceBusy = (path, busy) => {
-  perPaths[path] = busy
+export const onSetDeviceBusy = busy => {
+  globalBusy = busy
   instances.forEach(i => i.forceUpdate())
 }
 
@@ -30,8 +30,7 @@ class DeviceBusyIndicator extends PureComponent<{}> {
     instances.splice(i, 1)
   }
   render() {
-    const busy = Object.values(perPaths).reduce((busy, b) => busy || b, false)
-    return <Indicator busy={busy} />
+    return <Indicator busy={globalBusy} />
   }
 }
 
