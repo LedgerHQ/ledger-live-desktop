@@ -15,7 +15,11 @@ export const setDeveloperMode = (developerMode: boolean) => saveSettings({ devel
 export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs })
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics })
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator })
-export const setCounterValue = (counterValue: string) => saveSettings({ counterValue })
+export const setCounterValue = (counterValue: string) =>
+  saveSettings({
+    counterValue,
+    counterValueExchange: null,
+  })
 export const setLanguage = (language: ?string) => saveSettings({ language })
 export const setRegion = (region: ?string) => saveSettings({ region })
 export const setCounterValueExchange = (counterValueExchange: ?string) =>
