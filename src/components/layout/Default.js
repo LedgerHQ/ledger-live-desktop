@@ -88,8 +88,8 @@ class Default extends Component<Props> {
         <ExportLogsBtn hookToShortcut />
         <Track mandatory onMount event="App Starts" />
 
-        <OnboardingOrElse>
-          <IsUnlocked>
+        <IsUnlocked>
+          <OnboardingOrElse>
             {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
               <ModalComponent key={name} />
             ))}
@@ -119,8 +119,8 @@ class Default extends Component<Props> {
             <KeyboardContent sequence="BJBJBJ">
               <PerfIndicator />
             </KeyboardContent>
-          </IsUnlocked>
-        </OnboardingOrElse>
+          </OnboardingOrElse>
+        </IsUnlocked>
       </Fragment>
     )
   }
