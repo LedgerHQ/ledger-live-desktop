@@ -11,7 +11,7 @@ function MAIN {
 }
 
 function INSTALL_FLOW_TYPED {
-  LATEST_FLOW_TYPED_COMMIT_HASH=$(curl --silent --header "Accept: application/vnd.github.VERSION.sha" https://api.github.com/repos/flowtype/flow-typed/commits/master)
+  LATEST_FLOW_TYPED_COMMIT_HASH=$(curl --silent --header "Accept: application/vnd.github.VERSION.sha" --location https://api.github.com/repos/flowtype/flow-typed/commits/master)
   CURRENT_FLOW_TYPED_HASH=$(GET_HASH 'flow-typed')
   if [ "$LATEST_FLOW_TYPED_COMMIT_HASH" == "$CURRENT_FLOW_TYPED_HASH" ]; then
     echo "> Flow-typed definitions are up to date. Skipping"
