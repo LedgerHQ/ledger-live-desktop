@@ -5,6 +5,7 @@ import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import IconCross from 'icons/Cross'
 
 import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
@@ -21,6 +22,7 @@ import {
   isLedgerNano,
   flowType,
   relaunchOnboarding,
+  onboardingRelaunchedSelector,
 } from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
 
@@ -55,6 +57,7 @@ const STEPS = {
 
 const mapStateToProps = state => ({
   hasCompletedOnboarding: state.settings.hasCompletedOnboarding,
+  onboardingRelaunched: onboardingRelaunchedSelector(state),
   onboarding: state.onboarding,
   settings: state.settings,
   getCurrentDevice: getCurrentDevice(state),
@@ -73,6 +76,7 @@ const mapDispatchToProps = {
 type Props = {
   t: T,
   hasCompletedOnboarding: boolean,
+  onboardingRelaunched: boolean,
   saveSettings: Function,
   onboarding: OnboardingState,
   settings: SettingsState,
@@ -102,8 +106,30 @@ export type StepProps = {
   flowType: Function,
 }
 
+const CloseContainer = styled(Box).attrs({
+  p: 4,
+  color: 'fog',
+})`
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+
+  &:hover {
+    color: ${p => p.theme.colors.grey};
+  }
+
+  &:active {
+    color: ${p => p.theme.colors.dark};
+  }
+`
+
 class Onboarding extends PureComponent<Props> {
   getDeviceInfo = () => this.props.getCurrentDevice
+  cancelRelaunch = () => {
+    this.props.relaunchOnboarding(false)
+  }
   finish = () => {
     this.props.saveSettings({ hasCompletedOnboarding: true })
     this.props.relaunchOnboarding(false)
@@ -122,7 +148,15 @@ class Onboarding extends PureComponent<Props> {
   }
 
   render() {
-    const { onboarding, prevStep, nextStep, jumpStep, settings, t } = this.props
+    const {
+      onboarding,
+      prevStep,
+      nextStep,
+      jumpStep,
+      settings,
+      t,
+      onboardingRelaunched,
+    } = this.props
 
     const StepComponent = STEPS[onboarding.stepName]
     const step = onboarding.steps[onboarding.stepIndex]
@@ -152,6 +186,11 @@ class Onboarding extends PureComponent<Props> {
     return (
       <Container>
         {step.options.showBreadcrumb && <OnboardingBreadcrumb />}
+        {onboardingRelaunched ? (
+          <CloseContainer onClick={this.cancelRelaunch}>
+            <IconCross size={16} />
+          </CloseContainer>
+        ) : null}
         <StepContainer>
           <StepComponent {...stepProps} />
         </StepContainer>
