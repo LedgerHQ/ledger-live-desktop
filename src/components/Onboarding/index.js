@@ -20,6 +20,7 @@ import {
   updateGenuineCheck,
   isLedgerNano,
   flowType,
+  relaunchOnboarding,
 } from 'reducers/onboarding'
 import { getCurrentDevice } from 'reducers/devices'
 
@@ -66,6 +67,7 @@ const mapDispatchToProps = {
   jumpStep,
   unlock,
   openModal,
+  relaunchOnboarding,
 }
 
 type Props = {
@@ -80,6 +82,7 @@ type Props = {
   getCurrentDevice: Function,
   unlock: Function,
   openModal: string => void,
+  relaunchOnboarding: boolean => void,
 }
 
 export type StepProps = {
@@ -103,6 +106,7 @@ class Onboarding extends PureComponent<Props> {
   getDeviceInfo = () => this.props.getCurrentDevice
   finish = () => {
     this.props.saveSettings({ hasCompletedOnboarding: true })
+    this.props.relaunchOnboarding(false)
     setTimeout(() => {
       this.props.openModal(MODAL_DISCLAIMER)
     }, MODAL_DISCLAIMER_DELAY)
@@ -118,18 +122,7 @@ class Onboarding extends PureComponent<Props> {
   }
 
   render() {
-    const {
-      hasCompletedOnboarding,
-      onboarding,
-      prevStep,
-      nextStep,
-      jumpStep,
-      settings,
-      t,
-    } = this.props
-    if (hasCompletedOnboarding) {
-      return null
-    }
+    const { onboarding, prevStep, nextStep, jumpStep, settings, t } = this.props
 
     const StepComponent = STEPS[onboarding.stepName]
     const step = onboarding.steps[onboarding.stepIndex]
