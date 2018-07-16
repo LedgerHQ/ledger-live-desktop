@@ -15,7 +15,7 @@
     "lint": "eslint src webpack .storybook",
     "ci": "yarn lint && yarn flow && yarn prettier",
     "postinstall": "bash ./scripts/postinstall.sh",
-    "prettier": "prettier --write \"{src,webpack,.storybook}/**/*.js\"",
+    "prettier": "prettier --write \"{src,webpack,.storybook,static/i18n}/**/*.{js,json}\"",
     "publish-storybook": "bash ./scripts/publish-storybook.sh",
     "release": "bash ./scripts/release.sh",
     "start": "bash ./scripts/start.sh",
