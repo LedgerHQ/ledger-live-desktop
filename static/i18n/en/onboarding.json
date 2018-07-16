@@ -13,7 +13,6 @@
   },
   "init": {
     "title": "Get started with your Ledger device",
-    "desc": "The unified crypto portfolio, backed by the security of your Ledger device.",
     "newDevice": {
       "title": "Initialize a new Ledger device"
     },
@@ -174,10 +173,7 @@
     "disclaimer": {
       "note1": "Make sure to remember your password. Do not share it.",
       "note2": "Losing your password requires resetting Ledger Live and re-adding accounts.",
-      "note3": "Resetting Ledger Live does not affect your crypto assets.",
-      "password": "Password",
-      "confirmPassword": "Confirm password",
-      "skipThisStep": "Skip this step"
+      "note3": "Resetting Ledger Live does not affect your crypto assets."
     }
   },
   "analytics": {

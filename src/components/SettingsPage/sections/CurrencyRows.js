@@ -26,9 +26,6 @@ type Props = {
 }
 
 class CurrencyRows extends PureComponent<Props> {
-  handleChangeConfirmationsToSpend = (nb: number) =>
-    this.updateCurrencySettings('confirmationsToSpend', nb)
-
   handleChangeConfirmationsNb = (nb: number) => this.updateCurrencySettings('confirmationsNb', nb)
 
   handleChangeExchange = (exchange: *) =>

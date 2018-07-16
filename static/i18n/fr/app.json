@@ -2,7 +2,6 @@
   "common": {
     "labelYes": "Yes",
     "labelNo": "No",
-    "ok": "OK",
     "apply": "Apply",
     "confirm": "Confirm",
     "cancel": "Cancel",
@@ -12,8 +11,6 @@
     "learnMore": "Learn more",
     "skipThisStep": "Skip this step",
     "needHelp": "Need help?",
-    "chooseWalletPlaceholder": "Choose a wallet...",
-    "currency": "Currency",
     "selectAccount": "Select an account",
     "selectAccountNoOption": "No account matching \"{{accountName}}\"",
     "selectCurrency": "Choose a crypto asset",
@@ -24,13 +21,9 @@
     "sortBy": "Sort by",
     "search": "Search",
     "save": "Save",
-    "password": "Password",
-    "editProfile": "Preferences",
     "lock": "Lock",
-    "lockApplication": "Lock Ledger Live",
     "showMore": "Show more",
     "max": "Max",
-    "next": "Next",
     "back": "Back",
     "reset": "Reset",
     "retry": "Retry",
@@ -60,8 +53,7 @@
       "ago": "Synced {{time}}"
     },
     "error": {
-      "load": "Unable to load",
-      "noResults": "No results"
+      "load": "Unable to load"
     }
   },
   "buttons": {
@@ -92,8 +84,6 @@
     "exchange": "Exchanges"
   },
   "account": {
-    "balance": "Balance",
-    "receive": "Receive",
     "lastOperations": "Last operations",
     "emptyState": {
       "title": "No crypto assets yet?",
@@ -137,7 +127,6 @@
     },
     "summary": "Here's the summary of your account",
     "summary_plural": "Here's the summary of your {{count}} accounts",
-    "noAccounts": "No accounts yet",
     "recentActivity": "Last operations",
     "totalBalance": "Total balance",
     "accountsOrder": {
@@ -157,7 +146,6 @@
   },
   "deviceConnect": {
     "step1": {
-      "choose": "We detected {{count}} connected devices, please select one:",
       "connect": "Connect and unlock your <1>Ledger device</1>"
     },
     "step2": {
@@ -211,7 +199,6 @@
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
     "unselectAll": "Deselect all ({{count}})",
-    "editName": "Edit name",
     "newAccount": "New account",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
@@ -254,10 +241,6 @@
   },
   "manager": {
     "yourDeviceIsGenuine": "Your device is genuine",
-    "tabs": {
-      "apps": "Apps",
-      "device": "My device"
-    },
     "apps": {
       "install": "Install",
       "all": "App catalog",
@@ -265,7 +248,6 @@
       "uninstalling": "Uninstalling {{app}}...",
       "installSuccess": "{{app}} is now installed on your device",
       "uninstallSuccess": "{{app}} has been uninstalled from your device",
-      "alreadyInstalled": "{{app}} is already installed on your device",
       "help": "Check on your device to see which apps are already installed"
     },
     "firmware": {
@@ -283,8 +265,7 @@
     "modal": {
       "steps": {
         "idCheck": "Identifier",
-        "updateMCU": "MCU update",
-        "confirm": "Confirmation"
+        "updateMCU": "MCU update"
       },
       "installing": "Firmware updating...",
       "confirmIdentifier": "Verify the identifier",
@@ -305,11 +286,6 @@
       "title": "Connect your device",
       "desc": "Follow the steps below to open the Manager",
       "cta": "Connect my device"
-    },
-    "errors": {
-      "noDevice": "No device is connected (TEMPLATE NEEDED)",
-      "noDashboard": "Navigate to the dashboard on your device (TEMPLATED NEEDED)",
-      "noGenuine": "Allow Manager to continue (TEMPLATE NEEDED)"
     }
   },
   "receive": {
@@ -331,8 +307,7 @@
         "support": "Contact us"
       },
       "receiveFunds": {
-        "title": "Receive",
-        "label": "Amount (optional)"
+        "title": "Receive"
       }
     }
   },
@@ -345,15 +320,13 @@
         "selectAccountDebit": "Select an account to debit",
         "recipientAddress": "Recipient address",
         "amount": "Amount",
-        "max": "Max",
         "fees": "Network fees",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
         "message": "Leave a message (140)",
         "rippleTag": "Tag",
         "ethereumGasLimit": "Gas limit",
-        "unitPerByte": "{{unit}} per byte",
-        "feePerByte": "Fees per byte"
+        "unitPerByte": "{{unit}} per byte"
       },
       "connectDevice": {
         "title": "Device"
@@ -366,17 +339,10 @@
       "confirmation": {
         "title": "Confirmation",
         "success": {
-          "title": "Transaction sent",
-          "text":
-            "The transaction has been signed and sent to the network. Your account balance will update once the blockchain has confirmed the transaction.\n",
           "cta": "View operation details"
         },
         "error": {
-          "title": "Transaction canceled",
           "cta": "Retry"
-        },
-        "pending": {
-          "title": "Broadcasting transaction..."
         }
       }
     }
@@ -390,7 +356,6 @@
     "tabs": {
       "display": "General",
       "currencies": "Currencies",
-      "profile": "Profile",
       "help": "Help",
       "about": "About"
     },
@@ -414,27 +379,15 @@
       "exchange": "Rate provider ({{ticker}} → BTC)",
       "exchangeDesc":
         "Choose the provider of the rate between {{currencyName}} and Bitcoin. The indicative total value of your portfolio is calculated by converting your {{currencyName}} to Bitcoin, which is then converted to your base currency.",
-      "confirmationsToSpend": "Number of confirmations required to spend",
-      "confirmationsToSpendDesc":
-        "Set the number of network confirmations required for your crypto assets to be spendable.",
       "confirmationsNb": "Number of confirmations",
       "confirmationsNbDesc":
-        "Set the number of network confirmations for a transaction to be marked as confirmed.",
-      "transactionsFees": "Default transaction fees",
-      "transactionsFeesDesc":
-        "Select your default transaction fees. The higher the fee, the faster the transaction will be processed.",
-      "explorer": "Blockchain explorer",
-      "explorerDesc":
-        "Choose which explorer is used to look up the operation details in the blockchain."
+        "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
     "profile": {
-      "desc": "Set the preferences for your profile.",
       "password": "Password lock",
       "passwordDesc":
         "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
       "changePassword": "Change password",
-      "sync": "Synchronize accounts",
-      "syncDesc": "Resynchronize your accounts with the network.",
       "softResetTitle": "Clear cache",
       "softResetDesc":
         "Clear the Ledger Live cache to force resynchronization with the blockchain.",
@@ -499,11 +452,6 @@
     }
   },
   "password": {
-    "warning_0": "Very weak",
-    "warning_1": "Weak",
-    "warning_2": "Medium",
-    "warning_3": "Strong",
-    "warning_4": "Very strong",
     "errorMessageIncorrectPassword": "The password you entered is incorrect",
     "errorMessageNotMatchingPassword": "Passwords don't match",
     "inputFields": {
@@ -546,9 +494,7 @@
     "restart": "Restart",
     "reset": "Reset",
     "support": "Contact Support",
-    "github": "GitHub",
-    "showDetails": "Show details",
-    "showError": "Show error"
+    "github": "GitHub"
   },
   "disclaimerModal": {
     "title": "Trade safely",
