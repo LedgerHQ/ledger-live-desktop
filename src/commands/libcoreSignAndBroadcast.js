@@ -77,7 +77,9 @@ async function signTransaction({
   hasTimestamp: boolean,
 }) {
   const additionals = []
+  let expiryHeight
   if (currencyId === 'bitcoin_cash' || currencyId === 'bitcoin_gold') additionals.push('bip143')
+  if (currencyId === 'zcash') expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
   const rawInputs = transaction.getInputs()
 
   const inputs = await Promise.all(
@@ -119,7 +121,7 @@ async function signTransaction({
 
   const changePath = output ? output.getDerivationPath().toString() : undefined
   const outputScriptHex = Buffer.from(transaction.serializeOutputs()).toString('hex')
-  const lockTime = transaction.getLockTime()
+  const lockTime = undefined // TODO: transaction.getLockTime()
   const initialTimestamp = hasTimestamp ? transaction.getTimestamp() : undefined
 
   const signedTransaction = await hwApp.createPaymentTransactionNew(
@@ -132,6 +134,7 @@ async function signTransaction({
     isSegwit,
     initialTimestamp,
     additionals,
+    expiryHeight,
   )
 
   return signedTransaction
