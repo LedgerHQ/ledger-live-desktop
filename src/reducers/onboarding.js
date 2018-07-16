@@ -2,6 +2,7 @@
 
 import { SKIP_ONBOARDING } from 'config/constants'
 import { handleActions, createAction } from 'redux-actions'
+import type { State } from '.'
 
 type Step = {
   name: string,
@@ -170,13 +171,16 @@ const handlers = {
     ...state,
     isLedgerNano,
   }),
-  ONBOARDING_RELAUNCH: (
-    state: OnboardingState,
-    { payload: onboardingRelaunched }: { payload: $Shape<OnboardingState> },
-  ) => ({ ...initialState, ...onboardingRelaunched }),
+  ONBOARDING_RELAUNCH: (state: OnboardingState, { payload: onboardingRelaunched }) => ({
+    ...initialState,
+    onboardingRelaunched,
+  }),
 }
 
 export default handleActions(handlers, initialState)
+
+export const onboardingRelaunchedSelector = (s: State): ?boolean =>
+  s.onboarding.onboardingRelaunched
 
 export const relaunchOnboarding = createAction('ONBOARDING_RELAUNCH')
 export const nextStep = createAction('ONBOARDING_NEXT_STEP')
