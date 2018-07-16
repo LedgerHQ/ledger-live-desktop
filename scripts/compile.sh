@@ -7,7 +7,9 @@ source scripts/helpers/format.sh
 # shellcheck disable=SC1091
 source scripts/helpers/run-job.sh
 
-GIT_REVISION=$(git rev-parse HEAD)
+if [ "$GIT_REVISION" == "" ]; then
+  GIT_REVISION=$(git rev-parse HEAD)
+fi
 export GIT_REVISION
 
 export SENTRY_URL='https://db8f5b9b021048d4a401f045371701cb@sentry.io/274561'
