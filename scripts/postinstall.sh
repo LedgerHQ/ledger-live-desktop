@@ -2,6 +2,8 @@
 
 set -e
 
+export JOBS=max
+
 # shellcheck disable=SC1091
 source scripts/helpers/display-env.sh
 # shellcheck disable=SC1091
@@ -17,7 +19,7 @@ function main {
 
   # native dependencies
 
-  if [ "$CI" != "true" ] && hashDiffers yarn.lock "$(getYarnHash)"; then
+  if hashDiffers yarn.lock "$(getYarnHash)"; then
     rebuildElectronNativeDeps
   else
     formatSkip "native module build" "already up-to-date"

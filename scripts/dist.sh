@@ -2,6 +2,8 @@
 
 set -e
 
+export JOBS=max
+
 # shellcheck disable=SC1091
 source scripts/helpers/run-job.sh
 
