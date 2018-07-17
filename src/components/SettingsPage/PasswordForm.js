@@ -18,7 +18,7 @@ type Props = {
   currentPassword: string,
   newPassword: string,
   confirmPassword: string,
-  incorrectPassword: ?Error,
+  incorrectPassword?: ?Error,
   onSubmit: Function,
   isValid: () => boolean,
   onChange: Function,

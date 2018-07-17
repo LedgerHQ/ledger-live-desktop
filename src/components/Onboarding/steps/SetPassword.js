@@ -28,14 +28,12 @@ type State = {
   currentPassword: string,
   newPassword: string,
   confirmPassword: string,
-  incorrectPassword: boolean,
 }
 
 const INITIAL_STATE = {
   currentPassword: '',
   newPassword: '',
   confirmPassword: '',
-  incorrectPassword: false,
 }
 
 class SetPassword extends PureComponent<StepProps, State> {
@@ -59,9 +57,6 @@ class SetPassword extends PureComponent<StepProps, State> {
   }
 
   handleInputChange = (key: string) => (value: string) => {
-    if (this.state.incorrectPassword) {
-      this.setState({ incorrectPassword: false })
-    }
     this.setState({ [key]: value })
   }
 
@@ -74,7 +69,7 @@ class SetPassword extends PureComponent<StepProps, State> {
 
   render() {
     const { nextStep, prevStep, t, settings, onboarding } = this.props
-    const { newPassword, currentPassword, incorrectPassword, confirmPassword } = this.state
+    const { newPassword, currentPassword, confirmPassword } = this.state
 
     const isPasswordEnabled = settings.password.isEnabled === true
 
@@ -119,7 +114,6 @@ class SetPassword extends PureComponent<StepProps, State> {
                 newPassword={newPassword}
                 currentPassword={currentPassword}
                 confirmPassword={confirmPassword}
-                incorrectPassword={incorrectPassword}
                 isValid={this.isValid}
                 onChange={this.handleInputChange}
                 t={t}
