@@ -24,10 +24,10 @@ import {
 } from 'reducers/settings'
 import type { TimeRange } from 'reducers/settings'
 
-import { reorderAccounts } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
 
 import TrackPage from 'analytics/TrackPage'
+import RefreshAccountsOrdering from 'components/RefreshAccountsOrdering'
 import UpdateNotifier from 'components/UpdateNotifier'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
@@ -51,7 +51,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   push,
-  reorderAccounts,
   saveSettings,
   openModal,
 }
@@ -102,6 +101,7 @@ class DashboardPage extends PureComponent<Props> {
     return (
       <Fragment>
         <UpdateNotifier />
+        <RefreshAccountsOrdering onMount />
         <TrackPage
           category="Portfolio"
           totalAccounts={totalAccounts}

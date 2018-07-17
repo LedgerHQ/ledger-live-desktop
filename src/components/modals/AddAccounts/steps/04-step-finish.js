@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
+import RefreshAccountsOrdering from 'components/RefreshAccountsOrdering'
 import IconCheckFull from 'icons/CheckFull'
 import { CurrencyCircleIcon } from '../../../base/CurrencyBadge'
 import type { StepProps } from '../index'
@@ -30,6 +31,10 @@ const Text = styled(Box).attrs({
 function StepFinish({ currency, t, checkedAccountsIds }: StepProps) {
   return (
     <Box align="center" py={6}>
+      <RefreshAccountsOrdering onMount onUnmount />
+      {/* onMount because if we already have the countervalues we want to sort it straightaway
+          onUnmount because if not, it is useful to trigger a second refresh to ensure it get sorted */}
+
       <TrackPage category="AddAccounts" name="Step4" />
       {currency ? (
         <Box color="positiveGreen" style={{ position: 'relative' }}>
