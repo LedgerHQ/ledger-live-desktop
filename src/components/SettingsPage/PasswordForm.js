@@ -11,7 +11,6 @@ import { createCustomErrorClass } from 'helpers/errors'
 import type { T } from 'types/common'
 
 const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
-const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type Props = {
   t: T,
@@ -19,7 +18,7 @@ type Props = {
   currentPassword: string,
   newPassword: string,
   confirmPassword: string,
-  incorrectPassword: boolean,
+  incorrectPassword: ?Error,
   onSubmit: Function,
   isValid: () => boolean,
   onChange: Function,
@@ -52,7 +51,7 @@ class PasswordForm extends PureComponent<Props> {
                 id="currentPassword"
                 onChange={onChange('currentPassword')}
                 value={currentPassword}
-                error={incorrectPassword && new PasswordIncorrectError()}
+                error={incorrectPassword}
               />
             </Box>
           )}

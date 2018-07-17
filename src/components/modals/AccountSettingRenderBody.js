@@ -43,8 +43,8 @@ type State = {
   accountName: ?string,
   accountUnit: ?Unit,
   endpointConfig: ?string,
-  accountNameError: boolean,
-  endpointConfigError: boolean,
+  accountNameError: ?Error,
+  endpointConfigError: ?Error,
   isRemoveAccountModalOpen: boolean,
 }
 
@@ -72,8 +72,8 @@ const defaultState = {
   accountName: null,
   accountUnit: null,
   endpointConfig: null,
-  accountNameError: false,
-  endpointConfigError: false,
+  accountNameError: null,
+  endpointConfigError: null,
   isRemoveAccountModalOpen: false,
 }
 
@@ -108,7 +108,7 @@ class HelperComp extends PureComponent<Props, State> {
     const { handleChangeEndpointConfig_id } = this
     this.setState({
       endpointConfig,
-      endpointConfigError: false,
+      endpointConfigError: null,
     })
     try {
       if (bridge.validateEndpointConfig) {
@@ -116,12 +116,12 @@ class HelperComp extends PureComponent<Props, State> {
       }
       if (handleChangeEndpointConfig_id === this.handleChangeEndpointConfig_id) {
         this.setState({
-          endpointConfigError: false,
+          endpointConfigError: null,
         })
       }
     } catch (endpointConfigError) {
       if (handleChangeEndpointConfig_id === this.handleChangeEndpointConfig_id) {
-        this.setState({ endpointConfigError })
+        this.setState({ endpointConfigError: new EnpointConfigError() })
       }
     }
   }
@@ -140,7 +140,7 @@ class HelperComp extends PureComponent<Props, State> {
     const { accountName, accountUnit, endpointConfig, endpointConfigError } = this.state
 
     if (!account.name.length) {
-      this.setState({ accountNameError: true })
+      this.setState({ accountNameError: new AccountNameRequiredError() })
     } else if (!endpointConfigError) {
       const name = validateNameEdition(account, accountName)
 
@@ -163,10 +163,10 @@ class HelperComp extends PureComponent<Props, State> {
 
     switch (name) {
       case 'accountName':
-        this.setState({ accountNameError: false })
+        this.setState({ accountNameError: null })
         break
       case 'endpointConfig':
-        this.setState({ endpointConfigError: false })
+        this.setState({ endpointConfigError: null })
         break
       default:
         break
@@ -228,7 +228,7 @@ class HelperComp extends PureComponent<Props, State> {
                   maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
                   onFocus={e => this.handleFocus(e, 'accountName')}
-                  error={accountNameError && new AccountNameRequiredError()}
+                  error={accountNameError}
                 />
               </Box>
             </Container>
@@ -264,7 +264,7 @@ class HelperComp extends PureComponent<Props, State> {
                     }
                     onChange={this.handleChangeEndpointConfig}
                     onFocus={e => this.handleFocus(e, 'endpointConfig')}
-                    error={endpointConfigError && new EnpointConfigError()}
+                    error={endpointConfigError}
                   />
                 </Box>
               </Container>

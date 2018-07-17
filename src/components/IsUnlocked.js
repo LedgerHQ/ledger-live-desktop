@@ -43,7 +43,7 @@ type Props = {
 }
 type State = {
   inputValue: InputValue,
-  incorrectPassword: boolean,
+  incorrectPassword: ?Error,
   isHardResetting: boolean,
   isHardResetModalOpened: boolean,
 }
@@ -62,7 +62,7 @@ const defaultState = {
   inputValue: {
     password: '',
   },
-  incorrectPassword: false,
+  incorrectPassword: null,
   isHardResetting: false,
   isHardResetModalOpened: false,
 }
@@ -108,7 +108,7 @@ class IsUnlocked extends Component<Props, State> {
         ...prev.inputValue,
         [key]: value,
       },
-      incorrectPassword: false,
+      incorrectPassword: null,
     }))
 
   handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
@@ -126,7 +126,7 @@ class IsUnlocked extends Component<Props, State> {
         ...defaultState,
       })
     } else {
-      this.setState({ incorrectPassword: true })
+      this.setState({ incorrectPassword: new PasswordIncorrectError() })
     }
   }
 
@@ -181,7 +181,7 @@ class IsUnlocked extends Component<Props, State> {
                   type="password"
                   onChange={this.handleChangeInput('password')}
                   value={inputValue.password}
-                  error={incorrectPassword && new PasswordIncorrectError()}
+                  error={incorrectPassword}
                 />
               </Box>
               <Button type="button" mt={3} small onClick={this.handleOpenHardResetModal}>

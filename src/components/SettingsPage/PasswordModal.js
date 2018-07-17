@@ -5,11 +5,14 @@ import bcrypt from 'bcryptjs'
 
 import type { T } from 'types/common'
 
+import { createCustomErrorClass } from 'helpers/errors'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
 import PasswordForm from './PasswordForm'
+
+const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type Props = {
   t: T,
@@ -23,14 +26,14 @@ type State = {
   currentPassword: string,
   newPassword: string,
   confirmPassword: string,
-  incorrectPassword: boolean,
+  incorrectPassword: ?Error,
 }
 
 const INITIAL_STATE = {
   currentPassword: '',
   newPassword: '',
   confirmPassword: '',
-  incorrectPassword: false,
+  incorrectPassword: null,
 }
 
 class PasswordModal extends PureComponent<Props, State> {
@@ -49,7 +52,7 @@ class PasswordModal extends PureComponent<Props, State> {
     const { isPasswordEnabled, currentPasswordHash, onChangePassword } = this.props
     if (isPasswordEnabled) {
       if (!bcrypt.compareSync(currentPassword, currentPasswordHash)) {
-        this.setState({ incorrectPassword: true })
+        this.setState({ incorrectPassword: new PasswordIncorrectError() })
         return
       }
       onChangePassword(newPassword)
@@ -60,7 +63,7 @@ class PasswordModal extends PureComponent<Props, State> {
 
   handleInputChange = (key: string) => (value: string) => {
     if (this.state.incorrectPassword) {
-      this.setState({ incorrectPassword: false })
+      this.setState({ incorrectPassword: null })
     }
     this.setState({ [key]: value })
   }
