@@ -77,7 +77,9 @@ async function signTransaction({
   hasTimestamp: boolean,
 }) {
   const additionals = []
+  let expiryHeight
   if (currencyId === 'bitcoin_cash' || currencyId === 'bitcoin_gold') additionals.push('bip143')
+  if (currencyId === 'zcash') expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
   const rawInputs = transaction.getInputs()
 
   const inputs = await Promise.all(
@@ -119,8 +121,13 @@ async function signTransaction({
 
   const changePath = output ? output.getDerivationPath().toString() : undefined
   const outputScriptHex = Buffer.from(transaction.serializeOutputs()).toString('hex')
-  const lockTime = transaction.getLockTime()
   const initialTimestamp = hasTimestamp ? transaction.getTimestamp() : undefined
+
+  // FIXME
+  // should be `transaction.getLockTime()` as soon as lock time is
+  // handled by libcore (actually: it always returns a default value
+  // and that caused issue with zcash (see #904))
+  const lockTime = undefined
 
   const signedTransaction = await hwApp.createPaymentTransactionNew(
     inputs,
@@ -132,6 +139,7 @@ async function signTransaction({
     isSegwit,
     initialTimestamp,
     additionals,
+    expiryHeight,
   )
 
   return signedTransaction
