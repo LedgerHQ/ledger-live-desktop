@@ -375,8 +375,8 @@
       "analyticsDesc": "Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.",
       "reportErrors": "Report bugs",
       "reportErrorsDesc": "Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.",
-      "launchOnboarding": "Set up a device",
-      "launchOnboardingDesc": "Launch the onboarding process to initialize or restore a Ledger device. Your accounts and settings are saved."
+      "launchOnboarding": "Configure device",
+      "launchOnboardingDesc": "Securely initialize or restore a Ledger device to use with Ledger Live. Your accounts and settings are kept."
     },
     "about": {
       "desc": "Information about Ledger Live, terms and conditions, and privacy policy."
