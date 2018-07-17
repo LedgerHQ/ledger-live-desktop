@@ -192,11 +192,9 @@ type Tx = {
 const txToOperation = (account: Account) => ({
   id,
   sequence,
-  type: txType,
   outcome: { fee, deliveredAmount, ledgerVersion, timestamp },
   specification: { source, destination },
 }: Tx): ?Operation => {
-  if (txType === 'trustline') return null
   const type = source.address === account.freshAddress ? 'OUT' : 'IN'
   let value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0
   const feeValue = parseAPIValue(fee)
@@ -318,6 +316,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               const transactions = await api.getTransactions(address, {
                 minLedgerVersion,
                 maxLedgerVersion,
+                types: ['payment'],
               })
               if (finished) return
 
@@ -406,6 +405,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               minLedgerVersion,
             ),
             maxLedgerVersion,
+            types: ['payment'],
           })
 
           if (finished) return

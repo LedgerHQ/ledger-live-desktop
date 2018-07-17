@@ -1474,9 +1474,9 @@
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-0.7.1.tgz#e44e596d03c9f16ba3b127ad333a8a072bcb5a0a"
 
-"@ledgerhq/hw-app-btc@^4.13.0":
-  version "4.19.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.19.0.tgz#0fdce47ad71df7783c6bf881e6a9bc8b4c84de52"
+"@ledgerhq/hw-app-btc@4.20.0":
+  version "4.20.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.20.0.tgz#116f841932c199c3a286563831154207a5aa656f"
   dependencies:
     "@ledgerhq/hw-transport" "^4.19.0"
     create-hash "^1.1.3"
