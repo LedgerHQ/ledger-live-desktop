@@ -25,6 +25,6 @@ export const urls = {
   coinhouse: 'https://www.coinhouse.com/r/157530',
   changelly: 'https://changelly.com/?ref_id=aac789605a01',
   coinmama: 'http://go.coinmama.com/visit/?bta=51801&nci=5343',
-  simplex: 'https://www.simplex.com/',
-  paybis: 'https://paybis.com/',
+  simplex: 'https://partners.simplex.com/?partner=ledger',
+  paybis: 'https://paybis.idevaffiliate.com/idevaffiliate.php?id=4064',
 }
