@@ -375,8 +375,8 @@
       "analyticsDesc": "Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.",
       "reportErrors": "Report bugs",
       "reportErrorsDesc": "Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.",
-      "launchOnboarding": "Onboarding",
-      "launchOnboardingDesc": "Launch again the onboarding to add a new device to the Ledger Live application"
+      "launchOnboarding": "Set up a device",
+      "launchOnboardingDesc": "Launch the onboarding process to initialize or restore a Ledger device. Your accounts and settings are saved."
     },
     "about": {
       "desc": "Information about Ledger Live, terms and conditions, and privacy policy."
@@ -407,9 +407,9 @@
       "desc": "The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added."
     },
     "openUserDataDirectory": {
-      "title": "Open user data directory",
-      "desc": "Open the user data directory",
-      "btn": "Open"
+      "title": "View user data",
+      "desc": "View the user data that is stored on your computer, including your accounts, caches and settings.",
+      "btn": "View"
     },
     "exportLogs": {
       "title": "Export logs",
