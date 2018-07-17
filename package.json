@@ -7,20 +7,19 @@
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
-    "compile": "bash ./scripts/compile.sh",
-    "dist:dir": "bash ./scripts/dist-dir.sh",
-    "dist": "bash ./scripts/dist.sh",
-    "test": "jest",
-    "flow": "flow",
-    "lint": "eslint src webpack .storybook",
-    "ci": "yarn lint && yarn flow && yarn prettier",
     "postinstall": "bash ./scripts/postinstall.sh",
-    "prettier": "prettier --write \"{src,webpack,.storybook,static/i18n}/**/*.{js,json}\"",
-    "publish-storybook": "bash ./scripts/publish-storybook.sh",
-    "release": "bash ./scripts/release.sh",
     "start": "bash ./scripts/start.sh",
+    "release": "bash ./scripts/release.sh",
+    "dist": "bash ./scripts/dist.sh",
+    "dist:dir": "bash ./scripts/dist-dir.sh",
+    "compile": "bash ./scripts/compile.sh",
+    "lint": "eslint src webpack .storybook",
+    "flow": "flow",
+    "prettier": "prettier --write \"{src,webpack,.storybook,static/i18n}/**/*.{js,json}\"",
+    "ci": "yarn lint && yarn flow && yarn prettier",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
-    "reset-files": "bash ./scripts/reset-files.sh"
+    "publish-storybook": "bash ./scripts/legacy/publish-storybook.sh",
+    "reset-files": "bash ./scripts/legacy/reset-files.sh"
   },
   "electronWebpack": {
     "title": true,
@@ -30,9 +29,6 @@
     "main": {
       "webpackConfig": "./webpack/main.config.js"
     }
-  },
-  "resolutions": {
-    "webpack-sources": "1.0.1"
   },
   "dependencies": {
     "@ledgerhq/hw-app-btc": "4.20.0",
