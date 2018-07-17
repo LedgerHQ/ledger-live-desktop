@@ -20,10 +20,14 @@ import hardReset from 'helpers/hardReset'
 import { fetchAccounts } from 'actions/accounts'
 import { isLocked, unlock } from 'reducers/application'
 
+import { createCustomErrorClass } from 'helpers/errors'
+
 import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
 import Button from './base/Button/index'
 import ConfirmModal from './base/Modal/ConfirmModal'
+
+const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type InputValue = {
   password: string,
@@ -177,7 +181,7 @@ class IsUnlocked extends Component<Props, State> {
                   type="password"
                   onChange={this.handleChangeInput('password')}
                   value={inputValue.password}
-                  error={incorrectPassword && t('app:password.errorMessageIncorrectPassword')}
+                  error={incorrectPassword && new PasswordIncorrectError()}
                 />
               </Box>
               <Button type="button" mt={3} small onClick={this.handleOpenHardResetModal}>

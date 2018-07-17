@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import bcrypt from 'bcryptjs'
+import { createCustomErrorClass } from 'helpers/errors'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -10,6 +11,8 @@ import Label from 'components/base/Label'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
 import type { T } from 'types/common'
+
+const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type Props = {
   t: T,
@@ -87,9 +90,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
                           id="password"
                           onChange={this.handleInputChange('currentPassword')}
                           value={currentPassword}
-                          error={
-                            incorrectPassword && t('app:password.errorMessageIncorrectPassword')
-                          }
+                          error={incorrectPassword && new PasswordIncorrectError()}
                         />
                       </Box>
                     )}

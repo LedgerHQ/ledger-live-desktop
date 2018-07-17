@@ -17,6 +17,8 @@ import { setDataModal } from 'reducers/modals'
 
 import { getBridgeForCurrency } from 'bridge'
 
+import { createCustomErrorClass } from 'helpers/errors'
+
 import TrackPage from 'analytics/TrackPage'
 import Spoiler from 'components/base/Spoiler'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
@@ -34,12 +36,15 @@ import {
   ConfirmModal,
 } from 'components/base/Modal'
 
+const AccountNameRequiredError = createCustomErrorClass('AccountNameRequired')
+const EnpointConfigError = createCustomErrorClass('EnpointConfig')
+
 type State = {
   accountName: ?string,
   accountUnit: ?Unit,
   endpointConfig: ?string,
   accountNameError: boolean,
-  endpointConfigError: ?Error,
+  endpointConfigError: boolean,
   isRemoveAccountModalOpen: boolean,
 }
 
@@ -68,7 +73,7 @@ const defaultState = {
   accountUnit: null,
   endpointConfig: null,
   accountNameError: false,
-  endpointConfigError: null,
+  endpointConfigError: false,
   isRemoveAccountModalOpen: false,
 }
 
@@ -103,7 +108,7 @@ class HelperComp extends PureComponent<Props, State> {
     const { handleChangeEndpointConfig_id } = this
     this.setState({
       endpointConfig,
-      endpointConfigError: null,
+      endpointConfigError: false,
     })
     try {
       if (bridge.validateEndpointConfig) {
@@ -111,7 +116,7 @@ class HelperComp extends PureComponent<Props, State> {
       }
       if (handleChangeEndpointConfig_id === this.handleChangeEndpointConfig_id) {
         this.setState({
-          endpointConfigError: null,
+          endpointConfigError: false,
         })
       }
     } catch (endpointConfigError) {
@@ -133,18 +138,24 @@ class HelperComp extends PureComponent<Props, State> {
 
     const { updateAccount, setDataModal } = this.props
     const { accountName, accountUnit, endpointConfig, endpointConfigError } = this.state
-    const name = validateNameEdition(account, accountName)
-    account = {
-      ...account,
-      unit: accountUnit || account.unit,
-      name,
+
+    if (!account.name.length) {
+      this.setState({ accountNameError: true })
+    } else if (!endpointConfigError) {
+      const name = validateNameEdition(account, accountName)
+
+      account = {
+        ...account,
+        unit: accountUnit || account.unit,
+        name,
+      }
+      if (endpointConfig && !endpointConfigError) {
+        account.endpointConfig = endpointConfig
+      }
+      updateAccount(account)
+      setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
+      onClose()
     }
-    if (endpointConfig && !endpointConfigError) {
-      account.endpointConfig = endpointConfig
-    }
-    updateAccount(account)
-    setDataModal(MODAL_SETTINGS_ACCOUNT, { account })
-    onClose()
   }
 
   handleFocus = (e: any, name: string) => {
@@ -153,6 +164,9 @@ class HelperComp extends PureComponent<Props, State> {
     switch (name) {
       case 'accountName':
         this.setState({ accountNameError: false })
+        break
+      case 'endpointConfig':
+        this.setState({ endpointConfigError: false })
         break
       default:
         break
@@ -214,7 +228,7 @@ class HelperComp extends PureComponent<Props, State> {
                   maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
                   onFocus={e => this.handleFocus(e, 'accountName')}
-                  error={accountNameError && new Error(t('app:account.settings.accountName.error'))}
+                  error={accountNameError && new AccountNameRequiredError()}
                 />
               </Box>
             </Container>
@@ -250,11 +264,7 @@ class HelperComp extends PureComponent<Props, State> {
                     }
                     onChange={this.handleChangeEndpointConfig}
                     onFocus={e => this.handleFocus(e, 'endpointConfig')}
-                    error={
-                      endpointConfigError
-                        ? new Error(t('app:account.settings.endpointConfig.error'))
-                        : null
-                    }
+                    error={endpointConfigError && new EnpointConfigError()}
                   />
                 </Box>
               </Container>

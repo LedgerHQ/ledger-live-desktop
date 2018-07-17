@@ -49,23 +49,28 @@ export default function StepConfirmation({ t, optimisticOperation, error }: Step
     : error
       ? colors.alertRed
       : colors.grey
-  const tPrefix = optimisticOperation
-    ? 'app:send.steps.confirmation.success'
-    : error
-      ? 'app:send.steps.confirmation.error'
-      : 'app:send.steps.confirmation.pending'
 
-  const translatedErrTitle = error ? <TranslatedError error={error} /> || '' : ''
-  const translatedErrDesc = error ? <TranslatedError error={error} field="description" /> || '' : ''
   return (
     <Container>
       <TrackPage category="Send Flow" name="Step 4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
-      <Title>{translatedErrTitle || t(`${tPrefix}.title`)}</Title>
+      <Title>
+        {error ? (
+          <TranslatedError error={error} />
+        ) : optimisticOperation ? (
+          t('app:send.steps.confirmation.success.title')
+        ) : (
+          t('app:send.steps.confirmation.pending.title')
+        )}
+      </Title>
       <Text style={{ userSelect: 'text' }} color="smoke">
-        {optimisticOperation ? multiline(t(`${tPrefix}.text`)) : error ? translatedErrDesc : null}
+        {optimisticOperation ? (
+          multiline(t('app:send.steps.confirmation.success.text'))
+        ) : error ? (
+          <TranslatedError error={error} field="description" />
+        ) : null}
       </Text>
     </Container>
   )
@@ -109,7 +114,7 @@ export function StepConfirmationFooter({
             transitionTo('amount')
           }}
         >
-          {t('app:send.steps.confirmation.error.cta')}
+          {t('app:common.retry')}
         </Button>
       ) : null}
     </Fragment>

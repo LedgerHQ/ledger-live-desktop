@@ -3,6 +3,10 @@
     "title": "{{message}}",
     "description": "Something went wrong. Please retry or contact us."
   },
+  "AccountNameRequired": {
+    "title": "An account name is required",
+    "description": "Please provide with an account name"
+  },
   "BtcUnmatchedApp": {
     "title": "That's the wrong app",
     "description": "Open the ‘{{managerAppName}}’ app on your device"
@@ -30,6 +34,10 @@
   "DisconnectedDevice": {
     "title": "Oops, device was disconnected",
     "description": "The connection to the device was lost, so please try again."
+  },
+  "EnpointConfig": {
+    "title": "Invalid endpoint",
+    "description": "Please provide with a valid endpoint"
   },
   "FeeEstimationFailed": {
     "title": "Sorry, fee estimation failed",
@@ -92,6 +100,18 @@
   "NotEnoughBalance": {
     "title": "Oops, not enough balance",
     "description": "Make sure the account to debit has sufficient balance"
+  },
+  "PasswordsDontMatch": {
+    "title": "Passwords don't match",
+    "description": "Please try again"
+  },
+  "PasswordIncorrect": {
+    "title": "The password you entered is incorrect",
+    "description": "Please try again"
+  },
+  "SelectExchangesLoadError": {
+    "title": "Unable to load",
+    "description": "Can't load the exchanges"
   },
   "TimeoutError": {
     "title": "Oops, a time out occurred",

@@ -6,7 +6,12 @@ import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
 import Label from 'components/base/Label'
 
+import { createCustomErrorClass } from 'helpers/errors'
+
 import type { T } from 'types/common'
+
+const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
+const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type Props = {
   t: T,
@@ -47,7 +52,7 @@ class PasswordForm extends PureComponent<Props> {
                 id="currentPassword"
                 onChange={onChange('currentPassword')}
                 value={currentPassword}
-                error={incorrectPassword && t('app:password.errorMessageIncorrectPassword')}
+                error={incorrectPassword && new PasswordIncorrectError()}
               />
             </Box>
           )}
@@ -70,11 +75,7 @@ class PasswordForm extends PureComponent<Props> {
               id="confirmPassword"
               onChange={onChange('confirmPassword')}
               value={confirmPassword}
-              error={
-                !isValid() &&
-                confirmPassword.length > 0 &&
-                t('app:password.errorMessageNotMatchingPassword')
-              }
+              error={!isValid() && confirmPassword.length > 0 && new PasswordsDontMatchError()}
             />
           </Box>
         </Box>
