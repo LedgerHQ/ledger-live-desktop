@@ -1,17 +1,21 @@
 // @flow
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
-type Derivation = ({
-  currency: CryptoCurrency,
-  segwit: boolean,
-  x: number,
-}) => string
+type Derivation = {
+  ({
+    currency: CryptoCurrency,
+    segwit: boolean,
+    x: number,
+  }): string,
+
+  mandatoryEmptyAccountSkip?: number,
+}
 
 const ethLegacyMEW: Derivation = ({ x }) => `44'/60'/0'/${x}`
-ethLegacyMEW.mandatoryCount = 5
+ethLegacyMEW.mandatoryEmptyAccountSkip = 10
 
 const etcLegacyMEW: Derivation = ({ x }) => `44'/60'/160720'/${x}'/0`
-etcLegacyMEW.mandatoryCount = 5
+etcLegacyMEW.mandatoryEmptyAccountSkip = 10
 
 const rippleLegacy: Derivation = ({ x }) => `44'/144'/0'/${x}'`
 

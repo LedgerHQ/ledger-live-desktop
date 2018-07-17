@@ -16,6 +16,8 @@ module.exports = {
   analyticsTrack: noop,
   analyticsPage: noop,
   log: noop,
+  info: noop,
+  debug: noop,
   warn: noop,
   error: noop,
   critical: noop,
