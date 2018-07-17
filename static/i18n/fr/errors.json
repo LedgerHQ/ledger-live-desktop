@@ -3,6 +3,10 @@
     "title": "{{message}}",
     "description": "Something went wrong. Please retry or contact us."
   },
+  "AccountNameRequired": {
+    "title": "An account name is required",
+    "description": "Please provide with an account name"
+  },
   "BtcUnmatchedApp": {
     "title": "That's the wrong app",
     "description": "Open the ‘{{managerAppName}}’ app on your device"
@@ -31,6 +35,10 @@
     "title": "Oops, device was disconnected",
     "description": "The connection to the device was lost, so please try again."
   },
+  "EnpointConfig": {
+    "title": "Invalid endpoint",
+    "description": "Please provide with a valid endpoint"
+  },
   "FeeEstimationFailed": {
     "title": "Sorry, fee estimation failed",
     "description": "Try setting a custom fee (status: {{status}})"
@@ -41,8 +49,7 @@
   },
   "LatestMCUInstalledError": {
     "title": "Oops, nothing to update",
-    "description":
-      "Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device."
+    "description": "Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device."
   },
   "LedgerAPIError": {
     "title": "Sorry, try again (API HTTP {{status}})",
@@ -86,12 +93,23 @@
   },
   "NoAddressesFound": {
     "title": "Sorry, no accounts found",
-    "description":
-      "Something went wrong with address calculation, try again or contact Ledger Support."
+    "description": "Something went wrong with address calculation, try again or contact Ledger Support."
   },
   "NotEnoughBalance": {
     "title": "Oops, not enough balance",
     "description": "Make sure the account to debit has sufficient balance"
+  },
+  "PasswordsDontMatch": {
+    "title": "Passwords don't match",
+    "description": "Please try again"
+  },
+  "PasswordIncorrect": {
+    "title": "The password you entered is incorrect",
+    "description": "Please try again"
+  },
+  "SelectExchangesLoadError": {
+    "title": "Unable to load",
+    "description": "Can't load the exchanges"
   },
   "TimeoutError": {
     "title": "Oops, a time out occurred",
@@ -127,8 +145,7 @@
   },
   "WrongDeviceForAccount": {
     "title": "Oops, wrong device for ‘{{accountName}}’.",
-    "description":
-      "The connected device is not associated with the account you selected. Please connect the right device."
+    "description": "The connected device is not associated with the account you selected. Please connect the right device."
   },
   "DeviceAppVerifyNotSupported": {
     "title": "Open Manager to update this App",
