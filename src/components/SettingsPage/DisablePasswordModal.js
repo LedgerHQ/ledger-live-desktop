@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import bcrypt from 'bcryptjs'
+import { createCustomErrorClass } from 'helpers/errors'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -10,6 +11,8 @@ import Label from 'components/base/Label'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
 import type { T } from 'types/common'
+
+const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type Props = {
   t: T,
@@ -21,12 +24,12 @@ type Props = {
 
 type State = {
   currentPassword: string,
-  incorrectPassword: boolean,
+  incorrectPassword: ?Error,
 }
 
 const INITIAL_STATE = {
   currentPassword: '',
-  incorrectPassword: false,
+  incorrectPassword: null,
 }
 
 // TODO: combine with the refactored password form
@@ -42,7 +45,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
     const { isPasswordEnabled, currentPasswordHash, onChangePassword } = this.props
     if (isPasswordEnabled) {
       if (!bcrypt.compareSync(currentPassword, currentPasswordHash)) {
-        this.setState({ incorrectPassword: true })
+        this.setState({ incorrectPassword: new PasswordIncorrectError() })
         return
       }
       onChangePassword('')
@@ -53,7 +56,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
 
   handleInputChange = (key: string) => (value: string) => {
     if (this.state.incorrectPassword) {
-      this.setState({ incorrectPassword: false })
+      this.setState({ incorrectPassword: null })
     }
     this.setState({ [key]: value })
   }
@@ -87,9 +90,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
                           id="password"
                           onChange={this.handleInputChange('currentPassword')}
                           value={currentPassword}
-                          error={
-                            incorrectPassword && t('app:password.errorMessageIncorrectPassword')
-                          }
+                          error={incorrectPassword}
                         />
                       </Box>
                     )}
