@@ -1534,11 +1534,12 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@^2.35.0":
-  version "2.35.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.35.0.tgz#526bfb94f1a2f1449674c7854cf2c7a162385018"
+"@ledgerhq/live-common@3.0.0-beta.2":
+  version "3.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.0.0-beta.2.tgz#9280694bcfb6f8819bc90538dbdfcfa260e3454e"
   dependencies:
     axios "^0.18.0"
+    bignumber.js "^7.2.1"
     invariant "^2.2.2"
     lodash "^4.17.4"
     numeral "^2.0.6"
@@ -3578,6 +3579,10 @@ bigi@^1.1.0, bigi@^1.4.0:
 bignumber.js@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.1.0.tgz#db6f14067c140bd46624815a7916c92d9b6c24b1"
+
+bignumber.js@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-7.2.1.tgz#80c048759d826800807c4bfd521e50edbba57a5f"
 
 bin-links@^1.1.0, bin-links@^1.1.2:
   version "1.1.2"

@@ -1,6 +1,9 @@
 // @flow
 
+// TODO split these into many files
+
 import logger from 'logger'
+import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
@@ -530,4 +533,12 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
   logger.log(`Synced account [${syncedRawAccount.name}]: ${syncedRawAccount.balance}`)
 
   return syncedRawAccount
+}
+
+export function libcoreAmountToBigNumber(njsAmount: *): BigNumber {
+  return BigNumber(njsAmount.toBigInt().toString(10))
+}
+
+export function bigNumberToLibcoreAmount(core: *, njsWalletCurrency: *, bigNumber: BigNumber) {
+  return new core.NJSAmount(njsWalletCurrency, 0).fromHex(njsWalletCurrency, bigNumber.toString(16))
 }

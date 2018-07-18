@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import { BigNumber } from 'bignumber.js'
 import { translate } from 'react-i18next'
 
 import Box from 'components/base/Box'
@@ -8,8 +9,8 @@ import Label from 'components/base/Label'
 import Spoiler from 'components/base/Spoiler'
 
 type Props = {
-  gasLimit: number,
-  onChangeGasLimit: (?number) => void,
+  gasLimit: BigNumber,
+  onChangeGasLimit: BigNumber => void,
   t: *,
 }
 
@@ -25,9 +26,9 @@ export default translate()(({ gasLimit, onChangeGasLimit, t }: Props) => (
         <Input
           value={gasLimit}
           onChange={str => {
-            const gasLimit = parseInt(str || 0, 10)
-            if (!isNaN(gasLimit) && isFinite(gasLimit)) onChangeGasLimit(gasLimit)
-            else onChangeGasLimit(0x5208)
+            const gasLimit = BigNumber(str || 0)
+            if (!gasLimit.isNaN() && gasLimit.isFinite()) onChangeGasLimit(gasLimit)
+            else onChangeGasLimit(BigNumber(0x5208))
           }}
         />
       </Box>

@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import type { BigNumber } from 'bignumber.js'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -25,9 +26,9 @@ import PillsDaysCount from 'components/PillsDaysCount'
 
 type OwnProps = {
   isAvailable: boolean,
-  totalBalance: number,
-  sinceBalance: number,
-  refBalance: number,
+  totalBalance: BigNumber,
+  sinceBalance: BigNumber,
+  refBalance: BigNumber,
   accountId: string,
 }
 

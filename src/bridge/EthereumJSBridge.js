@@ -1,5 +1,6 @@
 // @flow
 import { Observable } from 'rxjs'
+import { BigNumber } from 'bignumber.js'
 import React from 'react'
 import FeesField from 'components/FeesField/EthereumKind'
 import AdvancedOptions from 'components/AdvancedOptions/EthereumKind'
@@ -21,11 +22,18 @@ const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 // TODO in future it would be neat to support eip55
 
 type Transaction = {
-  amount: number,
   recipient: string,
-  gasPrice: number,
-  gasLimit: number,
+  amount: BigNumber,
+  gasPrice: BigNumber,
+  gasLimit: BigNumber,
 }
+
+const serializeTransaction = t => ({
+  recipient: t.recipient,
+  amount: `0x${BigNumber(t.amount).toString(16)}`,
+  gasPrice: `0x${BigNumber(t.gasPrice).toString(16)}`,
+  gasLimit: `0x${BigNumber(t.gasLimit).toString(16)}`,
+})
 
 const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   <FeesField
@@ -60,8 +68,8 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
-      value: tx.value,
-      fee,
+      value: BigNumber(tx.value), // FIXME problem with our api, precision lost here...
+      fee: BigNumber(fee), // FIXME problem with our api, precision lost here...
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
       accountId: account.id,
@@ -75,8 +83,8 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       id: `${account.id}-${tx.hash}-IN`,
       hash: tx.hash,
       type: 'IN',
-      value: tx.value,
-      fee,
+      value: BigNumber(tx.value), // FIXME problem with our api, precision lost here...
+      fee: BigNumber(fee), // FIXME problem with our api, precision lost here...
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
       accountId: account.id,
@@ -115,7 +123,7 @@ const signAndBroadcast = async ({
       currencyId: a.currency.id,
       devicePath: deviceId,
       path: a.freshAddressPath,
-      transaction: { ...t, nonce },
+      transaction: { ...serializeTransaction(t), nonce },
     })
     .toPromise()
 
@@ -129,7 +137,7 @@ const signAndBroadcast = async ({
       hash,
       type: 'OUT',
       value: t.amount,
-      fee: t.gasPrice * t.gasLimit,
+      fee: t.gasPrice.times(t.gasLimit),
       blockHeight: null,
       blockHash: null,
       accountId: a.id,
@@ -351,10 +359,10 @@ const EthereumBridge: WalletBridge<Transaction> = {
   isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
 
   createTransaction: () => ({
-    amount: 0,
+    amount: BigNumber(0),
     recipient: '',
-    gasPrice: 0,
-    gasLimit: 0x5208,
+    gasPrice: BigNumber(0),
+    gasLimit: BigNumber(0x5208),
   }),
 
   editTransactionAmount: (account, t, amount) => ({
@@ -371,16 +379,20 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
+  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
 
   EditFees,
 
   EditAdvancedOptions,
 
   checkCanBeSpent: (a, t) =>
-    t.amount <= a.balance ? Promise.resolve() : Promise.reject(new NotEnoughBalance()),
-  getTotalSpent: (a, t) => Promise.resolve(t.amount + t.gasPrice * t.gasLimit),
-  getMaxAmount: (a, t) => Promise.resolve(a.balance - t.gasPrice * t.gasLimit),
+    t.amount.isLessThanOrEqualTo(a.balance)
+      ? Promise.resolve()
+      : Promise.reject(new NotEnoughBalance()),
+
+  getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit))),
+
+  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.gasPrice.times(t.gasLimit))),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {

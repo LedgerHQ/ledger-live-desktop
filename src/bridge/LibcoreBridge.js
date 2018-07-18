@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import { BigNumber } from 'bignumber.js'
 import { Observable } from 'rxjs'
 import LRU from 'lru-cache'
 import { map } from 'rxjs/operators'
@@ -20,10 +21,16 @@ const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 const notImplemented = new Error('LibcoreBridge: not implemented')
 
 type Transaction = {
-  amount: number,
-  feePerByte: number,
+  amount: BigNumber,
+  feePerByte: BigNumber,
   recipient: string,
 }
+
+const serializeTransaction = t => ({
+  recipient: t.recipient,
+  amount: t.amount.toString(),
+  feePerByte: t.feePerByte.toString(),
+})
 
 const decodeOperation = (encodedAccount, rawOp) =>
   decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations[0]
@@ -70,7 +77,7 @@ const isRecipientValid = (currency, recipient) => {
 const feesLRU = LRU({ max: 100 })
 
 const getFeesKey = (a, t) =>
-  `${a.id}_${a.blockHeight || 0}_${t.amount}_${t.recipient}_${t.feePerByte}`
+  `${a.id}_${a.blockHeight || 0}_${t.amount.toString()}_${t.recipient}_${t.feePerByte.toString()}`
 
 const getFees = async (a, transaction) => {
   const isValid = await isRecipientValid(a.currency, transaction.recipient)
@@ -79,9 +86,13 @@ const getFees = async (a, transaction) => {
   let promise = feesLRU.get(key)
   if (promise) return promise
   promise = libcoreGetFees
-    .send({ accountId: a.id, accountIndex: a.index, transaction })
+    .send({
+      accountId: a.id,
+      accountIndex: a.index,
+      transaction: serializeTransaction(transaction),
+    })
     .toPromise()
-    .then(r => r.totalFees)
+    .then(r => BigNumber(r.totalFees))
   feesLRU.set(key, promise)
   return promise
 }
@@ -168,9 +179,9 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   isRecipientValid,
 
   createTransaction: () => ({
-    amount: 0,
+    amount: BigNumber(0),
     recipient: '',
-    feePerByte: 0,
+    feePerByte: BigNumber(0),
     isRBF: false,
   }),
 
@@ -192,28 +203,28 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   // EditAdvancedOptions,
 
-  isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
+  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
 
   checkCanBeSpent,
 
   getTotalSpent: (a, t) =>
     !t.amount
-      ? Promise.resolve(0)
+      ? Promise.resolve(BigNumber(0))
       : getFees(a, t)
-          .then(totalFees => t.amount + (totalFees || 0))
-          .catch(() => 0),
+          .then(totalFees => t.amount.plus(totalFees || 0))
+          .catch(() => BigNumber(0)),
 
   getMaxAmount: (a, t) =>
     getFees(a, t)
-      .catch(() => 0)
-      .then(totalFees => a.balance - (totalFees || 0)),
+      .catch(() => BigNumber(0))
+      .then(totalFees => a.balance.minus(totalFees || 0)),
 
   signAndBroadcast: (account, transaction, deviceId) => {
     const encodedAccount = encodeAccount(account) // FIXME no need to send the whole account over the threads
     return libcoreSignAndBroadcast
       .send({
         account: encodedAccount,
-        transaction,
+        transaction: serializeTransaction(transaction),
         deviceId,
       })
       .pipe(

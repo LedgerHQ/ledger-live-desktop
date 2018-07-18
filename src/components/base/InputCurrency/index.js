@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { BigNumber } from 'bignumber.js'
 import uncontrollable from 'uncontrollable'
 import styled from 'styled-components'
 import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
@@ -52,13 +53,13 @@ const sanitizeValueString = (
   return { display, value }
 }
 
-function format(unit: Unit, value: number, { isFocused, showAllDigits, subMagnitude }) {
+function format(unit: Unit, value: BigNumber, { isFocused, showAllDigits, subMagnitude }) {
   // FIXME do we need locale for the input too ?
   return formatCurrencyUnit(unit, value, {
     useGrouping: !isFocused,
     disableRounding: true,
     showAllDigits: !!showAllDigits && !isFocused,
-    subMagnitude: value < 1 ? subMagnitude : 0,
+    subMagnitude: value.isLessThan(1) ? subMagnitude : 0,
   })
 }
 
@@ -75,12 +76,12 @@ function stopPropagation(e) {
 
 type Props = {
   onChangeFocus: boolean => void,
-  onChange: (number, Unit) => void, // FIXME Unit shouldn't be provided (this is not "standard" onChange)
+  onChange: (BigNumber, Unit) => void, // FIXME Unit shouldn't be provided (this is not "standard" onChange)
   onChangeUnit: Unit => void,
   renderRight: any,
   unit: Unit,
   units: Unit[],
-  value: number,
+  value: BigNumber,
   showAllDigits?: boolean,
   subMagnitude: number,
 }
@@ -96,7 +97,7 @@ class InputCurrency extends PureComponent<Props, State> {
     onChange: noop,
     renderRight: null,
     units: [],
-    value: 0,
+    value: BigNumber(0),
     showAllDigits: false,
     subMagnitude: 0,
   }
@@ -120,14 +121,13 @@ class InputCurrency extends PureComponent<Props, State> {
     if (needsToBeReformatted) {
       const { isFocused } = this.state
       this.setState({
-        displayValue:
-          nextProps.value === 0
-            ? ''
-            : format(nextProps.unit, nextProps.value, {
-                isFocused,
-                showAllDigits: nextProps.showAllDigits,
-                subMagnitude: nextProps.subMagnitude,
-              }),
+        displayValue: nextProps.value.isZero()
+          ? ''
+          : format(nextProps.unit, nextProps.value, {
+              isFocused,
+              showAllDigits: nextProps.showAllDigits,
+              subMagnitude: nextProps.subMagnitude,
+            }),
       })
     }
   }
@@ -135,8 +135,8 @@ class InputCurrency extends PureComponent<Props, State> {
   handleChange = (v: string) => {
     const { onChange, unit, value } = this.props
     const r = sanitizeValueString(unit, v)
-    const satoshiValue = parseInt(r.value, 10)
-    if (value !== satoshiValue) {
+    const satoshiValue = BigNumber(r.value)
+    if (!value.isEqualTo(satoshiValue)) {
       onChange(satoshiValue, unit)
     }
     this.setState({ displayValue: r.display })
@@ -157,7 +157,7 @@ class InputCurrency extends PureComponent<Props, State> {
     this.setState({
       isFocused,
       displayValue:
-        value === '' || value === 0
+        !value || value.isZero()
           ? ''
           : format(unit, value, { isFocused, showAllDigits, subMagnitude }),
     })
@@ -214,7 +214,7 @@ class InputCurrency extends PureComponent<Props, State> {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         renderRight={renderRight || this.renderListUnits()}
-        placeholder={format(unit, 0, { isFocused: false, showAllDigits, subMagnitude })}
+        placeholder={format(unit, BigNumber(0), { isFocused: false, showAllDigits, subMagnitude })}
       />
     )
   }

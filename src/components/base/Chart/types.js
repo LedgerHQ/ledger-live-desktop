@@ -1,14 +1,16 @@
 // @flow
 
+import type { BigNumber } from 'bignumber.js'
+
 export type Item = {
   date: Date,
-  value: number,
-  originalValue: number,
+  value: BigNumber,
+  originalValue: BigNumber,
 }
 
 type EnrichedItem = {
   date: string,
-  value: number,
+  value: BigNumber,
   parsedDate: Date,
   ref: Item,
 }

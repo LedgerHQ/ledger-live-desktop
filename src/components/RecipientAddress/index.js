@@ -1,5 +1,6 @@
 // @flow
 
+import type { BigNumber } from 'bignumber.js'
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
@@ -46,7 +47,7 @@ const BackgroundLayer = styled(Box)`
 type Props = {
   value: string,
   // return false if it can't be changed (invalid info)
-  onChange: (string, ?{ amount?: number, currency?: CryptoCurrency }) => ?boolean,
+  onChange: (string, ?{ amount?: BigNumber, currency?: CryptoCurrency }) => ?boolean,
   withQrCode: boolean,
 }
 

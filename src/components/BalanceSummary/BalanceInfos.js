@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import type { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 
 import type { Unit, Currency } from '@ledgerhq/live-common/lib/types'
@@ -20,9 +21,9 @@ const Sub = styled(Box).attrs({
 
 type BalanceSinceProps = {
   since: string,
-  totalBalance: number,
-  sinceBalance: number,
-  refBalance: number,
+  totalBalance: BigNumber,
+  sinceBalance: BigNumber,
+  refBalance: BigNumber,
   isAvailable: boolean,
   t: T,
 }
@@ -31,7 +32,7 @@ type BalanceTotalProps = {
   children?: any,
   unit: Unit,
   isAvailable: boolean,
-  totalBalance: number,
+  totalBalance: BigNumber,
   showCryptoEvenIfNotAvailable?: boolean,
 }
 
@@ -77,7 +78,7 @@ export function BalanceSinceDiff(props: Props) {
           unit={counterValue.units[0]}
           fontSize={7}
           showCode
-          val={totalBalance - sinceBalance}
+          val={totalBalance.minus(sinceBalance)}
           withIcon
         />
       )}

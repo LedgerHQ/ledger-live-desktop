@@ -1,11 +1,13 @@
 // @flow
 
 import logger from 'logger'
+import { BigNumber } from 'bignumber.js'
 import type { AccountRaw, OperationRaw } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import { isSegwitAccount } from 'helpers/bip32'
+import { libcoreAmountToBigNumber, bigNumberToLibcoreAmount } from 'helpers/libcore'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
@@ -13,8 +15,8 @@ import { withDevice } from 'helpers/deviceAccess'
 import * as accountIdHelper from 'helpers/accountId'
 
 type BitcoinLikeTransaction = {
-  amount: number,
-  feePerByte: number,
+  amount: string,
+  feePerByte: string,
   recipient: string,
 }
 
@@ -169,14 +171,8 @@ export async function doSignAndBroadcast({
   if (isCancelled()) return
   const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
   const njsWalletCurrency = njsWallet.getCurrency()
-  const amount = new core.NJSAmount(njsWalletCurrency, transaction.amount).fromLong(
-    njsWalletCurrency,
-    transaction.amount,
-  )
-  const fees = new core.NJSAmount(njsWalletCurrency, transaction.feePerByte).fromLong(
-    njsWalletCurrency,
-    transaction.feePerByte,
-  )
+  const amount = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.amount))
+  const fees = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.feePerByte))
   const transactionBuilder = bitcoinLikeAccount.buildTransaction()
 
   // TODO: check if is valid address. if not, it will fail silently on invalid
@@ -218,15 +214,17 @@ export async function doSignAndBroadcast({
     .asBitcoinLikeAccount()
     .broadcastRawTransaction(Array.from(Buffer.from(signedTransaction, 'hex')))
 
-  const fee = builded.getFees().toLong()
+  const fee = libcoreAmountToBigNumber(builded.getFees())
 
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
   onOperationBroadcasted({
     id: `${account.xpub}-${txHash}-OUT`,
     hash: txHash,
     type: 'OUT',
-    value: transaction.amount + fee,
-    fee,
+    value: BigNumber(transaction.amount)
+      .plus(fee)
+      .toString(),
+    fee: fee.toString(),
     blockHash: null,
     blockHeight: null,
     senders: [account.freshAddress],

@@ -1,11 +1,10 @@
 // @flow
 
+import type { BigNumber } from 'bignumber.js'
 import invariant from 'invariant'
 import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-
-import isUndefined from 'lodash/isUndefined'
 
 import type { Unit } from '@ledgerhq/live-common/lib/types'
 import type { State } from 'reducers'
@@ -41,7 +40,7 @@ I.defaultProps = {
 
 type OwnProps = {
   unit?: Unit,
-  val: number,
+  val: BigNumber,
   alwaysShowSign?: boolean,
   showCode?: boolean,
   withIcon?: boolean,
@@ -77,20 +76,23 @@ function FormattedVal(props: Props) {
   } = props
   let { val } = props
 
-  invariant(!isUndefined(val), 'FormattedVal require a `val` prop. Received `undefined`')
+  invariant(val, 'FormattedVal require a `val` prop. Received `undefined`')
 
-  const isNegative = val < 0
+  const isNegative = val.isNegative() && !val.isZero()
 
   let text = ''
 
   if (isPercent) {
     // FIXME move out the % feature of this component... totally unrelated to currency & annoying for flow type.
-    text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${isNegative ? val * -1 : val} %`
+    text = `${alwaysShowSign ? (isNegative ? '- ' : '+ ') : ''}${(isNegative
+      ? val.negated()
+      : val
+    ).toString()} %`
   } else {
     invariant(unit, 'FormattedVal require a `unit` prop. Received `undefined`')
 
     if (withIcon && isNegative) {
-      val *= -1
+      val = val.negated()
     }
 
     text = formatCurrencyUnit(unit, val, {

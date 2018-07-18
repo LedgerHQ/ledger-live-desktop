@@ -58,7 +58,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
               account = { ...account }
               account.blockHeight++
               for (const op of ops) {
-                account.balance += getOperationAmountNumber(op)
+                account.balance = account.balance.plus(getOperationAmountNumber(op))
               }
               return account
             })
