@@ -65,7 +65,7 @@ export default function handleMouseEvents({
     NODES.tooltip
       .style('transition', '100ms cubic-bezier(.61,1,.53,1) opacity')
       .style('opacity', 1)
-      .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, 0, 0)`)
+      .style('left', `${Math.floor(MARGINS.left + x(d.parsedDate))}px`)
     NODES.focus.style('opacity', 1)
     NODES.xBar.style('opacity', 1)
   }
@@ -102,7 +102,7 @@ export default function handleMouseEvents({
           </Provider>,
         ),
       )
-      .style('transform', `translate3d(${MARGINS.left + x(d.parsedDate)}px, 0, 0)`)
+      .style('left', `${Math.floor(MARGINS.left + x(d.parsedDate))}px`)
     NODES.xBar
       .attr('x1', x(d.parsedDate))
       .attr('x2', x(d.parsedDate))
