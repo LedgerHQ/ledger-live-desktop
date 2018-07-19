@@ -16,12 +16,6 @@ export const removeAccount: RemoveAccount = payload => ({
   payload,
 })
 
-export type ReorderAccounts = (string[]) => { type: string, payload: string[] }
-export const reorderAccounts: ReorderAccounts = payload => ({
-  type: 'DB:REORDER_ACCOUNTS',
-  payload,
-})
-
 export type FetchAccounts = () => *
 export const fetchAccounts: FetchAccounts = () => {
   db.init('accounts', []) // FIXME the "init" pattern to drop imo. a simple get()||[] is enough
