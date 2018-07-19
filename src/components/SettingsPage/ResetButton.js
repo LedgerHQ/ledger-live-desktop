@@ -45,7 +45,7 @@ class ResetButton extends PureComponent<Props, State> {
     return (
       <Fragment>
         <Button small danger onClick={this.open} event="HardResetIntent">
-          {t('app:settings.profile.hardReset')}
+          {t('app:common.reset')}
         </Button>
 
         <ConfirmModal

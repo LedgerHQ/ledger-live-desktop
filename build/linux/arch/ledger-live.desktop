@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=ledger-live
+Comment=Open source companion app for your Ledger devices
+Path=/opt/ledger-live
+Exec=ledger-live
+Icon=ledger-live
+Type=Application
+StartupNotify=true
+Categories=Utility;
+StartupWMClass=ledger-live

@@ -63,14 +63,16 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
   const sending = freshAddress === from
   const receiving = freshAddress === to
   const ops = []
-  const fee = tx.gas_price * tx.gas_used
+  // FIXME problem with our api, precision lost here...
+  const value = BigNumber(tx.value)
+  const fee = BigNumber(tx.gas_price * tx.gas_used)
   if (sending) {
     ops.push({
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
-      value: BigNumber(tx.value), // FIXME problem with our api, precision lost here...
-      fee: BigNumber(fee), // FIXME problem with our api, precision lost here...
+      value: value.plus(fee),
+      fee,
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
       accountId: account.id,
@@ -84,8 +86,8 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       id: `${account.id}-${tx.hash}-IN`,
       hash: tx.hash,
       type: 'IN',
-      value: BigNumber(tx.value), // FIXME problem with our api, precision lost here...
-      fee: BigNumber(fee), // FIXME problem with our api, precision lost here...
+      value,
+      fee,
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
       accountId: account.id,

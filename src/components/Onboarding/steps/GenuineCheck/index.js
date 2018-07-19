@@ -185,11 +185,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           {onboarding.flowType === 'restoreDevice' ? (
             <Description>{t('onboarding:genuineCheck.descRestore')}</Description>
           ) : (
-            <Description>
-              {onboarding.isLedgerNano
-                ? t('onboarding:genuineCheck.descNano')
-                : t('onboarding:genuineCheck.descBlue')}
-            </Description>
+            <Description>{t('onboarding:genuineCheck.descGeneric')}</Description>
           )}
           <Box mt={5}>
             <GenuineCheckCardWrapper>

@@ -310,7 +310,7 @@ class HelperComp extends PureComponent<Props, State> {
           onReject={this.handleCloseRemoveAccountModal}
           onConfirm={() => this.handleRemoveAccount(account)}
           title={t('app:settings.removeAccountModal.title')}
-          subTitle={t('app:settings.removeAccountModal.subTitle')}
+          subTitle={t('app:common.areYouSure')}
           desc={t('app:settings.removeAccountModal.desc')}
         />
       </ModalBody>

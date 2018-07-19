@@ -1,11 +1,20 @@
-.DS_Store
-*.log
 /.env
 /dist/
 /flow-typed/
 /node_modules/
 /static/fonts/museosans/
 /storybook-static/
-thumbs.db
+
+/build/linux/arch/.SRCINFO
+/build/linux/arch/pkg
+/build/linux/arch/src
+/build/linux/arch/*.tar.gz
+/build/linux/arch/*.tar.xz
+
+# TODO this should be in devs global gitignore
+# it makes no sense to have it here
+*.log
+.DS_Store
 .vscode
+thumbs.db
 jsconfig.json
