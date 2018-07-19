@@ -37,7 +37,7 @@
   },
   "EnpointConfig": {
     "title": "Invalid endpoint",
-    "description": "Please provide with a valid endpoint"
+    "description": "Please provide a valid endpoint"
   },
   "FeeEstimationFailed": {
     "title": "Sorry, fee estimation failed",
@@ -96,7 +96,7 @@
     "description": "Something went wrong with address calculation, try again or contact Ledger Support."
   },
   "NotEnoughBalance": {
-    "title": "Oops, not enough balance",
+    "title": "Oops, insufficient balance",
     "description": "Make sure the account to debit has sufficient balance"
   },
   "PasswordsDontMatch": {
@@ -116,11 +116,11 @@
     "description": "It took too long for the server to respond."
   },
   "TransportError": {
-    "title": "Something went wrong. Please replug your device.",
+    "title": "Something went wrong. Please reconnect your device.",
     "description": "{{message}}"
   },
   "TransportStatusError": {
-    "title": "Something went wrong. Please replug your device.",
+    "title": "Something went wrong. Please reconnect your device.",
     "description": "{{message}}"
   },
   "UserRefusedFirmwareUpdate": {
