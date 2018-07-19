@@ -56,7 +56,7 @@ class Init extends PureComponent<StepProps, *> {
       {
         key: 'noDevice',
         icon: <IconExternalLink size={20} />,
-        title: t('onboarding:init.noDevice.title'),
+        title: t('onboarding:noDevice.title'),
         onClick: () => {
           jumpStep('noDevice')
           flowType('noDevice')

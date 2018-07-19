@@ -20,7 +20,7 @@ import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmatio
 const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): Array<*> => {
   const updateStep = {
     id: 'idCheck',
-    label: t('app:manager.modal.steps.idCheck'),
+    label: t('app:manager.modal.identifier'),
     component: StepFullFirmwareInstall,
     footer: null,
     onBack: null,

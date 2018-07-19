@@ -97,9 +97,7 @@ class PasswordModal extends PureComponent<Props, State> {
                   : t('app:password.setPassword.subTitle')}
               </Box>
               <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
-                {isPasswordEnabled
-                  ? t('app:password.changePassword.desc')
-                  : t('app:password.setPassword.desc')}
+                {t('app:password.setPassword.desc')}
               </Box>
               <PasswordForm
                 onSubmit={this.handleSave}

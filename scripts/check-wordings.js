@@ -39,10 +39,23 @@ const WORDINGS = {
 }
 
 async function main() {
+  console.log(`>> Checking for unused wordings...`)
   for (const ns in WORDINGS) {
     if (WORDINGS.hasOwnProperty(ns)) {
       try {
-        await cleanNamespace(ns)
+        const root = WORDINGS[ns]
+        await checkForUsage(root, ns, ':')
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+  console.log(`>> Checking for duplicates...`)
+  for (const ns in WORDINGS) {
+    if (WORDINGS.hasOwnProperty(ns)) {
+      try {
+        const root = WORDINGS[ns]
+        checkForDuplicate(root, ns, {}, ':')
       } catch (err) {
         console.log(err)
       }
@@ -50,9 +63,24 @@ async function main() {
   }
 }
 
-async function cleanNamespace(ns) {
-  const root = WORDINGS[ns]
-  await checkForUsage(root, ns, ':')
+function checkForDuplicate(v, key, values, delimiter = '.') {
+  if (typeof v === 'object') {
+    for (const k in v) {
+      if (v.hasOwnProperty(k)) {
+        checkForDuplicate(v[k], `${key}${delimiter}${k}`, values)
+      }
+    }
+  } else if (typeof v === 'string') {
+    if (values[v]) {
+      console.log(`duplicate value [${v}] for key ${key} (exists in [${values[v].join(', ')}])`)
+      values[v].push(key)
+    } else {
+      values[v] = [key]
+    }
+  } else {
+    console.log(v)
+    throw new Error('invalid input')
+  }
 }
 
 async function checkForUsage(v, key, delimiter = '.') {
