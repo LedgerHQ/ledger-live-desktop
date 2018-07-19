@@ -202,6 +202,7 @@ class Onboarding extends PureComponent<Props> {
 const Container = styled(Box).attrs({
   bg: 'white',
   p: 60,
+  selectable: true,
 })`
   position: fixed;
   top: 0;
