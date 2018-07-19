@@ -350,6 +350,14 @@ export default {
 
   // General functions in case the hooks don't apply
 
+  debug: (...args: any) => {
+    logger.log('debug', ...args)
+  },
+
+  info: (...args: any) => {
+    logger.log('info', ...args)
+  },
+
   log: (...args: any) => {
     logger.log('info', ...args)
   },

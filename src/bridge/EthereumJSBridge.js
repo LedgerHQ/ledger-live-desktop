@@ -1,5 +1,6 @@
 // @flow
 import { Observable } from 'rxjs'
+import logger from 'logger'
 import React from 'react'
 import FeesField from 'components/FeesField/EthereumKind'
 import AdvancedOptions from 'components/AdvancedOptions/EthereumKind'
@@ -176,7 +177,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         index,
         { address, path: freshAddressPath, publicKey },
         isStandard,
-        mandatoryCount,
+        shouldSkipEmpty,
       ): { account?: Account, complete?: boolean } {
         const balance = await api.getAccountBalance(address)
         if (finished) return { complete: true }
@@ -213,7 +214,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
             newAccountCount++
           }
 
-          if (index < mandatoryCount) {
+          if (shouldSkipEmpty) {
             return {}
           }
           // NB for legacy addresses maybe we will continue at least for the first 10 addresses
@@ -254,6 +255,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
           const last = derivations[derivations.length - 1]
           for (const derivation of derivations) {
             const isStandard = last === derivation
+            let emptyCount = 0
+            const mandatoryEmptyAccountSkip = derivation.mandatoryEmptyAccountSkip || 0
             for (let index = 0; index < 255; index++) {
               const freshAddressPath = derivation({ currency, x: index, segwit: false })
               const res = await getAddressCommand
@@ -263,10 +266,18 @@ const EthereumBridge: WalletBridge<Transaction> = {
                 index,
                 res,
                 isStandard,
-                // $FlowFixMe i know i know, not part of function
-                derivation.mandatoryCount || 0,
+                emptyCount < mandatoryEmptyAccountSkip,
               )
-              if (r.account) o.next(r.account)
+              logger.log(
+                `scanning ${currency.id} at ${freshAddressPath}: ${res.address} resulted of ${
+                  r.account ? `Account with ${r.account.operations.length} txs` : 'no account'
+                }. ${r.complete ? 'ALL SCANNED' : ''}`,
+              )
+              if (r.account) {
+                o.next(r.account)
+              } else {
+                emptyCount++
+              }
               if (r.complete) {
                 break
               }
