@@ -3,7 +3,6 @@
     "selectDevice": "Device selection",
     "selectPIN": "PIN code",
     "writeSeed": "Recovery phrase",
-    "genuineCheck": "Security checklist",
     "setPassword": "Password lock",
     "analytics": "Bugs & analytics"
   },
@@ -21,9 +20,6 @@
     },
     "initializedDevice": {
       "title": "Use a device that's already initialized"
-    },
-    "noDevice": {
-      "title": "Do not have a Ledger device yet?"
     }
   },
   "noDevice": {
@@ -125,8 +121,7 @@
   },
   "genuineCheck": {
     "title": "Security checklist",
-    "descNano": "Before continuing, please complete the security checklist",
-    "descBlue": "Before continuing, please complete the security checklist",
+    "descGeneric": "Before continuing, please complete the security checklist",
     "descRestore": "Before getting started, please confirm",
     "step1": {
       "title": "Did you choose your PIN code by yourself?"

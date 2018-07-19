@@ -37,7 +37,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
               {t('app:receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
             </Text>
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
-              {t('app:buttons.displayAddressOnDevice')}
+              {t('app:common.verify')}
             </Button>
             <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
           </Fragment>

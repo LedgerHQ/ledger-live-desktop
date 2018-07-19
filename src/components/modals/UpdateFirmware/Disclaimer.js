@@ -69,7 +69,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
               </ModalContent>
               <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
                 <Button primary onClick={goToNextStep}>
-                  {t('app:manager.firmware.continue')}
+                  {t('app:common.continue')}
                 </Button>
               </ModalFooter>
             </Fragment>

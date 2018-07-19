@@ -103,7 +103,7 @@ class RenderError extends PureComponent<
             {t('app:crash.github')}
           </Button>
           <Button small danger onClick={this.handleOpenHardResetModal}>
-            {t('app:crash.reset')}
+            {t('app:common.reset')}
           </Button>
         </Box>
         <ConfirmModal

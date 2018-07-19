@@ -11,6 +11,7 @@
     "learnMore": "Learn more",
     "skipThisStep": "Skip this step",
     "needHelp": "Need help?",
+    "areYouSure": "Are you sure?",
     "selectAccount": "Select an account",
     "selectAccountNoOption": "No account matching \"{{accountName}}\"",
     "selectCurrency": "Choose a crypto asset",
@@ -52,9 +53,6 @@
       "refresh": "Refresh",
       "ago": "Synced {{time}}"
     }
-  },
-  "buttons": {
-    "displayAddressOnDevice": "Verify"
   },
   "operation": {
     "type": {
@@ -240,7 +238,6 @@
       "titleNano": "Ledger Nano S",
       "titleBlue": "Ledger Blue",
       "update": "Update",
-      "continue": "Continue",
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>",
       "disclaimerAppDelete": "Apps installed on your device have to be re-installed after the update.",
@@ -248,7 +245,6 @@
     },
     "modal": {
       "steps": {
-        "idCheck": "Identifier",
         "updateMCU": "MCU update"
       },
       "installing": "Firmware updating...",
@@ -401,12 +397,10 @@
     },
     "softResetModal": {
       "title": "Clear cache",
-      "subTitle": "Are you sure?",
       "desc": "Clearing the Ledger Live cache forces network resynchronization"
     },
     "removeAccountModal": {
       "title": "Remove account",
-      "subTitle": "Are you sure?",
       "desc": "The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added."
     },
     "openUserDataDirectory": {
@@ -434,8 +428,7 @@
     },
     "changePassword": {
       "title": "Password lock",
-      "subTitle": "Change your password",
-      "desc": "Make sure to remember your password. Losing your password requires resetting Ledger Live and re-adding accounts."
+      "subTitle": "Change your password"
     },
     "setPassword": {
       "title": "Enable password lock",
@@ -455,7 +448,6 @@
     "oops": "Oops, something went wrong",
     "uselessText": "You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.",
     "restart": "Restart",
-    "reset": "Reset",
     "support": "Contact Support",
     "github": "GitHub"
   },

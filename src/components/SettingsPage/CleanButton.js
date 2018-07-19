@@ -57,7 +57,7 @@ class CleanButton extends PureComponent<Props, State> {
           onReject={this.close}
           onConfirm={this.action}
           title={t('app:settings.softResetModal.title')}
-          subTitle={t('app:settings.softResetModal.subTitle')}
+          subTitle={t('app:common.areYouSure')}
           desc={t('app:settings.softResetModal.desc')}
         />
       </Fragment>
