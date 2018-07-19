@@ -96,7 +96,7 @@
     "description": "Something went wrong with address calculation, try again or contact Ledger Support."
   },
   "NotEnoughBalance": {
-    "title": "Oops, not enough balance",
+    "title": "Oops, insufficient balance",
     "description": "Make sure the account to debit has sufficient balance"
   },
   "PasswordsDontMatch": {
