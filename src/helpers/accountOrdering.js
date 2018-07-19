@@ -1,10 +1,11 @@
 // @flow
 
+import type { BigNumber } from 'bignumber.js'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 type Param = {
   accounts: Account[],
-  accountsBtcBalance: number[],
+  accountsBtcBalance: BigNumber[],
   orderAccounts: string,
 }
 
@@ -14,7 +15,7 @@ const sortMethod: { [_: SortMethod]: (Param) => string[] } = {
   balance: ({ accounts, accountsBtcBalance }) =>
     accounts
       .map((a, i) => [a.id, accountsBtcBalance[i]])
-      .sort((a, b) => a[1] - b[1])
+      .sort((a, b) => a[1].minus(b[1]).toNumber())
       .map(o => o[0]),
 
   name: ({ accounts }) =>
