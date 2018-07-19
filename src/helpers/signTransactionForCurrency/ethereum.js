@@ -27,9 +27,10 @@ export default async (
   t: {
     nonce: string,
     recipient: string,
-    gasPrice: number,
-    gasLimit: number,
-    amount: number,
+    // these are in hexa string format (e.g. '0xABCDEF')
+    gasPrice: string,
+    gasLimit: string,
+    amount: string,
   },
 ) => {
   // First, we need to create a partial tx and send to the device
@@ -38,10 +39,10 @@ export default async (
   invariant(chainId, `chainId not found for currency=${currencyId}`)
   const tx = new EthereumTx({
     nonce: t.nonce,
-    gasPrice: `0x${t.gasPrice.toString(16)}`,
-    gasLimit: `0x${t.gasLimit.toString(16)}`,
+    gasPrice: t.gasPrice,
+    gasLimit: t.gasLimit,
     to: t.recipient,
-    value: `0x${t.amount.toString(16)}`,
+    value: t.amount,
     chainId,
   })
   tx.raw[6] = Buffer.from([chainId]) // v

@@ -62,7 +62,7 @@ class AccountHeaderActions extends PureComponent<Props> {
     const { account, openModal, t } = this.props
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-        {account.operations.length > 0 || account.balance > 0 ? (
+        {account.operations.length > 0 || !account.balance.isZero() ? (
           <Fragment>
             <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={1} alignItems="center">

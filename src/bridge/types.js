@@ -1,6 +1,7 @@
 // @flow
 
 import type { Observable } from 'rxjs'
+import type { BigNumber } from 'bignumber.js'
 import type { Account, Operation, Currency } from '@ledgerhq/live-common/lib/types'
 
 // a WalletBridge is implemented on renderer side.
@@ -62,9 +63,9 @@ export interface WalletBridge<Transaction> {
 
   createTransaction(account: Account): Transaction;
 
-  editTransactionAmount(account: Account, transaction: Transaction, amount: number): Transaction;
+  editTransactionAmount(account: Account, transaction: Transaction, amount: BigNumber): Transaction;
 
-  getTransactionAmount(account: Account, transaction: Transaction): number;
+  getTransactionAmount(account: Account, transaction: Transaction): BigNumber;
 
   editTransactionRecipient(
     account: Account,
@@ -84,10 +85,10 @@ export interface WalletBridge<Transaction> {
 
   checkCanBeSpent(account: Account, transaction: Transaction): Promise<void>;
 
-  getTotalSpent(account: Account, transaction: Transaction): Promise<number>;
+  getTotalSpent(account: Account, transaction: Transaction): Promise<BigNumber>;
 
   // NB this is not used yet but we'll use it when we have MAX
-  getMaxAmount(account: Account, transaction: Transaction): Promise<number>;
+  getMaxAmount(account: Account, transaction: Transaction): Promise<BigNumber>;
 
   /**
    * finalize the transaction by

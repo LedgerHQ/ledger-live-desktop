@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
+import { BigNumber } from 'bignumber.js'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import InputCurrency from 'components/base/InputCurrency'
@@ -10,8 +11,8 @@ import GenericContainer from './GenericContainer'
 
 type Props = {
   account: Account,
-  gasPrice: number,
-  onChange: number => void,
+  gasPrice: BigNumber,
+  onChange: BigNumber => void,
 }
 
 class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
@@ -21,8 +22,8 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
   componentDidUpdate() {
     const { gasPrice, fees, onChange } = this.props
     const { isFocused } = this.state
-    if (!gasPrice && fees && fees.gas_price && !isFocused) {
-      onChange(fees.gas_price) // we want to set the default to gas_price
+    if (gasPrice.isZero() && fees && fees.gas_price && !isFocused) {
+      onChange(BigNumber(fees.gas_price)) // we want to set the default to gas_price
     }
   }
   onChangeFocus = isFocused => {

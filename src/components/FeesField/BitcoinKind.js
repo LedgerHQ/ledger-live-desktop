@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
+import { BigNumber } from 'bignumber.js'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
@@ -16,16 +17,16 @@ import Box from '../base/Box'
 
 type Props = {
   account: Account,
-  feePerByte: number,
-  onChange: number => void,
+  feePerByte: BigNumber,
+  onChange: BigNumber => void,
   t: T,
 }
 
 type FeeItem = {
   label: string,
-  value: string,
+  value: *,
   blockCount: number,
-  feePerByte: number,
+  feePerByte: BigNumber,
 }
 
 const InputRight = styled(Box).attrs({
@@ -47,7 +48,7 @@ const customItem = {
   label: 'Custom',
   value: 'custom',
   blockCount: 0,
-  feePerByte: 0,
+  feePerByte: BigNumber(0),
 }
 
 type State = { isFocused: boolean, items: FeeItem[], selectedItem: FeeItem }
@@ -64,9 +65,9 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State>
     let items: FeeItem[] = []
     if (fees) {
       for (const key of Object.keys(fees)) {
-        const feePerByte = Math.ceil(fees[key] / 1000)
+        const feePerByte = BigNumber(Math.ceil(fees[key] / 1000))
         const blockCount = parseInt(key, 10)
-        if (!isNaN(blockCount) && !isNaN(feePerByte)) {
+        if (!isNaN(blockCount) && !feePerByte.isNaN()) {
           items.push({
             blockCount,
             label: blockCountNameConvention[blockCount] || `${blockCount} blocks`,
@@ -88,7 +89,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State>
   componentDidUpdate() {
     const { feePerByte, fees, onChange } = this.props
     const { items, isFocused } = this.state
-    if (fees && !feePerByte && !isFocused) {
+    if (fees && feePerByte.isZero() && !isFocused) {
       // initialize with the median
       const feePerByte = (items.find(item => item.blockCount === defaultBlockCount) || items[0])
         .feePerByte
@@ -103,11 +104,11 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State>
   onSelectChange = selectedItem => {
     const { onChange } = this.props
     const patch: $Shape<State> = { selectedItem }
-    if (selectedItem.feePerByte) {
+    if (!selectedItem.feePerByte.isZero()) {
       onChange(selectedItem.feePerByte)
     } else {
       const { input } = this
-      if (!selectedItem.feePerByte && input.current) {
+      if (selectedItem.feePerByte.isZero() && input.current) {
         patch.isFocused = true
         input.current.select()
       }

@@ -1,18 +1,19 @@
 // @flow
 
 import { Observable } from 'rxjs'
+import { BigNumber } from 'bignumber.js'
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
 import * as accountIdHelper from 'helpers/accountId'
-import { isValidAddress } from 'helpers/libcore'
+import { isValidAddress, libcoreAmountToBigNumber, bigNumberToLibcoreAmount } from 'helpers/libcore'
 import { createCustomErrorClass } from 'helpers/errors'
 
 const InvalidAddress = createCustomErrorClass('InvalidAddress')
 
 type BitcoinLikeTransaction = {
   // TODO we rename this Transaction concept into transactionInput
-  amount: number,
-  feePerByte: number,
+  amount: string,
+  feePerByte: string,
   recipient: string,
 }
 
@@ -22,7 +23,7 @@ type Input = {
   transaction: BitcoinLikeTransaction,
 }
 
-type Result = { totalFees: number }
+type Result = { totalFees: string }
 
 const cmd: Command<Input, Result> = createCommand(
   'libcoreGetFees',
@@ -39,13 +40,15 @@ const cmd: Command<Input, Result> = createCommand(
         if (isCancelled()) return
         const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
         const njsWalletCurrency = njsWallet.getCurrency()
-        const amount = new core.NJSAmount(njsWalletCurrency, transaction.amount).fromLong(
+        const amount = bigNumberToLibcoreAmount(
+          core,
           njsWalletCurrency,
-          transaction.amount,
+          BigNumber(transaction.amount),
         )
-        const feesPerByte = new core.NJSAmount(njsWalletCurrency, transaction.feePerByte).fromLong(
+        const feesPerByte = bigNumberToLibcoreAmount(
+          core,
           njsWalletCurrency,
-          transaction.feePerByte,
+          BigNumber(transaction.feePerByte),
         )
         const transactionBuilder = bitcoinLikeAccount.buildTransaction()
         if (!isValidAddress(core, njsWalletCurrency, transaction.recipient)) {
@@ -56,7 +59,7 @@ const cmd: Command<Input, Result> = createCommand(
         transactionBuilder.pickInputs(0, 0xffffff)
         transactionBuilder.setFeesPerByte(feesPerByte)
         const builded = await transactionBuilder.build()
-        const totalFees = builded.getFees().toLong()
+        const totalFees = libcoreAmountToBigNumber(builded.getFees()).toString()
         o.next({ totalFees })
       }).then(() => o.complete(), e => o.error(e))
 

@@ -78,7 +78,7 @@ class AccountCard extends PureComponent<{
                   ) : null}
                 </Box>
                 <Box grow justifyContent="center">
-                  {balanceStart && isAvailable ? (
+                  {isAvailable && !balanceStart.isZero() ? (
                     <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
                   ) : null}
                 </Box>
