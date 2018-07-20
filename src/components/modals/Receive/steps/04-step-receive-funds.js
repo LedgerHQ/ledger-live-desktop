@@ -9,6 +9,7 @@ import { isSegwitAccount } from 'helpers/bip32'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import { WrongDeviceForAccount } from 'components/EnsureDeviceApp'
+import { DisconnectedDevice } from 'config/errors'
 
 import type { StepProps } from '..'
 
@@ -21,9 +22,10 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
 
   confirmAddress = async () => {
     const { account, device, onChangeAddressVerified, transitionTo } = this.props
-    invariant(account, 'No account given')
-    invariant(device, 'No device given')
     try {
+      if (!device || !account) {
+        throw new DisconnectedDevice()
+      }
       const params = {
         currencyId: account.currency.id,
         devicePath: device.path,
