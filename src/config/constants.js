@@ -32,7 +32,9 @@ export const GENUINE_TIMEOUT = intFromEnv('GENUINE_TIMEOUT', 120 * 1000)
 export const GET_CALLS_RETRY = intFromEnv('GET_CALLS_RETRY', 2)
 export const GET_CALLS_TIMEOUT = intFromEnv('GET_CALLS_TIMEOUT', 30 * 1000)
 export const LISTEN_DEVICES_POLLING_INTERVAL = intFromEnv('LISTEN_DEVICES_POLLING_INTERVAL', 1000)
-export const OUTDATED_CONSIDERED_DELAY = intFromEnv('OUTDATED_CONSIDERED_DELAY', 5 * 60 * 1000)
+// NB: technically speaking OUTDATED_CONSIDERED_DELAY should be set to ZERO.
+// but we'll only do that when we're sure the sync is performant and all is working smoothly
+export const OUTDATED_CONSIDERED_DELAY = intFromEnv('OUTDATED_CONSIDERED_DELAY', 2 * 60 * 1000)
 export const SYNC_ALL_INTERVAL = 120 * 1000
 export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_PENDING_INTERVAL = 10 * 1000
