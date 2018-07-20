@@ -16,7 +16,7 @@ import { updateAccountWithUpdater } from 'actions/accounts'
 import { setAccountSyncState } from 'actions/bridgeSync'
 import { bridgeSyncSelector, syncStateLocalSelector } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
-import { accountsSelector } from 'reducers/accounts'
+import { accountsSelector, isUpToDateSelector } from 'reducers/accounts'
 import { SYNC_MAX_CONCURRENT, SYNC_TIMEOUT } from 'config/constants'
 import { getBridgeForCurrency } from '.'
 
@@ -27,6 +27,7 @@ type BridgeSyncProviderProps = {
 type BridgeSyncProviderOwnProps = BridgeSyncProviderProps & {
   bridgeSync: BridgeSyncState,
   accounts: Account[],
+  isUpToDate: boolean,
   updateAccountWithUpdater: (string, (Account) => Account) => void,
   setAccountSyncState: (string, AsyncState) => *,
 }
@@ -50,6 +51,7 @@ const BridgeSyncContext = React.createContext((_: BehaviorAction) => {})
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
   bridgeSync: bridgeSyncSelector,
+  isUpToDate: isUpToDateSelector,
 })
 
 const actions = {
@@ -101,6 +103,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
       // by convention we remove concurrent tasks with same priority
       // FIXME this is somehow a hack. ideally we should just dedup the account ids in the pending queue...
       syncQueue.remove(o => priority === o.priority)
+      logger.debug('schedule', { type: 'syncQueue', ids })
       syncQueue.push(ids, -priority)
     }
 
@@ -118,6 +121,10 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         if (priority === skipUnderPriority) return
         skipUnderPriority = priority
         syncQueue.remove(({ priority }) => priority < skipUnderPriority)
+        if (priority === -1 && !this.props.isUpToDate) {
+          // going back to -1 priority => retriggering a background sync if it is "Paused"
+          schedule(shuffledAccountIds(), -1)
+        }
       },
 
       SYNC_ALL_ACCOUNTS: ({ priority }) => {
@@ -136,10 +143,11 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
     const sync = (action: BehaviorAction) => {
       const handler = handlers[action.type]
       if (handler) {
+        logger.debug(`action ${action.type}`, { action, type: 'syncQueue' })
         // $FlowFixMe
         handler(action)
       } else {
-        logger.warn('BridgeSyncContext unsupported action', action)
+        logger.warn('BridgeSyncContext unsupported action', { action, type: 'syncQueue' })
       }
     }
 
