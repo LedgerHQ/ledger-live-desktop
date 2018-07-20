@@ -417,6 +417,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             const [last] = operations
             const pendingOperations = a.pendingOperations.filter(
               o =>
+                !operations.some(op => o.hash === op.hash) &&
                 last &&
                 last.transactionSequenceNumber &&
                 o.transactionSequenceNumber &&
