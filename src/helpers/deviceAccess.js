@@ -3,16 +3,14 @@ import logger from 'logger'
 import throttle from 'lodash/throttle'
 import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
+import { DisconnectedDevice } from 'config/errors'
 import { retry } from './promise'
-import { createCustomErrorClass } from './errors'
 
 // all open to device must use openDevice so we can prevent race conditions
 // and guarantee we do one device access at a time. It also will handle the .close()
 // NOTE optim: in the future we can debounce the close & reuse the same transport instance.
 
 type WithDevice = (devicePath: string) => <T>(job: (Transport<*>) => Promise<*>) => Promise<T>
-
-const DisconnectedDevice = createCustomErrorClass('DisconnectedDevice')
 
 const mapError = e => {
   if (e && e.message && e.message.indexOf('HID') >= 0) {
