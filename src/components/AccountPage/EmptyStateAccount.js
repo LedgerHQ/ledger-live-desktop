@@ -32,7 +32,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
   render() {
     const { t, account, openModal } = this.props
     return (
-      <Box mt={7} alignItems="center">
+      <Box mt={7} alignItems="center" selectable>
         <img
           alt="emptyState Dashboard logo"
           src={i('logos/emptyStateAccount.png')}

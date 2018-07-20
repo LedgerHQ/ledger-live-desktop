@@ -77,6 +77,7 @@ const Body = styled(Box).attrs({
   bg: p => p.theme.colors.white,
   relative: true,
   borderRadius: 1,
+  selectable: true,
 })`
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
 `
