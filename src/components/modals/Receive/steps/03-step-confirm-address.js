@@ -1,6 +1,5 @@
 // @flow
 
-import invariant from 'invariant'
 import styled from 'styled-components'
 import React, { Fragment, PureComponent } from 'react'
 
@@ -13,9 +12,7 @@ import TranslatedError from '../../../TranslatedError'
 
 export default class StepConfirmAddress extends PureComponent<StepProps> {
   render() {
-    const { t, device, account, isAddressVerified, verifyAddressError, transitionTo } = this.props
-    invariant(account, 'No account given')
-    invariant(device, 'No device given')
+    const { t, account, isAddressVerified, verifyAddressError, transitionTo } = this.props
     return (
       <Container>
         <TrackPage category="Receive Flow" name="Step 3" />
@@ -34,7 +31,8 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
           <Fragment>
             <Title>{t('app:receive.steps.confirmAddress.action')}</Title>
             <Text>
-              {t('app:receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
+              {account &&
+                t('app:receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
             </Text>
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
               {t('app:common.verify')}
