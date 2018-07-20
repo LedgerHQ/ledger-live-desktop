@@ -69,6 +69,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
     }
     const instruction = {
       fee: formatAPICurrencyXRP(t.fee).value,
+      maxLedgerVersionOffset: 12,
     }
 
     const prepared = await api.preparePayment(a.freshAddress, payment, instruction)
