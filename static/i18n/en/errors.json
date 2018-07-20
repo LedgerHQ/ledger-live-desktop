@@ -153,5 +153,9 @@
   },
   "InvalidAddress": {
     "title": "This is not a valid {{currencyName}} address"
+  },
+  "CantOpenDevice": {
+    "title": "Oops, couldn’t connect to device",
+    "description": "Device detected but connection failed. Please retry and get help if the problem persists."
   }
 }
