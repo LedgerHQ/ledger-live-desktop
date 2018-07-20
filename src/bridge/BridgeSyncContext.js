@@ -3,7 +3,6 @@
 // it handles automatically re-calling synchronize
 // this is an even high abstraction than the bridge
 
-import invariant from 'invariant'
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
 import { timeout } from 'rxjs/operators/timeout'
@@ -67,7 +66,10 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         return
       }
       const account = this.props.accounts.find(a => a.id === accountId)
-      invariant(account, 'account not found')
+      if (!account) {
+        next()
+        return
+      }
 
       const bridge = getBridgeForCurrency(account.currency)
 
