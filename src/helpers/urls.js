@@ -26,6 +26,7 @@ export const GET_NEXT_MCU: string = managerUrlbuilder('mcu_versions_bootloader')
 export const GET_MCUS: string = managerUrlbuilder('mcu_versions')
 export const GET_CATEGORIES: string = managerUrlbuilder('categories')
 export const GET_APPLICATIONS: string = managerUrlbuilder('applications')
+export const GET_ICONS: string = managerUrlbuilder('icons')
 
 export const WS_INSTALL: (arg: LedgerScriptParams) => string = wsURLBuilder('install')
 export const WS_GENUINE: (arg: {

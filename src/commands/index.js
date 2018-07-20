@@ -7,6 +7,7 @@ import getAddress from 'commands/getAddress'
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getCurrentFirmware from 'commands/getCurrentFirmware'
 import getIsGenuine from 'commands/getIsGenuine'
+import getIcons from 'commands/getIcons'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import getMemInfo from 'commands/getMemInfo'
 import installApp from 'commands/installApp'
@@ -38,6 +39,7 @@ const all: Array<Command<any, any>> = [
   getDeviceInfo,
   getCurrentFirmware,
   getIsGenuine,
+  getIcons,
   getLatestFirmwareForDevice,
   getMemInfo,
   installApp,

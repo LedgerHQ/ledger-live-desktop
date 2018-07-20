@@ -13,6 +13,7 @@ import { developerModeSelector } from 'reducers/settings'
 
 import listApps from 'commands/listApps'
 import listAppVersions from 'commands/listAppVersions'
+import getIcons from 'commands/getIcons'
 
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
@@ -55,6 +56,11 @@ const ICONS_FALLBACK = {
 
 type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
 type Mode = 'home' | 'installing' | 'uninstalling'
+type Icon = {
+  id: number,
+  name: string,
+  file: string,
+}
 
 type Props = {
   device: Device,
@@ -70,6 +76,7 @@ type State = {
   appsLoaded: boolean,
   app: string,
   mode: Mode,
+  icons: Array<Icon>,
 }
 
 const LoadingApp = () => (
@@ -87,6 +94,7 @@ class AppsList extends PureComponent<Props, State> {
     filteredAppVersionsList: [],
     appsLoaded: false,
     app: '',
+    icons: [],
     mode: 'home',
   }
 
@@ -119,11 +127,14 @@ class AppsList extends PureComponent<Props, State> {
         compatibleAppVersionsList,
       )
 
+      const icons = await getIcons.send().toPromise()
+
       if (!this._unmounted) {
         this.setState({
           status: 'idle',
           filteredAppVersionsList,
           appsLoaded: true,
+          icons,
         })
       }
     } catch (err) {
@@ -269,7 +280,18 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   renderList() {
-    const { filteredAppVersionsList, appsLoaded } = this.state
+    const { filteredAppVersionsList, appsLoaded, icons } = this.state
+
+    const getIconUrl = (app: { picture?: number, icon: string }) => {
+      let icon
+      if (ICONS_FALLBACK[app.icon]) {
+        icon = icons.find(icn => icn.name === ICONS_FALLBACK[app.icon])
+      } else {
+        icon = app && app.picture && icons.find(icn => icn.id === app.picture)
+      }
+      return icon ? icon.file : ''
+    }
+
     return (
       <Box>
         <AppSearchBar list={filteredAppVersionsList}>
@@ -280,7 +302,7 @@ class AppsList extends PureComponent<Props, State> {
                   key={`${c.name}_${c.version}`}
                   name={c.name}
                   version={`Version ${c.version}`}
-                  icon={ICONS_FALLBACK[c.icon] || c.icon}
+                  icon={getIconUrl(c)}
                   onInstall={this.handleInstallApp(c)}
                   onUninstall={this.handleUninstallApp(c)}
                 />

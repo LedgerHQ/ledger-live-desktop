@@ -54,10 +54,9 @@ type Props = {
 }
 
 function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
-  const iconUrl = `https://api.ledgerwallet.com/update/assets/icons/${icon}`
   return (
     <Container>
-      <AppIcon src={iconUrl} />
+      <AppIcon src={icon} alt={name} />
       <Box flex="1" ml={3}>
         <AppName flex={1}>{name}</AppName>
         <Text ff="Open Sans|Regular" fontSize={3} color="grey">
