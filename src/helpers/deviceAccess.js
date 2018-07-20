@@ -3,8 +3,7 @@ import logger from 'logger'
 import throttle from 'lodash/throttle'
 import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
-import { DisconnectedDevice } from 'config/errors'
-import { retry } from './promise'
+import { DisconnectedDevice, CantOpenDevice } from 'config/errors'
 
 // all open to device must use openDevice so we can prevent race conditions
 // and guarantee we do one device access at a time. It also will handle the .close()
@@ -13,6 +12,9 @@ import { retry } from './promise'
 type WithDevice = (devicePath: string) => <T>(job: (Transport<*>) => Promise<*>) => Promise<T>
 
 const mapError = e => {
+  if (e && e.message && e.message.indexOf('cannot open device with path') >= 0) {
+    throw new CantOpenDevice(e.message)
+  }
   if (e && e.message && e.message.indexOf('HID') >= 0) {
     throw new DisconnectedDevice(e.message)
   }
@@ -37,8 +39,7 @@ export const withDevice: WithDevice = devicePath => job => {
     busy = true
     refreshBusyUIState()
     try {
-      // FIXME: remove this retry
-      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 })
+      const t = await TransportNodeHid.open(devicePath).catch(mapError)
       t.setDebugMode(logger.apdu)
       try {
         const res = await job(t).catch(mapError)

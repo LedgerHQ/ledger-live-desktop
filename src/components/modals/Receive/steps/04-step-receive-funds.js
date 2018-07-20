@@ -8,8 +8,7 @@ import getAddress from 'commands/getAddress'
 import { isSegwitAccount } from 'helpers/bip32'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
-import { WrongDeviceForAccount } from 'components/EnsureDeviceApp'
-import { DisconnectedDevice } from 'config/errors'
+import { DisconnectedDevice, WrongDeviceForAccount } from 'config/errors'
 
 import type { StepProps } from '..'
 
