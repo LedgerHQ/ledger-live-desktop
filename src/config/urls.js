@@ -27,4 +27,9 @@ export const urls = {
   coinmama: 'http://go.coinmama.com/visit/?bta=51801&nci=5343',
   simplex: 'https://partners.simplex.com/?partner=ledger',
   paybis: 'https://paybis.idevaffiliate.com/idevaffiliate.php?id=4064',
+
+  // Errors
+  errors: {
+    CantOpenDevice: 'https://support.ledgerwallet.com/hc/en-us/articles/115005165269',
+  },
 }
