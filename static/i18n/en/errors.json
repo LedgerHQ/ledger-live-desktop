@@ -73,7 +73,7 @@
   },
   "ManagerAppRelyOnBTC": {
     "title": "Bitcoin app required",
-    "description": "Install the Bitcoin app before installing this app."
+    "description": "Install the latest version of the Bitcoin app before installing this app."
   },
   "ManagerDeviceLocked": {
     "title": "Please unlock your device",
