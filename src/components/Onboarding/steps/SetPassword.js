@@ -1,10 +1,11 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
-import bcrypt from 'bcryptjs'
+import { connect } from 'react-redux'
 import { colors } from 'styles/theme'
 
-import { setEncryptionKey } from 'helpers/db'
+import db from 'helpers/db'
+import { saveSettings } from 'actions/settings'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -30,16 +31,24 @@ type State = {
   confirmPassword: string,
 }
 
+const mapDispatchToProps = {
+  saveSettings,
+}
+
 const INITIAL_STATE = {
   currentPassword: '',
   newPassword: '',
   confirmPassword: '',
 }
 
-class SetPassword extends PureComponent<StepProps, State> {
+type Props = StepProps & {
+  saveSettings: any => void,
+}
+
+class SetPassword extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
-  handleSave = (e: SyntheticEvent<HTMLFormElement>) => {
+  handleSave = async (e: SyntheticEvent<HTMLFormElement>) => {
     if (e) {
       e.preventDefault()
     }
@@ -47,11 +56,10 @@ class SetPassword extends PureComponent<StepProps, State> {
       return
     }
     const { newPassword } = this.state
-    const { nextStep, savePassword } = this.props
+    const { nextStep, saveSettings } = this.props
 
-    setEncryptionKey('accounts', newPassword)
-    const hash = newPassword ? bcrypt.hashSync(newPassword, 8) : undefined
-    savePassword(hash)
+    await db.setEncryptionKey('app', 'accounts', newPassword)
+    saveSettings({ hasPassword: true })
     this.handleReset()
     nextStep()
   }
@@ -71,7 +79,7 @@ class SetPassword extends PureComponent<StepProps, State> {
     const { nextStep, prevStep, t, settings, onboarding } = this.props
     const { newPassword, currentPassword, confirmPassword } = this.state
 
-    const isPasswordEnabled = settings.password.isEnabled === true
+    const hasPassword = settings.hasPassword === true
 
     const disclaimerNotes = [
       {
@@ -110,7 +118,7 @@ class SetPassword extends PureComponent<StepProps, State> {
             <Box align="center" mt={2}>
               <PasswordForm
                 onSubmit={this.handleSave}
-                isPasswordEnabled={isPasswordEnabled}
+                hasPassword={hasPassword}
                 newPassword={newPassword}
                 currentPassword={currentPassword}
                 confirmPassword={confirmPassword}
@@ -151,4 +159,7 @@ class SetPassword extends PureComponent<StepProps, State> {
   }
 }
 
-export default SetPassword
+export default connect(
+  null,
+  mapDispatchToProps,
+)(SetPassword)

@@ -1,10 +1,10 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import bcrypt from 'bcryptjs'
 
 import type { T } from 'types/common'
 
+import db from 'helpers/db'
 import { createCustomErrorClass } from 'helpers/errors'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -18,8 +18,7 @@ type Props = {
   t: T,
   onClose: () => void,
   onChangePassword: (?string) => void,
-  isPasswordEnabled: boolean,
-  currentPasswordHash: string,
+  hasPassword: boolean,
 }
 
 type State = {
@@ -49,9 +48,9 @@ class PasswordModal extends PureComponent<Props, State> {
       return
     }
 
-    const { isPasswordEnabled, currentPasswordHash, onChangePassword } = this.props
-    if (isPasswordEnabled) {
-      if (!bcrypt.compareSync(currentPassword, currentPasswordHash)) {
+    const { hasPassword, onChangePassword } = this.props
+    if (hasPassword) {
+      if (!db.isEncryptionKeyCorrect('app', 'accounts', currentPassword)) {
         this.setState({ incorrectPassword: new PasswordIncorrectError() })
         return
       }
@@ -76,7 +75,7 @@ class PasswordModal extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, isPasswordEnabled, onClose, ...props } = this.props
+    const { t, hasPassword, onClose, ...props } = this.props
     const { currentPassword, newPassword, incorrectPassword, confirmPassword } = this.state
     return (
       <Modal
@@ -85,14 +84,14 @@ class PasswordModal extends PureComponent<Props, State> {
         onClose={onClose}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            {isPasswordEnabled ? (
+            {hasPassword ? (
               <ModalTitle>{t('app:password.changePassword.title')}</ModalTitle>
             ) : (
               <ModalTitle>{t('app:password.setPassword.title')}</ModalTitle>
             )}
             <ModalContent>
               <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
-                {isPasswordEnabled
+                {hasPassword
                   ? t('app:password.changePassword.subTitle')
                   : t('app:password.setPassword.subTitle')}
               </Box>
@@ -101,7 +100,7 @@ class PasswordModal extends PureComponent<Props, State> {
               </Box>
               <PasswordForm
                 onSubmit={this.handleSave}
-                isPasswordEnabled={isPasswordEnabled}
+                hasPassword={hasPassword}
                 newPassword={newPassword}
                 currentPassword={currentPassword}
                 confirmPassword={confirmPassword}

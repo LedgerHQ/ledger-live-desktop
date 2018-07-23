@@ -17,14 +17,17 @@ import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/gl
 
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
-import { isLocked } from 'reducers/application'
+import { lock } from 'reducers/application'
 import { languageSelector, sentryLogsSelector } from 'reducers/settings'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 
+import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 import db from 'helpers/db'
 import dbMiddleware from 'middlewares/db'
 import CounterValues from 'helpers/countervalues'
 import hardReset from 'helpers/hardReset'
+
+import { decodeAccountsModel, encodeAccountsModel } from 'reducers/accounts'
 
 import sentry from 'sentry/browser'
 import App from 'components/App'
@@ -33,8 +36,11 @@ import AppError from 'components/AppError'
 import 'styles/global'
 
 const rootNode = document.getElementById('app')
+const userDataDirectory = resolveUserDataDirectory()
 
 const TAB_KEY = 9
+
+db.init(userDataDirectory)
 
 async function init() {
   if (LEDGER_RESET_ALL) {
@@ -42,17 +48,16 @@ async function init() {
   }
 
   await runMigrations()
-
-  // Init db with defaults if needed
-  db.init('settings', {})
+  db.init(userDataDirectory)
+  db.registerTransform('app', 'accounts', { get: decodeAccountsModel, set: encodeAccountsModel })
 
   const history = createHistory()
   const store = createStore({ history, dbMiddleware })
 
-  const settings = db.get('settings')
+  const settings = await db.getKey('app', 'settings')
   store.dispatch(fetchSettings(settings))
 
-  const countervaluesData = db.get('countervalues')
+  const countervaluesData = await db.getKey('app', 'countervalues')
   if (countervaluesData) {
     store.dispatch(CounterValues.importAction(countervaluesData))
   }
@@ -66,7 +71,10 @@ async function init() {
   // FIXME IMO init() really should only be for window. any other case is a hack!
   const isMainWindow = remote.getCurrentWindow().name === 'MainWindow'
 
-  if (!isLocked(store.getState())) {
+  const isAccountsEncrypted = await db.isKeyEncrypted('app', 'accounts')
+  if (isAccountsEncrypted) {
+    store.dispatch(lock())
+  } else {
     await store.dispatch(fetchAccounts())
   }
 

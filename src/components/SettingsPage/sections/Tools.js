@@ -1,5 +1,7 @@
 // @flow
 
+/* eslint-disable react/jsx-no-literals */
+
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import Box, { Card } from 'components/base/Box'

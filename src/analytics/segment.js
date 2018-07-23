@@ -52,9 +52,9 @@ const extraProperties = store => {
 
 let storeInstance // is the redux store. it's also used as a flag to know if analytics is on or off.
 
-export const start = (store: *) => {
+export const start = async (store: *) => {
   if (!user) return
-  const { id } = user()
+  const { id } = await user()
   logger.analyticsStart(id)
   storeInstance = store
   const { analytics } = window

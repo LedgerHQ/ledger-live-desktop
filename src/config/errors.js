@@ -12,3 +12,7 @@ export const UserRefusedAddress = createCustomErrorClass('UserRefusedAddress')
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 export const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
 export const DeviceGenuineSocketEarlyClose = createCustomErrorClass('DeviceGenuineSocketEarlyClose')
+
+// db stuff, no need to translate
+export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')
+export const DBWrongPassword = createCustomErrorClass('DBWrongPassword')

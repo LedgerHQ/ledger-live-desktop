@@ -14,7 +14,7 @@ const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
 
 type Props = {
   t: T,
-  isPasswordEnabled: boolean,
+  hasPassword: boolean,
   currentPassword: string,
   newPassword: string,
   confirmPassword: string,
@@ -28,7 +28,7 @@ class PasswordForm extends PureComponent<Props> {
   render() {
     const {
       t,
-      isPasswordEnabled,
+      hasPassword,
       currentPassword,
       newPassword,
       incorrectPassword,
@@ -41,7 +41,7 @@ class PasswordForm extends PureComponent<Props> {
     return (
       <form onSubmit={onSubmit}>
         <Box px={7} mt={4} flow={3}>
-          {isPasswordEnabled && (
+          {hasPassword && (
             <Box flow={1} mb={5}>
               <Label htmlFor="currentPassword">
                 {t('app:password.inputFields.currentPassword.label')}
@@ -59,7 +59,7 @@ class PasswordForm extends PureComponent<Props> {
             <Label htmlFor="newPassword">{t('app:password.inputFields.newPassword.label')}</Label>
             <InputPassword
               style={{ mt: 4, width: 240 }}
-              autoFocus={!isPasswordEnabled}
+              autoFocus={!hasPassword}
               id="newPassword"
               onChange={onChange('newPassword')}
               value={newPassword}
