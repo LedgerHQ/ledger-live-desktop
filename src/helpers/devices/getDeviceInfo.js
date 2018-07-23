@@ -3,6 +3,7 @@
 import type Transport from '@ledgerhq/hw-transport'
 
 import { getFirmwareInfo } from 'helpers/common'
+import { FORCE_PROVIDER } from 'config/constants'
 
 export type DeviceInfo = {
   targetId: string | number,
@@ -31,7 +32,7 @@ export default async (transport: Transport<*>): Promise<DeviceInfo> => {
     seVersion.match(/([0-9]+.[0-9])+(.[0-9]+)?((?!-osu)-([a-z]+))?(-osu)?/) || []
   const isOSU = typeof parsedVersion[5] !== 'undefined'
   const providerName = parsedVersion[4] || ''
-  const providerId = PROVIDERS[providerName]
+  const providerId = FORCE_PROVIDER || PROVIDERS[providerName]
   const isBootloader = targetId === 0x01000001
   const majMin = parsedVersion[1]
   const patch = parsedVersion[2] || '.0'
