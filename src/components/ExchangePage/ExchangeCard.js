@@ -26,14 +26,14 @@ export default class ExchangeCard extends PureComponent<{ t: T, card: CardType }
       t,
     } = this.props
     return (
-      <Card horizontal py={5} px={6} style={{ cursor: 'pointer' }} onClick={this.onClick}>
+      <Card horizontal py={5} px={6}>
         <Box justify="center" style={{ width: 200 }}>
           {logo}
         </Box>
         <Box shrink ff="Open Sans|Regular" fontSize={4} flow={3}>
           <Box>{t(`app:exchange.${id}`)}</Box>
           <Box horizontal align="center" color="wallet" flow={1}>
-            <FakeLink>{t('app:exchange.visitWebsite')}</FakeLink>
+            <FakeLink onClick={this.onClick}>{t('app:exchange.visitWebsite')}</FakeLink>
             <ExternalLinkIcon size={14} />
           </Box>
         </Box>

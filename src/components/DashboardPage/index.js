@@ -108,7 +108,7 @@ class DashboardPage extends PureComponent<Props> {
           totalOperations={totalOperations}
           totalCurrencies={totalCurrencies}
         />
-        <Box flow={7} selectable>
+        <Box flow={7}>
           {totalAccounts > 0 ? (
             <Fragment>
               <Box horizontal alignItems="flex-end">
