@@ -11,6 +11,7 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Spinner from 'components/base/Spinner'
+import RetryButton from 'components/base/RetryButton'
 import TranslatedError from 'components/TranslatedError'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
@@ -106,16 +107,14 @@ export function StepConfirmationFooter({
           {t('app:send.steps.confirmation.success.cta')}
         </Button>
       ) : error ? (
-        <Button
+        <RetryButton
           ml={2}
           primary
           onClick={() => {
             onRetry()
             transitionTo('amount')
           }}
-        >
-          {t('app:common.retry')}
-        </Button>
+        />
       ) : null}
     </Fragment>
   )

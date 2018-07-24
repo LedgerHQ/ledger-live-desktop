@@ -50,13 +50,10 @@ function StepFinish({ currency, t, checkedAccountsIds }: StepProps) {
 
 export default StepFinish
 
-export const StepFinishFooter = ({ onCloseModal, onGoStep1, t }: StepProps) => (
+export const StepFinishFooter = ({ onGoStep1, t }: StepProps) => (
   <Fragment>
-    <Button mr={2} outline onClick={onGoStep1}>
+    <Button mr={2} primary onClick={onGoStep1}>
       {t('app:addAccounts.cta.addMore')}
-    </Button>
-    <Button primary onClick={onCloseModal}>
-      {t('app:common.close')}
     </Button>
   </Fragment>
 )
