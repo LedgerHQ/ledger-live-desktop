@@ -21,7 +21,7 @@ function filepathReplace(path: string) {
   if (!path) return path
   const replaced = Object.keys(basePaths).reduce((path, name) => {
     const p = basePaths[name]
-    return replaced
+    return path
       .replace(p, name) // normal replace of the path
       .replace(encodeURI(p.replace(/\\/g, '/')), name) // replace of the URI version of the path (that are in file:///)
   }, path)
