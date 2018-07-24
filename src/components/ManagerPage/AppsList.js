@@ -132,7 +132,7 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   handleInstallApp = (app: LedgerScriptParams) => async () => {
-    this.setState({ status: 'busy', app: app.name, mode: 'installing' })
+    this.setState({ status: 'busy', app: app.displayName || app.name, mode: 'installing' })
     try {
       const {
         device: { path: devicePath },
@@ -147,7 +147,7 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   handleUninstallApp = (app: LedgerScriptParams) => async () => {
-    this.setState({ status: 'busy', app: app.name, mode: 'uninstalling' })
+    this.setState({ status: 'busy', app: app.displayName || app.name, mode: 'uninstalling' })
     try {
       const {
         device: { path: devicePath },
@@ -278,7 +278,7 @@ class AppsList extends PureComponent<Props, State> {
               {items.map(c => (
                 <ManagerApp
                   key={`${c.name}_${c.version}`}
-                  name={c.name}
+                  name={c.displayName || c.name}
                   version={`Version ${c.version}`}
                   icon={ICONS_FALLBACK[c.icon] || c.icon}
                   onInstall={this.handleInstallApp(c)}

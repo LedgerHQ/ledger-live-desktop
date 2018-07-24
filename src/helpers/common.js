@@ -17,6 +17,7 @@ export type LedgerScriptParams = {
   delete_key?: string,
   targetId?: string | number,
   name: string,
+  displayName: string,
   version: string,
   icon: string,
   app?: number,
