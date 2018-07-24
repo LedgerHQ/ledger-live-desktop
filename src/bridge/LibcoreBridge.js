@@ -1,9 +1,8 @@
 // @flow
 import React from 'react'
 import { BigNumber } from 'bignumber.js'
-import { Observable } from 'rxjs'
-import LRU from 'lru-cache'
 import { map } from 'rxjs/operators'
+import LRU from 'lru-cache'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
@@ -121,58 +120,41 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   },
 
   synchronize: account =>
-    Observable.create(o => {
-      // FIXME TODO:
-      // - when you implement addPendingOperation you also here need to:
-      //   - if there were pendingOperations that are now in operations, remove them as well.
-      //   - if there are pendingOperations that is older than a threshold (that depends on blockchain speed typically)
-      //     then we probably should trash them out? it's a complex question for UI
-      ;(async () => {
-        try {
-          const rawAccount = encodeAccount(account)
-          const rawSyncedAccount = await libcoreSyncAccount.send({ rawAccount }).toPromise()
-          const syncedAccount = decodeAccount(rawSyncedAccount)
-          o.next(account => {
-            const accountOps = account.operations
-            const syncedOps = syncedAccount.operations
-            const patch: $Shape<Account> = {
-              id: syncedAccount.id,
-              freshAddress: syncedAccount.freshAddress,
-              freshAddressPath: syncedAccount.freshAddressPath,
-              balance: syncedAccount.balance,
-              blockHeight: syncedAccount.blockHeight,
-              lastSyncDate: new Date(),
-            }
+    libcoreSyncAccount.send({ rawAccount: encodeAccount(account) }).pipe(
+      map(rawSyncedAccount => {
+        const syncedAccount = decodeAccount(rawSyncedAccount)
+        return account => {
+          const accountOps = account.operations
+          const syncedOps = syncedAccount.operations
+          const patch: $Shape<Account> = {
+            id: syncedAccount.id,
+            freshAddress: syncedAccount.freshAddress,
+            freshAddressPath: syncedAccount.freshAddressPath,
+            balance: syncedAccount.balance,
+            blockHeight: syncedAccount.blockHeight,
+            lastSyncDate: new Date(),
+          }
 
-            const hasChanged =
-              accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
-              (accountOps.length > 0 &&
-                syncedOps.length > 0 &&
-                (accountOps[0].accountId !== syncedOps[0].accountId ||
-                accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
-                  accountOps[0].blockHeight !== syncedOps[0].blockHeight))
+          const hasChanged =
+            accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
+            (accountOps.length > 0 &&
+              syncedOps.length > 0 &&
+              (accountOps[0].accountId !== syncedOps[0].accountId ||
+              accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
+                accountOps[0].blockHeight !== syncedOps[0].blockHeight))
 
-            if (hasChanged) {
-              patch.operations = syncedAccount.operations
-              patch.pendingOperations = [] // For now, we assume a change will clean the pendings.
-            }
+          if (hasChanged) {
+            patch.operations = syncedAccount.operations
+            patch.pendingOperations = [] // For now, we assume a change will clean the pendings.
+          }
 
-            return {
-              ...account,
-              ...patch,
-            }
-          })
-          o.complete()
-        } catch (e) {
-          o.error(e)
+          return {
+            ...account,
+            ...patch,
+          }
         }
-      })()
-      return {
-        unsubscribe() {
-          // LibcoreBridge: unsub sync not currently implemented
-        },
-      }
-    }),
+      }),
+    ),
 
   pullMoreOperations: () => Promise.reject(notImplemented),
 
