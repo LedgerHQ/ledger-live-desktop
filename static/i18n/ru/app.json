@@ -1,0 +1,461 @@
+{
+  "common": {
+    "labelYes": "Yes",
+    "labelNo": "No",
+    "apply": "Apply",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "launch": "Launch",
+    "continue": "Continue",
+    "learnMore": "Learn more",
+    "help": "Help",
+    "skipThisStep": "Skip this step",
+    "needHelp": "Need help?",
+    "areYouSure": "Are you sure?",
+    "selectAccount": "Select an account",
+    "selectAccountNoOption": "No account matching \"{{accountName}}\"",
+    "selectCurrency": "Choose a crypto asset",
+    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "selectExchange": "Select an exchange",
+    "selectExchangeNoOption": "No exchange matching \"{{exchangeName}}\"",
+    "selectExchangeNoOptionAtAll": "No exchange found",
+    "sortBy": "Sort by",
+    "search": "Search",
+    "save": "Save",
+    "lock": "Lock",
+    "showMore": "Show more",
+    "max": "Max",
+    "back": "Back",
+    "reset": "Reset",
+    "retry": "Retry",
+    "stop": "Stop",
+    "close": "Close",
+    "eastern": "Eastern",
+    "western": "Western",
+    "reverify": "Re-verify",
+    "verify": "Verify",
+    "copy": "Copy",
+    "copyAddress": "Copy address",
+    "copied": "Copied",
+    "addressCopied": "Address copied",
+    "lockScreen": {
+      "title": "Welcome back",
+      "subTitle": null,
+      "description": "Enter your password to continue",
+      "inputPlaceholder": "Type your password",
+      "lostPassword": "I lost my password"
+    },
+    "sync": {
+      "syncing": "Synchronizing...",
+      "upToDate": "Synchronized",
+      "outdated": "Paused",
+      "error": "Synchronization error",
+      "refresh": "Refresh",
+      "ago": "Synced {{time}}"
+    }
+  },
+  "operation": {
+    "type": {
+      "IN": "Received",
+      "OUT": "Sent"
+    }
+  },
+  "time": {
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
+    "since": {
+      "day": "past day",
+      "week": "past week",
+      "month": "past month",
+      "year": "past year"
+    }
+  },
+  "sidebar": {
+    "menu": "Menu",
+    "accounts": "Accounts ({{count}})",
+    "manager": "Manager",
+    "exchange": "Exchanges"
+  },
+  "account": {
+    "lastOperations": "Last operations",
+    "emptyState": {
+      "title": "No crypto assets yet?",
+      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
+      "buttons": {
+        "receiveFunds": "Receive"
+      }
+    },
+    "settings": {
+      "title": "Edit account",
+      "advancedLogs": "Advanced logs",
+      "accountName": {
+        "title": "Account name",
+        "desc": "Describe this account"
+      },
+      "unit": {
+        "title": "Unit",
+        "desc": "Choose the unit to display"
+      },
+      "endpointConfig": {
+        "title": "Node",
+        "desc": "The API node to use"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Portfolio",
+    "emptyAccountTile": {
+      "desc": "Add accounts to manage more crypto assets",
+      "createAccount": "Add account"
+    },
+    "accounts": {
+      "title": "Accounts ({{count}})"
+    },
+    "greeting": {
+      "morning": "Good morning",
+      "evening": "Good evening",
+      "afternoon": "Good afternoon"
+    },
+    "summary": "Here's the summary of your account",
+    "summary_plural": "Here's the summary of your {{count}} accounts",
+    "recentActivity": "Last operations",
+    "totalBalance": "Total balance",
+    "accountsOrder": {
+      "name": "name",
+      "balance": "balance"
+    }
+  },
+  "currentAddress": {
+    "title": "Current address",
+    "for": "Address for account <1><0>{{accountName}}</0></1>",
+    "messageIfUnverified": "Verify the address on your device for optimal security. Press the right button to confirm.",
+    "messageIfAccepted": "{{currencyName}} address confirmed on your device. Carefully verify when you copy and paste it.",
+    "messageIfSkipped": "Your receive address has not been confirmed on your Ledger device. Please verify your {{currencyName}} address for optimal security."
+  },
+  "deviceConnect": {
+    "step1": {
+      "connect": "Connect and unlock your <1>Ledger device</1>"
+    },
+    "step2": {
+      "open": "Open the <1><0>{{managerAppName}}</0></1> app on your device"
+    }
+  },
+  "emptyState": {
+    "sidebar": {
+      "text": "Press this button to add accounts to your portfolio"
+    },
+    "dashboard": {
+      "title": "Add accounts to your portfolio",
+      "desc": "Your portfolio has no accounts the first time Ledger Live is launched. Open the Manager to install apps on your Ledger device before you start adding accounts to your portfolio.",
+      "buttons": {
+        "addAccount": "Add accounts",
+        "installApp": "Open Manager"
+      }
+    }
+  },
+  "exchange": {
+    "title": "Exchanges",
+    "desc": "Try a few exchange services we've selected for you",
+    "visitWebsite": "Visit website",
+    "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
+    "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
+    "coinmama": "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
+    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
+    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia."
+  },
+  "genuinecheck": {
+    "modal": {
+      "title": "Genuine check"
+    }
+  },
+  "addAccounts": {
+    "title": "Add accounts",
+    "breadcrumb": {
+      "informations": "Crypto asset",
+      "connectDevice": "Device",
+      "import": "Accounts",
+      "finish": "Confirmation"
+    },
+    "accountAlreadyImportedSubtitle": "Accounts already in portfolio ({{count}})",
+    "accountToImportSubtitle": "Add existing account",
+    "accountToImportSubtitle_plural": "Add existing accounts",
+    "selectAll": "Select all ({{count}})",
+    "unselectAll": "Deselect all ({{count}})",
+    "newAccount": "New account",
+    "legacyAccount": "{{accountName}} (legacy)",
+    "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
+    "unsplitAccount": "{{accountName}} (unsplit)",
+    "noAccountToImport": "No existing {{currencyName}} accounts to add",
+    "success": "Account successfully added to your portfolio",
+    "success_plural": "Accounts successfully added to your portfolio",
+    "successDescription": "Your account has been created.",
+    "successDescription_plural": "Your accounts have been created.",
+    "createNewAccount": {
+      "title": "Add a new account",
+      "noOperationOnLastAccount": "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account.",
+      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to create"
+    },
+    "cta": {
+      "addMore": "Add more",
+      "add": "Add account",
+      "add_plural": "Add accounts"
+    }
+  },
+  "operationDetails": {
+    "title": "Operation details",
+    "account": "Account",
+    "date": "Date",
+    "status": "Status",
+    "confirmed": "Confirmed",
+    "notConfirmed": "Not confirmed",
+    "fees": "Fees",
+    "noFees": "No fee",
+    "from": "From",
+    "to": "To",
+    "identifier": "Transaction ID",
+    "viewOperation": "View in explorer",
+    "showMore": "Show {{recipients}} more",
+    "showLess": "Show less"
+  },
+  "operationList": {
+    "noMoreOperations": "That's all"
+  },
+  "manager": {
+    "yourDeviceIsGenuine": "Your device is genuine",
+    "apps": {
+      "install": "Install",
+      "all": "App catalog",
+      "installing": "Installing {{app}}...",
+      "uninstalling": "Uninstalling {{app}}...",
+      "installSuccess": "{{app}} is now installed on your device",
+      "uninstallSuccess": "{{app}} has been uninstalled from your device",
+      "help": "Check on your device to see which apps are already installed"
+    },
+    "firmware": {
+      "installed": "Firmware version {{version}}",
+      "titleNano": "Ledger Nano S",
+      "titleBlue": "Ledger Blue",
+      "update": "Update",
+      "latest": "Firmware version {{version}} is available",
+      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>",
+      "disclaimerAppDelete": "Apps installed on your device have to be re-installed after the update.",
+      "disclaimerAppReinstall": "This does not affect your crypto assets in the blockchain."
+    },
+    "modal": {
+      "steps": {
+        "updateMCU": "MCU update"
+      },
+      "installing": "Firmware updating...",
+      "confirmIdentifier": "Verify the identifier",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button to confirm.",
+      "identifier": "Identifier",
+      "mcuTitle": "Updating MCU",
+      "mcuFirst": "Disconnect the USB cable from your device",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the processing screen appears",
+      "mcuPin": "If asked on device, please enter your pin code to finish the process",
+      "successTitle": "Firmware updated",
+      "successText": "You may re-install the apps on your device"
+    },
+    "title": "Manager",
+    "subtitle": "Install or uninstall apps on your device",
+    "device": {
+      "title": "Connect your device",
+      "desc": "Follow the steps below to open the Manager",
+      "cta": "Connect my device"
+    }
+  },
+  "receive": {
+    "title": "Receive",
+    "steps": {
+      "chooseAccount": {
+        "title": "Account",
+        "label": "Account to credit"
+      },
+      "connectDevice": {
+        "title": "Device",
+        "withoutDevice": "Don't have your device?"
+      },
+      "confirmAddress": {
+        "title": "Verification",
+        "action": "Verify address on device",
+        "text": "A {{currencyName}} receive address will be displayed on your device. Carefully verify that it matches the address on your computer.",
+        "support": "Contact us"
+      },
+      "receiveFunds": {
+        "title": "Receive"
+      }
+    }
+  },
+  "send": {
+    "title": "Send",
+    "totalSpent": "Total to debit",
+    "steps": {
+      "amount": {
+        "title": "Details",
+        "selectAccountDebit": "Select an account to debit",
+        "recipientAddress": "Recipient address",
+        "amount": "Amount",
+        "fees": "Network fees",
+        "advancedOptions": "Advanced options",
+        "useRBF": "Use a replace-by-fee transaction",
+        "message": "Leave a message (140)",
+        "rippleTag": "Tag",
+        "ethereumGasLimit": "Gas limit",
+        "unitPerByte": "{{unit}} per byte"
+      },
+      "connectDevice": {
+        "title": "Device"
+      },
+      "verification": {
+        "title": "Verification",
+        "warning": "Carefully verify all transaction details now displayed on your device screen\n",
+        "body": "Once verified, press the right button to confirm and sign the transaction"
+      },
+      "confirmation": {
+        "title": "Confirmation",
+        "success": {
+          "title": "Transaction sent",
+          "text": "The transaction has been signed and sent to the network. Your account balance will update once the blockchain has confirmed the transaction.",
+          "cta": "View operation details"
+        },
+        "pending": {
+          "title": "Broadcasting transaction..."
+        }
+      }
+    }
+  },
+  "releaseNotes": {
+    "title": "Release notes",
+    "version": "Ledger Live {{versionNb}}"
+  },
+  "settings": {
+    "title": "Settings",
+    "tabs": {
+      "display": "General",
+      "currencies": "Currencies",
+      "help": "Help",
+      "about": "About"
+    },
+    "display": {
+      "desc": "Change settings that affect Ledger Live in general.",
+      "language": "Display language",
+      "languageDesc": "Set the language displayed in Ledger Live.",
+      "counterValue": "Countervalue",
+      "counterValueDesc": "Choose the currency to display next to your balance and operations.",
+      "exchange": "Rate provider",
+      "exchangeDesc": "Choose the provider of the exchange rate from Bitcoin to {{fiat}}. The value of crypto assets is first calculated in Bitcoin, before being converted to {{fiat}} (crypto asset → BTC → {{fiat}}).",
+      "region": "Region",
+      "regionDesc": "Choose the region in which you’re located to set the Ledger Live's time zone.",
+      "stock": "Regional market indicator",
+      "stockDesc": "Choose Western to display an increase in market value in green. Choose Eastern to display an increase in market value in red."
+    },
+    "currencies": {
+      "desc": "Select a crypto asset to edit its settings.",
+      "exchange": "Rate provider ({{ticker}} → BTC)",
+      "exchangeDesc": "Choose the provider of the rate between {{currencyName}} and Bitcoin. The indicative total value of your portfolio is calculated by converting your {{currencyName}} to Bitcoin, which is then converted to your base currency.",
+      "confirmationsNb": "Number of confirmations",
+      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
+    },
+    "profile": {
+      "password": "Password lock",
+      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
+      "changePassword": "Change password",
+      "softResetTitle": "Clear cache",
+      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
+      "softReset": "Clear",
+      "hardResetTitle": "Reset Ledger Live",
+      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings.",
+      "hardReset": "Reset",
+      "developerMode": "Developer mode",
+      "developerModeDesc": "Show developer apps in the Manager and enable testnet apps.",
+      "analytics": "Analytics",
+      "analyticsDesc": "Enable analytics of anonymous data to help Ledger improve the user experience. This includes the operating system, language, firmware versions and the number of added accounts.",
+      "reportErrors": "Report bugs",
+      "reportErrorsDesc": "Share anonymous usage and diagnostics data to help improve Ledger products, services and security features.",
+      "launchOnboarding": "Configure device",
+      "launchOnboardingDesc": "Securely initialize or restore a Ledger device to use with Ledger Live. Your accounts and settings are kept."
+    },
+    "about": {
+      "desc": "Information about Ledger Live, terms and conditions, and privacy policy."
+    },
+    "help": {
+      "desc": "Learn about Ledger Live features or get help.",
+      "version": "Version",
+      "releaseNotesBtn": "Details",
+      "faq": "Ledger Support",
+      "faqDesc": "A problem? Get help with Ledger Live, Ledger devices, supported crypto assets and apps.",
+      "terms": "Terms and conditions",
+      "termsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
+      "privacy": "Privacy policy",
+      "privacyDesc": "Refer to our privacy policy to learn what personal data we collect, why and how we use it."
+    },
+    "hardResetModal": {
+      "title": "Reset Ledger Live",
+      "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet."
+    },
+    "softResetModal": {
+      "title": "Clear cache",
+      "desc": "Clearing the Ledger Live cache forces network resynchronization"
+    },
+    "removeAccountModal": {
+      "title": "Remove account",
+      "desc": "The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added."
+    },
+    "openUserDataDirectory": {
+      "title": "View user data",
+      "desc": "View the user data that is stored on your computer, including your accounts, caches and settings.",
+      "btn": "View"
+    },
+    "exportLogs": {
+      "title": "Export logs",
+      "desc": "Exporting Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Export"
+    }
+  },
+  "password": {
+    "inputFields": {
+      "newPassword": {
+        "label": "New password"
+      },
+      "confirmPassword": {
+        "label": "Confirm password"
+      },
+      "currentPassword": {
+        "label": "Current password"
+      }
+    },
+    "changePassword": {
+      "title": "Password lock",
+      "subTitle": "Change your password"
+    },
+    "setPassword": {
+      "title": "Enable password lock",
+      "subTitle": "Set a password",
+      "desc": "Make sure to remember your password. Losing your password requires resetting Ledger Live and re-adding accounts."
+    },
+    "disablePassword": {
+      "title": "Disable password lock",
+      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, balances, transactions and public addresses."
+    }
+  },
+  "update": {
+    "newVersionReady": "A new update is available",
+    "relaunch": "Update now"
+  },
+  "crash": {
+    "oops": "Oops, something went wrong",
+    "uselessText": "You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.",
+    "restart": "Restart",
+    "support": "Contact Support",
+    "github": "GitHub"
+  },
+  "disclaimerModal": {
+    "title": "Trade safely",
+    "desc_1": "Before sending and receiving crypto assets, educate yourself to make informed decisions. Crypto assets are volatile and the prices can go up and down. Carefully evaluate your trading goals and the financial risk you are willing to take.",
+    "desc_2": "Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or consult with reliable experts.",
+    "cta": "Got it"
+  }
+}
