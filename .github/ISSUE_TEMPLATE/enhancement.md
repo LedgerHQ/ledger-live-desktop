@@ -1,6 +1,6 @@
 ---
 name: 🗣 Start a Discussion
-about: Discuss to propose changes to improve the state of Ledger Live. **Please keep one issue per topic.**
+about: Discuss changes to improve the state of Ledger Live. Please keep one issue per topic.
 ---
 
 <!-- DESCRIPTION: Explain precisely what you think should be improved and how you think it should work -->
