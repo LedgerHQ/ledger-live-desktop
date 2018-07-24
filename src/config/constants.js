@@ -56,6 +56,9 @@ export const MANAGER_API_BASE = stringFromEnv(
 
 export const BASE_SOCKET_URL = stringFromEnv('BASE_SOCKET_URL', 'wss://api.ledgerwallet.com/update')
 
+// Provider
+export const FORCE_PROVIDER = intFromEnv('FORCE_PROVIDER', 0)
+
 // Flags
 
 export const DEBUG_ANALYTICS = boolFromEnv('DEBUG_ANALYTICS')

@@ -11,9 +11,25 @@ const configDir = (() => {
 
 const cwd = typeof process === 'object' ? process.cwd() || '.' : '__NOTHING_TO_REPLACE__'
 
+// all the paths the app will use. we replace them to anonymize
+const basePaths = {
+  $USER_DATA: configDir,
+  '.': cwd,
+}
+
 function filepathReplace(path: string) {
-  if (!cwd) return path
-  return path.replace(cwd, '.').replace(configDir, '$USER_DATA')
+  if (!path) return path
+  const replaced = Object.keys(basePaths).reduce((path, name) => {
+    const p = basePaths[name]
+    return replaced
+      .replace(p, name) // normal replace of the path
+      .replace(encodeURI(p.replace(/\\/g, '/')), name) // replace of the URI version of the path (that are in file:///)
+  }, path)
+  if (replaced.length !== path.length) {
+    // we need to continue until there is no more occurences
+    return filepathReplace(replaced)
+  }
+  return replaced
 }
 
 function filepathRecursiveReplacer(obj: mixed, seen: Array<*>) {

@@ -51,7 +51,7 @@ function OnboardingBreadcrumb(props: Props) {
 
   return (
     <Breadcrumb
-      stepsErrors={genuine.isGenuineFail ? [genuineStepIndex] : undefined}
+      stepsErrors={genuine.displayErrorScreen ? [genuineStepIndex] : undefined}
       currentStep={stepIndex}
       items={filteredSteps}
     />

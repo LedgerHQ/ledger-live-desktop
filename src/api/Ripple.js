@@ -40,6 +40,7 @@ export const formatAPICurrencyXRP = (amount: number) => {
   const value = formatCurrencyUnit(rippleUnit, amount, {
     showAllDigits: true,
     disableRounding: true,
+    useGrouping: false,
   })
   return { currency: 'XRP', value }
 }

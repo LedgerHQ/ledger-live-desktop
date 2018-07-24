@@ -8,7 +8,6 @@ import { translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 
-import { createCustomErrorClass } from 'helpers/errors'
 import Track from 'analytics/Track'
 import { updateAccountWithUpdater } from 'actions/accounts'
 import { MODAL_SEND } from 'config/constants'
@@ -21,6 +20,7 @@ import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
 import { closeModal, openModal } from 'reducers/modals'
+import { DisconnectedDevice, UserRefusedOnDevice } from 'config/errors'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
@@ -30,8 +30,6 @@ import StepAmount, { StepAmountFooter } from './steps/01-step-amount'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepVerification from './steps/03-step-verification'
 import StepConfirmation, { StepConfirmationFooter } from './steps/04-step-confirmation'
-
-const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice')
 
 type Props = {
   t: T,
@@ -204,7 +202,13 @@ class SendModal extends PureComponent<Props, State<*>> {
     const { device } = this.props
     const { account, transaction, bridge } = this.state
 
-    invariant(device && account && transaction && bridge, 'signTransaction invalid conditions')
+    if (!device) {
+      this.handleTransactionError(new DisconnectedDevice())
+      transitionTo('confirmation')
+      return
+    }
+
+    invariant(account && transaction && bridge, 'signTransaction invalid conditions')
 
     this._signTransactionSub = bridge
       .signAndBroadcast(account, transaction, device.path)
