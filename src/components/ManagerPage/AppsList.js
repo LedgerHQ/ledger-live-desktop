@@ -202,7 +202,7 @@ class AppsList extends PureComponent<Props, State> {
                   error={error && error.name}
                   app={app}
                 />
-                <ModalContent grow align="center" justify="center" mt={3}>
+                <ModalContent grow align="center" justify="center" mt={5}>
                   <Box color="alertRed">
                     <ExclamationCircleThin size={44} />
                   </Box>
@@ -218,8 +218,8 @@ class AppsList extends PureComponent<Props, State> {
                   </Box>
                   <Box
                     color="graphite"
-                    mt={4}
-                    fontSize={6}
+                    mt={2}
+                    fontSize={4}
                     ff="Open Sans"
                     textAlign="center"
                     style={{ maxWidth: 350 }}
@@ -235,7 +235,7 @@ class AppsList extends PureComponent<Props, State> {
               </Fragment>
             ) : status === 'success' ? (
               <Fragment>
-                <ModalContent grow align="center" justify="center" mt={3}>
+                <ModalContent grow align="center" justify="center" mt={5}>
                   <Box color="positiveGreen">
                     <CheckCircle size={44} />
                   </Box>
