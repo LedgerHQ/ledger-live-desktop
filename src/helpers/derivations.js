@@ -14,7 +14,7 @@ type Derivation = {
 const ethLegacyMEW: Derivation = ({ x }) => `44'/60'/0'/${x}`
 ethLegacyMEW.mandatoryEmptyAccountSkip = 10
 
-const etcLegacyMEW: Derivation = ({ x }) => `44'/60'/160720'/${x}'/0`
+const etcLegacyMEW: Derivation = ({ x }) => `44'/60'/160720'/0'/${x}`
 etcLegacyMEW.mandatoryEmptyAccountSkip = 10
 
 const rippleLegacy: Derivation = ({ x }) => `44'/144'/0'/${x}'`
