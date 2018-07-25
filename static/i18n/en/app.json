@@ -399,7 +399,7 @@
     },
     "softResetModal": {
       "title": "Clear cache",
-      "desc": "Clearing the Ledger Live cache forces network resynchronization"
+      "desc": "Clearing the Ledger Live cache forces network resynchronization. Your settings and accounts are not affected. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet."
     },
     "removeAccountModal": {
       "title": "Remove account",
