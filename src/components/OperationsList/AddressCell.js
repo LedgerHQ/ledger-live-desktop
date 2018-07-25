@@ -29,7 +29,7 @@ const Address = ({ value }: { value: string }) => {
 const AddressEllipsis = styled.div`
   display: block;
   flex-shrink: 1;
-  min-width: 20px;
+
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
