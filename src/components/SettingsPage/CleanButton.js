@@ -51,7 +51,6 @@ class CleanButton extends PureComponent<Props, State> {
 
         <ConfirmModal
           analyticsName="CleanCache"
-          isDanger
           isOpened={opened}
           onClose={this.close}
           onReject={this.close}
