@@ -5,6 +5,13 @@ const intFromEnv = (key: string, def: number): number => {
   if (!isNaN(v)) return parseInt(v, 10)
   return def
 }
+
+const floatFromEnv = (key: string, def: number): number => {
+  const v = process.env[key]
+  if (!isNaN(v)) return parseFloat(v)
+  return def
+}
+
 const boolFromEnv = (key: string, def: boolean = false): boolean => {
   const v = process.env[key]
   if (typeof v === 'string') return !(v === '0' || v === 'false')
@@ -87,6 +94,7 @@ export const EXPERIMENTAL_TOOLS_SETTINGS = boolFromEnv('EXPERIMENTAL_TOOLS_SETTI
 export const EXPERIMENTAL_MARKET_INDICATOR_SETTINGS = boolFromEnv(
   'EXPERIMENTAL_MARKET_INDICATOR_SETTINGS',
 )
+export const USE_MOCK_DATA = boolFromEnv('USE_MOCK_DATA')
 
 // Other constants
 
@@ -103,3 +111,4 @@ export const MODAL_TECHNICAL_DATA = 'MODAL_TECHNICAL_DATA'
 
 export const MODAL_DISCLAIMER = 'MODAL_DISCLAIMER'
 export const MODAL_DISCLAIMER_DELAY = 1 * 1000
+export const MOCK_DATA_SEED = floatFromEnv('MOCK_DATA_SEED', Math.random())

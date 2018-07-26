@@ -8,14 +8,19 @@ import {
 } from '@ledgerhq/live-common/lib/mock/account'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
 import Prando from 'prando'
+import { BigNumber } from 'bignumber.js'
 import type { Operation } from '@ledgerhq/live-common/lib/types'
+import { validateNameEdition } from 'helpers/accountName'
+import { MOCK_DATA_SEED } from 'config/constants'
 import type { WalletBridge } from './types'
 
 const defaultOpts = {
-  syncSuccessRate: 0.8,
   scanAccountDeviceSuccessRate: 0.8,
   transactionsSizeTarget: 100,
   extraInitialTransactionProps: () => null,
+  checkCanBeSpent: () => Promise.resolve(),
+  getTotalSpent: (a, t) => Promise.resolve(t.amount),
+  getMaxAmount: a => Promise.resolve(a.balance),
 }
 
 const delay = ms => new Promise(success => setTimeout(success, ms))
@@ -24,7 +29,6 @@ type Opts = *
 
 function makeMockBridge(opts?: Opts): WalletBridge<*> {
   const {
-    syncSuccessRate,
     transactionsSizeTarget,
     EditFees,
     EditAdvancedOptions,
@@ -42,6 +46,9 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
   const syncTimeouts = {}
 
+  const substractOneYear = date =>
+    new Date(new Date(date).setFullYear(new Date(date).getFullYear() - 1))
+
   return {
     synchronize: initialAccount =>
       Observable.create(o => {
@@ -51,23 +58,20 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
           logger.warn('synchronize was called multiple pending time for same accounts!!!')
         }
         syncTimeouts[accountId] = setTimeout(() => {
-          if (Math.random() < syncSuccessRate) {
-            const ops = broadcasted[accountId] || []
-            broadcasted[accountId] = []
-            o.next(account => {
-              account = { ...account }
-              account.blockHeight++
-              for (const op of ops) {
-                account.balance = account.balance.plus(getOperationAmountNumber(op))
-              }
-              return account
-            })
-            o.complete()
-          } else {
-            o.error(new Error('Sync Failed'))
-          }
+          const ops = broadcasted[accountId] || []
+          broadcasted[accountId] = []
+          o.next(account => {
+            account = { ...account }
+            account.lastSyncDate = new Date()
+            account.blockHeight++
+            for (const op of ops) {
+              account.balance = account.balance.plus(getOperationAmountNumber(op))
+            }
+            return account
+          })
+          o.complete()
           syncTimeouts[accountId] = null
-        }, 20000)
+        }, 2000)
 
         return () => {
           clearTimeout(syncTimeouts[accountId])
@@ -78,7 +82,6 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
     scanAccountsOnDevice: currency =>
       Observable.create(o => {
         let unsubscribed = false
-
         async function job() {
           if (Math.random() > scanAccountDeviceSuccessRate) {
             await delay(1000)
@@ -88,11 +91,19 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
           const nbAccountToGen = 3
           for (let i = 0; i < nbAccountToGen && !unsubscribed; i++) {
             await delay(500)
-            const account = genAccount(String(Math.random()), {
+            const account = genAccount(`${MOCK_DATA_SEED}_${currency.id}_${i}`, {
               operationsSize: 0,
               currency,
             })
             account.unit = currency.units[0]
+            account.index = i
+            account.operations = account.operations.map(operation => ({
+              ...operation,
+              date: substractOneYear(operation.date),
+            }))
+            account.name = ''
+            account.name = validateNameEdition(account)
+
             if (!unsubscribed) o.next(account)
           }
           if (!unsubscribed) o.complete()
@@ -120,7 +131,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
     isRecipientValid: (currency, recipient) => Promise.resolve(recipient.length > 0),
 
     createTransaction: () => ({
-      amount: 0,
+      amount: BigNumber(0),
       recipient: '',
       ...extraInitialTransactionProps(),
     }),
