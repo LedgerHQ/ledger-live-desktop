@@ -58,7 +58,6 @@ const CloseContainer = styled(Box).attrs({
   p: 4,
   color: 'fog',
 })`
-  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;

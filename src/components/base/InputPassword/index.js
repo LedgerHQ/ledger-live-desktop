@@ -21,7 +21,9 @@ const InputRight = styled(Box).attrs({
   justifyContent: 'center',
   pr: 3,
 })`
-  cursor: pointer;
+  &:hover {
+    color: ${p => p.theme.colors.graphite};
+  }
 `
 
 const Strength = styled(Box).attrs({
@@ -96,7 +98,7 @@ class InputPassword extends PureComponent<Props, State> {
           type={inputType}
           onChange={this.handleChange}
           renderRight={
-            <InputRight onClick={this.toggleInputType}>
+            <InputRight onClick={this.toggleInputType} style={{ cursor: 'default' }}>
               {inputType === 'password' ? <IconEye size={16} /> : <IconEyeOff size={16} />}
             </InputRight>
           }

@@ -62,7 +62,7 @@ class AppSearchBar extends PureComponent<Props, State> {
           }
           renderRight={
             query ? (
-              <Box justify="center" cursor="pointer" onClick={this.reset} px={3}>
+              <Box justify="center" cursor="text" onClick={this.reset} px={3}>
                 <CrossIcon size={16} />
               </Box>
             ) : null

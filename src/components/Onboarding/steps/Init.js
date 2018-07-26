@@ -117,12 +117,12 @@ const InitCardContainer = styled(Box).attrs({
   horizontal: true,
   borderRadius: '4px',
 })`
+  cursor: initial;
   border: 1px solid ${p => p.theme.colors.fog};
   width: 530px;
   height: 70px;
   transition: all ease-in-out 0.2s;
   &:hover {
-    cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05);
   }
 `
