@@ -77,6 +77,7 @@ class PasswordForm extends PureComponent<Props> {
               error={!isValid() && confirmPassword.length > 0 && new PasswordsDontMatchError()}
             />
           </Box>
+          <button hidden type="submit" />
         </Box>
       </form>
     )
