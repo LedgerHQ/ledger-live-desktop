@@ -82,6 +82,8 @@ async function signTransaction({
   if (currencyId === 'zcash') expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
   const rawInputs = transaction.getInputs()
 
+  const hasExtraData = currencyId === 'zcash'
+
   const inputs = await Promise.all(
     rawInputs.map(async input => {
       const rawPreviousTransaction = await input.getPreviousTransaction()
@@ -90,6 +92,7 @@ async function signTransaction({
         hexPreviousTransaction,
         supportsSegwit,
         hasTimestamp,
+        hasExtraData,
       )
       const outputIndex = input.getPreviousOutputIndex()
       const sequence = input.getSequence()
