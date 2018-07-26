@@ -24,7 +24,6 @@ import Box, { Tabbable } from 'components/base/Box'
 import Button from 'components/base/Button'
 
 const ButtonSettings = styled(Tabbable).attrs({
-  cursor: 'pointer',
   align: 'center',
   justify: 'center',
   borderRadius: 1,

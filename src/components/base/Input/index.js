@@ -51,6 +51,7 @@ const Base = styled.input.attrs({
   padding: 0;
   width: 100%;
   background: none;
+  cursor: text;
 
   &::placeholder {
     color: ${p => p.theme.colors.fog};

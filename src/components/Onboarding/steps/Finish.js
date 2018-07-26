@@ -16,6 +16,8 @@ import IconSocialTwitter from 'icons/Twitter'
 import IconSocialReddit from 'icons/Reddit'
 import IconSocialGithub from 'icons/Github'
 
+import { lighten } from 'styles/helpers'
+
 import type { StepProps } from '..'
 import { Title, Description, LiveLogo } from '../helperComponents'
 
@@ -122,18 +124,19 @@ type SocMed = {
   onClick: string => void,
 }
 
+const StyledBox = styled(Box)`
+  cursor: default;
+  &:hover {
+    color: ${p => lighten(p.theme.colors.grey, 0.1)};
+  }
+`
+
 export function SocialMediaBox({ socMed }: { socMed: SocMed }) {
   const { icon, url, onClick } = socMed
   return (
-    <Box
-      horizontal
-      style={{
-        cursor: 'pointer',
-      }}
-      onClick={() => onClick(url)}
-    >
+    <StyledBox horizontal onClick={() => onClick(url)}>
       {icon}
-    </Box>
+    </StyledBox>
   )
 }
 

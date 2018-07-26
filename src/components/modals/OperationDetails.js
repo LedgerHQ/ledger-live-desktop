@@ -269,7 +269,6 @@ const More = styled(Text).attrs({
   tabIndex: 0,
 })`
   text-transform: ${p => (!p.textTransform ? 'auto' : 'uppercase')};
-  cursor: pointer;
   outline: none;
 `
 

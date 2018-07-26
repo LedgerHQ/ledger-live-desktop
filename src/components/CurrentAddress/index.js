@@ -88,7 +88,6 @@ const FooterButtonWrapper = styled(Box).attrs({
   px: 2,
 })`
   line-height: 1;
-  cursor: pointer;
   height: 55px;
 
   &:hover {

@@ -121,12 +121,12 @@ const AccountRowContainer = styled(Tabbable).attrs({
 })`
   height: 48px;
   border-radius: 4px;
+  cursor: initial;
 
   opacity: ${p => (p.isDisabled ? 0.5 : 1)};
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
 
   &:hover {
-    cursor: pointer;
     background-color: ${p => darken(p.theme.colors.lightGrey, 0.015)};
   }
 

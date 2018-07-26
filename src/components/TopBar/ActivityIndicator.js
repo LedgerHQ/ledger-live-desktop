@@ -90,7 +90,6 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
               <Box>{t('app:common.sync.error')}</Box>
               <Box
                 ml={2}
-                cursor="pointer"
                 style={{ textDecoration: 'underline', pointerEvents: 'all' }}
                 onClick={this.onClick}
               >
