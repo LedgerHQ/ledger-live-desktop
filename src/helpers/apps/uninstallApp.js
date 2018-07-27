@@ -34,9 +34,10 @@ export default async function uninstallApp(
 ): Promise<*> {
   const params = {
     targetId,
-    ...app,
-    firmware: app.delete,
-    firmwareKey: app.delete_key,
+    deleteKey: app.delete_key,
+    firmware: app.firmware,
+    firmwareKey: app.firmware_key,
+    hash: app.hash,
   }
   const url = `${BASE_SOCKET_URL}/install?${qs.stringify(params)}`
   return remapError(createDeviceSocket(transport, url).toPromise())

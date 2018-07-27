@@ -41,9 +41,12 @@ export default async function installApp(
 ): Promise<*> {
   const params = {
     targetId,
-    ...app,
+    deleteKey: app.delete_key,
+    firmware: app.firmware,
     firmwareKey: app.firmware_key,
+    hash: app.hash,
   }
+
   const url = `${BASE_SOCKET_URL}/install?${qs.stringify(params)}`
   return remapError(createDeviceSocket(transport, url).toPromise())
 }
