@@ -16,7 +16,7 @@ import LanguageSelect from '../LanguageSelect'
 import CounterValueSelect from '../CounterValueSelect'
 import CounterValueExchangeSelect from '../CounterValueExchangeSelect'
 import RegionSelect from '../RegionSelect'
-import DisablePasswordButton from '../DisablePasswordButton'
+import PasswordButton from '../PasswordButton'
 import DevModeButton from '../DevModeButton'
 import SentryLogsButton from '../SentryLogsButton'
 import ShareAnalyticsButton from '../ShareAnalyticsButton'
@@ -90,7 +90,7 @@ class TabGeneral extends PureComponent<Props> {
             title={t('app:settings.profile.password')}
             desc={t('app:settings.profile.passwordDesc')}
           >
-            <DisablePasswordButton />
+            <PasswordButton />
           </Row>
           <Row
             title={t('app:settings.profile.reportErrors')}

@@ -16,14 +16,12 @@ export const removeAccount: RemoveAccount = payload => ({
   payload,
 })
 
-export type FetchAccounts = () => *
-export const fetchAccounts: FetchAccounts = () => {
-  db.init('accounts', []) // FIXME the "init" pattern to drop imo. a simple get()||[] is enough
-  const accounts = db.get('accounts')
-  return {
+export const fetchAccounts = () => async (dispatch: *) => {
+  const accounts = await db.getKey('app', 'accounts', [])
+  return dispatch({
     type: 'SET_ACCOUNTS',
     payload: accounts,
-  }
+  })
 }
 
 export type UpdateAccountWithUpdater = (accountId: string, (Account) => Account) => *

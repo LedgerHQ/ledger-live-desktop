@@ -24,10 +24,15 @@ const LEDGER_CONFIG_DIRECTORY = app.getPath('userData')
 
 let internalProcess
 
+let userId = null
 let sentryEnabled = false
-const userId = user().id
 
-sentry(() => sentryEnabled, userId)
+async function init() {
+  const u = await user()
+  userId = u.id
+  sentry(() => sentryEnabled, userId)
+}
+init()
 
 const killInternalProcess = () => {
   if (internalProcess) {

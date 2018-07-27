@@ -12,11 +12,14 @@ import {
 import menu from 'main/menu'
 import db from 'helpers/db'
 import { i } from 'helpers/staticPath'
+import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 
 import { terminateAllTheThings } from './terminator'
 
 // necessary to prevent win from being garbage collected
 let mainWindow = null
+
+db.init(resolveUserDataDirectory())
 
 const isSecondInstance = app.makeSingleInstance(() => {
   if (mainWindow) {
@@ -66,7 +69,7 @@ const saveWindowSettings = window => {
     'resize',
     debounce(() => {
       const [width, height] = window.getSize()
-      db.setIn('settings', `window.${window.name}.dimensions`, { width, height })
+      db.setKey('windowParams', `${window.name}.dimensions`, { width, height })
     }, 100),
   )
 
@@ -74,7 +77,7 @@ const saveWindowSettings = window => {
     'move',
     debounce(() => {
       const [x, y] = window.getPosition()
-      db.setIn('settings', `window.${window.name}.positions`, { x, y })
+      db.setKey('windowParams', `${window.name}.positions`, { x, y })
     }, 100),
   )
 }
@@ -91,9 +94,9 @@ const defaultWindowOptions = {
   },
 }
 
-function createMainWindow() {
-  const savedDimensions = db.getIn('settings', 'window.MainWindow.dimensions', {})
-  const savedPositions = db.getIn('settings', 'window.MainWindow.positions', null)
+async function createMainWindow() {
+  const savedDimensions = await db.getKey('app', 'MainWindow.dimensions', {})
+  const savedPositions = await db.getKey('app', 'MainWindow.positions', null)
 
   const width = savedDimensions.width || DEFAULT_WINDOW_WIDTH
   const height = savedDimensions.height || DEFAULT_WINDOW_HEIGHT
@@ -178,5 +181,5 @@ app.on('ready', async () => {
 
   Menu.setApplicationMenu(menu)
 
-  mainWindow = createMainWindow()
+  mainWindow = await createMainWindow()
 })

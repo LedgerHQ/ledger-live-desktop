@@ -5,11 +5,11 @@ import uuid from 'uuid/v4'
 
 // a user is an anonymous way to identify a same instance of the app
 
-export default () => {
-  let user = db.get('user')
+export default async () => {
+  let user = await db.getKey('app', 'user')
   if (!user) {
     user = { id: uuid() }
-    db.set('user', user)
+    db.setKey('app', 'user', user)
   }
   return user
 }

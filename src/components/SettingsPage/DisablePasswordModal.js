@@ -1,9 +1,9 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import bcrypt from 'bcryptjs'
 import { createCustomErrorClass } from 'helpers/errors'
 
+import db from 'helpers/db'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
@@ -17,8 +17,6 @@ const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 type Props = {
   t: T,
   onClose: Function,
-  isPasswordEnabled: boolean,
-  currentPasswordHash: string,
   onChangePassword: Function,
 }
 
@@ -42,16 +40,14 @@ class DisablePasswordModal extends PureComponent<Props, State> {
     }
 
     const { currentPassword } = this.state
-    const { isPasswordEnabled, currentPasswordHash, onChangePassword } = this.props
-    if (isPasswordEnabled) {
-      if (!bcrypt.compareSync(currentPassword, currentPasswordHash)) {
-        this.setState({ incorrectPassword: new PasswordIncorrectError() })
-        return
-      }
-      onChangePassword('')
-    } else {
-      onChangePassword('')
+    const { onChangePassword } = this.props
+
+    if (!db.isEncryptionKeyCorrect('app', 'accounts', currentPassword)) {
+      this.setState({ incorrectPassword: new PasswordIncorrectError() })
+      return
     }
+
+    onChangePassword('')
   }
 
   handleInputChange = (key: string) => (value: string) => {
@@ -64,7 +60,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
   handleReset = () => this.setState(INITIAL_STATE)
 
   render() {
-    const { t, isPasswordEnabled, onClose, ...props } = this.props
+    const { t, onClose, ...props } = this.props
     const { currentPassword, incorrectPassword } = this.state
     return (
       <Modal
@@ -79,26 +75,24 @@ class DisablePasswordModal extends PureComponent<Props, State> {
                 <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
                   {t('app:password.disablePassword.desc')}
                   <Box px={7} mt={4} flow={3}>
-                    {isPasswordEnabled && (
-                      <Box flow={1}>
-                        <Label htmlFor="password">
-                          {t('app:password.inputFields.currentPassword.label')}
-                        </Label>
-                        <InputPassword
-                          autoFocus
-                          type="password"
-                          id="password"
-                          onChange={this.handleInputChange('currentPassword')}
-                          value={currentPassword}
-                          error={incorrectPassword}
-                        />
-                      </Box>
-                    )}
+                    <Box flow={1}>
+                      <Label htmlFor="password">
+                        {t('app:password.inputFields.currentPassword.label')}
+                      </Label>
+                      <InputPassword
+                        autoFocus
+                        type="password"
+                        id="password"
+                        onChange={this.handleInputChange('currentPassword')}
+                        value={currentPassword}
+                        error={incorrectPassword}
+                      />
+                    </Box>
                   </Box>
                 </Box>
               </ModalContent>
               <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-                <Button small type="Button small" onClick={onClose}>
+                <Button small type="button" onClick={onClose}>
                   {t('app:common.cancel')}
                 </Button>
                 <Button

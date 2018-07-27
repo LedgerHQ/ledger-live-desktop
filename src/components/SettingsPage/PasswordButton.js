@@ -4,14 +4,10 @@ import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
-import { createStructuredSelector } from 'reselect'
-import bcrypt from 'bcryptjs'
-import { setEncryptionKey } from 'helpers/db'
+import db from 'helpers/db'
+import { hasPasswordSelector } from 'reducers/settings'
 import { cleanAccountsCache } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
-import { storeSelector } from 'reducers/settings'
-import type { SettingsState } from 'reducers/settings'
-import { unlock } from 'reducers/application' // FIXME should be in actions
 import Track from 'analytics/Track'
 import Switch from 'components/base/Switch'
 import Box from 'components/base/Box'
@@ -19,22 +15,19 @@ import Button from 'components/base/Button'
 import PasswordModal from './PasswordModal'
 import DisablePasswordModal from './DisablePasswordModal'
 
-const mapStateToProps = createStructuredSelector({
-  // FIXME in future we should use dedicated password selector and a savePassword action (you don't know the shape of settings)
-  settings: storeSelector,
+const mapStateToProps = state => ({
+  hasPassword: hasPasswordSelector(state),
 })
 
 const mapDispatchToProps = {
-  unlock,
   cleanAccountsCache,
   saveSettings,
 }
 
 type Props = {
   t: T,
-  unlock: () => void,
-  settings: SettingsState,
   saveSettings: Function,
+  hasPassword: boolean,
 }
 
 type State = {
@@ -42,25 +35,20 @@ type State = {
   isDisablePasswordModalOpened: boolean,
 }
 
-class DisablePasswordButton extends PureComponent<Props, State> {
+class PasswordButton extends PureComponent<Props, State> {
   state = {
     isPasswordModalOpened: false,
     isDisablePasswordModalOpened: false,
   }
 
-  setPassword = password => {
-    const { saveSettings, unlock } = this.props
-    window.requestIdleCallback(() => {
-      setEncryptionKey('accounts', password)
-      const hash = password ? bcrypt.hashSync(password, 8) : undefined
-      saveSettings({
-        password: {
-          isEnabled: hash !== undefined,
-          value: hash,
-        },
-      })
-      unlock()
-    })
+  setPassword = async password => {
+    if (password) {
+      this.props.saveSettings({ hasPassword: true })
+      await db.setEncryptionKey('app', 'accounts', password)
+    } else {
+      this.props.saveSettings({ hasPassword: false })
+      await db.removeEncryptionKey('app', 'accounts')
+    }
   }
 
   handleOpenPasswordModal = () => this.setState({ isPasswordModalOpened: true })
@@ -87,20 +75,20 @@ class DisablePasswordButton extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, settings } = this.props
+    const { t, hasPassword } = this.props
     const { isDisablePasswordModalOpened, isPasswordModalOpened } = this.state
-    const isPasswordEnabled = settings.password.isEnabled === true
+
     return (
       <Fragment>
-        <Track onUpdate event={isPasswordEnabled ? 'PasswordEnabled' : 'PasswordDisabled'} />
+        <Track onUpdate event={hasPassword ? 'PasswordEnabled' : 'PasswordDisabled'} />
 
         <Box horizontal flow={2} align="center">
-          {isPasswordEnabled && (
+          {hasPassword && (
             <Button small onClick={this.handleOpenPasswordModal}>
               {t('app:settings.profile.changePassword')}
             </Button>
           )}
-          <Switch isChecked={isPasswordEnabled} onChange={this.handleChangePasswordCheck} />
+          <Switch isChecked={hasPassword} onChange={this.handleChangePasswordCheck} />
         </Box>
 
         <PasswordModal
@@ -108,8 +96,7 @@ class DisablePasswordButton extends PureComponent<Props, State> {
           isOpened={isPasswordModalOpened}
           onClose={this.handleClosePasswordModal}
           onChangePassword={this.handleChangePassword}
-          isPasswordEnabled={isPasswordEnabled}
-          currentPasswordHash={settings.password.value}
+          hasPassword={hasPassword}
         />
 
         <DisablePasswordModal
@@ -117,8 +104,7 @@ class DisablePasswordButton extends PureComponent<Props, State> {
           isOpened={isDisablePasswordModalOpened}
           onClose={this.handleCloseDisablePasswordModal}
           onChangePassword={this.handleChangePassword}
-          isPasswordEnabled={isPasswordEnabled}
-          currentPasswordHash={settings.password.value}
+          hasPassword={hasPassword}
         />
       </Fragment>
     )
@@ -129,5 +115,5 @@ export default translate()(
   connect(
     mapStateToProps,
     mapDispatchToProps,
-  )(DisablePasswordButton),
+  )(PasswordButton),
 )

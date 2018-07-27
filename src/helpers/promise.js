@@ -64,3 +64,11 @@ export function createCancelablePolling(
   })
   return { unsubscribe, promise }
 }
+
+export const promisify = (fn: any) => (...args: any) =>
+  new Promise((resolve, reject) =>
+    fn(...args, (err: Error, res: any) => {
+      if (err) return reject(err)
+      return resolve(res)
+    }),
+  )

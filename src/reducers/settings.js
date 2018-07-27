@@ -37,10 +37,7 @@ export type SettingsState = {
   language: ?string,
   region: ?string,
   orderAccounts: string,
-  password: {
-    isEnabled: boolean,
-    value: string,
-  },
+  hasPassword: boolean,
   selectedTimeRange: TimeRange,
   marketIndicator: 'eastern' | 'western',
   currenciesSettings: {
@@ -67,10 +64,7 @@ const INITIAL_STATE: SettingsState = {
   language: null,
   region: null,
   orderAccounts: 'balance|asc',
-  password: {
-    isEnabled: false,
-    value: '',
-  },
+  hasPassword: false,
   selectedTimeRange: 'month',
   marketIndicator: 'western',
   currenciesSettings: {},
@@ -140,7 +134,7 @@ export const storeSelector = (state: State): SettingsState => state.settings
 
 export const settingsExportSelector = storeSelector
 
-export const hasPassword = (state: State): boolean => state.settings.password.isEnabled
+export const hasPasswordSelector = (state: State): boolean => state.settings.hasPassword === true
 
 export const getCounterValueCode = (state: State) => state.settings.counterValue
 

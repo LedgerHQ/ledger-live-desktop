@@ -11,7 +11,7 @@ import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
 
 import { lock } from 'reducers/application'
-import { hasPassword } from 'reducers/settings'
+import { hasPasswordSelector } from 'reducers/settings'
 import { hasAccountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
@@ -54,7 +54,7 @@ const Bar = styled.div`
 `
 
 const mapStateToProps = state => ({
-  hasPassword: hasPassword(state),
+  hasPassword: hasPasswordSelector(state),
   hasAccounts: hasAccountsSelector(state),
 })
 

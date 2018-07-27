@@ -1,6 +1,5 @@
 // @flow
 
-import bcrypt from 'bcryptjs'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -8,13 +7,11 @@ import { remote } from 'electron'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
-import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 import { i } from 'helpers/staticPath'
 import IconTriangleWarning from 'icons/TriangleWarning'
-import get from 'lodash/get'
 
-import { setEncryptionKey } from 'helpers/db'
+import db from 'helpers/db'
 import hardReset from 'helpers/hardReset'
 
 import { fetchAccounts } from 'actions/accounts'
@@ -39,7 +36,6 @@ type Props = {
   children: any,
   fetchAccounts: Function,
   isLocked: boolean,
-  settings: Settings,
   t: T,
   unlock: Function,
 }
@@ -52,7 +48,6 @@ type State = {
 
 const mapStateToProps = state => ({
   isLocked: isLocked(state),
-  settings: state.settings,
 })
 
 const mapDispatchToProps: Object = {
@@ -112,18 +107,20 @@ class IsUnlocked extends Component<Props, State> {
   handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { settings, unlock, fetchAccounts } = this.props
+    const { unlock, fetchAccounts } = this.props
     const { inputValue } = this.state
 
-    if (bcrypt.compareSync(inputValue.password, get(settings, 'password.value'))) {
-      setEncryptionKey('accounts', inputValue.password)
-      await fetchAccounts()
+    const isAccountsDecrypted = await db.hasBeenDecrypted('app', 'accounts')
+    try {
+      if (!isAccountsDecrypted) {
+        await db.setEncryptionKey('app', 'accounts', inputValue.password)
+        await fetchAccounts()
+      } else if (!db.isEncryptionKeyCorrect('app', 'accounts', inputValue.password)) {
+        throw new PasswordIncorrectError()
+      }
       unlock()
-
-      this.setState({
-        ...defaultState,
-      })
-    } else {
+      this.setState(defaultState)
+    } catch (err) {
       this.setState({ incorrectPassword: new PasswordIncorrectError() })
     }
   }
