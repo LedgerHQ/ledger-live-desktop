@@ -1,6 +1,5 @@
 // @flow
 
-// FIXME remove this file! 'helpers/common.js' RLY? :P
 import type Transport from '@ledgerhq/hw-transport'
 
 const APDUS = {
@@ -10,23 +9,10 @@ const APDUS = {
   GET_FIRMWARE_FALLBACK: [0xe0, 0xc4, 0x00, 0x00],
 }
 
-export type LedgerScriptParams = {
-  firmware?: string,
-  firmware_key?: string,
-  delete?: string,
-  delete_key?: string,
-  targetId?: string | number,
-  name: string,
-  version: string,
-  icon: string,
-  app?: number,
-  hash?: string,
-}
-
 /**
  * Retrieve targetId and firmware version from device
  */
-export async function getFirmwareInfo(transport: Transport<*>) {
+export default async function getFirmwareInfo(transport: Transport<*>) {
   const res = await transport.send(...APDUS.GET_FIRMWARE)
   const byteArray = [...res]
   const data = byteArray.slice(0, byteArray.length - 2)

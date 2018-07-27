@@ -6,7 +6,7 @@ import { withDevice } from 'helpers/deviceAccess'
 
 import uninstallApp from 'helpers/apps/uninstallApp'
 
-import type { LedgerScriptParams } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/types'
 
 type Input = {
   app: LedgerScriptParams,

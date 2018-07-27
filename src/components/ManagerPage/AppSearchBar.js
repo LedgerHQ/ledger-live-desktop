@@ -3,7 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 
-import type { LedgerScriptParams } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/types'
 
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'

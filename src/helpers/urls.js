@@ -2,7 +2,7 @@
 import qs from 'qs'
 
 import { MANAGER_API_BASE, BASE_SOCKET_URL } from 'config/constants'
-import type { LedgerScriptParams } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/types'
 
 const urlBuilder = (base: string) => (endpoint: string): string => `${base}/${endpoint}`
 

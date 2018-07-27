@@ -2,7 +2,7 @@
 
 import type Transport from '@ledgerhq/hw-transport'
 
-import { getFirmwareInfo } from 'helpers/common'
+import getFirmwareInfo from 'helpers/firmware/getFirmwareInfo'
 
 export default async function getMemInfos(transport: Transport<*>): Promise<Object> {
   const { targetId } = await getFirmwareInfo(transport) // eslint-disable-line
