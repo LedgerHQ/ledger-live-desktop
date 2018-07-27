@@ -11,7 +11,7 @@ import logger from 'logger'
 import getAddress from 'commands/getAddress'
 import { createCancelablePolling } from 'helpers/promise'
 import { standardDerivation } from 'helpers/derivations'
-import { isSegwitAccount } from 'helpers/bip32'
+import { isSegwitPath } from 'helpers/bip32'
 import { BtcUnmatchedApp } from 'helpers/getAddressForCurrency/btc'
 
 import DeviceInteraction from 'components/DeviceInteraction'
@@ -124,7 +124,7 @@ async function getAddressFromAccountOrCurrency(device, account, currency) {
       path: account
         ? account.freshAddressPath
         : standardDerivation({ currency, segwit: false, x: 0 }),
-      segwit: account ? isSegwitAccount(account) : false,
+      segwit: account ? isSegwitPath(account.freshAddressPath) : false,
     })
     .toPromise()
   return address

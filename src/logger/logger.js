@@ -146,7 +146,7 @@ const logNetwork = !__DEV__ || DEBUG_NETWORK
 const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 const logApdu = !__DEV__ || DEBUG_DEVICE
 
-const blacklistTooVerboseCommandInput = ['libcoreSyncAccount', 'libcoreSignAndBroadcast']
+const blacklistTooVerboseCommandInput = []
 const blacklistTooVerboseCommandResponse = [
   'libcoreSyncAccount',
   'libcoreScanAccounts',

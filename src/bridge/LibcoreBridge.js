@@ -120,41 +120,48 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   },
 
   synchronize: account =>
-    libcoreSyncAccount.send({ rawAccount: encodeAccount(account) }).pipe(
-      map(rawSyncedAccount => {
-        const syncedAccount = decodeAccount(rawSyncedAccount)
-        return account => {
-          const accountOps = account.operations
-          const syncedOps = syncedAccount.operations
-          const patch: $Shape<Account> = {
-            id: syncedAccount.id,
-            freshAddress: syncedAccount.freshAddress,
-            freshAddressPath: syncedAccount.freshAddressPath,
-            balance: syncedAccount.balance,
-            blockHeight: syncedAccount.blockHeight,
-            lastSyncDate: new Date(),
-          }
+    libcoreSyncAccount
+      .send({
+        accountId: account.id,
+        freshAddressPath: account.freshAddressPath,
+        index: account.index,
+        currencyId: account.currency.id,
+      })
+      .pipe(
+        map(rawSyncedAccount => {
+          const syncedAccount = decodeAccount(rawSyncedAccount)
+          return account => {
+            const accountOps = account.operations
+            const syncedOps = syncedAccount.operations
+            const patch: $Shape<Account> = {
+              id: syncedAccount.id,
+              freshAddress: syncedAccount.freshAddress,
+              freshAddressPath: syncedAccount.freshAddressPath,
+              balance: syncedAccount.balance,
+              blockHeight: syncedAccount.blockHeight,
+              lastSyncDate: new Date(),
+            }
 
-          const hasChanged =
-            accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
-            (accountOps.length > 0 &&
-              syncedOps.length > 0 &&
-              (accountOps[0].accountId !== syncedOps[0].accountId ||
-              accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
-                accountOps[0].blockHeight !== syncedOps[0].blockHeight))
+            const hasChanged =
+              accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
+              (accountOps.length > 0 &&
+                syncedOps.length > 0 &&
+                (accountOps[0].accountId !== syncedOps[0].accountId ||
+                accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
+                  accountOps[0].blockHeight !== syncedOps[0].blockHeight))
 
-          if (hasChanged) {
-            patch.operations = syncedAccount.operations
-            patch.pendingOperations = [] // For now, we assume a change will clean the pendings.
-          }
+            if (hasChanged) {
+              patch.operations = syncedAccount.operations
+              patch.pendingOperations = [] // For now, we assume a change will clean the pendings.
+            }
 
-          return {
-            ...account,
-            ...patch,
+            return {
+              ...account,
+              ...patch,
+            }
           }
-        }
-      }),
-    ),
+        }),
+      ),
 
   pullMoreOperations: () => Promise.reject(notImplemented),
 
@@ -201,11 +208,15 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       .catch(() => BigNumber(0))
       .then(totalFees => a.balance.minus(totalFees || 0)),
 
-  signAndBroadcast: (account, transaction, deviceId) => {
-    const encodedAccount = encodeAccount(account) // FIXME no need to send the whole account over the threads
-    return libcoreSignAndBroadcast
+  signAndBroadcast: (account, transaction, deviceId) =>
+    libcoreSignAndBroadcast
       .send({
-        account: encodedAccount,
+        accountId: account.id,
+        currencyId: account.currency.id,
+        xpub: account.xpub,
+        freshAddress: account.freshAddress,
+        freshAddressPath: account.freshAddressPath,
+        index: account.index,
         transaction: serializeTransaction(transaction),
         deviceId,
       })
@@ -215,14 +226,13 @@ const LibcoreBridge: WalletBridge<Transaction> = {
             case 'broadcasted':
               return {
                 type: 'broadcasted',
-                operation: decodeOperation(encodedAccount, e.operation),
+                operation: decodeOperation(encodeAccount(account), e.operation),
               }
             default:
               return e
           }
         }),
-      )
-  },
+      ),
 
   addPendingOperation: (account, operation) => ({
     ...account,

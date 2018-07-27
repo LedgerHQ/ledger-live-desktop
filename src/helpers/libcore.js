@@ -12,7 +12,7 @@ import { SHOW_LEGACY_NEW_ACCOUNT } from 'config/constants'
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
-import { isSegwitAccount, isUnsplitAccount } from 'helpers/bip32'
+import { isSegwitPath, isUnsplitPath } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
 import { createCustomErrorClass, deserializeError } from './errors'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
@@ -482,10 +482,22 @@ function buildOperationRaw({
   }
 }
 
-export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: AccountRaw }) {
-  const decodedAccountId = accountIdHelper.decode(rawAccount.id)
-  const isSegwit = isSegwitAccount(rawAccount)
-  const isUnsplit = isUnsplitAccount(rawAccount, SPLITTED_CURRENCIES[rawAccount.currencyId])
+export async function syncAccount({
+  accountId,
+  freshAddressPath,
+  currencyId,
+  index,
+  core,
+}: {
+  core: *,
+  accountId: string,
+  freshAddressPath: string,
+  currencyId: string,
+  index: number,
+}) {
+  const decodedAccountId = accountIdHelper.decode(accountId)
+  const isSegwit = isSegwitPath(freshAddressPath)
+  const isUnsplit = isUnsplitPath(freshAddressPath, SPLITTED_CURRENCIES[currencyId])
   let njsWallet
   try {
     njsWallet = await core.getPoolInstance().getWallet(decodedAccountId.walletName)
@@ -494,7 +506,7 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
     njsWallet = await getOrCreateWallet(
       core,
       decodedAccountId.walletName,
-      rawAccount.currencyId,
+      currencyId,
       isSegwit,
       isUnsplit,
     )
@@ -502,10 +514,10 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
 
   let njsAccount
   try {
-    njsAccount = await njsWallet.getAccount(rawAccount.index)
+    njsAccount = await njsWallet.getAccount(index)
   } catch (e) {
     logger.warn(`Have to recreate the account... (${e.message})`)
-    const extendedInfos = await njsWallet.getExtendedKeyAccountCreationInfo(rawAccount.index)
+    const extendedInfos = await njsWallet.getExtendedKeyAccountCreationInfo(index)
     extendedInfos.extendedKeys.push(decodedAccountId.xpub)
     njsAccount = await njsWallet.newAccountWithExtendedKeyInfo(extendedInfos)
   }
@@ -521,9 +533,9 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
     njsAccount,
     isSegwit,
     isUnsplit,
-    accountIndex: rawAccount.index,
+    accountIndex: index,
     wallet: njsWallet,
-    currencyId: rawAccount.currencyId,
+    currencyId,
     core,
     ops,
   })
