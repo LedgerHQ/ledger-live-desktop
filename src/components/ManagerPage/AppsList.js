@@ -7,7 +7,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import type { Device, T } from 'types/common'
-import type { LedgerScriptParams } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/types'
 import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 import { developerModeSelector } from 'reducers/settings'
 
