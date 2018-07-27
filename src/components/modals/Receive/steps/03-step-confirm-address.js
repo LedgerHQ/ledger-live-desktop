@@ -12,6 +12,7 @@ import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
 import type { StepProps } from '../index'
 import TranslatedError from '../../../TranslatedError'
+import DebugAppInfosForCurrency from '../../../DebugAppInfosForCurrency'
 
 export default class StepConfirmAddress extends PureComponent<StepProps> {
   render() {
@@ -21,6 +22,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
         <TrackPage category="Receive Flow" name="Step 3" />
         {isAddressVerified === false ? (
           <Fragment>
+            {account ? <DebugAppInfosForCurrency currencyId={account.currency.id} /> : null}
             <TrackPage category="Receive Flow" name="Step 3 Address Not Verified Error" />
             <Title>
               <TranslatedError error={verifyAddressError} />

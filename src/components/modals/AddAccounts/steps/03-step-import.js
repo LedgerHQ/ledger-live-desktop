@@ -22,6 +22,7 @@ import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import TranslatedError from 'components/TranslatedError'
 import Spinner from 'components/base/Spinner'
 import Text from 'components/base/Text'
+import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 
 import type { StepProps } from '../index'
 
@@ -184,13 +185,14 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   renderError() {
-    const { err } = this.props
+    const { err, currency } = this.props
     invariant(err, 'Trying to render inexisting error')
     return (
       <Box style={{ height: 200 }} px={5} justify="center">
         <Box color="alertRed" align="center">
           <IconExclamationCircleThin size={43} />
         </Box>
+        {currency ? <DebugAppInfosForCurrency currencyId={currency.id} /> : null}
         <Title>
           <TranslatedError error={err} field="title" />
         </Title>
