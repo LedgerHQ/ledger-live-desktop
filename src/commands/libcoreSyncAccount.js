@@ -8,13 +8,16 @@ import { syncAccount } from 'helpers/libcore'
 import withLibcore from 'helpers/withLibcore'
 
 type Input = {
-  rawAccount: AccountRaw, // FIXME there is no reason we send the whole AccountRaw
+  accountId: string,
+  freshAddressPath: string,
+  currencyId: string,
+  index: number,
 }
 
 type Result = AccountRaw
 
-const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', ({ rawAccount }) =>
-  fromPromise(withLibcore(core => syncAccount({ rawAccount, core }))),
+const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', accountInfos =>
+  fromPromise(withLibcore(core => syncAccount({ ...accountInfos, core }))),
 )
 
 export default cmd
