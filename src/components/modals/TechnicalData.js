@@ -3,7 +3,12 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
 import { MODAL_TECHNICAL_DATA } from 'config/constants'
-import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import Modal, {
+  ModalBody,
+  ModalTitle,
+  ModalContent,
+  ModalFooter,
+} from 'components/base/LegacyModal'
 import Button from 'components/base/Button'
 
 import type { T } from 'types/common'

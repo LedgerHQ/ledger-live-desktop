@@ -6,7 +6,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
+import { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/LegacyModal'
 import Breadcrumb from 'components/Breadcrumb'
 
 type Props = {

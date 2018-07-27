@@ -4,7 +4,12 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 
 import { MODAL_SHARE_ANALYTICS } from 'config/constants'
-import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import Modal, {
+  ModalBody,
+  ModalTitle,
+  ModalContent,
+  ModalFooter,
+} from 'components/base/LegacyModal'
 
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'

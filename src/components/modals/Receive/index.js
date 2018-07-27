@@ -19,7 +19,7 @@ import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
 import { closeModal } from 'reducers/modals'
 
-import Modal from 'components/base/Modal'
+import Modal from 'components/base/LegacyModal'
 import Stepper from 'components/base/Stepper'
 
 import StepAccount, { StepAccountFooter } from './steps/01-step-account'

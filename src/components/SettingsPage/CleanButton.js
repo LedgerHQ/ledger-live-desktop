@@ -9,7 +9,7 @@ import { cleanAccountsCache } from 'actions/accounts'
 import db from 'helpers/db'
 import { delay } from 'helpers/promise'
 import Button from 'components/base/Button'
-import { ConfirmModal } from 'components/base/Modal'
+import { ConfirmModal } from 'components/base/LegacyModal'
 
 const mapDispatchToProps = {
   cleanAccountsCache,

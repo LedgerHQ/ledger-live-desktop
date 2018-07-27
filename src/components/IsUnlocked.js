@@ -24,8 +24,8 @@ import { createCustomErrorClass } from 'helpers/errors'
 
 import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
-import Button from './base/Button/index'
-import ConfirmModal from './base/Modal/ConfirmModal'
+import Button from 'components/base/Button/index'
+import ConfirmModal from 'components/base/LegacyModal/ConfirmModal'
 
 const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 

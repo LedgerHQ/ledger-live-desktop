@@ -6,7 +6,12 @@ import { translate, Trans } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal, {
+  ModalBody,
+  ModalFooter,
+  ModalTitle,
+  ModalContent,
+} from 'components/base/LegacyModal'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import GrowScroll from 'components/base/GrowScroll'

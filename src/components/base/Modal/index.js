@@ -1,250 +1,196 @@
 // @flow
 
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/no-multi-comp */
+import React, { PureComponent, Fragment } from 'react'
+import { createPortal } from 'react-dom'
+import Animated from 'animated/lib/targets/react-dom'
+import Easing from 'animated/lib/Easing'
 
-import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
-import { connect } from 'react-redux'
-import Mortal from 'react-mortal'
-import styled from 'styled-components'
-import noop from 'lodash/noop'
-import { EXPERIMENTAL_CENTER_MODAL } from 'config/constants'
+import { colors } from 'styles/theme'
+import ModalHeader from './ModalHeader'
+import ModalContent from './ModalContent'
 
-import { rgba } from 'styles/helpers'
-import { radii } from 'styles/theme'
+export { default as ModalFooter } from './ModalFooter'
+export { default as ModalContent } from './ModalContent'
+export { default as ModalHeader } from './ModalHeader'
 
-import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
-
-import Box from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
-
-export { default as ModalBody } from './ModalBody'
-export { default as ConfirmModal } from './ConfirmModal'
-export { default as ModalTitle } from './ModalTitle'
-
-const springConfig = {
-  stiffness: 320,
+const animShowHide = {
+  duration: 300,
+  easing: Easing.bezier(0.3, 1.0, 0.5, 0.8),
 }
 
-type OwnProps = {
-  name?: string, // eslint-disable-line
-  isOpened?: boolean,
-  onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
-  onClose?: () => void,
-  onHide?: () => void,
-  preventBackdropClick?: boolean,
-  render: Function,
-  refocusWhenChange?: string,
-  width?: string,
+const domNode = process.env.STORYBOOK_ENV ? document.body : document.getElementById('modals')
+
+type Props = {
+  isOpened: boolean,
+  children: React$Element<any>[],
+  title: string,
+  centered?: boolean,
+  onBack: void => void,
+  onClose: void => void,
 }
 
-type Props = OwnProps & {
-  isOpened?: boolean,
-  data?: any,
-} & {
-  onClose?: () => void,
+type State = {
+  animShowHide: Animated.Value,
+  animGradient: Animated.Value,
+  isInDOM: boolean,
 }
 
-const mapStateToProps = (state, { name, isOpened, onBeforeOpen }: OwnProps): * => {
-  const data = getModalData(state, name || '')
-  const modalOpened = isOpened || (name && isModalOpened(state, name))
-
-  if (onBeforeOpen && modalOpened) {
-    onBeforeOpen({ data })
+class Modal extends PureComponent<Props, State> {
+  state = {
+    animShowHide: new Animated.Value(0),
+    animGradient: new Animated.Value(0),
+    isInDOM: this.props.isOpened === true,
   }
 
-  return {
-    isOpened: !!modalOpened,
-    data,
-  }
-}
-
-const mapDispatchToProps = (dispatch: *, { name, onClose = noop }: OwnProps): * => ({
-  onClose: name
-    ? () => {
-        dispatch(closeModal(name))
-        onClose()
-      }
-    : onClose,
-})
-
-const Container = styled(Box).attrs({
-  color: 'grey',
-  sticky: true,
-  style: p => ({
-    pointerEvents: p.isVisible ? 'auto' : 'none',
-  }),
-})`
-  position: fixed;
-  z-index: 30;
-`
-
-const Backdrop = styled(Box).attrs({
-  bg: p => rgba(p.theme.colors.black, 0.4),
-  sticky: true,
-  style: p => ({
-    opacity: p.op,
-  }),
-})`
-  position: fixed;
-`
-
-const NonClickableHeadArea = styled.div`
-  position: fixed;
-  height: 48px;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`
-
-const Wrapper = styled(Box).attrs({
-  bg: 'transparent',
-  flow: 4,
-  style: p => ({
-    opacity: p.op,
-    transform: `scale3d(${p.scale}, ${p.scale}, ${p.scale})`,
-  }),
-})`
-  outline: none;
-  width: ${p => (p.width ? p.width : '500px')};
-  z-index: 2;
-`
-
-class Pure extends Component<any> {
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.isAnimated) {
-      return false
+  static getDerivedStateFromProps(nextProps: Props) {
+    const patch = {}
+    if (nextProps.isOpened) {
+      patch.isInDOM = true
     }
-
-    return true
+    return patch
   }
 
-  render() {
-    const { data, onClose, render } = this.props
+  componentDidMount() {
+    if (this.props.isOpened) {
+      this.animateEnter()
 
-    return render({ data, onClose })
-  }
-}
-
-function stopPropagation(e) {
-  e.stopPropagation()
-}
-
-const wrap = EXPERIMENTAL_CENTER_MODAL
-  ? children => (
-      <Box alignItems="center" justifyContent="center" grow>
-        {children}
-      </Box>
-    )
-  : children => (
-      <GrowScroll alignItems="center" full pt={8}>
-        {children}
-      </GrowScroll>
-    )
-
-export class Modal extends Component<Props> {
-  static defaultProps = {
-    isOpened: false,
-    onHide: noop,
-    preventBackdropClick: false,
-  }
-
-  shouldComponentUpdate(nextProps: Props) {
-    if (this.props.isOpened || nextProps.isOpened) {
-      return true
+      this.state.animShowHide.addListener(({ value }) => {
+        if (value === 0) this.setState({ isInDOM: false })
+        if (value === 1) this.setState({ isInDOM: true })
+      })
     }
-
-    return false
   }
 
   componentDidUpdate(prevProps: Props) {
-    const didOpened = this.props.isOpened && !prevProps.isOpened
-    const didClose = !this.props.isOpened && prevProps.isOpened
-    const shouldFocus = didOpened || this.props.refocusWhenChange !== prevProps.refocusWhenChange
+    const didOpened = !prevProps.isOpened && this.props.isOpened
+    const didClosed = prevProps.isOpened && !this.props.isOpened
+
     if (didOpened) {
-      // Store a reference to the last active element, to restore it after
-      // modal close
-      this._lastFocusedElement = document.activeElement
-    }
-    if (shouldFocus) {
-      this.focusWrapper()
+      this.animateEnter()
     }
 
-    if (didClose) {
-      if (this._lastFocusedElement) {
-        this._lastFocusedElement.focus()
-      }
+    if (didClosed) {
+      this.animateLeave()
     }
   }
 
-  _wrapper = null
-  _lastFocusedElement = null
+  animateEnter = () =>
+    Animated.timing(this.state.animShowHide, { ...animShowHide, toValue: 1 }).start()
 
-  focusWrapper = () => {
-    // Forced to use findDOMNode here, because innerRef is giving a proxied component
-    const domWrapper = findDOMNode(this._wrapper) // eslint-disable-line react/no-find-dom-node
+  animateLeave = () =>
+    Animated.timing(this.state.animShowHide, { ...animShowHide, toValue: 0 }).start()
 
-    if (domWrapper instanceof HTMLDivElement) {
-      domWrapper.focus()
+  animateGradient = (isScrollable: boolean) => {
+    const anim = {
+      duration: 150,
+      toValue: isScrollable ? 1 : 0,
     }
+    Animated.timing(this.state.animGradient, anim).start()
   }
 
   render() {
-    const { preventBackdropClick, isOpened, onHide, render, data, onClose, width } = this.props
+    const { animShowHide, animGradient, isInDOM } = this.state
+    const { title, children, centered, onBack, onClose } = this.props
 
-    return (
-      <Mortal
-        isOpened={isOpened}
-        onClose={onClose}
-        onHide={onHide}
-        closeOnEsc={!preventBackdropClick}
-        motionStyle={(spring, isVisible) => ({
-          opacity: spring(isVisible ? 1 : 0, springConfig),
-          scale: spring(isVisible ? 1 : 0.95, springConfig),
-        })}
-      >
-        {(m, isVisible, isAnimated) => (
-          <Container isVisible={isVisible} onClick={preventBackdropClick ? undefined : onClose}>
-            <Backdrop op={m.opacity} />
-            <NonClickableHeadArea onClick={stopPropagation} />
-            {wrap(
-              <Wrapper
-                tabIndex={-1}
-                op={m.opacity}
-                scale={m.scale}
-                innerRef={n => (this._wrapper = n)}
-                onClick={stopPropagation}
-                width={width}
-              >
-                <Pure isAnimated={isAnimated} render={render} data={data} onClose={onClose} />
-              </Wrapper>,
-            )}
-          </Container>
-        )}
-      </Mortal>
+    if (!isInDOM) {
+      return null
+    }
+
+    const backdropStyle = {
+      ...BACKDROP_STYLE,
+      opacity: animShowHide,
+    }
+
+    const containerStyle = {
+      ...CONTAINER_STYLE,
+      justifyContent: centered ? 'center' : 'flex-start',
+    }
+
+    const scale = animShowHide.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1.1, 1],
+      clamp: true,
+    })
+
+    const bodyStyle = {
+      ...BODY_STYLE,
+      opacity: animShowHide,
+      transform: [{ scale }],
+    }
+
+    const gradientStyle = {
+      ...GRADIENT_STYLE,
+      opacity: animGradient,
+    }
+
+    const content = children.length > 2 ? children.slice(0, children.length - 1) : children[0]
+    const footer = children.length > 1 ? children[children.length - 1] : null
+
+    const modal = (
+      <Fragment>
+        <Animated.div style={backdropStyle} />
+        <div style={containerStyle}>
+          <Animated.div style={bodyStyle}>
+            <ModalHeader onBack={onBack} onClose={onClose}>
+              {title}
+            </ModalHeader>
+            <ModalContent onIsScrollableChange={this.animateGradient}>{content}</ModalContent>
+            <div style={GRADIENT_WRAPPER_STYLE}>
+              <Animated.div style={gradientStyle} />
+            </div>
+            {footer}
+          </Animated.div>
+        </div>
+      </Fragment>
     )
+
+    return domNode ? createPortal(modal, domNode) : null
   }
 }
 
-export const ModalFooter = styled(Box).attrs({
-  px: 5,
-  py: 3,
-})`
-  border-top: 2px solid ${p => p.theme.colors.lightGrey};
-  border-bottom-left-radius: ${radii[1]}px;
-  border-bottom-right-radius: ${radii[1]}px;
-`
+const BACKDROP_STYLE = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background: 'rgba(0, 0, 0, 0.4)',
+}
 
-export const ModalContent = styled(Box).attrs({
-  px: 5,
-  pb: 5,
-  selectable: true,
-})``
+const CONTAINER_STYLE = {
+  ...BACKDROP_STYLE,
+  background: 'transparent',
+  padding: '60px 0 60px 0',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Modal)
+const BODY_STYLE = {
+  background: 'white',
+  width: 500,
+  borderRadius: 3,
+  boxShadow: 'box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2)',
+  color: colors.smoke,
+  flexShrink: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  overflow: 'hidden',
+}
+
+const GRADIENT_STYLE = {
+  background: 'linear-gradient(rgba(255, 255, 255, 0), #ffffff)',
+  height: 40,
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 6,
+}
+
+const GRADIENT_WRAPPER_STYLE = {
+  height: 0,
+  position: 'relative',
+  pointerEvents: 'none',
+}
+
+export default Modal

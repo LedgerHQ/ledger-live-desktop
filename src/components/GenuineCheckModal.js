@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/LegacyModal'
 import GenuineCheck from 'components/GenuineCheck'
 
 type Props = {

@@ -2,7 +2,7 @@
 import React from 'react'
 
 import { MODAL_RELEASES_NOTES } from 'config/constants'
-import Modal from 'components/base/Modal'
+import Modal from 'components/base/LegacyModal'
 
 import ReleaseNotesBody from './ReleaseNotesBody'
 

@@ -22,7 +22,7 @@ import { accountsSelector } from 'reducers/accounts'
 import { closeModal, openModal } from 'reducers/modals'
 import { DisconnectedDevice, UserRefusedOnDevice } from 'config/errors'
 
-import Modal from 'components/base/Modal'
+import Modal from 'components/base/LegacyModal'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 

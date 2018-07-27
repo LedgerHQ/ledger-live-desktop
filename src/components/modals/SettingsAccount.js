@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
-import Modal from 'components/base/Modal'
+import Modal from 'components/base/LegacyModal'
 import AccountSettingRenderBody from './AccountSettingRenderBody'
 
 export default class SettingsAccount extends PureComponent<*, *> {

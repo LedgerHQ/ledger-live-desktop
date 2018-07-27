@@ -34,7 +34,7 @@ import {
   ModalFooter,
   ModalContent,
   ConfirmModal,
-} from 'components/base/Modal'
+} from 'components/base/LegacyModal'
 
 const AccountNameRequiredError = createCustomErrorClass('AccountNameRequired')
 const EnpointConfigError = createCustomErrorClass('EnpointConfig')
