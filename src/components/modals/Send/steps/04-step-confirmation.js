@@ -13,6 +13,7 @@ import Button from 'components/base/Button'
 import Spinner from 'components/base/Spinner'
 import RetryButton from 'components/base/RetryButton'
 import TranslatedError from 'components/TranslatedError'
+import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 
@@ -43,7 +44,7 @@ const Text = styled(Box).attrs({
   text-align: center;
 `
 
-export default function StepConfirmation({ t, optimisticOperation, error }: StepProps<*>) {
+export default function StepConfirmation({ account, t, optimisticOperation, error }: StepProps<*>) {
   const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
   const iconColor = optimisticOperation
     ? colors.positiveGreen
@@ -53,6 +54,7 @@ export default function StepConfirmation({ t, optimisticOperation, error }: Step
 
   return (
     <Container>
+      {error && account ? <DebugAppInfosForCurrency currencyId={account.currency.id} /> : null}
       <TrackPage category="Send Flow" name="Step 4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
