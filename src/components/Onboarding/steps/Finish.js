@@ -125,7 +125,7 @@ type SocMed = {
 }
 
 const StyledBox = styled(Box)`
-  cursor: default;
+  cursor: default; // this here needs reset because it inherits from cursor: text from parent
   &:hover {
     color: ${p => lighten(p.theme.colors.grey, 0.1)};
   }

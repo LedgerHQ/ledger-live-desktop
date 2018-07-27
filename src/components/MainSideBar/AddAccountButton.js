@@ -11,7 +11,6 @@ import { rgba } from 'styles/helpers'
 
 const PlusWrapper = styled(Tabbable).attrs({
   p: 1,
-  cursor: 'default',
   borderRadius: 1,
 })`
   color: ${p => p.theme.colors.smoke};

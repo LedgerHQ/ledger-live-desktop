@@ -17,7 +17,6 @@ const OperationRow = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
-  cursor: initial;
   border-bottom: 1px solid ${p => p.theme.colors.lightGrey};
   height: 68px;
   opacity: ${p => (p.isOptimistic ? 0.5 : 1)};

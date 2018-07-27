@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
+import styled from 'styled-components'
 
 import type { LedgerScriptParams } from 'helpers/common'
 
@@ -11,6 +12,15 @@ import Search from 'components/base/Search'
 
 import SearchIcon from 'icons/Search'
 import CrossIcon from 'icons/Cross'
+
+const CrossContainer = styled(Box).attrs({
+  justify: 'center',
+  px: 3,
+})`
+  &:hover {
+    color: ${p => p.theme.colors.dark};
+  }
+`
 
 type Props = {
   list: Array<LedgerScriptParams>,
@@ -43,7 +53,7 @@ class AppSearchBar extends PureComponent<Props, State> {
     const { children, list } = this.props
     const { query, focused } = this.state
 
-    const color = focused ? 'black' : 'grey'
+    const color = focused ? 'dark' : 'grey'
 
     return (
       <Fragment>
@@ -56,15 +66,15 @@ class AppSearchBar extends PureComponent<Props, State> {
           onBlur={this.handleFocus(false)}
           placeholder={'Search app'}
           renderLeft={
-            <Box pl={3} justify="center">
-              <SearchIcon size={16} style={{ color }} />
+            <Box pl={3} justify="center" color={color}>
+              <SearchIcon size={16} />
             </Box>
           }
           renderRight={
             query ? (
-              <Box justify="center" cursor="text" onClick={this.reset} px={3}>
+              <CrossContainer justify="center" cursor="default" onClick={this.reset} px={3}>
                 <CrossIcon size={16} />
-              </Box>
+              </CrossContainer>
             ) : null
           }
         />

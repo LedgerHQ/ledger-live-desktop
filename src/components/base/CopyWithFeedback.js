@@ -66,7 +66,7 @@ const ClickableWrapper = styled(Box).attrs({
   color: 'wallet',
   fontSize: 4,
   ff: 'Open Sans|SemiBold',
-  cursor: 'default',
+  cursor: 'default', // this here needs reset because it inherits from cursor: text from parent
 })`
   &:hover {
     color: ${p => lighten(p.theme.colors.wallet, 0.1)};
