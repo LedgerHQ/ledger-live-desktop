@@ -9,11 +9,11 @@ import getCurrentFirmware from './getCurrentFirmware'
 import getDeviceVersion from './getDeviceVersion'
 
 export default async (transport: Transport<*>, deviceInfo: DeviceInfo): Promise<string> => {
-  const deviceVersion = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
+  const deviceVersion = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerName)
   const firmware = await getCurrentFirmware({
     deviceId: deviceVersion.id,
-    fullVersion: deviceInfo.fullVersion,
-    provider: deviceInfo.providerId,
+    seVersion: deviceInfo.seVersion,
+    provider: deviceInfo.providerName,
   })
   const params = {
     targetId: deviceInfo.targetId,

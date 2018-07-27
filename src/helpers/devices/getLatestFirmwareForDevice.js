@@ -11,13 +11,13 @@ import getDeviceVersion from './getDeviceVersion'
 
 export default async (deviceInfo: DeviceInfo) => {
   // Get device infos from targetId
-  const deviceVersion = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
+  const deviceVersion = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerName)
 
   // Get firmware infos with firmware name and device version
   const seFirmwareVersion = await getCurrentFirmware({
-    fullVersion: deviceInfo.fullVersion,
+    seVersion: deviceInfo.seVersion,
     deviceId: deviceVersion.id,
-    provider: deviceInfo.providerId,
+    provider: deviceInfo.providerName,
   })
 
   // Fetch next possible firmware
@@ -27,7 +27,7 @@ export default async (deviceInfo: DeviceInfo) => {
     data: {
       current_se_firmware_final_version: seFirmwareVersion.id,
       device_version: deviceVersion.id,
-      provider: deviceInfo.providerId,
+      provider: deviceInfo.providerName,
     },
   })
 

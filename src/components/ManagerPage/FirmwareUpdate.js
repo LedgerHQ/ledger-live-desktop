@@ -148,7 +148,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>
               {t('app:manager.firmware.installed', {
-                version: deviceInfo.fullVersion,
+                version: deviceInfo.seVersion,
               })}
             </Text>
           </Box>

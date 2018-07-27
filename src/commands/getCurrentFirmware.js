@@ -7,8 +7,8 @@ import getCurrentFirmware from 'helpers/devices/getCurrentFirmware'
 
 type Input = {
   deviceId: string | number,
-  fullVersion: string,
-  provider: number,
+  seVersion: string,
+  provider: string,
 }
 
 type Result = *

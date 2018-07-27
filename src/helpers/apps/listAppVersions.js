@@ -7,14 +7,14 @@ import getDeviceVersion from 'helpers/devices/getDeviceVersion'
 import getCurrentFirmware from 'helpers/devices/getCurrentFirmware'
 
 export default async (deviceInfo: DeviceInfo) => {
-  const deviceData = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
+  const deviceData = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerName)
   const firmwareData = await getCurrentFirmware({
     deviceId: deviceData.id,
-    fullVersion: deviceInfo.fullVersion,
-    provider: deviceInfo.providerId,
+    seVersion: deviceInfo.seVersion,
+    provider: deviceInfo.providerName,
   })
   const params = {
-    provider: deviceInfo.providerId,
+    provider: deviceInfo.providerName,
     current_se_firmware_final_version: firmwareData.id,
     device_version: deviceData.id,
   }

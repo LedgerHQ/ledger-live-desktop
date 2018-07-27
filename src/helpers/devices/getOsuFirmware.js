@@ -6,7 +6,7 @@ import { GET_CURRENT_OSU } from 'helpers/urls'
 type Input = {
   version: string,
   deviceId: string | number,
-  provider: number,
+  provider: string,
 }
 
 export default async (input: Input): Promise<*> => {

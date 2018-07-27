@@ -28,11 +28,11 @@ type Result = Promise<{ success: boolean, error?: string }>
 export default async (transport: Transport<*>): Result => {
   try {
     const deviceInfo: DeviceInfo = await getDeviceInfo(transport)
-    const device = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
+    const device = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerName)
     const firmware = await getOsuFirmware({
       deviceId: device.id,
-      version: deviceInfo.fullVersion,
-      provider: deviceInfo.providerId,
+      version: deviceInfo.seVersion,
+      provider: deviceInfo.providerName,
     })
     const { next_se_firmware_final_version } = firmware
     const nextFirmware = await getFinalFirmwareById(next_se_firmware_final_version)
