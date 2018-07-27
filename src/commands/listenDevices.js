@@ -7,6 +7,7 @@ import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { DEVICE_DISCONNECT_DEBOUNCE, LISTEN_DEVICES_POLLING_INTERVAL } from 'config/constants'
 
 CommNodeHid.setListenDevicesPollingInterval(LISTEN_DEVICES_POLLING_INTERVAL)
+CommNodeHid.setListenDevicesDebug(true)
 
 const cmd = createCommand('listenDevices', () =>
   Observable.create(o => {

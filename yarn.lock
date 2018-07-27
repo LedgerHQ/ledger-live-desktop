@@ -1501,12 +1501,14 @@
     "@ledgerhq/hw-transport" "^4.21.0"
     bip32-path "0.4.2"
 
-"@ledgerhq/hw-transport-node-hid@^4.13.0":
-  version "4.21.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.21.0.tgz#fffdae5314bb969473a763e59fe1dfdde3fd7aed"
+"@ledgerhq/hw-transport-node-hid@^4.22.0-beta.ae6f5c51":
+  version "4.22.0-beta.ae6f5c51"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.22.0-beta.ae6f5c51.tgz#36f5515c98af437d41653e854a613c462e65d9e1"
   dependencies:
-    "@ledgerhq/hw-transport" "^4.21.0"
+    "@ledgerhq/hw-transport" "^4.22.0-beta.ae6f5c51"
+    lodash "^4.17.10"
     node-hid "^0.7.2"
+    usb "^1.3.2"
 
 "@ledgerhq/hw-transport-node-hid@^4.7.6":
   version "4.16.0"
@@ -1524,6 +1526,12 @@
 "@ledgerhq/hw-transport@^4.15.0":
   version "4.19.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.19.0.tgz#19a804aee1bfc4abac1dc9a2a7a582e79273f991"
+  dependencies:
+    events "^2.0.0"
+
+"@ledgerhq/hw-transport@^4.22.0-beta.ae6f5c51":
+  version "4.22.0-beta.ae6f5c51"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.22.0-beta.ae6f5c51.tgz#a9f17ff8fa792a19e01d82d72f14ff7f7a211209"
   dependencies:
     events "^2.0.0"
 
@@ -9905,7 +9913,7 @@ mute-stream@0.0.7, mute-stream@~0.0.4:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.10.0, nan@^2.2.1, nan@^2.6.2, nan@^2.9.2:
+nan@^2.10.0, nan@^2.2.1, nan@^2.6.2, nan@^2.8.0, nan@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
@@ -14351,6 +14359,13 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+usb@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/usb/-/usb-1.3.2.tgz#4563a32323856e26c97dae374b34c66c3d83b5f4"
+  dependencies:
+    nan "^2.8.0"
+    node-pre-gyp "^0.10.0"
 
 use@^3.1.0:
   version "3.1.0"
