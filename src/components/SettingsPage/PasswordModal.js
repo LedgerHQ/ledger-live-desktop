@@ -112,7 +112,7 @@ class PasswordModal extends PureComponent<Props, State> {
               />
             </ModalContent>
             <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-              <Button small type="Button small" onClick={onClose}>
+              <Button small type="button" onClick={onClose}>
                 {t('app:common.cancel')}
               </Button>
               <Button

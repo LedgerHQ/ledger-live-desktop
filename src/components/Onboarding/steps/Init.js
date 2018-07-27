@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { flowType } from 'reducers/onboarding'
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
+import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
 import TrackPage from 'analytics/TrackPage'
 import IconPlus from 'icons/Plus'
 import IconRecover from 'icons/Recover'
@@ -15,7 +16,7 @@ import IconCheck from 'icons/Check'
 import IconExternalLink from 'icons/ExternalLink'
 import IconChevronRight from 'icons/ChevronRight'
 import { i } from 'helpers/staticPath'
-import { Title, LiveLogo } from '../helperComponents'
+import { Title } from '../helperComponents'
 
 import type { StepProps } from '..'
 
@@ -68,9 +69,12 @@ class Init extends PureComponent<StepProps, *> {
       <GrowScroll full justifyContent="center" py={7}>
         <TrackPage category="Onboarding" name="Init" />
         <Box align="center">
-          <LiveLogo
-            style={{ width: 64, height: 64 }}
-            icon={<img src={i('ledgerlive-logo.svg')} alt="" width={40} height={40} />}
+          <LedgerLiveLogo
+            width="64px"
+            height="64px"
+            icon={
+              <img src={i('ledgerlive-logo.svg')} alt="" draggable="false" width={40} height={40} />
+            }
           />
           <Box m={5} style={{ maxWidth: 480 }}>
             <Title>{t('onboarding:init.title')}</Title>
