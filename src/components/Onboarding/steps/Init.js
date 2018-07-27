@@ -117,7 +117,6 @@ const InitCardContainer = styled(Box).attrs({
   horizontal: true,
   borderRadius: '4px',
 })`
-  cursor: initial;
   border: 1px solid ${p => p.theme.colors.fog};
   width: 530px;
   height: 70px;
