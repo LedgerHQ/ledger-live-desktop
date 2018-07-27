@@ -152,17 +152,17 @@ describe('db', () => {
   })
 
   test('detect if field is encrypted or not', async () => {
-    let isEncrypted
+    let isDecrypted
     await db.setKey('app', 'encryptedField', { some: 'data' })
     await db.setEncryptionKey('app', 'encryptedField', 'passw0rd')
     db.init(dbPath)
     const k = await db.getKey('app', 'encryptedField')
     expect(k).toBe('HNEETQf+9An6saxmA/X8zg==')
-    isEncrypted = await db.isKeyEncrypted('app', 'encryptedField')
-    expect(isEncrypted).toBe(true)
+    isDecrypted = await db.hasBeenDecrypted('app', 'encryptedField')
+    expect(isDecrypted).toBe(false)
     await db.setEncryptionKey('app', 'encryptedField', 'passw0rd')
-    isEncrypted = await db.isKeyEncrypted('app', 'encryptedField')
-    expect(isEncrypted).toBe(false)
+    isDecrypted = await db.hasBeenDecrypted('app', 'encryptedField')
+    expect(isDecrypted).toBe(true)
     const value = await db.getKey('app', 'encryptedField')
     expect(value).toEqual({ some: 'data' })
   })

@@ -71,8 +71,8 @@ async function init() {
   // FIXME IMO init() really should only be for window. any other case is a hack!
   const isMainWindow = remote.getCurrentWindow().name === 'MainWindow'
 
-  const isAccountsEncrypted = await db.isKeyEncrypted('app', 'accounts')
-  if (isAccountsEncrypted) {
+  const isAccountsDecrypted = await db.hasBeenDecrypted('app', 'accounts')
+  if (!isAccountsDecrypted) {
     store.dispatch(lock())
   } else {
     await store.dispatch(fetchAccounts())

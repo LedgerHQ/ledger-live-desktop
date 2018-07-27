@@ -173,19 +173,19 @@ async function setNamespace(ns: string, value: any) {
 }
 
 /**
- * Check if a key is encrypted
+ * Check if a key has been decrypted
  *
  * /!\ it consider encrypted if it's string and can't JSON.parse, so
  *     can brings false-positive if bad used
  */
-async function isKeyEncrypted(ns: string, keyPath: string): Promise<boolean> {
+async function hasBeenDecrypted(ns: string, keyPath: string): Promise<boolean> {
   const v = await getKey(ns, keyPath)
-  if (typeof v !== 'string') return false
+  if (typeof v !== 'string') return true
   try {
     JSON.parse(v)
-    return false
-  } catch (err) {
     return true
+  } catch (err) {
+    return false
   }
 }
 
@@ -283,7 +283,7 @@ export default {
   getKey,
   getNamespace,
   setNamespace,
-  isKeyEncrypted,
+  hasBeenDecrypted,
   save,
   cleanCache,
   resetAll,

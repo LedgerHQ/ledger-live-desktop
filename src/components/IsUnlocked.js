@@ -112,9 +112,9 @@ class IsUnlocked extends Component<Props, State> {
     const { unlock, fetchAccounts } = this.props
     const { inputValue } = this.state
 
-    const isAccountsEncrypted = await db.isKeyEncrypted('app', 'accounts')
+    const isAccountsDecrypted = await db.hasBeenDecrypted('app', 'accounts')
     try {
-      if (isAccountsEncrypted) {
+      if (!isAccountsDecrypted) {
         await db.setEncryptionKey('app', 'accounts', inputValue.password)
         await fetchAccounts()
       } else if (!db.isEncryptionKeyCorrect('app', 'accounts', inputValue.password)) {
