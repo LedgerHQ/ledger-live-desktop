@@ -41,3 +41,8 @@ export const updateAccount: UpdateAccount = payload => ({
 })
 
 export const cleanAccountsCache = () => ({ type: 'DB:CLEAN_ACCOUNTS_CACHE' })
+
+export const reorderAccountByIndex = (payload: { from: number, to: number }) => ({
+  type: 'DB:REORDER_ACCOUNT_BY_INDEX',
+  payload,
+})

@@ -21,6 +21,16 @@ const handlers: Object = {
   REORDER_ACCOUNTS: (state: AccountsState, { payload }: { payload: string[] }) =>
     state.slice(0).sort((a, b) => payload.indexOf(a.id) - payload.indexOf(b.id)),
 
+  REORDER_ACCOUNT_BY_INDEX: (
+    state: AccountsState,
+    { payload: { from, to } }: { payload: { from: number, to: number } },
+  ) => {
+    const copy = [...state]
+    const [removed] = copy.splice(from, 1)
+    copy.splice(to, 0, removed)
+    return copy
+  },
+
   ADD_ACCOUNT: (
     state: AccountsState,
     { payload: account }: { payload: Account },

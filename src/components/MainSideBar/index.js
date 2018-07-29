@@ -19,6 +19,7 @@ import { i } from 'helpers/staticPath'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { getUpdateStatus } from 'reducers/update'
+import { reorderAccountByIndex } from 'actions/accounts'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
@@ -43,6 +44,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   push,
   openModal,
+  reorderAccountByIndex,
 }
 
 type Props = {
@@ -52,6 +54,7 @@ type Props = {
   push: string => void,
   openModal: string => void,
   updateStatus: UpdateStatus,
+  reorderAccountByIndex: ({ from: number, to: number }) => void,
 }
 
 class MainSideBar extends PureComponent<Props> {
@@ -81,7 +84,7 @@ class MainSideBar extends PureComponent<Props> {
   handleOpenImportModal = () => this.props.openModal(MODAL_ADD_ACCOUNTS)
 
   render() {
-    const { t, accounts, location, updateStatus } = this.props
+    const { t, accounts, location, updateStatus, reorderAccountByIndex } = this.props
     const { pathname } = location
 
     const addAccountButton = (
@@ -139,6 +142,7 @@ class MainSideBar extends PureComponent<Props> {
             title={t('app:sidebar.accounts', { count: accounts.length })}
             titleRight={addAccountButton}
             emptyState={this.ADD_ACCOUNT_EMPTY_STATE}
+            onReorder={reorderAccountByIndex}
           >
             {accounts.map(account => (
               <AccountListItem
