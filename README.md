@@ -10,7 +10,7 @@
 
 ## Architecture
 
-Ledger Live is an hybrid desktop application built with Electron, React, Redux, RxJS,.. and highly optimized with [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) C++ library to deal with blockchains (sync, broadcast,..) via [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings). It communicates to Ledger hardware wallet devices (Nano S / Blue) to verify address and sign transactions with [ledgerjs](https://github.com/LedgerHQ/ledgerjs). Some logic is shared with [live-common](https://github.com/LedgerHQ/ledger-live-common).
+Ledger Live is an hybrid desktop application built with Electron, React, Redux, RxJS,.. and highly optimized with [lib-ledger-core](https://github.com/LedgerHQ/lib-ledger-core) C++ library to deal with blockchains (sync, broadcast,..) via [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings). It communicates to Ledger hardware wallet devices (Nano S / Blue) to verify address and sign transactions with [ledgerjs](https://github.com/LedgerHQ/ledgerjs). Some logic is shared with [ledger-live-common](https://github.com/LedgerHQ/ledger-live-common).
 
 <p align="center">
  <img src="/docs/architecture.png" width="550"/>
@@ -18,8 +18,8 @@ Ledger Live is an hybrid desktop application built with Electron, React, Redux, 
 
 ### Coins
 
-- supported by [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) (C++) implementation: BTC BCH LTC DASH QTUM ZEC BTG STRAT DOGE DGB HSR KMD PIVX ZEN VTC PPC VIA XST POSW CLUB
-- supported by JavaScript implementation: ETH, ETC, XRP
+- supported by [lib-ledger-core](https://github.com/LedgerHQ/lib-ledger-core) (C++) implementation: BCH BTC BTG CLUB DASH DGB DOGE HSR KMD LTC PIVX POSW PPC QTUM STRAT VIA VTC XST ZEC ZEN
+- supported by [ledger-live-common](https://github.com/LedgerHQ/ledger-live-common) (JavaScript) implementation: ETC ETH UBQ XRP
 
 ## Setup
 
