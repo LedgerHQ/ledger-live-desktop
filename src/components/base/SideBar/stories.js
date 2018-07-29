@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
@@ -56,6 +57,12 @@ const SIDEBAR_ITEMS = [
 
 stories.add('SideBarList', () => (
   <SideBarList>
+    {SIDEBAR_ITEMS.map(item => <SideBarListItem key={item.key} {...item} />)}
+  </SideBarList>
+))
+
+stories.add('SideBarList - draggable', () => (
+  <SideBarList onReorder={action('onReorder')}>
     {SIDEBAR_ITEMS.map(item => <SideBarListItem key={item.key} {...item} />)}
   </SideBarList>
 ))
