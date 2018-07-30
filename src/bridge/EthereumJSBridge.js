@@ -199,7 +199,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         const freshAddress = address
         const accountId = `ethereumjs:${currency.id}:${address}:${publicKey}`
 
-        if (txs.length === 0) {
+        if (txs.length === 0 && balance.isZero()) {
           // this is an empty account
           if (isStandard) {
             if (newAccountCount === 0) {
