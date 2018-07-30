@@ -79,10 +79,9 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State>
       items = items.sort((a, b) => a.blockCount - b.blockCount)
     }
     items.push(customItem)
-    const selectedItem =
-      prevState.selectedItem.feePerByte === feePerByte
-        ? prevState.selectedItem
-        : items.find(f => f.feePerByte === feePerByte) || items[items.length - 1]
+    const selectedItem = prevState.selectedItem.feePerByte.eq(feePerByte)
+      ? prevState.selectedItem
+      : items.find(f => f.feePerByte.eq(feePerByte)) || items[items.length - 1]
     return { items, selectedItem }
   }
 
