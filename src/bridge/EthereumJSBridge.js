@@ -199,7 +199,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         const freshAddress = address
         const accountId = `ethereumjs:${currency.id}:${address}:${publicKey}`
 
-        if (txs.length === 0) {
+        if (txs.length === 0 && balance.isZero()) {
           // this is an empty account
           if (isStandard) {
             if (newAccountCount === 0) {
@@ -322,17 +322,18 @@ const EthereumBridge: WalletBridge<Transaction> = {
             const blockHash = operations.length > 0 ? operations[0].blockHash : undefined
             const { txs } = await api.getTransactions(freshAddress, blockHash)
             if (unsubscribed) return
+            const balance = await api.getAccountBalance(freshAddress)
+            if (unsubscribed) return
             if (txs.length === 0) {
               o.next(a => ({
                 ...a,
+                balance,
                 blockHeight: block.height,
                 lastSyncDate: new Date(),
               }))
               o.complete()
               return
             }
-            const balance = await api.getAccountBalance(freshAddress)
-            if (unsubscribed) return
             const nonce = await api.getAccountNonce(freshAddress)
             if (unsubscribed) return
             o.next(a => {
