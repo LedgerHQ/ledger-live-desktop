@@ -9,7 +9,7 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 
 import logger from 'logger'
-import { promisify } from 'helpers/promise'
+import { promisify, debounce } from 'helpers/promise'
 
 import { NoDBPathGiven, DBWrongPassword } from 'config/errors'
 
@@ -24,12 +24,13 @@ const writeFileAtomic = promisify(writeFileAtomicModule)
 
 const ALGORITHM = 'aes-256-cbc'
 
-let queue = Promise.resolve()
-
 let DBPath = null
 let memoryNamespaces = {}
 let encryptionKeys = {}
 let transforms = {}
+
+const DEBOUNCE_MS = process.env.NODE_ENV === 'test' ? 1 : 500
+const save = debounce(saveToDisk, DEBOUNCE_MS)
 
 /**
  * Reset memory state, db path, encryption keys, transforms..
@@ -230,11 +231,6 @@ async function saveToDisk(ns: string) {
 
   const fileContent = JSON.stringify({ data: clone })
   await writeFileAtomic(path.resolve(DBPath, `${ns}.json`), fileContent)
-}
-
-function save(ns: string) {
-  queue = queue.then(() => saveToDisk(ns))
-  return queue
 }
 
 async function cleanCache() {
