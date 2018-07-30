@@ -84,6 +84,7 @@ type Props = {
   value: BigNumber,
   showAllDigits?: boolean,
   subMagnitude: number,
+  allowZero: boolean,
 }
 
 type State = {
@@ -100,6 +101,7 @@ class InputCurrency extends PureComponent<Props, State> {
     value: BigNumber(0),
     showAllDigits: false,
     subMagnitude: 0,
+    allowZero: false,
   }
 
   state = {
@@ -153,11 +155,11 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   syncInput = ({ isFocused }: { isFocused: boolean }) => {
-    const { value, showAllDigits, subMagnitude, unit } = this.props
+    const { value, showAllDigits, subMagnitude, unit, allowZero } = this.props
     this.setState({
       isFocused,
       displayValue:
-        !value || value.isZero()
+        (!value || value.isZero()) && !allowZero
           ? ''
           : format(unit, value, { isFocused, showAllDigits, subMagnitude }),
     })
