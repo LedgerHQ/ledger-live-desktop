@@ -72,3 +72,29 @@ export const promisify = (fn: any) => (...args: any) =>
       return resolve(res)
     }),
   )
+
+export const debounce = (fn: any => any, ms: number) => {
+  let timeout
+  let resolveRefs = []
+  let rejectRefs = []
+  return (...args: any) => {
+    const promise = new Promise((resolve, reject) => {
+      resolveRefs.push(resolve)
+      rejectRefs.push(reject)
+    })
+    if (timeout) {
+      clearTimeout(timeout)
+    }
+    timeout = setTimeout(async () => {
+      try {
+        const res = await fn(...args)
+        resolveRefs.forEach(r => r(res))
+      } catch (err) {
+        rejectRefs.forEach(r => r(err))
+      }
+      resolveRefs = []
+      rejectRefs = []
+    }, ms)
+    return promise
+  }
+}
