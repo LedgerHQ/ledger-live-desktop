@@ -24,12 +24,10 @@ runJob \
   "error cloning AUR repository"
 
 runJob \
-  "cp build/linux/arch/* \"${tmpDir}\"; cp build/linux/arch/.SRCINFO \"${tmpDir}\"" \
+  "cp build/linux/arch/{ledger-live.desktop,PKGBUILD,.SRCINFO} \"${tmpDir}\"" \
   "copying files" \
   "copied files" \
   "error copying files"
-
-ls -l "$tmpDir"
 
 # shellcheck disable=SC2164
 cd "$tmpDir"
