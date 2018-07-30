@@ -53,7 +53,9 @@ const customItem = {
 
 type State = { isFocused: boolean, items: FeeItem[], selectedItem: FeeItem }
 
-class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State> {
+type OwnProps = Props & { fees?: Fees, error?: Error }
+
+class FeesField extends Component<OwnProps, State> {
   state = {
     items: [customItem],
     selectedItem: customItem,
@@ -85,10 +87,10 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State>
     return { items, selectedItem }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate({ fees: prevFees }: OwnProps) {
     const { feePerByte, fees, onChange } = this.props
     const { items, isFocused } = this.state
-    if (fees && feePerByte.isZero() && !isFocused) {
+    if (fees && fees !== prevFees && feePerByte.isZero() && !isFocused) {
       // initialize with the median
       const feePerByte = (items.find(item => item.blockCount === defaultBlockCount) || items[0])
         .feePerByte
@@ -140,6 +142,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, State>
               {t('app:send.steps.amount.unitPerByte', { unit: satoshi.code })}
             </InputRight>
           }
+          allowZero
         />
       </GenericContainer>
     )

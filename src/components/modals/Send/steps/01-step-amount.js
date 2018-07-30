@@ -138,7 +138,7 @@ export class StepAmountFooter extends PureComponent<
         .checkCanBeSpent(account, transaction)
         .then(() => true, () => false)
       if (syncId !== this.syncId) return
-      const canNext = isRecipientValid && canBeSpent
+      const canNext = isRecipientValid && canBeSpent && totalSpent.gt(0)
       this.setState({ totalSpent, canNext, isSyncing: false })
     } catch (err) {
       logger.critical(err)

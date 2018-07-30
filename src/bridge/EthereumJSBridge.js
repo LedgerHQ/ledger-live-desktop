@@ -404,7 +404,10 @@ const EthereumBridge: WalletBridge<Transaction> = {
       ? Promise.resolve()
       : Promise.reject(new NotEnoughBalance()),
 
-  getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit))),
+  getTotalSpent: (a, t) =>
+    t.amount.isGreaterThan(0) && t.gasPrice.isGreaterThan(0) && t.gasLimit.isGreaterThan(0)
+      ? Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit)))
+      : Promise.resolve(BigNumber(0)),
 
   getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.gasPrice.times(t.gasLimit))),
 

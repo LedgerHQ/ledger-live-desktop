@@ -197,7 +197,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   checkCanBeSpent,
 
   getTotalSpent: (a, t) =>
-    !t.amount
+    t.amount.isZero()
       ? Promise.resolve(BigNumber(0))
       : getFees(a, t)
           .then(totalFees => t.amount.plus(totalFees || 0))
