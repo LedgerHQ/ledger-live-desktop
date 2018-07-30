@@ -1,5 +1,6 @@
 // @flow
 import invariant from 'invariant'
+import { BigNumber } from 'bignumber.js'
 import { Observable } from 'rxjs'
 import React from 'react'
 import bs58check from 'ripple-bs58check'
@@ -25,9 +26,9 @@ import type { WalletBridge, EditProps } from './types'
 const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 type Transaction = {
-  amount: number,
+  amount: BigNumber,
   recipient: string,
-  fee: number,
+  fee: BigNumber,
   tag: ?number,
 }
 
@@ -197,11 +198,11 @@ const txToOperation = (account: Account) => ({
   specification: { source, destination },
 }: Tx): ?Operation => {
   const type = source.address === account.freshAddress ? 'OUT' : 'IN'
-  let value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : 0
+  let value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : BigNumber(0)
   const feeValue = parseAPIValue(fee)
   if (type === 'OUT') {
     if (!isNaN(feeValue)) {
-      value += feeValue
+      value = value.plus(feeValue)
     }
   }
 
@@ -293,7 +294,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
                     name: getNewAccountPlaceholderName(currency, index),
                     freshAddress,
                     freshAddressPath,
-                    balance: 0,
+                    balance: BigNumber(0),
                     blockHeight: maxLedgerVersion,
                     index,
                     currency,
@@ -310,8 +311,8 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               if (finished) return
               const balance = parseAPIValue(info.xrpBalance)
               invariant(
-                !isNaN(balance) && isFinite(balance),
-                `Ripple: invalid balance=${balance} for address ${address}`,
+                !balance.isNaN() && balance.isFinite(),
+                `Ripple: invalid balance=${balance.toString()} for address ${address}`,
               )
 
               const transactions = await api.getTransactions(address, {
@@ -394,8 +395,8 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
           const balance = parseAPIValue(info.xrpBalance)
           invariant(
-            !isNaN(balance) && isFinite(balance),
-            `Ripple: invalid balance=${balance} for address ${freshAddress}`,
+            !balance.isNaN() && balance.isFinite(),
+            `Ripple: invalid balance=${balance.toString()} for address ${freshAddress}`,
           )
 
           o.next(a => ({ ...a, balance }))
@@ -450,9 +451,9 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
 
   createTransaction: () => ({
-    amount: 0,
+    amount: BigNumber(0),
     recipient: '',
-    fee: 0,
+    fee: BigNumber(0),
     tag: undefined,
   }),
 
@@ -474,19 +475,24 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
+  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
 
   checkCanBeSpent: async (a, t) => {
     const r = await getServerInfo(a.endpointConfig)
-    if (t.amount + t.fee + parseAPIValue(r.validatedLedger.reserveBaseXRP) <= a.balance) {
+    if (
+      t.amount
+        .plus(t.fee)
+        .plus(parseAPIValue(r.validatedLedger.reserveBaseXRP))
+        .isLessThanOrEqualTo(a.balance)
+    ) {
       return
     }
     throw new NotEnoughBalance()
   },
 
-  getTotalSpent: (a, t) => Promise.resolve(t.amount + t.fee),
+  getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.fee)),
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance - t.fee),
+  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.fee)),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {

@@ -85,7 +85,7 @@ export default function handleMouseEvents({
       return
     }
     onTooltipUpdate(d)
-    NODES.focus.attr('transform', `translate(${x(d.parsedDate)},${y(d.value)})`)
+    NODES.focus.attr('transform', `translate(${x(d.parsedDate)},${y(d.value.toNumber())})`)
     NODES.tooltip
       .html(
         renderToString(

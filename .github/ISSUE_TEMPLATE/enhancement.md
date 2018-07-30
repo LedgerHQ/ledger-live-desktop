@@ -1,10 +1,10 @@
 ---
 name: 🗣 Start a Discussion
-about: Discuss to propose changes to improve the state of Ledger Live.
+about: Discuss changes to improve the state of Ledger Live. Please keep one issue per topic.
 ---
 
 <!-- DESCRIPTION: Explain precisely what you think should be improved and how you think it should work -->
-
+<!-- One topic at a time, use more issues if needed -->
 
 
 #### Ledger Live Version

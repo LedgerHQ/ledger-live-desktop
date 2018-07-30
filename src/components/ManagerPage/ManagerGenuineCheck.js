@@ -22,7 +22,7 @@ class ManagerGenuineCheck extends PureComponent<Props> {
   render() {
     const { t, onSuccess } = this.props
     return (
-      <Box align="center" py={7}>
+      <Box align="center" py={7} selectable>
         <TrackPage category="Manager" name="Genuine Check" />
         <Box align="center" style={{ maxWidth: 460 }}>
           <img
@@ -38,7 +38,7 @@ class ManagerGenuineCheck extends PureComponent<Props> {
           </Text>
         </Box>
         <Space of={40} />
-        <GenuineCheck shouldRenderRetry onSuccess={onSuccess} />
+        <GenuineCheck shouldRenderRetry onSuccess={onSuccess} style={{ width: 400 }} />
       </Box>
     )
   }

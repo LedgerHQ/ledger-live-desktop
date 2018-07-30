@@ -1,6 +1,5 @@
 // @flow
 
-import bcrypt from 'bcryptjs'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -8,22 +7,26 @@ import { remote } from 'electron'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 
-import type { SettingsState as Settings } from 'reducers/settings'
 import type { T } from 'types/common'
 import { i } from 'helpers/staticPath'
 import IconTriangleWarning from 'icons/TriangleWarning'
-import get from 'lodash/get'
 
-import { setEncryptionKey } from 'helpers/db'
+import db from 'helpers/db'
 import hardReset from 'helpers/hardReset'
 
 import { fetchAccounts } from 'actions/accounts'
 import { isLocked, unlock } from 'reducers/application'
 
+import { createCustomErrorClass } from 'helpers/errors'
+
 import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
+import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
+import IconArrowRight from 'icons/ArrowRight'
 import Button from './base/Button/index'
 import ConfirmModal from './base/Modal/ConfirmModal'
+
+const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type InputValue = {
   password: string,
@@ -33,20 +36,18 @@ type Props = {
   children: any,
   fetchAccounts: Function,
   isLocked: boolean,
-  settings: Settings,
   t: T,
   unlock: Function,
 }
 type State = {
   inputValue: InputValue,
-  incorrectPassword: boolean,
+  incorrectPassword: ?Error,
   isHardResetting: boolean,
   isHardResetModalOpened: boolean,
 }
 
 const mapStateToProps = state => ({
   isLocked: isLocked(state),
-  settings: state.settings,
 })
 
 const mapDispatchToProps: Object = {
@@ -58,22 +59,18 @@ const defaultState = {
   inputValue: {
     password: '',
   },
-  incorrectPassword: false,
+  incorrectPassword: null,
   isHardResetting: false,
   isHardResetModalOpened: false,
 }
 
 export const PageTitle = styled(Box).attrs({
-  width: 152,
-  height: 27,
   ff: 'Museo Sans|Regular',
   fontSize: 7,
   color: 'dark',
 })``
 
 export const LockScreenDesc = styled(Box).attrs({
-  width: 340,
-  height: 36,
   ff: 'Open Sans|Regular',
   fontSize: 4,
   textAlign: 'center',
@@ -104,25 +101,27 @@ class IsUnlocked extends Component<Props, State> {
         ...prev.inputValue,
         [key]: value,
       },
-      incorrectPassword: false,
+      incorrectPassword: null,
     }))
 
   handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { settings, unlock, fetchAccounts } = this.props
+    const { unlock, fetchAccounts } = this.props
     const { inputValue } = this.state
 
-    if (bcrypt.compareSync(inputValue.password, get(settings, 'password.value'))) {
-      setEncryptionKey('accounts', inputValue.password)
-      await fetchAccounts()
+    const isAccountsDecrypted = await db.hasBeenDecrypted('app', 'accounts')
+    try {
+      if (!isAccountsDecrypted) {
+        await db.setEncryptionKey('app', 'accounts', inputValue.password)
+        await fetchAccounts()
+      } else if (!db.isEncryptionKeyCorrect('app', 'accounts', inputValue.password)) {
+        throw new PasswordIncorrectError()
+      }
       unlock()
-
-      this.setState({
-        ...defaultState,
-      })
-    } else {
-      this.setState({ incorrectPassword: true })
+      this.setState(defaultState)
+    } catch (err) {
+      this.setState({ incorrectPassword: new PasswordIncorrectError() })
     }
   }
 
@@ -152,33 +151,42 @@ class IsUnlocked extends Component<Props, State> {
         <Box sticky alignItems="center" justifyContent="center">
           <form onSubmit={this.handleSubmit}>
             <Box align="center">
-              <div
-                style={{
-                  padding: 14,
-                  backgroundColor: 'white',
-                  borderRadius: 80,
-                  fontSize: 0,
-                  marginBottom: 40,
-                  boxShadow: '0 2px 23px 0 rgba(0, 0, 0, 0.08)',
-                }}
-              >
-                <img alt="" src={i('ledgerlive-logo.svg')} width={50} height={50} />
-              </div>
+              <LedgerLiveLogo
+                style={{ marginBottom: 40 }}
+                icon={
+                  <img
+                    src={i('ledgerlive-logo.svg')}
+                    alt=""
+                    draggable="false"
+                    width={50}
+                    height={50}
+                  />
+                }
+              />
               <PageTitle>{t('app:common.lockScreen.title')}</PageTitle>
               <LockScreenDesc>
                 {t('app:common.lockScreen.subTitle')}
                 <br />
                 {t('app:common.lockScreen.description')}
               </LockScreenDesc>
-              <Box style={{ minWidth: 230 }}>
-                <InputPassword
-                  autoFocus
-                  placeholder={t('app:common.lockScreen.inputPlaceholder')}
-                  type="password"
-                  onChange={this.handleChangeInput('password')}
-                  value={inputValue.password}
-                  error={incorrectPassword && t('app:password.errorMessageIncorrectPassword')}
-                />
+              <Box horizontal align="center">
+                <Box style={{ width: 280 }}>
+                  <InputPassword
+                    autoFocus
+                    placeholder={t('app:common.lockScreen.inputPlaceholder')}
+                    type="password"
+                    onChange={this.handleChangeInput('password')}
+                    value={inputValue.password}
+                    error={incorrectPassword}
+                  />
+                </Box>
+                <Box ml={2}>
+                  <Button style={{ width: 38, height: 38 }} primary onClick={this.handleSubmit}>
+                    <Box style={{ alignItems: 'center' }}>
+                      <IconArrowRight size={16} />
+                    </Box>
+                  </Button>
+                </Box>
               </Box>
               <Button type="button" mt={3} small onClick={this.handleOpenHardResetModal}>
                 {t('app:common.lockScreen.lostPassword')}

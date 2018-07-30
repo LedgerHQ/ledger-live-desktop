@@ -6,7 +6,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise'
 import { withDevice } from 'helpers/deviceAccess'
 import installApp from 'helpers/apps/installApp'
 
-import type { LedgerScriptParams } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/types'
 
 type Input = {
   app: LedgerScriptParams,

@@ -62,7 +62,7 @@ const Container = styled(Tabbable).attrs({
   px: 3,
   py: 2,
 })`
-  cursor: ${p => (p.disabled ? 'not-allowed' : p.isActive ? 'default' : 'pointer')};
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'default')};
   color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
   background: ${p => (p.isActive ? p.theme.colors.lightGrey : '')};
   opacity: ${p => (p.disabled ? 0.5 : 1)};

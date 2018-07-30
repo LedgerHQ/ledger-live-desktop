@@ -1,5 +1,6 @@
 // @flow
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import { BigNumber } from 'bignumber.js'
 import { createCustomErrorClass } from 'helpers/errors'
 import network from './network'
 import { blockchainBaseURL } from './Ledger'
@@ -39,7 +40,7 @@ export type API = {
   getCurrentBlock: () => Promise<Block>,
   getAccountNonce: (address: string) => Promise<number>,
   broadcastTransaction: (signedTransaction: string) => Promise<string>,
-  getAccountBalance: (address: string) => Promise<number>,
+  getAccountBalance: (address: string) => Promise<BigNumber>,
 }
 
 export const apiForCurrency = (currency: CryptoCurrency): API => {
@@ -85,7 +86,8 @@ export const apiForCurrency = (currency: CryptoCurrency): API => {
         method: 'GET',
         url: `${baseURL}/addresses/${address}/balance`,
       })
-      return data[0].balance
+      // FIXME precision lost here. nothing we can do easily
+      return BigNumber(data[0].balance)
     },
   }
 }

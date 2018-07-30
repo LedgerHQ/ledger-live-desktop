@@ -28,7 +28,6 @@ const Back = styled(Box).attrs({
   fontSize: 3,
   p: 4,
 })`
-  cursor: pointer;
   position: absolute;
   line-height: 1;
   top: 0;

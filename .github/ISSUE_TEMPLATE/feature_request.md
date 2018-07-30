@@ -5,9 +5,7 @@ about: Any feature you find missing in Ledger Live? Discuss to suggest feature r
 
 - [ ] I have checked this feature was not yet requested.
 
-<!-- DESCRIPTION: Explain precisely what is the feature about -->
-
-
+<!-- DESCRIPTION: Explain precisely what is the feature about. One topic at a time. use more issues if needed -->
 
 #### Part of the application
 

@@ -6,10 +6,7 @@ import { fromPromise } from 'rxjs/observable/fromPromise'
 import { withDevice } from 'helpers/deviceAccess'
 import getAddressForCurrency from 'helpers/getAddressForCurrency'
 
-import { createCustomErrorClass } from 'helpers/errors'
-
-const DeviceAppVerifyNotSupported = createCustomErrorClass('DeviceAppVerifyNotSupported')
-const UserRefusedAddress = createCustomErrorClass('UserRefusedAddress')
+import { DeviceAppVerifyNotSupported, UserRefusedAddress } from 'config/errors'
 
 type Input = {
   currencyId: string,

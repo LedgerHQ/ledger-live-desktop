@@ -4,11 +4,15 @@ import styled from 'styled-components'
 import React, { Fragment, PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
+import { urls } from 'config/urls'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import DeviceConfirm from 'components/DeviceConfirm'
+import ExternalLinkButton from 'components/base/ExternalLinkButton'
+import RetryButton from 'components/base/RetryButton'
 import type { StepProps } from '../index'
 import TranslatedError from '../../../TranslatedError'
+import DebugAppInfosForCurrency from '../../../DebugAppInfosForCurrency'
 
 export default class StepConfirmAddress extends PureComponent<StepProps> {
   render() {
@@ -18,6 +22,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
         <TrackPage category="Receive Flow" name="Step 3" />
         {isAddressVerified === false ? (
           <Fragment>
+            {account ? <DebugAppInfosForCurrency currencyId={account.currency.id} /> : null}
             <TrackPage category="Receive Flow" name="Step 3 Address Not Verified Error" />
             <Title>
               <TranslatedError error={verifyAddressError} />
@@ -35,7 +40,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
                 t('app:receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
             </Text>
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
-              {t('app:buttons.displayAddressOnDevice')}
+              {t('app:common.verify')}
             </Button>
             <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
           </Fragment>
@@ -45,14 +50,16 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
   }
 }
 
-export function StepConfirmAddressFooter({ t, transitionTo, onRetry, contactUs }: StepProps) {
+export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps) {
   // This will be displayed only if user rejected address
   return (
     <Fragment>
-      <Button onClick={contactUs} event="Receive Flow Step 3 Contact Us Clicked">
-        {t('app:receive.steps.confirmAddress.support')}
-      </Button>
-      <Button
+      <ExternalLinkButton
+        event="Receive Flow Step 3 Contact Us Clicked"
+        label={t('app:receive.steps.confirmAddress.support')}
+        url={urls.contactSupport}
+      />
+      <RetryButton
         ml={2}
         primary
         event="Receive Flow Step 3 Retry Clicked"
@@ -60,9 +67,7 @@ export function StepConfirmAddressFooter({ t, transitionTo, onRetry, contactUs }
           onRetry()
           transitionTo('device')
         }}
-      >
-        {t('app:common.retry')}
-      </Button>
+      />
     </Fragment>
   )
 }

@@ -1,47 +1,25 @@
 version: 2
 
-docker_defaults: &docker_defaults
+defaults: &defaults
+  working_directory: ~/ledger-live-desktop
   docker:
-    - image: circleci/node:9.5
+    - image: circleci/node:8.11.3-stretch-browsers
 
 jobs:
   build:
-    <<: *docker_defaults
-    branches:
-      ignore:
-        - gh-pages
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
-          name: Restore Yarn Package Cache
           keys:
-            - v2-yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: bash scripts/install-ci-deps.sh
+            - v7-yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install
       - save_cache:
-          name: Save Yarn Package Cache
-          key: v2-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v7-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules/
-      - run:
-          name: Lint
-          command: yarn lint
-      - run:
-          name: Prettier
-          command: ./node_modules/.bin/prettier -l "{src,webpack,.storybook}/**/*.js"
-      - run:
-          name: Flow
-          command: yarn flow --quiet
-      # - run:
-      #     name: Test
-      #     command: yarn test
-      # - run:
-      #     name: Build
-      #     command: yarn dist:dir
-      # - run:
-      #     name: Generate build stats
-      #     command: "du -h dist | sort -h > /tmp/build-stats.txt"
-      # - store_artifacts:
-      #     path: /tmp/build-stats.txt
-      #     destination: build-stats.txt
+            - node_modules
+      - run: yarn lint
+      - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
+      - run: yarn flow --quiet
+      - run: yarn test
+      - run: yarn release

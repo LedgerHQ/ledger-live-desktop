@@ -150,7 +150,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               <Box my={4} alignItems="center">
                 <Box>
                   <FormattedVal
-                    color={amount < 0 ? 'smoke' : undefined}
+                    color={amount.isNegative() ? 'smoke' : undefined}
                     unit={unit}
                     alwaysShowSign
                     showCode
@@ -269,7 +269,6 @@ const More = styled(Text).attrs({
   tabIndex: 0,
 })`
   text-transform: ${p => (!p.textTransform ? 'auto' : 'uppercase')};
-  cursor: pointer;
   outline: none;
 `
 

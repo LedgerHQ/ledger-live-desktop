@@ -11,8 +11,9 @@ import GrowScroll from 'components/base/GrowScroll'
 import Text from 'components/base/Text'
 import Spinner from 'components/base/Spinner'
 import GradientBox from 'components/GradientBox'
+import TranslatedError from 'components/TranslatedError'
 import TrackPage from 'analytics/TrackPage'
-import Markdow, { Notes } from 'components/base/Markdown'
+import Markdown, { Notes } from 'components/base/Markdown'
 import { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
 
 import type { T } from 'types/common'
@@ -77,16 +78,23 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
 
     if (notes) {
       return notes.map(note => (
-        <Notes mb={6}>
+        <Notes mb={6} key={note.tag_name}>
           <Title>{t('app:releaseNotes.version', { versionNb: note.tag_name })}</Title>
-          <Markdow>{note.body}</Markdow>
+          <Markdown>{note.body}</Markdown>
         </Notes>
       ))
     } else if (error) {
       return (
         <Notes>
           <Title>{t('app:releaseNotes.version', { versionNb: version })}</Title>
-          <Markdow>{t('app:common.error.load')}</Markdow>
+          <Box
+            style={{ wordWrap: 'break-word' }}
+            color="alertRed"
+            ff="Open Sans|SemiBold"
+            fontSize={3}
+          >
+            <TranslatedError error={error} />
+          </Box>
         </Notes>
       )
     }

@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
+import { BigNumber } from 'bignumber.js'
 
 import logger from 'logger'
 import Box from 'components/base/Box'
@@ -83,14 +84,14 @@ export default ({
 export class StepAmountFooter extends PureComponent<
   StepProps<*>,
   {
-    totalSpent: number,
+    totalSpent: BigNumber,
     canNext: boolean,
     isSyncing: boolean,
   },
 > {
   state = {
     isSyncing: false,
-    totalSpent: 0,
+    totalSpent: BigNumber(0),
     canNext: false,
   }
 
@@ -141,7 +142,7 @@ export class StepAmountFooter extends PureComponent<
       this.setState({ totalSpent, canNext, isSyncing: false })
     } catch (err) {
       logger.critical(err)
-      this.setState({ totalSpent: 0, canNext: false, isSyncing: false })
+      this.setState({ totalSpent: BigNumber(0), canNext: false, isSyncing: false })
     }
   }
 

@@ -35,7 +35,7 @@ class SideBarList extends Component<Props> {
             {children}
           </ListWrapper>
         ) : emptyState ? (
-          <Box px={4} ff="Open Sans|Regular" fontSize={3} color="grey">
+          <Box px={4} ff="Open Sans|Regular" selectable fontSize={3} color="grey">
             {emptyState}
           </Box>
         ) : null}

@@ -11,7 +11,9 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Spinner from 'components/base/Spinner'
+import RetryButton from 'components/base/RetryButton'
 import TranslatedError from 'components/TranslatedError'
+import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 
@@ -42,30 +44,36 @@ const Text = styled(Box).attrs({
   text-align: center;
 `
 
-export default function StepConfirmation({ t, optimisticOperation, error }: StepProps<*>) {
+export default function StepConfirmation({ account, t, optimisticOperation, error }: StepProps<*>) {
   const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
   const iconColor = optimisticOperation
     ? colors.positiveGreen
     : error
       ? colors.alertRed
       : colors.grey
-  const tPrefix = optimisticOperation
-    ? 'app:send.steps.confirmation.success'
-    : error
-      ? 'app:send.steps.confirmation.error'
-      : 'app:send.steps.confirmation.pending'
 
-  const translatedErrTitle = error ? <TranslatedError error={error} /> || '' : ''
-  const translatedErrDesc = error ? <TranslatedError error={error} field="description" /> || '' : ''
   return (
     <Container>
+      {error && account ? <DebugAppInfosForCurrency currencyId={account.currency.id} /> : null}
       <TrackPage category="Send Flow" name="Step 4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
       </span>
-      <Title>{translatedErrTitle || t(`${tPrefix}.title`)}</Title>
+      <Title>
+        {error ? (
+          <TranslatedError error={error} />
+        ) : optimisticOperation ? (
+          t('app:send.steps.confirmation.success.title')
+        ) : (
+          t('app:send.steps.confirmation.pending.title')
+        )}
+      </Title>
       <Text style={{ userSelect: 'text' }} color="smoke">
-        {optimisticOperation ? multiline(t(`${tPrefix}.text`)) : error ? translatedErrDesc : null}
+        {optimisticOperation ? (
+          multiline(t('app:send.steps.confirmation.success.text'))
+        ) : error ? (
+          <TranslatedError error={error} field="description" />
+        ) : null}
       </Text>
     </Container>
   )
@@ -101,16 +109,14 @@ export function StepConfirmationFooter({
           {t('app:send.steps.confirmation.success.cta')}
         </Button>
       ) : error ? (
-        <Button
+        <RetryButton
           ml={2}
           primary
           onClick={() => {
             onRetry()
             transitionTo('amount')
           }}
-        >
-          {t('app:send.steps.confirmation.error.cta')}
-        </Button>
+        />
       ) : null}
     </Fragment>
   )

@@ -34,7 +34,7 @@ class AmountCell extends PureComponent<Props> {
           showCode
           fontSize={4}
           alwaysShowSign
-          color={amount < 0 ? 'smoke' : undefined}
+          color={amount.isNegative() ? 'smoke' : undefined}
         />
         <CounterValue
           color="grey"

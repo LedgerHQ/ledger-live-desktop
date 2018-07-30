@@ -8,7 +8,8 @@ import logger from 'logger'
 
 import Track from 'analytics/Track'
 import Select from 'components/base/Select'
-import Text from 'components/base/Text'
+import Box from 'components/base/Box'
+import TranslatedError from 'components/TranslatedError'
 import CounterValues from 'helpers/countervalues'
 import type { T } from 'types/common'
 
@@ -101,9 +102,15 @@ class SelectExchange extends Component<
     const value = options.find(e => e.id === exchangeId)
 
     return error ? (
-      <Text ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-        {t('app:common.error.load')}
-      </Text>
+      <Box
+        style={{ wordWrap: 'break-word', width: 250 }}
+        color="alertRed"
+        ff="Open Sans|SemiBold"
+        fontSize={3}
+        textAlign="center"
+      >
+        <TranslatedError error={error} />
+      </Box>
     ) : (
       <Fragment>
         {exchanges ? (

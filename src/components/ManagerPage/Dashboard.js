@@ -23,7 +23,7 @@ type Props = {
 }
 
 const Dashboard = ({ device, deviceInfo, t, handleHelpRequest }: Props) => (
-  <Box flow={4} pb={8}>
+  <Box flow={4} pb={8} selectable>
     <TrackPage category="Manager" name="Dashboard" />
     <Box>
       <Text ff="Museo Sans|Regular" fontSize={7} color="dark">
@@ -33,12 +33,10 @@ const Dashboard = ({ device, deviceInfo, t, handleHelpRequest }: Props) => (
         <Text ff="Museo Sans|Light" fontSize={5}>
           {t('app:manager.subtitle')}
         </Text>
-        <ContainerToHover>
-          <FakeLink mr={1} underline color="grey" fontSize={4} onClick={handleHelpRequest}>
-            {t('app:common.needHelp')}
-          </FakeLink>
+        <HelpLink onClick={handleHelpRequest}>
+          <div style={{ textDecoration: 'underline' }}>{t('app:common.needHelp')}</div>
           <IconExternalLink size={14} />
-        </ContainerToHover>
+        </HelpLink>
       </Box>
     </Box>
     <Box mt={5}>
@@ -54,12 +52,15 @@ const Dashboard = ({ device, deviceInfo, t, handleHelpRequest }: Props) => (
 
 export default translate()(Dashboard)
 
-const ContainerToHover = styled(Box).attrs({
+const HelpLink = styled(FakeLink).attrs({
   align: 'center',
   ml: 'auto',
   horizontal: true,
+  flow: 1,
+  color: 'grey',
+  fontSize: 4,
 })`
-  ${FakeLink}:hover, &:hover {
+  &:hover {
     color: ${p => p.theme.colors.wallet};
   }
 `

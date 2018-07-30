@@ -1,5 +1,6 @@
 // @flow
 
+import type { BigNumber } from 'bignumber.js'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
@@ -23,7 +24,7 @@ type OwnProps = {
   // when? if not given: take latest
   date?: Date,
 
-  value: number,
+  value: BigNumber,
 
   alwaysShowSign?: boolean,
 }
@@ -61,7 +62,7 @@ class CounterValue extends PureComponent<Props> {
   }
   render() {
     const { value, counterValueCurrency, date, alwaysShowSign, ...props } = this.props
-    if (!value && value !== 0) {
+    if (!value) {
       return null
     }
     return (

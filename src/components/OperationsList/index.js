@@ -40,7 +40,6 @@ const ShowMore = styled(Box).attrs({
   p: 6,
   color: 'wallet',
 })`
-  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }

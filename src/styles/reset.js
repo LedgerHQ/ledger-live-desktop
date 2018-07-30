@@ -6,7 +6,8 @@ module.exports = `* {
   padding: 0;
   font: inherit;
   color: inherit;
-  user-select: none;
+  user-select: inherit;
+  cursor: inherit;
   min-width: 0;
   outline: none;
 
@@ -21,6 +22,8 @@ body {
   font-size: 16px;
   font-weight: 300;
   line-height: 1.5;
+  user-select: none;
+  cursor: default;
 }
 
 #app {

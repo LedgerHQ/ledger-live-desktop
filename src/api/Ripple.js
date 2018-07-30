@@ -1,5 +1,6 @@
 // @flow
 import logger from 'logger'
+import { BigNumber } from 'bignumber.js'
 import { RippleAPI } from 'ripple-lib'
 import {
   parseCurrencyUnit,
@@ -31,12 +32,12 @@ export const parseAPICurrencyObject = ({
 }) => {
   if (currency !== 'XRP') {
     logger.warn(`RippleJS: attempt to parse unknown currency ${currency}`)
-    return 0
+    return BigNumber(0)
   }
   return parseAPIValue(value)
 }
 
-export const formatAPICurrencyXRP = (amount: number) => {
+export const formatAPICurrencyXRP = (amount: BigNumber) => {
   const value = formatCurrencyUnit(rippleUnit, amount, {
     showAllDigits: true,
     disableRounding: true,

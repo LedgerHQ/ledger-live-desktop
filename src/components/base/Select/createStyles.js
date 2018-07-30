@@ -20,7 +20,7 @@ export default ({
     height: small ? 34 : 40,
     minHeight: 'unset',
     backgroundColor: 'white',
-    cursor: 'pointer',
+
     ...(isFocused
       ? {
           borderColor: colors.wallet,
@@ -53,9 +53,7 @@ export default ({
           background: 'unset !important',
           ...ff('Open Sans|SemiBold'),
         }
-      : {
-          cursor: 'pointer',
-        }),
+      : {}),
   }),
   menu: (styles: Object) => ({
     ...styles,

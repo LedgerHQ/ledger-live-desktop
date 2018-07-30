@@ -11,8 +11,9 @@ const Cell = styled(Box).attrs({
   horizontal: true,
   alignItems: 'center',
 })`
-  width: 150px;
+  flex: 1;
   overflow: hidden;
+  max-width: 400px;
 `
 
 type Props = {
@@ -43,6 +44,8 @@ const AccountNameEllipsis = styled(Box).attrs({
   color: 'dark',
   flexShrink: 1,
 })`
+  flex: 1;
+  min-width: 0;
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;

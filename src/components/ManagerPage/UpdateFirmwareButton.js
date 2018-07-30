@@ -4,8 +4,6 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-// import { EXPERIMENTAL_FIRMWARE_UPDATE } from 'config/constants'
-
 import Button from 'components/base/Button'
 import Text from 'components/base/Text'
 import { getCleanVersion } from 'components/ManagerPage/FirmwareUpdate'

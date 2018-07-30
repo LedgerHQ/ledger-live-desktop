@@ -95,7 +95,7 @@ const DeviceContainer = styled(Box).attrs({
   height: 204px;
   border: ${props => `1px solid ${props.theme.colors[props.isActive ? 'wallet' : 'fog']}`};
   &:hover {
-    cursor: pointer;
+    cursor: default; // this here needs reset because it inherits from cursor: text from parent
     background: ${p => rgba(p.theme.colors.wallet, 0.04)};
   }
 `

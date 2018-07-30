@@ -93,7 +93,7 @@ const initialState: OnboardingState = {
     },
     {
       name: 'genuineCheck',
-      label: 'onboarding:breadcrumb.genuineCheck',
+      label: 'onboarding:genuineCheck.title',
       options: {
         showBreadcrumb: true,
       },

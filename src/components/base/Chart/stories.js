@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component, Fragment } from 'react'
+import { BigNumber } from 'bignumber.js'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import Chance from 'chance'
 import moment from 'moment'
@@ -77,7 +78,7 @@ function generateRandomData(n) {
   const data = []
   const chance = new Chance()
   while (!day.isSame(today)) {
-    const value = chance.integer({ min: 0.5e8, max: 1e8 })
+    const value = BigNumber(chance.integer({ min: 0.5e8, max: 1e8 }))
     data.push({
       date: day.toDate(),
       value,

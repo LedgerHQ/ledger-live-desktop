@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import { BigNumber } from 'bignumber.js'
 import moment from 'moment'
 import { formatShort } from '@ledgerhq/live-common/lib/helpers/currencies'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
@@ -19,9 +20,9 @@ type Props = {
   daysCount: number,
   renderHeader?: ({
     selectedTimeRange: *,
-    totalBalance: number,
-    sinceBalance: number,
-    refBalance: number,
+    totalBalance: BigNumber,
+    sinceBalance: BigNumber,
+    refBalance: BigNumber,
     isAvailable: boolean,
   }) => *,
 }
@@ -64,11 +65,12 @@ const BalanceSummary = ({
                     ? balanceHistory
                     : balanceHistory.map(i => ({
                         ...i,
-                        value:
+                        value: BigNumber(
                           10000 *
-                          (1 +
-                          0.1 * Math.sin(i.date * Math.cos(i.date)) + // random-ish
-                            0.5 * Math.cos(i.date / 2000000000 + Math.sin(i.date / 1000000000))), // general curve trend
+                            (1 +
+                            0.1 * Math.sin(i.date * Math.cos(i.date)) + // random-ish
+                              0.5 * Math.cos(i.date / 2000000000 + Math.sin(i.date / 1000000000))),
+                        ), // general curve trend
                       }))
                 }
                 height={200}
@@ -76,7 +78,7 @@ const BalanceSummary = ({
                 cvCode={counterValue.ticker}
                 tickXScale={selectedTimeRange}
                 renderTickY={
-                  isAvailable ? val => formatShort(counterValue.units[0], val) : () => ''
+                  isAvailable ? val => formatShort(counterValue.units[0], BigNumber(val)) : () => ''
                 }
                 isInteractive={isAvailable}
                 renderTooltip={

@@ -1,5 +1,6 @@
 // @flow
 import { Observable } from 'rxjs'
+import { BigNumber } from 'bignumber.js'
 import type { WalletBridge } from './types'
 
 const genericError = new Error('UnsupportedBridge')
@@ -23,7 +24,7 @@ const UnsupportedBridge: WalletBridge<*> = {
 
   editTransactionAmount: () => null,
 
-  getTransactionAmount: () => 0,
+  getTransactionAmount: () => BigNumber(0),
 
   isValidTransaction: () => false,
 
@@ -33,9 +34,9 @@ const UnsupportedBridge: WalletBridge<*> = {
 
   checkCanBeSpent: () => Promise.resolve(),
 
-  getTotalSpent: () => Promise.resolve(0),
+  getTotalSpent: () => Promise.resolve(BigNumber(0)),
 
-  getMaxAmount: () => Promise.resolve(0),
+  getMaxAmount: () => Promise.resolve(BigNumber(0)),
 
   signAndBroadcast: () =>
     Observable.create(o => {
