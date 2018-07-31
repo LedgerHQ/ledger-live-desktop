@@ -1501,11 +1501,11 @@
     "@ledgerhq/hw-transport" "^4.21.0"
     bip32-path "0.4.2"
 
-"@ledgerhq/hw-transport-node-hid@^4.22.0-beta.ae6f5c51":
-  version "4.22.0-beta.ae6f5c51"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.22.0-beta.ae6f5c51.tgz#36f5515c98af437d41653e854a613c462e65d9e1"
+"@ledgerhq/hw-transport-node-hid@4.22.0-beta.a1987cb3":
+  version "4.22.0-beta.a1987cb3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.22.0-beta.a1987cb3.tgz#89dd5b30239ed81e41fd3a1a37a48d5e9cd8529b"
   dependencies:
-    "@ledgerhq/hw-transport" "^4.22.0-beta.ae6f5c51"
+    "@ledgerhq/hw-transport" "^4.22.0-beta.a1987cb3"
     lodash "^4.17.10"
     node-hid "^0.7.2"
     usb "^1.3.2"
@@ -1529,7 +1529,7 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/hw-transport@^4.22.0-beta.ae6f5c51":
+"@ledgerhq/hw-transport@^4.22.0-beta.a1987cb3":
   version "4.22.0-beta.ae6f5c51"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.22.0-beta.ae6f5c51.tgz#a9f17ff8fa792a19e01d82d72f14ff7f7a211209"
   dependencies:

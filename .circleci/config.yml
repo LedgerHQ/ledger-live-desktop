@@ -9,6 +9,7 @@ jobs:
   build:
     <<: *defaults
     steps:
+      - run: sudo apt-get install -y libudev-dev
       - checkout
       - restore_cache:
           keys:
