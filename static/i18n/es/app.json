@@ -78,7 +78,7 @@
     "menu": "Menu",
     "accounts": "Accounts ({{count}})",
     "manager": "Manager",
-    "exchange": "Exchanges"
+    "exchange": "Trade"
   },
   "account": {
     "lastOperations": "Last operations",
@@ -158,8 +158,8 @@
     }
   },
   "exchange": {
-    "title": "Exchanges",
-    "desc": "Try a few exchange services we've selected for you",
+    "title": "Trade",
+    "desc": "Try a few trading services we've selected for you",
     "visitWebsite": "Visit website",
     "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
     "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
