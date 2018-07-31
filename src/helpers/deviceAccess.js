@@ -4,6 +4,7 @@ import throttle from 'lodash/throttle'
 import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { DisconnectedDevice, CantOpenDevice } from 'config/errors'
+import { retry } from './promise'
 
 // all open to device must use openDevice so we can prevent race conditions
 // and guarantee we do one device access at a time. It also will handle the .close()
@@ -39,7 +40,10 @@ export const withDevice: WithDevice = devicePath => job => {
     busy = true
     refreshBusyUIState()
     try {
-      const t = await TransportNodeHid.open(devicePath).catch(mapError)
+      // $FlowFixMe not sure what's wrong
+      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 2 }).catch(
+        mapError,
+      )
       t.setDebugMode(logger.apdu)
       try {
         const res = await job(t).catch(mapError)
