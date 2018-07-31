@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
-import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
+import { resolveLogsDirectory } from 'helpers/log'
 import { urls } from 'config/urls'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'

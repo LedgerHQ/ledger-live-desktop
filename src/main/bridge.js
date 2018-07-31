@@ -9,7 +9,7 @@ import path from 'path'
 import logger from 'logger'
 import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
-import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
+import { resolveLogsDirectory, cleanUpBeforeClosingSync } from 'helpers/log'
 import { deserializeError } from 'helpers/errors'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
@@ -69,6 +69,7 @@ const bootInternalProcess = () => {
 
 process.on('exit', () => {
   killInternalProcess()
+  cleanUpBeforeClosingSync()
 })
 
 ipcMain.on('clean-processes', () => {
