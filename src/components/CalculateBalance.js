@@ -3,6 +3,7 @@
 
 import { Component } from 'react'
 import { connect } from 'react-redux'
+import { BigNumber } from 'bignumber.js'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { getBalanceHistorySum } from '@ledgerhq/live-common/lib/helpers/account'
@@ -23,14 +24,14 @@ type OwnProps = {
 
 type Item = {
   date: Date,
-  value: number,
-  originalValue: number,
+  value: BigNumber,
+  originalValue: BigNumber,
 }
 
 type Props = OwnProps & {
   balanceHistory: Item[],
-  balanceStart: number,
-  balanceEnd: number,
+  balanceStart: BigNumber,
+  balanceEnd: BigNumber,
   isAvailable: boolean,
   hash: string,
 }
@@ -61,15 +62,15 @@ const mapStateToProps = (state: State, props: OwnProps) => {
         toExchange: counterValueExchange,
         to: counterValueCurrency,
       })
-      if (!cv && cv !== 0) {
+      if (!cv) {
         isAvailable = false
-        return 0
+        return BigNumber(0)
       }
       return cv
     },
   ).map((item, i) =>
     // reconciliate balance history with original values
-    ({ ...item, originalValue: originalValues[i] || 0 }),
+    ({ ...item, originalValue: originalValues[i] || BigNumber(0) }),
   )
 
   const balanceEnd = balanceHistory[balanceHistory.length - 1].value
@@ -81,7 +82,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     balanceEnd,
     hash: `${props.accounts.length > 0 ? props.accounts[0].id : ''}_${
       balanceHistory.length
-    }_${balanceEnd}_${isAvailable.toString()}`,
+    }_${balanceEnd.toString()}_${isAvailable.toString()}`,
   }
 }
 

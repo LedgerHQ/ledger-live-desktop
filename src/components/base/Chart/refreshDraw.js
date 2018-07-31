@@ -39,12 +39,12 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
     .area()
     .x(d => x(d.parsedDate))
     .y0(HEIGHT)
-    .y1(d => y(d.value))
+    .y1(d => y(d.value.toNumber()))
 
   const valueline = d3
     .line()
     .x(d => x(d.parsedDate))
-    .y(d => y(d.value))
+    .y(d => y(d.value.toNumber()))
 
   // Resize container
   NODES.svg

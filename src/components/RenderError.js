@@ -17,6 +17,7 @@ import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Button from 'components/base/Button'
 import ConfirmModal from 'components/base/Modal/ConfirmModal'
+import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import IconTriangleWarning from 'icons/TriangleWarning'
 
 // SERIOUSLY plz refactor to use <ResetButton>
@@ -49,10 +50,6 @@ class RenderError extends PureComponent<
 
   github = () => {
     openURL(urls.githubIssues)
-  }
-
-  contact = () => {
-    openURL(urls.contactSupport)
   }
 
   handleRestart = () => {
@@ -96,14 +93,17 @@ class RenderError extends PureComponent<
             {t('app:crash.restart')}
           </Button>
           <ExportLogsBtn withoutAppData={withoutAppData} />
-          <Button small primary onClick={this.contact}>
-            {t('app:crash.support')}
-          </Button>
+          <ExternalLinkButton
+            small
+            primary
+            label={t('app:crash.support')}
+            url={urls.contactSupport}
+          />
           <Button small primary onClick={this.github}>
             {t('app:crash.github')}
           </Button>
           <Button small danger onClick={this.handleOpenHardResetModal}>
-            {t('app:crash.reset')}
+            {t('app:common.reset')}
           </Button>
         </Box>
         <ConfirmModal

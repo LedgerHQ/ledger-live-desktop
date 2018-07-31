@@ -2,6 +2,7 @@
 // small utilities for Promises
 
 import logger from 'logger'
+import { TimeoutTagged } from 'config/errors'
 
 export const delay = (ms: number): Promise<void> => new Promise(f => setTimeout(f, ms))
 
@@ -63,4 +64,55 @@ export function createCancelablePolling(
     poll()
   })
   return { unsubscribe, promise }
+}
+
+export const timeoutTagged = <T>(tag: string, delay: number, promise: Promise<T>): Promise<T> =>
+  new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      reject(new TimeoutTagged('timeout', { tag }))
+    }, delay)
+    promise.then(
+      r => {
+        clearTimeout(timeout)
+        resolve(r)
+      },
+      e => {
+        clearTimeout(timeout)
+        reject(e)
+      },
+    )
+  })
+
+export const promisify = (fn: any) => (...args: any) =>
+  new Promise((resolve, reject) =>
+    fn(...args, (err: Error, res: any) => {
+      if (err) return reject(err)
+      return resolve(res)
+    }),
+  )
+
+export const debounce = (fn: any => any, ms: number) => {
+  let timeout
+  let resolveRefs = []
+  let rejectRefs = []
+  return (...args: any) => {
+    const promise = new Promise((resolve, reject) => {
+      resolveRefs.push(resolve)
+      rejectRefs.push(reject)
+    })
+    if (timeout) {
+      clearTimeout(timeout)
+    }
+    timeout = setTimeout(async () => {
+      try {
+        const res = await fn(...args)
+        resolveRefs.forEach(r => r(res))
+      } catch (err) {
+        rejectRefs.forEach(r => r(err))
+      }
+      resolveRefs = []
+      rejectRefs = []
+    }, ms)
+    return promise
+  }
 }

@@ -9,7 +9,7 @@ import path from 'path'
 import logger from 'logger'
 import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
-import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
+import { resolveLogsDirectory, cleanUpBeforeClosingSync } from 'helpers/log'
 import { deserializeError } from 'helpers/errors'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
@@ -24,10 +24,15 @@ const LEDGER_CONFIG_DIRECTORY = app.getPath('userData')
 
 let internalProcess
 
+let userId = null
 let sentryEnabled = false
-const userId = user().id
 
-sentry(() => sentryEnabled, userId)
+async function init() {
+  const u = await user()
+  userId = u.id
+  sentry(() => sentryEnabled, userId)
+}
+init()
 
 const killInternalProcess = () => {
   if (internalProcess) {
@@ -64,6 +69,7 @@ const bootInternalProcess = () => {
 
 process.on('exit', () => {
   killInternalProcess()
+  cleanUpBeforeClosingSync()
 })
 
 ipcMain.on('clean-processes', () => {

@@ -9,7 +9,7 @@ import invariant from 'invariant'
 
 import type { Device, T } from 'types/common'
 
-import type { LedgerScriptParams } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/types'
 import type { StepId } from 'components/modals/UpdateFirmware'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'

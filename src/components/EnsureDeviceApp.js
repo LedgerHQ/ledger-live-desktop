@@ -11,7 +11,7 @@ import logger from 'logger'
 import getAddress from 'commands/getAddress'
 import { createCancelablePolling } from 'helpers/promise'
 import { standardDerivation } from 'helpers/derivations'
-import { isSegwitAccount } from 'helpers/bip32'
+import { isSegwitPath } from 'helpers/bip32'
 import { BtcUnmatchedApp } from 'helpers/getAddressForCurrency/btc'
 
 import DeviceInteraction from 'components/DeviceInteraction'
@@ -21,10 +21,8 @@ import IconUsb from 'icons/Usb'
 
 import type { Device } from 'types/common'
 
-import { createCustomErrorClass } from 'helpers/errors'
+import { WrongDeviceForAccount, CantOpenDevice } from 'config/errors'
 import { getCurrentDevice } from 'reducers/devices'
-
-export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 
 const usbIcon = <IconUsb size={16} />
 const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
@@ -66,7 +64,8 @@ class EnsureDeviceApp extends Component<{
         shouldThrow: (err: Error) => {
           const isWrongApp = err instanceof BtcUnmatchedApp
           const isWrongDevice = err instanceof WrongDeviceForAccount
-          return isWrongApp || isWrongDevice
+          const isCantOpenDevice = err instanceof CantOpenDevice
+          return isWrongApp || isWrongDevice || isCantOpenDevice
         },
       },
     )
@@ -125,7 +124,7 @@ async function getAddressFromAccountOrCurrency(device, account, currency) {
       path: account
         ? account.freshAddressPath
         : standardDerivation({ currency, segwit: false, x: 0 }),
-      segwit: account ? isSegwitAccount(account) : false,
+      segwit: account ? isSegwitPath(account.freshAddressPath) : false,
     })
     .toPromise()
   return address

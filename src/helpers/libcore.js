@@ -1,6 +1,9 @@
 // @flow
 
+// TODO split these into many files
+
 import logger from 'logger'
+import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
@@ -9,10 +12,11 @@ import { SHOW_LEGACY_NEW_ACCOUNT } from 'config/constants'
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
-import { isSegwitAccount, isUnsplitAccount } from 'helpers/bip32'
+import { isSegwitPath, isUnsplitPath } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
 import { createCustomErrorClass, deserializeError } from './errors'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
+import { timeoutTagged } from './promise'
 
 const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 
@@ -199,6 +203,7 @@ const coreSyncAccount = (core, account) =>
   new Promise((resolve, reject) => {
     const eventReceiver = createEventReceiver(core, e => {
       const code = e.getCode()
+      logger.debug(`syncAccountEvent ${code}`, { type: 'libcore-sync' })
       if (code === core.EVENT_CODE.UNDEFINED || code === core.EVENT_CODE.SYNCHRONIZATION_FAILED) {
         const payload = e.getPayload()
         const message = (
@@ -267,7 +272,7 @@ async function scanNextAccount(props: {
 
   const shouldSyncAccount = true // TODO: let's sync everytime. maybe in the future we can optimize.
   if (shouldSyncAccount) {
-    await coreSyncAccount(core, njsAccount)
+    await timeoutTagged('coreSyncAccount', 30000, coreSyncAccount(core, njsAccount))
   }
 
   if (isUnsubscribed()) return []
@@ -322,10 +327,10 @@ async function getOrCreateWallet(
 ): NJSWallet {
   const pool = core.getPoolInstance()
   try {
-    const wallet = await pool.getWallet(WALLET_IDENTIFIER)
+    const wallet = await timeoutTagged('getWallet', 5000, pool.getWallet(WALLET_IDENTIFIER))
     return wallet
   } catch (err) {
-    const currency = await pool.getCurrency(currencyId)
+    const currency = await timeoutTagged('getCurrency', 5000, pool.getCurrency(currencyId))
     const splitConfig = isUnsplit ? SPLITTED_CURRENCIES[currencyId] || null : null
     const coinType = splitConfig ? splitConfig.coinType : '<coin_type>'
     const walletConfig = isSegwit
@@ -339,9 +344,11 @@ async function getOrCreateWallet(
           }
         : undefined
     const njsWalletConfig = createWalletConfig(core, walletConfig)
-    const wallet = await core
-      .getPoolInstance()
-      .createWallet(WALLET_IDENTIFIER, currency, njsWalletConfig)
+    const wallet = await timeoutTagged(
+      'createWallet',
+      10000,
+      core.getPoolInstance().createWallet(WALLET_IDENTIFIER, currency, njsWalletConfig),
+    )
     return wallet
   }
 }
@@ -365,21 +372,33 @@ async function buildAccountRaw({
   core: *,
   ops: NJSOperation[],
 }): Promise<AccountRaw> {
-  const njsBalance = await njsAccount.getBalance()
+  const njsBalance = await timeoutTagged('getBalance', 10000, njsAccount.getBalance())
   const balance = njsBalance.toLong()
 
   const jsCurrency = getCryptoCurrencyById(currencyId)
-  const { derivations } = await wallet.getAccountCreationInfo(accountIndex)
+  const { derivations } = await timeoutTagged(
+    'getAccountCreationInfo',
+    10000,
+    wallet.getAccountCreationInfo(accountIndex),
+  )
   const [walletPath, accountPath] = derivations
 
   // retrieve xpub
   const xpub = njsAccount.getRestoreKey()
 
   // blockHeight
-  const { height: blockHeight } = await njsAccount.getLastBlock()
+  const { height: blockHeight } = await timeoutTagged(
+    'getLastBlock',
+    30000,
+    njsAccount.getLastBlock(),
+  )
 
   // get a bunch of fresh addresses
-  const rawAddresses = await njsAccount.getFreshPublicAddresses()
+  const rawAddresses = await timeoutTagged(
+    'getFreshPublicAddresses',
+    10000,
+    njsAccount.getFreshPublicAddresses(),
+  )
 
   const addresses = rawAddresses.map(njsAddress => ({
     str: njsAddress.toString(),
@@ -479,19 +498,35 @@ function buildOperationRaw({
   }
 }
 
-export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: AccountRaw }) {
-  const decodedAccountId = accountIdHelper.decode(rawAccount.id)
-  const isSegwit = isSegwitAccount(rawAccount)
-  const isUnsplit = isUnsplitAccount(rawAccount, SPLITTED_CURRENCIES[rawAccount.currencyId])
+export async function syncAccount({
+  accountId,
+  freshAddressPath,
+  currencyId,
+  index,
+  core,
+}: {
+  core: *,
+  accountId: string,
+  freshAddressPath: string,
+  currencyId: string,
+  index: number,
+}) {
+  const decodedAccountId = accountIdHelper.decode(accountId)
+  const isSegwit = isSegwitPath(freshAddressPath)
+  const isUnsplit = isUnsplitPath(freshAddressPath, SPLITTED_CURRENCIES[currencyId])
   let njsWallet
   try {
-    njsWallet = await core.getPoolInstance().getWallet(decodedAccountId.walletName)
+    njsWallet = await timeoutTagged(
+      'getWallet',
+      10000,
+      core.getPoolInstance().getWallet(decodedAccountId.walletName),
+    )
   } catch (e) {
     logger.warn(`Have to reimport the account... (${e})`)
     njsWallet = await getOrCreateWallet(
       core,
       decodedAccountId.walletName,
-      rawAccount.currencyId,
+      currencyId,
       isSegwit,
       isUnsplit,
     )
@@ -499,28 +534,36 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
 
   let njsAccount
   try {
-    njsAccount = await njsWallet.getAccount(rawAccount.index)
+    njsAccount = await timeoutTagged('getAccount', 10000, njsWallet.getAccount(index))
   } catch (e) {
     logger.warn(`Have to recreate the account... (${e.message})`)
-    const extendedInfos = await njsWallet.getExtendedKeyAccountCreationInfo(rawAccount.index)
+    const extendedInfos = await timeoutTagged(
+      'getEKACI',
+      10000,
+      njsWallet.getExtendedKeyAccountCreationInfo(index),
+    )
     extendedInfos.extendedKeys.push(decodedAccountId.xpub)
-    njsAccount = await njsWallet.newAccountWithExtendedKeyInfo(extendedInfos)
+    njsAccount = await timeoutTagged(
+      'newAWEKI',
+      10000,
+      njsWallet.newAccountWithExtendedKeyInfo(extendedInfos),
+    )
   }
 
-  const unsub = await coreSyncAccount(core, njsAccount)
+  const unsub = await timeoutTagged('coreSyncAccount', 30000, coreSyncAccount(core, njsAccount))
   unsub()
 
   const query = njsAccount.queryOperations()
-  const ops = await query.complete().execute()
-  const njsBalance = await njsAccount.getBalance()
+  const ops = await timeoutTagged('ops', 30000, query.complete().execute())
+  const njsBalance = await timeoutTagged('getBalance', 10000, njsAccount.getBalance())
 
   const syncedRawAccount = await buildAccountRaw({
     njsAccount,
     isSegwit,
     isUnsplit,
-    accountIndex: rawAccount.index,
+    accountIndex: index,
     wallet: njsWallet,
-    currencyId: rawAccount.currencyId,
+    currencyId,
     core,
     ops,
   })
@@ -530,4 +573,12 @@ export async function syncAccount({ rawAccount, core }: { core: *, rawAccount: A
   logger.log(`Synced account [${syncedRawAccount.name}]: ${syncedRawAccount.balance}`)
 
   return syncedRawAccount
+}
+
+export function libcoreAmountToBigNumber(njsAmount: *): BigNumber {
+  return BigNumber(njsAmount.toBigInt().toString(10))
+}
+
+export function bigNumberToLibcoreAmount(core: *, njsWalletCurrency: *, bigNumber: BigNumber) {
+  return new core.NJSAmount(njsWalletCurrency, 0).fromHex(njsWalletCurrency, bigNumber.toString(16))
 }

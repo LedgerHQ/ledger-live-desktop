@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
+import { BigNumber } from 'bignumber.js'
 
 import { storiesOf } from '@storybook/react'
 import {
@@ -19,7 +20,7 @@ const unit = getFiatCurrencyByTicker('USD').units[0]
 const chance = new Chance()
 
 function getValue() {
-  return formatCurrencyUnit(unit, chance.floating({ min: 1000, max: 100000 }), {
+  return formatCurrencyUnit(unit, BigNumber(chance.floating({ min: 1000, max: 100000 })), {
     showCode: true,
   })
 }

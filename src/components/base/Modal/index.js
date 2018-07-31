@@ -241,6 +241,7 @@ export const ModalFooter = styled(Box).attrs({
 export const ModalContent = styled(Box).attrs({
   px: 5,
   pb: 5,
+  selectable: true,
 })``
 
 export default connect(

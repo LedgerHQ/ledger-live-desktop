@@ -93,16 +93,22 @@ const buttonStyles: { [_: string]: Style } = {
         background: ${rgba(c, 0.1)};
       `
     },
-    active: p => `
-      color: ${darken(
-        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
-        0.1,
-      )};
-      border-color: ${darken(
-        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
-        0.1,
-      )};
-    `,
+    active: p => {
+      const c = p.outlineColor
+        ? p.theme.colors[p.outlineColor] || p.outlineColor
+        : p.theme.colors.wallet
+      return `
+        background: ${rgba(c, 0.15)};
+        color: ${darken(
+          p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
+          0.1,
+        )};
+        border-color: ${darken(
+          p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
+          0.1,
+        )};
+      `
+    },
   },
   outlineGrey: {
     default: p => `
@@ -168,7 +174,7 @@ const Base = styled.button.attrs({
   ${fontFamily};
   border: none;
   border-radius: ${p => p.theme.radii[1]}px;
-  cursor: ${p => (p.disabled ? 'default' : 'pointer')};
+  cursor: ${p => (p.disabled ? 'not-allowed' : 'default')};
   height: ${p => (p.small ? 34 : 40)}px;
   pointer-events: ${p => (p.disabled ? 'none' : '')};
   outline: none;

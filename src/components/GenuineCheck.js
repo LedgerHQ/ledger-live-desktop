@@ -14,7 +14,7 @@ import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT, GENUINE_CACHE_DELAY } from 'config/constants'
 
 import { getCurrentDevice } from 'reducers/devices'
-import { createCustomErrorClass } from 'helpers/errors'
+import { CantOpenDevice, DeviceNotGenuineError, DeviceGenuineSocketEarlyClose } from 'config/errors'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'
@@ -25,9 +25,6 @@ import Text from 'components/base/Text'
 import IconUsb from 'icons/Usb'
 import IconHome from 'icons/Home'
 import IconCheck from 'icons/Check'
-
-const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
-const DeviceGenuineSocketEarlyClose = createCustomErrorClass('DeviceGenuineSocketEarlyClose')
 
 type Props = {
   t: T,
@@ -59,11 +56,18 @@ class GenuineCheck extends PureComponent<Props> {
     })
 
   checkDashboardInteractionHandler = ({ device }: { device: Device }) =>
-    createCancelablePolling(() =>
-      getDeviceInfo
-        .send({ devicePath: device.path })
-        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
-        .toPromise(),
+    createCancelablePolling(
+      () =>
+        getDeviceInfo
+          .send({ devicePath: device.path })
+          .pipe(timeout(DEVICE_INFOS_TIMEOUT))
+          .toPromise(),
+      {
+        shouldThrow: (err: Error) => {
+          const isCantOpenDevice = err instanceof CantOpenDevice
+          return isCantOpenDevice
+        },
+      },
     )
 
   checkGenuineInteractionHandler = async ({

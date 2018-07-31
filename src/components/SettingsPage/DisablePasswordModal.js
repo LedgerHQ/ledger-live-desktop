@@ -1,8 +1,9 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import bcrypt from 'bcryptjs'
+import { createCustomErrorClass } from 'helpers/errors'
 
+import db from 'helpers/db'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import InputPassword from 'components/base/InputPassword'
@@ -11,22 +12,22 @@ import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'compone
 
 import type { T } from 'types/common'
 
+const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
+
 type Props = {
   t: T,
   onClose: Function,
-  isPasswordEnabled: boolean,
-  currentPasswordHash: string,
   onChangePassword: Function,
 }
 
 type State = {
   currentPassword: string,
-  incorrectPassword: boolean,
+  incorrectPassword: ?Error,
 }
 
 const INITIAL_STATE = {
   currentPassword: '',
-  incorrectPassword: false,
+  incorrectPassword: null,
 }
 
 // TODO: combine with the refactored password form
@@ -39,21 +40,19 @@ class DisablePasswordModal extends PureComponent<Props, State> {
     }
 
     const { currentPassword } = this.state
-    const { isPasswordEnabled, currentPasswordHash, onChangePassword } = this.props
-    if (isPasswordEnabled) {
-      if (!bcrypt.compareSync(currentPassword, currentPasswordHash)) {
-        this.setState({ incorrectPassword: true })
-        return
-      }
-      onChangePassword('')
-    } else {
-      onChangePassword('')
+    const { onChangePassword } = this.props
+
+    if (!db.isEncryptionKeyCorrect('app', 'accounts', currentPassword)) {
+      this.setState({ incorrectPassword: new PasswordIncorrectError() })
+      return
     }
+
+    onChangePassword('')
   }
 
   handleInputChange = (key: string) => (value: string) => {
     if (this.state.incorrectPassword) {
-      this.setState({ incorrectPassword: false })
+      this.setState({ incorrectPassword: null })
     }
     this.setState({ [key]: value })
   }
@@ -61,7 +60,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
   handleReset = () => this.setState(INITIAL_STATE)
 
   render() {
-    const { t, isPasswordEnabled, onClose, ...props } = this.props
+    const { t, onClose, ...props } = this.props
     const { currentPassword, incorrectPassword } = this.state
     return (
       <Modal
@@ -76,28 +75,24 @@ class DisablePasswordModal extends PureComponent<Props, State> {
                 <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
                   {t('app:password.disablePassword.desc')}
                   <Box px={7} mt={4} flow={3}>
-                    {isPasswordEnabled && (
-                      <Box flow={1}>
-                        <Label htmlFor="password">
-                          {t('app:password.inputFields.currentPassword.label')}
-                        </Label>
-                        <InputPassword
-                          autoFocus
-                          type="password"
-                          id="password"
-                          onChange={this.handleInputChange('currentPassword')}
-                          value={currentPassword}
-                          error={
-                            incorrectPassword && t('app:password.errorMessageIncorrectPassword')
-                          }
-                        />
-                      </Box>
-                    )}
+                    <Box flow={1}>
+                      <Label htmlFor="password">
+                        {t('app:password.inputFields.currentPassword.label')}
+                      </Label>
+                      <InputPassword
+                        autoFocus
+                        type="password"
+                        id="password"
+                        onChange={this.handleInputChange('currentPassword')}
+                        value={currentPassword}
+                        error={incorrectPassword}
+                      />
+                    </Box>
                   </Box>
                 </Box>
               </ModalContent>
               <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-                <Button small type="Button small" onClick={onClose}>
+                <Button small type="button" onClick={onClose}>
                   {t('app:common.cancel')}
                 </Button>
                 <Button

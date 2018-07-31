@@ -126,7 +126,6 @@ const AccountRowContainer = styled(Tabbable).attrs({
   pointer-events: ${p => (p.isDisabled ? 'none' : 'auto')};
 
   &:hover {
-    cursor: pointer;
     background-color: ${p => darken(p.theme.colors.lightGrey, 0.015)};
   }
 

@@ -2,8 +2,6 @@
 
 import { handleActions, createAction } from 'redux-actions'
 
-import { hasPassword } from 'reducers/settings'
-
 export type ApplicationState = {
   isLocked?: boolean,
 }
@@ -24,9 +22,7 @@ export const lock = createAction('APPLICATION_SET_DATA', () => ({ isLocked: true
 
 // Selectors
 
-export const isLocked = (state: Object) =>
-  // FIXME why!?
-  state.application.isLocked === undefined ? hasPassword(state) : state.application.isLocked
+export const isLocked = (state: Object) => state.application.isLocked === true
 
 // Exporting reducer
 

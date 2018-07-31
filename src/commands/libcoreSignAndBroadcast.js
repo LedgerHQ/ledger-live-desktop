@@ -1,11 +1,13 @@
 // @flow
 
 import logger from 'logger'
-import type { AccountRaw, OperationRaw } from '@ledgerhq/live-common/lib/types'
+import { BigNumber } from 'bignumber.js'
+import type { OperationRaw } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-import { isSegwitAccount } from 'helpers/bip32'
+import { isSegwitPath } from 'helpers/bip32'
+import { libcoreAmountToBigNumber, bigNumberToLibcoreAmount } from 'helpers/libcore'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
@@ -13,13 +15,18 @@ import { withDevice } from 'helpers/deviceAccess'
 import * as accountIdHelper from 'helpers/accountId'
 
 type BitcoinLikeTransaction = {
-  amount: number,
-  feePerByte: number,
+  amount: string,
+  feePerByte: string,
   recipient: string,
 }
 
 type Input = {
-  account: AccountRaw, // FIXME there is no reason we send the whole AccountRaw
+  accountId: string,
+  currencyId: string,
+  xpub: string,
+  freshAddress: string,
+  freshAddressPath: string,
+  index: number,
   transaction: BitcoinLikeTransaction,
   deviceId: string,
 }
@@ -30,13 +37,18 @@ type Result = { type: 'signed' } | { type: 'broadcasted', operation: OperationRa
 
 const cmd: Command<Input, Result> = createCommand(
   'libcoreSignAndBroadcast',
-  ({ account, transaction, deviceId }) =>
+  ({ accountId, currencyId, xpub, freshAddress, freshAddressPath, index, transaction, deviceId }) =>
     Observable.create(o => {
       let unsubscribed = false
       const isCancelled = () => unsubscribed
       withLibcore(core =>
         doSignAndBroadcast({
-          account,
+          accountId,
+          currencyId,
+          xpub,
+          freshAddress,
+          freshAddressPath,
+          index,
           transaction,
           deviceId,
           core,
@@ -124,8 +136,13 @@ async function signTransaction({
 
   const changePath = output ? output.getDerivationPath().toString() : undefined
   const outputScriptHex = Buffer.from(transaction.serializeOutputs()).toString('hex')
-  const lockTime = undefined // TODO: transaction.getLockTime()
   const initialTimestamp = hasTimestamp ? transaction.getTimestamp() : undefined
+
+  // FIXME
+  // should be `transaction.getLockTime()` as soon as lock time is
+  // handled by libcore (actually: it always returns a default value
+  // and that caused issue with zcash (see #904))
+  const lockTime = undefined
 
   const signedTransaction = await hwApp.createPaymentTransactionNew(
     inputs,
@@ -144,7 +161,12 @@ async function signTransaction({
 }
 
 export async function doSignAndBroadcast({
-  account,
+  accountId,
+  currencyId,
+  xpub,
+  freshAddress,
+  freshAddressPath,
+  index,
   transaction,
   deviceId,
   core,
@@ -152,7 +174,12 @@ export async function doSignAndBroadcast({
   onSigned,
   onOperationBroadcasted,
 }: {
-  account: AccountRaw,
+  accountId: string,
+  currencyId: string,
+  xpub: string,
+  freshAddress: string,
+  freshAddressPath: string,
+  index: number,
   transaction: BitcoinLikeTransaction,
   deviceId: string,
   core: *,
@@ -160,21 +187,15 @@ export async function doSignAndBroadcast({
   onSigned: () => void,
   onOperationBroadcasted: (optimisticOp: $Exact<OperationRaw>) => void,
 }): Promise<void> {
-  const { walletName } = accountIdHelper.decode(account.id)
+  const { walletName } = accountIdHelper.decode(accountId)
   const njsWallet = await core.getPoolInstance().getWallet(walletName)
   if (isCancelled()) return
-  const njsAccount = await njsWallet.getAccount(account.index)
+  const njsAccount = await njsWallet.getAccount(index)
   if (isCancelled()) return
   const bitcoinLikeAccount = njsAccount.asBitcoinLikeAccount()
   const njsWalletCurrency = njsWallet.getCurrency()
-  const amount = new core.NJSAmount(njsWalletCurrency, transaction.amount).fromLong(
-    njsWalletCurrency,
-    transaction.amount,
-  )
-  const fees = new core.NJSAmount(njsWalletCurrency, transaction.feePerByte).fromLong(
-    njsWalletCurrency,
-    transaction.feePerByte,
-  )
+  const amount = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.amount))
+  const fees = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.feePerByte))
   const transactionBuilder = bitcoinLikeAccount.buildTransaction()
 
   // TODO: check if is valid address. if not, it will fail silently on invalid
@@ -193,16 +214,16 @@ export async function doSignAndBroadcast({
   const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
   // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
 
-  const currency = getCryptoCurrencyById(account.currencyId)
+  const currency = getCryptoCurrencyById(currencyId)
 
   const signedTransaction = await withDevice(deviceId)(async transport =>
     signTransaction({
       hwApp: new Btc(transport),
-      currencyId: account.currencyId,
+      currencyId,
       transaction: builded,
       sigHashType: parseInt(sigHashType, 16),
       supportsSegwit: !!currency.supportsSegwit,
-      isSegwit: isSegwitAccount(account),
+      isSegwit: isSegwitPath(freshAddressPath),
       hasTimestamp,
     }),
   )
@@ -216,20 +237,23 @@ export async function doSignAndBroadcast({
     .asBitcoinLikeAccount()
     .broadcastRawTransaction(Array.from(Buffer.from(signedTransaction, 'hex')))
 
-  const fee = builded.getFees().toLong()
+  const fee = libcoreAmountToBigNumber(builded.getFees())
 
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
   onOperationBroadcasted({
-    id: `${account.xpub}-${txHash}-OUT`,
+    id: `${xpub}-${txHash}-OUT`,
     hash: txHash,
     type: 'OUT',
-    value: transaction.amount + fee,
-    fee,
+    value: BigNumber(transaction.amount)
+      .plus(fee)
+      .toString(),
+    fee: fee.toString(),
     blockHash: null,
     blockHeight: null,
-    senders: [account.freshAddress],
+    // FIXME for senders and recipients, can we ask the libcore?
+    senders: [freshAddress],
     recipients: [transaction.recipient],
-    accountId: account.id,
+    accountId,
     date: new Date().toISOString(),
   })
 }

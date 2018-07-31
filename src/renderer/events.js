@@ -9,17 +9,17 @@
 // events should all appear in the promise result / observer msgs as soon as they have this requestId
 
 import 'commands'
-import logger from 'logger'
-import network from 'api/network'
-
 import { ipcRenderer } from 'electron'
 import debug from 'debug'
+
+import network from 'api/network'
+import logger from 'logger'
+import db from 'helpers/db'
 
 import { CHECK_UPDATE_DELAY, DISABLE_ACTIVITY_INDICATORS } from 'config/constants'
 import { onSetDeviceBusy } from 'components/DeviceBusyIndicator'
 import { onSetLibcoreBusy } from 'components/LibcoreBusyIndicator'
 
-import { hasPassword } from 'reducers/settings'
 import { lock } from 'reducers/application'
 import { setUpdateStatus } from 'reducers/update'
 import { addDevice, removeDevice, resetDevices } from 'actions/devices'
@@ -84,7 +84,7 @@ export default ({ store }: { store: Object }) => {
   syncDevices()
 
   ipcRenderer.on('lock', () => {
-    if (hasPassword(store.getState())) {
+    if (db.hasEncryptionKey('app', 'accounts')) {
       store.dispatch(lock())
     }
   })

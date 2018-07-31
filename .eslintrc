@@ -20,6 +20,7 @@
     "ResizeObserver": false,
     "jest": false,
     "describe": false,
+    "beforeEach": false,
     "test": false,
     "it": false,
     "expect": false,

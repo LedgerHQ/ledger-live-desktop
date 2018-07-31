@@ -2,8 +2,13 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import { translate } from 'react-i18next'
+
+import type { T } from 'types/common'
 
 import { radii } from 'styles/theme'
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/urls'
 
 import TranslatedError from 'components/TranslatedError'
 import Box from 'components/base/Box'
@@ -112,30 +117,41 @@ export const ErrorContainer = ({ isVisible }: { isVisible: boolean }) => (
   </ErrorContainerWrapper>
 )
 
-export const ErrorDescContainer = ({
-  error,
-  onRetry,
-  ...p
-}: {
-  error: Error,
-  onRetry: void => void,
-}) => (
-  <Box
-    horizontal
-    fontSize={3}
-    color="alertRed"
-    align="center"
-    cursor="text"
-    ff="Open Sans|SemiBold"
-    style={{ maxWidth: 500 }}
-    {...p}
-  >
-    <IconExclamationCircle size={16} />
-    <Box ml={2} mr={1} shrink grow style={{ maxWidth: 300 }}>
-      <TranslatedError error={error} />
-    </Box>
-    <FakeLink ml="auto" underline color="alertRed" onClick={onRetry}>
-      {'Retry'}
-    </FakeLink>
-  </Box>
+export const ErrorDescContainer = translate()(
+  ({ error, onRetry, t, ...p }: { error: Error, onRetry: void => void, t: T }) => {
+    const errorHelpURL = urls.errors[error.name] || null
+    const errorDesc = <TranslatedError error={error} field="description" />
+    return (
+      <Box
+        horizontal
+        fontSize={3}
+        color="alertRed"
+        align="flex-start"
+        cursor="text"
+        ff="Open Sans|SemiBold"
+        style={{ maxWidth: 500 }}
+        {...p}
+      >
+        <IconExclamationCircle size={16} />
+        <Box ml={2} mr={1} shrink grow style={{ maxWidth: 300 }}>
+          <TranslatedError error={error} />
+          {!!errorDesc && (
+            <Box ff="Open Sans|Regular" mt={1}>
+              {errorDesc}
+            </Box>
+          )}
+        </Box>
+        <Box ml="auto" horizontal flow={2}>
+          {!!errorHelpURL && (
+            <FakeLink underline color="alertRed" onClick={() => openURL(errorHelpURL)}>
+              {t('app:common.help')}
+            </FakeLink>
+          )}
+          <FakeLink underline color="alertRed" onClick={onRetry}>
+            {t('app:common.retry')}
+          </FakeLink>
+        </Box>
+      </Box>
+    )
+  },
 )

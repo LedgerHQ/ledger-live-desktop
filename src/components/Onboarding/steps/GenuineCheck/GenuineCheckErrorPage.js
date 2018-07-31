@@ -5,9 +5,11 @@ import { i } from 'helpers/staticPath'
 
 import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
+import { urls } from 'config/urls'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
+import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import TrackPage from 'analytics/TrackPage'
 
 import { Title, Description, OnboardingFooterWrapper } from '../../helperComponents'
@@ -15,7 +17,6 @@ import { Title, Description, OnboardingFooterWrapper } from '../../helperCompone
 type Props = {
   t: T,
   redoGenuineCheck: () => void,
-  contactSupport: () => void,
   onboarding: OnboardingState,
 }
 
@@ -69,7 +70,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
   }
 
   render() {
-    const { redoGenuineCheck, contactSupport, t } = this.props
+    const { redoGenuineCheck, t } = this.props
     return (
       <Box sticky pt={50}>
         <Box grow alignItems="center" justifyContent="center">
@@ -79,9 +80,12 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
           <Button outlineGrey onClick={() => redoGenuineCheck()}>
             {t('app:common.back')}
           </Button>
-          <Button danger onClick={() => contactSupport()} ml="auto">
-            {t('onboarding:genuineCheck.buttons.contactSupport')}
-          </Button>
+          <ExternalLinkButton
+            danger
+            ml="auto"
+            label={t('onboarding:genuineCheck.buttons.contactSupport')}
+            url={urls.contactSupport}
+          />
         </OnboardingFooterWrapper>
       </Box>
     )

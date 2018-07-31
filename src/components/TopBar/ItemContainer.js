@@ -10,7 +10,7 @@ export default styled(Tabbable).attrs({
   px: 3,
   ml: 0,
   alignItems: 'center',
-  cursor: p => (p.disabled ? 'default' : 'pointer'),
+  cursor: p => (p.disabled ? 'not-allowed' : 'default'),
   horizontal: true,
   borderRadius: 1,
 })`

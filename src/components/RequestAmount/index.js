@@ -1,5 +1,6 @@
 // @flow
 
+import { BigNumber } from 'bignumber.js'
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
@@ -45,15 +46,15 @@ type OwnProps = {
   t: T,
 
   // left value (always the one which is returned)
-  value: number,
+  value: BigNumber,
 
   canBeSpentError: ?Error,
 
   // max left value
-  max: number,
+  max: BigNumber,
 
   // change handler
-  onChange: number => void,
+  onChange: BigNumber => void,
 
   // used to determine the left input unit
   account: Account,
@@ -68,8 +69,8 @@ type Props = OwnProps & {
   rightCurrency: Currency,
 
   // used to calculate the opposite field value (right & left)
-  getCounterValue: number => ?number,
-  getReverseCounterValue: number => ?number,
+  getCounterValue: BigNumber => ?BigNumber,
+  getReverseCounterValue: BigNumber => ?BigNumber,
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
@@ -111,7 +112,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
 
 export class RequestAmount extends PureComponent<Props> {
   static defaultProps = {
-    max: Infinity,
+    max: BigNumber(Infinity),
     canBeSpent: true,
     withMax: true,
   }
@@ -123,13 +124,13 @@ export class RequestAmount extends PureComponent<Props> {
     }
   }
 
-  handleChangeAmount = (changedField: string) => (val: number) => {
+  handleChangeAmount = (changedField: string) => (val: BigNumber) => {
     const { getReverseCounterValue, max, onChange } = this.props
     if (changedField === 'left') {
-      onChange(val > max ? max : val)
+      onChange(val.gt(max) ? max : val)
     } else if (changedField === 'right') {
-      const leftVal = getReverseCounterValue(val) || 0
-      onChange(leftVal > max ? max : leftVal)
+      const leftVal = getReverseCounterValue(val) || BigNumber(0)
+      onChange(leftVal.gt(max) ? max : leftVal)
     }
   }
 
@@ -139,7 +140,7 @@ export class RequestAmount extends PureComponent<Props> {
   renderInputs(containerProps: Object) {
     // TODO move this inlined into render() for less spaghetti
     const { value, account, rightCurrency, getCounterValue, canBeSpentError } = this.props
-    const right = getCounterValue(value) || 0
+    const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
     // FIXME: no way InputCurrency pure can work here. inlined InputRight (should be static func?), inline containerProps object..
     return (

@@ -1,11 +1,9 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { openURL } from 'helpers/linking'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { colors } from 'styles/theme'
-import { urls } from 'config/urls'
 
 import { updateGenuineCheck } from 'reducers/onboarding'
 
@@ -143,10 +141,6 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     })
   }
 
-  contactSupport = () => {
-    openURL(urls.contactSupport)
-  }
-
   handlePrevStep = () => {
     const { prevStep, onboarding, jumpStep } = this.props
     onboarding.flowType === 'initializedDevice' ? jumpStep('selectDevice') : prevStep()
@@ -158,7 +152,6 @@ class GenuineCheck extends PureComponent<StepProps, State> {
   renderGenuineFail = () => (
     <GenuineCheckErrorPage
       redoGenuineCheck={this.redoGenuineCheck}
-      contactSupport={this.contactSupport}
       t={this.props.t}
       onboarding={this.props.onboarding}
     />
@@ -185,11 +178,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           {onboarding.flowType === 'restoreDevice' ? (
             <Description>{t('onboarding:genuineCheck.descRestore')}</Description>
           ) : (
-            <Description>
-              {onboarding.isLedgerNano
-                ? t('onboarding:genuineCheck.descNano')
-                : t('onboarding:genuineCheck.descBlue')}
-            </Description>
+            <Description>{t('onboarding:genuineCheck.descGeneric')}</Description>
           )}
           <Box mt={5}>
             <GenuineCheckCardWrapper>

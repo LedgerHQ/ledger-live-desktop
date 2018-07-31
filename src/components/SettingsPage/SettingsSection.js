@@ -85,9 +85,7 @@ const SettingsSectionRowContainer = styled(Box).attrs({
   align: 'center',
   relative: true,
   justifyContent: 'space-between',
-})`
-  cursor: ${p => (p.onClick ? 'pointer' : '')};
-`
+})``
 
 export function SettingsSectionRow({
   title,

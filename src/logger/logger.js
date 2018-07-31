@@ -2,7 +2,7 @@
 
 import winston from 'winston'
 import Transport from 'winston-transport'
-import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
+import { resolveLogsDirectory } from 'helpers/log'
 import anonymizer from 'helpers/anonymizer'
 import pname from 'helpers/pname'
 
@@ -146,7 +146,7 @@ const logNetwork = !__DEV__ || DEBUG_NETWORK
 const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 const logApdu = !__DEV__ || DEBUG_DEVICE
 
-const blacklistTooVerboseCommandInput = ['libcoreSyncAccount', 'libcoreSignAndBroadcast']
+const blacklistTooVerboseCommandInput = []
 const blacklistTooVerboseCommandResponse = [
   'libcoreSyncAccount',
   'libcoreScanAccounts',

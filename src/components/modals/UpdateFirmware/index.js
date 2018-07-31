@@ -10,7 +10,7 @@ import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
 import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
-import type { LedgerScriptParams } from 'helpers/common'
+import type { LedgerScriptParams } from 'helpers/types'
 
 import { FreezeDeviceChangeEvents } from '../../ManagerPage/HookDeviceChange'
 import StepFullFirmwareInstall from './steps/01-step-install-full-firmware'
@@ -20,7 +20,7 @@ import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmatio
 const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): Array<*> => {
   const updateStep = {
     id: 'idCheck',
-    label: t('app:manager.modal.steps.idCheck'),
+    label: t('app:manager.modal.identifier'),
     component: StepFullFirmwareInstall,
     footer: null,
     onBack: null,

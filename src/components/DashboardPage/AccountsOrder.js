@@ -1,32 +1,21 @@
 // @flow
 
-import logger from 'logger'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { compose } from 'redux'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
-import type { Account } from '@ledgerhq/live-common/lib/types'
-import CounterValues from 'helpers/countervalues'
+import { createStructuredSelector } from 'reselect'
 
 import type { T } from 'types/common'
-
-import {
-  getOrderAccounts,
-  intermediaryCurrency,
-  currencySettingsForAccountSelector,
-} from 'reducers/settings'
-import { createStructuredSelector, createSelector } from 'reselect'
-import { reorderAccounts } from 'actions/accounts'
-import { accountsSelector } from 'reducers/accounts'
+import { refreshAccountsOrdering } from 'actions/general'
 import { saveSettings } from 'actions/settings'
-
+import { getOrderAccounts } from 'reducers/settings'
 import Track from 'analytics/Track'
 import BoldToggle from 'components/base/BoldToggle'
 import Box from 'components/base/Box'
 import DropDown, { DropDownItem } from 'components/base/DropDown'
 import Text from 'components/base/Text'
-
 import IconAngleDown from 'icons/AngleDown'
 import IconArrowDown from 'icons/ArrowDown'
 import IconArrowUp from 'icons/ArrowUp'
@@ -34,39 +23,8 @@ import IconArrowUp from 'icons/ArrowUp'
 type Props = {
   t: T,
   orderAccounts: string,
-  accounts: Account[],
-  accountsBtcBalance: number[], // eslint-disable-line
-  reorderAccounts: (string[]) => *,
+  refreshAccountsOrdering: () => *,
   saveSettings: (*) => *,
-}
-
-type SortMethod = 'name' | 'balance'
-
-const sortMethod: { [_: SortMethod]: (Account[], Props) => string[] } = {
-  balance: (accounts, { accountsBtcBalance }: Props) =>
-    accounts
-      .map((a, i) => [a.id, accountsBtcBalance[i]])
-      .sort((a, b) => a[1] - b[1])
-      .map(o => o[0]),
-
-  name: accounts =>
-    accounts
-      .slice(0)
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .map(a => a.id),
-}
-
-function sortAccounts(accounts: Account[], orderAccounts: string, props: Props) {
-  const [order, sort] = orderAccounts.split('|')
-  if (order === 'name' || order === 'balance') {
-    const ids = sortMethod[order](accounts, props)
-    if (sort === 'asc') {
-      ids.reverse()
-    }
-    return ids
-  }
-  logger.warn(`sortAccounts not implemented for ${orderAccounts}`)
-  return null
 }
 
 const OrderIcon = styled(Box).attrs({
@@ -77,31 +35,12 @@ const OrderIcon = styled(Box).attrs({
   opacity: ${p => (p.isActive ? 1 : 0)};
 `
 
-const accountsBtcBalanceSelector = createSelector(
-  accountsSelector,
-  state => state,
-  (accounts, state) =>
-    accounts.map(account => {
-      const { exchange } = currencySettingsForAccountSelector(state, { account })
-      return (
-        CounterValues.calculateSelector(state, {
-          from: account.currency,
-          to: intermediaryCurrency,
-          exchange,
-          value: account.balance,
-        }) || 0
-      )
-    }),
-)
-
 const mapStateToProps = createStructuredSelector({
   orderAccounts: getOrderAccounts,
-  accounts: accountsSelector,
-  accountsBtcBalance: accountsBtcBalanceSelector,
 })
 
 const mapDispatchToProps = {
-  reorderAccounts,
+  refreshAccountsOrdering,
   saveSettings,
 }
 
@@ -120,12 +59,9 @@ class AccountsOrder extends Component<Props> {
   }
 
   setAccountOrder = order => {
-    const { saveSettings, reorderAccounts } = this.props
-    const maybeIds = sortAccounts(this.props.accounts, order, this.props)
-    if (maybeIds) {
-      reorderAccounts(maybeIds)
-      saveSettings({ orderAccounts: order })
-    }
+    const { saveSettings, refreshAccountsOrdering } = this.props
+    saveSettings({ orderAccounts: order })
+    refreshAccountsOrdering()
   }
 
   getCurrentOrder = () => {

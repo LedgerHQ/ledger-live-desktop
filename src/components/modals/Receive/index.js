@@ -12,8 +12,6 @@ import Track from 'analytics/Track'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_RECEIVE } from 'config/constants'
-import { openURL } from 'helpers/linking'
-import { urls } from 'config/urls'
 import type { T, Device } from 'types/common'
 import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 
@@ -58,7 +56,6 @@ export type StepProps = DefaultStepProps & {
   onChangeAccount: (?Account) => void,
   onChangeAppOpened: boolean => void,
   onChangeAddressVerified: (?boolean, ?Error) => void,
-  contactUs: () => void,
 }
 
 const createSteps = ({ t }: { t: T }) => [
@@ -132,9 +129,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       isAddressVerified: null,
       isAppOpened: false,
     })
-  handleContactUs = () => {
-    openURL(urls.contactSupport)
-  }
+
   handleReset = () => this.setState({ ...INITIAL_STATE })
 
   handleCloseModal = () => this.props.closeModal(MODAL_RECEIVE)
@@ -187,7 +182,6 @@ class ReceiveModal extends PureComponent<Props, State> {
       onChangeAccount: this.handleChangeAccount,
       onChangeAppOpened: this.handleChangeAppOpened,
       onChangeAddressVerified: this.handleChangeAddressVerified,
-      contactUs: this.handleContactUs,
     }
 
     const errorSteps = verifyAddressError

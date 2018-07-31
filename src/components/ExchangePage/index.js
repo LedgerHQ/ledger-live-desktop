@@ -57,7 +57,7 @@ class ExchangePage extends PureComponent<Props> {
   render() {
     const { t } = this.props
     return (
-      <Box pb={6}>
+      <Box pb={6} selectable>
         <TrackPage category="Exchange" />
         <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
           {t('app:exchange.title')}

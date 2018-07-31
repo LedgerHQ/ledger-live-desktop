@@ -1501,12 +1501,14 @@
     "@ledgerhq/hw-transport" "^4.21.0"
     bip32-path "0.4.2"
 
-"@ledgerhq/hw-transport-node-hid@^4.13.0":
-  version "4.21.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.21.0.tgz#fffdae5314bb969473a763e59fe1dfdde3fd7aed"
+"@ledgerhq/hw-transport-node-hid@4.22.0-beta.a1987cb3":
+  version "4.22.0-beta.a1987cb3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.22.0-beta.a1987cb3.tgz#89dd5b30239ed81e41fd3a1a37a48d5e9cd8529b"
   dependencies:
-    "@ledgerhq/hw-transport" "^4.21.0"
+    "@ledgerhq/hw-transport" "^4.22.0-beta.a1987cb3"
+    lodash "^4.17.10"
     node-hid "^0.7.2"
+    usb "^1.3.2"
 
 "@ledgerhq/hw-transport-node-hid@^4.7.6":
   version "4.16.0"
@@ -1527,6 +1529,12 @@
   dependencies:
     events "^2.0.0"
 
+"@ledgerhq/hw-transport@^4.22.0-beta.a1987cb3":
+  version "4.22.0-beta.ae6f5c51"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.22.0-beta.ae6f5c51.tgz#a9f17ff8fa792a19e01d82d72f14ff7f7a211209"
+  dependencies:
+    events "^2.0.0"
+
 "@ledgerhq/ledger-core@2.0.0-rc.5":
   version "2.0.0-rc.5"
   resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.5.tgz#ec42f6c3cc265fc5ca82e01d27df38357642d3ed"
@@ -1540,11 +1548,12 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@^2.35.0":
-  version "2.35.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-2.35.0.tgz#526bfb94f1a2f1449674c7854cf2c7a162385018"
+"@ledgerhq/live-common@3.0.0-beta.2":
+  version "3.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.0.0-beta.2.tgz#9280694bcfb6f8819bc90538dbdfcfa260e3454e"
   dependencies:
     axios "^0.18.0"
+    bignumber.js "^7.2.1"
     invariant "^2.2.2"
     lodash "^4.17.4"
     numeral "^2.0.6"
@@ -3553,10 +3562,6 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-bcryptjs@^2.4.3:
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
-
 bech32@^1.1.2:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/bech32/-/bech32-1.1.3.tgz#bd47a8986bbb3eec34a56a097a84b8d3e9a2dfcd"
@@ -3584,6 +3589,10 @@ bigi@^1.1.0, bigi@^1.4.0:
 bignumber.js@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.1.0.tgz#db6f14067c140bd46624815a7916c92d9b6c24b1"
+
+bignumber.js@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-7.2.1.tgz#80c048759d826800807c4bfd521e50edbba57a5f"
 
 bin-links@^1.1.0, bin-links@^1.1.2:
   version "1.1.2"
@@ -9904,7 +9913,7 @@ mute-stream@0.0.7, mute-stream@~0.0.4:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.10.0, nan@^2.2.1, nan@^2.6.2, nan@^2.9.2:
+nan@^2.10.0, nan@^2.2.1, nan@^2.6.2, nan@^2.8.0, nan@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
@@ -14351,6 +14360,13 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
+usb@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/usb/-/usb-1.3.2.tgz#4563a32323856e26c97dae374b34c66c3d83b5f4"
+  dependencies:
+    nan "^2.8.0"
+    node-pre-gyp "^0.10.0"
+
 use@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.0.tgz#14716bf03fdfefd03040aef58d8b4b85f3a7c544"
@@ -14718,12 +14734,19 @@ webpack-merge@^4.1.2:
   dependencies:
     lodash "^4.17.5"
 
-webpack-sources@1.0.1, webpack-sources@^1.0.1, webpack-sources@^1.1.0:
+webpack-sources@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.0.1.tgz#c7356436a4d13123be2e2426a05d1dad9cbe65cf"
   dependencies:
     source-list-map "^2.0.0"
     source-map "~0.5.3"
+
+webpack-sources@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.1.0.tgz#a101ebae59d6507354d71d8013950a3a8b7a5a54"
+  dependencies:
+    source-list-map "^2.0.0"
+    source-map "~0.6.1"
 
 webpack@^3.11.0:
   version "3.12.0"

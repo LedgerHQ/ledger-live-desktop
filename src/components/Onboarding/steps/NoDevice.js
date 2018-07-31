@@ -6,13 +6,14 @@ import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
+import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
 import TrackPage from 'analytics/TrackPage'
 import { urls } from 'config/urls'
 import IconCart from 'icons/Cart'
 import IconTruck from 'icons/Truck'
 import IconInfoCircle from 'icons/InfoCircle'
 import Button from '../../base/Button/index'
-import { Title, OnboardingFooterWrapper, LiveLogo } from '../helperComponents'
+import { Title, OnboardingFooterWrapper } from '../helperComponents'
 import { OptionFlowCard } from './Init'
 
 import type { StepProps } from '..'
@@ -53,9 +54,18 @@ class NoDevice extends PureComponent<StepProps, *> {
         <GrowScroll pb={7} pt={130}>
           <TrackPage category="Onboarding" name="No Device" />
           <Box grow alignItems="center">
-            <LiveLogo
-              style={{ width: 64, height: 64 }}
-              icon={<img src={i('ledgerlive-logo.svg')} alt="" width={40} height={40} />}
+            <LedgerLiveLogo
+              width="64px"
+              height="64px"
+              icon={
+                <img
+                  src={i('ledgerlive-logo.svg')}
+                  alt=""
+                  draggable="false"
+                  width={40}
+                  height={40}
+                />
+              }
             />
             <Box m={5} style={{ maxWidth: 480 }}>
               <Title>{t('onboarding:noDevice.title')}</Title>

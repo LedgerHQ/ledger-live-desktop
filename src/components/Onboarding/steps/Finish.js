@@ -9,6 +9,7 @@ import { urls } from 'config/urls'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ConfettiParty from 'components/ConfettiParty'
+import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
 import TrackPage from 'analytics/TrackPage'
 
 import IconCheckFull from 'icons/CheckFull'
@@ -16,8 +17,10 @@ import IconSocialTwitter from 'icons/Twitter'
 import IconSocialReddit from 'icons/Reddit'
 import IconSocialGithub from 'icons/Github'
 
+import { lighten } from 'styles/helpers'
+
 import type { StepProps } from '..'
-import { Title, Description, LiveLogo } from '../helperComponents'
+import { Title, Description } from '../helperComponents'
 
 const ConfettiLayer = styled.div`
   position: absolute;
@@ -81,13 +84,14 @@ export default class Finish extends Component<StepProps, *> {
             onMouseUp={this.onMouseUp}
             onMouseLeave={this.onMouseLeave}
           >
-            <LiveLogo
-              style={{ width: 64, height: 64 }}
+            <LedgerLiveLogo
+              width="64px"
+              height="64px"
               icon={
                 <img
-                  draggable="false"
-                  alt=""
                   src={i('ledgerlive-logo.svg')}
+                  alt=""
+                  draggable="false"
                   width={40}
                   height={40}
                 />
@@ -122,18 +126,19 @@ type SocMed = {
   onClick: string => void,
 }
 
+const StyledBox = styled(Box)`
+  cursor: default; // this here needs reset because it inherits from cursor: text from parent
+  &:hover {
+    color: ${p => lighten(p.theme.colors.grey, 0.1)};
+  }
+`
+
 export function SocialMediaBox({ socMed }: { socMed: SocMed }) {
   const { icon, url, onClick } = socMed
   return (
-    <Box
-      horizontal
-      style={{
-        cursor: 'pointer',
-      }}
-      onClick={() => onClick(url)}
-    >
+    <StyledBox horizontal onClick={() => onClick(url)}>
       {icon}
-    </Box>
+    </StyledBox>
   )
 }
 

@@ -3,6 +3,7 @@
 import invariant from 'invariant'
 import type { Command } from 'helpers/ipc'
 
+import debugAppInfosForCurrency from 'commands/debugAppInfosForCurrency'
 import getAddress from 'commands/getAddress'
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getCurrentFirmware from 'commands/getCurrentFirmware'
@@ -34,6 +35,7 @@ import testInterval from 'commands/testInterval'
 import uninstallApp from 'commands/uninstallApp'
 
 const all: Array<Command<any, any>> = [
+  debugAppInfosForCurrency,
   getAddress,
   getDeviceInfo,
   getCurrentFirmware,

@@ -110,7 +110,6 @@ const CloseContainer = styled(Box).attrs({
   p: 4,
   color: 'fog',
 })`
-  cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
@@ -202,6 +201,7 @@ class Onboarding extends PureComponent<Props> {
 const Container = styled(Box).attrs({
   bg: 'white',
   p: 60,
+  selectable: true,
 })`
   position: fixed;
   top: 0;

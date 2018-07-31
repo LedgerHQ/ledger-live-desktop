@@ -7,6 +7,9 @@ import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
+import { urls } from 'config/urls'
+import ExternalLinkButton from 'components/base/ExternalLinkButton'
+import RetryButton from 'components/base/RetryButton'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -19,6 +22,7 @@ import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import TranslatedError from 'components/TranslatedError'
 import Spinner from 'components/base/Spinner'
 import Text from 'components/base/Text'
+import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 
 import type { StepProps } from '../index'
 
@@ -32,6 +36,23 @@ const LoadingRow = styled(Box).attrs({
 })`
   height: 48px;
   border: 1px dashed ${p => p.theme.colors.grey};
+`
+const Title = styled(Box).attrs({
+  ff: 'Museo Sans',
+  fontSize: 5,
+  mt: 2,
+  color: 'black',
+})`
+  text-align: center;
+`
+
+const Desc = styled(Box).attrs({
+  ff: 'Open Sans',
+  fontSize: 4,
+  mt: 2,
+  color: 'graphite',
+})`
+  text-align: center;
 `
 
 class StepImport extends PureComponent<StepProps> {
@@ -164,24 +185,20 @@ class StepImport extends PureComponent<StepProps> {
   }
 
   renderError() {
-    const { err } = this.props
+    const { err, currency } = this.props
     invariant(err, 'Trying to render inexisting error')
     return (
-      <Box
-        style={{ height: 200 }}
-        px={5}
-        textAlign="center"
-        align="center"
-        justify="center"
-        color="alertRed"
-      >
-        <IconExclamationCircleThin size={43} />
-        <Box mt={4}>
+      <Box style={{ height: 200 }} px={5} justify="center">
+        <Box color="alertRed" align="center">
+          <IconExclamationCircleThin size={43} />
+        </Box>
+        {currency ? <DebugAppInfosForCurrency currencyId={currency.id} /> : null}
+        <Title>
           <TranslatedError error={err} field="title" />
-        </Box>
-        <Box mt={4}>
+        </Title>
+        <Desc>
           <TranslatedError error={err} field="description" />
-        </Box>
+        </Desc>
       </Box>
     )
   }
@@ -353,25 +370,25 @@ export const StepImportFooter = ({
     <Fragment>
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       {scanStatus === 'error' && (
-        <Button mr={2} onClick={() => setScanStatus('scanning')}>
-          {t('app:common.retry')}
-        </Button>
+        <Fragment>
+          <ExternalLinkButton mr={2} label={t('app:common.getSupport')} url={urls.faq} />
+          <RetryButton primary onClick={() => setScanStatus('scanning')} />
+        </Fragment>
       )}
       {scanStatus === 'scanning' && (
         <Button mr={2} onClick={() => setScanStatus('finished')}>
           {t('app:common.stop')}
         </Button>
       )}
-      <Button
-        primary
-        disabled={
-          (scanStatus !== 'finished' && scanStatus !== 'error') ||
-          !(willCreateAccount || willAddAccounts)
-        }
-        onClick={onClick}
-      >
-        {ctaWording}
-      </Button>
+      {scanStatus !== 'error' && (
+        <Button
+          primary
+          disabled={scanStatus !== 'finished' || !(willCreateAccount || willAddAccounts)}
+          onClick={onClick}
+        >
+          {ctaWording}
+        </Button>
+      )}
     </Fragment>
   )
 }
