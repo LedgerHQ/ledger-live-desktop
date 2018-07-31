@@ -41,7 +41,7 @@ export const withDevice: WithDevice = devicePath => job => {
     refreshBusyUIState()
     try {
       // $FlowFixMe not sure what's wrong
-      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 }).catch(
+      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 2 }).catch(
         mapError,
       )
       t.setDebugMode(logger.apdu)
