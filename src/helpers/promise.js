@@ -2,6 +2,7 @@
 // small utilities for Promises
 
 import logger from 'logger'
+import { TimeoutTagged } from 'config/errors'
 
 export const delay = (ms: number): Promise<void> => new Promise(f => setTimeout(f, ms))
 
@@ -64,6 +65,23 @@ export function createCancelablePolling(
   })
   return { unsubscribe, promise }
 }
+
+export const timeoutTagged = <T>(tag: string, delay: number, promise: Promise<T>): Promise<T> =>
+  new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      reject(new TimeoutTagged('timeout', { tag }))
+    }, delay)
+    promise.then(
+      r => {
+        clearTimeout(timeout)
+        resolve(r)
+      },
+      e => {
+        clearTimeout(timeout)
+        reject(e)
+      },
+    )
+  })
 
 export const promisify = (fn: any) => (...args: any) =>
   new Promise((resolve, reject) =>

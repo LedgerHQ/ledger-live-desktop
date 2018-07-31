@@ -12,7 +12,6 @@ import { runMigrations } from 'migrations'
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
 
-import { LEDGER_RESET_ALL } from 'config/constants'
 import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
 
 import { fetchAccounts } from 'actions/accounts'
@@ -25,7 +24,6 @@ import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 import db from 'helpers/db'
 import dbMiddleware from 'middlewares/db'
 import CounterValues from 'helpers/countervalues'
-import hardReset from 'helpers/hardReset'
 
 import { decodeAccountsModel, encodeAccountsModel } from 'reducers/accounts'
 
@@ -43,10 +41,6 @@ const TAB_KEY = 9
 db.init(userDataDirectory)
 
 async function init() {
-  if (LEDGER_RESET_ALL) {
-    await hardReset()
-  }
-
   await runMigrations()
   db.init(userDataDirectory)
   db.registerTransform('app', 'accounts', { get: decodeAccountsModel, set: encodeAccountsModel })

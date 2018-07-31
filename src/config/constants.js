@@ -32,13 +32,12 @@ export const MIN_HEIGHT = intFromEnv('LEDGER_MIN_HEIGHT', 700)
 export const CHECK_APP_INTERVAL_WHEN_INVALID = 600
 export const CHECK_APP_INTERVAL_WHEN_VALID = 1200
 export const CHECK_UPDATE_DELAY = 5000
-export const DEVICE_DISCONNECT_DEBOUNCE = intFromEnv('LEDGER_DEVICE_DISCONNECT_DEBOUNCE', 1000)
 export const DEVICE_INFOS_TIMEOUT = intFromEnv('DEVICE_INFOS_TIMEOUT', 5 * 1000)
 export const GENUINE_CACHE_DELAY = intFromEnv('GENUINE_CACHE_DELAY', 1000)
 export const GENUINE_TIMEOUT = intFromEnv('GENUINE_TIMEOUT', 120 * 1000)
 export const GET_CALLS_RETRY = intFromEnv('GET_CALLS_RETRY', 2)
 export const GET_CALLS_TIMEOUT = intFromEnv('GET_CALLS_TIMEOUT', 30 * 1000)
-export const LISTEN_DEVICES_POLLING_INTERVAL = intFromEnv('LISTEN_DEVICES_POLLING_INTERVAL', 1000)
+export const LISTEN_DEVICES_DEBOUNCE = intFromEnv('LISTEN_DEVICES_DEBOUNCE', 200)
 // NB: technically speaking OUTDATED_CONSIDERED_DELAY should be set to ZERO.
 // but we'll only do that when we're sure the sync is performant and all is working smoothly
 export const OUTDATED_CONSIDERED_DELAY = intFromEnv('OUTDATED_CONSIDERED_DELAY', 2 * 60 * 1000)
@@ -46,7 +45,7 @@ export const SYNC_ALL_INTERVAL = 120 * 1000
 export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_PENDING_INTERVAL = 10 * 1000
 export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 1)
-export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 30 * 1000)
+export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 60 * 1000)
 
 // Endpoints...
 
@@ -80,7 +79,6 @@ export const DEBUG_TAB_KEY = boolFromEnv('DEBUG_TAB_KEY')
 export const DEBUG_LIBCORE = boolFromEnv('DEBUG_LIBCORE')
 export const DEBUG_WS = boolFromEnv('DEBUG_WS')
 export const DEBUG_SYNC = boolFromEnv('DEBUG_SYNC')
-export const LEDGER_RESET_ALL = boolFromEnv('LEDGER_RESET_ALL')
 export const LEDGER_DEBUG_ALL_LANGS = boolFromEnv('LEDGER_DEBUG_ALL_LANGS')
 export const SKIP_GENUINE = boolFromEnv('SKIP_GENUINE')
 export const SKIP_ONBOARDING = boolFromEnv('SKIP_ONBOARDING')
