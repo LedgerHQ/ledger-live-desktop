@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'
 import CommNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { LISTEN_DEVICES_DEBOUNCE } from 'config/constants'
 
-CommNodeHid.setListenDevicesPollingInterval(LISTEN_DEVICES_DEBOUNCE)
+CommNodeHid.setListenDevicesDebounce(LISTEN_DEVICES_DEBOUNCE)
 
 CommNodeHid.setListenDevicesDebug((msg, ...args) =>
   logger.debug(msg, {
