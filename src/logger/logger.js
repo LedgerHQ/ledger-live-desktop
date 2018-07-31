@@ -2,7 +2,7 @@
 
 import winston from 'winston'
 import Transport from 'winston-transport'
-import resolveLogsDirectory from 'helpers/resolveLogsDirectory'
+import { resolveLogsDirectory } from 'helpers/log'
 import anonymizer from 'helpers/anonymizer'
 import pname from 'helpers/pname'
 
