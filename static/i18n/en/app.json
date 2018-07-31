@@ -78,7 +78,7 @@
     "menu": "Menu",
     "accounts": "Accounts ({{count}})",
     "manager": "Manager",
-    "exchange": "Exchanges"
+    "exchange": "Trade"
   },
   "account": {
     "lastOperations": "Last operations",
