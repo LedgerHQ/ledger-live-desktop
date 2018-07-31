@@ -40,7 +40,9 @@ export const withDevice: WithDevice = devicePath => job => {
     busy = true
     refreshBusyUIState()
     try {
-      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 }).catch(mapError).catch(mapError)
+      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 1 }).catch(
+        mapError,
+      )
       t.setDebugMode(logger.apdu)
       try {
         const res = await job(t).catch(mapError)
