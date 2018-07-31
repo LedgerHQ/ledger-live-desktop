@@ -196,7 +196,7 @@
     "successDescription_plural": "Your accounts have been created.",
     "createNewAccount": {
       "title": "Add a new account",
-      "noOperationOnLastAccount": "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account.",
+      "noOperationOnLastAccount": "There are no transactions on your last created <1><0>{{accountName}}</0></1> account. You must first receive crypto assets on that account before you can add a new one.",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to create"
     },
     "cta": {
