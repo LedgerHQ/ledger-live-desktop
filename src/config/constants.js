@@ -45,7 +45,7 @@ export const SYNC_ALL_INTERVAL = 120 * 1000
 export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_PENDING_INTERVAL = 10 * 1000
 export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 1)
-export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 30 * 1000)
+export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 60 * 1000)
 
 // Endpoints...
 
@@ -79,7 +79,6 @@ export const DEBUG_TAB_KEY = boolFromEnv('DEBUG_TAB_KEY')
 export const DEBUG_LIBCORE = boolFromEnv('DEBUG_LIBCORE')
 export const DEBUG_WS = boolFromEnv('DEBUG_WS')
 export const DEBUG_SYNC = boolFromEnv('DEBUG_SYNC')
-export const LEDGER_RESET_ALL = boolFromEnv('LEDGER_RESET_ALL')
 export const LEDGER_DEBUG_ALL_LANGS = boolFromEnv('LEDGER_DEBUG_ALL_LANGS')
 export const SKIP_GENUINE = boolFromEnv('SKIP_GENUINE')
 export const SKIP_ONBOARDING = boolFromEnv('SKIP_ONBOARDING')

@@ -93,16 +93,22 @@ const buttonStyles: { [_: string]: Style } = {
         background: ${rgba(c, 0.1)};
       `
     },
-    active: p => `
-      color: ${darken(
-        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
-        0.1,
-      )};
-      border-color: ${darken(
-        p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
-        0.1,
-      )};
-    `,
+    active: p => {
+      const c = p.outlineColor
+        ? p.theme.colors[p.outlineColor] || p.outlineColor
+        : p.theme.colors.wallet
+      return `
+        background: ${rgba(c, 0.15)};
+        color: ${darken(
+          p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
+          0.1,
+        )};
+        border-color: ${darken(
+          p.outlineColor ? p.theme.colors[p.outlineColor] || p.outlineColor : p.theme.colors.wallet,
+          0.1,
+        )};
+      `
+    },
   },
   outlineGrey: {
     default: p => `
