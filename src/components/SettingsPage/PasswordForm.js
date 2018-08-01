@@ -6,11 +6,9 @@ import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
 import Label from 'components/base/Label'
 
-import { createCustomErrorClass } from 'helpers/errors'
+import { PasswordsDontMatchError } from 'config/errors'
 
 import type { T } from 'types/common'
-
-const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
 
 type Props = {
   t: T,

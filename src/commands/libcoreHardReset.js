@@ -3,9 +3,7 @@
 import { createCommand } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 import withLibcore from 'helpers/withLibcore'
-import { createCustomErrorClass } from 'helpers/errors'
-
-const HardResetFail = createCustomErrorClass('HardResetFail')
+import { HardResetFail } from 'config/errors'
 
 const cmd = createCommand('libcoreHardReset', () =>
   fromPromise(

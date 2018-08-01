@@ -4,13 +4,12 @@ import type { DeviceInfo, DeviceVersion, OsuFirmware, FinalFirmware } from 'help
 
 import { WS_INSTALL } from 'helpers/urls'
 import { createDeviceSocket } from 'helpers/socket'
-import { createCustomErrorClass } from 'helpers/errors'
 import getDeviceVersion from 'helpers/devices/getDeviceVersion'
 import getOsuFirmware from 'helpers/devices/getOsuFirmware'
 import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import getFinalFirmwareById from './getFinalFirmwareById'
+import { ManagerDeviceLockedError } from 'config/errors'
 
-const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+import getFinalFirmwareById from './getFinalFirmwareById'
 
 function remapSocketError(promise) {
   return promise.catch((e: Error) => {

@@ -5,11 +5,9 @@ import { WS_MCU } from 'helpers/urls'
 import { createDeviceSocket } from 'helpers/socket'
 import getNextMCU from 'helpers/firmware/getNextMCU'
 import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import { createCustomErrorClass } from 'helpers/errors'
+import { ManagerDeviceLockedError } from 'config/errors'
 
 import type { DeviceInfo } from 'helpers/types'
-
-const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
 
 function remapSocketError(promise) {
   return promise.catch((e: Error) => {

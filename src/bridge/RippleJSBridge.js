@@ -20,10 +20,8 @@ import {
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { createCustomErrorClass } from 'helpers/errors'
+import { NotEnoughBalance } from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
-
-const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 type Transaction = {
   amount: BigNumber,

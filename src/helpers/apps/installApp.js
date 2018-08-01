@@ -4,14 +4,14 @@ import type Transport from '@ledgerhq/hw-transport'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { ApplicationVersion } from 'helpers/types'
-
-import { createCustomErrorClass } from 'helpers/errors'
 import { WS_INSTALL } from 'helpers/urls'
 
-const ManagerNotEnoughSpaceError = createCustomErrorClass('ManagerNotEnoughSpace')
-const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
-const ManagerAppAlreadyInstalledError = createCustomErrorClass('ManagerAppAlreadyInstalled')
-const ManagerAppRelyOnBTCError = createCustomErrorClass('ManagerAppRelyOnBTC')
+import {
+  ManagerNotEnoughSpaceError,
+  ManagerDeviceLockedError,
+  ManagerAppAlreadyInstalledError,
+  ManagerAppRelyOnBTCError,
+} from 'config/errors'
 
 function remapError(promise) {
   return promise.catch((e: Error) => {
