@@ -9,7 +9,7 @@ import invariant from 'invariant'
 
 import type { Device, T } from 'types/common'
 
-import type { LedgerScriptParams } from 'helpers/types'
+import type { DeviceInfo, OsuFirmware } from 'helpers/types'
 import type { StepId } from 'components/modals/UpdateFirmware'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
@@ -19,7 +19,6 @@ import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
 import DisclaimerModal from 'components/modals/UpdateFirmware/Disclaimer'
 import UpdateModal from 'components/modals/UpdateFirmware'
-import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Tooltip from 'components/base/Tooltip'
 import Box, { Card } from 'components/base/Box'
@@ -43,7 +42,7 @@ type Props = {
 }
 
 type State = {
-  latestFirmware: ?LedgerScriptParams & ?{ shouldFlashMcu: boolean },
+  latestFirmware: ?OsuFirmware & ?{ shouldFlashMcu: boolean },
   modal: ModalStatus,
   stepId: ?StepId,
   shouldFlash: boolean,
