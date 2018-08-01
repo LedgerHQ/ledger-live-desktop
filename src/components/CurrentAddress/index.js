@@ -143,6 +143,10 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
     copyFeedback: false,
   }
 
+  componentWillUnmount() {
+    this._isUnmounted = true
+  }
+
   _isUnmounted = false
 
   render() {

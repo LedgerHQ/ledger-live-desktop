@@ -22,7 +22,7 @@ import { accountsSelector } from 'reducers/accounts'
 import { closeModal, openModal } from 'reducers/modals'
 import { DisconnectedDevice, UserRefusedOnDevice } from 'config/errors'
 
-import Modal from 'components/base/LegacyModal'
+import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
@@ -272,8 +272,8 @@ class SendModal extends PureComponent<Props, State<*>> {
 
     return (
       <Modal
+        centered
         name={MODAL_SEND}
-        refocusWhenChange={stepId}
         onHide={this.handleReset}
         preventBackdropClick={isModalLocked}
         onBeforeOpen={this.handleBeforeOpenModal}

@@ -43,8 +43,8 @@ const handlers = {
     return {
       ...state,
       [name]: {
+        ...state[name],
         isOpened: false,
-        data: undefined,
       },
     }
   },

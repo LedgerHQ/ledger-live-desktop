@@ -13,7 +13,7 @@ import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import type { T, Device } from 'types/common'
-import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
+import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 
 import { idleCallback } from 'helpers/promise'
 import { getCurrentDevice } from 'reducers/devices'
@@ -21,7 +21,7 @@ import { accountsSelector } from 'reducers/accounts'
 import { addAccount } from 'actions/accounts'
 import { closeModal } from 'reducers/modals'
 
-import Modal from 'components/base/LegacyModal'
+import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 import { validateNameEdition } from 'helpers/accountName'
 
@@ -43,6 +43,7 @@ const createSteps = ({ t }: { t: T }) => {
       footer: StepChooseCurrencyFooter,
       onBack: null,
       hideFooter: false,
+      noScroll: true,
     },
     {
       id: 'connectDevice',
@@ -161,7 +162,6 @@ class AddAccounts extends PureComponent<Props, State> {
   }
 
   handleCloseModal = () => this.props.closeModal(MODAL_ADD_ACCOUNTS)
-  handleStepChange = (step: Step) => this.setState({ stepId: step.id })
 
   handleSetCurrency = (currency: ?Currency) => this.setState({ currency })
 
@@ -207,7 +207,6 @@ class AddAccounts extends PureComponent<Props, State> {
   render() {
     const { t, device, existingAccounts } = this.props
     const {
-      stepId,
       currency,
       isAppOpened,
       scannedAccounts,
@@ -241,15 +240,14 @@ class AddAccounts extends PureComponent<Props, State> {
 
     return (
       <Modal
+        centered
         name={MODAL_ADD_ACCOUNTS}
-        refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}
         render={({ onClose }) => (
           <Stepper
             key={reset} // THIS IS A HACK because stepper is not controllable. FIXME
             title={t('app:addAccounts.title')}
             initialStepId="chooseCurrency"
-            onStepChange={this.handleStepChange}
             onClose={onClose}
             steps={this.STEPS}
             {...stepperProps}

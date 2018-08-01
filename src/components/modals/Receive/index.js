@@ -19,7 +19,7 @@ import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
 import { closeModal } from 'reducers/modals'
 
-import Modal from 'components/base/LegacyModal'
+import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 
 import StepAccount, { StepAccountFooter } from './steps/01-step-account'
@@ -64,6 +64,7 @@ const createSteps = ({ t }: { t: T }) => [
     label: t('app:receive.steps.chooseAccount.title'),
     component: StepAccount,
     footer: StepAccountFooter,
+    noScroll: true,
   },
   {
     id: 'device',
@@ -192,6 +193,7 @@ class ReceiveModal extends PureComponent<Props, State> {
 
     return (
       <Modal
+        centered
         name={MODAL_RECEIVE}
         refocusWhenChange={stepId}
         onHide={this.handleReset}

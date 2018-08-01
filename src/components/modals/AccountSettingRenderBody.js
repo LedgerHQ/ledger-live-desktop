@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -28,13 +28,8 @@ import Input from 'components/base/Input'
 import Select from 'components/base/Select'
 import SyncAgo from 'components/SyncAgo'
 
-import {
-  ModalBody,
-  ModalTitle,
-  ModalFooter,
-  ModalContent,
-  ConfirmModal,
-} from 'components/base/LegacyModal'
+import { ConfirmModal } from 'components/base/LegacyModal'
+import { ModalBody } from 'components/base/Modal'
 
 type State = {
   accountName: ?string,
@@ -74,7 +69,7 @@ const defaultState = {
   isRemoveAccountModalOpen: false,
 }
 
-class HelperComp extends PureComponent<Props, State> {
+class AccountSettingRenderBody extends PureComponent<Props, State> {
   state = {
     ...defaultState,
   }
@@ -207,11 +202,12 @@ class HelperComp extends PureComponent<Props, State> {
     }
 
     return (
-      <ModalBody onClose={onClose}>
-        <form onSubmit={this.handleSubmit(account, onClose)}>
-          <TrackPage category="Modal" name="AccountSettings" />
-          <ModalTitle>{t('app:account.settings.title')}</ModalTitle>
-          <ModalContent mb={3}>
+      <ModalBody
+        onClose={onClose}
+        title={t('app:account.settings.title')}
+        render={() => (
+          <form onSubmit={this.handleSubmit(account, onClose)}>
+            <TrackPage category="Modal" name="AccountSettings" />
             <Container>
               <Box>
                 <OptionRowTitle>{t('app:account.settings.accountName.title')}</OptionRowTitle>
@@ -284,8 +280,21 @@ class HelperComp extends PureComponent<Props, State> {
                 value={JSON.stringify(usefulData, null, 2)}
               />
             </Spoiler>
-          </ModalContent>
-          <ModalFooter horizontal>
+            <ConfirmModal
+              analyticsName="RemoveAccount"
+              isDanger
+              isOpened={isRemoveAccountModalOpen}
+              onClose={this.handleCloseRemoveAccountModal}
+              onReject={this.handleCloseRemoveAccountModal}
+              onConfirm={() => this.handleRemoveAccount(account)}
+              title={t('app:settings.removeAccountModal.title')}
+              subTitle={t('app:common.areYouSure')}
+              desc={t('app:settings.removeAccountModal.desc')}
+            />
+          </form>
+        )}
+        renderFooter={() => (
+          <Fragment>
             <Button
               event="OpenAccountDelete"
               danger
@@ -297,20 +306,9 @@ class HelperComp extends PureComponent<Props, State> {
             <Button event="DoneEditingAccount" ml="auto" type="submit" primary>
               {t('app:common.apply')}
             </Button>
-          </ModalFooter>
-        </form>
-        <ConfirmModal
-          analyticsName="RemoveAccount"
-          isDanger
-          isOpened={isRemoveAccountModalOpen}
-          onClose={this.handleCloseRemoveAccountModal}
-          onReject={this.handleCloseRemoveAccountModal}
-          onConfirm={() => this.handleRemoveAccount(account)}
-          title={t('app:settings.removeAccountModal.title')}
-          subTitle={t('app:common.areYouSure')}
-          desc={t('app:settings.removeAccountModal.desc')}
-        />
-      </ModalBody>
+          </Fragment>
+        )}
+      />
     )
   }
 }
@@ -321,7 +319,7 @@ export default compose(
     mapDispatchToProps,
   ),
   translate(),
-)(HelperComp)
+)(AccountSettingRenderBody)
 
 export function InputLeft({ currency }: { currency: Currency }) {
   return (
