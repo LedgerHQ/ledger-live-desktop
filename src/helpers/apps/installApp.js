@@ -1,13 +1,12 @@
 // @flow
-import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import { BASE_SOCKET_URL } from 'config/constants'
 import { createDeviceSocket } from 'helpers/socket'
 
-import type { LedgerScriptParams } from 'helpers/types'
+import type { ApplicationVersion } from 'helpers/types'
 
 import { createCustomErrorClass } from 'helpers/errors'
+import { WS_INSTALL } from 'helpers/urls'
 
 const ManagerNotEnoughSpaceError = createCustomErrorClass('ManagerNotEnoughSpace')
 const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
@@ -37,8 +36,8 @@ function remapError(promise) {
 export default async function installApp(
   transport: Transport<*>,
   targetId: string | number,
-  { app }: { app: LedgerScriptParams },
-): Promise<*> {
+  { app }: { app: ApplicationVersion },
+): Promise<void> {
   const params = {
     targetId,
     perso: app.perso,
@@ -47,6 +46,7 @@ export default async function installApp(
     firmwareKey: app.firmware_key,
     hash: app.hash,
   }
-  const url = `${BASE_SOCKET_URL}/install?${qs.stringify(params)}`
-  return remapError(createDeviceSocket(transport, url).toPromise())
+
+  const url = WS_INSTALL(params)
+  await remapError(createDeviceSocket(transport, url).toPromise())
 }

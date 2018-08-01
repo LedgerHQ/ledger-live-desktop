@@ -27,7 +27,7 @@ function remapError(promise) {
   })
 }
 
-type Result = Promise<{ success: boolean, error?: any }>
+type Result = Promise<{ success: boolean }>
 
 export default async (
   transport: Transport<*>,
