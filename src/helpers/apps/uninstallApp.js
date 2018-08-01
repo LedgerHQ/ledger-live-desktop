@@ -4,11 +4,8 @@ import type Transport from '@ledgerhq/hw-transport'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { ApplicationVersion } from 'helpers/types'
-import { createCustomErrorClass } from 'helpers/errors'
+import { ManagerDeviceLockedError, ManagerUninstallBTCDep } from 'config/errors'
 import { WS_INSTALL } from 'helpers/urls'
-
-const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
-const ManagerUninstallBTCDep = createCustomErrorClass('ManagerUninstallBTCDep')
 
 function remapError(promise) {
   return promise.catch((e: Error) => {

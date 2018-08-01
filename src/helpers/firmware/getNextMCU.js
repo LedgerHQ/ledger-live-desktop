@@ -2,10 +2,8 @@
 import network from 'api/network'
 
 import { GET_NEXT_MCU } from 'helpers/urls'
-import { createCustomErrorClass } from 'helpers/errors'
 import type { OsuFirmware } from 'helpers/types'
-
-const LatestMCUInstalledError = createCustomErrorClass('LatestMCUInstalledError')
+import { LatestMCUInstalledError } from 'config/errors'
 
 type NetworkResponse = { data: OsuFirmware | 'default' }
 

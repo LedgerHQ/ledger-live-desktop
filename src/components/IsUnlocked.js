@@ -17,7 +17,7 @@ import hardReset from 'helpers/hardReset'
 import { fetchAccounts } from 'actions/accounts'
 import { isLocked, unlock } from 'reducers/application'
 
-import { createCustomErrorClass } from 'helpers/errors'
+import { PasswordIncorrectError } from 'config/errors'
 
 import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
@@ -25,8 +25,6 @@ import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
 import IconArrowRight from 'icons/ArrowRight'
 import Button from './base/Button/index'
 import ConfirmModal from './base/Modal/ConfirmModal'
-
-const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type InputValue = {
   password: string,
