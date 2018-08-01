@@ -1542,9 +1542,9 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@3.0.0-beta.2":
-  version "3.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.0.0-beta.2.tgz#9280694bcfb6f8819bc90538dbdfcfa260e3454e"
+"@ledgerhq/live-common@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.0.0.tgz#abbd88e351c7d0ffffabf7e8502f5b2fbecdc150"
   dependencies:
     axios "^0.18.0"
     bignumber.js "^7.2.1"
