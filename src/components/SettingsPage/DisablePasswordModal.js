@@ -68,7 +68,9 @@ class DisablePasswordModal extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <form onSubmit={this.disablePassword}>
             <ModalBody onClose={onClose}>
-              <ModalTitle>{t('app:password.disablePassword.title')}</ModalTitle>
+              <ModalTitle data-e2e="disablePassword_modalTitle">
+                {t('app:password.disablePassword.title')}
+              </ModalTitle>
               <ModalContent>
                 <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
                   {t('app:password.disablePassword.desc')}

@@ -60,7 +60,7 @@ function ModalTitle({
   children: any,
 }) {
   return (
-    <Container {...props}>
+    <Container {...props} data-e2e="modal_title">
       {onBack && (
         <Back onClick={onBack}>
           <IconAngleLeft size={16} />

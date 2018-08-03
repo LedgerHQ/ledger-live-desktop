@@ -209,6 +209,7 @@ class InputCurrency extends PureComponent<Props, State> {
 
     return (
       <Input
+        data-e2e="addAccount_currencyInput"
         {...this.props}
         ff="Rubik"
         ref={this.onRef}

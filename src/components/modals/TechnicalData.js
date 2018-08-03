@@ -45,7 +45,7 @@ class TechnicalData extends PureComponent<Props, *> {
         name={MODAL_TECHNICAL_DATA}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle>
+            <ModalTitle data-e2e="modal_title_TechData">
               {t('onboarding:analytics.technicalData.mandatoryContextual.title')}
             </ModalTitle>
             <InlineDesc>{t('onboarding:analytics.technicalData.desc')}</InlineDesc>
@@ -53,7 +53,7 @@ class TechnicalData extends PureComponent<Props, *> {
               <Ul>{items.map(item => <li key={item.key}>{item.desc}</li>)}</Ul>
             </ModalContent>
             <ModalFooter horizontal justifyContent="flex-end">
-              <Button onClick={onClose} primary>
+              <Button onClick={onClose} primary data-e2e="modal_buttonClose_techData">
                 {t('app:common.close')}
               </Button>
             </ModalFooter>

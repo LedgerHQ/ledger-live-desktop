@@ -64,13 +64,15 @@ class ShareAnalytics extends PureComponent<Props, *> {
         name={MODAL_SHARE_ANALYTICS}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle>{t('onboarding:analytics.shareAnalytics.title')}</ModalTitle>
+            <ModalTitle data-e2e="modal_title_shareAnalytics">
+              {t('onboarding:analytics.shareAnalytics.title')}
+            </ModalTitle>
             <InlineDesc>{t('onboarding:analytics.shareAnalytics.desc')}</InlineDesc>
             <ModalContent mx={5}>
               <Ul>{items.map(item => <li key={item.key}>{item.desc}</li>)}</Ul>
             </ModalContent>
             <ModalFooter horizontal justifyContent="flex-end">
-              <Button onClick={onClose} primary>
+              <Button onClick={onClose} primary data-e2e="modal_buttonClose_shareAnalytics">
                 {t('app:common.close')}
               </Button>
             </ModalFooter>

@@ -19,7 +19,7 @@ class AccountCardListHeader extends PureComponent<Props> {
 
     return (
       <Box horizontal alignItems="flex-end">
-        <Text color="dark" ff="Museo Sans" fontSize={6}>
+        <Text color="dark" ff="Museo Sans" fontSize={6} data-e2e="dashboard_AccountCount">
           {t('app:dashboard.accounts.title', { count: accountsLength })}
         </Text>
         <Box ml="auto" horizontal flow={1}>

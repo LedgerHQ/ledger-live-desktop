@@ -25,7 +25,7 @@ class DisclaimerModal extends PureComponent<Props> {
         name={MODAL_DISCLAIMER}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle data-e2e="disclaimer_title">{t('app:disclaimerModal.title')}</ModalTitle>
+            <ModalTitle>{t('app:disclaimerModal.title')}</ModalTitle>
             <ModalContent flow={4} ff="Open Sans|Regular" fontSize={4} color="smoke">
               <Box align="center" mt={4} pb={4}>
                 <HandShield size={55} />
