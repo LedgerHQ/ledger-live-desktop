@@ -8,14 +8,16 @@ import migrations from './migrations'
 
 // Logic to run all the migrations based on what was not yet run:
 export const runMigrations = async (): Promise<void> => {
-  const current = await db.getNamespace('migrations')
+  // Legacy: the migration nonce was previously stored in separate file
+  // it can happen, so we have to check it from here also.
+  const current = (await db.getKey('app', 'migrations')) || (await db.getNamespace('migrations'))
 
   let { nonce } = current || { nonce: migrations.length }
   const outdated = migrations.length - nonce
 
   if (!outdated) {
     if (!current) {
-      await db.setNamespace('migrations', { nonce })
+      await db.setKey('app', 'migrations.nonce', nonce)
     }
     return
   }
@@ -31,6 +33,6 @@ export const runMigrations = async (): Promise<void> => {
     }
     logger.log(`${outdated} migration(s) performed.`)
   } finally {
-    await db.setNamespace('migrations', { nonce })
+    await db.setKey('app', 'migrations.nonce', nonce)
   }
 }
