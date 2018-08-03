@@ -10,14 +10,22 @@ class ModalContent extends PureComponent<{
   noScroll?: boolean,
 }> {
   componentDidMount() {
-    this.showHideGradient()
-    if (this._outer) {
-      const ro = new ResizeObserver(this.showHideGradient)
-      ro.observe(this._outer)
-    }
+    window.requestAnimationFrame(() => {
+      if (this._isUnmounted) return
+      this.showHideGradient()
+      if (this._outer) {
+        const ro = new ResizeObserver(this.showHideGradient)
+        ro.observe(this._outer)
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    this._isUnmounted = true
   }
 
   _outer = null
+  _isUnmounted = false
 
   showHideGradient = () => {
     if (!this._outer) return
