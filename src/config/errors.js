@@ -1,7 +1,5 @@
 // @flow
 
-// TODO we need to start porting all custom errors here.
-
 import { createCustomErrorClass } from 'helpers/errors'
 
 export const AccountNameRequiredError = createCustomErrorClass('AccountNameRequired')
@@ -41,6 +39,11 @@ export const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnec
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 export const ETHAddressNonEIP = createCustomErrorClass('ETHAddressNonEIP')
 export const CantScanQRCode = createCustomErrorClass('CantScanQRCode')
+
+// health check errors
+export const ManagerAPIsFail = createCustomErrorClass('ManagerAPIsFail')
+export const CountervaluesApiFails = createCustomErrorClass('CountervaluesApiFails')
+export const SecureWebSocketFails = createCustomErrorClass('SecureWebSocketFails')
 
 // db stuff, no need to translate
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')

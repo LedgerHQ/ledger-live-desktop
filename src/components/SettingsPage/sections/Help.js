@@ -14,6 +14,7 @@ import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
 import AboutRowItem from '../AboutRowItem'
 import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
+import CheckHealthButton from '../CheckHealthButton'
 
 import {
   SettingsSection as Section,
@@ -75,6 +76,12 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('app:settings.profile.hardResetDesc')}
           >
             <ResetButton />
+          </Row>
+          <Row
+            title={t('app:settings.healthCheck.title')}
+            desc={t('app:settings.healthCheck.desc')}
+          >
+            <CheckHealthButton />
           </Row>
         </Body>
       </Section>

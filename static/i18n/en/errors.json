@@ -49,7 +49,8 @@
   },
   "LatestMCUInstalledError": {
     "title": "Oops, nothing to update",
-    "description": "Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device."
+    "description":
+      "Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device."
   },
   "LedgerAPIError": {
     "title": "Sorry, try again (API HTTP {{status}})",
@@ -93,7 +94,8 @@
   },
   "NoAddressesFound": {
     "title": "Sorry, no accounts found",
-    "description": "Something went wrong with address calculation, try again or contact Ledger Support."
+    "description":
+      "Something went wrong with address calculation, try again or contact Ledger Support."
   },
   "NotEnoughBalance": {
     "title": "Oops, insufficient balance",
@@ -149,7 +151,8 @@
   },
   "WrongDeviceForAccount": {
     "title": "Oops, wrong device for ‘{{accountName}}’.",
-    "description": "The connected device is not associated with the account you selected. Please connect the right device."
+    "description":
+      "The connected device is not associated with the account you selected. Please connect the right device."
   },
   "DeviceAppVerifyNotSupported": {
     "title": "Open Manager to update this App",
@@ -160,7 +163,8 @@
   },
   "CantOpenDevice": {
     "title": "Oops, couldn’t connect to device",
-    "description": "Device detected but connection failed. Please retry and get help if the problem persists."
+    "description":
+      "Device detected but connection failed. Please retry and get help if the problem persists."
   },
   "ETHAddressNonEIP": {
     "title": "Auto-verification not available: carefully verify the address",

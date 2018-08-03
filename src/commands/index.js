@@ -10,6 +10,7 @@ import getCurrentFirmware from 'commands/getCurrentFirmware'
 import getIsGenuine from 'commands/getIsGenuine'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
 import getMemInfo from 'commands/getMemInfo'
+import healthCheck from 'commands/healthCheck'
 import installApp from 'commands/installApp'
 import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
@@ -41,6 +42,7 @@ const all: Array<Command<any, any>> = [
   getIsGenuine,
   getLatestFirmwareForDevice,
   getMemInfo,
+  healthCheck,
   installApp,
   installFinalFirmware,
   installMcu,
