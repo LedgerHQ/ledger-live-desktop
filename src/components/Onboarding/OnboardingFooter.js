@@ -27,7 +27,7 @@ const OnboardingFooter = ({
       {t('app:common.back')}
     </Button>
     <Button
-      data-e2eId="continue_button"
+      data-e2e="continue_button"
       disabled={isContinueDisabled}
       primary
       onClick={() => nextStep()}
