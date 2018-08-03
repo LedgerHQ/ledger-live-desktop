@@ -37,6 +37,17 @@ const migrations: Migration[] = [
       )
     },
   },
+  {
+    doc: 'merging migrations into app.json',
+    run: async () => {
+      const migrations = await db.getNamespace('migrations')
+      await db.setKey('app', 'migrations', migrations)
+      const dbPath = db.getDBPath()
+      try {
+        await fsUnlink(path.resolve(dbPath, 'migrations.json'))
+      } catch (err) {} // eslint-disable-line
+    },
+  },
 ]
 
 async function getFileData(dbPath, fileName) {
