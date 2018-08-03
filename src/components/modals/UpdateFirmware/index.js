@@ -4,7 +4,7 @@ import { translate } from 'react-i18next'
 
 import type { T, Device } from 'types/common'
 
-import Modal from 'components/base/LegacyModal'
+import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
@@ -121,20 +121,23 @@ class UpdateModal extends PureComponent<Props, State> {
       ...props,
     }
 
+    const isModalLocked = stepId !== 'finish' && !error
+
     return (
       <Modal
+        centered
         onClose={onClose}
         onHide={this.handleReset}
         isOpened={status === 'install'}
-        refocusWhenChange={stepId}
-        preventBackdropClick={stepId !== 'finish' && !error}
-        render={() => (
+        preventBackdropClick={isModalLocked}
+        render={({ onClose }) => (
           <Stepper
             key={nonce}
             onStepChange={this.handleStepChange}
             title={t('app:manager.firmware.update')}
             initialStepId={stepId}
             steps={this.STEPS}
+            onClose={onClose}
             {...additionalProps}
           >
             <FreezeDeviceChangeEvents />
