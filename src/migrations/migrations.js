@@ -18,7 +18,7 @@ const migrations: Migration[] = [
       const dbPath = db.getDBPath()
       const legacyKeys = ['accounts', 'countervalues', 'settings', 'user']
       const [accounts, countervalues, settings, user] = await Promise.all(
-        legacyKeys.map(key => getLegacyData(path.join(dbPath, `${key}.json`))),
+        legacyKeys.map(key => getFileData(dbPath, key)),
       )
       const appData = { user, settings, accounts, countervalues }
       await db.setNamespace('app', appData)
@@ -28,15 +28,33 @@ const migrations: Migration[] = [
       const windowParams = await db.getKey('app', 'settings.window')
       await db.setKey('app', 'settings.window', undefined)
       await db.setNamespace('windowParams', windowParams)
-      await Promise.all(legacyKeys.map(key => fsUnlink(path.join(dbPath, `${key}.json`))))
+      await Promise.all(
+        legacyKeys.map(async key => {
+          try {
+            await fsUnlink(path.join(dbPath, `${key}.json`))
+          } catch (err) {} // eslint-disable-line
+        }),
+      )
+    },
+  },
+  {
+    doc: 'merging migrations into app.json',
+    run: async () => {
+      const migrations = await db.getNamespace('migrations')
+      await db.setKey('app', 'migrations', migrations)
+      const dbPath = db.getDBPath()
+      try {
+        await fsUnlink(path.resolve(dbPath, 'migrations.json'))
+      } catch (err) {} // eslint-disable-line
     },
   },
 ]
 
-async function getLegacyData(filePath) {
+async function getFileData(dbPath, fileName) {
+  const filePath = path.join(dbPath, `${fileName}.json`)
   let finalData
-  const fileContent = await fsReadfile(filePath, 'utf-8')
   try {
+    const fileContent = await fsReadfile(filePath, 'utf-8')
     const { data } = JSON.parse(fileContent)
     finalData = data
   } catch (err) {
@@ -45,7 +63,8 @@ async function getLegacyData(filePath) {
       const buf = await fsReadfile(filePath)
       return buf.toString('base64')
     }
-    throw err
+    // will be stripped down by JSON.stringify
+    return undefined
   }
   return finalData
 }
