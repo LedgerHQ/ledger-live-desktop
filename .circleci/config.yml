@@ -1,27 +1,50 @@
 version: 2
-
 defaults: &defaults
   working_directory: ~/ledger-live-desktop
-  docker:
-    - image: circleci/node:8.11.3-stretch-browsers
 
 jobs:
-  build:
+  build-windows:
     <<: *defaults
+    docker:
+    - image: dockcross/windows-x64-posix
     steps:
-      - run: sudo apt-get install -y libudev-dev
       - checkout
-      - restore_cache:
-          keys:
-            - v7-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
-      - save_cache:
-          key: v7-yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
-      - run: yarn lint
-      - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
-      - run: yarn flow --quiet
-      - run: yarn dist
-      - run: yarn test
-#    - run: yarn release
+      - run: yarn release
+
+
+
+
+
+
+  build-OSX:
+    <<: *defaults
+    macos:
+      xcode: "9.0"
+    environment:
+        BASH_ENV: "~/.bashrc"
+    steps:
+#      - run: sudo apt-get install -y libudev-dev
+      - checkout
+      - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+#      - run: source ~/.bashrc
+#      - run: export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+#      - run: export NVM_DIR=~/.nvm
+#      - run: source ~/.nvm/nvm.sh
+      - run: nvm ls-remote --lts
+      - run: nvm install v8.11.3
+      - run: nvm --version
+      - run: nvm install node
+      - run: nvm use node
+      - run: node --version
+      - run: yarn install
+#      - run: yarn lint
+#      - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
+#      - run: yarn flow --quiet
+#      - run: yarn test
+      - run: yarn release
+workflows:
+  version: 2
+  builds:
+      - build-windows
+      - build-OSX
