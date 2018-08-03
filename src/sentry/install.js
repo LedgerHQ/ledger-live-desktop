@@ -16,6 +16,18 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
     },
     environment: __DEV__ ? 'development' : 'production',
     shouldSendCallback,
+    ignoreErrors: [
+      'status code 404',
+      'timeout',
+      'socket hang up',
+      'getaddrinfo ',
+      'ETIMEDOUT',
+      'ECONNRESET',
+      'ENETUNREACH',
+      'request timed out',
+      'NetworkDown',
+      'ERR_CONNECTION_TIMED_OUT',
+    ],
     autoBreadcrumbs: {
       xhr: false, // it is track anonymously from logger
       console: false, // we don't track because not anonymized
