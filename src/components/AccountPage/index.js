@@ -8,6 +8,7 @@ import { Redirect } from 'react-router'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
+import isAccountEmpty from 'helpers/isAccountEmpty'
 import {
   counterValueCurrencySelector,
   localeSelector,
@@ -82,7 +83,7 @@ class AccountPage extends PureComponent<Props> {
           <AccountHeaderActions account={account} />
         </Box>
 
-        {account.operations.length > 0 || !account.balance.isZero() ? (
+        {!isAccountEmpty(account) ? (
           <Fragment>
             <Box mb={7}>
               <BalanceSummary
