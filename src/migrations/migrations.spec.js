@@ -50,6 +50,41 @@ describe('migration 1', () => {
         },
       })
     })
+
+    test('handle missing file without crash', async () => {
+      const dir = await extractMock('userdata_v1.0.5_mock-03-missing-file')
+      let files
+      files = await fsReaddir(dir)
+      expect(files).toEqual(['countervalues.json', 'migrations.json', 'settings.json', 'user.json'])
+      db.init(dir)
+      let err
+      try {
+        await runMigrations()
+      } catch (e) {
+        err = e
+      }
+      expect(err).toBeUndefined()
+      files = await fsReaddir(dir)
+      expect(files).toEqual(['app.json', 'migrations.json', 'windowParams.json'])
+    })
+
+    test('handle where app.json is already present', async () => {
+      const dir = await extractMock('userdata_v1.0.5_mock-04-app-json-present')
+      let files
+      files = await fsReaddir(dir)
+      expect(files).toEqual([
+        'accounts.json',
+        'app.json',
+        'countervalues.json',
+        'migrations.json',
+        'settings.json',
+        'user.json',
+      ])
+      db.init(dir)
+      await runMigrations()
+      files = await fsReaddir(dir)
+      expect(files).toEqual(['app.json', 'migrations.json', 'windowParams.json'])
+    })
   })
 
   describe('with encryption', () => {
