@@ -1,8 +1,10 @@
 version: 2
+
 defaults: &defaults
   working_directory: ~/ledger-live-desktop
 
 jobs:
+# windows build
   build-windows:
     <<: *defaults
     docker:
