@@ -1,4 +1,5 @@
 version: 2
+
 defaults: &defaults
   working_directory: ~/ledger-live-desktop
 
@@ -11,10 +12,6 @@ jobs:
       - checkout
       - run: yarn install
       - run: yarn release
-
-
-
-
 
 
   build-OSX:
