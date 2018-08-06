@@ -246,7 +246,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
         }
         for (let i = 0; i < 50; i++) {
           const api = apiForCurrency(account.currency)
-          const { block } = txs[txs.length - 1]
+          const last = txs[txs.length - 1]
+          if (!last) break
+          const { block } = last
           if (!block) break
           const next = await api.getTransactions(account.freshAddress, block.hash)
           if (next.txs.length === 0) break

@@ -12,6 +12,7 @@ import db from 'helpers/db'
 
 const rimraf = promisify(rimrafModule)
 const fsReaddir = promisify(fs.readdir)
+const fsReadFile = promisify(fs.readFile)
 
 const tmpDir = os.tmpdir()
 
@@ -20,14 +21,12 @@ const accountsTransform = {
   set: encodeAccountsModel,
 }
 
-describe('migration 1', () => {
+describe('from nonce 0', () => {
   describe('without encryption', () => {
     test('merging db files', async () => {
       const dir = await extractMock('userdata_v1.0.5_mock-01')
-      let files
       db.init(dir)
-      files = await fsReaddir(dir)
-      expect(files).toEqual([
+      await expectFiles(dir, [
         'accounts.json',
         'countervalues.json',
         'migrations.json',
@@ -35,8 +34,7 @@ describe('migration 1', () => {
         'user.json',
       ])
       await runMigrations()
-      files = await fsReaddir(dir)
-      expect(files).toEqual(['app.json', 'migrations.json', 'windowParams.json'])
+      await expectFiles(dir, ['app.json', 'windowParams.json'])
       db.init(dir)
       db.registerTransform('app', 'accounts', accountsTransform)
       const accounts = await db.getKey('app', 'accounts')
@@ -50,6 +48,40 @@ describe('migration 1', () => {
         },
       })
     })
+
+    test('handle missing file without crash', async () => {
+      const dir = await extractMock('userdata_v1.0.5_mock-03-missing-file')
+      await expectFiles(dir, [
+        'countervalues.json',
+        'migrations.json',
+        'settings.json',
+        'user.json',
+      ])
+      db.init(dir)
+      let err
+      try {
+        await runMigrations()
+      } catch (e) {
+        err = e
+      }
+      expect(err).toBeUndefined()
+      await expectFiles(dir, ['app.json', 'windowParams.json'])
+    })
+
+    test('handle where app.json is already present', async () => {
+      const dir = await extractMock('userdata_v1.0.5_mock-04-app-json-present')
+      await expectFiles(dir, [
+        'accounts.json',
+        'app.json',
+        'countervalues.json',
+        'migrations.json',
+        'settings.json',
+        'user.json',
+      ])
+      db.init(dir)
+      await runMigrations()
+      await expectFiles(dir, ['app.json', 'windowParams.json'])
+    })
   })
 
   describe('with encryption', () => {
@@ -59,8 +91,7 @@ describe('migration 1', () => {
       db.registerTransform('app', 'accounts', accountsTransform)
       await runMigrations()
       await db.setEncryptionKey('app', 'accounts', 'passw0rd')
-      const files = await fsReaddir(dir)
-      expect(files).toEqual(['app.json', 'migrations.json', 'windowParams.json'])
+      await expectFiles(dir, ['app.json', 'windowParams.json'])
       const accounts = await db.getKey('app', 'accounts')
       expect(accounts.length).toBe(6)
       expect(accounts[0].balance).toBeInstanceOf(BigNumber)
@@ -79,6 +110,21 @@ describe('migration 1', () => {
   })
 })
 
+describe('from nonce 1', () => {
+  test('merging migration file into app file', async () => {
+    const dir = await extractMock('userdata_v1.1.1_mock-01')
+    await expectFiles(dir, ['app.json', 'migrations.json', 'windowParams.json'])
+    const migrationsBefore = await fsReadFile(path.resolve(dir, 'migrations.json'), 'utf-8')
+    expect(migrationsBefore).toBe('{"data":{"nonce":1}}')
+    db.init(dir)
+    db.registerTransform('app', 'accounts', accountsTransform)
+    await runMigrations()
+    await expectFiles(dir, ['app.json', 'windowParams.json'])
+    const migrations = await db.getKey('app', 'migrations')
+    expect(migrations).toEqual({ nonce: 2 })
+  })
+})
+
 async function extractMock(mockName) {
   const destDirectory = path.resolve(tmpDir, mockName)
   const zipFilePath = path.resolve(__dirname, 'mocks', `${mockName}.zip`)
@@ -93,4 +139,9 @@ function extractZip(zipFilePath, destDirectory) {
     childProcess.on('close', resolve)
     childProcess.on('error', reject)
   })
+}
+
+async function expectFiles(dir, expectedFiles) {
+  const files = await fsReaddir(dir)
+  expect(files).toEqual(expectedFiles)
 }

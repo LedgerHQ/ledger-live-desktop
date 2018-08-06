@@ -10,6 +10,7 @@ import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
+import isAccountEmpty from 'helpers/isAccountEmpty'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -132,7 +133,7 @@ class StepImport extends PureComponent<StepProps> {
           const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
           const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
-          const isNewAccount = account.operations.length === 0
+          const isNewAccount = isAccountEmpty(account)
           if (!hasAlreadyBeenScanned) {
             setScannedAccounts({
               scannedAccounts: [...scannedAccounts, this.translateName(account)],
@@ -229,7 +230,7 @@ class StepImport extends PureComponent<StepProps> {
     let alreadyEmptyAccount
     scannedAccounts.forEach(acc => {
       const existingAccount = existingAccounts.find(a => a.id === acc.id)
-      const empty = acc.operations.length === 0
+      const empty = isAccountEmpty(acc)
       if (existingAccount) {
         importedAccounts.push(existingAccount)
         if (empty) {
@@ -343,12 +344,12 @@ export const StepImportFooter = ({
 }: StepProps) => {
   const willCreateAccount = checkedAccountsIds.some(id => {
     const account = scannedAccounts.find(a => a.id === id)
-    return account && account.operations.length === 0
+    return account && isAccountEmpty(account)
   })
 
   const willAddAccounts = checkedAccountsIds.some(id => {
     const account = scannedAccounts.find(a => a.id === id)
-    return account && account.operations.length > 0
+    return account && !isAccountEmpty(account)
   })
 
   const count = checkedAccountsIds.length
