@@ -7,6 +7,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
+import isAccountEmpty from 'helpers/isAccountEmpty'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 
@@ -61,7 +62,7 @@ class AccountHeaderActions extends PureComponent<Props> {
     const { account, openModal, t } = this.props
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
-        {account.operations.length > 0 || !account.balance.isZero() ? (
+        {!isAccountEmpty(account) ? (
           <Fragment>
             <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={1} alignItems="center">
