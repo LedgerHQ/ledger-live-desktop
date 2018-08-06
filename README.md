@@ -167,7 +167,7 @@ yarn reset-files
 You will need to install the python gyp module
 
 ```
-pip install git+https://chromium.googlesource.com/external/gy
+pip install git+https://chromium.googlesource.com/external/gyp
 ```
 
 see [stackoverflow/40025591](https://stackoverflow.com/questions/40025591/the-gyp-0-1-distribution-was-not-found)
