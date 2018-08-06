@@ -37,8 +37,30 @@ jobs:
 #      - run: yarn flow --quiet
 #      - run: yarn test
       - run: yarn release
+
+# Linux build
+  build-Linux:
+    <<: *defaults
+    steps:
+      - run: sudo apt-get install -y libudev-dev
+      - checkout
+      - restore_cache:
+          keys:
+            - v7-yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v7-yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: yarn lint
+      - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
+      - run: yarn flow --quiet
+      - run: yarn test
+      - run: yarn release
+
 workflows:
   version: 2
   builds:
       - build-windows
       - build-OSX
+      - build-Linux
