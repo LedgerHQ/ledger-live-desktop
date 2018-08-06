@@ -1,24 +1,24 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-// import Websocket from 'ws'
+import Websocket from 'ws'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 
 import network from 'api/network'
-import { GET_APPLICATIONS } from 'helpers/urls'
+import { GET_APPLICATIONS, WS_CHECK } from 'helpers/urls'
 import { LEDGER_COUNTERVALUES_API } from 'config/constants'
 import {
   LedgerAPINotAvailable,
   ManagerAPIsFail,
   CountervaluesApiFails,
-  // WebsocketConnectionFailed,
+  WebsocketConnectionFailed,
 } from 'config/errors'
 
 type Input = void
 type Result = void
 
 const check = async () => {
-  // let socket
+  let socket
   try {
     const countervalues = await network({
       method: 'GET',
@@ -41,14 +41,18 @@ const check = async () => {
       throw new CountervaluesApiFails()
     }
 
-    // FIXME: WE NEED A URL TO OPEN A SECURE WEBSOCKET CHANNEL
-
-    // try {
-    //   socket = new Websocket(BASE_SOCKET_URL)
-    //   socket.close()
-    // } catch (err) {
-    //   throw new WebsocketConnectionFailed()
-    // }
+    try {
+      socket = new Websocket('wss://echo.websocket.org/')
+      socket.on('open', () => {
+        socket.close()
+      })
+      socket.on('error', () => {
+        socket.close()
+        throw new WebsocketConnectionFailed()
+      })
+    } catch (err) {
+      throw new WebsocketConnectionFailed()
+    }
   } catch (err) {
     throw err
   }

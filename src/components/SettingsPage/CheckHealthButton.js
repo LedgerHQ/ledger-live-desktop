@@ -6,7 +6,6 @@ import type { T } from 'types/common'
 
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
-import Spinner from 'components/base/Spinner'
 import Check from 'icons/Check'
 import TranslatedError from 'components/TranslatedError'
 
@@ -46,10 +45,6 @@ class CheckHealthButton extends PureComponent<Props, State> {
       return t('app:settings.healthCheck.btn')
     }
 
-    if (checking) {
-      return <Spinner size={20} />
-    }
-
     return error ? (
       <TranslatedError error={error} />
     ) : (
@@ -64,7 +59,7 @@ class CheckHealthButton extends PureComponent<Props, State> {
 
   render() {
     return (
-      <Button small primary onClick={this.checkHealth}>
+      <Button small primary onClick={this.checkHealth} isLoading={this.state.checking}>
         {this.renderBtnBody()}
       </Button>
     )

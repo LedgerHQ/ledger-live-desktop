@@ -27,6 +27,7 @@ export const GET_MCUS: string = managerUrlbuilder('mcu_versions')
 export const GET_CATEGORIES: string = managerUrlbuilder('categories')
 export const GET_APPLICATIONS: string = managerUrlbuilder('applications')
 
+export const WS_CHECK: () => string = wsURLBuilder('firmwares')
 export const WS_INSTALL: (arg: LedgerScriptParams) => string = wsURLBuilder('install')
 export const WS_GENUINE: (arg: {
   targetId: string | number,
