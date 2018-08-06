@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - run: yarn install
-      - run: yarn release
+#      - run: yarn release
 
 # OsX build
   build-OSX:
@@ -36,7 +36,7 @@ jobs:
 #      - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
 #      - run: yarn flow --quiet
 #      - run: yarn test
-      - run: yarn release
+#      - run: yarn release
 
 # Linux build
   build-Linux:
@@ -56,7 +56,7 @@ jobs:
       - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
       - run: yarn flow --quiet
       - run: yarn test
-      - run: yarn release
+#      - run: yarn release
 
 workflows:
   version: 2
