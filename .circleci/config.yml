@@ -2,15 +2,39 @@ version: 2
 
 defaults: &defaults
   working_directory: ~/ledger-live-desktop
-  docker:
-    - image: dockcross/windows-x64-posix
+  environment:
+        BASH_ENV: "~/.bashrc"
 
 jobs:
-# windows build
-  build-windows:
+  build_1:
     <<: *defaults
+    docker:
+      - image: circleci/node:8.11.3-stretch-browsers
+    steps:
+        - checkout
+        - run: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+#        - run: nvm ls-remote --lts
+        - persist_to_workspace:
+            root: ~/ledger-live-desktop
 
+
+  build_2:
+    macos:
+      xcode: "9.0"
     steps:
       - checkout
+      - attach_workspace:
+          at: my_workspace
+      - run: nvm install --lts
+      - run: nvm --version
+      - run: node --version
       - run: yarn install
-      - run: yarn release
+
+workflows:
+    version: 2
+    build:
+      jobs:
+        - build_1
+        - build_2:
+            requires:
+              - build_1
