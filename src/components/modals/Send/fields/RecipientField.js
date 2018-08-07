@@ -79,7 +79,7 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
         />
         <RecipientAddress
           autoFocus={autoFocus}
-          withQrCode
+          withQrCode={false}
           error={
             !value || isValid
               ? null
