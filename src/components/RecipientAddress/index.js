@@ -85,27 +85,23 @@ class RecipientAddress extends PureComponent<Props, State> {
     const { onChange, withQrCode, value, ...rest } = this.props
     const { qrReaderOpened } = this.state
 
+    const renderRight = withQrCode ? (
+      <Right onClick={this.handleClickQrCode}>
+        <IconQrCode size={16} />
+        {qrReaderOpened && (
+          <Fragment>
+            <BackgroundLayer />
+            <WrapperQrCode>
+              <QRCodeCameraPickerCanvas onPick={this.handleOnPick} />
+            </WrapperQrCode>
+          </Fragment>
+        )}
+      </Right>
+    ) : null
+
     return (
       <Box relative justifyContent="center">
-        <Input
-          {...rest}
-          value={value}
-          withQrCode={withQrCode}
-          onChange={onChange}
-          renderRight={
-            <Right onClick={this.handleClickQrCode}>
-              <IconQrCode size={16} />
-              {qrReaderOpened && (
-                <Fragment>
-                  <BackgroundLayer />
-                  <WrapperQrCode>
-                    <QRCodeCameraPickerCanvas onPick={this.handleOnPick} />
-                  </WrapperQrCode>
-                </Fragment>
-              )}
-            </Right>
-          }
-        />
+        <Input {...rest} value={value} onChange={onChange} renderRight={renderRight} />
       </Box>
     )
   }
