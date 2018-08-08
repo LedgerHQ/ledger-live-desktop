@@ -30,7 +30,7 @@ class SectionHelp extends PureComponent<Props> {
 
     return (
       <Section>
-        <TrackPage category="Settings" name="About" />
+        <TrackPage category="Settings" name="About"/>
 
         <Header
           icon={<IconLoader size={16} />}
