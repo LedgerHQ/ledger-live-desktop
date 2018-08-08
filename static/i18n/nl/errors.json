@@ -72,8 +72,8 @@
     "description": "Check your device to see which apps are already installed."
   },
   "ManagerAppRelyOnBTC": {
-    "title": "Bitcoin app required",
-    "description": "Install the latest version of the Bitcoin app before installing this app."
+    "title": "Bitcoin or Ethereum app required",
+    "description": "Either install the latest Ethereum app (for ETC/UBIQ/EXP/RSK/WAN/kUSD/POA), or the latest Bitcoin app."
   },
   "ManagerDeviceLocked": {
     "title": "Please unlock your device",
@@ -84,8 +84,8 @@
     "description": "Uninstall some apps to increase available storage and try again."
   },
   "ManagerUninstallBTCDep": {
-    "title": "Sorry, Bitcoin is required",
-    "description": "First uninstall apps that depend on Bitcoin."
+    "title": "Sorry, this app is required",
+    "description": "Uninstall the Bitcoin or Ethereum app last."
   },
   "NetworkDown": {
     "title": "Oops, internet seems down",
@@ -161,5 +161,9 @@
   "CantOpenDevice": {
     "title": "Oops, couldn’t connect to device",
     "description": "Device detected but connection failed. Please retry and get help if the problem persists."
+  },
+  "ETHAddressNonEIP": {
+    "title": "Auto-verification not available: carefully verify the address",
+    "description": null
   }
 }
