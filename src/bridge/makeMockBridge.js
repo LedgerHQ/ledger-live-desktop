@@ -129,6 +129,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
     },
 
     isRecipientValid: (currency, recipient) => Promise.resolve(recipient.length > 0),
+    getRecipientWarning: () => Promise.resolve(null),
 
     createTransaction: () => ({
       amount: BigNumber(0),

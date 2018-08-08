@@ -22,9 +22,13 @@ type Props<Transaction> = {
 
 const InvalidAddress = createCustomErrorClass('InvalidAddress')
 
-class RecipientField<Transaction> extends Component<Props<Transaction>, { isValid: boolean }> {
+class RecipientField<Transaction> extends Component<
+  Props<Transaction>,
+  { isValid: boolean, warning: ?Error },
+> {
   state = {
     isValid: true,
+    warning: null,
   }
   componentDidMount() {
     this.resync()
@@ -44,12 +48,11 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
   async resync() {
     const { account, bridge, transaction } = this.props
     const syncId = ++this.syncId
-    const isValid = await bridge.isRecipientValid(
-      account.currency,
-      bridge.getTransactionRecipient(account, transaction),
-    )
+    const recipient = bridge.getTransactionRecipient(account, transaction)
+    const isValid = await bridge.isRecipientValid(account.currency, recipient)
+    const warning = await bridge.getRecipientWarning(account.currency, recipient)
     if (syncId !== this.syncId) return
-    this.setState({ isValid })
+    this.setState({ isValid, warning })
   }
 
   onChange = (recipient: string, maybeExtra: ?Object) => {
@@ -71,8 +74,12 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
   }
   render() {
     const { bridge, account, transaction, t, autoFocus } = this.props
-    const { isValid } = this.state
+    const { isValid, warning } = this.state
     const value = bridge.getTransactionRecipient(account, transaction)
+
+    const error =
+      !value || isValid ? null : new InvalidAddress(null, { currencyName: account.currency.name })
+
     return (
       <Box flow={1}>
         <LabelWithExternalIcon
@@ -82,13 +89,8 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, { isVali
         <RecipientAddress
           autoFocus={autoFocus}
           withQrCode={false}
-          error={
-            !value || isValid
-              ? null
-              : new InvalidAddress(null, {
-                  currencyName: account.currency.name,
-                })
-          }
+          error={error}
+          warning={warning}
           value={value}
           onChange={this.onChange}
         />

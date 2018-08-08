@@ -17,11 +17,10 @@ import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
 import { createCustomErrorClass } from 'helpers/errors'
+import { ETHAddressNonEIP } from 'config/errors'
 import type { EditProps, WalletBridge } from './types'
 
 const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
-
-// TODO in future it would be neat to support eip55
 
 type Transaction = {
   recipient: string,
@@ -101,11 +100,33 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
 }
 
 function isRecipientValid(currency, recipient) {
+  if (!recipient.match(/^0x[0-9a-fA-F]{40}$/)) return false
+
+  // To handle non-eip55 addresses we stop validation here if we detect
+  // address is either full upper or full lower.
+  // see https://github.com/LedgerHQ/ledger-live-desktop/issues/1397
+  const slice = recipient.substr(2)
+  const isFullUpper = slice === slice.toUpperCase()
+  const isFullLower = slice === slice.toLowerCase()
+  if (isFullUpper || isFullLower) return true
+
   try {
     return eip55.verify(recipient)
   } catch (error) {
     return false
   }
+}
+
+// Returns a warning if we detect a non-eip address
+function getRecipientWarning(currency, recipient) {
+  if (!recipient.match(/^0x[0-9a-fA-F]{40}$/)) return null
+  const slice = recipient.substr(2)
+  const isFullUpper = slice === slice.toUpperCase()
+  const isFullLower = slice === slice.toLowerCase()
+  if (isFullUpper || isFullLower) {
+    return new ETHAddressNonEIP()
+  }
+  return null
 }
 
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
@@ -378,6 +399,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
   pullMoreOperations: () => Promise.resolve(a => a), // NOT IMPLEMENTED
 
   isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
+  getRecipientWarning: (currency, recipient) =>
+    Promise.resolve(getRecipientWarning(currency, recipient)),
 
   createTransaction: () => ({
     amount: BigNumber(0),

@@ -67,6 +67,7 @@ export const colors = {
 
   // new colors
   alertRed: '#ea2e49',
+  warning: '#f57f17',
   black: '#000000',
   dark: '#142533',
   fog: '#d8d8d8',
