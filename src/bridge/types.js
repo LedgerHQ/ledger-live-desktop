@@ -53,6 +53,7 @@ export interface WalletBridge<Transaction> {
   pullMoreOperations(initialAccount: Account, count: number): Promise<(Account) => Account>;
 
   isRecipientValid(currency: Currency, recipient: string): Promise<boolean>;
+  getRecipientWarning(currency: Currency, recipient: string): Promise<?Error>;
 
   // Related to send funds:
 
