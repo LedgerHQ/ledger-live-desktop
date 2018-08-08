@@ -23,10 +23,10 @@ source scripts/helpers/display-env.sh
 #   exit 1
 # fi
 
-if [ ! -d "static/fonts/museosans" ]; then
-  if ! command -v aws ; then
-    runJob "sudo apt install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
-  fi
+# if [ ! -d "static/fonts/museosans" ]; then
+#   if ! command -v aws ; then
+#     runJob "sudo apt install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
+#   fi
 
   runJob \
     "set -e ;\
@@ -39,12 +39,12 @@ if [ ! -d "static/fonts/museosans" ]; then
     "no museosans font. fetching it from private bucket..." \
     "successfully fetched museosans" \
     "error fetching museosans"
-fi
+# fi
 
-if ! git diff-index --quiet HEAD --; then
-  echo "you have uncommitted local changes!" >&2
-  exit 1
-fi
+# if ! git diff-index --quiet HEAD --; then
+#   echo "you have uncommitted local changes!" >&2
+#   exit 1
+# fi
 
 # originRemote=$(git config --get remote.origin.url)
 # if [ "$originRemote" != "https://github.com/LedgerHQ/ledger-live-desktop.git" ]; then
