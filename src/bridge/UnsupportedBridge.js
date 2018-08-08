@@ -19,6 +19,7 @@ const UnsupportedBridge: WalletBridge<*> = {
   pullMoreOperations: () => Promise.reject(genericError),
 
   isRecipientValid: () => Promise.reject(genericError),
+  getRecipientWarning: () => Promise.reject(genericError),
 
   createTransaction: () => null,
 

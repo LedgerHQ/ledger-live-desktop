@@ -165,6 +165,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   pullMoreOperations: () => Promise.reject(notImplemented),
 
   isRecipientValid,
+  getRecipientWarning: () => Promise.resolve(null),
 
   createTransaction: () => ({
     amount: BigNumber(0),

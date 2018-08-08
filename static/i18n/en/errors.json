@@ -73,7 +73,7 @@
   },
   "ManagerAppRelyOnBTC": {
     "title": "Bitcoin or Ethereum app required",
-    "description": "Either install the latest Ethereum app (RSK/WAN/kUSD/POA), or the latest Bitcoin app."
+    "description": "Either install the latest Ethereum app (for ETC/UBIQ/EXP/RSK/WAN/kUSD/POA), or the latest Bitcoin app."
   },
   "ManagerDeviceLocked": {
     "title": "Please unlock your device",
@@ -161,5 +161,9 @@
   "CantOpenDevice": {
     "title": "Oops, couldn’t connect to device",
     "description": "Device detected but connection failed. Please retry and get help if the problem persists."
+  },
+  "ETHAddressNonEIP": {
+    "title": "Auto-verification not available: carefully verify the address",
+    "description": null
   }
 }
