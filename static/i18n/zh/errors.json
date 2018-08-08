@@ -161,5 +161,9 @@
   "CantOpenDevice": {
     "title": "Oops, couldn’t connect to device",
     "description": "Device detected but connection failed. Please retry and get help if the problem persists."
+  },
+  "ETHAddressNonEIP": {
+    "title": "Auto-verification not available: carefully verify the address",
+    "description": null
   }
 }
