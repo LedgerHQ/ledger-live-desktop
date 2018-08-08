@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/ledger-live-desktop
   environment:
-        BASH_ENV: "~/.bashrc"
+    BASH_ENV: "~/.bashrc"
 
 jobs:
   build:
@@ -12,27 +12,8 @@ jobs:
       xcode: "9.0"
     steps:
       - checkout
-      - run: which yarn
-      - run: |
-          brew upgrade
-          brew install node@8
-          brew upgrade node@8
-          node --version
-
-
-#      - run: |
-#            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-#            nvm install --lts
-#            export NVM_DIR="$HOME/.nvm"
-#            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-#            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-#            nvm ls-remote --lts
-#      - run: |
-#            nvm --version
-#            nvm use node
+      - run: bash scripts/ci/macos-setup.sh
+      - run: cat ~/.bashrc
+      - run: node --version
       - run: yarn install
-      - run: yarn lint
-      - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
-      - run: yarn flow --quiet
-      - run: yarn test
       - run: yarn release
