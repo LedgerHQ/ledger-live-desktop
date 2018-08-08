@@ -18,7 +18,13 @@ const Container = styled(Box).attrs({
   border-width: 1px;
   border-style: solid;
   border-color: ${p =>
-    p.error ? p.theme.colors.pearl : p.isFocus ? p.theme.colors.wallet : p.theme.colors.fog};
+    p.error
+      ? p.theme.colors.pearl
+      : p.warning
+        ? p.theme.colors.warning
+        : p.isFocus
+          ? p.theme.colors.wallet
+          : p.theme.colors.fog};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: ${p => (p.small ? '34' : '40')}px;
   position: relative;
@@ -36,6 +42,10 @@ const ErrorDisplay = styled(Box)`
   font-size: 12px;
   white-space: nowrap;
   color: ${p => p.theme.colors.pearl};
+`
+
+const WarningDisplay = styled(ErrorDisplay)`
+  color: ${p => p.theme.colors.warning};
 `
 
 const Base = styled.input.attrs({
@@ -89,6 +99,7 @@ type Props = {
   renderRight?: any,
   containerProps?: Object,
   error?: ?Error | boolean,
+  warning?: ?Error | boolean,
   small?: boolean,
   editInPlace?: boolean,
 }
@@ -171,6 +182,7 @@ class Input extends PureComponent<Props, State> {
       editInPlace,
       small,
       error,
+      warning,
       ...props
     } = this.props
 
@@ -182,6 +194,7 @@ class Input extends PureComponent<Props, State> {
         {...containerProps}
         small={small}
         error={error}
+        warning={warning}
         editInPlace={editInPlace}
       >
         {renderLeft}
@@ -199,6 +212,10 @@ class Input extends PureComponent<Props, State> {
             <ErrorDisplay>
               <TranslatedError error={error} />
             </ErrorDisplay>
+          ) : warning ? (
+            <WarningDisplay>
+              <TranslatedError error={warning} />
+            </WarningDisplay>
           ) : null}
         </Box>
         {renderRight}
