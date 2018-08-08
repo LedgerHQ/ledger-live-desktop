@@ -73,7 +73,7 @@
   },
   "ManagerAppRelyOnBTC": {
     "title": "Bitcoin or Ethereum app required",
-    "description": "Either install the latest Ethereum app (RSK/WAN/kUSD/POA), or the latest Bitcoin app."
+    "description": "Either install the latest Ethereum app (for ETC/UBIQ/EXP/RSK/WAN/kUSD/POA), or the latest Bitcoin app."
   },
   "ManagerDeviceLocked": {
     "title": "Please unlock your device",
