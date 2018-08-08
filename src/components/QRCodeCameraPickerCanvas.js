@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import QrCode from 'qrcode-reader'
+import jsQR from 'jsqr'
 import logger from 'logger'
 
 export default class QRCodeCameraPickerCanvas extends Component<
@@ -60,12 +60,6 @@ export default class QRCodeCameraPickerCanvas extends Component<
     if (!getUserMedia) {
       this.setState({ message: 'Incompatible browser' }) // eslint-disable-line
     } else {
-      const qr = new QrCode()
-      qr.callback = (err, value) => {
-        if (!err) {
-          this.props.onPick(value.result)
-        }
-      }
       getUserMedia({
         video: { facingMode: 'environment' },
       })
@@ -146,7 +140,12 @@ export default class QRCodeCameraPickerCanvas extends Component<
 
               if (t - lastCheck >= intervalCheck) {
                 lastCheck = t
-                qr.decode(ctxMain.getImageData(0, 0, width, height))
+                const imageData = ctxMain.getImageData(0, 0, width, height)
+                const code = jsQR(imageData.data, width, height)
+
+                if (code && code.data) {
+                  this.props.onPick(code.data)
+                }
               }
             }
             raf = requestAnimationFrame(loop)
