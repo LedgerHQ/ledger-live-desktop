@@ -39,6 +39,7 @@ export const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice')
 export const WebsocketConnectionError = createCustomErrorClass('WebsocketConnectionError')
 export const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnectionFailed')
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
+export const ETHAddressNonEIP = createCustomErrorClass('ETHAddressNonEIP')
 
 // db stuff, no need to translate
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')

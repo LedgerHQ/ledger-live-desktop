@@ -447,6 +447,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
   isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
+  getRecipientWarning: () => Promise.resolve(null),
 
   createTransaction: () => ({
     amount: BigNumber(0),
