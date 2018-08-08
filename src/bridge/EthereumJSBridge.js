@@ -9,6 +9,7 @@ import throttle from 'lodash/throttle'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
+import eip55 from 'eip55'
 import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
 import { getDerivations } from 'helpers/derivations'
@@ -98,7 +99,11 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
 }
 
 function isRecipientValid(currency, recipient) {
-  return !!recipient.match(/^0x[0-9a-fA-F]{40}$/)
+  try {
+    return eip55.verify(recipient)
+  } catch (error) {
+    return false
+  }
 }
 
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
