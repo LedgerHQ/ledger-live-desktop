@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+unset PREFIX
+source ~/.bashrc
+
 set -e
 
 # shellcheck disable=SC1091
