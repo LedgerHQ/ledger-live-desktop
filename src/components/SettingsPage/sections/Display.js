@@ -4,7 +4,11 @@ import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { createSelector } from 'reselect'
-import { langAndRegionSelector, counterValueCurrencySelector } from 'reducers/settings'
+import {
+  hasPasswordSelector,
+  langAndRegionSelector,
+  counterValueCurrencySelector,
+} from 'reducers/settings'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { EXPERIMENTAL_MARKET_INDICATOR_SETTINGS } from 'config/constants'
@@ -17,6 +21,7 @@ import CounterValueSelect from '../CounterValueSelect'
 import CounterValueExchangeSelect from '../CounterValueExchangeSelect'
 import RegionSelect from '../RegionSelect'
 import PasswordButton from '../PasswordButton'
+import PasswordAutoLockSelect from '../PasswordAutoLockSelect'
 import DevModeButton from '../DevModeButton'
 import SentryLogsButton from '../SentryLogsButton'
 import ShareAnalyticsButton from '../ShareAnalyticsButton'
@@ -32,11 +37,12 @@ type Props = {
   t: T,
   counterValueCurrency: Currency,
   useSystem: boolean,
+  hasPassword: boolean,
 }
 
 class TabGeneral extends PureComponent<Props> {
   render() {
-    const { t, useSystem, counterValueCurrency } = this.props
+    const { t, useSystem, counterValueCurrency, hasPassword } = this.props
 
     return (
       <Section>
@@ -92,6 +98,14 @@ class TabGeneral extends PureComponent<Props> {
           >
             <PasswordButton />
           </Row>
+          {hasPassword ? (
+            <Row
+              title={t('app:settings.profile.passwordAutoLock')}
+              desc={t('app:settings.profile.passwordAutoLockDesc')}
+            >
+              <PasswordAutoLockSelect />
+            </Row>
+          ) : null}
           <Row
             title={t('app:settings.profile.reportErrors')}
             desc={t('app:settings.profile.reportErrorsDesc')}
@@ -121,10 +135,13 @@ export default translate()(
     createSelector(
       langAndRegionSelector,
       counterValueCurrencySelector,
-      ({ useSystem }, counterValueCurrency) => ({
+      hasPasswordSelector,
+      ({ useSystem }, counterValueCurrency, hasPassword) => ({
         useSystem,
         counterValueCurrency,
+        hasPassword,
       }),
     ),
+    null,
   )(TabGeneral),
 )

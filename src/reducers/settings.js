@@ -38,6 +38,7 @@ export type SettingsState = {
   region: ?string,
   orderAccounts: string,
   hasPassword: boolean,
+  autoLockTimeout: number,
   selectedTimeRange: TimeRange,
   marketIndicator: 'eastern' | 'western',
   currenciesSettings: {
@@ -65,6 +66,7 @@ const INITIAL_STATE: SettingsState = {
   region: null,
   orderAccounts: 'balance|asc',
   hasPassword: false,
+  autoLockTimeout: 10,
   selectedTimeRange: 'month',
   marketIndicator: 'western',
   currenciesSettings: {},
@@ -219,6 +221,7 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
 
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs
+export const autoLockTimeoutSelector = (state: State) => state.settings.autoLockTimeout
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
 export const hasCompletedOnboardingSelector = (state: State) =>

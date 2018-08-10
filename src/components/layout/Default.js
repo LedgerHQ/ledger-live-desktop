@@ -14,6 +14,7 @@ import * as modals from 'components/modals'
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Track from 'analytics/Track'
+import Idler from 'components/Idler'
 
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
@@ -87,6 +88,7 @@ class Default extends Component<Props> {
         {process.platform === 'darwin' && <AppRegionDrag />}
         <ExportLogsBtn hookToShortcut />
         <Track mandatory onMount event="App Starts" />
+        <Idler />
 
         <IsUnlocked>
           <OnboardingOrElse>
