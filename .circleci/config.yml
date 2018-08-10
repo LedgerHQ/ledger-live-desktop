@@ -9,7 +9,7 @@ jobs:
   build:
     <<: *defaults
     macos:
-      xcode: "9.0"
+      xcode: "9.4.1"
     steps:
       - checkout
       - run: bash scripts/ci/macos-setup.sh
