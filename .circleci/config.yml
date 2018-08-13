@@ -15,5 +15,12 @@ jobs:
       - run: bash scripts/ci/macos-setup.sh
       - run: cat ~/.bashrc
       - run: node --version
+      - restore_cache:
+          keys:
+            - v7-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
+      - save_cache:
+          key: v7-yarn-packages-{{ checksum "yarn.lock" }}
+          path:
+            - node_modules
       - run: yarn release
