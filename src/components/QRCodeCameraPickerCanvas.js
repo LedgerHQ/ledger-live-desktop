@@ -156,7 +156,7 @@ export default class QRCodeCameraPickerCanvas extends Component<
         .catch(e => {
           if (this.unmounted) return
           this.setState({
-            message: String(e.message || e),
+            message: String(e.message || e.name || e),
           })
         })
     }
