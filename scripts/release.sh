@@ -16,10 +16,10 @@ source scripts/helpers/display-env.sh
 #   exit 0
 # fi
 
-# if ! git describe --exact-match --tags 2>/dev/null >/dev/null; then
-#   echo "You are not on a tag. Exiting properly. (CI)"
-#   exit 0
-# fi
+ if ! git describe --exact-match --tags 2>/dev/null >/dev/null; then
+   echo "You are not on a tag. Exiting properly. (CI)"
+   exit 0
+ fi
 
 # if [ -z "$GH_TOKEN" ]; then
 #   echo "GH_TOKEN is unset. can't release" >&2
