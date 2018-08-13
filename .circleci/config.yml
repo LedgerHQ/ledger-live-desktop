@@ -17,10 +17,11 @@ jobs:
       - run: node --version
       - restore_cache:
           keys:
-            - v7-yarn-packages-{{ checksum "yarn.lock" }}
+            - v8-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v7-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v8-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
+#      - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <certificate>
       - run: yarn release
