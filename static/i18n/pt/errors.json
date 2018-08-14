@@ -1,0 +1,169 @@
+{
+  "generic": {
+    "title": "{{message}}",
+    "description": "Something went wrong. Please retry or contact us."
+  },
+  "AccountNameRequired": {
+    "title": "An account name is required",
+    "description": "Please provide with an account name"
+  },
+  "BtcUnmatchedApp": {
+    "title": "That's the wrong app",
+    "description": "Open the ‘{{managerAppName}}’ app on your device"
+  },
+  "DeviceNotGenuine": {
+    "title": "Possibly not genuine",
+    "description": "Request Ledger Support assistance."
+  },
+  "DeviceGenuineSocketEarlyClose": {
+    "title": "Sorry, try again (genuine-close)",
+    "description": null
+  },
+  "DeviceSocketFail": {
+    "title": "Oops, try again",
+    "description": "Some connection failed, so please try again."
+  },
+  "DeviceSocketNoBulkStatus": {
+    "title": "Oops, try again",
+    "description": "Some connection failed, so please try again."
+  },
+  "DeviceSocketNoHandler": {
+    "title": "Oops, try again",
+    "description": "Some connection failed, so please try again."
+  },
+  "DisconnectedDevice": {
+    "title": "Oops, device was disconnected",
+    "description": "The connection to the device was lost, so please try again."
+  },
+  "EnpointConfig": {
+    "title": "Invalid endpoint",
+    "description": "Please provide a valid endpoint"
+  },
+  "FeeEstimationFailed": {
+    "title": "Sorry, fee estimation failed",
+    "description": "Try setting a custom fee (status: {{status}})"
+  },
+  "HardResetFail": {
+    "title": "Oops, could not reset",
+    "description": "Please retry or contact Ledger Support."
+  },
+  "LatestMCUInstalledError": {
+    "title": "Oops, nothing to update",
+    "description": "Needlessly tried to update the device microcontroller. Contact Ledger Support if there's a problem with your device."
+  },
+  "LedgerAPIError": {
+    "title": "Sorry, try again (API HTTP {{status}})",
+    "description": "Interacting with Ledger's API server went wrong. Please retry."
+  },
+  "LedgerAPIErrorWithMessage": {
+    "title": "Oops, {{message}}",
+    "description": "Please retry or contact Ledger Support."
+  },
+  "LedgerAPINotAvailable": {
+    "title": "Sorry, {{currencyName}} services unavailable",
+    "description": "Please retry or contact Ledger Support."
+  },
+  "ManagerAPIsFail": {
+    "title": "Oops, Manager services unavailable.",
+    "description": "Please check the network status."
+  },
+  "ManagerAppAlreadyInstalled": {
+    "title": "Oops, that's already installed.",
+    "description": "Check your device to see which apps are already installed."
+  },
+  "ManagerAppRelyOnBTC": {
+    "title": "Bitcoin or Ethereum app required",
+    "description": "Either install the latest Ethereum app (for ETC/UBIQ/EXP/RSK/WAN/kUSD/POA), or the latest Bitcoin app."
+  },
+  "ManagerDeviceLocked": {
+    "title": "Please unlock your device",
+    "description": "Your device was locked. Please unlock it."
+  },
+  "ManagerNotEnoughSpace": {
+    "title": "Sorry, insufficient device storage",
+    "description": "Uninstall some apps to increase available storage and try again."
+  },
+  "ManagerUninstallBTCDep": {
+    "title": "Sorry, this app is required",
+    "description": "Uninstall the Bitcoin or Ethereum app last."
+  },
+  "NetworkDown": {
+    "title": "Oops, internet seems down",
+    "description": "Please check your internet connection."
+  },
+  "NoAddressesFound": {
+    "title": "Sorry, no accounts found",
+    "description": "Something went wrong with address calculation, try again or contact Ledger Support."
+  },
+  "NotEnoughBalance": {
+    "title": "Oops, insufficient balance",
+    "description": "Make sure the account to debit has sufficient balance"
+  },
+  "PasswordsDontMatch": {
+    "title": "Passwords don't match",
+    "description": "Please try again"
+  },
+  "PasswordIncorrect": {
+    "title": "The password you entered is incorrect",
+    "description": "Please try again"
+  },
+  "SelectExchangesLoadError": {
+    "title": "Unable to load",
+    "description": "Can't load the exchanges"
+  },
+  "TimeoutError": {
+    "title": "Oops, a time out occurred",
+    "description": "It took too long for the server to respond."
+  },
+  "TimeoutTagged": {
+    "title": "Oops, a time out occurred ({{tag}})",
+    "description": "It took too long for the server to respond."
+  },
+  "TransportError": {
+    "title": "Something went wrong. Please reconnect your device.",
+    "description": "{{message}}"
+  },
+  "TransportStatusError": {
+    "title": "Something went wrong. Please reconnect your device.",
+    "description": "{{message}}"
+  },
+  "UserRefusedFirmwareUpdate": {
+    "title": "Firmware update refused on device",
+    "description": "Please retry or contact Ledger Support"
+  },
+  "UserRefusedOnDevice": {
+    "title": "Transaction refused on device",
+    "description": "Please retry or contact Ledger Support in case of doubt."
+  },
+  "UserRefusedAddress": {
+    "title": "Receive address rejected",
+    "description": "Please try again or contact Ledger Support"
+  },
+  "WebsocketConnectionError": {
+    "title": "Sorry, try again (websocket error).",
+    "description": null
+  },
+  "WebsocketConnectionFailed": {
+    "title": "Sorry, try again (websocket failed).",
+    "description": null
+  },
+  "WrongDeviceForAccount": {
+    "title": "Oops, wrong device for ‘{{accountName}}’.",
+    "description": "The connected device is not associated with the account you selected. Please connect the right device."
+  },
+  "DeviceAppVerifyNotSupported": {
+    "title": "Open Manager to update this App",
+    "description": "The app verification is not supported"
+  },
+  "InvalidAddress": {
+    "title": "This is not a valid {{currencyName}} address"
+  },
+  "CantOpenDevice": {
+    "title": "Oops, couldn’t connect to device",
+    "description": "Device detected but connection failed. Please retry and get help if the problem persists."
+  },
+  "ETHAddressNonEIP": {
+    "title": "Auto-verification not available: carefully verify the address",
+    "description": null
+  }
+}
