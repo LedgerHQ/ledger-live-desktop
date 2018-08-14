@@ -5,6 +5,7 @@
     "apply": "Apply",
     "confirm": "Confirm",
     "cancel": "Cancel",
+    "getSupport": "Get Support",
     "delete": "Delete",
     "launch": "Launch",
     "continue": "Continue",
@@ -77,7 +78,7 @@
     "menu": "Menu",
     "accounts": "Accounts ({{count}})",
     "manager": "Manager",
-    "exchange": "Exchanges"
+    "exchange": "Trade"
   },
   "account": {
     "lastOperations": "Last operations",
@@ -157,8 +158,8 @@
     }
   },
   "exchange": {
-    "title": "Exchanges",
-    "desc": "Try a few exchange services we've selected for you",
+    "title": "Trade",
+    "desc": "Try a few trading services we've selected for you",
     "visitWebsite": "Visit website",
     "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
     "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
@@ -195,7 +196,7 @@
     "successDescription_plural": "Your accounts have been created.",
     "createNewAccount": {
       "title": "Add a new account",
-      "noOperationOnLastAccount": "No transactions found on your last new account <1><0>{{accountName}}</0></1>. You can add a new account after you've started transacting on that account.",
+      "noOperationOnLastAccount": "There are no transactions on your last created <1><0>{{accountName}}</0></1> account. You must first receive crypto assets on that account before you can add a new one.",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to create"
     },
     "cta": {
@@ -398,7 +399,7 @@
     },
     "softResetModal": {
       "title": "Clear cache",
-      "desc": "Clearing the Ledger Live cache forces network resynchronization"
+      "desc": "Clearing the Ledger Live cache forces network resynchronization. Your settings and accounts are not affected. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet."
     },
     "removeAccountModal": {
       "title": "Remove account",
