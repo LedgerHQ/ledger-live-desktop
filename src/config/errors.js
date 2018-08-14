@@ -14,6 +14,7 @@ export const DeviceNotGenuineError = createCustomErrorClass('DeviceNotGenuine')
 export const DeviceGenuineSocketEarlyClose = createCustomErrorClass('DeviceGenuineSocketEarlyClose')
 export const TimeoutTagged = createCustomErrorClass('TimeoutTagged')
 export const ETHAddressNonEIP = createCustomErrorClass('ETHAddressNonEIP')
+export const CantScanQRCode = createCustomErrorClass('CantScanQRCode')
 
 // db stuff, no need to translate
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')
