@@ -6,7 +6,7 @@ defaults: &defaults
     BASH_ENV: "~/.bashrc"
 
 jobs:
-  build:
+  build-macos:
     <<: *defaults
     macos:
       xcode: "9.4.1"
@@ -23,5 +23,30 @@ jobs:
           key: v8-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-#      - run: sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <certificate>
+#      - run: |
+#          security import scripts/ci/Certificats\ Ledger\ SAS\ Mac.p12 cUIk0zfWp^GaRURsDd2Gmc37
+#          sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain scripts/ci/Certificats\ Ledger\ SAS\ Mac.p12 cUIk0zfWp^GaRURsDd2Gmc37
       - run: yarn release
+
+  build-linux:
+    <<: *defaults
+    docker:
+      - image: circleci/node:8.11.3-stretch-browsers
+    steps:
+      - run: sudo apt-get install -y libudev-dev
+      - checkout
+      - restore_cache:
+          keys:
+            - v9-yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          key: v9-yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run: yarn release
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-linux
+      - build-macos

@@ -60,7 +60,7 @@ source scripts/helpers/display-env.sh
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
 runJob \
-  "DEBUG=electron-builder electron-builder build --publish always" \
+  "DEBUG=electron-builder electron-builder build --publish never" \
   "building, packaging and publishing app..." \
   "app built, packaged and published successfully" \
   "failed to build app" \
