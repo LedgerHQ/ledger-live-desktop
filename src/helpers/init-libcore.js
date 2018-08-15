@@ -24,7 +24,8 @@ const stringToBytesArray = str => Array.from(Buffer.from(str))
 const NJSExecutionContextImpl = {
   execute: runnable => {
     try {
-      runnable.run()
+      const runFunction = () => runnable.run()
+      setImmediate(runFunction)
     } catch (e) {
       logger.log(e)
     }
