@@ -17,15 +17,12 @@ jobs:
       - run: node --version
       - restore_cache:
           keys:
-            - v8-yarn-packages-{{ checksum "yarn.lock" }}
+            - v11-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v8-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v11-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-#      - run: |
-#          security import scripts/ci/Certificats\ Ledger\ SAS\ Mac.p12 cUIk0zfWp^GaRURsDd2Gmc37
-#          sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain scripts/ci/Certificats\ Ledger\ SAS\ Mac.p12 cUIk0zfWp^GaRURsDd2Gmc37
       - run: yarn release
 
   build-linux:
@@ -37,10 +34,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v9-yarn-packages-{{ checksum "yarn.lock" }}
+            - v12-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v9-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v12-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - run: yarn release
