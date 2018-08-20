@@ -21,10 +21,10 @@ source scripts/helpers/display-env.sh
 #   exit 0
 # fi
 
-# if [ -z "$GH_TOKEN" ]; then
-#   echo "GH_TOKEN is unset. can't release" >&2
-#   exit 1
-# fi
+ if [ -z "$GH_TOKEN" ]; then
+   echo "GH_TOKEN is unset. can't release" >&2
+   exit 1
+ fi
 
   if [ ! -d "static/fonts/museosans" ]; then
     if ! command -v aws ; then
@@ -33,17 +33,17 @@ source scripts/helpers/display-env.sh
       fi
     fi
 
-#    runJob \
-#      "set -e ;\
-#      rm -rf /tmp/museosans* ;\
-#      aws s3 cp s3://ledger-ledgerlive-resources-dev/resources/museosans.zip /tmp/museosans.zip ;\
-#      unzip /tmp/museosans.zip -d /tmp/museosans ;\
-#      mv /tmp/museosans/museosans static/fonts ;\
-#      rm static/fonts/museosans/.DS_Store # remove crappy macOS file ;\
-#      rm -rf /tmp/museosans*" \
-#      "no museosans font. fetching it from private bucket..." \
-#      "successfully fetched museosans" \
-#      "error fetching museosans"
+    runJob \
+      "set -e ;\
+      rm -rf /tmp/museosans* ;\
+      aws s3 cp s3://ledger-ledgerlive-resources-dev/resources/museosans.zip /tmp/museosans.zip ;\
+      unzip /tmp/museosans.zip -d /tmp/museosans ;\
+      mv /tmp/museosans/museosans static/fonts ;\
+      rm static/fonts/museosans/.DS_Store # remove crappy macOS file ;\
+      rm -rf /tmp/museosans*" \
+      "no museosans font. fetching it from private bucket..." \
+      "successfully fetched museosans" \
+      "error fetching museosans"
   fi
 
 # if ! git diff-index --quiet HEAD --; then
@@ -51,11 +51,11 @@ source scripts/helpers/display-env.sh
 #   exit 1
 # fi
 
-# originRemote=$(git config --get remote.origin.url)
-# if [ "$originRemote" != "https://github.com/LedgerHQ/ledger-live-desktop.git" ]; then
-#   echo "the origin remote is incorrect ($originRemote)"
-#   exit 1
-# fi
+ originRemote=$(git config --get remote.origin.url)
+ if [ "$originRemote" != "https://github.com/LedgerHQ/ledger-live-desktop.git" ]; then
+   echo "the origin remote is incorrect ($originRemote)"
+   exit 1
+ fi
 
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
