@@ -6,7 +6,6 @@ defaults: &defaults
     BASH_ENV: "~/.bashrc"
 
 jobs:
-  
   build-macos:
     <<: *defaults
     macos:
