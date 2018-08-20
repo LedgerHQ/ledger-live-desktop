@@ -46,21 +46,21 @@ source scripts/helpers/display-env.sh
       "error fetching museosans"
   fi
 
-# if ! git diff-index --quiet HEAD --; then
-#   echo "you have uncommitted local changes!" >&2
-#   exit 1
-# fi
+ if ! git diff-index --quiet HEAD --; then
+   echo "you have uncommitted local changes!" >&2
+   exit 1
+ fi
 
-# originRemote=$(git config --get remote.origin.url)
-# if [ "$originRemote" != "https://github.com/LedgerHQ/ledger-live-desktop.git" ]; then
-#   echo "the origin remote is incorrect ($originRemote)"
-#   exit 1
-# fi
+ originRemote=$(git config --get remote.origin.url)
+ if [ "$originRemote" != "git@github.com:LedgerHQ/ledger-live-desktop.git" ]; then
+   echo "the origin remote is incorrect ($originRemote)"
+   exit 1
+ fi
 
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
 runJob \
-  "DEBUG=electron-builder electron-builder build --publish never" \
+  "DEBUG=electron-builder electron-builder build --publish always" \
   "building, packaging and publishing app..." \
   "app built, packaged and published successfully" \
   "failed to build app" \
