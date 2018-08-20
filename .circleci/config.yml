@@ -24,7 +24,6 @@ jobs:
           paths:
             - node_modules
       - run: yarn release
-
   build-linux:
     <<: *defaults
     docker:
@@ -41,7 +40,6 @@ jobs:
           paths:
             - node_modules
       - run: yarn release
-
 workflows:
   version: 2
   build:
