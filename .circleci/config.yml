@@ -24,7 +24,7 @@ jobs:
           paths:
             - node_modules
       - run: bash scripts/ci/macos-ci.sh
-      - run: yarn dist
+      - run: yarn release
       - run: cd ./dist && ls
 
   build-linux:
@@ -43,7 +43,7 @@ jobs:
           paths:
             - node_modules
       - run: yarn ci
-      - run: yarn dist
+      - run: yarn release
       - run: cd ./dist && ls
       - run: bash scripts/ci/git-release.sh
 
