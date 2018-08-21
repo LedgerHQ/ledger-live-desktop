@@ -26,7 +26,13 @@ const OnboardingFooter = ({
     <Button outlineGrey onClick={() => prevStep()}>
       {t('app:common.back')}
     </Button>
-    <Button disabled={isContinueDisabled} primary onClick={() => nextStep()} ml="auto">
+    <Button
+      data-e2e="continue_button"
+      disabled={isContinueDisabled}
+      primary
+      onClick={() => nextStep()}
+      ml="auto"
+    >
       {t('app:common.continue')}
     </Button>
   </OnboardingFooterWrapper>

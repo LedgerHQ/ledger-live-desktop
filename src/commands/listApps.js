@@ -4,10 +4,11 @@ import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 
 import listApps from 'helpers/apps/listApps'
+import type { Application } from 'helpers/types'
 
-type Input = {}
+type Input = void
 
-type Result = *
+type Result = Array<Application>
 
 const cmd: Command<Input, Result> = createCommand('listApps', () => fromPromise(listApps()))
 

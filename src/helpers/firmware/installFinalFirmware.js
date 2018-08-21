@@ -1,16 +1,15 @@
 // @flow
 import type Transport from '@ledgerhq/hw-transport'
-import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
+import type { DeviceInfo, DeviceVersion, OsuFirmware, FinalFirmware } from 'helpers/types'
 
 import { WS_INSTALL } from 'helpers/urls'
 import { createDeviceSocket } from 'helpers/socket'
-import { createCustomErrorClass } from 'helpers/errors'
 import getDeviceVersion from 'helpers/devices/getDeviceVersion'
 import getOsuFirmware from 'helpers/devices/getOsuFirmware'
 import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import getFinalFirmwareById from './getFinalFirmwareById'
+import { ManagerDeviceLockedError } from 'config/errors'
 
-const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+import getFinalFirmwareById from './getFinalFirmwareById'
 
 function remapSocketError(promise) {
   return promise.catch((e: Error) => {
@@ -23,19 +22,19 @@ function remapSocketError(promise) {
   })
 }
 
-type Result = Promise<{ success: boolean, error?: string }>
+type Result = Promise<{ success: boolean }>
 
 export default async (transport: Transport<*>): Result => {
   try {
     const deviceInfo: DeviceInfo = await getDeviceInfo(transport)
-    const device = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
-    const firmware = await getOsuFirmware({
+    const device: DeviceVersion = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
+    const firmware: OsuFirmware = await getOsuFirmware({
       deviceId: device.id,
       version: deviceInfo.fullVersion,
       provider: deviceInfo.providerId,
     })
     const { next_se_firmware_final_version } = firmware
-    const nextFirmware = await getFinalFirmwareById(next_se_firmware_final_version)
+    const nextFirmware: FinalFirmware = await getFinalFirmwareById(next_se_firmware_final_version)
 
     const params = {
       targetId: deviceInfo.targetId,

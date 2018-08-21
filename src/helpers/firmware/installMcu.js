@@ -5,9 +5,9 @@ import { WS_MCU } from 'helpers/urls'
 import { createDeviceSocket } from 'helpers/socket'
 import getNextMCU from 'helpers/firmware/getNextMCU'
 import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import { createCustomErrorClass } from 'helpers/errors'
+import { ManagerDeviceLockedError } from 'config/errors'
 
-const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+import type { DeviceInfo } from 'helpers/types'
 
 function remapSocketError(promise) {
   return promise.catch((e: Error) => {
@@ -20,16 +20,15 @@ function remapSocketError(promise) {
   })
 }
 
-type Result = Promise<*>
+type Result = Promise<void>
 
 export default async (transport: Transport<*>): Result => {
-  const deviceInfo = await getDeviceInfo(transport)
-  const { seVersion: version, targetId } = deviceInfo
+  const { seVersion: version, targetId }: DeviceInfo = await getDeviceInfo(transport)
   const nextVersion = await getNextMCU(version)
   const params = {
     targetId,
     version: nextVersion.name,
   }
   const url = WS_MCU(params)
-  return remapSocketError(createDeviceSocket(transport, url).toPromise())
+  await remapSocketError(createDeviceSocket(transport, url).toPromise())
 }

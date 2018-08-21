@@ -11,6 +11,7 @@ import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
 import { createCustomErrorClass } from 'helpers/errors'
 import { CantScanQRCode } from 'config/errors'
+import { InvalidAddress } from 'config/errors'
 
 type Props<Transaction> = {
   t: T,
@@ -20,8 +21,6 @@ type Props<Transaction> = {
   onChangeTransaction: Transaction => void,
   autoFocus?: boolean,
 }
-
-const InvalidAddress = createCustomErrorClass('InvalidAddress')
 
 class RecipientField<Transaction> extends Component<
   Props<Transaction>,

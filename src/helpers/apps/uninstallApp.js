@@ -1,15 +1,11 @@
 // @flow
-import qs from 'qs'
 import type Transport from '@ledgerhq/hw-transport'
 
-import { BASE_SOCKET_URL } from 'config/constants'
 import { createDeviceSocket } from 'helpers/socket'
 
-import type { LedgerScriptParams } from 'helpers/types'
-import { createCustomErrorClass } from '../errors'
-
-const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
-const ManagerUninstallBTCDep = createCustomErrorClass('ManagerUninstallBTCDep')
+import type { ApplicationVersion } from 'helpers/types'
+import { ManagerDeviceLockedError, ManagerUninstallBTCDep } from 'config/errors'
+import { WS_INSTALL } from 'helpers/urls'
 
 function remapError(promise) {
   return promise.catch((e: Error) => {
@@ -30,8 +26,8 @@ function remapError(promise) {
 export default async function uninstallApp(
   transport: Transport<*>,
   targetId: string | number,
-  { app }: { app: LedgerScriptParams },
-): Promise<*> {
+  { app }: { app: ApplicationVersion },
+): Promise<void> {
   const params = {
     targetId,
     perso: app.perso,
@@ -40,6 +36,6 @@ export default async function uninstallApp(
     firmwareKey: app.delete_key,
     hash: app.hash,
   }
-  const url = `${BASE_SOCKET_URL}/install?${qs.stringify(params)}`
-  return remapError(createDeviceSocket(transport, url).toPromise())
+  const url = WS_INSTALL(params)
+  await remapError(createDeviceSocket(transport, url).toPromise())
 }

@@ -45,15 +45,25 @@ class EmptyState extends PureComponent<Props, *> {
           height="157"
         />
         <Box mt={5} alignItems="center">
-          <Title>{t('app:emptyState.dashboard.title')}</Title>
+          <Title data-e2e="dashboard_empty_title">{t('app:emptyState.dashboard.title')}</Title>
           <Description mt={3} style={{ maxWidth: 600 }}>
             {t('app:emptyState.dashboard.desc')}
           </Description>
           <Box mt={5} horizontal style={{ width: 300 }} flow={3} justify="center">
-            <Button primary style={{ minWidth: 120 }} onClick={this.handleInstallApp}>
+            <Button
+              primary
+              style={{ minWidth: 120 }}
+              onClick={this.handleInstallApp}
+              data-e2e="dashboard_empty_OpenManager"
+            >
               {t('app:emptyState.dashboard.buttons.installApp')}
             </Button>
-            <Button outline style={{ minWidth: 120 }} onClick={() => openModal(MODAL_ADD_ACCOUNTS)}>
+            <Button
+              outline
+              style={{ minWidth: 120 }}
+              onClick={() => openModal(MODAL_ADD_ACCOUNTS)}
+              data-e2e="dashboard_empty_AddAccounts"
+            >
               {t('app:emptyState.dashboard.buttons.addAccount')}
             </Button>
           </Box>
