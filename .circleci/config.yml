@@ -45,6 +45,7 @@ jobs:
       - run: yarn ci
       - run: yarn dist
       - run: cd ./dist && ls
+      - run: bash scripts/ci/git-release.sh
 
 workflows:
   version: 2
