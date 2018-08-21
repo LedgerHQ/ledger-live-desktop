@@ -78,7 +78,7 @@
     "menu": "Menu",
     "accounts": "Accounts ({{count}})",
     "manager": "Manager",
-    "exchange": "Trade"
+    "exchange": "Buy/Trade"
   },
   "account": {
     "lastOperations": "Last operations",
@@ -165,7 +165,10 @@
     "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
     "coinmama": "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
     "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
-    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia."
+    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
+    "luno": "Luno makes it safe and easy to buy, store and learn about digital currencies like Bitcoin and Ethreum",
+    "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
+    "genesis": "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP."
   },
   "genuinecheck": {
     "modal": {
