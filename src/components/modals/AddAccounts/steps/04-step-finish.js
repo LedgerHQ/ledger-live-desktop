@@ -52,7 +52,7 @@ export default StepFinish
 
 export const StepFinishFooter = ({ onGoStep1, t }: StepProps) => (
   <Fragment>
-    <Button mr={2} primary onClick={onGoStep1}>
+    <Button primary onClick={onGoStep1}>
       {t('app:addAccounts.cta.addMore')}
     </Button>
   </Fragment>
