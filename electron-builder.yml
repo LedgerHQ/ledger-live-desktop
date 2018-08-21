@@ -24,6 +24,9 @@ linux:
     - target: AppImage
       arch:
         - x64
+    - target: deb
+      arch:
+        - x64
 
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
