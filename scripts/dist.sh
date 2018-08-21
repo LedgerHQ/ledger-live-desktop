@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+unset PREFIX
+source ~/.bashrc
 
 set -e
 

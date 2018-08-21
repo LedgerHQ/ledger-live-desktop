@@ -17,13 +17,15 @@ jobs:
       - run: node --version
       - restore_cache:
           keys:
-            - v11-yarn-packages-{{ checksum "yarn.lock" }}
+            - v13-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v11-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v13-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - run: yarn release
+      - run: bash scripts/ci/macos-ci.sh
+      - run: yarn dist
+      - run: cd ./dist && ls
 
   build-linux:
     <<: *defaults
@@ -34,13 +36,15 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v12-yarn-packages-{{ checksum "yarn.lock" }}
+            - v14-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v12-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v14-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - run: yarn release
+      - run: yarn ci
+      - run: yarn dist
+      - run: cd ./dist && ls
 
 workflows:
   version: 2
