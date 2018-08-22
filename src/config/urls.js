@@ -26,7 +26,10 @@ export const urls = {
   changelly: 'https://changelly.com/?ref_id=aac789605a01',
   coinmama: 'http://go.coinmama.com/visit/?bta=51801&nci=5343',
   simplex: 'https://partners.simplex.com/?partner=ledger',
-  paybis: 'https://paybis.idevaffiliate.com/idevaffiliate.php?id=4064',
+  paybis: 'https://aff-tracking.paybis.com/click?pid=22&offer_id=1',
+  luno: 'http://luno.go2cloud.org/aff_c?offer_id=4&aff_id=1001&source=ledger',
+  shapeshift: 'https://shapeshift.io/#/coins?affiliate=ledger',
+  genesis: 'https://genesistrading.com/ledger-live/',
 
   // Errors
   errors: {
