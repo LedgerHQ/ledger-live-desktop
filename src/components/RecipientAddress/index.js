@@ -47,7 +47,7 @@ const BackgroundLayer = styled(Box)`
 type Props = {
   value: string,
   // return false if it can't be changed (invalid info)
-  onChange: (string, ?{ amount?: BigNumber, currency?: CryptoCurrency }) => Promise<?boolean>,
+  onChange: (string, ?{ amount?: BigNumber, currency?: CryptoCurrency }) => ?boolean,
   withQrCode: boolean,
 }
 
@@ -76,8 +76,6 @@ class RecipientAddress extends PureComponent<Props, State> {
 
   handleOnPick = (code: string) => {
     const { address, ...rest } = decodeURIScheme(code)
-    // $FlowFixMe
-    Object.assign(rest, { fromQRCode: true })
     if (this.props.onChange(address, rest) !== false) {
       this.setState({ qrReaderOpened: false })
     }

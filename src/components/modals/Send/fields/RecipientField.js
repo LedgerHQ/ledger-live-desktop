@@ -9,8 +9,6 @@ import Box from 'components/base/Box'
 import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
 import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
-import { createCustomErrorClass } from 'helpers/errors'
-import { CantScanQRCode } from 'config/errors'
 import { InvalidAddress } from 'config/errors'
 
 type Props<Transaction> = {
@@ -24,12 +22,11 @@ type Props<Transaction> = {
 
 class RecipientField<Transaction> extends Component<
   Props<Transaction>,
-  { isValid: boolean, warning: ?Error, QRCodeRefusedReason: ?Error },
+  { isValid: boolean, warning: ?Error },
 > {
   state = {
     isValid: true,
     warning: null,
-    QRCodeRefusedReason: null,
   }
   componentDidMount() {
     this.resync()
@@ -44,9 +41,7 @@ class RecipientField<Transaction> extends Component<
   }
   componentWillUnmount() {
     this.syncId++
-    this.isUnmounted = true
   }
-  isUnmounted = false
   syncId = 0
   async resync() {
     const { account, bridge, transaction } = this.props
@@ -55,31 +50,18 @@ class RecipientField<Transaction> extends Component<
     const isValid = await bridge.isRecipientValid(account.currency, recipient)
     const warning = await bridge.getRecipientWarning(account.currency, recipient)
     if (syncId !== this.syncId) return
-    if (this.isUnmounted) return
     this.setState({ isValid, warning })
   }
 
-  onChange = async (recipient: string, maybeExtra: ?Object) => {
+  onChange = (recipient: string, maybeExtra: ?Object) => {
     const { bridge, account, transaction, onChangeTransaction } = this.props
-    const { QRCodeRefusedReason } = this.state
-    const { amount, currency, fromQRCode } = maybeExtra || {}
+    const { amount, currency } = maybeExtra || {}
     if (currency && currency.scheme !== account.currency.scheme) return false
     let t = transaction
     if (amount) {
       t = bridge.editTransactionAmount(account, t, amount)
     }
-    const warning = fromQRCode
-      ? await bridge.getRecipientWarning(account.currency, recipient)
-      : null
-    if (this.isUnmounted) return false
-    if (warning) {
-      // clear the input if field has warning AND has a warning
-      t = bridge.editTransactionRecipient(account, t, '')
-      this.setState({ QRCodeRefusedReason: new CantScanQRCode() })
-    } else {
-      t = bridge.editTransactionRecipient(account, t, recipient)
-      if (QRCodeRefusedReason) this.setState({ QRCodeRefusedReason: null })
-    }
+    t = bridge.editTransactionRecipient(account, t, recipient)
     onChangeTransaction(t)
     return true
   }
@@ -90,13 +72,11 @@ class RecipientField<Transaction> extends Component<
   }
   render() {
     const { bridge, account, transaction, t, autoFocus } = this.props
-    const { isValid, warning, QRCodeRefusedReason } = this.state
+    const { isValid, warning } = this.state
     const value = bridge.getTransactionRecipient(account, transaction)
 
     const error =
-      !value || isValid
-        ? QRCodeRefusedReason
-        : new InvalidAddress(null, { currencyName: account.currency.name })
+      !value || isValid ? null : new InvalidAddress(null, { currencyName: account.currency.name })
 
     return (
       <Box flow={1}>
@@ -106,7 +86,7 @@ class RecipientField<Transaction> extends Component<
         />
         <RecipientAddress
           autoFocus={autoFocus}
-          withQrCode
+          withQrCode={false}
           error={error}
           warning={warning}
           value={value}
