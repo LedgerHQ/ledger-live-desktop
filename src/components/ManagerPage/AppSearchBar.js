@@ -3,7 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 
-import type { ApplicationVersion } from 'helpers/types'
+import type { LedgerScriptParams } from 'helpers/types'
 
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
@@ -23,8 +23,8 @@ const CrossContainer = styled(Box).attrs({
 `
 
 type Props = {
-  list: Array<ApplicationVersion>,
-  children: (list: Array<ApplicationVersion>) => React$Node,
+  list: Array<LedgerScriptParams>,
+  children: (list: Array<LedgerScriptParams>) => React$Node,
 }
 
 type State = {

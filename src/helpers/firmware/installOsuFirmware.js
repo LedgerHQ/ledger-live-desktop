@@ -6,11 +6,11 @@ import { createDeviceSocket } from 'helpers/socket'
 
 import type { Firmware } from 'components/modals/UpdateFirmware'
 
-import {
-  ManagerNotEnoughSpaceError,
-  ManagerDeviceLockedError,
-  UserRefusedFirmwareUpdate,
-} from 'config/errors'
+import { createCustomErrorClass } from '../errors'
+
+const ManagerNotEnoughSpaceError = createCustomErrorClass('ManagerNotEnoughSpace')
+const ManagerDeviceLockedError = createCustomErrorClass('ManagerDeviceLocked')
+const UserRefusedFirmwareUpdate = createCustomErrorClass('UserRefusedFirmwareUpdate')
 
 function remapError(promise) {
   return promise.catch((e: Error) => {
@@ -27,7 +27,7 @@ function remapError(promise) {
   })
 }
 
-type Result = Promise<{ success: boolean }>
+type Result = Promise<{ success: boolean, error?: any }>
 
 export default async (
   transport: Transport<*>,

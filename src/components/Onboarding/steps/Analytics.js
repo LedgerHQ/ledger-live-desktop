@@ -70,7 +70,7 @@ class Analytics extends PureComponent<StepProps, State> {
           deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
         />
         <StepContainerInner>
-          <Title data-e2e="onboarding_title">{t('onboarding:analytics.title')}</Title>
+          <Title>{t('onboarding:analytics.title')}</Title>
           <Description>{t('onboarding:analytics.desc')}</Description>
           <Box mt={5}>
             <Container>

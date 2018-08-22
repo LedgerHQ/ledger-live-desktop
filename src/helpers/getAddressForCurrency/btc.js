@@ -3,8 +3,10 @@
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import type Transport from '@ledgerhq/hw-transport'
-import { BtcUnmatchedApp } from 'config/errors'
 import getBitcoinLikeInfo from '../devices/getBitcoinLikeInfo'
+import { createCustomErrorClass } from '../errors'
+
+export const BtcUnmatchedApp = createCustomErrorClass('BtcUnmatchedApp')
 
 export default async (
   transport: Transport<*>,

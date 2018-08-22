@@ -1,9 +1,11 @@
 // @flow
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { BigNumber } from 'bignumber.js'
-import { LedgerAPINotAvailable } from 'config/errors'
+import { createCustomErrorClass } from 'helpers/errors'
 import network from './network'
 import { blockchainBaseURL } from './Ledger'
+
+export const LedgerAPINotAvailable = createCustomErrorClass('LedgerAPINotAvailable')
 
 export type Block = { height: number } // TODO more fields actually
 export type Tx = {

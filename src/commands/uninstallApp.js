@@ -6,20 +6,20 @@ import { withDevice } from 'helpers/deviceAccess'
 
 import uninstallApp from 'helpers/apps/uninstallApp'
 
-import type { ApplicationVersion } from 'helpers/types'
+import type { LedgerScriptParams } from 'helpers/types'
 
 type Input = {
-  app: ApplicationVersion,
+  app: LedgerScriptParams,
   devicePath: string,
   targetId: string | number,
 }
 
-type Result = void
+type Result = *
 
 const cmd: Command<Input, Result> = createCommand(
   'uninstallApp',
-  ({ devicePath, targetId, ...app }) =>
-    fromPromise(withDevice(devicePath)(transport => uninstallApp(transport, targetId, app))),
+  ({ devicePath, targetId, ...rest }) =>
+    fromPromise(withDevice(devicePath)(transport => uninstallApp(transport, targetId, rest))),
 )
 
 export default cmd

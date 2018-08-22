@@ -10,7 +10,7 @@ type Input = {
   devicePath: string,
 }
 
-type Result = void
+type Result = *
 
 const cmd: Command<Input, Result> = createCommand('installMcu', ({ devicePath }) =>
   fromPromise(withDevice(devicePath)(transport => installMcu(transport))),

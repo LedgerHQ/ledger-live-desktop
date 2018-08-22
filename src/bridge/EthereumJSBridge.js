@@ -16,8 +16,11 @@ import { getDerivations } from 'helpers/derivations'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { NotEnoughBalance, ETHAddressNonEIP } from 'config/errors'
+import { createCustomErrorClass } from 'helpers/errors'
+import { ETHAddressNonEIP } from 'config/errors'
 import type { EditProps, WalletBridge } from './types'
+
+const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 type Transaction = {
   recipient: string,

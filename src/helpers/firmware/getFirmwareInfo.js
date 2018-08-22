@@ -1,7 +1,6 @@
 // @flow
 
 import type Transport from '@ledgerhq/hw-transport'
-import type { FirmwareInfo } from 'helpers/types'
 
 const APDUS = {
   GET_FIRMWARE: [0xe0, 0x01, 0x00, 0x00],
@@ -13,7 +12,7 @@ const APDUS = {
 /**
  * Retrieve targetId and firmware version from device
  */
-export default async function getFirmwareInfo(transport: Transport<*>): Promise<FirmwareInfo> {
+export default async function getFirmwareInfo(transport: Transport<*>) {
   const res = await transport.send(...APDUS.GET_FIRMWARE)
   const byteArray = [...res]
   const data = byteArray.slice(0, byteArray.length - 2)

@@ -12,6 +12,7 @@ import getAddress from 'commands/getAddress'
 import { createCancelablePolling } from 'helpers/promise'
 import { standardDerivation } from 'helpers/derivations'
 import { isSegwitPath } from 'helpers/bip32'
+import { BtcUnmatchedApp } from 'helpers/getAddressForCurrency/btc'
 
 import DeviceInteraction from 'components/DeviceInteraction'
 import Text from 'components/base/Text'
@@ -20,7 +21,7 @@ import IconUsb from 'icons/Usb'
 
 import type { Device } from 'types/common'
 
-import { WrongDeviceForAccount, CantOpenDevice, BtcUnmatchedApp } from 'config/errors'
+import { WrongDeviceForAccount, CantOpenDevice } from 'config/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />

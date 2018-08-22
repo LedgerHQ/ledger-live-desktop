@@ -1,19 +1,14 @@
 // @flow
 import network from 'api/network'
-import type { DeviceInfo, DeviceVersion, FinalFirmware, ApplicationVersion } from 'helpers/types'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import { APPLICATIONS_BY_DEVICE } from 'helpers/urls'
 import getDeviceVersion from 'helpers/devices/getDeviceVersion'
 import getCurrentFirmware from 'helpers/devices/getCurrentFirmware'
 
-type NetworkResponse = { data: { application_versions: Array<ApplicationVersion> } }
-
-export default async (deviceInfo: DeviceInfo): Promise<Array<ApplicationVersion>> => {
-  const deviceData: DeviceVersion = await getDeviceVersion(
-    deviceInfo.targetId,
-    deviceInfo.providerId,
-  )
-  const firmwareData: FinalFirmware = await getCurrentFirmware({
+export default async (deviceInfo: DeviceInfo) => {
+  const deviceData = await getDeviceVersion(deviceInfo.targetId, deviceInfo.providerId)
+  const firmwareData = await getCurrentFirmware({
     deviceId: deviceData.id,
     fullVersion: deviceInfo.fullVersion,
     provider: deviceInfo.providerId,
@@ -25,6 +20,6 @@ export default async (deviceInfo: DeviceInfo): Promise<Array<ApplicationVersion>
   }
   const {
     data: { application_versions },
-  }: NetworkResponse = await network({ method: 'POST', url: APPLICATIONS_BY_DEVICE, data: params })
+  } = await network({ method: 'POST', url: APPLICATIONS_BY_DEVICE, data: params })
   return application_versions.length > 0 ? application_versions : []
 }

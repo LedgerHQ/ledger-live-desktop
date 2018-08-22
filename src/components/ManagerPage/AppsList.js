@@ -7,7 +7,8 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import type { Device, T } from 'types/common'
-import type { Application, ApplicationVersion, DeviceInfo } from 'helpers/types'
+import type { LedgerScriptParams } from 'helpers/types'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 import { developerModeSelector } from 'reducers/settings'
 
 import listApps from 'commands/listApps'
@@ -65,7 +66,7 @@ type Props = {
 type State = {
   status: Status,
   error: ?Error,
-  filteredAppVersionsList: Array<ApplicationVersion>,
+  filteredAppVersionsList: LedgerScriptParams[],
   appsLoaded: boolean,
   app: string,
   mode: Mode,
@@ -101,14 +102,9 @@ class AppsList extends PureComponent<Props, State> {
 
   filterAppVersions = (applicationsList, compatibleAppVersionsList) => {
     if (!this.props.isDevMode) {
-      return compatibleAppVersionsList.filter(version => {
-        const app = applicationsList.find(e => e.id === version.app)
-        if (app) {
-          return app.category !== 2
-        }
-
-        return false
-      })
+      return compatibleAppVersionsList.filter(
+        version => applicationsList.find(e => e.id === version.app).category !== 2,
+      )
     }
     return compatibleAppVersionsList
   }
@@ -116,7 +112,7 @@ class AppsList extends PureComponent<Props, State> {
   async fetchAppList() {
     try {
       const { deviceInfo } = this.props
-      const applicationsList: Array<Application> = await listApps.send().toPromise()
+      const applicationsList = await listApps.send({}).toPromise()
       const compatibleAppVersionsList = await listAppVersions.send(deviceInfo).toPromise()
       const filteredAppVersionsList = this.filterAppVersions(
         applicationsList,
@@ -135,7 +131,7 @@ class AppsList extends PureComponent<Props, State> {
     }
   }
 
-  handleInstallApp = (app: ApplicationVersion) => async () => {
+  handleInstallApp = (app: LedgerScriptParams) => async () => {
     this.setState({ status: 'busy', app: app.name, mode: 'installing' })
     try {
       const {
@@ -150,7 +146,7 @@ class AppsList extends PureComponent<Props, State> {
     }
   }
 
-  handleUninstallApp = (app: ApplicationVersion) => async () => {
+  handleUninstallApp = (app: LedgerScriptParams) => async () => {
     this.setState({ status: 'busy', app: app.name, mode: 'uninstalling' })
     try {
       const {

@@ -4,7 +4,6 @@ import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 
 import getCurrentFirmware from 'helpers/devices/getCurrentFirmware'
-import type { FinalFirmware } from 'helpers/types'
 
 type Input = {
   deviceId: string | number,
@@ -12,7 +11,7 @@ type Input = {
   provider: number,
 }
 
-type Result = FinalFirmware
+type Result = *
 
 const cmd: Command<Input, Result> = createCommand('getCurrentFirmware', data =>
   fromPromise(getCurrentFirmware(data)),

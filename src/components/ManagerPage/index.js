@@ -6,7 +6,7 @@ import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 
 import type { Device } from 'types/common'
-import type { DeviceInfo } from 'helpers/types'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import Dashboard from './Dashboard'
 

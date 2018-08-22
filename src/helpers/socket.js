@@ -5,13 +5,13 @@ import logger from 'logger'
 import Websocket from 'ws'
 import type Transport from '@ledgerhq/hw-transport'
 import { Observable } from 'rxjs'
-import {
-  WebsocketConnectionError,
-  WebsocketConnectionFailed,
-  DeviceSocketFail,
-  DeviceSocketNoBulkStatus,
-  DeviceSocketNoHandler,
-} from 'config/errors'
+import { createCustomErrorClass } from './errors'
+
+const WebsocketConnectionError = createCustomErrorClass('WebsocketConnectionError')
+const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnectionFailed')
+const DeviceSocketFail = createCustomErrorClass('DeviceSocketFail')
+const DeviceSocketNoBulkStatus = createCustomErrorClass('DeviceSocketNoBulkStatus')
+const DeviceSocketNoHandler = createCustomErrorClass('DeviceSocketNoHandler')
 
 /**
  * use Ledger WebSocket API to exchange data with the device

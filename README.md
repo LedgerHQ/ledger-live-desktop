@@ -159,15 +159,3 @@ yarn reset-files
 ├── webpack : build configuration
 └── yarn.lock
 ```
-
-## Troubleshooting
-
-#### The 'gyp==0.1' distribution was not found and is required by the application
-
-You will need to install the python gyp module
-
-```
-pip install git+https://chromium.googlesource.com/external/gyp
-```
-
-see [stackoverflow/40025591](https://stackoverflow.com/questions/40025591/the-gyp-0-1-distribution-was-not-found)

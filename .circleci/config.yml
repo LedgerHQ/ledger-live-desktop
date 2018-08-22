@@ -13,10 +13,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v8-yarn-packages-{{ checksum "yarn.lock" }}
+            - v7-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v8-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v7-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - run: yarn lint

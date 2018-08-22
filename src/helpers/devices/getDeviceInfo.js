@@ -5,7 +5,17 @@ import type Transport from '@ledgerhq/hw-transport'
 import getFirmwareInfo from 'helpers/firmware/getFirmwareInfo'
 import { FORCE_PROVIDER } from 'config/constants'
 
-import type { DeviceInfo } from 'helpers/types'
+export type DeviceInfo = {
+  targetId: string | number,
+  seVersion: string,
+  isBootloader: boolean,
+  flags: string,
+  mcuVersion: string,
+  isOSU: boolean,
+  providerName: string,
+  providerId: number,
+  fullVersion: string,
+}
 
 const PROVIDERS = {
   '': 1,

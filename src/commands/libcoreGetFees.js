@@ -6,7 +6,9 @@ import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
 import * as accountIdHelper from 'helpers/accountId'
 import { isValidAddress, libcoreAmountToBigNumber, bigNumberToLibcoreAmount } from 'helpers/libcore'
-import { InvalidAddress } from 'config/errors'
+import { createCustomErrorClass } from 'helpers/errors'
+
+const InvalidAddress = createCustomErrorClass('InvalidAddress')
 
 type BitcoinLikeTransaction = {
   // TODO we rename this Transaction concept into transactionInput

@@ -1,7 +1,7 @@
 // @flow
 import network from 'api/network'
 import { GET_LATEST_FIRMWARE } from 'helpers/urls'
-import type { DeviceInfo } from 'helpers/types'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import getFinalFirmwareById from 'helpers/firmware/getFinalFirmwareById'
 import getMcus from 'helpers/firmware/getMcus'

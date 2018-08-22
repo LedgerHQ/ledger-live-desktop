@@ -10,3 +10,11 @@
 /build/linux/arch/src
 /build/linux/arch/*.tar.gz
 /build/linux/arch/*.tar.xz
+
+# TODO this should be in devs global gitignore
+# it makes no sense to have it here
+*.log
+.DS_Store
+.vscode
+thumbs.db
+jsconfig.json

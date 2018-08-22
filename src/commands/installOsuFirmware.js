@@ -14,7 +14,7 @@ type Input = {
   firmware: Firmware,
 }
 
-type Result = { success: boolean }
+type Result = *
 
 const cmd: Command<Input, Result> = createCommand(
   'installOsuFirmware',

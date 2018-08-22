@@ -14,10 +14,11 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 
 import { isSegwitPath, isUnsplitPath } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
-import { NoAddressesFound } from 'config/errors'
-import { deserializeError } from './errors'
+import { createCustomErrorClass, deserializeError } from './errors'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
 import { timeoutTagged } from './promise'
+
+const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 
 // TODO: put that info inside currency itself
 const SPLITTED_CURRENCIES = {

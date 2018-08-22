@@ -2,13 +2,12 @@
 import network from 'api/network'
 
 import { GET_NEXT_MCU } from 'helpers/urls'
-import type { OsuFirmware } from 'helpers/types'
-import { LatestMCUInstalledError } from 'config/errors'
+import { createCustomErrorClass } from 'helpers/errors'
 
-type NetworkResponse = { data: OsuFirmware | 'default' }
+const LatestMCUInstalledError = createCustomErrorClass('LatestMCUInstalledError')
 
 export default async (bootloaderVersion: string): Promise<*> => {
-  const { data }: NetworkResponse = await network({
+  const { data } = await network({
     method: 'POST',
     url: GET_NEXT_MCU,
     data: {

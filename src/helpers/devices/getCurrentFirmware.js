@@ -2,7 +2,6 @@
 import network from 'api/network'
 
 import { GET_CURRENT_FIRMWARE } from 'helpers/urls'
-import type { FinalFirmware } from 'helpers/types'
 
 type Input = {
   fullVersion: string,
@@ -10,8 +9,8 @@ type Input = {
   provider: number,
 }
 
-export default async (input: Input): Promise<FinalFirmware> => {
-  const { data }: { data: FinalFirmware } = await network({
+export default async (input: Input): Promise<*> => {
+  const { data } = await network({
     method: 'POST',
     url: GET_CURRENT_FIRMWARE,
     data: {

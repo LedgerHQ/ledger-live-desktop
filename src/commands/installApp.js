@@ -6,15 +6,15 @@ import { fromPromise } from 'rxjs/observable/fromPromise'
 import { withDevice } from 'helpers/deviceAccess'
 import installApp from 'helpers/apps/installApp'
 
-import type { ApplicationVersion } from 'helpers/types'
+import type { LedgerScriptParams } from 'helpers/types'
 
 type Input = {
-  app: ApplicationVersion,
+  app: LedgerScriptParams,
   devicePath: string,
   targetId: string | number,
 }
 
-type Result = void
+type Result = *
 
 const cmd: Command<Input, Result> = createCommand(
   'installApp',

@@ -9,7 +9,7 @@ import { delay, createCancelablePolling } from 'helpers/promise'
 
 import logger from 'logger'
 import type { T, Device } from 'types/common'
-import type { DeviceInfo } from 'helpers/types'
+import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 
 import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT, GENUINE_CACHE_DELAY } from 'config/constants'
 

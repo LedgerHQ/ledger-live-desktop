@@ -2,9 +2,11 @@
 import invariant from 'invariant'
 import LRU from 'lru-cache'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
-import { FeeEstimationFailed } from 'config/errors'
+import { createCustomErrorClass } from 'helpers/errors'
 import { blockchainBaseURL } from './Ledger'
 import network from './network'
+
+const FeeEstimationFailed = createCustomErrorClass('FeeEstimationFailed')
 
 export type Fees = {
   [_: string]: number,

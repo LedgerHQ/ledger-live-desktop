@@ -2,10 +2,8 @@
 import { GET_DEVICE_VERSION } from 'helpers/urls'
 import network from 'api/network'
 
-import type { DeviceVersion } from 'helpers/types'
-
-export default async (targetId: string | number, provider: number): Promise<DeviceVersion> => {
-  const { data }: { data: DeviceVersion } = await network({
+export default async (targetId: string | number, provider: number): Promise<*> => {
+  const { data } = await network({
     method: 'POST',
     url: GET_DEVICE_VERSION,
     data: {

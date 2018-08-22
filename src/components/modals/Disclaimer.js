@@ -25,7 +25,7 @@ class DisclaimerModal extends PureComponent<Props> {
         name={MODAL_DISCLAIMER}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle data-e2e="disclaimer_title">{t('app:disclaimerModal.title')}</ModalTitle>
+            <ModalTitle>{t('app:disclaimerModal.title')}</ModalTitle>
             <ModalContent flow={4} ff="Open Sans|Regular" fontSize={4} color="smoke">
               <Box align="center" mt={4} pb={4}>
                 <HandShield size={55} />
@@ -34,7 +34,7 @@ class DisclaimerModal extends PureComponent<Props> {
               <p>{t('app:disclaimerModal.desc_2')}</p>
             </ModalContent>
             <ModalFooter horizontal justifyContent="flex-end">
-              <Button data-e2e="continue_button" onClick={onClose} primary>
+              <Button onClick={onClose} primary>
                 {t('app:disclaimerModal.cta')}
               </Button>
             </ModalFooter>
