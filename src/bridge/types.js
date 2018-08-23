@@ -76,15 +76,16 @@ export interface WalletBridge<Transaction> {
 
   getTransactionRecipient(account: Account, transaction: Transaction): string;
 
-  isValidTransaction(account: Account, transaction: Transaction): boolean;
-
   // render the whole Fees section of the form
   EditFees?: *; // React$ComponentType<EditProps<Transaction>>;
 
   // render the whole advanced part of the form
   EditAdvancedOptions?: *; // React$ComponentType<EditProps<Transaction>>;
 
-  checkCanBeSpent(account: Account, transaction: Transaction): Promise<void>;
+  // validate the transaction and all currency specific validations here, we can return false
+  // to disable the button without throwing an error if we are handling the error on a different
+  // input or throw an error that will highlight the issue on the amount field
+  checkValidTransaction(account: Account, transaction: Transaction): Promise<boolean>;
 
   getTotalSpent(account: Account, transaction: Transaction): Promise<BigNumber>;
 

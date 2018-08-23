@@ -95,11 +95,11 @@ const getFees = async (a, transaction) => {
   return promise
 }
 
-const checkCanBeSpent = (a, t) =>
+const checkValidTransaction = (a, t) =>
   !t.amount
-    ? Promise.resolve()
+    ? Promise.resolve(true)
     : getFees(a, t)
-        .then(() => {})
+        .then(() => true)
         .catch(e => {
           if (e.code === NOT_ENOUGH_FUNDS) {
             throw new NotEnoughBalance()
@@ -192,9 +192,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   // EditAdvancedOptions,
 
-  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
-
-  checkCanBeSpent,
+  checkValidTransaction,
 
   getTotalSpent: (a, t) =>
     t.amount.isZero()
