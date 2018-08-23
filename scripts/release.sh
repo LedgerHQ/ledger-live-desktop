@@ -25,6 +25,11 @@ fi
 
 if [ ! -d "static/fonts/museosans" ]; then
   if ! command -v aws ; then
+    if ! command -v apt ; then
+      echo "Museo Sans is missing, and I can't fetch it (no aws, no apt)" >&2
+      exit 1
+    fi
+
     runJob "sudo apt install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
   fi
 
