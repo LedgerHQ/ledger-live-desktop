@@ -5,6 +5,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 import { urls } from 'config/urls'
+import { i } from 'helpers/staticPath'
 
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
@@ -50,6 +51,24 @@ const cards = [
     id: 'paybis',
     url: urls.paybis,
     logo: <PaybisLogo width={150} height={57} />,
+  },
+  {
+    key: 'luno',
+    id: 'luno',
+    url: urls.luno,
+    logo: <img src={i('logos/exchanges/luno.svg')} alt="Luno" width={150} />,
+  },
+  {
+    key: 'shapeshift',
+    id: 'shapeshift',
+    url: urls.shapeshift,
+    logo: <img src={i('logos/exchanges/shapeshift.svg')} alt="Shapeshift" width={150} />,
+  },
+  {
+    key: 'genesis',
+    id: 'genesis',
+    url: urls.genesis,
+    logo: <img src={i('logos/exchanges/genesis.svg')} alt="Genesis" width={150} />,
   },
 ]
 
