@@ -57,6 +57,15 @@ fi
 #   exit 1
 # fi
 
+
+if [[ $(uname) == 'Linux' ]]; then # only run it on one target, to prevent race conditions
+  runJob \
+    "node scripts/create-draft-release.js" \
+    "creating a draft release on GitHub (if needed)..." \
+    "draft release ready" \
+    "failed to create a draft release"
+fi
+
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
 runJob \
