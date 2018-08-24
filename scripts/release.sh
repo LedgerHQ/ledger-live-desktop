@@ -16,10 +16,10 @@ source scripts/helpers/display-env.sh
 #   exit 0
 # fi
 
-# if ! git describe --exact-match --tags 2>/dev/null >/dev/null; then
-#   echo "You are not on a tag. Exiting properly. (CI)"
-#   exit 0
-# fi
+ if ! git describe --exact-match --tags 2>/dev/null >/dev/null; then
+   echo "You are not on a tag. Exiting properly. (CI)"
+   exit 0
+ fi
 
  if [ -z "$GH_TOKEN" ]; then
    echo "GH_TOKEN is unset. can't release" >&2
@@ -51,11 +51,11 @@ source scripts/helpers/display-env.sh
 #   exit 1
 # fi
 
- originRemote=$(git config --get remote.origin.url)
- if [ "$originRemote" != "git@github.com:LedgerHQ/ledger-live-desktop.git" ]; then
-   echo "the origin remote is incorrect ($originRemote)"
-   exit 1
- fi
+# originRemote=$(git config --get remote.origin.url)
+# if [ "$originRemote" != "git@github.com:LedgerHQ/ledger-live-desktop.git" ]; then
+#   echo "the origin remote is incorrect ($originRemote)"
+#   exit 1
+# fi
 
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
