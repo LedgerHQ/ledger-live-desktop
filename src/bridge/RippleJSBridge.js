@@ -463,10 +463,30 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getTransactionAmount: (a, t) => t.amount,
 
-  editTransactionRecipient: (account, t, recipient) => ({
-    ...t,
-    recipient,
-  }),
+  editTransactionRecipient: (account, t, recipient) => {
+    const parts = recipient.split('?')
+    const params = new URLSearchParams(parts[1])
+    recipient = parts[0]
+
+    // Extract parameters we may need
+    for (const [key, value] of params.entries()) {
+      switch (key) {
+        case 'dt':
+          t.tag = parseInt(value, 10) || 0
+          break
+        case 'amount':
+          t.amount = parseAPIValue(value || '0')
+          break
+        default:
+        // do nothing
+      }
+    }
+
+    return {
+      ...t,
+      recipient,
+    }
+  },
 
   EditFees,
 
