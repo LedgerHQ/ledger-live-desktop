@@ -233,7 +233,12 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
 
       {url && (
         <ModalFooter horizontal justify="flex-end" flow={2}>
-          <Button primary onClick={() => openURL(url)}>
+          <Button
+            primary
+            onClick={() => {
+              openURL(url)
+            }}
+          >
             {t('app:operationDetails.viewOperation')}
           </Button>
         </ModalFooter>
@@ -289,7 +294,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
       <Box>
         {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(line => (
           <OpDetailsData key={line}>
-            {line}
+            <Ellipsis canSelect>{line}</Ellipsis>
             <GradientHover>
               <CopyWithFeedback text={line} />
             </GradientHover>

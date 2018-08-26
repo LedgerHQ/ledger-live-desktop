@@ -19,10 +19,13 @@ etcLegacyMEW.mandatoryEmptyAccountSkip = 10
 
 const rippleLegacy: Derivation = ({ x }) => `44'/144'/0'/${x}'`
 
+const stellarLegacy: Derivation = ({ x }) => `44'/148'/${x}'`
+
 const legacyDerivations = {
   ethereum: [ethLegacyMEW],
   ethereum_classic: [ethLegacyMEW, etcLegacyMEW],
   ripple: [rippleLegacy],
+  stellar: [stellarLegacy],
 }
 
 export const standardDerivation: Derivation = ({ currency, segwit, x }) => {

@@ -15,6 +15,7 @@ import { rgba } from 'styles/helpers'
 import Box from 'components/base/Box'
 import CopyToClipboard from 'components/base/CopyToClipboard'
 import QRCode from 'components/base/QRCode'
+import Ellipsis from 'components/base/Ellipsis'
 
 import IconRecheck from 'icons/Recover'
 import IconCopy from 'icons/Copy'
@@ -204,7 +205,7 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
         </Label>
         <Address>
           {copyFeedback && <CopyFeedback>{t('app:common.addressCopied')}</CopyFeedback>}
-          {address}
+          <Ellipsis>{address}</Ellipsis>
         </Address>
         <Box horizontal flow={2} mt={2} alignItems="center" style={{ maxWidth: 320 }}>
           <Box color={isAddressVerified === false ? 'alertRed' : 'wallet'}>

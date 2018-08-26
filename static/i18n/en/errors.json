@@ -170,6 +170,26 @@
     "title": "Auto-verification not available: carefully verify the address",
     "description": null
   },
+  "StellarInvalidTextMemo": {
+    "title": "Memo must contain a maximum of 28 characters",
+    "description": null
+  },
+  "StellarInvalidEmptyMemo": {
+    "title": "Memo can't be empty",
+    "description": null
+  },
+  "StellarInvalidHashMemo": {
+    "title": "Memo must be a 32 byte hash represented in hexadecimal",
+    "description": null
+  },
+  "StellarNotEnoughToCreateAccount": {
+    "title": "Destination account doesn't exist yet, minimum starting balance is 1XLM",
+    "description": null
+  },
+  "StellarInvalidIdMemo": {
+    "title": "Memo must be a valid 64 bit unsigned integer under 18446744073709551616",
+    "description": null
+  },
   "CantScanQRCode": {
     "title": "Couldn't scan this QR-code: auto-verification not supported by this address"
   }

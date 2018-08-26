@@ -4,13 +4,14 @@ import type Transport from '@ledgerhq/hw-transport'
 
 import ethereum from './ethereum'
 import ripple from './ripple'
+import stellar from './stellar'
 
 type Resolver = (
   transport: Transport<*>,
   currencyId: string,
   path: string, // if provided use this path, otherwise resolve it
   transaction: *, // any data
-) => Promise<string>
+) => Promise<String>
 
 type Module = (currencyId: string) => Resolver
 
@@ -22,7 +23,7 @@ const all = {
   ethereum_testnet: ethereum,
   ethereum_classic: ethereum,
   ethereum_classic_testnet: ethereum,
-
+  stellar,
   ripple,
 }
 

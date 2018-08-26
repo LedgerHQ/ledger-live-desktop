@@ -308,6 +308,8 @@
         "useRBF": "Use a replace-by-fee transaction",
         "message": "Leave a message (140)",
         "rippleTag": "Tag",
+        "stellarMemo": "Memo Text",
+        "stellarMemoType": "Memo Type",
         "ethereumGasLimit": "Gas limit",
         "unitPerByte": "{{unit}} per byte"
       },

@@ -93,6 +93,7 @@ export const EXPERIMENTAL_MARKET_INDICATOR_SETTINGS = boolFromEnv(
   'EXPERIMENTAL_MARKET_INDICATOR_SETTINGS',
 )
 export const USE_MOCK_DATA = boolFromEnv('USE_MOCK_DATA')
+export const STELLAR_USE_TESTNET = boolFromEnv('STELLAR_USE_TESTNET')
 
 // Other constants
 

@@ -6,6 +6,7 @@ import type Transport from '@ledgerhq/hw-transport'
 import bitcoin from './btc'
 import ethereum from './ethereum'
 import ripple from './ripple'
+import stellar from './stellar'
 
 type Resolver = (
   transport: Transport<*>,
@@ -21,6 +22,7 @@ const perFamily: { [_: string]: Resolver } = {
   bitcoin,
   ethereum,
   ripple,
+  stellar,
 }
 
 const proxy: Resolver = (transport, currency, path, options) => {

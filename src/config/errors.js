@@ -42,6 +42,13 @@ export const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnec
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 export const ETHAddressNonEIP = createCustomErrorClass('ETHAddressNonEIP')
 export const CantScanQRCode = createCustomErrorClass('CantScanQRCode')
+export const StellarInvalidTextMemo = createCustomErrorClass('StellarInvalidTextMemo')
+export const StellarInvalidIdMemo = createCustomErrorClass('StellarInvalidIdMemo')
+export const StellarInvalidHashMemo = createCustomErrorClass('StellarInvalidHashMemo')
+export const StellarInvalidEmptyMemo = createCustomErrorClass('StellarInvalidEmptyMemo')
+export const StellarNotEnoughToCreateAccount = createCustomErrorClass(
+  'StellarNotEnoughToCreateAccount',
+)
 
 // db stuff, no need to translate
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')

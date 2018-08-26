@@ -474,9 +474,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
-
-  checkCanBeSpent: async (a, t) => {
+  checkValidTransaction: async (a, t) => {
     const r = await getServerInfo(a.endpointConfig)
     if (
       t.amount
@@ -484,7 +482,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         .plus(parseAPIValue(r.validatedLedger.reserveBaseXRP))
         .isLessThanOrEqualTo(a.balance)
     ) {
-      return
+      return true
     }
     throw new NotEnoughBalance()
   },

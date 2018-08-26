@@ -4,9 +4,9 @@ import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import RequestAmount from 'components/RequestAmount'
 
-class AmountField extends Component<*, { canBeSpentError: ?Error }> {
+class AmountField extends Component<*, { validTransactionError: ?Error }> {
   state = {
-    canBeSpentError: null,
+    validTransactionError: null,
   }
   componentDidMount() {
     this.resync()
@@ -27,11 +27,11 @@ class AmountField extends Component<*, { canBeSpentError: ?Error }> {
     const { account, bridge, transaction } = this.props
     const syncId = ++this.syncId
     try {
-      await bridge.checkCanBeSpent(account, transaction)
+      await bridge.checkValidTransaction(account, transaction)
       if (this.syncId !== syncId) return
-      this.setState({ canBeSpentError: null })
-    } catch (canBeSpentError) {
-      this.setState({ canBeSpentError })
+      this.setState({ validTransactionError: null })
+    } catch (validTransactionError) {
+      this.setState({ validTransactionError })
     }
   }
 
@@ -42,14 +42,14 @@ class AmountField extends Component<*, { canBeSpentError: ?Error }> {
 
   render() {
     const { bridge, account, transaction, t } = this.props
-    const { canBeSpentError } = this.state
+    const { validTransactionError } = this.state
     return (
       <Box flow={1}>
         <Label>{t('app:send.steps.amount.amount')}</Label>
         <RequestAmount
           withMax={false}
           account={account}
-          canBeSpentError={canBeSpentError}
+          validTransactionError={validTransactionError}
           onChange={this.onChange}
           value={bridge.getTransactionAmount(account, transaction)}
         />
