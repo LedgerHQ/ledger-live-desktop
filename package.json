@@ -119,6 +119,7 @@
     "@babel/preset-flow": "7.0.0-beta.42",
     "@babel/preset-react": "7.0.0-beta.42",
     "@babel/preset-stage-0": "7.0.0-beta.42",
+    "@octokit/rest": "^15.10.0",
     "@storybook/addon-actions": "^3.4.7",
     "@storybook/addon-knobs": "^3.4.7",
     "@storybook/addon-links": "^3.4.7",
