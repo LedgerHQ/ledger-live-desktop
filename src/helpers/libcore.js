@@ -271,7 +271,7 @@ async function scanNextAccount(props: {
 
   const shouldSyncAccount = true // TODO: let's sync everytime. maybe in the future we can optimize.
   if (shouldSyncAccount) {
-    await timeoutTagged('coreSyncAccount', 30000, coreSyncAccount(core, njsAccount))
+    await coreSyncAccount(core, njsAccount)
   }
 
   if (isUnsubscribed()) return []
@@ -549,7 +549,7 @@ export async function syncAccount({
     )
   }
 
-  const unsub = await timeoutTagged('coreSyncAccount', 30000, coreSyncAccount(core, njsAccount))
+  const unsub = await coreSyncAccount(core, njsAccount)
   unsub()
 
   const query = njsAccount.queryOperations()
