@@ -165,5 +165,8 @@
   "ETHAddressNonEIP": {
     "title": "Auto-verification not available: carefully verify the address",
     "description": null
+  },
+  "CantScanQRCode": {
+    "title": "Couldn't scan this QR-code: auto-verification not supported by this address"
   }
 }
