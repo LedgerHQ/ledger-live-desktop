@@ -180,7 +180,7 @@ class InputCurrency extends PureComponent<Props, State> {
     return (
       <Currencies onClick={stopPropagation}>
         <Select
-          onChange={onChangeUnit}
+          onChange={unit => (unit ? onChangeUnit(unit) : undefined)}
           options={units}
           value={unit}
           getOptionValue={unitGetOptionValue}
