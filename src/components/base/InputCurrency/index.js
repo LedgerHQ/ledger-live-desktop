@@ -187,6 +187,7 @@ class InputCurrency extends PureComponent<Props, State> {
           renderOption={this.renderOption}
           renderValue={this.renderValue}
           fakeFocusRight={isFocused}
+          isRight
         />
       </Currencies>
     )
