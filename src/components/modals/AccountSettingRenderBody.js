@@ -17,7 +17,7 @@ import { setDataModal } from 'reducers/modals'
 
 import { getBridgeForCurrency } from 'bridge'
 
-import { createCustomErrorClass } from 'helpers/errors'
+import { AccountNameRequiredError, EnpointConfigError } from 'config/errors'
 
 import TrackPage from 'analytics/TrackPage'
 import Spoiler from 'components/base/Spoiler'
@@ -35,9 +35,6 @@ import {
   ModalContent,
   ConfirmModal,
 } from 'components/base/Modal'
-
-const AccountNameRequiredError = createCustomErrorClass('AccountNameRequired')
-const EnpointConfigError = createCustomErrorClass('EnpointConfig')
 
 type State = {
   accountName: ?string,

@@ -5,14 +5,12 @@ import React, { PureComponent } from 'react'
 import type { T } from 'types/common'
 
 import db from 'helpers/db'
-import { createCustomErrorClass } from 'helpers/errors'
+import { PasswordIncorrectError } from 'config/errors'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
 import PasswordForm from './PasswordForm'
-
-const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type Props = {
   t: T,
