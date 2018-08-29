@@ -7,10 +7,14 @@ export default ({
   width,
   minWidth,
   small,
+  isRight,
+  isLeft,
 }: {
   width: number,
   minWidth: number,
   small: boolean,
+  isRight: boolean,
+  isLeft: boolean,
 }) => ({
   control: (styles: Object, { isFocused }: Object) => ({
     ...styles,
@@ -19,6 +23,8 @@ export default ({
     ...ff('Open Sans|SemiBold'),
     height: small ? 34 : 40,
     minHeight: 'unset',
+    borderRadius: isRight ? '0 4px 4px 0' : isLeft ? '4px 0 0 4px' : 4,
+    borderColor: colors.fog,
     backgroundColor: 'white',
 
     ...(isFocused
