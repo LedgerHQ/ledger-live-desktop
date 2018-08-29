@@ -52,7 +52,7 @@ source scripts/helpers/display-env.sh
  fi
 
 # runJob \
-#   "aws s3 cp s3://ledger-ledgerlive-resources-dev/resources /tmp/CertificatesLL.cer ;\
+#   "aws s3 cp s3://ledger-ledgerlive-resources-dev/resources/CertificatesLL.cer /tmp/CertificatesLL.cer ;\
 #   security import /tmp/CertificatesLL.cer" \
 #   "adding certificates..." "certificates added" "failed to add certificates"
 
