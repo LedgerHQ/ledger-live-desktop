@@ -172,7 +172,7 @@ class InputCurrency extends PureComponent<Props, State> {
   renderListUnits = () => {
     const { units, onChangeUnit, unit } = this.props
     const { isFocused } = this.state
-
+    const avoidEmptyValue = value => value && onChangeUnit(value)
     if (units.length <= 1) {
       return null
     }
@@ -180,13 +180,14 @@ class InputCurrency extends PureComponent<Props, State> {
     return (
       <Currencies onClick={stopPropagation}>
         <Select
-          onChange={onChangeUnit}
+          onChange={avoidEmptyValue}
           options={units}
           value={unit}
           getOptionValue={unitGetOptionValue}
           renderOption={this.renderOption}
           renderValue={this.renderValue}
           fakeFocusRight={isFocused}
+          isRight
         />
       </Currencies>
     )
