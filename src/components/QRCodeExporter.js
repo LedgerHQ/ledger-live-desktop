@@ -1,31 +1,21 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-
+import { createSelector } from 'reselect'
 import { connect } from 'react-redux'
-import type { State } from 'reducers'
+
 import { accountsSelector } from 'reducers/accounts'
+import { makeChunks } from '@ledgerhq/live-common/lib/bridgestream/exporter'
 import QRCode from './base/QRCode'
 
-// encode the app state to export into an array of chunks for the mobile app to understand.
-// returned data frames are json stringified array with format: [ datalength, index, type, ...rest ]
-// NB as soon as we have common types we'll move this in a ledgerhq/common project
-function makeChunks(state: State): Array<string> {
-  const chunksFormatVersion = 1
-  const desktopVersion = __APP_VERSION__
-  const data = [
-    ['meta', chunksFormatVersion, 'desktop', desktopVersion],
-    ...accountsSelector(state).map(account => [
-      'account',
-      account.id,
-      account.name,
-      account.currency.id,
-    ]),
-  ]
-  return data.map((arr, i) => JSON.stringify([data.length, i, ...arr]))
-}
-
-const mapStateToProps = (state: State) => ({ chunks: makeChunks(state) })
+const mapStateToProps = createSelector(accountsSelector, accounts => ({
+  chunks: makeChunks({
+    accounts,
+    exporterName: 'desktop',
+    exporterVersion: __APP_VERSION__,
+    pad: true,
+  }),
+}))
 
 class QRCodeExporter extends PureComponent<
   {
@@ -38,7 +28,7 @@ class QRCodeExporter extends PureComponent<
   },
 > {
   static defaultProps = {
-    fps: 10,
+    fps: 4,
     size: 480,
   }
 
