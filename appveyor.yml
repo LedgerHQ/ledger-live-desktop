@@ -1,0 +1,29 @@
+version: 1.0.{build}
+
+image:
+  - Visual Studio 2017
+platform:
+  - x64
+
+configuration:
+  - Debug
+environment:
+  nodejs_version: "9"
+  GH_TOKEN:
+      secure: +8ZX+Dxh+wPfFliZxb4m4CCjXarcfAB5vsqJxgqIuX/yWfgX0ptAvZxEYmMVP0tg
+cache:
+  - node_modules -> **\yarn.lock
+
+build:
+  verbosity: minimal
+install:
+  - ps: Install-Product node 8.11.3 x64
+
+build_script:
+  - cd C:/projects/ledger-live-desktop
+  - node --version
+  - yarn install
+  - yarn lint
+  - yarn flow
+  - yarn test
+  - yarn release
