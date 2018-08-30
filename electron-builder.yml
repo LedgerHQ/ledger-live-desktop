@@ -27,7 +27,7 @@ linux:
     - target: deb
       arch:
         - x64
-  maintainer: "Arnaud Ulric <arnaud.ulric@gmail.com>"
+  maintainer: "ledgerHQ"
 
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}

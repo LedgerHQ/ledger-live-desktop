@@ -41,9 +41,11 @@ jobs:
           key: v14-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - run: yarn ci
+      - run: yarn lint
+      - run: yarn flow
+      - run: yarn test
       - run: yarn release
-      
+
 workflows:
   version: 2
   build:
