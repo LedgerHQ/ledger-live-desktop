@@ -12,7 +12,7 @@ import { i } from 'helpers/staticPath'
 import IconTriangleWarning from 'icons/TriangleWarning'
 
 import db from 'helpers/db'
-import hardReset from 'helpers/hardReset'
+import { hardReset } from 'helpers/reset'
 
 import { fetchAccounts } from 'actions/accounts'
 import { isLocked, unlock } from 'reducers/application'
