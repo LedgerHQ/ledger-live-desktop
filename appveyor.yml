@@ -11,8 +11,8 @@ environment:
   nodejs_version: "9"
   GH_TOKEN:
       secure: +8ZX+Dxh+wPfFliZxb4m4CCjXarcfAB5vsqJxgqIuX/yWfgX0ptAvZxEYmMVP0tg
-cache:
-  - node_modules -> **\yarn.lock
+#cache:
+#  - node_modules -> **\yarn.lock
 
 build:
   verbosity: minimal
