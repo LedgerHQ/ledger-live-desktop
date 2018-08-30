@@ -72,8 +72,8 @@
     "description": "Check your device to see which apps are already installed."
   },
   "ManagerAppRelyOnBTC": {
-    "title": "Bitcoin or Ethereum app required",
-    "description": "Either install the latest Ethereum app (for ETC/UBIQ/EXP/RSK/WAN/kUSD/POA), or the latest Bitcoin app."
+    "title": "Bitcoin and Ethereum apps required",
+    "description": "Install the latest Bitcoin and Ethereum apps first."
   },
   "ManagerDeviceLocked": {
     "title": "Please unlock your device",
