@@ -11,27 +11,28 @@ source scripts/helpers/run-job.sh
 # shellcheck disable=SC1091
 source scripts/helpers/display-env.sh
 
- if [ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]; then
-   echo "You are not on master. Exiting properly. (CI)"
-   exit 0
- fi
-
-# if ! git describe --exact-match --tags 2>/dev/null >/dev/null; then
-#   echo "You are not on a tag. Exiting properly. (CI)"
+# if [ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]; then
+#   echo "You are not on master. Exiting properly. (CI)"
 #   exit 0
 # fi
+
+ if ! git describe --exact-match --tags 2>/dev/null >/dev/null; then
+   echo "You are not on a tag. Exiting properly. (CI)"
+   exit 0
+ fi
 
  if [ -z "$GH_TOKEN" ]; then
    echo "GH_TOKEN is unset. can't release" >&2
    exit 1
  fi
 
-  if [ ! -d "static/fonts/museosans" ]; then
-    if ! command -v aws ; then
-      if [[ $(uname) == 'Darwin' ]]; then echo 'you are on MacOS' && runJob "brew install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
-    elif [[ $(uname) == 'Linux' ]]; then echo 'you are on Linux' && runJob "sudo apt install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
-      fi
-    fi
+ if [ ! -d "static/fonts/museosans" ]; then
+   if ! command -v aws ; then
+     if [[ $(uname) == 'Darwin' ]]; then echo 'you are on MacOS' && runJob "brew install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
+   elif [[ $(uname) == 'Linux' ]]; then echo 'you are on Linux' && runJob "sudo apt install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
+   else echo 'you are on Windows' && runJob "pip install awscli" "installing aws cli..." "installed aws cli" "failed to install aws cli"
+     fi
+   fi
 
     runJob \
       "set -e ;\

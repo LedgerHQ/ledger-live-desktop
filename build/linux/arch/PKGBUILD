@@ -1,4 +1,4 @@
-# Maintainer: Meriadec Pillet <meriadec.pillet@gmail.com>
+# Maintainer:Arnaud97234 <arnaud.ulric@gmail.com>
 # shellcheck disable=SC2154,SC2034,SC2164
 
 pkgname=ledger-live
