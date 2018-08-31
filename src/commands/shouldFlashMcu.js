@@ -2,8 +2,9 @@
 
 import { createCommand, Command } from 'helpers/ipc'
 import { fromPromise } from 'rxjs/observable/fromPromise'
-import type { DeviceInfo } from 'helpers/devices/getDeviceInfo'
 import shouldFlashMcu from 'helpers/devices/shouldFlashMcu'
+
+import type { DeviceInfo } from 'helpers/types'
 
 type Result = boolean
 

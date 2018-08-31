@@ -11,11 +11,10 @@ import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
-import { createCustomErrorClass } from 'helpers/errors'
+import { NotEnoughBalance } from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
 
 const NOT_ENOUGH_FUNDS = 52
-const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 
 const notImplemented = new Error('LibcoreBridge: not implemented')
 

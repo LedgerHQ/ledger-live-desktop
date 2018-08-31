@@ -4,12 +4,10 @@ import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
-import { remote } from 'electron'
 import { cleanAccountsCache } from 'actions/accounts'
-import db from 'helpers/db'
-import { delay } from 'helpers/promise'
 import Button from 'components/base/Button'
 import { ConfirmModal } from 'components/base/Modal'
+import { softReset } from 'helpers/reset'
 
 const mapDispatchToProps = {
   cleanAccountsCache,
@@ -22,11 +20,13 @@ type Props = {
 
 type State = {
   opened: boolean,
+  isLoading: boolean,
 }
 
 class CleanButton extends PureComponent<Props, State> {
   state = {
     opened: false,
+    isLoading: false,
   }
 
   open = () => this.setState({ opened: true })
@@ -34,15 +34,18 @@ class CleanButton extends PureComponent<Props, State> {
   close = () => this.setState({ opened: false })
 
   action = async () => {
-    this.props.cleanAccountsCache()
-    await delay(500)
-    db.cleanCache()
-    remote.getCurrentWindow().webContents.reload()
+    if (this.state.isLoading) return
+    try {
+      this.setState({ isLoading: true })
+      await softReset({ cleanAccountsCache: this.props.cleanAccountsCache })
+    } finally {
+      this.setState({ isLoading: false })
+    }
   }
 
   render() {
     const { t } = this.props
-    const { opened } = this.state
+    const { opened, isLoading } = this.state
     return (
       <Fragment>
         <Button small primary onClick={this.open} event="ClearCacheIntent">
@@ -55,6 +58,7 @@ class CleanButton extends PureComponent<Props, State> {
           onClose={this.close}
           onReject={this.close}
           onConfirm={this.action}
+          isLoading={isLoading}
           title={t('app:settings.softResetModal.title')}
           subTitle={t('app:common.areYouSure')}
           desc={t('app:settings.softResetModal.desc')}

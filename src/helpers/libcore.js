@@ -14,11 +14,10 @@ import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgerc
 
 import { isSegwitPath, isUnsplitPath } from 'helpers/bip32'
 import * as accountIdHelper from 'helpers/accountId'
-import { createCustomErrorClass, deserializeError } from './errors'
+import { NoAddressesFound } from 'config/errors'
+import { deserializeError } from './errors'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
 import { timeoutTagged } from './promise'
-
-const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 
 // TODO: put that info inside currency itself
 const SPLITTED_CURRENCIES = {
@@ -272,7 +271,7 @@ async function scanNextAccount(props: {
 
   const shouldSyncAccount = true // TODO: let's sync everytime. maybe in the future we can optimize.
   if (shouldSyncAccount) {
-    await timeoutTagged('coreSyncAccount', 30000, coreSyncAccount(core, njsAccount))
+    await coreSyncAccount(core, njsAccount)
   }
 
   if (isUnsubscribed()) return []
@@ -550,7 +549,7 @@ export async function syncAccount({
     )
   }
 
-  const unsub = await timeoutTagged('coreSyncAccount', 30000, coreSyncAccount(core, njsAccount))
+  const unsub = await coreSyncAccount(core, njsAccount)
   unsub()
 
   const query = njsAccount.queryOperations()

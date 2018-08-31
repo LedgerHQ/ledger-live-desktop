@@ -17,7 +17,6 @@ import installOsuFirmware from 'commands/installOsuFirmware'
 import isDashboardOpen from 'commands/isDashboardOpen'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
-import libcoreHardReset from 'commands/libcoreHardReset'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
@@ -49,7 +48,6 @@ const all: Array<Command<any, any>> = [
   isDashboardOpen,
   libcoreGetFees,
   libcoreGetVersion,
-  libcoreHardReset,
   libcoreScanAccounts,
   libcoreSignAndBroadcast,
   libcoreSyncAccount,

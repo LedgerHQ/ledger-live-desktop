@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { createCustomErrorClass } from 'helpers/errors'
+import { PasswordIncorrectError } from 'config/errors'
 
 import db from 'helpers/db'
 import Box from 'components/base/Box'
@@ -11,8 +11,6 @@ import Label from 'components/base/Label'
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
 
 import type { T } from 'types/common'
-
-const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 
 type Props = {
   t: T,
