@@ -88,7 +88,11 @@ class PasswordButton extends PureComponent<Props, State> {
               {t('app:settings.profile.changePassword')}
             </Button>
           )}
-          <Switch isChecked={hasPassword} onChange={this.handleChangePasswordCheck} />
+          <Switch
+            isChecked={hasPassword}
+            onChange={this.handleChangePasswordCheck}
+            data-e2e="passwordLock_button"
+          />
         </Box>
 
         <PasswordModal

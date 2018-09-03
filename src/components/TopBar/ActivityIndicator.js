@@ -76,6 +76,7 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
           )}
         </Rotating>
         <Box
+          data-e2e="syncButton"
           ml={isRotating ? 2 : 1}
           ff="Open Sans|SemiBold"
           color={isError ? 'alertRed' : undefined}

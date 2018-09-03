@@ -85,10 +85,19 @@ class PasswordModal extends PureComponent<Props, State> {
             {hasPassword ? (
               <ModalTitle>{t('app:password.changePassword.title')}</ModalTitle>
             ) : (
-              <ModalTitle>{t('app:password.setPassword.title')}</ModalTitle>
+              <ModalTitle data-e2e="enablePassword_modal">
+                {t('app:password.setPassword.title')}
+              </ModalTitle>
             )}
             <ModalContent>
-              <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
+              <Box
+                ff="Museo Sans|Regular"
+                color="dark"
+                textAlign="center"
+                mb={2}
+                mt={3}
+                data-e2e="setPassword_modalTitle"
+              >
                 {hasPassword
                   ? t('app:password.changePassword.subTitle')
                   : t('app:password.setPassword.subTitle')}
@@ -109,7 +118,12 @@ class PasswordModal extends PureComponent<Props, State> {
               />
             </ModalContent>
             <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-              <Button small type="button" onClick={onClose}>
+              <Button
+                small
+                type="button"
+                onClick={onClose}
+                data-e2e="setPassword_modalCancel_button"
+              >
                 {t('app:common.cancel')}
               </Button>
               <Button

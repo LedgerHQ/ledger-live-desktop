@@ -31,7 +31,7 @@ class AccountCardPlaceholder extends PureComponent<{
   render() {
     const { t } = this.props
     return (
-      <Wrapper>
+      <Wrapper data-e2e="dashboard_AccountPlaceOrder">
         <Box mt={2}>
           <img alt="" src={i('empty-account-tile.svg')} />
         </Box>

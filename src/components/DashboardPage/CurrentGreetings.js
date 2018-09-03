@@ -21,7 +21,7 @@ class CurrentGettings extends PureComponent<{ t: T }> {
   render() {
     const { t } = this.props
     return (
-      <Text color="dark" ff="Museo Sans" fontSize={7}>
+      <Text color="dark" ff="Museo Sans" fontSize={7} data-e2e="dashboard_currentGettings">
         {t(getCurrentGreetings())}
       </Text>
     )
