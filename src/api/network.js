@@ -67,6 +67,13 @@ const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime }): Promis
 
 let implementation = (arg: Object) => {
   let promise
+  arg = {
+    ...arg,
+    headers: {
+      ...arg.headers,
+      'X-LedgerLiveVersion': __APP_VERSION__,
+    },
+  }
   if (arg.method === 'GET') {
     if (!('timeout' in arg)) {
       arg.timeout = GET_CALLS_TIMEOUT

@@ -9,7 +9,10 @@ const urlBuilder = (base: string) => (endpoint: string): string => `${base}/${en
 const managerUrlbuilder = urlBuilder(MANAGER_API_BASE)
 
 const wsURLBuilder = (endpoint: string) => (params?: Object) =>
-  `${BASE_SOCKET_URL}/${endpoint}${params ? `?${qs.stringify(params)}` : ''}`
+  `${BASE_SOCKET_URL}/${endpoint}${`?${qs.stringify({
+    ...params,
+    ledgerLiveVersion: __APP_VERSION__,
+  })}`}`
 
 // const wsURLBuilderProxy = (endpoint: string) => (params?: Object) =>
 //   `ws://manager.ledger.fr:3501/${endpoint}${params ? `?${qs.stringify(params)}` : ''}`
