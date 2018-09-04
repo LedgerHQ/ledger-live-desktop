@@ -28,6 +28,7 @@ class AccountCardList extends Component<Props> {
           justifyContent="flex-start"
           alignItems="center"
           style={{ margin: '0 -16px' }}
+          data-e2e="dashboard_AccountList"
         >
           {accounts
             .map(account => ({

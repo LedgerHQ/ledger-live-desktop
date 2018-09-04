@@ -26,7 +26,11 @@ class ShareAnalytics extends PureComponent<Props> {
     return (
       <Fragment>
         <Track onUpdate event={shareAnalytics ? 'AnalyticsEnabled' : 'AnalyticsDisabled'} />
-        <Switch isChecked={shareAnalytics} onChange={setShareAnalytics} />
+        <Switch
+          isChecked={shareAnalytics}
+          onChange={setShareAnalytics}
+          data-e2e="shareAnalytics_button"
+        />
       </Fragment>
     )
   }
