@@ -19,17 +19,17 @@ function reload() {
 }
 
 export async function hardReset() {
-  resetLibcoreDatabase()
   disableDBMiddleware()
   db.resetAll()
   await delay(500)
+  resetLibcoreDatabase()
   reload()
 }
 
 export async function softReset({ cleanAccountsCache }: *) {
-  resetLibcoreDatabase()
   cleanAccountsCache()
   await delay(500)
-  db.cleanCache()
+  await db.cleanCache()
+  resetLibcoreDatabase()
   reload()
 }
