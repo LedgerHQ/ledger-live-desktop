@@ -29,6 +29,15 @@ const SPLITTED_CURRENCIES = {
   },
 }
 
+// each time there is a breaking change that needs use to clear cache on both libcore and js side,
+// we should bump a nonce in this map
+// tech notes:
+// - this is used to generate walletName for libcore to completely re-sync to a new wallet.
+// - by changing walletName we also make the JS db refresh because we handle the accountId changes (walletName is in accountId).
+const migrationNonceByCurrency = {
+  digibyte: 1,
+}
+
 export function isValidAddress(core: *, currency: *, address: string): boolean {
   const addr = new core.NJSAddress(address, currency)
   return addr.isValid(address, currency)
@@ -155,6 +164,7 @@ async function scanAccountsOnDeviceBySegwit({
   const accounts = await scanNextAccount({
     core,
     wallet,
+    walletName,
     devicePath,
     currencyId,
     accountsCount,
@@ -232,6 +242,7 @@ const coreSyncAccount = (core, account) =>
 async function scanNextAccount(props: {
   // $FlowFixMe
   wallet: NJSWallet,
+  walletName: string,
   core: *,
   devicePath: string,
   currencyId: string,
@@ -247,6 +258,7 @@ async function scanNextAccount(props: {
   const {
     core,
     wallet,
+    walletName,
     devicePath,
     currencyId,
     accountsCount,
@@ -285,6 +297,7 @@ async function scanNextAccount(props: {
     isUnsplit,
     accountIndex,
     wallet,
+    walletName,
     currencyId,
     core,
     ops,
@@ -319,14 +332,16 @@ const createWalletConfig = (core, configMap = {}) => {
 
 async function getOrCreateWallet(
   core: *,
-  WALLET_IDENTIFIER: string,
+  walletName: string,
   currencyId: string,
   isSegwit: boolean,
   isUnsplit: boolean,
 ): NJSWallet {
+  const migrationNonce = migrationNonceByCurrency[currencyId]
+  const walletId = walletName + (migrationNonce ? `_${migrationNonce}` : '')
   const pool = core.getPoolInstance()
   try {
-    const wallet = await timeoutTagged('getWallet', 5000, pool.getWallet(WALLET_IDENTIFIER))
+    const wallet = await timeoutTagged('getWallet', 5000, pool.getWallet(walletId))
     return wallet
   } catch (err) {
     const currency = await timeoutTagged('getCurrency', 5000, pool.getCurrency(currencyId))
@@ -346,7 +361,7 @@ async function getOrCreateWallet(
     const wallet = await timeoutTagged(
       'createWallet',
       10000,
-      core.getPoolInstance().createWallet(WALLET_IDENTIFIER, currency, njsWalletConfig),
+      core.getPoolInstance().createWallet(walletId, currency, njsWalletConfig),
     )
     return wallet
   }
@@ -357,6 +372,7 @@ async function buildAccountRaw({
   isSegwit,
   isUnsplit,
   wallet,
+  walletName,
   currencyId,
   core,
   accountIndex,
@@ -366,6 +382,7 @@ async function buildAccountRaw({
   isSegwit: boolean,
   isUnsplit: boolean,
   wallet: NJSWallet,
+  walletName: string,
   currencyId: string,
   accountIndex: number,
   core: *,
@@ -430,7 +447,7 @@ async function buildAccountRaw({
       type: 'libcore',
       version: '1',
       xpub,
-      walletName: wallet.getName(),
+      walletName,
     }),
     xpub,
     path: walletPath,
@@ -511,25 +528,10 @@ export async function syncAccount({
   index: number,
 }) {
   const decodedAccountId = accountIdHelper.decode(accountId)
+  const { walletName } = decodedAccountId
   const isSegwit = isSegwitPath(freshAddressPath)
   const isUnsplit = isUnsplitPath(freshAddressPath, SPLITTED_CURRENCIES[currencyId])
-  let njsWallet
-  try {
-    njsWallet = await timeoutTagged(
-      'getWallet',
-      10000,
-      core.getPoolInstance().getWallet(decodedAccountId.walletName),
-    )
-  } catch (e) {
-    logger.warn(`Have to reimport the account... (${e})`)
-    njsWallet = await getOrCreateWallet(
-      core,
-      decodedAccountId.walletName,
-      currencyId,
-      isSegwit,
-      isUnsplit,
-    )
-  }
+  const njsWallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
 
   let njsAccount
   try {
@@ -562,6 +564,7 @@ export async function syncAccount({
     isUnsplit,
     accountIndex: index,
     wallet: njsWallet,
+    walletName,
     currencyId,
     core,
     ops,
