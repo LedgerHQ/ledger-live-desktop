@@ -164,6 +164,7 @@ async function scanAccountsOnDeviceBySegwit({
   const accounts = await scanNextAccount({
     core,
     wallet,
+    walletName,
     devicePath,
     currencyId,
     accountsCount,
@@ -241,6 +242,7 @@ const coreSyncAccount = (core, account) =>
 async function scanNextAccount(props: {
   // $FlowFixMe
   wallet: NJSWallet,
+  walletName: string,
   core: *,
   devicePath: string,
   currencyId: string,
@@ -256,6 +258,7 @@ async function scanNextAccount(props: {
   const {
     core,
     wallet,
+    walletName,
     devicePath,
     currencyId,
     accountsCount,
@@ -294,6 +297,7 @@ async function scanNextAccount(props: {
     isUnsplit,
     accountIndex,
     wallet,
+    walletName,
     currencyId,
     core,
     ops,
@@ -368,6 +372,7 @@ async function buildAccountRaw({
   isSegwit,
   isUnsplit,
   wallet,
+  walletName,
   currencyId,
   core,
   accountIndex,
@@ -377,6 +382,7 @@ async function buildAccountRaw({
   isSegwit: boolean,
   isUnsplit: boolean,
   wallet: NJSWallet,
+  walletName: string,
   currencyId: string,
   accountIndex: number,
   core: *,
@@ -441,7 +447,7 @@ async function buildAccountRaw({
       type: 'libcore',
       version: '1',
       xpub,
-      walletName: wallet.getName(),
+      walletName,
     }),
     xpub,
     path: walletPath,
@@ -522,15 +528,10 @@ export async function syncAccount({
   index: number,
 }) {
   const decodedAccountId = accountIdHelper.decode(accountId)
+  const { walletName } = decodedAccountId
   const isSegwit = isSegwitPath(freshAddressPath)
   const isUnsplit = isUnsplitPath(freshAddressPath, SPLITTED_CURRENCIES[currencyId])
-  const njsWallet = await getOrCreateWallet(
-    core,
-    decodedAccountId.walletName,
-    currencyId,
-    isSegwit,
-    isUnsplit,
-  )
+  const njsWallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
 
   let njsAccount
   try {
@@ -563,6 +564,7 @@ export async function syncAccount({
     isUnsplit,
     accountIndex: index,
     wallet: njsWallet,
+    walletName,
     currencyId,
     core,
     ops,
