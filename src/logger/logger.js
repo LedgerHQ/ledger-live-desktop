@@ -273,6 +273,7 @@ export default {
     status,
     error,
     responseTime,
+    ...rest
   }: {
     method: string,
     url: string,
@@ -285,7 +286,7 @@ export default {
       0,
     )}ms`
     if (logNetwork) {
-      logger.log('info', log, { type: 'network-error', status, method })
+      logger.log('info', log, { type: 'network-error', status, method, ...rest })
     }
     captureBreadcrumb({
       category: 'network',
