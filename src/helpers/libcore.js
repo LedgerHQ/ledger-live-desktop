@@ -555,7 +555,7 @@ export async function syncAccount({
   unsub()
 
   const query = njsAccount.queryOperations()
-  const ops = await timeoutTagged('ops', 30000, query.complete().execute())
+  const ops = await timeoutTagged('ops', 5 * 60 * 1000, query.complete().execute())
   const njsBalance = await timeoutTagged('getBalance', 10000, njsAccount.getBalance())
 
   const syncedRawAccount = await buildAccountRaw({
