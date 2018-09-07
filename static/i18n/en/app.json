@@ -133,7 +133,7 @@
     "title": "Current address",
     "for": "Address for account <1><0>{{accountName}}</0></1>",
     "messageIfUnverified": "Verify the address on your device for optimal security. Press the right button to confirm.",
-    "messageIfAccepted": "{{currencyName}} address confirmed on your device. Carefully verify when you copy and paste it.",
+    "messageIfAccepted": "{{currencyName}} address confirmed. Please verify the address if you copy/paste it or if you scan the QR code.",
     "messageIfSkipped": "Your receive address has not been confirmed on your Ledger device. Please verify your {{currencyName}} address for optimal security."
   },
   "deviceConnect": {
@@ -315,7 +315,7 @@
       },
       "verification": {
         "title": "Verification",
-        "warning": "Carefully verify all transaction details now displayed on your device screen\n",
+        "warning": "Please verify all transaction details now displayed on your device\n",
         "body": "Once verified, press the right button to confirm and sign the transaction"
       },
       "confirmation": {
