@@ -78,7 +78,8 @@
     "menu": "Menu",
     "accounts": "Accounts ({{count}})",
     "manager": "Manager",
-    "exchange": "Buy/Trade"
+    "exchange": "Buy/Trade",
+    "developer": "Dev tools"
   },
   "account": {
     "lastOperations": "Last operations",

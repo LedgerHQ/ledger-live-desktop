@@ -92,7 +92,7 @@ type Props = {
   keepEvent?: boolean,
   onBlur: (SyntheticInputEvent<HTMLInputElement>) => void,
   onChange?: Function,
-  onEnter?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onEnter?: (SyntheticKeyboardEvent<HTMLInputElement>) => *,
   onEsc?: (SyntheticKeyboardEvent<HTMLInputElement>) => void,
   onFocus: (SyntheticInputEvent<HTMLInputElement>) => void,
   renderLeft?: any,

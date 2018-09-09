@@ -18,6 +18,7 @@ import isDashboardOpen from 'commands/isDashboardOpen'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
+import libcoreScanFromXPUB from 'commands/libcoreScanFromXPUB'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
@@ -49,6 +50,7 @@ const all: Array<Command<any, any>> = [
   libcoreGetFees,
   libcoreGetVersion,
   libcoreScanAccounts,
+  libcoreScanFromXPUB,
   libcoreSignAndBroadcast,
   libcoreSyncAccount,
   libcoreValidAddress,
