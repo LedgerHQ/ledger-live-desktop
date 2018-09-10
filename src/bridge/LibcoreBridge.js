@@ -9,7 +9,7 @@ import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
-import libcoreGetFees from 'commands/libcoreGetFees'
+import libcoreGetFees, { extractGetFeesInputFromAccount } from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
 import { NotEnoughBalance } from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
@@ -85,8 +85,7 @@ const getFees = async (a, transaction) => {
   if (promise) return promise
   promise = libcoreGetFees
     .send({
-      accountId: a.id,
-      accountIndex: a.index,
+      ...extractGetFeesInputFromAccount(a),
       transaction: serializeTransaction(transaction),
     })
     .toPromise()

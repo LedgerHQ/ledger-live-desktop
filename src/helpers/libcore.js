@@ -321,7 +321,7 @@ const createWalletConfig = (core, configMap = {}) => {
   return config
 }
 
-async function getOrCreateWallet(
+export async function getOrCreateWallet(
   core: *,
   walletName: string,
   currencyId: string,
