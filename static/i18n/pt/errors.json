@@ -139,6 +139,10 @@
     "title": "Receive address rejected",
     "description": "Please try again or contact Ledger Support"
   },
+  "UpdateYourApp": {
+    "title": "App update required. Uninstall and reinstall the {{managerAppName}} app in the Manager",
+    "description": null
+  },
   "WebsocketConnectionError": {
     "title": "Sorry, try again (websocket error).",
     "description": null
