@@ -19,6 +19,7 @@ import { i } from 'helpers/staticPath'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { getUpdateStatus } from 'reducers/update'
+import { developerModeSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
@@ -38,6 +39,7 @@ import TopGradient from './TopGradient'
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
   updateStatus: getUpdateStatus(state),
+  developerMode: developerModeSelector(state),
 })
 
 const mapDispatchToProps = {
@@ -52,7 +54,25 @@ type Props = {
   push: string => void,
   openModal: string => void,
   updateStatus: UpdateStatus,
+  developerMode: boolean,
 }
+
+const IconDev = () => (
+  <div
+    style={{
+      width: 16,
+      height: 16,
+      fontSize: 10,
+      fontFamily: 'monospace',
+      fontWeight: 'bold',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    {'DEV'}
+  </div>
+)
 
 class MainSideBar extends PureComponent<Props> {
   push = (to: string) => {
@@ -78,10 +98,11 @@ class MainSideBar extends PureComponent<Props> {
   handleOpenReceiveModal = () => this.props.openModal(MODAL_RECEIVE)
   handleClickManager = () => this.push('/manager')
   handleClickExchange = () => this.push('/exchange')
+  handleClickDev = () => this.push('/dev')
   handleOpenImportModal = () => this.props.openModal(MODAL_ADD_ACCOUNTS)
 
   render() {
-    const { t, accounts, location, updateStatus } = this.props
+    const { t, accounts, location, updateStatus, developerMode } = this.props
     const { pathname } = location
 
     const addAccountButton = (
@@ -133,6 +154,15 @@ class MainSideBar extends PureComponent<Props> {
               onClick={this.handleClickExchange}
               isActive={pathname === '/exchange'}
             />
+            {developerMode && (
+              <SideBarListItem
+                label={t('app:sidebar.developer')}
+                icon={IconDev}
+                iconActiveColor="wallet"
+                onClick={this.handleClickDev}
+                isActive={pathname === '/dev'}
+              />
+            )}
           </SideBarList>
           <Space of={40} />
           <SideBarList
