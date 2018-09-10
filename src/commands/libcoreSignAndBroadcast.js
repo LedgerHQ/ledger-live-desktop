@@ -164,7 +164,6 @@ export async function doSignAndBroadcast({
   accountId,
   currencyId,
   xpub,
-  freshAddress,
   freshAddressPath,
   index,
   transaction,
@@ -237,6 +236,16 @@ export async function doSignAndBroadcast({
     .asBitcoinLikeAccount()
     .broadcastRawTransaction(Array.from(Buffer.from(signedTransaction, 'hex')))
 
+  const senders = builded
+    .getInputs()
+    .map(input => input.getAddress())
+    .filter(a => a)
+
+  const recipients = builded
+    .getOutputs()
+    .map(output => output.getAddress())
+    .filter(a => a)
+
   const fee = libcoreAmountToBigNumber(builded.getFees())
 
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
@@ -250,9 +259,8 @@ export async function doSignAndBroadcast({
     fee: fee.toString(),
     blockHash: null,
     blockHeight: null,
-    // FIXME for senders and recipients, can we ask the libcore?
-    senders: [freshAddress],
-    recipients: [transaction.recipient],
+    senders,
+    recipients,
     accountId,
     date: new Date().toISOString(),
   })
