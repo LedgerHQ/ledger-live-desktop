@@ -6,8 +6,13 @@ import type { OperationRaw } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-import { isSegwitPath } from 'helpers/bip32'
-import { libcoreAmountToBigNumber, bigNumberToLibcoreAmount } from 'helpers/libcore'
+import { isSegwitPath, isUnsplitPath } from 'helpers/bip32'
+import {
+  libcoreAmountToBigNumber,
+  bigNumberToLibcoreAmount,
+  getOrCreateWallet,
+} from 'helpers/libcore'
+import { splittedCurrencies } from 'config/cryptocurrencies'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
@@ -187,7 +192,10 @@ export async function doSignAndBroadcast({
   onOperationBroadcasted: (optimisticOp: $Exact<OperationRaw>) => void,
 }): Promise<void> {
   const { walletName } = accountIdHelper.decode(accountId)
-  const njsWallet = await core.getPoolInstance().getWallet(walletName)
+
+  const isSegwit = isSegwitPath(freshAddressPath)
+  const isUnsplit = isUnsplitPath(freshAddressPath, splittedCurrencies[currencyId])
+  const njsWallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
   if (isCancelled()) return
   const njsAccount = await njsWallet.getAccount(index)
   if (isCancelled()) return
