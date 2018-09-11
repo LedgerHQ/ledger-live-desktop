@@ -49,7 +49,7 @@ type Props = {
   name: string,
   version: string,
   icon: string,
-  onInstall: Function,
+  onInstall?: Function,
   onUninstall: Function,
 }
 
@@ -64,17 +64,19 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
           {version}
         </Text>
       </Box>
-      <Button
-        outline
-        onClick={onInstall}
-        event={'Manager Install Click'}
-        eventProperties={{
-          appName: name,
-          appVersion: version,
-        }}
-      >
-        {t('app:manager.apps.install')}
-      </Button>
+      {onInstall ? (
+        <Button
+          outline
+          onClick={onInstall}
+          event={'Manager Install Click'}
+          eventProperties={{
+            appName: name,
+            appVersion: version,
+          }}
+        >
+          {t('app:manager.apps.install')}
+        </Button>
+      ) : null}
       <Button
         outline
         onClick={onUninstall}

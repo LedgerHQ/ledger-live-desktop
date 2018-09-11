@@ -71,6 +71,9 @@ type State = {
   mode: Mode,
 }
 
+const oldAppsInstallDisabled = ['ZenCash', 'Ripple']
+const canHandleInstall = c => !oldAppsInstallDisabled.includes(c.name)
+
 const LoadingApp = () => (
   <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>
     <Spinner size={16} color="rgba(0, 0, 0, 0.3)" />
@@ -285,7 +288,7 @@ class AppsList extends PureComponent<Props, State> {
                   name={c.name}
                   version={`Version ${c.version}`}
                   icon={ICONS_FALLBACK[c.icon] || c.icon}
-                  onInstall={this.handleInstallApp(c)}
+                  onInstall={canHandleInstall(c) ? this.handleInstallApp(c) : null}
                   onUninstall={this.handleUninstallApp(c)}
                 />
               ))}
