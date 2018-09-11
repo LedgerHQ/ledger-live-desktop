@@ -7,7 +7,7 @@ import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-import { SHOW_LEGACY_NEW_ACCOUNT } from 'config/constants'
+import { SHOW_LEGACY_NEW_ACCOUNT, SYNC_TIMEOUT } from 'config/constants'
 
 import type { AccountRaw, OperationRaw, OperationType } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
@@ -546,7 +546,7 @@ export async function syncAccount({
   unsub()
 
   const query = njsAccount.queryOperations()
-  const ops = await timeoutTagged('ops', 5 * 60 * 1000, query.complete().execute())
+  const ops = await timeoutTagged('ops', SYNC_TIMEOUT, query.complete().execute())
   const njsBalance = await timeoutTagged('getBalance', 10000, njsAccount.getBalance())
 
   const syncedRawAccount = await buildAccountRaw({
