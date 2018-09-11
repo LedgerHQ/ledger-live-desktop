@@ -143,7 +143,26 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
     copyFeedback: false,
   }
 
-  _isUnmounted = false
+  componentWillUnmount() {
+    if (this._timeout) clearTimeout(this._timeout)
+  }
+
+  renderCopy = copy => {
+    const { t } = this.props
+    return (
+      <FooterButton
+        icon={<IconCopy size={16} />}
+        label={t('app:common.copyAddress')}
+        onClick={() => {
+          this.setState({ copyFeedback: true })
+          this._timeout = setTimeout(() => this.setState({ copyFeedback: false }), 1e3)
+          copy()
+        }}
+      />
+    )
+  }
+
+  _timeout: ?TimeoutID = null
 
   render() {
     const {
@@ -214,23 +233,7 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
               onClick={onVerify}
             />
           ) : null}
-          <CopyToClipboard
-            data={address}
-            render={copy => (
-              <FooterButton
-                icon={<IconCopy size={16} />}
-                label={t('app:common.copyAddress')}
-                onClick={() => {
-                  this.setState({ copyFeedback: true })
-                  setTimeout(() => {
-                    if (this._isUnmounted) return
-                    this.setState({ copyFeedback: false })
-                  }, 1e3)
-                  copy()
-                }}
-              />
-            )}
-          />
+          <CopyToClipboard data={address} render={this.renderCopy} />
         </Footer>
       </Container>
     )

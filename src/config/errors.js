@@ -33,6 +33,7 @@ export const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
 export const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
 export const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 export const TimeoutTagged = createCustomErrorClass('TimeoutTagged')
+export const UpdateYourApp = createCustomErrorClass('UpdateYourApp')
 export const UserRefusedAddress = createCustomErrorClass('UserRefusedAddress')
 export const UserRefusedFirmwareUpdate = createCustomErrorClass('UserRefusedFirmwareUpdate')
 export const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice') // TODO rename because it's just for transaction refusal

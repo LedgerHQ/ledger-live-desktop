@@ -5,7 +5,7 @@
   },
   "AccountNameRequired": {
     "title": "An account name is required",
-    "description": "Please provide with an account name"
+    "description": "Please provide an account name"
   },
   "BtcUnmatchedApp": {
     "title": "That's the wrong app",
@@ -80,8 +80,8 @@
     "description": "Your device was locked. Please unlock it."
   },
   "ManagerNotEnoughSpace": {
-    "title": "Sorry, insufficient device storage",
-    "description": "Uninstall some apps to increase available storage and try again."
+    "title": "Sorry, not enough storage left",
+    "description": "Please uninstall some apps to make space. This will not affect your crypto assets."
   },
   "ManagerUninstallBTCDep": {
     "title": "Sorry, this app is required",
@@ -138,6 +138,10 @@
   "UserRefusedAddress": {
     "title": "Receive address rejected",
     "description": "Please try again or contact Ledger Support"
+  },
+  "UpdateYourApp": {
+    "title": "App update required. Uninstall and reinstall the {{managerAppName}} app in the Manager",
+    "description": null
   },
   "WebsocketConnectionError": {
     "title": "Sorry, try again (websocket error).",
