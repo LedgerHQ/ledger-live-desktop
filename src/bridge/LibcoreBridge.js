@@ -126,8 +126,8 @@ const LibcoreBridge: WalletBridge<Transaction> = {
         currencyId: account.currency.id,
       })
       .pipe(
-        map(rawSyncedAccount => {
-          const syncedAccount = decodeAccount(rawSyncedAccount)
+        map(({ rawAccount, requiresCacheFlush }) => {
+          const syncedAccount = decodeAccount(rawAccount)
           return account => {
             const accountOps = account.operations
             const syncedOps = syncedAccount.operations
@@ -141,11 +141,11 @@ const LibcoreBridge: WalletBridge<Transaction> = {
             }
 
             const hasChanged =
+              requiresCacheFlush ||
               accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
               (accountOps.length > 0 &&
                 syncedOps.length > 0 &&
-                (accountOps[0].accountId !== syncedOps[0].accountId ||
-                accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
+                (accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
                   accountOps[0].blockHeight !== syncedOps[0].blockHeight))
 
             if (hasChanged) {

@@ -54,7 +54,11 @@ const cmd: Command<Input, Result> = createCommand(
 
       withLibcore(async core => {
         const { walletName } = accountIdHelper.decode(accountId)
-        const njsWallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
+        const njsWallet = await getOrCreateWallet(core, walletName, {
+          currencyId,
+          isSegwit,
+          isUnsplit,
+        })
         if (isCancelled()) return
         const njsAccount = await njsWallet.getAccount(accountIndex)
         if (isCancelled()) return
