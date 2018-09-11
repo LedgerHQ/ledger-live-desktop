@@ -195,7 +195,7 @@ export async function doSignAndBroadcast({
 
   const isSegwit = isSegwitPath(freshAddressPath)
   const isUnsplit = isUnsplitPath(freshAddressPath, splittedCurrencies[currencyId])
-  const njsWallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
+  const njsWallet = await getOrCreateWallet(core, walletName, { currencyId, isSegwit, isUnsplit })
   if (isCancelled()) return
   const njsAccount = await njsWallet.getAccount(index)
   if (isCancelled()) return

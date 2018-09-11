@@ -20,15 +20,6 @@ import { deserializeError } from './errors'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from './accountName'
 import { timeoutTagged } from './promise'
 
-// each time there is a breaking change that needs use to clear cache on both libcore and js side,
-// we should bump a nonce in this map
-// tech notes:
-// - this is used to generate walletName for libcore to completely re-sync to a new wallet.
-// - by changing walletName we also make the JS db refresh because we handle the accountId changes (walletName is in accountId).
-const migrationNonceByCurrency = {
-  digibyte: 1,
-}
-
 export function isValidAddress(core: *, currency: *, address: string): boolean {
   const addr = new core.NJSAddress(address, currency)
   return addr.isValid(address, currency)
@@ -147,7 +138,7 @@ async function scanAccountsOnDeviceBySegwit({
   const walletName = encodeWalletName({ publicKey, currencyId, isSegwit, isUnsplit })
 
   // retrieve or create the wallet
-  const wallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
+  const wallet = await getOrCreateWallet(core, walletName, { currencyId, isSegwit, isUnsplit })
   const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
@@ -324,15 +315,19 @@ const createWalletConfig = (core, configMap = {}) => {
 export async function getOrCreateWallet(
   core: *,
   walletName: string,
-  currencyId: string,
-  isSegwit: boolean,
-  isUnsplit: boolean,
+  {
+    currencyId,
+    isSegwit,
+    isUnsplit,
+  }: {
+    currencyId: string,
+    isSegwit: boolean,
+    isUnsplit: boolean,
+  },
 ): NJSWallet {
-  const migrationNonce = migrationNonceByCurrency[currencyId]
-  const walletId = walletName + (migrationNonce ? `_${migrationNonce}` : '')
   const pool = core.getPoolInstance()
   try {
-    const wallet = await timeoutTagged('getWallet', 5000, pool.getWallet(walletId))
+    const wallet = await timeoutTagged('getWallet', 5000, pool.getWallet(walletName))
     return wallet
   } catch (err) {
     const currency = await timeoutTagged('getCurrency', 5000, pool.getCurrency(currencyId))
@@ -352,7 +347,7 @@ export async function getOrCreateWallet(
     const wallet = await timeoutTagged(
       'createWallet',
       10000,
-      core.getPoolInstance().createWallet(walletId, currency, njsWalletConfig),
+      core.getPoolInstance().createWallet(walletName, currency, njsWalletConfig),
     )
     return wallet
   }
@@ -522,12 +517,14 @@ export async function syncAccount({
   const { walletName } = decodedAccountId
   const isSegwit = isSegwitPath(freshAddressPath)
   const isUnsplit = isUnsplitPath(freshAddressPath, splittedCurrencies[currencyId])
-  const njsWallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
+  const njsWallet = await getOrCreateWallet(core, walletName, { currencyId, isSegwit, isUnsplit })
 
   let njsAccount
+  let requiresCacheFlush = false
   try {
     njsAccount = await timeoutTagged('getAccount', 10000, njsWallet.getAccount(index))
   } catch (e) {
+    requiresCacheFlush = true
     logger.warn(`Have to recreate the account... (${e.message})`)
     const extendedInfos = await timeoutTagged(
       'getEKACI',
@@ -565,7 +562,7 @@ export async function syncAccount({
 
   logger.log(`Synced account [${syncedRawAccount.name}]: ${syncedRawAccount.balance}`)
 
-  return syncedRawAccount
+  return { rawAccount: syncedRawAccount, requiresCacheFlush }
 }
 
 export function libcoreAmountToBigNumber(njsAmount: *): BigNumber {
@@ -597,7 +594,7 @@ export async function scanAccountsFromXPUB({
     isUnsplit,
   })
 
-  const wallet = await getOrCreateWallet(core, walletName, currencyId, isSegwit, isUnsplit)
+  const wallet = await getOrCreateWallet(core, walletName, { currencyId, isSegwit, isUnsplit })
 
   await wallet.eraseDataSince(new Date(0))
 

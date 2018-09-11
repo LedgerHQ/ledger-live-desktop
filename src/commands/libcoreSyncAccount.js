@@ -14,7 +14,7 @@ type Input = {
   index: number,
 }
 
-type Result = AccountRaw
+type Result = { rawAccount: AccountRaw, requiresCacheFlush: boolean }
 
 const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', accountInfos =>
   fromPromise(withLibcore(core => syncAccount({ ...accountInfos, core }))),
