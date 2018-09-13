@@ -26,9 +26,7 @@ class TabProfile extends PureComponent<*, *> {
     <ModalBody onClose={onClose} justify="center" align="center">
       <ModalTitle>{'QRCode Mobile Export'}</ModalTitle>
       <ModalContent flow={4}>
-        <Box>
-          Open Ledger Wallet Mobile App, go to <strong>Settings {'>'} Import Accounts</strong>
-        </Box>
+        <Box>Scan this animated QRCode with Ledger Live Mobile App</Box>
         <QRCodeExporter />
       </ModalContent>
     </ModalBody>

@@ -17,36 +17,44 @@ const mapStateToProps = createSelector(accountsSelector, accounts => ({
   }),
 }))
 
+const LOW_FPS = 2
+const HIGH_FPS = 8
+
 class QRCodeExporter extends PureComponent<
   {
     chunks: string[],
-    fps: number,
     size: number,
   },
   {
     frame: number,
+    fps: number,
   },
 > {
   static defaultProps = {
-    fps: 4,
-    size: 480,
+    size: 440,
   }
 
   state = {
     frame: 0,
+    fps: HIGH_FPS,
   }
 
   componentDidMount() {
-    console.log(`BRIDGESTREAM_DATA=${JSON.stringify(this.props.chunks)}`) // eslint-disable-line
+    console.log(`BRIDGESTREAM_DATA=${btoa(JSON.stringify(this.props.chunks))}`) // eslint-disable-line
 
-    const nextFrame = ({ frame }, { chunks }) => ({
-      frame: (frame + 1) % chunks.length,
-    })
+    const nextFrame = ({ frame, fps }, { chunks }) => {
+      frame = (frame + 1) % chunks.length
+      return {
+        frame,
+        fps: frame === 0 ? (fps === LOW_FPS ? HIGH_FPS : LOW_FPS) : fps,
+      }
+    }
+
     let lastT
     const loop = t => {
       this._raf = requestAnimationFrame(loop)
       if (!lastT) lastT = t
-      if ((t - lastT) * this.props.fps < 1000) return
+      if ((t - lastT) * this.state.fps < 1000) return
       lastT = t
       this.setState(nextFrame)
     }
@@ -66,7 +74,7 @@ class QRCodeExporter extends PureComponent<
       <div style={{ position: 'relative', width: size, height: size }}>
         {chunks.map((chunk, i) => (
           <div key={String(i)} style={{ position: 'absolute', opacity: i === frame ? 1 : 0 }}>
-            <QRCode data={chunk} size={size} />
+            <QRCode data={chunk} size={size} errorCorrectionLevel="M" />
           </div>
         ))}
       </div>
