@@ -37,6 +37,8 @@ class QRCodeExporter extends PureComponent<
   }
 
   componentDidMount() {
+    console.log(`BRIDGESTREAM_DATA=${JSON.stringify(this.props.chunks)}`) // eslint-disable-line
+
     const nextFrame = ({ frame }, { chunks }) => ({
       frame: (frame + 1) % chunks.length,
     })
