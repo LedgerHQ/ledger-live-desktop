@@ -35,6 +35,7 @@ import IconExchange from 'icons/Exchange'
 import AccountListItem from './AccountListItem'
 import AddAccountButton from './AddAccountButton'
 import TopGradient from './TopGradient'
+import KeyboardContent from '../KeyboardContent'
 
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
@@ -155,13 +156,15 @@ class MainSideBar extends PureComponent<Props> {
               isActive={pathname === '/exchange'}
             />
             {developerMode && (
-              <SideBarListItem
-                label={t('app:sidebar.developer')}
-                icon={IconDev}
-                iconActiveColor="wallet"
-                onClick={this.handleClickDev}
-                isActive={pathname === '/dev'}
-              />
+              <KeyboardContent sequence="DEVTOOLS">
+                <SideBarListItem
+                  label={t('app:sidebar.developer')}
+                  icon={IconDev}
+                  iconActiveColor="wallet"
+                  onClick={this.handleClickDev}
+                  isActive={pathname === '/dev'}
+                />
+              </KeyboardContent>
             )}
           </SideBarList>
           <Space of={40} />
