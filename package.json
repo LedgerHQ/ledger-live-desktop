@@ -17,6 +17,7 @@
     "flow": "flow",
     "test": "jest src",
     "test-e2e": "jest test-e2e",
+    "test-sync": "bash test-e2e/sync/launch.sh",
     "prettier": "prettier --write \"{src,webpack,.storybook,test-e2e}/**/*.{js,json}\"",
     "ci": "yarn lint && yarn flow && yarn prettier && yarn test",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
