@@ -1,6 +1,6 @@
 import { Application } from 'spectron'
 
-import { waitForDisappear, waitForExpectedText } from '../test-e2e/helpers/test_helpers'
+import { waitForDisappear, waitForExpectedText } from './helpers'
 
 const os = require('os')
 const appVersion = require('../package.json')
@@ -14,7 +14,7 @@ const platform = os.platform()
 if (platform === 'darwin') {
   app_path = `./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live`
 } else if (platform === 'win32') {
-  app_path = `./dist\\win-unpacked\\Ledger Live.exe`
+  app_path = `.\\dist\\win-unpacked\\Ledger Live.exe`
 } else {
   app_path = `./dist/ledger-live-desktop-${appVersion.version}-linux-x86_64.AppImage`
 }
