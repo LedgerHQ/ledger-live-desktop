@@ -52,7 +52,7 @@ yarn start
 
 ```bash
 # Build & package the whole app
-# Creates a .dmg for Mac, .exe installer for Windows, or .AppImage for Linux
+# Creates a .dmg for Mac, .exe installer for Windows, or .AppImage and .snap for Linux
 # Output files will be created in dist/ folder
 yarn dist
 ```
