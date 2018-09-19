@@ -28,6 +28,9 @@ linux:
       arch:
         - x64
 
+snap:
+  plugs: [raw-usb]
+
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
   icon: build/windows/app.ico
