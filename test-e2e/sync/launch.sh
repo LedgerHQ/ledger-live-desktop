@@ -19,8 +19,6 @@ fi
 rm -rf "$settingsPath"
 mkdir "$settingsPath"
 
-# rm ../data/actual_app.json
-
 # Copy app.json init file for testing
 cp test-e2e/sync/data/empty-app.json "$settingsPath/app.json"
 
@@ -46,4 +44,4 @@ fi
 cp "$settingsPath"/app.json test-e2e/sync/data/actual-app.json
 
 # compare new app.json with expected_app.json
-./node_modules/.bin/jest test-e2e/sync/sync-accounts.js
+./node_modules/.bin/jest test-e2e/sync/sync-accounts.spec.js
