@@ -27,7 +27,7 @@ class SentryLogsButton extends PureComponent<Props> {
     return (
       <Fragment>
         <Track onUpdate event={sentryLogs ? 'SentryEnabled' : 'SentryDisabled'} />
-        <Switch isChecked={sentryLogs} onChange={setSentryLogs} />
+        <Switch isChecked={sentryLogs} onChange={setSentryLogs} data-e2e="reportBugs_button" />
       </Fragment>
     )
   }

@@ -18,7 +18,7 @@ const defaultOpts = {
   scanAccountDeviceSuccessRate: 0.8,
   transactionsSizeTarget: 100,
   extraInitialTransactionProps: () => null,
-  checkCanBeSpent: () => Promise.resolve(),
+  checkValidTransaction: () => Promise.resolve(),
   getTotalSpent: (a, t) => Promise.resolve(t.amount),
   getMaxAmount: a => Promise.resolve(a.balance),
 }
@@ -36,7 +36,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
     extraInitialTransactionProps,
     getTotalSpent,
     getMaxAmount,
-    checkCanBeSpent,
+    checkValidTransaction,
   } = {
     ...defaultOpts,
     ...opts,
@@ -155,9 +155,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
     EditAdvancedOptions,
 
-    isValidTransaction: (a, t) => (t.amount > 0 && t.recipient && true) || false,
-
-    checkCanBeSpent,
+    checkValidTransaction,
 
     getTotalSpent,
 

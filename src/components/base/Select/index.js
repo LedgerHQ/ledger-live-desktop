@@ -21,6 +21,8 @@ type Props = {
   placeholder: string,
   isClearable: boolean,
   isDisabled: boolean,
+  isRight: boolean,
+  isLeft: boolean,
   isLoading: boolean,
   isSearchable: boolean,
   small: boolean,
@@ -52,6 +54,8 @@ class Select extends PureComponent<Props> {
       isSearchable,
       isDisabled,
       isLoading,
+      isRight,
+      isLeft,
       placeholder,
       options,
       renderOption,
@@ -69,7 +73,7 @@ class Select extends PureComponent<Props> {
         classNamePrefix="select"
         options={options}
         components={createRenderers({ renderOption, renderValue })}
-        styles={createStyles({ width, minWidth, small })}
+        styles={createStyles({ width, minWidth, small, isRight, isLeft })}
         placeholder={placeholder}
         isDisabled={isDisabled}
         isLoading={isLoading}

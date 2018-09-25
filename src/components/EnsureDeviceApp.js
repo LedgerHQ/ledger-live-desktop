@@ -20,7 +20,7 @@ import IconUsb from 'icons/Usb'
 
 import type { Device } from 'types/common'
 
-import { WrongDeviceForAccount, CantOpenDevice, BtcUnmatchedApp } from 'config/errors'
+import { WrongDeviceForAccount, CantOpenDevice, UpdateYourApp } from 'config/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />
@@ -61,10 +61,10 @@ class EnsureDeviceApp extends Component<{
       },
       {
         shouldThrow: (err: Error) => {
-          const isWrongApp = err instanceof BtcUnmatchedApp
           const isWrongDevice = err instanceof WrongDeviceForAccount
           const isCantOpenDevice = err instanceof CantOpenDevice
-          return isWrongApp || isWrongDevice || isCantOpenDevice
+          const isUpdateYourApp = err instanceof UpdateYourApp
+          return isWrongDevice || isCantOpenDevice || isUpdateYourApp
         },
       },
     )

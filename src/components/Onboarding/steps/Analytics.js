@@ -76,7 +76,9 @@ class Analytics extends PureComponent<StepProps, State> {
             <Container>
               <Box>
                 <Box horizontal mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.technicalData.title')}</AnalyticsTitle>
+                  <AnalyticsTitle data-e2e="analytics_techData">
+                    {t('onboarding:analytics.technicalData.title')}
+                  </AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
                       underline
@@ -84,6 +86,7 @@ class Analytics extends PureComponent<StepProps, State> {
                       color="smoke"
                       ml={2}
                       onClick={this.handleTechnicalDataModal}
+                      data-e2e="analytics_techData_Link"
                     >
                       {t('app:common.learnMore')}
                     </FakeLink>
@@ -102,7 +105,9 @@ class Analytics extends PureComponent<StepProps, State> {
             <Container>
               <Box>
                 <Box horizontal mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.shareAnalytics.title')}</AnalyticsTitle>
+                  <AnalyticsTitle data-e2e="analytics_shareAnalytics">
+                    {t('onboarding:analytics.shareAnalytics.title')}
+                  </AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
                       style={{ textDecoration: 'underline' }}
@@ -110,6 +115,7 @@ class Analytics extends PureComponent<StepProps, State> {
                       color="smoke"
                       ml={2}
                       onClick={this.handleShareAnalyticsModal}
+                      data-e2e="analytics_shareAnalytics_Link"
                     >
                       {t('app:common.learnMore')}
                     </FakeLink>
@@ -133,7 +139,9 @@ class Analytics extends PureComponent<StepProps, State> {
             <Container>
               <Box>
                 <Box mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
+                  <AnalyticsTitle data-e2e="analytics_reportBugs">
+                    {t('onboarding:analytics.sentryLogs.title')}
+                  </AnalyticsTitle>
                 </Box>
                 <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
               </Box>

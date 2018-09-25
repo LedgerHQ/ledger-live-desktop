@@ -12,6 +12,7 @@ const perFamily = {
   bitcoin: LibcoreBridge,
   ripple: RippleJSBridge,
   ethereum: EthereumJSBridge,
+  stellar: null,
 }
 if (USE_MOCK_DATA) {
   const mockBridge = makeMockBridge()

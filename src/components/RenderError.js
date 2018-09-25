@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 
 import { urls } from 'config/urls'
 import { i } from 'helpers/staticPath'
-import hardReset from 'helpers/hardReset'
+import { hardReset } from 'helpers/reset'
 
 import type { T } from 'types/common'
 
