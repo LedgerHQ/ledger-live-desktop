@@ -261,11 +261,10 @@ const recipientIsNew = async (endpointConfig, recipient) => {
 }
 
 const cacheRecipientsNew = {}
-const cachedRecipientIsNew= (endpointConfig, recipient) => {
+const cachedRecipientIsNew = (endpointConfig, recipient) => {
   if (recipient in cacheRecipientsNew) return cacheRecipientsNew[recipient]
   return (cacheRecipientsNew[recipient] = recipientIsNew(endpointConfig, recipient))
 }
-
 
 const RippleJSBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice: (currency, deviceId) =>
