@@ -4,12 +4,11 @@ import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
-
 import type { Device } from 'types/common'
 import type { DeviceInfo } from 'helpers/types'
+import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 
 import Dashboard from './Dashboard'
-
 import ManagerGenuineCheck from './ManagerGenuineCheck'
 import HookDeviceChange from './HookDeviceChange'
 
@@ -29,6 +28,10 @@ const INITIAL_STATE = {
 
 class ManagerPage extends PureComponent<Props, State> {
   state = INITIAL_STATE
+
+  componentDidMount() {
+    getFullListSortedCryptoCurrencies() // start fetching the crypto currencies ordering
+  }
 
   // prettier-ignore
   handleSuccessGenuine = ({ device, deviceInfo }: { device: Device, deviceInfo: DeviceInfo }) => { // eslint-disable-line react/no-unused-prop-types
