@@ -30,6 +30,7 @@ export const urls = {
   luno: 'http://luno.go2cloud.org/aff_c?offer_id=4&aff_id=1001&source=ledger',
   shapeshift: 'https://shapeshift.io/#/coins?affiliate=ledger',
   genesis: 'https://genesistrading.com/ledger-live/',
+  kyber: 'http://kyber.network/swap?ref=0xE2D8481eeF31CDA994833974FFfEccd576f8D71E',
 
   // Errors
   errors: {
