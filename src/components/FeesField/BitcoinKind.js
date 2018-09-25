@@ -51,6 +51,12 @@ const customItem = {
   blockCount: 0,
   feePerByte: BigNumber(0),
 }
+const notLoadedItem = {
+  label: 'Standard',
+  value: 'standard',
+  blockCount: 0,
+  feePerByte: BigNumber(0),
+}
 
 type State = { isFocused: boolean, items: FeeItem[], selectedItem: FeeItem }
 
@@ -58,13 +64,13 @@ type OwnProps = Props & { fees?: Fees, error?: Error }
 
 class FeesField extends Component<OwnProps, State> {
   state = {
-    items: [customItem],
-    selectedItem: customItem,
+    items: [notLoadedItem],
+    selectedItem: notLoadedItem,
     isFocused: false,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { fees, feePerByte } = nextProps
+    const { fees, feePerByte, error } = nextProps
     let items: FeeItem[] = []
     if (fees) {
       for (const key of Object.keys(fees)) {
@@ -81,10 +87,9 @@ class FeesField extends Component<OwnProps, State> {
       }
       items = items.sort((a, b) => a.blockCount - b.blockCount)
     }
-    items.push(customItem)
-    const selectedItem = !feePerByte
-      ? customItem
-      : prevState.selectedItem.feePerByte.eq(feePerByte)
+    items.push(!feePerByte && !error ? notLoadedItem : customItem)
+    const selectedItem =
+      !feePerByte && prevState.selectedItem.feePerByte.eq(feePerByte)
         ? prevState.selectedItem
         : items.find(f => f.feePerByte.eq(feePerByte)) || items[items.length - 1]
     return { items, selectedItem }
