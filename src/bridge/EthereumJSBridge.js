@@ -420,15 +420,13 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
-
   EditFees,
 
   EditAdvancedOptions,
 
-  checkCanBeSpent: (a, t) =>
+  checkValidTransaction: (a, t) =>
     t.amount.isLessThanOrEqualTo(a.balance)
-      ? Promise.resolve()
+      ? Promise.resolve(true)
       : Promise.reject(new NotEnoughBalance()),
 
   getTotalSpent: (a, t) =>
