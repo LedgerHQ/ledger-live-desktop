@@ -4,12 +4,13 @@ import React, { Component } from 'react'
 import type { BigNumber } from 'bignumber.js'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { apiForEndpointConfig, parseAPIValue } from 'api/Ripple'
+import { FeeNotLoaded } from 'config/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import GenericContainer from './GenericContainer'
 
 type Props = {
   account: Account,
-  fee: BigNumber,
+  fee: ?BigNumber,
   onChange: BigNumber => void,
 }
 
@@ -36,7 +37,7 @@ class FeesField extends Component<Props, State> {
       const info = await api.getServerInfo()
       if (syncId !== this.syncId) return
       const serverFee = parseAPIValue(info.validatedLedger.baseFeeXRP)
-      if (this.props.fee.isZero()) {
+      if (!this.props.fee) {
         this.props.onChange(serverFee)
       }
     } catch (error) {
@@ -50,11 +51,13 @@ class FeesField extends Component<Props, State> {
     const { error } = this.state
     const { units } = account.currency
     return (
-      <GenericContainer error={error}>
+      <GenericContainer>
         <InputCurrency
           defaultUnit={units[0]}
           units={units}
           containerProps={{ grow: true }}
+          loading={!error && !fee}
+          error={!fee && error ? new FeeNotLoaded() : null}
           value={fee}
           onChange={onChange}
         />

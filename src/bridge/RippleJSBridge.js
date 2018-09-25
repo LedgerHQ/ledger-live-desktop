@@ -20,13 +20,13 @@ import {
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { NotEnoughBalance } from 'config/errors'
+import { NotEnoughBalance, FeeNotLoaded } from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
 
 type Transaction = {
   amount: BigNumber,
   recipient: string,
-  fee: BigNumber,
+  fee: ?BigNumber,
   tag: ?number,
 }
 
@@ -51,6 +51,8 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
 
 async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }) {
   const api = apiForEndpointConfig(a.endpointConfig)
+  const { fee } = t
+  if (!fee) throw new FeeNotLoaded()
   try {
     await api.connect()
     const amount = formatAPICurrencyXRP(t.amount)
@@ -66,7 +68,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
       },
     }
     const instruction = {
-      fee: formatAPICurrencyXRP(t.fee).value,
+      fee: formatAPICurrencyXRP(fee).value,
       maxLedgerVersionOffset: 12,
     }
 
@@ -97,7 +99,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
         accountId: a.id,
         type: 'OUT',
         value: t.amount,
-        fee: t.fee,
+        fee,
         blockHash: null,
         blockHeight: null,
         senders: [a.freshAddress],
@@ -452,7 +454,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
-    fee: BigNumber(0),
+    fee: null,
     tag: undefined,
   }),
 
@@ -495,10 +497,11 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   getTransactionRecipient: (a, t) => t.recipient,
 
   checkValidTransaction: async (a, t) => {
+    if (!t.fee) throw new FeeNotLoaded()
     const r = await getServerInfo(a.endpointConfig)
     if (
       t.amount
-        .plus(t.fee)
+        .plus(t.fee || 0)
         .plus(parseAPIValue(r.validatedLedger.reserveBaseXRP))
         .isLessThanOrEqualTo(a.balance)
     ) {
@@ -507,9 +510,9 @@ const RippleJSBridge: WalletBridge<Transaction> = {
     throw new NotEnoughBalance()
   },
 
-  getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.fee)),
+  getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.fee || 0)),
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.fee)),
+  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.fee || 0)),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {

@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { BigNumber } from 'bignumber.js'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
+import { FeeNotLoaded } from 'config/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import type { Fees } from 'api/Fees'
 import WithFeesAPI from '../WithFeesAPI'
@@ -11,7 +12,7 @@ import GenericContainer from './GenericContainer'
 
 type Props = {
   account: Account,
-  gasPrice: BigNumber,
+  gasPrice: ?BigNumber,
   onChange: BigNumber => void,
 }
 
@@ -22,7 +23,7 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
   componentDidUpdate() {
     const { gasPrice, fees, onChange } = this.props
     const { isFocused } = this.state
-    if (gasPrice.isZero() && fees && fees.gas_price && !isFocused) {
+    if (!gasPrice && fees && fees.gas_price && !isFocused) {
       onChange(BigNumber(fees.gas_price)) // we want to set the default to gas_price
     }
   }
@@ -33,12 +34,14 @@ class FeesField extends Component<Props & { fees?: Fees, error?: Error }, *> {
     const { account, gasPrice, error, onChange } = this.props
     const { units } = account.currency
     return (
-      <GenericContainer error={error}>
+      <GenericContainer>
         <InputCurrency
           defaultUnit={units.length > 1 ? units[1] : units[0]}
           units={units}
           containerProps={{ grow: true }}
           value={gasPrice}
+          loading={!error && !gasPrice}
+          error={!gasPrice && error ? new FeeNotLoaded() : null}
           onChange={onChange}
           onChangeFocus={this.onChangeFocus}
         />

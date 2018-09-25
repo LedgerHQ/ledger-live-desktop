@@ -42,6 +42,7 @@ export const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnec
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 export const ETHAddressNonEIP = createCustomErrorClass('ETHAddressNonEIP')
 export const CantScanQRCode = createCustomErrorClass('CantScanQRCode')
+export const FeeNotLoaded = createCustomErrorClass('FeeNotLoaded')
 
 // db stuff, no need to translate
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')

@@ -4,9 +4,8 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { fontSize, space } from 'styled-system'
 import noop from 'lodash/noop'
-
 import fontFamily from 'styles/styled/fontFamily'
-
+import Spinner from 'components/base/Spinner'
 import Box from 'components/base/Box'
 import TranslatedError from 'components/TranslatedError'
 
@@ -42,6 +41,19 @@ const ErrorDisplay = styled(Box)`
   font-size: 12px;
   white-space: nowrap;
   color: ${p => p.theme.colors.pearl};
+`
+
+const LoadingDisplay = styled(Box)`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  background: white;
+  pointer-events: none;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 15px;
+  border-radius: 4px;
 `
 
 const WarningDisplay = styled(ErrorDisplay)`
@@ -98,6 +110,7 @@ type Props = {
   renderLeft?: any,
   renderRight?: any,
   containerProps?: Object,
+  loading?: boolean,
   error?: ?Error | boolean,
   warning?: ?Error | boolean,
   small?: boolean,
@@ -182,6 +195,7 @@ class Input extends PureComponent<Props, State> {
       editInPlace,
       small,
       error,
+      loading,
       warning,
       ...props
     } = this.props
@@ -216,6 +230,11 @@ class Input extends PureComponent<Props, State> {
             <WarningDisplay>
               <TranslatedError error={warning} />
             </WarningDisplay>
+          ) : null}
+          {loading && !isFocus ? (
+            <LoadingDisplay>
+              <Spinner size={16} />
+            </LoadingDisplay>
           ) : null}
         </Box>
         {renderRight}
