@@ -99,6 +99,9 @@
     "title": "Oops, insufficient balance",
     "description": "Make sure the account to debit has sufficient balance"
   },
+  "NotEnoughBalanceBecauseDestinationNotCreated": {
+    "title": "Destination does not exist. Send at least {{minimalAmount}}"
+  },
   "PasswordsDontMatch": {
     "title": "Passwords don't match",
     "description": "Please try again"
