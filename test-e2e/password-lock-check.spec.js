@@ -2,30 +2,32 @@ import { Application } from 'spectron'
 import { waitForDisappear, waitForExpectedText } from './helpers'
 
 const os = require('os')
+const path = require('path')
+const fs = require('fs')
 const appVersion = require('../package.json')
 
 let app
 
 const TIMEOUT = 50 * 1000
 
-let app_path
+let appPath
 let configPath
 const platform = os.platform()
 if (platform === 'darwin') {
-  app_path = `./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live`
-  configPath = `~/Library/Application Support/Ledger Live/`
+  appPath = `./dist/mac/Ledger Live.app/Contents/MacOS/Ledger Live`
+  configPath = `${os.homedir()}/Library/Application Support/Ledger Live/`
 } else if (platform === 'win32') {
-  app_path = `.\\dist\\win-unpacked\\Ledger Live.exe`
+  appPath = `.\\dist\\win-unpacked\\Ledger Live.exe`
   configPath = '%AppData\\Roaming\\Ledger Live'
 } else {
-  app_path = `./dist/ledger-live-desktop-${appVersion.version}-linux-x86_64.AppImage`
+  appPath = `./dist/ledger-live-desktop-${appVersion.version}-linux-x86_64.AppImage`
   configPath = '$HOME/apps/ledger-live-desktop-$ledgerLiveVersion-linux-x86_64.AppImage'
 }
 
 describe('Application launch', () => {
   beforeEach(async () => {
     app = new Application({
-      path: app_path,
+      path: appPath,
       env: {
         SKIP_ONBOARDING: '1',
       },
@@ -49,7 +51,7 @@ describe('Application launch', () => {
       // Verify Account summary text
       // Count user's accounts
       const userAccountsList = await app.client.elements('[data-e2e=dashboard_AccountCardWrapper]')
-      const userAccountsCount = await Object.keys(userAccountsList.value).length
+      const userAccountsCount = Object.keys(userAccountsList.value).length
       // Check account number
       const accountSummary = await app.client.getText('[data-e2e=dashboard_accountsSummaryDesc]')
       const accountSummaryMessage = `Here's the summary of your ${userAccountsCount} accounts`
@@ -66,18 +68,24 @@ describe('Application launch', () => {
       await app.client.setValue('[data-e2e=setPassword_ConfirmPassword]', 5)
       await app.client.keys('Enter')
       await waitForExpectedText(app, '[data-e2e=settings_title]', 'Settings')
-
+      await app.client.pause(2000)
       // Verify in app.json that accounts data are encrypted
-      const tmpAppJSONPath = `${configPath} + "app.json"`
-      const accountsOperations = '"operations": [{'
-      expect(tmpAppJSONPath).not.toContain(accountsOperations)
+      const tmpAppJSONPath = path.resolve(configPath, 'app.json')
+      const LockedfileContent = fs.readFileSync(tmpAppJSONPath, 'utf-8')
+      const accountsOperations = '"operations":[{'
+      await expect(LockedfileContent).not.toContain(accountsOperations)
 
-      // Desable password lock
+      // Disable password lock
       await app.client.click('[data-e2e=passwordLock_button]')
       await waitForExpectedText(app, '[data-e2e=modal_title]', 'Disable password lock')
       await app.client.setValue('#password', 5)
+      await app.client.pause(500)
       await app.client.keys('Enter')
       await waitForExpectedText(app, '[data-e2e=settings_title]', 'Settings')
+      await app.client.pause(3000)
+      const UnlockedfileContent = fs.readFileSync(tmpAppJSONPath, 'utf-8')
+      // Verify in app.json that accounts data are not encrypted
+      await expect(UnlockedfileContent).toContain(accountsOperations)
       await app.client.pause(1000)
     },
     TIMEOUT,

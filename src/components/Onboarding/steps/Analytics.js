@@ -26,7 +26,7 @@ type State = {
 }
 
 const INITIAL_STATE = {
-  analyticsToggle: false,
+  analyticsToggle: true,
   sentryLogsToggle: true,
 }
 

@@ -27,13 +27,11 @@ const UnsupportedBridge: WalletBridge<*> = {
 
   getTransactionAmount: () => BigNumber(0),
 
-  isValidTransaction: () => false,
-
   editTransactionRecipient: () => null,
 
   getTransactionRecipient: () => '',
 
-  checkCanBeSpent: () => Promise.resolve(),
+  checkValidTransaction: () => Promise.resolve(false),
 
   getTotalSpent: () => Promise.resolve(BigNumber(0)),
 
