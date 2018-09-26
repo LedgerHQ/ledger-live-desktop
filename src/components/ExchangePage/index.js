@@ -71,6 +71,12 @@ const cards = shuffle([
     url: urls.genesis,
     logo: <img src={i('logos/exchanges/genesis.svg')} alt="Genesis" width={150} />,
   },
+  {
+    key: 'kyber',
+    id: 'kyber',
+    url: urls.kyber,
+    logo: <img src={i('logos/exchanges/kyber.svg')} alt="KYBER" width={150} />,
+  },
 ])
 
 class ExchangePage extends PureComponent<Props> {
