@@ -175,5 +175,8 @@
   },
   "CantScanQRCode": {
     "title": "Couldn't scan this QR-code: auto-verification not supported by this address"
+  },
+  "FeeNotLoaded": {
+    "title": "Couldn’t load fee rates. Please set manual fees"
   }
 }
