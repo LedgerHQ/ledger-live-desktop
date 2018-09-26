@@ -30,6 +30,9 @@ export const ManagerUninstallBTCDep = createCustomErrorClass('ManagerUninstallBT
 export const NetworkDown = createCustomErrorClass('NetworkDown')
 export const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 export const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
+export const NotEnoughBalanceBecauseDestinationNotCreated = createCustomErrorClass(
+  'NotEnoughBalanceBecauseDestinationNotCreated',
+)
 export const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
 export const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 export const TimeoutTagged = createCustomErrorClass('TimeoutTagged')
@@ -42,6 +45,7 @@ export const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnec
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 export const ETHAddressNonEIP = createCustomErrorClass('ETHAddressNonEIP')
 export const CantScanQRCode = createCustomErrorClass('CantScanQRCode')
+export const FeeNotLoaded = createCustomErrorClass('FeeNotLoaded')
 
 // db stuff, no need to translate
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')

@@ -99,6 +99,9 @@
     "title": "Oops, insufficient balance",
     "description": "Make sure the account to debit has sufficient balance"
   },
+  "NotEnoughBalanceBecauseDestinationNotCreated": {
+    "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+  },
   "PasswordsDontMatch": {
     "title": "Passwords don't match",
     "description": "Please try again"
@@ -172,5 +175,8 @@
   },
   "CantScanQRCode": {
     "title": "Couldn't scan this QR-code: auto-verification not supported by this address"
+  },
+  "FeeNotLoaded": {
+    "title": "Couldn’t load fee rates. Please set manual fees"
   }
 }

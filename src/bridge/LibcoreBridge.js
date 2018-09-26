@@ -11,7 +11,7 @@ import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreGetFees, { extractGetFeesInputFromAccount } from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
-import { NotEnoughBalance } from 'config/errors'
+import { NotEnoughBalance, FeeNotLoaded } from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
 
 const NOT_ENOUGH_FUNDS = 52
@@ -20,15 +20,18 @@ const notImplemented = new Error('LibcoreBridge: not implemented')
 
 type Transaction = {
   amount: BigNumber,
-  feePerByte: BigNumber,
+  feePerByte: ?BigNumber,
   recipient: string,
 }
 
-const serializeTransaction = t => ({
-  recipient: t.recipient,
-  amount: t.amount.toString(),
-  feePerByte: t.feePerByte.toString(),
-})
+const serializeTransaction = t => {
+  const { feePerByte } = t
+  return {
+    recipient: t.recipient,
+    amount: t.amount.toString(),
+    feePerByte: (feePerByte && feePerByte.toString()) || '0',
+  }
+}
 
 const decodeOperation = (encodedAccount, rawOp) =>
   decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations[0]
@@ -75,7 +78,9 @@ const isRecipientValid = (currency, recipient) => {
 const feesLRU = LRU({ max: 100 })
 
 const getFeesKey = (a, t) =>
-  `${a.id}_${a.blockHeight || 0}_${t.amount.toString()}_${t.recipient}_${t.feePerByte.toString()}`
+  `${a.id}_${a.blockHeight || 0}_${t.amount.toString()}_${t.recipient}_${
+    t.feePerByte ? t.feePerByte.toString() : ''
+  }`
 
 const getFees = async (a, transaction) => {
   const isValid = await isRecipientValid(a.currency, transaction.recipient)
@@ -83,6 +88,7 @@ const getFees = async (a, transaction) => {
   const key = getFeesKey(a, transaction)
   let promise = feesLRU.get(key)
   if (promise) return promise
+
   promise = libcoreGetFees
     .send({
       ...extractGetFeesInputFromAccount(a),
@@ -95,17 +101,19 @@ const getFees = async (a, transaction) => {
 }
 
 const checkValidTransaction = (a, t) =>
-  !t.amount
-    ? Promise.resolve(true)
-    : getFees(a, t)
-        .then(() => true)
-        .catch(e => {
-          if (e.code === NOT_ENOUGH_FUNDS) {
-            throw new NotEnoughBalance()
-          }
-          feesLRU.del(getFeesKey(a, t))
-          throw e
-        })
+  !t.feePerByte
+    ? Promise.reject(new FeeNotLoaded())
+    : !t.amount
+      ? Promise.resolve(true)
+      : getFees(a, t)
+          .then(() => true)
+          .catch(e => {
+            if (e.code === NOT_ENOUGH_FUNDS) {
+              throw new NotEnoughBalance()
+            }
+            feesLRU.del(getFeesKey(a, t))
+            throw e
+          })
 
 const LibcoreBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, devicePath) {
@@ -169,7 +177,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
-    feePerByte: BigNumber(0),
+    feePerByte: null,
     isRBF: false,
   }),
 

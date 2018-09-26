@@ -1,2 +1,2 @@
 package.json
-test-e2e/sync/data
+test-e2e/**/*.json
