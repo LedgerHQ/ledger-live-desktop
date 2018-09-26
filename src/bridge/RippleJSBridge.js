@@ -20,7 +20,7 @@ import {
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { NotEnoughBalance } from 'config/errors'
+import { NotEnoughBalance, NotEnoughBalanceBecauseDestinationNotCreated } from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
 
 type Transaction = {
@@ -114,7 +114,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
   }
 }
 
-function isRecipientValid(currency, recipient) {
+function isRecipientValid(recipient) {
   try {
     bs58check.decode(recipient)
     return true
@@ -240,6 +240,31 @@ const getServerInfo = (map => endpointConfig => {
   map[endpointConfig] = f
   return f()
 })({})
+
+const recipientIsNew = async (endpointConfig, recipient) => {
+  if (!isRecipientValid(recipient)) return false
+  const api = apiForEndpointConfig(endpointConfig)
+  try {
+    await api.connect()
+    try {
+      await api.getAccountInfo(recipient)
+      return false
+    } catch (e) {
+      if (e.message !== 'actNotFound') {
+        throw e
+      }
+      return true
+    }
+  } finally {
+    api.disconnect()
+  }
+}
+
+const cacheRecipientsNew = {}
+const cachedRecipientIsNew = (endpointConfig, recipient) => {
+  if (recipient in cacheRecipientsNew) return cacheRecipientsNew[recipient]
+  return (cacheRecipientsNew[recipient] = recipientIsNew(endpointConfig, recipient))
+}
 
 const RippleJSBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice: (currency, deviceId) =>
@@ -446,7 +471,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
-  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
+  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(recipient)),
   getRecipientWarning: () => Promise.resolve(null),
 
   createTransaction: () => ({
@@ -496,10 +521,21 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   checkValidTransaction: async (a, t) => {
     const r = await getServerInfo(a.endpointConfig)
+    const reserveBaseXRP = parseAPIValue(r.validatedLedger.reserveBaseXRP)
+    if (t.recipient) {
+      if (await cachedRecipientIsNew(a.endpointConfig, t.recipient)) {
+        if (t.amount.lt(reserveBaseXRP)) {
+          const f = formatAPICurrencyXRP(reserveBaseXRP)
+          throw new NotEnoughBalanceBecauseDestinationNotCreated('', {
+            minimalAmount: `${f.currency} ${f.value}`,
+          })
+        }
+      }
+    }
     if (
       t.amount
         .plus(t.fee)
-        .plus(parseAPIValue(r.validatedLedger.reserveBaseXRP))
+        .plus(reserveBaseXRP)
         .isLessThanOrEqualTo(a.balance)
     ) {
       return true
@@ -513,6 +549,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {
+      delete cacheRecipientsNew[t.recipient]
       let cancelled = false
       const isCancelled = () => cancelled
       const onSigned = () => {
