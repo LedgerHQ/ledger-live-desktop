@@ -100,7 +100,7 @@
     "description": "Make sure the account to debit has sufficient balance"
   },
   "NotEnoughBalanceBecauseDestinationNotCreated": {
-    "title": "Destination does not exist. Send at least {{minimalAmount}}"
+    "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
   },
   "PasswordsDontMatch": {
     "title": "Passwords don't match",
