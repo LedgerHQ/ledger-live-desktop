@@ -20,7 +20,11 @@ import {
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { NotEnoughBalance, FeeNotLoaded, NotEnoughBalanceBecauseDestinationNotCreated } from 'config/errors'
+import {
+  NotEnoughBalance,
+  FeeNotLoaded,
+  NotEnoughBalanceBecauseDestinationNotCreated,
+} from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
 
 type Transaction = {
