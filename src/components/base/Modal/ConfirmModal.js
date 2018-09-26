@@ -79,6 +79,7 @@ class ConfirmModal extends PureComponent<Props> {
                 primary={!isDanger}
                 danger={isDanger}
                 isLoading={isLoading}
+                disabled={isLoading}
               >
                 {realConfirmText}
               </Button>

@@ -12,6 +12,8 @@ import {
   intermediaryCurrency,
 } from 'reducers/settings'
 import logger from 'logger'
+import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 const pairsSelector = createSelector(
   currenciesSelector,
@@ -52,6 +54,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
   }
 }
 
+// TODO we should be able to pass-in our network() function
 const CounterValues = createCounterValues({
   log: (...args) => logger.log('CounterValues:', ...args),
   getAPIBaseURL: () => LEDGER_COUNTERVALUES_API,
@@ -60,5 +63,31 @@ const CounterValues = createCounterValues({
   setExchangePairsAction,
   addExtraPollingHooks,
 })
+
+let sortCache
+export const getFullListSortedCryptoCurrencies: () => Promise<CryptoCurrency[]> = () => {
+  if (!sortCache) {
+    sortCache = CounterValues.fetchTickersByMarketcap().then(
+      tickers => {
+        const list = listCryptoCurrencies().slice(0)
+        const prependList = []
+        tickers.forEach(ticker => {
+          const item = list.find(c => c.ticker === ticker)
+          if (item) {
+            list.splice(list.indexOf(item), 1)
+            prependList.push(item)
+          }
+        })
+        return prependList.concat(list)
+      },
+      () => {
+        sortCache = null // reset the cache for the next time it comes here to "try again"
+        return listCryptoCurrencies() // fallback on default sort
+      },
+    )
+  }
+
+  return sortCache
+}
 
 export default CounterValues

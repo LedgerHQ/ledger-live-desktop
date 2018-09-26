@@ -27,7 +27,11 @@ async function waitForSync() {
     const areAllSync = mapped.every(account => {
       const diff = now - new Date(account.lastSyncDate).getTime()
       if (diff <= MIN_TIME_DIFF) return true
-      console.log(`[${account.name}] synced ${moment(account.lastSyncDate).fromNow()} (${moment(account.lastSyncDate).format('YYYY-MM-DD HH:mm:ss')})`)
+      console.log(
+        `[${account.name}] synced ${moment(account.lastSyncDate).fromNow()} (${moment(
+          account.lastSyncDate,
+        ).format('YYYY-MM-DD HH:mm:ss')})`,
+      )
       return false
     })
     return areAllSync

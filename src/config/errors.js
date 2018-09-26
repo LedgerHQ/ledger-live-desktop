@@ -30,6 +30,9 @@ export const ManagerUninstallBTCDep = createCustomErrorClass('ManagerUninstallBT
 export const NetworkDown = createCustomErrorClass('NetworkDown')
 export const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 export const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
+export const NotEnoughBalanceBecauseDestinationNotCreated = createCustomErrorClass(
+  'NotEnoughBalanceBecauseDestinationNotCreated',
+)
 export const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
 export const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 export const TimeoutTagged = createCustomErrorClass('TimeoutTagged')
