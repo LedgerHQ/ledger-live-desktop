@@ -15,6 +15,7 @@ import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
 import installOsuFirmware from 'commands/installOsuFirmware'
 import isDashboardOpen from 'commands/isDashboardOpen'
+import killInternalProcess from 'commands/killInternalProcess'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
@@ -47,6 +48,7 @@ const all: Array<Command<any, any>> = [
   installMcu,
   installOsuFirmware,
   isDashboardOpen,
+  killInternalProcess,
   libcoreGetFees,
   libcoreGetVersion,
   libcoreScanAccounts,

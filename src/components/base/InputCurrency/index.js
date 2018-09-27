@@ -81,7 +81,7 @@ type Props = {
   renderRight: any,
   unit: Unit,
   units: Unit[],
-  value: BigNumber,
+  value: ?BigNumber,
   showAllDigits?: boolean,
   subMagnitude: number,
   allowZero: boolean,
@@ -98,7 +98,7 @@ class InputCurrency extends PureComponent<Props, State> {
     onChange: noop,
     renderRight: null,
     units: [],
-    value: BigNumber(0),
+    value: null,
     showAllDigits: false,
     subMagnitude: 0,
     allowZero: false,
@@ -123,13 +123,14 @@ class InputCurrency extends PureComponent<Props, State> {
     if (needsToBeReformatted) {
       const { isFocused } = this.state
       this.setState({
-        displayValue: nextProps.value.isZero()
-          ? ''
-          : format(nextProps.unit, nextProps.value, {
-              isFocused,
-              showAllDigits: nextProps.showAllDigits,
-              subMagnitude: nextProps.subMagnitude,
-            }),
+        displayValue:
+          !nextProps.value || nextProps.value.isZero()
+            ? ''
+            : format(nextProps.unit, nextProps.value, {
+                isFocused,
+                showAllDigits: nextProps.showAllDigits,
+                subMagnitude: nextProps.subMagnitude,
+              }),
       })
     }
   }
@@ -138,7 +139,7 @@ class InputCurrency extends PureComponent<Props, State> {
     const { onChange, unit, value } = this.props
     const r = sanitizeValueString(unit, v)
     const satoshiValue = BigNumber(r.value)
-    if (!value.isEqualTo(satoshiValue)) {
+    if (!value || !value.isEqualTo(satoshiValue)) {
       onChange(satoshiValue, unit)
     }
     this.setState({ displayValue: r.display })
@@ -159,7 +160,7 @@ class InputCurrency extends PureComponent<Props, State> {
     this.setState({
       isFocused,
       displayValue:
-        (!value || value.isZero()) && !allowZero
+        !value || (value.isZero() && !allowZero)
           ? ''
           : format(unit, value, { isFocused, showAllDigits, subMagnitude }),
     })

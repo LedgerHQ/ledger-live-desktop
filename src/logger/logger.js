@@ -316,19 +316,19 @@ export default {
 
   analyticsStart: (id: string) => {
     if (logAnalytics) {
-      logger.log('info', `△ start() with user id ${id}`, { type: 'anaytics-start', id })
+      logger.log('info', `△ start() with user id ${id}`, { type: 'analytics-start', id })
     }
   },
 
   analyticsStop: () => {
     if (logAnalytics) {
-      logger.log('info', `△ stop()`, { type: 'anaytics-stop' })
+      logger.log('info', `△ stop()`, { type: 'analytics-stop' })
     }
   },
 
   analyticsTrack: (event: string, properties: ?Object) => {
     if (logAnalytics) {
-      logger.log('info', `△ track ${event}`, { type: 'anaytics-track', properties })
+      logger.log('info', `△ track ${event}`, { type: 'analytics-track', properties })
     }
     captureBreadcrumb({
       category: 'track',
@@ -340,7 +340,7 @@ export default {
   analyticsPage: (category: string, name: ?string, properties: ?Object) => {
     const message = name ? `${category} ${name}` : category
     if (logAnalytics) {
-      logger.log('info', `△ page ${message}`, { type: 'anaytics-page', properties })
+      logger.log('info', `△ page ${message}`, { type: 'analytics-page', properties })
     }
     captureBreadcrumb({
       category: 'page',

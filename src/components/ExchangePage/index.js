@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
+import shuffle from 'lodash/shuffle'
 
 import type { T } from 'types/common'
 import { urls } from 'config/urls'
@@ -21,7 +22,7 @@ type Props = {
   t: T,
 }
 
-const cards = [
+const cards = shuffle([
   {
     key: 'coinhouse',
     id: 'coinhouse',
@@ -70,7 +71,13 @@ const cards = [
     url: urls.genesis,
     logo: <img src={i('logos/exchanges/genesis.svg')} alt="Genesis" width={150} />,
   },
-]
+  {
+    key: 'kyber',
+    id: 'kyber',
+    url: urls.kyber,
+    logo: <img src={i('logos/exchanges/kyber.svg')} alt="KYBER" width={150} />,
+  },
+])
 
 class ExchangePage extends PureComponent<Props> {
   render() {

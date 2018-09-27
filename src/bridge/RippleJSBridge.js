@@ -20,13 +20,17 @@ import {
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { NotEnoughBalance } from 'config/errors'
+import {
+  NotEnoughBalance,
+  FeeNotLoaded,
+  NotEnoughBalanceBecauseDestinationNotCreated,
+} from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
 
 type Transaction = {
   amount: BigNumber,
   recipient: string,
-  fee: BigNumber,
+  fee: ?BigNumber,
   tag: ?number,
 }
 
@@ -51,6 +55,8 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
 
 async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }) {
   const api = apiForEndpointConfig(a.endpointConfig)
+  const { fee } = t
+  if (!fee) throw new FeeNotLoaded()
   try {
     await api.connect()
     const amount = formatAPICurrencyXRP(t.amount)
@@ -66,7 +72,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
       },
     }
     const instruction = {
-      fee: formatAPICurrencyXRP(t.fee).value,
+      fee: formatAPICurrencyXRP(fee).value,
       maxLedgerVersionOffset: 12,
     }
 
@@ -97,7 +103,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
         accountId: a.id,
         type: 'OUT',
         value: t.amount,
-        fee: t.fee,
+        fee,
         blockHash: null,
         blockHeight: null,
         senders: [a.freshAddress],
@@ -114,7 +120,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
   }
 }
 
-function isRecipientValid(currency, recipient) {
+function isRecipientValid(recipient) {
   try {
     bs58check.decode(recipient)
     return true
@@ -240,6 +246,31 @@ const getServerInfo = (map => endpointConfig => {
   map[endpointConfig] = f
   return f()
 })({})
+
+const recipientIsNew = async (endpointConfig, recipient) => {
+  if (!isRecipientValid(recipient)) return false
+  const api = apiForEndpointConfig(endpointConfig)
+  try {
+    await api.connect()
+    try {
+      await api.getAccountInfo(recipient)
+      return false
+    } catch (e) {
+      if (e.message !== 'actNotFound') {
+        throw e
+      }
+      return true
+    }
+  } finally {
+    api.disconnect()
+  }
+}
+
+const cacheRecipientsNew = {}
+const cachedRecipientIsNew = (endpointConfig, recipient) => {
+  if (recipient in cacheRecipientsNew) return cacheRecipientsNew[recipient]
+  return (cacheRecipientsNew[recipient] = recipientIsNew(endpointConfig, recipient))
+}
 
 const RippleJSBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice: (currency, deviceId) =>
@@ -446,13 +477,13 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
-  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
+  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(recipient)),
   getRecipientWarning: () => Promise.resolve(null),
 
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
-    fee: BigNumber(0),
+    fee: null,
     tag: undefined,
   }),
 
@@ -463,10 +494,30 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getTransactionAmount: (a, t) => t.amount,
 
-  editTransactionRecipient: (account, t, recipient) => ({
-    ...t,
-    recipient,
-  }),
+  editTransactionRecipient: (account, t, recipient) => {
+    const parts = recipient.split('?')
+    const params = new URLSearchParams(parts[1])
+    recipient = parts[0]
+
+    // Extract parameters we may need
+    for (const [key, value] of params.entries()) {
+      switch (key) {
+        case 'dt':
+          t.tag = parseInt(value, 10) || 0
+          break
+        case 'amount':
+          t.amount = parseAPIValue(value || '0')
+          break
+        default:
+        // do nothing
+      }
+    }
+
+    return {
+      ...t,
+      recipient,
+    }
+  },
 
   EditFees,
 
@@ -474,27 +525,38 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
-
-  checkCanBeSpent: async (a, t) => {
+  checkValidTransaction: async (a, t) => {
+    if (!t.fee) throw new FeeNotLoaded()
     const r = await getServerInfo(a.endpointConfig)
+    const reserveBaseXRP = parseAPIValue(r.validatedLedger.reserveBaseXRP)
+    if (t.recipient) {
+      if (await cachedRecipientIsNew(a.endpointConfig, t.recipient)) {
+        if (t.amount.lt(reserveBaseXRP)) {
+          const f = formatAPICurrencyXRP(reserveBaseXRP)
+          throw new NotEnoughBalanceBecauseDestinationNotCreated('', {
+            minimalAmount: `${f.currency} ${f.value}`,
+          })
+        }
+      }
+    }
     if (
       t.amount
-        .plus(t.fee)
-        .plus(parseAPIValue(r.validatedLedger.reserveBaseXRP))
+        .plus(t.fee || 0)
+        .plus(reserveBaseXRP)
         .isLessThanOrEqualTo(a.balance)
     ) {
-      return
+      return true
     }
     throw new NotEnoughBalance()
   },
 
-  getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.fee)),
+  getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.fee || 0)),
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.fee)),
+  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.fee || 0)),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {
+      delete cacheRecipientsNew[t.recipient]
       let cancelled = false
       const isCancelled = () => cancelled
       const onSigned = () => {

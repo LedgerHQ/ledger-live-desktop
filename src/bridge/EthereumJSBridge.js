@@ -16,20 +16,20 @@ import { getDerivations } from 'helpers/derivations'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
 import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { NotEnoughBalance, ETHAddressNonEIP } from 'config/errors'
+import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from 'config/errors'
 import type { EditProps, WalletBridge } from './types'
 
 type Transaction = {
   recipient: string,
   amount: BigNumber,
-  gasPrice: BigNumber,
+  gasPrice: ?BigNumber,
   gasLimit: BigNumber,
 }
 
 const serializeTransaction = t => ({
   recipient: t.recipient,
   amount: `0x${BigNumber(t.amount).toString(16)}`,
-  gasPrice: `0x${BigNumber(t.gasPrice).toString(16)}`,
+  gasPrice: !t.gasPrice ? '0x00' : `0x${BigNumber(t.gasPrice).toString(16)}`,
   gasLimit: `0x${BigNumber(t.gasLimit).toString(16)}`,
 })
 
@@ -140,6 +140,8 @@ const signAndBroadcast = async ({
   onSigned,
   onOperationBroadcasted,
 }) => {
+  const { gasPrice, amount, gasLimit } = t
+  if (!gasPrice) throw new FeeNotLoaded()
   const api = apiForCurrency(a.currency)
 
   const nonce = await api.getAccountNonce(a.freshAddress)
@@ -162,8 +164,8 @@ const signAndBroadcast = async ({
       id: `${a.id}-${hash}-OUT`,
       hash,
       type: 'OUT',
-      value: t.amount,
-      fee: t.gasPrice.times(t.gasLimit),
+      value: amount,
+      fee: gasPrice.times(gasLimit),
       blockHeight: null,
       blockHash: null,
       accountId: a.id,
@@ -402,7 +404,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
-    gasPrice: BigNumber(0),
+    gasPrice: null,
     gasLimit: BigNumber(0x5208),
   }),
 
@@ -420,23 +422,27 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
-
   EditFees,
 
   EditAdvancedOptions,
 
-  checkCanBeSpent: (a, t) =>
-    t.amount.isLessThanOrEqualTo(a.balance)
-      ? Promise.resolve()
-      : Promise.reject(new NotEnoughBalance()),
+  checkValidTransaction: (a, t) =>
+    !t.gasPrice
+      ? Promise.reject(new FeeNotLoaded())
+      : t.amount.isLessThanOrEqualTo(a.balance)
+        ? Promise.resolve(true)
+        : Promise.reject(new NotEnoughBalance()),
 
   getTotalSpent: (a, t) =>
-    t.amount.isGreaterThan(0) && t.gasPrice.isGreaterThan(0) && t.gasLimit.isGreaterThan(0)
+    t.amount.isGreaterThan(0) &&
+    t.gasPrice &&
+    t.gasPrice.isGreaterThan(0) &&
+    t.gasLimit.isGreaterThan(0)
       ? Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit)))
       : Promise.resolve(BigNumber(0)),
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.gasPrice.times(t.gasLimit))),
+  getMaxAmount: (a, t) =>
+    Promise.resolve(a.balance.minus((t.gasPrice || BigNumber(0)).times(t.gasLimit))),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {
