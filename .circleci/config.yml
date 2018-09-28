@@ -10,13 +10,22 @@ jobs:
     <<: *defaults
     steps:
       - run: sudo apt-get install -y libudev-dev
+      - run:
+          name: Install latest yarn
+          command: |
+            curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" ;
+            sudo mkdir -p /opt ;
+            sudo tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ ;
+            sudo ln -sf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn ;
+            sudo ln -sf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg ;
+            rm yarn-v$YARN_VERSION.tar.gz
       - checkout
       - restore_cache:
           keys:
-            - v10-yarn-packages-{{ checksum "yarn.lock" }}
+            - v11-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v10-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v11-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - run: yarn lint
