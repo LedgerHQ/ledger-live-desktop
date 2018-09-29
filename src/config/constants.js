@@ -46,6 +46,8 @@ export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_PENDING_INTERVAL = 10 * 1000
 export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 1)
 export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 5 * 60 * 1000)
+export const DELAY_DEVICE_ACCESS = intFromEnv('DELAY_DEVICE_ACCESS', 60)
+export const DELAY_DEVICE_OPEN = intFromEnv('DELAY_DEVICE_OPEN', 20)
 
 // Endpoints...
 
