@@ -50,8 +50,7 @@ export default styled.div`
     p.selectable &&
     `
     user-select: text;
-    cursor: text;
-  `};
+    `};
 
   ${p =>
     p.sticky &&
