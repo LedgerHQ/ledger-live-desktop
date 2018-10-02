@@ -13,12 +13,10 @@ jobs:
       - run:
           name: Install latest yarn
           command: |
-            curl -fsSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" ;
-            sudo mkdir -p /opt ;
-            sudo tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ ;
-            sudo ln -sf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn ;
-            sudo ln -sf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg ;
-            rm yarn-v$YARN_VERSION.tar.gz
+            curl -sS http://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - ;
+            echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list ;
+            sudo apt-get update && sudo apt-get install yarn
+            sudo rm /usr/local/bin/yarn # remove docker yarn
       - checkout
       - restore_cache:
           keys:
