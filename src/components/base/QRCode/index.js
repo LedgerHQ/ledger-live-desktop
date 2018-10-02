@@ -38,7 +38,7 @@ class QRCode extends PureComponent<Props> {
   }
 
   render() {
-    return <canvas ref={n => (this._canvas = n)} />
+    return <canvas style={{ cursor: 'none' }} ref={n => (this._canvas = n)} />
   }
 }
 

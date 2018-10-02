@@ -224,4 +224,15 @@ export const selectedTimeRangeSelector = (state: State) => state.settings.select
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding
 
+export const exportSettingsSelector = createSelector(
+  counterValueCurrencySelector,
+  counterValueExchangeSelector,
+  state => state.settings.currenciesSettings,
+  (counterValueCurrency, counterValueExchange, currenciesSettings) => ({
+    counterValue: counterValueCurrency.ticker,
+    counterValueExchange,
+    currenciesSettings,
+  }),
+)
+
 export default handleActions(handlers, INITIAL_STATE)
