@@ -41,8 +41,8 @@ GH_REPO="$GH_API/repos/$owner/$repo"
 # shellcheck disable=SC2154
 AUTH="Authorization: token $github_api_token"
 
-# github_api_token=$GH_TOKEN owner=meriadec repo=ledger-live-desktop tag=v1.2.2 filename=./dist/electron-builder-debug.yml
-LATEST_RELEASE_ID=$(curl -sH "$AUTH" "$GH_API/repos/meriadec/ledger-live-desktop/releases" | grep '"id":' | head -n 1 | sed -E 's/.*: (.*),/\1/')
+# github_api_token=$GH_TOKEN owner=LedgerHQ repo=ledger-live-desktop tag=v1.2.2 filename=./dist/electron-builder-debug.yml
+LATEST_RELEASE_ID=$(curl -sH "$AUTH" "$GH_API/repos/LedgerHQ/ledger-live-desktop/releases" | grep '"id":' | head -n 1 | sed -E 's/.*: (.*),/\1/')
 
 # Validate token.
 curl -o /dev/null -sH "$AUTH" "$GH_REPO" || { echo "Error: Invalid repo, token or network issue!";  exit 1; }
