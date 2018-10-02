@@ -46,6 +46,9 @@ function filepathRecursiveReplacer(obj: mixed, seen: Array<*>) {
         }
       }
     } else {
+      if (obj instanceof Error) {
+        obj.message = filepathReplace(obj.message)
+      }
       for (const k in obj) {
         if (typeof obj.hasOwnProperty === 'function' && obj.hasOwnProperty(k)) {
           const value = obj[k]
