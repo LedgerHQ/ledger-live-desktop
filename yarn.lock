@@ -1749,10 +1749,10 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@3.8.0-beta.7":
-  version "3.8.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.8.0-beta.7.tgz#913f52e0c74396fea88290ea36ad16f4e8ecb610"
-  integrity sha512-8WqlR1gQSPZhFfnjJptNCfgmHOc9RFlrDYVc6vtViML0K13+sH47CYoRorQz8izHhN+xw2BHtWuW8QMRDzn8lw==
+"@ledgerhq/live-common@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.8.0.tgz#8a956f4995c6006d7788a98959d0b0cab92307f6"
+  integrity sha512-ZfhNP9Zt6LGVJhwIdGqeqUZdele6cWEiGDsuXl5NGxS5BGuFZFp7MfrQ7IQWIaePQ5/A1FMy4SoOkgdPskqtvw==
   dependencies:
     axios "^0.18.0"
     bignumber.js "^7.2.1"
@@ -1761,7 +1761,6 @@
     node-lzw "^0.3.1"
     numeral "^2.0.6"
     prando "^3.0.1"
-    qrcode "^1.2.2"
     react "^16.4.0"
     react-redux "^5.0.7"
     redux "^4.0.0"
@@ -13486,17 +13485,6 @@ qrcode@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/qrcode/-/qrcode-1.2.0.tgz#330d24313fbf8d429a806091af9525250239e44a"
   integrity sha512-wZK0Z0eYmOUDP2tOGzmLdeBn5Npa+4wms9GdvzH7HrywvGUq/Stz0BKUhW4DfmBf1PSrm9dNfdnVDq683Zxvag==
-  dependencies:
-    can-promise "^0.0.1"
-    dijkstrajs "^1.0.1"
-    isarray "^2.0.1"
-    pngjs "^3.3.0"
-    yargs "^8.0.2"
-
-qrcode@^1.2.2:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/qrcode/-/qrcode-1.3.0.tgz#a30dfe636225893501ea03af9ca10634ff1473a5"
-  integrity sha512-HFE7drEGhVoPxL1Ilm/zV+wkNJzUa8zL2nXP30vzo78EXAnHPStVOt2iZUIOfgmELtAbSkw/Z8igqu/TbNDGrQ==
   dependencies:
     can-promise "^0.0.1"
     dijkstrajs "^1.0.1"
