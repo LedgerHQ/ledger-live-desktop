@@ -85,17 +85,17 @@ class SetPassword extends PureComponent<Props, State> {
       {
         key: 'note1',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:setPassword.disclaimer.note1'),
+        desc: t('app:onboarding.setPassword.disclaimer.note1'),
       },
       {
         key: 'note2',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:setPassword.disclaimer.note2'),
+        desc: t('app:onboarding.setPassword.disclaimer.note2'),
       },
       {
         key: 'note3',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:setPassword.disclaimer.note3'),
+        desc: t('app:onboarding.setPassword.disclaimer.note3'),
       },
     ]
 
@@ -110,9 +110,9 @@ class SetPassword extends PureComponent<Props, State> {
         <StepContainerInner>
           <Fragment>
             <Box alignItems="center">
-              <Title>{t('onboarding:setPassword.title')}</Title>
+              <Title>{t('app:onboarding.setPassword.title')}</Title>
               <Description style={{ maxWidth: 620 }}>
-                {t('onboarding:setPassword.desc')}
+                {t('app:onboarding.setPassword.desc')}
               </Description>
             </Box>
             <Box align="center" mt={2}>

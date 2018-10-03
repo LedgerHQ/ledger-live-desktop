@@ -34,14 +34,14 @@ class WriteSeedRestore extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.nano.step1'),
+        desc: t('app:onboarding.writeSeed.restore.nano.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="onboarding:writeSeed.restore.nano.step2">
+            <Trans i18nKey="app:onboarding.writeSeed.restore.nano.step2">
               {'Select the first letters of'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Word #1'}
@@ -56,7 +56,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="onboarding:writeSeed.restore.nano.step3">
+            <Trans i18nKey="app:onboarding.writeSeed.restore.nano.step3">
               {'Select'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Word #1'}
@@ -69,54 +69,54 @@ class WriteSeedRestore extends PureComponent<Props, *> {
       {
         key: 'step4',
         icon: <IconOptionRow>{'4.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.nano.step4'),
+        desc: t('app:onboarding.writeSeed.restore.nano.step4'),
       },
     ]
     const stepsBlue = [
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.blue.step1'),
+        desc: t('app:onboarding.writeSeed.restore.blue.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.blue.step2'),
+        desc: t('app:onboarding.writeSeed.restore.blue.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.restore.blue.step3'),
+        desc: t('app:onboarding.writeSeed.restore.blue.step3'),
       },
     ]
     const disclaimerNotes = [
       {
         key: 'note1',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note1'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note1'),
       },
       {
         key: 'note2',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note2'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note2'),
       },
       {
         key: 'note3',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note3'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note3'),
       },
       {
         key: 'note4',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note4'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note4'),
       },
     ]
 
     return (
       <Fragment>
         <Box mb={3}>
-          <Title>{t('onboarding:writeSeed.restore.title')}</Title>
-          <Description>{t('onboarding:writeSeed.restore.desc')}</Description>
+          <Title>{t('app:onboarding.writeSeed.restore.title')}</Title>
+          <Description>{t('app:onboarding.writeSeed.restore.desc')}</Description>
         </Box>
         <Box align="center">
           <Inner style={{ width: 760 }}>

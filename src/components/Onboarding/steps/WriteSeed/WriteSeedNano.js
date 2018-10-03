@@ -33,7 +33,7 @@ class WriteSeedNano extends PureComponent<Props, *> {
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="onboarding:writeSeed.initialize.nano.step1">
+            <Trans i18nKey="app:onboarding.writeSeed.initialize.nano.step1">
               {'Copy the word displayed below'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Word #1'}
@@ -48,7 +48,7 @@ class WriteSeedNano extends PureComponent<Props, *> {
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="onboarding:writeSeed.initialize.nano.step2">
+            <Trans i18nKey="app:onboarding.writeSeed.initialize.nano.step2">
               {'Press the right button to display'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Word #2'}
@@ -61,37 +61,37 @@ class WriteSeedNano extends PureComponent<Props, *> {
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.initialize.nano.step3'),
+        desc: t('app:onboarding.writeSeed.initialize.nano.step3'),
       },
     ]
     const disclaimerNotes = [
       {
         key: 'note1',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note1'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note1'),
       },
       {
         key: 'note2',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note2'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note2'),
       },
       {
         key: 'note3',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note3'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note3'),
       },
       {
         key: 'note4',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note4'),
+        desc: t('app:onboarding.writeSeed.disclaimer.note4'),
       },
     ]
 
     return (
       <Fragment>
         <Box mb={3}>
-          <Title>{t('onboarding:writeSeed.initialize.title')}</Title>
-          <Description>{t('onboarding:writeSeed.initialize.desc')}</Description>
+          <Title>{t('app:onboarding.writeSeed.initialize.title')}</Title>
+          <Description>{t('app:onboarding.writeSeed.initialize.desc')}</Description>
         </Box>
         <Box align="center" mt={3}>
           <Inner style={{ width: 700 }}>

@@ -26,7 +26,7 @@ class NoDevice extends PureComponent<StepProps, *> {
       {
         key: 'buyNew',
         icon: <IconCart size={20} />,
-        title: t('onboarding:noDevice.buyNew.title'),
+        title: t('app:onboarding.noDevice.buyNew.title'),
         onClick: () => {
           openURL(urls.noDeviceBuyNew)
         },
@@ -34,7 +34,7 @@ class NoDevice extends PureComponent<StepProps, *> {
       {
         key: 'trackOrder',
         icon: <IconTruck size={20} />,
-        title: t('onboarding:noDevice.trackOrder.title'),
+        title: t('app:onboarding.noDevice.trackOrder.title'),
         onClick: () => {
           openURL(urls.noDeviceTrackOrder)
         },
@@ -42,7 +42,7 @@ class NoDevice extends PureComponent<StepProps, *> {
       {
         key: 'learnMore',
         icon: <IconInfoCircle size={20} />,
-        title: t('onboarding:noDevice.learnMore.title'),
+        title: t('app:onboarding.noDevice.learnMore.title'),
         onClick: () => {
           openURL(urls.noDeviceLearnMore)
         },
@@ -68,7 +68,7 @@ class NoDevice extends PureComponent<StepProps, *> {
               }
             />
             <Box m={5} style={{ maxWidth: 480 }}>
-              <Title>{t('onboarding:noDevice.title')}</Title>
+              <Title>{t('app:onboarding.noDevice.title')}</Title>
             </Box>
             <Box pt={4} flow={4}>
               {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}

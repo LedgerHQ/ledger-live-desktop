@@ -70,14 +70,14 @@ class Analytics extends PureComponent<StepProps, State> {
           deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
         />
         <StepContainerInner>
-          <Title data-e2e="onboarding_title">{t('onboarding:analytics.title')}</Title>
-          <Description>{t('onboarding:analytics.desc')}</Description>
+          <Title data-e2e="onboarding_title">{t('app:onboarding.analytics.title')}</Title>
+          <Description>{t('app:onboarding.analytics.desc')}</Description>
           <Box mt={5}>
             <Container>
               <Box>
                 <Box horizontal mb={1}>
                   <AnalyticsTitle data-e2e="analytics_techData">
-                    {t('onboarding:analytics.technicalData.title')}
+                    {t('app:onboarding.analytics.technicalData.title')}
                   </AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
@@ -93,9 +93,9 @@ class Analytics extends PureComponent<StepProps, State> {
                   </LearnMoreWrapper>
                 </Box>
                 <TechnicalData />
-                <AnalyticsText>{t('onboarding:analytics.technicalData.desc')}</AnalyticsText>
+                <AnalyticsText>{t('app:onboarding.analytics.technicalData.desc')}</AnalyticsText>
                 <MandatoryText>
-                  {t('onboarding:analytics.technicalData.mandatoryText')}
+                  {t('app:onboarding.analytics.technicalData.mandatoryText')}
                 </MandatoryText>
               </Box>
               <Box justifyContent="center">
@@ -106,7 +106,7 @@ class Analytics extends PureComponent<StepProps, State> {
               <Box>
                 <Box horizontal mb={1}>
                   <AnalyticsTitle data-e2e="analytics_shareAnalytics">
-                    {t('onboarding:analytics.shareAnalytics.title')}
+                    {t('app:onboarding.analytics.shareAnalytics.title')}
                   </AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
@@ -122,7 +122,7 @@ class Analytics extends PureComponent<StepProps, State> {
                   </LearnMoreWrapper>
                   <ShareAnalytics />
                 </Box>
-                <AnalyticsText>{t('onboarding:analytics.shareAnalytics.desc')}</AnalyticsText>
+                <AnalyticsText>{t('app:onboarding.analytics.shareAnalytics.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
                 <Track
@@ -140,10 +140,10 @@ class Analytics extends PureComponent<StepProps, State> {
               <Box>
                 <Box mb={1}>
                   <AnalyticsTitle data-e2e="analytics_reportBugs">
-                    {t('onboarding:analytics.sentryLogs.title')}
+                    {t('app:onboarding.analytics.sentryLogs.title')}
                   </AnalyticsTitle>
                 </Box>
-                <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
+                <AnalyticsText>{t('app:onboarding.analytics.sentryLogs.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
                 <Track

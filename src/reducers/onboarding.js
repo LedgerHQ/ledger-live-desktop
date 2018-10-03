@@ -70,14 +70,14 @@ const initialState: OnboardingState = {
     },
     {
       name: 'selectDevice',
-      label: 'onboarding:breadcrumb.selectDevice',
+      label: 'app:onboarding.breadcrumb.selectDevice',
       options: {
         showBreadcrumb: true,
       },
     },
     {
       name: 'selectPIN',
-      label: 'onboarding:breadcrumb.selectPIN',
+      label: 'app:onboarding.breadcrumb.selectPIN',
       options: {
         showBreadcrumb: true,
         alreadyInitSkip: true,
@@ -85,7 +85,7 @@ const initialState: OnboardingState = {
     },
     {
       name: 'writeSeed',
-      label: 'onboarding:breadcrumb.writeSeed',
+      label: 'app:onboarding.breadcrumb.writeSeed',
       options: {
         showBreadcrumb: true,
         alreadyInitSkip: true,
@@ -93,14 +93,14 @@ const initialState: OnboardingState = {
     },
     {
       name: 'genuineCheck',
-      label: 'onboarding:genuineCheck.title',
+      label: 'app:onboarding.genuineCheck.title',
       options: {
         showBreadcrumb: true,
       },
     },
     {
       name: 'setPassword',
-      label: 'onboarding:breadcrumb.setPassword',
+      label: 'app:onboarding.breadcrumb.setPassword',
       options: {
         showBreadcrumb: true,
         relaunchSkip: true,
@@ -108,7 +108,7 @@ const initialState: OnboardingState = {
     },
     {
       name: 'analytics',
-      label: 'onboarding:breadcrumb.analytics',
+      label: 'app:onboarding.breadcrumb.analytics',
       options: {
         showBreadcrumb: true,
         relaunchSkip: true,
