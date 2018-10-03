@@ -1749,15 +1749,16 @@
     npm "^5.7.1"
     prebuild-install "^2.2.2"
 
-"@ledgerhq/live-common@^3.7.1":
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.7.1.tgz#5ce1895920d2eae6c454c2c72612dc9afd11adec"
-  integrity sha512-xlvH6+O1iNC1LI+UyiKb9i4u/6mbO8jTBvXZ6EeFgMhAZGLHNgO2uEJVBxOFe4lVImWqfQI0b8i04AipjlSw6w==
+"@ledgerhq/live-common@3.8.0":
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.8.0.tgz#8a956f4995c6006d7788a98959d0b0cab92307f6"
+  integrity sha512-ZfhNP9Zt6LGVJhwIdGqeqUZdele6cWEiGDsuXl5NGxS5BGuFZFp7MfrQ7IQWIaePQ5/A1FMy4SoOkgdPskqtvw==
   dependencies:
     axios "^0.18.0"
     bignumber.js "^7.2.1"
     invariant "^2.2.2"
     lodash "^4.17.4"
+    node-lzw "^0.3.1"
     numeral "^2.0.6"
     prando "^3.0.1"
     react "^16.4.0"
@@ -11734,6 +11735,11 @@ node-loader@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/node-loader/-/node-loader-0.6.0.tgz#c797ef51095ed5859902b157f6384f6361e05ae8"
   integrity sha1-x5fvUQle1YWZArFX9jhPY2HgWug=
+
+node-lzw@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/node-lzw/-/node-lzw-0.3.1.tgz#f50e37968976aca83320028b91f101df4a436b2d"
+  integrity sha1-9Q43lol2rKgzIAKLkfEB30pDay0=
 
 node-notifier@^5.2.1:
   version "5.2.1"
