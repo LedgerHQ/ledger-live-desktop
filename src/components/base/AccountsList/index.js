@@ -92,8 +92,8 @@ class AccountsList extends Component<
                 style={{ lineHeight: '10px' }}
               >
                 {isAllSelected
-                  ? t('app:addAccounts.unselectAll', { count: accounts.length })
-                  : t('app:addAccounts.selectAll', { count: accounts.length })}
+                  ? t('addAccounts.unselectAll', { count: accounts.length })
+                  : t('addAccounts.selectAll', { count: accounts.length })}
               </FakeLink>
             )}
           </Box>

@@ -24,7 +24,7 @@ const OnboardingFooter = ({
 }: Props) => (
   <OnboardingFooterWrapper {...props}>
     <Button outlineGrey onClick={() => prevStep()}>
-      {t('app:common.back')}
+      {t('common.back')}
     </Button>
     <Button
       data-e2e="continue_button"
@@ -33,7 +33,7 @@ const OnboardingFooter = ({
       onClick={() => nextStep()}
       ml="auto"
     >
-      {t('app:common.continue')}
+      {t('common.continue')}
     </Button>
   </OnboardingFooterWrapper>
 )

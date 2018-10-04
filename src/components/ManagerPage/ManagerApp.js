@@ -74,7 +74,7 @@ function ManagerApp({ name, version, icon, onInstall, onUninstall, t }: Props) {
             appVersion: version,
           }}
         >
-          {t('app:manager.apps.install')}
+          {t('manager.apps.install')}
         </Button>
       ) : null}
       <Button

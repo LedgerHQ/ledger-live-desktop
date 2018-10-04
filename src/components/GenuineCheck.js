@@ -124,7 +124,7 @@ class GenuineCheck extends PureComponent<Props> {
       {
         id: 'device',
         title: (
-          <Trans i18nKey="app:deviceConnect.step1.connect" parent="div">
+          <Trans i18nKey="deviceConnect.step1.connect" parent="div">
             {'Connect and unlock your '}
             <Bold>{'Ledger device'}</Bold>
           </Trans>

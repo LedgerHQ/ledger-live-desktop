@@ -85,22 +85,22 @@ class ActivityIndicatorInner extends PureComponent<Props, { lastClickTime: numbe
           align="center"
         >
           {isRotating ? (
-            t('app:common.sync.syncing')
+            t('common.sync.syncing')
           ) : isError ? (
             <Fragment>
-              <Box>{t('app:common.sync.error')}</Box>
+              <Box>{t('common.sync.error')}</Box>
               <Box
                 ml={2}
                 style={{ textDecoration: 'underline', pointerEvents: 'all' }}
                 onClick={this.onClick}
               >
-                {t('app:common.sync.refresh')}
+                {t('common.sync.refresh')}
               </Box>
             </Fragment>
           ) : isUpToDate ? (
-            t('app:common.sync.upToDate')
+            t('common.sync.upToDate')
           ) : (
-            t('app:common.sync.outdated')
+            t('common.sync.outdated')
           )}
         </Box>
       </ItemContainer>

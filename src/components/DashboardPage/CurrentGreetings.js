@@ -10,11 +10,11 @@ const getCurrentGreetings = () => {
   const afternoon_breakpoint = 12
   const evening_breakpoint = 17
   if (localTimeHour >= afternoon_breakpoint && localTimeHour < evening_breakpoint) {
-    return 'app:dashboard.greeting.afternoon'
+    return 'dashboard.greeting.afternoon'
   } else if (localTimeHour >= evening_breakpoint) {
-    return 'app:dashboard.greeting.evening'
+    return 'dashboard.greeting.evening'
   }
-  return 'app:dashboard.greeting.morning'
+  return 'dashboard.greeting.morning'
 }
 
 class CurrentGettings extends PureComponent<{ t: T }> {

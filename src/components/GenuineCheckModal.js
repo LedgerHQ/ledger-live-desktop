@@ -20,7 +20,7 @@ class GenuineCheckModal extends PureComponent<Props> {
     const { t, onSuccess, onFail, onUnavailable } = this.props
     return (
       <ModalBody onClose={onClose}>
-        <ModalTitle>{t('app:genuinecheck.modal.title')}</ModalTitle>
+        <ModalTitle>{t('genuinecheck.modal.title')}</ModalTitle>
         <ModalContent>
           <GenuineCheck onSuccess={onSuccess} onFail={onFail} onUnavailable={onUnavailable} />
         </ModalContent>

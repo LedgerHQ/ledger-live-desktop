@@ -61,20 +61,20 @@ export type StepProps = DefaultStepProps & {
 const createSteps = ({ t }: { t: T }) => [
   {
     id: 'account',
-    label: t('app:receive.steps.chooseAccount.title'),
+    label: t('receive.steps.chooseAccount.title'),
     component: StepAccount,
     footer: StepAccountFooter,
   },
   {
     id: 'device',
-    label: t('app:receive.steps.connectDevice.title'),
+    label: t('receive.steps.connectDevice.title'),
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }: StepProps) => transitionTo('account'),
   },
   {
     id: 'confirm',
-    label: t('app:receive.steps.confirmAddress.title'),
+    label: t('receive.steps.confirmAddress.title'),
     footer: StepConfirmAddressFooter,
     component: StepConfirmAddress,
     onBack: ({ transitionTo }: StepProps) => transitionTo('device'),
@@ -82,7 +82,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'receive',
-    label: t('app:receive.steps.receiveFunds.title'),
+    label: t('receive.steps.receiveFunds.title'),
     component: StepReceiveFunds,
     shouldPreventClose: ({ isAddressVerified }: StepProps) => isAddressVerified === null,
   },
@@ -199,7 +199,7 @@ class ReceiveModal extends PureComponent<Props, State> {
         onBeforeOpen={this.handleBeforeOpenModal}
         render={({ onClose }) => (
           <Stepper
-            title={t('app:receive.title')}
+            title={t('receive.title')}
             initialStepId={stepId}
             onStepChange={this.handleStepChange}
             onClose={onClose}

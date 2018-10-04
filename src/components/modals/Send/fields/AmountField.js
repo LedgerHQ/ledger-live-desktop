@@ -48,7 +48,7 @@ class AmountField extends Component<*, { validTransactionError: ?Error }> {
     const { validTransactionError } = this.state
     return (
       <Box flow={1}>
-        <Label>{t('app:send.steps.amount.amount')}</Label>
+        <Label>{t('send.steps.amount.amount')}</Label>
         <RequestAmount
           withMax={false}
           account={account}

@@ -66,7 +66,7 @@ class GlobalSearch extends PureComponent<Props, State> {
               <IconSearch size={16} />
             </Box>
             <Input
-              placeholder={t('app:common.search')}
+              placeholder={t('common.search')}
               innerRef={input => (this._input = input)}
               onBlur={this.handleBlur}
               onFocus={this.handleFocus}

@@ -161,17 +161,17 @@ class IsUnlocked extends Component<Props, State> {
                   />
                 }
               />
-              <PageTitle>{t('app:common.lockScreen.title')}</PageTitle>
+              <PageTitle>{t('common.lockScreen.title')}</PageTitle>
               <LockScreenDesc>
-                {t('app:common.lockScreen.subTitle')}
+                {t('common.lockScreen.subTitle')}
                 <br />
-                {t('app:common.lockScreen.description')}
+                {t('common.lockScreen.description')}
               </LockScreenDesc>
               <Box horizontal align="center">
                 <Box style={{ width: 280 }}>
                   <InputPassword
                     autoFocus
-                    placeholder={t('app:common.lockScreen.inputPlaceholder')}
+                    placeholder={t('common.lockScreen.inputPlaceholder')}
                     type="password"
                     onChange={this.handleChangeInput('password')}
                     value={inputValue.password}
@@ -187,7 +187,7 @@ class IsUnlocked extends Component<Props, State> {
                 </Box>
               </Box>
               <Button type="button" mt={3} small onClick={this.handleOpenHardResetModal}>
-                {t('app:common.lockScreen.lostPassword')}
+                {t('common.lockScreen.lostPassword')}
               </Button>
             </Box>
           </form>
@@ -199,9 +199,9 @@ class IsUnlocked extends Component<Props, State> {
             onClose={this.handleCloseHardResetModal}
             onReject={this.handleCloseHardResetModal}
             onConfirm={this.handleHardReset}
-            confirmText={t('app:common.reset')}
-            title={t('app:settings.hardResetModal.title')}
-            desc={t('app:settings.hardResetModal.desc')}
+            confirmText={t('common.reset')}
+            title={t('settings.hardResetModal.title')}
+            desc={t('settings.hardResetModal.desc')}
             renderIcon={this.hardResetIconRender}
           />
         </Box>

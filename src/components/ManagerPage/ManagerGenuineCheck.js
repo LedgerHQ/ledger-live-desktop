@@ -31,10 +31,10 @@ class ManagerGenuineCheck extends PureComponent<Props> {
             style={{ marginBottom: 30, maxWidth: 362, width: '100%' }}
           />
           <Text ff="Museo Sans|Regular" fontSize={7} color="dark" style={{ marginBottom: 10 }}>
-            {t('app:manager.device.title')}
+            {t('manager.device.title')}
           </Text>
           <Text ff="Museo Sans|Light" fontSize={5} color="grey" align="center">
-            {t('app:manager.device.desc')}
+            {t('manager.device.desc')}
           </Text>
         </Box>
         <Space of={40} />

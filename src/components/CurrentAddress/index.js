@@ -152,7 +152,7 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
     return (
       <FooterButton
         icon={<IconCopy size={16} />}
-        label={t('app:common.copyAddress')}
+        label={t('common.copyAddress')}
         onClick={() => {
           this.setState({ copyFeedback: true })
           this._timeout = setTimeout(() => this.setState({ copyFeedback: false }), 1e3)
@@ -193,17 +193,17 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
         <Label>
           <Box>
             {accountName ? (
-              <Trans i18nKey="app:currentAddress.for" parent="div">
+              <Trans i18nKey="currentAddress.for" parent="div">
                 {'Address for '}
                 <strong>{accountName}</strong>
               </Trans>
             ) : (
-              t('app:currentAddress.title')
+              t('currentAddress.title')
             )}
           </Box>
         </Label>
         <Address>
-          {copyFeedback && <CopyFeedback>{t('app:common.addressCopied')}</CopyFeedback>}
+          {copyFeedback && <CopyFeedback>{t('common.addressCopied')}</CopyFeedback>}
           {address}
         </Address>
         <Box horizontal flow={2} mt={2} alignItems="center" style={{ maxWidth: 320 }}>
@@ -217,19 +217,17 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
             ff="Open Sans"
           >
             {isAddressVerified === null
-              ? t('app:currentAddress.messageIfUnverified', { currencyName })
+              ? t('currentAddress.messageIfUnverified', { currencyName })
               : isAddressVerified
-                ? t('app:currentAddress.messageIfAccepted', { currencyName })
-                : t('app:currentAddress.messageIfSkipped', { currencyName })}
+                ? t('currentAddress.messageIfAccepted', { currencyName })
+                : t('currentAddress.messageIfSkipped', { currencyName })}
           </Box>
         </Box>
         <Footer>
           {isAddressVerified !== null ? (
             <FooterButton
               icon={<IconRecheck size={16} />}
-              label={
-                isAddressVerified === false ? t('app:common.verify') : t('app:common.reverify')
-              }
+              label={isAddressVerified === false ? t('common.verify') : t('common.reverify')}
               onClick={onVerify}
             />
           ) : null}

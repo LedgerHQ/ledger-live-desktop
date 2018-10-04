@@ -97,7 +97,7 @@ class AccountPage extends PureComponent<Props> {
               />
             </Box>
 
-            <OperationsList account={account} title={t('app:account.lastOperations')} />
+            <OperationsList account={account} title={t('account.lastOperations')} />
 
             <StickyBackToTop />
           </Fragment>

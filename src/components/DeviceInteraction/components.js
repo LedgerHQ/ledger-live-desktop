@@ -144,11 +144,11 @@ export const ErrorDescContainer = translate()(
         <Box ml="auto" horizontal flow={2}>
           {!!errorHelpURL && (
             <FakeLink underline color="alertRed" onClick={() => openURL(errorHelpURL)}>
-              {t('app:common.help')}
+              {t('common.help')}
             </FakeLink>
           )}
           <FakeLink underline color="alertRed" onClick={onRetry}>
-            {t('app:common.retry')}
+            {t('common.retry')}
           </FakeLink>
         </Box>
       </Box>

@@ -75,26 +75,26 @@ export type StepProps<Transaction> = DefaultStepProps & {
 const createSteps = ({ t }: { t: T }) => [
   {
     id: 'amount',
-    label: t('app:send.steps.amount.title'),
+    label: t('send.steps.amount.title'),
     component: StepAmount,
     footer: StepAmountFooter,
   },
   {
     id: 'device',
-    label: t('app:send.steps.connectDevice.title'),
+    label: t('send.steps.connectDevice.title'),
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('amount'),
   },
   {
     id: 'verification',
-    label: t('app:send.steps.verification.title'),
+    label: t('send.steps.verification.title'),
     component: StepVerification,
     shouldPreventClose: true,
   },
   {
     id: 'confirmation',
-    label: t('app:send.steps.confirmation.title'),
+    label: t('send.steps.confirmation.title'),
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
@@ -279,7 +279,7 @@ class SendModal extends PureComponent<Props, State<*>> {
         onBeforeOpen={this.handleBeforeOpenModal}
         render={({ onClose }) => (
           <Stepper
-            title={t('app:send.title')}
+            title={t('send.title')}
             initialStepId={stepId}
             onStepChange={this.handleStepChange}
             onClose={onClose}

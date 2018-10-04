@@ -39,7 +39,7 @@ export default ({
     <Box flow={4}>
       <TrackPage category="Send Flow" name="Step 1" />
       <Box flow={1}>
-        <Label>{t('app:send.steps.amount.selectAccountDebit')}</Label>
+        <Label>{t('send.steps.amount.selectAccountDebit')}</Label>
         <SelectAccount autoFocus={!openedFromAccount} onChange={onChangeAccount} value={account} />
       </Box>
 
@@ -154,7 +154,7 @@ export class StepAmountFooter extends PureComponent<
     return (
       <Fragment>
         <Box grow>
-          <Label>{t('app:send.totalSpent')}</Label>
+          <Label>{t('send.totalSpent')}</Label>
           <Box horizontal flow={2} align="center">
             {account && (
               <FormattedVal
@@ -188,7 +188,7 @@ export class StepAmountFooter extends PureComponent<
           </Box>
         </Box>
         <Button disabled={!canNext} primary onClick={() => transitionTo('device')}>
-          {t('app:common.continue')}
+          {t('common.continue')}
         </Button>
       </Fragment>
     )

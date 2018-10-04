@@ -132,7 +132,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   return (
     <ModalBody onClose={onClose}>
       <TrackPage category="Modal" name="OperationDetails" />
-      <ModalTitle>{t('app:operationDetails.title')}</ModalTitle>
+      <ModalTitle>{t('operationDetails.title')}</ModalTitle>
       <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
         <GrowScroll px={5} pt={1} pb={8}>
           <Box flow={3}>
@@ -172,18 +172,18 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             </Box>
             <Box horizontal flow={2}>
               <Box flex={1}>
-                <OpDetailsTitle>{t('app:operationDetails.account')}</OpDetailsTitle>
+                <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
                 <OpDetailsData>{name}</OpDetailsData>
               </Box>
               <Box flex={1}>
-                <OpDetailsTitle>{t('app:operationDetails.date')}</OpDetailsTitle>
+                <OpDetailsTitle>{t('operationDetails.date')}</OpDetailsTitle>
                 <OpDetailsData>{moment(date).format('LLL')}</OpDetailsData>
               </Box>
             </Box>
             <B />
             <Box horizontal flow={2}>
               <Box flex={1}>
-                <OpDetailsTitle>{t('app:operationDetails.fees')}</OpDetailsTitle>
+                <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
                 {fee ? (
                   <Fragment>
                     <OpDetailsData>
@@ -191,16 +191,16 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                     </OpDetailsData>
                   </Fragment>
                 ) : (
-                  <OpDetailsData>{t('app:operationDetails.noFees')}</OpDetailsData>
+                  <OpDetailsData>{t('operationDetails.noFees')}</OpDetailsData>
                 )}
               </Box>
               <Box flex={1}>
-                <OpDetailsTitle>{t('app:operationDetails.status')}</OpDetailsTitle>
+                <OpDetailsTitle>{t('operationDetails.status')}</OpDetailsTitle>
                 <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
                   <Box>
                     {isConfirmed
-                      ? t('app:operationDetails.confirmed')
-                      : t('app:operationDetails.notConfirmed')}
+                      ? t('operationDetails.confirmed')
+                      : t('operationDetails.notConfirmed')}
                   </Box>
                   <Box>{`(${confirmations})`}</Box>
                 </OpDetailsData>
@@ -208,7 +208,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             </Box>
             <B />
             <Box>
-              <OpDetailsTitle>{t('app:operationDetails.identifier')}</OpDetailsTitle>
+              <OpDetailsTitle>{t('operationDetails.identifier')}</OpDetailsTitle>
               <OpDetailsData>
                 <Ellipsis canSelect>{hash}</Ellipsis>
                 <GradientHover>
@@ -218,12 +218,12 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             </Box>
             <B />
             <Box>
-              <OpDetailsTitle>{t('app:operationDetails.from')}</OpDetailsTitle>
+              <OpDetailsTitle>{t('operationDetails.from')}</OpDetailsTitle>
               <DataList lines={uniqueSenders} t={t} />
             </Box>
             <B />
             <Box>
-              <OpDetailsTitle>{t('app:operationDetails.to')}</OpDetailsTitle>
+              <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
               <DataList lines={recipients} t={t} />
             </Box>
           </Box>
@@ -234,7 +234,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
       {url && (
         <ModalFooter horizontal justify="flex-end" flow={2}>
           <Button primary onClick={() => openURL(url)}>
-            {t('app:operationDetails.viewOperation')}
+            {t('operationDetails.viewOperation')}
           </Button>
         </ModalFooter>
       )}
@@ -300,7 +300,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
             <Box onClick={this.onClick} py={1}>
               <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
                 <IconChevronRight size={12} style={{ marginRight: 5 }} />
-                {t('app:operationDetails.showMore', { recipients: lines.length - numToShow })}
+                {t('operationDetails.showMore', { recipients: lines.length - numToShow })}
               </More>
             </Box>
           )}
@@ -311,7 +311,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
             <Box onClick={this.onClick} py={1}>
               <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
                 <IconChevronRight size={12} style={{ marginRight: 5 }} />
-                {t('app:operationDetails.showLess')}
+                {t('operationDetails.showLess')}
               </More>
             </Box>
           )}

@@ -49,7 +49,7 @@ class CleanButton extends PureComponent<Props, State> {
     return (
       <Fragment>
         <Button small primary onClick={this.open} event="ClearCacheIntent">
-          {t('app:settings.profile.softReset')}
+          {t('settings.profile.softReset')}
         </Button>
 
         <ConfirmModal
@@ -59,9 +59,9 @@ class CleanButton extends PureComponent<Props, State> {
           onReject={this.close}
           onConfirm={this.action}
           isLoading={isLoading}
-          title={t('app:settings.softResetModal.title')}
-          subTitle={t('app:common.areYouSure')}
-          desc={t('app:settings.softResetModal.desc')}
+          title={t('settings.softResetModal.title')}
+          subTitle={t('common.areYouSure')}
+          desc={t('settings.softResetModal.desc')}
         />
       </Fragment>
     )

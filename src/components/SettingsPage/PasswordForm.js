@@ -42,7 +42,7 @@ class PasswordForm extends PureComponent<Props> {
           {hasPassword && (
             <Box flow={1} mb={5}>
               <Label htmlFor="currentPassword">
-                {t('app:password.inputFields.currentPassword.label')}
+                {t('password.inputFields.currentPassword.label')}
               </Label>
               <InputPassword
                 autoFocus
@@ -54,7 +54,7 @@ class PasswordForm extends PureComponent<Props> {
             </Box>
           )}
           <Box flow={1}>
-            <Label htmlFor="newPassword">{t('app:password.inputFields.newPassword.label')}</Label>
+            <Label htmlFor="newPassword">{t('password.inputFields.newPassword.label')}</Label>
             <InputPassword
               style={{ mt: 4, width: 240 }}
               autoFocus={!hasPassword}
@@ -66,7 +66,7 @@ class PasswordForm extends PureComponent<Props> {
           </Box>
           <Box flow={1}>
             <Label htmlFor="confirmPassword">
-              {t('app:password.inputFields.confirmPassword.label')}
+              {t('password.inputFields.confirmPassword.label')}
             </Label>
             <InputPassword
               style={{ width: 240 }}
