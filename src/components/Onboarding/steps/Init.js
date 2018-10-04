@@ -30,7 +30,7 @@ class Init extends PureComponent<StepProps, *> {
       {
         key: 'newDevice',
         icon: <IconPlus size={20} />,
-        title: t('app:onboarding.init.newDevice.title'),
+        title: t('onboarding.init.newDevice.title'),
         onClick: () => {
           jumpStep('selectDevice')
           flowType('newDevice')
@@ -39,7 +39,7 @@ class Init extends PureComponent<StepProps, *> {
       {
         key: 'restoreDevice',
         icon: <IconRecover size={20} />,
-        title: t('app:onboarding.init.restoreDevice.title'),
+        title: t('onboarding.init.restoreDevice.title'),
         onClick: () => {
           jumpStep('selectDevice')
           flowType('restoreDevice')
@@ -48,7 +48,7 @@ class Init extends PureComponent<StepProps, *> {
       {
         key: 'initializedDevice',
         icon: <IconCheck size={20} />,
-        title: t('app:onboarding.init.initializedDevice.title'),
+        title: t('onboarding.init.initializedDevice.title'),
         onClick: () => {
           jumpStep('selectDevice')
           flowType('initializedDevice')
@@ -57,7 +57,7 @@ class Init extends PureComponent<StepProps, *> {
       {
         key: 'noDevice',
         icon: <IconExternalLink size={20} />,
-        title: t('app:onboarding.noDevice.title'),
+        title: t('onboarding.noDevice.title'),
         onClick: () => {
           jumpStep('noDevice')
           flowType('noDevice')
@@ -77,7 +77,7 @@ class Init extends PureComponent<StepProps, *> {
             }
           />
           <Box m={5} style={{ maxWidth: 480 }}>
-            <Title>{t('app:onboarding.init.title')}</Title>
+            <Title>{t('onboarding.init.title')}</Title>
           </Box>
           <Box pt={4} flow={4}>
             {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}

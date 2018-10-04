@@ -34,24 +34,24 @@ class SectionHelp extends PureComponent<Props> {
 
         <Header
           icon={<IconLoader size={16} />}
-          title={t('app:settings.tabs.about')}
-          desc={t('app:settings.about.desc')}
+          title={t('settings.tabs.about')}
+          desc={t('settings.about.desc')}
         />
 
         <Body>
-          <Row title={t('app:settings.help.version')} desc={`Ledger Live ${version}`}>
+          <Row title={t('settings.help.version')} desc={`Ledger Live ${version}`}>
             <ReleaseNotesButton />
           </Row>
 
           <AboutRowItem
-            title={t('app:settings.help.terms')}
-            desc={t('app:settings.help.termsDesc')}
+            title={t('settings.help.terms')}
+            desc={t('settings.help.termsDesc')}
             url={urls.terms}
           />
 
           <AboutRowItem
-            title={t('app:settings.help.privacy')}
-            desc={t('app:settings.help.privacyDesc')}
+            title={t('settings.help.privacy')}
+            desc={t('settings.help.privacyDesc')}
             url={urls.privacyPolicy}
           />
         </Body>

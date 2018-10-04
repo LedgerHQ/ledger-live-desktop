@@ -180,7 +180,7 @@ export class RequestAmount extends PureComponent<Props> {
         {withMax && (
           <Box grow justify="flex-end">
             <Button primary onClick={this.handleClickMax}>
-              {t('app:common.max')}
+              {t('common.max')}
             </Button>
           </Box>
         )}

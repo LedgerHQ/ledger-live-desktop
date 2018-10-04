@@ -63,14 +63,14 @@ export default function StepConfirmation({ account, t, optimisticOperation, erro
         {error ? (
           <TranslatedError error={error} />
         ) : optimisticOperation ? (
-          t('app:send.steps.confirmation.success.title')
+          t('send.steps.confirmation.success.title')
         ) : (
-          t('app:send.steps.confirmation.pending.title')
+          t('send.steps.confirmation.pending.title')
         )}
       </Title>
       <Text style={{ userSelect: 'text' }} color="smoke">
         {optimisticOperation ? (
-          multiline(t('app:send.steps.confirmation.success.text'))
+          multiline(t('send.steps.confirmation.success.text'))
         ) : error ? (
           <TranslatedError error={error} field="description" />
         ) : null}
@@ -106,7 +106,7 @@ export function StepConfirmationFooter({
           }}
           primary
         >
-          {t('app:send.steps.confirmation.success.cta')}
+          {t('send.steps.confirmation.success.cta')}
         </Button>
       ) : error ? (
         <RetryButton

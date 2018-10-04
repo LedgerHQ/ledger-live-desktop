@@ -45,7 +45,7 @@ class ResetButton extends PureComponent<Props, State> {
     return (
       <Fragment>
         <Button small danger onClick={this.open} event="HardResetIntent">
-          {t('app:common.reset')}
+          {t('common.reset')}
         </Button>
 
         <ConfirmModal
@@ -56,9 +56,9 @@ class ResetButton extends PureComponent<Props, State> {
           onClose={this.close}
           onReject={this.close}
           onConfirm={this.action}
-          confirmText={t('app:common.reset')}
-          title={t('app:settings.hardResetModal.title')}
-          desc={t('app:settings.hardResetModal.desc')}
+          confirmText={t('common.reset')}
+          title={t('settings.hardResetModal.title')}
+          desc={t('settings.hardResetModal.desc')}
           renderIcon={() => (
             // FIXME why not pass in directly the DOM 🤷🏻
             <IconWrapperCircle color="alertRed">

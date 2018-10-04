@@ -152,24 +152,24 @@ class StepFlashMcu extends PureComponent<Props, State> {
         <Box mx={7}>
           <Text ff="Open Sans|Regular" align="center" color="smoke">
             <Bullet>{'1.'}</Bullet>
-            {t('app:manager.modal.mcuFirst')}
+            {t('manager.modal.mcuFirst')}
           </Text>
           <img
             src={i('logos/unplugDevice.png')}
             style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-            alt={t('app:manager.modal.mcuFirst')}
+            alt={t('manager.modal.mcuFirst')}
           />
         </Box>
         <Separator my={6} />
         <Box mx={7}>
           <Text ff="Open Sans|Regular" align="center" color="smoke">
             <Bullet>{'2.'}</Bullet>
-            {t('app:manager.modal.mcuSecond')}
+            {t('manager.modal.mcuSecond')}
           </Text>
           <img
             src={i('logos/bootloaderMode.png')}
             style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-            alt={t('app:manager.modal.mcuFirst')}
+            alt={t('manager.modal.mcuFirst')}
           />
         </Box>
       </Fragment>
@@ -184,7 +184,7 @@ class StepFlashMcu extends PureComponent<Props, State> {
     const { installing } = this.state
     return (
       <Container>
-        <Title>{installing ? '' : t('app:manager.modal.mcuTitle')}</Title>
+        <Title>{installing ? '' : t('manager.modal.mcuTitle')}</Title>
         <TrackPage category="Manager" name="FlashMCU" />
         {this.renderBody()}
       </Container>

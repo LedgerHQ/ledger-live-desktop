@@ -83,10 +83,10 @@ class PasswordModal extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
             {hasPassword ? (
-              <ModalTitle>{t('app:password.changePassword.title')}</ModalTitle>
+              <ModalTitle>{t('password.changePassword.title')}</ModalTitle>
             ) : (
               <ModalTitle data-e2e="enablePassword_modal">
-                {t('app:password.setPassword.title')}
+                {t('password.setPassword.title')}
               </ModalTitle>
             )}
             <ModalContent>
@@ -99,11 +99,11 @@ class PasswordModal extends PureComponent<Props, State> {
                 data-e2e="setPassword_modalTitle"
               >
                 {hasPassword
-                  ? t('app:password.changePassword.subTitle')
-                  : t('app:password.setPassword.subTitle')}
+                  ? t('password.changePassword.subTitle')
+                  : t('password.setPassword.subTitle')}
               </Box>
               <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
-                {t('app:password.setPassword.desc')}
+                {t('password.setPassword.desc')}
               </Box>
               <PasswordForm
                 onSubmit={this.handleSave}
@@ -124,7 +124,7 @@ class PasswordModal extends PureComponent<Props, State> {
                 onClick={onClose}
                 data-e2e="setPassword_modalCancel_button"
               >
-                {t('app:common.cancel')}
+                {t('common.cancel')}
               </Button>
               <Button
                 small
@@ -132,7 +132,7 @@ class PasswordModal extends PureComponent<Props, State> {
                 onClick={this.handleSave}
                 disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
               >
-                {t('app:common.save')}
+                {t('common.save')}
               </Button>
             </ModalFooter>
           </ModalBody>

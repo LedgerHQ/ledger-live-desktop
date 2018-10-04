@@ -2,6 +2,7 @@ import { HIGHLIGHT_I18N } from 'config/constants'
 import i18n from 'i18next'
 
 const commonConfig = {
+  defaultNS: 'app',
   fallbackLng: 'en',
   debug: false,
   compatibilityJSON: 'v2',

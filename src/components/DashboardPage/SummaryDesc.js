@@ -18,7 +18,7 @@ class SummaryDesc extends PureComponent<{
         ff="Museo Sans|Light"
         data-e2e="dashboard_accountsSummaryDesc"
       >
-        {t('app:dashboard.summary', { count: totalAccounts })}
+        {t('dashboard.summary', { count: totalAccounts })}
       </Text>
     )
   }

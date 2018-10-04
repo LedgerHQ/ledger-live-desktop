@@ -85,17 +85,17 @@ class SetPassword extends PureComponent<Props, State> {
       {
         key: 'note1',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('app:onboarding.setPassword.disclaimer.note1'),
+        desc: t('onboarding.setPassword.disclaimer.note1'),
       },
       {
         key: 'note2',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('app:onboarding.setPassword.disclaimer.note2'),
+        desc: t('onboarding.setPassword.disclaimer.note2'),
       },
       {
         key: 'note3',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('app:onboarding.setPassword.disclaimer.note3'),
+        desc: t('onboarding.setPassword.disclaimer.note3'),
       },
     ]
 
@@ -110,9 +110,9 @@ class SetPassword extends PureComponent<Props, State> {
         <StepContainerInner>
           <Fragment>
             <Box alignItems="center">
-              <Title>{t('app:onboarding.setPassword.title')}</Title>
+              <Title>{t('onboarding.setPassword.title')}</Title>
               <Description style={{ maxWidth: 620 }}>
-                {t('app:onboarding.setPassword.desc')}
+                {t('onboarding.setPassword.desc')}
               </Description>
             </Box>
             <Box align="center" mt={2}>
@@ -134,7 +134,7 @@ class SetPassword extends PureComponent<Props, State> {
 
         <OnboardingFooterWrapper>
           <Button outlineGrey onClick={() => prevStep()}>
-            {t('app:common.back')}
+            {t('common.back')}
           </Button>
           <Box horizontal ml="auto">
             <Button
@@ -143,14 +143,14 @@ class SetPassword extends PureComponent<Props, State> {
               disabled={false}
               mx={2}
             >
-              {t('app:common.skipThisStep')}
+              {t('common.skipThisStep')}
             </Button>
             <Button
               onClick={this.handleSave}
               disabled={!this.isValid() || !newPassword.length || !confirmPassword.length}
               primary
             >
-              {t('app:common.continue')}
+              {t('common.continue')}
             </Button>
           </Box>
         </OnboardingFooterWrapper>

@@ -136,17 +136,17 @@ class FirmwareUpdate extends PureComponent<Props, State> {
             <Box horizontal align="center">
               <Text ff="Open Sans|SemiBold" fontSize={4} color="dark">
                 {device.product === 'Blue'
-                  ? t('app:manager.firmware.titleBlue')
-                  : t('app:manager.firmware.titleNano')}
+                  ? t('manager.firmware.titleBlue')
+                  : t('manager.firmware.titleNano')}
               </Text>
               <Box color="wallet" ml={2}>
-                <Tooltip render={() => t('app:manager.yourDeviceIsGenuine')}>
+                <Tooltip render={() => t('manager.yourDeviceIsGenuine')}>
                   <CheckFull size={13} color="wallet" />
                 </Tooltip>
               </Box>
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>
-              {t('app:manager.firmware.installed', {
+              {t('manager.firmware.installed', {
                 version: deviceInfo.fullVersion,
               })}
             </Text>

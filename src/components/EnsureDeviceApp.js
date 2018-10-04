@@ -74,7 +74,7 @@ class EnsureDeviceApp extends Component<{
     const cur = account ? account.currency : currency
     invariant(cur, 'No currency given')
     return (
-      <Trans i18nKey="app:deviceConnect.step2.open" parent="div">
+      <Trans i18nKey="deviceConnect.step2.open" parent="div">
         {'Open the '}
         <Bold>{cur.managerAppName}</Bold>
         {' app on your device'}
@@ -94,7 +94,7 @@ class EnsureDeviceApp extends Component<{
           {
             id: 'device',
             title: (
-              <Trans i18nKey="app:deviceConnect.step1.connect" parent="div">
+              <Trans i18nKey="deviceConnect.step1.connect" parent="div">
                 {'Connect and unlock your '}
                 <Bold>{'Ledger device'}</Bold>
               </Trans>

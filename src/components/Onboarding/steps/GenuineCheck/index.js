@@ -59,12 +59,12 @@ class GenuineCheck extends PureComponent<StepProps, State> {
     const { t } = this.props
     return [
       {
-        label: t('app:common.labelYes'),
+        label: t('common.labelYes'),
         key: 'yes',
         pass: true,
       },
       {
-        label: t('app:common.labelNo'),
+        label: t('common.labelNo'),
         key: 'no',
         pass: false,
       },
@@ -174,18 +174,18 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
         />
         <StepContainerInner>
-          <Title>{t('app:onboarding.genuineCheck.title')}</Title>
+          <Title>{t('onboarding.genuineCheck.title')}</Title>
           {onboarding.flowType === 'restoreDevice' ? (
-            <Description>{t('app:onboarding.genuineCheck.descRestore')}</Description>
+            <Description>{t('onboarding.genuineCheck.descRestore')}</Description>
           ) : (
-            <Description>{t('app:onboarding.genuineCheck.descGeneric')}</Description>
+            <Description>{t('onboarding.genuineCheck.descGeneric')}</Description>
           )}
           <Box mt={5}>
             <GenuineCheckCardWrapper>
               <Box justify="center">
                 <Box horizontal>
                   <IconOptionRow>{'1.'}</IconOptionRow>
-                  <CardTitle>{t('app:onboarding.genuineCheck.step1.title')}</CardTitle>
+                  <CardTitle>{t('onboarding.genuineCheck.step1.title')}</CardTitle>
                 </Box>
               </Box>
               <Box justify="center">
@@ -204,7 +204,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>
                     {'2.'}
                   </IconOptionRow>
-                  <CardTitle>{t('app:onboarding.genuineCheck.step2.title')}</CardTitle>
+                  <CardTitle>{t('onboarding.genuineCheck.step2.title')}</CardTitle>
                 </Box>
               </Box>
               <Box justify="center">
@@ -228,7 +228,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                   <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
                     {'3.'}
                   </IconOptionRow>
-                  <CardTitle>{t('app:onboarding.genuineCheck.step3.title')}</CardTitle>
+                  <CardTitle>{t('onboarding.genuineCheck.step3.title')}</CardTitle>
                 </Box>
               </Box>
               {genuine.recoveryStepPass && (
@@ -237,7 +237,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                     <Box horizontal align="center" flow={1} color={colors.wallet}>
                       <IconCheck size={16} />
                       <Box ff="Open Sans|SemiBold" fontSize={4}>
-                        {t('app:onboarding.genuineCheck.isGenuinePassed')}
+                        {t('onboarding.genuineCheck.isGenuinePassed')}
                       </Box>
                     </Box>
                   ) : genuine.genuineCheckUnavailable ? (
@@ -250,7 +250,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
                       disabled={!genuine.recoveryStepPass}
                       onClick={this.handleOpenGenuineCheckModal}
                     >
-                      {t('app:onboarding.genuineCheck.buttons.genuineCheck')}
+                      {t('onboarding.genuineCheck.buttons.genuineCheck')}
                     </Button>
                   )}
                 </Box>

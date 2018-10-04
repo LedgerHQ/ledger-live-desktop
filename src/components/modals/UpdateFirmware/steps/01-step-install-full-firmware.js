@@ -149,11 +149,11 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     ) : (
       <Fragment>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
-          {t('app:manager.modal.confirmIdentifierText')}
+          {t('manager.modal.confirmIdentifierText')}
         </Text>
         <Box mx={7} mt={5}>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
-            {t('app:manager.modal.identifier')}
+            {t('manager.modal.identifier')}
           </Text>
           <Address>
             {firmware &&
@@ -175,7 +175,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     const { t } = this.props
     return (
       <Container>
-        <Title>{installing ? '' : t('app:manager.modal.confirmIdentifier')}</Title>
+        <Title>{installing ? '' : t('manager.modal.confirmIdentifier')}</Title>
         <TrackPage category="Manager" name="InstallFirmware" />
         {this.renderBody()}
       </Container>

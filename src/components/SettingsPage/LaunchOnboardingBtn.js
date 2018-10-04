@@ -27,7 +27,7 @@ class LaunchOnboardingBtn extends PureComponent<Props> {
       <Fragment>
         <Track onUpdate event={'Launch Onboarding from Settings'} />
         <Button primary small onClick={this.handleLaunchOnboarding}>
-          {t('app:common.launch')}
+          {t('common.launch')}
         </Button>
       </Fragment>
     )

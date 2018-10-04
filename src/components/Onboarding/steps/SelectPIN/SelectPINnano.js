@@ -25,19 +25,19 @@ class SelectPINnano extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('app:onboarding.selectPIN.initialize.instructions.nano.step1'),
+        desc: t('onboarding.selectPIN.initialize.instructions.nano.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('app:onboarding.selectPIN.initialize.instructions.nano.step2'),
+        desc: t('onboarding.selectPIN.initialize.instructions.nano.step2'),
       },
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="app:onboarding.selectPIN.initialize.instructions.nano.step3">
+            <Trans i18nKey="onboarding.selectPIN.initialize.instructions.nano.step3">
               {'Press the right button to select'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Configure as new device'}
@@ -49,24 +49,24 @@ class SelectPINnano extends PureComponent<Props, *> {
       {
         key: 'step4',
         icon: <IconOptionRow>{'4.'}</IconOptionRow>,
-        desc: t('app:onboarding.selectPIN.initialize.instructions.nano.step4'),
+        desc: t('onboarding.selectPIN.initialize.instructions.nano.step4'),
       },
     ]
     const disclaimerNotes = [
       {
         key: 'note1',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('app:onboarding.selectPIN.disclaimer.note1'),
+        desc: t('onboarding.selectPIN.disclaimer.note1'),
       },
       {
         key: 'note2',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('app:onboarding.selectPIN.disclaimer.note2'),
+        desc: t('onboarding.selectPIN.disclaimer.note2'),
       },
       {
         key: 'note3',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('app:onboarding.selectPIN.disclaimer.note3'),
+        desc: t('onboarding.selectPIN.disclaimer.note3'),
       },
     ]
 

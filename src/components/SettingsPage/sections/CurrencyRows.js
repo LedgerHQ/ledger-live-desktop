@@ -63,10 +63,10 @@ class CurrencyRows extends PureComponent<Props> {
       <Fragment>
         {currency !== intermediaryCurrency ? (
           <Row
-            title={t('app:settings.currencies.exchange', {
+            title={t('settings.currencies.exchange', {
               ticker: currency.ticker,
             })}
-            desc={t('app:settings.currencies.exchangeDesc', {
+            desc={t('settings.currencies.exchangeDesc', {
               currencyName: currency.name,
             })}
           >
@@ -82,8 +82,8 @@ class CurrencyRows extends PureComponent<Props> {
         ) : null}
         {defaults.confirmationsNb ? (
           <Row
-            title={t('app:settings.currencies.confirmationsNb')}
-            desc={t('app:settings.currencies.confirmationsNbDesc')}
+            title={t('settings.currencies.confirmationsNb')}
+            desc={t('settings.currencies.confirmationsNbDesc')}
           >
             <Track onUpdate event="ConfirmationsNb" confirmationsNb={confirmationsNb} />
             <StepperNumber

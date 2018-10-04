@@ -67,19 +67,19 @@ class AccountHeaderActions extends PureComponent<Props> {
             <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
               <Box horizontal flow={1} alignItems="center">
                 <IconSend size={12} />
-                <Box>{t('app:send.title')}</Box>
+                <Box>{t('send.title')}</Box>
               </Box>
             </Button>
 
             <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
               <Box horizontal flow={1} alignItems="center">
                 <IconReceive size={12} />
-                <Box>{t('app:receive.title')}</Box>
+                <Box>{t('receive.title')}</Box>
               </Box>
             </Button>
           </Fragment>
         ) : null}
-        <Tooltip render={() => t('app:account.settings.title')}>
+        <Tooltip render={() => t('account.settings.title')}>
           <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
             <Box justifyContent="center">
               <IconAccountSettings size={16} />

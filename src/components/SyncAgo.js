@@ -9,7 +9,7 @@ import Box from './base/Box'
 class SyncAgo extends PureComponent<{ t: T, date: Date }> {
   render() {
     const { t, date } = this.props
-    return <Box p={4}>{t('app:common.sync.ago', { time: moment(date).fromNow() })}</Box>
+    return <Box p={4}>{t('common.sync.ago', { time: moment(date).fromNow() })}</Box>
   }
 }
 

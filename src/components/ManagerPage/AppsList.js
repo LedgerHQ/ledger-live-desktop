@@ -214,7 +214,7 @@ class AppsList extends PureComponent<Props, State> {
                 </ModalTitle>
                 <ModalContent>
                   <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-                    {t(`app:manager.apps.${mode}`, { app })}
+                    {t(`manager.apps.${mode}`, { app })}
                   </Text>
                   <Box mt={6}>
                     <Progress style={{ width: '100%' }} infinite />
@@ -256,7 +256,7 @@ class AppsList extends PureComponent<Props, State> {
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
                   <Button primary onClick={this.handleCloseModal}>
-                    {t('app:common.close')}
+                    {t('common.close')}
                   </Button>
                 </ModalFooter>
               </Fragment>
@@ -275,7 +275,7 @@ class AppsList extends PureComponent<Props, State> {
                     style={{ maxWidth: 350 }}
                   >
                     {t(
-                      `app:manager.apps.${
+                      `manager.apps.${
                         mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'
                       }`,
                       { app },
@@ -284,7 +284,7 @@ class AppsList extends PureComponent<Props, State> {
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
                   <Button primary onClick={this.handleCloseModal}>
-                    {t('app:common.close')}
+                    {t('common.close')}
                   </Button>
                 </ModalFooter>
               </Fragment>
@@ -342,11 +342,11 @@ class AppsList extends PureComponent<Props, State> {
       <Box flow={6}>
         <Box>
           <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal align="center">
-            <span style={{ lineHeight: 1 }}>{t('app:manager.apps.all')}</span>
+            <span style={{ lineHeight: 1 }}>{t('manager.apps.all')}</span>
             <Tooltip
               render={() => (
                 <Box ff="Open Sans|SemiBold" fontSize={2}>
-                  {t('app:manager.apps.help')}
+                  {t('manager.apps.help')}
                 </Box>
               )}
             >

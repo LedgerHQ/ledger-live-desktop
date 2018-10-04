@@ -91,11 +91,11 @@ class AccountsOrder extends Component<Props> {
     return [
       {
         key: 'name',
-        label: t('app:dashboard.accountsOrder.name'),
+        label: t('dashboard.accountsOrder.name'),
       },
       {
         key: 'balance',
-        label: t('app:dashboard.accountsOrder.balance'),
+        label: t('dashboard.accountsOrder.balance'),
       },
     ].map(item => ({
       ...item,
@@ -141,7 +141,7 @@ class AccountsOrder extends Component<Props> {
       >
         <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
         <Text ff="Open Sans|SemiBold" fontSize={4}>
-          {t('app:common.sortBy')}
+          {t('common.sortBy')}
         </Text>
         <Box
           alignItems="center"
@@ -152,7 +152,7 @@ class AccountsOrder extends Component<Props> {
           horizontal
         >
           <Text color="dark">
-            {t(`app:dashboard.accountsOrder.${this.getCurrentValue() || 'balance'}`)}
+            {t(`dashboard.accountsOrder.${this.getCurrentValue() || 'balance'}`)}
           </Text>
           <IconAngleDown size={16} />
         </Box>

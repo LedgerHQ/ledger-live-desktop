@@ -40,23 +40,21 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
         {onboarding.genuine.isGenuineFail ? (
           <Fragment>
             {this.trackErrorPage('Not Genuine')}
-            <Title>{t('app:onboarding.genuineCheck.errorPage.title.isGenuineFail')}</Title>
-            <Description>
-              {t('app:onboarding.genuineCheck.errorPage.desc.isGenuineFail')}
-            </Description>
+            <Title>{t('onboarding.genuineCheck.errorPage.title.isGenuineFail')}</Title>
+            <Description>{t('onboarding.genuineCheck.errorPage.desc.isGenuineFail')}</Description>
           </Fragment>
         ) : !onboarding.genuine.pinStepPass ? (
           <Fragment>
             {this.trackErrorPage('PIN Step')}
-            <Title>{t('app:onboarding.genuineCheck.errorPage.title.pinFailed')}</Title>
-            <Description>{t('app:onboarding.genuineCheck.errorPage.desc.pinFailed')}</Description>
+            <Title>{t('onboarding.genuineCheck.errorPage.title.pinFailed')}</Title>
+            <Description>{t('onboarding.genuineCheck.errorPage.desc.pinFailed')}</Description>
           </Fragment>
         ) : (
           <Fragment>
             {this.trackErrorPage('Recovery Phase Step')}
-            <Title>{t('app:onboarding.genuineCheck.errorPage.title.recoveryPhraseFailed')}</Title>
+            <Title>{t('onboarding.genuineCheck.errorPage.title.recoveryPhraseFailed')}</Title>
             <Description>
-              {t('app:onboarding.genuineCheck.errorPage.desc.recoveryPhraseFailed')}
+              {t('onboarding.genuineCheck.errorPage.desc.recoveryPhraseFailed')}
             </Description>
           </Fragment>
         )}
@@ -80,12 +78,12 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
         </Box>
         <OnboardingFooterWrapper>
           <Button outlineGrey onClick={() => redoGenuineCheck()}>
-            {t('app:common.back')}
+            {t('common.back')}
           </Button>
           <ExternalLinkButton
             danger
             ml="auto"
-            label={t('app:onboarding.genuineCheck.buttons.contactSupport')}
+            label={t('onboarding.genuineCheck.buttons.contactSupport')}
             url={urls.contactSupport}
           />
         </OnboardingFooterWrapper>

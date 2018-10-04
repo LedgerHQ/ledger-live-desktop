@@ -24,7 +24,7 @@ class PillsDaysCount extends PureComponent<Props> {
           items={Object.keys(timeRangeDaysByKey).map((key: TimeRange) => ({
             key,
             value: timeRangeDaysByKey[key],
-            label: t(`app:time.${key}`),
+            label: t(`time.${key}`),
           }))}
           activeKey={selected}
           onChange={onChange}

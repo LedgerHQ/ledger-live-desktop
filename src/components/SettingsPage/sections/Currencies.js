@@ -47,8 +47,8 @@ class TabCurrencies extends PureComponent<Props, State> {
         <TrackPage category="Settings" name="Currencies" currencyId={currency.id} />
         <Header
           icon={<IconCurrencies size={16} />}
-          title={t('app:settings.tabs.currencies')}
-          desc={t('app:settings.currencies.desc')}
+          title={t('settings.tabs.currencies')}
+          desc={t('settings.currencies.desc')}
           renderRight={
             <SelectCurrency
               small

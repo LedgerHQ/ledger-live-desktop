@@ -14,7 +14,7 @@ type Props = {
 class RetryButton extends PureComponent<Props> {
   render() {
     const { t, ...props } = this.props
-    return <Button {...props}>{t('app:common.retry')}</Button>
+    return <Button {...props}>{t('common.retry')}</Button>
   }
 }
 
