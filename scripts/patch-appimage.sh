@@ -29,6 +29,9 @@ for PACKAGE in "${LIBRARIES[@]}"; do
   rm "$PACKAGE$PACKAGE_SUFFIX"
 done
 
+cp "$OLDPWD/scripts/shasums/kernel-libs.txt" .
+sha512sum --quiet --check kernel-libs.txt || exit 1
+
 ./ledger-live-desktop-"$LEDGER_LIVE_VERSION"-linux-x86_64.AppImage --appimage-extract
 cp -a usr/lib/x86_64-linux-gnu/*.so.* squashfs-root/usr/lib
 
