@@ -10,7 +10,7 @@ import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
-import isAccountEmpty from 'helpers/isAccountEmpty'
+import { isAccountEmpty } from '@ledgerhq/live-common/lib/helpers/account'
 
 import { getBridgeForCurrency } from 'bridge'
 

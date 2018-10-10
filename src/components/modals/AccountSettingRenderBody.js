@@ -10,7 +10,7 @@ import { translate } from 'react-i18next'
 import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { MODAL_SETTINGS_ACCOUNT, MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
-import { validateNameEdition } from 'helpers/accountName'
+import { validateNameEdition } from '@ledgerhq/live-common/lib/helpers/account'
 
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'

@@ -1747,10 +1747,23 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@3.8.0":
+"@ledgerhq/live-common@/Users/gre/dev/ledger-live-common":
   version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-3.8.0.tgz#8a956f4995c6006d7788a98959d0b0cab92307f6"
-  integrity sha512-ZfhNP9Zt6LGVJhwIdGqeqUZdele6cWEiGDsuXl5NGxS5BGuFZFp7MfrQ7IQWIaePQ5/A1FMy4SoOkgdPskqtvw==
+  dependencies:
+    axios "^0.18.0"
+    bignumber.js "^7.2.1"
+    invariant "^2.2.2"
+    lodash "^4.17.4"
+    node-lzw "^0.3.1"
+    numeral "^2.0.6"
+    prando "^3.0.1"
+    react "^16.4.0"
+    react-redux "^5.0.7"
+    redux "^4.0.0"
+    reselect "^3.0.1"
+
+"@ledgerhq/live-common@file:../ledger-live-common":
+  version "3.8.0"
   dependencies:
     axios "^0.18.0"
     bignumber.js "^7.2.1"
@@ -1790,6 +1803,21 @@
     https-proxy-agent "^2.2.0"
     lodash "^4.17.4"
     node-fetch "^2.1.1"
+    url-template "^2.0.8"
+
+"@octokit/rest@^15.2.6":
+  version "15.13.1"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-15.13.1.tgz#68b12ff0e470ad70c90e99bbb69f16bcdf62edb4"
+  integrity sha512-r6aRAZaaUZkTqtI4seaSamvgqmYswXpxclIqUrwtFtOuRAnE7l0aeWU252vQ/mxd1wKZWMq1oFChzk0/qzcYcg==
+  dependencies:
+    before-after-hook "^1.1.0"
+    btoa-lite "^1.0.0"
+    debug "^3.1.0"
+    http-proxy-agent "^2.1.0"
+    https-proxy-agent "^2.2.0"
+    lodash "^4.17.4"
+    node-fetch "^2.1.1"
+    universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
 "@posthtml/esm@^1.0.0":
@@ -7879,6 +7907,27 @@ flow-typed@^2.4.0:
     which "^1.3.0"
     yargs "^4.2.0"
 
+flow-typed@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/flow-typed/-/flow-typed-2.5.1.tgz#0ff565cc94d2af8c557744ba364b6f14726a6b9f"
+  integrity sha1-D/VlzJTSr4xVd0S6NktvFHJqa58=
+  dependencies:
+    "@octokit/rest" "^15.2.6"
+    babel-polyfill "^6.26.0"
+    colors "^1.1.2"
+    fs-extra "^5.0.0"
+    glob "^7.1.2"
+    got "^7.1.0"
+    md5 "^2.1.0"
+    mkdirp "^0.5.1"
+    rimraf "^2.6.2"
+    semver "^5.5.0"
+    table "^4.0.2"
+    through "^2.3.8"
+    unzipper "^0.8.11"
+    which "^1.3.0"
+    yargs "^4.2.0"
+
 flush-write-stream@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
@@ -10689,6 +10738,11 @@ lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.3:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
+macos-release@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-1.1.0.tgz#831945e29365b470aa8724b0ab36c8f8959d10fb"
+  integrity sha512-mmLbumEYMi5nXReB9js3WGsB8UE6cDBWyIO62Z4DNx6GbRhDxHNjA1MlzSpJ2S2KM1wyiPRA0d19uHWYYvMHjA==
+
 make-dir@^1.0.0, make-dir@^1.1.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.3.0.tgz#79c1033b80515bd6d24ec9933e860ca75ee27f0c"
@@ -11728,6 +11782,14 @@ os-locale@^2.0.0:
     lcid "^1.0.0"
     mem "^1.1.0"
 
+os-name@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/os-name/-/os-name-2.0.1.tgz#b9a386361c17ae3a21736ef0599405c9a8c5dc5e"
+  integrity sha1-uaOGNhwXrjohc27wWZQFyajF3F4=
+  dependencies:
+    macos-release "^1.0.0"
+    win-release "^1.0.0"
+
 os-tmpdir@^1.0.0, os-tmpdir@^1.0.1, os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
@@ -12744,6 +12806,14 @@ qrcode@^1.2.0:
     isarray "^2.0.1"
     pngjs "^3.3.0"
     yargs "^8.0.2"
+
+qrloop@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/qrloop/-/qrloop-0.6.1.tgz#167f8868f03018c7625b0e887049830e9253beae"
+  integrity sha512-1wJwoKpukmkfqwzyb9lMMEE9BDWXlKv63J/gdWMIeUfzgSR3QrZ3VKTtjN9Xvyo1DWwJd/G3FuMtJaH9cf+XUw==
+  dependencies:
+    flow-typed "^2.5.1"
+    md5 "^2.2.1"
 
 qs@6.5.1:
   version "6.5.1"
@@ -14170,6 +14240,11 @@ semver-diff@^2.0.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
   integrity sha512-4SJ3dm0WAwWy/NVeioZh5AntkdJoWKxHxcmyP622fOkgHa4z3R0TdBJICINyaSDE6uNwVc8gZr+ZinwZAH4xIA==
+
+semver@^5.0.1:
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
+  integrity sha512-PqpAxfrEhlSUWge8dwIp4tZnQ25DIOthpiaHNIthsjEFQD6EvqUKUDM7L8O2rShkFccYo1VjJR0coWfNkCubRw==
 
 semver@~5.3.0:
   version "5.3.0"
@@ -15640,6 +15715,13 @@ unist-util-visit@^1.1.0, unist-util-visit@^1.3.0:
   dependencies:
     unist-util-is "^2.1.1"
 
+universal-user-agent@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/universal-user-agent/-/universal-user-agent-2.0.1.tgz#18e591ca52b1cb804f6b9cbc4c336cf8191f80e1"
+  integrity sha512-vz+heWVydO0iyYAa65VHD7WZkYzhl7BeNVy4i54p4TF8OMiLSXdbuQe4hm+fmWAsL+rVibaQHXfhvkw3c1Ws2w==
+  dependencies:
+    os-name "^2.0.1"
+
 universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
@@ -16400,6 +16482,13 @@ wif@^2.0.1:
   integrity sha1-CNP1IFbGZnkplyb63g1DKudLRwQ=
   dependencies:
     bs58check "<3.0.0"
+
+win-release@^1.0.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/win-release/-/win-release-1.1.1.tgz#5fa55e02be7ca934edfc12665632e849b72e5209"
+  integrity sha1-X6VeAr58qTTt/BJmVjLoSbcuUgk=
+  dependencies:
+    semver "^5.0.1"
 
 window-or-global@^1.0.1:
   version "1.0.1"

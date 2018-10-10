@@ -7,20 +7,23 @@ import { connect } from 'react-redux'
 
 import { accountsSelector } from 'reducers/accounts'
 import { exportSettingsSelector } from 'reducers/settings'
-import { makeChunks } from '@ledgerhq/live-common/lib/bridgestream/exporter'
+import { encode } from '@ledgerhq/live-common/lib/bridgestream'
+import { dataToFrames } from 'qrloop/exporter'
 import QRCode from './base/QRCode'
 
 const mapStateToProps = createSelector(
   accountsSelector,
   exportSettingsSelector,
   (accounts, settings) => ({
-    chunks: makeChunks({
-      accounts,
-      settings,
-      exporterName: 'desktop',
-      exporterVersion: __APP_VERSION__,
-      chunkSize: 120,
-    }),
+    chunks: dataToFrames(
+      encode({
+        accounts,
+        settings,
+        exporterName: 'desktop',
+        exporterVersion: __APP_VERSION__,
+        chunkSize: 120,
+      }),
+    ),
   }),
 )
 

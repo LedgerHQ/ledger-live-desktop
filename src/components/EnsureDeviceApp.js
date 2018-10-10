@@ -10,8 +10,11 @@ import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import logger from 'logger'
 import getAddress from 'commands/getAddress'
 import { createCancelablePolling } from 'helpers/promise'
-import { standardDerivation } from 'helpers/derivations'
-import { isSegwitPath } from 'helpers/bip32'
+import {
+  isSegwitDerivationMode,
+  getDerivationScheme,
+  runDerivationScheme,
+} from '@ledgerhq/live-common/lib/helpers/derivation'
 
 import DeviceInteraction from 'components/DeviceInteraction'
 import Text from 'components/base/Text'
@@ -122,8 +125,8 @@ async function getAddressFromAccountOrCurrency(device, account, currency) {
       currencyId: currency.id,
       path: account
         ? account.freshAddressPath
-        : standardDerivation({ currency, segwit: false, x: 0 }),
-      segwit: account ? isSegwitPath(account.freshAddressPath) : false,
+        : runDerivationScheme(getDerivationScheme({ currency, derivationMode: '' })),
+      segwit: account ? isSegwitDerivationMode(account.derivationMode) : false,
     })
     .toPromise()
   return address

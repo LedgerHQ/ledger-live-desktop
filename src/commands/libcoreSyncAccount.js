@@ -1,6 +1,7 @@
 // @flow
 
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 
 import { createCommand, Command } from 'helpers/ipc'
@@ -9,15 +10,24 @@ import withLibcore from 'helpers/withLibcore'
 
 type Input = {
   accountId: string,
-  freshAddressPath: string,
   currencyId: string,
+  xpub: string,
+  derivationMode: string,
+  seedIdentifier: string,
   index: number,
 }
 
 type Result = { rawAccount: AccountRaw, requiresCacheFlush: boolean }
 
-const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', accountInfos =>
-  fromPromise(withLibcore(core => syncAccount({ ...accountInfos, core }))),
+const cmd: Command<Input, Result> = createCommand(
+  'libcoreSyncAccount',
+  ({ currencyId, ...accountInfos }) =>
+    fromPromise(
+      withLibcore(core => {
+        const currency = getCryptoCurrencyById(currencyId)
+        return syncAccount({ ...accountInfos, currency, core })
+      }),
+    ),
 )
 
 export default cmd

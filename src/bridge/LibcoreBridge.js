@@ -129,7 +129,9 @@ const LibcoreBridge: WalletBridge<Transaction> = {
     libcoreSyncAccount
       .send({
         accountId: account.id,
-        freshAddressPath: account.freshAddressPath,
+        derivationMode: account.derivationMode,
+        xpub: account.xpub || '',
+        seedIdentifier: account.seedIdentifier,
         index: account.index,
         currencyId: account.currency.id,
       })
@@ -218,9 +220,9 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       .send({
         accountId: account.id,
         currencyId: account.currency.id,
-        xpub: account.xpub,
-        freshAddress: account.freshAddress,
-        freshAddressPath: account.freshAddressPath,
+        xpub: account.xpub || '', // FIXME only reason is to build the op id. we need to consider another id for making op id.
+        derivationMode: account.derivationMode,
+        seedIdentifier: account.seedIdentifier,
         index: account.index,
         transaction: serializeTransaction(transaction),
         deviceId,

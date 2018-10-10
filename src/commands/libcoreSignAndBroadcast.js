@@ -2,22 +2,21 @@
 
 import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
-import type { OperationRaw } from '@ledgerhq/live-common/lib/types'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
+import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/helpers/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-import { isSegwitPath, isUnsplitPath } from 'helpers/bip32'
+import type { OperationRaw, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import { getWalletName } from '@ledgerhq/live-common/lib/helpers/account'
 import {
   libcoreAmountToBigNumber,
   bigNumberToLibcoreAmount,
   getOrCreateWallet,
 } from 'helpers/libcore'
-import { splittedCurrencies } from 'config/cryptocurrencies'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
 import { withDevice } from 'helpers/deviceAccess'
-import * as accountIdHelper from 'helpers/accountId'
 
 type BitcoinLikeTransaction = {
   amount: string,
@@ -28,9 +27,9 @@ type BitcoinLikeTransaction = {
 type Input = {
   accountId: string,
   currencyId: string,
+  derivationMode: string,
+  seedIdentifier: string,
   xpub: string,
-  freshAddress: string,
-  freshAddressPath: string,
   index: number,
   transaction: BitcoinLikeTransaction,
   deviceId: string,
@@ -42,17 +41,18 @@ type Result = { type: 'signed' } | { type: 'broadcasted', operation: OperationRa
 
 const cmd: Command<Input, Result> = createCommand(
   'libcoreSignAndBroadcast',
-  ({ accountId, currencyId, xpub, freshAddress, freshAddressPath, index, transaction, deviceId }) =>
+  ({ accountId, currencyId, derivationMode, seedIdentifier, xpub, index, transaction, deviceId }) =>
     Observable.create(o => {
       let unsubscribed = false
+      const currency = getCryptoCurrencyById(currencyId)
       const isCancelled = () => unsubscribed
       withLibcore(core =>
         doSignAndBroadcast({
           accountId,
-          currencyId,
+          currency,
+          derivationMode,
+          seedIdentifier,
           xpub,
-          freshAddress,
-          freshAddressPath,
           index,
           transaction,
           deviceId,
@@ -78,28 +78,26 @@ const cmd: Command<Input, Result> = createCommand(
 
 async function signTransaction({
   hwApp,
-  currencyId,
+  currency,
   transaction,
+  derivationMode,
   sigHashType,
-  supportsSegwit,
-  isSegwit,
   hasTimestamp,
 }: {
   hwApp: Btc,
-  currencyId: string,
+  currency: CryptoCurrency,
   transaction: *,
+  derivationMode: string,
   sigHashType: number,
-  supportsSegwit: boolean,
-  isSegwit: boolean,
   hasTimestamp: boolean,
 }) {
   const additionals = []
   let expiryHeight
-  if (currencyId === 'bitcoin_cash' || currencyId === 'bitcoin_gold') additionals.push('bip143')
-  if (currencyId === 'zcash') expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
+  if (currency.id === 'bitcoin_cash' || currency.id === 'bitcoin_gold') additionals.push('bip143')
+  if (currency.id === 'zcash') expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
   const rawInputs = transaction.getInputs()
 
-  const hasExtraData = currencyId === 'zcash'
+  const hasExtraData = currency.id === 'zcash'
 
   const inputs = await Promise.all(
     rawInputs.map(async input => {
@@ -107,7 +105,7 @@ async function signTransaction({
       const hexPreviousTransaction = Buffer.from(rawPreviousTransaction).toString('hex')
       const previousTransaction = hwApp.splitTransaction(
         hexPreviousTransaction,
-        supportsSegwit,
+        currency.supportsSegwit,
         hasTimestamp,
         hasExtraData,
       )
@@ -156,7 +154,7 @@ async function signTransaction({
     outputScriptHex,
     lockTime,
     sigHashType,
-    isSegwit,
+    isSegwitDerivationMode(derivationMode),
     initialTimestamp,
     additionals,
     expiryHeight,
@@ -167,9 +165,10 @@ async function signTransaction({
 
 export async function doSignAndBroadcast({
   accountId,
-  currencyId,
+  derivationMode,
+  seedIdentifier,
+  currency,
   xpub,
-  freshAddressPath,
   index,
   transaction,
   deviceId,
@@ -179,10 +178,10 @@ export async function doSignAndBroadcast({
   onOperationBroadcasted,
 }: {
   accountId: string,
-  currencyId: string,
+  derivationMode: string,
+  seedIdentifier: string,
+  currency: CryptoCurrency,
   xpub: string,
-  freshAddress: string,
-  freshAddressPath: string,
   index: number,
   transaction: BitcoinLikeTransaction,
   deviceId: string,
@@ -191,11 +190,9 @@ export async function doSignAndBroadcast({
   onSigned: () => void,
   onOperationBroadcasted: (optimisticOp: $Exact<OperationRaw>) => void,
 }): Promise<void> {
-  const { walletName } = accountIdHelper.decode(accountId)
+  const walletName = getWalletName({ currency, seedIdentifier, derivationMode })
 
-  const isSegwit = isSegwitPath(freshAddressPath)
-  const isUnsplit = isUnsplitPath(freshAddressPath, splittedCurrencies[currencyId])
-  const njsWallet = await getOrCreateWallet(core, walletName, { currencyId, isSegwit, isUnsplit })
+  const njsWallet = await getOrCreateWallet(core, walletName, { currency, derivationMode })
   if (isCancelled()) return
   const njsAccount = await njsWallet.getAccount(index)
   if (isCancelled()) return
@@ -221,17 +218,14 @@ export async function doSignAndBroadcast({
   const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
   // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
 
-  const currency = getCryptoCurrencyById(currencyId)
-
   const signedTransaction = await withDevice(deviceId)(async transport =>
     signTransaction({
       hwApp: new Btc(transport),
-      currencyId,
+      currency,
       transaction: builded,
       sigHashType: parseInt(sigHashType, 16),
-      supportsSegwit: !!currency.supportsSegwit,
-      isSegwit: isSegwitPath(freshAddressPath),
       hasTimestamp,
+      derivationMode,
     }),
   )
 

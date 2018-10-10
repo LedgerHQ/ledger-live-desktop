@@ -35,12 +35,3 @@ export const listCryptoCurrencies = memoize((withDevCrypto?: boolean) =>
     .filter(c => supported.includes(c.id))
     .sort((a, b) => a.name.localeCompare(b.name)),
 )
-
-export const splittedCurrencies = {
-  bitcoin_cash: {
-    coinType: 0,
-  },
-  bitcoin_gold: {
-    coinType: 0,
-  },
-}

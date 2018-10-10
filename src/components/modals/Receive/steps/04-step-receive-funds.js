@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
 import getAddress from 'commands/getAddress'
-import { isSegwitPath } from 'helpers/bip32'
+import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/helpers/derivation'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import { DisconnectedDevice, WrongDeviceForAccount } from 'config/errors'
@@ -29,7 +29,7 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
         currencyId: account.currency.id,
         devicePath: device.path,
         path: account.freshAddressPath,
-        segwit: isSegwitPath(account.freshAddressPath),
+        segwit: isSegwitDerivationMode(account.derivationMode),
         verify: true,
       }
       const { address } = await getAddress.send(params).toPromise()

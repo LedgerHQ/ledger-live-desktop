@@ -10,7 +10,7 @@ import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/oper
 import Prando from 'prando'
 import { BigNumber } from 'bignumber.js'
 import type { Operation } from '@ledgerhq/live-common/lib/types'
-import { validateNameEdition } from 'helpers/accountName'
+import { validateNameEdition } from '@ledgerhq/live-common/lib/helpers/account'
 import { MOCK_DATA_SEED } from 'config/constants'
 import type { WalletBridge } from './types'
 

@@ -23,7 +23,7 @@ import { closeModal } from 'reducers/modals'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
-import { validateNameEdition } from 'helpers/accountName'
+import { validateNameEdition } from '@ledgerhq/live-common/lib/helpers/account'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
