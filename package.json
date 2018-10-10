@@ -34,11 +34,11 @@
     }
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "4.21.0",
-    "@ledgerhq/hw-app-eth": "^4.14.0",
-    "@ledgerhq/hw-app-xrp": "^4.13.0",
-    "@ledgerhq/hw-transport": "^4.13.0",
-    "@ledgerhq/hw-transport-node-hid": "4.22.0",
+    "@ledgerhq/hw-app-btc": "4.24.0",
+    "@ledgerhq/hw-app-eth": "^4.24.0",
+    "@ledgerhq/hw-app-xrp": "^4.24.0",
+    "@ledgerhq/hw-transport": "^4.24.0",
+    "@ledgerhq/hw-transport-node-hid": "4.24.0",
     "@ledgerhq/ledger-core": "2.0.0-rc.8",
     "@ledgerhq/live-common": "3.8.0",
     "animated": "^0.2.2",
