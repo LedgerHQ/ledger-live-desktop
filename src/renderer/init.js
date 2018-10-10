@@ -18,6 +18,7 @@ import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { lock } from 'reducers/application'
 import { languageSelector, sentryLogsSelector } from 'reducers/settings'
+import { commandsById } from 'commands'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 
 import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
@@ -111,6 +112,14 @@ async function init() {
     },
     false,
   )
+
+  // expose stuff in Windows for DEBUG purpose
+
+  window.ledger = {
+    commands: commandsById,
+    store,
+    db,
+  }
 }
 
 function r(Comp) {

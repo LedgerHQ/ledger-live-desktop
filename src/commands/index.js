@@ -69,8 +69,11 @@ const all: Array<Command<any, any>> = [
   uninstallApp,
 ]
 
+export const commandsById = {}
+
 all.forEach(cmd => {
   invariant(!all.some(c => c !== cmd && c.id === cmd.id), `duplicate command '${cmd.id}'`)
+  commandsById[cmd.id] = cmd
 })
 
 export default all
