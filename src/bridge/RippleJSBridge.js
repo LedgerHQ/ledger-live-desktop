@@ -11,11 +11,11 @@ import {
   getDerivationModesForCurrency,
   getDerivationScheme,
   runDerivationScheme,
-} from '@ledgerhq/live-common/lib/helpers/derivation'
+} from '@ledgerhq/live-common/lib/derivation'
 import {
   getAccountPlaceholderName,
   getNewAccountPlaceholderName,
-} from '@ledgerhq/live-common/lib/helpers/account'
+} from '@ledgerhq/live-common/lib/account'
 import getAddress from 'commands/getAddress'
 import signTransaction from 'commands/signTransaction'
 import {
@@ -300,13 +300,15 @@ const RippleJSBridge: WalletBridge<Transaction> = {
           for (const derivationMode of derivationModes) {
             const derivationScheme = getDerivationScheme({ derivationMode, currency })
             for (let index = 0; index < 255; index++) {
-              const freshAddressPath = runDerivationScheme(derivationScheme, { account: index })
-              const { address, publicKey } = await await getAddress
+              const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
+                account: index,
+              })
+              const { address } = await await getAddress
                 .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
                 .toPromise()
               if (finished) return
 
-              const accountId = `ripplejs:2:${currency.id}:${address}:${publicKey}`
+              const accountId = `ripplejs:2:${currency.id}:${address}:${derivationMode}`
 
               let info
               try {

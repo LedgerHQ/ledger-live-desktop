@@ -2,7 +2,7 @@
 
 import React, { Component, Fragment } from 'react'
 import { BigNumber } from 'bignumber.js'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import Chance from 'chance'
 import moment from 'moment'
 import { storiesOf } from '@storybook/react'

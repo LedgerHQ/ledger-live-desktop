@@ -7,17 +7,18 @@ import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
 import { withDevice } from 'helpers/deviceAccess'
 import {
+  getDerivationModesForCurrency,
   getDerivationScheme,
   isSegwitDerivationMode,
   isUnsplitDerivationMode,
-} from '@ledgerhq/live-common/lib/helpers/derivation'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+} from '@ledgerhq/live-common/lib/derivation'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import {
   encodeAccountId,
   getNewAccountPlaceholderName,
   getAccountPlaceholderName,
   getWalletName,
-} from '@ledgerhq/live-common/lib/helpers/account'
+} from '@ledgerhq/live-common/lib/account'
 import { SHOW_LEGACY_NEW_ACCOUNT, SYNC_TIMEOUT } from 'config/constants'
 
 import type {
@@ -45,55 +46,30 @@ type Props = {
   isUnsubscribed: () => boolean,
 }
 
+const shouldShowNewAccount = (currency, derivationMode) =>
+  derivationMode === ''
+    ? !!SHOW_LEGACY_NEW_ACCOUNT || !currency.supportsSegwit
+    : derivationMode === 'segwit'
+
 export async function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> {
   const { devicePath, currencyId, onAccountScanned, core, isUnsubscribed } = props
   const currency = getCryptoCurrencyById(currencyId)
 
-  const commonParams = {
-    core,
-    currency,
-    onAccountScanned,
-    devicePath,
-    isUnsubscribed,
-  }
-
   let allAccounts = []
 
-  // TODO use getDerivationModesForCurrency
-  // introduce an internal shouldShowNewAccount({currency, derivationMode})
-
-  const nonSegwitAccounts = await scanAccountsOnDeviceBySegwit({
-    ...commonParams,
-    showNewAccount: !!SHOW_LEGACY_NEW_ACCOUNT || !currency.supportsSegwit,
-    derivationMode: '',
-  })
-  allAccounts = allAccounts.concat(nonSegwitAccounts)
-
-  if (currency.supportsSegwit) {
-    const segwitAccounts = await scanAccountsOnDeviceBySegwit({
-      ...commonParams,
-      derivationMode: 'segwit',
-      showNewAccount: true,
+  const derivationModes = getDerivationModesForCurrency(currency)
+  for (let i = 0; i < derivationModes.length; i++) {
+    const derivationMode = derivationModes[i]
+    const accounts = await scanAccountsOnDeviceBySegwit({
+      core,
+      currency,
+      onAccountScanned,
+      devicePath,
+      isUnsubscribed,
+      showNewAccount: shouldShowNewAccount(currency, derivationMode),
+      derivationMode,
     })
-    allAccounts = allAccounts.concat(segwitAccounts)
-  }
-
-  if (currency.forkedFrom) {
-    const splittedAccounts = await scanAccountsOnDeviceBySegwit({
-      ...commonParams,
-      derivationMode: 'unsplit',
-      showNewAccount: false,
-    })
-    allAccounts = allAccounts.concat(splittedAccounts)
-
-    if (currency.supportsSegwit) {
-      const segwitAccounts = await scanAccountsOnDeviceBySegwit({
-        ...commonParams,
-        derivationMode: 'segwit_unsplit',
-        showNewAccount: false,
-      })
-      allAccounts = allAccounts.concat(segwitAccounts)
-    }
+    allAccounts = allAccounts.concat(accounts)
   }
 
   return allAccounts

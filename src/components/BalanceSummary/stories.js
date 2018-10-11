@@ -4,7 +4,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { number } from '@storybook/addon-knobs'
 import { translate } from 'react-i18next'
-import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/currencies'
 
 import BalanceInfos from './BalanceInfos'
 

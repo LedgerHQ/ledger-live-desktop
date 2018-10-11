@@ -7,7 +7,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
-import { isAccountEmpty } from '@ledgerhq/live-common/lib/helpers/account'
+import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
 
 import { MODAL_SEND, MODAL_RECEIVE, MODAL_SETTINGS_ACCOUNT } from 'config/constants'
 

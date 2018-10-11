@@ -4,10 +4,10 @@ import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
-import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/helpers/derivation'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import type { OperationRaw, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-import { getWalletName } from '@ledgerhq/live-common/lib/helpers/account'
+import { getWalletName } from '@ledgerhq/live-common/lib/account'
 import {
   libcoreAmountToBigNumber,
   bigNumberToLibcoreAmount,

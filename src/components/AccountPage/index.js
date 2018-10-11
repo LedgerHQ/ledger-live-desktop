@@ -8,7 +8,7 @@ import { Redirect } from 'react-router'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
-import { isAccountEmpty } from '@ledgerhq/live-common/lib/helpers/account'
+import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
 import {
   counterValueCurrencySelector,
   localeSelector,

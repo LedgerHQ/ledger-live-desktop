@@ -6,7 +6,7 @@ import { openURL } from 'helpers/linking'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
-import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
 import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
 import uniq from 'lodash/uniq'
 

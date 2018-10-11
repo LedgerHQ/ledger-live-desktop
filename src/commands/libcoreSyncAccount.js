@@ -1,7 +1,7 @@
 // @flow
 
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 
 import { createCommand, Command } from 'helpers/ipc'

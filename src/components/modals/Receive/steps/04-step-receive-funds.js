@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
 import getAddress from 'commands/getAddress'
-import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/helpers/derivation'
+import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
 import { DisconnectedDevice, WrongDeviceForAccount } from 'config/errors'

@@ -14,7 +14,7 @@ import {
   isSegwitDerivationMode,
   getDerivationScheme,
   runDerivationScheme,
-} from '@ledgerhq/live-common/lib/helpers/derivation'
+} from '@ledgerhq/live-common/lib/derivation'
 
 import DeviceInteraction from 'components/DeviceInteraction'
 import Text from 'components/base/Text'
@@ -125,7 +125,7 @@ async function getAddressFromAccountOrCurrency(device, account, currency) {
       currencyId: currency.id,
       path: account
         ? account.freshAddressPath
-        : runDerivationScheme(getDerivationScheme({ currency, derivationMode: '' })),
+        : runDerivationScheme(getDerivationScheme({ currency, derivationMode: '' }), currency),
       segwit: account ? isSegwitDerivationMode(account.derivationMode) : false,
     })
     .toPromise()

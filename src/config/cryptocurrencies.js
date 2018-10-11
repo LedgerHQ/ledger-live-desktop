@@ -1,6 +1,6 @@
 // @flow
 import memoize from 'lodash/memoize'
-import { listCryptoCurrencies as listCC } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { listCryptoCurrencies as listCC } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrencyIds } from '@ledgerhq/live-common/lib/types'
 
 const supported: CryptoCurrencyIds[] = [

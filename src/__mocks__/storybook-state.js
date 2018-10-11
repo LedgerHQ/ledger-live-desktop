@@ -2,7 +2,7 @@ import { genStoreState } from '@ledgerhq/live-common/lib/countervalues/mock'
 import {
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
+} from '@ledgerhq/live-common/lib/currencies'
 
 export default {
   countervalues: genStoreState([

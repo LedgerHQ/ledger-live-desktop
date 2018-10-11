@@ -4,7 +4,7 @@ import type { BigNumber } from 'bignumber.js'
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
-import { decodeURIScheme } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { decodeURIScheme } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import { radii } from 'styles/theme'

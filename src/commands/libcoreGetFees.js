@@ -4,8 +4,8 @@ import { Observable } from 'rxjs'
 import { BigNumber } from 'bignumber.js'
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-import { getWalletName } from '@ledgerhq/live-common/lib/helpers/account'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import { getWalletName } from '@ledgerhq/live-common/lib/account'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import {
   isValidAddress,

@@ -13,11 +13,11 @@ import {
   getDerivationScheme,
   runDerivationScheme,
   getMandatoryEmptyAccountSkip,
-} from '@ledgerhq/live-common/lib/helpers/derivation'
+} from '@ledgerhq/live-common/lib/derivation'
 import {
   getAccountPlaceholderName,
   getNewAccountPlaceholderName,
-} from '@ledgerhq/live-common/lib/helpers/account'
+} from '@ledgerhq/live-common/lib/account'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import eip55 from 'eip55'
 import { apiForCurrency } from 'api/Ethereum'
@@ -218,7 +218,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
       async function stepAddress(
         index,
-        { address, path: freshAddressPath, publicKey },
+        { address, path: freshAddressPath },
         derivationMode,
         shouldSkipEmpty,
       ): { account?: Account, complete?: boolean } {
@@ -230,7 +230,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         if (finished) return { complete: true }
 
         const freshAddress = address
-        const accountId = `ethereumjs:2:${currency.id}:${address}:${publicKey}`
+        const accountId = `ethereumjs:2:${currency.id}:${address}:${derivationMode}`
 
         if (txs.length === 0 && balance.isZero()) {
           // this is an empty account
@@ -305,7 +305,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
             const mandatoryEmptyAccountSkip = getMandatoryEmptyAccountSkip(derivationMode)
             const derivationScheme = getDerivationScheme({ derivationMode, currency })
             for (let index = 0; index < 255; index++) {
-              const freshAddressPath = runDerivationScheme(derivationScheme, { account: index })
+              const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
+                account: index,
+              })
               const res = await getAddressCommand
                 .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
                 .toPromise()

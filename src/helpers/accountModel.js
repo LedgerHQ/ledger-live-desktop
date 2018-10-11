@@ -3,7 +3,7 @@
  * @flow
  */
 import { BigNumber } from 'bignumber.js'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { createDataModel } from '@ledgerhq/live-common/lib/DataModel'
 import type { DataModel } from '@ledgerhq/live-common/lib/DataModel'
 import type { Account, AccountRaw, Operation } from '@ledgerhq/live-common/lib/types'
@@ -73,7 +73,6 @@ const accountModel: DataModel<AccountRaw, Account> = createDataModel({
       }
 
       const id = `${type}:${version}:${currencyId}:${xpubOrAddress}:${derivationMode}`
-      console.log({ old: raw, id, derivationMode, seedIdentifier })
       return {
         ...raw,
         id,

@@ -3,11 +3,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-import {
-  getDerivationScheme,
-  runDerivationScheme,
-} from '@ledgerhq/live-common/lib/helpers/derivation'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import { getDerivationScheme, runDerivationScheme } from '@ledgerhq/live-common/lib/derivation'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
 import { getCurrentDevice } from 'reducers/devices'
 import Button from 'components/base/Button'
@@ -53,7 +50,7 @@ class Debug extends Component<*, *> {
       for (let x = 0; x < 20; x++) {
         const { address, path } = await getAddress
           .send({
-            path: runDerivationScheme(derivationScheme, { account: x }),
+            path: runDerivationScheme(derivationScheme, currency, { account: x }),
             currencyId: currency.id,
             devicePath: device.path,
           })
@@ -104,7 +101,7 @@ class Debug extends Component<*, *> {
       derivationMode: 'segwit',
     })
     const obj = {
-      path: runDerivationScheme(derivationScheme),
+      path: runDerivationScheme(derivationScheme, currency),
       currencyId: currency.id,
       devicePath: device.path,
     }
