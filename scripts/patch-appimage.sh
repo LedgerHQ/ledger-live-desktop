@@ -29,16 +29,15 @@ for PACKAGE in "${LIBRARIES[@]}"; do
   rm "$PACKAGE$PACKAGE_SUFFIX"
 done
 
-cp "$OLDPWD/scripts/shasums/kernel-libs.txt" .
-sha512sum --quiet --check kernel-libs.txt || exit 1
+curl -fOL "https://s3-eu-west-1.amazonaws.com/ledger-ledgerlive-resources-dev/public_resources/appimagetool-x86_64.AppImage"
+
+cp "$OLDPWD/scripts/shasums/patch-appimage-sums.txt" .
+sha512sum --quiet --check patch-appimage-sums.txt || exit 1
 
 ./ledger-live-desktop-"$LEDGER_LIVE_VERSION"-linux-x86_64.AppImage --appimage-extract
 cp -a usr/lib/x86_64-linux-gnu/*.so.* squashfs-root/usr/lib
 
-echo "> downloading appimagetool"
-curl -fOL "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
 chmod +x appimagetool-x86_64.AppImage
-
 ./appimagetool-x86_64.AppImage squashfs-root "$OLDPWD/dist/ledger-live-desktop-$LEDGER_LIVE_VERSION-linux-x86_64.AppImage"
 
 popd
