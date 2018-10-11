@@ -13,7 +13,9 @@ if [ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]; then
   exit 0
 fi
 
-if ! git describe --exact-match --tags 2>/dev/null >/dev/null; then
+GH_TAG=$(git describe --exact-match --tags 2>/dev/null || echo '')
+
+if [[ $GH_TAG == "" ]]; then
   echo "You are not on a tag. Exiting properly. (CI)"
   exit 0
 fi
@@ -57,7 +59,6 @@ fi
 #   exit 1
 # fi
 
-
 if [[ $(uname) == 'Linux' ]]; then # only run it on one target, to prevent race conditions
   runJob \
     "node scripts/create-draft-release.js" \
@@ -68,9 +69,48 @@ fi
 
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
+# --------------------------------------------------------------------
+#                     Linux: Internal process error (null)
+#
+# context: https://github.com/LedgerHQ/ledger-live-desktop/issues/1010
+# Linux: Internal process error (null)
+#
+# The "fix" is not optimal, as it doesn't really solve the problem
+# (electron loading system openssl before we can load our embedded one)
+# Quick summary:
+#
+#  - build without publishing
+#  - unpack the .AppImage
+#  - download reported working libs from ubuntu mirrors, put it inside
+#  - re-pack the .AppImage
+#  - checksum stuff
+#  - upload to gh
+
 runJob \
-  "DEBUG=electron-builder electron-builder build --publish always" \
-  "building, packaging and publishing app..." \
-  "app built, packaged and published successfully" \
+  "DEBUG=electron-builder electron-builder build --publish never" \
+  "building and packaging app..." \
+  "app built and packaged successfully" \
   "failed to build app" \
   "verbose"
+
+runJob \
+  "scripts/patch-appimage.sh" \
+  "patching AppImage..." \
+  "AppImage patched successfully" \
+  "failed to patch AppImage"
+
+LEDGER_LIVE_VERSION=$(grep version package.json | sed -E 's/.*: "(.*)",/\1/g')
+
+scripts/upload-github-release-asset.sh \
+  github_api_token="$GH_TOKEN" \
+  owner=LedgerHQ \
+  repo=ledger-live-desktop \
+  tag="$GH_TAG" \
+  filename="dist/ledger-live-desktop-$LEDGER_LIVE_VERSION-linux-x86_64.AppImage"
+
+scripts/upload-github-release-asset.sh \
+  github_api_token="$GH_TOKEN" \
+  owner=LedgerHQ \
+  repo=ledger-live-desktop \
+  tag="$GH_TAG" \
+  filename="dist/latest-linux.yml"
