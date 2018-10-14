@@ -134,7 +134,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     }
 
     hash = hash.toUpperCase()
-    return hash.length > 8 ? `[${hash.slice(0, 4)}...${hash.substr(-4)}]` : hash
+    return hash.length > 8 ? `${hash.slice(0, 4)}...${hash.substr(-4)}` : hash
   }
 
   renderBody = () => {
