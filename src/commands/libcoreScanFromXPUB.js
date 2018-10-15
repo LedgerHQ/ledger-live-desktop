@@ -10,18 +10,18 @@ import { scanAccountsFromXPUB } from 'helpers/libcore'
 type Input = {
   currencyId: string,
   xpub: string,
-  isSegwit: boolean,
-  isUnsplit: boolean,
+  derivationMode: string,
+  seedIdentifier: string,
 }
 
 type Result = AccountRaw
 
 const cmd: Command<Input, Result> = createCommand(
   'libcoreScanFromXPUB',
-  ({ currencyId, xpub, isSegwit, isUnsplit }) =>
+  ({ currencyId, xpub, derivationMode, seedIdentifier }) =>
     fromPromise(
       withLibcore(async core =>
-        scanAccountsFromXPUB({ core, currencyId, xpub, isSegwit, isUnsplit }),
+        scanAccountsFromXPUB({ core, currencyId, xpub, derivationMode, seedIdentifier }),
       ),
     ),
 )

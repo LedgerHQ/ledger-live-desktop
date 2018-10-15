@@ -6,11 +6,11 @@ import {
   genAddingOperationsInAccount,
   genOperation,
 } from '@ledgerhq/live-common/lib/mock/account'
-import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
 import Prando from 'prando'
 import { BigNumber } from 'bignumber.js'
 import type { Operation } from '@ledgerhq/live-common/lib/types'
-import { validateNameEdition } from 'helpers/accountName'
+import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
 import { MOCK_DATA_SEED } from 'config/constants'
 import type { WalletBridge } from './types'
 

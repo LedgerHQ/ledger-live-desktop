@@ -4,10 +4,7 @@ import React, { Component } from 'react'
 import { BigNumber } from 'bignumber.js'
 
 import { storiesOf } from '@storybook/react'
-import {
-  formatCurrencyUnit,
-  getFiatCurrencyByTicker,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
+import { formatCurrencyUnit, getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/currencies'
 import Chance from 'chance'
 
 import Box from 'components/base/Box'

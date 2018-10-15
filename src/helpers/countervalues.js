@@ -12,7 +12,7 @@ import {
   intermediaryCurrency,
 } from 'reducers/settings'
 import logger from 'logger'
-import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 const pairsSelector = createSelector(

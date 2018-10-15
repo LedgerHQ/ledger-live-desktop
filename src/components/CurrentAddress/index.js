@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
-import { encodeURIScheme } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { encodeURIScheme } from '@ledgerhq/live-common/lib/currencies'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import noop from 'lodash/noop'

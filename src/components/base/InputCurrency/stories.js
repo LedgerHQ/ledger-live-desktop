@@ -5,7 +5,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import { boolean } from '@storybook/addon-knobs'
 
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import InputCurrency from 'components/base/InputCurrency'
 
 const stories = storiesOf('Components', module)

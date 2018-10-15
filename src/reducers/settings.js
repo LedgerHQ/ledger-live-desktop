@@ -5,7 +5,7 @@ import {
   findCurrencyByTicker,
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
+} from '@ledgerhq/live-common/lib/currencies'
 import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import languages from 'config/languages'
 import { createSelector } from 'reselect'

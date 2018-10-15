@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 import {
   groupAccountOperationsByDay,
   groupAccountsOperationsByDay,
-} from '@ledgerhq/live-common/lib/helpers/account'
+} from '@ledgerhq/live-common/lib/account'
 
 import type { Operation, Account } from '@ledgerhq/live-common/lib/types'
 
