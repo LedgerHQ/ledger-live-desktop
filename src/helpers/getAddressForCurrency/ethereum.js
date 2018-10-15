@@ -9,7 +9,7 @@ export default async (
   transport: Transport<*>,
   currency: CryptoCurrency,
   path: string,
-  { verify = false }: *,
+  { verify = false }: * = {},
 ) => {
   const eth = new Eth(transport)
   const r = await eth.getAddress(path, verify)

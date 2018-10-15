@@ -5,12 +5,14 @@
 import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
+import getAddressForCurrency from 'helpers/getAddressForCurrency'
 import { withDevice } from 'helpers/deviceAccess'
 import {
   getDerivationModesForCurrency,
   getDerivationScheme,
   isSegwitDerivationMode,
   isUnsplitDerivationMode,
+  runDerivationScheme,
 } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import {
@@ -58,6 +60,7 @@ export async function scanAccountsOnDevice(props: Props): Promise<AccountRaw[]> 
   let allAccounts = []
 
   const derivationModes = getDerivationModesForCurrency(currency)
+
   for (let i = 0; i < derivationModes.length; i++) {
     const derivationMode = derivationModes[i]
     const accounts = await scanAccountsOnDeviceBySegwit({
@@ -97,9 +100,18 @@ async function scanAccountsOnDeviceBySegwit({
   const { coinType } = unsplitFork ? getCryptoCurrencyById(unsplitFork) : currency
   const path = `${isSegwit ? '49' : '44'}'/${coinType}'`
 
-  const { publicKey: seedIdentifier } = await withDevice(devicePath)(async transport =>
-    new Btc(transport).getWalletPublicKey(path, false, isSegwit),
-  )
+  let seedIdentifier
+  if (currency.family === 'ethereum') {
+    const { address } = await withDevice(devicePath)(async transport =>
+      getAddressForCurrency(transport, getCryptoCurrencyById(currency.id), path),
+    )
+    seedIdentifier = address
+  } else {
+    const { publicKey } = await withDevice(devicePath)(async transport =>
+      new Btc(transport).getWalletPublicKey(path, false, isSegwit),
+    )
+    seedIdentifier = publicKey
+  }
 
   if (isUnsubscribed()) return []
 
@@ -111,7 +123,6 @@ async function scanAccountsOnDeviceBySegwit({
 
   // retrieve or create the wallet
   const wallet = await getOrCreateWallet(core, walletName, { currency, derivationMode })
-  const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
   // new accounts will be created in sqlite, existing ones will be updated
@@ -121,7 +132,6 @@ async function scanAccountsOnDeviceBySegwit({
     walletName,
     devicePath,
     currency,
-    accountsCount,
     accountIndex: 0,
     accounts: [],
     onAccountScanned,
@@ -136,19 +146,23 @@ async function scanAccountsOnDeviceBySegwit({
 
 const hexToBytes = str => Array.from(Buffer.from(str, 'hex'))
 
-const createAccount = async (wallet, devicePath) => {
-  const accountCreationInfos = await wallet.getNextAccountCreationInfo()
-  await accountCreationInfos.derivations.reduce(
-    (promise, derivation) =>
-      promise.then(async () => {
-        const { publicKey, chainCode } = await withDevice(devicePath)(async transport =>
-          new Btc(transport).getWalletPublicKey(derivation),
-        )
-        accountCreationInfos.publicKeys.push(hexToBytes(publicKey))
-        accountCreationInfos.chainCodes.push(hexToBytes(chainCode))
-      }),
-    Promise.resolve(),
-  )
+const createAccount = async (wallet, devicePath, currency) => {
+  let accountCreationInfos
+  if (currency.family === 'ethereum') {
+  } else {
+    accountCreationInfos = await wallet.getNextAccountCreationInfo()
+    await accountCreationInfos.derivations.reduce(
+      (promise, derivation) =>
+        promise.then(async () => {
+          const { publicKey, chainCode } = await withDevice(devicePath)(async transport =>
+            new Btc(transport).getWalletPublicKey(derivation),
+          )
+          accountCreationInfos.publicKeys.push(hexToBytes(publicKey))
+          accountCreationInfos.chainCodes.push(hexToBytes(chainCode))
+        }),
+      Promise.resolve(),
+    )
+  }
   return wallet.newAccountWithInfo(accountCreationInfos)
 }
 
@@ -202,7 +216,6 @@ async function scanNextAccount(props: {
   currency: CryptoCurrency,
   seedIdentifier: string,
   derivationMode: string,
-  accountsCount: number,
   accountIndex: number,
   accounts: AccountRaw[],
   onAccountScanned: AccountRaw => void,
@@ -215,7 +228,6 @@ async function scanNextAccount(props: {
     walletName,
     devicePath,
     currency,
-    accountsCount,
     accountIndex,
     accounts,
     onAccountScanned,
@@ -225,25 +237,33 @@ async function scanNextAccount(props: {
     isUnsubscribed,
   } = props
 
-  // create account only if account has not been scanned yet
-  // if it has already been created, we just need to get it, and sync it
-  const hasBeenScanned = accountIndex < accountsCount
-
-  const njsAccount = hasBeenScanned
-    ? await wallet.getAccount(accountIndex)
-    : await createAccount(wallet, devicePath)
-
+  await syncAccount({
+    core,
+    devicePath,
+    derivationMode,
+    seedIdentifier,
+    currency,
+    index: accountIndex,
+  })
   if (isUnsubscribed()) return []
 
-  const shouldSyncAccount = true // TODO: let's sync everytime. maybe in the future we can optimize.
-  if (shouldSyncAccount) {
-    await coreSyncAccount(core, njsAccount)
-  }
-
+  const njsAccount = await wallet.getAccount(accountIndex)
   if (isUnsubscribed()) return []
 
   const query = njsAccount.queryOperations()
   const ops = await query.complete().execute()
+  if (isUnsubscribed()) return []
+
+  // ERC20
+  // if (currency.family === 'ethereum') {
+  //   const ethAccount = njsAccount.asEthereumLikeAccount()
+  //   const erc20Accounts = await ethAccount.getERC20Accounts()
+  //   const enriched = erc20Accounts.map(erc20account => ({
+  //     balance: erc20account.getBalance().toString(10),
+  //     token: erc20account.getToken().name,
+  //     contractAddress: erc20account.contractAddress(),
+  //   }))
+  // }
 
   const account = await buildAccountRaw({
     njsAccount,
@@ -256,7 +276,6 @@ async function scanNextAccount(props: {
     core,
     ops,
   })
-
   if (isUnsubscribed()) return []
 
   const isEmpty = ops.length === 0
@@ -310,7 +329,13 @@ export async function getOrCreateWallet(
       : {
           KEYCHAIN_DERIVATION_SCHEME: derivationScheme,
         }
+    if (currency.family === 'ethereum') {
+      // New API not reachable outside of Ledger !!!
+      // walletConfig.BLOCKCHAIN_EXPLORER_API_ENDPOINT = 'http://18.202.239.45:20000'
+      walletConfig.BLOCKCHAIN_EXPLORER_VERSION = 'v2'
+    }
     const njsWalletConfig = createWalletConfig(core, walletConfig)
+    // const libcoreCurrency = currency.id === 'ethereum' ? 'ethereum_ropstein' : currencyCore
     const wallet = await timeoutTagged(
       'createWallet',
       10000,
@@ -380,7 +405,7 @@ async function buildAccountRaw({
 
   ops.sort((a, b) => b.getDate() - a.getDate())
 
-  const operations = ops.map(op => buildOperationRaw({ core, op, xpub }))
+  const operations = ops.map(op => buildOperationRaw({ core, op, xpub, currency }))
 
   const name =
     operations.length === 0
@@ -424,17 +449,14 @@ function buildOperationRaw({
   core,
   op,
   xpub,
+  currency,
 }: {
   core: *,
   op: NJSOperation,
   xpub: string,
+  currency: CryptoCurrency,
 }): OperationRaw {
-  const bitcoinLikeOperation = op.asBitcoinLikeOperation()
-  const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
-  const hash = bitcoinLikeTransaction.getHash()
   const operationType = op.getOperationType()
-  let value = op.getAmount().toLong()
-  const fee = op.getFees().toLong()
 
   const OperationTypeMap: { [_: $Keys<typeof core.OPERATION_TYPES>]: OperationType } = {
     [core.OPERATION_TYPES.SEND]: 'OUT',
@@ -443,6 +465,40 @@ function buildOperationRaw({
 
   // if transaction is a send, amount becomes negative
   const type = OperationTypeMap[operationType]
+
+  // ETHEREUM OPERATION
+  if (currency.family === 'ethereum') {
+    const ethereumLikeOperation = op.asEthereumLikeOperation()
+    const ethereumLikeTransaction = ethereumLikeOperation.getTransaction()
+    const hash = ethereumLikeTransaction.getHash()
+    const gasPrice = ethereumLikeTransaction.getGasPrice().toString()
+    const gasLimit = ethereumLikeTransaction.getGasLimit().toString()
+    let value = BigNumber(op.getAmount().toString())
+    const fee = BigNumber(gasPrice).times(gasLimit)
+    if (type === 'OUT') {
+      value = value.plus(fee)
+    }
+    const id = `${xpub}-${hash}-${type}`
+    return {
+      id,
+      hash,
+      type,
+      value,
+      fee,
+      senders: type === 'IN' ? [ethereumLikeTransaction.getSender().toEIP55()] : [xpub],
+      recipients: type === 'IN' ? [xpub] : [ethereumLikeTransaction.getReceiver().toEIP55()],
+      blockHeight: op.getBlockHeight(), // TODO can we put something?
+      blockHash: null,
+      accountId: xpub, // FIXME accountId: xpub  !?
+      date: op.getDate().toISOString(),
+    }
+  }
+
+  const bitcoinLikeOperation = op.asBitcoinLikeOperation()
+  const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
+  const hash = bitcoinLikeTransaction.getHash()
+  let value = op.getAmount().toLong()
+  const fee = op.getFees().toLong()
 
   if (type === 'OUT') {
     value += fee
@@ -468,13 +524,15 @@ function buildOperationRaw({
 export async function syncAccount({
   core,
   xpub,
+  devicePath,
   derivationMode,
   seedIdentifier,
   currency,
   index,
 }: {
   core: *,
-  xpub: string,
+  xpub?: string,
+  devicePath?: string,
   derivationMode: string,
   seedIdentifier: string,
   currency: CryptoCurrency,
@@ -489,22 +547,66 @@ export async function syncAccount({
 
   let njsAccount
   let requiresCacheFlush = false
+
   try {
     njsAccount = await timeoutTagged('getAccount', 10000, njsWallet.getAccount(index))
   } catch (e) {
     requiresCacheFlush = true
     logger.warn(`Have to recreate the account... (${e.message})`)
-    const extendedInfos = await timeoutTagged(
-      'getEKACI',
-      10000,
-      njsWallet.getExtendedKeyAccountCreationInfo(index),
-    )
-    extendedInfos.extendedKeys.push(xpub)
-    njsAccount = await timeoutTagged(
-      'newAWEKI',
-      10000,
-      njsWallet.newAccountWithExtendedKeyInfo(extendedInfos),
-    )
+    if (xpub) {
+      const extendedInfos = await timeoutTagged(
+        'getEKACI',
+        10000,
+        njsWallet.getExtendedKeyAccountCreationInfo(index),
+      )
+      extendedInfos.extendedKeys.push(xpub)
+      njsAccount = await timeoutTagged(
+        'newAWEKI',
+        10000,
+        njsWallet.newAccountWithExtendedKeyInfo(extendedInfos),
+      )
+    } else if (devicePath) {
+      if (currency.family === 'ethereum') {
+        // TODO: factorize with other usage
+        const isSegwit = isSegwitDerivationMode(derivationMode)
+        const unsplitFork = isUnsplitDerivationMode(derivationMode) ? currency.forkedFrom : null
+        const { coinType } = unsplitFork ? getCryptoCurrencyById(unsplitFork) : currency
+        const path = `${isSegwit ? '49' : '44'}'/${coinType}'`
+
+        // for now we always use index 0 for account
+        const derivationScheme = getDerivationScheme({ currency, derivationMode })
+        const accountPath = runDerivationScheme(derivationScheme, currency, { account: index })
+
+        const { address } = await withDevice(devicePath)(async transport =>
+          getAddressForCurrency(transport, getCryptoCurrencyById(currency.id), accountPath),
+        )
+
+        const extendedInfos = {
+          index,
+          owners: ['main'],
+          derivations: [path, accountPath],
+          extendedKeys: [address],
+        }
+
+        njsAccount = await njsWallet.newAccountWithExtendedKeyInfo(extendedInfos)
+      } else {
+        const accountCreationInfos = await njsWallet.getNextAccountCreationInfo()
+        await accountCreationInfos.derivations.reduce(
+          (promise, derivation) =>
+            promise.then(async () => {
+              const { publicKey, chainCode } = await withDevice(devicePath)(async transport =>
+                new Btc(transport).getWalletPublicKey(derivation),
+              )
+              accountCreationInfos.publicKeys.push(hexToBytes(publicKey))
+              accountCreationInfos.chainCodes.push(hexToBytes(chainCode))
+            }),
+          Promise.resolve(),
+        )
+        njsAccount = await njsWallet.newAccountWithInfo(accountCreationInfos)
+      }
+    } else {
+      throw new Error('Cant re-create the account. Are you mad?')
+    }
   }
 
   const unsub = await coreSyncAccount(core, njsAccount)

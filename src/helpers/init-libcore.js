@@ -97,7 +97,7 @@ const NJSHttpClient = new lib.NJSHttpClient({
     let res
     try {
       // $FlowFixMe
-      res = await network({ method: lib.METHODS[method], url, headers, data })
+      res = await network({ method: lib.METHODS[method], url, headers, data : lib.METHODS[method] === "GET"  ? undefined : data  })
       const urlConnection = createHttpConnection(res)
       r.complete(urlConnection, null)
     } catch (err) {

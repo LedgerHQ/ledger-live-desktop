@@ -6,6 +6,9 @@ import LRU from 'lru-cache'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
+import FeesEthereumKind from 'components/FeesField/EthereumKind'
+// import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
+import AdvancedOptionsEthereumKind from 'components/AdvancedOptions/EthereumKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
@@ -24,7 +27,15 @@ type Transaction = {
   recipient: string,
 }
 
-const serializeTransaction = t => {
+const serializeTransaction = (t, a) => {
+  if (a.currency.family === 'ethereum') {
+    return {
+      recipient: t.recipient,
+      amount: `0x${BigNumber(t.amount).toString(16)}`,
+      gasPrice: !t.gasPrice ? '0x00' : `0x${BigNumber(t.gasPrice).toString(16)}`,
+      gasLimit: `0x${BigNumber(t.gasLimit).toString(16)}`,
+    }
+  }
   const { feePerByte } = t
   return {
     recipient: t.recipient,
@@ -36,27 +47,51 @@ const serializeTransaction = t => {
 const decodeOperation = (encodedAccount, rawOp) =>
   decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations[0]
 
-const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
-  <FeesBitcoinKind
-    onChange={feePerByte => {
-      onChange({ ...value, feePerByte })
-    }}
-    feePerByte={value.feePerByte}
-    account={account}
-  />
-)
+const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => {
+  if (account.currency.family === 'ethereum') {
+    return (
+      <FeesEthereumKind
+        onChange={gasPrice => {
+          onChange({ ...value, gasPrice })
+        }}
+        gasPrice={value.gasPrice}
+        account={account}
+      />
+    )
+  }
+  return (
+    <FeesBitcoinKind
+      onChange={feePerByte => {
+        onChange({ ...value, feePerByte })
+      }}
+      feePerByte={value.feePerByte}
+      account={account}
+    />
+  )
+}
 
-/*
-import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
-const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
-  <AdvancedOptionsBitcoinKind
-    isRBF={value.isRBF}
-    onChangeRBF={isRBF => {
-      onChange({ ...value, isRBF })
-    }}
-  />
-)
-*/
+const EditAdvancedOptions = ({ account, onChange, value }: EditProps<Transaction>) => {
+  if (account.currency.family === 'ethereum') {
+    console.log(value)
+    return (
+      <AdvancedOptionsEthereumKind
+        gasLimit={value.gasLimit}
+        onChangeGasLimit={gasLimit => {
+          onChange({ ...value, gasLimit })
+        }}
+      />
+    )
+  }
+  return null
+  // return (
+  //   <AdvancedOptionsBitcoinKind
+  //     isRBF={value.isRBF}
+  //     onChangeRBF={isRBF => {
+  //       onChange({ ...value, isRBF })
+  //     }}
+  //   />
+  // )
+}
 
 const recipientValidLRU = LRU({ max: 100 })
 
@@ -92,7 +127,7 @@ const getFees = async (a, transaction) => {
   promise = libcoreGetFees
     .send({
       ...extractGetFeesInputFromAccount(a),
-      transaction: serializeTransaction(transaction),
+      transaction: serializeTransaction(transaction, a),
     })
     .toPromise()
     .then(r => BigNumber(r.totalFees))
@@ -101,12 +136,18 @@ const getFees = async (a, transaction) => {
 }
 
 const checkValidTransaction = (a, t) =>
-  !t.feePerByte
+  a.currency.family === 'bitcoin' && !t.feePerByte
     ? Promise.reject(new FeeNotLoaded())
     : !t.amount
       ? Promise.resolve(true)
       : getFees(a, t)
-          .then(() => true)
+          .then(totalFees => {
+            const totalSpent = t.amount.plus(totalFees || 0)
+            if (totalSpent.isGreaterThan(a.balance)) {
+              throw new NotEnoughBalance()
+            }
+            return true
+          })
           .catch(e => {
             if (e.code === NOT_ENOUGH_FUNDS) {
               throw new NotEnoughBalance()
@@ -176,12 +217,22 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   isRecipientValid,
   getRecipientWarning: () => Promise.resolve(null),
 
-  createTransaction: () => ({
-    amount: BigNumber(0),
-    recipient: '',
-    feePerByte: null,
-    isRBF: false,
-  }),
+  createTransaction: account => {
+    if (account.currency.family === 'ethereum') {
+      return {
+        amount: BigNumber(0),
+        recipient: '',
+        gasPrice: null,
+        gasLimit: BigNumber(0x5208),
+      }
+    }
+    return {
+      amount: BigNumber(0),
+      recipient: '',
+      feePerByte: null,
+      isRBF: false,
+    }
+  },
 
   editTransactionAmount: (account, t, amount) => ({
     ...t,
@@ -198,8 +249,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   getTransactionRecipient: (a, t) => t.recipient,
 
   EditFees,
-
-  // EditAdvancedOptions,
+  EditAdvancedOptions,
 
   checkValidTransaction,
 
@@ -225,7 +275,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
         derivationMode: account.derivationMode,
         seedIdentifier: account.seedIdentifier,
         index: account.index,
-        transaction: serializeTransaction(transaction),
+        transaction: serializeTransaction(transaction, account),
         deviceId,
       })
       .pipe(

@@ -4,14 +4,13 @@ import invariant from 'invariant'
 import { USE_MOCK_DATA } from 'config/constants'
 import { WalletBridge } from './types'
 import LibcoreBridge from './LibcoreBridge'
-import EthereumJSBridge from './EthereumJSBridge'
 import RippleJSBridge from './RippleJSBridge'
 import makeMockBridge from './makeMockBridge'
 
 const perFamily = {
   bitcoin: LibcoreBridge,
   ripple: RippleJSBridge,
-  ethereum: EthereumJSBridge,
+  ethereum: LibcoreBridge,
   stellar: null,
 }
 if (USE_MOCK_DATA) {
