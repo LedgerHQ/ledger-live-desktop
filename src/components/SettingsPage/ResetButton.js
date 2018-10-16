@@ -10,6 +10,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import { ConfirmModal } from 'components/base/Modal'
 import IconTriangleWarning from 'icons/TriangleWarning'
+import ResetFallbackModal from './ResetFallbackModal'
 
 type Props = {
   t: T,
@@ -18,16 +19,19 @@ type Props = {
 type State = {
   opened: boolean,
   pending: boolean,
+  fallbackOpened: boolean,
 }
 
 class ResetButton extends PureComponent<Props, State> {
   state = {
     opened: false,
     pending: false,
+    fallbackOpened: false,
   }
 
   open = () => this.setState({ opened: true })
   close = () => this.setState({ opened: false })
+  closeFallback = () => this.setState({ fallbackOpened: false })
 
   action = async () => {
     this.setState({ pending: true })
@@ -35,13 +39,14 @@ class ResetButton extends PureComponent<Props, State> {
       await hardReset()
       remote.getCurrentWindow().webContents.reloadIgnoringCache()
     } catch (err) {
-      this.setState({ pending: false })
+      this.setState({ pending: false, fallbackOpened: true })
     }
   }
 
   render() {
     const { t } = this.props
-    const { opened, pending } = this.state
+    const { opened, pending, fallbackOpened } = this.state
+
     return (
       <Fragment>
         <Button small danger onClick={this.open} event="HardResetIntent">
@@ -66,6 +71,8 @@ class ResetButton extends PureComponent<Props, State> {
             </IconWrapperCircle>
           )}
         />
+
+        <ResetFallbackModal isOpened={fallbackOpened} onClose={this.closeFallback} />
       </Fragment>
     )
   }

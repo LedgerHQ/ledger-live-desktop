@@ -8,6 +8,7 @@ import { cleanAccountsCache } from 'actions/accounts'
 import Button from 'components/base/Button'
 import { ConfirmModal } from 'components/base/Modal'
 import { softReset } from 'helpers/reset'
+import ResetFallbackModal from './ResetFallbackModal'
 
 const mapDispatchToProps = {
   cleanAccountsCache,
@@ -20,32 +21,35 @@ type Props = {
 
 type State = {
   opened: boolean,
+  fallbackOpened: boolean,
   isLoading: boolean,
 }
 
 class CleanButton extends PureComponent<Props, State> {
   state = {
     opened: false,
+    fallbackOpened: false,
     isLoading: false,
   }
 
   open = () => this.setState({ opened: true })
 
   close = () => this.setState({ opened: false })
+  closeFallback = () => this.setState({ fallbackOpened: false })
 
   action = async () => {
     if (this.state.isLoading) return
     try {
       this.setState({ isLoading: true })
       await softReset({ cleanAccountsCache: this.props.cleanAccountsCache })
-    } finally {
-      this.setState({ isLoading: false })
+    } catch (err) {
+      this.setState({ isLoading: false, fallbackOpened: true })
     }
   }
 
   render() {
     const { t } = this.props
-    const { opened, isLoading } = this.state
+    const { opened, isLoading, fallbackOpened } = this.state
     return (
       <Fragment>
         <Button small primary onClick={this.open} event="ClearCacheIntent">
@@ -63,6 +67,8 @@ class CleanButton extends PureComponent<Props, State> {
           subTitle={t('common.areYouSure')}
           desc={t('settings.softResetModal.desc')}
         />
+
+        <ResetFallbackModal isOpened={fallbackOpened} onClose={this.closeFallback} />
       </Fragment>
     )
   }
