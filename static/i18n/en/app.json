@@ -406,6 +406,13 @@
       "title": "Clear cache",
       "desc": "Clearing the Ledger Live cache forces network resynchronization. Your settings and accounts are not affected. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet."
     },
+    "resetFallbackModal": {
+      "part1": "Cache folder couldnt be deleted. You will have to delete it manually.",
+      "part2": "Click on \"Open folder\", then the ",
+      "part3": "app will close",
+      "part4": ", and you will have to delete the \"sqlite\" folder.",
+      "part5": "After that, you can restart the app."
+    },
     "removeAccountModal": {
       "title": "Remove account",
       "desc": "The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added."

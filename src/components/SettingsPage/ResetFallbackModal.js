@@ -1,18 +1,20 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { translate } from 'react-i18next'
 
 import { ConfirmModal } from 'components/base/Modal'
 import { openUserDataFolderAndQuit } from 'helpers/reset'
 
 type Props = {
+  t: *,
   isOpened: boolean,
   onClose: () => *,
 }
 
 class ResetFallbackModal extends PureComponent<Props> {
   render() {
-    const { isOpened, onClose } = this.props
+    const { t, isOpened, onClose } = this.props
     return (
       <ConfirmModal
         centered
@@ -24,13 +26,15 @@ class ResetFallbackModal extends PureComponent<Props> {
         title="Couldnt remove app files"
         desc={
           <div>
-            <p>{'Cache folder couldnt be deleted. You will have to delete it manually.'}</p>
+            <p>{t('settings.resetFallbackModal.part1')}</p>
             <p style={{ fontWeight: 'bold' }}>
-              {'Click on "Open folder", then the '}
-              <span style={{ textDecoration: 'underline' }}>{'app will close'}</span>
-              {', and you will have to delete the "sqlite" folder.'}
+              {t('settings.resetFallbackModal.part2')}
+              <span style={{ textDecoration: 'underline' }}>
+                {t('settings.resetFallbackModal.part3')}
+              </span>
+              {t('settings.resetFallbackModal.part4')}
             </p>
-            <p style={{ marginTop: 20 }}>{'After that, you can restart the app.'}</p>
+            <p style={{ marginTop: 20 }}>{t('settings.resetFallbackModal.part5')}</p>
           </div>
         }
       />
@@ -38,4 +42,4 @@ class ResetFallbackModal extends PureComponent<Props> {
   }
 }
 
-export default ResetFallbackModal
+export default translate()(ResetFallbackModal)

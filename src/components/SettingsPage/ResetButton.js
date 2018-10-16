@@ -4,6 +4,7 @@ import React, { Fragment, PureComponent } from 'react'
 import styled from 'styled-components'
 import { remote } from 'electron'
 import { translate } from 'react-i18next'
+import logger from 'logger'
 import type { T } from 'types/common'
 import { hardReset } from 'helpers/reset'
 import Box from 'components/base/Box'
@@ -39,6 +40,7 @@ class ResetButton extends PureComponent<Props, State> {
       await hardReset()
       remote.getCurrentWindow().webContents.reloadIgnoringCache()
     } catch (err) {
+      logger.error(err)
       this.setState({ pending: false, fallbackOpened: true })
     }
   }

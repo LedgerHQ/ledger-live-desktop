@@ -3,6 +3,7 @@
 import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
+import logger from 'logger'
 import type { T } from 'types/common'
 import { cleanAccountsCache } from 'actions/accounts'
 import Button from 'components/base/Button'
@@ -43,6 +44,7 @@ class CleanButton extends PureComponent<Props, State> {
       this.setState({ isLoading: true })
       await softReset({ cleanAccountsCache: this.props.cleanAccountsCache })
     } catch (err) {
+      logger.error(err)
       this.setState({ isLoading: false, fallbackOpened: true })
     }
   }
