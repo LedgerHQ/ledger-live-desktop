@@ -128,22 +128,18 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     }
   }
 
-  formatHashName = (hash: string): string[] => {
+  formatHashName = (hash: string): string => {
     if (!hash) {
-      return []
+      return ''
     }
 
-    const length = hash.length
-    const half = Math.ceil(length / 2)
-    const start = hash.slice(0, half)
-    const end = hash.slice(half)
-    return [start, end]
+    hash = hash.toUpperCase()
+    return hash.length > 8 ? `${hash.slice(0, 4)}...${hash.substr(-4)}` : hash
   }
 
   renderBody = () => {
     const { installing } = this.state
     const { t, firmware } = this.props
-
     return installing ? (
       <Installing />
     ) : (
@@ -155,11 +151,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('manager.modal.identifier')}
           </Text>
-          <Address>
-            {firmware &&
-              firmware.hash &&
-              this.formatHashName(firmware.hash.toUpperCase()).join('\n')}
-          </Address>
+          <Address>{firmware && this.formatHashName(firmware.hash)}</Address>
         </Box>
         <Box mt={5}>
           <DeviceConfirm />
