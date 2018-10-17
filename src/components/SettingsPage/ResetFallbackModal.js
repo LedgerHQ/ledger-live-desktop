@@ -23,15 +23,13 @@ class ResetFallbackModal extends PureComponent<Props> {
         onClose={onClose}
         onReject={onClose}
         confirmText={'Open folder'}
-        title="Couldnt remove app files"
+        title={t('settings.resetFallbackModal.title')}
         desc={
           <div>
             <p>{t('settings.resetFallbackModal.part1')}</p>
             <p style={{ fontWeight: 'bold' }}>
               {t('settings.resetFallbackModal.part2')}
-              <span style={{ textDecoration: 'underline' }}>
-                {t('settings.resetFallbackModal.part3')}
-              </span>
+              {t('settings.resetFallbackModal.part3')}
               {t('settings.resetFallbackModal.part4')}
             </p>
             <p style={{ marginTop: 20 }}>{t('settings.resetFallbackModal.part5')}</p>
