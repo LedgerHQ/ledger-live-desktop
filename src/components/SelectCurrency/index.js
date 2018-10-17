@@ -40,7 +40,6 @@ const SelectCurrency = ({ onChange, value, t, placeholder, currencies, ...props 
       renderValue={renderOption}
       options={options}
       placeholder={placeholder || t('common.selectCurrency')}
-      data-e2e="test"
       noOptionsMessage={({ inputValue }: { inputValue: string }) =>
         t('common.selectCurrencyNoOption', { currencyName: inputValue })
       }
