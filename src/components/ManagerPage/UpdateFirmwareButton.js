@@ -23,7 +23,7 @@ const UpdateFirmwareButton = ({ t, firmware, onClick }: Props) =>
   firmware ? (
     <Fragment>
       <Text ff="Open Sans|Regular" fontSize={4} style={{ marginLeft: 'auto', marginRight: 15 }}>
-        {t('app:manager.firmware.latest', { version: getCleanVersion(firmware.name) })}
+        {t('manager.firmware.latest', { version: getCleanVersion(firmware.name) })}
       </Text>
       <Button
         primary
@@ -33,7 +33,7 @@ const UpdateFirmwareButton = ({ t, firmware, onClick }: Props) =>
           firmwareName: firmware.name,
         }}
       >
-        {t('app:manager.firmware.update')}
+        {t('manager.firmware.update')}
       </Button>
     </Fragment>
   ) : null

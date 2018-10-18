@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { BigNumber } from 'bignumber.js'
 import uncontrollable from 'uncontrollable'
 import styled from 'styled-components'
-import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/currencies'
 
 import noop from 'lodash/noop'
 

@@ -21,10 +21,10 @@ export default (props: StepProps) => {
           icon={<img src={i('ledgerlive-logo.svg')} alt="" width={50} height={50} />}
         />
         <Box my={5}>
-          <Title>{t('onboarding:start.title')}</Title>
+          <Title>{t('onboarding.start.title')}</Title>
         </Box>
         <Button primary onClick={() => jumpStep('init')}>
-          {t('onboarding:start.startBtn')}
+          {t('onboarding.start.startBtn')}
         </Button>
       </Box>
     </Box>

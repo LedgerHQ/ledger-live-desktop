@@ -64,10 +64,10 @@ function StepConfirmation({ t, error }: StepProps) {
       <Box mx={7} color="positiveGreen" my={4}>
         <CheckCircle size={44} />
       </Box>
-      <Title>{t('app:manager.modal.successTitle')}</Title>
+      <Title>{t('manager.modal.successTitle')}</Title>
       <Box mt={2} mb={5}>
         <Text ff="Open Sans|Regular" fontSize={4} color="graphite">
-          {t('app:manager.modal.successText')}
+          {t('manager.modal.successText')}
         </Text>
       </Box>
       <Box mx={7} />
@@ -78,7 +78,7 @@ function StepConfirmation({ t, error }: StepProps) {
 export function StepConfirmFooter({ t, onCloseModal }: StepProps) {
   return (
     <Button primary onClick={onCloseModal}>
-      {t('app:common.close')}
+      {t('common.close')}
     </Button>
   )
 }

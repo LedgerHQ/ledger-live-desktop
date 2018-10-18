@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 import {
   groupAccountOperationsByDay,
   groupAccountsOperationsByDay,
-} from '@ledgerhq/live-common/lib/helpers/account'
+} from '@ledgerhq/live-common/lib/account'
 
 import type { Operation, Account } from '@ledgerhq/live-common/lib/types'
 
@@ -139,13 +139,13 @@ export class OperationsList extends PureComponent<Props, State> {
         ) : null}
         {!groupedOperations.completed ? (
           <ShowMore onClick={this.fetchMoreOperations}>
-            <span>{t('app:common.showMore')}</span>
+            <span>{t('common.showMore')}</span>
             <IconAngleDown size={12} />
           </ShowMore>
         ) : (
           <Box p={6} align="center">
             <Text ff="Open Sans" fontSize={3}>
-              {t('app:operationList.noMoreOperations')}
+              {t('operationList.noMoreOperations')}
             </Text>
           </Box>
         )}

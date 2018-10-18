@@ -19,11 +19,11 @@ type Props = {
 class MarketIndicatorRadio extends PureComponent<Props> {
   indicators = [
     {
-      label: this.props.t('app:common.eastern'),
+      label: this.props.t('common.eastern'),
       key: 'eastern',
     },
     {
-      label: this.props.t('app:common.western'),
+      label: this.props.t('common.western'),
       key: 'western',
     },
   ]

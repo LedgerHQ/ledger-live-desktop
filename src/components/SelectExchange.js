@@ -127,11 +127,11 @@ class SelectExchange extends Component<
           options={options}
           onChange={onChange}
           isLoading={isLoading}
-          placeholder={t('app:common.selectExchange')}
+          placeholder={t('common.selectExchange')}
           noOptionsMessage={({ inputValue }) =>
             inputValue
-              ? t('app:common.selectExchangeNoOption', { exchangeName: inputValue })
-              : t('app:common.selectExchangeNoOptionAtAll')
+              ? t('common.selectExchangeNoOption', { exchangeName: inputValue })
+              : t('common.selectExchangeNoOptionAtAll')
           }
           {...props}
         />

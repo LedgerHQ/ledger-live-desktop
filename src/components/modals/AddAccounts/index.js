@@ -23,7 +23,7 @@ import { closeModal } from 'reducers/modals'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
-import { validateNameEdition } from 'helpers/accountName'
+import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
@@ -38,7 +38,7 @@ const createSteps = ({ t }: { t: T }) => {
   return [
     {
       id: 'chooseCurrency',
-      label: t('app:addAccounts.breadcrumb.informations'),
+      label: t('addAccounts.breadcrumb.informations'),
       component: StepChooseCurrency,
       footer: StepChooseCurrencyFooter,
       onBack: null,
@@ -46,7 +46,7 @@ const createSteps = ({ t }: { t: T }) => {
     },
     {
       id: 'connectDevice',
-      label: t('app:addAccounts.breadcrumb.connectDevice'),
+      label: t('addAccounts.breadcrumb.connectDevice'),
       component: StepConnectDevice,
       footer: StepConnectDeviceFooter,
       onBack,
@@ -54,7 +54,7 @@ const createSteps = ({ t }: { t: T }) => {
     },
     {
       id: 'import',
-      label: t('app:addAccounts.breadcrumb.import'),
+      label: t('addAccounts.breadcrumb.import'),
       component: StepImport,
       footer: StepImportFooter,
       onBack,
@@ -62,7 +62,7 @@ const createSteps = ({ t }: { t: T }) => {
     },
     {
       id: 'finish',
-      label: t('app:addAccounts.breadcrumb.finish'),
+      label: t('addAccounts.breadcrumb.finish'),
       component: StepFinish,
       footer: StepFinishFooter,
       onBack: null,
@@ -247,7 +247,7 @@ class AddAccounts extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <Stepper
             key={reset} // THIS IS A HACK because stepper is not controllable. FIXME
-            title={t('app:addAccounts.title')}
+            title={t('addAccounts.title')}
             initialStepId="chooseCurrency"
             onStepChange={this.handleStepChange}
             onClose={onClose}

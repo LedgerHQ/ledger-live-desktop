@@ -10,7 +10,7 @@ import { translate } from 'react-i18next'
 import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { MODAL_SETTINGS_ACCOUNT, MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
-import { validateNameEdition } from 'helpers/accountName'
+import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
 
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
@@ -210,12 +210,12 @@ class HelperComp extends PureComponent<Props, State> {
       <ModalBody onClose={onClose}>
         <form onSubmit={this.handleSubmit(account, onClose)}>
           <TrackPage category="Modal" name="AccountSettings" />
-          <ModalTitle>{t('app:account.settings.title')}</ModalTitle>
+          <ModalTitle>{t('account.settings.title')}</ModalTitle>
           <ModalContent mb={3}>
             <Container>
               <Box>
-                <OptionRowTitle>{t('app:account.settings.accountName.title')}</OptionRowTitle>
-                <OptionRowDesc>{t('app:account.settings.accountName.desc')}</OptionRowDesc>
+                <OptionRowTitle>{t('account.settings.accountName.title')}</OptionRowTitle>
+                <OptionRowDesc>{t('account.settings.accountName.desc')}</OptionRowDesc>
               </Box>
               <Box>
                 <Input
@@ -231,8 +231,8 @@ class HelperComp extends PureComponent<Props, State> {
             </Container>
             <Container>
               <Box>
-                <OptionRowTitle>{t('app:account.settings.unit.title')}</OptionRowTitle>
-                <OptionRowDesc>{t('app:account.settings.unit.desc')}</OptionRowDesc>
+                <OptionRowTitle>{t('account.settings.unit.title')}</OptionRowTitle>
+                <OptionRowDesc>{t('account.settings.unit.desc')}</OptionRowDesc>
               </Box>
               <Box style={{ width: 230 }}>
                 <Select
@@ -248,8 +248,8 @@ class HelperComp extends PureComponent<Props, State> {
             {canConfigureEndpointConfig(account) ? (
               <Container>
                 <Box>
-                  <OptionRowTitle>{t('app:account.settings.endpointConfig.title')}</OptionRowTitle>
-                  <OptionRowDesc>{t('app:account.settings.endpointConfig.desc')}</OptionRowDesc>
+                  <OptionRowTitle>{t('account.settings.endpointConfig.title')}</OptionRowTitle>
+                  <OptionRowDesc>{t('account.settings.endpointConfig.desc')}</OptionRowDesc>
                 </Box>
                 <Box>
                   <Input
@@ -266,7 +266,7 @@ class HelperComp extends PureComponent<Props, State> {
                 </Box>
               </Container>
             ) : null}
-            <Spoiler textTransform title={t('app:account.settings.advancedLogs')}>
+            <Spoiler textTransform title={t('account.settings.advancedLogs')}>
               <SyncAgo date={account.lastSyncDate} />
               <textarea
                 readOnly
@@ -292,10 +292,10 @@ class HelperComp extends PureComponent<Props, State> {
               type="button"
               onClick={this.handleOpenRemoveAccountModal}
             >
-              {t('app:common.delete')}
+              {t('common.delete')}
             </Button>
             <Button event="DoneEditingAccount" ml="auto" type="submit" primary>
-              {t('app:common.apply')}
+              {t('common.apply')}
             </Button>
           </ModalFooter>
         </form>
@@ -306,9 +306,9 @@ class HelperComp extends PureComponent<Props, State> {
           onClose={this.handleCloseRemoveAccountModal}
           onReject={this.handleCloseRemoveAccountModal}
           onConfirm={() => this.handleRemoveAccount(account)}
-          title={t('app:settings.removeAccountModal.title')}
-          subTitle={t('app:common.areYouSure')}
-          desc={t('app:settings.removeAccountModal.desc')}
+          title={t('settings.removeAccountModal.title')}
+          subTitle={t('common.areYouSure')}
+          desc={t('settings.removeAccountModal.desc')}
         />
       </ModalBody>
     )

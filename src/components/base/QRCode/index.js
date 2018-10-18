@@ -23,22 +23,39 @@ class QRCode extends PureComponent<Props> {
     this.drawQRCode()
   }
 
-  _canvas = null
+  canvas = React.createRef()
 
   drawQRCode() {
     const { data, size, errorCorrectionLevel } = this.props
-    qrcode.toCanvas(this._canvas, data, {
-      width: size,
-      margin: 0,
-      errorCorrectionLevel,
-      color: {
-        light: '#ffffff00', // transparent background
+    const { current } = this.canvas
+    if (!current) return
+    qrcode.toCanvas(
+      current,
+      data,
+      {
+        width: current.width,
+        margin: 0,
+        errorCorrectionLevel,
       },
-    })
+      () => {
+        // fix again the CSS because lib changes it –_–
+        current.style.width = `${size}px`
+        current.style.height = `${size}px`
+      },
+    )
   }
 
   render() {
-    return <canvas ref={n => (this._canvas = n)} />
+    const { size } = this.props
+    const px = size * (window.devicePixelRatio || 1)
+    return (
+      <canvas
+        style={{ cursor: 'none', width: `${size}px`, height: `${size}px` }}
+        width={px}
+        height={px}
+        ref={this.canvas}
+      />
+    )
   }
 }
 

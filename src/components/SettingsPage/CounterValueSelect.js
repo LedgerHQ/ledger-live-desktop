@@ -3,7 +3,7 @@
 import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { listFiatCurrencies } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { listFiatCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setCounterValue } from 'actions/settings'
 import { counterValueCurrencySelector } from 'reducers/settings'

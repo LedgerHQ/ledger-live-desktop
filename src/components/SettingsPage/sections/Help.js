@@ -36,43 +36,43 @@ class SectionHelp extends PureComponent<Props> {
 
         <Header
           icon={<IconHelp size={16} />}
-          title={t('app:settings.tabs.help')}
-          desc={t('app:settings.help.desc')}
+          title={t('settings.tabs.help')}
+          desc={t('settings.help.desc')}
         />
 
         <Body>
           <AboutRowItem
-            title={t('app:settings.help.faq')}
-            desc={t('app:settings.help.faqDesc')}
+            title={t('settings.help.faq')}
+            desc={t('settings.help.faqDesc')}
             url={urls.faq}
           />
           <Row
-            title={t('app:settings.profile.softResetTitle')}
-            desc={t('app:settings.profile.softResetDesc')}
+            title={t('settings.profile.softResetTitle')}
+            desc={t('settings.profile.softResetDesc')}
           >
             <CleanButton />
           </Row>
           <Row
-            title={t('app:settings.exportLogs.title')}
-            desc={t('app:settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
+            title={t('settings.exportLogs.title')}
+            desc={t('settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
           >
             <ExportLogsBtn />
           </Row>
           <Row
-            title={t('app:settings.profile.launchOnboarding')}
-            desc={t('app:settings.profile.launchOnboardingDesc')}
+            title={t('settings.profile.launchOnboarding')}
+            desc={t('settings.profile.launchOnboardingDesc')}
           >
             <LaunchOnboardingBtn />
           </Row>
           <Row
-            title={t('app:settings.openUserDataDirectory.title')}
-            desc={t('app:settings.openUserDataDirectory.desc')}
+            title={t('settings.openUserDataDirectory.title')}
+            desc={t('settings.openUserDataDirectory.desc')}
           >
             <OpenUserDataDirectoryBtn />
           </Row>
           <Row
-            title={t('app:settings.profile.hardResetTitle')}
-            desc={t('app:settings.profile.hardResetDesc')}
+            title={t('settings.profile.hardResetTitle')}
+            desc={t('settings.profile.hardResetDesc')}
           >
             <ResetButton />
           </Row>

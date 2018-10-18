@@ -21,7 +21,7 @@ function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
       <Box align="center" mb={6}>
         <CurrencyCircleIcon mb={3} size={40} currency={currency} />
         <Box ff="Open Sans" fontSize={4} color="dark" textAlign="center" style={{ width: 370 }}>
-          <Trans i18nKey="app:addAccounts.connectDevice.desc" parent="div">
+          <Trans i18nKey="addAccounts.connectDevice.desc" parent="div">
             {`Follow the steps below to add `}
             <strong style={{ fontWeight: 'bold' }}>{`${currency.name} (${
               currency.ticker
@@ -47,7 +47,7 @@ function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
 export function StepConnectDeviceFooter({ t, transitionTo, isAppOpened }: StepProps) {
   return (
     <Button primary disabled={!isAppOpened} onClick={() => transitionTo('import')}>
-      {t('app:common.continue')}
+      {t('common.continue')}
     </Button>
   )
 }

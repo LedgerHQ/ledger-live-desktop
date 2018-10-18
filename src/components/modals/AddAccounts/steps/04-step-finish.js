@@ -42,8 +42,8 @@ function StepFinish({ currency, t, checkedAccountsIds }: StepProps) {
           <IconCheckFull size={18} style={{ position: 'absolute', top: 0, right: 0 }} />
         </Box>
       ) : null}
-      <Title>{t('app:addAccounts.success', { count: checkedAccountsIds.length })}</Title>
-      <Text>{t('app:addAccounts.successDescription', { count: checkedAccountsIds.length })}</Text>
+      <Title>{t('addAccounts.success', { count: checkedAccountsIds.length })}</Title>
+      <Text>{t('addAccounts.successDescription', { count: checkedAccountsIds.length })}</Text>
     </Box>
   )
 }
@@ -53,7 +53,7 @@ export default StepFinish
 export const StepFinishFooter = ({ onGoStep1, t }: StepProps) => (
   <Fragment>
     <Button primary onClick={onGoStep1}>
-      {t('app:addAccounts.cta.addMore')}
+      {t('addAccounts.cta.addMore')}
     </Button>
   </Fragment>
 )

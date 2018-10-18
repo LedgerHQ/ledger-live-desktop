@@ -41,7 +41,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
         <TrackPage category="Onboarding" name="Select Device" flowType={onboarding.flowType} />
         <StepContainerInner>
           <Box mb={5}>
-            <Title>{t('onboarding:selectDevice.title')}</Title>
+            <Title>{t('onboarding.selectDevice.title')}</Title>
           </Box>
           <Box pt={4}>
             <Inner>
@@ -53,7 +53,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
                 <DeviceIcon>
                   <img alt="" src={i('ledger-nano-onb.svg')} />
                 </DeviceIcon>
-                <BlockTitle>{t('onboarding:selectDevice.ledgerNanoCard.title')}</BlockTitle>
+                <BlockTitle>{t('onboarding.selectDevice.ledgerNanoCard.title')}</BlockTitle>
               </DeviceContainer>
               <DeviceContainer
                 isActive={!onboarding.isLedgerNano && onboarding.isLedgerNano !== null}
@@ -63,7 +63,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
                 <DeviceIcon>
                   <img alt="" src={i('ledger-blue-onb.svg')} />
                 </DeviceIcon>
-                <BlockTitle>{t('onboarding:selectDevice.ledgerBlueCard.title')}</BlockTitle>
+                <BlockTitle>{t('onboarding.selectDevice.ledgerBlueCard.title')}</BlockTitle>
               </DeviceContainer>
             </Inner>
           </Box>

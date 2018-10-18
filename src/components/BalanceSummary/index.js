@@ -3,7 +3,7 @@
 import React, { Fragment } from 'react'
 import { BigNumber } from 'bignumber.js'
 import moment from 'moment'
-import { formatShort } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { formatShort } from '@ledgerhq/live-common/lib/currencies'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'

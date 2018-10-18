@@ -16,7 +16,7 @@ export default translate()(({ children, t }: { children: React$Node, t: * }) => 
         openURL(urls.feesMoreInfo)
         track('Send Flow Fees Help Requested')
       }}
-      label={t('app:send.steps.amount.fees')}
+      label={t('send.steps.amount.fees')}
     />
     <Box horizontal flow={5}>
       {children}

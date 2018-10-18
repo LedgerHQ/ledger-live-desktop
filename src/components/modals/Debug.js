@@ -3,14 +3,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
-import last from 'lodash/last'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import { getDerivationScheme, runDerivationScheme } from '@ledgerhq/live-common/lib/derivation'
 import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
 import { getCurrentDevice } from 'reducers/devices'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
-import { getDerivations } from 'helpers/derivations'
 import getAddress from 'commands/getAddress'
 import testInterval from 'commands/testInterval'
 import testCrash from 'commands/testCrash'
@@ -44,11 +43,14 @@ class Debug extends Component<*, *> {
   onClickStressDevice = (device: *) => async () => {
     try {
       const currency = getCryptoCurrencyById('bitcoin')
-      const derivation = last(getDerivations(currency))
+      const derivationScheme = getDerivationScheme({
+        currency,
+        derivationMode: 'segwit',
+      })
       for (let x = 0; x < 20; x++) {
         const { address, path } = await getAddress
           .send({
-            path: derivation({ currency, segwit: true, x }),
+            path: runDerivationScheme(derivationScheme, currency, { account: x }),
             currencyId: currency.id,
             devicePath: device.path,
           })
@@ -94,9 +96,12 @@ class Debug extends Component<*, *> {
         .then(o => o.stringVersion),
     )
     const currency = getCryptoCurrencyById('bitcoin')
-    const derivation = last(getDerivations(currency))
+    const derivationScheme = getDerivationScheme({
+      currency,
+      derivationMode: 'segwit',
+    })
     const obj = {
-      path: derivation({ currency, segwit: true, x: 0 }),
+      path: runDerivationScheme(derivationScheme, currency),
       currencyId: currency.id,
       devicePath: device.path,
     }

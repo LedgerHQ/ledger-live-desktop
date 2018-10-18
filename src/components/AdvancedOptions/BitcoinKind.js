@@ -15,12 +15,12 @@ type Props = {
 }
 
 export default translate()(({ isRBF, onChangeRBF, t }: Props) => (
-  <Spoiler title={t('app:send.steps.amount.advancedOptions')}>
+  <Spoiler title={t('send.steps.amount.advancedOptions')}>
     <Box horizontal align="center" flow={5}>
       <Box style={{ width: 200 }}>
         <Label>
-          <span>{t('app:send.steps.amount.useRBF')}</span>
-          <LabelInfoTooltip ml={1} text={t('app:send.steps.amount.useRBF')} />
+          <span>{t('send.steps.amount.useRBF')}</span>
+          <LabelInfoTooltip ml={1} text={t('send.steps.amount.useRBF')} />
         </Label>
       </Box>
       <Box grow>
@@ -32,7 +32,7 @@ export default translate()(({ isRBF, onChangeRBF, t }: Props) => (
     <Box horizontal align="flex-start" flow={5}>
       <Box style={{ width: 200 }}>
         <Label>
-          <span>{t('app:send.steps.amount.message')}</span>
+          <span>{t('send.steps.amount.message')}</span>
         </Label>
       </Box>
       <Box grow>

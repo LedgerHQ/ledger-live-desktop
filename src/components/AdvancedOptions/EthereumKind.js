@@ -15,11 +15,11 @@ type Props = {
 }
 
 export default translate()(({ gasLimit, onChangeGasLimit, t }: Props) => (
-  <Spoiler title={t('app:send.steps.amount.advancedOptions')}>
+  <Spoiler title={t('send.steps.amount.advancedOptions')}>
     <Box horizontal align="center" flow={5}>
       <Box style={{ width: 200 }}>
         <Label>
-          <span>{t('app:send.steps.amount.ethereumGasLimit')}</span>
+          <span>{t('send.steps.amount.ethereumGasLimit')}</span>
         </Label>
       </Box>
       <Box grow>

@@ -35,10 +35,10 @@ export function StepConnectDeviceFooter({
           transitionTo('receive')
         }}
       >
-        {t('app:receive.steps.connectDevice.withoutDevice')}
+        {t('receive.steps.connectDevice.withoutDevice')}
       </Button>
       <Button disabled={!isAppOpened} primary onClick={() => transitionTo('confirm')}>
-        {t('app:common.continue')}
+        {t('common.continue')}
       </Button>
     </Box>
   )

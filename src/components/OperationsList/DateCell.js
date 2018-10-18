@@ -29,7 +29,7 @@ class DateCell extends PureComponent<Props> {
     return (
       <Cell>
         <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke">
-          {t(`app:operation.type.${operation.type}`)}
+          {t(`operation.type.${operation.type}`)}
         </Box>
         <OperationDate date={operation.date} />
       </Cell>

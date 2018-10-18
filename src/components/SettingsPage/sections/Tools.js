@@ -25,9 +25,11 @@ class TabProfile extends PureComponent<*, *> {
   renderQRCodeModal = ({ onClose }: any) => (
     <ModalBody onClose={onClose} justify="center" align="center">
       <ModalTitle>{'QRCode Mobile Export'}</ModalTitle>
-      <ModalContent flow={4}>
+      <ModalContent flow={2}>
         <Box>Scan this animated QRCode with Ledger Live Mobile App</Box>
-        <QRCodeExporter />
+        <Box flow={2}>
+          <QRCodeExporter />
+        </Box>
       </ModalContent>
     </ModalBody>
   )

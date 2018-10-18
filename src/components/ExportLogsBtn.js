@@ -78,7 +78,7 @@ class ExportLogsBtn extends Component<{
       <KeyHandler keyValue="e" onKeyHandle={this.onKeyHandle} />
     ) : (
       <Button small primary event="ExportLogs" onClick={this.handleExportLogs}>
-        {t('app:settings.exportLogs.btn')}
+        {t('settings.exportLogs.btn')}
       </Button>
     )
   }

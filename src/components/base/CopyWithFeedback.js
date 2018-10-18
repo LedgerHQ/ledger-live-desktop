@@ -53,7 +53,7 @@ class CopyWithFeedback extends PureComponent<Props, State> {
     return (
       <ClickableWrapper onClick={this.handleCopy}>
         <IconCopy size={16} />
-        <span>{isCopied ? t('app:common.copied') : t('app:common.copy')}</span>
+        <span>{isCopied ? t('common.copied') : t('common.copy')}</span>
       </ClickableWrapper>
     )
   }

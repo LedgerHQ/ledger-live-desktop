@@ -21,7 +21,6 @@ import SelectCurrency from 'components/SelectCurrency'
 import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
 
 import { idleCallback } from 'helpers/promise'
-import { splittedCurrencies } from 'config/cryptocurrencies'
 
 import scanFromXPUB from 'commands/libcoreScanFromXPUB'
 
@@ -80,12 +79,19 @@ class AccountImporter extends PureComponent<Props, State> {
     try {
       const { currency, xpub, isSegwit, isUnsplit } = this.state
       invariant(currency, 'no currency')
+      const derivationMode = isSegwit
+        ? isUnsplit
+          ? 'segwit_unsplit'
+          : 'segwit'
+        : isUnsplit
+          ? 'unsplit'
+          : ''
       const rawAccount = await scanFromXPUB
         .send({
+          seedIdentifier: 'dev_tool',
           currencyId: currency.id,
           xpub,
-          isSegwit,
-          isUnsplit,
+          derivationMode,
         })
         .toPromise()
       const account = decodeAccount(rawAccount)
@@ -107,7 +113,7 @@ class AccountImporter extends PureComponent<Props, State> {
 
   render() {
     const { currency, xpub, isSegwit, isUnsplit, status, account, error } = this.state
-    const supportsSplit = !!currency && !!splittedCurrencies[currency.id]
+    const supportsSplit = !!currency && !!currency.forkedFrom
     return (
       <Card title="Import from xpub" flow={3}>
         {status === 'idle' ? (

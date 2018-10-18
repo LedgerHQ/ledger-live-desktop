@@ -34,8 +34,8 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
     return (
       <Container>
         <TrackPage category="Send Flow" name="Step 3" />
-        <WarnBox>{multiline(t('app:send.steps.verification.warning'))}</WarnBox>
-        <Info>{t('app:send.steps.verification.body')}</Info>
+        <WarnBox>{multiline(t('send.steps.verification.warning'))}</WarnBox>
+        <Info>{t('send.steps.verification.body')}</Info>
         <DeviceConfirm />
       </Container>
     )

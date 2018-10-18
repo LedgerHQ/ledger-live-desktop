@@ -14,7 +14,7 @@ export default function StepAccount({ t, account, onChangeAccount }: StepProps) 
   return (
     <Box flow={1}>
       <TrackPage category="Receive Flow" name="Step 1" />
-      <Label>{t('app:receive.steps.chooseAccount.label')}</Label>
+      <Label>{t('receive.steps.chooseAccount.label')}</Label>
       <SelectAccount autoFocus onChange={onChangeAccount} value={account} />
     </Box>
   )
@@ -23,7 +23,7 @@ export default function StepAccount({ t, account, onChangeAccount }: StepProps) 
 export function StepAccountFooter({ t, transitionTo, account }: StepProps) {
   return (
     <Button disabled={!account} primary onClick={() => transitionTo('device')}>
-      {t('app:common.continue')}
+      {t('common.continue')}
     </Button>
   )
 }

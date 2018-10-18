@@ -1,24 +1,32 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { Buffer } from 'buffer'
 import { createSelector } from 'reselect'
 import { connect } from 'react-redux'
 
 import { accountsSelector } from 'reducers/accounts'
-import { makeChunks } from '@ledgerhq/live-common/lib/bridgestream/exporter'
+import { exportSettingsSelector } from 'reducers/settings'
+import { encode } from '@ledgerhq/live-common/lib/cross'
+import { dataToFrames } from 'qrloop/exporter'
 import QRCode from './base/QRCode'
 
-const mapStateToProps = createSelector(accountsSelector, accounts => ({
-  chunks: makeChunks({
-    accounts,
-    exporterName: 'desktop',
-    exporterVersion: __APP_VERSION__,
-    pad: true,
+const mapStateToProps = createSelector(
+  accountsSelector,
+  exportSettingsSelector,
+  (accounts, settings) => ({
+    chunks: dataToFrames(
+      encode({
+        accounts,
+        settings,
+        exporterName: 'desktop',
+        exporterVersion: __APP_VERSION__,
+      }),
+      200,
+      4,
+    ),
   }),
-}))
-
-const LOW_FPS = 2
-const HIGH_FPS = 8
+)
 
 class QRCodeExporter extends PureComponent<
   {
@@ -31,23 +39,21 @@ class QRCodeExporter extends PureComponent<
   },
 > {
   static defaultProps = {
-    size: 440,
+    size: 460,
   }
 
   state = {
     frame: 0,
-    fps: HIGH_FPS,
+    fps: 3,
   }
 
   componentDidMount() {
-    console.log(`BRIDGESTREAM_DATA=${btoa(JSON.stringify(this.props.chunks))}`) // eslint-disable-line
+    const BRIDGESTREAM_DATA = Buffer.from(JSON.stringify(this.props.chunks)).toString('base64')
+    console.log(`BRIDGESTREAM_DATA=${BRIDGESTREAM_DATA}`) // eslint-disable-line
 
-    const nextFrame = ({ frame, fps }, { chunks }) => {
+    const nextFrame = ({ frame }, { chunks }) => {
       frame = (frame + 1) % chunks.length
-      return {
-        frame,
-        fps: frame === 0 ? (fps === LOW_FPS ? HIGH_FPS : LOW_FPS) : fps,
-      }
+      return { frame }
     }
 
     let lastT

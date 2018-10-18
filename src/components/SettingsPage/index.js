@@ -40,22 +40,22 @@ class SettingsPage extends PureComponent<Props, State> {
     this._items = [
       {
         key: 'display',
-        label: props.t('app:settings.tabs.display'),
+        label: props.t('settings.tabs.display'),
         value: SectionDisplay,
       },
       {
         key: 'currencies',
-        label: props.t('app:settings.tabs.currencies'),
+        label: props.t('settings.tabs.currencies'),
         value: SectionCurrencies,
       },
       {
         key: 'about',
-        label: props.t('app:settings.tabs.about'),
+        label: props.t('settings.tabs.about'),
         value: SectionAbout,
       },
       {
         key: 'help',
-        label: props.t('app:settings.tabs.help'),
+        label: props.t('settings.tabs.help'),
         value: SectionHelp,
       },
     ]
@@ -107,7 +107,7 @@ class SettingsPage extends PureComponent<Props, State> {
     return (
       <Box pb={4} selectable>
         <Box ff="Museo Sans|Regular" color="dark" fontSize={7} mb={5} data-e2e="settings_title">
-          {t('app:settings.title')}
+          {t('settings.title')}
         </Box>
         <Pills mb={4} items={items} activeKey={tab.key} onChange={this.handleChangeTab} />
         <Switch>

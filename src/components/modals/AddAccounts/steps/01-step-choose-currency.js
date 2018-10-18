@@ -19,7 +19,7 @@ export function StepChooseCurrencyFooter({ transitionTo, currency, t }: StepProp
       <TrackPage category="AddAccounts" name="Step1" />
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       <Button primary disabled={!currency} onClick={() => transitionTo('connectDevice')}>
-        {t('app:common.continue')}
+        {t('common.continue')}
       </Button>
     </Fragment>
   )

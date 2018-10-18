@@ -5,7 +5,7 @@ import {
   findCurrencyByTicker,
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
-} from '@ledgerhq/live-common/lib/helpers/currencies'
+} from '@ledgerhq/live-common/lib/currencies'
 import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import languages from 'config/languages'
 import { createSelector } from 'reselect'
@@ -223,5 +223,16 @@ export const shareAnalyticsSelector = (state: State) => state.settings.shareAnal
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding
+
+export const exportSettingsSelector = createSelector(
+  counterValueCurrencySelector,
+  counterValueExchangeSelector,
+  state => state.settings.currenciesSettings,
+  (counterValueCurrency, counterValueExchange, currenciesSettings) => ({
+    counterValue: counterValueCurrency.ticker,
+    counterValueExchange,
+    currenciesSettings,
+  }),
+)
 
 export default handleActions(handlers, INITIAL_STATE)

@@ -56,11 +56,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
           withIcon
         />
       )}
-      {!isAvailable ? (
-        <PlaceholderLine dark width={60} />
-      ) : (
-        <Sub>{t(`app:time.since.${since}`)}</Sub>
-      )}
+      {!isAvailable ? <PlaceholderLine dark width={60} /> : <Sub>{t(`time.since.${since}`)}</Sub>}
     </Box>
   )
 }
@@ -82,11 +78,7 @@ export function BalanceSinceDiff(props: Props) {
           withIcon
         />
       )}
-      {!isAvailable ? (
-        <PlaceholderLine dark width={60} />
-      ) : (
-        <Sub>{t(`app:time.since.${since}`)}</Sub>
-      )}
+      {!isAvailable ? <PlaceholderLine dark width={60} /> : <Sub>{t(`time.since.${since}`)}</Sub>}
     </Box>
   )
 }
@@ -127,7 +119,7 @@ function BalanceInfos(props: Props) {
         isAvailable={isAvailable}
         totalBalance={totalBalance}
       >
-        <Sub>{t('app:dashboard.totalBalance')}</Sub>
+        <Sub>{t('dashboard.totalBalance')}</Sub>
       </BalanceTotal>
       <BalanceSincePercent
         alignItems="flex-end"

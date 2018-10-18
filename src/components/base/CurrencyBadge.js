@@ -45,7 +45,7 @@ function CurrencyBadge({ currency, ...props }: { currency: Currency }) {
         <Box ff="Museo Sans|ExtraBold" color="dark" fontSize={2} style={{ letterSpacing: 2 }}>
           {currency.ticker}
         </Box>
-        <Box ff="Open Sans" color="dark" fontSize={5}>
+        <Box ff="Open Sans" color="dark" fontSize={5} data-e2e="currencyBadge">
           {currency.name}
         </Box>
       </Box>

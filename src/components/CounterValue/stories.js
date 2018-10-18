@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { storiesOf } from '@storybook/react'
 import { number } from '@storybook/addon-knobs'
 

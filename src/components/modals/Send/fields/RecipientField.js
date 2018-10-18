@@ -103,7 +103,7 @@ class RecipientField<Transaction> extends Component<
       <Box flow={1}>
         <LabelWithExternalIcon
           onClick={this.handleRecipientAddressHelp}
-          label={t('app:send.steps.amount.recipientAddress')}
+          label={t('send.steps.amount.recipientAddress')}
         />
         <RecipientAddress
           autoFocus={autoFocus}

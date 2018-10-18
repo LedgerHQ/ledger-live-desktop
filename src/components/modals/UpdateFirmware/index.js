@@ -20,7 +20,7 @@ import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmatio
 const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): Array<*> => {
   const updateStep = {
     id: 'idCheck',
-    label: t('app:manager.modal.identifier'),
+    label: t('manager.modal.identifier'),
     component: StepFullFirmwareInstall,
     footer: null,
     onBack: null,
@@ -29,7 +29,7 @@ const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): 
 
   const finalStep = {
     id: 'finish',
-    label: t('app:addAccounts.breadcrumb.finish'),
+    label: t('addAccounts.breadcrumb.finish'),
     component: StepConfirmation,
     footer: StepConfirmFooter,
     onBack: null,
@@ -38,7 +38,7 @@ const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): 
 
   const mcuStep = {
     id: 'updateMCU',
-    label: t('app:manager.modal.steps.updateMCU'),
+    label: t('manager.modal.steps.updateMCU'),
     component: StepFlashMcu,
     footer: null,
     onBack: null,
@@ -132,7 +132,7 @@ class UpdateModal extends PureComponent<Props, State> {
           <Stepper
             key={nonce}
             onStepChange={this.handleStepChange}
-            title={t('app:manager.firmware.update')}
+            title={t('manager.firmware.update')}
             initialStepId={stepId}
             steps={this.STEPS}
             {...additionalProps}

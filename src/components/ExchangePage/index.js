@@ -86,10 +86,10 @@ class ExchangePage extends PureComponent<Props> {
       <Box pb={6} selectable>
         <TrackPage category="Exchange" />
         <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
-          {t('app:exchange.title')}
+          {t('exchange.title')}
         </Box>
         <Box ff="Museo Sans|Light" fontSize={5} mb={5}>
-          {t('app:exchange.desc')}
+          {t('exchange.desc')}
         </Box>
         <Box flow={3}>{cards.map(card => <ExchangeCard key={card.key} t={t} card={card} />)}</Box>
       </Box>

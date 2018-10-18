@@ -7,7 +7,15 @@ import bs58check from 'ripple-bs58check'
 import { computeBinaryTransactionHash } from 'ripple-hashes'
 import throttle from 'lodash/throttle'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
-import { getDerivations } from 'helpers/derivations'
+import {
+  getDerivationModesForCurrency,
+  getDerivationScheme,
+  runDerivationScheme,
+} from '@ledgerhq/live-common/lib/derivation'
+import {
+  getAccountPlaceholderName,
+  getNewAccountPlaceholderName,
+} from '@ledgerhq/live-common/lib/account'
 import getAddress from 'commands/getAddress'
 import signTransaction from 'commands/signTransaction'
 import {
@@ -19,7 +27,6 @@ import {
 } from 'api/Ripple'
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
-import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
 import {
   NotEnoughBalance,
   FeeNotLoaded,
@@ -211,7 +218,7 @@ const txToOperation = (account: Account) => ({
   }
 
   const op: $Exact<Operation> = {
-    id,
+    id: `${account.id}-${id}-${type}`,
     hash: id,
     accountId: account.id,
     type,
@@ -289,17 +296,19 @@ const RippleJSBridge: WalletBridge<Transaction> = {
           const minLedgerVersion = Number(ledgers[0])
           const maxLedgerVersion = Number(ledgers[1])
 
-          const derivations = getDerivations(currency)
-          for (const derivation of derivations) {
-            const legacy = derivation !== derivations[derivations.length - 1]
+          const derivationModes = getDerivationModesForCurrency(currency)
+          for (const derivationMode of derivationModes) {
+            const derivationScheme = getDerivationScheme({ derivationMode, currency })
             for (let index = 0; index < 255; index++) {
-              const freshAddressPath = derivation({ currency, x: index, segwit: false })
-              const { address, publicKey } = await await getAddress
+              const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
+                account: index,
+              })
+              const { address } = await await getAddress
                 .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
                 .toPromise()
               if (finished) return
 
-              const accountId = `ripplejs:${currency.id}:${address}:${publicKey}`
+              const accountId = `ripplejs:2:${currency.id}:${address}:${derivationMode}`
 
               let info
               try {
@@ -316,11 +325,12 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               if (!info) {
                 // account does not exist in Ripple server
                 // we are generating a new account locally
-                if (!legacy) {
+                if (derivationMode === '') {
                   o.next({
                     id: accountId,
-                    xpub: '',
-                    name: getNewAccountPlaceholderName(currency, index),
+                    seedIdentifier: freshAddress,
+                    derivationMode,
+                    name: getNewAccountPlaceholderName({ currency, index, derivationMode }),
                     freshAddress,
                     freshAddressPath,
                     balance: BigNumber(0),
@@ -353,8 +363,9 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
               const account: $Exact<Account> = {
                 id: accountId,
-                xpub: '',
-                name: getAccountPlaceholderName(currency, index, legacy),
+                seedIdentifier: freshAddress,
+                derivationMode,
+                name: getAccountPlaceholderName({ currency, index, derivationMode }),
                 freshAddress,
                 freshAddressPath,
                 balance,

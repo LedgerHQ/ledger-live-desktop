@@ -90,7 +90,7 @@ class MainSideBar extends PureComponent<Props> {
   ADD_ACCOUNT_EMPTY_STATE = (
     <Box relative pr={3}>
       <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
-      {this.props.t('app:emptyState.sidebar.text')}
+      {this.props.t('emptyState.sidebar.text')}
     </Box>
   )
 
@@ -107,10 +107,7 @@ class MainSideBar extends PureComponent<Props> {
     const { pathname } = location
 
     const addAccountButton = (
-      <AddAccountButton
-        tooltipText={t('app:addAccounts.title')}
-        onClick={this.handleOpenImportModal}
-      />
+      <AddAccountButton tooltipText={t('addAccounts.title')} onClick={this.handleOpenImportModal} />
     )
 
     return (
@@ -118,9 +115,9 @@ class MainSideBar extends PureComponent<Props> {
         <TopGradient />
         <GrowScroll>
           <Space of={70} />
-          <SideBarList title={t('app:sidebar.menu')}>
+          <SideBarList title={t('sidebar.menu')}>
             <SideBarListItem
-              label={t('app:dashboard.title')}
+              label={t('dashboard.title')}
               icon={IconPieChart}
               iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
@@ -128,28 +125,28 @@ class MainSideBar extends PureComponent<Props> {
               hasNotif={updateStatus === 'downloaded'}
             />
             <SideBarListItem
-              label={t('app:send.title')}
+              label={t('send.title')}
               icon={IconSend}
               iconActiveColor="wallet"
               onClick={this.handleOpenSendModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
-              label={t('app:receive.title')}
+              label={t('receive.title')}
               icon={IconReceive}
               iconActiveColor="wallet"
               onClick={this.handleOpenReceiveModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
-              label={t('app:sidebar.manager')}
+              label={t('sidebar.manager')}
               icon={IconManager}
               iconActiveColor="wallet"
               onClick={this.handleClickManager}
               isActive={pathname === '/manager'}
             />
             <SideBarListItem
-              label={t('app:sidebar.exchange')}
+              label={t('sidebar.exchange')}
               icon={IconExchange}
               iconActiveColor="wallet"
               onClick={this.handleClickExchange}
@@ -158,7 +155,7 @@ class MainSideBar extends PureComponent<Props> {
             {developerMode && (
               <KeyboardContent sequence="DEVTOOLS">
                 <SideBarListItem
-                  label={t('app:sidebar.developer')}
+                  label={t('sidebar.developer')}
                   icon={IconDev}
                   iconActiveColor="wallet"
                   onClick={this.handleClickDev}
@@ -169,7 +166,7 @@ class MainSideBar extends PureComponent<Props> {
           </SideBarList>
           <Space of={40} />
           <SideBarList
-            title={t('app:sidebar.accounts', { count: accounts.length })}
+            title={t('sidebar.accounts', { count: accounts.length })}
             titleRight={addAccountButton}
             emptyState={this.ADD_ACCOUNT_EMPTY_STATE}
           >

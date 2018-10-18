@@ -33,7 +33,7 @@ class RippleKind extends Component<Props> {
       <Box vertical flow={5}>
         <Box grow>
           <Label>
-            <span>{t('app:send.steps.amount.rippleTag')}</span>
+            <span>{t('send.steps.amount.rippleTag')}</span>
           </Label>
           <Input value={String(tag || '')} onChange={this.onChange} />
         </Box>

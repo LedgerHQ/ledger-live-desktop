@@ -8,7 +8,7 @@ import {
   getOrderAccounts,
 } from 'reducers/settings'
 import { accountsSelector } from 'reducers/accounts'
-import { sortAccounts } from 'helpers/accountOrdering'
+import { sortAccounts } from '@ledgerhq/live-common/lib/account'
 
 const accountsBtcBalanceSelector = createSelector(
   accountsSelector,
