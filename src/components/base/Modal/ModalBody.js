@@ -42,7 +42,10 @@ class ModalBody extends PureComponent<Props, State> {
     const { children, onClose, deferHeight, ...props } = this.props
     const { isHidden } = this.state
     return (
-      <Body style={{ height: isHidden && deferHeight ? deferHeight : undefined }}>
+      <Body
+        style={{ height: isHidden && deferHeight ? deferHeight : undefined }}
+        data-e2e="modalBody"
+      >
         {onClose && (
           <CloseContainer onClick={onClose}>
             <IconCross size={16} />

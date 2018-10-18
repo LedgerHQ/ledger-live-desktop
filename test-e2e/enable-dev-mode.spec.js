@@ -113,6 +113,12 @@ describe('Application launch', () => {
       // Add New Account
       await app.client.click('[data-e2e=menuAddAccount_button]')
       await waitForExpectedText(app, '[data-e2e=modal_title]', 'Add accounts')
+
+      // Select Bitcoin Testnet from dropdown list
+      await app.client.setValue('[data-e2e=modalBody] input', 'Bitcoin testnet')
+      await app.client.keys('Enter')
+      const currencyBadge = await app.client.getText('[data-e2e=currencyBadge]')
+      expect(currencyBadge).toEqual('Bitcoin Testnet')
     },
     TIMEOUT,
   )
