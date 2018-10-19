@@ -12,7 +12,6 @@ import user from 'helpers/user'
 import { resolveLogsDirectory, cleanUpBeforeClosingSync } from 'helpers/log'
 import { deserializeError } from 'helpers/errors'
 
-import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
@@ -144,14 +143,4 @@ ipcMain.on('sentryLogsChanged', (event, payload) => {
   const p = internalProcess
   if (!p) return
   p.send({ type: 'sentryLogsChanged', payload })
-})
-
-// TODO move this to "command" pattern
-ipcMain.on('updater', (event, { type, data }) => {
-  const handler = {
-    init: setupAutoUpdater,
-    quitAndInstall,
-  }[type]
-  const send = (type: string, data: *) => event.sender.send('updater', { type, data })
-  handler(send, data, type)
 })

@@ -51,3 +51,8 @@ export const FeeNotLoaded = createCustomErrorClass('FeeNotLoaded')
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')
 export const DBWrongPassword = createCustomErrorClass('DBWrongPassword')
 export const DBNotReset = createCustomErrorClass('DBNotReset')
+
+// auto-update errors
+export const UpdateIncorrectHash = createCustomErrorClass('UpdateIncorrectHash')
+export const UpdateIncorrectSig = createCustomErrorClass('UpdateIncorrectSig')
+export const UpdateFetchFileFail = createCustomErrorClass('UpdateFetchFileFail')

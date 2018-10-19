@@ -69,6 +69,7 @@
     "lru-cache": "^4.1.3",
     "measure-scrollbar": "^1.1.0",
     "moment": "^2.22.2",
+    "openpgp": "^4.2.1",
     "qrcode": "^1.2.0",
     "qrloop": "0.8.1",
     "qs": "^6.5.1",
