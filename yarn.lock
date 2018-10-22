@@ -12861,10 +12861,10 @@ qrcode@^1.2.0:
     pngjs "^3.3.0"
     yargs "^8.0.2"
 
-qrloop@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/qrloop/-/qrloop-0.6.1.tgz#167f8868f03018c7625b0e887049830e9253beae"
-  integrity sha512-1wJwoKpukmkfqwzyb9lMMEE9BDWXlKv63J/gdWMIeUfzgSR3QrZ3VKTtjN9Xvyo1DWwJd/G3FuMtJaH9cf+XUw==
+qrloop@0.8.0-beta.2:
+  version "0.8.0-beta.2"
+  resolved "https://registry.yarnpkg.com/qrloop/-/qrloop-0.8.0-beta.2.tgz#23253ffe4a2754a5752039225db81e58a068ae42"
+  integrity sha512-hCSS6pJ+eIDQGaHqztEq/WIn0w5T06nBWptCUl6oX3rJbdmpK7cg0cqGBSnB+pITKtzyvPpVe4t7L0tIGk7NhQ==
   dependencies:
     flow-typed "^2.5.1"
     md5 "^2.2.1"

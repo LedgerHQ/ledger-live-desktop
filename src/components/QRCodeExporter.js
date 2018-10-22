@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import { Buffer } from 'buffer'
-import { createSelector } from 'reselect'
+import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
 import { accountsSelector } from 'reducers/accounts'
@@ -11,26 +11,15 @@ import { encode } from '@ledgerhq/live-common/lib/cross'
 import { dataToFrames } from 'qrloop/exporter'
 import QRCode from './base/QRCode'
 
-const mapStateToProps = createSelector(
-  accountsSelector,
-  exportSettingsSelector,
-  (accounts, settings) => ({
-    chunks: dataToFrames(
-      encode({
-        accounts,
-        settings,
-        exporterName: 'desktop',
-        exporterVersion: __APP_VERSION__,
-      }),
-      200,
-      4,
-    ),
-  }),
-)
+const mapStateToProps = createStructuredSelector({
+  accounts: accountsSelector,
+  settings: exportSettingsSelector,
+})
 
 class QRCodeExporter extends PureComponent<
   {
-    chunks: string[],
+    accounts: *,
+    settings: *,
     size: number,
   },
   {
@@ -42,17 +31,34 @@ class QRCodeExporter extends PureComponent<
     size: 460,
   }
 
+  constructor(props) {
+    super()
+    const { accounts, settings } = props
+    const data = encode({
+      accounts,
+      settings,
+      exporterName: 'desktop',
+      exporterVersion: __APP_VERSION__,
+    })
+
+    this.chunks = dataToFrames(data, 160, 4)
+
+    setTimeout(() => {
+      const BRIDGESTREAM_DATA = Buffer.from(JSON.stringify(dataToFrames(data, 160, 1))).toString(
+        'base64',
+      )
+      console.log(`BRIDGESTREAM_DATA=${BRIDGESTREAM_DATA}`) // eslint-disable-line
+    }, 500)
+  }
+
   state = {
     frame: 0,
     fps: 3,
   }
 
   componentDidMount() {
-    const BRIDGESTREAM_DATA = Buffer.from(JSON.stringify(this.props.chunks)).toString('base64')
-    console.log(`BRIDGESTREAM_DATA=${BRIDGESTREAM_DATA}`) // eslint-disable-line
-
-    const nextFrame = ({ frame }, { chunks }) => {
-      frame = (frame + 1) % chunks.length
+    const nextFrame = ({ frame }) => {
+      frame = (frame + 1) % this.chunks.length
       return { frame }
     }
 
@@ -71,11 +77,13 @@ class QRCodeExporter extends PureComponent<
     cancelAnimationFrame(this._raf)
   }
 
+  chunks: string[]
   _raf: *
 
   render() {
     const { frame } = this.state
-    const { chunks, size } = this.props
+    const { size } = this.props
+    const { chunks } = this
     return (
       <div style={{ position: 'relative', width: size, height: size }}>
         {chunks.map((chunk, i) => (

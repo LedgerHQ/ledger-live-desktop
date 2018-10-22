@@ -70,7 +70,7 @@
     "measure-scrollbar": "^1.1.0",
     "moment": "^2.22.2",
     "qrcode": "^1.2.0",
-    "qrloop": "^0.6.1",
+    "qrloop": "0.8.0-beta.2",
     "qs": "^6.5.1",
     "raven": "^2.5.0",
     "raven-js": "^3.24.2",
