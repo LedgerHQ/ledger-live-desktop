@@ -23,6 +23,7 @@ import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
 import { idleCallback } from 'helpers/promise'
 
 import scanFromXPUB from 'commands/libcoreScanFromXPUB'
+import { getBridgeForCurrency } from 'bridge'
 
 const mapDispatchToProps = {
   addAccount,
@@ -33,6 +34,7 @@ type Props = {
 }
 
 const INITIAL_STATE = {
+  xpubLabel: 'xpub',
   status: 'idle',
   currency: null,
   xpub: '',
@@ -43,6 +45,7 @@ const INITIAL_STATE = {
 }
 
 type State = {
+  xpubLabel: string,
   status: string,
   currency: ?Currency,
   xpub: string,
@@ -56,8 +59,8 @@ class AccountImporter extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
   onChangeCurrency = currency => {
-    if (currency.family !== 'bitcoin') return
     this.setState({
+      xpubLabel: currency.family !== 'bitcoin' ? 'Public Address' : 'xpub',
       currency,
       isSegwit: !!currency.supportsSegwit,
       isUnsplit: false,
@@ -79,23 +82,39 @@ class AccountImporter extends PureComponent<Props, State> {
     try {
       const { currency, xpub, isSegwit, isUnsplit } = this.state
       invariant(currency, 'no currency')
-      const derivationMode = isSegwit
-        ? isUnsplit
-          ? 'segwit_unsplit'
-          : 'segwit'
-        : isUnsplit
-          ? 'unsplit'
-          : ''
-      const rawAccount = await scanFromXPUB
-        .send({
-          seedIdentifier: 'dev_tool',
-          currencyId: currency.id,
-          xpub,
-          derivationMode,
-        })
-        .toPromise()
-      const account = decodeAccount(rawAccount)
-      this.setState({ status: 'finish', account })
+
+      if (currency.family === 'bitcoin') {
+        const derivationMode = isSegwit
+          ? isUnsplit
+            ? 'segwit_unsplit'
+            : 'segwit'
+          : isUnsplit
+            ? 'unsplit'
+            : ''
+        const rawAccount = await scanFromXPUB
+          .send({
+            seedIdentifier: 'dev_tool',
+            currencyId: currency.id,
+            xpub,
+            derivationMode,
+          })
+          .toPromise()
+        const account = decodeAccount(rawAccount)
+        this.setState({ status: 'finish', account })
+      } else {
+        const { getDummyAccountFromAddress } = getBridgeForCurrency(currency)
+        if (getDummyAccountFromAddress) {
+          this.setState({
+            status: 'finish',
+            account: await getDummyAccountFromAddress(currency, xpub),
+          })
+        } else {
+          this.setState({
+            status: 'error',
+            error: new Error(`Bridge for ${currency.name} doesn't implement dummy accounts`),
+          })
+        }
+      }
     } catch (error) {
       this.setState({ status: 'error', error })
     }
@@ -112,14 +131,14 @@ class AccountImporter extends PureComponent<Props, State> {
   reset = () => this.setState(INITIAL_STATE)
 
   render() {
-    const { currency, xpub, isSegwit, isUnsplit, status, account, error } = this.state
+    const { xpubLabel, currency, xpub, isSegwit, isUnsplit, status, account, error } = this.state
     const supportsSplit = !!currency && !!currency.forkedFrom
     return (
-      <Card title="Import from xpub" flow={3}>
+      <Card title="Import" flow={3}>
         {status === 'idle' ? (
           <Fragment>
             <Box flow={1}>
-              <Label>{'currency'}</Label>
+              <Label>{'Currency'}</Label>
               <SelectCurrency autoFocus value={currency} onChange={this.onChangeCurrency} />
             </Box>
             {currency && (currency.supportsSegwit || supportsSplit) ? (
@@ -142,20 +161,25 @@ class AccountImporter extends PureComponent<Props, State> {
                 )}
               </Box>
             ) : null}
-            <Box flow={1}>
-              <Label>{'xpub'}</Label>
-              <Input
-                placeholder="xpub"
-                value={xpub}
-                onChange={this.onChangeXPUB}
-                onEnter={this.scan}
-              />
-            </Box>
-            <Box align="flex-end">
-              <Button primary small disabled={!this.isValid()} onClick={this.scan}>
-                {'scan'}
-              </Button>
-            </Box>
+            {currency ? (
+              <Box>
+                <Box flow={1}>
+                  <Label>{xpubLabel}</Label>
+                  <Input
+                    placeholder={xpubLabel}
+                    value={xpub}
+                    onChange={this.onChangeXPUB}
+                    onEnter={this.scan}
+                  />
+                </Box>
+                <br />
+                <Box align="flex-end" flow={2}>
+                  <Button primary small disabled={!this.isValid()} onClick={this.scan}>
+                    {'Scan'}
+                  </Button>
+                </Box>
+              </Box>
+            ) : null}
           </Fragment>
         ) : status === 'scanning' ? (
           <Box align="center" justify="center" p={5}>

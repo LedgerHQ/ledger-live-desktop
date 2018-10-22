@@ -36,6 +36,10 @@ export interface WalletBridge<Transaction> {
   // TODO return Observable
   scanAccountsOnDevice(currency: Currency, deviceId: DeviceId): Observable<Account>;
 
+  // only for devtools mode, allows us to import non-bitcoin-family accounts for monitoring
+  // making it easier to stress test the system using very active accounts as a base.
+  getDummyAccountFromAddress?: (currency: Currency, freshAddress: string) => Account;
+
   // synchronize an account. meaning updating the account object with latest state.
   // function receives the initialAccount object so you can actually know what the user side currently have
   // then you must emit one or more updater functions to inform data changes.

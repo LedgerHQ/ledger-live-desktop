@@ -203,6 +203,27 @@ const fetchCurrentBlock = (perCurrencyId => currency => {
 })({})
 
 const EthereumBridge: WalletBridge<Transaction> = {
+  getDummyAccountFromAddress: (currency, address) => {
+    const derivationMode = getDerivationModesForCurrency(currency).slice(-1)[0]
+    const index = -1
+    return {
+      id: `ethereumjs:2:${currency.id}:${address}:${derivationMode}`,
+      seedIdentifier: address,
+      derivationMode,
+      name: getAccountPlaceholderName({ currency, index, derivationMode }),
+      freshAddress: address,
+      freshAddressPath: '',
+      balance: BigNumber(0),
+      blockHeight: 0,
+      index,
+      currency,
+      operations: [],
+      pendingOperations: [],
+      unit: currency.units[0],
+      lastSyncDate: new Date(),
+    }
+  },
+
   scanAccountsOnDevice: (currency, deviceId) =>
     Observable.create(o => {
       let finished = false
