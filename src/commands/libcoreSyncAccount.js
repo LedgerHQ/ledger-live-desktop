@@ -1,6 +1,6 @@
 // @flow
 
-import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
+import type { AccountRaw, DerivationMode } from '@ledgerhq/live-common/lib/types'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { fromPromise } from 'rxjs/observable/fromPromise'
 
@@ -12,7 +12,7 @@ type Input = {
   accountId: string,
   currencyId: string,
   xpub: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
   index: number,
 }

@@ -1670,7 +1670,7 @@
     camelcase "^5.0.0"
     prettier "^1.13.7"
 
-"@ledgerhq/hw-app-btc@4.24.0":
+"@ledgerhq/hw-app-btc@4.24.0", "@ledgerhq/hw-app-btc@^4.24.0":
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.24.0.tgz#8889b2bc9b9583209ed24f832c96ea8d23e1dc74"
   integrity sha512-OEc8UCcdAWp10PPM9Keoh8imuusmNVe2o/89ujMT5UIWOGCu7duezpsnCY11jGNxf2hyos6lezUMlUAOHBuISQ==
@@ -1697,6 +1697,14 @@
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-xrp/-/hw-app-xrp-4.24.0.tgz#cb41975597ac43d6f95dfb6ef52ff3ce5376ab80"
   integrity sha512-KWxqnf4Ci3pF/2RsavDLNXHwh7iG2xBkUBD5iYgui9WaWCJfTv+F5zBYeeDeULfTSj9+WAtNcPXFHyiKLYPTfw==
+  dependencies:
+    "@ledgerhq/hw-transport" "^4.24.0"
+    bip32-path "0.4.2"
+
+"@ledgerhq/hw-app-xrp@^4.25.0":
+  version "4.25.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-xrp/-/hw-app-xrp-4.25.0.tgz#d97d7e85290dd2d1ec99f85747a26145e7a7383e"
+  integrity sha512-kG9S8CxUFMG1hbLBiKtoPMquzlTigndDsxhoXB8oywAdbGsoCi2cufMHV2p5Bek6YlGfn5J5p49Hx5iNIf2y5Q==
   dependencies:
     "@ledgerhq/hw-transport" "^4.24.0"
     bip32-path "0.4.2"
@@ -1745,13 +1753,17 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.0.0-beta.1":
-  version "4.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.0.0-beta.1.tgz#52ed90757761a08a5f5c9c40c1fed0cb2f1fb4ca"
-  integrity sha512-Ms06Za/EI8yP/4GOAziCMecqIssZbkS5tjSCgaqd1h0zHLzM6i6PvgjhJyvG5SrET6+uQVp4YM4qbo2tc6irjQ==
+"@ledgerhq/live-common@4.1.3":
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.1.3.tgz#dbd5be04925b11b4bf646520fe01a8959554c561"
+  integrity sha512-4FZ6th8ZtpC0B20olsyqF9hb0VUhVkLeiO/QyWzKa+bdn7jt4PgOyUdaKbRuoW2w9UKj2qkXgIgBIaZ+l0AlJA==
   dependencies:
-    axios "^0.18.0"
+    "@ledgerhq/hw-app-btc" "^4.24.0"
+    "@ledgerhq/hw-app-eth" "^4.24.0"
+    "@ledgerhq/hw-app-xrp" "^4.24.0"
+    "@ledgerhq/hw-transport" "^4.24.0"
     bignumber.js "^7.2.1"
+    eip55 "^1.0.3"
     invariant "^2.2.2"
     lodash "^4.17.4"
     node-lzw "^0.3.1"

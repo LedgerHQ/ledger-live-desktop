@@ -6,7 +6,7 @@ import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
-import type { OperationRaw, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import type { OperationRaw, DerivationMode, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { getWalletName } from '@ledgerhq/live-common/lib/account'
 import {
   libcoreAmountToBigNumber,
@@ -27,7 +27,7 @@ type BitcoinLikeTransaction = {
 type Input = {
   accountId: string,
   currencyId: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
   xpub: string,
   index: number,
@@ -87,7 +87,7 @@ async function signTransaction({
   hwApp: Btc,
   currency: CryptoCurrency,
   transaction: *,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   sigHashType: number,
   hasTimestamp: boolean,
 }) {
@@ -178,7 +178,7 @@ export async function doSignAndBroadcast({
   onOperationBroadcasted,
 }: {
   accountId: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
   currency: CryptoCurrency,
   xpub: string,
