@@ -1670,10 +1670,10 @@
     camelcase "^5.0.0"
     prettier "^1.13.7"
 
-"@ledgerhq/hw-app-btc@4.24.0":
-  version "4.24.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.24.0.tgz#8889b2bc9b9583209ed24f832c96ea8d23e1dc74"
-  integrity sha512-OEc8UCcdAWp10PPM9Keoh8imuusmNVe2o/89ujMT5UIWOGCu7duezpsnCY11jGNxf2hyos6lezUMlUAOHBuISQ==
+"@ledgerhq/hw-app-btc@^4.27.0":
+  version "4.27.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.27.0.tgz#11fc822bd34a47a39b1a7ae03ced69cf1d432796"
+  integrity sha512-7Ck48wCBb6nd9UXarNeGOsOqbOTi2cs4AxFhbDNrVLvPiBSH0yEiNQEF95J6u5BxKkAdM1GV9LoRumR4KhZGqQ==
   dependencies:
     "@ledgerhq/hw-transport" "^4.24.0"
     create-hash "^1.1.3"
@@ -1733,10 +1733,10 @@
   dependencies:
     events "^3.0.0"
 
-"@ledgerhq/ledger-core@2.0.0-rc.8":
-  version "2.0.0-rc.8"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.8.tgz#618ff2ca091464c71890678d3912921ee46f98af"
-  integrity sha512-UYEwlw7+JfRCPw1z2kw9EGs88wsk5XBGxMPpNPF1cdpE7extEL63Gr+4h4ibU6kXEeEIpfI0lZ2l/6HwzMw6EQ==
+"@ledgerhq/ledger-core@2.0.0-rc.9":
+  version "2.0.0-rc.9"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.9.tgz#f478f52fac0ecace8842df430bc83fa60e14483f"
+  integrity sha512-wd+w4W/8IfhX2a4h1sM9rkKD0vfcixkbrvKa+SmKzv0WtiUx1i94rHlPLX08tbP2ubaAv/LufeT2DwFz+EcssA==
   dependencies:
     "@ledgerhq/hw-app-btc" "^4.7.3"
     "@ledgerhq/hw-transport-node-hid" "^4.7.6"
