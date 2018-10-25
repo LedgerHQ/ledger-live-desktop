@@ -2,6 +2,7 @@
 
 import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
+import { StatusCodes } from '@ledgerhq/hw-transport'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
@@ -13,6 +14,7 @@ import {
   bigNumberToLibcoreAmount,
   getOrCreateWallet,
 } from 'helpers/libcore'
+import { UpdateYourApp } from 'config/errors'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
@@ -26,6 +28,7 @@ type BitcoinLikeTransaction = {
 
 type Input = {
   accountId: string,
+  blockHeight: number,
   currencyId: string,
   derivationMode: string,
   seedIdentifier: string,
@@ -41,7 +44,17 @@ type Result = { type: 'signed' } | { type: 'broadcasted', operation: OperationRa
 
 const cmd: Command<Input, Result> = createCommand(
   'libcoreSignAndBroadcast',
-  ({ accountId, currencyId, derivationMode, seedIdentifier, xpub, index, transaction, deviceId }) =>
+  ({
+    accountId,
+    blockHeight,
+    currencyId,
+    derivationMode,
+    seedIdentifier,
+    xpub,
+    index,
+    transaction,
+    deviceId,
+  }) =>
     Observable.create(o => {
       let unsubscribed = false
       const currency = getCryptoCurrencyById(currencyId)
@@ -50,6 +63,7 @@ const cmd: Command<Input, Result> = createCommand(
         doSignAndBroadcast({
           accountId,
           currency,
+          blockHeight,
           derivationMode,
           seedIdentifier,
           xpub,
@@ -79,6 +93,7 @@ const cmd: Command<Input, Result> = createCommand(
 async function signTransaction({
   hwApp,
   currency,
+  blockHeight,
   transaction,
   derivationMode,
   sigHashType,
@@ -86,6 +101,7 @@ async function signTransaction({
 }: {
   hwApp: Btc,
   currency: CryptoCurrency,
+  blockHeight: number,
   transaction: *,
   derivationMode: string,
   sigHashType: number,
@@ -94,7 +110,12 @@ async function signTransaction({
   const additionals = []
   let expiryHeight
   if (currency.id === 'bitcoin_cash' || currency.id === 'bitcoin_gold') additionals.push('bip143')
-  if (currency.id === 'zcash') expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
+  if (currency.id === 'zcash') {
+    expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
+    if (blockHeight >= 419200) {
+      additionals.push('sapling')
+    }
+  }
   const rawInputs = transaction.getInputs()
 
   const hasExtraData = currency.id === 'zcash'
@@ -166,6 +187,7 @@ async function signTransaction({
 export async function doSignAndBroadcast({
   accountId,
   derivationMode,
+  blockHeight,
   seedIdentifier,
   currency,
   xpub,
@@ -180,6 +202,7 @@ export async function doSignAndBroadcast({
   accountId: string,
   derivationMode: string,
   seedIdentifier: string,
+  blockHeight: number,
   currency: CryptoCurrency,
   xpub: string,
   index: number,
@@ -222,12 +245,18 @@ export async function doSignAndBroadcast({
     signTransaction({
       hwApp: new Btc(transport),
       currency,
+      blockHeight,
       transaction: builded,
       sigHashType: parseInt(sigHashType, 16),
       hasTimestamp,
       derivationMode,
     }),
-  )
+  ).catch(e => {
+    if (e && e.statusCode === StatusCodes.INCORRECT_P1_P2) {
+      throw new UpdateYourApp(`UpdateYourApp ${currency.id}`, currency)
+    }
+    throw e
+  })
 
   if (!signedTransaction || isCancelled() || !njsAccount) return
   onSigned()

@@ -220,6 +220,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       .send({
         accountId: account.id,
         currencyId: account.currency.id,
+        blockHeight: account.blockHeight,
         xpub: account.xpub || '', // FIXME only reason is to build the op id. we need to consider another id for making op id.
         derivationMode: account.derivationMode,
         seedIdentifier: account.seedIdentifier,

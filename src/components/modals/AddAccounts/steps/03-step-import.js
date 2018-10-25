@@ -144,7 +144,9 @@ class StepImport extends PureComponent<StepProps> {
             })
           }
         },
-        complete: () => setScanStatus('finished'),
+        complete: () => {
+          setScanStatus('finished')
+        },
         error: err => {
           logger.critical(err)
           setScanStatus('error', err)
