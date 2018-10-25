@@ -2,6 +2,7 @@
 
 import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
+import { StatusCodes } from '@ledgerhq/hw-transport'
 import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
@@ -13,6 +14,7 @@ import {
   bigNumberToLibcoreAmount,
   getOrCreateWallet,
 } from 'helpers/libcore'
+import { UpdateYourApp } from 'config/errors'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
@@ -227,7 +229,12 @@ export async function doSignAndBroadcast({
       hasTimestamp,
       derivationMode,
     }),
-  )
+  ).catch(e => {
+    if (e && e.statusCode === StatusCodes.INCORRECT_P1_P2) {
+      throw new UpdateYourApp(`UpdateYourApp ${currency.id}`, currency)
+    }
+    throw e
+  })
 
   if (!signedTransaction || isCancelled() || !njsAccount) return
   onSigned()
