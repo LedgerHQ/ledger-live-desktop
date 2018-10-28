@@ -557,13 +557,11 @@ export async function scanAccountsFromXPUB({
   const currency = getCryptoCurrencyById(currencyId)
   const walletName = getWalletName({
     currency,
-    seedIdentifier: 'debug',
+    seedIdentifier,
     derivationMode,
   })
 
   const wallet = await getOrCreateWallet(core, walletName, { currency, derivationMode })
-
-  await wallet.eraseDataSince(new Date(0))
 
   const index = 0
 
