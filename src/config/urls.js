@@ -36,4 +36,7 @@ export const urls = {
   errors: {
     CantOpenDevice: 'https://support.ledgerwallet.com/hc/en-us/articles/115005165269',
   },
+
+  // Currencies status
+  currenciesStatus: 'https://i-dont-know-which-url.ledger.com/currencies-status',
 }
