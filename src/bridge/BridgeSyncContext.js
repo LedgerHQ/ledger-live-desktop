@@ -16,7 +16,9 @@ import { setAccountSyncState } from 'actions/bridgeSync'
 import { bridgeSyncSelector, syncStateLocalSelector } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
 import { accountsSelector, isUpToDateSelector } from 'reducers/accounts'
+import { currenciesStatusSelector, getIsCurrencyDown } from 'reducers/currenciesStatus'
 import { SYNC_MAX_CONCURRENT, SYNC_TIMEOUT } from 'config/constants'
+import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { getBridgeForCurrency } from '.'
 
 type BridgeSyncProviderProps = {
@@ -29,6 +31,7 @@ type BridgeSyncProviderOwnProps = BridgeSyncProviderProps & {
   isUpToDate: boolean,
   updateAccountWithUpdater: (string, (Account) => Account) => void,
   setAccountSyncState: (string, AsyncState) => *,
+  currenciesStatus: CurrencyStatus[],
 }
 
 type AsyncState = {
@@ -48,6 +51,7 @@ export type Sync = (action: BehaviorAction) => void
 const BridgeSyncContext = React.createContext((_: BehaviorAction) => {})
 
 const mapStateToProps = createStructuredSelector({
+  currenciesStatus: currenciesStatusSelector,
   accounts: accountsSelector,
   bridgeSync: bridgeSyncSelector,
   isUpToDate: isUpToDateSelector,
@@ -69,6 +73,11 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
       }
       const account = this.props.accounts.find(a => a.id === accountId)
       if (!account) {
+        next()
+        return
+      }
+
+      if (getIsCurrencyDown(this.props.currenciesStatus, account.currency)) {
         next()
         return
       }

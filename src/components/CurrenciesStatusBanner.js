@@ -8,40 +8,33 @@ import { createStructuredSelector } from 'reselect'
 import styled from 'styled-components'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 
-import logger from 'logger'
 import { colors } from 'styles/theme'
 import { openURL } from 'helpers/linking'
-import { urls } from 'config/urls'
 import { CHECK_CUR_STATUS_INTERVAL } from 'config/constants'
-import network from 'api/network'
 import IconCross from 'icons/Cross'
 import IconTriangleWarning from 'icons/TriangleWarning'
 import IconChevronRight from 'icons/ChevronRight'
 
 import { dismissedBannersSelector } from 'reducers/settings'
+import { currenciesStatusSelector, fetchCurrenciesStatus } from 'reducers/currenciesStatus'
 import { currenciesSelector } from 'reducers/accounts'
 import { dismissBanner } from 'actions/settings'
+import type { CurrencyStatus } from 'reducers/currenciesStatus'
 
 import Box from 'components/base/Box'
-
-type ResultItem = {
-  id: string,
-  status: string,
-  message: string,
-  link: string,
-  nonce: number,
-}
 
 const mapStateToProps = createStructuredSelector({
   dismissedBanners: dismissedBannersSelector,
   accountsCurrencies: currenciesSelector,
+  currenciesStatus: currenciesStatusSelector,
 })
 
 const mapDispatchToProps = {
   dismissBanner,
+  fetchCurrenciesStatus,
 }
 
-const getItemKey = (item: ResultItem) => `${item.id}_${item.nonce}`
+const getItemKey = (item: CurrencyStatus) => `${item.id}_${item.nonce}`
 
 const CloseIconContainer = styled.div`
   position: absolute;
@@ -69,18 +62,12 @@ type Props = {
   accountsCurrencies: Currency[],
   dismissedBanners: string[],
   dismissBanner: string => void,
+  currenciesStatus: CurrencyStatus[],
+  fetchCurrenciesStatus: () => Promise<void>,
   t: *,
 }
 
-type State = {
-  result: ResultItem[],
-}
-
-class CurrenciesStatusBanner extends PureComponent<Props, State> {
-  state = {
-    result: [],
-  }
-
+class CurrenciesStatusBanner extends PureComponent<Props> {
   componentDidMount() {
     this.pollStatus()
   }
@@ -95,32 +82,17 @@ class CurrenciesStatusBanner extends PureComponent<Props, State> {
   unmounted = false
   timeout: *
 
-  pollStatus = () => {
-    this.fetchStatus()
+  pollStatus = async () => {
+    await this.props.fetchCurrenciesStatus()
+    if (this.unmounted) return
     this.timeout = setTimeout(this.pollStatus, CHECK_CUR_STATUS_INTERVAL)
-  }
-
-  fetchStatus = async () => {
-    try {
-      const baseUrl = process.env.LL_STATUS_API || urls.currenciesStatus
-      const { data } = await network({
-        method: 'GET',
-        url: `${baseUrl}/currencies-status`,
-      })
-      if (this.unmounted) return
-      this.setState({ result: data })
-    } catch (err) {
-      logger.error(err)
-    }
   }
 
   dismiss = item => this.props.dismissBanner(getItemKey(item))
 
   render() {
-    const { dismissedBanners, accountsCurrencies, t } = this.props
-    const { result } = this.state
-    if (!result) return null
-    const filtered = result.filter(
+    const { dismissedBanners, accountsCurrencies, currenciesStatus, t } = this.props
+    const filtered = currenciesStatus.filter(
       item =>
         accountsCurrencies.find(cur => cur.id === item.id) &&
         dismissedBanners.indexOf(getItemKey(item)) === -1,
@@ -135,8 +107,8 @@ class CurrenciesStatusBanner extends PureComponent<Props, State> {
 }
 
 class BannerItem extends PureComponent<{
-  item: ResultItem,
-  onItemDismiss: ResultItem => void,
+  item: CurrencyStatus,
+  onItemDismiss: CurrencyStatus => void,
   t: *,
 }> {
   onLinkClick = () => openURL(this.props.item.link)
