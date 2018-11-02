@@ -7,9 +7,12 @@ import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import Switch from 'components/base/Switch'
 import FakeLink from 'components/base/FakeLink'
+import { Trans } from 'react-i18next'
 import TrackPage from 'analytics/TrackPage'
 import Track from 'analytics/Track'
 import { openModal } from 'reducers/modals'
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/urls'
 import { MODAL_SHARE_ANALYTICS, MODAL_TECHNICAL_DATA } from 'config/constants'
 import ShareAnalytics from '../../modals/ShareAnalytics'
 import TechnicalData from '../../modals/TechnicalData'
@@ -23,11 +26,13 @@ const mapDispatchToProps = { saveSettings, openModal }
 type State = {
   analyticsToggle: boolean,
   sentryLogsToggle: boolean,
+  termsToggle: boolean,
 }
 
 const INITIAL_STATE = {
   analyticsToggle: true,
   sentryLogsToggle: true,
+  termsToggle: false,
 }
 
 class Analytics extends PureComponent<StepProps, State> {
@@ -46,6 +51,11 @@ class Analytics extends PureComponent<StepProps, State> {
     })
   }
 
+  handleTermsToggle = (isChecked: boolean) => {
+    this.setState({ termsToggle: !this.state.termsToggle })
+    this.props.saveSettings({ termsAccepted: isChecked })
+  }
+
   handleNavBack = () => {
     const { savePassword, prevStep } = this.props
     savePassword(undefined)
@@ -57,9 +67,12 @@ class Analytics extends PureComponent<StepProps, State> {
   handleTechnicalDataModal = () => {
     this.props.openModal(MODAL_TECHNICAL_DATA)
   }
+
+  onClickTerms = () => openURL(urls.terms)
+
   render() {
     const { nextStep, t, onboarding } = this.props
-    const { analyticsToggle, sentryLogsToggle } = this.state
+    const { analyticsToggle, sentryLogsToggle, termsToggle } = this.state
 
     return (
       <FixedTopContainer>
@@ -157,9 +170,35 @@ class Analytics extends PureComponent<StepProps, State> {
                 <Switch isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
               </Box>
             </Container>
+            <Container>
+              <Box>
+                <Box mb={1}>
+                  <AnalyticsTitle data-e2e="analytics_terms">
+                    {t('onboarding.analytics.terms.title')}
+                  </AnalyticsTitle>
+                </Box>
+                <AnalyticsText>
+                  <div>
+                    <Trans i18nKey="onboarding.analytics.terms.desc">
+                      {'Accept the '}
+                      <HoveredLink onClick={this.onClickTerms}>{'terms of license'}</HoveredLink>
+                      {'.'}
+                    </Trans>
+                  </div>
+                </AnalyticsText>
+              </Box>
+              <Box justifyContent="center">
+                <Track
+                  onUpdate
+                  event={termsToggle ? 'Terms Enabled Onboarding' : 'Terms Disabled Onboarding'}
+                />
+                <Switch isChecked={termsToggle} onChange={this.handleTermsToggle} />
+              </Box>
+            </Container>
           </Box>
         </StepContainerInner>
         <OnboardingFooter
+          isContinueDisabled={!termsToggle}
           horizontal
           align="center"
           flow={2}
@@ -204,8 +243,15 @@ const Container = styled(Box).attrs({
   width: 550px;
   justify-content: space-between;
 `
-const LearnMoreWrapper = styled(Box).attrs({})`
+const LearnMoreWrapper = styled(Box)`
   ${FakeLink}:hover {
+    color: ${p => p.theme.colors.wallet};
+  }
+`
+const HoveredLink = styled.span`
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover {
     color: ${p => p.theme.colors.wallet};
   }
 `

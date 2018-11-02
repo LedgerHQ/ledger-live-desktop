@@ -661,6 +661,10 @@
         "title": "Report bugs",
         "desc": "Automatically send reports to help Ledger fix bugs."
       },
+      "terms": {
+        "title": "Terms *",
+        "desc": "Accept the <1>Terms of License</1>."
+      },
       "technicalData": {
         "title": "Technical data *",
         "desc": "Ledger will automatically collect technical information to get basic feedback on usage. This information is anonymous and does not contain personal data.",
