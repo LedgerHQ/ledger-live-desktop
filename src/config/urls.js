@@ -8,7 +8,7 @@ export const urls = {
 
   // Ledger support
   faq: 'https://support.ledgerwallet.com/hc/en-us',
-  terms: 'https://www.ledgerwallet.com/terms',
+  terms: 'https://www.ledger.com/pages/terms-of-use-and-disclaimer',
   noDeviceBuyNew: 'https://www.ledgerwallet.com/',
   noDeviceTrackOrder: 'http://order.ledgerwallet.com/',
   noDeviceLearnMore: 'https://www.ledgerwallet.com/',
