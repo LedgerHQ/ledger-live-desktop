@@ -9,7 +9,7 @@ jobs:
   build:
     <<: *defaults
     steps:
-      - run: sudo apt-get install -y libudev-dev
+      - run: sudo apt-get install -y libudev-dev libfuse-dev
       - run:
           name: Install latest yarn
           command: |

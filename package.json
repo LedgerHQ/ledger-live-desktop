@@ -3,7 +3,7 @@
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
-  "version": "1.2.1",
+  "version": "1.2.3",
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
@@ -35,7 +35,7 @@
     }
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "4.24.0",
+    "@ledgerhq/hw-app-btc": "^4.27.0",
     "@ledgerhq/hw-app-eth": "^4.24.0",
     "@ledgerhq/hw-app-xrp": "^4.25.0",
     "@ledgerhq/hw-transport": "^4.24.0",

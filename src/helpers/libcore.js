@@ -113,7 +113,6 @@ async function scanAccountsOnDeviceBySegwit({
 
   // retrieve or create the wallet
   const wallet = await getOrCreateWallet(core, walletName, { currency, derivationMode })
-  const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
   // new accounts will be created in sqlite, existing ones will be updated
@@ -123,7 +122,6 @@ async function scanAccountsOnDeviceBySegwit({
     walletName,
     devicePath,
     currency,
-    accountsCount,
     accountIndex: 0,
     accounts: [],
     onAccountScanned,
@@ -204,7 +202,6 @@ async function scanNextAccount(props: {
   currency: CryptoCurrency,
   seedIdentifier: string,
   derivationMode: DerivationMode,
-  accountsCount: number,
   accountIndex: number,
   accounts: AccountRaw[],
   onAccountScanned: AccountRaw => void,
@@ -217,7 +214,6 @@ async function scanNextAccount(props: {
     walletName,
     devicePath,
     currency,
-    accountsCount,
     accountIndex,
     accounts,
     onAccountScanned,
@@ -227,13 +223,12 @@ async function scanNextAccount(props: {
     isUnsubscribed,
   } = props
 
-  // create account only if account has not been scanned yet
-  // if it has already been created, we just need to get it, and sync it
-  const hasBeenScanned = accountIndex < accountsCount
-
-  const njsAccount = hasBeenScanned
-    ? await wallet.getAccount(accountIndex)
-    : await createAccount(wallet, devicePath)
+  let njsAccount
+  try {
+    njsAccount = await wallet.getAccount(accountIndex)
+  } catch (err) {
+    njsAccount = await createAccount(wallet, devicePath)
+  }
 
   if (isUnsubscribed()) return []
 
@@ -559,13 +554,11 @@ export async function scanAccountsFromXPUB({
   const currency = getCryptoCurrencyById(currencyId)
   const walletName = getWalletName({
     currency,
-    seedIdentifier: 'debug',
+    seedIdentifier,
     derivationMode,
   })
 
   const wallet = await getOrCreateWallet(core, walletName, { currency, derivationMode })
-
-  await wallet.eraseDataSince(new Date(0))
 
   const index = 0
 
