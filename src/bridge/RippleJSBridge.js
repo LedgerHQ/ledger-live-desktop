@@ -11,6 +11,7 @@ import {
   getDerivationModesForCurrency,
   getDerivationScheme,
   runDerivationScheme,
+  isIterableDerivationMode,
 } from '@ledgerhq/live-common/lib/derivation'
 import {
   getAccountPlaceholderName,
@@ -299,7 +300,8 @@ const RippleJSBridge: WalletBridge<Transaction> = {
           const derivationModes = getDerivationModesForCurrency(currency)
           for (const derivationMode of derivationModes) {
             const derivationScheme = getDerivationScheme({ derivationMode, currency })
-            for (let index = 0; index < 255; index++) {
+            const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
+            for (let index = 0; index < stopAt; index++) {
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })

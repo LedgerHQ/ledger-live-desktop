@@ -14,6 +14,7 @@ import {
 import logger from 'logger'
 import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import network from '../api/network'
 
 const pairsSelector = createSelector(
   currenciesSelector,
@@ -62,6 +63,7 @@ const CounterValues = createCounterValues({
   pairsSelector,
   setExchangePairsAction,
   addExtraPollingHooks,
+  network,
 })
 
 let sortCache

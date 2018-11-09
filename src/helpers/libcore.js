@@ -11,6 +11,7 @@ import {
   getDerivationScheme,
   isSegwitDerivationMode,
   isUnsplitDerivationMode,
+  isIterableDerivationMode,
 } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import {
@@ -26,6 +27,7 @@ import type {
   AccountRaw,
   OperationRaw,
   OperationType,
+  DerivationMode,
 } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
@@ -89,7 +91,7 @@ async function scanAccountsOnDeviceBySegwit({
   currency: CryptoCurrency,
   onAccountScanned: AccountRaw => void,
   isUnsubscribed: () => boolean,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
   const isSegwit = isSegwitDerivationMode(derivationMode)
@@ -199,7 +201,7 @@ async function scanNextAccount(props: {
   devicePath: string,
   currency: CryptoCurrency,
   seedIdentifier: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   accountIndex: number,
   accounts: AccountRaw[],
   onAccountScanned: AccountRaw => void,
@@ -254,15 +256,15 @@ async function scanNextAccount(props: {
 
   if (isUnsubscribed()) return []
 
-  const isEmpty = ops.length === 0
+  const isLast = ops.length === 0 || !isIterableDerivationMode(derivationMode)
 
-  if (!isEmpty || showNewAccount) {
+  if (!isLast || showNewAccount) {
     onAccountScanned(account)
     accounts.push(account)
   }
 
   // returns if the current index points on an account with no ops
-  if (isEmpty) {
+  if (isLast) {
     return accounts
   }
 
@@ -287,7 +289,7 @@ export async function getOrCreateWallet(
     derivationMode,
   }: {
     currency: CryptoCurrency,
-    derivationMode: string,
+    derivationMode: DerivationMode,
   },
 ): NJSWallet {
   const pool = core.getPoolInstance()
@@ -330,7 +332,7 @@ async function buildAccountRaw({
   seedIdentifier: string,
   walletName: string,
   currency: CryptoCurrency,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   accountIndex: number,
   core: *,
   ops: NJSOperation[],
@@ -470,7 +472,7 @@ export async function syncAccount({
 }: {
   core: *,
   xpub: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
   currency: CryptoCurrency,
   index: number,
@@ -546,7 +548,7 @@ export async function scanAccountsFromXPUB({
   core: *,
   currencyId: string,
   xpub: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
 }) {
   const currency = getCryptoCurrencyById(currencyId)

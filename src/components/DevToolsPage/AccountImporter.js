@@ -6,7 +6,7 @@ import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
 import { connect } from 'react-redux'
 
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { Currency, Account, DerivationMode } from '@ledgerhq/live-common/lib/types'
 
 import { decodeAccount } from 'reducers/accounts'
 import { addAccount } from 'actions/accounts'
@@ -38,7 +38,7 @@ type Props = {
 type ImportableAccountType = {
   name: string,
   currency: Currency,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   xpub: string,
 }
 
