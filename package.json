@@ -40,7 +40,7 @@
     "@ledgerhq/hw-app-xrp": "^4.25.0",
     "@ledgerhq/hw-transport": "^4.24.0",
     "@ledgerhq/hw-transport-node-hid": "4.24.0",
-    "@ledgerhq/ledger-core": "2.0.0-rc.8",
+    "@ledgerhq/ledger-core": "2.0.0-rc.11",
     "@ledgerhq/live-common": "4.3.0",
     "animated": "^0.2.2",
     "async": "^2.6.1",
