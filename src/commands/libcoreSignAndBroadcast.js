@@ -115,6 +115,8 @@ async function signTransaction({
     if (blockHeight >= 419200) {
       additionals.push('sapling')
     }
+  } else if (currency.id === 'decred') {
+    expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
   }
   const rawInputs = transaction.getInputs()
 
@@ -122,6 +124,10 @@ async function signTransaction({
 
   const inputs = await Promise.all(
     rawInputs.map(async input => {
+      const additionals = []
+      if (currency.id === 'decred') {
+        additionals.push('decred')
+      }
       const rawPreviousTransaction = await input.getPreviousTransaction()
       const hexPreviousTransaction = Buffer.from(rawPreviousTransaction).toString('hex')
       const previousTransaction = hwApp.splitTransaction(
@@ -129,6 +135,7 @@ async function signTransaction({
         currency.supportsSegwit,
         hasTimestamp,
         hasExtraData,
+        additionals,
       )
       const outputIndex = input.getPreviousOutputIndex()
       const sequence = input.getSequence()
