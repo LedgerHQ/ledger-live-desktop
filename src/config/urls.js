@@ -38,5 +38,6 @@ export const urls = {
   },
 
   // Currencies status
-  currenciesStatus: 'https://i-dont-know-which-url.ledger.com/currencies-status',
+  currenciesStatus:
+    'https://s3-eu-west-1.amazonaws.com/ledger-ledgerlive-resources-prod/public_resources/currencies.json',
 }

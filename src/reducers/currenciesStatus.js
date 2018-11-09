@@ -33,10 +33,9 @@ const handlers = {
 const setCurrenciesStatus = createAction('CURRENCIES_STATUS_SET')
 export const fetchCurrenciesStatus = () => async (dispatch: *) => {
   try {
-    const baseUrl = process.env.LL_STATUS_API || urls.currenciesStatus
     const { data } = await network({
       method: 'GET',
-      url: `${baseUrl}/currencies-status`,
+      url: process.env.LL_STATUS_ENDPOINT || urls.currenciesStatus,
     })
     dispatch(setCurrenciesStatus(data))
   } catch (err) {
