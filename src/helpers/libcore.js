@@ -425,7 +425,7 @@ function buildOperationRaw({
   core: *,
   op: NJSOperation,
   xpub: string,
-}): OperationRaw {
+}): $Exact<OperationRaw> {
   const bitcoinLikeOperation = op.asBitcoinLikeOperation()
   const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
   const hash = bitcoinLikeTransaction.getHash()
@@ -459,6 +459,7 @@ function buildOperationRaw({
     blockHash: null,
     accountId: xpub, // FIXME accountId: xpub  !?
     date: op.getDate().toISOString(),
+    extra: {},
   }
 }
 

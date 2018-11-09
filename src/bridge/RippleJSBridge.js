@@ -105,7 +105,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
 
       const hash = computeBinaryTransactionHash(transaction)
 
-      onOperationBroadcasted({
+      const op: $Exact<Operation> = {
         id: `${a.id}-${hash}-OUT`,
         hash,
         accountId: a.id,
@@ -121,7 +121,9 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
         transactionSequenceNumber:
           (a.operations.length > 0 ? a.operations[0].transactionSequenceNumber : 0) +
           a.pendingOperations.length,
-      })
+        extra: {},
+      }
+      onOperationBroadcasted(op)
     }
   } finally {
     api.disconnect()
@@ -231,6 +233,7 @@ const txToOperation = (account: Account) => ({
     recipients: [destination.address],
     date: new Date(timestamp),
     transactionSequenceNumber: sequence,
+    extra: {},
   }
   return op
 }

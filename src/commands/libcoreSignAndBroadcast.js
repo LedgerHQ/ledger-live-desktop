@@ -280,7 +280,7 @@ export async function doSignAndBroadcast({
   const fee = libcoreAmountToBigNumber(builded.getFees())
 
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
-  onOperationBroadcasted({
+  const op: $Exact<OperationRaw> = {
     id: `${xpub}-${txHash}-OUT`,
     hash: txHash,
     type: 'OUT',
@@ -294,7 +294,9 @@ export async function doSignAndBroadcast({
     recipients,
     accountId,
     date: new Date().toISOString(),
-  })
+    extra: {},
+  }
+  onOperationBroadcasted(op)
 }
 
 export default cmd
