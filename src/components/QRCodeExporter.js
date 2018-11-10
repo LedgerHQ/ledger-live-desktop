@@ -24,6 +24,7 @@ class QRCodeExporter extends PureComponent<
   },
   {
     frame: number,
+    framesRendered: number,
     fps: number,
   },
 > {
@@ -44,22 +45,22 @@ class QRCodeExporter extends PureComponent<
     this.chunks = dataToFrames(data, 160, 4)
 
     setTimeout(() => {
-      const BRIDGESTREAM_DATA = Buffer.from(JSON.stringify(dataToFrames(data, 160, 1))).toString(
-        'base64',
-      )
+      const BRIDGESTREAM_DATA = Buffer.from(JSON.stringify(this.chunks)).toString('base64')
       console.log(`BRIDGESTREAM_DATA=${BRIDGESTREAM_DATA}`) // eslint-disable-line
     }, 500)
   }
 
   state = {
     frame: 0,
+    framesRendered: 1,
     fps: 3,
   }
 
   componentDidMount() {
-    const nextFrame = ({ frame }) => {
+    const nextFrame = ({ frame, framesRendered }) => {
       frame = (frame + 1) % this.chunks.length
-      return { frame }
+      framesRendered = Math.min(Math.max(framesRendered, frame + 1), this.chunks.length)
+      return { frame, framesRendered }
     }
 
     let lastT
@@ -81,12 +82,12 @@ class QRCodeExporter extends PureComponent<
   _raf: *
 
   render() {
-    const { frame } = this.state
+    const { frame, framesRendered } = this.state
     const { size } = this.props
     const { chunks } = this
     return (
       <div style={{ position: 'relative', width: size, height: size }}>
-        {chunks.map((chunk, i) => (
+        {chunks.slice(0, framesRendered).map((chunk, i) => (
           <div key={String(i)} style={{ position: 'absolute', opacity: i === frame ? 1 : 0 }}>
             <QRCode data={chunk} size={size} errorCorrectionLevel="M" />
           </div>
