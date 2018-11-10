@@ -11,6 +11,7 @@ import {
   getDerivationScheme,
   isSegwitDerivationMode,
   isUnsplitDerivationMode,
+  isIterableDerivationMode,
 } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import {
@@ -26,6 +27,7 @@ import type {
   AccountRaw,
   OperationRaw,
   OperationType,
+  DerivationMode,
 } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
@@ -89,7 +91,7 @@ async function scanAccountsOnDeviceBySegwit({
   currency: CryptoCurrency,
   onAccountScanned: AccountRaw => void,
   isUnsubscribed: () => boolean,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   showNewAccount: boolean,
 }): Promise<AccountRaw[]> {
   const isSegwit = isSegwitDerivationMode(derivationMode)
@@ -111,7 +113,6 @@ async function scanAccountsOnDeviceBySegwit({
 
   // retrieve or create the wallet
   const wallet = await getOrCreateWallet(core, walletName, { currency, derivationMode })
-  const accountsCount = await wallet.getAccountCount()
 
   // recursively scan all accounts on device on the given app
   // new accounts will be created in sqlite, existing ones will be updated
@@ -121,7 +122,6 @@ async function scanAccountsOnDeviceBySegwit({
     walletName,
     devicePath,
     currency,
-    accountsCount,
     accountIndex: 0,
     accounts: [],
     onAccountScanned,
@@ -201,8 +201,7 @@ async function scanNextAccount(props: {
   devicePath: string,
   currency: CryptoCurrency,
   seedIdentifier: string,
-  derivationMode: string,
-  accountsCount: number,
+  derivationMode: DerivationMode,
   accountIndex: number,
   accounts: AccountRaw[],
   onAccountScanned: AccountRaw => void,
@@ -215,7 +214,6 @@ async function scanNextAccount(props: {
     walletName,
     devicePath,
     currency,
-    accountsCount,
     accountIndex,
     accounts,
     onAccountScanned,
@@ -225,13 +223,12 @@ async function scanNextAccount(props: {
     isUnsubscribed,
   } = props
 
-  // create account only if account has not been scanned yet
-  // if it has already been created, we just need to get it, and sync it
-  const hasBeenScanned = accountIndex < accountsCount
-
-  const njsAccount = hasBeenScanned
-    ? await wallet.getAccount(accountIndex)
-    : await createAccount(wallet, devicePath)
+  let njsAccount
+  try {
+    njsAccount = await wallet.getAccount(accountIndex)
+  } catch (err) {
+    njsAccount = await createAccount(wallet, devicePath)
+  }
 
   if (isUnsubscribed()) return []
 
@@ -259,15 +256,15 @@ async function scanNextAccount(props: {
 
   if (isUnsubscribed()) return []
 
-  const isEmpty = ops.length === 0
+  const isLast = ops.length === 0 || !isIterableDerivationMode(derivationMode)
 
-  if (!isEmpty || showNewAccount) {
+  if (!isLast || showNewAccount) {
     onAccountScanned(account)
     accounts.push(account)
   }
 
   // returns if the current index points on an account with no ops
-  if (isEmpty) {
+  if (isLast) {
     return accounts
   }
 
@@ -292,7 +289,7 @@ export async function getOrCreateWallet(
     derivationMode,
   }: {
     currency: CryptoCurrency,
-    derivationMode: string,
+    derivationMode: DerivationMode,
   },
 ): NJSWallet {
   const pool = core.getPoolInstance()
@@ -335,7 +332,7 @@ async function buildAccountRaw({
   seedIdentifier: string,
   walletName: string,
   currency: CryptoCurrency,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   accountIndex: number,
   core: *,
   ops: NJSOperation[],
@@ -428,7 +425,7 @@ function buildOperationRaw({
   core: *,
   op: NJSOperation,
   xpub: string,
-}): OperationRaw {
+}): $Exact<OperationRaw> {
   const bitcoinLikeOperation = op.asBitcoinLikeOperation()
   const bitcoinLikeTransaction = bitcoinLikeOperation.getTransaction()
   const hash = bitcoinLikeTransaction.getHash()
@@ -462,6 +459,7 @@ function buildOperationRaw({
     blockHash: null,
     accountId: xpub, // FIXME accountId: xpub  !?
     date: op.getDate().toISOString(),
+    extra: {},
   }
 }
 
@@ -475,7 +473,7 @@ export async function syncAccount({
 }: {
   core: *,
   xpub: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
   currency: CryptoCurrency,
   index: number,
@@ -551,19 +549,17 @@ export async function scanAccountsFromXPUB({
   core: *,
   currencyId: string,
   xpub: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
 }) {
   const currency = getCryptoCurrencyById(currencyId)
   const walletName = getWalletName({
     currency,
-    seedIdentifier: 'debug',
+    seedIdentifier,
     derivationMode,
   })
 
   const wallet = await getOrCreateWallet(core, walletName, { currency, derivationMode })
-
-  await wallet.eraseDataSince(new Date(0))
 
   const index = 0
 

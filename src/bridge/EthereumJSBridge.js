@@ -12,6 +12,7 @@ import {
   getDerivationModesForCurrency,
   getDerivationScheme,
   runDerivationScheme,
+  isIterableDerivationMode,
   getMandatoryEmptyAccountSkip,
 } from '@ledgerhq/live-common/lib/derivation'
 import {
@@ -72,7 +73,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
   const value = BigNumber(tx.value)
   const fee = BigNumber(tx.gas_price * tx.gas_used)
   if (sending) {
-    ops.push({
+    const op: $Exact<Operation> = {
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
@@ -84,10 +85,12 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       senders: [tx.from],
       recipients: [tx.to],
       date: new Date(tx.received_at),
-    })
+      extra: {},
+    }
+    ops.push(op)
   }
   if (receiving) {
-    ops.push({
+    const op: $Exact<Operation> = {
       id: `${account.id}-${tx.hash}-IN`,
       hash: tx.hash,
       type: 'IN',
@@ -99,7 +102,9 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       senders: [tx.from],
       recipients: [tx.to],
       date: new Date(new Date(tx.received_at) + 1), // hack: make the IN appear after the OUT in history.
-    })
+      extra: {},
+    }
+    ops.push(op)
   }
   return ops
 }
@@ -168,7 +173,7 @@ const signAndBroadcast = async ({
 
     const hash = await api.broadcastTransaction(transaction)
 
-    onOperationBroadcasted({
+    const op: $Exact<Operation> = {
       id: `${a.id}-${hash}-OUT`,
       hash,
       type: 'OUT',
@@ -181,7 +186,10 @@ const signAndBroadcast = async ({
       recipients: [t.recipient],
       transactionSequenceNumber: nonce,
       date: new Date(),
-    })
+      extra: {},
+    }
+
+    onOperationBroadcasted(op)
   }
 }
 
@@ -304,7 +312,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
             let emptyCount = 0
             const mandatoryEmptyAccountSkip = getMandatoryEmptyAccountSkip(derivationMode)
             const derivationScheme = getDerivationScheme({ derivationMode, currency })
-            for (let index = 0; index < 255; index++) {
+            const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
+            for (let index = 0; index < stopAt; index++) {
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })

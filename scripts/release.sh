@@ -69,48 +69,58 @@ fi
 
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
-# --------------------------------------------------------------------
-#                     Linux: Internal process error (null)
-#
-# context: https://github.com/LedgerHQ/ledger-live-desktop/issues/1010
-# Linux: Internal process error (null)
-#
-# The "fix" is not optimal, as it doesn't really solve the problem
-# (electron loading system openssl before we can load our embedded one)
-# Quick summary:
-#
-#  - build without publishing
-#  - unpack the .AppImage
-#  - download reported working libs from ubuntu mirrors, put it inside
-#  - re-pack the .AppImage
-#  - checksum stuff
-#  - upload to gh
+if [[ $(uname) == 'Linux' ]]; then
+  # --------------------------------------------------------------------
+  #                     Linux: Internal process error (null)
+  #
+  # context: https://github.com/LedgerHQ/ledger-live-desktop/issues/1010
+  # Linux: Internal process error (null)
+  #
+  # The "fix" is not optimal, as it doesn't really solve the problem
+  # (electron loading system openssl before we can load our embedded one)
+  # Quick summary:
+  #
+  #  - build without publishing
+  #  - unpack the .AppImage
+  #  - download reported working libs from ubuntu mirrors, put it inside
+  #  - re-pack the .AppImage
+  #  - checksum stuff
+  #  - upload to gh
 
-runJob \
-  "DEBUG=electron-builder electron-builder build --publish never" \
-  "building and packaging app..." \
-  "app built and packaged successfully" \
-  "failed to build app" \
-  "verbose"
+  runJob \
+    "DEBUG=electron-builder electron-builder build --publish never" \
+    "building and packaging app..." \
+    "app built and packaged successfully" \
+    "failed to build app" \
+    "verbose"
 
-runJob \
-  "scripts/patch-appimage.sh" \
-  "patching AppImage..." \
-  "AppImage patched successfully" \
-  "failed to patch AppImage"
+  runJob \
+    "scripts/patch-appimage.sh" \
+    "patching AppImage..." \
+    "AppImage patched successfully" \
+    "failed to patch AppImage"
 
-LEDGER_LIVE_VERSION=$(grep version package.json | sed -E 's/.*: "(.*)",/\1/g')
+  LEDGER_LIVE_VERSION=$(grep version package.json | sed -E 's/.*: "(.*)",/\1/g')
 
-scripts/upload-github-release-asset.sh \
-  github_api_token="$GH_TOKEN" \
-  owner=LedgerHQ \
-  repo=ledger-live-desktop \
-  tag="$GH_TAG" \
-  filename="dist/ledger-live-desktop-$LEDGER_LIVE_VERSION-linux-x86_64.AppImage"
+  scripts/upload-github-release-asset.sh \
+    github_api_token="$GH_TOKEN" \
+    owner=LedgerHQ \
+    repo=ledger-live-desktop \
+    tag="$GH_TAG" \
+    filename="dist/ledger-live-desktop-$LEDGER_LIVE_VERSION-linux-x86_64.AppImage"
 
-scripts/upload-github-release-asset.sh \
-  github_api_token="$GH_TOKEN" \
-  owner=LedgerHQ \
-  repo=ledger-live-desktop \
-  tag="$GH_TAG" \
-  filename="dist/latest-linux.yml"
+  scripts/upload-github-release-asset.sh \
+    github_api_token="$GH_TOKEN" \
+    owner=LedgerHQ \
+    repo=ledger-live-desktop \
+    tag="$GH_TAG" \
+    filename="dist/latest-linux.yml"
+
+else
+  runJob \
+    "DEBUG=electron-builder electron-builder build --publish always" \
+    "building and packaging app..." \
+    "app built and packaged successfully" \
+    "failed to build app" \
+    "verbose"
+fi

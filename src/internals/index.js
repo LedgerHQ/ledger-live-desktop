@@ -1,4 +1,5 @@
 // @flow
+import '@babel/polyfill'
 import commands from 'commands'
 import logger from 'logger'
 import uuid from 'uuid/v4'

@@ -1670,10 +1670,10 @@
     camelcase "^5.0.0"
     prettier "^1.13.7"
 
-"@ledgerhq/hw-app-btc@4.24.0":
-  version "4.24.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.24.0.tgz#8889b2bc9b9583209ed24f832c96ea8d23e1dc74"
-  integrity sha512-OEc8UCcdAWp10PPM9Keoh8imuusmNVe2o/89ujMT5UIWOGCu7duezpsnCY11jGNxf2hyos6lezUMlUAOHBuISQ==
+"@ledgerhq/hw-app-btc@^4.24.0", "@ledgerhq/hw-app-btc@^4.27.0":
+  version "4.27.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.27.0.tgz#11fc822bd34a47a39b1a7ae03ced69cf1d432796"
+  integrity sha512-7Ck48wCBb6nd9UXarNeGOsOqbOTi2cs4AxFhbDNrVLvPiBSH0yEiNQEF95J6u5BxKkAdM1GV9LoRumR4KhZGqQ==
   dependencies:
     "@ledgerhq/hw-transport" "^4.24.0"
     create-hash "^1.1.3"
@@ -1697,6 +1697,14 @@
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-xrp/-/hw-app-xrp-4.24.0.tgz#cb41975597ac43d6f95dfb6ef52ff3ce5376ab80"
   integrity sha512-KWxqnf4Ci3pF/2RsavDLNXHwh7iG2xBkUBD5iYgui9WaWCJfTv+F5zBYeeDeULfTSj9+WAtNcPXFHyiKLYPTfw==
+  dependencies:
+    "@ledgerhq/hw-transport" "^4.24.0"
+    bip32-path "0.4.2"
+
+"@ledgerhq/hw-app-xrp@^4.25.0":
+  version "4.25.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-xrp/-/hw-app-xrp-4.25.0.tgz#d97d7e85290dd2d1ec99f85747a26145e7a7383e"
+  integrity sha512-kG9S8CxUFMG1hbLBiKtoPMquzlTigndDsxhoXB8oywAdbGsoCi2cufMHV2p5Bek6YlGfn5J5p49Hx5iNIf2y5Q==
   dependencies:
     "@ledgerhq/hw-transport" "^4.24.0"
     bip32-path "0.4.2"
@@ -1733,10 +1741,10 @@
   dependencies:
     events "^3.0.0"
 
-"@ledgerhq/ledger-core@2.0.0-rc.8":
-  version "2.0.0-rc.8"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.8.tgz#618ff2ca091464c71890678d3912921ee46f98af"
-  integrity sha512-UYEwlw7+JfRCPw1z2kw9EGs88wsk5XBGxMPpNPF1cdpE7extEL63Gr+4h4ibU6kXEeEIpfI0lZ2l/6HwzMw6EQ==
+"@ledgerhq/ledger-core@2.0.0-rc.11":
+  version "2.0.0-rc.11"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.11.tgz#5b314e222f487dfa8f525ba1ef008ae30b289339"
+  integrity sha512-HmtUd3WrVhJQtjNe6qO/hGrnzrE2YbdaTQnLhsQyD3qN1vUwHmanHjqOqVLFRI8a3KqVdMFqYMvn3N5c0hsLuQ==
   dependencies:
     "@ledgerhq/hw-app-btc" "^4.7.3"
     "@ledgerhq/hw-transport-node-hid" "^4.7.6"
@@ -1745,19 +1753,23 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.0.0-beta.1":
-  version "4.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.0.0-beta.1.tgz#52ed90757761a08a5f5c9c40c1fed0cb2f1fb4ca"
-  integrity sha512-Ms06Za/EI8yP/4GOAziCMecqIssZbkS5tjSCgaqd1h0zHLzM6i6PvgjhJyvG5SrET6+uQVp4YM4qbo2tc6irjQ==
+"@ledgerhq/live-common@4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.3.0.tgz#f983cb691642f1372d89e6a9320986141ab31045"
+  integrity sha512-086MHRLvkPB7qxpzBGm2W1bE3yMbUxwCF2JuEMiQzgTK4fNPYV9mz+qR+qhYYcUXuXZQ2fCnCBYDqUlfo1Wb3g==
   dependencies:
-    axios "^0.18.0"
+    "@ledgerhq/hw-app-btc" "^4.24.0"
+    "@ledgerhq/hw-app-eth" "^4.24.0"
+    "@ledgerhq/hw-app-xrp" "^4.24.0"
+    "@ledgerhq/hw-transport" "^4.24.0"
     bignumber.js "^7.2.1"
+    eip55 "^1.0.3"
     invariant "^2.2.2"
     lodash "^4.17.4"
     node-lzw "^0.3.1"
     numeral "^2.0.6"
     prando "^3.0.1"
-    react "^16.4.0"
+    react "*"
     react-i18next "^8.0.7"
     react-redux "^5.0.7"
     redux "^4.0.0"
@@ -13342,15 +13354,15 @@ react-treebeard@^2.1.0:
     shallowequal "^0.2.2"
     velocity-react "^1.3.1"
 
-react@^16.2.0, react@^16.4.0, react@^16.4.1:
-  version "16.4.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
-  integrity sha512-3GEs0giKp6E0Oh/Y9ZC60CmYgUPnp7voH9fbjWsvXtYFb4EWtgQub0ADSq0sJR0BbHc4FThLLtzlcFaFXIorwg==
+react@*, react@^16.2.0, react@^16.6.1:
+  version "16.6.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.6.1.tgz#ee2aef4f0a09e494594882029821049772f915fe"
+  integrity sha512-OtawJThYlvRgm9BXK+xTL7BIlDx8vv21j+fbQDjRRUyok6y7NyjlweGorielTahLZHYIdKUoK2Dp9ByVWuMqxw==
   dependencies:
-    fbjs "^0.8.16"
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.0"
+    prop-types "^15.6.2"
+    scheduler "^0.11.0"
 
 reactcss@^1.2.0:
   version "1.2.3"
@@ -14248,6 +14260,14 @@ sax@^1.2.4, sax@~1.2.1, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
+
+scheduler@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.11.0.tgz#def1f1bfa6550cc57981a87106e65e8aea41a6b5"
+  integrity sha512-MAYbBfmiEHxF0W+c4CxMpEqMYK+rYF584VP/qMKSiHM6lTkBKKYOJaDiSILpJHla6hBOsVd6GucPL46o2Uq3sg==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 schema-utils@^0.3.0:
   version "0.3.0"
