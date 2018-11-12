@@ -7,7 +7,7 @@ import Btc from '@ledgerhq/hw-app-btc'
 import { Observable } from 'rxjs'
 import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
-import type { OperationRaw, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import type { OperationRaw, DerivationMode, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { getWalletName } from '@ledgerhq/live-common/lib/account'
 import {
   libcoreAmountToBigNumber,
@@ -30,7 +30,7 @@ type Input = {
   accountId: string,
   blockHeight: number,
   currencyId: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
   xpub: string,
   index: number,
@@ -103,7 +103,7 @@ async function signTransaction({
   currency: CryptoCurrency,
   blockHeight: number,
   transaction: *,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   sigHashType: number,
   hasTimestamp: boolean,
 }) {
@@ -200,7 +200,7 @@ export async function doSignAndBroadcast({
   onOperationBroadcasted,
 }: {
   accountId: string,
-  derivationMode: string,
+  derivationMode: DerivationMode,
   seedIdentifier: string,
   blockHeight: number,
   currency: CryptoCurrency,
@@ -280,7 +280,7 @@ export async function doSignAndBroadcast({
   const fee = libcoreAmountToBigNumber(builded.getFees())
 
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
-  onOperationBroadcasted({
+  const op: $Exact<OperationRaw> = {
     id: `${xpub}-${txHash}-OUT`,
     hash: txHash,
     type: 'OUT',
@@ -294,7 +294,9 @@ export async function doSignAndBroadcast({
     recipients,
     accountId,
     date: new Date().toISOString(),
-  })
+    extra: {},
+  }
+  onOperationBroadcasted(op)
 }
 
 export default cmd

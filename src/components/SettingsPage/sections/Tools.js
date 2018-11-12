@@ -3,6 +3,7 @@
 /* eslint-disable react/jsx-no-literals */
 
 import React, { PureComponent } from 'react'
+import liveCommonPkg from '@ledgerhq/live-common/package.json'
 import { translate } from 'react-i18next'
 import Box, { Card } from 'components/base/Box'
 import Modal, { ModalBody, ModalContent, ModalTitle } from 'components/base/Modal'
@@ -30,6 +31,7 @@ class TabProfile extends PureComponent<*, *> {
         <Box flow={2}>
           <QRCodeExporter />
         </Box>
+        <Box style={{ textAlign: 'right' }}>{liveCommonPkg.version}</Box>
       </ModalContent>
     </ModalBody>
   )

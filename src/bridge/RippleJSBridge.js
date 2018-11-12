@@ -11,6 +11,7 @@ import {
   getDerivationModesForCurrency,
   getDerivationScheme,
   runDerivationScheme,
+  isIterableDerivationMode,
 } from '@ledgerhq/live-common/lib/derivation'
 import {
   getAccountPlaceholderName,
@@ -104,7 +105,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
 
       const hash = computeBinaryTransactionHash(transaction)
 
-      onOperationBroadcasted({
+      const op: $Exact<Operation> = {
         id: `${a.id}-${hash}-OUT`,
         hash,
         accountId: a.id,
@@ -120,7 +121,9 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
         transactionSequenceNumber:
           (a.operations.length > 0 ? a.operations[0].transactionSequenceNumber : 0) +
           a.pendingOperations.length,
-      })
+        extra: {},
+      }
+      onOperationBroadcasted(op)
     }
   } finally {
     api.disconnect()
@@ -230,6 +233,7 @@ const txToOperation = (account: Account) => ({
     recipients: [destination.address],
     date: new Date(timestamp),
     transactionSequenceNumber: sequence,
+    extra: {},
   }
   return op
 }
@@ -299,7 +303,8 @@ const RippleJSBridge: WalletBridge<Transaction> = {
           const derivationModes = getDerivationModesForCurrency(currency)
           for (const derivationMode of derivationModes) {
             const derivationScheme = getDerivationScheme({ derivationMode, currency })
-            for (let index = 0; index < 255; index++) {
+            const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
+            for (let index = 0; index < stopAt; index++) {
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })

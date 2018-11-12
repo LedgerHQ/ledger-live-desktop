@@ -1,15 +1,18 @@
 // @flow
 
+/* eslint-disable react/no-multi-comp */
+
 import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
 import { connect } from 'react-redux'
 
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { Currency, Account, DerivationMode } from '@ledgerhq/live-common/lib/types'
 
 import { decodeAccount } from 'reducers/accounts'
 import { addAccount } from 'actions/accounts'
 
-import FormattedVal from 'components/base/FormattedVal'
+import FakeLink from 'components/base/FakeLink'
+import Ellipsis from 'components/base/Ellipsis'
 import Switch from 'components/base/Switch'
 import Spinner from 'components/base/Spinner'
 import Box, { Card } from 'components/base/Box'
@@ -32,24 +35,38 @@ type Props = {
   addAccount: Account => void,
 }
 
-const INITIAL_STATE = {
-  status: 'idle',
-  currency: null,
-  xpub: '',
-  account: null,
-  isSegwit: true,
-  isUnsplit: false,
-  error: null,
+type ImportableAccountType = {
+  name: string,
+  currency: Currency,
+  derivationMode: DerivationMode,
+  xpub: string,
 }
 
 type State = {
   status: string,
+
+  importableAccounts: ImportableAccountType[],
+
   currency: ?Currency,
   xpub: string,
-  account: ?Account,
+  name: string,
   isSegwit: boolean,
   isUnsplit: boolean,
+
   error: ?Error,
+}
+
+const INITIAL_STATE = {
+  status: 'idle',
+
+  currency: null,
+  xpub: '',
+  name: 'dev',
+  isSegwit: true,
+  isUnsplit: false,
+
+  error: null,
+  importableAccounts: [],
 }
 
 class AccountImporter extends PureComponent<Props, State> {
@@ -67,142 +84,199 @@ class AccountImporter extends PureComponent<Props, State> {
   onChangeXPUB = xpub => this.setState({ xpub })
   onChangeSegwit = isSegwit => this.setState({ isSegwit })
   onChangeUnsplit = isUnsplit => this.setState({ isUnsplit })
+  onChangeName = name => this.setState({ name })
 
   isValid = () => {
-    const { currency, xpub } = this.state
-    return !!currency && !!xpub
+    const { currency, xpub, status } = this.state
+    return !!currency && !!xpub && status !== 'scanning'
   }
 
   scan = async () => {
-    if (!this.isValid()) return
     this.setState({ status: 'scanning' })
+    const { importableAccounts } = this.state
     try {
-      const { currency, xpub, isSegwit, isUnsplit } = this.state
-      invariant(currency, 'no currency')
-      const derivationMode = isSegwit
-        ? isUnsplit
-          ? 'segwit_unsplit'
-          : 'segwit'
-        : isUnsplit
-          ? 'unsplit'
-          : ''
-      const rawAccount = await scanFromXPUB
-        .send({
-          seedIdentifier: 'dev_tool',
-          currencyId: currency.id,
-          xpub,
-          derivationMode,
+      for (let i = 0; i < importableAccounts.length; i++) {
+        const a = importableAccounts[i]
+        const scanPayload = {
+          seedIdentifier: `dev_${a.xpub}`,
+          currencyId: a.currency.id,
+          xpub: a.xpub,
+          derivationMode: a.derivationMode,
+        }
+        const rawAccount = await scanFromXPUB.send(scanPayload).toPromise()
+        const account = decodeAccount(rawAccount)
+        await this.import({
+          ...account,
+          name: a.name,
         })
-        .toPromise()
-      const account = decodeAccount(rawAccount)
-      this.setState({ status: 'finish', account })
+        this.removeImportableAccount(a)
+      }
+      this.reset()
     } catch (error) {
       this.setState({ status: 'error', error })
     }
   }
 
-  import = async () => {
-    const { account } = this.state
+  addToScan = () => {
+    const { xpub, currency, isSegwit, isUnsplit, name } = this.state
+    const derivationMode = isSegwit
+      ? isUnsplit
+        ? 'segwit_unsplit'
+        : 'segwit'
+      : isUnsplit
+        ? 'unsplit'
+        : ''
+    const importableAccount = { xpub, currency, derivationMode, name }
+    this.setState(({ importableAccounts }) => ({
+      importableAccounts: [...importableAccounts, importableAccount],
+      currency: null,
+      xpub: '',
+      name: 'dev',
+      isSegwit: true,
+      isUnsplit: false,
+    }))
+  }
+
+  removeImportableAccount = importableAccount => {
+    this.setState(({ importableAccounts }) => ({
+      importableAccounts: importableAccounts.filter(i => i.xpub !== importableAccount.xpub),
+    }))
+  }
+
+  import = async account => {
     invariant(account, 'no account')
     await idleCallback()
     this.props.addAccount(account)
-    this.reset()
   }
 
   reset = () => this.setState(INITIAL_STATE)
 
   render() {
-    const { currency, xpub, isSegwit, isUnsplit, status, account, error } = this.state
+    const {
+      currency,
+      xpub,
+      name,
+      isSegwit,
+      isUnsplit,
+      status,
+      error,
+      importableAccounts,
+    } = this.state
     const supportsSplit = !!currency && !!currency.forkedFrom
     return (
-      <Card title="Import from xpub" flow={3}>
-        {status === 'idle' ? (
-          <Fragment>
-            <Box flow={1}>
-              <Label>{'currency'}</Label>
-              <SelectCurrency autoFocus value={currency} onChange={this.onChangeCurrency} />
-            </Box>
-            {currency && (currency.supportsSegwit || supportsSplit) ? (
-              <Box horizontal justify="flex-end" align="center" flow={3}>
-                {supportsSplit && (
-                  <Box horizontal align="center" flow={1}>
-                    <Box ff="Museo Sans|Bold" fontSize={4}>
-                      {'unsplit'}
-                    </Box>
-                    <Switch isChecked={isUnsplit} onChange={this.onChangeUnsplit} />
-                  </Box>
-                )}
-                {currency.supportsSegwit && (
-                  <Box horizontal align="center" flow={1}>
-                    <Box ff="Museo Sans|Bold" fontSize={4}>
-                      {'segwit'}
-                    </Box>
-                    <Switch isChecked={isSegwit} onChange={this.onChangeSegwit} />
-                  </Box>
-                )}
+      <Fragment>
+        <Card title="Import from xpub" flow={3}>
+          {status === 'idle' || status === 'scanning' ? (
+            <Fragment>
+              <Box flow={1}>
+                <Label>{'currency'}</Label>
+                <SelectCurrency autoFocus value={currency} onChange={this.onChangeCurrency} />
               </Box>
-            ) : null}
-            <Box flow={1}>
-              <Label>{'xpub'}</Label>
-              <Input
-                placeholder="xpub"
-                value={xpub}
-                onChange={this.onChangeXPUB}
-                onEnter={this.scan}
-              />
-            </Box>
-            <Box align="flex-end">
-              <Button primary small disabled={!this.isValid()} onClick={this.scan}>
-                {'scan'}
-              </Button>
-            </Box>
-          </Fragment>
-        ) : status === 'scanning' ? (
-          <Box align="center" justify="center" p={5}>
-            <Spinner size={16} />
-          </Box>
-        ) : status === 'finish' ? (
-          account ? (
-            <Box p={8} align="center" justify="center" flow={5} horizontal>
-              <Box horizontal flow={4} color="graphite" align="center">
-                {currency && <CurrencyCircleIcon size={64} currency={currency} />}
-                <Box>
-                  <Box ff="Museo Sans|Bold">{account.name}</Box>
-                  <FormattedVal
-                    fontSize={2}
-                    alwaysShowSign={false}
-                    color="graphite"
-                    unit={account.unit}
-                    showCode
-                    val={account.balance || 0}
-                  />
-                  <Box fontSize={2}>{`${account.operations.length} operation(s)`}</Box>
+              {currency && (currency.supportsSegwit || supportsSplit) ? (
+                <Box horizontal justify="flex-end" align="center" flow={3}>
+                  {supportsSplit && (
+                    <Box horizontal align="center" flow={1}>
+                      <Box ff="Museo Sans|Bold" fontSize={4}>
+                        {'unsplit'}
+                      </Box>
+                      <Switch isChecked={isUnsplit} onChange={this.onChangeUnsplit} />
+                    </Box>
+                  )}
+                  {currency.supportsSegwit && (
+                    <Box horizontal align="center" flow={1}>
+                      <Box ff="Museo Sans|Bold" fontSize={4}>
+                        {'segwit'}
+                      </Box>
+                      <Switch isChecked={isSegwit} onChange={this.onChangeSegwit} />
+                    </Box>
+                  )}
                 </Box>
+              ) : null}
+              <Box flow={1}>
+                <Label>{'xpub'}</Label>
+                <Input
+                  placeholder="xpub"
+                  value={xpub}
+                  onChange={this.onChangeXPUB}
+                  onEnter={this.addToScan}
+                />
               </Box>
-
-              <Button outline small disabled={!account} onClick={this.import}>
-                {'import'}
-              </Button>
-            </Box>
-          ) : (
+              <Box flow={1}>
+                <Label>{'name'}</Label>
+                <Input
+                  placeholder="name"
+                  value={name}
+                  onChange={this.onChangeName}
+                  onEnter={this.addToScan}
+                />
+              </Box>
+              <Box align="flex-end">
+                <Button primary small disabled={!this.isValid()} onClick={this.addToScan}>
+                  {'add to scan'}
+                </Button>
+              </Box>
+            </Fragment>
+          ) : status === 'error' ? (
             <Box align="center" justify="center" p={5} flow={4}>
-              <Box>{'No accounts found or wrong xpub'}</Box>
+              <Box>
+                <TranslatedError error={error} />
+              </Box>
               <Button primary onClick={this.reset} small autoFocus>
                 {'Reset'}
               </Button>
             </Box>
-          )
-        ) : status === 'error' ? (
-          <Box align="center" justify="center" p={5} flow={4}>
-            <Box>
-              <TranslatedError error={error} />
-            </Box>
-            <Button primary onClick={this.reset} small autoFocus>
-              {'Reset'}
-            </Button>
-          </Box>
-        ) : null}
-      </Card>
+          ) : null}
+        </Card>
+        {!!importableAccounts.length && (
+          <Card flow={2}>
+            {importableAccounts.map((acc, i) => (
+              <ImportableAccount
+                key={acc.xpub}
+                importableAccount={acc}
+                onRemove={this.removeImportableAccount}
+                isLoading={status === 'scanning' && i === 0}
+              >
+                {acc.xpub}
+              </ImportableAccount>
+            ))}
+            {status !== 'scanning' && (
+              <Box mt={4} align="flex-start">
+                <Button primary onClick={this.scan}>
+                  {'Launch scan'}
+                </Button>
+              </Box>
+            )}
+          </Card>
+        )}
+      </Fragment>
+    )
+  }
+}
+
+class ImportableAccount extends PureComponent<{
+  importableAccount: ImportableAccountType,
+  onRemove: ImportableAccountType => void,
+  isLoading: boolean,
+}> {
+  remove = () => {
+    this.props.onRemove(this.props.importableAccount)
+  }
+  render() {
+    const { importableAccount, isLoading } = this.props
+    return (
+      <Box horizontal flow={2} align="center">
+        {isLoading && <Spinner size={16} color="rgba(0, 0, 0, 0.3)" />}
+        <CurrencyCircleIcon currency={importableAccount.currency} size={24} />
+        <Box grow ff="Rubik" fontSize={3}>
+          <Ellipsis>{`[${importableAccount.name}] ${importableAccount.derivationMode ||
+            'default'} ${importableAccount.xpub}`}</Ellipsis>
+        </Box>
+        {!isLoading && (
+          <FakeLink onClick={this.remove} fontSize={3}>
+            {'Remove'}
+          </FakeLink>
+        )}
+      </Box>
     )
   }
 }

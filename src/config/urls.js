@@ -8,7 +8,7 @@ export const urls = {
 
   // Ledger support
   faq: 'https://support.ledgerwallet.com/hc/en-us',
-  terms: 'https://www.ledgerwallet.com/terms',
+  terms: 'https://www.ledger.com/pages/terms-of-use-and-disclaimer',
   noDeviceBuyNew: 'https://www.ledgerwallet.com/',
   noDeviceTrackOrder: 'http://order.ledgerwallet.com/',
   noDeviceLearnMore: 'https://www.ledgerwallet.com/',
@@ -36,4 +36,8 @@ export const urls = {
   errors: {
     CantOpenDevice: 'https://support.ledgerwallet.com/hc/en-us/articles/115005165269',
   },
+
+  // Currencies status
+  currenciesStatus:
+    'https://s3-eu-west-1.amazonaws.com/ledger-ledgerlive-resources-prod/public_resources/currencies.json',
 }

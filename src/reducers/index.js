@@ -9,6 +9,7 @@ import type { CounterValuesState } from '@ledgerhq/live-common/lib/countervalues
 import CounterValues from 'helpers/countervalues'
 import accounts from './accounts'
 import application from './application'
+import currenciesStatus from './currenciesStatus'
 import devices from './devices'
 import modals from './modals'
 import settings from './settings'
@@ -24,11 +25,13 @@ import type { SettingsState } from './settings'
 import type { UpdateState } from './update'
 import type { OnboardingState } from './onboarding'
 import type { BridgeSyncState } from './bridgeSync'
+import type { CurrenciesStatusState } from './currenciesStatus'
 
 export type State = {
   accounts: AccountsState,
   application: ApplicationState,
   countervalues: CounterValuesState,
+  currenciesStatus: CurrenciesStatusState,
   devices: DevicesState,
   modals: ModalsState,
   router: LocationShape,
@@ -42,6 +45,7 @@ export default combineReducers({
   accounts,
   application,
   countervalues: CounterValues.reducer,
+  currenciesStatus,
   devices,
   modals,
   router,

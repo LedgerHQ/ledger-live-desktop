@@ -47,6 +47,7 @@ export type SettingsState = {
   shareAnalytics: boolean,
   sentryLogs: boolean,
   lastUsedVersion: string,
+  dismissedBanners: string[],
 }
 
 const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
@@ -73,6 +74,7 @@ const INITIAL_STATE: SettingsState = {
   shareAnalytics: true,
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
+  dismissedBanners: [],
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
@@ -125,6 +127,14 @@ const handlers: Object = {
     ...state,
     ...settings,
     loaded: true,
+  }),
+  SETTINGS_DISMISS_BANNER: (state: SettingsState, { payload: bannerId }) => ({
+    ...state,
+    dismissedBanners: [...state.dismissedBanners, bannerId],
+  }),
+  CLEAN_ACCOUNTS_CACHE: (state: SettingsState) => ({
+    ...state,
+    dismissedBanners: [],
   }),
 }
 
@@ -223,6 +233,8 @@ export const shareAnalyticsSelector = (state: State) => state.settings.shareAnal
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding
+
+export const dismissedBannersSelector = (state: State) => state.settings.dismissedBanners || []
 
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
