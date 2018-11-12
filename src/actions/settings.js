@@ -45,3 +45,8 @@ export const setExchangePairsAction: SetExchangePairs = pairs => ({
   type: 'SETTINGS_SET_PAIRS',
   pairs,
 })
+
+export const dismissBanner = (bannerId: string) => ({
+  type: 'SETTINGS_DISMISS_BANNER',
+  payload: bannerId,
+})
