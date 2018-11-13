@@ -674,6 +674,10 @@
           "item4": "Application language or region",
           "item5": "OS language or region"
         }
+      },
+      "terms": {
+        "title": "Terms *",
+        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
       }
     },
     "finish": {
