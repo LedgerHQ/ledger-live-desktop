@@ -16,7 +16,7 @@ export const urls = {
   contactSupport: 'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
   feesMoreInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006535873',
   recipientAddressInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006433934',
-  privacyPolicy: 'https://www.ledgerwallet.com/privacy-policy',
+  privacyPolicy: 'https://www.ledgerwallet.com/pages/privacy-policy',
 
   githubIssues:
     'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc',
