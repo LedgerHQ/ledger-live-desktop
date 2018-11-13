@@ -72,10 +72,22 @@ const cards = shuffle([
     logo: <img src={i('logos/exchanges/genesis.svg')} alt="Genesis" width={150} />,
   },
   {
-    key: 'kyber',
-    id: 'kyber',
-    url: urls.kyber,
-    logo: <img src={i('logos/exchanges/kyber.svg')} alt="KYBER" width={150} />,
+    key: 'kyberSwap',
+    id: 'kyberSwap',
+    url: urls.kyberSwap,
+    logo: <img src={i('logos/exchanges/kyber-swap.png')} alt="KyberSwap" width={150} />,
+  },
+  {
+    key: 'changeNow',
+    id: 'changeNow',
+    url: urls.changeNow,
+    logo: <img src={i('logos/exchanges/change-now.png')} alt="ChangeNow" width={150} />,
+  },
+  {
+    key: 'thorSwap',
+    id: 'thorSwap',
+    url: urls.thorSwap,
+    logo: <img src={i('logos/exchanges/thor-swap.png')} alt="ThorSwap" width={150} />,
   },
 ])
 
