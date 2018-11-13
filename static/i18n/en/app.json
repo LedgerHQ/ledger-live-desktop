@@ -186,6 +186,9 @@
       "import": "Accounts",
       "finish": "Confirmation"
     },
+    "connectDevice": {
+      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+    },
     "accountAlreadyImportedSubtitle": "Accounts already in portfolio ({{count}})",
     "accountToImportSubtitle": "Add existing account",
     "accountToImportSubtitle_plural": "Add existing accounts",
