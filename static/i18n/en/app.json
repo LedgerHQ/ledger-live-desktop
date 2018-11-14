@@ -170,7 +170,9 @@
     "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
     "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
     "genesis": "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP.",
-    "kyber": "Kyber is a trading platform for exchange and conversion of ERC-20 tokens"
+    "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
+    "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
+    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
   },
   "genuinecheck": {
     "modal": {
@@ -185,7 +187,10 @@
       "import": "Accounts",
       "finish": "Confirmation"
     },
-    "accountAlreadyImportedSubtitle": "Accounts already in Portfolio ({{count}})",
+    "connectDevice": {
+      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+    },
+    "accountAlreadyImportedSubtitle": "Accounts already in portfolio ({{count}})",
     "accountToImportSubtitle": "Add existing account",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
@@ -674,6 +679,10 @@
           "item4": "",
           "item5": ""
         }
+      },
+      "terms": {
+        "title": "Terms *",
+        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
       }
     },
     "finish": {

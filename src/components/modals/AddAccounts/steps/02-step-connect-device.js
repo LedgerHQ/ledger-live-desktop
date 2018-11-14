@@ -15,6 +15,8 @@ import type { StepProps } from '../index'
 function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
   invariant(currency, 'No crypto asset given')
 
+  const currencyName = `${currency.name} (${currency.ticker})`
+
   return (
     <Fragment>
       <TrackPage category="AddAccounts" name="Step2" />
@@ -23,9 +25,7 @@ function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
         <Box ff="Open Sans" fontSize={4} color="dark" textAlign="center" style={{ width: 370 }}>
           <Trans i18nKey="addAccounts.connectDevice.desc" parent="div">
             {`Follow the steps below to add `}
-            <strong style={{ fontWeight: 'bold' }}>{`${currency.name} (${
-              currency.ticker
-            })`}</strong>
+            <strong style={{ fontWeight: 'bold' }}>{currencyName}</strong>
             {` accounts from your Ledger device.`}
           </Trans>
         </Box>
