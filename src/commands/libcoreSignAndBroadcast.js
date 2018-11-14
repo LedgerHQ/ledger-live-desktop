@@ -126,7 +126,7 @@ async function signTransaction({
       const hexPreviousTransaction = Buffer.from(rawPreviousTransaction).toString('hex')
       const previousTransaction = hwApp.splitTransaction(
         hexPreviousTransaction,
-        currency.supportsSegwit,
+        true, // Setting the flag to false only prevent the parsing of segwit txs. The flag on true allow both segwit and non-segwit
         hasTimestamp,
         hasExtraData,
       )
