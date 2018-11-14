@@ -41,6 +41,5 @@ export const urls = {
   },
 
   // Currencies status
-  currenciesStatus:
-    'http://resources.live.ledger.app/public_resources/currencies.json',
+  currenciesStatus: 'http://resources.live.ledger.app/public_resources/currencies.json',
 }
