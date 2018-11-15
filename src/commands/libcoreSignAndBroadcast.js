@@ -117,6 +117,7 @@ async function signTransaction({
     }
   } else if (currency.id === 'decred') {
     expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
+    additionals.push('decred')
   }
   const rawInputs = transaction.getInputs()
 
@@ -124,10 +125,6 @@ async function signTransaction({
 
   const inputs = await Promise.all(
     rawInputs.map(async input => {
-      const additionals = []
-      if (currency.id === 'decred') {
-        additionals.push('decred')
-      }
       const rawPreviousTransaction = await input.getPreviousTransaction()
       const hexPreviousTransaction = Buffer.from(rawPreviousTransaction).toString('hex')
       const previousTransaction = hwApp.splitTransaction(
