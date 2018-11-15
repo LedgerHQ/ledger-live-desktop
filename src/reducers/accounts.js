@@ -6,6 +6,7 @@ import accountModel from 'helpers/accountModel'
 import logger from 'logger'
 import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
+import { currenciesStatusSelector, getIsCurrencyDown } from './currenciesStatus'
 
 export type AccountsState = Account[]
 const state: AccountsState = []
@@ -60,7 +61,14 @@ const handlers: Object = {
 
 export const accountsSelector = (state: { accounts: AccountsState }): Account[] => state.accounts
 
-export const isUpToDateSelector = createSelector(accountsSelector, accounts =>
+export const activeAccountsSelector = createSelector(
+  accountsSelector,
+  currenciesStatusSelector,
+  (accounts, currenciesStatus) =>
+    accounts.filter(a => !getIsCurrencyDown(currenciesStatus, a.currency)),
+)
+
+export const isUpToDateSelector = createSelector(activeAccountsSelector, accounts =>
   accounts.every(a => {
     const { lastSyncDate } = a
     const { blockAvgTime } = a.currency
