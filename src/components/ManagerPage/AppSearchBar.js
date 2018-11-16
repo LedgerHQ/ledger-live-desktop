@@ -81,7 +81,7 @@ class AppSearchBar extends PureComponent<Props, State> {
         <Space of={30} />
         <Search
           fuseOptions={{
-            threshold: 0.5,
+            threshold: 0.1,
             keys: ['name'],
           }}
           value={query}
