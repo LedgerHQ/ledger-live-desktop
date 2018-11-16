@@ -6,7 +6,7 @@ import accountModel from 'helpers/accountModel'
 import logger from 'logger'
 import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
-import { currenciesStatusSelector, getIsCurrencyDown } from './currenciesStatus'
+import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
 
 export type AccountsState = Account[]
 const state: AccountsState = []
@@ -65,7 +65,7 @@ export const activeAccountsSelector = createSelector(
   accountsSelector,
   currenciesStatusSelector,
   (accounts, currenciesStatus) =>
-    accounts.filter(a => !getIsCurrencyDown(currenciesStatus, a.currency)),
+    accounts.filter(a => !currencyDownStatusLocal(currenciesStatus, a.currency)),
 )
 
 export const isUpToDateSelector = createSelector(activeAccountsSelector, accounts =>
