@@ -1,21 +1,25 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
+import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../index'
 
 export default function StepConnectDevice({ account, onChangeAppOpened }: StepProps) {
   return (
-    <EnsureDeviceApp
-      account={account}
-      waitBeforeSuccess={200}
-      onSuccess={() => onChangeAppOpened(true)}
-    />
+    <Fragment>
+      {account ? <CurrencyDownStatusAlert currency={account.currency} /> : null}
+      <EnsureDeviceApp
+        account={account}
+        waitBeforeSuccess={200}
+        onSuccess={() => onChangeAppOpened(true)}
+      />
+    </Fragment>
   )
 }
 

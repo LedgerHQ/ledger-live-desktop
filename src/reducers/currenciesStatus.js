@@ -1,7 +1,8 @@
 // @flow
 
 import { handleActions, createAction } from 'redux-actions'
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import { createSelector } from 'reselect'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import network from 'api/network'
 import { urls } from 'config/urls'
@@ -11,7 +12,6 @@ import type { State } from './index'
 
 export type CurrencyStatus = {
   id: string, // the currency id
-  status: 'KO' | 'OK',
   message: string,
   link: string,
   nonce: number,
@@ -47,11 +47,17 @@ export const fetchCurrenciesStatus = () => async (dispatch: *) => {
 
 export const currenciesStatusSelector = (state: State) => state.currenciesStatus
 
-// It's not a *real* selector, but it's better than having this logic inside component
-export const getIsCurrencyDown = (currenciesStatus: CurrenciesStatusState, currency: Currency) => {
-  const item = currenciesStatus.find(c => c.id === currency.id)
-  return !!item && item.status === 'KO'
-}
+// if there is a status, it means that currency is disrupted, the status is returned.
+export const currencyDownStatusLocal = (
+  currenciesStatus: CurrenciesStatusState,
+  currency: CryptoCurrency,
+): ?CurrencyStatus => currenciesStatus.find(c => c.id === currency.id)
+
+export const currencyDownStatus = createSelector(
+  currenciesStatusSelector,
+  (_, { currency }) => currency,
+  currencyDownStatusLocal,
+)
 
 // Exporting reducer
 
