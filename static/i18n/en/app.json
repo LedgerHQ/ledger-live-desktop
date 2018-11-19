@@ -539,7 +539,7 @@
         "instructions": {
           "nano": {
             "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select *Configure as new device?*.",
+            "step2": "Press the right button to select <1><0>Configure as new device?.</0></1>",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
@@ -555,7 +555,7 @@
         "instructions": {
           "nano": {
             "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
-            "step2": "Press the left button to cancel *Initialize as new device?*. Then press the right button to select *Restore configuration?*.",
+            "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },

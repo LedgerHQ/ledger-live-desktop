@@ -30,25 +30,25 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding.selectPIN.restore.instructions.nano.step2'),
-      },
-      {
-        key: 'step3',
-        icon: <IconOptionRow>{'3.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="onboarding.selectPIN.restore.instructions.nano.step3">
+            <Trans i18nKey="onboarding.selectPIN.restore.instructions.nano.step2">
               {'Press the left button to cancel'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Initialize as new device?'}
               </Text>
-              {'Press the right button to select'}
+              {'Then press the right button to select'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Restore configuration?'}
               </Text>
             </Trans>
           </Box>
         ),
+      },
+      {
+        key: 'step3',
+        icon: <IconOptionRow>{'3.'}</IconOptionRow>,
+        desc: t('onboarding.selectPIN.restore.instructions.nano.step3'),
       },
       {
         key: 'step4',
