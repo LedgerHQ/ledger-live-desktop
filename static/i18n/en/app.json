@@ -481,7 +481,12 @@
   "language": {
     "system": "Use system language",
     "en": "English",
-    "fr": "French"
+    "fr": "French",
+    "es": "Spanish",
+    "ko": "Korean",
+    "zh": "Simplified Chinese",
+    "ja": "Japanese",
+    "ru": "Russian"
   },
   "onboarding": {
     "breadcrumb": {
