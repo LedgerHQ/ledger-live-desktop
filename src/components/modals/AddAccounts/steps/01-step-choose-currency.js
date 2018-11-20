@@ -5,12 +5,18 @@ import React, { Fragment } from 'react'
 import TrackPage from 'analytics/TrackPage'
 import SelectCurrency from 'components/SelectCurrency'
 import Button from 'components/base/Button'
+import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import CurrencyBadge from 'components/base/CurrencyBadge'
 
 import type { StepProps } from '../index'
 
 function StepChooseCurrency({ currency, setCurrency }: StepProps) {
-  return <SelectCurrency autoFocus onChange={setCurrency} value={currency} />
+  return (
+    <Fragment>
+      {currency ? <CurrencyDownStatusAlert currency={currency} /> : null}
+      <SelectCurrency autoFocus onChange={setCurrency} value={currency} />
+    </Fragment>
+  )
 }
 
 export function StepChooseCurrencyFooter({ transitionTo, currency, t }: StepProps) {

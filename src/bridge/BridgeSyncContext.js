@@ -16,7 +16,7 @@ import { setAccountSyncState } from 'actions/bridgeSync'
 import { bridgeSyncSelector, syncStateLocalSelector } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
 import { accountsSelector, isUpToDateSelector } from 'reducers/accounts'
-import { currenciesStatusSelector, getIsCurrencyDown } from 'reducers/currenciesStatus'
+import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/currenciesStatus'
 import { SYNC_MAX_CONCURRENT, SYNC_TIMEOUT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { getBridgeForCurrency } from '.'
@@ -77,7 +77,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         return
       }
 
-      if (getIsCurrencyDown(this.props.currenciesStatus, account.currency)) {
+      if (currencyDownStatusLocal(this.props.currenciesStatus, account.currency)) {
         next()
         return
       }

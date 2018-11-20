@@ -16,7 +16,7 @@ export const urls = {
   contactSupport: 'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
   feesMoreInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006535873',
   recipientAddressInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006433934',
-  privacyPolicy: 'https://www.ledgerwallet.com/pages/privacy-policy',
+  privacyPolicy: 'https://www.ledger.com/pages/privacy-policy',
 
   githubIssues:
     'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc',
@@ -30,7 +30,10 @@ export const urls = {
   luno: 'http://luno.go2cloud.org/aff_c?offer_id=4&aff_id=1001&source=ledger',
   shapeshift: 'https://shapeshift.io/#/coins?affiliate=ledger',
   genesis: 'https://genesistrading.com/ledger-live/',
-  kyber: 'http://kyber.network/swap?ref=0xE2D8481eeF31CDA994833974FFfEccd576f8D71E',
+  kyberSwap: 'http://kyber.network/swap?ref=0xE2D8481eeF31CDA994833974FFfEccd576f8D71E',
+  changeNow: 'https://changenow.io/?utm_source=ledger_wallet',
+  thorSwap:
+    'https://www.thorswap.com/?utm_source=Wallet&utm_medium=ledger&utm_campaign=EmbedLink&utm_content=Link1',
 
   // Errors
   errors: {
@@ -38,6 +41,5 @@ export const urls = {
   },
 
   // Currencies status
-  currenciesStatus:
-    'https://s3-eu-west-1.amazonaws.com/ledger-ledgerlive-resources-prod/public_resources/currencies.json',
+  currenciesStatus: 'http://resources.live.ledger.app/public_resources/currencies.json',
 }

@@ -5,14 +5,14 @@ import { Buffer } from 'buffer'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
-import { accountsSelector } from 'reducers/accounts'
+import { activeAccountsSelector } from 'reducers/accounts'
 import { exportSettingsSelector } from 'reducers/settings'
 import { encode } from '@ledgerhq/live-common/lib/cross'
 import { dataToFrames } from 'qrloop/exporter'
 import QRCode from './base/QRCode'
 
 const mapStateToProps = createStructuredSelector({
-  accounts: accountsSelector,
+  accounts: activeAccountsSelector,
   settings: exportSettingsSelector,
 })
 
