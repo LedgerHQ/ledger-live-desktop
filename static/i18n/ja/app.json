@@ -1,0 +1,876 @@
+{
+  "common": {
+    "labelYes": "はい",
+    "labelNo": "いいえ",
+    "apply": "適用",
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "getSupport": "サポートを受ける",
+    "delete": "削除",
+    "launch": "開始",
+    "continue": "続行",
+    "learnMore": "詳細",
+    "help": "ヘルプ",
+    "dismiss": "Dismiss",
+    "skipThisStep": "このステップをスキップする",
+    "needHelp": "サポートが必要ですか？",
+    "areYouSure": "実行しますか？",
+    "selectAccount": "アカウントを選択",
+    "selectAccountNoOption": "アカウントがマッチしません\"{{accountName}}\"",
+    "selectCurrency": "クリプトアセットを選択",
+    "selectCurrencyNoOption": "クリプトアセットが存在しません\"{{currencyName}}\"",
+    "selectExchange": "取引所を選択",
+    "selectExchangeNoOption": "取引所がマッチしません \"{{exchangeName}}\"",
+    "selectExchangeNoOptionAtAll": "取引所が見つかりません",
+    "sortBy": "ソート基準",
+    "search": "検索",
+    "save": "保存",
+    "lock": "ロック",
+    "showMore": "展開",
+    "max": "最大",
+    "back": "戻る",
+    "reset": "リセット",
+    "retry": "再試行",
+    "stop": "停止",
+    "close": "閉じる",
+    "eastern": "東部",
+    "western": "西部",
+    "reverify": "再確認",
+    "verify": "確認",
+    "copy": "コピー",
+    "copyAddress": "アドレスをコピー",
+    "copied": "コピー済み",
+    "addressCopied": "アドレスをコピーしました",
+    "lockScreen": {
+      "title": "お帰りなさい",
+      "subTitle": null,
+      "description": "パスワードを入力して続行",
+      "inputPlaceholder": "パスワードを入力",
+      "lostPassword": "パスワードを紛失しました"
+    },
+    "sync": {
+      "syncing": "同期しています...",
+      "upToDate": "同期が完了しました",
+      "outdated": "中断",
+      "error": "同期エラー",
+      "refresh": "更新",
+      "ago": "同期済み {{time}}"
+    }
+  },
+  "operation": {
+    "type": {
+      "IN": "受信済み",
+      "OUT": "送信済み"
+    }
+  },
+  "time": {
+    "day": "日",
+    "week": "週",
+    "month": "月",
+    "year": "年",
+    "since": {
+      "day": "日（過去）",
+      "week": "週（過去）",
+      "month": "月（過去）",
+      "year": "年（過去）"
+    }
+  },
+  "sidebar": {
+    "menu": "メニュー",
+    "accounts": "アカウント ({{count}})",
+    "manager": "マネージャー",
+    "exchange": "購入/取引",
+    "developer": "開発ツール"
+  },
+  "account": {
+    "lastOperations": "最後の操作",
+    "emptyState": {
+      "title": "まだクリプトアセットをお持ちではありませんか？",
+      "desc": "受信を開始する前に、<1><0>{{managerAppName}}</0></1> アプリがインストールされていることを確認してください",
+      "buttons": {
+        "receiveFunds": "受信"
+      }
+    },
+    "settings": {
+      "title": "アカウントを編集",
+      "advancedLogs": "詳細ログ",
+      "accountName": {
+        "title": "アカウント名",
+        "desc": "このアカウントを説明"
+      },
+      "unit": {
+        "title": "単位",
+        "desc": "表示する単位を選択"
+      },
+      "endpointConfig": {
+        "title": "ノード",
+        "desc": "使用するAPIノード"
+      }
+    }
+  },
+  "dashboard": {
+    "title": "ポートフォリオ",
+    "emptyAccountTile": {
+      "desc": "アカウントを追加して、クリプトアセットをさらに管理",
+      "createAccount": "アカウントを追加"
+    },
+    "accounts": {
+      "title": "アカウント ({{count}})"
+    },
+    "greeting": {
+      "morning": "おはようございます",
+      "evening": "こんばんは",
+      "afternoon": "こんにちは"
+    },
+    "summary": "アカウントの概要をお知らせします",
+    "summary_plural": "{{count}}アカウントの概要をお知らせします",
+    "recentActivity": "最後の操作",
+    "totalBalance": "合計残高",
+    "accountsOrder": {
+      "name": "名前",
+      "balance": "残高"
+    }
+  },
+  "currentAddress": {
+    "title": "現在のアドレス",
+    "for": "アカウント <1><0>{{accountName}}</0></1>のアドレス",
+    "messageIfUnverified": "セキュリティを最適化するために、お持ちの機器のアドレスを確認してください。右ボタンを押して確認します。",
+    "messageIfAccepted": "{{currencyName}} アドレスが確認されました。コピー/ペーストをした場合やQRコードをスキャンした場合は、アドレスを確認してください。",
+    "messageIfSkipped": "Ledger機器の受信アドレスが確認されていません。セキュリティを最適化するために、{{currencyName}}アドレスを確認してください。"
+  },
+  "deviceConnect": {
+    "step1": {
+      "connect": "<1>Ledger 機器</1>を接続し、ロックを解除します"
+    },
+    "step2": {
+      "open": "機器で<1><0>{{managerAppName}}</0></1>アプリを開きます"
+    }
+  },
+  "emptyState": {
+    "sidebar": {
+      "text": "このボタンを押して、ポートフォリオにアカウントを追加します"
+    },
+    "dashboard": {
+      "title": "ポートフォリオにアカウントを追加",
+      "desc": "Ledger Liveを初めてご利用になる場合、アカウントにはポートフォリオが存在しません。ポートフォリオへのアカウントの追加を開始する前に、マネージャーを開き、 Ledger  機器にアプリをインストールしてください。",
+      "buttons": {
+        "addAccount": "アカウントを追加",
+        "installApp": "マネージャーを開く"
+      }
+    }
+  },
+  "exchange": {
+    "title": "取引",
+    "desc": "当社がお客様のために選択した取引サービスをいくつかお試しください",
+    "visitWebsite": "ウェブサイトを訪問",
+    "coinhouse": "Coinhouseは個人および機関投資家向けの信用度の高いプラットフォームで、暗号資産を分析、取得、売却、安全に保管できます。",
+    "changelly": "Changellyは、100を超えるコインやトークンが上場された人気の高いインスタント暗号資産取引所です。",
+    "coinmama": "Coinmamaは世界中でデジタル資産を素早く安全かつ楽しく購入できる金融サービスです。",
+    "simplex": "SimplexはEUで認可を受けた金融機関で、不正行為に悩まされることなくクレジットカード決済を行えるソリューションを提供します。",
+    "paybis": "クレジットカードを使って、PayBisからBitcoinを安心して簡単に購入できます。米国、カナダ、ドイツ、ロシア、サウジアラビアでサービスを提供しています。",
+    "luno": "LunoではBitcoinやEthereumといった暗号通貨を安全かつ簡単に購入・保管し、それらについて学習することができます。",
+    "shapeshift": "ShapeShiftはオンラインマーケットプレイスで、ユーザーはデジタルアセットを売買できます。デジタルアセットを素早く安全に購入でき、サインアッププロセスにも時間がかからず、カウンターパーティリスクや軋轢もありません。",
+    "genesis": "GenesisはBitcoinやBitcoin Cash、Ethereum、Ethereum Classic、Litecoin、XRPといったデジタル通貨の流動性や借入を提供する機関トレーディング会社です。",
+    "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
+    "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
+    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
+  },
+  "genuinecheck": {
+    "modal": {
+      "title": "真贋性チェック"
+    }
+  },
+  "addAccounts": {
+    "title": "アカウントを追加",
+    "breadcrumb": {
+      "informations": "クリプトアセット",
+      "connectDevice": "機器",
+      "import": "アカウント",
+      "finish": "確認"
+    },
+    "connectDevice": {
+      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+    },
+    "accountAlreadyImportedSubtitle": "アカウントは既にポートフォリオ内に存在します ({{count}})",
+    "accountToImportSubtitle": "既存アカウントを追加",
+    "accountToImportSubtitle_plural": "既存アカウントを追加",
+    "selectAll": "すべて選択 ({{count}})",
+    "unselectAll": "すべての選択を解除 ({{count}})",
+    "newAccount": "新規アカウント",
+    "legacyAccount": "{{accountName}} (legacy)",
+    "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
+    "unsplitAccount": "{{accountName}} (unsplit)",
+    "noAccountToImport": "追加する既存の {{currencyName}} アカウントが存在しません",
+    "success": "ポートフォリオにアカウントが追加されました",
+    "success_plural": "ポートフォリオにアカウントが追加されました",
+    "successDescription": "アカウントが作成されました。",
+    "successDescription_plural": "アカウントが作成されました。",
+    "createNewAccount": {
+      "title": "新規アカウントを追加",
+      "noOperationOnLastAccount": "最後に作成された <1><0>{{accountName}}</0></1> アカウントには取引が存在しません。まず、アカウントで暗号通貨を受け取り、その後、新規に追加できます。",
+      "noAccountToCreate": "作成する <1><0>{{currencyName}}</0></1> アカウントが見つかりませんでした"
+    },
+    "cta": {
+      "addMore": "さらに追加",
+      "add": "アカウントを追加",
+      "add_plural": "アカウントを追加"
+    }
+  },
+  "operationDetails": {
+    "title": "操作に関する詳細",
+    "account": "アカウント",
+    "date": "日付",
+    "status": "ステータス",
+    "confirmed": "確認済み",
+    "notConfirmed": "未確認",
+    "fees": "料金",
+    "noFees": "料金なし",
+    "from": "から",
+    "to": "へ",
+    "identifier": "取引ID",
+    "viewOperation": "Explorerで表示",
+    "showMore": "{{recipients}} 展開",
+    "showLess": "折りたたむ"
+  },
+  "operationList": {
+    "noMoreOperations": "すべて"
+  },
+  "manager": {
+    "yourDeviceIsGenuine": "お持ちの機器は本物です",
+    "apps": {
+      "install": "インストール",
+      "all": "アプリカタログ",
+      "installing": "{{app}}をインストールしています...",
+      "uninstalling": "{{app}}をアンインストールしています...",
+      "installSuccess": "{{app}} が機器にインストールされました",
+      "uninstallSuccess": "{{app}} が機器からアンインストールされました",
+      "help": "機器を確認して、インストール済みのアプリを確認してください"
+    },
+    "firmware": {
+      "installed": "ファームウェアバージョン {{version}}",
+      "titleNano": "Ledger Nano S",
+      "titleBlue": "Ledger Blue",
+      "update": "更新",
+      "latest": "ファームウェアバージョン {{version}} をご利用いただけます",
+      "disclaimerTitle": "<1><0>ファームウェアバージョン {{version}}</0></1>をインストールします",
+      "disclaimerAppDelete": "お使いの機器にインストールされたアプリは、更新後再インストールする必要があります。",
+      "disclaimerAppReinstall": "これはブロックチェーンのクリプトアセットに影響を与えません。"
+    },
+    "modal": {
+      "steps": {
+        "updateMCU": "MCU更新"
+      },
+      "installing": "ファームウェアを更新しています...",
+      "confirmIdentifier": "識別子を検証してください",
+      "confirmIdentifierText": "お使いの機器の識別子が以下の識別子と同じか検証してください。右ボタンを押して確認します。",
+      "identifier": "識別子",
+      "mcuTitle": "MCUを更新しています",
+      "mcuFirst": "機器からUSBケーブルを外します",
+      "mcuSecond": "USBケーブルを再接続している間、処理画面が表示されるまで左ボタンを押し続けます",
+      "mcuPin": "機器上で指示が表示されたら、ピンコードを入力してプロセスを終了します",
+      "successTitle": "ファームウェアが更新されました",
+      "successText": "機器にアプリを再インストールしてください"
+    },
+    "title": "マネージャー",
+    "subtitle": "機器にアプリをインストールまたはアンインストールします",
+    "device": {
+      "title": "機器を接続します",
+      "desc": "以下のステップに従い、マネージャーを開きます",
+      "cta": "機器を接続します"
+    }
+  },
+  "receive": {
+    "title": "受信",
+    "steps": {
+      "chooseAccount": {
+        "title": "アカウント",
+        "label": "入金アカウント"
+      },
+      "connectDevice": {
+        "title": "機器",
+        "withoutDevice": "機器をお持ちではありませんか？"
+      },
+      "confirmAddress": {
+        "title": "検証",
+        "action": "機器のアドレスを検証します",
+        "text": "{{currencyName}} 受信アドレスが機器に表示されます。コンピューターのアドレスとマッチするか注意して確認してください。",
+        "support": "お問い合わせ"
+      },
+      "receiveFunds": {
+        "title": "受信"
+      }
+    }
+  },
+  "send": {
+    "title": "送信",
+    "totalSpent": "出金総額",
+    "steps": {
+      "amount": {
+        "title": "詳細",
+        "selectAccountDebit": "出金アカウントを選択",
+        "recipientAddress": "受取人のアドレス",
+        "amount": "金額",
+        "fees": "ネットワーク手数料",
+        "advancedOptions": "詳細オプション",
+        "useRBF": "replace-by-fee取引を利用する",
+        "message": "メッセージを残す（140）",
+        "rippleTag": "タグ",
+        "ethereumGasLimit": "ガス制限",
+        "unitPerByte": "バイト当たり{{unit}} "
+      },
+      "connectDevice": {
+        "title": "機器"
+      },
+      "verification": {
+        "title": "検証",
+        "warning": "機器に表示されている取引明細をすべて確認してください",
+        "body": "検証したら、右ボタンを押して確認し、取引に署名します"
+      },
+      "confirmation": {
+        "title": "確認",
+        "success": {
+          "title": "送信済み取引",
+          "text": "取引が署名され、ネットワークに送信されました。アカウント残高はブロックチェーンが取引を確認したら更新されます。",
+          "cta": "操作の詳細を表示"
+        },
+        "pending": {
+          "title": "取引をブロードキャストしています..."
+        }
+      }
+    }
+  },
+  "releaseNotes": {
+    "title": "メモをリリース",
+    "version": "Ledger Live {{versionNb}}"
+  },
+  "settings": {
+    "title": "設定",
+    "tabs": {
+      "display": "一般",
+      "currencies": "通貨",
+      "help": "ヘルプ",
+      "about": "詳細"
+    },
+    "display": {
+      "desc": "一般的に、Ledger Liveに影響を与える設定を変更します。",
+      "language": "言語を表示",
+      "languageDesc": "Ledger Liveに表示される言語を設定します。",
+      "counterValue": "対価",
+      "counterValueDesc": "残高と操作の横に表示する通貨を選択します。",
+      "exchange": "レートプロバイダー",
+      "exchangeDesc": "Bitcoinから{{fiat}}への取引レートのプロバイダーを選択します。クリプトアセットの価値はまずBitcoinで計算され、その後{{fiat}}に変換されます（クリプトアセット → BTC → {{fiat}}）。",
+      "region": "地域",
+      "regionDesc": "Ledger Liveのタイムゾーンを設定するために、お住まいの地域を選択します。",
+      "stock": "地域市場インジケータ",
+      "stockDesc": "Westernを選択して、グリーンで市場価値の増加を表示します。Easternを選択して、レッドで市場価値の増加を表示します。"
+    },
+    "currencies": {
+      "desc": "クリプトアセットを選択して、設定を編集します。",
+      "exchange": "レートプロバイダー ({{ticker}} → BTC)",
+      "exchangeDesc": "{{currencyName}}とBitcoin間のレートプロバイダーを選択します。ポートフォリオの表示総額は{{currencyName}}をBitcoinに変換し、その後基本通貨に変換して計算されます。",
+      "confirmationsNb": "確認数",
+      "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
+    },
+    "profile": {
+      "password": "パスワードロック",
+      "passwordDesc": "お使いのコンピューターに保存された、アカウント名、残高、取引、パブリックアドレスといったLedger Liveデータへの不正アクセスを防ぐためにパスワードを設定します。",
+      "changePassword": "パスワードの変更",
+      "softResetTitle": "キャッシュを削除",
+      "softResetDesc": "Ledger Liveのキャッシュを削除し、ブロックチェーンと再同期させます。",
+      "softReset": "削除",
+      "hardResetTitle": "Ledger Liveをリセット",
+      "hardResetDesc": "お使いのコンピューターに保存された、アカウント、取引履歴、設定などのLedger Liveデータすべてを削除します。",
+      "hardReset": "リセット",
+      "developerMode": "開発者モード",
+      "developerModeDesc": "マネージャーで開発者アプリを表示し、testnetアプリを有効にします。",
+      "analytics": "アナリティクス",
+      "analyticsDesc": "匿名データのアナリティクスをオンにして、Ledgerがユーザー体験を向上させる手助けをします。これには、OS、言語、ファームウェアバージョンおよび追加アカウント数が含まれます。",
+      "reportErrors": "バグの報告",
+      "reportErrorsDesc": "匿名で利用および診断データを共有し、Ledger商品、サービス、セキュリティ機能の向上を手助けします。",
+      "launchOnboarding": "機器の設定",
+      "launchOnboardingDesc": "安全にLedger機器を初期化または復元し、Ledger Liveで使用します。お客様のアカウントと設定は維持されます。"
+    },
+    "about": {
+      "desc": "Ledger Live、利用条件およびプライバシーポリシーに関する情報。"
+    },
+    "help": {
+      "desc": "Ledger Live機能に関する詳細またはヘルプ。",
+      "version": "バージョン",
+      "releaseNotesBtn": "詳細",
+      "faq": "Ledger Support",
+      "faqDesc": "問題が発生しましたか？Ledger Live、Ledger機器、サポート対象のクリプトアセットおよびアプリに関するヘルプをご覧ください。",
+      "terms": "利用条件",
+      "termsDesc": "Ledger Liveを使うと、当社の利用条件に同意したものと見なされます。",
+      "privacy": "プライバシーポリシー",
+      "privacyDesc": "当社のプライバシーポリシーをお読みになり、当社が収集する個人データや使用目的および使用方法についてご理解ください。"
+    },
+    "hardResetModal": {
+      "title": "Ledger Liveをリセット",
+      "desc": "お使いのコンピューターに保存された、アカウント、取引履歴、設定といったLedger Liveデータをすべて削除します。ブロックチェーンのクリプトアセットにアクセスするためのプライベートキーはLedger機器とRecoveryシートに残ります。"
+    },
+    "softResetModal": {
+      "title": "キャッシュを削除",
+      "desc": "Ledger Liveキャッシュを削除すると、ネットワークが強制的に再同期されます。設定とアカウントには影響はありません。ブロックチェーンのクリプトアセットにアクセスするためのプライベートキーはLedger機器とRecoveryシートに残ります。"
+    },
+    "resetFallbackModal": {
+      "title": "ユーザーアクションが必要",
+      "part1": "キャッシュフォルダを削除できませんでした。手作業でフォルダを削除してください。",
+      "part2": "フォルダを開くボタンをクリックして",
+      "part3": "アプリを終了し、",
+      "part4": "\"sqlite\"フォルダを手作業で削除します。",
+      "part5": "その後、アプリを通常通り再起動できます。"
+    },
+    "removeAccountModal": {
+      "title": "アカウントの削除",
+      "desc": "アカウントがポートフォリオから削除されます。この操作はお客様のアセットに影響を与えません。アカウントはいつでも再追加できます。"
+    },
+    "openUserDataDirectory": {
+      "title": "ユーザーデータの閲覧",
+      "desc": "お使いのコンピューターに保存されたアカウントやキャッシュ、設定といったユーザーデータを表示します。",
+      "btn": "表示"
+    },
+    "exportLogs": {
+      "title": "ログのエクスポート",
+      "desc": "トラブルシューティングのためにLedger Liveログをエクスポートする必要が生じることがあります。",
+      "btn": "エクスポート"
+    }
+  },
+  "password": {
+    "inputFields": {
+      "newPassword": {
+        "label": "新規パスワード"
+      },
+      "confirmPassword": {
+        "label": "パスワードを確認"
+      },
+      "currentPassword": {
+        "label": "現在のパスワード"
+      }
+    },
+    "changePassword": {
+      "title": "パスワードロック",
+      "subTitle": "パスワードを変更"
+    },
+    "setPassword": {
+      "title": "パスワードロックを有効にする",
+      "subTitle": "パスワードを設定",
+      "desc": "パスワードを忘れないでください。パスワードを紛失した場合、Ledger Liveを再設定し、アカウントを再追加する必要があります。"
+    },
+    "disablePassword": {
+      "title": "パスワードロックを無効にする",
+      "desc": "Ledger Liveデータはお使いのコンピューターに暗号化されていない状態で保存されます。これにはアカウント名、残高、取引、パブリックアドレスが含まれます。"
+    }
+  },
+  "update": {
+    "newVersionReady": "新しい更新を利用できます",
+    "relaunch": "今すぐ更新"
+  },
+  "crash": {
+    "oops": "エラーが発生しました",
+    "uselessText": "Ledger Liveを再起動し、再試行することができます。ログをエクスポートし、問題が引き続き発生する場合はLedger Supportにお問い合わせください。",
+    "restart": "再起動",
+    "support": "サポートに問い合わせる",
+    "github": "GitHub"
+  },
+  "disclaimerModal": {
+    "title": "安全に取引",
+    "desc_1": "クリプトアセットを送受信する前に、十分な情報収集を行った上で、決定を行うようにしてください。クリプトアセットはボラティリティが高く、価格は乱高下することがあります。取引目標とお客様がとることができる財務リスクを慎重に定めてください。",
+    "desc_2": "Ledgerは財務、税務または法務に関する助言を提供しません。それらはお客様ご自身で決定するか、信頼のおける専門家にご相談ください。",
+    "cta": "了解"
+  },
+  "language": {
+    "system": "システム言語を使用",
+    "en": "英語",
+    "fr": "フランス語"
+  },
+  "onboarding": {
+    "breadcrumb": {
+      "selectDevice": "機器の選択",
+      "selectPIN": "PINコード",
+      "writeSeed": "復元フレーズ",
+      "setPassword": "パスワードロック",
+      "analytics": "バグ＆アナリティクス"
+    },
+    "start": {
+      "title": "Ledger Liveにようこそ",
+      "startBtn": "はじめに"
+    },
+    "init": {
+      "title": "お持ちのLedger機器から始めましょう",
+      "newDevice": {
+        "title": "新しいLedger機器を初期化"
+      },
+      "restoreDevice": {
+        "title": "Ledger機器を復元"
+      },
+      "initializedDevice": {
+        "title": "すでに初期化されている機器を使用"
+      }
+    },
+    "noDevice": {
+      "title": "まだLedger機器をお持ちではありませんか？",
+      "buyNew": {
+        "title": "Ledger機器を購入"
+      },
+      "trackOrder": {
+        "title": "注文を追跡"
+      },
+      "learnMore": {
+        "title": "Ledgerについて"
+      }
+    },
+    "selectDevice": {
+      "title": "機器を選択",
+      "ledgerNanoCard": {
+        "title": "Ledger Nano S"
+      },
+      "ledgerBlueCard": {
+        "title": "Ledger Blue"
+      }
+    },
+    "selectPIN": {
+      "disclaimer": {
+        "note1": "PINコードを選択します。このコードは機器のロックを解除するために使用します。",
+        "note2": "8桁のPINコードは、セキュリティレベルを最適にします。",
+        "note3": "PINコードや24の単語の復元フレーズがすでに提供されている機器は絶対に使用しないでください。"
+      },
+      "initialize": {
+        "title": "PINコードを選択します",
+        "instructions": {
+          "nano": {
+            "step1": "Ledger Nano Sをお使いのコンピューターに接続します。",
+            "step2": "画面の指示に従い、両方のボタンを同時に押します。",
+            "step3": "右ボタンを押して、<1><0>新しい機器として設定しますか？</0></1>を選択します。",
+            "step4": "4～8桁のPINコードを選択し、チェック印（✓）を入れます。"
+          },
+          "blue": {
+            "step1": "Ledger Blueをお使いのコンピューターに接続します。",
+            "step2": "<1><0>新しい機器として設定をタップします。</0></1>",
+            "step3": "4～8桁のPINコードを選択します。"
+          }
+        }
+      },
+      "restore": {
+        "title": "PINコードを選択します",
+        "instructions": {
+          "nano": {
+            "step1": "Ledger Nano Sをお使いのコンピューターに接続します。",
+            "step2": "画面の指示に従い、両方のボタンを同時に押します。",
+            "step3": "左ボタンを押して、<1><0>新しい機器を初期化しますか？</0></1>をキャンセルします。その後、右ボタンを押して、<3><0>設定を復元しますか？</0></3>を選択します。",
+            "step4": "4～8桁のPINコードを選択し、チェック印（✓）を入れます。"
+          },
+          "blue": {
+            "step1": "Ledger Blueをお使いのコンピューターに接続します。",
+            "step2": "<1><0>設定を復元</0></1>をタップします。",
+            "step3": "4～8桁のPINコードを選択します。"
+          }
+        }
+      }
+    },
+    "writeSeed": {
+      "initialize": {
+        "title": "復元フレーズを保存します",
+        "desc": "お使いの機器により、お客様のプライベートキーをバックアップするために、24の単語の復元フレーズが作成されます",
+        "nano": {
+          "step1": "以下に表示された単語<1><0>単語 #1</0></1>を空欄のリカバリシートの位置1にコピーします。 ",
+          "step2": "右ボタンを押して、<1><0>単語 #2</0></1>を表示し、24の単語すべてがリカバリシートにコピーされるまでプロセスを繰り返します。",
+          "step3": "復元フレーズを確認します。リクエストされた単語をそれぞれ選択し、両方のボタンを押してそれを検証します。"
+        },
+        "blue": {
+          "step1": "空欄のリカバリシートに復元フレーズのそれぞれの単語をコピーします。同じ順番で単語をコピーします。",
+          "step2": "<1><0>次へ</0></1>をタップして、次の単語に移動します。<3><0>確認</0></3>画面が表示されるまで同じプロセスを繰り返します。",
+          "step3": "リクエストされた単語それぞれを入力し、復元フレーズを確認します。"
+        }
+      },
+      "restore": {
+        "title": "復元フレーズを入力します",
+        "desc": "24の単語の復元フレーズをリカバリシートから機器にコピーします。",
+        "nano": {
+          "step1": "復元フレーズの長さを選択します。両方のボタンを押して続行します。",
+          "step2": "右または左ボタンを押して、<1><0>単語 #1</0></1>の最初の文字を選択します。両方のボタンを押して、それぞれの文字を確認します。",
+          "step3": "提案された単語から<1><0>単語 #1</0></1>を選択します。両方のボタンを押して続行します。",
+          "step4": "最後の単語まで、プロセスを繰り返します。"
+        },
+        "blue": {
+          "step1": "復元フレーズの長さを選択します。",
+          "step2": "復元フレーズの最初の単語を入力します。単語が表示されたら選択します。",
+          "step3": "最後の単語まで、プロセスを繰り返します。"
+        }
+      },
+      "disclaimer": {
+        "note1": "24の単語の復元フレーズは、他人の目に触れないよう慎重に保管してください。",
+        "note2": "復元フレーズは、絶対に他人に知られないようにしてください。",
+        "note3": "Ledgerはお客様の復元フレーズのバックアップを保管しません。",
+        "note4": "復元フレーズやPINコードがすでに提供されている機器は絶対に使用しないでください。"
+      }
+    },
+    "genuineCheck": {
+      "title": "セキュリティチェックリスト",
+      "descGeneric": "続行する前に、セキュリティリストを完了してください。",
+      "descRestore": "開始する前に、確認してください",
+      "step1": {
+        "title": "ご自身でPINコードを選択しましたか？"
+      },
+      "step2": {
+        "title": "ご自身で復元フレーズを保存しましたか？"
+      },
+      "step3": {
+        "title": "お使いのLedger機器は正規品ですか？"
+      },
+      "isGenuinePassed": "お持ちの機器は本物です",
+      "buttons": {
+        "genuineCheck": "今すぐ確認",
+        "contactSupport": "お問い合わせ"
+      },
+      "errorPage": {
+        "title": {
+          "pinFailed": "ご自身でPINコードを選択しませんでしたか？",
+          "recoveryPhraseFailed": "ご自身で復元フレーズを保存しませんでしたか？",
+          "isGenuineFail": "お使いの機器は正規品ではないようです…"
+        },
+        "desc": {
+          "pinFailed": "PINコードがすでに提供されている機器は絶対に使用しないでください。お使いの機器にすでにPINコードが提供されている場合、当社にご連絡ください。",
+          "recoveryPhraseFailed": "機器に表示された復元フレーズだけを保存してください。疑問点がある場合は、当社にお問い合わせください。そうでない場合は、セキュリティチェックリストに戻ります。",
+          "isGenuineFail": "お使いの機器は、Ledgerの安全なサーバに接続するために求められる真贋性テストに合格しませんでした。Ledger Supportに問い合わせ、サポートを依頼してください。"
+        }
+      }
+    },
+    "setPassword": {
+      "title": "パスワードロック（オプション）",
+      "desc": "お使いのコンピューターに保存された、アカウント名、残高、取引、パブリックアドレスといったLedger Liveデータへの不正アクセスを防ぐためにパスワードを設定します。",
+      "disclaimer": {
+        "note1": "パスワードを忘れないようご注意ください。また、パスワードを共有しないでください。",
+        "note2": "パスワードを紛失した場合、Ledger Liveを再設定し、アカウントを再追加する必要があります。",
+        "note3": "Ledger Liveをリセットしても、お持ちのクリプトアセットには影響はありません。"
+      }
+    },
+    "analytics": {
+      "title": "アナリティクスとバグレポート",
+      "desc": "匿名で利用および診断データを共有し、Ledger商品、サービス、セキュリティ機能の向上を手助けします。",
+      "shareAnalytics": {
+        "title": "アナリティクスの共有",
+        "desc": "アナリティクスを有効にし、Ledgerがユーザー体験を向上させる方法を理解する手助けをします。",
+        "mandatoryContextual": {
+          "item1": "アプリ内ページの閲覧",
+          "item2": "アクション（送信、受信、ロック）",
+          "item3": "クリック",
+          "item4": "ウェブページへリダイレクト",
+          "item5": "ページ末にスクロール済み",
+          "item6": "インストール/アンインストール",
+          "item7": "アカウント数、通貨、操作",
+          "item8": "全体およびページセッション時間",
+          "item9": "Ledger機器のタイプ",
+          "item10": "機器のファームウェアとアプリバージョン番号"
+        }
+      },
+      "sentryLogs": {
+        "title": "バグの報告",
+        "desc": "Ledgerがバグを修正できるよう、自動的にレポートを送信"
+      },
+      "technicalData": {
+        "title": "技術データ*",
+        "desc": "Ledgerは自動的に技術情報を収集し、使用について基本的なフィードバックを受け取ります。この情報は匿名で、個人データは含まれません。",
+        "mandatoryText": "*必須",
+        "mandatoryContextual": {
+          "title": "技術データ",
+          "item1": "匿名の固有アプリケーションID",
+          "item2": "OS名とバージョン",
+          "item3": "Ledger Liveバージョン",
+          "item4": "アプリケーション言語または地域",
+          "item5": "OS言語または地域"
+        }
+      },
+      "terms": {
+        "title": "Terms *",
+        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+      }
+    },
+    "finish": {
+      "title": "機器の準備が完了しました！",
+      "desc": "ポートフォリオに進み、アカウントの追加を開始します…",
+      "openAppButton": "Ledger Liveを開く"
+    }
+  },
+  "errors": {
+    "generic": {
+      "title": "{{message}}",
+      "description": "エラーが発生しました。再試行するか当社にご連絡ください。"
+    },
+    "AccountNameRequired": {
+      "title": "アカウント名が必要です",
+      "description": "アカウント名を提供してください"
+    },
+    "BtcUnmatchedApp": {
+      "title": "アプリが間違っています",
+      "description": "お使いの機器で‘{{managerAppName}}’ アプリを開きます"
+    },
+    "DeviceNotGenuine": {
+      "title": "正規品でない可能性があります",
+      "description": "Ledger Supportアシスタンスを依頼してください。"
+    },
+    "DeviceGenuineSocketEarlyClose": {
+      "title": "再試行してください（正規品 - 閉じる）",
+      "description": null
+    },
+    "DeviceSocketFail": {
+      "title": "再試行してください",
+      "description": "接続できませんでした。再試行してください。"
+    },
+    "DeviceSocketNoBulkStatus": {
+      "title": "再試行してください",
+      "description": "接続できませんでした。再試行してください。"
+    },
+    "DeviceSocketNoHandler": {
+      "title": "再試行してください",
+      "description": "接続できませんでした。再試行してください。"
+    },
+    "DisconnectedDevice": {
+      "title": "機器の接続が解除されました",
+      "description": "機器への接続が切断されました。再試行してください。"
+    },
+    "EnpointConfig": {
+      "title": "エンドポイントが無効です",
+      "description": "有効なエンドポイントを提供してください"
+    },
+    "FeeEstimationFailed": {
+      "title": "手数料見積もりに失敗しました",
+      "description": "通関手数料を設定してください（ステータス：{{status}}）"
+    },
+    "HardResetFail": {
+      "title": "リセットできませんでした",
+      "description": "再試行するか、Ledger Supportにご連絡ください。"
+    },
+    "LatestMCUInstalledError": {
+      "title": "更新するものがありません",
+      "description": "機器のマイクロコントローラの更新が試みられました。機器に問題がある場合は、Ledger Supportにお問い合わせください。"
+    },
+    "LedgerAPIError": {
+      "title": "再試行してください（API HTTP {{status}}）",
+      "description": "LedgerのAPIサーバとのインタラクションに不具合が発生しました。再試行してください。"
+    },
+    "LedgerAPIErrorWithMessage": {
+      "title": "申し訳ございません。 {{message}}",
+      "description": "再試行するか、Ledger Supportにご連絡ください。"
+    },
+    "LedgerAPINotAvailable": {
+      "title": "申し訳ございません。{{currencyName}}サービスをご利用いただけません",
+      "description": "再試行するか、Ledger Supportにご連絡ください。"
+    },
+    "ManagerAPIsFail": {
+      "title": "マネージャーサービスをご利用いただけません。",
+      "description": "ネットワークステータスをご確認ください。"
+    },
+    "ManagerAppAlreadyInstalled": {
+      "title": "すでにインストールされています。",
+      "description": "機器にすでにインストール済みのアプリを確認してください"
+    },
+    "ManagerAppRelyOnBTC": {
+      "title": "BitcoinとEthereumアプリが必要です",
+      "description": "まず、最新のBitcoinとEthereumアプリをインストールします。"
+    },
+    "ManagerDeviceLocked": {
+      "title": "機器のロックを解除してください",
+      "description": "お使いの機器がロックされました。ロックを解除してください。"
+    },
+    "ManagerNotEnoughSpace": {
+      "title": "保存スペースが残りわずかです。",
+      "description": "一部のアプリを削除してスペースを設けてください。これはお持ちのクリプトアセットに影響を与えません。"
+    },
+    "ManagerUninstallBTCDep": {
+      "title": "このアプリは必要です",
+      "description": "BitcoinまたはEthereumアプリを最後にアンインストールします。"
+    },
+    "NetworkDown": {
+      "title": "インターネットがダウンしたようです",
+      "description": "インターネット接続を確認してください"
+    },
+    "NoAddressesFound": {
+      "title": "アカウントが見つかりません",
+      "description": "アドレスの算出で問題が発生したようです。再試行するか、Ledger Supportにお問い合わせください。"
+    },
+    "NotEnoughBalance": {
+      "title": "残高が不足しています",
+      "description": "出金アカウントの残高が十分であることを確認してください"
+    },
+    "NotEnoughBalanceBecauseDestinationNotCreated": {
+      "title": "受信者のアドレスが無効です。少なくても{{minimalAmount}}に送信し、有効にしてください"
+    },
+    "PasswordsDontMatch": {
+      "title": "パスワードがマッチしません",
+      "description": "再試行してください"
+    },
+    "PasswordIncorrect": {
+      "title": "入力したパスワードが間違っています",
+      "description": "再試行してください"
+    },
+    "SelectExchangesLoadError": {
+      "title": "ロードできません",
+      "description": "取引所をロードできません"
+    },
+    "TimeoutError": {
+      "title": "タイムアウトが発生しました",
+      "description": "サーバのレスポンスに時間がかかりすぎています。"
+    },
+    "TimeoutTagged": {
+      "title": "タイムアウトが発生しました({{tag}})",
+      "description": "サーバのレスポンスに時間がかかりすぎています。"
+    },
+    "TransportError": {
+      "title": "問題が発生しました。機器を再接続してください。",
+      "description": "{{message}}"
+    },
+    "TransportStatusError": {
+      "title": "問題が発生しました。機器を再接続してください。",
+      "description": "{{message}}"
+    },
+    "UserRefusedFirmwareUpdate": {
+      "title": "ファームウェアのアップデートが機器で却下されました",
+      "description": "再試行するか、Ledger Supportにご連絡ください。"
+    },
+    "UserRefusedOnDevice": {
+      "title": "機器が取引を却下しました",
+      "description": "再試行するか、不明な点がある場合はLedger Supportにご連絡ください。"
+    },
+    "UserRefusedAddress": {
+      "title": "受信アドレスが却下されました",
+      "description": "再試行するか、Ledger Supportにご連絡ください。"
+    },
+    "UpdateYourApp": {
+      "title": "アプリの更新が必要です",
+      "description": "マネージャーに{{managerAppName}}アプリをアンインストールし、再インストールします"
+    },
+    "WebsocketConnectionError": {
+      "title": "再試行してください（ウェブソケットエラー）",
+      "description": null
+    },
+    "WebsocketConnectionFailed": {
+      "title": "再試行してください（ウェブソケットに失敗しました）",
+      "description": null
+    },
+    "WrongDeviceForAccount": {
+      "title": "‘{{accountName}}’向けの機器ではありません。",
+      "description": "接続された機器は、選択したアカウントと関連付けられていません。適切な機器を接続してください。"
+    },
+    "DeviceAppVerifyNotSupported": {
+      "title": "マネージャーを開いて、このアプリを更新します",
+      "description": "アプリの検証はサポートされていません"
+    },
+    "InvalidAddress": {
+      "title": "これは有効な{{currencyName}}アドレスではありません"
+    },
+    "CantOpenDevice": {
+      "title": "機器に接続できませんでした",
+      "description": "機器が検出されましたが、接続に失敗しました。再試行し、問題が引き続き生じる場合は、ヘルプを依頼してください。"
+    },
+    "ETHAddressNonEIP": {
+      "title": "自動検証は無効です。注意してアドレスを検証してください",
+      "description": null
+    },
+    "CantScanQRCode": {
+      "title": "このQRコードをスキャンできませんでした。自動検証はこのアドレスではサポートされていません"
+    },
+    "FeeNotLoaded": {
+      "title": "手数料率をロードできませんでした。手作業で手数料を設定してください"
+    }
+  }
+}
