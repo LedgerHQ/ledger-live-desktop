@@ -562,7 +562,7 @@
           "blue": {
             "step1": "Connect the Ledger Blue to your computer.",
             "step2": "Tap on <1><0>Restore configuration</0></1>.",
-            "step3": "Choose a PIN code between 4 and 8 digits long."
+            "step3": "Choose a PIN code of 4 to 8 digits."
           }
         }
       }
