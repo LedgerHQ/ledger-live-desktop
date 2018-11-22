@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import type { T } from 'types/common'
 import { Switch, Route } from 'react-router'
 import type { RouterHistory, Match, Location } from 'react-router'
@@ -40,22 +40,22 @@ class SettingsPage extends PureComponent<Props, State> {
     this._items = [
       {
         key: 'display',
-        label: props.t('settings.tabs.display'),
+        label: <Trans i18nKey="settings.tabs.display" />,
         value: SectionDisplay,
       },
       {
         key: 'currencies',
-        label: props.t('settings.tabs.currencies'),
+        label: <Trans i18nKey="settings.tabs.currencies" />,
         value: SectionCurrencies,
       },
       {
         key: 'about',
-        label: props.t('settings.tabs.about'),
+        label: <Trans i18nKey="settings.tabs.about" />,
         value: SectionAbout,
       },
       {
         key: 'help',
-        label: props.t('settings.tabs.help'),
+        label: <Trans i18nKey="settings.tabs.help" />,
         value: SectionHelp,
       },
     ]

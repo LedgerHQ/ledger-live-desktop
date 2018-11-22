@@ -10,7 +10,7 @@ import Track from 'analytics/Track'
 
 type Props = {
   selected: string,
-  onChange: ({ key: string, value: *, label: string }) => *,
+  onChange: ({ key: string, value: *, label: React$Node }) => *,
   t: T,
 }
 
