@@ -659,8 +659,7 @@
           "item6": "App (un)installation and version",
           "item7": "Number of accounts, crypto assets and operations",
           "item8": "Overall and page session duration",
-          "item9": "Ledger device type and firmware",
-          "item10": ""
+          "item9": "Ledger device type and firmware"
         }
       },
       "sentryLogs": {
@@ -675,9 +674,7 @@
           "title": "Technical data",
           "item1": "Anonymous unique application ID",
           "item2": "Ledger Live version, language and region",
-          "item3": "OS version, language and region",
-          "item4": "",
-          "item5": ""
+          "item3": "OS version, language and region"
         }
       },
       "terms": {
