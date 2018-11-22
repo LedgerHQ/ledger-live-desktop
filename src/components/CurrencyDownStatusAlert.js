@@ -5,7 +5,6 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { currencyDownStatus } from 'reducers/currenciesStatus'
