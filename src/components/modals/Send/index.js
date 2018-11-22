@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import invariant from 'invariant'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import {Trans, translate} from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 
@@ -72,29 +72,29 @@ export type StepProps<Transaction> = DefaultStepProps & {
   signTransaction: ({ transitionTo: string => void }) => void,
 }
 
-const createSteps = ({ t }: { t: T }) => [
+const createSteps = () => [
   {
     id: 'amount',
-    label: t('send.steps.amount.title'),
+    label: <Trans i18nKey='send.steps.amount.title'/>,
     component: StepAmount,
     footer: StepAmountFooter,
   },
   {
     id: 'device',
-    label: t('send.steps.connectDevice.title'),
+    label: <Trans i18nKey='send.steps.connectDevice.title'/>,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('amount'),
   },
   {
     id: 'verification',
-    label: t('send.steps.verification.title'),
+    label: <Trans i18nKey='send.steps.verification.title'/>,
     component: StepVerification,
     shouldPreventClose: true,
   },
   {
     id: 'confirmation',
-    label: t('send.steps.confirmation.title'),
+    label: <Trans i18nKey='send.steps.confirmation.title'/>,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
@@ -136,7 +136,7 @@ class SendModal extends PureComponent<Props, State<*>> {
     }
   }
 
-  STEPS = createSteps({ t: this.props.t })
+  STEPS = createSteps()
   _signTransactionSub = null
   _isUnmounted = false
 

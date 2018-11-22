@@ -9,6 +9,7 @@ import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../index'
+import { Trans } from 'react-i18next'
 
 export default function StepConnectDevice({ account, onChangeAppOpened }: StepProps) {
   return (
@@ -42,7 +43,7 @@ export function StepConnectDeviceFooter({
         {t('receive.steps.connectDevice.withoutDevice')}
       </Button>
       <Button disabled={!isAppOpened} primary onClick={() => transitionTo('confirm')}>
-        {t('common.continue')}
+        <Trans i18nKey="common.continue" />
       </Button>
     </Box>
   )

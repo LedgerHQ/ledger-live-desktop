@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
@@ -58,23 +58,23 @@ export type StepProps = DefaultStepProps & {
   onChangeAddressVerified: (?boolean, ?Error) => void,
 }
 
-const createSteps = ({ t }: { t: T }) => [
+const createSteps = () => [
   {
     id: 'account',
-    label: t('receive.steps.chooseAccount.title'),
+    label: <Trans i18nKey="receive.steps.chooseAccount.title" />,
     component: StepAccount,
     footer: StepAccountFooter,
   },
   {
     id: 'device',
-    label: t('receive.steps.connectDevice.title'),
+    label: <Trans i18nKey="receive.steps.connectDevice.title" />,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }: StepProps) => transitionTo('account'),
   },
   {
     id: 'confirm',
-    label: t('receive.steps.confirmAddress.title'),
+    label: <Trans i18nKey="receive.steps.confirmAddress.title" />,
     footer: StepConfirmAddressFooter,
     component: StepConfirmAddress,
     onBack: ({ transitionTo }: StepProps) => transitionTo('device'),
@@ -82,7 +82,7 @@ const createSteps = ({ t }: { t: T }) => [
   },
   {
     id: 'receive',
-    label: t('receive.steps.receiveFunds.title'),
+    label: <Trans i18nKey="receive.steps.receiveFunds.title" />,
     component: StepReceiveFunds,
     shouldPreventClose: ({ isAddressVerified }: StepProps) => isAddressVerified === null,
   },
@@ -108,7 +108,7 @@ const INITIAL_STATE = {
 
 class ReceiveModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
-  STEPS = createSteps({ t: this.props.t })
+  STEPS = createSteps()
 
   handleBeforeOpenModal = ({ data }) => {
     const { account } = this.state

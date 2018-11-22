@@ -9,6 +9,7 @@ import Button from 'components/base/Button'
 import SelectAccount from 'components/SelectAccount'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 
+import { Trans } from 'react-i18next'
 import type { StepProps } from '../index'
 
 export default function StepAccount({ t, account, onChangeAccount }: StepProps) {
@@ -23,10 +24,10 @@ export default function StepAccount({ t, account, onChangeAccount }: StepProps) 
   )
 }
 
-export function StepAccountFooter({ t, transitionTo, account }: StepProps) {
+export function StepAccountFooter({ transitionTo, account }: StepProps) {
   return (
     <Button disabled={!account} primary onClick={() => transitionTo('device')}>
-      {t('common.continue')}
+      <Trans i18nKey="common.continue" />
     </Button>
   )
 }
