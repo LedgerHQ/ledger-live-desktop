@@ -8,6 +8,7 @@ import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import TrackPage from 'analytics/TrackPage'
+import { Trans } from 'react-i18next'
 
 import type { StepProps } from '../index'
 
