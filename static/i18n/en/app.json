@@ -347,9 +347,22 @@
     "title": "Settings",
     "tabs": {
       "display": "General",
+      "export": "Export accounts",
       "currencies": "Currencies",
       "help": "Help",
       "about": "About"
+    },
+    "export": {
+      "desc": "Import accounts on your Ledger Live Mobile app",
+      "button": "Export",
+      "modal":{
+        "button": "Done",
+        "listTitle": "To import accounts on your Ledger Live Mobile app:",
+        "step1": "Go to <1><0>Accounts</0></1>",
+        "step2": "Click on the <1><0>+</0></1> button",
+        "step3": "Select <1><0>Import accounts</0></1>",
+        "step4": "Scan the image <1><0>until the loader hits 100%</0></1>"
+      }
     },
     "display": {
       "desc": "Configure general Ledger Live settings.",
