@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import { Trans } from 'react-i18next'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -9,7 +10,6 @@ import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../index'
-import { Trans } from 'react-i18next'
 
 export default function StepConnectDevice({ account, onChangeAppOpened }: StepProps) {
   return (
