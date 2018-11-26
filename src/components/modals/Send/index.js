@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import invariant from 'invariant'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import {Trans, translate} from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 
@@ -75,26 +75,26 @@ export type StepProps<Transaction> = DefaultStepProps & {
 const createSteps = () => [
   {
     id: 'amount',
-    label: <Trans i18nKey='send.steps.amount.title'/>,
+    label: <Trans i18nKey="send.steps.amount.title" />,
     component: StepAmount,
     footer: StepAmountFooter,
   },
   {
     id: 'device',
-    label: <Trans i18nKey='send.steps.connectDevice.title'/>,
+    label: <Trans i18nKey="send.steps.connectDevice.title" />,
     component: StepConnectDevice,
     footer: StepConnectDeviceFooter,
     onBack: ({ transitionTo }) => transitionTo('amount'),
   },
   {
     id: 'verification',
-    label: <Trans i18nKey='send.steps.verification.title'/>,
+    label: <Trans i18nKey="send.steps.verification.title" />,
     component: StepVerification,
     shouldPreventClose: true,
   },
   {
     id: 'confirmation',
-    label: <Trans i18nKey='send.steps.confirmation.title'/>,
+    label: <Trans i18nKey="send.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
     onBack: ({ transitionTo, onRetry }) => {
