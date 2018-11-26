@@ -54,10 +54,6 @@ class ShareAnalytics extends PureComponent<Props, *> {
         key: 'item9',
         desc: t('onboarding.analytics.shareAnalytics.mandatoryContextual.item9'),
       },
-      {
-        key: 'item10',
-        desc: t('onboarding.analytics.shareAnalytics.mandatoryContextual.item10'),
-      },
     ]
     return (
       <Modal

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
@@ -87,13 +87,6 @@ class MainSideBar extends PureComponent<Props> {
     push(to)
   }
 
-  ADD_ACCOUNT_EMPTY_STATE = (
-    <Box relative pr={3}>
-      <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
-      {this.props.t('emptyState.sidebar.text')}
-    </Box>
-  )
-
   handleClickDashboard = () => this.push('/')
   handleOpenSendModal = () => this.props.openModal(MODAL_SEND)
   handleOpenReceiveModal = () => this.props.openModal(MODAL_RECEIVE)
@@ -108,6 +101,13 @@ class MainSideBar extends PureComponent<Props> {
 
     const addAccountButton = (
       <AddAccountButton tooltipText={t('addAccounts.title')} onClick={this.handleOpenImportModal} />
+    )
+
+    const emptyState = (
+      <Box relative pr={3}>
+        <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
+        <Trans i18nKey="emptyState.sidebar.text" />
+      </Box>
     )
 
     return (
@@ -168,7 +168,7 @@ class MainSideBar extends PureComponent<Props> {
           <SideBarList
             title={t('sidebar.accounts', { count: accounts.length })}
             titleRight={addAccountButton}
-            emptyState={this.ADD_ACCOUNT_EMPTY_STATE}
+            emptyState={emptyState}
           >
             {accounts.map(account => (
               <AccountListItem
