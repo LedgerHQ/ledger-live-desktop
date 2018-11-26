@@ -1,15 +1,11 @@
 // @flow
 
-import fs from 'fs'
 import path from 'path'
 
-import { promisify } from 'helpers/promise'
+import { fsReadFile, fsUnlink } from 'helpers/fs'
 import db from 'helpers/db'
 
 import type { Migration } from './types'
-
-const fsReadfile = promisify(fs.readFile)
-const fsUnlink = promisify(fs.unlink)
 
 const migrations: Migration[] = [
   {
@@ -54,13 +50,13 @@ async function getFileData(dbPath, fileName) {
   const filePath = path.join(dbPath, `${fileName}.json`)
   let finalData
   try {
-    const fileContent = await fsReadfile(filePath, 'utf-8')
+    const fileContent = await fsReadFile(filePath, 'utf-8')
     const { data } = JSON.parse(fileContent)
     finalData = data
   } catch (err) {
     // we assume we are in that case because file is encrypted
     if (err instanceof SyntaxError) {
-      const buf = await fsReadfile(filePath)
+      const buf = await fsReadFile(filePath)
       return buf.toString('base64')
     }
     // will be stripped down by JSON.stringify

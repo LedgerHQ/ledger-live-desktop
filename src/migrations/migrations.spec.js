@@ -1,4 +1,3 @@
-import fs from 'fs'
 import os from 'os'
 import path from 'path'
 import { spawn } from 'child_process'
@@ -6,13 +5,12 @@ import rimrafModule from 'rimraf'
 import { BigNumber } from 'bignumber.js'
 
 import { promisify } from 'helpers/promise'
+import { fsReadFile, fsReaddir } from 'helpers/fs'
 import { runMigrations } from 'migrations'
 import { decodeAccountsModel, encodeAccountsModel } from 'reducers/accounts'
 import db from 'helpers/db'
 
 const rimraf = promisify(rimrafModule)
-const fsReaddir = promisify(fs.readdir)
-const fsReadFile = promisify(fs.readFile)
 
 const tmpDir = os.tmpdir()
 
