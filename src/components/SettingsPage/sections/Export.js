@@ -61,10 +61,11 @@ class SectionExport extends PureComponent<Props, State> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="settings.export.modal.step1">
-              {'Go to'}
+              {'Tap the'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Accounts'}
+                {'+'}
               </Text>
+              {'button in Accounts'}
             </Trans>
           </Box>
         ),
@@ -75,11 +76,10 @@ class SectionExport extends PureComponent<Props, State> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="settings.export.modal.step2">
-              {'Click on the'}
+              {'Tap'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'+'}
+                {'Import desktop accounts'}
               </Text>
-              {'button'}
             </Trans>
           </Box>
         ),
@@ -89,26 +89,7 @@ class SectionExport extends PureComponent<Props, State> {
         icon: <BulletRowIcon>{'3'}</BulletRowIcon>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="settings.export.modal.step3">
-              {'Select'}
-              <Text ff="Open Sans|SemiBold" color="dark">
-                {'Import accounts'}
-              </Text>
-            </Trans>
-          </Box>
-        ),
-      },
-      {
-        key: 'step4',
-        icon: <BulletRowIcon>{'4'}</BulletRowIcon>,
-        desc: (
-          <Box style={{ display: 'block' }}>
-            <Trans i18nKey="settings.export.modal.step4">
-              {'Scan the image'}
-              <Text ff="Open Sans|SemiBold" color="dark">
-                {'until the loader hits 100%'}
-              </Text>
-            </Trans>
+            <Trans i18nKey="settings.export.modal.step3" />
           </Box>
         ),
       },
@@ -116,7 +97,7 @@ class SectionExport extends PureComponent<Props, State> {
 
     return (
       <ModalBody onClose={onClose}>
-        <ModalTitle>{'Export accounts'}</ModalTitle>
+        <ModalTitle>{t('settings.export.modal.title')}</ModalTitle>
         <ModalContent flow={2} justify="center" align="center">
           <Box flow={2}>
             <QRCodeExporter size={330} />

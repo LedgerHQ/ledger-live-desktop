@@ -357,11 +357,11 @@
       "button": "Export",
       "modal":{
         "button": "Done",
+        "title": "Scan to export to mobile",
         "listTitle": "To import accounts on your Ledger Live Mobile app:",
-        "step1": "Go to <1><0>Accounts</0></1>",
-        "step2": "Click on the <1><0>+</0></1> button",
-        "step3": "Select <1><0>Import accounts</0></1>",
-        "step4": "Scan the image <1><0>until the loader hits 100%</0></1>"
+        "step1": "Tap the <1><0>+</0></1> button in Account",
+        "step2": "Tap <1><0>Import desktop accounts</0></1>",
+        "step3": "Scan until the loader hits 100%"
       }
     },
     "display": {
