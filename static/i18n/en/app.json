@@ -138,12 +138,9 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
-    "step1": {
-      "connect": "Connect and unlock your <1>Ledger device</1>"
-    },
-    "step2": {
-      "open": "Open the <1><0>{{managerAppName}}</0></1> app on your device"
-    }
+    "step1": "Connect and unlock your <1>Ledger device</1>",
+    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
   },
   "emptyState": {
     "sidebar": {
@@ -359,7 +356,7 @@
         "button": "Done",
         "title": "Scan to export to mobile",
         "listTitle": "To import accounts on your Ledger Live Mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in Account",
+        "step1": "Tap the <1><0>+</0></1> button in Accounts",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
         "step3": "Scan until the loader hits 100%"
       }
@@ -632,7 +629,7 @@
       "step2": {
         "title": "Did you save your recovery phrase by yourself?"
       },
-      "step3": {
+      "step3":{
         "title": "Is your Ledger device genuine?"
       },
       "isGenuinePassed": "Your device is genuine",

@@ -17,8 +17,8 @@ import { BulletRow } from '../../Onboarding/helperComponents'
 import Text from '../../base/Text'
 
 const BulletRowIcon = styled(Box).attrs({
-  ff: 'Open Sans|Regular',
-  fontSize: 12,
+  ff: 'Rubik|Regular',
+  fontSize: 10,
   textAlign: 'center',
   color: 'wallet',
   pl: 2,
@@ -29,6 +29,7 @@ const BulletRowIcon = styled(Box).attrs({
   height: 18px;
   width: 18px;
   padding: 0px;
+  padding-top: 2px;
 `
 
 type Props = {
