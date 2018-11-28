@@ -14,13 +14,17 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
     tags: {
       git_commit: __GIT_REVISION__,
     },
+    sampleRate: 0.01,
     environment: __DEV__ ? 'development' : 'production',
     shouldSendCallback,
     ignoreErrors: [
+      'failed with status code',
       'status code 404',
       'timeout',
       'socket hang up',
-      'getaddrinfo ',
+      'getaddrinfo',
+      'could not read from HID device',
+      'ENOTFOUND',
       'ETIMEDOUT',
       'ECONNRESET',
       'ENETUNREACH',
