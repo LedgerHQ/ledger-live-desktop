@@ -69,6 +69,19 @@ export function OptionRow({ step, ...p }: { step: StepType }) {
     </Box>
   )
 }
+export function BulletRow({ step, ...p }: { step: StepType }) {
+  const { icon, desc } = step
+  return (
+    <Box horizontal my="7px">
+      <Box {...p} mr="7px">
+        {icon}
+      </Box>
+      <Box justify="center" shrink>
+        <OptionRowDesc>{desc}</OptionRowDesc>
+      </Box>
+    </Box>
+  )
+}
 export const OptionRowDesc = styled(Box).attrs({
   ff: 'Open Sans|Regular',
   fontSize: 4,

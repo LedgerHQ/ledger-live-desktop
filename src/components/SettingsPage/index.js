@@ -15,7 +15,7 @@ import SectionDisplay from './sections/Display'
 import SectionCurrencies from './sections/Currencies'
 import SectionHelp from './sections/Help'
 import SectionAbout from './sections/About'
-import SectionTools from './sections/Tools'
+import SectionExport from './sections/Export'
 
 const mapStateToProps = state => ({
   accountsCount: accountsSelector(state).length,
@@ -61,10 +61,10 @@ class SettingsPage extends PureComponent<Props, State> {
     ]
 
     if (EXPERIMENTAL_TOOLS_SETTINGS) {
-      this._items.push({
+      this._items.splice(2, 0, {
         key: 'tool',
         label: 'Experimental Tools',
-        value: SectionTools,
+        value: SectionExport,
       })
     }
 
