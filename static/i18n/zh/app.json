@@ -136,7 +136,8 @@
     "for": "账户 <1><0>{{accountName}}</0></1> 地址",
     "messageIfUnverified": "请验证您设备上的地址，以确保最高安全性。按下右按钮进行确认。",
     "messageIfAccepted": "{{currencyName}} 地址已确认。复制/粘贴地址或扫描二维码时，请进行验证。",
-    "messageIfSkipped": "尚未在您的 Ledger 设备上确认您的接收地址。请验证 {{currencyName}} 地址，以确保最高安全性。"
+    "messageIfSkipped":
+      "尚未在您的 Ledger 设备上确认您的接收地址。请验证 {{currencyName}} 地址，以确保最高安全性。"
   },
   "deviceConnect": {
     "step1": {
@@ -152,7 +153,8 @@
     },
     "dashboard": {
       "title": "添加账户到您的资产组合",
-      "desc": "Ledger Live 首次推出时，您的资产组合尚无账户。打开管理器将应用程序安装到您的 Ledger 设备上，然后再开始将账户添加到您的资产组合。",
+      "desc":
+        "Ledger Live 首次推出时，您的资产组合尚无账户。打开管理器将应用程序安装到您的 Ledger 设备上，然后再开始将账户添加到您的资产组合。",
       "buttons": {
         "addAccount": "添加账户",
         "installApp": "打开管理器"
@@ -163,16 +165,22 @@
     "title": "交易",
     "desc": "尝试我们为您选择的一些交易服务",
     "visitWebsite": "访问网站",
-    "coinhouse": "对于寻求分析、获得、销售和安全存储加密资产的个人和机构投资者而言，Coinhouse 是一个值得信赖的平台。",
+    "coinhouse":
+      "对于寻求分析、获得、销售和安全存储加密资产的个人和机构投资者而言，Coinhouse 是一个值得信赖的平台。",
     "changelly": "Changelly 是一个备受欢迎的即时加密资产交易所，上线了 100 多种钱币和代币。",
     "coinmama": "Coinmama 是一家金融服务机构，让您在世界各地都能快速、安全且愉快地购买数字资产。",
     "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
-    "paybis": "使用 PayBis 信用卡可安全而轻松地购买比特币，其服务遍及美国、加拿大、德国、俄罗斯和沙特阿拉伯。",
+    "paybis":
+      "使用 PayBis 信用卡可安全而轻松地购买比特币，其服务遍及美国、加拿大、德国、俄罗斯和沙特阿拉伯。",
     "luno": "Luno 让购买、存储比特币和以太币等加密货币和了解相关知识变得安全而简单。",
-    "shapeshift": "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
-    "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，包括比特币、比特币现金、以太币、以太坊经典、莱特币和 XRP。",
-    "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
+    "shapeshift":
+      "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
+    "genesis":
+      "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，包括比特币、比特币现金、以太币、以太坊经典、莱特币和 XRP。",
+    "kyberSwap":
+      "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
+    "thorSwap":
+      "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
     "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
   },
   "genuinecheck": {
@@ -207,7 +215,8 @@
     "successDescription_plural": "您的账户已创建。",
     "createNewAccount": {
       "title": "添加新账户",
-      "noOperationOnLastAccount": "您上次创建的 <1><0>{{accountName}}</0></1> 账户上没有任何交易。您必须先在该账户上接收加密资产，然后才能添加新账户。",
+      "noOperationOnLastAccount":
+        "您上次创建的 <1><0>{{accountName}}</0></1> 账户上没有任何交易。您必须先在该账户上接收加密资产，然后才能添加新账户。",
       "noAccountToCreate": "未找到要创建的 <1><0>{{currencyName}}</0></1> 账户"
     },
     "cta": {
@@ -293,7 +302,8 @@
       "confirmAddress": {
         "title": "Verification",
         "action": "Verify address on device",
-        "text": "您的设备上将显示 {{currencyName}} 接收地址。请仔细检查，以确保与计算机上的地址匹配。",
+        "text":
+          "您的设备上将显示 {{currencyName}} 接收地址。请仔细检查，以确保与计算机上的地址匹配。",
         "support": "Contact us"
       },
       "receiveFunds": {
@@ -358,7 +368,8 @@
       "counterValue": "Countervalue",
       "counterValueDesc": "选择要在余额和操作旁显示的货币。",
       "exchange": "汇率提供商",
-      "exchangeDesc": "选择比特币兑 {{fiat}} 的汇率提供商。加密资产的价值首先以比特币计算，然后再转换为 {{fiat}}（加密资产 → BTC → {{fiat}}）。",
+      "exchangeDesc":
+        "选择比特币兑 {{fiat}} 的汇率提供商。加密资产的价值首先以比特币计算，然后再转换为 {{fiat}}（加密资产 → BTC → {{fiat}}）。",
       "region": "地区",
       "regionDesc": "选择您所在的地区，以便设置 Ledger Live 的时区。",
       "stock": "地区市场指示器",
@@ -367,28 +378,33 @@
     "currencies": {
       "desc": "选择一种加密资产以编辑其设置。",
       "exchange": "汇率提供商 ({{ticker}} → BTC)",
-      "exchangeDesc": "选择 {{currencyName}} 和比特币之间的汇率提供商。您的资产组合的指示性总价值计算方式为：将您的 {{currencyName}} 转换为比特币，然后再将比特币转换为您的基准币。",
+      "exchangeDesc":
+        "选择 {{currencyName}} 和比特币之间的汇率提供商。您的资产组合的指示性总价值计算方式为：将您的 {{currencyName}} 转换为比特币，然后再将比特币转换为您的基准币。",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
     "profile": {
       "password": "密码锁",
-      "passwordDesc": "设置密码防止存储在您的计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、余额、交易和公开地址等。",
+      "passwordDesc":
+        "设置密码防止存储在您的计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、余额、交易和公开地址等。",
       "changePassword": "更改密码",
       "softResetTitle": "清除缓存",
       "softResetDesc": "清除 Ledger Live 缓存，以强制与区块链重新同步。",
       "softReset": "清除",
       "hardResetTitle": "重置 Ledger Live",
-      "hardResetDesc": "清除计算机上存储的所有 Ledger Live 数据，包括您的账户、交易历史记录和设置。",
+      "hardResetDesc":
+        "清除计算机上存储的所有 Ledger Live 数据，包括您的账户、交易历史记录和设置。",
       "hardReset": "重置",
       "developerMode": "开发者模式",
       "developerModeDesc": "在管理器中显示开发者应用程序并启用测试网应用程序。",
       "analytics": "分析",
-      "analyticsDesc": "启用匿名数据分析，帮助 Ledger 提升用户体验。这包括操作系统、语言、固件版本和添加的账户数量。",
+      "analyticsDesc":
+        "启用匿名数据分析，帮助 Ledger 提升用户体验。这包括操作系统、语言、固件版本和添加的账户数量。",
       "reportErrors": "报告 bug",
       "reportErrorsDesc": "共享匿名使用资料和诊断数据，帮助完善 Ledger 的产品、服务和安全功能。",
       "launchOnboarding": "配置设备",
-      "launchOnboardingDesc": "安全初始化或恢复 Ledger 设备，以便与 Ledger Live 一起使用。您的账户和设置将会保留。"
+      "launchOnboardingDesc":
+        "安全初始化或恢复 Ledger 设备，以便与 Ledger Live 一起使用。您的账户和设置将会保留。"
     },
     "about": {
       "desc": "有关 Ledger Live、条款与条件以及隐私政策的信息。"
@@ -406,11 +422,13 @@
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
-      "desc": "清除计算机上存储的所有 Ledger Live 数据，包括您的账户、交易历史记录和设置。用于访问区块链中的加密资产的密钥仍安全存储在您的 Ledger 设备和恢复表上。"
+      "desc":
+        "清除计算机上存储的所有 Ledger Live 数据，包括您的账户、交易历史记录和设置。用于访问区块链中的加密资产的密钥仍安全存储在您的 Ledger 设备和恢复表上。"
     },
     "softResetModal": {
       "title": "清除缓存",
-      "desc": "清除 Ledger Live 缓存会强制网络重新同步。您的设置和账户不受影响。用于访问区块链中的加密资产的密钥仍安全存储在您的 Ledger 设备和恢复表上。"
+      "desc":
+        "清除 Ledger Live 缓存会强制网络重新同步。您的设置和账户不受影响。用于访问区块链中的加密资产的密钥仍安全存储在您的 Ledger 设备和恢复表上。"
     },
     "resetFallbackModal": {
       "title": "需要用户操作",
@@ -458,7 +476,8 @@
     },
     "disablePassword": {
       "title": "禁用密码锁",
-      "desc": "Ledger Live 数据将以未加密方式保存在您的计算机上。这包括账户名、余额、交易和公开地址等。"
+      "desc":
+        "Ledger Live 数据将以未加密方式保存在您的计算机上。这包括账户名、余额、交易和公开地址等。"
     }
   },
   "update": {
@@ -467,14 +486,16 @@
   },
   "crash": {
     "oops": "糟糕，出错了",
-    "uselessText": "您可以重启 Ledger Live 再试一次。如果问题仍然存在，请导出您的记录并联系 Ledger 支持人员。",
+    "uselessText":
+      "您可以重启 Ledger Live 再试一次。如果问题仍然存在，请导出您的记录并联系 Ledger 支持人员。",
     "restart": "重启",
     "support": "联系客服",
     "github": "GitHub"
   },
   "disclaimerModal": {
     "title": "安全交易",
-    "desc_1": "发送和接收加密资产之前，请务必了解相关知识，以便做出知情决策。加密资产并不稳定，价格也可能上下起伏。请认真评估您的交易目标和您愿意承担的财务风险。",
+    "desc_1":
+      "发送和接收加密资产之前，请务必了解相关知识，以便做出知情决策。加密资产并不稳定，价格也可能上下起伏。请认真评估您的交易目标和您愿意承担的财务风险。",
     "desc_2": "请注意，Ledger 不提供财务、税务或法律建议。您应自行做出这些决定，或咨询可靠的专家。",
     "cta": "明白了"
   },
@@ -556,7 +577,8 @@
           "nano": {
             "step1": "将 Ledger Nano S 连接到您的计算机。",
             "step2": "按照屏幕上的说明同时按下两个按钮。",
-            "step3": "按下左键取消<1><0>初始化为新设备？</0></1>。然后按下右键选择<3><0>恢复配置？</0></3>",
+            "step3":
+              "按下左键取消<1><0>初始化为新设备？</0></1>。然后按下右键选择<3><0>恢复配置？</0></3>",
             "step4": "选择长度为 4 到 8 位的 PIN 码，然后选中复选标记 (✓)。"
           },
           "blue": {
@@ -573,12 +595,14 @@
         "desc": "您的设备将生成 24 字恢复短语来备份您的私钥",
         "nano": {
           "step1": "在空白恢复表上复制位置 1 中<1><0>字 #1</0></1>下显示的文字。",
-          "step2": "按下右键显示<1><0>字 #2</0></1>并重复该过程，直至将全部 24 个字都复制到恢复表上。",
+          "step2":
+            "按下右键显示<1><0>字 #2</0></1>并重复该过程，直至将全部 24 个字都复制到恢复表上。",
           "step3": "请确认您的恢复短语：选择每个请求的字，然后按下两个按钮进行验证。"
         },
         "blue": {
           "step1": "在空白恢复表上复制恢复短语的每个字。以相同的顺序进行复制。",
-          "step2": "轻击<1><0>下一个</0></1>移动到下一个字。重复该过程，直至出现<3><0>确认</0></3>页面。",
+          "step2":
+            "轻击<1><0>下一个</0></1>移动到下一个字。重复该过程，直至出现<3><0>确认</0></3>页面。",
           "step3": "键入每个请求的字，确认您的恢复短语。"
         }
       },
@@ -630,14 +654,17 @@
         },
         "desc": {
           "pinFailed": "切勿使用自带 PIN 码的设备。如果您的设备自带了 PIN 码，请联系我们。",
-          "recoveryPhraseFailed": "仅保存设备上显示的恢复短语。如有疑问，请联系我们。否则，请返回安全检查表。",
-          "isGenuineFail": "您的设备未通过连接到 Ledger 安全服务器所需的真伪测试。请联系 Ledger 客服以获取帮助。"
+          "recoveryPhraseFailed":
+            "仅保存设备上显示的恢复短语。如有疑问，请联系我们。否则，请返回安全检查表。",
+          "isGenuineFail":
+            "您的设备未通过连接到 Ledger 安全服务器所需的真伪测试。请联系 Ledger 客服以获取帮助。"
         }
       }
     },
     "setPassword": {
       "title": "密码锁（可选）",
-      "desc": "设置密码防止存储在您的计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、余额、交易和公开地址等。",
+      "desc":
+        "设置密码防止存储在您的计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、余额、交易和公开地址等。",
       "disclaimer": {
         "note1": "确保记住您的密码。勿告知他人。",
         "note2": "如丢失密码，则需要重置 Ledger Live 和重新添加账户。",
@@ -669,7 +696,8 @@
       },
       "technicalData": {
         "title": "技术数据 *",
-        "desc": "Ledger 将自动收集技术信息以获取有关使用情况的基本反馈。此信息为匿名，不包含个人数据。",
+        "desc":
+          "Ledger 将自动收集技术信息以获取有关使用情况的基本反馈。此信息为匿名，不包含个人数据。",
         "mandatoryText": "* 强制性",
         "mandatoryContextual": {
           "title": "技术数据",
@@ -682,7 +710,8 @@
       },
       "terms": {
         "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "desc":
+          "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
       }
     },
     "finish": {

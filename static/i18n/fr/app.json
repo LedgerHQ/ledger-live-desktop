@@ -86,7 +86,8 @@
     "lastOperations": "Last operations",
     "emptyState": {
       "title": "Vous n’avez pas encore de crypto-actifs ?",
-      "desc": "Assurez-vous que l’application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
+      "desc":
+        "Assurez-vous que l’application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
       "buttons": {
         "receiveFunds": "Receive"
       }
@@ -134,9 +135,12 @@
   "currentAddress": {
     "title": "Current address",
     "for": "Adresse pour le compte <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Vérifiez l’adresse sur votre appareil pour une sécurité optimale. Appuyez sur le bouton droit pour confirmer.",
-    "messageIfAccepted": "Adresse {{currencyName}} confirmée. Veuillez vérifier l’adresse si vous la copiez/collez ou si vous scannez le code QR.",
-    "messageIfSkipped": "Votre adresse de réception n’a pas été confirmée sur votre appareil Ledger. Veuillez vérifier votre adresse {{currencyName}} pour une sécurité optimale."
+    "messageIfUnverified":
+      "Vérifiez l’adresse sur votre appareil pour une sécurité optimale. Appuyez sur le bouton droit pour confirmer.",
+    "messageIfAccepted":
+      "Adresse {{currencyName}} confirmée. Veuillez vérifier l’adresse si vous la copiez/collez ou si vous scannez le code QR.",
+    "messageIfSkipped":
+      "Votre adresse de réception n’a pas été confirmée sur votre appareil Ledger. Veuillez vérifier votre adresse {{currencyName}} pour une sécurité optimale."
   },
   "deviceConnect": {
     "step1": {
@@ -152,7 +156,8 @@
     },
     "dashboard": {
       "title": "Add accounts to your portfolio",
-      "desc": "Votre portefeuille ne contient aucun compte au premier lancement de Ledger Live. Ouvrez le gestionnaire pour installer des applications sur votre appareil Ledger avant de commencer à ajouter des comptes à votre portefeuille.",
+      "desc":
+        "Votre portefeuille ne contient aucun compte au premier lancement de Ledger Live. Ouvrez le gestionnaire pour installer des applications sur votre appareil Ledger avant de commencer à ajouter des comptes à votre portefeuille.",
       "buttons": {
         "addAccount": "Add accounts",
         "installApp": "Open Manager"
@@ -163,16 +168,26 @@
     "title": "Trade",
     "desc": "Try a few trading services we've selected for you",
     "visitWebsite": "Visit website",
-    "coinhouse": "Coinhouse est une plateforme de confiance pour les particuliers et les 'investisseurs institutionnels, cherchant à analyser, acquérir, vendre et stocker de manière sécurisée des crypto-actifs.",
-    "changelly": "Changelly est un service d'échange instantané de crypto-actifs, très utilisé et listant plus de 100 coins et tokens.",
-    "coinmama": "Coinmama est un service financier d’achat d’actifs numériques rapide, sécurisé et amusant, disponible partout dans le monde.",
-    "simplex": "Simplex est une institution financière agréée de l’UE, fournissant des solutions de paiement par carte bancaire anti-fraude.",
-    "paybis": "Grâce aux cartes bancaires de PayBis, il est sûr et facile d’acheter des Bitcoin. Le service est disponible aux États-Unis, au Canada, en Allemagne, en Russie et en Arabie Saoudite.",
-    "luno": "Luno sécurise et facilite l’achat, le stockage et l’apprentissage des cryptomonnaies telles que Bitcoin et Ethereum.",
-    "shapeshift": "ShapeShift est un marché en ligne sur lequel les utilisateurs peuvent acheter et vendre des actifs numériques. Il s’agit d’un moyen sécurisé et rapide d’acheter et de vendre des actifs numériques, sans long processus d’inscription, sans risques de contrepartie et sans friction.",
-    "genesis": "Genesis est une société de commerce institutionnelle offrant de la liquidité et des prêts de monnaies numériques, dont bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin et XRP.",
-    "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
+    "coinhouse":
+      "Coinhouse est une plateforme de confiance pour les particuliers et les 'investisseurs institutionnels, cherchant à analyser, acquérir, vendre et stocker de manière sécurisée des crypto-actifs.",
+    "changelly":
+      "Changelly est un service d'échange instantané de crypto-actifs, très utilisé et listant plus de 100 coins et tokens.",
+    "coinmama":
+      "Coinmama est un service financier d’achat d’actifs numériques rapide, sécurisé et amusant, disponible partout dans le monde.",
+    "simplex":
+      "Simplex est une institution financière agréée de l’UE, fournissant des solutions de paiement par carte bancaire anti-fraude.",
+    "paybis":
+      "Grâce aux cartes bancaires de PayBis, il est sûr et facile d’acheter des Bitcoin. Le service est disponible aux États-Unis, au Canada, en Allemagne, en Russie et en Arabie Saoudite.",
+    "luno":
+      "Luno sécurise et facilite l’achat, le stockage et l’apprentissage des cryptomonnaies telles que Bitcoin et Ethereum.",
+    "shapeshift":
+      "ShapeShift est un marché en ligne sur lequel les utilisateurs peuvent acheter et vendre des actifs numériques. Il s’agit d’un moyen sécurisé et rapide d’acheter et de vendre des actifs numériques, sans long processus d’inscription, sans risques de contrepartie et sans friction.",
+    "genesis":
+      "Genesis est une société de commerce institutionnelle offrant de la liquidité et des prêts de monnaies numériques, dont bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin et XRP.",
+    "kyberSwap":
+      "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
+    "thorSwap":
+      "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
     "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
   },
   "genuinecheck": {
@@ -207,7 +222,8 @@
     "successDescription_plural": "Your accounts have been created.",
     "createNewAccount": {
       "title": "Add a new account",
-      "noOperationOnLastAccount": "Aucune transaction n’a été effectuée sur votre dernier compte ajouté <1><0>{{accountName}}</0></1>. Vous devez recevoir des crypto-actifs sur ce compte avant de pouvoir en ajouter un autre.",
+      "noOperationOnLastAccount":
+        "Aucune transaction n’a été effectuée sur votre dernier compte ajouté <1><0>{{accountName}}</0></1>. Vous devez recevoir des crypto-actifs sur ce compte avant de pouvoir en ajouter un autre.",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> à créer n’a été trouvé."
     },
     "cta": {
@@ -252,8 +268,10 @@
       "titleBlue": "Ledger Blue",
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
-      "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
-      "disclaimerAppDelete": "Les applications installées sur votre appareil doivent être réinstallées après la mise à jour.",
+      "disclaimerTitle":
+        "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
+      "disclaimerAppDelete":
+        "Les applications installées sur votre appareil doivent être réinstallées après la mise à jour.",
       "disclaimerAppReinstall": "Cela n’affecte pas vos crypto-actifs sur la blockchain."
     },
     "modal": {
@@ -262,11 +280,13 @@
       },
       "installing": "Firmware updating...",
       "confirmIdentifier": "Vérifiez l’identificateur.",
-      "confirmIdentifierText": "Vérifiez que l’identificateur sur votre appareil est le même que l’identificateur ci-dessus. Appuyez sur le bouton droit pour confirmer.",
+      "confirmIdentifierText":
+        "Vérifiez que l’identificateur sur votre appareil est le même que l’identificateur ci-dessus. Appuyez sur le bouton droit pour confirmer.",
       "identifier": "Identifier",
       "mcuTitle": "Mise à jour du MCU",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu’à ce que l’écran de traitement apparaisse.",
+      "mcuSecond":
+        "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu’à ce que l’écran de traitement apparaisse.",
       "mcuPin": "If asked on device, please enter your pin code to finish the process",
       "successTitle": "Firmware updated",
       "successText": "Vous pouvez réinstaller les applications sur votre appareil."
@@ -293,7 +313,8 @@
       "confirmAddress": {
         "title": "Verification",
         "action": "Verify address on device",
-        "text": "Une adresse de réception {{currencyName}} s’affichera sur votre appareil. Vérifiez bien qu’elle correspond à l’adresse sur votre ordinateur.",
+        "text":
+          "Une adresse de réception {{currencyName}} s’affichera sur votre appareil. Vérifiez bien qu’elle correspond à l’adresse sur votre ordinateur.",
         "support": "Contact us"
       },
       "receiveFunds": {
@@ -330,7 +351,8 @@
         "title": "Confirmation",
         "success": {
           "title": "Transaction sent",
-          "text": "La transaction a été signée et envoyée au réseau. Votre solde de compte sera mis à jour une fois que la blockchain aura confirmé la transaction.",
+          "text":
+            "La transaction a été signée et envoyée au réseau. Votre solde de compte sera mis à jour une fois que la blockchain aura confirmé la transaction.",
           "cta": "View operation details"
         },
         "pending": {
@@ -356,77 +378,99 @@
       "language": "Display language",
       "languageDesc": "Set the language displayed in Ledger Live.",
       "counterValue": "Contre-valeur",
-      "counterValueDesc": "Choisissez la monnaie à afficher à côté de votre solde et de vos opérations.",
+      "counterValueDesc":
+        "Choisissez la monnaie à afficher à côté de votre solde et de vos opérations.",
       "exchange": "Prestataire de change",
-      "exchangeDesc": "Choisissez le prestataire de taux de change de Bitcoin en {{fiat}}. La valeur des crypto-actifs est calculée dans un premier temps en Bitcoin, avant d’être convertie en {{fiat}} (crypto-actif → BTC → {{fiat}}).",
+      "exchangeDesc":
+        "Choisissez le prestataire de taux de change de Bitcoin en {{fiat}}. La valeur des crypto-actifs est calculée dans un premier temps en Bitcoin, avant d’être convertie en {{fiat}} (crypto-actif → BTC → {{fiat}}).",
       "region": "Region",
-      "regionDesc": "Choisissez la région dans laquelle vous vous trouvez pour définir le fuseau horaire de Ledger Live.",
+      "regionDesc":
+        "Choisissez la région dans laquelle vous vous trouvez pour définir le fuseau horaire de Ledger Live.",
       "stock": "Indicateur de marché régional",
-      "stockDesc": "Choisissez Ouest pour afficher une augmentation de la valeur du marché en vert. Choisissez Est pour afficher une augmentation de la valeur du marché en rouge."
+      "stockDesc":
+        "Choisissez Ouest pour afficher une augmentation de la valeur du marché en vert. Choisissez Est pour afficher une augmentation de la valeur du marché en rouge."
     },
     "currencies": {
       "desc": "Sélectionnez un crypto-actif pour en modifier les paramètres.",
       "exchange": "Prestataire de change ({{ticker}} → BTC)",
-      "exchangeDesc": "Choisissez le prestataire de change entre {{currencyName}} et Bitcoin. La valeur indicative totale de votre portefeuille est calculée en convertissant vos {{currencyName}} en Bitcoin, qui sont ensuite convertis vers votre monnaie de base.",
+      "exchangeDesc":
+        "Choisissez le prestataire de change entre {{currencyName}} et Bitcoin. La valeur indicative totale de votre portefeuille est calculée en convertissant vos {{currencyName}} en Bitcoin, qui sont ensuite convertis vers votre monnaie de base.",
       "confirmationsNb": "Number of confirmations",
-      "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
+      "confirmationsNbDesc":
+        "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
     },
     "profile": {
       "password": "Password lock",
-      "passwordDesc": "Définissez un mot de passe pour prévenir les accès non autorisés aux données Ledger Live stockées sur votre ordinateur, y compris les noms, les soldes, les transactions et les adresses publiques des comptes.",
+      "passwordDesc":
+        "Définissez un mot de passe pour prévenir les accès non autorisés aux données Ledger Live stockées sur votre ordinateur, y compris les noms, les soldes, les transactions et les adresses publiques des comptes.",
       "changePassword": "Change password",
       "softResetTitle": "Clear cache",
-      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
+      "softResetDesc":
+        "Clear the Ledger Live cache to force resynchronization with the blockchain.",
       "softReset": "Clear",
       "hardResetTitle": "Reset Ledger Live",
-      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings.",
+      "hardResetDesc":
+        "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings.",
       "hardReset": "Reset",
       "developerMode": "Developer mode",
-      "developerModeDesc": "Afficher les applications développeur sur le gestionnaire et autoriser les applications Testnet.",
+      "developerModeDesc":
+        "Afficher les applications développeur sur le gestionnaire et autoriser les applications Testnet.",
       "analytics": "Analyse",
-      "analyticsDesc": "Autorisez l’analyse de données anonymes pour aider Ledger à améliorer l’expérience utilisateur. Cela comprend le système d’exploitation, la langue, les versions du firmware et le nombre de comptes ajoutés.",
+      "analyticsDesc":
+        "Autorisez l’analyse de données anonymes pour aider Ledger à améliorer l’expérience utilisateur. Cela comprend le système d’exploitation, la langue, les versions du firmware et le nombre de comptes ajoutés.",
       "reportErrors": "Report bugs",
-      "reportErrorsDesc": "Partagez les données d’utilisation et de diagnostic pour aider Ledger à améliorer ses produits, services et fonctions de sécurité.",
+      "reportErrorsDesc":
+        "Partagez les données d’utilisation et de diagnostic pour aider Ledger à améliorer ses produits, services et fonctions de sécurité.",
       "launchOnboarding": "Configure device",
-      "launchOnboardingDesc": "Initialisez ou restaurez de manière sécurisée un appareil Ledger à utiliser avec Ledger Live. Vos comptes et paramètres sont conservés."
+      "launchOnboardingDesc":
+        "Initialisez ou restaurez de manière sécurisée un appareil Ledger à utiliser avec Ledger Live. Vos comptes et paramètres sont conservés."
     },
     "about": {
-      "desc": "Informations concernant Ledger Live, les conditions générales et la politique de confidentialité."
+      "desc":
+        "Informations concernant Ledger Live, les conditions générales et la politique de confidentialité."
     },
     "help": {
       "desc": "En savoir plus sur les fonctionnalités Ledger Live ou obtenir de l’aide.",
       "version": "Version",
       "releaseNotesBtn": "Details",
       "faq": "Assistance Ledger",
-      "faqDesc": "Un problème ? Obtenez de l’aide concernant Ledger Live, les appareils Ledger, les crypto-actifs et applications pris en charge.",
+      "faqDesc":
+        "Un problème ? Obtenez de l’aide concernant Ledger Live, les appareils Ledger, les crypto-actifs et applications pris en charge.",
       "terms": "Conditions générales",
       "termsDesc": "En utilisant Ledger Live, vous acceptez nos conditions générales.",
       "privacy": "Politique de confidentialité",
-      "privacyDesc": "Consultez notre politique de confidentialité pour savoir quelles données personnelles nous collectons, à quelles fins et comment nous les utilisons."
+      "privacyDesc":
+        "Consultez notre politique de confidentialité pour savoir quelles données personnelles nous collectons, à quelles fins et comment nous les utilisons."
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",
-      "desc": "Supprimez toutes les données Ledger Live stockées sur votre ordinateur, y compris vos comptes, historiques de transactions et paramètres. Les clés privées pour accéder à vos crypto-actifs sur la blockchain sont conservées en toute sécurité sur votre appareil Ledger et sur votre fiche de récupération."
+      "desc":
+        "Supprimez toutes les données Ledger Live stockées sur votre ordinateur, y compris vos comptes, historiques de transactions et paramètres. Les clés privées pour accéder à vos crypto-actifs sur la blockchain sont conservées en toute sécurité sur votre appareil Ledger et sur votre fiche de récupération."
     },
     "softResetModal": {
       "title": "Clear cache",
-      "desc": "En nettoyant le cache de Ledger Live, vous forcez une resynchronisation réseau. Vos paramètres et comptes ne seront pas affectés. Les clés privées pour accéder à vos crypto-actifs sur la blockchain sont conservées en toute sécurité sur votre appareil Ledger et sur votre fiche de récupération."
+      "desc":
+        "En nettoyant le cache de Ledger Live, vous forcez une resynchronisation réseau. Vos paramètres et comptes ne seront pas affectés. Les clés privées pour accéder à vos crypto-actifs sur la blockchain sont conservées en toute sécurité sur votre appareil Ledger et sur votre fiche de récupération."
     },
     "resetFallbackModal": {
       "title": "Action de l’utilisateur requise",
-      "part1": "Erreur lors de la suppression du dossier cache. Veuillez supprimer le dossier manuellement :",
-      "part2": "Cliquez sur le bouton Ouvrir dossier L’application va se fermer. Supprimez manuellement le dossier \"sqlite\".",
+      "part1":
+        "Erreur lors de la suppression du dossier cache. Veuillez supprimer le dossier manuellement :",
+      "part2":
+        "Cliquez sur le bouton Ouvrir dossier L’application va se fermer. Supprimez manuellement le dossier \"sqlite\".",
       "part3": "app will close",
       "part4": ", and manually delete the \"sqlite\" folder.",
       "part5": "Vous pouvez ensuite relancer l’application normalement."
     },
     "removeAccountModal": {
       "title": "Remove account",
-      "desc": "The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added."
+      "desc":
+        "The account will no longer be included in your portfolio. This operation does not affect your assets. Accounts can always be re-added."
     },
     "openUserDataDirectory": {
       "title": "View user data",
-      "desc": "Consultez les données utilisateur stockées sur votre ordinateur, y compris vos comptes, caches et paramètres.",
+      "desc":
+        "Consultez les données utilisateur stockées sur votre ordinateur, y compris vos comptes, caches et paramètres.",
       "btn": "Affichage"
     },
     "exportLogs": {
@@ -454,11 +498,13 @@
     "setPassword": {
       "title": "Enable password lock",
       "subTitle": "Set a password",
-      "desc": "Assurez-vous de vous souvenir de votre mot de passe. La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes doivent à nouveau être ajoutés."
+      "desc":
+        "Assurez-vous de vous souvenir de votre mot de passe. La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes doivent à nouveau être ajoutés."
     },
     "disablePassword": {
       "title": "Disable password lock",
-      "desc": "Les données Ledger Live seront stockées de façon non cryptée sur votre ordinateur. Cela inclut les noms, soldes, transactions et adresses publiques des comptes."
+      "desc":
+        "Les données Ledger Live seront stockées de façon non cryptée sur votre ordinateur. Cela inclut les noms, soldes, transactions et adresses publiques des comptes."
     }
   },
   "update": {
@@ -467,15 +513,18 @@
   },
   "crash": {
     "oops": "Oops, something went wrong",
-    "uselessText": "Tentez à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos journaux et contactez l’assistance Ledger.",
+    "uselessText":
+      "Tentez à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos journaux et contactez l’assistance Ledger.",
     "restart": "Restart",
     "support": "Contact Support",
     "github": "GitHub"
   },
   "disclaimerModal": {
     "title": "Échangez en toute sécurité",
-    "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent augmenter ou baisser. Évaluez attentivement vos objectifs commerciaux et les risques financiers que vous êtes prêt à prendre.",
-    "desc_2": "Veuillez noter que Ledger ne fournit aucun service de conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
+    "desc_1":
+      "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent augmenter ou baisser. Évaluez attentivement vos objectifs commerciaux et les risques financiers que vous êtes prêt à prendre.",
+    "desc_2":
+      "Veuillez noter que Ledger ne fournit aucun service de conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
     "cta": "Got it"
   },
   "language": {
@@ -532,7 +581,8 @@
       "disclaimer": {
         "note1": "Choisissez votre propre code PIN, ce code déverrouillera votre appareil.",
         "note2": "Un code PIN à 8 chiffres offre un niveau optimal de sécurité.",
-        "note3": "N’utilisez jamais un appareil fourni avec un code PIN ou une phrase de récupération de 24 mots."
+        "note3":
+          "N’utilisez jamais un appareil fourni avec un code PIN ou une phrase de récupération de 24 mots."
       },
       "initialize": {
         "title": "Choisissez votre code PIN.",
@@ -540,7 +590,8 @@
           "nano": {
             "step1": "Connectez le Ledger Nano S à votre ordinateur.",
             "step2": "Appuyez sur les deux boutons simultanément comme indiqué à l’écran.",
-            "step3": "Appuyez sur le bouton droit pour sélectionner <1><0>Configurer en tant que nouvel appareil ?</0></1>",
+            "step3":
+              "Appuyez sur le bouton droit pour sélectionner <1><0>Configurer en tant que nouvel appareil ?</0></1>",
             "step4": "Choisissez un code PIN de 4 à 8 chiffres, suivi par la coche (✓)."
           },
           "blue": {
@@ -556,7 +607,8 @@
           "nano": {
             "step1": "Connectez le Ledger Nano S à votre ordinateur.",
             "step2": "Appuyez sur les deux boutons simultanément comme indiqué à l’écran.",
-            "step3": "Appuyez sur le bouton gauche pour annuler <1><0>Initialiser en tant que nouvel appareil ?</0></1>. Appuyez ensuite sur le bouton droit pour sélectionner <3><0>Restaurer la configuration ?</0></3>",
+            "step3":
+              "Appuyez sur le bouton gauche pour annuler <1><0>Initialiser en tant que nouvel appareil ?</0></1>. Appuyez ensuite sur le bouton droit pour sélectionner <3><0>Restaurer la configuration ?</0></3>",
             "step4": "Choisissez un code PIN de 4 à 8 chiffres, suivi par la coche (✓)."
           },
           "blue": {
@@ -570,38 +622,51 @@
     "writeSeed": {
       "initialize": {
         "title": "Enregistrez votre phrase de récupération.",
-        "desc": "Votre appareil génèrera une phrase de récupération de 24 mots pour sauvegarder vos clés privés.",
+        "desc":
+          "Votre appareil génèrera une phrase de récupération de 24 mots pour sauvegarder vos clés privés.",
         "nano": {
-          "step1": "Copiez le mot affiché ci-dessous <1><0>Mot #1</0></1> en position 1 sur une fiche de récupération vierge.",
-          "step2": "Appuyez sur le bouton droit pour afficher le <1><0>Mot #2</0></1> et répétez le processus jusqu’à ce que les 24 mots soient copiés sur la fiche de récupération.",
-          "step3": "Confirmez votre phrase de récupération : sélectionnez chaque mot demandé et appuyez sur les deux boutons pour le valider."
+          "step1":
+            "Copiez le mot affiché ci-dessous <1><0>Mot #1</0></1> en position 1 sur une fiche de récupération vierge.",
+          "step2":
+            "Appuyez sur le bouton droit pour afficher le <1><0>Mot #2</0></1> et répétez le processus jusqu’à ce que les 24 mots soient copiés sur la fiche de récupération.",
+          "step3":
+            "Confirmez votre phrase de récupération : sélectionnez chaque mot demandé et appuyez sur les deux boutons pour le valider."
         },
         "blue": {
-          "step1": "Copiez chaque mot de la phrase de récupération sur une fiche de récupération vierge. Copiez les mots dans le même ordre.",
-          "step2": "Appuyez sur <1><0>Suivant</0></1> pour passer au mot suivant. Répétez le processus jusqu’à ce que l’écran de <3><0>Confirmation</0></3> apparaisse.",
+          "step1":
+            "Copiez chaque mot de la phrase de récupération sur une fiche de récupération vierge. Copiez les mots dans le même ordre.",
+          "step2":
+            "Appuyez sur <1><0>Suivant</0></1> pour passer au mot suivant. Répétez le processus jusqu’à ce que l’écran de <3><0>Confirmation</0></3> apparaisse.",
           "step3": "Saisissez chaque mot demandé pour confirmer votre phrase de récupération."
         }
       },
       "restore": {
         "title": "Saisissez votre phrase de récupération.",
-        "desc": "Copiez la phrase de récupération de 24 mots de votre fiche de récupération sur votre appareil.",
+        "desc":
+          "Copiez la phrase de récupération de 24 mots de votre fiche de récupération sur votre appareil.",
         "nano": {
-          "step1": "Sélectionnez la longueur de votre phrase de récupération. Appuyez sur les deux boutons pour continuer.",
-          "step2": "Sélectionnez les premières lettres du <1><0>Mot #1</0></1> en appuyant sur le bouton droit ou gauche. Appuyez sur les deux boutons pour confirmer chaque lettre.",
-          "step3": "Sélectionnez le <1><0>Mot #1</0></1> dans la liste de mots suggérés. Appuyez sur les deux boutons pour continuer.",
+          "step1":
+            "Sélectionnez la longueur de votre phrase de récupération. Appuyez sur les deux boutons pour continuer.",
+          "step2":
+            "Sélectionnez les premières lettres du <1><0>Mot #1</0></1> en appuyant sur le bouton droit ou gauche. Appuyez sur les deux boutons pour confirmer chaque lettre.",
+          "step3":
+            "Sélectionnez le <1><0>Mot #1</0></1> dans la liste de mots suggérés. Appuyez sur les deux boutons pour continuer.",
           "step4": "Répétez le processus jusqu’au dernier mot."
         },
         "blue": {
           "step1": "Sélectionnez la longueur de votre phrase de récupération.",
-          "step2": "Saisissez le premier mot de votre phrase de récupération. Sélectionnez le mot lorsqu’il apparait.",
+          "step2":
+            "Saisissez le premier mot de votre phrase de récupération. Sélectionnez le mot lorsqu’il apparait.",
           "step3": "Répétez le processus jusqu’au dernier mot."
         }
       },
       "disclaimer": {
-        "note1": "Conservez votre phrase de récupération de 24 mots de manière sécurisée, hors de portée.",
+        "note1":
+          "Conservez votre phrase de récupération de 24 mots de manière sécurisée, hors de portée.",
         "note2": "Assurez-vous d’être le seul détenteur de votre phrase de récupération.",
         "note3": "Ledger ne conserve aucune sauvegarde de votre phrase de récupération.",
-        "note4": "N’utilisez jamais un appareil fourni avec une phrase de récupération ou un code PIN."
+        "note4":
+          "N’utilisez jamais un appareil fourni avec une phrase de récupération ou un code PIN."
       }
     },
     "genuineCheck": {
@@ -625,31 +690,40 @@
       "errorPage": {
         "title": {
           "pinFailed": "Vous n’avez pas choisi votre propre code PIN ?",
-          "recoveryPhraseFailed": "Vous n’avez pas enregistré votre propre phrase de récupération ?",
+          "recoveryPhraseFailed":
+            "Vous n’avez pas enregistré votre propre phrase de récupération ?",
           "isGenuineFail": "Désolé, votre appareil ne semble pas authentique..."
         },
         "desc": {
-          "pinFailed": "N’utilisez jamais un appareil fourni avec un code PIN. Si votre appareil vous a été fourni avec un code PIN, veuillez nous contacter.",
-          "recoveryPhraseFailed": "N’enregistrez que la phrase de récupération affichée sur votre appareil. Veuillez nous contacter en cas de doute. Autrement, reprenez la liste de contrôles de sécurité.",
-          "isGenuineFail": "Votre appareil a échoué au test d’authenticité requis pour se connecter au serveur sécurisé de Ledger. Veuillez contacter l’assistance Ledger pour obtenir de l’aide."
+          "pinFailed":
+            "N’utilisez jamais un appareil fourni avec un code PIN. Si votre appareil vous a été fourni avec un code PIN, veuillez nous contacter.",
+          "recoveryPhraseFailed":
+            "N’enregistrez que la phrase de récupération affichée sur votre appareil. Veuillez nous contacter en cas de doute. Autrement, reprenez la liste de contrôles de sécurité.",
+          "isGenuineFail":
+            "Votre appareil a échoué au test d’authenticité requis pour se connecter au serveur sécurisé de Ledger. Veuillez contacter l’assistance Ledger pour obtenir de l’aide."
         }
       }
     },
     "setPassword": {
       "title": "Verrouillage par mot de passe (facultatif)",
-      "desc": "Définissez un mot de passe pour prévenir les accès non autorisés aux données Ledger Live stockées sur votre ordinateur, y compris les noms, les soldes, les transactions et les adresses publiques des comptes.",
+      "desc":
+        "Définissez un mot de passe pour prévenir les accès non autorisés aux données Ledger Live stockées sur votre ordinateur, y compris les noms, les soldes, les transactions et les adresses publiques des comptes.",
       "disclaimer": {
-        "note1": "Assurez-vous de vous souvenir de votre mot de passe. Ne le partagez avec personne.",
-        "note2": "La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes devront à nouveau être ajoutés.",
+        "note1":
+          "Assurez-vous de vous souvenir de votre mot de passe. Ne le partagez avec personne.",
+        "note2":
+          "La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes devront à nouveau être ajoutés.",
         "note3": "La réinitialisation de Ledger Live n’affecte pas vos crypto-actifs."
       }
     },
     "analytics": {
       "title": "Analyses et signalements de bugs",
-      "desc": "Partagez les données d'utilisation et de diagnostic pour aider Ledger à améliorer ses produits, services et fonctions de sécurité.",
+      "desc":
+        "Partagez les données d'utilisation et de diagnostic pour aider Ledger à améliorer ses produits, services et fonctions de sécurité.",
       "shareAnalytics": {
         "title": "Partage d’analyses",
-        "desc": "Autorisez les analyses pour aider Ledger à comprendre comment améliorer l’expérience utilisateur.",
+        "desc":
+          "Autorisez les analyses pour aider Ledger à comprendre comment améliorer l’expérience utilisateur.",
         "mandatoryContextual": {
           "item1": "Visites de pages dans l'application",
           "item2": "Actions (envoyer, recevoir, verrouiller)",
@@ -669,7 +743,8 @@
       },
       "technicalData": {
         "title": "Données techniques *",
-        "desc": "Ledger collectera automatiquement les informations techniques afin d’obtenir un retour de base sur l’utilisation. Ces informations sont anonymes et ne contiennent pas de données personnelles.",
+        "desc":
+          "Ledger collectera automatiquement les informations techniques afin d’obtenir un retour de base sur l’utilisation. Ces informations sont anonymes et ne contiennent pas de données personnelles.",
         "mandatoryText": "* obligatoire",
         "mandatoryContextual": {
           "title": "Données techniques",
@@ -682,7 +757,8 @@
       },
       "terms": {
         "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "desc":
+          "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
       }
     },
     "finish": {
@@ -742,11 +818,13 @@
     },
     "LatestMCUInstalledError": {
       "title": "Désolé, aucune mise à jour disponible",
-      "description": "Échec de mise à jour du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
+      "description":
+        "Échec de mise à jour du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
     },
     "LedgerAPIError": {
       "title": "Désolé, veuillez essayer à nouveau (API HTTP {{status}})",
-      "description": "Quelque chose s’est mal passé lors de l’interaction avec le serveur API de Ledger. Veuillez essayer à nouveau."
+      "description":
+        "Quelque chose s’est mal passé lors de l’interaction avec le serveur API de Ledger. Veuillez essayer à nouveau."
     },
     "LedgerAPIErrorWithMessage": {
       "title": "Désolé, {{message}}",
@@ -766,7 +844,8 @@
     },
     "ManagerAppRelyOnBTC": {
       "title": "Applications Bitcoin et Ethereum requises",
-      "description": "Installez dans un premier temps la dernière version des applications Bitcoin et Ethereum."
+      "description":
+        "Installez dans un premier temps la dernière version des applications Bitcoin et Ethereum."
     },
     "ManagerDeviceLocked": {
       "title": "Veuillez déverrouiller votre appareil.",
@@ -774,7 +853,8 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "Désolé, espace disponible insuffisant",
-      "description": "Veuillez désinstaller des applications pour libérer de l’espace. Cela n’affectera pas vos crypto-actifs."
+      "description":
+        "Veuillez désinstaller des applications pour libérer de l’espace. Cela n’affectera pas vos crypto-actifs."
     },
     "ManagerUninstallBTCDep": {
       "title": "Désolé, cette application est requise.",
@@ -786,14 +866,16 @@
     },
     "NoAddressesFound": {
       "title": "Désolé, aucun compte trouvé",
-      "description": "Quelque chose s’est mal passé lors du calcul de l’adresse, essayez à nouveau ou contactez l’assistance Ledger."
+      "description":
+        "Quelque chose s’est mal passé lors du calcul de l’adresse, essayez à nouveau ou contactez l’assistance Ledger."
     },
     "NotEnoughBalance": {
       "title": "Désolé, solde insuffisant",
       "description": "Assurez-vous que le solde du compte à débiter est suffisant."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "L’adresse du destinataire est inactive. Envoyez au minimum {{minimalAmount}} pour l’activer."
+      "title":
+        "L’adresse du destinataire est inactive. Envoyez au minimum {{minimalAmount}} pour l’activer."
     },
     "PasswordsDontMatch": {
       "title": "Les mots de passe de correspondent pas.",
@@ -829,7 +911,8 @@
     },
     "UserRefusedOnDevice": {
       "title": "Transaction refusée sur l’appareil",
-      "description": "Veuillez essayer à nouveau ou, en cas de doute, contactez l’assistance Ledger."
+      "description":
+        "Veuillez essayer à nouveau ou, en cas de doute, contactez l’assistance Ledger."
     },
     "UserRefusedAddress": {
       "title": "Adresse de réception rejetée",
@@ -837,7 +920,8 @@
     },
     "UpdateYourApp": {
       "title": "Mise à jour de l’application requise",
-      "description": "Désinstallez et réinstallez l’application {{managerAppName}} dans le gestionnaire."
+      "description":
+        "Désinstallez et réinstallez l’application {{managerAppName}} dans le gestionnaire."
     },
     "WebsocketConnectionError": {
       "title": "Désolé, essayez à nouveau (erreur websocket).",
@@ -849,7 +933,8 @@
     },
     "WrongDeviceForAccount": {
       "title": "Désolé, ce n'est pas le bon appareil pour « {{accountName}} ».",
-      "description": "L’appareil connecté n’est pas associé au compte que vous avez sélectionné. Veuillez connecter le bon appareil."
+      "description":
+        "L’appareil connecté n’est pas associé au compte que vous avez sélectionné. Veuillez connecter le bon appareil."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Ouvrez le gestionnaire pour mettre à jour cette application.",
@@ -860,14 +945,16 @@
     },
     "CantOpenDevice": {
       "title": "Désolé, connexion à l’appareil impossible",
-      "description": "Appareil détecté mais échec de la connexion. Veuillez essayer à nouveau, si le problème persiste, contactez l’assistance."
+      "description":
+        "Appareil détecté mais échec de la connexion. Veuillez essayer à nouveau, si le problème persiste, contactez l’assistance."
     },
     "ETHAddressNonEIP": {
       "title": "Auto-vérification indisponible : veuillez vérifier attentivement l’adresse.",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Ce code QR n’a pu être scanné : cette adresse ne prend pas en charge l’auto-vérification."
+      "title":
+        "Ce code QR n’a pu être scanné : cette adresse ne prend pas en charge l’auto-vérification."
     },
     "FeeNotLoaded": {
       "title": "Chargement des taux de frais impossible. Veuillez définir manuellement les frais."

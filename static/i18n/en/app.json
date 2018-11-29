@@ -133,9 +133,12 @@
   "currentAddress": {
     "title": "Current address",
     "for": "Address for account <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Please verify that the Bitcoin address shown on your device matches the one on your phone",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfUnverified":
+      "Please verify that the Bitcoin address shown on your device matches the one on your phone",
+    "messageIfAccepted":
+      "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
+    "messageIfSkipped":
+      "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
     "step1": {
@@ -151,7 +154,8 @@
     },
     "dashboard": {
       "title": "Install apps or add accounts",
-      "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
+      "desc":
+        "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
       "buttons": {
         "addAccount": "Add accounts",
         "installApp": "Open Manager"
@@ -162,16 +166,26 @@
     "title": "Trade",
     "desc": "Try a few services we've selected",
     "visitWebsite": "Visit website",
-    "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
-    "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
-    "coinmama": "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
-    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
-    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
-    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
-    "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
-    "genesis": "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP.",
-    "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
+    "coinhouse":
+      "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
+    "changelly":
+      "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
+    "coinmama":
+      "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
+    "simplex":
+      "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
+    "paybis":
+      "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
+    "luno":
+      "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
+    "shapeshift":
+      "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
+    "genesis":
+      "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP.",
+    "kyberSwap":
+      "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
+    "thorSwap":
+      "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
     "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
   },
   "genuinecheck": {
@@ -206,7 +220,8 @@
     "successDescription_plural": "Add more accounts or return to Portfolio",
     "createNewAccount": {
       "title": "Add new account",
-      "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
+      "noOperationOnLastAccount":
+        "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to create"
     },
     "cta": {
@@ -252,7 +267,8 @@
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>",
-      "disclaimerAppDelete": "Apps installed on your device have to be re-installed after the update.",
+      "disclaimerAppDelete":
+        "Apps installed on your device have to be re-installed after the update.",
       "disclaimerAppReinstall": "This does not affect your crypto assets in the blockchain."
     },
     "modal": {
@@ -261,11 +277,13 @@
       },
       "installing": "Firmware updating...",
       "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button to confirm.",
+      "confirmIdentifierText":
+        "Verify that the identifier on your device is the same as the identifier below. Press the right button to confirm.",
       "identifier": "Identifier",
       "mcuTitle": "Updating MCU",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the processing screen appears",
+      "mcuSecond":
+        "Press the left button and hold it while you reconnect the USB cable until the processing screen appears",
       "mcuPin": "If asked on device, please enter your pin code to finish the process",
       "successTitle": "Firmware updated",
       "successText": "You may re-install the apps on your device"
@@ -292,8 +310,8 @@
       "confirmAddress": {
         "title": "Verification",
         "action": "Verify address on device",
-        "text": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer"
-        ,
+        "text":
+          "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
         "support": "Contact us"
       },
       "receiveFunds": {
@@ -330,7 +348,8 @@
         "title": "Confirmation",
         "success": {
           "title": "Transaction sent",
-          "text": "Your account balance will update once the blockchain has confirmed the transaction",
+          "text":
+            "Your account balance will update once the blockchain has confirmed the transaction",
           "cta": "View details"
         },
         "pending": {
@@ -358,37 +377,46 @@
       "counterValue": "Countervalue",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "exchange": "Rate provider",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
+      "exchangeDesc":
+        "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
       "region": "Region",
       "regionDesc": "Choose your region, used to set Ledger Live's time zone.",
       "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
+      "stockDesc":
+        "Choose Western to display an increase in market value in blue or Eastern to display it in red."
     },
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",
       "exchange": "Rate provider ({{ticker}} → BTC)",
-      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{currencyName}} → BTC → {{fiat}}).",
+      "exchangeDesc":
+        "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{currencyName}} → BTC → {{fiat}}).",
       "confirmationsNb": "Number of confirmations",
-      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
+      "confirmationsNbDesc":
+        "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
     "profile": {
       "password": "Password lock",
-      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, transactions and public addresses.",
+      "passwordDesc":
+        "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, transactions and public addresses.",
       "changePassword": "Change password",
       "softResetTitle": "Clear cache",
-      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
+      "softResetDesc":
+        "Clear the Ledger Live cache to force resynchronization with the blockchain.",
       "softReset": "Clear",
       "hardResetTitle": "Reset Ledger Live",
-      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings.",
+      "hardResetDesc":
+        "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings.",
       "hardReset": "Reset",
       "developerMode": "Developer mode",
       "developerModeDesc": "Show developer and testnet apps in the Manager.",
       "analytics": "Analytics",
-      "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
+      "analyticsDesc":
+        "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
       "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
       "launchOnboarding": "Device setup",
-      "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
+      "launchOnboardingDesc":
+        "Set up as new or restore a Ledger device. Accounts and settings are kept."
     },
     "about": {
       "desc": "App information, Terms and Conditions, and Privacy Policy."
@@ -402,15 +430,18 @@
       "terms": "Terms of Use",
       "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
       "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+      "privacyDesc":
+        "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",
-      "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc":
+        "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "softResetModal": {
       "title": "Clear cache",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc":
+        "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
       "title": "User action required",
@@ -426,7 +457,8 @@
     },
     "openUserDataDirectory": {
       "title": "View user data",
-      "desc": "View the user data that is stored on your computer, including your accounts, caches and settings.",
+      "desc":
+        "View the user data that is stored on your computer, including your accounts, caches and settings.",
       "btn": "View"
     },
     "exportLogs": {
@@ -454,11 +486,13 @@
     "setPassword": {
       "title": "Password lock",
       "subTitle": "Set a password",
-      "desc": "Make sure to remember your password. Losing your password requires resetting Ledger Live and re-adding accounts."
+      "desc":
+        "Make sure to remember your password. Losing your password requires resetting Ledger Live and re-adding accounts."
     },
     "disablePassword": {
       "title": "Disable password lock",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc":
+        "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
     }
   },
   "update": {
@@ -467,15 +501,18 @@
   },
   "crash": {
     "oops": "Oops, something went wrong",
-    "uselessText": "You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.",
+    "uselessText":
+      "You may try again by restarting Ledger Live. Please export your logs and contact Ledger Support if the problem persists.",
     "restart": "Restart",
     "support": "Contact Support",
     "github": "GitHub"
   },
   "disclaimerModal": {
     "title": "Trade safely",
-    "desc_1": "Before sending and receiving crypto assets, educate yourself to make informed decisions. Crypto assets are volatile and the prices can go up and down. Carefully evaluate your trading goals and the financial risk you are willing to take.",
-    "desc_2": "Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or consult with reliable experts.",
+    "desc_1":
+      "Before sending and receiving crypto assets, educate yourself to make informed decisions. Crypto assets are volatile and the prices can go up and down. Carefully evaluate your trading goals and the financial risk you are willing to take.",
+    "desc_2":
+      "Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or consult with reliable experts.",
     "cta": "Got it"
   },
   "language": {
@@ -545,7 +582,8 @@
           "nano": {
             "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
             "step2": "Press the right button to select <1><0>Configure as new device?.</0></1>",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step3":
+              "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
@@ -560,8 +598,10 @@
         "instructions": {
           "nano": {
             "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
-            "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step2":
+              "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
+            "step3":
+              "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
@@ -579,11 +619,13 @@
         "nano": {
           "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "Press the right button to continue and write down all 24 words.",
-          "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
+          "step3":
+            "Confirm your recovery phrase: select and validate each word by pressing both buttons."
         },
         "blue": {
           "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
-          "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
+          "step2":
+            "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
           "step3": "Enter each word to confirm your recovery phrase."
         }
       },
@@ -593,7 +635,8 @@
         "nano": {
           "step1": "Choose the length of your recovery phrase.",
           "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+          "step3":
+            "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
           "step4": "Repeat the process until the last word."
         },
         "blue": {
@@ -634,15 +677,19 @@
           "isGenuineFail": "Oops, your device does not seem genuine..."
         },
         "desc": {
-          "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
-          "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
-          "isGenuineFail": "Your device did not pass the authenticity test required to connect to Ledger’s secure server. Please contact Ledger Support to get assistance."
+          "pinFailed":
+            "Never use a device supplied with a PIN code. Please contact us when in doubt.",
+          "recoveryPhraseFailed":
+            "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
+          "isGenuineFail":
+            "Your device did not pass the authenticity test required to connect to Ledger’s secure server. Please contact Ledger Support to get assistance."
         }
       }
     },
     "setPassword": {
       "title": "Password lock (optional)",
-        "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
+      "desc":
+        "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
         "note1": "Make sure to remember your password. Do not share it.",
         "note2": "Losing your password requires resetting Ledger Live and re-adding accounts.",
@@ -673,7 +720,8 @@
       },
       "technicalData": {
         "title": "Technical data*",
-        "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
+        "desc":
+          "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
         "mandatoryText": "* mandatory",
         "mandatoryContextual": {
           "title": "Technical data",
@@ -684,7 +732,8 @@
       },
       "terms": {
         "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "desc":
+          "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
       }
     },
     "finish": {
@@ -744,7 +793,8 @@
     },
     "LatestMCUInstalledError": {
       "title": "Oops, nothing to update",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "description":
+        "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
       "title": "Sorry, try again (API HTTP {{status}})",
@@ -788,7 +838,8 @@
     },
     "NoAddressesFound": {
       "title": "Sorry, no accounts found",
-      "description": "Something went wrong with address calculation, try again or contact Ledger Support"
+      "description":
+        "Something went wrong with address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
       "title": "Oops, insufficient balance",
@@ -862,7 +913,8 @@
     },
     "CantOpenDevice": {
       "title": "Oops, couldn’t connect to device",
-      "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
+      "description":
+        "Device detected but connection failed. Please try again or contact us if the problem persists."
     },
     "ETHAddressNonEIP": {
       "title": "Auto-verification not available: carefully verify the address",
