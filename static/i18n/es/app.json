@@ -138,12 +138,9 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
-    "step1": {
-      "connect": "Conecta y desbloquea tu <1>dispositivo Ledger</1>"
-    },
-    "step2": {
-      "open": "Abre la aplicación <1><0>{{managerAppName}}</0></1> en tu dispositivo"
-    }
+    "step1": "Connect and unlock your <1>Ledger device</1>",
+    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
   },
   "emptyState": {
     "sidebar": {
@@ -346,9 +343,22 @@
     "title": "Ajustes",
     "tabs": {
       "display": "General",
+      "export": "Export accounts",
       "currencies": "Monedas",
       "help": "Ayuda",
       "about": "Acerca de..."
+    },
+    "export": {
+      "desc": "Import accounts on your Ledger Live Mobile app",
+      "button": "Export",
+      "modal": {
+        "button": "Done",
+        "title": "Scan to export to mobile",
+        "listTitle": "To import accounts on your Ledger Live Mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in Accounts",
+        "step2": "Tap <1><0>Import desktop accounts</0></1>",
+        "step3": "Scan until the loader hits 100%"
+      }
     },
     "display": {
       "desc": "Configure general Ledger Live settings.",
