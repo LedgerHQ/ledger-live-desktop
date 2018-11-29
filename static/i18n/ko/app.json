@@ -138,12 +138,9 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
-    "step1": {
-      "connect": "<1>Ledger 장치</1> 연결 및 잠금 해제"
-    },
-    "step2": {
-      "open": "장치에서 <1><0>{{managerAppName}}</0></1> 앱 열기"
-    }
+    "step1": "Connect and unlock your <1>Ledger device</1>",
+    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
   },
   "emptyState": {
     "sidebar": {
@@ -346,9 +343,22 @@
     "title": "설정",
     "tabs": {
       "display": "일반",
+      "export": "Export accounts",
       "currencies": "통화",
       "help": "도움말",
       "about": "소개"
+    },
+    "export": {
+      "desc": "Import accounts on your Ledger Live Mobile app",
+      "button": "Export",
+      "modal": {
+        "button": "Done",
+        "title": "Scan to export to mobile",
+        "listTitle": "To import accounts on your Ledger Live Mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in Accounts",
+        "step2": "Tap <1><0>Import desktop accounts</0></1>",
+        "step3": "Scan until the loader hits 100%"
+      }
     },
     "display": {
       "desc": "Configure general Ledger Live settings.",
