@@ -9,6 +9,8 @@ jobs:
   build:
     <<: *defaults
     steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y libudev-dev
       - run:
           name: Install latest yarn
           command: |
@@ -19,10 +21,10 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - v11-yarn-packages-{{ checksum "yarn.lock" }}
+            - v12-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v11-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v12-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - run: yarn lint
