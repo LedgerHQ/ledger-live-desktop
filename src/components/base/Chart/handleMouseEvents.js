@@ -5,7 +5,7 @@ import * as d3 from 'd3'
 import { renderToString } from 'react-dom/server'
 import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
-import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/currencies'
 
 import createStore from 'renderer/createStore'
 

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { BigNumber } from 'bignumber.js'
 
 import type { Account } from '@ledgerhq/live-common/lib/types'
-import { getBalanceHistorySum } from '@ledgerhq/live-common/lib/helpers/account'
+import { getBalanceHistorySum } from '@ledgerhq/live-common/lib/account'
 import CounterValues from 'helpers/countervalues'
 import {
   exchangeSettingsForAccountSelector,

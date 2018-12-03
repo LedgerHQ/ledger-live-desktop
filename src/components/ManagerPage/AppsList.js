@@ -7,15 +7,13 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import type { Device, T } from 'types/common'
-import type { Application, ApplicationVersion, DeviceInfo } from 'helpers/types'
+import type { ApplicationVersion, DeviceInfo } from 'helpers/types'
+import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 import { developerModeSelector } from 'reducers/settings'
-
 import listApps from 'commands/listApps'
 import listAppVersions from 'commands/listAppVersions'
-
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
-
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
 import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
@@ -26,13 +24,11 @@ import Spinner from 'components/base/Spinner'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
 import TrackPage from 'analytics/TrackPage'
-
 import IconInfoCircle from 'icons/InfoCircle'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Update from 'icons/Update'
 import Trash from 'icons/Trash'
 import CheckCircle from 'icons/CheckCircle'
-
 import { FreezeDeviceChangeEvents } from './HookDeviceChange'
 import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
@@ -71,6 +67,9 @@ type State = {
   mode: Mode,
 }
 
+const oldAppsInstallDisabled = ['ZenCash', 'Ripple']
+const canHandleInstall = c => !oldAppsInstallDisabled.includes(c.name)
+
 const LoadingApp = () => (
   <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>
     <Spinner size={16} color="rgba(0, 0, 0, 0.3)" />
@@ -99,29 +98,53 @@ class AppsList extends PureComponent<Props, State> {
 
   _unmounted = false
 
-  filterAppVersions = (applicationsList, compatibleAppVersionsList) => {
-    if (!this.props.isDevMode) {
-      return compatibleAppVersionsList.filter(version => {
-        const app = applicationsList.find(e => e.id === version.app)
-        if (app) {
-          return app.category !== 2
-        }
+  prepareAppList = ({ applicationsList, compatibleAppVersionsList, sortedCryptoCurrencies }) => {
+    const filtered = this.props.isDevMode
+      ? compatibleAppVersionsList.slice(0)
+      : compatibleAppVersionsList.filter(version => {
+          const app = applicationsList.find(e => e.id === version.app)
+          if (app) {
+            return app.category !== 2
+          }
 
-        return false
-      })
-    }
-    return compatibleAppVersionsList
+          return false
+        })
+
+    const sortedCryptoApps = []
+
+    // sort by crypto first
+    sortedCryptoCurrencies.forEach(crypto => {
+      const app = filtered.find(
+        item => item.name.toLowerCase() === crypto.managerAppName.toLowerCase(),
+      )
+      if (app) {
+        filtered.splice(filtered.indexOf(app), 1)
+        sortedCryptoApps.push(app)
+      }
+    })
+
+    return sortedCryptoApps.concat(filtered)
   }
 
   async fetchAppList() {
     try {
       const { deviceInfo } = this.props
-      const applicationsList: Array<Application> = await listApps.send().toPromise()
-      const compatibleAppVersionsList = await listAppVersions.send(deviceInfo).toPromise()
-      const filteredAppVersionsList = this.filterAppVersions(
+
+      const [
         applicationsList,
         compatibleAppVersionsList,
-      )
+        sortedCryptoCurrencies,
+      ] = await Promise.all([
+        listApps.send().toPromise(),
+        listAppVersions.send(deviceInfo).toPromise(),
+        getFullListSortedCryptoCurrencies(),
+      ])
+
+      const filteredAppVersionsList = this.prepareAppList({
+        applicationsList,
+        compatibleAppVersionsList,
+        sortedCryptoCurrencies,
+      })
 
       if (!this._unmounted) {
         this.setState({
@@ -191,7 +214,7 @@ class AppsList extends PureComponent<Props, State> {
                 </ModalTitle>
                 <ModalContent>
                   <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-                    {t(`app:manager.apps.${mode}`, { app })}
+                    {t(`manager.apps.${mode}`, { app })}
                   </Text>
                   <Box mt={6}>
                     <Progress style={{ width: '100%' }} infinite />
@@ -233,7 +256,7 @@ class AppsList extends PureComponent<Props, State> {
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
                   <Button primary onClick={this.handleCloseModal}>
-                    {t('app:common.close')}
+                    {t('common.close')}
                   </Button>
                 </ModalFooter>
               </Fragment>
@@ -252,7 +275,7 @@ class AppsList extends PureComponent<Props, State> {
                     style={{ maxWidth: 350 }}
                   >
                     {t(
-                      `app:manager.apps.${
+                      `manager.apps.${
                         mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'
                       }`,
                       { app },
@@ -261,7 +284,7 @@ class AppsList extends PureComponent<Props, State> {
                 </ModalContent>
                 <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
                   <Button primary onClick={this.handleCloseModal}>
-                    {t('app:common.close')}
+                    {t('common.close')}
                   </Button>
                 </ModalFooter>
               </Fragment>
@@ -285,7 +308,7 @@ class AppsList extends PureComponent<Props, State> {
                   name={c.name}
                   version={`Version ${c.version}`}
                   icon={ICONS_FALLBACK[c.icon] || c.icon}
-                  onInstall={this.handleInstallApp(c)}
+                  onInstall={canHandleInstall(c) ? this.handleInstallApp(c) : null}
                   onUninstall={this.handleUninstallApp(c)}
                 />
               ))}
@@ -319,11 +342,11 @@ class AppsList extends PureComponent<Props, State> {
       <Box flow={6}>
         <Box>
           <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal align="center">
-            <span style={{ lineHeight: 1 }}>{t('app:manager.apps.all')}</span>
+            <span style={{ lineHeight: 1 }}>{t('manager.apps.all')}</span>
             <Tooltip
               render={() => (
                 <Box ff="Open Sans|SemiBold" fontSize={2}>
-                  {t('app:manager.apps.help')}
+                  {t('manager.apps.help')}
                 </Box>
               )}
             >

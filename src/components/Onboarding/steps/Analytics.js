@@ -7,10 +7,13 @@ import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import Switch from 'components/base/Switch'
 import FakeLink from 'components/base/FakeLink'
+import { Trans } from 'react-i18next'
 import TrackPage from 'analytics/TrackPage'
 import Track from 'analytics/Track'
 import { openModal } from 'reducers/modals'
 import { MODAL_SHARE_ANALYTICS, MODAL_TECHNICAL_DATA } from 'config/constants'
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/urls'
 import ShareAnalytics from '../../modals/ShareAnalytics'
 import TechnicalData from '../../modals/TechnicalData'
 import { Title, Description, FixedTopContainer, StepContainerInner } from '../helperComponents'
@@ -26,7 +29,7 @@ type State = {
 }
 
 const INITIAL_STATE = {
-  analyticsToggle: false,
+  analyticsToggle: true,
   sentryLogsToggle: true,
 }
 
@@ -45,6 +48,9 @@ class Analytics extends PureComponent<StepProps, State> {
       shareAnalytics: isChecked,
     })
   }
+
+  onClickTerms = () => openURL(urls.terms)
+  onClickPrivacy = () => openURL(urls.privacyPolicy)
 
   handleNavBack = () => {
     const { savePassword, prevStep } = this.props
@@ -70,13 +76,15 @@ class Analytics extends PureComponent<StepProps, State> {
           deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
         />
         <StepContainerInner>
-          <Title data-e2e="onboarding_title">{t('onboarding:analytics.title')}</Title>
-          <Description>{t('onboarding:analytics.desc')}</Description>
+          <Title data-e2e="onboarding_title">{t('onboarding.analytics.title')}</Title>
+          <Description>{t('onboarding.analytics.desc')}</Description>
           <Box mt={5}>
             <Container>
               <Box>
                 <Box horizontal mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.technicalData.title')}</AnalyticsTitle>
+                  <AnalyticsTitle data-e2e="analytics_techData">
+                    {t('onboarding.analytics.technicalData.title')}
+                  </AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
                       underline
@@ -84,15 +92,16 @@ class Analytics extends PureComponent<StepProps, State> {
                       color="smoke"
                       ml={2}
                       onClick={this.handleTechnicalDataModal}
+                      data-e2e="analytics_techData_Link"
                     >
-                      {t('app:common.learnMore')}
+                      {t('common.learnMore')}
                     </FakeLink>
                   </LearnMoreWrapper>
                 </Box>
                 <TechnicalData />
-                <AnalyticsText>{t('onboarding:analytics.technicalData.desc')}</AnalyticsText>
+                <AnalyticsText>{t('onboarding.analytics.technicalData.desc')}</AnalyticsText>
                 <MandatoryText>
-                  {t('onboarding:analytics.technicalData.mandatoryText')}
+                  {t('onboarding.analytics.technicalData.mandatoryText')}
                 </MandatoryText>
               </Box>
               <Box justifyContent="center">
@@ -102,7 +111,9 @@ class Analytics extends PureComponent<StepProps, State> {
             <Container>
               <Box>
                 <Box horizontal mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.shareAnalytics.title')}</AnalyticsTitle>
+                  <AnalyticsTitle data-e2e="analytics_shareAnalytics">
+                    {t('onboarding.analytics.shareAnalytics.title')}
+                  </AnalyticsTitle>
                   <LearnMoreWrapper>
                     <FakeLink
                       style={{ textDecoration: 'underline' }}
@@ -110,13 +121,14 @@ class Analytics extends PureComponent<StepProps, State> {
                       color="smoke"
                       ml={2}
                       onClick={this.handleShareAnalyticsModal}
+                      data-e2e="analytics_shareAnalytics_Link"
                     >
-                      {t('app:common.learnMore')}
+                      {t('common.learnMore')}
                     </FakeLink>
                   </LearnMoreWrapper>
                   <ShareAnalytics />
                 </Box>
-                <AnalyticsText>{t('onboarding:analytics.shareAnalytics.desc')}</AnalyticsText>
+                <AnalyticsText>{t('onboarding.analytics.shareAnalytics.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
                 <Track
@@ -133,9 +145,11 @@ class Analytics extends PureComponent<StepProps, State> {
             <Container>
               <Box>
                 <Box mb={1}>
-                  <AnalyticsTitle>{t('onboarding:analytics.sentryLogs.title')}</AnalyticsTitle>
+                  <AnalyticsTitle data-e2e="analytics_reportBugs">
+                    {t('onboarding.analytics.sentryLogs.title')}
+                  </AnalyticsTitle>
                 </Box>
-                <AnalyticsText>{t('onboarding:analytics.sentryLogs.desc')}</AnalyticsText>
+                <AnalyticsText>{t('onboarding.analytics.sentryLogs.desc')}</AnalyticsText>
               </Box>
               <Box justifyContent="center">
                 <Track
@@ -147,6 +161,26 @@ class Analytics extends PureComponent<StepProps, State> {
                   }
                 />
                 <Switch isChecked={sentryLogsToggle} onChange={this.handleSentryLogsToggle} />
+              </Box>
+            </Container>
+            <Container>
+              <Box>
+                <Box mb={1}>
+                  <AnalyticsTitle data-e2e="analytics_terms">
+                    {t('onboarding.analytics.terms.title')}
+                  </AnalyticsTitle>
+                </Box>
+                <AnalyticsText>
+                  <div>
+                    <Trans i18nKey="onboarding.analytics.terms.desc">
+                      {'Accept the '}
+                      <HoveredLink onClick={this.onClickTerms}>{'terms of license'}</HoveredLink>
+                      {'and'}
+                      <HoveredLink onClick={this.onClickPrivacy}>{'privacy'}</HoveredLink>
+                      {'.'}
+                    </Trans>
+                  </div>
+                </AnalyticsText>
               </Box>
             </Container>
           </Box>
@@ -196,8 +230,16 @@ const Container = styled(Box).attrs({
   width: 550px;
   justify-content: space-between;
 `
-const LearnMoreWrapper = styled(Box).attrs({})`
+const LearnMoreWrapper = styled(Box)`
   ${FakeLink}:hover {
+    color: ${p => p.theme.colors.wallet};
+  }
+`
+
+const HoveredLink = styled.span`
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover {
     color: ${p => p.theme.colors.wallet};
   }
 `

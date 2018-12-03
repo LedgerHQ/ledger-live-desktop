@@ -128,38 +128,30 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     }
   }
 
-  formatHashName = (hash: string): string[] => {
+  formatHashName = (hash: string): string => {
     if (!hash) {
-      return []
+      return ''
     }
 
-    const length = hash.length
-    const half = Math.ceil(length / 2)
-    const start = hash.slice(0, half)
-    const end = hash.slice(half)
-    return [start, end]
+    hash = hash.toUpperCase()
+    return hash.length > 8 ? `${hash.slice(0, 4)}...${hash.substr(-4)}` : hash
   }
 
   renderBody = () => {
     const { installing } = this.state
     const { t, firmware } = this.props
-
     return installing ? (
       <Installing />
     ) : (
       <Fragment>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
-          {t('app:manager.modal.confirmIdentifierText')}
+          {t('manager.modal.confirmIdentifierText')}
         </Text>
         <Box mx={7} mt={5}>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
-            {t('app:manager.modal.identifier')}
+            {t('manager.modal.identifier')}
           </Text>
-          <Address>
-            {firmware &&
-              firmware.hash &&
-              this.formatHashName(firmware.hash.toUpperCase()).join('\n')}
-          </Address>
+          <Address>{firmware && this.formatHashName(firmware.hash)}</Address>
         </Box>
         <Box mt={5}>
           <DeviceConfirm />
@@ -175,7 +167,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     const { t } = this.props
     return (
       <Container>
-        <Title>{installing ? '' : t('app:manager.modal.confirmIdentifier')}</Title>
+        <Title>{installing ? '' : t('manager.modal.confirmIdentifier')}</Title>
         <TrackPage category="Manager" name="InstallFirmware" />
         {this.renderBody()}
       </Container>

@@ -27,7 +27,7 @@ export function GenuineCheckUnavailableFooter({
   return (
     <OnboardingFooterWrapper>
       <Button outlineGrey onClick={() => prevStep()}>
-        {t('app:common.back')}
+        {t('common.back')}
       </Button>
       <Box horizontal ml="auto">
         <Button
@@ -36,10 +36,10 @@ export function GenuineCheckUnavailableFooter({
           onClick={() => nextStep()}
           mx={2}
         >
-          {t('app:common.skipThisStep')}
+          {t('common.skipThisStep')}
         </Button>
         <Button onClick={nextStep} disabled primary>
-          {t('app:common.continue')}
+          {t('common.continue')}
         </Button>
       </Box>
     </OnboardingFooterWrapper>
@@ -81,7 +81,7 @@ export function GenuineCheckUnavailableMessage({
           })
         }}
       >
-        {t('app:common.retry')}
+        {t('common.retry')}
       </FakeLink>
     </Box>
   )

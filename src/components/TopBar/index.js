@@ -21,6 +21,7 @@ import IconSettings from 'icons/Settings'
 import Box from 'components/base/Box'
 import GlobalSearch from 'components/GlobalSearch'
 import Tooltip from 'components/base/Tooltip'
+import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
 
 import ActivityIndicator from './ActivityIndicator'
 import ItemContainer from './ItemContainer'
@@ -101,6 +102,7 @@ class TopBar extends PureComponent<Props> {
         <Inner>
           <Box grow horizontal>
             <GlobalSearch t={t} isHidden />
+            <CurrenciesStatusBanner />
             {hasAccounts && (
               <Fragment>
                 <ActivityIndicator />
@@ -109,7 +111,7 @@ class TopBar extends PureComponent<Props> {
                 </Box>
               </Fragment>
             )}
-            <Tooltip render={() => t('app:settings.title')} data-e2e="setting_button">
+            <Tooltip render={() => t('settings.title')} data-e2e="setting_button">
               <ItemContainer isInteractive onClick={this.navigateToSettings}>
                 <IconSettings size={16} />
               </ItemContainer>
@@ -119,7 +121,7 @@ class TopBar extends PureComponent<Props> {
                 <Box justifyContent="center">
                   <Bar />
                 </Box>
-                <Tooltip render={() => t('app:common.lock')}>
+                <Tooltip render={() => t('common.lock')}>
                   <ItemContainer isInteractive justifyContent="center" onClick={this.handleLock}>
                     <IconLock size={16} />
                   </ItemContainer>

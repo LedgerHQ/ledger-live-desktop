@@ -6,7 +6,7 @@ import logger from 'logger'
 import { LedgerAPIErrorWithMessage, LedgerAPIError, NetworkDown } from 'config/errors'
 import anonymizer from 'helpers/anonymizer'
 
-const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime }): Promise<A> =>
+const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime, ...rest }): Promise<A> =>
   p.catch(error => {
     let errorToThrow
     if (error.response) {
@@ -47,6 +47,7 @@ const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime }): Promis
         })
       }
       logger.networkError({
+        ...rest,
         status,
         url,
         method,
@@ -80,6 +81,7 @@ let implementation = (arg: Object) => {
   const meta = {
     url: arg.url,
     method: arg.method,
+    data: arg.data,
     startTime: Date.now(),
   }
   logger.network(meta)

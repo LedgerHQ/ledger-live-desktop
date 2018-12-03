@@ -49,53 +49,44 @@ class TabGeneral extends PureComponent<Props> {
         <TrackPage category="Settings" name="Display" />
         <Header
           icon={<IconDisplay size={16} />}
-          title={t('app:settings.tabs.display')}
-          desc={t('app:settings.display.desc')}
+          title={t('settings.tabs.display')}
+          desc={t('settings.display.desc')}
         />
         <Body>
           <Row
-            title={t('app:settings.display.counterValue')}
-            desc={t('app:settings.display.counterValueDesc')}
+            title={t('settings.display.counterValue')}
+            desc={t('settings.display.counterValueDesc')}
           >
             <CounterValueSelect />
           </Row>
           <Row
-            title={t('app:settings.display.exchange', {
+            title={t('settings.display.exchange', {
               ticker: counterValueCurrency.ticker,
               fiat: counterValueCurrency.name,
             })}
-            desc={t('app:settings.display.exchangeDesc', {
+            desc={t('settings.display.exchangeDesc', {
               fiat: counterValueCurrency.name,
               ticker: counterValueCurrency.ticker,
             })}
           >
             <CounterValueExchangeSelect />
           </Row>
-          <Row
-            title={t('app:settings.display.language')}
-            desc={t('app:settings.display.languageDesc')}
-          >
+          <Row title={t('settings.display.language')} desc={t('settings.display.languageDesc')}>
             <LanguageSelect />
           </Row>
           {useSystem ? null : (
-            <Row
-              title={t('app:settings.display.region')}
-              desc={t('app:settings.display.regionDesc')}
-            >
+            <Row title={t('settings.display.region')} desc={t('settings.display.regionDesc')}>
               <RegionSelect />
             </Row>
           )}
 
           {EXPERIMENTAL_MARKET_INDICATOR_SETTINGS ? (
-            <Row title={t('app:settings.display.stock')} desc={t('app:settings.display.stockDesc')}>
+            <Row title={t('settings.display.stock')} desc={t('settings.display.stockDesc')}>
               <MarketIndicatorRadio />
             </Row>
           ) : null}
 
-          <Row
-            title={t('app:settings.profile.password')}
-            desc={t('app:settings.profile.passwordDesc')}
-          >
+          <Row title={t('settings.profile.password')} desc={t('settings.profile.passwordDesc')}>
             <PasswordButton />
           </Row>
           {hasPassword ? (
@@ -107,20 +98,17 @@ class TabGeneral extends PureComponent<Props> {
             </Row>
           ) : null}
           <Row
-            title={t('app:settings.profile.reportErrors')}
-            desc={t('app:settings.profile.reportErrorsDesc')}
+            title={t('settings.profile.reportErrors')}
+            desc={t('settings.profile.reportErrorsDesc')}
           >
             <SentryLogsButton />
           </Row>
-          <Row
-            title={t('app:settings.profile.analytics')}
-            desc={t('app:settings.profile.analyticsDesc')}
-          >
+          <Row title={t('settings.profile.analytics')} desc={t('settings.profile.analyticsDesc')}>
             <ShareAnalyticsButton />
           </Row>
           <Row
-            title={t('app:settings.profile.developerMode')}
-            desc={t('app:settings.profile.developerModeDesc')}
+            title={t('settings.profile.developerMode')}
+            desc={t('settings.profile.developerModeDesc')}
           >
             <DevModeButton />
           </Row>

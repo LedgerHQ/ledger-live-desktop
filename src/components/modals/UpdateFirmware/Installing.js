@@ -20,12 +20,12 @@ function Installing({ t }: Props) {
       </Box>
       <Box mx={7} mt={4} mb={2}>
         <Text ff="Museo Sans|Regular" align="center" color="dark" fontSize={6}>
-          {t('app:manager.modal.installing')}
+          {t('manager.modal.installing')}
         </Text>
       </Box>
       <Box mx={7} mt={4} mb={7}>
         <Text ff="Open Sans|Regular" align="center" color="graphite" fontSize={4}>
-          {t('app:manager.modal.mcuPin')}
+          {t('manager.modal.mcuPin')}
         </Text>
       </Box>
     </Fragment>

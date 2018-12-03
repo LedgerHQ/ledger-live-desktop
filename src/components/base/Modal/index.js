@@ -186,8 +186,7 @@ export class Modal extends Component<Props> {
   focusWrapper = () => {
     // Forced to use findDOMNode here, because innerRef is giving a proxied component
     const domWrapper = findDOMNode(this._wrapper) // eslint-disable-line react/no-find-dom-node
-
-    if (domWrapper instanceof HTMLDivElement) {
+    if (domWrapper instanceof HTMLDivElement && !domWrapper.contains(this._lastFocusedElement)) {
       domWrapper.focus()
     }
   }

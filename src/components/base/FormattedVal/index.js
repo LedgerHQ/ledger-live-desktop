@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import type { Unit } from '@ledgerhq/live-common/lib/types'
 import type { State } from 'reducers'
 
-import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/currencies'
 
 import { marketIndicatorSelector, localeSelector } from 'reducers/settings'
 

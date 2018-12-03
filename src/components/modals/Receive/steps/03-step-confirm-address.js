@@ -34,13 +34,13 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
           </Fragment>
         ) : (
           <Fragment>
-            <Title>{t('app:receive.steps.confirmAddress.action')}</Title>
+            <Title>{t('receive.steps.confirmAddress.action')}</Title>
             <Text>
               {account &&
-                t('app:receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
+                t('receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
             </Text>
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
-              {t('app:common.verify')}
+              {t('common.verify')}
             </Button>
             <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
           </Fragment>
@@ -56,7 +56,7 @@ export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps
     <Fragment>
       <ExternalLinkButton
         event="Receive Flow Step 3 Contact Us Clicked"
-        label={t('app:receive.steps.confirmAddress.support')}
+        label={t('receive.steps.confirmAddress.support')}
         url={urls.contactSupport}
       />
       <RetryButton

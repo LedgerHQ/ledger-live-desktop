@@ -79,14 +79,14 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
     if (notes) {
       return notes.map(note => (
         <Notes mb={6} key={note.tag_name}>
-          <Title>{t('app:releaseNotes.version', { versionNb: note.tag_name })}</Title>
+          <Title>{t('releaseNotes.version', { versionNb: note.tag_name })}</Title>
           <Markdown>{note.body}</Markdown>
         </Notes>
       ))
     } else if (error) {
       return (
         <Notes>
-          <Title>{t('app:releaseNotes.version', { versionNb: version })}</Title>
+          <Title>{t('releaseNotes.version', { versionNb: version })}</Title>
           <Box
             style={{ wordWrap: 'break-word' }}
             color="alertRed"
@@ -117,7 +117,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
     return (
       <ModalBody onClose={onClose}>
         <TrackPage category="Modal" name="ReleaseNotes" />
-        <ModalTitle>{t('app:releaseNotes.title')}</ModalTitle>
+        <ModalTitle>{t('releaseNotes.title')}</ModalTitle>
         <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
           <GrowScroll px={5} pb={8}>
             {this.renderContent()}
@@ -126,7 +126,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
         </ModalContent>
         <ModalFooter horizontal justifyContent="flex-end">
           <Button onClick={onClose} primary>
-            {t('app:common.continue')}
+            {t('common.continue')}
           </Button>
         </ModalFooter>
       </ModalBody>

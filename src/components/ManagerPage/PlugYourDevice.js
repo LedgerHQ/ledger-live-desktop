@@ -22,12 +22,12 @@ function PlugYourDevice(props: Props) {
       <Box align="center" style={{ width: 365 }}>
         <Box mb={5}>hey</Box>
         <Box textAlign="center" mb={1} ff="Museo Sans|Regular" color="dark" fontSize={6}>
-          {t('app:manager.device.title')}
+          {t('manager.device.title')}
         </Box>
         <Box textAlign="center" mb={5} ff="Open Sans|Regular" color="smoke" fontSize={4}>
-          {t('app:manager.device.desc')}
+          {t('manager.device.desc')}
         </Box>
-        <Button primary>{t('app:manager.device.cta')}</Button>
+        <Button primary>{t('manager.device.cta')}</Button>
       </Box>
     </Card>
   )

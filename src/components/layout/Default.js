@@ -20,6 +20,7 @@ import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
 import ManagerPage from 'components/ManagerPage'
 import ExchangePage from 'components/ExchangePage'
+import DevToolsPage from 'components/DevToolsPage'
 import SettingsPage from 'components/SettingsPage'
 import KeyboardContent from 'components/KeyboardContent'
 import PerfIndicator from 'components/PerfIndicator'
@@ -112,6 +113,7 @@ class Default extends Component<Props> {
                   <Route path="/manager" component={ManagerPage} />
                   <Route path="/exchange" component={ExchangePage} />
                   <Route path="/account/:id" component={AccountPage} />
+                  <Route path="/dev" component={DevToolsPage} />
                 </Main>
               </Box>
             </Box>

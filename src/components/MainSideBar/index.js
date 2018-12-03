@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
@@ -19,6 +19,7 @@ import { i } from 'helpers/staticPath'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { getUpdateStatus } from 'reducers/update'
+import { developerModeSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
@@ -34,10 +35,12 @@ import IconExchange from 'icons/Exchange'
 import AccountListItem from './AccountListItem'
 import AddAccountButton from './AddAccountButton'
 import TopGradient from './TopGradient'
+import KeyboardContent from '../KeyboardContent'
 
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
   updateStatus: getUpdateStatus(state),
+  developerMode: developerModeSelector(state),
 })
 
 const mapDispatchToProps = {
@@ -52,7 +55,25 @@ type Props = {
   push: string => void,
   openModal: string => void,
   updateStatus: UpdateStatus,
+  developerMode: boolean,
 }
+
+const IconDev = () => (
+  <div
+    style={{
+      width: 16,
+      height: 16,
+      fontSize: 10,
+      fontFamily: 'monospace',
+      fontWeight: 'bold',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    {'DEV'}
+  </div>
+)
 
 class MainSideBar extends PureComponent<Props> {
   push = (to: string) => {
@@ -66,29 +87,27 @@ class MainSideBar extends PureComponent<Props> {
     push(to)
   }
 
-  ADD_ACCOUNT_EMPTY_STATE = (
-    <Box relative pr={3}>
-      <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
-      {this.props.t('app:emptyState.sidebar.text')}
-    </Box>
-  )
-
   handleClickDashboard = () => this.push('/')
   handleOpenSendModal = () => this.props.openModal(MODAL_SEND)
   handleOpenReceiveModal = () => this.props.openModal(MODAL_RECEIVE)
   handleClickManager = () => this.push('/manager')
   handleClickExchange = () => this.push('/exchange')
+  handleClickDev = () => this.push('/dev')
   handleOpenImportModal = () => this.props.openModal(MODAL_ADD_ACCOUNTS)
 
   render() {
-    const { t, accounts, location, updateStatus } = this.props
+    const { t, accounts, location, updateStatus, developerMode } = this.props
     const { pathname } = location
 
     const addAccountButton = (
-      <AddAccountButton
-        tooltipText={t('app:addAccounts.title')}
-        onClick={this.handleOpenImportModal}
-      />
+      <AddAccountButton tooltipText={t('addAccounts.title')} onClick={this.handleOpenImportModal} />
+    )
+
+    const emptyState = (
+      <Box relative pr={3}>
+        <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
+        <Trans i18nKey="emptyState.sidebar.text" />
+      </Box>
     )
 
     return (
@@ -96,9 +115,9 @@ class MainSideBar extends PureComponent<Props> {
         <TopGradient />
         <GrowScroll>
           <Space of={70} />
-          <SideBarList title={t('app:sidebar.menu')}>
+          <SideBarList title={t('sidebar.menu')}>
             <SideBarListItem
-              label={t('app:dashboard.title')}
+              label={t('dashboard.title')}
               icon={IconPieChart}
               iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
@@ -106,39 +125,50 @@ class MainSideBar extends PureComponent<Props> {
               hasNotif={updateStatus === 'downloaded'}
             />
             <SideBarListItem
-              label={t('app:send.title')}
+              label={t('send.title')}
               icon={IconSend}
               iconActiveColor="wallet"
               onClick={this.handleOpenSendModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
-              label={t('app:receive.title')}
+              label={t('receive.title')}
               icon={IconReceive}
               iconActiveColor="wallet"
               onClick={this.handleOpenReceiveModal}
               disabled={accounts.length === 0}
             />
             <SideBarListItem
-              label={t('app:sidebar.manager')}
+              label={t('sidebar.manager')}
               icon={IconManager}
               iconActiveColor="wallet"
               onClick={this.handleClickManager}
               isActive={pathname === '/manager'}
             />
             <SideBarListItem
-              label={t('app:sidebar.exchange')}
+              label={t('sidebar.exchange')}
               icon={IconExchange}
               iconActiveColor="wallet"
               onClick={this.handleClickExchange}
               isActive={pathname === '/exchange'}
             />
+            {developerMode && (
+              <KeyboardContent sequence="DEVTOOLS">
+                <SideBarListItem
+                  label={t('sidebar.developer')}
+                  icon={IconDev}
+                  iconActiveColor="wallet"
+                  onClick={this.handleClickDev}
+                  isActive={pathname === '/dev'}
+                />
+              </KeyboardContent>
+            )}
           </SideBarList>
           <Space of={40} />
           <SideBarList
-            title={t('app:sidebar.accounts', { count: accounts.length })}
+            title={t('sidebar.accounts', { count: accounts.length })}
             titleRight={addAccountButton}
-            emptyState={this.ADD_ACCOUNT_EMPTY_STATE}
+            emptyState={emptyState}
           >
             {accounts.map(account => (
               <AccountListItem

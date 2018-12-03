@@ -9,18 +9,25 @@ jobs:
   build:
     <<: *defaults
     steps:
+      - run: sudo apt-get update
       - run: sudo apt-get install -y libudev-dev
+      - run:
+          name: Install latest yarn
+          command: |
+            curl -sS http://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - ;
+            echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list ;
+            sudo apt-get update && sudo apt-get install yarn
+            sudo rm /usr/local/bin/yarn # remove docker yarn
       - checkout
       - restore_cache:
           keys:
-            - v7-yarn-packages-{{ checksum "yarn.lock" }}
+            - v12-yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
       - save_cache:
-          key: v7-yarn-packages-{{ checksum "yarn.lock" }}
+          key: v12-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
       - run: yarn lint
       - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
       - run: yarn flow --quiet
       - run: yarn test
-      - run: yarn release

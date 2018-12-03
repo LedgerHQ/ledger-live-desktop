@@ -29,6 +29,7 @@ let busy = false
 TransportNodeHid.setListenDevicesPollingSkip(() => busy)
 
 const refreshBusyUIState = throttle(() => {
+  if (process.env.CLI) return
   process.send({
     type: 'setDeviceBusy',
     busy,

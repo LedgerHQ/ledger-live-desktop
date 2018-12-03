@@ -8,28 +8,37 @@ import AdvancedOptions from 'components/AdvancedOptions/EthereumKind'
 import throttle from 'lodash/throttle'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
+import {
+  getDerivationModesForCurrency,
+  getDerivationScheme,
+  runDerivationScheme,
+  isIterableDerivationMode,
+  getMandatoryEmptyAccountSkip,
+} from '@ledgerhq/live-common/lib/derivation'
+import {
+  getAccountPlaceholderName,
+  getNewAccountPlaceholderName,
+} from '@ledgerhq/live-common/lib/account'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import eip55 from 'eip55'
 import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
-import { getDerivations } from 'helpers/derivations'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
-import { getAccountPlaceholderName, getNewAccountPlaceholderName } from 'helpers/accountName'
-import { NotEnoughBalance, ETHAddressNonEIP } from 'config/errors'
+import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from 'config/errors'
 import type { EditProps, WalletBridge } from './types'
 
 type Transaction = {
   recipient: string,
   amount: BigNumber,
-  gasPrice: BigNumber,
+  gasPrice: ?BigNumber,
   gasLimit: BigNumber,
 }
 
 const serializeTransaction = t => ({
   recipient: t.recipient,
   amount: `0x${BigNumber(t.amount).toString(16)}`,
-  gasPrice: `0x${BigNumber(t.gasPrice).toString(16)}`,
+  gasPrice: !t.gasPrice ? '0x00' : `0x${BigNumber(t.gasPrice).toString(16)}`,
   gasLimit: `0x${BigNumber(t.gasLimit).toString(16)}`,
 })
 
@@ -64,7 +73,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
   const value = BigNumber(tx.value)
   const fee = BigNumber(tx.gas_price * tx.gas_used)
   if (sending) {
-    ops.push({
+    const op: $Exact<Operation> = {
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
@@ -76,10 +85,12 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       senders: [tx.from],
       recipients: [tx.to],
       date: new Date(tx.received_at),
-    })
+      extra: {},
+    }
+    ops.push(op)
   }
   if (receiving) {
-    ops.push({
+    const op: $Exact<Operation> = {
       id: `${account.id}-${tx.hash}-IN`,
       hash: tx.hash,
       type: 'IN',
@@ -91,7 +102,9 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       senders: [tx.from],
       recipients: [tx.to],
       date: new Date(new Date(tx.received_at) + 1), // hack: make the IN appear after the OUT in history.
-    })
+      extra: {},
+    }
+    ops.push(op)
   }
   return ops
 }
@@ -140,6 +153,8 @@ const signAndBroadcast = async ({
   onSigned,
   onOperationBroadcasted,
 }) => {
+  const { gasPrice, amount, gasLimit } = t
+  if (!gasPrice) throw new FeeNotLoaded()
   const api = apiForCurrency(a.currency)
 
   const nonce = await api.getAccountNonce(a.freshAddress)
@@ -158,12 +173,12 @@ const signAndBroadcast = async ({
 
     const hash = await api.broadcastTransaction(transaction)
 
-    onOperationBroadcasted({
+    const op: $Exact<Operation> = {
       id: `${a.id}-${hash}-OUT`,
       hash,
       type: 'OUT',
-      value: t.amount,
-      fee: t.gasPrice.times(t.gasLimit),
+      value: amount,
+      fee: gasPrice.times(gasLimit),
       blockHeight: null,
       blockHash: null,
       accountId: a.id,
@@ -171,7 +186,10 @@ const signAndBroadcast = async ({
       recipients: [t.recipient],
       transactionSequenceNumber: nonce,
       date: new Date(),
-    })
+      extra: {},
+    }
+
+    onOperationBroadcasted(op)
   }
 }
 
@@ -208,8 +226,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
       async function stepAddress(
         index,
-        { address, path: freshAddressPath, publicKey },
-        isStandard,
+        { address, path: freshAddressPath },
+        derivationMode,
         shouldSkipEmpty,
       ): { account?: Account, complete?: boolean } {
         const balance = await api.getAccountBalance(address)
@@ -220,19 +238,21 @@ const EthereumBridge: WalletBridge<Transaction> = {
         if (finished) return { complete: true }
 
         const freshAddress = address
-        const accountId = `ethereumjs:${currency.id}:${address}:${publicKey}`
+        const accountId = `ethereumjs:2:${currency.id}:${address}:${derivationMode}`
 
         if (txs.length === 0 && balance.isZero()) {
           // this is an empty account
-          if (isStandard) {
+          if (derivationMode === '') {
+            // is standard derivation
             if (newAccountCount === 0) {
               // first zero account will emit one account as opportunity to create a new account..
               const account: $Exact<Account> = {
                 id: accountId,
-                xpub: '',
+                seedIdentifier: freshAddress,
                 freshAddress,
                 freshAddressPath,
-                name: getNewAccountPlaceholderName(currency, index),
+                derivationMode,
+                name: getNewAccountPlaceholderName({ currency, index, derivationMode }),
                 balance,
                 blockHeight: currentBlock.height,
                 index,
@@ -256,10 +276,11 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
         const account: $Exact<Account> = {
           id: accountId,
-          xpub: '',
+          seedIdentifier: freshAddress,
           freshAddress,
           freshAddressPath,
-          name: getAccountPlaceholderName(currency, index, !isStandard),
+          derivationMode,
+          name: getAccountPlaceholderName({ currency, index, derivationMode }),
           balance,
           blockHeight: currentBlock.height,
           index,
@@ -286,21 +307,23 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
       async function main() {
         try {
-          const derivations = getDerivations(currency)
-          const last = derivations[derivations.length - 1]
-          for (const derivation of derivations) {
-            const isStandard = last === derivation
+          const derivationModes = getDerivationModesForCurrency(currency)
+          for (const derivationMode of derivationModes) {
             let emptyCount = 0
-            const mandatoryEmptyAccountSkip = derivation.mandatoryEmptyAccountSkip || 0
-            for (let index = 0; index < 255; index++) {
-              const freshAddressPath = derivation({ currency, x: index, segwit: false })
+            const mandatoryEmptyAccountSkip = getMandatoryEmptyAccountSkip(derivationMode)
+            const derivationScheme = getDerivationScheme({ derivationMode, currency })
+            const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
+            for (let index = 0; index < stopAt; index++) {
+              const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
+                account: index,
+              })
               const res = await getAddressCommand
                 .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
                 .toPromise()
               const r = await stepAddress(
                 index,
                 res,
-                isStandard,
+                derivationMode,
                 emptyCount < mandatoryEmptyAccountSkip,
               )
               logger.log(
@@ -402,7 +425,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
-    gasPrice: BigNumber(0),
+    gasPrice: null,
     gasLimit: BigNumber(0x5208),
   }),
 
@@ -420,23 +443,27 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
-
   EditFees,
 
   EditAdvancedOptions,
 
-  checkCanBeSpent: (a, t) =>
-    t.amount.isLessThanOrEqualTo(a.balance)
-      ? Promise.resolve()
-      : Promise.reject(new NotEnoughBalance()),
+  checkValidTransaction: (a, t) =>
+    !t.gasPrice
+      ? Promise.reject(new FeeNotLoaded())
+      : t.amount.isLessThanOrEqualTo(a.balance)
+        ? Promise.resolve(true)
+        : Promise.reject(new NotEnoughBalance()),
 
   getTotalSpent: (a, t) =>
-    t.amount.isGreaterThan(0) && t.gasPrice.isGreaterThan(0) && t.gasLimit.isGreaterThan(0)
+    t.amount.isGreaterThan(0) &&
+    t.gasPrice &&
+    t.gasPrice.isGreaterThan(0) &&
+    t.gasLimit.isGreaterThan(0)
       ? Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit)))
       : Promise.resolve(BigNumber(0)),
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.gasPrice.times(t.gasLimit))),
+  getMaxAmount: (a, t) =>
+    Promise.resolve(a.balance.minus((t.gasPrice || BigNumber(0)).times(t.gasLimit))),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {

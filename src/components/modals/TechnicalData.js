@@ -20,23 +20,15 @@ class TechnicalData extends PureComponent<Props, *> {
     const items = [
       {
         key: 'item1',
-        desc: t('onboarding:analytics.technicalData.mandatoryContextual.item1'),
+        desc: t('onboarding.analytics.technicalData.mandatoryContextual.item1'),
       },
       {
         key: 'item2',
-        desc: t('onboarding:analytics.technicalData.mandatoryContextual.item2'),
+        desc: t('onboarding.analytics.technicalData.mandatoryContextual.item2'),
       },
       {
         key: 'item3',
-        desc: t('onboarding:analytics.technicalData.mandatoryContextual.item3'),
-      },
-      {
-        key: 'item4',
-        desc: t('onboarding:analytics.technicalData.mandatoryContextual.item4'),
-      },
-      {
-        key: 'item5',
-        desc: t('onboarding:analytics.technicalData.mandatoryContextual.item5'),
+        desc: t('onboarding.analytics.technicalData.mandatoryContextual.item3'),
       },
     ]
 
@@ -45,16 +37,16 @@ class TechnicalData extends PureComponent<Props, *> {
         name={MODAL_TECHNICAL_DATA}
         render={({ onClose }) => (
           <ModalBody onClose={onClose}>
-            <ModalTitle>
-              {t('onboarding:analytics.technicalData.mandatoryContextual.title')}
+            <ModalTitle data-e2e="modal_title_TechData">
+              {t('onboarding.analytics.technicalData.mandatoryContextual.title')}
             </ModalTitle>
-            <InlineDesc>{t('onboarding:analytics.technicalData.desc')}</InlineDesc>
+            <InlineDesc>{t('onboarding.analytics.technicalData.desc')}</InlineDesc>
             <ModalContent mx={5}>
               <Ul>{items.map(item => <li key={item.key}>{item.desc}</li>)}</Ul>
             </ModalContent>
             <ModalFooter horizontal justifyContent="flex-end">
-              <Button onClick={onClose} primary>
-                {t('app:common.close')}
+              <Button onClick={onClose} primary data-e2e="modal_buttonClose_techData">
+                {t('common.close')}
               </Button>
             </ModalFooter>
           </ModalBody>

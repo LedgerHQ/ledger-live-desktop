@@ -27,14 +27,14 @@ const Dashboard = ({ device, deviceInfo, t, handleHelpRequest }: Props) => (
     <TrackPage category="Manager" name="Dashboard" />
     <Box>
       <Text ff="Museo Sans|Regular" fontSize={7} color="dark">
-        {t('app:manager.title')}
+        {t('manager.title')}
       </Text>
       <Box horizontal>
         <Text ff="Museo Sans|Light" fontSize={5}>
-          {t('app:manager.subtitle')}
+          {t('manager.subtitle')}
         </Text>
         <HelpLink onClick={handleHelpRequest}>
-          <div style={{ textDecoration: 'underline' }}>{t('app:common.needHelp')}</div>
+          <div style={{ textDecoration: 'underline' }}>{t('common.needHelp')}</div>
           <IconExternalLink size={14} />
         </HelpLink>
       </Box>

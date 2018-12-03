@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 
 import { urls } from 'config/urls'
 import { i } from 'helpers/staticPath'
-import hardReset from 'helpers/hardReset'
+import { hardReset } from 'helpers/reset'
 
 import type { T } from 'types/common'
 
@@ -75,7 +75,7 @@ class RenderError extends PureComponent<
         <img alt="" src={i('crash-screen.svg')} width={380} />
         <Space of={40} />
         <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
-          {t('app:crash.oops')}
+          {t('crash.oops')}
         </Box>
         <Space of={15} />
         <Box
@@ -85,25 +85,20 @@ class RenderError extends PureComponent<
           color="smoke"
           fontSize={4}
         >
-          {t('app:crash.uselessText')}
+          {t('crash.uselessText')}
         </Box>
         <Space of={30} />
         <Box horizontal flow={2}>
           <Button small primary onClick={this.handleRestart}>
-            {t('app:crash.restart')}
+            {t('crash.restart')}
           </Button>
           <ExportLogsBtn withoutAppData={withoutAppData} />
-          <ExternalLinkButton
-            small
-            primary
-            label={t('app:crash.support')}
-            url={urls.contactSupport}
-          />
+          <ExternalLinkButton small primary label={t('crash.support')} url={urls.contactSupport} />
           <Button small primary onClick={this.github}>
-            {t('app:crash.github')}
+            {t('crash.github')}
           </Button>
           <Button small danger onClick={this.handleOpenHardResetModal}>
-            {t('app:common.reset')}
+            {t('common.reset')}
           </Button>
         </Box>
         <ConfirmModal
@@ -114,9 +109,9 @@ class RenderError extends PureComponent<
           onClose={this.handleCloseHardResetModal}
           onReject={this.handleCloseHardResetModal}
           onConfirm={this.handleHardReset}
-          confirmText={t('app:common.reset')}
-          title={t('app:settings.hardResetModal.title')}
-          desc={t('app:settings.hardResetModal.desc')}
+          confirmText={t('common.reset')}
+          title={t('settings.hardResetModal.title')}
+          desc={t('settings.hardResetModal.desc')}
           renderIcon={this.hardResetIconRender}
         />
         <Box my={6}>

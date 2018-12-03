@@ -48,7 +48,7 @@ type OwnProps = {
   // left value (always the one which is returned)
   value: BigNumber,
 
-  canBeSpentError: ?Error,
+  validTransactionError: ?Error,
 
   // max left value
   max: BigNumber,
@@ -113,7 +113,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
 export class RequestAmount extends PureComponent<Props> {
   static defaultProps = {
     max: BigNumber(Infinity),
-    canBeSpent: true,
+    validTransaction: true,
     withMax: true,
   }
 
@@ -139,14 +139,14 @@ export class RequestAmount extends PureComponent<Props> {
 
   renderInputs(containerProps: Object) {
     // TODO move this inlined into render() for less spaghetti
-    const { value, account, rightCurrency, getCounterValue, canBeSpentError } = this.props
+    const { value, account, rightCurrency, getCounterValue, validTransactionError } = this.props
     const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
     // FIXME: no way InputCurrency pure can work here. inlined InputRight (should be static func?), inline containerProps object..
     return (
       <Box horizontal grow shrink>
         <InputCurrency
-          error={canBeSpentError}
+          error={validTransactionError}
           containerProps={containerProps}
           defaultUnit={account.unit}
           value={value}
@@ -180,7 +180,7 @@ export class RequestAmount extends PureComponent<Props> {
         {withMax && (
           <Box grow justify="flex-end">
             <Button primary onClick={this.handleClickMax}>
-              {t('app:common.max')}
+              {t('common.max')}
             </Button>
           </Box>
         )}

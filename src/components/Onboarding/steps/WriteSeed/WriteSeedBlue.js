@@ -31,14 +31,14 @@ class WriteSeedBlue extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.initialize.blue.step1'),
+        desc: t('onboarding.writeSeed.initialize.blue.step1'),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="onboarding:writeSeed.initialize.blue.step2">
+            <Trans i18nKey="onboarding.writeSeed.initialize.blue.step2">
               {'Tap'}
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'Next'}
@@ -55,37 +55,37 @@ class WriteSeedBlue extends PureComponent<Props, *> {
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding:writeSeed.initialize.blue.step3'),
+        desc: t('onboarding.writeSeed.initialize.blue.step3'),
       },
     ]
     const disclaimerNotes = [
       {
         key: 'note1',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note1'),
+        desc: t('onboarding.writeSeed.disclaimer.note1'),
       },
       {
         key: 'note2',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note2'),
+        desc: t('onboarding.writeSeed.disclaimer.note2'),
       },
       {
         key: 'note3',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note3'),
+        desc: t('onboarding.writeSeed.disclaimer.note3'),
       },
       {
         key: 'note4',
         icon: <IconChevronRight size={12} style={{ color: colors.smoke }} />,
-        desc: t('onboarding:writeSeed.disclaimer.note4'),
+        desc: t('onboarding.writeSeed.disclaimer.note4'),
       },
     ]
 
     return (
       <Fragment>
         <Box mb={3}>
-          <Title>{t('onboarding:writeSeed.initialize.title')}</Title>
-          <Description>{t('onboarding:writeSeed.initialize.desc')}</Description>
+          <Title>{t('onboarding.writeSeed.initialize.title')}</Title>
+          <Description>{t('onboarding.writeSeed.initialize.desc')}</Description>
         </Box>
         <Box align="center">
           <Inner style={{ width: 760 }}>

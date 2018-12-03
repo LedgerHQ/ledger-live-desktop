@@ -69,7 +69,7 @@ class AccountCard extends PureComponent<{
   render() {
     const { counterValue, account, onClick, daysCount, ...props } = this.props
     return (
-      <Wrapper onClick={this.onClick} {...props}>
+      <Wrapper onClick={this.onClick} {...props} data-e2e="dashboard_AccountCardWrapper">
         <Box flow={4}>
           <AccountCardHeader accountName={account.name} currency={account.currency} />
           <Bar size={1} color="fog" />

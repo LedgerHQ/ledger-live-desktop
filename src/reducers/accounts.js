@@ -2,15 +2,14 @@
 
 import { createSelector } from 'reselect'
 import { handleActions } from 'redux-actions'
-import { createAccountModel } from '@ledgerhq/live-common/lib/models/account'
+import accountModel from 'helpers/accountModel'
 import logger from 'logger'
 import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
+import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
 
 export type AccountsState = Account[]
 const state: AccountsState = []
-
-const accountModel = createAccountModel()
 
 const handlers: Object = {
   SET_ACCOUNTS: (
@@ -62,7 +61,14 @@ const handlers: Object = {
 
 export const accountsSelector = (state: { accounts: AccountsState }): Account[] => state.accounts
 
-export const isUpToDateSelector = createSelector(accountsSelector, accounts =>
+export const activeAccountsSelector = createSelector(
+  accountsSelector,
+  currenciesStatusSelector,
+  (accounts, currenciesStatus) =>
+    accounts.filter(a => !currencyDownStatusLocal(currenciesStatus, a.currency)),
+)
+
+export const isUpToDateSelector = createSelector(activeAccountsSelector, accounts =>
   accounts.every(a => {
     const { lastSyncDate } = a
     const { blockAvgTime } = a.currency

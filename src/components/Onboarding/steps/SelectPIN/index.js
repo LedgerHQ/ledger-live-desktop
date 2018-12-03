@@ -29,14 +29,14 @@ export default (props: StepProps) => {
         />
         {onboarding.flowType === 'restoreDevice' ? (
           <Box grow alignItems="center">
-            <Title>{t('onboarding:selectPIN.restore.title')}</Title>
+            <Title>{t('onboarding.selectPIN.restore.title')}</Title>
             <Box align="center" mt={7}>
               {onboarding.isLedgerNano ? <SelectPINrestoreNano /> : <SelectPINrestoreBlue />}
             </Box>
           </Box>
         ) : (
           <Box grow alignItems="center">
-            <Title>{t('onboarding:selectPIN.initialize.title')}</Title>
+            <Title>{t('onboarding.selectPIN.initialize.title')}</Title>
             <Box align="center" mt={7}>
               {onboarding.isLedgerNano ? <SelectPINnano /> : <SelectPINblue />}
             </Box>

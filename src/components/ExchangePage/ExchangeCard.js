@@ -31,9 +31,9 @@ export default class ExchangeCard extends PureComponent<{ t: T, card: CardType }
           {logo}
         </Box>
         <Box shrink ff="Open Sans|Regular" fontSize={4} flow={3}>
-          <Box>{t(`app:exchange.${id}`)}</Box>
+          <Box>{t(`exchange.${id}`)}</Box>
           <Box horizontal align="center" color="wallet" flow={1}>
-            <FakeLink onClick={this.onClick}>{t('app:exchange.visitWebsite')}</FakeLink>
+            <FakeLink onClick={this.onClick}>{t('exchange.visitWebsite')}</FakeLink>
             <ExternalLinkIcon size={14} />
           </Box>
         </Box>

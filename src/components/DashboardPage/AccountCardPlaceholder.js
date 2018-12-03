@@ -31,7 +31,7 @@ class AccountCardPlaceholder extends PureComponent<{
   render() {
     const { t } = this.props
     return (
-      <Wrapper>
+      <Wrapper data-e2e="dashboard_AccountPlaceOrder">
         <Box mt={2}>
           <img alt="" src={i('empty-account-tile.svg')} />
         </Box>
@@ -44,10 +44,10 @@ class AccountCardPlaceholder extends PureComponent<{
           textAlign="center"
           style={{ maxWidth: 150 }}
         >
-          {t('app:dashboard.emptyAccountTile.desc')}
+          {t('dashboard.emptyAccountTile.desc')}
         </Box>
         <Button primary onClick={this.onAddAccounts}>
-          {t('app:dashboard.emptyAccountTile.createAccount')}
+          {t('dashboard.emptyAccountTile.createAccount')}
         </Button>
       </Wrapper>
     )

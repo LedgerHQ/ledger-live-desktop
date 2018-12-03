@@ -21,7 +21,7 @@ class OpenUserDataDirectoryBtn extends Component<{
     const { t } = this.props
     return (
       <Button primary small onClick={this.handleOpenUserDataDirectory}>
-        {t('app:settings.openUserDataDirectory.btn')}
+        {t('settings.openUserDataDirectory.btn')}
       </Button>
     )
   }

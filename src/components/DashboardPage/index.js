@@ -129,7 +129,7 @@ class DashboardPage extends PureComponent<Props> {
                 <OperationsList
                   onAccountClick={this.onAccountClick}
                   accounts={accounts}
-                  title={t('app:dashboard.recentActivity')}
+                  title={t('dashboard.recentActivity')}
                   withAccount
                 />
               )}

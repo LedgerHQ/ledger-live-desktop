@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { BigNumber } from 'bignumber.js'
 import uncontrollable from 'uncontrollable'
 import styled from 'styled-components'
-import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/currencies'
 
 import noop from 'lodash/noop'
 
@@ -81,7 +81,7 @@ type Props = {
   renderRight: any,
   unit: Unit,
   units: Unit[],
-  value: BigNumber,
+  value: ?BigNumber,
   showAllDigits?: boolean,
   subMagnitude: number,
   allowZero: boolean,
@@ -98,7 +98,7 @@ class InputCurrency extends PureComponent<Props, State> {
     onChange: noop,
     renderRight: null,
     units: [],
-    value: BigNumber(0),
+    value: null,
     showAllDigits: false,
     subMagnitude: 0,
     allowZero: false,
@@ -123,13 +123,14 @@ class InputCurrency extends PureComponent<Props, State> {
     if (needsToBeReformatted) {
       const { isFocused } = this.state
       this.setState({
-        displayValue: nextProps.value.isZero()
-          ? ''
-          : format(nextProps.unit, nextProps.value, {
-              isFocused,
-              showAllDigits: nextProps.showAllDigits,
-              subMagnitude: nextProps.subMagnitude,
-            }),
+        displayValue:
+          !nextProps.value || nextProps.value.isZero()
+            ? ''
+            : format(nextProps.unit, nextProps.value, {
+                isFocused,
+                showAllDigits: nextProps.showAllDigits,
+                subMagnitude: nextProps.subMagnitude,
+              }),
       })
     }
   }
@@ -138,7 +139,7 @@ class InputCurrency extends PureComponent<Props, State> {
     const { onChange, unit, value } = this.props
     const r = sanitizeValueString(unit, v)
     const satoshiValue = BigNumber(r.value)
-    if (!value.isEqualTo(satoshiValue)) {
+    if (!value || !value.isEqualTo(satoshiValue)) {
       onChange(satoshiValue, unit)
     }
     this.setState({ displayValue: r.display })
@@ -159,7 +160,7 @@ class InputCurrency extends PureComponent<Props, State> {
     this.setState({
       isFocused,
       displayValue:
-        (!value || value.isZero()) && !allowZero
+        !value || (value.isZero() && !allowZero)
           ? ''
           : format(unit, value, { isFocused, showAllDigits, subMagnitude }),
     })
@@ -172,7 +173,7 @@ class InputCurrency extends PureComponent<Props, State> {
   renderListUnits = () => {
     const { units, onChangeUnit, unit } = this.props
     const { isFocused } = this.state
-
+    const avoidEmptyValue = value => value && onChangeUnit(value)
     if (units.length <= 1) {
       return null
     }
@@ -180,13 +181,14 @@ class InputCurrency extends PureComponent<Props, State> {
     return (
       <Currencies onClick={stopPropagation}>
         <Select
-          onChange={onChangeUnit}
+          onChange={avoidEmptyValue}
           options={units}
           value={unit}
           getOptionValue={unitGetOptionValue}
           renderOption={this.renderOption}
           renderValue={this.renderValue}
           fakeFocusRight={isFocused}
+          isRight
         />
       </Currencies>
     )
@@ -208,6 +210,7 @@ class InputCurrency extends PureComponent<Props, State> {
 
     return (
       <Input
+        data-e2e="addAccount_currencyInput"
         {...this.props}
         ff="Rubik"
         ref={this.onRef}

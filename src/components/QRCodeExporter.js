@@ -1,60 +1,73 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-
+import { Buffer } from 'buffer'
+import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
-import type { State } from 'reducers'
-import { accountsSelector } from 'reducers/accounts'
+
+import { activeAccountsSelector } from 'reducers/accounts'
+import { exportSettingsSelector } from 'reducers/settings'
+import { encode } from '@ledgerhq/live-common/lib/cross'
+import { dataToFrames } from 'qrloop/exporter'
 import QRCode from './base/QRCode'
 
-// encode the app state to export into an array of chunks for the mobile app to understand.
-// returned data frames are json stringified array with format: [ datalength, index, type, ...rest ]
-// NB as soon as we have common types we'll move this in a ledgerhq/common project
-function makeChunks(state: State): Array<string> {
-  const chunksFormatVersion = 1
-  const desktopVersion = __APP_VERSION__
-  const data = [
-    ['meta', chunksFormatVersion, 'desktop', desktopVersion],
-    ...accountsSelector(state).map(account => [
-      'account',
-      account.id,
-      account.name,
-      account.currency.id,
-    ]),
-  ]
-  return data.map((arr, i) => JSON.stringify([data.length, i, ...arr]))
-}
-
-const mapStateToProps = (state: State) => ({ chunks: makeChunks(state) })
+const mapStateToProps = createStructuredSelector({
+  accounts: activeAccountsSelector,
+  settings: exportSettingsSelector,
+})
 
 class QRCodeExporter extends PureComponent<
   {
-    chunks: string[],
-    fps: number,
+    accounts: *,
+    settings: *,
     size: number,
   },
   {
     frame: number,
+    framesRendered: number,
+    fps: number,
   },
 > {
   static defaultProps = {
-    fps: 10,
-    size: 480,
+    size: 460,
+  }
+
+  constructor(props) {
+    super()
+    const { accounts, settings } = props
+    const data = encode({
+      accounts,
+      settings,
+      exporterName: 'desktop',
+      exporterVersion: __APP_VERSION__,
+    })
+
+    this.chunks = dataToFrames(data, 160, 4)
+
+    setTimeout(() => {
+      const BRIDGESTREAM_DATA = Buffer.from(JSON.stringify(this.chunks)).toString('base64')
+      console.log(`BRIDGESTREAM_DATA=${BRIDGESTREAM_DATA}`) // eslint-disable-line
+    }, 500)
   }
 
   state = {
     frame: 0,
+    framesRendered: 1,
+    fps: 3,
   }
 
   componentDidMount() {
-    const nextFrame = ({ frame }, { chunks }) => ({
-      frame: (frame + 1) % chunks.length,
-    })
+    const nextFrame = ({ frame, framesRendered }) => {
+      frame = (frame + 1) % this.chunks.length
+      framesRendered = Math.min(Math.max(framesRendered, frame + 1), this.chunks.length)
+      return { frame, framesRendered }
+    }
+
     let lastT
     const loop = t => {
       this._raf = requestAnimationFrame(loop)
       if (!lastT) lastT = t
-      if ((t - lastT) * this.props.fps < 1000) return
+      if ((t - lastT) * this.state.fps < 1000) return
       lastT = t
       this.setState(nextFrame)
     }
@@ -65,16 +78,18 @@ class QRCodeExporter extends PureComponent<
     cancelAnimationFrame(this._raf)
   }
 
+  chunks: string[]
   _raf: *
 
   render() {
-    const { frame } = this.state
-    const { chunks, size } = this.props
+    const { frame, framesRendered } = this.state
+    const { size } = this.props
+    const { chunks } = this
     return (
       <div style={{ position: 'relative', width: size, height: size }}>
-        {chunks.map((chunk, i) => (
+        {chunks.slice(0, framesRendered).map((chunk, i) => (
           <div key={String(i)} style={{ position: 'absolute', opacity: i === frame ? 1 : 0 }}>
-            <QRCode data={chunk} size={size} />
+            <QRCode data={chunk} size={size} errorCorrectionLevel="M" />
           </div>
         ))}
       </div>

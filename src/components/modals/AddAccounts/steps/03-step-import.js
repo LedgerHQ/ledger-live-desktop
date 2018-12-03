@@ -10,7 +10,7 @@ import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
-import isAccountEmpty from 'helpers/isAccountEmpty'
+import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -97,17 +97,17 @@ class StepImport extends PureComponent<StepProps> {
     const isUnsplit = name.indexOf('unsplit') !== -1
 
     if (name === 'New Account') {
-      name = t('app:addAccounts.newAccount')
+      name = t('addAccounts.newAccount')
     } else if (isLegacy) {
       if (isUnsplit) {
-        name = t('app:addAccounts.legacyUnsplitAccount', {
+        name = t('addAccounts.legacyUnsplitAccount', {
           accountName: name.replace(' (legacy)', '').replace(' (unsplit)', ''),
         })
       } else {
-        name = t('app:addAccounts.legacyAccount', { accountName: name.replace(' (legacy)', '') })
+        name = t('addAccounts.legacyAccount', { accountName: name.replace(' (legacy)', '') })
       }
     } else if (isUnsplit) {
-      name = t('app:addAccounts.unsplitAccount', { accountName: name.replace(' (unsplit)', '') })
+      name = t('addAccounts.unsplitAccount', { accountName: name.replace(' (unsplit)', '') })
     }
 
     return {
@@ -144,7 +144,9 @@ class StepImport extends PureComponent<StepProps> {
             })
           }
         },
-        complete: () => setScanStatus('finished'),
+        complete: () => {
+          setScanStatus('finished')
+        },
         error: err => {
           logger.critical(err)
           setScanStatus('error', err)
@@ -243,15 +245,15 @@ class StepImport extends PureComponent<StepProps> {
       }
     })
 
-    const importableAccountsListTitle = t('app:addAccounts.accountToImportSubtitle', {
+    const importableAccountsListTitle = t('addAccounts.accountToImportSubtitle', {
       count: importableAccounts.length,
     })
 
-    const importedAccountsListTitle = t('app:addAccounts.accountAlreadyImportedSubtitle', {
+    const importedAccountsListTitle = t('addAccounts.accountAlreadyImportedSubtitle', {
       count: importedAccounts.length,
     })
 
-    const importableAccountsEmpty = t('app:addAccounts.noAccountToImport', { currencyName })
+    const importableAccountsEmpty = t('addAccounts.noAccountToImport', { currencyName })
 
     const shouldShowNew = scanStatus !== 'scanning'
 
@@ -276,11 +278,11 @@ class StepImport extends PureComponent<StepProps> {
           {!shouldShowNew ? null : (
             <AccountsList
               autoFocusFirstInput={importableAccounts.length === 0}
-              title={t('app:addAccounts.createNewAccount.title')}
+              title={t('addAccounts.createNewAccount.title')}
               emptyText={
                 alreadyEmptyAccount ? (
                   <Trans
-                    i18nKey="app:addAccounts.createNewAccount.noOperationOnLastAccount"
+                    i18nKey="addAccounts.createNewAccount.noOperationOnLastAccount"
                     parent="div"
                   >
                     {' '}
@@ -289,7 +291,7 @@ class StepImport extends PureComponent<StepProps> {
                     </Text>{' '}
                   </Trans>
                 ) : (
-                  <Trans i18nKey="app:addAccounts.createNewAccount.noAccountToCreate" parent="div">
+                  <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
                     {' '}
                     <Text ff="Open Sans|SemiBold" color="dark">
                       {currencyName}
@@ -317,7 +319,7 @@ class StepImport extends PureComponent<StepProps> {
             <LoadingRow>
               <Spinner color="grey" size={16} />
               <Box ml={2} ff="Open Sans|Regular" color="grey" fontSize={4}>
-                {t('app:common.sync.syncing')}
+                {t('common.sync.syncing')}
               </Box>
             </LoadingRow>
           ) : null}
@@ -355,9 +357,7 @@ export const StepImportFooter = ({
   const count = checkedAccountsIds.length
 
   const ctaWording =
-    scanStatus === 'scanning'
-      ? t('app:common.sync.syncing')
-      : t('app:addAccounts.cta.add', { count })
+    scanStatus === 'scanning' ? t('common.sync.syncing') : t('addAccounts.cta.add', { count })
 
   const willClose = !willCreateAccount && !willAddAccounts
   const onClick = willClose
@@ -372,13 +372,13 @@ export const StepImportFooter = ({
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
       {scanStatus === 'error' && (
         <Fragment>
-          <ExternalLinkButton mr={2} label={t('app:common.getSupport')} url={urls.faq} />
+          <ExternalLinkButton mr={2} label={t('common.getSupport')} url={urls.faq} />
           <RetryButton primary onClick={() => setScanStatus('scanning')} />
         </Fragment>
       )}
       {scanStatus === 'scanning' && (
         <Button mr={2} onClick={() => setScanStatus('finished')}>
-          {t('app:common.stop')}
+          {t('common.stop')}
         </Button>
       )}
       {scanStatus !== 'error' && (

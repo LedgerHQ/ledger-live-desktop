@@ -9,9 +9,9 @@ import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
-import libcoreGetFees from 'commands/libcoreGetFees'
+import libcoreGetFees, { extractGetFeesInputFromAccount } from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
-import { NotEnoughBalance } from 'config/errors'
+import { NotEnoughBalance, FeeNotLoaded } from 'config/errors'
 import type { WalletBridge, EditProps } from './types'
 
 const NOT_ENOUGH_FUNDS = 52
@@ -20,15 +20,18 @@ const notImplemented = new Error('LibcoreBridge: not implemented')
 
 type Transaction = {
   amount: BigNumber,
-  feePerByte: BigNumber,
+  feePerByte: ?BigNumber,
   recipient: string,
 }
 
-const serializeTransaction = t => ({
-  recipient: t.recipient,
-  amount: t.amount.toString(),
-  feePerByte: t.feePerByte.toString(),
-})
+const serializeTransaction = t => {
+  const { feePerByte } = t
+  return {
+    recipient: t.recipient,
+    amount: t.amount.toString(),
+    feePerByte: (feePerByte && feePerByte.toString()) || '0',
+  }
+}
 
 const decodeOperation = (encodedAccount, rawOp) =>
   decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations[0]
@@ -75,7 +78,9 @@ const isRecipientValid = (currency, recipient) => {
 const feesLRU = LRU({ max: 100 })
 
 const getFeesKey = (a, t) =>
-  `${a.id}_${a.blockHeight || 0}_${t.amount.toString()}_${t.recipient}_${t.feePerByte.toString()}`
+  `${a.id}_${a.blockHeight || 0}_${t.amount.toString()}_${t.recipient}_${
+    t.feePerByte ? t.feePerByte.toString() : ''
+  }`
 
 const getFees = async (a, transaction) => {
   const isValid = await isRecipientValid(a.currency, transaction.recipient)
@@ -83,10 +88,10 @@ const getFees = async (a, transaction) => {
   const key = getFeesKey(a, transaction)
   let promise = feesLRU.get(key)
   if (promise) return promise
+
   promise = libcoreGetFees
     .send({
-      accountId: a.id,
-      accountIndex: a.index,
+      ...extractGetFeesInputFromAccount(a),
       transaction: serializeTransaction(transaction),
     })
     .toPromise()
@@ -95,18 +100,20 @@ const getFees = async (a, transaction) => {
   return promise
 }
 
-const checkCanBeSpent = (a, t) =>
-  !t.amount
-    ? Promise.resolve()
-    : getFees(a, t)
-        .then(() => {})
-        .catch(e => {
-          if (e.code === NOT_ENOUGH_FUNDS) {
-            throw new NotEnoughBalance()
-          }
-          feesLRU.del(getFeesKey(a, t))
-          throw e
-        })
+const checkValidTransaction = (a, t) =>
+  !t.feePerByte
+    ? Promise.reject(new FeeNotLoaded())
+    : !t.amount
+      ? Promise.resolve(true)
+      : getFees(a, t)
+          .then(() => true)
+          .catch(e => {
+            if (e.code === NOT_ENOUGH_FUNDS) {
+              throw new NotEnoughBalance()
+            }
+            feesLRU.del(getFeesKey(a, t))
+            throw e
+          })
 
 const LibcoreBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, devicePath) {
@@ -122,13 +129,15 @@ const LibcoreBridge: WalletBridge<Transaction> = {
     libcoreSyncAccount
       .send({
         accountId: account.id,
-        freshAddressPath: account.freshAddressPath,
+        derivationMode: account.derivationMode,
+        xpub: account.xpub || '',
+        seedIdentifier: account.seedIdentifier,
         index: account.index,
         currencyId: account.currency.id,
       })
       .pipe(
-        map(rawSyncedAccount => {
-          const syncedAccount = decodeAccount(rawSyncedAccount)
+        map(({ rawAccount, requiresCacheFlush }) => {
+          const syncedAccount = decodeAccount(rawAccount)
           return account => {
             const accountOps = account.operations
             const syncedOps = syncedAccount.operations
@@ -142,11 +151,11 @@ const LibcoreBridge: WalletBridge<Transaction> = {
             }
 
             const hasChanged =
+              requiresCacheFlush ||
               accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
               (accountOps.length > 0 &&
                 syncedOps.length > 0 &&
-                (accountOps[0].accountId !== syncedOps[0].accountId ||
-                accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
+                (accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
                   accountOps[0].blockHeight !== syncedOps[0].blockHeight))
 
             if (hasChanged) {
@@ -170,7 +179,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
-    feePerByte: BigNumber(0),
+    feePerByte: null,
     isRBF: false,
   }),
 
@@ -192,9 +201,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   // EditAdvancedOptions,
 
-  isValidTransaction: (a, t) => (!t.amount.isZero() && t.recipient && true) || false,
-
-  checkCanBeSpent,
+  checkValidTransaction,
 
   getTotalSpent: (a, t) =>
     t.amount.isZero()
@@ -213,9 +220,10 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       .send({
         accountId: account.id,
         currencyId: account.currency.id,
-        xpub: account.xpub,
-        freshAddress: account.freshAddress,
-        freshAddressPath: account.freshAddressPath,
+        blockHeight: account.blockHeight,
+        xpub: account.xpub || '', // FIXME only reason is to build the op id. we need to consider another id for making op id.
+        derivationMode: account.derivationMode,
+        seedIdentifier: account.seedIdentifier,
         index: account.index,
         transaction: serializeTransaction(transaction),
         deviceId,

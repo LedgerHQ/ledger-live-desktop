@@ -13,6 +13,7 @@ import Text from 'components/base/Text'
 import CounterValue from 'components/CounterValue'
 import Spinner from 'components/base/Spinner'
 import TrackPage from 'analytics/TrackPage'
+import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 
 import RecipientField from '../fields/RecipientField'
 import AmountField from '../fields/AmountField'
@@ -38,8 +39,10 @@ export default ({
   return (
     <Box flow={4}>
       <TrackPage category="Send Flow" name="Step 1" />
+      {account ? <CurrencyDownStatusAlert currency={account.currency} /> : null}
+
       <Box flow={1}>
-        <Label>{t('app:send.steps.amount.selectAccountDebit')}</Label>
+        <Label>{t('send.steps.amount.selectAccountDebit')}</Label>
         <SelectAccount autoFocus={!openedFromAccount} onChange={onChangeAccount} value={account} />
       </Box>
 
@@ -134,11 +137,13 @@ export class StepAmountFooter extends PureComponent<
         bridge.getTransactionRecipient(account, transaction),
       )
       if (syncId !== this.syncId) return
-      const canBeSpent = await bridge
-        .checkCanBeSpent(account, transaction)
-        .then(() => true, () => false)
+      const isValidTransaction = await bridge
+        .checkValidTransaction(account, transaction)
+        .then(result => result, () => false)
+
       if (syncId !== this.syncId) return
-      const canNext = isRecipientValid && canBeSpent && totalSpent.gt(0)
+      const canNext =
+        !transaction.amount.isZero() && isRecipientValid && isValidTransaction && totalSpent.gt(0)
       this.setState({ totalSpent, canNext, isSyncing: false })
     } catch (err) {
       logger.critical(err)
@@ -152,7 +157,7 @@ export class StepAmountFooter extends PureComponent<
     return (
       <Fragment>
         <Box grow>
-          <Label>{t('app:send.totalSpent')}</Label>
+          <Label>{t('send.totalSpent')}</Label>
           <Box horizontal flow={2} align="center">
             {account && (
               <FormattedVal
@@ -186,7 +191,7 @@ export class StepAmountFooter extends PureComponent<
           </Box>
         </Box>
         <Button disabled={!canNext} primary onClick={() => transitionTo('device')}>
-          {t('app:common.continue')}
+          {t('common.continue')}
         </Button>
       </Fragment>
     )

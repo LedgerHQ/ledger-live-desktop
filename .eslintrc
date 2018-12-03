@@ -60,6 +60,7 @@
     "react/jsx-no-literals": [1, {"noStrings": false}],
     "react/prefer-stateless-function": 0,
     "react/require-default-props": 0,
+    "react/no-multi-comp": 0,
     "react/sort-comp": [1, {
       order: [
         'static-methods',

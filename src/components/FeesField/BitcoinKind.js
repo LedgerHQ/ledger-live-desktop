@@ -8,6 +8,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
+import { FeeNotLoaded } from 'config/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
 import type { Fees } from 'api/Fees'
@@ -17,7 +18,7 @@ import Box from '../base/Box'
 
 type Props = {
   account: Account,
-  feePerByte: BigNumber,
+  feePerByte: ?BigNumber,
   onChange: BigNumber => void,
   t: T,
 }
@@ -50,6 +51,12 @@ const customItem = {
   blockCount: 0,
   feePerByte: BigNumber(0),
 }
+const notLoadedItem = {
+  label: 'Standard',
+  value: 'standard',
+  blockCount: 0,
+  feePerByte: BigNumber(0),
+}
 
 type State = { isFocused: boolean, items: FeeItem[], selectedItem: FeeItem }
 
@@ -57,13 +64,13 @@ type OwnProps = Props & { fees?: Fees, error?: Error }
 
 class FeesField extends Component<OwnProps, State> {
   state = {
-    items: [customItem],
-    selectedItem: customItem,
+    items: [notLoadedItem],
+    selectedItem: notLoadedItem,
     isFocused: false,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { fees, feePerByte } = nextProps
+    const { fees, feePerByte, error } = nextProps
     let items: FeeItem[] = []
     if (fees) {
       for (const key of Object.keys(fees)) {
@@ -80,17 +87,18 @@ class FeesField extends Component<OwnProps, State> {
       }
       items = items.sort((a, b) => a.blockCount - b.blockCount)
     }
-    items.push(customItem)
-    const selectedItem = prevState.selectedItem.feePerByte.eq(feePerByte)
-      ? prevState.selectedItem
-      : items.find(f => f.feePerByte.eq(feePerByte)) || items[items.length - 1]
+    items.push(!feePerByte && !error ? notLoadedItem : customItem)
+    const selectedItem =
+      !feePerByte && prevState.selectedItem.feePerByte.eq(feePerByte)
+        ? prevState.selectedItem
+        : items.find(f => f.feePerByte.eq(feePerByte)) || items[items.length - 1]
     return { items, selectedItem }
   }
 
   componentDidUpdate({ fees: prevFees }: OwnProps) {
     const { feePerByte, fees, onChange } = this.props
     const { items, isFocused } = this.state
-    if (fees && fees !== prevFees && feePerByte.isZero() && !isFocused) {
+    if (fees && fees !== prevFees && !feePerByte && !isFocused) {
       // initialize with the median
       const feePerByte = (items.find(item => item.blockCount === defaultBlockCount) || items[0])
         .feePerByte
@@ -127,7 +135,7 @@ class FeesField extends Component<OwnProps, State> {
     const satoshi = units[units.length - 1]
 
     return (
-      <GenericContainer error={error}>
+      <GenericContainer>
         <Select width={156} options={items} value={selectedItem} onChange={this.onSelectChange} />
         <InputCurrency
           ref={this.input}
@@ -137,10 +145,10 @@ class FeesField extends Component<OwnProps, State> {
           value={feePerByte}
           onChange={onChange}
           onChangeFocus={this.onChangeFocus}
+          loading={!feePerByte && !error}
+          error={!feePerByte && error ? new FeeNotLoaded() : null}
           renderRight={
-            <InputRight>
-              {t('app:send.steps.amount.unitPerByte', { unit: satoshi.code })}
-            </InputRight>
+            <InputRight>{t('send.steps.amount.unitPerByte', { unit: satoshi.code })}</InputRight>
           }
           allowZero
         />

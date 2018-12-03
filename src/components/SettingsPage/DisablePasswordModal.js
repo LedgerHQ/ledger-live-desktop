@@ -68,14 +68,16 @@ class DisablePasswordModal extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <form onSubmit={this.disablePassword}>
             <ModalBody onClose={onClose}>
-              <ModalTitle>{t('app:password.disablePassword.title')}</ModalTitle>
+              <ModalTitle data-e2e="disablePassword_modalTitle">
+                {t('password.disablePassword.title')}
+              </ModalTitle>
               <ModalContent>
                 <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" px={4}>
-                  {t('app:password.disablePassword.desc')}
+                  {t('password.disablePassword.desc')}
                   <Box px={7} mt={4} flow={3}>
                     <Box flow={1}>
                       <Label htmlFor="password">
-                        {t('app:password.inputFields.currentPassword.label')}
+                        {t('password.inputFields.currentPassword.label')}
                       </Label>
                       <InputPassword
                         autoFocus
@@ -91,7 +93,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
               </ModalContent>
               <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
                 <Button small type="button" onClick={onClose}>
-                  {t('app:common.cancel')}
+                  {t('common.cancel')}
                 </Button>
                 <Button
                   small
@@ -99,7 +101,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
                   onClick={this.disablePassword}
                   disabled={!currentPassword && !incorrectPassword}
                 >
-                  {t('app:common.save')}
+                  {t('common.save')}
                 </Button>
               </ModalFooter>
             </ModalBody>

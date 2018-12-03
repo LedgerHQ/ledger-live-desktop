@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/helpers/operation'
+import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
 import type { Currency, Unit, Operation } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'

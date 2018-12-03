@@ -4,8 +4,15 @@ import { Observable } from 'rxjs'
 import { BigNumber } from 'bignumber.js'
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
-import * as accountIdHelper from 'helpers/accountId'
-import { isValidAddress, libcoreAmountToBigNumber, bigNumberToLibcoreAmount } from 'helpers/libcore'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import { getWalletName } from '@ledgerhq/live-common/lib/account'
+import type { Account, DerivationMode } from '@ledgerhq/live-common/lib/types'
+import {
+  isValidAddress,
+  libcoreAmountToBigNumber,
+  bigNumberToLibcoreAmount,
+  getOrCreateWallet,
+} from 'helpers/libcore'
 import { InvalidAddress } from 'config/errors'
 
 type BitcoinLikeTransaction = {
@@ -16,23 +23,43 @@ type BitcoinLikeTransaction = {
 }
 
 type Input = {
-  accountId: string,
   accountIndex: number,
   transaction: BitcoinLikeTransaction,
+  currencyId: string,
+  derivationMode: DerivationMode,
+  seedIdentifier: string,
+}
+
+export const extractGetFeesInputFromAccount = (a: Account) => {
+  const currencyId = a.currency.id
+  return {
+    accountIndex: a.index,
+    currencyId,
+    derivationMode: a.derivationMode,
+    seedIdentifier: a.seedIdentifier,
+  }
 }
 
 type Result = { totalFees: string }
 
 const cmd: Command<Input, Result> = createCommand(
   'libcoreGetFees',
-  ({ accountId, accountIndex, transaction }) =>
+  ({ currencyId, derivationMode, seedIdentifier, accountIndex, transaction }) =>
     Observable.create(o => {
       let unsubscribed = false
       const isCancelled = () => unsubscribed
+      const currency = getCryptoCurrencyById(currencyId)
 
       withLibcore(async core => {
-        const { walletName } = accountIdHelper.decode(accountId)
-        const njsWallet = await core.getPoolInstance().getWallet(walletName)
+        const walletName = getWalletName({
+          currency,
+          derivationMode,
+          seedIdentifier,
+        })
+        const njsWallet = await getOrCreateWallet(core, walletName, {
+          currency,
+          derivationMode,
+        })
         if (isCancelled()) return
         const njsAccount = await njsWallet.getAccount(accountIndex)
         if (isCancelled()) return

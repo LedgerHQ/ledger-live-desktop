@@ -10,8 +10,11 @@ import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import logger from 'logger'
 import getAddress from 'commands/getAddress'
 import { createCancelablePolling } from 'helpers/promise'
-import { standardDerivation } from 'helpers/derivations'
-import { isSegwitPath } from 'helpers/bip32'
+import {
+  isSegwitDerivationMode,
+  getDerivationScheme,
+  runDerivationScheme,
+} from '@ledgerhq/live-common/lib/derivation'
 
 import DeviceInteraction from 'components/DeviceInteraction'
 import Text from 'components/base/Text'
@@ -20,7 +23,7 @@ import IconUsb from 'icons/Usb'
 
 import type { Device } from 'types/common'
 
-import { WrongDeviceForAccount, CantOpenDevice, BtcUnmatchedApp } from 'config/errors'
+import { WrongDeviceForAccount, CantOpenDevice, UpdateYourApp } from 'config/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />
@@ -61,10 +64,10 @@ class EnsureDeviceApp extends Component<{
       },
       {
         shouldThrow: (err: Error) => {
-          const isWrongApp = err instanceof BtcUnmatchedApp
           const isWrongDevice = err instanceof WrongDeviceForAccount
           const isCantOpenDevice = err instanceof CantOpenDevice
-          return isWrongApp || isWrongDevice || isCantOpenDevice
+          const isUpdateYourApp = err instanceof UpdateYourApp
+          return isWrongDevice || isCantOpenDevice || isUpdateYourApp
         },
       },
     )
@@ -74,7 +77,7 @@ class EnsureDeviceApp extends Component<{
     const cur = account ? account.currency : currency
     invariant(cur, 'No currency given')
     return (
-      <Trans i18nKey="app:deviceConnect.step2.open" parent="div">
+      <Trans i18nKey="deviceConnect.step2" parent="div">
         {'Open the '}
         <Bold>{cur.managerAppName}</Bold>
         {' app on your device'}
@@ -94,7 +97,7 @@ class EnsureDeviceApp extends Component<{
           {
             id: 'device',
             title: (
-              <Trans i18nKey="app:deviceConnect.step1.connect" parent="div">
+              <Trans i18nKey="deviceConnect.step1" parent="div">
                 {'Connect and unlock your '}
                 <Bold>{'Ledger device'}</Bold>
               </Trans>
@@ -122,8 +125,8 @@ async function getAddressFromAccountOrCurrency(device, account, currency) {
       currencyId: currency.id,
       path: account
         ? account.freshAddressPath
-        : standardDerivation({ currency, segwit: false, x: 0 }),
-      segwit: account ? isSegwitPath(account.freshAddressPath) : false,
+        : runDerivationScheme(getDerivationScheme({ currency, derivationMode: '' }), currency),
+      segwit: account ? isSegwitDerivationMode(account.derivationMode) : false,
     })
     .toPromise()
   return address

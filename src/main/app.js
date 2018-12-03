@@ -65,21 +65,15 @@ const getDefaultUrl = () =>
   __DEV__ ? `http://localhost:${ELECTRON_WEBPACK_WDS_PORT || ''}` : `file://${__dirname}/index.html`
 
 const saveWindowSettings = window => {
-  window.on(
-    'resize',
-    debounce(() => {
-      const [width, height] = window.getSize()
-      db.setKey('windowParams', `${window.name}.dimensions`, { width, height })
-    }, 100),
-  )
+  const windowParamsHandler = () => {
+    const [width, height] = window.getSize()
+    const [x, y] = window.getPosition()
+    db.setKey('windowParams', `${window.name}.dimensions`, { width, height })
+    db.setKey('windowParams', `${window.name}.positions`, { x, y })
+  }
 
-  window.on(
-    'move',
-    debounce(() => {
-      const [x, y] = window.getPosition()
-      db.setKey('windowParams', `${window.name}.positions`, { x, y })
-    }, 100),
-  )
+  window.on('resize', debounce(windowParamsHandler, 100))
+  window.on('move', debounce(windowParamsHandler, 100))
 }
 
 const defaultWindowOptions = {
@@ -95,8 +89,8 @@ const defaultWindowOptions = {
 }
 
 async function createMainWindow() {
-  const savedDimensions = await db.getKey('app', 'MainWindow.dimensions', {})
-  const savedPositions = await db.getKey('app', 'MainWindow.positions', null)
+  const savedDimensions = await db.getKey('windowParams', 'MainWindow.dimensions', {})
+  const savedPositions = await db.getKey('windowParams', 'MainWindow.positions', null)
 
   const width = savedDimensions.width || DEFAULT_WINDOW_WIDTH
   const height = savedDimensions.height || DEFAULT_WINDOW_HEIGHT
@@ -121,7 +115,6 @@ async function createMainWindow() {
   const window = new BrowserWindow(windowOptions)
 
   window.name = 'MainWindow'
-
   const url = getDefaultUrl()
 
   if (devTools) {
@@ -171,8 +164,6 @@ const installExtensions = async () => {
     extensions.map(name => installer.default(installer[name], forceDownload)),
   ).catch(console.log) // eslint-disable-line
 }
-
-app.setAsDefaultProtocolClient('ledgerhq')
 
 app.on('ready', async () => {
   if (__DEV__) {

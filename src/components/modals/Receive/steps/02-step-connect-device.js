@@ -1,21 +1,26 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
+import { Trans } from 'react-i18next'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
+import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
 import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../index'
 
 export default function StepConnectDevice({ account, onChangeAppOpened }: StepProps) {
   return (
-    <EnsureDeviceApp
-      account={account}
-      waitBeforeSuccess={200}
-      onSuccess={() => onChangeAppOpened(true)}
-    />
+    <Fragment>
+      {account ? <CurrencyDownStatusAlert currency={account.currency} /> : null}
+      <EnsureDeviceApp
+        account={account}
+        waitBeforeSuccess={200}
+        onSuccess={() => onChangeAppOpened(true)}
+      />
+    </Fragment>
   )
 }
 
@@ -35,10 +40,10 @@ export function StepConnectDeviceFooter({
           transitionTo('receive')
         }}
       >
-        {t('app:receive.steps.connectDevice.withoutDevice')}
+        {t('receive.steps.connectDevice.withoutDevice')}
       </Button>
       <Button disabled={!isAppOpened} primary onClick={() => transitionTo('confirm')}>
-        {t('app:common.continue')}
+        <Trans i18nKey="common.continue" />
       </Button>
     </Box>
   )

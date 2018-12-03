@@ -8,7 +8,7 @@ import { Redirect } from 'react-router'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
-import isAccountEmpty from 'helpers/isAccountEmpty'
+import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
 import {
   counterValueCurrencySelector,
   localeSelector,
@@ -97,7 +97,7 @@ class AccountPage extends PureComponent<Props> {
               />
             </Box>
 
-            <OperationsList account={account} title={t('app:account.lastOperations')} />
+            <OperationsList account={account} title={t('account.lastOperations')} />
 
             <StickyBackToTop />
           </Fragment>

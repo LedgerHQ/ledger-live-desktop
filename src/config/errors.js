@@ -30,9 +30,13 @@ export const ManagerUninstallBTCDep = createCustomErrorClass('ManagerUninstallBT
 export const NetworkDown = createCustomErrorClass('NetworkDown')
 export const NoAddressesFound = createCustomErrorClass('NoAddressesFound')
 export const NotEnoughBalance = createCustomErrorClass('NotEnoughBalance')
+export const NotEnoughBalanceBecauseDestinationNotCreated = createCustomErrorClass(
+  'NotEnoughBalanceBecauseDestinationNotCreated',
+)
 export const PasswordsDontMatchError = createCustomErrorClass('PasswordsDontMatch')
 export const PasswordIncorrectError = createCustomErrorClass('PasswordIncorrect')
 export const TimeoutTagged = createCustomErrorClass('TimeoutTagged')
+export const UpdateYourApp = createCustomErrorClass('UpdateYourApp')
 export const UserRefusedAddress = createCustomErrorClass('UserRefusedAddress')
 export const UserRefusedFirmwareUpdate = createCustomErrorClass('UserRefusedFirmwareUpdate')
 export const UserRefusedOnDevice = createCustomErrorClass('UserRefusedOnDevice') // TODO rename because it's just for transaction refusal
@@ -40,7 +44,10 @@ export const WebsocketConnectionError = createCustomErrorClass('WebsocketConnect
 export const WebsocketConnectionFailed = createCustomErrorClass('WebsocketConnectionFailed')
 export const WrongDeviceForAccount = createCustomErrorClass('WrongDeviceForAccount')
 export const ETHAddressNonEIP = createCustomErrorClass('ETHAddressNonEIP')
+export const CantScanQRCode = createCustomErrorClass('CantScanQRCode')
+export const FeeNotLoaded = createCustomErrorClass('FeeNotLoaded')
 
 // db stuff, no need to translate
 export const NoDBPathGiven = createCustomErrorClass('NoDBPathGiven')
 export const DBWrongPassword = createCustomErrorClass('DBWrongPassword')
+export const DBNotReset = createCustomErrorClass('DBNotReset')

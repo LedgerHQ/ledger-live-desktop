@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 
 import Track from 'analytics/Track'
@@ -23,14 +23,14 @@ import { closeModal } from 'reducers/modals'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
-import { validateNameEdition } from 'helpers/accountName'
+import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepImport, { StepImportFooter } from './steps/03-step-import'
 import StepFinish, { StepFinishFooter } from './steps/04-step-finish'
 
-const createSteps = ({ t }: { t: T }) => {
+const createSteps = () => {
   const onBack = ({ transitionTo, resetScanState }: StepProps) => {
     resetScanState()
     transitionTo('chooseCurrency')
@@ -38,7 +38,7 @@ const createSteps = ({ t }: { t: T }) => {
   return [
     {
       id: 'chooseCurrency',
-      label: t('app:addAccounts.breadcrumb.informations'),
+      label: <Trans i18nKey="addAccounts.breadcrumb.informations" />,
       component: StepChooseCurrency,
       footer: StepChooseCurrencyFooter,
       onBack: null,
@@ -46,7 +46,7 @@ const createSteps = ({ t }: { t: T }) => {
     },
     {
       id: 'connectDevice',
-      label: t('app:addAccounts.breadcrumb.connectDevice'),
+      label: <Trans i18nKey="addAccounts.breadcrumb.connectDevice" />,
       component: StepConnectDevice,
       footer: StepConnectDeviceFooter,
       onBack,
@@ -54,7 +54,7 @@ const createSteps = ({ t }: { t: T }) => {
     },
     {
       id: 'import',
-      label: t('app:addAccounts.breadcrumb.import'),
+      label: <Trans i18nKey="addAccounts.breadcrumb.import" />,
       component: StepImport,
       footer: StepImportFooter,
       onBack,
@@ -62,7 +62,7 @@ const createSteps = ({ t }: { t: T }) => {
     },
     {
       id: 'finish',
-      label: t('app:addAccounts.breadcrumb.finish'),
+      label: <Trans i18nKey="addAccounts.breadcrumb.finish" />,
       component: StepFinish,
       footer: StepFinishFooter,
       onBack: null,
@@ -72,7 +72,6 @@ const createSteps = ({ t }: { t: T }) => {
 }
 
 type Props = {
-  t: T,
   device: ?Device,
   existingAccounts: Account[],
   closeModal: string => void,
@@ -143,7 +142,7 @@ const INITIAL_STATE = {
 
 class AddAccounts extends PureComponent<Props, State> {
   state = INITIAL_STATE
-  STEPS = createSteps({ t: this.props.t })
+  STEPS = createSteps()
 
   handleClickAdd = async () => {
     const { addAccount } = this.props
@@ -205,7 +204,7 @@ class AddAccounts extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, device, existingAccounts } = this.props
+    const { device, existingAccounts } = this.props
     const {
       stepId,
       currency,
@@ -238,6 +237,7 @@ class AddAccounts extends PureComponent<Props, State> {
       onGoStep1: this.onGoStep1,
       editedNames,
     }
+    const title = <Trans i18nKey="addAccounts.title" />
 
     return (
       <Modal
@@ -247,7 +247,7 @@ class AddAccounts extends PureComponent<Props, State> {
         render={({ onClose }) => (
           <Stepper
             key={reset} // THIS IS A HACK because stepper is not controllable. FIXME
-            title={t('app:addAccounts.title')}
+            title={title}
             initialStepId="chooseCurrency"
             onStepChange={this.handleStepChange}
             onClose={onClose}

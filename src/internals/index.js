@@ -1,4 +1,5 @@
 // @flow
+import '@babel/polyfill'
 import commands from 'commands'
 import logger from 'logger'
 import uuid from 'uuid/v4'
@@ -63,34 +64,45 @@ process.on('message', m => {
     }
     const startTime = Date.now()
     logger.onCmd('cmd.START', id, 0, data)
-    subscriptions[requestId] = cmd.impl(data).subscribe({
-      next: data => {
-        logger.onCmd('cmd.NEXT', id, Date.now() - startTime, data)
-        process.send({
-          type: 'cmd.NEXT',
-          requestId,
-          data,
-        })
-      },
-      complete: () => {
-        delete subscriptions[requestId]
-        logger.onCmd('cmd.COMPLETE', id, Date.now() - startTime)
-        process.send({
-          type: 'cmd.COMPLETE',
-          requestId,
-        })
-      },
-      error: error => {
-        logger.warn('Command error:', error)
-        delete subscriptions[requestId]
-        logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
-        process.send({
-          type: 'cmd.ERROR',
-          requestId,
-          data: serializeError(error),
-        })
-      },
-    })
+    try {
+      subscriptions[requestId] = cmd.impl(data).subscribe({
+        next: data => {
+          logger.onCmd('cmd.NEXT', id, Date.now() - startTime, data)
+          process.send({
+            type: 'cmd.NEXT',
+            requestId,
+            data,
+          })
+        },
+        complete: () => {
+          delete subscriptions[requestId]
+          logger.onCmd('cmd.COMPLETE', id, Date.now() - startTime)
+          process.send({
+            type: 'cmd.COMPLETE',
+            requestId,
+          })
+        },
+        error: error => {
+          logger.warn('Command error:', error)
+          delete subscriptions[requestId]
+          logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
+          process.send({
+            type: 'cmd.ERROR',
+            requestId,
+            data: serializeError(error),
+          })
+        },
+      })
+    } catch (error) {
+      logger.warn('Command error:', error)
+      delete subscriptions[requestId]
+      logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
+      process.send({
+        type: 'cmd.ERROR',
+        requestId,
+        data: serializeError(error),
+      })
+    }
   } else if (m.type === 'command-unsubscribe') {
     const { requestId } = m
     const sub = subscriptions[requestId]

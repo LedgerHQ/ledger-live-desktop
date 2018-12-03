@@ -15,10 +15,11 @@ import installFinalFirmware from 'commands/installFinalFirmware'
 import installMcu from 'commands/installMcu'
 import installOsuFirmware from 'commands/installOsuFirmware'
 import isDashboardOpen from 'commands/isDashboardOpen'
+import killInternalProcess from 'commands/killInternalProcess'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
-import libcoreHardReset from 'commands/libcoreHardReset'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
+import libcoreScanFromXPUB from 'commands/libcoreScanFromXPUB'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
@@ -47,10 +48,11 @@ const all: Array<Command<any, any>> = [
   installMcu,
   installOsuFirmware,
   isDashboardOpen,
+  killInternalProcess,
   libcoreGetFees,
   libcoreGetVersion,
-  libcoreHardReset,
   libcoreScanAccounts,
+  libcoreScanFromXPUB,
   libcoreSignAndBroadcast,
   libcoreSyncAccount,
   libcoreValidAddress,
@@ -67,8 +69,11 @@ const all: Array<Command<any, any>> = [
   uninstallApp,
 ]
 
+export const commandsById = {}
+
 all.forEach(cmd => {
   invariant(!all.some(c => c !== cmd && c.id === cmd.id), `duplicate command '${cmd.id}'`)
+  commandsById[cmd.id] = cmd
 })
 
 export default all

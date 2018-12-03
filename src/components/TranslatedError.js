@@ -33,13 +33,13 @@ class TranslatedError extends PureComponent<Props> {
     // $FlowFixMe
     const arg: Object = Object.assign({ message: error.message }, error)
     if (error.name) {
-      const translation = t(`errors:${error.name}.${field}`, arg)
-      if (translation !== `${error.name}.${field}`) {
+      const translation = t(`errors.${error.name}.${field}`, arg)
+      if (translation !== `errors.${error.name}.${field}`) {
         // It is translated
         return translation
       }
     }
-    return t(`errors:generic.${field}`, arg)
+    return t(`errors.generic.${field}`, arg)
   }
 }
 

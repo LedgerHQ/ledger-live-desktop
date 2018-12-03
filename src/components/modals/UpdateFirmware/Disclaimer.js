@@ -44,10 +44,10 @@ class DisclaimerModal extends PureComponent<Props, State> {
           <ModalBody onClose={onClose} grow align="center" justify="center" mt={3}>
             <TrackPage category="Manager" name="DisclaimerModal" />
             <Fragment>
-              <ModalTitle>{t('app:manager.firmware.update')}</ModalTitle>
+              <ModalTitle>{t('manager.firmware.update')}</ModalTitle>
               <ModalContent>
                 <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
-                  <Trans i18nKey="app:manager.firmware.disclaimerTitle">
+                  <Trans i18nKey="manager.firmware.disclaimerTitle">
                     You are about to install
                     <Text ff="Open Sans|SemiBold" color="dark">
                       {`firmware version ${firmware ? getCleanVersion(firmware.name) : ''}`}
@@ -55,8 +55,8 @@ class DisclaimerModal extends PureComponent<Props, State> {
                   </Trans>
                 </Text>
                 <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
-                  {t('app:manager.firmware.disclaimerAppDelete')}
-                  {t('app:manager.firmware.disclaimerAppReinstall')}
+                  {t('manager.firmware.disclaimerAppDelete')}
+                  {t('manager.firmware.disclaimerAppReinstall')}
                 </Text>
               </ModalContent>
               <ModalContent relative pb={0} style={{ height: 250, width: '100%' }}>
@@ -69,7 +69,7 @@ class DisclaimerModal extends PureComponent<Props, State> {
               </ModalContent>
               <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
                 <Button primary onClick={goToNextStep}>
-                  {t('app:common.continue')}
+                  {t('common.continue')}
                 </Button>
               </ModalFooter>
             </Fragment>
