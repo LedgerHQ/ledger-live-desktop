@@ -10,6 +10,7 @@ import logger from 'logger'
 import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
 import { resolveLogsDirectory, cleanUpBeforeClosingSync } from 'helpers/log'
+import { executeCommand, unsubscribeCommand } from 'main/commandHandler'
 import { deserializeError } from 'helpers/errors'
 
 import { setInternalProcessPID } from './terminator'
@@ -77,10 +78,18 @@ ipcMain.on('clean-processes', () => {
 
 ipcMainListenReceiveCommands({
   onUnsubscribe: requestId => {
-    if (!internalProcess) return
-    internalProcess.send({ type: 'command-unsubscribe', requestId })
+    unsubscribeCommand(requestId)
+    if (internalProcess) {
+      internalProcess.send({ type: 'command-unsubscribe', requestId })
+    }
   },
   onCommand: (command, notifyCommandEvent) => {
+    // ability to run command from the main process
+    if (command.id.startsWith('main:')) {
+      executeCommand(command, notifyCommandEvent)
+      return
+    }
+
     if (!internalProcess) bootInternalProcess()
     const p = internalProcess
     invariant(p, 'internalProcess not started !?')
