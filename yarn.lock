@@ -12,6 +12,13 @@
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
   integrity sha1-nK+xca+CMpSQNTtIFvAzR6oVCjA=
 
+"@aeternity/ledger-app-api@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@aeternity/ledger-app-api/-/ledger-app-api-0.0.4.tgz#79d253b46cc6b0b18ef7cb57c3684bbe7e723c51"
+  integrity sha512-aXvCJX9fdT/EJbRKBdc2mu8fvvWu80A8JyFdfvS4bsaDOGjBaIfFFYbEpxaXef8TBE5zV8u7RN1PaXDPGeDUZg==
+  dependencies:
+    "@ledgerhq/hw-transport" "^4.21.0"
+
 "@babel/code-frame@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.44.tgz#2a02643368de80916162be70865c97774f3adbd9"
@@ -1742,7 +1749,7 @@
   dependencies:
     events "^2.0.0"
 
-"@ledgerhq/hw-transport@^4.24.0":
+"@ledgerhq/hw-transport@^4.21.0", "@ledgerhq/hw-transport@^4.24.0":
   version "4.24.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.24.0.tgz#8def925d8c2e1f73d15128d9e27ead729870be58"
   integrity sha512-L34TG1Ss7goRB+5BxtvBwUuu0CmDSIxS33oUqkpEy6rCs31k7XicV48iUGAnRnt8hNY2DvJ9WFyaOroUE9h6wQ==
@@ -1761,11 +1768,12 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.4.2":
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.4.2.tgz#0c60efe9f13fa17c39db880ee87d68561ba54da8"
-  integrity sha512-oghcqyZY9G2xSH/PDDqTH2DZ+JLeRLEN0nEEo1t48zdXsu6LZ5ZweF8pK3jSETi+IfLYOzUuB93iJM1+AcVYAA==
+"@ledgerhq/live-common@4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.6.0.tgz#d99b82123e5275affebded1001ace6e1e98d117e"
+  integrity sha512-kyKa4o7fR0DrGmu2GxlgMEkVE4aA9BJujr+q5bTpRhO5xDv2jSHT52NOPdhB6H7EfbHChaBaKv/C6wW7Q37Xyw==
   dependencies:
+    "@aeternity/ledger-app-api" "0.0.4"
     "@ledgerhq/hw-app-btc" "^4.24.0"
     "@ledgerhq/hw-app-eth" "^4.24.0"
     "@ledgerhq/hw-app-xrp" "^4.24.0"
