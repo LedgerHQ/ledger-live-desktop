@@ -34,6 +34,7 @@ const Title = styled(Box).attrs({
   mt: 2,
 })`
   text-align: center;
+  word-break: break-word;
 `
 
 const Text = styled(Box).attrs({

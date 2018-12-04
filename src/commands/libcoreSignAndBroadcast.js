@@ -115,6 +115,9 @@ async function signTransaction({
     if (blockHeight >= 419200) {
       additionals.push('sapling')
     }
+  } else if (currency.id === 'decred') {
+    expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
+    additionals.push('decred')
   }
   const rawInputs = transaction.getInputs()
 
@@ -129,6 +132,7 @@ async function signTransaction({
         true, // set to true allow both segwit AND non-segwit
         hasTimestamp,
         hasExtraData,
+        additionals,
       )
       const outputIndex = input.getPreviousOutputIndex()
       const sequence = input.getSequence()
