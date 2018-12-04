@@ -1,12 +1,12 @@
 // @flow
 import '@babel/polyfill'
-import commands from 'commands'
 import logger from 'logger'
 import uuid from 'uuid/v4'
 import { setImplementation } from 'api/network'
 import sentry from 'sentry/node'
 import { EXPERIMENTAL_HTTP_ON_RENDERER } from 'config/constants'
 import { serializeError } from 'helpers/errors'
+import { executeCommand, unsubscribeCommand } from 'main/commandHandler'
 
 require('../env')
 
@@ -52,64 +52,11 @@ if (EXPERIMENTAL_HTTP_ON_RENDERER) {
   })
 }
 
-const subscriptions = {}
-
 process.on('message', m => {
   if (m.type === 'command') {
-    const { data, requestId, id } = m.command
-    const cmd = commands.find(cmd => cmd.id === id)
-    if (!cmd) {
-      logger.warn(`command ${id} not found`)
-      return
-    }
-    const startTime = Date.now()
-    logger.onCmd('cmd.START', id, 0, data)
-    try {
-      subscriptions[requestId] = cmd.impl(data).subscribe({
-        next: data => {
-          logger.onCmd('cmd.NEXT', id, Date.now() - startTime, data)
-          process.send({
-            type: 'cmd.NEXT',
-            requestId,
-            data,
-          })
-        },
-        complete: () => {
-          delete subscriptions[requestId]
-          logger.onCmd('cmd.COMPLETE', id, Date.now() - startTime)
-          process.send({
-            type: 'cmd.COMPLETE',
-            requestId,
-          })
-        },
-        error: error => {
-          logger.warn('Command error:', error)
-          delete subscriptions[requestId]
-          logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
-          process.send({
-            type: 'cmd.ERROR',
-            requestId,
-            data: serializeError(error),
-          })
-        },
-      })
-    } catch (error) {
-      logger.warn('Command error:', error)
-      delete subscriptions[requestId]
-      logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
-      process.send({
-        type: 'cmd.ERROR',
-        requestId,
-        data: serializeError(error),
-      })
-    }
+    executeCommand(m.command, process.send.bind(process))
   } else if (m.type === 'command-unsubscribe') {
-    const { requestId } = m
-    const sub = subscriptions[requestId]
-    if (sub) {
-      sub.unsubscribe()
-      delete subscriptions[requestId]
-    }
+    unsubscribeCommand(m.requestId)
   } else if (m.type === 'executeHttpQueryPayload') {
     const { payload } = m
     const defer = defers[payload.id]
