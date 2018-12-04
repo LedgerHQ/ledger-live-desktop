@@ -8,7 +8,7 @@ import Box, { Tabbable } from 'components/base/Box'
 import BoldToggle from 'components/base/BoldToggle'
 
 type Item = {
-  label: string,
+  label: React$Node,
   key: string,
   value?: any,
 }

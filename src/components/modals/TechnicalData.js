@@ -30,14 +30,6 @@ class TechnicalData extends PureComponent<Props, *> {
         key: 'item3',
         desc: t('onboarding.analytics.technicalData.mandatoryContextual.item3'),
       },
-      {
-        key: 'item4',
-        desc: t('onboarding.analytics.technicalData.mandatoryContextual.item4'),
-      },
-      {
-        key: 'item5',
-        desc: t('onboarding.analytics.technicalData.mandatoryContextual.item5'),
-      },
     ]
 
     return (

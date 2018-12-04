@@ -173,4 +173,9 @@ app.on('ready', async () => {
   Menu.setApplicationMenu(menu)
 
   mainWindow = await createMainWindow()
+  await clearSessionCache(mainWindow.webContents.session)
 })
+
+function clearSessionCache(session) {
+  return new Promise(r => session.clearCache(r))
+}

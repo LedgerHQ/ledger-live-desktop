@@ -4,16 +4,14 @@ import chalk from 'chalk'
 import path from 'path'
 import fs from 'fs'
 import inquirer from 'inquirer'
-import { createAccountModel } from '@ledgerhq/live-common/lib/models/account'
-import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/helpers/currencies'
+import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/currencies'
 
 import 'globals'
 import withLibcore from 'helpers/withLibcore'
+import accountModel from 'helpers/accountModel'
 import { doSignAndBroadcast } from 'commands/libcoreSignAndBroadcast'
 
 import getDevice from './getDevice'
-
-const accountModel = createAccountModel()
 
 async function main() {
   try {

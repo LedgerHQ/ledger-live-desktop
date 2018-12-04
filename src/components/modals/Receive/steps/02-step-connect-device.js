@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Fragment } from 'react'
+import { Trans } from 'react-i18next'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -42,7 +43,7 @@ export function StepConnectDeviceFooter({
         {t('receive.steps.connectDevice.withoutDevice')}
       </Button>
       <Button disabled={!isAppOpened} primary onClick={() => transitionTo('confirm')}>
-        {t('common.continue')}
+        <Trans i18nKey="common.continue" />
       </Button>
     </Box>
   )

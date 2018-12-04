@@ -15,6 +15,7 @@ export const setDeveloperMode = (developerMode: boolean) => saveSettings({ devel
 export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs })
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics })
 export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketIndicator })
+export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout })
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
