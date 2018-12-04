@@ -2,6 +2,7 @@
   "common": {
     "labelYes": "예",
     "labelNo": "아니오",
+    "never": "Never",
     "apply": "신청",
     "confirm": "확인",
     "cancel": "취소",
@@ -67,6 +68,9 @@
     "week": "주",
     "month": "월",
     "year": "년",
+    "minute": "Minute",
+    "second": "Second",
+    "hour": "Hour",
     "since": {
       "day": "전날",
       "week": "지난 주",
@@ -382,7 +386,9 @@
     },
     "profile": {
       "password": "암호 잠금",
-      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, transactions and public addresses.",
+      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
+      "passwordAutoLock": "Auto-lock",
+      "passwordAutoLockDesc": "Optional, how long should the app be idle before it locks itself.",
       "changePassword": "암호 변경",
       "softResetTitle": "캐시 지우기",
       "softResetDesc": "블록 체인과 강제로 동기화하려면 Ledger Live 캐시를 지우십시오.",
