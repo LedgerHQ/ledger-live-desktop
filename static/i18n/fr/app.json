@@ -2,6 +2,7 @@
   "common": {
     "labelYes": "Yes",
     "labelNo": "No",
+    "never": "Never",
     "apply": "Apply",
     "confirm": "Confirm",
     "cancel": "Cancel",
@@ -67,6 +68,9 @@
     "week": "Week",
     "month": "Month",
     "year": "Year",
+    "minute": "Minute",
+    "second": "Second",
+    "hour": "Hour",
     "since": {
       "day": "past day",
       "week": "past week",
@@ -382,7 +386,9 @@
     },
     "profile": {
       "password": "Password lock",
-      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, transactions and public addresses.",
+      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
+      "passwordAutoLock": "Auto-lock",
+      "passwordAutoLockDesc": "Optional, how long should the app be idle before it locks itself.",
       "changePassword": "Change password",
       "softResetTitle": "Clear cache",
       "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
