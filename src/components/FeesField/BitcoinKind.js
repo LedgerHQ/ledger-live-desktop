@@ -89,7 +89,7 @@ class FeesField extends Component<OwnProps, State> {
     }
     items.push(!feePerByte && !error ? notLoadedItem : customItem)
     const selectedItem =
-      !feePerByte && prevState.selectedItem.feePerByte.eq(feePerByte)
+      feePerByte && prevState.selectedItem.feePerByte.eq(feePerByte)
         ? prevState.selectedItem
         : items.find(f => f.feePerByte.eq(feePerByte)) || items[items.length - 1]
     return { items, selectedItem }
