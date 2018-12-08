@@ -11,7 +11,7 @@ export type Props = {
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   disabled?: boolean,
   iconActiveColor: ?string,
-  hasNotif?: boolean,
+  NotifComponent?: React$ComponentType<*>,
   isActive?: boolean,
   onClick?: void => void,
   isActive?: boolean,
@@ -24,7 +24,7 @@ class SideBarListItem extends PureComponent<Props> {
       label,
       desc,
       iconActiveColor,
-      hasNotif,
+      NotifComponent,
       onClick,
       isActive,
       disabled,
@@ -47,7 +47,7 @@ class SideBarListItem extends PureComponent<Props> {
           )}
           {!!desc && desc(this.props)}
         </Box>
-        {!!hasNotif && <Bullet />}
+        {NotifComponent && <NotifComponent />}
       </Container>
     )
   }
@@ -83,13 +83,6 @@ const Container = styled(Tabbable).attrs({
       &:hover svg { color: ${p.disabled ? color : iconActiveColor}; }
     `
   }};
-`
-
-const Bullet = styled.div`
-  background: ${p => p.theme.colors.wallet};
-  width: 8px;
-  height: 8px;
-  border-radius: 100%;
 `
 
 export default SideBarListItem
