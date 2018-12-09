@@ -24,7 +24,7 @@ import { saveSettings } from 'actions/settings'
 
 import TrackPage from 'analytics/TrackPage'
 import RefreshAccountsOrdering from 'components/RefreshAccountsOrdering'
-import UpdateNotifier from 'components/UpdateNotifier'
+import UpdateBanner from 'components/Updater/Banner'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
@@ -84,7 +84,7 @@ class DashboardPage extends PureComponent<Props> {
 
     return (
       <Fragment>
-        <UpdateNotifier />
+        <UpdateBanner />
         <RefreshAccountsOrdering onMount />
         <TrackPage
           category="Portfolio"

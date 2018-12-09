@@ -4,6 +4,7 @@ import invariant from 'invariant'
 import type { Command } from 'helpers/ipc'
 
 import debugAppInfosForCurrency from 'commands/debugAppInfosForCurrency'
+import autoUpdate from 'commands/autoUpdate'
 import getAddress from 'commands/getAddress'
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getCurrentFirmware from 'commands/getCurrentFirmware'
@@ -28,6 +29,7 @@ import listAppVersions from 'commands/listAppVersions'
 import listCategories from 'commands/listCategories'
 import listenDevices from 'commands/listenDevices'
 import ping from 'commands/ping'
+import quitAndInstallElectronUpdate from 'commands/quitAndInstallElectronUpdate'
 import shouldFlashMcu from 'commands/shouldFlashMcu'
 import signTransaction from 'commands/signTransaction'
 import testApdu from 'commands/testApdu'
@@ -37,6 +39,7 @@ import uninstallApp from 'commands/uninstallApp'
 
 const all: Array<Command<any, any>> = [
   debugAppInfosForCurrency,
+  autoUpdate,
   getAddress,
   getDeviceInfo,
   getCurrentFirmware,
@@ -61,6 +64,7 @@ const all: Array<Command<any, any>> = [
   listCategories,
   listenDevices,
   ping,
+  quitAndInstallElectronUpdate,
   shouldFlashMcu,
   signTransaction,
   testApdu,
