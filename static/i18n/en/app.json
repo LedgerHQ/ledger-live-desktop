@@ -137,7 +137,7 @@
   "currentAddress": {
     "title": "Current address",
     "for": "Address for account <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Please verify that the Bitcoin address shown on your device matches the one on your phone",
+    "messageIfUnverified": "Please verify that the Bitcoin address shown on your device matches the one on your screen",
     "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
