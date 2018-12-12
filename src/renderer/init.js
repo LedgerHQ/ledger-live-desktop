@@ -1,6 +1,7 @@
 // @flow
 
 import logger from 'logger'
+import LoggerTransport from 'logger/logger-transport-renderer'
 import React from 'react'
 import { remote, webFrame } from 'electron'
 import { render } from 'react-dom'
@@ -33,6 +34,8 @@ import App from 'components/App'
 import AppError from 'components/AppError'
 
 import 'styles/global'
+
+logger.add(new LoggerTransport())
 
 const rootNode = document.getElementById('app')
 const userDataDirectory = resolveUserDataDirectory()

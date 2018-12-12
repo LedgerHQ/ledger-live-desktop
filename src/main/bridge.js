@@ -7,9 +7,10 @@ import { ipcMain, app } from 'electron'
 import { ipcMainListenReceiveCommands } from 'helpers/ipc'
 import path from 'path'
 import logger from 'logger'
+import LoggerTransport from 'logger/logger-transport-main'
 import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
-import { resolveLogsDirectory, cleanUpBeforeClosingSync } from 'helpers/log'
+import { cleanUpBeforeClosingSync } from 'helpers/log'
 import { deserializeError } from 'helpers/errors'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
@@ -17,9 +18,11 @@ import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
 
+const loggerTransport = new LoggerTransport()
+logger.add(loggerTransport)
+
 // sqlite files will be located in the app local data folder
 const LEDGER_LIVE_SQLITE_PATH = path.resolve(app.getPath('userData'), 'sqlite')
-const LEDGER_LOGS_DIRECTORY = process.env.LEDGER_LOGS_DIRECTORY || resolveLogsDirectory()
 const LEDGER_CONFIG_DIRECTORY = app.getPath('userData')
 
 let internalProcess
@@ -55,7 +58,6 @@ const bootInternalProcess = () => {
     env: {
       ...process.env,
       IS_INTERNAL_PROCESS: 1,
-      LEDGER_LOGS_DIRECTORY,
       LEDGER_CONFIG_DIRECTORY,
       LEDGER_LIVE_SQLITE_PATH,
       INITIAL_SENTRY_ENABLED: sentryEnabled,
@@ -74,6 +76,10 @@ process.on('exit', () => {
 
 ipcMain.on('clean-processes', () => {
   killInternalProcess()
+})
+
+ipcMain.on('log', (e, { log }) => {
+  logger.onLog(log)
 })
 
 ipcMainListenReceiveCommands({
@@ -118,6 +124,9 @@ function handleGlobalInternalMessage(payload) {
       captureException(err)
       break
     }
+    case 'log':
+      logger.onLog(payload.log)
+      break
     case 'setLibcoreBusy':
     case 'setDeviceBusy':
     case 'executeHttpQueryOnRenderer': {
@@ -132,6 +141,10 @@ function handleGlobalInternalMessage(payload) {
     default:
   }
 }
+
+ipcMain.on('queryLogs', event => {
+  event.sender.send('logs', { logs: loggerTransport.logs })
+})
 
 ipcMain.on('executeHttpQueryPayload', (event, payload) => {
   const p = internalProcess
