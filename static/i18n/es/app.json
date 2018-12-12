@@ -148,7 +148,7 @@
   },
   "emptyState": {
     "sidebar": {
-      "text": "Press this button to add accounts to the Portfolio"
+      "text": "Click this button to add accounts to the Portfolio"
     },
     "dashboard": {
       "title": "Install apps or add accounts",
@@ -160,7 +160,7 @@
     }
   },
   "exchange": {
-    "title": "Negociar",
+    "title": "Buy crypto",
     "desc": "Try a few services we've selected",
     "visitWebsite": "Visita la página web",
     "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar crypto activos con seguridad.",
@@ -242,8 +242,8 @@
       "all": "Catálogo de aplicaciones ",
       "installing": "Instalando {{app}}...",
       "uninstalling": "Desinstalando {{app}}...",
-      "installSuccess": "{{app}} se ha instalado en tu dispositivo.",
-      "uninstallSuccess": "{{app}} se ha desinstalado de tu dispositivo",
+      "installSuccess": "Successfully installed {{app}}",
+      "uninstallSuccess": "{{app}} uninstalled",
       "help": "Comprueba tu dispositivo para ver qué aplicaciones ya están instaladas."
     },
     "firmware": {
@@ -262,7 +262,7 @@
       },
       "installing": "Actualizando el firmware...",
       "confirmIdentifier": "Comprobar el identificador",
-      "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo es el mismo que el que aparece a continuación. Pulsa el botón derecho para confirmar.",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "Identificador",
       "mcuTitle": "Actualizando MCU",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
@@ -388,7 +388,7 @@
       "password": "Bloqueo por contraseña",
       "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
       "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Optional, how long should the app be idle before it locks itself.",
+      "passwordAutoLockDesc": "Automatically lock Ledger Live after inactivity.",
       "changePassword": "Cambiar contraseña",
       "softResetTitle": "Borrar caché",
       "softResetDesc": "Borra la caché de Ledger Live para forzar la resincronización con la cadena de bloques.",
@@ -559,7 +559,7 @@
         "instructions": {
           "nano": {
             "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?.</0></1>",
+            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
@@ -666,7 +666,7 @@
     },
     "analytics": {
       "title": "Bugs and analytics",
-      "desc": "Share anonymized data to help improve Ledger security products and services.",
+      "desc": "Share anonymized data to help improve Ledger security products and services",
       "shareAnalytics": {
         "title": "Analytics",
         "desc": "Enable analytics to help Ledger understand how to improve user experience.",
@@ -865,8 +865,8 @@
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Oops, wrong device for ‘{{accountName}}’",
-      "description": "Please connect the device that manages the selected account"
+      "title": "Wrong device or passphrase for ‘{{accountName}}’",
+      "description": "Please use the device or passphrase for the selected account"
     },
     "DeviceAppVerifyNotSupported": {
       "title": "App update required",
