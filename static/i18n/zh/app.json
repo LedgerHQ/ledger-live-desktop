@@ -148,7 +148,7 @@
   },
   "emptyState": {
     "sidebar": {
-      "text": "Press this button to add accounts to the Portfolio"
+      "text": "Click this button to add accounts to the Portfolio"
     },
     "dashboard": {
       "title": "Install apps or add accounts",
@@ -160,7 +160,7 @@
     }
   },
   "exchange": {
-    "title": "交易",
+    "title": "Buy crypto",
     "desc": "Try a few services we've selected",
     "visitWebsite": "访问网站",
     "coinhouse": "对于寻求分析、获得、销售和安全存储加密资产的个人和机构投资者而言，Coinhouse 是一个值得信赖的平台。",
@@ -242,8 +242,8 @@
       "all": "App catalog",
       "installing": "Installing {{app}}...",
       "uninstalling": "Uninstalling {{app}}...",
-      "installSuccess": "{{app}} 现在已安装在您的设备上",
-      "uninstallSuccess": "{{app}} has been uninstalled from your device",
+      "installSuccess": "Successfully installed {{app}}",
+      "uninstallSuccess": "{{app}} uninstalled",
       "help": "检查您的设备，查看已安装了哪些应用程序"
     },
     "firmware": {
@@ -262,7 +262,7 @@
       },
       "installing": "正在更新固件...",
       "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "验证以确保设备上的标识与以下标识相同。按右键以确认。",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "Identifier",
       "mcuTitle": "正在更新 MCU",
       "mcuFirst": "从设备上断开 USB 数据线连接",
@@ -388,7 +388,7 @@
       "password": "密码锁",
       "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
       "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Optional, how long should the app be idle before it locks itself.",
+      "passwordAutoLockDesc": "Automatically lock Ledger Live after inactivity.",
       "changePassword": "更改密码",
       "softResetTitle": "清除缓存",
       "softResetDesc": "清除 Ledger Live 缓存，以强制与区块链重新同步。",
@@ -559,7 +559,7 @@
         "instructions": {
           "nano": {
             "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?.</0></1>",
+            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
@@ -666,7 +666,7 @@
     },
     "analytics": {
       "title": "Bugs and analytics",
-      "desc": "Share anonymized data to help improve Ledger security products and services.",
+      "desc": "Share anonymized data to help improve Ledger security products and services",
       "shareAnalytics": {
         "title": "Analytics",
         "desc": "Enable analytics to help Ledger understand how to improve user experience.",
@@ -865,8 +865,8 @@
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Oops, wrong device for ‘{{accountName}}’",
-      "description": "Please connect the device that manages the selected account"
+      "title": "Wrong device or passphrase for ‘{{accountName}}’",
+      "description": "Please use the device or passphrase for the selected account"
     },
     "DeviceAppVerifyNotSupported": {
       "title": "App update required",
