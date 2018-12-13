@@ -23,6 +23,7 @@ const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
 
     const handleDownload = async info => {
       try {
+        sendStatus('checking')
         const appUpdater = await createElectronAppUpdater({
           feedURL: UPDATE_CHECK_FEED,
           updateVersion: info.version,

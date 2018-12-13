@@ -1,6 +1,8 @@
 // @flow
 
 export const urls = {
+  liveHome: 'https://www.ledger.com/pages/ledger-live',
+
   // Social
   twitter: 'https://twitter.com/LedgerHQ',
   github: 'https://github.com/LedgerHQ/ledger-live-desktop',
