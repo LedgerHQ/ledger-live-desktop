@@ -5,7 +5,6 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
-import { resolveLogsDirectory } from 'helpers/log'
 import { urls } from 'config/urls'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
@@ -52,10 +51,7 @@ class SectionHelp extends PureComponent<Props> {
           >
             <CleanButton />
           </Row>
-          <Row
-            title={t('settings.exportLogs.title')}
-            desc={t('settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
-          >
+          <Row title={t('settings.exportLogs.title')} desc={t('settings.exportLogs.desc')}>
             <ExportLogsBtn />
           </Row>
           <Row

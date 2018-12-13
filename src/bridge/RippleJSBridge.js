@@ -123,6 +123,10 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
           a.pendingOperations.length,
         extra: {},
       }
+
+      if (t.tag) {
+        op.extra.tag = t.tag
+      }
       onOperationBroadcasted(op)
     }
   } finally {
@@ -164,6 +168,7 @@ type Tx = {
         currency: string,
         value: string,
       },
+      tag?: string,
     },
     paths: string,
   },
@@ -234,6 +239,10 @@ const txToOperation = (account: Account) => ({
     date: new Date(timestamp),
     transactionSequenceNumber: sequence,
     extra: {},
+  }
+
+  if (destination.tag) {
+    op.extra.tag = destination.tag
   }
   return op
 }
