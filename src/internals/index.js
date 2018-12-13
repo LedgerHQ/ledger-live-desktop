@@ -2,11 +2,14 @@
 import '@babel/polyfill'
 import commands from 'commands'
 import logger from 'logger'
+import LoggerTransport from 'logger/logger-transport-internal'
 import uuid from 'uuid/v4'
 import { setImplementation } from 'api/network'
 import sentry from 'sentry/node'
 import { EXPERIMENTAL_HTTP_ON_RENDERER } from 'config/constants'
 import { serializeError } from 'helpers/errors'
+
+logger.add(new LoggerTransport())
 
 require('../env')
 

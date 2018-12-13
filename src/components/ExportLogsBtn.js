@@ -2,11 +2,19 @@
 import logger from 'logger'
 import moment from 'moment'
 import fs from 'fs'
-import { webFrame, remote } from 'electron'
+import { ipcRenderer, webFrame, remote } from 'electron'
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
 import KeyHandler from 'react-key-handler'
 import Button from './base/Button'
+
+const queryLogs = () =>
+  new Promise(success => {
+    ipcRenderer.once('logs', (event: any, { logs }) => {
+      success(logs)
+    })
+    ipcRenderer.send('queryLogs')
+  })
 
 function writeToFile(file, data) {
   return new Promise((resolve, reject) => {
@@ -33,7 +41,6 @@ class ExportLogsBtn extends Component<{
       environment: __DEV__ ? 'development' : 'production',
       userAgent: window.navigator.userAgent,
     })
-    const date = new Date() // we don't want all the logs that happen after the Export was pressed ^^
     const path = remote.dialog.showSaveDialog({
       title: 'Export logs',
       defaultPath: `ledgerlive-export-${moment().format(
@@ -47,7 +54,7 @@ class ExportLogsBtn extends Component<{
       ],
     })
     if (path) {
-      const logs = await logger.queryAllLogs(date)
+      const logs = await queryLogs()
       const json = JSON.stringify(logs)
       await writeToFile(path, json)
     }
