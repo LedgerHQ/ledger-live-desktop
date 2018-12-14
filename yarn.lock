@@ -1756,10 +1756,10 @@
   dependencies:
     events "^3.0.0"
 
-"@ledgerhq/ledger-core@2.0.0-rc.12":
-  version "2.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.12.tgz#bdd3e4b601acb0c74c640f40bea2609bb5e4b0f4"
-  integrity sha512-nwPAmDlGGSx/nRzwxKodmN1KBKtFmElE0FkbbAn1s0xiX6C8wMPRWPtD7oTufJ5MsfSfJg4ELsscEiaHFbZFKA==
+"@ledgerhq/ledger-core@2.0.0-rc.13":
+  version "2.0.0-rc.13"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.13.tgz#a07ac7ee1f0bd3f91699158cb46c6ce8e3b981b5"
+  integrity sha512-HV7PV5UAB5LVnBtF9hYsRHPt9IG0bIXOsWxU43D4h5RZlkZxDt3j8EQv2Yy1s/y4aHj5bnmBYWw4RxCH2QVR3A==
   dependencies:
     "@ledgerhq/hw-app-btc" "^4.7.3"
     "@ledgerhq/hw-transport-node-hid" "^4.7.6"
