@@ -1,9 +1,9 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
+import { from } from 'rxjs'
 
-import { withDevice } from 'helpers/deviceAccess'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import installMcu from 'helpers/firmware/installMcu'
 
 type Input = {
@@ -13,7 +13,7 @@ type Input = {
 type Result = void
 
 const cmd: Command<Input, Result> = createCommand('installMcu', ({ devicePath }) =>
-  fromPromise(withDevice(devicePath)(transport => installMcu(transport))),
+  withDevice(devicePath)(transport => from(installMcu(transport))),
 )
 
 export default cmd

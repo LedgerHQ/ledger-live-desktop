@@ -1,5 +1,7 @@
 // @flow
 
+import 'helpers/live-common-setup'
+
 import logger from 'logger'
 import LoggerTransport from 'logger/logger-transport-renderer'
 import React from 'react'

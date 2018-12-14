@@ -5,7 +5,8 @@
 import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
-import { withDevice } from 'helpers/deviceAccess'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import {
   getDerivationModesForCurrency,
   getDerivationScheme,
@@ -99,9 +100,9 @@ async function scanAccountsOnDeviceBySegwit({
   const { coinType } = unsplitFork ? getCryptoCurrencyById(unsplitFork) : currency
   const path = `${isSegwit ? '49' : '44'}'/${coinType}'`
 
-  const { publicKey: seedIdentifier } = await withDevice(devicePath)(async transport =>
-    new Btc(transport).getWalletPublicKey(path, false, isSegwit),
-  )
+  const { publicKey: seedIdentifier } = await withDevice(devicePath)(transport =>
+    from(new Btc(transport).getWalletPublicKey(path, false, isSegwit)),
+  ).toPromise()
 
   if (isUnsubscribed()) return []
 
@@ -141,9 +142,9 @@ const createAccount = async (wallet, devicePath) => {
   await accountCreationInfos.derivations.reduce(
     (promise, derivation) =>
       promise.then(async () => {
-        const { publicKey, chainCode } = await withDevice(devicePath)(async transport =>
-          new Btc(transport).getWalletPublicKey(derivation),
-        )
+        const { publicKey, chainCode } = await withDevice(devicePath)(transport =>
+          from(new Btc(transport).getWalletPublicKey(derivation)),
+        ).toPromise()
         accountCreationInfos.publicKeys.push(hexToBytes(publicKey))
         accountCreationInfos.chainCodes.push(hexToBytes(chainCode))
       }),

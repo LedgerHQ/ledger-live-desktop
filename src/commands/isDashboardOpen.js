@@ -1,8 +1,8 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { withDevice } from 'helpers/deviceAccess'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
 import isDashboardOpen from '../helpers/devices/isDashboardOpen'
 
@@ -13,7 +13,7 @@ type Input = {
 type Result = boolean
 
 const cmd: Command<Input, Result> = createCommand('isDashboardOpen', ({ devicePath }) =>
-  fromPromise(withDevice(devicePath)(transport => isDashboardOpen(transport))),
+  withDevice(devicePath)(transport => from(isDashboardOpen(transport))),
 )
 
 export default cmd

@@ -1,8 +1,8 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { withDevice } from 'helpers/deviceAccess'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
 import uninstallApp from 'helpers/apps/uninstallApp'
 
@@ -19,7 +19,7 @@ type Result = void
 const cmd: Command<Input, Result> = createCommand(
   'uninstallApp',
   ({ devicePath, targetId, ...app }) =>
-    fromPromise(withDevice(devicePath)(transport => uninstallApp(transport, targetId, app))),
+    withDevice(devicePath)(transport => from(uninstallApp(transport, targetId, app))),
 )
 
 export default cmd

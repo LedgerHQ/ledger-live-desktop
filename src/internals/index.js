@@ -1,5 +1,8 @@
 // @flow
 import '@babel/polyfill'
+import 'helpers/live-common-setup'
+import 'helpers/live-common-setup-internal-hw'
+
 import commands from 'commands'
 import logger from 'logger'
 import LoggerTransport from 'logger/logger-transport-internal'
@@ -9,9 +12,9 @@ import sentry from 'sentry/node'
 import { EXPERIMENTAL_HTTP_ON_RENDERER } from 'config/constants'
 import { serializeError } from 'helpers/errors'
 
-logger.add(new LoggerTransport())
-
 require('../env')
+
+logger.add(new LoggerTransport())
 
 process.title = 'Ledger Live Internal'
 

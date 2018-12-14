@@ -1,9 +1,9 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
+import { from } from 'rxjs'
 
-import { withDevice } from 'helpers/deviceAccess'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import getMemInfo from 'helpers/devices/getMemInfo'
 
 type Input = {
@@ -13,7 +13,7 @@ type Input = {
 type Result = *
 
 const cmd: Command<Input, Result> = createCommand('getMemInfo', ({ devicePath }) =>
-  fromPromise(withDevice(devicePath)(transport => getMemInfo(transport))),
+  withDevice(devicePath)(transport => from(getMemInfo(transport))),
 )
 
 export default cmd

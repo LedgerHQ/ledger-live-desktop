@@ -1,8 +1,8 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { withDevice } from 'helpers/deviceAccess'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
 import installFinalFirmware from 'helpers/firmware/installFinalFirmware'
 
@@ -15,7 +15,7 @@ type Result = {
 }
 
 const cmd: Command<Input, Result> = createCommand('installFinalFirmware', ({ devicePath }) =>
-  fromPromise(withDevice(devicePath)(transport => installFinalFirmware(transport))),
+  withDevice(devicePath)(transport => from(installFinalFirmware(transport))),
 )
 
 export default cmd
