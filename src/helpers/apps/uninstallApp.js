@@ -4,7 +4,7 @@ import type Transport from '@ledgerhq/hw-transport'
 import { createDeviceSocket } from 'helpers/socket'
 
 import type { ApplicationVersion } from 'helpers/types'
-import { ManagerDeviceLockedError, ManagerUninstallBTCDep } from 'config/errors'
+import { ManagerDeviceLockedError, ManagerUninstallBTCDep } from '@ledgerhq/live-common/lib/errors'
 import { WS_INSTALL } from 'helpers/urls'
 
 function remapError(promise) {

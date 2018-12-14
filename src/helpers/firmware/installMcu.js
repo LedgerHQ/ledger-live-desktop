@@ -5,7 +5,7 @@ import { WS_MCU } from 'helpers/urls'
 import { createDeviceSocket } from 'helpers/socket'
 import getNextMCU from 'helpers/firmware/getNextMCU'
 import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import { ManagerDeviceLockedError } from 'config/errors'
+import { ManagerDeviceLockedError } from '@ledgerhq/live-common/lib/errors'
 
 import type { DeviceInfo } from 'helpers/types'
 

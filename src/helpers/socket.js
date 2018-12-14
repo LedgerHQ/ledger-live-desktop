@@ -11,7 +11,7 @@ import {
   DeviceSocketFail,
   DeviceSocketNoBulkStatus,
   DeviceSocketNoHandler,
-} from 'config/errors'
+} from '@ledgerhq/live-common/lib/errors'
 
 /**
  * use Ledger WebSocket API to exchange data with the device

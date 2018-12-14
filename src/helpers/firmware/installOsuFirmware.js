@@ -10,7 +10,7 @@ import {
   ManagerNotEnoughSpaceError,
   ManagerDeviceLockedError,
   UserRefusedFirmwareUpdate,
-} from 'config/errors'
+} from '@ledgerhq/live-common/lib/errors'
 
 function remapError(promise) {
   return promise.catch((e: Error) => {

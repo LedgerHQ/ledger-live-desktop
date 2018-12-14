@@ -14,7 +14,11 @@ import type { DeviceInfo } from 'helpers/types'
 import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT, GENUINE_CACHE_DELAY } from 'config/constants'
 
 import { getCurrentDevice } from 'reducers/devices'
-import { CantOpenDevice, DeviceNotGenuineError, DeviceGenuineSocketEarlyClose } from 'config/errors'
+import {
+  CantOpenDevice,
+  DeviceNotGenuineError,
+  DeviceGenuineSocketEarlyClose,
+} from '@ledgerhq/live-common/lib/errors'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'

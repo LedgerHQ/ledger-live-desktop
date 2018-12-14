@@ -3,7 +3,7 @@ import network from 'api/network'
 
 import { GET_NEXT_MCU } from 'helpers/urls'
 import type { OsuFirmware } from 'helpers/types'
-import { LatestMCUInstalledError } from 'config/errors'
+import { LatestMCUInstalledError } from '@ledgerhq/live-common/lib/errors'
 
 type NetworkResponse = { data: OsuFirmware | 'default' }
 

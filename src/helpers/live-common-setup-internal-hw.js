@@ -4,9 +4,8 @@ import { throwError } from 'rxjs'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import throttle from 'lodash/throttle'
-import type Transport from '@ledgerhq/hw-transport'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
-import { DisconnectedDevice, CantOpenDevice } from 'config/errors'
+import { DisconnectedDevice } from '@ledgerhq/live-common/lib/errors'
 import { retry } from './promise'
 
 let busy = false

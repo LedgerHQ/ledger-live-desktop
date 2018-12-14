@@ -7,7 +7,7 @@ import { createDeviceSocket } from 'helpers/socket'
 import getDeviceVersion from 'helpers/devices/getDeviceVersion'
 import getOsuFirmware from 'helpers/devices/getOsuFirmware'
 import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import { ManagerDeviceLockedError } from 'config/errors'
+import { ManagerDeviceLockedError } from '@ledgerhq/live-common/lib/errors'
 
 import getFinalFirmwareById from './getFinalFirmwareById'
 

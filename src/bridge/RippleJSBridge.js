@@ -32,7 +32,7 @@ import {
   NotEnoughBalance,
   FeeNotLoaded,
   NotEnoughBalanceBecauseDestinationNotCreated,
-} from 'config/errors'
+} from '@ledgerhq/live-common/lib/errors'
 import type { WalletBridge, EditProps } from './types'
 
 type Transaction = {

@@ -5,10 +5,9 @@ import React, { PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
 import getAddress from 'commands/getAddress'
-import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
-import { DisconnectedDevice, WrongDeviceForAccount } from 'config/errors'
+import { DisconnectedDevice, WrongDeviceForAccount } from '@ledgerhq/live-common/lib/errors'
 
 import type { StepProps } from '..'
 
@@ -25,14 +24,14 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
       if (!device || !account) {
         throw new DisconnectedDevice()
       }
-      const params = {
-        currencyId: account.currency.id,
-        devicePath: device.path,
-        path: account.freshAddressPath,
-        segwit: isSegwitDerivationMode(account.derivationMode),
-        verify: true,
-      }
-      const { address } = await getAddress.send(params).toPromise()
+      const { address } = await getAddress
+        .send({
+          currencyId: account.currency.id,
+          devicePath: device.path,
+          path: account.freshAddressPath,
+          verify: true,
+        })
+        .toPromise()
 
       if (address !== account.freshAddress) {
         throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
