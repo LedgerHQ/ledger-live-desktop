@@ -227,7 +227,8 @@ export async function doSignAndBroadcast({
   const njsWalletCurrency = njsWallet.getCurrency()
   const amount = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.amount))
   const fees = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.feePerByte))
-  const transactionBuilder = bitcoinLikeAccount.buildTransaction()
+  const isPartial = false
+  const transactionBuilder = bitcoinLikeAccount.buildTransaction(isPartial)
 
   // TODO: check if is valid address. if not, it will fail silently on invalid
 

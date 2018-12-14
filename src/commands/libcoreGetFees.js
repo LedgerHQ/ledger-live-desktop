@@ -75,7 +75,8 @@ const cmd: Command<Input, Result> = createCommand(
           njsWalletCurrency,
           BigNumber(transaction.feePerByte),
         )
-        const transactionBuilder = bitcoinLikeAccount.buildTransaction()
+        const isPartial = true
+        const transactionBuilder = bitcoinLikeAccount.buildTransaction(isPartial)
         if (!isValidAddress(core, njsWalletCurrency, transaction.recipient)) {
           // FIXME this is a bug in libcore. later it will probably check this and we can remove this check
           throw new InvalidAddress()

@@ -1685,14 +1685,6 @@
     "@ledgerhq/hw-transport" "^4.32.0"
     create-hash "^1.1.3"
 
-"@ledgerhq/hw-app-btc@^4.7.3":
-  version "4.15.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.15.0.tgz#8bea2908c4c67f47f85641eb8d82c54df50fef19"
-  integrity sha1-i+opCMTGf0f4VkHrjYLFTfUP7xk=
-  dependencies:
-    "@ledgerhq/hw-transport" "^4.15.0"
-    create-hash "^1.1.3"
-
 "@ledgerhq/hw-app-eth@^4.32.0":
   version "4.32.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.32.0.tgz#7d43ca2c7952f1fb726e02c3b4485be10af481a2"
@@ -1718,44 +1710,18 @@
     node-hid "^0.7.2"
     usb "^1.3.3"
 
-"@ledgerhq/hw-transport-node-hid@^4.7.6":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.16.0.tgz#de8d7ffd37e01c77aed566d8c534fe3937c3c35c"
-  integrity sha1-3o1//TfgHHeu1WbYxTT+OTfDw1w=
-  dependencies:
-    "@ledgerhq/hw-transport" "^4.15.0"
-    node-hid "^0.7.2"
-
-"@ledgerhq/hw-transport@^4.15.0":
-  version "4.19.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.19.0.tgz#19a804aee1bfc4abac1dc9a2a7a582e79273f991"
-  integrity sha1-GagEruG/xKusHcmip6WC55Jz+ZE=
-  dependencies:
-    events "^2.0.0"
-
-"@ledgerhq/hw-transport@^4.21.0":
-  version "4.24.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.24.0.tgz#8def925d8c2e1f73d15128d9e27ead729870be58"
-  integrity sha512-L34TG1Ss7goRB+5BxtvBwUuu0CmDSIxS33oUqkpEy6rCs31k7XicV48iUGAnRnt8hNY2DvJ9WFyaOroUE9h6wQ==
-  dependencies:
-    events "^3.0.0"
-
-"@ledgerhq/hw-transport@^4.32.0":
+"@ledgerhq/hw-transport@^4.21.0", "@ledgerhq/hw-transport@^4.32.0":
   version "4.32.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-4.32.0.tgz#592b9dc51459cb1cd31ce9444cf943f627bc4beb"
   integrity sha512-Wgsk9UHC4RShqYoDeIEeKgHZOvNCtB0WWIG0xqlVPzS+IcKDkIxtXQw7hTA7GQSuDuGeauVtlbTQ5yat6+2/BA==
   dependencies:
     events "^3.0.0"
 
-"@ledgerhq/ledger-core@2.0.0-rc.12":
-  version "2.0.0-rc.12"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.12.tgz#bdd3e4b601acb0c74c640f40bea2609bb5e4b0f4"
-  integrity sha512-nwPAmDlGGSx/nRzwxKodmN1KBKtFmElE0FkbbAn1s0xiX6C8wMPRWPtD7oTufJ5MsfSfJg4ELsscEiaHFbZFKA==
+"@ledgerhq/ledger-core@2.0.0-rc.14":
+  version "2.0.0-rc.14"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.0.0-rc.14.tgz#538b771e9d837ce1d26aabaa1dfe58a6b882e3cd"
+  integrity sha512-WIq6DyOoqtPPt+pS8K6NQ8EJD9GIn/VD1HLehWvJYqZhUf1IOIEIaOqxCnayHMQ/7b4c68xANgmKggUBdQ0M+A==
   dependencies:
-    "@ledgerhq/hw-app-btc" "^4.7.3"
-    "@ledgerhq/hw-transport-node-hid" "^4.7.6"
-    axios "^0.18.0"
-    babel-runtime "^6.26.0"
     bindings "^1.3.0"
     nan "^2.6.2"
 
