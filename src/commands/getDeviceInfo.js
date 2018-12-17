@@ -3,9 +3,8 @@
 import { createCommand, Command } from 'helpers/ipc'
 import { from } from 'rxjs'
 import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
-
-import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import type { DeviceInfo } from 'helpers/types'
+import getDeviceInfo from '@ledgerhq/live-common/lib/hw/getDeviceInfo'
+import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 
 type Input = {
   devicePath: string,

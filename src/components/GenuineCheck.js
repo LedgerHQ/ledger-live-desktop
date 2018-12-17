@@ -9,7 +9,8 @@ import { delay, createCancelablePolling } from 'helpers/promise'
 
 import logger from 'logger'
 import type { T, Device } from 'types/common'
-import type { DeviceInfo } from 'helpers/types'
+import manager from '@ledgerhq/live-common/lib/manager'
+import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 
 import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT, GENUINE_CACHE_DELAY } from 'config/constants'
 
@@ -91,6 +92,16 @@ class GenuineCheck extends PureComponent<Props> {
       logger.log('device is in update mode. skipping genuine')
       return true
     }
+
+    // Preload things in parallel
+    Promise.all([
+      // Step dashboard, we preload the applist before entering manager while we're still doing the genuine check
+      manager.getAppsList(deviceInfo),
+      // we also preload as much info as possible in case of a MCU
+      manager.getLatestFirmwareForDevice(deviceInfo),
+    ]).catch(e => {
+      logger.warn(e)
+    })
 
     if (genuineDevices.has(device)) {
       logger.log("genuine was already checked. don't check again")

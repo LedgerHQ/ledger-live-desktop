@@ -9,11 +9,10 @@ import { compose } from 'redux'
 import { throttleTime, filter, map } from 'rxjs/operators'
 
 import type { Device, T } from 'types/common'
-import type { ApplicationVersion, DeviceInfo } from 'helpers/types'
+import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
+import manager from '@ledgerhq/live-common/lib/manager'
 import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 import { developerModeSelector } from 'reducers/settings'
-import listApps from 'commands/listApps'
-import listAppVersions from 'commands/listAppVersions'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import Box from 'components/base/Box'
@@ -131,24 +130,14 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   async fetchAppList() {
+    const { deviceInfo, isDevMode } = this.props
+
     try {
-      const { deviceInfo } = this.props
-
-      const [
-        applicationsList,
-        compatibleAppVersionsList,
-        sortedCryptoCurrencies,
-      ] = await Promise.all([
-        listApps.send().toPromise(),
-        listAppVersions.send(deviceInfo).toPromise(),
-        getFullListSortedCryptoCurrencies(),
-      ])
-
-      const filteredAppVersionsList = this.prepareAppList({
-        applicationsList,
-        compatibleAppVersionsList,
-        sortedCryptoCurrencies,
-      })
+      const filteredAppVersionsList = await manager.getAppsList(
+        deviceInfo,
+        isDevMode,
+        getFullListSortedCryptoCurrencies,
+      )
 
       if (!this._unmounted) {
         this.setState({

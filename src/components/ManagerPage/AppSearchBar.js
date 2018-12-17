@@ -3,7 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 
-import type { ApplicationVersion } from 'helpers/types'
+import type { ApplicationVersion } from '@ledgerhq/live-common/lib/types/manager'
 
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'

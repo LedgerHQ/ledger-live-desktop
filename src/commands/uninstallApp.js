@@ -4,7 +4,7 @@ import { createCommand, Command } from 'helpers/ipc'
 import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import uninstallApp from '@ledgerhq/live-common/lib/hw/uninstallApp'
 
-import type { ApplicationVersion } from 'helpers/types'
+import type { ApplicationVersion } from '@ledgerhq/live-common/lib/types/manager'
 
 type Input = {
   app: ApplicationVersion,
