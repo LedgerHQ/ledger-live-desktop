@@ -43,13 +43,13 @@ const Separator = styled(Box).attrs({
 type Props = StepProps
 
 type State = {
-  installing: boolean,
+  installing: ?string,
   progress: number,
 }
 
 class StepFlashMcu extends PureComponent<Props, State> {
   state = {
-    installing: false,
+    installing: null,
     progress: 0,
   }
 
@@ -92,7 +92,7 @@ class StepFlashMcu extends PureComponent<Props, State> {
     const { t } = this.props
 
     return installing ? (
-      <Installing progress={progress} />
+      <Installing installing={installing} progress={progress} />
     ) : (
       <Fragment>
         <Box mx={7}>

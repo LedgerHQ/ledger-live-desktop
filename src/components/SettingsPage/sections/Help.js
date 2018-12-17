@@ -73,10 +73,7 @@ class SectionHelp extends PureComponent<Props> {
           >
             <ResetButton />
           </Row>
-          <Row
-            title={t('settings.repairDevice.title')}
-            desc={t('settings.repairDevice.desc')}
-          >
+          <Row title={t('settings.repairDevice.title')} desc={t('settings.repairDevice.desc')}>
             <RepairDeviceButton />
           </Row>
         </Body>

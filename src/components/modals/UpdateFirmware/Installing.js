@@ -11,9 +11,10 @@ import type { T } from 'types/common'
 type Props = {
   t: T,
   progress: number,
+  installing: string,
 }
 
-function Installing({ t, progress }: Props) {
+function Installing({ t, progress, installing }: Props) {
   return (
     <Fragment>
       <Box mx={7} align="center">
@@ -21,7 +22,7 @@ function Installing({ t, progress }: Props) {
       </Box>
       <Box mx={7} mt={4} mb={2}>
         <Text ff="Museo Sans|Regular" align="center" color="dark" fontSize={6}>
-          {t('manager.modal.installing')}
+          {t(`manager.modal.steps.${installing}`)}
         </Text>
       </Box>
       <Box mx={7} mt={4} mb={7}>

@@ -258,9 +258,12 @@
     },
     "modal": {
       "steps": {
-        "updateMCU": "MCU update"
+        "updateMCU": "MCU update",
+        "osu": "Installing OSU...",
+        "flash-mcu": "MCU updating...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating..."
       },
-      "installing": "Firmware updating...",
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "Identifier",
