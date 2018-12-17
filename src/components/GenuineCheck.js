@@ -18,6 +18,7 @@ import {
   CantOpenDevice,
   DeviceNotGenuineError,
   DeviceGenuineSocketEarlyClose,
+  UnexpectedBootloader,
 } from '@ledgerhq/live-common/lib/errors'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
@@ -81,7 +82,12 @@ class GenuineCheck extends PureComponent<Props> {
     device: Device,
     deviceInfo: DeviceInfo,
   }) => {
-    if (deviceInfo.isOSU || deviceInfo.isBootloader) {
+    if (deviceInfo.isBootloader) {
+      logger.log('device is in bootloader mode')
+      throw new UnexpectedBootloader()
+    }
+
+    if (deviceInfo.isOSU) {
       logger.log('device is in update mode. skipping genuine')
       return true
     }

@@ -3,23 +3,15 @@
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { timeout } from 'rxjs/operators/timeout'
 
-import { DEVICE_INFOS_TIMEOUT } from 'config/constants'
-import getDeviceInfo from 'commands/getDeviceInfo'
-
+import firmwareCheckId from 'commands/firmwareCheckId'
 import { getCurrentDevice } from 'reducers/devices'
-import { createCancelablePolling, delay } from 'helpers/promise'
-
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import DeviceConfirm from 'components/DeviceConfirm'
-
 import type { Device } from 'types/common'
 import type { StepProps } from '../'
-
-import Installing from '../Installing'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -55,78 +47,36 @@ type Props = StepProps & {
   device: Device,
 }
 
-type State = {
-  installing: boolean,
-}
-
-class StepFullFirmwareInstall extends PureComponent<Props, State> {
-  state = {
-    installing: false,
-  }
-
+class StepFullFirmwareInstall extends PureComponent<Props> {
   componentDidMount() {
-    this.install()
+    const { osu, device, transitionTo, setError } = this.props
+
+    if (!osu) {
+      transitionTo('finish')
+      return
+    }
+
+    this.sub = firmwareCheckId
+      .send({
+        devicePath: device.path,
+        osuFirmware: osu,
+      })
+      .subscribe({
+        complete: () => {
+          transitionTo('updateMCU')
+        },
+        error: error => {
+          setError(error)
+          transitionTo('finish')
+        },
+      })
   }
 
   componentWillUnmount() {
-    if (this._unsubConnect) this._unsubConnect()
+    if (this.sub) this.sub.unsubscribe()
   }
 
-  ensureDevice = () => {
-    const { unsubscribe, promise } = createCancelablePolling(async () => {
-      const { device } = this.props
-      if (!device) {
-        throw new Error('No device')
-      }
-
-      const deviceInfo = await getDeviceInfo
-        .send({ devicePath: device.path })
-        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
-        .toPromise()
-      return { device, deviceInfo }
-    })
-    this._unsubConnect = unsubscribe
-    return promise
-  }
-
-  install = async () => {
-    const {
-      installOsuFirmware,
-      installFinalFirmware,
-      firmware,
-      shouldFlashMcu,
-      transitionTo,
-      setError,
-    } = this.props
-    const { device, deviceInfo } = await this.ensureDevice()
-
-    if (deviceInfo.isBootloader) {
-      transitionTo('updateMCU')
-    }
-
-    try {
-      if (deviceInfo.isOSU) {
-        this.setState({ installing: true })
-        await installFinalFirmware(device)
-        transitionTo('finish')
-      } else {
-        await installOsuFirmware(device)
-        this.setState({ installing: true })
-        if (this._unsubConnect) this._unsubConnect()
-        if ((firmware && firmware.shouldFlashMcu) || shouldFlashMcu) {
-          delay(1000)
-          transitionTo('updateMCU')
-        } else {
-          const { device: freshDevice } = await this.ensureDevice()
-          await installFinalFirmware(freshDevice)
-          transitionTo('finish')
-        }
-      }
-    } catch (error) {
-      setError(error)
-      transitionTo('finish')
-    }
-  }
+  sub: *
 
   formatHashName = (hash: string): string => {
     if (!hash) {
@@ -138,11 +88,8 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   renderBody = () => {
-    const { installing } = this.state
-    const { t, firmware } = this.props
-    return installing ? (
-      <Installing />
-    ) : (
+    const { t, osu } = this.props
+    return (
       <Fragment>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
           {t('manager.modal.confirmIdentifierText')}
@@ -151,7 +98,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('manager.modal.identifier')}
           </Text>
-          <Address>{firmware && this.formatHashName(firmware.hash)}</Address>
+          <Address>{osu && this.formatHashName(osu.hash)}</Address>
         </Box>
         <Box mt={5}>
           <DeviceConfirm />
@@ -160,14 +107,11 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     )
   }
 
-  _unsubConnect: *
-
   render() {
-    const { installing } = this.state
     const { t } = this.props
     return (
       <Container>
-        <Title>{installing ? '' : t('manager.modal.confirmIdentifier')}</Title>
+        <Title>{t('manager.modal.confirmIdentifier')}</Title>
         <TrackPage category="Manager" name="InstallFirmware" />
         {this.renderBody()}
       </Container>

@@ -2,22 +2,22 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
-import type { T, Device } from 'types/common'
+import type { T } from 'types/common'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
+import type { OsuFirmware, FinalFirmware } from '@ledgerhq/live-common/lib/types/manager'
 
 import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
-import type { OsuFirmware } from 'helpers/types'
 
 import { FreezeDeviceChangeEvents } from '../../ManagerPage/HookDeviceChange'
 import StepFullFirmwareInstall from './steps/01-step-install-full-firmware'
 import StepFlashMcu from './steps/02-step-flash-mcu'
 import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmation'
 
-const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): Array<*> => {
+const createSteps = ({ t }: { t: T }): Array<*> => {
   const updateStep = {
     id: 'idCheck',
     label: t('manager.modal.identifier'),
@@ -45,26 +45,13 @@ const createSteps = ({ t, shouldFlashMcu }: { t: T, shouldFlashMcu: boolean }): 
     hideFooter: true,
   }
 
-  const steps = [updateStep]
-
-  if (shouldFlashMcu) {
-    steps.push(mcuStep)
-  }
-
-  steps.push(finalStep)
-
-  return steps
+  return [updateStep, mcuStep, finalStep]
 }
 
-export type Firmware = OsuFirmware & { shouldFlashMcu: boolean }
-
 export type StepProps = DefaultStepProps & {
-  firmware: Firmware,
+  osu: OsuFirmware,
+  final: FinalFirmware,
   onCloseModal: () => void,
-  installOsuFirmware: (device: Device) => void,
-  installFinalFirmware: (device: Device) => void,
-  flashMCU: (device: Device) => void,
-  shouldFlashMcu: boolean,
   error: ?Error,
   setError: Error => void,
 }
@@ -75,11 +62,7 @@ type Props = {
   t: T,
   status: ModalStatus,
   onClose: () => void,
-  firmware: Firmware,
-  shouldFlashMcu: boolean,
-  installOsuFirmware: (device: Device) => void,
-  installFinalFirmware: (device: Device) => void,
-  flashMCU: (device: Device) => void,
+  firmware: { osu: OsuFirmware, final: FinalFirmware },
   stepId: StepId | string,
 }
 
@@ -98,9 +81,6 @@ class UpdateModal extends PureComponent<Props, State> {
 
   STEPS = createSteps({
     t: this.props.t,
-    shouldFlashMcu: this.props.firmware
-      ? this.props.firmware.shouldFlashMcu
-      : this.props.shouldFlashMcu,
   })
 
   setError = (e: Error) => this.setState({ error: e })
@@ -114,10 +94,10 @@ class UpdateModal extends PureComponent<Props, State> {
     const { stepId, error, nonce } = this.state
 
     const additionalProps = {
-      firmware,
       error,
       onCloseModal: onClose,
       setError: this.setError,
+      ...firmware,
       ...props,
     }
 

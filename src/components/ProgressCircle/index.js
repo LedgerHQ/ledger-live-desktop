@@ -7,7 +7,7 @@ import { colors } from 'styles/theme'
 
 import Text from 'components/base/Text'
 
-const STROKE_WIDTH = 10
+const STROKE_WIDTH = 5
 
 type Props = {
   progress: number,
@@ -64,7 +64,7 @@ class ProgressCircle extends PureComponent<Props> {
     return (
       <Container size={size}>
         <TextContainer>
-          <Text ff="Museo Sans|Bold" color="graphite" fontSize={6}>
+          <Text ff="Museo Sans|Bold" color="graphite" fontSize={5}>
             {`${Math.round(progress * 100)}%`}
           </Text>
         </TextContainer>

@@ -40,7 +40,6 @@ setErrorRemapping(e => {
 registerTransportModule({
   id: 'hid',
   open: async devicePath => {
-    // $FlowFixMe
     const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 2 })
     t.setDebugMode(logger.apdu)
     return t

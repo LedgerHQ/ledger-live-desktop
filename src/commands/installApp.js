@@ -1,25 +1,21 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { from } from 'rxjs'
 
+import installApp from '@ledgerhq/live-common/lib/hw/installApp'
 import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
-import installApp from 'helpers/apps/installApp'
-
-import type { ApplicationVersion } from 'helpers/types'
+import type { ApplicationVersion } from '@ledgerhq/live-common/lib/types/manager'
 
 type Input = {
-  app: ApplicationVersion,
   devicePath: string,
   targetId: string | number,
+  app: ApplicationVersion,
 }
 
-type Result = void
+type Result = *
 
-const cmd: Command<Input, Result> = createCommand(
-  'installApp',
-  ({ devicePath, targetId, ...app }) =>
-    withDevice(devicePath)(transport => from(installApp(transport, targetId, app))),
+const cmd: Command<Input, Result> = createCommand('installApp', ({ devicePath, targetId, app }) =>
+  withDevice(devicePath)(transport => installApp(transport, targetId, app)),
 )
 
 export default cmd

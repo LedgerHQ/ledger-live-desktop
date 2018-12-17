@@ -5,18 +5,17 @@ import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
 import isEqual from 'lodash/isEqual'
 import isEmpty from 'lodash/isEmpty'
-import invariant from 'invariant'
 
 import type { Device, T } from 'types/common'
 
-import type { DeviceInfo, OsuFirmware } from 'helpers/types'
+import type {
+  DeviceInfo,
+  OsuFirmware,
+  FinalFirmware,
+} from '@ledgerhq/live-common/lib/types/manager'
 import type { StepId } from 'components/modals/UpdateFirmware'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
-import shouldFlashMcu from 'commands/shouldFlashMcu'
-import installOsuFirmware from 'commands/installOsuFirmware'
-import installFinalFirmware from 'commands/installFinalFirmware'
-import installMcu from 'commands/installMcu'
 import DisclaimerModal from 'components/modals/UpdateFirmware/Disclaimer'
 import UpdateModal from 'components/modals/UpdateFirmware'
 
@@ -42,7 +41,7 @@ type Props = {
 }
 
 type State = {
-  latestFirmware: ?OsuFirmware & ?{ shouldFlashMcu: boolean },
+  firmware: ?{ osu: OsuFirmware, final: FinalFirmware },
   modal: ModalStatus,
   stepId: ?StepId,
   shouldFlash: boolean,
@@ -50,7 +49,7 @@ type State = {
 }
 
 const intializeState = ({ deviceInfo }): State => ({
-  latestFirmware: null,
+  firmware: null,
   modal: 'closed',
   stepId: deviceInfo.isBootloader ? 'updateMCU' : 'idCheck',
   shouldFlash: false,
@@ -64,9 +63,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
     const { deviceInfo } = this.props
     if (!deviceInfo.isOSU && !deviceInfo.isBootloader) {
       this.fetchLatestFirmware()
-    } else if (deviceInfo.isOSU) {
-      this.shouldFlashMcu()
-    } else if (deviceInfo.isBootloader) {
+    } else {
       this.handleInstallModal('updateMCU', true)
     }
   }
@@ -79,45 +76,16 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
   fetchLatestFirmware = async () => {
     const { deviceInfo } = this.props
-    const latestFirmware = await getLatestFirmwareForDevice.send(deviceInfo).toPromise()
-    if (
-      !isEmpty(latestFirmware) &&
-      !isEqual(this.state.latestFirmware, latestFirmware) &&
-      !this._unmounting
-    ) {
-      this.setState({ latestFirmware, ready: true })
+    const firmware = await getLatestFirmwareForDevice.send(deviceInfo).toPromise()
+    if (!isEmpty(firmware) && !isEqual(this.state.firmware, firmware) && !this._unmounting) {
+      this.setState({ firmware, ready: true })
     }
   }
-
-  shouldFlashMcu = async () => {
-    const { deviceInfo } = this.props
-    const shouldFlash = await shouldFlashMcu.send(deviceInfo).toPromise()
-    if (!this._unmounting) {
-      this.setState({ shouldFlash, modal: 'install', stepId: 'idCheck', ready: true })
-    }
-  }
-
-  installOsuFirmware = async (device: Device) => {
-    const { latestFirmware } = this.state
-    const { deviceInfo } = this.props
-    invariant(latestFirmware, 'did not find a new firmware or firmware is not set')
-
-    this.setState({ modal: 'install' })
-    const result = await installOsuFirmware
-      .send({ devicePath: device.path, firmware: latestFirmware, targetId: deviceInfo.targetId })
-      .toPromise()
-
-    return result
-  }
-
-  installFinalFirmware = (device: Device) =>
-    installFinalFirmware.send({ devicePath: device.path }).toPromise()
-
-  flashMCU = async (device: Device) => installMcu.send({ devicePath: device.path }).toPromise()
 
   handleCloseModal = () => this.setState({ modal: 'closed' })
 
   handleDisclaimerModal = () => this.setState({ modal: 'disclaimer' })
+
   handleInstallModal = (stepId: StepId = 'idCheck', shouldFlash?: boolean) =>
     this.setState({ modal: 'install', stepId, shouldFlash, ready: true })
 
@@ -125,7 +93,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
   render() {
     const { deviceInfo, t, device } = this.props
-    const { latestFirmware, modal, stepId, shouldFlash, ready } = this.state
+    const { firmware, modal, stepId, shouldFlash, ready } = this.state
     return (
       <Card p={4}>
         <Box horizontal align="center" flow={2}>
@@ -151,12 +119,12 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               })}
             </Text>
           </Box>
-          <UpdateFirmwareButton firmware={latestFirmware} onClick={this.handleDisclaimerModal} />
+          <UpdateFirmwareButton firmware={firmware} onClick={this.handleDisclaimerModal} />
         </Box>
         {ready ? (
           <Fragment>
             <DisclaimerModal
-              firmware={latestFirmware}
+              firmware={firmware}
               status={modal}
               goToNextStep={this.handleDisclaimerNext}
               onClose={this.handleCloseModal}
@@ -165,11 +133,8 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               status={modal}
               stepId={stepId}
               onClose={this.handleCloseModal}
-              firmware={latestFirmware}
+              firmware={firmware}
               shouldFlashMcu={shouldFlash}
-              installOsuFirmware={this.installOsuFirmware}
-              installFinalFirmware={this.installFinalFirmware}
-              flashMCU={this.flashMCU}
             />
           </Fragment>
         ) : null}

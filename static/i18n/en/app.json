@@ -445,6 +445,11 @@
       "desc": "View the user data that is stored on your computer, including your accounts, caches and settings.",
       "btn": "View"
     },
+    "repairDevice": {
+      "title": "Repair your Ledger device",
+      "desc": "If you encountered some issue while updating your device and cannot resume the update process, you can try this option to repair your device.",
+      "button": "Repair"
+    },
     "exportLogs": {
       "title": "Export logs",
       "desc": "Exporting Ledger Live logs may be necessary for troubleshooting purposes.",
@@ -840,6 +845,10 @@
     "TransportStatusError": {
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
+    },
+    "UnexpectedBootloader": {
+      "title": "Opps, your device should not be in Bootloader mode",
+      "description": "Please restart your device or contact us"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Firmware update refused on device",

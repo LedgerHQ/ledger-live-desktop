@@ -11,6 +11,7 @@ import ExportLogsBtn from 'components/ExportLogsBtn'
 import OpenUserDataDirectoryBtn from 'components/OpenUserDataDirectoryBtn'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
+import RepairDeviceButton from '../RepairDeviceButton'
 import AboutRowItem from '../AboutRowItem'
 import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
 
@@ -71,6 +72,12 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('settings.profile.hardResetDesc')}
           >
             <ResetButton />
+          </Row>
+          <Row
+            title={t('settings.repairDevice.title')}
+            desc={t('settings.repairDevice.desc')}
+          >
+            <RepairDeviceButton />
           </Row>
         </Body>
       </Section>
