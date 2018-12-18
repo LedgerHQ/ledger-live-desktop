@@ -2,7 +2,6 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
-import { filter, tap } from 'rxjs/operators'
 
 import { i } from 'helpers/staticPath'
 import firmwareMain from 'commands/firmwareMain'

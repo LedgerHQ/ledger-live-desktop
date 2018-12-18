@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Fragment, PureComponent } from 'react'
-import { filter, tap } from 'rxjs/operators'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import firmwareRepair from 'commands/firmwareRepair'
