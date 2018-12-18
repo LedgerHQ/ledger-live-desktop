@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { throttleTime, filter, map } from 'rxjs/operators'
 
 import type { Device, T } from 'types/common'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
@@ -158,24 +157,17 @@ class AppsList extends PureComponent<Props, State> {
       device: { path: devicePath },
       deviceInfo: { targetId },
     } = this.props
-    this.sub = cmd
-      .send({ app, devicePath, targetId })
-      .pipe(
-        filter(e => e.type === 'bulk-progress'), // only bulk progress interests the UI
-        throttleTime(100), // throttle to only emit 10 event/s max, to not spam the UI
-        map(e => e.progress), // extract a stream of progress percentage
-      )
-      .subscribe({
-        next: progress => {
-          this.setState({ progress })
-        },
-        complete: () => {
-          this.setState({ status: 'success' })
-        },
-        error: error => {
-          this.setState({ status: 'error', error, app: '', mode: 'home' })
-        },
-      })
+    this.sub = cmd.send({ app, devicePath, targetId }).subscribe({
+      next: patch => {
+        this.setState(patch)
+      },
+      complete: () => {
+        this.setState({ status: 'success' })
+      },
+      error: error => {
+        this.setState({ status: 'error', error, app: '', mode: 'home' })
+      },
+    })
   }
 
   handleInstallApp = (app: ApplicationVersion) => () =>
