@@ -9,6 +9,7 @@ import { getCurrentDevice } from 'reducers/devices'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import ProgressBar from 'components/ProgressBar'
 import DeviceConfirm from 'components/DeviceConfirm'
 import type { Device } from 'types/common'
 import type { StepProps } from '../'
@@ -47,7 +48,11 @@ type Props = StepProps & {
   device: Device,
 }
 
-class StepFullFirmwareInstall extends PureComponent<Props> {
+class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }> {
+  state = {
+    progress: 0,
+  }
+
   componentDidMount() {
     const { osu, device, transitionTo, setError } = this.props
 
@@ -62,6 +67,9 @@ class StepFullFirmwareInstall extends PureComponent<Props> {
         osuFirmware: osu,
       })
       .subscribe({
+        next: patch => {
+          this.setState(patch)
+        },
         complete: () => {
           transitionTo('updateMCU')
         },
@@ -94,12 +102,13 @@ class StepFullFirmwareInstall extends PureComponent<Props> {
         <Text ff="Open Sans|Regular" align="center" color="smoke">
           {t('manager.modal.confirmIdentifierText')}
         </Text>
-        <Box mx={7} mt={5}>
+        <Box mx={7} my={5}>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('manager.modal.identifier')}
           </Text>
           <Address>{osu && this.formatHashName(osu.hash)}</Address>
         </Box>
+        <ProgressBar progress={this.state.progress} width={200} />
         <Box mt={5}>
           <DeviceConfirm />
         </Box>
