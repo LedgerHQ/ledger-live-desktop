@@ -63,7 +63,7 @@ const ConnectStep = ({ t, desc }: { t: *, desc?: string }) => (
 )
 
 const FlashStep = ({ progress, t }: { progress: number, t: * }) => (
-  <>
+  <ModalContent>
     <Box mx={7} align="center">
       <ProgressCircle size={64} progress={progress} />
     </Box>
@@ -77,13 +77,15 @@ const FlashStep = ({ progress, t }: { progress: number, t: * }) => (
         {t('manager.modal.mcuPin')}
       </Text>
     </Box>
-  </>
+  </ModalContent>
 )
 
 const ErrorStep = ({ error }: { error: Error }) => (
-  <Box mx={7} mt={4} mb={6} align="center">
-    <TranslatedError error={error} />
-  </Box>
+  <ModalContent>
+    <Box mx={7} mt={4} mb={6} align="center">
+      <TranslatedError error={error} />
+    </Box>
+  </ModalContent>
 )
 
 type Props = {
@@ -136,7 +138,7 @@ class RepairModal extends PureComponent<Props> {
           <ModalBody onClose={!cancellable && isLoading ? undefined : onClose}>
             <TrackPage category="Modal" name={analyticsName} />
             <ModalTitle>{title}</ModalTitle>
-            {isLoading && progress > 0 ? (
+            {isLoading ? (
               <FlashStep t={t} progress={progress} />
             ) : error ? (
               <ErrorStep error={error} />

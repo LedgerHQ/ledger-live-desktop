@@ -1,7 +1,12 @@
 // @flow
 
 import React, { Fragment, PureComponent } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { translate } from 'react-i18next'
+import { push } from 'react-router-redux'
+
 import type { T } from 'types/common'
 import firmwareRepair from 'commands/firmwareRepair'
 import Button from 'components/base/Button'
@@ -9,6 +14,7 @@ import { RepairModal } from 'components/base/Modal'
 
 type Props = {
   t: T,
+  push: Function,
 }
 
 type State = {
@@ -37,6 +43,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
 
   action = () => {
     if (this.state.isLoading) return
+    const { push } = this.props
     this.setState({ isLoading: true })
     this.sub = firmwareRepair.send().subscribe({
       next: patch => {
@@ -46,7 +53,9 @@ class RepairDeviceButton extends PureComponent<Props, State> {
         this.setState({ error, isLoading: false })
       },
       complete: () => {
-        this.setState({ opened: false, isLoading: false })
+        this.setState({ opened: false, isLoading: false }, () => {
+          push('/manager')
+        })
       },
     })
   }
@@ -80,4 +89,15 @@ class RepairDeviceButton extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(RepairDeviceButton)
+const mapDispatchToProps = {
+  push,
+}
+
+export default compose(
+  translate(),
+  withRouter,
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+)(RepairDeviceButton)
