@@ -8,7 +8,7 @@ type Input = {
   finalFirmware: FinalFirmware,
 }
 
-type Result = *
+type Result = { progress: number, installing: ?string }
 
 const cmd: Command<Input, Result> = createCommand(
   'firmwareMain',

@@ -4,7 +4,7 @@ import repair from '@ledgerhq/live-common/lib/hw/firmwareUpdate-repair'
 import { createCommand, Command } from 'helpers/ipc'
 
 type Input = void
-type Result = *
+type Result = { progress: number }
 
 const cmd: Command<Input, Result> = createCommand(
   'firmwareRepair',

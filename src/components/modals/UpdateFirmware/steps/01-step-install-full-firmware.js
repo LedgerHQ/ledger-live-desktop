@@ -4,7 +4,7 @@ import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 
-import firmwareCheckId from 'commands/firmwareCheckId'
+import firmwarePrepare from 'commands/firmwarePrepare'
 import { getCurrentDevice } from 'reducers/devices'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
@@ -56,7 +56,7 @@ class StepFullFirmwareInstall extends PureComponent<Props> {
       return
     }
 
-    this.sub = firmwareCheckId
+    this.sub = firmwarePrepare
       .send({
         devicePath: device.path,
         osuFirmware: osu,

@@ -56,29 +56,18 @@ class StepFlashMcu extends PureComponent<Props, State> {
   componentDidMount() {
     const { final: finalFirmware, transitionTo, setError } = this.props
 
-    this.sub = firmwareMain
-      .send({ finalFirmware })
-      .pipe(
-        tap(e => console.log(e)), // eslint-disable-line no-console
-        // ^ TODO remove at the end
-        filter(e => e.type === 'bulk-progress' || e.type === 'install'),
-      )
-      .subscribe({
-        next: e => {
-          if (e.type === 'install') {
-            this.setState({ installing: e.step, progress: 0 })
-          } else {
-            this.setState({ progress: e.progress })
-          }
-        },
-        complete: () => {
-          transitionTo('finish')
-        },
-        error: error => {
-          setError(error)
-          transitionTo('finish')
-        },
-      })
+    this.sub = firmwareMain.send({ finalFirmware }).subscribe({
+      next: patch => {
+        this.setState(patch)
+      },
+      complete: () => {
+        transitionTo('finish')
+      },
+      error: error => {
+        setError(error)
+        transitionTo('finish')
+      },
+    })
   }
 
   componentWillUnmount() {

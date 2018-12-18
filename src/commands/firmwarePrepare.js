@@ -1,6 +1,6 @@
 // @flow
 
-import checkId from '@ledgerhq/live-common/lib/hw/firmwareUpdate-checkId'
+import prepare from '@ledgerhq/live-common/lib/hw/firmwareUpdate-prepare'
 import type { OsuFirmware } from '@ledgerhq/live-common/lib/types/manager'
 import { createCommand, Command } from 'helpers/ipc'
 
@@ -9,11 +9,11 @@ type Input = {
   osuFirmware: OsuFirmware,
 }
 
-type Result = *
+type Result = { progress: number }
 
 const cmd: Command<Input, Result> = createCommand(
-  'firmwareCheckId',
-  ({ devicePath, osuFirmware }) => checkId(devicePath, osuFirmware),
+  'firmwarePrepare',
+  ({ devicePath, osuFirmware }) => prepare(devicePath, osuFirmware),
 )
 
 export default cmd

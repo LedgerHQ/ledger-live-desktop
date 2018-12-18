@@ -16,13 +16,15 @@ type State = {
   opened: boolean,
   isLoading: boolean,
   error: ?Error,
+  progress: number,
 }
 
-class CleanButton extends PureComponent<Props, State> {
+class RepairDeviceButton extends PureComponent<Props, State> {
   state = {
     opened: false,
     isLoading: false,
     error: null,
+    progress: 0,
   }
 
   open = () => this.setState({ opened: true })
@@ -37,32 +39,25 @@ class CleanButton extends PureComponent<Props, State> {
   action = () => {
     if (this.state.isLoading) return
     this.setState({ isLoading: true })
-    this.sub = firmwareRepair
-      .send()
-      .pipe(
-        tap(e => console.log(e)), // eslint-disable-line no-console
-        // ^ TODO remove at the end
-        filter(e => e.type === 'bulk-progress'),
-      )
-      .subscribe({
-        next: () => {
-          // TODO cc @val
-        },
-        error: error => {
-          this.setState({ error, opened: false, isLoading: false })
-        },
-        complete: () => {
-          this.setState({ opened: false, isLoading: false })
-        },
-      })
+    this.sub = firmwareRepair.send().subscribe({
+      next: patch => {
+        this.setState(patch)
+      },
+      error: error => {
+        this.setState({ error, opened: false, isLoading: false })
+      },
+      complete: () => {
+        this.setState({ opened: false, isLoading: false })
+      },
+    })
   }
 
   render() {
     const { t } = this.props
-    const { opened, isLoading, error } = this.state
+    const { opened, isLoading, error, progress } = this.state
     // @val basically I think we want to diverge from the traditional ConfirmModal to make our own version
     // with the progress and the error cases handled.
-    console.log({ error }) // eslint-disable-line no-console
+    console.log({ error, progress }) // eslint-disable-line no-console
     // ^ TODO use error to pass in that custom thing
     return (
       <Fragment>
@@ -87,4 +82,4 @@ class CleanButton extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(CleanButton)
+export default translate()(RepairDeviceButton)

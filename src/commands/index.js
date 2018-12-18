@@ -4,7 +4,7 @@ import invariant from 'invariant'
 import type { Command } from 'helpers/ipc'
 
 import debugAppInfosForCurrency from 'commands/debugAppInfosForCurrency'
-import firmwareCheckId from 'commands/firmwareCheckId'
+import firmwarePrepare from 'commands/firmwarePrepare'
 import firmwareMain from 'commands/firmwareMain'
 import firmwareRepair from 'commands/firmwareRepair'
 import getAddress from 'commands/getAddress'
@@ -30,7 +30,7 @@ import uninstallApp from 'commands/uninstallApp'
 
 const all: Array<Command<any, any>> = [
   debugAppInfosForCurrency,
-  firmwareCheckId,
+  firmwarePrepare,
   firmwareMain,
   firmwareRepair,
   getAddress,
