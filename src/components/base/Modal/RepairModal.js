@@ -46,49 +46,48 @@ const DisclaimerStep = ({ desc }: { desc?: string }) => (
   </ModalContent>
 )
 
-const ConnectStep = ({ t }: { t: * }) => (
-  <ModalContent>
-    <Box mx={7}>
-      <Text ff="Open Sans|Regular" align="center" color="smoke">
-        <Bullet>{'1.'}</Bullet>
-        {t('manager.modal.mcuFirst')}
-      </Text>
-      <img
-        src={i('logos/unplugDevice.png')}
-        style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-        alt={t('manager.modal.mcuFirst')}
-      />
-    </Box>
-    <Separator my={6} />
-    <Box mx={7}>
-      <Text ff="Open Sans|Regular" align="center" color="smoke">
-        <Bullet>{'2.'}</Bullet>
-        {t('manager.modal.mcuSecond')}
-      </Text>
-      <img
-        src={i('logos/bootloaderMode.png')}
-        style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-        alt={t('manager.modal.mcuFirst')}
-      />
-    </Box>
-  </ModalContent>
-)
-
-const FlashStep = ({ progress, t }: { progress: number, t: * }) => (
-  <ModalContent>
-    <Box mx={7} align="center">
-      <ProgressCircle size={64} progress={progress} />
-    </Box>
-    <Box mx={7} mt={3} mb={2} ff="Museo Sans|Regular" color="dark" textAlign="center">
-      {t(`manager.modal.steps.flash`)}
-    </Box>
-    <Box mx={7} mt={2} mb={2}>
-      <Text ff="Open Sans|Regular" align="center" color="graphite" fontSize={4}>
-        {t('manager.modal.mcuPin')}
-      </Text>
-    </Box>
-  </ModalContent>
-)
+const FlashStep = ({ progress, t }: { progress: number, t: * }) =>
+  progress === 0 ? (
+    <ModalContent>
+      <Box mx={7}>
+        <Text ff="Open Sans|Regular" align="center" color="smoke">
+          <Bullet>{'1.'}</Bullet>
+          {t('manager.modal.mcuFirst')}
+        </Text>
+        <img
+          src={i('logos/unplugDevice.png')}
+          style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
+          alt={t('manager.modal.mcuFirst')}
+        />
+      </Box>
+      <Separator my={6} />
+      <Box mx={7}>
+        <Text ff="Open Sans|Regular" align="center" color="smoke">
+          <Bullet>{'2.'}</Bullet>
+          {t('manager.modal.mcuSecond')}
+        </Text>
+        <img
+          src={i('logos/bootloaderMode.png')}
+          style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
+          alt={t('manager.modal.mcuFirst')}
+        />
+      </Box>
+    </ModalContent>
+  ) : (
+    <ModalContent>
+      <Box mx={7} align="center">
+        <ProgressCircle size={64} progress={progress} />
+      </Box>
+      <Box mx={7} mt={3} mb={2} ff="Museo Sans|Regular" color="dark" textAlign="center">
+        {t(`manager.modal.steps.flash`)}
+      </Box>
+      <Box mx={7} mt={2} mb={2}>
+        <Text ff="Open Sans|Regular" align="center" color="graphite" fontSize={4}>
+          {t('manager.modal.mcuPin')}
+        </Text>
+      </Box>
+    </ModalContent>
+  )
 
 const ErrorStep = ({ error }: { error: Error }) => (
   <ModalContent>
@@ -137,15 +136,9 @@ type Props = {
   cancellable?: boolean,
   progress: number,
   error?: Error,
-  confirmed: boolean,
-  setConfirm: Function,
 }
 
-type State = {
-  confirmed: boolean,
-}
-
-class RepairModal extends PureComponent<Props, State> {
+class RepairModal extends PureComponent<Props> {
   render() {
     const {
       cancellable,
@@ -162,8 +155,6 @@ class RepairModal extends PureComponent<Props, State> {
       analyticsName,
       progress,
       error,
-      confirmed,
-      setConfirm,
       ...props
     } = this.props
 
@@ -182,28 +173,26 @@ class RepairModal extends PureComponent<Props, State> {
               <ErrorStep error={error} />
             ) : isLoading ? (
               <FlashStep t={t} progress={progress} />
-            ) : confirmed ? (
-              <ConnectStep t={t} desc={desc} />
             ) : (
               <DisclaimerStep desc={desc} />
             )}
 
-            <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-              {!isLoading && (
+            {!isLoading ? (
+              <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
                 <Button onClick={onReject}>{t(`common.${error ? 'close' : 'cancel'}`)}</Button>
-              )}
-              {error ? null : (
-                <Button
-                  onClick={confirmed ? onConfirm : setConfirm}
-                  primary={!isDanger}
-                  danger={isDanger}
-                  isLoading={isLoading}
-                  disabled={isLoading}
-                >
-                  {confirmed ? realConfirmText : t('common.confirm')}
-                </Button>
-              )}
-            </ModalFooter>
+                {error ? null : (
+                  <Button
+                    onClick={onConfirm}
+                    primary={!isDanger}
+                    danger={isDanger}
+                    isLoading={isLoading}
+                    disabled={isLoading}
+                  >
+                    {realConfirmText}
+                  </Button>
+                )}
+              </ModalFooter>
+            ) : null}
           </ModalBody>
         )}
       />
