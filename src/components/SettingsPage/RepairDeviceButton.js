@@ -22,6 +22,7 @@ type State = {
   isLoading: boolean,
   error: ?Error,
   progress: number,
+  confirmed: boolean,
 }
 
 class RepairDeviceButton extends PureComponent<Props, State> {
@@ -30,15 +31,18 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     isLoading: false,
     error: null,
     progress: 0,
+    confirmed: false,
   }
 
-  open = () => this.setState({ opened: true })
+  open = () => this.setState({ opened: true, error: null })
+
+  setConfirm = () => this.setState({ confirmed: true })
 
   sub: *
 
   close = () => {
     if (this.sub) this.sub.unsubscribe()
-    this.setState({ opened: false, isLoading: false })
+    this.setState({ opened: false, isLoading: false, error: null, confirmed: false })
   }
 
   action = () => {
@@ -50,10 +54,10 @@ class RepairDeviceButton extends PureComponent<Props, State> {
         this.setState(patch)
       },
       error: error => {
-        this.setState({ error, isLoading: false })
+        this.setState({ error, isLoading: false, confirmed: false })
       },
       complete: () => {
-        this.setState({ opened: false, isLoading: false }, () => {
+        this.setState({ opened: false, isLoading: false, confirmed: false }, () => {
           push('/manager')
         })
       },
@@ -62,7 +66,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
-    const { opened, isLoading, error, progress } = this.state
+    const { opened, isLoading, error, progress, confirmed } = this.state
 
     return (
       <Fragment>
@@ -83,6 +87,8 @@ class RepairDeviceButton extends PureComponent<Props, State> {
           confirmText={t('settings.repairDevice.button')}
           progress={progress}
           error={error}
+          setConfirm={this.setConfirm}
+          confirmed={confirmed}
         />
       </Fragment>
     )

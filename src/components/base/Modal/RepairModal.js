@@ -13,8 +13,15 @@ import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import ProgressCircle from 'components/ProgressCircle'
 import TranslatedError from 'components/TranslatedError'
+import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 
 import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from './index'
+
+const Container = styled(Box).attrs({
+  alignItems: 'center',
+  fontSize: 4,
+  color: 'dark',
+})``
 
 const Bullet = styled.span`
   font-weight: 600;
@@ -29,13 +36,18 @@ const Separator = styled(Box).attrs({
   background-color: currentColor;
 `
 
-const ConnectStep = ({ t, desc }: { t: *, desc?: string }) => (
+const DisclaimerStep = ({ desc }: { desc?: string }) => (
   <ModalContent>
     {desc ? (
-      <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" mb={6}>
+      <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center" mb={2}>
         {desc}
       </Box>
     ) : null}
+  </ModalContent>
+)
+
+const ConnectStep = ({ t }: { t: * }) => (
+  <ModalContent>
     <Box mx={7}>
       <Text ff="Open Sans|Regular" align="center" color="smoke">
         <Bullet>{'1.'}</Bullet>
@@ -67,12 +79,10 @@ const FlashStep = ({ progress, t }: { progress: number, t: * }) => (
     <Box mx={7} align="center">
       <ProgressCircle size={64} progress={progress} />
     </Box>
-    <Box mx={7} mt={4} mb={2}>
-      <Text ff="Museo Sans|Regular" align="center" color="dark" fontSize={6}>
-        {t(`manager.modal.steps.flash`)}
-      </Text>
+    <Box mx={7} mt={3} mb={2} ff="Museo Sans|Regular" color="dark" textAlign="center">
+      {t(`manager.modal.steps.flash`)}
     </Box>
-    <Box mx={7} mt={4} mb={7}>
+    <Box mx={7} mt={2} mb={2}>
       <Text ff="Open Sans|Regular" align="center" color="graphite" fontSize={4}>
         {t('manager.modal.mcuPin')}
       </Text>
@@ -82,9 +92,31 @@ const FlashStep = ({ progress, t }: { progress: number, t: * }) => (
 
 const ErrorStep = ({ error }: { error: Error }) => (
   <ModalContent>
-    <Box mx={7} mt={4} mb={6} align="center">
-      <TranslatedError error={error} />
-    </Box>
+    <Container>
+      <Box color="alertRed">
+        <ExclamationCircleThin size={44} />
+      </Box>
+      <Box
+        color="dark"
+        mt={4}
+        fontSize={6}
+        ff="Museo Sans|Regular"
+        textAlign="center"
+        style={{ maxWidth: 350 }}
+      >
+        <TranslatedError error={error} field="title" />
+      </Box>
+      <Box
+        color="graphite"
+        mt={4}
+        fontSize={6}
+        ff="Open Sans"
+        textAlign="center"
+        style={{ maxWidth: 350 }}
+      >
+        <TranslatedError error={error} field="description" />
+      </Box>
+    </Container>
   </ModalContent>
 )
 
@@ -105,9 +137,15 @@ type Props = {
   cancellable?: boolean,
   progress: number,
   error?: Error,
+  confirmed: boolean,
+  setConfirm: Function,
 }
 
-class RepairModal extends PureComponent<Props> {
+type State = {
+  confirmed: boolean,
+}
+
+class RepairModal extends PureComponent<Props, State> {
   render() {
     const {
       cancellable,
@@ -124,6 +162,8 @@ class RepairModal extends PureComponent<Props> {
       analyticsName,
       progress,
       error,
+      confirmed,
+      setConfirm,
       ...props
     } = this.props
 
@@ -138,26 +178,29 @@ class RepairModal extends PureComponent<Props> {
           <ModalBody onClose={!cancellable && isLoading ? undefined : onClose}>
             <TrackPage category="Modal" name={analyticsName} />
             <ModalTitle>{title}</ModalTitle>
-            {isLoading ? (
-              <FlashStep t={t} progress={progress} />
-            ) : error ? (
+            {error ? (
               <ErrorStep error={error} />
-            ) : (
+            ) : isLoading ? (
+              <FlashStep t={t} progress={progress} />
+            ) : confirmed ? (
               <ConnectStep t={t} desc={desc} />
+            ) : (
+              <DisclaimerStep desc={desc} />
             )}
+
             <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
               {!isLoading && (
                 <Button onClick={onReject}>{t(`common.${error ? 'close' : 'cancel'}`)}</Button>
               )}
               {error ? null : (
                 <Button
-                  onClick={onConfirm}
+                  onClick={confirmed ? onConfirm : setConfirm}
                   primary={!isDanger}
                   danger={isDanger}
                   isLoading={isLoading}
                   disabled={isLoading}
                 >
-                  {realConfirmText}
+                  {confirmed ? realConfirmText : t('common.confirm')}
                 </Button>
               )}
             </ModalFooter>
