@@ -22,6 +22,7 @@ import GrowScroll from 'components/base/GrowScroll'
 
 export { default as ModalBody } from './ModalBody'
 export { default as ConfirmModal } from './ConfirmModal'
+export { default as RepairModal } from './RepairModal'
 export { default as ModalTitle } from './ModalTitle'
 
 const springConfig = {

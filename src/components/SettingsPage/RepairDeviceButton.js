@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import firmwareRepair from 'commands/firmwareRepair'
 import Button from 'components/base/Button'
-import { ConfirmModal } from 'components/base/Modal'
+import { RepairModal } from 'components/base/Modal'
 
 type Props = {
   t: T,
@@ -32,7 +32,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
 
   close = () => {
     if (this.sub) this.sub.unsubscribe()
-    this.setState({ opened: false })
+    this.setState({ opened: false, isLoading: false })
   }
 
   action = () => {
@@ -43,7 +43,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
         this.setState(patch)
       },
       error: error => {
-        this.setState({ error, opened: false, isLoading: false })
+        this.setState({ error, isLoading: false })
       },
       complete: () => {
         this.setState({ opened: false, isLoading: false })
@@ -54,17 +54,14 @@ class RepairDeviceButton extends PureComponent<Props, State> {
   render() {
     const { t } = this.props
     const { opened, isLoading, error, progress } = this.state
-    // @val basically I think we want to diverge from the traditional ConfirmModal to make our own version
-    // with the progress and the error cases handled.
-    console.log({ error, progress }) // eslint-disable-line no-console
-    // ^ TODO use error to pass in that custom thing
+
     return (
       <Fragment>
         <Button small primary onClick={this.open} event="RepairDeviceButton">
           {t('settings.repairDevice.button')}
         </Button>
 
-        <ConfirmModal
+        <RepairModal
           cancellable
           analyticsName="RepairDevice"
           isOpened={opened}
@@ -73,8 +70,10 @@ class RepairDeviceButton extends PureComponent<Props, State> {
           onConfirm={this.action}
           isLoading={isLoading}
           title={t('settings.repairDevice.title')}
-          subTitle={t('common.areYouSure')}
           desc={t('settings.repairDevice.desc')}
+          confirmText={t('settings.repairDevice.button')}
+          progress={progress}
+          error={error}
         />
       </Fragment>
     )
