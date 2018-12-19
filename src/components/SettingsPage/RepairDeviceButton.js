@@ -14,7 +14,7 @@ import { RepairModal } from 'components/base/Modal'
 
 type Props = {
   t: T,
-  push: Function,
+  push: string => void,
 }
 
 type State = {
