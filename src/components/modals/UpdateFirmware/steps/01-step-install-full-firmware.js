@@ -54,9 +54,9 @@ class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }>
   }
 
   componentDidMount() {
-    const { osu, device, transitionTo, setError } = this.props
+    const { firmware, device, transitionTo, setError } = this.props
 
-    if (!osu) {
+    if (!firmware.osu) {
       transitionTo('finish')
       return
     }
@@ -64,7 +64,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }>
     this.sub = firmwarePrepare
       .send({
         devicePath: device.path,
-        osuFirmware: osu,
+        firmware,
       })
       .subscribe({
         next: patch => {
@@ -96,7 +96,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }>
   }
 
   renderBody = () => {
-    const { t, osu } = this.props
+    const { t, firmware } = this.props
     return (
       <Fragment>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
@@ -106,7 +106,7 @@ class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('manager.modal.identifier')}
           </Text>
-          <Address>{osu && this.formatHashName(osu.hash)}</Address>
+          <Address>{firmware.osu && this.formatHashName(firmware.osu.hash)}</Address>
         </Box>
         <ProgressBar progress={this.state.progress} width={200} />
         <Box mt={5}>

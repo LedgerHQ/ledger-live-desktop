@@ -7,7 +7,7 @@ import type { T } from 'types/common'
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
-import type { OsuFirmware, FinalFirmware } from '@ledgerhq/live-common/lib/types/manager'
+import type { FirmwareUpdateContext } from '@ledgerhq/live-common/lib/types/manager'
 
 import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
@@ -49,8 +49,7 @@ const createSteps = ({ t }: { t: T }): Array<*> => {
 }
 
 export type StepProps = DefaultStepProps & {
-  osu: OsuFirmware,
-  final: FinalFirmware,
+  firmware: FirmwareUpdateContext,
   onCloseModal: () => void,
   error: ?Error,
   setError: Error => void,
@@ -62,7 +61,7 @@ type Props = {
   t: T,
   status: ModalStatus,
   onClose: () => void,
-  firmware: { osu: OsuFirmware, final: FinalFirmware },
+  firmware: FirmwareUpdateContext,
   stepId: StepId | string,
 }
 
@@ -97,7 +96,7 @@ class UpdateModal extends PureComponent<Props, State> {
       error,
       onCloseModal: onClose,
       setError: this.setError,
-      ...firmware,
+      firmware,
       ...props,
     }
 

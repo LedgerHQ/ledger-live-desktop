@@ -258,7 +258,7 @@
     },
     "modal": {
       "steps": {
-        "updateMCU": "MCU update",
+        "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "Bootloader updating...",

@@ -53,9 +53,9 @@ class StepFlashMcu extends PureComponent<Props, State> {
   }
 
   componentDidMount() {
-    const { final: finalFirmware, transitionTo, setError } = this.props
+    const { firmware, transitionTo, setError } = this.props
 
-    this.sub = firmwareMain.send({ finalFirmware }).subscribe({
+    this.sub = firmwareMain.send(firmware).subscribe({
       next: patch => {
         this.setState(patch)
       },
