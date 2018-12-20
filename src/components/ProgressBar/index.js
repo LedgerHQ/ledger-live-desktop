@@ -42,7 +42,6 @@ const Inner = styled.div`
         `
       : css`
           transform: scaleX(${p => p.progress});
-          transition: 150ms ease-out transform;
         `};
 `
 
