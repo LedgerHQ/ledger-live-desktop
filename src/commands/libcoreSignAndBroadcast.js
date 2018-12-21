@@ -4,7 +4,7 @@ import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
 import { StatusCodes } from '@ledgerhq/hw-transport'
 import Btc from '@ledgerhq/hw-app-btc'
-import { Observable } from 'rxjs'
+import { Observable, from } from 'rxjs'
 import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import type { OperationRaw, DerivationMode, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
@@ -14,11 +14,11 @@ import {
   bigNumberToLibcoreAmount,
   getOrCreateWallet,
 } from 'helpers/libcore'
-import { UpdateYourApp } from 'config/errors'
+import { UpdateYourApp } from '@ledgerhq/live-common/lib/errors'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
-import { withDevice } from 'helpers/deviceAccess'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
 type BitcoinLikeTransaction = {
   amount: string,
@@ -246,22 +246,26 @@ export async function doSignAndBroadcast({
   const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
   // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
 
-  const signedTransaction = await withDevice(deviceId)(async transport =>
-    signTransaction({
-      hwApp: new Btc(transport),
-      currency,
-      blockHeight,
-      transaction: builded,
-      sigHashType: parseInt(sigHashType, 16),
-      hasTimestamp,
-      derivationMode,
-    }),
-  ).catch(e => {
-    if (e && e.statusCode === StatusCodes.INCORRECT_P1_P2) {
-      throw new UpdateYourApp(`UpdateYourApp ${currency.id}`, currency)
-    }
-    throw e
-  })
+  const signedTransaction = await withDevice(deviceId)(transport =>
+    from(
+      signTransaction({
+        hwApp: new Btc(transport),
+        currency,
+        blockHeight,
+        transaction: builded,
+        sigHashType: parseInt(sigHashType, 16),
+        hasTimestamp,
+        derivationMode,
+      }),
+    ),
+  )
+    .toPromise()
+    .catch(e => {
+      if (e && e.statusCode === StatusCodes.INCORRECT_P1_P2) {
+        throw new UpdateYourApp(`UpdateYourApp ${currency.id}`, currency)
+      }
+      throw e
+    })
 
   if (!signedTransaction || isCancelled() || !njsAccount) return
   onSigned()

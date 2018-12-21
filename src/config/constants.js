@@ -58,12 +58,6 @@ export const LEDGER_REST_API_BASE = stringFromEnv(
   'LEDGER_REST_API_BASE',
   'https://explorers.api.live.ledger.com',
 )
-export const MANAGER_API_BASE = stringFromEnv(
-  'MANAGER_API_BASE',
-  'https://manager.api.live.ledger.com/api',
-)
-
-export const BASE_SOCKET_URL = stringFromEnv('BASE_SOCKET_URL', 'wss://api.ledgerwallet.com/update')
 
 // Provider
 export const FORCE_PROVIDER = intFromEnv('FORCE_PROVIDER', 0)
@@ -84,6 +78,7 @@ export const LEDGER_DEBUG_ALL_LANGS = boolFromEnv('LEDGER_DEBUG_ALL_LANGS')
 export const SKIP_GENUINE = boolFromEnv('SKIP_GENUINE')
 export const SKIP_ONBOARDING = boolFromEnv('SKIP_ONBOARDING')
 export const SHOW_LEGACY_NEW_ACCOUNT = boolFromEnv('SHOW_LEGACY_NEW_ACCOUNT')
+export const SHOW_MOCK_HSMWARNINGS = boolFromEnv('SHOW_MOCK_HSMWARNINGS')
 export const HIGHLIGHT_I18N = boolFromEnv('HIGHLIGHT_I18N')
 export const DISABLE_ACTIVITY_INDICATORS = boolFromEnv('DISABLE_ACTIVITY_INDICATORS')
 export const EXPERIMENTAL_CENTER_MODAL = boolFromEnv('EXPERIMENTAL_CENTER_MODAL')

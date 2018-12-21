@@ -21,7 +21,7 @@ const Outer = styled.div`
   background-color: ${colors.fog};
   border-radius: 3px;
   overflow: hidden;
-  height: 10px;
+  height: 5px;
   width: ${p => p.width}px;
   position: relative;
 `
@@ -42,7 +42,6 @@ const Inner = styled.div`
         `
       : css`
           transform: scaleX(${p => p.progress});
-          transition: 150ms ease-out transform;
         `};
 `
 

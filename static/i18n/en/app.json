@@ -258,9 +258,13 @@
     },
     "modal": {
       "steps": {
-        "updateMCU": "MCU update"
+        "updateMCU": "Firmware update",
+        "osu": "Installing OSU...",
+        "flash-mcu": "MCU updating...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating...",
+        "flash": "Flashing your device..."
       },
-      "installing": "Firmware updating...",
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "Identifier",
@@ -293,8 +297,7 @@
       "confirmAddress": {
         "title": "Verification",
         "action": "Verify address on device",
-        "text": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer"
-        ,
+        "text": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
         "support": "Contact us"
       },
       "receiveFunds": {
@@ -356,7 +359,7 @@
     "export": {
       "desc": "Import accounts on your Ledger Live Mobile app",
       "button": "Export",
-      "modal":{
+      "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
         "listTitle": "To import accounts on your Ledger Live Mobile app:",
@@ -444,6 +447,11 @@
       "title": "View user data",
       "desc": "View the user data that is stored on your computer, including your accounts, caches and settings.",
       "btn": "View"
+    },
+    "repairDevice": {
+      "title": "Repair your Ledger device",
+      "desc": "If you encountered some issue while updating your device and cannot resume the update process, you can try this option to repair your device.",
+      "button": "Repair"
     },
     "exportLogs": {
       "title": "Export logs",
@@ -635,7 +643,7 @@
       "step2": {
         "title": "Did you save your recovery phrase by yourself?"
       },
-      "step3":{
+      "step3": {
         "title": "Is your Ledger device genuine?"
       },
       "isGenuinePassed": "Your device is genuine",
@@ -658,7 +666,7 @@
     },
     "setPassword": {
       "title": "Password lock (optional)",
-        "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
+      "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
         "note1": "Make sure to remember your password. Do not share it.",
         "note2": "Losing your password requires resetting Ledger Live and re-adding accounts.",
@@ -840,6 +848,10 @@
     "TransportStatusError": {
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
+    },
+    "UnexpectedBootloader": {
+      "title": "Opps, your device should not be in Bootloader mode",
+      "description": "Please restart your device or contact us"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Firmware update refused on device",

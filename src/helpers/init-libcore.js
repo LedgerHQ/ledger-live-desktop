@@ -3,7 +3,7 @@
 import logger from 'logger'
 import invariant from 'invariant'
 import network from 'api/network'
-import { serializeError } from './errors'
+import { serializeError } from '@ledgerhq/live-common/lib/errors/helpers'
 
 const lib = require('@ledgerhq/ledger-core')
 

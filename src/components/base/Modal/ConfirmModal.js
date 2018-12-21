@@ -25,11 +25,13 @@ type Props = {
   t: T,
   isLoading?: boolean,
   analyticsName: string,
+  cancellable?: boolean,
 }
 
 class ConfirmModal extends PureComponent<Props> {
   render() {
     const {
+      cancellable,
       isOpened,
       title,
       subTitle,
@@ -54,7 +56,7 @@ class ConfirmModal extends PureComponent<Props> {
         preventBackdropClick={isLoading}
         {...props}
         render={({ onClose }) => (
-          <ModalBody onClose={isLoading ? undefined : onClose}>
+          <ModalBody onClose={!cancellable && isLoading ? undefined : onClose}>
             <TrackPage category="Modal" name={analyticsName} />
             <ModalTitle>{title}</ModalTitle>
             <ModalContent>

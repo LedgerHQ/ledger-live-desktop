@@ -5,6 +5,7 @@
 
 [untyped]
 .*/node_modules/react-select
+<PROJECT_ROOT>/node_modules/qrloop/lib/Buffer.js*
 
 [include]
 

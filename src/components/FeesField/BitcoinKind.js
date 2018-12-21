@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { FeeNotLoaded } from 'config/errors'
+import { FeeNotLoaded } from '@ledgerhq/live-common/lib/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
 import type { Fees } from 'api/Fees'
