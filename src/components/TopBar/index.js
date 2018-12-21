@@ -25,6 +25,7 @@ import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
 
 import ActivityIndicator from './ActivityIndicator'
 import ItemContainer from './ItemContainer'
+import HSMStatusBanner from '../HSMStatusBanner'
 
 const Container = styled(Box).attrs({
   px: 6,
@@ -103,6 +104,7 @@ class TopBar extends PureComponent<Props> {
           <Box grow horizontal>
             <GlobalSearch t={t} isHidden />
             <CurrenciesStatusBanner />
+            <HSMStatusBanner />
             {hasAccounts && (
               <Fragment>
                 <ActivityIndicator />
