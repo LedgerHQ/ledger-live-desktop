@@ -1,5 +1,7 @@
 // @flow
 
+import 'helpers/live-common-setup'
+
 import { app, BrowserWindow, Menu, screen } from 'electron'
 import debounce from 'lodash/debounce'
 import {

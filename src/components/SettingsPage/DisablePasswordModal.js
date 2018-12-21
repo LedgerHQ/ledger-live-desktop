@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { PasswordIncorrectError } from 'config/errors'
+import { PasswordIncorrectError } from '@ledgerhq/live-common/lib/errors'
 
 import db from 'helpers/db'
 import Box from 'components/base/Box'

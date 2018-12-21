@@ -2,7 +2,6 @@
 
 import winston from 'winston'
 import Transport from 'winston-transport'
-import { resolveLogsDirectory } from 'helpers/log'
 import anonymizer from 'helpers/anonymizer'
 import pname from 'helpers/pname'
 
@@ -18,66 +17,17 @@ import {
   DEBUG_ANALYTICS,
 } from 'config/constants'
 
-require('winston-daily-rotate-file')
-
 const { format } = winston
 const { combine, json, timestamp } = format
 
-let logIndex = 0
-
 const pinfo = format(info => {
-  info.pname = pname
-  info.index = logIndex++
+  if (!info.pname) {
+    info.pname = pname
+  }
   return info
 })
 
-function createDailyRotateFile(processName) {
-  return new winston.transports.DailyRotateFile({
-    dirname: resolveLogsDirectory(),
-    json: true,
-    filename: `ledger-live-${processName}-%DATE%.log`,
-    datePattern: 'YYYY-MM-DD',
-    maxSize: '20m',
-    maxFiles: '7d',
-  })
-}
-
-const transports = [createDailyRotateFile(pname)]
-
-const queryLogs = (processName: string, date: Date) =>
-  new Promise((resolve, reject) => {
-    const dailyRotateFile = createDailyRotateFile(processName)
-    const options = {
-      from: date - 10 * 60 * 1000,
-      until: date,
-      limit: 2000,
-      start: 0,
-      order: 'desc',
-    }
-    dailyRotateFile.query(options, (err, result) => {
-      if (err) {
-        reject(err)
-        return
-      }
-      resolve(result)
-    })
-  })
-
-const queryAllLogs = async (date: Date = new Date()) => {
-  const internal = await queryLogs('internal', date)
-  const main = await queryLogs('main', date)
-  const renderer = await queryLogs('renderer', date)
-  const all = internal
-    .concat(main)
-    .concat(renderer)
-    .sort((a, b) => {
-      if (a.timestamp !== b.timestamp) {
-        return new Date(b.timestamp) - new Date(a.timestamp)
-      }
-      return b.index - a.index
-    })
-  return all
-}
+const transports = []
 
 if (process.env.NODE_ENV !== 'production' || process.env.DEV_TOOLS) {
   let consoleT
@@ -130,6 +80,10 @@ const logger = winston.createLogger({
   transports,
 })
 
+const add = (transport: *) => {
+  logger.add(transport)
+}
+
 const captureBreadcrumb = (breadcrumb: any) => {
   if (!process.env.STORYBOOK_ENV) {
     try {
@@ -155,13 +109,7 @@ const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 const logApdu = !__DEV__ || DEBUG_DEVICE
 
 const blacklistTooVerboseCommandInput = []
-const blacklistTooVerboseCommandResponse = [
-  'libcoreSyncAccount',
-  'libcoreScanAccounts',
-  'listApps',
-  'listAppVersions',
-  'listCategories',
-]
+const blacklistTooVerboseCommandResponse = ['libcoreSyncAccount', 'libcoreScanAccounts']
 
 export default {
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {
@@ -404,5 +352,9 @@ export default {
     }
   },
 
-  queryAllLogs,
+  add,
+
+  onLog: (log: *) => {
+    logger.log(log)
+  },
 }

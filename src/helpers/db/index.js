@@ -1,6 +1,5 @@
 // @flow
 
-import fs from 'fs'
 import path from 'path'
 import crypto from 'crypto'
 import cloneDeep from 'lodash/cloneDeep'
@@ -9,17 +8,16 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 
 import logger from 'logger'
+import { fsReadFile, fsUnlink } from 'helpers/fs'
 import { promisify, debounce } from 'helpers/promise'
 
-import { NoDBPathGiven, DBWrongPassword } from 'config/errors'
+import { NoDBPathGiven, DBWrongPassword } from '@ledgerhq/live-common/lib/errors'
 
 type Transform = {
   get: any => any,
   set: any => any,
 }
 
-const fsReadFile = promisify(fs.readFile)
-const fsUnlink = promisify(fs.unlink)
 const writeFileAtomic = promisify(writeFileAtomicModule)
 
 const ALGORITHM = 'aes-256-cbc'

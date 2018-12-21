@@ -3,7 +3,7 @@
 import React, { Fragment, Component } from 'react'
 import { connect } from 'react-redux'
 import { openURL } from 'helpers/linking'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
@@ -114,7 +114,7 @@ type Props = {
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const { t, onClose, operation, account, currencySettings, marketIndicator } = props
   if (!operation || !account || !currencySettings) return null
-  const { hash, date, senders, type, fee, recipients } = operation
+  const { extra, hash, date, senders, type, fee, recipients } = operation
 
   const { name, unit, currency } = account
   const amount = getOperationAmountNumber(operation)
@@ -226,6 +226,14 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
               <DataList lines={recipients} t={t} />
             </Box>
+            {Object.entries(extra).map(([key, value]) => (
+              <Box key={key}>
+                <OpDetailsTitle>
+                  <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
+                </OpDetailsTitle>
+                <OpDetailsData>{value}</OpDetailsData>
+              </Box>
+            ))}
           </Box>
         </GrowScroll>
         <GradientBox />

@@ -1,10 +1,10 @@
 // @flow
 
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import debugAppInfosForCurrency from '@ledgerhq/live-common/lib/hw/debugAppInfosForCurrency'
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { withDevice } from 'helpers/deviceAccess'
-import debugAppInfosForCurrency from 'helpers/debugAppInfosForCurrency'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
 type Input = {
   currencyId: string,
@@ -18,10 +18,8 @@ type Result = {
 const cmd: Command<Input, Result> = createCommand(
   'debugAppInfosForCurrency',
   ({ currencyId, devicePath }) =>
-    fromPromise(
-      withDevice(devicePath)(transport =>
-        debugAppInfosForCurrency(transport, getCryptoCurrencyById(currencyId)),
-      ),
+    withDevice(devicePath)(transport =>
+      from(debugAppInfosForCurrency(transport, getCryptoCurrencyById(currencyId))),
     ),
 )
 

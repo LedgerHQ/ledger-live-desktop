@@ -5,13 +5,13 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconHelp from 'icons/Help'
-import { resolveLogsDirectory } from 'helpers/log'
 import { urls } from 'config/urls'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import OpenUserDataDirectoryBtn from 'components/OpenUserDataDirectoryBtn'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
+import RepairDeviceButton from '../RepairDeviceButton'
 import AboutRowItem from '../AboutRowItem'
 import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
 
@@ -52,10 +52,7 @@ class SectionHelp extends PureComponent<Props> {
           >
             <CleanButton />
           </Row>
-          <Row
-            title={t('settings.exportLogs.title')}
-            desc={t('settings.exportLogs.desc', { logsDirectory: resolveLogsDirectory() })}
-          >
+          <Row title={t('settings.exportLogs.title')} desc={t('settings.exportLogs.desc')}>
             <ExportLogsBtn />
           </Row>
           <Row
@@ -75,6 +72,9 @@ class SectionHelp extends PureComponent<Props> {
             desc={t('settings.profile.hardResetDesc')}
           >
             <ResetButton />
+          </Row>
+          <Row title={t('settings.repairDevice.title')} desc={t('settings.repairDevice.desc')}>
+            <RepairDeviceButton />
           </Row>
         </Body>
       </Section>

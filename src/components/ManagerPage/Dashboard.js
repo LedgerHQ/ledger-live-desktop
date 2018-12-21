@@ -4,7 +4,7 @@ import { translate } from 'react-i18next'
 import styled from 'styled-components'
 
 import type { T, Device } from 'types/common'
-import type { DeviceInfo } from 'helpers/types'
+import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'

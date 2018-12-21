@@ -45,4 +45,5 @@ const App = ({
   </Provider>
 )
 
+// $FlowFixMe
 export default hot(module)(App)

@@ -6,12 +6,12 @@ import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+
 import type { Device, T } from 'types/common'
-import type { ApplicationVersion, DeviceInfo } from 'helpers/types'
+import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
+import manager from '@ledgerhq/live-common/lib/manager'
 import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 import { developerModeSelector } from 'reducers/settings'
-import listApps from 'commands/listApps'
-import listAppVersions from 'commands/listAppVersions'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import Box from 'components/base/Box'
@@ -19,7 +19,7 @@ import Space from 'components/base/Space'
 import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
-import Progress from 'components/base/Progress'
+import ProgressBar from 'components/ProgressBar'
 import Spinner from 'components/base/Spinner'
 import Button from 'components/base/Button'
 import TranslatedError from 'components/TranslatedError'
@@ -65,6 +65,7 @@ type State = {
   appsLoaded: boolean,
   app: string,
   mode: Mode,
+  progress: number,
 }
 
 const oldAppsInstallDisabled = ['ZenCash', 'Ripple']
@@ -86,6 +87,7 @@ class AppsList extends PureComponent<Props, State> {
     appsLoaded: false,
     app: '',
     mode: 'home',
+    progress: 0,
   }
 
   componentDidMount() {
@@ -98,53 +100,15 @@ class AppsList extends PureComponent<Props, State> {
 
   _unmounted = false
 
-  prepareAppList = ({ applicationsList, compatibleAppVersionsList, sortedCryptoCurrencies }) => {
-    const filtered = this.props.isDevMode
-      ? compatibleAppVersionsList.slice(0)
-      : compatibleAppVersionsList.filter(version => {
-          const app = applicationsList.find(e => e.id === version.app)
-          if (app) {
-            return app.category !== 2
-          }
-
-          return false
-        })
-
-    const sortedCryptoApps = []
-
-    // sort by crypto first
-    sortedCryptoCurrencies.forEach(crypto => {
-      const app = filtered.find(
-        item => item.name.toLowerCase() === crypto.managerAppName.toLowerCase(),
-      )
-      if (app) {
-        filtered.splice(filtered.indexOf(app), 1)
-        sortedCryptoApps.push(app)
-      }
-    })
-
-    return sortedCryptoApps.concat(filtered)
-  }
-
   async fetchAppList() {
+    const { deviceInfo, isDevMode } = this.props
+
     try {
-      const { deviceInfo } = this.props
-
-      const [
-        applicationsList,
-        compatibleAppVersionsList,
-        sortedCryptoCurrencies,
-      ] = await Promise.all([
-        listApps.send().toPromise(),
-        listAppVersions.send(deviceInfo).toPromise(),
-        getFullListSortedCryptoCurrencies(),
-      ])
-
-      const filteredAppVersionsList = this.prepareAppList({
-        applicationsList,
-        compatibleAppVersionsList,
-        sortedCryptoCurrencies,
-      })
+      const filteredAppVersionsList = await manager.getAppsList(
+        deviceInfo,
+        isDevMode,
+        getFullListSortedCryptoCurrencies,
+      )
 
       if (!this._unmounted) {
         this.setState({
@@ -158,41 +122,37 @@ class AppsList extends PureComponent<Props, State> {
     }
   }
 
-  handleInstallApp = (app: ApplicationVersion) => async () => {
-    this.setState({ status: 'busy', app: app.name, mode: 'installing' })
-    try {
-      const {
-        device: { path: devicePath },
-        deviceInfo,
-      } = this.props
-      const data = { app, devicePath, targetId: deviceInfo.targetId }
-      await installApp.send(data).toPromise()
-      this.setState({ status: 'success' })
-    } catch (err) {
-      this.setState({ status: 'error', error: err, mode: 'home' })
-    }
+  sub: *
+  runAppScript = (app: ApplicationVersion, mode: *, cmd: *) => {
+    this.setState({ status: 'busy', app: app.name, mode, progress: 0 })
+    const {
+      device: { path: devicePath },
+      deviceInfo: { targetId },
+    } = this.props
+    this.sub = cmd.send({ app, devicePath, targetId }).subscribe({
+      next: patch => {
+        this.setState(patch)
+      },
+      complete: () => {
+        this.setState({ status: 'success' })
+      },
+      error: error => {
+        this.setState({ status: 'error', error, app: '', mode: 'home' })
+      },
+    })
   }
 
-  handleUninstallApp = (app: ApplicationVersion) => async () => {
-    this.setState({ status: 'busy', app: app.name, mode: 'uninstalling' })
-    try {
-      const {
-        device: { path: devicePath },
-        deviceInfo,
-      } = this.props
-      const data = { app, devicePath, targetId: deviceInfo.targetId }
-      await uninstallApp.send(data).toPromise()
-      this.setState({ status: 'success' })
-    } catch (err) {
-      this.setState({ status: 'error', error: err, app: '', mode: 'home' })
-    }
-  }
+  handleInstallApp = (app: ApplicationVersion) => () =>
+    this.runAppScript(app, 'installing', installApp)
+
+  handleUninstallApp = (app: ApplicationVersion) => () =>
+    this.runAppScript(app, 'uninstalling', uninstallApp)
 
   handleCloseModal = () => this.setState({ status: 'idle', mode: 'home' })
 
   renderModal = () => {
     const { t } = this.props
-    const { app, status, error, mode } = this.state
+    const { app, status, error, mode, progress } = this.state
     return (
       <Modal
         isOpened={status !== 'idle' && status !== 'loading'}
@@ -217,7 +177,7 @@ class AppsList extends PureComponent<Props, State> {
                     {t(`manager.apps.${mode}`, { app })}
                   </Text>
                   <Box mt={6}>
-                    <Progress style={{ width: '100%' }} infinite />
+                    <ProgressBar width={150} progress={progress} />
                   </Box>
                 </ModalContent>
               </Fragment>

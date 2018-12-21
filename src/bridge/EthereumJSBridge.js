@@ -25,7 +25,7 @@ import { apiForCurrency } from 'api/Ethereum'
 import type { Tx } from 'api/Ethereum'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
-import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from 'config/errors'
+import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from '@ledgerhq/live-common/lib/errors'
 import type { EditProps, WalletBridge } from './types'
 
 type Transaction = {

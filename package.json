@@ -35,13 +35,13 @@
     }
   },
   "dependencies": {
-    "@ledgerhq/hw-app-btc": "^v4.30.0",
-    "@ledgerhq/hw-app-eth": "^4.24.0",
-    "@ledgerhq/hw-app-xrp": "^4.25.0",
-    "@ledgerhq/hw-transport": "^4.24.0",
-    "@ledgerhq/hw-transport-node-hid": "4.24.0",
-    "@ledgerhq/ledger-core": "2.0.0-rc.12",
-    "@ledgerhq/live-common": "4.6.0",
+    "@ledgerhq/hw-app-btc": "^4.32.0",
+    "@ledgerhq/hw-app-eth": "^4.32.0",
+    "@ledgerhq/hw-app-xrp": "^4.32.0",
+    "@ledgerhq/hw-transport": "^4.32.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.32.0",
+    "@ledgerhq/ledger-core": "2.0.0-rc.14",
+    "@ledgerhq/live-common": "4.8.0-beta.23",
     "animated": "^0.2.2",
     "async": "^2.6.1",
     "axios": "^0.18.0",
@@ -109,7 +109,6 @@
     "uncontrollable": "^6.0.0",
     "uuid": "^3.2.1",
     "winston": "^3.0.0",
-    "winston-daily-rotate-file": "^3.2.3",
     "winston-transport": "^4.2.0",
     "write-file-atomic": "^2.3.0",
     "ws": "^5.1.1",
@@ -186,7 +185,7 @@
     "yaml-loader": "^0.5.0"
   },
   "engines": {
-    "node": ">=8.9.0 <=8.12.0",
+    "node": ">=8.9.0 <=8.14.0",
     "yarn": "^1.10.1"
   },
   "private": true

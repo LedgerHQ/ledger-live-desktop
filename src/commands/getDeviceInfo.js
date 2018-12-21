@@ -1,11 +1,10 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { withDevice } from 'helpers/deviceAccess'
-
-import getDeviceInfo from 'helpers/devices/getDeviceInfo'
-import type { DeviceInfo } from 'helpers/types'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
+import getDeviceInfo from '@ledgerhq/live-common/lib/hw/getDeviceInfo'
+import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 
 type Input = {
   devicePath: string,
@@ -14,7 +13,7 @@ type Input = {
 type Result = DeviceInfo
 
 const cmd: Command<Input, Result> = createCommand('getDeviceInfo', ({ devicePath }) =>
-  fromPromise(withDevice(devicePath)(transport => getDeviceInfo(transport))),
+  withDevice(devicePath)(transport => from(getDeviceInfo(transport))),
 )
 
 export default cmd

@@ -1,15 +1,12 @@
 import os from 'os'
 import path from 'path'
-import fs from 'fs'
 import rimrafModule from 'rimraf'
 
 import db from 'helpers/db'
 import { promisify } from 'helpers/promise'
+import { fsReadFile, fsWriteFile, fsMkdir } from 'helpers/fs'
 
 const rimraf = promisify(rimrafModule)
-const fsReadFile = promisify(fs.readFile)
-const fsWriteFile = promisify(fs.writeFile)
-const fsMkdir = promisify(fs.mkdir)
 
 const accountsTransform = {
   get: accounts => accounts.map(account => ({ ...account, balance: Number(account.balance) })),

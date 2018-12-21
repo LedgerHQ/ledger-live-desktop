@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { FeeNotLoaded } from 'config/errors'
+import { FeeNotLoaded } from '@ledgerhq/live-common/lib/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
 import type { Fees } from 'api/Fees'
@@ -89,7 +89,7 @@ class FeesField extends Component<OwnProps, State> {
     }
     items.push(!feePerByte && !error ? notLoadedItem : customItem)
     const selectedItem =
-      !feePerByte && prevState.selectedItem.feePerByte.eq(feePerByte)
+      feePerByte && prevState.selectedItem.feePerByte.eq(feePerByte)
         ? prevState.selectedItem
         : items.find(f => f.feePerByte.eq(feePerByte)) || items[items.length - 1]
     return { items, selectedItem }
