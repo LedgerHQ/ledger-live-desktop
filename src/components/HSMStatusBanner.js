@@ -13,8 +13,7 @@ import IconExclamationCircle from 'icons/ExclamationCircle'
 import IconChevronRight from 'icons/ChevronRight'
 
 import Box from 'components/base/Box'
-import { from } from 'rxjs'
-import { SHOW_MOCK_HSMWARNINGS } from "../config/constants";
+import { SHOW_MOCK_HSMWARNINGS } from '../config/constants'
 
 const CloseIconContainer = styled.div`
   position: absolute;
@@ -54,18 +53,18 @@ class HSMStatusBanner extends PureComponent<Props, State> {
   }
 
   componentWillMount() {
-    if(SHOW_MOCK_HSMWARNINGS){
+    if (SHOW_MOCK_HSMWARNINGS) {
       this.setState({
         pendingMessages: [
           {
-            id: "mock1",
-            message: "Lorem Ipsum dolor sit amet #1"
+            id: 'mock1',
+            message: 'Lorem Ipsum dolor sit amet #1',
           },
           {
-            id: "mock2",
-            message: "Lorem Ipsum dolor sit amet #2"
-          }
-        ]
+            id: 'mock2',
+            message: 'Lorem Ipsum dolor sit amet #2',
+          },
+        ],
       })
     }
 
@@ -166,15 +165,15 @@ const styles = {
     borderRadius: 4,
     fontSize: 13,
     paddingTop: 17,
-    padding:15,
+    padding: 15,
     color: 'white',
     fontWeight: 'bold',
     paddingRight: 30,
     width: 350,
   },
   message: {
-    marginTop: -3
-  }
+    marginTop: -3,
+  },
 }
 
 export default translate()(HSMStatusBanner)
