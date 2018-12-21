@@ -100,34 +100,6 @@ class AppsList extends PureComponent<Props, State> {
 
   _unmounted = false
 
-  prepareAppList = ({ applicationsList, compatibleAppVersionsList, sortedCryptoCurrencies }) => {
-    const filtered = this.props.isDevMode
-      ? compatibleAppVersionsList.slice(0)
-      : compatibleAppVersionsList.filter(version => {
-          const app = applicationsList.find(e => e.id === version.app)
-          if (app) {
-            return app.category !== 2
-          }
-
-          return false
-        })
-
-    const sortedCryptoApps = []
-
-    // sort by crypto first
-    sortedCryptoCurrencies.forEach(crypto => {
-      const app = filtered.find(
-        item => item.name.toLowerCase() === crypto.managerAppName.toLowerCase(),
-      )
-      if (app) {
-        filtered.splice(filtered.indexOf(app), 1)
-        sortedCryptoApps.push(app)
-      }
-    })
-
-    return sortedCryptoApps.concat(filtered)
-  }
-
   async fetchAppList() {
     const { deviceInfo, isDevMode } = this.props
 
