@@ -104,7 +104,6 @@ class TopBar extends PureComponent<Props> {
           <Box grow horizontal>
             <GlobalSearch t={t} isHidden />
             <CurrenciesStatusBanner />
-            <HSMStatusBanner />
             {hasAccounts && (
               <Fragment>
                 <ActivityIndicator />

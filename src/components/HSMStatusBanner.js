@@ -14,6 +14,7 @@ import IconChevronRight from 'icons/ChevronRight'
 
 import Box from 'components/base/Box'
 import { SHOW_MOCK_HSMWARNINGS } from '../config/constants'
+import { urls } from '../config/urls'
 
 const CloseIconContainer = styled.div`
   position: absolute;
@@ -38,7 +39,6 @@ type Props = {
 
 type State = {
   pendingMessages: HSMStatus[],
-  dismissedMessages: string[],
 }
 
 type HSMStatus = {
@@ -48,26 +48,17 @@ type HSMStatus = {
 
 class HSMStatusBanner extends PureComponent<Props, State> {
   state = {
-    pendingMessages: [],
-    dismissedMessages: [],
-  }
-
-  componentWillMount() {
-    if (SHOW_MOCK_HSMWARNINGS) {
-      this.setState({
-        pendingMessages: [
+    pendingMessages: SHOW_MOCK_HSMWARNINGS
+      ? [
           {
             id: 'mock1',
             message: 'Lorem Ipsum dolor sit amet #1',
           },
-          {
-            id: 'mock2',
-            message: 'Lorem Ipsum dolor sit amet #2',
-          },
-        ],
-      })
-    }
+        ]
+      : [],
+  }
 
+  componentDidMount() {
     this.warningSub = warnings.subscribe({
       next: message => {
         this.setState(prevState => ({
@@ -85,21 +76,21 @@ class HSMStatusBanner extends PureComponent<Props, State> {
 
   warningSub = null
 
-  dismiss = item =>
+  dismiss = dismissedItem =>
     this.setState(prevState => ({
-      dismissedMessages: [...prevState.dismissedMessages, item.id],
+      pendingMessages: prevState.pendingMessages.filter(item => item.id !== dismissedItem.id),
     }))
 
   render() {
     const { t } = this.props
-    const { pendingMessages, dismissedMessages } = this.state
+    const { pendingMessages } = this.state
 
-    const filtered = pendingMessages.filter(item => dismissedMessages.indexOf(item.id) === -1)
+    if (!pendingMessages.length) return null
+    const item = pendingMessages[0]
 
-    if (!filtered.length) return null
     return (
       <Box flow={2} style={styles.container}>
-        {filtered.map(r => <BannerItem key={r.id} t={t} item={r} onItemDismiss={this.dismiss} />)}
+        <BannerItem key={item.id} t={t} item={item} onItemDismiss={this.dismiss} />
       </Box>
     )
   }
@@ -110,7 +101,7 @@ class BannerItem extends PureComponent<{
   onItemDismiss: HSMStatus => void,
   t: *,
 }> {
-  onLinkClick = () => openURL('#')
+  onLinkClick = () => openURL(urls.contactSupport)
   dismiss = () => this.props.onItemDismiss(this.props.item)
 
   render() {
@@ -158,6 +149,7 @@ const styles = {
     position: 'fixed',
     left: 32,
     bottom: 32,
+    zIndex: 100,
   },
   banner: {
     background: colors.orange,
