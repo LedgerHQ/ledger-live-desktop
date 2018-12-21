@@ -59,7 +59,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
       this.setState({
         firmware,
         ready: true,
-        modal: 'install',
+        modal: deviceInfo.isOSU ? 'install' : 'closed',
         stepId: deviceInfo.isOSU ? 'updateMCU' : 'idCheck',
       })
       /* eslint-enable */
