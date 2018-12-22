@@ -118,7 +118,7 @@ class AccountsOrder extends Component<Props> {
           <BoldToggle isBold={isActive}>{item.label}</BoldToggle>
         </Box>
         <OrderIcon isActive={isActive}>
-          {order === 'desc' ? <IconArrowUp size={14} /> : <IconArrowDown size={14} />}
+          {order === 'asc' ? <IconArrowUp size={14} /> : <IconArrowDown size={14} />}
         </OrderIcon>
       </DropDownItem>
     )
