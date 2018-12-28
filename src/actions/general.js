@@ -33,11 +33,8 @@ const selectAccountsBalanceAndOrder = createStructuredSelector({
 
 export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {
   const all = selectAccountsBalanceAndOrder(getState())
-  const allRatesAvailable = all.accountsBtcBalance.every(b => !!b)
-  if (allRatesAvailable) {
-    dispatch({
-      type: 'DB:REORDER_ACCOUNTS',
-      payload: sortAccounts(all),
-    })
-  }
+  dispatch({
+    type: 'DB:REORDER_ACCOUNTS',
+    payload: sortAccounts(all),
+  })
 }
