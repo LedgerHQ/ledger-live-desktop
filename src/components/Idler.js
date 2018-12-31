@@ -40,7 +40,7 @@ class Idler extends PureComponent<Props> {
 
   lastAction: number = -1
 
-  debounceOnChange = debounce(_ => this.idleTimeHandler(), 1000, { maxWait: 1000, leading: true })
+  debounceOnChange = debounce(this.idleTimeHandler, 1000, { maxWait: 1000, leading: true })
 
   checkForAutoLock = _ => {
     const timeout = this.props.autoLockTimeout
