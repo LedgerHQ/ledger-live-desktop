@@ -89,7 +89,7 @@ process.on('message', m => {
           })
         },
         error: error => {
-          logger.warn('Command error:', error)
+          logger.warn('Command error:', { error })
           delete subscriptions[requestId]
           logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
           process.send({
@@ -100,7 +100,7 @@ process.on('message', m => {
         },
       })
     } catch (error) {
-      logger.warn('Command error:', error)
+      logger.warn('Command impl error:', { error })
       delete subscriptions[requestId]
       logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
       process.send({
