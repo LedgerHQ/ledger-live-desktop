@@ -120,6 +120,7 @@ class FeesField extends Component<OwnProps, State> {
       if (selectedItem.feePerByte.isZero() && input.current) {
         patch.isFocused = true
         input.current.select()
+        onChange(selectedItem.feePerByte)
       }
     }
     this.setState(patch)
