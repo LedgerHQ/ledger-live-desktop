@@ -7,7 +7,6 @@ import { Trans, translate } from 'react-i18next'
 import type { T } from 'types/common'
 import { Switch, Route } from 'react-router'
 import type { RouterHistory, Match, Location } from 'react-router'
-import { EXPERIMENTAL_TOOLS_SETTINGS } from 'config/constants'
 import { accountsSelector } from 'reducers/accounts'
 import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
@@ -49,6 +48,11 @@ class SettingsPage extends PureComponent<Props, State> {
         value: SectionCurrencies,
       },
       {
+        key: 'export',
+        label: <Trans i18nKey="settings.tabs.export" />,
+        value: SectionExport,
+      },
+      {
         key: 'about',
         label: <Trans i18nKey="settings.tabs.about" />,
         value: SectionAbout,
@@ -59,14 +63,6 @@ class SettingsPage extends PureComponent<Props, State> {
         value: SectionHelp,
       },
     ]
-
-    if (EXPERIMENTAL_TOOLS_SETTINGS) {
-      this._items.splice(2, 0, {
-        key: 'tool',
-        label: 'Experimental Tools',
-        value: SectionExport,
-      })
-    }
 
     this.state = {
       tab: this.getCurrentTab({ url: props.match.url, pathname: props.location.pathname }),
