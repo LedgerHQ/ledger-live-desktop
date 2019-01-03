@@ -258,9 +258,13 @@
     },
     "modal": {
       "steps": {
-        "updateMCU": "Actualización MCU"
+        "updateMCU": "Firmware update",
+        "osu": "Installing OSU...",
+        "flash-mcu": "MCU updating...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating...",
+        "flash": "Flashing your device..."
       },
-      "installing": "Actualizando el firmware...",
       "confirmIdentifier": "Comprobar el identificador",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "Identificador",
@@ -443,6 +447,11 @@
       "title": "Ver datos de usuario",
       "desc": "Visualiza los datos de usuario guardados en tu ordenador, incluidas tus cuentas, caché y ajustes.",
       "btn": "Ver"
+    },
+    "repairDevice": {
+      "title": "Repair your Ledger device",
+      "desc": "If you encountered some issue while updating your device and cannot resume the update process, you can try this option to repair your device.",
+      "button": "Repair"
     },
     "exportLogs": {
       "title": "Exportar registros",
@@ -839,6 +848,10 @@
     "TransportStatusError": {
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
+    },
+    "UnexpectedBootloader": {
+      "title": "Opps, your device should not be in Bootloader mode",
+      "description": "Please restart your device or contact us"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Actualización del firmware rechazada en el dispositivo. ",
