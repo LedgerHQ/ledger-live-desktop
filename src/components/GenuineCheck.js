@@ -156,10 +156,10 @@ class GenuineCheck extends PureComponent<Props> {
       {
         id: 'deviceInfo',
         title: (
-          <Trans i18nKey="deviceConnect.step2" parent="div">
+          <Trans i18nKey="deviceConnect.dashboard" parent="div">
             {'Navigate to the '}
             <Bold>{'dashboard'}</Bold>
-            {' app on your device'}
+            {' on your device'}
           </Trans>
         ),
         icon: homeIcon,
