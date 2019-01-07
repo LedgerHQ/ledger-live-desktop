@@ -37,6 +37,19 @@ export type Option = {
 }
 
 class Select extends PureComponent<Props> {
+  componentDidMount() {
+    if (this.ref) {
+      // $FlowFixMe
+      this.timeout = setTimeout(() => this.ref.focus(), 16)
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
+  }
+
   handleChange = (value, { action }) => {
     const { onChange } = this.props
     if (action === 'select-option') {
@@ -46,6 +59,9 @@ class Select extends PureComponent<Props> {
       onChange(null)
     }
   }
+
+  ref: *
+  timeout: *
 
   render() {
     const {
@@ -68,6 +84,7 @@ class Select extends PureComponent<Props> {
 
     return (
       <ReactSelect
+        ref={c => (this.ref = c)}
         value={value}
         maxMenuHeight={300}
         classNamePrefix="select"
