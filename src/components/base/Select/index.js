@@ -28,6 +28,7 @@ type Props = {
   small: boolean,
   width: number,
   minWidth: number,
+  autoFocus: boolean,
 }
 
 export type Option = {
@@ -38,15 +39,15 @@ export type Option = {
 
 class Select extends PureComponent<Props> {
   componentDidMount() {
-    if (this.ref) {
+    if (this.ref && this.props.autoFocus) {
       // $FlowFixMe
-      this.timeout = setTimeout(() => this.ref.focus(), 16)
+      this.timeout = requestAnimationFrame(() => this.ref.focus())
     }
   }
 
   componentWillUnmount() {
     if (this.timeout) {
-      clearTimeout(this.timeout)
+      cancelAnimationFrame(this.timeout)
     }
   }
 
