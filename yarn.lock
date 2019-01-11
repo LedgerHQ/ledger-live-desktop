@@ -1725,10 +1725,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.8.0-beta.24":
-  version "4.8.0-beta.24"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.8.0-beta.24.tgz#5f30ea9b63c1a561120eb6757b6663d1c20b67e0"
-  integrity sha512-guW9LH/kAk9bmZ8dJV0OlzNYOoE8Jo0VPxZuYCLuzO09Xr41oBfEARdSnVNV6+n/L/BDc8EZSlixpbxMKZ9yFQ==
+"@ledgerhq/live-common@4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.8.1.tgz#3327b438d18ab02f54fed08756439d7637a631a0"
+  integrity sha512-5Bw74PCPMpMny4/Ro0t/Pi6lYj5bMkcF/1tzX+l++RMkiwvE3+gP7gqW5Vk3waU7i6FOUk22aMMgFYDcQx7O+g==
   dependencies:
     "@aeternity/ledger-app-api" "0.0.4"
     "@ledgerhq/hw-app-btc" "^4.32.0"
