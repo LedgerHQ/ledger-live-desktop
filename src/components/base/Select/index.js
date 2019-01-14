@@ -28,6 +28,7 @@ type Props = {
   small: boolean,
   width: number,
   minWidth: number,
+  autoFocus: boolean,
 }
 
 export type Option = {
@@ -37,6 +38,19 @@ export type Option = {
 }
 
 class Select extends PureComponent<Props> {
+  componentDidMount() {
+    if (this.ref && this.props.autoFocus) {
+      // $FlowFixMe
+      this.timeout = requestAnimationFrame(() => this.ref.focus())
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      cancelAnimationFrame(this.timeout)
+    }
+  }
+
   handleChange = (value, { action }) => {
     const { onChange } = this.props
     if (action === 'select-option') {
@@ -46,6 +60,9 @@ class Select extends PureComponent<Props> {
       onChange(null)
     }
   }
+
+  ref: *
+  timeout: *
 
   render() {
     const {
@@ -68,6 +85,7 @@ class Select extends PureComponent<Props> {
 
     return (
       <ReactSelect
+        ref={c => (this.ref = c)}
         value={value}
         maxMenuHeight={300}
         classNamePrefix="select"
