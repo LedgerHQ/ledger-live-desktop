@@ -37,7 +37,9 @@ export const fetchCurrenciesStatus = () => async (dispatch: *) => {
       method: 'GET',
       url: process.env.LL_STATUS_ENDPOINT || urls.currenciesStatus,
     })
-    dispatch(setCurrenciesStatus(data))
+    if (Array.isArray(data)) {
+      dispatch(setCurrenciesStatus(data))
+    }
   } catch (err) {
     logger.error(err)
   }
