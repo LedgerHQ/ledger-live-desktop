@@ -9,7 +9,7 @@ import type { T } from 'types/common'
 import { hardReset } from 'helpers/reset'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import { ConfirmModal } from 'components/base/Modal'
+import ConfirmModal from 'components/base/Modal/ConfirmModal'
 import IconTriangleWarning from 'icons/TriangleWarning'
 import ResetFallbackModal from './ResetFallbackModal'
 
@@ -58,6 +58,7 @@ class ResetButton extends PureComponent<Props, State> {
         <ConfirmModal
           analyticsName="HardReset"
           isDanger
+          centered
           isLoading={pending}
           isOpened={opened}
           onClose={this.close}

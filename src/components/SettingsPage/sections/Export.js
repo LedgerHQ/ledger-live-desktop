@@ -10,7 +10,8 @@ import styled from 'styled-components'
 import { SettingsSection as Section, SettingsSectionHeader as Header } from '../SettingsSection'
 import IconShare from '../../../icons/Share'
 import Button from '../../base/Button'
-import Modal, { ModalBody, ModalContent, ModalFooter, ModalTitle } from '../../base/Modal'
+import Modal from '../../base/Modal'
+import ModalBody from '../../base/Modal/ModalBody'
 import Box from '../../base/Box'
 import QRCodeExporter from '../../QRCodeExporter'
 import { BulletRow } from '../../Onboarding/helperComponents'
@@ -97,27 +98,32 @@ class SectionExport extends PureComponent<Props, State> {
     ]
 
     return (
-      <ModalBody onClose={onClose}>
-        <ModalTitle>{t('settings.export.modal.title')}</ModalTitle>
-        <ModalContent flow={2} justify="center" align="center">
-          <Box flow={2}>
-            <QRCodeExporter size={330} />
+      <ModalBody
+        onClose={onClose}
+        title={t('settings.export.modal.title')}
+        render={() => (
+          <Box justify="center" align="center">
+            <Box flow={2}>
+              <QRCodeExporter size={330} />
+            </Box>
+            <Box shrink style={{ width: 330, fontSize: 13, marginTop: 20 }}>
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {t('settings.export.modal.listTitle')}
+              </Text>
+            </Box>
+            <Box style={{ width: 330 }}>
+              {stepsImportMobile.map(step => <BulletRow key={step.key} step={step} />)}
+            </Box>
           </Box>
-          <Box shrink style={{ width: 330, fontSize: 13, marginTop: 20 }}>
-            <Text ff="Open Sans|SemiBold" color="dark">
-              {t('settings.export.modal.listTitle')}
-            </Text>
+        )}
+        renderFooter={() => (
+          <Box>
+            <Button small onClick={onClose} primary>
+              {t('settings.export.modal.button')}
+            </Button>
           </Box>
-          <Box style={{ width: 330 }}>
-            {stepsImportMobile.map(step => <BulletRow key={step.key} step={step} />)}
-          </Box>
-        </ModalContent>
-        <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-          <Button small onClick={onClose} primary>
-            {t('settings.export.modal.button')}
-          </Button>
-        </ModalFooter>
-      </ModalBody>
+        )}
+      />
     )
   }
 
@@ -139,7 +145,12 @@ class SectionExport extends PureComponent<Props, State> {
             </Button>
           }
         />
-        <Modal isOpened={isModalOpened} onClose={this.onModalClose} render={this.renderModal} />
+        <Modal
+          isOpened={isModalOpened}
+          centered
+          onClose={this.onModalClose}
+          render={this.renderModal}
+        />
       </Section>
     )
   }

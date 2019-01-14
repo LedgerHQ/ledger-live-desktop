@@ -1,19 +1,28 @@
 // @flow
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
 
 import { MODAL_SHARE_ANALYTICS } from 'config/constants'
-import Modal, { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import Modal from 'components/base/Modal'
 
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
-
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import type { T } from 'types/common'
+
+import { closeModal } from '../../reducers/modals'
+import ModalBody from '../base/Modal/ModalBody'
 
 type Props = {
   t: T,
+  closeModal: string => void,
 }
+const mapDispatchToProps = {
+  closeModal,
+}
+
 class ShareAnalytics extends PureComponent<Props, *> {
   render() {
     const { t } = this.props
@@ -56,30 +65,41 @@ class ShareAnalytics extends PureComponent<Props, *> {
       },
     ]
     return (
-      <Modal
-        name={MODAL_SHARE_ANALYTICS}
-        render={({ onClose }) => (
-          <ModalBody onClose={onClose}>
-            <ModalTitle data-e2e="modal_title_shareAnalytics">
-              {t('onboarding.analytics.shareAnalytics.title')}
-            </ModalTitle>
-            <InlineDesc>{t('onboarding.analytics.shareAnalytics.desc')}</InlineDesc>
-            <ModalContent mx={5}>
-              <Ul>{items.map(item => <li key={item.key}>{item.desc}</li>)}</Ul>
-            </ModalContent>
-            <ModalFooter horizontal justifyContent="flex-end">
-              <Button onClick={onClose} primary data-e2e="modal_buttonClose_shareAnalytics">
+      <Modal name={MODAL_SHARE_ANALYTICS} centered>
+        <ModalBody
+          title={t('onboarding.analytics.shareAnalytics.title')}
+          render={() => (
+            <Fragment>
+              <InlineDesc>{t('onboarding.analytics.shareAnalytics.desc')}</InlineDesc>
+              <Box mx={5}>
+                <Ul>{items.map(item => <li key={item.key}>{item.desc}</li>)}</Ul>
+              </Box>
+            </Fragment>
+          )}
+          renderFooter={() => (
+            <Fragment>
+              <Button
+                onClick={() => this.props.closeModal(MODAL_SHARE_ANALYTICS)}
+                primary
+                data-e2e="modal_buttonClose_shareAnalytics"
+              >
                 {t('common.close')}
               </Button>
-            </ModalFooter>
-          </ModalBody>
-        )}
-      />
+            </Fragment>
+          )}
+        />
+      </Modal>
     )
   }
 }
 
-export default translate()(ShareAnalytics)
+export default compose(
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+  translate(),
+)(ShareAnalytics)
 
 export const Ul = styled.ul.attrs({
   ff: 'Open Sans|Regular',

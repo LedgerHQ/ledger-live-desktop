@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 
 import type { T } from 'types/common'
 
@@ -8,7 +8,7 @@ import db from 'helpers/db'
 import { PasswordIncorrectError } from '@ledgerhq/errors'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from 'components/base/Modal'
+import Modal, { ModalBody } from 'components/base/Modal'
 
 import PasswordForm from './PasswordForm'
 
@@ -17,6 +17,7 @@ type Props = {
   onClose: () => void,
   onChangePassword: (?string) => void,
   hasPassword: boolean,
+  isOpened: boolean,
 }
 
 type State = {
@@ -35,6 +36,13 @@ const INITIAL_STATE = {
 
 class PasswordModal extends PureComponent<Props, State> {
   state = INITIAL_STATE
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (!nextProps.isOpened) {
+      // CLean the state?
+      this.setState(prevState => ({ ...prevState, ...INITIAL_STATE }))
+    }
+  }
 
   handleSave = (e: SyntheticEvent<HTMLFormElement>) => {
     const { currentPassword, newPassword } = this.state
@@ -73,23 +81,17 @@ class PasswordModal extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, hasPassword, onClose, ...props } = this.props
+    const { t, hasPassword, onClose, isOpened, ...props } = this.props
     const { currentPassword, newPassword, incorrectPassword, confirmPassword } = this.state
     return (
-      <Modal
-        {...props}
-        onHide={this.handleReset}
-        onClose={onClose}
-        render={({ onClose }) => (
-          <ModalBody onClose={onClose}>
-            {hasPassword ? (
-              <ModalTitle>{t('password.changePassword.title')}</ModalTitle>
-            ) : (
-              <ModalTitle data-e2e="enablePassword_modal">
-                {t('password.setPassword.title')}
-              </ModalTitle>
-            )}
-            <ModalContent>
+      <Modal isOpened={isOpened} centered>
+        <ModalBody
+          {...props}
+          title={hasPassword ? t('password.changePassword.title') : t('password.setPassword.title')}
+          onHide={this.handleReset}
+          onClose={onClose}
+          render={() => (
+            <Fragment>
               <Box
                 ff="Museo Sans|Regular"
                 color="dark"
@@ -116,8 +118,10 @@ class PasswordModal extends PureComponent<Props, State> {
                 onChange={this.handleInputChange}
                 t={t}
               />
-            </ModalContent>
-            <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
+            </Fragment>
+          )}
+          renderFooter={() => (
+            <Box horizontal align="center" justify="flex-end" flow={2}>
               <Button
                 small
                 type="button"
@@ -134,10 +138,10 @@ class PasswordModal extends PureComponent<Props, State> {
               >
                 {t('common.save')}
               </Button>
-            </ModalFooter>
-          </ModalBody>
-        )}
-      />
+            </Box>
+          )}
+        />
+      </Modal>
     )
   }
 }

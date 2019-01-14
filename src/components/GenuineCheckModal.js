@@ -5,7 +5,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal, { ModalBody } from 'components/base/Modal'
 import GenuineCheck from 'components/GenuineCheck'
 
 type Props = {
@@ -19,12 +19,13 @@ class GenuineCheckModal extends PureComponent<Props> {
   renderBody = ({ onClose }) => {
     const { t, onSuccess, onFail, onUnavailable } = this.props
     return (
-      <ModalBody onClose={onClose}>
-        <ModalTitle>{t('genuinecheck.modal.title')}</ModalTitle>
-        <ModalContent>
+      <ModalBody
+        onClose={onClose}
+        title={t('genuinecheck.modal.title')}
+        render={() => (
           <GenuineCheck onSuccess={onSuccess} onFail={onFail} onUnavailable={onUnavailable} />
-        </ModalContent>
-      </ModalBody>
+        )}
+      />
     )
   }
 

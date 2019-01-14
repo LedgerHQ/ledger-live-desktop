@@ -1,95 +1,102 @@
 // @flow
 
-import React, { PureComponent } from 'react'
-import styled, { keyframes } from 'styled-components'
+import React, { PureComponent, Fragment } from 'react'
+import Animated from 'animated/lib/targets/react-dom'
+import { findDOMNode } from 'react-dom'
 
-import Box from 'components/base/Box'
-import IconCross from 'icons/Cross'
+import ModalContent from './ModalContent'
+import ModalHeader from './ModalHeader'
+import ModalFooter from './ModalFooter'
 
-export const Container = styled(Box).attrs({
-  px: 5,
-  pb: 5,
-})``
+import type { RenderProps } from './index'
 
 type Props = {
-  deferHeight?: number,
-  onClose?: Function,
-  children: any,
+  title: string,
+  onBack?: void => void,
+  onClose?: void => void,
+  render?: (?RenderProps) => any,
+  renderFooter?: (?RenderProps) => any,
+  renderProps?: RenderProps,
+  noScroll?: boolean,
+  refocusWhenChange?: any,
 }
 
 type State = {
-  isHidden: boolean,
+  animGradient: Animated.Value,
 }
 
 class ModalBody extends PureComponent<Props, State> {
-  static defaultProps = {
-    onClose: undefined,
-  }
-
   state = {
-    isHidden: true,
+    animGradient: new Animated.Value(0),
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      window.requestAnimationFrame(() => {
-        this.setState({ isHidden: false })
-      })
-    }, 150)
+  componentDidUpdate(prevProps: Props) {
+    const shouldFocus = prevProps.refocusWhenChange !== this.props.refocusWhenChange
+    if (shouldFocus) {
+      if (this._content) {
+        const node = findDOMNode(this._content) // eslint-disable-line react/no-find-dom-node
+        if (node) {
+          // $FlowFixMe
+          node.focus()
+        }
+      }
+    }
+  }
+
+  _content = null
+
+  animateGradient = (isScrollable: boolean) => {
+    const anim = {
+      duration: 150,
+      toValue: isScrollable ? 1 : 0,
+    }
+    Animated.timing(this.state.animGradient, anim).start()
   }
 
   render() {
-    const { children, onClose, deferHeight, ...props } = this.props
-    const { isHidden } = this.state
+    const { onBack, onClose, title, render, renderFooter, renderProps, noScroll } = this.props
+    const { animGradient } = this.state
+
+    const gradientStyle = {
+      ...GRADIENT_STYLE,
+      opacity: animGradient,
+    }
+
     return (
-      <Body
-        style={{ height: isHidden && deferHeight ? deferHeight : undefined }}
-        data-e2e="modalBody"
-      >
-        {onClose && (
-          <CloseContainer onClick={onClose}>
-            <IconCross size={16} />
-          </CloseContainer>
-        )}
-        {(!isHidden || !deferHeight) && <Inner {...props}>{children}</Inner>}
-      </Body>
+      <Fragment>
+        <ModalHeader onBack={onBack} onClose={onClose}>
+          {title}
+        </ModalHeader>
+        <ModalContent
+          tabIndex={0}
+          ref={n => (this._content = n)}
+          onIsScrollableChange={this.animateGradient}
+          noScroll={noScroll}
+        >
+          {render && render(renderProps)}
+        </ModalContent>
+        <div style={GRADIENT_WRAPPER_STYLE}>
+          <Animated.div style={gradientStyle} />
+        </div>
+        {renderFooter && <ModalFooter>{renderFooter(renderProps)}</ModalFooter>}
+      </Fragment>
     )
   }
 }
 
-const CloseContainer = styled(Box).attrs({
-  p: 4,
-  color: 'fog',
-})`
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
+const GRADIENT_STYLE = {
+  background: 'linear-gradient(rgba(255, 255, 255, 0), #ffffff)',
+  height: 40,
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 6,
+}
 
-  &:hover {
-    color: ${p => p.theme.colors.grey};
-  }
-
-  &:active {
-    color: ${p => p.theme.colors.dark};
-  }
-`
-
-const Body = styled(Box).attrs({
-  bg: p => p.theme.colors.white,
-  relative: true,
-  borderRadius: 1,
-})`
-  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
-`
-
-const appear = keyframes`
-  from { opacity: 0; }
-  to { opacity: 1; }
-`
-
-const Inner = styled(Box)`
-  animation: ${appear} 80ms linear;
-`
+const GRADIENT_WRAPPER_STYLE = {
+  height: 0,
+  position: 'relative',
+  pointerEvents: 'none',
+}
 
 export default ModalBody

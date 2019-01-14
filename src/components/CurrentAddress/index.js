@@ -145,7 +145,10 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
 
   componentWillUnmount() {
     if (this._timeout) clearTimeout(this._timeout)
+    this._isUnmounted = true
   }
+
+  _isUnmounted = false
 
   renderCopy = copy => {
     const { t } = this.props

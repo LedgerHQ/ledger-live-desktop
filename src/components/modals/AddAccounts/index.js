@@ -43,6 +43,7 @@ const createSteps = () => {
       footer: StepChooseCurrencyFooter,
       onBack: null,
       hideFooter: false,
+      noScroll: true,
     },
     {
       id: 'connectDevice',
@@ -241,6 +242,7 @@ class AddAccounts extends PureComponent<Props, State> {
 
     return (
       <Modal
+        centered
         name={MODAL_ADD_ACCOUNTS}
         refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}

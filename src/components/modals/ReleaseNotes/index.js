@@ -9,6 +9,7 @@ import ReleaseNotesBody from './ReleaseNotesBody'
 const ReleaseNotesModal = () => (
   <Modal
     name={MODAL_RELEASES_NOTES}
+    centered
     render={({ data, onClose }) => <ReleaseNotesBody version={data} onClose={onClose} />}
   />
 )

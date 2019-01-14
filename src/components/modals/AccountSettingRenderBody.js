@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -28,13 +28,8 @@ import Input from 'components/base/Input'
 import Select from 'components/base/Select'
 import SyncAgo from 'components/SyncAgo'
 
-import {
-  ModalBody,
-  ModalTitle,
-  ModalFooter,
-  ModalContent,
-  ConfirmModal,
-} from 'components/base/Modal'
+import ConfirmModal from 'components/base/Modal/ConfirmModal'
+import ModalBody from 'components/base/Modal/ModalBody'
 
 type State = {
   accountName: ?string,
@@ -74,7 +69,7 @@ const defaultState = {
   isRemoveAccountModalOpen: false,
 }
 
-class HelperComp extends PureComponent<Props, State> {
+class AccountSettingRenderBody extends PureComponent<Props, State> {
   state = {
     ...defaultState,
   }
@@ -84,7 +79,6 @@ class HelperComp extends PureComponent<Props, State> {
   }
 
   getAccount(data: Object): Account {
-    // FIXME this should be a selector
     const { accountName } = this.state
     const account = get(data, 'account', {})
 
@@ -132,7 +126,6 @@ class HelperComp extends PureComponent<Props, State> {
     e: SyntheticEvent<HTMLFormElement>,
   ) => {
     e.preventDefault()
-
     const { updateAccount, setDataModal } = this.props
     const { accountName, accountUnit, endpointConfig, endpointConfigError } = this.state
 
@@ -194,10 +187,10 @@ class HelperComp extends PureComponent<Props, State> {
       endpointConfigError,
     } = this.state
     const { t, onClose, data } = this.props
+    if (!data) return null
 
     const account = this.getAccount(data)
     const bridge = getBridgeForCurrency(account.currency)
-
     const usefulData = {
       xpub: account.xpub || undefined,
       index: account.index,
@@ -207,11 +200,12 @@ class HelperComp extends PureComponent<Props, State> {
     }
 
     return (
-      <ModalBody onClose={onClose}>
-        <form onSubmit={this.handleSubmit(account, onClose)}>
-          <TrackPage category="Modal" name="AccountSettings" />
-          <ModalTitle>{t('account.settings.title')}</ModalTitle>
-          <ModalContent mb={3}>
+      <ModalBody
+        onClose={onClose}
+        title={t('account.settings.title')}
+        render={() => (
+          <form onSubmit={this.handleSubmit(account, onClose)}>
+            <TrackPage category="Modal" name="AccountSettings" />
             <Container>
               <Box>
                 <OptionRowTitle>{t('account.settings.accountName.title')}</OptionRowTitle>
@@ -284,8 +278,21 @@ class HelperComp extends PureComponent<Props, State> {
                 value={JSON.stringify(usefulData, null, 2)}
               />
             </Spoiler>
-          </ModalContent>
-          <ModalFooter horizontal>
+            <ConfirmModal
+              analyticsName="RemoveAccount"
+              isDanger
+              isOpened={isRemoveAccountModalOpen}
+              onClose={this.handleCloseRemoveAccountModal}
+              onReject={this.handleCloseRemoveAccountModal}
+              onConfirm={() => this.handleRemoveAccount(account)}
+              title={t('settings.removeAccountModal.title')}
+              subTitle={t('common.areYouSure')}
+              desc={t('settings.removeAccountModal.desc')}
+            />
+          </form>
+        )}
+        renderFooter={() => (
+          <Fragment>
             <Button
               event="OpenAccountDelete"
               danger
@@ -297,20 +304,9 @@ class HelperComp extends PureComponent<Props, State> {
             <Button event="DoneEditingAccount" ml="auto" type="submit" primary>
               {t('common.apply')}
             </Button>
-          </ModalFooter>
-        </form>
-        <ConfirmModal
-          analyticsName="RemoveAccount"
-          isDanger
-          isOpened={isRemoveAccountModalOpen}
-          onClose={this.handleCloseRemoveAccountModal}
-          onReject={this.handleCloseRemoveAccountModal}
-          onConfirm={() => this.handleRemoveAccount(account)}
-          title={t('settings.removeAccountModal.title')}
-          subTitle={t('common.areYouSure')}
-          desc={t('settings.removeAccountModal.desc')}
-        />
-      </ModalBody>
+          </Fragment>
+        )}
+      />
     )
   }
 }
@@ -321,7 +317,7 @@ export default compose(
     mapDispatchToProps,
   ),
   translate(),
-)(HelperComp)
+)(AccountSettingRenderBody)
 
 export function InputLeft({ currency }: { currency: Currency }) {
   return (
