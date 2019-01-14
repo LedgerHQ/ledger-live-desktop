@@ -142,6 +142,7 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
+    "dashboard": "Navigate to the <1><0>{{managerAppName}}</0></1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
