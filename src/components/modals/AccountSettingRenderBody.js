@@ -123,7 +123,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
     })
 
   handleSubmit = (account: Account, onClose: () => void) => (
-    e: SyntheticEvent<HTMLFormElement>,
+    e: SyntheticEvent<HTMLFormElement | HTMLInputElement>,
   ) => {
     e.preventDefault()
     const { updateAccount, setDataModal } = this.props
@@ -199,12 +199,14 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
       blockHeight: account.blockHeight,
     }
 
+    const onSubmit = this.handleSubmit(account, onClose)
+
     return (
       <ModalBody
         onClose={onClose}
         title={t('account.settings.title')}
         render={() => (
-          <form onSubmit={this.handleSubmit(account, onClose)}>
+          <Fragment>
             <TrackPage category="Modal" name="AccountSettings" />
             <Container>
               <Box>
@@ -218,6 +220,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
                   value={account.name}
                   maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
+                  onEnter={onSubmit}
                   onFocus={e => this.handleFocus(e, 'accountName')}
                   error={accountNameError}
                 />
@@ -289,7 +292,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
               subTitle={t('common.areYouSure')}
               desc={t('settings.removeAccountModal.desc')}
             />
-          </form>
+          </Fragment>
         )}
         renderFooter={() => (
           <Fragment>
@@ -301,7 +304,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
             >
               {t('common.delete')}
             </Button>
-            <Button event="DoneEditingAccount" ml="auto" type="submit" primary>
+            <Button event="DoneEditingAccount" ml="auto" onClick={onSubmit} primary>
               {t('common.apply')}
             </Button>
           </Fragment>
