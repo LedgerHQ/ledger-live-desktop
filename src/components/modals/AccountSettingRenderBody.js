@@ -203,6 +203,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
 
     return (
       <ModalBody
+        noScroll
         onClose={onClose}
         title={t('account.settings.title')}
         render={() => (
@@ -277,6 +278,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
                   height: 200,
                   outline: 'none',
                   padding: '20px',
+                  width: '100%',
                 }}
                 value={JSON.stringify(usefulData, null, 2)}
               />
