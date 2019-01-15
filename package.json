@@ -40,13 +40,8 @@
     "@ledgerhq/hw-app-xrp": "^4.32.0",
     "@ledgerhq/hw-transport": "^4.32.0",
     "@ledgerhq/hw-transport-node-hid": "^4.32.0",
-<<<<<<< HEAD
-    "@ledgerhq/ledger-core": "2.0.0-rc.15",
-    "@ledgerhq/live-common": "4.13.0",
-=======
     "@ledgerhq/ledger-core": "2.0.0-rc.16",
-    "@ledgerhq/live-common": "4.8.0-beta.24",
->>>>>>> Bump binding which now uses 1.1.9: fix getFees
+    "@ledgerhq/live-common": "4.13.0",
     "animated": "^0.2.2",
     "async": "^2.6.1",
     "axios": "^0.18.0",
