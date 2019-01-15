@@ -39,8 +39,7 @@ class PasswordModal extends PureComponent<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     if (!nextProps.isOpened) {
-      // CLean the state?
-      this.setState(prevState => ({ ...prevState, ...INITIAL_STATE }))
+      this.setState(INITIAL_STATE)
     }
   }
 

@@ -39,7 +39,7 @@ class ModalContent extends PureComponent<{
 
     const contentStyle = {
       ...CONTENT_STYLE,
-      overflow: noScroll ? 'visible' : 'auto',
+      overflow: noScroll ? 'visible' : 'inherit',
     }
 
     return (
