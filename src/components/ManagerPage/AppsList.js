@@ -225,26 +225,25 @@ class AppsList extends PureComponent<Props, State> {
 
   renderFooter = () => {
     const { t } = this.props
-    const { status } = this.state
-    return ['error', 'success'].includes(status) ? (
+    return (
       <Box horizontal justifyContent="flex-end" style={{ width: '100%' }}>
         <Button primary onClick={this.handleCloseModal}>
           {t('common.close')}
         </Button>
       </Box>
-    ) : null
+    )
   }
 
   renderModal = () => {
     const { status } = this.state
     return (
-      <Modal isOpened={status !== 'idle' && status !== 'loading'}>
+      <Modal isOpened={status !== 'idle' && status !== 'loading'} centered>
         <ModalBody
           align="center"
           justify="center"
           title={''}
           render={this.renderBody}
-          renderFooter={this.renderFooter}
+          renderFooter={['error', 'success'].includes(status) ? this.renderFooter : undefined}
         >
           <FreezeDeviceChangeEvents />
         </ModalBody>
@@ -295,6 +294,7 @@ class AppsList extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
+
     return (
       <Box flow={6}>
         <Box>
