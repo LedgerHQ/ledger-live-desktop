@@ -870,6 +870,10 @@
       "title": "App update required",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
+    "DeviceOnDashboardExpected": {
+      "title": "Return to Dashboard",
+      "description": "Please navigate back to Dashboard on your device"
+    },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (websocket error)",
       "description": null
