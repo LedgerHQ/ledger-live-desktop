@@ -41,11 +41,11 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     this.setState({ opened: false, isLoading: false, error: null, progress: 0 })
   }
 
-  action = () => {
+  repair = (version = null) => {
     if (this.state.isLoading) return
     const { push } = this.props
     this.setState({ isLoading: true })
-    this.sub = firmwareRepair.send().subscribe({
+    this.sub = firmwareRepair.send({ version }).subscribe({
       next: patch => {
         this.setState(patch)
       },
@@ -59,6 +59,8 @@ class RepairDeviceButton extends PureComponent<Props, State> {
       },
     })
   }
+
+  repairMcu = () => this.repair('0.8')
 
   render() {
     const { t } = this.props
@@ -76,11 +78,11 @@ class RepairDeviceButton extends PureComponent<Props, State> {
           isOpened={opened}
           onClose={this.close}
           onReject={this.close}
-          onConfirm={this.action}
+          onRepair={this.repair}
+          onRepairMCU={this.repair}
           isLoading={isLoading}
           title={t('settings.repairDevice.title')}
           desc={t('settings.repairDevice.desc')}
-          confirmText={t('settings.repairDevice.button')}
           progress={progress}
           error={error}
         />

@@ -129,7 +129,8 @@ type Props = {
   confirmText?: string,
   cancelText?: string,
   onReject: Function,
-  onConfirm: Function,
+  onRepair: Function,
+  onRepairMCU: Function,
   t: T,
   isLoading?: boolean,
   analyticsName: string,
@@ -148,7 +149,8 @@ class RepairModal extends PureComponent<Props> {
       confirmText,
       isDanger,
       onReject,
-      onConfirm,
+      onRepair,
+      onRepairMCU,
       isLoading,
       renderIcon,
       t,
@@ -157,8 +159,6 @@ class RepairModal extends PureComponent<Props> {
       error,
       ...props
     } = this.props
-
-    const realConfirmText = confirmText || t('common.confirm')
 
     return (
       <Modal
@@ -178,18 +178,29 @@ class RepairModal extends PureComponent<Props> {
             )}
 
             {!isLoading ? (
-              <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-                <Button onClick={onReject}>{t(`common.${error ? 'close' : 'cancel'}`)}</Button>
+              <ModalFooter horizontal align="center" justify="space-between" flow={2}>
+                {error ? <Button onClick={onReject}>{t(`common.close`)}</Button> : null}
                 {error ? null : (
-                  <Button
-                    onClick={onConfirm}
-                    primary={!isDanger}
-                    danger={isDanger}
-                    isLoading={isLoading}
-                    disabled={isLoading}
-                  >
-                    {realConfirmText}
-                  </Button>
+                  <>
+                    <Button
+                      onClick={onRepair}
+                      primary={!isDanger}
+                      danger={isDanger}
+                      isLoading={isLoading}
+                      disabled={isLoading}
+                    >
+                      {t('settings.repairDevice.repair')}
+                    </Button>
+                    <Button
+                      onClick={onRepair}
+                      primary={!isDanger}
+                      danger={isDanger}
+                      isLoading={isLoading}
+                      disabled={isLoading}
+                    >
+                      {t('settings.repairDevice.mcu')}
+                    </Button>
+                  </>
                 )}
               </ModalFooter>
             ) : null}
