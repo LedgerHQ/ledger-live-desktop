@@ -317,27 +317,36 @@ const EthereumBridge: WalletBridge<Transaction> = {
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })
-              const res = await getAddressCommand
-                .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
-                .toPromise()
-              const r = await stepAddress(
-                index,
-                res,
-                derivationMode,
-                emptyCount < mandatoryEmptyAccountSkip,
-              )
-              logger.log(
-                `scanning ${currency.id} at ${freshAddressPath}: ${res.address} resulted of ${
-                  r.account ? `Account with ${r.account.operations.length} txs` : 'no account'
-                }. ${r.complete ? 'ALL SCANNED' : ''}`,
-              )
-              if (r.account) {
-                o.next(r.account)
-              } else {
-                emptyCount++
-              }
-              if (r.complete) {
-                break
+
+              try {
+                const res = await getAddressCommand
+                  .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
+                  .toPromise()
+
+                const r = await stepAddress(
+                  index,
+                  res,
+                  derivationMode,
+                  emptyCount < mandatoryEmptyAccountSkip,
+                )
+                logger.log(
+                  `scanning ${currency.id} at ${freshAddressPath}: ${res.address} resulted of ${
+                    r.account ? `Account with ${r.account.operations.length} txs` : 'no account'
+                  }. ${r.complete ? 'ALL SCANNED' : ''}`,
+                )
+                if (r.account) {
+                  o.next(r.account)
+                } else {
+                  emptyCount++
+                }
+                if (r.complete) {
+                  break
+                }
+              } catch (error) {
+                // Fail-safe to avoid a crash due to the derivation path lock from 1.5
+                if (error.statusCode === 26628 && error.message.includes('0x6804')) {
+                  break
+                }
               }
             }
           }
