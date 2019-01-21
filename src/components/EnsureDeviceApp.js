@@ -23,11 +23,7 @@ import IconUsb from 'icons/Usb'
 
 import type { Device } from 'types/common'
 
-import {
-  WrongDeviceForAccount,
-  CantOpenDevice,
-  UpdateYourApp,
-} from '@ledgerhq/errors'
+import { WrongDeviceForAccount, CantOpenDevice, UpdateYourApp } from '@ledgerhq/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />
