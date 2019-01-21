@@ -129,8 +129,7 @@ type Props = {
   confirmText?: string,
   cancelText?: string,
   onReject: Function,
-  onRepair: Function,
-  onRepairMCU: Function,
+  repair: ?string=>*,
   t: T,
   isLoading?: boolean,
   analyticsName: string,
@@ -149,8 +148,7 @@ class RepairModal extends PureComponent<Props> {
       confirmText,
       isDanger,
       onReject,
-      onRepair,
-      onRepairMCU,
+      repair,
       isLoading,
       renderIcon,
       t,
@@ -183,22 +181,31 @@ class RepairModal extends PureComponent<Props> {
                 {error ? null : (
                   <>
                     <Button
-                      onClick={onRepair}
+                      onClick={() => repair()}
                       primary={!isDanger}
                       danger={isDanger}
                       isLoading={isLoading}
                       disabled={isLoading}
                     >
-                      {t('settings.repairDevice.repair')}
+                      {t('settings.repairDevice.generic')}
                     </Button>
                     <Button
-                      onClick={onRepair}
+                      onClick={() => repair("0.8")}
                       primary={!isDanger}
                       danger={isDanger}
                       isLoading={isLoading}
                       disabled={isLoading}
                     >
-                      {t('settings.repairDevice.mcu')}
+                      {t('settings.repairDevice.0_8')}
+                    </Button>
+                    <Button
+                      onClick={() => repair("0.9")}
+                      primary={!isDanger}
+                      danger={isDanger}
+                      isLoading={isLoading}
+                      disabled={isLoading}
+                    >
+                      {t('settings.repairDevice.0_9')}
                     </Button>
                   </>
                 )}

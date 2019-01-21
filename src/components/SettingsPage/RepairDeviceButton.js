@@ -60,9 +60,6 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     })
   }
 
-  repairMcu = () => this.repair('0.8')
-  repairGeneric = () => this.repair()
-
   render() {
     const { t } = this.props
     const { opened, isLoading, error, progress } = this.state
@@ -79,8 +76,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
           isOpened={opened}
           onClose={this.close}
           onReject={this.close}
-          onRepair={this.repairGeneric}
-          onRepairMCU={this.repairMcu}
+          repair={this.repair}
           isLoading={isLoading}
           title={t('settings.repairDevice.title')}
           desc={t('settings.repairDevice.desc')}

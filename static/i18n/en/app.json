@@ -453,8 +453,9 @@
       "title": "Repair your Ledger device",
       "desc": "If you encountered some issue while updating your Ledger Nano S and cannot resume the update process, you can try this option to repair your device.",
       "button": "Repair",
-      "repair": "Stuck in 'Bootloader'",
-      "mcu": "Stuck in 'MCU not genuine'"
+      "generic": "'Bootloader'",
+      "0_8": "'MCU not genuine'",
+      "0_9": "'follow repair instruction'"
     },
     "exportLogs": {
       "title": "Export logs",
