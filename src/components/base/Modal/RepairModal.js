@@ -11,6 +11,7 @@ import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import Select from 'components/base/Select'
 import ProgressCircle from 'components/ProgressCircle'
 import TranslatedError from 'components/TranslatedError'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
@@ -129,7 +130,7 @@ type Props = {
   confirmText?: string,
   cancelText?: string,
   onReject: Function,
-  repair: ?string=>*,
+  repair: (?string) => *,
   t: T,
   isLoading?: boolean,
   analyticsName: string,
@@ -138,7 +139,22 @@ type Props = {
   error?: Error,
 }
 
-class RepairModal extends PureComponent<Props> {
+const options = [{ value: 'generic' }, { value: '0_8' }, { value: '0_9' }]
+
+class RepairModal extends PureComponent<Props, *> {
+  state = {
+    selectedOption: options[0],
+  }
+
+  onChange = selectedOption => {
+    this.setState({ selectedOption })
+  }
+
+  renderOption = option => (option && this.props.t(`settings.repairDevice.${option.value}`)) || null
+
+  renderValue = option =>
+    (option && this.props.t(`settings.repairDevice.${option.data.value}`)) || null
+
   render() {
     const {
       cancellable,
@@ -157,6 +173,7 @@ class RepairModal extends PureComponent<Props> {
       error,
       ...props
     } = this.props
+    const { selectedOption } = this.state
 
     return (
       <Modal
@@ -175,37 +192,36 @@ class RepairModal extends PureComponent<Props> {
               <DisclaimerStep desc={desc} />
             )}
 
+            {!isLoading && !error ? (
+              <Box py={2} px={4}>
+                <Select
+                  value={selectedOption}
+                  onChange={this.onChange}
+                  autoFocus
+                  options={options}
+                  renderOption={this.renderOption}
+                  renderValue={this.renderValue}
+                />
+              </Box>
+            ) : null}
+
             {!isLoading ? (
-              <ModalFooter horizontal align="center" justify="space-between" flow={2}>
+              <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
                 {error ? <Button onClick={onReject}>{t(`common.close`)}</Button> : null}
                 {error ? null : (
                   <>
                     <Button
-                      onClick={() => repair()}
+                      onClick={() =>
+                        repair(
+                          selectedOption.value === 'generic' ? undefined : selectedOption.value,
+                        )
+                      }
                       primary={!isDanger}
                       danger={isDanger}
                       isLoading={isLoading}
                       disabled={isLoading}
                     >
-                      {t('settings.repairDevice.generic')}
-                    </Button>
-                    <Button
-                      onClick={() => repair("0.8")}
-                      primary={!isDanger}
-                      danger={isDanger}
-                      isLoading={isLoading}
-                      disabled={isLoading}
-                    >
-                      {t('settings.repairDevice.0_8')}
-                    </Button>
-                    <Button
-                      onClick={() => repair("0.9")}
-                      primary={!isDanger}
-                      danger={isDanger}
-                      isLoading={isLoading}
-                      disabled={isLoading}
-                    >
-                      {t('settings.repairDevice.0_9')}
+                      {t('settings.repairDevice.button')}
                     </Button>
                   </>
                 )}
