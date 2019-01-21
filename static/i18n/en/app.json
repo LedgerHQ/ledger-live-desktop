@@ -902,6 +902,10 @@
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
+    },
+    "UnknownMCU": {
+      "title": "Oops, MCU not found",
+      "description": "Please try again or contact us"
     }
   }
 }
