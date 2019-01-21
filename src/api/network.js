@@ -7,7 +7,7 @@ import {
   LedgerAPIErrorWithMessage,
   LedgerAPIError,
   NetworkDown,
-} from '@ledgerhq/live-common/lib/errors'
+} from '@ledgerhq/errors'
 import anonymizer from 'helpers/anonymizer'
 
 const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime, ...rest }): Promise<A> =>

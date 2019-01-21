@@ -2,7 +2,7 @@
 // small utilities for Promises
 
 import logger from 'logger'
-import { TimeoutTagged } from '@ledgerhq/live-common/lib/errors'
+import { TimeoutTagged } from '@ledgerhq/errors'
 
 export const delay = (ms: number): Promise<void> => new Promise(f => setTimeout(f, ms))
 

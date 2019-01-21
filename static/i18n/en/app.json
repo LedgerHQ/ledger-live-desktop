@@ -455,8 +455,8 @@
       "desc": "Please select the state of your Ledger device.",
       "button": "Repair",
       "generic": "Bootloader",
-      "0_8": "MCU not genuine",
-      "0_9": "Follow device repair instructions"
+      "mcuNotGenuine": "MCU not genuine",
+      "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
       "title": "Export logs",

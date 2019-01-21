@@ -20,7 +20,7 @@ import {
   DeviceNotGenuineError,
   DeviceGenuineSocketEarlyClose,
   UnexpectedBootloader,
-} from '@ledgerhq/live-common/lib/errors'
+} from '@ledgerhq/errors'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'

@@ -27,7 +27,7 @@ import {
   WrongDeviceForAccount,
   CantOpenDevice,
   UpdateYourApp,
-} from '@ledgerhq/live-common/lib/errors'
+} from '@ledgerhq/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />

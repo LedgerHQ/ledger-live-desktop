@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
+import { forceRepairChoices } from '@ledgerhq/live-common/lib/hw/firmwareUpdate-repair'
 
 import type { T } from 'types/common'
 
@@ -139,21 +140,19 @@ type Props = {
   error?: Error,
 }
 
-const options = [{ value: 'generic' }, { value: '0_8' }, { value: '0_9' }]
-
 class RepairModal extends PureComponent<Props, *> {
   state = {
-    selectedOption: options[0],
+    selectedOption: forceRepairChoices[0],
   }
 
   onChange = selectedOption => {
-    this.setState({ selectedOption: selectedOption || options[0] })
+    this.setState({ selectedOption: selectedOption || forceRepairChoices[0] })
   }
 
-  renderOption = option => (option && this.props.t(`settings.repairDevice.${option.value}`)) || null
+  renderOption = option => (option && this.props.t(`settings.repairDevice.${option.label}`)) || null
 
   renderValue = option =>
-    (option && this.props.t(`settings.repairDevice.${option.data.value}`)) || null
+    (option && this.props.t(`settings.repairDevice.${option.data.label}`)) || null
 
   render() {
     const {
@@ -200,7 +199,7 @@ class RepairModal extends PureComponent<Props, *> {
                   value={selectedOption}
                   onChange={this.onChange}
                   autoFocus
-                  options={options}
+                  options={forceRepairChoices}
                   renderOption={this.renderOption}
                   renderValue={this.renderValue}
                 />
@@ -213,11 +212,7 @@ class RepairModal extends PureComponent<Props, *> {
                 {error ? null : (
                   <>
                     <Button
-                      onClick={() =>
-                        repair(
-                          selectedOption.value === 'generic' ? undefined : selectedOption.value,
-                        )
-                      }
+                      onClick={() => repair(selectedOption.value)}
                       primary={!isDanger}
                       danger={isDanger}
                       isLoading={isLoading}

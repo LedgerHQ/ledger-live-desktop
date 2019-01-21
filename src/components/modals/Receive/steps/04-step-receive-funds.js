@@ -7,7 +7,7 @@ import TrackPage from 'analytics/TrackPage'
 import getAddress from 'commands/getAddress'
 import Box from 'components/base/Box'
 import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
-import { DisconnectedDevice, WrongDeviceForAccount } from '@ledgerhq/live-common/lib/errors'
+import { DisconnectedDevice, WrongDeviceForAccount } from '@ledgerhq/errors'
 
 import type { StepProps } from '..'
 

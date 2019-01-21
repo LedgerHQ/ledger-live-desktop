@@ -5,7 +5,7 @@ import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import throttle from 'lodash/throttle'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
-import { DisconnectedDevice } from '@ledgerhq/live-common/lib/errors'
+import { DisconnectedDevice } from '@ledgerhq/errors'
 import { retry } from './promise'
 
 let busy = false
