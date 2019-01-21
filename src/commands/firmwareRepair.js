@@ -11,7 +11,7 @@ type Result = { progress: number }
 
 const cmd: Command<Input, Result> = createCommand(
   'firmwareRepair',
-  ({ version }) => repair(''), // devicePath='' HACK to not depend on a devicePath because it's dynamic
+  ({ version }) => repair('', version), // devicePath='' HACK to not depend on a devicePath because it's dynamic
 )
 
 export default cmd
