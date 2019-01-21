@@ -147,7 +147,7 @@ class RepairModal extends PureComponent<Props, *> {
   }
 
   onChange = selectedOption => {
-    this.setState({ selectedOption })
+    this.setState({ selectedOption: selectedOption || options[0] })
   }
 
   renderOption = option => (option && this.props.t(`settings.repairDevice.${option.value}`)) || null
@@ -193,8 +193,10 @@ class RepairModal extends PureComponent<Props, *> {
             )}
 
             {!isLoading && !error ? (
-              <Box py={2} px={4}>
+              <Box py={2} px={5}>
                 <Select
+                  isSearchable={false}
+                  isClearable={false}
                   value={selectedOption}
                   onChange={this.onChange}
                   autoFocus
