@@ -1734,6 +1734,7 @@
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.12.0.tgz#7956564236f30460916bf61667fac4ea7ab5d814"
   integrity sha512-7EH/hvZiaYzOjNd/dMZif1ydFABRxR/zc5U13XhRMutL5ru4cbyDOKW6zC97FZNNaC35RJwhT7MFkhu2hwMvLA==
+
   dependencies:
     "@aeternity/ledger-app-api" "0.0.4"
     "@ledgerhq/errors" "^4.32.0"
