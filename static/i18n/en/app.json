@@ -851,7 +851,7 @@
       "description": "{{message}}"
     },
     "UnexpectedBootloader": {
-      "title": "Opps, your device should not be in Bootloader mode",
+      "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
     "UserRefusedFirmwareUpdate": {
