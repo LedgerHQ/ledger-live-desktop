@@ -451,8 +451,12 @@
     },
     "repairDevice": {
       "title": "Repair your Ledger device",
-      "desc": "If you encountered some issue while updating your device and cannot resume the update process, you can try this option to repair your device.",
-      "button": "Repair"
+      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
+      "desc": "Please select the state of your Ledger device.",
+      "button": "Repair",
+      "generic": "Bootloader",
+      "mcuNotGenuine": "MCU not genuine",
+      "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
       "title": "Экспортировать журналы",
@@ -851,7 +855,7 @@
       "description": "{{message}}"
     },
     "UnexpectedBootloader": {
-      "title": "Opps, your device should not be in Bootloader mode",
+      "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
     "UserRefusedFirmwareUpdate": {
