@@ -874,6 +874,10 @@
       "title": "Se requiere la actualización de la aplicación.",
       "description": "Desinstala y vuelve a instalar la aplicación {{managerAppName}} en el Gestor."
     },
+    "DeviceOnDashboardExpected": {
+      "title": "Return to Dashboard",
+      "description": "Please navigate back to Dashboard on your device"
+    },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (websocket error)",
       "description": null
