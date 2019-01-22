@@ -874,6 +874,10 @@
       "title": "アプリの更新が必要です",
       "description": "マネージャーに{{managerAppName}}アプリをアンインストールし、再インストールします"
     },
+    "DeviceOnDashboardExpected": {
+      "title": "Return to Dashboard",
+      "description": "Please navigate back to Dashboard on your device"
+    },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (websocket error)",
       "description": null
