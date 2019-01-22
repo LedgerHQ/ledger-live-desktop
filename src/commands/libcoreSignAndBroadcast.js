@@ -14,7 +14,7 @@ import {
   bigNumberToLibcoreAmount,
   getOrCreateWallet,
 } from 'helpers/libcore'
-import { UpdateYourApp } from '@ledgerhq/live-common/lib/errors'
+import { UpdateYourApp } from '@ledgerhq/errors'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'

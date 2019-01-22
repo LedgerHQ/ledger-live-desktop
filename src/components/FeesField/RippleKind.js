@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import type { BigNumber } from 'bignumber.js'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { apiForEndpointConfig, parseAPIValue } from 'api/Ripple'
-import { FeeNotLoaded } from '@ledgerhq/live-common/lib/errors'
+import { FeeNotLoaded } from '@ledgerhq/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import GenericContainer from './GenericContainer'
 

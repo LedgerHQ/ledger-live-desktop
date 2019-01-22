@@ -11,7 +11,7 @@ import LoggerTransport from 'logger/logger-transport-main'
 import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
 import { cleanUpBeforeClosingSync } from 'helpers/log'
-import { deserializeError } from '@ledgerhq/live-common/lib/errors/helpers'
+import { deserializeError } from '@ledgerhq/errors/lib/helpers'
 
 import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 import { setInternalProcessPID } from './terminator'

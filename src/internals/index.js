@@ -10,7 +10,7 @@ import uuid from 'uuid/v4'
 import { setImplementation } from 'api/network'
 import sentry from 'sentry/node'
 import { EXPERIMENTAL_HTTP_ON_RENDERER } from 'config/constants'
-import { serializeError } from '@ledgerhq/live-common/lib/errors/helpers'
+import { serializeError } from '@ledgerhq/errors/lib/helpers'
 
 require('../env')
 
