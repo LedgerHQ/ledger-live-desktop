@@ -11,7 +11,7 @@ import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreGetFees, { extractGetFeesInputFromAccount } from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
-import { NotEnoughBalance, FeeNotLoaded } from '@ledgerhq/live-common/lib/errors'
+import { NotEnoughBalance, FeeNotLoaded } from '@ledgerhq/errors'
 import type { WalletBridge, EditProps } from './types'
 
 const NOT_ENOUGH_FUNDS = 52
