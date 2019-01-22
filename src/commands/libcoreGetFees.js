@@ -13,7 +13,7 @@ import {
   bigNumberToLibcoreAmount,
   getOrCreateWallet,
 } from 'helpers/libcore'
-import { InvalidAddress } from '@ledgerhq/live-common/lib/errors'
+import { InvalidAddress } from '@ledgerhq/errors'
 
 type BitcoinLikeTransaction = {
   // TODO we rename this Transaction concept into transactionInput

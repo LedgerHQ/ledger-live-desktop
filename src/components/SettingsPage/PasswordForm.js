@@ -6,7 +6,7 @@ import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
 import Label from 'components/base/Label'
 
-import { PasswordsDontMatchError } from '@ledgerhq/live-common/lib/errors'
+import { PasswordsDontMatchError } from '@ledgerhq/errors'
 
 import type { T } from 'types/common'
 

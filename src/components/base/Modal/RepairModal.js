@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
+import { forceRepairChoices } from '@ledgerhq/live-common/lib/hw/firmwareUpdate-repair'
 
 import type { T } from 'types/common'
 
@@ -11,6 +12,7 @@ import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
+import Select from 'components/base/Select'
 import ProgressCircle from 'components/ProgressCircle'
 import TranslatedError from 'components/TranslatedError'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
@@ -129,7 +131,7 @@ type Props = {
   confirmText?: string,
   cancelText?: string,
   onReject: Function,
-  onConfirm: Function,
+  repair: (?string) => *,
   t: T,
   isLoading?: boolean,
   analyticsName: string,
@@ -138,7 +140,20 @@ type Props = {
   error?: Error,
 }
 
-class RepairModal extends PureComponent<Props> {
+class RepairModal extends PureComponent<Props, *> {
+  state = {
+    selectedOption: forceRepairChoices[0],
+  }
+
+  onChange = selectedOption => {
+    this.setState({ selectedOption: selectedOption || forceRepairChoices[0] })
+  }
+
+  renderOption = option => (option && this.props.t(`settings.repairDevice.${option.label}`)) || null
+
+  renderValue = option =>
+    (option && this.props.t(`settings.repairDevice.${option.data.label}`)) || null
+
   render() {
     const {
       cancellable,
@@ -148,7 +163,7 @@ class RepairModal extends PureComponent<Props> {
       confirmText,
       isDanger,
       onReject,
-      onConfirm,
+      repair,
       isLoading,
       renderIcon,
       t,
@@ -157,8 +172,7 @@ class RepairModal extends PureComponent<Props> {
       error,
       ...props
     } = this.props
-
-    const realConfirmText = confirmText || t('common.confirm')
+    const { selectedOption } = this.state
 
     return (
       <Modal
@@ -177,19 +191,36 @@ class RepairModal extends PureComponent<Props> {
               <DisclaimerStep desc={desc} />
             )}
 
+            {!isLoading && !error ? (
+              <Box py={2} px={5}>
+                <Select
+                  isSearchable={false}
+                  isClearable={false}
+                  value={selectedOption}
+                  onChange={this.onChange}
+                  autoFocus
+                  options={forceRepairChoices}
+                  renderOption={this.renderOption}
+                  renderValue={this.renderValue}
+                />
+              </Box>
+            ) : null}
+
             {!isLoading ? (
               <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-                <Button onClick={onReject}>{t(`common.${error ? 'close' : 'cancel'}`)}</Button>
+                {error ? <Button onClick={onReject}>{t(`common.close`)}</Button> : null}
                 {error ? null : (
-                  <Button
-                    onClick={onConfirm}
-                    primary={!isDanger}
-                    danger={isDanger}
-                    isLoading={isLoading}
-                    disabled={isLoading}
-                  >
-                    {realConfirmText}
-                  </Button>
+                  <>
+                    <Button
+                      onClick={() => repair(selectedOption.value)}
+                      primary={!isDanger}
+                      danger={isDanger}
+                      isLoading={isLoading}
+                      disabled={isLoading}
+                    >
+                      {t('settings.repairDevice.button')}
+                    </Button>
+                  </>
                 )}
               </ModalFooter>
             ) : null}

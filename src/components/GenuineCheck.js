@@ -20,7 +20,7 @@ import {
   DeviceNotGenuineError,
   DeviceGenuineSocketEarlyClose,
   UnexpectedBootloader,
-} from '@ledgerhq/live-common/lib/errors'
+} from '@ledgerhq/errors'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'
@@ -156,10 +156,10 @@ class GenuineCheck extends PureComponent<Props> {
       {
         id: 'deviceInfo',
         title: (
-          <Trans i18nKey="deviceConnect.step2" parent="div">
+          <Trans i18nKey="deviceConnect.dashboard" parent="div">
             {'Navigate to the '}
             <Bold>{'dashboard'}</Bold>
-            {' app on your device'}
+            {' on your device'}
           </Trans>
         ),
         icon: homeIcon,

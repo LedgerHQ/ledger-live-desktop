@@ -9,7 +9,7 @@ import { disable as disableDBMiddleware } from 'middlewares/db'
 import db from 'helpers/db'
 import { delay } from 'helpers/promise'
 import killInternalProcess from 'commands/killInternalProcess'
-import { DBNotReset } from '@ledgerhq/live-common/lib/errors'
+import { DBNotReset } from '@ledgerhq/errors'
 
 async function resetLibcoreDatabase() {
   await killInternalProcess.send().toPromise()

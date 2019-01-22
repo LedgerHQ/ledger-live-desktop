@@ -32,8 +32,8 @@ import type {
 } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
-import { NoAddressesFound } from '@ledgerhq/live-common/lib/errors'
-import { deserializeError } from '@ledgerhq/live-common/lib/errors/helpers'
+import { NoAddressesFound } from '@ledgerhq/errors'
+import { deserializeError } from '@ledgerhq/errors/lib/helpers'
 import { timeoutTagged } from './promise'
 
 export function isValidAddress(core: *, currency: *, address: string): boolean {

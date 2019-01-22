@@ -9,8 +9,8 @@ import Box from 'components/base/Box'
 import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
 import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
-import { createCustomErrorClass } from '@ledgerhq/live-common/lib/errors/helpers'
-import { CantScanQRCode } from '@ledgerhq/live-common/lib/errors'
+import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
+import { CantScanQRCode } from '@ledgerhq/errors'
 
 type Props<Transaction> = {
   t: T,

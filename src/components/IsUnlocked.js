@@ -17,7 +17,7 @@ import { hardReset } from 'helpers/reset'
 import { fetchAccounts } from 'actions/accounts'
 import { isLocked, unlock } from 'reducers/application'
 
-import { PasswordIncorrectError } from '@ledgerhq/live-common/lib/errors'
+import { PasswordIncorrectError } from '@ledgerhq/errors'
 
 import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'

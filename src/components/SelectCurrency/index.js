@@ -18,6 +18,7 @@ type OwnProps = {
   currencies?: CryptoCurrency[],
   value?: CryptoCurrency,
   placeholder: string,
+  autoFocus?: boolean,
   t: T,
 }
 
@@ -29,12 +30,21 @@ const mapStateToProps = (state, props: OwnProps) => ({
   currencies: props.currencies || availableCurrencies(state),
 })
 
-const SelectCurrency = ({ onChange, value, t, placeholder, currencies, ...props }: Props) => {
+const SelectCurrency = ({
+  onChange,
+  value,
+  t,
+  placeholder,
+  currencies,
+  autoFocus,
+  ...props
+}: Props) => {
   const options = currencies
     ? currencies.map(c => ({ ...c, value: c.id, label: c.name, currency: c }))
     : []
   return (
     <Select
+      autoFocus={autoFocus}
       value={value}
       renderOption={renderOption}
       renderValue={renderOption}
