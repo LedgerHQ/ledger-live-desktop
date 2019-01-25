@@ -271,7 +271,7 @@
       "identifier": "Identificador",
       "mcuTitle": "Actualizando MCU",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
-      "mcuSecond": "Pulsa el botón izquierdo y mantenlo pulsado mientras conectas de nuevo el cable USB hasta que aparezca la pantalla de procesamiento.",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
       "mcuPin": "Si te lo pide el dispositivo, introduce tu código pin para finalizar el proceso.",
       "successTitle": "Firmware actualizado",
       "successText": "Puedes volver a instalar las aplicaciones en tu dispositivo"
