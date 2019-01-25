@@ -13,6 +13,7 @@ import {
   isSegwitDerivationMode,
   isUnsplitDerivationMode,
   isIterableDerivationMode,
+  derivationModeSupportsIndex,
 } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import {
@@ -258,8 +259,9 @@ async function scanNextAccount(props: {
   if (isUnsubscribed()) return []
 
   const isLast = ops.length === 0 || !isIterableDerivationMode(derivationMode)
+  const skipIndex = !derivationModeSupportsIndex(derivationMode, accountIndex)
 
-  if (!isLast || showNewAccount) {
+  if ((!isLast || showNewAccount) && !skipIndex) {
     onAccountScanned(account)
     accounts.push(account)
   }
