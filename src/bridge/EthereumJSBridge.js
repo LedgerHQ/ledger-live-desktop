@@ -13,6 +13,7 @@ import {
   getDerivationScheme,
   runDerivationScheme,
   isIterableDerivationMode,
+  derivationModeSupportsIndex,
   getMandatoryEmptyAccountSkip,
 } from '@ledgerhq/live-common/lib/derivation'
 import {
@@ -314,6 +315,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
             const derivationScheme = getDerivationScheme({ derivationMode, currency })
             const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
             for (let index = 0; index < stopAt; index++) {
+              if (!derivationModeSupportsIndex(derivationMode, index)) continue
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })
