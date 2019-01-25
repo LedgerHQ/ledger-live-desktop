@@ -271,7 +271,7 @@
       "identifier": "Identifier",
       "mcuTitle": "正在更新 MCU",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "重新连接 USB 接口时，按住左键，直到显示处理屏幕",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
       "mcuPin": "如在设备上显示了要求，则请输入您的 pin 码以完成该过程",
       "successTitle": "固件已更新",
       "successText": "您可在设备上重新安装应用程序"
