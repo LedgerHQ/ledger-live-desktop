@@ -116,7 +116,11 @@ class BannerItem extends PureComponent<{
   render() {
     const { item, t } = this.props
     return (
-      <Box relative key={item.id} style={styles.banner}>
+      <Box
+        relative
+        key={item.id}
+        style={{ ...styles.banner, ...(item.warning ? styles.warning : null) }}
+      >
         <CloseIcon onClick={this.dismiss} />
         <Box horizontal flow={2}>
           <IconTriangleWarning height={16} width={16} color="white" />
@@ -159,8 +163,11 @@ const styles = {
     left: 32,
     bottom: 32,
   },
+  warning: {
+    background: colors.orange,
+  },
   banner: {
-    background: colors.alertRed,
+    background: colors.warning,
     overflow: 'hidden',
     borderRadius: 4,
     fontSize: 13,

@@ -15,6 +15,7 @@ export type CurrencyStatus = {
   message: string,
   link: string,
   nonce: number,
+  warning?: boolean, // display as a warning
   keepSync?: boolean, // even if something is happening, make live still stay in sync
 }
 
