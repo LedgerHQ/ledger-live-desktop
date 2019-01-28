@@ -360,15 +360,15 @@
       "about": "About"
     },
     "export": {
-      "desc": "Import accounts on your Ledger Live Mobile app",
+      "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "To import accounts on your Ledger Live Mobile app:",
+        "title": "Export accounts to Ledger Live mobile",
+        "listTitle": "On the Ledger Live mobile app:",
         "step1": "Tap the <1><0>+</0></1> button in Accounts",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan until the loader hits 100%"
+        "step2": "Tap Import accounts",
+        "step3": "Scan the LiveQR code until the loader hits 100%"
       }
     },
     "display": {
@@ -908,7 +908,7 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR-code: auto-verification not supported by this address"
+      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
