@@ -167,7 +167,7 @@ const styles = {
     background: colors.orange,
   },
   banner: {
-    background: colors.warning,
+    background: colors.alertRed,
     overflow: 'hidden',
     borderRadius: 4,
     fontSize: 13,
