@@ -77,7 +77,8 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         return
       }
 
-      if (currencyDownStatusLocal(this.props.currenciesStatus, account.currency)) {
+      const downStatus = currencyDownStatusLocal(this.props.currenciesStatus, account.currency)
+      if (downStatus && !downStatus.keepSync) {
         next()
         return
       }
