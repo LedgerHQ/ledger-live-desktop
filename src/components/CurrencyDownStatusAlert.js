@@ -28,7 +28,7 @@ const CurrencyDownBox = styled(Box).attrs({
   py: 2,
   mb: 4,
 })`
-  background-color: ${p => p.theme.colors.alertRed};
+  background-color: ${p => (p.warning ? p.theme.colors.orange : p.theme.colors.alertRed)};
 `
 
 const Link = styled.span`
@@ -48,7 +48,7 @@ class CurrencyDownStatusAlert extends PureComponent<Props> {
     const { status, t } = this.props
     if (!status) return null
     return (
-      <CurrencyDownBox>
+      <CurrencyDownBox warning={!!status.warning}>
         <Box mr={2}>
           <IconTriangleWarning height={16} width={16} />
         </Box>

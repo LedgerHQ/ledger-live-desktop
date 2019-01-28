@@ -34,6 +34,8 @@ export const urls = {
   changeNow: 'https://changenow.io?link_id=80ab1d8ad846e7',
   thorSwap:
     'https://www.thorswap.com/?utm_source=Wallet&utm_medium=ledger&utm_campaign=EmbedLink&utm_content=Link1',
+  coinberry: 'https://www.coinberry.com/?utm_source=ledger',
+  btcDirect: 'https://btcdirect.eu/en-gb?partnerId=261',
 
   // Errors
   errors: {

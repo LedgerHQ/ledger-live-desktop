@@ -174,7 +174,9 @@
     "genesis": "Genesis est une société de commerce institutionnelle offrant de la liquidité et des prêts de monnaies numériques, dont bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin et XRP.",
     "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
     "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
+    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services",
+    "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
+    "btcDirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot"
   },
   "genuinecheck": {
     "modal": {
@@ -271,7 +273,7 @@
       "identifier": "Identifier",
       "mcuTitle": "Mise à jour du MCU",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu’à ce que l’écran de traitement apparaisse.",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
       "mcuPin": "If asked on device, please enter your pin code to finish the process",
       "successTitle": "Firmware updated",
       "successText": "Vous pouvez réinstaller les applications sur votre appareil."
