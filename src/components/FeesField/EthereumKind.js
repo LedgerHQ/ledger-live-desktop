@@ -6,7 +6,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { FeeNotLoaded } from '@ledgerhq/errors'
 import InputCurrency from 'components/base/InputCurrency'
-import type { Fees } from 'api/Fees'
+import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
 import WithFeesAPI from '../WithFeesAPI'
 import GenericContainer from './GenericContainer'
 

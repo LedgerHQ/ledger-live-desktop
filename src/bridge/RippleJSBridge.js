@@ -3,6 +3,7 @@ import invariant from 'invariant'
 import { BigNumber } from 'bignumber.js'
 import { Observable } from 'rxjs'
 import React from 'react'
+import { RippleAPI } from 'ripple-lib'
 import bs58check from 'ripple-bs58check'
 import { computeBinaryTransactionHash } from 'ripple-hashes'
 import throttle from 'lodash/throttle'
@@ -26,7 +27,7 @@ import {
   parseAPIValue,
   parseAPICurrencyObject,
   formatAPICurrencyXRP,
-} from 'api/Ripple'
+} from '@ledgerhq/live-common/lib/api/Ripple'
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import {
@@ -63,7 +64,7 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
 )
 
 async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }) {
-  const api = apiForEndpointConfig(a.endpointConfig)
+  const api = apiForEndpointConfig(RippleAPI, a.endpointConfig)
   const { fee } = t
   if (!fee) throw new FeeNotLoaded()
   try {
@@ -252,7 +253,7 @@ const getServerInfo = (map => endpointConfig => {
   if (!endpointConfig) endpointConfig = ''
   if (map[endpointConfig]) return map[endpointConfig]()
   const f = throttle(async () => {
-    const api = apiForEndpointConfig(endpointConfig)
+    const api = apiForEndpointConfig(RippleAPI, endpointConfig)
     try {
       await api.connect()
       const res = await api.getServerInfo()
@@ -270,7 +271,7 @@ const getServerInfo = (map => endpointConfig => {
 
 const recipientIsNew = async (endpointConfig, recipient) => {
   if (!isRecipientValid(recipient)) return false
-  const api = apiForEndpointConfig(endpointConfig)
+  const api = apiForEndpointConfig(RippleAPI, endpointConfig)
   try {
     await api.connect()
     try {
@@ -302,7 +303,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       }
 
       async function main() {
-        const api = apiForEndpointConfig()
+        const api = apiForEndpointConfig(RippleAPI)
         try {
           await api.connect()
           const serverInfo = await getServerInfo()
@@ -423,7 +424,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       }
 
       async function main() {
-        const api = apiForEndpointConfig(endpointConfig)
+        const api = apiForEndpointConfig(RippleAPI, endpointConfig)
         try {
           await api.connect()
           if (finished) return
@@ -617,7 +618,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   getDefaultEndpointConfig: () => defaultEndpoint,
 
   validateEndpointConfig: async endpointConfig => {
-    const api = apiForEndpointConfig(endpointConfig)
+    const api = apiForEndpointConfig(RippleAPI, endpointConfig)
     await api.connect()
   },
 }
