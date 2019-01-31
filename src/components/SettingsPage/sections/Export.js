@@ -131,7 +131,7 @@ class SectionExport extends PureComponent<Props, State> {
 
         <Header
           icon={<IconShare size={16} />}
-          title={t('settings.tabs.export')}
+          title={t('settings.export.title')}
           desc={t('settings.export.desc')}
           renderRight={
             <Button small onClick={this.onModalOpen} primary>
