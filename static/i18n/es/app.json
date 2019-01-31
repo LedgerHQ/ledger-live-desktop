@@ -360,7 +360,7 @@
       "about": "Acerca de..."
     },
     "export": {
-      "desc": "Import accounts on your Ledger Live Mobile app",
+      "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
