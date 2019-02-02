@@ -1,6 +1,6 @@
 ---
 name: ✨ Feature Request
-about: Any feature you find missing in Ledger Live? Discuss to suggest feature requests. For crypto asset support, please read Issue 1650.
+about: Any feature you find missing in Ledger Live? Discuss to suggest feature requests. For crypto asset support, please read Issue #1560.
 ---
 
 - [ ] I have checked this feature was not yet requested.
