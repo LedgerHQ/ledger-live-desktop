@@ -8,6 +8,7 @@ import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import styled from 'styled-components'
 import { SettingsSection as Section, SettingsSectionHeader as Header } from '../SettingsSection'
+import { EXPERIMENTAL_WS_EXPORT } from '../../../config/constants'
 import IconShare from '../../../icons/Share'
 import Button from '../../base/Button'
 import Modal from '../../base/Modal'
@@ -16,6 +17,7 @@ import Box from '../../base/Box'
 import QRCodeExporter from '../../QRCodeExporter'
 import { BulletRow } from '../../Onboarding/helperComponents'
 import Text from '../../base/Text'
+import SocketExport from '../SocketExport'
 
 const BulletRowIcon = styled(Box).attrs({
   ff: 'Rubik|Regular',
@@ -145,12 +147,15 @@ class SectionExport extends PureComponent<Props, State> {
             </Button>
           }
         />
-        <Modal
-          isOpened={isModalOpened}
-          centered
-          onClose={this.onModalClose}
-          render={this.renderModal}
-        />
+        {EXPERIMENTAL_WS_EXPORT && (
+          <Header
+            icon={<IconShare size={16} />}
+            title="Experimental websocket local export ⚡"
+            desc="Generate a pairing code and use it on Ledger Live Mobile"
+            renderRight={<SocketExport />}
+          />
+        )}
+        <Modal isOpened={isModalOpened} onClose={this.onModalClose} render={this.renderModal} />
       </Section>
     )
   }
