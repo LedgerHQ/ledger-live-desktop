@@ -33,9 +33,11 @@ export const urls = {
   shapeshift: 'https://shapeshift.io/#/coins?affiliate=ledger',
   genesis: 'https://genesistrading.com/ledger-live/',
   kyberSwap: 'http://kyber.network/swap?ref=0xE2D8481eeF31CDA994833974FFfEccd576f8D71E',
-  changeNow: 'https://changenow.io/?utm_source=ledger_wallet',
+  changeNow: 'https://changenow.io?link_id=80ab1d8ad846e7',
   thorSwap:
     'https://www.thorswap.com/?utm_source=Wallet&utm_medium=ledger&utm_campaign=EmbedLink&utm_content=Link1',
+  coinberry: 'https://www.coinberry.com/?utm_source=ledger',
+  btcDirect: 'https://btcdirect.eu/en-gb?partnerId=261',
 
   // Errors
   errors: {

@@ -1,8 +1,8 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { withDevice } from 'helpers/deviceAccess'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import signTransactionForCurrency from 'helpers/signTransactionForCurrency'
 
 type Input = {
@@ -17,10 +17,8 @@ type Result = string
 const cmd: Command<Input, Result> = createCommand(
   'signTransaction',
   ({ currencyId, devicePath, path, transaction }) =>
-    fromPromise(
-      withDevice(devicePath)(transport =>
-        signTransactionForCurrency(currencyId)(transport, currencyId, path, transaction),
-      ),
+    withDevice(devicePath)(transport =>
+      from(signTransactionForCurrency(currencyId)(transport, currencyId, path, transaction)),
     ),
 )
 

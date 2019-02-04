@@ -17,7 +17,7 @@ import { setDataModal } from 'reducers/modals'
 
 import { getBridgeForCurrency } from 'bridge'
 
-import { AccountNameRequiredError, EnpointConfigError } from 'config/errors'
+import { AccountNameRequiredError, EnpointConfigError } from '@ledgerhq/errors'
 
 import TrackPage from 'analytics/TrackPage'
 import Spoiler from 'components/base/Spoiler'

@@ -37,6 +37,7 @@ import SyncBackground from 'components/SyncBackground'
 import DebugUpdater from 'components/Updater/DebugUpdater'
 
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
+import HSMStatusBanner from '../HSMStatusBanner'
 
 const Main = styled(GrowScroll).attrs({
   px: 6,
@@ -110,6 +111,7 @@ class Default extends Component<Props> {
               <SideBar />
 
               <Box shrink grow bg="lightGrey" color="grey" overflow="hidden" relative>
+                <HSMStatusBanner />
                 <TopBar />
                 <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
                   <Route path="/" exact component={DashboardPage} />

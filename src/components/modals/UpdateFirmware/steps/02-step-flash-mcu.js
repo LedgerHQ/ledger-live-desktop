@@ -2,20 +2,13 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
-import { connect } from 'react-redux'
-import { timeout } from 'rxjs/operators/timeout'
 
-import { DEVICE_INFOS_TIMEOUT } from 'config/constants'
 import { i } from 'helpers/staticPath'
-import { getCurrentDevice } from 'reducers/devices'
-import { createCancelablePolling } from 'helpers/promise'
-import getDeviceInfo from 'commands/getDeviceInfo'
+import firmwareMain from 'commands/firmwareMain'
 
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
-
-import type { Device } from 'types/common'
 
 import type { StepProps } from '../'
 
@@ -46,107 +39,48 @@ const Separator = styled(Box).attrs({
   background-color: currentColor;
 `
 
-const mapStateToProps = state => ({
-  device: getCurrentDevice(state),
-})
-
-type Props = StepProps & { device?: Device }
+type Props = StepProps
 
 type State = {
-  installing: boolean,
+  installing: ?string,
+  progress: number,
 }
 
 class StepFlashMcu extends PureComponent<Props, State> {
   state = {
-    installing: false,
+    installing: null,
+    progress: 0,
   }
 
   componentDidMount() {
-    this.install()
+    const { firmware, transitionTo, setError } = this.props
+
+    this.sub = firmwareMain.send(firmware).subscribe({
+      next: patch => {
+        this.setState(patch)
+      },
+      complete: () => {
+        transitionTo('finish')
+      },
+      error: error => {
+        setError(error)
+        transitionTo('finish')
+      },
+    })
   }
 
   componentWillUnmount() {
-    if (this._unsubConnect) this._unsubConnect()
-    if (this._unsubDeviceInfo) this._unsubDeviceInfo()
+    if (this.sub) this.sub.unsubscribe()
   }
 
-  getDeviceInfo = () => {
-    const { unsubscribe, promise } = createCancelablePolling(async () => {
-      const { device } = this.props
-      if (!device) {
-        throw new Error('No device')
-      }
-      const deviceInfo = await getDeviceInfo
-        .send({ devicePath: device.path })
-        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
-        .toPromise()
-
-      return { device, deviceInfo }
-    })
-    this._unsubDeviceInfo = unsubscribe
-    return promise
-  }
-
-  waitForDeviceInBootloader = () => {
-    const { unsubscribe, promise } = createCancelablePolling(async () => {
-      const { device } = this.props
-      if (!device) {
-        throw new Error('No device')
-      }
-      const deviceInfo = await getDeviceInfo
-        .send({ devicePath: device.path })
-        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
-        .toPromise()
-
-      if (!deviceInfo.isBootloader) {
-        throw new Error('Device is not in bootloader')
-      }
-      return { device, deviceInfo }
-    })
-    this._unsubConnect = unsubscribe
-    return promise
-  }
-
-  flash = async () => {
-    await this.waitForDeviceInBootloader()
-    const { flashMCU, device } = this.props
-    if (device) {
-      this.setState({ installing: true })
-      await flashMCU(device)
-    }
-  }
-
-  install = async () => {
-    const { transitionTo, installFinalFirmware, setError } = this.props
-    const { deviceInfo, device } = await this.getDeviceInfo()
-
-    try {
-      if (deviceInfo.isBootloader) {
-        await this.flash()
-        this.install()
-      } else if (deviceInfo.isOSU) {
-        await installFinalFirmware(device)
-        transitionTo('finish')
-      } else {
-        transitionTo('finish')
-      }
-    } catch (error) {
-      setError(error)
-      transitionTo('finish')
-    }
-  }
-
-  firstFlash = async () => {
-    await this.flash()
-    this.install()
-  }
+  sub: *
 
   renderBody = () => {
-    const { installing } = this.state
+    const { installing, progress } = this.state
     const { t } = this.props
 
     return installing ? (
-      <Installing />
+      <Installing installing={installing} progress={progress} />
     ) : (
       <Fragment>
         <Box mx={7}>
@@ -176,9 +110,6 @@ class StepFlashMcu extends PureComponent<Props, State> {
     )
   }
 
-  _unsubConnect: *
-  _unsubDeviceInfo: *
-
   render() {
     const { t } = this.props
     const { installing } = this.state
@@ -192,4 +123,4 @@ class StepFlashMcu extends PureComponent<Props, State> {
   }
 }
 
-export default connect(mapStateToProps)(StepFlashMcu)
+export default StepFlashMcu

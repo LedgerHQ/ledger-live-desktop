@@ -142,6 +142,7 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
+    "dashboard": "Navigate to the <1><0>{{managerAppName}}</0></1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
@@ -173,7 +174,9 @@
     "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，包括比特币、比特币现金、以太币、以太坊经典、莱特币和 XRP。",
     "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
     "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
+    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services",
+    "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
+    "btcDirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot"
   },
   "genuinecheck": {
     "modal": {
@@ -258,15 +261,19 @@
     },
     "modal": {
       "steps": {
-        "updateMCU": "MCU update"
+        "updateMCU": "Firmware update",
+        "osu": "Installing OSU...",
+        "flash-mcu": "MCU updating...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating...",
+        "flash": "Flashing your device..."
       },
-      "installing": "正在更新固件...",
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "Identifier",
       "mcuTitle": "正在更新 MCU",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "重新连接 USB 接口时，按住左键，直到显示处理屏幕",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
       "mcuPin": "如在设备上显示了要求，则请输入您的 pin 码以完成该过程",
       "successTitle": "固件已更新",
       "successText": "您可在设备上重新安装应用程序"
@@ -353,7 +360,7 @@
       "about": "关于"
     },
     "export": {
-      "desc": "Import accounts on your Ledger Live Mobile app",
+      "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
@@ -443,6 +450,15 @@
       "title": "查看用户数据",
       "desc": "查看存储在您的计算机上的用户数据，包括您的账户、缓存和设置。",
       "btn": "查看"
+    },
+    "repairDevice": {
+      "title": "Repair your Ledger device",
+      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
+      "desc": "Please select the state of your Ledger device.",
+      "button": "Repair",
+      "generic": "Bootloader",
+      "mcuNotGenuine": "MCU not genuine",
+      "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
       "title": "导出记录",
@@ -840,6 +856,10 @@
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
     },
+    "UnexpectedBootloader": {
+      "title": "Oops, your device should not be in Bootloader mode",
+      "description": "Please restart your device or contact us"
+    },
     "UserRefusedFirmwareUpdate": {
       "title": "设备上的固件更新被拒",
       "description": "请重试或联系 Ledger 支持人员"
@@ -855,6 +875,10 @@
     "UpdateYourApp": {
       "title": "需要更新应用程序",
       "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
+    },
+    "DeviceOnDashboardExpected": {
+      "title": "Return to Dashboard",
+      "description": "Please navigate back to Dashboard on your device"
     },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (websocket error)",
@@ -888,6 +912,10 @@
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
+    },
+    "UnknownMCU": {
+      "title": "Unknown MCU version",
+      "description": "Please contact Ledger Support"
     }
   }
 }

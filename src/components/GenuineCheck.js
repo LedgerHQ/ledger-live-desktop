@@ -9,12 +9,18 @@ import { delay, createCancelablePolling } from 'helpers/promise'
 
 import logger from 'logger'
 import type { T, Device } from 'types/common'
-import type { DeviceInfo } from 'helpers/types'
+import manager from '@ledgerhq/live-common/lib/manager'
+import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 
 import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT, GENUINE_CACHE_DELAY } from 'config/constants'
 
 import { getCurrentDevice } from 'reducers/devices'
-import { CantOpenDevice, DeviceNotGenuineError, DeviceGenuineSocketEarlyClose } from 'config/errors'
+import {
+  CantOpenDevice,
+  DeviceNotGenuineError,
+  DeviceGenuineSocketEarlyClose,
+  UnexpectedBootloader,
+} from '@ledgerhq/errors'
 
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'
@@ -77,10 +83,25 @@ class GenuineCheck extends PureComponent<Props> {
     device: Device,
     deviceInfo: DeviceInfo,
   }) => {
-    if (deviceInfo.isOSU || deviceInfo.isBootloader) {
+    if (deviceInfo.isBootloader) {
+      logger.log('device is in bootloader mode')
+      throw new UnexpectedBootloader()
+    }
+
+    if (deviceInfo.isOSU) {
       logger.log('device is in update mode. skipping genuine')
       return true
     }
+
+    // Preload things in parallel
+    Promise.all([
+      // Step dashboard, we preload the applist before entering manager while we're still doing the genuine check
+      manager.getAppsList(deviceInfo),
+      // we also preload as much info as possible in case of a MCU
+      manager.getLatestFirmwareForDevice(deviceInfo),
+    ]).catch(e => {
+      logger.warn(e)
+    })
 
     if (genuineDevices.has(device)) {
       logger.log("genuine was already checked. don't check again")
@@ -135,10 +156,10 @@ class GenuineCheck extends PureComponent<Props> {
       {
         id: 'deviceInfo',
         title: (
-          <Trans i18nKey="deviceConnect.step2" parent="div">
+          <Trans i18nKey="deviceConnect.dashboard" parent="div">
             {'Navigate to the '}
             <Bold>{'dashboard'}</Bold>
-            {' app on your device'}
+            {' on your device'}
           </Trans>
         ),
         icon: homeIcon,

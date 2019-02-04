@@ -2,7 +2,7 @@ import path from 'path'
 import crypto from 'crypto'
 
 import { fsReadFile } from 'helpers/fs'
-import { UpdateIncorrectHash, UpdateIncorrectSig } from 'config/errors'
+import { UpdateIncorrectHash, UpdateIncorrectSig } from './errors'
 import createMockAppUpdater from './createMockAppUpdater'
 import { sha512sumPath, readUpdateInfos } from './createElectronAppUpdater'
 import * as pgpHelper from './pgpHelper'

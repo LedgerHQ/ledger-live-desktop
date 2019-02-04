@@ -4,7 +4,7 @@ import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
 import { StatusCodes } from '@ledgerhq/hw-transport'
 import Btc from '@ledgerhq/hw-app-btc'
-import { Observable } from 'rxjs'
+import { Observable, from } from 'rxjs'
 import { isSegwitDerivationMode } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import type { OperationRaw, DerivationMode, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
@@ -14,11 +14,11 @@ import {
   bigNumberToLibcoreAmount,
   getOrCreateWallet,
 } from 'helpers/libcore'
-import { UpdateYourApp } from 'config/errors'
+import { UpdateYourApp } from '@ledgerhq/errors'
 
 import withLibcore from 'helpers/withLibcore'
 import { createCommand, Command } from 'helpers/ipc'
-import { withDevice } from 'helpers/deviceAccess'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
 type BitcoinLikeTransaction = {
   amount: string,
@@ -110,7 +110,7 @@ async function signTransaction({
   const additionals = []
   let expiryHeight
   if (currency.id === 'bitcoin_cash' || currency.id === 'bitcoin_gold') additionals.push('bip143')
-  if (currency.id === 'zcash') {
+  if (currency.id === 'zcash' || currency.id === 'komodo') {
     expiryHeight = Buffer.from([0x00, 0x00, 0x00, 0x00])
     if (blockHeight >= 419200) {
       additionals.push('sapling')
@@ -121,7 +121,7 @@ async function signTransaction({
   }
   const rawInputs = transaction.getInputs()
 
-  const hasExtraData = currency.id === 'zcash'
+  const hasExtraData = currency.id === 'zcash' || currency.id === 'komodo'
 
   const inputs = await Promise.all(
     rawInputs.map(async input => {
@@ -227,7 +227,8 @@ export async function doSignAndBroadcast({
   const njsWalletCurrency = njsWallet.getCurrency()
   const amount = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.amount))
   const fees = bigNumberToLibcoreAmount(core, njsWalletCurrency, BigNumber(transaction.feePerByte))
-  const transactionBuilder = bitcoinLikeAccount.buildTransaction()
+  const isPartial = false
+  const transactionBuilder = bitcoinLikeAccount.buildTransaction(isPartial)
 
   // TODO: check if is valid address. if not, it will fail silently on invalid
 
@@ -245,22 +246,26 @@ export async function doSignAndBroadcast({
   const hasTimestamp = !!njsWalletCurrency.bitcoinLikeNetworkParameters.UsesTimestampedTransaction
   // TODO: const timestampDelay = njsWalletCurrency.bitcoinLikeNetworkParameters.TimestampDelay
 
-  const signedTransaction = await withDevice(deviceId)(async transport =>
-    signTransaction({
-      hwApp: new Btc(transport),
-      currency,
-      blockHeight,
-      transaction: builded,
-      sigHashType: parseInt(sigHashType, 16),
-      hasTimestamp,
-      derivationMode,
-    }),
-  ).catch(e => {
-    if (e && e.statusCode === StatusCodes.INCORRECT_P1_P2) {
-      throw new UpdateYourApp(`UpdateYourApp ${currency.id}`, currency)
-    }
-    throw e
-  })
+  const signedTransaction = await withDevice(deviceId)(transport =>
+    from(
+      signTransaction({
+        hwApp: new Btc(transport),
+        currency,
+        blockHeight,
+        transaction: builded,
+        sigHashType: parseInt(sigHashType, 16),
+        hasTimestamp,
+        derivationMode,
+      }),
+    ),
+  )
+    .toPromise()
+    .catch(e => {
+      if (e && e.statusCode === StatusCodes.INCORRECT_P1_P2) {
+        throw new UpdateYourApp(`UpdateYourApp ${currency.id}`, currency)
+      }
+      throw e
+    })
 
   if (!signedTransaction || isCancelled() || !njsAccount) return
   onSigned()

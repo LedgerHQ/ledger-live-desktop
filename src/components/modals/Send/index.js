@@ -20,7 +20,7 @@ import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
 import { closeModal, openModal } from 'reducers/modals'
-import { DisconnectedDevice, UserRefusedOnDevice } from 'config/errors'
+import { DisconnectedDevice, UserRefusedOnDevice } from '@ledgerhq/errors'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'

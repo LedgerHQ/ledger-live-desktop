@@ -3,7 +3,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { translate, Trans } from 'react-i18next'
-
+import type { OsuFirmware, FinalFirmware } from '@ledgerhq/live-common/lib/types/manager'
 import type { T } from 'types/common'
 
 import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
@@ -18,15 +18,13 @@ import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
 
 import { getCleanVersion } from 'components/ManagerPage/FirmwareUpdate'
 
-type FirmwareInfos = {
-  name: string,
-  notes: string,
-}
-
 type Props = {
   t: T,
   status: ModalStatus,
-  firmware: FirmwareInfos,
+  firmware: {
+    osu: ?OsuFirmware,
+    final: ?FinalFirmware,
+  },
   goToNextStep: () => void,
   onClose: () => void,
 }
@@ -50,7 +48,9 @@ class DisclaimerModal extends PureComponent<Props, State> {
                   <Trans i18nKey="manager.firmware.disclaimerTitle">
                     You are about to install
                     <Text ff="Open Sans|SemiBold" color="dark">
-                      {`firmware version ${firmware ? getCleanVersion(firmware.name) : ''}`}
+                      {`firmware version ${
+                        firmware && firmware.osu ? getCleanVersion(firmware.osu.name) : ''
+                      }`}
                     </Text>
                   </Trans>
                 </Text>
@@ -59,14 +59,16 @@ class DisclaimerModal extends PureComponent<Props, State> {
                   {t('manager.firmware.disclaimerAppReinstall')}
                 </Text>
               </ModalContent>
-              <ModalContent relative pb={0} style={{ height: 250, width: '100%' }}>
-                <GrowScroll pb={5}>
-                  <Notes>
-                    <Markdown>{firmware.notes}</Markdown>
-                  </Notes>
-                </GrowScroll>
-                <GradientBox />
-              </ModalContent>
+              {firmware && firmware.osu ? (
+                <ModalContent relative pb={0} style={{ height: 250, width: '100%' }}>
+                  <GrowScroll pb={5}>
+                    <Notes>
+                      <Markdown>{firmware.osu.notes}</Markdown>
+                    </Notes>
+                  </GrowScroll>
+                  <GradientBox />
+                </ModalContent>
+              ) : null}
               <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
                 <Button primary onClick={goToNextStep}>
                   {t('common.continue')}

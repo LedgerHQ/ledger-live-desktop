@@ -13,6 +13,7 @@ import {
   getDerivationScheme,
   runDerivationScheme,
   isIterableDerivationMode,
+  derivationModeSupportsIndex,
   getMandatoryEmptyAccountSkip,
 } from '@ledgerhq/live-common/lib/derivation'
 import {
@@ -21,11 +22,11 @@ import {
 } from '@ledgerhq/live-common/lib/account'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import eip55 from 'eip55'
-import { apiForCurrency } from 'api/Ethereum'
-import type { Tx } from 'api/Ethereum'
+import { apiForCurrency } from '@ledgerhq/live-common/lib/api/Ethereum'
+import type { Tx } from '@ledgerhq/live-common/lib/api/Ethereum'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
-import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from 'config/errors'
+import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from '@ledgerhq/errors'
 import type { EditProps, WalletBridge } from './types'
 
 type Transaction = {
@@ -314,6 +315,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
             const derivationScheme = getDerivationScheme({ derivationMode, currency })
             const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
             for (let index = 0; index < stopAt; index++) {
+              if (!derivationModeSupportsIndex(derivationMode, index)) continue
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })

@@ -1,6 +1,7 @@
+import { serializeError } from '@ledgerhq/errors/lib/helpers'
+
 import commands from 'commands'
 import logger from 'logger'
-import { serializeError } from 'helpers/errors'
 
 const subscriptions = {}
 
@@ -25,14 +26,14 @@ export function executeCommand(command, send) {
         send({ type: 'cmd.COMPLETE', requestId })
       },
       error: error => {
-        logger.warn('Command error:', error)
+        logger.warn('Command error:', { error })
         delete subscriptions[requestId]
         logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
         send({ type: 'cmd.ERROR', requestId, data: serializeError(error) })
       },
     })
   } catch (error) {
-    logger.warn('Command error:', error)
+    logger.warn('Command impl error:', { error })
     delete subscriptions[requestId]
     logger.onCmd('cmd.ERROR', id, Date.now() - startTime, error)
     send({ type: 'cmd.ERROR', requestId, data: serializeError(error) })

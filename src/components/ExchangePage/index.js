@@ -17,6 +17,8 @@ import ChangellyLogo from './logos/changelly'
 import CoinmamaLogo from './logos/bigmama'
 import SimplexLogo from './logos/simplex'
 import PaybisLogo from './logos/paybis'
+import Coinberry from './logos/coinberry'
+import BtcDirect from './logos/btcdirect'
 
 type Props = {
   t: T,
@@ -88,6 +90,18 @@ const cards = shuffle([
     id: 'thorSwap',
     url: urls.thorSwap,
     logo: <img src={i('logos/exchanges/thor-swap.png')} alt="ThorSwap" width={150} />,
+  },
+  {
+    key: 'coinberry',
+    id: 'coinberry',
+    url: urls.coinberry,
+    logo: <Coinberry width={150} />,
+  },
+  {
+    key: 'btcDirect',
+    id: 'btcDirect',
+    url: urls.btcDirect,
+    logo: <BtcDirect width={150} />,
   },
 ])
 

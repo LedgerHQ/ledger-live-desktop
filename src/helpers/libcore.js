@@ -5,13 +5,15 @@
 import logger from 'logger'
 import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
-import { withDevice } from 'helpers/deviceAccess'
+import { from } from 'rxjs'
+import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import {
   getDerivationModesForCurrency,
   getDerivationScheme,
   isSegwitDerivationMode,
   isUnsplitDerivationMode,
   isIterableDerivationMode,
+  derivationModeSupportsIndex,
 } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import {
@@ -31,8 +33,8 @@ import type {
 } from '@ledgerhq/live-common/lib/types'
 import type { NJSAccount, NJSOperation } from '@ledgerhq/ledger-core/src/ledgercore_doc'
 
-import { NoAddressesFound } from 'config/errors'
-import { deserializeError } from './errors'
+import { NoAddressesFound } from '@ledgerhq/errors'
+import { deserializeError } from '@ledgerhq/errors/lib/helpers'
 import { timeoutTagged } from './promise'
 
 export function isValidAddress(core: *, currency: *, address: string): boolean {
@@ -99,9 +101,9 @@ async function scanAccountsOnDeviceBySegwit({
   const { coinType } = unsplitFork ? getCryptoCurrencyById(unsplitFork) : currency
   const path = `${isSegwit ? '49' : '44'}'/${coinType}'`
 
-  const { publicKey: seedIdentifier } = await withDevice(devicePath)(async transport =>
-    new Btc(transport).getWalletPublicKey(path, false, isSegwit),
-  )
+  const { publicKey: seedIdentifier } = await withDevice(devicePath)(transport =>
+    from(new Btc(transport).getWalletPublicKey(path, false, isSegwit)),
+  ).toPromise()
 
   if (isUnsubscribed()) return []
 
@@ -141,9 +143,9 @@ const createAccount = async (wallet, devicePath) => {
   await accountCreationInfos.derivations.reduce(
     (promise, derivation) =>
       promise.then(async () => {
-        const { publicKey, chainCode } = await withDevice(devicePath)(async transport =>
-          new Btc(transport).getWalletPublicKey(derivation),
-        )
+        const { publicKey, chainCode } = await withDevice(devicePath)(transport =>
+          from(new Btc(transport).getWalletPublicKey(derivation)),
+        ).toPromise()
         accountCreationInfos.publicKeys.push(hexToBytes(publicKey))
         accountCreationInfos.chainCodes.push(hexToBytes(chainCode))
       }),
@@ -257,8 +259,9 @@ async function scanNextAccount(props: {
   if (isUnsubscribed()) return []
 
   const isLast = ops.length === 0 || !isIterableDerivationMode(derivationMode)
+  const skipIndex = !derivationModeSupportsIndex(derivationMode, accountIndex)
 
-  if (!isLast || showNewAccount) {
+  if ((!isLast || showNewAccount) && !skipIndex) {
     onAccountScanned(account)
     accounts.push(account)
   }

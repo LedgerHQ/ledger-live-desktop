@@ -142,6 +142,7 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
+    "dashboard": "Navigate to the <1><0>{{managerAppName}}</0></1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
@@ -173,7 +174,9 @@
     "genesis": "Genesis는 유동성을 제공하고 Bitcoin, Bitcoin cash, Ethereum, Ethereum Classic, Litecoin, XRP 등의 디지털 통화에 대한 대출을 실시하는 기관 거래 회사입니다.",
     "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
     "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
+    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services",
+    "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
+    "btcDirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot"
   },
   "genuinecheck": {
     "modal": {
@@ -258,15 +261,19 @@
     },
     "modal": {
       "steps": {
-        "updateMCU": "MCU 업데이트"
+        "updateMCU": "Firmware update",
+        "osu": "Installing OSU...",
+        "flash-mcu": "MCU updating...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating...",
+        "flash": "Flashing your device..."
       },
-      "installing": "펌웨어 업데이트 중...",
       "confirmIdentifier": "식별자 확인",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "식별자",
       "mcuTitle": "MCU 업데이트",
       "mcuFirst": "장치에서 USB 케이블 분리",
-      "mcuSecond": "USB 케이블을 다시 연결하는 동안 처리 화면이 나타날 때까지 왼쪽 버튼을 길게 누르십시오.",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
       "mcuPin": "장치에서 요구하는 경우 PIN 코드를 입력하여 처리를 완료하십시오.",
       "successTitle": "펌웨어 업데이트됨",
       "successText": "장치에 앱을 다시 설치하실 수 있습니다."
@@ -353,7 +360,7 @@
       "about": "소개"
     },
     "export": {
-      "desc": "Import accounts on your Ledger Live Mobile app",
+      "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
@@ -443,6 +450,15 @@
       "title": "사용자 데이터 보기",
       "desc": "계정, 캐시 및 설정을 포함하여 컴퓨터에 저장된 사용자 데이터를 봅니다.",
       "btn": "보기"
+    },
+    "repairDevice": {
+      "title": "Repair your Ledger device",
+      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
+      "desc": "Please select the state of your Ledger device.",
+      "button": "Repair",
+      "generic": "Bootloader",
+      "mcuNotGenuine": "MCU not genuine",
+      "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
       "title": "로그 내보내기",
@@ -840,6 +856,10 @@
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
     },
+    "UnexpectedBootloader": {
+      "title": "Oops, your device should not be in Bootloader mode",
+      "description": "Please restart your device or contact us"
+    },
     "UserRefusedFirmwareUpdate": {
       "title": "장치에서 펌웨어 업데이트가 거부되었습니다.",
       "description": "다시 시도하거나 Ledger 지원 센터에 문의하십시오."
@@ -855,6 +875,10 @@
     "UpdateYourApp": {
       "title": "앱 업데이트가 필요합니다.",
       "description": "Manager에서 {{managerAppName}} 앱을 제거한 후 다시 설치하십시오."
+    },
+    "DeviceOnDashboardExpected": {
+      "title": "Return to Dashboard",
+      "description": "Please navigate back to Dashboard on your device"
     },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (websocket error)",
@@ -888,6 +912,10 @@
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
+    },
+    "UnknownMCU": {
+      "title": "Unknown MCU version",
+      "description": "Please contact Ledger Support"
     }
   }
 }

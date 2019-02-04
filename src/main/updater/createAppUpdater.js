@@ -1,6 +1,6 @@
 // @flow
 
-import { UpdateIncorrectHash, UpdateIncorrectSig } from 'config/errors'
+import { UpdateIncorrectHash, UpdateIncorrectSig } from './errors'
 import * as pgpHelper from './pgpHelper'
 
 type Opts = {

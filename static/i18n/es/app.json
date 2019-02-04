@@ -142,6 +142,7 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
+    "dashboard": "Navigate to the <1><0>{{managerAppName}}</0></1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
@@ -173,7 +174,9 @@
     "genesis": "Genesis es una empresa comercial institucional que ofrece liquidez y préstamos en monedas digitales, incluidas bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin y XRP.",
     "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
     "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services"
+    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services",
+    "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
+    "btcDirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot"
   },
   "genuinecheck": {
     "modal": {
@@ -258,15 +261,19 @@
     },
     "modal": {
       "steps": {
-        "updateMCU": "Actualización MCU"
+        "updateMCU": "Firmware update",
+        "osu": "Installing OSU...",
+        "flash-mcu": "MCU updating...",
+        "flash-bootloader": "Bootloader updating...",
+        "firmware": "Firmware updating...",
+        "flash": "Flashing your device..."
       },
-      "installing": "Actualizando el firmware...",
       "confirmIdentifier": "Comprobar el identificador",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
       "identifier": "Identificador",
       "mcuTitle": "Actualizando MCU",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
-      "mcuSecond": "Pulsa el botón izquierdo y mantenlo pulsado mientras conectas de nuevo el cable USB hasta que aparezca la pantalla de procesamiento.",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
       "mcuPin": "Si te lo pide el dispositivo, introduce tu código pin para finalizar el proceso.",
       "successTitle": "Firmware actualizado",
       "successText": "Puedes volver a instalar las aplicaciones en tu dispositivo"
@@ -353,7 +360,7 @@
       "about": "Acerca de..."
     },
     "export": {
-      "desc": "Import accounts on your Ledger Live Mobile app",
+      "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
@@ -443,6 +450,15 @@
       "title": "Ver datos de usuario",
       "desc": "Visualiza los datos de usuario guardados en tu ordenador, incluidas tus cuentas, caché y ajustes.",
       "btn": "Ver"
+    },
+    "repairDevice": {
+      "title": "Repair your Ledger device",
+      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
+      "desc": "Please select the state of your Ledger device.",
+      "button": "Repair",
+      "generic": "Bootloader",
+      "mcuNotGenuine": "MCU not genuine",
+      "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
       "title": "Exportar registros",
@@ -840,6 +856,10 @@
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
     },
+    "UnexpectedBootloader": {
+      "title": "Oops, your device should not be in Bootloader mode",
+      "description": "Please restart your device or contact us"
+    },
     "UserRefusedFirmwareUpdate": {
       "title": "Actualización del firmware rechazada en el dispositivo. ",
       "description": "Inténtalo de nuevo o ponte en contacto con Soporte de Ledger."
@@ -855,6 +875,10 @@
     "UpdateYourApp": {
       "title": "Se requiere la actualización de la aplicación.",
       "description": "Desinstala y vuelve a instalar la aplicación {{managerAppName}} en el Gestor."
+    },
+    "DeviceOnDashboardExpected": {
+      "title": "Return to Dashboard",
+      "description": "Please navigate back to Dashboard on your device"
     },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (websocket error)",
@@ -888,6 +912,10 @@
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
+    },
+    "UnknownMCU": {
+      "title": "Unknown MCU version",
+      "description": "Please contact Ledger Support"
     }
   }
 }

@@ -5,8 +5,8 @@ import path from 'path'
 import fs from 'fs'
 
 import network from 'api/network'
-import { UpdateFetchFileFail } from 'config/errors'
 import { fsReadFile } from 'helpers/fs'
+import { UpdateFetchFileFail } from './errors'
 import createAppUpdater from './createAppUpdater'
 
 import pubKey from './ledger-pubkey'

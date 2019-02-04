@@ -11,7 +11,7 @@ import logger from 'logger'
 import { fsReadFile, fsUnlink } from 'helpers/fs'
 import { promisify, debounce } from 'helpers/promise'
 
-import { NoDBPathGiven, DBWrongPassword } from 'config/errors'
+import { NoDBPathGiven, DBWrongPassword } from '@ledgerhq/errors'
 
 type Transform = {
   get: any => any,

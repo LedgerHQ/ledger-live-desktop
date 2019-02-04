@@ -1,15 +1,14 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import type { DeviceInfo, OsuFirmware } from 'helpers/types'
+import { from } from 'rxjs'
+import type { DeviceInfo, FirmwareUpdateContext } from '@ledgerhq/live-common/lib/types/manager'
+import manager from '@ledgerhq/live-common/lib/manager'
 
-import getLatestFirmwareForDevice from '../helpers/devices/getLatestFirmwareForDevice'
+type Result = ?FirmwareUpdateContext
 
-type Result = ?(OsuFirmware & { shouldFlashMcu: boolean })
-
-const cmd: Command<DeviceInfo, Result> = createCommand('getLatestFirmwareForDevice', data =>
-  fromPromise(getLatestFirmwareForDevice(data)),
+const cmd: Command<DeviceInfo, Result> = createCommand('getLatestFirmwareForDevice', deviceInfo =>
+  from(manager.getLatestFirmwareForDevice(deviceInfo)),
 )
 
 export default cmd

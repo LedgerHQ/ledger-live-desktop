@@ -109,13 +109,7 @@ const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 const logApdu = !__DEV__ || DEBUG_DEVICE
 
 const blacklistTooVerboseCommandInput = []
-const blacklistTooVerboseCommandResponse = [
-  'libcoreSyncAccount',
-  'libcoreScanAccounts',
-  'listApps',
-  'listAppVersions',
-  'listCategories',
-]
+const blacklistTooVerboseCommandResponse = ['libcoreSyncAccount', 'libcoreScanAccounts']
 
 export default {
   onCmd: (type: string, id: string, spentTime: number, data?: any) => {

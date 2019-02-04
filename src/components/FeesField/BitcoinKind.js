@@ -8,10 +8,10 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { FeeNotLoaded } from 'config/errors'
+import { FeeNotLoaded } from '@ledgerhq/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
-import type { Fees } from 'api/Fees'
+import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
 import WithFeesAPI from '../WithFeesAPI'
 import GenericContainer from './GenericContainer'
 import Box from '../base/Box'
@@ -120,6 +120,7 @@ class FeesField extends Component<OwnProps, State> {
       if (selectedItem.feePerByte.isZero() && input.current) {
         patch.isFocused = true
         input.current.select()
+        onChange(selectedItem.feePerByte)
       }
     }
     this.setState(patch)
