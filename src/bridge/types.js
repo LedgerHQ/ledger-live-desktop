@@ -52,8 +52,8 @@ export interface WalletBridge<Transaction> {
   // count is user's desired number of ops to pull (but implementation can decide to ignore it or not)
   pullMoreOperations(initialAccount: Account, count: number): Promise<(Account) => Account>;
 
-  isRecipientValid(currency: Currency, recipient: string): Promise<boolean>;
-  getRecipientWarning(currency: Currency, recipient: string): Promise<?Error>;
+  isRecipientValid(currency: Currency, recipient: string, source?: string): Promise<boolean>;
+  getRecipientWarning(currency: Currency, recipient: string, source?: string): Promise<?Error>;
 
   // Related to send funds:
 

@@ -136,13 +136,24 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
   }
 }
 
-function isRecipientValid(recipient) {
+function isRecipientValid(recipient, source) {
+  if (source === recipient) {
+    return false
+  }
+
   try {
     bs58check.decode(recipient)
     return true
   } catch (e) {
     return false
   }
+}
+
+function getRecipientWarning(recipient, source) {
+  if (source === recipient) {
+    return new Error('InvalidAddressBecauseDestinationIsAlsoSource')
+  }
+  return null
 }
 
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
@@ -505,8 +516,10 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
-  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(recipient)),
-  getRecipientWarning: () => Promise.resolve(null),
+  isRecipientValid: (currency, recipient, source) =>
+    Promise.resolve(isRecipientValid(recipient, source)),
+  getRecipientWarning: (currency, recipient, source) =>
+    Promise.resolve(getRecipientWarning(recipient, source)),
 
   createTransaction: () => ({
     amount: BigNumber(0),
