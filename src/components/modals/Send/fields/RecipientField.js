@@ -6,7 +6,8 @@ import type { WalletBridge } from 'bridge/types'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 import Box from 'components/base/Box'
-import { InteractiveLabel } from 'components/base/Label'
+import SelectAccount from 'components/SelectAccount'
+import Label, { InteractiveLabel } from 'components/base/Label'
 import IconExternalLink from 'icons/ExternalLink'
 import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
@@ -22,16 +23,31 @@ type Props<Transaction> = {
   autoFocus?: boolean,
 }
 
+type State = {
+  isValid: boolean,
+  warning: ?Error,
+  QRCodeRefusedReason: ?Error,
+
+  // whether or not recipient is from accounts list
+  isChoosingAccount: boolean,
+
+  // currently selected account
+  selectedAccount: ?Account,
+
+  // internal field to manage focus after going back from "accounts list" mode
+  shouldFocus: boolean,
+}
+
 const InvalidAddress = createCustomErrorClass('InvalidAddress')
 
-class RecipientField<Transaction> extends Component<
-  Props<Transaction>,
-  { isValid: boolean, warning: ?Error, QRCodeRefusedReason: ?Error },
-> {
+class RecipientField<Transaction> extends Component<Props<Transaction>, State> {
   state = {
     isValid: true,
     warning: null,
     QRCodeRefusedReason: null,
+    isChoosingAccount: false,
+    shouldFocus: false,
+    selectedAccount: null,
   }
   componentDidMount() {
     this.resync()
@@ -90,9 +106,38 @@ class RecipientField<Transaction> extends Component<
     openURL(urls.recipientAddressInfo)
     track('Send Flow Recipient Address Help Requested')
   }
+
+  handleChooseAccount = (selectedAccount: ?Account) => {
+    if (!selectedAccount) return
+    const { bridge, account, transaction, onChangeTransaction } = this.props
+    this.setState({ selectedAccount })
+    const t = bridge.editTransactionRecipient(account, transaction, selectedAccount.freshAddress)
+    onChangeTransaction(t)
+  }
+
+  toggleChooseAccount = () => {
+    const { bridge, account, transaction, onChangeTransaction } = this.props
+    this.setState(({ isChoosingAccount }) => ({
+      isChoosingAccount: !isChoosingAccount,
+      shouldFocus: isChoosingAccount,
+      selectedAccount: null,
+    }))
+    const t = bridge.editTransactionRecipient(account, transaction, '')
+    onChangeTransaction(t)
+  }
+
+  accountsFilter = (acc: Account) => acc.currency === this.props.account.currency
+
   render() {
     const { bridge, account, transaction, t, autoFocus } = this.props
-    const { isValid, warning, QRCodeRefusedReason } = this.state
+    const {
+      isValid,
+      warning,
+      QRCodeRefusedReason,
+      isChoosingAccount,
+      selectedAccount,
+      shouldFocus,
+    } = this.state
     const value = bridge.getTransactionRecipient(account, transaction)
 
     const error =
@@ -100,21 +145,42 @@ class RecipientField<Transaction> extends Component<
         ? QRCodeRefusedReason
         : new InvalidAddress(null, { currencyName: account.currency.name })
 
+    const actionLabel = isChoosingAccount
+      ? t('send.steps.amount.useAddress')
+      : t('send.steps.amount.useAccount')
+
     return (
       <Box flow={1}>
-        <InteractiveLabel
-          Icon={IconExternalLink}
-          onClick={this.handleRecipientAddressHelp}
-          label={t('send.steps.amount.recipientAddress')}
-        />
-        <RecipientAddress
-          autoFocus={autoFocus}
-          withQrCode
-          error={error}
-          warning={warning}
-          value={value}
-          onChange={this.onChange}
-        />
+        {isChoosingAccount ? (
+          <Label>{t('send.steps.amount.recipientAccount')}</Label>
+        ) : (
+          <InteractiveLabel
+            Icon={IconExternalLink}
+            onClick={this.handleRecipientAddressHelp}
+            label={t('send.steps.amount.recipientAddress')}
+          />
+        )}
+        {isChoosingAccount ? (
+          <SelectAccount
+            filter={this.accountsFilter}
+            openMenuOnFocus
+            autoFocus
+            onChange={this.handleChooseAccount}
+            value={selectedAccount}
+          />
+        ) : (
+          <RecipientAddress
+            autoFocus={autoFocus || shouldFocus}
+            withQrCode
+            error={error}
+            warning={warning}
+            value={value}
+            onChange={this.onChange}
+          />
+        )}
+        <Box align="flex-end">
+          <InteractiveLabel onClick={this.toggleChooseAccount} label={actionLabel} />
+        </Box>
       </Box>
     )
   }

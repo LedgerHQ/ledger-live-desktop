@@ -59,13 +59,17 @@ type Props = {
   accounts: Account[],
   onChange: Option => void,
   value: ?Account,
+  filter?: Account => boolean,
   t: T,
 }
 
 const getOptionValue = account => account.id
 
-const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => {
+const RawSelectAccount = ({ accounts, onChange, filter, value, t, ...props }: Props) => {
   const selectedOption = value ? accounts.find(o => o.id === value.id) : null
+  if (filter) {
+    accounts = accounts.filter(filter)
+  }
   return (
     <Select
       {...props}
