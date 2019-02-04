@@ -6,7 +6,8 @@ import type { WalletBridge } from 'bridge/types'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 import Box from 'components/base/Box'
-import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
+import { InteractiveLabel } from 'components/base/Label'
+import IconExternalLink from 'icons/ExternalLink'
 import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
 import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
@@ -101,7 +102,8 @@ class RecipientField<Transaction> extends Component<
 
     return (
       <Box flow={1}>
-        <LabelWithExternalIcon
+        <InteractiveLabel
+          Icon={IconExternalLink}
           onClick={this.handleRecipientAddressHelp}
           label={t('send.steps.amount.recipientAddress')}
         />
