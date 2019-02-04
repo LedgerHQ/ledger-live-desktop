@@ -15,7 +15,6 @@ import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import Box from 'components/base/Box'
-import Space from 'components/base/Space'
 import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
@@ -39,14 +38,34 @@ const mapStateToProps = state => ({
 
 const List = styled(Box).attrs({
   horizontal: true,
-  m: -3,
 })`
   flex-wrap: wrap;
+
+  > * {
+    width: calc(50% - 10px);
+    margin-bottom: 20px;
+    &:nth-child(even) {
+      margin-left: 20px;
+    }
+
+    @media (max-width: 1000px) {
+      width: 100%;
+      &:nth-child(even) {
+        margin-left: 0;
+      }
+    }
+  }
 `
 
 const ICONS_FALLBACK = {
   bitcoin_testnet: 'bitcoin',
 }
+
+const CATALOG_INFO_ICON = (
+  <Box color="grey">
+    <IconInfoCircle size={12} />
+  </Box>
+)
 
 type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
 type Mode = 'home' | 'installing' | 'uninstalling'
@@ -78,6 +97,20 @@ const LoadingApp = () => (
 )
 
 const loadingApp = <LoadingApp />
+
+const FAKE_LIST = (
+  <List>
+    {loadingApp}
+    {loadingApp}
+    {loadingApp}
+    {loadingApp}
+    {loadingApp}
+    {loadingApp}
+    {loadingApp}
+    {loadingApp}
+    {loadingApp}
+  </List>
+)
 
 class AppsList extends PureComponent<Props, State> {
   state = {
@@ -276,22 +309,16 @@ class AppsList extends PureComponent<Props, State> {
           )}
         </AppSearchBar>
         {this.renderModal()}
-        {!appsLoaded && (
-          <Fragment>
-            <Space of={30} />
-            <List>
-              {loadingApp}
-              {loadingApp}
-              {loadingApp}
-              {loadingApp}
-              {loadingApp}
-              {loadingApp}
-              {loadingApp}
-              {loadingApp}
-              {loadingApp}
-            </List>
-          </Fragment>
-        )}
+        {!appsLoaded && FAKE_LIST}
+      </Box>
+    )
+  }
+
+  renderTooltip = () => {
+    const { t } = this.props
+    return (
+      <Box ff="Open Sans|SemiBold" fontSize={2}>
+        {t('manager.apps.help')}
       </Box>
     )
   }
@@ -299,24 +326,12 @@ class AppsList extends PureComponent<Props, State> {
   render() {
     const { t } = this.props
     return (
-      <Box flow={6}>
-        <Box>
-          <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal align="center">
-            <span style={{ lineHeight: 1 }}>{t('manager.apps.all')}</span>
-            <Tooltip
-              render={() => (
-                <Box ff="Open Sans|SemiBold" fontSize={2}>
-                  {t('manager.apps.help')}
-                </Box>
-              )}
-            >
-              <Box color="grey">
-                <IconInfoCircle size={12} />
-              </Box>
-            </Tooltip>
-          </Box>
-          {this.renderList()}
+      <Box>
+        <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal align="center">
+          <span>{t('manager.apps.all')}</span>
+          <Tooltip render={this.renderTooltip}>{CATALOG_INFO_ICON}</Tooltip>
         </Box>
+        {this.renderList()}
       </Box>
     )
   }

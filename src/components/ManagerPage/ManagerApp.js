@@ -14,15 +14,12 @@ import Button from 'components/base/Button'
 
 export const Container = styled(Box).attrs({
   horizontal: true,
-  my: 2,
-  mx: 3,
   p: 4,
   bg: 'white',
   boxShadow: p => (p.noShadow ? -1 : 0),
   borderRadius: 4,
   flow: 2,
 })`
-  width: calc(50% - 30px);
   line-height: normal;
 `
 
