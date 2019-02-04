@@ -16809,10 +16809,10 @@ ws@^4.0.0:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
 
-ws@^5.1.1:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.1.tgz#37827a0ba772d072a843c3615b0ad38bcdb354eb"
-  integrity sha512-2NkHdPKjDBj3CHdnAGNpmlliryKqF+n9MYXX7/wsVC4yqYocKreKNjydPDvT3wShAZnndlM0RytEfTALCDvz7A==
+ws@^6.1.3:
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.1.3.tgz#d2d2e5f0e3c700ef2de89080ebc0ac6e1bf3a72d"
+  integrity sha512-tbSxiT+qJI223AP4iLfQbkbxkwdFcneYinM2+x46Gx2wgvbaOMO36czfdfVUBRTHvzAMRhDd98sA5d/BuWbQdg==
   dependencies:
     async-limiter "~1.0.0"
 
