@@ -90,7 +90,7 @@ const GRADIENT_STYLE = {
   position: 'absolute',
   bottom: 0,
   left: 0,
-  right: 6,
+  right: 20,
 }
 
 const GRADIENT_WRAPPER_STYLE = {

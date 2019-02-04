@@ -7,7 +7,6 @@ import network from 'api/network'
 
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
 import Text from 'components/base/Text'
 import Spinner from 'components/base/Spinner'
 import GradientBox from 'components/GradientBox'
@@ -121,9 +120,9 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
         render={() => (
           <Box relative style={{ height: 500 }} px={0} pb={0}>
             <TrackPage category="Modal" name="ReleaseNotes" />
-            <GrowScroll px={5} pb={8}>
+            <Box px={5} pb={8}>
               {this.renderContent()}
-            </GrowScroll>
+            </Box>
             <GradientBox />
           </Box>
         )}
