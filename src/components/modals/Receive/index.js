@@ -8,6 +8,7 @@ import { createStructuredSelector } from 'reselect'
 
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
+import logger from 'logger'
 import Track from 'analytics/Track'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
@@ -141,6 +142,9 @@ class ReceiveModal extends PureComponent<Props, State> {
   handleChangeAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
 
   handleChangeAddressVerified = (isAddressVerified: boolean, err: ?Error) => {
+    if (err && err.name !== 'UserRefusedAddress') {
+      logger.critical(err)
+    }
     this.setState({ isAddressVerified, verifyAddressError: err })
   }
 

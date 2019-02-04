@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { translate } from 'react-i18next'
 import { push } from 'react-router-redux'
+import logger from 'logger'
 
 import type { T } from 'types/common'
 import firmwareRepair from 'commands/firmwareRepair'
@@ -50,6 +51,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
         this.setState(patch)
       },
       error: error => {
+        logger.critical(error)
         this.setState({ error, isLoading: false, progress: 0 })
       },
       complete: () => {

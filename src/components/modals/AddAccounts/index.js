@@ -24,6 +24,7 @@ import { closeModal } from 'reducers/modals'
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
 import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
+import logger from 'logger'
 
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
@@ -165,6 +166,9 @@ class AddAccounts extends PureComponent<Props, State> {
   handleSetCurrency = (currency: ?Currency) => this.setState({ currency })
 
   handleSetScanStatus = (scanStatus: string, err: ?Error = null) => {
+    if (err) {
+      logger.critical(err)
+    }
     this.setState({ scanStatus, err })
   }
 

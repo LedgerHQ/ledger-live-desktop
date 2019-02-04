@@ -100,6 +100,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
             next()
           },
           error: error => {
+            logger.critical(error)
             this.props.setAccountSyncState(accountId, { pending: false, error })
             next()
           },
