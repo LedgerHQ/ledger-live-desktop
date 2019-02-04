@@ -84,6 +84,7 @@ const defaultWindowOptions = {
 
   backgroundColor: '#fff',
   webPreferences: {
+    blinkFeatures: 'OverlayScrollbars',
     devTools,
     // Enable, among other things, the ResizeObserver
     experimentalFeatures: true,

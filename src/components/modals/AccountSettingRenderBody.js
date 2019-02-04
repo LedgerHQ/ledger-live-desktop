@@ -23,6 +23,7 @@ import TrackPage from 'analytics/TrackPage'
 import Spoiler from 'components/base/Spoiler'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
+import Space from 'components/base/Space'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Select from 'components/base/Select'
@@ -203,7 +204,6 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
 
     return (
       <ModalBody
-        noScroll
         onClose={onClose}
         title={t('account.settings.title')}
         render={() => (
@@ -266,8 +266,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
             ) : null}
             <Spoiler textTransform title={t('account.settings.advancedLogs')}>
               <SyncAgo date={account.lastSyncDate} />
-              <textarea
-                readOnly
+              <div
                 style={{
                   userSelect: 'text',
                   border: '1px dashed #f9f9f9',
@@ -275,13 +274,16 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
                   color: '#000',
                   fontFamily: 'monospace',
                   fontSize: '10px',
-                  height: 200,
                   outline: 'none',
                   padding: '20px',
                   width: '100%',
+                  whiteSpace: 'pre-wrap',
+                  wordWrap: 'break-word',
+                  overflow: 'auto',
                 }}
-                value={JSON.stringify(usefulData, null, 2)}
-              />
+              >
+                {JSON.stringify(usefulData, null, 2)}
+              </div>
             </Spoiler>
             <ConfirmModal
               analyticsName="RemoveAccount"
@@ -294,6 +296,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
               subTitle={t('common.areYouSure')}
               desc={t('settings.removeAccountModal.desc')}
             />
+            <Space of={20} />
           </Fragment>
         )}
         renderFooter={() => (
