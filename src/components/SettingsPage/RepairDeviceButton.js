@@ -33,6 +33,12 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     progress: 0,
   }
 
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
+  }
+
   open = () => this.setState({ opened: true, error: null })
 
   sub: *
@@ -45,7 +51,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
   repair = (version = null) => {
     if (this.state.isLoading) return
     const { push } = this.props
-    this.setState({ isLoading: true })
+    this.timeout = setTimeout(() => this.setState({ isLoading: true }), 500)
     this.sub = firmwareRepair.send({ version }).subscribe({
       next: patch => {
         this.setState(patch)
