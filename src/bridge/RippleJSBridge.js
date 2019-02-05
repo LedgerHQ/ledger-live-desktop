@@ -34,6 +34,7 @@ import {
   NotEnoughBalance,
   FeeNotLoaded,
   NotEnoughBalanceBecauseDestinationNotCreated,
+  InvalidAddressBecauseDestinationIsAlsoSource,
 } from '@ledgerhq/errors'
 import type { WalletBridge, EditProps } from './types'
 
@@ -136,13 +137,21 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
   }
 }
 
-function isRecipientValid(recipient) {
+function isRecipientValid(account, recipient) {
   try {
     bs58check.decode(recipient)
-    return true
+
+    return !(account && account.freshAddress === recipient)
   } catch (e) {
     return false
   }
+}
+
+function getRecipientWarning(account, recipient) {
+  if (account.freshAddress === recipient) {
+    return new InvalidAddressBecauseDestinationIsAlsoSource()
+  }
+  return null
 }
 
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
@@ -270,7 +279,7 @@ const getServerInfo = (map => endpointConfig => {
 })({})
 
 const recipientIsNew = async (endpointConfig, recipient) => {
-  if (!isRecipientValid(recipient)) return false
+  if (!isRecipientValid(null, recipient)) return false
   const api = apiForEndpointConfig(RippleAPI, endpointConfig)
   try {
     await api.connect()
@@ -505,8 +514,9 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
-  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(recipient)),
-  getRecipientWarning: () => Promise.resolve(null),
+  isRecipientValid: (account, recipient) => Promise.resolve(isRecipientValid(account, recipient)),
+  getRecipientWarning: (account, recipient) =>
+    Promise.resolve(getRecipientWarning(account, recipient)),
 
   createTransaction: () => ({
     amount: BigNumber(0),
