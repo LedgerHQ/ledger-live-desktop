@@ -34,6 +34,8 @@ import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/MainSideBar'
 import TopBar from 'components/TopBar'
 import SyncBackground from 'components/SyncBackground'
+import DebugUpdater from 'components/Updater/DebugUpdater'
+
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
 
@@ -97,6 +99,8 @@ class Default extends Component<Props> {
             {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
               <ModalComponent key={name} />
             ))}
+
+            {process.env.DEBUG_UPDATE && <DebugUpdater />}
 
             <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
             <SyncBackground />

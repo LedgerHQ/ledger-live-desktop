@@ -11,20 +11,19 @@ import type { Location } from 'react-router'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
-import type { UpdateStatus } from 'reducers/update'
 
 import { MODAL_RECEIVE, MODAL_SEND, MODAL_ADD_ACCOUNTS } from 'config/constants'
 
 import { i } from 'helpers/staticPath'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
-import { getUpdateStatus } from 'reducers/update'
 import { developerModeSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
+import UpdateDot from 'components/Updater/UpdateDot'
 
 import IconManager from 'icons/Manager'
 import IconPieChart from 'icons/PieChart'
@@ -39,7 +38,6 @@ import KeyboardContent from '../KeyboardContent'
 
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
-  updateStatus: getUpdateStatus(state),
   developerMode: developerModeSelector(state),
 })
 
@@ -54,7 +52,6 @@ type Props = {
   location: Location,
   push: string => void,
   openModal: string => void,
-  updateStatus: UpdateStatus,
   developerMode: boolean,
 }
 
@@ -96,7 +93,7 @@ class MainSideBar extends PureComponent<Props> {
   handleOpenImportModal = () => this.props.openModal(MODAL_ADD_ACCOUNTS)
 
   render() {
-    const { t, accounts, location, updateStatus, developerMode } = this.props
+    const { t, accounts, location, developerMode } = this.props
     const { pathname } = location
 
     const addAccountButton = (
@@ -122,7 +119,7 @@ class MainSideBar extends PureComponent<Props> {
               iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
               isActive={pathname === '/'}
-              hasNotif={updateStatus === 'downloaded'}
+              NotifComponent={UpdateDot}
             />
             <SideBarListItem
               label={t('send.title')}

@@ -4,6 +4,7 @@ import invariant from 'invariant'
 import type { Command } from 'helpers/ipc'
 
 import debugAppInfosForCurrency from 'commands/debugAppInfosForCurrency'
+import autoUpdate from 'commands/autoUpdate'
 import firmwarePrepare from 'commands/firmwarePrepare'
 import firmwareMain from 'commands/firmwareMain'
 import firmwareRepair from 'commands/firmwareRepair'
@@ -22,6 +23,7 @@ import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
 import listenDevices from 'commands/listenDevices'
 import ping from 'commands/ping'
+import quitAndInstallElectronUpdate from 'commands/quitAndInstallElectronUpdate'
 import signTransaction from 'commands/signTransaction'
 import testApdu from 'commands/testApdu'
 import testCrash from 'commands/testCrash'
@@ -29,6 +31,7 @@ import testInterval from 'commands/testInterval'
 import uninstallApp from 'commands/uninstallApp'
 
 const all: Array<Command<any, any>> = [
+  autoUpdate,
   debugAppInfosForCurrency,
   firmwarePrepare,
   firmwareMain,
@@ -48,6 +51,7 @@ const all: Array<Command<any, any>> = [
   libcoreValidAddress,
   listenDevices,
   ping,
+  quitAndInstallElectronUpdate,
   signTransaction,
   testApdu,
   testCrash,

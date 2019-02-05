@@ -67,6 +67,7 @@ if [[ $(uname) == 'Linux' ]]; then # only run it on one target, to prevent race 
     "failed to create a draft release"
 fi
 
+runJob "rm -rf ./node_modules/.cache" "Removing node modules cache..." "done" "fail"
 runJob "yarn compile" "compiling..." "compiled" "failed to compile" "verbose"
 
 if [[ $(uname) == 'Linux' ]]; then
