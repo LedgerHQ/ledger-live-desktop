@@ -34,6 +34,7 @@ import {
   NotEnoughBalance,
   FeeNotLoaded,
   NotEnoughBalanceBecauseDestinationNotCreated,
+  InvalidAddressBecauseDestinationIsAlsoSource,
 } from '@ledgerhq/errors'
 import type { WalletBridge, EditProps } from './types'
 
@@ -151,7 +152,7 @@ function isRecipientValid(recipient, source) {
 
 function getRecipientWarning(recipient, source) {
   if (source === recipient) {
-    return new Error('InvalidAddressBecauseDestinationIsAlsoSource')
+    return new InvalidAddressBecauseDestinationIsAlsoSource()
   }
   return null
 }

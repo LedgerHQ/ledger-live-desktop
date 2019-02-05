@@ -900,6 +900,9 @@
     "InvalidAddress": {
       "title": "This is not a valid {{currencyName}} address"
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Destination and source accounts can't be the same"
+    },
     "CantOpenDevice": {
       "title": "Oops, couldn’t connect to device",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
