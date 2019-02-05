@@ -900,6 +900,9 @@
     "InvalidAddress": {
       "title": "Il ne s’agit pas d’une adresse {{currencyName}} valide."
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
+    },
     "CantOpenDevice": {
       "title": "Désolé, connexion à l’appareil impossible",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
