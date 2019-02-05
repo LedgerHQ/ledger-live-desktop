@@ -60,15 +60,15 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
 
 const recipientValidLRU = LRU({ max: 100 })
 
-const isRecipientValid = (currency, recipient) => {
-  const key = `${currency.id}_${recipient}`
+const isRecipientValid = (account, recipient) => {
+  const key = `${account.currency.id}_${recipient}`
   let promise = recipientValidLRU.get(key)
   if (promise) return promise
   if (!recipient) return Promise.resolve(false)
   promise = libcoreValidAddress
     .send({
       address: recipient,
-      currencyId: currency.id,
+      currencyId: account.currency.id,
     })
     .toPromise()
   recipientValidLRU.set(key, promise)
@@ -83,7 +83,7 @@ const getFeesKey = (a, t) =>
   }`
 
 const getFees = async (a, transaction) => {
-  const isValid = await isRecipientValid(a.currency, transaction.recipient)
+  const isValid = await isRecipientValid(a, transaction.recipient)
   if (!isValid) return null
   const key = getFeesKey(a, transaction)
   let promise = feesLRU.get(key)

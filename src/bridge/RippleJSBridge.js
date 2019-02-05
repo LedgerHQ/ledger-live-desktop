@@ -137,21 +137,18 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
   }
 }
 
-function isRecipientValid(recipient, source) {
-  if (source === recipient) {
-    return false
-  }
-
+function isRecipientValid(account, recipient) {
   try {
     bs58check.decode(recipient)
-    return true
+
+    return !(account && account.freshAddress === recipient)
   } catch (e) {
     return false
   }
 }
 
-function getRecipientWarning(recipient, source) {
-  if (source === recipient) {
+function getRecipientWarning(account, recipient) {
+  if (account.freshAddress === recipient) {
     return new InvalidAddressBecauseDestinationIsAlsoSource()
   }
   return null
@@ -282,7 +279,7 @@ const getServerInfo = (map => endpointConfig => {
 })({})
 
 const recipientIsNew = async (endpointConfig, recipient) => {
-  if (!isRecipientValid(recipient)) return false
+  if (!isRecipientValid(null, recipient)) return false
   const api = apiForEndpointConfig(RippleAPI, endpointConfig)
   try {
     await api.connect()
@@ -517,10 +514,9 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
-  isRecipientValid: (currency, recipient, source) =>
-    Promise.resolve(isRecipientValid(recipient, source)),
-  getRecipientWarning: (currency, recipient, source) =>
-    Promise.resolve(getRecipientWarning(recipient, source)),
+  isRecipientValid: (account, recipient) => Promise.resolve(isRecipientValid(account, recipient)),
+  getRecipientWarning: (account, recipient) =>
+    Promise.resolve(getRecipientWarning(account, recipient)),
 
   createTransaction: () => ({
     amount: BigNumber(0),

@@ -53,12 +53,8 @@ class RecipientField<Transaction> extends Component<
     const { account, bridge, transaction } = this.props
     const syncId = ++this.syncId
     const recipient = bridge.getTransactionRecipient(account, transaction)
-    const isValid = await bridge.isRecipientValid(account.currency, recipient, account.freshAddress)
-    const warning = await bridge.getRecipientWarning(
-      account.currency,
-      recipient,
-      account.freshAddress,
-    )
+    const isValid = await bridge.isRecipientValid(account, recipient)
+    const warning = await bridge.getRecipientWarning(account, recipient)
     if (syncId !== this.syncId) return
     if (this.isUnmounted) return
     this.setState({ isValid, warning })
@@ -73,9 +69,7 @@ class RecipientField<Transaction> extends Component<
     if (amount) {
       t = bridge.editTransactionAmount(account, t, amount)
     }
-    const warning = fromQRCode
-      ? await bridge.getRecipientWarning(account.currency, recipient)
-      : null
+    const warning = fromQRCode ? await bridge.getRecipientWarning(account, recipient) : null
     if (this.isUnmounted) return false
     if (warning) {
       // clear the input if field has warning AND has a warning
