@@ -900,6 +900,9 @@
     "InvalidAddress": {
       "title": "Esta no es una dirección {{currencyName}} válida."
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
+    },
     "CantOpenDevice": {
       "title": "Vaya, no se pudo conectar al dispositivo.",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
