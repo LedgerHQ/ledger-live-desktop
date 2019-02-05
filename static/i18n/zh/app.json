@@ -900,6 +900,9 @@
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
+    },
     "CantOpenDevice": {
       "title": "糟糕，无法连接到设备",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
