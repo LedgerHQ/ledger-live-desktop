@@ -360,15 +360,16 @@
       "about": "О программе"
     },
     "export": {
+      "title": "Export accounts",
       "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
-        "listTitle": "To import accounts on your Ledger Live Mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in Accounts",
+        "listTitle": "On the Ledger Live mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan until the loader hits 100%"
+        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
     "display": {
@@ -898,6 +899,9 @@
     },
     "InvalidAddress": {
       "title": "Этот адрес {{currencyName}} недействительный."
+    },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
       "title": "Не удалось подключиться к устройству.",
