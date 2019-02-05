@@ -900,6 +900,9 @@
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}}アドレスではありません"
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
+    },
     "CantOpenDevice": {
       "title": "機器に接続できませんでした",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
