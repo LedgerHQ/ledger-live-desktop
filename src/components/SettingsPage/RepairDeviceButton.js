@@ -58,9 +58,11 @@ class RepairDeviceButton extends PureComponent<Props, State> {
       },
       error: error => {
         logger.critical(error)
+        if (this.timeout) clearTimeout(this.timeout)
         this.setState({ error, isLoading: false, progress: 0 })
       },
       complete: () => {
+        if (this.timeout) clearTimeout(this.timeout)
         this.setState({ opened: false, isLoading: false, progress: 0 }, () => {
           push('/manager')
         })
