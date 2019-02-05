@@ -901,7 +901,7 @@
       "title": "This is not a valid {{currencyName}} address"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Destination and source accounts can't be the same"
+      "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
       "title": "Oops, couldn’t connect to device",
