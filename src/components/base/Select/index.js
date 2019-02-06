@@ -1,11 +1,19 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 import ReactSelect from 'react-select'
 import { translate } from 'react-i18next'
 
+import { ErrorDisplay, WarningDisplay } from 'components/base/Input'
+import TranslatedError from 'components/TranslatedError'
+
 import createStyles from './createStyles'
 import createRenderers from './createRenderers'
+
+const Container = styled.div`
+  position: relative;
+`
 
 type Props = {
   // required
@@ -29,6 +37,8 @@ type Props = {
   width: number,
   minWidth: number,
   autoFocus: boolean,
+  error?: ?Error | boolean,
+  warning?: ?Error | boolean,
 }
 
 export type Option = {
@@ -80,10 +90,12 @@ class Select extends PureComponent<Props> {
       width,
       minWidth,
       small,
+      error,
+      warning,
       ...props
     } = this.props
 
-    return (
+    const select = (
       <ReactSelect
         ref={c => (this.ref = c)}
         value={value}
@@ -91,7 +103,15 @@ class Select extends PureComponent<Props> {
         classNamePrefix="select"
         options={options}
         components={createRenderers({ renderOption, renderValue })}
-        styles={createStyles({ width, minWidth, small, isRight, isLeft })}
+        styles={createStyles({
+          width,
+          minWidth,
+          small,
+          isRight,
+          isLeft,
+          isError: !!error,
+          isWarning: !!warning,
+        })}
         placeholder={placeholder}
         isDisabled={isDisabled}
         isLoading={isLoading}
@@ -104,6 +124,21 @@ class Select extends PureComponent<Props> {
         {...props}
         onChange={this.handleChange}
       />
+    )
+
+    return (
+      <Container>
+        {select}
+        {error ? (
+          <ErrorDisplay>
+            <TranslatedError error={error} />
+          </ErrorDisplay>
+        ) : warning ? (
+          <WarningDisplay>
+            <TranslatedError error={warning} />
+          </WarningDisplay>
+        ) : null}
+      </Container>
     )
   }
 }

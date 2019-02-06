@@ -9,12 +9,16 @@ export default ({
   small,
   isRight,
   isLeft,
+  isError,
+  isWarning,
 }: {
   width: number,
   minWidth: number,
   small: boolean,
   isRight: boolean,
   isLeft: boolean,
+  isError: boolean,
+  isWarning: boolean,
 }) => ({
   control: (styles: Object, { isFocused }: Object) => ({
     ...styles,
@@ -33,6 +37,9 @@ export default ({
           boxShadow: 'rgba(0, 0, 0, 0.05) 0 2px 2px',
         }
       : {}),
+
+    ...(isWarning ? { borderColor: colors.orange } : {}),
+    ...(isError ? { borderColor: colors.alertRed } : {}),
   }),
   valueContainer: (styles: Object) => ({
     ...styles,

@@ -34,7 +34,7 @@ const Container = styled(Box).attrs({
   }
 `
 
-const ErrorDisplay = styled(Box)`
+export const ErrorDisplay = styled(Box)`
   position: absolute;
   bottom: -20px;
   left: 0px;
@@ -56,7 +56,7 @@ const LoadingDisplay = styled(Box)`
   border-radius: 4px;
 `
 
-const WarningDisplay = styled(ErrorDisplay)`
+export const WarningDisplay = styled(ErrorDisplay)`
   color: ${p => p.theme.colors.warning};
 `
 

@@ -164,6 +164,8 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, State> {
             openMenuOnFocus
             autoFocus
             onChange={this.handleChooseAccount}
+            error={error}
+            warning={warning}
             value={selectedAccount}
           />
         ) : (
