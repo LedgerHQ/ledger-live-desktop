@@ -20,7 +20,7 @@
     "test-e2e": "jest test-e2e",
     "test-sync": "bash test-e2e/sync/launch.sh",
     "prettier": "prettier --write \"{src,webpack,.storybook,test-e2e}/**/*.{js,json}\"",
-    "ci": "yarn lint && yarn flow && yarn prettier && yarn test",
+    "ci": "yarn check --integrity && ./scripts/check-no-dups.sh && yarn lint && yarn flow && yarn prettier && yarn test",
     "storybook": "NODE_ENV=development STORYBOOK_ENV=1 start-storybook -s ./static -p 4444",
     "publish-storybook": "bash ./scripts/legacy/publish-storybook.sh",
     "reset-files": "bash ./scripts/legacy/reset-files.sh"
@@ -36,11 +36,11 @@
   },
   "dependencies": {
     "@ledgerhq/errors": "^4.35.1",
-    "@ledgerhq/hw-app-btc": "^4.34.0",
-    "@ledgerhq/hw-app-eth": "^4.32.0",
-    "@ledgerhq/hw-app-xrp": "^4.32.0",
-    "@ledgerhq/hw-transport": "^4.32.0",
-    "@ledgerhq/hw-transport-node-hid": "^4.32.0",
+    "@ledgerhq/hw-app-btc": "^4.35.0",
+    "@ledgerhq/hw-app-eth": "^4.35.0",
+    "@ledgerhq/hw-app-xrp": "^4.35.0",
+    "@ledgerhq/hw-transport": "^4.35.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.35.0",
     "@ledgerhq/ledger-core": "2.0.0-rc.16",
     "@ledgerhq/live-common": "4.15.0-beta.0",
     "animated": "^0.2.2",
@@ -184,7 +184,8 @@
     "webpack": "^4.6.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.14",
-    "yaml-loader": "^0.5.0"
+    "yaml-loader": "^0.5.0",
+    "yarn-deduplicate": "^1.1.1"
   },
   "engines": {
     "node": ">=8.9.0 <=8.15.0",
