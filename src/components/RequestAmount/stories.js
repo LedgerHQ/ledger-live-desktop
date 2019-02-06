@@ -1,6 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import { BigNumber } from 'bignumber.js'
+
 import { storiesOf } from '@storybook/react'
 import { text, boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
@@ -12,12 +14,12 @@ import RequestAmount from 'components/RequestAmount'
 const stories = storiesOf('Components', module)
 
 type State = {
-  value: number,
+  value: BigNumber,
 }
 
 class Wrapper extends PureComponent<any, State> {
   state = {
-    value: 3e8,
+    value: BigNumber(3e8),
   }
   handleChange = value => {
     action('onChange')(value)

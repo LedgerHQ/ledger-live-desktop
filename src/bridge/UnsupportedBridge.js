@@ -35,8 +35,6 @@ const UnsupportedBridge: WalletBridge<*> = {
 
   getTotalSpent: () => Promise.resolve(BigNumber(0)),
 
-  getMaxAmount: () => Promise.resolve(BigNumber(0)),
-
   signAndBroadcast: () =>
     Observable.create(o => {
       o.error(genericError)

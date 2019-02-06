@@ -464,8 +464,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
       ? Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit)))
       : Promise.resolve(BigNumber(0)),
 
-  getMaxAmount: (a, t) =>
-    Promise.resolve(a.balance.minus((t.gasPrice || BigNumber(0)).times(t.gasLimit))),
+  // getMaxAmount: (a, t) =>
+  //   Promise.resolve(a.balance.minus((t.gasPrice || BigNumber(0)).times(t.gasLimit))),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {

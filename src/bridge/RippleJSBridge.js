@@ -590,7 +590,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getTotalSpent: (a, t) => Promise.resolve(t.amount.plus(t.fee || 0)),
 
-  getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.fee || 0)),
+  // getMaxAmount: (a, t) => Promise.resolve(a.balance.minus(t.fee || 0)),
 
   signAndBroadcast: (a, t, deviceId) =>
     Observable.create(o => {

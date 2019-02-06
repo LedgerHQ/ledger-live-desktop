@@ -317,6 +317,8 @@
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
         "amount": "Amount",
+        "max": "max",
+        "maxDesc": "Send all of your balance except the fees",
         "fees": "Network fees",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",

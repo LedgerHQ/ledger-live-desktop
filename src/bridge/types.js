@@ -89,8 +89,7 @@ export interface WalletBridge<Transaction> {
 
   getTotalSpent(account: Account, transaction: Transaction): Promise<BigNumber>;
 
-  // NB this is not used yet but we'll use it when we have MAX
-  getMaxAmount(account: Account, transaction: Transaction): Promise<BigNumber>;
+  getMaxAmount?: (account: Account, transaction: Transaction) => Promise<BigNumber>;
 
   /**
    * finalize the transaction by

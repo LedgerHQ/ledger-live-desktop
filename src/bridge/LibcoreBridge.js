@@ -46,6 +46,8 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
+const editTransactionAmount = (account, t, amount) => ({ ...t, amount })
+
 /*
 import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
 const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
@@ -183,10 +185,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
     isRBF: false,
   }),
 
-  editTransactionAmount: (account, t, amount) => ({
-    ...t,
-    amount,
-  }),
+  editTransactionAmount,
 
   getTransactionAmount: (a, t) => t.amount,
 
@@ -210,10 +209,23 @@ const LibcoreBridge: WalletBridge<Transaction> = {
           .then(totalFees => t.amount.plus(totalFees || 0))
           .catch(() => BigNumber(0)),
 
-  getMaxAmount: (a, t) =>
-    getFees(a, t)
-      .catch(() => BigNumber(0))
-      .then(totalFees => a.balance.minus(totalFees || 0)),
+  getMaxAmount: async (a, t) => {
+    t = editTransactionAmount(a, t, a.balance)
+    // naive & dumb approach for POC, until we connect to libcore getMax
+    // TODO REMOVE THIS LOL
+    const maxIterations = 1000
+    for (let i = 0; i < maxIterations; i++) {
+      try {
+        const fees = await getFees(a, t)
+        const newT = editTransactionAmount(a, t, a.balance.minus(fees || 0))
+        await getFees(a, newT)
+        return t.amount
+      } catch (err) {
+        t = editTransactionAmount(a, t, t.amount.minus(20))
+      }
+    }
+    return BigNumber(0)
+  },
 
   signAndBroadcast: (account, transaction, deviceId) =>
     libcoreSignAndBroadcast
