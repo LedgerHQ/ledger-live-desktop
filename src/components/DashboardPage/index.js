@@ -3,7 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
 import { compose } from 'redux'
-import IconExternalLink from 'icons/ExternalLink'
+import IconNanoX from 'icons/device/NanoX'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
@@ -94,12 +94,13 @@ class DashboardPage extends PureComponent<Props> {
           <TopBanner
             content={{
               message: t('banners.promoteMobile'),
-              Icon: IconExternalLink,
+              Icon: IconNanoX,
               right: (
                 <FakeLink onClick={() => openURL(urls.nanoX)}>{t('common.learnMore')}</FakeLink>
               ),
             }}
-            bannerId={'promoteMobile'}
+            status={'dark'}
+            bannerId={'promoteMobile2'}
             dismissable
           />
         </TopBannerContainer>

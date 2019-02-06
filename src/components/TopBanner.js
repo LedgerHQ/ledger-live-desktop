@@ -65,7 +65,7 @@ class TopBanner extends PureComponent<Props> {
         <RightContainer>{right}</RightContainer>
         {dismissable && (
           <CloseContainer onClick={this.onDismiss}>
-            <IconCross size={16} />
+            <IconCross size={14} />
           </CloseContainer>
         )}
       </Container>
@@ -86,6 +86,7 @@ const IconContainer = styled.div`
 
 const colorForStatus = {
   error: 'alertRed',
+  dark: '#142533',
 }
 
 const Container = styled(Box).attrs({
@@ -120,10 +121,10 @@ const CloseContainer = styled(Box).attrs({
   margin-left: 10px;
   cursor: pointer;
   &:hover {
-    color: ${p => p.theme.colors.graphite};
+    color: #eee;
   }
 
   &:active {
-    color: ${p => p.theme.colors.graphite};
+    color: #eee;
   }
 `
