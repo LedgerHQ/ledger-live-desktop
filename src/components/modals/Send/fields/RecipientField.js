@@ -53,6 +53,7 @@ class RecipientField<Transaction> extends Component<
     const { account, bridge, transaction } = this.props
     const syncId = ++this.syncId
     const recipient = bridge.getTransactionRecipient(account, transaction)
+    if (!recipient) return
     const isValid = await bridge.isRecipientValid(account, recipient)
     const warning = await bridge.getRecipientWarning(account, recipient)
     if (syncId !== this.syncId) return
