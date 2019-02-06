@@ -30,6 +30,7 @@ const supported: CryptoCurrencyIds[] = [
   'clubcoin',
   'decred',
   'bitcoin_testnet',
+  'energi',
 ]
 
 export const listCryptoCurrencies = memoize((withDevCrypto?: boolean) =>
