@@ -8,6 +8,9 @@ export const urls = {
   github: 'https://github.com/LedgerHQ/ledger-live-desktop',
   reddit: 'https://www.reddit.com/r/ledgerwallet/',
 
+  // Products
+  nanoX: 'https://www.ledger.com/pages/ledger-nano-x',
+
   // Ledger support
   faq: 'https://support.ledgerwallet.com/hc/en-us',
   terms: 'https://www.ledger.com/pages/terms-of-use-and-disclaimer',

@@ -111,6 +111,9 @@
       }
     }
   },
+  "banners": {
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X"
+  },
   "dashboard": {
     "title": "Portfolio",
     "emptyAccountTile": {

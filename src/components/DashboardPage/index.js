@@ -3,6 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
 import { compose } from 'redux'
+import IconExternalLink from 'icons/ExternalLink'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
@@ -31,10 +32,14 @@ import Box from 'components/base/Box'
 import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
+import styled from 'styled-components'
+import { openURL } from 'helpers/linking'
 import EmptyState from './EmptyState'
 import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
 import AccountCardList from './AccountCardList'
+import TopBanner, { FakeLink } from '../TopBanner'
+import { urls } from '../../config/urls'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
@@ -84,7 +89,20 @@ class DashboardPage extends PureComponent<Props> {
 
     return (
       <Fragment>
-        <UpdateBanner />
+        <TopBannerContainer>
+          <UpdateBanner />
+          <TopBanner
+            content={{
+              message: t('banners.promoteMobile'),
+              Icon: IconExternalLink,
+              right: (
+                <FakeLink onClick={() => openURL(urls.nanoX)}>{t('common.learnMore')}</FakeLink>
+              ),
+            }}
+            bannerId={'promoteMobile'}
+            dismissable
+          />
+        </TopBannerContainer>
         <RefreshAccountsOrdering onMount />
         <TrackPage
           category="Portfolio"
@@ -143,6 +161,12 @@ class DashboardPage extends PureComponent<Props> {
     )
   }
 }
+// This forces only one visible top banner at a time
+const TopBannerContainer = styled.div`
+  & > *:not(:first-child) {
+    display: none;
+  }
+`
 
 export default compose(
   connect(
