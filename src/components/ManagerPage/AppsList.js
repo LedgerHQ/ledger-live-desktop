@@ -205,7 +205,7 @@ class AppsList extends PureComponent<Props, State> {
                     </Box>
                   )}
                 </ModalTitle>
-                <ModalContent>
+                <ModalContent align="center">
                   <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
                     {t(`manager.apps.${mode}`, { app })}
                   </Text>
