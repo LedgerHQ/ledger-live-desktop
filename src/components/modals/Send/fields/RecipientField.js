@@ -70,8 +70,8 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, State> {
     const { account, bridge, transaction } = this.props
     const syncId = ++this.syncId
     const recipient = bridge.getTransactionRecipient(account, transaction)
-    const isValid = await bridge.isRecipientValid(account.currency, recipient)
-    const warning = await bridge.getRecipientWarning(account.currency, recipient)
+    const isValid = await bridge.isRecipientValid(account, recipient)
+    const warning = await bridge.getRecipientWarning(account, recipient)
     if (syncId !== this.syncId) return
     if (this.isUnmounted) return
     this.setState({ isValid, warning })
@@ -86,9 +86,7 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, State> {
     if (amount) {
       t = bridge.editTransactionAmount(account, t, amount)
     }
-    const warning = fromQRCode
-      ? await bridge.getRecipientWarning(account.currency, recipient)
-      : null
+    const warning = fromQRCode ? await bridge.getRecipientWarning(account, recipient) : null
     if (this.isUnmounted) return false
     if (warning) {
       // clear the input if field has warning AND has a warning
@@ -143,7 +141,7 @@ class RecipientField<Transaction> extends Component<Props<Transaction>, State> {
     const error =
       !value || isValid
         ? QRCodeRefusedReason
-        : new InvalidAddress(null, { currencyName: account.currency.name })
+        : warning || new InvalidAddress(null, { currencyName: account.currency.name })
 
     const actionLabel = isChoosingAccount
       ? t('send.steps.amount.useAddress')

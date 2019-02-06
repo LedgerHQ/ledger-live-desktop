@@ -133,7 +133,7 @@ export class StepAmountFooter extends PureComponent<
       const totalSpent = await bridge.getTotalSpent(account, transaction)
       if (syncId !== this.syncId) return
       const isRecipientValid = await bridge.isRecipientValid(
-        account.currency,
+        account,
         bridge.getTransactionRecipient(account, transaction),
       )
       if (syncId !== this.syncId) return
