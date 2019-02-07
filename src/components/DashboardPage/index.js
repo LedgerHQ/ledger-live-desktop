@@ -96,11 +96,13 @@ class DashboardPage extends PureComponent<Props> {
               message: t('banners.promoteMobile'),
               Icon: IconNanoX,
               right: (
-                <FakeLink onClick={() => openURL(urls.nanoX)}>{t('common.learnMore')}</FakeLink>
+                <FakeLink onClick={() => openURL(urls.promoNanoX)}>
+                  {t('common.learnMore')}
+                </FakeLink>
               ),
             }}
             status={'dark'}
-            bannerId={'promoteMobile2'}
+            bannerId={'promoNanoX'}
             dismissable
           />
         </TopBannerContainer>
