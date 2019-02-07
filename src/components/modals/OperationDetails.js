@@ -18,12 +18,10 @@ import { MODAL_OPERATION_DETAILS } from 'config/constants'
 import { getMarketColor } from 'styles/helpers'
 
 import Box from 'components/base/Box'
-import GradientBox from 'components/GradientBox'
-import GrowScroll from 'components/base/GrowScroll'
 import Button from 'components/base/Button'
 import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
-import Modal, { ModalBody, ModalTitle, ModalFooter, ModalContent } from 'components/base/Modal'
+import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
 
@@ -130,122 +128,120 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const uniqueSenders = uniq(senders)
 
   return (
-    <ModalBody onClose={onClose}>
-      <TrackPage category="Modal" name="OperationDetails" />
-      <ModalTitle>{t('operationDetails.title')}</ModalTitle>
-      <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
-        <GrowScroll px={5} pt={1} pb={8}>
-          <Box flow={3}>
-            <Box alignItems="center" mt={1}>
-              <ConfirmationCheck
-                marketColor={marketColor}
-                isConfirmed={isConfirmed}
-                style={{
-                  transform: 'scale(1.5)',
-                }}
-                t={t}
-                type={type}
-                withTooltip={false}
-              />
-              <Box my={4} alignItems="center">
+    <ModalBody
+      title={t('operationDetails.title')}
+      onClose={onClose}
+      render={() => (
+        <Box flow={3}>
+          <Box alignItems="center" mt={1}>
+            <ConfirmationCheck
+              marketColor={marketColor}
+              isConfirmed={isConfirmed}
+              style={{
+                transform: 'scale(1.5)',
+              }}
+              t={t}
+              type={type}
+              withTooltip={false}
+            />
+            <Box my={4} alignItems="center">
+              <Box>
+                <FormattedVal
+                  color={amount.isNegative() ? 'smoke' : undefined}
+                  unit={unit}
+                  alwaysShowSign
+                  showCode
+                  val={amount}
+                  fontSize={7}
+                  disableRounding
+                />
+              </Box>
+              <Box mt={1}>
+                <CounterValue
+                  color="grey"
+                  fontSize={5}
+                  date={date}
+                  currency={currency}
+                  value={amount}
+                />
+              </Box>
+            </Box>
+          </Box>
+          <Box horizontal flow={2}>
+            <Box flex={1}>
+              <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
+              <OpDetailsData>{name}</OpDetailsData>
+            </Box>
+            <Box flex={1}>
+              <OpDetailsTitle>{t('operationDetails.date')}</OpDetailsTitle>
+              <OpDetailsData>{moment(date).format('LLL')}</OpDetailsData>
+            </Box>
+          </Box>
+          <B />
+          <Box horizontal flow={2}>
+            <Box flex={1}>
+              <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
+              {fee ? (
+                <Fragment>
+                  <OpDetailsData>
+                    <FormattedVal unit={unit} showCode val={fee} color="smoke" />
+                  </OpDetailsData>
+                </Fragment>
+              ) : (
+                <OpDetailsData>{t('operationDetails.noFees')}</OpDetailsData>
+              )}
+            </Box>
+            <Box flex={1}>
+              <OpDetailsTitle>{t('operationDetails.status')}</OpDetailsTitle>
+              <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
                 <Box>
-                  <FormattedVal
-                    color={amount.isNegative() ? 'smoke' : undefined}
-                    unit={unit}
-                    alwaysShowSign
-                    showCode
-                    val={amount}
-                    fontSize={7}
-                    disableRounding
-                  />
+                  {isConfirmed
+                    ? t('operationDetails.confirmed')
+                    : t('operationDetails.notConfirmed')}
                 </Box>
-                <Box mt={1}>
-                  <CounterValue
-                    color="grey"
-                    fontSize={5}
-                    date={date}
-                    currency={currency}
-                    value={amount}
-                  />
-                </Box>
-              </Box>
-            </Box>
-            <Box horizontal flow={2}>
-              <Box flex={1}>
-                <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
-                <OpDetailsData>{name}</OpDetailsData>
-              </Box>
-              <Box flex={1}>
-                <OpDetailsTitle>{t('operationDetails.date')}</OpDetailsTitle>
-                <OpDetailsData>{moment(date).format('LLL')}</OpDetailsData>
-              </Box>
-            </Box>
-            <B />
-            <Box horizontal flow={2}>
-              <Box flex={1}>
-                <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
-                {fee ? (
-                  <Fragment>
-                    <OpDetailsData>
-                      <FormattedVal unit={unit} showCode val={fee} color="smoke" />
-                    </OpDetailsData>
-                  </Fragment>
-                ) : (
-                  <OpDetailsData>{t('operationDetails.noFees')}</OpDetailsData>
-                )}
-              </Box>
-              <Box flex={1}>
-                <OpDetailsTitle>{t('operationDetails.status')}</OpDetailsTitle>
-                <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
-                  <Box>
-                    {isConfirmed
-                      ? t('operationDetails.confirmed')
-                      : t('operationDetails.notConfirmed')}
-                  </Box>
-                  <Box>{`(${confirmations})`}</Box>
-                </OpDetailsData>
-              </Box>
-            </Box>
-            <B />
-            <Box>
-              <OpDetailsTitle>{t('operationDetails.identifier')}</OpDetailsTitle>
-              <OpDetailsData>
-                <Ellipsis canSelect>{hash}</Ellipsis>
-                <GradientHover>
-                  <CopyWithFeedback text={hash} />
-                </GradientHover>
+                <Box>{`(${confirmations})`}</Box>
               </OpDetailsData>
             </Box>
-            <B />
-            <Box>
-              <OpDetailsTitle>{t('operationDetails.from')}</OpDetailsTitle>
-              <DataList lines={uniqueSenders} t={t} />
-            </Box>
-            <B />
-            <Box>
-              <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
-              <DataList lines={recipients} t={t} />
-            </Box>
-            {Object.entries(extra).map(([key, value]) => (
-              <Box key={key}>
-                <OpDetailsTitle>
-                  <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
-                </OpDetailsTitle>
-                <OpDetailsData>{value}</OpDetailsData>
-              </Box>
-            ))}
           </Box>
-        </GrowScroll>
-        <GradientBox />
-      </ModalContent>
-
-      {url && (
-        <ModalFooter horizontal justify="flex-end" flow={2}>
+          <B />
+          <Box>
+            <OpDetailsTitle>{t('operationDetails.identifier')}</OpDetailsTitle>
+            <OpDetailsData>
+              <Ellipsis canSelect>{hash}</Ellipsis>
+              <GradientHover>
+                <CopyWithFeedback text={hash} />
+              </GradientHover>
+            </OpDetailsData>
+          </Box>
+          <B />
+          <Box>
+            <OpDetailsTitle>{t('operationDetails.from')}</OpDetailsTitle>
+            <DataList lines={uniqueSenders} t={t} />
+          </Box>
+          <B />
+          <Box>
+            <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
+            <DataList lines={recipients} t={t} />
+          </Box>
+          {Object.entries(extra).map(([key, value]) => (
+            <Box key={key}>
+              <OpDetailsTitle>
+                <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
+              </OpDetailsTitle>
+              <OpDetailsData>{value}</OpDetailsData>
+            </Box>
+          ))}
+        </Box>
+      )}
+      renderFooter={() =>
+        url && (
           <Button primary onClick={() => openURL(url)}>
             {t('operationDetails.viewOperation')}
           </Button>
-        </ModalFooter>
-      )}
+        )
+      }
+    >
+      <TrackPage category="Modal" name="OperationDetails" />
     </ModalBody>
   )
 })
@@ -255,12 +251,13 @@ type ModalRenderProps = {
     account: string,
     operation: string,
   },
-  onClose: Function,
+  onClose?: Function,
 }
 
 const OperationDetailsWrapper = ({ t }: { t: T }) => (
   <Modal
     name={MODAL_OPERATION_DETAILS}
+    centered
     render={(props: ModalRenderProps) => {
       const { data, onClose } = props
       return <OperationDetails t={t} {...data} onClose={onClose} />

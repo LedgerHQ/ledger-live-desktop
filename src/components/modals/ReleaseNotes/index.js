@@ -43,6 +43,7 @@ class ReleaseNotesModal extends PureComponent<Props> {
     return (
       <Modal
         name={MODAL_RELEASES_NOTES}
+        centered
         render={({ data, onClose }) => <ReleaseNotesBody version={data} onClose={onClose} />}
       />
     )

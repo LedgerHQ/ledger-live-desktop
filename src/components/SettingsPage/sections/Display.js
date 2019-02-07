@@ -91,8 +91,8 @@ class TabGeneral extends PureComponent<Props> {
           </Row>
           {hasPassword ? (
             <Row
-              title={t('app:settings.profile.passwordAutoLock')}
-              desc={t('app:settings.profile.passwordAutoLockDesc')}
+              title={t('settings.profile.passwordAutoLock')}
+              desc={t('settings.profile.passwordAutoLockDesc')}
             >
               <PasswordAutoLockSelect />
             </Row>

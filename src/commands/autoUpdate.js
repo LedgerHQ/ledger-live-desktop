@@ -3,8 +3,9 @@
 import { createCommand, Command } from 'helpers/ipc'
 import { Observable } from 'rxjs'
 
-import { UPDATE_CHECK_IGNORE, UPDATE_CHECK_FEED } from 'config/constants'
-import createElectronAppUpdater from 'main/updater/createElectronAppUpdater'
+// import { UPDATE_CHECK_IGNORE, UPDATE_CHECK_FEED } from 'config/constants'
+import { UPDATE_CHECK_IGNORE } from 'config/constants'
+// import createElectronAppUpdater from 'main/updater/createElectronAppUpdater'
 import type { UpdateStatus } from 'components/Updater/UpdaterContext'
 
 type Input = {}

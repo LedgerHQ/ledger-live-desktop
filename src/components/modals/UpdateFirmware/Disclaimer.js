@@ -1,12 +1,13 @@
 // @flow
 /* eslint react/jsx-no-literals: 0 */
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { translate, Trans } from 'react-i18next'
 import type { OsuFirmware, FinalFirmware } from '@ledgerhq/live-common/lib/types/manager'
 import type { T } from 'types/common'
 
-import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal from 'components/base/Modal'
+import ModalBody from 'components/base/Modal/ModalBody'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
 import GrowScroll from 'components/base/GrowScroll'
@@ -17,6 +18,7 @@ import TrackPage from 'analytics/TrackPage'
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
 
 import { getCleanVersion } from 'components/ManagerPage/FirmwareUpdate'
+import Box from '../../base/Box/Box'
 
 type Props = {
   t: T,
@@ -35,49 +37,51 @@ class DisclaimerModal extends PureComponent<Props, State> {
   render(): React$Node {
     const { status, firmware, onClose, t, goToNextStep } = this.props
     return (
-      <Modal
-        isOpened={status === 'disclaimer'}
-        onClose={onClose}
-        render={({ onClose }) => (
-          <ModalBody onClose={onClose} grow align="center" justify="center" mt={3}>
-            <TrackPage category="Manager" name="DisclaimerModal" />
-            <Fragment>
-              <ModalTitle>{t('manager.firmware.update')}</ModalTitle>
-              <ModalContent>
-                <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
-                  <Trans i18nKey="manager.firmware.disclaimerTitle">
-                    You are about to install
-                    <Text ff="Open Sans|SemiBold" color="dark">
-                      {`firmware version ${
-                        firmware && firmware.osu ? getCleanVersion(firmware.osu.name) : ''
-                      }`}
-                    </Text>
-                  </Trans>
-                </Text>
-                <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
-                  {t('manager.firmware.disclaimerAppDelete')}
-                  {t('manager.firmware.disclaimerAppReinstall')}
-                </Text>
-              </ModalContent>
+      <Modal isOpened={status === 'disclaimer'} onClose={onClose}>
+        <TrackPage category="Manager" name="DisclaimerModal" />
+        <ModalBody
+          grow
+          align="center"
+          justify="center"
+          mt={3}
+          title={t('manager.firmware.update')}
+          render={() => (
+            <Box>
+              <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
+                <Trans i18nKey="manager.firmware.disclaimerTitle">
+                  You are about to install
+                  <Text ff="Open Sans|SemiBold" color="dark">
+                    {`firmware version ${
+                      firmware && firmware.osu ? getCleanVersion(firmware.osu.name) : ''
+                    }`}
+                  </Text>
+                </Trans>
+              </Text>
+              <Text ff="Open Sans|Regular" fontSize={4} color="graphite" align="center">
+                {t('manager.firmware.disclaimerAppDelete')}
+                {t('manager.firmware.disclaimerAppReinstall')}
+              </Text>
               {firmware && firmware.osu ? (
-                <ModalContent relative pb={0} style={{ height: 250, width: '100%' }}>
+                <Box relative pb={0} style={{ height: 250, width: '100%' }}>
                   <GrowScroll pb={5}>
                     <Notes>
                       <Markdown>{firmware.osu.notes}</Markdown>
                     </Notes>
                   </GrowScroll>
                   <GradientBox />
-                </ModalContent>
+                </Box>
               ) : null}
-              <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
-                <Button primary onClick={goToNextStep}>
-                  {t('common.continue')}
-                </Button>
-              </ModalFooter>
-            </Fragment>
-          </ModalBody>
-        )}
-      />
+            </Box>
+          )}
+          renderFooter={() => (
+            <Box horizontal justifyContent="flex-end">
+              <Button primary onClick={goToNextStep}>
+                {t('common.continue')}
+              </Button>
+            </Box>
+          )}
+        />
+      </Modal>
     )
   }
 }

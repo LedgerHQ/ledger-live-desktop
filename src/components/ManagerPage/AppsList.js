@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/jsx-no-literals */ // FIXME
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -15,7 +15,7 @@ import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import Box from 'components/base/Box'
-import Modal, { ModalBody, ModalFooter, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'
 import ProgressBar from 'components/ProgressBar'
@@ -31,6 +31,7 @@ import CheckCircle from 'icons/CheckCircle'
 import { FreezeDeviceChangeEvents } from './HookDeviceChange'
 import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
+import ModalBody from '../base/Modal/ModalBody'
 
 const mapStateToProps = state => ({
   isDevMode: developerModeSelector(state),
@@ -183,108 +184,103 @@ class AppsList extends PureComponent<Props, State> {
 
   handleCloseModal = () => this.setState({ status: 'idle', mode: 'home' })
 
-  renderModal = () => {
+  renderBody = () => {
     const { t } = this.props
     const { app, status, error, mode, progress } = this.state
-    return (
-      <Modal
-        isOpened={status !== 'idle' && status !== 'loading'}
-        render={() => (
-          <ModalBody align="center" justify="center" style={{ height: 300 }}>
-            <FreezeDeviceChangeEvents />
-            {status === 'busy' || status === 'idle' ? (
-              <Fragment>
-                <ModalTitle>
-                  {mode === 'installing' ? (
-                    <Box color="grey">
-                      <Update size={30} />
-                    </Box>
-                  ) : (
-                    <Box color="grey">
-                      <Trash size={30} />
-                    </Box>
-                  )}
-                </ModalTitle>
-                <ModalContent>
-                  <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-                    {t(`manager.apps.${mode}`, { app })}
-                  </Text>
-                  <Box mt={6}>
-                    <ProgressBar width={150} progress={progress} />
-                  </Box>
-                </ModalContent>
-              </Fragment>
-            ) : status === 'error' ? (
-              <Fragment>
-                <TrackPage
-                  category="Manager"
-                  name="Error Modal"
-                  error={error && error.name}
-                  app={app}
-                />
-                <ModalContent grow align="center" justify="center" mt={5}>
-                  <Box color="alertRed">
-                    <ExclamationCircleThin size={44} />
-                  </Box>
-                  <Box
-                    color="dark"
-                    mt={4}
-                    fontSize={6}
-                    ff="Museo Sans|Regular"
-                    textAlign="center"
-                    style={{ maxWidth: 350 }}
-                  >
-                    <TranslatedError error={error} field="title" />
-                  </Box>
-                  <Box
-                    color="graphite"
-                    mt={2}
-                    fontSize={4}
-                    ff="Open Sans"
-                    textAlign="center"
-                    style={{ maxWidth: 350 }}
-                  >
-                    <TranslatedError error={error} field="description" />
-                  </Box>
-                </ModalContent>
-                <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
-                  <Button primary onClick={this.handleCloseModal}>
-                    {t('common.close')}
-                  </Button>
-                </ModalFooter>
-              </Fragment>
-            ) : status === 'success' ? (
-              <Fragment>
-                <ModalContent grow align="center" justify="center" mt={5}>
-                  <Box color="positiveGreen">
-                    <CheckCircle size={44} />
-                  </Box>
-                  <Box
-                    color="dark"
-                    mt={4}
-                    fontSize={6}
-                    ff="Museo Sans|Regular"
-                    textAlign="center"
-                    style={{ maxWidth: 350 }}
-                  >
-                    {t(
-                      `manager.apps.${
-                        mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'
-                      }`,
-                      { app },
-                    )}
-                  </Box>
-                </ModalContent>
-                <ModalFooter horizontal justifyContent="flex-end" style={{ width: '100%' }}>
-                  <Button primary onClick={this.handleCloseModal}>
-                    {t('common.close')}
-                  </Button>
-                </ModalFooter>
-              </Fragment>
-            ) : null}
-          </ModalBody>
+
+    return ['busy', 'idle'].includes(status) ? (
+      <Box grow align="center" justify="center">
+        {mode === 'installing' ? (
+          <Box color="grey" grow align="center" mb={5}>
+            <Update size={30} />
+          </Box>
+        ) : (
+          <Box color="grey" grow align="center" mb={5}>
+            <Trash size={30} />
+          </Box>
         )}
-      />
+        <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+          {t(`manager.apps.${mode}`, { app })}
+        </Text>
+        <Box mt={6}>
+          <ProgressBar width={150} progress={progress} />
+        </Box>
+      </Box>
+    ) : status === 'error' ? (
+      <Box>
+        <TrackPage category="Manager" name="Error Modal" error={error && error.name} app={app} />
+        <Box grow align="center" justify="center" mt={5}>
+          <Box color="alertRed">
+            <ExclamationCircleThin size={44} />
+          </Box>
+          <Box
+            color="dark"
+            mt={4}
+            fontSize={6}
+            ff="Museo Sans|Regular"
+            textAlign="center"
+            style={{ maxWidth: 350 }}
+          >
+            <TranslatedError error={error} field="title" />
+          </Box>
+          <Box
+            color="graphite"
+            mt={2}
+            fontSize={4}
+            ff="Open Sans"
+            textAlign="center"
+            style={{ maxWidth: 350 }}
+          >
+            <TranslatedError error={error} field="description" />
+          </Box>
+        </Box>
+      </Box>
+    ) : status === 'success' ? (
+      <Box grow align="center" justify="center" mt={5}>
+        <Box color="positiveGreen">
+          <CheckCircle size={44} />
+        </Box>
+        <Box
+          color="dark"
+          mt={4}
+          fontSize={6}
+          ff="Museo Sans|Regular"
+          textAlign="center"
+          style={{ maxWidth: 350 }}
+        >
+          {t(`manager.apps.${mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'}`, {
+            app,
+          })}
+        </Box>
+      </Box>
+    ) : null
+  }
+
+  renderFooter = () => {
+    const { t } = this.props
+    return (
+      <Box horizontal justifyContent="flex-end" style={{ width: '100%' }}>
+        <Button primary onClick={this.handleCloseModal}>
+          {t('common.close')}
+        </Button>
+      </Box>
+    )
+  }
+
+  renderModal = () => {
+    const { status } = this.state
+    return (
+      <Modal isOpened={status !== 'idle' && status !== 'loading'} centered>
+        <ModalBody
+          align="center"
+          justify="center"
+          title={''}
+          render={this.renderBody}
+          renderFooter={['error', 'success'].includes(status) ? this.renderFooter : undefined}
+        >
+          <FreezeDeviceChangeEvents />
+        </ModalBody>
+      </Modal>
     )
   }
 
@@ -325,6 +321,7 @@ class AppsList extends PureComponent<Props, State> {
 
   render() {
     const { t } = this.props
+
     return (
       <Box>
         <Box mb={4} color="dark" ff="Museo Sans" fontSize={5} flow={2} horizontal align="center">
