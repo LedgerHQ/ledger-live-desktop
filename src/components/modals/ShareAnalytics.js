@@ -111,5 +111,5 @@ export const InlineDesc = styled(Box).attrs({
   ff: 'Open Sans|SemiBold',
   fontSize: 4,
   color: 'dark',
-  mx: '45px',
+  mx: '15px',
 })``
