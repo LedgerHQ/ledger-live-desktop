@@ -277,6 +277,7 @@ class SendModal extends PureComponent<Props, State<*>> {
     return (
       <Modal
         name={MODAL_SEND}
+        centered
         refocusWhenChange={stepId}
         onHide={this.handleReset}
         preventBackdropClick={isModalLocked}

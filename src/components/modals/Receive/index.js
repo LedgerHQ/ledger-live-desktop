@@ -197,16 +197,17 @@ class ReceiveModal extends PureComponent<Props, State> {
     return (
       <Modal
         name={MODAL_RECEIVE}
+        centered
         refocusWhenChange={stepId}
         onHide={this.handleReset}
         preventBackdropClick={isModalLocked}
         onBeforeOpen={this.handleBeforeOpenModal}
-        render={({ onClose }) => (
+        render={() => (
           <Stepper
             title={t('receive.title')}
             initialStepId={stepId}
             onStepChange={this.handleStepChange}
-            onClose={onClose}
+            onClose={addtionnalProps.closeModal}
             steps={this.STEPS}
             disabledSteps={disabledSteps}
             errorSteps={errorSteps}

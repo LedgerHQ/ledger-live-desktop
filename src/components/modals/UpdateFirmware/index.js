@@ -107,6 +107,7 @@ class UpdateModal extends PureComponent<Props, State> {
     return (
       <Modal
         onClose={onClose}
+        centered
         onHide={this.handleReset}
         isOpened={status === 'install'}
         refocusWhenChange={stepId}

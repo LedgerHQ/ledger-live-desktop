@@ -1,54 +1,28 @@
 // @flow
 
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/no-multi-comp */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
-import React, { Component } from 'react'
-import { findDOMNode } from 'react-dom'
+import React, { PureComponent, Fragment } from 'react'
+import { createPortal } from 'react-dom'
 import { connect } from 'react-redux'
-import Mortal from 'react-mortal'
-import styled from 'styled-components'
 import noop from 'lodash/noop'
-import { EXPERIMENTAL_CENTER_MODAL } from 'config/constants'
-
-import { rgba } from 'styles/helpers'
-import { radii } from 'styles/theme'
+import Animated from 'animated/lib/targets/react-dom'
+import Easing from 'animated/lib/Easing'
 
 import { closeModal, isModalOpened, getModalData } from 'reducers/modals'
-
-import Box from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
+import { colors } from 'styles/theme'
 
 export { default as ModalBody } from './ModalBody'
-export { default as ConfirmModal } from './ConfirmModal'
-export { default as RepairModal } from './RepairModal'
-export { default as ModalTitle } from './ModalTitle'
 
-const springConfig = {
-  stiffness: 320,
+const animShowHide = {
+  duration: 200,
+  easing: Easing.bezier(0.3, 1.0, 0.5, 0.8),
 }
 
-type OwnProps = {
-  name?: string, // eslint-disable-line
-  isOpened?: boolean,
-  onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
-  onClose?: () => void,
-  onHide?: () => void,
-  preventBackdropClick?: boolean,
-  render: Function,
-  refocusWhenChange?: string,
-  width?: string,
-}
+const domNode = process.env.STORYBOOK_ENV ? document.body : document.getElementById('modals')
 
-type Props = OwnProps & {
-  isOpened?: boolean,
-  data?: any,
-} & {
-  onClose?: () => void,
-}
-
-const mapStateToProps = (state, { name, isOpened, onBeforeOpen }: OwnProps): * => {
+const mapStateToProps = (state, { name, isOpened, onBeforeOpen }: Props): * => {
   const data = getModalData(state, name || '')
   const modalOpened = isOpened || (name && isModalOpened(state, name))
 
@@ -62,7 +36,7 @@ const mapStateToProps = (state, { name, isOpened, onBeforeOpen }: OwnProps): * =
   }
 }
 
-const mapDispatchToProps = (dispatch: *, { name, onClose = noop }: OwnProps): * => ({
+const mapDispatchToProps = (dispatch: *, { name, onClose = noop }: Props): * => ({
   onClose: name
     ? () => {
         dispatch(closeModal(name))
@@ -71,178 +45,187 @@ const mapDispatchToProps = (dispatch: *, { name, onClose = noop }: OwnProps): * 
     : onClose,
 })
 
-const Container = styled(Box).attrs({
-  color: 'grey',
-  sticky: true,
-  style: p => ({
-    pointerEvents: p.isVisible ? 'auto' : 'none',
-  }),
-})`
-  position: fixed;
-  z-index: 30;
-`
-
-const Backdrop = styled(Box).attrs({
-  bg: p => rgba(p.theme.colors.black, 0.4),
-  sticky: true,
-  style: p => ({
-    opacity: p.op,
-  }),
-})`
-  position: fixed;
-`
-
-const NonClickableHeadArea = styled.div`
-  position: fixed;
-  height: 48px;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`
-
-const Wrapper = styled(Box).attrs({
-  bg: 'transparent',
-  flow: 4,
-  style: p => ({
-    opacity: p.op,
-    transform: `scale3d(${p.scale}, ${p.scale}, ${p.scale})`,
-  }),
-})`
-  outline: none;
-  width: ${p => (p.width ? p.width : '500px')};
-  z-index: 2;
-`
-
-class Pure extends Component<any> {
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.isAnimated) {
-      return false
-    }
-
-    return true
-  }
-
-  render() {
-    const { data, onClose, render } = this.props
-
-    return render({ data, onClose })
-  }
+export type RenderProps = {
+  onClose?: void => void,
+  data: any,
 }
 
-function stopPropagation(e) {
-  e.stopPropagation()
+type Props = {
+  isOpened?: boolean,
+  children?: any,
+  centered?: boolean,
+  onClose?: void => void,
+  onHide?: void => void,
+  render?: RenderProps => any,
+  data?: any,
+  preventBackdropClick?: boolean,
+
+  name?: string, // eslint-disable-line
+  onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
 }
 
-const wrap = EXPERIMENTAL_CENTER_MODAL
-  ? children => (
-      <Box alignItems="center" justifyContent="center" grow>
-        {children}
-      </Box>
-    )
-  : children => (
-      <GrowScroll alignItems="center" full pt={8}>
-        {children}
-      </GrowScroll>
-    )
+type State = {
+  animShowHide: Animated.Value,
+  isInDOM: boolean,
+}
 
-export class Modal extends Component<Props> {
-  static defaultProps = {
-    isOpened: false,
-    onHide: noop,
-    preventBackdropClick: false,
+class Modal extends PureComponent<Props, State> {
+  state = {
+    animShowHide: new Animated.Value(0),
+    isInDOM: this.props.isOpened === true,
   }
 
-  shouldComponentUpdate(nextProps: Props) {
-    if (this.props.isOpened || nextProps.isOpened) {
-      return true
+  static getDerivedStateFromProps(nextProps: Props) {
+    const patch = {}
+    if (nextProps.isOpened) {
+      patch.isInDOM = true
+    }
+    return patch
+  }
+
+  componentDidMount() {
+    if (this.props.isOpened) {
+      this.animateEnter()
     }
 
-    return false
+    this.state.animShowHide.addListener(({ value }) => {
+      if (value === 0) {
+        const { onHide } = this.props
+        this.setState({ isInDOM: false })
+        if (onHide) {
+          onHide()
+        }
+      }
+      if (value === 1) this.setState({ isInDOM: true })
+    })
+
+    document.addEventListener('keyup', this.handleKeyup)
   }
 
   componentDidUpdate(prevProps: Props) {
-    const didOpened = this.props.isOpened && !prevProps.isOpened
-    const didClose = !this.props.isOpened && prevProps.isOpened
-    const shouldFocus = didOpened || this.props.refocusWhenChange !== prevProps.refocusWhenChange
+    const didOpened = !prevProps.isOpened && this.props.isOpened
+    const didClosed = prevProps.isOpened && !this.props.isOpened
+
     if (didOpened) {
-      // Store a reference to the last active element, to restore it after
-      // modal close
-      this._lastFocusedElement = document.activeElement
-    }
-    if (shouldFocus) {
-      this.focusWrapper()
+      this.animateEnter()
     }
 
-    if (didClose) {
-      if (this._lastFocusedElement) {
-        this._lastFocusedElement.focus()
-      }
+    if (didClosed) {
+      this.animateLeave()
     }
   }
 
-  _wrapper = null
-  _lastFocusedElement = null
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this.handleKeyup)
+  }
 
-  focusWrapper = () => {
-    // Forced to use findDOMNode here, because innerRef is giving a proxied component
-    const domWrapper = findDOMNode(this._wrapper) // eslint-disable-line react/no-find-dom-node
-    if (domWrapper instanceof HTMLDivElement && !domWrapper.contains(this._lastFocusedElement)) {
-      domWrapper.focus()
+  handleKeyup = (e: KeyboardEvent) => {
+    const { onClose, preventBackdropClick } = this.props
+    if (e.which === 27 && onClose && !preventBackdropClick) {
+      onClose()
     }
   }
+
+  handleClickOnBackdrop = () => {
+    const { preventBackdropClick, onClose } = this.props
+    if (!preventBackdropClick && onClose) {
+      onClose()
+    }
+  }
+
+  swallowClick = e => {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  animateEnter = () =>
+    Animated.timing(this.state.animShowHide, { ...animShowHide, toValue: 1 }).start()
+
+  animateLeave = () =>
+    Animated.timing(this.state.animShowHide, { ...animShowHide, toValue: 0 }).start()
 
   render() {
-    const { preventBackdropClick, isOpened, onHide, render, data, onClose, width } = this.props
+    const { animShowHide, isInDOM } = this.state
+    const { children, render, centered, onClose, data, isOpened } = this.props
 
-    return (
-      <Mortal
-        isOpened={isOpened}
-        onClose={onClose}
-        onHide={onHide}
-        closeOnEsc={!preventBackdropClick}
-        motionStyle={(spring, isVisible) => ({
-          opacity: spring(isVisible ? 1 : 0, springConfig),
-          scale: spring(isVisible ? 1 : 0.95, springConfig),
-        })}
-      >
-        {(m, isVisible, isAnimated) => (
-          <Container isVisible={isVisible} onClick={preventBackdropClick ? undefined : onClose}>
-            <Backdrop op={m.opacity} />
-            <NonClickableHeadArea onClick={stopPropagation} />
-            {wrap(
-              <Wrapper
-                tabIndex={-1}
-                op={m.opacity}
-                scale={m.scale}
-                innerRef={n => (this._wrapper = n)}
-                onClick={stopPropagation}
-                width={width}
-              >
-                <Pure isAnimated={isAnimated} render={render} data={data} onClose={onClose} />
-              </Wrapper>,
-            )}
-          </Container>
-        )}
-      </Mortal>
+    if (!isInDOM) {
+      return null
+    }
+
+    const backdropStyle = {
+      ...BACKDROP_STYLE,
+      opacity: animShowHide,
+    }
+
+    const containerStyle = {
+      ...CONTAINER_STYLE,
+      justifyContent: centered ? 'center' : 'flex-start',
+      pointerEvents: isOpened ? 'auto' : 'none',
+    }
+
+    const scale = animShowHide.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1.1, 1],
+      clamp: true,
+    })
+
+    const bodyWrapperStyle = {
+      ...BODY_WRAPPER_STYLE,
+      opacity: animShowHide,
+      transform: [{ scale }],
+    }
+
+    const renderProps = {
+      onClose,
+      data,
+    }
+
+    const modal = (
+      <Fragment>
+        <Animated.div style={backdropStyle} />
+        <div style={containerStyle} onClick={this.handleClickOnBackdrop}>
+          <Animated.div style={bodyWrapperStyle} onClick={this.swallowClick}>
+            {render && render(renderProps)}
+            {children}
+          </Animated.div>
+        </div>
+      </Fragment>
     )
+
+    return domNode ? createPortal(modal, domNode) : null
   }
 }
 
-export const ModalFooter = styled(Box).attrs({
-  px: 5,
-  py: 3,
-})`
-  border-top: 2px solid ${p => p.theme.colors.lightGrey};
-  border-bottom-left-radius: ${radii[1]}px;
-  border-bottom-right-radius: ${radii[1]}px;
-`
+const BACKDROP_STYLE = {
+  pointerEvents: 'none',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background: 'rgba(0, 0, 0, 0.4)',
+  zIndex: 100,
+}
 
-export const ModalContent = styled(Box).attrs({
-  px: 5,
-  pb: 5,
-  selectable: true,
-})``
+const CONTAINER_STYLE = {
+  ...BACKDROP_STYLE,
+  background: 'transparent',
+  padding: '60px 0 60px 0',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+}
+
+const BODY_WRAPPER_STYLE = {
+  background: 'white',
+  width: 500,
+  borderRadius: 3,
+  boxShadow: 'box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2)',
+  color: colors.smoke,
+  flexShrink: 1,
+  display: 'flex',
+  flexDirection: 'column',
+}
 
 export default connect(
   mapStateToProps,

@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 
-import { ConfirmModal } from 'components/base/Modal'
+import ConfirmModal from 'components/base/Modal/ConfirmModal'
 import { openUserDataFolderAndQuit } from 'helpers/reset'
 
 type Props = {

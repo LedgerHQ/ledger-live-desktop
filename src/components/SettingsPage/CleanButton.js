@@ -7,7 +7,7 @@ import logger from 'logger'
 import type { T } from 'types/common'
 import { cleanAccountsCache } from 'actions/accounts'
 import Button from 'components/base/Button'
-import { ConfirmModal } from 'components/base/Modal'
+import ConfirmModal from 'components/base/Modal/ConfirmModal'
 import { softReset } from 'helpers/reset'
 import ResetFallbackModal from './ResetFallbackModal'
 
@@ -60,6 +60,7 @@ class CleanButton extends PureComponent<Props, State> {
 
         <ConfirmModal
           analyticsName="CleanCache"
+          centered
           isOpened={opened}
           onClose={this.close}
           onReject={this.close}

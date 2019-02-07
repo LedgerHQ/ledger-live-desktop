@@ -7,14 +7,13 @@ import network from 'api/network'
 
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
 import Text from 'components/base/Text'
 import Spinner from 'components/base/Spinner'
 import GradientBox from 'components/GradientBox'
 import TranslatedError from 'components/TranslatedError'
 import TrackPage from 'analytics/TrackPage'
 import Markdown, { Notes } from 'components/base/Markdown'
-import { ModalBody, ModalTitle, ModalContent, ModalFooter } from 'components/base/Modal'
+import ModalBody from 'components/base/Modal/ModalBody'
 
 import type { T } from 'types/common'
 
@@ -115,21 +114,26 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
     const { onClose, t } = this.props
 
     return (
-      <ModalBody onClose={onClose}>
-        <TrackPage category="Modal" name="ReleaseNotes" />
-        <ModalTitle>{t('releaseNotes.title')}</ModalTitle>
-        <ModalContent relative style={{ height: 500 }} px={0} pb={0}>
-          <GrowScroll px={5} pb={8}>
-            {this.renderContent()}
-          </GrowScroll>
-          <GradientBox />
-        </ModalContent>
-        <ModalFooter horizontal justifyContent="flex-end">
-          <Button onClick={onClose} primary>
-            {t('common.continue')}
-          </Button>
-        </ModalFooter>
-      </ModalBody>
+      <ModalBody
+        onClose={onClose}
+        title={t('releaseNotes.title')}
+        render={() => (
+          <Box relative style={{ height: 500 }} px={0} pb={0}>
+            <TrackPage category="Modal" name="ReleaseNotes" />
+            <Box px={5} pb={8}>
+              {this.renderContent()}
+            </Box>
+            <GradientBox />
+          </Box>
+        )}
+        renderFooter={() => (
+          <Box horizontal justifyContent="flex-end">
+            <Button onClick={onClose} primary>
+              {t('common.continue')}
+            </Button>
+          </Box>
+        )}
+      />
     )
   }
 }

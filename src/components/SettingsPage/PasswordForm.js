@@ -70,6 +70,7 @@ class PasswordForm extends PureComponent<Props> {
             </Label>
             <InputPassword
               style={{ width: 240 }}
+              onEnter={onSubmit}
               id="confirmPassword"
               onChange={onChange('confirmPassword')}
               value={confirmPassword}

@@ -11,7 +11,7 @@ import logger from 'logger'
 import type { T } from 'types/common'
 import firmwareRepair from 'commands/firmwareRepair'
 import Button from 'components/base/Button'
-import { RepairModal } from 'components/base/Modal'
+import RepairModal from 'components/base/Modal/RepairModal'
 
 type Props = {
   t: T,

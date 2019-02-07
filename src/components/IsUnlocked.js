@@ -23,8 +23,8 @@ import Box from 'components/base/Box'
 import InputPassword from 'components/base/InputPassword'
 import LedgerLiveLogo from 'components/base/LedgerLiveLogo'
 import IconArrowRight from 'icons/ArrowRight'
-import Button from './base/Button/index'
-import ConfirmModal from './base/Modal/ConfirmModal'
+import Button from 'components/base/Button/index'
+import ConfirmModal from 'components/base/Modal/ConfirmModal'
 
 type InputValue = {
   password: string,
