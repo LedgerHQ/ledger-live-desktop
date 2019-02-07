@@ -24,6 +24,7 @@ const mapDispatchToProps = {
 }
 
 class ShareAnalytics extends PureComponent<Props, *> {
+  onClose = () => this.props.closeModal(MODAL_SHARE_ANALYTICS)
   render() {
     const { t } = this.props
     const items = [
@@ -67,6 +68,7 @@ class ShareAnalytics extends PureComponent<Props, *> {
     return (
       <Modal name={MODAL_SHARE_ANALYTICS} centered>
         <ModalBody
+          onClose={this.onClose}
           title={t('onboarding.analytics.shareAnalytics.title')}
           render={() => (
             <Fragment>
@@ -78,11 +80,7 @@ class ShareAnalytics extends PureComponent<Props, *> {
           )}
           renderFooter={() => (
             <Fragment>
-              <Button
-                onClick={() => this.props.closeModal(MODAL_SHARE_ANALYTICS)}
-                primary
-                data-e2e="modal_buttonClose_shareAnalytics"
-              >
+              <Button onClick={this.onClose} primary data-e2e="modal_buttonClose_shareAnalytics">
                 {t('common.close')}
               </Button>
             </Fragment>

@@ -25,12 +25,14 @@ const mapDispatchToProps = {
 }
 
 class DisclaimerModal extends PureComponent<Props> {
+  onClose = () => this.props.closeModal(MODAL_DISCLAIMER)
   render() {
     const { t } = this.props
 
     return (
       <Modal name={MODAL_DISCLAIMER} centered>
         <ModalBody
+          onClose={this.onClose}
           title={t('disclaimerModal.title')}
           render={() => (
             <Box flow={4} ff="Open Sans|Regular" fontSize={4} color="smoke">
@@ -43,11 +45,7 @@ class DisclaimerModal extends PureComponent<Props> {
           )}
           renderFooter={() => (
             <Box horizontal justifyContent="flex-end">
-              <Button
-                data-e2e="continue_button"
-                onClick={() => this.props.closeModal(MODAL_DISCLAIMER)}
-                primary
-              >
+              <Button data-e2e="continue_button" onClick={this.onClose} primary>
                 {t('disclaimerModal.cta')}
               </Button>
             </Box>

@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable react/jsx-no-literals */ // FIXME
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
@@ -15,7 +15,6 @@ import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import Box from 'components/base/Box'
-import Space from 'components/base/Space'
 import Modal from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
 import Text from 'components/base/Text'

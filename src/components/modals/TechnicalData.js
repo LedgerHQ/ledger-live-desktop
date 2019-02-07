@@ -23,6 +23,8 @@ const mapDispatchToProps = {
 }
 
 class TechnicalData extends PureComponent<Props, *> {
+  onClose = () => this.props.closeModal(MODAL_TECHNICAL_DATA)
+
   render() {
     const { t } = this.props
 
@@ -44,6 +46,7 @@ class TechnicalData extends PureComponent<Props, *> {
     return (
       <Modal name={MODAL_TECHNICAL_DATA} centered>
         <ModalBody
+          onClose={this.onClose}
           title={t('onboarding.analytics.technicalData.mandatoryContextual.title')}
           render={() => (
             <Fragment>
@@ -55,11 +58,7 @@ class TechnicalData extends PureComponent<Props, *> {
           )}
           renderFooter={() => (
             <Fragment>
-              <Button
-                onClick={() => this.props.closeModal(MODAL_TECHNICAL_DATA)}
-                primary
-                data-e2e="modal_buttonClose_techData"
-              >
+              <Button onClick={this.onClose} primary data-e2e="modal_buttonClose_techData">
                 {t('common.close')}
               </Button>
             </Fragment>
