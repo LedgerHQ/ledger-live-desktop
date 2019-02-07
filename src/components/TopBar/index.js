@@ -42,9 +42,7 @@ const Inner = styled(Box).attrs({
   grow: true,
   flow: 4,
   align: 'center',
-})`
-  border-bottom: 1px solid ${p => p.theme.colors.fog};
-`
+})``
 
 const Bar = styled.div`
   margin-left: 5px;

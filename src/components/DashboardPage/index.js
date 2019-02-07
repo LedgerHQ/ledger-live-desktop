@@ -105,6 +105,7 @@ class DashboardPage extends PureComponent<Props> {
             bannerId={'promoNanoX'}
             dismissable
           />
+          <SeparatorBar />
         </TopBannerContainer>
         <RefreshAccountsOrdering onMount />
         <TrackPage
@@ -169,6 +170,13 @@ const TopBannerContainer = styled.div`
   & > *:not(:first-child) {
     display: none;
   }
+`
+// If no banners are present, the SeparatorBar appears
+const SeparatorBar = styled.div`
+  height: 1px;
+  border-bottom: 1px solid ${p => p.theme.colors.fog};
+  margin-bottom: 15px;
+  margin-top: -20px;
 `
 
 export default compose(

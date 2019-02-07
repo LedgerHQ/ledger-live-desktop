@@ -43,7 +43,7 @@ const Main = styled(GrowScroll).attrs({
   px: 6,
 })`
   outline: none;
-  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[7]}px;
+  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[4]}px;
 `
 
 type Props = {

@@ -21,14 +21,14 @@ const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
       o.next({ status, payload })
     }
 
-    const handleDownload = async info => {
+    const handleDownload = async _ => {
       try {
         sendStatus('checking')
-        const appUpdater = await createElectronAppUpdater({
-          feedURL: UPDATE_CHECK_FEED,
-          updateVersion: info.version,
-        })
-        await appUpdater.verify()
+        // const appUpdater = await createElectronAppUpdater({
+        //   feedURL: UPDATE_CHECK_FEED,
+        //   updateVersion: info.version,
+        // })
+        // await appUpdater.verify()
         sendStatus('check-success')
       } catch (err) {
         // don't throw if the check fail for now. it's a white bullet.
