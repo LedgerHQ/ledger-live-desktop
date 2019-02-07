@@ -11,6 +11,7 @@ import type { FirmwareUpdateContext } from '@ledgerhq/live-common/lib/types/mana
 
 import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
 import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
+import logger from 'logger'
 
 import { FreezeDeviceChangeEvents } from '../../ManagerPage/HookDeviceChange'
 import StepFullFirmwareInstall from './steps/01-step-install-full-firmware'
@@ -82,7 +83,10 @@ class UpdateModal extends PureComponent<Props, State> {
     t: this.props.t,
   })
 
-  setError = (e: Error) => this.setState({ error: e })
+  setError = (e: Error) => {
+    logger.critical(e)
+    this.setState({ error: e })
+  }
 
   handleReset = () => this.setState({ stepId: 'idCheck', error: null, nonce: this.state.nonce++ })
 

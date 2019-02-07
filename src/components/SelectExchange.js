@@ -87,7 +87,7 @@ class SelectExchange extends Component<
         this.setState({ exchanges, isLoading: false })
       }
     } catch (error) {
-      logger.error(error)
+      logger.critical(error)
       if (!this._unmounted && this._loadId === _loadId) {
         this.setState({ error, isLoading: false })
       }

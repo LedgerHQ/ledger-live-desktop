@@ -366,10 +366,10 @@
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
-        "listTitle": "To import accounts on your Ledger Live Mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in Accounts",
+        "listTitle": "On the Ledger Live mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan until the loader hits 100%"
+        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
     "display": {
@@ -783,7 +783,7 @@
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
-      "title": "Oops, {{message}}",
+      "title": "{{message}}",
       "description": "Please retry or contact Ledger Support"
     },
     "LedgerAPINotAvailable": {
@@ -899,6 +899,9 @@
     },
     "InvalidAddress": {
       "title": "This is not a valid {{currencyName}} address"
+    },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
       "title": "Oops, couldn’t connect to device",

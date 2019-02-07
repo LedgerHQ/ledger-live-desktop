@@ -69,7 +69,10 @@ class SectionExport extends PureComponent<Props, State> {
               <Text ff="Open Sans|SemiBold" color="dark">
                 {'+'}
               </Text>
-              {'button in Accounts'}
+              {'button in'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Accounts'}
+              </Text>
             </Trans>
           </Box>
         ),
@@ -93,7 +96,13 @@ class SectionExport extends PureComponent<Props, State> {
         icon: <BulletRowIcon>{'3'}</BulletRowIcon>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="settings.export.modal.step3" />
+            <Trans i18nKey="settings.export.modal.step3">
+              {'Scan the'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'LiveQR Code'}
+              </Text>
+              {'until the loader hits 100%'}
+            </Trans>
           </Box>
         ),
       },

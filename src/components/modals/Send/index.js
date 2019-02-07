@@ -12,6 +12,7 @@ import Track from 'analytics/Track'
 import { updateAccountWithUpdater } from 'actions/accounts'
 import { MODAL_SEND } from 'config/constants'
 import { getBridgeForCurrency } from 'bridge'
+import logger from 'logger'
 
 import type { WalletBridge } from 'bridge/types'
 import type { T, Device } from 'types/common'
@@ -180,6 +181,9 @@ class SendModal extends PureComponent<Props, State<*>> {
   }
 
   handleTransactionError = (error: Error) => {
+    if (!(error instanceof UserRefusedOnDevice)) {
+      logger.critical(error)
+    }
     const stepVerificationIndex = this.STEPS.findIndex(step => step.id === 'verification')
     if (stepVerificationIndex === -1) return
     this.setState({ error })
