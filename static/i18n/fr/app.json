@@ -111,6 +111,9 @@
       }
     }
   },
+  "banners": {
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X"
+  },
   "dashboard": {
     "title": "Portfolio",
     "emptyAccountTile": {
@@ -255,9 +258,9 @@
       "titleBlue": "Ledger Blue",
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
-      "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
-      "disclaimerAppDelete": "Les applications installées sur votre appareil doivent être réinstallées après la mise à jour.",
-      "disclaimerAppReinstall": "Cela n’affecte pas vos crypto-actifs sur la blockchain."
+      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
+      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -269,14 +272,14 @@
         "flash": "Flashing your device..."
       },
       "confirmIdentifier": "Vérifiez l’identificateur.",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Identifier",
       "mcuTitle": "Mise à jour du MCU",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
-      "mcuPin": "If asked on device, please enter your pin code to finish the process",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
-      "successText": "Vous pouvez réinstaller les applications sur votre appareil."
+      "successText": "Please re-install the apps on your device"
     },
     "title": "Manager",
     "subtitle": "Install or uninstall apps on your device",
@@ -360,15 +363,16 @@
       "about": "About"
     },
     "export": {
+      "title": "Export accounts",
       "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
-        "listTitle": "To import accounts on your Ledger Live Mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in Accounts",
+        "listTitle": "On the Ledger Live mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan until the loader hits 100%"
+        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
     "display": {
@@ -493,8 +497,13 @@
     }
   },
   "update": {
-    "newVersionReady": "A new update is available",
-    "relaunch": "Update now"
+    "downloadInProgress": "Downloading update...",
+    "downloadProgress": "{{progress}}% completed",
+    "checking": "Checking update...",
+    "checkSuccess": "Update ready to install",
+    "quitAndInstall": "Install now",
+    "error": "Error during update. Please download again",
+    "reDownload": "Download again"
   },
   "crash": {
     "oops": "Oops, something went wrong",
@@ -782,7 +791,7 @@
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
-      "title": "Désolé, {{message}}",
+      "title": "{{message}}",
       "description": "Please retry or contact Ledger Support"
     },
     "LedgerAPINotAvailable": {
@@ -899,6 +908,9 @@
     "InvalidAddress": {
       "title": "Il ne s’agit pas d’une adresse {{currencyName}} valide."
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
+    },
     "CantOpenDevice": {
       "title": "Désolé, connexion à l’appareil impossible",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
@@ -908,7 +920,7 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Ce code QR n’a pu être scanné : cette adresse ne prend pas en charge l’auto-vérification."
+      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
