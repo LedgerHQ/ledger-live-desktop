@@ -15,7 +15,7 @@ const fiats = listFiatCurrencies()
   // For now we take first unit, in the future we'll need to figure out something else
   .map(fiat => ({
     value: fiat.code,
-    label: `${fiat.name} - ${fiat.code}${fiat.symbol ? ` (${fiat.symbol})` : ''}`,
+    label: `${fiat.name} - ${fiat.code}`,
     fiat,
   }))
 
