@@ -255,9 +255,9 @@
       "titleBlue": "Ledger Blue",
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
-      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>",
-      "disclaimerAppDelete": "Apps installed on your device have to be re-installed after the update.",
-      "disclaimerAppReinstall": "This does not affect your crypto assets in the blockchain."
+      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
+	    "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
+	    "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -269,15 +269,15 @@
         "flash": "Flashing your device..."
       },
       "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
-      "identifier": "Identifier",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
+	      "identifier": "Identifier",
       "mcuTitle": "Updating MCU",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
-      "mcuPin": "If asked on device, please enter your pin code to finish the process",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
-      "successText": "You may re-install the apps on your device"
-    },
+      "successText": "Please re-install the apps on your device"
+	    },
     "title": "Manager",
     "subtitle": "Install or uninstall apps on your device",
     "device": {
@@ -912,7 +912,7 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR-code: auto-verification not supported by this address"
+      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
