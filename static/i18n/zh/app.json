@@ -111,6 +111,9 @@
       }
     }
   },
+  "banners": {
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X"
+  },
   "dashboard": {
     "title": "资产组合",
     "emptyAccountTile": {
@@ -255,9 +258,9 @@
       "titleBlue": "Ledger Blue",
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
-      "disclaimerTitle": "您即将安装<1><0>固件版本 {{version}}</0></1>",
-      "disclaimerAppDelete": "在更新后，您设备上安装的应用程序必须进行重新安装。",
-      "disclaimerAppReinstall": "这不会影响您在区块链中的加密资产。"
+      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
+      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -269,14 +272,14 @@
         "flash": "Flashing your device..."
       },
       "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Identifier",
       "mcuTitle": "正在更新 MCU",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
-      "mcuPin": "如在设备上显示了要求，则请输入您的 pin 码以完成该过程",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "固件已更新",
-      "successText": "您可在设备上重新安装应用程序"
+      "successText": "Please re-install the apps on your device"
     },
     "title": "管理器",
     "subtitle": "Install or uninstall apps on your device",
@@ -360,15 +363,16 @@
       "about": "关于"
     },
     "export": {
+      "title": "Export accounts",
       "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
-        "listTitle": "To import accounts on your Ledger Live Mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in Accounts",
+        "listTitle": "On the Ledger Live mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan until the loader hits 100%"
+        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
     "display": {
@@ -493,8 +497,13 @@
     }
   },
   "update": {
-    "newVersionReady": "新更新可用",
-    "relaunch": "立即更新"
+    "downloadInProgress": "Downloading update...",
+    "downloadProgress": "{{progress}}% completed",
+    "checking": "Checking update...",
+    "checkSuccess": "Update ready to install",
+    "quitAndInstall": "Install now",
+    "error": "Error during update. Please download again",
+    "reDownload": "Download again"
   },
   "crash": {
     "oops": "糟糕，出错了",
@@ -782,7 +791,7 @@
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
-      "title": "糟糕，{{message}}",
+      "title": "{{message}}",
       "description": "Please retry or contact Ledger Support"
     },
     "LedgerAPINotAvailable": {
@@ -899,6 +908,9 @@
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
+    },
     "CantOpenDevice": {
       "title": "糟糕，无法连接到设备",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
@@ -908,7 +920,7 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "无法扫描此二维码：此地址不支持自动验证"
+      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
