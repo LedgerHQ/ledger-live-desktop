@@ -111,6 +111,9 @@
       }
     }
   },
+  "banners": {
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X"
+  },
   "dashboard": {
     "title": "포트폴리오",
     "emptyAccountTile": {
@@ -255,9 +258,9 @@
       "titleBlue": "Ledger Blue",
       "update": "업데이트",
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
-      "disclaimerTitle": "<1><0>펌웨어 버전 {{version}}</0></1>을(를) 설치하려 합니다.",
-      "disclaimerAppDelete": "장치에 설치된 앱은 업데이트 후 다시 설치해야 합니다.",
-      "disclaimerAppReinstall": "이것은 블록 체인의 암호화 자산에 영향을 미치지 않습니다."
+      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
+      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
     },
     "modal": {
       "steps": {
@@ -269,14 +272,14 @@
         "flash": "Flashing your device..."
       },
       "confirmIdentifier": "식별자 확인",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm",
+      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "식별자",
       "mcuTitle": "MCU 업데이트",
       "mcuFirst": "장치에서 USB 케이블 분리",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the bootloader screen appears",
-      "mcuPin": "장치에서 요구하는 경우 PIN 코드를 입력하여 처리를 완료하십시오.",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "펌웨어 업데이트됨",
-      "successText": "장치에 앱을 다시 설치하실 수 있습니다."
+      "successText": "Please re-install the apps on your device"
     },
     "title": "Manager",
     "subtitle": "장치에 앱 설치 또는 제거",
@@ -360,15 +363,16 @@
       "about": "소개"
     },
     "export": {
+      "title": "Export accounts",
       "desc": "Export accounts to the Ledger Live mobile app.",
       "button": "Export",
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
-        "listTitle": "To import accounts on your Ledger Live Mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in Accounts",
+        "listTitle": "On the Ledger Live mobile app:",
+        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan until the loader hits 100%"
+        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
     "display": {
@@ -493,8 +497,13 @@
     }
   },
   "update": {
-    "newVersionReady": "새 업데이트를 사용할 수 있습니다.",
-    "relaunch": "지금 업데이트"
+    "downloadInProgress": "Downloading update...",
+    "downloadProgress": "{{progress}}% completed",
+    "checking": "Checking update...",
+    "checkSuccess": "Update ready to install",
+    "quitAndInstall": "Install now",
+    "error": "Error during update. Please download again",
+    "reDownload": "Download again"
   },
   "crash": {
     "oops": "죄송합니다. 무언가가 잘못되었습니다.",
@@ -782,7 +791,7 @@
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
-      "title": "죄송합니다. {{message}}.",
+      "title": "{{message}}",
       "description": "Please retry or contact Ledger Support"
     },
     "LedgerAPINotAvailable": {
@@ -899,6 +908,9 @@
     "InvalidAddress": {
       "title": "유효한 {{currencyName}} 주소가 아닙니다."
     },
+    "InvalidAddressBecauseDestinationIsAlsoSource": {
+      "title": "Recipient address is the same as the sender address"
+    },
     "CantOpenDevice": {
       "title": "죄송합니다. 장치에 연결할 수 없습니다.",
       "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
@@ -908,7 +920,7 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "이 QR 코드를 스캔할 수 없습니다. 이 주소는 자동 확인을 지원하지 않습니다."
+      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
