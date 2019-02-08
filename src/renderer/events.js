@@ -21,7 +21,6 @@ import { onSetDeviceBusy } from 'components/DeviceBusyIndicator'
 import { onSetLibcoreBusy } from 'components/LibcoreBusyIndicator'
 
 import { lock } from 'reducers/application'
-import { setUpdateStatus } from 'reducers/update'
 import { addDevice, removeDevice, resetDevices } from 'actions/devices'
 
 import listenDevices from 'commands/listenDevices'
@@ -30,11 +29,6 @@ const d = {
   device: debug('lwd:device'),
   sync: debug('lwd:sync'),
   update: debug('lwd:update'),
-}
-
-type MsgPayload = {
-  type: string,
-  data: any,
 }
 
 // TODO port remaining to command pattern
@@ -108,25 +102,6 @@ export default ({ store }: { store: Object }) => {
     ipcRenderer.on('setDeviceBusy', (event: any, { busy }) => {
       onSetDeviceBusy(busy)
     })
-  }
-
-  if (__PROD__) {
-    // TODO move this to "command" pattern
-    const updaterHandlers = {
-      checking: () => store.dispatch(setUpdateStatus('checking')),
-      updateAvailable: info => store.dispatch(setUpdateStatus('available', info)),
-      updateNotAvailable: () => store.dispatch(setUpdateStatus('unavailable')),
-      error: err => store.dispatch(setUpdateStatus('error', err)),
-      downloadProgress: progress => store.dispatch(setUpdateStatus('progress', progress)),
-      downloaded: () => store.dispatch(setUpdateStatus('downloaded')),
-    }
-    ipcRenderer.on('updater', (event: any, payload: MsgPayload) => {
-      const { type, data } = payload
-      updaterHandlers[type](data)
-    })
-
-    // Start check of eventual updates
-    checkUpdates()
   }
 }
 

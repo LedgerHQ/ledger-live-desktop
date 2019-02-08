@@ -90,6 +90,11 @@ export const EXPERIMENTAL_MARKET_INDICATOR_SETTINGS = boolFromEnv(
 )
 export const USE_MOCK_DATA = boolFromEnv('USE_MOCK_DATA')
 
+// Auto update
+
+export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_IGNORE_CHECK', true)
+export const UPDATE_CHECK_FEED = stringFromEnv('UPDATE_CHECK_FEED', 'https://insert.feed.here')
+
 // Other constants
 
 export const MAX_ACCOUNT_NAME_SIZE = 50

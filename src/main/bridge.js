@@ -10,10 +10,10 @@ import logger from 'logger'
 import LoggerTransport from 'logger/logger-transport-main'
 import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
+import { executeCommand, unsubscribeCommand } from 'main/commandHandler'
 import { cleanUpBeforeClosingSync } from 'helpers/log'
 import { deserializeError } from '@ledgerhq/errors/lib/helpers'
 
-import setupAutoUpdater, { quitAndInstall } from './autoUpdate'
 import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
@@ -84,10 +84,18 @@ ipcMain.on('log', (e, { log }) => {
 
 ipcMainListenReceiveCommands({
   onUnsubscribe: requestId => {
-    if (!internalProcess) return
-    internalProcess.send({ type: 'command-unsubscribe', requestId })
+    unsubscribeCommand(requestId)
+    if (internalProcess) {
+      internalProcess.send({ type: 'command-unsubscribe', requestId })
+    }
   },
   onCommand: (command, notifyCommandEvent) => {
+    // ability to run command from the main process
+    if (command.id.startsWith('main:')) {
+      executeCommand(command, notifyCommandEvent)
+      return
+    }
+
     if (!internalProcess) bootInternalProcess()
     const p = internalProcess
     invariant(p, 'internalProcess not started !?')
@@ -157,14 +165,4 @@ ipcMain.on('sentryLogsChanged', (event, payload) => {
   const p = internalProcess
   if (!p) return
   p.send({ type: 'sentryLogsChanged', payload })
-})
-
-// TODO move this to "command" pattern
-ipcMain.on('updater', (event, { type, data }) => {
-  const handler = {
-    init: setupAutoUpdater,
-    quitAndInstall,
-  }[type]
-  const send = (type: string, data: *) => event.sender.send('updater', { type, data })
-  handler(send, data, type)
 })

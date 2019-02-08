@@ -13,7 +13,6 @@ import currenciesStatus from './currenciesStatus'
 import devices from './devices'
 import modals from './modals'
 import settings from './settings'
-import update from './update'
 import onboarding from './onboarding'
 import bridgeSync from './bridgeSync'
 
@@ -22,7 +21,6 @@ import type { ApplicationState } from './application'
 import type { DevicesState } from './devices'
 import type { ModalsState } from './modals'
 import type { SettingsState } from './settings'
-import type { UpdateState } from './update'
 import type { OnboardingState } from './onboarding'
 import type { BridgeSyncState } from './bridgeSync'
 import type { CurrenciesStatusState } from './currenciesStatus'
@@ -36,7 +34,6 @@ export type State = {
   modals: ModalsState,
   router: LocationShape,
   settings: SettingsState,
-  update: UpdateState,
   onboarding: OnboardingState,
   bridgeSync: BridgeSyncState,
 }
@@ -50,7 +47,6 @@ export default combineReducers({
   modals,
   router,
   settings,
-  update,
   onboarding,
   bridgeSync,
 })

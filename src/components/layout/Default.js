@@ -34,6 +34,8 @@ import IsUnlocked from 'components/IsUnlocked'
 import SideBar from 'components/MainSideBar'
 import TopBar from 'components/TopBar'
 import SyncBackground from 'components/SyncBackground'
+import DebugUpdater from 'components/Updater/DebugUpdater'
+
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
 
@@ -41,7 +43,7 @@ const Main = styled(GrowScroll).attrs({
   px: 6,
 })`
   outline: none;
-  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[7]}px;
+  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[4]}px;
 `
 
 type Props = {
@@ -97,6 +99,8 @@ class Default extends Component<Props> {
             {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
               <ModalComponent key={name} />
             ))}
+
+            {process.env.DEBUG_UPDATE && <DebugUpdater />}
 
             <SyncContinuouslyPendingOperations priority={20} interval={SYNC_PENDING_INTERVAL} />
             <SyncBackground />

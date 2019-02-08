@@ -33,7 +33,6 @@ const SIDEBAR_ITEMS = [
     label: 'Third very very very very long text very long text very long',
     icon: IconControls,
     iconActiveColor: '#27a2db',
-    hasNotif: true,
   },
   {
     key: 'fourth',

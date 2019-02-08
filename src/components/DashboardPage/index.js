@@ -3,6 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
 import { compose } from 'redux'
+import IconNanoX from 'icons/device/NanoX'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
@@ -24,17 +25,21 @@ import { saveSettings } from 'actions/settings'
 
 import TrackPage from 'analytics/TrackPage'
 import RefreshAccountsOrdering from 'components/RefreshAccountsOrdering'
-import UpdateNotifier from 'components/UpdateNotifier'
+import UpdateBanner from 'components/Updater/Banner'
 import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
 import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
 import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
+import styled from 'styled-components'
+import { openURL } from 'helpers/linking'
 import EmptyState from './EmptyState'
 import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
 import AccountCardList from './AccountCardList'
+import TopBanner, { FakeLink } from '../TopBanner'
+import { urls } from '../../config/urls'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
@@ -84,7 +89,24 @@ class DashboardPage extends PureComponent<Props> {
 
     return (
       <Fragment>
-        <UpdateNotifier />
+        <TopBannerContainer>
+          <UpdateBanner />
+          <TopBanner
+            content={{
+              message: t('banners.promoteMobile'),
+              Icon: IconNanoX,
+              right: (
+                <FakeLink onClick={() => openURL(urls.promoNanoX)}>
+                  {t('common.learnMore')}
+                </FakeLink>
+              ),
+            }}
+            status={'dark'}
+            bannerId={'promoNanoX'}
+            dismissable
+          />
+          <SeparatorBar />
+        </TopBannerContainer>
         <RefreshAccountsOrdering onMount />
         <TrackPage
           category="Portfolio"
@@ -143,6 +165,19 @@ class DashboardPage extends PureComponent<Props> {
     )
   }
 }
+// This forces only one visible top banner at a time
+const TopBannerContainer = styled.div`
+  & > *:not(:first-child) {
+    display: none;
+  }
+`
+// If no banners are present, the SeparatorBar appears
+const SeparatorBar = styled.div`
+  height: 1px;
+  border-bottom: 1px solid ${p => p.theme.colors.fog};
+  margin-bottom: 15px;
+  margin-top: -20px;
+`
 
 export default compose(
   connect(

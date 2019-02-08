@@ -1,10 +1,16 @@
 // @flow
 
 export const urls = {
+  liveHome: 'https://www.ledger.com/pages/ledger-live',
+
   // Social
   twitter: 'https://twitter.com/LedgerHQ',
   github: 'https://github.com/LedgerHQ/ledger-live-desktop',
   reddit: 'https://www.reddit.com/r/ledgerwallet/',
+
+  // Campaigns
+  promoNanoX:
+    'https://www.ledger.com/pages/ledger-nano-x#utm_source=Ledger%20Live%20Desktop%20App&utm_medium=Ledger%20Live&utm_campaign=Ledger%20Live%20Desktop%20-%20Banner%20LNX',
 
   // Ledger support
   faq: 'https://support.ledgerwallet.com/hc/en-us',
