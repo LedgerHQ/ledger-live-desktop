@@ -80,7 +80,8 @@ const INITIAL_STATE: SettingsState = {
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
-  return 'id' in c ? c : null
+  // $FlowFixMe
+  return 'coinType' in c ? c : null
 }
 
 const handlers: Object = {
@@ -201,7 +202,7 @@ export const areSettingsLoaded = (state: State) => state.settings.loaded
 
 export const currencySettingsLocaleSelector = (
   settings: SettingsState,
-  currency: Currency,
+  currency: CryptoCurrency,
 ): CurrencySettings => {
   const currencySettings = settings.currenciesSettings[currency.id]
   const val = { ...defaultsForCurrency(currency), ...currencySettings }

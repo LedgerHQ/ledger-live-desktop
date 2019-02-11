@@ -1,5 +1,5 @@
 // @flow
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import invariant from 'invariant'
 import { USE_MOCK_DATA } from 'config/constants'
 import { WalletBridge } from './types'
@@ -20,7 +20,7 @@ if (USE_MOCK_DATA) {
   perFamily.ethereum = mockBridge
   perFamily.ripple = mockBridge
 }
-export const getBridgeForCurrency = (currency: Currency): WalletBridge<any> => {
+export const getBridgeForCurrency = (currency: CryptoCurrency): WalletBridge<any> => {
   const bridge = perFamily[currency.family]
   invariant(bridge, `${currency.id} currency is not supported`)
   return bridge

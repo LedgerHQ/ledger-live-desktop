@@ -9,7 +9,7 @@ import { createStructuredSelector } from 'reselect'
 import Track from 'analytics/Track'
 import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import type { T, Device } from 'types/common'
@@ -90,7 +90,7 @@ type State = {
   scanStatus: ScanStatus | string,
 
   isAppOpened: boolean,
-  currency: ?Currency,
+  currency: ?CryptoCurrency,
   scannedAccounts: Account[],
   checkedAccountsIds: string[],
   editedNames: { [_: string]: string },
@@ -100,7 +100,7 @@ type State = {
 
 export type StepProps = DefaultStepProps & {
   t: T,
-  currency: ?Currency,
+  currency: ?CryptoCurrency,
   device: ?Device,
   isAppOpened: boolean,
   scannedAccounts: Account[],
@@ -112,7 +112,7 @@ export type StepProps = DefaultStepProps & {
   onGoStep1: () => void,
   onCloseModal: () => void,
   resetScanState: () => void,
-  setCurrency: (?Currency) => void,
+  setCurrency: (?CryptoCurrency) => void,
   setAppOpened: boolean => void,
   setScanStatus: (ScanStatus, ?Error) => string,
   setAccountName: (Account, string) => void,
@@ -164,7 +164,7 @@ class AddAccounts extends PureComponent<Props, State> {
   handleCloseModal = () => this.props.closeModal(MODAL_ADD_ACCOUNTS)
   handleStepChange = (step: Step) => this.setState({ stepId: step.id })
 
-  handleSetCurrency = (currency: ?Currency) => this.setState({ currency })
+  handleSetCurrency = (currency: ?CryptoCurrency) => this.setState({ currency })
 
   handleSetScanStatus = (scanStatus: string, err: ?Error = null) => {
     if (err) {
