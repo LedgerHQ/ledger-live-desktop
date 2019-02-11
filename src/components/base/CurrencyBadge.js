@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import { rgba } from 'styles/helpers'
 
@@ -26,7 +26,7 @@ export function CurrencyCircleIcon({
   size,
   ...props
 }: {
-  currency: Currency,
+  currency: CryptoCurrency,
   size: number,
 }) {
   const Icon = getCryptoCurrencyIcon(currency)
@@ -37,7 +37,7 @@ export function CurrencyCircleIcon({
   )
 }
 
-function CurrencyBadge({ currency, ...props }: { currency: Currency }) {
+function CurrencyBadge({ currency, ...props }: { currency: CryptoCurrency }) {
   return (
     <Box horizontal flow={3} {...props}>
       <CurrencyCircleIcon size={40} currency={currency} />

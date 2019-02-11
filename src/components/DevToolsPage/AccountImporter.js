@@ -6,7 +6,7 @@ import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
 import { connect } from 'react-redux'
 
-import type { Currency, Account, DerivationMode } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, Account, DerivationMode } from '@ledgerhq/live-common/lib/types'
 
 import { decodeAccount } from 'reducers/accounts'
 import { addAccount } from 'actions/accounts'
@@ -37,7 +37,7 @@ type Props = {
 
 type ImportableAccountType = {
   name: string,
-  currency: Currency,
+  currency: CryptoCurrency,
   derivationMode: DerivationMode,
   xpub: string,
 }
@@ -47,7 +47,7 @@ type State = {
 
   importableAccounts: ImportableAccountType[],
 
-  currency: ?Currency,
+  currency: ?CryptoCurrency,
   xpub: string,
   name: string,
   isSegwit: boolean,
@@ -72,7 +72,7 @@ const INITIAL_STATE = {
 class AccountImporter extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
-  onChangeCurrency = currency => {
+  onChangeCurrency = (currency: CryptoCurrency) => {
     if (currency.family !== 'bitcoin') return
     this.setState({
       currency,
@@ -119,6 +119,7 @@ class AccountImporter extends PureComponent<Props, State> {
 
   addToScan = () => {
     const { xpub, currency, isSegwit, isUnsplit, name } = this.state
+    if (!currency) return
     const derivationMode = isSegwit
       ? isUnsplit
         ? 'segwit_unsplit'

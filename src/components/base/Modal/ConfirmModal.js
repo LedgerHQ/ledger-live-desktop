@@ -9,7 +9,8 @@ import TrackPage from 'analytics/TrackPage'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 
-import { Modal, ModalContent, ModalBody, ModalTitle, ModalFooter } from './index'
+import Modal from './index'
+import ModalBody from './ModalBody'
 
 type Props = {
   isOpened: boolean,
@@ -21,11 +22,13 @@ type Props = {
   confirmText?: string,
   cancelText?: string,
   onReject: Function,
+  onClose?: Function,
   onConfirm: Function,
   t: T,
   isLoading?: boolean,
   analyticsName: string,
   cancellable?: boolean,
+  centered?: boolean,
 }
 
 class ConfirmModal extends PureComponent<Props> {
@@ -43,23 +46,38 @@ class ConfirmModal extends PureComponent<Props> {
       onConfirm,
       isLoading,
       renderIcon,
+      onClose,
       t,
       analyticsName,
+      centered,
       ...props
     } = this.props
 
     const realConfirmText = confirmText || t('common.confirm')
     const realCancelText = cancelText || t('common.cancel')
     return (
-      <Modal
-        isOpened={isOpened}
-        preventBackdropClick={isLoading}
-        {...props}
-        render={({ onClose }) => (
-          <ModalBody onClose={!cancellable && isLoading ? undefined : onClose}>
-            <TrackPage category="Modal" name={analyticsName} />
-            <ModalTitle>{title}</ModalTitle>
-            <ModalContent>
+      <Modal isOpened={isOpened} centered={centered}>
+        <ModalBody
+          preventBackdropClick={isLoading}
+          {...props}
+          onClose={!cancellable && isLoading ? undefined : onClose}
+          title={title}
+          renderFooter={() => (
+            <Box horizontal align="center" justify="flex-end" flow={2}>
+              {!isLoading && <Button onClick={onReject}>{realCancelText}</Button>}
+              <Button
+                onClick={onConfirm}
+                primary={!isDanger}
+                danger={isDanger}
+                isLoading={isLoading}
+                disabled={isLoading}
+              >
+                {realConfirmText}
+              </Button>
+            </Box>
+          )}
+          render={() => (
+            <Box>
               {subTitle && (
                 <Box ff="Museo Sans|Regular" color="dark" textAlign="center" mb={2} mt={3}>
                   {subTitle}
@@ -73,22 +91,11 @@ class ConfirmModal extends PureComponent<Props> {
               <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center">
                 {desc}
               </Box>
-            </ModalContent>
-            <ModalFooter horizontal align="center" justify="flex-end" flow={2}>
-              {!isLoading && <Button onClick={onReject}>{realCancelText}</Button>}
-              <Button
-                onClick={onConfirm}
-                primary={!isDanger}
-                danger={isDanger}
-                isLoading={isLoading}
-                disabled={isLoading}
-              >
-                {realConfirmText}
-              </Button>
-            </ModalFooter>
-          </ModalBody>
-        )}
-      />
+            </Box>
+          )}
+        />
+        <TrackPage category="Modal" name={analyticsName} />
+      </Modal>
     )
   }
 }

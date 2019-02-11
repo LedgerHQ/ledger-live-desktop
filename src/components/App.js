@@ -16,6 +16,7 @@ import ThrowBlock from 'components/ThrowBlock'
 import Default from 'components/layout/Default'
 import CounterValues from 'helpers/countervalues'
 import { BridgeSyncProvider } from 'bridge/BridgeSyncContext'
+import { UpdaterProvider } from 'components/Updater/UpdaterContext'
 
 const App = ({
   store,
@@ -31,13 +32,15 @@ const App = ({
       <CounterValues.PollingProvider>
         <I18nextProvider i18n={i18n} initialLanguage={language}>
           <ThemeProvider theme={theme}>
-            <ThrowBlock>
-              <ConnectedRouter history={history}>
-                <Switch>
-                  <Route component={Default} />
-                </Switch>
-              </ConnectedRouter>
-            </ThrowBlock>
+            <UpdaterProvider>
+              <ThrowBlock>
+                <ConnectedRouter history={history}>
+                  <Switch>
+                    <Route component={Default} />
+                  </Switch>
+                </ConnectedRouter>
+              </ThrowBlock>
+            </UpdaterProvider>
           </ThemeProvider>
         </I18nextProvider>
       </CounterValues.PollingProvider>

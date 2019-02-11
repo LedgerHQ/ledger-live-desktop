@@ -3,6 +3,7 @@ import invariant from 'invariant'
 import { BigNumber } from 'bignumber.js'
 import { Observable } from 'rxjs'
 import React from 'react'
+import { RippleAPI } from 'ripple-lib'
 import bs58check from 'ripple-bs58check'
 import { computeBinaryTransactionHash } from 'ripple-hashes'
 import throttle from 'lodash/throttle'
@@ -26,13 +27,14 @@ import {
   parseAPIValue,
   parseAPICurrencyObject,
   formatAPICurrencyXRP,
-} from 'api/Ripple'
+} from '@ledgerhq/live-common/lib/api/Ripple'
 import FeesRippleKind from 'components/FeesField/RippleKind'
 import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
 import {
   NotEnoughBalance,
   FeeNotLoaded,
   NotEnoughBalanceBecauseDestinationNotCreated,
+  InvalidAddressBecauseDestinationIsAlsoSource,
 } from '@ledgerhq/errors'
 import type { WalletBridge, EditProps } from './types'
 
@@ -63,7 +65,7 @@ const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
 )
 
 async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }) {
-  const api = apiForEndpointConfig(a.endpointConfig)
+  const api = apiForEndpointConfig(RippleAPI, a.endpointConfig)
   const { fee } = t
   if (!fee) throw new FeeNotLoaded()
   try {
@@ -135,13 +137,21 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
   }
 }
 
-function isRecipientValid(recipient) {
+function isRecipientValid(account, recipient) {
   try {
     bs58check.decode(recipient)
-    return true
+
+    return !(account && account.freshAddress === recipient)
   } catch (e) {
     return false
   }
+}
+
+function getRecipientWarning(account, recipient) {
+  if (account.freshAddress === recipient) {
+    return new InvalidAddressBecauseDestinationIsAlsoSource()
+  }
+  return null
 }
 
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
@@ -252,7 +262,7 @@ const getServerInfo = (map => endpointConfig => {
   if (!endpointConfig) endpointConfig = ''
   if (map[endpointConfig]) return map[endpointConfig]()
   const f = throttle(async () => {
-    const api = apiForEndpointConfig(endpointConfig)
+    const api = apiForEndpointConfig(RippleAPI, endpointConfig)
     try {
       await api.connect()
       const res = await api.getServerInfo()
@@ -269,8 +279,8 @@ const getServerInfo = (map => endpointConfig => {
 })({})
 
 const recipientIsNew = async (endpointConfig, recipient) => {
-  if (!isRecipientValid(recipient)) return false
-  const api = apiForEndpointConfig(endpointConfig)
+  if (!isRecipientValid(null, recipient)) return false
+  const api = apiForEndpointConfig(RippleAPI, endpointConfig)
   try {
     await api.connect()
     try {
@@ -302,7 +312,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       }
 
       async function main() {
-        const api = apiForEndpointConfig()
+        const api = apiForEndpointConfig(RippleAPI)
         try {
           await api.connect()
           const serverInfo = await getServerInfo()
@@ -423,7 +433,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       }
 
       async function main() {
-        const api = apiForEndpointConfig(endpointConfig)
+        const api = apiForEndpointConfig(RippleAPI, endpointConfig)
         try {
           await api.connect()
           if (finished) return
@@ -504,8 +514,9 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
-  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(recipient)),
-  getRecipientWarning: () => Promise.resolve(null),
+  isRecipientValid: (account, recipient) => Promise.resolve(isRecipientValid(account, recipient)),
+  getRecipientWarning: (account, recipient) =>
+    Promise.resolve(getRecipientWarning(account, recipient)),
 
   createTransaction: () => ({
     amount: BigNumber(0),
@@ -617,7 +628,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
   getDefaultEndpointConfig: () => defaultEndpoint,
 
   validateEndpointConfig: async endpointConfig => {
-    const api = apiForEndpointConfig(endpointConfig)
+    const api = apiForEndpointConfig(RippleAPI, endpointConfig)
     await api.connect()
   },
 }

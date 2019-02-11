@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Component } from 'react'
+import { RippleAPI } from 'ripple-lib'
 import type { BigNumber } from 'bignumber.js'
 import type { Account } from '@ledgerhq/live-common/lib/types'
-import { apiForEndpointConfig, parseAPIValue } from 'api/Ripple'
+import { apiForEndpointConfig, parseAPIValue } from '@ledgerhq/live-common/lib/api/Ripple'
 import { FeeNotLoaded } from '@ledgerhq/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import GenericContainer from './GenericContainer'
@@ -30,7 +31,7 @@ class FeesField extends Component<Props, State> {
   }
   syncId = 0
   async sync() {
-    const api = apiForEndpointConfig(this.props.account.endpointConfig)
+    const api = apiForEndpointConfig(RippleAPI, this.props.account.endpointConfig)
     const syncId = ++this.syncId
     try {
       await api.connect()

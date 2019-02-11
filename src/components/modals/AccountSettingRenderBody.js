@@ -1,13 +1,13 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import get from 'lodash/get'
 import { translate } from 'react-i18next'
 
-import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Account, Unit, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { MODAL_SETTINGS_ACCOUNT, MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
 import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
@@ -23,18 +23,14 @@ import TrackPage from 'analytics/TrackPage'
 import Spoiler from 'components/base/Spoiler'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Box from 'components/base/Box'
+import Space from 'components/base/Space'
 import Button from 'components/base/Button'
 import Input from 'components/base/Input'
 import Select from 'components/base/Select'
 import SyncAgo from 'components/SyncAgo'
 
-import {
-  ModalBody,
-  ModalTitle,
-  ModalFooter,
-  ModalContent,
-  ConfirmModal,
-} from 'components/base/Modal'
+import ConfirmModal from 'components/base/Modal/ConfirmModal'
+import ModalBody from 'components/base/Modal/ModalBody'
 
 type State = {
   accountName: ?string,
@@ -74,7 +70,7 @@ const defaultState = {
   isRemoveAccountModalOpen: false,
 }
 
-class HelperComp extends PureComponent<Props, State> {
+class AccountSettingRenderBody extends PureComponent<Props, State> {
   state = {
     ...defaultState,
   }
@@ -84,7 +80,6 @@ class HelperComp extends PureComponent<Props, State> {
   }
 
   getAccount(data: Object): Account {
-    // FIXME this should be a selector
     const { accountName } = this.state
     const account = get(data, 'account', {})
 
@@ -129,10 +124,9 @@ class HelperComp extends PureComponent<Props, State> {
     })
 
   handleSubmit = (account: Account, onClose: () => void) => (
-    e: SyntheticEvent<HTMLFormElement>,
+    e: SyntheticEvent<HTMLFormElement | HTMLInputElement>,
   ) => {
     e.preventDefault()
-
     const { updateAccount, setDataModal } = this.props
     const { accountName, accountUnit, endpointConfig, endpointConfigError } = this.state
 
@@ -194,10 +188,10 @@ class HelperComp extends PureComponent<Props, State> {
       endpointConfigError,
     } = this.state
     const { t, onClose, data } = this.props
+    if (!data) return null
 
     const account = this.getAccount(data)
     const bridge = getBridgeForCurrency(account.currency)
-
     const usefulData = {
       xpub: account.xpub || undefined,
       index: account.index,
@@ -206,12 +200,15 @@ class HelperComp extends PureComponent<Props, State> {
       blockHeight: account.blockHeight,
     }
 
+    const onSubmit = this.handleSubmit(account, onClose)
+
     return (
-      <ModalBody onClose={onClose}>
-        <form onSubmit={this.handleSubmit(account, onClose)}>
-          <TrackPage category="Modal" name="AccountSettings" />
-          <ModalTitle>{t('account.settings.title')}</ModalTitle>
-          <ModalContent mb={3}>
+      <ModalBody
+        onClose={onClose}
+        title={t('account.settings.title')}
+        render={() => (
+          <Fragment>
+            <TrackPage category="Modal" name="AccountSettings" />
             <Container>
               <Box>
                 <OptionRowTitle>{t('account.settings.accountName.title')}</OptionRowTitle>
@@ -224,6 +221,7 @@ class HelperComp extends PureComponent<Props, State> {
                   value={account.name}
                   maxLength={MAX_ACCOUNT_NAME_SIZE}
                   onChange={this.handleChangeName}
+                  onEnter={onSubmit}
                   onFocus={e => this.handleFocus(e, 'accountName')}
                   error={accountNameError}
                 />
@@ -268,8 +266,7 @@ class HelperComp extends PureComponent<Props, State> {
             ) : null}
             <Spoiler textTransform title={t('account.settings.advancedLogs')}>
               <SyncAgo date={account.lastSyncDate} />
-              <textarea
-                readOnly
+              <div
                 style={{
                   userSelect: 'text',
                   border: '1px dashed #f9f9f9',
@@ -277,15 +274,33 @@ class HelperComp extends PureComponent<Props, State> {
                   color: '#000',
                   fontFamily: 'monospace',
                   fontSize: '10px',
-                  height: 200,
                   outline: 'none',
                   padding: '20px',
+                  width: '100%',
+                  whiteSpace: 'pre-wrap',
+                  wordWrap: 'break-word',
+                  overflow: 'auto',
                 }}
-                value={JSON.stringify(usefulData, null, 2)}
-              />
+              >
+                {JSON.stringify(usefulData, null, 2)}
+              </div>
             </Spoiler>
-          </ModalContent>
-          <ModalFooter horizontal>
+            <ConfirmModal
+              analyticsName="RemoveAccount"
+              isDanger
+              isOpened={isRemoveAccountModalOpen}
+              onClose={this.handleCloseRemoveAccountModal}
+              onReject={this.handleCloseRemoveAccountModal}
+              onConfirm={() => this.handleRemoveAccount(account)}
+              title={t('settings.removeAccountModal.title')}
+              subTitle={t('common.areYouSure')}
+              desc={t('settings.removeAccountModal.desc')}
+            />
+            <Space of={20} />
+          </Fragment>
+        )}
+        renderFooter={() => (
+          <Fragment>
             <Button
               event="OpenAccountDelete"
               danger
@@ -294,23 +309,12 @@ class HelperComp extends PureComponent<Props, State> {
             >
               {t('common.delete')}
             </Button>
-            <Button event="DoneEditingAccount" ml="auto" type="submit" primary>
+            <Button event="DoneEditingAccount" ml="auto" onClick={onSubmit} primary>
               {t('common.apply')}
             </Button>
-          </ModalFooter>
-        </form>
-        <ConfirmModal
-          analyticsName="RemoveAccount"
-          isDanger
-          isOpened={isRemoveAccountModalOpen}
-          onClose={this.handleCloseRemoveAccountModal}
-          onReject={this.handleCloseRemoveAccountModal}
-          onConfirm={() => this.handleRemoveAccount(account)}
-          title={t('settings.removeAccountModal.title')}
-          subTitle={t('common.areYouSure')}
-          desc={t('settings.removeAccountModal.desc')}
-        />
-      </ModalBody>
+          </Fragment>
+        )}
+      />
     )
   }
 }
@@ -321,9 +325,9 @@ export default compose(
     mapDispatchToProps,
   ),
   translate(),
-)(HelperComp)
+)(AccountSettingRenderBody)
 
-export function InputLeft({ currency }: { currency: Currency }) {
+export function InputLeft({ currency }: { currency: CryptoCurrency }) {
   return (
     <Box ml={2} style={{ justifyContent: 'center' }} color={currency.color}>
       <CryptoCurrencyIcon currency={currency} size={16} />

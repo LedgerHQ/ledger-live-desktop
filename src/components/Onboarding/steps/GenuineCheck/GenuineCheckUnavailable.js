@@ -31,15 +31,14 @@ export function GenuineCheckUnavailableFooter({
       </Button>
       <Box horizontal ml="auto">
         <Button
+          outline
+          outlineColor="alertRed"
           disabled={false}
           event="Onboarding Skip Genuine Check"
           onClick={() => nextStep()}
           mx={2}
         >
           {t('common.skipThisStep')}
-        </Button>
-        <Button onClick={nextStep} disabled primary>
-          {t('common.continue')}
         </Button>
       </Box>
     </OnboardingFooterWrapper>

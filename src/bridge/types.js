@@ -2,7 +2,7 @@
 
 import type { Observable } from 'rxjs'
 import type { BigNumber } from 'bignumber.js'
-import type { Account, Operation, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Account, Operation, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 // a WalletBridge is implemented on renderer side.
 // this is an abstraction on top of libcore / ethereumjs / ripple js / ...
@@ -34,7 +34,7 @@ export interface WalletBridge<Transaction> {
   // the scan can stop once all accounts are discovered.
   // the function returns a Subscription and you MUST stop everything if it is unsubscribed.
   // TODO return Observable
-  scanAccountsOnDevice(currency: Currency, deviceId: DeviceId): Observable<Account>;
+  scanAccountsOnDevice(currency: CryptoCurrency, deviceId: DeviceId): Observable<Account>;
 
   // synchronize an account. meaning updating the account object with latest state.
   // function receives the initialAccount object so you can actually know what the user side currently have
@@ -52,8 +52,8 @@ export interface WalletBridge<Transaction> {
   // count is user's desired number of ops to pull (but implementation can decide to ignore it or not)
   pullMoreOperations(initialAccount: Account, count: number): Promise<(Account) => Account>;
 
-  isRecipientValid(currency: Currency, recipient: string): Promise<boolean>;
-  getRecipientWarning(currency: Currency, recipient: string): Promise<?Error>;
+  isRecipientValid(account: Account, recipient: string): Promise<boolean>;
+  getRecipientWarning(account: Account, recipient: string): Promise<?Error>;
 
   // Related to send funds:
 

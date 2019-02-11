@@ -1,12 +1,12 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
 import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { ModalContent, ModalTitle, ModalFooter, ModalBody } from 'components/base/Modal'
+import { ModalBody } from 'components/base/Modal'
 import Breadcrumb from 'components/Breadcrumb'
 
 type Props = {
@@ -29,6 +29,7 @@ export type Step = {
   shouldRenderFooter?: StepProps => boolean,
   shouldPreventClose?: boolean | (StepProps => boolean),
   onBack?: StepProps => void,
+  noScroll?: boolean,
 }
 
 type State = {
@@ -72,6 +73,7 @@ class Stepper extends PureComponent<Props, State> {
       onBack,
       shouldPreventClose,
       shouldRenderFooter,
+      noScroll,
     } = step
 
     const stepProps: StepProps = {
@@ -89,25 +91,27 @@ class Stepper extends PureComponent<Props, State> {
         : !!shouldPreventClose
 
     return (
-      <ModalBody onClose={preventClose ? undefined : onClose}>
-        <ModalTitle onBack={onBack ? () => onBack(stepProps) : undefined}>{title}</ModalTitle>
-        <ModalContent>
-          <Breadcrumb
-            mb={6}
-            currentStep={stepIndex}
-            items={steps}
-            stepsDisabled={disabledSteps}
-            stepsErrors={errorSteps}
-          />
-          <StepComponent {...stepProps} />
-          {children}
-        </ModalContent>
-        {renderFooter && (
-          <ModalFooter horizontal align="center" justify="flex-end">
-            <StepFooter {...stepProps} />
-          </ModalFooter>
+      <ModalBody
+        refocusWhenChange={stepId}
+        onClose={preventClose ? undefined : onClose}
+        onBack={onBack ? () => onBack(stepProps) : undefined}
+        title={title}
+        noScroll={noScroll}
+        render={() => (
+          <Fragment>
+            <Breadcrumb
+              mb={6}
+              currentStep={stepIndex}
+              items={steps}
+              stepsDisabled={disabledSteps}
+              stepsErrors={errorSteps}
+            />
+            <StepComponent {...stepProps} />
+            {children}
+          </Fragment>
         )}
-      </ModalBody>
+        renderFooter={renderFooter ? () => <StepFooter {...stepProps} /> : undefined}
+      />
     )
   }
 }

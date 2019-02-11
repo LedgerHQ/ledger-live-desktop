@@ -6,7 +6,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import styled from 'styled-components'
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import { colors } from 'styles/theme'
 import { openURL } from 'helpers/linking'
@@ -59,7 +59,7 @@ const CloseIcon = (props: *) => (
 )
 
 type Props = {
-  accountsCurrencies: Currency[],
+  accountsCurrencies: CryptoCurrency[],
   dismissedBanners: string[],
   dismissBanner: string => void,
   currenciesStatus: CurrencyStatus[],

@@ -44,7 +44,6 @@ const handlers = {
       ...state,
       [name]: {
         isOpened: false,
-        data: undefined,
       },
     }
   },

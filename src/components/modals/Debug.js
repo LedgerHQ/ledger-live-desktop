@@ -1,11 +1,12 @@
 // @flow
 /* eslint-disable react/jsx-no-literals */
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { getDerivationScheme, runDerivationScheme } from '@ledgerhq/live-common/lib/derivation'
-import Modal, { ModalBody, ModalTitle, ModalContent } from 'components/base/Modal'
+import Modal from 'components/base/Modal'
+import ModalBody from 'components/base/Modal/ModalBody'
 import { getCurrentDevice } from 'reducers/devices'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
@@ -127,14 +128,12 @@ class Debug extends Component<*, *> {
     const { device } = this.props
     const { logs } = this.state
     return (
-      <Modal
-        name="MODAL_DEBUG"
-        onHide={this.onHide}
-        render={({ onClose }: *) => (
-          <ModalBody onClose={onClose}>
-            <SyncSkipUnderPriority priority={99999999} />
-            <ModalTitle>developer internal tools</ModalTitle>
-            <ModalContent>
+      <Modal name="MODAL_DEBUG" centered onHide={this.onHide}>
+        <ModalBody
+          title="developer internal tools"
+          render={() => (
+            <Box>
+              <SyncSkipUnderPriority priority={99999999} />
               <Box style={{ height: 60, overflow: 'auto' }}>
                 {device && (
                   <Box horizontal style={{ padding: 10 }}>
@@ -191,6 +190,7 @@ class Debug extends Component<*, *> {
               >
                 {logs.map(log => (
                   <Box
+                    key={log.txt}
                     style={{
                       userSelect: 'all',
                       color: log.type === 'error' ? '#c22' : '#888',
@@ -200,6 +200,10 @@ class Debug extends Component<*, *> {
                   </Box>
                 ))}
               </Box>
+            </Box>
+          )}
+          renderFooter={() => (
+            <Fragment>
               <Button
                 style={{ position: 'absolute', right: 30, bottom: 28 }}
                 onClick={() => {
@@ -208,10 +212,10 @@ class Debug extends Component<*, *> {
               >
                 Clear
               </Button>
-            </ModalContent>
-          </ModalBody>
-        )}
-      />
+            </Fragment>
+          )}
+        />
+      </Modal>
     )
   }
 }

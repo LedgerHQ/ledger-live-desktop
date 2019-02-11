@@ -30,10 +30,10 @@ class PasswordAutoLockSelect extends PureComponent<Props> {
   }
 
   timeouts = [
-    { value: 1, label: `1 ${this.props.t('app:time.minute')}` },
-    { value: 10, label: `10 ${this.props.t('app:time.minute')}s` },
-    { value: 30, label: `30 ${this.props.t('app:time.minute')}s` },
-    { value: 60, label: `1 ${this.props.t('app:time.hour')}` },
+    { value: 1, label: `1 ${this.props.t('time.minute')}` },
+    { value: 10, label: `10 ${this.props.t('time.minute')}s` },
+    { value: 30, label: `30 ${this.props.t('time.minute')}s` },
+    { value: 60, label: `1 ${this.props.t('time.hour')}` },
     { value: -1, label: this.props.t(`app:common.never`) },
   ]
 

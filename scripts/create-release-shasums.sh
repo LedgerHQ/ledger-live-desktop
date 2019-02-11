@@ -1,0 +1,51 @@
+#!/bin/env bash
+
+# Fetch release binaries for all platforms
+# and produce a .sha512sum file in the current folder
+
+# exit on error
+set -e
+
+[[ "$GH_TOKEN" == "" ]] && echo "GH_TOKEN is unset" && exit 1
+
+function main {
+  ASSETS_FILTER="(AppImage|zip|exe)"
+  PKG_VER=$(grep version package.json | sed -E 's/.*: "(.*)",/\1/g')
+  OUTPUT_FILE="ledger-live-desktop-$PKG_VER.sha512sum"
+
+  read -p "> release version ($PKG_VER): " -r RELEASE_VERSION
+  RELEASE_VERSION=${RELEASE_VERSION:-$PKG_VER}
+
+  RELEASES=$(do_request "/repos/LedgerHQ/ledger-live-desktop/releases")
+  printf """
+  console.log(
+    (%s).find(r => r.tag_name === 'v%s').assets
+      .filter(a => a.name.match(/\\.%s$/))
+      .map(a => a.browser_download_url)
+      .join('\\\n')
+  )
+  """ "$RELEASES" "$RELEASE_VERSION" "$ASSETS_FILTER" >"$TMP_FILE1"
+  node "$TMP_FILE1" | tee "$TMP_FILE2"
+
+  pushd "$TMP_DIR" >/dev/null
+  while IFS= read -r line ; do
+    curl -L -O "$line"
+  done < "$TMP_FILE2"
+  sha512sum -- * > "$OLDPWD/$OUTPUT_FILE"
+  popd >/dev/null
+}
+
+TMP_DIR=$(mktemp -d)
+TMP_FILE1=$(mktemp)
+TMP_FILE2=$(mktemp)
+
+function cleanup {
+  rm -rf "$TMP_FILE1" "$TMP_FILE2" "$TMP_DIR"
+}
+
+function do_request {
+  curl -H "Authorization: token $GH_TOKEN" "https://api.github.com$1"
+}
+
+trap cleanup EXIT
+main

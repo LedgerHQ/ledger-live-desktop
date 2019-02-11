@@ -22,8 +22,8 @@ import {
 } from '@ledgerhq/live-common/lib/account'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
 import eip55 from 'eip55'
-import { apiForCurrency } from 'api/Ethereum'
-import type { Tx } from 'api/Ethereum'
+import { apiForCurrency } from '@ledgerhq/live-common/lib/api/Ethereum'
+import type { Tx } from '@ledgerhq/live-common/lib/api/Ethereum'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
 import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from '@ledgerhq/errors'
@@ -129,7 +129,7 @@ function isRecipientValid(currency, recipient) {
 }
 
 // Returns a warning if we detect a non-eip address
-function getRecipientWarning(currency, recipient) {
+function getRecipientWarning(account, recipient) {
   if (!recipient.match(/^0x[0-9a-fA-F]{40}$/)) return null
   const slice = recipient.substr(2)
   const isFullUpper = slice === slice.toUpperCase()
@@ -420,9 +420,9 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // NOT IMPLEMENTED
 
-  isRecipientValid: (currency, recipient) => Promise.resolve(isRecipientValid(currency, recipient)),
-  getRecipientWarning: (currency, recipient) =>
-    Promise.resolve(getRecipientWarning(currency, recipient)),
+  isRecipientValid: (account, recipient) => Promise.resolve(isRecipientValid(account, recipient)),
+  getRecipientWarning: (account, recipient) =>
+    Promise.resolve(getRecipientWarning(account, recipient)),
 
   createTransaction: () => ({
     amount: BigNumber(0),
