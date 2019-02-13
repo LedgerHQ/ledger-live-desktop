@@ -1,13 +1,13 @@
 // @flow
 import { Component } from 'react'
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { getEstimatedFees } from '@ledgerhq/live-common/lib/api/Fees'
 import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
 
 // FIXME we need to abstract this out like we did for CounterValues
 export default class WithFeesAPI extends Component<
   {
-    currency: Currency,
+    currency: CryptoCurrency,
     render: Fees => *,
     renderLoading: () => *,
     renderError: Error => *,

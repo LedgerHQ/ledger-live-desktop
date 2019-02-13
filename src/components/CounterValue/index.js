@@ -3,7 +3,7 @@
 import type { BigNumber } from 'bignumber.js'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
 
 import {
   counterValueCurrencySelector,
@@ -19,7 +19,7 @@ import type { State } from 'reducers'
 
 type OwnProps = {
   // wich market to query
-  currency: Currency,
+  currency: CryptoCurrency,
 
   // when? if not given: take latest
   date?: Date,

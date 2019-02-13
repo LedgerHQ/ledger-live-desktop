@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
-import type { Currency } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 
 const Cell = styled(Box).attrs({
@@ -17,7 +17,7 @@ const Cell = styled(Box).attrs({
 `
 
 type Props = {
-  currency: Currency,
+  currency: CryptoCurrency,
   accountName: string,
 }
 

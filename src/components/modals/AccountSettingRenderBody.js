@@ -7,7 +7,7 @@ import { compose } from 'redux'
 import get from 'lodash/get'
 import { translate } from 'react-i18next'
 
-import type { Account, Unit, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Account, Unit, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { MODAL_SETTINGS_ACCOUNT, MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
 import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
@@ -327,7 +327,7 @@ export default compose(
   translate(),
 )(AccountSettingRenderBody)
 
-export function InputLeft({ currency }: { currency: Currency }) {
+export function InputLeft({ currency }: { currency: CryptoCurrency }) {
   return (
     <Box ml={2} style={{ justifyContent: 'center' }} color={currency.color}>
       <CryptoCurrencyIcon currency={currency} size={16} />
