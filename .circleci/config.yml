@@ -10,7 +10,7 @@ jobs:
     <<: *defaults
     steps:
       - run: sudo apt-get update
-      - run: sudo apt-get install -y libudev-dev
+      - run: sudo apt-get install -y libudev-dev libusb-1.0-0-dev
       - run:
           name: Install latest yarn
           command: |
