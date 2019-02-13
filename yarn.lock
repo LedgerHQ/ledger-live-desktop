@@ -1730,10 +1730,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.16.1":
-  version "4.16.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.16.1.tgz#9b8d29bad5867f422566b51ba8ef262ba32a49ae"
-  integrity sha512-a0ckySEeCj+xnSr6zkbx2uFri3W+uHbEf0I5HIUjm7hXP4N36Rm8vPP+xR5oHpzIaj1DzpcFVDIBm9TgIhXwMA==
+"@ledgerhq/live-common@4.18.0":
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.18.0.tgz#0e087e18ec147feaebfaf66e6346138b4a7e4fd2"
+  integrity sha512-hcIzeuw96T2eYm13KYatg32zNyl5o16yyJrc+C+xB5mG0FeL6zSAEvodLsLqVIeJ22YXl5lVAlx8y4VVI0AseA==
   dependencies:
     "@aeternity/ledger-app-api" "0.0.4"
     "@ledgerhq/errors" "^4.32.0"
