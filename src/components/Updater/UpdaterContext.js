@@ -44,7 +44,8 @@ class Provider extends Component<UpdaterProviderProps, UpdaterProviderState> {
       this.sub = autoUpdate.send({}).subscribe({
         next: e => {
           if (e.status === 'download-progress') {
-            const downloadProgress = e.payload && e.payload.percent ? e.payload.percent : 0
+            const downloadProgress =
+              e.payload && e.payload.percent ? e.payload.percent.toFixed(0) : 0
             this.setState({ status: e.status, downloadProgress })
           } else {
             this.setStatus(e.status)
