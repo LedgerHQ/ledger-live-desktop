@@ -103,17 +103,19 @@ const getFees = async (a, transaction) => {
 const checkValidTransaction = (a, t) =>
   !t.feePerByte
     ? Promise.reject(new FeeNotLoaded())
-    : !t.amount
-      ? Promise.resolve(true)
-      : getFees(a, t)
-          .then(() => true)
-          .catch(e => {
-            if (e.code === NOT_ENOUGH_FUNDS) {
-              throw new NotEnoughBalance()
-            }
-            feesLRU.del(getFeesKey(a, t))
-            throw e
-          })
+    : t.feePerByte.eq(0)
+      ? Promise.resolve(false)
+      : !t.amount
+        ? Promise.resolve(true)
+        : getFees(a, t)
+            .then(() => true)
+            .catch(e => {
+              if (e.code === NOT_ENOUGH_FUNDS) {
+                throw new NotEnoughBalance()
+              }
+              feesLRU.del(getFeesKey(a, t))
+              throw e
+            })
 
 const LibcoreBridge: WalletBridge<Transaction> = {
   scanAccountsOnDevice(currency, devicePath) {

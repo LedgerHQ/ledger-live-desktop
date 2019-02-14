@@ -738,6 +738,9 @@
       "title": "{{message}}",
       "description": "Something went wrong. Please retry or contact us."
     },
+    "FeesAreRequired": {
+      "title": "Fees are required"
+    },
     "AccountNameRequired": {
       "title": "An account name is required",
       "description": "Please provide an account name"

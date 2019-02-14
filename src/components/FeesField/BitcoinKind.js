@@ -147,7 +147,13 @@ class FeesField extends Component<OwnProps, State> {
           onChange={onChange}
           onChangeFocus={this.onChangeFocus}
           loading={!feePerByte && !error}
-          error={!feePerByte && error ? new FeeNotLoaded() : null}
+          error={
+            !feePerByte && error
+              ? new FeeNotLoaded()
+              : feePerByte && feePerByte.isZero()
+                ? new Error(t('errors.FeesAreRequired.title'))
+                : null
+          }
           renderRight={
             <InputRight>{t('send.steps.amount.unitPerByte', { unit: satoshi.code })}</InputRight>
           }
