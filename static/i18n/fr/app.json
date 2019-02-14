@@ -925,6 +925,9 @@
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
     },
+    "FeeRequired": {
+      "title": "Fees are required"
+    },
     "UnknownMCU": {
       "title": "Unknown MCU version",
       "description": "Please contact Ledger Support"
