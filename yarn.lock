@@ -1677,10 +1677,10 @@
     camelcase "^5.0.0"
     prettier "^1.13.7"
 
-"@ledgerhq/errors@^4.32.0", "@ledgerhq/errors@^4.35.1":
-  version "4.35.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.35.1.tgz#3f162dc05480e444083b6381bd098df187751633"
-  integrity sha512-2Bo3/NRKyz3ddR07TvZ87VpDJc8fz4+ONLJnhzC0mwIwu+Pxal6SgCBiGtv503oGxkgDuG5PtODZBaehWkGRnQ==
+"@ledgerhq/errors@^4.32.0", "@ledgerhq/errors@^4.39.0":
+  version "4.39.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.39.0.tgz#10b9889f78df94ce36a4b34d9a3a45aac77be0e9"
+  integrity sha512-kBr2rnoYDACRCxTLtEufE4oCvYj6vx2oFWVVjwskBxYsF5LC9R8Mbg5C4GgvDweiWW4Io8HA9p9jCsOfdCDygg==
 
 "@ledgerhq/hw-app-btc@^4.32.0", "@ledgerhq/hw-app-btc@^4.35.0":
   version "4.35.0"

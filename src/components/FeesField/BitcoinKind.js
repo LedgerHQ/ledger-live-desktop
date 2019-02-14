@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { FeeNotLoaded } from '@ledgerhq/errors'
+import { FeeNotLoaded, FeeRequired } from '@ledgerhq/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
 import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
@@ -151,7 +151,7 @@ class FeesField extends Component<OwnProps, State> {
             !feePerByte && error
               ? new FeeNotLoaded()
               : feePerByte && feePerByte.isZero()
-                ? new Error(t('errors.FeesAreRequired.title'))
+                ? new FeeRequired()
                 : null
           }
           renderRight={
