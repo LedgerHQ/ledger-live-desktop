@@ -6,11 +6,11 @@ import { disable as disableDBMiddleware } from 'middlewares/db'
 import db from 'helpers/db'
 import { delay } from 'helpers/promise'
 import killInternalProcess from 'commands/killInternalProcess'
-import withLibcore from 'helpers/withLibcore'
+import libcoreReset from 'commands/libcoreReset'
 
 async function resetLibcore() {
+  await libcoreReset.send().toPromise()
   await killInternalProcess.send().toPromise()
-  withLibcore(core => core.freshResetAll())
 }
 
 function reload() {

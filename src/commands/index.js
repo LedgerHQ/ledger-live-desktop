@@ -16,6 +16,7 @@ import installApp from 'commands/installApp'
 import killInternalProcess from 'commands/killInternalProcess'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
+import libcoreReset from 'commands/libcoreReset'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreScanFromXPUB from 'commands/libcoreScanFromXPUB'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
@@ -44,6 +45,7 @@ const all: Array<Command<any, any>> = [
   killInternalProcess,
   libcoreGetFees,
   libcoreGetVersion,
+  libcoreReset,
   libcoreScanAccounts,
   libcoreScanFromXPUB,
   libcoreSignAndBroadcast,
