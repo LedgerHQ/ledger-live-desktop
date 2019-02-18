@@ -254,8 +254,6 @@
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
-      "titleNano": "Ledger Nano S",
-      "titleBlue": "Ledger Blue",
       "update": "업데이트",
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
