@@ -9,8 +9,10 @@ import killInternalProcess from 'commands/killInternalProcess'
 import libcoreReset from 'commands/libcoreReset'
 
 async function resetLibcore() {
-  await libcoreReset.send().toPromise()
+  // we need to stop everything that is happening right now, like syncs
   await killInternalProcess.send().toPromise()
+  // we can now ask libcore to reset itself
+  await libcoreReset.send().toPromise()
 }
 
 function reload() {
