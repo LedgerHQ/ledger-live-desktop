@@ -146,8 +146,11 @@ class GenuineCheck extends PureComponent<Props> {
         id: 'device',
         title: (
           <Trans i18nKey="deviceConnect.step1" parent="div">
-            {'Connect and unlock your '}
+            {'Connect your'}
             <Bold>{'Ledger device'}</Bold>
+            {'to your computer and enter your'}
+            <Bold>{'PIN code'}</Bold>
+            {'on your device'}
           </Trans>
         ),
         icon: usbIcon,
@@ -157,9 +160,9 @@ class GenuineCheck extends PureComponent<Props> {
         id: 'deviceInfo',
         title: (
           <Trans i18nKey="deviceConnect.dashboard" parent="div">
-            {'Navigate to the '}
-            <Bold>{'dashboard'}</Bold>
-            {' on your device'}
+            {'Go to'}
+            <Bold>{'Home screen'}</Bold>
+            {'on your device'}
           </Trans>
         ),
         icon: homeIcon,
@@ -169,9 +172,9 @@ class GenuineCheck extends PureComponent<Props> {
         id: 'isGenuine',
         title: (
           <Trans i18nKey="deviceConnect.step3" parent="div">
-            {'Allow '}
-            <Bold>{'Ledger Manager'}</Bold>
-            {' on your device'}
+            {'Confirm'}
+            <Bold>{'Authentication'}</Bold>
+            {'on your device'}
           </Trans>
         ),
         icon: genuineCheckIcon,

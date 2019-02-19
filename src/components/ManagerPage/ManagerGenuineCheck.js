@@ -28,7 +28,7 @@ class ManagerGenuineCheck extends PureComponent<Props> {
           <img
             src={i('logos/connectDevice.png')}
             alt="connect your device"
-            style={{ marginBottom: 30, maxWidth: 362, width: '100%' }}
+            style={{ marginBottom: 30, maxWidth: 25, width: '100%' }}
           />
           <Text ff="Museo Sans|Regular" fontSize={7} color="dark" style={{ marginBottom: 10 }}>
             {t('manager.device.title')}

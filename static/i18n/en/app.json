@@ -145,10 +145,10 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
-    "dashboard": "Navigate to the <1><0>{{managerAppName}}</0></1> on your device",
-    "step1": "Connect and unlock your <1>Ledger device</1>",
+    "dashboard": "Go to <1>Home screen</1> on your device",
+    "step1": "Connect your <1>Ledger device</1> to your computer and enter your <3>PIN code</3> on your device",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
+    "step3": "Confirm <1>Authentication</1> on your device"
   },
   "emptyState": {
     "sidebar": {
@@ -283,7 +283,7 @@
     "subtitle": "Install or uninstall apps on your device",
     "device": {
       "title": "Connect your device",
-      "desc": "Follow the steps below to open the Manager",
+      "desc": "Please connect your Ledger device and follow the steps below to access to the manager",
       "cta": "Connect my device"
     }
   },
