@@ -13,6 +13,7 @@ import Track from 'analytics/Track'
 import { openModal } from 'reducers/modals'
 import { MODAL_SHARE_ANALYTICS, MODAL_TECHNICAL_DATA } from 'config/constants'
 import { openURL } from 'helpers/linking'
+import { cleanDeviceName } from 'helpers/devices'
 import { urls } from 'config/urls'
 import ShareAnalytics from '../../modals/ShareAnalytics'
 import TechnicalData from '../../modals/TechnicalData'
@@ -73,7 +74,7 @@ class Analytics extends PureComponent<StepProps, State> {
           category="Onboarding"
           name="Analytics"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={cleanDeviceName(onboarding.deviceType)}
         />
         <StepContainerInner>
           <Title data-e2e="onboarding_title">{t('onboarding.analytics.title')}</Title>

@@ -15,6 +15,8 @@ type Step = {
   },
 }
 
+export type DeviceType = 'nanoX' | 'nanoS' | 'blue' | ''
+
 export type OnboardingState = {
   stepIndex: number,
   stepName: string, // TODO: specify that the string comes from Steps type
@@ -27,7 +29,7 @@ export type OnboardingState = {
     genuineCheckUnavailable: ?Error,
     displayErrorScreen: boolean,
   },
-  isLedgerNano: boolean | null,
+  deviceType: DeviceType,
   flowType: string,
   onboardingRelaunched?: boolean,
 }
@@ -43,7 +45,7 @@ const initialState: OnboardingState = {
     genuineCheckUnavailable: null,
     displayErrorScreen: false,
   },
-  isLedgerNano: null,
+  deviceType: '',
   flowType: '',
   onboardingRelaunched: false,
   steps: [
@@ -167,9 +169,9 @@ const handlers = {
     ...state,
     flowType,
   }),
-  ONBOARDING_SET_DEVICE_TYPE: (state: OnboardingState, { payload: isLedgerNano }) => ({
+  ONBOARDING_SET_DEVICE_TYPE: (state: OnboardingState, { payload: deviceType }) => ({
     ...state,
-    isLedgerNano,
+    deviceType,
   }),
   ONBOARDING_RELAUNCH: (state: OnboardingState, { payload: onboardingRelaunched }) => ({
     ...initialState,
@@ -187,5 +189,5 @@ export const nextStep = createAction('ONBOARDING_NEXT_STEP')
 export const prevStep = createAction('ONBOARDING_PREV_STEP')
 export const jumpStep = createAction('ONBOARDING_JUMP_STEP')
 export const updateGenuineCheck = createAction('UPDATE_GENUINE_CHECK')
-export const isLedgerNano = createAction('ONBOARDING_SET_DEVICE_TYPE')
+export const deviceType = createAction('ONBOARDING_SET_DEVICE_TYPE')
 export const flowType = createAction('ONBOARDING_SET_FLOW_TYPE')

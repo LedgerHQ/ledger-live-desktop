@@ -7,7 +7,8 @@ import { i } from 'helpers/staticPath'
 
 import { rgba } from 'styles/helpers'
 
-import { isLedgerNano } from 'reducers/onboarding'
+import { deviceType } from 'reducers/onboarding'
+import type { DeviceType } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
@@ -19,11 +20,11 @@ import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
-const mapDispatchToProps = { isLedgerNano }
+const mapDispatchToProps = { deviceType }
 
 class SelectDevice extends PureComponent<StepProps, {}> {
-  handleIsLedgerNano = (isLedgerNano: boolean) => {
-    this.props.isLedgerNano(isLedgerNano)
+  handleDeviceType = (deviceType: DeviceType) => {
+    this.props.deviceType(deviceType)
   }
 
   handleContinue = () => {
@@ -46,20 +47,20 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           <Box pt={4}>
             <Inner>
               <DeviceContainer
-                isActive={onboarding.isLedgerNano}
-                onClick={() => this.handleIsLedgerNano(true)}
+                isActive={onboarding.deviceType === 'nanoS'}
+                onClick={() => this.handleDeviceType('nanoS')}
               >
-                {onboarding.isLedgerNano && <DeviceSelected />}
+                {onboarding.deviceType === 'nanoS' && <DeviceSelected />}
                 <DeviceIcon>
                   <img alt="" src={i('ledger-nano-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{t('onboarding.selectDevice.ledgerNanoCard.title')}</BlockTitle>
               </DeviceContainer>
               <DeviceContainer
-                isActive={!onboarding.isLedgerNano && onboarding.isLedgerNano !== null}
-                onClick={() => this.handleIsLedgerNano(false)}
+                isActive={onboarding.deviceType === 'blue'}
+                onClick={() => this.handleDeviceType('blue')}
               >
-                {!onboarding.isLedgerNano && onboarding.isLedgerNano !== null && <DeviceSelected />}
+                {onboarding.deviceType === 'blue' && <DeviceSelected />}
                 <DeviceIcon>
                   <img alt="" src={i('ledger-blue-onb.svg')} />
                 </DeviceIcon>
@@ -73,7 +74,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           t={t}
           nextStep={this.handleContinue}
           prevStep={() => jumpStep('init')}
-          isContinueDisabled={onboarding.isLedgerNano === null}
+          isContinueDisabled={onboarding.deviceType === ''}
         />
       </FixedTopContainer>
     )

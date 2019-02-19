@@ -123,7 +123,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
             <Box style={{ width: 260, justifyContent: 'center', alignItems: 'center' }}>
               <img alt="" src={i('write-seed-onb.svg')} />
             </Box>
-            {onboarding.isLedgerNano ? (
+            {onboarding.deviceType === 'nanoS' ? (
               <Box shrink flow={2} m={0}>
                 {stepsNano.map(step => <OptionRow key={step.key} step={step} />)}
               </Box>

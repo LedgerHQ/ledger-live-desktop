@@ -11,6 +11,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import TrackPage from 'analytics/TrackPage'
+import { cleanDeviceName } from 'helpers/devices'
 
 import { Title, Description, OnboardingFooterWrapper } from '../../helperComponents'
 
@@ -28,7 +29,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
         category="Onboarding"
         name={`Genuine Check Error Page - ${page}`}
         flowType={onboarding.flowType}
-        deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        deviceType={cleanDeviceName(onboarding.deviceType)}
       />
     )
   }
@@ -59,7 +60,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
           </Fragment>
         )}
         <Box mt={5} mr={7}>
-          {onboarding.isLedgerNano ? (
+          {onboarding.deviceType === 'nanoS' ? (
             <img alt="" src={i('nano-error-onb.svg')} />
           ) : (
             <img alt="" src={i('blue-error-onb.svg')} />

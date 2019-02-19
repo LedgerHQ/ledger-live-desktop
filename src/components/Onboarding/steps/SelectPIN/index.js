@@ -5,6 +5,7 @@ import React from 'react'
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
 
+import { cleanDeviceName } from 'helpers/devices'
 import GrowScroll from 'components/base/GrowScroll'
 import { Title, FixedTopContainer } from '../../helperComponents'
 import OnboardingFooter from '../../OnboardingFooter'
@@ -25,20 +26,24 @@ export default (props: StepProps) => {
           category="Onboarding"
           name="Choose PIN"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={cleanDeviceName(onboarding.deviceType)}
         />
         {onboarding.flowType === 'restoreDevice' ? (
           <Box grow alignItems="center">
             <Title>{t('onboarding.selectPIN.restore.title')}</Title>
             <Box align="center" mt={7}>
-              {onboarding.isLedgerNano ? <SelectPINrestoreNano /> : <SelectPINrestoreBlue />}
+              {onboarding.deviceType === 'nanoS' ? (
+                <SelectPINrestoreNano />
+              ) : (
+                <SelectPINrestoreBlue />
+              )}
             </Box>
           </Box>
         ) : (
           <Box grow alignItems="center">
             <Title>{t('onboarding.selectPIN.initialize.title')}</Title>
             <Box align="center" mt={7}>
-              {onboarding.isLedgerNano ? <SelectPINnano /> : <SelectPINblue />}
+              {onboarding.deviceType === 'nanoS' ? <SelectPINnano /> : <SelectPINblue />}
             </Box>
           </Box>
         )}

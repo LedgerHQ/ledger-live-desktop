@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { colors } from 'styles/theme'
 
 import db from 'helpers/db'
+import { cleanDeviceName } from 'helpers/devices'
 import { saveSettings } from 'actions/settings'
 
 import Box from 'components/base/Box'
@@ -105,7 +106,7 @@ class SetPassword extends PureComponent<Props, State> {
           category="Onboarding"
           name="Set Password"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={cleanDeviceName(onboarding.deviceType)}
         />
         <StepContainerInner>
           <Fragment>

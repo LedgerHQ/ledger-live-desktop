@@ -18,6 +18,7 @@ import IconSocialReddit from 'icons/Reddit'
 import IconSocialGithub from 'icons/Github'
 
 import { lighten } from 'styles/helpers'
+import { cleanDeviceName } from 'helpers/devices'
 
 import type { StepProps } from '..'
 import { Title, Description } from '../helperComponents'
@@ -72,7 +73,7 @@ export default class Finish extends Component<StepProps, *> {
           category="Onboarding"
           name="Finish"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={cleanDeviceName(onboarding.deviceType)}
         />
         <ConfettiLayer>
           <ConfettiParty emit={emit} />

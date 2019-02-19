@@ -6,6 +6,8 @@ import { colors } from 'styles/theme'
 import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 
+import { cleanDeviceName } from 'helpers/devices'
+
 import FakeLink from 'components/base/FakeLink'
 import IconExclamationCircle from 'icons/ExclamationCircle'
 import Box from 'components/base/Box'
@@ -76,7 +78,7 @@ export function GenuineCheckUnavailableMessage({
           handleOpenGenuineCheckModal()
           track('Genuine Check Retry', {
             flowType: onboarding.flowType,
-            deviceType: onboarding.isLedgerNano ? 'Nano S' : 'Blue',
+            deviceType: cleanDeviceName(onboarding.deviceType),
           })
         }}
       >

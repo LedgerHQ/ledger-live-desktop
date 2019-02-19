@@ -6,6 +6,7 @@ import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
 
 import GrowScroll from 'components/base/GrowScroll'
+import { cleanDeviceName } from 'helpers/devices'
 
 import OnboardingFooter from '../../OnboardingFooter'
 import WriteSeedNano from './WriteSeedNano'
@@ -24,12 +25,12 @@ export default (props: StepProps) => {
           category="Onboarding"
           name="Recovery Phase"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={cleanDeviceName(onboarding.deviceType)}
         />
         <Box grow alignItems="center">
           {onboarding.flowType === 'restoreDevice' ? (
             <WriteSeedRestore onboarding={onboarding} />
-          ) : onboarding.isLedgerNano ? (
+          ) : onboarding.deviceType === 'nanoS' ? (
             <WriteSeedNano />
           ) : (
             <WriteSeedBlue />
