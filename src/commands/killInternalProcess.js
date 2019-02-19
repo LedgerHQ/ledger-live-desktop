@@ -1,10 +1,10 @@
 // @flow
 
 import { createCommand, Command } from 'helpers/ipc'
-import { of } from 'rxjs'
+import { never } from 'rxjs'
 
 type Input = void
-type Result = boolean
+type Result = void
 
 const cmd: Command<Input, Result> = createCommand('killInternalProcess', () => {
   setTimeout(() => {
@@ -12,7 +12,8 @@ const cmd: Command<Input, Result> = createCommand('killInternalProcess', () => {
     // special exit code for better identification
     process.exit(42)
   })
-  return of(true)
+  // The command shouldn't finish now because process.exit will make it end!
+  return never()
 })
 
 export default cmd
