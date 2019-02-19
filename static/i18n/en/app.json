@@ -254,8 +254,6 @@
     },
     "firmware": {
       "installed": "Firmware version {{version}}",
-      "titleNano": "Ledger Nano S",
-      "titleBlue": "Ledger Blue",
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",

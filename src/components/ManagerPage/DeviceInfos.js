@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react'
 import Text from 'components/base/Text'
 import Box, { Card } from 'components/base/Box'
 import Button from 'components/base/Button'
-
+import { getDeviceModel } from '@ledgerhq/devices'
 import type { Device, MemoryInfos } from 'types/common'
 
 import MemInfos from './MemInfos'
@@ -43,10 +43,11 @@ class DeviceInfos extends PureComponent<Props, State> {
       return <Box py={5}>{'You dont have any device connected'}</Box>
     }
 
+    const deviceInfos = getDeviceModel(device.modelId)
+
     const title = (
       <Text>
-        {device.manufacturer}
-        <Text ff="Museo Sans|Bold">{` ${device.product}`}</Text>
+        <Text ff="Museo Sans|Bold">{`${deviceInfos.productName}`}</Text>
       </Text>
     )
     return (

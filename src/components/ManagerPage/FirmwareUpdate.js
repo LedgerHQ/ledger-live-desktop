@@ -3,10 +3,10 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { translate } from 'react-i18next'
+import { getDeviceModel } from '@ledgerhq/devices'
+import type { DeviceInfo, FirmwareUpdateContext } from '@ledgerhq/live-common/lib/types/manager'
 
 import type { Device, T } from 'types/common'
-
-import type { DeviceInfo, FirmwareUpdateContext } from '@ledgerhq/live-common/lib/types/manager'
 import type { StepId } from 'components/modals/UpdateFirmware'
 
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
@@ -81,18 +81,19 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   render() {
     const { deviceInfo, t, device } = this.props
     const { firmware, modal, stepId, ready } = this.state
+
+    const deviceSpecs = getDeviceModel(device.modelId)
+
     return (
       <Card p={4}>
         <Box horizontal align="center" flow={2}>
           <Box color="dark">
-            {device.product === 'Blue' ? <Blue size={30} /> : <NanoS size={30} />}
+            {deviceSpecs.id === 'blue' ? <Blue size={30} /> : <NanoS size={30} />}
           </Box>
           <Box>
             <Box horizontal align="center">
               <Text ff="Open Sans|SemiBold" fontSize={4} color="dark">
-                {device.product === 'Blue'
-                  ? t('manager.firmware.titleBlue')
-                  : t('manager.firmware.titleNano')}
+                {deviceSpecs.productName}
               </Text>
               <Box color="wallet" ml={2}>
                 <Tooltip render={() => t('manager.yourDeviceIsGenuine')}>
