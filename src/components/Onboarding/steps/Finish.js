@@ -3,6 +3,8 @@
 import React, { Component } from 'react'
 import { openURL } from 'helpers/linking'
 import styled from 'styled-components'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { i } from 'helpers/staticPath'
 import { urls } from 'config/urls'
 
@@ -66,13 +68,16 @@ export default class Finish extends Component<StepProps, *> {
   render() {
     const { finish, t, onboarding } = this.props
     const { emit } = this.state
+
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <Box sticky justifyContent="center">
         <TrackPage
           category="Onboarding"
           name="Finish"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={model.productName}
         />
         <ConfettiLayer>
           <ConfettiParty emit={emit} />
