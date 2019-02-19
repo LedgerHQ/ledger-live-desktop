@@ -10,7 +10,10 @@ import libcoreReset from 'commands/libcoreReset'
 
 async function resetLibcore() {
   // we need to stop everything that is happening right now, like syncs
-  await killInternalProcess.send().toPromise()
+  await killInternalProcess
+    .send()
+    .toPromise()
+    .catch(() => {}) // this is a normal error due to the crash of the process, we ignore it
   // we can now ask libcore to reset itself
   await libcoreReset.send().toPromise()
 }
