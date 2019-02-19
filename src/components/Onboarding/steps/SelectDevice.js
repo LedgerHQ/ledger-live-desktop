@@ -9,6 +9,7 @@ import { rgba } from 'styles/helpers'
 
 import { deviceType } from 'reducers/onboarding'
 import type { DeviceType } from 'reducers/onboarding'
+import { deviceModelName } from 'helpers/devices'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
@@ -47,14 +48,24 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           <Box pt={4}>
             <Inner>
               <DeviceContainer
+                isActive={onboarding.deviceType === 'nanoX'}
+                onClick={() => this.handleDeviceType('nanoX')}
+              >
+                {onboarding.deviceType === 'nanoX' && <DeviceSelected />}
+                <DeviceIcon>
+                  <img alt="" src={i('ledger-nano-x-onb.svg')} />
+                </DeviceIcon>
+                <BlockTitle>{deviceModelName('nanoX')}</BlockTitle>
+              </DeviceContainer>
+              <DeviceContainer
                 isActive={onboarding.deviceType === 'nanoS'}
                 onClick={() => this.handleDeviceType('nanoS')}
               >
                 {onboarding.deviceType === 'nanoS' && <DeviceSelected />}
                 <DeviceIcon>
-                  <img alt="" src={i('ledger-nano-onb.svg')} />
+                  <img alt="" src={i('ledger-nano-s-onb.svg')} />
                 </DeviceIcon>
-                <BlockTitle>{t('onboarding.selectDevice.ledgerNanoCard.title')}</BlockTitle>
+                <BlockTitle>{deviceModelName('nanoS')}</BlockTitle>
               </DeviceContainer>
               <DeviceContainer
                 isActive={onboarding.deviceType === 'blue'}
@@ -64,7 +75,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
                 <DeviceIcon>
                   <img alt="" src={i('ledger-blue-onb.svg')} />
                 </DeviceIcon>
-                <BlockTitle>{t('onboarding.selectDevice.ledgerBlueCard.title')}</BlockTitle>
+                <BlockTitle>{deviceModelName('blue')}</BlockTitle>
               </DeviceContainer>
             </Inner>
           </Box>
