@@ -15,6 +15,17 @@ import { getDeviceModel } from '@ledgerhq/devices'
 
 import { Title, Description, OnboardingFooterWrapper } from '../../helperComponents'
 
+const Img = ({ type }: { type: string }) => {
+  switch (type) {
+    case 'blue':
+      return <img alt="" src={i('blue-error-onb.svg')} />
+    case 'nanoX':
+      return <img alt="" src={i('nano-x-error-onb.svg')} />
+    default:
+      return <img alt="" src={i('nano-error-onb.svg')} />
+  }
+}
+
 type Props = {
   t: T,
   redoGenuineCheck: () => void,
@@ -63,11 +74,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
           </Fragment>
         )}
         <Box mt={5} mr={7}>
-          {onboarding.deviceModelId === 'nanoS' ? (
-            <img alt="" src={i('nano-error-onb.svg')} />
-          ) : (
-            <img alt="" src={i('blue-error-onb.svg')} />
-          )}
+          <Img type={onboarding.deviceModelId} />
         </Box>
       </Fragment>
     )
