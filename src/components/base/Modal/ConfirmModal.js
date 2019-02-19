@@ -29,6 +29,7 @@ type Props = {
   analyticsName: string,
   cancellable?: boolean,
   centered?: boolean,
+  children?: *,
 }
 
 class ConfirmModal extends PureComponent<Props> {
