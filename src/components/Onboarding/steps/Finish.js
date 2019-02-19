@@ -77,7 +77,7 @@ export default class Finish extends Component<StepProps, *> {
           category="Onboarding"
           name="Finish"
           flowType={onboarding.flowType}
-          deviceType={model ? model.productName : ''}
+          deviceType={model.productName}
         />
         <ConfettiLayer>
           <ConfettiParty emit={emit} />

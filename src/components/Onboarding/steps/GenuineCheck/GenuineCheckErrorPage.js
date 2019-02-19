@@ -43,7 +43,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
         category="Onboarding"
         name={`Genuine Check Error Page - ${page}`}
         flowType={onboarding.flowType}
-        deviceType={model ? model.productName : ''}
+        deviceType={model.productName}
       />
     )
   }

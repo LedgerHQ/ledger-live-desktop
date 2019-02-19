@@ -79,7 +79,7 @@ export function GenuineCheckUnavailableMessage({
           handleOpenGenuineCheckModal()
           track('Genuine Check Retry', {
             flowType: onboarding.flowType,
-            deviceType: model ? model.productName : '',
+            deviceType: model.productName,
           })
         }}
       >

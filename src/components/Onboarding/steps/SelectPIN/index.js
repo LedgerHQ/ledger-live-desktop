@@ -41,7 +41,7 @@ export default (props: StepProps) => {
           category="Onboarding"
           name="Choose PIN"
           flowType={onboarding.flowType}
-          deviceType={model ? model.productName : ''}
+          deviceType={model.productName}
         />
         {onboarding.flowType === 'restoreDevice' ? (
           <Box grow alignItems="center">

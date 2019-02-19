@@ -77,7 +77,7 @@ class Analytics extends PureComponent<StepProps, State> {
           category="Onboarding"
           name="Analytics"
           flowType={onboarding.flowType}
-          deviceType={model ? model.productName : ''}
+          deviceType={model.productName}
         />
         <StepContainerInner>
           <Title data-e2e="onboarding_title">{t('onboarding.analytics.title')}</Title>

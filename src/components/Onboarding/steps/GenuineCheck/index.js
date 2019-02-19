@@ -174,7 +174,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
           category="Onboarding"
           name="Genuine Check"
           flowType={onboarding.flowType}
-          deviceType={model ? model.productName : ''}
+          deviceType={model.productName}
         />
         <StepContainerInner>
           <Title>{t('onboarding.genuineCheck.title')}</Title>

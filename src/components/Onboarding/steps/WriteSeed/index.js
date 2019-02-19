@@ -26,7 +26,7 @@ export default (props: StepProps) => {
           category="Onboarding"
           name="Recovery Phase"
           flowType={onboarding.flowType}
-          deviceType={model ? model.productName : ''}
+          deviceType={model.productName}
         />
         <Box grow alignItems="center">
           {onboarding.flowType === 'restoreDevice' ? (
