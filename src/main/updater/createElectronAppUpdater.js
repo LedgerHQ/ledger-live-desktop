@@ -26,9 +26,9 @@ export default async ({ feedURL, updateVersion }: { feedURL: string, updateVersi
     getHashFile: () => getDistantFileContent(hashFileURL),
     getHashFileSignature: () => getDistantFileContent(hashSigFileURL),
     getNextKey: (fingerprint: ?string) =>
-      fingerprint ? getDistantFileContent(`${keysURL}/${fingerprint}.asc`) : pubKey,
+      fingerprint ? getDistantFileContent(`${keysURL}/${fingerprint}.pem`) : pubKey,
     getNextKeySignature: async (fingerprint: string) =>
-      getDistantFileContent(`${keysURL}/${fingerprint}.asc.sig`),
+      getDistantFileContent(`${keysURL}/${fingerprint}.pem.sig`),
   })
 }
 
