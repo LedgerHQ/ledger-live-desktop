@@ -1,12 +1,12 @@
 // @flow
 
 import React from 'react'
+import { getDeviceModel } from '@ledgerhq/devices'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
-import type { DeviceType } from 'reducers/onboarding'
+import type { DeviceModelId } from 'reducers/onboarding'
 
-import { cleanDeviceName } from 'helpers/devices'
 import GrowScroll from 'components/base/GrowScroll'
 import { Title, FixedTopContainer } from '../../helperComponents'
 import OnboardingFooter from '../../OnboardingFooter'
@@ -17,14 +17,8 @@ import SelectPINrestoreNano from './SelectPINrestoreNano'
 import SelectPINrestoreBlue from './SelectPINrestoreBlue'
 import type { StepProps } from '../..'
 
-const SelectPinSwitcher = ({
-  deviceType,
-  restore = false,
-}: {
-  deviceType: DeviceType,
-  restore?: boolean,
-}) => {
-  switch (deviceType) {
+const SelectPin = ({ modelId, restore = false }: { modelId: DeviceModelId, restore?: boolean }) => {
+  switch (modelId) {
     case 'nanoX':
       return restore ? <SelectPINnanoX /> : <SelectPINnanoX /> // TODO: Restore NanoX
     case 'blue':
@@ -37,6 +31,8 @@ const SelectPinSwitcher = ({
 export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
 
+  const model = getDeviceModel(onboarding.deviceModelId)
+
   return (
     <FixedTopContainer>
       <GrowScroll pb={7}>
@@ -44,20 +40,20 @@ export default (props: StepProps) => {
           category="Onboarding"
           name="Choose PIN"
           flowType={onboarding.flowType}
-          deviceType={cleanDeviceName(onboarding.deviceType)}
+          deviceType={model ? model.productName : ''}
         />
         {onboarding.flowType === 'restoreDevice' ? (
           <Box grow alignItems="center">
             <Title>{t('onboarding.selectPIN.restore.title')}</Title>
             <Box align="center" mt={7}>
-              <SelectPinSwitcher deviceType={onboarding.deviceType} restore />
+              <SelectPin modelId={onboarding.deviceModelId} restore />
             </Box>
           </Box>
         ) : (
           <Box grow alignItems="center">
             <Title>{t('onboarding.selectPIN.initialize.title')}</Title>
             <Box align="center" mt={7}>
-              <SelectPinSwitcher deviceType={onboarding.deviceType} />
+              <SelectPin modelId={onboarding.deviceModelId} />
             </Box>
           </Box>
         )}

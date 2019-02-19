@@ -3,6 +3,8 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import Switch from 'components/base/Switch'
@@ -13,7 +15,6 @@ import Track from 'analytics/Track'
 import { openModal } from 'reducers/modals'
 import { MODAL_SHARE_ANALYTICS, MODAL_TECHNICAL_DATA } from 'config/constants'
 import { openURL } from 'helpers/linking'
-import { cleanDeviceName } from 'helpers/devices'
 import { urls } from 'config/urls'
 import ShareAnalytics from '../../modals/ShareAnalytics'
 import TechnicalData from '../../modals/TechnicalData'
@@ -68,13 +69,15 @@ class Analytics extends PureComponent<StepProps, State> {
     const { nextStep, t, onboarding } = this.props
     const { analyticsToggle, sentryLogsToggle } = this.state
 
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <FixedTopContainer>
         <TrackPage
           category="Onboarding"
           name="Analytics"
           flowType={onboarding.flowType}
-          deviceType={cleanDeviceName(onboarding.deviceType)}
+          deviceType={model ? model.productName : ''}
         />
         <StepContainerInner>
           <Title data-e2e="onboarding_title">{t('onboarding.analytics.title')}</Title>

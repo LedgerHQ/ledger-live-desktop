@@ -3,6 +3,8 @@
 import React, { Component } from 'react'
 import { openURL } from 'helpers/linking'
 import styled from 'styled-components'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { i } from 'helpers/staticPath'
 import { urls } from 'config/urls'
 
@@ -18,7 +20,6 @@ import IconSocialReddit from 'icons/Reddit'
 import IconSocialGithub from 'icons/Github'
 
 import { lighten } from 'styles/helpers'
-import { cleanDeviceName } from 'helpers/devices'
 
 import type { StepProps } from '..'
 import { Title, Description } from '../helperComponents'
@@ -67,13 +68,16 @@ export default class Finish extends Component<StepProps, *> {
   render() {
     const { finish, t, onboarding } = this.props
     const { emit } = this.state
+
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <Box sticky justifyContent="center">
         <TrackPage
           category="Onboarding"
           name="Finish"
           flowType={onboarding.flowType}
-          deviceType={cleanDeviceName(onboarding.deviceType)}
+          deviceType={model ? model.productName : ''}
         />
         <ConfettiLayer>
           <ConfettiParty emit={emit} />

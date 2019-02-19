@@ -2,10 +2,11 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { colors } from 'styles/theme'
 
 import db from 'helpers/db'
-import { cleanDeviceName } from 'helpers/devices'
 import { saveSettings } from 'actions/settings'
 
 import Box from 'components/base/Box'
@@ -106,7 +107,7 @@ class SetPassword extends PureComponent<Props, State> {
           category="Onboarding"
           name="Set Password"
           flowType={onboarding.flowType}
-          deviceType={cleanDeviceName(onboarding.deviceType)}
+          deviceType={getDeviceModel(onboarding.deviceModelId).productName}
         />
         <StepContainerInner>
           <Fragment>

@@ -11,7 +11,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import TrackPage from 'analytics/TrackPage'
-import { cleanDeviceName } from 'helpers/devices'
+import { getDeviceModel } from '@ledgerhq/devices'
 
 import { Title, Description, OnboardingFooterWrapper } from '../../helperComponents'
 
@@ -24,12 +24,15 @@ type Props = {
 class GenuineCheckErrorPage extends PureComponent<Props, *> {
   trackErrorPage = (page: string) => {
     const { onboarding } = this.props
+
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <TrackPage
         category="Onboarding"
         name={`Genuine Check Error Page - ${page}`}
         flowType={onboarding.flowType}
-        deviceType={cleanDeviceName(onboarding.deviceType)}
+        deviceType={model ? model.productName : ''}
       />
     )
   }
@@ -60,7 +63,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
           </Fragment>
         )}
         <Box mt={5} mr={7}>
-          {onboarding.deviceType === 'nanoS' ? (
+          {onboarding.deviceModelId === 'nanoS' ? (
             <img alt="" src={i('nano-error-onb.svg')} />
           ) : (
             <img alt="" src={i('blue-error-onb.svg')} />

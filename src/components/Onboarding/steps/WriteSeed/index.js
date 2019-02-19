@@ -1,12 +1,11 @@
 // @flow
 
 import React from 'react'
-
+import { getDeviceModel } from '@ledgerhq/devices'
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
 
 import GrowScroll from 'components/base/GrowScroll'
-import { cleanDeviceName } from 'helpers/devices'
 
 import OnboardingFooter from '../../OnboardingFooter'
 import WriteSeedNano from './WriteSeedNano'
@@ -18,6 +17,8 @@ import type { StepProps } from '../..'
 export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
 
+  const model = getDeviceModel(onboarding.deviceModelId)
+
   return (
     <FixedTopContainer>
       <GrowScroll pb={7}>
@@ -25,12 +26,12 @@ export default (props: StepProps) => {
           category="Onboarding"
           name="Recovery Phase"
           flowType={onboarding.flowType}
-          deviceType={cleanDeviceName(onboarding.deviceType)}
+          deviceType={model ? model.productName : ''}
         />
         <Box grow alignItems="center">
           {onboarding.flowType === 'restoreDevice' ? (
             <WriteSeedRestore onboarding={onboarding} />
-          ) : onboarding.deviceType === 'nanoS' ? (
+          ) : onboarding.deviceModelId === 'nanoS' ? (
             <WriteSeedNano />
           ) : (
             <WriteSeedBlue />

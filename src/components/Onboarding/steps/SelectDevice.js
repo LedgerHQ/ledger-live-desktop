@@ -3,13 +3,14 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { i } from 'helpers/staticPath'
 
 import { rgba } from 'styles/helpers'
 
-import { deviceType } from 'reducers/onboarding'
-import type { DeviceType } from 'reducers/onboarding'
-import { deviceModelName } from 'helpers/devices'
+import { deviceModelId } from 'reducers/onboarding'
+import type { DeviceModelId } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
@@ -21,11 +22,11 @@ import OnboardingFooter from '../OnboardingFooter'
 
 import type { StepProps } from '..'
 
-const mapDispatchToProps = { deviceType }
+const mapDispatchToProps = { deviceModelId }
 
 class SelectDevice extends PureComponent<StepProps, {}> {
-  handleDeviceType = (deviceType: DeviceType) => {
-    this.props.deviceType(deviceType)
+  handleDeviceModelId = (deviceModelId: DeviceModelId) => {
+    this.props.deviceModelId(deviceModelId)
   }
 
   handleContinue = () => {
@@ -48,34 +49,34 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           <Box pt={4}>
             <Inner>
               <DeviceContainer
-                isActive={onboarding.deviceType === 'nanoX'}
-                onClick={() => this.handleDeviceType('nanoX')}
+                isActive={onboarding.deviceModelId === 'nanoX'}
+                onClick={() => this.handleDeviceModelId('nanoX')}
               >
-                {onboarding.deviceType === 'nanoX' && <DeviceSelected />}
+                {onboarding.deviceModelId === 'nanoX' && <DeviceSelected />}
                 <DeviceIcon>
                   <img alt="" src={i('ledger-nano-x-onb.svg')} />
                 </DeviceIcon>
-                <BlockTitle>{deviceModelName('nanoX')}</BlockTitle>
+                <BlockTitle>{getDeviceModel('nanoX').productName}</BlockTitle>
               </DeviceContainer>
               <DeviceContainer
-                isActive={onboarding.deviceType === 'nanoS'}
-                onClick={() => this.handleDeviceType('nanoS')}
+                isActive={onboarding.deviceModelId === 'nanoS'}
+                onClick={() => this.handleDeviceModelId('nanoS')}
               >
-                {onboarding.deviceType === 'nanoS' && <DeviceSelected />}
+                {onboarding.deviceModelId === 'nanoS' && <DeviceSelected />}
                 <DeviceIcon>
                   <img alt="" src={i('ledger-nano-s-onb.svg')} />
                 </DeviceIcon>
-                <BlockTitle>{deviceModelName('nanoS')}</BlockTitle>
+                <BlockTitle>{getDeviceModel('nanoS').productName}</BlockTitle>
               </DeviceContainer>
               <DeviceContainer
-                isActive={onboarding.deviceType === 'blue'}
-                onClick={() => this.handleDeviceType('blue')}
+                isActive={onboarding.deviceModelId === 'blue'}
+                onClick={() => this.handleDeviceModelId('blue')}
               >
-                {onboarding.deviceType === 'blue' && <DeviceSelected />}
+                {onboarding.deviceModelId === 'blue' && <DeviceSelected />}
                 <DeviceIcon>
                   <img alt="" src={i('ledger-blue-onb.svg')} />
                 </DeviceIcon>
-                <BlockTitle>{deviceModelName('blue')}</BlockTitle>
+                <BlockTitle>{getDeviceModel('blue').productName}</BlockTitle>
               </DeviceContainer>
             </Inner>
           </Box>
@@ -85,7 +86,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           t={t}
           nextStep={this.handleContinue}
           prevStep={() => jumpStep('init')}
-          isContinueDisabled={onboarding.deviceType === ''}
+          isContinueDisabled={onboarding.deviceModelId === ''}
         />
       </FixedTopContainer>
     )

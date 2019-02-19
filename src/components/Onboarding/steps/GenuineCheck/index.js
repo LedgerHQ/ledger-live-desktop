@@ -3,11 +3,10 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { colors } from 'styles/theme'
-
 import { updateGenuineCheck } from 'reducers/onboarding'
-
-import { cleanDeviceName } from 'helpers/devices'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
@@ -167,13 +166,15 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       return this.renderGenuineFail()
     }
 
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <FixedTopContainer>
         <TrackPage
           category="Onboarding"
           name="Genuine Check"
           flowType={onboarding.flowType}
-          deviceType={cleanDeviceName(onboarding.deviceType)}
+          deviceType={model ? model.productName : ''}
         />
         <StepContainerInner>
           <Title>{t('onboarding.genuineCheck.title')}</Title>

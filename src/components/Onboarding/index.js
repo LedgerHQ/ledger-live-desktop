@@ -19,7 +19,7 @@ import {
   prevStep,
   jumpStep,
   updateGenuineCheck,
-  deviceType,
+  deviceModelId,
   flowType,
   relaunchOnboarding,
   onboardingRelaunchedSelector,
@@ -102,7 +102,7 @@ export type StepProps = {
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
   openModal: Function,
-  deviceType: Function,
+  deviceModelId: Function,
   flowType: Function,
 }
 
@@ -171,7 +171,7 @@ class Onboarding extends PureComponent<Props> {
       settings,
       updateGenuineCheck,
       openModal,
-      deviceType,
+      deviceModelId,
       flowType,
       prevStep,
       nextStep,
