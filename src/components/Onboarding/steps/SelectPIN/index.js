@@ -14,13 +14,14 @@ import SelectPINnano from './SelectPINnano'
 import SelectPINblue from './SelectPINblue'
 import SelectPINnanoX from './SelectPINnanoX'
 import SelectPINrestoreNano from './SelectPINrestoreNano'
+import SelectPINRestoreNanoX from './SelectPINRestoreNanoX'
 import SelectPINrestoreBlue from './SelectPINrestoreBlue'
 import type { StepProps } from '../..'
 
 const SelectPin = ({ modelId, restore = false }: { modelId: DeviceModelId, restore?: boolean }) => {
   switch (modelId) {
     case 'nanoX':
-      return restore ? <SelectPINnanoX /> : <SelectPINnanoX /> // TODO: Restore NanoX
+      return restore ? <SelectPINRestoreNanoX /> : <SelectPINnanoX />
     case 'blue':
       return restore ? <SelectPINrestoreBlue /> : <SelectPINblue />
     default:

@@ -602,6 +602,13 @@
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
+          "nanoX": {
+            "step1": "Connect your Ledger Nano X to your computer.",
+            "step2": "Press both buttons as instructed on your Ledger Nano X screen.",
+            "step3": "Press the left button to cancel Configure as new device.",
+            "step4": "Press the right button to select Restore configuration.",
+            "step5": "Choose a PIN code between 4 and 8 digits long."
+          },
           "blue": {
             "step1": "Connect the Ledger Blue to your computer.",
             "step2": "Tap on <1><0>Restore configuration</0></1>.",
