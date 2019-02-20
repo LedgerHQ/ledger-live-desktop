@@ -3,7 +3,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
 import { compose } from 'redux'
-import IconNanoX from 'icons/device/NanoX'
+import IconNanoX from 'icons/device/NanoXBanner'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
