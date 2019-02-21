@@ -7,6 +7,7 @@ import { translate } from 'react-i18next'
 import logger from 'logger'
 import type { T } from 'types/common'
 import { hardReset } from 'helpers/reset'
+import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ConfirmModal from 'components/base/Modal/ConfirmModal'
@@ -73,7 +74,9 @@ class ResetButton extends PureComponent<Props, State> {
               <IconTriangleWarning width={23} height={21} />
             </IconWrapperCircle>
           )}
-        />
+        >
+          <SyncSkipUnderPriority priority={999} />
+        </ConfirmModal>
 
         <ResetFallbackModal isOpened={fallbackOpened} onClose={this.closeFallback} />
       </Fragment>

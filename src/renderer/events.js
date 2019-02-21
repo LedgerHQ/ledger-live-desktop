@@ -51,14 +51,19 @@ export default ({ store }: { store: Object }) => {
 
   function syncDevices() {
     syncDeviceSub = listenDevices.send().subscribe(
-      ({ device, type }) => {
+      ({ device, deviceModel, type }) => {
         if (device) {
+          const stateDevice = {
+            path: device.path,
+            modelId: deviceModel ? deviceModel.id : 'nanoS',
+            type: 'hid',
+          }
           if (type === 'add') {
             d.device('Device - add')
-            store.dispatch(addDevice(device))
+            store.dispatch(addDevice(stateDevice))
           } else if (type === 'remove') {
             d.device('Device - remove')
-            store.dispatch(removeDevice(device))
+            store.dispatch(removeDevice(stateDevice))
           }
         }
       },

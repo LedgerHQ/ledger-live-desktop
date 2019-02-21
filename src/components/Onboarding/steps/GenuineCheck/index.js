@@ -3,8 +3,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { colors } from 'styles/theme'
+import { getDeviceModel } from '@ledgerhq/devices'
 
+import { colors } from 'styles/theme'
 import { updateGenuineCheck } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
@@ -165,13 +166,15 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       return this.renderGenuineFail()
     }
 
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <FixedTopContainer>
         <TrackPage
           category="Onboarding"
           name="Genuine Check"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={model.productName}
         />
         <StepContainerInner>
           <Title>{t('onboarding.genuineCheck.title')}</Title>

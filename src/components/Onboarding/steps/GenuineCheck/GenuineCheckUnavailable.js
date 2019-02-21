@@ -1,8 +1,9 @@
 // @flow
 
 import React from 'react'
-import { colors } from 'styles/theme'
+import { getDeviceModel } from '@ledgerhq/devices'
 
+import { colors } from 'styles/theme'
 import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
 
@@ -54,6 +55,8 @@ export function GenuineCheckUnavailableMessage({
   t: T,
   onboarding: OnboardingState,
 }) {
+  const model = getDeviceModel(onboarding.deviceModelId)
+
   return (
     <Box
       horizontal
@@ -76,7 +79,7 @@ export function GenuineCheckUnavailableMessage({
           handleOpenGenuineCheckModal()
           track('Genuine Check Retry', {
             flowType: onboarding.flowType,
-            deviceType: onboarding.isLedgerNano ? 'Nano S' : 'Blue',
+            deviceType: model.productName,
           })
         }}
       >

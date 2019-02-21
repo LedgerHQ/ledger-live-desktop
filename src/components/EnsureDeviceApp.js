@@ -98,8 +98,11 @@ class EnsureDeviceApp extends Component<{
             id: 'device',
             title: (
               <Trans i18nKey="deviceConnect.step1" parent="div">
-                {'Connect and unlock your '}
+                {'Connect your'}
                 <Bold>{'Ledger device'}</Bold>
+                {'to your computer and enter your'}
+                <Bold>{'PIN code'}</Bold>
+                {'  on your device'}
               </Trans>
             ),
             icon: usbIcon,

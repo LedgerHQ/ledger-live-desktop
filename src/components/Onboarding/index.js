@@ -19,7 +19,7 @@ import {
   prevStep,
   jumpStep,
   updateGenuineCheck,
-  isLedgerNano,
+  deviceModelId,
   flowType,
   relaunchOnboarding,
   onboardingRelaunchedSelector,
@@ -102,7 +102,7 @@ export type StepProps = {
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
   openModal: Function,
-  isLedgerNano: Function,
+  deviceModelId: Function,
   flowType: Function,
 }
 
@@ -171,7 +171,7 @@ class Onboarding extends PureComponent<Props> {
       settings,
       updateGenuineCheck,
       openModal,
-      isLedgerNano,
+      deviceModelId,
       flowType,
       prevStep,
       nextStep,

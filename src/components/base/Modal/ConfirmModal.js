@@ -29,6 +29,7 @@ type Props = {
   analyticsName: string,
   cancellable?: boolean,
   centered?: boolean,
+  children?: *,
 }
 
 class ConfirmModal extends PureComponent<Props> {
@@ -50,6 +51,7 @@ class ConfirmModal extends PureComponent<Props> {
       t,
       analyticsName,
       centered,
+      children,
       ...props
     } = this.props
 
@@ -91,6 +93,7 @@ class ConfirmModal extends PureComponent<Props> {
               <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center">
                 {desc}
               </Box>
+              {children}
             </Box>
           )}
         />
