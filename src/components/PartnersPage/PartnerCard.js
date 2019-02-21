@@ -11,29 +11,30 @@ import { FakeLink } from 'components/base/Link'
 
 type CardType = {
   id: string,
-  logo: any,
+  Logo: any,
   url: string,
 }
 
-export default class ExchangeCard extends PureComponent<{ t: T, card: CardType }> {
+export default class PartnerCard extends PureComponent<{ t: T, card: CardType }> {
   onClick = () => {
     const { card } = this.props
-    openURL(card.url, 'VisitExchange', { id: card.id })
+    openURL(card.url, 'VisitPartner', { id: card.id })
   }
+
   render() {
     const {
-      card: { logo, id },
+      card: { Logo, id },
       t,
     } = this.props
     return (
       <Card horizontal py={5} px={6}>
-        <Box justify="center" style={{ width: 200 }}>
-          {logo}
+        <Box justify="center" style={{ width: 180, marginRight: 64 }}>
+          <Logo />
         </Box>
         <Box shrink ff="Open Sans|Regular" fontSize={4} flow={3}>
-          <Box>{t(`exchange.${id}`)}</Box>
+          <Box>{t(`partners.${id}`)}</Box>
           <Box horizontal align="center" color="wallet" flow={1}>
-            <FakeLink onClick={this.onClick}>{t('exchange.visitWebsite')}</FakeLink>
+            <FakeLink onClick={this.onClick}>{t('partners.visitWebsite')}</FakeLink>
             <ExternalLinkIcon size={14} />
           </Box>
         </Box>

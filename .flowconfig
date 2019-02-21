@@ -6,6 +6,8 @@
 [untyped]
 .*/node_modules/react-select
 <PROJECT_ROOT>/node_modules/qrloop/lib/Buffer.js*
+<PROJECT_ROOT>/node_modules/@ledgerhq/live-common/lib/partners/icons/react/*
+<PROJECT_ROOT>/node_modules/@ledgerhq/live-common/lib/partners/react.jsarn
 
 [include]
 
@@ -18,5 +20,6 @@ flow-defs
 [options]
 module.system.node.resolve_dirname=node_modules
 module.system.node.resolve_dirname=./src
+munge_underscores=true
 
 [strict]
