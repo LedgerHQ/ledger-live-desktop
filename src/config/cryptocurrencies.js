@@ -38,4 +38,5 @@ export const listCryptoCurrencies = memoize(
       .filter(c => supported.includes(c.id))
       .filter(c => (onlyTerminated ? c.terminated : !c.terminated))
       .sort((a, b) => a.name.localeCompare(b.name)),
+  (a?: boolean, b?: boolean) => `${a ? 1 : 0}_${b ? 1 : 0}`,
 )

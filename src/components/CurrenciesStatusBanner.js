@@ -99,7 +99,7 @@ class CurrenciesStatusBanner extends PureComponent<Props> {
         id: coin.id,
         nonce: 98,
         message: t('banners.genericTerminatedCrypto', { coinName: coin.name }),
-        link: coin.terminated && coin.terminated.link || "#",
+        link: (coin.terminated && coin.terminated.link) || '#',
       })),
     )
 
