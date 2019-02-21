@@ -15,6 +15,7 @@ import IconCross from 'icons/Cross'
 import IconTriangleWarning from 'icons/TriangleWarning'
 import IconChevronRight from 'icons/ChevronRight'
 
+import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import { dismissedBannersSelector } from 'reducers/settings'
 import { currenciesStatusSelector, fetchCurrenciesStatus } from 'reducers/currenciesStatus'
 import { currenciesSelector } from 'reducers/accounts'
@@ -92,11 +93,22 @@ class CurrenciesStatusBanner extends PureComponent<Props> {
 
   render() {
     const { dismissedBanners, accountsCurrencies, currenciesStatus, t } = this.props
-    const filtered = currenciesStatus.filter(
+
+    const currenciesStatusWithTerminated = currenciesStatus.concat(
+      listCryptoCurrencies(true, true).map(coin => ({
+        id: coin.id,
+        nonce: 98,
+        message: t('banners.genericTerminatedCrypto', { coinName: coin.name }),
+        link: coin.terminated && coin.terminated.link || "#",
+      })),
+    )
+
+    const filtered = currenciesStatusWithTerminated.filter(
       item =>
         accountsCurrencies.find(cur => cur.id === item.id) &&
         dismissedBanners.indexOf(getItemKey(item)) === -1,
     )
+
     if (!filtered.length) return null
     return (
       <Box flow={2} style={styles.container}>
