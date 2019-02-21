@@ -1,11 +1,8 @@
 // @flow
 
 export type Device = {
-  manufacturer: string,
   path: string,
-  product: string,
-  productId: string,
-  vendorId: string,
+  modelId: string,
 }
 
 // -------------------- Settings

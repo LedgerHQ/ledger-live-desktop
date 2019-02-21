@@ -146,7 +146,7 @@ class GenuineCheck extends PureComponent<Props> {
         id: 'device',
         title: (
           <Trans i18nKey="deviceConnect.step1" parent="div">
-            {'Connect and unlock your '}
+            {'Connect and unlock your'}
             <Bold>{'Ledger device'}</Bold>
           </Trans>
         ),
@@ -157,9 +157,9 @@ class GenuineCheck extends PureComponent<Props> {
         id: 'deviceInfo',
         title: (
           <Trans i18nKey="deviceConnect.dashboard" parent="div">
-            {'Navigate to the '}
-            <Bold>{'dashboard'}</Bold>
-            {' on your device'}
+            {'Navigate to the'}
+            <Bold>{'Dashboard'}</Bold>
+            {'on your device'}
           </Trans>
         ),
         icon: homeIcon,
@@ -169,9 +169,9 @@ class GenuineCheck extends PureComponent<Props> {
         id: 'isGenuine',
         title: (
           <Trans i18nKey="deviceConnect.step3" parent="div">
-            {'Allow '}
+            {'Allow'}
             <Bold>{'Ledger Manager'}</Bold>
-            {' on your device'}
+            {'on your device'}
           </Trans>
         ),
         icon: genuineCheckIcon,

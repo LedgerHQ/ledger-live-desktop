@@ -6,6 +6,7 @@ import { translate } from 'react-i18next'
 import logger from 'logger'
 import type { T } from 'types/common'
 import { cleanAccountsCache } from 'actions/accounts'
+import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 import Button from 'components/base/Button'
 import ConfirmModal from 'components/base/Modal/ConfirmModal'
 import { softReset } from 'helpers/reset'
@@ -69,7 +70,9 @@ class CleanButton extends PureComponent<Props, State> {
           title={t('settings.softResetModal.title')}
           subTitle={t('common.areYouSure')}
           desc={t('settings.softResetModal.desc')}
-        />
+        >
+          <SyncSkipUnderPriority priority={999} />
+        </ConfirmModal>
 
         <ResetFallbackModal isOpened={fallbackOpened} onClose={this.closeFallback} />
       </Fragment>

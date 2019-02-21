@@ -3,6 +3,8 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { saveSettings } from 'actions/settings'
 import Box from 'components/base/Box'
 import Switch from 'components/base/Switch'
@@ -67,13 +69,15 @@ class Analytics extends PureComponent<StepProps, State> {
     const { nextStep, t, onboarding } = this.props
     const { analyticsToggle, sentryLogsToggle } = this.state
 
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <FixedTopContainer>
         <TrackPage
           category="Onboarding"
           name="Analytics"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={model.productName}
         />
         <StepContainerInner>
           <Title data-e2e="onboarding_title">{t('onboarding.analytics.title')}</Title>
