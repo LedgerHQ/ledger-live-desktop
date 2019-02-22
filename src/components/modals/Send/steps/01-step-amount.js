@@ -19,6 +19,7 @@ import RecipientField from '../fields/RecipientField'
 import AmountField from '../fields/AmountField'
 
 import type { StepProps } from '../index'
+import { listCryptoCurrencies } from '../../../../config/cryptocurrencies'
 
 export default ({
   t,
@@ -154,6 +155,9 @@ export class StepAmountFooter extends PureComponent<
   render() {
     const { t, transitionTo, account } = this.props
     const { isSyncing, totalSpent, canNext } = this.state
+    const isTerminated =
+      account && listCryptoCurrencies(true, true).some(coin => coin.name === account.currency.name)
+
     return (
       <Fragment>
         <Box grow>
@@ -190,7 +194,11 @@ export class StepAmountFooter extends PureComponent<
             {isSyncing && <Spinner size={10} />}
           </Box>
         </Box>
-        <Button disabled={!canNext} primary onClick={() => transitionTo('device')}>
+        <Button
+          disabled={!canNext || !!isTerminated}
+          primary
+          onClick={() => transitionTo('device')}
+        >
           {t('common.continue')}
         </Button>
       </Fragment>

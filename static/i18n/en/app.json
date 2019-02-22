@@ -112,7 +112,8 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X"
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X",
+    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
   },
   "dashboard": {
     "title": "Portfolio",

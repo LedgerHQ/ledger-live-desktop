@@ -1,4 +1,5 @@
 // @flow
+import React from 'react'
 
 import { handleActions, createAction } from 'redux-actions'
 import { createSelector } from 'reselect'
@@ -8,7 +9,9 @@ import network from 'api/network'
 import { urls } from 'config/urls'
 import logger from 'logger'
 
+import { Trans } from 'react-i18next'
 import type { State } from './index'
+import { listCryptoCurrencies } from '../config/cryptocurrencies'
 
 export type CurrencyStatus = {
   id: string, // the currency id
@@ -39,8 +42,24 @@ export const fetchCurrenciesStatus = () => async (dispatch: *) => {
       method: 'GET',
       url: process.env.LL_STATUS_ENDPOINT || urls.currenciesStatus,
     })
+
+    const terminatedCurrencies = listCryptoCurrencies(true, true).map(coin => ({
+      id: coin.id,
+      nonce: 98,
+      message: (
+        <Trans
+          i18nKey="banners.genericTerminatedCrypto"
+          values={{ coinName: coin.name }}
+          parent="div"
+        />
+      ),
+      link: (coin.terminated && coin.terminated.link) || '#',
+    }))
+
     if (Array.isArray(data)) {
-      dispatch(setCurrenciesStatus(data))
+      dispatch(setCurrenciesStatus(data.concat(terminatedCurrencies)))
+    } else {
+      setCurrenciesStatus(terminatedCurrencies)
     }
   } catch (err) {
     logger.error(err)
