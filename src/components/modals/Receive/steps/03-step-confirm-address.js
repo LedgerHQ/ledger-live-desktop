@@ -10,13 +10,16 @@ import Button from 'components/base/Button'
 import DeviceConfirm from 'components/DeviceConfirm'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
+import NanoXStates from 'components/NanoXStates'
+
 import type { StepProps } from '../index'
 import TranslatedError from '../../../TranslatedError'
 import DebugAppInfosForCurrency from '../../../DebugAppInfosForCurrency'
 
 export default class StepConfirmAddress extends PureComponent<StepProps> {
   render() {
-    const { t, account, isAddressVerified, verifyAddressError, transitionTo } = this.props
+    const { t, account, isAddressVerified, verifyAddressError, transitionTo, device } = this.props
+
     return (
       <Container>
         <TrackPage category="Receive Flow" name="Step 3" />
@@ -30,7 +33,13 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
             <Text mb={5}>
               <TranslatedError error={verifyAddressError} field="description" />
             </Text>
-            <DeviceConfirm error />
+            {device && device.modelId === 'nanoX' ? (
+              <Box pt={30}>
+                <NanoXStates error />
+              </Box>
+            ) : (
+              <DeviceConfirm error />
+            )}
           </Fragment>
         ) : (
           <Fragment>
@@ -42,7 +51,13 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
               {t('common.verify')}
             </Button>
-            <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
+            {device && device.modelId === 'nanoX' ? (
+              <Box pt={30}>
+                <NanoXStates />
+              </Box>
+            ) : (
+              <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
+            )}
           </Fragment>
         )}
       </Container>

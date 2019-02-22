@@ -9,6 +9,7 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import WarnBox from 'components/WarnBox'
 import DeviceConfirm from 'components/DeviceConfirm'
+import NanoXStates from 'components/NanoXStates'
 
 import type { StepProps } from '../index'
 
@@ -30,13 +31,13 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
   }
 
   render() {
-    const { t } = this.props
+    const { t, device } = this.props
     return (
       <Container>
         <TrackPage category="Send Flow" name="Step 3" />
         <WarnBox>{multiline(t('send.steps.verification.warning'))}</WarnBox>
         <Info>{t('send.steps.verification.body')}</Info>
-        <DeviceConfirm />
+        {device && device.modelId === 'nanoX' ? <NanoXStates validate /> : <DeviceConfirm />}
       </Container>
     )
   }
