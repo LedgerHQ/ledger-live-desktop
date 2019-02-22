@@ -122,7 +122,8 @@ class GenuineCheck extends PureComponent<Props> {
     if (!res) {
       throw new DeviceGenuineSocketEarlyClose()
     }
-    const isGenuine = res === '0000'
+    const isGenuine = res && res.payload === '0000'
+
     if (!isGenuine) {
       throw new DeviceNotGenuineError()
     }
