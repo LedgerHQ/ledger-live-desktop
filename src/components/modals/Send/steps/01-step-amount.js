@@ -195,7 +195,7 @@ export class StepAmountFooter extends PureComponent<
           </Box>
         </Box>
         <Button
-          disabled={!canNext && !!isTerminated}
+          disabled={!canNext || !!isTerminated}
           primary
           onClick={() => transitionTo('device')}
         >
