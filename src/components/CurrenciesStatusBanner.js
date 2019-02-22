@@ -15,7 +15,6 @@ import IconCross from 'icons/Cross'
 import IconTriangleWarning from 'icons/TriangleWarning'
 import IconChevronRight from 'icons/ChevronRight'
 
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import { dismissedBannersSelector } from 'reducers/settings'
 import { currenciesStatusSelector, fetchCurrenciesStatus } from 'reducers/currenciesStatus'
 import { currenciesSelector } from 'reducers/accounts'
@@ -94,16 +93,7 @@ class CurrenciesStatusBanner extends PureComponent<Props> {
   render() {
     const { dismissedBanners, accountsCurrencies, currenciesStatus, t } = this.props
 
-    const currenciesStatusWithTerminated = currenciesStatus.concat(
-      listCryptoCurrencies(true, true).map(coin => ({
-        id: coin.id,
-        nonce: 98,
-        message: t('banners.genericTerminatedCrypto', { coinName: coin.name }),
-        link: (coin.terminated && coin.terminated.link) || '#',
-      })),
-    )
-
-    const filtered = currenciesStatusWithTerminated.filter(
+    const filtered = currenciesStatus.filter(
       item =>
         accountsCurrencies.find(cur => cur.id === item.id) &&
         dismissedBanners.indexOf(getItemKey(item)) === -1,
@@ -112,7 +102,9 @@ class CurrenciesStatusBanner extends PureComponent<Props> {
     if (!filtered.length) return null
     return (
       <Box flow={2} style={styles.container}>
-        {filtered.map(r => <BannerItem key={r.id} t={t} item={r} onItemDismiss={this.dismiss} />)}
+        {filtered.map(r => (
+          <BannerItem key={`{r.id}_${r.nonce}`} t={t} item={r} onItemDismiss={this.dismiss} />
+        ))}
       </Box>
     )
   }
