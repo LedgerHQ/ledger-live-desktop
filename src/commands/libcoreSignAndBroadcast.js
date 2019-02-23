@@ -170,14 +170,14 @@ async function signTransaction({
   // should be `transaction.getLockTime()` as soon as lock time is
   // handled by libcore (actually: it always returns a default value
   // and that caused issue with zcash (see #904))
-  let lockTime;
+  let lockTime
 
   // Set lockTime for Komodo to enable reward claiming on UTXOs created by
   // Ledger Live. We should only set this if the currency is Komodo and
   // lockTime isn't already defined.
   if (currency.id === 'komodo' && lockTime === undefined) {
-    const unixtime = Math.floor(Date.now() / 1000);
-    lockTime = (unixtime - 777);
+    const unixtime = Math.floor(Date.now() / 1000)
+    lockTime = unixtime - 777
   }
 
   const signedTransaction = await hwApp.createPaymentTransactionNew(
