@@ -24,11 +24,11 @@ export default async ({ feedURL, updateVersion }: { feedURL: string, updateVersi
     filename,
     computeHash: () => sha512sumPath(path.resolve(updateFolder, filename)),
     getHashFile: () => getDistantFileContent(hashFileURL),
-    getHashFileSignature: () => getDistantFileContent(hashSigFileURL),
+    getHashFileSignature: () => getDistantFileContent(hashSigFileURL, true),
     getNextKey: (fingerprint: ?string) =>
       fingerprint ? getDistantFileContent(`${keysURL}/${fingerprint}.pem`) : pubKey,
     getNextKeySignature: async (fingerprint: string) =>
-      getDistantFileContent(`${keysURL}/${fingerprint}.pem.sig`),
+      getDistantFileContent(`${keysURL}/${fingerprint}.pem.sig`, true),
   })
 }
 
@@ -52,9 +52,15 @@ export function sha512sumPath(filePath: string) {
   })
 }
 
-async function getDistantFileContent(url: string) {
+async function getDistantFileContent(url: string, binary: boolean = false) {
+  const query: Object = { method: 'GET', url }
+
+  if (binary) {
+    query.responseType = 'arraybuffer'
+  }
+
   try {
-    const res = await network({ method: 'GET', url })
+    const res = await network(query)
     return res.data
   } catch (err) {
     throw new UpdateFetchFileFail(url)
