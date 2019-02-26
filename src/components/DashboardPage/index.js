@@ -8,6 +8,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { createStructuredSelector } from 'reselect'
+import { getDeviceModel } from '@ledgerhq/devices'
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
@@ -93,7 +94,7 @@ class DashboardPage extends PureComponent<Props> {
           <UpdateBanner />
           <TopBanner
             content={{
-              message: t('banners.promoteMobile'),
+              message: t('banners.promoteMobile', getDeviceModel('nanoX')),
               Icon: IconNanoX,
               right: (
                 <FakeLink onClick={() => openURL(urls.promoNanoX)}>

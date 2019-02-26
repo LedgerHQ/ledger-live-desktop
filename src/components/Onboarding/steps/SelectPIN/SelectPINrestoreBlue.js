@@ -11,6 +11,7 @@ import type { T } from 'types/common'
 
 import IconChevronRight from 'icons/ChevronRight'
 
+import { getDeviceModel } from '@ledgerhq/devices'
 import { IconOptionRow, DisclaimerBox, OptionRow, Inner } from '../../helperComponents'
 
 type Props = {
@@ -25,7 +26,7 @@ class SelectPINrestoreBlue extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding.selectPIN.restore.instructions.blue.step1'),
+        desc: t('onboarding.selectPIN.restore.instructions.blue.step1', getDeviceModel('blue')),
       },
       {
         key: 'step2',
