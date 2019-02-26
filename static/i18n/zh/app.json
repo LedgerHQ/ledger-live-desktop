@@ -112,7 +112,8 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X"
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X",
+    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
   },
   "dashboard": {
     "title": "资产组合",
@@ -145,10 +146,10 @@
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
-    "dashboard": "Navigate to the <1><0>{{managerAppName}}</0></1> on your device",
+    "dashboard": "Navigate to the <1>Dashboard</1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1><0>Ledger Manager</0></1> on your device"
+    "step3": "Allow <1>Ledger Manager</1> on your device"
   },
   "emptyState": {
     "sidebar": {
@@ -163,23 +164,26 @@
       }
     }
   },
-  "exchange": {
+  "partners": {
     "title": "Buy crypto",
     "desc": "Try a few services we've selected",
-    "visitWebsite": "访问网站",
-    "coinhouse": "对于寻求分析、获得、销售和安全存储加密资产的个人和机构投资者而言，Coinhouse 是一个值得信赖的平台。",
-    "changelly": "Changelly 是一个备受欢迎的即时加密资产交易所，上线了 100 多种钱币和代币。",
-    "coinmama": "Coinmama 是一家金融服务机构，让您在世界各地都能快速、安全且愉快地购买数字资产。",
-    "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
-    "paybis": "使用 PayBis 信用卡可安全而轻松地购买比特币，其服务遍及美国、加拿大、德国、俄罗斯和沙特阿拉伯。",
-    "luno": "Luno 让购买、存储比特币和以太币等加密货币和了解相关知识变得安全而简单。",
-    "shapeshift": "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
-    "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，包括比特币、比特币现金、以太币、以太坊经典、莱特币和 XRP。",
-    "kyberSwap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "thorSwap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "changeNow": "ChangeNOW is one of the leading custody-free instant exchange services",
+    "visitWebsite": "Visit website",
+    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot",
+    "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
+    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services",
     "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
-    "btcDirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot"
+    "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
+    "coinmama": "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
+    "genesis": "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP.",
+    "kyberswap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
+    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
+    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
+    "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
+    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
+    "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
+    "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
+    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
+    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity."
   },
   "genuinecheck": {
     "modal": {
@@ -254,8 +258,6 @@
     },
     "firmware": {
       "installed": "Firmware version {{version}}",
-      "titleNano": "Ledger Nano S",
-      "titleBlue": "Ledger Blue",
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
@@ -391,7 +393,7 @@
     "currencies": {
       "desc": "选择一种加密资产以编辑其设置。",
       "exchange": "汇率提供商 ({{ticker}} → BTC)",
-      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{currencyName}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
@@ -565,13 +567,7 @@
       }
     },
     "selectDevice": {
-      "title": "选择您的设备",
-      "ledgerNanoCard": {
-        "title": "Ledger Nano S"
-      },
-      "ledgerBlueCard": {
-        "title": "Ledger Blue"
-      }
+      "title": "选择您的设备"
     },
     "selectPIN": {
       "disclaimer": {
@@ -586,6 +582,12 @@
             "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
             "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+          },
+          "nanoX": {
+            "step1": "Connect the Ledger Nano X to your computer.",
+            "step2": "Press both buttons to choose Set up as new device.",
+            "step3": "Press the left or right button to select a digit.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
@@ -603,6 +605,13 @@
             "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+          },
+          "nanoX": {
+            "step1": "Connect your Ledger Nano X to your computer.",
+            "step2": "Press both buttons as instructed on your Ledger Nano X screen.",
+            "step3": "Press the left button to cancel Configure as new device.",
+            "step4": "Press the right button to select Restore configuration.",
+            "step5": "Choose a PIN code between 4 and 8 digits long."
           },
           "blue": {
             "step1": "将 Ledger Blue 连接到您的计算机。",
@@ -924,6 +933,9 @@
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
+    },
+    "FeeRequired": {
+      "title": "Fees are required"
     },
     "UnknownMCU": {
       "title": "Unknown MCU version",
