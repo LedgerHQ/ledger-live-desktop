@@ -92,15 +92,19 @@ class CurrenciesStatusBanner extends PureComponent<Props> {
 
   render() {
     const { dismissedBanners, accountsCurrencies, currenciesStatus, t } = this.props
+
     const filtered = currenciesStatus.filter(
       item =>
         accountsCurrencies.find(cur => cur.id === item.id) &&
         dismissedBanners.indexOf(getItemKey(item)) === -1,
     )
+
     if (!filtered.length) return null
     return (
       <Box flow={2} style={styles.container}>
-        {filtered.map(r => <BannerItem key={r.id} t={t} item={r} onItemDismiss={this.dismiss} />)}
+        {filtered.map(r => (
+          <BannerItem key={`{r.id}_${r.nonce}`} t={t} item={r} onItemDismiss={this.dismiss} />
+        ))}
       </Box>
     )
   }

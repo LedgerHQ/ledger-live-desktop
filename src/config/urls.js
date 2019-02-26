@@ -4,7 +4,7 @@ export const urls = {
   liveHome: 'https://www.ledger.com/pages/ledger-live',
 
   // Social
-  twitter: 'https://twitter.com/LedgerHQ',
+  twitter: 'https://twitter.com/Ledger',
   github: 'https://github.com/LedgerHQ/ledger-live-desktop',
   reddit: 'https://www.reddit.com/r/ledgerwallet/',
 

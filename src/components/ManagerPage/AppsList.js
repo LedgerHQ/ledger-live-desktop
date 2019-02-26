@@ -9,8 +9,10 @@ import { compose } from 'redux'
 
 import type { Device, T } from 'types/common'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
 import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
+import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
@@ -89,7 +91,10 @@ type State = {
 }
 
 const oldAppsInstallDisabled = ['ZenCash', 'Ripple']
-const canHandleInstall = c => !oldAppsInstallDisabled.includes(c.name)
+const terminatedCryptoCurrencies: Array<CryptoCurrency> = listCryptoCurrencies(true, true)
+const canHandleInstall = app =>
+  !oldAppsInstallDisabled.includes(app.name) &&
+  !terminatedCryptoCurrencies.some(coin => coin.managerAppName === app.name)
 
 const LoadingApp = () => (
   <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>

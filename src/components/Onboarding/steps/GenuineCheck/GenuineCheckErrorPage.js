@@ -11,8 +11,20 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import TrackPage from 'analytics/TrackPage'
+import { getDeviceModel } from '@ledgerhq/devices'
 
 import { Title, Description, OnboardingFooterWrapper } from '../../helperComponents'
+
+const Img = ({ type }: { type: string }) => {
+  switch (type) {
+    case 'blue':
+      return <img alt="" src={i('blue-error-onb.svg')} />
+    case 'nanoX':
+      return <img alt="" src={i('nano-x-error-onb.svg')} />
+    default:
+      return <img alt="" src={i('nano-error-onb.svg')} />
+  }
+}
 
 type Props = {
   t: T,
@@ -23,12 +35,15 @@ type Props = {
 class GenuineCheckErrorPage extends PureComponent<Props, *> {
   trackErrorPage = (page: string) => {
     const { onboarding } = this.props
+
+    const model = getDeviceModel(onboarding.deviceModelId)
+
     return (
       <TrackPage
         category="Onboarding"
         name={`Genuine Check Error Page - ${page}`}
         flowType={onboarding.flowType}
-        deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+        deviceType={model.productName}
       />
     )
   }
@@ -59,11 +74,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
           </Fragment>
         )}
         <Box mt={5} mr={7}>
-          {onboarding.isLedgerNano ? (
-            <img alt="" src={i('nano-error-onb.svg')} />
-          ) : (
-            <img alt="" src={i('blue-error-onb.svg')} />
-          )}
+          <Img type={onboarding.deviceModelId} />
         </Box>
       </Fragment>
     )

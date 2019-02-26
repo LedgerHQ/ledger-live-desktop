@@ -8,7 +8,7 @@ import { translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import { FeeNotLoaded } from '@ledgerhq/errors'
+import { FeeNotLoaded, FeeRequired } from '@ledgerhq/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
 import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
@@ -147,7 +147,13 @@ class FeesField extends Component<OwnProps, State> {
           onChange={onChange}
           onChangeFocus={this.onChangeFocus}
           loading={!feePerByte && !error}
-          error={!feePerByte && error ? new FeeNotLoaded() : null}
+          error={
+            !feePerByte && error
+              ? new FeeNotLoaded()
+              : feePerByte && feePerByte.isZero()
+                ? new FeeRequired()
+                : null
+          }
           renderRight={
             <InputRight>{t('send.steps.amount.unitPerByte', { unit: satoshi.code })}</InputRight>
           }

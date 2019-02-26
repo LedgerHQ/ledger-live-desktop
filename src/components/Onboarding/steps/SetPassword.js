@@ -2,6 +2,8 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { getDeviceModel } from '@ledgerhq/devices'
+
 import { colors } from 'styles/theme'
 
 import db from 'helpers/db'
@@ -105,7 +107,7 @@ class SetPassword extends PureComponent<Props, State> {
           category="Onboarding"
           name="Set Password"
           flowType={onboarding.flowType}
-          deviceType={onboarding.isLedgerNano ? 'Nano S' : 'Blue'}
+          deviceType={getDeviceModel(onboarding.deviceModelId).productName}
         />
         <StepContainerInner>
           <Fragment>

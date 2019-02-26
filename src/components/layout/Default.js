@@ -19,7 +19,7 @@ import Idler from 'components/Idler'
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
 import ManagerPage from 'components/ManagerPage'
-import ExchangePage from 'components/ExchangePage'
+import PartnersPage from 'components/PartnersPage'
 import DevToolsPage from 'components/DevToolsPage'
 import SettingsPage from 'components/SettingsPage'
 import KeyboardContent from 'components/KeyboardContent'
@@ -117,7 +117,7 @@ class Default extends Component<Props> {
                   <Route path="/" exact component={DashboardPage} />
                   <Route path="/settings" component={SettingsPage} />
                   <Route path="/manager" component={ManagerPage} />
-                  <Route path="/exchange" component={ExchangePage} />
+                  <Route path="/partners" component={PartnersPage} />
                   <Route path="/account/:id" component={AccountPage} />
                   <Route path="/dev" component={DevToolsPage} />
                 </Main>

@@ -32,8 +32,11 @@ const supported: CryptoCurrencyIds[] = [
   'bitcoin_testnet',
 ]
 
-export const listCryptoCurrencies = memoize((withDevCrypto?: boolean) =>
-  listCC(withDevCrypto)
-    .filter(c => supported.includes(c.id))
-    .sort((a, b) => a.name.localeCompare(b.name)),
+export const listCryptoCurrencies = memoize(
+  (withDevCrypto?: boolean, onlyTerminated?: boolean = false) =>
+    listCC(withDevCrypto)
+      .filter(c => supported.includes(c.id))
+      .filter(c => (onlyTerminated ? c.terminated : !c.terminated))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  (a?: boolean, b?: boolean) => `${a ? 1 : 0}_${b ? 1 : 0}`,
 )

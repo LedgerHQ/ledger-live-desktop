@@ -244,10 +244,12 @@ export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
   counterValueExchangeSelector,
   state => state.settings.currenciesSettings,
-  (counterValueCurrency, counterValueExchange, currenciesSettings) => ({
+  developerModeSelector,
+  (counterValueCurrency, counterValueExchange, currenciesSettings, developerModeEnabled) => ({
     counterValue: counterValueCurrency.ticker,
     counterValueExchange,
     currenciesSettings,
+    developerModeEnabled,
   }),
 )
 
