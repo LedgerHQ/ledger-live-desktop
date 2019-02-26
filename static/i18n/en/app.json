@@ -389,7 +389,7 @@
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",
       "exchange": "Rate provider ({{ticker}} → BTC)",
-      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{currencyName}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Number of confirmations",
       "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
     },

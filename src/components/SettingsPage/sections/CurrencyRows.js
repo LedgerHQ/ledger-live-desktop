@@ -56,7 +56,7 @@ class CurrencyRows extends PureComponent<Props> {
   }
 
   render() {
-    const { currency, t, currencySettings } = this.props
+    const { currency, t, settings, currencySettings } = this.props
     const { confirmationsNb, exchange } = currencySettings
     const defaults = currencySettingsDefaults(currency)
     return (
@@ -67,7 +67,8 @@ class CurrencyRows extends PureComponent<Props> {
               ticker: currency.ticker,
             })}
             desc={t('settings.currencies.exchangeDesc', {
-              currencyName: currency.name,
+              ticker: currency.ticker,
+              fiat: settings.counterValue,
             })}
           >
             <ExchangeSelect
