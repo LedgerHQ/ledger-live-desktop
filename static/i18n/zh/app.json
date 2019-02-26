@@ -112,7 +112,7 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X",
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
   },
   "dashboard": {
@@ -579,19 +579,19 @@
         "title": "选择您的 PIN 码",
         "instructions": {
           "nano": {
-            "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
+            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect the Ledger Nano X to your computer.",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "Press both buttons to choose Set up as new device.",
             "step3": "Press the left or right button to select a digit.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
-            "step1": "将 Ledger Blue 连接到您的计算机。",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "Tap on <1><0>Configure as new device</0></1>.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
@@ -601,20 +601,20 @@
         "title": "选择您的 PIN 码",
         "instructions": {
           "nano": {
-            "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
+            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect your Ledger Nano X to your computer.",
-            "step2": "Press both buttons as instructed on your Ledger Nano X screen.",
+            "step1": "Connect your {{productName}} to your computer.",
+            "step2": "Press both buttons as instructed on your {{productName}} screen.",
             "step3": "Press the left button to cancel Configure as new device.",
             "step4": "Press the right button to select Restore configuration.",
             "step5": "Choose a PIN code between 4 and 8 digits long."
           },
           "blue": {
-            "step1": "将 Ledger Blue 连接到您的计算机。",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "轻击<1><0>恢复配置</0></1>。",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
