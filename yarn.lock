@@ -1741,10 +1741,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.20.0":
-  version "4.20.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.20.0.tgz#034763f79a308245b0d7754341e0c9731e4d77c0"
-  integrity sha512-zOamSAo9kIVi7zmYAovDh7xDFOF9DThSQGtXmu25zIIPhGeAWPQo9rVvtDCV9CDHTjsPs5baN0qFSCHwFIM9Cw==
+"@ledgerhq/live-common@4.21.0":
+  version "4.21.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.21.0.tgz#7751589c440824952fdb14a59f0dd3ad90450390"
+  integrity sha512-uKbWKKHh4x9mfKETdcC5xf1PXTNmNYZqoW92f+hCNDJrCADlPtpxwBlnHGaPo5ZFO0Dnac21Qh2bE+6Z+pF6RQ==
   dependencies:
     "@aeternity/ledger-app-api" "0.0.4"
     "@ledgerhq/errors" "^4.39.0"
