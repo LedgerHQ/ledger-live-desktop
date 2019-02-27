@@ -3,9 +3,8 @@
 import { createCommand, Command } from 'helpers/ipc'
 import { Observable } from 'rxjs'
 
-// import { UPDATE_CHECK_IGNORE, UPDATE_CHECK_FEED } from 'config/constants'
-import { UPDATE_CHECK_IGNORE } from 'config/constants'
-// import createElectronAppUpdater from 'main/updater/createElectronAppUpdater'
+import { UPDATE_CHECK_IGNORE, UPDATE_CHECK_FEED } from 'config/constants'
+import createElectronAppUpdater from 'main/updater/createElectronAppUpdater'
 import type { UpdateStatus } from 'components/Updater/UpdaterContext'
 
 type Input = {}
@@ -22,17 +21,14 @@ const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
       o.next({ status, payload })
     }
 
-    const handleDownload = async _ => {
+    const handleDownload = async info => {
       try {
         sendStatus('checking')
-        // const appUpdater = await createElectronAppUpdater({
-        //   feedURL: UPDATE_CHECK_FEED,
-        //   updateVersion: info.version,
-        // })
-        // await appUpdater.verify()
+        const appUpdater = await createElectronAppUpdater({ feedURL: UPDATE_CHECK_FEED, info })
+        await appUpdater.verify()
         sendStatus('check-success')
       } catch (err) {
-        // don't throw if the check fail for now. it's a white bullet.
+        // don't throw if the check fail for now. it's a blank bullet.
         if (UPDATE_CHECK_IGNORE) {
           // TODO: track the error
           sendStatus('check-success')
