@@ -9,7 +9,7 @@ import { getCurrentDevice } from 'reducers/devices'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
-import ProgressBar from 'components/ProgressBar'
+import ProgressCircle from 'components/ProgressCircle'
 import DeviceConfirm from 'components/DeviceConfirm'
 import type { Device } from 'types/common'
 import type { StepProps } from '../'
@@ -48,9 +48,15 @@ type Props = StepProps & {
   device: Device,
 }
 
-class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }> {
+type State = {
+  progress: number,
+  displayedOnDevice: boolean,
+}
+
+class StepFullFirmwareInstall extends PureComponent<Props, State> {
   state = {
     progress: 0,
+    displayedOnDevice: false,
   }
 
   componentDidMount() {
@@ -97,6 +103,19 @@ class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }>
 
   renderBody = () => {
     const { t, firmware } = this.props
+    const { progress, displayedOnDevice } = this.state
+    if (!displayedOnDevice) {
+      return (
+        <Fragment>
+          <Text ff="Open Sans|Regular" align="center" color="smoke">
+            {t('manager.firmware.downloadingUpdateDesc')}
+          </Text>
+          <Box my={5}>
+            <ProgressCircle progress={progress} size={56} />
+          </Box>
+        </Fragment>
+      )
+    }
     return (
       <Fragment>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
@@ -108,19 +127,21 @@ class StepFullFirmwareInstall extends PureComponent<Props, { progress: number }>
           </Text>
           <Address>{firmware.osu && this.formatHashName(firmware.osu.hash)}</Address>
         </Box>
-        <ProgressBar progress={this.state.progress} width={200} />
-        <Box mt={5}>
-          <DeviceConfirm />
-        </Box>
+        <DeviceConfirm />
       </Fragment>
     )
   }
 
   render() {
     const { t } = this.props
+    const { displayedOnDevice } = this.state
     return (
       <Container>
-        <Title>{t('manager.modal.confirmIdentifier')}</Title>
+        <Title>
+          {!displayedOnDevice
+            ? t('manager.modal.steps.downloadingUpdate')
+            : t('manager.modal.confirmIdentifier')}
+        </Title>
         <TrackPage category="Manager" name="InstallFirmware" />
         {this.renderBody()}
       </Container>
