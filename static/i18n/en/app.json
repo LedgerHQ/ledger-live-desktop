@@ -277,9 +277,9 @@
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Identifier",
-      "mcuTitle": "Updating MCU",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
       "successText": "Please re-install the apps on your device"
