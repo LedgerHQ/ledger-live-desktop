@@ -881,6 +881,9 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Allow Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
       "title": "Firmware update refused on device",
       "description": "Please retry or contact Ledger Support"
