@@ -882,7 +882,7 @@
       "description": "Please restart your device or contact us"
     },
     "UserRefusedAllowManager": {
-      "title": "Allow Manager refused on device"
+      "title": "Manager refused on device"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Firmware update refused on device",
