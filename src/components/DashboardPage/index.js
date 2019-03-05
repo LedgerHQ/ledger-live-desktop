@@ -173,7 +173,7 @@ const TopBannerContainer = styled.div`
   }
 `
 // If no banners are present, the SeparatorBar appears
-const SeparatorBar = styled.div`
+export const SeparatorBar = styled.div`
   height: 1px;
   border-bottom: 1px solid ${p => p.theme.colors.fog};
   margin-bottom: 15px;

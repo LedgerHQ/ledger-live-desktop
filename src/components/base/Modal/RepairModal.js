@@ -186,6 +186,7 @@ class RepairModal extends PureComponent<Props, *> {
         <TrackPage category="Modal" name={analyticsName} />
         <ModalBody
           title={title}
+          noScroll
           render={() => (
             <Box>
               {error ? (
