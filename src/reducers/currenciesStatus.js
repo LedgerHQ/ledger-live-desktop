@@ -43,18 +43,20 @@ export const fetchCurrenciesStatus = () => async (dispatch: *) => {
       url: process.env.LL_STATUS_ENDPOINT || urls.currenciesStatus,
     })
 
-    const terminatedCurrencies = listCryptoCurrencies(true, true).map(coin => ({
-      id: coin.id,
-      nonce: 98,
-      message: (
-        <Trans
-          i18nKey="banners.genericTerminatedCrypto"
-          values={{ coinName: coin.name }}
-          parent="div"
-        />
-      ),
-      link: (coin.terminated && coin.terminated.link) || '#',
-    }))
+    const terminatedCurrencies = listCryptoCurrencies(true, true)
+      .filter(coin => !data.find(c => c.id === coin.id))
+      .map(coin => ({
+        id: coin.id,
+        nonce: 98,
+        message: (
+          <Trans
+            i18nKey="banners.genericTerminatedCrypto"
+            values={{ coinName: coin.name }}
+            parent="div"
+          />
+        ),
+        link: (coin.terminated && coin.terminated.link) || '#',
+      }))
 
     if (Array.isArray(data)) {
       dispatch(setCurrenciesStatus(data.concat(terminatedCurrencies)))

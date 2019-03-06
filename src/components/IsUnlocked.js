@@ -194,6 +194,7 @@ class IsUnlocked extends Component<Props, State> {
           <ConfirmModal
             analyticsName="HardReset"
             isDanger
+            centered
             isLoading={isHardResetting}
             isOpened={isHardResetModalOpened}
             onClose={this.handleCloseHardResetModal}

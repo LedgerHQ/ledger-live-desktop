@@ -103,7 +103,7 @@ class CurrenciesStatusBanner extends PureComponent<Props> {
     return (
       <Box flow={2} style={styles.container}>
         {filtered.map(r => (
-          <BannerItem key={`{r.id}_${r.nonce}`} t={t} item={r} onItemDismiss={this.dismiss} />
+          <BannerItem key={`${r.id}_${r.nonce}`} t={t} item={r} onItemDismiss={this.dismiss} />
         ))}
       </Box>
     )
