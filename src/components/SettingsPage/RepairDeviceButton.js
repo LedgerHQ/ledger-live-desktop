@@ -37,6 +37,8 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     if (this.timeout) {
       clearTimeout(this.timeout)
     }
+
+    if (this.sub) this.sub.unsubscribe()
   }
 
   open = () => this.setState({ opened: true, error: null })
