@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import styled from 'styled-components'
 import { forceRepairChoices } from '@ledgerhq/live-common/lib/hw/firmwareUpdate-repair'
 
@@ -67,7 +67,11 @@ const FlashStep = ({ progress, t }: { progress: number, t: * }) =>
       <Box mx={7}>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
           <Bullet>{'2.'}</Bullet>
-          {t('manager.modal.mcuSecond')}
+          <Trans i18nKey="manager.modal.mcuSecond">
+            {'place holder text'}
+            <Text ff="Open Sans|SemiBold">{'Processing'}</Text>
+            {'place holder text'}
+          </Trans>
         </Text>
         <img
           src={i('logos/bootloaderMode.png')}
