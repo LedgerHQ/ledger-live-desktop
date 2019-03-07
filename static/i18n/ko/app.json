@@ -80,7 +80,7 @@
   },
   "sidebar": {
     "menu": "메뉴",
-    "accounts": "계정({{count}})",
+    "accounts": "계정 ({{count}})",
     "manager": "Manager",
     "exchange": "Buy crypto",
     "developer": "개발 도구"
@@ -89,7 +89,7 @@
     "lastOperations": "마지막 작업",
     "emptyState": {
       "title": "아직 암호화 자산이 없습니까?",
-      "desc": " <1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
+      "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
       "buttons": {
         "receiveFunds": "수신"
       }
@@ -122,7 +122,7 @@
       "createAccount": "계정 추가"
     },
     "accounts": {
-      "title": "계정({{count}})"
+      "title": "계정 ({{count}})"
     },
     "greeting": {
       "morning": "안녕하세요.",
@@ -201,11 +201,11 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "accountAlreadyImportedSubtitle": "포트폴리오에 이미 있는 계정({{count}})",
+    "accountAlreadyImportedSubtitle": "계정이 이미 포트폴리오 ({{count}})에 있습니다.",
     "accountToImportSubtitle": "기존 계정 추가",
     "accountToImportSubtitle_plural": "기존 계정 추가",
-    "selectAll": "모두 선택({{count}})",
-    "unselectAll": "모두 선택 해제({{count}})",
+    "selectAll": "모든 ({{count}}) 선택",
+    "unselectAll": "모든 ({{count}}) 선택 해제",
     "newAccount": "새 계정",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
@@ -325,7 +325,7 @@
         "fees": "네트워크 수수료",
         "advancedOptions": "고급 옵션",
         "useRBF": "RBF(replace-by-fee) 트랜잭션 사용",
-        "message": "메시지 남기기(140자)",
+        "message": "메시지 남기기 (140 )",
         "rippleTag": "태그",
         "ethereumGasLimit": "가스 리밋",
         "unitPerByte": "바이트 당 {{unit}}"
@@ -392,7 +392,7 @@
     },
     "currencies": {
       "desc": "설정을 수정할 암호화 자산을 선택합니다.",
-      "exchange": "환율 공급자({{ticker}} → BTC)",
+      "exchange": "환율 공급자 ({{ticker}} → BTC)",
       "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "확인 수",
       "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
@@ -690,7 +690,7 @@
       }
     },
     "setPassword": {
-      "title": "암호 잠금(선택 사항)",
+      "title": "암호 잠금(옵션)",
       "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
         "note1": "암호를 기억하고, 공유하지 마십시오.",
@@ -760,7 +760,7 @@
       "description": "Request Ledger Support assistance"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "죄송합니다. 다시 시도하십시오(정품-닫기).",
+      "title": "죄송합니다. 다시 시도하십시오(정품-종료).",
       "description": null
     },
     "DeviceSocketFail": {
@@ -785,7 +785,7 @@
     },
     "FeeEstimationFailed": {
       "title": "죄송합니다. 수수료를 산정하지 못했습니다.",
-      "description": "관례적 수수료 설정을 시도하십시오(상태: {{status}})."
+      "description": "관례적 수수료 설정을 시도하십시오. (status: {{status}})"
     },
     "HardResetFail": {
       "title": "죄송합니다. 재설정하지 못했습니다.",
@@ -796,7 +796,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
-      "title": "죄송합니다. 다시 시도하십시오(API HTTP {{status}}).",
+      "title": "죄송합니다. (API HTTP {{status}})을(를) 다시 시도하십시오.",
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
@@ -863,7 +863,7 @@
       "description": "It took too long for the server to respond, please retry"
     },
     "TimeoutTagged": {
-      "title": "죄송합니다. 시간이 초과되었습니다({{tag}}).",
+      "title": "죄송합니다. 시간이 초과되었습니다. ({{tag}})",
       "description": "It took too long for the server to respond"
     },
     "TransportError": {
