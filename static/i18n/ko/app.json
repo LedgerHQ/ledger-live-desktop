@@ -193,7 +193,7 @@
   "addAccounts": {
     "title": "계정 추가",
     "breadcrumb": {
-      "informations": "암호화 자산 ",
+      "informations": "암호화 자산",
       "connectDevice": "장치",
       "import": "계정",
       "finish": "확인"
@@ -443,8 +443,8 @@
     "resetFallbackModal": {
       "title": "사용자 조치 필요",
       "part1": "캐시 폴더를 삭제할 수 없습니다. 폴더를 수동으로 삭제하십시오.",
-      "part2": "폴더 열기 버튼을 클릭하여 ",
-      "part3": "앱이 닫히면 ",
+      "part2": "폴더 열기 버튼을 클릭하여",
+      "part3": "앱이 닫히면",
       "part4": "\"sqlite\" 폴더를 수동으로 삭제하십시오.",
       "part5": "그런 다음 앱을 정상적으로 다시 시작할 수 있습니다."
     },
@@ -660,7 +660,7 @@
     },
     "genuineCheck": {
       "title": "보안 체크리스트",
-      "descGeneric": "계속하기 전에 보안 체크리스트의 작성을 완료하십시오. ",
+      "descGeneric": "계속하기 전에 보안 체크리스트의 작성을 완료하십시오.",
       "descRestore": "Before getting started, please confirm:",
       "step1": {
         "title": "PIN 코드를 자신이 직접 선택했습니까?"
@@ -725,7 +725,7 @@
         "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
         "mandatoryText": "* 필수",
         "mandatoryContextual": {
-          "title": "기술 데이터 ",
+          "title": "기술 데이터",
           "item1": "익명 고유 애플리케이션 ID",
           "item2": "Ledger Live version, language and region",
           "item3": "OS version, language and region"
