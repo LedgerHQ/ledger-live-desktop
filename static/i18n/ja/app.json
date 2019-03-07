@@ -201,11 +201,11 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "accountAlreadyImportedSubtitle": "アカウントは既にポートフォリオ内に存在します ({{count}})",
+    "accountAlreadyImportedSubtitle": "アカウントは既にポートフォリオ({{count}})内に存在します",
     "accountToImportSubtitle": "既存アカウントを追加",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
-    "selectAll": "すべて選択 ({{count}})",
-    "unselectAll": "すべての選択を解除 ({{count}})",
+    "selectAll": "すべての({{count}})を選択",
+    "unselectAll": "すべての({{count}})を選択を解除",
     "newAccount": "新規アカウント",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
@@ -392,7 +392,7 @@
     },
     "currencies": {
       "desc": "クリプトアセットを選択して、設定を編集します。",
-      "exchange": "レートプロバイダー ({{ticker}} → BTC)",
+      "exchange": "レートプロバイダー({{ticker}} → BTC)",
       "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
@@ -760,7 +760,7 @@
       "description": "Request Ledger Support assistance"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "再試行してください（正規品 - 閉じる）",
+      "title": "申し訳ありませんが、再度お試し (ください  本当に閉じる)",
       "description": null
     },
     "DeviceSocketFail": {
@@ -785,7 +785,7 @@
     },
     "FeeEstimationFailed": {
       "title": "手数料見積もりに失敗しました",
-      "description": "通関手数料を設定してください（ステータス：{{status}}）"
+      "description": "通関手数料を設定してください(status: {{status}})"
     },
     "HardResetFail": {
       "title": "リセットできませんでした",
@@ -796,7 +796,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
-      "title": "再試行してください（API HTTP {{status}}）",
+      "title": "申し訳ありませんが、再度お試しください (API HTTP {{status}})",
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
