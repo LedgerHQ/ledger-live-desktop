@@ -87,7 +87,7 @@ class Select extends PureComponent<Props> {
       <ReactSelect
         ref={c => (this.ref = c)}
         value={value}
-        maxMenuHeight={300}
+        maxMenuHeight={200}
         classNamePrefix="select"
         options={options}
         components={createRenderers({ renderOption, renderValue })}
