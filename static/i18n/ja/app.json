@@ -328,7 +328,7 @@
         "message": "メッセージを残す（140）",
         "rippleTag": "タグ",
         "ethereumGasLimit": "ガス制限",
-        "unitPerByte": "バイト当たり{{unit}} "
+        "unitPerByte": "バイト当たり{{unit}}"
       },
       "connectDevice": {
         "title": "機器"
@@ -690,7 +690,7 @@
       }
     },
     "setPassword": {
-      "title": "パスワードロック（オプション）",
+      "title": "パスワードロック（オプション） ",
       "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
         "note1": "パスワードを忘れないようご注意ください。また、パスワードを共有しないでください。",
