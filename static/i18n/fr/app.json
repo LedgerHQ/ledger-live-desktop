@@ -83,7 +83,7 @@
     "accounts": "Accounts ({{count}})",
     "manager": "Manager",
     "exchange": "Buy crypto",
-    "developer": "Outils développement"
+    "developer": "Outils de développement"
   },
   "account": {
     "lastOperations": "Last operations",
@@ -99,7 +99,7 @@
       "advancedLogs": "Journaux détaillés",
       "accountName": {
         "title": "Account name",
-        "desc": "Décrit ce compte"
+        "desc": "Décrire ce compte"
       },
       "unit": {
         "title": "Unit",
@@ -712,7 +712,7 @@
           "item5": "End of page scroll",
           "item6": "App (un)installation and version",
           "item7": "Number of accounts, crypto assets and operations",
-          "item8": "Durée de session globale et par page ",
+          "item8": "Durée de session globale et par page",
           "item9": "Ledger device type and firmware"
         }
       },
