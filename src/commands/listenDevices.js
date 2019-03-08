@@ -15,6 +15,6 @@ CommNodeHid.setListenDevicesDebug((msg, ...args) =>
   }),
 )
 
-const cmd = createCommand('listenDevices', () => Observable.create(CommNodeHid.listen))
+const cmd: any = createCommand('listenDevices', () => Observable.create(CommNodeHid.listen))
 
 export default cmd

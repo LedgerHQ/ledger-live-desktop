@@ -137,6 +137,7 @@ class Default extends Component<Props> {
 }
 
 export default compose(
+  // $FlowFixMe
   withRouter,
   translate(),
 )(Default)

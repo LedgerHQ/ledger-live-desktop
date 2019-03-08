@@ -1,7 +1,7 @@
 // @flow
 import memoize from 'lodash/memoize'
 import { listCryptoCurrencies as listCC } from '@ledgerhq/live-common/lib/currencies'
-import type { CryptoCurrencyIds } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrencyIds, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 const supported: CryptoCurrencyIds[] = [
   'bitcoin',
@@ -32,8 +32,11 @@ const supported: CryptoCurrencyIds[] = [
   'bitcoin_testnet',
 ]
 
-export const listCryptoCurrencies = memoize(
-  (withDevCrypto?: boolean, onlyTerminated?: boolean = false) =>
+export const listCryptoCurrencies: (
+  withDevCrypto?: boolean,
+  onlyTerminated?: boolean,
+) => CryptoCurrency[] = memoize(
+  (withDevCrypto, onlyTerminated = false) =>
     listCC(withDevCrypto, true)
       .filter(c => supported.includes(c.id))
       .filter(c => (onlyTerminated ? c.terminated : !c.terminated))

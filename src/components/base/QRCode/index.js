@@ -23,7 +23,7 @@ class QRCode extends PureComponent<Props> {
     this.drawQRCode()
   }
 
-  canvas = React.createRef()
+  canvas: * = React.createRef()
 
   drawQRCode() {
     const { data, size, errorCorrectionLevel } = this.props

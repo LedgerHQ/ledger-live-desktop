@@ -184,6 +184,7 @@ class MainSideBar extends PureComponent<Props> {
 }
 
 const decorate = compose(
+  // $FlowFixMe
   withRouter,
   translate(),
   connect(
