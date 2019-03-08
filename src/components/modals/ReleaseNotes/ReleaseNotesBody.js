@@ -9,7 +9,6 @@ import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Spinner from 'components/base/Spinner'
-import GradientBox from 'components/GradientBox'
 import TranslatedError from 'components/TranslatedError'
 import TrackPage from 'analytics/TrackPage'
 import Markdown, { Notes } from 'components/base/Markdown'
@@ -118,12 +117,9 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
         onClose={onClose}
         title={t('releaseNotes.title')}
         render={() => (
-          <Box relative style={{ height: 500 }} px={0} pb={0}>
+          <Box relative style={{ height: 500 }} px={5} pb={8}>
             <TrackPage category="Modal" name="ReleaseNotes" />
-            <Box px={5} pb={8}>
-              {this.renderContent()}
-            </Box>
-            <GradientBox />
+            {this.renderContent()}
           </Box>
         )}
         renderFooter={() => (
