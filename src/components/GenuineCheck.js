@@ -5,14 +5,14 @@ import { timeout, filter, map } from 'rxjs/operators'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate, Trans } from 'react-i18next'
-import { delay, createCancelablePolling } from 'helpers/promise'
+import { createCancelablePolling } from 'helpers/promise'
 
 import logger from 'logger'
 import type { T, Device } from 'types/common'
 import manager from '@ledgerhq/live-common/lib/manager'
 import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 
-import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT, GENUINE_CACHE_DELAY } from 'config/constants'
+import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT } from 'config/constants'
 
 import { getCurrentDevice } from 'reducers/devices'
 import {
@@ -49,9 +49,6 @@ const mapStateToProps = state => ({
 })
 
 const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
-
-// to speed up genuine check, cache result by device id
-const genuineDevices = new WeakSet()
 
 class GenuineCheck extends PureComponent<Props> {
   connectInteractionHandler = () =>
@@ -103,12 +100,6 @@ class GenuineCheck extends PureComponent<Props> {
       logger.warn(e)
     })
 
-    if (genuineDevices.has(device)) {
-      logger.log("genuine was already checked. don't check again")
-      await delay(GENUINE_CACHE_DELAY)
-      return true
-    }
-
     const beforeDate = Date.now()
 
     const res = await getIsGenuine
@@ -130,7 +121,6 @@ class GenuineCheck extends PureComponent<Props> {
     if (!isGenuine) {
       throw new DeviceNotGenuineError()
     }
-    genuineDevices.add(device)
     return true
   }
 
