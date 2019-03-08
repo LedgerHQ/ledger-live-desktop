@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { timeout } from 'rxjs/operators/timeout'
+import { timeout, filter, map } from 'rxjs/operators'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { translate, Trans } from 'react-i18next'
@@ -113,7 +113,11 @@ class GenuineCheck extends PureComponent<Props> {
 
     const res = await getIsGenuine
       .send({ devicePath: device.path, deviceInfo })
-      .pipe(timeout(GENUINE_TIMEOUT))
+      .pipe(
+        filter(e => e.type === 'result'),
+        map(e => e.payload),
+        timeout(GENUINE_TIMEOUT),
+      )
       .toPromise()
 
     logger.log(`genuine check resulted ${res} after ${(Date.now() - beforeDate) / 1000}s`, {
