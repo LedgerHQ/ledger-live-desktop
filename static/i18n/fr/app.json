@@ -262,10 +262,12 @@
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
+        "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -276,9 +278,9 @@
       "confirmIdentifier": "Vérifier l’identifiant",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Identifier",
-      "mcuTitle": "Mise à jour du microcontrôleur",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
       "successText": "Please re-install the apps on your device"
@@ -764,7 +766,7 @@
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "Oops, connection failed",
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -878,8 +880,11 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
-      "title": "Mise à jour du firmware refusée sur l’appareil",
+      "title": "Update canceled",
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
     },
     "UserRefusedOnDevice": {
