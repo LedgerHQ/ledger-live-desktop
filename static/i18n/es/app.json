@@ -239,7 +239,7 @@
     "to": "Hasta",
     "identifier": "ID de la transacción",
     "viewOperation": "Ver en el explorador",
-    "showMore": "Ver {{recipients}} más ",
+    "showMore": "Ver {{recipients}} más",
     "showLess": "Ver menos"
   },
   "operationList": {
@@ -249,7 +249,7 @@
     "yourDeviceIsGenuine": "Tu dispositivo es auténtico",
     "apps": {
       "install": "Instalar",
-      "all": "Catálogo de aplicaciones ",
+      "all": "Catálogo de aplicaciones",
       "installing": "Instalando {{app}}...",
       "uninstalling": "Desinstalando {{app}}...",
       "installSuccess": "Successfully installed {{app}}",
@@ -259,13 +259,15 @@
     "firmware": {
       "installed": "Versión {{version}} del firmware",
       "update": "Actualizar",
-      "latest": "La versión {{version}} del firmware está disponible. ",
+      "latest": "La versión {{version}} del firmware está disponible.",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
+        "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -276,9 +278,9 @@
       "confirmIdentifier": "Comprobar el identificador",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Identificador",
-      "mcuTitle": "Actualizando MCU",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware actualizado",
       "successText": "Please re-install the apps on your device"
@@ -325,7 +327,7 @@
         "fees": "Comisiones de red",
         "advancedOptions": "Opciones avanzadas",
         "useRBF": "Utilizar una transacción RBF",
-        "message": "Deja un mensaje (140)",
+        "message": "Dejar un mensaje (140) ",
         "rippleTag": "Etiquetar",
         "ethereumGasLimit": "Límite de gas",
         "unitPerByte": "{{unit}} por byte"
@@ -392,7 +394,7 @@
     },
     "currencies": {
       "desc": "Selecciona un crypto activo para editar sus ajustes.",
-      "exchange": "Proveedor de tipo de cambio ({{ticker}} → BTC)",
+      "exchange": "Proveedor de tipo ({{ticker}} → BTC)",
       "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Número de confirmaciones",
       "confirmationsNbDesc": "Establece el número de confirmaciones de red para que una transacción se marque como confirmada."
@@ -423,7 +425,7 @@
     },
     "help": {
       "desc": "Learn more about Ledger Live or get help.",
-      "version": "Versión ",
+      "version": "Versión",
       "releaseNotesBtn": "Detalles",
       "faq": "Soporte de Ledger",
       "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
@@ -443,7 +445,7 @@
     "resetFallbackModal": {
       "title": "Es necesaria la acción del usuario",
       "part1": "No se ha podido borrar la carpeta caché. Bórrala manualmente.",
-      "part2": "Haz clic en el botón Abrir carpeta para ",
+      "part2": "Haz clic en el botón Abrir carpeta para",
       "part3": "cerrar la aplicación",
       "part4": "y borra manualmente la carpeta \"sqlite\".",
       "part5": "Ahora puedes reiniciar la aplicación normalmente."
@@ -510,7 +512,7 @@
   "crash": {
     "oops": "Vaya, algo ha fallado.",
     "uselessText": "Puedes intentarlo de nuevo reiniciando Ledger Live. Exporta tus registros y ponte en contacto con Soporte de Ledger si el problema persiste.",
-    "restart": "Reiniciar ",
+    "restart": "Reiniciar",
     "support": "Contactar con Soporte",
     "github": "GitHub"
   },
@@ -563,7 +565,7 @@
         "title": "Haz el seguimiento de tu pedido"
       },
       "learnMore": {
-        "title": " Conoce Ledger"
+        "title": "Conoce Ledger"
       }
     },
     "selectDevice": {
@@ -690,7 +692,7 @@
       }
     },
     "setPassword": {
-      "title": "Bloqueo por contraseña (opcional)",
+      "title": "Bloqueo por contraseña (opcional) ",
       "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
         "note1": "Asegúrate de que recuerdas tu contraseña. No la compartas.",
@@ -725,7 +727,7 @@
         "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
         "mandatoryText": "* obligatorio",
         "mandatoryContextual": {
-          "title": "Datos técnicos ",
+          "title": "Datos técnicos",
           "item1": "ID de aplicación único y anónimo",
           "item2": "Ledger Live version, language and region",
           "item3": "OS version, language and region"
@@ -760,11 +762,11 @@
       "description": "Request Ledger Support assistance"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Lo sentimos, vuelve a intentarlo (casi auténtico)",
+      "title": "Lo sentimos, inténtalo de nuevo (genuine-close)",
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "Oops, connection failed",
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -785,7 +787,7 @@
     },
     "FeeEstimationFailed": {
       "title": "Lo sentimos, el cálculo de comisiones ha fallado.",
-      "description": "Intenta establecer una comisión habitual (estado: {{status}})"
+      "description": "Intenta establecer una comisión habitual (status: {{status}})"
     },
     "HardResetFail": {
       "title": "Vaya, no se ha podido restablecer.",
@@ -796,7 +798,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
-      "title": "Lo sentimos, inténtalo de nuevo (API HTTP {{status}}).",
+      "title": "Lo sentimos, inténtalo de nuevo (API HTTP {{status}})",
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
@@ -863,7 +865,7 @@
       "description": "It took too long for the server to respond, please retry"
     },
     "TimeoutTagged": {
-      "title": "Vaya, se ha excedido el tiempo ({{tag}}).",
+      "title": "Vaya, se ha excedido el tiempo ({{tag}})",
       "description": "It took too long for the server to respond"
     },
     "TransportError": {
@@ -878,8 +880,11 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
-      "title": "Actualización del firmware rechazada en el dispositivo. ",
+      "title": "Update canceled",
       "description": "Inténtalo de nuevo o ponte en contacto con Soporte de Ledger."
     },
     "UserRefusedOnDevice": {

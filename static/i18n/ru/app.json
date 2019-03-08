@@ -89,7 +89,7 @@
     "lastOperations": "Последние операции",
     "emptyState": {
       "title": "Еще не получили криптоактивы?",
-      "desc": "Убедитесь в том, что на устройстве установлено приложение <1><0>{{managerAppName}}</0></1>, и начните прием.",
+      "desc": "Убедитесь в том, что на устройстве установлено приложение <1><0>{{managerAppName}}</0></1>, и начните получать.",
       "buttons": {
         "receiveFunds": "Получить"
       }
@@ -201,7 +201,7 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "accountAlreadyImportedSubtitle": "Счета, находящиеся в портфеле ({{count}})",
+    "accountAlreadyImportedSubtitle": "Счета, находящиеся в портфеле: ({{count}})",
     "accountToImportSubtitle": "Добавить существующий счет",
     "accountToImportSubtitle_plural": "Добавить существующие счета",
     "selectAll": "Выбрать все ({{count}})",
@@ -262,10 +262,12 @@
       "latest": "Доступно встроенное ПО версии {{version}}.",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
+        "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -276,9 +278,9 @@
       "confirmIdentifier": "Проверить идентификатор",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Идентификатор",
-      "mcuTitle": "Обновление микроконтроллера",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "Отсоедините USB-кабель от устройства.",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Встроенное ПО обновлено",
       "successText": "Please re-install the apps on your device"
@@ -361,7 +363,7 @@
       "display": "Общие",
       "export": "Export accounts",
       "currencies": "Валюта",
-      "help": "Помощь",
+      "help": "Справка",
       "about": "О программе"
     },
     "export": {
@@ -392,7 +394,7 @@
     },
     "currencies": {
       "desc": "Для изменения настроек криптоактива его необходимо выделить.",
-      "exchange": "Обменник ({{ticker}} → BTC)",
+      "exchange": "Обменник ({{ticker}} → BTC)",
       "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Количество подтверждений",
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
@@ -764,7 +766,7 @@
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "Oops, connection failed",
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -785,7 +787,7 @@
     },
     "FeeEstimationFailed": {
       "title": "К сожалению, во время расчета комиссии произошел сбой.",
-      "description": "Попробуйте настроить пользовательскую комиссию (состояние: {{status}})."
+      "description": "Попробуйте настроить пользовательскую комиссию (status: {{status}})."
     },
     "HardResetFail": {
       "title": "Не удалось сбросить.",
@@ -796,7 +798,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
-      "title": "Повторите попытку (API HTTP {{status}})",
+      "title": "Повторите попытку (genuine-close)(API HTTP {{status}})",
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
@@ -863,7 +865,7 @@
       "description": "It took too long for the server to respond, please retry"
     },
     "TimeoutTagged": {
-      "title": "Время истекло ({{tag}}).",
+      "title": "Время истекло. ({{tag}})",
       "description": "It took too long for the server to respond"
     },
     "TransportError": {
@@ -878,8 +880,11 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
-      "title": "Не удалось обновить встроенное ПО на устройстве.",
+      "title": "Update canceled",
       "description": "Повторите попытку или обратитесь в службу поддержки компании Ledger."
     },
     "UserRefusedOnDevice": {

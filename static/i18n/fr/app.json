@@ -19,9 +19,9 @@
     "selectAccountNoOption": "No account matching \"{{accountName}}\"",
     "selectCurrency": "Choose a crypto asset",
     "selectCurrencyNoOption": "Aucun crypto-actif \"{{currencyName}}\"",
-    "selectExchange": "Sélectionner un échange",
-    "selectExchangeNoOption": "Aucun échange correspondant à \"{{exchangeName}}\"",
-    "selectExchangeNoOptionAtAll": "Aucun échange trouvé",
+    "selectExchange": "Sélectionner un service d'échange",
+    "selectExchangeNoOption": "Aucun service d'échange correspondant à \"{{exchangeName}}\"",
+    "selectExchangeNoOptionAtAll": "Aucun service d'échange trouvé",
     "sortBy": "Sort by",
     "search": "Search",
     "save": "Save",
@@ -83,7 +83,7 @@
     "accounts": "Accounts ({{count}})",
     "manager": "Manager",
     "exchange": "Buy crypto",
-    "developer": "Outils développement"
+    "developer": "Outils de développement"
   },
   "account": {
     "lastOperations": "Last operations",
@@ -99,7 +99,7 @@
       "advancedLogs": "Journaux détaillés",
       "accountName": {
         "title": "Account name",
-        "desc": "Décrit ce compte"
+        "desc": "Décrire ce compte"
       },
       "unit": {
         "title": "Unit",
@@ -107,7 +107,7 @@
       },
       "endpointConfig": {
         "title": "Node",
-        "desc": "L’API à utiliser"
+        "desc": "Le noeud d’API à utiliser"
       }
     }
   },
@@ -204,8 +204,8 @@
     "accountAlreadyImportedSubtitle": "Comptes déjà présents dans le portefeuille ({{count}})",
     "accountToImportSubtitle": "Add existing account",
     "accountToImportSubtitle_plural": "Add existing accounts",
-    "selectAll": "Sélectionner Tout ({{count}})",
-    "unselectAll": "Désélectionner Tout ({{count}})",
+    "selectAll": "Sélectionner tout ({{count}})",
+    "unselectAll": "Désélectionner tout ({{count}})",
     "newAccount": "New account",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
@@ -262,10 +262,12 @@
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
+        "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -273,12 +275,12 @@
         "firmware": "Firmware updating...",
         "flash": "Flashing your device..."
       },
-      "confirmIdentifier": "Vérifiez l’identificateur.",
+      "confirmIdentifier": "Vérifier l’identifiant",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Identifier",
-      "mcuTitle": "Mise à jour du MCU",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
       "successText": "Please re-install the apps on your device"
@@ -441,9 +443,9 @@
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
-      "title": "Action de l’utilisateur requise",
-      "part1": "Erreur lors de la suppression du dossier cache. Veuillez supprimer le dossier manuellement :",
-      "part2": "Cliquez sur le bouton Ouvrir dossier L’application va se fermer. Supprimez manuellement le dossier \"sqlite\".",
+      "title": "Action requise de l’utilisateur",
+      "part1": "Erreur lors de la suppression du dossier de cache. Veuillez supprimer le dossier manuellement :",
+      "part2": "Cliquez sur le bouton Ouvrir dossier. L’application va se fermer. Supprimez manuellement le dossier \"sqlite\".",
       "part3": "app will close",
       "part4": ", and manually delete the \"sqlite\" folder.",
       "part5": "Vous pouvez ensuite relancer l’application normalement."
@@ -468,7 +470,7 @@
     },
     "exportLogs": {
       "title": "Export logs",
-      "desc": "L’export des journaux Ledger Live pourra être nécessaire aux fins de dépannage.",
+      "desc": "L’export des journaux de Ledger Live pourra être nécessaire aux fins de dépannage.",
       "btn": "Export"
     }
   },
@@ -491,7 +493,7 @@
     "setPassword": {
       "title": "Password lock",
       "subTitle": "Set a password",
-      "desc": "Assurez-vous de vous souvenir de votre mot de passe. La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes doivent à nouveau être ajoutés."
+      "desc": "Veillez à vous souvenir de votre mot de passe. La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes devront à nouveau être ajoutés."
     },
     "disablePassword": {
       "title": "Disable password lock",
@@ -509,15 +511,15 @@
   },
   "crash": {
     "oops": "Oops, something went wrong",
-    "uselessText": "Tentez à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos journaux et contactez l’assistance Ledger.",
+    "uselessText": "Vous pouvez essayer à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos journaux et contacter l’assistance Ledger.",
     "restart": "Restart",
     "support": "Contact Support",
     "github": "GitHub"
   },
   "disclaimerModal": {
-    "title": "Échangez en toute sécurité",
-    "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent augmenter ou baisser. Évaluez attentivement vos objectifs commerciaux et les risques financiers que vous êtes prêt à prendre.",
-    "desc_2": "Veuillez noter que Ledger ne fournit aucun service de conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
+    "title": "Tradez en toute sécurité.",
+    "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent monter ou baisser. Évaluez attentivement vos objectifs de trading et les risques financiers que vous êtes prêt à prendre.",
+    "desc_2": "Veuillez noter que Ledger ne fournit aucun conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
     "cta": "Got it"
   },
   "language": {
@@ -543,7 +545,7 @@
       "startBtn": "Premiers pas"
     },
     "init": {
-      "title": "Les premiers pas avec votre appareil Ledger",
+      "title": "Premiers pas avec votre appareil Ledger",
       "newDevice": {
         "title": "Initialize as new device"
       },
@@ -567,7 +569,7 @@
       }
     },
     "selectDevice": {
-      "title": "Sélectionnez votre appareil"
+      "title": "Sélectionner votre appareil"
     },
     "selectPIN": {
       "disclaimer": {
@@ -693,8 +695,8 @@
       "title": "Verrouillage par mot de passe (facultatif)",
       "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
-        "note1": "Assurez-vous de vous souvenir de votre mot de passe. Ne le partagez avec personne.",
-        "note2": "La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes devront à nouveau être ajoutés.",
+        "note1": "Veillez à vous souvenir de votre mot de passe. Ne le partagez avec personne.",
+        "note2": "La perte de votre mot de passe nécessite la reconfiguration de Ledger Live. Vos comptes devront à nouveau être ajoutés.",
         "note3": "La réinitialisation de Ledger Live n’affecte pas vos crypto-actifs."
       }
     },
@@ -712,13 +714,13 @@
           "item5": "End of page scroll",
           "item6": "App (un)installation and version",
           "item7": "Number of accounts, crypto assets and operations",
-          "item8": "Durée de session globale et par page ",
+          "item8": "Durée de session globale et par page",
           "item9": "Ledger device type and firmware"
         }
       },
       "sentryLogs": {
         "title": "Bug reports",
-        "desc": "Envoyer automatiquement les rapports pour aider Ledger à corriger les bugs."
+        "desc": "Envoyer automatiquement des rapports pour aider Ledger à corriger les bugs."
       },
       "technicalData": {
         "title": "Technical data*",
@@ -726,7 +728,7 @@
         "mandatoryText": "* obligatoire",
         "mandatoryContextual": {
           "title": "Données techniques",
-          "item1": "Identificateur unique et anonyme de l’application",
+          "item1": "Identifiant unique et anonyme de l’application",
           "item2": "Ledger Live version, language and region",
           "item3": "OS version, language and region"
         }
@@ -739,7 +741,7 @@
     "finish": {
       "title": "Votre appareil est prêt !",
       "desc": "Install some apps on your device and access the Portfolio",
-      "openAppButton": "Ouvrez Ledger Live"
+      "openAppButton": "Ouvrez Ledger Live."
     }
   },
   "errors": {
@@ -756,15 +758,15 @@
       "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil."
     },
     "DeviceNotGenuine": {
-      "title": "Potentiellement non authentique",
+      "title": "Vraisemblablement non authentique",
       "description": "Request Ledger Support assistance"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Désolé, essayez à nouveau (authenticité proche).",
+      "title": "Désolé, veuillez essayer à nouveau (fermeture pour absence d'authenticité)",
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "Oops, connection failed",
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -780,12 +782,12 @@
       "description": "Please try again"
     },
     "EnpointConfig": {
-      "title": "Point de terminaison invalide",
-      "description": "Veuillez fournir un point de terminaison valide"
+      "title": "Point de terminaison non valide",
+      "description": "Veuillez fournir un point de terminaison valide."
     },
     "FeeEstimationFailed": {
       "title": "Désolé, une erreur est survenue lors de l’estimation des frais.",
-      "description": "Essayez de définir des frais personnalisés (statut : {{status}})."
+      "description": "Essayez de définir des frais personnalisés (status: {{status}})."
     },
     "HardResetFail": {
       "title": "Désolé, réinitialisation impossible",
@@ -863,7 +865,7 @@
       "description": "It took too long for the server to respond, please retry"
     },
     "TimeoutTagged": {
-      "title": "Désolé, le délai est dépassé({{tag}}).",
+      "title": "Désolé, le délai est dépassé ({{tag}}).",
       "description": "It took too long for the server to respond"
     },
     "TransportError": {
@@ -878,8 +880,11 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
-      "title": "Mise à jour du firmware refusée sur l’appareil",
+      "title": "Update canceled",
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
     },
     "UserRefusedOnDevice": {

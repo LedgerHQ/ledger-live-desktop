@@ -18,9 +18,9 @@
     "selectAccount": "Select an account",
     "selectAccountNoOption": "不存在与 \"{{accountName}}\" 匹配的账户",
     "selectCurrency": "选择加密资产",
-    "selectCurrencyNoOption": "不存在加密资产 {{currencyName}}",
+    "selectCurrencyNoOption": "不存在加密资产 \"{{currencyName}}\"",
     "selectExchange": "Select an exchange",
-    "selectExchangeNoOption": "不存在与 {{exchangeName}} 匹配的交易所",
+    "selectExchangeNoOption": "不存在与 \"{{exchangeName}}\" 匹配的交易",
     "selectExchangeNoOptionAtAll": "未找到交易所",
     "sortBy": "排序方式",
     "search": "搜索",
@@ -49,7 +49,7 @@
       "lostPassword": "I lost my password"
     },
     "sync": {
-      "syncing": "正在同步...",
+      "syncing": "正在同步...+",
       "upToDate": "Synchronized",
       "outdated": "Paused",
       "error": "Synchronization error",
@@ -116,7 +116,7 @@
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
   },
   "dashboard": {
-    "title": "资产组合",
+    "title": "账户概览",
     "emptyAccountTile": {
       "desc": "Add accounts to manage more crypto assets",
       "createAccount": "Add account"
@@ -201,7 +201,7 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "accountAlreadyImportedSubtitle": "账户已在 ({{count}}) 资产组合中",
+    "accountAlreadyImportedSubtitle": "账户已位于 ({{count}}) 资产组合中",
     "accountToImportSubtitle": "添加现有账户",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
@@ -262,10 +262,12 @@
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
+        "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -276,9 +278,9 @@
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "Identifier",
-      "mcuTitle": "正在更新 MCU",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "固件已更新",
       "successText": "Please re-install the apps on your device"
@@ -325,7 +327,7 @@
         "fees": "网络费用",
         "advancedOptions": "高级选项",
         "useRBF": "使用费用替代法交易",
-        "message": "留言（140 字）",
+        "message": "留言 (140)",
         "rippleTag": "标签",
         "ethereumGasLimit": "Gas 上限",
         "unitPerByte": "{{unit}} 每字节"
@@ -444,7 +446,7 @@
       "title": "需要用户操作",
       "part1": "无法删除缓存文件夹。请手动删除文件夹：",
       "part2": "点击“打开”文件夹按钮，",
-      "part3": "应用程序将会关闭，然后手动删除 \"sqlite\" 文件夹。",
+      "part3": "应用程序将关闭",
       "part4": ", and manually delete the \"sqlite\" folder.",
       "part5": "这样即可正常重启应用程序。"
     },
@@ -534,7 +536,7 @@
     "breadcrumb": {
       "selectDevice": "设备选择",
       "selectPIN": "PIN 码",
-      "writeSeed": "恢复短语",
+      "writeSeed": "短语助记词",
       "setPassword": "密码锁",
       "analytics": "错误和分析"
     },
@@ -623,7 +625,7 @@
     },
     "writeSeed": {
       "initialize": {
-        "title": "保存您的恢复短语",
+        "title": "保存您的短语助记词",
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
           "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
@@ -637,24 +639,24 @@
         }
       },
       "restore": {
-        "title": "输入您的恢复短语",
+        "title": "输入您的短语助记词",
         "desc": "Enter the recovery phrase saved on your Recovery sheet",
         "nano": {
           "step1": "Choose the length of your recovery phrase.",
           "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
           "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
-          "step4": "重复该过程，直至最后一个字。"
+          "step4": "重复该过程，直至完成最后一个助记词。"
         },
         "blue": {
-          "step1": "选择您的恢复短语的长度。",
+          "step1": "选择您的短语助记词的长度。",
           "step2": "Type the first word of your recovery phrase. Tap the word when it appears.",
-          "step3": "重复该过程，直至最后一个字。"
+          "step3": "重复该过程，直至完成最后一个助记词。"
         }
       },
       "disclaimer": {
-        "note1": "请仔细将您的 24 字恢复短语保存在安全的地方。",
-        "note2": "确保不要将您的恢复短语告知任何人。",
-        "note3": "Ledger 不会保留您恢复短语的任何备份。",
+        "note1": "请仔细将您的一组 24 个短语助记词保存在安全的地方。",
+        "note2": "确保不要将您的短语助记词告知任何人。",
+        "note3": "Ledger 不会保留您短语助记词的任何备份。",
         "note4": "Never use a device supplied with a PIN code or a recovery phrase."
       }
     },
@@ -666,7 +668,7 @@
         "title": "您是否自行选择了您的 PIN 码？"
       },
       "step2": {
-        "title": "您是否自行保存了您的恢复短语？"
+        "title": "您是否自行保存了您的短语助记词？"
       },
       "step3": {
         "title": "您的 Ledger 设备是否为正版？"
@@ -760,11 +762,11 @@
       "description": "Request Ledger Support assistance"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "抱歉，请再试一次（正版-关闭）",
+      "title": "对不起，请重试 （正版-结束）",
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "Oops, connection failed",
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -785,7 +787,7 @@
     },
     "FeeEstimationFailed": {
       "title": "抱歉，费用估算失败",
-      "description": "尝试设置自定义费用（状态：{{status}}）"
+      "description": "尝试设置自定义费用 (status: {{status}})"
     },
     "HardResetFail": {
       "title": "糟糕，无法重置",
@@ -796,7 +798,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
-      "title": "抱歉，请再试一次 (API HTTP {{status}})",
+      "title": "对不起，请重试(API HTTP {{status}})",
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
@@ -878,8 +880,11 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
-      "title": "设备上的固件更新被拒",
+      "title": "Update canceled",
       "description": "请重试或联系 Ledger 支持人员"
     },
     "UserRefusedOnDevice": {
