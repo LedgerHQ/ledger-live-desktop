@@ -62,6 +62,9 @@ class ModalBody extends PureComponent<Props, State> {
       opacity: animGradient,
     }
 
+    // For `renderFooter` returning falsy values, we need to resolve first.
+    const renderedFooter = renderFooter && renderFooter(renderProps)
+
     return (
       <Fragment>
         <ModalHeader onBack={onBack} onClose={onClose}>
@@ -78,7 +81,7 @@ class ModalBody extends PureComponent<Props, State> {
         <div style={GRADIENT_WRAPPER_STYLE}>
           <Animated.div style={gradientStyle} />
         </div>
-        {renderFooter && <ModalFooter>{renderFooter(renderProps)}</ModalFooter>}
+        {renderedFooter && <ModalFooter>{renderedFooter}</ModalFooter>}
       </Fragment>
     )
   }

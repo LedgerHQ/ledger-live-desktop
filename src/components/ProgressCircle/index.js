@@ -7,7 +7,7 @@ import { colors } from 'styles/theme'
 
 import Text from 'components/base/Text'
 
-const STROKE_WIDTH = 5
+const STROKE_WIDTH = 4
 
 type Props = {
   progress: number,
@@ -64,13 +64,13 @@ class ProgressCircle extends PureComponent<Props> {
     return (
       <Container size={size}>
         <TextContainer>
-          <Text ff="Rubik|Regular" color="graphite" fontSize={5}>
+          <Text ff="Rubik|Regular" color={progress === 0 ? 'graphite' : 'wallet'} fontSize={5}>
             {`${Math.round(progress * 100)}%`}
           </Text>
         </TextContainer>
         <svg height={size} width={size}>
           <circle
-            stroke={colors.fog}
+            stroke={colors.lightFog}
             fill="transparent"
             strokeWidth={STROKE_WIDTH}
             style={{ strokeDashoffset }}

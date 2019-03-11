@@ -11,6 +11,7 @@ import type { State } from 'reducers'
 
 import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/currencies'
 
+import { DISABLE_TICKER_ANIMATION } from 'config/constants'
 import { marketIndicatorSelector, localeSelector } from 'reducers/settings'
 
 import { getMarketColor } from 'styles/helpers'
@@ -103,7 +104,7 @@ function FormattedVal(props: Props) {
     })
   }
 
-  if (animateTicker) {
+  if (animateTicker && !DISABLE_TICKER_ANIMATION) {
     text = <FlipTicker value={text} />
   }
 

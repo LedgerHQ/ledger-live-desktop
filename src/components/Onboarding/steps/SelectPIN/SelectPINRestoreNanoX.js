@@ -10,6 +10,7 @@ import type { T } from 'types/common'
 
 import IconChevronRight from 'icons/ChevronRight'
 
+import { getDeviceModel } from '@ledgerhq/devices'
 import { IconOptionRow, DisclaimerBox, OptionRow, Inner } from '../../helperComponents'
 
 type Props = {
@@ -19,17 +20,18 @@ type Props = {
 class SelectPINrestoreNanoX extends PureComponent<Props, *> {
   render() {
     const { t } = this.props
+    const device = getDeviceModel('nanoX')
 
     const stepsLedgerNano = [
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding.selectPIN.restore.instructions.nanoX.step1'),
+        desc: t('onboarding.selectPIN.restore.instructions.nanoX.step1', device),
       },
       {
         key: 'step2',
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
-        desc: t('onboarding.selectPIN.restore.instructions.nanoX.step2'),
+        desc: t('onboarding.selectPIN.restore.instructions.nanoX.step2', device),
       },
       {
         key: 'step3',

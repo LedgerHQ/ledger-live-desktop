@@ -10,6 +10,7 @@ import type { T } from 'types/common'
 
 import IconChevronRight from 'icons/ChevronRight'
 
+import { getDeviceModel } from '@ledgerhq/devices'
 import { IconOptionRow, DisclaimerBox, OptionRow, Inner } from '../../helperComponents'
 
 type Props = {
@@ -24,7 +25,10 @@ class SelectPINnanoX extends PureComponent<Props, *> {
       {
         key: 'step1',
         icon: <IconOptionRow>{'1.'}</IconOptionRow>,
-        desc: t('onboarding.selectPIN.initialize.instructions.nanoX.step1'),
+        desc: t(
+          'onboarding.selectPIN.initialize.instructions.nanoX.step1',
+          getDeviceModel('nanoX'),
+        ),
       },
       {
         key: 'step2',

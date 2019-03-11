@@ -37,7 +37,7 @@ function StepConfirmation({ t, error }: StepProps) {
         <Box
           color="dark"
           mt={4}
-          fontSize={6}
+          fontSize={5}
           ff="Museo Sans|Regular"
           textAlign="center"
           style={{ maxWidth: 350 }}
@@ -47,7 +47,7 @@ function StepConfirmation({ t, error }: StepProps) {
         <Box
           color="graphite"
           mt={4}
-          fontSize={6}
+          fontSize={4}
           ff="Open Sans"
           textAlign="center"
           style={{ maxWidth: 350 }}

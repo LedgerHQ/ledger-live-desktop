@@ -112,7 +112,7 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X",
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
   },
   "dashboard": {
@@ -201,11 +201,11 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "accountAlreadyImportedSubtitle": "アカウントは既にポートフォリオ内に存在します ({{count}})",
+    "accountAlreadyImportedSubtitle": "アカウントは既にポートフォリオ({{count}})内に存在します",
     "accountToImportSubtitle": "既存アカウントを追加",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
-    "selectAll": "すべて選択 ({{count}})",
-    "unselectAll": "すべての選択を解除 ({{count}})",
+    "selectAll": "すべての({{count}})を選択",
+    "unselectAll": "すべての({{count}})を選択を解除",
     "newAccount": "新規アカウント",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
@@ -262,10 +262,12 @@
       "latest": "ファームウェアバージョン {{version}} をご利用いただけます",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
+        "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -276,9 +278,9 @@
       "confirmIdentifier": "識別子を検証してください",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "識別子",
-      "mcuTitle": "MCUを更新しています",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "機器からUSBケーブルを外します",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "ファームウェアが更新されました",
       "successText": "Please re-install the apps on your device"
@@ -328,7 +330,7 @@
         "message": "メッセージを残す（140）",
         "rippleTag": "タグ",
         "ethereumGasLimit": "ガス制限",
-        "unitPerByte": "バイト当たり{{unit}} "
+        "unitPerByte": "バイト当たり{{unit}}"
       },
       "connectDevice": {
         "title": "機器"
@@ -392,7 +394,7 @@
     },
     "currencies": {
       "desc": "クリプトアセットを選択して、設定を編集します。",
-      "exchange": "レートプロバイダー ({{ticker}} → BTC)",
+      "exchange": "レートプロバイダー({{ticker}} → BTC)",
       "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
@@ -579,19 +581,19 @@
         "title": "PINコードを選択します",
         "instructions": {
           "nano": {
-            "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
+            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect the Ledger Nano X to your computer.",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "Press both buttons to choose Set up as new device.",
             "step3": "Press the left or right button to select a digit.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
-            "step1": "Ledger Blueをお使いのコンピューターに接続します。",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "Tap on <1><0>Configure as new device</0></1>.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
@@ -601,20 +603,20 @@
         "title": "PINコードを選択します",
         "instructions": {
           "nano": {
-            "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
+            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect your Ledger Nano X to your computer.",
-            "step2": "Press both buttons as instructed on your Ledger Nano X screen.",
+            "step1": "Connect your {{productName}} to your computer.",
+            "step2": "Press both buttons as instructed on your {{productName}} screen.",
             "step3": "Press the left button to cancel Configure as new device.",
             "step4": "Press the right button to select Restore configuration.",
             "step5": "Choose a PIN code between 4 and 8 digits long."
           },
           "blue": {
-            "step1": "Ledger Blueをお使いのコンピューターに接続します。",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "<1><0>設定を復元</0></1>をタップします。",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
@@ -690,7 +692,7 @@
       }
     },
     "setPassword": {
-      "title": "パスワードロック（オプション）",
+      "title": "パスワードロック（オプション） ",
       "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
         "note1": "パスワードを忘れないようご注意ください。また、パスワードを共有しないでください。",
@@ -760,11 +762,11 @@
       "description": "Request Ledger Support assistance"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "再試行してください（正規品 - 閉じる）",
+      "title": "申し訳ありませんが、再度お試し (ください  本当に閉じる)",
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "Oops, connection failed",
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -785,7 +787,7 @@
     },
     "FeeEstimationFailed": {
       "title": "手数料見積もりに失敗しました",
-      "description": "通関手数料を設定してください（ステータス：{{status}}）"
+      "description": "通関手数料を設定してください(status: {{status}})"
     },
     "HardResetFail": {
       "title": "リセットできませんでした",
@@ -796,7 +798,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
-      "title": "再試行してください（API HTTP {{status}}）",
+      "title": "申し訳ありませんが、再度お試しください (API HTTP {{status}})",
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
@@ -878,8 +880,11 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
-      "title": "ファームウェアのアップデートが機器で却下されました",
+      "title": "Update canceled",
       "description": "再試行するか、Ledger Supportにご連絡ください。"
     },
     "UserRefusedOnDevice": {

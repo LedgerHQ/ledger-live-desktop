@@ -8,6 +8,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { createStructuredSelector } from 'reselect'
+import { getDeviceModel } from '@ledgerhq/devices'
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
@@ -93,7 +94,7 @@ class DashboardPage extends PureComponent<Props> {
           <UpdateBanner />
           <TopBanner
             content={{
-              message: t('banners.promoteMobile'),
+              message: t('banners.promoteMobile', getDeviceModel('nanoX')),
               Icon: IconNanoX,
               right: (
                 <FakeLink onClick={() => openURL(urls.promoNanoX)}>
@@ -172,7 +173,7 @@ const TopBannerContainer = styled.div`
   }
 `
 // If no banners are present, the SeparatorBar appears
-const SeparatorBar = styled.div`
+export const SeparatorBar = styled.div`
   height: 1px;
   border-bottom: 1px solid ${p => p.theme.colors.fog};
   margin-bottom: 15px;

@@ -9,7 +9,7 @@ type Input = {
   firmware: FirmwareUpdateContext,
 }
 
-type Result = { progress: number }
+type Result = { progress: number, displayedOnDevice: boolean }
 
 const cmd: Command<Input, Result> = createCommand('firmwarePrepare', ({ devicePath, firmware }) =>
   prepare(devicePath, firmware),

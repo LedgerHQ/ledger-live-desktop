@@ -80,7 +80,7 @@
   },
   "sidebar": {
     "menu": "메뉴",
-    "accounts": "계정({{count}})",
+    "accounts": "계정 ({{count}})",
     "manager": "Manager",
     "exchange": "Buy crypto",
     "developer": "개발 도구"
@@ -89,7 +89,7 @@
     "lastOperations": "마지막 작업",
     "emptyState": {
       "title": "아직 암호화 자산이 없습니까?",
-      "desc": " <1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
+      "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
       "buttons": {
         "receiveFunds": "수신"
       }
@@ -112,7 +112,7 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the Ledger Nano X",
+    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
   },
   "dashboard": {
@@ -122,7 +122,7 @@
       "createAccount": "계정 추가"
     },
     "accounts": {
-      "title": "계정({{count}})"
+      "title": "계정 ({{count}})"
     },
     "greeting": {
       "morning": "안녕하세요.",
@@ -193,7 +193,7 @@
   "addAccounts": {
     "title": "계정 추가",
     "breadcrumb": {
-      "informations": "암호화 자산 ",
+      "informations": "암호화 자산",
       "connectDevice": "장치",
       "import": "계정",
       "finish": "확인"
@@ -201,11 +201,11 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
-    "accountAlreadyImportedSubtitle": "포트폴리오에 이미 있는 계정({{count}})",
+    "accountAlreadyImportedSubtitle": "계정이 이미 포트폴리오 ({{count}})에 있습니다.",
     "accountToImportSubtitle": "기존 계정 추가",
     "accountToImportSubtitle_plural": "기존 계정 추가",
-    "selectAll": "모두 선택({{count}})",
-    "unselectAll": "모두 선택 해제({{count}})",
+    "selectAll": "모든 ({{count}}) 선택",
+    "unselectAll": "모든 ({{count}}) 선택 해제",
     "newAccount": "새 계정",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
@@ -262,10 +262,12 @@
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets."
+      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
+        "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -276,9 +278,9 @@
       "confirmIdentifier": "식별자 확인",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
       "identifier": "식별자",
-      "mcuTitle": "MCU 업데이트",
+      "mcuTitle": "Finalize update",
       "mcuFirst": "장치에서 USB 케이블 분리",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the Processing screen appears",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "펌웨어 업데이트됨",
       "successText": "Please re-install the apps on your device"
@@ -325,7 +327,7 @@
         "fees": "네트워크 수수료",
         "advancedOptions": "고급 옵션",
         "useRBF": "RBF(replace-by-fee) 트랜잭션 사용",
-        "message": "메시지 남기기(140자)",
+        "message": "메시지 남기기 (140 )",
         "rippleTag": "태그",
         "ethereumGasLimit": "가스 리밋",
         "unitPerByte": "바이트 당 {{unit}}"
@@ -392,7 +394,7 @@
     },
     "currencies": {
       "desc": "설정을 수정할 암호화 자산을 선택합니다.",
-      "exchange": "환율 공급자({{ticker}} → BTC)",
+      "exchange": "환율 공급자 ({{ticker}} → BTC)",
       "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "확인 수",
       "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
@@ -443,8 +445,8 @@
     "resetFallbackModal": {
       "title": "사용자 조치 필요",
       "part1": "캐시 폴더를 삭제할 수 없습니다. 폴더를 수동으로 삭제하십시오.",
-      "part2": "폴더 열기 버튼을 클릭하여 ",
-      "part3": "앱이 닫히면 ",
+      "part2": "폴더 열기 버튼을 클릭하여",
+      "part3": "앱이 닫히면",
       "part4": "\"sqlite\" 폴더를 수동으로 삭제하십시오.",
       "part5": "그런 다음 앱을 정상적으로 다시 시작할 수 있습니다."
     },
@@ -579,19 +581,19 @@
         "title": "PIN 코드 선택",
         "instructions": {
           "nano": {
-            "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
+            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect the Ledger Nano X to your computer.",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "Press both buttons to choose Set up as new device.",
             "step3": "Press the left or right button to select a digit.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
-            "step1": "Ledger Blue를 컴퓨터에 연결합니다.",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "Tap on <1><0>Configure as new device</0></1>.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
@@ -601,20 +603,20 @@
         "title": "PIN 코드 선택",
         "instructions": {
           "nano": {
-            "step1": "Connect the Ledger Nano S to your computer. Press both buttons to begin.",
+            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect your Ledger Nano X to your computer.",
-            "step2": "Press both buttons as instructed on your Ledger Nano X screen.",
+            "step1": "Connect your {{productName}} to your computer.",
+            "step2": "Press both buttons as instructed on your {{productName}} screen.",
             "step3": "Press the left button to cancel Configure as new device.",
             "step4": "Press the right button to select Restore configuration.",
             "step5": "Choose a PIN code between 4 and 8 digits long."
           },
           "blue": {
-            "step1": "Ledger Blue를 컴퓨터에 연결합니다.",
+            "step1": "Connect the {{productName}} to your computer.",
             "step2": "<1><0>구성 복원</0></1>을 누릅니다.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
@@ -660,7 +662,7 @@
     },
     "genuineCheck": {
       "title": "보안 체크리스트",
-      "descGeneric": "계속하기 전에 보안 체크리스트의 작성을 완료하십시오. ",
+      "descGeneric": "계속하기 전에 보안 체크리스트의 작성을 완료하십시오.",
       "descRestore": "Before getting started, please confirm:",
       "step1": {
         "title": "PIN 코드를 자신이 직접 선택했습니까?"
@@ -690,7 +692,7 @@
       }
     },
     "setPassword": {
-      "title": "암호 잠금(선택 사항)",
+      "title": "암호 잠금(옵션)",
       "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
       "disclaimer": {
         "note1": "암호를 기억하고, 공유하지 마십시오.",
@@ -725,7 +727,7 @@
         "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
         "mandatoryText": "* 필수",
         "mandatoryContextual": {
-          "title": "기술 데이터 ",
+          "title": "기술 데이터",
           "item1": "익명 고유 애플리케이션 ID",
           "item2": "Ledger Live version, language and region",
           "item3": "OS version, language and region"
@@ -760,11 +762,11 @@
       "description": "Request Ledger Support assistance"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "죄송합니다. 다시 시도하십시오(정품-닫기).",
+      "title": "죄송합니다. 다시 시도하십시오(정품-종료).",
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "Oops, connection failed",
+      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -785,7 +787,7 @@
     },
     "FeeEstimationFailed": {
       "title": "죄송합니다. 수수료를 산정하지 못했습니다.",
-      "description": "관례적 수수료 설정을 시도하십시오(상태: {{status}})."
+      "description": "관례적 수수료 설정을 시도하십시오. (status: {{status}})"
     },
     "HardResetFail": {
       "title": "죄송합니다. 재설정하지 못했습니다.",
@@ -796,7 +798,7 @@
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPIError": {
-      "title": "죄송합니다. 다시 시도하십시오(API HTTP {{status}}).",
+      "title": "죄송합니다. (API HTTP {{status}})을(를) 다시 시도하십시오.",
       "description": "Please retry. Interacting with Ledger's API server went wrong."
     },
     "LedgerAPIErrorWithMessage": {
@@ -863,7 +865,7 @@
       "description": "It took too long for the server to respond, please retry"
     },
     "TimeoutTagged": {
-      "title": "죄송합니다. 시간이 초과되었습니다({{tag}}).",
+      "title": "죄송합니다. 시간이 초과되었습니다. ({{tag}})",
       "description": "It took too long for the server to respond"
     },
     "TransportError": {
@@ -878,8 +880,11 @@
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
+    "UserRefusedAllowManager": {
+      "title": "Manager refused on device"
+    },
     "UserRefusedFirmwareUpdate": {
-      "title": "장치에서 펌웨어 업데이트가 거부되었습니다.",
+      "title": "Update canceled",
       "description": "다시 시도하거나 Ledger 지원 센터에 문의하십시오."
     },
     "UserRefusedOnDevice": {

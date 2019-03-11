@@ -11,6 +11,7 @@ import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
 import FormattedVal from 'components/base/FormattedVal'
 import DeltaChange from 'components/DeltaChange'
+import { DISABLE_GRAPHS } from 'config/constants'
 import AccountCardHeader from './Header'
 
 const Wrapper = styled(Card).attrs({
@@ -50,15 +51,17 @@ class AccountCard extends PureComponent<{
             ) : null}
           </Box>
         </Box>
-        <Chart
-          data={balanceHistory}
-          color={account.currency.color}
-          height={52}
-          hideAxis
-          isInteractive={false}
-          id={`account-chart-${account.id}`}
-          unit={account.unit}
-        />
+        {DISABLE_GRAPHS ? null : (
+          <Chart
+            data={balanceHistory}
+            color={account.currency.color}
+            height={52}
+            hideAxis
+            isInteractive={false}
+            id={`account-chart-${account.id}`}
+            unit={account.unit}
+          />
+        )}
       </Box>
     )
   }

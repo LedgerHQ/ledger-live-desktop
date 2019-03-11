@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent, Fragment } from 'react'
+import { Trans } from 'react-i18next'
 import styled from 'styled-components'
 
 import { i } from 'helpers/staticPath'
@@ -77,9 +78,9 @@ class StepFlashMcu extends PureComponent<Props, State> {
 
   renderBody = () => {
     const { installing, progress } = this.state
-    const { t } = this.props
+    const { firmware, t } = this.props
 
-    return installing ? (
+    return installing || !firmware.shouldFlashMCU ? (
       <Installing installing={installing} progress={progress} />
     ) : (
       <Fragment>
@@ -98,7 +99,13 @@ class StepFlashMcu extends PureComponent<Props, State> {
         <Box mx={7}>
           <Text ff="Open Sans|Regular" align="center" color="smoke">
             <Bullet>{'2.'}</Bullet>
-            {t('manager.modal.mcuSecond')}
+            <Trans i18nKey="manager.modal.mcuSecond">
+              {'Press the left button and hold it while you reconnect the USB cable until the '}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Processing'}
+              </Text>
+              {' screen appears'}
+            </Trans>
           </Text>
           <img
             src={i('logos/bootloaderMode.png')}
