@@ -6,6 +6,7 @@ import moment from 'moment'
 import { formatShort } from '@ledgerhq/live-common/lib/currencies'
 import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
+import { DISABLE_GRAPHS } from 'config/constants'
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
 import CalculateBalance from 'components/CalculateBalance'
@@ -55,53 +56,58 @@ const BalanceSummary = ({
                 })}
               </Box>
             ) : null}
-            <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
-              <Chart
-                id={chartId}
-                unit={account ? account.unit : null}
-                color={!isAvailable ? 'rgba(0,0,0,0.04)' : chartColor}
-                data={
-                  isAvailable
-                    ? balanceHistory
-                    : balanceHistory.map(i => ({
-                        ...i,
-                        value: BigNumber(
-                          10000 *
-                            (1 +
-                            0.1 * Math.sin(i.date * Math.cos(i.date)) + // random-ish
-                              0.5 * Math.cos(i.date / 2000000000 + Math.sin(i.date / 1000000000))),
-                        ), // general curve trend
-                      }))
-                }
-                height={200}
-                currency={counterValue}
-                cvCode={counterValue.ticker}
-                tickXScale={selectedTimeRange}
-                renderTickY={
-                  isAvailable ? val => formatShort(counterValue.units[0], BigNumber(val)) : () => ''
-                }
-                isInteractive={isAvailable}
-                renderTooltip={
-                  isAvailable && !account
-                    ? d => (
-                        <Fragment>
-                          <FormattedVal
-                            alwaysShowSign={false}
-                            fontSize={5}
-                            color="dark"
-                            showCode
-                            unit={counterValue.units[0]}
-                            val={d.value}
-                          />
-                          <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-                            {moment(d.date).format('LL')}
-                          </Box>
-                        </Fragment>
-                      )
-                    : undefined
-                }
-              />
-            </Box>
+            {DISABLE_GRAPHS ? null : (
+              <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
+                <Chart
+                  id={chartId}
+                  unit={account ? account.unit : null}
+                  color={!isAvailable ? 'rgba(0,0,0,0.04)' : chartColor}
+                  data={
+                    isAvailable
+                      ? balanceHistory
+                      : balanceHistory.map(i => ({
+                          ...i,
+                          value: BigNumber(
+                            10000 *
+                              (1 +
+                              0.1 * Math.sin(i.date * Math.cos(i.date)) + // random-ish
+                                0.5 *
+                                  Math.cos(i.date / 2000000000 + Math.sin(i.date / 1000000000))),
+                          ), // general curve trend
+                        }))
+                  }
+                  height={200}
+                  currency={counterValue}
+                  cvCode={counterValue.ticker}
+                  tickXScale={selectedTimeRange}
+                  renderTickY={
+                    isAvailable
+                      ? val => formatShort(counterValue.units[0], BigNumber(val))
+                      : () => ''
+                  }
+                  isInteractive={isAvailable}
+                  renderTooltip={
+                    isAvailable && !account
+                      ? d => (
+                          <Fragment>
+                            <FormattedVal
+                              alwaysShowSign={false}
+                              fontSize={5}
+                              color="dark"
+                              showCode
+                              unit={counterValue.units[0]}
+                              val={d.value}
+                            />
+                            <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
+                              {moment(d.date).format('LL')}
+                            </Box>
+                          </Fragment>
+                        )
+                      : undefined
+                  }
+                />
+              </Box>
+            )}
           </Fragment>
         )}
       </CalculateBalance>
