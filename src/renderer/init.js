@@ -133,7 +133,20 @@ function r(Comp) {
   }
 }
 
-init().catch(e => {
-  logger.critical(e)
-  r(<AppError error={e} language="en" />)
-})
+init()
+  .catch(e => {
+    logger.critical(e)
+    r(<AppError error={e} language="en" />)
+  })
+  .catch(error => {
+    // catch the catch! (e.g. react fails to render)
+    const pre = document.createElement('pre')
+    pre.innerHTML = `Ledger Live crashed. Please contact Ledger support.
+${String(error)}
+${String((error && error.stack) || 'no stacktrace')}`
+    if (document.body) {
+      document.body.style.padding = '50px'
+      document.body.innerHTML = ''
+      document.body.appendChild(pre)
+    }
+  })
