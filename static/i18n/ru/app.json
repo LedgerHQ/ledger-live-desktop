@@ -113,7 +113,7 @@
   },
   "banners": {
     "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
+    "genericTerminatedCrypto": "{{coinName}} больше не поддерживается"
   },
   "dashboard": {
     "title": "Портфель",
@@ -125,25 +125,25 @@
       "title": "Счета ({{count}})"
     },
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "Доброе утро",
+      "evening": "Добрый вечер",
+      "afternoon": "Добрый день"
     },
     "summary": "Ознакомьтесь со сводной информацией о счете.",
     "summary_plural": "Ознакомьтесь со сводной информацией о таком количестве счетов: {{count}}.",
     "recentActivity": "Последние операции",
-    "totalBalance": "Total balance",
+    "totalBalance": "Общий баланс",
     "accountsOrder": {
       "name": "имя",
-      "balance": "balance"
+      "balance": "баланс"
     }
   },
   "currentAddress": {
     "title": "Текущий адрес",
     "for": "Адрес для счета <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfUnverified": "Убедитесь в том, что адрес {{currencyName}}, отображаемый на устройстве, совпадает с адресом, отображаемым на компьютере.",
+    "messageIfAccepted": "Адрес подтвержден. Если он был вставлен из буфера обмена или введен в результате сканирования QR-кода, проверьте его еще раз.",
+    "messageIfSkipped": "На используемом устройстве Ledger адрес {{currencyName}} не был подтвержден. Для обеспечения оптимального уровня безопасности проверьте его."
   },
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
