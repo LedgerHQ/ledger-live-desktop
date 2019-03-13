@@ -147,9 +147,9 @@
   },
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
-    "step1": "Connect and unlock your <1>Ledger device</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1>Ledger Manager</1> on your device"
+    "step1": "Подключите и разблокируйте <1>устройство Ledger</1>.",
+    "step2": "Откройте на устройстве приложение <1><0>{{managerAppName}}</0></1>.",
+    "step3": "Разрешите приложению <1>Ledger Manager</1> доступ к своему устройству."
   },
   "emptyState": {
     "sidebar": {
@@ -165,9 +165,9 @@
     }
   },
   "partners": {
-    "title": "Buy crypto",
+    "title": "Купить крипто",
     "desc": "Try a few services we've selected",
-    "visitWebsite": "Visit website",
+    "visitWebsite": "Посетить веб-сайт",
     "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot",
     "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
     "changenow": "ChangeNOW is one of the leading custody-free instant exchange services",
@@ -272,11 +272,11 @@
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Flashing your device..."
+        "firmware": "Обновление встроенного ПО...",
+        "flash": "Выполняется перепрошивка устройства..."
       },
       "confirmIdentifier": "Проверить идентификатор",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
+      "confirmIdentifierText": "Убедитесь в том, что идентификатор на устройстве совпадает с приведенным ниже идентификатором. Для подтверждения нажмите правую кнопку и введите PIN-код.",
       "identifier": "Идентификатор",
       "mcuTitle": "Finalize update",
       "mcuFirst": "Отсоедините USB-кабель от устройства.",
@@ -338,14 +338,14 @@
       "verification": {
         "title": "Проверка",
         "warning": "Please verify all transaction details on your device",
-        "body": "Confirm the transaction on your device to send it"
+        "body": "Для отправки транзакции подтвердите ее на устройстве."
       },
       "confirmation": {
         "title": "Подтверждение",
         "success": {
           "title": "Транзакция отправлена",
           "text": "Your account balance will update once the blockchain has confirmed the transaction",
-          "cta": "View details"
+          "cta": "Просмотреть сведения"
         },
         "pending": {
           "title": "Трансляция транзакции..."
@@ -361,20 +361,20 @@
     "title": "Настройки",
     "tabs": {
       "display": "Общие",
-      "export": "Export accounts",
+      "export": "Экспортировать счета",
       "currencies": "Валюта",
       "help": "Справка",
       "about": "О программе"
     },
     "export": {
-      "title": "Export accounts",
-      "desc": "Export accounts to the Ledger Live mobile app.",
-      "button": "Export",
+      "title": "Экспортировать счета",
+      "desc": "Экспортируйте счета в мобильное приложение Ledger Live.",
+      "button": "Экспортировать",
       "modal": {
-        "button": "Done",
+        "button": "Готово",
         "title": "Scan to export to mobile",
         "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
+        "step1": "Нажмите кнопку <1><0>+</0></1> в меню <3><0>Счета</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
         "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
