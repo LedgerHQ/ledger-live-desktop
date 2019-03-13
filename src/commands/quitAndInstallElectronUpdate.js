@@ -9,7 +9,7 @@ type Result = void
 const cmd: Command<Input, Result> = createCommand('main:quitAndInstallElectronUpdate', () =>
   Observable.create(o => {
     const { app, BrowserWindow } = require('electron')
-    const { autoUpdater } = require('electron-updater')
+    const { autoUpdater } = require('@ledgerhq/electron-updater')
     const browserWindows = BrowserWindow.getAllWindows()
 
     // Fixes quitAndInstall not quitting on macOS, as suggested on
