@@ -118,7 +118,7 @@
   "dashboard": {
     "title": "Portfolio",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage more crypto assets",
+      "desc": "Ajouter des comptes pour gérer plus de crypto-actifs",
       "createAccount": "Add account"
     },
     "accounts": {
