@@ -372,7 +372,7 @@
       "button": "Экспортировать",
       "modal": {
         "button": "Готово",
-        "title": "Scan to export to mobile",
+        "title": "Сканировать для экспорта в мобильное приложение",
         "listTitle": "On the Ledger Live mobile app:",
         "step1": "Нажмите кнопку <1><0>+</0></1> в меню <3><0>Счета</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
@@ -390,7 +390,7 @@
       "region": "Регион",
       "regionDesc": "Choose your region, used to set Ledger Live's time zone.",
       "stock": "Индикатор регионального рынка",
-      "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
+      "stockDesc": "Выберите «Западный», чтобы увеличение рыночной стоимости отображалось синим цветом, или «Восточный», чтобы увеличение рыночной стоимости отображалось красным цветом."
     },
     "currencies": {
       "desc": "Для изменения настроек криптоактива его необходимо выделить.",
