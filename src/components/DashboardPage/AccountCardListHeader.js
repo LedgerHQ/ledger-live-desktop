@@ -7,6 +7,7 @@ import type { T } from 'types/common'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import AccountsOrder from './AccountsOrder'
+import ExportOperationsBtn from '../ExportOperationsBtn'
 
 type Props = {
   t: T,
@@ -18,12 +19,15 @@ class AccountCardListHeader extends PureComponent<Props> {
     const { accountsLength, t } = this.props
 
     return (
-      <Box horizontal alignItems="flex-end">
+      <Box horizontal alignItems="center">
         <Text color="dark" ff="Museo Sans" fontSize={6} data-e2e="dashboard_AccountCount">
           {t('dashboard.accounts.title', { count: accountsLength })}
         </Text>
-        <Box ml="auto" horizontal flow={1}>
+        <Box ml={4}>
           <AccountsOrder />
+        </Box>
+        <Box ml="auto" horizontal flow={1}>
+          <ExportOperationsBtn />
         </Box>
       </Box>
     )

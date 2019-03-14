@@ -31,6 +31,9 @@ class AccountsList extends Component<
     collapsed: boolean,
   },
 > {
+  static defaultProps = {
+    editedNames: {},
+  }
   state = {
     collapsed: !!this.props.collapsible,
   }

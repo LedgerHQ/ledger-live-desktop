@@ -566,6 +566,13 @@
       "Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or consult with reliable experts.",
     "cta": "Got it"
   },
+  "exportOperationsModal": {
+    "title": "Export operations",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper est et nunc suscipit, at volupat lectus iaculis",
+    "cta": "Continue",
+    "noAccounts": "No accounts to export",
+    "selectedAccounts": "Selected Accounts"
+  },
   "language": {
     "system": "Use system language",
     "en": "English",
