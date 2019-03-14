@@ -414,7 +414,7 @@
       "developerMode": "Режим разработчика",
       "developerModeDesc": "Show developer and testnet apps in the Manager.",
       "analytics": "Аналитика",
-      "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
+      "analyticsDesc": "Включите аналитику, чтобы помочь компании Ledger улучшить работу пользовательского интерфейса. Сюда относятся щелчки, посещения страниц, перенаправления, действия (отправка, получение, блокировка экрана и т. п.), прокручивания до конца страницы, установка/удаление и версии приложений, версия приложения, количество счетов, криптоактивы и операции, продолжительность сеансов, тип устройства и встроенное ПО Ledger.",
       "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
       "launchOnboarding": "Device setup",
