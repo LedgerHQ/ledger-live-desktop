@@ -135,6 +135,7 @@ class AppsList extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     this._unmounted = true
+    if (this.sub) this.sub.unsubscribe()
   }
 
   _unmounted = false
@@ -187,7 +188,10 @@ class AppsList extends PureComponent<Props, State> {
   handleUninstallApp = (app: ApplicationVersion) => () =>
     this.runAppScript(app, 'uninstalling', uninstallApp)
 
-  handleCloseModal = () => this.setState({ status: 'idle', mode: 'home' })
+  handleCloseModal = () => {
+    if (this.sub) this.sub.unsubscribe()
+    this.setState({ status: 'idle', mode: 'home' })
+  }
 
   renderBody = () => {
     const { t } = this.props
@@ -205,7 +209,7 @@ class AppsList extends PureComponent<Props, State> {
           </Box>
         )}
         <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          {t(`manager.apps.${mode}`, { app })}
+          {mode !== 'home' ? t(`manager.apps.${mode}`, { app }) : null}
         </Text>
         <Box mt={6}>
           <ProgressBar width={150} progress={progress} />
@@ -275,12 +279,17 @@ class AppsList extends PureComponent<Props, State> {
   renderModal = () => {
     const { status } = this.state
     return (
-      <Modal isOpened={status !== 'idle' && status !== 'loading'} centered>
+      <Modal
+        isOpened={status !== 'idle' && status !== 'loading'}
+        centered
+        onClose={this.handleCloseModal}
+      >
         <ModalBody
           align="center"
           justify="center"
           title={''}
           render={this.renderBody}
+          onClose={this.handleCloseModal}
           renderFooter={['error', 'success'].includes(status) ? this.renderFooter : undefined}
         >
           <FreezeDeviceChangeEvents />
