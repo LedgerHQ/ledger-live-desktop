@@ -7,9 +7,9 @@ type Opts = {
   filename: string,
   computeHash: () => Promise<string>,
   getNextKey: (?string) => Promise<string>,
-  getNextKeySignature: string => Promise<string>,
+  getNextKeySignature: string => Promise<Buffer>,
   getHashFile: () => Promise<string>,
-  getHashFileSignature: () => Promise<string>,
+  getHashFileSignature: () => Promise<Buffer>,
 }
 
 export default function createAppUpdater(opts: Opts): { verify: () => Promise<void> } {
