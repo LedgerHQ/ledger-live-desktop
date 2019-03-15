@@ -506,8 +506,8 @@
     "checking": "Checking update...",
     "checkSuccess": "Update ready to install",
     "quitAndInstall": "Установить сейчас",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again"
+    "error": "Во время обновления возникла ошибка. Скачайте еще раз.",
+    "reDownload": "Скачать еще раз"
   },
   "crash": {
     "oops": "Произошла ошибка",
@@ -526,11 +526,11 @@
     "system": "Использовать язык системы",
     "en": "Английский",
     "fr": "Французский",
-    "es": "Spanish",
-    "ko": "Korean",
-    "zh": "Simplified Chinese",
-    "ja": "Japanese",
-    "ru": "Russian"
+    "es": "Испанский",
+    "ko": "Корейский",
+    "zh": "Китайский упрощенный",
+    "ja": "Японский",
+    "ru": "Русский"
   },
   "onboarding": {
     "breadcrumb": {
@@ -547,17 +547,17 @@
     "init": {
       "title": "Начало работы с устройством Ledger",
       "newDevice": {
-        "title": "Initialize as new device"
+        "title": "Инициализировать как новое устройство"
       },
       "restoreDevice": {
-        "title": "Restore device from recovery phrase"
+        "title": "Восстановить устройство по фразе восстановления"
       },
       "initializedDevice": {
-        "title": "Use an initialized device"
+        "title": "Использовать инициализированное устройство"
       }
     },
     "noDevice": {
-      "title": "Don't have a Ledger device?",
+      "title": "Нет устройства Ledger?",
       "buyNew": {
         "title": "Купить устройство Ledger"
       },
@@ -573,29 +573,29 @@
     },
     "selectPIN": {
       "disclaimer": {
-        "note1": "Always choose your own PIN code.",
-        "note2": "Use 8 digits for optimal security.",
-        "note3": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note1": "Всегда выбирайте собственный PIN-код.",
+        "note2": "Для создания оптимального уровня защиты используйте 8-значный код.",
+        "note3": "Ни в коем случае не используйте устройство с уже заданным PIN-кодом или фразой восстановления."
       },
       "initialize": {
         "title": "Выберите свой PIN-код",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
+            "step2": "Нажмите правую кнопку, чтобы выбрать <1><0>Настроить как новое устройство?</0></1>.",
+            "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
+            "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press both buttons to choose Set up as new device.",
-            "step3": "Press the left or right button to select a digit.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Подключите {{productName}} к компьютеру.",
+            "step2": "Нажмите обе кнопки, чтобы выбрать «Настроить как новое устройство».",
+            "step3": "Для выбора цифры нажимайте левую или правую кнопку.",
+            "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Configure as new device</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step1": "Подключите {{productName}} к компьютеру.",
+            "step2": "Нажмите <1><0>Настроить как новое устройство</0></1>.",
+            "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
       },
@@ -603,22 +603,22 @@
         "title": "Выберите свой PIN-код",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
+            "step2": "Чтобы отменить выбор <1><0>Инициализировать как новое устройство?</0></1>, нажмите левую кнопку. Затем выберите <3><0>Восстановить настройки?</0></3>, нажав правую кнопку.",
+            "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
+            "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
-            "step1": "Connect your {{productName}} to your computer.",
-            "step2": "Press both buttons as instructed on your {{productName}} screen.",
-            "step3": "Press the left button to cancel Configure as new device.",
-            "step4": "Press the right button to select Restore configuration.",
-            "step5": "Choose a PIN code between 4 and 8 digits long."
+            "step1": "Подключите {{productName}} к компьютеру.",
+            "step2": "Нажмите одновременно обе кнопки, как указано на экране {{productName}}.",
+            "step3": "Чтобы отменить выбор «Настроить как новое устройство», нажмите левую кнопку.",
+            "step4": "Чтобы выбрать «Восстановить настройки», нажмите правую кнопку.",
+            "step5": "Выберите PIN-код длиной от 4 до 8 символов."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
+            "step1": "Подключите {{productName}} к компьютеру.",
             "step2": "Нажмите <1><0>Восстановить настройки</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
       }
@@ -628,28 +628,28 @@
         "title": "Сохраните свою фразу восстановления",
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
-          "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "Press the right button to continue and write down all 24 words.",
-          "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
+          "step1": "Запишите <1><0>Слово #1</0></1> в позицию 1 на пустой карточке восстановления.",
+          "step2": "Нажмите правую кнопку, чтобы продолжить, и таким же образом запишите все 24 слова.",
+          "step3": "Подтвердите фразу восстановления, для чего выделите каждое требуемое слово и нажмите обе кнопки для ее подтверждения."
         },
         "blue": {
-          "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
-          "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
-          "step3": "Enter each word to confirm your recovery phrase."
+          "step1": "Запишите каждое слово в карточку восстановления, соблюдая порядок слов.",
+          "step2": "Нажмите <1><0>Далее</0></1> и вводите все слова до тех пор, пока не появится экран <3><0>Подтверждение</0></3>.",
+          "step3": "Чтобы подтвердить фразу восстановления, введите каждое слово."
         }
       },
       "restore": {
         "title": "Введите фразу восстановления.",
-        "desc": "Enter the recovery phrase saved on your Recovery sheet",
+        "desc": "Введите фразу восстановления, сохраненную в карточке восстановления.",
         "nano": {
-          "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+          "step1": "Выберите длину фразы восстановления.",
+          "step2": "Вводите первые буквы <1><0>Слова #1</0></1> до тех пор, пока не появятся предлагаемые слова.",
+          "step3": "Из списка предлагаемых слов выберите <1><0>Слово #1</0></1>, нажав обе кнопки.",
           "step4": "Повторяйте всю процедуру до тех пор, пока не будет выбрано последнее слово."
         },
         "blue": {
           "step1": "Выберите длину фразы восстановления.",
-          "step2": "Type the first word of your recovery phrase. Tap the word when it appears.",
+          "step2": "Введите первое слово фразы восстановления. Выберите его, как только оно появится.",
           "step3": "Повторяйте всю процедуру до тех пор, пока не будет выбрано последнее слово."
         }
       },
@@ -657,7 +657,7 @@
         "note1": "Надежно спрячьте фразу восстановления из 24 слов от посторонних.",
         "note2": "Убедитесь в том, что фраза восстановления известна только вам.",
         "note3": "Компания Ledger не хранит резервные копии фразы восстановления.",
-        "note4": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note4": "Ни в коем случае не используйте устройство с уже заданным PIN-кодом или фразой восстановления."
       }
     },
     "genuineCheck": {
@@ -862,22 +862,22 @@
     },
     "TimeoutError": {
       "title": "Время истекло.",
-      "description": "It took too long for the server to respond, please retry"
+      "description": "Сервер отвечает очень долго. Повторите попытку."
     },
     "TimeoutTagged": {
       "title": "Время истекло. ({{tag}})",
-      "description": "It took too long for the server to respond"
+      "description": "Сервер отвечает очень долго."
     },
     "TransportError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Произошла ошибка. Повторно подключите устройство.",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Произошла ошибка. Повторно подключите устройство.",
       "description": "{{message}}"
     },
     "UnexpectedBootloader": {
-      "title": "Oops, your device should not be in Bootloader mode",
+      "title": "Устройство не должно быть в режиме загрузчика.",
       "description": "Please restart your device or contact us"
     },
     "UserRefusedAllowManager": {
