@@ -145,7 +145,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               withTooltip={false}
             />
             <Box my={4} alignItems="center">
-              <Box>
+              <Box selectable>
                 <FormattedVal
                   color={amount.isNegative() ? 'smoke' : undefined}
                   unit={unit}
@@ -156,7 +156,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                   disableRounding
                 />
               </Box>
-              <Box mt={1}>
+              <Box mt={1} selectable>
                 <CounterValue
                   color="grey"
                   fontSize={5}
