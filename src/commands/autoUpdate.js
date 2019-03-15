@@ -2,6 +2,7 @@
 
 import { createCommand, Command } from 'helpers/ipc'
 import { Observable } from 'rxjs'
+import logger from 'logger'
 
 import { UPDATE_CHECK_IGNORE, UPDATE_CHECK_FEED } from 'config/constants'
 import createElectronAppUpdater from 'main/updater/createElectronAppUpdater'
@@ -28,9 +29,9 @@ const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
         await appUpdater.verify()
         sendStatus('check-success')
       } catch (err) {
+        logger.critical(err)
         // don't throw if the check fail for now. it's a blank bullet.
         if (UPDATE_CHECK_IGNORE) {
-          // TODO: track the error
           sendStatus('check-success')
         } else {
           o.error(err)
