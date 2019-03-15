@@ -25,7 +25,7 @@
     "sortBy": "Сортировать по",
     "search": "Поиск",
     "save": "Сохранить",
-    "lock": "Lock",
+    "lock": "Заблокировать экран",
     "showMore": "Показать больше",
     "max": "Макс.",
     "back": "Назад",
@@ -82,7 +82,7 @@
     "menu": "Меню",
     "accounts": "Счета ({{count}})",
     "manager": "Диспетчер",
-    "exchange": "Buy crypto",
+    "exchange": "Купить крипто",
     "developer": "Инструменты разработчика"
   },
   "account": {
@@ -112,7 +112,7 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
+    "promoteMobile": "Наслаждайтесь использованием Ledger Live теперь и на мобильных устройствах с {{productName}}",
     "genericTerminatedCrypto": "{{coinName}} больше не поддерживается"
   },
   "dashboard": {
@@ -146,18 +146,18 @@
     "messageIfSkipped": "На используемом устройстве Ledger адрес {{currencyName}} не был подтвержден. Для обеспечения оптимального уровня безопасности проверьте его."
   },
   "deviceConnect": {
-    "dashboard": "Navigate to the <1>Dashboard</1> on your device",
+    "dashboard": "Перейдите на <1>панель мониторинга</1> на устройстве.",
     "step1": "Подключите и разблокируйте <1>устройство Ledger</1>.",
     "step2": "Откройте на устройстве приложение <1><0>{{managerAppName}}</0></1>.",
     "step3": "Разрешите приложению <1>Ledger Manager</1> доступ к своему устройству."
   },
   "emptyState": {
     "sidebar": {
-      "text": "Click this button to add accounts to the Portfolio"
+      "text": "Чтобы добавить счета в портфель, нажмите эту кнопку."
     },
     "dashboard": {
-      "title": "Install apps or add accounts",
-      "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
+      "title": "Установка приложений или добавление счетов",
+      "desc": "Чтобы установить приложения или добавить счета, если приложения уже установлены на устройстве Ledger, откройте диспетчер.",
       "buttons": {
         "addAccount": "Добавить счета",
         "installApp": "Открыть диспетчер"
