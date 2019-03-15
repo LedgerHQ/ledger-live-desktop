@@ -386,24 +386,24 @@
       "counterValue": "Эквивалент",
       "counterValueDesc": "Выберите валюту для отображения состояния счета и операций.",
       "exchange": "Обменник",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
+      "exchangeDesc": "Предоставляет обменный курс биткоинов на {{fiat}}, используемый для оценки ценности криптоактивов (crypto asset → BTC → {{fiat}}).",
       "region": "Регион",
-      "regionDesc": "Choose your region, used to set Ledger Live's time zone.",
+      "regionDesc": "Выберите регион для задания часового пояса Ledger Live.",
       "stock": "Индикатор регионального рынка",
       "stockDesc": "Выберите «Западный», чтобы увеличение рыночной стоимости отображалось синим цветом, или «Восточный», чтобы увеличение рыночной стоимости отображалось красным цветом."
     },
     "currencies": {
       "desc": "Для изменения настроек криптоактива его необходимо выделить.",
       "exchange": "Обменник ({{ticker}} → BTC)",
-      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Выберите обменник для обмена из {{currencyName}} в биткоины, используемый для оценки ценности криптоактивов ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Количество подтверждений",
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
     },
     "profile": {
       "password": "Блокировка паролем",
-      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live after inactivity.",
+      "passwordDesc": "Задайте пароль для защиты от несанкционированного доступа к данным Ledger Live, хранящимся на компьютере, в том числе к названиям счетов, информации об остатке, транзакциях и общественным адресам.",
+      "passwordAutoLock": "Автоматическая блокировка экрана",
+      "passwordAutoLockDesc": "Автоматически блокирует экран Ledger Live после периода бездействия.",
       "changePassword": "Изменить пароль",
       "softResetTitle": "Очистить кэш",
       "softResetDesc": "Для принудительной синхронизации с блокчейном очистите кэш Ledger Live.",
@@ -412,35 +412,35 @@
       "hardResetDesc": "Удалите все данные Ledger Live, хранящиеся на компьютере, в том числе информацию о счетах, журнал транзакций и настройки.",
       "hardReset": "Сбросить",
       "developerMode": "Режим разработчика",
-      "developerModeDesc": "Show developer and testnet apps in the Manager.",
+      "developerModeDesc": "Отображает в диспетчере приложения разработчика и приложение Testnet.",
       "analytics": "Аналитика",
       "analyticsDesc": "Включите аналитику, чтобы помочь компании Ledger улучшить работу пользовательского интерфейса. Сюда относятся щелчки, посещения страниц, перенаправления, действия (отправка, получение, блокировка экрана и т. п.), прокручивания до конца страницы, установка/удаление и версии приложений, версия приложения, количество счетов, криптоактивы и операции, продолжительность сеансов, тип устройства и встроенное ПО Ledger.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
-      "launchOnboarding": "Device setup",
-      "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
+      "reportErrors": "Отчеты об ошибках",
+      "reportErrorsDesc": "Автоматически отправляйте отчеты компании Ledger для исправления ошибок.",
+      "launchOnboarding": "Настройка устройства",
+      "launchOnboardingDesc": "Настройте устройство Ledger как новое или восстановите его. Счета и настройки будут сохранены."
     },
     "about": {
-      "desc": "App information, Terms and Conditions, and Privacy Policy."
+      "desc": "Сведения о приложении, условия и положения, политика конфиденциальности."
     },
     "help": {
-      "desc": "Learn more about Ledger Live or get help.",
+      "desc": "Узнайте больше о Ledger Live или воспользуйтесь справкой.",
       "version": "Версия",
       "releaseNotesBtn": "Сведения",
       "faq": "Служба поддержки компании Ledger",
-      "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+      "faqDesc": "При возникновении проблемы воспользуйтесь справкой по использованию Ledger Live с аппаратным кошельком.",
+      "terms": "Условия использования",
+      "termsDesc": "Используя приложение Ledger Live, вы принимаете наши условия использования.",
+      "privacy": "Политика конфиденциальности",
+      "privacyDesc": "О том, какие персональные данные мы собираем, каким образом и для чего, можно узнать в нашей политике конфиденциальности."
     },
     "hardResetModal": {
       "title": "Сбросить Ledger Live",
-      "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Удалили все данные Ledger Live, хранящиеся на компьютере, в том числе информацию о счетах, журнал транзакций и настройки? Закрытые ключи для доступа к криптоактивам остаются в полной сохранности на устройстве Ledger и на карточке восстановления."
     },
     "softResetModal": {
       "title": "Очистить кэш",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Очистка кэша приводит к принудительной повторной синхронизации. Настройки и счета остаются без изменений. Закрытые ключи для доступа к криптоактивам остаются в полной сохранности на устройстве Ledger и на карточке восстановления."
     },
     "resetFallbackModal": {
       "title": "Требуется действие пользователя.",
@@ -452,7 +452,7 @@
     },
     "removeAccountModal": {
       "title": "Удалить счет",
-      "desc": "This will not affect your crypto assets. Accounts can always be re-added."
+      "desc": "Криптоактивы остаются в полной сохранности. Счета можно повторно добавить в любой момент."
     },
     "openUserDataDirectory": {
       "title": "Просмотреть пользовательские данные",
@@ -460,13 +460,13 @@
       "btn": "Просмотреть"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
-      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
-      "desc": "Please select the state of your Ledger device.",
-      "button": "Repair",
-      "generic": "Bootloader",
-      "mcuNotGenuine": "MCU not genuine",
-      "followDeviceRepair": "Follow device repair instructions"
+      "title": "Ремонт устройства Ledger",
+      "descSettings": "Используйте этот инструмент для восстановления устройства Ledger, если во время обновления встроенного ПО возникла неисправность.",
+      "desc": "Выберите состояние устройства Ledger.",
+      "button": "Ремонт",
+      "generic": "Загрузчик",
+      "mcuNotGenuine": "Микроконтроллер не подлинный",
+      "followDeviceRepair": "Следуйте инструкциям по ремонту устройства."
     },
     "exportLogs": {
       "title": "Экспортировать журналы",
@@ -491,20 +491,20 @@
       "subTitle": "Изменить свой пароль"
     },
     "setPassword": {
-      "title": "Password lock",
+      "title": "Блокировка экрана паролем",
       "subTitle": "Задать пароль",
       "desc": "Убедитесь в том, что запомнили свой пароль. В случае утраты пароля необходимо сбросить Ledger Live и повторно добавить счета."
     },
     "disablePassword": {
       "title": "Отключить блокировку паролем",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "Данные Ledger Live будут храниться на компьютере в незашифрованном виде. К таким данным относятся названия счетов, информация о транзакциях и общественные адреса."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
+    "downloadInProgress": "Выполняется скачивание обновлений...",
+    "downloadProgress": "Выполнено: {{progress}} %",
+    "checking": "Проверка обновлений...",
+    "checkSuccess": "Обновления готовы к установке",
     "quitAndInstall": "Установить сейчас",
     "error": "Во время обновления возникла ошибка. Скачайте еще раз.",
     "reDownload": "Скачать еще раз"
