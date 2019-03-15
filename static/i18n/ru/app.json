@@ -878,7 +878,7 @@
     },
     "UnexpectedBootloader": {
       "title": "Устройство не должно быть в режиме загрузчика.",
-      "description": "Please restart your device or contact us"
+      "description": "Перезапустите устройство или свяжитесь с нами."
     },
     "UserRefusedAllowManager": {
       "title": "Manager refused on device"
@@ -889,45 +889,45 @@
     },
     "UserRefusedOnDevice": {
       "title": "Не удалось провести транзакцию на устройстве.",
-      "description": "Please retry or contact Ledger Support in case of doubt"
+      "description": "Повторите попытку, а в случае возникновения сомнений обратитесь в службу поддержки компании Ledger."
     },
     "UserRefusedAddress": {
       "title": "Адрес получения отклонен.",
-      "description": "Please try again or contact Ledger Support when in doubt"
+      "description": "Повторите попытку, а в случае возникновения каких-либо сомнений обратитесь в службу поддержки компании Ledger."
     },
     "UpdateYourApp": {
       "title": "Требуется обновить приложение.",
       "description": "Удалите и повторно установите приложение {{managerAppName}} через диспетчер."
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to Dashboard",
-      "description": "Please navigate back to Dashboard on your device"
+      "title": "Вернуться к панели мониторинга",
+      "description": "Перейдите обратно на панель мониторинга на устройстве."
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (websocket error)",
+      "title": "Повторите попытку (ошибка WebSocket).",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (websocket failed)",
+      "title": "Повторите попытку (сбой WebSocket).",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Wrong device or passphrase for ‘{{accountName}}’",
-      "description": "Please use the device or passphrase for the selected account"
+      "title": "Неправильное устройство или парольная фраза для «{{accountName}}»",
+      "description": "Используйте устройство или фразу, соответствующую для выбранного счета."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Open Manager to update the app"
+      "title": "Требуется обновить приложение.",
+      "description": "Чтобы обновить приложение, откройте диспетчер."
     },
     "InvalidAddress": {
       "title": "Этот адрес {{currencyName}} недействительный."
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "Адрес получателя совпадает с адресом отправителя."
     },
     "CantOpenDevice": {
       "title": "Не удалось подключиться к устройству.",
-      "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
+      "description": "Устройство обнаружено, но при подключении произошел сбой. Повторите попытку, а если проблема не будет устранена, свяжитесь с нами."
     },
     "ETHAddressNonEIP": {
       "title": "Автопроверка не доступна: внимательно проверьте адрес.",
