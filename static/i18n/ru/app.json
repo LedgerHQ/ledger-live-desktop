@@ -663,7 +663,7 @@
     "genuineCheck": {
       "title": "Контрольный список требований по безопасности",
       "descGeneric": "Прежде чем продолжить, заполните контрольный список требований по безопасности.",
-      "descRestore": "Before getting started, please confirm:",
+      "descRestore": "Прежде чем начать, подтвердите:",
       "step1": {
         "title": "Вы лично выбирали PIN-код?"
       },
@@ -681,19 +681,19 @@
       "errorPage": {
         "title": {
           "pinFailed": "Вы не выбирали свой PIN-код?",
-          "recoveryPhraseFailed": "Didn't save your recovery phrase by yourself?",
+          "recoveryPhraseFailed": "Фраза восстановления была сохранена не вами?",
           "isGenuineFail": "Похоже, Ваше устройство не подлинное."
         },
         "desc": {
-          "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
-          "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
+          "pinFailed": "Ни в коем случае не используйте устройство с уже заданным PIN-кодом. В случае возникновения сомнений свяжитесь с нами.",
+          "recoveryPhraseFailed": "Сохранить нужно только ту фразу восстановления, которая была отображена на устройстве. В случае возникновения каких-либо сомнений свяжитесь с нами.",
           "isGenuineFail": "Ваше устройство не прошло проверку подлинности перед подключением к защищенному серверу Ledger. Обратитесь за помощью в службу поддержки компании Ledger."
         }
       }
     },
     "setPassword": {
       "title": "Блокировка паролем (необязательно)",
-      "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
+      "desc": "Задайте пароль для защиты от несанкционированного доступа к данным Ledger Live, хранящимся на компьютере, в том числе к названиям счетов, информации о транзакциях и общественным адресам.",
       "disclaimer": {
         "note1": "Удостоверьтесь в том, что вы запомнили пароль. Никому его не сообщайте.",
         "note2": "В случае утраты пароля необходимо сбросить Ledger Live и повторно добавить счета.",
@@ -701,46 +701,46 @@
       }
     },
     "analytics": {
-      "title": "Bugs and analytics",
-      "desc": "Share anonymized data to help improve Ledger security products and services",
+      "title": "Ошибки и аналитика",
+      "desc": "Предоставьте анонимные данные, чтобы мы могли усовершенствовать продукты и услуги Ledger.",
       "shareAnalytics": {
-        "title": "Analytics",
-        "desc": "Enable analytics to help Ledger understand how to improve user experience.",
+        "title": "Аналитика",
+        "desc": "Включите аналитику, чтобы помочь компании Ledger улучшить работу пользовательского интерфейса.",
         "mandatoryContextual": {
-          "item1": "Clicks",
-          "item2": "In-app page visits",
-          "item3": "Redirection to webpage",
-          "item4": "Actions: send, receive, lock, etc.",
-          "item5": "End of page scroll",
-          "item6": "App (un)installation and version",
-          "item7": "Number of accounts, crypto assets and operations",
+          "item1": "Щелчки",
+          "item2": "Посещение страниц в приложении",
+          "item3": "Перенаправление на веб-страницу",
+          "item4": "Действия: отправка, получение, блокировка экрана и т. п.",
+          "item5": "Прокручивание до конца страницы",
+          "item6": "Установка/удаление приложения и его версия",
+          "item7": "Количество счетов, криптоактивов и операций",
           "item8": "Общая продолжительность сеанса и продолжительность сеанса на странице",
-          "item9": "Ledger device type and firmware"
+          "item9": "Тип устройства Ledger и встроенное ПО"
         }
       },
       "sentryLogs": {
-        "title": "Bug reports",
+        "title": "Отчеты от ошибках",
         "desc": "Автоматически отправляйте отчеты компании Ledger для исправления ошибок."
       },
       "technicalData": {
-        "title": "Technical data*",
-        "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
+        "title": "Технические данные*",
+        "desc": "Компания Ledger автоматически собирает полностью анонимные технические данные, чтобы улучшить работу пользовательского интерфейса.",
         "mandatoryText": "* Обязательно.",
         "mandatoryContextual": {
           "title": "Технические данные",
           "item1": "Анонимный уникальный идентификатор приложения",
-          "item2": "Ledger Live version, language and region",
-          "item3": "OS version, language and region"
+          "item2": "Версия Ledger Live, язык интерфейса и регион",
+          "item3": "Версия ОС, язык интерфейса и регион"
         }
       },
       "terms": {
-        "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "title": "Условия*",
+        "desc": "Продолжая работу, вы подтверждаете, что прочли <1>Условия использования</1> и <3>Политику конфиденциальности</3> и соглашаетесь с их положениями."
       }
     },
     "finish": {
       "title": "Ваше устройство готово!",
-      "desc": "Install some apps on your device and access the Portfolio",
+      "desc": "Установите на устройство приложения и получите доступ к портфелю",
       "openAppButton": "Открыть Ledger Live"
     }
   },
@@ -759,7 +759,7 @@
     },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
-      "description": "Request Ledger Support assistance"
+      "description": "Обратитесь за помощью в службу поддержки компании Ledger"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "Повторите попытку (genuine-close)",
@@ -767,19 +767,19 @@
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Please try again"
+      "description": "Повторите попытку."
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Произошел сбой подключения.",
+      "description": "Повторите попытку."
     },
     "DeviceSocketNoHandler": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Произошел сбой подключения.",
+      "description": "Повторите попытку."
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
-      "description": "Please try again"
+      "title": "Соединение с устройством утеряно.",
+      "description": "Повторите попытку."
     },
     "EnpointConfig": {
       "title": "Недействительная конечная точка.",
@@ -791,30 +791,30 @@
     },
     "HardResetFail": {
       "title": "Не удалось сбросить.",
-      "description": "Please try again or contact us when in doubt"
+      "description": "Повторите попытку, а в случае возникновения сомнений свяжитесь с нами."
     },
     "LatestMCUInstalledError": {
       "title": "Установлена последняя версия.",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "description": "Вы пробовали обновить микроконтроллер устройства без необходимости. Если устройство неисправно, обратитесь в службу поддержки компании Ledger."
     },
     "LedgerAPIError": {
       "title": "Повторите попытку (genuine-close)(API HTTP {{status}})",
-      "description": "Please retry. Interacting with Ledger's API server went wrong."
+      "description": "Повторите попытку. Во время взаимодействия с сервером API компании Ledger произошла ошибка."
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Повторите попытку или обратитесь в службу поддержки компании Ledger."
     },
     "LedgerAPINotAvailable": {
       "title": "Службы для {{currencyName}} недоступны.",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Повторите попытку или обратитесь в службу поддержки компании Ledger."
     },
     "ManagerAPIsFail": {
-      "title": "Oops, Manager services unavailable",
-      "description": "Please check the network status"
+      "title": "Службы диспетчера недоступны.",
+      "description": "Проверьте состояние сети."
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
+      "title": "Уже установлено.",
       "description": "Check your device to see which apps are already installed"
     },
     "ManagerAppRelyOnBTC": {
@@ -934,17 +934,17 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "Не удалось сканировать этот QR код: этот адрес не поддерживает автопроверку."
     },
     "FeeNotLoaded": {
-      "title": "Couldn’t load fee rates, please set manual fees"
+      "title": "Не удалось загрузить тарифы комиссии. Задайте комиссию вручную."
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Комиссия обязательная"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Неизвестная версия микроконтроллера",
+      "description": "Обратитесь в службу поддержки компании Ledger."
     }
   }
 }
