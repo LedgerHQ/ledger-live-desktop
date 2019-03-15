@@ -143,7 +143,7 @@
     "title": "Current address",
     "for": "Address for account <1><0>{{accountName}}</0></1>",
     "messageIfUnverified":
-      "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+      "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted":
       "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
     "messageIfSkipped":
@@ -331,7 +331,7 @@
         "title": "Verification",
         "action": "Verify address on device",
         "text":
-          "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+          "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "Contact us"
       },
       "receiveFunds": {
