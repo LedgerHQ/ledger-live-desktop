@@ -179,11 +179,11 @@
     "luno": "Компания Luno обеспечивает возможность безопасной и простой покупки, хранения и изучения криптовалют, таких как биткоин и Ethereum.",
     "paybis": "С помощью кредитной карты покупка биткоинов от PayBis осуществляется просто и быстро. Служба работает на территории США, Канады, Германии, России и Саудовской Аравии.",
     "shapeshift": "ShapeShift — это интернет-биржа, пользователи которой получают возможность покупать и продавать цифровые активы. Это быстрый и надежный способ покупки и продажи цифровых активов по всему миру без длительной регистрации, риска встречной стороны и помех.",
-    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
-    "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
-    "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
-    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity."
+    "simplex": "Simplex представляет собой финансовое учреждение, имеющее лицензию ЕС, которое предоставляет решение для проведения оплаты кредитными картами с защитой от мошенников.",
+    "taxtoken": "Автоматизированная программа учета налогов и затрат на операции с криптовалютой для граждан США.",
+    "thorswap": "ThorSwap представляет собой мгновенную, безопасную и честную биржу криптоактивов, работающую на основе децентрализованных технологий атомных свопов. Это наиболее удобный способ начать торговлю, не требующий регистрации или соблюдения правила KYC (Know Your Customer — знай своего клиента) для проведения транзакций на небольшую сумму.",
+    "bitpanda": "Bitpanda — это ведущая в Европе розничная брокерская компания, специализирующаяся на покупке и продаже такой криптовалюты, как Bitcoin, Ethereum, IOTA и много других. Вносите деньги, используя кредитную карточку, систему SOFORT-Transfer, NETELLER и другие варианты.",
+    "exmo": "Основанная в 2013 году биржа EXMO, отделения которой расположены в Лондоне, Киеве, Барселоне и Москве, занимает первое место среди бирж в Восточной Европе и является одной из крупнейших в мире по объему и ликвидности."
   },
   "genuinecheck": {
     "modal": {
@@ -194,12 +194,12 @@
     "title": "Добавить счета",
     "breadcrumb": {
       "informations": "Криптоактив",
-      "connectDevice": "Device",
+      "connectDevice": "Устройство",
       "import": "Счета",
       "finish": "Подтверждение"
     },
     "connectDevice": {
-      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+      "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
     "accountAlreadyImportedSubtitle": "Счета, находящиеся в портфеле: ({{count}})",
     "accountToImportSubtitle": "Добавить существующий счет",
@@ -211,17 +211,17 @@
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
     "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "Счетов в {{currencyName}} для добавления нет.",
-    "success": "Account successfully added",
-    "success_plural": "Accounts successfully added",
-    "successDescription": "Add more accounts or return to Portfolio",
-    "successDescription_plural": "Add more accounts or return to Portfolio",
+    "success": "Счет успешно добавлен",
+    "success_plural": "Счета успешно добавлены",
+    "successDescription": "Добавить больше счетов или вернуться в портфель",
+    "successDescription_plural": "Добавить больше счетов или вернуться в портфель",
     "createNewAccount": {
-      "title": "Add new account",
-      "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
+      "title": "Добавить новый счет",
+      "noOperationOnLastAccount": "Невозможно добавить новый счет до получения на счет <1><0>{{accountName}}</0></1> активов.",
       "noAccountToCreate": "Счета в <1><0>{{currencyName}}</0></1> для создания не найдены"
     },
     "cta": {
-      "addMore": "Add more",
+      "addMore": "Добавить еще",
       "add": "Добавить счет",
       "add_plural": "Добавить счета"
     }
@@ -230,9 +230,9 @@
     "title": "Сведения об операции",
     "account": "Счет",
     "date": "Дата",
-    "status": "Status",
-    "confirmed": "Confirmed",
-    "notConfirmed": "Not confirmed",
+    "status": "Статус",
+    "confirmed": "Подтверждено",
+    "notConfirmed": "Не подтверждено",
     "fees": "Комиссия",
     "noFees": "Без комиссии",
     "from": "От",
@@ -252,26 +252,26 @@
       "all": "Каталог приложений",
       "installing": "Установка {{app}}...",
       "uninstalling": "Удаление {{app}}...",
-      "installSuccess": "Successfully installed {{app}}",
-      "uninstallSuccess": "{{app}} uninstalled",
+      "installSuccess": "{{app}} успешно установлено",
+      "uninstallSuccess": "{{app}} удалено",
       "help": "Проверьте, какие приложения уже установлены на устройстве."
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
       "update": "Обновить",
       "latest": "Доступно встроенное ПО версии {{version}}.",
-      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
-      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "disclaimerTitle": "Вы собираетесь установить <1><0>встроенное ПО версии {{version}}</0></1>.",
+      "disclaimerAppDelete": "Удалите все приложения, чтобы освободить место для файлов обновления.",
+      "disclaimerAppReinstall": "При удалении приложений криптоактивы остаются в полной сохранности.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
+        "updateMCU": "Обновление встроенного ПО",
+        "osu": "Установка обновления ОС...",
+        "flash-mcu": "Обновление микроконтроллера...",
+        "flash-bootloader": "Обновление загрузчика...",
         "firmware": "Обновление встроенного ПО...",
         "flash": "Выполняется перепрошивка устройства..."
       },
@@ -505,7 +505,7 @@
     "downloadProgress": "{{progress}}% completed",
     "checking": "Checking update...",
     "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
+    "quitAndInstall": "Установить сейчас",
     "error": "Error during update. Please download again",
     "reDownload": "Download again"
   },
