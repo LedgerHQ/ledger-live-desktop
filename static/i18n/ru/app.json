@@ -141,7 +141,7 @@
   "currentAddress": {
     "title": "Текущий адрес",
     "for": "Адрес для счета <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Убедитесь в том, что адрес {{currencyName}}, отображаемый на устройстве, совпадает с адресом, отображаемым на компьютере.",
+    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "Адрес подтвержден. Если он был вставлен из буфера обмена или введен в результате сканирования QR-кода, проверьте его еще раз.",
     "messageIfSkipped": "На используемом устройстве Ledger адрес {{currencyName}} не был подтвержден. Для обеспечения оптимального уровня безопасности проверьте его."
   },
@@ -307,7 +307,7 @@
       "confirmAddress": {
         "title": "Проверка",
         "action": "Проверить адрес на устройстве",
-        "text": "Убедитесь в том, что адрес {{currencyName}}, отображаемый на устройстве, совпадает с адресом, отображаемым на компьютере.",
+        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "Обратная связь"
       },
       "receiveFunds": {
