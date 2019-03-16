@@ -568,10 +568,13 @@
   },
   "exportOperationsModal": {
     "title": "Export operations",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper est et nunc suscipit, at volupat lectus iaculis",
-    "cta": "Continue",
+    "desc": "Select the accounts for which to export the operations.",
+    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "cta": "Export",
+    "ctaSuccess": "Done",
     "noAccounts": "No accounts to export",
-    "selectedAccounts": "Selected Accounts"
+    "selectedAccounts": "Accounts to include",
+    "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
     "system": "Use system language",
