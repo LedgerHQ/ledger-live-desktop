@@ -240,25 +240,25 @@
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
     "showMore": "Afficher plus de {{recipients}}",
-    "showLess": "Show less"
+    "showLess": "Afficher moins"
   },
   "operationList": {
-    "noMoreOperations": "That's all"
+    "noMoreOperations": "C'est tout."
   },
   "manager": {
-    "yourDeviceIsGenuine": "Your device is genuine",
+    "yourDeviceIsGenuine": "Votre appareil est authentique.",
     "apps": {
-      "install": "Install",
-      "all": "App catalog",
-      "installing": "Installing {{app}}...",
-      "uninstalling": "Uninstalling {{app}}...",
+      "install": "Installer",
+      "all": "Catalogue d'applications",
+      "installing": "Installation de {{app}}...",
+      "uninstalling": "Désinstallation de {{app}}...",
       "installSuccess": "Successfully installed {{app}}",
       "uninstallSuccess": "{{app}} uninstalled",
       "help": "Consultez votre appareil pour voir quelles applications sont déjà installées."
     },
     "firmware": {
-      "installed": "Firmware version {{version}}",
-      "update": "Update",
+      "installed": "Version {{version}} du firmware",
+      "update": "Mise à jour",
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
       "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
