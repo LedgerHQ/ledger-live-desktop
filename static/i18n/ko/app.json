@@ -141,7 +141,7 @@
   "currentAddress": {
     "title": "현재 주소",
     "for": "계정 <1><0>{{accountName}}</0></1>의 주소",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
@@ -307,7 +307,7 @@
       "confirmAddress": {
         "title": "확인",
         "action": "장치의 주소 확인",
-        "text": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "연락처"
       },
       "receiveFunds": {
