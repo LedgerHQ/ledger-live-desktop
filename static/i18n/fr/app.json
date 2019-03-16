@@ -1,8 +1,8 @@
 {
   "common": {
-    "labelYes": "Yes",
-    "labelNo": "No",
-    "never": "Never",
+    "labelYes": "Oui",
+    "labelNo": "Non",
+    "never": "Jamais",
     "apply": "Apply",
     "confirm": "Confirm",
     "cancel": "Cancel",
@@ -40,7 +40,7 @@
     "copy": "Copy",
     "copyAddress": "Copy",
     "copied": "Copied",
-    "addressCopied": "Address copied",
+    "addressCopied": "Adresse copiée",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -54,7 +54,7 @@
       "outdated": "Paused",
       "error": "Synchronization error",
       "refresh": "Refresh",
-      "ago": "Synchronized {{time}}"
+      "ago": "Synchronisé {{time}}"
     }
   },
   "operation": {
@@ -187,15 +187,15 @@
   },
   "genuinecheck": {
     "modal": {
-      "title": "Genuine check"
+      "title": "Vérification d'authenticité"
     }
   },
   "addAccounts": {
-    "title": "Add accounts",
+    "title": "Ajouter des comptes",
     "breadcrumb": {
       "informations": "Crypto-actif",
       "connectDevice": "Device",
-      "import": "Accounts",
+      "import": "Comptes",
       "finish": "Confirmation"
     },
     "connectDevice": {
@@ -206,7 +206,7 @@
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
-    "newAccount": "New account",
+    "newAccount": "Nouveau compte",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
     "unsplitAccount": "{{accountName}} (unsplit)",
@@ -222,13 +222,13 @@
     },
     "cta": {
       "addMore": "Ajouter davantage",
-      "add": "Add account",
-      "add_plural": "Add accounts"
+      "add": "Ajouter un compte",
+      "add_plural": "Ajouter des comptes"
     }
   },
   "operationDetails": {
-    "title": "Operation details",
-    "account": "Account",
+    "title": "Détails de l'opération",
+    "account": "Compte",
     "date": "Date",
     "status": "Status",
     "confirmed": "Confirmed",
