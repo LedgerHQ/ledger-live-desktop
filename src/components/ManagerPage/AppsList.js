@@ -16,6 +16,7 @@ import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
+import flushDevice from 'commands/flushDevice'
 import Box from 'components/base/Box'
 import Modal from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
@@ -135,7 +136,10 @@ class AppsList extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     this._unmounted = true
-    if (this.sub) this.sub.unsubscribe()
+    if (this.sub) {
+      this.sub.unsubscribe()
+      this.flush()
+    }
   }
 
   _unmounted = false
@@ -160,6 +164,11 @@ class AppsList extends PureComponent<Props, State> {
     } catch (err) {
       this.setState({ status: 'error', error: err })
     }
+  }
+
+  flush = async () => {
+    const { device: { path: deviceId } } = this.props
+    await flushDevice.send(deviceId).toPromise()
   }
 
   sub: *
@@ -190,6 +199,7 @@ class AppsList extends PureComponent<Props, State> {
 
   handleCloseModal = () => {
     if (this.sub) this.sub.unsubscribe()
+    this.flush()
     this.setState({ status: 'idle', mode: 'home' })
   }
 

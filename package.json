@@ -35,15 +35,15 @@
     }
   },
   "dependencies": {
-    "@ledgerhq/devices": "^4.43.0",
-    "@ledgerhq/errors": "^4.43.0",
-    "@ledgerhq/hw-app-btc": "^4.43.0",
-    "@ledgerhq/hw-app-eth": "^4.43.0",
-    "@ledgerhq/hw-app-xrp": "^4.43.0",
-    "@ledgerhq/hw-transport": "^4.43.0",
-    "@ledgerhq/hw-transport-node-hid": "^4.43.0",
+    "@ledgerhq/devices": "^4.46.0",
+    "@ledgerhq/errors": "^4.46.0",
+    "@ledgerhq/hw-app-btc": "^4.46.0",
+    "@ledgerhq/hw-app-eth": "^4.46.1",
+    "@ledgerhq/hw-app-xrp": "^4.46.0",
+    "@ledgerhq/hw-transport": "^4.46.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.46.0",
     "@ledgerhq/ledger-core": "2.1.0",
-    "@ledgerhq/live-common": "4.25.1",
+    "@ledgerhq/live-common": "4.29.2",
     "animated": "^0.2.2",
     "async": "^2.6.1",
     "axios": "^0.18.0",
@@ -190,7 +190,7 @@
     "yarn-deduplicate": "^1.1.1"
   },
   "engines": {
-    "node": ">=8.9.0 <=8.15.0",
+    "node": ">=8.9.0 <=8.15.1",
     "yarn": "^1.10.1"
   },
   "private": true
