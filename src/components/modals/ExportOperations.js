@@ -20,7 +20,8 @@ import logger from 'logger'
 import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
 import IconDownloadCloud from 'icons/DownloadCloud'
-import IconCheck from 'icons/Check'
+import IconCheckCircle from 'icons/CheckCircle'
+import { colors } from 'styles/theme'
 import { closeModal } from '../../reducers/modals'
 
 type Props = {
@@ -132,17 +133,22 @@ class ExportOperations extends PureComponent<Props, State> {
           render={() =>
             success ? (
               <Box>
-                <IconWrapperCircle green>
-                  <IconCheck size={16} />
-                </IconWrapperCircle>
-                <LabelWrapper>{t('exportOperationsModal.descSuccess')}</LabelWrapper>
+                <IconWrapper>
+                  <IconCheckCircle size={43} />
+                </IconWrapper>
+                <Title>{t('exportOperationsModal.titleSuccess')}</Title>
+                <LabelWrapper ff="Open Sans|Regular">
+                  {t('exportOperationsModal.descSuccess')}
+                </LabelWrapper>
               </Box>
             ) : (
               <Box>
                 <IconWrapperCircle>
                   <IconDownloadCloud />
                 </IconWrapperCircle>
-                <LabelWrapper>{t('exportOperationsModal.desc')}</LabelWrapper>
+                <LabelWrapper ff="Open Sans|Regular">
+                  {t('exportOperationsModal.desc')}
+                </LabelWrapper>
                 <AccountsList
                   emptyText={t('exportOperationsModal.noAccounts')}
                   title={headerText}
@@ -171,12 +177,13 @@ class ExportOperations extends PureComponent<Props, State> {
   }
 }
 
-export const LabelWrapper = styled(Box)`
+const LabelWrapper = styled(Box)`
   text-align: center;
   font-size: 13px;
   font-family: 'Open Sans';
+  font-weight: ;
 `
-export const IconWrapperCircle = styled(Box)`
+const IconWrapperCircle = styled(Box)`
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -186,6 +193,22 @@ export const IconWrapperCircle = styled(Box)`
   justify-content: center;
   align-self: center;
   margin-bottom: 15px;
+`
+
+const IconWrapper = styled(Box)`
+  color: ${_ => colors.positiveGreen};
+  align-self: center;
+  margin-bottom: 15px;
+`
+
+const Title = styled(Box).attrs({
+  ff: 'Museo Sans',
+  fontSize: 5,
+  mt: 2,
+  mb: 15,
+  color: 'dark',
+})`
+  text-align: center;
 `
 
 export default compose(

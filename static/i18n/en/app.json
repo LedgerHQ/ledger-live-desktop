@@ -570,6 +570,7 @@
     "title": "Export operations",
     "desc": "Select the accounts for which to export the operations.",
     "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "titleSuccess": "Operation history successfully saved",
     "cta": "Export",
     "ctaSuccess": "Done",
     "noAccounts": "No accounts to export",
