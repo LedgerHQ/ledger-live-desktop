@@ -12,23 +12,24 @@ import uniq from 'lodash/uniq'
 
 import TrackPage from 'analytics/TrackPage'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
+import { colors } from 'styles/theme'
+
 import type { T, CurrencySettings } from 'types/common'
-
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
-import { getMarketColor } from 'styles/helpers'
 
+import { getMarketColor } from 'styles/helpers'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
-import CopyWithFeedback from 'components/base/CopyWithFeedback'
 
+import CopyWithFeedback from 'components/base/CopyWithFeedback'
 import { createStructuredSelector, createSelector } from 'reselect'
 import { accountSelector } from 'reducers/accounts'
-import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 
+import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
 import IconChevronRight from 'icons/ChevronRight'
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
@@ -42,6 +43,11 @@ const OpDetailsTitle = styled(Box).attrs({
   mb: 1,
 })`
   letter-spacing: 2px;
+`
+export const Address = styled(Text).attrs({})`
+  flex-wrap: wrap;
+  padding: 3px;
+  width: fit-content;
 `
 
 export const GradientHover = styled(Box).attrs({
@@ -69,6 +75,14 @@ const OpDetailsData = styled(Box).attrs({
 
   &:hover ${GradientHover} {
     display: flex;
+    & > * {
+      cursor: pointer;
+    }
+  }
+
+  &:hover ${Address} {
+    background: ${colors.pillActiveBackground};
+    color: ${colors.wallet};
   }
 `
 
@@ -294,7 +308,7 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
       <Box>
         {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(line => (
           <OpDetailsData key={line}>
-            {line}
+            <Address>{line}</Address>
             <GradientHover>
               <CopyWithFeedback text={line} />
             </GradientHover>
@@ -310,7 +324,14 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
             </Box>
           )}
         {showMore &&
-          lines.slice(numToShow).map(line => <OpDetailsData key={line}>{line}</OpDetailsData>)}
+          lines.slice(numToShow).map(line => (
+            <OpDetailsData key={line}>
+              <Address>{line}</Address>
+              <GradientHover>
+                <CopyWithFeedback text={line} />
+              </GradientHover>
+            </OpDetailsData>
+          ))}
         {shouldShowMore &&
           showMore && (
             <Box onClick={this.onClick} py={1}>
