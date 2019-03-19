@@ -45,8 +45,10 @@ const OpDetailsTitle = styled(Box).attrs({
   letter-spacing: 2px;
 `
 export const Address = styled(Text).attrs({})`
+  margin-left: -4px;
+  border-radius: 4px;
   flex-wrap: wrap;
-  padding: 3px;
+  padding: 4px;
   width: fit-content;
 `
 
@@ -83,6 +85,7 @@ const OpDetailsData = styled(Box).attrs({
   &:hover ${Address} {
     background: ${colors.pillActiveBackground};
     color: ${colors.wallet};
+    font-weight: 400;
   }
 `
 
