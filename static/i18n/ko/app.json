@@ -261,8 +261,8 @@
       "update": "업데이트",
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
-      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
