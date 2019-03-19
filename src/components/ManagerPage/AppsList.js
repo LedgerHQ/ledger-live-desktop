@@ -167,7 +167,9 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   flush = async () => {
-    const { device: { path: deviceId } } = this.props
+    const {
+      device: { path: deviceId },
+    } = this.props
     await flushDevice.send(deviceId).toPromise()
   }
 
