@@ -64,9 +64,7 @@ class ExportOperations extends PureComponent<Props, State> {
     const { checkedIds } = this.state
     const path = remote.dialog.showSaveDialog({
       title: 'Exported account transactions',
-      defaultPath: `ledgerlive-operations-${moment().format(
-        'YYYY.MM.DD',
-      )}.csv`,
+      defaultPath: `ledgerlive-operations-${moment().format('YYYY.MM.DD')}.csv`,
       filters: [
         {
           name: 'All Files',
@@ -78,8 +76,7 @@ class ExportOperations extends PureComponent<Props, State> {
     if (path) {
       this.setState({ success: true })
       const data = accountsOpToCSV(accounts.filter(account => checkedIds.includes(account.id)))
-      const json = JSON.stringify(data)
-      writeToFile(path, json)
+      writeToFile(path, data)
     }
   }
 

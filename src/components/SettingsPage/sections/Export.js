@@ -19,7 +19,7 @@ import { BulletRow } from '../../Onboarding/helperComponents'
 import Text from '../../base/Text'
 import SocketExport from '../SocketExport'
 import ExportOperationsBtn from '../../ExportOperationsBtn'
-import DownloadCloud from "../../../icons/DownloadCloud";
+import DownloadCloud from '../../../icons/DownloadCloud'
 
 const BulletRowIcon = styled(Box).attrs({
   ff: 'Rubik|Regular',
