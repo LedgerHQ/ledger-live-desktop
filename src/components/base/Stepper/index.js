@@ -19,6 +19,8 @@ type Props = {
   disabledSteps?: number[],
   errorSteps?: number[],
   children: any,
+  error?: Error,
+  signed?: boolean,
 }
 
 export type Step = {
