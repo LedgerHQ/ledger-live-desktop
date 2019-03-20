@@ -65,8 +65,8 @@ class ExportOperations extends PureComponent<Props, State> {
     const path = remote.dialog.showSaveDialog({
       title: 'Exported account transactions',
       defaultPath: `ledgerlive-operations-${moment().format(
-        'YYYY.MM.DD-HH.mm.ss',
-      )}-${__GIT_REVISION__ || 'unversionned'}.csv`,
+        'YYYY.MM.DD',
+      )}.csv`,
       filters: [
         {
           name: 'All Files',

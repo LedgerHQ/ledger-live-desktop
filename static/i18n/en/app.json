@@ -386,15 +386,23 @@
     "title": "Settings",
     "tabs": {
       "display": "General",
-      "export": "Export accounts",
+      "export": "Accounts",
       "currencies": "Currencies",
       "help": "Help",
       "about": "About"
     },
     "export": {
-      "title": "Export accounts",
-      "desc": "Export accounts to the Ledger Live mobile app.",
-      "button": "Export",
+      "accounts": {
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
+      },
+      "operations": {
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer.",
+        "button": "Save"
+      },
+
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
@@ -508,9 +516,9 @@
       "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
-      "title": "Export logs",
-      "desc": "Exporting Ledger Live logs may be necessary for troubleshooting purposes.",
-      "btn": "Export"
+      "title": "Save logs",
+      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Save"
     }
   },
   "password": {
@@ -567,11 +575,11 @@
     "cta": "Got it"
   },
   "exportOperationsModal": {
-    "title": "Export operations",
-    "desc": "Select the accounts for which to export the operations.",
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
     "titleSuccess": "Operation history successfully saved",
-    "cta": "Export",
+    "cta": "Save",
     "ctaSuccess": "Done",
     "noAccounts": "No accounts to export",
     "selectedAccounts": "Accounts to include",
