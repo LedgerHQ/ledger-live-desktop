@@ -1734,10 +1734,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.30.1":
-  version "4.30.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.30.1.tgz#76f361b7deca49205aab9240a6a7bf05fd6d3c58"
-  integrity sha512-CltziDZhpPMPIVhvySopABIK1MMeDMp+PG4HeP7nwH6j6Y5XQ+aMeHTgxfjZZ5wOmhW/P6NJPVA1SVX9lYKnTQ==
+"@ledgerhq/live-common@4.31.0":
+  version "4.31.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.31.0.tgz#7bc8453a061baf6d842a322d03709e1f79cc5303"
+  integrity sha512-6n9KWZ/Veh7DIQJ9++1KEn3bvAUslS9MRliURbtMwMNZdM9EWC85QDgoiwR2PRfRzAcRTZ49+avncfxrX4dmKQ==
   dependencies:
     "@ledgerhq/errors" "^4.46.0"
     "@ledgerhq/hw-app-btc" "^4.47.0"
