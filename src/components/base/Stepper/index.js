@@ -100,7 +100,7 @@ class Stepper extends PureComponent<Props, State> {
         render={() => (
           <Fragment>
             <Breadcrumb
-              mb={6}
+              mb={props.error && props.signed ? 4 : 6}
               currentStep={stepIndex}
               items={steps}
               stepsDisabled={disabledSteps}

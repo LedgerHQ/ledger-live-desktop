@@ -84,6 +84,7 @@ export const colors = {
   smoke: '#666666',
   wallet: '#6490f1',
   pillActiveBackground: rgba('#6490f1', 0.1),
+  lightRed: rgba('#ea2e49', 0.1),
   white: '#ffffff',
 
   // market indicator
