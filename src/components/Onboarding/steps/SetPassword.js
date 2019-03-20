@@ -107,7 +107,7 @@ class SetPassword extends PureComponent<Props, State> {
           category="Onboarding"
           name="Set Password"
           flowType={onboarding.flowType}
-          deviceType={getDeviceModel(onboarding.deviceModelId).productName}
+          deviceType={getDeviceModel(onboarding.deviceModelId || 'nanoS').productName}
         />
         <StepContainerInner>
           <Fragment>

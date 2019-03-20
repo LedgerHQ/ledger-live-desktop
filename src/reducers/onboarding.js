@@ -1,5 +1,6 @@
 // @flow
 
+import type { DeviceModelId } from '@ledgerhq/devices'
 import { SKIP_ONBOARDING } from 'config/constants'
 import { handleActions, createAction } from 'redux-actions'
 import type { State } from '.'
@@ -15,8 +16,6 @@ type Step = {
   },
 }
 
-export type DeviceModelId = 'nanoX' | 'nanoS' | 'blue' | ''
-
 export type OnboardingState = {
   stepIndex: number,
   stepName: string, // TODO: specify that the string comes from Steps type
@@ -29,7 +28,7 @@ export type OnboardingState = {
     genuineCheckUnavailable: ?Error,
     displayErrorScreen: boolean,
   },
-  deviceModelId: DeviceModelId,
+  deviceModelId: ?DeviceModelId,
   flowType: string,
   onboardingRelaunched?: boolean,
 }
@@ -45,7 +44,7 @@ const initialState: OnboardingState = {
     genuineCheckUnavailable: null,
     displayErrorScreen: false,
   },
-  deviceModelId: '',
+  deviceModelId: null,
   flowType: '',
   onboardingRelaunched: false,
   steps: [

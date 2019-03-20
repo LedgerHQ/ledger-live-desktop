@@ -69,7 +69,7 @@ export default class Finish extends Component<StepProps, *> {
     const { finish, t, onboarding } = this.props
     const { emit } = this.state
 
-    const model = getDeviceModel(onboarding.deviceModelId)
+    const model = getDeviceModel(onboarding.deviceModelId || 'nanoS')
 
     return (
       <Box sticky justifyContent="center">
