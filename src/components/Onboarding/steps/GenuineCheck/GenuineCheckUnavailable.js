@@ -55,7 +55,7 @@ export function GenuineCheckUnavailableMessage({
   t: T,
   onboarding: OnboardingState,
 }) {
-  const model = getDeviceModel(onboarding.deviceModelId)
+  const model = getDeviceModel(onboarding.deviceModelId || 'nanoS')
 
   return (
     <Box

@@ -69,7 +69,7 @@ class Analytics extends PureComponent<StepProps, State> {
     const { nextStep, t, onboarding } = this.props
     const { analyticsToggle, sentryLogsToggle } = this.state
 
-    const model = getDeviceModel(onboarding.deviceModelId)
+    const model = getDeviceModel(onboarding.deviceModelId || 'nanoS')
 
     return (
       <FixedTopContainer>

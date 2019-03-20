@@ -28,7 +28,7 @@ export type OnboardingState = {
     genuineCheckUnavailable: ?Error,
     displayErrorScreen: boolean,
   },
-  deviceModelId: DeviceModelId,
+  deviceModelId: ?DeviceModelId,
   flowType: string,
   onboardingRelaunched?: boolean,
 }
@@ -44,7 +44,7 @@ const initialState: OnboardingState = {
     genuineCheckUnavailable: null,
     displayErrorScreen: false,
   },
-  deviceModelId: 'nanoS',
+  deviceModelId: null,
   flowType: '',
   onboardingRelaunched: false,
   steps: [
