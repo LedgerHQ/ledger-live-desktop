@@ -6,6 +6,7 @@ import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import IconCross from 'icons/Cross'
+import type { DeviceModelId } from '@ledgerhq/devices'
 
 import type { T } from 'types/common'
 import type { OnboardingState } from 'reducers/onboarding'
@@ -102,7 +103,7 @@ export type StepProps = {
   getDeviceInfo: Function,
   updateGenuineCheck: Function,
   openModal: Function,
-  deviceModelId: Function,
+  deviceModelId: DeviceModelId => *,
   flowType: Function,
 }
 

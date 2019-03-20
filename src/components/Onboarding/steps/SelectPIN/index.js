@@ -5,7 +5,7 @@ import { getDeviceModel } from '@ledgerhq/devices'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
-import type { DeviceModelId } from 'reducers/onboarding'
+import type { DeviceModelId } from '@ledgerhq/devices'
 
 import GrowScroll from 'components/base/GrowScroll'
 import { Title, FixedTopContainer } from '../../helperComponents'
