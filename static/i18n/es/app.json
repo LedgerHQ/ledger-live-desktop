@@ -391,7 +391,7 @@
       "region": "Región",
       "regionDesc": "Elige tu región, utilizada para establecer la zona horaria de Ledger Live.",
       "stock": "Indicador del mercado regional",
-      "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
+      "stockDesc": "Elige Occidental para que la subida del valor de mercado aparezca en azul u Oriental para que aparezca en rojo."
     },
     "currencies": {
       "desc": "Selecciona un crypto activo para editar sus ajustes.",
