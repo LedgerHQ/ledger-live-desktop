@@ -2,19 +2,19 @@
   "common": {
     "labelYes": "Sí",
     "labelNo": "No",
-    "never": "Never",
-    "apply": "Apply",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "getSupport": "Get support",
-    "delete": "Delete",
-    "launch": "Launch",
-    "continue": "Continue",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "skipThisStep": "Skip this step",
-    "needHelp": "Need help?",
-    "areYouSure": "Are you sure?",
+    "never": "Nunca",
+    "apply": "Aplicar",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "getSupport": "Obtener soporte",
+    "delete": "Eliminar",
+    "launch": "Ejecutar",
+    "continue": "Continuar",
+    "learnMore": "Conoce más",
+    "help": "Ayuda",
+    "skipThisStep": "Omitir este paso",
+    "needHelp": "¿Necesitas ayuda?",
+    "areYouSure": "¿Estás seguro?",
     "selectAccount": "Seleccionar una cuenta",
     "selectAccountNoOption": "No hay ninguna cuenta que coincida con \"{{accountName}}\"",
     "selectCurrency": "Elija un crypto activo",
@@ -22,44 +22,44 @@
     "selectExchange": "Seleccione un cambio",
     "selectExchangeNoOption": "No hay ningún cambio que coincida con \"{{exchangeName}}\"",
     "selectExchangeNoOptionAtAll": "No se ha encontrado ningún cambio",
-    "sortBy": "Sort by",
-    "search": "Search",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
-    "max": "Max",
-    "back": "Back",
+    "sortBy": "Ordenar por",
+    "search": "Buscar",
+    "save": "Guardar",
+    "lock": "Bloquear",
+    "showMore": "Ver más",
+    "max": "Máx",
+    "back": "Atrás",
     "reset": "Restablecer",
     "retry": "Intentar de nuevo",
-    "stop": "Stop",
-    "close": "Close",
-    "eastern": "Eastern",
-    "western": "Western",
+    "stop": "Detener",
+    "close": "Cerrar",
+    "eastern": "Oriental",
+    "western": "Occidental",
     "reverify": "Comprobar de nuevo",
     "verify": "Comprobar",
-    "copy": "Copy",
-    "copyAddress": "Copy",
-    "copied": "Copied",
-    "addressCopied": "Address copied",
+    "copy": "Copiar",
+    "copyAddress": "Copiar",
+    "copied": "Copiado",
+    "addressCopied": "Dirección copiada",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "Bienvenido de nuevo",
       "subTitle": null,
       "description": "Introduce tu contraseña para continuar",
       "inputPlaceholder": "Escribe tu contraseña",
-      "lostPassword": "I lost my password"
+      "lostPassword": "He olvidado mi contraseña"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
+      "syncing": "Sincronizando...",
+      "upToDate": "Sincronizado",
       "outdated": "En pausa",
-      "error": "Synchronization error",
-      "refresh": "Refresh",
-      "ago": "Synchronized {{time}}"
+      "error": "Error de sincronización",
+      "refresh": "Actualizar",
+      "ago": "Sincronizado {{time}}"
     }
   },
   "operation": {
     "type": {
-      "IN": "Received",
+      "IN": "Recibido",
       "OUT": "Sent"
     }
   },
@@ -153,37 +153,37 @@
   },
   "emptyState": {
     "sidebar": {
-      "text": "Click this button to add accounts to the Portfolio"
+      "text": "Haz clic en este botón para añadir cuentas a la Cartera"
     },
     "dashboard": {
-      "title": "Install apps or add accounts",
-      "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
+      "title": "Instala aplicaciones o añade cuentas",
+      "desc": "Abre el Gestor para instalar aplicaciones o añadir cuentas si tu dispositivo Ledger ya tiene aplicaciones instaladas",
       "buttons": {
-        "addAccount": "Add accounts",
+        "addAccount": "Añadir cuentas",
         "installApp": "Abrir el Gestor"
       }
     }
   },
   "partners": {
-    "title": "Buy crypto",
-    "desc": "Try a few services we've selected",
-    "visitWebsite": "Visit website",
-    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot",
-    "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
-    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services",
-    "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
-    "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
-    "coinmama": "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
-    "genesis": "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP.",
-    "kyberswap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
-    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
-    "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
-    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
-    "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
-    "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
-    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity."
+    "title": "Comprar crypto",
+    "desc": "Prueba algunos de los servicios que hemos seleccionado",
+    "visitWebsite": "Visita la página web",
+    "btcdirect": "Compra y vende con total comodidad en el principal agente de criptomonedas de Europa. Inscríbete gratuitamente y recibe tus monedas en solo unos minutos. Nuestros usuarios nos califican con un 8,7 en Trustpilot",
+    "changelly": "Changelly es un conocido cambiador instantáneo de crypto activos que cotiza más de 100 monedas y tokens.",
+    "changenow": "ChangeNOW es uno de los principales servicios de intercambios instantáneos sin custodia",
+    "coinberry": "Coinberry es la plataforma de criptomonedas que disfruta de mayor confianza al ofrecer una seguridad superior a la de los bancos, una interfaz de usuario de primera clase y financiación y retirada sin comisión. Preinscríbete para obtener un acceso rápido a nuestra plataforma si no eres ciudadano canadiense.",
+    "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar crypto activos con seguridad.",
+    "coinmama": "Coinmama es un servicio financiero que permite comprar activos digitales de forma segura, rápida y divertida en cualquier parte del mundo.",
+    "genesis": "Genesis es una empresa comercial institucional que ofrece liquidez y préstamos en monedas digitales, incluidas bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin y XRP.",
+    "kyberswap": "Plataforma rápida, sencilla y segura de canje de tokens. Alimentada por el protocolo de liquidez en cadena de Kyber Network.",
+    "luno": "Luno te permite comprar, guardar y aprender sobre criptomonedas como Bitcoin y Ethereum de una forma segura y sencilla.",
+    "paybis": "Comprar Bitcoin con tarjeta de crédito en PayBis es seguro y sencillo. El servicio opera en Estados Unidos, Canadá, Alemania, Rusia y Arabia Saudí.",
+    "shapeshift": "ShapeShift es un marketplace en línea donde los usuarios pueden comprar y vender activos digitales. Es una forma rápida y segura para que cualquiera compre o venda activos digitales, sin tediosos procesos de inscripción, sin riesgos de contraparte y sin fricciones.",
+    "simplex": "Simplex es una institución financiera con licencia en la UE que ofrece una solución de pago antifraude con tarjeta de crédito.",
+    "taxtoken": "Software de base fiscal y costes de criptomonedas automatizado para ciudadanos de EE.UU.",
+    "thorswap": "ThorSwap es una plataforma para el intercambio de crypto activos de forma instantánea, segura y fiable, utilizando tecnologías descentralizadas para intercambios atómicos. Es la forma más fácil de comenzar a negociar, sin registro ni procesos KYC para operaciones con pequeñas cantidades.",
+    "bitpanda": "Bitpanda es el principal agente minorista en Europa de intercambio para la compra y venta de Bitcoin, Ethereum, IOTA y muchas otras. Deposita monedas utilizando tu tarjeta de crédito, Transferencia SOFORT, NETELLER y otras opciones.",
+    "exmo": "Fundada en 2013 y con sede en Londres, Kiev, Barcelona y Moscú, EXMO es la casa de bolsa número uno en Europa del Este y una de las bolsas mundiales de volumen y liquidez más grandes del mundo."
   },
   "genuinecheck": {
     "modal": {
@@ -199,7 +199,7 @@
       "finish": "Confirmación"
     },
     "connectDevice": {
-      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+      "desc": "Siga los pasos siguientes para agregar cuentas de <1><0>{{currencyName}}</0></1>"
     },
     "accountAlreadyImportedSubtitle": "Cuentas ya en cartera ({{count}})",
     "accountToImportSubtitle": "Añadir cuenta existente",
@@ -211,13 +211,13 @@
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
     "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "No existen cuentas {{currencyName}} para añadir.",
-    "success": "Account successfully added",
-    "success_plural": "Accounts successfully added",
-    "successDescription": "Add more accounts or return to Portfolio",
-    "successDescription_plural": "Add more accounts or return to Portfolio",
+    "success": "La cuenta se ha añadido con éxito",
+    "success_plural": "Las cuentas se han añadido con éxito",
+    "successDescription": "Añadir más cuentas o volver a Cartera",
+    "successDescription_plural": "Añadir más cuentas o volver a Cartera",
     "createNewAccount": {
-      "title": "Add new account",
-      "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
+      "title": "Añadir nueva cuenta",
+      "noOperationOnLastAccount": "No puedes añadir una nueva cuenta antes de recibir en tu <1><0>{{accountName}}</0></1> cuenta",
       "noAccountToCreate": "No se ha encontrado ninguna cuenta <1><0>{{currencyName}}</0></1> para crear."
     },
     "cta": {
@@ -252,15 +252,15 @@
       "all": "Catálogo de aplicaciones",
       "installing": "Instalando {{app}}...",
       "uninstalling": "Desinstalando {{app}}...",
-      "installSuccess": "Successfully installed {{app}}",
-      "uninstallSuccess": "{{app}} uninstalled",
+      "installSuccess": "Instalada con éxito {{app}}",
+      "uninstallSuccess": "{{app}} desinstalada",
       "help": "Comprueba tu dispositivo para ver qué aplicaciones ya están instaladas."
     },
     "firmware": {
       "installed": "Versión {{version}} del firmware",
       "update": "Actualizar",
       "latest": "La versión {{version}} del firmware está disponible.",
-      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
+      "disclaimerTitle": "Estás a punto de instalar la versión <1><0>del firmware {{version}}</0></1>.",
       "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
@@ -268,22 +268,22 @@
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Flashing your device..."
+        "updateMCU": "Actualización de firmware",
+        "osu": "Instalando OSU...",
+        "flash-mcu": "Actualizando MCU...",
+        "flash-bootloader": "Actualizando el gestor de arranque...",
+        "firmware": "Actualizando el firmware...",
+        "flash": "Flasheando tu dispositivo..."
       },
       "confirmIdentifier": "Comprobar el identificador",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
+      "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo es el mismo que el que aparece a continuación. Pulsa el botón derecho e introduce tu código PIN para confirmar.",
       "identifier": "Identificador",
       "mcuTitle": "Finalize update",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
-      "mcuPin": "Please be patient while the update is finalized",
+      "mcuPin": "Ten paciencia mientras finaliza la actualización",
       "successTitle": "Firmware actualizado",
-      "successText": "Please re-install the apps on your device"
+      "successText": "Reinstala las aplicaciones en tu dispositivo"
     },
     "title": "Gestor",
     "subtitle": "Instala o desinstala aplicaciones en tu dispositivo",
@@ -321,7 +321,7 @@
     "steps": {
       "amount": {
         "title": "Detalles",
-        "selectAccountDebit": "Account to debit",
+        "selectAccountDebit": "Cuenta de débito",
         "recipientAddress": "Dirección del destinatario",
         "amount": "Importe",
         "fees": "Comisiones de red",
@@ -337,15 +337,15 @@
       },
       "verification": {
         "title": "Comprobación",
-        "warning": "Please verify all transaction details on your device",
-        "body": "Confirm the transaction on your device to send it"
+        "warning": "Comprueba todos los datos de la transacción en tu dispositivo.",
+        "body": "Confirma la transacción en tu dispositivo para enviarla"
       },
       "confirmation": {
         "title": "Confirmación",
         "success": {
           "title": "Transacción enviada",
-          "text": "Your account balance will update once the blockchain has confirmed the transaction",
-          "cta": "View details"
+          "text": "El saldo de tu cuenta se actualizará cuando el blockchain haya confirmado la transacción",
+          "cta": "Ver detalles"
         },
         "pending": {
           "title": "Retransmitiendo transacción..."
@@ -506,9 +506,9 @@
     "downloadProgress": "{{progress}}% completed",
     "checking": "Checking update...",
     "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again"
+    "quitAndInstall": "Instalar ahora",
+    "error": "Error durante la actualización. Por favor, descárgala de nuevo",
+    "reDownload": "Descargar de nuevo"
   },
   "crash": {
     "oops": "Vaya, algo ha fallado.",
@@ -527,11 +527,11 @@
     "system": "Utilizar idioma del sistema",
     "en": "Inglés",
     "fr": "Francés",
-    "es": "Spanish",
-    "ko": "Korean",
-    "zh": "Simplified Chinese",
-    "ja": "Japanese",
-    "ru": "Russian"
+    "es": "Español",
+    "ko": "Coreano",
+    "zh": "Chino simplificado",
+    "ja": "Japonés",
+    "ru": "Ruso"
   },
   "onboarding": {
     "breadcrumb": {
@@ -548,13 +548,13 @@
     "init": {
       "title": "Empieza a utilizar tu dispositivo Ledger.",
       "newDevice": {
-        "title": "Initialize as new device"
+        "title": "Inicializar como nuevo dispositivo"
       },
       "restoreDevice": {
-        "title": "Restore device from recovery phrase"
+        "title": "Restaurar dispositivo desde frase de recuperación"
       },
       "initializedDevice": {
-        "title": "Use an initialized device"
+        "title": "Usar un dispositivo inicializado"
       }
     },
     "noDevice": {
