@@ -36,7 +36,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
   trackErrorPage = (page: string) => {
     const { onboarding } = this.props
 
-    const model = getDeviceModel(onboarding.deviceModelId)
+    const model = getDeviceModel(onboarding.deviceModelId || 'nanoS')
 
     return (
       <TrackPage
@@ -74,7 +74,7 @@ class GenuineCheckErrorPage extends PureComponent<Props, *> {
           </Fragment>
         )}
         <Box mt={5} mr={7}>
-          <Img type={onboarding.deviceModelId} />
+          <Img type={onboarding.deviceModelId || 'nanoS'} />
         </Box>
       </Fragment>
     )

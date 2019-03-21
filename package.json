@@ -3,7 +3,7 @@
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "author": "Ledger",
   "license": "MIT",
   "scripts": {
@@ -35,13 +35,13 @@
     }
   },
   "dependencies": {
-    "@ledgerhq/devices": "^4.43.0",
-    "@ledgerhq/errors": "^4.43.0",
-    "@ledgerhq/hw-app-btc": "^4.43.0",
-    "@ledgerhq/hw-app-eth": "^4.43.0",
-    "@ledgerhq/hw-app-xrp": "^4.43.0",
-    "@ledgerhq/hw-transport": "^4.43.0",
-    "@ledgerhq/hw-transport-node-hid": "^4.43.0",
+    "@ledgerhq/devices": "^4.47.0",
+    "@ledgerhq/errors": "^4.46.0",
+    "@ledgerhq/hw-app-btc": "^4.47.0",
+    "@ledgerhq/hw-app-eth": "^4.47.0",
+    "@ledgerhq/hw-app-xrp": "^4.47.0",
+    "@ledgerhq/hw-transport": "^4.47.0",
+    "@ledgerhq/hw-transport-node-hid": "^4.47.0",
     "@ledgerhq/ledger-core": "2.1.0",
     "@ledgerhq/live-common": "4.32.0",
     "animated": "^0.2.2",
@@ -190,7 +190,7 @@
     "yarn-deduplicate": "^1.1.1"
   },
   "engines": {
-    "node": ">=8.9.0 <=8.15.0",
+    "node": ">=8.9.0 <=8.15.1",
     "yarn": "^1.10.1"
   },
   "private": true

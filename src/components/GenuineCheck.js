@@ -51,6 +51,12 @@ const mapStateToProps = state => ({
 const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
 
 class GenuineCheck extends PureComponent<Props> {
+  componentWillUnmount() {
+    if (this.sub) this.sub.unsubscribe()
+  }
+
+  sub: *
+
   connectInteractionHandler = () =>
     createCancelablePolling(() => {
       const { device } = this.props
@@ -102,14 +108,19 @@ class GenuineCheck extends PureComponent<Props> {
 
     const beforeDate = Date.now()
 
-    const res = await getIsGenuine
-      .send({ devicePath: device.path, deviceInfo })
-      .pipe(
-        filter(e => e.type === 'result'),
-        map(e => e.payload),
-        timeout(GENUINE_TIMEOUT),
-      )
-      .toPromise()
+    const res = await new Promise((resolve, reject) => {
+      this.sub = getIsGenuine
+        .send({ devicePath: device.path, deviceInfo })
+        .pipe(
+          filter(e => e.type === 'result'),
+          map(e => e.payload),
+          timeout(GENUINE_TIMEOUT),
+        )
+        .subscribe({
+          next: data => resolve(data),
+          error: err => reject(err),
+        })
+    })
 
     logger.log(`genuine check resulted ${res} after ${(Date.now() - beforeDate) / 1000}s`, {
       deviceInfo,

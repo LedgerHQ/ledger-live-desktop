@@ -1,4 +1,5 @@
 // @flow
+import os from 'os'
 import pname from 'helpers/pname'
 import anonymizer from 'helpers/anonymizer'
 /* eslint-disable no-continue */
@@ -13,6 +14,8 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
     release: __APP_VERSION__,
     tags: {
       git_commit: __GIT_REVISION__,
+      osType: os.type(),
+      osRelease: os.release(),
     },
     sampleRate: 0.01,
     environment: __DEV__ ? 'development' : 'production',

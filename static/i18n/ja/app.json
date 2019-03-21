@@ -141,7 +141,7 @@
   "currentAddress": {
     "title": "現在のアドレス",
     "for": "アカウント <1><0>{{accountName}}</0></1>のアドレス",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
@@ -261,8 +261,8 @@
       "update": "更新",
       "latest": "ファームウェアバージョン {{version}} をご利用いただけます",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
-      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
@@ -307,7 +307,7 @@
       "confirmAddress": {
         "title": "検証",
         "action": "機器のアドレスを検証します",
-        "text": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "お問い合わせ"
       },
       "receiveFunds": {
@@ -349,7 +349,8 @@
         },
         "pending": {
           "title": "取引をブロードキャストしています..."
-        }
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },

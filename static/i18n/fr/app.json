@@ -1,18 +1,18 @@
 {
   "common": {
-    "labelYes": "Yes",
-    "labelNo": "No",
-    "never": "Never",
+    "labelYes": "Oui",
+    "labelNo": "Non",
+    "never": "Jamais",
     "apply": "Apply",
     "confirm": "Confirm",
     "cancel": "Cancel",
     "getSupport": "Get support",
     "delete": "Delete",
     "launch": "Launch",
-    "continue": "Continue",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "skipThisStep": "Skip this step",
+    "continue": "Continuer",
+    "learnMore": "En savoir plus",
+    "help": "Aide",
+    "skipThisStep": "Ignorer cette étape",
     "needHelp": "Besoin d’aide ?",
     "areYouSure": "Are you sure?",
     "selectAccount": "Select an account",
@@ -40,7 +40,7 @@
     "copy": "Copy",
     "copyAddress": "Copy",
     "copied": "Copied",
-    "addressCopied": "Address copied",
+    "addressCopied": "Adresse copiée",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -54,7 +54,7 @@
       "outdated": "Paused",
       "error": "Synchronization error",
       "refresh": "Refresh",
-      "ago": "Synchronized {{time}}"
+      "ago": "Synchronisé {{time}}"
     }
   },
   "operation": {
@@ -141,7 +141,7 @@
   "currentAddress": {
     "title": "Current address",
     "for": "Adresse pour le compte <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
@@ -187,15 +187,15 @@
   },
   "genuinecheck": {
     "modal": {
-      "title": "Genuine check"
+      "title": "Vérification d'authenticité"
     }
   },
   "addAccounts": {
-    "title": "Add accounts",
+    "title": "Ajouter des comptes",
     "breadcrumb": {
       "informations": "Crypto-actif",
       "connectDevice": "Device",
-      "import": "Accounts",
+      "import": "Comptes",
       "finish": "Confirmation"
     },
     "connectDevice": {
@@ -206,7 +206,7 @@
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
-    "newAccount": "New account",
+    "newAccount": "Nouveau compte",
     "legacyAccount": "{{accountName}} (legacy)",
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
     "unsplitAccount": "{{accountName}} (unsplit)",
@@ -222,13 +222,13 @@
     },
     "cta": {
       "addMore": "Ajouter davantage",
-      "add": "Add account",
-      "add_plural": "Add accounts"
+      "add": "Ajouter un compte",
+      "add_plural": "Ajouter des comptes"
     }
   },
   "operationDetails": {
-    "title": "Operation details",
-    "account": "Account",
+    "title": "Détails de l'opération",
+    "account": "Compte",
     "date": "Date",
     "status": "Status",
     "confirmed": "Confirmed",
@@ -240,29 +240,29 @@
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
     "showMore": "Afficher plus de {{recipients}}",
-    "showLess": "Show less"
+    "showLess": "Afficher moins"
   },
   "operationList": {
-    "noMoreOperations": "That's all"
+    "noMoreOperations": "C'est tout."
   },
   "manager": {
-    "yourDeviceIsGenuine": "Your device is genuine",
+    "yourDeviceIsGenuine": "Votre appareil est authentique.",
     "apps": {
-      "install": "Install",
-      "all": "App catalog",
-      "installing": "Installing {{app}}...",
-      "uninstalling": "Uninstalling {{app}}...",
+      "install": "Installer",
+      "all": "Catalogue d'applications",
+      "installing": "Installation de {{app}}...",
+      "uninstalling": "Désinstallation de {{app}}...",
       "installSuccess": "Successfully installed {{app}}",
       "uninstallSuccess": "{{app}} uninstalled",
       "help": "Consultez votre appareil pour voir quelles applications sont déjà installées."
     },
     "firmware": {
-      "installed": "Firmware version {{version}}",
-      "update": "Update",
+      "installed": "Version {{version}} du firmware",
+      "update": "Mise à jour",
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
-      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
@@ -307,7 +307,7 @@
       "confirmAddress": {
         "title": "Verification",
         "action": "Verify address on device",
-        "text": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "Contact us"
       },
       "receiveFunds": {
@@ -349,7 +349,8 @@
         },
         "pending": {
           "title": "Diffusion de la transaction..."
-        }
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
