@@ -60,20 +60,20 @@
   "operation": {
     "type": {
       "IN": "Recibido",
-      "OUT": "Sent"
+      "OUT": "Enviado"
     }
   },
   "time": {
-    "day": "Day",
-    "week": "Week",
-    "month": "Month",
-    "year": "Year",
-    "minute": "Minute",
-    "second": "Second",
-    "hour": "Hour",
+    "day": "Día",
+    "week": "Semana",
+    "month": "Mes",
+    "year": "Año",
+    "minute": "Minuto",
+    "second": "Segundo",
+    "hour": "Hora",
     "since": {
       "day": "día pasado",
-      "week": "past week",
+      "week": "semana pasada",
       "month": "past month",
       "year": "past year"
     }
@@ -142,14 +142,14 @@
     "title": "Current address",
     "for": "Dirección de la cuenta <1><0>{{accountName}}</0></1>",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfAccepted": "Dirección confirmada, compruébala de nuevo si la has copiado/pegado o si has escaneado el código QR.",
+    "messageIfSkipped": "Tu {{currencyName}} dirección no ha sido confirmada en tu dispositivo Ledger. Comprueba tu dirección para maximizar la seguridad."
   },
   "deviceConnect": {
-    "dashboard": "Navigate to the <1>Dashboard</1> on your device",
-    "step1": "Connect and unlock your <1>Ledger device</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1>Ledger Manager</1> on your device"
+    "dashboard": "Navega hasta el <1>Panel de control</1> en tu dispositivo",
+    "step1": "Conecta y desbloquea tu <1>dispositivo Ledger</1>",
+    "step2": "Navega hasta la <1><0>{{managerAppName}}</0></1> aplicación en tu dispositivo",
+    "step3": "Acepta el <1>Gestor de Ledger</1> en tu dispositivo"
   },
   "emptyState": {
     "sidebar": {
@@ -362,34 +362,34 @@
     "title": "Ajustes",
     "tabs": {
       "display": "General",
-      "export": "Export accounts",
+      "export": "Exportar cuentas",
       "currencies": "Monedas",
       "help": "Ayuda",
       "about": "Acerca de..."
     },
     "export": {
-      "title": "Export accounts",
-      "desc": "Export accounts to the Ledger Live mobile app.",
-      "button": "Export",
+      "title": "Exportar cuentas",
+      "desc": "Exportar cuentas a la aplicación móvil de Ledger Live",
+      "button": "Exportar",
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "button": "Hecho",
+        "title": "Escanear para exportar a móvil",
+        "listTitle": "En la aplicación móvil de Ledger Live",
+        "step1": "Pulsa el botón <1><0>+</0></1> en <3><0>Cuentas</0></3>",
+        "step2": "Pulsa <1><0>Importar cuentas de escritorio</0></1>",
+        "step3": "Escanea el <1><0>código LiveQR</0></1> hasta que el progreso alcance el 100 %"
       }
     },
     "display": {
-      "desc": "Configure general Ledger Live settings.",
+      "desc": "Configurar ajustes generales de Ledger Live.",
       "language": "Mostrar idioma",
       "languageDesc": "Configura el idioma que aparece en Ledger Live.",
       "counterValue": "Contravalor",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
-      "exchange": "Proveedor de tipo",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
+      "counterValueDesc": "Elige la moneda mostrada al lado de tu saldo y operaciones.",
+      "exchange": "Proveedor de tarifas",
+      "exchangeDesc": "Ofrece el tipo de cambio de Bitcoin a {{fiat}}, utilizado para calcular el valor de tus crypto activos (crypto activo→ BTC → {{fiat}}).",
       "region": "Región",
-      "regionDesc": "Choose your region, used to set Ledger Live's time zone.",
+      "regionDesc": "Elige tu región, utilizada para establecer la zona horaria de Ledger Live.",
       "stock": "Indicador del mercado regional",
       "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
     },
