@@ -558,7 +558,7 @@
       }
     },
     "noDevice": {
-      "title": "Don't have a Ledger device?",
+      "title": "¿No tienes un dispositivo Ledger?",
       "buyNew": {
         "title": "Comprar un dispositivo Ledger"
       },
@@ -574,16 +574,16 @@
     },
     "selectPIN": {
       "disclaimer": {
-        "note1": "Always choose your own PIN code.",
-        "note2": "Use 8 digits for optimal security.",
-        "note3": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note1": "Elige siempre tu propio código PIN.",
+        "note2": "Utiliza 8 dígitos para una seguridad óptima.",
+        "note3": "No utilices nunca un dispositivo suministrado con un código PIN o una frase de recuperación."
       },
       "initialize": {
         "title": "Elige tu código PIN.",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
+            "step1": "Conecta el {{productName}} a tu ordenador. Pulsa ambos botones para comenzar",
+            "step2": "Pulsa el botón derecho para seleccionar <1><0>¿Configurar como dispositivo nuevo?</0></1>",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
