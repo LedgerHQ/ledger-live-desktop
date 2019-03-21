@@ -349,7 +349,8 @@
         },
         "pending": {
           "title": "트랜잭션 브로드캐스트 중..."
-        }
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },

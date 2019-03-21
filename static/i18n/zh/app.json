@@ -349,7 +349,8 @@
         },
         "pending": {
           "title": "正在传送交易信息…"
-        }
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
