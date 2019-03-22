@@ -377,21 +377,21 @@
         "listTitle": "On the Ledger Live mobile app:",
         "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "step3": "Scannez le <1><0>LiveQR code</0></1> jusqu’à ce que la barre de chargement soit à 100 %."
       }
     },
     "display": {
-      "desc": "Configure general Ledger Live settings.",
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
+      "desc": "Configurez les paramètres généraux de Ledger Live.",
+      "language": "Langue d'affichage",
+      "languageDesc": "Sélectionner la langue affichée dans Ledger Live.",
       "counterValue": "Contre-valeur",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "counterValueDesc": "Choisissez la devise affichée à côté de votre solde et de vos opérations.",
       "exchange": "Prestataire de change",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
-      "region": "Region",
-      "regionDesc": "Choose your region, used to set Ledger Live's time zone.",
+      "exchangeDesc": "Fournit le taux de change du Bitcoin en {{fiat}}, utilisé pour estimer la valeur de vos crypto-actifs (crypto asset → BTC → {{fiat}}).",
+      "region": "Région",
+      "regionDesc": "Choisissez votre région. Ce paramètre est utilisé pour définir le fuseau horaire de Ledger Live.",
       "stock": "Indicateur de marché régional",
-      "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
+      "stockDesc": "Choisissez Ouest pour afficher une augmentation de la valeur du marché en bleu ou Est pour l’afficher en rouge."
     },
     "currencies": {
       "desc": "Sélectionnez un crypto-actif pour en modifier les paramètres.",
