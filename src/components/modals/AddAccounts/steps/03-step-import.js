@@ -35,7 +35,7 @@ const remapTransportError = (err: mixed, appName: string): Error => {
   const { name, statusCode } = err
 
   const errorToThrow =
-    name === 'BtcUnmatchedApp' || statusCode === 0x6982
+    name === 'BtcUnmatchedApp' || statusCode === 0x6982 || statusCode === 0x6700
       ? new DeviceShouldStayInApp(null, { appName })
       : err
 
