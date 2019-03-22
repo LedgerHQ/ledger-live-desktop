@@ -436,18 +436,18 @@
       "version": "Version",
       "releaseNotesBtn": "Détails",
       "faq": "Assistance Ledger",
-      "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+      "faqDesc": "Un problème ? Obtenez de l’aide sur l'utilisation de Ledger Live avec votre coffre-fort digital.",
+      "terms": "Conditions d’utilisation",
+      "termsDesc": "En utilisant Ledger Live, vous acceptez nos Conditions d’utilisation.",
+      "privacy": "Politique de confidentialité",
+      "privacyDesc": "Consultez notre Politique de confidentialité pour savoir quelles données personnelles nous collectons, à quelles fins et comment nous les utilisons."
     },
     "hardResetModal": {
-      "title": "Reset Ledger Live",
+      "title": "Réinitialiser Ledger Live",
       "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "softResetModal": {
-      "title": "Clear cache",
+      "title": "Vider le cache",
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
@@ -459,19 +459,19 @@
       "part5": "Vous pouvez ensuite relancer l’application normalement."
     },
     "removeAccountModal": {
-      "title": "Remove account",
-      "desc": "This will not affect your crypto assets. Accounts can always be re-added."
+      "title": "Supprimer le compte",
+      "desc": "Cette opération n’affectera pas vos crypto-actifs. Les comptes peuvent toujours être ajoutés à nouveau."
     },
     "openUserDataDirectory": {
-      "title": "View user data",
+      "title": "Voir les données utilisateur",
       "desc": "Consultez les données utilisateur stockées sur votre ordinateur, y compris vos comptes, caches et paramètres.",
       "btn": "Affichage"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
-      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
-      "desc": "Please select the state of your Ledger device.",
-      "button": "Repair",
+      "title": "Réparer votre appareil Ledger",
+      "descSettings": "Utilisez cet outil pour restaurer votre appareil Ledger en cas de blocage lors de la mise à jour du firmware.",
+      "desc": "Veuillez sélectionner l’état de votre appareil Ledger.",
+      "button": "Réparer",
       "generic": "Bootloader",
       "mcuNotGenuine": "MCU not genuine",
       "followDeviceRepair": "Follow device repair instructions"
@@ -630,14 +630,14 @@
           "nanoX": {
             "step1": "Connect your {{productName}} to your computer.",
             "step2": "Press both buttons as instructed on your {{productName}} screen.",
-            "step3": "Press the left button to cancel Configure as new device.",
-            "step4": "Press the right button to select Restore configuration.",
-            "step5": "Choose a PIN code between 4 and 8 digits long."
+            "step3": "Appuyez sur le bouton gauche pour annuler la configuration en tant que nouvel appareil.",
+            "step4": "Appuyez sur le bouton droit pour sélectionner Restaurer la configuration.",
+            "step5": "Choisissez un code PIN de 4 à 8 chiffres."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
+            "step1": "Connectez {{productName}} à votre ordinateur.",
             "step2": "Appuyez sur <1><0>Restaurer la configuration</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step3": "Choisissez un code PIN de 4 à 8 chiffres."
           }
         }
       }
@@ -648,12 +648,12 @@
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
           "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "Press the right button to continue and write down all 24 words.",
+          "step2": "Appuyez sur le bouton droit pour continuer et notez les 24 mots.",
           "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
         },
         "blue": {
           "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
-          "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
+          "step2": "Appuyez sur <1><0>Suivant</0></1> et écrivez l’ensemble des mots jusqu’à ce que l’écran <3><0>Confirmation</0></3> apparaisse.",
           "step3": "Enter each word to confirm your recovery phrase."
         }
       },
@@ -662,8 +662,8 @@
         "desc": "Enter the recovery phrase saved on your Recovery sheet",
         "nano": {
           "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+          "step2": "Saisissez les premières lettres du <1><0>Mot n°1</0></1> jusqu’à ce que des suggestions de mots apparaissent.",
+          "step3": "Sélectionnez le <1><0>Mot n°1</0></1> parmi les mots suggérés en appuyant sur les deux boutons.",
           "step4": "Répétez le processus jusqu’au dernier mot."
         },
         "blue": {
@@ -682,7 +682,7 @@
     "genuineCheck": {
       "title": "Liste des contrôles de sécurité",
       "descGeneric": "Avant de poursuivre, veuillez compléter la liste des contrôles de sécurité.",
-      "descRestore": "Before getting started, please confirm:",
+      "descRestore": "Avant de commencer, veuillez confirmer :",
       "step1": {
         "title": "Avez-vous choisi votre code PIN vous-même ?"
       },
@@ -704,7 +704,7 @@
           "isGenuineFail": "Désolé, votre appareil ne semble pas authentique..."
         },
         "desc": {
-          "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
+          "pinFailed": "N’utilisez jamais un appareil fourni avec un code PIN. En cas de doute, veuillez nous contacter.",
           "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
           "isGenuineFail": "Votre appareil a échoué au test d’authenticité requis pour se connecter au serveur sécurisé de Ledger. Veuillez contacter l’assistance Ledger pour obtenir de l’aide."
         }
