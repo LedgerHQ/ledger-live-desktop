@@ -957,6 +957,10 @@
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
     },
+    "DeviceShouldStayInApp": {
+      "title": "Please open the {{appName}} app",
+      "description": "Keep the {{appName}} app open while we look for your accounts"
+    },
     "UnexpectedBootloader": {
       "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
