@@ -81,7 +81,7 @@
   "sidebar": {
     "menu": "Menú",
     "accounts": "Cuentas ({{count}})",
-    "manager": "Gestor",
+    "manager": "Manager",
     "exchange": "Comprar crypto",
     "developer": "Herramientas de desarrollo"
   },
@@ -141,12 +141,12 @@
   "currentAddress": {
     "title": "Dirección actual",
     "for": "Dirección de la cuenta <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
+    "messageIfUnverified": "Por favor, comprueba que la dirección {{currencyName}} mostrada en Ledger Live coincide con la de tu dispositivo Ledger",
     "messageIfAccepted": "Dirección confirmada, compruébala de nuevo si la has copiado/pegado o si has escaneado el código QR.",
     "messageIfSkipped": "Tu {{currencyName}} dirección no ha sido confirmada en tu dispositivo Ledger. Comprueba tu dirección para maximizar la seguridad."
   },
   "deviceConnect": {
-    "dashboard": "Navega hasta el <1>Panel de control</1> en tu dispositivo",
+    "dashboard": "Navega hasta el <1>Dashboard</1> en tu dispositivo",
     "step1": "Conecta y desbloquea tu <1>dispositivo Ledger</1>",
     "step2": "Navega hasta la <1><0>{{managerAppName}}</0></1> aplicación en tu dispositivo",
     "step3": "Acepta <1>Ledger Manager</1> en tu dispositivo"
@@ -157,7 +157,7 @@
     },
     "dashboard": {
       "title": "Instala aplicaciones o añade cuentas",
-      "desc": "Abre el Gestor para instalar aplicaciones o añadir cuentas si tu dispositivo Ledger ya tiene aplicaciones instaladas",
+      "desc": "Abre el Manager para instalar aplicaciones o añadir cuentas si tu dispositivo Ledger ya tiene aplicaciones instaladas",
       "buttons": {
         "addAccount": "Añadir cuentas",
         "installApp": "Abrir el Gestor"
@@ -262,34 +262,34 @@
       "latest": "La versión {{version}} del firmware está disponible.",
       "disclaimerTitle": "Estás a punto de instalar la versión <1><0>del firmware {{version}}</0></1>.",
       "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus crypto activos.",
-      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "disclaimerAppReinstall": "Como precaución, ten a mano la hoja de recuperacion.",
+      "downloadingUpdateDesc": "Por favor, espera mientras se descarga el instalador de actualización"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
+        "downloadingUpdate": "Descargando actualización",
         "updateMCU": "Actualización de firmware",
         "osu": "Instalando OSU...",
         "flash-mcu": "Actualizando MCU...",
-        "flash-bootloader": "Actualizando el gestor de arranque...",
+        "flash-bootloader": "Actualizando el Bootloader...",
         "firmware": "Actualizando el firmware...",
         "flash": "Flasheando tu dispositivo..."
       },
       "confirmIdentifier": "Comprobar el identificador",
       "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo es el mismo que el que aparece a continuación. Pulsa el botón derecho e introduce tu código PIN para confirmar.",
       "identifier": "Identificador",
-      "mcuTitle": "Finalize update",
+      "mcuTitle": "Finalizar actualización",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
+      "mcuSecond": "Pulsa el botón izquierdo y mantenlo pulsado mientras conectas de nuevo el cable USB hasta que aparezca la pantalla de <1><0>Processing</0></1>",
       "mcuPin": "Ten paciencia mientras finaliza la actualización",
       "successTitle": "Firmware actualizado",
       "successText": "Reinstala las aplicaciones en tu dispositivo"
     },
-    "title": "Gestor",
+    "title": "Manager",
     "subtitle": "Instala o desinstala aplicaciones en tu dispositivo",
     "device": {
       "title": "Conecta tu dispositivo",
-      "desc": "Sigue los pasos a continuación para abrir el Gestor",
+      "desc": "Sigue los pasos a continuación para abrir el Manager",
       "cta": "Conectar mi dispositivo"
     }
   },
@@ -307,7 +307,7 @@
       "confirmAddress": {
         "title": "Comprobación",
         "action": "Comprueba la dirección en el dispositivo",
-        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
+        "text": "Por favor, comprueba que la dirección {{currencyName}} mostrada en Ledger Live coincide con la de tu dispositivo Ledger",
         "support": "Contacta con nosotros"
       },
       "receiveFunds": {
@@ -350,7 +350,7 @@
         "pending": {
           "title": "Retransmitiendo transacción..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Tu transacción puede haber fallado. Por favor, comprueba que no se ha enviado en unos minutos para asegurarte antes de volver a intentarlo."
       }
     }
   },
@@ -413,7 +413,7 @@
       "hardResetDesc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes.",
       "hardReset": "Restablecer",
       "developerMode": "Modo desarrollador",
-      "developerModeDesc": "Mostrar aplicaciones de desarrollador y testnet en el Administrador.",
+      "developerModeDesc": "Mostrar aplicaciones de desarrollador y testnet en el Manager.",
       "analytics": "Análisis",
       "analyticsDesc": "Permitir análisis para ayudar a Ledger a entender cómo mejorar la experiencia de usuario. Esto incluye clics, visitas a la página, redirecciones, acciones (enviar, recibir, bloquear, etc.) desplazamientos hasta el final de la página, (des)instalación y versión de aplicaciones, versión de la aplicación, número de cuentas, crypto activos y operaciones, duraciones de sesión, tipo de dispositivo y firmware de Ledger.",
       "reportErrors": "Informes de bugs",
@@ -709,7 +709,7 @@
         "desc": "Habilite la analítica para ayudar a Ledger a comprender cómo mejorar la experiencia de usuario.",
         "mandatoryContextual": {
           "item1": "Clics",
-          "item2": "In-app page visits",
+          "item2": "Visitas a páginas dentro de la aplicación",
           "item3": "Redirección a página web",
           "item4": "Acciones: enviar, recibir, bloquear, etc.",
           "item5": "Desplazamiento hasta el final de la página",
@@ -882,10 +882,10 @@
       "description": "Por favor, reinicia tu dispositivo o ponte en contacto con nosotros"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager refused on device"
+      "title": "Manager rechazado en el dispositivo"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update canceled",
+      "title": "Actualización cancelada",
       "description": "Inténtalo de nuevo o ponte en contacto con Soporte de Ledger."
     },
     "UserRefusedOnDevice": {
@@ -898,54 +898,54 @@
     },
     "UpdateYourApp": {
       "title": "Se requiere la actualización de la aplicación.",
-      "description": "Desinstala y vuelve a instalar la aplicación {{managerAppName}} en el Gestor."
+      "description": "Desinstala y vuelve a instalar la aplicación {{managerAppName}} en el Manager"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to Dashboard",
-      "description": "Please navigate back to Dashboard on your device"
+      "title": "Volver al Dashboard",
+      "description": "Navega de nuevo a Dashboard en tu dispositivo"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (websocket error)",
+      "title": "Lo sentimos, inténtalo de nuevo (error de websocket)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (websocket failed)",
+      "title": "Lo sentimos, inténtalo de nuevo (fallo de websocket )",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Wrong device or passphrase for ‘{{accountName}}’",
-      "description": "Please use the device or passphrase for the selected account"
+      "title": "Dispositivo o frase de seguridad equivocada para ‘{{accountName}}’",
+      "description": "Por favor, utiliza el dispositivo o frase de seguridad para la cuenta seleccionada"
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Open Manager to update the app"
+      "title": "Se requiere la actualización de la aplicación.",
+      "description": "Abre el Manager para actualizar la aplicación"
     },
     "InvalidAddress": {
       "title": "Esta no es una dirección {{currencyName}} válida."
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "La dirección del destinatario es la misma que la dirección del remitente"
     },
     "CantOpenDevice": {
       "title": "Vaya, no se pudo conectar al dispositivo.",
-      "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
+      "description": "Se ha detectado el dispositivo, pero ha fallado la conexión. Inténtalo de nuevo o ponte en contacto con nosotros si el problema persiste."
     },
     "ETHAddressNonEIP": {
       "title": "Autocomprobación no disponible: comprueba detenidamente la dirección.",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "No se ha podido escanear este código QR: autocomprobación no soportada por esta dirección"
     },
     "FeeNotLoaded": {
-      "title": "Couldn’t load fee rates, please set manual fees"
+      "title": "No se han podido cargar los tipos de comisión. Establece las comisiones manualmente."
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Se requieren comisiones"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Versión de MCU desconocida",
+      "description": "Por favor, ponte en contacto con el Soporte de Ledger"
     }
   }
 }
