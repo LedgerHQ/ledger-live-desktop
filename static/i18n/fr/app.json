@@ -920,7 +920,7 @@
     },
     "DeviceOnDashboardExpected": {
       "title": "Retourner au Dashboard",
-      "description": "Please navigate back to Dashboard on your device"
+      "description": "Veuillez retourner au Dashboard de votre appareil"
     },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (websocket error)",
