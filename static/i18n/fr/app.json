@@ -6,7 +6,7 @@
     "apply": "Appliquer",
     "confirm": "Confirmer",
     "cancel": "Annuler",
-    "getSupport": "Get support",
+    "getSupport": "Obtenir de l’aide",
     "delete": "Supprimer",
     "launch": "Lancer",
     "continue": "Continuer",
@@ -485,33 +485,33 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "Nouveau mot de passe"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "Confirmer le mot de passe"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "Mot de passe actuel"
       }
     },
     "changePassword": {
-      "title": "Password lock",
-      "subTitle": "Change your password"
+      "title": "Verrouillage par mot de passe",
+      "subTitle": "Modifier votre mot de passe"
     },
     "setPassword": {
-      "title": "Password lock",
-      "subTitle": "Set a password",
+      "title": "Verrouillage par mot de passe",
+      "subTitle": "Définir un mot de passe",
       "desc": "Veillez à vous souvenir de votre mot de passe. La perte de votre mot de passe nécessite la reconfiguration de Ledger Live et vos comptes devront à nouveau être ajoutés."
     },
     "disablePassword": {
-      "title": "Disable password lock",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "title": "Désactiver le verrouillage par mot de passe",
+      "desc": "Les données Ledger Live seront stockées de façon non cryptée sur votre ordinateur. Ces données incluent les noms, transactions et adresses publiques des comptes."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
+    "downloadInProgress": "Téléchargement de la mise à jour...",
+    "downloadProgress": "{{progress}} % terminés",
+    "checking": "Vérification de la mise à jour...",
     "checkSuccess": "Update ready to install",
     "quitAndInstall": "Install now",
     "error": "Error during update. Please download again",
@@ -923,37 +923,37 @@
       "description": "Veuillez retourner au Dashboard de votre appareil"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (websocket error)",
+      "title": "Désolé, veuillez essayer à nouveau (erreur websocket)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (websocket failed)",
+      "title": "Désolé, veuillez essayer à nouveau (erreur websocket)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Wrong device or passphrase for ‘{{accountName}}’",
-      "description": "Please use the device or passphrase for the selected account"
+      "title": "Appareil incorrect ou passphrase incorrecte pour « {{accountName}} »",
+      "description": "Veuillez utiliser l’appareil ou la passphrase correspondant au compte sélectionné"
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Open Manager to update the app"
+      "title": "Mise à jour de l’application requise",
+      "description": "Ouvrez le Manager pour mettre à jour l’application"
     },
     "InvalidAddress": {
       "title": "Il ne s’agit pas d’une adresse {{currencyName}} valide."
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "L’adresse de réception est identique à l'adresse d'émission"
     },
     "CantOpenDevice": {
       "title": "Désolé, connexion à l’appareil impossible",
-      "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
+      "description": "Appareil détecté mais échec de la connexion. Veuillez essayer à nouveau ou, si le problème persiste, contacter l’assistance."
     },
     "ETHAddressNonEIP": {
       "title": "Auto-vérification indisponible : veuillez vérifier attentivement l’adresse.",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "Ce QR code n’a pu être scanné : cette adresse ne prend pas en charge l’auto-vérification"
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
