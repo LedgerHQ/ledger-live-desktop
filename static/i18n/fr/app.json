@@ -82,7 +82,7 @@
     "menu": "Menu",
     "accounts": "Comptes ({{count}})",
     "manager": "Manager",
-    "exchange": "Buy crypto",
+    "exchange": "Acheter des cryptos",
     "developer": "Outils de développement"
   },
   "account": {
@@ -165,7 +165,7 @@
     }
   },
   "partners": {
-    "title": "Buy crypto",
+    "title": "Acheter des cryptos",
     "desc": "Essayez quelques services que nous avons sélectionnés",
     "visitWebsite": "Visiter le site internet",
     "btcdirect": "Achetez et vendez en toute simplicité auprès du principal courtier en cryptomonnaies européen. Inscrivez-vous gratuitement et recevez vos coins en quelques minutes ! Nos utilisateurs sur Trustpilot nous ont attribué une note de 8,7",
@@ -383,7 +383,7 @@
         "title": "Scannez pour exporter vers un mobile",
         "listTitle": "Sur l’application mobile Ledger Live :",
         "step1": "Appuyez sur le bouton <1><0>+</0></1> dans <3><0>Comptes</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
+        "step2": "Appuyez sur <1><0>Importer des comptes de l'application desktop</0></1>",
         "step3": "Scannez le <1><0>LiveQR code</0></1> jusqu’à ce que la barre de chargement soit à 100 %."
       }
     },
@@ -645,30 +645,30 @@
     "writeSeed": {
       "initialize": {
         "title": "Enregistrez votre phrase de récupération.",
-        "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
+        "desc": "Votre appareil affichera une phrase de récupération de 24 mots pour sauvegarder vos clés privés",
         "nano": {
           "step1": "Écrivez le <1><0>Mot n°1</0></1> en position 1 sur une feuille de récupération vierge.",
           "step2": "Appuyez sur le bouton droit pour continuer et notez les 24 mots.",
-          "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
+          "step3": "Confirmez votre phrase de récupération : sélectionnez et validez chaque mot en appuyant sur les deux boutons."
         },
         "blue": {
           "step1": "Écrivez dans le bon ordre chaque mot sur une feuille de récupération vierge.",
           "step2": "Appuyez sur <1><0>Suivant</0></1> et écrivez l’ensemble des mots jusqu’à ce que l’écran <3><0>Confirmation</0></3> apparaisse.",
-          "step3": "Enter each word to confirm your recovery phrase."
+          "step3": "Saisissez chaque mot pour confirmer votre phrase de récupération."
         }
       },
       "restore": {
         "title": "Saisissez votre phrase de récupération.",
-        "desc": "Enter the recovery phrase saved on your Recovery sheet",
+        "desc": "Saisissez la phrase de récupération enregistrée sur votre feuille de récupération",
         "nano": {
-          "step1": "Choose the length of your recovery phrase.",
+          "step1": "Choisissez la longueur de votre phrase de récupération.",
           "step2": "Saisissez les premières lettres du <1><0>Mot n°1</0></1> jusqu’à ce que des suggestions de mots apparaissent.",
           "step3": "Sélectionnez le <1><0>Mot n°1</0></1> parmi les mots suggérés en appuyant sur les deux boutons.",
           "step4": "Répétez le processus jusqu’au dernier mot."
         },
         "blue": {
           "step1": "Sélectionnez la longueur de votre phrase de récupération.",
-          "step2": "Type the first word of your recovery phrase. Tap the word when it appears.",
+          "step2": "Saisissez le premier mot de votre phrase de récupération. Appuyez sur le mot lorsqu’il apparait.",
           "step3": "Répétez le processus jusqu’au dernier mot."
         }
       },
@@ -676,7 +676,7 @@
         "note1": "Conservez votre phrase de récupération de 24 mots de manière sécurisée, hors de portée.",
         "note2": "Assurez-vous d’être le seul détenteur de votre phrase de récupération.",
         "note3": "Ledger ne conserve aucune sauvegarde de votre phrase de récupération.",
-        "note4": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note4": "N’utilisez jamais un appareil fourni avec un code PIN ou une phrase de récupération."
       }
     },
     "genuineCheck": {
@@ -700,12 +700,12 @@
       "errorPage": {
         "title": {
           "pinFailed": "Vous n’avez pas choisi votre propre code PIN ?",
-          "recoveryPhraseFailed": "Didn't save your recovery phrase by yourself?",
+          "recoveryPhraseFailed": "Vous n’avez pas enregistré votre phrase de récupération vous-même ?",
           "isGenuineFail": "Désolé, votre appareil ne semble pas authentique..."
         },
         "desc": {
           "pinFailed": "N’utilisez jamais un appareil fourni avec un code PIN. En cas de doute, veuillez nous contacter.",
-          "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
+          "recoveryPhraseFailed": "Enregistrez uniquement une phrase de récupération qui s’est affichée sur votre appareil et pour vous seul. En cas de doute, veuillez nous contacter.",
           "isGenuineFail": "Votre appareil a échoué au test d’authenticité requis pour se connecter au serveur sécurisé de Ledger. Veuillez contacter l’assistance Ledger pour obtenir de l’aide."
         }
       }
@@ -956,14 +956,14 @@
       "title": "Ce QR code n’a pu être scanné : cette adresse ne prend pas en charge l’auto-vérification"
     },
     "FeeNotLoaded": {
-      "title": "Couldn’t load fee rates, please set manual fees"
+      "title": "Chargement des taux de frais impossible, veuillez définir les frais manuellement"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Des frais sont requis"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Version MCU inconnue",
+      "description": "Veuillez contacter l’assistance Ledger"
     }
   }
 }
