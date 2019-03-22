@@ -362,15 +362,22 @@
     "title": "Ajustes",
     "tabs": {
       "display": "General",
-      "export": "Exportar cuentas",
+      "export": "Accounts",
       "currencies": "Monedas",
       "help": "Ayuda",
       "about": "Acerca de..."
     },
     "export": {
-      "title": "Exportar cuentas",
-      "desc": "Exportar cuentas a la aplicación móvil de Ledger Live",
-      "button": "Exportar",
+      "accounts": {
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
+      },
+      "operations": {
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer.",
+        "button": "Save"
+      },
       "modal": {
         "button": "Hecho",
         "title": "Escanear para exportar a móvil",
@@ -470,9 +477,9 @@
       "followDeviceRepair": "Sigue las instrucciones de reparación del dispositivo"
     },
     "exportLogs": {
-      "title": "Exportar registros",
-      "desc": "Exportar los registros de Ledger Live puede ser necesario para solucionar problemas.",
-      "btn": "Exportar"
+      "title": "Save logs",
+      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Save"
     }
   },
   "password": {
@@ -522,6 +529,17 @@
     "desc_1": "Antes de enviar y recibir crypto activos, asegúrate de que tomas decisiones informadas. Los crypto activos son volátiles y los precios pueden subir y bajar. Analiza detenidamente tus objetivos comerciales y el riesgo financiero que estás dispuesto a asumir.",
     "desc_2": "Ten en cuenta que Ledger no ofrece asesoramiento financiero, fiscal o jurídico. Debes tomar esas decisiones por ti mismo o consultar con expertos de confianza.",
     "cta": "Entendido"
+  },
+  "exportOperationsModal": {
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
+    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "titleSuccess": "Operation history successfully saved",
+    "cta": "Save",
+    "ctaSuccess": "Done",
+    "noAccounts": "No accounts to export",
+    "selectedAccounts": "Accounts to include",
+    "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
     "system": "Utilizar idioma del sistema",
@@ -798,13 +816,13 @@
       "title": "Vaya, no hay nada pendiente de actualizar.",
       "description": "Se ha intentado actualizar el microcontrolador del dispositivo sin necesidad. Ponte en contacto con Soporte de Ledger si hay algún problema con tu dispositivo."
     },
-    "LedgerAPIError": {
-      "title": "Lo sentimos, inténtalo de nuevo (API HTTP {{status}})",
-      "description": "Por favor, inténtalo de nuevo. Algo ha fallado en la interacción con el servidor API de Ledger."
-    },
-    "LedgerAPIErrorWithMessage": {
+    "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Por favor, inténtalo de nuevo o ponte en contacto con Soporte de Ledger"
+      "description": "Please check your connection and try again or contact Ledger Support."
+    },
+    "LedgerAPI5xx": {
+      "title": "Sorry, try again.",
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Lo sentimos, los servicios {{currencyName}} no están disponibles.",
