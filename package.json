@@ -112,6 +112,7 @@
     "tippy.js": "^2.5.2",
     "uncontrollable": "^6.0.0",
     "uuid": "^3.2.1",
+    "victory": "^32.1.0",
     "winston": "^3.0.0",
     "winston-transport": "^4.2.0",
     "write-file-atomic": "^2.3.0",

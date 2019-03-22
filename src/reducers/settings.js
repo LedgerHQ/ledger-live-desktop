@@ -200,6 +200,8 @@ export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 
 export const areSettingsLoaded = (state: State) => state.settings.loaded
 
+export const currenciesSettingsSelector = (state: State) => state.settings.currenciesSettings
+
 export const currencySettingsLocaleSelector = (
   settings: SettingsState,
   currency: CryptoCurrency,

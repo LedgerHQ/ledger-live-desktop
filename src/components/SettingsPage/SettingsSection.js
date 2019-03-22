@@ -9,7 +9,7 @@ import Box, { Card } from 'components/base/Box'
 
 export const SettingsSection = styled(Card).attrs({ p: 0 })``
 
-const SettingsSectionHeaderContainer = styled(Box).attrs({
+export const SettingsSectionHeaderContainer = styled(Box).attrs({
   p: 4,
   horizontal: true,
   align: 'center',
@@ -79,7 +79,7 @@ SettingsSectionHeader.defaultProps = {
   renderRight: undefined,
 }
 
-const SettingsSectionRowContainer = styled(Box).attrs({
+export const SettingsSectionRowContainer = styled(Box).attrs({
   p: 4,
   horizontal: true,
   align: 'center',

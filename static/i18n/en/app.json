@@ -387,12 +387,17 @@
   },
   "settings": {
     "title": "Settings",
+    "rates": {
+      "desc":
+        "Here are all the rates that are used by Ledger Live to calculate countervalues. You can configure a fiat countervalue and what exchanges are used for each rate."
+    },
     "tabs": {
       "display": "General",
       "export": "Export accounts",
       "currencies": "Currencies",
       "help": "Help",
-      "about": "About"
+      "about": "About",
+      "rates": "Rates"
     },
     "export": {
       "title": "Export accounts",

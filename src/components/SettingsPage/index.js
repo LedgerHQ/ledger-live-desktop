@@ -15,6 +15,7 @@ import SectionCurrencies from './sections/Currencies'
 import SectionHelp from './sections/Help'
 import SectionAbout from './sections/About'
 import SectionExport from './sections/Export'
+import SectionRates from './sections/Rates'
 
 const mapStateToProps = state => ({
   accountsCount: accountsSelector(state).length,
@@ -46,6 +47,11 @@ class SettingsPage extends PureComponent<Props, State> {
         key: 'currencies',
         label: <Trans i18nKey="settings.tabs.currencies" />,
         value: SectionCurrencies,
+      },
+      {
+        key: 'rates',
+        label: <Trans i18nKey="settings.tabs.rates" />,
+        value: SectionRates,
       },
       {
         key: 'export',
