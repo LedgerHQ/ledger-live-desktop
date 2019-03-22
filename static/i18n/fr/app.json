@@ -712,7 +712,7 @@
     },
     "setPassword": {
       "title": "Verrouillage par mot de passe (facultatif)",
-      "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
+      "desc": "Définissez un mot de passe pour bloquer les accès non autorisés aux données Ledger Live sur votre ordinateur, y compris les noms, transactions et adresses publiques des comptes",
       "disclaimer": {
         "note1": "Veillez à vous souvenir de votre mot de passe. Ne le partagez avec personne.",
         "note2": "La perte de votre mot de passe nécessite la reconfiguration de Ledger Live. Vos comptes devront à nouveau être ajoutés.",
@@ -720,21 +720,21 @@
       }
     },
     "analytics": {
-      "title": "Bugs and analytics",
-      "desc": "Share anonymized data to help improve Ledger security products and services",
+      "title": "Bugs et analytics",
+      "desc": "Partager des données anonymisées pour aider Ledger à améliorer la sécurité de ses produits et services",
       "shareAnalytics": {
         "title": "Analytics",
-        "desc": "Enable analytics to help Ledger understand how to improve user experience.",
+        "desc": "Autoriser les analytics pour aider Ledger à comprendre comment améliorer l’expérience utilisateur.",
         "mandatoryContextual": {
-          "item1": "Clicks",
-          "item2": "In-app page visits",
-          "item3": "Redirection to webpage",
-          "item4": "Actions: send, receive, lock, etc.",
-          "item5": "End of page scroll",
-          "item6": "App (un)installation and version",
-          "item7": "Number of accounts, crypto assets and operations",
+          "item1": "Clics",
+          "item2": "Visites de pages dans l'application",
+          "item3": "Redirection vers une page internet",
+          "item4": "Actions : envoyer, recevoir, verrouiller, etc.",
+          "item5": "Défilement en bas de page",
+          "item6": "Installation/désinstallation et version de l’application",
+          "item7": "Nombre de comptes, de crypto-actifs et d’opérations",
           "item8": "Durée de session globale et par page",
-          "item9": "Ledger device type and firmware"
+          "item9": "Type d’appareil Ledger et firmware"
         }
       },
       "sentryLogs": {
