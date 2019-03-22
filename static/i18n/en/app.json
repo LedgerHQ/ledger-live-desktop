@@ -876,13 +876,14 @@
       "description":
         "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
-    "LedgerAPIError": {
-      "title": "Sorry, try again (API HTTP {{status}})",
-      "description": "Please retry. Interacting with Ledger's API server went wrong."
-    },
-    "LedgerAPIErrorWithMessage": {
+    "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Please check your connection and try again or contact Ledger Support."
+    },
+    "LedgerAPI5xx": {
+      "title": "Sorry, try again.",
+      "description":
+        "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
