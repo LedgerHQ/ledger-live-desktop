@@ -18,6 +18,8 @@ import QRCodeExporter from '../../QRCodeExporter'
 import { BulletRow } from '../../Onboarding/helperComponents'
 import Text from '../../base/Text'
 import SocketExport from '../SocketExport'
+import ExportOperationsBtn from '../../ExportOperationsBtn'
+import DownloadCloud from '../../../icons/DownloadCloud'
 
 const BulletRowIcon = styled(Box).attrs({
   ff: 'Rubik|Regular',
@@ -42,7 +44,7 @@ type Props = {
 type State = {
   isModalOpened: boolean,
 }
-
+// TODO refactor out the export accounts into its own file
 class SectionExport extends PureComponent<Props, State> {
   state = {
     isModalOpened: false,
@@ -148,14 +150,21 @@ class SectionExport extends PureComponent<Props, State> {
 
         <Header
           icon={<IconShare size={16} />}
-          title={t('settings.export.title')}
-          desc={t('settings.export.desc')}
+          title={t('settings.export.accounts.title')}
+          desc={t('settings.export.accounts.desc')}
           renderRight={
             <Button small onClick={this.onModalOpen} primary>
-              {t('settings.export.button')}
+              {t('settings.export.accounts.button')}
             </Button>
           }
         />
+        <Header
+          icon={<DownloadCloud size={16} />}
+          title={t('settings.export.operations.title')}
+          desc={t('settings.export.operations.desc')}
+          renderRight={<ExportOperationsBtn primary />}
+        />
+
         {EXPERIMENTAL_WS_EXPORT && (
           <Header
             icon={<IconShare size={16} />}

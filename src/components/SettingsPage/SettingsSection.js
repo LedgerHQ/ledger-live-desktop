@@ -58,7 +58,7 @@ export function SettingsSectionHeader({
   return (
     <SettingsSectionHeaderContainer tabIndex={-1}>
       <RoundIconContainer mr={3}>{icon}</RoundIconContainer>
-      <Box grow>
+      <Box grow flex={1} mr={3}>
         <Box ff="Museo Sans|Regular" color="dark" data-e2e="settingsGeneral_title">
           {title}
         </Box>
