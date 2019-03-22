@@ -830,35 +830,35 @@
     },
     "ManagerAPIsFail": {
       "title": "Désolé, les services du Manager ne sont pas disponibles",
-      "description": "Please check the network status"
+      "description": "Veuillez vérifier le statut du réseau"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
-      "description": "Check your device to see which apps are already installed"
+      "title": "Désolé, cette application est déjà installée",
+      "description": "Consultez votre appareil pour voir quelles applications sont déjà installées"
     },
     "ManagerAppRelyOnBTC": {
       "title": "Applications Bitcoin et Ethereum requises",
-      "description": "Install the latest Bitcoin and Ethereum apps first"
+      "description": "Installez dans un premier temps la dernière version des applications Bitcoin et Ethereum"
     },
     "ManagerDeviceLocked": {
       "title": "Veuillez déverrouiller votre appareil.",
-      "description": "Your device was locked, please unlock it"
+      "description": "Votre appareil était verrouillé, veuillez le déverrouiller"
     },
     "ManagerNotEnoughSpace": {
       "title": "Désolé, espace disponible insuffisant",
-      "description": "Uninstall some apps to make space. This will not affect your crypto assets."
+      "description": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs."
     },
     "ManagerUninstallBTCDep": {
       "title": "Désolé, cette application est requise.",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "description": "Désinstallez les applications Bitcoin ou Ethereum en dernier"
     },
     "NetworkDown": {
       "title": "Désolé, la connexion internet ne semble pas fonctionner.",
-      "description": "Please check your internet connection"
+      "description": "Veuillez vérifier votre connexion internet"
     },
     "NoAddressesFound": {
       "title": "Désolé, aucun compte trouvé",
-      "description": "Something went wrong with address calculation, try again or contact Ledger Support"
+      "description": "Quelque chose s’est mal passé lors du calcul de l’adresse, veuillez essayer à nouveau ou contacter l’assistance Ledger"
     },
     "NotEnoughBalance": {
       "title": "Désolé, solde insuffisant",
@@ -877,49 +877,49 @@
     },
     "SelectExchangesLoadError": {
       "title": "Chargement impossible",
-      "description": "Please try again later"
+      "description": "Veuillez essayer à nouveau plus tard"
     },
     "TimeoutError": {
       "title": "Désolé, le délai est dépassé.",
-      "description": "It took too long for the server to respond, please retry"
+      "description": "Le serveur a mis trop de temps à répondre, veuillez réessayer"
     },
     "TimeoutTagged": {
       "title": "Désolé, le délai est dépassé ({{tag}}).",
-      "description": "It took too long for the server to respond"
+      "description": "Le serveur a mis trop de temps à répondre"
     },
     "TransportError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Quelque chose s’est mal passé, veuillez reconnecter votre appareil",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Quelque chose s’est mal passé, veuillez reconnecter votre appareil",
       "description": "{{message}}"
     },
     "UnexpectedBootloader": {
-      "title": "Oops, your device should not be in Bootloader mode",
-      "description": "Please restart your device or contact us"
+      "title": "Désolé, votre appareil ne devrait pas être en mode Bootloader",
+      "description": "Veuillez redémarrer votre appareil ou nous contacter"
     },
     "UserRefusedAllowManager": {
       "title": "Manager refused on device"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update canceled",
+      "title": "Mise à jour annulée",
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
     },
     "UserRefusedOnDevice": {
       "title": "Transaction refusée sur l’appareil",
-      "description": "Please retry or contact Ledger Support in case of doubt"
+      "description": "Veuillez réessayer ou, en cas de doute, contacter l’assistance Ledger"
     },
     "UserRefusedAddress": {
       "title": "Adresse de réception rejetée",
-      "description": "Please try again or contact Ledger Support when in doubt"
+      "description": "Veuillez essayer à nouveau ou, en cas de doute, contacter l’assistance Ledger"
     },
     "UpdateYourApp": {
       "title": "Mise à jour de l’application requise",
       "description": "Désinstallez et réinstallez l’application {{managerAppName}} dans le gestionnaire."
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to Dashboard",
+      "title": "Retourner au Dashboard",
       "description": "Please navigate back to Dashboard on your device"
     },
     "WebsocketConnectionError": {
