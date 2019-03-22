@@ -629,7 +629,7 @@
           },
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
-            "step2": "Press both buttons as instructed on your {{productName}} screen.",
+            "step2": "Appuyez sur les deux boutons comme indiqué sur l’écran de votre {{productName}}.",
             "step3": "Appuyez sur le bouton gauche pour annuler la configuration en tant que nouvel appareil.",
             "step4": "Appuyez sur le bouton droit pour sélectionner Restaurer la configuration.",
             "step5": "Choisissez un code PIN de 4 à 8 chiffres."
@@ -647,12 +647,12 @@
         "title": "Enregistrez votre phrase de récupération.",
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
-          "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
+          "step1": "Écrivez le <1><0>Mot n°1</0></1> en position 1 sur une feuille de récupération vierge.",
           "step2": "Appuyez sur le bouton droit pour continuer et notez les 24 mots.",
           "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
         },
         "blue": {
-          "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
+          "step1": "Écrivez dans le bon ordre chaque mot sur une feuille de récupération vierge.",
           "step2": "Appuyez sur <1><0>Suivant</0></1> et écrivez l’ensemble des mots jusqu’à ce que l’écran <3><0>Confirmation</0></3> apparaisse.",
           "step3": "Enter each word to confirm your recovery phrase."
         }
@@ -798,7 +798,7 @@
     },
     "DisconnectedDevice": {
       "title": "Désolé, connexion à l'appareil perdue",
-      "description": "Please try again"
+      "description": "Veuillez essayer à nouveau"
     },
     "EnpointConfig": {
       "title": "Point de terminaison non valide",
@@ -810,11 +810,11 @@
     },
     "HardResetFail": {
       "title": "Désolé, réinitialisation impossible",
-      "description": "Please try again or contact us when in doubt"
+      "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger"
     },
     "LatestMCUInstalledError": {
       "title": "Désolé, aucune mise à jour disponible",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "description": "Tentative de mise à jour inutile du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -826,10 +826,10 @@
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
     },
     "ManagerAPIsFail": {
-      "title": "Oops, Manager services unavailable",
+      "title": "Désolé, les services du Manager ne sont pas disponibles",
       "description": "Please check the network status"
     },
     "ManagerAppAlreadyInstalled": {
