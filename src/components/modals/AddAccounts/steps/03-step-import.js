@@ -5,12 +5,13 @@ import invariant from 'invariant'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment } from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
 import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
+import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -26,6 +27,43 @@ import Text from 'components/base/Text'
 import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 
 import type { StepProps } from '../index'
+
+const DeviceShouldStayInApp = createCustomErrorClass('DeviceShouldStayInApp')
+
+const remapTransportError = (err: Error, appName: string): Error => {
+  const { name, message } = err
+  let errorToThrow
+  const errorStatus = message ? message.slice(-5, -1) : ''
+  switch (true) {
+    case name === 'BtcUnmatchedApp':
+    case errorStatus === '6982':
+      errorToThrow = new DeviceShouldStayInApp(null, { appName })
+      break
+    default:
+      errorToThrow = err
+      break
+  }
+
+  return errorToThrow
+}
+
+const ImportError = ({ error, currency }: { error: Error, currency: ?CryptoCurrency }) => {
+  invariant(error, 'Trying to render inexisting error')
+  return (
+    <Box style={{ height: 200 }} px={5} justify="center">
+      <Box color="alertRed" align="center">
+        <IconExclamationCircleThin size={43} />
+      </Box>
+      {currency ? <DebugAppInfosForCurrency currencyId={currency.id} /> : null}
+      <Title>
+        <TranslatedError error={error} field="title" />
+      </Title>
+      <Desc>
+        <TranslatedError error={error} field="description" />
+      </Desc>
+    </Box>
+  )
+}
 
 const LoadingRow = styled(Box).attrs({
   horizontal: true,
@@ -149,7 +187,8 @@ class StepImport extends PureComponent<StepProps> {
         },
         error: err => {
           logger.critical(err)
-          setScanStatus('error', err)
+          const error = remapTransportError(err, currency.name)
+          setScanStatus('error', error)
         },
       })
     } catch (err) {
@@ -187,25 +226,6 @@ class StepImport extends PureComponent<StepProps> {
     })
   }
 
-  renderError() {
-    const { err, currency } = this.props
-    invariant(err, 'Trying to render inexisting error')
-    return (
-      <Box style={{ height: 200 }} px={5} justify="center">
-        <Box color="alertRed" align="center">
-          <IconExclamationCircleThin size={43} />
-        </Box>
-        {currency ? <DebugAppInfosForCurrency currencyId={currency.id} /> : null}
-        <Title>
-          <TranslatedError error={err} field="title" />
-        </Title>
-        <Desc>
-          <TranslatedError error={err} field="description" />
-        </Desc>
-      </Box>
-    )
-  }
-
   render() {
     const {
       scanStatus,
@@ -220,8 +240,7 @@ class StepImport extends PureComponent<StepProps> {
     } = this.props
 
     if (err) {
-      // TODO prefer rendering a component
-      return this.renderError()
+      return <ImportError error={err} currency={currency} />
     }
 
     const currencyName = currency ? currency.name : ''

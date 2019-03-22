@@ -7,6 +7,7 @@ import { BigNumber } from 'bignumber.js'
 import Btc from '@ledgerhq/hw-app-btc'
 import { from } from 'rxjs'
 import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
+import getAddress from '@ledgerhq/live-common/lib/hw/getAddress'
 import {
   getDerivationModesForCurrency,
   getDerivationScheme,
@@ -102,7 +103,7 @@ async function scanAccountsOnDeviceBySegwit({
   const path = `${isSegwit ? '49' : '44'}'/${coinType}'`
 
   const { publicKey: seedIdentifier } = await withDevice(devicePath)(transport =>
-    from(new Btc(transport).getWalletPublicKey(path, false, isSegwit)),
+    from(getAddress(transport, currency, path)),
   ).toPromise()
 
   if (isUnsubscribed()) return []

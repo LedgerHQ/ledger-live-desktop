@@ -244,6 +244,8 @@ class AddAccounts extends PureComponent<Props, State> {
     }
     const title = <Trans i18nKey="addAccounts.title" />
 
+    const errorSteps = err ? [2] : []
+
     return (
       <Modal
         centered
@@ -258,6 +260,7 @@ class AddAccounts extends PureComponent<Props, State> {
             onStepChange={this.handleStepChange}
             onClose={onClose}
             steps={this.STEPS}
+            errorSteps={errorSteps}
             {...stepperProps}
           >
             <Track onUnmount event="CloseModalAddAccounts" />
