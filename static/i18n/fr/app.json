@@ -738,23 +738,23 @@
         }
       },
       "sentryLogs": {
-        "title": "Bug reports",
+        "title": "Rapports de bugs",
         "desc": "Envoyer automatiquement des rapports pour aider Ledger à corriger les bugs."
       },
       "technicalData": {
-        "title": "Technical data*",
-        "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
+        "title": "Données techniques*",
+        "desc": "Ledger collectera automatiquement des données techniques totalement anonymisées afin d'améliorer l’expérience utilisateur.",
         "mandatoryText": "* obligatoire",
         "mandatoryContextual": {
           "title": "Données techniques",
           "item1": "Identifiant unique et anonyme de l’application",
-          "item2": "Ledger Live version, language and region",
-          "item3": "OS version, language and region"
+          "item2": "Version, langue et région de Ledger Live",
+          "item3": "Version, langue et région du système d'exploitation"
         }
       },
       "terms": {
-        "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "title": "Termes",
+        "desc": "En continuant, vous reconnaissez avoir lu et accepté les <1>Conditions d’utilisation</1> et la <3>Politique de confidentialité</3>."
       }
     },
     "finish": {
