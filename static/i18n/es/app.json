@@ -415,33 +415,33 @@
       "developerMode": "Modo desarrollador",
       "developerModeDesc": "Mostrar aplicaciones de desarrollador y testnet en el Administrador.",
       "analytics": "Análisis",
-      "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
-      "launchOnboarding": "Device setup",
-      "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
+      "analyticsDesc": "Permitir análisis para ayudar a Ledger a entender cómo mejorar la experiencia de usuario. Esto incluye clics, visitas a la página, redirecciones, acciones (enviar, recibir, bloquear, etc.) desplazamientos hasta el final de la página, (des)instalación y versión de aplicaciones, versión de la aplicación, número de cuentas, crypto activos y operaciones, duraciones de sesión, tipo de dispositivo y firmware de Ledger.",
+      "reportErrors": "Informes de bugs",
+      "reportErrorsDesc": "Enviar informes automáticamente para ayudar a Ledger a corregir bugs.",
+      "launchOnboarding": "Configuración del dispositivo",
+      "launchOnboardingDesc": "Configurar como nuevo o restaurar un dispositivo de Ledger. Las cuentas y configuraciones se mantienen."
     },
     "about": {
-      "desc": "App information, Terms and Conditions, and Privacy Policy."
+      "desc": "Información sobre aplicaciones, Términos y Condiciones y Política de Privacidad."
     },
     "help": {
-      "desc": "Learn more about Ledger Live or get help.",
+      "desc": "Saber más sobre Ledger Live u obtener ayuda.",
       "version": "Versión",
       "releaseNotesBtn": "Detalles",
       "faq": "Soporte de Ledger",
-      "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+      "faqDesc": "¿Tienes problemas? Consigue ayuda utilizando Ledger Live con tu monedero hardware.",
+      "terms": "Condiciones de uso",
+      "termsDesc": "Al utilizar Ledger Live consideramos que aceptas nuestros Términos y Condiciones.",
+      "privacy": "Política de Privacidad",
+      "privacyDesc": "Consulta nuestra Política de Privacidad para conocer qué datos personales recogemos, por qué y cómo los utilizamos."
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
-      "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes. Las claves privadas que ofrecen acceso a tus crypto activos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
     },
     "softResetModal": {
       "title": "Borrar caché",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "El borrado de la caché de Ledger fuerza la resincronización de red. Tus ajustes y cuentas se mantienen. Las claves privadas que ofrecen acceso a tus crypto activos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
     },
     "resetFallbackModal": {
       "title": "Es necesaria la acción del usuario",
@@ -453,7 +453,7 @@
     },
     "removeAccountModal": {
       "title": "Quitar cuenta",
-      "desc": "This will not affect your crypto assets. Accounts can always be re-added."
+      "desc": "Esto no afectará a tus cripto activos. Las cuentas siempre pueden volver a añadirse."
     },
     "openUserDataDirectory": {
       "title": "Ver datos de usuario",
@@ -461,13 +461,13 @@
       "btn": "Ver"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
-      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
-      "desc": "Please select the state of your Ledger device.",
-      "button": "Repair",
+      "title": "Repara tu dispositivo Ledger",
+      "descSettings": "Utiliza esta herramienta para restaurar tu dispositivo Ledger si se ha atascado durante una actualización de firmware.",
+      "desc": "Selecciona el estado de tu dispositivo Ledger.",
+      "button": "Reparar",
       "generic": "Bootloader",
-      "mcuNotGenuine": "MCU not genuine",
-      "followDeviceRepair": "Follow device repair instructions"
+      "mcuNotGenuine": "MCU no genuino",
+      "followDeviceRepair": "Sigue las instrucciones de reparación del dispositivo"
     },
     "exportLogs": {
       "title": "Exportar registros",
@@ -710,21 +710,21 @@
         "mandatoryContextual": {
           "item1": "Clicks",
           "item2": "In-app page visits",
-          "item3": "Redirection to webpage",
-          "item4": "Actions: send, receive, lock, etc.",
-          "item5": "End of page scroll",
-          "item6": "App (un)installation and version",
-          "item7": "Number of accounts, crypto assets and operations",
+          "item3": "Redirección a página web",
+          "item4": "Acciones: enviar, recibir, bloquear, etc.",
+          "item5": "Desplazamiento hasta el final de la página",
+          "item6": "(Des)instalación y versión de la aplicación",
+          "item7": "Número de cuentas, crypto activos y operaciones",
           "item8": "Duración general y de la sesión de la página",
-          "item9": "Ledger device type and firmware"
+          "item9": "Tipo de dispositivo Ledger y firmware"
         }
       },
       "sentryLogs": {
-        "title": "Bug reports",
+        "title": "Informes de bugs",
         "desc": "Enviar informes automáticamente para ayudar a Ledger a corregir bugs."
       },
       "technicalData": {
-        "title": "Technical data*",
+        "title": "Datos técnicos*",
         "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
         "mandatoryText": "* obligatorio",
         "mandatoryContextual": {
