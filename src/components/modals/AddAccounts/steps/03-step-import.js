@@ -11,7 +11,7 @@ import { urls } from 'config/urls'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
 import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
-import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
+import { DeviceShouldStayInApp } from '@ledgerhq/errors'
 
 import { getBridgeForCurrency } from 'bridge'
 
@@ -27,8 +27,6 @@ import Text from 'components/base/Text'
 import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 
 import type { StepProps } from '../index'
-
-const DeviceShouldStayInApp = createCustomErrorClass('DeviceShouldStayInApp')
 
 // $FlowFixMe
 const remapTransportError = (err: mixed, appName: string): Error => {

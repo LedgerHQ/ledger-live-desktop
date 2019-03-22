@@ -3,12 +3,8 @@ import axios from 'axios'
 import { GET_CALLS_RETRY, GET_CALLS_TIMEOUT } from 'config/constants'
 import { retry } from 'helpers/promise'
 import logger from 'logger'
-import { NetworkDown } from '@ledgerhq/errors'
-import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
+import { NetworkDown, LedgerAPI5xx, LedgerAPI4xx } from '@ledgerhq/errors'
 import anonymizer from 'helpers/anonymizer'
-
-const LedgerAPI4xx = createCustomErrorClass('LedgerAPI4xx')
-const LedgerAPI5xx = createCustomErrorClass('LedgerAPI5xx')
 
 const makeError = (msg, status, url, method) => {
   const obj = {
