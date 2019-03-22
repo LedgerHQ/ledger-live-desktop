@@ -178,12 +178,12 @@
     "kyberswap": "Plateforme d’échange de tokens rapide, simple et sécurisée. Optimisée par le protocole de liquidité on-chain de Kyber Network.",
     "luno": "Luno sécurise et facilite l’achat, le stockage et l’apprentissage des cryptomonnaies telles que Bitcoin et Ethereum.",
     "paybis": "Les cartes bancaires simplifient et sécurisent l'achat de Bitcoins. Ce service est disponible aux États-Unis, au Canada, en Allemagne, en Russie et en Arabie Saoudite.",
-    "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
-    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
-    "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
-    "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
-    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity."
+    "shapeshift": "ShapeShift est un marché en ligne sur lequel les utilisateurs peuvent acheter et vendre des actifs numériques. Il s’agit d’un moyen sécurisé et rapide d’acheter et de vendre des actifs numériques, sans long processus d’inscription, sans risques de contrepartie et sans friction.",
+    "simplex": "Simplex est une institution financière agréée par l’UE, qui fournit une solution anti-fraude de paiement par carte bancaire.",
+    "taxtoken": "Logiciel automatisé de gestion des coûts initiaux et des taxes pour les cryptomonnaies réservé aux citoyens américains.",
+    "thorswap": "ThorSwap est un marché de crypto-actifs instantané, sécurisé et équitable qui s'appuie sur les technologies décentralisées d’Atomic Swap. Il s’agit du moyen le plus pratique pour se lancer dans le trading, aucune inscription, aucun formulaire à remplir pour les transactions de faible montant.",
+    "bitpanda": "Bitpanda est le service de courtage leader en Europe pour acheter et revendre Bitcoins, Ethereum, IOTA et bien d’autres. Déposez de l’argent avec votre carte bancaire, SOFORT-Transfer, NETELLER et d’autres options.",
+    "exmo": "Créé en 2013 et basé à Londres, Kiev, Barcelone et Moscou, EXMO est la plateforme d'échange numéro 1 en Europe de l’Est et l’une des plus grandes plateformes d'échange mondiales en termes de volume et de liquidités."
   },
   "genuinecheck": {
     "modal": {
@@ -194,16 +194,16 @@
     "title": "Ajouter des comptes",
     "breadcrumb": {
       "informations": "Crypto-actif",
-      "connectDevice": "Device",
+      "connectDevice": "Appareil",
       "import": "Comptes",
       "finish": "Confirmation"
     },
     "connectDevice": {
-      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+      "desc": "Suivez les étapes ci-dessous pour ajouter des comptes <1><0>{{currencyName}}</0></1>"
     },
     "accountAlreadyImportedSubtitle": "Comptes déjà présents dans le portefeuille ({{count}})",
-    "accountToImportSubtitle": "Add existing account",
-    "accountToImportSubtitle_plural": "Add existing accounts",
+    "accountToImportSubtitle": "Ajouter un compte existant",
+    "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
     "newAccount": "Nouveau compte",
@@ -211,13 +211,13 @@
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
     "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "Aucun compte {{currencyName}} existant à ajouter",
-    "success": "Account successfully added",
-    "success_plural": "Accounts successfully added",
-    "successDescription": "Add more accounts or return to Portfolio",
-    "successDescription_plural": "Add more accounts or return to Portfolio",
+    "success": "Compte ajouté avec succès",
+    "success_plural": "Comptes ajoutés avec succès",
+    "successDescription": "Ajoutez davantage de comptes ou retournez au Portfolio",
+    "successDescription_plural": "Ajoutez davantage de comptes ou retournez au Portfolio",
     "createNewAccount": {
-      "title": "Add new account",
-      "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
+      "title": "Ajouter un nouveau compte",
+      "noOperationOnLastAccount": "Impossible d’ajouter un nouveau compte avant d’avoir reçu sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> à créer n’a été trouvé."
     },
     "cta": {
@@ -230,15 +230,15 @@
     "title": "Détails de l'opération",
     "account": "Compte",
     "date": "Date",
-    "status": "Status",
-    "confirmed": "Confirmed",
-    "notConfirmed": "Not confirmed",
-    "fees": "Fees",
-    "noFees": "No fee",
-    "from": "From",
-    "to": "To",
-    "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
+    "status": "Statut",
+    "confirmed": "Confirmée",
+    "notConfirmed": "Non confirmée",
+    "fees": "Frais",
+    "noFees": "Aucun frais",
+    "from": "De",
+    "to": "Vers",
+    "identifier": "ID de la transaction",
+    "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins"
   },
@@ -252,14 +252,14 @@
       "all": "Catalogue d'applications",
       "installing": "Installation de {{app}}...",
       "uninstalling": "Désinstallation de {{app}}...",
-      "installSuccess": "Successfully installed {{app}}",
-      "uninstallSuccess": "{{app}} uninstalled",
+      "installSuccess": "{{app}} installé",
+      "uninstallSuccess": "{{app}} désinstallé",
       "help": "Consultez votre appareil pour voir quelles applications sont déjà installées."
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
       "update": "Mise à jour",
-      "latest": "Firmware version {{version}} is available",
+      "latest": "La version {{version}} du firmware est disponible.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
