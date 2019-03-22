@@ -362,15 +362,22 @@
     "title": "Settings",
     "tabs": {
       "display": "General",
-      "export": "Export accounts",
+      "export": "Accounts",
       "currencies": "Currencies",
       "help": "Help",
       "about": "About"
     },
     "export": {
-      "title": "Export accounts",
-      "desc": "Export accounts to the Ledger Live mobile app.",
-      "button": "Export",
+      "accounts": {
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
+      },
+      "operations": {
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer.",
+        "button": "Save"
+      },
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
@@ -407,27 +414,27 @@
       "passwordAutoLockDesc": "Verrouille automatiquement Ledger Live après une période d’inactivité.",
       "changePassword": "Changer le mot de passe",
       "softResetTitle": "Vider le cache",
-      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
-      "softReset": "Clear",
-      "hardResetTitle": "Reset Ledger Live",
-      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings.",
-      "hardReset": "Reset",
-      "developerMode": "Developer mode",
-      "developerModeDesc": "Show developer and testnet apps in the Manager.",
+      "softResetDesc": "Effacer le cache de Ledger Live pour forcer la resynchronisation avec la blockchain.",
+      "softReset": "Effacer",
+      "hardResetTitle": "Réinitialiser Ledger Live",
+      "hardResetDesc": "Effacer toutes les données de Ledger Live stockées sur votre ordinateur, y compris les comptes, l'historique des transactions et les paramètres.",
+      "hardReset": "Réinitialiser",
+      "developerMode": "Mode développeur",
+      "developerModeDesc": "Afficher les applications développeur et les applications Testnet dans le gestionnaire.",
       "analytics": "Analyse",
-      "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
-      "launchOnboarding": "Device setup",
-      "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
+      "analyticsDesc": "Autoriser les analyses pour aider Ledger à comprendre comment améliorer l’expérience utilisateur. Ces analyses incluent les clics, les visites de pages, les redirections, les actions (envoyer, recevoir, verrouiller, etc.), les défilements en bas de page, les installations/désinstallations et mises à jour des applications, les versions d’application, le nombre de comptes, de crypto-actifs et d’opérations, la durée des sessions, le type d’appareil Ledger ainsi que le firmware.",
+      "reportErrors": "Rapports de bugs",
+      "reportErrorsDesc": "Envoyer automatiquement des rapports pour aider Ledger à corriger les bugs.",
+      "launchOnboarding": "Configuration de l’appareil",
+      "launchOnboardingDesc": "Configurer un appareil Ledger comme neuf ou le restaurer. Les comptes et les paramètres sont conservés."
     },
     "about": {
-      "desc": "App information, Terms and Conditions, and Privacy Policy."
+      "desc": "Informations, conditions générales et politique de confidentialité de l’application."
     },
     "help": {
-      "desc": "Learn more about Ledger Live or get help.",
+      "desc": "En savoir plus sur Ledger Live ou obtenir de l’aide.",
       "version": "Version",
-      "releaseNotesBtn": "Details",
+      "releaseNotesBtn": "Détails",
       "faq": "Assistance Ledger",
       "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
       "terms": "Terms of Use",
@@ -470,9 +477,9 @@
       "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
-      "title": "Export logs",
-      "desc": "L’export des journaux de Ledger Live pourra être nécessaire aux fins de dépannage.",
-      "btn": "Export"
+      "title": "Save logs",
+      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Save"
     }
   },
   "password": {
@@ -522,6 +529,17 @@
     "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent monter ou baisser. Évaluez attentivement vos objectifs de trading et les risques financiers que vous êtes prêt à prendre.",
     "desc_2": "Veuillez noter que Ledger ne fournit aucun conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
     "cta": "Got it"
+  },
+  "exportOperationsModal": {
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
+    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "titleSuccess": "Operation history successfully saved",
+    "cta": "Save",
+    "ctaSuccess": "Done",
+    "noAccounts": "No accounts to export",
+    "selectedAccounts": "Accounts to include",
+    "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
     "system": "Utiliser la langue du système",
@@ -798,13 +816,13 @@
       "title": "Désolé, aucune mise à jour disponible",
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
-    "LedgerAPIError": {
-      "title": "Désolé, veuillez essayer à nouveau (API HTTP {{status}})",
-      "description": "Please retry. Interacting with Ledger's API server went wrong."
-    },
-    "LedgerAPIErrorWithMessage": {
+    "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Please check your connection and try again or contact Ledger Support."
+    },
+    "LedgerAPI5xx": {
+      "title": "Sorry, try again.",
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
