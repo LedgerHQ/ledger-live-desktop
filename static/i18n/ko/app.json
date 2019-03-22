@@ -362,15 +362,22 @@
     "title": "설정",
     "tabs": {
       "display": "일반",
-      "export": "Export accounts",
+      "export": "Accounts",
       "currencies": "통화",
       "help": "도움말",
       "about": "소개"
     },
     "export": {
-      "title": "Export accounts",
-      "desc": "Export accounts to the Ledger Live mobile app.",
-      "button": "Export",
+      "accounts": {
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
+      },
+      "operations": {
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer.",
+        "button": "Save"
+      },
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
@@ -470,9 +477,9 @@
       "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
-      "title": "로그 내보내기",
-      "desc": "문제 해결을 위해 Ledger Live 로그 내보내기가 필요할 수 있습니다.",
-      "btn": "내보내기"
+      "title": "Save logs",
+      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Save"
     }
   },
   "password": {
@@ -522,6 +529,17 @@
     "desc_1": "암호화 자산을 전송 및 수신하기 전에 정보에 입각한 결정을 내릴 수 있도록 관련 지식을 학습하십시오. 암호화 화폐는 변동성이 높으며 가격이 상승 또는 하락할 수 있습니다. 자신의 거래 목표와 감수하려는 금융 위험을 조심스럽게 평가하십시오.",
     "desc_2": "Ledger는 재무, 세금 또는 법적 조언을 제공하지 않는다는 점에 유의하십시오. 귀하는 결정을 스스로 내리거나 신뢰할 수 있는 전문가와 상의해야 합니다.",
     "cta": "알겠습니다"
+  },
+  "exportOperationsModal": {
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
+    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "titleSuccess": "Operation history successfully saved",
+    "cta": "Save",
+    "ctaSuccess": "Done",
+    "noAccounts": "No accounts to export",
+    "selectedAccounts": "Accounts to include",
+    "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
     "system": "시스템 언어 사용",
@@ -798,13 +816,13 @@
       "title": "죄송합니다. 업데이트할 것이 없습니다.",
       "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
-    "LedgerAPIError": {
-      "title": "죄송합니다. (API HTTP {{status}})을(를) 다시 시도하십시오.",
-      "description": "Please retry. Interacting with Ledger's API server went wrong."
-    },
-    "LedgerAPIErrorWithMessage": {
+    "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Please check your connection and try again or contact Ledger Support."
+    },
+    "LedgerAPI5xx": {
+      "title": "Sorry, try again.",
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "죄송합니다. {{currencyName}} 서비스를 사용할 수 없습니다.",
