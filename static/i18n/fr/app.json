@@ -130,20 +130,20 @@
       "afternoon": "Bonjour"
     },
     "summary": "Voici le résumé de votre compte",
-    "summary_plural": "Here's the summary of your {{count}} accounts",
-    "recentActivity": "Last operations",
-    "totalBalance": "Total balance",
+    "summary_plural": "Voici le résumé de vos {{count}} comptes",
+    "recentActivity": "Dernières opérations",
+    "totalBalance": "Solde total",
     "accountsOrder": {
-      "name": "name",
-      "balance": "balance"
+      "name": "nom",
+      "balance": "solde"
     }
   },
   "currentAddress": {
-    "title": "Current address",
+    "title": "Adresse actuelle",
     "for": "Adresse pour le compte <1><0>{{accountName}}</0></1>",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfAccepted": "Adresse confirmée. Veuillez la revérifier si vous la copiez/collez ou si vous scannez le QR code.",
+    "messageIfSkipped": "Votre adresse {{currencyName}} n’a pas été confirmée sur votre appareil Ledger. Veuillez la vérifier pour une sécurité optimale."
   },
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
