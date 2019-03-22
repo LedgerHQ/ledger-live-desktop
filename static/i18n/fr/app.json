@@ -7,7 +7,7 @@
     "confirm": "Confirmer",
     "cancel": "Annuler",
     "getSupport": "Get support",
-    "delete": "Delete",
+    "delete": "Supprimer",
     "launch": "Lancer",
     "continue": "Continuer",
     "learnMore": "En savoir plus",
@@ -22,114 +22,114 @@
     "selectExchange": "Sélectionner un service d'échange",
     "selectExchangeNoOption": "Aucun service d'échange correspondant à \"{{exchangeName}}\"",
     "selectExchangeNoOptionAtAll": "Aucun service d'échange trouvé",
-    "sortBy": "Sort by",
-    "search": "Search",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
-    "max": "Max",
-    "back": "Back",
-    "reset": "Reset",
-    "retry": "Retry",
-    "stop": "Stop",
-    "close": "Close",
-    "eastern": "Eastern",
-    "western": "Western",
-    "reverify": "Re-verify",
-    "verify": "Verify",
-    "copy": "Copy",
-    "copyAddress": "Copy",
-    "copied": "Copied",
+    "sortBy": "Trier par",
+    "search": "Rechercher",
+    "save": "Enregistrer",
+    "lock": "Verrouiller",
+    "showMore": "Afficher plus",
+    "max": "Maximum",
+    "back": "Retour",
+    "reset": "Réinitialiser",
+    "retry": "Réessayer",
+    "stop": "Arrêter",
+    "close": "Fermer",
+    "eastern": "Est",
+    "western": "Ouest",
+    "reverify": "Revérifier",
+    "verify": "Vérifier",
+    "copy": "Copier",
+    "copyAddress": "Copier",
+    "copied": "Copié",
     "addressCopied": "Adresse copiée",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "Bienvenue",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "Entrez votre mot de passe pour continuer",
+      "inputPlaceholder": "Saisissez votre mot de passe",
+      "lostPassword": "Mot de passe oublié"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "error": "Synchronization error",
-      "refresh": "Refresh",
+      "syncing": "Synchronisation...",
+      "upToDate": "Synchronisé",
+      "outdated": "En pause",
+      "error": "Erreur de synchronisation",
+      "refresh": "Actualiser",
       "ago": "Synchronisé {{time}}"
     }
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent"
+      "IN": "Reçu",
+      "OUT": "Envoyé"
     }
   },
   "time": {
-    "day": "Day",
-    "week": "Week",
-    "month": "Month",
-    "year": "Year",
+    "day": "Jour",
+    "week": "Semaine",
+    "month": "Mois",
+    "year": "Année",
     "minute": "Minute",
-    "second": "Second",
-    "hour": "Hour",
+    "second": "Seconde",
+    "hour": "Heure",
     "since": {
-      "day": "past day",
-      "week": "past week",
-      "month": "past month",
-      "year": "past year"
+      "day": "hier",
+      "week": "la semaine dernière",
+      "month": "le mois dernier",
+      "year": "l'année dernière"
     }
   },
   "sidebar": {
     "menu": "Menu",
-    "accounts": "Accounts ({{count}})",
+    "accounts": "Comptes ({{count}})",
     "manager": "Manager",
     "exchange": "Buy crypto",
     "developer": "Outils de développement"
   },
   "account": {
-    "lastOperations": "Last operations",
+    "lastOperations": "Dernières opérations",
     "emptyState": {
       "title": "Vous n’avez pas encore de crypto-actifs ?",
       "desc": "Assurez-vous que l’application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
       "buttons": {
-        "receiveFunds": "Receive"
+        "receiveFunds": "Recevoir"
       }
     },
     "settings": {
-      "title": "Edit account",
+      "title": "Modifier le compte",
       "advancedLogs": "Journaux détaillés",
       "accountName": {
-        "title": "Account name",
+        "title": "Nom du compte",
         "desc": "Décrire ce compte"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to display"
+        "title": "Unité",
+        "desc": "Choisir l'unité à afficher"
       },
       "endpointConfig": {
-        "title": "Node",
+        "title": "Noeud",
         "desc": "Le noeud d’API à utiliser"
       }
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
+    "promoteMobile": "Profitez de l’expérience Ledger Live, maintenant disponible sur mobile avec {{productName}}",
+    "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge"
   },
   "dashboard": {
     "title": "Portfolio",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage more crypto assets",
-      "createAccount": "Add account"
+      "desc": "Ajouter des comptes pour gérer plus de crypto-actifs",
+      "createAccount": "Ajouter un compte"
     },
     "accounts": {
-      "title": "Accounts ({{count}})"
+      "title": "Comptes ({{count}})"
     },
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "Bonjour",
+      "evening": "Bonsoir",
+      "afternoon": "Bonjour"
     },
-    "summary": "Here's the summary of your account",
+    "summary": "Voici le résumé de votre compte",
     "summary_plural": "Here's the summary of your {{count}} accounts",
     "recentActivity": "Last operations",
     "totalBalance": "Total balance",
