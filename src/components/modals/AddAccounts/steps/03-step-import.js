@@ -30,19 +30,16 @@ import type { StepProps } from '../index'
 
 const DeviceShouldStayInApp = createCustomErrorClass('DeviceShouldStayInApp')
 
-const remapTransportError = (err: Error, appName: string): Error => {
-  const { name, message } = err
-  let errorToThrow
-  const errorStatus = message ? message.slice(-5, -1) : ''
-  switch (true) {
-    case name === 'BtcUnmatchedApp':
-    case errorStatus === '6982':
-      errorToThrow = new DeviceShouldStayInApp(null, { appName })
-      break
-    default:
-      errorToThrow = err
-      break
-  }
+// $FlowFixMe
+const remapTransportError = (err: mixed, appName: string): Error => {
+  if (!err || typeof err !== 'object') return err
+
+  const { name, statusCode } = err
+
+  const errorToThrow =
+    name === 'BtcUnmatchedApp' || statusCode === 0x6982
+      ? new DeviceShouldStayInApp(null, { appName })
+      : err
 
   return errorToThrow
 }
