@@ -74,46 +74,46 @@
     "since": {
       "day": "día pasado",
       "week": "semana pasada",
-      "month": "past month",
-      "year": "past year"
+      "month": "mes pasado",
+      "year": "año pasado"
     }
   },
   "sidebar": {
-    "menu": "Menu",
-    "accounts": "Accounts ({{count}})",
+    "menu": "Menú",
+    "accounts": "Cuentas ({{count}})",
     "manager": "Gestor",
-    "exchange": "Buy crypto",
+    "exchange": "Comprar crypto",
     "developer": "Herramientas de desarrollo"
   },
   "account": {
-    "lastOperations": "Last operations",
+    "lastOperations": "Últimas operaciones",
     "emptyState": {
       "title": "¿Aún no tienes crypto activos?",
       "desc": "Asegúrate de que la aplicación <1><0>{{managerAppName}}</0></1> está instalada y empieza a recibir.",
       "buttons": {
-        "receiveFunds": "Receive"
+        "receiveFunds": "Recibir"
       }
     },
     "settings": {
-      "title": "Edit account",
+      "title": "Editar cuenta",
       "advancedLogs": "Registros avanzados",
       "accountName": {
-        "title": "Account name",
+        "title": "Nombre de la cuenta",
         "desc": "Describir esta cuenta"
       },
       "unit": {
-        "title": "Unit",
+        "title": "Unidad",
         "desc": "Elegir la unidad que va a mostrarse"
       },
       "endpointConfig": {
-        "title": "Node",
+        "title": "Nodo",
         "desc": "Nodo de la API que va a utilizarse"
       }
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
+    "promoteMobile": "Disfruta la experiencia de Ledger Live, ahora disponible en móviles con {{productName}}",
+    "genericTerminatedCrypto": "{{coinName}} ya no es compatible"
   },
   "dashboard": {
     "title": "Cartera",
@@ -122,24 +122,24 @@
       "createAccount": "Añadir cuenta"
     },
     "accounts": {
-      "title": "Accounts ({{count}})"
+      "title": "Cuentas ({{count}})"
     },
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "Buenos días",
+      "evening": "Buenas noches",
+      "afternoon": "Buenas tardes"
     },
     "summary": "Este es el resumen de tu cuenta",
     "summary_plural": "Este es el resumen de tus cuentas {{count}}",
-    "recentActivity": "Last operations",
-    "totalBalance": "Total balance",
+    "recentActivity": "Últimas operaciones",
+    "totalBalance": "Saldo total",
     "accountsOrder": {
-      "name": "name",
-      "balance": "balance"
+      "name": "nombre",
+      "balance": "saldo"
     }
   },
   "currentAddress": {
-    "title": "Current address",
+    "title": "Dirección actual",
     "for": "Dirección de la cuenta <1><0>{{accountName}}</0></1>",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "Dirección confirmada, compruébala de nuevo si la has copiado/pegado o si has escaneado el código QR.",
@@ -149,7 +149,7 @@
     "dashboard": "Navega hasta el <1>Panel de control</1> en tu dispositivo",
     "step1": "Conecta y desbloquea tu <1>dispositivo Ledger</1>",
     "step2": "Navega hasta la <1><0>{{managerAppName}}</0></1> aplicación en tu dispositivo",
-    "step3": "Acepta el <1>Gestor de Ledger</1> en tu dispositivo"
+    "step3": "Acepta <1>Ledger Manager</1> en tu dispositivo"
   },
   "emptyState": {
     "sidebar": {
@@ -261,7 +261,7 @@
       "update": "Actualizar",
       "latest": "La versión {{version}} del firmware está disponible.",
       "disclaimerTitle": "Estás a punto de instalar la versión <1><0>del firmware {{version}}</0></1>.",
-      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus crypto activos.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
@@ -396,15 +396,15 @@
     "currencies": {
       "desc": "Selecciona un crypto activo para editar sus ajustes.",
       "exchange": "Proveedor de tipo ({{ticker}} → BTC)",
-      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Elige el proveedor del tipo de cambio de {{currencyName}} a Bitcoin, utilizado para calcular el valor de tus crypto activos ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Número de confirmaciones",
       "confirmationsNbDesc": "Establece el número de confirmaciones de red para que una transacción se marque como confirmada."
     },
     "profile": {
       "password": "Bloqueo por contraseña",
-      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live after inactivity.",
+      "passwordDesc": "Establece una contraseña para evitar el acceso no autorizado a los datos de Ledger Live guardados en tu ordenador, incluidos nombres, saldos, transacciones y direcciones públicas de cuentas.",
+      "passwordAutoLock": "Bloqueo automático",
+      "passwordAutoLockDesc": "Bloquea Ledger Live automáticamente después de un periodo de inactividad.",
       "changePassword": "Cambiar contraseña",
       "softResetTitle": "Borrar caché",
       "softResetDesc": "Borra la caché de Ledger Live para forzar la resincronización con la cadena de bloques.",
@@ -413,7 +413,7 @@
       "hardResetDesc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes.",
       "hardReset": "Restablecer",
       "developerMode": "Modo desarrollador",
-      "developerModeDesc": "Show developer and testnet apps in the Manager.",
+      "developerModeDesc": "Mostrar aplicaciones de desarrollador y testnet en el Administrador.",
       "analytics": "Análisis",
       "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
       "reportErrors": "Bug reports",
