@@ -74,9 +74,11 @@ class ExportOperations extends PureComponent<Props, State> {
     })
 
     if (path) {
+      writeToFile(
+        path,
+        accountsOpToCSV(accounts.filter(account => checkedIds.includes(account.id))),
+      )
       this.setState({ success: true })
-      const data = accountsOpToCSV(accounts.filter(account => checkedIds.includes(account.id)))
-      writeToFile(path, data)
     }
   }
 
