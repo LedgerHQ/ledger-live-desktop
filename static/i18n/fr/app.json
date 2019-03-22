@@ -148,7 +148,7 @@
   "deviceConnect": {
     "dashboard": "Accédez au <1>Dashboard</1> sur votre appareil",
     "step1": "Connectez et déverrouillez votre <1>appareil Ledger</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step2": "Ouvrez l’application <1><0>{{managerAppName}}</0></1> sur votre appareil",
     "step3": "Allow <1>Ledger Manager</1> on your device"
   },
   "emptyState": {
@@ -260,29 +260,29 @@
       "installed": "Version {{version}} du firmware",
       "update": "Mise à jour",
       "latest": "Firmware version {{version}} is available",
-      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
-      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
+      "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
+        "downloadingUpdate": "Téléchargement de la mise à jour",
+        "updateMCU": "Mise à jour du firmware",
+        "osu": "Installation de l'OSU...",
+        "flash-mcu": "Mise à jour du MCU...",
+        "flash-bootloader": "Mise à jour du bootloader...",
+        "firmware": "Mise à jour du firmware...",
         "flash": "Flashing your device..."
       },
       "confirmIdentifier": "Vérifier l’identifiant",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
-      "identifier": "Identifier",
-      "mcuTitle": "Finalize update",
-      "mcuFirst": "Disconnect the USB cable from your device",
+      "confirmIdentifierText": "Vérifiez que l’identifiant de votre appareil est le même que l’identifiant ci-dessous. Appuyez sur le bouton droit et saisissez votre code PIN pour confirmer.",
+      "identifier": "Identifiant",
+      "mcuTitle": "Finaliser la mise à jour",
+      "mcuFirst": "Déconnectez le câble USB de votre appareil",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
-      "mcuPin": "Please be patient while the update is finalized",
-      "successTitle": "Firmware updated",
+      "mcuPin": "Veuillez patienter pendant la finalisation de la mise à jour",
+      "successTitle": "Firmware mis à jour",
       "successText": "Please re-install the apps on your device"
     },
     "title": "Manager",
