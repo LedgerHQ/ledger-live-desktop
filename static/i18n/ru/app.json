@@ -362,15 +362,22 @@
     "title": "Настройки",
     "tabs": {
       "display": "Общие",
-      "export": "Экспортировать счета",
+      "export": "Accounts",
       "currencies": "Валюта",
       "help": "Справка",
       "about": "О программе"
     },
     "export": {
-      "title": "Экспортировать счета",
-      "desc": "Экспортируйте счета в мобильное приложение Ledger Live.",
-      "button": "Экспортировать",
+      "accounts": {
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
+      },
+      "operations": {
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer.",
+        "button": "Save"
+      },
       "modal": {
         "button": "Готово",
         "title": "Сканировать для экспорта в мобильное приложение",
@@ -470,9 +477,9 @@
       "followDeviceRepair": "Следуйте инструкциям по ремонту устройства."
     },
     "exportLogs": {
-      "title": "Экспортировать журналы",
-      "desc": "Экспорт журналов Ledger Live может понадобиться в целях устранения неисправностей.",
-      "btn": "Экспортировать"
+      "title": "Save logs",
+      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Save"
     }
   },
   "password": {
@@ -522,6 +529,17 @@
     "desc_1": "Перед отправкой и получением криптоактивов получите как можно больше информации, чтобы принять обоснованные решения. Криптоактивы отличаются изменчивостью, а цены могут повышаться и снижаться. Тщательно оцените свои торговые задачи и финансовый риск, который вы готовы принять.",
     "desc_2": "Будьте осторожны и помните, что компания Ledger не оказывает финансовые, налоговые или юридические консультации. Подобные решения необходимо принимать по своему усмотрению или предварительно проконсультироваться с заслуживающими доверия специалистами.",
     "cta": "Понятно"
+  },
+  "exportOperationsModal": {
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
+    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "titleSuccess": "Operation history successfully saved",
+    "cta": "Save",
+    "ctaSuccess": "Done",
+    "noAccounts": "No accounts to export",
+    "selectedAccounts": "Accounts to include",
+    "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
     "system": "Использовать язык системы",
@@ -798,13 +816,13 @@
       "title": "Установлена последняя версия.",
       "description": "Вы пробовали обновить микроконтроллер устройства без необходимости. Если устройство неисправно, обратитесь в службу поддержки компании Ledger."
     },
-    "LedgerAPIError": {
-      "title": "Повторите попытку (genuine-close)(API HTTP {{status}})",
-      "description": "Повторите попытку. Во время взаимодействия с сервером API компании Ledger произошла ошибка."
-    },
-    "LedgerAPIErrorWithMessage": {
+    "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Повторите попытку или обратитесь в службу поддержки компании Ledger."
+      "description": "Please check your connection and try again or contact Ledger Support."
+    },
+    "LedgerAPI5xx": {
+      "title": "Sorry, try again.",
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Службы для {{currencyName}} недоступны.",
