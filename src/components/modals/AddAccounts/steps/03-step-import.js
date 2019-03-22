@@ -44,23 +44,20 @@ const remapTransportError = (err: mixed, appName: string): Error => {
   return errorToThrow
 }
 
-const ImportError = ({ error, currency }: { error: Error, currency: ?CryptoCurrency }) => {
-  invariant(error, 'Trying to render inexisting error')
-  return (
-    <Box style={{ height: 200 }} px={5} justify="center">
-      <Box color="alertRed" align="center">
-        <IconExclamationCircleThin size={43} />
-      </Box>
-      {currency ? <DebugAppInfosForCurrency currencyId={currency.id} /> : null}
-      <Title>
-        <TranslatedError error={error} field="title" />
-      </Title>
-      <Desc>
-        <TranslatedError error={error} field="description" />
-      </Desc>
+const ImportError = ({ error, currency }: { error: Error, currency: ?CryptoCurrency }) => (
+  <Box style={{ height: 200 }} px={5} justify="center">
+    <Box color="alertRed" align="center">
+      <IconExclamationCircleThin size={43} />
     </Box>
-  )
-}
+    {currency ? <DebugAppInfosForCurrency currencyId={currency.id} /> : null}
+    <Title>
+      <TranslatedError error={error} field="title" />
+    </Title>
+    <Desc>
+      <TranslatedError error={error} field="description" />
+    </Desc>
+  </Box>
+)
 
 const LoadingRow = styled(Box).attrs({
   horizontal: true,
