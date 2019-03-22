@@ -612,14 +612,14 @@
           "nanoX": {
             "step1": "Conecta tu {{productName}} a tu ordenador.",
             "step2": "Pulsa ambos botones a la vez según lo indicado en la pantalla de tu {{productName}}.",
-            "step3": "Press the left button to cancel Configure as new device.",
-            "step4": "Press the right button to select Restore configuration.",
-            "step5": "Choose a PIN code between 4 and 8 digits long."
+            "step3": "Pulsa el botón izquierdo para cancelar Configure as new device.",
+            "step4": "Pulsa el botón derecho para seleccionar Restore configuration.",
+            "step5": "Elige un código PIN que tenga entre 4 y 8 dígitos."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
+            "step1": "Conecta el {{productName}} a tu ordenador.",
             "step2": "Pulsa <1><0>Restaurar configuración</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step3": "Elige un código PIN de 4 a 8 dígitos."
           }
         }
       }
@@ -627,30 +627,30 @@
     "writeSeed": {
       "initialize": {
         "title": "Guarda tu frase de recuperación",
-        "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
+        "desc": "Tu dispositivo mostrará una frase de recuperación de 24 palabras para proteger tus claves privadas.",
         "nano": {
-          "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "Press the right button to continue and write down all 24 words.",
-          "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
+          "step1": "Escribe la <1><0>Word #1</0></1> en la posición 1 en una hoja de Recuperación en blanco.",
+          "step2": "Pulsa el botón derecho para continuar y escribe las 24 palabras.",
+          "step3": "Confirma tu frase de recuperación: selecciona y valida cada palabra pulsando ambos botones."
         },
         "blue": {
-          "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
-          "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
-          "step3": "Enter each word to confirm your recovery phrase."
+          "step1": "Escribe cada palabra en una hoja de Recuperación en blanco manteniendo el orden.",
+          "step2": "Pulsa <1><0>Next</0></1> y escribe todas las palabras hasta que aparezca la pantalla <3><0>Confirmation</0></3>.",
+          "step3": "Introduce cada palabra para confirmar tu frase de recuperación."
         }
       },
       "restore": {
         "title": "Introduce tu frase de recuperación",
-        "desc": "Enter the recovery phrase saved on your Recovery sheet",
+        "desc": "Introduce la frase de recuperación guardada en tu hoja de Recuperación.",
         "nano": {
-          "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+          "step1": "Elige la longitud de tu frase de recuperación.",
+          "step2": "Introduce las primeras letras de la <1><0>Word #1</0></1> hasta que aparezcan las palabras sugeridas.",
+          "step3": "Elige la <1><0>Word #1</0></1> de las palabras sugeridas pulsando ambos botones.",
           "step4": "Repite el proceso hasta la última palabra."
         },
         "blue": {
           "step1": "Selecciona la longitud de tu frase de recuperación.",
-          "step2": "Type the first word of your recovery phrase. Tap the word when it appears.",
+          "step2": "Escribe la primera palabra de tu frase de recuperación. Pulsa en la palabra cuando aparezca.",
           "step3": "Repite el proceso hasta la última palabra."
         }
       },
@@ -658,13 +658,13 @@
         "note1": "Guarda con cuidado tu frase de recuperación de 24 palabras y mantenla fuera de la vista.",
         "note2": "Asegúrate de que nadie más conoce tu frase de recuperación.",
         "note3": "Ledger no conserva ninguna copia de seguridad de tu frase de recuperación.",
-        "note4": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note4": "No utilices nunca un dispositivo suministrado con un código PIN o una frase de recuperación."
       }
     },
     "genuineCheck": {
       "title": "Lista de comprobación de seguridad",
       "descGeneric": "Antes de seguir, repasa la lista de comprobación de seguridad",
-      "descRestore": "Before getting started, please confirm:",
+      "descRestore": "Antes de empezar, confirma lo siguiente:",
       "step1": {
         "title": "¿Has elegido tu código PIN tú mismo?"
       },
@@ -682,19 +682,19 @@
       "errorPage": {
         "title": {
           "pinFailed": "¿No has elegido tu propio código PIN?",
-          "recoveryPhraseFailed": "Didn't save your recovery phrase by yourself?",
+          "recoveryPhraseFailed": "¿No has guardado tu frase de recuperación tú mismo?",
           "isGenuineFail": "Vaya, parece que tu dispositivo no es auténtico..."
         },
         "desc": {
-          "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
-          "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
+          "pinFailed": "No utilices nunca un dispositivo suministrado con un código PIN. Ponte en contacto con nosotros si tienes alguna duda.",
+          "recoveryPhraseFailed": "Guarda una frase de recuperación solo si se mostró en tu dispositivo y solo para ti. Ponte en contacto con nosotros si tienes alguna duda.",
           "isGenuineFail": "Tu dispositivo no ha superado el test de autenticidad necesario para conectarse al servidor seguro de Ledger. Ponte en contacto con Soporte de Ledger para obtener ayuda."
         }
       }
     },
     "setPassword": {
       "title": "Bloqueo por contraseña (opcional) ",
-      "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
+      "desc": "Establece una contraseña para evitar el acceso no autorizado a los datos de Ledger Live en tu ordenador, incluidos nombres, transacciones y direcciones públicas de cuentas",
       "disclaimer": {
         "note1": "Asegúrate de que recuerdas tu contraseña. No la compartas.",
         "note2": "Si la pierdes tendrás que restablecer Ledger Live y volver a añadir las cuentas.",
@@ -702,13 +702,13 @@
       }
     },
     "analytics": {
-      "title": "Bugs and analytics",
-      "desc": "Share anonymized data to help improve Ledger security products and services",
+      "title": "Errores y analítica",
+      "desc": "Comparte datos anónimos para ayudar a mejorar los productos y servicios de seguridad de Ledger.",
       "shareAnalytics": {
-        "title": "Analytics",
-        "desc": "Enable analytics to help Ledger understand how to improve user experience.",
+        "title": "Analíticas",
+        "desc": "Habilite la analítica para ayudar a Ledger a comprender cómo mejorar la experiencia de usuario.",
         "mandatoryContextual": {
-          "item1": "Clicks",
+          "item1": "Clics",
           "item2": "In-app page visits",
           "item3": "Redirección a página web",
           "item4": "Acciones: enviar, recibir, bloquear, etc.",
