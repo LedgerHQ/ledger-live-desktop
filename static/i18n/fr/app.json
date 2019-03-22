@@ -512,23 +512,23 @@
     "downloadInProgress": "Téléchargement de la mise à jour...",
     "downloadProgress": "{{progress}} % terminés",
     "checking": "Vérification de la mise à jour...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again"
+    "checkSuccess": "La mise à jour est prête à être installée",
+    "quitAndInstall": "Installer maintenant",
+    "error": "Erreur lors de la mise à jour. Veuillez télécharger à nouveau",
+    "reDownload": "Télécharger à nouveau"
   },
   "crash": {
-    "oops": "Oops, something went wrong",
+    "oops": "Oups, une erreur c'est produite",
     "uselessText": "Vous pouvez essayer à nouveau en redémarrant Ledger Live. Si le problème persiste, veuillez exporter vos journaux et contacter l’assistance Ledger.",
-    "restart": "Restart",
-    "support": "Contact Support",
+    "restart": "Redémarrer",
+    "support": "Contacter l'assistance",
     "github": "GitHub"
   },
   "disclaimerModal": {
     "title": "Tradez en toute sécurité.",
     "desc_1": "Avant d’envoyer et de recevoir des crypto-actifs, renseignez-vous afin de prendre des décisions éclairées. Les crypto-actifs sont volatiles et les prix peuvent monter ou baisser. Évaluez attentivement vos objectifs de trading et les risques financiers que vous êtes prêt à prendre.",
     "desc_2": "Veuillez noter que Ledger ne fournit aucun conseil financier, fiscal ou juridique. Vous devrez prendre ces décisions par vous-même ou consulter des experts fiables.",
-    "cta": "Got it"
+    "cta": "Compris"
   },
   "exportOperationsModal": {
     "title": "Operation history",
@@ -545,11 +545,11 @@
     "system": "Utiliser la langue du système",
     "en": "Anglais",
     "fr": "Français",
-    "es": "Spanish",
-    "ko": "Korean",
-    "zh": "Simplified Chinese",
-    "ja": "Japanese",
-    "ru": "Russian"
+    "es": "Espagnol",
+    "ko": "Coréen",
+    "zh": "Chinois simplifié",
+    "ja": "Japonais",
+    "ru": "Russe"
   },
   "onboarding": {
     "breadcrumb": {
@@ -566,7 +566,7 @@
     "init": {
       "title": "Premiers pas avec votre appareil Ledger",
       "newDevice": {
-        "title": "Initialize as new device"
+        "title": "Initialiser en tant que nouvel appareil"
       },
       "restoreDevice": {
         "title": "Restore device from recovery phrase"
