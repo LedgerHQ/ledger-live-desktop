@@ -725,23 +725,23 @@
       },
       "technicalData": {
         "title": "Datos técnicos*",
-        "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
+        "desc": "Ledger recopilará automáticamente datos técnicos totalmente anónimos para ayudar a mejorar la experiencia de usuario.",
         "mandatoryText": "* obligatorio",
         "mandatoryContextual": {
           "title": "Datos técnicos",
           "item1": "ID de aplicación único y anónimo",
-          "item2": "Ledger Live version, language and region",
-          "item3": "OS version, language and region"
+          "item2": "Versión, idioma y región de Ledger Live",
+          "item3": "Versión del sistema operativo, lenguaje y región"
         }
       },
       "terms": {
-        "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "title": "Términos*",
+        "desc": "Si continúas, reconoces que has leído y estás de acuerdo con los <1>Términos de Uso</1> y la <3>Política de Privacidad</3>."
       }
     },
     "finish": {
       "title": "¡Tu dispositivo está listo!",
-      "desc": "Install some apps on your device and access the Portfolio",
+      "desc": "Instala algunas aplicaciones en tu dispositivo y accede a la Cartera",
       "openAppButton": "Abrir Ledger Live"
     }
   },
@@ -760,7 +760,7 @@
     },
     "DeviceNotGenuine": {
       "title": "Posiblemente no es auténtico",
-      "description": "Request Ledger Support assistance"
+      "description": "Solicita asistencia de Soporte de Ledger"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "Lo sentimos, inténtalo de nuevo (genuine-close)",
@@ -768,19 +768,19 @@
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Please try again"
+      "description": "Por favor, inténtalo de nuevo"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Vaya, la conexión ha fallado",
+      "description": "Por favor, inténtalo de nuevo"
     },
     "DeviceSocketNoHandler": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Vaya, la conexión ha fallado",
+      "description": "Por favor, inténtalo de nuevo"
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
-      "description": "Please try again"
+      "title": "Vaya, la conexión con el dispositivo ha fallado",
+      "description": "Por favor, inténtalo de nuevo"
     },
     "EnpointConfig": {
       "title": "Endpoint inválido.",
@@ -792,35 +792,35 @@
     },
     "HardResetFail": {
       "title": "Vaya, no se ha podido restablecer.",
-      "description": "Please try again or contact us when in doubt"
+      "description": "Por favor, inténtalo de nuevo o ponte en contacto con nosotros si tienes dudas"
     },
     "LatestMCUInstalledError": {
       "title": "Vaya, no hay nada pendiente de actualizar.",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "description": "Se ha intentado actualizar el microcontrolador del dispositivo sin necesidad. Ponte en contacto con Soporte de Ledger si hay algún problema con tu dispositivo."
     },
     "LedgerAPIError": {
       "title": "Lo sentimos, inténtalo de nuevo (API HTTP {{status}})",
-      "description": "Please retry. Interacting with Ledger's API server went wrong."
+      "description": "Por favor, inténtalo de nuevo. Algo ha fallado en la interacción con el servidor API de Ledger."
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Por favor, inténtalo de nuevo o ponte en contacto con Soporte de Ledger"
     },
     "LedgerAPINotAvailable": {
       "title": "Lo sentimos, los servicios {{currencyName}} no están disponibles.",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Por favor, inténtalo de nuevo o ponte en contacto con Soporte de Ledger"
     },
     "ManagerAPIsFail": {
       "title": "Oops, Manager services unavailable",
-      "description": "Please check the network status"
+      "description": "Comprueba el estado de la red"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
-      "description": "Check your device to see which apps are already installed"
+      "title": "Vaya, esa ya está instalada",
+      "description": "Comprueba tu dispositivo para ver qué aplicaciones ya están instaladas"
     },
     "ManagerAppRelyOnBTC": {
       "title": "Se requieren las aplicaciones Bitcoin y Ethereum.",
-      "description": "Install the latest Bitcoin and Ethereum apps first"
+      "description": "Instala primero las últimas aplicaciones Bitcoin y Ethereum"
     },
     "ManagerDeviceLocked": {
       "title": "Desbloquea tu dispositivo",
@@ -828,19 +828,19 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "Lo sentimos, no queda espacio suficiente.",
-      "description": "Uninstall some apps to make space. This will not affect your crypto assets."
+      "description": "Desinstala algunas aplicaciones para liberar espacio. Esto no afectará a tus crypto activos."
     },
     "ManagerUninstallBTCDep": {
       "title": "Lo sentimos, esta aplicación es obligatoria.",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "description": "Desinstala la aplicación Bitcoin o Ethereum en último lugar"
     },
     "NetworkDown": {
       "title": "Vaya, parece que Internet no funciona.",
-      "description": "Please check your internet connection"
+      "description": "Por favor, revisa tu conexión a Internet"
     },
     "NoAddressesFound": {
       "title": "Lo sentimos, no hemos encontrado ninguna cuenta.",
-      "description": "Something went wrong with address calculation, try again or contact Ledger Support"
+      "description": "Algo ha fallado en el cálculo de la dirección, inténtalo de nuevo o ponte en contacto con Soporte de Ledger."
     },
     "NotEnoughBalance": {
       "title": "Vaya, saldo insuficiente.",
@@ -859,22 +859,22 @@
     },
     "SelectExchangesLoadError": {
       "title": "No se puede cargar.",
-      "description": "Please try again later"
+      "description": "Por favor, inténtalo de nuevo más tarde"
     },
     "TimeoutError": {
       "title": "Vaya, se ha excedido el tiempo.",
-      "description": "It took too long for the server to respond, please retry"
+      "description": "El servidor ha tardado demasiado en responder, inténtalo de nuevo"
     },
     "TimeoutTagged": {
       "title": "Vaya, se ha excedido el tiempo ({{tag}})",
-      "description": "It took too long for the server to respond"
+      "description": "El servidor ha tardado demasiado en responder"
     },
     "TransportError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Algo ha fallado, vuelve a conectar tu dispositivo",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Algo ha fallado, vuelve a conectar tu dispositivo",
       "description": "{{message}}"
     },
     "UnexpectedBootloader": {
