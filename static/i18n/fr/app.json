@@ -569,14 +569,14 @@
         "title": "Initialiser en tant que nouvel appareil"
       },
       "restoreDevice": {
-        "title": "Restore device from recovery phrase"
+        "title": "Restaurer l’appareil à partir de la phrase de récupération"
       },
       "initializedDevice": {
-        "title": "Use an initialized device"
+        "title": "Utiliser un appareil initialisé"
       }
     },
     "noDevice": {
-      "title": "Don't have a Ledger device?",
+      "title": "Vous n’avez pas d’appareil Ledger ?",
       "buyNew": {
         "title": "Acheter un appareil Ledger"
       },
@@ -592,29 +592,29 @@
     },
     "selectPIN": {
       "disclaimer": {
-        "note1": "Always choose your own PIN code.",
-        "note2": "Use 8 digits for optimal security.",
-        "note3": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note1": "Choisissez toujours votre propre code PIN.",
+        "note2": "Utilisez 8 chiffres pour une sécurité optimale.",
+        "note3": "N’utilisez jamais un appareil fourni avec un code PIN ou une phrase de récupération."
       },
       "initialize": {
         "title": "Choisissez votre code PIN.",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Connectez {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
+            "step2": "Appuyez sur le bouton droit pour sélectionner <1><0>Configure as new device?</0></1>.",
+            "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
+            "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "nanoX": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press both buttons to choose Set up as new device.",
-            "step3": "Press the left or right button to select a digit.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Connectez {{productName}} à votre ordinateur.",
+            "step2": "Appuyez sur les deux boutons pour choisir Set up as new device.",
+            "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre.",
+            "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Configure as new device</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step1": "Connectez {{productName}} à votre ordinateur.",
+            "step2": "Appuyez sur <1><0>Configure as new device</0></1>.",
+            "step3": "Choisissez un code PIN de 4 à 8 chiffres."
           }
         }
       },
@@ -622,8 +622,8 @@
         "title": "Choisissez votre code PIN.",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
+            "step1": "Connectez le {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
+            "step2": "Appuyez sur le bouton gauche pour annuler <1><0>Initialize as new device?</0></1> Appuyez ensuite sur le bouton droit pour sélectionner <3><0>Restore configuration?</0></3>.",
             "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
             "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
