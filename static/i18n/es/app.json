@@ -492,20 +492,20 @@
       "subTitle": "Cambiar tu contraseña"
     },
     "setPassword": {
-      "title": "Password lock",
+      "title": "Bloqueo por contraseña",
       "subTitle": "Establecer una contraseña",
       "desc": "Asegúrate de que recuerdas tu contraseña. Si la pierdes tendrás que restablecer Ledger Live y volver a añadir las cuentas."
     },
     "disablePassword": {
       "title": "Desactivar bloqueo por contraseña",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "Los datos de Ledger Live se guardarán sin codificar en tu ordenador. Esto incluye nombres, transacciones y direcciones públicas de cuentas."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
+    "downloadInProgress": "Descargando actualización...",
+    "downloadProgress": "{{progress}}% completado",
+    "checking": "Comprobando actualización...",
+    "checkSuccess": "Actualización lista para instalarse",
     "quitAndInstall": "Instalar ahora",
     "error": "Error durante la actualización. Por favor, descárgala de nuevo",
     "reDownload": "Descargar de nuevo"
@@ -584,19 +584,19 @@
           "nano": {
             "step1": "Conecta el {{productName}} a tu ordenador. Pulsa ambos botones para comenzar",
             "step2": "Pulsa el botón derecho para seleccionar <1><0>¿Configurar como dispositivo nuevo?</0></1>",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito. Pulsa ambos botones para validar.",
+            "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "nanoX": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press both buttons to choose Set up as new device.",
-            "step3": "Press the left or right button to select a digit.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Conecta el {{productName}} a tu ordenador.",
+            "step2": "Pulsa ambos botones para elegir Set up as new device.",
+            "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito.",
+            "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Configure as new device</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step1": "Conecta el {{productName}} a tu ordenador.",
+            "step2": "Pulsa <1><0>Configure as new device</0></1>.",
+            "step3": "Elige un código PIN de 4 a 8 dígitos."
           }
         }
       },
@@ -604,7 +604,7 @@
         "title": "Elige tu código PIN.",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
+            "step1": "Conecta el {{productName}} a tu ordenador. Pulsa ambos botones para comenzar",
             "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
@@ -811,7 +811,7 @@
       "description": "Por favor, inténtalo de nuevo o ponte en contacto con Soporte de Ledger"
     },
     "ManagerAPIsFail": {
-      "title": "Oops, Manager services unavailable",
+      "title": "Vaya, los servicios del Manager no están disponibles",
       "description": "Comprueba el estado de la red"
     },
     "ManagerAppAlreadyInstalled": {
@@ -824,7 +824,7 @@
     },
     "ManagerDeviceLocked": {
       "title": "Desbloquea tu dispositivo",
-      "description": "Your device was locked, please unlock it"
+      "description": "Tu dispositivo se ha bloqueado. Por favor, desbloquéalo"
     },
     "ManagerNotEnoughSpace": {
       "title": "Lo sentimos, no queda espacio suficiente.",
@@ -878,8 +878,8 @@
       "description": "{{message}}"
     },
     "UnexpectedBootloader": {
-      "title": "Oops, your device should not be in Bootloader mode",
-      "description": "Please restart your device or contact us"
+      "title": "Vaya, tu dispositivo no debería estar en modo Bootloader",
+      "description": "Por favor, reinicia tu dispositivo o ponte en contacto con nosotros"
     },
     "UserRefusedAllowManager": {
       "title": "Manager refused on device"
@@ -890,11 +890,11 @@
     },
     "UserRefusedOnDevice": {
       "title": "Transacción rechazada en el dispositivo.",
-      "description": "Please retry or contact Ledger Support in case of doubt"
+      "description": "Inténtalo de nuevo o, en caso de duda, ponte en contacto con Soporte de Ledger."
     },
     "UserRefusedAddress": {
       "title": "Dirección de recepción rechazada.",
-      "description": "Please try again or contact Ledger Support when in doubt"
+      "description": "Por favor, inténtalo de nuevo o ponte en contacto con Soporte de Ledger"
     },
     "UpdateYourApp": {
       "title": "Se requiere la actualización de la aplicación.",
