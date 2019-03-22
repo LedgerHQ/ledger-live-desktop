@@ -273,7 +273,7 @@
         "flash-mcu": "Mise à jour du MCU...",
         "flash-bootloader": "Mise à jour du bootloader...",
         "firmware": "Mise à jour du firmware...",
-        "flash": "Flashing your device..."
+        "flash": "Mise à jour du firmware de votre appareil..."
       },
       "confirmIdentifier": "Vérifier l’identifiant",
       "confirmIdentifierText": "Vérifiez que l’identifiant de votre appareil est le même que l’identifiant ci-dessous. Appuyez sur le bouton droit et saisissez votre code PIN pour confirmer.",
@@ -283,69 +283,69 @@
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Veuillez patienter pendant la finalisation de la mise à jour",
       "successTitle": "Firmware mis à jour",
-      "successText": "Please re-install the apps on your device"
+      "successText": "Veuillez réinstaller les applications sur votre appareil"
     },
     "title": "Manager",
-    "subtitle": "Install or uninstall apps on your device",
+    "subtitle": "Installer ou désinstaller des applications sur votre appareil",
     "device": {
-      "title": "Connect your device",
-      "desc": "Follow the steps below to open the Manager",
-      "cta": "Connect my device"
+      "title": "Connectez votre appareil",
+      "desc": "Suivez les étapes ci-dessous pour ouvrir le Manager",
+      "cta": "Connecter l'appareil"
     }
   },
   "receive": {
-    "title": "Receive",
+    "title": "Recevoir",
     "steps": {
       "chooseAccount": {
-        "title": "Account",
-        "label": "Account to credit"
+        "title": "Compte",
+        "label": "Compte à créditer"
       },
       "connectDevice": {
-        "title": "Device",
+        "title": "Appareil",
         "withoutDevice": "Vous n’avez pas votre appareil ?"
       },
       "confirmAddress": {
-        "title": "Verification",
-        "action": "Verify address on device",
+        "title": "Vérification",
+        "action": "Confirmez votre adresse sur l’appareil",
         "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
-        "support": "Contact us"
+        "support": "Nous contacter"
       },
       "receiveFunds": {
-        "title": "Receive"
+        "title": "Recevoir"
       }
     }
   },
   "send": {
-    "title": "Send",
-    "totalSpent": "Total to debit",
+    "title": "Envoyer",
+    "totalSpent": "Total à débiter",
     "steps": {
       "amount": {
-        "title": "Details",
-        "selectAccountDebit": "Account to debit",
-        "recipientAddress": "Recipient address",
-        "amount": "Amount",
-        "fees": "Network fees",
-        "advancedOptions": "Advanced options",
+        "title": "Détails",
+        "selectAccountDebit": "Compte à débiter",
+        "recipientAddress": "Adresse du destinataire",
+        "amount": "Montant",
+        "fees": "Frais de réseau",
+        "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
-        "message": "Leave a message (140)",
+        "message": "Laisser un message (140) ",
         "rippleTag": "Balise",
         "ethereumGasLimit": "Limite d'essence",
         "unitPerByte": "{{unit}} par octet"
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Appareil"
       },
       "verification": {
-        "title": "Verification",
-        "warning": "Please verify all transaction details on your device",
-        "body": "Confirm the transaction on your device to send it"
+        "title": "Vérification",
+        "warning": "Veuillez vérifier tous les détails de la transaction sur votre appareil",
+        "body": "Confirmez la transaction sur votre appareil pour l’envoyer"
       },
       "confirmation": {
         "title": "Confirmation",
         "success": {
-          "title": "Transaction sent",
-          "text": "Your account balance will update once the blockchain has confirmed the transaction",
-          "cta": "View details"
+          "title": "Transaction effectuée",
+          "text": "Le solde de votre compte sera actualisé dès que la blockchain aura confirmé la transaction",
+          "cta": "Voir les détails"
         },
         "pending": {
           "title": "Diffusion de la transaction..."
@@ -359,13 +359,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "settings": {
-    "title": "Settings",
+    "title": "Paramètres",
     "tabs": {
-      "display": "General",
+      "display": "Général",
       "export": "Accounts",
-      "currencies": "Currencies",
-      "help": "Help",
-      "about": "About"
+      "currencies": "Devises",
+      "help": "Aide",
+      "about": "A propos de"
     },
     "export": {
       "accounts": {
@@ -379,10 +379,10 @@
         "button": "Save"
       },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
+        "button": "Terminé",
+        "title": "Scannez pour exporter vers un mobile",
+        "listTitle": "Sur l’application mobile Ledger Live :",
+        "step1": "Appuyez sur le bouton <1><0>+</0></1> dans <3><0>Comptes</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
         "step3": "Scannez le <1><0>LiveQR code</0></1> jusqu’à ce que la barre de chargement soit à 100 %."
       }
@@ -444,11 +444,11 @@
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
-      "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Supprimer toutes les données Ledger Live stockées sur votre ordinateur, y compris vos comptes, historiques de transactions et paramètres. Les clés privées donnant accès à vos crypto-actifs sont conservées en toute sécurité sur votre appareil Ledger et votre fiche de récupération."
     },
     "softResetModal": {
       "title": "Vider le cache",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Le nettoyage du cache force une resynchronisation réseau. Vos paramètres et comptes sont conservés. Les clés privées donnant accès à vos crypto-actifs sont conservées en toute sécurité sur votre appareil Ledger et votre feuille de récupération."
     },
     "resetFallbackModal": {
       "title": "Action requise de l’utilisateur",
@@ -473,8 +473,8 @@
       "desc": "Veuillez sélectionner l’état de votre appareil Ledger.",
       "button": "Réparer",
       "generic": "Bootloader",
-      "mcuNotGenuine": "MCU not genuine",
-      "followDeviceRepair": "Follow device repair instructions"
+      "mcuNotGenuine": "MCU non authentique",
+      "followDeviceRepair": "Suivez les instructions de réparation de l’appareil"
     },
     "exportLogs": {
       "title": "Save logs",
@@ -624,11 +624,11 @@
           "nano": {
             "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
+            "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "nanoX": {
-            "step1": "Connect your {{productName}} to your computer.",
+            "step1": "Connectez {{productName}} à votre ordinateur.",
             "step2": "Press both buttons as instructed on your {{productName}} screen.",
             "step3": "Appuyez sur le bouton gauche pour annuler la configuration en tant que nouvel appareil.",
             "step4": "Appuyez sur le bouton droit pour sélectionner Restaurer la configuration.",
@@ -759,7 +759,7 @@
     },
     "finish": {
       "title": "Votre appareil est prêt !",
-      "desc": "Install some apps on your device and access the Portfolio",
+      "desc": "Installez des applications sur votre appareil et accédez au Portfolio",
       "openAppButton": "Ouvrez Ledger Live."
     }
   },
@@ -778,7 +778,7 @@
     },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
-      "description": "Request Ledger Support assistance"
+      "description": "Contactez l’assistance Ledger"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "Désolé, veuillez essayer à nouveau (fermeture pour absence d'authenticité)",
@@ -786,18 +786,18 @@
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Please try again"
+      "description": "Veuillez essayer à nouveau"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Désolé, échec de la connexion",
+      "description": "Veuillez essayer à nouveau"
     },
     "DeviceSocketNoHandler": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Désolé, échec de la connexion",
+      "description": "Veuillez essayer à nouveau"
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
+      "title": "Désolé, connexion à l'appareil perdue",
       "description": "Please try again"
     },
     "EnpointConfig": {
