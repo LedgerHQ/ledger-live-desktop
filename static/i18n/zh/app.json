@@ -253,13 +253,13 @@
       "installing": "正在安装 {{app}}...",
       "uninstalling": "正在卸载 {{app}}...",
       "installSuccess": "已成功安装 {{app}}",
-      "uninstallSuccess": "{{app}} uninstalled",
+      "uninstallSuccess": "{{app}} 已卸载",
       "help": "检查您的设备，查看已安装了哪些应用程序"
     },
     "firmware": {
       "installed": "固件版本 {{version}}",
       "update": "更新",
-      "latest": "Firmware version {{version}} is available",
+      "latest": "固件版本 {{version}} 已可用",
       "disclaimerTitle": "您即将安装<1><0>固件版本 {{version}}</0></1>。",
       "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
@@ -344,7 +344,7 @@
         "title": "确认",
         "success": {
           "title": "交易已发送",
-          "text": "Your account balance will update once the blockchain has confirmed the transaction",
+          "text": "区块链确认交易后，将会立即更新您的账户余额",
           "cta": "查看详情"
         },
         "pending": {
@@ -734,7 +734,7 @@
           "item6": "App (un)installation and version",
           "item7": "Number of accounts, crypto assets and operations",
           "item8": "整体和页面会话持续时间",
-          "item9": "Ledger device type and firmware"
+          "item9": "Ledger 设备类型和固件版本信息"
         }
       },
       "sentryLogs": {
@@ -742,19 +742,19 @@
         "desc": "自动发送报告，帮助 Ledger 修复 bug。"
       },
       "technicalData": {
-        "title": "Technical data*",
-        "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
+        "title": "技术数据*",
+        "desc": "Ledger 将自动收集完全匿名的技术数据，以帮助改进用户体验。",
         "mandatoryText": "* 强制性",
         "mandatoryContextual": {
           "title": "技术数据",
           "item1": "匿名唯一应用程序 ID",
-          "item2": "Ledger Live version, language and region",
-          "item3": "OS version, language and region"
+          "item2": "Ledger Live 版本、语言和地区",
+          "item3": "OS 版本、语言和地区"
         }
       },
       "terms": {
-        "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "title": "条款 *",
+        "desc": "若继续，则表明您已阅读并同意<1>使用条款</1>和<3>隐私政策</3>。"
       }
     },
     "finish": {
