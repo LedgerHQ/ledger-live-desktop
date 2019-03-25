@@ -321,7 +321,7 @@
     "steps": {
       "amount": {
         "title": "详情",
-        "selectAccountDebit": "Account to debit",
+        "selectAccountDebit": "付币账户",
         "recipientAddress": "收件人地址",
         "amount": "金额",
         "fees": "网络费用",
@@ -505,7 +505,7 @@
     },
     "disablePassword": {
       "title": "禁用密码锁",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "Ledger Live 数据将以未加密的方式保存在您的计算机上，包括账户名、交易和公开地址等。"
     }
   },
   "update": {
@@ -963,7 +963,7 @@
       "title": "Couldn’t load fee rates, please set manual fees"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "交易手续费为必填项"
     },
     "UnknownMCU": {
       "title": "MCU 版本未知",
