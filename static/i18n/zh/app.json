@@ -281,7 +281,7 @@
       "mcuTitle": "Finalize update",
       "mcuFirst": "从设备上断开 USB 数据线连接",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
-      "mcuPin": "Please be patient while the update is finalized",
+      "mcuPin": "正在更新，请您耐心等待",
       "successTitle": "固件已更新",
       "successText": "请在设备上重新安装应用程序"
     },
@@ -381,8 +381,8 @@
       "modal": {
         "button": "完成",
         "title": "扫描以导出至移动设备",
-        "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
+        "listTitle": "在 Ledger Live 移动应用程序中：",
+        "step1": "点击<3><0>账户</0></3>中的 <1><0>+</0></1> 按钮",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
         "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
@@ -396,7 +396,7 @@
       "exchange": "汇率提供商",
       "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
       "region": "地区",
-      "regionDesc": "Choose your region, used to set Ledger Live's time zone.",
+      "regionDesc": "选择您所在的地区，以用于设置 Ledger Live 的时区。",
       "stock": "地区市场指示器",
       "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
     },
@@ -410,8 +410,8 @@
     "profile": {
       "password": "密码锁",
       "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live after inactivity.",
+      "passwordAutoLock": "自动锁定",
+      "passwordAutoLockDesc": "无活动状态下自动锁定 Ledger Live。",
       "changePassword": "更改密码",
       "softResetTitle": "清除缓存",
       "softResetDesc": "清除 Ledger Live 缓存，以强制与区块链重新同步。",
@@ -423,8 +423,8 @@
       "developerModeDesc": "Show developer and testnet apps in the Manager.",
       "analytics": "分析",
       "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
+      "reportErrors": "缺陷报告",
+      "reportErrorsDesc": "自动发送报告，帮助 Ledger 修复缺陷。",
       "launchOnboarding": "设备设置",
       "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
     },
@@ -438,7 +438,7 @@
       "faq": "Ledger 支持人员",
       "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
       "terms": "使用条款",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
+      "termsDesc": "使用 Ledger Live 即表示您已接受我们的使用条款。",
       "privacy": "隐私政策",
       "privacyDesc": "请参考我们的隐私政策了解我们收集哪些个人数据、收集原因以及使用方式。"
     },
@@ -509,13 +509,13 @@
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again"
+    "downloadInProgress": "正在下载更新...",
+    "downloadProgress": "已完成 {{progress}}%",
+    "checking": "正在检查更新...",
+    "checkSuccess": "更新安装已就绪",
+    "quitAndInstall": "立即安装",
+    "error": "更新时出错。请重新下载",
+    "reDownload": "重新下载"
   },
   "crash": {
     "oops": "糟糕，出错了",
@@ -545,10 +545,10 @@
     "system": "使用系统语言",
     "en": "英语",
     "fr": "法语",
-    "es": "Spanish",
-    "ko": "Korean",
-    "zh": "Simplified Chinese",
-    "ja": "Japanese",
+    "es": "西班牙语",
+    "ko": "韩语",
+    "zh": "简体中文",
+    "ja": "日语",
     "ru": "俄语"
   },
   "onboarding": {
@@ -592,7 +592,7 @@
     },
     "selectPIN": {
       "disclaimer": {
-        "note1": "Always choose your own PIN code.",
+        "note1": "请您务必自己选择您的 PIN 码。",
         "note2": "使用 8 位数密码以确保最佳安全性。",
         "note3": "请勿使用自带 PIN 码或短语助记词的设备。"
       },
@@ -600,16 +600,16 @@
         "title": "选择您的 PIN 码",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
+            "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
             "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
             "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "nanoX": {
             "step1": "将 {{productName}} 连接至您的计算机。",
             "step2": "Press both buttons to choose Set up as new device.",
             "step3": "按下左键或右键选择数字。",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
