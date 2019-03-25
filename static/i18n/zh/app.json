@@ -302,7 +302,7 @@
       },
       "connectDevice": {
         "title": "设备",
-        "withoutDevice": "Don't have your device?"
+        "withoutDevice": "您还没有 Ledger 设备？"
       },
       "confirmAddress": {
         "title": "验证",
@@ -383,7 +383,7 @@
         "title": "扫描以导出至移动设备",
         "listTitle": "在 Ledger Live 移动应用程序中：",
         "step1": "点击<3><0>账户</0></3>中的 <1><0>+</0></1> 按钮",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
+        "step2": "点击<1><0>Import desktop accounts</0></1>",
         "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
       }
     },
@@ -647,28 +647,28 @@
         "title": "保存您的短语助记词",
         "desc": "您的设备将显示一组 24 个短语助记词来备份您的私钥",
         "nano": {
-          "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
+          "step1": "在空白恢复短语列表上的位置 1 记下<1><0>Word #1</0></1>。",
           "step2": "按下右键以继续，直至 24 个助记词输入完成。",
           "step3": "请确认您的短语助记词：选择并同时按下两个按钮验证每个助记词。"
         },
         "blue": {
-          "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
+          "step1": "在空白恢复短语列表中按顺序记下每个短语助记词。",
           "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
           "step3": "键入每个助记词，以确认您的短语助记词组。"
         }
       },
       "restore": {
         "title": "输入您的短语助记词",
-        "desc": "Enter the recovery phrase saved on your Recovery sheet",
+        "desc": "输入您在恢复短语列表上中记下的短语助记词。",
         "nano": {
-          "step1": "Choose the length of your recovery phrase.",
+          "step1": "选择您的恢复短语的长度。",
           "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
           "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
           "step4": "重复该过程，直至完成最后一个助记词。"
         },
         "blue": {
           "step1": "选择您的短语助记词的长度。",
-          "step2": "Type the first word of your recovery phrase. Tap the word when it appears.",
+          "step2": "输入您恢复短语中的第一个助记词。显示该助记词后点击该词。",
           "step3": "重复该过程，直至完成最后一个助记词。"
         }
       },
@@ -676,7 +676,7 @@
         "note1": "请仔细将您的一组 24 个短语助记词保存在安全的地方。",
         "note2": "确保不要将您的短语助记词告知任何人。",
         "note3": "Ledger 不会保留您短语助记词的任何备份。",
-        "note4": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note4": "请勿使用自带 PIN 码或附有非空白的恢复短语列表的设备。"
       }
     },
     "genuineCheck": {
@@ -700,12 +700,12 @@
       "errorPage": {
         "title": {
           "pinFailed": "没有选择您自己的 PIN 码？",
-          "recoveryPhraseFailed": "Didn't save your recovery phrase by yourself?",
+          "recoveryPhraseFailed": "您是否自行保存过自己的恢复短语？",
           "isGenuineFail": "糟糕，您的设备似乎不是正版…"
         },
         "desc": {
           "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
-          "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
+          "recoveryPhraseFailed": "保存只显示在您的设备上的恢复短语，且勿告知他人。如有疑问，请联系我们。",
           "isGenuineFail": "您的设备未通过连接到 Ledger 安全服务器所需的真伪测试。请联系 Ledger 客服以获取帮助。"
         }
       }
