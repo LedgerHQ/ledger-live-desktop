@@ -179,11 +179,11 @@
     "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
     "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
     "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
-    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
+    "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
     "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
     "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
     "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
-    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity."
+    "exmo": "EXMO 成立于 2013 年，总部位于伦敦、基辅、巴塞罗那和莫斯科，是东欧排名第一的交易所，也是全球交易量和流动性最大的交易所之一。"
   },
   "genuinecheck": {
     "modal": {
@@ -199,7 +199,7 @@
       "finish": "确认"
     },
     "connectDevice": {
-      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+      "desc": "按照以下步骤，添加 <1><0>{{currencyName}}</0></1> 账户"
     },
     "accountAlreadyImportedSubtitle": "账户已位于 ({{count}}) 资产组合中",
     "accountToImportSubtitle": "添加现有账户",
@@ -211,12 +211,12 @@
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
     "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "没有要添加的现有 {{currencyName}} 账户",
-    "success": "Account successfully added",
-    "success_plural": "Accounts successfully added",
+    "success": "已成功添加账户",
+    "success_plural": "已成功添加账户",
     "successDescription": "Add more accounts or return to Portfolio",
     "successDescription_plural": "Add more accounts or return to Portfolio",
     "createNewAccount": {
-      "title": "Add new account",
+      "title": "添加新账户",
       "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "未找到要创建的 <1><0>{{currencyName}}</0></1> 账户"
     },
@@ -240,7 +240,7 @@
     "identifier": "交易 ID",
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
-    "showLess": "Show less"
+    "showLess": "显示更少"
   },
   "operationList": {
     "noMoreOperations": "以上"
@@ -248,19 +248,19 @@
   "manager": {
     "yourDeviceIsGenuine": "您的设备为正版",
     "apps": {
-      "install": "Install",
-      "all": "App catalog",
-      "installing": "Installing {{app}}...",
-      "uninstalling": "Uninstalling {{app}}...",
-      "installSuccess": "Successfully installed {{app}}",
+      "install": "安装",
+      "all": "应用程序目录",
+      "installing": "正在安装 {{app}}...",
+      "uninstalling": "正在卸载 {{app}}...",
+      "installSuccess": "已成功安装 {{app}}",
       "uninstallSuccess": "{{app}} uninstalled",
       "help": "检查您的设备，查看已安装了哪些应用程序"
     },
     "firmware": {
-      "installed": "Firmware version {{version}}",
-      "update": "Update",
+      "installed": "固件版本 {{version}}",
+      "update": "更新",
       "latest": "Firmware version {{version}} is available",
-      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
+      "disclaimerTitle": "您即将安装<1><0>固件版本 {{version}}</0></1>。",
       "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
@@ -268,12 +268,12 @@
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
+        "updateMCU": "固件更新",
+        "osu": "OSU 安装中...",
+        "flash-mcu": "MCU 更新中...",
         "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Flashing your device..."
+        "firmware": "正在更新固件...",
+        "flash": "正在更新您的设备..."
       },
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
@@ -283,14 +283,14 @@
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "固件已更新",
-      "successText": "Please re-install the apps on your device"
+      "successText": "请在设备上重新安装应用程序"
     },
     "title": "管理器",
-    "subtitle": "Install or uninstall apps on your device",
+    "subtitle": "在设备上安装或卸载应用程序",
     "device": {
       "title": "连接设备",
       "desc": "按照以下步骤打开管理器",
-      "cta": "Connect my device"
+      "cta": "连接我的设备"
     }
   },
   "receive": {
@@ -301,14 +301,14 @@
         "label": "信贷账户"
       },
       "connectDevice": {
-        "title": "Device",
+        "title": "设备",
         "withoutDevice": "Don't have your device?"
       },
       "confirmAddress": {
-        "title": "Verification",
-        "action": "Verify address on device",
+        "title": "验证",
+        "action": "验证设备上的地址",
         "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
-        "support": "Contact us"
+        "support": "联系我们"
       },
       "receiveFunds": {
         "title": "接收"
@@ -337,15 +337,15 @@
       },
       "verification": {
         "title": "验证",
-        "warning": "Please verify all transaction details on your device",
-        "body": "Confirm the transaction on your device to send it"
+        "warning": "请验证您设备上的所有交易详情",
+        "body": "确认您设备上的交易以进行发送"
       },
       "confirmation": {
         "title": "确认",
         "success": {
           "title": "交易已发送",
           "text": "Your account balance will update once the blockchain has confirmed the transaction",
-          "cta": "View details"
+          "cta": "查看详情"
         },
         "pending": {
           "title": "正在传送交易信息…"
@@ -379,8 +379,8 @@
         "button": "Save"
       },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
+        "button": "完成",
+        "title": "扫描以导出至移动设备",
         "listTitle": "On the Ledger Live mobile app:",
         "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
@@ -388,7 +388,7 @@
       }
     },
     "display": {
-      "desc": "Configure general Ledger Live settings.",
+      "desc": "配置 Ledger Live 常规设置。",
       "language": "显示语言",
       "languageDesc": "设置 Ledger Live 中显示的语言。",
       "counterValue": "Countervalue",
