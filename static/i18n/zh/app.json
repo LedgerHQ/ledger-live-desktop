@@ -384,7 +384,7 @@
         "listTitle": "在 Ledger Live 移动应用程序中：",
         "step1": "点击<3><0>账户</0></3>中的 <1><0>+</0></1> 按钮",
         "step2": "点击<1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "step3": "扫描 <1><0>LiveQR code</0></1>，等待加载至 100%"
       }
     },
     "display": {
@@ -392,9 +392,9 @@
       "language": "显示语言",
       "languageDesc": "设置 Ledger Live 中显示的语言。",
       "counterValue": "Countervalue",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "counterValueDesc": "选择在余额和操作旁显示的货币币种。",
       "exchange": "汇率提供商",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
+      "exchangeDesc": "提供比特币兑 {{fiat}} 的汇率，以估算您的加密资产的价值 (crypto asset → BTC → {{fiat}}) 。",
       "region": "地区",
       "regionDesc": "选择您所在的地区，以用于设置 Ledger Live 的时区。",
       "stock": "地区市场指示器",
@@ -403,13 +403,13 @@
     "currencies": {
       "desc": "选择一种加密资产以编辑其设置。",
       "exchange": "汇率提供商 ({{ticker}} → BTC)",
-      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
+      "exchangeDesc": "选择 {{currencyName}} 兑比特币汇率的提供商，以估算您的加密资产的价值 ({{ticker}} → BTC → {{fiat}}) 。",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
     "profile": {
       "password": "密码锁",
-      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
+      "passwordDesc": "设置密码，防止存储在您的计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、余额、交易和公开地址等。",
       "passwordAutoLock": "自动锁定",
       "passwordAutoLockDesc": "无活动状态下自动锁定 Ledger Live。",
       "changePassword": "更改密码",
@@ -420,7 +420,7 @@
       "hardResetDesc": "清除计算机上存储的所有 Ledger Live 数据，包括您的账户、交易历史记录和设置。",
       "hardReset": "重置",
       "developerMode": "开发者模式",
-      "developerModeDesc": "Show developer and testnet apps in the Manager.",
+      "developerModeDesc": "在 Manager 中显示开发者和测试网应用程序。",
       "analytics": "分析",
       "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
       "reportErrors": "缺陷报告",
@@ -448,7 +448,7 @@
     },
     "softResetModal": {
       "title": "清除缓存",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "清除缓存会强制网络重新同步。您的设置和账户信息将会保留。用于访问加密资产的密钥仍安全存储在您的 Ledger 设备和恢复短语列表上。"
     },
     "resetFallbackModal": {
       "title": "需要用户操作",
@@ -460,7 +460,7 @@
     },
     "removeAccountModal": {
       "title": "删除账户",
-      "desc": "This will not affect your crypto assets. Accounts can always be re-added."
+      "desc": "这不会影响您的加密资产。您可以随时重新添加账户。"
     },
     "openUserDataDirectory": {
       "title": "查看用户数据",
@@ -474,7 +474,7 @@
       "button": "修复",
       "generic": "Bootloader",
       "mcuNotGenuine": "MCU not genuine",
-      "followDeviceRepair": "Follow device repair instructions"
+      "followDeviceRepair": "按照设备修复说明进行操作"
     },
     "exportLogs": {
       "title": "Save logs",
@@ -663,7 +663,7 @@
         "nano": {
           "step1": "选择您的恢复短语的长度。",
           "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+          "step3": "同时按下两个按钮，从建议助记词中选择<1><0>Word #1</0></1>。",
           "step4": "重复该过程，直至完成最后一个助记词。"
         },
         "blue": {
@@ -727,12 +727,12 @@
         "desc": "启用分析，帮助 Ledger 改进用户体验。",
         "mandatoryContextual": {
           "item1": "Clicks",
-          "item2": "In-app page visits",
-          "item3": "Redirection to webpage",
-          "item4": "Actions: send, receive, lock, etc.",
-          "item5": "End of page scroll",
+          "item2": "应用内页面访问数",
+          "item3": "重定向到网页",
+          "item4": "操作：发送、接收、锁定等",
+          "item5": "页末滚动",
           "item6": "App (un)installation and version",
-          "item7": "Number of accounts, crypto assets and operations",
+          "item7": "账户数量、加密资产种类数量和操作数量",
           "item8": "整体和页面会话持续时间",
           "item9": "Ledger 设备类型和固件版本信息"
         }
@@ -935,8 +935,8 @@
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Wrong device or passphrase for ‘{{accountName}}’",
-      "description": "Please use the device or passphrase for the selected account"
+      "title": "“{{accountName}}”的设备或密码短语错误",
+      "description": "请使用所选账户的设备或密码短语"
     },
     "DeviceAppVerifyNotSupported": {
       "title": "应用程序待更新",
