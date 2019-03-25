@@ -38,20 +38,20 @@
     "reverify": "重新验证",
     "verify": "验证",
     "copy": "复制",
-    "copyAddress": "Copy",
+    "copyAddress": "复制",
     "copied": "已复制",
     "addressCopied": "地址已复制",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
       "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "inputPlaceholder": "输入密码",
+      "lostPassword": "忘记密码"
     },
     "sync": {
       "syncing": "正在同步...+",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
+      "upToDate": "已同步",
+      "outdated": "暂停",
       "error": "同步错误",
       "refresh": "刷新",
       "ago": "Synchronized {{time}}"
@@ -99,64 +99,64 @@
       "advancedLogs": "高级日志",
       "accountName": {
         "title": "账户名称",
-        "desc": "Describe this account"
+        "desc": "账户描述"
       },
       "unit": {
         "title": "Unit",
         "desc": "Choose the unit to display"
       },
       "endpointConfig": {
-        "title": "Node",
-        "desc": "The API node to use"
+        "title": "节点",
+        "desc": "要使用的 API 节点"
       }
     }
   },
   "banners": {
     "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
+    "genericTerminatedCrypto": "不再支持 {{coinName}}"
   },
   "dashboard": {
     "title": "账户概览",
     "emptyAccountTile": {
       "desc": "Add accounts to manage more crypto assets",
-      "createAccount": "Add account"
+      "createAccount": "添加账户"
     },
     "accounts": {
       "title": "账户 ({{count}})"
     },
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "早上好",
+      "evening": "晚上好",
+      "afternoon": "下午好"
     },
     "summary": "以下是您的账户概览",
     "summary_plural": "以下是您 {{count}} 个账户的概览",
     "recentActivity": "Last operations",
     "totalBalance": "Total balance",
     "accountsOrder": {
-      "name": "name",
-      "balance": "balance"
+      "name": "名称",
+      "balance": "余额"
     }
   },
   "currentAddress": {
-    "title": "Current address",
+    "title": "当前地址",
     "for": "账户 <1><0>{{accountName}}</0></1> 地址",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
+    "messageIfAccepted": "地址已确认，如果您采用复制/粘贴或扫描二维码方式，则请重新验证。",
     "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
   },
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1>Ledger Manager</1> on your device"
+    "step3": "在您的设备上允许 <1>Ledger Manager</1>"
   },
   "emptyState": {
     "sidebar": {
       "text": "Click this button to add accounts to the Portfolio"
     },
     "dashboard": {
-      "title": "Install apps or add accounts",
+      "title": "安装应用程序或添加账户",
       "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
       "buttons": {
         "addAccount": "添加账户",
@@ -165,9 +165,9 @@
     }
   },
   "partners": {
-    "title": "Buy crypto",
+    "title": "购买加密资产",
     "desc": "Try a few services we've selected",
-    "visitWebsite": "Visit website",
+    "visitWebsite": "访问网站",
     "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot",
     "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
     "changenow": "ChangeNOW is one of the leading custody-free instant exchange services",
