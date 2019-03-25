@@ -2,15 +2,15 @@
   "common": {
     "labelYes": "确定",
     "labelNo": "取消",
-    "never": "Never",
-    "apply": "Apply",
+    "never": "从不",
+    "apply": "应用",
     "confirm": "确认",
     "cancel": "取消",
     "getSupport": "获取支持",
     "delete": "删除",
     "launch": "启动",
     "continue": "继续",
-    "learnMore": "Learn more",
+    "learnMore": "了解更多",
     "help": "帮助",
     "skipThisStep": "跳过此步骤",
     "needHelp": "需要帮助？",
@@ -44,7 +44,7 @@
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
-      "description": "Enter your password to continue",
+      "description": "请输入您的密码后继续操作",
       "inputPlaceholder": "输入密码",
       "lostPassword": "忘记密码"
     },
@@ -54,7 +54,7 @@
       "outdated": "暂停",
       "error": "同步错误",
       "refresh": "刷新",
-      "ago": "Synchronized {{time}}"
+      "ago": "已同步 {{time}}"
     }
   },
   "operation": {
@@ -82,7 +82,7 @@
     "menu": "菜单",
     "accounts": "账户 ({{count}})",
     "manager": "管理器",
-    "exchange": "Buy crypto",
+    "exchange": "购买加密资产",
     "developer": "开发工具"
   },
   "account": {
@@ -102,8 +102,8 @@
         "desc": "账户描述"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to display"
+        "title": "单位",
+        "desc": "选择要显示的单位"
       },
       "endpointConfig": {
         "title": "节点",
@@ -118,7 +118,7 @@
   "dashboard": {
     "title": "账户概览",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage more crypto assets",
+      "desc": "添加更多的加密资产账户",
       "createAccount": "添加账户"
     },
     "accounts": {
@@ -143,11 +143,11 @@
     "for": "账户 <1><0>{{accountName}}</0></1> 地址",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "地址已确认，如果您采用复制/粘贴或扫描二维码方式，则请重新验证。",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfSkipped": "尚未在您的 Ledger 设备上确认您的 {{currencyName}} 地址。请验证以确保最优安全性。"
   },
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
-    "step1": "Connect and unlock your <1>Ledger device</1>",
+    "step1": "连接并解锁您的 <1>Ledger 设备</1>",
     "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "在您的设备上允许 <1>Ledger Manager</1>"
   },
@@ -602,7 +602,7 @@
           "nano": {
             "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
             "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
+            "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "nanoX": {
@@ -622,14 +622,14 @@
         "title": "选择您的 PIN 码",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
+            "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
             "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
+            "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
-            "step2": "Press both buttons as instructed on your {{productName}} screen.",
+            "step2": "按照 {{productName}} 屏幕上的说明同时按下两个按钮。",
             "step3": "Press the left button to cancel Configure as new device.",
             "step4": "按下右键选择恢复配置。",
             "step5": "选择长度为 4 到 8 位的 PIN 码。"
@@ -654,7 +654,7 @@
         "blue": {
           "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
           "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
-          "step3": "Enter each word to confirm your recovery phrase."
+          "step3": "键入每个助记词，以确认您的短语助记词组。"
         }
       },
       "restore": {
