@@ -132,7 +132,7 @@
     "summary": "以下是您的账户概览",
     "summary_plural": "以下是您 {{count}} 个账户的概览",
     "recentActivity": "Last operations",
-    "totalBalance": "Total balance",
+    "totalBalance": "总余额",
     "accountsOrder": {
       "name": "名称",
       "balance": "余额"
@@ -275,9 +275,9 @@
         "firmware": "正在更新固件...",
         "flash": "正在更新您的设备..."
       },
-      "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
-      "identifier": "Identifier",
+      "confirmIdentifier": "验证标识符",
+      "confirmIdentifierText": "验证以确保设备上的标识符与以下标识符相同。按右键并输入您的 PIN 码以确认。",
+      "identifier": "标识符",
       "mcuTitle": "Finalize update",
       "mcuFirst": "从设备上断开 USB 数据线连接",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
