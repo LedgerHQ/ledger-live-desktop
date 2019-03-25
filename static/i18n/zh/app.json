@@ -425,22 +425,22 @@
       "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
       "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
-      "launchOnboarding": "Device setup",
+      "launchOnboarding": "设备设置",
       "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
     },
     "about": {
-      "desc": "App information, Terms and Conditions, and Privacy Policy."
+      "desc": "应用程序信息、条款与条件和隐私政策。"
     },
     "help": {
-      "desc": "Learn more about Ledger Live or get help.",
+      "desc": "了解更多 Ledger Live 相关信息或获取帮助。",
       "version": "版本",
       "releaseNotesBtn": "详情",
       "faq": "Ledger 支持人员",
       "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
+      "terms": "使用条款",
       "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+      "privacy": "隐私政策",
+      "privacyDesc": "请参考我们的隐私政策了解我们收集哪些个人数据、收集原因以及使用方式。"
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
@@ -455,7 +455,7 @@
       "part1": "无法删除缓存文件夹。请手动删除文件夹：",
       "part2": "点击“打开”文件夹按钮，",
       "part3": "应用程序将关闭",
-      "part4": ", and manually delete the \"sqlite\" folder.",
+      "part4": "，手动删除 \"sqlite\" 文件夹。",
       "part5": "这样即可正常重启应用程序。"
     },
     "removeAccountModal": {
@@ -468,10 +468,10 @@
       "btn": "查看"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
-      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
-      "desc": "Please select the state of your Ledger device.",
-      "button": "Repair",
+      "title": "修复您的 Ledger 设备",
+      "descSettings": "如果 Ledger 设备在固件更新期间卡顿，则可使用此工具恢复您的设备。",
+      "desc": "请选择您的 Ledger 设备状态。",
+      "button": "修复",
       "generic": "Bootloader",
       "mcuNotGenuine": "MCU not genuine",
       "followDeviceRepair": "Follow device repair instructions"
@@ -499,7 +499,7 @@
       "subTitle": "更改您的密码"
     },
     "setPassword": {
-      "title": "Password lock",
+      "title": "密码锁",
       "subTitle": "设置密码",
       "desc": "确保记住您的密码。如丢失密码，则需要重置 Ledger Live 和重新添加账户。"
     },
@@ -549,7 +549,7 @@
     "ko": "Korean",
     "zh": "Simplified Chinese",
     "ja": "Japanese",
-    "ru": "Russian"
+    "ru": "俄语"
   },
   "onboarding": {
     "breadcrumb": {
@@ -576,7 +576,7 @@
       }
     },
     "noDevice": {
-      "title": "Don't have a Ledger device?",
+      "title": "还没有 Ledger 设备？",
       "buyNew": {
         "title": "购买 Ledger 设备"
       },
@@ -593,8 +593,8 @@
     "selectPIN": {
       "disclaimer": {
         "note1": "Always choose your own PIN code.",
-        "note2": "Use 8 digits for optimal security.",
-        "note3": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note2": "使用 8 位数密码以确保最佳安全性。",
+        "note3": "请勿使用自带 PIN 码或短语助记词的设备。"
       },
       "initialize": {
         "title": "选择您的 PIN 码",
@@ -606,15 +606,15 @@
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect the {{productName}} to your computer.",
+            "step1": "将 {{productName}} 连接至您的计算机。",
             "step2": "Press both buttons to choose Set up as new device.",
-            "step3": "Press the left or right button to select a digit.",
+            "step3": "按下左键或右键选择数字。",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
+            "step1": "将 {{productName}} 连接至您的计算机。",
             "step2": "Tap on <1><0>Configure as new device</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step3": "选择 4 到 8 位数的 PIN 码。"
           }
         }
       },
@@ -628,16 +628,16 @@
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
-            "step1": "Connect your {{productName}} to your computer.",
+            "step1": "将您的 {{productName}} 连接到您的计算机。",
             "step2": "Press both buttons as instructed on your {{productName}} screen.",
             "step3": "Press the left button to cancel Configure as new device.",
-            "step4": "Press the right button to select Restore configuration.",
-            "step5": "Choose a PIN code between 4 and 8 digits long."
+            "step4": "按下右键选择恢复配置。",
+            "step5": "选择长度为 4 到 8 位的 PIN 码。"
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
+            "step1": "将 {{productName}} 连接至您的计算机。",
             "step2": "轻击<1><0>恢复配置</0></1>。",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step3": "选择 4 到 8 位数的 PIN 码。"
           }
         }
       }
@@ -645,11 +645,11 @@
     "writeSeed": {
       "initialize": {
         "title": "保存您的短语助记词",
-        "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
+        "desc": "您的设备将显示一组 24 个短语助记词来备份您的私钥",
         "nano": {
           "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "Press the right button to continue and write down all 24 words.",
-          "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
+          "step2": "按下右键以继续，直至 24 个助记词输入完成。",
+          "step3": "请确认您的短语助记词：选择并同时按下两个按钮验证每个助记词。"
         },
         "blue": {
           "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
