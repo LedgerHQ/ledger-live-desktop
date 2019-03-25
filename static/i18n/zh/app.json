@@ -19,7 +19,7 @@
     "selectAccountNoOption": "不存在与 \"{{accountName}}\" 匹配的账户",
     "selectCurrency": "选择加密资产",
     "selectCurrencyNoOption": "不存在加密资产 \"{{currencyName}}\"",
-    "selectExchange": "Select an exchange",
+    "selectExchange": "选择交易所",
     "selectExchangeNoOption": "不存在与 \"{{exchangeName}}\" 匹配的交易",
     "selectExchangeNoOptionAtAll": "未找到交易所",
     "sortBy": "排序方式",
@@ -168,21 +168,21 @@
     "title": "购买加密资产",
     "desc": "Try a few services we've selected",
     "visitWebsite": "访问网站",
-    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot",
-    "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
+    "btcdirect": "欧洲领先的加密货币代理商，轻松便捷的加密货币交易过程。免费注册，接收您的货币，仅需几分钟！我们的 Trustpilot 用户评分高达 8.7",
+    "changelly": "Changelly 是一个备受欢迎的即时加密资产交易所，上线了 100 多种币和代币。",
     "changenow": "ChangeNOW is one of the leading custody-free instant exchange services",
-    "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
-    "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
-    "coinmama": "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
-    "genesis": "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP.",
-    "kyberswap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
+    "coinberry": "Coinberry 是加拿大备受信赖的加密资产交易平台，其安全性甚至超过银行，用户界面十分出色，存取与提现均为免费。如果您不是加拿大公民，请预注册以便尽早使用我们的平台。",
+    "coinhouse": "Coinhouse 是一个值得信赖的平台，为个人和机构投资者寻求分析、收购、出售和安全存储加密资产。",
+    "coinmama": "Coinmama 是一家金融服务机构，让您在世界各地都能快速、安全和愉快地购买数字资产。",
+    "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，支持比特币、比特币现金、以太坊、以太坊经典、莱特币和瑞波币。",
+    "kyberswap": "快捷、简单、安全的代币交易平台，由 Kyber Network 的链上流动性协议提供支持。",
+    "luno": "Luno 让购买、存储比特币和以太坊等加密货币和了解相关知识变得安全而简单。",
     "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
-    "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
+    "shapeshift": "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
     "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
     "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
     "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
+    "bitpanda": "Bitpanda 是欧洲领先的比特币、以太币、IOTA 等加密货币的交易零售代理商。可使用信用卡、SOFORT-Transfer、NETELLER 或其他方式进行存款。",
     "exmo": "EXMO 成立于 2013 年，总部位于伦敦、基辅、巴塞罗那和莫斯科，是东欧排名第一的交易所，也是全球交易量和流动性最大的交易所之一。"
   },
   "genuinecheck": {
@@ -712,7 +712,7 @@
     },
     "setPassword": {
       "title": "密码锁（可选）",
-      "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
+      "desc": "设置密码，防止您计算机上的 Ledger Live 数据受到未经授权的访问，包括账户名、交易和公开地址等。",
       "disclaimer": {
         "note1": "确保记住您的密码。勿告知他人。",
         "note2": "如丢失密码，则需要重置 Ledger Live 和重新添加账户。",
@@ -720,11 +720,11 @@
       }
     },
     "analytics": {
-      "title": "Bugs and analytics",
-      "desc": "Share anonymized data to help improve Ledger security products and services",
+      "title": "缺陷和分析",
+      "desc": "共享匿名数据，帮助改进 Ledger 安全产品和服务",
       "shareAnalytics": {
-        "title": "Analytics",
-        "desc": "Enable analytics to help Ledger understand how to improve user experience.",
+        "title": "分析",
+        "desc": "启用分析，帮助 Ledger 改进用户体验。",
         "mandatoryContextual": {
           "item1": "Clicks",
           "item2": "In-app page visits",
@@ -738,7 +738,7 @@
         }
       },
       "sentryLogs": {
-        "title": "Bug reports",
+        "title": "缺陷报告",
         "desc": "自动发送报告，帮助 Ledger 修复 bug。"
       },
       "technicalData": {
@@ -778,7 +778,7 @@
     },
     "DeviceNotGenuine": {
       "title": "可能不是正版",
-      "description": "Request Ledger Support assistance"
+      "description": "请求 Ledger 客服帮助"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "对不起，请重试 （正版-结束）",
@@ -901,7 +901,7 @@
     },
     "UnexpectedBootloader": {
       "title": "Oops, your device should not be in Bootloader mode",
-      "description": "Please restart your device or contact us"
+      "description": "请重启您的设备或联系我们"
     },
     "UserRefusedAllowManager": {
       "title": "Manager refused on device"
@@ -950,7 +950,7 @@
     },
     "CantOpenDevice": {
       "title": "糟糕，无法连接到设备",
-      "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
+      "description": "已检测到设备，但连接失败。请重试，如果问题持续，请联系我们。"
     },
     "ETHAddressNonEIP": {
       "title": "自动验证不可用：请仔细验证地址",
