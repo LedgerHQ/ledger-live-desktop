@@ -682,7 +682,7 @@
     "genuineCheck": {
       "title": "安全检查表",
       "descGeneric": "继续之前，请完成安全检查表",
-      "descRestore": "Before getting started, please confirm:",
+      "descRestore": "开始之前请确认：",
       "step1": {
         "title": "您是否自行选择了您的 PIN 码？"
       },
@@ -789,7 +789,7 @@
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
+      "title": "糟糕，连接失败",
       "description": "Please try again"
     },
     "DeviceSocketNoHandler": {
