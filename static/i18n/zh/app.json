@@ -829,36 +829,36 @@
       "description": "请重试或联系 Ledger 客服"
     },
     "ManagerAPIsFail": {
-      "title": "Oops, Manager services unavailable",
+      "title": "抱歉，Manager 服务暂不可用",
       "description": "请检查网络状态"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
-      "description": "Check your device to see which apps are already installed"
+      "title": "抱歉，该应用已安装",
+      "description": "检查您的设备，查看已安装了哪些应用程序"
     },
     "ManagerAppRelyOnBTC": {
       "title": "需要安装比特币和以太币应用程序",
-      "description": "Install the latest Bitcoin and Ethereum apps first"
+      "description": "首先，请安装最新的比特币和以太币应用程序"
     },
     "ManagerDeviceLocked": {
       "title": "请解锁您的设备",
-      "description": "Your device was locked, please unlock it"
+      "description": "您的设备已锁定，请解锁"
     },
     "ManagerNotEnoughSpace": {
       "title": "抱歉，剩余存储空间不足",
-      "description": "Uninstall some apps to make space. This will not affect your crypto assets."
+      "description": "请卸载一些应用程序清出空间，此操作不会影响您的加密资产。"
     },
     "ManagerUninstallBTCDep": {
       "title": "抱歉，需要安装此应用程序",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "description": "请最后卸载比特币或以太币应用程序"
     },
     "NetworkDown": {
       "title": "糟糕，网络似乎已断开",
-      "description": "Please check your internet connection"
+      "description": "请检查您的网络连接"
     },
     "NoAddressesFound": {
       "title": "抱歉，未找到账户",
-      "description": "Something went wrong with address calculation, try again or contact Ledger Support"
+      "description": "地址计算出错，请重试或联系 Ledger 客服"
     },
     "NotEnoughBalance": {
       "title": "糟糕，余额不足",
@@ -877,22 +877,22 @@
     },
     "SelectExchangesLoadError": {
       "title": "无法加载",
-      "description": "Please try again later"
+      "description": "请稍后再试"
     },
     "TimeoutError": {
       "title": "糟糕，已超时",
-      "description": "It took too long for the server to respond, please retry"
+      "description": "服务器响应时间过长，请重试"
     },
     "TimeoutTagged": {
       "title": "糟糕，已超时 ({{tag}})",
-      "description": "It took too long for the server to respond"
+      "description": "服务器响应时间过长"
     },
     "TransportError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "出错了。请重新连接您的设备",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "出错了。请重新连接您的设备",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
@@ -912,11 +912,11 @@
     },
     "UserRefusedOnDevice": {
       "title": "设备上的交易被拒绝",
-      "description": "Please retry or contact Ledger Support in case of doubt"
+      "description": "请重试，如有疑问，请随时联系 Ledger 客服"
     },
     "UserRefusedAddress": {
       "title": "接收地址被拒",
-      "description": "Please try again or contact Ledger Support when in doubt"
+      "description": "请重试，如有疑问，请随时联系 Ledger 客服"
     },
     "UpdateYourApp": {
       "title": "需要更新应用程序",
@@ -939,14 +939,14 @@
       "description": "Please use the device or passphrase for the selected account"
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Open Manager to update the app"
+      "title": "应用程序待更新",
+      "description": "打开 Manager 更新此应用程序"
     },
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "收币人地址与发币人地址相同"
     },
     "CantOpenDevice": {
       "title": "糟糕，无法连接到设备",
@@ -957,7 +957,7 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "无法扫描此二维码：此地址不支持自动验证"
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates, please set manual fees"
@@ -966,8 +966,8 @@
       "title": "Fees are required"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "MCU 版本未知",
+      "description": "请联系 Ledger 客服"
     }
   }
 }
