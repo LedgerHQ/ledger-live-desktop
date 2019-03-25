@@ -786,19 +786,19 @@
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Please try again"
+      "description": "请重试"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "糟糕，连接失败",
-      "description": "Please try again"
+      "title": "抱歉，连接失败",
+      "description": "请重试"
     },
     "DeviceSocketNoHandler": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "抱歉，连接失败",
+      "description": "请重试"
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
-      "description": "Please try again"
+      "title": "抱歉，设备连接丢失",
+      "description": "请重试"
     },
     "EnpointConfig": {
       "title": "端点无效",
@@ -810,11 +810,11 @@
     },
     "HardResetFail": {
       "title": "糟糕，无法重置",
-      "description": "Please try again or contact us when in doubt"
+      "description": "请重试，如有疑问，请随时联系我们"
     },
     "LatestMCUInstalledError": {
       "title": "糟糕，没有更新",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "description": "无需尝试更新设备的微控制器。如果您的设备出现问题，请联系 Ledger 客服。"
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -826,11 +826,11 @@
     },
     "LedgerAPINotAvailable": {
       "title": "抱歉，{{currencyName}} 服务不可用",
-      "description": "Please retry or contact Ledger Support"
+      "description": "请重试或联系 Ledger 客服"
     },
     "ManagerAPIsFail": {
       "title": "Oops, Manager services unavailable",
-      "description": "Please check the network status"
+      "description": "请检查网络状态"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Oops, that's already installed",
