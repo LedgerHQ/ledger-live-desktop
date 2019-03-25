@@ -86,7 +86,7 @@
     "developer": "开发工具"
   },
   "account": {
-    "lastOperations": "Last operations",
+    "lastOperations": "近期操作",
     "emptyState": {
       "title": "还没有加密资产？",
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
@@ -131,7 +131,7 @@
     },
     "summary": "以下是您的账户概览",
     "summary_plural": "以下是您 {{count}} 个账户的概览",
-    "recentActivity": "Last operations",
+    "recentActivity": "近期操作",
     "totalBalance": "总余额",
     "accountsOrder": {
       "name": "名称",
@@ -157,7 +157,7 @@
     },
     "dashboard": {
       "title": "安装应用程序或添加账户",
-      "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
+      "desc": "打开 Manager 以安装应用程序，如果您的 Ledger 设备已安装应用程序，请添加相应账户",
       "buttons": {
         "addAccount": "添加账户",
         "installApp": "打开管理器"
@@ -181,7 +181,7 @@
     "shapeshift": "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
     "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
     "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
-    "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
+    "thorswap": "ThorSwap 是一个即时、安全和公平的加密资产市场，由分散原子交换技术提供动力。操作简单便捷，小额交易无需注册或 KYC，是开启交易的理想之选。",
     "bitpanda": "Bitpanda 是欧洲领先的比特币、以太币、IOTA 等加密货币的交易零售代理商。可使用信用卡、SOFORT-Transfer、NETELLER 或其他方式进行存款。",
     "exmo": "EXMO 成立于 2013 年，总部位于伦敦、基辅、巴塞罗那和莫斯科，是东欧排名第一的交易所，也是全球交易量和流动性最大的交易所之一。"
   },
