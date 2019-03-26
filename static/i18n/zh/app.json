@@ -141,7 +141,7 @@
   "currentAddress": {
     "title": "当前地址",
     "for": "账户 <1><0>{{accountName}}</0></1> 地址",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
+    "messageIfUnverified": "请验证您设备上显示的 {{currencyName}} 地址与您的 Ledger Live 上显示的地址是否匹配",
     "messageIfAccepted": "地址已确认，如果您采用复制/粘贴或扫描二维码方式，则请重新验证。",
     "messageIfSkipped": "尚未在您的 Ledger 设备上确认您的 {{currencyName}} 地址。请验证以确保最优安全性。"
   },
@@ -594,7 +594,7 @@
       "disclaimer": {
         "note1": "请您务必自己选择您的 PIN 码。",
         "note2": "使用 8 位数密码以确保最佳安全性。",
-        "note3": "请勿使用自带 PIN 码或恢复短语的设备。"
+        "note3": "请勿使用自带 PIN 码或附有恢复短语的设备。"
       },
       "initialize": {
         "title": "选择您的 PIN 码",
@@ -652,7 +652,7 @@
           "step3": "请确认您的恢复短语：选择并同时按下两个按钮验证每个助记词。"
         },
         "blue": {
-          "step1": "在空白恢复短语列表中按顺序记下每个短语助记词。",
+          "step1": "在空白恢复短语列表中按顺序记下每个助记词。",
           "step2": "点击<1><0>Next</0></1>，输入所有助记词直至屏幕上出现<3><0>Confirmation</0></3>。",
           "step3": "键入每个助记词，以确认您的恢复短语。"
         }
@@ -676,7 +676,7 @@
         "note1": "请仔细将您的 24 词恢复短语保存在安全的地方。",
         "note2": "确保不要将您的恢复短语告知任何人。",
         "note3": "Ledger 不会保留您恢复短语的任何备份。",
-        "note4": "请勿使用自带 PIN 码或附有非空白的恢复短语列表的设备。"
+        "note4": "请勿使用自带 PIN 码或附有恢复短语的设备。"
       }
     },
     "genuineCheck": {
@@ -687,7 +687,7 @@
         "title": "您是否自行选择了您的 PIN 码？"
       },
       "step2": {
-        "title": "您是否自行保存了您的恢复短语？"
+        "title": "您是否已自行保存您的恢复短语？"
       },
       "step3": {
         "title": "您的 Ledger 设备是否为正版？"
@@ -700,7 +700,7 @@
       "errorPage": {
         "title": {
           "pinFailed": "没有选择您自己的 PIN 码？",
-          "recoveryPhraseFailed": "您是否自行保存过自己的恢复短语？",
+          "recoveryPhraseFailed": "您是否已自行保存您的恢复短语？",
           "isGenuineFail": "糟糕，您的设备似乎不是正版…"
         },
         "desc": {
