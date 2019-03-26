@@ -261,13 +261,13 @@
       "update": "更新",
       "latest": "固件版本 {{version}} 已可用",
       "disclaimerTitle": "您即将安装<1><0>固件版本 {{version}}</0></1>。",
-      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
-      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "disclaimerAppDelete": "请卸载设备上所有应用程序，此操作不会影响您的加密资产。",
+      "disclaimerAppReinstall": "为谨慎起见，请安全保存您的恢复短语列表。",
+      "downloadingUpdateDesc": "请等待更新安装程序下载"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
+        "downloadingUpdate": "正在下载更新",
         "updateMCU": "固件更新",
         "osu": "OSU 安装中...",
         "flash-mcu": "MCU 更新中...",
@@ -278,9 +278,9 @@
       "confirmIdentifier": "验证标识符",
       "confirmIdentifierText": "验证以确保设备上的标识符与以下标识符相同。按右键并输入您的 PIN 码以确认。",
       "identifier": "标识符",
-      "mcuTitle": "Finalize update",
+      "mcuTitle": "完成更新",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
+      "mcuSecond": "按下左键并同时重新连接 USB 数据线直到屏幕出现 <1><0>Processing</0></1> ",
       "mcuPin": "正在更新，请您耐心等待",
       "successTitle": "固件已更新",
       "successText": "请在设备上重新安装应用程序"
@@ -307,7 +307,7 @@
       "confirmAddress": {
         "title": "验证",
         "action": "验证设备上的地址",
-        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
+        "text": "请验证您设备上显示的 {{currencyName}} 地址与您的 Ledger Live 上显示的地址是否匹配",
         "support": "联系我们"
       },
       "receiveFunds": {
@@ -350,7 +350,7 @@
         "pending": {
           "title": "正在传送交易信息…"
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "您的交易可能失败。请在几分钟后查看并确保您的交易没有通过后，然后再试一次。"
       }
     }
   },
@@ -362,21 +362,21 @@
     "title": "设置",
     "tabs": {
       "display": "通用",
-      "export": "Accounts",
+      "export": "账户",
       "currencies": "货币",
       "help": "帮助",
       "about": "关于"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "title": "导出账户",
+        "desc": "在 Ledger Live 移动应用中添加您的帐户。您的帐户将仅与区块链同步，而不会在移动应用和桌面应用之间同步。",
+        "button": "导出"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer.",
-        "button": "Save"
+        "title": "操作历史",
+        "desc": "在您的计算机上保存帐户操作的 CSV 文件。",
+        "button": "保存"
       },
       "modal": {
         "button": "完成",
@@ -391,7 +391,7 @@
       "desc": "配置 Ledger Live 常规设置。",
       "language": "显示语言",
       "languageDesc": "设置 Ledger Live 中显示的语言。",
-      "counterValue": "Countervalue",
+      "counterValue": "对价",
       "counterValueDesc": "选择在余额和操作旁显示的货币币种。",
       "exchange": "汇率提供商",
       "exchangeDesc": "提供比特币兑 {{fiat}} 的汇率，以估算您的加密资产的价值 (crypto asset → BTC → {{fiat}}) 。",
@@ -477,9 +477,9 @@
       "followDeviceRepair": "按照设备修复说明进行操作"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
-      "btn": "Save"
+      "title": "保存日志",
+      "desc": "故障排除可能需要导出 Ledger Live 日志记录。",
+      "btn": "保存"
     }
   },
   "password": {
@@ -531,15 +531,15 @@
     "cta": "明白了"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
-    "titleSuccess": "Operation history successfully saved",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to include",
-    "selectedAccounts_plural": "Accounts to include ({{count}})"
+    "title": "操作历史",
+    "desc": "选择需保存操作历史的帐户",
+    "descSuccess": "您操作历史的 CSV 文件已被成功保存在所选文件夹下",
+    "titleSuccess": "操作历史保存成功",
+    "cta": "保存",
+    "ctaSuccess": "完成",
+    "noAccounts": "暂无可导出的账户",
+    "selectedAccounts": "要包括的账户",
+    "selectedAccounts_plural": "要包括的帐户 ({{count}})"
   },
   "language": {
     "system": "使用系统语言",
@@ -818,11 +818,11 @@
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "请检查您的连接后重试，或联系 Ledger 客服。"
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
+      "title": "抱歉，请重试。",
+      "description": "服务器无法处理您的请求。请稍后再试，或联系Ledger客服。 {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "抱歉，{{currencyName}} 服务不可用",
@@ -896,18 +896,18 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we look for your accounts"
+      "title": "请打开 {{appName}} 应用",
+      "description": "在我们寻找您的帐户时，请您保持 {{appName}} 应用程序打开"
     },
     "UnexpectedBootloader": {
       "title": "抱歉，您的设备无法进入启动加载程序模式",
       "description": "请重启您的设备或联系我们"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager refused on device"
+      "title": "Manager 在设备上被拒绝"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update canceled",
+      "title": "更新已取消",
       "description": "请重试或联系 Ledger 支持人员"
     },
     "UserRefusedOnDevice": {
