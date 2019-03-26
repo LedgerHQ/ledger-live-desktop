@@ -426,7 +426,7 @@
       "reportErrors": "缺陷报告",
       "reportErrorsDesc": "自动发送报告，帮助 Ledger 修复缺陷。",
       "launchOnboarding": "设备设置",
-      "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
+      "launchOnboardingDesc": "设为新设备或恢复 Ledger 设备。保留账户和设置信息。"
     },
     "about": {
       "desc": "应用程序信息、条款与条件和隐私政策。"
@@ -630,7 +630,7 @@
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
             "step2": "按照 {{productName}} 屏幕上的说明同时按下两个按钮。",
-            "step3": "Press the left button to cancel Configure as new device.",
+            "step3": "按左键选择取消<1><0>Configure as new device<0><1> 。",
             "step4": "按下右键选择恢复配置。",
             "step5": "选择长度为 4 到 8 位的 PIN 码。"
           },
@@ -759,7 +759,7 @@
     },
     "finish": {
       "title": "您的设备已准备就绪！",
-      "desc": "Install some apps on your device and access the Portfolio",
+      "desc": "在您的设备上安装一些应用程序，并访问资产组合",
       "openAppButton": "打开 Ledger Live"
     }
   },
