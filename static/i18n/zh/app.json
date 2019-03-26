@@ -112,7 +112,7 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
+    "promoteMobile": "享受 Ledger Live 体验，现已推出移动版本，尽在 {{productName}}",
     "genericTerminatedCrypto": "不再支持 {{coinName}}"
   },
   "dashboard": {
@@ -146,7 +146,7 @@
     "messageIfSkipped": "尚未在您的 Ledger 设备上确认您的 {{currencyName}} 地址。请验证以确保最优安全性。"
   },
   "deviceConnect": {
-    "dashboard": "Navigate to the <1>Dashboard</1> on your device",
+    "dashboard": "导航至您设备上的<1>仪表板</1>",
     "step1": "连接并解锁您的 <1>Ledger 设备</1>",
     "step2": "导航至您设备上的 <1><0>{{managerAppName}}</0></1> 应用程序",
     "step3": "在您的设备上允许 <1>Ledger Manager</1>"
@@ -166,7 +166,7 @@
   },
   "partners": {
     "title": "购买加密资产",
-    "desc": "Try a few services we've selected",
+    "desc": "尝试我们为您精选的服务",
     "visitWebsite": "访问网站",
     "btcdirect": "欧洲领先的加密货币代理商，轻松便捷的加密货币交易过程。免费注册，接收您的货币，仅需几分钟！我们的 Trustpilot 用户评分高达 8.7",
     "changelly": "Changelly 是一个备受欢迎的即时加密资产交易所，上线了 100 多种币和代币。",
@@ -436,7 +436,7 @@
       "version": "版本",
       "releaseNotesBtn": "详情",
       "faq": "Ledger 支持人员",
-      "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
+      "faqDesc": "使用 Ledger Live 和您的硬件钱包时遇到问题？请随时联系我们。",
       "terms": "使用条款",
       "termsDesc": "使用 Ledger Live 即表示您已接受我们的使用条款。",
       "privacy": "隐私政策",
@@ -923,8 +923,8 @@
       "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "DeviceOnDashboardExpected": {
-      "title": "返回至控制面板",
-      "description": "请导航回您设备上的控制面板"
+      "title": "返回到仪表板",
+      "description": "请回到您设备上的仪表板"
     },
     "WebsocketConnectionError": {
       "title": "抱歉，请重试（WebSocket 错误）",
