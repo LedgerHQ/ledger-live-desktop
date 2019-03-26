@@ -72,10 +72,10 @@
     "second": "秒",
     "hour": "时",
     "since": {
-      "day": "past day",
-      "week": "past week",
+      "day": "昨天",
+      "week": "上周",
       "month": "上个月",
-      "year": "past year"
+      "year": "去年"
     }
   },
   "sidebar": {
@@ -177,7 +177,7 @@
     "genesis": "Genesis 是一家机构交易公司，提供数字货币流动性和借贷服务，支持比特币、比特币现金、以太坊、以太坊经典、莱特币和瑞波币。",
     "kyberswap": "快捷、简单、安全的代币交易平台，由 Kyber Network 的链上流动性协议提供支持。",
     "luno": "Luno 让购买、存储比特币和以太坊等加密货币和了解相关知识变得安全而简单。",
-    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
+    "paybis": "通过 PayBis 可安全轻松地使用信用卡购买比特币，该服务已遍及美国、加拿大、德国、俄罗斯和沙特阿拉伯。",
     "shapeshift": "ShapeShift 是一个在线市场，用户可在此购买和销售数字资产，可快速且安全地在世界各地买卖数字资产，既没有冗长的注册过程，也没有交易对手风险，更不会产生摩擦。",
     "simplex": "Simplex 是一家欧盟许可的金融机构，提供无欺诈的信用卡支付解决方案。",
     "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
@@ -960,7 +960,7 @@
       "title": "无法扫描此二维码：此地址不支持自动验证"
     },
     "FeeNotLoaded": {
-      "title": "Couldn’t load fee rates, please set manual fees"
+      "title": "无法加载费率，请手动设置手续费"
     },
     "FeeRequired": {
       "title": "交易手续费为必填项"
