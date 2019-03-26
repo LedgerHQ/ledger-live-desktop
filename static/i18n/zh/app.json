@@ -74,8 +74,8 @@
     "since": {
       "day": "past day",
       "week": "past week",
-      "month": "本月",
-      "year": "本年"
+      "month": "上个月",
+      "year": "past year"
     }
   },
   "sidebar": {
@@ -422,7 +422,7 @@
       "developerMode": "开发者模式",
       "developerModeDesc": "在 Manager 中显示开发者和测试网应用程序。",
       "analytics": "分析",
-      "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
+      "analyticsDesc": "启用分析可以帮助 Ledger 提升用户体验。分析包括点击量、页面访问量、重定向、操作（发送、接收、锁定等）、页末滚动、应用程序安装或卸载和版本信息、 Ledger Live 应用程序版本信息、账户数量、加密资产和操作数、会话时长、Ledger 设备类型和固件版本。",
       "reportErrors": "缺陷报告",
       "reportErrorsDesc": "自动发送报告，帮助 Ledger 修复缺陷。",
       "launchOnboarding": "设备设置",
@@ -607,7 +607,7 @@
           },
           "nanoX": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "Press both buttons to choose Set up as new device.",
+            "step2": "同时按两个按钮，选择设置新设备。",
             "step3": "按下左键或右键选择数字。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
@@ -662,7 +662,7 @@
         "desc": "输入您在恢复短语列表上中记下的短语助记词。",
         "nano": {
           "step1": "选择您的恢复短语的长度。",
-          "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
+          "step2": "输入<1><0>Word #1</0></1>的开头字母，直至显示建议助记词。",
           "step3": "同时按下两个按钮，从建议助记词中选择<1><0>Word #1</0></1>。",
           "step4": "重复该过程，直至完成最后一个助记词。"
         },
@@ -704,7 +704,7 @@
           "isGenuineFail": "糟糕，您的设备似乎不是正版…"
         },
         "desc": {
-          "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
+          "pinFailed": "请勿使用自带 PIN 码的设备。若有任何疑问，请随时联系我们。",
           "recoveryPhraseFailed": "保存只显示在您的设备上的恢复短语，且勿告知他人。如有疑问，请联系我们。",
           "isGenuineFail": "您的设备未通过连接到 Ledger 安全服务器所需的真伪测试。请联系 Ledger 客服以获取帮助。"
         }
