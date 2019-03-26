@@ -33,8 +33,8 @@
     "retry": "重试",
     "stop": "停止",
     "close": "关闭",
-    "eastern": "Eastern",
-    "western": "Western",
+    "eastern": "东方",
+    "western": "西方",
     "reverify": "重新验证",
     "verify": "验证",
     "copy": "复制",
@@ -64,7 +64,7 @@
     }
   },
   "time": {
-    "day": "Day",
+    "day": "日度",
     "week": "周度",
     "month": "月度",
     "year": "年度",
@@ -74,8 +74,8 @@
     "since": {
       "day": "past day",
       "week": "past week",
-      "month": "past month",
-      "year": "past year"
+      "month": "本月",
+      "year": "本年"
     }
   },
   "sidebar": {
@@ -89,7 +89,7 @@
     "lastOperations": "近期操作",
     "emptyState": {
       "title": "还没有加密资产？",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
+      "desc": "请确认已安装 <1> <0>{{managerAppName}}</0> </1> 应用程序后开始接收",
       "buttons": {
         "receiveFunds": "接收"
       }
@@ -148,12 +148,12 @@
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
     "step1": "连接并解锁您的 <1>Ledger 设备</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step2": "导航至您设备上的 <1><0>{{managerAppName}}</0></1> 应用程序",
     "step3": "在您的设备上允许 <1>Ledger Manager</1>"
   },
   "emptyState": {
     "sidebar": {
-      "text": "Click this button to add accounts to the Portfolio"
+      "text": "单击此按钮添加账户至资产组合"
     },
     "dashboard": {
       "title": "安装应用程序或添加账户",
@@ -566,7 +566,7 @@
     "init": {
       "title": "开始使用您的 Ledger 设备",
       "newDevice": {
-        "title": "Initialize as new device"
+        "title": "初始化为新设备"
       },
       "restoreDevice": {
         "title": "通过恢复短语恢复设备配置"
@@ -601,7 +601,7 @@
         "instructions": {
           "nano": {
             "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
+            "step2": "按右键选择<1><0>Configure as new device?</0></1>。",
             "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
@@ -613,7 +613,7 @@
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "Tap on <1><0>Configure as new device</0></1>.",
+            "step2": "点击<1><0>Configure as new device</0></1>。",
             "step3": "选择 4 到 8 位数的 PIN 码。"
           }
         }
@@ -623,7 +623,7 @@
         "instructions": {
           "nano": {
             "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
+            "step2": "按左键取消<1><0>Initialize as new device?</0></1>，然后按右键选择<3><0>Restore configuration?</0></3>。",
             "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
@@ -653,7 +653,7 @@
         },
         "blue": {
           "step1": "在空白恢复短语列表中按顺序记下每个短语助记词。",
-          "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
+          "step2": "点击<1><0>Next</0></1>，输入所有助记词直至屏幕上出现<3><0>Confirmation</0></3>。",
           "step3": "键入每个助记词，以确认您的短语助记词组。"
         }
       },
@@ -731,7 +731,7 @@
           "item3": "重定向到网页",
           "item4": "操作：发送、接收、锁定等",
           "item5": "页末滚动",
-          "item6": "App (un)installation and version",
+          "item6": "应用程序安装或卸载及版本信息",
           "item7": "账户数量、加密资产种类数量和操作数量",
           "item8": "整体和页面会话持续时间",
           "item9": "Ledger 设备类型和固件版本信息"
@@ -927,11 +927,11 @@
       "description": "Please navigate back to Dashboard on your device"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (websocket error)",
+      "title": "抱歉，请重试（WebSocket 错误）",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (websocket failed)",
+      "title": "抱歉，请重试 （WebSocket 错误）",
       "description": null
     },
     "WrongDeviceForAccount": {
