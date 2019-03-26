@@ -6,7 +6,7 @@
     "apply": "신청",
     "confirm": "확인",
     "cancel": "취소",
-    "getSupport": "Get support",
+    "getSupport": "지원 받기",
     "delete": "삭제",
     "launch": "시작",
     "continue": "계속",
@@ -38,7 +38,7 @@
     "reverify": "재확인",
     "verify": "확인",
     "copy": "복사",
-    "copyAddress": "Copy",
+    "copyAddress": "복사",
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
     "lockScreen": {
@@ -54,7 +54,7 @@
       "outdated": "일시 중지됨",
       "error": "동기화 오류",
       "refresh": "새로고침",
-      "ago": "Synchronized {{time}}"
+      "ago": "{{time}} 동기화됨"
     }
   },
   "operation": {
@@ -68,8 +68,8 @@
     "week": "주",
     "month": "월",
     "year": "년",
-    "minute": "Minute",
-    "second": "Second",
+    "minute": "분",
+    "second": "초",
     "hour": "Hour",
     "since": {
       "day": "전날",
@@ -81,8 +81,8 @@
   "sidebar": {
     "menu": "메뉴",
     "accounts": "계정 ({{count}})",
-    "manager": "Manager",
-    "exchange": "Buy crypto",
+    "manager": "관리자",
+    "exchange": "암호화 자산 구입",
     "developer": "개발 도구"
   },
   "account": {
@@ -112,8 +112,8 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
+    "promoteMobile": "이제 {{productName}}을(를) 통해 모바일에서 제공되는 Ledger Live를 즐기세요.",
+    "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다."
   },
   "dashboard": {
     "title": "포트폴리오",
@@ -141,23 +141,23 @@
   "currentAddress": {
     "title": "현재 주소",
     "for": "계정 <1><0>{{accountName}}</0></1>의 주소",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfUnverified": "장치에 표시된 {{currencyName}} 주소가 컴퓨터에 표시된 주소와 일치하는지 확인하십시오.",
+    "messageIfAccepted": "주소가 확인되었습니다. 복사/붙여넣기를 하거나 QR 코드를 스캔하는 경우 주소를 다시 확인하십시오.",
+    "messageIfSkipped": "Ledger 장치에서 귀하의 {{currencyName}} 주소가 확인되지 않았습니다. 최적의 보안을 위해 주소를 확인하십시오."
   },
   "deviceConnect": {
-    "dashboard": "Navigate to the <1>Dashboard</1> on your device",
-    "step1": "Connect and unlock your <1>Ledger device</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1>Ledger Manager</1> on your device"
+    "dashboard": "장치의 <1>대시 보드</1>로 이동",
+    "step1": "<1>Ledger 장치</1> 연결 및 잠금 해제",
+    "step2": "장치의 <1><0>{{managerAppName}}</0></1> 앱으로 이동",
+    "step3": "장치에서 <1>Ledger Manager</1> 허용"
   },
   "emptyState": {
     "sidebar": {
-      "text": "Click this button to add accounts to the Portfolio"
+      "text": "포트폴리오에 계정을 추가하려면 이 버튼을 클릭하십시오."
     },
     "dashboard": {
-      "title": "Install apps or add accounts",
-      "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
+      "title": "앱 설치 또는 계정 추가",
+      "desc": "Manager를 열고 앱을 설치하거나 장치에 이미 앱이 설치되어 있는 경우 계정을 추가하십시오.",
       "buttons": {
         "addAccount": "계정 추가",
         "installApp": "Manager 열기"
@@ -165,9 +165,9 @@
     }
   },
   "partners": {
-    "title": "Buy crypto",
-    "desc": "Try a few services we've selected",
-    "visitWebsite": "Visit website",
+    "title": "암호화 자산 구입",
+    "desc": "저희가 선택한 몇 가지 서비스를 사용해 보십시오.",
+    "visitWebsite": "웹 사이트 방문",
     "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot",
     "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
     "changenow": "ChangeNOW is one of the leading custody-free instant exchange services",
