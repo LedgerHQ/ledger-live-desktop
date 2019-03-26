@@ -213,11 +213,11 @@
     "noAccountToImport": "没有要添加的现有 {{currencyName}} 账户",
     "success": "已成功添加账户",
     "success_plural": "已成功添加账户",
-    "successDescription": "Add more accounts or return to Portfolio",
-    "successDescription_plural": "Add more accounts or return to Portfolio",
+    "successDescription": "添加更多账户或返回至资产组合",
+    "successDescription_plural": "添加更多账户或返回至资产组合",
     "createNewAccount": {
       "title": "添加新账户",
-      "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
+      "noOperationOnLastAccount": "您的 <1><0>{{accountName}}</0></1> 账户为空，无法添加新账户",
       "noAccountToCreate": "未找到要创建的 <1><0>{{currencyName}}</0></1> 账户"
     },
     "cta": {
@@ -398,7 +398,7 @@
       "region": "地区",
       "regionDesc": "选择您所在的地区，以用于设置 Ledger Live 的时区。",
       "stock": "地区市场指示器",
-      "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
+      "stockDesc": "选择西方即以蓝色显示市场价值的增长。选择东方即以红色显示市场价值的增长。"
     },
     "currencies": {
       "desc": "选择一种加密资产以编辑其设置。",
