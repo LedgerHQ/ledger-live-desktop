@@ -923,8 +923,8 @@
       "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to Dashboard",
-      "description": "Please navigate back to Dashboard on your device"
+      "title": "返回至控制面板",
+      "description": "请导航回您设备上的控制面板"
     },
     "WebsocketConnectionError": {
       "title": "抱歉，请重试（WebSocket 错误）",
