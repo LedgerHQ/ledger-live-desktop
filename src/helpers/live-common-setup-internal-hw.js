@@ -7,6 +7,7 @@ import throttle from 'lodash/throttle'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { DisconnectedDevice } from '@ledgerhq/errors'
 import { retry } from './promise'
+import './implement-libcore'
 
 let busy = false
 
