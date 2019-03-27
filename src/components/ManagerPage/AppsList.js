@@ -154,10 +154,20 @@ class AppsList extends PureComponent<Props, State> {
         getFullListSortedCryptoCurrencies,
       )
 
+      const withTickers = filteredAppVersionsList.map(app => {
+        const maybeCrypto = listCryptoCurrencies(true).find(c => c.managerAppName === app.name)
+        const ticker = maybeCrypto ? maybeCrypto.ticker : ''
+
+        return {
+          ...app,
+          ticker,
+        }
+      })
+
       if (!this._unmounted) {
         this.setState({
           status: 'idle',
-          filteredAppVersionsList,
+          filteredAppVersionsList: withTickers,
           appsLoaded: true,
         })
       }
@@ -314,7 +324,7 @@ class AppsList extends PureComponent<Props, State> {
     const { filteredAppVersionsList, appsLoaded } = this.state
     return (
       <Box>
-        <AppSearchBar list={filteredAppVersionsList}>
+        <AppSearchBar searchKeys={['ticker']} list={filteredAppVersionsList}>
           {items => (
             <List>
               {items.map(c => (
