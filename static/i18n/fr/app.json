@@ -350,7 +350,7 @@
         "pending": {
           "title": "Diffusion de la transaction..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
     }
   },
@@ -370,13 +370,13 @@
     "export": {
       "accounts": {
         "title": "Exporter les comptes",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "desc": "Ajoutez vos comptes dans Ledger Live mobile. Vos comptes vont se synchroniser avec la blockchain, pas entre vos applications mobiles et de bureau.",
+        "button": "Exporter"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer.",
-        "button": "Save"
+        "title": "Historique des opérations",
+        "desc": "Enregistrez un fichier CSV des opérations de vos comptes sur votre ordinateur.",
+        "button": "Sauvegarder"
       },
       "modal": {
         "button": "Terminé",
@@ -454,8 +454,8 @@
       "title": "Action requise de l’utilisateur",
       "part1": "Erreur lors de la suppression du dossier de cache. Veuillez supprimer le dossier manuellement :",
       "part2": "Cliquez sur le bouton Ouvrir dossier. L’application va se fermer. Supprimez manuellement le dossier \"sqlite\".",
-      "part3": "app will close",
-      "part4": ", and manually delete the \"sqlite\" folder.",
+      "part3": "l'application va se fermer",
+      "part4": ", et supprimez manuellement le dossier \"sqlite\".",
       "part5": "Vous pouvez ensuite relancer l’application normalement."
     },
     "removeAccountModal": {
@@ -477,9 +477,9 @@
       "followDeviceRepair": "Suivez les instructions de réparation de l’appareil"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
-      "btn": "Save"
+      "title": "Sauvegarder les logs",
+      "desc": "La sauvegarde des logs de Ledger Live peut être nécessaire à des fins de dépannage.",
+      "btn": "Sauvegarder"
     }
   },
   "password": {
@@ -531,7 +531,7 @@
     "cta": "Compris"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
+    "title": "Historique des opérations",
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
     "titleSuccess": "Operation history successfully saved",
