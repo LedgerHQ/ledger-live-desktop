@@ -532,14 +532,14 @@
   },
   "exportOperationsModal": {
     "title": "Historique des opérations",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
-    "titleSuccess": "Operation history successfully saved",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to include",
-    "selectedAccounts_plural": "Accounts to include ({{count}})"
+    "desc": "Sélectionnez les comptes pour lesquels sauvegarder l'historique d'opération",
+    "descSuccess": "Un fichier CSV de votre historique d'opération a été enregistré avec succès dans le dossier sélectionné",
+    "titleSuccess": "Historique sauvegardé avec succès",
+    "cta": "Sauvegarder",
+    "ctaSuccess": "Terminé",
+    "noAccounts": "Aucun compte à exporter",
+    "selectedAccounts": "Comptes à inclure",
+    "selectedAccounts_plural": "Comptes à inclure ({{count}})"
   },
   "language": {
     "system": "Utiliser la langue du système",
@@ -818,11 +818,11 @@
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "Veuillez vérifier votre connexion et réessayer ou contacter le Support Ledger."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
+      "title": "Désolé, essayez à nouveau.",
+      "description": "Le serveur n'a pas pu gérer votre demande. Veuillez réessayer ultérieurement ou contacter le Support Ledger. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
@@ -896,15 +896,15 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we look for your accounts"
+      "title": "Veuillez ouvrir l'application {{appName}}",
+      "description": "Gardez l'application {{appName}} ouverte pendant que nous recherchons vos comptes"
     },
     "UnexpectedBootloader": {
       "title": "Désolé, votre appareil ne devrait pas être en mode Bootloader",
       "description": "Veuillez redémarrer votre appareil ou nous contacter"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager refused on device"
+      "title": "Manager refusé sur l’appareil"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Mise à jour annulée",
