@@ -141,7 +141,7 @@
   "currentAddress": {
     "title": "Adresse actuelle",
     "for": "Adresse pour le compte <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
+    "messageIfUnverified": "Veuillez vérifier que l’adresse {{currencyName}} affichée sur Ledger Live correspond à celle indiquée sur votre appareil",
     "messageIfAccepted": "Adresse confirmée. Veuillez la revérifier si vous la copiez/collez ou si vous scannez le QR code.",
     "messageIfSkipped": "Votre adresse {{currencyName}} n’a pas été confirmée sur votre appareil Ledger. Veuillez la vérifier pour une sécurité optimale."
   },
@@ -262,8 +262,8 @@
       "latest": "La version {{version}} du firmware est disponible.",
       "disclaimerTitle": "Vous êtes sur le point d’installer la <1><0>version {{version}}</0></1>du firmware.",
       "disclaimerAppDelete": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs.",
-      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
-      "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
+      "disclaimerAppReinstall": "Assurez-vous que votre feuille de récupération est accessible, par mesure de précaution.",
+      "downloadingUpdateDesc": "Veuillez patienter pendant le téléchargement de l'installateur de mise à jour"
     },
     "modal": {
       "steps": {
@@ -280,7 +280,7 @@
       "identifier": "Identifiant",
       "mcuTitle": "Finaliser la mise à jour",
       "mcuFirst": "Déconnectez le câble USB de votre appareil",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
+      "mcuSecond": "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu’à ce que l’écran <1><0>Processing</0></1> apparaisse",
       "mcuPin": "Veuillez patienter pendant la finalisation de la mise à jour",
       "successTitle": "Firmware mis à jour",
       "successText": "Veuillez réinstaller les applications sur votre appareil"
@@ -307,7 +307,7 @@
       "confirmAddress": {
         "title": "Vérification",
         "action": "Confirmez votre adresse sur l’appareil",
-        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
+        "text": "Veuillez vérifier que l’adresse {{currencyName}} qui sera affichée sur Ledger Live va correspondre à celle indiquée sur votre appareil",
         "support": "Nous contacter"
       },
       "receiveFunds": {
@@ -350,7 +350,7 @@
         "pending": {
           "title": "Diffusion de la transaction..."
         },
-        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+        "broadcastError": "Votre transaction a peut-être échoué. Veuillez vérifier dans quelques minutes pour vous assurer que votre transaction n'a pas été traitée avant de réessayer."
       }
     }
   },
@@ -362,21 +362,21 @@
     "title": "Paramètres",
     "tabs": {
       "display": "Général",
-      "export": "Accounts",
+      "export": "Comptes",
       "currencies": "Devises",
       "help": "Aide",
       "about": "A propos de"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "title": "Exporter les comptes",
+        "desc": "Ajoutez vos comptes dans Ledger Live mobile. Vos comptes vont se synchroniser avec la blockchain, pas entre vos applications mobiles et de bureau.",
+        "button": "Exporter"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer.",
-        "button": "Save"
+        "title": "Historique des opérations",
+        "desc": "Enregistrez un fichier CSV des opérations de vos comptes sur votre ordinateur.",
+        "button": "Sauvegarder"
       },
       "modal": {
         "button": "Terminé",
@@ -454,8 +454,8 @@
       "title": "Action requise de l’utilisateur",
       "part1": "Erreur lors de la suppression du dossier de cache. Veuillez supprimer le dossier manuellement :",
       "part2": "Cliquez sur le bouton Ouvrir dossier. L’application va se fermer. Supprimez manuellement le dossier \"sqlite\".",
-      "part3": "app will close",
-      "part4": ", and manually delete the \"sqlite\" folder.",
+      "part3": "l'application va se fermer",
+      "part4": ", et supprimez manuellement le dossier \"sqlite\".",
       "part5": "Vous pouvez ensuite relancer l’application normalement."
     },
     "removeAccountModal": {
@@ -477,9 +477,9 @@
       "followDeviceRepair": "Suivez les instructions de réparation de l’appareil"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
-      "btn": "Save"
+      "title": "Sauvegarder les logs",
+      "desc": "La sauvegarde des logs de Ledger Live peut être nécessaire à des fins de dépannage.",
+      "btn": "Sauvegarder"
     }
   },
   "password": {
@@ -531,15 +531,15 @@
     "cta": "Compris"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
-    "titleSuccess": "Operation history successfully saved",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to include",
-    "selectedAccounts_plural": "Accounts to include ({{count}})"
+    "title": "Historique des opérations",
+    "desc": "Sélectionnez les comptes pour lesquels sauvegarder l'historique d'opération",
+    "descSuccess": "Un fichier CSV de votre historique d'opération a été enregistré avec succès dans le dossier sélectionné",
+    "titleSuccess": "Historique sauvegardé avec succès",
+    "cta": "Sauvegarder",
+    "ctaSuccess": "Terminé",
+    "noAccounts": "Aucun compte à exporter",
+    "selectedAccounts": "Comptes à inclure",
+    "selectedAccounts_plural": "Comptes à inclure ({{count}})"
   },
   "language": {
     "system": "Utiliser la langue du système",
@@ -818,11 +818,11 @@
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "Veuillez vérifier votre connexion et réessayer ou contacter le Support Ledger."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
+      "title": "Désolé, essayez à nouveau.",
+      "description": "Le serveur n'a pas pu gérer votre demande. Veuillez réessayer ultérieurement ou contacter le Support Ledger. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Désolé, les services {{currencyName}} ne sont pas disponibles.",
@@ -896,15 +896,15 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we look for your accounts"
+      "title": "Veuillez ouvrir l'application {{appName}}",
+      "description": "Gardez l'application {{appName}} ouverte pendant que nous recherchons vos comptes"
     },
     "UnexpectedBootloader": {
       "title": "Désolé, votre appareil ne devrait pas être en mode Bootloader",
       "description": "Veuillez redémarrer votre appareil ou nous contacter"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager refused on device"
+      "title": "Manager refusé sur l’appareil"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Mise à jour annulée",
