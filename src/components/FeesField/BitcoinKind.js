@@ -137,7 +137,13 @@ class FeesField extends Component<OwnProps, State> {
 
     return (
       <GenericContainer>
-        <Select width={156} options={items} value={selectedItem} onChange={this.onSelectChange} />
+        <Select
+          menuPlacement="top"
+          width={156}
+          options={items}
+          value={selectedItem}
+          onChange={this.onSelectChange}
+        />
         <InputCurrency
           ref={this.input}
           defaultUnit={satoshi}
