@@ -7,6 +7,7 @@ import { Observable } from 'rxjs'
 import { UPDATE_CHECK_IGNORE } from 'config/constants'
 // import createElectronAppUpdater from 'main/updater/createElectronAppUpdater'
 import type { UpdateStatus } from 'components/Updater/UpdaterContext'
+import { deleteInstallFlag } from '../helpers/reinstallCleanup'
 
 type Input = {}
 type Result = {
@@ -32,6 +33,8 @@ const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
         // await appUpdater.verify()
         sendStatus('check-success')
       } catch (err) {
+        // Next launch will update the executable?
+        deleteInstallFlag()
         // don't throw if the check fail for now. it's a white bullet.
         if (UPDATE_CHECK_IGNORE) {
           // TODO: track the error

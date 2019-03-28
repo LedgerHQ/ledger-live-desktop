@@ -1,7 +1,6 @@
 // @flow
 
 import 'helpers/live-common-setup'
-
 import { app, BrowserWindow, Menu, screen } from 'electron'
 import debounce from 'lodash/debounce'
 import {
@@ -17,6 +16,7 @@ import { i } from 'helpers/staticPath'
 import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 
 import { terminateAllTheThings } from './terminator'
+import { checkFlag } from '../helpers/reinstallCleanup'
 
 // necessary to prevent win from being garbage collected
 let mainWindow = null
@@ -176,6 +176,9 @@ app.on('ready', async () => {
   Menu.setApplicationMenu(menu)
 
   mainWindow = await createMainWindow()
+
+  await checkFlag()
+
   await clearSessionCache(mainWindow.webContents.session)
 })
 

@@ -1,4 +1,5 @@
 // @flow
+require('babel-polyfill')
 
 process.setMaxListeners(0)
 

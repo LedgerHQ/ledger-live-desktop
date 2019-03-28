@@ -157,8 +157,8 @@ class FeesField extends Component<OwnProps, State> {
             !feePerByte && error
               ? new FeeNotLoaded()
               : feePerByte && feePerByte.isZero()
-                ? new FeeRequired()
-                : null
+              ? new FeeRequired()
+              : null
           }
           renderRight={
             <InputRight>{t('send.steps.amount.unitPerByte', { unit: satoshi.code })}</InputRight>

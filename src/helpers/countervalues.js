@@ -27,11 +27,13 @@ const pairsSelector = createSelector(
       : [
           { from: intermediaryCurrency, to: counterValueCurrency, exchange: counterValueExchange },
         ].concat(
-          currencies.filter(c => c.ticker !== intermediaryCurrency.ticker).map(currency => ({
-            from: currency,
-            to: intermediaryCurrency,
-            exchange: currencySettingsSelector(state, { currency }).exchange,
-          })),
+          currencies
+            .filter(c => c.ticker !== intermediaryCurrency.ticker)
+            .map(currency => ({
+              from: currency,
+              to: intermediaryCurrency,
+              exchange: currencySettingsSelector(state, { currency }).exchange,
+            })),
         ),
 )
 

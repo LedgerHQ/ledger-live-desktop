@@ -125,7 +125,9 @@ class SectionExport extends PureComponent<Props, State> {
               </Text>
             </Box>
             <Box style={{ width: 330 }}>
-              {stepsImportMobile.map(step => <BulletRow key={step.key} step={step} />)}
+              {stepsImportMobile.map(step => (
+                <BulletRow key={step.key} step={step} />
+              ))}
             </Box>
           </Box>
         )}
