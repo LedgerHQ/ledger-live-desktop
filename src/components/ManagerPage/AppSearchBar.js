@@ -23,6 +23,7 @@ const CrossContainer = styled(Box).attrs({
 `
 
 type Props = {
+  searchKeys: string[],
   list: Array<ApplicationVersion>,
   children: (list: Array<ApplicationVersion>) => React$Node,
 }
@@ -33,6 +34,10 @@ type State = {
 }
 
 class AppSearchBar extends PureComponent<Props, State> {
+  static defaultProps = {
+    searchKeys: [],
+  }
+
   state = {
     query: '',
     focused: false,
@@ -50,7 +55,7 @@ class AppSearchBar extends PureComponent<Props, State> {
   input = null
 
   render() {
-    const { children, list } = this.props
+    const { children, list, searchKeys } = this.props
     const { query, focused } = this.state
 
     const color = focused ? 'dark' : 'grey'
@@ -82,7 +87,7 @@ class AppSearchBar extends PureComponent<Props, State> {
         <Search
           fuseOptions={{
             threshold: 0.1,
-            keys: ['name'],
+            keys: ['name', ...searchKeys],
           }}
           value={query}
           items={list}

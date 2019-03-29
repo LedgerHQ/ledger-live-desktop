@@ -12,6 +12,7 @@ import { hardReset } from 'helpers/reset'
 
 import type { T } from 'types/common'
 
+import TriggerAppReady from 'components/TriggerAppReady'
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import Box from 'components/base/Box'
 import Space from 'components/base/Space'
@@ -23,11 +24,35 @@ import IconTriangleWarning from 'icons/TriangleWarning'
 // SERIOUSLY plz refactor to use <ResetButton>
 import { IconWrapperCircle } from './SettingsPage/ResetButton'
 
+const printError = (error: mixed) => `${String(error)}
+${String((error && error.stack) || 'no stacktrace')}`
+
 type Props = {
   error: Error,
   t: T,
   withoutAppData?: boolean,
   children?: *,
+}
+
+class Unsafe extends PureComponent<*, *> {
+  state = {
+    error: null,
+  }
+  componentDidCatch(error) {
+    this.setState({ error })
+  }
+  render() {
+    const { children, prefix } = this.props
+    const { error } = this.state
+    if (error) {
+      return (
+        <Box my={6}>
+          <ErrContainer>{`${prefix}: ${printError(error)}`}</ErrContainer>
+        </Box>
+      )
+    }
+    return children
+  }
 }
 
 class RenderError extends PureComponent<
@@ -71,6 +96,7 @@ class RenderError extends PureComponent<
     const { isHardResetting, isHardResetModalOpened } = this.state
     return (
       <Box align="center" grow>
+        <TriggerAppReady />
         <Space of={100} />
         <img alt="" src={i('crash-screen.svg')} width={380} />
         <Space of={40} />
@@ -101,23 +127,24 @@ class RenderError extends PureComponent<
             {t('common.reset')}
           </Button>
         </Box>
-        <ConfirmModal
-          analyticsName="HardReset"
-          isDanger
-          isLoading={isHardResetting}
-          isOpened={isHardResetModalOpened}
-          onClose={this.handleCloseHardResetModal}
-          onReject={this.handleCloseHardResetModal}
-          onConfirm={this.handleHardReset}
-          confirmText={t('common.reset')}
-          title={t('settings.hardResetModal.title')}
-          desc={t('settings.hardResetModal.desc')}
-          renderIcon={this.hardResetIconRender}
-        />
         <Box my={6}>
-          <ErrContainer>{`${String(error)}
-${error.stack || 'no stacktrace'}`}</ErrContainer>
+          <ErrContainer>{printError(error)}</ErrContainer>
         </Box>
+        <Unsafe prefix="redux failed">
+          <ConfirmModal
+            analyticsName="HardReset"
+            isDanger
+            isLoading={isHardResetting}
+            isOpened={isHardResetModalOpened}
+            onClose={this.handleCloseHardResetModal}
+            onReject={this.handleCloseHardResetModal}
+            onConfirm={this.handleHardReset}
+            confirmText={t('common.reset')}
+            title={t('settings.hardResetModal.title')}
+            desc={t('settings.hardResetModal.desc')}
+            renderIcon={this.hardResetIconRender}
+          />
+        </Unsafe>
         <pre
           style={{
             position: 'fixed',

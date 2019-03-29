@@ -55,7 +55,7 @@ function installFlowTyped {
     "Failed installing flow-typed definitions"
 
   runJob \
-    "rm flow-typed/npm/{react-i18next_v7.x.x.js,styled-components_v3.x.x.js,redux_*,winston*,react-hot-loader_*}" \
+    "rm flow-typed/npm/{react-i18next_v7.x.x.js,styled-components_v3.x.x.js,winston*,react-hot-loader_*}" \
     "Removing broken flow-typed definitions" \
     "Removed broken flow-typed definitions" \
     "Failed removing broken flow-typed definitions"

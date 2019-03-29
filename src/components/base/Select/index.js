@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import ReactSelect from 'react-select'
+import AsyncReactSelect from 'react-select/lib/Async'
 import { translate } from 'react-i18next'
 
 import createStyles from './createStyles'
@@ -18,6 +19,7 @@ type Props = {
   renderValue: Option => Node,
 
   // optional
+  async: boolean,
   placeholder: string,
   isClearable: boolean,
   isDisabled: boolean,
@@ -66,6 +68,7 @@ class Select extends PureComponent<Props> {
 
   render() {
     const {
+      async,
       value,
       isClearable,
       isSearchable,
@@ -83,8 +86,10 @@ class Select extends PureComponent<Props> {
       ...props
     } = this.props
 
+    const Comp = async ? AsyncReactSelect : ReactSelect
+
     return (
-      <ReactSelect
+      <Comp
         ref={c => (this.ref = c)}
         value={value}
         maxMenuHeight={200}

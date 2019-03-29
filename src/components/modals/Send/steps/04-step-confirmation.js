@@ -2,6 +2,7 @@
 
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
+import { Trans } from 'react-i18next'
 
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
 import { colors } from 'styles/theme'
@@ -16,16 +17,17 @@ import TranslatedError from 'components/TranslatedError'
 import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
 import IconCheckCircle from 'icons/CheckCircle'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
+import IconTriangleWarning from 'icons/TriangleWarning'
 
 import type { StepProps } from '../index'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
-  justifyContent: 'center',
   grow: true,
   color: 'dark',
 })`
-  height: 220px;
+  justify-content: ${p => (p.shouldSpace ? 'space-between' : 'center')};
+  min-height: 220px;
 `
 
 const Title = styled(Box).attrs({
@@ -45,7 +47,26 @@ const Text = styled(Box).attrs({
   text-align: center;
 `
 
-export default function StepConfirmation({ account, t, optimisticOperation, error }: StepProps<*>) {
+const Disclaimer = styled(Box).attrs({
+  horizontal: true,
+  align: 'center',
+  color: 'white',
+  borderRadius: 1,
+  p: 3,
+  mb: 5,
+})`
+  width: 100%;
+  background-color: ${p => p.theme.colors.lightRed};
+  color: ${p => p.theme.colors.alertRed};
+`
+
+export default function StepConfirmation({
+  account,
+  t,
+  optimisticOperation,
+  error,
+  signed,
+}: StepProps<*>) {
   const Icon = optimisticOperation ? IconCheckCircle : error ? IconExclamationCircleThin : Spinner
   const iconColor = optimisticOperation
     ? colors.positiveGreen
@@ -53,9 +74,21 @@ export default function StepConfirmation({ account, t, optimisticOperation, erro
       ? colors.alertRed
       : colors.grey
 
+  const broadcastError = error && signed
+
   return (
-    <Container>
+    <Container shouldSpace={broadcastError}>
       {error && account ? <DebugAppInfosForCurrency currencyId={account.currency.id} /> : null}
+      {broadcastError ? (
+        <Disclaimer>
+          <Box mr={3}>
+            <IconTriangleWarning height={16} width={16} />
+          </Box>
+          <Box style={{ display: 'block' }} ff="Open Sans|SemiBold" fontSize={3} horizontal shrink>
+            <Trans i18nKey="send.steps.confirmation.broadcastError" />
+          </Box>
+        </Disclaimer>
+      ) : null}
       <TrackPage category="Send Flow" name="Step 4" />
       <span style={{ color: iconColor }}>
         <Icon size={43} />
@@ -64,9 +97,9 @@ export default function StepConfirmation({ account, t, optimisticOperation, erro
         {error ? (
           <TranslatedError error={error} />
         ) : optimisticOperation ? (
-          t('send.steps.confirmation.success.title')
+          <Trans i18nKey="send.steps.confirmation.success.title" />
         ) : (
-          t('send.steps.confirmation.pending.title')
+          <Trans i18nKey="send.steps.confirmation.pending.title" />
         )}
       </Title>
       <Text style={{ userSelect: 'text' }} color="smoke">

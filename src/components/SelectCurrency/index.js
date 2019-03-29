@@ -3,6 +3,7 @@
 import React from 'react'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
+import Fuse from 'fuse.js'
 
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
@@ -40,15 +41,35 @@ const SelectCurrency = ({
   ...props
 }: Props) => {
   const options = currencies
-    ? currencies.map(c => ({ ...c, value: c.id, label: c.name, currency: c }))
+    ? currencies.map(c => ({ ...c, value: c, label: c.name, currency: c }))
     : []
+
+  const fuseOptions = {
+    threshold: 0.1,
+    keys: ['name', 'ticker', 'value', 'label'],
+  }
+
+  const fuse = new Fuse(options, fuseOptions)
+
+  const loadOptions = (inputValue?: string) =>
+    new Promise(resolve => {
+      window.requestAnimationFrame(() => {
+        if (!inputValue) return resolve(options)
+
+        const result = fuse.search(inputValue)
+        return resolve(result)
+      })
+    })
+
   return (
     <Select
+      async
       autoFocus={autoFocus}
       value={value}
       renderOption={renderOption}
       renderValue={renderOption}
-      options={options}
+      defaultOptions={options}
+      loadOptions={loadOptions}
       placeholder={placeholder || t('common.selectCurrency')}
       noOptionsMessage={({ inputValue }: { inputValue: string }) =>
         t('common.selectCurrencyNoOption', { currencyName: inputValue })

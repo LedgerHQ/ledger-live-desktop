@@ -32,15 +32,15 @@ const App = ({
       <CounterValues.PollingProvider>
         <I18nextProvider i18n={i18n} initialLanguage={language}>
           <ThemeProvider theme={theme}>
-            <UpdaterProvider>
-              <ThrowBlock>
+            <ThrowBlock>
+              <UpdaterProvider>
                 <ConnectedRouter history={history}>
                   <Switch>
                     <Route component={Default} />
                   </Switch>
                 </ConnectedRouter>
-              </ThrowBlock>
-            </UpdaterProvider>
+              </UpdaterProvider>
+            </ThrowBlock>
           </ThemeProvider>
         </I18nextProvider>
       </CounterValues.PollingProvider>

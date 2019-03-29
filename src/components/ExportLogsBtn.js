@@ -5,6 +5,7 @@ import fs from 'fs'
 import { ipcRenderer, webFrame, remote } from 'electron'
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
+import getUser from 'helpers/user'
 import KeyHandler from 'react-key-handler'
 import Button from './base/Button'
 
@@ -34,18 +35,19 @@ class ExportLogsBtn extends Component<{
 }> {
   export = async () => {
     const resourceUsage = webFrame.getResourceUsage()
+    const user = await getUser()
     logger.log('exportLogsMeta', {
       resourceUsage,
       release: __APP_VERSION__,
       git_commit: __GIT_REVISION__,
       environment: __DEV__ ? 'development' : 'production',
       userAgent: window.navigator.userAgent,
+      userAnonymousId: user.id,
     })
     const path = remote.dialog.showSaveDialog({
       title: 'Export logs',
-      defaultPath: `ledgerlive-export-${moment().format(
-        'YYYY.MM.DD-HH.mm.ss',
-      )}-${__GIT_REVISION__ || 'unversionned'}.json`,
+      defaultPath: `ledgerlive-logs-${moment().format('YYYY.MM.DD-HH.mm.ss')}-${__GIT_REVISION__ ||
+        'unversionned'}.json`,
       filters: [
         {
           name: 'All Files',

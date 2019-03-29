@@ -101,6 +101,7 @@ if (name === 'MainWindow') {
   const startTime = Date.now()
   const PRELOAD_WAIT_TIME_MIN = 3000
   window.onAppReady = () => {
+    window.onAppReady = () => {};
     const delay = Math.max(0, PRELOAD_WAIT_TIME_MIN - (Date.now() - startTime))
     setTimeout(initApp, delay)
   }

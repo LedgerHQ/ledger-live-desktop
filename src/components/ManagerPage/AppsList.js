@@ -16,6 +16,7 @@ import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
+import flushDevice from 'commands/flushDevice'
 import Box from 'components/base/Box'
 import Modal from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
@@ -135,6 +136,10 @@ class AppsList extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     this._unmounted = true
+    if (this.sub) {
+      this.sub.unsubscribe()
+      this.flush()
+    }
   }
 
   _unmounted = false
@@ -149,16 +154,33 @@ class AppsList extends PureComponent<Props, State> {
         getFullListSortedCryptoCurrencies,
       )
 
+      const withTickers = filteredAppVersionsList.map(app => {
+        const maybeCrypto = listCryptoCurrencies(true).find(c => c.managerAppName.toLowerCase() === app.name.toLowerCase())
+        const ticker = maybeCrypto ? maybeCrypto.ticker : ''
+
+        return {
+          ...app,
+          ticker,
+        }
+      })
+
       if (!this._unmounted) {
         this.setState({
           status: 'idle',
-          filteredAppVersionsList,
+          filteredAppVersionsList: withTickers,
           appsLoaded: true,
         })
       }
     } catch (err) {
       this.setState({ status: 'error', error: err })
     }
+  }
+
+  flush = async () => {
+    const {
+      device: { path: deviceId },
+    } = this.props
+    await flushDevice.send(deviceId).toPromise()
   }
 
   sub: *
@@ -187,7 +209,11 @@ class AppsList extends PureComponent<Props, State> {
   handleUninstallApp = (app: ApplicationVersion) => () =>
     this.runAppScript(app, 'uninstalling', uninstallApp)
 
-  handleCloseModal = () => this.setState({ status: 'idle', mode: 'home' })
+  handleCloseModal = () => {
+    if (this.sub) this.sub.unsubscribe()
+    this.flush()
+    this.setState({ status: 'idle', mode: 'home' })
+  }
 
   renderBody = () => {
     const { t } = this.props
@@ -205,7 +231,7 @@ class AppsList extends PureComponent<Props, State> {
           </Box>
         )}
         <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          {t(`manager.apps.${mode}`, { app })}
+          {mode !== 'home' ? t(`manager.apps.${mode}`, { app }) : null}
         </Text>
         <Box mt={6}>
           <ProgressBar width={150} progress={progress} />
@@ -275,12 +301,17 @@ class AppsList extends PureComponent<Props, State> {
   renderModal = () => {
     const { status } = this.state
     return (
-      <Modal isOpened={status !== 'idle' && status !== 'loading'} centered>
+      <Modal
+        isOpened={status !== 'idle' && status !== 'loading'}
+        centered
+        onClose={this.handleCloseModal}
+      >
         <ModalBody
           align="center"
           justify="center"
           title={''}
           render={this.renderBody}
+          onClose={this.handleCloseModal}
           renderFooter={['error', 'success'].includes(status) ? this.renderFooter : undefined}
         >
           <FreezeDeviceChangeEvents />
@@ -293,7 +324,7 @@ class AppsList extends PureComponent<Props, State> {
     const { filteredAppVersionsList, appsLoaded } = this.state
     return (
       <Box>
-        <AppSearchBar list={filteredAppVersionsList}>
+        <AppSearchBar searchKeys={['ticker']} list={filteredAppVersionsList}>
           {items => (
             <List>
               {items.map(c => (

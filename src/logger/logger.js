@@ -335,8 +335,8 @@ export default {
       })
     }
     // $FlowFixMe
-    logger.log('error', error.message, {
-      stack: error.stack,
+    logger.log('error', error && error.message, {
+      stack: error && error.stack,
       ...error,
     })
     if (!process.env.STORYBOOK_ENV) {

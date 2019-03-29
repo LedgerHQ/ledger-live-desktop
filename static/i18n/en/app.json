@@ -143,7 +143,7 @@
     "title": "Current address",
     "for": "Address for account <1><0>{{accountName}}</0></1>",
     "messageIfUnverified":
-      "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+      "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted":
       "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
     "messageIfSkipped":
@@ -282,8 +282,9 @@
       "update": "Update",
       "latest": "Firmware version {{version}} is available",
       "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
-      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "disclaimerAppDelete":
+        "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
@@ -331,7 +332,7 @@
         "title": "Verification",
         "action": "Verify address on device",
         "text":
-          "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+          "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "Contact us"
       },
       "receiveFunds": {
@@ -374,7 +375,9 @@
         },
         "pending": {
           "title": "Broadcasting transaction..."
-        }
+        },
+        "broadcastError":
+          "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -386,15 +389,23 @@
     "title": "Settings",
     "tabs": {
       "display": "General",
-      "export": "Export accounts",
+      "export": "Accounts",
       "currencies": "Currencies",
       "help": "Help",
       "about": "About"
     },
     "export": {
-      "title": "Export accounts",
-      "desc": "Export accounts to the Ledger Live mobile app.",
-      "button": "Export",
+      "accounts": {
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
+      },
+      "operations": {
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer.",
+        "button": "Save"
+      },
+
       "modal": {
         "button": "Done",
         "title": "Scan to export to mobile",
@@ -508,9 +519,9 @@
       "followDeviceRepair": "Follow device repair instructions"
     },
     "exportLogs": {
-      "title": "Export logs",
-      "desc": "Exporting Ledger Live logs may be necessary for troubleshooting purposes.",
-      "btn": "Export"
+      "title": "Save logs",
+      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Save"
     }
   },
   "password": {
@@ -565,6 +576,17 @@
     "desc_2":
       "Please beware that Ledger does not provide financial, tax, or legal advice. You should take such decisions on your own or consult with reliable experts.",
     "cta": "Got it"
+  },
+  "exportOperationsModal": {
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
+    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "titleSuccess": "Operation history successfully saved",
+    "cta": "Save",
+    "ctaSuccess": "Done",
+    "noAccounts": "No accounts to export",
+    "selectedAccounts": "Accounts to include",
+    "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
     "system": "Use system language",
@@ -854,13 +876,14 @@
       "description":
         "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
-    "LedgerAPIError": {
-      "title": "Sorry, try again (API HTTP {{status}})",
-      "description": "Please retry. Interacting with Ledger's API server went wrong."
-    },
-    "LedgerAPIErrorWithMessage": {
+    "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Please check your connection and try again or contact Ledger Support."
+    },
+    "LedgerAPI5xx": {
+      "title": "Sorry, try again.",
+      "description":
+        "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
@@ -933,6 +956,10 @@
     "TransportStatusError": {
       "title": "Something went wrong, please reconnect your device",
       "description": "{{message}}"
+    },
+    "DeviceShouldStayInApp": {
+      "title": "Please open the {{appName}} app",
+      "description": "Keep the {{appName}} app open while we look for your accounts"
     },
     "UnexpectedBootloader": {
       "title": "Oops, your device should not be in Bootloader mode",
