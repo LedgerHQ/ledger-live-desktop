@@ -38,6 +38,7 @@ export type State = {
   bridgeSync: BridgeSyncState,
 }
 
+// $FlowFixMe
 export default combineReducers({
   accounts,
   application,
