@@ -11,6 +11,7 @@ import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
 import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
 import { CantScanQRCode } from '@ledgerhq/errors'
+import { BigNumber } from 'bignumber.js'
 
 type Props<Transaction> = {
   t: T,
@@ -62,7 +63,7 @@ class RecipientField<Transaction> extends Component<
 
   onChange = async (recipient: string, maybeExtra: ?Object) => {
     const { bridge, account, transaction, onChangeTransaction } = this.props
-    const { QRCodeRefusedReason } = this.state
+    const { QRCodeRefusedReason, isValid } = this.state
     const { amount, currency, fromQRCode } = maybeExtra || {}
     if (currency && currency.scheme !== account.currency.scheme) return false
     let t = transaction
@@ -79,6 +80,12 @@ class RecipientField<Transaction> extends Component<
       t = bridge.editTransactionRecipient(account, t, recipient)
       if (QRCodeRefusedReason) this.setState({ QRCodeRefusedReason: null })
     }
+
+    if (isValid && bridge.estimateGasLimit) {
+      // $FlowFixMe
+      t.gasLimit = BigNumber(await bridge.estimateGasLimit(account, recipient))
+    }
+
     onChangeTransaction(t)
     return true
   }

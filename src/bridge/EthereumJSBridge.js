@@ -460,6 +460,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     t.amount.isGreaterThan(0) &&
     t.gasPrice &&
     t.gasPrice.isGreaterThan(0) &&
+    t.gasLimit &&
     t.gasLimit.isGreaterThan(0)
       ? Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit)))
       : Promise.resolve(BigNumber(0)),
@@ -498,6 +499,11 @@ const EthereumBridge: WalletBridge<Transaction> = {
       ),
     ),
   }),
+
+  estimateGasLimit: (account, address) => {
+    const api = apiForCurrency(account.currency)
+    return api.estimateGasLimitForERC20(address)
+  },
 }
 
 export default EthereumBridge
