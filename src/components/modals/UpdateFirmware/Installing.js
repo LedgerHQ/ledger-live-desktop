@@ -8,7 +8,7 @@ import ProgressCircle from 'components/ProgressCircle'
 
 type Props = {
   progress: number,
-  installing: string,
+  installing: ?string,
 }
 
 function Installing({ progress, installing }: Props) {
