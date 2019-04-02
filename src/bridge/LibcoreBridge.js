@@ -4,17 +4,16 @@ import { BigNumber } from 'bignumber.js'
 import { map } from 'rxjs/operators'
 import LRU from 'lru-cache'
 import type { Account } from '@ledgerhq/live-common/lib/types'
+import { deserializeError } from '@ledgerhq/errors/lib/helpers'
 import { decodeAccount, encodeAccount } from 'reducers/accounts'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
-import libcoreGetFees, { extractGetFeesInputFromAccount } from 'commands/libcoreGetFees'
+import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
 import { NotEnoughBalance, FeeNotLoaded } from '@ledgerhq/errors'
 import type { WalletBridge, EditProps } from './types'
-
-const NOT_ENOUGH_FUNDS = 52
 
 const notImplemented = new Error('LibcoreBridge: not implemented')
 
@@ -46,31 +45,20 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
-/*
-import AdvancedOptionsBitcoinKind from 'components/AdvancedOptions/BitcoinKind'
-const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
-  <AdvancedOptionsBitcoinKind
-    isRBF={value.isRBF}
-    onChangeRBF={isRBF => {
-      onChange({ ...value, isRBF })
-    }}
-  />
-)
-*/
-
 const recipientValidLRU = LRU({ max: 100 })
 
-const isRecipientValid = (account, recipient) => {
+const isRecipientValid = (account, recipient): Promise<?Error> => {
   const key = `${account.currency.id}_${recipient}`
   let promise = recipientValidLRU.get(key)
   if (promise) return promise
-  if (!recipient) return Promise.resolve(false)
+  if (!recipient) return Promise.resolve(null)
   promise = libcoreValidAddress
     .send({
       address: recipient,
       currencyId: account.currency.id,
     })
     .toPromise()
+    .then(o => o && deserializeError(o))
   recipientValidLRU.set(key, promise)
   return promise
 }
@@ -83,15 +71,14 @@ const getFeesKey = (a, t) =>
   }`
 
 const getFees = async (a, transaction) => {
-  const isValid = await isRecipientValid(a, transaction.recipient)
-  if (!isValid) return null
+  await isRecipientValid(a, transaction.recipient)
   const key = getFeesKey(a, transaction)
   let promise = feesLRU.get(key)
   if (promise) return promise
 
   promise = libcoreGetFees
     .send({
-      ...extractGetFeesInputFromAccount(a),
+      accountRaw: encodeAccount({ ...a, transactions: [] }),
       transaction: serializeTransaction(transaction),
     })
     .toPromise()
@@ -110,8 +97,8 @@ const checkValidTransaction = (a, t) =>
         : getFees(a, t)
             .then(() => true)
             .catch(e => {
-              if (e.code === NOT_ENOUGH_FUNDS) {
-                throw new NotEnoughBalance()
+              if (e instanceof NotEnoughBalance) {
+                throw e
               }
               feesLRU.del(getFeesKey(a, t))
               throw e
@@ -130,12 +117,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   synchronize: account =>
     libcoreSyncAccount
       .send({
-        accountId: account.id,
-        derivationMode: account.derivationMode,
-        xpub: account.xpub || '',
-        seedIdentifier: account.seedIdentifier,
-        index: account.index,
-        currencyId: account.currency.id,
+        rawAccount: encodeAccount(account),
       })
       .pipe(
         map(({ rawAccount, requiresCacheFlush }) => {
@@ -175,8 +157,9 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.reject(notImplemented),
 
-  isRecipientValid,
-  getRecipientWarning: () => Promise.resolve(null),
+  // TODO we need to move to the new bridge interface that unify these two:
+  isRecipientValid: (...args) => isRecipientValid(...args).then(() => true, () => false),
+  getRecipientWarning: isRecipientValid,
 
   createTransaction: () => ({
     amount: BigNumber(0),
@@ -239,6 +222,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
                 operation: decodeOperation(encodeAccount(account), e.operation),
               }
             default:
+              // $FlowFixMe
               return e
           }
         }),

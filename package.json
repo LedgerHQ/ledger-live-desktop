@@ -13,7 +13,6 @@
     "dist": "bash ./scripts/dist.sh",
     "dist:dir": "bash ./scripts/dist-dir.sh",
     "compile": "bash ./scripts/compile.sh",
-    "cli": "bash ./scripts/cli/cli.sh",
     "lint": "eslint src webpack .storybook test-e2e",
     "flow": "flow",
     "test": "jest src",
