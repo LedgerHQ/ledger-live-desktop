@@ -261,17 +261,17 @@
       "update": "업데이트",
       "latest": "펌웨어 버전 {{version}}을(를) 사용할 수 있습니다.",
       "disclaimerTitle": "<1><0>펌웨어 버전 {{version}}</0></1>을(를) 설치하려합니다.",
-      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerAppDelete": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다.",
       "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "osu": "Installing OSU...",
+        "updateMCU": "펌웨어 업데이트",
+        "osu": "OSU를 설치하는 중...",
         "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
+        "flash-bootloader": "부트 로더 업데이트 중...",
         "firmware": "Firmware updating...",
         "flash": "Flashing your device..."
       },
