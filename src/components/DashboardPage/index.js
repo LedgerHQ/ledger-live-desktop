@@ -15,11 +15,7 @@ import type { T } from 'types/common'
 import { colors } from 'styles/theme'
 
 import { accountsSelector } from 'reducers/accounts'
-import {
-  counterValueCurrencySelector,
-  selectedTimeRangeSelector,
-  timeRangeDaysByKey,
-} from 'reducers/settings'
+import { counterValueCurrencySelector, selectedTimeRangeSelector } from 'reducers/settings'
 import type { TimeRange } from 'reducers/settings'
 
 import { saveSettings } from 'actions/settings'
@@ -27,14 +23,14 @@ import { saveSettings } from 'actions/settings'
 import TrackPage from 'analytics/TrackPage'
 import RefreshAccountsOrdering from 'components/RefreshAccountsOrdering'
 import UpdateBanner from 'components/Updater/Banner'
-import BalanceInfos from 'components/BalanceSummary/BalanceInfos'
-import BalanceSummary from 'components/BalanceSummary'
+import BalanceInfos from 'components/BalanceInfos'
 import Box from 'components/base/Box'
 import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
 import styled from 'styled-components'
 import { openURL } from 'helpers/linking'
+import BalanceSummary from './BalanceSummary'
 import EmptyState from './EmptyState'
 import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
@@ -69,21 +65,20 @@ class DashboardPage extends PureComponent<Props> {
     this.props.saveSettings({ selectedTimeRange: item.key })
   }
 
-  renderHeader = ({ isAvailable, totalBalance, selectedTimeRange, sinceBalance, refBalance }) => (
+  Header = ({ balanceAvailable, balanceHistory }) => (
     <BalanceInfos
       t={this.props.t}
-      counterValue={this.props.counterValue}
-      isAvailable={isAvailable}
-      totalBalance={totalBalance}
-      since={selectedTimeRange}
-      sinceBalance={sinceBalance}
-      refBalance={refBalance}
+      unit={this.props.counterValue.units[0]}
+      isAvailable={balanceAvailable}
+      totalBalance={balanceHistory[balanceHistory.length - 1].value}
+      since={this.props.selectedTimeRange}
+      sinceBalance={balanceHistory[0].value}
+      refBalance={balanceHistory[0].value}
     />
   )
 
   render() {
     const { accounts, t, counterValue, selectedTimeRange } = this.props
-    const daysCount = timeRangeDaysByKey[selectedTimeRange]
     const totalAccounts = accounts.length
     const totalCurrencies = uniq(accounts.map(a => a.currency.id)).length
     const totalOperations = accounts.reduce((sum, a) => sum + a.operations.length, 0)
@@ -136,16 +131,14 @@ class DashboardPage extends PureComponent<Props> {
                 chartId="dashboard-chart"
                 chartColor={colors.wallet}
                 accounts={accounts}
-                selectedTimeRange={selectedTimeRange}
-                daysCount={daysCount}
-                renderHeader={this.renderHeader}
+                range={selectedTimeRange}
+                Header={this.Header}
               />
 
               <AccountCardList
                 onAccountClick={this.onAccountClick}
                 accounts={accounts}
-                daysCount={daysCount}
-                counterValue={counterValue}
+                range={selectedTimeRange}
               />
 
               {totalOperations > 0 && (

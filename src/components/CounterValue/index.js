@@ -27,6 +27,8 @@ type OwnProps = {
   value: BigNumber,
 
   alwaysShowSign?: boolean,
+
+  subMagnitude?: number,
 }
 
 type Props = OwnProps & {
@@ -36,7 +38,7 @@ type Props = OwnProps & {
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const { currency, value, date } = props
+  const { currency, value, date, subMagnitude } = props
   const counterValueCurrency = counterValueCurrencySelector(state)
   const fromExchange = currencySettingsSelector(state, { currency }).exchange
   const toExchange = counterValueExchangeSelector(state)
@@ -48,6 +50,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     to: counterValueCurrency,
     value,
     date,
+    disableRounding: !!subMagnitude,
   })
 
   return {

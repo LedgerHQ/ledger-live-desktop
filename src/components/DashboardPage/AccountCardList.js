@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 
 import Box from 'components/base/Box'
 import AccountCard from './AccountCard'
@@ -11,13 +11,12 @@ import AccountCardPlaceholder from './AccountCardPlaceholder'
 type Props = {
   accounts: Account[],
   onAccountClick: Account => void,
-  counterValue: Currency,
-  daysCount: number,
+  range: PortfolioRange,
 }
 
 class AccountCardList extends Component<Props> {
   render() {
-    const { accounts, counterValue, daysCount, onAccountClick } = this.props
+    const { accounts, range, onAccountClick } = this.props
 
     return (
       <Box flow={4}>
@@ -48,9 +47,8 @@ class AccountCardList extends Component<Props> {
                 {item.account ? (
                   <AccountCard
                     key={item.account.id}
-                    counterValue={counterValue}
                     account={item.account}
-                    daysCount={daysCount}
+                    range={range}
                     onClick={onAccountClick}
                   />
                 ) : item.withPlaceholder ? (
