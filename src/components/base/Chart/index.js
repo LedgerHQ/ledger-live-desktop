@@ -142,7 +142,7 @@ class Chart extends PureComponent<Props> {
       const x = d3.scaleTime().range([0, ctx.WIDTH])
       const y = d3.scaleLinear().range([ctx.HEIGHT, 0])
       x.domain(d3.extent(ctx.DATA, d => d.parsedDate))
-      y.domain([0, d3.max(ctx.DATA, d => d.value.toNumber())])
+      y.domain([d3.min(ctx.DATA, d => d.value.toNumber()), d3.max(ctx.DATA, d => d.value.toNumber())])
       ctx.x = x
       ctx.y = y
 
