@@ -131,7 +131,7 @@ const NJSLogPrinter = new lib.NJSLogPrinter({
 })
 
 const NJSRandomNumberGenerator = new lib.NJSRandomNumberGenerator({
-  getRandomBytes: size => crypto.randomBytes(size),
+  getRandomBytes: size => Array.from(Buffer.from(crypto.randomBytes(size), 'hex')),
   getRandomInt: () => Math.random() * MAX_RANDOM,
   getRandomLong: () => Math.random() * MAX_RANDOM * MAX_RANDOM,
 })
