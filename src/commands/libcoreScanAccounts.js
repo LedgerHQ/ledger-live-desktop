@@ -1,10 +1,11 @@
 // @flow
 
+import { map } from 'rxjs/operators'
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
 import { createCommand, Command } from 'helpers/ipc'
-import { Observable } from 'rxjs'
-import { scanAccountsOnDevice } from 'helpers/libcore'
-import withLibcore from 'helpers/withLibcore'
+import { scanAccountsOnDevice } from '@ledgerhq/live-common/lib/libcore/scanAccountsOnDevice'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import { encodeAccount } from 'reducers/accounts'
 
 type Input = {
   devicePath: string,
@@ -16,34 +17,9 @@ type Result = AccountRaw
 const cmd: Command<Input, Result> = createCommand(
   'libcoreScanAccounts',
   ({ devicePath, currencyId }) =>
-    Observable.create(o => {
-      let unsubscribed = false
-      // TODO scanAccountsOnDevice should directly return a Observable so we just have to pass-in
-      withLibcore(core =>
-        scanAccountsOnDevice({
-          core,
-          devicePath,
-          currencyId,
-          onAccountScanned: account => {
-            o.next(account)
-          },
-          isUnsubscribed: () => unsubscribed,
-        }).then(
-          () => {
-            o.complete()
-          },
-          e => {
-            o.error(e)
-          },
-        ),
-      )
-
-      function unsubscribe() {
-        unsubscribed = true
-      }
-
-      return unsubscribe
-    }),
+    scanAccountsOnDevice(getCryptoCurrencyById(currencyId), devicePath).pipe(
+      map(account => encodeAccount(account)),
+    ),
 )
 
 export default cmd

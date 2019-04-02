@@ -1,24 +1,22 @@
 // @flow
 
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import withLibcore from 'helpers/withLibcore'
+import { from } from 'rxjs'
 import { createCommand, Command } from 'helpers/ipc'
-import { isValidAddress } from 'helpers/libcore'
+import { isValidRecipient } from '@ledgerhq/live-common/lib/libcore/isValidRecipient'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
+import { serializeError } from '@ledgerhq/errors/lib/helpers'
 
 type Input = {
   address: string,
   currencyId: string,
 }
 
-const cmd: Command<Input, boolean> = createCommand(
-  'libcoreValidAddress',
-  ({ currencyId, address }) =>
-    fromPromise(
-      withLibcore(async core => {
-        const currency = await core.getPoolInstance().getCurrency(currencyId)
-        return isValidAddress(core, currency, address)
-      }),
+const cmd: Command<Input, *> = createCommand('libcoreValidAddress', ({ currencyId, address }) =>
+  from(
+    isValidRecipient({ currency: getCryptoCurrencyById(currencyId), recipient: address }).then(
+      o => o && serializeError(o),
     ),
+  ),
 )
 
 export default cmd
