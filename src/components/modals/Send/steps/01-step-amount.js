@@ -20,6 +20,7 @@ import AmountField from '../fields/AmountField'
 
 import type { StepProps } from '../index'
 import { listCryptoCurrencies } from '../../../../config/cryptocurrencies'
+import HighFeeConfirmation from '../HighFeeConfirmation'
 
 export default ({
   t,
@@ -32,10 +33,6 @@ export default ({
 }: StepProps<*>) => {
   const FeesField = bridge && bridge.EditFees
   const AdvancedOptionsField = bridge && bridge.EditAdvancedOptions
-
-  // TODO: figure out why flow can't understand when we put conditions in variables
-  // e.g:
-  // const hasTransaction = !!account && !!bridge && !!transaction
 
   return (
     <Box flow={4}>
@@ -91,10 +88,12 @@ export class StepAmountFooter extends PureComponent<
     totalSpent: BigNumber,
     canNext: boolean,
     isSyncing: boolean,
+    highFeesOpen: boolean,
   },
 > {
   state = {
     isSyncing: false,
+    highFeesOpen: false,
     totalSpent: BigNumber(0),
     canNext: false,
   }
@@ -152,9 +151,35 @@ export class StepAmountFooter extends PureComponent<
     }
   }
 
+  onNext = async () => {
+    const { totalSpent } = this.state
+    const { transitionTo, account, transaction, bridge } = this.props
+    if (bridge && account && transaction) {
+      if (
+        totalSpent
+          .minus(transaction.amount)
+          .times(10)
+          .gt(transaction.amount)
+      ) {
+        this.setState({ highFeesOpen: true })
+        return
+      }
+    }
+    transitionTo('device')
+  }
+
+  onAcceptFees = () => {
+    const { transitionTo } = this.props
+    transitionTo('device')
+  }
+
+  onRejectFees = () => {
+    this.setState({ highFeesOpen: false })
+  }
+
   render() {
-    const { t, transitionTo, account } = this.props
-    const { isSyncing, totalSpent, canNext } = this.state
+    const { t, account, transaction } = this.props
+    const { isSyncing, totalSpent, canNext, highFeesOpen } = this.state
     const isTerminated =
       account && listCryptoCurrencies(true, true).some(coin => coin.name === account.currency.name)
 
@@ -194,13 +219,20 @@ export class StepAmountFooter extends PureComponent<
             {isSyncing && <Spinner size={10} />}
           </Box>
         </Box>
-        <Button
-          disabled={!canNext || !!isTerminated}
-          primary
-          onClick={() => transitionTo('device')}
-        >
+        <Button primary disabled={!canNext || !!isTerminated} onClick={this.onNext}>
           {t('common.continue')}
         </Button>
+        {transaction &&
+          account && (
+            <HighFeeConfirmation
+              isOpened={highFeesOpen}
+              onReject={this.onRejectFees}
+              onAccept={this.onAcceptFees}
+              fees={totalSpent.minus(transaction.amount)}
+              amount={transaction.amount}
+              unit={account.unit}
+            />
+          )}
       </Fragment>
     )
   }
