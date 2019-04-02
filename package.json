@@ -43,7 +43,7 @@
     "@ledgerhq/hw-transport": "^4.47.0",
     "@ledgerhq/hw-transport-node-hid": "^4.48.0",
     "@ledgerhq/ledger-core": "2.2.1-rc",
-    "@ledgerhq/live-common": "4.36.1",
+    "@ledgerhq/live-common": "4.38.0",
     "animated": "^0.2.2",
     "async": "^2.6.1",
     "axios": "^0.18.0",
