@@ -392,7 +392,8 @@
       "export": "Accounts",
       "currencies": "Currencies",
       "help": "Help",
-      "about": "About"
+      "about": "About",
+      "experimental": "Experimental features"
     },
     "export": {
       "accounts": {
@@ -479,6 +480,10 @@
       "privacy": "Privacy Policy",
       "privacyDesc":
         "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+    },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what think",
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",

@@ -14,6 +14,7 @@ import SectionDisplay from './sections/Display'
 import SectionCurrencies from './sections/Currencies'
 import SectionHelp from './sections/Help'
 import SectionAbout from './sections/About'
+import SectionExperimental from './sections/Experimental'
 import SectionExport from './sections/Export'
 
 const mapStateToProps = state => ({
@@ -61,6 +62,11 @@ class SettingsPage extends PureComponent<Props, State> {
         key: 'help',
         label: <Trans i18nKey="settings.tabs.help" />,
         value: SectionHelp,
+      },
+      {
+        key: 'experimental',
+        label: <Trans i18nKey="settings.tabs.experimental" />,
+        value: SectionExperimental,
       },
     ]
 
