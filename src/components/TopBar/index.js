@@ -134,6 +134,7 @@ class TopBar extends PureComponent<Props> {
 }
 
 export default compose(
+  // $FlowFixMe
   withRouter,
   connect(
     mapStateToProps,

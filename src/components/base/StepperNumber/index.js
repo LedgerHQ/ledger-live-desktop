@@ -49,7 +49,7 @@ const DEBOUNCE_ON_CHANGE = 250
 type Props = {
   max: number,
   min: number,
-  onChange: Function,
+  onChange: number => void,
   step: number,
   value: number,
 }
@@ -83,7 +83,7 @@ class StepperNumber extends PureComponent<Props, State> {
     this.debounceOnChange(v)
   }
 
-  debounceOnChange = debounce(v => this.props.onChange(v), DEBOUNCE_ON_CHANGE)
+  debounceOnChange = debounce((v: number) => this.props.onChange(v), DEBOUNCE_ON_CHANGE)
 
   decrement = () => {
     const { step, min } = this.props

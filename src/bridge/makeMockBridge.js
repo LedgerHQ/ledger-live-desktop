@@ -111,10 +111,8 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
         job()
 
-        return {
-          unsubscribe() {
-            unsubscribed = true
-          },
+        return () => {
+          unsubscribed = true
         }
       }),
 

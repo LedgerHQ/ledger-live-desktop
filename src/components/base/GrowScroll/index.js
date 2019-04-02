@@ -10,6 +10,7 @@ type Props = {
   maxHeight?: number,
 }
 
+// $FlowFixMe
 export const GrowScrollContext = React.createContext()
 
 const scrollbarWidth = measureScrollbar()

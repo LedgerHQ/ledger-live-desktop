@@ -48,6 +48,7 @@ export type BehaviorAction =
 
 export type Sync = (action: BehaviorAction) => void
 
+// $FlowFixMe
 const BridgeSyncContext = React.createContext((_: BehaviorAction) => {})
 
 const mapStateToProps = createStructuredSelector({
