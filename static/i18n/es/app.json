@@ -330,7 +330,11 @@
         "message": "Dejar un mensaje (140) ",
         "rippleTag": "Etiquetar",
         "ethereumGasLimit": "Límite de gas",
-        "unitPerByte": "{{unit}} por byte"
+        "unitPerByte": "{{unit}} por byte",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "Dispositivo"
