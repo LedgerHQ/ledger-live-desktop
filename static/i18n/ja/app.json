@@ -330,7 +330,11 @@
         "message": "メッセージを残す（140）",
         "rippleTag": "タグ",
         "ethereumGasLimit": "ガス制限",
-        "unitPerByte": "バイト当たり{{unit}}"
+        "unitPerByte": "バイト当たり{{unit}}",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "機器"
