@@ -59,6 +59,7 @@ type Props = {
   render?: RenderProps => any,
   data?: any,
   preventBackdropClick?: boolean,
+  width?: number,
 
   name?: string, // eslint-disable-line
   onBeforeOpen?: ({ data: * }) => *, // eslint-disable-line
@@ -146,7 +147,7 @@ class Modal extends PureComponent<Props, State> {
 
   render() {
     const { animShowHide, isInDOM } = this.state
-    const { children, render, centered, onClose, data, isOpened } = this.props
+    const { children, render, centered, onClose, data, isOpened, width } = this.props
 
     if (!isInDOM) {
       return null
@@ -173,6 +174,7 @@ class Modal extends PureComponent<Props, State> {
       ...BODY_WRAPPER_STYLE,
       opacity: animShowHide,
       transform: [{ scale }],
+      width: width || BODY_WRAPPER_STYLE.width,
     }
 
     const renderProps = {

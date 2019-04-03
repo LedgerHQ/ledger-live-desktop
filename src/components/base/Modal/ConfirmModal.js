@@ -17,7 +17,7 @@ type Props = {
   isDanger: boolean,
   title: string,
   subTitle?: string,
-  desc: string,
+  desc?: string,
   renderIcon?: Function,
   confirmText?: string,
   cancelText?: string,
@@ -30,6 +30,7 @@ type Props = {
   cancellable?: boolean,
   centered?: boolean,
   children?: *,
+  narrow?: boolean,
 }
 
 class ConfirmModal extends PureComponent<Props> {
@@ -52,13 +53,14 @@ class ConfirmModal extends PureComponent<Props> {
       analyticsName,
       centered,
       children,
+      narrow,
       ...props
     } = this.props
 
     const realConfirmText = confirmText || t('common.confirm')
     const realCancelText = cancelText || t('common.cancel')
     return (
-      <Modal isOpened={isOpened} centered={centered}>
+      <Modal isOpened={isOpened} centered={centered} width={narrow && 380}>
         <ModalBody
           preventBackdropClick={isLoading}
           {...props}
@@ -90,9 +92,11 @@ class ConfirmModal extends PureComponent<Props> {
                   {renderIcon()}
                 </Box>
               )}
-              <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center">
-                {desc}
-              </Box>
+              {desc && (
+                <Box ff="Open Sans" color="smoke" fontSize={4} textAlign="center">
+                  {desc}
+                </Box>
+              )}
               {children}
             </Box>
           )}
