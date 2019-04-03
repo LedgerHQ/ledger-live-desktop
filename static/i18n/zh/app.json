@@ -330,7 +330,11 @@
         "message": "留言 (140)",
         "rippleTag": "标签",
         "ethereumGasLimit": "Gas 上限",
-        "unitPerByte": "{{unit}} 每字节"
+        "unitPerByte": "{{unit}} 每字节",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "设备"
