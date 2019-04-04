@@ -1,10 +1,11 @@
 // @flow
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 
 import type { T } from 'types/common'
 
@@ -12,6 +13,7 @@ import IconChevronRight from 'icons/ChevronRight'
 
 import { getDeviceModel } from '@ledgerhq/devices'
 import { IconOptionRow, DisclaimerBox, OptionRow, Inner } from '../../helperComponents'
+import { restoreConfiguration, setUpAsNewDevice } from '../../../../config/nontranslatables'
 
 type Props = {
   t: T,
@@ -36,12 +38,30 @@ class SelectPINrestoreNanoX extends PureComponent<Props, *> {
       {
         key: 'step3',
         icon: <IconOptionRow>{'3.'}</IconOptionRow>,
-        desc: t('onboarding.selectPIN.restore.instructions.nanoX.step3'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding.selectPIN.restore.instructions.nanoX.step3">
+              {'Press the left button to cancel'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {setUpAsNewDevice}
+              </Text>
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step4',
         icon: <IconOptionRow>{'4.'}</IconOptionRow>,
-        desc: t('onboarding.selectPIN.restore.instructions.nanoX.step4'),
+        desc: (
+          <Box style={{ display: 'block' }}>
+            <Trans i18nKey="onboarding.selectPIN.restore.instructions.nanoX.step4">
+              {'Press the left button to cancel'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {restoreConfiguration}
+              </Text>
+            </Trans>
+          </Box>
+        ),
       },
       {
         key: 'step5',

@@ -18,6 +18,7 @@ import {
   OptionRow,
   Inner,
 } from '../../helperComponents'
+import { seedWord1 } from '../../../../config/nontranslatables'
 
 type Props = {
   t: T,
@@ -36,7 +37,7 @@ class WriteSeedNano extends PureComponent<Props, *> {
             <Trans i18nKey="onboarding.writeSeed.initialize.nano.step1">
               {'Copy the word displayed below'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Word #1'}
+                {{ seedWord1 }}
               </Text>
               {'in position 1 on a blank Recovery sheet.'}
             </Trans>
@@ -49,11 +50,7 @@ class WriteSeedNano extends PureComponent<Props, *> {
         desc: (
           <Box style={{ display: 'block' }}>
             <Trans i18nKey="onboarding.writeSeed.initialize.nano.step2">
-              {'Press the right button to display'}
-              <Text ff="Open Sans|SemiBold" color="dark">
-                {'Word #2'}
-              </Text>
-              {'and repeat the process until all 24 words are copied on the Recovery sheet.'}
+              {'Press the right button to continue and write down all 24 words.'}
             </Trans>
           </Box>
         ),

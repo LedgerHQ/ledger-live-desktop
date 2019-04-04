@@ -304,7 +304,7 @@
       "mcuTitle": "Finalize update",
       "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond":
-        "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
+        "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
       "successText": "Please re-install the apps on your device"
@@ -518,9 +518,9 @@
         "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
       "desc": "Please select the state of your Ledger device.",
       "button": "Repair",
-      "generic": "Bootloader",
-      "mcuNotGenuine": "MCU not genuine",
-      "followDeviceRepair": "Follow device repair instructions"
+      "generic": "{{repairDeviceBootloader}}",
+      "mcuNotGenuine": "{{repairDeviceMcuNotGenuine}}",
+      "followDeviceRepair": "{{repairDeviceFollow}}"
     },
     "exportLogs": {
       "title": "Save logs",
@@ -652,20 +652,20 @@
         "instructions": {
           "nano": {
             "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3":
               "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press both buttons to choose Set up as new device.",
+            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Press the left or right button to select a digit.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Configure as new device</0></1>.",
+            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
         }
@@ -676,7 +676,7 @@
           "nano": {
             "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2":
-              "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
+              "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3":
               "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
@@ -684,13 +684,13 @@
           "nanoX": {
             "step1": "Connect your {{productName}} to your computer.",
             "step2": "Press both buttons as instructed on your {{productName}} screen.",
-            "step3": "Press the left button to cancel Configure as new device.",
-            "step4": "Press the right button to select Restore configuration.",
+            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Choose a PIN code between 4 and 8 digits long."
           },
           "blue": {
             "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Restore configuration</0></1>.",
+            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
         }
@@ -701,7 +701,7 @@
         "title": "Save your recovery phrase",
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
-          "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
+          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "Press the right button to continue and write down all 24 words.",
           "step3":
             "Confirm your recovery phrase: select and validate each word by pressing both buttons."
@@ -709,7 +709,7 @@
         "blue": {
           "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
           "step2":
-            "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
+            "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
           "step3": "Enter each word to confirm your recovery phrase."
         }
       },
@@ -718,9 +718,9 @@
         "desc": "Enter the recovery phrase saved on your Recovery sheet",
         "nano": {
           "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
+          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
           "step3":
-            "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+            "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "Repeat the process until the last word."
         },
         "blue": {

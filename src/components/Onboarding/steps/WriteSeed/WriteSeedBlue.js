@@ -18,6 +18,7 @@ import {
   OptionRow,
   Inner,
 } from '../../helperComponents'
+import { seedConfirmation, seedNext } from '../../../../config/nontranslatables'
 
 type Props = {
   t: T,
@@ -41,11 +42,11 @@ class WriteSeedBlue extends PureComponent<Props, *> {
             <Trans i18nKey="onboarding.writeSeed.initialize.blue.step2">
               {'Tap'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Next'}
+                {{ seedNext }}
               </Text>
               {'to move to the next words. Repeat the process until the'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Confirmation'}
+                {{ seedConfirmation }}
               </Text>
               {'screen appears.'}
             </Trans>

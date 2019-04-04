@@ -13,6 +13,7 @@ import IconChevronRight from 'icons/ChevronRight'
 
 import { getDeviceModel } from '@ledgerhq/devices'
 import { IconOptionRow, DisclaimerBox, OptionRow, Inner } from '../../helperComponents'
+import { configureAsNewDevice } from '../../../../config/nontranslatables'
 
 type Props = {
   t: T,
@@ -36,7 +37,7 @@ class SelectPIN extends PureComponent<Props, *> {
             <Trans i18nKey="onboarding.selectPIN.initialize.instructions.blue.step2">
               {'Tap on'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Configure as new device'}
+                {configureAsNewDevice}
               </Text>
             </Trans>
           </Box>
