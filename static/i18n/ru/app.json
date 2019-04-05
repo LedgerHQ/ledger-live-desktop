@@ -330,7 +330,11 @@
         "message": "Оставьте сообщение (140)",
         "rippleTag": "Тег",
         "ethereumGasLimit": "Лимит газа",
-        "unitPerByte": "{{unit}} на байт"
+        "unitPerByte": "{{unit}} на байт",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "Устройство"
@@ -365,7 +369,8 @@
       "export": "Accounts",
       "currencies": "Валюта",
       "help": "Справка",
-      "about": "О программе"
+      "about": "О программе",
+      "experimental": "Experimental features"
     },
     "export": {
       "accounts": {
@@ -441,6 +446,10 @@
       "termsDesc": "Используя приложение Ledger Live, вы принимаете наши условия использования.",
       "privacy": "Политика конфиденциальности",
       "privacyDesc": "О том, какие персональные данные мы собираем, каким образом и для чего, можно узнать в нашей политике конфиденциальности."
+    },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what think",
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
       "title": "Сбросить Ledger Live",
