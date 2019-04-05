@@ -2,13 +2,14 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { withRouter } from 'react-router'
 
 import type { Location, RouterHistory } from 'react-router'
 import type { T } from 'types/common'
+import useExperimental from 'hooks/useExperimental'
 
 import { lock } from 'reducers/application'
 import { hasPasswordSelector } from 'reducers/settings'
@@ -19,7 +20,6 @@ import IconLock from 'icons/Lock'
 import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
-import GlobalSearch from 'components/GlobalSearch'
 import Tooltip from 'components/base/Tooltip'
 import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
 
@@ -43,6 +43,32 @@ const Inner = styled(Box).attrs({
   flow: 4,
   align: 'center',
 })``
+
+const Tag = styled(Box).attrs({
+  ff: 'Open Sans|Bold',
+  justifyContent: 'center',
+  alignItems: 'center',
+  px: 2,
+})`
+  font-size: 10px;
+  height: 22px;
+  line-height: 22px;
+  border-radius: 16px;
+  color: ${p => p.theme.colors.white};
+  background-color: ${p => p.theme.colors.experimentalBlue};
+`
+
+const TagContainer = () => {
+  const isExperimental = useExperimental()
+
+  return isExperimental ? (
+    <Box justifyContent="center">
+      <Tag>
+        <Trans i18nKey="common.experimentalFeature" />
+      </Tag>
+    </Box>
+  ) : null
+}
 
 const Bar = styled.div`
   margin-left: 5px;
@@ -99,7 +125,8 @@ class TopBar extends PureComponent<Props> {
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal>
-            <GlobalSearch t={t} isHidden />
+            <TagContainer />
+            <Box grow />
             <CurrenciesStatusBanner />
             {hasAccounts && (
               <Fragment>
