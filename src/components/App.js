@@ -6,7 +6,6 @@ import { ConnectedRouter } from 'react-router-redux'
 import { Switch, Route } from 'react-router'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
-import { hot } from 'react-hot-loader'
 
 import theme from 'styles/theme'
 
@@ -48,5 +47,4 @@ const App = ({
   </Provider>
 )
 
-// $FlowFixMe
-export default hot(module)(App)
+export default App
