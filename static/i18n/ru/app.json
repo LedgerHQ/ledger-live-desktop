@@ -41,6 +41,7 @@
     "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,

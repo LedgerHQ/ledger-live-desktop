@@ -41,6 +41,7 @@
     "copyAddress": "Copiar",
     "copied": "Copiado",
     "addressCopied": "Dirección copiada",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "Bienvenido de nuevo",
       "subTitle": null,

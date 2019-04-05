@@ -41,6 +41,7 @@
     "copyAddress": "복사",
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "다시 돌아오신 것을 환영합니다.",
       "subTitle": null,
