@@ -1,6 +1,7 @@
 // @flow
 
 import 'helpers/live-common-setup'
+import 'helpers/experimental'
 
 import logger from 'logger'
 import LoggerTransport from 'logger/logger-transport-renderer'
