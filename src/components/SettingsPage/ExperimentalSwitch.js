@@ -15,6 +15,10 @@ type Props = {
 }
 
 export default class ExperimentalSwitch extends PureComponent<Props, { checked: boolean }> {
+  static defaultProps = {
+    valueOn: true,
+    valueOff: false,
+  }
   state = {
     checked: this.props.checked,
   }

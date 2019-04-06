@@ -3,32 +3,39 @@ import { ipcRenderer } from 'electron'
 import { setEnvUnsafe, isEnvDefault, changes, getAllEnvs } from '@ledgerhq/live-common/lib/env'
 import type { EnvName } from '@ledgerhq/live-common/lib/env'
 
-export type Feature = {
-  type: string,
+export type FeatureCommon = {
   name: EnvName,
   title: string,
   description: string,
-  valueOn: any,
-  valueOff: any,
-  shadow: boolean,
+  shadow?: boolean,
 }
+
+export type FeatureToggle = {
+  type: 'toggle',
+  valueOn?: any,
+  valueOff?: any,
+}
+
+export type Feature = FeatureCommon & FeatureToggle
 
 export const experimentalFeatures: Feature[] = [
   {
-    shadow: false,
     type: 'toggle',
     name: 'MANAGER_DEV_MODE',
-    valueOn: true,
-    valueOff: false,
     title: 'Dev mode',
     description: 'enables developer apps in manager',
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_USB',
+    title: 'Experimental USB',
+    description:
+      'Alternative USB implementation that might help solving USB issues. Enabling this feature might create UI glitches.',
   },
   {
     shadow: true,
     type: 'toggle',
     name: 'EXPERIMENTAL_EXPLORERS',
-    valueOn: true,
-    valueOff: false,
     title: 'Experimental explorers',
     description: 'switch to the new version of explorers',
   },
