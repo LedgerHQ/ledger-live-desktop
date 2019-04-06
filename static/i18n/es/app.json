@@ -400,7 +400,7 @@
       "counterValue": "Contravalor",
       "counterValueDesc": "Elige la moneda mostrada al lado de tu saldo y operaciones.",
       "exchange": "Proveedor de tarifas",
-      "exchangeDesc": "Ofrece el tipo de cambio de Bitcoin a {{fiat}}, utilizado para calcular el valor de tus crypto activos (crypto activo→ BTC → {{fiat}}).",
+      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
       "region": "Región",
       "regionDesc": "Elige tu región, utilizada para establecer la zona horaria de Ledger Live.",
       "stock": "Indicador del mercado regional",
