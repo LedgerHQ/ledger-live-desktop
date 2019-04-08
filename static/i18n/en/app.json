@@ -848,7 +848,6 @@
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -881,7 +880,6 @@
         "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPI4xx": {
-      "title": "{{message}}",
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {

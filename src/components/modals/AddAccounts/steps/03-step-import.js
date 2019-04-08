@@ -119,33 +119,6 @@ class StepImport extends PureComponent<StepProps> {
     }
   }
 
-  translateName(account: Account) {
-    const { t } = this.props
-    let { name } = account
-
-    const isLegacy = name.indexOf('legacy') !== -1
-    const isUnsplit = name.indexOf('unsplit') !== -1
-
-    if (name === 'New Account') {
-      name = t('addAccounts.newAccount')
-    } else if (isLegacy) {
-      if (isUnsplit) {
-        name = t('addAccounts.legacyUnsplitAccount', {
-          accountName: name.replace(' (legacy)', '').replace(' (unsplit)', ''),
-        })
-      } else {
-        name = t('addAccounts.legacyAccount', { accountName: name.replace(' (legacy)', '') })
-      }
-    } else if (isUnsplit) {
-      name = t('addAccounts.unsplitAccount', { accountName: name.replace(' (unsplit)', '') })
-    }
-
-    return {
-      ...account,
-      name,
-    }
-  }
-
   startScanAccountsDevice() {
     this.unsub()
     const { currency, device, setScanStatus, setScannedAccounts } = this.props
@@ -166,7 +139,7 @@ class StepImport extends PureComponent<StepProps> {
           const isNewAccount = isAccountEmpty(account)
           if (!hasAlreadyBeenScanned) {
             setScannedAccounts({
-              scannedAccounts: [...scannedAccounts, this.translateName(account)],
+              scannedAccounts: [...scannedAccounts, account],
               checkedAccountsIds:
                 !hasAlreadyBeenImported && !isNewAccount
                   ? uniq([...checkedAccountsIds, account.id])
