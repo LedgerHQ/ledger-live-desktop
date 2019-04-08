@@ -1,13 +1,13 @@
 // @flow
 
 import 'helpers/live-common-setup'
+import 'helpers/experimental'
 
 import logger from 'logger'
 import LoggerTransport from 'logger/logger-transport-renderer'
 import React from 'react'
 import { remote, webFrame } from 'electron'
 import { render } from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
 import createHistory from 'history/createHashHistory'
 import moment from 'moment'
 import { runMigrations } from 'migrations'
@@ -129,7 +129,7 @@ async function init() {
 
 function r(Comp) {
   if (rootNode) {
-    render(<AppContainer>{Comp}</AppContainer>, rootNode)
+    render(Comp, rootNode)
   }
 }
 

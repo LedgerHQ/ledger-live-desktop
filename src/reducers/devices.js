@@ -1,7 +1,7 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
-
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import type { Device } from 'types/common'
 
 export type DevicesState = {
@@ -41,10 +41,18 @@ const handlers: Object = {
 }
 
 export function getCurrentDevice(state: { devices: DevicesState }) {
+  if (getEnv('EXPERIMENTAL_USB')) {
+    // bypass the listen devices (we should remove modelId here by instead get it at open time if needed)
+    return { path: '', modelId: 'nanoS' }
+  }
   return state.devices.currentDevice
 }
 
 export function getDevices(state: { devices: DevicesState }) {
+  if (getEnv('EXPERIMENTAL_USB')) {
+    // bypass the listen devices
+    return [{ path: '', modelId: 'nanoS' }]
+  }
   return state.devices.devices
 }
 

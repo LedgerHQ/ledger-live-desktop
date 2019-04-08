@@ -41,6 +41,7 @@
     "copyAddress": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -330,7 +331,11 @@
         "message": "Laisser un message (140) ",
         "rippleTag": "Balise",
         "ethereumGasLimit": "Limite d'essence",
-        "unitPerByte": "{{unit}} par octet"
+        "unitPerByte": "{{unit}} par octet",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "Appareil"
@@ -365,7 +370,8 @@
       "export": "Comptes",
       "currencies": "Devises",
       "help": "Aide",
-      "about": "A propos de"
+      "about": "A propos de",
+      "experimental": "Experimental features"
     },
     "export": {
       "accounts": {
@@ -441,6 +447,10 @@
       "termsDesc": "En utilisant Ledger Live, vous acceptez nos Conditions d’utilisation.",
       "privacy": "Politique de confidentialité",
       "privacyDesc": "Consultez notre Politique de confidentialité pour savoir quelles données personnelles nous collectons, à quelles fins et comment nous les utilisons."
+    },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what think",
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",

@@ -41,6 +41,7 @@
     "copyAddress": "Copy",
     "copied": "コピー済み",
     "addressCopied": "アドレスをコピーしました",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "お帰りなさい",
       "subTitle": null,
@@ -369,7 +370,8 @@
       "export": "Accounts",
       "currencies": "通貨",
       "help": "ヘルプ",
-      "about": "詳細"
+      "about": "詳細",
+      "experimental": "Experimental features"
     },
     "export": {
       "accounts": {
@@ -445,6 +447,10 @@
       "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
       "privacy": "Privacy Policy",
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+    },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what think",
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
       "title": "Ledger Liveをリセット",

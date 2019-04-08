@@ -41,6 +41,7 @@
     "copyAddress": "Copy",
     "copied": "Copied",
     "addressCopied": "Address copied",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -396,12 +397,14 @@
       "export": "Accounts",
       "currencies": "Currencies",
       "help": "Help",
-      "about": "About"
+      "about": "About",
+      "experimental": "Experimental features"
     },
     "export": {
       "accounts": {
         "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "desc":
+          "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
         "button": "Export"
       },
       "operations": {
@@ -483,6 +486,11 @@
       "privacy": "Privacy Policy",
       "privacyDesc":
         "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+    },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what think",
+      "disclaimer":
+        "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",
@@ -584,7 +592,8 @@
   "exportOperationsModal": {
     "title": "Operation history",
     "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "descSuccess":
+      "A CSV file of your operation history has been successfully saved in the selected folder",
     "titleSuccess": "Operation history successfully saved",
     "cta": "Save",
     "ctaSuccess": "Done",
