@@ -6,9 +6,11 @@ import { translate, Trans } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { withRouter } from 'react-router'
-
+import { Link } from 'react-router-dom'
 import type { Location, RouterHistory } from 'react-router'
+
 import type { T } from 'types/common'
+import { darken } from 'styles/helpers'
 import useExperimental from 'hooks/useExperimental'
 
 import { lock } from 'reducers/application'
@@ -44,18 +46,24 @@ const Inner = styled(Box).attrs({
   align: 'center',
 })``
 
-const Tag = styled(Box).attrs({
-  ff: 'Open Sans|Bold',
-  justifyContent: 'center',
-  alignItems: 'center',
-  px: 2,
-})`
+const Tag = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans';
+  font-weight: bold;
   font-size: 10px;
   height: 22px;
   line-height: 22px;
+  padding: 0 10px;
   border-radius: 16px;
   color: ${p => p.theme.colors.white};
   background-color: ${p => p.theme.colors.experimentalBlue};
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${p => darken(p.theme.colors.experimentalBlue, 0.05)};
+  }
 `
 
 const TagContainer = () => {
@@ -63,7 +71,7 @@ const TagContainer = () => {
 
   return isExperimental ? (
     <Box justifyContent="center">
-      <Tag>
+      <Tag to="/settings/experimental">
         <Trans i18nKey="common.experimentalFeature" />
       </Tag>
     </Box>
