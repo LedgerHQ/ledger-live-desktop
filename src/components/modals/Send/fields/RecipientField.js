@@ -51,7 +51,7 @@ class RecipientField<Transaction> extends Component<
   isUnmounted = false
   syncId = 0
   async resync() {
-    const { account, bridge, transaction } = this.props
+    const { account, bridge, transaction, onChangeTransaction } = this.props
     const syncId = ++this.syncId
     const recipient = bridge.getTransactionRecipient(account, transaction)
     const isValid = await bridge.isRecipientValid(account, recipient)
@@ -59,11 +59,17 @@ class RecipientField<Transaction> extends Component<
     if (syncId !== this.syncId) return
     if (this.isUnmounted) return
     this.setState({ isValid, warning })
+
+    if (isValid && bridge.estimateGasLimit) {
+      // $FlowFixMe
+      transaction.gasLimit = BigNumber(await bridge.estimateGasLimit(account, recipient))
+      onChangeTransaction(transaction)
+    }
   }
 
   onChange = async (recipient: string, maybeExtra: ?Object) => {
     const { bridge, account, transaction, onChangeTransaction } = this.props
-    const { QRCodeRefusedReason, isValid } = this.state
+    const { QRCodeRefusedReason } = this.state
     const { amount, currency, fromQRCode } = maybeExtra || {}
     if (currency && currency.scheme !== account.currency.scheme) return false
     let t = transaction
@@ -79,11 +85,6 @@ class RecipientField<Transaction> extends Component<
     } else {
       t = bridge.editTransactionRecipient(account, t, recipient)
       if (QRCodeRefusedReason) this.setState({ QRCodeRefusedReason: null })
-    }
-
-    if (isValid && bridge.estimateGasLimit) {
-      // $FlowFixMe
-      t.gasLimit = BigNumber(await bridge.estimateGasLimit(account, recipient))
     }
 
     onChangeTransaction(t)
