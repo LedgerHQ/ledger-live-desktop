@@ -6,7 +6,6 @@ import {
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/currencies'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import languages from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
@@ -173,8 +172,6 @@ export const counterValueExchangeSelector = createSelector(
 export const developerModeSelector = (state: State): boolean => state.settings.developerMode
 
 export const lastUsedVersionSelector = (state: State): string => state.settings.lastUsedVersion
-
-export const availableCurrencies = createSelector(developerModeSelector, listCryptoCurrencies)
 
 export const langAndRegionSelector = (
   state: State,
