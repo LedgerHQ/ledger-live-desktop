@@ -62,4 +62,7 @@ const LabelWrapper = styled(Label).attrs({})`
     cursor: pointer;
   }
   color: ${p => p.theme.colors.wallet};
+  font-size: 13px;
+  font-family: 'Open Sans', Arial;
+  font-weight: 600;
 `
