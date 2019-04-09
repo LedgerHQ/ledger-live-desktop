@@ -58,6 +58,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
 
   renderTickYCounterValue = val => formatShort(this.props.counterValue.units[0], BigNumber(val))
 
+  // $FlowFixMe
   mapValueCounterValue = d => d.countervalue.toNumber()
 
   mapValueCryptoValue = d => d.value.toNumber()
