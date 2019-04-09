@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/no-unused-prop-types */
 
 /**
  *                                   Chart
@@ -33,10 +34,10 @@
  *
  */
 
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import * as d3 from 'd3'
 import noop from 'lodash/noop'
-import type { Unit } from '@ledgerhq/live-common/lib/types'
+import last from 'lodash/last'
 
 import refreshNodes from './refreshNodes'
 import refreshDraw from './refreshDraw'
@@ -46,21 +47,21 @@ import { enrichData, generateColors, generateMargins, observeResize } from './he
 import type { Data } from './types'
 
 export type Props = {
-  data: Data, // eslint-disable-line react/no-unused-prop-types
-  unit?: ?Unit, // eslint-disable-line react/no-unused-prop-types
-  cvCode?: string, // eslint-disable-line react/no-unused-prop-types
-  id?: string, // eslint-disable-line react/no-unused-prop-types
+  data: Data,
+  id?: string,
   height?: number,
-  tickXScale: string, // eslint-disable-line react/no-unused-prop-types
-  color?: string, // eslint-disable-line react/no-unused-prop-types
-  hideAxis?: boolean, // eslint-disable-line react/no-unused-prop-types
-  dateFormat?: string, // eslint-disable-line react/no-unused-prop-types
-  isInteractive?: boolean, // eslint-disable-line react/no-unused-prop-types
-  renderTooltip?: Function, // eslint-disable-line react/no-unused-prop-types
-  renderTickY: (t: number) => string | number, // eslint-disable-line react/no-unused-prop-types
+  tickXScale: string,
+  color?: string,
+  hideAxis?: boolean,
+  dateFormat?: string,
+  isInteractive?: boolean,
+  renderTooltip?: Function,
+  renderTickY: (t: number) => string | number,
+  mapValue: (*) => number,
+  onlyUpdateIfLastPointChanges?: boolean,
 }
 
-class Chart extends PureComponent<Props> {
+class Chart extends Component<Props> {
   static defaultProps = {
     color: '#000',
     dateFormat: '%Y-%m-%d',
@@ -70,6 +71,7 @@ class Chart extends PureComponent<Props> {
     isInteractive: true,
     tickXScale: 'month',
     renderTickY: (t: *) => t,
+    mapValue: (d: *) => d.value.toNumber(),
   }
 
   componentDidMount() {
@@ -82,6 +84,23 @@ class Chart extends PureComponent<Props> {
         this.refreshChart(this.props)
       }
     })
+  }
+
+  shouldComponentUpdate(nextProps: Props) {
+    const lastPointChanges =
+      nextProps.mapValue(last(nextProps.data)) !== this.props.mapValue(last(this.props.data))
+    return (
+      lastPointChanges ||
+      nextProps.id !== this.props.id ||
+      nextProps.height !== this.props.height ||
+      nextProps.tickXScale !== this.props.tickXScale ||
+      nextProps.color !== this.props.color ||
+      nextProps.hideAxis !== this.props.hideAxis ||
+      nextProps.dateFormat !== this.props.dateFormat ||
+      nextProps.isInteractive !== this.props.isInteractive ||
+      nextProps.data.length !== this.props.data.length ||
+      (nextProps.onlyUpdateIfLastPointChanges ? false : nextProps.data !== this.props.data)
+    )
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -113,7 +132,7 @@ class Chart extends PureComponent<Props> {
 
     this.refreshChart = prevProps => {
       const { _node: node, props } = this
-      const { data: raw, color, height, hideAxis, isInteractive, renderTooltip } = props
+      const { data: raw, color, height, hideAxis, isInteractive, mapValue, renderTooltip } = props
 
       ctx.DATA = enrichData(raw)
 
@@ -138,11 +157,17 @@ class Chart extends PureComponent<Props> {
       ctx.HEIGHT = Math.max(0, (height || 0) - ctx.MARGINS.top - ctx.MARGINS.bottom)
       ctx.WIDTH = Math.max(0, this._width - ctx.MARGINS.left - ctx.MARGINS.right)
 
+      const [min, max] = d3.extent(ctx.DATA, mapValue)
+
       // Scales and areas
-      const x = d3.scaleTime().range([0, ctx.WIDTH])
-      const y = d3.scaleLinear().range([ctx.HEIGHT, 0])
-      x.domain(d3.extent(ctx.DATA, d => d.parsedDate))
-      y.domain([0, d3.max(ctx.DATA, d => d.value.toNumber())])
+      const x = d3
+        .scaleTime()
+        .range([0, ctx.WIDTH])
+        .domain(d3.extent(ctx.DATA, d => d.parsedDate))
+      const y = d3
+        .scaleLinear()
+        .range([ctx.HEIGHT, 0])
+        .domain([0.8 * min, max])
       ctx.x = x
       ctx.y = y
 
@@ -160,10 +185,10 @@ class Chart extends PureComponent<Props> {
       if (isInteractive) {
         mouseHandler = handleMouseEvents({
           ctx,
-          props,
           shouldTooltipUpdate: d => d !== lastDisplayedTooltip,
           onTooltipUpdate: d => (lastDisplayedTooltip = d),
           renderTooltip,
+          mapValue: props.mapValue,
         })
       }
     }

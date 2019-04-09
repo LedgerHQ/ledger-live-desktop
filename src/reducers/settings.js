@@ -37,6 +37,7 @@ export type SettingsState = {
   language: ?string,
   region: ?string,
   orderAccounts: string,
+  countervalueFirst: boolean,
   hasPassword: boolean,
   autoLockTimeout: number,
   selectedTimeRange: TimeRange,
@@ -66,6 +67,7 @@ const INITIAL_STATE: SettingsState = {
   language: null,
   region: null,
   orderAccounts: 'balance|asc',
+  countervalueFirst: false,
   hasPassword: false,
   autoLockTimeout: 10,
   selectedTimeRange: 'month',
@@ -158,6 +160,8 @@ export const counterValueCurrencySelector = createSelector(
   storeSelector,
   counterValueCurrencyLocalSelector,
 )
+
+export const countervalueFirstSelector = createSelector(storeSelector, s => s.countervalueFirst)
 
 export const counterValueExchangeLocalSelector = (s: SettingsState) => s.counterValueExchange
 

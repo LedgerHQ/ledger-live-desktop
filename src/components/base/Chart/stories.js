@@ -2,7 +2,6 @@
 
 import React, { Component, Fragment } from 'react'
 import { BigNumber } from 'bignumber.js'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import Chance from 'chance'
 import moment from 'moment'
 import { storiesOf } from '@storybook/react'
@@ -15,12 +14,6 @@ import Box from 'components/base/Box'
 const stories = storiesOf('Components/base', module)
 
 const data = generateRandomData(365)
-const currency = getCryptoCurrencyById('bitcoin')
-
-// $FlowFixMe
-const fakeAccount = {
-  currency,
-}
 
 type State = {
   start: number,
@@ -63,7 +56,6 @@ class Wrapper extends Component<any, State> {
           color={color('color', '#5f8ced')}
           data={data.slice(start, stop)}
           height={number('height', 300)}
-          unit={fakeAccount.unit}
         />
       </Fragment>
     )
