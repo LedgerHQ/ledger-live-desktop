@@ -881,6 +881,11 @@
       "title": "Sorry, fee estimation failed",
       "description": "Try setting a custom fee (status: {{status}})"
     },
+    "FirmwareOrAppUpdateRequired": {
+      "title": "Firmware or app update required",
+      "description":
+        "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+    },
     "HardResetFail": {
       "title": "Oops, could not reset",
       "description": "Please try again or contact us when in doubt"
