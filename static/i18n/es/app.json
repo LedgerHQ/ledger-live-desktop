@@ -420,7 +420,7 @@
       "passwordAutoLockDesc": "Bloquea Ledger Live automáticamente después de un periodo de inactividad.",
       "changePassword": "Cambiar contraseña",
       "softResetTitle": "Borrar caché",
-      "softResetDesc": "Borra la caché de Ledger Live para forzar la resincronización con la cadena de bloques.",
+      "softResetDesc": "Borra la caché de Ledger Live para forzar la resincronización con la blockchain.",
       "softReset": "Borrar",
       "hardResetTitle": "Restablecer Ledger Live",
       "hardResetDesc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes.",
