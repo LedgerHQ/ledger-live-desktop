@@ -19,6 +19,7 @@ const DisclaimerBoxIconContainer = styled(Box).attrs({
 })``
 
 const DisclaimerText = styled(Box).attrs({
+  ff: 'Open Sans|Regular',
   shrink: 1,
   grow: true,
   fontSize: 3,
