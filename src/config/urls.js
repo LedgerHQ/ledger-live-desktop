@@ -21,7 +21,7 @@ export const urls = {
   managerHelpRequest: 'https://support.ledgerwallet.com/hc/en-us/articles/360006523674 ',
   contactSupport: 'https://support.ledgerwallet.com/hc/en-us/requests/new?ticket_form_id=248165',
   feesMoreInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006535873',
-  recipientAddressInfo: 'https://support.ledgerwallet.com/hc/en-us/articles/360006433934',
+  recipientAddressInfo: 'https://support.ledger.com/hc/en-us/articles/360006433934',
   privacyPolicy: 'https://www.ledger.com/pages/privacy-policy',
 
   githubIssues:
