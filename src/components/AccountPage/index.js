@@ -9,24 +9,24 @@ import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
 import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
+import { setCountervalueFirst } from 'actions/settings'
 import {
   counterValueCurrencySelector,
   localeSelector,
   selectedTimeRangeSelector,
-  timeRangeDaysByKey,
+  countervalueFirstSelector,
 } from 'reducers/settings'
 import type { TimeRange } from 'reducers/settings'
 
 import TrackPage from 'analytics/TrackPage'
 import SyncOneAccountOnMount from 'components/SyncOneAccountOnMount'
-import BalanceSummary from 'components/BalanceSummary'
 import Box from 'components/base/Box'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
 
+import BalanceSummary from './BalanceSummary'
 import AccountHeader from './AccountHeader'
 import AccountHeaderActions from './AccountHeaderActions'
-import AccountBalanceSummaryHeader from './AccountBalanceSummaryHeader'
 import EmptyStateAccount from './EmptyStateAccount'
 import { SeparatorBar } from '../DashboardPage'
 
@@ -35,35 +35,32 @@ const mapStateToProps = (state, props) => ({
   counterValue: counterValueCurrencySelector(state),
   settings: localeSelector(state),
   selectedTimeRange: selectedTimeRangeSelector(state),
+  countervalueFirst: countervalueFirstSelector(state),
 })
 
-const mapDispatchToProps = null
+const mapDispatchToProps = {
+  setCountervalueFirst,
+}
 
 type Props = {
   counterValue: Currency,
   t: T,
   account?: Account,
   selectedTimeRange: TimeRange,
+  countervalueFirst: boolean,
+  setCountervalueFirst: boolean => void,
 }
 
 class AccountPage extends PureComponent<Props> {
-  renderBalanceSummaryHeader = ({ isAvailable, totalBalance, sinceBalance, refBalance }) => {
-    const { account } = this.props
-    if (!account) return null
-    return (
-      <AccountBalanceSummaryHeader
-        accountId={account.id}
-        isAvailable={isAvailable}
-        totalBalance={totalBalance}
-        sinceBalance={sinceBalance}
-        refBalance={refBalance}
-      />
-    )
-  }
-
   render() {
-    const { account, t, counterValue, selectedTimeRange } = this.props
-    const daysCount = timeRangeDaysByKey[selectedTimeRange]
+    const {
+      account,
+      t,
+      counterValue,
+      selectedTimeRange,
+      countervalueFirst,
+      setCountervalueFirst,
+    } = this.props
 
     if (!account) {
       return <Redirect to="/" />
@@ -88,13 +85,13 @@ class AccountPage extends PureComponent<Props> {
           <Fragment>
             <Box mb={7}>
               <BalanceSummary
-                accounts={[account]}
+                account={account}
                 chartColor={account.currency.color}
                 chartId={`account-chart-${account.id}`}
                 counterValue={counterValue}
-                daysCount={daysCount}
-                selectedTimeRange={selectedTimeRange}
-                renderHeader={this.renderBalanceSummaryHeader}
+                range={selectedTimeRange}
+                countervalueFirst={countervalueFirst}
+                setCountervalueFirst={setCountervalueFirst}
               />
             </Box>
 

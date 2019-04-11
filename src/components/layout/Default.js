@@ -35,6 +35,7 @@ import SideBar from 'components/MainSideBar'
 import TopBar from 'components/TopBar'
 import SyncBackground from 'components/SyncBackground'
 import DebugUpdater from 'components/Updater/DebugUpdater'
+import ListenDevices from 'components/ListenDevices'
 
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
@@ -89,6 +90,7 @@ class Default extends Component<Props> {
     return (
       <Fragment>
         <TriggerAppReady />
+        <ListenDevices />
         {process.platform === 'darwin' && <AppRegionDrag />}
         <ExportLogsBtn hookToShortcut />
         <Track mandatory onMount event="App Starts" />
@@ -137,6 +139,7 @@ class Default extends Component<Props> {
 }
 
 export default compose(
+  // $FlowFixMe
   withRouter,
   translate(),
 )(Default)

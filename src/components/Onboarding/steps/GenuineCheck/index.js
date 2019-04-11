@@ -166,7 +166,7 @@ class GenuineCheck extends PureComponent<StepProps, State> {
       return this.renderGenuineFail()
     }
 
-    const model = getDeviceModel(onboarding.deviceModelId)
+    const model = getDeviceModel(onboarding.deviceModelId || 'nanoS')
 
     return (
       <FixedTopContainer>

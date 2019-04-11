@@ -23,7 +23,7 @@ export function generateColors(color) {
 export function generateMargins(hideAxis) {
   const margins = {
     top: hideAxis ? 5 : 10,
-    bottom: hideAxis ? 5 : 30,
+    bottom: hideAxis ? 5 : 40,
     right: hideAxis ? 5 : 40,
     left: hideAxis ? 5 : 70,
   }

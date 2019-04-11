@@ -1,5 +1,7 @@
 // @flow
 
+import { rgba } from './helpers'
+
 export const space = [0, 5, 10, 15, 20, 30, 40, 50, 70]
 export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32]
 export const radii = [0, 4]
@@ -81,7 +83,10 @@ export const colors = {
   positiveGreen: '#66be54',
   smoke: '#666666',
   wallet: '#6490f1',
+  pillActiveBackground: rgba('#6490f1', 0.1),
+  lightRed: rgba('#ea2e49', 0.1),
   white: '#ffffff',
+  experimentalBlue: '#165edb',
 
   // market indicator
   marketUp_eastern: '#ea2e49',

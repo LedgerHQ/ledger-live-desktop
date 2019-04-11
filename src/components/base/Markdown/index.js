@@ -129,7 +129,7 @@ export const Notes = styled(Box).attrs({
 `
 
 type Props = {
-  children: React$Node,
+  children: *,
 }
 
 export default class Markdown extends PureComponent<Props> {

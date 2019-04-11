@@ -29,7 +29,7 @@ export default class PartnerCard extends PureComponent<{ t: T, card: CardType }>
     return (
       <Card horizontal py={5} px={6}>
         <Box justify="center" style={{ width: 180, marginRight: 64 }}>
-          <Logo />
+          <Logo width={180} />
         </Box>
         <Box shrink ff="Open Sans|Regular" fontSize={4} flow={3}>
           <Box>{t(`partners.${id}`)}</Box>

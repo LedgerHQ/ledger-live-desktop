@@ -39,9 +39,8 @@ export async function readUpdateInfos(updateFolder: string) {
   return JSON.parse(updateInfoContent)
 }
 
-// compute hash for given path. i guess we only need that here
-export function sha512sumPath(path: string) {
-  //
+// compute hash for given path.
+export function sha512sumPath(path: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const sum = crypto.createHash('sha512')
     const stream = fs.createReadStream(path)

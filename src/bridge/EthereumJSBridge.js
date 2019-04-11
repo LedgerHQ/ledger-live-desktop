@@ -102,7 +102,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       accountId: account.id,
       senders: [tx.from],
       recipients: [tx.to],
-      date: new Date(new Date(tx.received_at) + 1), // hack: make the IN appear after the OUT in history.
+      date: new Date(new Date(tx.received_at).getTime() + 1), // hack: make the IN appear after the OUT in history.
       extra: {},
     }
     ops.push(op)

@@ -1,33 +1,31 @@
 // @flow
 
-import type { AccountRaw, DerivationMode } from '@ledgerhq/live-common/lib/types'
-import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
-import { fromPromise } from 'rxjs/observable/fromPromise'
+import type { AccountRaw, Account } from '@ledgerhq/live-common/lib/types'
+import { syncAccount } from '@ledgerhq/live-common/lib/libcore/syncAccount'
+import { reduce, map } from 'rxjs/operators'
+import { decodeAccount, encodeAccount } from 'reducers/accounts'
 
 import { createCommand, Command } from 'helpers/ipc'
-import { syncAccount } from 'helpers/libcore'
-import withLibcore from 'helpers/withLibcore'
 
 type Input = {
-  accountId: string,
-  currencyId: string,
-  xpub: string,
-  derivationMode: DerivationMode,
-  seedIdentifier: string,
-  index: number,
+  rawAccount: AccountRaw,
 }
 
-type Result = { rawAccount: AccountRaw, requiresCacheFlush: boolean }
+type Result = {
+  rawAccount: AccountRaw,
+  requiresCacheFlush: boolean,
+}
 
-const cmd: Command<Input, Result> = createCommand(
-  'libcoreSyncAccount',
-  ({ currencyId, ...accountInfos }) =>
-    fromPromise(
-      withLibcore(core => {
-        const currency = getCryptoCurrencyById(currencyId)
-        return syncAccount({ ...accountInfos, currency, core })
-      }),
-    ),
-)
+const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', ({ rawAccount }) => {
+  const account = decodeAccount(rawAccount)
+  return syncAccount(account)
+    .pipe(reduce((acc, updater: Account => Account) => updater(acc), account))
+    .pipe(
+      map(account => ({
+        rawAccount: encodeAccount(account),
+        requiresCacheFlush: false, // TODO to determine that, we would have to know if account was recreated!
+      })),
+    )
+})
 
 export default cmd

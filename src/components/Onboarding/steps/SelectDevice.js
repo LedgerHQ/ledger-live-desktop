@@ -4,13 +4,13 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { getDeviceModel } from '@ledgerhq/devices'
+import type { DeviceModelId } from '@ledgerhq/devices'
 
 import { i } from 'helpers/staticPath'
 
 import { rgba } from 'styles/helpers'
 
 import { deviceModelId } from 'reducers/onboarding'
-import type { DeviceModelId } from 'reducers/onboarding'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'

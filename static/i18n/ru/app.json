@@ -1,20 +1,20 @@
 {
   "common": {
-    "labelYes": "Yes",
-    "labelNo": "No",
-    "never": "Never",
-    "apply": "Apply",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
+    "labelYes": "Да",
+    "labelNo": "Нет",
+    "never": "Никогда",
+    "apply": "Применить",
+    "confirm": "Подтвердить",
+    "cancel": "Отменить",
     "getSupport": "Get support",
-    "delete": "Delete",
-    "launch": "Launch",
-    "continue": "Continue",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "skipThisStep": "Skip this step",
+    "delete": "Удалить",
+    "launch": "Запустить",
+    "continue": "Продолжить",
+    "learnMore": "Подробнее",
+    "help": "Помощь",
+    "skipThisStep": "Пропустить шаг",
     "needHelp": "Требуется помощь?",
-    "areYouSure": "Are you sure?",
+    "areYouSure": "Вы уверены?",
     "selectAccount": "Выберите счет",
     "selectAccountNoOption": "Счета, совпадающие с \"{{accountName}}\", отсутствуют.",
     "selectCurrency": "Выберите криптоактив",
@@ -22,10 +22,10 @@
     "selectExchange": "Выберите биржу",
     "selectExchangeNoOption": "Биржа, совпадающая с \"{{exchangeName}}\", отсутствует",
     "selectExchangeNoOptionAtAll": "Биржа не найдена",
-    "sortBy": "Sort by",
-    "search": "Search",
-    "save": "Save",
-    "lock": "Lock",
+    "sortBy": "Сортировать по",
+    "search": "Поиск",
+    "save": "Сохранить",
+    "lock": "Заблокировать экран",
     "showMore": "Показать больше",
     "max": "Макс.",
     "back": "Назад",
@@ -38,23 +38,24 @@
     "reverify": "Проверить повторно",
     "verify": "Проверить",
     "copy": "Копировать",
-    "copyAddress": "Copy",
+    "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "Для продолжения введите свой пароль",
+      "inputPlaceholder": "Введите пароль",
+      "lostPassword": "Я забыл(а) свой пароль"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
+      "syncing": "Синхронизация...",
+      "upToDate": "Синхронизировано",
       "outdated": "Приостановлено",
       "error": "Ошибка синхронизации",
-      "refresh": "Refresh",
-      "ago": "Synchronized {{time}}"
+      "refresh": "Обновить",
+      "ago": "Синхронизировано {{time}}"
     }
   },
   "operation": {
@@ -82,7 +83,7 @@
     "menu": "Меню",
     "accounts": "Счета ({{count}})",
     "manager": "Диспетчер",
-    "exchange": "Buy crypto",
+    "exchange": "Купить крипто",
     "developer": "Инструменты разработчика"
   },
   "account": {
@@ -112,8 +113,8 @@
     }
   },
   "banners": {
-    "promoteMobile": "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore"
+    "promoteMobile": "Наслаждайтесь использованием Ledger Live теперь и на мобильных устройствах с {{productName}}",
+    "genericTerminatedCrypto": "{{coinName}} больше не поддерживается"
   },
   "dashboard": {
     "title": "Портфель",
@@ -125,39 +126,39 @@
       "title": "Счета ({{count}})"
     },
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "Доброе утро",
+      "evening": "Добрый вечер",
+      "afternoon": "Добрый день"
     },
     "summary": "Ознакомьтесь со сводной информацией о счете.",
     "summary_plural": "Ознакомьтесь со сводной информацией о таком количестве счетов: {{count}}.",
     "recentActivity": "Последние операции",
-    "totalBalance": "Total balance",
+    "totalBalance": "Общий баланс",
     "accountsOrder": {
       "name": "имя",
-      "balance": "balance"
+      "balance": "баланс"
     }
   },
   "currentAddress": {
     "title": "Текущий адрес",
     "for": "Адрес для счета <1><0>{{accountName}}</0></1>",
-    "messageIfUnverified": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
-    "messageIfAccepted": "Address confirmed, please re-verify it if you copy/paste or scan the QR code.",
-    "messageIfSkipped": "Your {{currencyName}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+    "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
+    "messageIfAccepted": "Адрес подтвержден. Если он был вставлен из буфера обмена или введен в результате сканирования QR-кода, проверьте его еще раз.",
+    "messageIfSkipped": "На используемом устройстве Ledger адрес {{currencyName}} не был подтвержден. Для обеспечения оптимального уровня безопасности проверьте его."
   },
   "deviceConnect": {
-    "dashboard": "Navigate to the <1>Dashboard</1> on your device",
-    "step1": "Connect and unlock your <1>Ledger device</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
-    "step3": "Allow <1>Ledger Manager</1> on your device"
+    "dashboard": "Перейдите на <1>панель мониторинга</1> на устройстве.",
+    "step1": "Подключите и разблокируйте <1>устройство Ledger</1>.",
+    "step2": "Откройте на устройстве приложение <1><0>{{managerAppName}}</0></1>.",
+    "step3": "Разрешите приложению <1>Ledger Manager</1> доступ к своему устройству."
   },
   "emptyState": {
     "sidebar": {
-      "text": "Click this button to add accounts to the Portfolio"
+      "text": "Чтобы добавить счета в портфель, нажмите эту кнопку."
     },
     "dashboard": {
-      "title": "Install apps or add accounts",
-      "desc": "Open the Manager to install apps or add accounts if your Ledger device already has apps installed",
+      "title": "Установка приложений или добавление счетов",
+      "desc": "Чтобы установить приложения или добавить счета, если приложения уже установлены на устройстве Ledger, откройте диспетчер.",
       "buttons": {
         "addAccount": "Добавить счета",
         "installApp": "Открыть диспетчер"
@@ -165,25 +166,25 @@
     }
   },
   "partners": {
-    "title": "Buy crypto",
-    "desc": "Try a few services we've selected",
-    "visitWebsite": "Visit website",
-    "btcdirect": "Buy and sell with the greatest of ease at Europe's leading cryptocurrency broker. Sign up for free and receive your coins within minutes! Our users rate us with an 8,7 on Trustpilot",
-    "changelly": "Changelly is a popular instant crypto asset exchange with 100+ coins and tokens listed.",
-    "changenow": "ChangeNOW is one of the leading custody-free instant exchange services",
-    "coinberry": "Coinberry is the most trusted crypto platform in Canada with better-than-bank security, best-in-class user interface and No Fee funding & withdraw. Pre-register to get early access to our platform if you are not a Canadian citizen.",
-    "coinhouse": "Coinhouse is a trusted platform for individuals and institutional investors looking to analyze, acquire, sell and securely store crypto assets.",
-    "coinmama": "Coinmama is a financial service that makes it fast, safe and fun to buy digital assets, anywhere in the world.",
-    "genesis": "Genesis is an institutional trading firm offering liquidity and borrow for digital currencies, including bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin, and XRP.",
-    "kyberswap": "Fast, simple and secure token swap platform. Powered by Kyber Network's on-chain liquidity protocol.",
-    "luno": "Luno makes it safe and easy to buy, store and learn about cryptocurrencies like Bitcoin and Ethereum",
-    "paybis": "it is safe and easy to Buy Bitcoin with credit card from PayBis. Service operates in US, Canada, Germany, Russia and Saudi Arabia.",
-    "shapeshift": "ShapeShift is an online marketplace where users can buy and sell digital assets. It is a fast and secure way for the world to buy and sell digital assets, with no lengthy signup process, no counterparty risk, and no friction.",
-    "simplex": "Simplex is a EU licensed financial institution, providing a fraudless credit card payment solution.",
-    "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
-    "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
-    "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
-    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity."
+    "title": "Купить крипто",
+    "desc": "Попробуйте некоторые специально подобранных служб",
+    "visitWebsite": "Посетить веб-сайт",
+    "btcdirect": "Совершайте операции покупки и продажи без особых усилий вместе с ведущей в Европе брокерской компанией криптовалют. Регистрируйтесь бесплатно и получайте криптоактивы в считанные минуты! На ресурсе Trustpilot пользователи оценили нас в 8,7 балла",
+    "changelly": "Changelly - это широко используемая биржа криптоактивов, на которой представлены свыше 100 монет и токенов.",
+    "changenow": "ChangeNOW — одна из ведущих служб мгновенного обмена валют.",
+    "coinberry": "Coinberry - это наиболее надежная криптоплатформа в Канаде с уровнем безопасности, превосходящим банковскую защиту, с лучшим в своем классе пользовательским интерфейсом, финансированием и выводом средств без комиссии. Регистрируйтесь заранее, чтобы получить ранний доступ к платформе, если вы не являетесь гражданином Канады.",
+    "coinhouse": "Coinhouse - это надежная платформа для частных лиц и институциональных инвесторов, которая предназначена для анализа, приобретения, продажи и безопасного хранения криптоактивов.",
+    "coinmama": "Coinmama представляет собой финансовую службу для быстрой, безопасной и оживленной покупки цифровых активов из любой точки мира.",
+    "genesis": "Genesis — это институциональная торговая фирма, предлагающая ликвидность и займы для цифровых валют, включая биткоин, биткоин кэш (Bitcoin Cash), Ethereum, Ethereum Classic, Litecoin и XRP.",
+    "kyberswap": "Быстрая, простая и надежная платформа миграции токенов. Она работает на протоколе Kyber Network ликвидности сети.",
+    "luno": "Компания Luno обеспечивает возможность безопасной и простой покупки, хранения и изучения криптовалют, таких как биткоин и Ethereum.",
+    "paybis": "С помощью кредитной карты покупка биткоинов от PayBis осуществляется просто и быстро. Служба работает на территории США, Канады, Германии, России и Саудовской Аравии.",
+    "shapeshift": "ShapeShift — это интернет-биржа, пользователи которой получают возможность покупать и продавать цифровые активы. Это быстрый и надежный способ покупки и продажи цифровых активов по всему миру без длительной регистрации, риска встречной стороны и помех.",
+    "simplex": "Simplex представляет собой финансовое учреждение, имеющее лицензию ЕС, которое предоставляет решение для проведения оплаты кредитными картами с защитой от мошенников.",
+    "taxtoken": "Автоматизированная программа учета налогов и затрат на операции с криптовалютой для граждан США.",
+    "thorswap": "ThorSwap представляет собой мгновенную, безопасную и честную биржу криптоактивов, работающую на основе децентрализованных технологий атомных свопов. Это наиболее удобный способ начать торговлю, не требующий регистрации или соблюдения правила KYC (Know Your Customer — знай своего клиента) для проведения транзакций на небольшую сумму.",
+    "bitpanda": "Bitpanda — это ведущая в Европе розничная брокерская компания, специализирующаяся на покупке и продаже такой криптовалюты, как Bitcoin, Ethereum, IOTA и много других. Вносите деньги, используя кредитную карточку, систему SOFORT-Transfer, NETELLER и другие варианты.",
+    "exmo": "Основанная в 2013 году биржа EXMO, отделения которой расположены в Лондоне, Киеве, Барселоне и Москве, занимает первое место среди бирж в Восточной Европе и является одной из крупнейших в мире по объему и ликвидности."
   },
   "genuinecheck": {
     "modal": {
@@ -194,12 +195,12 @@
     "title": "Добавить счета",
     "breadcrumb": {
       "informations": "Криптоактив",
-      "connectDevice": "Device",
+      "connectDevice": "Устройство",
       "import": "Счета",
       "finish": "Подтверждение"
     },
     "connectDevice": {
-      "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
+      "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
     "accountAlreadyImportedSubtitle": "Счета, находящиеся в портфеле: ({{count}})",
     "accountToImportSubtitle": "Добавить существующий счет",
@@ -211,17 +212,17 @@
     "legacyUnsplitAccount": "{{accountName}} (legacy) (unsplit)",
     "unsplitAccount": "{{accountName}} (unsplit)",
     "noAccountToImport": "Счетов в {{currencyName}} для добавления нет.",
-    "success": "Account successfully added",
-    "success_plural": "Accounts successfully added",
-    "successDescription": "Add more accounts or return to Portfolio",
-    "successDescription_plural": "Add more accounts or return to Portfolio",
+    "success": "Счет успешно добавлен",
+    "success_plural": "Счета успешно добавлены",
+    "successDescription": "Добавить больше счетов или вернуться в портфель",
+    "successDescription_plural": "Добавить больше счетов или вернуться в портфель",
     "createNewAccount": {
-      "title": "Add new account",
-      "noOperationOnLastAccount": "Can't add a new account before you've received on your <1><0>{{accountName}}</0></1> account",
+      "title": "Добавить новый счет",
+      "noOperationOnLastAccount": "Невозможно добавить новый счет до получения на счет <1><0>{{accountName}}</0></1> активов.",
       "noAccountToCreate": "Счета в <1><0>{{currencyName}}</0></1> для создания не найдены"
     },
     "cta": {
-      "addMore": "Add more",
+      "addMore": "Добавить еще",
       "add": "Добавить счет",
       "add_plural": "Добавить счета"
     }
@@ -230,9 +231,9 @@
     "title": "Сведения об операции",
     "account": "Счет",
     "date": "Дата",
-    "status": "Status",
-    "confirmed": "Confirmed",
-    "notConfirmed": "Not confirmed",
+    "status": "Статус",
+    "confirmed": "Подтверждено",
+    "notConfirmed": "Не подтверждено",
     "fees": "Комиссия",
     "noFees": "Без комиссии",
     "from": "От",
@@ -252,38 +253,38 @@
       "all": "Каталог приложений",
       "installing": "Установка {{app}}...",
       "uninstalling": "Удаление {{app}}...",
-      "installSuccess": "Successfully installed {{app}}",
-      "uninstallSuccess": "{{app}} uninstalled",
+      "installSuccess": "{{app}} успешно установлено",
+      "uninstallSuccess": "{{app}} удалено",
       "help": "Проверьте, какие приложения уже установлены на устройстве."
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
       "update": "Обновить",
       "latest": "Доступно встроенное ПО версии {{version}}.",
-      "disclaimerTitle": "You are about to install <1><0>firmware version {{version}}</0></1>.",
-      "disclaimerAppDelete": "Please uninstall all applications to make room for the update. ",
-      "disclaimerAppReinstall": "Uninstalling apps does not affect your crypto assets.",
+      "disclaimerTitle": "Вы собираетесь установить <1><0>встроенное ПО версии {{version}}</0></1>.",
+      "disclaimerAppDelete": "Uninstall all apps from your device. This does not affect your crypto assets.",
+      "disclaimerAppReinstall": "Ensure your Recovery sheet is accessible, as a precaution.",
       "downloadingUpdateDesc": "Please wait while the update installer is being downloaded"
     },
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Flashing your device..."
+        "updateMCU": "Обновление встроенного ПО",
+        "osu": "Установка обновления ОС...",
+        "flash-mcu": "Обновление микроконтроллера...",
+        "flash-bootloader": "Обновление загрузчика...",
+        "firmware": "Обновление встроенного ПО...",
+        "flash": "Выполняется перепрошивка устройства..."
       },
       "confirmIdentifier": "Проверить идентификатор",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Press the right button and enter your PIN code to confirm.",
+      "confirmIdentifierText": "Убедитесь в том, что идентификатор на устройстве совпадает с приведенным ниже идентификатором. Для подтверждения нажмите правую кнопку и введите PIN-код.",
       "identifier": "Идентификатор",
       "mcuTitle": "Finalize update",
       "mcuFirst": "Отсоедините USB-кабель от устройства.",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
-      "mcuPin": "Please be patient while the update is finalized",
+      "mcuPin": "Дождитесь завершения обновления.",
       "successTitle": "Встроенное ПО обновлено",
-      "successText": "Please re-install the apps on your device"
+      "successText": "Повторно установите приложения на устройстве."
     },
     "title": "Диспетчер",
     "subtitle": "Установка или удаление приложений на устройстве",
@@ -307,7 +308,7 @@
       "confirmAddress": {
         "title": "Проверка",
         "action": "Проверить адрес на устройстве",
-        "text": "Please verify that the {{currencyName}} address shown on your device matches the one on your computer",
+        "text": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device",
         "support": "Обратная связь"
       },
       "receiveFunds": {
@@ -321,7 +322,7 @@
     "steps": {
       "amount": {
         "title": "Сведения",
-        "selectAccountDebit": "Account to debit",
+        "selectAccountDebit": "Счет для списания",
         "recipientAddress": "Адрес получателя",
         "amount": "Сумма",
         "fees": "Комиссия за пользование сетью",
@@ -330,26 +331,31 @@
         "message": "Оставьте сообщение (140)",
         "rippleTag": "Тег",
         "ethereumGasLimit": "Лимит газа",
-        "unitPerByte": "{{unit}} на байт"
+        "unitPerByte": "{{unit}} на байт",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "Устройство"
       },
       "verification": {
         "title": "Проверка",
-        "warning": "Please verify all transaction details on your device",
-        "body": "Confirm the transaction on your device to send it"
+        "warning": "Проверьте все детали транзакции на устройстве.",
+        "body": "Для отправки транзакции подтвердите ее на устройстве."
       },
       "confirmation": {
         "title": "Подтверждение",
         "success": {
           "title": "Транзакция отправлена",
-          "text": "Your account balance will update once the blockchain has confirmed the transaction",
-          "cta": "View details"
+          "text": "Информация о состоянии счета будет обновлена сразу же после подтверждения транзакции на блокчейне.",
+          "cta": "Просмотреть сведения"
         },
         "pending": {
           "title": "Трансляция транзакции..."
-        }
+        },
+        "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
       }
     }
   },
@@ -361,49 +367,57 @@
     "title": "Настройки",
     "tabs": {
       "display": "Общие",
-      "export": "Export accounts",
+      "export": "Accounts",
       "currencies": "Валюта",
       "help": "Справка",
-      "about": "О программе"
+      "about": "О программе",
+      "experimental": "Experimental features"
     },
     "export": {
-      "title": "Export accounts",
-      "desc": "Export accounts to the Ledger Live mobile app.",
-      "button": "Export",
+      "accounts": {
+        "title": "Export accounts",
+        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "button": "Export"
+      },
+      "operations": {
+        "title": "Operation history",
+        "desc": "Save a CSV file of your account operations on your computer.",
+        "button": "Save"
+      },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "button": "Готово",
+        "title": "Сканировать для экспорта в мобильное приложение",
+        "listTitle": "В мобильном приложении Ledger Live:",
+        "step1": "Нажмите кнопку <1><0>+</0></1> в меню <3><0>Счета</0></3>",
+        "step2": "Нажмите <1><0>Импорт счетов рабочего стола</0></1>",
+        "step3": "Сканируйте <1><0>код LiveQR</0></1> до тех пор, пока загрузчик не достигнет 100 %."
       }
     },
     "display": {
-      "desc": "Configure general Ledger Live settings.",
+      "desc": "Настройте общие параметры Ledger Live.",
       "language": "Язык интерфейса",
       "languageDesc": "Настройте язык интерфейса Ledger Live.",
       "counterValue": "Эквивалент",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "counterValueDesc": "Выберите валюту для отображения состояния счета и операций.",
       "exchange": "Обменник",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
+      "exchangeDesc": "Предоставляет обменный курс биткоинов на {{fiat}}, используемый для оценки ценности криптоактивов (crypto asset → BTC → {{fiat}}).",
       "region": "Регион",
-      "regionDesc": "Choose your region, used to set Ledger Live's time zone.",
+      "regionDesc": "Выберите регион для задания часового пояса Ledger Live.",
       "stock": "Индикатор регионального рынка",
-      "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
+      "stockDesc": "Выберите «Западный», чтобы увеличение рыночной стоимости отображалось синим цветом, или «Восточный», чтобы увеличение рыночной стоимости отображалось красным цветом."
     },
     "currencies": {
       "desc": "Для изменения настроек криптоактива его необходимо выделить.",
       "exchange": "Обменник ({{ticker}} → BTC)",
-      "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Выберите обменник для обмена из {{currencyName}} в биткоины, используемый для оценки ценности криптоактивов ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Количество подтверждений",
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
     },
     "profile": {
       "password": "Блокировка паролем",
-      "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live after inactivity.",
+      "passwordDesc": "Задайте пароль для защиты от несанкционированного доступа к данным Ledger Live, хранящимся на компьютере, в том числе к названиям счетов, информации об остатке, транзакциях и общественным адресам.",
+      "passwordAutoLock": "Автоматическая блокировка экрана",
+      "passwordAutoLockDesc": "Автоматически блокирует экран Ledger Live после периода бездействия.",
       "changePassword": "Изменить пароль",
       "softResetTitle": "Очистить кэш",
       "softResetDesc": "Для принудительной синхронизации с блокчейном очистите кэш Ledger Live.",
@@ -412,35 +426,39 @@
       "hardResetDesc": "Удалите все данные Ledger Live, хранящиеся на компьютере, в том числе информацию о счетах, журнал транзакций и настройки.",
       "hardReset": "Сбросить",
       "developerMode": "Режим разработчика",
-      "developerModeDesc": "Show developer and testnet apps in the Manager.",
+      "developerModeDesc": "Отображает в диспетчере приложения разработчика и приложение Testnet.",
       "analytics": "Аналитика",
-      "analyticsDesc": "Enable analytics to help Ledger understand how to improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc.), end of page scrolls, (un)installing and version of apps, app version, number of accounts, crypto assets and operations, session durations, Ledger device type and firmware.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger fix bugs.",
-      "launchOnboarding": "Device setup",
-      "launchOnboardingDesc": "Set up as new or restore a Ledger device. Accounts and settings are kept."
+      "analyticsDesc": "Включите аналитику, чтобы помочь компании Ledger улучшить работу пользовательского интерфейса. Сюда относятся щелчки, посещения страниц, перенаправления, действия (отправка, получение, блокировка экрана и т. п.), прокручивания до конца страницы, установка/удаление и версии приложений, версия приложения, количество счетов, криптоактивы и операции, продолжительность сеансов, тип устройства и встроенное ПО Ledger.",
+      "reportErrors": "Отчеты об ошибках",
+      "reportErrorsDesc": "Автоматически отправляйте отчеты компании Ledger для исправления ошибок.",
+      "launchOnboarding": "Настройка устройства",
+      "launchOnboardingDesc": "Настройте устройство Ledger как новое или восстановите его. Счета и настройки будут сохранены."
     },
     "about": {
-      "desc": "App information, Terms and Conditions, and Privacy Policy."
+      "desc": "Сведения о приложении, условия и положения, политика конфиденциальности."
     },
     "help": {
-      "desc": "Learn more about Ledger Live or get help.",
+      "desc": "Узнайте больше о Ledger Live или воспользуйтесь справкой.",
       "version": "Версия",
       "releaseNotesBtn": "Сведения",
       "faq": "Служба поддержки компании Ledger",
-      "faqDesc": "A problem? Get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
+      "faqDesc": "При возникновении проблемы воспользуйтесь справкой по использованию Ledger Live с аппаратным кошельком.",
+      "terms": "Условия использования",
+      "termsDesc": "Используя приложение Ledger Live, вы принимаете наши условия использования.",
+      "privacy": "Политика конфиденциальности",
+      "privacyDesc": "О том, какие персональные данные мы собираем, каким образом и для чего, можно узнать в нашей политике конфиденциальности."
+    },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what you think",
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
       "title": "Сбросить Ledger Live",
-      "desc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction history and settings? The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Удалили все данные Ledger Live, хранящиеся на компьютере, в том числе информацию о счетах, журнал транзакций и настройки? Закрытые ключи для доступа к криптоактивам остаются в полной сохранности на устройстве Ledger и на карточке восстановления."
     },
     "softResetModal": {
       "title": "Очистить кэш",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys providing access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Очистка кэша приводит к принудительной повторной синхронизации. Настройки и счета остаются без изменений. Закрытые ключи для доступа к криптоактивам остаются в полной сохранности на устройстве Ledger и на карточке восстановления."
     },
     "resetFallbackModal": {
       "title": "Требуется действие пользователя.",
@@ -452,7 +470,7 @@
     },
     "removeAccountModal": {
       "title": "Удалить счет",
-      "desc": "This will not affect your crypto assets. Accounts can always be re-added."
+      "desc": "Криптоактивы остаются в полной сохранности. Счета можно повторно добавить в любой момент."
     },
     "openUserDataDirectory": {
       "title": "Просмотреть пользовательские данные",
@@ -460,18 +478,18 @@
       "btn": "Просмотреть"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
-      "descSettings": "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
-      "desc": "Please select the state of your Ledger device.",
-      "button": "Repair",
-      "generic": "Bootloader",
-      "mcuNotGenuine": "MCU not genuine",
-      "followDeviceRepair": "Follow device repair instructions"
+      "title": "Ремонт устройства Ledger",
+      "descSettings": "Используйте этот инструмент для восстановления устройства Ledger, если во время обновления встроенного ПО возникла неисправность.",
+      "desc": "Выберите состояние устройства Ledger.",
+      "button": "Ремонт",
+      "generic": "Загрузчик",
+      "mcuNotGenuine": "Микроконтроллер не подлинный",
+      "followDeviceRepair": "Следуйте инструкциям по ремонту устройства."
     },
     "exportLogs": {
-      "title": "Экспортировать журналы",
-      "desc": "Экспорт журналов Ledger Live может понадобиться в целях устранения неисправностей.",
-      "btn": "Экспортировать"
+      "title": "Save logs",
+      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
+      "btn": "Save"
     }
   },
   "password": {
@@ -491,23 +509,23 @@
       "subTitle": "Изменить свой пароль"
     },
     "setPassword": {
-      "title": "Password lock",
+      "title": "Блокировка экрана паролем",
       "subTitle": "Задать пароль",
       "desc": "Убедитесь в том, что запомнили свой пароль. В случае утраты пароля необходимо сбросить Ledger Live и повторно добавить счета."
     },
     "disablePassword": {
       "title": "Отключить блокировку паролем",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "Данные Ledger Live будут храниться на компьютере в незашифрованном виде. К таким данным относятся названия счетов, информация о транзакциях и общественные адреса."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again"
+    "downloadInProgress": "Выполняется скачивание обновлений...",
+    "downloadProgress": "Выполнено: {{progress}} %",
+    "checking": "Проверка обновлений...",
+    "checkSuccess": "Обновления готовы к установке",
+    "quitAndInstall": "Установить сейчас",
+    "error": "Во время обновления возникла ошибка. Скачайте еще раз.",
+    "reDownload": "Скачать еще раз"
   },
   "crash": {
     "oops": "Произошла ошибка",
@@ -522,15 +540,26 @@
     "desc_2": "Будьте осторожны и помните, что компания Ledger не оказывает финансовые, налоговые или юридические консультации. Подобные решения необходимо принимать по своему усмотрению или предварительно проконсультироваться с заслуживающими доверия специалистами.",
     "cta": "Понятно"
   },
+  "exportOperationsModal": {
+    "title": "Operation history",
+    "desc": "Select the accounts for which to save the operation history",
+    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "titleSuccess": "Operation history successfully saved",
+    "cta": "Save",
+    "ctaSuccess": "Done",
+    "noAccounts": "No accounts to export",
+    "selectedAccounts": "Accounts to include",
+    "selectedAccounts_plural": "Accounts to include ({{count}})"
+  },
   "language": {
     "system": "Использовать язык системы",
     "en": "Английский",
     "fr": "Французский",
-    "es": "Spanish",
-    "ko": "Korean",
-    "zh": "Simplified Chinese",
-    "ja": "Japanese",
-    "ru": "Russian"
+    "es": "Испанский",
+    "ko": "Корейский",
+    "zh": "Китайский упрощенный",
+    "ja": "Японский",
+    "ru": "Русский"
   },
   "onboarding": {
     "breadcrumb": {
@@ -547,17 +576,17 @@
     "init": {
       "title": "Начало работы с устройством Ledger",
       "newDevice": {
-        "title": "Initialize as new device"
+        "title": "Инициализировать как новое устройство"
       },
       "restoreDevice": {
-        "title": "Restore device from recovery phrase"
+        "title": "Восстановить устройство по фразе восстановления"
       },
       "initializedDevice": {
-        "title": "Use an initialized device"
+        "title": "Использовать инициализированное устройство"
       }
     },
     "noDevice": {
-      "title": "Don't have a Ledger device?",
+      "title": "Нет устройства Ledger?",
       "buyNew": {
         "title": "Купить устройство Ledger"
       },
@@ -573,29 +602,29 @@
     },
     "selectPIN": {
       "disclaimer": {
-        "note1": "Always choose your own PIN code.",
-        "note2": "Use 8 digits for optimal security.",
-        "note3": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note1": "Всегда выбирайте собственный PIN-код.",
+        "note2": "Для создания оптимального уровня защиты используйте 8-значный код.",
+        "note3": "Ни в коем случае не используйте устройство с уже заданным PIN-кодом или фразой восстановления."
       },
       "initialize": {
         "title": "Выберите свой PIN-код",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
+            "step2": "Нажмите правую кнопку, чтобы выбрать <1><0>Настроить как новое устройство?</0></1>.",
+            "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
+            "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press both buttons to choose Set up as new device.",
-            "step3": "Press the left or right button to select a digit.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Подключите {{productName}} к компьютеру.",
+            "step2": "Нажмите обе кнопки, чтобы выбрать «Настроить как новое устройство».",
+            "step3": "Для выбора цифры нажимайте левую или правую кнопку.",
+            "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Configure as new device</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step1": "Подключите {{productName}} к компьютеру.",
+            "step2": "Нажмите <1><0>Настроить как новое устройство</0></1>.",
+            "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
       },
@@ -603,22 +632,22 @@
         "title": "Выберите свой PIN-код",
         "instructions": {
           "nano": {
-            "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
-            "step3": "Press the left or right button to select a digit. Press both buttons to validate.",
-            "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
+            "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
+            "step2": "Чтобы отменить выбор <1><0>Инициализировать как новое устройство?</0></1>, нажмите левую кнопку. Затем выберите <3><0>Восстановить настройки?</0></3>, нажав правую кнопку.",
+            "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
+            "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
-            "step1": "Connect your {{productName}} to your computer.",
-            "step2": "Press both buttons as instructed on your {{productName}} screen.",
-            "step3": "Press the left button to cancel Configure as new device.",
-            "step4": "Press the right button to select Restore configuration.",
-            "step5": "Choose a PIN code between 4 and 8 digits long."
+            "step1": "Подключите {{productName}} к компьютеру.",
+            "step2": "Нажмите одновременно обе кнопки, как указано на экране {{productName}}.",
+            "step3": "Чтобы отменить выбор «Настроить как новое устройство», нажмите левую кнопку.",
+            "step4": "Чтобы выбрать «Восстановить настройки», нажмите правую кнопку.",
+            "step5": "Выберите PIN-код длиной от 4 до 8 символов."
           },
           "blue": {
-            "step1": "Connect the {{productName}} to your computer.",
+            "step1": "Подключите {{productName}} к компьютеру.",
             "step2": "Нажмите <1><0>Восстановить настройки</0></1>.",
-            "step3": "Choose a PIN code of 4 to 8 digits."
+            "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
       }
@@ -628,28 +657,28 @@
         "title": "Сохраните свою фразу восстановления",
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
-          "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
-          "step2": "Press the right button to continue and write down all 24 words.",
-          "step3": "Confirm your recovery phrase: select and validate each word by pressing both buttons."
+          "step1": "Запишите <1><0>Слово #1</0></1> в позицию 1 на пустой карточке восстановления.",
+          "step2": "Нажмите правую кнопку, чтобы продолжить, и таким же образом запишите все 24 слова.",
+          "step3": "Подтвердите фразу восстановления, для чего выделите каждое требуемое слово и нажмите обе кнопки для ее подтверждения."
         },
         "blue": {
-          "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
-          "step2": "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
-          "step3": "Enter each word to confirm your recovery phrase."
+          "step1": "Запишите каждое слово в карточку восстановления, соблюдая порядок слов.",
+          "step2": "Нажмите <1><0>Далее</0></1> и вводите все слова до тех пор, пока не появится экран <3><0>Подтверждение</0></3>.",
+          "step3": "Чтобы подтвердить фразу восстановления, введите каждое слово."
         }
       },
       "restore": {
         "title": "Введите фразу восстановления.",
-        "desc": "Enter the recovery phrase saved on your Recovery sheet",
+        "desc": "Введите фразу восстановления, сохраненную в карточке восстановления.",
         "nano": {
-          "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+          "step1": "Выберите длину фразы восстановления.",
+          "step2": "Вводите первые буквы <1><0>Слова #1</0></1> до тех пор, пока не появятся предлагаемые слова.",
+          "step3": "Из списка предлагаемых слов выберите <1><0>Слово #1</0></1>, нажав обе кнопки.",
           "step4": "Повторяйте всю процедуру до тех пор, пока не будет выбрано последнее слово."
         },
         "blue": {
           "step1": "Выберите длину фразы восстановления.",
-          "step2": "Type the first word of your recovery phrase. Tap the word when it appears.",
+          "step2": "Введите первое слово фразы восстановления. Выберите его, как только оно появится.",
           "step3": "Повторяйте всю процедуру до тех пор, пока не будет выбрано последнее слово."
         }
       },
@@ -657,13 +686,13 @@
         "note1": "Надежно спрячьте фразу восстановления из 24 слов от посторонних.",
         "note2": "Убедитесь в том, что фраза восстановления известна только вам.",
         "note3": "Компания Ledger не хранит резервные копии фразы восстановления.",
-        "note4": "Never use a device supplied with a PIN code or a recovery phrase."
+        "note4": "Ни в коем случае не используйте устройство с уже заданным PIN-кодом или фразой восстановления."
       }
     },
     "genuineCheck": {
       "title": "Контрольный список требований по безопасности",
       "descGeneric": "Прежде чем продолжить, заполните контрольный список требований по безопасности.",
-      "descRestore": "Before getting started, please confirm:",
+      "descRestore": "Прежде чем начать, подтвердите:",
       "step1": {
         "title": "Вы лично выбирали PIN-код?"
       },
@@ -681,19 +710,19 @@
       "errorPage": {
         "title": {
           "pinFailed": "Вы не выбирали свой PIN-код?",
-          "recoveryPhraseFailed": "Didn't save your recovery phrase by yourself?",
+          "recoveryPhraseFailed": "Фраза восстановления была сохранена не вами?",
           "isGenuineFail": "Похоже, Ваше устройство не подлинное."
         },
         "desc": {
-          "pinFailed": "Never use a device supplied with a PIN code. Please contact us when in doubt.",
-          "recoveryPhraseFailed": "Only save a recovery phrase that was displayed on your device and to you alone. Please contact us when in doubt.",
+          "pinFailed": "Ни в коем случае не используйте устройство с уже заданным PIN-кодом. В случае возникновения сомнений свяжитесь с нами.",
+          "recoveryPhraseFailed": "Сохранить нужно только ту фразу восстановления, которая была отображена на устройстве. В случае возникновения каких-либо сомнений свяжитесь с нами.",
           "isGenuineFail": "Ваше устройство не прошло проверку подлинности перед подключением к защищенному серверу Ledger. Обратитесь за помощью в службу поддержки компании Ledger."
         }
       }
     },
     "setPassword": {
       "title": "Блокировка паролем (необязательно)",
-      "desc": "Set a password to prevent unauthorized access to Ledger Live data on your computer, including account names, transactions and public addresses",
+      "desc": "Задайте пароль для защиты от несанкционированного доступа к данным Ledger Live, хранящимся на компьютере, в том числе к названиям счетов, информации о транзакциях и общественным адресам.",
       "disclaimer": {
         "note1": "Удостоверьтесь в том, что вы запомнили пароль. Никому его не сообщайте.",
         "note2": "В случае утраты пароля необходимо сбросить Ledger Live и повторно добавить счета.",
@@ -701,46 +730,46 @@
       }
     },
     "analytics": {
-      "title": "Bugs and analytics",
-      "desc": "Share anonymized data to help improve Ledger security products and services",
+      "title": "Ошибки и аналитика",
+      "desc": "Предоставьте анонимные данные, чтобы мы могли усовершенствовать продукты и услуги Ledger.",
       "shareAnalytics": {
-        "title": "Analytics",
-        "desc": "Enable analytics to help Ledger understand how to improve user experience.",
+        "title": "Аналитика",
+        "desc": "Включите аналитику, чтобы помочь компании Ledger улучшить работу пользовательского интерфейса.",
         "mandatoryContextual": {
-          "item1": "Clicks",
-          "item2": "In-app page visits",
-          "item3": "Redirection to webpage",
-          "item4": "Actions: send, receive, lock, etc.",
-          "item5": "End of page scroll",
-          "item6": "App (un)installation and version",
-          "item7": "Number of accounts, crypto assets and operations",
+          "item1": "Щелчки",
+          "item2": "Посещение страниц в приложении",
+          "item3": "Перенаправление на веб-страницу",
+          "item4": "Действия: отправка, получение, блокировка экрана и т. п.",
+          "item5": "Прокручивание до конца страницы",
+          "item6": "Установка/удаление приложения и его версия",
+          "item7": "Количество счетов, криптоактивов и операций",
           "item8": "Общая продолжительность сеанса и продолжительность сеанса на странице",
-          "item9": "Ledger device type and firmware"
+          "item9": "Тип устройства Ledger и встроенное ПО"
         }
       },
       "sentryLogs": {
-        "title": "Bug reports",
+        "title": "Отчеты от ошибках",
         "desc": "Автоматически отправляйте отчеты компании Ledger для исправления ошибок."
       },
       "technicalData": {
-        "title": "Technical data*",
-        "desc": "Ledger will automatically collect fully anonymized technical data to help improve user experience.",
+        "title": "Технические данные*",
+        "desc": "Компания Ledger автоматически собирает полностью анонимные технические данные, чтобы улучшить работу пользовательского интерфейса.",
         "mandatoryText": "* Обязательно.",
         "mandatoryContextual": {
           "title": "Технические данные",
           "item1": "Анонимный уникальный идентификатор приложения",
-          "item2": "Ledger Live version, language and region",
-          "item3": "OS version, language and region"
+          "item2": "Версия Ledger Live, язык интерфейса и регион",
+          "item3": "Версия ОС, язык интерфейса и регион"
         }
       },
       "terms": {
-        "title": "Terms *",
-        "desc": "By continuing, you acknowledge that you have read and agree to the <1>Terms of Use</1> and <3>Privacy Policy</3>."
+        "title": "Условия*",
+        "desc": "Продолжая работу, вы подтверждаете, что прочли <1>Условия использования</1> и <3>Политику конфиденциальности</3> и соглашаетесь с их положениями."
       }
     },
     "finish": {
       "title": "Ваше устройство готово!",
-      "desc": "Install some apps on your device and access the Portfolio",
+      "desc": "Установите на устройство приложения и получите доступ к портфелю",
       "openAppButton": "Открыть Ledger Live"
     }
   },
@@ -759,7 +788,7 @@
     },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
-      "description": "Request Ledger Support assistance"
+      "description": "Обратитесь за помощью в службу поддержки компании Ledger"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "Повторите попытку (genuine-close)",
@@ -767,19 +796,19 @@
     },
     "DeviceSocketFail": {
       "title": "{{message}}",
-      "description": "Please try again"
+      "description": "Повторите попытку."
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Произошел сбой подключения.",
+      "description": "Повторите попытку."
     },
     "DeviceSocketNoHandler": {
-      "title": "Oops, connection failed",
-      "description": "Please try again"
+      "title": "Произошел сбой подключения.",
+      "description": "Повторите попытку."
     },
     "DisconnectedDevice": {
-      "title": "Oops, device connection lost",
-      "description": "Please try again"
+      "title": "Соединение с устройством утеряно.",
+      "description": "Повторите попытку."
     },
     "EnpointConfig": {
       "title": "Недействительная конечная точка.",
@@ -791,55 +820,55 @@
     },
     "HardResetFail": {
       "title": "Не удалось сбросить.",
-      "description": "Please try again or contact us when in doubt"
+      "description": "Повторите попытку, а в случае возникновения сомнений свяжитесь с нами."
     },
     "LatestMCUInstalledError": {
       "title": "Установлена последняя версия.",
-      "description": "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
+      "description": "Вы пробовали обновить микроконтроллер устройства без необходимости. Если устройство неисправно, обратитесь в службу поддержки компании Ledger."
     },
-    "LedgerAPIError": {
-      "title": "Повторите попытку (genuine-close)(API HTTP {{status}})",
-      "description": "Please retry. Interacting with Ledger's API server went wrong."
-    },
-    "LedgerAPIErrorWithMessage": {
+    "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Please check your connection and try again or contact Ledger Support."
+    },
+    "LedgerAPI5xx": {
+      "title": "Sorry, try again.",
+      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Службы для {{currencyName}} недоступны.",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Повторите попытку или обратитесь в службу поддержки компании Ledger."
     },
     "ManagerAPIsFail": {
-      "title": "Oops, Manager services unavailable",
-      "description": "Please check the network status"
+      "title": "Службы диспетчера недоступны.",
+      "description": "Проверьте состояние сети."
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Oops, that's already installed",
-      "description": "Check your device to see which apps are already installed"
+      "title": "Уже установлено.",
+      "description": "Проверьте, какие приложения уже были установлены на устройстве."
     },
     "ManagerAppRelyOnBTC": {
       "title": "Необходимы приложения Bitcoin и Ethereum.",
-      "description": "Install the latest Bitcoin and Ethereum apps first"
+      "description": "Сначала установите последнюю версию приложений Bitcoin и Ethereum."
     },
     "ManagerDeviceLocked": {
       "title": "Разблокируйте устройство.",
-      "description": "Your device was locked, please unlock it"
+      "description": "Устройство было заблокировано. Разблокируйте его."
     },
     "ManagerNotEnoughSpace": {
       "title": "Недостаточно свободного места.",
-      "description": "Uninstall some apps to make space. This will not affect your crypto assets."
+      "description": "Чтобы освободить место, удалите некоторые приложения. Это не повлияет на криптоактивы."
     },
     "ManagerUninstallBTCDep": {
       "title": "Это приложение является обязательным.",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "description": "Удалите приложение Bitcoin или Ethereum в последнюю очередь."
     },
     "NetworkDown": {
       "title": "Подключение к Интернету утеряно.",
-      "description": "Please check your internet connection"
+      "description": "Проверьте подключение к Интернету."
     },
     "NoAddressesFound": {
       "title": "Счета не найдены.",
-      "description": "Something went wrong with address calculation, try again or contact Ledger Support"
+      "description": "Во время вычисления адреса произошла ошибка. Повторите попытку или обратитесь в службу поддержки компании Ledger."
     },
     "NotEnoughBalance": {
       "title": "Недостаточный остаток средств.",
@@ -858,27 +887,31 @@
     },
     "SelectExchangesLoadError": {
       "title": "Невозможно загрузить.",
-      "description": "Please try again later"
+      "description": "Повторите попытку."
     },
     "TimeoutError": {
       "title": "Время истекло.",
-      "description": "It took too long for the server to respond, please retry"
+      "description": "Сервер отвечает очень долго. Повторите попытку."
     },
     "TimeoutTagged": {
       "title": "Время истекло. ({{tag}})",
-      "description": "It took too long for the server to respond"
+      "description": "Сервер отвечает очень долго."
     },
     "TransportError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Произошла ошибка. Повторно подключите устройство.",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong, please reconnect your device",
+      "title": "Произошла ошибка. Повторно подключите устройство.",
       "description": "{{message}}"
     },
+    "DeviceShouldStayInApp": {
+      "title": "Please open the {{appName}} app",
+      "description": "Keep the {{appName}} app open while we look for your accounts"
+    },
     "UnexpectedBootloader": {
-      "title": "Oops, your device should not be in Bootloader mode",
-      "description": "Please restart your device or contact us"
+      "title": "Устройство не должно быть в режиме загрузчика.",
+      "description": "Перезапустите устройство или свяжитесь с нами."
     },
     "UserRefusedAllowManager": {
       "title": "Manager refused on device"
@@ -889,62 +922,62 @@
     },
     "UserRefusedOnDevice": {
       "title": "Не удалось провести транзакцию на устройстве.",
-      "description": "Please retry or contact Ledger Support in case of doubt"
+      "description": "Повторите попытку, а в случае возникновения сомнений обратитесь в службу поддержки компании Ledger."
     },
     "UserRefusedAddress": {
       "title": "Адрес получения отклонен.",
-      "description": "Please try again or contact Ledger Support when in doubt"
+      "description": "Повторите попытку, а в случае возникновения каких-либо сомнений обратитесь в службу поддержки компании Ledger."
     },
     "UpdateYourApp": {
       "title": "Требуется обновить приложение.",
       "description": "Удалите и повторно установите приложение {{managerAppName}} через диспетчер."
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to Dashboard",
-      "description": "Please navigate back to Dashboard on your device"
+      "title": "Вернуться к панели мониторинга",
+      "description": "Перейдите обратно на панель мониторинга на устройстве."
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (websocket error)",
+      "title": "Повторите попытку (ошибка WebSocket).",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (websocket failed)",
+      "title": "Повторите попытку (сбой WebSocket).",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Wrong device or passphrase for ‘{{accountName}}’",
-      "description": "Please use the device or passphrase for the selected account"
+      "title": "Неправильное устройство или парольная фраза для «{{accountName}}»",
+      "description": "Используйте устройство или фразу, соответствующую для выбранного счета."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Open Manager to update the app"
+      "title": "Требуется обновить приложение.",
+      "description": "Чтобы обновить приложение, откройте диспетчер."
     },
     "InvalidAddress": {
       "title": "Этот адрес {{currencyName}} недействительный."
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "Адрес получателя совпадает с адресом отправителя."
     },
     "CantOpenDevice": {
       "title": "Не удалось подключиться к устройству.",
-      "description": "Device detected but connection failed. Please try again or contact us if the problem persists."
+      "description": "Устройство обнаружено, но при подключении произошел сбой. Повторите попытку, а если проблема не будет устранена, свяжитесь с нами."
     },
     "ETHAddressNonEIP": {
       "title": "Автопроверка не доступна: внимательно проверьте адрес.",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "Не удалось сканировать этот QR код: этот адрес не поддерживает автопроверку."
     },
     "FeeNotLoaded": {
-      "title": "Couldn’t load fee rates, please set manual fees"
+      "title": "Не удалось загрузить тарифы комиссии. Задайте комиссию вручную."
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Комиссия обязательная"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Неизвестная версия микроконтроллера",
+      "description": "Обратитесь в службу поддержки компании Ledger."
     }
   }
 }

@@ -3,10 +3,18 @@ import logger from 'logger'
 import { throwError } from 'rxjs'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
+import { setEnvUnsafe } from '@ledgerhq/live-common/lib/env'
 import throttle from 'lodash/throttle'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import { DisconnectedDevice } from '@ledgerhq/errors'
 import { retry } from './promise'
+import './implement-libcore'
+
+/* eslint-disable guard-for-in */
+for (const k in process.env) {
+  setEnvUnsafe(k, process.env[k])
+}
+/* eslint-enable guard-for-in */
 
 let busy = false
 

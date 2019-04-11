@@ -5,7 +5,7 @@ import { getDeviceModel } from '@ledgerhq/devices'
 
 import Box from 'components/base/Box'
 import TrackPage from 'analytics/TrackPage'
-import type { DeviceModelId } from 'reducers/onboarding'
+import type { DeviceModelId } from '@ledgerhq/devices'
 
 import GrowScroll from 'components/base/GrowScroll'
 import { Title, FixedTopContainer } from '../../helperComponents'
@@ -32,7 +32,7 @@ const SelectPin = ({ modelId, restore = false }: { modelId: DeviceModelId, resto
 export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
 
-  const model = getDeviceModel(onboarding.deviceModelId)
+  const model = getDeviceModel(onboarding.deviceModelId || 'nanoS')
 
   return (
     <FixedTopContainer>
@@ -47,14 +47,14 @@ export default (props: StepProps) => {
           <Box grow alignItems="center">
             <Title>{t('onboarding.selectPIN.restore.title')}</Title>
             <Box align="center" mt={7}>
-              <SelectPin modelId={onboarding.deviceModelId} restore />
+              <SelectPin modelId={model.id} restore />
             </Box>
           </Box>
         ) : (
           <Box grow alignItems="center">
             <Title>{t('onboarding.selectPIN.initialize.title')}</Title>
             <Box align="center" mt={7}>
-              <SelectPin modelId={onboarding.deviceModelId} />
+              <SelectPin modelId={model.id} />
             </Box>
           </Box>
         )}

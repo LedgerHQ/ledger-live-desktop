@@ -51,6 +51,7 @@ type State<Transaction> = {
   isAppOpened: boolean,
   amount: number,
   error: ?Error,
+  signed: boolean,
 }
 
 export type StepProps<Transaction> = DefaultStepProps & {
@@ -60,6 +61,7 @@ export type StepProps<Transaction> = DefaultStepProps & {
   bridge: ?WalletBridge<Transaction>,
   transaction: ?Transaction,
   error: ?Error,
+  signed: boolean,
   optimisticOperation: ?Operation,
   closeModal: void => void,
   openModal: (string, any) => void,
@@ -124,6 +126,7 @@ const INITIAL_STATE = {
   bridge: null,
   transaction: null,
   error: null,
+  signed: true,
   optimisticOperation: null,
   isAppOpened: false,
 }
@@ -177,6 +180,7 @@ class SendModal extends PureComponent<Props, State<*>> {
       error: null,
       optimisticOperation: null,
       isAppOpened: false,
+      signed: false,
     })
   }
 
@@ -221,6 +225,7 @@ class SendModal extends PureComponent<Props, State<*>> {
           switch (e.type) {
             case 'signed': {
               if (this._isUnmounted) return
+              this.setState({ signed: true })
               transitionTo('confirmation')
               break
             }
@@ -250,6 +255,7 @@ class SendModal extends PureComponent<Props, State<*>> {
       transaction,
       optimisticOperation,
       error,
+      signed,
     } = this.state
 
     const addtionnalProps = {
@@ -260,6 +266,7 @@ class SendModal extends PureComponent<Props, State<*>> {
       transaction,
       isAppOpened,
       error,
+      signed,
       optimisticOperation,
       openModal,
       closeModal: this.handleCloseModal,

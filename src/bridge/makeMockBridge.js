@@ -111,10 +111,8 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
 
         job()
 
-        return {
-          unsubscribe() {
-            unsubscribed = true
-          },
+        return () => {
+          unsubscribed = true
         }
       }),
 
@@ -164,7 +162,7 @@ function makeMockBridge(opts?: Opts): WalletBridge<*> {
     signAndBroadcast: (account, t) =>
       Observable.create(o => {
         const rng = new Prando()
-        const op = genOperation(account, account.operations, account.currency, rng)
+        const op = genOperation(account, account, account.operations, account.currency, rng)
         op.type = 'OUT'
         op.value = t.amount
         op.blockHash = null

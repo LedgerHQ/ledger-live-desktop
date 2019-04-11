@@ -49,7 +49,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
                 t('receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
             </Text>
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
-              {t('common.verify')}
+              {t('common.continue')}
             </Button>
             {device && device.modelId === 'nanoX' ? (
               <Box pt={30}>

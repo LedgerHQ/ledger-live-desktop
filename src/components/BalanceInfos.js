@@ -4,13 +4,13 @@ import React from 'react'
 import type { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 
-import type { Unit, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
-import DeltaChange from '../DeltaChange'
-import { PlaceholderLine } from '../Placeholder'
+import DeltaChange from './DeltaChange'
+import { PlaceholderLine } from './Placeholder'
 
 const Sub = styled(Box).attrs({
   ff: 'Open Sans',
@@ -37,7 +37,7 @@ type BalanceTotalProps = {
 }
 
 type Props = {
-  counterValue: Currency,
+  unit: Unit,
 } & BalanceSinceProps
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
@@ -62,7 +62,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
 }
 
 export function BalanceSinceDiff(props: Props) {
-  const { t, totalBalance, sinceBalance, since, counterValue, isAvailable, ...otherProps } = props
+  const { t, totalBalance, sinceBalance, since, unit, isAvailable, ...otherProps } = props
   return (
     <Box {...otherProps}>
       {!isAvailable ? (
@@ -71,7 +71,7 @@ export function BalanceSinceDiff(props: Props) {
         <FormattedVal
           color="dark"
           animateTicker
-          unit={counterValue.units[0]}
+          unit={unit}
           fontSize={7}
           showCode
           val={totalBalance.minus(sinceBalance)}
@@ -111,14 +111,10 @@ BalanceTotal.defaultProps = {
 }
 
 function BalanceInfos(props: Props) {
-  const { t, totalBalance, since, sinceBalance, refBalance, isAvailable, counterValue } = props
+  const { t, totalBalance, since, sinceBalance, refBalance, isAvailable, unit } = props
   return (
     <Box horizontal alignItems="center" flow={7}>
-      <BalanceTotal
-        unit={counterValue.units[0]}
-        isAvailable={isAvailable}
-        totalBalance={totalBalance}
-      >
+      <BalanceTotal unit={unit} isAvailable={isAvailable} totalBalance={totalBalance}>
         <Sub>{t('dashboard.totalBalance')}</Sub>
       </BalanceTotal>
       <BalanceSincePercent
@@ -131,7 +127,7 @@ function BalanceInfos(props: Props) {
         t={t}
       />
       <BalanceSinceDiff
-        counterValue={counterValue}
+        unit={unit}
         alignItems="flex-end"
         isAvailable={isAvailable}
         totalBalance={totalBalance}

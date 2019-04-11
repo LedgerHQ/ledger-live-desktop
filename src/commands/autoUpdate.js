@@ -44,7 +44,10 @@ const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
     autoUpdater.on('update-not-available', info => sendStatus('update-not-available', info))
     autoUpdater.on('download-progress', p => sendStatus('download-progress', p))
     autoUpdater.on('update-downloaded', handleDownload)
-    autoUpdater.on('error', err => o.error(err))
+    autoUpdater.on('error', err => {
+      logger.error(err)
+      o.complete()
+    })
 
     autoUpdater.autoInstallOnAppQuit = false
     autoUpdater.checkForUpdates()

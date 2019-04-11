@@ -22,7 +22,6 @@ import CounterValueExchangeSelect from '../CounterValueExchangeSelect'
 import RegionSelect from '../RegionSelect'
 import PasswordButton from '../PasswordButton'
 import PasswordAutoLockSelect from '../PasswordAutoLockSelect'
-import DevModeButton from '../DevModeButton'
 import SentryLogsButton from '../SentryLogsButton'
 import ShareAnalyticsButton from '../ShareAnalyticsButton'
 
@@ -105,12 +104,6 @@ class TabGeneral extends PureComponent<Props> {
           </Row>
           <Row title={t('settings.profile.analytics')} desc={t('settings.profile.analyticsDesc')}>
             <ShareAnalyticsButton />
-          </Row>
-          <Row
-            title={t('settings.profile.developerMode')}
-            desc={t('settings.profile.developerModeDesc')}
-          >
-            <DevModeButton />
           </Row>
         </Body>
       </Section>

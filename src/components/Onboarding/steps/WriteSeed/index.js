@@ -17,7 +17,7 @@ import type { StepProps } from '../..'
 export default (props: StepProps) => {
   const { nextStep, prevStep, t, onboarding } = props
 
-  const model = getDeviceModel(onboarding.deviceModelId)
+  const model = getDeviceModel(onboarding.deviceModelId || 'nanoS')
 
   return (
     <FixedTopContainer>

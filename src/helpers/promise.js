@@ -29,7 +29,7 @@ export function retry<A>(f: () => Promise<A>, options?: $Shape<typeof defaults>)
   }
 }
 
-export function idleCallback() {
+export function idleCallback(): Promise<any> {
   return new Promise(resolve => window.requestIdleCallback(resolve))
 }
 
@@ -45,7 +45,7 @@ export function createCancelablePolling(
   let isUnsub = false
   const unsubscribe = () => (isUnsub = true)
   const getUnsub = () => isUnsub
-  const promise = new Promise((resolve, reject) => {
+  const promise: Promise<any> = new Promise((resolve, reject) => {
     async function poll() {
       try {
         const res = await job()
@@ -83,7 +83,7 @@ export const timeoutTagged = <T>(tag: string, delay: number, promise: Promise<T>
     )
   })
 
-export const promisify = (fn: any) => (...args: any) =>
+export const promisify = (fn: any) => (...args: any): Promise<any> =>
   new Promise((resolve, reject) =>
     fn(...args, (err: Error, res: any) => {
       if (err) return reject(err)
@@ -96,7 +96,7 @@ export const debounce = (fn: any => any, ms: number) => {
   let resolveRefs = []
   let rejectRefs = []
   return (...args: any) => {
-    const promise = new Promise((resolve, reject) => {
+    const promise: Promise<any> = new Promise((resolve, reject) => {
       resolveRefs.push(resolve)
       rejectRefs.push(reject)
     })

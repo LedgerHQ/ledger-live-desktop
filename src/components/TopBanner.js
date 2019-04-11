@@ -11,7 +11,7 @@ import { dismissBanner } from '../actions/settings'
 import { dismissedBannersSelector } from '../reducers/settings'
 
 export type Content = {
-  Icon?: React$ComponentType<*>,
+  Icon?: React$ComponentType<any>,
   message: React$Node,
   right?: React$Node,
 }

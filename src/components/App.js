@@ -6,7 +6,6 @@ import { ConnectedRouter } from 'react-router-redux'
 import { Switch, Route } from 'react-router'
 import { Provider } from 'react-redux'
 import { I18nextProvider } from 'react-i18next'
-import { hot } from 'react-hot-loader'
 
 import theme from 'styles/theme'
 
@@ -32,15 +31,15 @@ const App = ({
       <CounterValues.PollingProvider>
         <I18nextProvider i18n={i18n} initialLanguage={language}>
           <ThemeProvider theme={theme}>
-            <UpdaterProvider>
-              <ThrowBlock>
+            <ThrowBlock>
+              <UpdaterProvider>
                 <ConnectedRouter history={history}>
                   <Switch>
                     <Route component={Default} />
                   </Switch>
                 </ConnectedRouter>
-              </ThrowBlock>
-            </UpdaterProvider>
+              </UpdaterProvider>
+            </ThrowBlock>
           </ThemeProvider>
         </I18nextProvider>
       </CounterValues.PollingProvider>
@@ -48,5 +47,4 @@ const App = ({
   </Provider>
 )
 
-// $FlowFixMe
-export default hot(module)(App)
+export default App

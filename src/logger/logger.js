@@ -192,10 +192,10 @@ export default {
     }
   },
 
-  network: ({ method, url }: { method: string, url: string }) => {
-    const log = `➡📡  ${method} ${anonymizer.url(url)}`
+  network: ({ method, url, data }: { method: string, url: string, data: * }) => {
+    const log = `➡📡  ${method} ${url}`
     if (logNetwork) {
-      logger.log('info', log, { type: 'network' })
+      logger.log('info', log, { type: 'network', data })
     }
   },
 
@@ -335,8 +335,8 @@ export default {
       })
     }
     // $FlowFixMe
-    logger.log('error', error.message, {
-      stack: error.stack,
+    logger.log('error', error && error.message, {
+      stack: error && error.stack,
       ...error,
     })
     if (!process.env.STORYBOOK_ENV) {

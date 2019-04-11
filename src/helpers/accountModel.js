@@ -6,7 +6,7 @@ import { BigNumber } from 'bignumber.js'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { createDataModel } from '@ledgerhq/live-common/lib/DataModel'
 import type { DataModel } from '@ledgerhq/live-common/lib/DataModel'
-import type { Account, AccountRaw, Operation } from '@ledgerhq/live-common/lib/types'
+import type { Account, AccountRaw, Operation, OperationRaw } from '@ledgerhq/live-common/lib/types'
 
 /**
  * @memberof models/account
@@ -91,16 +91,18 @@ const accountModel: DataModel<AccountRaw, Account> = createDataModel({
       pendingOperations,
       lastSyncDate,
       balance,
+      tokenAccounts,
       ...acc
     } = rawAccount
     const currency = getCryptoCurrencyById(currencyId)
     const unit = currency.units.find(u => u.magnitude === unitMagnitude) || currency.units[0]
-    const convertOperation = ({ date, value, fee, ...op }) => ({
+    const convertOperation = ({ date, value, fee, extra, ...op }) => ({
       ...op,
       accountId: acc.id,
       date: new Date(date),
       value: BigNumber(value),
       fee: BigNumber(fee),
+      extra: extra || {},
     })
     return {
       ...acc,
@@ -120,25 +122,24 @@ const accountModel: DataModel<AccountRaw, Account> = createDataModel({
     unit,
     lastSyncDate,
     balance,
+    tokenAccounts,
     ...acc
-  }: Account): AccountRaw => {
-    const convertOperation = ({ date, value, fee, ...op }) => ({
-      ...op,
-      date: date.toISOString(),
-      value: value.toString(),
-      fee: fee.toString(),
-    })
+  }: Account): AccountRaw => ({
+    ...acc,
+    operations: operations.filter(opRetentionFilter).map(operationToRow),
+    pendingOperations: pendingOperations.map(operationToRow),
+    currencyId: currency.id,
+    unitMagnitude: unit.magnitude,
+    lastSyncDate: lastSyncDate.toISOString(),
+    balance: balance.toString(),
+  }),
+})
 
-    return {
-      ...acc,
-      operations: operations.filter(opRetentionFilter).map(convertOperation),
-      pendingOperations: pendingOperations.map(convertOperation),
-      currencyId: currency.id,
-      unitMagnitude: unit.magnitude,
-      lastSyncDate: lastSyncDate.toISOString(),
-      balance: balance.toString(),
-    }
-  },
+export const operationToRow = ({ date, value, fee, ...op }: Operation): OperationRaw => ({
+  ...op,
+  date: date.toISOString(),
+  value: value.toString(),
+  fee: fee.toString(),
 })
 
 export default accountModel

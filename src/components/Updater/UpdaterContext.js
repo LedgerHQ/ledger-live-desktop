@@ -34,6 +34,7 @@ type UpdaterProviderState = {
   error: ?Error,
 }
 
+// $FlowFixMe
 const UpdaterContext = React.createContext()
 
 class Provider extends Component<UpdaterProviderProps, UpdaterProviderState> {

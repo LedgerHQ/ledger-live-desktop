@@ -19,6 +19,8 @@ type Props = {
   disabledSteps?: number[],
   errorSteps?: number[],
   children: any,
+  error?: Error,
+  signed?: boolean,
 }
 
 export type Step = {
@@ -100,7 +102,7 @@ class Stepper extends PureComponent<Props, State> {
         render={() => (
           <Fragment>
             <Breadcrumb
-              mb={6}
+              mb={props.error && props.signed ? 4 : 6}
               currentStep={stepIndex}
               items={steps}
               stepsDisabled={disabledSteps}

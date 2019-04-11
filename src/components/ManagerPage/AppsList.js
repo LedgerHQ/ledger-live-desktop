@@ -4,18 +4,18 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
-import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import type { Device, T } from 'types/common'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 import { listCryptoCurrencies } from 'config/cryptocurrencies'
-import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
+import flushDevice from 'commands/flushDevice'
 import Box from 'components/base/Box'
 import Modal from 'components/base/Modal'
 import Tooltip from 'components/base/Tooltip'
@@ -34,10 +34,6 @@ import { FreezeDeviceChangeEvents } from './HookDeviceChange'
 import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
 import ModalBody from '../base/Modal/ModalBody'
-
-const mapStateToProps = state => ({
-  isDevMode: developerModeSelector(state),
-})
 
 const List = styled(Box).attrs({
   horizontal: true,
@@ -77,7 +73,6 @@ type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
   t: T,
-  isDevMode: boolean,
 }
 
 type State = {
@@ -135,30 +130,53 @@ class AppsList extends PureComponent<Props, State> {
 
   componentWillUnmount() {
     this._unmounted = true
+    if (this.sub) {
+      this.sub.unsubscribe()
+      this.flush()
+    }
   }
 
   _unmounted = false
 
   async fetchAppList() {
-    const { deviceInfo, isDevMode } = this.props
+    const { deviceInfo } = this.props
 
     try {
       const filteredAppVersionsList = await manager.getAppsList(
         deviceInfo,
-        isDevMode,
+        getEnv('MANAGER_DEV_MODE'),
         getFullListSortedCryptoCurrencies,
       )
+
+      const withTickers = filteredAppVersionsList.map(app => {
+        const maybeCrypto = listCryptoCurrencies(true).find(
+          c => c.managerAppName.toLowerCase() === app.name.toLowerCase(),
+        )
+        const ticker = maybeCrypto ? maybeCrypto.ticker : ''
+
+        return {
+          ...app,
+          ticker,
+        }
+      })
 
       if (!this._unmounted) {
         this.setState({
           status: 'idle',
-          filteredAppVersionsList,
+          filteredAppVersionsList: withTickers,
           appsLoaded: true,
         })
       }
     } catch (err) {
       this.setState({ status: 'error', error: err })
     }
+  }
+
+  flush = async () => {
+    const {
+      device: { path: deviceId },
+    } = this.props
+    await flushDevice.send(deviceId).toPromise()
   }
 
   sub: *
@@ -187,7 +205,11 @@ class AppsList extends PureComponent<Props, State> {
   handleUninstallApp = (app: ApplicationVersion) => () =>
     this.runAppScript(app, 'uninstalling', uninstallApp)
 
-  handleCloseModal = () => this.setState({ status: 'idle', mode: 'home' })
+  handleCloseModal = () => {
+    if (this.sub) this.sub.unsubscribe()
+    this.flush()
+    this.setState({ status: 'idle', mode: 'home' })
+  }
 
   renderBody = () => {
     const { t } = this.props
@@ -205,7 +227,7 @@ class AppsList extends PureComponent<Props, State> {
           </Box>
         )}
         <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          {t(`manager.apps.${mode}`, { app })}
+          {mode !== 'home' ? t(`manager.apps.${mode}`, { app }) : null}
         </Text>
         <Box mt={6}>
           <ProgressBar width={150} progress={progress} />
@@ -275,12 +297,17 @@ class AppsList extends PureComponent<Props, State> {
   renderModal = () => {
     const { status } = this.state
     return (
-      <Modal isOpened={status !== 'idle' && status !== 'loading'} centered>
+      <Modal
+        isOpened={status !== 'idle' && status !== 'loading'}
+        centered
+        onClose={this.handleCloseModal}
+      >
         <ModalBody
           align="center"
           justify="center"
           title={''}
           render={this.renderBody}
+          onClose={this.handleCloseModal}
           renderFooter={['error', 'success'].includes(status) ? this.renderFooter : undefined}
         >
           <FreezeDeviceChangeEvents />
@@ -293,7 +320,7 @@ class AppsList extends PureComponent<Props, State> {
     const { filteredAppVersionsList, appsLoaded } = this.state
     return (
       <Box>
-        <AppSearchBar list={filteredAppVersionsList}>
+        <AppSearchBar searchKeys={['ticker']} list={filteredAppVersionsList}>
           {items => (
             <List>
               {items.map(c => (
@@ -339,7 +366,4 @@ class AppsList extends PureComponent<Props, State> {
   }
 }
 
-export default compose(
-  translate(),
-  connect(mapStateToProps),
-)(AppsList)
+export default compose(translate())(AppsList)

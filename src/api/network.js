@@ -3,8 +3,19 @@ import axios from 'axios'
 import { GET_CALLS_RETRY, GET_CALLS_TIMEOUT } from 'config/constants'
 import { retry } from 'helpers/promise'
 import logger from 'logger'
-import { LedgerAPIErrorWithMessage, LedgerAPIError, NetworkDown } from '@ledgerhq/errors'
+import { NetworkDown, LedgerAPI5xx, LedgerAPI4xx } from '@ledgerhq/errors'
 import anonymizer from 'helpers/anonymizer'
+
+const makeError = (msg, status, url, method) => {
+  const obj = {
+    status,
+    url,
+    method,
+  }
+  return (status || '').toString().startsWith('4')
+    ? new LedgerAPI4xx(msg, obj)
+    : new LedgerAPI5xx(msg, obj)
+}
 
 const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime, ...rest }): Promise<A> =>
   p.catch(error => {
@@ -20,7 +31,7 @@ const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime, ...rest }
           const innerPart = m ? m[1] : msg
           try {
             const r = JSON.parse(innerPart)
-            let message = r.error
+            let message = r.message
             if (typeof message === 'object') {
               message = message.message
             }
@@ -30,21 +41,13 @@ const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime, ...rest }
           } catch (e) {
             logger.warn("can't parse server result", e)
           }
-          if (msg && msg[0] !== '<') {
-            errorToThrow = new LedgerAPIErrorWithMessage(msg, {
-              status,
-              url: anonymizer.url(url),
-              method,
-            })
+          if (msg && !msg.includes('<html')) {
+            errorToThrow = makeError(msg, status, anonymizer.url(url), method)
           }
         }
       }
       if (!errorToThrow) {
-        errorToThrow = new LedgerAPIError(`LedgerAPIError ${status}`, {
-          status,
-          url: anonymizer.url(url),
-          method,
-        })
+        errorToThrow = makeError(`API HTTP ${status}`, status, anonymizer.url(url), method)
       }
       logger.networkError({
         ...rest,
@@ -72,10 +75,12 @@ let implementation = (arg: Object) => {
     if (!('timeout' in arg)) {
       arg.timeout = GET_CALLS_TIMEOUT
     }
+    // $FlowFixMe
     promise = retry(() => axios(arg), {
       maxRetry: GET_CALLS_RETRY,
     })
   } else {
+    // $FlowFixMe
     promise = axios(arg)
   }
   const meta = {

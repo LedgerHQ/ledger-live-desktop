@@ -8,6 +8,7 @@ import autoUpdate from 'commands/autoUpdate'
 import firmwarePrepare from 'commands/firmwarePrepare'
 import firmwareMain from 'commands/firmwareMain'
 import firmwareRepair from 'commands/firmwareRepair'
+import flushDevice from 'commands/flushDevice'
 import getAddress from 'commands/getAddress'
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'
@@ -37,6 +38,7 @@ const all: Array<Command<any, any>> = [
   firmwarePrepare,
   firmwareMain,
   firmwareRepair,
+  flushDevice,
   getAddress,
   getDeviceInfo,
   getIsGenuine,

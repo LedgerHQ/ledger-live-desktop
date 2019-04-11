@@ -147,7 +147,7 @@ class MainSideBar extends PureComponent<Props> {
               icon={IconExchange}
               iconActiveColor="wallet"
               onClick={this.handleClickExchange}
-              isActive={pathname === '/exchange'}
+              isActive={pathname === '/partners'}
             />
             {developerMode && (
               <KeyboardContent sequence="DEVTOOLS">
@@ -184,6 +184,7 @@ class MainSideBar extends PureComponent<Props> {
 }
 
 const decorate = compose(
+  // $FlowFixMe
   withRouter,
   translate(),
   connect(
