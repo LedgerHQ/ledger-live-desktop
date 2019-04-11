@@ -6,7 +6,10 @@ import styled from 'styled-components'
 import { multiline } from 'styles/helpers'
 
 import TrackPage from 'analytics/TrackPage'
+import { urls } from 'config/urls'
+import { openURL } from 'helpers/linking'
 import Box from 'components/base/Box'
+import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 import WarnBox from 'components/WarnBox'
 import DeviceConfirm from 'components/DeviceConfirm'
 import NanoXStates from 'components/NanoXStates'
@@ -35,7 +38,13 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
     return (
       <Container>
         <TrackPage category="Send Flow" name="Step 3" />
-        <WarnBox>{multiline(t('send.steps.verification.warning'))}</WarnBox>
+        <WarnBox>
+          {multiline(t('send.steps.verification.warning'))}
+          <LinkWithExternalIcon
+            onClick={() => openURL(urls.recipientAddressInfo)}
+            label={t('common.learnMore')}
+          />
+        </WarnBox>
         <Info>{t('send.steps.verification.body')}</Info>
         {device && device.modelId === 'nanoX' ? <NanoXStates validate /> : <DeviceConfirm />}
       </Container>

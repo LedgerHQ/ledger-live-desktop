@@ -11,10 +11,13 @@ import noop from 'lodash/noop'
 import type { T } from 'types/common'
 
 import { rgba } from 'styles/helpers'
+import { urls } from 'config/urls'
+import { openURL } from 'helpers/linking'
 
 import Box from 'components/base/Box'
-import CopyToClipboard from 'components/base/CopyToClipboard'
 import QRCode from 'components/base/QRCode'
+import CopyToClipboard from 'components/base/CopyToClipboard'
+import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 
 import IconRecheck from 'icons/Recover'
 import IconCopy from 'icons/Copy'
@@ -224,6 +227,10 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
               : isAddressVerified
                 ? t('currentAddress.messageIfAccepted', { currencyName })
                 : t('currentAddress.messageIfSkipped', { currencyName })}
+            <LinkWithExternalIcon
+              onClick={() => openURL(urls.recipientAddressInfo)}
+              label={t('common.learnMore')}
+            />
           </Box>
         </Box>
         <Footer>
