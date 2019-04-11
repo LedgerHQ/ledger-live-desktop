@@ -20,9 +20,9 @@ import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Modal from './index'
 import ModalBody from './ModalBody'
 import {
-  repairDeviceBootloader,
-  repairDeviceFollow,
-  repairDeviceMcuNotGenuine,
+  generic,
+  mcuNotGenuine,
+  followDeviceRepair,
   repairProcessing,
 } from '../../../config/nontranslatables'
 
@@ -160,18 +160,15 @@ class RepairModal extends PureComponent<Props, *> {
     this.setState({ selectedOption: selectedOption || forceRepairChoices[0] })
   }
 
-  nonTranslatable = {
-    repairDeviceBootloader,
-    repairDeviceMcuNotGenuine,
-    repairDeviceFollow,
+  nonTranslatable: { [string]: string } = {
+    generic,
+    mcuNotGenuine,
+    followDeviceRepair,
   }
 
-  renderOption = option =>
-    (option && this.props.t(`settings.repairDevice.${option.label}`, this.nonTranslatable)) || null
+  renderOption = option => (option && this.nonTranslatable[option.label]) || null
 
-  renderValue = option =>
-    (option && this.props.t(`settings.repairDevice.${option.data.label}`, this.nonTranslatable)) ||
-    null
+  renderValue = option => (option && this.nonTranslatable[option.data.label]) || null
 
   render() {
     const {

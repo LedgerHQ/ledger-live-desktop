@@ -525,10 +525,7 @@
       "descSettings":
         "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
       "desc": "Please select the state of your Ledger device.",
-      "button": "Repair",
-      "generic": "{{repairDeviceBootloader}}",
-      "mcuNotGenuine": "{{repairDeviceMcuNotGenuine}}",
-      "followDeviceRepair": "{{repairDeviceFollow}}"
+      "button": "Repair"
     },
     "exportLogs": {
       "title": "Save logs",

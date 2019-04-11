@@ -481,10 +481,7 @@
       "title": "Repara tu dispositivo Ledger",
       "descSettings": "Utiliza esta herramienta para restaurar tu dispositivo Ledger si se ha atascado durante una actualización de firmware.",
       "desc": "Selecciona el estado de tu dispositivo Ledger.",
-      "button": "Reparar",
-      "generic": "{{repairDeviceBootloader}}",
-      "mcuNotGenuine": "{{repairDeviceMcuNotGenuine}}",
-      "followDeviceRepair": "{{repairDeviceFollow}}"
+      "button": "Reparar"
     },
     "exportLogs": {
       "title": "Save logs",

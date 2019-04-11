@@ -481,10 +481,7 @@
       "title": "Ремонт устройства Ledger",
       "descSettings": "Используйте этот инструмент для восстановления устройства Ledger, если во время обновления встроенного ПО возникла неисправность.",
       "desc": "Выберите состояние устройства Ledger.",
-      "button": "Ремонт",
-      "generic": "{{repairDeviceBootloader}}",
-      "mcuNotGenuine": "{{repairDeviceMcuNotGenuine}}",
-      "followDeviceRepair": "{{repairDeviceFollow}}"
+      "button": "Ремонт"
     },
     "exportLogs": {
       "title": "Save logs",
