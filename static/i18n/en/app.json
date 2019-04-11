@@ -603,14 +603,7 @@
     "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
-    "system": "Use system language",
-    "en": "English",
-    "fr": "French",
-    "es": "Spanish",
-    "ko": "Korean",
-    "zh": "Simplified Chinese",
-    "ja": "Japanese",
-    "ru": "Russian"
+    "system": "Use system language"
   },
   "onboarding": {
     "breadcrumb": {

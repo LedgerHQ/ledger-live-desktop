@@ -552,14 +552,7 @@
     "selectedAccounts_plural": "({{count}}) 件のアカウントが選択されました"
   },
   "language": {
-    "system": "システム言語を使用",
-    "en": "英語",
-    "fr": "フランス語",
-    "es": "スペイン語",
-    "ko": "韓国語",
-    "zh": "簡体字中国語",
-    "ja": "日本語",
-    "ru": "ロシア語"
+    "system": "システム言語を使用"
   },
   "onboarding": {
     "breadcrumb": {
