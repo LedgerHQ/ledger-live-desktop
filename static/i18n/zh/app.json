@@ -281,7 +281,7 @@
       "identifier": "标识符",
       "mcuTitle": "完成更新",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "按下左键并同时重新连接 USB 数据线直到屏幕出现 <1><0>Processing</0></1> ",
+      "mcuSecond": "按下左键并同时重新连接 USB 数据线直到屏幕出现 <1><0>{{repairProcessing}}</0></1> ",
       "mcuPin": "正在更新，请您耐心等待",
       "successTitle": "固件已更新",
       "successText": "请在设备上重新安装应用程序"
@@ -481,10 +481,7 @@
       "title": "修复您的 Ledger 设备",
       "descSettings": "如果 Ledger 设备在固件更新期间卡顿，则可使用此工具恢复您的设备。",
       "desc": "请选择您的 Ledger 设备状态。",
-      "button": "修复",
-      "generic": "启动加载程序",
-      "mcuNotGenuine": "MCU 非正版",
-      "followDeviceRepair": "按照设备修复说明进行操作"
+      "button": "修复"
     },
     "exportLogs": {
       "title": "保存日志",
@@ -611,7 +608,7 @@
         "instructions": {
           "nano": {
             "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "按右键选择<1><0>Configure as new device?</0></1>。",
+            "step2": "按右键选择<1><0>{{configureAsNewDevice}}?</0></1>。",
             "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
@@ -623,7 +620,7 @@
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "点击<1><0>Configure as new device</0></1>。",
+            "step2": "点击<1><0>{{configureAsNewDevice}}</0></1>。",
             "step3": "选择 4 到 8 位数的 PIN 码。"
           }
         }
@@ -633,20 +630,20 @@
         "instructions": {
           "nano": {
             "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "按左键取消<1><0>Initialize as new device?</0></1>，然后按右键选择<3><0>Restore configuration?</0></3>。",
+            "step2": "按左键取消<1><0>{{configureAsNewDevice}}?</0></1>，然后按右键选择<3><0>{{restoreConfiguration}}?</0></3>。",
             "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
             "step2": "按照 {{productName}} 屏幕上的说明同时按下两个按钮。",
-            "step3": "按左键选择取消<1><0>Configure as new device<0><1> 。",
-            "step4": "按下右键选择恢复配置。",
+            "step3": "按左键选择取消<1><0>{{setUpAsNewDevice}}</0></1> 。",
+            "step4": "按下右键选择<1><0>{{restoreConfiguration}}</0></1>。",
             "step5": "选择长度为 4 到 8 位的 PIN 码。"
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "轻击<1><0>恢复配置</0></1>。",
+            "step2": "轻击<1><0>{{restoreConfiguration}}</0></1>。",
             "step3": "选择 4 到 8 位数的 PIN 码。"
           }
         }
@@ -657,13 +654,13 @@
         "title": "保存您的恢复短语",
         "desc": "您的设备将显示一组 24 词恢复短语来备份您的私钥",
         "nano": {
-          "step1": "在空白恢复短语列表上的位置 1 记下<1><0>Word #1</0></1>。",
+          "step1": "在空白恢复短语列表上的位置 1 记下<1><0>{{seedWord1}}</0></1>。",
           "step2": "按下右键以继续，直至 24 个助记词输入完成。",
           "step3": "请确认您的恢复短语：选择并同时按下两个按钮验证每个助记词。"
         },
         "blue": {
           "step1": "在空白恢复短语列表中按顺序记下每个助记词。",
-          "step2": "点击<1><0>Next</0></1>，输入所有助记词直至屏幕上出现<3><0>Confirmation</0></3>。",
+          "step2": "点击<1><0>{{seedNext}}</0></1>，输入所有助记词直至屏幕上出现<3><0>{{seedConfirmation}}</0></3>。",
           "step3": "键入每个助记词，以确认您的恢复短语。"
         }
       },
@@ -672,8 +669,8 @@
         "desc": "输入您在恢复短语列表上中记下的恢复短语助记词。",
         "nano": {
           "step1": "选择您的恢复短语的长度。",
-          "step2": "输入<1><0>Word #1</0></1>的开头字母，直至显示建议助记词。",
-          "step3": "同时按下两个按钮，从建议助记词中选择<1><0>Word #1</0></1>。",
+          "step2": "输入<1><0>{{seedWord1}}</0></1>的开头字母，直至显示建议助记词。",
+          "step3": "同时按下两个按钮，从建议助记词中选择<1><0>{{seedWord1}}</0></1>。",
           "step4": "重复该过程，直至完成最后一个助记词。"
         },
         "blue": {

@@ -14,6 +14,7 @@ import Text from 'components/base/Text'
 import type { StepProps } from '../'
 
 import Installing from '../Installing'
+import { repairProcessing } from '../../../../config/nontranslatables'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -102,7 +103,7 @@ class StepFlashMcu extends PureComponent<Props, State> {
             <Trans i18nKey="manager.modal.mcuSecond">
               {'Press the left button and hold it while you reconnect the USB cable until the '}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Processing'}
+                {repairProcessing}
               </Text>
               {' screen appears'}
             </Trans>
