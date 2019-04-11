@@ -6,7 +6,6 @@ import {
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/currencies'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import languages from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
@@ -37,6 +36,7 @@ export type SettingsState = {
   language: ?string,
   region: ?string,
   orderAccounts: string,
+  countervalueFirst: boolean,
   hasPassword: boolean,
   autoLockTimeout: number,
   selectedTimeRange: TimeRange,
@@ -66,6 +66,7 @@ const INITIAL_STATE: SettingsState = {
   language: null,
   region: null,
   orderAccounts: 'balance|asc',
+  countervalueFirst: false,
   hasPassword: false,
   autoLockTimeout: 10,
   selectedTimeRange: 'month',
@@ -159,6 +160,8 @@ export const counterValueCurrencySelector = createSelector(
   counterValueCurrencyLocalSelector,
 )
 
+export const countervalueFirstSelector = createSelector(storeSelector, s => s.countervalueFirst)
+
 export const counterValueExchangeLocalSelector = (s: SettingsState) => s.counterValueExchange
 
 export const counterValueExchangeSelector = createSelector(
@@ -169,8 +172,6 @@ export const counterValueExchangeSelector = createSelector(
 export const developerModeSelector = (state: State): boolean => state.settings.developerMode
 
 export const lastUsedVersionSelector = (state: State): string => state.settings.lastUsedVersion
-
-export const availableCurrencies = createSelector(developerModeSelector, listCryptoCurrencies)
 
 export const langAndRegionSelector = (
   state: State,

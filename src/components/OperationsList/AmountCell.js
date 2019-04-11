@@ -39,6 +39,7 @@ class AmountCell extends PureComponent<Props> {
         <CounterValue
           color="grey"
           fontSize={3}
+          alwaysShowSign
           date={operation.date}
           currency={currency}
           value={amount}

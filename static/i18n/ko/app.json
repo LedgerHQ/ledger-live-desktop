@@ -449,7 +449,7 @@
       "privacyDesc": "수집되는 데이터와 그 이유 및 사용 방법을 알아보려면 당사 개인 정보 보호 정책을 참조하십시오."
     },
     "experimental": {
-      "desc": "Try out experimental features and let us know what think",
+      "desc": "Try out experimental features and let us know what you think",
       "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {

@@ -96,12 +96,13 @@ const accountModel: DataModel<AccountRaw, Account> = createDataModel({
     } = rawAccount
     const currency = getCryptoCurrencyById(currencyId)
     const unit = currency.units.find(u => u.magnitude === unitMagnitude) || currency.units[0]
-    const convertOperation = ({ date, value, fee, ...op }) => ({
+    const convertOperation = ({ date, value, fee, extra, ...op }) => ({
       ...op,
       accountId: acc.id,
       date: new Date(date),
       value: BigNumber(value),
       fee: BigNumber(fee),
+      extra: extra || {},
     })
     return {
       ...acc,

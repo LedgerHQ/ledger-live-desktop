@@ -5,8 +5,7 @@ import type { BigNumber } from 'bignumber.js'
 export type Item = {
   date: Date,
   value: BigNumber,
-  originalValue: BigNumber,
-}
+} & Object
 
 type EnrichedItem = {
   date: string,
@@ -15,8 +14,8 @@ type EnrichedItem = {
   ref: Item,
 }
 
-export type Data = Array<Item>
-export type EnrichedData = Array<EnrichedItem>
+export type Data = Item[]
+export type EnrichedData = EnrichedItem[]
 
 export type CTX = {
   NODES: Object,

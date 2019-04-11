@@ -5,29 +5,27 @@ import * as d3 from 'd3'
 import { renderToString } from 'react-dom/server'
 import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
-import { getFiatCurrencyByTicker } from '@ledgerhq/live-common/lib/currencies'
 
 import createStore from 'renderer/createStore'
 
 import theme from 'styles/theme'
 
-import type { Props } from '.'
 import type { CTX } from './types'
 
 import Tooltip from './Tooltip'
 
 export default function handleMouseEvents({
   ctx,
-  props,
   shouldTooltipUpdate,
   onTooltipUpdate,
   renderTooltip,
+  mapValue,
 }: {
   ctx: CTX,
-  props: Props,
   shouldTooltipUpdate: Function,
   onTooltipUpdate: Function,
   renderTooltip?: Function,
+  mapValue: (*) => number,
 }) {
   const { MARGINS, HEIGHT, WIDTH, NODES, DATA, x, y } = ctx
 
@@ -85,24 +83,20 @@ export default function handleMouseEvents({
       return
     }
     onTooltipUpdate(d)
-    NODES.focus.attr('transform', `translate(${x(d.parsedDate)},${y(d.value.toNumber())})`)
-    NODES.tooltip
-      .html(
-        renderToString(
-          // FIXME :o why is this not in React tree. maybe use a portal (native in React now)
-          <Provider store={createStore({})}>
-            <ThemeProvider theme={theme}>
-              <Tooltip
-                unit={props.unit}
-                renderTooltip={renderTooltip}
-                item={d.ref}
-                counterValue={getFiatCurrencyByTicker(props.cvCode || 'USD')}
-              />
-            </ThemeProvider>
-          </Provider>,
-        ),
-      )
-      .style('left', `${Math.floor(MARGINS.left + x(d.parsedDate))}px`)
+    NODES.focus.attr('transform', `translate(${x(d.parsedDate)},${y(mapValue(d))})`)
+    renderTooltip &&
+      NODES.tooltip
+        .html(
+          renderToString(
+            // FIXME :o why is this not in React tree. maybe use a portal (native in React now)
+            <Provider store={createStore({})}>
+              <ThemeProvider theme={theme}>
+                <Tooltip renderTooltip={renderTooltip} item={d.ref} />
+              </ThemeProvider>
+            </Provider>,
+          ),
+        )
+        .style('left', `${Math.floor(MARGINS.left + x(d.parsedDate))}px`)
     NODES.xBar
       .attr('x1', x(d.parsedDate))
       .attr('x2', x(d.parsedDate))

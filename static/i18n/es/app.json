@@ -400,7 +400,7 @@
       "counterValue": "Contravalor",
       "counterValueDesc": "Elige la moneda mostrada al lado de tu saldo y operaciones.",
       "exchange": "Proveedor de tarifas",
-      "exchangeDesc": "Ofrece el tipo de cambio de Bitcoin a {{fiat}}, utilizado para calcular el valor de tus crypto activos (crypto activo→ BTC → {{fiat}}).",
+      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
       "region": "Región",
       "regionDesc": "Elige tu región, utilizada para establecer la zona horaria de Ledger Live.",
       "stock": "Indicador del mercado regional",
@@ -420,7 +420,7 @@
       "passwordAutoLockDesc": "Bloquea Ledger Live automáticamente después de un periodo de inactividad.",
       "changePassword": "Cambiar contraseña",
       "softResetTitle": "Borrar caché",
-      "softResetDesc": "Borra la caché de Ledger Live para forzar la resincronización con la cadena de bloques.",
+      "softResetDesc": "Borra la caché de Ledger Live para forzar la resincronización con la blockchain.",
       "softReset": "Borrar",
       "hardResetTitle": "Restablecer Ledger Live",
       "hardResetDesc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes.",
@@ -449,7 +449,7 @@
       "privacyDesc": "Consulta nuestra Política de Privacidad para conocer qué datos personales recogemos, por qué y cómo los utilizamos."
     },
     "experimental": {
-      "desc": "Try out experimental features and let us know what think",
+      "desc": "Try out experimental features and let us know what you think",
       "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
