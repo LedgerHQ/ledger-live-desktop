@@ -549,14 +549,7 @@
     "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
-    "system": "Utilizar idioma del sistema",
-    "en": "Inglés",
-    "fr": "Francés",
-    "es": "Español",
-    "ko": "Coreano",
-    "zh": "Chino simplificado",
-    "ja": "Japonés",
-    "ru": "Ruso"
+    "system": "Utilizar idioma del sistema"
   },
   "onboarding": {
     "breadcrumb": {

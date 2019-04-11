@@ -20,6 +20,16 @@ type Props = {
 }
 
 class LanguageSelect extends PureComponent<Props> {
+  languageLabels = {
+    en: 'English',
+    fr: 'Français',
+    es: 'Español',
+    ko: '한국어',
+    zh: '简体中文',
+    ja: '日本語',
+    ru: 'Русский',
+  }
+
   handleChangeLanguage = ({ value: languageKey }: *) => {
     const { i18n, setLanguage } = this.props
     i18n.changeLanguage(languageKey)
@@ -28,7 +38,7 @@ class LanguageSelect extends PureComponent<Props> {
   }
 
   languages = [{ value: null, label: this.props.t(`language.system`) }].concat(
-    languageKeys.map(key => ({ value: key, label: this.props.t(`language.${key}`) })),
+    languageKeys.map(key => ({ value: key, label: this.languageLabels[key] })),
   )
 
   render() {
