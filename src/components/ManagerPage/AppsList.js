@@ -10,9 +10,9 @@ import type { Device, T } from 'types/common'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
+import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import flushDevice from 'commands/flushDevice'
@@ -149,7 +149,7 @@ class AppsList extends PureComponent<Props, State> {
       )
 
       const withTickers = filteredAppVersionsList.map(app => {
-        const maybeCrypto = listCryptoCurrencies(true).find(
+        const maybeCrypto = listCryptoCurrencies(true, true).find(
           c => c.managerAppName.toLowerCase() === app.name.toLowerCase(),
         )
         const ticker = maybeCrypto ? maybeCrypto.ticker : ''
