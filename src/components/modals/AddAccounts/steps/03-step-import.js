@@ -339,11 +339,15 @@ export const StepImportFooter = ({
   })
 
   const count = checkedAccountsIds.length
+  const willClose = !willCreateAccount && !willAddAccounts
 
   const ctaWording =
-    scanStatus === 'scanning' ? t('common.sync.syncing') : t('addAccounts.cta.add', { count })
+    scanStatus === 'scanning'
+      ? t('common.sync.syncing')
+      : willClose
+        ? t('common.close')
+        : t('addAccounts.cta.add', { count })
 
-  const willClose = !willCreateAccount && !willAddAccounts
   const onClick = willClose
     ? onCloseModal
     : async () => {
@@ -366,11 +370,7 @@ export const StepImportFooter = ({
         </Button>
       )}
       {scanStatus !== 'error' && (
-        <Button
-          primary
-          disabled={scanStatus !== 'finished' || !(willCreateAccount || willAddAccounts)}
-          onClick={onClick}
-        >
+        <Button primary disabled={scanStatus !== 'finished'} onClick={onClick}>
           {ctaWording}
         </Button>
       )}
