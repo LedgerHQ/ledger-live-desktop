@@ -1,7 +1,5 @@
-// TODO: it's actually my key. replace with qorum key.
-
 export default `-----BEGIN PUBLIC KEY-----
-MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEIXzxNFSQ8CJFDoPQuvKUcm/lfeqkK7U3
-ZRliTOxeoR5wAVzjl3lKtypAjXWmsmntOFhLmR4PGiBDe6FpkR4ahA==
+MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEN7qcsG6bogi1nkD3jnMWS813wWguYEcI
+CRcijSvFskSFjHB5la4xUt+Omb2t6iUwop+JRy+EUhy0UQ9p/cPsQA==
 -----END PUBLIC KEY-----
 `
