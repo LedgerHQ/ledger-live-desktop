@@ -281,7 +281,7 @@
       "identifier": "Identificador",
       "mcuTitle": "Finalizar actualización",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
-      "mcuSecond": "Pulsa el botón izquierdo y mantenlo pulsado mientras conectas de nuevo el cable USB hasta que aparezca la pantalla de <1><0>{{repairProcessing}}</0></1>",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Ten paciencia mientras finaliza la actualización",
       "successTitle": "Firmware actualizado",
       "successText": "Reinstala las aplicaciones en tu dispositivo"
@@ -601,19 +601,19 @@
         "instructions": {
           "nano": {
             "step1": "Conecta el {{productName}} a tu ordenador. Pulsa ambos botones para comenzar",
-            "step2": "Pulsa el botón derecho para seleccionar <1><0>{{configureAsNewDevice}}</0></1>",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito. Pulsa ambos botones para validar.",
             "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "nanoX": {
             "step1": "Conecta el {{productName}} a tu ordenador.",
-            "step2": "Pulsa ambos botones para elegir <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito.",
             "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "blue": {
             "step1": "Conecta el {{productName}} a tu ordenador.",
-            "step2": "Pulsa <1><0>{{configureAsNewDevice}}</0></1>.",
+            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Elige un código PIN de 4 a 8 dígitos."
           }
         }
@@ -623,20 +623,20 @@
         "instructions": {
           "nano": {
             "step1": "Conecta el {{productName}} a tu ordenador. Pulsa ambos botones para comenzar",
-            "step2": "Pulsa el botón izquierdo para cancelar <1><0>{{configureAsNewDevice}}</0></1>. A continuación, pulsa el botón derecho para seleccionar <3><0>{{restoreConfiguration}}?</0></3>.",
+            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito. Pulsa ambos botones para validar.",
             "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "nanoX": {
             "step1": "Conecta tu {{productName}} a tu ordenador.",
             "step2": "Pulsa ambos botones a la vez según lo indicado en la pantalla de tu {{productName}}.",
-            "step3": "Pulsa el botón izquierdo para cancelar <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Pulsa el botón derecho para seleccionar <1><0>{{restoreConfiguration}}</0></1>.",
+            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Elige un código PIN que tenga entre 4 y 8 dígitos."
           },
           "blue": {
             "step1": "Conecta el {{productName}} a tu ordenador.",
-            "step2": "Pulsa <1><0>{{restoreConfiguration}}</0></1>.",
+            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Elige un código PIN de 4 a 8 dígitos."
           }
         }
@@ -647,13 +647,13 @@
         "title": "Guarda tu frase de recuperación",
         "desc": "Tu dispositivo mostrará una frase de recuperación de 24 palabras para proteger tus claves privadas.",
         "nano": {
-          "step1": "Escribe la <1><0>{{seedWord1}}</0></1> en la posición 1 en una hoja de Recuperación en blanco.",
+          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "Pulsa el botón derecho para continuar y escribe las 24 palabras.",
           "step3": "Confirma tu frase de recuperación: selecciona y valida cada palabra pulsando ambos botones."
         },
         "blue": {
           "step1": "Escribe cada palabra en una hoja de Recuperación en blanco manteniendo el orden.",
-          "step2": "Pulsa <1><0>{{seedNext}}</0></1> y escribe todas las palabras hasta que aparezca la pantalla <3><0>{{seedConfirmation}}</0></3>.",
+          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
           "step3": "Introduce cada palabra para confirmar tu frase de recuperación."
         }
       },
@@ -662,8 +662,8 @@
         "desc": "Introduce la frase de recuperación guardada en tu hoja de Recuperación.",
         "nano": {
           "step1": "Elige la longitud de tu frase de recuperación.",
-          "step2": "Introduce las primeras letras de la <1><0>{{seedWord1}}</0></1> hasta que aparezcan las palabras sugeridas.",
-          "step3": "Elige la <1><0>{{seedWord1}}</0></1> de las palabras sugeridas pulsando ambos botones.",
+          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
+          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "Repite el proceso hasta la última palabra."
         },
         "blue": {
@@ -785,7 +785,6 @@
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "{{message}}",
       "description": "Por favor, inténtalo de nuevo"
     },
     "DeviceSocketNoBulkStatus": {
@@ -808,6 +807,10 @@
       "title": "Lo sentimos, el cálculo de comisiones ha fallado.",
       "description": "Intenta establecer una comisión habitual (status: {{status}})"
     },
+    "FirmwareOrAppUpdateRequired": {
+      "title": "Firmware or app update required",
+      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+    },
     "HardResetFail": {
       "title": "Vaya, no se ha podido restablecer.",
       "description": "Por favor, inténtalo de nuevo o ponte en contacto con nosotros si tienes dudas"
@@ -817,7 +820,6 @@
       "description": "Se ha intentado actualizar el microcontrolador del dispositivo sin necesidad. Ponte en contacto con Soporte de Ledger si hay algún problema con tu dispositivo."
     },
     "LedgerAPI4xx": {
-      "title": "{{message}}",
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {
