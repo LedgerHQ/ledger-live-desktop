@@ -4,7 +4,7 @@ import { createSelector } from 'reselect'
 import { handleActions } from 'redux-actions'
 import accountModel from 'helpers/accountModel'
 import logger from 'logger'
-import type { Account, AccountRaw } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
 import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
 
@@ -93,14 +93,6 @@ export const accountSelector = createSelector(
   (_, { accountId }: { accountId: string }) => accountId,
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 )
-
-export const decodeAccount = (account: AccountRaw): Account =>
-  accountModel.decode({
-    data: account,
-    version: accountModel.version,
-  })
-
-export const encodeAccount = (account: Account): AccountRaw => accountModel.encode(account).data
 
 export const decodeAccountsModel = (raws: *) => (raws || []).map(accountModel.decode)
 

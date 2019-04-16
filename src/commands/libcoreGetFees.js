@@ -3,8 +3,8 @@
 import { from } from 'rxjs'
 import { createCommand, Command } from 'helpers/ipc'
 import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
+import { fromAccountRaw } from '@ledgerhq/live-common/lib/account'
 import { getFeesForTransaction } from '@ledgerhq/live-common/lib/libcore/getFeesForTransaction'
-import { decodeAccount } from 'reducers/accounts'
 
 type Input = {
   accountRaw: AccountRaw,
@@ -18,7 +18,7 @@ type Result = {
 const cmd: Command<Input, Result> = createCommand('libcoreGetFees', ({ accountRaw, transaction }) =>
   from(
     getFeesForTransaction({
-      account: decodeAccount(accountRaw),
+      account: fromAccountRaw(accountRaw),
       transaction,
     }).then(fees => ({
       totalFees: fees.toString(),

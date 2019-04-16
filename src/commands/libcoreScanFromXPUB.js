@@ -5,10 +5,9 @@ import { reduce, map } from 'rxjs/operators'
 import type { AccountRaw, Account, DerivationMode } from '@ledgerhq/live-common/lib/types'
 import { syncAccount } from '@ledgerhq/live-common/lib/libcore/syncAccount'
 import { createCommand, Command } from 'helpers/ipc'
-import { encodeAccountId } from '@ledgerhq/live-common/lib/account'
+import { encodeAccountId, toAccountRaw } from '@ledgerhq/live-common/lib/account'
 import { runDerivationScheme } from '@ledgerhq/live-common/lib/derivation'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
-import { encodeAccount } from 'reducers/accounts'
 
 type Input = {
   currencyId: string,
@@ -48,7 +47,7 @@ const cmd: Command<Input, Result> = createCommand(
     }
     return syncAccount(account)
       .pipe(reduce((acc, updater: Account => Account) => updater(acc), account))
-      .pipe(map(a => encodeAccount(a)))
+      .pipe(map(a => toAccountRaw(a)))
   },
 )
 

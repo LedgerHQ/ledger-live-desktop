@@ -3,6 +3,7 @@
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { createCommand, Command } from 'helpers/ipc'
 import { from } from 'rxjs'
+import type { DerivationMode } from '@ledgerhq/live-common/lib/types'
 import { withDevice } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import getAddress from '@ledgerhq/live-common/lib/hw/getAddress'
 
@@ -11,6 +12,7 @@ type Input = {
   devicePath: string,
   path: string,
   verify?: boolean,
+  derivationMode: DerivationMode,
 }
 
 type Result = {
@@ -21,9 +23,14 @@ type Result = {
 
 const cmd: Command<Input, Result> = createCommand(
   'getAddress',
-  ({ currencyId, devicePath, path, ...options }) =>
+  ({ currencyId, devicePath, ...options }) =>
     withDevice(devicePath)(transport =>
-      from(getAddress(transport, getCryptoCurrencyById(currencyId), path, options.verify)),
+      from(
+        getAddress(transport, {
+          currency: getCryptoCurrencyById(currencyId),
+          ...options,
+        }),
+      ),
     ),
 )
 

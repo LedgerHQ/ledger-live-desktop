@@ -5,7 +5,7 @@ import type { AccountRaw } from '@ledgerhq/live-common/lib/types'
 import { createCommand, Command } from 'helpers/ipc'
 import { scanAccountsOnDevice } from '@ledgerhq/live-common/lib/libcore/scanAccountsOnDevice'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
-import { encodeAccount } from 'reducers/accounts'
+import { toAccountRaw } from '@ledgerhq/live-common/lib/account'
 
 type Input = {
   devicePath: string,
@@ -18,7 +18,7 @@ const cmd: Command<Input, Result> = createCommand(
   'libcoreScanAccounts',
   ({ devicePath, currencyId }) =>
     scanAccountsOnDevice(getCryptoCurrencyById(currencyId), devicePath).pipe(
-      map(account => encodeAccount(account)),
+      map(account => toAccountRaw(account)),
     ),
 )
 

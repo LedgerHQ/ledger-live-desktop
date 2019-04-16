@@ -124,6 +124,7 @@ class EnsureDeviceApp extends Component<{
 async function getAddressFromAccountOrCurrency(device, account, currency) {
   const { address } = await getAddress
     .send({
+      derivationMode: account ? account.derivationMode : '',
       devicePath: device.path,
       currencyId: currency.id,
       path: account

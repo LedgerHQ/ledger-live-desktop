@@ -27,6 +27,13 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: 'toggle',
+    name: 'SCAN_FOR_INVALID_PATHS',
+    title: 'Scan for invalid paths',
+    description:
+      'will ask Ledger Live to search for potential accounts that was created by mistake / in incorrect derivation paths. It is recommended to move funds if you discover such accounts.',
+  },
+  {
+    type: 'toggle',
     name: 'EXPERIMENTAL_USB',
     title: 'Experimental USB',
     description:
