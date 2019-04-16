@@ -19,6 +19,12 @@ import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 
 import Modal from './index'
 import ModalBody from './ModalBody'
+import {
+  generic,
+  mcuNotGenuine,
+  followDeviceRepair,
+  repairProcessing,
+} from '../../../config/nontranslatables'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
@@ -69,7 +75,7 @@ const FlashStep = ({ progress, t }: { progress: number, t: * }) =>
           <Bullet>{'2.'}</Bullet>
           <Trans i18nKey="manager.modal.mcuSecond">
             {'place holder text'}
-            <Text ff="Open Sans|SemiBold">{'Processing'}</Text>
+            <Text ff="Open Sans|SemiBold">{repairProcessing}</Text>
             {'place holder text'}
           </Trans>
         </Text>
@@ -154,10 +160,15 @@ class RepairModal extends PureComponent<Props, *> {
     this.setState({ selectedOption: selectedOption || forceRepairChoices[0] })
   }
 
-  renderOption = option => (option && this.props.t(`settings.repairDevice.${option.label}`)) || null
+  nonTranslatable: { [string]: string } = {
+    generic,
+    mcuNotGenuine,
+    followDeviceRepair,
+  }
 
-  renderValue = option =>
-    (option && this.props.t(`settings.repairDevice.${option.data.label}`)) || null
+  renderOption = option => (option && this.nonTranslatable[option.label]) || null
+
+  renderValue = option => (option && this.nonTranslatable[option.data.label]) || null
 
   render() {
     const {

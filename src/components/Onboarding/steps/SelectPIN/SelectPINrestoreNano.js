@@ -13,6 +13,7 @@ import IconChevronRight from 'icons/ChevronRight'
 
 import { getDeviceModel } from '@ledgerhq/devices'
 import { IconOptionRow, DisclaimerBox, OptionRow, Inner } from '../../helperComponents'
+import { configureAsNewDevice, restoreConfiguration } from '../../../../config/nontranslatables'
 
 type Props = {
   t: T,
@@ -36,11 +37,11 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
             <Trans i18nKey="onboarding.selectPIN.restore.instructions.nano.step2">
               {'Press the left button to cancel'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Initialize as new device?'}
+                {configureAsNewDevice}
               </Text>
               {'Then press the right button to select'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Restore configuration?'}
+                {restoreConfiguration}
               </Text>
             </Trans>
           </Box>

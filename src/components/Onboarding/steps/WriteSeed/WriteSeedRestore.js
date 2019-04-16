@@ -20,6 +20,7 @@ import {
   OptionRow,
   Inner,
 } from '../../helperComponents'
+import { seedWord1 } from '../../../../config/nontranslatables'
 
 type Props = {
   t: T,
@@ -44,7 +45,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
             <Trans i18nKey="onboarding.writeSeed.restore.nano.step2">
               {'Select the first letters of'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Word #1'}
+                {{ seedWord1 }}
               </Text>
               {'by pressing the right or left button. Press both buttons to confirm each letter.'}
             </Trans>
@@ -59,7 +60,7 @@ class WriteSeedRestore extends PureComponent<Props, *> {
             <Trans i18nKey="onboarding.writeSeed.restore.nano.step3">
               {'Select'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {'Word #1'}
+                {{ seedWord1 }}
               </Text>
               {'from the suggested words. Press both buttons to continue.'}
             </Trans>

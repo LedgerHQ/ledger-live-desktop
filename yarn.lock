@@ -1693,10 +1693,10 @@
     semver "^5.6.0"
     source-map-support "^0.5.9"
 
-"@ledgerhq/errors@^4.48.0":
-  version "4.48.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.48.0.tgz#3a2a65862de72641095db8ef72739d105524a68f"
-  integrity sha512-MM5Tvo+KBr+dQyc6F2d93eyepZdHCmrR9KjwuB2W8pjPBG9jYmtPM/+I72k9o22YXQ9FIyd1WJJaARJoOzWXOA==
+"@ledgerhq/errors@^4.48.0", "@ledgerhq/errors@^4.50.0":
+  version "4.50.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.50.0.tgz#d330e396d47bbbe474fe0adfa087eeb7edd76912"
+  integrity sha512-Xg5GTDUWprVJ5zCWtfESLfI1qyr09JQH8pLtWDCkz3GxlwnFPtMAvKB9qUoc2Ou4zJ9DfsZdS8KaZ/2VKXkYGA==
 
 "@ledgerhq/hw-app-btc@^4.48.0":
   version "4.48.0"
@@ -1750,12 +1750,12 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@4.41.1":
-  version "4.41.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.41.1.tgz#c2816803d72728eb2711f153cdfb963f33b750b4"
-  integrity sha512-504PNfB2bAvnr80L9NAOwbhi44/9DzLmY38eRUy+2ZWTy/wI9Atu64IiNv9VH/6WW47DYrSLZTdtw/Qgeiv8BQ==
+"@ledgerhq/live-common@4.42.0":
+  version "4.42.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-4.42.0.tgz#06d667d72631c966e2511c7f9befadc02ec07114"
+  integrity sha512-Tc28UIoS6BRi+XXYpUbdIt4YDG/xasVKUEKnaE8o8DV44ArkjU/SbFM7wINr4pxJrm4S1s0LtId3ID5ZyqPCbw==
   dependencies:
-    "@ledgerhq/errors" "^4.48.0"
+    "@ledgerhq/errors" "^4.50.0"
     "@ledgerhq/hw-app-btc" "^4.48.0"
     "@ledgerhq/hw-app-eth" "^4.48.0"
     "@ledgerhq/hw-app-xrp" "^4.48.0"

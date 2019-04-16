@@ -281,7 +281,7 @@
       "identifier": "Identifiant",
       "mcuTitle": "Finaliser la mise à jour",
       "mcuFirst": "Déconnectez le câble USB de votre appareil",
-      "mcuSecond": "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu’à ce que l’écran <1><0>Processing</0></1> apparaisse",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Veuillez patienter pendant la finalisation de la mise à jour",
       "successTitle": "Firmware mis à jour",
       "successText": "Veuillez réinstaller les applications sur votre appareil"
@@ -481,10 +481,7 @@
       "title": "Réparer votre appareil Ledger",
       "descSettings": "Utilisez cet outil pour restaurer votre appareil Ledger en cas de blocage lors de la mise à jour du firmware.",
       "desc": "Veuillez sélectionner l’état de votre appareil Ledger.",
-      "button": "Réparer",
-      "generic": "Bootloader",
-      "mcuNotGenuine": "MCU non authentique",
-      "followDeviceRepair": "Suivez les instructions de réparation de l’appareil"
+      "button": "Réparer"
     },
     "exportLogs": {
       "title": "Sauvegarder les logs",
@@ -552,14 +549,7 @@
     "selectedAccounts_plural": "Comptes à inclure ({{count}})"
   },
   "language": {
-    "system": "Utiliser la langue du système",
-    "en": "Anglais",
-    "fr": "Français",
-    "es": "Espagnol",
-    "ko": "Coréen",
-    "zh": "Chinois simplifié",
-    "ja": "Japonais",
-    "ru": "Russe"
+    "system": "Utiliser la langue du système"
   },
   "onboarding": {
     "breadcrumb": {
@@ -611,19 +601,19 @@
         "instructions": {
           "nano": {
             "step1": "Connectez {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
-            "step2": "Appuyez sur le bouton droit pour sélectionner <1><0>Configure as new device?</0></1>.",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
             "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
-            "step2": "Appuyez sur les deux boutons pour choisir Set up as new device.",
+            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre.",
             "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "blue": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
-            "step2": "Appuyez sur <1><0>Configure as new device</0></1>.",
+            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Choisissez un code PIN de 4 à 8 chiffres."
           }
         }
@@ -633,20 +623,20 @@
         "instructions": {
           "nano": {
             "step1": "Connectez le {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
-            "step2": "Appuyez sur le bouton gauche pour annuler <1><0>Initialize as new device?</0></1> Appuyez ensuite sur le bouton droit pour sélectionner <3><0>Restore configuration?</0></3>.",
+            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
             "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
             "step2": "Appuyez sur les deux boutons comme indiqué sur l’écran de votre {{productName}}.",
-            "step3": "Appuyez sur le bouton gauche pour annuler la configuration en tant que nouvel appareil.",
-            "step4": "Appuyez sur le bouton droit pour sélectionner Restaurer la configuration.",
+            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Choisissez un code PIN de 4 à 8 chiffres."
           },
           "blue": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
-            "step2": "Appuyez sur <1><0>Restaurer la configuration</0></1>.",
+            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Choisissez un code PIN de 4 à 8 chiffres."
           }
         }
@@ -657,13 +647,13 @@
         "title": "Enregistrez votre phrase de récupération.",
         "desc": "Votre appareil affichera une phrase de récupération de 24 mots pour sauvegarder vos clés privés",
         "nano": {
-          "step1": "Écrivez le <1><0>Mot n°1</0></1> en position 1 sur une feuille de récupération vierge.",
+          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "Appuyez sur le bouton droit pour continuer et notez les 24 mots.",
           "step3": "Confirmez votre phrase de récupération : sélectionnez et validez chaque mot en appuyant sur les deux boutons."
         },
         "blue": {
           "step1": "Écrivez dans le bon ordre chaque mot sur une feuille de récupération vierge.",
-          "step2": "Appuyez sur <1><0>Suivant</0></1> et écrivez l’ensemble des mots jusqu’à ce que l’écran <3><0>Confirmation</0></3> apparaisse.",
+          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
           "step3": "Saisissez chaque mot pour confirmer votre phrase de récupération."
         }
       },
@@ -672,8 +662,8 @@
         "desc": "Saisissez la phrase de récupération enregistrée sur votre feuille de récupération",
         "nano": {
           "step1": "Choisissez la longueur de votre phrase de récupération.",
-          "step2": "Saisissez les premières lettres du <1><0>Mot n°1</0></1> jusqu’à ce que des suggestions de mots apparaissent.",
-          "step3": "Sélectionnez le <1><0>Mot n°1</0></1> parmi les mots suggérés en appuyant sur les deux boutons.",
+          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
+          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "Répétez le processus jusqu’au dernier mot."
         },
         "blue": {
@@ -795,7 +785,6 @@
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "{{message}}",
       "description": "Veuillez essayer à nouveau"
     },
     "DeviceSocketNoBulkStatus": {
@@ -818,6 +807,10 @@
       "title": "Désolé, une erreur est survenue lors de l’estimation des frais.",
       "description": "Essayez de définir des frais personnalisés (status: {{status}})."
     },
+    "FirmwareOrAppUpdateRequired": {
+      "title": "Firmware or app update required",
+      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+    },
     "HardResetFail": {
       "title": "Désolé, réinitialisation impossible",
       "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger"
@@ -827,7 +820,6 @@
       "description": "Tentative de mise à jour inutile du microcontrôleur de l’appareil. En cas de problème avec votre appareil, veuillez contacter l’assistance Ledger."
     },
     "LedgerAPI4xx": {
-      "title": "{{message}}",
       "description": "Veuillez vérifier votre connexion et réessayer ou contacter le Support Ledger."
     },
     "LedgerAPI5xx": {

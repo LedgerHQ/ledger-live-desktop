@@ -5,12 +5,14 @@ import React, { Fragment, PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
 import { urls } from 'config/urls'
+import { openURL } from 'helpers/linking'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import DeviceConfirm from 'components/DeviceConfirm'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
 import NanoXStates from 'components/NanoXStates'
+import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 
 import type { StepProps } from '../index'
 import TranslatedError from '../../../TranslatedError'
@@ -48,6 +50,10 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
               {account &&
                 t('receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
             </Text>
+            <LinkWithExternalIcon
+              onClick={() => openURL(urls.recipientAddressInfo)}
+              label={t('common.learnMore')}
+            />
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
               {t('common.continue')}
             </Button>

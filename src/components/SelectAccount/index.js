@@ -62,7 +62,8 @@ type Props = {
   t: T,
 }
 
-const getOptionValue = account => account.id
+const getOptionValue = account =>
+  `${account.currency.ticker}|${account.currency.name}|${account.name}`
 
 const RawSelectAccount = ({ accounts, onChange, value, t, ...props }: Props) => {
   const selectedOption = value ? accounts.find(o => o.id === value.id) : null

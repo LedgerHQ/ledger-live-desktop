@@ -149,7 +149,7 @@ class AppsList extends PureComponent<Props, State> {
       )
 
       const withTickers = filteredAppVersionsList.map(app => {
-        const maybeCrypto = listCryptoCurrencies(true).find(
+        const maybeCrypto = listCryptoCurrencies(true, false, false).find(
           c => c.managerAppName.toLowerCase() === app.name.toLowerCase(),
         )
         const ticker = maybeCrypto ? maybeCrypto.ticker : ''
