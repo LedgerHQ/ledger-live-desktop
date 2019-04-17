@@ -49,6 +49,8 @@ const createSteps = ({ t }: { t: T }): Array<*> => {
   return [updateStep, mcuStep, finalStep]
 }
 
+const stepsId = ['idCheck', 'updateMCU', 'finish']
+
 export type StepProps = DefaultStepProps & {
   firmware: FirmwareUpdateContext,
   onCloseModal: () => void,
@@ -64,6 +66,7 @@ type Props = {
   onClose: () => void,
   firmware: FirmwareUpdateContext,
   stepId: StepId | string,
+  error: ?Error,
 }
 
 type State = {
@@ -75,7 +78,7 @@ type State = {
 class UpdateModal extends PureComponent<Props, State> {
   state = {
     stepId: this.props.stepId,
-    error: null,
+    error: this.props.error || null,
     nonce: 0,
   }
 
@@ -95,6 +98,8 @@ class UpdateModal extends PureComponent<Props, State> {
   render(): React$Node {
     const { status, t, firmware, onClose, ...props } = this.props
     const { stepId, error, nonce } = this.state
+
+    const errorSteps = error ? [stepsId.indexOf(stepId)] : []
 
     const additionalProps = {
       error,
@@ -119,6 +124,7 @@ class UpdateModal extends PureComponent<Props, State> {
             title={t('manager.firmware.update')}
             initialStepId={stepId}
             steps={this.STEPS}
+            errorSteps={errorSteps}
             {...additionalProps}
           >
             <FreezeDeviceChangeEvents />
