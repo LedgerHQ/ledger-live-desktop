@@ -63,6 +63,7 @@ class EnsureDeviceApp extends Component<{
         return address
       },
       {
+        pollingInterval: 1250,
         shouldThrow: (err: Error) => {
           const isWrongDevice = err instanceof WrongDeviceForAccount
           const isCantOpenDevice = err instanceof CantOpenDevice
