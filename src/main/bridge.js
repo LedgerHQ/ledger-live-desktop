@@ -90,7 +90,7 @@ ipcMain.on('log', (e, { log }) => {
   logger.onLog(log)
 })
 
-ipcMain.on('set-env', onNewEnvs)
+ipcMain.on('set-envs', onNewEnvs)
 
 ipcMainListenReceiveCommands({
   onUnsubscribe: requestId => {
