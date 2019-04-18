@@ -35,12 +35,12 @@ const supported: CryptoCurrencyIds[] = [
 export const listCryptoCurrencies: (
   withDevCrypto?: boolean,
   onlyTerminated?: boolean,
-  onlyInstallable?: boolean,
+  onlySupported?: boolean,
 ) => CryptoCurrency[] = memoize(
   (withDevCrypto, onlyTerminated = false, onlySupported = true) =>
     listCC(withDevCrypto, true)
       .filter(c => (onlySupported ? supported.includes(c.id) : true))
       .filter(c => (onlyTerminated ? c.terminated : !c.terminated))
       .sort((a, b) => a.name.localeCompare(b.name)),
-  (a?: boolean, b?: boolean) => `${a ? 1 : 0}_${b ? 1 : 0}`,
+  (a?: boolean, b?: boolean, c?: boolean) => `${a ? 1 : 0}_${b ? 1 : 0}_${c ? 1 : 0}`,
 )

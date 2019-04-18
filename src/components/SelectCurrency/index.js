@@ -32,7 +32,7 @@ const SelectCurrency = ({
   autoFocus,
   ...props
 }: Props) => {
-  const availableCC = useCryptocurrencies()
+  const availableCC = useCryptocurrencies({ onlySupported: true })
 
   const cryptos = currencies || availableCC
 
