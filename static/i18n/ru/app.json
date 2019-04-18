@@ -601,19 +601,19 @@
         "instructions": {
           "nano": {
             "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
-            "step2": "Нажмите правую кнопку, чтобы выбрать <1><0>{{configureAsNewDevice}}?</0></1>.",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
             "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
             "step1": "Подключите {{productName}} к компьютеру.",
-            "step2": "Нажмите обе кнопки, чтобы выбрать <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Для выбора цифры нажимайте левую или правую кнопку.",
             "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "blue": {
             "step1": "Подключите {{productName}} к компьютеру.",
-            "step2": "Нажмите <1><0>{{configureAsNewDevice}}</0></1>.",
+            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
@@ -623,20 +623,20 @@
         "instructions": {
           "nano": {
             "step1": "Подключите {{productName}} к компьютеру. Чтобы начать, нажмите обе кнопки.",
-            "step2": "Чтобы отменить выбор <1><0>{{configureAsNewDevice}}?</0></1>, нажмите левую кнопку. Затем выберите <3><0>{{restoreConfiguration}}?</0></3>, нажав правую кнопку.",
+            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
             "step4": "Для подтверждения PIN-кода выберите символ ✓. Для удаления цифры выберите символ ⬅."
           },
           "nanoX": {
             "step1": "Подключите {{productName}} к компьютеру.",
             "step2": "Нажмите одновременно обе кнопки, как указано на экране {{productName}}.",
-            "step3": "Чтобы отменить выбор <1><0>{{setUpAsNewDevice}}</0></1>, нажмите левую кнопку.",
-            "step4": "Чтобы выбрать <1><0>{{restoreConfiguration}}</0></1>, нажмите правую кнопку.",
+            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Выберите PIN-код длиной от 4 до 8 символов."
           },
           "blue": {
             "step1": "Подключите {{productName}} к компьютеру.",
-            "step2": "Нажмите <1><0>{{restoreConfiguration}}</0></1>.",
+            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Выберите PIN-код длиной 4–8 символов."
           }
         }
@@ -647,13 +647,13 @@
         "title": "Сохраните свою фразу восстановления",
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
-          "step1": "Запишите <1><0>{{seedWord1}}</0></1> в позицию 1 на пустой карточке восстановления.",
+          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "Нажмите правую кнопку, чтобы продолжить, и таким же образом запишите все 24 слова.",
           "step3": "Подтвердите фразу восстановления, для чего выделите каждое требуемое слово и нажмите обе кнопки для ее подтверждения."
         },
         "blue": {
           "step1": "Запишите каждое слово в карточку восстановления, соблюдая порядок слов.",
-          "step2": "Нажмите <1><0>{{seedNext}}</0></1> и вводите все слова до тех пор, пока не появится экран <3><0>{{seedConfirmation}}</0></3>.",
+          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
           "step3": "Чтобы подтвердить фразу восстановления, введите каждое слово."
         }
       },
@@ -662,8 +662,8 @@
         "desc": "Введите фразу восстановления, сохраненную в карточке восстановления.",
         "nano": {
           "step1": "Выберите длину фразы восстановления.",
-          "step2": "Вводите первые буквы <1><0>{{seedWord1}}</0></1> до тех пор, пока не появятся предлагаемые слова.",
-          "step3": "Из списка предлагаемых слов выберите <1><0>{{seedWord1}}</0></1>, нажав обе кнопки.",
+          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
+          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "Повторяйте всю процедуру до тех пор, пока не будет выбрано последнее слово."
         },
         "blue": {
@@ -785,7 +785,6 @@
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "{{message}}",
       "description": "Повторите попытку."
     },
     "DeviceSocketNoBulkStatus": {
@@ -808,6 +807,10 @@
       "title": "К сожалению, во время расчета комиссии произошел сбой.",
       "description": "Попробуйте настроить пользовательскую комиссию (status: {{status}})."
     },
+    "FirmwareOrAppUpdateRequired": {
+      "title": "Firmware or app update required",
+      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+    },
     "HardResetFail": {
       "title": "Не удалось сбросить.",
       "description": "Повторите попытку, а в случае возникновения сомнений свяжитесь с нами."
@@ -817,7 +820,6 @@
       "description": "Вы пробовали обновить микроконтроллер устройства без необходимости. Если устройство неисправно, обратитесь в службу поддержки компании Ledger."
     },
     "LedgerAPI4xx": {
-      "title": "{{message}}",
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {

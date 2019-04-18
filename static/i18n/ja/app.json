@@ -281,7 +281,7 @@
       "identifier": "識別子",
       "mcuTitle": "更新を完了します",
       "mcuFirst": "機器からUSBケーブルを外します",
-      "mcuSecond": "USBケーブルを再接続している間、<1><0>Processing</0></1> 画面が表示されるまでLedgerデバイスの左ボタンを押し続けます",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "更新が完了するまでお待ちください",
       "successTitle": "ファームウェアが更新されました",
       "successText": "Ledgerデバイスにアプリを再インストールしてください"
@@ -481,7 +481,7 @@
       "title": "Ledgerデバイスの修理",
       "descSettings": "ファームウェアの更新中にデバイスが動作しなくなった場合は、このツールを使用してLedgerデバイスを復元します。",
       "desc": "Ledgerデバイスの状態を選択してください。",
-      "button": "修理",
+      "button": "修理"
     },
     "exportLogs": {
       "title": "ログの保存",
@@ -601,7 +601,7 @@
         "instructions": {
           "nano": {
             "step1": "{{productName}} をご使用のコンピューターに接続してから、両方のボタンを押すと開始します。",
-            "step2": "右ボタンを押して<1><0>{{configureAsNewDevice}}?</0></1>を選択します。",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "左または右ボタンを押して数字を選択します。両方のボタンを押して確認します。",
             "step4": "PINコードを確認するには、✓を選択します。 数字を消去するには、←を選択します。"
           },
@@ -613,7 +613,7 @@
           },
           "blue": {
             "step1": "{{productName}}をお使いのコンピューターに接続します。",
-            "step2": "<1><0>{{configureAsNewDevice}}</0></1>をタップします。",
+            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "4～8桁のPINコードを選択します。"
           }
         }
@@ -623,7 +623,7 @@
         "instructions": {
           "nano": {
             "step1": "{{productName}} をご使用のコンピューターに接続してから、両方のボタンを押すと開始します。",
-            "step2": "左ボタンを押して、<1><0>{{configureAsNewDevice}}?</0></1>>をキャンセルします。そして、右ボタンを押して、<3><0>{{restoreConfiguration}}?</0></3>>を選択します。",
+            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "左または右ボタンを押して数字を選択します。両方のボタンを押して確認します。",
             "step4": "PINコードを確認するには、✓を選択します。 数字を消去するには、←を選択します。"
           },
@@ -636,7 +636,7 @@
           },
           "blue": {
             "step1": "{{productName}}をお使いのコンピューターに接続します。",
-            "step2": "<1><0>設定を復元</0></1>をタップします。",
+            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "4～8桁のPINコードを選択します。"
           }
         }
@@ -647,13 +647,13 @@
         "title": "復元フレーズを保存します",
         "desc": "お客様のプライベートキーをバックアップするために、お使いのデバイスに24単語のリカバリーフレーズが表示されます",
         "nano": {
-          "step1": "<1><0>{{seedWord1}}</0></1>を空白のリカバリーシートの位置1に記入します。",
+          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "継続のために右ボタンを押して、24単語をすべて書き留めます。",
           "step3": "リカバリーフレーズを確認します。両方のボタンを押して、各単語を選択して、確認します。"
         },
         "blue": {
           "step1": "空白のリカバリーシートに、各単語を順番通りに書き留めます。",
-          "step2": "<3><0>{{seedConfirmation}}</0></3>が画面に表示されるまで、<1><0>{{seedNext}}</0></1>を押して、すべての単語を書き留めます。",
+          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
           "step3": "各単語を入力し、リカバリーフレーズを確認します。"
         }
       },
@@ -662,8 +662,8 @@
         "desc": "リカバリーシートに保存されているリカバリーフレーズを入力します",
         "nano": {
           "step1": "リカバリーフレーズの長さを選択します。",
-          "step2": "提案される単語が表示されるまで、<1><0>{{seedWord1}}</0></1>の最初の文字列を入力します。",
-          "step3": "両方のボタンを押して、提案された単語から<1><0>{{seedWord1}}</0></1>を選択します。",
+          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
+          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "最後の単語まで、プロセスを繰り返します。"
         },
         "blue": {
@@ -785,7 +785,6 @@
       "description": null
     },
     "DeviceSocketFail": {
-      "title": "{{message}}",
       "description": "再試行してください"
     },
     "DeviceSocketNoBulkStatus": {
@@ -808,6 +807,10 @@
       "title": "手数料見積もりに失敗しました",
       "description": "通関手数料を設定してください(status: {{status}})"
     },
+    "FirmwareOrAppUpdateRequired": {
+      "title": "Firmware or app update required",
+      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+    },
     "HardResetFail": {
       "title": "リセットできませんでした",
       "description": "再度お試しください。または疑わしい場合は、当社にお問い合わせください"
@@ -817,7 +820,6 @@
       "description": "機器のマイクロコントローラの更新が試みられました。機器に問題がある場合は、Ledger Supportにお問い合わせください。"
     },
     "LedgerAPI4xx": {
-      "title": "{{message}}",
       "description": "接続を確認して再試行するか、またはLedgerのサポートにお問い合わせください。"
     },
     "LedgerAPI5xx": {
