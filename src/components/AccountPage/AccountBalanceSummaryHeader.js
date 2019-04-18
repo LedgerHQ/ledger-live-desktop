@@ -13,9 +13,11 @@ import { saveSettings } from 'actions/settings'
 import type { TimeRange } from 'reducers/settings'
 
 import { BalanceTotal, BalanceSinceDiff, BalanceSincePercent } from 'components/BalanceInfos'
-import Box from 'components/base/Box'
+import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
+import styled from 'styled-components'
+import Swap from '../../icons/Swap'
 
 type Props = {
   isAvailable: boolean,
@@ -37,6 +39,34 @@ type Props = {
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
 }
+
+const SwapButton = styled(Tabbable).attrs({
+  color: 'dark',
+  ff: 'Museo Sans',
+  fontSize: 7,
+})`
+  align-items: center;
+  align-self: center;
+  border-radius: 4px;
+  border: 1px solid ${p => p.theme.colors.fog};
+  color: ${p => p.theme.colors.fog};
+  cursor: pointer;
+  display: flex;
+  height: 49px;
+  justify-content: center;
+  margin-right: 12px;
+  margin-top: 2px;
+  width: 25px;
+
+  &:hover {
+    border-color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.dark};
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+`
 
 const mapDispatchToProps = {
   saveSettings,
@@ -73,6 +103,9 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
     return (
       <Box flow={4} mb={2}>
         <Box horizontal>
+          <SwapButton onClick={() => setCountervalueFirst(!countervalueFirst)}>
+            <Swap />
+          </SwapButton>
           <BalanceTotal
             style={{ cursor: 'pointer' }}
             onClick={() => setCountervalueFirst(!countervalueFirst)}
