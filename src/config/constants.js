@@ -93,7 +93,10 @@ export const USE_MOCK_DATA = boolFromEnv('USE_MOCK_DATA')
 // Auto update
 
 export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_IGNORE_CHECK', true)
-export const UPDATE_CHECK_FEED = stringFromEnv('UPDATE_CHECK_FEED', 'https://insert.feed.here')
+export const UPDATE_CHECK_FEED = stringFromEnv(
+  'UPDATE_CHECK_FEED',
+  'http://resources.live.ledger.app/public_resources/signatures',
+)
 
 // Other constants
 

@@ -13,9 +13,9 @@ export default ({
   filename: string,
   computedHash: string,
   hashFile: string,
-  signature: string,
+  signature: Buffer,
   pubKey: string,
-  pubKeys: Array<{ fingerprint: string, content: string, signature: string }>,
+  pubKeys: Array<{ fingerprint: string, content: string, signature: Buffer }>,
 }) =>
   createAppUpdater({
     filename,
