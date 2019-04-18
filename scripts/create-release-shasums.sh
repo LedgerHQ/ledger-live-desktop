@@ -11,10 +11,10 @@ set -e
 function main {
   ASSETS_FILTER="(AppImage|zip|exe)"
   PKG_VER=$(grep version package.json | sed -E 's/.*: "(.*)",/\1/g')
-  OUTPUT_FILE="ledger-live-desktop-$PKG_VER.sha512sum"
 
   read -p "> release version ($PKG_VER): " -r RELEASE_VERSION
   RELEASE_VERSION=${RELEASE_VERSION:-$PKG_VER}
+  OUTPUT_FILE="ledger-live-desktop-$RELEASE_VERSION.sha512sum"
 
   RELEASES=$(do_request "/repos/LedgerHQ/ledger-live-desktop/releases")
   printf """
