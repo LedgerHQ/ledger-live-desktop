@@ -84,7 +84,7 @@
     "react-markdown": "^3.3.2",
     "react-mortal": "^3.2.0",
     "react-motion": "^0.5.2",
-    "react-redux": "^5.0.7",
+    "react-redux": "5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "5.0.0-alpha.9",
