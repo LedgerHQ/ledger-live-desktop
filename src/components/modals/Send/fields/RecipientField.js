@@ -9,8 +9,7 @@ import Box from 'components/base/Box'
 import LabelWithExternalIcon from 'components/base/LabelWithExternalIcon'
 import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
-import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
-import { CantScanQRCode } from '@ledgerhq/errors'
+import { createCustomErrorClass, CantScanQRCode } from '@ledgerhq/errors'
 import { BigNumber } from 'bignumber.js'
 
 type Props<Transaction> = {

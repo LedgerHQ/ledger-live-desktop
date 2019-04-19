@@ -4,7 +4,7 @@ import { from } from 'rxjs'
 import { createCommand, Command } from 'helpers/ipc'
 import { isValidRecipient } from '@ledgerhq/live-common/lib/libcore/isValidRecipient'
 import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
-import { serializeError } from '@ledgerhq/errors/lib/helpers'
+import { serializeError } from '@ledgerhq/errors'
 
 type Input = {
   address: string,

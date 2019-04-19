@@ -1,4 +1,4 @@
-import { createCustomErrorClass } from '@ledgerhq/errors/lib/helpers'
+import { createCustomErrorClass } from '@ledgerhq/errors'
 
 export const UpdateIncorrectHash = createCustomErrorClass('UpdateIncorrectHash')
 export const UpdateIncorrectSig = createCustomErrorClass('UpdateIncorrectSig')

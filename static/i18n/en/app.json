@@ -718,7 +718,8 @@
         "desc": "Enter the recovery phrase saved on your Recovery sheet",
         "nano": {
           "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
+          "step2":
+            "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
           "step3":
             "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "Repeat the process until the last word."
@@ -847,6 +848,14 @@
       "title": "Sorry, try again (genuine-close)",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
       "description": "Please try again"
     },
@@ -861,6 +870,10 @@
     "DisconnectedDevice": {
       "title": "Oops, device connection lost",
       "description": "Please try again"
+    },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
     },
     "EnpointConfig": {
       "title": "Invalid endpoint",
