@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import type { BigNumber } from 'bignumber.js'
+import { BigNumber } from 'bignumber.js'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -17,6 +17,7 @@ import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
 import styled from 'styled-components'
+import CounterValue from '../CounterValue'
 import Swap from '../../icons/Swap'
 
 type Props = {
@@ -114,17 +115,29 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             totalBalance={data[0].balance}
             unit={data[0].unit}
           >
-            <FormattedVal
-              key={account.id}
-              animateTicker
-              disableRounding
-              alwaysShowSign={false}
-              color="warmGrey"
-              unit={data[1].unit}
-              fontSize={6}
-              showCode
-              val={data[1].balance}
-            />
+            <Wrapper>
+              <FormattedVal
+                key={account.id}
+                animateTicker
+                disableRounding
+                alwaysShowSign={false}
+                color="warmGrey"
+                unit={data[1].unit}
+                fontSize={6}
+                showCode
+                val={data[1].balance}
+                style={{ marginRight: 8 }}
+              />
+              {'('}
+              <CounterValue
+                currency={account.currency}
+                value={BigNumber(10 ** account.currency.units[0].magnitude)}
+                color="grey"
+                fontSize={3}
+                alwaysShowSign={false}
+              />
+              {')'}
+            </Wrapper>
           </BalanceTotal>
           <Box>
             <PillsDaysCount selected={selectedTimeRange} onChange={this.handleChangeSelectedTime} />
@@ -155,6 +168,12 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
     )
   }
 }
+
+const Wrapper = styled(Box)`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+`
 
 export default compose(
   connect(
