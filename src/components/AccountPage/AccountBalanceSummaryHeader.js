@@ -128,7 +128,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
                 val={data[1].balance}
                 style={{ marginRight: 8 }}
               />
-              {'('}
+              {'(@'}
               <CounterValue
                 currency={account.currency}
                 value={BigNumber(10 ** account.currency.units[0].magnitude)}
