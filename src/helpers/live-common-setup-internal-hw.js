@@ -48,7 +48,7 @@ setErrorRemapping(e => {
 registerTransportModule({
   id: 'hid',
   open: async devicePath => {
-    const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 2 })
+    const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 })
     t.setDebugMode(logger.apdu)
     return t
   },
