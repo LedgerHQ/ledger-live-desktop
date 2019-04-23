@@ -21,6 +21,7 @@ import FlipTicker from 'components/base/FlipTicker'
 
 import IconBottom from 'icons/Bottom'
 import IconTop from 'icons/Top'
+import Tooltip from 'components/base/Tooltip'
 
 const T = styled(Box).attrs({
   ff: 'Rubik',
@@ -49,6 +50,7 @@ type OwnProps = {
   animateTicker?: boolean,
   disableRounding?: boolean,
   isPercent?: boolean,
+  maxLength?: number,
 }
 
 const mapStateToProps = (state: State, _props: OwnProps) => ({
@@ -73,6 +75,7 @@ function FormattedVal(props: Props) {
     locale,
     marketIndicator,
     color,
+    maxLength,
     ...p
   } = props
   let { val } = props
@@ -82,6 +85,7 @@ function FormattedVal(props: Props) {
   const isNegative = val.isNegative() && !val.isZero()
 
   let text = ''
+  let showTooltip = false
 
   if (isPercent) {
     // FIXME move out the % feature of this component... totally unrelated to currency & annoying for flow type.
@@ -102,6 +106,11 @@ function FormattedVal(props: Props) {
       showCode,
       locale,
     })
+
+    if (maxLength && text.length > maxLength) {
+      text = `${text.substring(0, maxLength)}...`
+      showTooltip = true
+    }
   }
 
   if (animateTicker && !DISABLE_TICKER_ANIMATION) {
@@ -113,7 +122,7 @@ function FormattedVal(props: Props) {
     isNegative,
   })
 
-  return (
+  const content = (
     <T color={color || marketColor} withIcon={withIcon} {...p}>
       {withIcon ? (
         <Box horizontal alignItems="center" flow={1}>
@@ -131,6 +140,11 @@ function FormattedVal(props: Props) {
       )}
     </T>
   )
+
+  if (showTooltip) {
+    return <Tooltip render={() => unit && formatCurrencyUnit(unit, val)}> {content} </Tooltip>
+  }
+  return content
 }
 
 export default connect(mapStateToProps)(FormattedVal)

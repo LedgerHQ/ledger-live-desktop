@@ -39,6 +39,7 @@ class AccountCard extends PureComponent<{
               unit={account.unit}
               showCode
               val={account.balance}
+              maxLength={18}
             />
           </Box>
         </Box>
