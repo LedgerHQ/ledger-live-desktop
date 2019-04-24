@@ -784,6 +784,14 @@
       "title": "Désolé, veuillez essayer à nouveau (fermeture pour absence d'authenticité)",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
       "description": "Veuillez essayer à nouveau"
     },
@@ -798,6 +806,10 @@
     "DisconnectedDevice": {
       "title": "Désolé, connexion à l'appareil perdue",
       "description": "Veuillez essayer à nouveau"
+    },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
     },
     "EnpointConfig": {
       "title": "Point de terminaison non valide",

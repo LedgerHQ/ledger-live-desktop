@@ -784,6 +784,14 @@
       "title": "죄송합니다. 다시 시도하십시오(정품-종료).",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
       "description": "다시 시도하십시오."
     },
@@ -798,6 +806,10 @@
     "DisconnectedDevice": {
       "title": "죄송합니다. 장치의 연결이 끊어졌습니다.",
       "description": "다시 시도하십시오."
+    },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
     },
     "EnpointConfig": {
       "title": "잘못된 엔드 포인트",

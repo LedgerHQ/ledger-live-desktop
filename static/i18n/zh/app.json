@@ -784,6 +784,14 @@
       "title": "对不起，请重试 （正版-结束）",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
       "description": "请重试"
     },
@@ -798,6 +806,10 @@
     "DisconnectedDevice": {
       "title": "抱歉，设备连接丢失",
       "description": "请重试"
+    },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
     },
     "EnpointConfig": {
       "title": "端点无效",

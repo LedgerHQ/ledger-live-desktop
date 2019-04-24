@@ -784,6 +784,14 @@
       "title": "申し訳ありませんが、再度お試し (ください  本当に閉じる)",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
       "description": "再試行してください"
     },
@@ -798,6 +806,10 @@
     "DisconnectedDevice": {
       "title": "機器の接続が失われました",
       "description": "再試行してください"
+    },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
     },
     "EnpointConfig": {
       "title": "エンドポイントが無効です",

@@ -784,6 +784,14 @@
       "title": "Lo sentimos, inténtalo de nuevo (genuine-close)",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
       "description": "Por favor, inténtalo de nuevo"
     },
@@ -798,6 +806,10 @@
     "DisconnectedDevice": {
       "title": "Vaya, la conexión con el dispositivo ha fallado",
       "description": "Por favor, inténtalo de nuevo"
+    },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
     },
     "EnpointConfig": {
       "title": "Endpoint inválido.",
