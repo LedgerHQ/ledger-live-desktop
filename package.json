@@ -188,7 +188,7 @@
     "yarn-deduplicate": "^1.1.1"
   },
   "engines": {
-    "node": ">=8.9.0 <=8.15.1",
+    "node": ">=8.9.0",
     "yarn": "^1.10.1"
   },
   "private": true
