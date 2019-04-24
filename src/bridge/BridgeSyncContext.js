@@ -5,7 +5,6 @@
 
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
-import { timeout } from 'rxjs/operators/timeout'
 import React, { Component } from 'react'
 import priorityQueue from 'async/priorityQueue'
 import { connect } from 'react-redux'
@@ -17,7 +16,7 @@ import { bridgeSyncSelector, syncStateLocalSelector } from 'reducers/bridgeSync'
 import type { BridgeSyncState } from 'reducers/bridgeSync'
 import { accountsSelector, isUpToDateSelector } from 'reducers/accounts'
 import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/currenciesStatus'
-import { SYNC_MAX_CONCURRENT, SYNC_TIMEOUT } from 'config/constants'
+import { SYNC_MAX_CONCURRENT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { getBridgeForCurrency } from '.'
 
@@ -48,6 +47,7 @@ export type BehaviorAction =
 
 export type Sync = (action: BehaviorAction) => void
 
+// $FlowFixMe
 const BridgeSyncContext = React.createContext((_: BehaviorAction) => {})
 
 const mapStateToProps = createStructuredSelector({
@@ -88,23 +88,20 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
       this.props.setAccountSyncState(accountId, { pending: true, error: null })
 
       // TODO use Subscription to unsubscribe at relevant time
-      bridge
-        .synchronize(account)
-        .pipe(timeout(SYNC_TIMEOUT))
-        .subscribe({
-          next: accountUpdater => {
-            this.props.updateAccountWithUpdater(accountId, accountUpdater)
-          },
-          complete: () => {
-            this.props.setAccountSyncState(accountId, { pending: false, error: null })
-            next()
-          },
-          error: error => {
-            logger.critical(error)
-            this.props.setAccountSyncState(accountId, { pending: false, error })
-            next()
-          },
-        })
+      bridge.synchronize(account).subscribe({
+        next: accountUpdater => {
+          this.props.updateAccountWithUpdater(accountId, accountUpdater)
+        },
+        complete: () => {
+          this.props.setAccountSyncState(accountId, { pending: false, error: null })
+          next()
+        },
+        error: error => {
+          logger.critical(error)
+          this.props.setAccountSyncState(accountId, { pending: false, error })
+          next()
+        },
+      })
     }
 
     const syncQueue = priorityQueue(synchronize, SYNC_MAX_CONCURRENT)

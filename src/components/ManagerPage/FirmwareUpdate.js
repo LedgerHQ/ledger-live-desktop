@@ -1,7 +1,6 @@
 // @flow
-/* eslint-disable react/jsx-no-literals */ // FIXME
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import { getDeviceModel } from '@ledgerhq/devices'
 import type { DeviceInfo, FirmwareUpdateContext } from '@ledgerhq/live-common/lib/types/manager'
@@ -51,6 +50,7 @@ type State = {
   modal: ModalStatus,
   stepId: ?StepId,
   ready: boolean,
+  error: ?Error,
 }
 
 const intializeState = ({ deviceInfo }): State => ({
@@ -58,6 +58,7 @@ const intializeState = ({ deviceInfo }): State => ({
   modal: 'closed',
   stepId: deviceInfo.isBootloader ? 'updateMCU' : 'idCheck',
   ready: false,
+  error: null,
 })
 
 class FirmwareUpdate extends PureComponent<Props, State> {
@@ -65,14 +66,25 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
   async componentDidMount() {
     const { deviceInfo } = this.props
-    const firmware = await getLatestFirmwareForDevice.send(deviceInfo).toPromise()
-    if (firmware && !this._unmounting) {
+    try {
+      const firmware = await getLatestFirmwareForDevice.send(deviceInfo).toPromise()
+      if (firmware && !this._unmounting) {
+        /* eslint-disable */
+        this.setState({
+          firmware,
+          ready: true,
+          modal: deviceInfo.isOSU ? 'install' : 'closed',
+          stepId: deviceInfo.isOSU ? 'updateMCU' : 'idCheck',
+        })
+        /* eslint-enable */
+      }
+    } catch (error) {
       /* eslint-disable */
       this.setState({
-        firmware,
         ready: true,
         modal: deviceInfo.isOSU ? 'install' : 'closed',
-        stepId: deviceInfo.isOSU ? 'updateMCU' : 'idCheck',
+        stepId: 'finish',
+        error,
       })
       /* eslint-enable */
     }
@@ -92,7 +104,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
   render() {
     const { deviceInfo, t, device } = this.props
-    const { firmware, modal, stepId, ready } = this.state
+    const { firmware, modal, stepId, ready, error } = this.state
 
     const deviceSpecs = getDeviceModel(device.modelId)
 
@@ -115,14 +127,14 @@ class FirmwareUpdate extends PureComponent<Props, State> {
             </Box>
             <Text ff="Open Sans|SemiBold" fontSize={2}>
               {t('manager.firmware.installed', {
-                version: deviceInfo.fullVersion,
+                version: deviceInfo.version,
               })}
             </Text>
           </Box>
           <UpdateFirmwareButton firmware={firmware} onClick={this.handleDisclaimerModal} />
         </Box>
         {ready ? (
-          <Fragment>
+          <>
             <DisclaimerModal
               firmware={firmware}
               status={modal}
@@ -134,8 +146,9 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               stepId={stepId}
               onClose={this.handleCloseModal}
               firmware={firmware}
+              error={error}
             />
-          </Fragment>
+          </>
         ) : null}
       </Card>
     )

@@ -30,21 +30,26 @@ function getRenderTickX(selectedTimeRange) {
 
 export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) {
   const { NODES, WIDTH, HEIGHT, MARGINS, COLORS, INVALIDATED, DATA, x, y } = ctx
-  const { hideAxis, isInteractive, tickXScale, renderTickY } = props
+  const { hideAxis, isInteractive, tickXScale, renderTickY, mapValue } = props
+
+  const transition = '1s'
 
   const nbTicksX = getTickXCount(tickXScale)
   const renderTickX = getRenderTickX(tickXScale)
+
+  // NB this is a hack because can't figure out how
+  const nearZero = d3.min(DATA, mapValue) === 0
 
   const area = d3
     .area()
     .x(d => x(d.parsedDate))
     .y0(HEIGHT)
-    .y1(d => y(d.value.toNumber()))
+    .y1(d => y(mapValue(d)))
 
   const valueline = d3
     .line()
     .x(d => x(d.parsedDate))
-    .y(d => y(d.value.toNumber()))
+    .y(d => y(mapValue(d)))
 
   // Resize container
   NODES.svg
@@ -67,6 +72,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
       NODES.focus.attr('stroke', COLORS.focus)
     }
     // Update gradient color
+    NODES.wrapper.selectAll('path').style('transition', transition)
     NODES.gradientStart.attr('stop-color', COLORS.gradientStart)
     NODES.gradientStop.attr('stop-color', COLORS.gradientStop)
 
@@ -86,6 +92,7 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
     NODES.axisLeft.call(
       d3
         .axisLeft(y)
+        .tickSize(0)
         .ticks(3)
         .tickFormat(renderTickY),
     )
@@ -93,10 +100,12 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
       d3
         .axisBottom(x)
         .ticks(nbTicksX)
+        .tickSize(0)
+        .tickPadding(nearZero ? 0 : 10)
         .tickFormat(val => (renderTickX ? renderTickX(val) : val)),
     )
     stylizeAxis(NODES.axisLeft)
-    stylizeAxis(NODES.axisBot)
+    stylizeAxis(NODES.axisBot, !nearZero)
   }
 
   // Draw ticks
@@ -115,10 +124,12 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
       .attr('stroke', 'rgba(0, 0, 0, 0.1)')
       .attr('stroke-dasharray', '5, 5')
 
-    NODES.yTicks
-      .selectAll('.tick:first-of-type line')
-      .attr('stroke-width', '1px')
-      .attr('stroke-dasharray', 'none')
+    if (nearZero) {
+      NODES.yTicks
+        .selectAll('.tick:first-of-type line')
+        .attr('stroke-width', '1px')
+        .attr('stroke-dasharray', 'none')
+    }
   }
 
   // Draw line and gradient
@@ -126,9 +137,9 @@ export default function refreshDraw({ ctx, props }: { ctx: CTX, props: Props }) 
   NODES.line.data([DATA]).attr('d', valueline)
 }
 
-function stylizeAxis(axis) {
+function stylizeAxis(axis, showAxisLine) {
   axis.selectAll('.tick line').attr('stroke', 'none')
-  axis.selectAll('path').attr('stroke', 'none')
+  axis.selectAll('path').attr('stroke', showAxisLine ? 'rgba(0, 0, 0, 0.1)' : 'none')
   axis
     .selectAll('text')
     .attr('fill', themeColors.grey)

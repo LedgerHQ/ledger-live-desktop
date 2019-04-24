@@ -120,7 +120,6 @@ export const ErrorContainer = ({ isVisible }: { isVisible: boolean }) => (
 export const ErrorDescContainer = translate()(
   ({ error, onRetry, t, ...p }: { error: Error, onRetry: void => void, t: T }) => {
     const errorHelpURL = urls.errors[error.name] || null
-    const errorDesc = <TranslatedError error={error} field="description" />
     return (
       <Box
         horizontal
@@ -135,11 +134,9 @@ export const ErrorDescContainer = translate()(
         <IconExclamationCircle size={16} />
         <Box ml={2} mr={1} shrink grow style={{ maxWidth: 300 }}>
           <TranslatedError error={error} />
-          {!!errorDesc && (
-            <Box ff="Open Sans|Regular" mt={1}>
-              {errorDesc}
-            </Box>
-          )}
+          <Box ff="Open Sans|Regular" mt={1}>
+            <TranslatedError error={error} field="description" />
+          </Box>
         </Box>
         <Box ml="auto" horizontal flow={2}>
           {!!errorHelpURL && (

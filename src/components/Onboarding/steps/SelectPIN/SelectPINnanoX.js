@@ -5,6 +5,7 @@ import { colors } from 'styles/theme'
 import { i } from 'helpers/staticPath'
 
 import Box from 'components/base/Box'
+import Text from 'components/base/Text'
 
 import type { T } from 'types/common'
 
@@ -12,6 +13,7 @@ import IconChevronRight from 'icons/ChevronRight'
 
 import { getDeviceModel } from '@ledgerhq/devices'
 import { IconOptionRow, DisclaimerBox, OptionRow, Inner } from '../../helperComponents'
+import { setUpAsNewDevice } from '../../../../config/nontranslatables'
 
 type Props = {
   t: T,
@@ -35,7 +37,12 @@ class SelectPINnanoX extends PureComponent<Props, *> {
         icon: <IconOptionRow>{'2.'}</IconOptionRow>,
         desc: (
           <Box style={{ display: 'block' }}>
-            <Trans i18nKey="onboarding.selectPIN.initialize.instructions.nanoX.step2" />
+            <Trans i18nKey="onboarding.selectPIN.initialize.instructions.nanoX.step2">
+              {'Press both buttons to choose'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {setUpAsNewDevice}
+              </Text>
+            </Trans>
           </Box>
         ),
       },

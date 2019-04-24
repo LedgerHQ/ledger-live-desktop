@@ -113,4 +113,5 @@ export interface WalletBridge<Transaction> {
 
   getDefaultEndpointConfig?: () => string;
   validateEndpointConfig?: (endpointConfig: string) => Promise<void>;
+  estimateGasLimit?: (account: Account, address: string) => Promise<number>;
 }

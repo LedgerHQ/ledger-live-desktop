@@ -2,13 +2,16 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { withRouter } from 'react-router'
-
+import { Link } from 'react-router-dom'
 import type { Location, RouterHistory } from 'react-router'
+
 import type { T } from 'types/common'
+import { darken } from 'styles/helpers'
+import useExperimental from 'hooks/useExperimental'
 
 import { lock } from 'reducers/application'
 import { hasPasswordSelector } from 'reducers/settings'
@@ -19,7 +22,6 @@ import IconLock from 'icons/Lock'
 import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
-import GlobalSearch from 'components/GlobalSearch'
 import Tooltip from 'components/base/Tooltip'
 import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
 
@@ -43,6 +45,38 @@ const Inner = styled(Box).attrs({
   flow: 4,
   align: 'center',
 })``
+
+const Tag = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 10px;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 10px;
+  border-radius: 16px;
+  color: ${p => p.theme.colors.white};
+  background-color: ${p => p.theme.colors.experimentalBlue};
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${p => darken(p.theme.colors.experimentalBlue, 0.05)};
+  }
+`
+
+const TagContainer = () => {
+  const isExperimental = useExperimental()
+
+  return isExperimental ? (
+    <Box justifyContent="center">
+      <Tag to="/settings/experimental">
+        <Trans i18nKey="common.experimentalFeature" />
+      </Tag>
+    </Box>
+  ) : null
+}
 
 const Bar = styled.div`
   margin-left: 5px;
@@ -99,7 +133,8 @@ class TopBar extends PureComponent<Props> {
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal>
-            <GlobalSearch t={t} isHidden />
+            <TagContainer />
+            <Box grow />
             <CurrenciesStatusBanner />
             {hasAccounts && (
               <Fragment>
@@ -134,6 +169,7 @@ class TopBar extends PureComponent<Props> {
 }
 
 export default compose(
+  // $FlowFixMe
   withRouter,
   connect(
     mapStateToProps,

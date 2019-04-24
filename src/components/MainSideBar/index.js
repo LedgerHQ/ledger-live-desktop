@@ -85,8 +85,14 @@ class MainSideBar extends PureComponent<Props> {
   }
 
   handleClickDashboard = () => this.push('/')
-  handleOpenSendModal = () => this.props.openModal(MODAL_SEND)
-  handleOpenReceiveModal = () => this.props.openModal(MODAL_RECEIVE)
+  handleOpenSendModal = () => {
+    this.push('/')
+    this.props.openModal(MODAL_SEND)
+  }
+  handleOpenReceiveModal = () => {
+    this.push('/')
+    this.props.openModal(MODAL_RECEIVE)
+  }
   handleClickManager = () => this.push('/manager')
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
@@ -147,7 +153,7 @@ class MainSideBar extends PureComponent<Props> {
               icon={IconExchange}
               iconActiveColor="wallet"
               onClick={this.handleClickExchange}
-              isActive={pathname === '/exchange'}
+              isActive={pathname === '/partners'}
             />
             {developerMode && (
               <KeyboardContent sequence="DEVTOOLS">
@@ -184,6 +190,7 @@ class MainSideBar extends PureComponent<Props> {
 }
 
 const decorate = compose(
+  // $FlowFixMe
   withRouter,
   translate(),
   connect(

@@ -55,7 +55,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
   }
 }
 
-// TODO we should be able to pass-in our network() function
+// $FlowFixMe
 const CounterValues = createCounterValues({
   log: (...args) => logger.log('CounterValues:', ...args),
   getAPIBaseURL: () => LEDGER_COUNTERVALUES_API,

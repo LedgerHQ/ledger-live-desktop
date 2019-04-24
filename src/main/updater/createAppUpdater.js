@@ -1,15 +1,15 @@
 // @flow
 
 import { UpdateIncorrectHash, UpdateIncorrectSig } from './errors'
-import * as pgpHelper from './pgpHelper'
+import * as sslHelper from './sslHelper'
 
 type Opts = {
   filename: string,
   computeHash: () => Promise<string>,
   getNextKey: (?string) => Promise<string>,
-  getNextKeySignature: string => Promise<string>,
+  getNextKeySignature: string => Promise<Buffer>,
   getHashFile: () => Promise<string>,
-  getHashFileSignature: () => Promise<string>,
+  getHashFileSignature: () => Promise<Buffer>,
 }
 
 export default function createAppUpdater(opts: Opts): { verify: () => Promise<void> } {
@@ -47,7 +47,7 @@ export default function createAppUpdater(opts: Opts): { verify: () => Promise<vo
   // if no more key, throw
   async function verifyHashFileSignature(hash, sigContent, pubKey) {
     try {
-      await pgpHelper.verify(hash, sigContent, pubKey)
+      await sslHelper.verify(hash, sigContent, pubKey)
     } catch (err) {
       try {
         const nextPubKey = await getNextPubKey(pubKey)
@@ -61,10 +61,10 @@ export default function createAppUpdater(opts: Opts): { verify: () => Promise<vo
   // fetch the next pubkey based on the previous key fingerprint
   // also fetch signature, and verify against previous pubkey
   async function getNextPubKey(pubKey) {
-    const fingerprint = await pgpHelper.getFingerprint(pubKey)
+    const fingerprint = await sslHelper.getFingerprint(pubKey)
     const nextPubKey = await getNextKey(fingerprint)
     const nextPubKeySignature = await getNextKeySignature(fingerprint)
-    await pgpHelper.verify(nextPubKey, nextPubKeySignature, pubKey)
+    await sslHelper.verify(nextPubKey, nextPubKeySignature, pubKey)
     return nextPubKey
   }
 

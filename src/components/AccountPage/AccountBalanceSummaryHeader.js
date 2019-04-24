@@ -2,7 +2,6 @@
 
 import React, { PureComponent } from 'react'
 import type { BigNumber } from 'bignumber.js'
-import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -11,40 +10,63 @@ import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import { saveSettings } from 'actions/settings'
-import { accountSelector } from 'reducers/accounts'
-import { counterValueCurrencySelector, selectedTimeRangeSelector } from 'reducers/settings'
 import type { TimeRange } from 'reducers/settings'
 
-import {
-  BalanceTotal,
-  BalanceSinceDiff,
-  BalanceSincePercent,
-} from 'components/BalanceSummary/BalanceInfos'
-import Box from 'components/base/Box'
+import { BalanceTotal, BalanceSinceDiff, BalanceSincePercent } from 'components/BalanceInfos'
+import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
+import styled from 'styled-components'
+import Swap from '../../icons/Swap'
 
-type OwnProps = {
+type Props = {
   isAvailable: boolean,
-  totalBalance: BigNumber,
-  sinceBalance: BigNumber,
-  refBalance: BigNumber,
-  accountId: string,
-}
-
-type Props = OwnProps & {
+  first: {
+    date: Date,
+    value: BigNumber,
+    countervalue: BigNumber,
+  },
+  last: {
+    date: Date,
+    value: BigNumber,
+    countervalue: BigNumber,
+  },
   counterValue: Currency,
   t: T,
   account: Account,
   saveSettings: ({ selectedTimeRange: TimeRange }) => *,
   selectedTimeRange: TimeRange,
+  countervalueFirst: boolean,
+  setCountervalueFirst: boolean => void,
 }
 
-const mapStateToProps = createStructuredSelector({
-  account: accountSelector,
-  counterValue: counterValueCurrencySelector,
-  selectedTimeRange: selectedTimeRangeSelector,
-})
+const SwapButton = styled(Tabbable).attrs({
+  color: 'dark',
+  ff: 'Museo Sans',
+  fontSize: 7,
+})`
+  align-items: center;
+  align-self: center;
+  border-radius: 4px;
+  border: 1px solid ${p => p.theme.colors.fog};
+  color: ${p => p.theme.colors.fog};
+  cursor: pointer;
+  display: flex;
+  height: 49px;
+  justify-content: center;
+  margin-right: 12px;
+  margin-top: 2px;
+  width: 25px;
+
+  &:hover {
+    border-color: ${p => p.theme.colors.dark};
+    color: ${p => p.theme.colors.dark};
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+`
 
 const mapDispatchToProps = {
   saveSettings,
@@ -58,35 +80,50 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
   render() {
     const {
       account,
-      accountId,
       t,
       counterValue,
       selectedTimeRange,
       isAvailable,
-      totalBalance,
-      sinceBalance,
-      refBalance,
+      first,
+      last,
+      countervalueFirst,
+      setCountervalueFirst,
     } = this.props
+
+    const unit = account.unit
+    const cvUnit = counterValue.units[0]
+    const data = [
+      { oldBalance: first.value, balance: last.value, unit },
+      { oldBalance: first.countervalue, balance: last.countervalue, unit: cvUnit },
+    ]
+    if (countervalueFirst) {
+      data.reverse()
+    }
 
     return (
       <Box flow={4} mb={2}>
         <Box horizontal>
+          <SwapButton onClick={() => setCountervalueFirst(!countervalueFirst)}>
+            <Swap />
+          </SwapButton>
           <BalanceTotal
+            style={{ cursor: 'pointer' }}
+            onClick={() => setCountervalueFirst(!countervalueFirst)}
             showCryptoEvenIfNotAvailable
             isAvailable={isAvailable}
-            totalBalance={account.balance}
-            unit={account.unit}
+            totalBalance={data[0].balance}
+            unit={data[0].unit}
           >
             <FormattedVal
-              key={accountId}
+              key={account.id}
               animateTicker
               disableRounding
               alwaysShowSign={false}
               color="warmGrey"
-              unit={counterValue.units[0]}
+              unit={data[1].unit}
               fontSize={6}
               showCode
-              val={totalBalance}
+              val={data[1].balance}
             />
           </BalanceTotal>
           <Box>
@@ -98,19 +135,19 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             isAvailable={isAvailable}
             t={t}
             alignItems="center"
-            totalBalance={totalBalance}
-            sinceBalance={sinceBalance}
-            refBalance={refBalance}
+            totalBalance={data[0].balance}
+            sinceBalance={data[0].oldBalance}
+            refBalance={data[0].oldBalance}
             since={selectedTimeRange}
           />
           <BalanceSinceDiff
             isAvailable={isAvailable}
             t={t}
-            counterValue={counterValue}
+            unit={data[0].unit}
             alignItems="center"
-            totalBalance={totalBalance}
-            sinceBalance={sinceBalance}
-            refBalance={refBalance}
+            totalBalance={data[0].balance}
+            sinceBalance={data[0].oldBalance}
+            refBalance={data[0].oldBalance}
             since={selectedTimeRange}
           />
         </Box>
@@ -121,7 +158,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
 
 export default compose(
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
   ),
   translate(), // FIXME t() is not even needed directly here. should be underlying component responsability to inject it

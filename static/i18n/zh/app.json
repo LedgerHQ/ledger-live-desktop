@@ -41,6 +41,7 @@
     "copyAddress": "复制",
     "copied": "已复制",
     "addressCopied": "地址已复制",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
@@ -280,7 +281,7 @@
       "identifier": "标识符",
       "mcuTitle": "完成更新",
       "mcuFirst": "从设备上断开 USB 数据线连接",
-      "mcuSecond": "按下左键并同时重新连接 USB 数据线直到屏幕出现 <1><0>Processing</0></1> ",
+      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "正在更新，请您耐心等待",
       "successTitle": "固件已更新",
       "successText": "请在设备上重新安装应用程序"
@@ -330,7 +331,11 @@
         "message": "留言 (140)",
         "rippleTag": "标签",
         "ethereumGasLimit": "Gas 上限",
-        "unitPerByte": "{{unit}} 每字节"
+        "unitPerByte": "{{unit}} 每字节",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "设备"
@@ -365,7 +370,8 @@
       "export": "账户",
       "currencies": "货币",
       "help": "帮助",
-      "about": "关于"
+      "about": "关于",
+      "experimental": "Experimental features"
     },
     "export": {
       "accounts": {
@@ -442,6 +448,10 @@
       "privacy": "隐私政策",
       "privacyDesc": "请参考我们的隐私政策了解我们收集哪些个人数据、收集原因以及使用方式。"
     },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what you think",
+      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+    },
     "hardResetModal": {
       "title": "重置 Ledger Live",
       "desc": "是否清除计算机上存储的所有 Ledger Live 数据（包括您的账户、交易历史记录和设置）？用于访问加密资产的密钥仍安全存储在您的 Ledger 设备和恢复短语列表上。"
@@ -471,10 +481,7 @@
       "title": "修复您的 Ledger 设备",
       "descSettings": "如果 Ledger 设备在固件更新期间卡顿，则可使用此工具恢复您的设备。",
       "desc": "请选择您的 Ledger 设备状态。",
-      "button": "修复",
-      "generic": "启动加载程序",
-      "mcuNotGenuine": "MCU 非正版",
-      "followDeviceRepair": "按照设备修复说明进行操作"
+      "button": "修复"
     },
     "exportLogs": {
       "title": "保存日志",
@@ -542,14 +549,7 @@
     "selectedAccounts_plural": "要包括的帐户 ({{count}})"
   },
   "language": {
-    "system": "使用系统语言",
-    "en": "英语",
-    "fr": "法语",
-    "es": "西班牙语",
-    "ko": "韩语",
-    "zh": "简体中文",
-    "ja": "日语",
-    "ru": "俄语"
+    "system": "使用系统语言"
   },
   "onboarding": {
     "breadcrumb": {
@@ -601,19 +601,19 @@
         "instructions": {
           "nano": {
             "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "按右键选择<1><0>Configure as new device?</0></1>。",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "nanoX": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "同时按两个按钮，选择设置新设备。",
+            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "按下左键或右键选择数字。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "点击<1><0>Configure as new device</0></1>。",
+            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "选择 4 到 8 位数的 PIN 码。"
           }
         }
@@ -623,20 +623,20 @@
         "instructions": {
           "nano": {
             "step1": "将 {{productName}} 连接至您的电脑，同时按下两个按钮后开始。",
-            "step2": "按左键取消<1><0>Initialize as new device?</0></1>，然后按右键选择<3><0>Restore configuration?</0></3>。",
+            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "按左键或右键选择数字，同时按下两个按钮进行确认。",
             "step4": "选择 ✓ 以确认 PIN 码。选择 ⬅ 以删除数字。"
           },
           "nanoX": {
             "step1": "将您的 {{productName}} 连接到您的计算机。",
             "step2": "按照 {{productName}} 屏幕上的说明同时按下两个按钮。",
-            "step3": "按左键选择取消<1><0>Configure as new device<0><1> 。",
-            "step4": "按下右键选择恢复配置。",
+            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "选择长度为 4 到 8 位的 PIN 码。"
           },
           "blue": {
             "step1": "将 {{productName}} 连接至您的计算机。",
-            "step2": "轻击<1><0>恢复配置</0></1>。",
+            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "选择 4 到 8 位数的 PIN 码。"
           }
         }
@@ -647,13 +647,13 @@
         "title": "保存您的恢复短语",
         "desc": "您的设备将显示一组 24 词恢复短语来备份您的私钥",
         "nano": {
-          "step1": "在空白恢复短语列表上的位置 1 记下<1><0>Word #1</0></1>。",
+          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "按下右键以继续，直至 24 个助记词输入完成。",
           "step3": "请确认您的恢复短语：选择并同时按下两个按钮验证每个助记词。"
         },
         "blue": {
           "step1": "在空白恢复短语列表中按顺序记下每个助记词。",
-          "step2": "点击<1><0>Next</0></1>，输入所有助记词直至屏幕上出现<3><0>Confirmation</0></3>。",
+          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
           "step3": "键入每个助记词，以确认您的恢复短语。"
         }
       },
@@ -662,8 +662,8 @@
         "desc": "输入您在恢复短语列表上中记下的恢复短语助记词。",
         "nano": {
           "step1": "选择您的恢复短语的长度。",
-          "step2": "输入<1><0>Word #1</0></1>的开头字母，直至显示建议助记词。",
-          "step3": "同时按下两个按钮，从建议助记词中选择<1><0>Word #1</0></1>。",
+          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
+          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "重复该过程，直至完成最后一个助记词。"
         },
         "blue": {
@@ -784,8 +784,15 @@
       "title": "对不起，请重试 （正版-结束）",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
-      "title": "{{message}}",
       "description": "请重试"
     },
     "DeviceSocketNoBulkStatus": {
@@ -800,6 +807,10 @@
       "title": "抱歉，设备连接丢失",
       "description": "请重试"
     },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
+    },
     "EnpointConfig": {
       "title": "端点无效",
       "description": "请提供有效端点"
@@ -807,6 +818,10 @@
     "FeeEstimationFailed": {
       "title": "抱歉，费用估算失败",
       "description": "尝试设置自定义费用 (status: {{status}})"
+    },
+    "FirmwareOrAppUpdateRequired": {
+      "title": "Firmware or app update required",
+      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
     },
     "HardResetFail": {
       "title": "糟糕，无法重置",
@@ -817,7 +832,6 @@
       "description": "无需尝试更新设备的微控制器。如果您的设备出现问题，请联系 Ledger 客服。"
     },
     "LedgerAPI4xx": {
-      "title": "{{message}}",
       "description": "请检查您的连接后重试，或联系 Ledger 客服。"
     },
     "LedgerAPI5xx": {

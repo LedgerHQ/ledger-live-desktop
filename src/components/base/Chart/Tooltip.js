@@ -1,14 +1,8 @@
 // @flow
 
-import React, { Fragment } from 'react'
-import moment from 'moment'
+import React from 'react'
 import styled from 'styled-components'
-
-import type { Unit, Currency } from '@ledgerhq/live-common/lib/types'
-
-import FormattedVal from 'components/base/FormattedVal'
 import Box from 'components/base/Box'
-
 import type { Item } from './types'
 
 const Container = styled(Box).attrs({
@@ -23,17 +17,7 @@ const Container = styled(Box).attrs({
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
 `
 
-const Tooltip = ({
-  item,
-  renderTooltip,
-  unit,
-  counterValue,
-}: {
-  item: Item,
-  renderTooltip?: Function,
-  unit?: ?Unit,
-  counterValue: Currency,
-}) => (
+const Tooltip = ({ item, renderTooltip }: { item: Item, renderTooltip: Item => * }) => (
   <div style={{ position: 'relative' }}>
     <div
       style={{
@@ -45,37 +29,7 @@ const Tooltip = ({
         marginBottom: -5,
       }}
     >
-      <Container style={{ textAlign: 'center' }}>
-        {renderTooltip ? (
-          renderTooltip(item)
-        ) : (
-          <Fragment>
-            <FormattedVal
-              color="dark"
-              fontSize={5}
-              alwaysShowSign={false}
-              showCode
-              unit={counterValue.units[0]}
-              val={item.value}
-            />
-            {unit && (
-              <FormattedVal
-                color="grey"
-                fontSize={3}
-                alwaysShowSign={false}
-                showCode
-                unit={unit}
-                val={item.originalValue}
-              />
-            )}
-            <Box ff="Open Sans|Regular" color="grey" fontSize={3} mt={2}>
-              {moment(item.date)
-                .add(1, 'second')
-                .format('LL')}
-            </Box>
-          </Fragment>
-        )}
-      </Container>
+      <Container style={{ textAlign: 'center' }}>{renderTooltip(item)}</Container>
     </div>
   </div>
 )

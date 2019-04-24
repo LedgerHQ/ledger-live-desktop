@@ -11,6 +11,8 @@ export const saveSettings: SaveSettings = payload => ({
   payload,
 })
 
+export const setCountervalueFirst = (countervalueFirst: boolean) =>
+  saveSettings({ countervalueFirst })
 export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode })
 export const setSentryLogs = (sentryLogs: boolean) => saveSettings({ sentryLogs })
 export const setShareAnalytics = (shareAnalytics: boolean) => saveSettings({ shareAnalytics })

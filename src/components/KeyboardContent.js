@@ -6,7 +6,7 @@ import { Component } from 'react'
 class KeyboardContent extends Component<
   {
     sequence: string,
-    children?: *,
+    children: React$Node,
   },
   { enabled: boolean },
 > {

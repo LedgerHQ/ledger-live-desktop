@@ -4,16 +4,15 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
-import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import type { Device, T } from 'types/common'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 import { listCryptoCurrencies } from 'config/cryptocurrencies'
-import { developerModeSelector } from 'reducers/settings'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import flushDevice from 'commands/flushDevice'
@@ -35,10 +34,6 @@ import { FreezeDeviceChangeEvents } from './HookDeviceChange'
 import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
 import ModalBody from '../base/Modal/ModalBody'
-
-const mapStateToProps = state => ({
-  isDevMode: developerModeSelector(state),
-})
 
 const List = styled(Box).attrs({
   horizontal: true,
@@ -78,7 +73,6 @@ type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
   t: T,
-  isDevMode: boolean,
 }
 
 type State = {
@@ -145,17 +139,19 @@ class AppsList extends PureComponent<Props, State> {
   _unmounted = false
 
   async fetchAppList() {
-    const { deviceInfo, isDevMode } = this.props
+    const { deviceInfo } = this.props
 
     try {
       const filteredAppVersionsList = await manager.getAppsList(
         deviceInfo,
-        isDevMode,
+        getEnv('MANAGER_DEV_MODE'),
         getFullListSortedCryptoCurrencies,
       )
 
       const withTickers = filteredAppVersionsList.map(app => {
-        const maybeCrypto = listCryptoCurrencies(true).find(c => c.managerAppName.toLowerCase() === app.name.toLowerCase())
+        const maybeCrypto = listCryptoCurrencies(true, false, false).find(
+          c => c.managerAppName.toLowerCase() === app.name.toLowerCase(),
+        )
         const ticker = maybeCrypto ? maybeCrypto.ticker : ''
 
         return {
@@ -370,7 +366,4 @@ class AppsList extends PureComponent<Props, State> {
   }
 }
 
-export default compose(
-  translate(),
-  connect(mapStateToProps),
-)(AppsList)
+export default compose(translate())(AppsList)

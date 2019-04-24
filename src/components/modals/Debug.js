@@ -51,6 +51,7 @@ class Debug extends Component<*, *> {
       for (let x = 0; x < 20; x++) {
         const { address, path } = await getAddress
           .send({
+            derivationMode: 'segwit',
             path: runDerivationScheme(derivationScheme, currency, { account: x }),
             currencyId: currency.id,
             devicePath: device.path,
@@ -105,6 +106,7 @@ class Debug extends Component<*, *> {
       path: runDerivationScheme(derivationScheme, currency),
       currencyId: currency.id,
       devicePath: device.path,
+      derivationMode: 'segwit',
     }
     await run('getAddress', () =>
       getAddress

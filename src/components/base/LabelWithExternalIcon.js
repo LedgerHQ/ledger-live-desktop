@@ -7,8 +7,17 @@ import Label from 'components/base/Label'
 import Box from 'components/base/Box'
 import IconExternalLink from 'icons/ExternalLink'
 
+const LabelWrapper = styled(Label).attrs({})`
+  &:hover {
+    color: ${p => p.theme.colors.wallet};
+    cursor: pointer;
+  }
+`
+
+type Props = { onClick: ?() => void, label: string }
+
 // can add more dynamic options if needed
-export function LabelWithExternalIcon({ onClick, label }: { onClick: ?() => void, label: string }) {
+export function LabelWithExternalIcon({ onClick, label }: Props) {
   return (
     <LabelWrapper onClick={onClick}>
       <span>{label}</span>
@@ -20,10 +29,3 @@ export function LabelWithExternalIcon({ onClick, label }: { onClick: ?() => void
 }
 
 export default LabelWithExternalIcon
-
-const LabelWrapper = styled(Label).attrs({})`
-  &:hover {
-    color: ${p => p.theme.colors.wallet};
-    cursor: pointer;
-  }
-`

@@ -41,6 +41,7 @@
     "copyAddress": "Copy",
     "copied": "Copied",
     "addressCopied": "Address copied",
+    "experimentalFeature": "Experimental feature",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -304,7 +305,7 @@
       "mcuTitle": "Finalize update",
       "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond":
-        "Press the left button and hold it while you reconnect the USB cable until the <1><0>Processing</0></1> screen appears",
+        "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
       "successText": "Please re-install the apps on your device"
@@ -355,7 +356,12 @@
         "message": "Leave a message (140)",
         "rippleTag": "Tag",
         "ethereumGasLimit": "Gas limit",
-        "unitPerByte": "{{unit}} per byte"
+        "unitPerByte": "{{unit}} per byte",
+        "highFeeModal": {
+          "title": "High fees",
+          "desc":
+            "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+        }
       },
       "connectDevice": {
         "title": "Device"
@@ -392,12 +398,14 @@
       "export": "Accounts",
       "currencies": "Currencies",
       "help": "Help",
-      "about": "About"
+      "about": "About",
+      "experimental": "Experimental features"
     },
     "export": {
       "accounts": {
         "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "desc":
+          "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
         "button": "Export"
       },
       "operations": {
@@ -480,6 +488,11 @@
       "privacyDesc":
         "Refer to our Privacy Policy to learn what personal data we collect, why and how we use it."
     },
+    "experimental": {
+      "desc": "Try out experimental features and let us know what you think",
+      "disclaimer":
+        "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+    },
     "hardResetModal": {
       "title": "Reset Ledger Live",
       "desc":
@@ -513,10 +526,7 @@
       "descSettings":
         "Use this tool to restore your Ledger device if it has become stuck during a firmware update.",
       "desc": "Please select the state of your Ledger device.",
-      "button": "Repair",
-      "generic": "Bootloader",
-      "mcuNotGenuine": "MCU not genuine",
-      "followDeviceRepair": "Follow device repair instructions"
+      "button": "Repair"
     },
     "exportLogs": {
       "title": "Save logs",
@@ -580,7 +590,8 @@
   "exportOperationsModal": {
     "title": "Operation history",
     "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
+    "descSuccess":
+      "A CSV file of your operation history has been successfully saved in the selected folder",
     "titleSuccess": "Operation history successfully saved",
     "cta": "Save",
     "ctaSuccess": "Done",
@@ -589,14 +600,7 @@
     "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
   "language": {
-    "system": "Use system language",
-    "en": "English",
-    "fr": "French",
-    "es": "Spanish",
-    "ko": "Korean",
-    "zh": "Simplified Chinese",
-    "ja": "Japanese",
-    "ru": "Russian"
+    "system": "Use system language"
   },
   "onboarding": {
     "breadcrumb": {
@@ -648,20 +652,20 @@
         "instructions": {
           "nano": {
             "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
-            "step2": "Press the right button to select <1><0>Configure as new device?</0></1>.",
+            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3":
               "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "nanoX": {
             "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Press both buttons to choose Set up as new device.",
+            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Press the left or right button to select a digit.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
           },
           "blue": {
             "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Configure as new device</0></1>.",
+            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
         }
@@ -672,7 +676,7 @@
           "nano": {
             "step1": "Connect the {{productName}} to your computer. Press both buttons to begin.",
             "step2":
-              "Press the left button to cancel <1><0>Initialize as new device?</0></1>. Then press the right button to select <3><0>Restore configuration?</0></3>.",
+              "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3":
               "Press the left or right button to select a digit. Press both buttons to validate.",
             "step4": "Select ✓ to confirm your PIN code. Select ⬅ to erase a digit."
@@ -680,13 +684,13 @@
           "nanoX": {
             "step1": "Connect your {{productName}} to your computer.",
             "step2": "Press both buttons as instructed on your {{productName}} screen.",
-            "step3": "Press the left button to cancel Configure as new device.",
-            "step4": "Press the right button to select Restore configuration.",
+            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Choose a PIN code between 4 and 8 digits long."
           },
           "blue": {
             "step1": "Connect the {{productName}} to your computer.",
-            "step2": "Tap on <1><0>Restore configuration</0></1>.",
+            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Choose a PIN code of 4 to 8 digits."
           }
         }
@@ -697,7 +701,7 @@
         "title": "Save your recovery phrase",
         "desc": "Your device will display a 24-word recovery phrase to back up your private keys",
         "nano": {
-          "step1": "Write <1><0>Word #1</0></1> in position 1 on a blank Recovery sheet.",
+          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
           "step2": "Press the right button to continue and write down all 24 words.",
           "step3":
             "Confirm your recovery phrase: select and validate each word by pressing both buttons."
@@ -705,7 +709,7 @@
         "blue": {
           "step1": "Write down each word on a blank Recovery sheet while keeping the order.",
           "step2":
-            "Tap <1><0>Next</0></1> and write down all words until the <3><0>Confirmation</0></3> screen appears.",
+            "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
           "step3": "Enter each word to confirm your recovery phrase."
         }
       },
@@ -714,9 +718,10 @@
         "desc": "Enter the recovery phrase saved on your Recovery sheet",
         "nano": {
           "step1": "Choose the length of your recovery phrase.",
-          "step2": "Enter the first letters of <1><0>Word #1</0></1> until suggested words appear.",
+          "step2":
+            "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
           "step3":
-            "Choose <1><0>Word #1</0></1> from the suggested words by pressing both buttons.",
+            "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
           "step4": "Repeat the process until the last word."
         },
         "blue": {
@@ -843,8 +848,15 @@
       "title": "Sorry, try again (genuine-close)",
       "description": null
     },
+    "DeviceInOSUExpected": {
+      "title": "Sorry, update failed",
+      "description": "Please retry or contact Ledger Support"
+    },
+    "DeviceHalted": {
+      "title": "Please restart your Ledger device and retry",
+      "description": "An unexpected error occurred, so please try again"
+    },
     "DeviceSocketFail": {
-      "title": "{{message}}",
       "description": "Please try again"
     },
     "DeviceSocketNoBulkStatus": {
@@ -859,6 +871,10 @@
       "title": "Oops, device connection lost",
       "description": "Please try again"
     },
+    "DisconnectedDeviceDuringOperation": {
+      "title": "Oops, device disconnected",
+      "description": "The connection to the device was lost during an operation, please try again"
+    },
     "EnpointConfig": {
       "title": "Invalid endpoint",
       "description": "Please provide a valid endpoint"
@@ -866,6 +882,11 @@
     "FeeEstimationFailed": {
       "title": "Sorry, fee estimation failed",
       "description": "Try setting a custom fee (status: {{status}})"
+    },
+    "FirmwareOrAppUpdateRequired": {
+      "title": "Firmware or app update required",
+      "description":
+        "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
     },
     "HardResetFail": {
       "title": "Oops, could not reset",
@@ -877,7 +898,6 @@
         "Needlessly tried to update the device microcontroller. Please contact Ledger Support if there's a problem with your device."
     },
     "LedgerAPI4xx": {
-      "title": "{{message}}",
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {

@@ -75,10 +75,12 @@ let implementation = (arg: Object) => {
     if (!('timeout' in arg)) {
       arg.timeout = GET_CALLS_TIMEOUT
     }
+    // $FlowFixMe
     promise = retry(() => axios(arg), {
       maxRetry: GET_CALLS_RETRY,
     })
   } else {
+    // $FlowFixMe
     promise = axios(arg)
   }
   const meta = {

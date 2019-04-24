@@ -86,6 +86,7 @@ export const colors = {
   pillActiveBackground: rgba('#6490f1', 0.1),
   lightRed: rgba('#ea2e49', 0.1),
   white: '#ffffff',
+  experimentalBlue: '#165edb',
 
   // market indicator
   marketUp_eastern: '#ea2e49',

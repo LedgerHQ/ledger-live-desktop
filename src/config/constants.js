@@ -45,8 +45,7 @@ export const OUTDATED_CONSIDERED_DELAY = intFromEnv('OUTDATED_CONSIDERED_DELAY',
 export const SYNC_ALL_INTERVAL = 120 * 1000
 export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_PENDING_INTERVAL = 10 * 1000
-export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 1)
-export const SYNC_TIMEOUT = intFromEnv('SYNC_TIMEOUT', 5 * 60 * 1000)
+export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 4)
 
 // Endpoints...
 
@@ -64,7 +63,6 @@ export const FORCE_PROVIDER = intFromEnv('FORCE_PROVIDER', 0)
 
 // Flags
 
-export const DISABLE_GRAPHS = boolFromEnv('DISABLE_GRAPHS')
 export const DISABLE_TICKER_ANIMATION = boolFromEnv('DISABLE_TICKER_ANIMATION')
 export const DEBUG_ANALYTICS = boolFromEnv('DEBUG_ANALYTICS')
 export const DEBUG_DEVICE = boolFromEnv('DEBUG_DEVICE')
@@ -94,8 +92,11 @@ export const USE_MOCK_DATA = boolFromEnv('USE_MOCK_DATA')
 
 // Auto update
 
-export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_IGNORE_CHECK', true)
-export const UPDATE_CHECK_FEED = stringFromEnv('UPDATE_CHECK_FEED', 'https://insert.feed.here')
+export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_CHECK_IGNORE', true)
+export const UPDATE_CHECK_FEED = stringFromEnv(
+  'UPDATE_CHECK_FEED',
+  'http://resources.live.ledger.app/public_resources/signatures',
+)
 
 // Other constants
 

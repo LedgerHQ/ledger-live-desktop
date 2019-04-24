@@ -192,10 +192,10 @@ export default {
     }
   },
 
-  network: ({ method, url }: { method: string, url: string }) => {
-    const log = `➡📡  ${method} ${anonymizer.url(url)}`
+  network: ({ method, url, data }: { method: string, url: string, data: * }) => {
+    const log = `➡📡  ${method} ${url}`
     if (logNetwork) {
-      logger.log('info', log, { type: 'network' })
+      logger.log('info', log, { type: 'network', data })
     }
   },
 

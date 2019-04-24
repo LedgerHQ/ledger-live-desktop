@@ -12,11 +12,13 @@ import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
 import { executeCommand, unsubscribeCommand } from 'main/commandHandler'
 import { cleanUpBeforeClosingSync } from 'helpers/log'
-import { deserializeError } from '@ledgerhq/errors/lib/helpers'
+import { deserializeError } from '@ledgerhq/errors'
 
 import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
+
+let envs = {}
 
 const loggerTransport = new LoggerTransport()
 logger.add(loggerTransport)
@@ -56,6 +58,7 @@ const bootInternalProcess = () => {
   logger.log('booting internal process...')
   internalProcess = fork(forkBundlePath, {
     env: {
+      ...envs,
       ...process.env,
       IS_INTERNAL_PROCESS: 1,
       LEDGER_CONFIG_DIRECTORY,
@@ -67,6 +70,11 @@ const bootInternalProcess = () => {
   setInternalProcessPID(internalProcess.pid)
   internalProcess.on('message', handleGlobalInternalMessage)
   internalProcess.on('exit', handleExit)
+}
+
+const onNewEnvs = (evt, val) => {
+  envs = val
+  killInternalProcess()
 }
 
 process.on('exit', () => {
@@ -81,6 +89,8 @@ ipcMain.on('clean-processes', () => {
 ipcMain.on('log', (e, { log }) => {
   logger.onLog(log)
 })
+
+ipcMain.on('set-envs', onNewEnvs)
 
 ipcMainListenReceiveCommands({
   onUnsubscribe: requestId => {

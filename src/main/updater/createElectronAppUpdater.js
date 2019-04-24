@@ -11,10 +11,8 @@ import createAppUpdater from './createAppUpdater'
 
 import pubKey from './ledger-pubkey'
 
-export default async ({ feedURL, updateVersion }: { feedURL: string, updateVersion: string }) => {
-  const { app } = require('electron')
-  const updateFolder = path.resolve(app.getPath('userData'), '__update__')
-  const { fileName: filename } = await readUpdateInfos(updateFolder)
+export default async ({ feedURL, info }: { feedURL: string, info: Object }) => {
+  const { version: updateVersion, path: filename, downloadedFile: filePath } = info
 
   const hashFileURL = `${feedURL}/ledger-live-desktop-${updateVersion}.sha512sum`
   const hashSigFileURL = `${feedURL}/ledger-live-desktop-${updateVersion}.sha512sum.sig`
@@ -22,13 +20,13 @@ export default async ({ feedURL, updateVersion }: { feedURL: string, updateVersi
 
   return createAppUpdater({
     filename,
-    computeHash: () => sha512sumPath(path.resolve(updateFolder, filename)),
+    computeHash: () => sha512sumPath(filePath),
     getHashFile: () => getDistantFileContent(hashFileURL),
-    getHashFileSignature: () => getDistantFileContent(hashSigFileURL),
+    getHashFileSignature: () => getDistantFileContent(hashSigFileURL, true),
     getNextKey: (fingerprint: ?string) =>
-      fingerprint ? getDistantFileContent(`${keysURL}/${fingerprint}.asc`) : pubKey,
+      fingerprint ? getDistantFileContent(`${keysURL}/${fingerprint}.pem`) : pubKey,
     getNextKeySignature: async (fingerprint: string) =>
-      getDistantFileContent(`${keysURL}/${fingerprint}.asc.sig`),
+      getDistantFileContent(`${keysURL}/${fingerprint}.pem.sig`, true),
   })
 }
 
@@ -41,20 +39,26 @@ export async function readUpdateInfos(updateFolder: string) {
   return JSON.parse(updateInfoContent)
 }
 
-// compute hash for given path. i guess we only need that here
-export function sha512sumPath(filePath: string) {
+// compute hash for given path.
+export function sha512sumPath(path: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const sum = crypto.createHash('sha512')
-    const stream = fs.createReadStream(filePath)
+    const stream = fs.createReadStream(path)
     stream.on('data', data => sum.update(data))
     stream.on('end', () => resolve(sum.digest('hex')))
     stream.on('error', reject)
   })
 }
 
-async function getDistantFileContent(url: string) {
+async function getDistantFileContent(url: string, binary: boolean = false) {
+  const query: Object = { method: 'GET', url }
+
+  if (binary) {
+    query.responseType = 'arraybuffer'
+  }
+
   try {
-    const res = await network({ method: 'GET', url })
+    const res = await network(query)
     return res.data
   } catch (err) {
     throw new UpdateFetchFileFail(url)

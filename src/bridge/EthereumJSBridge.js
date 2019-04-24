@@ -102,7 +102,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       accountId: account.id,
       senders: [tx.from],
       recipients: [tx.to],
-      date: new Date(new Date(tx.received_at) + 1), // hack: make the IN appear after the OUT in history.
+      date: new Date(new Date(tx.received_at).getTime() + 1), // hack: make the IN appear after the OUT in history.
       extra: {},
     }
     ops.push(op)
@@ -320,7 +320,12 @@ const EthereumBridge: WalletBridge<Transaction> = {
                 account: index,
               })
               const res = await getAddressCommand
-                .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
+                .send({
+                  derivationMode,
+                  currencyId: currency.id,
+                  devicePath: deviceId,
+                  path: freshAddressPath,
+                })
                 .toPromise()
               const r = await stepAddress(
                 index,
@@ -460,6 +465,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
     t.amount.isGreaterThan(0) &&
     t.gasPrice &&
     t.gasPrice.isGreaterThan(0) &&
+    t.gasLimit &&
     t.gasLimit.isGreaterThan(0)
       ? Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit)))
       : Promise.resolve(BigNumber(0)),
@@ -498,6 +504,11 @@ const EthereumBridge: WalletBridge<Transaction> = {
       ),
     ),
   }),
+
+  estimateGasLimit: (account, address) => {
+    const api = apiForCurrency(account.currency)
+    return api.estimateGasLimitForERC20(address)
+  },
 }
 
 export default EthereumBridge

@@ -27,7 +27,4 @@ jobs:
           key: v12-yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-      - run: yarn lint
-      - run: ./node_modules/.bin/prettier -l "{src,webpack,.storybook,static/i18n}/**/*.js"
-      - run: yarn flow --quiet
-      - run: yarn test
+      - run: yarn ci
