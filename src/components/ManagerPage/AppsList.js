@@ -295,10 +295,11 @@ class AppsList extends PureComponent<Props, State> {
   }
 
   renderModal = () => {
-    const { status } = this.state
+    const { status, mode } = this.state
     return (
       <Modal
         isOpened={status !== 'idle' && status !== 'loading'}
+        preventBackdropClick={['installing', 'uninstalling'].includes(mode)}
         centered
         onClose={this.handleCloseModal}
       >
