@@ -320,7 +320,12 @@ const EthereumBridge: WalletBridge<Transaction> = {
                 account: index,
               })
               const res = await getAddressCommand
-                .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
+                .send({
+                  derivationMode,
+                  currencyId: currency.id,
+                  devicePath: deviceId,
+                  path: freshAddressPath,
+                })
                 .toPromise()
               const r = await stepAddress(
                 index,

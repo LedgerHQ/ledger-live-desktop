@@ -23,7 +23,7 @@ import IconUsb from 'icons/Usb'
 
 import type { Device } from 'types/common'
 
-import { WrongDeviceForAccount, CantOpenDevice, UpdateYourApp } from '@ledgerhq/errors'
+import { WrongDeviceForAccount } from '@ledgerhq/errors'
 import { getCurrentDevice } from 'reducers/devices'
 
 const usbIcon = <IconUsb size={16} />
@@ -45,33 +45,22 @@ class EnsureDeviceApp extends Component<{
     })
 
   openAppInteractionHandler = ({ device }) =>
-    createCancelablePolling(
-      async () => {
-        const { account, currency: _currency } = this.props
-        const currency = account ? account.currency : _currency
-        invariant(currency, 'No currency given')
-        const address = await getAddressFromAccountOrCurrency(device, account, currency)
-        if (account) {
-          const { freshAddress } = account
-          if (account && freshAddress !== address) {
-            logger.warn({ freshAddress, address })
-            throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
-              accountName: account.name,
-            })
-          }
+    createCancelablePolling(async () => {
+      const { account, currency: _currency } = this.props
+      const currency = account ? account.currency : _currency
+      invariant(currency, 'No currency given')
+      const address = await getAddressFromAccountOrCurrency(device, account, currency)
+      if (account) {
+        const { freshAddress } = account
+        if (account && freshAddress !== address) {
+          logger.warn({ freshAddress, address })
+          throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
+            accountName: account.name,
+          })
         }
-        return address
-      },
-      {
-        pollingInterval: 1250,
-        shouldThrow: (err: Error) => {
-          const isWrongDevice = err instanceof WrongDeviceForAccount
-          const isCantOpenDevice = err instanceof CantOpenDevice
-          const isUpdateYourApp = err instanceof UpdateYourApp
-          return isWrongDevice || isCantOpenDevice || isUpdateYourApp
-        },
-      },
-    )
+      }
+      return address
+    })
 
   renderOpenAppTitle = () => {
     const { account, currency } = this.props
@@ -125,6 +114,7 @@ class EnsureDeviceApp extends Component<{
 async function getAddressFromAccountOrCurrency(device, account, currency) {
   const { address } = await getAddress
     .send({
+      derivationMode: account ? account.derivationMode : '',
       devicePath: device.path,
       currencyId: currency.id,
       path: account

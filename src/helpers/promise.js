@@ -3,6 +3,7 @@
 
 import logger from 'logger'
 import { TimeoutTagged } from '@ledgerhq/errors'
+import { genericCanRetryOnError } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
 export const delay = (ms: number): Promise<void> => new Promise(f => setTimeout(f, ms))
 
@@ -35,12 +36,11 @@ export function idleCallback(): Promise<any> {
 
 type CancellablePollingOpts = {
   pollingInterval?: number,
-  shouldThrow?: Error => boolean,
 }
 
 export function createCancelablePolling(
   job: any => Promise<any>,
-  { pollingInterval = 500, shouldThrow }: CancellablePollingOpts = {},
+  { pollingInterval = 1250 }: CancellablePollingOpts = {},
 ) {
   let isUnsub = false
   const unsubscribe = () => (isUnsub = true)
@@ -52,7 +52,7 @@ export function createCancelablePolling(
         if (getUnsub()) return
         resolve(res)
       } catch (err) {
-        if (shouldThrow && shouldThrow(err)) {
+        if (!genericCanRetryOnError(err)) {
           reject(err)
           return
         }

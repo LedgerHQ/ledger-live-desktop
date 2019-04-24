@@ -22,22 +22,29 @@ export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
     name: 'MANAGER_DEV_MODE',
-    title: 'Dev mode',
-    description: 'enables developer apps in manager',
+    title: 'Developer mode',
+    description: 'Show developer and testnet apps in the Manager.',
+  },
+  {
+    type: 'toggle',
+    name: 'SCAN_FOR_INVALID_PATHS',
+    title: 'Scan for invalid paths',
+    description:
+      'will ask Ledger Live to search for potential accounts that was created by mistake / in incorrect derivation paths. It is recommended to move funds if you discover such accounts.',
   },
   {
     type: 'toggle',
     name: 'EXPERIMENTAL_USB',
     title: 'Experimental USB',
     description:
-      'Alternative USB implementation that might help solving USB issues. Enabling this feature might create UI glitches.',
+      'Alternative USB implementation that might help solving USB issues. Enabling this feature may lead to interface glitches.',
   },
   {
     shadow: true,
     type: 'toggle',
     name: 'EXPERIMENTAL_EXPLORERS',
     title: 'Experimental explorers',
-    description: 'switch to the new version of explorers',
+    description: "Switch to Ledger's new explorers.",
   },
   {
     shadow: true,
@@ -45,8 +52,8 @@ export const experimentalFeatures: Feature[] = [
     name: 'FORCE_PROVIDER',
     valueOn: 4,
     valueOff: 1,
-    title: 'Manager test app provider=4',
-    description: 'enables yet `unreleased` apps in manager',
+    title: 'Pre-release apps',
+    description: 'Enable pre-release apps in the Manager',
   },
 ]
 

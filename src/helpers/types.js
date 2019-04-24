@@ -11,18 +11,6 @@ export type LedgerScriptParams = {
   perso: string,
 }
 
-export type DeviceInfo = {
-  targetId: string | number,
-  seVersion: string,
-  isBootloader: boolean,
-  flags: string,
-  mcuVersion: string,
-  isOSU: boolean,
-  providerName: string,
-  providerId: number,
-  fullVersion: string,
-}
-
 export type DeviceVersion = {
   id: Id,
   name: string,

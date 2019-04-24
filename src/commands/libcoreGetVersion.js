@@ -12,9 +12,8 @@ type Result = { stringVersion: string, intVersion: number }
 const cmd: Command<Input, Result> = createCommand('libcoreGetVersion', () =>
   fromPromise(
     withLibcore(async ledgerCore => {
-      const core = await ledgerCore.LedgerCore.newInstance()
-      const stringVersion = await core.getStringVersion()
-      const intVersion = await core.getIntVersion()
+      const stringVersion = await ledgerCore.LedgerCore.getStringVersion()
+      const intVersion = await ledgerCore.LedgerCore.getIntVersion()
       return { stringVersion, intVersion }
     }),
   ),

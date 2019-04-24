@@ -26,6 +26,7 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
       }
       const { address } = await getAddress
         .send({
+          derivationMode: account.derivationMode,
           currencyId: account.currency.id,
           devicePath: device.path,
           path: account.freshAddressPath,

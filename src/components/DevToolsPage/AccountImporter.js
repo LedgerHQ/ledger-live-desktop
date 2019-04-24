@@ -5,12 +5,11 @@
 import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
 import { connect } from 'react-redux'
-
 import type { CryptoCurrency, Account, DerivationMode } from '@ledgerhq/live-common/lib/types'
-
-import { decodeAccount } from 'reducers/accounts'
+import { fromAccountRaw } from '@ledgerhq/live-common/lib/account'
 import { addAccount } from 'actions/accounts'
-
+import { idleCallback } from 'helpers/promise'
+import scanFromXPUB from 'commands/libcoreScanFromXPUB'
 import FakeLink from 'components/base/FakeLink'
 import Ellipsis from 'components/base/Ellipsis'
 import Switch from 'components/base/Switch'
@@ -22,10 +21,6 @@ import Input from 'components/base/Input'
 import Label from 'components/base/Label'
 import SelectCurrency from 'components/SelectCurrency'
 import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
-
-import { idleCallback } from 'helpers/promise'
-
-import scanFromXPUB from 'commands/libcoreScanFromXPUB'
 
 const mapDispatchToProps = {
   addAccount,
@@ -104,7 +99,7 @@ class AccountImporter extends PureComponent<Props, State> {
           derivationMode: a.derivationMode,
         }
         const rawAccount = await scanFromXPUB.send(scanPayload).toPromise()
-        const account = decodeAccount(rawAccount)
+        const account = fromAccountRaw(rawAccount)
         await this.import({
           ...account,
           name: a.name,

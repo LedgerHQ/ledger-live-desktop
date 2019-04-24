@@ -1,4 +1,4 @@
-import { serializeError } from '@ledgerhq/errors/lib/helpers'
+import { serializeError } from '@ledgerhq/errors'
 
 import commands from 'commands'
 import logger from 'logger'

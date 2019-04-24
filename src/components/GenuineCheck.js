@@ -16,7 +16,6 @@ import { GENUINE_TIMEOUT, DEVICE_INFOS_TIMEOUT } from 'config/constants'
 
 import { getCurrentDevice } from 'reducers/devices'
 import {
-  CantOpenDevice,
   DeviceNotGenuineError,
   DeviceGenuineSocketEarlyClose,
   UnexpectedBootloader,
@@ -65,18 +64,11 @@ class GenuineCheck extends PureComponent<Props> {
     })
 
   checkDashboardInteractionHandler = ({ device }: { device: Device }) =>
-    createCancelablePolling(
-      () =>
-        getDeviceInfo
-          .send({ devicePath: device.path })
-          .pipe(timeout(DEVICE_INFOS_TIMEOUT))
-          .toPromise(),
-      {
-        shouldThrow: (err: Error) => {
-          const isCantOpenDevice = err instanceof CantOpenDevice
-          return isCantOpenDevice
-        },
-      },
+    createCancelablePolling(() =>
+      getDeviceInfo
+        .send({ devicePath: device.path })
+        .pipe(timeout(DEVICE_INFOS_TIMEOUT))
+        .toPromise(),
     )
 
   checkGenuineInteractionHandler = async ({

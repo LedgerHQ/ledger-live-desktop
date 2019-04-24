@@ -329,8 +329,13 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })
-              const { address } = await await getAddress
-                .send({ currencyId: currency.id, devicePath: deviceId, path: freshAddressPath })
+              const { address } = await getAddress
+                .send({
+                  derivationMode,
+                  currencyId: currency.id,
+                  devicePath: deviceId,
+                  path: freshAddressPath,
+                })
                 .toPromise()
               if (finished) return
 

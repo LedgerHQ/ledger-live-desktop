@@ -1,7 +1,7 @@
 // @flow
 
 import '@babel/polyfill'
-import { serializeError } from '@ledgerhq/errors/lib/helpers'
+import { serializeError } from '@ledgerhq/errors'
 
 import 'helpers/live-common-setup'
 import 'helpers/live-common-setup-internal-hw'

@@ -4,15 +4,14 @@ import { BigNumber } from 'bignumber.js'
 import { map } from 'rxjs/operators'
 import LRU from 'lru-cache'
 import type { Account } from '@ledgerhq/live-common/lib/types'
-import { deserializeError } from '@ledgerhq/errors/lib/helpers'
-import { decodeAccount, encodeAccount } from 'reducers/accounts'
+import { deserializeError, NotEnoughBalance, FeeNotLoaded } from '@ledgerhq/errors'
+import { fromOperationRaw, toAccountRaw, fromAccountRaw } from '@ledgerhq/live-common/lib/account'
 import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
-import { NotEnoughBalance, FeeNotLoaded } from '@ledgerhq/errors'
 import type { WalletBridge, EditProps } from './types'
 
 const notImplemented = new Error('LibcoreBridge: not implemented')
@@ -31,9 +30,6 @@ const serializeTransaction = t => {
     feePerByte: (feePerByte && feePerByte.toString()) || '0',
   }
 }
-
-const decodeOperation = (encodedAccount, rawOp) =>
-  decodeAccount({ ...encodedAccount, operations: [rawOp] }).operations[0]
 
 const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   <FeesBitcoinKind
@@ -78,7 +74,7 @@ const getFees = async (a, transaction) => {
 
   promise = libcoreGetFees
     .send({
-      accountRaw: encodeAccount({ ...a, transactions: [] }),
+      accountRaw: toAccountRaw({ ...a, transactions: [] }),
       transaction: serializeTransaction(transaction),
     })
     .toPromise()
@@ -111,17 +107,17 @@ const LibcoreBridge: WalletBridge<Transaction> = {
         devicePath,
         currencyId: currency.id,
       })
-      .pipe(map(decodeAccount))
+      .pipe(map(fromAccountRaw))
   },
 
   synchronize: account =>
     libcoreSyncAccount
       .send({
-        rawAccount: encodeAccount(account),
+        rawAccount: toAccountRaw(account),
       })
       .pipe(
         map(({ rawAccount, requiresCacheFlush }) => {
-          const syncedAccount = decodeAccount(rawAccount)
+          const syncedAccount = fromAccountRaw(rawAccount)
           return account => {
             const accountOps = account.operations
             const syncedOps = syncedAccount.operations
@@ -159,7 +155,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
 
   // TODO we need to move to the new bridge interface that unify these two:
   isRecipientValid: (...args) => isRecipientValid(...args).then(() => true, () => false),
-  getRecipientWarning: isRecipientValid,
+  getRecipientWarning: (...args) => isRecipientValid(...args).catch(() => null),
 
   createTransaction: () => ({
     amount: BigNumber(0),
@@ -203,13 +199,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
   signAndBroadcast: (account, transaction, deviceId) =>
     libcoreSignAndBroadcast
       .send({
-        accountId: account.id,
-        currencyId: account.currency.id,
-        blockHeight: account.blockHeight,
-        xpub: account.xpub || '', // FIXME only reason is to build the op id. we need to consider another id for making op id.
-        derivationMode: account.derivationMode,
-        seedIdentifier: account.seedIdentifier,
-        index: account.index,
+        account: toAccountRaw({ ...account, operations: [] }),
         transaction: serializeTransaction(transaction),
         deviceId,
       })
@@ -219,7 +209,7 @@ const LibcoreBridge: WalletBridge<Transaction> = {
             case 'broadcasted':
               return {
                 type: 'broadcasted',
-                operation: decodeOperation(encodeAccount(account), e.operation),
+                operation: fromOperationRaw(e.operation, account.id),
               }
             default:
               // $FlowFixMe

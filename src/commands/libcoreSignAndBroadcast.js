@@ -1,20 +1,20 @@
 // @flow
 
 import { map } from 'rxjs/operators'
+import {
+  toOperationRaw,
+  fromAccountRaw,
+  fromTokenAccountRaw,
+} from '@ledgerhq/live-common/lib/account'
 import signAndBroadcast from '@ledgerhq/live-common/lib/libcore/signAndBroadcast'
-import type { OperationRaw, DerivationMode } from '@ledgerhq/live-common/lib/types'
+import type { Transaction } from '@ledgerhq/live-common/lib/libcore/buildTransaction'
+import type { AccountRaw, TokenAccountRaw, OperationRaw } from '@ledgerhq/live-common/lib/types'
 import { createCommand, Command } from 'helpers/ipc'
-import { operationToRow } from 'helpers/accountModel'
 
 type Input = {
-  accountId: string,
-  blockHeight: number,
-  currencyId: string,
-  derivationMode: DerivationMode,
-  seedIdentifier: string,
-  xpub: string,
-  index: number,
-  transaction: *,
+  account: AccountRaw,
+  tokenAccount?: ?TokenAccountRaw,
+  transaction: Transaction,
   deviceId: string,
 }
 
@@ -24,11 +24,16 @@ type Result =
   | { type: 'broadcasted', operation: OperationRaw }
 
 const cmd: Command<Input, Result> = createCommand('libcoreSignAndBroadcast', input =>
-  signAndBroadcast(input).pipe(
+  signAndBroadcast({
+    account: fromAccountRaw(input.account),
+    tokenAccount: input.tokenAccount && fromTokenAccountRaw(input.tokenAccount),
+    transaction: input.transaction,
+    deviceId: input.deviceId,
+  }).pipe(
     map(
       (e: *): Result => {
         if (e.type === 'broadcasted') {
-          const operation: OperationRaw = operationToRow(e.operation)
+          const operation: OperationRaw = toOperationRaw(e.operation)
           return { type: 'broadcasted', operation }
         }
         return e

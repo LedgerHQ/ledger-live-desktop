@@ -12,7 +12,7 @@ import sentry, { captureException } from 'sentry/node'
 import user from 'helpers/user'
 import { executeCommand, unsubscribeCommand } from 'main/commandHandler'
 import { cleanUpBeforeClosingSync } from 'helpers/log'
-import { deserializeError } from '@ledgerhq/errors/lib/helpers'
+import { deserializeError } from '@ledgerhq/errors'
 
 import { setInternalProcessPID } from './terminator'
 
@@ -90,7 +90,7 @@ ipcMain.on('log', (e, { log }) => {
   logger.onLog(log)
 })
 
-ipcMain.on('set-env', onNewEnvs)
+ipcMain.on('set-envs', onNewEnvs)
 
 ipcMainListenReceiveCommands({
   onUnsubscribe: requestId => {
