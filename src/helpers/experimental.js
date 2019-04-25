@@ -28,16 +28,16 @@ export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
     name: 'SCAN_FOR_INVALID_PATHS',
-    title: 'Scan for invalid paths',
+    title: 'Extended account search',
     description:
-      'will ask Ledger Live to search for potential accounts that was created by mistake / in incorrect derivation paths. It is recommended to move funds if you discover such accounts.',
+      'Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.',
   },
   {
     type: 'toggle',
     name: 'EXPERIMENTAL_USB',
     title: 'Experimental USB',
     description:
-      'Alternative USB implementation that might help solving USB issues. Enabling this feature may lead to interface glitches.',
+      'Alternative USB implementation that might help solve USB issues. Enabling this feature might create UI glitches.',
   },
   {
     shadow: true,
