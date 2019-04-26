@@ -333,7 +333,25 @@
         "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
       "successTitle": "Firmware updated",
-      "successText": "Please re-install the apps on your device"
+      "successText": "Please re-install the apps on your device",
+      "resetTitle": "Prepare Device",
+      "resetSteps": {
+        "first": "1. Reset your device",
+        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
+        "turnOn": "Press the button on the device to turn it on.",
+        "falsePin": "Enter three wrong PIN codes to reset the device.",
+        "turnOff": "Press and hold the side button until {{action}} is displayed.",
+        "confirmTurnOff": "Tap {{action}} to confirm.",
+        "second": "2. Boot in {{mode}} mode",
+        "boot": "Press and hold the side button until {{option}} is displayed",
+        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
+        "third": "3. Uninstall all apps",
+        "openLive": "Open the Manager in Ledger Live.",
+        "uninstall":
+          "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "disclaimer":
+          "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+      }
     },
     "title": "Manager",
     "subtitle": "Install or uninstall apps on your device",

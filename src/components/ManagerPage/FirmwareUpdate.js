@@ -65,7 +65,9 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   state = intializeState(this.props)
 
   async componentDidMount() {
-    const { deviceInfo } = this.props
+    const { deviceInfo, device } = this.props
+    const deviceSpecs = getDeviceModel(device.modelId)
+
     try {
       const firmware = await getLatestFirmwareForDevice.send(deviceInfo).toPromise()
       if (firmware && !this._unmounting) {
@@ -74,7 +76,11 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           firmware,
           ready: true,
           modal: deviceInfo.isOSU ? 'install' : 'closed',
-          stepId: deviceInfo.isOSU ? 'updateMCU' : 'idCheck',
+          stepId: deviceInfo.isOSU
+            ? 'updateMCU'
+            : deviceSpecs.id === 'blue'
+              ? 'resetDevice'
+              : 'idCheck',
         })
         /* eslint-enable */
       }
@@ -147,6 +153,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               onClose={this.handleCloseModal}
               firmware={firmware}
               error={error}
+              deviceModelId={deviceSpecs.id}
             />
           </>
         ) : null}

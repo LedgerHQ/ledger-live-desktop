@@ -1,8 +1,9 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import type { DeviceModelId } from '@ledgerhq/devices'
 
 import firmwarePrepare from 'commands/firmwarePrepare'
 import { getCurrentDevice } from 'reducers/devices'
@@ -46,6 +47,7 @@ const Address = styled(Box).attrs({
 
 type Props = StepProps & {
   device: Device,
+  deviceModelId: DeviceModelId,
 }
 
 type State = {
@@ -102,22 +104,23 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   renderBody = () => {
+    // TODO: Use deviceModel to change the <DeviceConfirm /> logo
     const { t, firmware } = this.props
     const { progress, displayedOnDevice } = this.state
     if (!displayedOnDevice) {
       return (
-        <Fragment>
+        <>
           <Text ff="Open Sans|Regular" align="center" color="smoke">
             {t('manager.firmware.downloadingUpdateDesc')}
           </Text>
           <Box my={5}>
             <ProgressCircle progress={progress} size={56} />
           </Box>
-        </Fragment>
+        </>
       )
     }
     return (
-      <Fragment>
+      <>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
           {t('manager.modal.confirmIdentifierText')}
         </Text>
@@ -127,8 +130,11 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
           </Text>
           <Address>{firmware.osu && this.formatHashName(firmware.osu.hash)}</Address>
         </Box>
+        {/* TODO: Switch between components depending on model
+            Note => might need some new illustrations
+         */}
         <DeviceConfirm />
-      </Fragment>
+      </>
     )
   }
 
