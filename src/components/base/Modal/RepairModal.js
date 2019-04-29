@@ -20,7 +20,7 @@ import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Modal from './index'
 import ModalBody from './ModalBody'
 import {
-  generic,
+  bootloader,
   mcuNotGenuine,
   followDeviceRepair,
   repairProcessing,
@@ -161,7 +161,7 @@ class RepairModal extends PureComponent<Props, *> {
   }
 
   nonTranslatable: { [string]: string } = {
-    generic,
+    generic: bootloader,
     mcuNotGenuine,
     followDeviceRepair,
   }
