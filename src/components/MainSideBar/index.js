@@ -96,7 +96,10 @@ class MainSideBar extends PureComponent<Props> {
   handleClickManager = () => this.push('/manager')
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
-  handleOpenImportModal = () => this.props.openModal(MODAL_ADD_ACCOUNTS)
+  handleOpenImportModal = () => {
+    this.push('/')
+    this.props.openModal(MODAL_ADD_ACCOUNTS)
+  }
 
   render() {
     const { t, accounts, location, developerMode } = this.props
