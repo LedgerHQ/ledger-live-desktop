@@ -43,8 +43,8 @@ export const experimentalFeatures: Feature[] = [
     shadow: true,
     type: 'toggle',
     name: 'EXPERIMENTAL_EXPLORERS',
-    title: 'Experimental explorers',
-    description: "Switch to Ledger's new explorers.",
+    title: 'Experimental nodes',
+    description: "Connect to Ledger's new blockchain nodes.",
   },
   {
     shadow: true,
