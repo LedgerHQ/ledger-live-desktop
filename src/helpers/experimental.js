@@ -55,6 +55,12 @@ export const experimentalFeatures: Feature[] = [
     title: 'Pre-release apps',
     description: 'Enable pre-release apps in the Manager',
   },
+  {
+    type: 'toggle',
+    name: 'DEBUG_ALL_LANGS',
+    title: 'Translation testing',
+    description: 'Adds unreleased languages to the language list in the general settings tab.',
+  },
 ]
 
 const lsKey = 'experimentalFlags'

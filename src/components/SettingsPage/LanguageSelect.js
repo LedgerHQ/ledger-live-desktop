@@ -1,15 +1,16 @@
 // @flow
 
-import React, { Fragment, PureComponent } from 'react'
+import React from 'react'
 import moment from 'moment'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import { connect } from 'react-redux'
 import { setLanguage } from 'actions/settings'
 import { langAndRegionSelector } from 'reducers/settings'
-import languageKeys from 'config/languages'
+import { allLanguages, prodStableLanguages } from 'config/languages'
 import Track from 'analytics/Track'
 import Select from 'components/base/Select'
+import useEnv from 'hooks/useEnv'
 
 type Props = {
   t: T,
@@ -19,52 +20,52 @@ type Props = {
   i18n: Object,
 }
 
-class LanguageSelect extends PureComponent<Props> {
-  languageLabels = {
-    en: 'English',
-    fr: 'Français',
-    es: 'Español',
-    ko: '한국어',
-    zh: '简体中文',
-    ja: '日本語',
-    ru: 'Русский',
-  }
+const languageLabels = {
+  en: 'English',
+  fr: 'Français',
+  es: 'Español',
+  ko: '한국어',
+  zh: '简体中文',
+  ja: '日本語',
+  ru: 'Русский',
+}
 
-  handleChangeLanguage = ({ value: languageKey }: *) => {
-    const { i18n, setLanguage } = this.props
+const LanguageSelect = ({ i18n, setLanguage, language, useSystem, t }: Props) => {
+  const debugLanguage = useEnv('DEBUG_ALL_LANGS')
+
+  const languages = [{ value: null, label: t(`language.system`) }].concat(
+    (debugLanguage ? allLanguages : prodStableLanguages).map(key => ({
+      value: key,
+      label: languageLabels[key],
+    })),
+  )
+
+  const currentLanguage = useSystem ? languages[0] : languages.find(l => l.value === language)
+
+  const handleChangeLanguage = ({ value: languageKey }: *) => {
     i18n.changeLanguage(languageKey)
     moment.locale(languageKey)
     setLanguage(languageKey)
   }
 
-  languages = [{ value: null, label: this.props.t(`language.system`) }].concat(
-    languageKeys.map(key => ({ value: key, label: this.languageLabels[key] })),
+  return (
+    <>
+      <Track
+        onUpdate
+        event="LanguageSelect"
+        currentRegion={currentLanguage && currentLanguage.value}
+      />
+      <Select
+        small
+        minWidth={250}
+        isSearchable={false}
+        onChange={handleChangeLanguage}
+        renderSelected={item => item && item.name}
+        value={currentLanguage}
+        options={languages}
+      />
+    </>
   )
-
-  render() {
-    const { language, useSystem } = this.props
-    const currentLanguage = useSystem
-      ? this.languages[0]
-      : this.languages.find(l => l.value === language)
-    return (
-      <Fragment>
-        <Track
-          onUpdate
-          event="LanguageSelect"
-          currentRegion={currentLanguage && currentLanguage.value}
-        />
-        <Select
-          small
-          minWidth={250}
-          isSearchable={false}
-          onChange={this.handleChangeLanguage}
-          renderSelected={item => item && item.name}
-          value={currentLanguage}
-          options={this.languages}
-        />
-      </Fragment>
-    )
-  }
 }
 
 export default translate()(
