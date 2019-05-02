@@ -25,7 +25,7 @@ class AccountCardBody extends PureComponent<{
             <CounterValue
               currency={account.currency}
               value={balanceEnd}
-              animateTicker
+              animateTicker={false}
               alwaysShowSign={false}
               showCode
               fontSize={3}

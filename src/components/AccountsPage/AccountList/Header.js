@@ -1,0 +1,73 @@
+// @flow
+
+import React, { PureComponent } from 'react'
+
+import Box from 'components/base/Box'
+import Text from 'components/base/Text'
+import styled from 'styled-components'
+import SearchIcon from 'icons/Search'
+import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
+import AccountsOrder from './Order'
+import AccountsRange from './Range'
+
+import GridIcon from '../../../icons/Grid'
+import ListIcon from '../../../icons/List'
+import Button from '../../base/Button'
+import { GenericBox } from '../index'
+
+type Props = {
+  onModeChange: () => void,
+  onTextChange: (evt: SyntheticInputEvent<HTMLInputElement>) => void,
+  onRangeChange: PortfolioRange => void,
+  mode: string,
+  search?: string,
+  range?: string,
+}
+
+const ToggleButton = styled(Button)`
+  height: 30px;
+  width: 30px;
+  padding: 7px;
+  background: ${p => (p.active ? p.theme.colors.pillActiveBackground : p.theme.colors.white)};
+  color: ${p => (p.active ? p.theme.colors.wallet : p.theme.colors.fog)};
+`
+
+const SearchInput = styled.input`
+  border: none;
+  background: transparent;
+  outline: none;
+  flex-grow: 1;
+  font-family: 'Open Sans';
+  &::placeholder {
+    color: #999999;
+  }
+`
+
+class AccountListHeader extends PureComponent<Props> {
+  render() {
+    const { onModeChange, onTextChange, onRangeChange, mode, search, range } = this.props
+
+    return (
+      <GenericBox horizontal p={0} alignItems="center">
+        <Box pr={3} justify="center" color={'#999999'}>
+          <SearchIcon size={16} />
+        </Box>
+        <SearchInput placeholder="Search" onChange={onTextChange} value={search} />
+        <Text color="dark" ff="Museo Sans" fontSize={6} data-e2e="dashboard_AccountCount">
+          <AccountsRange onRangeChange={onRangeChange} range={range} />
+        </Text>
+        <Box ml={4}>
+          <AccountsOrder />
+        </Box>
+        <ToggleButton onClick={onModeChange} active={mode === 'list'}>
+          <ListIcon />
+        </ToggleButton>
+        <ToggleButton onClick={onModeChange} active={mode === 'card'}>
+          <GridIcon />
+        </ToggleButton>
+      </GenericBox>
+    )
+  }
+}
+
+export default AccountListHeader

@@ -94,6 +94,19 @@ export const accountSelector = createSelector(
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 )
 
+const isUpToDateAccount = a => {
+  const { lastSyncDate } = a
+  const { blockAvgTime } = a.currency
+  if (!blockAvgTime) return true
+  const outdated =
+    Date.now() - (lastSyncDate || 0) > blockAvgTime * 1000 + OUTDATED_CONSIDERED_DELAY
+  if (outdated && DEBUG_SYNC) {
+    logger.log('account not up to date', a)
+  }
+  return !outdated
+}
+
+export const isUpToDateAccountSelector = createSelector(accountSelector, isUpToDateAccount)
 export const decodeAccountsModel = (raws: *) => (raws || []).map(accountModel.decode)
 
 export const encodeAccountsModel = (accounts: *) => (accounts || []).map(accountModel.encode)

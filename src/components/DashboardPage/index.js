@@ -34,7 +34,6 @@ import BalanceSummary from './BalanceSummary'
 import EmptyState from './EmptyState'
 import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
-import AccountCardList from './AccountCardList'
 import TopBanner, { FakeLink } from '../TopBanner'
 import { urls } from '../../config/urls'
 
@@ -133,12 +132,6 @@ class DashboardPage extends PureComponent<Props> {
                 accounts={accounts}
                 range={selectedTimeRange}
                 Header={this.Header}
-              />
-
-              <AccountCardList
-                onAccountClick={this.onAccountClick}
-                accounts={accounts}
-                range={selectedTimeRange}
               />
 
               {totalOperations > 0 && (

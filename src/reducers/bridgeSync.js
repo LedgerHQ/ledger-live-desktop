@@ -44,6 +44,9 @@ export const syncStateLocalSelector = (
   { accountId }: { accountId: string },
 ) => bridgeSync.syncs[accountId] || nothingState
 
+export const accountSyncStateSelector = (s: State, o: { accountId: string }): AsyncState =>
+  syncStateLocalSelector(bridgeSyncSelector(s), o)
+
 export const globalSyncStateSelector = createSelector(
   activeAccountsSelector,
   bridgeSyncSelector,

@@ -31,6 +31,7 @@
     "back": "Back",
     "reset": "Reset",
     "retry": "Retry",
+    "range": "Range",
     "stop": "Stop",
     "close": "Close",
     "eastern": "Eastern",
@@ -81,7 +82,7 @@
   },
   "sidebar": {
     "menu": "Menu",
-    "accounts": "Accounts ({{count}})",
+    "accounts": "Account",
     "manager": "Manager",
     "exchange": "Buy crypto",
     "developer": "Dev tools"
@@ -112,6 +113,18 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    }
+  },
   "banners": {
     "promoteMobile":
       "Enjoy the Ledger Live experience, now available on mobile with the {{productName}}",
@@ -134,11 +147,7 @@
     "summary": "Here's the summary of your account",
     "summary_plural": "Here's the summary of your {{count}} accounts",
     "recentActivity": "Last operations",
-    "totalBalance": "Total balance",
-    "accountsOrder": {
-      "name": "name",
-      "balance": "balance"
-    }
+    "totalBalance": "Total balance"
   },
   "currentAddress": {
     "title": "Current address",

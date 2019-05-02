@@ -19,6 +19,7 @@ import Idler from 'components/Idler'
 import AccountPage from 'components/AccountPage'
 import DashboardPage from 'components/DashboardPage'
 import ManagerPage from 'components/ManagerPage'
+import AccountsPage from 'components/AccountsPage'
 import PartnersPage from 'components/PartnersPage'
 import DevToolsPage from 'components/DevToolsPage'
 import SettingsPage from 'components/SettingsPage'
@@ -118,6 +119,7 @@ class Default extends Component<Props> {
                 <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
                   <Route path="/" exact component={DashboardPage} />
                   <Route path="/settings" component={SettingsPage} />
+                  <Route path="/accounts" component={AccountsPage} />
                   <Route path="/manager" component={ManagerPage} />
                   <Route path="/partners" component={PartnersPage} />
                   <Route path="/account/:id" component={AccountPage} />

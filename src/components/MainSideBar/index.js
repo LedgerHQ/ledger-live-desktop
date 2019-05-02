@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { Trans, translate } from 'react-i18next'
+import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
@@ -14,7 +14,6 @@ import type { T } from 'types/common'
 
 import { MODAL_RECEIVE, MODAL_SEND, MODAL_ADD_ACCOUNTS } from 'config/constants'
 
-import { i } from 'helpers/staticPath'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { developerModeSelector } from 'reducers/settings'
@@ -26,13 +25,12 @@ import Space from 'components/base/Space'
 import UpdateDot from 'components/Updater/UpdateDot'
 
 import IconManager from 'icons/Manager'
+import IconWallet from 'icons/Wallet'
 import IconPieChart from 'icons/PieChart'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
 
-import AccountListItem from './AccountListItem'
-import AddAccountButton from './AddAccountButton'
 import TopGradient from './TopGradient'
 import KeyboardContent from '../KeyboardContent'
 
@@ -94,6 +92,7 @@ class MainSideBar extends PureComponent<Props> {
     this.props.openModal(MODAL_RECEIVE)
   }
   handleClickManager = () => this.push('/manager')
+  handleClickAccounts = () => this.push('/accounts')
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
   handleOpenImportModal = () => {
@@ -105,16 +104,16 @@ class MainSideBar extends PureComponent<Props> {
     const { t, accounts, location, developerMode } = this.props
     const { pathname } = location
 
-    const addAccountButton = (
-      <AddAccountButton tooltipText={t('addAccounts.title')} onClick={this.handleOpenImportModal} />
-    )
-
-    const emptyState = (
-      <Box relative pr={3}>
-        <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
-        <Trans i18nKey="emptyState.sidebar.text" />
-      </Box>
-    )
+    // const addAccountButton = (
+    //   <AddAccountButton tooltipText={t('addAccounts.title')} onClick={this.handleOpenImportModal} />
+    // )
+    //
+    // const emptyState = (
+    //   <Box relative pr={3}>
+    //     <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
+    //     <Trans i18nKey="emptyState.sidebar.text" />
+    //   </Box>
+    // )
 
     return (
       <Box relative bg="white" style={{ width: 230 }}>
@@ -129,6 +128,13 @@ class MainSideBar extends PureComponent<Props> {
               onClick={this.handleClickDashboard}
               isActive={pathname === '/'}
               NotifComponent={UpdateDot}
+            />
+            <SideBarListItem
+              label={t('sidebar.accounts')}
+              icon={IconWallet}
+              iconActiveColor="wallet"
+              isActive={pathname === '/accounts'}
+              onClick={this.handleClickAccounts}
             />
             <SideBarListItem
               label={t('send.title')}
@@ -171,21 +177,6 @@ class MainSideBar extends PureComponent<Props> {
             )}
           </SideBarList>
           <Space of={40} />
-          <SideBarList
-            title={t('sidebar.accounts', { count: accounts.length })}
-            titleRight={addAccountButton}
-            emptyState={emptyState}
-          >
-            {accounts.map(account => (
-              <AccountListItem
-                key={account.id}
-                account={account}
-                push={this.push}
-                isActive={pathname === `/account/${account.id}`}
-              />
-            ))}
-          </SideBarList>
-          <Space of={30} />
         </GrowScroll>
       </Box>
     )
