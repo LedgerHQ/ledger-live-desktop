@@ -95,6 +95,8 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
       .attr('r', 4),
   )
 
+  NODES.svg.attr('viewBox', `0 0 ${node.clientWidth} ${node.clientHeight}`)
+
   ctx.NODES = NODES
 }
 

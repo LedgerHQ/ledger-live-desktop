@@ -47,7 +47,7 @@ const ContextMenuContainer = styled(Box)`
   left: ${p => p.x}px;
   width: 170px;
   border-radius: 4px;
-  box-shadow: 0 4px 8px 0 #00000007;
+  box-shadow: 0 4px 8px 0 #00000035;
   background-color: white;
 `
 
@@ -60,6 +60,7 @@ const ContextMenuItemContainer = styled(Box)`
   color:${p => p.theme.colors.smoke}
   font-family: 'Open Sans', Arial;
   font-size: 13px;
+  
   &:hover{
     cursor: pointer;
     color:${p => p.theme.colors.dark}

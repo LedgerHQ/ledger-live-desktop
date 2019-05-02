@@ -23,39 +23,12 @@ class GridBody extends PureComponent<Props> {
   render() {
     const { accounts, range, onAccountClick, ...rest } = this.props
 
-    let withPlaceholder = true
-
-    const parsedAccounts = accounts
-      .concat(Array(3 - (accounts.length % 3)).fill(null))
-      .map((account, i) => {
-        const item = {
-          key: account ? account.id : `placeholder_${i}`,
-          account,
-          withPlaceholder,
-        }
-
-        if (!account && withPlaceholder) {
-          withPlaceholder = !withPlaceholder
-        }
-
-        return item
-      })
-
     return (
       <GridBox {...rest}>
-        {parsedAccounts.map(
-          item =>
-            item.account ? (
-              <AccountCard
-                key={item.account.id}
-                account={item.account}
-                range={range}
-                onClick={onAccountClick}
-              />
-            ) : (
-              <AccountCardPlaceholder key={item.key} withPlaceholder={item.withPlaceholder} />
-            ),
-        )}
+        {accounts.map(account => (
+          <AccountCard key={account.id} account={account} range={range} onClick={onAccountClick} />
+        ))}
+        <AccountCardPlaceholder key={'placeholder'} />
       </GridBox>
     )
   }

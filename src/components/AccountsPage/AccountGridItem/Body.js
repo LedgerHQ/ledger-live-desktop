@@ -10,7 +10,7 @@ import CounterValue from 'components/CounterValue'
 import DeltaChange from 'components/DeltaChange'
 import Chart from 'components/base/Chart'
 
-class AccountCardBody extends PureComponent<{
+class Body extends PureComponent<{
   balanceHistory: BalanceHistory,
   account: Account,
 }> {
@@ -55,4 +55,4 @@ export default connect(
   createStructuredSelector({
     balanceHistory: balanceHistorySelector,
   }),
-)(AccountCardBody)
+)(Body)

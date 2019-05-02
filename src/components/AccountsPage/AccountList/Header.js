@@ -38,13 +38,13 @@ const SearchInput = styled.input`
   outline: none;
   flex-grow: 1;
   font-family: 'Open Sans';
-  cursor:text;
+  cursor: text;
   &::placeholder {
     color: #999999;
   }
 `
 
-class AccountListHeader extends PureComponent<Props> {
+class Header extends PureComponent<Props> {
   render() {
     const { onModeChange, onTextChange, onRangeChange, mode, search, range } = this.props
 
@@ -71,4 +71,4 @@ class AccountListHeader extends PureComponent<Props> {
   }
 }
 
-export default AccountListHeader
+export default Header

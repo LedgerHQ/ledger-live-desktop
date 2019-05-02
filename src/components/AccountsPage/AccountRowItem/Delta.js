@@ -18,7 +18,7 @@ class Delta extends PureComponent<{
     const balanceStart = balanceHistory[0].value
     const balanceEnd = balanceHistory[balanceHistory.length - 1].value
     return (
-      <Box {...rest} justifyContent="center">
+      <Box {...rest} justifyContent="flex-end">
         {!balanceStart.isZero() ? (
           <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
         ) : null}

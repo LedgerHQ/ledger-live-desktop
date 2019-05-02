@@ -17,7 +17,7 @@ type Props = {
   range: string,
 }
 
-class AccountsRange extends Component<Props> {
+class Range extends Component<Props> {
   onRangeChange = ({ selectedItem: item }) => {
     if (!item) {
       return
@@ -93,4 +93,4 @@ class AccountsRange extends Component<Props> {
   }
 }
 
-export default translate()(AccountsRange)
+export default translate()(Range)

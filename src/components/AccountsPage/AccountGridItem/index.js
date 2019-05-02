@@ -55,7 +55,13 @@ class AccountCard extends PureComponent<Props> {
     return (
       <ContextMenuItem items={this.contextMenuItems}>
         <Box>
-          <Card {...props} style={{cursor:"pointer"}} p={20} onClick={this.onClick} data-e2e="dashboard_AccountCardWrapper">
+          <Card
+            {...props}
+            style={{ cursor: 'pointer' }}
+            p={20}
+            onClick={this.onClick}
+            data-e2e="dashboard_AccountCardWrapper"
+          >
             <Box flow={4}>
               <AccountCardHeader account={account} />
               <Bar size={1} color="fog" />

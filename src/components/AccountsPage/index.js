@@ -12,7 +12,7 @@ import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import AccountsHeader from './AccountsHeader'
 import AccountList from './AccountList'
 import { accountsSelector } from '../../reducers/accounts'
-import { SeparatorBar } from "../DashboardPage";
+import { SeparatorBar } from '../DashboardPage'
 
 type Props = {
   accounts: Account[],

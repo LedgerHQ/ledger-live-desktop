@@ -33,6 +33,7 @@ const AddAccountButton = styled(Button)`
   height: auto;
 
   &:hover {
+    cursor: pointer;
     color: ${p => p.theme.colors.dark};
   }
 `
@@ -45,7 +46,7 @@ class Placeholder extends PureComponent<Props> {
   render() {
     const { t } = this.props
     return (
-      <Box mb={2}>
+      <Box mb={5}>
         <AddAccountButton isAccountRow onClick={this.handleAddAccountModal} pb={6}>
           <IconPlus size={16} mr={20} />
           <Box ml={2} ff="Open Sans|Regular" fontSize={4}>

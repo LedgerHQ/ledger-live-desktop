@@ -44,7 +44,7 @@ const mapDispatchToProps = {
   saveSettings,
 }
 
-class AccountsOrder extends Component<Props> {
+class Order extends Component<Props> {
   onStateChange = ({ selectedItem: item }) => {
     if (!item) {
       return
@@ -165,4 +165,4 @@ export default compose(
     mapDispatchToProps,
   ),
   translate(),
-)(AccountsOrder)
+)(Order)

@@ -82,7 +82,7 @@ class AccountRowItem extends PureComponent<Props> {
             </Box>
             <Balance flex="35%" account={account} />
             <Countervalue flex="15%" account={account} range={range} />
-            <Delta flex="1" account={account} range={range} />
+            <Delta flex="10%" account={account} range={range} />
           </GenericBox>
         </Box>
       </ContextMenuItem>

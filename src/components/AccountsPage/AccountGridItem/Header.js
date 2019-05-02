@@ -7,7 +7,7 @@ import Ellipsis from 'components/base/Ellipsis'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
 
-class AccountCardHeader extends PureComponent<{
+class Header extends PureComponent<{
   account: Account,
 }> {
   render() {
@@ -33,4 +33,4 @@ class AccountCardHeader extends PureComponent<{
   }
 }
 
-export default AccountCardHeader
+export default Header
