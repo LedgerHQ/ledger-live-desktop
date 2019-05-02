@@ -82,7 +82,7 @@
   },
   "sidebar": {
     "menu": "Menu",
-    "accounts": "Account",
+    "accounts": "Accounts",
     "manager": "Manager",
     "exchange": "Buy crypto",
     "developer": "Dev tools"
@@ -123,6 +123,11 @@
       "week": "week",
       "month": "month",
       "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
     }
   },
   "banners": {

@@ -38,6 +38,7 @@ const SearchInput = styled.input`
   outline: none;
   flex-grow: 1;
   font-family: 'Open Sans';
+  cursor:text;
   &::placeholder {
     color: #999999;
   }
@@ -56,7 +57,7 @@ class AccountListHeader extends PureComponent<Props> {
         <Text color="dark" ff="Museo Sans" fontSize={6} data-e2e="dashboard_AccountCount">
           <AccountsRange onRangeChange={onRangeChange} range={range} />
         </Text>
-        <Box ml={4}>
+        <Box ml={4} mr={4}>
           <AccountsOrder />
         </Box>
         <ToggleButton onClick={onModeChange} active={mode === 'list'}>

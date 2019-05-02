@@ -12,6 +12,7 @@ import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import AccountsHeader from './AccountsHeader'
 import AccountList from './AccountList'
 import { accountsSelector } from '../../reducers/accounts'
+import { SeparatorBar } from "../DashboardPage";
 
 type Props = {
   accounts: Account[],
@@ -59,6 +60,7 @@ class AccountsPage extends PureComponent<Props, State> {
     return (
       <Box>
         <TrackPage category="Accounts" />
+        <SeparatorBar />
         <AccountsHeader />
         <AccountList
           onAccountClick={this.onAccountClick}
