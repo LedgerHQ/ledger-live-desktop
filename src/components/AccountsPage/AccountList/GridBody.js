@@ -17,7 +17,7 @@ type Props = {
 const GridBox = styled(Box)`
   display: grid;
   grid-gap: 18px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 `
 
 class GridBody extends PureComponent<Props> {

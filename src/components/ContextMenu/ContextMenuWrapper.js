@@ -47,23 +47,26 @@ const ContextMenuContainer = styled(Box)`
   left: ${p => p.x}px;
   width: 170px;
   border-radius: 4px;
-  box-shadow: 0 4px 8px 0 #00000035;
+  box-shadow: 0 4px 8px 0 #00000007;
+  border: 1px solid #d8d8d8;
   background-color: white;
+  padding: 10px;
 `
 
 const ContextMenuItemContainer = styled(Box)`
-  padding: 10px 30px;
+  padding: 10px 10px;
   text-align: center;
   flex-direction: row;
-  align-items: center;
+  align-items: left;
   border-radius: 4px;
-  color:${p => p.theme.colors.smoke}
+  color: ${p => p.theme.colors.smoke};
   font-family: 'Open Sans', Arial;
   font-size: 13px;
-  
-  &:hover{
+
+  &:hover {
     cursor: pointer;
-    color:${p => p.theme.colors.dark}
+    color: ${p => p.theme.colors.dark};
+    background: ${p => p.theme.colors.lightGrey};
   }
 `
 
