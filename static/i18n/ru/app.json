@@ -588,7 +588,9 @@
       }
     },
     "selectDevice": {
-      "title": "Выберите свое устройство"
+      "title": "Выберите свое устройство",
+      "usbOnly": "usb only",
+      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
     },
     "selectPIN": {
       "disclaimer": {

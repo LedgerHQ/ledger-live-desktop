@@ -588,7 +588,9 @@
       }
     },
     "selectDevice": {
-      "title": "機器を選択"
+      "title": "機器を選択",
+      "usbOnly": "usb only",
+      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
     },
     "selectPIN": {
       "disclaimer": {
