@@ -5,7 +5,7 @@ import invariant from 'invariant'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment } from 'react'
-import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
+import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
@@ -42,12 +42,12 @@ const remapTransportError = (err: mixed, appName: string): Error => {
   return errorToThrow
 }
 
-const ImportError = ({ error, currency }: { error: Error, currency: ?CryptoCurrency }) => (
+const ImportError = ({ error }: { error: Error }) => (
   <Box style={{ height: 200 }} px={5} justify="center">
     <Box color="alertRed" align="center">
       <IconExclamationCircleThin size={43} />
     </Box>
-    {currency ? <DebugAppInfosForCurrency currencyId={currency.id} /> : null}
+    <DebugAppInfosForCurrency />
     <Title>
       <TranslatedError error={error} field="title" />
     </Title>
