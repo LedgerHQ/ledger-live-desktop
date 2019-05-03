@@ -22,6 +22,7 @@ import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../../conf
 type Props = {
   account: Account,
   onClick: Account => void,
+  hidden?: boolean,
   range: PortfolioRange,
   openModal: Function,
 }
@@ -55,36 +56,34 @@ class AccountRowItem extends PureComponent<Props> {
   ]
 
   render() {
-    const { account, range } = this.props
+    const { account, range, hidden } = this.props
     return (
       <ContextMenuItem items={this.contextMenuItems}>
-        <Box>
-          <GenericBox flex={1} onClick={this.onClick}>
-            <Box horizontal ff="Open Sans|SemiBold" flow={3} flex="30%" alignItems="center">
-              <Box
-                alignItems="center"
-                justifyContent="center"
-                style={{ color: account.currency.color }}
-              >
-                <CryptoCurrencyIcon currency={account.currency} size={20} />
-              </Box>
-              <Box grow>
-                <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="graphite">
-                  {account.currency.name}
-                </Box>
-                <Ellipsis fontSize={12} color="dark">
-                  {account.name}
-                </Ellipsis>
-              </Box>
+        <GenericBox style={{ display: hidden && 'none' }} flex={1} onClick={this.onClick}>
+          <Box horizontal ff="Open Sans|SemiBold" flow={3} flex="30%" alignItems="center">
+            <Box
+              alignItems="center"
+              justifyContent="center"
+              style={{ color: account.currency.color }}
+            >
+              <CryptoCurrencyIcon currency={account.currency} size={20} />
             </Box>
-            <Box flex="10%">
-              <AccountSyncStatusIndicator accountId={account.id} account={account} />
+            <Box grow>
+              <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="graphite">
+                {account.currency.name}
+              </Box>
+              <Ellipsis fontSize={12} color="dark">
+                {account.name}
+              </Ellipsis>
             </Box>
-            <Balance flex="35%" account={account} />
-            <Countervalue flex="15%" account={account} range={range} />
-            <Delta flex="10%" account={account} range={range} />
-          </GenericBox>
-        </Box>
+          </Box>
+          <Box flex="10%">
+            <AccountSyncStatusIndicator accountId={account.id} account={account} />
+          </Box>
+          <Balance flex="35%" account={account} />
+          <Countervalue flex="15%" account={account} range={range} />
+          <Delta flex="10%" account={account} range={range} />
+        </GenericBox>
       </ContextMenuItem>
     )
   }

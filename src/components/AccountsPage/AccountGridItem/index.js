@@ -16,6 +16,7 @@ import IconAccountSettings from '../../../icons/AccountSettings'
 import ContextMenuItem from '../../ContextMenu/ContextMenuItem'
 
 type Props = {
+  hidden?: boolean,
   account: Account,
   onClick: Account => void,
   range: PortfolioRange,
@@ -51,35 +52,33 @@ class AccountCard extends PureComponent<Props> {
   ]
 
   render() {
-    const { account, range, ...props } = this.props
+    const { account, range, hidden, ...props } = this.props
     return (
       <ContextMenuItem items={this.contextMenuItems}>
-        <Box>
-          <Card
-            {...props}
-            style={{ cursor: 'pointer' }}
-            p={20}
-            onClick={this.onClick}
-            data-e2e="dashboard_AccountCardWrapper"
-          >
-            <Box flow={4}>
-              <AccountCardHeader account={account} />
-              <Bar size={1} color="fog" />
-              <Box justifyContent="center">
-                <FormattedVal
-                  alwaysShowSign={false}
-                  animateTicker={false}
-                  ellipsis
-                  color="dark"
-                  unit={account.unit}
-                  showCode
-                  val={account.balance}
-                />
-              </Box>
+        <Card
+          {...props}
+          style={{ cursor: 'pointer', display: hidden && 'none' }}
+          p={20}
+          onClick={this.onClick}
+          data-e2e="dashboard_AccountCardWrapper"
+        >
+          <Box flow={4}>
+            <AccountCardHeader account={account} />
+            <Bar size={1} color="fog" />
+            <Box justifyContent="center">
+              <FormattedVal
+                alwaysShowSign={false}
+                animateTicker={false}
+                ellipsis
+                color="dark"
+                unit={account.unit}
+                showCode
+                val={account.balance}
+              />
             </Box>
-            <AccountCardBody account={account} range={range} />
-          </Card>
-        </Box>
+          </Box>
+          <AccountCardBody account={account} range={range} />
+        </Card>
       </ContextMenuItem>
     )
   }
