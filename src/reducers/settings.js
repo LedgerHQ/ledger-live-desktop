@@ -6,7 +6,7 @@ import {
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/currencies'
-import languages from 'config/languages'
+import { getLanguages } from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency, Account } from '@ledgerhq/live-common/lib/types'
@@ -176,6 +176,7 @@ export const lastUsedVersionSelector = (state: State): string => state.settings.
 export const langAndRegionSelector = (
   state: State,
 ): { language: string, region: ?string, useSystem: boolean } => {
+  const languages = getLanguages()
   let { language, region } = state.settings
   if (language && languages.includes(language)) {
     return { language, region, useSystem: false }
