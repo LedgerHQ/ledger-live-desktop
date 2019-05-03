@@ -97,10 +97,9 @@ class DashboardPage extends PureComponent<Props> {
               ),
             }}
             status={'dark'}
-            bannerId={'promoNanoX'}
+            bannerId={'promoNanoX3'}
             dismissable
           />
-          <SeparatorBar />
         </TopBannerContainer>
         <RefreshAccountsOrdering onMount />
         <TrackPage
@@ -154,16 +153,12 @@ class DashboardPage extends PureComponent<Props> {
 }
 // This forces only one visible top banner at a time
 const TopBannerContainer = styled.div`
+  margin-top: -3px; //To hide the separator bar
+  z-index: 20;
+
   & > *:not(:first-child) {
     display: none;
   }
-`
-// If no banners are present, the SeparatorBar appears
-export const SeparatorBar = styled.div`
-  height: 1px;
-  border-bottom: 1px solid ${p => p.theme.colors.fog};
-  margin-bottom: 15px;
-  margin-top: -20px;
 `
 
 export default compose(

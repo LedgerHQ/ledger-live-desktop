@@ -163,10 +163,16 @@ class TopBar extends PureComponent<Props> {
             )}
           </Box>
         </Inner>
+        <SeparatorBar />
       </Container>
     )
   }
 }
+
+export const SeparatorBar = styled.div`
+  height: 1px;
+  border-bottom: 1px solid ${p => p.theme.colors.fog};
+`
 
 export default compose(
   // $FlowFixMe
