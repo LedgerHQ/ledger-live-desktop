@@ -31,7 +31,7 @@ const languageLabels = {
 }
 
 const LanguageSelect = ({ i18n, setLanguage, language, useSystem, t }: Props) => {
-  const debugLanguage = useEnv('DEBUG_ALL_LANGS')
+  const debugLanguage = useEnv('EXPERIMENTAL_LANGUAGES')
 
   const languages = [{ value: null, label: t(`language.system`) }].concat(
     (debugLanguage ? allLanguages : prodStableLanguages).map(key => ({

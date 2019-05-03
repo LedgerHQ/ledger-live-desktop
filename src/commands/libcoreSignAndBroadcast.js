@@ -7,8 +7,12 @@ import {
   fromTokenAccountRaw,
 } from '@ledgerhq/live-common/lib/account'
 import signAndBroadcast from '@ledgerhq/live-common/lib/libcore/signAndBroadcast'
-import type { Transaction } from '@ledgerhq/live-common/lib/libcore/buildTransaction'
-import type { AccountRaw, TokenAccountRaw, OperationRaw } from '@ledgerhq/live-common/lib/types'
+import type {
+  Transaction,
+  AccountRaw,
+  TokenAccountRaw,
+  OperationRaw,
+} from '@ledgerhq/live-common/lib/types'
 import { createCommand, Command } from 'helpers/ipc'
 
 type Input = {

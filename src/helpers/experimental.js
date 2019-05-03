@@ -21,6 +21,18 @@ export type Feature = FeatureCommon & FeatureToggle
 export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
+    name: 'EXPERIMENTAL_LANGUAGES',
+    title: 'Translation testing',
+    description: 'Adds unreleased languages to the language list in the general settings tab.',
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_EXPLORERS',
+    title: 'Experimental nodes',
+    description: "Connect to Ledger's new blockchain nodes.",
+  },
+  {
+    type: 'toggle',
     name: 'MANAGER_DEV_MODE',
     title: 'Developer mode',
     description: 'Show developer and testnet apps in the Manager.',
@@ -42,24 +54,11 @@ export const experimentalFeatures: Feature[] = [
   {
     shadow: true,
     type: 'toggle',
-    name: 'EXPERIMENTAL_EXPLORERS',
-    title: 'Experimental nodes',
-    description: "Connect to Ledger's new blockchain nodes.",
-  },
-  {
-    shadow: true,
-    type: 'toggle',
     name: 'FORCE_PROVIDER',
     valueOn: 4,
     valueOff: 1,
     title: 'Pre-release apps',
     description: 'Enable pre-release apps in the Manager',
-  },
-  {
-    type: 'toggle',
-    name: 'DEBUG_ALL_LANGS',
-    title: 'Translation testing',
-    description: 'Adds unreleased languages to the language list in the general settings tab.',
   },
 ]
 
