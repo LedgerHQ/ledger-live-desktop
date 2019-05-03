@@ -40,11 +40,21 @@ class AccountList extends Component<Props, State> {
     const isUsingCards = this.state.mode === 'card'
     const Body = isUsingCards ? GridBody : ListBody
 
-    const filteredAccounts = accounts.filter(account =>
-      `${account.currency.ticker}|${account.currency.name}|${account.name}`
-        .toLowerCase()
-        .includes(search.toLowerCase()),
-    )
+    const visibleAccounts = []
+    const hiddenAccounts = []
+    for (let i = 0; i < accounts.length; i++) {
+      const account = accounts[i]
+      if (
+        !search ||
+        `${account.currency.ticker}|${account.currency.name}|${account.name}`
+          .toLowerCase()
+          .includes(search.toLowerCase())
+      ) {
+        visibleAccounts.push(account)
+      } else {
+        hiddenAccounts.push(account)
+      }
+    }
 
     return (
       <Box flow={4} style={{ cursor: 'pointer' }}>
@@ -61,7 +71,8 @@ class AccountList extends Component<Props, State> {
           horizontal
           data-e2e="dashboard_AccountList"
           range={range}
-          accounts={filteredAccounts}
+          visibleAccounts={visibleAccounts}
+          hiddenAccounts={hiddenAccounts}
           onAccountClick={onAccountClick}
         />
       </Box>

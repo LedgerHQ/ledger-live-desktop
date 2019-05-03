@@ -7,20 +7,24 @@ import AccountItem from '../AccountRowItem'
 import AccountItemPlaceholder from '../AccountRowItem/Placeholder'
 
 type Props = {
-  accounts: Account[],
+  visibleAccounts: Account[],
+  hiddenAccounts: Account[],
   onAccountClick: Account => void,
   range: PortfolioRange,
 }
 
 class ListBody extends PureComponent<Props> {
   render() {
-    const { accounts, range, onAccountClick } = this.props
+    const { visibleAccounts, hiddenAccounts, range, onAccountClick } = this.props
     return (
       <Box>
-        {accounts.map(item => (
+        {visibleAccounts.map(item => (
           <AccountItem key={item.id} account={item} range={range} onClick={onAccountClick} />
         ))}
         <AccountItemPlaceholder />
+        {hiddenAccounts.map(item => (
+          <AccountItem hidden key={item.id} account={item} range={range} onClick={onAccountClick} />
+        ))}
       </Box>
     )
   }

@@ -8,7 +8,8 @@ import AccountCardPlaceholder from '../AccountGridItem/Placeholder'
 import AccountCard from '../AccountGridItem'
 
 type Props = {
-  accounts: Account[],
+  visibleAccounts: Account[],
+  hiddenAccounts: Account[],
   onAccountClick: Account => void,
   range: PortfolioRange,
 }
@@ -21,14 +22,23 @@ const GridBox = styled(Box)`
 
 class GridBody extends PureComponent<Props> {
   render() {
-    const { accounts, range, onAccountClick, ...rest } = this.props
+    const { visibleAccounts, hiddenAccounts, range, onAccountClick, ...rest } = this.props
 
     return (
       <GridBox {...rest}>
-        {accounts.map(account => (
+        {visibleAccounts.map(account => (
           <AccountCard key={account.id} account={account} range={range} onClick={onAccountClick} />
         ))}
-        <AccountCardPlaceholder key={'placeholder'} />
+        <AccountCardPlaceholder key="placeholder" />
+        {hiddenAccounts.map(account => (
+          <AccountCard
+            hidden
+            key={account.id}
+            account={account}
+            range={range}
+            onClick={onAccountClick}
+          />
+        ))}
       </GridBox>
     )
   }
