@@ -19,6 +19,7 @@ import { hasAccountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
 import IconLock from 'icons/Lock'
+import IconAngleLeft from 'icons/AngleLeft'
 import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
@@ -64,6 +65,15 @@ const Tag = styled(Link)`
   &:hover {
     background-color: ${p => darken(p.theme.colors.experimentalBlue, 0.05)};
   }
+`
+
+const BreadCrumbBack = styled(Box)`
+  flex-direction: row;
+  align-items: center;
+  font-family: 'Open Sans';
+  font-size: 13px;
+  font-weight: 600;
+  color: ${p => p.theme.colors.grey};
 `
 
 const TagContainer = () => {
@@ -126,14 +136,32 @@ class TopBar extends PureComponent<Props> {
       history.push(url)
     }
   }
+
+  goBack = () => this.props.history.goBack()
+
   render() {
-    const { hasPassword, hasAccounts, t } = this.props
+    const {
+      location: { pathname },
+      hasPassword,
+      hasAccounts,
+      t,
+    } = this.props
+    const showBack = pathname.startsWith('/account/')
 
     return (
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal>
             <TagContainer />
+
+            {showBack && (
+              <BreadCrumbBack onClick={this.goBack}>
+                <Box mr={1}>
+                  <IconAngleLeft size={16} />
+                </Box>
+                {t('common.back')}
+              </BreadCrumbBack>
+            )}
             <Box grow />
             <CurrenciesStatusBanner />
             {hasAccounts && (
