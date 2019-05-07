@@ -2,16 +2,13 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
-import { translate, Trans } from 'react-i18next'
+import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
 import type { Location, RouterHistory } from 'react-router'
 
 import type { T } from 'types/common'
-import { darken } from 'styles/helpers'
-import useExperimental from 'hooks/useExperimental'
 
 import { lock } from 'reducers/application'
 import { hasPasswordSelector } from 'reducers/settings'
@@ -47,26 +44,6 @@ const Inner = styled(Box).attrs({
   align: 'center',
 })``
 
-const Tag = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Open Sans';
-  font-weight: bold;
-  font-size: 10px;
-  height: 22px;
-  line-height: 22px;
-  padding: 0 10px;
-  border-radius: 16px;
-  color: ${p => p.theme.colors.white};
-  background-color: ${p => p.theme.colors.experimentalBlue};
-  text-decoration: none;
-
-  &:hover {
-    background-color: ${p => darken(p.theme.colors.experimentalBlue, 0.05)};
-  }
-`
-
 const BreadCrumbBack = styled(Box)`
   flex-direction: row;
   align-items: center;
@@ -75,18 +52,6 @@ const BreadCrumbBack = styled(Box)`
   font-weight: 600;
   color: ${p => p.theme.colors.grey};
 `
-
-const TagContainer = () => {
-  const isExperimental = useExperimental()
-
-  return isExperimental ? (
-    <Box justifyContent="center">
-      <Tag to="/settings/experimental">
-        <Trans i18nKey="common.experimentalFeature" />
-      </Tag>
-    </Box>
-  ) : null
-}
 
 const Bar = styled.div`
   margin-left: 5px;
@@ -152,8 +117,6 @@ class TopBar extends PureComponent<Props> {
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal>
-            <TagContainer />
-
             {showBack && (
               <BreadCrumbBack onClick={this.goBack}>
                 <Box mr={1}>

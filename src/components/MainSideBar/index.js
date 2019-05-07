@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { translate } from 'react-i18next'
+import { Trans, translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
@@ -16,14 +16,14 @@ import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
 
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
-import { developerModeSelector } from 'reducers/settings'
+import { developerModeSelector, dismissedBannersSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
+
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
-import UpdateDot from 'components/Updater/UpdateDot'
-
+import UpdateDot, { Dot } from 'components/Updater/UpdateDot'
 import IconManager from 'icons/Manager'
 import IconWallet from 'icons/Wallet'
 import IconPieChart from 'icons/PieChart'
@@ -31,17 +31,26 @@ import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
 
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import TopGradient from './TopGradient'
 import KeyboardContent from '../KeyboardContent'
+import useExperimental from '../../hooks/useExperimental'
+import { darken } from '../../styles/helpers'
+import NewUpdateNotice from '../NewUpdateNotice'
+import { dismissBanner } from '../../actions/settings'
 
+const accountsBannerKey = 'accountsHelperBanner'
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
   developerMode: developerModeSelector(state),
+  showAccountsHelperBanner: !dismissedBannersSelector(state).includes(accountsBannerKey),
 })
 
 const mapDispatchToProps = {
   push,
   openModal,
+  dismissBanner,
 }
 
 type Props = {
@@ -51,6 +60,8 @@ type Props = {
   push: string => void,
   openModal: string => void,
   developerMode: boolean,
+  showAccountsHelperBanner: boolean,
+  dismissBanner: string => void,
 }
 
 const IconDev = () => (
@@ -69,6 +80,46 @@ const IconDev = () => (
     {'DEV'}
   </div>
 )
+
+const TagContainer = () => {
+  const isExperimental = useExperimental()
+
+  return isExperimental ? (
+    <Box
+      justifyContent="center"
+      m={4}
+      style={{
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+      }}
+    >
+      <Tag to="/settings/experimental">
+        <Trans i18nKey="common.experimentalFeature" />
+      </Tag>
+    </Box>
+  ) : null
+}
+
+const Tag = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 10px;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 8px;
+  border-radius: 4px;
+  color: ${p => p.theme.colors.smoke};
+  background-color: ${p => p.theme.colors.lightFog};
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${p => darken(p.theme.colors.lightFog, 0.05)};
+  }
+`
 
 class MainSideBar extends PureComponent<Props> {
   push = (to: string) => {
@@ -92,12 +143,19 @@ class MainSideBar extends PureComponent<Props> {
     this.props.openModal(MODAL_RECEIVE)
   }
   handleClickManager = () => this.push('/manager')
-  handleClickAccounts = () => this.push('/accounts')
+  handleClickAccounts = () => {
+    const { showAccountsHelperBanner, dismissBanner } = this.props
+    if (showAccountsHelperBanner) dismissBanner(accountsBannerKey)
+
+    this.push('/accounts')
+  }
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
 
+  dismissUpdateBanner = () => this.props.dismissBanner(accountsBannerKey)
+
   render() {
-    const { t, accounts, location, developerMode } = this.props
+    const { t, accounts, location, developerMode, showAccountsHelperBanner } = this.props
     const { pathname } = location
 
     return (
@@ -120,6 +178,7 @@ class MainSideBar extends PureComponent<Props> {
               iconActiveColor="wallet"
               isActive={pathname === '/accounts'}
               onClick={this.handleClickAccounts}
+              NotifComponent={showAccountsHelperBanner ? Dot : undefined}
             />
             <SideBarListItem
               label={t('send.title')}
@@ -160,8 +219,17 @@ class MainSideBar extends PureComponent<Props> {
                 />
               </KeyboardContent>
             )}
+            <Space of={30} />
+            {showAccountsHelperBanner && (
+              <NewUpdateNotice
+                title={`${t('sidebar.newUpdate.title')} 🎉`}
+                description={t('sidebar.newUpdate.description')}
+                callback={this.dismissUpdateBanner}
+              />
+            )}
           </SideBarList>
-          <Space of={40} />
+          <Space grow />
+          <TagContainer />
         </GrowScroll>
       </Box>
     )

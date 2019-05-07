@@ -57,7 +57,7 @@ class AccountList extends Component<Props, State> {
     }
 
     return (
-      <Box flow={4} style={{ cursor: 'pointer' }}>
+      <Box flow={4}>
         <AccountListHeader
           onTextChange={this.onTextChange}
           onModeChange={this.onModeChange}

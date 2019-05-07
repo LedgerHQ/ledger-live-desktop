@@ -42,7 +42,7 @@
     "copyAddress": "Copy",
     "copied": "Copied",
     "addressCopied": "Address copied",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -85,7 +85,11 @@
     "accounts": "Accounts",
     "manager": "Manager",
     "exchange": "Buy crypto",
-    "developer": "Dev tools"
+    "developer": "Dev tools",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "Last operations",
