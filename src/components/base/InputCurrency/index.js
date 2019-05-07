@@ -4,58 +4,21 @@ import React, { PureComponent } from 'react'
 import { BigNumber } from 'bignumber.js'
 import uncontrollable from 'uncontrollable'
 import styled from 'styled-components'
-import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/currencies'
-
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { localeSelector } from 'reducers/settings'
+import { formatCurrencyUnit, sanitizeValueString } from '@ledgerhq/live-common/lib/currencies'
 import noop from 'lodash/noop'
-
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
 import Select from 'components/base/Select'
-
 import type { Unit } from '@ledgerhq/live-common/lib/types'
 
 const unitGetOptionValue = unit => unit.magnitude
 
-// TODO move this back to live common
-const numbers = '0123456789'
-const sanitizeValueString = (
-  unit: Unit,
-  valueString: string,
-): {
-  display: string,
-  value: string,
-} => {
-  let display = ''
-  let value = ''
-  let decimals = -1
-  for (let i = 0; i < valueString.length; i++) {
-    const c = valueString[i]
-    if (numbers.indexOf(c) !== -1) {
-      if (decimals >= 0) {
-        decimals++
-        if (decimals > unit.magnitude) break
-        value += c
-        display += c
-      } else if (value !== '0') {
-        value += c
-        display += c
-      }
-    } else if (decimals === -1 && (c === ',' || c === '.')) {
-      if (i === 0) display = '0'
-      decimals = 0
-      display += '.'
-    }
-  }
-  for (let i = Math.max(0, decimals); i < unit.magnitude; ++i) {
-    value += '0'
-  }
-  if (!value) value = '0'
-  return { display, value }
-}
-
-function format(unit: Unit, value: BigNumber, { isFocused, showAllDigits, subMagnitude }) {
-  // FIXME do we need locale for the input too ?
+function format(unit: Unit, value: BigNumber, { locale, isFocused, showAllDigits, subMagnitude }) {
   return formatCurrencyUnit(unit, value, {
+    locale,
     useGrouping: !isFocused,
     disableRounding: true,
     showAllDigits: !!showAllDigits && !isFocused,
@@ -85,6 +48,7 @@ type Props = {
   showAllDigits?: boolean,
   subMagnitude: number,
   allowZero: boolean,
+  locale: string,
 }
 
 type State = {
@@ -114,7 +78,7 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    const { value, showAllDigits, unit } = this.props
+    const { locale, value, showAllDigits, unit } = this.props
     const needsToBeReformatted =
       !this.state.isFocused &&
       (value !== nextProps.value ||
@@ -127,6 +91,7 @@ class InputCurrency extends PureComponent<Props, State> {
           !nextProps.value || nextProps.value.isZero()
             ? ''
             : format(nextProps.unit, nextProps.value, {
+                locale,
                 isFocused,
                 showAllDigits: nextProps.showAllDigits,
                 subMagnitude: nextProps.subMagnitude,
@@ -136,8 +101,8 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   handleChange = (v: string) => {
-    const { onChange, unit, value } = this.props
-    const r = sanitizeValueString(unit, v)
+    const { onChange, unit, value, locale } = this.props
+    const r = sanitizeValueString(unit, v, locale)
     const satoshiValue = BigNumber(r.value)
     if (!value || !value.isEqualTo(satoshiValue)) {
       onChange(satoshiValue, unit)
@@ -156,13 +121,13 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   syncInput = ({ isFocused }: { isFocused: boolean }) => {
-    const { value, showAllDigits, subMagnitude, unit, allowZero } = this.props
+    const { value, showAllDigits, subMagnitude, unit, allowZero, locale } = this.props
     this.setState({
       isFocused,
       displayValue:
         !value || (value.isZero() && !allowZero)
           ? ''
-          : format(unit, value, { isFocused, showAllDigits, subMagnitude }),
+          : format(unit, value, { locale, isFocused, showAllDigits, subMagnitude }),
     })
   }
 
@@ -205,7 +170,7 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   render() {
-    const { renderRight, showAllDigits, unit, subMagnitude } = this.props
+    const { renderRight, showAllDigits, unit, subMagnitude, locale } = this.props
     const { displayValue } = this.state
 
     return (
@@ -219,12 +184,28 @@ class InputCurrency extends PureComponent<Props, State> {
         onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         renderRight={renderRight || this.renderListUnits()}
-        placeholder={format(unit, BigNumber(0), { isFocused: false, showAllDigits, subMagnitude })}
+        placeholder={
+          displayValue
+            ? ''
+            : format(unit, BigNumber(0), {
+                locale,
+                isFocused: false,
+                showAllDigits,
+                subMagnitude,
+              })
+        }
       />
     )
   }
 }
 
-export default uncontrollable(InputCurrency, {
-  unit: 'onChangeUnit',
-})
+export default uncontrollable(
+  connect(
+    createStructuredSelector({
+      locale: localeSelector,
+    }),
+  )(InputCurrency),
+  {
+    unit: 'onChangeUnit',
+  },
+)

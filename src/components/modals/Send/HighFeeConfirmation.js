@@ -2,8 +2,10 @@
 import React, { PureComponent } from 'react'
 import { Trans, translate } from 'react-i18next'
 import type { T } from 'types/common'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { localeSelector } from 'reducers/settings'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
-
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import { BigNumber } from 'bignumber.js'
@@ -19,11 +21,12 @@ type Props = {
   onReject: () => void,
   onAccept: () => void,
   unit: Unit,
+  locale: string,
 }
 
 class HighFeeConfirmation extends PureComponent<Props, *> {
   render() {
-    const { t, onReject, onAccept, fees, amount, unit, isOpened } = this.props
+    const { locale, t, onReject, onAccept, fees, amount, unit, isOpened } = this.props
 
     return (
       <ConfirmModal
@@ -47,11 +50,11 @@ class HighFeeConfirmation extends PureComponent<Props, *> {
             <Trans i18nKey="send.steps.amount.highFeeModal.desc" parent="div">
               {'Be careful, the transaction fees  ('}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {formatCurrencyUnit(unit, fees, { showCode: true })}
+                {formatCurrencyUnit(unit, fees, { locale, showCode: true })}
               </Text>
               {'). represent more than 10% of the amount ('}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {formatCurrencyUnit(unit, amount, { showCode: true })}
+                {formatCurrencyUnit(unit, amount, { locale, showCode: true })}
               </Text>
               {'). Do you want to continue?'}
             </Trans>
@@ -62,4 +65,10 @@ class HighFeeConfirmation extends PureComponent<Props, *> {
   }
 }
 
-export default translate()(HighFeeConfirmation)
+export default translate()(
+  connect(
+    createStructuredSelector({
+      locale: localeSelector,
+    }),
+  )(HighFeeConfirmation),
+)
