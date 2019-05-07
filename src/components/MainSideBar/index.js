@@ -33,6 +33,7 @@ import IconExchange from 'icons/Exchange'
 
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { delay } from 'helpers/promise'
 import TopGradient from './TopGradient'
 import KeyboardContent from '../KeyboardContent'
 import useExperimental from '../../hooks/useExperimental'
@@ -121,7 +122,8 @@ const Tag = styled(Link)`
   }
 `
 
-class MainSideBar extends PureComponent<Props> {
+class MainSideBar extends PureComponent<Props, { reverseBanner: boolean }> {
+  state = { reverseBanner: false }
   push = (to: string) => {
     const { push } = this.props
     const {
@@ -152,10 +154,16 @@ class MainSideBar extends PureComponent<Props> {
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
 
-  dismissUpdateBanner = () => this.props.dismissBanner(accountsBannerKey)
+  dismissUpdateBanner = () => {
+    this.setState({ reverseBanner: true }, async () => {
+      await delay(500)
+      this.props.dismissBanner(accountsBannerKey)
+    })
+  }
 
   render() {
     const { t, accounts, location, developerMode, showAccountsHelperBanner } = this.props
+    const { reverseBanner } = this.state
     const { pathname } = location
 
     return (
@@ -222,6 +230,7 @@ class MainSideBar extends PureComponent<Props> {
             <Space of={30} />
             {showAccountsHelperBanner && (
               <NewUpdateNotice
+                reverse={reverseBanner}
                 title={`${t('sidebar.newUpdate.title')} 🎉`}
                 description={t('sidebar.newUpdate.description')}
                 callback={this.dismissUpdateBanner}
