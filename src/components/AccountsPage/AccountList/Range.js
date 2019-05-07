@@ -71,7 +71,7 @@ class Range extends Component<Props> {
         items={rangeItems}
         renderItem={this.renderItem}
         onStateChange={this.onRangeChange}
-        value={rangeItems.find(item => item.key === rangeItems)}
+        value={rangeItems.find(item => item.key === range)}
       >
         <Track onUpdate event="ChangeRange" range={rangeItems} />
         <Text color="grey" ff="Open Sans|SemiBold" fontSize={4}>
