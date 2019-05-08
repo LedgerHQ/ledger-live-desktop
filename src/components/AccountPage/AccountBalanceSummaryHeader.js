@@ -100,6 +100,9 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
       data.reverse()
     }
 
+    const primaryKey = data[0].unit.code
+    const secondaryKey = data[1].unit.code
+
     return (
       <Box flow={4} mb={2}>
         <Box horizontal>
@@ -107,6 +110,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             <Swap />
           </SwapButton>
           <BalanceTotal
+            key={primaryKey}
             style={{ cursor: 'pointer' }}
             onClick={() => setCountervalueFirst(!countervalueFirst)}
             showCryptoEvenIfNotAvailable
@@ -115,7 +119,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             unit={data[0].unit}
           >
             <FormattedVal
-              key={account.id}
+              key={secondaryKey}
               animateTicker
               disableRounding
               alwaysShowSign={false}
@@ -130,7 +134,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             <PillsDaysCount selected={selectedTimeRange} onChange={this.handleChangeSelectedTime} />
           </Box>
         </Box>
-        <Box horizontal justifyContent="center" flow={7}>
+        <Box key={primaryKey} horizontal justifyContent="center" flow={7}>
           <BalanceSincePercent
             isAvailable={isAvailable}
             t={t}
