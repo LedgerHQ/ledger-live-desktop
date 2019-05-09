@@ -62,6 +62,7 @@ class RecipientField<Transaction> extends Component<
     if (isValid && bridge.estimateGasLimit) {
       // $FlowFixMe
       transaction.gasLimit = BigNumber(await bridge.estimateGasLimit(account, recipient))
+      if (syncId !== this.syncId) return
       onChangeTransaction(transaction)
     }
   }
