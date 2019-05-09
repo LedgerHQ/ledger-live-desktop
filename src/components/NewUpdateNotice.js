@@ -10,10 +10,11 @@ import { rgba } from '../styles/helpers'
 
 const NewUpdateNoticeDismissButton = styled(Box)`
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 0;
+  right: 0;
+  padding: 8px;
   color: white;
-  opacity: 0.8;
+  opacity: 0.5;
   &:hover {
     cursor: pointer;
   }
@@ -62,10 +63,18 @@ class NewUpdateNotice extends PureComponent<{
         <NewUpdateNoticeDismissButton onClick={callback}>
           <IconCross size={12} />
         </NewUpdateNoticeDismissButton>
-        <Text ff="Open Sans|SemiBold" color="white" fontSize={'10px'}>
-          {title && title}
+        <Text
+          ff="Open Sans|SemiBold"
+          color="white"
+          fontSize="10px"
+          style={{
+            textTransform: 'uppercase',
+            marginBottom: 4,
+          }}
+        >
+          {title}
         </Text>
-        <Text ff="Open Sans" color={rgba(colors.white, 0.8)} fontSize={'10px'}>
+        <Text ff="Open Sans" color={rgba(colors.white, 0.8)} fontSize="10px">
           {description}
         </Text>
       </NewUpdateNoticeWrapper>

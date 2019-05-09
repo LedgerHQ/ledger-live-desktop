@@ -9,7 +9,7 @@ import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
-import { saveSettings } from 'actions/settings'
+import { setSelectedTimeRange } from 'actions/settings'
 import type { TimeRange } from 'reducers/settings'
 
 import { BalanceTotal, BalanceSinceDiff, BalanceSincePercent } from 'components/BalanceInfos'
@@ -34,7 +34,7 @@ type Props = {
   counterValue: Currency,
   t: T,
   account: Account,
-  saveSettings: ({ selectedTimeRange: TimeRange }) => *,
+  setSelectedTimeRange: TimeRange => *,
   selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
@@ -69,12 +69,12 @@ const SwapButton = styled(Tabbable).attrs({
 `
 
 const mapDispatchToProps = {
-  saveSettings,
+  setSelectedTimeRange,
 }
 
 class AccountBalanceSummaryHeader extends PureComponent<Props> {
   handleChangeSelectedTime = item => {
-    this.props.saveSettings({ selectedTimeRange: item.key })
+    this.props.setSelectedTimeRange(item.key)
   }
 
   render() {

@@ -1,10 +1,11 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import Bar from 'components/base/Bar'
 import { connect } from 'react-redux'
-import Box, { Card } from 'components/base/Box'
+import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import { openModal } from 'reducers/modals'
 import AccountCardHeader from './Header'
@@ -14,6 +15,14 @@ import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../../conf
 import IconReceive from '../../../icons/Receive'
 import IconAccountSettings from '../../../icons/AccountSettings'
 import ContextMenuItem from '../../ContextMenu/ContextMenuItem'
+
+const Card = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 1 })`
+  cursor: pointer;
+  border: 1px solid transparent;
+  :hover {
+    border-color: ${p => p.theme.colors.fog};
+  }
+`
 
 type Props = {
   hidden?: boolean,
@@ -57,7 +66,7 @@ class AccountCard extends PureComponent<Props> {
       <ContextMenuItem items={this.contextMenuItems}>
         <Card
           {...props}
-          style={{ cursor: 'pointer', display: hidden && 'none' }}
+          style={{ display: hidden && 'none' }}
           p={20}
           onClick={this.onClick}
           data-e2e="dashboard_AccountCardWrapper"

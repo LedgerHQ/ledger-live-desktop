@@ -10,24 +10,26 @@ import ListBody from '../AccountList/ListBody'
 
 type Props = {
   accounts: Account[],
+  mode: *,
+  onModeChange: (*) => void,
   onRangeChange: PortfolioRange => void,
   onAccountClick: Account => void,
   range: PortfolioRange,
 }
 
 type State = {
-  mode: string,
   search: string,
+}
+
+const BodyByMode = {
+  card: GridBody,
+  list: ListBody,
 }
 
 class AccountList extends Component<Props, State> {
   state = {
-    mode: 'card',
     search: '',
   }
-
-  onModeChange = () =>
-    this.setState(prevState => ({ mode: prevState.mode === 'card' ? 'list' : 'card' }))
 
   onTextChange = (evt: SyntheticInputEvent<HTMLInputElement>) =>
     this.setState({
@@ -35,10 +37,9 @@ class AccountList extends Component<Props, State> {
     })
 
   render() {
-    const { accounts, range, onAccountClick, onRangeChange } = this.props
-    const { mode, search } = this.state
-    const isUsingCards = this.state.mode === 'card'
-    const Body = isUsingCards ? GridBody : ListBody
+    const { accounts, range, onAccountClick, onModeChange, onRangeChange, mode } = this.props
+    const { search } = this.state
+    const Body = BodyByMode[mode]
 
     const visibleAccounts = []
     const hiddenAccounts = []
@@ -60,7 +61,7 @@ class AccountList extends Component<Props, State> {
       <Box flow={4}>
         <AccountListHeader
           onTextChange={this.onTextChange}
-          onModeChange={this.onModeChange}
+          onModeChange={onModeChange}
           onRangeChange={onRangeChange}
           mode={mode}
           range={range}

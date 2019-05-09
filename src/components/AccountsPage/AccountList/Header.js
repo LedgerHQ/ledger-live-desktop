@@ -16,7 +16,7 @@ import Button from '../../base/Button'
 import { GenericBox } from '../index'
 
 type Props = {
-  onModeChange: () => void,
+  onModeChange: (*) => void,
   onTextChange: (evt: SyntheticInputEvent<HTMLInputElement>) => void,
   onRangeChange: PortfolioRange => void,
   mode: string,
@@ -60,10 +60,10 @@ class Header extends PureComponent<Props> {
         <Box ml={4} mr={4}>
           <AccountsOrder />
         </Box>
-        <ToggleButton onClick={onModeChange} active={mode === 'list'}>
+        <ToggleButton onClick={() => onModeChange('list')} active={mode === 'list'}>
           <ListIcon />
         </ToggleButton>
-        <ToggleButton onClick={onModeChange} active={mode === 'card'}>
+        <ToggleButton onClick={() => onModeChange('card')} active={mode === 'card'}>
           <GridIcon />
         </ToggleButton>
       </GenericBox>

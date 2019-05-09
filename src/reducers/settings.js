@@ -49,6 +49,7 @@ export type SettingsState = {
   sentryLogs: boolean,
   lastUsedVersion: string,
   dismissedBanners: string[],
+  accountsViewMode: 'card' | 'list',
 }
 
 const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
@@ -78,6 +79,7 @@ const INITIAL_STATE: SettingsState = {
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
+  accountsViewMode: 'card',
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
@@ -231,6 +233,7 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
   settings => settings.exchange,
 )
 
+export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs
 export const autoLockTimeoutSelector = (state: State) => state.settings.autoLockTimeout

@@ -12,22 +12,28 @@ import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import AccountsHeader from './AccountsHeader'
 import AccountList from './AccountList'
 import { accountsSelector } from '../../reducers/accounts'
+import { setAccountsViewMode, setSelectedTimeRange } from '../../actions/settings'
+import { accountsViewModeSelector, selectedTimeRangeSelector } from '../../reducers/settings'
 
 type Props = {
   accounts: Account[],
   push: Function,
-}
-
-type State = {
   range: PortfolioRange,
+  mode: *,
+  setAccountsViewMode: (*) => void,
+  setSelectedTimeRange: PortfolioRange => void,
 }
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
+  mode: accountsViewModeSelector,
+  range: selectedTimeRangeSelector,
 })
 
 const mapDispatchToProps = {
   push,
+  setAccountsViewMode,
+  setSelectedTimeRange,
 }
 
 export const GenericBox = styled(Box)`
@@ -45,26 +51,22 @@ export const GenericBox = styled(Box)`
   box-shadow: 0 4px 8px 0 #00000007;
 `
 
-class AccountsPage extends PureComponent<Props, State> {
-  state = {
-    range: 'year',
-  }
-
+class AccountsPage extends PureComponent<Props> {
   onAccountClick = account => this.props.push(`/account/${account.id}`)
-  onRangeChange = (range: PortfolioRange) => this.setState({ range })
 
   render() {
-    const { accounts } = this.props
-    const { range } = this.state
+    const { accounts, mode, setAccountsViewMode, setSelectedTimeRange, range } = this.props
     return (
       <Box>
         <TrackPage category="Accounts" />
         <AccountsHeader />
         <AccountList
           onAccountClick={this.onAccountClick}
-          onRangeChange={this.onRangeChange}
+          onRangeChange={setSelectedTimeRange}
+          onModeChange={setAccountsViewMode}
           accounts={accounts}
           range={range}
+          mode={mode}
         />
       </Box>
     )

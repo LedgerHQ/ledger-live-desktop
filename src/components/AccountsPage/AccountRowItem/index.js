@@ -1,12 +1,12 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 import Box from 'components/base/Box'
 import type { Account } from '@ledgerhq/live-common/lib/types/account'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import { openModal } from 'reducers/modals'
 import { connect } from 'react-redux'
-import { GenericBox } from '../index'
 import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
 import Ellipsis from '../../base/Ellipsis'
 import Balance from './Balance'
@@ -30,6 +30,26 @@ type Props = {
 const mapDispatchToProps = {
   openModal,
 }
+
+const Row = styled(Box)`
+  background: #ffffff;
+  flex: 1;
+  padding: 10px 20px;
+  margin-bottom: 9px;
+  color: #abadb6;
+  font-weight: 600;
+  align-items: center;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 #00000007;
+  cursor: pointer;
+  border: 1px solid transparent;
+  :hover {
+    border-color: ${p => p.theme.colors.fog};
+  }
+`
 
 class AccountRowItem extends PureComponent<Props> {
   onClick = () => {
@@ -59,7 +79,12 @@ class AccountRowItem extends PureComponent<Props> {
     const { account, range, hidden } = this.props
     return (
       <ContextMenuItem items={this.contextMenuItems}>
-        <GenericBox style={{ display: hidden && 'none' }} flex={1} onClick={this.onClick}>
+        <Row
+          style={{ cursor: 'pointer', display: hidden && 'none' }}
+          flex={1}
+          onClick={this.onClick}
+          interactive
+        >
           <Box horizontal ff="Open Sans|SemiBold" flow={3} flex="30%" alignItems="center">
             <Box
               alignItems="center"
@@ -83,7 +108,7 @@ class AccountRowItem extends PureComponent<Props> {
           <Balance flex="35%" account={account} />
           <Countervalue flex="15%" account={account} range={range} />
           <Delta flex="10%" account={account} range={range} />
-        </GenericBox>
+        </Row>
       </ContextMenuItem>
     )
   }

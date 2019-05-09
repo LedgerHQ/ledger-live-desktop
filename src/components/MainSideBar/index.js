@@ -231,7 +231,7 @@ class MainSideBar extends PureComponent<Props, { reverseBanner: boolean }> {
             {showAccountsHelperBanner && (
               <NewUpdateNotice
                 reverse={reverseBanner}
-                title={`${t('sidebar.newUpdate.title')} 🎉`}
+                title={`${t('sidebar.newUpdate.title')}${'  '}🎉`}
                 description={t('sidebar.newUpdate.description')}
                 callback={this.dismissUpdateBanner}
               />

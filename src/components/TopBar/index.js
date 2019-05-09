@@ -51,6 +51,9 @@ const BreadCrumbBack = styled(Box)`
   font-size: 13px;
   font-weight: 600;
   color: ${p => p.theme.colors.grey};
+  :hover {
+    color: ${p => p.theme.colors.dark};
+  }
 `
 
 const Bar = styled.div`
