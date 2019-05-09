@@ -3,25 +3,30 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { balanceHistorySelector } from 'actions/portfolio'
-import type { Account, BalanceHistory, PortfolioRange } from '@ledgerhq/live-common/lib/types'
+import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
+import type { BalanceHistoryWithCountervalue } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import DeltaChange from 'components/DeltaChange'
+import { PlaceholderLine } from '../../Placeholder'
 
 class Delta extends PureComponent<{
-  balanceHistory: BalanceHistory,
-  account: Account,
-  range: PortfolioRange,
+  histo: { history: BalanceHistoryWithCountervalue },
 }> {
   render() {
-    const { balanceHistory, ...rest } = this.props
-    const balanceStart = balanceHistory[0].value
-    const balanceEnd = balanceHistory[balanceHistory.length - 1].value
+    const {
+      histo: { history },
+    } = this.props
+    const balanceStart = history[0].countervalue
+    const balanceEnd = history[history.length - 1].countervalue
     return (
-      <Box {...rest} justifyContent="flex-end">
-        {!balanceStart.isZero() ? (
-          <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
-        ) : null}
+      <Box flex="10%" justifyContent="flex-end">
+        <DeltaChange
+          placeholder={<PlaceholderLine width={50} />}
+          from={balanceStart}
+          to={balanceEnd}
+          alwaysShowSign
+          fontSize={3}
+        />
       </Box>
     )
   }
@@ -29,6 +34,6 @@ class Delta extends PureComponent<{
 
 export default connect(
   createStructuredSelector({
-    balanceHistory: balanceHistorySelector,
+    histo: balanceHistoryWithCountervalueSelector,
   }),
 )(Delta)

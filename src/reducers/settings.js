@@ -50,6 +50,7 @@ export type SettingsState = {
   lastUsedVersion: string,
   dismissedBanners: string[],
   accountsViewMode: 'card' | 'list',
+  showAccountsHelperBanner: boolean,
 }
 
 const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
@@ -80,6 +81,7 @@ const INITIAL_STATE: SettingsState = {
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
   accountsViewMode: 'card',
+  showAccountsHelperBanner: true,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
@@ -137,10 +139,6 @@ const handlers: Object = {
   SETTINGS_DISMISS_BANNER: (state: SettingsState, { payload: bannerId }) => ({
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
-  }),
-  CLEAN_ACCOUNTS_CACHE: (state: SettingsState) => ({
-    ...state,
-    dismissedBanners: [],
   }),
 }
 

@@ -3,28 +3,38 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { balanceHistorySelector } from 'actions/portfolio'
-import type { Account, BalanceHistory } from '@ledgerhq/live-common/lib/types'
+import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
+import type { Account, BalanceHistoryWithCountervalue } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
 import DeltaChange from 'components/DeltaChange'
 import Chart from 'components/base/Chart'
 
 class Body extends PureComponent<{
-  balanceHistory: BalanceHistory,
+  histo: {
+    history: BalanceHistoryWithCountervalue,
+    countervalueAvailable: boolean,
+  },
   account: Account,
 }> {
+  // $FlowFixMe
+  mapValueCounterValue = d => d.countervalue.toNumber()
+  mapValue = d => d.value.toNumber()
+
   render() {
-    const { balanceHistory, account } = this.props
-    const balanceStart = balanceHistory[0].value
-    const balanceEnd = balanceHistory[balanceHistory.length - 1].value
+    const {
+      histo: { history, countervalueAvailable },
+      account,
+    } = this.props
+    const balanceStart = history[0].countervalue
+    const balanceEnd = history[history.length - 1].countervalue
     return (
       <Box flow={4}>
         <Box flow={2} horizontal>
           <Box justifyContent="center">
             <CounterValue
               currency={account.currency}
-              value={balanceEnd}
+              value={history[history.length - 1].value}
               animateTicker={false}
               alwaysShowSign={false}
               showCode
@@ -33,14 +43,13 @@ class Body extends PureComponent<{
             />
           </Box>
           <Box grow justifyContent="center">
-            {!balanceStart.isZero() ? (
-              <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
-            ) : null}
+            <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
           </Box>
         </Box>
         <Chart
-          data={balanceHistory}
+          data={history}
           color={account.currency.color}
+          mapValue={countervalueAvailable ? this.mapValueCounterValue : this.mapValue}
           height={52}
           hideAxis
           isInteractive={false}
@@ -53,6 +62,6 @@ class Body extends PureComponent<{
 
 export default connect(
   createStructuredSelector({
-    balanceHistory: balanceHistorySelector,
+    histo: balanceHistoryWithCountervalueSelector,
   }),
 )(Body)

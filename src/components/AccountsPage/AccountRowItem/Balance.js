@@ -1,25 +1,27 @@
 // @flow
 
+import type { BigNumber } from 'bignumber.js'
 import React, { PureComponent } from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Unit } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 
 class Balance extends PureComponent<{
-  account: Account,
+  unit: Unit,
+  balance: BigNumber,
 }> {
   render() {
-    const { account, ...rest } = this.props
+    const { unit, balance } = this.props
     return (
-      <Box {...rest} justifyContent="center">
+      <Box flex="35%" justifyContent="center">
         <FormattedVal
           alwaysShowSign={false}
           animateTicker={false}
           ellipsis
           color="dark"
-          unit={account.unit}
+          unit={unit}
           showCode
-          val={account.balance}
+          val={balance}
         />
       </Box>
     )
