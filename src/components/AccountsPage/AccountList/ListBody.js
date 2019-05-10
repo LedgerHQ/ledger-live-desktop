@@ -11,17 +11,18 @@ type Props = {
   hiddenAccounts: Account[],
   onAccountClick: Account => void,
   range: PortfolioRange,
+  showNewAccount: boolean,
 }
 
 class ListBody extends PureComponent<Props> {
   render() {
-    const { visibleAccounts, hiddenAccounts, range, onAccountClick } = this.props
+    const { visibleAccounts, showNewAccount, hiddenAccounts, range, onAccountClick } = this.props
     return (
       <Box>
         {visibleAccounts.map(item => (
           <AccountItem key={item.id} account={item} range={range} onClick={onAccountClick} />
         ))}
-        <AccountItemPlaceholder />
+        {showNewAccount ? <AccountItemPlaceholder /> : null}
         {hiddenAccounts.map(item => (
           <AccountItem hidden key={item.id} account={item} range={range} onClick={onAccountClick} />
         ))}

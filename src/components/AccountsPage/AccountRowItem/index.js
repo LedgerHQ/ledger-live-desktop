@@ -86,7 +86,7 @@ class AccountRowItem extends PureComponent<Props> {
         >
           <Head currency={account.currency} name={account.name} />
           <AccountSyncStatusIndicator accountId={account.id} />
-          <Box flex="8%" />
+          <Box flex="12%" />
           <Balance unit={account.unit} balance={account.balance} />
           <Countervalue account={account} range={range} />
           <Delta account={account} range={range} />

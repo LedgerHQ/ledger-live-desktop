@@ -21,7 +21,7 @@ class Delta extends PureComponent<{
     return (
       <Box flex="10%" justifyContent="flex-end">
         <DeltaChange
-          placeholder={<PlaceholderLine width={50} />}
+          placeholder={<PlaceholderLine width={16} height={2} />}
           from={balanceStart}
           to={balanceEnd}
           alwaysShowSign

@@ -12,9 +12,11 @@ type Props = {
   hiddenAccounts: Account[],
   onAccountClick: Account => void,
   range: PortfolioRange,
+  showNewAccount: boolean,
 }
 
 const GridBox = styled(Box)`
+  margin-top: 18px;
   display: grid;
   grid-gap: 18px;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -22,14 +24,21 @@ const GridBox = styled(Box)`
 
 class GridBody extends PureComponent<Props> {
   render() {
-    const { visibleAccounts, hiddenAccounts, range, onAccountClick, ...rest } = this.props
+    const {
+      visibleAccounts,
+      hiddenAccounts,
+      range,
+      showNewAccount,
+      onAccountClick,
+      ...rest
+    } = this.props
 
     return (
       <GridBox {...rest}>
         {visibleAccounts.map(account => (
           <AccountCard key={account.id} account={account} range={range} onClick={onAccountClick} />
         ))}
-        <AccountCardPlaceholder key="placeholder" />
+        {showNewAccount ? <AccountCardPlaceholder key="placeholder" /> : null}
         {hiddenAccounts.map(account => (
           <AccountCard
             hidden

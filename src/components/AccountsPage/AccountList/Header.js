@@ -39,21 +39,39 @@ const SearchInput = styled.input`
   flex-grow: 1;
   font-family: 'Open Sans';
   cursor: text;
+  color: ${p => p.theme.colors.dark};
   &::placeholder {
     color: #999999;
   }
 `
 
-class Header extends PureComponent<Props> {
+class Header extends PureComponent<Props, { focused: boolean }> {
+  state = {
+    focused: false,
+  }
+  onFocus = () => {
+    this.setState({ focused: true })
+  }
+  onBlur = () => {
+    this.setState({ focused: false })
+  }
   render() {
     const { onModeChange, onTextChange, onRangeChange, mode, search, range } = this.props
+    const { focused } = this.state
 
     return (
       <GenericBox horizontal p={0} alignItems="center">
-        <Box pr={3} justify="center" color={'#999999'}>
+        <Box pr={3} justify="center" color={focused || search ? '#142533' : '#999999'}>
           <SearchIcon size={16} />
         </Box>
-        <SearchInput placeholder="Search" onChange={onTextChange} value={search} />
+        <SearchInput
+          autoFocus
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          placeholder="Search"
+          onChange={onTextChange}
+          value={search}
+        />
         <Text color="dark" ff="Museo Sans" fontSize={6} data-e2e="dashboard_AccountCount">
           <AccountsRange onRangeChange={onRangeChange} range={range} />
         </Text>

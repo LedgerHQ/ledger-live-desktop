@@ -15,7 +15,7 @@ class Head extends PureComponent<Props> {
   render() {
     const { currency, name } = this.props
     return (
-      <Box horizontal ff="Open Sans|SemiBold" flow={3} flex="30%" alignItems="center">
+      <Box horizontal ff="Open Sans|SemiBold" flow={3} flex="30%" pr={1} alignItems="center">
         <Box alignItems="center" justifyContent="center" style={{ color: currency.color }}>
           <CryptoCurrencyIcon currency={currency} size={20} />
         </Box>

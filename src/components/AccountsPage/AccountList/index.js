@@ -2,8 +2,10 @@
 
 import React, { Component } from 'react'
 import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
+import { Trans, translate } from 'react-i18next'
 
-import Box from 'components/base/Box'
+import Text from 'components/base/Text'
+import StickyBackToTop from 'components/StickyBackToTop'
 import AccountListHeader from './Header'
 import GridBody from '../AccountList/GridBody'
 import ListBody from '../AccountList/ListBody'
@@ -58,7 +60,7 @@ class AccountList extends Component<Props, State> {
     }
 
     return (
-      <Box flow={4}>
+      <div style={{ paddingBottom: 70 }}>
         <AccountListHeader
           onTextChange={this.onTextChange}
           onModeChange={onModeChange}
@@ -68,15 +70,22 @@ class AccountList extends Component<Props, State> {
           search={search}
           accountsLength={accounts.length}
         />
+        {visibleAccounts.length === 0 ? (
+          <Text style={{ display: 'block', padding: 60, textAlign: 'center' }}>
+            <Trans i18nKey="accounts.noResultFound" />
+          </Text>
+        ) : null}
         <Body
           horizontal
           data-e2e="dashboard_AccountList"
           range={range}
           visibleAccounts={visibleAccounts}
           hiddenAccounts={hiddenAccounts}
+          showNewAccount={!search}
           onAccountClick={onAccountClick}
         />
-      </Box>
+        <StickyBackToTop />
+      </div>
     )
   }
 }

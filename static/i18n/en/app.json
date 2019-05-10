@@ -119,6 +119,7 @@
   },
   "accounts": {
     "title": "Accounts",
+    "noResultFound": "No accounts found.",
     "order": {
       "name": "Account Name",
       "balance": "Account Balance"
