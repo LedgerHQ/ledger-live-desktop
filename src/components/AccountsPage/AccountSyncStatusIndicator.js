@@ -2,7 +2,7 @@
 
 import { createStructuredSelector } from 'reselect'
 import { Trans } from 'react-i18next'
-import React, { PureComponent, useCallback } from 'react'
+import React, { PureComponent, useCallback, useState, useRef, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { colors } from 'styles/theme'
 import IconCheck from 'icons/Check'
@@ -89,6 +89,8 @@ const AccountSyncStatusIndicator = ({
   syncState: { pending, error },
 }: *) => {
   const setSyncBehavior = useBridgeSync()
+  const [userAction, setUserAction] = useState(false)
+  const timeout = useRef(null)
   const onClick = useCallback(
     e => {
       e.stopPropagation()
@@ -97,12 +99,31 @@ const AccountSyncStatusIndicator = ({
         accountId,
         priority: 10,
       })
+      setUserAction(true)
+      // a user action is kept in memory for a short time (which will correspond to a spinner time)
+      clearTimeout(timeout.current)
+      timeout.current = setTimeout(() => setUserAction(false), 1000)
     },
     [setSyncBehavior, accountId],
   )
-  if (pending && !isUpToDateAccount) return <StatusSynchronizing onClick={onClick} />
-  if (error) return <StatusError onClick={onClick} error={error} />
-  if (isUpToDateAccount) return <StatusUpToDate onClick={onClick} />
+
+  // at unmount, clear all timeouts
+  useEffect(() => {
+    clearTimeout(timeout.current)
+  }, [])
+
+  // We optimistically will show things are up to date even if it's actually synchronizing
+  // in order to "debounce" the UI and don't make it blinks each time a sync happens
+  // only when user did the account we will show the true state
+  if ((pending && !isUpToDateAccount) || userAction) {
+    return <StatusSynchronizing onClick={onClick} />
+  }
+  if (error) {
+    return <StatusError onClick={onClick} error={error} />
+  }
+  if (isUpToDateAccount) {
+    return <StatusUpToDate onClick={onClick} />
+  }
   return <StatusQueued onClick={onClick} />
 }
 
