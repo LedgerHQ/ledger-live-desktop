@@ -123,7 +123,6 @@ class DashboardPage extends PureComponent<Props> {
                   />
                 </Box>
               </Box>
-
               <BalanceSummary
                 counterValue={counterValue}
                 chartId="dashboard-chart"
@@ -132,7 +131,6 @@ class DashboardPage extends PureComponent<Props> {
                 range={selectedTimeRange}
                 Header={this.Header}
               />
-
               {totalOperations > 0 && (
                 <OperationsList
                   onAccountClick={this.onAccountClick}
@@ -141,7 +139,7 @@ class DashboardPage extends PureComponent<Props> {
                   withAccount
                 />
               )}
-              <StickyBackToTop />
+              <StickyBackToTop scrollUpOnMount />
             </Fragment>
           ) : (
             <Redirect to="/accounts" />

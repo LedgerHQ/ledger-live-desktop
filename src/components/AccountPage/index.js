@@ -92,10 +92,8 @@ class AccountPage extends PureComponent<Props> {
                 setCountervalueFirst={setCountervalueFirst}
               />
             </Box>
-
             <OperationsList account={account} title={t('account.lastOperations')} />
-
-            <StickyBackToTop />
+            <StickyBackToTop scrollUpOnMount />
           </Fragment>
         ) : (
           <EmptyStateAccount account={account} />

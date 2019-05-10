@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
-import { Trans, translate } from 'react-i18next'
+import { Trans } from 'react-i18next'
 
 import Text from 'components/base/Text'
 import StickyBackToTop from 'components/StickyBackToTop'
@@ -84,7 +84,7 @@ class AccountList extends Component<Props, State> {
           showNewAccount={!search}
           onAccountClick={onAccountClick}
         />
-        <StickyBackToTop />
+        <StickyBackToTop scrollUpOnMount />
       </div>
     )
   }
