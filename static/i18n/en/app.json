@@ -209,7 +209,8 @@
   "genuinecheck": {
     "modal": {
       "title": "Genuine check"
-    }
+    },
+    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
   "addAccounts": {
     "title": "Add accounts",
@@ -296,7 +297,7 @@
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "Bootloader updating...",
         "firmware": "Firmware updating...",
-        "flash": "Flashing your device..."
+        "flash": "Updating your device..."
       },
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText":
@@ -828,6 +829,9 @@
       "desc": "Install some apps on your device and access the Portfolio",
       "openAppButton": "Open Ledger Live"
     }
+  },
+  "connectTroubleshooting": {
+    "desc": "Having a hard time connecting your device?"
   },
   "errors": {
     "generic": {
