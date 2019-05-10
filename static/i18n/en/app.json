@@ -317,6 +317,7 @@
       "steps": {
         "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
+        "reset": "Prepare device",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "Bootloader updating...",

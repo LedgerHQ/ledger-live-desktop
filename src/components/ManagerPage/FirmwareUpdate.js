@@ -53,10 +53,17 @@ type State = {
   error: ?Error,
 }
 
-const intializeState = ({ deviceInfo }): State => ({
+const initialStepId = ({ deviceInfo, device }): StepId =>
+  deviceInfo.isOSU
+    ? 'updateMCU'
+    : getDeviceModel(device.modelId).id === 'blue'
+      ? 'resetDevice'
+      : 'idCheck'
+
+const intializeState = (props: Props): State => ({
   firmware: null,
   modal: 'closed',
-  stepId: deviceInfo.isBootloader ? 'updateMCU' : 'idCheck',
+  stepId: initialStepId(props),
   ready: false,
   error: null,
 })
@@ -65,9 +72,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   state = intializeState(this.props)
 
   async componentDidMount() {
-    const { deviceInfo, device } = this.props
-    const deviceSpecs = getDeviceModel(device.modelId)
-
+    const { deviceInfo } = this.props
     try {
       const firmware = await getLatestFirmwareForDevice.send(deviceInfo).toPromise()
       if (firmware && !this._unmounting) {
@@ -76,11 +81,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           firmware,
           ready: true,
           modal: deviceInfo.isOSU ? 'install' : 'closed',
-          stepId: deviceInfo.isOSU
-            ? 'updateMCU'
-            : deviceSpecs.id === 'blue'
-              ? 'resetDevice'
-              : 'idCheck',
+          stepId: initialStepId(this.props),
         })
         /* eslint-enable */
       }

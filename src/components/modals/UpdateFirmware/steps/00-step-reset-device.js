@@ -54,9 +54,6 @@ const StepResetDevice = ({ deviceModelId }: Props) => {
   const device = getDeviceModel(deviceModelId)
   return (
     <Container>
-      <Title>
-        <Trans i18nKey="manager.modal.resetTitle" />
-      </Title>
       <TrackPage category="Manager" name="ResetBlueDevice" />
 
       <Wrapper>

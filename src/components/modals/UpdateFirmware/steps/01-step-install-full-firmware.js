@@ -104,9 +104,9 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   renderBody = () => {
-    // TODO: Use deviceModel to change the <DeviceConfirm /> logo
-    const { t, firmware } = this.props
+    const { t, firmware, deviceModelId } = this.props
     const { progress, displayedOnDevice } = this.state
+
     if (!displayedOnDevice) {
       return (
         <>
@@ -119,21 +119,19 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
         </>
       )
     }
+
     return (
       <>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
           {t('manager.modal.confirmIdentifierText')}
         </Text>
-        <Box mx={7} my={5}>
+        <Box mx={7} mt={5} mb={deviceModelId === 'blue' ? 0 : 5}>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('manager.modal.identifier')}
           </Text>
           <Address>{firmware.osu && this.formatHashName(firmware.osu.hash)}</Address>
         </Box>
-        {/* TODO: Switch between components depending on model
-            Note => might need some new illustrations
-         */}
-        <DeviceConfirm />
+        <DeviceConfirm deviceModelId={deviceModelId} />
       </>
     )
   }

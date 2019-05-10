@@ -50,7 +50,7 @@ const createSteps = ({ t, deviceModel }: { t: T, deviceModel: DeviceModelId }): 
 
   const resetStep = {
     id: 'resetDevice',
-    label: 'Reset Step',
+    label: t('manager.modal.steps.reset'),
     component: StepResetDevice,
     footer: StepResetFooter,
     onBack: null,
@@ -132,6 +132,7 @@ class UpdateModal extends PureComponent<Props, State> {
 
     return (
       <Modal
+        width={550}
         onClose={onClose}
         centered
         onHide={this.handleReset}

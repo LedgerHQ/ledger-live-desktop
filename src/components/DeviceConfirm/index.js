@@ -2,13 +2,12 @@
 
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-
+import type { DeviceModelId } from '@ledgerhq/devices'
 import { rgba } from 'styles/helpers'
-
 import Box from 'components/base/Box'
-
 import IconCheck from 'icons/Check'
 import IconCross from 'icons/Cross'
+import { i } from 'helpers/staticPath'
 
 const pulseAnimation = p => keyframes`
   0% {
@@ -49,9 +48,9 @@ const Check = ({ error }: { error?: boolean }) => (
 
 const PushButton = styled(Box)`
   background: linear-gradient(to bottom, #ffffff, ${p => p.theme.colors.wallet});
-  bottom: 48px;
-  height: 28px;
-  left: 205px;
+  bottom: ${p => p.bottom}px;
+  left: ${p => p.left}px;
+  height: ${p => p.height}px;
   position: absolute;
   width: 1px;
 
@@ -76,9 +75,10 @@ const PushButton = styled(Box)`
 type Props = {
   error?: boolean,
   withoutPushDisplay?: boolean,
+  deviceModelId?: DeviceModelId,
 }
 
-const SVG = (
+const NanoSVG = (
   <svg width="365" height="44">
     <defs>
       <rect id="DeviceConfirm-a" width="41.7112299" height="238.383838" rx="4.00000006" />
@@ -164,12 +164,31 @@ const SVG = (
   </svg>
 )
 
-const DeviceConfirm = (props: Props) => (
+const BlueDeviceConfirm = (props: Props) => (
   <Wrapper {...props}>
-    {!props.error && !props.withoutPushDisplay ? <PushButton /> : null}
-    <Check error={props.error} />
-    {SVG}
+    {!props.error && !props.withoutPushDisplay ? (
+      <PushButton left={90} bottom={150} height={180} />
+    ) : null}
+    <img src={i('confirm/Blue.svg')} alt="" />
   </Wrapper>
 )
+
+// TODO split into NanoX and NanoS
+const NanoDeviceConfirm = (props: Props) => (
+  <Wrapper {...props}>
+    {!props.error && !props.withoutPushDisplay ? (
+      <PushButton left={205} bottom={48} height={28} />
+    ) : null}
+    <Check error={props.error} />
+    {NanoSVG}
+  </Wrapper>
+)
+
+const DeviceConfirm = (props: Props) =>
+  props.deviceModelId === 'blue' ? (
+    <BlueDeviceConfirm {...props} />
+  ) : (
+    <NanoDeviceConfirm {...props} />
+  )
 
 export default DeviceConfirm

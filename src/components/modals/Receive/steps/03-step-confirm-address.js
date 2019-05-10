@@ -35,12 +35,12 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
             <Text mb={5}>
               <TranslatedError error={verifyAddressError} field="description" />
             </Text>
-            {device && device.modelId === 'nanoX' ? (
+            {!device ? null : device.modelId === 'nanoX' ? (
               <Box pt={30}>
                 <NanoXStates error />
               </Box>
             ) : (
-              <DeviceConfirm error />
+              <DeviceConfirm error deviceModelId={device.modelId} />
             )}
           </Fragment>
         ) : (
@@ -57,12 +57,16 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
               {t('common.continue')}
             </Button>
-            {device && device.modelId === 'nanoX' ? (
+            {!device ? null : device.modelId === 'nanoX' ? (
               <Box pt={30}>
                 <NanoXStates />
               </Box>
             ) : (
-              <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
+              <DeviceConfirm
+                deviceModelId={device.modelId}
+                withoutPushDisplay
+                error={isAddressVerified === false}
+              />
             )}
           </Fragment>
         )}

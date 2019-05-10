@@ -46,7 +46,13 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
           />
         </WarnBox>
         <Info>{t('send.steps.verification.body')}</Info>
-        {device && device.modelId === 'nanoX' ? <NanoXStates validate /> : <DeviceConfirm />}
+        {device ? (
+          device.modelId === 'nanoX' ? (
+            <NanoXStates validate />
+          ) : (
+            <DeviceConfirm deviceModelId={device.modelId} />
+          )
+        ) : null}
       </Container>
     )
   }
