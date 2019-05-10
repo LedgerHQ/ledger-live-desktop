@@ -6,20 +6,17 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
-
 import type { Location } from 'react-router'
-import type { Account } from '@ledgerhq/live-common/lib/types'
-
 import type { T } from 'types/common'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
-
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { developerModeSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
-
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
@@ -30,9 +27,6 @@ import IconPieChart from 'icons/PieChart'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
-
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import TopGradient from './TopGradient'
 import KeyboardContent from '../KeyboardContent'
 import useExperimental from '../../hooks/useExperimental'
@@ -43,7 +37,7 @@ import {
 } from '../news/NewAccountsPage'
 
 const mapStateToProps = state => ({
-  accounts: accountsSelector(state),
+  noAccounts: accountsSelector(state).length === 0,
   developerMode: developerModeSelector(state),
 })
 
@@ -54,7 +48,7 @@ const mapDispatchToProps = {
 
 type Props = {
   t: T,
-  accounts: Account[],
+  noAccounts: boolean,
   location: Location,
   push: string => void,
   openModal: string => void,
@@ -145,7 +139,7 @@ class MainSideBar extends PureComponent<Props> {
   handleClickDev = () => this.push('/dev')
 
   render() {
-    const { t, accounts, location, developerMode } = this.props
+    const { t, noAccounts, location, developerMode } = this.props
     const { pathname } = location
 
     return (
@@ -161,7 +155,7 @@ class MainSideBar extends PureComponent<Props> {
               onClick={this.handleClickDashboard}
               isActive={pathname === '/'}
               NotifComponent={UpdateDot}
-              disabled={accounts.length === 0}
+              disabled={noAccounts}
             />
             <SideBarListItem
               label={t('sidebar.accounts')}
@@ -176,14 +170,14 @@ class MainSideBar extends PureComponent<Props> {
               icon={IconSend}
               iconActiveColor="wallet"
               onClick={this.handleOpenSendModal}
-              disabled={accounts.length === 0}
+              disabled={noAccounts}
             />
             <SideBarListItem
               label={t('receive.title')}
               icon={IconReceive}
               iconActiveColor="wallet"
               onClick={this.handleOpenReceiveModal}
-              disabled={accounts.length === 0}
+              disabled={noAccounts}
             />
             <SideBarListItem
               label={t('sidebar.manager')}
