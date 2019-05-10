@@ -242,6 +242,9 @@ export const hasCompletedOnboardingSelector = (state: State) =>
 
 export const dismissedBannersSelector = (state: State) => state.settings.dismissedBanners || []
 
+export const dismissedBannerSelector = (state: State, { bannerKey }: { bannerKey: string }) =>
+  (state.settings.dismissedBanners || []).includes(bannerKey)
+
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
   counterValueExchangeSelector,

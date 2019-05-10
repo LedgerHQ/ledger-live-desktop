@@ -2,6 +2,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
+import { Redirect } from 'react-router'
 import { compose } from 'redux'
 import IconNanoX from 'icons/device/NanoXBanner'
 import { translate } from 'react-i18next'
@@ -31,7 +32,6 @@ import StickyBackToTop from 'components/StickyBackToTop'
 import styled from 'styled-components'
 import { openURL } from 'helpers/linking'
 import BalanceSummary from './BalanceSummary'
-import EmptyState from './EmptyState'
 import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
 import TopBanner, { FakeLink } from '../TopBanner'
@@ -144,7 +144,7 @@ class DashboardPage extends PureComponent<Props> {
               <StickyBackToTop />
             </Fragment>
           ) : (
-            <EmptyState />
+            <Redirect to="/accounts" />
           )}
         </Box>
       </Fragment>

@@ -70,7 +70,7 @@ class StatusError extends PureComponent<{ onClick: (*) => void, error: ?Error }>
       <Tooltip
         tooltipBg="alertRed"
         render={() => (
-          <Box fontSize={4} p={2} style={{ maxWidth: 250 }}>
+          <Box style={{ maxWidth: 250 }}>
             <TranslatedError error={error} />
           </Box>
         )}

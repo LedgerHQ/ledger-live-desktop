@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import { connect } from 'react-redux'
@@ -14,6 +14,8 @@ import AccountList from './AccountList'
 import { accountsSelector } from '../../reducers/accounts'
 import { setAccountsViewMode, setSelectedTimeRange } from '../../actions/settings'
 import { accountsViewModeSelector, selectedTimeRangeSelector } from '../../reducers/settings'
+import EmptyState from './EmptyState'
+import { Dismiss as NewAccountsDismiss } from '../news/NewAccountsPage'
 
 type Props = {
   accounts: Account[],
@@ -56,8 +58,17 @@ class AccountsPage extends PureComponent<Props> {
 
   render() {
     const { accounts, mode, setAccountsViewMode, setSelectedTimeRange, range } = this.props
+    if (accounts.length === 0) {
+      return (
+        <Fragment>
+          <NewAccountsDismiss />
+          <EmptyState />
+        </Fragment>
+      )
+    }
     return (
       <Box>
+        <NewAccountsDismiss />
         <TrackPage category="Accounts" />
         <AccountsHeader />
         <AccountList

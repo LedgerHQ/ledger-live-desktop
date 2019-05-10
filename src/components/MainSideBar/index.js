@@ -16,14 +16,14 @@ import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
 
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
-import { developerModeSelector, dismissedBannersSelector } from 'reducers/settings'
+import { developerModeSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 
 import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
-import UpdateDot, { Dot } from 'components/Updater/UpdateDot'
+import UpdateDot from 'components/Updater/UpdateDot'
 import IconManager from 'icons/Manager'
 import IconWallet from 'icons/Wallet'
 import IconPieChart from 'icons/PieChart'
@@ -33,25 +33,23 @@ import IconExchange from 'icons/Exchange'
 
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { delay } from 'helpers/promise'
 import TopGradient from './TopGradient'
 import KeyboardContent from '../KeyboardContent'
 import useExperimental from '../../hooks/useExperimental'
 import { darken } from '../../styles/helpers'
-import NewUpdateNotice from '../NewUpdateNotice'
-import { dismissBanner } from '../../actions/settings'
+import {
+  UpdateNotice as NewAccountsUpdateNotice,
+  NotifDot as NewAccountsNotifDot,
+} from '../news/NewAccountsPage'
 
-const accountsBannerKey = 'accountsHelperBanner'
 const mapStateToProps = state => ({
   accounts: accountsSelector(state),
   developerMode: developerModeSelector(state),
-  showAccountsHelperBanner: !dismissedBannersSelector(state).includes(accountsBannerKey),
 })
 
 const mapDispatchToProps = {
   push,
   openModal,
-  dismissBanner,
 }
 
 type Props = {
@@ -61,8 +59,6 @@ type Props = {
   push: string => void,
   openModal: string => void,
   developerMode: boolean,
-  showAccountsHelperBanner: boolean,
-  dismissBanner: string => void,
 }
 
 const IconDev = () => (
@@ -122,8 +118,7 @@ const Tag = styled(Link)`
   }
 `
 
-class MainSideBar extends PureComponent<Props, { reverseBanner: boolean }> {
-  state = { reverseBanner: false }
+class MainSideBar extends PureComponent<Props> {
   push = (to: string) => {
     const { push } = this.props
     const {
@@ -145,25 +140,12 @@ class MainSideBar extends PureComponent<Props, { reverseBanner: boolean }> {
     this.props.openModal(MODAL_RECEIVE)
   }
   handleClickManager = () => this.push('/manager')
-  handleClickAccounts = () => {
-    const { showAccountsHelperBanner, dismissBanner } = this.props
-    if (showAccountsHelperBanner) dismissBanner(accountsBannerKey)
-
-    this.push('/accounts')
-  }
+  handleClickAccounts = () => this.push('/accounts')
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
 
-  dismissUpdateBanner = () => {
-    this.setState({ reverseBanner: true }, async () => {
-      await delay(500)
-      this.props.dismissBanner(accountsBannerKey)
-    })
-  }
-
   render() {
-    const { t, accounts, location, developerMode, showAccountsHelperBanner } = this.props
-    const { reverseBanner } = this.state
+    const { t, accounts, location, developerMode } = this.props
     const { pathname } = location
 
     return (
@@ -179,6 +161,7 @@ class MainSideBar extends PureComponent<Props, { reverseBanner: boolean }> {
               onClick={this.handleClickDashboard}
               isActive={pathname === '/'}
               NotifComponent={UpdateDot}
+              disabled={accounts.length === 0}
             />
             <SideBarListItem
               label={t('sidebar.accounts')}
@@ -186,7 +169,7 @@ class MainSideBar extends PureComponent<Props, { reverseBanner: boolean }> {
               iconActiveColor="wallet"
               isActive={pathname === '/accounts'}
               onClick={this.handleClickAccounts}
-              NotifComponent={showAccountsHelperBanner ? Dot : undefined}
+              NotifComponent={NewAccountsNotifDot}
             />
             <SideBarListItem
               label={t('send.title')}
@@ -228,14 +211,7 @@ class MainSideBar extends PureComponent<Props, { reverseBanner: boolean }> {
               </KeyboardContent>
             )}
             <Space of={30} />
-            {showAccountsHelperBanner && (
-              <NewUpdateNotice
-                reverse={reverseBanner}
-                title={`${t('sidebar.newUpdate.title')}${'  '}🎉`}
-                description={t('sidebar.newUpdate.description')}
-                callback={this.dismissUpdateBanner}
-              />
-            )}
+            <NewAccountsUpdateNotice />
           </SideBarList>
           <Space grow />
           <TagContainer />
