@@ -56,6 +56,9 @@ const handlers: Object = {
       operations: [],
       pendingOperations: [],
     })),
+
+  // used to debug performance of redux updates
+  DEBUG_TICK: state => state.slice(0),
 }
 
 // Selectors

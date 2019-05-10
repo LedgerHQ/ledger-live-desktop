@@ -14,6 +14,7 @@ import { runMigrations } from 'migrations'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
+import { DEBUG_TICK_REDUX } from 'config/constants'
 
 import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
 
@@ -76,6 +77,10 @@ async function init() {
     store.dispatch(lock())
   } else {
     await store.dispatch(fetchAccounts())
+  }
+
+  if (DEBUG_TICK_REDUX) {
+    setInterval(() => store.dispatch({ type: 'DEBUG_TICK' }), DEBUG_TICK_REDUX)
   }
 
   r(<App store={store} history={history} language={language} />)

@@ -140,6 +140,9 @@ const handlers: Object = {
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
   }),
+
+  // used to debug performance of redux updates
+  DEBUG_TICK: state => ({ ...state }),
 }
 
 // TODO refactor selectors to *Selector naming convention

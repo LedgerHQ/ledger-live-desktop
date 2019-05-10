@@ -47,6 +47,8 @@ export const SYNC_BOOT_DELAY = 2 * 1000
 export const SYNC_PENDING_INTERVAL = 10 * 1000
 export const SYNC_MAX_CONCURRENT = intFromEnv('LEDGER_SYNC_MAX_CONCURRENT', 4)
 
+export const DEBUG_TICK_REDUX = intFromEnv('DEBUG_TICK_REDUX', 0)
+
 // Endpoints...
 
 export const LEDGER_COUNTERVALUES_API = stringFromEnv(
