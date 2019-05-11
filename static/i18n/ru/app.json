@@ -956,7 +956,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Требуется обновить приложение.",
-      "description": "Чтобы обновить приложение, откройте диспетчер."
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
       "title": "Этот адрес {{currencyName}} недействительный."
