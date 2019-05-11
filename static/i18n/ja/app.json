@@ -956,7 +956,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "アプリの更新が必要です",
-      "description": "マネージャーを開いて、アプリを更新します"
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}}アドレスではありません"
