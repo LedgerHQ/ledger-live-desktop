@@ -956,7 +956,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "앱 업데이트가 필요합니다.",
-      "description": "Manager를 열고 앱을 업데이트하십시오."
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
       "title": "유효한 {{currencyName}} 주소가 아닙니다."
