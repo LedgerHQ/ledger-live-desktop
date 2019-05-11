@@ -956,7 +956,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "应用程序待更新",
-      "description": "打开 Manager 更新此应用程序"
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
