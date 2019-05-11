@@ -956,7 +956,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Se requiere la actualización de la aplicación.",
-      "description": "Abre el Manager para actualizar la aplicación"
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
       "title": "Esta no es una dirección {{currencyName}} válida."
