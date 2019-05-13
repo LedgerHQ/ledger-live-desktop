@@ -4,7 +4,7 @@ import { BigNumber } from 'bignumber.js'
 import logger from 'logger'
 import React from 'react'
 import FeesField from 'components/FeesField/EthereumKind'
-import AdvancedOptions from 'components/AdvancedOptions/EthereumKind'
+import EditAdvancedOptions from 'components/AdvancedOptions/EthereumKind'
 import throttle from 'lodash/throttle'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
@@ -50,15 +50,6 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
     }}
     gasPrice={value.gasPrice}
     account={account}
-  />
-)
-
-const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
-  <AdvancedOptions
-    gasLimit={value.gasLimit}
-    onChangeGasLimit={gasLimit => {
-      onChange({ ...value, gasLimit })
-    }}
   />
 )
 

@@ -71,6 +71,7 @@ export default ({
 
             {AdvancedOptionsField && (
               <AdvancedOptionsField
+                bridge={bridge}
                 account={account}
                 value={transaction}
                 onChange={onChangeTransaction}
