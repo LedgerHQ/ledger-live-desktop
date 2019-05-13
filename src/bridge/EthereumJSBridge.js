@@ -69,7 +69,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
-      value: value.plus(fee),
+      value: tx.status ? value.plus(fee) : fee,
       fee,
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
@@ -78,6 +78,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       recipients: [tx.to],
       date: new Date(tx.received_at),
       extra: {},
+      hasFailed: !tx.status,
     }
     ops.push(op)
   }
