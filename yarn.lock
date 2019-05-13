@@ -1722,6 +1722,16 @@
     "@ledgerhq/hw-transport" "^4.55.0"
     bip32-path "0.4.2"
 
+"@ledgerhq/hw-transport-http@^4.55.0":
+  version "4.55.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-4.55.0.tgz#d62b9301f4a1867776219946907ff20d1d420eac"
+  integrity sha512-6gMr5u7bQEb0t9WTdQY5sTPO82CVYFPkCwR9jaVJEEKyxd/QdbPqJl+pmpei0z4wwUHtvBuway6Djfcekzqkvw==
+  dependencies:
+    "@ledgerhq/errors" "^4.55.0"
+    "@ledgerhq/hw-transport" "^4.55.0"
+    axios "^0.18.0"
+    ws "^6.1.4"
+
 "@ledgerhq/hw-transport-mocker@^4.55.0":
   version "4.55.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-mocker/-/hw-transport-mocker-4.55.0.tgz#bf00a8628fb157bb60238e5a69da69be66d3580a"
@@ -17176,7 +17186,7 @@ ws@^4.0.0:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
 
-ws@^6.2.1:
+ws@^6.1.4, ws@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"
   integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==

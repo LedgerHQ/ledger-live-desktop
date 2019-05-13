@@ -44,6 +44,7 @@
     "@ledgerhq/hw-app-eth": "^4.55.0",
     "@ledgerhq/hw-app-xrp": "^4.55.0",
     "@ledgerhq/hw-transport": "^4.55.0",
+    "@ledgerhq/hw-transport-http": "^4.55.0",
     "@ledgerhq/hw-transport-node-hid": "^4.55.0",
     "@ledgerhq/ledger-core": "^2.2.1-rc",
     "@ledgerhq/live-common": "^5.5.0",
