@@ -31,6 +31,7 @@
     "back": "Назад",
     "reset": "Сбросить",
     "retry": "Повторить попытку",
+    "range": "Range",
     "stop": "Остановить",
     "close": "Закрыть",
     "eastern": "Восточный",
@@ -41,7 +42,7 @@
     "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
@@ -81,10 +82,14 @@
   },
   "sidebar": {
     "menu": "Меню",
-    "accounts": "Счета ({{count}})",
+    "accounts": "Accounts",
     "manager": "Диспетчер",
     "exchange": "Купить крипто",
-    "developer": "Инструменты разработчика"
+    "developer": "Инструменты разработчика",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "Последние операции",
@@ -112,6 +117,24 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "noResultFound": "No accounts found.",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
+    }
+  },
   "banners": {
     "promoteMobile": "Наслаждайтесь использованием Ledger Live теперь и на мобильных устройствах с {{productName}}",
     "genericTerminatedCrypto": "{{coinName}} больше не поддерживается"
@@ -133,11 +156,7 @@
     "summary": "Ознакомьтесь со сводной информацией о счете.",
     "summary_plural": "Ознакомьтесь со сводной информацией о таком количестве счетов: {{count}}.",
     "recentActivity": "Последние операции",
-    "totalBalance": "Общий баланс",
-    "accountsOrder": {
-      "name": "имя",
-      "balance": "баланс"
-    }
+    "totalBalance": "Общий баланс"
   },
   "currentAddress": {
     "title": "Текущий адрес",
