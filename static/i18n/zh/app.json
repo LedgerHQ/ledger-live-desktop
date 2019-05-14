@@ -233,6 +233,7 @@
     "date": "日期",
     "status": "状态",
     "confirmed": "已确认",
+    "failed": "Failed",
     "notConfirmed": "未确认",
     "fees": "费用",
     "noFees": "无费用",
