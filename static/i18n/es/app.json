@@ -31,6 +31,7 @@
     "back": "Atrás",
     "reset": "Restablecer",
     "retry": "Intentar de nuevo",
+    "range": "Range",
     "stop": "Detener",
     "close": "Cerrar",
     "eastern": "Oriental",
@@ -41,7 +42,7 @@
     "copyAddress": "Copiar",
     "copied": "Copiado",
     "addressCopied": "Dirección copiada",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "Bienvenido de nuevo",
       "subTitle": null,
@@ -81,10 +82,14 @@
   },
   "sidebar": {
     "menu": "Menú",
-    "accounts": "Cuentas ({{count}})",
+    "accounts": "Accounts",
     "manager": "Manager",
     "exchange": "Comprar crypto",
-    "developer": "Herramientas de desarrollo"
+    "developer": "Herramientas de desarrollo",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "Últimas operaciones",
@@ -112,6 +117,24 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "noResultFound": "No accounts found.",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
+    }
+  },
   "banners": {
     "promoteMobile": "Disfruta la experiencia de Ledger Live, ahora disponible en móviles con {{productName}}",
     "genericTerminatedCrypto": "{{coinName}} ya no es compatible"
@@ -133,11 +156,7 @@
     "summary": "Este es el resumen de tu cuenta",
     "summary_plural": "Este es el resumen de tus cuentas {{count}}",
     "recentActivity": "Últimas operaciones",
-    "totalBalance": "Saldo total",
-    "accountsOrder": {
-      "name": "nombre",
-      "balance": "saldo"
-    }
+    "totalBalance": "Saldo total"
   },
   "currentAddress": {
     "title": "Dirección actual",
