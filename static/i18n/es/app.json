@@ -233,6 +233,7 @@
     "date": "Fecha",
     "status": "Estado",
     "confirmed": "Confirmada",
+    "failed": "Failed",
     "notConfirmed": "No confirmada",
     "fees": "Comisiones",
     "noFees": "Sin comisiones",
