@@ -123,6 +123,22 @@ async function init() {
     false,
   )
 
+  if (document.body) {
+    const classes = document.body.classList
+    let timer = 0
+    window.addEventListener('resize', () => {
+      if (timer) {
+        clearTimeout(timer)
+        timer = null
+      } else classes.add('stop-all-transition')
+
+      timer = setTimeout(() => {
+        classes.remove('stop-all-transition')
+        timer = null
+      }, 100)
+    })
+  }
+
   // expose stuff in Windows for DEBUG purpose
 
   window.ledger = {
