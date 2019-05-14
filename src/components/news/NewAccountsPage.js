@@ -49,20 +49,30 @@ export const Dismiss = connect(
   mapDispatch,
 )(DismissB)
 
-class UpdateNoticeB extends PureComponent<Props, { reverse: boolean }> {
+type State = {
+  reverse: boolean,
+  show: boolean,
+}
+
+class UpdateNoticeB extends PureComponent<Props, State> {
   state = {
     reverse: false,
+    // we will only starts showing if it was not dismissed yet
+    // however, we shouldn't hide it on "side effect" dismiss (aka opening account)
+    // but only if explicitely closing the modal
+    show: this.props.showAccountsHelperBanner,
   }
 
   dismissUpdateBanner = async () => {
     this.setState({ reverse: true })
     await delay(500)
     this.props.dismissBanner(accountsBannerKey)
+    this.setState({ show: false })
   }
 
   render() {
-    const { reverse } = this.state
-    if (!this.props.showAccountsHelperBanner) return null
+    const { reverse, show } = this.state
+    if (!show) return null
     return (
       <NewUpdateNotice
         reverse={reverse}
