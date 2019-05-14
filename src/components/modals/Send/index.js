@@ -126,7 +126,7 @@ const INITIAL_STATE = {
   bridge: null,
   transaction: null,
   error: null,
-  signed: true,
+  signed: false,
   optimisticOperation: null,
   isAppOpened: false,
 }
