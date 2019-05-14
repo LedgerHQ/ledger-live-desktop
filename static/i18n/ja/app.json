@@ -233,6 +233,7 @@
     "date": "日付",
     "status": "ステータス",
     "confirmed": "確認済み",
+    "failed": "Failed",
     "notConfirmed": "未確認",
     "fees": "料金",
     "noFees": "料金なし",
