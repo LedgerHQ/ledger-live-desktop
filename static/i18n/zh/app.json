@@ -31,6 +31,7 @@
     "back": "返回",
     "reset": "重置",
     "retry": "重试",
+    "range": "Range",
     "stop": "停止",
     "close": "关闭",
     "eastern": "东方",
@@ -41,7 +42,7 @@
     "copyAddress": "复制",
     "copied": "已复制",
     "addressCopied": "地址已复制",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
@@ -81,10 +82,14 @@
   },
   "sidebar": {
     "menu": "菜单",
-    "accounts": "账户 ({{count}})",
+    "accounts": "Accounts",
     "manager": "管理器",
     "exchange": "购买加密资产",
-    "developer": "开发工具"
+    "developer": "开发工具",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "近期操作",
@@ -112,6 +117,24 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "noResultFound": "No accounts found.",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
+    }
+  },
   "banners": {
     "promoteMobile": "享受 Ledger Live 体验，现已推出移动版本，尽在 {{productName}}",
     "genericTerminatedCrypto": "不再支持 {{coinName}}"
@@ -133,11 +156,7 @@
     "summary": "以下是您的账户概览",
     "summary_plural": "以下是您 {{count}} 个账户的概览",
     "recentActivity": "近期操作",
-    "totalBalance": "总余额",
-    "accountsOrder": {
-      "name": "名称",
-      "balance": "余额"
-    }
+    "totalBalance": "总余额"
   },
   "currentAddress": {
     "title": "当前地址",
