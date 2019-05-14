@@ -31,6 +31,7 @@
     "back": "戻る",
     "reset": "リセット",
     "retry": "再試行",
+    "range": "Range",
     "stop": "停止",
     "close": "閉じる",
     "eastern": "東部",
@@ -41,7 +42,7 @@
     "copyAddress": "アドレスをコピーしてください",
     "copied": "コピー済み",
     "addressCopied": "アドレスをコピーしました",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "お帰りなさい",
       "subTitle": null,
@@ -81,10 +82,14 @@
   },
   "sidebar": {
     "menu": "メニュー",
-    "accounts": "アカウント ({{count}})",
+    "accounts": "Accounts",
     "manager": "マネージャー",
     "exchange": "暗号資産を購入",
-    "developer": "開発ツール"
+    "developer": "開発ツール",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "最後の操作",
@@ -112,6 +117,24 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "noResultFound": "No accounts found.",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
+    }
+  },
   "banners": {
     "promoteMobile": "{{productName}} をスマホでもご利用できるようになりました。Ledger Live体験をお楽しみください。",
     "genericTerminatedCrypto": "{{coinName}} はもうサポートされません"
@@ -133,11 +156,7 @@
     "summary": "アカウントの概要をお知らせします",
     "summary_plural": "{{count}}アカウントの概要をお知らせします",
     "recentActivity": "最後の操作",
-    "totalBalance": "合計残高",
-    "accountsOrder": {
-      "name": "名前",
-      "balance": "残高"
-    }
+    "totalBalance": "合計残高"
   },
   "currentAddress": {
     "title": "現在のアドレス",
