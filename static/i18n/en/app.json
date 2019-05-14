@@ -254,6 +254,7 @@
     "date": "Date",
     "status": "Status",
     "confirmed": "Confirmed",
+    "failed": "Failed",
     "notConfirmed": "Not confirmed",
     "fees": "Fees",
     "noFees": "No fee",
