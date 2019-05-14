@@ -28,7 +28,6 @@ import BalanceSummary from './BalanceSummary'
 import AccountHeader from './AccountHeader'
 import AccountHeaderActions from './AccountHeaderActions'
 import EmptyStateAccount from './EmptyStateAccount'
-import { SeparatorBar } from '../DashboardPage'
 
 const mapStateToProps = (state, props) => ({
   account: accountSelector(state, { accountId: props.match.params.id }),
@@ -73,7 +72,6 @@ class AccountPage extends PureComponent<Props> {
           currency={account.currency.id}
           operationsLength={account.operations.length}
         />
-        <SeparatorBar />
         <SyncOneAccountOnMount priority={10} accountId={account.id} />
 
         <Box horizontal mb={5} flow={4}>
@@ -94,10 +92,8 @@ class AccountPage extends PureComponent<Props> {
                 setCountervalueFirst={setCountervalueFirst}
               />
             </Box>
-
             <OperationsList account={account} title={t('account.lastOperations')} />
-
-            <StickyBackToTop />
+            <StickyBackToTop scrollUpOnMount />
           </Fragment>
         ) : (
           <EmptyStateAccount account={account} />

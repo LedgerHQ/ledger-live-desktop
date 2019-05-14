@@ -2,6 +2,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
+import { Redirect } from 'react-router'
 import { compose } from 'redux'
 import IconNanoX from 'icons/device/NanoXBanner'
 import { translate } from 'react-i18next'
@@ -31,10 +32,8 @@ import StickyBackToTop from 'components/StickyBackToTop'
 import styled from 'styled-components'
 import { openURL } from 'helpers/linking'
 import BalanceSummary from './BalanceSummary'
-import EmptyState from './EmptyState'
 import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
-import AccountCardList from './AccountCardList'
 import TopBanner, { FakeLink } from '../TopBanner'
 import { urls } from '../../config/urls'
 
@@ -98,10 +97,9 @@ class DashboardPage extends PureComponent<Props> {
               ),
             }}
             status={'dark'}
-            bannerId={'promoNanoX'}
+            bannerId={'promoNanoX3'}
             dismissable
           />
-          <SeparatorBar />
         </TopBannerContainer>
         <RefreshAccountsOrdering onMount />
         <TrackPage
@@ -125,7 +123,6 @@ class DashboardPage extends PureComponent<Props> {
                   />
                 </Box>
               </Box>
-
               <BalanceSummary
                 counterValue={counterValue}
                 chartId="dashboard-chart"
@@ -134,13 +131,6 @@ class DashboardPage extends PureComponent<Props> {
                 range={selectedTimeRange}
                 Header={this.Header}
               />
-
-              <AccountCardList
-                onAccountClick={this.onAccountClick}
-                accounts={accounts}
-                range={selectedTimeRange}
-              />
-
               {totalOperations > 0 && (
                 <OperationsList
                   onAccountClick={this.onAccountClick}
@@ -149,10 +139,10 @@ class DashboardPage extends PureComponent<Props> {
                   withAccount
                 />
               )}
-              <StickyBackToTop />
+              <StickyBackToTop scrollUpOnMount />
             </Fragment>
           ) : (
-            <EmptyState />
+            <Redirect to="/accounts" />
           )}
         </Box>
       </Fragment>
@@ -161,16 +151,12 @@ class DashboardPage extends PureComponent<Props> {
 }
 // This forces only one visible top banner at a time
 const TopBannerContainer = styled.div`
+  margin-top: -3px; //To hide the separator bar
+  z-index: 20;
+
   & > *:not(:first-child) {
     display: none;
   }
-`
-// If no banners are present, the SeparatorBar appears
-export const SeparatorBar = styled.div`
-  height: 1px;
-  border-bottom: 1px solid ${p => p.theme.colors.fog};
-  margin-bottom: 15px;
-  margin-top: -20px;
 `
 
 export default compose(
