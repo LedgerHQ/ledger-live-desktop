@@ -31,6 +31,7 @@
     "back": "뒤로",
     "reset": "재설정",
     "retry": "다시 시도",
+    "range": "Range",
     "stop": "중지",
     "close": "닫기",
     "eastern": "동부",
@@ -41,7 +42,7 @@
     "copyAddress": "복사",
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "다시 돌아오신 것을 환영합니다.",
       "subTitle": null,
@@ -81,10 +82,14 @@
   },
   "sidebar": {
     "menu": "메뉴",
-    "accounts": "계정 ({{count}})",
+    "accounts": "Accounts",
     "manager": "관리자",
     "exchange": "암호화 자산 구입",
-    "developer": "개발 도구"
+    "developer": "개발 도구",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "마지막 작업",
@@ -112,6 +117,24 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "noResultFound": "No accounts found.",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
+    }
+  },
   "banners": {
     "promoteMobile": "이제 {{productName}}을(를) 통해 모바일에서 제공되는 Ledger Live를 즐기세요.",
     "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다."
@@ -133,11 +156,7 @@
     "summary": "다음은 귀하의 계정 요약입니다.",
     "summary_plural": "다음은 귀하의 {{count}} 계정 요약입니다.",
     "recentActivity": "마지막 작업",
-    "totalBalance": "총 잔액",
-    "accountsOrder": {
-      "name": "이름",
-      "balance": "잔액"
-    }
+    "totalBalance": "총 잔액"
   },
   "currentAddress": {
     "title": "현재 주소",
