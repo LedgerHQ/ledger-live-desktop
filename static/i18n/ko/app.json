@@ -233,6 +233,7 @@
     "date": "날짜",
     "status": "상태",
     "confirmed": "확인됨",
+    "failed": "Failed",
     "notConfirmed": "확인되지 않음",
     "fees": "수수료",
     "noFees": "수수료 없음",
