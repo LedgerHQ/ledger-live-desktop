@@ -233,6 +233,7 @@
     "date": "Дата",
     "status": "Статус",
     "confirmed": "Подтверждено",
+    "failed": "Failed",
     "notConfirmed": "Не подтверждено",
     "fees": "Комиссия",
     "noFees": "Без комиссии",
