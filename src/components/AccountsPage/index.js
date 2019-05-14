@@ -61,6 +61,7 @@ class AccountsPage extends PureComponent<Props> {
     if (accounts.length === 0) {
       return (
         <Fragment>
+          <TrackPage category="Accounts" accountsLength={accounts.length} />
           <NewAccountsDismiss />
           <EmptyState />
         </Fragment>
@@ -69,7 +70,7 @@ class AccountsPage extends PureComponent<Props> {
     return (
       <Box>
         <NewAccountsDismiss />
-        <TrackPage category="Accounts" />
+        <TrackPage category="Accounts" accountsLength={accounts.length} />
         <AccountsHeader />
         <AccountList
           onAccountClick={this.onAccountClick}
