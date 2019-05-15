@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -28,6 +28,7 @@ import BalanceSummary from './BalanceSummary'
 import AccountHeader from './AccountHeader'
 import AccountHeaderActions from './AccountHeaderActions'
 import EmptyStateAccount from './EmptyStateAccount'
+import Blue from '../../icons/device/interactions/Blue'
 
 const mapStateToProps = (state, props) => ({
   account: accountSelector(state, { accountId: props.match.params.id }),
@@ -80,7 +81,7 @@ class AccountPage extends PureComponent<Props> {
         </Box>
 
         {!isAccountEmpty(account) ? (
-          <Fragment>
+          <>
             <Box mb={7}>
               <BalanceSummary
                 account={account}
@@ -94,10 +95,11 @@ class AccountPage extends PureComponent<Props> {
             </Box>
             <OperationsList account={account} title={t('account.lastOperations')} />
             <StickyBackToTop scrollUpOnMount />
-          </Fragment>
+          </>
         ) : (
           <EmptyStateAccount account={account} />
         )}
+        <Blue screen="update" wire="wired" />
       </Box>
     )
   }

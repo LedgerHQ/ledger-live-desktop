@@ -36,13 +36,13 @@ const INITIAL_STATE = {
 }
 
 class DeviceInteraction extends PureComponent<Props, State> {
-  state = INITIAL_STATE
-
   static defaultProps = {
     renderError: (error: *, retry: *) => (
       <ErrorDescContainer error={error} onRetry={retry} mt={4} />
     ),
   }
+
+  state = INITIAL_STATE
 
   componentWillUnmount() {
     this._unmounted = true

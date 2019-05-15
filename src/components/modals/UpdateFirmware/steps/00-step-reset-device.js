@@ -22,12 +22,6 @@ const Container = styled(Box).attrs({
   px: 7,
 })``
 
-const Title = styled(Box).attrs({
-  ff: 'Museo Sans|Regular',
-  fontSize: 5,
-  mb: 3,
-})``
-
 const SubTitle = styled(Box).attrs({
   ff: 'Museo Sans|Regular',
   fontSize: 4,

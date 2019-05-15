@@ -1,9 +1,11 @@
 // @flow
 
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { translate, Trans } from 'react-i18next'
-import { i } from 'helpers/staticPath'
+import type { DeviceModelId } from '@ledgerhq/devices'
+
+import Interactions from 'icons/device/interactions'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import { bootloader } from 'config/nontranslatables'
@@ -21,18 +23,20 @@ const Separator = styled(Box).attrs({
   background-color: currentColor;
 `
 
-const FlashMCU = React.memo(({ t }) => (
-  <Fragment>
+type Props = {
+  deviceModelId: DeviceModelId,
+}
+
+const FlashMCU = React.memo(({ t, deviceModelId }: Props) => (
+  <>
     <Box mx={7}>
       <Text ff="Open Sans|Regular" align="center" color="smoke">
         <Bullet>{'1. '}</Bullet>
         {t('manager.modal.mcuFirst')}
       </Text>
-      <img
-        src={i('logos/unplugDevice.png')}
-        style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-        alt={t('manager.modal.mcuFirst')}
-      />
+      <Box mt={5}>
+        <Interactions wire="disconnecting" type={deviceModelId} width={368} />
+      </Box>
     </Box>
     <Separator my={6} />
     <Box mx={7}>
@@ -46,13 +50,11 @@ const FlashMCU = React.memo(({ t }) => (
           {' screen appears'}
         </Trans>
       </Text>
-      <img
-        src={i('logos/bootloaderMode.png')}
-        style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-        alt={t('manager.modal.mcuFirst')}
-      />
+      <Box mt={5}>
+        <Interactions action="left" wire="connecting" type={deviceModelId} width={368} />
+      </Box>
     </Box>
-  </Fragment>
+  </>
 ))
 
 export default translate()(FlashMCU)

@@ -11,7 +11,8 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import ProgressCircle from 'components/ProgressCircle'
-import DeviceConfirm from 'components/DeviceConfirm'
+import Interactions from 'icons/device/interactions'
+
 import type { Device } from 'types/common'
 import type { StepProps } from '../'
 
@@ -58,7 +59,7 @@ type State = {
 class StepFullFirmwareInstall extends PureComponent<Props, State> {
   state = {
     progress: 0,
-    displayedOnDevice: false,
+    displayedOnDevice: true,
   }
 
   componentDidMount() {
@@ -107,6 +108,8 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
     const { t, firmware, deviceModelId } = this.props
     const { progress, displayedOnDevice } = this.state
 
+    const isBlue = deviceModelId === 'blue'
+
     if (!displayedOnDevice) {
       return (
         <>
@@ -125,13 +128,21 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
         <Text ff="Open Sans|Regular" align="center" color="smoke">
           {t('manager.modal.confirmIdentifierText')}
         </Text>
-        <Box mx={7} mt={5} mb={deviceModelId === 'blue' ? 0 : 5}>
+        <Box mx={7} mt={5} mb={isBlue ? 0 : 5}>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('manager.modal.identifier')}
           </Text>
           <Address>{firmware.osu && this.formatHashName(firmware.osu.hash)}</Address>
         </Box>
-        <DeviceConfirm deviceModelId={deviceModelId} />
+        <Box mt={isBlue ? 4 : null}>
+          <Interactions
+            wire="wired"
+            type={deviceModelId}
+            width={isBlue ? 150 : 375}
+            screen="validation"
+            action="accept"
+          />
+        </Box>
       </>
     )
   }
