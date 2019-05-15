@@ -192,6 +192,7 @@ export class StepAmountFooter extends PureComponent<
             {account && (
               <FormattedVal
                 disableRounding
+                style={{ width: 'auto' }}
                 color="dark"
                 val={totalSpent}
                 unit={account.unit}
