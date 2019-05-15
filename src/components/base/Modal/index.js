@@ -224,7 +224,7 @@ const BODY_WRAPPER_STYLE = {
   borderRadius: 3,
   boxShadow: 'box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2)',
   color: colors.smoke,
-  flexShrink: 1,
+  flexShrink: 0.5,
   display: 'flex',
   flexDirection: 'column',
 }
