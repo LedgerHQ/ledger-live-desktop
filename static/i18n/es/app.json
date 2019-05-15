@@ -295,7 +295,7 @@
         "flash-mcu": "Actualizando MCU...",
         "flash-bootloader": "Actualizando el Bootloader...",
         "firmware": "Actualizando el firmware...",
-        "flash": "Updating your device..."
+        "flash": "Preparing your device..."
       },
       "confirmIdentifier": "Comprobar el identificador",
       "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo es el mismo que el que aparece a continuación. Pulsa el botón derecho e introduce tu código PIN para confirmar.",
