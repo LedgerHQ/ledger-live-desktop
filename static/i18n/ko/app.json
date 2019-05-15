@@ -295,7 +295,7 @@
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "부트 로더 업데이트 중...",
         "firmware": "펌웨어 업데이트 중...",
-        "flash": "Updating your device..."
+        "flash": "Preparing your device..."
       },
       "confirmIdentifier": "식별자 확인",
       "confirmIdentifierText": "장치의 식별자가 아래의 식별자와 같은지 확인하십시오. 확인하려면 오른쪽 버튼을 누르고 PIN 코드를 입력하십시오.",
