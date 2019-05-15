@@ -21,6 +21,7 @@ import FlipTicker from 'components/base/FlipTicker'
 
 import IconBottom from 'icons/Bottom'
 import IconTop from 'icons/Top'
+import Ellipsis from '../Ellipsis'
 
 const T = styled(Box).attrs({
   ff: 'Rubik',
@@ -29,6 +30,10 @@ const T = styled(Box).attrs({
 })`
   line-height: 1.2;
   white-space: pre;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  overflow: hidden;
 `
 
 const I = ({ color, children }: { color?: string, children: any }) => (
@@ -59,6 +64,7 @@ const mapStateToProps = (state: State, _props: OwnProps) => ({
 type Props = OwnProps & {
   marketIndicator: string,
   locale: string,
+  ellipsis?: boolean,
 }
 
 function FormattedVal(props: Props) {
@@ -73,6 +79,7 @@ function FormattedVal(props: Props) {
     locale,
     marketIndicator,
     color,
+    ellipsis,
     ...p
   } = props
   let { val } = props
@@ -106,6 +113,8 @@ function FormattedVal(props: Props) {
 
   if (animateTicker && !DISABLE_TICKER_ANIMATION) {
     text = <FlipTicker value={text} />
+  } else if (ellipsis) {
+    text = <Ellipsis>{text}</Ellipsis>
   }
 
   const marketColor = getMarketColor({

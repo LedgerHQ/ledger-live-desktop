@@ -94,6 +94,10 @@ export default function refreshNodes({ ctx, node, props }: { ctx: CTX, node: any
       .attr('stroke-width', 2)
       .attr('r', 4),
   )
+  if (node && node.clientWidth && node.clientHeight) {
+    // Breaks if we don't have this with the way cards are filtered.
+    NODES.svg.attr('viewBox', `0 0 ${node.clientWidth} ${node.clientHeight}`)
+  }
 
   ctx.NODES = NODES
 }

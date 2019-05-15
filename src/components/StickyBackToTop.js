@@ -32,6 +32,7 @@ const Container = styled(Box)`
 `
 
 type Props = {
+  scrollUpOnMount?: boolean,
   scrollThreshold: number,
   getGrowScroll: () => { scrollContainer: ?HTMLDivElement },
 }
@@ -65,6 +66,10 @@ class StickyBackToTop extends PureComponent<Props, State> {
       }
       scrollContainer.addEventListener('scroll', listener)
       this.releaseListener = () => scrollContainer.removeEventListener('scroll', listener)
+      if (this.props.scrollUpOnMount) {
+        // $FlowFixMe
+        scrollContainer.scrollTo({ top: 0 })
+      }
     }
   }
 

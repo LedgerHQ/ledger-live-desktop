@@ -9,7 +9,7 @@ import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
-import { saveSettings } from 'actions/settings'
+import { setSelectedTimeRange } from 'actions/settings'
 import type { TimeRange } from 'reducers/settings'
 
 import { BalanceTotal, BalanceSinceDiff, BalanceSincePercent } from 'components/BalanceInfos'
@@ -34,7 +34,7 @@ type Props = {
   counterValue: Currency,
   t: T,
   account: Account,
-  saveSettings: ({ selectedTimeRange: TimeRange }) => *,
+  setSelectedTimeRange: TimeRange => *,
   selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
@@ -69,12 +69,12 @@ const SwapButton = styled(Tabbable).attrs({
 `
 
 const mapDispatchToProps = {
-  saveSettings,
+  setSelectedTimeRange,
 }
 
 class AccountBalanceSummaryHeader extends PureComponent<Props> {
   handleChangeSelectedTime = item => {
-    this.props.saveSettings({ selectedTimeRange: item.key })
+    this.props.setSelectedTimeRange(item.key)
   }
 
   render() {
@@ -100,6 +100,9 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
       data.reverse()
     }
 
+    const primaryKey = data[0].unit.code
+    const secondaryKey = data[1].unit.code
+
     return (
       <Box flow={4} mb={2}>
         <Box horizontal>
@@ -107,7 +110,12 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             <Swap />
           </SwapButton>
           <BalanceTotal
-            style={{ cursor: 'pointer' }}
+            key={primaryKey}
+            style={{
+              cursor: 'pointer',
+              overflow: 'hidden',
+              flexShrink: 1,
+            }}
             onClick={() => setCountervalueFirst(!countervalueFirst)}
             showCryptoEvenIfNotAvailable
             isAvailable={isAvailable}
@@ -115,7 +123,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             unit={data[0].unit}
           >
             <FormattedVal
-              key={account.id}
+              key={secondaryKey}
               animateTicker
               disableRounding
               alwaysShowSign={false}
@@ -130,7 +138,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             <PillsDaysCount selected={selectedTimeRange} onChange={this.handleChangeSelectedTime} />
           </Box>
         </Box>
-        <Box horizontal justifyContent="center" flow={7}>
+        <Box key={primaryKey} horizontal justifyContent="center" flow={7}>
           <BalanceSincePercent
             isAvailable={isAvailable}
             t={t}

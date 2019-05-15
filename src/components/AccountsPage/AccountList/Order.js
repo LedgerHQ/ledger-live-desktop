@@ -44,7 +44,7 @@ const mapDispatchToProps = {
   saveSettings,
 }
 
-class AccountsOrder extends Component<Props> {
+class Order extends Component<Props> {
   onStateChange = ({ selectedItem: item }) => {
     if (!item) {
       return
@@ -91,11 +91,11 @@ class AccountsOrder extends Component<Props> {
     return [
       {
         key: 'name',
-        label: t('dashboard.accountsOrder.name'),
+        label: t('accounts.order.name'),
       },
       {
         key: 'balance',
-        label: t('dashboard.accountsOrder.balance'),
+        label: t('accounts.order.balance'),
       },
     ].map(item => ({
       ...item,
@@ -145,15 +145,13 @@ class AccountsOrder extends Component<Props> {
         </Text>
         <Box
           alignItems="center"
-          color="dark"
+          color="wallet"
           ff="Open Sans|SemiBold"
           flow={1}
           fontSize={4}
           horizontal
         >
-          <Text color="dark">
-            {t(`dashboard.accountsOrder.${this.getCurrentValue() || 'balance'}`)}
-          </Text>
+          <Text color="wallet">{t(`accounts.order.${this.getCurrentValue() || 'balance'}`)}</Text>
           <IconAngleDown size={16} />
         </Box>
       </DropDown>
@@ -167,4 +165,4 @@ export default compose(
     mapDispatchToProps,
   ),
   translate(),
-)(AccountsOrder)
+)(Order)

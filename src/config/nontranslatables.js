@@ -9,7 +9,9 @@ export const seedNext = 'Next'
 export const seedConfirmation = 'Confirmation'
 
 export const bootloader = 'Bootloader'
+export const mcuOutdated = 'MCU outdated'
 export const mcuNotGenuine = 'MCU not genuine'
 export const followDeviceRepair = 'Follow device repair instructions'
+export const followDeviceUpdate = 'Follow device update instructions'
 
 export const repairProcessing = 'Processing'

@@ -77,7 +77,7 @@ class SectionHelp extends PureComponent<Props> {
             title={t('settings.repairDevice.title')}
             desc={t('settings.repairDevice.descSettings')}
           >
-            <RepairDeviceButton />
+            <RepairDeviceButton buttonProps={{ small: true }} />
           </Row>
         </Body>
       </Section>

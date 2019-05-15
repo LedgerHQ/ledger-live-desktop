@@ -41,7 +41,7 @@ const handlers: Object = {
 }
 
 export function getCurrentDevice(state: { devices: DevicesState }) {
-  if (getEnv('EXPERIMENTAL_USB')) {
+  if (getEnv('EXPERIMENTAL_USB') || getEnv('DEVICE_PROXY_URL')) {
     // bypass the listen devices (we should remove modelId here by instead get it at open time if needed)
     return { path: '', modelId: 'nanoS' }
   }
@@ -49,7 +49,7 @@ export function getCurrentDevice(state: { devices: DevicesState }) {
 }
 
 export function getDevices(state: { devices: DevicesState }) {
-  if (getEnv('EXPERIMENTAL_USB')) {
+  if (getEnv('EXPERIMENTAL_USB') || getEnv('DEVICE_PROXY_URL')) {
     // bypass the listen devices
     return [{ path: '', modelId: 'nanoS' }]
   }

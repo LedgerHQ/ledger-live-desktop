@@ -12,11 +12,11 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_RECEIVE } from 'config/constants'
 
+import IconReceive from 'icons/Receive'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import Button from 'components/base/Button'
-import { Title, Description } from 'components/DashboardPage/EmptyState'
-import IconReceive from 'icons/Receive'
+import { Title, Description } from '../AccountsPage/EmptyState'
 
 const mapDispatchToProps = {
   openModal,

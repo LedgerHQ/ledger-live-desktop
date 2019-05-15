@@ -5,7 +5,7 @@
 
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import priorityQueue from 'async/priorityQueue'
 import { connect } from 'react-redux'
 import type { Account } from '@ledgerhq/live-common/lib/types'
@@ -49,6 +49,8 @@ export type Sync = (action: BehaviorAction) => void
 
 // $FlowFixMe
 const BridgeSyncContext = React.createContext((_: BehaviorAction) => {})
+
+export const useBridgeSync = () => useContext(BridgeSyncContext)
 
 const mapStateToProps = createStructuredSelector({
   currenciesStatus: currenciesStatusSelector,

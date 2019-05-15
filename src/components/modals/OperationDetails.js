@@ -144,6 +144,8 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const url = getAccountOperationExplorer(account, operation)
   const uniqueSenders = uniq(senders)
 
+  const { hasFailed } = operation
+
   return (
     <ModalBody
       title={t('operationDetails.title')}
@@ -154,6 +156,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             <ConfirmationCheck
               marketColor={marketColor}
               isConfirmed={isConfirmed}
+              hasFailed={hasFailed}
               style={{
                 transform: 'scale(1.5)',
               }}
@@ -161,8 +164,10 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               type={type}
               withTooltip={false}
             />
-            <Box my={4} alignItems="center">
-              <Box selectable>
+          </Box>
+          <Box my={4} alignItems="center">
+            <Box selectable>
+              {hasFailed ? null : (
                 <FormattedVal
                   color={amount.isNegative() ? 'smoke' : undefined}
                   unit={unit}
@@ -172,8 +177,10 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                   fontSize={7}
                   disableRounding
                 />
-              </Box>
-              <Box mt={1} selectable>
+              )}
+            </Box>
+            <Box mt={1} selectable>
+              {hasFailed ? null : (
                 <CounterValue
                   color="grey"
                   fontSize={5}
@@ -181,7 +188,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                   currency={currency}
                   value={amount}
                 />
-              </Box>
+              )}
             </Box>
           </Box>
           <Box horizontal flow={2}>
@@ -210,13 +217,19 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
             </Box>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.status')}</OpDetailsTitle>
-              <OpDetailsData color={isConfirmed ? 'positiveGreen' : null} horizontal flow={1}>
+              <OpDetailsData
+                color={hasFailed ? 'alertRed' : isConfirmed ? 'positiveGreen' : null}
+                horizontal
+                flow={1}
+              >
                 <Box>
-                  {isConfirmed
-                    ? t('operationDetails.confirmed')
-                    : t('operationDetails.notConfirmed')}
+                  {hasFailed
+                    ? t('operationDetails.failed')
+                    : isConfirmed
+                      ? t('operationDetails.confirmed')
+                      : t('operationDetails.notConfirmed')}
                 </Box>
-                <Box>{`(${confirmations})`}</Box>
+                {hasFailed ? null : <Box>{`(${confirmations})`}</Box>}
               </OpDetailsData>
             </Box>
           </Box>

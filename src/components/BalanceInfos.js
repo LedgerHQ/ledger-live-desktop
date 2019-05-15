@@ -44,18 +44,15 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
   const { t, totalBalance, sinceBalance, refBalance, since, isAvailable, ...otherProps } = props
   return (
     <Box {...otherProps}>
-      {!isAvailable ? (
-        <PlaceholderLine width={100} />
-      ) : (
-        <DeltaChange
-          from={refBalance}
-          to={totalBalance}
-          color="dark"
-          animateTicker
-          fontSize={7}
-          withIcon
-        />
-      )}
+      <DeltaChange
+        placeholder={<PlaceholderLine width={100} />}
+        from={refBalance}
+        to={totalBalance}
+        color="dark"
+        animateTicker
+        fontSize={7}
+        withIcon
+      />
       {!isAvailable ? <PlaceholderLine dark width={60} /> : <Sub>{t(`time.since.${since}`)}</Sub>}
     </Box>
   )

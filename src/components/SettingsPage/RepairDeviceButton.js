@@ -16,6 +16,7 @@ import RepairModal from 'components/base/Modal/RepairModal'
 type Props = {
   t: T,
   push: string => void,
+  buttonProps?: *,
 }
 
 type State = {
@@ -75,12 +76,12 @@ class RepairDeviceButton extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t } = this.props
+    const { t, buttonProps } = this.props
     const { opened, isLoading, error, progress } = this.state
 
     return (
       <Fragment>
-        <Button small primary onClick={this.open} event="RepairDeviceButton">
+        <Button {...buttonProps} primary onClick={this.open} event="RepairDeviceButton">
           {t('settings.repairDevice.button')}
         </Button>
 

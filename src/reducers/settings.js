@@ -49,6 +49,8 @@ export type SettingsState = {
   sentryLogs: boolean,
   lastUsedVersion: string,
   dismissedBanners: string[],
+  accountsViewMode: 'card' | 'list',
+  showAccountsHelperBanner: boolean,
 }
 
 const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
@@ -78,6 +80,8 @@ const INITIAL_STATE: SettingsState = {
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
+  accountsViewMode: 'card',
+  showAccountsHelperBanner: true,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
@@ -136,10 +140,9 @@ const handlers: Object = {
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
   }),
-  CLEAN_ACCOUNTS_CACHE: (state: SettingsState) => ({
-    ...state,
-    dismissedBanners: [],
-  }),
+
+  // used to debug performance of redux updates
+  DEBUG_TICK: state => ({ ...state }),
 }
 
 // TODO refactor selectors to *Selector naming convention
@@ -232,6 +235,7 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
   settings => settings.exchange,
 )
 
+export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs
 export const autoLockTimeoutSelector = (state: State) => state.settings.autoLockTimeout
@@ -241,6 +245,9 @@ export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding
 
 export const dismissedBannersSelector = (state: State) => state.settings.dismissedBanners || []
+
+export const dismissedBannerSelector = (state: State, { bannerKey }: { bannerKey: string }) =>
+  (state.settings.dismissedBanners || []).includes(bannerKey)
 
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
