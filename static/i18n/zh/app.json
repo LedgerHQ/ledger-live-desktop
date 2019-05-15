@@ -295,7 +295,7 @@
         "flash-mcu": "MCU 更新中...",
         "flash-bootloader": "启动加载器更新中...",
         "firmware": "正在更新固件...",
-        "flash": "Updating your device..."
+        "flash": "Preparing your device..."
       },
       "confirmIdentifier": "验证标识符",
       "confirmIdentifierText": "验证以确保设备上的标识符与以下标识符相同。按右键并输入您的 PIN 码以确认。",
