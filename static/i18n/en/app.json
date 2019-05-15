@@ -317,7 +317,7 @@
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "Bootloader updating...",
         "firmware": "Firmware updating...",
-        "flash": "Updating your device..."
+        "flash": "Preparing your device..."
       },
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText":
