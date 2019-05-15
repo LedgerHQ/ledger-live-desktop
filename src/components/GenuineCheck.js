@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { timeout, filter, map } from 'rxjs/operators'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -24,7 +24,11 @@ import {
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'
 
+import Box from 'components/base/Box'
+import Button from 'components/base/Button'
+import ConnectTroubleshooting from 'components/ConnectTroubleshooting'
 import DeviceInteraction from 'components/DeviceInteraction'
+import AutoRepair from 'components/AutoRepair'
 import Text from 'components/base/Text'
 
 import IconUsb from 'icons/Usb'
@@ -39,6 +43,11 @@ type Props = {
   device: ?Device,
 }
 
+type State = {
+  autoRepair: boolean,
+  isBootloader: boolean,
+}
+
 const usbIcon = <IconUsb size={16} />
 const homeIcon = <IconHome size={16} />
 const genuineCheckIcon = <IconCheck size={16} />
@@ -49,7 +58,12 @@ const mapStateToProps = state => ({
 
 const Bold = props => <Text ff="Open Sans|SemiBold" {...props} />
 
-class GenuineCheck extends PureComponent<Props> {
+class GenuineCheck extends PureComponent<Props, State> {
+  state = {
+    isBootloader: false,
+    autoRepair: false,
+  }
+
   componentWillUnmount() {
     if (this.sub) this.sub.unsubscribe()
   }
@@ -64,12 +78,19 @@ class GenuineCheck extends PureComponent<Props> {
     })
 
   checkDashboardInteractionHandler = ({ device }: { device: Device }) =>
-    createCancelablePolling(() =>
-      getDeviceInfo
+    createCancelablePolling(async () => {
+      const deviceInfo = await getDeviceInfo
         .send({ devicePath: device.path })
         .pipe(timeout(DEVICE_INFOS_TIMEOUT))
-        .toPromise(),
-    )
+        .toPromise()
+      /*
+      if (deviceInfo.isBootloader) {
+        this.setState({ isBootloader: true })
+        throw new UnexpectedBootloader()
+      }
+      */
+      return deviceInfo
+    })
 
   checkGenuineInteractionHandler = async ({
     device,
@@ -80,8 +101,10 @@ class GenuineCheck extends PureComponent<Props> {
   }) => {
     if (deviceInfo.isBootloader) {
       logger.log('device is in bootloader mode')
+      this.setState({ isBootloader: true })
       throw new UnexpectedBootloader()
     }
+    this.setState({ isBootloader: false })
 
     if (deviceInfo.isOSU) {
       logger.log('device is in update mode. skipping genuine')
@@ -136,8 +159,13 @@ class GenuineCheck extends PureComponent<Props> {
     }
   }
 
+  onStartAutoRepair = () => this.setState({ autoRepair: true })
+
+  onDoneAutoRepair = () => this.setState({ autoRepair: false })
+
   render() {
     const { onSuccess, device, ...props } = this.props
+    const { autoRepair, isBootloader } = this.state
     const steps = [
       {
         id: 'device',
@@ -176,15 +204,39 @@ class GenuineCheck extends PureComponent<Props> {
       },
     ]
 
+    const continueT = props.t('common.continue')
+
     return (
-      <DeviceInteraction
-        key={device ? device.path : null}
-        {...props}
-        waitBeforeSuccess={500}
-        steps={steps}
-        onSuccess={onSuccess}
-        onFail={this.handleFail}
-      />
+      <Fragment>
+        <DeviceInteraction
+          key={device ? device.path : null}
+          {...props}
+          waitBeforeSuccess={500}
+          steps={steps}
+          onSuccess={onSuccess}
+          onFail={this.handleFail}
+        />
+        {autoRepair ? <AutoRepair onDone={this.onDoneAutoRepair} /> : null}
+        {device ? (
+          isBootloader ? (
+            <Box fontSize={3} color="dark" align="center" cursor="text" ff="Open Sans|SemiBold">
+              <Box mt={4} mb={2}>
+                <Trans
+                  i18nKey="genuinecheck.deviceInBootloader"
+                  values={{
+                    button: continueT,
+                  }}
+                />
+              </Box>
+              <Button primary onClick={this.onStartAutoRepair} event="RepairBootloaderButton">
+                {continueT}
+              </Button>
+            </Box>
+          ) : null
+        ) : (
+          <ConnectTroubleshooting />
+        )}
+      </Fragment>
     )
   }
 }

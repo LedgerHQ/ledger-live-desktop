@@ -1,29 +1,26 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import { translate, Trans } from 'react-i18next'
+import { translate } from 'react-i18next'
 import styled from 'styled-components'
-import { forceRepairChoices } from '@ledgerhq/live-common/lib/hw/firmwareUpdate-repair'
-
 import type { T } from 'types/common'
-
-import { i } from 'helpers/staticPath'
 import TrackPage from 'analytics/TrackPage'
+import IconCheck from 'icons/Check'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
-import Select from 'components/base/Select'
 import ProgressCircle from 'components/ProgressCircle'
 import TranslatedError from 'components/TranslatedError'
+import ConnectTroubleshootingHelpButton from 'components/ConnectTroubleshootingHelpButton'
+import FlashMCU from 'components/FlashMCU'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
-
 import Modal from './index'
 import ModalBody from './ModalBody'
 import {
-  bootloader,
+  mcuOutdated,
   mcuNotGenuine,
   followDeviceRepair,
-  repairProcessing,
+  followDeviceUpdate,
 } from '../../../config/nontranslatables'
 
 const Container = styled(Box).attrs({
@@ -32,18 +29,39 @@ const Container = styled(Box).attrs({
   color: 'dark',
 })``
 
-const Bullet = styled.span`
-  font-weight: 600;
-  color: #142533;
+const repairChoices = [
+  { id: 'mcuOutdated', label: mcuOutdated, forceMCU: '0.7' },
+  { id: 'mcuNotGenuine', label: mcuNotGenuine, forceMCU: '0.7' },
+  { id: 'followDeviceRepair', label: followDeviceRepair, forceMCU: '0.9' },
+  { id: 'followDeviceUpdate', label: followDeviceUpdate, forceMCU: '0.9' },
+]
+
+const ChoiceBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  box-shadow: ${props => (props.selected ? '0 2px 4px 0 rgba(0, 0, 0, 0.08)' : null)};
+  border: solid 1px
+    ${props => (props.selected ? props.theme.colors.wallet : props.theme.colors.fog)};
+  height: 48px;
+  padding: 0 24px;
+  margin-bottom: 8px;
+  align-items: center;
+  justify-content: space-between;
 `
 
-const Separator = styled(Box).attrs({
-  color: 'fog',
-})`
-  height: 1px;
-  width: 100%;
-  background-color: currentColor;
-`
+const Choice = React.memo(({ selected, choice, onSelect }) => (
+  <ChoiceBox selected={selected} onClick={() => onSelect(selected ? null : choice)}>
+    <Text ff="Open Sans|SemiBold" fontSize={4}>
+      {choice.label}
+    </Text>
+    {selected ? (
+      <Box color="wallet">
+        <IconCheck size={16} />
+      </Box>
+    ) : null}
+  </ChoiceBox>
+))
 
 const DisclaimerStep = ({ desc }: { desc?: string }) => (
   <Box>
@@ -55,37 +73,19 @@ const DisclaimerStep = ({ desc }: { desc?: string }) => (
   </Box>
 )
 
-const FlashStep = ({ progress, t }: { progress: number, t: * }) =>
-  progress === 0 ? (
-    <Box>
-      <Box mx={7}>
-        <Text ff="Open Sans|Regular" align="center" color="smoke">
-          <Bullet>{'1.'}</Bullet>
-          {t('manager.modal.mcuFirst')}
-        </Text>
-        <img
-          src={i('logos/unplugDevice.png')}
-          style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-          alt={t('manager.modal.mcuFirst')}
-        />
-      </Box>
-      <Separator my={6} />
-      <Box mx={7}>
-        <Text ff="Open Sans|Regular" align="center" color="smoke">
-          <Bullet>{'2.'}</Bullet>
-          <Trans i18nKey="manager.modal.mcuSecond">
-            {'place holder text'}
-            <Text ff="Open Sans|SemiBold">{repairProcessing}</Text>
-            {'place holder text'}
-          </Trans>
-        </Text>
-        <img
-          src={i('logos/bootloaderMode.png')}
-          style={{ width: '100%', maxWidth: 368, marginTop: 30 }}
-          alt={t('manager.modal.mcuFirst')}
-        />
-      </Box>
-    </Box>
+const FlashStep = ({
+  progress,
+  t,
+  isAlreadyBootloader,
+}: {
+  progress: number,
+  t: *,
+  isAlreadyBootloader?: boolean,
+}) =>
+  progress === 0 && !isAlreadyBootloader ? (
+    <Container>
+      <FlashMCU />
+    </Container>
   ) : (
     <Box>
       <Box mx={7} align="center">
@@ -149,26 +149,17 @@ type Props = {
   cancellable?: boolean,
   progress: number,
   error?: Error,
+  isAlreadyBootloader?: boolean,
 }
 
 class RepairModal extends PureComponent<Props, *> {
   state = {
-    selectedOption: forceRepairChoices[0],
+    selectedOption: null,
   }
 
-  onChange = selectedOption => {
-    this.setState({ selectedOption: selectedOption || forceRepairChoices[0] })
+  onSelectOption = selectedOption => {
+    this.setState({ selectedOption })
   }
-
-  nonTranslatable: { [string]: string } = {
-    generic: bootloader,
-    mcuNotGenuine,
-    followDeviceRepair,
-  }
-
-  renderOption = option => (option && this.nonTranslatable[option.label]) || null
-
-  renderValue = option => (option && this.nonTranslatable[option.data.label]) || null
 
   render() {
     const {
@@ -186,65 +177,63 @@ class RepairModal extends PureComponent<Props, *> {
       analyticsName,
       progress,
       error,
+      isAlreadyBootloader,
       ...props
     } = this.props
     const { selectedOption } = this.state
+    const onClose = !cancellable && isLoading ? undefined : onReject
 
     return (
       <Modal
         isOpened={isOpened}
         centered
         preventBackdropClick={isLoading}
-        onClose={!cancellable && isLoading ? undefined : onReject}
+        onClose={onClose}
         {...props}
       >
         <TrackPage category="Modal" name={analyticsName} />
         <ModalBody
           title={title}
+          onClose={onClose}
           noScroll
           render={() => (
             <Box>
               {error ? (
                 <ErrorStep error={error} />
               ) : isLoading ? (
-                <FlashStep t={t} progress={progress} />
+                <FlashStep t={t} progress={progress} isAlreadyBootloader={isAlreadyBootloader} />
               ) : (
                 <DisclaimerStep desc={desc} />
               )}
 
               {!isLoading && !error ? (
-                <Box py={2} px={5}>
-                  <Select
-                    isSearchable={false}
-                    isClearable={false}
-                    value={selectedOption}
-                    onChange={this.onChange}
-                    autoFocus
-                    options={forceRepairChoices}
-                    renderOption={this.renderOption}
-                    renderValue={this.renderValue}
-                  />
+                <Box py={2} px={5} color="dark" fontSize={4}>
+                  {repairChoices.map(choice => (
+                    <Choice
+                      onSelect={this.onSelectOption}
+                      selected={choice === selectedOption}
+                      choice={choice}
+                    />
+                  ))}
                 </Box>
               ) : null}
             </Box>
           )}
           renderFooter={() =>
             !isLoading ? (
-              <Box horizontal align="center" justify="flex-end" flow={2}>
+              <Box horizontal align="center" flow={2} flex={1}>
+                <ConnectTroubleshootingHelpButton />
+                <div style={{ flex: 1 }} />
                 <Button onClick={onReject}>{t(`common.${error ? 'close' : 'cancel'}`)}</Button>
-                {error ? null : (
-                  <>
-                    <Button
-                      onClick={() => repair(selectedOption.value)}
-                      primary={!isDanger}
-                      danger={isDanger}
-                      isLoading={isLoading}
-                      disabled={isLoading}
-                    >
-                      {t('settings.repairDevice.button')}
-                    </Button>
-                  </>
-                )}
+                <Button
+                  onClick={selectedOption ? () => repair(selectedOption.value) : null}
+                  primary={!isDanger}
+                  danger={isDanger}
+                  isLoading={isLoading}
+                  disabled={isLoading || !selectedOption}
+                >
+                  {t('settings.repairDevice.button')}
+                </Button>
               </Box>
             ) : null
           }
