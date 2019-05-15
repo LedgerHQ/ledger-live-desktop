@@ -208,7 +208,8 @@
   "genuinecheck": {
     "modal": {
       "title": "Проверка подлинности"
-    }
+    },
+    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
   "addAccounts": {
     "title": "Добавить счета",
@@ -294,7 +295,7 @@
         "flash-mcu": "Обновление микроконтроллера...",
         "flash-bootloader": "Обновление загрузчика...",
         "firmware": "Обновление встроенного ПО...",
-        "flash": "Выполняется перепрошивка устройства..."
+        "flash": "Updating your device..."
       },
       "confirmIdentifier": "Проверить идентификатор",
       "confirmIdentifierText": "Убедитесь в том, что идентификатор на устройстве совпадает с приведенным ниже идентификатором. Для подтверждения нажмите правую кнопку и введите PIN-код.",
@@ -784,6 +785,9 @@
       "desc": "Установите на устройство приложения и получите доступ к портфелю",
       "openAppButton": "Открыть Ledger Live"
     }
+  },
+  "connectTroubleshooting": {
+    "desc": "Having a hard time connecting your device?"
   },
   "errors": {
     "generic": {
