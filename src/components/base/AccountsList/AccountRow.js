@@ -97,6 +97,7 @@ export default class AccountRow extends PureComponent<Props> {
           <FormattedVal
             val={account.balance}
             unit={account.unit}
+            style={{ textAlign: 'right' }}
             showCode
             fontSize={4}
             color="grey"
