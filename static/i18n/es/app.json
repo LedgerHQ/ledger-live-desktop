@@ -208,7 +208,8 @@
   "genuinecheck": {
     "modal": {
       "title": "Comprobación de autenticidad"
-    }
+    },
+    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
   "addAccounts": {
     "title": "Añadir cuentas",
@@ -294,7 +295,7 @@
         "flash-mcu": "Actualizando MCU...",
         "flash-bootloader": "Actualizando el Bootloader...",
         "firmware": "Actualizando el firmware...",
-        "flash": "Flasheando tu dispositivo..."
+        "flash": "Updating your device..."
       },
       "confirmIdentifier": "Comprobar el identificador",
       "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo es el mismo que el que aparece a continuación. Pulsa el botón derecho e introduce tu código PIN para confirmar.",
@@ -784,6 +785,9 @@
       "desc": "Instala algunas aplicaciones en tu dispositivo y accede a la Cartera",
       "openAppButton": "Abrir Ledger Live"
     }
+  },
+  "connectTroubleshooting": {
+    "desc": "Having a hard time connecting your device?"
   },
   "errors": {
     "generic": {
