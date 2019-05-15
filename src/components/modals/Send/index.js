@@ -17,6 +17,7 @@ import logger from 'logger'
 import type { WalletBridge } from 'bridge/types'
 import type { T, Device } from 'types/common'
 import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
+import { track } from 'analytics/segment'
 
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
@@ -218,6 +219,13 @@ class SendModal extends PureComponent<Props, State<*>> {
 
     invariant(account && transaction && bridge, 'signTransaction invalid conditions')
 
+    const eventProps = {
+      currencyName: account.currency.name,
+      derivationMode: account.derivationMode,
+      freshAddressPath: account.freshAddressPath,
+      operationsLength: account.operations.length,
+    }
+    track('SendTransactionStart', eventProps)
     this._signTransactionSub = bridge
       .signAndBroadcast(account, transaction, device.path)
       .subscribe({
@@ -225,11 +233,13 @@ class SendModal extends PureComponent<Props, State<*>> {
           switch (e.type) {
             case 'signed': {
               if (this._isUnmounted) return
+              track('SendTransactionSigned', eventProps)
               this.setState({ signed: true })
               transitionTo('confirmation')
               break
             }
             case 'broadcasted': {
+              track('SendTransactionBroadcasted', eventProps)
               this.handleOperationBroadcasted(e.operation)
               break
             }
@@ -238,6 +248,12 @@ class SendModal extends PureComponent<Props, State<*>> {
         },
         error: err => {
           const error = err.statusCode === 0x6985 ? new UserRefusedOnDevice() : err
+          track(
+            error instanceof UserRefusedOnDevice
+              ? 'SendTransactionRefused'
+              : 'SendTransactionError',
+            eventProps,
+          )
           this.handleTransactionError(error)
           transitionTo('confirmation')
         },
