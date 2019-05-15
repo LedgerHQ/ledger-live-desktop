@@ -111,7 +111,11 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
           </SwapButton>
           <BalanceTotal
             key={primaryKey}
-            style={{ cursor: 'pointer' }}
+            style={{
+              cursor: 'pointer',
+              overflow: 'hidden',
+              flexShrink: 1,
+            }}
             onClick={() => setCountervalueFirst(!countervalueFirst)}
             showCryptoEvenIfNotAvailable
             isAvailable={isAvailable}

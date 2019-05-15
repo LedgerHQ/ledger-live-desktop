@@ -30,6 +30,10 @@ const T = styled(Box).attrs({
 })`
   line-height: 1.2;
   white-space: pre;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+  overflow: hidden;
 `
 
 const I = ({ color, children }: { color?: string, children: any }) => (
