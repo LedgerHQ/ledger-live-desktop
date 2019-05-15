@@ -37,13 +37,15 @@ export function generateMargins(hideAxis) {
 }
 
 export function observeResize(node, cb) {
-  const ro = new ResizeObserver(() => {
-    if (!node) {
-      return
-    }
+  const onResize = () => {
     const { width } = node.getBoundingClientRect()
     cb(width)
-  })
+  }
 
+  const ro = new ResizeObserver(onResize)
   ro.observe(node)
+
+  return () => {
+    ro.unobserve(node)
+  }
 }

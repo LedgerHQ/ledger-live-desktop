@@ -74,16 +74,22 @@ class Chart extends Component<Props> {
     mapValue: (d: *) => d.value.toNumber(),
   }
 
+  subResize: *
+
   componentDidMount() {
     const { width } = this._ruler.getBoundingClientRect()
     this._width = width
     this.createChart()
-    observeResize(this._ruler, width => {
+    this.subResize = observeResize(this._ruler, width => {
       if (width !== this._width) {
         this._width = width
         this.refreshChart(this.props)
       }
     })
+  }
+
+  componentWillUnmount() {
+    if (this.subResize) this.subResize()
   }
 
   shouldComponentUpdate(nextProps: Props) {
