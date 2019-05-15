@@ -32,6 +32,7 @@ const T = styled(Box).attrs({
   white-space: pre;
   text-overflow: ellipsis;
   display: block;
+  flex-shrink: 1;
   width: 100%;
   overflow: hidden;
 `
