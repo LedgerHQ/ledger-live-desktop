@@ -78,7 +78,7 @@ export default function StepConfirmation({
 
   return (
     <Container shouldSpace={broadcastError}>
-      {error && account ? <DebugAppInfosForCurrency currencyId={account.currency.id} /> : null}
+      {error && account ? <DebugAppInfosForCurrency /> : null}
       {broadcastError ? (
         <Disclaimer>
           <Box mr={3}>

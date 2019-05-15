@@ -27,7 +27,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
         <TrackPage category="Receive Flow" name="Step 3" />
         {isAddressVerified === false ? (
           <Fragment>
-            {account ? <DebugAppInfosForCurrency currencyId={account.currency.id} /> : null}
+            {account ? <DebugAppInfosForCurrency /> : null}
             <TrackPage category="Receive Flow" name="Step 3 Address Not Verified Error" />
             <Title>
               <TranslatedError error={verifyAddressError} />
