@@ -234,6 +234,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
               </Box>
               <Box style={{ width: 230 }}>
                 <Select
+                  isSearchable={false}
                   onChange={this.handleChangeUnit}
                   getOptionValue={unitGetOptionValue}
                   renderValue={renderUnitItemCode}
