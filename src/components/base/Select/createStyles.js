@@ -43,9 +43,14 @@ export default ({
     ...styles,
     background: 'none',
   }),
+  noOptionsMessage: (styles: Object) => ({
+    ...styles,
+    fontSize: small ? 12 : 13,
+  }),
   option: (styles: Object, { isFocused, isSelected }: Object) => ({
     ...styles,
     ...ff('Open Sans|Regular'),
+    fontSize: small ? 12 : 13,
     color: colors.dark,
     padding: '10px 15px 10px 15px',
     ...(isFocused
@@ -71,6 +76,7 @@ export default ({
     background: 'white',
     borderRadius: 3,
   }),
+  menuPortal: (styles: Object) => ({ ...styles, zIndex: 101 }),
   container: (styles: Object) => ({
     ...styles,
     fontSize: small ? 12 : 13,
