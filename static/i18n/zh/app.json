@@ -208,7 +208,8 @@
   "genuinecheck": {
     "modal": {
       "title": "正版查验"
-    }
+    },
+    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
   "addAccounts": {
     "title": "添加账户",
@@ -294,7 +295,7 @@
         "flash-mcu": "MCU 更新中...",
         "flash-bootloader": "启动加载器更新中...",
         "firmware": "正在更新固件...",
-        "flash": "正在更新您的设备..."
+        "flash": "Updating your device..."
       },
       "confirmIdentifier": "验证标识符",
       "confirmIdentifierText": "验证以确保设备上的标识符与以下标识符相同。按右键并输入您的 PIN 码以确认。",
@@ -784,6 +785,9 @@
       "desc": "在您的设备上安装一些应用程序，并访问资产组合",
       "openAppButton": "打开 Ledger Live"
     }
+  },
+  "connectTroubleshooting": {
+    "desc": "Having a hard time connecting your device?"
   },
   "errors": {
     "generic": {
