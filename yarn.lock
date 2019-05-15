@@ -1768,10 +1768,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^5.7.0":
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-5.7.0.tgz#8dd1728e6db947be7e8b122dcacc78184ea195ac"
-  integrity sha512-zVIbR5WGlYP5jOhN/QpQ6HCRaxwKlvBHFRGSwLpNK1vfwiSJTuZ7aAWr2hX2UgUbkxunSdJHDguwH8PvqNdmow==
+"@ledgerhq/live-common@^5.9.1":
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-5.9.1.tgz#adb4f77dc6470972bfea0e77d97bde20b4c18040"
+  integrity sha512-W4W8f7RrcoNc+a/CmGdi905m71M24E+PHgO2nuBTkqQZyrYYuSFWTv4xjzRS8Pq64pn/VxCduWwM2t3My7BDLQ==
   dependencies:
     "@ledgerhq/errors" "^4.56.0"
     "@ledgerhq/hw-app-btc" "^4.56.0"
@@ -1785,6 +1785,7 @@
     ethereumjs-tx "^1.3.7"
     invariant "^2.2.2"
     lodash "^4.17.11"
+    lru-cache "4.1.3"
     numeral "^2.0.6"
     prando "^5.1.0"
     react "*"
@@ -11028,7 +11029,7 @@ lowercase-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.1.tgz#6f9e30b47084d971a7c820ff15a6c5167b74c26f"
   integrity sha512-G2Lj61tXDnVFFOi8VZds+SoQjtQC3dgokKdDG2mTm1tx4m50NUHBOZSBwQQHyy0V12A0JTG4icfZQH+xPyh8VA==
 
-lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.3:
+lru-cache@4.1.3, lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.3:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
   integrity sha512-fFEhvcgzuIoJVUF8fYr5KR0YqxD238zgObTps31YdADwPPAp82a4M8TrckkWyx7ekNlf9aBcVn81cFwwXngrJA==

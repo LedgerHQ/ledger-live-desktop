@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
+import { repairChoices } from '@ledgerhq/live-common/lib/hw/firmwareUpdate-repair'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconCheck from 'icons/Check'
@@ -16,25 +17,12 @@ import FlashMCU from 'components/FlashMCU'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Modal from './index'
 import ModalBody from './ModalBody'
-import {
-  mcuOutdated,
-  mcuNotGenuine,
-  followDeviceRepair,
-  followDeviceUpdate,
-} from '../../../config/nontranslatables'
 
 const Container = styled(Box).attrs({
   alignItems: 'center',
   fontSize: 4,
   color: 'dark',
 })``
-
-const repairChoices = [
-  { id: 'mcuOutdated', label: mcuOutdated, forceMCU: '0.7' },
-  { id: 'mcuNotGenuine', label: mcuNotGenuine, forceMCU: '0.7' },
-  { id: 'followDeviceRepair', label: followDeviceRepair, forceMCU: '0.9' },
-  { id: 'followDeviceUpdate', label: followDeviceUpdate, forceMCU: '0.9' },
-]
 
 const ChoiceBox = styled.div`
   display: flex;
