@@ -208,7 +208,8 @@
   "genuinecheck": {
     "modal": {
       "title": "真贋性チェック"
-    }
+    },
+    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
   "addAccounts": {
     "title": "アカウントを追加",
@@ -294,7 +295,7 @@
         "flash-mcu": "MCUを更新しています...",
         "flash-bootloader": "ブートローダーを更新しています...",
         "firmware": "ファームウェアを更新しています...",
-        "flash": "お客様のデバイスのフラッシングをしています…"
+        "flash": "Updating your device..."
       },
       "confirmIdentifier": "識別子を検証してください",
       "confirmIdentifierText": "お使いのデバイスの識別子が下記の識別子と同じであることを確認してください。 確認するには、右ボタンを押してPINコードを入力します。",
@@ -784,6 +785,9 @@
       "desc": "いくつかのアプリをご使用のデバイスにインストールして、ポートフォリオにアクセスします。",
       "openAppButton": "Ledger Liveを開く"
     }
+  },
+  "connectTroubleshooting": {
+    "desc": "Having a hard time connecting your device?"
   },
   "errors": {
     "generic": {
