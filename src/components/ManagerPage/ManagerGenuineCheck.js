@@ -38,7 +38,7 @@ class ManagerGenuineCheck extends PureComponent<Props> {
           </Text>
         </Box>
         <Space of={40} />
-        <GenuineCheck onSuccess={onSuccess} style={{ width: 400 }} />
+        <GenuineCheck shouldRenderRetry onSuccess={onSuccess} style={{ width: 400 }} />
       </Box>
     )
   }
