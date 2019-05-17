@@ -94,7 +94,7 @@
   "account": {
     "lastOperations": "Últimas operaciones",
     "emptyState": {
-      "title": "¿Aún no tienes crypto activos?",
+      "title": "¿Aún no tienes criptoactivos?",
       "desc": "Asegúrate de que la aplicación <1><0>{{managerAppName}}</0></1> está instalada y empieza a recibir.",
       "buttons": {
         "receiveFunds": "Recibir"
@@ -142,7 +142,7 @@
   "dashboard": {
     "title": "Cartera",
     "emptyAccountTile": {
-      "desc": "Añadir cuentas para gestionar más crypto activos",
+      "desc": "Añadir cuentas para gestionar más criptoactivos",
       "createAccount": "Añadir cuenta"
     },
     "accounts": {
@@ -189,19 +189,19 @@
     "desc": "Prueba algunos de los servicios que hemos seleccionado",
     "visitWebsite": "Visita la página web",
     "btcdirect": "Compra y vende con total comodidad en el principal agente de criptomonedas de Europa. Inscríbete gratuitamente y recibe tus monedas en solo unos minutos. Nuestros usuarios nos califican con un 8,7 en Trustpilot",
-    "changelly": "Changelly es un conocido cambiador instantáneo de crypto activos que cotiza más de 100 monedas y tokens.",
+    "changelly": "Changelly es un conocido cambiador instantáneo de criptoactivos que cotiza más de 100 monedas y tokens.",
     "changenow": "ChangeNOW es uno de los principales servicios de intercambios instantáneos sin custodia",
     "coinberry": "Coinberry es la plataforma de criptomonedas que disfruta de mayor confianza al ofrecer una seguridad superior a la de los bancos, una interfaz de usuario de primera clase y financiación y retirada sin comisión. Preinscríbete para obtener un acceso rápido a nuestra plataforma si no eres ciudadano canadiense.",
-    "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar crypto activos con seguridad.",
-    "coinmama": "Coinmama es un servicio financiero que permite comprar activos digitales de forma segura, rápida y divertida en cualquier parte del mundo.",
+    "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar criptoactivos con seguridad.",
+    "coinmama": "Coinmama es un servicio financiero que permite comprar criptoactivos de forma segura, rápida y divertida en cualquier parte del mundo.",
     "genesis": "Genesis es una empresa comercial institucional que ofrece liquidez y préstamos en monedas digitales, incluidas bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin y XRP.",
     "kyberswap": "Plataforma rápida, sencilla y segura de canje de tokens. Alimentada por el protocolo de liquidez en cadena de Kyber Network.",
     "luno": "Luno te permite comprar, guardar y aprender sobre criptomonedas como Bitcoin y Ethereum de una forma segura y sencilla.",
     "paybis": "Comprar Bitcoin con tarjeta de crédito en PayBis es seguro y sencillo. El servicio opera en Estados Unidos, Canadá, Alemania, Rusia y Arabia Saudí.",
-    "shapeshift": "ShapeShift es un marketplace en línea donde los usuarios pueden comprar y vender activos digitales. Es una forma rápida y segura para que cualquiera compre o venda activos digitales, sin tediosos procesos de inscripción, sin riesgos de contraparte y sin fricciones.",
+    "shapeshift": "ShapeShift es un marketplace en línea donde los usuarios pueden comprar y vender criptoactivos. Es una forma rápida y segura para que cualquiera compre o venda activos digitales, sin tediosos procesos de inscripción, sin riesgos de contraparte y sin fricciones.",
     "simplex": "Simplex es una institución financiera con licencia en la UE que ofrece una solución de pago antifraude con tarjeta de crédito.",
     "taxtoken": "Software de base fiscal y costes de criptomonedas automatizado para ciudadanos de EE.UU.",
-    "thorswap": "ThorSwap es una plataforma para el intercambio de crypto activos de forma instantánea, segura y fiable, utilizando tecnologías descentralizadas para intercambios atómicos. Es la forma más fácil de comenzar a negociar, sin registro ni procesos KYC para operaciones con pequeñas cantidades.",
+    "thorswap": "ThorSwap es una plataforma para el intercambio de criptoactivos de forma instantánea, segura y fiable, utilizando tecnologías descentralizadas para intercambios atómicos. Es la forma más fácil de comenzar a negociar, sin registro ni procesos KYC para operaciones con pequeñas cantidades.",
     "bitpanda": "Bitpanda es el principal agente minorista en Europa de intercambio para la compra y venta de Bitcoin, Ethereum, IOTA y muchas otras. Deposita monedas utilizando tu tarjeta de crédito, Transferencia SOFORT, NETELLER y otras opciones.",
     "exmo": "Fundada en 2013 y con sede en Londres, Kiev, Barcelona y Moscú, EXMO es la casa de bolsa número uno en Europa del Este y una de las bolsas mundiales de volumen y liquidez más grandes del mundo."
   },
@@ -283,7 +283,7 @@
       "update": "Actualizar",
       "latest": "La versión {{version}} del firmware está disponible.",
       "disclaimerTitle": "Estás a punto de instalar la versión <1><0>del firmware {{version}}</0></1>.",
-      "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus crypto activos.",
+      "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus criptoactivos.",
       "disclaimerAppReinstall": "Como precaución, ten a mano la hoja de recuperacion.",
       "downloadingUpdateDesc": "Por favor, espera mientras se descarga el instalador de actualización"
     },
@@ -421,7 +421,7 @@
       "counterValue": "Contravalor",
       "counterValueDesc": "Elige la moneda mostrada al lado de tu saldo y operaciones.",
       "exchange": "Proveedor de tarifas",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
+      "exchangeDesc": "Ofrece el tipo de cambio de Bitcoin a {{fiat}}, utilizado para calcular el valor de tus criptoactivos (criptoactivo → BTC → {{fiat}}).",
       "region": "Región",
       "regionDesc": "Elige tu región, utilizada para establecer la zona horaria de Ledger Live.",
       "stock": "Indicador del mercado regional",
@@ -430,7 +430,7 @@
     "currencies": {
       "desc": "Selecciona un crypto activo para editar sus ajustes.",
       "exchange": "Proveedor de tipo ({{ticker}} → BTC)",
-      "exchangeDesc": "Elige el proveedor del tipo de cambio de {{currencyName}} a Bitcoin, utilizado para calcular el valor de tus crypto activos ({{ticker}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Elige el proveedor del tipo de cambio de {{currencyName}} a Bitcoin, utilizado para calcular el valor de tus criptoactivos ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Número de confirmaciones",
       "confirmationsNbDesc": "Establece el número de confirmaciones de red para que una transacción se marque como confirmada."
     },
@@ -449,7 +449,7 @@
       "developerMode": "Modo desarrollador",
       "developerModeDesc": "Mostrar aplicaciones de desarrollador y testnet en el Manager.",
       "analytics": "Análisis",
-      "analyticsDesc": "Permitir análisis para ayudar a Ledger a entender cómo mejorar la experiencia de usuario. Esto incluye clics, visitas a la página, redirecciones, acciones (enviar, recibir, bloquear, etc.) desplazamientos hasta el final de la página, (des)instalación y versión de aplicaciones, versión de la aplicación, número de cuentas, crypto activos y operaciones, duraciones de sesión, tipo de dispositivo y firmware de Ledger.",
+      "analyticsDesc": "Permitir analíticas para ayudar a Ledger a entender cómo mejorar la experiencia de usuario. Esto incluye clics, visitas a la página, redirecciones, acciones (enviar, recibir, bloquear, etc.) desplazamientos hasta el final de la página, (des)instalación y versión de aplicaciones, versión de la aplicación, número de cuentas, criptoactivos y operaciones, duraciones de sesión, tipo de dispositivo y firmware de Ledger.",
       "reportErrors": "Informes de bugs",
       "reportErrorsDesc": "Enviar informes automáticamente para ayudar a Ledger a corregir bugs.",
       "launchOnboarding": "Configuración del dispositivo",
@@ -471,15 +471,15 @@
     },
     "experimental": {
       "desc": "Try out experimental features and let us know what you think",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "disclaimer": "Estas son características experimentales que proporcionamos en una base “tal como está” para que nuestra comunidad pruebe. Pueden cambiar, romper o ser eliminados en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad. Tus criptoactivos permanecen protegidos por tu monedero de hardware de Ledger."
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
-      "desc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes. Las claves privadas que ofrecen acceso a tus crypto activos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
+      "desc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes. Las claves privadas que ofrecen acceso a tus criptoactivos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
     },
     "softResetModal": {
       "title": "Borrar caché",
-      "desc": "El borrado de la caché de Ledger fuerza la resincronización de red. Tus ajustes y cuentas se mantienen. Las claves privadas que ofrecen acceso a tus crypto activos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
+      "desc": "El borrado de la caché de Ledger fuerza la resincronización de red. Tus ajustes y cuentas se mantienen. Las claves privadas que ofrecen acceso a tus criptoactivos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
     },
     "resetFallbackModal": {
       "title": "Es necesaria la acción del usuario",
@@ -491,7 +491,7 @@
     },
     "removeAccountModal": {
       "title": "Quitar cuenta",
-      "desc": "Esto no afectará a tus cripto activos. Las cuentas siempre pueden volver a añadirse."
+      "desc": "Esto no afectará a tus criptoactivos. Las cuentas siempre pueden volver a añadirse."
     },
     "openUserDataDirectory": {
       "title": "Ver datos de usuario",
@@ -554,7 +554,7 @@
   },
   "disclaimerModal": {
     "title": "Operar con seguridad",
-    "desc_1": "Antes de enviar y recibir crypto activos, asegúrate de que tomas decisiones informadas. Los crypto activos son volátiles y los precios pueden subir y bajar. Analiza detenidamente tus objetivos comerciales y el riesgo financiero que estás dispuesto a asumir.",
+    "desc_1": "Antes de enviar y recibir crypto activos, asegúrate de que tomas decisiones informadas. Los criptoactivos son volátiles y los precios pueden subir y bajar. Analiza detenidamente tus objetivos comerciales y el riesgo financiero que estás dispuesto a asumir.",
     "desc_2": "Ten en cuenta que Ledger no ofrece asesoramiento financiero, fiscal o jurídico. Debes tomar esas decisiones por ti mismo o consultar con expertos de confianza.",
     "cta": "Entendido"
   },
@@ -739,7 +739,7 @@
       "disclaimer": {
         "note1": "Asegúrate de que recuerdas tu contraseña. No la compartas.",
         "note2": "Si la pierdes tendrás que restablecer Ledger Live y volver a añadir las cuentas.",
-        "note3": "Restablecer Ledger Live no afectará a tus crypto activos."
+        "note3": "Restablecer Ledger Live no afectará a tus criptoactivos."
       }
     },
     "analytics": {
@@ -755,7 +755,7 @@
           "item4": "Acciones: enviar, recibir, bloquear, etc.",
           "item5": "Desplazamiento hasta el final de la página",
           "item6": "(Des)instalación y versión de la aplicación",
-          "item7": "Número de cuentas, crypto activos y operaciones",
+          "item7": "Número de cuentas, criptoactivos y operaciones",
           "item8": "Duración general y de la sesión de la página",
           "item9": "Tipo de dispositivo Ledger y firmware"
         }
@@ -886,7 +886,7 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "Lo sentimos, no queda espacio suficiente.",
-      "description": "Desinstala algunas aplicaciones para liberar espacio. Esto no afectará a tus crypto activos."
+      "description": "Desinstala algunas aplicaciones para liberar espacio. Esto no afectará a tus criptoactivos."
     },
     "ManagerUninstallBTCDep": {
       "title": "Lo sentimos, esta aplicación es obligatoria.",
