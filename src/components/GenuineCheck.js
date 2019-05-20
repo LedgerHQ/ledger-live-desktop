@@ -28,6 +28,7 @@ import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import ConnectTroubleshooting from 'components/ConnectTroubleshooting'
 import DeviceInteraction from 'components/DeviceInteraction'
+import { ErrorDescContainer } from 'components/DeviceInteraction/components'
 import AutoRepair from 'components/AutoRepair'
 import Text from 'components/base/Text'
 
@@ -83,12 +84,6 @@ class GenuineCheck extends PureComponent<Props, State> {
         .send({ devicePath: device.path })
         .pipe(timeout(DEVICE_INFOS_TIMEOUT))
         .toPromise()
-      /*
-      if (deviceInfo.isBootloader) {
-        this.setState({ isBootloader: true })
-        throw new UnexpectedBootloader()
-      }
-      */
       return deviceInfo
     })
 
@@ -215,6 +210,11 @@ class GenuineCheck extends PureComponent<Props, State> {
           steps={steps}
           onSuccess={onSuccess}
           onFail={this.handleFail}
+          renderError={(error, retry) =>
+            device && isBootloader ? null : (
+              <ErrorDescContainer error={error} onRetry={retry} mt={4} />
+            )
+          }
         />
         {autoRepair ? <AutoRepair onDone={this.onDoneAutoRepair} /> : null}
         {device ? (
