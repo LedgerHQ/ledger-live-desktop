@@ -154,7 +154,7 @@ class MainSideBar extends PureComponent<Props> {
               iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
               isActive={pathname === '/'}
-              NotifComponent={UpdateDot}
+              NotifComponent={noAccounts ? undefined : UpdateDot}
               disabled={noAccounts}
             />
             <SideBarListItem
@@ -163,7 +163,7 @@ class MainSideBar extends PureComponent<Props> {
               iconActiveColor="wallet"
               isActive={pathname === '/accounts'}
               onClick={this.handleClickAccounts}
-              NotifComponent={NewAccountsNotifDot}
+              NotifComponent={(noAccounts && UpdateDot) || NewAccountsNotifDot}
             />
             <SideBarListItem
               label={t('send.title')}
