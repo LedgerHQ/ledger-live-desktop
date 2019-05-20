@@ -31,7 +31,7 @@
     "back": "Atrás",
     "reset": "Restablecer",
     "retry": "Intentar de nuevo",
-    "range": "Range",
+    "range": "Rango",
     "stop": "Detener",
     "close": "Cerrar",
     "eastern": "Oriental",
@@ -42,7 +42,7 @@
     "copyAddress": "Copiar",
     "copied": "Copiado",
     "addressCopied": "Dirección copiada",
-    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
+    "experimentalFeature": "FUNCIONALIDAD EXPERIMENTAL ACTIVA",
     "lockScreen": {
       "title": "Bienvenido de nuevo",
       "subTitle": null,
@@ -82,19 +82,19 @@
   },
   "sidebar": {
     "menu": "Menú",
-    "accounts": "Accounts",
+    "accounts": "Cuentas",
     "manager": "Manager",
     "exchange": "Comprar crypto",
     "developer": "Herramientas de desarrollo",
     "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
+      "title": "Nueva actualización",
+      "description": "¡Tus cuentas han sido movidas a una nueva página dedicada!"
     }
   },
   "account": {
     "lastOperations": "Últimas operaciones",
     "emptyState": {
-      "title": "¿Aún no tienes crypto activos?",
+      "title": "¿Aún no tienes criptoactivos?",
       "desc": "Asegúrate de que la aplicación <1><0>{{managerAppName}}</0></1> está instalada y empieza a recibir.",
       "buttons": {
         "receiveFunds": "Recibir"
@@ -118,21 +118,21 @@
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "Cuentas",
+    "noResultFound": "No se encontraron cuentas.",
     "order": {
-      "name": "Account Name",
-      "balance": "Account Balance"
+      "name": "Nombre de la Cuenta",
+      "balance": "Saldo de la Cuenta"
     },
     "range": {
-      "week": "week",
-      "month": "month",
-      "year": "year"
+      "week": "semana",
+      "month": "mes",
+      "year": "año"
     },
     "contextMenu": {
-      "receive": "Receive",
-      "send": "Send",
-      "edit": "Edit Account"
+      "receive": "Recibir",
+      "send": "Enviar",
+      "edit": "Editar Cuenta"
     }
   },
   "banners": {
@@ -142,7 +142,7 @@
   "dashboard": {
     "title": "Cartera",
     "emptyAccountTile": {
-      "desc": "Añadir cuentas para gestionar más crypto activos",
+      "desc": "Añadir cuentas para gestionar más criptoactivos",
       "createAccount": "Añadir cuenta"
     },
     "accounts": {
@@ -189,19 +189,19 @@
     "desc": "Prueba algunos de los servicios que hemos seleccionado",
     "visitWebsite": "Visita la página web",
     "btcdirect": "Compra y vende con total comodidad en el principal agente de criptomonedas de Europa. Inscríbete gratuitamente y recibe tus monedas en solo unos minutos. Nuestros usuarios nos califican con un 8,7 en Trustpilot",
-    "changelly": "Changelly es un conocido cambiador instantáneo de crypto activos que cotiza más de 100 monedas y tokens.",
+    "changelly": "Changelly es un conocido cambiador instantáneo de criptoactivos que cotiza más de 100 monedas y tokens.",
     "changenow": "ChangeNOW es uno de los principales servicios de intercambios instantáneos sin custodia",
     "coinberry": "Coinberry es la plataforma de criptomonedas que disfruta de mayor confianza al ofrecer una seguridad superior a la de los bancos, una interfaz de usuario de primera clase y financiación y retirada sin comisión. Preinscríbete para obtener un acceso rápido a nuestra plataforma si no eres ciudadano canadiense.",
-    "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar crypto activos con seguridad.",
-    "coinmama": "Coinmama es un servicio financiero que permite comprar activos digitales de forma segura, rápida y divertida en cualquier parte del mundo.",
+    "coinhouse": "Coinhouse es una plataforma de confianza para individuos e inversores institucionales que buscan analizar, comprar, vender y guardar criptoactivos con seguridad.",
+    "coinmama": "Coinmama es un servicio financiero que permite comprar criptoactivos de forma segura, rápida y divertida en cualquier parte del mundo.",
     "genesis": "Genesis es una empresa comercial institucional que ofrece liquidez y préstamos en monedas digitales, incluidas bitcoin, bitcoin cash, ethereum, ethereum classic, litecoin y XRP.",
     "kyberswap": "Plataforma rápida, sencilla y segura de canje de tokens. Alimentada por el protocolo de liquidez en cadena de Kyber Network.",
     "luno": "Luno te permite comprar, guardar y aprender sobre criptomonedas como Bitcoin y Ethereum de una forma segura y sencilla.",
     "paybis": "Comprar Bitcoin con tarjeta de crédito en PayBis es seguro y sencillo. El servicio opera en Estados Unidos, Canadá, Alemania, Rusia y Arabia Saudí.",
-    "shapeshift": "ShapeShift es un marketplace en línea donde los usuarios pueden comprar y vender activos digitales. Es una forma rápida y segura para que cualquiera compre o venda activos digitales, sin tediosos procesos de inscripción, sin riesgos de contraparte y sin fricciones.",
+    "shapeshift": "ShapeShift es un marketplace en línea donde los usuarios pueden comprar y vender criptoactivos. Es una forma rápida y segura para que cualquiera compre o venda activos digitales, sin tediosos procesos de inscripción, sin riesgos de contraparte y sin fricciones.",
     "simplex": "Simplex es una institución financiera con licencia en la UE que ofrece una solución de pago antifraude con tarjeta de crédito.",
     "taxtoken": "Software de base fiscal y costes de criptomonedas automatizado para ciudadanos de EE.UU.",
-    "thorswap": "ThorSwap es una plataforma para el intercambio de crypto activos de forma instantánea, segura y fiable, utilizando tecnologías descentralizadas para intercambios atómicos. Es la forma más fácil de comenzar a negociar, sin registro ni procesos KYC para operaciones con pequeñas cantidades.",
+    "thorswap": "ThorSwap es una plataforma para el intercambio de criptoactivos de forma instantánea, segura y fiable, utilizando tecnologías descentralizadas para intercambios atómicos. Es la forma más fácil de comenzar a negociar, sin registro ni procesos KYC para operaciones con pequeñas cantidades.",
     "bitpanda": "Bitpanda es el principal agente minorista en Europa de intercambio para la compra y venta de Bitcoin, Ethereum, IOTA y muchas otras. Deposita monedas utilizando tu tarjeta de crédito, Transferencia SOFORT, NETELLER y otras opciones.",
     "exmo": "Fundada en 2013 y con sede en Londres, Kiev, Barcelona y Moscú, EXMO es la casa de bolsa número uno en Europa del Este y una de las bolsas mundiales de volumen y liquidez más grandes del mundo."
   },
@@ -209,7 +209,7 @@
     "modal": {
       "title": "Comprobación de autenticidad"
     },
-    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
+    "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en {{button}} para actualizarlo."
   },
   "addAccounts": {
     "title": "Añadir cuentas",
@@ -253,7 +253,7 @@
     "date": "Fecha",
     "status": "Estado",
     "confirmed": "Confirmada",
-    "failed": "Failed",
+    "failed": "Fallído",
     "notConfirmed": "No confirmada",
     "fees": "Comisiones",
     "noFees": "Sin comisiones",
@@ -283,7 +283,7 @@
       "update": "Actualizar",
       "latest": "La versión {{version}} del firmware está disponible.",
       "disclaimerTitle": "Estás a punto de instalar la versión <1><0>del firmware {{version}}</0></1>.",
-      "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus crypto activos.",
+      "disclaimerAppDelete": "Desinstala todas las aplicaciones de tu dispositivo. Esto no afectará a tus criptoactivos.",
       "disclaimerAppReinstall": "Como precaución, ten a mano la hoja de recuperacion.",
       "downloadingUpdateDesc": "Por favor, espera mientras se descarga el instalador de actualización"
     },
@@ -295,14 +295,14 @@
         "flash-mcu": "Actualizando MCU...",
         "flash-bootloader": "Actualizando el Bootloader...",
         "firmware": "Actualizando el firmware...",
-        "flash": "Preparing your device..."
+        "flash": "Preparando tu dispositivo..."
       },
       "confirmIdentifier": "Comprobar el identificador",
       "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo es el mismo que el que aparece a continuación. Pulsa el botón derecho e introduce tu código PIN para confirmar.",
       "identifier": "Identificador",
       "mcuTitle": "Finalizar actualización",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
+      "mcuSecond": "Pulsa el botón izquierdo y mantenlo pulsado mientras conectas de nuevo el cable USB hasta que aparezca la pantalla de <1><0>{{repairProcessing}}</0></1>",
       "mcuPin": "Ten paciencia mientras finaliza la actualización",
       "successTitle": "Firmware actualizado",
       "successText": "Reinstala las aplicaciones en tu dispositivo"
@@ -354,8 +354,8 @@
         "ethereumGasLimit": "Límite de gas",
         "unitPerByte": "{{unit}} por byte",
         "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+          "title": "Comisiones elevadas",
+          "desc": "Ten cuidado, las comisiones de transacción (<1><0>{{fees}}</0></1>) representan más del 10% de la cantidad (<3><0>{{amount}}</0></3>). ¿Deseas continuar?"
         }
       },
       "connectDevice": {
@@ -388,22 +388,22 @@
     "title": "Ajustes",
     "tabs": {
       "display": "General",
-      "export": "Accounts",
+      "export": "Cuentas",
       "currencies": "Monedas",
       "help": "Ayuda",
       "about": "Acerca de...",
-      "experimental": "Experimental features"
+      "experimental": "Funcionalidades experimentales"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "title": "Exportar cuentas",
+        "desc": "Añade tus cuentas en Ledger Live móvil. Tus cuentas solo se sincronizarán con el blockchain, no entre tus aplicaciones móviles y de escritorio.",
+        "button": "Exportar"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer.",
-        "button": "Save"
+        "title": "Historial de operaciones",
+        "desc": "Guarda un archivo CSV de las operaciones de tus cuentas.",
+        "button": "Guardar"
       },
       "modal": {
         "button": "Hecho",
@@ -421,7 +421,7 @@
       "counterValue": "Contravalor",
       "counterValueDesc": "Elige la moneda mostrada al lado de tu saldo y operaciones.",
       "exchange": "Proveedor de tarifas",
-      "exchangeDesc": "Provides the exchange rate from Bitcoin to {{fiat}}, used to estimate the value of your crypto assets (crypto asset → BTC → {{fiat}}).",
+      "exchangeDesc": "Ofrece el tipo de cambio de Bitcoin a {{fiat}}, utilizado para calcular el valor de tus criptoactivos (criptoactivo → BTC → {{fiat}}).",
       "region": "Región",
       "regionDesc": "Elige tu región, utilizada para establecer la zona horaria de Ledger Live.",
       "stock": "Indicador del mercado regional",
@@ -430,7 +430,7 @@
     "currencies": {
       "desc": "Selecciona un crypto activo para editar sus ajustes.",
       "exchange": "Proveedor de tipo ({{ticker}} → BTC)",
-      "exchangeDesc": "Elige el proveedor del tipo de cambio de {{currencyName}} a Bitcoin, utilizado para calcular el valor de tus crypto activos ({{ticker}} → BTC → {{fiat}}).",
+      "exchangeDesc": "Elige el proveedor del tipo de cambio de {{currencyName}} a Bitcoin, utilizado para calcular el valor de tus criptoactivos ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Número de confirmaciones",
       "confirmationsNbDesc": "Establece el número de confirmaciones de red para que una transacción se marque como confirmada."
     },
@@ -449,7 +449,7 @@
       "developerMode": "Modo desarrollador",
       "developerModeDesc": "Mostrar aplicaciones de desarrollador y testnet en el Manager.",
       "analytics": "Análisis",
-      "analyticsDesc": "Permitir análisis para ayudar a Ledger a entender cómo mejorar la experiencia de usuario. Esto incluye clics, visitas a la página, redirecciones, acciones (enviar, recibir, bloquear, etc.) desplazamientos hasta el final de la página, (des)instalación y versión de aplicaciones, versión de la aplicación, número de cuentas, crypto activos y operaciones, duraciones de sesión, tipo de dispositivo y firmware de Ledger.",
+      "analyticsDesc": "Permitir analíticas para ayudar a Ledger a entender cómo mejorar la experiencia de usuario. Esto incluye clics, visitas a la página, redirecciones, acciones (enviar, recibir, bloquear, etc.) desplazamientos hasta el final de la página, (des)instalación y versión de aplicaciones, versión de la aplicación, número de cuentas, criptoactivos y operaciones, duraciones de sesión, tipo de dispositivo y firmware de Ledger.",
       "reportErrors": "Informes de bugs",
       "reportErrorsDesc": "Enviar informes automáticamente para ayudar a Ledger a corregir bugs.",
       "launchOnboarding": "Configuración del dispositivo",
@@ -470,16 +470,16 @@
       "privacyDesc": "Consulta nuestra Política de Privacidad para conocer qué datos personales recogemos, por qué y cómo los utilizamos."
     },
     "experimental": {
-      "desc": "Try out experimental features and let us know what you think",
-      "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
+      "desc": "Prueba las funcionalidades experimentales y dínos qué te parecen",
+      "disclaimer": "Estas son características experimentales que proporcionamos en una base “tal como está” para que nuestra comunidad pruebe. Pueden cambiar, romper o ser eliminados en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad. Tus criptoactivos permanecen protegidos por tu monedero de hardware de Ledger."
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
-      "desc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes. Las claves privadas que ofrecen acceso a tus crypto activos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
+      "desc": "Borra todos los datos de Ledger Live guardados en tu ordenador, incluidas tus cuentas, historial de transacciones y ajustes. Las claves privadas que ofrecen acceso a tus criptoactivos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
     },
     "softResetModal": {
       "title": "Borrar caché",
-      "desc": "El borrado de la caché de Ledger fuerza la resincronización de red. Tus ajustes y cuentas se mantienen. Las claves privadas que ofrecen acceso a tus crypto activos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
+      "desc": "El borrado de la caché de Ledger fuerza la resincronización de red. Tus ajustes y cuentas se mantienen. Las claves privadas que ofrecen acceso a tus criptoactivos permanecen seguras en tu dispositivo Ledger y en tu hoja de Recuperación."
     },
     "resetFallbackModal": {
       "title": "Es necesaria la acción del usuario",
@@ -491,7 +491,7 @@
     },
     "removeAccountModal": {
       "title": "Quitar cuenta",
-      "desc": "Esto no afectará a tus cripto activos. Las cuentas siempre pueden volver a añadirse."
+      "desc": "Esto no afectará a tus criptoactivos. Las cuentas siempre pueden volver a añadirse."
     },
     "openUserDataDirectory": {
       "title": "Ver datos de usuario",
@@ -505,9 +505,9 @@
       "button": "Reparar"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
-      "btn": "Save"
+      "title": "Guardar registros",
+      "desc": "Exportar los registros de Ledger Live puede ser necesario para solucionar problemas.",
+      "btn": "Guardar"
     }
   },
   "password": {
@@ -554,20 +554,20 @@
   },
   "disclaimerModal": {
     "title": "Operar con seguridad",
-    "desc_1": "Antes de enviar y recibir crypto activos, asegúrate de que tomas decisiones informadas. Los crypto activos son volátiles y los precios pueden subir y bajar. Analiza detenidamente tus objetivos comerciales y el riesgo financiero que estás dispuesto a asumir.",
+    "desc_1": "Antes de enviar y recibir crypto activos, asegúrate de que tomas decisiones informadas. Los criptoactivos son volátiles y los precios pueden subir y bajar. Analiza detenidamente tus objetivos comerciales y el riesgo financiero que estás dispuesto a asumir.",
     "desc_2": "Ten en cuenta que Ledger no ofrece asesoramiento financiero, fiscal o jurídico. Debes tomar esas decisiones por ti mismo o consultar con expertos de confianza.",
     "cta": "Entendido"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
-    "titleSuccess": "Operation history successfully saved",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to include",
-    "selectedAccounts_plural": "Accounts to include ({{count}})"
+    "title": "Historial de operaciones",
+    "desc": "Seleccione las cuentas para las que guardar el historial de operaciones",
+    "descSuccess": "Un archivo CSV de tu historial de operaciones se ha guardado correctamente en la carpeta seleccionada",
+    "titleSuccess": "Historial de operaciones guardado correctamente",
+    "cta": "Guardar",
+    "ctaSuccess": "Hecho",
+    "noAccounts": "No hay cuentas que mostrar",
+    "selectedAccounts": "Cuentas a incluir",
+    "selectedAccounts_plural": "Cuentas a incluir ({{count}})"
   },
   "language": {
     "system": "Utilizar idioma del sistema"
@@ -610,8 +610,8 @@
     },
     "selectDevice": {
       "title": "Selecciona tu dispositivo",
-      "usbOnly": "usb only",
-      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
+      "usbOnly": "sólo usb",
+      "usbOnlyTooltip": "Ledger Live Desktop todavía no es compatible con Bluetooth"
     },
     "selectPIN": {
       "disclaimer": {
@@ -624,19 +624,19 @@
         "instructions": {
           "nano": {
             "step1": "Conecta el {{productName}} a tu ordenador. Pulsa ambos botones para comenzar",
-            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
+            "step2": "Pulsa el botón derecho para seleccionar <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito. Pulsa ambos botones para validar.",
             "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "nanoX": {
             "step1": "Conecta el {{productName}} a tu ordenador.",
-            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step2": "Pulsa ambos botones para elegir <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito.",
             "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "blue": {
             "step1": "Conecta el {{productName}} a tu ordenador.",
-            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
+            "step2": "Pulsa <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Elige un código PIN de 4 a 8 dígitos."
           }
         }
@@ -646,20 +646,20 @@
         "instructions": {
           "nano": {
             "step1": "Conecta el {{productName}} a tu ordenador. Pulsa ambos botones para comenzar",
-            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
+            "step2": "Pulsa el botón izquierdo para cancelar <1><0>{{configureAsNewDevice}}?</0></1>. A continuación, pulsa el botón derecho para seleccionar <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "Pulsa el botón izquierdo o derecho para seleccionar un dígito. Pulsa ambos botones para validar.",
             "step4": "Selecciona ✓ para confirmar tu código PIN. Selecciona ⬅ para borrar un dígito."
           },
           "nanoX": {
             "step1": "Conecta tu {{productName}} a tu ordenador.",
             "step2": "Pulsa ambos botones a la vez según lo indicado en la pantalla de tu {{productName}}.",
-            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step3": "Pulsa el botón izquierdo para cancelar <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Pulsa el botón derecho para seleccionar <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Elige un código PIN que tenga entre 4 y 8 dígitos."
           },
           "blue": {
             "step1": "Conecta el {{productName}} a tu ordenador.",
-            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
+            "step2": "Pulsa <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Elige un código PIN de 4 a 8 dígitos."
           }
         }
@@ -670,13 +670,13 @@
         "title": "Guarda tu frase de recuperación",
         "desc": "Tu dispositivo mostrará una frase de recuperación de 24 palabras para proteger tus claves privadas.",
         "nano": {
-          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
+          "step1": "Escribe la <1><0>{{seedWord1}}</0></1> en la posición 1 en una hoja de Recuperación en blanco.",
           "step2": "Pulsa el botón derecho para continuar y escribe las 24 palabras.",
           "step3": "Confirma tu frase de recuperación: selecciona y valida cada palabra pulsando ambos botones."
         },
         "blue": {
           "step1": "Escribe cada palabra en una hoja de Recuperación en blanco manteniendo el orden.",
-          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
+          "step2": "Pulsa <1><0>{{seedNext}}</0></1> y escribe todas las palabras hasta que aparezca la pantalla <3><0>{{seedConfirmation}}</0></3>.",
           "step3": "Introduce cada palabra para confirmar tu frase de recuperación."
         }
       },
@@ -685,8 +685,8 @@
         "desc": "Introduce la frase de recuperación guardada en tu hoja de Recuperación.",
         "nano": {
           "step1": "Elige la longitud de tu frase de recuperación.",
-          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
+          "step2": "Introduce las primeras letras de la <1><0>{{seedWord1}}</0></1> hasta que aparezcan las palabras sugeridas.",
+          "step3": "Elige la <1><0>{{seedWord1}}</0></1> de las palabras sugeridas pulsando ambos botones.",
           "step4": "Repite el proceso hasta la última palabra."
         },
         "blue": {
@@ -739,7 +739,7 @@
       "disclaimer": {
         "note1": "Asegúrate de que recuerdas tu contraseña. No la compartas.",
         "note2": "Si la pierdes tendrás que restablecer Ledger Live y volver a añadir las cuentas.",
-        "note3": "Restablecer Ledger Live no afectará a tus crypto activos."
+        "note3": "Restablecer Ledger Live no afectará a tus criptoactivos."
       }
     },
     "analytics": {
@@ -755,7 +755,7 @@
           "item4": "Acciones: enviar, recibir, bloquear, etc.",
           "item5": "Desplazamiento hasta el final de la página",
           "item6": "(Des)instalación y versión de la aplicación",
-          "item7": "Número de cuentas, crypto activos y operaciones",
+          "item7": "Número de cuentas, criptoactivos y operaciones",
           "item8": "Duración general y de la sesión de la página",
           "item9": "Tipo de dispositivo Ledger y firmware"
         }
@@ -787,7 +787,7 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "¿Tienes problemas para conectar tu dispositivo?"
   },
   "errors": {
     "generic": {
@@ -811,12 +811,12 @@
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Lo sentimos, la actualización falló",
+      "description": "Por favor, inténtalo de nuevo o ponte en contacto con Soporte de Ledger"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred, so please try again"
+      "title": "Por favor reinicia tu dispositivo Ledger e inténtalo de nuevo",
+      "description": "Ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde"
     },
     "DeviceSocketFail": {
       "description": "Por favor, inténtalo de nuevo"
@@ -834,8 +834,8 @@
       "description": "Por favor, inténtalo de nuevo"
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Oops, device disconnected",
-      "description": "The connection to the device was lost during an operation, please try again"
+      "title": "Vaya, el dispositivo se ha desconectado",
+      "description": "Se ha perdido la conexión con el dispositivo durante una operación, por favor inténtalo de nuevo"
     },
     "EnpointConfig": {
       "title": "Endpoint inválido.",
@@ -846,8 +846,8 @@
       "description": "Intenta establecer una comisión habitual (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+      "title": "Se requiere actualización de firmware o app",
+      "description": "Por favor, usa el Manager para desinstalar todas las aplicaciones y comprueba si hay una actualización de firmware disponible antes de reinstalarlas"
     },
     "HardResetFail": {
       "title": "Vaya, no se ha podido restablecer.",
@@ -858,11 +858,11 @@
       "description": "Se ha intentado actualizar el microcontrolador del dispositivo sin necesidad. Ponte en contacto con Soporte de Ledger si hay algún problema con tu dispositivo."
     },
     "LedgerAPI4xx": {
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "Por favor, comprueba tu conexión e inténtalo de nuevo o ponte en contacto con el servicio de soporte de Ledger."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again at a later moment or contact Ledger Support. {{message}}"
+      "title": "Lo sentimos, inténtalo de nuevo.",
+      "description": "El servidor no pudo manejar tu solicitud. Por favor, inténtalo de nuevo más tarde o contacta con el soporte de Ledger. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Lo sentimos, los servicios {{currencyName}} no están disponibles.",
@@ -886,7 +886,7 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "Lo sentimos, no queda espacio suficiente.",
-      "description": "Desinstala algunas aplicaciones para liberar espacio. Esto no afectará a tus crypto activos."
+      "description": "Desinstala algunas aplicaciones para liberar espacio. Esto no afectará a tus criptoactivos."
     },
     "ManagerUninstallBTCDep": {
       "title": "Lo sentimos, esta aplicación es obligatoria.",
@@ -936,8 +936,8 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we look for your accounts"
+      "title": "Por favor, abre la aplicación {{appName}}",
+      "description": "Manten abierta la aplicación {{appName}} mientras buscamos tus cuentas"
     },
     "UnexpectedBootloader": {
       "title": "Vaya, tu dispositivo no debería estar en modo Bootloader",
@@ -980,7 +980,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Se requiere la actualización de la aplicación.",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "Desinstala y vuelve a instalar la aplicación {{managerAppName}} en el Manager"
     },
     "InvalidAddress": {
       "title": "Esta no es una dirección {{currencyName}} válida."
