@@ -9,6 +9,7 @@ import { push } from 'react-router-redux'
 import styled from 'styled-components'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
+import UpdateBanner from 'components/Updater/Banner'
 import AccountsHeader from './AccountsHeader'
 import AccountList from './AccountList'
 import { accountsSelector } from '../../reducers/accounts'
@@ -16,6 +17,7 @@ import { setAccountsViewMode, setSelectedTimeRange } from '../../actions/setting
 import { accountsViewModeSelector, selectedTimeRangeSelector } from '../../reducers/settings'
 import EmptyState from './EmptyState'
 import { Dismiss as NewAccountsDismiss } from '../news/NewAccountsPage'
+import { TopBannerContainer } from '../DashboardPage'
 
 type Props = {
   accounts: Account[],
@@ -62,6 +64,9 @@ class AccountsPage extends PureComponent<Props> {
       return (
         <Fragment>
           <TrackPage category="Accounts" accountsLength={accounts.length} />
+          <TopBannerContainer>
+            <UpdateBanner />
+          </TopBannerContainer>
           <NewAccountsDismiss />
           <EmptyState />
         </Fragment>

@@ -150,7 +150,7 @@ class DashboardPage extends PureComponent<Props> {
   }
 }
 // This forces only one visible top banner at a time
-const TopBannerContainer = styled.div`
+export const TopBannerContainer = styled.div`
   margin-top: -3px; //To hide the separator bar
   z-index: 20;
 
