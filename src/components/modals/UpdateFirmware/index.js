@@ -102,11 +102,11 @@ class UpdateModal extends PureComponent<Props, State> {
     const errorSteps = error ? [stepsId.indexOf(stepId)] : []
 
     const additionalProps = {
-      error,
+      ...props,
       onCloseModal: onClose,
       setError: this.setError,
       firmware,
-      ...props,
+      error,
     }
 
     return (

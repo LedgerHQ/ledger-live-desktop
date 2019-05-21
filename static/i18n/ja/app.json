@@ -31,6 +31,7 @@
     "back": "戻る",
     "reset": "リセット",
     "retry": "再試行",
+    "range": "Range",
     "stop": "停止",
     "close": "閉じる",
     "eastern": "東部",
@@ -41,7 +42,7 @@
     "copyAddress": "アドレスをコピーしてください",
     "copied": "コピー済み",
     "addressCopied": "アドレスをコピーしました",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "お帰りなさい",
       "subTitle": null,
@@ -81,10 +82,14 @@
   },
   "sidebar": {
     "menu": "メニュー",
-    "accounts": "アカウント ({{count}})",
+    "accounts": "Accounts",
     "manager": "マネージャー",
     "exchange": "暗号資産を購入",
-    "developer": "開発ツール"
+    "developer": "開発ツール",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "最後の操作",
@@ -112,6 +117,24 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "noResultFound": "No accounts found.",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
+    }
+  },
   "banners": {
     "promoteMobile": "{{productName}} をスマホでもご利用できるようになりました。Ledger Live体験をお楽しみください。",
     "genericTerminatedCrypto": "{{coinName}} はもうサポートされません"
@@ -133,11 +156,7 @@
     "summary": "アカウントの概要をお知らせします",
     "summary_plural": "{{count}}アカウントの概要をお知らせします",
     "recentActivity": "最後の操作",
-    "totalBalance": "合計残高",
-    "accountsOrder": {
-      "name": "名前",
-      "balance": "残高"
-    }
+    "totalBalance": "合計残高"
   },
   "currentAddress": {
     "title": "現在のアドレス",
@@ -189,7 +208,8 @@
   "genuinecheck": {
     "modal": {
       "title": "真贋性チェック"
-    }
+    },
+    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
   "addAccounts": {
     "title": "アカウントを追加",
@@ -233,6 +253,7 @@
     "date": "日付",
     "status": "ステータス",
     "confirmed": "確認済み",
+    "failed": "Failed",
     "notConfirmed": "未確認",
     "fees": "料金",
     "noFees": "料金なし",
@@ -274,7 +295,7 @@
         "flash-mcu": "MCUを更新しています...",
         "flash-bootloader": "ブートローダーを更新しています...",
         "firmware": "ファームウェアを更新しています...",
-        "flash": "お客様のデバイスのフラッシングをしています…"
+        "flash": "Preparing your device..."
       },
       "confirmIdentifier": "識別子を検証してください",
       "confirmIdentifierText": "お使いのデバイスの識別子が下記の識別子と同じであることを確認してください。 確認するには、右ボタンを押してPINコードを入力します。",
@@ -588,7 +609,9 @@
       }
     },
     "selectDevice": {
-      "title": "機器を選択"
+      "title": "機器を選択",
+      "usbOnly": "usb only",
+      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
     },
     "selectPIN": {
       "disclaimer": {
@@ -762,6 +785,9 @@
       "desc": "いくつかのアプリをご使用のデバイスにインストールして、ポートフォリオにアクセスします。",
       "openAppButton": "Ledger Liveを開く"
     }
+  },
+  "connectTroubleshooting": {
+    "desc": "Having a hard time connecting your device?"
   },
   "errors": {
     "generic": {
@@ -954,7 +980,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "アプリの更新が必要です",
-      "description": "マネージャーを開いて、アプリを更新します"
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}}アドレスではありません"

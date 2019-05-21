@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { Trans } from 'react-i18next'
 import { getDeviceModel } from '@ledgerhq/devices'
 import type { DeviceModelId } from '@ledgerhq/devices'
 
@@ -17,10 +18,10 @@ import TrackPage from 'analytics/TrackPage'
 
 import IconCheckCirle from 'icons/Check'
 
+import type { StepProps } from '..'
 import { Title, Inner, FixedTopContainer, StepContainerInner } from '../helperComponents'
 import OnboardingFooter from '../OnboardingFooter'
-
-import type { StepProps } from '..'
+import Tooltip from '../../base/Tooltip'
 
 const mapDispatchToProps = { deviceModelId }
 
@@ -57,6 +58,11 @@ class SelectDevice extends PureComponent<StepProps, {}> {
                   <img alt="" src={i('ledger-nano-x-onb.svg')} />
                 </DeviceIcon>
                 <BlockTitle>{getDeviceModel('nanoX').productName}</BlockTitle>
+                <Tooltip render={() => <Trans i18nKey="onboarding.selectDevice.usbOnlyTooltip" />}>
+                  <USBOnly>
+                    <Trans i18nKey="onboarding.selectDevice.usbOnly" />
+                  </USBOnly>
+                </Tooltip>
               </DeviceContainer>
               <DeviceContainer
                 isActive={onboarding.deviceModelId === 'nanoS'}
@@ -149,4 +155,20 @@ const SelectDeviceIconWrapper = styled(Box).attrs({
   border-radius: 50%;
   width: 18px;
   height: 18px;
+`
+
+const USBOnly = styled(Box).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+  ff: 'Open Sans|Bold',
+  fontSize: 0,
+  borderRadius: '2px',
+})`
+  position: absolute;
+  bottom: 20px;
+  background-color: ${p => p.theme.colors.lightFog};
+  line-height: 16px;
+  padding: 0 4px;
+  text-transform: uppercase;
+  transform: translateX(-50%);
 `

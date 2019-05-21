@@ -1,7 +1,7 @@
 // @flow
-import { LEDGER_DEBUG_ALL_LANGS } from 'config/constants'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 
-const allLanguages = ['en', 'es', 'fr', 'ja', 'ko', 'ru', 'zh']
-const prodStableLanguages = ['en']
-const languages = LEDGER_DEBUG_ALL_LANGS ? allLanguages : prodStableLanguages
-export default languages
+export const allLanguages = ['en', 'es', 'fr', 'ja', 'ko', 'ru', 'zh']
+export const prodStableLanguages = ['en']
+export const getLanguages = () =>
+  getEnv('EXPERIMENTAL_LANGUAGES') ? allLanguages : prodStableLanguages

@@ -3,12 +3,11 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { getCurrentDevice } from 'reducers/devices'
-import debugAppInfosForCurrency from 'commands/debugAppInfosForCurrency'
+import getAppAndVersion from 'commands/getAppAndVersion'
 
 class DebugAppInfosForCurrency extends Component<
   {
     children?: (?string) => React$Node,
-    currencyId: string,
     device: *,
   },
   {
@@ -19,10 +18,10 @@ class DebugAppInfosForCurrency extends Component<
     version: null,
   }
   componentDidMount() {
-    const { device, currencyId } = this.props
+    const { device } = this.props
     if (device) {
-      debugAppInfosForCurrency
-        .send({ currencyId, devicePath: device.path })
+      getAppAndVersion
+        .send({ devicePath: device.path })
         .toPromise()
         .then(
           ({ version }) => {

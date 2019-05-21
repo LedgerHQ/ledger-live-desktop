@@ -58,7 +58,7 @@ export default class AccountRow extends PureComponent<Props> {
   }
 
   _input = null
-
+  overflowStyles = { textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }
   render() {
     const {
       account,
@@ -78,7 +78,7 @@ export default class AccountRow extends PureComponent<Props> {
         <Box shrink grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {onEditName ? (
             <Input
-              containerProps={{ style: { width: 200 } }}
+              style={this.overflowStyles}
               value={accountName}
               onChange={this.handleChangeName}
               onClick={this.onClickInput}
@@ -90,13 +90,14 @@ export default class AccountRow extends PureComponent<Props> {
               autoFocus={autoFocusInput}
             />
           ) : (
-            <div style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{accountName}</div>
+            <div style={this.overflowStyles}>{accountName}</div>
           )}
         </Box>
         {!hideAmount ? (
           <FormattedVal
             val={account.balance}
             unit={account.unit}
+            style={{ textAlign: 'right', width: 'auto' }}
             showCode
             fontSize={4}
             color="grey"

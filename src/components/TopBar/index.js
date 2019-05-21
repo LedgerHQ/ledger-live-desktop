@@ -2,16 +2,13 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { compose } from 'redux'
-import { translate, Trans } from 'react-i18next'
+import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
 import type { Location, RouterHistory } from 'react-router'
 
 import type { T } from 'types/common'
-import { darken } from 'styles/helpers'
-import useExperimental from 'hooks/useExperimental'
 
 import { lock } from 'reducers/application'
 import { hasPasswordSelector } from 'reducers/settings'
@@ -19,6 +16,7 @@ import { hasAccountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
 import IconLock from 'icons/Lock'
+import IconAngleLeft from 'icons/AngleLeft'
 import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
@@ -46,37 +44,17 @@ const Inner = styled(Box).attrs({
   align: 'center',
 })``
 
-const Tag = styled(Link)`
-  display: flex;
-  justify-content: center;
+const BreadCrumbBack = styled(Box)`
+  flex-direction: row;
   align-items: center;
   font-family: 'Open Sans';
-  font-weight: bold;
-  font-size: 10px;
-  height: 22px;
-  line-height: 22px;
-  padding: 0 10px;
-  border-radius: 16px;
-  color: ${p => p.theme.colors.white};
-  background-color: ${p => p.theme.colors.experimentalBlue};
-  text-decoration: none;
-
-  &:hover {
-    background-color: ${p => darken(p.theme.colors.experimentalBlue, 0.05)};
+  font-size: 13px;
+  font-weight: 600;
+  color: ${p => p.theme.colors.grey};
+  :hover {
+    color: ${p => p.theme.colors.dark};
   }
 `
-
-const TagContainer = () => {
-  const isExperimental = useExperimental()
-
-  return isExperimental ? (
-    <Box justifyContent="center">
-      <Tag to="/settings/experimental">
-        <Trans i18nKey="common.experimentalFeature" />
-      </Tag>
-    </Box>
-  ) : null
-}
 
 const Bar = styled.div`
   margin-left: 5px;
@@ -126,14 +104,30 @@ class TopBar extends PureComponent<Props> {
       history.push(url)
     }
   }
+
+  goBack = () => this.props.history.goBack()
+
   render() {
-    const { hasPassword, hasAccounts, t } = this.props
+    const {
+      location: { pathname },
+      hasPassword,
+      hasAccounts,
+      t,
+    } = this.props
+    const showBack = pathname.startsWith('/account/')
 
     return (
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal>
-            <TagContainer />
+            {showBack && (
+              <BreadCrumbBack onClick={this.goBack}>
+                <Box mr={1}>
+                  <IconAngleLeft size={16} />
+                </Box>
+                {t('common.back')}
+              </BreadCrumbBack>
+            )}
             <Box grow />
             <CurrenciesStatusBanner />
             {hasAccounts && (
@@ -163,10 +157,16 @@ class TopBar extends PureComponent<Props> {
             )}
           </Box>
         </Inner>
+        <SeparatorBar />
       </Container>
     )
   }
 }
+
+export const SeparatorBar = styled.div`
+  height: 1px;
+  border-bottom: 1px solid ${p => p.theme.colors.fog};
+`
 
 export default compose(
   // $FlowFixMe

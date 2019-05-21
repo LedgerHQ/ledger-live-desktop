@@ -14,6 +14,7 @@ import { runMigrations } from 'migrations'
 
 import createStore from 'renderer/createStore'
 import events from 'renderer/events'
+import { DEBUG_TICK_REDUX } from 'config/constants'
 
 import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/global-tab'
 
@@ -78,6 +79,10 @@ async function init() {
     await store.dispatch(fetchAccounts())
   }
 
+  if (DEBUG_TICK_REDUX) {
+    setInterval(() => store.dispatch({ type: 'DEBUG_TICK' }), DEBUG_TICK_REDUX)
+  }
+
   r(<App store={store} history={history} language={language} />)
 
   // Only init events on MainWindow
@@ -117,6 +122,22 @@ async function init() {
     },
     false,
   )
+
+  if (document.body) {
+    const classes = document.body.classList
+    let timer = 0
+    window.addEventListener('resize', () => {
+      if (timer) {
+        clearTimeout(timer)
+        timer = null
+      } else classes.add('stop-all-transition')
+
+      timer = setTimeout(() => {
+        classes.remove('stop-all-transition')
+        timer = null
+      }, 100)
+    })
+  }
 
   // expose stuff in Windows for DEBUG purpose
 

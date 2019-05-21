@@ -6,7 +6,7 @@ import {
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
 } from '@ledgerhq/live-common/lib/currencies'
-import languages from 'config/languages'
+import { getLanguages } from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency, Account } from '@ledgerhq/live-common/lib/types'
@@ -49,6 +49,8 @@ export type SettingsState = {
   sentryLogs: boolean,
   lastUsedVersion: string,
   dismissedBanners: string[],
+  accountsViewMode: 'card' | 'list',
+  showAccountsHelperBanner: boolean,
 }
 
 const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
@@ -78,6 +80,8 @@ const INITIAL_STATE: SettingsState = {
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
+  accountsViewMode: 'card',
+  showAccountsHelperBanner: true,
 }
 
 function asCryptoCurrency(c: Currency): ?CryptoCurrency {
@@ -136,10 +140,9 @@ const handlers: Object = {
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
   }),
-  CLEAN_ACCOUNTS_CACHE: (state: SettingsState) => ({
-    ...state,
-    dismissedBanners: [],
-  }),
+
+  // used to debug performance of redux updates
+  DEBUG_TICK: state => ({ ...state }),
 }
 
 // TODO refactor selectors to *Selector naming convention
@@ -176,6 +179,7 @@ export const lastUsedVersionSelector = (state: State): string => state.settings.
 export const langAndRegionSelector = (
   state: State,
 ): { language: string, region: ?string, useSystem: boolean } => {
+  const languages = getLanguages()
   let { language, region } = state.settings
   if (language && languages.includes(language)) {
     return { language, region, useSystem: false }
@@ -231,6 +235,7 @@ export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
   settings => settings.exchange,
 )
 
+export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs
 export const autoLockTimeoutSelector = (state: State) => state.settings.autoLockTimeout
@@ -240,6 +245,9 @@ export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding
 
 export const dismissedBannersSelector = (state: State) => state.settings.dismissedBanners || []
+
+export const dismissedBannerSelector = (state: State, { bannerKey }: { bannerKey: string }) =>
+  (state.settings.dismissedBanners || []).includes(bannerKey)
 
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,

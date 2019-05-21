@@ -19,7 +19,7 @@ const getColor = ({ status }: { status: UpdateStatus }) =>
 const getOpacity = ({ status }: { status: UpdateStatus }) =>
   status === 'download-progress' || status === 'checking' ? 0.5 : 1
 
-const Dot = styled.div`
+export const Dot = styled.div`
   opacity: ${getOpacity};
   width: 8px;
   height: 8px;

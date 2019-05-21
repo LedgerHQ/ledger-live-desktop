@@ -31,7 +31,11 @@ function main {
   while IFS= read -r line ; do
     curl -L -O "$line"
   done < "$TMP_FILE2"
-  sha512sum -- * > "$OLDPWD/$OUTPUT_FILE"
+  if [[ "$(uname)" == "Darwin" ]]; then
+    shasum -a 512 -- * > "$OLDPWD/$OUTPUT_FILE"
+  else
+    sha512sum -- * > "$OLDPWD/$OUTPUT_FILE"
+  fi
   popd >/dev/null
 }
 

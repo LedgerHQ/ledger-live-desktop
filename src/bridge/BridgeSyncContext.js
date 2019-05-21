@@ -5,7 +5,7 @@
 
 import logger from 'logger'
 import shuffle from 'lodash/shuffle'
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import priorityQueue from 'async/priorityQueue'
 import { connect } from 'react-redux'
 import type { Account } from '@ledgerhq/live-common/lib/types'
@@ -19,6 +19,7 @@ import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/curr
 import { SYNC_MAX_CONCURRENT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
 import { getBridgeForCurrency } from '.'
+import { track } from '../analytics/segment'
 
 type BridgeSyncProviderProps = {
   children: *,
@@ -50,6 +51,8 @@ export type Sync = (action: BehaviorAction) => void
 // $FlowFixMe
 const BridgeSyncContext = React.createContext((_: BehaviorAction) => {})
 
+export const useBridgeSync = () => useContext(BridgeSyncContext)
+
 const mapStateToProps = createStructuredSelector({
   currenciesStatus: currenciesStatusSelector,
   accounts: accountsSelector,
@@ -61,6 +64,8 @@ const actions = {
   updateAccountWithUpdater,
   setAccountSyncState,
 }
+
+const lastTimeAnalyticsTrackPerAccountId = {}
 
 class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
   constructor() {
@@ -87,16 +92,40 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
 
       this.props.setAccountSyncState(accountId, { pending: true, error: null })
 
+      const startSyncTime = Date.now()
+      const trackedRecently =
+        lastTimeAnalyticsTrackPerAccountId[accountId] &&
+        startSyncTime - lastTimeAnalyticsTrackPerAccountId[accountId] < 90 * 1000
+      if (!trackedRecently) {
+        lastTimeAnalyticsTrackPerAccountId[accountId] = startSyncTime
+      }
+      const trackEnd = event => {
+        if (trackedRecently) return
+        const account = this.props.accounts.find(a => a.id === accountId)
+        if (!account) return
+        track(event, {
+          duration: (Date.now() - startSyncTime) / 1000,
+          currencyName: account.currency.name,
+          derivationMode: account.derivationMode,
+          freshAddressPath: account.freshAddressPath,
+          operationsLength: account.operations.length,
+        })
+      }
+
       // TODO use Subscription to unsubscribe at relevant time
       bridge.synchronize(account).subscribe({
         next: accountUpdater => {
           this.props.updateAccountWithUpdater(accountId, accountUpdater)
         },
         complete: () => {
+          trackEnd('SyncSuccess')
           this.props.setAccountSyncState(accountId, { pending: false, error: null })
           next()
         },
         error: error => {
+          if (!error || error.name !== 'NetworkDown') {
+            trackEnd('SyncError')
+          }
           logger.critical(error)
           this.props.setAccountSyncState(accountId, { pending: false, error })
           next()

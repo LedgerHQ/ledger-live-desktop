@@ -37,13 +37,8 @@ class EmptyState extends PureComponent<Props, *> {
     const { t, openModal } = this.props
 
     return (
-      <Box mt={7} alignItems="center">
-        <img
-          alt="emptyState Dashboard logo"
-          src={i('empty-state-dashboard.svg')}
-          width="413"
-          height="157"
-        />
+      <Box alignItems="center" pb={8} style={{ margin: 'auto' }}>
+        <img alt="emptyState Dashboard logo" src={i('empty-state-accounts.svg')} width="500" />
         <Box mt={5} alignItems="center">
           <Title data-e2e="dashboard_empty_title">{t('emptyState.dashboard.title')}</Title>
           <Description mt={3} style={{ maxWidth: 600 }}>

@@ -18,6 +18,7 @@ type Props = {
 
   // when true and there is an error, display the error + retry button
   shouldRenderRetry?: boolean,
+  renderError: (*, *) => *,
 }
 
 type State = {
@@ -36,6 +37,12 @@ const INITIAL_STATE = {
 
 class DeviceInteraction extends PureComponent<Props, State> {
   state = INITIAL_STATE
+
+  static defaultProps = {
+    renderError: (error: *, retry: *) => (
+      <ErrorDescContainer error={error} onRetry={retry} mt={4} />
+    ),
+  }
 
   componentWillUnmount() {
     this._unmounted = true
@@ -81,7 +88,7 @@ class DeviceInteraction extends PureComponent<Props, State> {
   }
 
   render() {
-    const { steps, shouldRenderRetry, ...props } = this.props
+    const { steps, shouldRenderRetry, renderError, ...props } = this.props
     const { stepIndex, error, isSuccess, data } = this.state
 
     return (
@@ -106,8 +113,7 @@ class DeviceInteraction extends PureComponent<Props, State> {
             />
           )
         })}
-        {error &&
-          shouldRenderRetry && <ErrorDescContainer error={error} onRetry={this.reset} mt={4} />}
+        {error && shouldRenderRetry && renderError(error, this.reset)}
       </Box>
     )
   }

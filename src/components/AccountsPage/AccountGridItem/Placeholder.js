@@ -22,7 +22,7 @@ const Wrapper = styled(Box).attrs({
   height: 215px;
 `
 
-class AccountCardPlaceholder extends PureComponent<{
+class Placeholder extends PureComponent<{
   t: T,
   openModal: string => void,
 }> {
@@ -31,25 +31,27 @@ class AccountCardPlaceholder extends PureComponent<{
   render() {
     const { t } = this.props
     return (
-      <Wrapper data-e2e="dashboard_AccountPlaceOrder">
-        <Box mt={2}>
-          <img alt="" src={i('empty-account-tile.svg')} />
-        </Box>
-        <Box
-          ff="Open Sans"
-          fontSize={3}
-          color="grey"
-          pb={2}
-          mt={3}
-          textAlign="center"
-          style={{ maxWidth: 150 }}
-        >
-          {t('dashboard.emptyAccountTile.desc')}
-        </Box>
-        <Button primary onClick={this.onAddAccounts}>
-          {t('dashboard.emptyAccountTile.createAccount')}
-        </Button>
-      </Wrapper>
+      <Box mb={5}>
+        <Wrapper data-e2e="dashboard_AccountPlaceOrder">
+          <Box mt={2}>
+            <img alt="" src={i('empty-account-tile.svg')} />
+          </Box>
+          <Box
+            ff="Open Sans"
+            fontSize={3}
+            color="grey"
+            pb={2}
+            mt={3}
+            textAlign="center"
+            style={{ maxWidth: 150 }}
+          >
+            {t('dashboard.emptyAccountTile.desc')}
+          </Box>
+          <Button primary onClick={this.onAddAccounts}>
+            {t('dashboard.emptyAccountTile.createAccount')}
+          </Button>
+        </Wrapper>
+      </Box>
     )
   }
 }
@@ -60,5 +62,5 @@ export default translate()(
     {
       openModal,
     },
-  )(AccountCardPlaceholder),
+  )(Placeholder),
 )

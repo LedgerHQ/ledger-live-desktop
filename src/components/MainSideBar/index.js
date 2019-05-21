@@ -6,15 +6,12 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
-
 import type { Location } from 'react-router'
-import type { Account } from '@ledgerhq/live-common/lib/types'
-
 import type { T } from 'types/common'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
-import { MODAL_RECEIVE, MODAL_SEND, MODAL_ADD_ACCOUNTS } from 'config/constants'
-
-import { i } from 'helpers/staticPath'
+import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { developerModeSelector } from 'reducers/settings'
@@ -24,20 +21,23 @@ import Box from 'components/base/Box'
 import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
 import UpdateDot from 'components/Updater/UpdateDot'
-
 import IconManager from 'icons/Manager'
+import IconWallet from 'icons/Wallet'
 import IconPieChart from 'icons/PieChart'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
-
-import AccountListItem from './AccountListItem'
-import AddAccountButton from './AddAccountButton'
 import TopGradient from './TopGradient'
 import KeyboardContent from '../KeyboardContent'
+import useExperimental from '../../hooks/useExperimental'
+import { darken } from '../../styles/helpers'
+import {
+  UpdateNotice as NewAccountsUpdateNotice,
+  NotifDot as NewAccountsNotifDot,
+} from '../news/NewAccountsPage'
 
 const mapStateToProps = state => ({
-  accounts: accountsSelector(state),
+  noAccounts: accountsSelector(state).length === 0,
   developerMode: developerModeSelector(state),
 })
 
@@ -48,7 +48,7 @@ const mapDispatchToProps = {
 
 type Props = {
   t: T,
-  accounts: Account[],
+  noAccounts: boolean,
   location: Location,
   push: string => void,
   openModal: string => void,
@@ -72,6 +72,46 @@ const IconDev = () => (
   </div>
 )
 
+const TagContainer = () => {
+  const isExperimental = useExperimental()
+
+  return isExperimental ? (
+    <Box
+      justifyContent="center"
+      m={4}
+      style={{
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+      }}
+    >
+      <Tag to="/settings/experimental">
+        <Trans i18nKey="common.experimentalFeature" />
+      </Tag>
+    </Box>
+  ) : null
+}
+
+const Tag = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Open Sans';
+  font-weight: bold;
+  font-size: 10px;
+  height: 22px;
+  line-height: 22px;
+  padding: 0 8px;
+  border-radius: 4px;
+  color: ${p => p.theme.colors.smoke};
+  background-color: ${p => p.theme.colors.lightFog};
+  text-decoration: none;
+
+  &:hover {
+    background-color: ${p => darken(p.theme.colors.lightFog, 0.05)};
+  }
+`
+
 class MainSideBar extends PureComponent<Props> {
   push = (to: string) => {
     const { push } = this.props
@@ -94,24 +134,13 @@ class MainSideBar extends PureComponent<Props> {
     this.props.openModal(MODAL_RECEIVE)
   }
   handleClickManager = () => this.push('/manager')
+  handleClickAccounts = () => this.push('/accounts')
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
-  handleOpenImportModal = () => this.props.openModal(MODAL_ADD_ACCOUNTS)
 
   render() {
-    const { t, accounts, location, developerMode } = this.props
+    const { t, noAccounts, location, developerMode } = this.props
     const { pathname } = location
-
-    const addAccountButton = (
-      <AddAccountButton tooltipText={t('addAccounts.title')} onClick={this.handleOpenImportModal} />
-    )
-
-    const emptyState = (
-      <Box relative pr={3}>
-        <img style={{ position: 'absolute', top: -10, right: 5 }} alt="" src={i('arrow-add.svg')} />
-        <Trans i18nKey="emptyState.sidebar.text" />
-      </Box>
-    )
 
     return (
       <Box relative bg="white" style={{ width: 230 }}>
@@ -125,21 +154,30 @@ class MainSideBar extends PureComponent<Props> {
               iconActiveColor="wallet"
               onClick={this.handleClickDashboard}
               isActive={pathname === '/'}
-              NotifComponent={UpdateDot}
+              NotifComponent={noAccounts ? undefined : UpdateDot}
+              disabled={noAccounts}
+            />
+            <SideBarListItem
+              label={t('sidebar.accounts')}
+              icon={IconWallet}
+              iconActiveColor="wallet"
+              isActive={pathname === '/accounts'}
+              onClick={this.handleClickAccounts}
+              NotifComponent={(noAccounts && UpdateDot) || NewAccountsNotifDot}
             />
             <SideBarListItem
               label={t('send.title')}
               icon={IconSend}
               iconActiveColor="wallet"
               onClick={this.handleOpenSendModal}
-              disabled={accounts.length === 0}
+              disabled={noAccounts}
             />
             <SideBarListItem
               label={t('receive.title')}
               icon={IconReceive}
               iconActiveColor="wallet"
               onClick={this.handleOpenReceiveModal}
-              disabled={accounts.length === 0}
+              disabled={noAccounts}
             />
             <SideBarListItem
               label={t('sidebar.manager')}
@@ -166,23 +204,11 @@ class MainSideBar extends PureComponent<Props> {
                 />
               </KeyboardContent>
             )}
+            <Space of={30} />
+            <NewAccountsUpdateNotice />
           </SideBarList>
-          <Space of={40} />
-          <SideBarList
-            title={t('sidebar.accounts', { count: accounts.length })}
-            titleRight={addAccountButton}
-            emptyState={emptyState}
-          >
-            {accounts.map(account => (
-              <AccountListItem
-                key={account.id}
-                account={account}
-                push={this.push}
-                isActive={pathname === `/account/${account.id}`}
-              />
-            ))}
-          </SideBarList>
-          <Space of={30} />
+          <Space grow />
+          <TagContainer />
         </GrowScroll>
       </Box>
     )

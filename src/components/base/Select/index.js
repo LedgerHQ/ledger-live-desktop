@@ -106,6 +106,7 @@ class Select extends PureComponent<Props> {
         blurInputOnSelect={false}
         backspaceRemovesValue
         menuShouldBlockScroll
+        menuPortalTarget={document.body}
         {...props}
         onChange={this.handleChange}
       />

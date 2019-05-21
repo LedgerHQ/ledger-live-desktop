@@ -16,6 +16,7 @@ import Default from 'components/layout/Default'
 import CounterValues from 'helpers/countervalues'
 import { BridgeSyncProvider } from 'bridge/BridgeSyncContext'
 import { UpdaterProvider } from 'components/Updater/UpdaterContext'
+import ContextMenuWrapper from './ContextMenu/ContextMenuWrapper'
 
 const App = ({
   store,
@@ -35,7 +36,9 @@ const App = ({
               <UpdaterProvider>
                 <ConnectedRouter history={history}>
                   <Switch>
-                    <Route component={Default} />
+                    <ContextMenuWrapper>
+                      <Route component={Default} />
+                    </ContextMenuWrapper>
                   </Switch>
                 </ConnectedRouter>
               </UpdaterProvider>

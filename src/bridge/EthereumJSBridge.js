@@ -4,7 +4,7 @@ import { BigNumber } from 'bignumber.js'
 import logger from 'logger'
 import React from 'react'
 import FeesField from 'components/FeesField/EthereumKind'
-import AdvancedOptions from 'components/AdvancedOptions/EthereumKind'
+import EditAdvancedOptions from 'components/AdvancedOptions/EthereumKind'
 import throttle from 'lodash/throttle'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
@@ -53,15 +53,6 @@ const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
   />
 )
 
-const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
-  <AdvancedOptions
-    gasLimit={value.gasLimit}
-    onChangeGasLimit={gasLimit => {
-      onChange({ ...value, gasLimit })
-    }}
-  />
-)
-
 // in case of a SELF send, 2 ops are returned.
 const txToOps = (account: Account) => (tx: Tx): Operation[] => {
   const freshAddress = account.freshAddress.toLowerCase()
@@ -78,7 +69,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
-      value: value.plus(fee),
+      value: tx.status === 0 ? fee : value.plus(fee),
       fee,
       blockHeight: tx.block && tx.block.height,
       blockHash: tx.block && tx.block.hash,
@@ -87,6 +78,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       recipients: [tx.to],
       date: new Date(tx.received_at),
       extra: {},
+      hasFailed: tx.status === 0,
     }
     ops.push(op)
   }

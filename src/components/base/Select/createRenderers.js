@@ -29,7 +29,7 @@ export default ({
           <Box grow>{renderOption ? renderOption(props) : data.label}</Box>
           {isSelected && (
             <CheckContainer color="wallet">
-              <IconCheck size={12} color="red" />
+              <IconCheck size={12} color={props.theme.colors.wallet} />
             </CheckContainer>
           )}
         </Box>

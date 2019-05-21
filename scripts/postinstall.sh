@@ -28,39 +28,10 @@ function main {
   # flow-typed
 
   formatProgress "Checking if flow-typed definitions are up-to-date..."
-  latestFlowTypedCommitHash=$(curl --silent --header "Accept: application/vnd.github.VERSION.sha" --location https://api.github.com/repos/flowtype/flow-typed/commits/master)
   clearLine
-
-  if [[ $latestFlowTypedCommitHash =~ ^\{ ]]; then
-    formatError "Failed to retrieve flow-typed definitions"
-    echo "$latestFlowTypedCommitHash"
-    exit 1
-  else
-    if hashDiffers flow-typed "$latestFlowTypedCommitHash"; then
-      installFlowTyped
-    else
-      formatSkip "flow-typed installation" "already up-to-date"
-    fi
-  fi
 
   echo
 
-}
-
-function installFlowTyped {
-  runJob \
-    "flow-typed install -s --overwrite" \
-    "Installing flow-typed definitions..." \
-    "Installed flow-typed definitions" \
-    "Failed installing flow-typed definitions"
-
-  runJob \
-    "rm -f flow-typed/npm/{reselect_*,redux-actions_*,react-redux_*,react-i18next_v7.x.x.js,styled-components_v3.x.x.js,winston*}" \
-    "Removing broken flow-typed definitions" \
-    "Removed broken flow-typed definitions" \
-    "Failed removing broken flow-typed definitions"
-
-  setHash flow-typed "$latestFlowTypedCommitHash"
 }
 
 function rebuildElectronNativeDeps {

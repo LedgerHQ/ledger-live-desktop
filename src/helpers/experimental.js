@@ -21,6 +21,18 @@ export type Feature = FeatureCommon & FeatureToggle
 export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
+    name: 'EXPERIMENTAL_LANGUAGES',
+    title: 'Translation testing',
+    description: 'Adds unreleased languages to the language list in the general settings tab.',
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_EXPLORERS',
+    title: 'Experimental nodes',
+    description: "Connect to Ledger's new blockchain nodes.",
+  },
+  {
+    type: 'toggle',
     name: 'MANAGER_DEV_MODE',
     title: 'Developer mode',
     description: 'Show developer and testnet apps in the Manager.',
@@ -28,23 +40,16 @@ export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
     name: 'SCAN_FOR_INVALID_PATHS',
-    title: 'Scan for invalid paths',
+    title: 'Extended account search',
     description:
-      'will ask Ledger Live to search for potential accounts that was created by mistake / in incorrect derivation paths. It is recommended to move funds if you discover such accounts.',
+      'Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.',
   },
   {
     type: 'toggle',
     name: 'EXPERIMENTAL_USB',
     title: 'Experimental USB',
     description:
-      'Alternative USB implementation that might help solving USB issues. Enabling this feature may lead to interface glitches.',
-  },
-  {
-    shadow: true,
-    type: 'toggle',
-    name: 'EXPERIMENTAL_EXPLORERS',
-    title: 'Experimental explorers',
-    description: "Switch to Ledger's new explorers.",
+      'Alternative USB implementation that might help solve USB issues. Enabling this feature might create UI glitches.',
   },
   {
     shadow: true,

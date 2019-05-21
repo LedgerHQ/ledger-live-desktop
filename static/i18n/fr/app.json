@@ -31,6 +31,7 @@
     "back": "Retour",
     "reset": "Réinitialiser",
     "retry": "Réessayer",
+    "range": "Range",
     "stop": "Arrêter",
     "close": "Fermer",
     "eastern": "Est",
@@ -41,7 +42,7 @@
     "copyAddress": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
-    "experimentalFeature": "Experimental feature",
+    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -81,10 +82,14 @@
   },
   "sidebar": {
     "menu": "Menu",
-    "accounts": "Comptes ({{count}})",
+    "accounts": "Accounts",
     "manager": "Manager",
     "exchange": "Acheter des cryptos",
-    "developer": "Outils de développement"
+    "developer": "Outils de développement",
+    "newUpdate": {
+      "title": "New Update",
+      "description": "Your accounts have been moved to a new dedicated page!"
+    }
   },
   "account": {
     "lastOperations": "Dernières opérations",
@@ -112,6 +117,24 @@
       }
     }
   },
+  "accounts": {
+    "title": "Accounts",
+    "noResultFound": "No accounts found.",
+    "order": {
+      "name": "Account Name",
+      "balance": "Account Balance"
+    },
+    "range": {
+      "week": "week",
+      "month": "month",
+      "year": "year"
+    },
+    "contextMenu": {
+      "receive": "Receive",
+      "send": "Send",
+      "edit": "Edit Account"
+    }
+  },
   "banners": {
     "promoteMobile": "Profitez de l’expérience Ledger Live, maintenant disponible sur mobile avec {{productName}}",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge"
@@ -133,11 +156,7 @@
     "summary": "Voici le résumé de votre compte",
     "summary_plural": "Voici le résumé de vos {{count}} comptes",
     "recentActivity": "Dernières opérations",
-    "totalBalance": "Solde total",
-    "accountsOrder": {
-      "name": "nom",
-      "balance": "solde"
-    }
+    "totalBalance": "Solde total"
   },
   "currentAddress": {
     "title": "Adresse actuelle",
@@ -189,7 +208,8 @@
   "genuinecheck": {
     "modal": {
       "title": "Vérification d'authenticité"
-    }
+    },
+    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
   "addAccounts": {
     "title": "Ajouter des comptes",
@@ -233,6 +253,7 @@
     "date": "Date",
     "status": "Statut",
     "confirmed": "Confirmée",
+    "failed": "Failed",
     "notConfirmed": "Non confirmée",
     "fees": "Frais",
     "noFees": "Aucun frais",
@@ -274,7 +295,7 @@
         "flash-mcu": "Mise à jour du MCU...",
         "flash-bootloader": "Mise à jour du bootloader...",
         "firmware": "Mise à jour du firmware...",
-        "flash": "Mise à jour du firmware de votre appareil..."
+        "flash": "Preparing your device..."
       },
       "confirmIdentifier": "Vérifier l’identifiant",
       "confirmIdentifierText": "Vérifiez que l’identifiant de votre appareil est le même que l’identifiant ci-dessous. Appuyez sur le bouton droit et saisissez votre code PIN pour confirmer.",
@@ -588,7 +609,9 @@
       }
     },
     "selectDevice": {
-      "title": "Sélectionner votre appareil"
+      "title": "Sélectionner votre appareil",
+      "usbOnly": "usb only",
+      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
     },
     "selectPIN": {
       "disclaimer": {
@@ -762,6 +785,9 @@
       "desc": "Installez des applications sur votre appareil et accédez au Portfolio",
       "openAppButton": "Ouvrez Ledger Live."
     }
+  },
+  "connectTroubleshooting": {
+    "desc": "Having a hard time connecting your device?"
   },
   "errors": {
     "generic": {
@@ -954,7 +980,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Mise à jour de l’application requise",
-      "description": "Ouvrez le Manager pour mettre à jour l’application"
+      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
       "title": "Il ne s’agit pas d’une adresse {{currencyName}} valide."

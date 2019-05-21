@@ -3,9 +3,10 @@ import logger from 'logger'
 import { throwError } from 'rxjs'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
-import { setEnvUnsafe } from '@ledgerhq/live-common/lib/env'
+import { setEnvUnsafe, getEnv } from '@ledgerhq/live-common/lib/env'
 import throttle from 'lodash/throttle'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
+import TransportHttp from '@ledgerhq/hw-transport-http'
 import { DisconnectedDevice } from '@ledgerhq/errors'
 import { retry } from './promise'
 import './implement-libcore'
@@ -45,12 +46,22 @@ setErrorRemapping(e => {
   return throwError(e)
 })
 
-registerTransportModule({
-  id: 'hid',
-  open: async devicePath => {
-    const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 })
-    t.setDebugMode(logger.apdu)
-    return t
-  },
-  disconnect: () => Promise.resolve(),
-})
+if (getEnv('DEVICE_PROXY_URL')) {
+  const Tr = TransportHttp(getEnv('DEVICE_PROXY_URL').split('|'))
+
+  registerTransportModule({
+    id: 'proxy',
+    open: () => retry(() => Tr.create(3000, 5000)),
+    disconnect: () => Promise.resolve(),
+  })
+} else {
+  registerTransportModule({
+    id: 'hid',
+    open: async devicePath => {
+      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 })
+      t.setDebugMode(logger.apdu)
+      return t
+    },
+    disconnect: () => Promise.resolve(),
+  })
+}
