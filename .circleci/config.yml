@@ -28,4 +28,4 @@ jobs:
           paths:
             - node_modules
       - run: yarn ci
-      - run: yarn start
+      - run: bash scripts/startApp.sh
