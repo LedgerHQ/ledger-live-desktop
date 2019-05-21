@@ -28,3 +28,4 @@ jobs:
           paths:
             - node_modules
       - run: yarn ci
+      - run: yarn start
