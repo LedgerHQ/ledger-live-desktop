@@ -1706,15 +1706,15 @@
     "@ledgerhq/hw-transport" "^4.58.0"
     bip32-path "0.4.2"
 
-"@ledgerhq/hw-transport-http@^4.58.0":
-  version "4.58.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-4.58.0.tgz#014dd7027545d7a829d1f996476a01816100efbb"
-  integrity sha512-zDJ2KAZaJS9E2jl/ZBsxtPDaiI/MuxM7mN+xKPpUyyx7GXPRAHdYUOLLbirEMvWoGb6OLss4KCzbF7H0hiWZew==
+"@ledgerhq/hw-transport-http@^4.59.0":
+  version "4.59.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-4.59.0.tgz#c958d01b4ec6ce77048e09e18f5519daa8fb6b1a"
+  integrity sha512-SJBnJ1pp/KpQow0MwkyGlfS5aAwEyB5/4cKZKNcsFbROwizU8lq3xEZUKUZY1hbFBKCR0qOSLWJeTrz1oB/heA==
   dependencies:
     "@ledgerhq/errors" "^4.58.0"
     "@ledgerhq/hw-transport" "^4.58.0"
     axios "^0.18.0"
-    ws "^7.0.0"
+    ws "6"
 
 "@ledgerhq/hw-transport-mocker@^4.58.0":
   version "4.58.0"
@@ -2891,7 +2891,7 @@ async-exit-hook@^2.0.1:
   resolved "https://registry.yarnpkg.com/async-exit-hook/-/async-exit-hook-2.0.1.tgz#8bd8b024b0ec9b1c01cccb9af9db29bd717dfaf3"
   integrity sha512-NW2cX8m1Q7KPA7a5M2ULQeZ2wR5qI5PAbw5L0UOMxdioVk9PMZ0h1TmyZEkPYrCvYjDlFICusOu1dlEKAAeXBw==
 
-async-limiter@^1.0.0, async-limiter@~1.0.0:
+async-limiter@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
   integrity sha512-jp/uFnooOiO+L211eZOoSyzpOITMXx1rBITauYykG3BRYPu8h0UcxsPNB04RR5vo4Tyz3+ay17tR6JVf9qzYWg==
@@ -17162,6 +17162,13 @@ write@^0.2.1:
   dependencies:
     mkdirp "^0.5.1"
 
+ws@6, ws@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"
+  integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
+  dependencies:
+    async-limiter "~1.0.0"
+
 ws@^3.3.1:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/ws/-/ws-3.3.3.tgz#f1cf84fe2d5e901ebce94efaece785f187a228f2"
@@ -17178,20 +17185,6 @@ ws@^4.0.0:
   dependencies:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
-
-ws@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"
-  integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
-  dependencies:
-    async-limiter "~1.0.0"
-
-ws@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.0.0.tgz#79351cbc3f784b3c20d0821baf4b4ff809ffbf51"
-  integrity sha512-cknCal4k0EAOrh1SHHPPWWh4qm93g1IuGGGwBjWkXmCG7LsDtL8w9w+YVfaF+KSVwiHQKDIMsSLBVftKf9d1pg==
-  dependencies:
-    async-limiter "^1.0.0"
 
 x-address-codec@^0.7.0:
   version "0.7.2"
