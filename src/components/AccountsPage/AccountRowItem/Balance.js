@@ -13,7 +13,7 @@ class Balance extends PureComponent<{
   render() {
     const { unit, balance } = this.props
     return (
-      <Box flex="30%" justifyContent="center">
+      <Box flex="30%" justifyContent="center" fontSize={4}>
         <FormattedVal
           alwaysShowSign={false}
           animateTicker={false}

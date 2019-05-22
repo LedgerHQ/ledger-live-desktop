@@ -19,6 +19,7 @@ class Countervalue extends PureComponent<{
   render() {
     const { histo, account } = this.props
     const balanceEnd = histo.history[histo.history.length - 1].value
+    const placeholder = <PlaceholderLine width={16} height={2} />
     return (
       <Box flex="20%">
         {histo.countervalueAvailable ? (
@@ -30,9 +31,10 @@ class Countervalue extends PureComponent<{
             showCode
             fontSize={3}
             color="graphite"
+            placeholder={placeholder}
           />
         ) : (
-          <PlaceholderLine width={16} height={2} />
+          placeholder
         )}
       </Box>
     )
