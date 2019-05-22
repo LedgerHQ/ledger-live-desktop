@@ -78,7 +78,7 @@ class Header extends PureComponent<Props, { focused: boolean }> {
         <Box ml={4} mr={4}>
           <AccountsOrder />
         </Box>
-        <ToggleButton onClick={() => onModeChange('list')} active={mode === 'list'}>
+        <ToggleButton mr={1} onClick={() => onModeChange('list')} active={mode === 'list'}>
           <ListIcon />
         </ToggleButton>
         <ToggleButton onClick={() => onModeChange('card')} active={mode === 'card'}>
