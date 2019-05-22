@@ -29,6 +29,8 @@ type OwnProps = {
   alwaysShowSign?: boolean,
 
   subMagnitude?: number,
+
+  placeholder?: React$Node,
 }
 
 type Props = OwnProps & {
@@ -64,9 +66,9 @@ class CounterValue extends PureComponent<Props> {
     alwaysShowSign: true, // FIXME this shouldn't be true by default
   }
   render() {
-    const { value, counterValueCurrency, date, alwaysShowSign, ...props } = this.props
+    const { value, counterValueCurrency, date, alwaysShowSign, placeholder, ...props } = this.props
     if (!value) {
-      return null
+      return placeholder || null
     }
     return (
       <FormattedVal
