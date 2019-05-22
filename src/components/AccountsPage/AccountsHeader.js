@@ -32,13 +32,10 @@ class AccountsHeader extends PureComponent<Props> {
           {t('accounts.title')}
         </Box>
         <Box>
-          <Button primary onClick={this.handleAddAccountModal}>
-            <Box horizontal pb={6}>
-              <IconPlus size={16} mr={20} />
-
-              <Box ml={2} ff="Open Sans|Regular" fontSize={4}>
-                {t('addAccounts.cta.add')}
-              </Box>
+          <Button small primary onClick={this.handleAddAccountModal}>
+            <Box horizontal flow={1} alignItems="center">
+              <IconPlus size={12} />
+              <Box>{t('addAccounts.cta.add')}</Box>
             </Box>
           </Button>
         </Box>
