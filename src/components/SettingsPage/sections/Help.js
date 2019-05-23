@@ -9,12 +9,14 @@ import { urls } from 'config/urls'
 
 import ExportLogsBtn from 'components/ExportLogsBtn'
 import OpenUserDataDirectoryBtn from 'components/OpenUserDataDirectoryBtn'
+import ExportUserDataBtn from 'components/ExportUserDataBtn'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import CleanButton from '../CleanButton'
 import ResetButton from '../ResetButton'
 import RepairDeviceButton from '../RepairDeviceButton'
 import AboutRowItem from '../AboutRowItem'
-import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
 
+import LaunchOnboardingBtn from '../LaunchOnboardingBtn'
 import {
   SettingsSection as Section,
   SettingsSectionHeader as Header,
@@ -25,6 +27,7 @@ import {
 type Props = {
   t: T,
 }
+const EXPERIMENTAL_LOCAL_STORAGE = getEnv('EXPERIMENTAL_LOCAL_STORAGE')
 
 class SectionHelp extends PureComponent<Props> {
   render() {
@@ -61,12 +64,21 @@ class SectionHelp extends PureComponent<Props> {
           >
             <LaunchOnboardingBtn />
           </Row>
-          <Row
-            title={t('settings.openUserDataDirectory.title')}
-            desc={t('settings.openUserDataDirectory.desc')}
-          >
-            <OpenUserDataDirectoryBtn />
-          </Row>
+          {EXPERIMENTAL_LOCAL_STORAGE ? (
+            <Row
+              title={t('settings.exportUserData.title')}
+              desc={t('settings.exportUserData.desc')}
+            >
+              <ExportUserDataBtn />
+            </Row>
+          ) : (
+            <Row
+              title={t('settings.openUserDataDirectory.title')}
+              desc={t('settings.openUserDataDirectory.desc')}
+            >
+              <OpenUserDataDirectoryBtn />
+            </Row>
+          )}
           <Row
             title={t('settings.profile.hardResetTitle')}
             desc={t('settings.profile.hardResetDesc')}

@@ -12,6 +12,7 @@ import { fsReadFile, fsUnlink } from 'helpers/fs'
 import { promisify, debounce } from 'helpers/promise'
 
 import { NoDBPathGiven, DBWrongPassword } from '@ledgerhq/errors'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 
 type Transform = {
   get: any => any,
@@ -28,7 +29,8 @@ let encryptionKeys = {}
 let transforms = {}
 
 const DEBOUNCE_MS = process.env.NODE_ENV === 'test' ? 1 : 500
-const save = debounce(saveToDisk, DEBOUNCE_MS)
+const save = debounce(persistData, DEBOUNCE_MS)
+const EXPERIMENTAL_LOCAL_STORAGE = getEnv('EXPERIMENTAL_LOCAL_STORAGE')
 
 /**
  * Reset memory state, db path, encryption keys, transforms..
@@ -49,26 +51,33 @@ function registerTransform(ns: string, keyPath: string, transform: Transform) {
   transforms[ns][keyPath] = transform
 }
 
+async function getRawData(ns: string): Promise<string> {
+  if (EXPERIMENTAL_LOCAL_STORAGE) {
+    if (!window || !window.localStorage) return '{}'
+    return window.localStorage.getItem(ns) || '{}'
+  }
+
+  if (!DBPath) throw new NoDBPathGiven()
+  const filePath = path.resolve(DBPath, `${ns}.json`)
+  return fsReadFile(filePath)
+}
 /**
  * Load a namespace, using <file>.json
  */
 async function load(ns: string): Promise<mixed> {
   try {
-    if (!DBPath) throw new NoDBPathGiven()
-    const filePath = path.resolve(DBPath, `${ns}.json`)
-    const fileContent = await fsReadFile(filePath)
-    const { data } = JSON.parse(fileContent)
+    const { data } = JSON.parse(await getRawData(ns))
     memoryNamespaces[ns] = data
-
     // transform fields
     for (const keyPath in transforms[ns]) {
       if (transforms[ns].hasOwnProperty(keyPath)) {
+        memoryNamespaces[ns] = memoryNamespaces[ns] || {}
         const transform = transforms[ns][keyPath]
         const val = get(memoryNamespaces[ns], keyPath)
 
         // if value is string, it's encrypted, so we don't want to transform
         if (typeof val === 'string') continue // eslint-disable-line no-continue
-
+        memoryNamespaces[ns][keyPath] = memoryNamespaces[ns][keyPath] || {}
         set(memoryNamespaces[ns], keyPath, transform.get(val))
       }
     }
@@ -191,8 +200,8 @@ async function hasBeenDecrypted(ns: string, keyPath: string): Promise<boolean> {
 /**
  * Save given namespace to corresponding file, in atomic way
  */
-async function saveToDisk(ns: string) {
-  if (!DBPath) throw new NoDBPathGiven()
+async function persistData(ns: string) {
+  if (!DBPath && !EXPERIMENTAL_LOCAL_STORAGE) throw new NoDBPathGiven()
   await ensureNSLoaded(ns)
 
   // cloning because we are mutating the obj
@@ -226,9 +235,14 @@ async function saveToDisk(ns: string) {
       }
     }
   }
-
-  const fileContent = JSON.stringify({ data: clone })
-  await writeFileAtomic(path.resolve(DBPath, `${ns}.json`), fileContent)
+  if (EXPERIMENTAL_LOCAL_STORAGE) {
+    window &&
+      window.localStorage &&
+      window.localStorage.setItem(ns, JSON.stringify({ data: clone }))
+  } else if (DBPath) {
+    const fileContent = JSON.stringify({ data: clone })
+    await writeFileAtomic(path.resolve(DBPath, `${ns}.json`), fileContent)
+  }
 }
 
 async function cleanCache() {
@@ -239,9 +253,13 @@ async function cleanCache() {
 
 async function resetAll() {
   logger.onDB('reset all')
-  if (!DBPath) throw new NoDBPathGiven()
-  memoryNamespaces.app = null
-  await fsUnlink(path.resolve(DBPath, 'app.json'))
+  if (EXPERIMENTAL_LOCAL_STORAGE) {
+    window && window.localStorage && window.localStorage.clear()
+  } else {
+    if (!DBPath) throw new NoDBPathGiven()
+    memoryNamespaces.app = null
+    await fsUnlink(path.resolve(DBPath, 'app.json'))
+  }
 }
 
 function isEncryptionKeyCorrect(ns: string, keyPath: string, encryptionKey: string) {

@@ -92,15 +92,8 @@ const defaultWindowOptions = {
 }
 
 async function createMainWindow() {
-  const savedDimensions = await db.getKey('windowParams', 'MainWindow.dimensions', {})
-  const savedPositions = await db.getKey('windowParams', 'MainWindow.positions', null)
-
-  const width = savedDimensions.width || DEFAULT_WINDOW_WIDTH
-  const height = savedDimensions.height || DEFAULT_WINDOW_HEIGHT
-
   const windowOptions = {
     ...defaultWindowOptions,
-    ...(savedPositions !== null ? savedPositions : getWindowPosition(height, width)),
     ...(process.platform === 'darwin'
       ? {
           frame: false,
@@ -108,14 +101,19 @@ async function createMainWindow() {
         }
       : {}),
     autoHideMenuBar: true,
-    height,
     minHeight: MIN_HEIGHT,
     minWidth: MIN_WIDTH,
     show: false,
-    width,
   }
 
   const window = new BrowserWindow(windowOptions)
+  const savedDimensions = await db.getKey('windowParams', 'MainWindow.dimensions', {})
+  const savedPositions = await db.getKey('windowParams', 'MainWindow.positions', null)
+  const width = savedDimensions.width || DEFAULT_WINDOW_WIDTH
+  const height = savedDimensions.height || DEFAULT_WINDOW_HEIGHT
+  window.setSize(width, height)
+  const { x, y } = savedPositions !== null ? savedPositions : getWindowPosition(height, width)
+  window.setPosition(x, y)
 
   window.name = 'MainWindow'
   const url = getDefaultUrl()

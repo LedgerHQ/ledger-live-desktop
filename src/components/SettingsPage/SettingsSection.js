@@ -104,7 +104,7 @@ export function SettingsSectionRow({
         <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {title}
         </Box>
-        <Box ff="Open Sans" fontSize={3} color="grey" mt={1} mr={1} style={{ maxWidth: 520 }}>
+        <Box ff="Open Sans" fontSize={3} color="grey" mt={1} mr={1}>
           {desc}
         </Box>
       </Box>

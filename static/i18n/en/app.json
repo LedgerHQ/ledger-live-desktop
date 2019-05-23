@@ -542,6 +542,12 @@
         "View the user data that is stored on your computer, including your accounts, caches and settings.",
       "btn": "View"
     },
+    "exportUserData": {
+      "title": "Export user data",
+      "desc":
+      "Export a copy of the data that is stored on your computer, including your accounts, caches and settings.",
+      "btn": "Export"
+    },
     "repairDevice": {
       "title": "Repair your Ledger device",
       "descSettings":

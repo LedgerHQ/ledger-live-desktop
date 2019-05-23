@@ -52,6 +52,13 @@ export const experimentalFeatures: Feature[] = [
       'Alternative USB implementation that might help solve USB issues. Enabling this feature might create UI glitches.',
   },
   {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_LOCAL_STORAGE',
+    title: 'Experimental Persistent Storage',
+    description:
+      'Alternative method of storing data in the application. Might solve the persistence issues for some users with the file based approach. Note that resetting data in this mode will revert you back to the file based storage.',
+  },
+  {
     shadow: true,
     type: 'toggle',
     name: 'FORCE_PROVIDER',
