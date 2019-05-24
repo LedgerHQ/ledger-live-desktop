@@ -10,10 +10,20 @@ type TypeProps = {
   type: 'nanoS' | 'nanoX' | 'blue',
 }
 
+export type ScreenTypes =
+  | 'validation'
+  | 'home'
+  | 'pin'
+  | 'empty'
+  | 'bootloaderMode'
+  | 'bootloader'
+  | 'recovery'
+  | 'update'
+
 export type Props = {
   wire?: 'wired' | 'disconnecting' | 'connecting',
   action?: 'left' | 'accept',
-  screen?: 'validation' | 'home' | 'pin' | 'empty' | 'update' | 'recoveryMode' | 'recovery',
+  screen?: ScreenTypes,
   width?: number,
   error?: ?Error,
 }

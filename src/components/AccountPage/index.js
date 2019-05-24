@@ -28,7 +28,6 @@ import BalanceSummary from './BalanceSummary'
 import AccountHeader from './AccountHeader'
 import AccountHeaderActions from './AccountHeaderActions'
 import EmptyStateAccount from './EmptyStateAccount'
-import Blue from '../../icons/device/interactions/Blue'
 
 const mapStateToProps = (state, props) => ({
   account: accountSelector(state, { accountId: props.match.params.id }),
@@ -99,7 +98,6 @@ class AccountPage extends PureComponent<Props> {
         ) : (
           <EmptyStateAccount account={account} />
         )}
-        <Blue screen="update" wire="wired" />
       </Box>
     )
   }

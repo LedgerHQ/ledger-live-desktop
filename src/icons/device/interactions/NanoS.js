@@ -374,7 +374,7 @@ const NanoS = ({ error, wire, action, screen, width = 272 }: Props) => {
     <svg
       style={{ overflow: 'visible' }}
       width={width}
-      height={(width * 80) / 374}
+      height={(width * 80) / 394}
       viewBox="0 0 394 80"
     >
       <g fill="none" fillRule="evenodd" transform="translate(100 38)">

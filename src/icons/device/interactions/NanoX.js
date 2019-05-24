@@ -144,6 +144,96 @@ const Usb = () => (
   </>
 )
 
+const UsbConnecting = () => (
+  <>
+    <defs>
+      <linearGradient id="nanox-connecting" x1="50%" x2="50%" y1="98.633%" y2="0%">
+        <stop offset="0%" stopColor="#FFF" stopOpacity="0" />
+        <stop offset="100%" stopColor="#142533" />
+      </linearGradient>
+    </defs>
+    <g transform="translate(-28 45)">
+      <g fillRule="nonzero">
+        <path
+          fill="url(#nanox-connecting)"
+          d="M8.308 48h1.64v83.077h-1.64V48zm5.743 0h1.641v83.077h-1.64V48z"
+          transform="scale(1 -1) rotate(90 81.538 48)"
+        />
+        <path
+          fill="#142533"
+          d="M92.615 25.23H81.538v-7.384h11.077v7.385zm1.847 1.847V16H80.8c-.612 0-1.108.496-1.108 1.108v8.861c0 .612.496 1.108 1.108 1.108h13.662z"
+        />
+        <path
+          fill="#142533"
+          d="M127.692 31.323a.37.37 0 0 1-.369.37H99.262a4.8 4.8 0 0 1-4.8-4.8V16.184a4.8 4.8 0 0 1 4.8-4.8h28.061a.37.37 0 0 1 .37.369v19.57zm1.846 0v-19.57a2.215 2.215 0 0 0-2.215-2.215H99.262a6.646 6.646 0 0 0-6.647 6.647v10.707a6.646 6.646 0 0 0 6.647 6.646h28.061a2.215 2.215 0 0 0 2.215-2.215z"
+        />
+      </g>
+      <g transform="matrix(-1 0 0 1 42 10)">
+        <ellipse
+          cx="10.299"
+          cy="10.45"
+          fill="#6490F1"
+          stroke="#6490F1"
+          strokeOpacity=".4"
+          strokeWidth="3.208"
+          rx="11.903"
+          ry="12.013"
+        />
+        <g stroke="#FFF" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+          <path d="M14.345 10.58H6.253M9.471 13.832L6.253 10.58M9.471 7.327L6.253 10.58" />
+        </g>
+      </g>
+    </g>
+  </>
+)
+
+const UsbDisconnecting = () => (
+  <>
+    <defs>
+      <linearGradient id="nanox-disconnecting" x1="50%" x2="50%" y1="98.633%" y2="0%">
+        <stop offset="0%" stopColor="#FFF" stopOpacity="0" />
+        <stop offset="100%" stopColor="#142533" />
+      </linearGradient>
+    </defs>
+    <g transform="translate(-48 45)">
+      <g fillRule="nonzero">
+        <path
+          fill="url(#nanox-disconnecting)"
+          d="M8.308 48h1.64v83.077h-1.64V48zm5.743 0h1.641v83.077h-1.64V48z"
+          transform="matrix(0 -1 -1 0 130.077 32)"
+        />
+        <path
+          fill="#142533"
+          d="M93.154 23.692H82.077v-7.384h11.077v7.384zM95 25.538V14.462H81.338c-.611 0-1.107.495-1.107 1.107v8.862c0 .612.496 1.107 1.107 1.107H95z"
+        />
+        <path
+          fill="#142533"
+          d="M128.23 29.785a.37.37 0 0 1-.368.369H99.8a4.8 4.8 0 0 1-4.8-4.8V14.646a4.8 4.8 0 0 1 4.8-4.8h28.062a.37.37 0 0 1 .369.37v19.569zm1.847 0v-19.57A2.215 2.215 0 0 0 127.862 8H99.8a6.646 6.646 0 0 0-6.646 6.646v10.708A6.646 6.646 0 0 0 99.8 32h28.062a2.215 2.215 0 0 0 2.215-2.215z"
+        />
+      </g>
+      <g strokeWidth="1.5">
+        <path stroke="#000" d="M129.154 13.538h10a2 2 0 0 1 2 2v8.924a2 2 0 0 1-2 2h-10V13.538z" />
+        <path stroke="#142533" strokeLinecap="round" d="M132.385 17.949h5.67M132.385 22.564h5.67" />
+      </g>
+      <g transform="translate(44 10)">
+        <ellipse
+          cx="10.299"
+          cy="10.45"
+          fill="#6490F1"
+          stroke="#6490F1"
+          strokeOpacity=".4"
+          strokeWidth="3.208"
+          rx="11.903"
+          ry="12.013"
+        />
+        <g stroke="#FFF" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8">
+          <path d="M14.345 10.58H6.253M9.471 13.832L6.253 10.58M9.471 7.327L6.253 10.58" />
+        </g>
+      </g>
+    </g>
+  </>
+)
+
 const EmptyScreen = ({ color, children = null }: ColorProps & ChildrenProps) => (
   <g transform="translate(142 51)">
     <rect
@@ -313,7 +403,12 @@ const NanoX = ({ action, screen, error, width = 272, wire }: Props) => {
   const isRefusal = !!(error && error.name.startsWith('UserRefused'))
 
   return (
-    <svg width={width} height={(width * 87) / 386} viewBox="0 0 386 87">
+    <svg
+      width={width}
+      height={(width * 87) / 386}
+      viewBox="0 0 386 87"
+      style={{ overflow: 'visible' }}
+    >
       <g fill="none" fillRule="evenodd">
         <g transform="translate(100 45)">
           <Frame color={color} />
@@ -323,20 +418,22 @@ const NanoX = ({ action, screen, error, width = 272, wire }: Props) => {
         </g>
         {/* displays usb cable */}
         {wire === 'wired' ? <Usb /> : null}
+        {wire === 'disconnecting' ? <UsbDisconnecting /> : null}
+        {wire === 'connecting' ? <UsbConnecting /> : null}
 
         {/* displays action button */}
         {action ? <Hints action={action} color={color} /> : null}
 
         {/* displays screen type */}
-        {screen === 'empty' ? (
-          <EmptyScreen color={color} />
-        ) : screen === 'home' ? (
+        {screen === 'home' ? (
           <HomeScreen color={color} />
         ) : screen === 'pin' ? (
           <PinScreen color={color} />
         ) : screen === 'validation' ? (
           <ValidationScreen color={color} />
-        ) : null}
+        ) : (
+          <EmptyScreen color={color} />
+        )}
 
         {/* displays error */}
         {error ? <ErrorScreen rejected={isRefusal} color={color} /> : null}

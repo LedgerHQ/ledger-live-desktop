@@ -27,15 +27,16 @@ type Props = {
   deviceModelId: DeviceModelId,
 }
 
-const FlashMCU = React.memo(({ t, deviceModelId }: Props) => (
+const FlashMCUNanos = React.memo(({ deviceModelId }: Props) => (
   <>
     <Box mx={7}>
       <Text ff="Open Sans|Regular" align="center" color="smoke">
         <Bullet>{'1. '}</Bullet>
-        {t('manager.modal.mcuFirst')}
+        <Trans i18nKey="manager.modal.mcuFirst" />
       </Text>
       <Box mt={5}>
-        <Interactions wire="disconnecting" type={deviceModelId} width={368} />
+        {/* TODO: add connecting / disconnecting to NanoX */}
+        <Interactions screen="empty" wire="disconnecting" type={deviceModelId} width={368} />
       </Box>
     </Box>
     <Separator my={6} />
@@ -51,10 +52,52 @@ const FlashMCU = React.memo(({ t, deviceModelId }: Props) => (
         </Trans>
       </Text>
       <Box mt={5}>
-        <Interactions action="left" wire="connecting" type={deviceModelId} width={368} />
+        <Interactions
+          screen="empty"
+          action="left"
+          wire="connecting"
+          type={deviceModelId}
+          width={368}
+        />
       </Box>
     </Box>
   </>
 ))
+
+const Container = styled(Box).attrs({})`
+  max-width: 50%;
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const FlashMCUBlue = React.memo(({ deviceModelId }: Props) => (
+  <>
+    <Box mx={7} horizontal>
+      <Container px={1}>
+        <Text ff="Open Sans|Regular" align="center" color="smoke">
+          <Bullet>{'1. '}</Bullet>
+          <Trans i18nKey="manager.modal.mcuBlueFirst" />
+        </Text>
+        <Box mt={5}>
+          <Interactions wire="wired" type={deviceModelId} width={120} />
+        </Box>
+      </Container>
+      <Container>
+        <Text ff="Open Sans|Regular" align="center" color="smoke">
+          <Bullet>{'2. '}</Bullet>
+          <Trans i18nKey="manager.modal.mcuBlueSecond" />
+        </Text>
+        <Box mt={5}>
+          <Interactions screen="bootloader" wire="wired" type={deviceModelId} width={120} />
+        </Box>
+      </Container>
+    </Box>
+  </>
+))
+
+const FlashMCU = (props: Props) =>
+  props.deviceModelId === 'blue' ? <FlashMCUBlue {...props} /> : <FlashMCUNanos {...props} />
 
 export default translate()(FlashMCU)
