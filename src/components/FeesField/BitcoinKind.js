@@ -137,34 +137,36 @@ class FeesField extends Component<OwnProps, State> {
 
     return (
       <GenericContainer>
-        <Select
-          menuPlacement="top"
-          width={156}
-          options={items}
-          value={selectedItem}
-          onChange={this.onSelectChange}
-        />
-        <InputCurrency
-          ref={this.input}
-          defaultUnit={satoshi}
-          units={units}
-          containerProps={{ grow: true }}
-          value={feePerByte}
-          onChange={onChange}
-          onChangeFocus={this.onChangeFocus}
-          loading={!feePerByte && !error}
-          error={
-            !feePerByte && error
-              ? new FeeNotLoaded()
-              : feePerByte && feePerByte.isZero()
-                ? new FeeRequired()
-                : null
-          }
-          renderRight={
-            <InputRight>{t('send.steps.amount.unitPerByte', { unit: satoshi.code })}</InputRight>
-          }
-          allowZero
-        />
+        <Box horizontal flow={5}>
+          <Select
+            menuPlacement="top"
+            width={156}
+            options={items}
+            value={selectedItem}
+            onChange={this.onSelectChange}
+          />
+          <InputCurrency
+            ref={this.input}
+            defaultUnit={satoshi}
+            units={units}
+            containerProps={{ grow: true }}
+            value={feePerByte}
+            onChange={onChange}
+            onChangeFocus={this.onChangeFocus}
+            loading={!feePerByte && !error}
+            error={
+              !feePerByte && error
+                ? new FeeNotLoaded()
+                : feePerByte && feePerByte.isZero()
+                  ? new FeeRequired()
+                  : null
+            }
+            renderRight={
+              <InputRight>{t('send.steps.amount.unitPerByte', { unit: satoshi.code })}</InputRight>
+            }
+            allowZero
+          />
+        </Box>
       </GenericContainer>
     )
   }

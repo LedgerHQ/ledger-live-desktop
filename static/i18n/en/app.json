@@ -78,6 +78,10 @@
       "year": "past year"
     }
   },
+  "fees": {
+    "slow": "Slow",
+    "fast": "Fast"
+  },
   "sidebar": {
     "menu": "Menu",
     "accounts": "Accounts ({{count}})",
