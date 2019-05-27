@@ -9,17 +9,20 @@ import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 import { track } from 'analytics/segment'
 
-export default translate()(({ children, t }: { children: React$Node, t: * }) => (
-  <Box flow={1}>
-    <LabelWithExternalIcon
-      onClick={() => {
-        openURL(urls.feesMoreInfo)
-        track('Send Flow Fees Help Requested')
-      }}
-      label={t('send.steps.amount.fees')}
-    />
-    <Box horizontal flow={5}>
+export default translate()(
+  ({ children, header, t }: { children: React$Node, header?: React$Node, t: * }) => (
+    <Box flow={1}>
+      <Box horizontal alignItems="center" justifyContent="space-between">
+        <LabelWithExternalIcon
+          onClick={() => {
+            openURL(urls.feesMoreInfo)
+            track('Send Flow Fees Help Requested')
+          }}
+          label={t('send.steps.amount.fees')}
+        />
+        {header}
+      </Box>
       {children}
     </Box>
-  </Box>
-))
+  ),
+)
