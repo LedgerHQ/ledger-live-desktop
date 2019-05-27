@@ -80,6 +80,10 @@
       "year": "去年"
     }
   },
+  "fees": {
+    "slow": "Slow",
+    "fast": "Fast"
+  },
   "sidebar": {
     "menu": "菜单",
     "accounts": "Accounts",
