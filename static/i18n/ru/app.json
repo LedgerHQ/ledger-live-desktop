@@ -80,6 +80,10 @@
       "year": "прошедший год"
     }
   },
+  "fees": {
+    "slow": "Slow",
+    "fast": "Fast"
+  },
   "sidebar": {
     "menu": "Меню",
     "accounts": "Accounts",
