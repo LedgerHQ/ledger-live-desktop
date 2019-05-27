@@ -3,21 +3,19 @@
 import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { listFiatCurrencies } from '@ledgerhq/live-common/lib/currencies'
+import { getCryptoCurrencyById, listFiatCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setCounterValue } from 'actions/settings'
 import { counterValueCurrencySelector } from 'reducers/settings'
 import Select from 'components/base/Select'
 import Track from 'analytics/Track'
 
-const fiats = listFiatCurrencies()
-  .map(f => f.units[0])
-  // For now we take first unit, in the future we'll need to figure out something else
-  .map(fiat => ({
-    value: fiat.code,
-    label: `${fiat.name} - ${fiat.code}`,
-    fiat,
-  }))
+// TODO allow more cryptos as countervalues, then refactor this to common
+const currencies = [...listFiatCurrencies(), getCryptoCurrencyById('bitcoin')].map(currency => ({
+  value: currency.ticker,
+  label: `${currency.name} - ${currency.ticker}`,
+  currency,
+}))
 
 type Props = {
   counterValueCurrency: Currency,
@@ -27,12 +25,12 @@ type Props = {
 class CounterValueSelect extends PureComponent<Props> {
   handleChangeCounterValue = (item: Object) => {
     const { setCounterValue } = this.props
-    setCounterValue(item.fiat.code)
+    setCounterValue(item.currency.ticker)
   }
 
   render() {
     const { counterValueCurrency } = this.props
-    const cvOption = fiats.find(f => f.value === counterValueCurrency.ticker)
+    const cvOption = currencies.find(f => f.value === counterValueCurrency.ticker)
 
     return (
       <Fragment>
@@ -43,7 +41,7 @@ class CounterValueSelect extends PureComponent<Props> {
           onChange={this.handleChangeCounterValue}
           itemToString={item => (item ? item.name : '')}
           renderSelected={item => item && item.name}
-          options={fiats}
+          options={currencies}
           value={cvOption}
         />
       </Fragment>

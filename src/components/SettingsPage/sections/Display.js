@@ -8,6 +8,7 @@ import {
   hasPasswordSelector,
   langAndRegionSelector,
   counterValueCurrencySelector,
+  intermediaryCurrency,
 } from 'reducers/settings'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
@@ -58,18 +59,20 @@ class TabGeneral extends PureComponent<Props> {
           >
             <CounterValueSelect />
           </Row>
-          <Row
-            title={t('settings.display.exchange', {
-              ticker: counterValueCurrency.ticker,
-              fiat: counterValueCurrency.name,
-            })}
-            desc={t('settings.display.exchangeDesc', {
-              fiat: counterValueCurrency.name,
-              ticker: counterValueCurrency.ticker,
-            })}
-          >
-            <CounterValueExchangeSelect />
-          </Row>
+          {counterValueCurrency.ticker !== intermediaryCurrency.ticker && (
+            <Row
+              title={t('settings.display.exchange', {
+                ticker: counterValueCurrency.ticker,
+                fiat: counterValueCurrency.name,
+              })}
+              desc={t('settings.display.exchangeDesc', {
+                fiat: counterValueCurrency.name,
+                ticker: counterValueCurrency.ticker,
+              })}
+            >
+              <CounterValueExchangeSelect />
+            </Row>
+          )}
           <Row title={t('settings.display.language')} desc={t('settings.display.languageDesc')}>
             <LanguageSelect />
           </Row>
