@@ -2,6 +2,7 @@
 import logger from 'logger'
 import { throwError } from 'rxjs'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
+import { listen as listenLogs } from '@ledgerhq/logs'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import { setEnvUnsafe, getEnv } from '@ledgerhq/live-common/lib/env'
 import throttle from 'lodash/throttle'
@@ -10,6 +11,8 @@ import TransportHttp from '@ledgerhq/hw-transport-http'
 import { DisconnectedDevice } from '@ledgerhq/errors'
 import { retry } from './promise'
 import './implement-libcore'
+
+listenLogs(({ id, date, ...log }) => logger.debug(log))
 
 /* eslint-disable guard-for-in */
 for (const k in process.env) {
@@ -57,11 +60,7 @@ if (getEnv('DEVICE_PROXY_URL')) {
 } else {
   registerTransportModule({
     id: 'hid',
-    open: async devicePath => {
-      const t = await retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 })
-      t.setDebugMode(logger.apdu)
-      return t
-    },
+    open: devicePath => retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 }),
     disconnect: () => Promise.resolve(),
   })
 }
