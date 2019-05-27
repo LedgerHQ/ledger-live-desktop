@@ -80,6 +80,10 @@
       "year": "지난 해"
     }
   },
+  "fees": {
+    "slow": "Slow",
+    "fast": "Fast"
+  },
   "sidebar": {
     "menu": "메뉴",
     "accounts": "Accounts",
