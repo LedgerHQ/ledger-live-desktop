@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
-import { currenciesSelector } from 'reducers/accounts'
+import { cryptoCurrenciesSelector } from 'reducers/accounts'
 import IconCurrencies from 'icons/Currencies'
 import TrackPage from 'analytics/TrackPage'
 import SelectCurrency from 'components/SelectCurrency'
@@ -28,7 +28,7 @@ type State = {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currencies: currenciesSelector,
+  currencies: cryptoCurrenciesSelector,
 })
 
 class TabCurrencies extends PureComponent<Props, State> {

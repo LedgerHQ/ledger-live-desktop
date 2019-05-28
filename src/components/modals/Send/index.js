@@ -7,14 +7,11 @@ import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
 import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
-
 import Track from 'analytics/Track'
 import { updateAccountWithUpdater } from 'actions/accounts'
 import { MODAL_SEND } from 'config/constants'
-import { getBridgeForCurrency } from 'bridge'
 import logger from 'logger'
-
-import type { WalletBridge } from 'bridge/types'
+import { getAccountBridge } from 'bridge'
 import type { T, Device } from 'types/common'
 import type { StepProps as DefaultStepProps } from 'components/base/Stepper'
 import { track } from 'analytics/segment'
@@ -46,7 +43,6 @@ type State<Transaction> = {
   stepId: string,
   openedFromAccount: boolean,
   account: ?Account,
-  bridge: ?WalletBridge<Transaction>,
   transaction: ?Transaction,
   optimisticOperation: ?Operation,
   isAppOpened: boolean,
@@ -59,7 +55,6 @@ export type StepProps<Transaction> = DefaultStepProps & {
   openedFromAccount: boolean,
   device: ?Device,
   account: ?Account,
-  bridge: ?WalletBridge<Transaction>,
   transaction: ?Transaction,
   error: ?Error,
   signed: boolean,
@@ -124,7 +119,6 @@ const INITIAL_STATE = {
   amount: 0,
   openedFromAccount: false,
   account: null,
-  bridge: null,
   transaction: null,
   error: null,
   signed: false,
@@ -155,12 +149,11 @@ class SendModal extends PureComponent<Props, State<*>> {
     const { accounts } = this.props
     if (!account) {
       const account = (data && data.account) || accounts[0]
-      const bridge = account ? getBridgeForCurrency(account.currency) : null
+      const bridge = account && getAccountBridge(account)
       const transaction = bridge ? bridge.createTransaction(account) : null
       this.setState({
         openedFromAccount: !!(data && data.account),
         account,
-        bridge,
         transaction,
       })
     }
@@ -168,9 +161,9 @@ class SendModal extends PureComponent<Props, State<*>> {
 
   handleChangeAccount = (account: Account) => {
     if (account !== this.state.account) {
-      const bridge = getBridgeForCurrency(account.currency)
+      const bridge = getAccountBridge(account)
       const transaction = bridge.createTransaction(account)
-      this.setState({ account, bridge, transaction })
+      this.setState({ account, transaction })
     }
   }
 
@@ -195,9 +188,10 @@ class SendModal extends PureComponent<Props, State<*>> {
   }
 
   handleOperationBroadcasted = (optimisticOperation: Operation) => {
-    const { account, bridge } = this.state
+    const { account } = this.state
     const { updateAccountWithUpdater } = this.props
-    if (!account || !bridge) return
+    if (!account) return
+    const bridge = getAccountBridge(account)
     const { addPendingOperation } = bridge
     if (addPendingOperation) {
       updateAccountWithUpdater(account.id, account =>
@@ -209,8 +203,9 @@ class SendModal extends PureComponent<Props, State<*>> {
 
   handleSignTransaction = async ({ transitionTo }: { transitionTo: string => void }) => {
     const { device } = this.props
-    const { account, transaction, bridge } = this.state
-
+    const { account, transaction } = this.state
+    if (!account) return
+    const bridge = getAccountBridge(account)
     if (!device) {
       this.handleTransactionError(new DisconnectedDevice())
       transitionTo('confirmation')
@@ -267,7 +262,6 @@ class SendModal extends PureComponent<Props, State<*>> {
       openedFromAccount,
       account,
       isAppOpened,
-      bridge,
       transaction,
       optimisticOperation,
       error,
@@ -278,7 +272,6 @@ class SendModal extends PureComponent<Props, State<*>> {
       device,
       openedFromAccount,
       account,
-      bridge,
       transaction,
       isAppOpened,
       error,

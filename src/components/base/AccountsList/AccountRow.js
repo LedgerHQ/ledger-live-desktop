@@ -74,7 +74,7 @@ export default class AccountRow extends PureComponent<Props> {
         isDisabled={isDisabled}
         onClick={isDisabled ? null : this.onToggleAccount}
       >
-        <CryptoCurrencyIcon currency={account.currency} size={16} color={account.currency.color} />
+        <CryptoCurrencyIcon currency={account.currency} size={16} />
         <Box shrink grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {onEditName ? (
             <Input

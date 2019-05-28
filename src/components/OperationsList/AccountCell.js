@@ -2,9 +2,9 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import type { Currency } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
+import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 
 const Cell = styled(Box).attrs({
   px: 4,
@@ -17,18 +17,17 @@ const Cell = styled(Box).attrs({
 `
 
 type Props = {
-  currency: CryptoCurrency,
+  currency: Currency,
   accountName: string,
 }
 
 class AccountCell extends PureComponent<Props> {
   render() {
     const { currency, accountName } = this.props
-    const Icon = getCryptoCurrencyIcon(currency)
     return (
       <Cell horizontal flow={2}>
-        <Box alignItems="center" justifyContent="center" style={{ color: currency.color }}>
-          {Icon && <Icon size={16} />}
+        <Box alignItems="center" justifyContent="center">
+          <CryptoCurrencyIcon size={16} currency={currency} />
         </Box>
         <AccountNameEllipsis>{accountName}</AccountNameEllipsis>
       </Cell>

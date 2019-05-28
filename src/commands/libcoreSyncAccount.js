@@ -7,25 +7,14 @@ import { reduce, map } from 'rxjs/operators'
 import { createCommand, Command } from 'helpers/ipc'
 import { fromAccountRaw, toAccountRaw } from '@ledgerhq/live-common/lib/account'
 
-type Input = {
-  rawAccount: AccountRaw,
-}
+type Input = AccountRaw
+type Result = AccountRaw
 
-type Result = {
-  rawAccount: AccountRaw,
-  requiresCacheFlush: boolean,
-}
-
-const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', ({ rawAccount }) => {
+const cmd: Command<Input, Result> = createCommand('libcoreSyncAccount', rawAccount => {
   const account = fromAccountRaw(rawAccount)
   return syncAccount(account)
     .pipe(reduce((acc, updater: Account => Account) => updater(acc), account))
-    .pipe(
-      map(account => ({
-        rawAccount: toAccountRaw(account),
-        requiresCacheFlush: false, // TODO to determine that, we would have to know if account was recreated!
-      })),
-    )
+    .pipe(map(account => toAccountRaw(account)))
 })
 
 export default cmd

@@ -1,13 +1,16 @@
 // @flow
+/* eslint-disable no-param-reassign */
 import { Observable } from 'rxjs'
 import { BigNumber } from 'bignumber.js'
-import logger from 'logger'
-import React from 'react'
-import FeesField from 'components/FeesField/EthereumKind'
-import EditAdvancedOptions from 'components/AdvancedOptions/EthereumKind'
 import throttle from 'lodash/throttle'
 import flatMap from 'lodash/flatMap'
 import uniqBy from 'lodash/uniqBy'
+import invariant from 'invariant'
+import eip55 from 'eip55'
+import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP, InvalidAddress } from '@ledgerhq/errors'
+import type { Account, Operation, Unit } from '@ledgerhq/live-common/lib/types'
+import type { Tx } from '@ledgerhq/live-common/lib/api/Ethereum'
+import type { CurrencyBridge, AccountBridge } from '@ledgerhq/live-common/lib/bridge/types'
 import {
   getDerivationModesForCurrency,
   getDerivationScheme,
@@ -20,20 +23,19 @@ import {
   getAccountPlaceholderName,
   getNewAccountPlaceholderName,
 } from '@ledgerhq/live-common/lib/account'
-import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
-import eip55 from 'eip55'
+import { getCryptoCurrencyById } from '@ledgerhq/live-common/lib/currencies'
 import { apiForCurrency } from '@ledgerhq/live-common/lib/api/Ethereum'
-import type { Tx } from '@ledgerhq/live-common/lib/api/Ethereum'
+import { getEstimatedFees } from '@ledgerhq/live-common/lib/api/Fees'
 import getAddressCommand from 'commands/getAddress'
 import signTransactionCommand from 'commands/signTransaction'
-import { NotEnoughBalance, FeeNotLoaded, ETHAddressNonEIP } from '@ledgerhq/errors'
-import type { EditProps, WalletBridge } from './types'
 
-type Transaction = {
+export type Transaction = {
   recipient: string,
   amount: BigNumber,
   gasPrice: ?BigNumber,
   gasLimit: BigNumber,
+  feeCustomUnit: ?Unit,
+  networkInfo: ?{ serverFees: { gas_price: number } },
 }
 
 const serializeTransaction = t => ({
@@ -42,16 +44,6 @@ const serializeTransaction = t => ({
   gasPrice: !t.gasPrice ? '0x00' : `0x${BigNumber(t.gasPrice).toString(16)}`,
   gasLimit: `0x${BigNumber(t.gasLimit).toString(16)}`,
 })
-
-const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
-  <FeesField
-    onChange={gasPrice => {
-      onChange({ ...value, gasPrice })
-    }}
-    gasPrice={value.gasPrice}
-    account={account}
-  />
-)
 
 // in case of a SELF send, 2 ops are returned.
 const txToOps = (account: Account) => (tx: Tx): Operation[] => {
@@ -65,7 +57,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
   const value = BigNumber(tx.value)
   const fee = BigNumber(tx.gas_price * tx.gas_used)
   if (sending) {
-    const op: $Exact<Operation> = {
+    ops.push({
       id: `${account.id}-${tx.hash}-OUT`,
       hash: tx.hash,
       type: 'OUT',
@@ -79,11 +71,10 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       date: new Date(tx.received_at),
       extra: {},
       hasFailed: tx.status === 0,
-    }
-    ops.push(op)
+    })
   }
   if (receiving) {
-    const op: $Exact<Operation> = {
+    ops.push({
       id: `${account.id}-${tx.hash}-IN`,
       hash: tx.hash,
       type: 'IN',
@@ -96,8 +87,7 @@ const txToOps = (account: Account) => (tx: Tx): Operation[] => {
       recipients: [tx.to],
       date: new Date(new Date(tx.received_at).getTime() + 1), // hack: make the IN appear after the OUT in history.
       extra: {},
-    }
-    ops.push(op)
+    })
   }
   return ops
 }
@@ -121,7 +111,7 @@ function isRecipientValid(currency, recipient) {
 }
 
 // Returns a warning if we detect a non-eip address
-function getRecipientWarning(account, recipient) {
+function getRecipientWarning(currency, recipient) {
   if (!recipient.match(/^0x[0-9a-fA-F]{40}$/)) return null
   const slice = recipient.substr(2)
   const isFullUpper = slice === slice.toUpperCase()
@@ -166,7 +156,7 @@ const signAndBroadcast = async ({
 
     const hash = await api.broadcastTransaction(transaction)
 
-    const op: $Exact<Operation> = {
+    onOperationBroadcasted({
       id: `${a.id}-${hash}-OUT`,
       hash,
       type: 'OUT',
@@ -180,9 +170,7 @@ const signAndBroadcast = async ({
       transactionSequenceNumber: nonce,
       date: new Date(),
       extra: {},
-    }
-
-    onOperationBroadcasted(op)
+    })
   }
 }
 
@@ -203,7 +191,7 @@ const fetchCurrentBlock = (perCurrencyId => currency => {
   return f()
 })({})
 
-const EthereumBridge: WalletBridge<Transaction> = {
+export const currencyBridge: CurrencyBridge = {
   scanAccountsOnDevice: (currency, deviceId) =>
     Observable.create(o => {
       let finished = false
@@ -240,12 +228,17 @@ const EthereumBridge: WalletBridge<Transaction> = {
             if (newAccountCount === 0) {
               // first zero account will emit one account as opportunity to create a new account..
               const account: $Exact<Account> = {
+                type: 'Account',
                 id: accountId,
                 seedIdentifier: freshAddress,
                 freshAddress,
                 freshAddressPath,
                 derivationMode,
-                name: getNewAccountPlaceholderName({ currency, index, derivationMode }),
+                name: getNewAccountPlaceholderName({
+                  currency,
+                  index,
+                  derivationMode,
+                }),
                 balance,
                 blockHeight: currentBlock.height,
                 index,
@@ -268,6 +261,7 @@ const EthereumBridge: WalletBridge<Transaction> = {
         }
 
         const account: $Exact<Account> = {
+          type: 'Account',
           id: accountId,
           seedIdentifier: freshAddress,
           freshAddress,
@@ -284,7 +278,6 @@ const EthereumBridge: WalletBridge<Transaction> = {
           lastSyncDate: new Date(),
         }
         for (let i = 0; i < 50; i++) {
-          const api = apiForCurrency(account.currency)
           const last = txs[txs.length - 1]
           if (!last) break
           const { block } = last
@@ -304,7 +297,10 @@ const EthereumBridge: WalletBridge<Transaction> = {
           for (const derivationMode of derivationModes) {
             let emptyCount = 0
             const mandatoryEmptyAccountSkip = getMandatoryEmptyAccountSkip(derivationMode)
-            const derivationScheme = getDerivationScheme({ derivationMode, currency })
+            const derivationScheme = getDerivationScheme({
+              derivationMode,
+              currency,
+            })
             const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
             for (let index = 0; index < stopAt; index++) {
               if (!derivationModeSupportsIndex(derivationMode, index)) continue
@@ -319,17 +315,22 @@ const EthereumBridge: WalletBridge<Transaction> = {
                   path: freshAddressPath,
                 })
                 .toPromise()
+
               const r = await stepAddress(
                 index,
                 res,
                 derivationMode,
                 emptyCount < mandatoryEmptyAccountSkip,
               )
-              logger.log(
-                `scanning ${currency.id} at ${freshAddressPath}: ${res.address} resulted of ${
-                  r.account ? `Account with ${r.account.operations.length} txs` : 'no account'
-                }. ${r.complete ? 'ALL SCANNED' : ''}`,
-              )
+              if (process.env.NODE_ENV === 'development') {
+                /* eslint-disable no-console */
+                console.log(
+                  `scanning ${currency.id} at ${freshAddressPath}: ${res.address} resulted of ${
+                    r.account ? `Account with ${r.account.operations.length} txs` : 'no account'
+                  }. ${r.complete ? 'ALL SCANNED' : ''}`,
+                )
+                /* eslint-enable no-console */
+              }
               if (r.account) {
                 o.next(r.account)
               } else {
@@ -350,8 +351,10 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
       return unsubscribe
     }),
+}
 
-  synchronize: ({ freshAddress, blockHeight, currency, operations }) =>
+export const accountBridge: AccountBridge<Transaction> = {
+  startSync: ({ freshAddress, blockHeight, currency, operations }) =>
     Observable.create(o => {
       let unsubscribed = false
       const api = apiForCurrency(currency)
@@ -362,8 +365,8 @@ const EthereumBridge: WalletBridge<Transaction> = {
           if (block.height === blockHeight) {
             o.complete()
           } else {
-            const filterConfirmedOperations = o =>
-              o.blockHeight && blockHeight - o.blockHeight > SAFE_REORG_THRESHOLD
+            const filterConfirmedOperations = op =>
+              op.blockHeight && blockHeight - op.blockHeight > SAFE_REORG_THRESHOLD
 
             operations = operations.filter(filterConfirmedOperations)
             const blockHash = operations.length > 0 ? operations[0].blockHash : undefined
@@ -386,17 +389,17 @@ const EthereumBridge: WalletBridge<Transaction> = {
             o.next(a => {
               const currentOps = a.operations.filter(filterConfirmedOperations)
               const newOps = flatMap(txs, txToOps(a))
-              const operations = mergeOps(currentOps, newOps)
+              const ops = mergeOps(currentOps, newOps)
               const pendingOperations = a.pendingOperations.filter(
-                o =>
-                  o.transactionSequenceNumber &&
-                  o.transactionSequenceNumber >= nonce &&
-                  !operations.some(op => o.hash === op.hash),
+                op =>
+                  op.transactionSequenceNumber &&
+                  op.transactionSequenceNumber >= nonce &&
+                  !operations.some(op2 => op2.hash === op.hash),
               )
               return {
                 ...a,
                 pendingOperations,
-                operations,
+                operations: ops,
                 balance,
                 blockHeight: block.height,
                 lastSyncDate: new Date(),
@@ -415,17 +418,35 @@ const EthereumBridge: WalletBridge<Transaction> = {
       }
     }),
 
-  pullMoreOperations: () => Promise.resolve(a => a), // NOT IMPLEMENTED
+  fetchTransactionNetworkInfo: async account => {
+    const serverFees = await getEstimatedFees(account.currency)
+    return {
+      serverFees,
+    }
+  },
 
-  isRecipientValid: (account, recipient) => Promise.resolve(isRecipientValid(account, recipient)),
-  getRecipientWarning: (account, recipient) =>
-    Promise.resolve(getRecipientWarning(account, recipient)),
+  getTransactionNetworkInfo: (account, transaction) => transaction.networkInfo,
+
+  applyTransactionNetworkInfo: (account, transaction, networkInfo) => ({
+    ...transaction,
+    networkInfo,
+    gasPrice:
+      transaction.gasPrice ||
+      (networkInfo.serverFees.gas_price ? BigNumber(networkInfo.serverFees.gas_price) : null),
+  }),
+
+  checkValidRecipient: (account, recipient) =>
+    isRecipientValid(account.currency, recipient)
+      ? Promise.resolve(getRecipientWarning(account.currency, recipient))
+      : Promise.reject(new InvalidAddress('', { currencyName: account.currency.name })),
 
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
     gasPrice: null,
     gasLimit: BigNumber(0x5208),
+    networkInfo: null,
+    feeCustomUnit: getCryptoCurrencyById('ethereum').units[1],
   }),
 
   editTransactionAmount: (account, t, amount) => ({
@@ -442,22 +463,58 @@ const EthereumBridge: WalletBridge<Transaction> = {
 
   getTransactionRecipient: (a, t) => t.recipient,
 
-  EditFees,
+  editTransactionExtra: (a, t, field, value) => {
+    switch (field) {
+      case 'gasLimit':
+        invariant(
+          value && BigNumber.isBigNumber(value),
+          "editTransactionExtra(a,t,'gasLimit',value): BigNumber value expected",
+        )
+        return { ...t, gasLimit: value }
 
-  EditAdvancedOptions,
+      case 'gasPrice':
+        invariant(
+          !value || BigNumber.isBigNumber(value),
+          "editTransactionExtra(a,t,'gasPrice',value): BigNumber value expected",
+        )
+        return { ...t, gasPrice: value }
+
+      case 'feeCustomUnit':
+        invariant(value, "editTransactionExtra(a,t,'feeCustomUnit',value): value is expected")
+        return { ...t, feeCustomUnit: value }
+
+      default:
+        return t
+    }
+  },
+
+  getTransactionExtra: (a, t, field) => {
+    switch (field) {
+      case 'gasLimit':
+        return t.gasLimit
+
+      case 'gasPrice':
+        return t.gasPrice
+
+      case 'feeCustomUnit':
+        return t.feeCustomUnit
+
+      default:
+        return undefined
+    }
+  },
 
   checkValidTransaction: (a, t) =>
     !t.gasPrice
       ? Promise.reject(new FeeNotLoaded())
       : t.amount.isLessThanOrEqualTo(a.balance)
-        ? Promise.resolve(true)
+        ? Promise.resolve(null)
         : Promise.reject(new NotEnoughBalance()),
 
   getTotalSpent: (a, t) =>
     t.amount.isGreaterThan(0) &&
     t.gasPrice &&
     t.gasPrice.isGreaterThan(0) &&
-    t.gasLimit &&
     t.gasLimit.isGreaterThan(0)
       ? Promise.resolve(t.amount.plus(t.gasPrice.times(t.gasLimit)))
       : Promise.resolve(BigNumber(0)),
@@ -475,7 +532,14 @@ const EthereumBridge: WalletBridge<Transaction> = {
       const onOperationBroadcasted = operation => {
         o.next({ type: 'broadcasted', operation })
       }
-      signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }).then(
+      signAndBroadcast({
+        a,
+        t,
+        deviceId,
+        isCancelled,
+        onSigned,
+        onOperationBroadcasted,
+      }).then(
         () => {
           o.complete()
         },
@@ -502,5 +566,3 @@ const EthereumBridge: WalletBridge<Transaction> = {
     return api.estimateGasLimitForERC20(address)
   },
 }
-
-export default EthereumBridge

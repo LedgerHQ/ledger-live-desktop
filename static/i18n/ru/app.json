@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
-    "accountAlreadyImportedSubtitle": "Счета, находящиеся в портфеле: ({{count}})",
-    "accountToImportSubtitle": "Добавить существующий счет",
     "accountToImportSubtitle_plural": "Добавить существующие счета",
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
@@ -241,7 +239,6 @@
     "successDescription": "Добавить больше счетов или вернуться в портфель",
     "successDescription_plural": "Добавить больше счетов или вернуться в портфель",
     "createNewAccount": {
-      "title": "Добавить новый счет",
       "noOperationOnLastAccount": "Невозможно добавить новый счет до получения на счет <1><0>{{accountName}}</0></1> активов.",
       "noAccountToCreate": "Счета в <1><0>{{currencyName}}</0></1> для создания не найдены"
     },
@@ -249,6 +246,17 @@
       "addMore": "Добавить еще",
       "add": "Добавить счет",
       "add_plural": "Добавить счета"
+    },
+    "sections": {
+      "importable": {
+        "title": "Добавить существующий счет"
+      },
+      "creatable": {
+        "title": "Добавить новый счет"
+      },
+      "imported": {
+        "title": "Счета, находящиеся в портфеле: ({{count}})"
+      }
     }
   },
   "operationDetails": {

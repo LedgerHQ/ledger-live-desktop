@@ -11,9 +11,8 @@ const Base = styled(Tabbable).attrs({
   horizontal: true,
   align: 'center',
 })`
-  backround: red;
-  width: 50px;
-  height: 26px;
+  width: ${p => (p.small ? 25 : 50)}px;
+  height: ${p => (p.small ? 13 : 26)}px;
   border-radius: 13px;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
   transition: 250ms linear background-color;
@@ -24,25 +23,35 @@ const Base = styled(Tabbable).attrs({
 `
 
 const Ball = styled.div`
-  width: 20px;
-  height: 20px;
+  width: ${p => (p.small ? 9 : 20)}px;
+  height: ${p => (p.small ? 9 : 20)}px;
   border-radius: 50%;
   background: white;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   transition: 250ms ease-in-out transform;
-  transform: translate3d(${p => (p.isChecked ? '27px' : '3px')}, 0, 0);
+  transform: translate3d(
+    ${p => (p.small ? (p.isChecked ? '14px' : '2px') : p.isChecked ? '27px' : '3px')},
+    0,
+    0
+  );
 `
 
 type Props = {
   isChecked: boolean,
   onChange?: Function,
+  small?: boolean,
 }
 
 function Switch(props: Props) {
-  const { isChecked, onChange, ...p } = props
+  const { isChecked, onChange, small, ...p } = props
   return (
-    <Base isChecked={isChecked} onClick={() => onChange && onChange(!isChecked)} {...p}>
-      <Ball isChecked={isChecked} />
+    <Base
+      small={small}
+      isChecked={isChecked}
+      onClick={() => onChange && onChange(!isChecked)}
+      {...p}
+    >
+      <Ball small={small} isChecked={isChecked} />
     </Base>
   )
 }

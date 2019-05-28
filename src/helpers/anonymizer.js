@@ -54,6 +54,7 @@ function filepathRecursiveReplacer(obj: mixed, seen: Array<*>) {
           const value = obj[k]
           if (seen.indexOf(value) !== -1) return
           if (typeof value === 'string') {
+            // $FlowFixMe
             obj[k] = filepathReplace(value)
           } else {
             filepathRecursiveReplacer(obj[k], seen)

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 // @flow
 // Unify the synchronization management for bridges with the redux store
 // it handles automatically re-calling synchronize
@@ -18,7 +19,7 @@ import { accountsSelector, isUpToDateSelector } from 'reducers/accounts'
 import { currenciesStatusSelector, currencyDownStatusLocal } from 'reducers/currenciesStatus'
 import { SYNC_MAX_CONCURRENT } from 'config/constants'
 import type { CurrencyStatus } from 'reducers/currenciesStatus'
-import { getBridgeForCurrency } from '.'
+import { getAccountBridge } from '.'
 import { track } from '../analytics/segment'
 
 type BridgeSyncProviderProps = {
@@ -88,7 +89,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         return
       }
 
-      const bridge = getBridgeForCurrency(account.currency)
+      const bridge = getAccountBridge(account)
 
       this.props.setAccountSyncState(accountId, { pending: true, error: null })
 
@@ -112,8 +113,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         })
       }
 
-      // TODO use Subscription to unsubscribe at relevant time
-      bridge.synchronize(account).subscribe({
+      bridge.startSync(account, false).subscribe({
         next: accountUpdater => {
           this.props.updateAccountWithUpdater(accountId, accountUpdater)
         },
@@ -156,7 +156,7 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         }
       },
 
-      SET_SKIP_UNDER_PRIORITY: ({ priority }) => {
+      SET_SKIP_UNDER_PRIORITY: ({ priority }: { priority: number }) => {
         if (priority === skipUnderPriority) return
         skipUnderPriority = priority
         syncQueue.remove(({ priority }) => priority < skipUnderPriority)
@@ -166,15 +166,21 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
         }
       },
 
-      SYNC_ALL_ACCOUNTS: ({ priority }) => {
+      SYNC_ALL_ACCOUNTS: ({ priority }: { priority: number }) => {
         schedule(shuffledAccountIds(), priority)
       },
 
-      SYNC_ONE_ACCOUNT: ({ accountId, priority }) => {
+      SYNC_ONE_ACCOUNT: ({ accountId, priority }: { accountId: string, priority: number }) => {
         schedule([accountId], priority)
       },
 
-      SYNC_SOME_ACCOUNTS: ({ accountIds, priority }) => {
+      SYNC_SOME_ACCOUNTS: ({
+        accountIds,
+        priority,
+      }: {
+        accountIds: string[],
+        priority: number,
+      }) => {
         schedule(accountIds, priority)
       },
     }

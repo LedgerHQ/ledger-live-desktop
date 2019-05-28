@@ -5,27 +5,20 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
-
-import Track from 'analytics/Track'
-import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
-
 import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
-
+import { addAccounts } from '@ledgerhq/live-common/lib/account'
+import Track from 'analytics/Track'
 import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import type { T, Device } from 'types/common'
-import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
-
-import { idleCallback } from 'helpers/promise'
+import logger from 'logger'
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
-import { addAccount } from 'actions/accounts'
+import { replaceAccounts } from 'actions/accounts'
 import { closeModal } from 'reducers/modals'
-
+import type { StepProps as DefaultStepProps, Step } from 'components/base/Stepper'
+import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
-import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
-import logger from 'logger'
-
 import StepChooseCurrency, { StepChooseCurrencyFooter } from './steps/01-step-choose-currency'
 import StepConnectDevice, { StepConnectDeviceFooter } from './steps/02-step-connect-device'
 import StepImport, { StepImportFooter } from './steps/03-step-import'
@@ -77,7 +70,7 @@ type Props = {
   device: ?Device,
   existingAccounts: Account[],
   closeModal: string => void,
-  addAccount: Account => void,
+  replaceAccounts: (Account[]) => void,
 }
 
 type StepId = 'chooseCurrency' | 'connectDevice' | 'import' | 'finish'
@@ -126,7 +119,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = {
-  addAccount,
+  replaceAccounts,
   closeModal,
 }
 
@@ -147,18 +140,16 @@ class AddAccounts extends PureComponent<Props, State> {
   STEPS = createSteps()
 
   handleClickAdd = async () => {
-    const { addAccount } = this.props
+    const { replaceAccounts, existingAccounts } = this.props
     const { scannedAccounts, checkedAccountsIds, editedNames } = this.state
-    const accountsIdsMap = checkedAccountsIds.reduce((acc, cur) => {
-      acc[cur] = true
-      return acc
-    }, {})
-    const accountsToAdd = scannedAccounts.filter(account => accountsIdsMap[account.id] === true)
-    for (const account of accountsToAdd) {
-      await idleCallback()
-      const name = validateNameEdition(account, editedNames[account.id])
-      addAccount({ ...account, name })
-    }
+    replaceAccounts(
+      addAccounts({
+        scannedAccounts,
+        existingAccounts,
+        selectedIds: checkedAccountsIds,
+        renamings: editedNames,
+      }),
+    )
   }
 
   handleCloseModal = () => this.props.closeModal(MODAL_ADD_ACCOUNTS)

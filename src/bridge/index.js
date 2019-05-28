@@ -1,27 +1,52 @@
 // @flow
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-import invariant from 'invariant'
-import { USE_MOCK_DATA } from 'config/constants'
-import { WalletBridge } from './types'
-import LibcoreBridge from './LibcoreBridge'
-import EthereumJSBridge from './EthereumJSBridge'
-import RippleJSBridge from './RippleJSBridge'
-import makeMockBridge from './makeMockBridge'
+import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
+import type { CurrencyBridge, AccountBridge } from '@ledgerhq/live-common/lib/bridge/types'
+import {
+  makeMockCurrencyBridge,
+  makeMockAccountBridge,
+} from '@ledgerhq/live-common/lib/bridge/makeMockBridge'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
+import { createCustomErrorClass } from '@ledgerhq/errors'
+import { decodeAccountId } from '@ledgerhq/live-common/lib/account'
+import * as LibcoreBridge from './LibcoreBridge'
+import * as RippleJSBridge from './RippleJSBridge'
+import * as EthereumJSBridge from './EthereumJSBridge'
 
-const perFamily = {
-  bitcoin: LibcoreBridge,
-  ripple: RippleJSBridge,
-  ethereum: EthereumJSBridge,
-  stellar: null,
+// TODO as soon as it's in @ledgerhq/errors we can import it
+const CurrencyNotSupported = createCustomErrorClass('CurrencyNotSupported')
+
+const mockCurrencyBridge = makeMockCurrencyBridge()
+const mockAccountBridge = makeMockAccountBridge()
+
+export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
+  if (getEnv('MOCK')) return mockCurrencyBridge
+  switch (currency.family) {
+    case 'ripple':
+      return RippleJSBridge.currencyBridge
+    case 'ethereum':
+      if (getEnv('EXPERIMENTAL_LIBCORE')) {
+        return LibcoreBridge.currencyBridge
+      }
+      return EthereumJSBridge.currencyBridge
+    case 'bitcoin':
+      return LibcoreBridge.currencyBridge
+    default:
+      return mockCurrencyBridge // fallback mock until we implement it all!
+  }
 }
-if (USE_MOCK_DATA) {
-  const mockBridge = makeMockBridge()
-  perFamily.bitcoin = mockBridge
-  perFamily.ethereum = mockBridge
-  perFamily.ripple = mockBridge
-}
-export const getBridgeForCurrency = (currency: CryptoCurrency): WalletBridge<any> => {
-  const bridge = perFamily[currency.family]
-  invariant(bridge, `${currency.id} currency is not supported`)
-  return bridge
+
+export const getAccountBridge = (account: Account): AccountBridge<any> => {
+  const { type } = decodeAccountId(account.id)
+  if (type === 'mock') return mockAccountBridge
+  if (type === 'libcore') return LibcoreBridge.accountBridge
+  switch (account.currency.family) {
+    case 'ripple':
+      return RippleJSBridge.accountBridge
+    case 'ethereum':
+      return EthereumJSBridge.accountBridge
+    default:
+      throw new CurrencyNotSupported('currency not supported', {
+        currencyName: account.currency.name,
+      })
+  }
 }

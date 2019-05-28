@@ -27,12 +27,6 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: 'toggle',
-    name: 'EXPERIMENTAL_EXPLORERS',
-    title: 'Experimental nodes',
-    description: "Connect to Ledger's new blockchain nodes.",
-  },
-  {
-    type: 'toggle',
     name: 'MANAGER_DEV_MODE',
     title: 'Developer mode',
     description: 'Show developer and testnet apps in the Manager.',
@@ -58,6 +52,18 @@ export const experimentalFeatures: Feature[] = [
     description: 'Experimental support of Native Segwit (bech32).',
   },
   {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_EXPLORERS',
+    title: 'Experimental nodes',
+    description: "Connect to Ledger's new blockchain nodes.",
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_LIBCORE',
+    title: 'Experimental Core',
+    description: 'Enable experimental Ledger lib-core features.',
+  },
+  {
     shadow: true,
     type: 'toggle',
     name: 'FORCE_PROVIDER',
@@ -66,13 +72,29 @@ export const experimentalFeatures: Feature[] = [
     title: 'Pre-release apps',
     description: 'Enable pre-release apps in the Manager',
   },
+  {
+    shadow: true,
+    type: 'toggle',
+    name: 'EXPERIMENTAL_SEND_MAX',
+    title: 'Experimental Send MAX',
+    description:
+      'Support using all the balance to send funds with a MAX toggle (not yet supported in ETH and XRP)',
+  },
 ]
 
 const lsKey = 'experimentalFlags'
 
-export const getLocalStorageEnvs = () => {
+export const getLocalStorageEnvs = (): { [_: string]: any } => {
   const maybeData = window.localStorage.getItem(lsKey)
-  return maybeData ? JSON.parse(maybeData) : {}
+  if (!maybeData) return {}
+  const obj = JSON.parse(maybeData)
+  if (typeof obj !== 'object' || !obj) return {}
+  Object.keys(obj).forEach(k => {
+    if (!experimentalFeatures.find(f => f.name === k)) {
+      delete obj[k]
+    }
+  })
+  return obj
 }
 
 const envs = getLocalStorageEnvs()

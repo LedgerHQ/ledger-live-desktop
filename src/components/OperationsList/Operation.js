@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { rgba } from 'styles/helpers'
 import Box from 'components/base/Box'
-import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import ConfirmationCell from './ConfirmationCell'
@@ -32,8 +32,13 @@ const OperationRow = styled(Box).attrs({
 
 type Props = {
   operation: Operation,
-  account: Account,
-  onOperationClick: (operation: Operation, account: Account) => void,
+  account: Account | TokenAccount,
+  parentAccount?: Account,
+  onOperationClick: (
+    operation: Operation,
+    account: Account | TokenAccount,
+    parentAccount?: Account,
+  ) => void,
   t: T,
   withAccount: boolean,
 }
@@ -44,21 +49,38 @@ class OperationComponent extends PureComponent<Props> {
   }
 
   onOperationClick = () => {
-    const { account, onOperationClick, operation } = this.props
-    onOperationClick(operation, account)
+    const { account, parentAccount, onOperationClick, operation } = this.props
+    onOperationClick(operation, account, parentAccount)
   }
 
   render() {
-    const { account, t, operation, withAccount } = this.props
+    const { account, parentAccount, t, operation, withAccount } = this.props
     const isOptimistic = operation.blockHeight === null
     return (
       <OperationRow isOptimistic={isOptimistic} onClick={this.onOperationClick}>
-        <ConfirmationCell operation={operation} account={account} t={t} />
+        <ConfirmationCell
+          operation={operation}
+          parentAccount={parentAccount}
+          account={account}
+          t={t}
+        />
         <DateCell operation={operation} t={t} />
         {withAccount &&
-          account && <AccountCell accountName={account.name} currency={account.currency} />}
+          (account.type === 'Account' ? (
+            <AccountCell accountName={account.name} currency={account.currency} />
+          ) : (
+            <AccountCell accountName={account.token.name} currency={account.token} />
+          ))}
         <AddressCell operation={operation} />
-        <AmountCell operation={operation} currency={account.currency} unit={account.unit} />
+        {account.type === 'Account' ? (
+          <AmountCell operation={operation} currency={account.currency} unit={account.unit} />
+        ) : (
+          <AmountCell
+            operation={operation}
+            currency={account.token}
+            unit={account.token.units[0]}
+          />
+        )}
       </OperationRow>
     )
   }

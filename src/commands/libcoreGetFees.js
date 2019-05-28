@@ -11,18 +11,14 @@ type Input = {
   transaction: *,
 }
 
-type Result = {
-  totalFees: string,
-}
+type Result = string
 
 const cmd: Command<Input, Result> = createCommand('libcoreGetFees', ({ accountRaw, transaction }) =>
   from(
     getFeesForTransaction({
       account: fromAccountRaw(accountRaw),
       transaction,
-    }).then(fees => ({
-      totalFees: fees.toString(),
-    })),
+    }).then(fees => fees.toString()),
   ),
 )
 

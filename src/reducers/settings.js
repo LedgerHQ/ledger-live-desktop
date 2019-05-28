@@ -53,7 +53,7 @@ export type SettingsState = {
   showAccountsHelperBanner: boolean,
 }
 
-const defaultsForCurrency: CryptoCurrency => CurrencySettings = crypto => {
+const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   const defaults = currencySettingsDefaults(crypto)
   return {
     confirmationsNb: defaults.confirmationsNb ? defaults.confirmationsNb.def : 0,
@@ -84,11 +84,6 @@ const INITIAL_STATE: SettingsState = {
   showAccountsHelperBanner: true,
 }
 
-function asCryptoCurrency(c: Currency): ?CryptoCurrency {
-  // $FlowFixMe
-  return 'coinType' in c ? c : null
-}
-
 const handlers: Object = {
   SETTINGS_SET_PAIRS: (
     state: SettingsState,
@@ -106,10 +101,9 @@ const handlers: Object = {
     const copy = { ...state }
     copy.currenciesSettings = { ...copy.currenciesSettings }
     for (const { to, from, exchange } of pairs) {
-      const fromCrypto = asCryptoCurrency(from)
-      if (fromCrypto && to.ticker === intermediaryCurrency.ticker) {
-        copy.currenciesSettings[fromCrypto.id] = {
-          ...copy.currenciesSettings[fromCrypto.id],
+      if (from.type !== 'FiatCurrency' && to.ticker === intermediaryCurrency.ticker) {
+        copy.currenciesSettings[from.ticker] = {
+          ...copy.currenciesSettings[from.ticker],
           exchange,
         }
       } else if (
@@ -205,11 +199,12 @@ export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 
 export const areSettingsLoaded = (state: State) => state.settings.loaded
 
+// TODO drop (bad perf implication)
 export const currencySettingsLocaleSelector = (
   settings: SettingsState,
-  currency: CryptoCurrency,
+  currency: Currency,
 ): CurrencySettings => {
-  const currencySettings = settings.currenciesSettings[currency.id]
+  const currencySettings = settings.currenciesSettings[currency.ticker]
   const val = { ...defaultsForCurrency(currency), ...currencySettings }
   return val
 }
@@ -218,22 +213,45 @@ type CSS = Selector<*, { currency: CryptoCurrency }, CurrencySettings>
 
 export const currencyPropExtractor = (_: *, { currency }: *) => currency
 
+// TODO drop (bad perf implication)
 export const currencySettingsSelector: CSS = createSelector(
   storeSelector,
   currencyPropExtractor,
   currencySettingsLocaleSelector,
 )
 
+// TODO drop
 export const currencySettingsForAccountSelector = (
   state: State,
   { account }: { account: Account },
-) => currencySettingsSelector(state, { currency: account.currency })
+) =>
+  currencySettingsSelector(state, {
+    currency: account.type === 'Account' ? account.currency : account.token,
+  })
 
 type ESFAS = Selector<*, { account: Account }, ?string>
+// TODO drop
 export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
   currencySettingsForAccountSelector,
   settings => settings.exchange,
 )
+export const exchangeSettingsForTickerSelector = (
+  state: State,
+  { ticker }: { ticker: string },
+): ?string => {
+  const obj = state.settings.currenciesSettings[ticker]
+  return obj && obj.exchange
+}
+
+export const confirmationsNbForCurrencySelector = (
+  state: State,
+  { currency }: { currency: CryptoCurrency },
+): number => {
+  const obj = state.settings.currenciesSettings[currency.ticker]
+  if (obj) return obj.confirmationsNb
+  const defs = currencySettingsDefaults(currency)
+  return defs.confirmationsNb ? defs.confirmationsNb.def : 0
+}
 
 export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator

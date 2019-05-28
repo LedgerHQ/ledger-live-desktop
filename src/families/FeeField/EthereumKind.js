@@ -5,23 +5,24 @@ import { Trans } from 'react-i18next'
 import { BigNumber } from 'bignumber.js'
 import noop from 'lodash/noop'
 import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
 import {
   inferDynamicRange,
   reverseRangeIndex,
   projectRangeIndex,
 } from '@ledgerhq/live-common/lib/range'
+import { getAccountBridge } from 'bridge'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import CurrencyUnitValue from 'components/CurrencyUnitValue'
 import Slider from 'components/Slider'
-import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
-import WithFeesAPI from '../WithFeesAPI'
+import WithFeesAPI from 'components/WithFeesAPI'
 import GenericContainer from './GenericContainer'
 
 type Props = {
   account: Account,
-  gasPrice: ?BigNumber,
-  onChange: BigNumber => void,
+  transaction: *,
+  onChange: (*) => void,
 }
 
 const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
@@ -33,25 +34,38 @@ const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
 
 const fallbackGasPrice = BigNumber(10000000000)
 
-const FeesField = ({ fees, account, gasPrice, onChange }: Props & { fees?: Fees }) => {
+const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fees }) => {
+  const bridge = getAccountBridge(account)
+  const gasPrice = bridge.getTransactionExtra(account, transaction, 'gasPrice')
   const { units } = account.currency
   const unit = units.length > 1 ? units[1] : units[0]
   const serverGas = fees && fees.gas_price ? BigNumber(fees.gas_price) : null
   const defaultGas = serverGas || fallbackGasPrice
   const value = gasPrice || defaultGas
 
+  const onChangeF = useCallback(
+    value => {
+      onChange(bridge.editTransactionExtra(account, transaction, 'gasPrice', value))
+    },
+    [bridge, account, transaction],
+  )
+  const latestOnChange = useRef(onChangeF)
+  useEffect(
+    () => {
+      latestOnChange.current = onChangeF
+    },
+    [onChangeF],
+  )
+
   // as soon as a serverGas is fetched, we set it in the tx
   useEffect(
     () => {
       if (!gasPrice && serverGas) {
-        onChange(serverGas)
+        latestOnChange.current(serverGas)
       }
     },
-    [gasPrice, serverGas, onChange],
+    [account, transaction, gasPrice, serverGas],
   )
-
-  const latestOnChange = useRef(onChange)
-  latestOnChange.current = onChange
 
   // If after 5s, there is still no gasPrice set, we'll set in the tx the default gas
   useEffect(
@@ -81,7 +95,7 @@ const FeesField = ({ fees, account, gasPrice, onChange }: Props & { fees?: Fees 
       }
     >
       <Box flex={1} pt={2}>
-        <GasSlider defaultGas={defaultGas} value={value} onChange={onChange} />
+        <GasSlider defaultGas={defaultGas} value={value} onChange={onChangeF} />
       </Box>
       <Box
         ff="Open Sans|SemiBold"

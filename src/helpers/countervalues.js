@@ -8,7 +8,7 @@ import { currenciesSelector } from 'reducers/accounts'
 import {
   counterValueCurrencySelector,
   counterValueExchangeSelector,
-  currencySettingsSelector,
+  exchangeSettingsForTickerSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import logger from 'logger'
@@ -30,7 +30,7 @@ const pairsSelector = createSelector(
           currencies.filter(c => c.ticker !== intermediaryCurrency.ticker).map(currency => ({
             from: currency,
             to: intermediaryCurrency,
-            exchange: currencySettingsSelector(state, { currency }).exchange,
+            exchange: exchangeSettingsForTickerSelector(state, { ticker: currency.ticker }),
           })),
         ),
 )
