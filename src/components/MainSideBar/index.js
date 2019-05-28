@@ -31,10 +31,6 @@ import TopGradient from './TopGradient'
 import KeyboardContent from '../KeyboardContent'
 import useExperimental from '../../hooks/useExperimental'
 import { darken } from '../../styles/helpers'
-import {
-  UpdateNotice as NewAccountsUpdateNotice,
-  NotifDot as NewAccountsNotifDot,
-} from '../news/NewAccountsPage'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
@@ -163,7 +159,7 @@ class MainSideBar extends PureComponent<Props> {
               iconActiveColor="wallet"
               isActive={pathname === '/accounts'}
               onClick={this.handleClickAccounts}
-              NotifComponent={(noAccounts && UpdateDot) || NewAccountsNotifDot}
+              NotifComponent={noAccounts ? UpdateDot : undefined}
             />
             <SideBarListItem
               label={t('send.title')}
@@ -205,7 +201,6 @@ class MainSideBar extends PureComponent<Props> {
               </KeyboardContent>
             )}
             <Space of={30} />
-            <NewAccountsUpdateNotice />
           </SideBarList>
           <Space grow />
           <TagContainer />

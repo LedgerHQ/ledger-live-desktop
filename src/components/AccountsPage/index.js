@@ -16,7 +16,6 @@ import { accountsSelector } from '../../reducers/accounts'
 import { setAccountsViewMode, setSelectedTimeRange } from '../../actions/settings'
 import { accountsViewModeSelector, selectedTimeRangeSelector } from '../../reducers/settings'
 import EmptyState from './EmptyState'
-import { Dismiss as NewAccountsDismiss } from '../news/NewAccountsPage'
 import { TopBannerContainer } from '../DashboardPage'
 
 type Props = {
@@ -67,14 +66,12 @@ class AccountsPage extends PureComponent<Props> {
           <TopBannerContainer>
             <UpdateBanner />
           </TopBannerContainer>
-          <NewAccountsDismiss />
           <EmptyState />
         </Fragment>
       )
     }
     return (
       <Box>
-        <NewAccountsDismiss />
         <TrackPage category="Accounts" accountsLength={accounts.length} />
         <AccountsHeader />
         <AccountList
