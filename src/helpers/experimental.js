@@ -52,6 +52,12 @@ export const experimentalFeatures: Feature[] = [
       'Alternative USB implementation that might help solve USB issues. Enabling this feature might create UI glitches.',
   },
   {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_NATIVE_SEGWIT',
+    title: 'Native Segwit',
+    description: 'Experimental support of Native Segwit (bech32).',
+  },
+  {
     shadow: true,
     type: 'toggle',
     name: 'FORCE_PROVIDER',
