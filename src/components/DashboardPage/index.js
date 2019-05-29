@@ -36,6 +36,7 @@ import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
 import TopBanner, { FakeLink } from '../TopBanner'
 import { urls } from '../../config/urls'
+import AssetDistribution from '../AssetDistribution'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
@@ -131,6 +132,7 @@ class DashboardPage extends PureComponent<Props> {
                 range={selectedTimeRange}
                 Header={this.Header}
               />
+              <AssetDistribution />
               {totalOperations > 0 && (
                 <OperationsList
                   onAccountClick={this.onAccountClick}
