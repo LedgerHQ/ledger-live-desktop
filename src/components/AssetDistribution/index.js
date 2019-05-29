@@ -49,20 +49,28 @@ const mapStateToProps = createStructuredSelector({
     const accounts = accountsSelector(state)
     const counterValueCurrency = counterValueCurrencySelector(state)
     const toExchange = counterValueExchangeSelector(state)
-    return getAssetsDistribution(accounts, (currency: Currency, value) => {
-      // $FlowFixMe
-      const currencySettings = currencySettingsSelector(state, { currency })
-      const fromExchange = currencySettings.exchange
-      return CounterValues.calculateWithIntermediarySelector(state, {
-        from: currency,
-        fromExchange,
-        intermediary: intermediaryCurrency,
-        toExchange,
-        to: counterValueCurrency,
-        value,
-        disableRounding: true,
-      })
-    })
+    return getAssetsDistribution(
+      accounts,
+      (currency: Currency, value) => {
+        // $FlowFixMe
+        const currencySettings = currencySettingsSelector(state, { currency })
+        const fromExchange = currencySettings.exchange
+        return CounterValues.calculateWithIntermediarySelector(state, {
+          from: currency,
+          fromExchange,
+          intermediary: intermediaryCurrency,
+          toExchange,
+          to: counterValueCurrency,
+          value,
+          disableRounding: true,
+        })
+      },
+      {
+        minShowFirst: 6,
+        maxShowFirst: 6,
+        showFirstThreshold: 0.95,
+      },
+    )
   },
   counterValueCurrency: counterValueCurrencySelector,
 })
@@ -73,25 +81,37 @@ class AssetDistribution extends PureComponent<Props, State> {
   }
   render() {
     const { distribution } = this.props
+    const {
+      showFirst: initialRowCount,
+      list,
+      list: { length: totalRowCount },
+    } = distribution
+
     const { showAll } = this.state
-    const subList = showAll ? distribution.list : distribution.list.slice(0, distribution.showFirst)
+    const almostAll = initialRowCount + 3 > totalRowCount
+    const subList = showAll || almostAll ? list : list.slice(0, initialRowCount)
 
     return (
       <>
         <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          <Trans i18nKey="distribution.header" values={{ count: 0 }} count={subList.length} />
+          <Trans
+            i18nKey="distribution.header"
+            values={{ count: 0 }}
+            count={distribution.list.length}
+          />
         </Text>
         <Card p={0} mt={20}>
           <Header />
           {subList.map(item => <Row key={item.currency.id} item={item} />)}
-          {!showAll && (
-            <SeeAllButton onClick={() => this.setState({ showAll: true })}>
-              <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
-                <Trans i18nKey="distribution.seeAll" />
-              </Text>{' '}
-              <IconAngleDown size={12} />
-            </SeeAllButton>
-          )}
+          {!showAll &&
+            subList.length < distribution.list.length && (
+              <SeeAllButton onClick={() => this.setState({ showAll: true })}>
+                <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
+                  <Trans i18nKey="distribution.seeAll" />
+                </Text>{' '}
+                <IconAngleDown size={12} />
+              </SeeAllButton>
+            )}
         </Card>
       </>
     )

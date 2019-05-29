@@ -81,7 +81,7 @@ class Row extends PureComponent<Props, State> {
     const color = currency.color || colors.live
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     // $FlowFixMe
-    const icon = <CryptoCurrencyIcon currency={currency} size={16} color={color} />;
+    const icon = <CryptoCurrencyIcon currency={currency} size={16} color={color} />
     return (
       <Wrapper>
         <Asset>
