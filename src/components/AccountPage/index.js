@@ -62,7 +62,7 @@ class AccountPage extends PureComponent<Props> {
     } = this.props
 
     if (!account) {
-      return <Redirect to="/" />
+      return <Redirect to="/accounts" />
     }
 
     return (
