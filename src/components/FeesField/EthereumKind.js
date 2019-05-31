@@ -31,7 +31,7 @@ const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
   return <Slider value={index} onChange={setValueIndex} steps={range.steps} />
 })
 
-const fallbackGasPrice = BigNumber(0.01 * 10000000000)
+const fallbackGasPrice = BigNumber(10000000000)
 
 const FeesField = ({ fees, account, gasPrice, onChange }: Props & { fees?: Fees }) => {
   const { units } = account.currency
