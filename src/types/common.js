@@ -4,6 +4,9 @@ import type { DeviceModelId } from '@ledgerhq/devices'
 export type Device = {
   path: string,
   modelId: DeviceModelId,
+  // EXPERIMENTAL
+  appName?: string,
+  version?: string,
 }
 
 // -------------------- Settings

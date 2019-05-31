@@ -1,7 +1,6 @@
 // @flow
 // small utilities for Promises
 
-import logger from 'logger'
 import { TimeoutTagged } from '@ledgerhq/errors'
 import { genericCanRetryOnError } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 
@@ -23,10 +22,9 @@ export function retry<A>(f: () => Promise<A>, options?: $Shape<typeof defaults>)
       return result
     }
     // In case of failure, wait the interval, retry the action
-    return result.catch(e => {
-      logger.warn('retry failed', e.message)
-      return delay(interval).then(() => rec(remainingTry - 1, interval * intervalMultiplicator))
-    })
+    return result.catch(() =>
+      delay(interval).then(() => rec(remainingTry - 1, interval * intervalMultiplicator)),
+    )
   }
 }
 

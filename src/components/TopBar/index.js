@@ -13,6 +13,7 @@ import type { T } from 'types/common'
 import { lock } from 'reducers/application'
 import { hasPasswordSelector } from 'reducers/settings'
 import { hasAccountsSelector } from 'reducers/accounts'
+import { getCurrentDevice } from 'reducers/devices'
 import { openModal } from 'reducers/modals'
 
 import IconLock from 'icons/Lock'
@@ -22,9 +23,29 @@ import IconSettings from 'icons/Settings'
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
 import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
+import KeyboardContent from 'components/KeyboardContent'
+import DeviceIcon from 'components/DeviceIcon'
 
 import ActivityIndicator from './ActivityIndicator'
 import ItemContainer from './ItemContainer'
+
+const ExperimentalDeviceC = ({ device }: *) => (
+  <Tooltip
+    render={() =>
+      !device ? 'disconnected' : `${device.appName || 'Unknown'} ${device.version || ''}`
+    }
+  >
+    <ItemContainer
+      style={{ color: device ? '#66be54' : '#ea2e49' }}
+      isInteractive
+      justifyContent="center"
+    >
+      <DeviceIcon size={20} type={(device && device.modelId) || 'nanoS'} />
+    </ItemContainer>
+  </Tooltip>
+)
+
+const ExperimentalDevice = connect(s => ({ device: getCurrentDevice(s) }))(ExperimentalDeviceC)
 
 const Container = styled(Box).attrs({
   px: 6,
@@ -129,6 +150,14 @@ class TopBar extends PureComponent<Props> {
               </BreadCrumbBack>
             )}
             <Box grow />
+            <KeyboardContent sequence="SHOWMYDEVICE">
+              <Fragment>
+                <ExperimentalDevice />
+                <Box justifyContent="center">
+                  <Bar />
+                </Box>
+              </Fragment>
+            </KeyboardContent>
             <CurrenciesStatusBanner />
             {hasAccounts && (
               <Fragment>

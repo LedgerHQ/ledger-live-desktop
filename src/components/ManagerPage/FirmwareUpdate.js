@@ -15,27 +15,13 @@ import UpdateModal from 'components/modals/UpdateFirmware'
 import Tooltip from 'components/base/Tooltip'
 import Box, { Card } from 'components/base/Box'
 import Text from 'components/base/Text'
-
-import NanoS from 'icons/device/NanoS'
-import NanoX from 'icons/device/NanoX'
-import Blue from 'icons/device/Blue'
+import DeviceIcon from 'components/DeviceIcon'
 import CheckFull from 'icons/CheckFull'
 
 import UpdateFirmwareButton from './UpdateFirmwareButton'
 
 export const getCleanVersion = (input: string): string =>
   input.endsWith('-osu') ? input.replace('-osu', '') : input
-
-const Icon = ({ type }: { type: string }) => {
-  switch (type) {
-    case 'blue':
-      return <Blue size={30} />
-    case 'nanoX':
-      return <NanoX size={30} />
-    default:
-      return <NanoS size={30} />
-  }
-}
 
 export type ModalStatus = 'closed' | 'disclaimer' | 'install' | 'error' | 'success'
 
@@ -112,7 +98,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
       <Card p={4}>
         <Box horizontal align="center" flow={2}>
           <Box color="dark">
-            <Icon type={deviceSpecs.id} />
+            <DeviceIcon size={30} type={deviceSpecs.id} />
           </Box>
           <Box>
             <Box horizontal align="center">

@@ -5,11 +5,11 @@ import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { listen as listenLogs } from '@ledgerhq/logs'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import { setEnvUnsafe, getEnv } from '@ledgerhq/live-common/lib/env'
+import { retry } from '@ledgerhq/live-common/lib/promise'
 import throttle from 'lodash/throttle'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import TransportHttp from '@ledgerhq/hw-transport-http'
 import { DisconnectedDevice } from '@ledgerhq/errors'
-import { retry } from './promise'
 import './implement-libcore'
 
 listenLogs(({ id, date, ...log }) => logger.debug(log))
@@ -58,9 +58,37 @@ if (getEnv('DEVICE_PROXY_URL')) {
     disconnect: () => Promise.resolve(),
   })
 } else {
+  let openedT = null
+  const experimentalOpenHID = async () => {
+    if (openedT) return openedT
+    try {
+      // $FlowFixMe
+      const t = await TransportNodeHid.open('')
+      const onDisconnect = () => {
+        openedT = null
+        t.off('disconnect', onDisconnect)
+      }
+      t.on('disconnect', onDisconnect)
+      t.close = () => Promise.resolve(true)
+      openedT = t
+      return t
+    } catch (e) {
+      openedT = null
+      throw e
+    }
+  }
+
+  const legacyOpenHID = (devicePath: string) =>
+    retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 })
+
   registerTransportModule({
     id: 'hid',
-    open: devicePath => retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 }),
+    open: devicePath => {
+      if (getEnv('EXPERIMENTAL_USB')) {
+        return experimentalOpenHID()
+      }
+      return legacyOpenHID(devicePath)
+    },
     disconnect: () => Promise.resolve(),
   })
 }

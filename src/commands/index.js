@@ -3,13 +3,14 @@
 import invariant from 'invariant'
 import type { Command } from 'helpers/ipc'
 
-import getAppAndVersion from 'commands/getAppAndVersion'
+import appAndVersionPolling from 'commands/appAndVersionPolling'
 import autoUpdate from 'commands/autoUpdate'
-import firmwarePrepare from 'commands/firmwarePrepare'
 import firmwareMain from 'commands/firmwareMain'
+import firmwarePrepare from 'commands/firmwarePrepare'
 import firmwareRepair from 'commands/firmwareRepair'
 import flushDevice from 'commands/flushDevice'
 import getAddress from 'commands/getAddress'
+import getAppAndVersion from 'commands/getAppAndVersion'
 import getDeviceInfo from 'commands/getDeviceInfo'
 import getIsGenuine from 'commands/getIsGenuine'
 import getLatestFirmwareForDevice from 'commands/getLatestFirmwareForDevice'
@@ -33,13 +34,14 @@ import testInterval from 'commands/testInterval'
 import uninstallApp from 'commands/uninstallApp'
 
 const all: Array<Command<any, any>> = [
+  appAndVersionPolling,
   autoUpdate,
-  getAppAndVersion,
-  firmwarePrepare,
   firmwareMain,
+  firmwarePrepare,
   firmwareRepair,
   flushDevice,
   getAddress,
+  getAppAndVersion,
   getDeviceInfo,
   getIsGenuine,
   getLatestFirmwareForDevice,
