@@ -35,7 +35,6 @@ const FlashMCUNanos = React.memo(({ deviceModelId }: Props) => (
         <Trans i18nKey="manager.modal.mcuFirst" />
       </Text>
       <Box mt={5}>
-        {/* TODO: add connecting / disconnecting to NanoX */}
         <Interactions screen="empty" wire="disconnecting" type={deviceModelId} width={368} />
       </Box>
     </Box>
