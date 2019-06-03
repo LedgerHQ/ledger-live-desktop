@@ -34,6 +34,9 @@ if (isSecondInstance) {
   app.quit()
 }
 
+// eslint-disable-next-line no-console
+console.log(`Ledger Live ${__APP_VERSION__}`)
+
 export const getMainWindow = () => mainWindow
 
 const { UPGRADE_EXTENSIONS, ELECTRON_WEBPACK_WDS_PORT, DEV_TOOLS, DEV_TOOLS_MODE } = process.env
