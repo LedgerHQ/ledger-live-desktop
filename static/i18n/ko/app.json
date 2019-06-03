@@ -80,6 +80,10 @@
       "year": "지난 해"
     }
   },
+  "fees": {
+    "slow": "Slow",
+    "fast": "Fast"
+  },
   "sidebar": {
     "menu": "메뉴",
     "accounts": "Accounts",
@@ -383,6 +387,15 @@
   "releaseNotes": {
     "title": "릴리즈 노트",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "distribution": {
+    "asset": "Asset",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "seeAll": "See all",
+    "header": "Asset distribution ({{count}})"
   },
   "settings": {
     "title": "설정",

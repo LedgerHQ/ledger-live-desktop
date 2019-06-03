@@ -80,6 +80,10 @@
       "year": "прошедший год"
     }
   },
+  "fees": {
+    "slow": "Slow",
+    "fast": "Fast"
+  },
   "sidebar": {
     "menu": "Меню",
     "accounts": "Accounts",
@@ -186,7 +190,7 @@
   },
   "partners": {
     "title": "Купить крипто",
-    "desc": "Попробуйте некоторые специально подобранных служб",
+    "desc": "Попробуйте некоторые из специально подобранных служб",
     "visitWebsite": "Посетить веб-сайт",
     "btcdirect": "Совершайте операции покупки и продажи без особых усилий вместе с ведущей в Европе брокерской компанией криптовалют. Регистрируйтесь бесплатно и получайте криптоактивы в считанные минуты! На ресурсе Trustpilot пользователи оценили нас в 8,7 балла",
     "changelly": "Changelly - это широко используемая биржа криптоактивов, на которой представлены свыше 100 монет и токенов.",
@@ -383,6 +387,15 @@
   "releaseNotes": {
     "title": "Заметки о выпуске",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "distribution": {
+    "asset": "Asset",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "seeAll": "See all",
+    "header": "Asset distribution ({{count}})"
   },
   "settings": {
     "title": "Настройки",
