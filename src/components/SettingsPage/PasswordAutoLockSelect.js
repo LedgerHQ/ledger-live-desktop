@@ -44,7 +44,7 @@ class PasswordAutoLockSelect extends PureComponent<Props> {
     return (
       <Select
         small
-        minWidth={250}
+        minWidth={260}
         isSearchable={false}
         onChange={this.handleChangeTimeout}
         renderSelected={item => item && item.name}

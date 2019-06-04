@@ -178,97 +178,77 @@ class GenuineCheck extends PureComponent<StepProps, State> {
         />
         <StepContainerInner>
           <Title>{t('onboarding.genuineCheck.title')}</Title>
-          {onboarding.flowType === 'restoreDevice' ? (
-            <Description>{t('onboarding.genuineCheck.descRestore')}</Description>
-          ) : (
-            <Description>{t('onboarding.genuineCheck.descGeneric')}</Description>
-          )}
-          <Box mt={5}>
-            <GenuineCheckCardWrapper>
+          <Description>
+            {t(
+              onboarding.flowType === 'restoreDevice'
+                ? 'onboarding.genuineCheck.descRestore'
+                : 'onboarding.genuineCheck.descGeneric',
+            )}
+          </Description>
+          <GenuineCheckCardWrapper mt={5}>
+            <IconOptionRow>{'1.'}</IconOptionRow>
+            <CardTitle>{t('onboarding.genuineCheck.step1.title')}</CardTitle>
+            <RadioGroup
+              items={this.getButtonLabel()}
+              activeKey={cachedPinStepButton}
+              onChange={item => this.handleButtonPass(item, 'pinStepPass')}
+            />
+          </GenuineCheckCardWrapper>
+          <GenuineCheckCardWrapper mt={3} isDisabled={!genuine.pinStepPass}>
+            <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>{'2.'}</IconOptionRow>
+            <CardTitle>{t('onboarding.genuineCheck.step2.title')}</CardTitle>
+            {genuine.pinStepPass && (
+              <RadioGroup
+                items={this.getButtonLabel()}
+                activeKey={cachedRecoveryStepButton}
+                onChange={item => this.handleButtonPass(item, 'recoveryStepPass')}
+              />
+            )}
+          </GenuineCheckCardWrapper>
+          <GenuineCheckCardWrapper
+            mt={3}
+            isDisabled={!genuine.recoveryStepPass}
+            isError={genuine.genuineCheckUnavailable}
+          >
+            <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
+              {'3.'}
+            </IconOptionRow>
+            <CardTitle>{t('onboarding.genuineCheck.step3.title')}</CardTitle>
+            <Spacer />
+            {genuine.recoveryStepPass && (
               <Box justify="center">
-                <Box horizontal>
-                  <IconOptionRow>{'1.'}</IconOptionRow>
-                  <CardTitle>{t('onboarding.genuineCheck.step1.title')}</CardTitle>
-                </Box>
-              </Box>
-              <Box justify="center">
-                <RadioGroup
-                  items={this.getButtonLabel()}
-                  activeKey={cachedPinStepButton}
-                  onChange={item => this.handleButtonPass(item, 'pinStepPass')}
-                />
-              </Box>
-            </GenuineCheckCardWrapper>
-          </Box>
-          <Box mt={3}>
-            <GenuineCheckCardWrapper isDisabled={!genuine.pinStepPass}>
-              <Box justify="center">
-                <Box horizontal>
-                  <IconOptionRow color={!genuine.pinStepPass ? 'grey' : 'wallet'}>
-                    {'2.'}
-                  </IconOptionRow>
-                  <CardTitle>{t('onboarding.genuineCheck.step2.title')}</CardTitle>
-                </Box>
-              </Box>
-              <Box justify="center">
-                {genuine.pinStepPass && (
-                  <RadioGroup
-                    items={this.getButtonLabel()}
-                    activeKey={cachedRecoveryStepButton}
-                    onChange={item => this.handleButtonPass(item, 'recoveryStepPass')}
-                  />
+                {genuine.isDeviceGenuine ? (
+                  <Box horizontal align="center" flow={1} color={colors.wallet}>
+                    <IconCheck size={16} />
+                    <Box ff="Open Sans|SemiBold" fontSize={4}>
+                      {t('onboarding.genuineCheck.isGenuinePassed')}
+                    </Box>
+                  </Box>
+                ) : genuine.genuineCheckUnavailable ? (
+                  <Box color="alertRed">
+                    <IconCross size={16} />
+                  </Box>
+                ) : (
+                  <Button
+                    primary
+                    disabled={!genuine.recoveryStepPass}
+                    onClick={this.handleOpenGenuineCheckModal}
+                  >
+                    {t('onboarding.genuineCheck.buttons.genuineCheck')}
+                  </Button>
                 )}
               </Box>
-            </GenuineCheckCardWrapper>
-          </Box>
-          <Box mt={3}>
-            <GenuineCheckCardWrapper
-              isDisabled={!genuine.recoveryStepPass}
-              isError={genuine.genuineCheckUnavailable}
-            >
-              <Box justify="center">
-                <Box horizontal>
-                  <IconOptionRow color={!genuine.recoveryStepPass ? 'grey' : 'wallet'}>
-                    {'3.'}
-                  </IconOptionRow>
-                  <CardTitle>{t('onboarding.genuineCheck.step3.title')}</CardTitle>
-                </Box>
-              </Box>
-              {genuine.recoveryStepPass && (
-                <Box justify="center">
-                  {genuine.isDeviceGenuine ? (
-                    <Box horizontal align="center" flow={1} color={colors.wallet}>
-                      <IconCheck size={16} />
-                      <Box ff="Open Sans|SemiBold" fontSize={4}>
-                        {t('onboarding.genuineCheck.isGenuinePassed')}
-                      </Box>
-                    </Box>
-                  ) : genuine.genuineCheckUnavailable ? (
-                    <Box color="alertRed">
-                      <IconCross size={16} />
-                    </Box>
-                  ) : (
-                    <Button
-                      primary
-                      disabled={!genuine.recoveryStepPass}
-                      onClick={this.handleOpenGenuineCheckModal}
-                    >
-                      {t('onboarding.genuineCheck.buttons.genuineCheck')}
-                    </Button>
-                  )}
-                </Box>
-              )}
-            </GenuineCheckCardWrapper>
-            {genuine.genuineCheckUnavailable && (
-              <Box mt={4}>
-                <GenuineCheckUnavailableMessage
-                  handleOpenGenuineCheckModal={this.handleOpenGenuineCheckModal}
-                  onboarding={onboarding}
-                  t={t}
-                />
-              </Box>
             )}
-          </Box>
+          </GenuineCheckCardWrapper>
+          {genuine.genuineCheckUnavailable && (
+            <Box mt={4}>
+              <GenuineCheckUnavailableMessage
+                handleOpenGenuineCheckModal={this.handleOpenGenuineCheckModal}
+                onboarding={onboarding}
+                t={t}
+              />
+            </Box>
+          )}
         </StepContainerInner>
         {genuine.genuineCheckUnavailable ? (
           <GenuineCheckUnavailableFooter nextStep={nextStep} prevStep={prevStep} t={t} />
@@ -303,4 +283,7 @@ export const CardTitle = styled(Box).attrs({
   fontSize: 4,
   textAlign: 'left',
   pl: 2,
-})``
+})`
+  flex-shrink: 1;
+`
+export const Spacer = styled.div``
