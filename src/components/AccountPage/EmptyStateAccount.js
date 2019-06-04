@@ -8,7 +8,7 @@ import { translate, Trans } from 'react-i18next'
 
 import { openModal } from 'reducers/modals'
 import type { T } from 'types/common'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_RECEIVE } from 'config/constants'
 
@@ -24,13 +24,16 @@ const mapDispatchToProps = {
 
 type Props = {
   t: T,
-  account: Account,
+  account: TokenAccount | Account,
+  parentAccount: ?Account,
   openModal: Function,
 }
 
 class EmptyStateAccount extends PureComponent<Props, *> {
   render() {
-    const { t, account, openModal } = this.props
+    const { t, account, parentAccount, openModal } = this.props
+    const mainAccount = account.type === 'Account' ? account : parentAccount
+    if (!mainAccount) return null
     return (
       <Box mt={7} alignItems="center" selectable>
         <img
@@ -45,12 +48,16 @@ class EmptyStateAccount extends PureComponent<Props, *> {
             <Trans i18nKey="account.emptyState.desc">
               {'Make sure the'}
               <Text ff="Open Sans|SemiBold" color="dark">
-                {account.currency.managerAppName}
+                {mainAccount.currency.managerAppName}
               </Text>
               {'app is installed to receive funds.'}
             </Trans>
           </Description>
-          <Button mt={5} primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
+          <Button
+            mt={5}
+            primary
+            onClick={() => openModal(MODAL_RECEIVE, { account, parentAccount })}
+          >
             <Box horizontal flow={1} alignItems="center">
               <IconReceive size={12} />
               <Box>{t('account.emptyState.buttons.receiveFunds')}</Box>

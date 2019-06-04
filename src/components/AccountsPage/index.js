@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { push } from 'react-router-redux'
 import styled from 'styled-components'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import UpdateBanner from 'components/Updater/Banner'
 import AccountsHeader from './AccountsHeader'
@@ -55,7 +55,10 @@ export const GenericBox = styled(Box)`
 `
 
 class AccountsPage extends PureComponent<Props> {
-  onAccountClick = account => this.props.push(`/account/${account.id}`)
+  onAccountClick = (account: Account | TokenAccount, parentAccount: ?Account) =>
+    parentAccount
+      ? this.props.push(`/account/${parentAccount.id}/${account.id}`)
+      : this.props.push(`/account/${account.id}`)
 
   render() {
     const { accounts, mode, setAccountsViewMode, setSelectedTimeRange, range } = this.props

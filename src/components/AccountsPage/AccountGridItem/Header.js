@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount, Currency } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
 import Ellipsis from 'components/base/Ellipsis'
@@ -10,12 +10,12 @@ import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
 
 class CurrencyHead extends PureComponent<{
-  currency: CryptoCurrency,
+  currency: Currency,
 }> {
   render() {
     const { currency } = this.props
     return (
-      <Box alignItems="center" justifyContent="center" style={{ color: currency.color }}>
+      <Box alignItems="center" justifyContent="center">
         <CryptoCurrencyIcon currency={currency} size={20} />
       </Box>
     )
@@ -23,7 +23,7 @@ class CurrencyHead extends PureComponent<{
 }
 
 class HeadText extends PureComponent<{
-  currency: CryptoCurrency,
+  currency: Currency,
   name: string,
 }> {
   render() {
@@ -42,16 +42,21 @@ class HeadText extends PureComponent<{
 }
 
 class Header extends PureComponent<{
-  account: Account,
+  account: Account | TokenAccount,
+  parentAccount: ?Account,
 }> {
   render() {
-    const { account } = this.props
+    const { account, parentAccount } = this.props
+    const mainAccount = account.type === 'Account' ? account : parentAccount
+    if (!mainAccount) return null
+    const currency = account.type === 'Account' ? account.currency : account.token
+    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
     return (
       <Box flow={4}>
         <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
-          <CurrencyHead currency={account.currency} />
-          <HeadText name={account.name} currency={account.currency} />
-          <AccountSyncStatusIndicator accountId={account.id} account={account} />
+          <CurrencyHead currency={currency} />
+          <HeadText name={mainAccount.name} currency={currency} />
+          <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
         </Box>
         <Bar size={1} color="fog" />
         <Box justifyContent="center">
@@ -60,7 +65,7 @@ class Header extends PureComponent<{
             animateTicker={false}
             ellipsis
             color="dark"
-            unit={account.unit}
+            unit={unit}
             showCode
             val={account.balance}
           />

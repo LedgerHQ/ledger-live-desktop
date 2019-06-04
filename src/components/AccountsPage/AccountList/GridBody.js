@@ -1,16 +1,17 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import styled from 'styled-components'
 import AccountCardPlaceholder from '../AccountGridItem/Placeholder'
 import AccountCard from '../AccountGridItem'
 
 type Props = {
-  visibleAccounts: Account[],
-  hiddenAccounts: Account[],
-  onAccountClick: Account => void,
+  visibleAccounts: (Account | TokenAccount)[],
+  hiddenAccounts: (Account | TokenAccount)[],
+  onAccountClick: (Account | TokenAccount) => void,
+  lookupParentAccount: (id: string) => ?Account,
   range: PortfolioRange,
   showNewAccount: boolean,
 }
@@ -30,13 +31,22 @@ class GridBody extends PureComponent<Props> {
       range,
       showNewAccount,
       onAccountClick,
+      lookupParentAccount,
       ...rest
     } = this.props
 
     return (
       <GridBox {...rest}>
         {visibleAccounts.map(account => (
-          <AccountCard key={account.id} account={account} range={range} onClick={onAccountClick} />
+          <AccountCard
+            key={account.id}
+            account={account}
+            parentAccount={
+              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+            }
+            range={range}
+            onClick={onAccountClick}
+          />
         ))}
         {showNewAccount ? <AccountCardPlaceholder key="placeholder" /> : null}
         {hiddenAccounts.map(account => (
@@ -44,6 +54,9 @@ class GridBody extends PureComponent<Props> {
             hidden
             key={account.id}
             account={account}
+            parentAccount={
+              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+            }
             range={range}
             onClick={onAccountClick}
           />

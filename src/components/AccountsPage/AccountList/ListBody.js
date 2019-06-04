@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import AccountItem from '../AccountRowItem'
 import AccountItemPlaceholder from '../AccountRowItem/Placeholder'
@@ -9,7 +9,7 @@ import AccountItemPlaceholder from '../AccountRowItem/Placeholder'
 type Props = {
   visibleAccounts: Account[],
   hiddenAccounts: Account[],
-  onAccountClick: Account => void,
+  onAccountClick: (Account | TokenAccount) => void,
   range: PortfolioRange,
   showNewAccount: boolean,
 }

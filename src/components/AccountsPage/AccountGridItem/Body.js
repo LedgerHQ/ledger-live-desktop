@@ -4,7 +4,12 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
-import type { Account, BalanceHistoryWithCountervalue } from '@ledgerhq/live-common/lib/types'
+import type {
+  Account,
+  TokenAccount,
+  BalanceHistoryWithCountervalue,
+} from '@ledgerhq/live-common/lib/types'
+import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
 import DeltaChange from 'components/DeltaChange'
@@ -15,7 +20,7 @@ class Body extends PureComponent<{
     history: BalanceHistoryWithCountervalue,
     countervalueAvailable: boolean,
   },
-  account: Account,
+  account: Account | TokenAccount,
 }> {
   // $FlowFixMe
   mapValueCounterValue = d => d.countervalue.toNumber()
@@ -28,12 +33,13 @@ class Body extends PureComponent<{
     } = this.props
     const balanceStart = history[0].countervalue
     const balanceEnd = history[history.length - 1].countervalue
+    const currency = account.type === 'Account' ? account.currency : account.token
     return (
       <Box flow={4}>
         <Box flow={2} horizontal>
           <Box justifyContent="center">
             <CounterValue
-              currency={account.currency}
+              currency={currency}
               value={history[history.length - 1].value}
               animateTicker={false}
               alwaysShowSign={false}
@@ -48,7 +54,7 @@ class Body extends PureComponent<{
         </Box>
         <Chart
           data={history}
-          color={account.currency.color}
+          color={getCurrencyColor(currency)}
           mapValue={countervalueAvailable ? this.mapValueCounterValue : this.mapValue}
           height={52}
           hideAxis

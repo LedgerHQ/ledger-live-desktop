@@ -5,7 +5,7 @@ import type { BigNumber } from 'bignumber.js'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { Currency, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
@@ -33,7 +33,7 @@ type Props = {
   },
   counterValue: Currency,
   t: T,
-  account: Account,
+  account: Account | TokenAccount,
   setSelectedTimeRange: TimeRange => *,
   selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
@@ -90,7 +90,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
       setCountervalueFirst,
     } = this.props
 
-    const unit = account.unit
+    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
     const cvUnit = counterValue.units[0]
     const data = [
       { oldBalance: first.value, balance: last.value, unit },
