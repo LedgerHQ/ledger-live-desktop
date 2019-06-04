@@ -92,7 +92,7 @@ class SelectDevice extends PureComponent<StepProps, {}> {
           t={t}
           nextStep={this.handleContinue}
           prevStep={() => jumpStep('init')}
-          isContinueDisabled={onboarding.deviceModelId === ''}
+          isContinueDisabled={!onboarding.deviceModelId}
         />
       </FixedTopContainer>
     )

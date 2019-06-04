@@ -1,9 +1,12 @@
 // @flow
 import WebSocket from 'ws'
 import { setNetwork, setWebSocketImplementation } from '@ledgerhq/live-common/lib/network'
+import { listen as listenLogs } from '@ledgerhq/logs'
 import { logs as websocketLogs } from '@ledgerhq/live-common/lib/api/socket'
 import network from 'api/network'
 import logger from 'logger'
+
+listenLogs(({ id, date, ...log }) => logger.debug(log))
 
 setWebSocketImplementation(WebSocket)
 setNetwork(network)

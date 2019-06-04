@@ -80,6 +80,10 @@
       "year": "去年"
     }
   },
+  "fees": {
+    "slow": "Slow",
+    "fast": "Fast"
+  },
   "sidebar": {
     "menu": "菜单",
     "accounts": "Accounts",
@@ -383,6 +387,15 @@
   "releaseNotes": {
     "title": "发行说明",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "distribution": {
+    "asset": "Asset",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "seeAll": "See all",
+    "header": "Asset distribution ({{count}})"
   },
   "settings": {
     "title": "设置",

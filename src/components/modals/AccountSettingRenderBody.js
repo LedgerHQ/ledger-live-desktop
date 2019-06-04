@@ -289,6 +289,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
             <ConfirmModal
               analyticsName="RemoveAccount"
               isDanger
+              centered
               isOpened={isRemoveAccountModalOpen}
               onClose={this.handleCloseRemoveAccountModal}
               onReject={this.handleCloseRemoveAccountModal}

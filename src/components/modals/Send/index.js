@@ -295,7 +295,7 @@ class SendModal extends PureComponent<Props, State<*>> {
 
     const errorSteps = error ? [error instanceof UserRefusedOnDevice ? 2 : 3] : []
 
-    const isModalLocked = stepId === 'verification'
+    const isModalLocked = stepId === 'amount' || stepId === 'verification'
 
     return (
       <Modal

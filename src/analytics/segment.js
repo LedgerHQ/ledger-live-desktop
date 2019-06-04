@@ -3,7 +3,6 @@
 import uuid from 'uuid/v4'
 import logger from 'logger'
 import invariant from 'invariant'
-import { getDeviceModel } from '@ledgerhq/devices'
 import { getSystemLocale } from 'helpers/systemLocale'
 import { langAndRegionSelector, shareAnalyticsSelector } from 'reducers/settings'
 import { getCurrentDevice } from 'reducers/devices'
@@ -34,9 +33,7 @@ const extraProperties = store => {
   const { language, region } = langAndRegionSelector(state)
   const systemLocale = getSystemLocale()
   const device = getCurrentDevice(state)
-  const deviceInfo = device && {
-    productId: getDeviceModel(device.modelId).usbProductId,
-  }
+  const deviceInfo = device
   return {
     appVersion: __APP_VERSION__,
     language,
