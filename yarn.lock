@@ -1773,10 +1773,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^5.12.1":
-  version "5.12.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-5.12.1.tgz#dbf0b1b0c23eed569c3ecef00e82f2ff9566a252"
-  integrity sha512-Gm1/ot+Tb9p0Xe5LzY2hne+XpKG3W9XMgiEqhuS9wikP64YdguIglurbBoR3B46awRm38XjqevKyRYfL22limA==
+"@ledgerhq/live-common@5":
+  version "5.12.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-5.12.2.tgz#73a3737d7bbf1a929d08f824145939936e2b6716"
+  integrity sha512-JE6Cnm3W/JOF/ZGioaBjw7Chc7s7xG93aVmK7asOMMHmmzG1cBeGEwbb7tTUtlaXSF5dEoAM6xfif3MB5+p1zQ==
   dependencies:
     "@ledgerhq/errors" "4.60.0"
     "@ledgerhq/hw-app-btc" "4.60.3"
