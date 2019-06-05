@@ -10,21 +10,46 @@ type Props = {
   visibleAccounts: Account[],
   hiddenAccounts: Account[],
   onAccountClick: (Account | TokenAccount) => void,
+  lookupParentAccount: (id: string) => ?Account,
   range: PortfolioRange,
   showNewAccount: boolean,
 }
 
 class ListBody extends PureComponent<Props> {
   render() {
-    const { visibleAccounts, showNewAccount, hiddenAccounts, range, onAccountClick } = this.props
+    const {
+      visibleAccounts,
+      showNewAccount,
+      hiddenAccounts,
+      range,
+      onAccountClick,
+      lookupParentAccount,
+    } = this.props
     return (
       <Box>
-        {visibleAccounts.map(item => (
-          <AccountItem key={item.id} account={item} range={range} onClick={onAccountClick} />
+        {visibleAccounts.map(account => (
+          <AccountItem
+            key={account.id}
+            account={account}
+            parentAccount={
+              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+            }
+            range={range}
+            onClick={onAccountClick}
+          />
         ))}
         {showNewAccount ? <AccountItemPlaceholder /> : null}
-        {hiddenAccounts.map(item => (
-          <AccountItem hidden key={item.id} account={item} range={range} onClick={onAccountClick} />
+        {hiddenAccounts.map(account => (
+          <AccountItem
+            hidden
+            key={account.id}
+            account={account}
+            parentAccount={
+              account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
+            }
+            range={range}
+            onClick={onAccountClick}
+          />
         ))}
       </Box>
     )

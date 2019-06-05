@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import invariant from 'invariant'
 import { withContextMenuContext } from './ContextMenuWrapper'
 import type { ContextMenuItemType } from './ContextMenuWrapper'
+import { DISABLE_CONTEXT_MENU } from '../../config/constants'
 
 type Props = {
   children?: React$Node,
@@ -20,13 +21,13 @@ type State = {
 class ContextMenuItem extends PureComponent<Props, State> {
   componentDidMount() {
     invariant(this.props.items, "Don't wrap with ContextMenuWrapper without providing items")
-    if (this.ref) {
+    if (!DISABLE_CONTEXT_MENU && this.ref) {
       this.ref.addEventListener('contextmenu', this.showContextMenu)
     }
   }
 
   componentWillUnmount() {
-    if (this.ref) {
+    if (!DISABLE_CONTEXT_MENU && this.ref) {
       this.ref.removeEventListener('contextmenu', this.showContextMenu)
     }
   }

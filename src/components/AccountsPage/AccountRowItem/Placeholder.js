@@ -6,7 +6,6 @@ import { compose } from 'redux'
 import { T, translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import IconPlus from 'icons/Plus'
-import Button from 'components/base/Button'
 import { openModal } from 'reducers/modals'
 import styled from 'styled-components'
 import { MODAL_ADD_ACCOUNTS } from '../../../config/constants'
@@ -20,8 +19,9 @@ const mapDispatchToProps = {
   openModal,
 }
 
-const AddAccountButton = styled(Button)`
+const AddAccountButton = styled.div`
   border: 1px dashed rgba(153, 153, 153, 0.3);
+  cursor: pointer;
   border-radius: 4px;
   padding: 20px;
   color: #abadb6;
@@ -34,6 +34,7 @@ const AddAccountButton = styled(Button)`
 
   &:hover {
     cursor: pointer;
+    border-color: ${p => p.theme.colors.dark};
     color: ${p => p.theme.colors.dark};
   }
 `

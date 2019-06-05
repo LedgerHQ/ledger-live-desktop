@@ -4,7 +4,11 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
-import type { Account, BalanceHistoryWithCountervalue } from '@ledgerhq/live-common/lib/types'
+import type {
+  BalanceHistoryWithCountervalue,
+  CryptoCurrency,
+  TokenCurrency,
+} from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
 import { PlaceholderLine } from '../../Placeholder'
@@ -14,17 +18,17 @@ class Countervalue extends PureComponent<{
     history: BalanceHistoryWithCountervalue,
     countervalueAvailable: boolean,
   },
-  account: Account,
+  currency: CryptoCurrency | TokenCurrency,
 }> {
   render() {
-    const { histo, account } = this.props
+    const { histo, currency } = this.props
     const balanceEnd = histo.history[histo.history.length - 1].value
     const placeholder = <PlaceholderLine width={16} height={2} />
     return (
       <Box flex="20%">
         {histo.countervalueAvailable ? (
           <CounterValue
-            currency={account.currency}
+            currency={currency}
             value={balanceEnd}
             animateTicker={false}
             alwaysShowSign={false}
