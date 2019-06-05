@@ -57,7 +57,7 @@ const LanguageSelect = ({ i18n, setLanguage, language, useSystem, t }: Props) =>
       />
       <Select
         small
-        minWidth={250}
+        minWidth={260}
         isSearchable={false}
         onChange={handleChangeLanguage}
         renderSelected={item => item && item.name}
