@@ -85,7 +85,7 @@ class AccountPage extends PureComponent<Props> {
 
     const mainAccount = account && account.type === 'Account' ? account : parentAccount
     if (!account || !mainAccount) {
-      return <Redirect to="/" />
+      return <Redirect to="/accounts" />
     }
 
     const currency = account.type === 'Account' ? account.currency : account.token
