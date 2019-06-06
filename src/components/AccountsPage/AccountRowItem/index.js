@@ -18,7 +18,7 @@ import IconSend from '../../../icons/Send'
 import IconReceive from '../../../icons/Receive'
 import IconAccountSettings from '../../../icons/AccountSettings'
 import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../../config/constants'
-import TokenRow from './TokenRow'
+import TokenRow from '../../TokenRow'
 
 const Wrapper = styled.div`
   display: ${p => (p.hidden ? 'none' : 'contents')};
@@ -37,7 +37,7 @@ const Row = styled(Box)`
   font-weight: 600;
   justify-content: flex-start;
   margin-bottom: ${p => (p.tokens ? 9 : 18)}px;
-  padding: 10px 20px;
+  padding: 16px 20px;
   position: relative;
   :hover {
     border-color: ${p => p.theme.colors.lightFog};
@@ -151,6 +151,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       tokens = account.tokenAccounts
     }
 
+    const showTokensIndicator = tokens && tokens.length > 0 && !hidden
     return (
       <Wrapper hidden={hidden}>
         <Row expanded={expanded} key={mainAccount.id}>
@@ -165,7 +166,7 @@ class AccountRowItem extends PureComponent<Props, State> {
               <Balance unit={unit} balance={account.balance} />
               <Countervalue account={account} currency={currency} range={range} />
               <Delta account={account} range={range} />
-              {tokens ? (
+              {showTokensIndicator ? (
                 <TokenShowMoreIndicator
                   size={18}
                   expanded={expanded}
@@ -178,23 +179,25 @@ class AccountRowItem extends PureComponent<Props, State> {
               )}
             </RowContent>
           </ContextMenuItem>
-          {tokens &&
+          {showTokensIndicator &&
             expanded && (
               <TokenContent>
-                {tokens.map((token, index) => (
-                  <TokenRow
-                    index={index}
-                    key={token.id}
-                    range={range}
-                    account={token}
-                    parentAccount={mainAccount}
-                    onClick={onClick}
-                  />
-                ))}
+                {tokens &&
+                  tokens.map((token, index) => (
+                    <TokenRow
+                      nested
+                      index={index}
+                      key={token.id}
+                      range={range}
+                      account={token}
+                      parentAccount={mainAccount}
+                      onClick={onClick}
+                    />
+                  ))}
               </TokenContent>
             )}
         </Row>
-        {tokens && !expanded && !hidden && <TokenAccountIndicator />}
+        {showTokensIndicator && !expanded && <TokenAccountIndicator />}
       </Wrapper>
     )
   }
