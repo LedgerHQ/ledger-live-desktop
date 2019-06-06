@@ -66,6 +66,7 @@ export const FORCE_PROVIDER = intFromEnv('FORCE_PROVIDER', 0)
 // Flags
 
 export const DISABLE_TICKER_ANIMATION = boolFromEnv('DISABLE_TICKER_ANIMATION')
+export const DISABLE_CONTEXT_MENU = boolFromEnv('DISABLE_CONTEXT_MENU')
 export const DEBUG_ANALYTICS = boolFromEnv('DEBUG_ANALYTICS')
 export const DEBUG_DEVICE = boolFromEnv('DEBUG_DEVICE')
 export const DEBUG_NETWORK = boolFromEnv('DEBUG_NETWORK')

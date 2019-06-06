@@ -11,14 +11,13 @@ type Props = {
   size: number,
 }
 
-// FIXME when design have a solution
 const TokenIcon = styled.div`
-  font-size: ${p => p.size / 3}px;
+  font-size: ${p => p.size / 2}px;
   font-family: 'Open Sans';
   font-weight: bold;
   color: ${p => p.color};
   background-color: ${p => lighten(p.color, 0.9)};
-  border-radius: ${p => p.size}px;
+  border-radius: 4px;
   display: flex;
   overflow: hidden;
   flex-direction: column;
@@ -38,7 +37,7 @@ class CryptoCurrencyIcon extends PureComponent<Props> {
     if (currency.type === 'TokenCurrency') {
       return (
         <TokenIcon color={color} size={size}>
-          {currency.ticker}
+          {currency.ticker[0]}
         </TokenIcon>
       )
     }
