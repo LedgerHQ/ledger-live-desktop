@@ -18,15 +18,8 @@ const ConnectTroubleshooting = ({ appearsAfterDelay = 20000 }: Props) => {
     return () => clearTimeout(timeout)
   }, [])
 
-  return (
-    <Box
-      p={4}
-      alignItems="center"
-      style={{
-        opacity: visible ? 1 : 0,
-        transition: 'opacity 2s',
-      }}
-    >
+  return visible ? (
+    <Box p={4} alignItems="center">
       <Box p={2}>
         <Text ff="Open Sans|SemiBold" fontSize={4}>
           <Trans i18nKey="connectTroubleshooting.desc" />
@@ -37,7 +30,7 @@ const ConnectTroubleshooting = ({ appearsAfterDelay = 20000 }: Props) => {
         <RepairDeviceButton />
       </Box>
     </Box>
-  )
+  ) : null
 }
 
 export default ConnectTroubleshooting
