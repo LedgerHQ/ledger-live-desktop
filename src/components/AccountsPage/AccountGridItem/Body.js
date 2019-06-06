@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
@@ -14,6 +15,10 @@ import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
 import DeltaChange from 'components/DeltaChange'
 import Chart from 'components/base/Chart'
+
+const Placeholder = styled.div`
+  height: 14px;
+`
 
 class Body extends PureComponent<{
   histo: {
@@ -45,6 +50,7 @@ class Body extends PureComponent<{
               alwaysShowSign={false}
               showCode
               fontSize={3}
+              placeholder={<Placeholder />}
               color="graphite"
             />
           </Box>
