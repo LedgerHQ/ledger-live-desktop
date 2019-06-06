@@ -28,6 +28,7 @@ import BalanceSummary from './BalanceSummary'
 import AccountHeader from './AccountHeader'
 import AccountHeaderActions from './AccountHeaderActions'
 import EmptyStateAccount from './EmptyStateAccount'
+import TokenList from './TokensList'
 
 const mapStateToProps = (
   state,
@@ -118,6 +119,7 @@ class AccountPage extends PureComponent<Props> {
                 setCountervalueFirst={setCountervalueFirst}
               />
             </Box>
+            <TokenList account={account} range={selectedTimeRange} />
             <OperationsList
               account={account}
               parentAccount={parentAccount}

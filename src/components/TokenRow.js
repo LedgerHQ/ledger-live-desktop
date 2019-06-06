@@ -7,13 +7,14 @@ import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import { openModal } from 'reducers/modals'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import Header from './Header'
-import Balance from './Balance'
-import Delta from './Delta'
-import Countervalue from './Countervalue'
+import Header from './AccountsPage/AccountRowItem/Header'
+import Balance from './AccountsPage/AccountRowItem/Balance'
+import Delta from './AccountsPage/AccountRowItem/Delta'
+import Countervalue from './AccountsPage/AccountRowItem/Countervalue'
 
 type Props = {
   account: TokenAccount,
+  nested?: boolean,
   index: number,
   parentAccount: Account,
   onClick: (Account | TokenAccount, ?Account) => void,
@@ -24,7 +25,24 @@ const mapDispatchToProps = {
   openModal,
 }
 
-const Row = styled(Box)`
+const TopLevelRow = styled(Box)`
+  background: #ffffff;
+  align-items: center;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 8px 0 #00000007;
+  flex-direction: row;
+  color: #abadb6;
+  cursor: pointer;
+  display: flex;
+  margin-bottom: 9px;
+  padding: 20px;
+  :hover {
+    border-color: ${p => p.theme.colors.lightFog};
+  }
+`
+
+const NestedRow = styled(Box)`
   flex: 1;
   height: 40px;
   font-weight: 600;
@@ -60,12 +78,13 @@ class TokenRow extends PureComponent<Props> {
       account: { token },
       range,
       index,
+      nested,
     } = this.props
     const unit = account.token.units[0]
-
+    const Row = nested ? NestedRow : TopLevelRow
     return (
       <Row index={index} onClick={this.onClick}>
-        <Header account={account} name={token.name} />
+        <Header nested={nested} account={account} name={token.name} />
         <Box flex="12%" />
         <Balance unit={unit} balance={account.balance} />
         <Countervalue account={account} currency={token} range={range} />

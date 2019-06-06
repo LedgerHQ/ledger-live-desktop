@@ -215,6 +215,10 @@
     },
     "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Add token"
+  },
   "addAccounts": {
     "title": "Add accounts",
     "breadcrumb": {

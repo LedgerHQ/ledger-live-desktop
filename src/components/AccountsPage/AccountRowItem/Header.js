@@ -11,6 +11,7 @@ import Ellipsis from '../../base/Ellipsis'
 type Props = {
   account: Account | TokenAccount,
   name: string,
+  nested?: boolean,
 }
 
 // NB Inside Head to not break alignment with parent row;
@@ -24,7 +25,7 @@ const NestedIndicator = styled.div`
 
 class Header extends PureComponent<Props> {
   render() {
-    const { account, name } = this.props
+    const { account, name, nested } = this.props
     let currency
     let color
     let title
@@ -39,15 +40,24 @@ class Header extends PureComponent<Props> {
       title = 'token'
     }
     return (
-      <Box horizontal ff="Open Sans|SemiBold" flow={3} flex="30%" pr={1} alignItems="center">
-        {account.type !== 'Account' && <NestedIndicator />}
+      <Box
+        horizontal
+        ff="Open Sans|SemiBold"
+        flow={3}
+        flex={`${nested ? 30 : 42}%`}
+        pr={1}
+        alignItems="center"
+      >
+        {nested && <NestedIndicator />}
         <Box alignItems="center" justifyContent="center" style={{ color }}>
           <CryptoCurrencyIcon currency={currency} size={20} />
         </Box>
         <Box grow>
-          <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
-            {title}
-          </Box>
+          {nested && (
+            <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
+              {title}
+            </Box>
+          )}
           <Ellipsis fontSize={12} color="dark">
             {name}
           </Ellipsis>
