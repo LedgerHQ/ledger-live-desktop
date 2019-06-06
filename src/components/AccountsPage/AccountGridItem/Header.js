@@ -23,15 +23,15 @@ class CurrencyHead extends PureComponent<{
 }
 
 class HeadText extends PureComponent<{
-  currency: Currency,
+  title: string,
   name: string,
 }> {
   render() {
-    const { currency, name } = this.props
+    const { title, name } = this.props
     return (
       <Box grow>
         <Box style={{ textTransform: 'uppercase' }} fontSize={10} color="graphite">
-          {currency.name}
+          {title}
         </Box>
         <Ellipsis fontSize={13} color="dark">
           {name}
@@ -47,15 +47,33 @@ class Header extends PureComponent<{
 }> {
   render() {
     const { account, parentAccount } = this.props
-    const mainAccount = account.type === 'Account' ? account : parentAccount
-    if (!mainAccount) return null
-    const currency = account.type === 'Account' ? account.currency : account.token
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    let currency
+    let unit
+    let mainAccount
+    let title
+    let name
+
+    if (account.type !== 'Account') {
+      currency = account.token
+      unit = account.token.units[0]
+      mainAccount = parentAccount
+      title = 'token'
+      name = currency.name
+
+      if (!mainAccount) return null
+    } else {
+      currency = account.currency
+      unit = account.unit
+      mainAccount = account
+      title = currency.name
+      name = mainAccount.name
+    }
+
     return (
       <Box flow={4}>
         <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
           <CurrencyHead currency={currency} />
-          <HeadText name={mainAccount.name} currency={currency} />
+          <HeadText name={name} title={title} />
           <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
         </Box>
         <Bar size={1} color="fog" />
