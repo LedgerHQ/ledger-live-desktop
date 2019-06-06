@@ -37,7 +37,7 @@ class CounterValueSelect extends PureComponent<Props> {
         <Track onUpdate event="CounterValueSelect" counterValue={cvOption && cvOption.value} />
         <Select
           small
-          minWidth={250}
+          minWidth={260}
           onChange={this.handleChangeCounterValue}
           itemToString={item => (item ? item.name : '')}
           renderSelected={item => item && item.name}

@@ -16,7 +16,7 @@ type Result = {
 
 const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
   Observable.create(o => {
-    const { autoUpdater } = require('electron-updater')
+    const { autoUpdater } = require('@ledgerhq/electron-updater')
 
     const sendStatus = (status, payload) => {
       o.next({ status, payload })

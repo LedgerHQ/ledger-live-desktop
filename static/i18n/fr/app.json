@@ -796,7 +796,7 @@
     "finish": {
       "title": "Votre appareil est prêt !",
       "desc": "Installez des applications sur votre appareil et accédez au Portfolio",
-      "openAppButton": "Ouvrez Ledger Live."
+      "openAppButton": "Ouvrez Ledger Live"
     }
   },
   "connectTroubleshooting": {
