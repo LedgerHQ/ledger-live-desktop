@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "<1><0>{{currencyName}}</0></1> 계정을 추가하려면 아래 단계를 따르십시오."
     },
-    "accountAlreadyImportedSubtitle": "계정이 이미 포트폴리오 ({{count}})에 있습니다.",
-    "accountToImportSubtitle": "기존 계정 추가",
     "accountToImportSubtitle_plural": "기존 계정 추가",
     "selectAll": "모든 ({{count}}) 선택",
     "unselectAll": "모든 ({{count}}) 선택 해제",
@@ -241,7 +239,6 @@
     "successDescription": "더 많은 계정을 추가하거나 포트폴리오로 돌아가십시오.",
     "successDescription_plural": "더 많은 계정을 추가하거나 포트폴리오로 돌아가십시오.",
     "createNewAccount": {
-      "title": "새 계정 추가",
       "noOperationOnLastAccount": "<1><0>{{accountName}}</0></1> 계정에서 받기 전에 새 계정을 추가할 수 없습니다.",
       "noAccountToCreate": "생성할 <1><0>{{currencyName}}</0></1> 계정이 없습니다."
     },
@@ -249,6 +246,20 @@
       "addMore": "더 추가하기",
       "add": "계정 추가",
       "add_plural": "계정 추가"
+    },
+    "sections": {
+      "importable": {
+        "title": "Add existing account"
+      },
+      "creatable": {
+        "title": "Add new account"
+      },
+      "imported": {
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
+      }
     }
   },
   "operationDetails": {
@@ -370,6 +381,7 @@
         "recipientAddress": "수취인 주소",
         "amount": "금액",
         "fees": "네트워크 수수료",
+        "useMax": "use max",
         "advancedOptions": "고급 옵션",
         "useRBF": "RBF(replace-by-fee) 트랜잭션 사용",
         "message": "메시지 남기기 (140 )",
@@ -833,6 +845,10 @@
     "BtcUnmatchedApp": {
       "title": "잘못된 앱입니다.",
       "description": "장치에서 ‘{{managerAppName}}’ 앱을 여십시오."
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "정품이 아닐 수 있습니다.",
