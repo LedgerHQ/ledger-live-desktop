@@ -15,10 +15,9 @@ import type { TimeRange } from 'reducers/settings'
 import { BalanceTotal, BalanceSinceDiff, BalanceSincePercent } from 'components/BalanceInfos'
 import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
+import Price from 'components/Price'
 import PillsDaysCount from 'components/PillsDaysCount'
 import styled from 'styled-components'
-import IconActivity from 'icons/Activity'
-import CounterValue from '../CounterValue'
 import Swap from '../../icons/Swap'
 
 type Props = {
@@ -98,7 +97,8 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
       setCountervalueFirst,
     } = this.props
 
-    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const currency = account.type === 'Account' ? account.currency : account.token
+    const unit = account.type === 'Account' ? account.unit : currency.units[0]
     const cvUnit = counterValue.units[0]
     const data = [
       { oldBalance: first.value, balance: last.value, unit },
@@ -110,7 +110,6 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
 
     const primaryKey = data[0].unit.code
     const secondaryKey = data[1].unit.code
-    const bigOne = BigNumber(10 ** account.currency.units[0].magnitude)
 
     return (
       <Box flow={4} mb={2}>
@@ -132,7 +131,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             unit={data[0].unit}
           >
             <Wrapper>
-              <div style={{ width: 'auto' }}>
+              <div style={{ width: 'auto', marginRight: 8 }}>
                 <FormattedVal
                   key={secondaryKey}
                   animateTicker
@@ -145,36 +144,13 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
                   val={data[1].balance}
                 />
               </div>
-              <IconActivity
-                size={12}
-                style={{
-                  color: account.currency.color,
-                  marginRight: 4,
-                  marginLeft: 8,
-                }}
-              />
-              <Box>
-                <FormattedVal
-                  key={account.id}
-                  animateTicker
-                  disableRounding
-                  alwaysShowSign={false}
-                  color="grey"
-                  unit={account.unit}
-                  fontSize={4}
-                  showCode
-                  val={bigOne}
-                  style={{ marginRight: 4 }}
-                />
-              </Box>
-              {'='}
-              <CounterValue
-                currency={account.currency}
-                value={bigOne}
-                color="grey"
+              <Price
+                unit={unit}
+                currency={currency}
+                withActivityCurrencyColor
+                withEquality
+                color="warmGrey"
                 fontSize={4}
-                alwaysShowSign={false}
-                style={{ marginLeft: 4 }}
               />
             </Wrapper>
           </BalanceTotal>

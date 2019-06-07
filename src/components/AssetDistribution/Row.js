@@ -2,13 +2,13 @@
 
 import React, { PureComponent } from 'react'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
+import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
-import { colors } from 'styles/theme'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
+import Price from 'components/Price'
 import Text from 'components/base/Text'
-import IconActivity from 'icons/Activity'
 import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
 import Bar from './Bar'
 import Ellipsis from '../base/Ellipsis'
@@ -46,7 +46,7 @@ const Asset = styled.div`
     margin-right: 10px;
   }
 `
-const Price = styled.div`
+const PriceSection = styled.div`
   width: 20%;
   text-align: left;
   > :first-child {
@@ -76,9 +76,7 @@ class Row extends PureComponent<Props, State> {
     const {
       item: { currency, amount, distribution },
     } = this.props
-    const one = new BigNumber(10 ** currency.units[0].magnitude)
-    // $FlowFixMe
-    const color = currency.color || colors.live
+    const color = getCurrencyColor(currency)
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
     const icon = <CryptoCurrencyIcon currency={currency} size={16} />
     return (
@@ -89,18 +87,9 @@ class Row extends PureComponent<Props, State> {
             {currency.name}
           </Text>
         </Asset>
-        <Price>
-          <IconActivity size={12} color={colors.graphite} />
-          <CounterValue
-            currency={currency}
-            value={one}
-            disableRounding
-            color="graphite"
-            fontSize={3}
-            showCode
-            alwaysShowSign={false}
-          />
-        </Price>
+        <PriceSection>
+          <Price currency={currency} color="graphite" fontSize={3} />
+        </PriceSection>
         <Distribution>
           <Text ff="Rubik" color="dark" fontSize={3}>
             {`${percentage}%`}
