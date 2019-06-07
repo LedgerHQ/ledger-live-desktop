@@ -18,9 +18,6 @@ const handlers: Object = {
     { payload: accounts }: { payload: Account[] },
   ): AccountsState => accounts,
 
-  REORDER_ACCOUNTS: (state: AccountsState, { payload }: { payload: string[] }) =>
-    state.slice(0).sort((a, b) => payload.indexOf(a.id) - payload.indexOf(b.id)),
-
   ADD_ACCOUNT: (
     state: AccountsState,
     { payload: account }: { payload: Account },

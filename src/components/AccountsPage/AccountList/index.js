@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import type { TokenAccount, Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
-import { flattenAccounts } from '@ledgerhq/live-common/lib/account'
 import { Trans } from 'react-i18next'
 
 import Text from 'components/base/Text'
@@ -12,7 +11,7 @@ import GridBody from '../AccountList/GridBody'
 import ListBody from '../AccountList/ListBody'
 
 type Props = {
-  accounts: Account[],
+  accounts: (Account | TokenAccount)[],
   mode: *,
   onModeChange: (*) => void,
   onRangeChange: PortfolioRange => void,
@@ -27,11 +26,6 @@ type State = {
 const BodyByMode = {
   card: GridBody,
   list: ListBody,
-}
-
-const modeShouldFlatten = {
-  card: true,
-  list: false,
 }
 
 const matchesSearch = (search: string, account: Account | TokenAccount): boolean =>
@@ -50,7 +44,14 @@ class AccountList extends Component<Props, State> {
     search: '',
   }
 
-  lookupParentAccount = (id: string): ?Account => this.props.accounts.find(a => a.id === id)
+  lookupParentAccount = (id: string): ?Account => {
+    for (const a of this.props.accounts) {
+      if (a.type === 'Account' && a.id === id) {
+        return a
+      }
+    }
+    return null
+  }
 
   onTextChange = (evt: SyntheticInputEvent<HTMLInputElement>) =>
     this.setState({
@@ -62,11 +63,10 @@ class AccountList extends Component<Props, State> {
     const { search } = this.state
     const Body = BodyByMode[mode]
 
-    const all = modeShouldFlatten[mode] ? flattenAccounts(accounts) : accounts
     const visibleAccounts = []
     const hiddenAccounts = []
-    for (let i = 0; i < all.length; i++) {
-      const account = all[i]
+    for (let i = 0; i < accounts.length; i++) {
+      const account = accounts[i]
       if (matchesSearch(search, account)) {
         visibleAccounts.push(account)
       } else {
@@ -83,7 +83,7 @@ class AccountList extends Component<Props, State> {
           mode={mode}
           range={range}
           search={search}
-          accountsLength={all.length}
+          accountsLength={accounts.length}
         />
         {visibleAccounts.length === 0 ? (
           <Text style={{ display: 'block', padding: 60, textAlign: 'center' }}>

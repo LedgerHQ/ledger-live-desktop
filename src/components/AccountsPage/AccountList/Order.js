@@ -1,13 +1,9 @@
 // @flow
-
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { useCallback } from 'react'
 import { compose } from 'redux'
-import { translate } from 'react-i18next'
+import { translate, Trans } from 'react-i18next'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-
-import type { T } from 'types/common'
 import { refreshAccountsOrdering } from 'actions/general'
 import { saveSettings } from 'actions/settings'
 import { getOrderAccounts } from 'reducers/settings'
@@ -17,23 +13,76 @@ import Box from 'components/base/Box'
 import DropDown, { DropDownItem } from 'components/base/DropDown'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
-import IconArrowDown from 'icons/ArrowDown'
-import IconArrowUp from 'icons/ArrowUp'
 
-type Props = {
-  t: T,
+const items = ['balance|desc', 'balance|asc', 'name|asc', 'name|desc'].map(key => ({
+  key,
+  label: <Trans i18nKey={`accounts.order.${key}`} />,
+}))
+
+const Order = ({
+  orderAccounts,
+  saveSettings,
+  refreshAccountsOrdering,
+}: {
   orderAccounts: string,
   refreshAccountsOrdering: () => *,
   saveSettings: (*) => *,
+}) => {
+  const onChange = useCallback(
+    o => {
+      saveSettings({ orderAccounts: o.key })
+      refreshAccountsOrdering()
+    },
+    [saveSettings, refreshAccountsOrdering],
+  )
+
+  const renderItem = useCallback(props => <OrderItem {...props} />, [])
+
+  const value = items.find(item => item.key === orderAccounts)
+
+  return (
+    <DropDown
+      flow={1}
+      offsetTop={2}
+      horizontal
+      items={items}
+      renderItem={renderItem}
+      onChange={onChange}
+      value={value}
+    >
+      <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
+      <Text ff="Open Sans|SemiBold" fontSize={4}>
+        <Trans i18nKey="common.sortBy" />
+      </Text>
+      <Box
+        alignItems="center"
+        color="wallet"
+        ff="Open Sans|SemiBold"
+        flow={1}
+        fontSize={4}
+        horizontal
+      >
+        <Text color="wallet">
+          <Trans i18nKey={`accounts.order.${orderAccounts}`} />
+        </Text>
+        <IconAngleDown size={16} />
+      </Box>
+    </DropDown>
+  )
 }
 
-const OrderIcon = styled(Box).attrs({
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'wallet',
-})`
-  opacity: ${p => (p.isActive ? 1 : 0)};
-`
+const OrderItem = React.memo(({ item, isHighlighted, isActive }: *) => (
+  <DropDownItem
+    alignItems="center"
+    justifyContent="flex-start"
+    horizontal
+    isHighlighted={isHighlighted}
+    isActive={isActive}
+    flow={2}
+  >
+    <BoldToggle isBold={isActive}>{item.label}</BoldToggle>
+  </DropDownItem>
+))
 
 const mapStateToProps = createStructuredSelector({
   orderAccounts: getOrderAccounts,
@@ -42,121 +91,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   refreshAccountsOrdering,
   saveSettings,
-}
-
-class Order extends Component<Props> {
-  onStateChange = ({ selectedItem: item }) => {
-    if (!item) {
-      return
-    }
-    const currentAccountOrder = this.getCurrentValue()
-    const [accountOrder] = item.key.split('|')
-
-    const order =
-      currentAccountOrder === accountOrder ? this.getReverseOrder() : this.getCurrentOrder()
-
-    this.setAccountOrder(`${accountOrder}|${order}`)
-  }
-
-  setAccountOrder = order => {
-    const { saveSettings, refreshAccountsOrdering } = this.props
-    saveSettings({ orderAccounts: order })
-    refreshAccountsOrdering()
-  }
-
-  getCurrentOrder = () => {
-    const { orderAccounts } = this.props
-    if (orderAccounts !== null) {
-      return orderAccounts.split('|')[1]
-    }
-    return 'desc'
-  }
-
-  getCurrentValue = () => {
-    const { orderAccounts } = this.props
-    if (orderAccounts !== null) {
-      return orderAccounts.split('|')[0]
-    }
-    return null
-  }
-
-  getReverseOrder = () => {
-    const currentOrder = this.getCurrentOrder()
-    return currentOrder === 'desc' ? 'asc' : 'desc'
-  }
-
-  getSortItems = () => {
-    const { t } = this.props
-    const currentOrder = this.getCurrentOrder()
-    return [
-      {
-        key: 'name',
-        label: t('accounts.order.name'),
-      },
-      {
-        key: 'balance',
-        label: t('accounts.order.balance'),
-      },
-    ].map(item => ({
-      ...item,
-      key: `${item.key}|${currentOrder}`,
-    }))
-  }
-
-  renderItem = ({ item, isHighlighted, isActive }) => {
-    const [, order] = item.key.split('|')
-    return (
-      <DropDownItem
-        alignItems="center"
-        justifyContent="flex-start"
-        horizontal
-        isHighlighted={isHighlighted}
-        isActive={isActive}
-        flow={2}
-      >
-        <Box grow alignItems="flex-start">
-          <BoldToggle isBold={isActive}>{item.label}</BoldToggle>
-        </Box>
-        <OrderIcon isActive={isActive}>
-          {order === 'asc' ? <IconArrowUp size={14} /> : <IconArrowDown size={14} />}
-        </OrderIcon>
-      </DropDownItem>
-    )
-  }
-
-  render() {
-    const { t, orderAccounts } = this.props
-
-    const sortItems = this.getSortItems()
-
-    return (
-      <DropDown
-        flow={1}
-        offsetTop={2}
-        horizontal
-        items={sortItems}
-        renderItem={this.renderItem}
-        onStateChange={this.onStateChange}
-        value={sortItems.find(item => item.key === orderAccounts)}
-      >
-        <Track onUpdate event="ChangeSort" orderAccounts={orderAccounts} />
-        <Text ff="Open Sans|SemiBold" fontSize={4}>
-          {t('common.sortBy')}
-        </Text>
-        <Box
-          alignItems="center"
-          color="wallet"
-          ff="Open Sans|SemiBold"
-          flow={1}
-          fontSize={4}
-          horizontal
-        >
-          <Text color="wallet">{t(`accounts.order.${this.getCurrentValue() || 'balance'}`)}</Text>
-          <IconAngleDown size={16} />
-        </Box>
-      </DropDown>
-    )
-  }
 }
 
 export default compose(
