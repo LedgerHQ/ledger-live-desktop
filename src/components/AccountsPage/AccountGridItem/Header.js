@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import type { Account, TokenAccount, Currency } from '@ledgerhq/live-common/lib/types'
+import styled from 'styled-components'
 import Box from 'components/base/Box'
 import Bar from 'components/base/Bar'
 import Ellipsis from 'components/base/Ellipsis'
@@ -9,15 +10,27 @@ import FormattedVal from 'components/base/FormattedVal'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
 
+const CryptoCurrencyIconWrapper = styled.div`
+  > :nth-child(2) {
+    margin-top: -13px;
+    margin-left: 8px;
+    border: 2px solid white;
+  }
+`
+
 class CurrencyHead extends PureComponent<{
   currency: Currency,
+  parentCurrency?: Currency,
 }> {
   render() {
-    const { currency } = this.props
+    const { currency, parentCurrency } = this.props
+    const double = !!parentCurrency
+
     return (
-      <Box alignItems="center" justifyContent="center">
-        <CryptoCurrencyIcon currency={currency} size={20} />
-      </Box>
+      <CryptoCurrencyIconWrapper>
+        {parentCurrency && <CryptoCurrencyIcon currency={parentCurrency} size={double ? 16 : 20} />}
+        <CryptoCurrencyIcon currency={currency} size={double ? 16 : 20} />
+      </CryptoCurrencyIconWrapper>
     )
   }
 }
@@ -72,7 +85,7 @@ class Header extends PureComponent<{
     return (
       <Box flow={4}>
         <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
-          <CurrencyHead currency={currency} />
+          <CurrencyHead currency={currency} parentCurrency={mainAccount && mainAccount.currency} />
           <HeadText name={name} title={title} />
           <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
         </Box>

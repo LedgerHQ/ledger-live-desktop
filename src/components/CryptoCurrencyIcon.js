@@ -4,19 +4,24 @@ import styled from 'styled-components'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
-import { lighten } from 'styles/helpers'
+import { rgba } from 'styles/helpers'
 
 type Props = {
   currency: Currency,
   size: number,
 }
 
+// NB this is to avoid seeing the parent icon through
+const TokenIconWrapper = styled.div`
+  border-radius: 4px;
+  background: white;
+`
 const TokenIcon = styled.div`
   font-size: ${p => p.size / 2}px;
   font-family: 'Open Sans';
   font-weight: bold;
   color: ${p => p.color};
-  background-color: ${p => lighten(p.color, 0.9)};
+  background-color: ${p => rgba(p.color, 0.1)};
   border-radius: 4px;
   display: flex;
   overflow: hidden;
@@ -36,9 +41,11 @@ class CryptoCurrencyIcon extends PureComponent<Props> {
     }
     if (currency.type === 'TokenCurrency') {
       return (
-        <TokenIcon color={color} size={size}>
-          {currency.ticker[0]}
-        </TokenIcon>
+        <TokenIconWrapper>
+          <TokenIcon color={color} size={size}>
+            {currency.ticker[0]}
+          </TokenIcon>
+        </TokenIconWrapper>
       )
     }
     const IconCurrency = getCryptoCurrencyIcon(currency)
