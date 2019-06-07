@@ -53,10 +53,17 @@ type State = {
   error: ?Error,
 }
 
-const intializeState = ({ deviceInfo }): State => ({
+const initialStepId = ({ deviceInfo, device }): StepId =>
+  deviceInfo.isOSU
+    ? 'updateMCU'
+    : getDeviceModel(device.modelId).id === 'blue'
+      ? 'resetDevice'
+      : 'idCheck'
+
+const intializeState = (props: Props): State => ({
   firmware: null,
   modal: 'closed',
-  stepId: deviceInfo.isBootloader ? 'updateMCU' : 'idCheck',
+  stepId: initialStepId(props),
   ready: false,
   error: null,
 })
@@ -74,7 +81,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           firmware,
           ready: true,
           modal: deviceInfo.isOSU ? 'install' : 'closed',
-          stepId: deviceInfo.isOSU ? 'updateMCU' : 'idCheck',
+          stepId: initialStepId(this.props),
         })
         /* eslint-enable */
       }
@@ -147,6 +154,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
               onClose={this.handleCloseModal}
               firmware={firmware}
               error={error}
+              deviceModelId={deviceSpecs.id}
             />
           </>
         ) : null}
