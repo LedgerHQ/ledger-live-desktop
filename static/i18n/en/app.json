@@ -125,8 +125,10 @@
     "title": "Accounts",
     "noResultFound": "No accounts found.",
     "order": {
-      "name": "Account Name",
-      "balance": "Account Balance"
+      "name|asc": "Name A-Z",
+      "name|desc": "Name Z-A",
+      "balance|asc": "Lowest Balance",
+      "balance|desc": "Highest Balance"
     },
     "range": {
       "week": "week",

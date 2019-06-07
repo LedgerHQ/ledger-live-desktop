@@ -67,7 +67,7 @@ const INITIAL_STATE: SettingsState = {
   counterValueExchange: null,
   language: null,
   region: null,
-  orderAccounts: 'balance|asc',
+  orderAccounts: 'balance|desc',
   countervalueFirst: false,
   hasPassword: false,
   autoLockTimeout: 10,

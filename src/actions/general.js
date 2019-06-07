@@ -1,41 +1,62 @@
 // @flow
 
-import { createSelector, createStructuredSelector } from 'reselect'
+import type { BigNumber } from 'bignumber.js'
+import type { State } from 'reducers'
+import type { Currency } from '@ledgerhq/live-common/lib/types'
+import { createSelector } from 'reselect'
 import CounterValues from 'helpers/countervalues'
 import {
   intermediaryCurrency,
   exchangeSettingsForTickerSelector,
   getOrderAccounts,
+  counterValueCurrencySelector,
+  counterValueExchangeSelector,
 } from 'reducers/settings'
 import { accountsSelector } from 'reducers/accounts'
-import { sortAccounts } from '@ledgerhq/live-common/lib/account'
+import {
+  nestedSortAccounts,
+  flattenSortAccounts,
+  sortAccountsComparatorFromOrder,
+} from '@ledgerhq/live-common/lib/account'
 
-const accountsBtcBalanceSelector = createSelector(
-  accountsSelector,
-  state => state,
-  (accounts, state) =>
-    accounts.map(account => {
-      const currency = account.currency
-      const exchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
-      return CounterValues.calculateSelector(state, {
-        from: currency,
-        to: intermediaryCurrency,
-        exchange,
-        value: account.balance,
-      })
-    }),
+export const calculateCountervalueSelector = (state: State) => {
+  const counterValueCurrency = counterValueCurrencySelector(state)
+  const toExchange = counterValueExchangeSelector(state)
+  return (currency: Currency, value: BigNumber): ?BigNumber => {
+    const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
+    return CounterValues.calculateWithIntermediarySelector(state, {
+      from: currency,
+      fromExchange,
+      intermediary: intermediaryCurrency,
+      toExchange,
+      to: counterValueCurrency,
+      value,
+      disableRounding: true,
+    })
+  }
+}
+
+export const sortAccountsComparatorSelector = createSelector(
+  getOrderAccounts,
+  calculateCountervalueSelector,
+  sortAccountsComparatorFromOrder,
 )
 
-const selectAccountsBalanceAndOrder = createStructuredSelector({
-  accounts: accountsSelector,
-  accountsBtcBalance: accountsBtcBalanceSelector,
-  orderAccounts: getOrderAccounts,
-})
+const nestedSortAccountsSelector = createSelector(
+  accountsSelector,
+  sortAccountsComparatorSelector,
+  nestedSortAccounts,
+)
+
+export const flattenSortAccountsSelector = createSelector(
+  accountsSelector,
+  sortAccountsComparatorSelector,
+  flattenSortAccounts,
+)
 
 export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {
-  const all = selectAccountsBalanceAndOrder(getState())
   dispatch({
-    type: 'DB:REORDER_ACCOUNTS',
-    payload: sortAccounts(all),
+    type: 'DB:SET_ACCOUNTS',
+    payload: nestedSortAccountsSelector(getState()),
   })
 }
