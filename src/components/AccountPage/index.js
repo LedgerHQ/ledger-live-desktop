@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -106,7 +106,7 @@ class AccountPage extends PureComponent<Props> {
         </Box>
 
         {!isAccountEmpty(account) ? (
-          <Fragment>
+          <>
             <Box mb={7}>
               <BalanceSummary
                 account={account}
@@ -126,7 +126,7 @@ class AccountPage extends PureComponent<Props> {
               title={t('account.lastOperations')}
             />
             <StickyBackToTop scrollUpOnMount />
-          </Fragment>
+          </>
         ) : (
           <EmptyStateAccount account={account} parentAccount={parentAccount} />
         )}

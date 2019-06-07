@@ -303,6 +303,7 @@
       "steps": {
         "downloadingUpdate": "Téléchargement de la mise à jour",
         "updateMCU": "Mise à jour du firmware",
+        "reset": "Prepare device",
         "osu": "Installation de l'OSU...",
         "flash-mcu": "Mise à jour du MCU...",
         "flash-bootloader": "Mise à jour du bootloader...",
@@ -316,8 +317,26 @@
       "mcuFirst": "Déconnectez le câble USB de votre appareil",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Veuillez patienter pendant la finalisation de la mise à jour",
+      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
+      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware mis à jour",
-      "successText": "Veuillez réinstaller les applications sur votre appareil"
+      "successText": "Veuillez réinstaller les applications sur votre appareil",
+      "resetTitle": "Prepare Device",
+      "resetSteps": {
+        "first": "1. Reset your device",
+        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
+        "turnOn": "Press the button on the device to turn it on.",
+        "falsePin": "Enter three wrong PIN codes to reset the device.",
+        "turnOff": "Press and hold the side button until {{action}} is displayed.",
+        "confirmTurnOff": "Tap {{action}} to confirm.",
+        "second": "2. Boot in {{mode}} mode",
+        "boot": "Press and hold the side button until {{option}} is displayed",
+        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
+        "third": "3. Uninstall all apps",
+        "openLive": "Open the Manager in Ledger Live.",
+        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+      }
     },
     "title": "Manager",
     "subtitle": "Installer ou désinstaller des applications sur votre appareil",
@@ -804,7 +823,7 @@
     "finish": {
       "title": "Votre appareil est prêt !",
       "desc": "Installez des applications sur votre appareil et accédez au Portfolio",
-      "openAppButton": "Ouvrez Ledger Live"
+      "openAppButton": "Ouvrez Ledger Live."
     }
   },
   "connectTroubleshooting": {

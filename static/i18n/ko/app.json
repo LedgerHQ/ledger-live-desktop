@@ -303,6 +303,7 @@
       "steps": {
         "downloadingUpdate": "Downloading update",
         "updateMCU": "펌웨어 업데이트",
+        "reset": "Prepare device",
         "osu": "OSU를 설치하는 중...",
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "부트 로더 업데이트 중...",
@@ -316,8 +317,26 @@
       "mcuFirst": "장치에서 USB 케이블 분리",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "업데이트가 완료되는 동안 기다리십시오.",
+      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
+      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "펌웨어 업데이트됨",
-      "successText": "장치에 앱을 다시 설치하십시오."
+      "successText": "장치에 앱을 다시 설치하십시오.",
+      "resetTitle": "Prepare Device",
+      "resetSteps": {
+        "first": "1. Reset your device",
+        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
+        "turnOn": "Press the button on the device to turn it on.",
+        "falsePin": "Enter three wrong PIN codes to reset the device.",
+        "turnOff": "Press and hold the side button until {{action}} is displayed.",
+        "confirmTurnOff": "Tap {{action}} to confirm.",
+        "second": "2. Boot in {{mode}} mode",
+        "boot": "Press and hold the side button until {{option}} is displayed",
+        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
+        "third": "3. Uninstall all apps",
+        "openLive": "Open the Manager in Ledger Live.",
+        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+      }
     },
     "title": "Manager",
     "subtitle": "장치에 앱 설치 또는 제거",

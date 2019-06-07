@@ -1,18 +1,16 @@
 // @flow
-
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import React, { Fragment, PureComponent } from 'react'
 
 import TrackPage from 'analytics/TrackPage'
 import { urls } from 'config/urls'
 import { openURL } from 'helpers/linking'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
-import DeviceConfirm from 'components/DeviceConfirm'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
-import NanoXStates from 'components/NanoXStates'
 import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
+import Interactions from 'icons/device/interactions'
 
 import type { StepProps } from '../index'
 import TranslatedError from '../../../TranslatedError'
@@ -21,12 +19,13 @@ import DebugAppInfosForCurrency from '../../../DebugAppInfosForCurrency'
 export default class StepConfirmAddress extends PureComponent<StepProps> {
   render() {
     const { t, account, isAddressVerified, verifyAddressError, transitionTo, device } = this.props
+    const isBlue = device && device.modelId === 'blue'
 
     return (
       <Container>
         <TrackPage category="Receive Flow" name="Step 3" />
         {isAddressVerified === false ? (
-          <Fragment>
+          <>
             {account ? <DebugAppInfosForCurrency /> : null}
             <TrackPage category="Receive Flow" name="Step 3 Address Not Verified Error" />
             <Title>
@@ -35,16 +34,19 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
             <Text mb={5}>
               <TranslatedError error={verifyAddressError} field="description" />
             </Text>
-            {device && device.modelId === 'nanoX' ? (
-              <Box pt={30}>
-                <NanoXStates error />
+            {!device ? null : (
+              <Box pt={isBlue ? 2 : null}>
+                <Interactions
+                  type={device.modelId}
+                  error={verifyAddressError}
+                  width={isBlue ? 120 : 375}
+                  wire="wired"
+                />
               </Box>
-            ) : (
-              <DeviceConfirm error />
             )}
-          </Fragment>
+          </>
         ) : (
-          <Fragment>
+          <>
             <Title>{t('receive.steps.confirmAddress.action')}</Title>
             <Text>
               {account &&
@@ -57,14 +59,18 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
             <Button mt={4} mb={2} primary onClick={() => transitionTo('receive')}>
               {t('common.continue')}
             </Button>
-            {device && device.modelId === 'nanoX' ? (
-              <Box pt={30}>
-                <NanoXStates />
+            {!device ? null : (
+              <Box pt={isBlue ? 4 : null}>
+                <Interactions
+                  type={device.modelId}
+                  screen="validation"
+                  error={verifyAddressError}
+                  width={isBlue ? 120 : 375}
+                  wire="wired"
+                />
               </Box>
-            ) : (
-              <DeviceConfirm withoutPushDisplay error={isAddressVerified === false} />
             )}
-          </Fragment>
+          </>
         )}
       </Container>
     )
@@ -74,7 +80,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
 export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps) {
   // This will be displayed only if user rejected address
   return (
-    <Fragment>
+    <>
       <ExternalLinkButton
         event="Receive Flow Step 3 Contact Us Clicked"
         label={t('receive.steps.confirmAddress.support')}
@@ -89,7 +95,7 @@ export function StepConfirmAddressFooter({ t, transitionTo, onRetry }: StepProps
           transitionTo('device')
         }}
       />
-    </Fragment>
+    </>
   )
 }
 

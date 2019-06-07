@@ -1,8 +1,9 @@
 // @flow
 
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import type { DeviceModelId } from '@ledgerhq/devices'
 
 import firmwarePrepare from 'commands/firmwarePrepare'
 import { getCurrentDevice } from 'reducers/devices'
@@ -10,7 +11,8 @@ import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import ProgressCircle from 'components/ProgressCircle'
-import DeviceConfirm from 'components/DeviceConfirm'
+import Interactions from 'icons/device/interactions'
+
 import type { Device } from 'types/common'
 import type { StepProps } from '../'
 
@@ -46,6 +48,7 @@ const Address = styled(Box).attrs({
 
 type Props = StepProps & {
   device: Device,
+  deviceModelId: DeviceModelId,
 }
 
 type State = {
@@ -56,7 +59,7 @@ type State = {
 class StepFullFirmwareInstall extends PureComponent<Props, State> {
   state = {
     progress: 0,
-    displayedOnDevice: false,
+    displayedOnDevice: true,
   }
 
   componentDidMount() {
@@ -102,33 +105,45 @@ class StepFullFirmwareInstall extends PureComponent<Props, State> {
   }
 
   renderBody = () => {
-    const { t, firmware } = this.props
+    const { t, firmware, deviceModelId } = this.props
     const { progress, displayedOnDevice } = this.state
+
+    const isBlue = deviceModelId === 'blue'
+
     if (!displayedOnDevice) {
       return (
-        <Fragment>
+        <>
           <Text ff="Open Sans|Regular" align="center" color="smoke">
             {t('manager.firmware.downloadingUpdateDesc')}
           </Text>
           <Box my={5}>
             <ProgressCircle progress={progress} size={56} />
           </Box>
-        </Fragment>
+        </>
       )
     }
+
     return (
-      <Fragment>
+      <>
         <Text ff="Open Sans|Regular" align="center" color="smoke">
           {t('manager.modal.confirmIdentifierText')}
         </Text>
-        <Box mx={7} my={5}>
+        <Box mx={7} mt={5} mb={isBlue ? 0 : 5}>
           <Text ff="Open Sans|SemiBold" align="center" color="smoke">
             {t('manager.modal.identifier')}
           </Text>
           <Address>{firmware.osu && this.formatHashName(firmware.osu.hash)}</Address>
         </Box>
-        <DeviceConfirm />
-      </Fragment>
+        <Box mt={isBlue ? 4 : null}>
+          <Interactions
+            wire="wired"
+            type={deviceModelId}
+            width={isBlue ? 150 : 375}
+            screen="validation"
+            action="accept"
+          />
+        </Box>
+      </>
     )
   }
 

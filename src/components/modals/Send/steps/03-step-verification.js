@@ -11,8 +11,7 @@ import { openURL } from 'helpers/linking'
 import Box from 'components/base/Box'
 import LinkWithExternalIcon from 'components/base/LinkWithExternalIcon'
 import WarnBox from 'components/WarnBox'
-import DeviceConfirm from 'components/DeviceConfirm'
-import NanoXStates from 'components/NanoXStates'
+import Interactions from 'icons/device/interactions'
 
 import type { StepProps } from '../index'
 
@@ -35,6 +34,8 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
 
   render() {
     const { t, device } = this.props
+    const isBlue = device && device.modelId === 'blue'
+
     return (
       <Container>
         <TrackPage category="Send Flow" name="Step 3" />
@@ -46,7 +47,17 @@ export default class StepVerification extends PureComponent<StepProps<*>> {
           />
         </WarnBox>
         <Info>{t('send.steps.verification.body')}</Info>
-        {device && device.modelId === 'nanoX' ? <NanoXStates validate /> : <DeviceConfirm />}
+        {!device ? null : (
+          <Box mt={isBlue ? 4 : null}>
+            <Interactions
+              screen="validation"
+              action="accept"
+              type={device.modelId}
+              width={isBlue ? 120 : 375}
+              wire="wired"
+            />
+          </Box>
+        )}
       </Container>
     )
   }

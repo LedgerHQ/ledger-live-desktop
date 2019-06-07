@@ -303,6 +303,7 @@
       "steps": {
         "downloadingUpdate": "Descargando actualización",
         "updateMCU": "Actualización de firmware",
+        "reset": "Prepare device",
         "osu": "Instalando OSU...",
         "flash-mcu": "Actualizando MCU...",
         "flash-bootloader": "Actualizando el Bootloader...",
@@ -316,8 +317,26 @@
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
       "mcuSecond": "Pulsa el botón izquierdo y mantenlo pulsado mientras conectas de nuevo el cable USB hasta que aparezca la pantalla de <1><0>{{repairProcessing}}</0></1>",
       "mcuPin": "Ten paciencia mientras finaliza la actualización",
+      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
+      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware actualizado",
-      "successText": "Reinstala las aplicaciones en tu dispositivo"
+      "successText": "Reinstala las aplicaciones en tu dispositivo",
+      "resetTitle": "Prepare Device",
+      "resetSteps": {
+        "first": "1. Reset your device",
+        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
+        "turnOn": "Press the button on the device to turn it on.",
+        "falsePin": "Enter three wrong PIN codes to reset the device.",
+        "turnOff": "Press and hold the side button until {{action}} is displayed.",
+        "confirmTurnOff": "Tap {{action}} to confirm.",
+        "second": "2. Boot in {{mode}} mode",
+        "boot": "Press and hold the side button until {{option}} is displayed",
+        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
+        "third": "3. Uninstall all apps",
+        "openLive": "Open the Manager in Ledger Live.",
+        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+      }
     },
     "title": "Manager",
     "subtitle": "Instala o desinstala aplicaciones en tu dispositivo",
