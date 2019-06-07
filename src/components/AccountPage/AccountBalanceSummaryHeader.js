@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import type { BigNumber } from 'bignumber.js'
+import { BigNumber } from 'bignumber.js'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
@@ -17,6 +17,8 @@ import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import PillsDaysCount from 'components/PillsDaysCount'
 import styled from 'styled-components'
+import IconActivity from 'icons/Activity'
+import CounterValue from '../CounterValue'
 import Swap from '../../icons/Swap'
 
 type Props = {
@@ -39,6 +41,12 @@ type Props = {
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
 }
+
+const Wrapper = styled(Box)`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+`
 
 const SwapButton = styled(Tabbable).attrs({
   color: 'dark',
@@ -102,6 +110,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
 
     const primaryKey = data[0].unit.code
     const secondaryKey = data[1].unit.code
+    const bigOne = BigNumber(10 ** account.currency.units[0].magnitude)
 
     return (
       <Box flow={4} mb={2}>
@@ -122,17 +131,52 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             totalBalance={data[0].balance}
             unit={data[0].unit}
           >
-            <FormattedVal
-              key={secondaryKey}
-              animateTicker
-              disableRounding
-              alwaysShowSign={false}
-              color="warmGrey"
-              unit={data[1].unit}
-              fontSize={6}
-              showCode
-              val={data[1].balance}
-            />
+            <Wrapper>
+              <div style={{ width: 'auto' }}>
+                <FormattedVal
+                  key={secondaryKey}
+                  animateTicker
+                  disableRounding
+                  alwaysShowSign={false}
+                  color="warmGrey"
+                  unit={data[1].unit}
+                  fontSize={6}
+                  showCode
+                  val={data[1].balance}
+                />
+              </div>
+              <IconActivity
+                size={12}
+                style={{
+                  color: account.currency.color,
+                  marginRight: 4,
+                  marginLeft: 8,
+                }}
+              />
+              <Box>
+                <FormattedVal
+                  key={account.id}
+                  animateTicker
+                  disableRounding
+                  alwaysShowSign={false}
+                  color="grey"
+                  unit={account.unit}
+                  fontSize={4}
+                  showCode
+                  val={bigOne}
+                  style={{ marginRight: 4 }}
+                />
+              </Box>
+              {'='}
+              <CounterValue
+                currency={account.currency}
+                value={bigOne}
+                color="grey"
+                fontSize={4}
+                alwaysShowSign={false}
+                style={{ marginLeft: 4 }}
+              />
+            </Wrapper>
           </BalanceTotal>
           <Box>
             <PillsDaysCount selected={selectedTimeRange} onChange={this.handleChangeSelectedTime} />
