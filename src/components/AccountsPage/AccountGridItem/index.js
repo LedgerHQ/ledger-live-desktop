@@ -25,7 +25,7 @@ const Card = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 
 type Props = {
   hidden?: boolean,
   account: TokenAccount | Account,
-  parentAccount: ?Account,
+  parentAccount?: Account,
   onClick: (Account | TokenAccount, ?Account) => void,
   range: PortfolioRange,
   openModal: Function,
@@ -61,6 +61,7 @@ class AccountCard extends PureComponent<Props> {
 
   render() {
     const { account, parentAccount, range, hidden, ...props } = this.props
+
     return (
       <ContextMenuItem items={this.contextMenuItems}>
         <Card
