@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "按照以下步骤，添加 <1><0>{{currencyName}}</0></1> 账户"
     },
-    "accountAlreadyImportedSubtitle": "账户已位于 ({{count}}) 资产组合中",
-    "accountToImportSubtitle": "添加现有账户",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
     "unselectAll": "取消全选 ({{count}})",
@@ -241,7 +239,6 @@
     "successDescription": "添加更多账户或返回至资产组合",
     "successDescription_plural": "添加更多账户或返回至资产组合",
     "createNewAccount": {
-      "title": "添加新账户",
       "noOperationOnLastAccount": "您的 <1><0>{{accountName}}</0></1> 账户为空，无法添加新账户",
       "noAccountToCreate": "未找到要创建的 <1><0>{{currencyName}}</0></1> 账户"
     },
@@ -249,6 +246,20 @@
       "addMore": "添加更多",
       "add": "添加账户",
       "add_plural": "添加账户"
+    },
+    "sections": {
+      "importable": {
+        "title": "Add existing account"
+      },
+      "creatable": {
+        "title": "Add new account"
+      },
+      "imported": {
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
+      }
     }
   },
   "operationDetails": {
@@ -370,6 +381,7 @@
         "recipientAddress": "收件人地址",
         "amount": "金额",
         "fees": "网络费用",
+        "useMax": "use max",
         "advancedOptions": "高级选项",
         "useRBF": "使用费用替代法交易",
         "message": "留言 (140)",
@@ -833,6 +845,10 @@
     "BtcUnmatchedApp": {
       "title": "应用程序错误",
       "description": "打开您的设备上的‘{{managerAppName}}’应用程序"
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "可能不是正版",
