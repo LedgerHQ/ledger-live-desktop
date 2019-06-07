@@ -45,7 +45,6 @@ const TopLevelRow = styled(Box)`
 
 const NestedRow = styled(Box)`
   flex: 1;
-  height: 40px;
   font-weight: 600;
   align-items: center;
   justify-content: flex-start;
@@ -53,10 +52,12 @@ const NestedRow = styled(Box)`
   flex-direction: row;
   cursor: pointer;
   position: relative;
-
+  &:last-of-type {
+    margin-bottom: 0px;
+  }
   opacity: 0;
-  animation: fadeIn 0.3s ease both;
-  animation-delay: ${p => p.index * 0.3}s;
+  animation: fadeIn 0.1s ease both;
+  animation-delay: ${p => p.index * 0.1}s;
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -87,7 +88,6 @@ class TokenRow extends PureComponent<Props> {
     return (
       <Row index={index} onClick={this.onClick}>
         <Header nested={nested} account={account} name={token.name} />
-        <Box flex="12%" />
         <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
         <Countervalue account={account} currency={token} range={range} />
         <Delta account={account} range={range} />

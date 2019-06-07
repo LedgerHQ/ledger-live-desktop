@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
-import { lighten } from 'styles/helpers'
+import { rgba } from 'styles/helpers'
 
 type Props = {
   currency: Currency,
@@ -16,7 +16,7 @@ const TokenIcon = styled.div`
   font-family: 'Open Sans';
   font-weight: bold;
   color: ${p => p.color};
-  background-color: ${p => lighten(p.color, 0.9)};
+  background-color: ${p => rgba(p.color, 0.1)};
   border-radius: 4px;
   display: flex;
   overflow: hidden;

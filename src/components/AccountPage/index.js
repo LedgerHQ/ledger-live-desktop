@@ -92,7 +92,7 @@ class AccountPage extends PureComponent<Props> {
     const color = getCurrencyColor(currency)
 
     return (
-      <Box>
+      <Box key={account.id}>
         <TrackPage
           category="Account"
           currency={currency.id}
