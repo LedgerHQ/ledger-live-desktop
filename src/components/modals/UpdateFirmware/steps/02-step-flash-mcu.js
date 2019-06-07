@@ -59,12 +59,12 @@ class StepFlashMcu extends PureComponent<Props, State> {
 
   renderBody = () => {
     const { installing, progress } = this.state
-    const { firmware } = this.props
+    const { firmware, deviceModelId } = this.props
 
     return installing || !firmware.shouldFlashMCU ? (
       <Installing installing={installing} progress={progress} />
     ) : (
-      <FlashMCU />
+      <FlashMCU deviceModelId={deviceModelId} />
     )
   }
 

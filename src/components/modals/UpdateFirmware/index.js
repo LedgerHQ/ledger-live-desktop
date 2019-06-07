@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
+import type { DeviceModelId } from '@ledgerhq/devices'
 
 import type { T } from 'types/common'
 
@@ -14,11 +15,12 @@ import type { ModalStatus } from 'components/ManagerPage/FirmwareUpdate'
 import logger from 'logger'
 
 import { FreezeDeviceChangeEvents } from '../../ManagerPage/HookDeviceChange'
+import StepResetDevice, { StepResetFooter } from './steps/00-step-reset-device'
 import StepFullFirmwareInstall from './steps/01-step-install-full-firmware'
 import StepFlashMcu from './steps/02-step-flash-mcu'
 import StepConfirmation, { StepConfirmFooter } from './steps/03-step-confirmation'
 
-const createSteps = ({ t }: { t: T }): Array<*> => {
+const createSteps = ({ t, deviceModel }: { t: T, deviceModel: DeviceModelId }): Array<*> => {
   const updateStep = {
     id: 'idCheck',
     label: t('manager.modal.identifier'),
@@ -46,27 +48,39 @@ const createSteps = ({ t }: { t: T }): Array<*> => {
     hideFooter: true,
   }
 
-  return [updateStep, mcuStep, finalStep]
-}
+  const resetStep = {
+    id: 'resetDevice',
+    label: t('manager.modal.steps.reset'),
+    component: StepResetDevice,
+    footer: StepResetFooter,
+    onBack: null,
+    hideFooter: false,
+  }
 
-const stepsId = ['idCheck', 'updateMCU', 'finish']
+  let steps = [updateStep, mcuStep, finalStep]
+  if (deviceModel === 'blue') steps = [resetStep, ...steps]
+
+  return steps
+}
 
 export type StepProps = DefaultStepProps & {
   firmware: FirmwareUpdateContext,
   onCloseModal: () => void,
   error: ?Error,
   setError: Error => void,
+  deviceModelId: DeviceModelId,
 }
 
-export type StepId = 'idCheck' | 'updateMCU' | 'finish'
+export type StepId = 'idCheck' | 'updateMCU' | 'finish' | 'resetDevice'
 
 type Props = {
   t: T,
   status: ModalStatus,
   onClose: () => void,
   firmware: FirmwareUpdateContext,
-  stepId: StepId | string,
+  stepId: StepId,
   error: ?Error,
+  deviceModelId: DeviceModelId,
 }
 
 type State = {
@@ -84,6 +98,7 @@ class UpdateModal extends PureComponent<Props, State> {
 
   STEPS = createSteps({
     t: this.props.t,
+    deviceModel: this.props.deviceModelId,
   })
 
   setError = (e: Error) => {
@@ -91,15 +106,21 @@ class UpdateModal extends PureComponent<Props, State> {
     this.setState({ error: e })
   }
 
-  handleReset = () => this.setState({ stepId: 'idCheck', error: null, nonce: this.state.nonce++ })
+  handleReset = () =>
+    this.setState({
+      stepId: this.STEPS[0].id,
+      error: null,
+      nonce: this.state.nonce++,
+    })
 
   handleStepChange = (step: Step) => this.setState({ stepId: step.id })
 
   render(): React$Node {
-    const { status, t, firmware, onClose, ...props } = this.props
+    const { status, t, firmware, onClose, deviceModelId, ...props } = this.props
     const { stepId, error, nonce } = this.state
 
-    const errorSteps = error ? [stepsId.indexOf(stepId)] : []
+    const steps = this.STEPS.map(step => step.id)
+    const errorSteps = error ? [steps.indexOf(stepId)] : []
 
     const additionalProps = {
       ...props,
@@ -111,12 +132,13 @@ class UpdateModal extends PureComponent<Props, State> {
 
     return (
       <Modal
+        width={550}
         onClose={onClose}
         centered
         onHide={this.handleReset}
         isOpened={status === 'install'}
         refocusWhenChange={stepId}
-        preventBackdropClick={stepId !== 'finish' && !error}
+        preventBackdropClick={!['finish', 'resetDevice'].includes(stepId) && !error}
         render={() => (
           <Stepper
             key={nonce}
@@ -125,6 +147,7 @@ class UpdateModal extends PureComponent<Props, State> {
             initialStepId={stepId}
             steps={this.STEPS}
             errorSteps={errorSteps}
+            deviceModelId={deviceModelId}
             {...additionalProps}
           >
             <FreezeDeviceChangeEvents />
