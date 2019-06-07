@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
-    "accountAlreadyImportedSubtitle": "Счета, находящиеся в портфеле: ({{count}})",
-    "accountToImportSubtitle": "Добавить существующий счет",
     "accountToImportSubtitle_plural": "Добавить существующие счета",
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
@@ -241,7 +239,6 @@
     "successDescription": "Добавить больше счетов или вернуться в портфель",
     "successDescription_plural": "Добавить больше счетов или вернуться в портфель",
     "createNewAccount": {
-      "title": "Добавить новый счет",
       "noOperationOnLastAccount": "Невозможно добавить новый счет до получения на счет <1><0>{{accountName}}</0></1> активов.",
       "noAccountToCreate": "Счета в <1><0>{{currencyName}}</0></1> для создания не найдены"
     },
@@ -249,6 +246,20 @@
       "addMore": "Добавить еще",
       "add": "Добавить счет",
       "add_plural": "Добавить счета"
+    },
+    "sections": {
+      "importable": {
+        "title": "Add existing account"
+      },
+      "creatable": {
+        "title": "Add new account"
+      },
+      "imported": {
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
+      }
     }
   },
   "operationDetails": {
@@ -370,6 +381,7 @@
         "recipientAddress": "Адрес получателя",
         "amount": "Сумма",
         "fees": "Комиссия за пользование сетью",
+        "useMax": "use max",
         "advancedOptions": "Дополнительные параметры",
         "useRBF": "Использовать транзакцию Replace-by-Fee (замена с повышением комиссии)",
         "message": "Оставьте сообщение (140)",
@@ -833,6 +845,10 @@
     "BtcUnmatchedApp": {
       "title": "Это не то приложение.",
       "description": "Откройте приложение ‘{{managerAppName}}‘ на устройстве."
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
