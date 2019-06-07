@@ -112,7 +112,6 @@ class Chart extends Component<Props> {
   }
 
   subResize: *
-
   _ruler: any
   _node: any
   _width: number

@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "Siga los pasos siguientes para agregar cuentas de <1><0>{{currencyName}}</0></1>"
     },
-    "accountAlreadyImportedSubtitle": "Cuentas ya en cartera ({{count}})",
-    "accountToImportSubtitle": "Añadir cuenta existente",
     "accountToImportSubtitle_plural": "Añadir cuentas existentes",
     "selectAll": "Seleccionar todas ({{count}})",
     "unselectAll": "Deseleccionar todas ({{count}})",
@@ -241,7 +239,6 @@
     "successDescription": "Añadir más cuentas o volver a Cartera",
     "successDescription_plural": "Añadir más cuentas o volver a Cartera",
     "createNewAccount": {
-      "title": "Añadir nueva cuenta",
       "noOperationOnLastAccount": "No puedes añadir una nueva cuenta antes de recibir en tu <1><0>{{accountName}}</0></1> cuenta",
       "noAccountToCreate": "No se ha encontrado ninguna cuenta <1><0>{{currencyName}}</0></1> para crear."
     },
@@ -249,6 +246,17 @@
       "addMore": "Añadir más",
       "add": "Añadir cuenta",
       "add_plural": "Añadir cuentas"
+    },
+    "sections": {
+      "importable": {
+        "title": "Añadir cuenta existente"
+      },
+      "creatable": {
+        "title": "Añadir nueva cuenta"
+      },
+      "imported": {
+        "title": "Cuentas ya en cartera ({{count}})"
+      }
     }
   },
   "operationDetails": {

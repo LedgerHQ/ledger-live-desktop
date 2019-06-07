@@ -6,7 +6,7 @@ import {
 } from '@ledgerhq/live-common/lib/portfolio'
 import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import {
-  exchangeSettingsForAccountSelector,
+  exchangeSettingsForTickerSelector,
   counterValueCurrencySelector,
   counterValueExchangeSelector,
   intermediaryCurrency,
@@ -37,13 +37,14 @@ export const balanceHistoryWithCountervalueSelector = (
 ) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
   const counterValueExchange = counterValueExchangeSelector(state)
-  const accountExchange = exchangeSettingsForAccountSelector(state, { account })
+  const currency = account.type === 'Account' ? account.currency : account.token
+  const exchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
   return getBalanceHistoryWithCountervalue(account, range, (_, value, date) =>
     CounterValues.calculateWithIntermediarySelector(state, {
       value,
       date,
-      from: account.currency,
-      fromExchange: accountExchange,
+      from: currency,
+      fromExchange: exchange,
       intermediary: intermediaryCurrency,
       toExchange: counterValueExchange,
       to: counterValueCurrency,
@@ -63,12 +64,12 @@ export const portfolioSelector = (
 ) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
   const counterValueExchange = counterValueExchangeSelector(state)
-  return getPortfolio(accounts, range, (account, value, date) =>
+  return getPortfolio(accounts, range, (currency, value, date) =>
     CounterValues.calculateWithIntermediarySelector(state, {
       value,
       date,
-      from: account.currency,
-      fromExchange: exchangeSettingsForAccountSelector(state, { account }),
+      from: currency,
+      fromExchange: exchangeSettingsForTickerSelector(state, { ticker: currency.ticker }),
       intermediary: intermediaryCurrency,
       toExchange: counterValueExchange,
       to: counterValueCurrency,

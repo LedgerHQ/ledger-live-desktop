@@ -4,7 +4,7 @@ import { createSelector, createStructuredSelector } from 'reselect'
 import CounterValues from 'helpers/countervalues'
 import {
   intermediaryCurrency,
-  currencySettingsForAccountSelector,
+  exchangeSettingsForTickerSelector,
   getOrderAccounts,
 } from 'reducers/settings'
 import { accountsSelector } from 'reducers/accounts'
@@ -15,9 +15,10 @@ const accountsBtcBalanceSelector = createSelector(
   state => state,
   (accounts, state) =>
     accounts.map(account => {
-      const { exchange } = currencySettingsForAccountSelector(state, { account })
+      const currency = account.currency
+      const exchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
       return CounterValues.calculateSelector(state, {
-        from: account.currency,
+        from: currency,
         to: intermediaryCurrency,
         exchange,
         value: account.balance,

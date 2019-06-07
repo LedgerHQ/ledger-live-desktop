@@ -7,14 +7,14 @@ import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
-import { getAccountOperationExplorer } from '@ledgerhq/live-common/lib/explorers'
+import { getTransactionExplorer, getDefaultExplorerView } from '@ledgerhq/live-common/lib/explorers'
 import uniq from 'lodash/uniq'
 
 import TrackPage from 'analytics/TrackPage'
-import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
 import { colors } from 'styles/theme'
 
-import type { T, CurrencySettings } from 'types/common'
+import type { T } from 'types/common'
 import { MODAL_OPERATION_DETAILS } from 'config/constants'
 
 import { getMarketColor } from 'styles/helpers'
@@ -26,10 +26,9 @@ import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
 
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
-import { createStructuredSelector, createSelector } from 'reselect'
 import { accountSelector } from 'reducers/accounts'
 
-import { currencySettingsForAccountSelector, marketIndicatorSelector } from 'reducers/settings'
+import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'reducers/settings'
 import IconChevronRight from 'icons/ChevronRight'
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
@@ -94,54 +93,67 @@ const B = styled(Bar).attrs({
   size: 1,
 })``
 
-const operationSelector = createSelector(
-  accountSelector,
-  (_, { operationId }) => operationId,
-  (account: Account, operationId: string): ?Operation => {
-    if (!account) return null
+const mapStateToProps = (state, { operationId, accountId, parentId }) => {
+  const marketIndicator = marketIndicatorSelector(state)
+  const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId })
+  let account: ?(TokenAccount | Account)
+  if (parentAccount) {
+    const { tokenAccounts } = parentAccount
+    if (tokenAccounts) {
+      account = tokenAccounts.find(t => t.id === accountId)
+    }
+  } else {
+    account = accountSelector(state, { accountId })
+  }
+  const mainCurrency = parentAccount
+    ? parentAccount.currency
+    : account && account.type === 'Account'
+      ? account.currency
+      : null
+  const confirmationsNb = mainCurrency
+    ? confirmationsNbForCurrencySelector(state, { currency: mainCurrency })
+    : 0
+  let operation = null
+  if (account) {
     const maybeOp = account.operations.find(op => op.id === operationId)
-    if (maybeOp) return maybeOp
-    const maybeOpPending = account.pendingOperations.find(op => op.id === operationId)
-    return maybeOpPending
-  },
-)
-
-const mapStateToProps = createStructuredSelector({
-  marketIndicator: marketIndicatorSelector,
-  account: accountSelector,
-  operation: operationSelector,
-  currencySettings: createSelector(
-    state => state,
-    accountSelector,
-    (state, account) => (account ? currencySettingsForAccountSelector(state, { account }) : null),
-  ),
-})
+    if (maybeOp) operation = maybeOp
+    else if (account.type === 'Account') {
+      const maybeOpPending = account.pendingOperations.find(op => op.id === operationId)
+      operation = maybeOpPending
+    }
+  }
+  return { marketIndicator, account, parentAccount, operation, confirmationsNb }
+}
 
 type Props = {
   t: T,
   operation: ?Operation,
-  account: ?Account,
-  currencySettings: ?CurrencySettings,
+  account: ?(Account | TokenAccount),
+  parentAccount: ?Account,
+  confirmationsNb: number,
   onClose: () => void,
   marketIndicator: *,
 }
 
 const OperationDetails = connect(mapStateToProps)((props: Props) => {
-  const { t, onClose, operation, account, currencySettings, marketIndicator } = props
-  if (!operation || !account || !currencySettings) return null
+  const { t, onClose, operation, account, parentAccount, confirmationsNb, marketIndicator } = props
+  if (!operation || !account) return null
+  const mainAccount = parentAccount || (account.type === 'Account' ? account : undefined)
+  if (!mainAccount) return null
   const { extra, hash, date, senders, type, fee, recipients } = operation
-
-  const { name, unit, currency } = account
+  const { name } = mainAccount
+  const currency = account.type === 'Account' ? account.currency : account.token
+  const unit = account.type === 'Account' ? account.unit : currency.units[0]
   const amount = getOperationAmountNumber(operation)
   const isNegative = operation.type === 'OUT'
   const marketColor = getMarketColor({
     marketIndicator,
     isNegative,
   })
-  const confirmations = operation.blockHeight ? account.blockHeight - operation.blockHeight : 0
-  const isConfirmed = confirmations >= currencySettings.confirmationsNb
+  const confirmations = operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0
+  const isConfirmed = confirmations >= confirmationsNb
 
-  const url = getAccountOperationExplorer(account, operation)
+  const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash)
   const uniqueSenders = uniq(senders)
 
   const { hasFailed } = operation
@@ -208,7 +220,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               {fee ? (
                 <Fragment>
                   <OpDetailsData>
-                    <FormattedVal unit={unit} showCode val={fee} color="smoke" />
+                    <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
                   </OpDetailsData>
                 </Fragment>
               ) : (

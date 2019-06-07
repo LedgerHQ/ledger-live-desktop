@@ -8,9 +8,10 @@ import { translate } from 'react-i18next'
 import {
   groupAccountOperationsByDay,
   groupAccountsOperationsByDay,
+  flattenAccounts,
 } from '@ledgerhq/live-common/lib/account'
-
-import type { Operation, Account } from '@ledgerhq/live-common/lib/types'
+import logger from 'logger'
+import type { Operation, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 
 import keyBy from 'lodash/keyBy'
 
@@ -55,6 +56,7 @@ type Props = {
   openModal: (string, Object) => *,
   t: T,
   withAccount?: boolean,
+  withTokenAccounts?: boolean,
   title?: string,
 }
 
@@ -73,10 +75,15 @@ export class OperationsList extends PureComponent<Props, State> {
 
   state = initialState
 
-  handleClickOperation = (operation: Operation, account: Account) =>
+  handleClickOperation = (
+    operation: Operation,
+    account: Account | TokenAccount,
+    parentAccount?: Account,
+  ) =>
     this.props.openModal(MODAL_OPERATION_DETAILS, {
       operationId: operation.id,
       accountId: account.id,
+      parentId: parentAccount && parentAccount.id,
     })
 
   // TODO: convert of async/await if fetching with the api
@@ -86,7 +93,7 @@ export class OperationsList extends PureComponent<Props, State> {
   }
 
   render() {
-    const { account, accounts, t, title, withAccount } = this.props
+    const { account, accounts, t, title, withAccount, withTokenAccounts } = this.props
     const { nbToShow } = this.state
 
     if (!account && !accounts) {
@@ -94,10 +101,12 @@ export class OperationsList extends PureComponent<Props, State> {
       return null
     }
     const groupedOperations = accounts
-      ? groupAccountsOperationsByDay(accounts, nbToShow)
-      : groupAccountOperationsByDay(account, nbToShow)
+      ? groupAccountsOperationsByDay(accounts, { count: nbToShow, withTokenAccounts })
+      : groupAccountOperationsByDay(account, { count: nbToShow, withTokenAccounts })
 
-    const accountsMap = accounts ? keyBy(accounts, 'id') : { [account.id]: account }
+    const accountsMap = accounts
+      ? keyBy(flattenAccounts(accounts), 'id')
+      : { [account.id]: account }
 
     return (
       <Box flow={4}>
@@ -113,12 +122,25 @@ export class OperationsList extends PureComponent<Props, State> {
               {group.data.map(operation => {
                 const account = accountsMap[operation.accountId]
                 if (!account) {
+                  logger.warn(`no account found for operation ${operation.id}`)
                   return null
+                }
+                let parentAccount
+                if (account.type === 'TokenAccount') {
+                  const pa = accountsMap[account.parentId]
+                  if (pa && pa.type === 'Account') {
+                    parentAccount = pa
+                  }
+                  if (!parentAccount) {
+                    logger.warn(`no token account found for token operation ${operation.id}`)
+                    return null
+                  }
                 }
                 return (
                   <OperationC
                     operation={operation}
                     account={account}
+                    parentAccount={parentAccount}
                     key={`${account.id}_${operation.id}`}
                     onOperationClick={this.handleClickOperation}
                     t={t}

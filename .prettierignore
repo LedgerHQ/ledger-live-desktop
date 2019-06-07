@@ -1,2 +1,3 @@
 package.json
 test-e2e/**/*.json
+static/**/*.json

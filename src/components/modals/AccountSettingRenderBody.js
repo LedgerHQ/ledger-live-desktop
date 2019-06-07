@@ -15,7 +15,7 @@ import { validateNameEdition } from '@ledgerhq/live-common/lib/account'
 import { updateAccount, removeAccount } from 'actions/accounts'
 import { setDataModal } from 'reducers/modals'
 
-import { getBridgeForCurrency } from 'bridge'
+import { getAccountBridge } from 'bridge'
 
 import { AccountNameRequiredError, EnpointConfigError } from '@ledgerhq/errors'
 
@@ -95,7 +95,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
 
   handleChangeEndpointConfig_id = 0
   handleChangeEndpointConfig = async (endpointConfig: string) => {
-    const bridge = getBridgeForCurrency(this.getAccount(this.props.data).currency)
+    const bridge = getAccountBridge(this.getAccount(this.props.data))
     this.handleChangeEndpointConfig_id++
     const { handleChangeEndpointConfig_id } = this
     this.setState({
@@ -191,7 +191,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
     if (!data) return null
 
     const account = this.getAccount(data)
-    const bridge = getBridgeForCurrency(account.currency)
+    const bridge = getAccountBridge(account)
     const usefulData = {
       xpub: account.xpub || undefined,
       index: account.index,

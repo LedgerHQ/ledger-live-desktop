@@ -1,8 +1,9 @@
 // @flow
 
 import React, { Component } from 'react'
-import { RippleAPI } from 'ripple-lib'
 import type { BigNumber } from 'bignumber.js'
+import { RippleAPI } from 'ripple-lib'
+import { getAccountBridge } from 'bridge'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { apiForEndpointConfig, parseAPIValue } from '@ledgerhq/live-common/lib/api/Ripple'
 import { FeeNotLoaded } from '@ledgerhq/errors'
@@ -11,8 +12,8 @@ import GenericContainer from './GenericContainer'
 
 type Props = {
   account: Account,
-  fee: ?BigNumber,
-  onChange: BigNumber => void,
+  transaction: *,
+  onChange: (*) => void,
 }
 
 type State = {
@@ -38,8 +39,11 @@ class FeesField extends Component<Props, State> {
       const info = await api.getServerInfo()
       if (syncId !== this.syncId) return
       const serverFee = parseAPIValue(info.validatedLedger.baseFeeXRP)
-      if (!this.props.fee) {
-        this.props.onChange(serverFee)
+      const { account, transaction, onChange } = this.props
+      const bridge = getAccountBridge(account)
+      const fee = bridge.getTransactionExtra(account, transaction, 'fee')
+      if (!fee) {
+        onChange(bridge.editTransactionExtra(account, transaction, 'fee', serverFee))
       }
     } catch (error) {
       this.setState({ error })
@@ -47,10 +51,19 @@ class FeesField extends Component<Props, State> {
       api.disconnect()
     }
   }
+
+  onChange = (fee: BigNumber) => {
+    const { account, transaction, onChange } = this.props
+    const bridge = getAccountBridge(account)
+    onChange(bridge.editTransactionExtra(account, transaction, 'fee', fee))
+  }
+
   render() {
-    const { account, fee, onChange } = this.props
+    const { account, transaction } = this.props
     const { error } = this.state
     const { units } = account.currency
+    const bridge = getAccountBridge(account)
+    const fee = bridge.getTransactionExtra(account, transaction, 'fee')
     return (
       <GenericContainer>
         <InputCurrency
@@ -60,7 +73,7 @@ class FeesField extends Component<Props, State> {
           loading={!error && !fee}
           error={!fee && error ? new FeeNotLoaded() : null}
           value={fee}
-          onChange={onChange}
+          onChange={this.onChange}
         />
       </GenericContainer>
     )

@@ -139,6 +139,7 @@ class DashboardPage extends PureComponent<Props> {
                   accounts={accounts}
                   title={t('dashboard.recentActivity')}
                   withAccount
+                  withTokenAccounts
                 />
               )}
               <StickyBackToTop scrollUpOnMount />

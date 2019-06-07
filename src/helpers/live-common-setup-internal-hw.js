@@ -1,6 +1,7 @@
 // @flow
 import logger from 'logger'
 import { throwError } from 'rxjs'
+import '@ledgerhq/live-common/lib/load/tokens/ethereum/erc20'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { listen as listenLogs } from '@ledgerhq/logs'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'

@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "以下の手順に従って、<1><0>{{currencyName}}</0></1>のアカウントを追加してください"
     },
-    "accountAlreadyImportedSubtitle": "アカウントは既にポートフォリオ({{count}})内に存在します",
-    "accountToImportSubtitle": "既存アカウントを追加",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
     "selectAll": "すべての({{count}})を選択",
     "unselectAll": "すべての({{count}})を選択を解除",
@@ -241,7 +239,6 @@
     "successDescription": "アカウントを更に追加するか、ポートフォリオに戻る",
     "successDescription_plural": "アカウントを更に追加するか、ポートフォリオに戻る",
     "createNewAccount": {
-      "title": "新規アカウントを追加",
       "noOperationOnLastAccount": "<1><0>{{accountName}}</0> </1>のアカウントを受け取る前に、新しいアカウントを追加することはできません",
       "noAccountToCreate": "作成する <1><0>{{currencyName}}</0></1> アカウントが見つかりませんでした"
     },
@@ -249,6 +246,17 @@
       "addMore": "さらに追加",
       "add": "アカウントを追加",
       "add_plural": "アカウントを追加"
+    },
+    "sections": {
+      "importable": {
+        "title": "既存アカウントを追加"
+      },
+      "creatable": {
+        "title": "新規アカウントを追加"
+      },
+      "imported": {
+        "title": "アカウントは既にポートフォリオ({{count}})内に存在します"
+      }
     }
   },
   "operationDetails": {

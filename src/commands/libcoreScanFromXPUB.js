@@ -23,6 +23,7 @@ const cmd: Command<Input, Result> = createCommand(
   ({ currencyId, xpub, derivationMode, seedIdentifier }) => {
     const currency = getCryptoCurrencyById(currencyId)
     const account: $Exact<Account> = {
+      type: 'Account',
       name: `(DEV) ${currencyId}`,
       xpub,
       seedIdentifier,

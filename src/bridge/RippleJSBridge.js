@@ -1,13 +1,22 @@
 // @flow
+/* eslint-disable no-param-reassign */
 import invariant from 'invariant'
 import { BigNumber } from 'bignumber.js'
 import { Observable } from 'rxjs'
-import React from 'react'
 import { RippleAPI } from 'ripple-lib'
 import bs58check from 'ripple-bs58check'
 import { computeBinaryTransactionHash } from 'ripple-hashes'
 import throttle from 'lodash/throttle'
-import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
+import {
+  NotEnoughBalanceBecauseDestinationNotCreated,
+  NotEnoughBalance,
+  InvalidAddress,
+  FeeNotLoaded,
+  NetworkDown,
+  InvalidAddressBecauseDestinationIsAlsoSource,
+} from '@ledgerhq/errors'
+import type { Account, Operation, Unit } from '@ledgerhq/live-common/lib/types'
+import type { CurrencyBridge, AccountBridge } from '@ledgerhq/live-common/lib/bridge/types'
 import {
   getDerivationModesForCurrency,
   getDerivationScheme,
@@ -19,8 +28,6 @@ import {
   getAccountPlaceholderName,
   getNewAccountPlaceholderName,
 } from '@ledgerhq/live-common/lib/account'
-import getAddress from 'commands/getAddress'
-import signTransaction from 'commands/signTransaction'
 import {
   apiForEndpointConfig,
   defaultEndpoint,
@@ -28,41 +35,17 @@ import {
   parseAPICurrencyObject,
   formatAPICurrencyXRP,
 } from '@ledgerhq/live-common/lib/api/Ripple'
-import FeesRippleKind from 'components/FeesField/RippleKind'
-import AdvancedOptionsRippleKind from 'components/AdvancedOptions/RippleKind'
-import {
-  NotEnoughBalance,
-  FeeNotLoaded,
-  NotEnoughBalanceBecauseDestinationNotCreated,
-  InvalidAddressBecauseDestinationIsAlsoSource,
-} from '@ledgerhq/errors'
-import type { WalletBridge, EditProps } from './types'
+import getAddress from 'commands/getAddress'
+import signTransaction from 'commands/signTransaction'
 
-type Transaction = {
+export type Transaction = {
   amount: BigNumber,
   recipient: string,
   fee: ?BigNumber,
+  networkInfo: ?{ serverFee: BigNumber },
   tag: ?number,
+  feeCustomUnit: ?Unit,
 }
-
-const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
-  <FeesRippleKind
-    onChange={fee => {
-      onChange({ ...value, fee })
-    }}
-    fee={value.fee}
-    account={account}
-  />
-)
-
-const EditAdvancedOptions = ({ onChange, value }: EditProps<Transaction>) => (
-  <AdvancedOptionsRippleKind
-    tag={value.tag}
-    onChangeTag={tag => {
-      onChange({ ...value, tag })
-    }}
-  />
-)
 
 async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }) {
   const api = apiForEndpointConfig(RippleAPI, a.endpointConfig)
@@ -107,8 +90,7 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
       }
 
       const hash = computeBinaryTransactionHash(transaction)
-
-      const op: $Exact<Operation> = {
+      const operation = {
         id: `${a.id}-${hash}-OUT`,
         hash,
         accountId: a.id,
@@ -128,30 +110,40 @@ async function signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOpera
       }
 
       if (t.tag) {
-        op.extra.tag = t.tag
+        operation.extra.tag = t.tag
       }
-      onOperationBroadcasted(op)
+      onOperationBroadcasted(operation)
     }
+  } catch (e) {
+    if (e && e.name === 'RippledError' && e.data.resultMessage) {
+      throw new Error(e.data.resultMessage)
+    }
+    throw e
   } finally {
     api.disconnect()
   }
 }
 
-function isRecipientValid(account, recipient) {
+function isRecipientValid(recipient) {
   try {
     bs58check.decode(recipient)
-
-    return !(account && account.freshAddress === recipient)
+    return true
   } catch (e) {
     return false
   }
 }
 
-function getRecipientWarning(account, recipient) {
+function checkValidRecipient(account, recipient) {
   if (account.freshAddress === recipient) {
-    return new InvalidAddressBecauseDestinationIsAlsoSource()
+    return Promise.reject(new InvalidAddressBecauseDestinationIsAlsoSource())
   }
-  return null
+
+  try {
+    bs58check.decode(recipient)
+    return Promise.resolve(null)
+  } catch (e) {
+    return Promise.reject(new InvalidAddress('', { currencyName: account.currency.name }))
+  }
 }
 
 function mergeOps(existing: Operation[], newFetched: Operation[]) {
@@ -231,7 +223,7 @@ const txToOperation = (account: Account) => ({
   let value = deliveredAmount ? parseAPICurrencyObject(deliveredAmount) : BigNumber(0)
   const feeValue = parseAPIValue(fee)
   if (type === 'OUT') {
-    if (!isNaN(feeValue)) {
+    if (!Number.isNaN(feeValue)) {
       value = value.plus(feeValue)
     }
   }
@@ -251,7 +243,6 @@ const txToOperation = (account: Account) => ({
     transactionSequenceNumber: sequence,
     extra: {},
   }
-
   if (destination.tag) {
     op.extra.tag = destination.tag
   }
@@ -279,7 +270,7 @@ const getServerInfo = (map => endpointConfig => {
 })({})
 
 const recipientIsNew = async (endpointConfig, recipient) => {
-  if (!isRecipientValid(null, recipient)) return false
+  if (!isRecipientValid(recipient)) return false
   const api = apiForEndpointConfig(RippleAPI, endpointConfig)
   try {
     await api.connect()
@@ -297,13 +288,25 @@ const recipientIsNew = async (endpointConfig, recipient) => {
   }
 }
 
+// FIXME this could be cleaner
+const remapError = error => {
+  const msg = error.message
+
+  if (msg.includes('Unable to resolve host') || msg.includes('Network is down')) {
+    return new NetworkDown()
+  }
+
+  return error
+}
+
 const cacheRecipientsNew = {}
 const cachedRecipientIsNew = (endpointConfig, recipient) => {
   if (recipient in cacheRecipientsNew) return cacheRecipientsNew[recipient]
-  return (cacheRecipientsNew[recipient] = recipientIsNew(endpointConfig, recipient))
+  cacheRecipientsNew[recipient] = recipientIsNew(endpointConfig, recipient)
+  return cacheRecipientsNew[recipient]
 }
 
-const RippleJSBridge: WalletBridge<Transaction> = {
+export const currencyBridge: CurrencyBridge = {
   scanAccountsOnDevice: (currency, deviceId) =>
     Observable.create(o => {
       let finished = false
@@ -322,13 +325,17 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
           const derivationModes = getDerivationModesForCurrency(currency)
           for (const derivationMode of derivationModes) {
-            const derivationScheme = getDerivationScheme({ derivationMode, currency })
+            const derivationScheme = getDerivationScheme({
+              derivationMode,
+              currency,
+            })
             const stopAt = isIterableDerivationMode(derivationMode) ? 255 : 1
             for (let index = 0; index < stopAt; index++) {
               if (!derivationModeSupportsIndex(derivationMode, index)) continue
               const freshAddressPath = runDerivationScheme(derivationScheme, currency, {
                 account: index,
               })
+
               const { address } = await getAddress
                 .send({
                   derivationMode,
@@ -337,6 +344,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
                   path: freshAddressPath,
                 })
                 .toPromise()
+
               if (finished) return
 
               const accountId = `ripplejs:2:${currency.id}:${address}:${derivationMode}`
@@ -358,10 +366,15 @@ const RippleJSBridge: WalletBridge<Transaction> = {
                 // we are generating a new account locally
                 if (derivationMode === '') {
                   o.next({
+                    type: 'Account',
                     id: accountId,
                     seedIdentifier: freshAddress,
                     derivationMode,
-                    name: getNewAccountPlaceholderName({ currency, index, derivationMode }),
+                    name: getNewAccountPlaceholderName({
+                      currency,
+                      index,
+                      derivationMode,
+                    }),
                     freshAddress,
                     freshAddressPath,
                     balance: BigNumber(0),
@@ -393,10 +406,15 @@ const RippleJSBridge: WalletBridge<Transaction> = {
               if (finished) return
 
               const account: $Exact<Account> = {
+                type: 'Account',
                 id: accountId,
                 seedIdentifier: freshAddress,
                 derivationMode,
-                name: getAccountPlaceholderName({ currency, index, derivationMode }),
+                name: getAccountPlaceholderName({
+                  currency,
+                  index,
+                  derivationMode,
+                }),
                 freshAddress,
                 freshAddressPath,
                 balance,
@@ -424,8 +442,10 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
       return unsubscribe
     }),
+}
 
-  synchronize: ({
+export const accountBridge: AccountBridge<Transaction> = {
+  startSync: ({
     endpointConfig,
     freshAddress,
     blockHeight,
@@ -459,7 +479,11 @@ const RippleJSBridge: WalletBridge<Transaction> = {
           if (finished) return
 
           if (!info) {
-            // account does not exist, we have nothing to sync
+            // account does not exist, we have nothing to sync but to update the last sync date
+            o.next(a => ({
+              ...a,
+              lastSyncDate: new Date(),
+            }))
             o.complete()
             return
           }
@@ -469,8 +493,6 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             !balance.isNaN() && balance.isFinite(),
             `Ripple: invalid balance=${balance.toString()} for address ${freshAddress}`,
           )
-
-          o.next(a => ({ ...a, balance }))
 
           const transactions = await api.getTransactions(freshAddress, {
             minLedgerVersion: Math.max(
@@ -488,15 +510,16 @@ const RippleJSBridge: WalletBridge<Transaction> = {
             const operations = mergeOps(a.operations, newOps)
             const [last] = operations
             const pendingOperations = a.pendingOperations.filter(
-              o =>
-                !operations.some(op => o.hash === op.hash) &&
+              oo =>
+                !operations.some(op => oo.hash === op.hash) &&
                 last &&
                 last.transactionSequenceNumber &&
-                o.transactionSequenceNumber &&
-                o.transactionSequenceNumber > last.transactionSequenceNumber,
+                oo.transactionSequenceNumber &&
+                oo.transactionSequenceNumber > last.transactionSequenceNumber,
             )
             return {
               ...a,
+              balance,
               operations,
               pendingOperations,
               blockHeight: maxLedgerVersion,
@@ -506,7 +529,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
           o.complete()
         } catch (e) {
-          o.error(e)
+          o.error(remapError(e))
         } finally {
           api.disconnect()
         }
@@ -519,15 +542,41 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   pullMoreOperations: () => Promise.resolve(a => a), // FIXME not implemented
 
-  isRecipientValid: (account, recipient) => Promise.resolve(isRecipientValid(account, recipient)),
-  getRecipientWarning: (account, recipient) =>
-    Promise.resolve(getRecipientWarning(account, recipient)),
+  checkValidRecipient,
+
+  getRecipientWarning: () => Promise.resolve(null),
 
   createTransaction: () => ({
     amount: BigNumber(0),
     recipient: '',
     fee: null,
     tag: undefined,
+    networkInfo: null,
+    feeCustomUnit: null,
+  }),
+
+  fetchTransactionNetworkInfo: async account => {
+    const api = apiForEndpointConfig(RippleAPI, account.endpointConfig)
+    try {
+      await api.connect()
+      const info = await api.getServerInfo()
+      const serverFee = parseAPIValue(info.validatedLedger.baseFeeXRP)
+      return {
+        serverFee,
+      }
+    } catch (e) {
+      throw remapError(e)
+    } finally {
+      api.disconnect()
+    }
+  },
+
+  getTransactionNetworkInfo: (account, transaction) => transaction.networkInfo,
+
+  applyTransactionNetworkInfo: (account, transaction, networkInfo) => ({
+    ...transaction,
+    networkInfo,
+    fee: transaction.fee || networkInfo.serverFee,
   }),
 
   editTransactionAmount: (account, t, amount) => ({
@@ -537,36 +586,55 @@ const RippleJSBridge: WalletBridge<Transaction> = {
 
   getTransactionAmount: (a, t) => t.amount,
 
-  editTransactionRecipient: (account, t, recipient) => {
-    const parts = recipient.split('?')
-    const params = new URLSearchParams(parts[1])
-    recipient = parts[0]
-
-    // Extract parameters we may need
-    for (const [key, value] of params.entries()) {
-      switch (key) {
-        case 'dt':
-          t.tag = parseInt(value, 10) || 0
-          break
-        case 'amount':
-          t.amount = parseAPIValue(value || '0')
-          break
-        default:
-        // do nothing
-      }
-    }
-
-    return {
+  editTransactionRecipient: (account, t, recipient) =>
+    // TODO add back the same code as in desktop
+    ({
       ...t,
       recipient,
+    }),
+
+  getTransactionRecipient: (a, t) => t.recipient,
+
+  editTransactionExtra: (a, t, field, value) => {
+    switch (field) {
+      case 'fee':
+        invariant(
+          !value || BigNumber.isBigNumber(value),
+          "editTransactionExtra(a,t,'fee',value): BigNumber value expected",
+        )
+        return { ...t, fee: value }
+
+      case 'tag':
+        invariant(
+          !value || typeof value === 'number',
+          "editTransactionExtra(a,t,'tag',value): number value expected",
+        )
+        return { ...t, tag: value }
+
+      case 'feeCustomUnit':
+        invariant(value, "editTransactionExtra(a,t,'feeCustomUnit',value): value is expected")
+        return { ...t, feeCustomUnit: value }
+
+      default:
+        return t
     }
   },
 
-  EditFees,
+  getTransactionExtra: (a, t, field) => {
+    switch (field) {
+      case 'fee':
+        return t.fee
 
-  EditAdvancedOptions,
+      case 'tag':
+        return t.tag
 
-  getTransactionRecipient: (a, t) => t.recipient,
+      case 'feeCustomUnit':
+        return t.feeCustomUnit
+
+      default:
+        return undefined
+    }
+  },
 
   checkValidTransaction: async (a, t) => {
     if (!t.fee) throw new FeeNotLoaded()
@@ -577,7 +645,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         if (t.amount.lt(reserveBaseXRP)) {
           const f = formatAPICurrencyXRP(reserveBaseXRP)
           throw new NotEnoughBalanceBecauseDestinationNotCreated('', {
-            minimalAmount: `${f.currency} ${f.value}`,
+            minimalAmount: `${f.currency} ${BigNumber(f.value).toFixed()}`,
           })
         }
       }
@@ -588,7 +656,7 @@ const RippleJSBridge: WalletBridge<Transaction> = {
         .plus(reserveBaseXRP)
         .isLessThanOrEqualTo(a.balance)
     ) {
-      return true
+      return null
     }
     throw new NotEnoughBalance()
   },
@@ -608,7 +676,14 @@ const RippleJSBridge: WalletBridge<Transaction> = {
       const onOperationBroadcasted = operation => {
         o.next({ type: 'broadcasted', operation })
       }
-      signAndBroadcast({ a, t, deviceId, isCancelled, onSigned, onOperationBroadcasted }).then(
+      signAndBroadcast({
+        a,
+        t,
+        deviceId,
+        isCancelled,
+        onSigned,
+        onOperationBroadcasted,
+      }).then(
         () => {
           o.complete()
         },
@@ -637,5 +712,3 @@ const RippleJSBridge: WalletBridge<Transaction> = {
     await api.connect()
   },
 }
-
-export default RippleJSBridge

@@ -49,6 +49,7 @@ type Props = {
   subMagnitude: number,
   allowZero: boolean,
   locale: string,
+  disabled?: boolean,
 }
 
 type State = {
@@ -170,7 +171,7 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 
   render() {
-    const { renderRight, showAllDigits, unit, subMagnitude, locale } = this.props
+    const { renderRight, showAllDigits, unit, subMagnitude, locale, disabled } = this.props
     const { displayValue } = this.state
 
     return (
@@ -179,6 +180,7 @@ class InputCurrency extends PureComponent<Props, State> {
         {...this.props}
         ff="Rubik"
         ref={this.onRef}
+        disabled={disabled}
         value={displayValue}
         onChange={this.handleChange}
         onFocus={this.handleFocus}

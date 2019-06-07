@@ -55,6 +55,7 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
       if (typeof data.request === 'object' && data.request) {
         const { request } = data
         if (typeof request.url === 'string') {
+          // $FlowFixMe not sure why
           request.url = anonymizer.appURI(request.url)
         }
       }

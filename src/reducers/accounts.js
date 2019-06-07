@@ -5,6 +5,7 @@ import { handleActions } from 'redux-actions'
 import accountModel from 'helpers/accountModel'
 import logger from 'logger'
 import type { Account } from '@ledgerhq/live-common/lib/types'
+import { flattenAccounts, clearAccount } from '@ledgerhq/live-common/lib/account'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
 import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
 
@@ -31,6 +32,8 @@ const handlers: Object = {
     return [...state, account]
   },
 
+  REPLACE_ACCOUNTS: (state: AccountsState, { payload }: { payload: Account[] }) => payload,
+
   UPDATE_ACCOUNT: (
     state: AccountsState,
     {
@@ -49,13 +52,7 @@ const handlers: Object = {
     { payload: account }: { payload: Account },
   ): AccountsState => state.filter(acc => acc.id !== account.id),
 
-  CLEAN_ACCOUNTS_CACHE: (state: AccountsState): AccountsState =>
-    state.map(acc => ({
-      ...acc,
-      lastSyncDate: new Date(0),
-      operations: [],
-      pendingOperations: [],
-    })),
+  CLEAN_ACCOUNTS_CACHE: (state: AccountsState): AccountsState => state.map(clearAccount),
 
   // used to debug performance of redux updates
   DEBUG_TICK: state => state.slice(0),
@@ -89,6 +86,12 @@ export const isUpToDateSelector = createSelector(activeAccountsSelector, account
 export const hasAccountsSelector = createSelector(accountsSelector, accounts => accounts.length > 0)
 
 export const currenciesSelector = createSelector(accountsSelector, accounts =>
+  [
+    ...new Set(flattenAccounts(accounts).map(a => (a.type === 'Account' ? a.currency : a.token))),
+  ].sort((a, b) => a.name.localeCompare(b.name)),
+)
+
+export const cryptoCurrenciesSelector = createSelector(accountsSelector, accounts =>
   [...new Set(accounts.map(a => a.currency))].sort((a, b) => a.name.localeCompare(b.name)),
 )
 
