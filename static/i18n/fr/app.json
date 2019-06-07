@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "Suivez les étapes ci-dessous pour ajouter des comptes <1><0>{{currencyName}}</0></1>"
     },
-    "accountAlreadyImportedSubtitle": "Comptes déjà présents dans le portefeuille ({{count}})",
-    "accountToImportSubtitle": "Ajouter un compte existant",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
@@ -241,7 +239,6 @@
     "successDescription": "Ajoutez davantage de comptes ou retournez au Portfolio",
     "successDescription_plural": "Ajoutez davantage de comptes ou retournez au Portfolio",
     "createNewAccount": {
-      "title": "Ajouter un nouveau compte",
       "noOperationOnLastAccount": "Impossible d’ajouter un nouveau compte avant d’avoir reçu sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> à créer n’a été trouvé."
     },
@@ -249,6 +246,20 @@
       "addMore": "Ajouter davantage",
       "add": "Ajouter un compte",
       "add_plural": "Ajouter des comptes"
+    },
+    "sections": {
+      "importable": {
+        "title": "Add existing account"
+      },
+      "creatable": {
+        "title": "Add new account"
+      },
+      "imported": {
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
+      }
     }
   },
   "operationDetails": {
@@ -370,6 +381,7 @@
         "recipientAddress": "Adresse du destinataire",
         "amount": "Montant",
         "fees": "Frais de réseau",
+        "useMax": "use max",
         "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
         "message": "Laisser un message (140) ",
@@ -833,6 +845,10 @@
     "BtcUnmatchedApp": {
       "title": "Il ne s’agit pas de la bonne application.",
       "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil."
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
