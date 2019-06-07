@@ -249,13 +249,16 @@
     },
     "sections": {
       "importable": {
-        "title": "Ajouter un compte existant"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "Ajouter un nouveau compte"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "Comptes déjà présents dans le portefeuille ({{count}})"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
       }
     }
   },
@@ -378,6 +381,7 @@
         "recipientAddress": "Adresse du destinataire",
         "amount": "Montant",
         "fees": "Frais de réseau",
+        "useMax": "use max",
         "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
         "message": "Laisser un message (140) ",
@@ -841,6 +845,10 @@
     "BtcUnmatchedApp": {
       "title": "Il ne s’agit pas de la bonne application.",
       "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil."
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
