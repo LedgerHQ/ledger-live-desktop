@@ -15,6 +15,7 @@ import Countervalue from './AccountsPage/AccountRowItem/Countervalue'
 type Props = {
   account: TokenAccount,
   nested?: boolean,
+  disableRounding?: boolean,
   index: number,
   parentAccount: Account,
   onClick: (Account | TokenAccount, ?Account) => void,
@@ -79,6 +80,7 @@ class TokenRow extends PureComponent<Props> {
       range,
       index,
       nested,
+      disableRounding,
     } = this.props
     const unit = account.token.units[0]
     const Row = nested ? NestedRow : TopLevelRow
@@ -86,7 +88,7 @@ class TokenRow extends PureComponent<Props> {
       <Row index={index} onClick={this.onClick}>
         <Header nested={nested} account={account} name={token.name} />
         <Box flex="12%" />
-        <Balance unit={unit} balance={account.balance} />
+        <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
         <Countervalue account={account} currency={token} range={range} />
         <Delta account={account} range={range} />
         <div style={{ width: 18 }} />

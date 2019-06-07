@@ -104,7 +104,6 @@ class Row extends PureComponent<Props, State> {
               val={amount}
               fontSize={3}
               showCode
-              disableRounding
             />
           </Ellipsis>
         </Amount>

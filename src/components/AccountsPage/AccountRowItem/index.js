@@ -82,6 +82,7 @@ export const TokenShowMoreIndicator = styled.button`
 type Props = {
   account: TokenAccount | Account,
   parentAccount: ?Account,
+  disableRounding?: boolean,
   onClick: (Account | TokenAccount, ?Account) => void,
   hidden?: boolean,
   range: PortfolioRange,
@@ -130,7 +131,7 @@ class AccountRowItem extends PureComponent<Props, State> {
   }
 
   render() {
-    const { account, parentAccount, range, hidden, onClick } = this.props
+    const { account, parentAccount, range, hidden, onClick, disableRounding } = this.props
     const { expanded } = this.state
 
     let currency
@@ -163,7 +164,7 @@ class AccountRowItem extends PureComponent<Props, State> {
                   <AccountSyncStatusIndicator accountId={mainAccount.id} />
                 </div>
               </Box>
-              <Balance unit={unit} balance={account.balance} />
+              <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
               <Countervalue account={account} currency={currency} range={range} />
               <Delta account={account} range={range} />
               {showTokensIndicator ? (

@@ -62,6 +62,7 @@ class TokensList extends PureComponent<Props> {
               account={token}
               parentAccount={account}
               onClick={this.onAccountClick}
+              disableRounding
             />
           ))}
       </Box>
