@@ -17,8 +17,7 @@ type Props = {
 // NB Inside Head to not break alignment with parent row;
 const NestedIndicator = styled.div`
   border-left: 1px solid ${p => p.theme.colors.lightFog};
-  min-height: 40px;
-  height: 100%;
+  height: 44px;
   margin-left: 9px;
   padding-left: 5px;
 `
@@ -44,7 +43,7 @@ class Header extends PureComponent<Props> {
         horizontal
         ff="Open Sans|SemiBold"
         flow={3}
-        flex={`${nested ? 30 : 42}%`}
+        flex={`${nested ? 42 : 30}%`}
         pr={1}
         alignItems="center"
       >
@@ -53,11 +52,12 @@ class Header extends PureComponent<Props> {
           <CryptoCurrencyIcon currency={currency} size={20} />
         </Box>
         <Box grow>
-          {nested && (
-            <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
-              {title}
-            </Box>
-          )}
+          {!nested &&
+            account.type === 'Account' && (
+              <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
+                {title}
+              </Box>
+            )}
           <Ellipsis fontSize={12} color="dark">
             {name}
           </Ellipsis>

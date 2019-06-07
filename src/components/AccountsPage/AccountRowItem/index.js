@@ -36,7 +36,7 @@ const Row = styled(Box)`
   flex: 1;
   font-weight: 600;
   justify-content: flex-start;
-  margin-bottom: ${p => (p.tokens ? 9 : 18)}px;
+  margin-bottom: ${p => (p.tokens && !p.expanded ? 18 : 9)}px;
   padding: 16px 20px;
   position: relative;
   :hover {
@@ -55,7 +55,7 @@ const TokenContent = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-top: 8px;
+  margin-top: 20px;
 `
 
 const TokenAccountIndicator = styled.div`
@@ -155,7 +155,7 @@ class AccountRowItem extends PureComponent<Props, State> {
     const showTokensIndicator = tokens && tokens.length > 0 && !hidden
     return (
       <Wrapper hidden={hidden}>
-        <Row expanded={expanded} key={mainAccount.id}>
+        <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
           <ContextMenuItem items={this.contextMenuItems}>
             <RowContent onClick={this.onClick}>
               <Header account={account} name={mainAccount.name} />
