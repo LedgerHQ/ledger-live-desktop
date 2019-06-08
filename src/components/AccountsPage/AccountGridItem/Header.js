@@ -56,38 +56,41 @@ class HeadText extends PureComponent<{
 
 class Header extends PureComponent<{
   account: Account | TokenAccount,
-  parentAccount: ?Account,
+  parentAccount?: Account,
 }> {
   render() {
     const { account, parentAccount } = this.props
     let currency
     let unit
-    let mainAccount
     let title
     let name
 
     if (account.type !== 'Account') {
       currency = account.token
       unit = account.token.units[0]
-      mainAccount = parentAccount
       title = 'token'
       name = currency.name
 
-      if (!mainAccount) return null
+      if (!parentAccount) return null
     } else {
       currency = account.currency
       unit = account.unit
-      mainAccount = account
       title = currency.name
-      name = mainAccount.name
+      name = account.name
     }
 
     return (
       <Box flow={4}>
         <Box horizontal ff="Open Sans|SemiBold" flow={3} alignItems="center">
-          <CurrencyHead currency={currency} parentCurrency={mainAccount && mainAccount.currency} />
+          <CurrencyHead
+            currency={currency}
+            parentCurrency={parentAccount && parentAccount.currency}
+          />
           <HeadText name={name} title={title} />
-          <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
+          <AccountSyncStatusIndicator
+            accountId={(parentAccount && parentAccount.id) || account.id}
+            account={account}
+          />
         </Box>
         <Bar size={1} color="fog" />
         <Box justifyContent="center">
