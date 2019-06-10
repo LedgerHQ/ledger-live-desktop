@@ -13,6 +13,7 @@ type Props = {
   lookupParentAccount: (id: string) => ?Account,
   range: PortfolioRange,
   showNewAccount: boolean,
+  search?: string,
 }
 
 class ListBody extends PureComponent<Props> {
@@ -24,6 +25,7 @@ class ListBody extends PureComponent<Props> {
       range,
       onAccountClick,
       lookupParentAccount,
+      search,
     } = this.props
     return (
       <Box>
@@ -31,6 +33,7 @@ class ListBody extends PureComponent<Props> {
           <AccountItem
             key={account.id}
             account={account}
+            search={search}
             parentAccount={
               account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
             }
@@ -44,6 +47,7 @@ class ListBody extends PureComponent<Props> {
             hidden
             key={account.id}
             account={account}
+            search={search}
             parentAccount={
               account.type === 'TokenAccount' ? lookupParentAccount(account.parentId) : null
             }
