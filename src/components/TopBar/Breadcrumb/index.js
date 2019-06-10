@@ -37,7 +37,6 @@ export const Separator = styled.div`
 `
 const Breadcrumb = () => (
   <Wrapper>
-    <Route path="/accounts/" component={AccountCrumb} />
     <Route path="/account/" component={AccountCrumb} />
     <Route path="/account/:id/" component={AccountCrumb} />
     <Route path="/account/:parentId/:id/" component={AccountCrumb} />
