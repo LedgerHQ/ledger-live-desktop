@@ -337,7 +337,7 @@
         "recoveryMode": "Appuyez sur le Mode {{mode}} . Attendez jusqu'à ce que le tableau de bord apparaisse.",
         "third": "3. Désinstaller toutes les applications",
         "openLive": "Ouvrez le Manager dans Ledger Live.",
-        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "uninstall": "Cliquez sur l'icône de corbeille grise pour toutes les applications actuellement installées sur le {{deviceName}}. Cela permet de faire de la place pour l'installateur du firmware.",
         "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
       }
     },
@@ -420,11 +420,11 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
+    "asset": "Actif ",
     "price": "Price",
-    "distribution": "Distribution",
-    "amount": "Amount",
-    "value": "Value",
+    "distribution": "Répartition",
+    "amount": "Montant",
+    "value": "Valeur",
     "seeAll": "See all",
     "header": "Asset distribution ({{count}})"
   },
