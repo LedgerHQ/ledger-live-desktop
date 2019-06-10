@@ -19,6 +19,7 @@ import IconReceive from '../../../icons/Receive'
 import IconAccountSettings from '../../../icons/AccountSettings'
 import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../../config/constants'
 import TokenRow from '../../TokenRow'
+import { matchesSearch } from '../AccountList'
 
 const Wrapper = styled.div`
   display: ${p => (p.hidden ? 'none' : 'contents')};
@@ -49,6 +50,11 @@ const RowContent = styled.div`
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  & * {
+    color: ${p => (p.disabled ? p.theme.colors.dark : 'auto')};
+    fill: ${p => (p.disabled ? p.theme.colors.dark : 'auto')};
+  }
 `
 
 const TokenContent = styled.div`
@@ -87,6 +93,7 @@ type Props = {
   hidden?: boolean,
   range: PortfolioRange,
   openModal: Function,
+  search?: string,
 }
 
 type State = {
@@ -100,6 +107,12 @@ const mapDispatchToProps = {
 class AccountRowItem extends PureComponent<Props, State> {
   state = {
     expanded: false,
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    this.setState({
+      expanded: !!nextProps.search,
+    })
   }
 
   onClick = () => {
@@ -131,13 +144,14 @@ class AccountRowItem extends PureComponent<Props, State> {
   }
 
   render() {
-    const { account, parentAccount, range, hidden, onClick, disableRounding } = this.props
+    const { account, parentAccount, range, hidden, onClick, disableRounding, search } = this.props
     const { expanded } = this.state
 
     let currency
     let unit
     let mainAccount
     let tokens
+    let disabled
 
     if (account.type !== 'Account') {
       currency = account.token
@@ -150,6 +164,8 @@ class AccountRowItem extends PureComponent<Props, State> {
       unit = account.unit
       mainAccount = account
       tokens = account.tokenAccounts
+      disabled = !matchesSearch(search, account)
+      if (tokens) tokens = tokens.filter(t => matchesSearch(search, t))
     }
 
     const showTokensIndicator = tokens && tokens.length > 0 && !hidden
@@ -157,7 +173,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       <Wrapper hidden={hidden}>
         <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
           <ContextMenuItem items={this.contextMenuItems}>
-            <RowContent onClick={this.onClick}>
+            <RowContent disabled={disabled} onClick={this.onClick}>
               <Header account={account} name={mainAccount.name} />
               <Box flex="12%">
                 <div>
@@ -167,7 +183,7 @@ class AccountRowItem extends PureComponent<Props, State> {
               <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
               <Countervalue account={account} currency={currency} range={range} />
               <Delta account={account} range={range} />
-              {showTokensIndicator ? (
+              {showTokensIndicator && !disabled ? (
                 <TokenShowMoreIndicator
                   size={18}
                   expanded={expanded}

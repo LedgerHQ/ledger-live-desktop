@@ -28,16 +28,26 @@ const BodyByMode = {
   list: ListBody,
 }
 
-const matchesSearch = (search: string, account: Account | TokenAccount): boolean =>
-  !search ||
-  (account.type === 'Account'
-    ? `${account.currency.ticker}|${account.currency.name}|${account.currency.ticker}|${
-        account.name
-      }`
-    : `${account.token.ticker}|${account.token.name}`
-  )
-    .toLowerCase()
-    .includes(search.toLowerCase())
+export const matchesSearch = (
+  search?: string,
+  account: Account | TokenAccount,
+  subMatch: boolean = false,
+): boolean => {
+  if (!search) return true
+  let match
+
+  if (account.type === 'Account') {
+    match = `${account.currency.ticker}|${account.currency.name}|${account.name}`
+    subMatch =
+      subMatch &&
+      !!account.tokenAccounts &&
+      account.tokenAccounts.some(token => matchesSearch(search, token))
+  } else {
+    match = `${account.token.ticker}|${account.token.name}`
+  }
+
+  return match.toLowerCase().includes(search.toLowerCase()) || subMatch
+}
 
 class AccountList extends Component<Props, State> {
   state = {
@@ -67,7 +77,7 @@ class AccountList extends Component<Props, State> {
     const hiddenAccounts = []
     for (let i = 0; i < accounts.length; i++) {
       const account = accounts[i]
-      if (matchesSearch(search, account)) {
+      if (matchesSearch(search, account, mode === 'list')) {
         visibleAccounts.push(account)
       } else {
         hiddenAccounts.push(account)
@@ -94,6 +104,7 @@ class AccountList extends Component<Props, State> {
           horizontal
           data-e2e="dashboard_AccountList"
           range={range}
+          search={search}
           visibleAccounts={visibleAccounts}
           hiddenAccounts={hiddenAccounts}
           showNewAccount={!search}
