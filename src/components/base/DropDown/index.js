@@ -19,10 +19,12 @@ const Drop = styled(Box).attrs({
   p: 2,
 })`
   ${p => p.border && `border:1px solid ${p.theme.colors.lightFog}`};
+  max-height: 400px;
   position: absolute;
   right: 0;
   top: 100%;
   z-index: 1;
+  overflow: scroll;
 `
 
 export const DropDownItem = styled(Box).attrs({
