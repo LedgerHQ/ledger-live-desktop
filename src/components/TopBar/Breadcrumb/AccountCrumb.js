@@ -14,7 +14,7 @@ import { push } from 'react-router-redux'
 import { accountsSelector } from '../../../reducers/accounts'
 import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
 import DropDown from '../../base/DropDown'
-import Button from '../../base/Button'
+import Button, { Base } from '../../base/Button'
 import { Separator } from './index'
 
 type Props = {
@@ -56,14 +56,15 @@ const TextLink = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
-
+  -webkit-app-region: no-drag;
   > :first-child {
     margin-right: 8px;
   }
 
-  > :nth-child(2) {
+  > ${Base} {
     padding: 0px;
-    &:hover {
+    &:hover,
+    &:active {
       background: transparent;
       text-decoration: underline;
     }
@@ -155,11 +156,11 @@ class AccountCrumb extends PureComponent<Props> {
 
     if (!id) {
       return (
-        <>
+        <TextLink>
           <Button onClick={() => push('/accounts/')}>
             <Trans>{'accounts.title'}</Trans>
           </Button>
-        </>
+        </TextLink>
       )
     }
 
