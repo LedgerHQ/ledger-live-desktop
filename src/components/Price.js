@@ -22,7 +22,8 @@ import CounterValues from 'helpers/countervalues'
 
 type OwnProps = {
   unit?: Unit,
-  currency: Currency,
+  from: Currency,
+  to?: Currency,
   withActivityCurrencyColor?: boolean,
   withActivityColor?: string,
   withEquality?: boolean,
@@ -51,7 +52,7 @@ const Price = ({
   value,
   counterValue,
   counterValueCurrency,
-  currency,
+  from,
   withActivityCurrencyColor,
   withActivityColor,
   withEquality,
@@ -66,7 +67,7 @@ const Price = ({
       ? color
         ? colors[color]
         : undefined
-      : getCurrencyColor(currency)
+      : getCurrencyColor(from)
 
   const subMagnitude = counterValue.lt(1) ? 1 : 0
 
@@ -92,22 +93,35 @@ const Price = ({
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const { unit, currency, date } = props
-  const effectiveUnit = unit || currency.units[0]
+  const { unit, from, to, date } = props
+  const effectiveUnit = unit || from.units[0]
   const value = new BigNumber(10 ** effectiveUnit.magnitude)
-  const counterValueCurrency = counterValueCurrencySelector(state)
-  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
+  const counterValueCurrency = to || counterValueCurrencySelector(state)
+  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: from.ticker })
   const toExchange = counterValueExchangeSelector(state)
-  const counterValue = CounterValues.calculateWithIntermediarySelector(state, {
-    from: currency,
-    fromExchange,
-    intermediary: intermediaryCurrency,
-    toExchange,
-    to: counterValueCurrency,
-    value,
-    date,
-    disableRounding: true,
-  })
+
+  let counterValue
+  if (from && to && intermediaryCurrency.ticker !== from.ticker) {
+    counterValue = CounterValues.calculateSelector(state, {
+      from,
+      to,
+      exchange: fromExchange,
+      value,
+      date,
+      disableRounding: true,
+    })
+  } else {
+    counterValue = CounterValues.calculateWithIntermediarySelector(state, {
+      from,
+      fromExchange,
+      intermediary: intermediaryCurrency,
+      toExchange,
+      to: counterValueCurrency,
+      value,
+      date,
+      disableRounding: true,
+    })
+  }
 
   return {
     counterValueCurrency,

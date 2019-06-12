@@ -79,7 +79,8 @@ class RateRow extends PureComponent<Props> {
             <Price
               withEquality
               withActivityColor="wallet"
-              currency={from}
+              from={from}
+              to={to}
               color="graphite"
               fontSize={3}
             />

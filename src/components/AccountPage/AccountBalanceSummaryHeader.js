@@ -146,7 +146,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
               </div>
               <Price
                 unit={unit}
-                currency={currency}
+                from={currency}
                 withActivityCurrencyColor
                 withEquality
                 color="warmGrey"
