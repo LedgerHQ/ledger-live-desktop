@@ -35,7 +35,7 @@ class CounterValueExchangeSelect extends PureComponent<Props> {
           to={counterValueCurrency}
           exchangeId={counterValueExchange}
           onChange={this.handleChangeExchange}
-          minWidth={260}
+          minWidth={150}
         />
       </Fragment>
     ) : null

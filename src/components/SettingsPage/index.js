@@ -10,7 +10,7 @@ import type { RouterHistory, Match, Location } from 'react-router'
 import { accountsSelector } from 'reducers/accounts'
 import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
-import SectionDisplay from './sections/Display'
+import SectionDisplay from './sections/General'
 import SectionCurrencies from './sections/Currencies'
 import SectionHelp from './sections/Help'
 import SectionAbout from './sections/About'
@@ -45,7 +45,7 @@ class SettingsPage extends PureComponent<Props, State> {
       },
       {
         key: 'currencies',
-        label: <Trans i18nKey="settings.tabs.currencies" />,
+        label: <Trans i18nKey="settings.tabs.cryptoAssets" />,
         value: SectionCurrencies,
       },
       {
