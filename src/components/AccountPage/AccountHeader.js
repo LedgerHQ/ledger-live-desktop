@@ -8,8 +8,8 @@ import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
-import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
+import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
 
 const CurName = styled(Text).attrs({
   ff: 'Open Sans|SemiBold',

@@ -219,7 +219,10 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token"
+    "cta": "Receive token",
+    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
+    "placeholder2": "For more information: ",
+    "link": "Manage ERC20 tokens"
   },
   "addAccounts": {
     "title": "Add accounts",
