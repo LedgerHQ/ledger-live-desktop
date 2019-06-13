@@ -249,13 +249,16 @@
     },
     "sections": {
       "importable": {
-        "title": "Добавить существующий счет"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "Добавить новый счет"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "Счета, находящиеся в портфеле: ({{count}})"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
       }
     }
   },
@@ -378,6 +381,7 @@
         "recipientAddress": "Адрес получателя",
         "amount": "Сумма",
         "fees": "Комиссия за пользование сетью",
+        "useMax": "use max",
         "advancedOptions": "Дополнительные параметры",
         "useRBF": "Использовать транзакцию Replace-by-Fee (замена с повышением комиссии)",
         "message": "Оставьте сообщение (140)",
@@ -841,6 +845,10 @@
     "BtcUnmatchedApp": {
       "title": "Это не то приложение.",
       "description": "Откройте приложение ‘{{managerAppName}}‘ на устройстве."
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
