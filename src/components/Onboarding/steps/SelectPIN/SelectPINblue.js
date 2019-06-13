@@ -76,7 +76,9 @@ class SelectPIN extends PureComponent<Props, *> {
           </Box>
           <Box>
             <Box shrink grow flow={4}>
-              {stepsLedgerBlue.map(step => <OptionRow key={step.key} step={step} />)}
+              {stepsLedgerBlue.map(step => (
+                <OptionRow key={step.key} step={step} />
+              ))}
             </Box>
           </Box>
         </Inner>

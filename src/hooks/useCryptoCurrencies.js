@@ -10,10 +10,9 @@ const useCryptocurrencies = ({
 }: {
   onlyTerminated?: boolean,
   onlySupported?: boolean,
-}): ?(CryptoCurrency[]) => {
+}): CryptoCurrency[] => {
   const devMode = useEnv('MANAGER_DEV_MODE')
   const cryptos = listCryptoCurrencies(devMode, onlyTerminated, onlySupported)
-
   return cryptos
 }
 

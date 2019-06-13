@@ -24,7 +24,11 @@ class PartnersPage extends PureComponent<Props> {
         <Box ff="Museo Sans|Light" fontSize={5} mb={5}>
           {t('partners.desc')}
         </Box>
-        <Box flow={3}>{partners.map(card => <PartnerCard key={card.id} t={t} card={card} />)}</Box>
+        <Box flow={3}>
+          {partners.map(card => (
+            <PartnerCard key={card.id} t={t} card={card} />
+          ))}
+        </Box>
       </Box>
     )
   }

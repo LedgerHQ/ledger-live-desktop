@@ -8,6 +8,8 @@ import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
+import { MODAL_RECEIVE } from 'config/constants'
+import { openModal } from 'reducers/modals'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import type { T } from 'types/common'
@@ -20,6 +22,7 @@ type Props = {
   push: string => void,
   t: T,
   range: PortfolioRange,
+  openModal: Function,
 }
 
 const Wrapper = styled.div`
@@ -30,6 +33,7 @@ const Wrapper = styled.div`
 
 const mapDispatchToProps = {
   push,
+  openModal,
 }
 
 class TokensList extends PureComponent<Props> {
@@ -37,7 +41,7 @@ class TokensList extends PureComponent<Props> {
     this.props.push(`/account/${parentAccount.id}/${account.id}`)
 
   render() {
-    const { account, t, range } = this.props
+    const { account, t, range, openModal } = this.props
     if (!account.tokenAccounts) return null
 
     return (
@@ -46,7 +50,11 @@ class TokensList extends PureComponent<Props> {
           <Text color="dark" mb={2} ff="Museo Sans" fontSize={6}>
             {t('tokensList.title')}
           </Text>
-          <Button small primary onClick={() => null}>
+          <Button
+            small
+            primary
+            onClick={() => openModal(MODAL_RECEIVE, { account, receiveTokenMode: true })}
+          >
             <Box horizontal flow={1} alignItems="center">
               <IconPlus size={12} />
               <Box>{t('tokensList.cta')}</Box>

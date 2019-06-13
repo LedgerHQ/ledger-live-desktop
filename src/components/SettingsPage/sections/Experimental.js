@@ -63,11 +63,10 @@ class SectionExperimental extends PureComponent<Props> {
             icon={<IconSensitiveOperationShield />}
             content={<Trans i18nKey="settings.experimental.disclaimer" />}
           />
-          {experimentalFeatures.map(
-            feature =>
-              !feature.shadow || (feature.shadow && !isEnvDefault(feature.name)) ? (
-                <ExperimentalFeatureRow key={feature.name} feature={feature} />
-              ) : null,
+          {experimentalFeatures.map(feature =>
+            !feature.shadow || (feature.shadow && !isEnvDefault(feature.name)) ? (
+              <ExperimentalFeatureRow key={feature.name} feature={feature} />
+            ) : null,
           )}
         </Body>
       </Section>

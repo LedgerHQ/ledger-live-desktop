@@ -50,36 +50,27 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
     [bridge, account, transaction],
   )
   const latestOnChange = useRef(onChangeF)
-  useEffect(
-    () => {
-      latestOnChange.current = onChangeF
-    },
-    [onChangeF],
-  )
+  useEffect(() => {
+    latestOnChange.current = onChangeF
+  }, [onChangeF])
 
   // as soon as a serverGas is fetched, we set it in the tx
-  useEffect(
-    () => {
-      if (!gasPrice && serverGas) {
-        latestOnChange.current(serverGas)
-      }
-    },
-    [account, transaction, gasPrice, serverGas],
-  )
+  useEffect(() => {
+    if (!gasPrice && serverGas) {
+      latestOnChange.current(serverGas)
+    }
+  }, [account, transaction, gasPrice, serverGas])
 
   // If after 5s, there is still no gasPrice set, we'll set in the tx the default gas
-  useEffect(
-    () => {
-      if (gasPrice) return noop
-      const timeout = setTimeout(() => {
-        if (!gasPrice) {
-          latestOnChange.current(defaultGas)
-        }
-      }, 5000)
-      return () => clearTimeout(timeout)
-    },
-    [gasPrice],
-  )
+  useEffect(() => {
+    if (gasPrice) return noop
+    const timeout = setTimeout(() => {
+      if (!gasPrice) {
+        latestOnChange.current(defaultGas)
+      }
+    }, 5000)
+    return () => clearTimeout(timeout)
+  }, [gasPrice])
 
   return (
     <GenericContainer

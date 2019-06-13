@@ -10,8 +10,9 @@ import { BridgeSyncConsumer } from 'bridge/BridgeSyncContext'
 import type { Sync } from 'bridge/BridgeSyncContext'
 import { accountsSelector } from 'reducers/accounts'
 
-const accountsWithPendingOperationsSelector = createSelector(accountsSelector, accounts =>
-  accounts.filter(a => a.pendingOperations.length > 0),
+const accountsWithPendingOperationsSelector = createSelector(
+  accountsSelector,
+  accounts => accounts.filter(a => a.pendingOperations.length > 0),
 )
 
 class SyncContPendingOpsConnected extends Component<{

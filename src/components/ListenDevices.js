@@ -7,42 +7,39 @@ import useEnv from 'hooks/useEnv'
 
 const ListenDevices = ({ addDevice, removeDevice, resetDevices }) => {
   const experimentalUSB = useEnv('EXPERIMENTAL_USB')
-  useEffect(
-    () => {
-      if (experimentalUSB) return () => {}
-      let sub
-      function syncDevices() {
-        sub = listenDevices.send().subscribe(
-          ({ device, deviceModel, type }) => {
-            if (device) {
-              const stateDevice = {
-                path: device.path,
-                modelId: deviceModel ? deviceModel.id : 'nanoS',
-                type: 'hid',
-              }
-              if (type === 'add') {
-                addDevice(stateDevice)
-              } else if (type === 'remove') {
-                removeDevice(stateDevice)
-              }
+  useEffect(() => {
+    if (experimentalUSB) return () => {}
+    let sub
+    function syncDevices() {
+      sub = listenDevices.send().subscribe(
+        ({ device, deviceModel, type }) => {
+          if (device) {
+            const stateDevice = {
+              path: device.path,
+              modelId: deviceModel ? deviceModel.id : 'nanoS',
+              type: 'hid',
             }
-          },
-          () => {
-            resetDevices()
-            syncDevices()
-          },
-          () => {
-            resetDevices()
-            syncDevices()
-          },
-        )
-      }
-      syncDevices()
+            if (type === 'add') {
+              addDevice(stateDevice)
+            } else if (type === 'remove') {
+              removeDevice(stateDevice)
+            }
+          }
+        },
+        () => {
+          resetDevices()
+          syncDevices()
+        },
+        () => {
+          resetDevices()
+          syncDevices()
+        },
+      )
+    }
+    syncDevices()
 
-      return () => sub.unsubscribe()
-    },
-    [experimentalUSB],
-  )
+    return () => sub.unsubscribe()
+  }, [experimentalUSB])
   return null
 }
 

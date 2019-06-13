@@ -94,7 +94,9 @@ class WriteSeedBlue extends PureComponent<Props, *> {
               <img alt="" src={i('write-seed-onb.svg')} />
             </Box>
             <Box shrink flow={2} m={0}>
-              {steps.map(step => <OptionRow key={step.key} step={step} />)}
+              {steps.map(step => (
+                <OptionRow key={step.key} step={step} />
+              ))}
             </Box>
           </Inner>
           <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />

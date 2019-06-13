@@ -50,7 +50,7 @@ const mapDispatchToProps = {
 
 type OwnProps = {
   account: TokenAccount | Account,
-  parentAccount?: Account,
+  parentAccount: ?Account,
 }
 
 type Props = OwnProps & {
@@ -65,7 +65,7 @@ class AccountHeaderActions extends PureComponent<Props> {
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
           <Fragment>
-            <Button small primary onClick={() => openModal(MODAL_SEND, { account, parentAccount })}>
+            <Button small primary onClick={() => openModal(MODAL_SEND, { parentAccount, account })}>
               <Box horizontal flow={1} alignItems="center">
                 <IconSend size={12} />
                 <Box>{t('send.title')}</Box>
@@ -75,7 +75,7 @@ class AccountHeaderActions extends PureComponent<Props> {
             <Button
               small
               primary
-              onClick={() => openModal(MODAL_RECEIVE, { account, parentAccount })}
+              onClick={() => openModal(MODAL_RECEIVE, { parentAccount, account })}
             >
               <Box horizontal flow={1} alignItems="center">
                 <IconReceive size={12} />
@@ -84,15 +84,17 @@ class AccountHeaderActions extends PureComponent<Props> {
             </Button>
           </Fragment>
         ) : null}
-        <Tooltip render={() => t('account.settings.title')}>
-          <ButtonSettings
-            onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account, parentAccount })}
-          >
-            <Box justifyContent="center">
-              <IconAccountSettings size={16} />
-            </Box>
-          </ButtonSettings>
-        </Tooltip>
+        {account.type === 'Account' ? (
+          <Tooltip render={() => t('account.settings.title')}>
+            <ButtonSettings
+              onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
+            >
+              <Box justifyContent="center">
+                <IconAccountSettings size={16} />
+              </Box>
+            </ButtonSettings>
+          </Tooltip>
+        ) : null}
       </Box>
     )
   }

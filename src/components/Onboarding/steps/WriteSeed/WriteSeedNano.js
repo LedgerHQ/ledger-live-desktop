@@ -97,7 +97,9 @@ class WriteSeedNano extends PureComponent<Props, *> {
             </Box>
 
             <Box shrink grow flow={4}>
-              {steps.map(step => <OptionRow key={step.key} step={step} />)}
+              {steps.map(step => (
+                <OptionRow key={step.key} step={step} />
+              ))}
             </Box>
           </Inner>
           <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />

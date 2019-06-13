@@ -2,11 +2,11 @@
 
 import invariant from 'invariant'
 import React, { PureComponent } from 'react'
-
+import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import TrackPage from 'analytics/TrackPage'
 import getAddress from 'commands/getAddress'
 import Box from 'components/base/Box'
-import CurrentAddressForAccount from 'components/CurrentAddressForAccount'
+import CurrentAddress from 'components/CurrentAddress'
 import { DisconnectedDevice, WrongDeviceForAccount } from '@ledgerhq/errors'
 
 import type { StepProps } from '..'
@@ -19,24 +19,25 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
   }
 
   confirmAddress = async () => {
-    const { account, device, onChangeAddressVerified, transitionTo } = this.props
+    const { account, parentAccount, device, onChangeAddressVerified, transitionTo } = this.props
     try {
       if (!device || !account) {
         throw new DisconnectedDevice()
       }
+      const mainAccount = getMainAccount(account, parentAccount)
       const { address } = await getAddress
         .send({
-          derivationMode: account.derivationMode,
-          currencyId: account.currency.id,
+          derivationMode: mainAccount.derivationMode,
+          currencyId: mainAccount.currency.id,
           devicePath: device.path,
-          path: account.freshAddressPath,
+          path: mainAccount.freshAddressPath,
           verify: true,
         })
         .toPromise()
 
-      if (address !== account.freshAddress) {
-        throw new WrongDeviceForAccount(`WrongDeviceForAccount ${account.name}`, {
-          accountName: account.name,
+      if (address !== mainAccount.freshAddress) {
+        throw new WrongDeviceForAccount(`WrongDeviceForAccount ${mainAccount.name}`, {
+          accountName: mainAccount.name,
         })
       }
       onChangeAddressVerified(true)
@@ -56,13 +57,17 @@ export default class StepReceiveFunds extends PureComponent<StepProps> {
   }
 
   render() {
-    const { account, isAddressVerified } = this.props
-    invariant(account, 'No account given')
+    const { account, parentAccount, isAddressVerified, token } = this.props
+    const mainAccount = account ? getMainAccount(account, parentAccount) : null
+    invariant(account && mainAccount, 'No account given')
+    const name = token ? token.name : account.type === 'Account' ? account.name : account.token.name
     return (
       <Box flow={5}>
         <TrackPage category="Receive Flow" name="Step 4" />
-        <CurrentAddressForAccount
-          account={account}
+        <CurrentAddress
+          name={name}
+          currency={mainAccount.currency}
+          address={mainAccount.freshAddress}
           isAddressVerified={isAddressVerified}
           onVerify={this.handleGoPrev}
           withBadge

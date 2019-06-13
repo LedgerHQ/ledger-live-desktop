@@ -19,8 +19,10 @@ class DebugUpdater extends Component<Props> {
     return (
       <div style={styles.root}>
         <h1>
-          DEBUG UPDATE<br />
-          ------------<br />
+          DEBUG UPDATE
+          <br />
+          ------------
+          <br />
         </h1>
         <b>status:</b> {status}
         <div style={{ marginTop: 20 }}>

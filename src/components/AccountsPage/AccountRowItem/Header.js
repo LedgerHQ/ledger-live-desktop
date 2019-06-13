@@ -52,12 +52,11 @@ class Header extends PureComponent<Props> {
           <CryptoCurrencyIcon currency={currency} size={20} />
         </Box>
         <Box grow>
-          {!nested &&
-            account.type === 'Account' && (
-              <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
-                {title}
-              </Box>
-            )}
+          {!nested && account.type === 'Account' && (
+            <Box style={{ textTransform: 'uppercase' }} fontSize={9} color="grey">
+              {title}
+            </Box>
+          )}
           <Ellipsis fontSize={12} color="dark">
             {name}
           </Ellipsis>

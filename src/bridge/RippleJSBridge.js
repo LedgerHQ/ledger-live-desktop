@@ -696,19 +696,12 @@ export const accountBridge: AccountBridge<Transaction> = {
       }
     }),
 
-  addPendingOperation: (account, operation) => ({
-    ...account,
-    pendingOperations: [operation].concat(
-      account.pendingOperations.filter(
-        o => o.transactionSequenceNumber === operation.transactionSequenceNumber,
-      ),
-    ),
-  }),
-
   getDefaultEndpointConfig: () => defaultEndpoint,
 
   validateEndpointConfig: async endpointConfig => {
     const api = apiForEndpointConfig(RippleAPI, endpointConfig)
     await api.connect()
   },
+
+  prepareTransaction: (a, t) => Promise.resolve(t),
 }

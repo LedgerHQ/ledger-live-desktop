@@ -9,7 +9,11 @@ import type { Currency, TokenAccount, Account } from '@ledgerhq/live-common/lib/
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
-import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
+import {
+  isAccountEmpty,
+  getAccountCurrency,
+  getMainAccount,
+} from '@ledgerhq/live-common/lib/account'
 import { setCountervalueFirst } from 'actions/settings'
 import {
   counterValueCurrencySelector,
@@ -83,12 +87,12 @@ class AccountPage extends PureComponent<Props> {
       setCountervalueFirst,
     } = this.props
 
-    const mainAccount = account && account.type === 'Account' ? account : parentAccount
+    const mainAccount = account ? getMainAccount(account, parentAccount) : null
     if (!account || !mainAccount) {
       return <Redirect to="/accounts" />
     }
 
-    const currency = account.type === 'Account' ? account.currency : account.token
+    const currency = getAccountCurrency(account)
     const color = getCurrencyColor(currency)
 
     return (
@@ -101,7 +105,7 @@ class AccountPage extends PureComponent<Props> {
         <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
         <Box horizontal mb={5} flow={4}>
-          <AccountHeader account={account} parentAccount={parentAccount} />
+          <AccountHeader account={account} />
           <AccountHeaderActions account={account} parentAccount={parentAccount} />
         </Box>
 

@@ -2,7 +2,7 @@
 
 import React, { Fragment } from 'react'
 import { Trans } from 'react-i18next'
-
+import { getMainAccount } from '@ledgerhq/live-common/lib/account/helpers'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
@@ -11,12 +11,17 @@ import TrackPage from 'analytics/TrackPage'
 
 import type { StepProps } from '../index'
 
-export default function StepConnectDevice({ account, onChangeAppOpened }: StepProps) {
+export default function StepConnectDevice({
+  account,
+  parentAccount,
+  onChangeAppOpened,
+}: StepProps) {
+  const mainAccount = account ? getMainAccount(account, parentAccount) : null
   return (
     <Fragment>
-      {account ? <CurrencyDownStatusAlert currency={account.currency} /> : null}
+      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
       <EnsureDeviceApp
-        account={account}
+        account={mainAccount}
         waitBeforeSuccess={200}
         onSuccess={() => onChangeAppOpened(true)}
       />

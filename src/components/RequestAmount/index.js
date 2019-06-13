@@ -4,16 +4,15 @@ import { BigNumber } from 'bignumber.js'
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
-
+import type { Currency, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import {
   counterValueCurrencySelector,
-  currencySettingsSelector,
+  exchangeSettingsForTickerSelector,
   counterValueExchangeSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
-
 import InputCurrency from 'components/base/InputCurrency'
 import Box from 'components/base/Box'
 import type { State } from 'reducers'
@@ -51,7 +50,7 @@ type OwnProps = {
   onChange: BigNumber => void,
 
   // used to determine the left input unit
-  account: Account,
+  account: Account | TokenAccount,
 }
 
 type Props = OwnProps & {
@@ -65,11 +64,10 @@ type Props = OwnProps & {
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const {
-    account: { currency },
-  } = props
+  const { account } = props
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const fromExchange = currencySettingsSelector(state, { currency }).exchange
+  const currency = getAccountCurrency(account)
+  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
   const toExchange = counterValueExchangeSelector(state)
 
   // FIXME this make the component not working with "Pure". is there a way we can calculate here whatever needs to be?
@@ -138,6 +136,7 @@ export class RequestAmount extends PureComponent<Props> {
     } = this.props
     const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
+    const defaultUnit = account.type === 'Account' ? account.unit : account.token.units[0]
     return (
       <Box horizontal flow={5} alignItems="center">
         <Box horizontal grow shrink>
@@ -145,10 +144,10 @@ export class RequestAmount extends PureComponent<Props> {
             disabled={disabled}
             error={validTransactionError}
             containerProps={{ grow: true }}
-            defaultUnit={account.unit}
+            defaultUnit={defaultUnit}
             value={value}
             onChange={this.onLeftChange}
-            renderRight={<InputRight>{account.unit.code}</InputRight>}
+            renderRight={<InputRight>{defaultUnit.code}</InputRight>}
           />
           <InputCenter>{'='}</InputCenter>
           <InputCurrency
