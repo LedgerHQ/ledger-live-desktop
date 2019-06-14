@@ -249,13 +249,16 @@
     },
     "sections": {
       "importable": {
-        "title": "既存アカウントを追加"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "新規アカウントを追加"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "アカウントは既にポートフォリオ({{count}})内に存在します"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
       }
     }
   },
@@ -378,6 +381,7 @@
         "recipientAddress": "受取人のアドレス",
         "amount": "金額",
         "fees": "ネットワーク手数料",
+        "useMax": "use max",
         "advancedOptions": "詳細オプション",
         "useRBF": "replace-by-fee取引を利用する",
         "message": "メッセージを残す（140）",
@@ -841,6 +845,10 @@
     "BtcUnmatchedApp": {
       "title": "アプリが間違っています",
       "description": "お使いの機器で‘{{managerAppName}}’ アプリを開きます"
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "正規品でない可能性があります",
