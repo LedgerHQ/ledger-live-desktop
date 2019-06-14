@@ -3,8 +3,10 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Trans } from 'react-i18next'
+import { createStructuredSelector } from 'reselect'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setExchangePairsAction } from 'actions/settings'
+import { exchangeSettingsForPairSelector } from 'reducers/settings'
 import ExchangeSelect from 'components/SelectExchange'
 import Box from 'components/base/Box'
 import styled from 'styled-components'
@@ -51,7 +53,8 @@ const RateTypeBar = styled.div`
   width: 2px;
   height: 16px;
   margin-right: 8px;
-  background-color: ${p => p.theme.colors[p.fiat ? 'wallet' : 'identity']};
+  background-color: ${p =>
+    p.theme.colors[p.currencyType === 'FiatCurrency' ? 'wallet' : 'identity']};
 `
 
 class RateRow extends PureComponent<Props> {
@@ -67,11 +70,10 @@ class RateRow extends PureComponent<Props> {
   }
   render() {
     const { from, to, exchangeId } = this.props
-    const toFiat = to.type === 'FiatCurrency'
     return (
       <RateRowWrapper>
         <Box ff="Museo Sans|Regular" horizontal alignItems="center" color="dark" fontSize={4}>
-          <RateTypeBar fiat={toFiat} />
+          <RateTypeBar currencyType={to.type} />
           <Trans i18nKey="settings.rates.fromTo" values={{ from: from.ticker, to: to.ticker }} />
         </Box>
         <div>
@@ -87,15 +89,7 @@ class RateRow extends PureComponent<Props> {
           </Ellipsis>
         </div>
         <div>
-          <PriceGraph
-            fiat={toFiat}
-            from={from}
-            to={to}
-            width={150}
-            height={40}
-            exchange={exchangeId}
-            days={30}
-          />
+          <PriceGraph from={from} to={to} width={150} height={40} exchange={exchangeId} days={30} />
         </div>
         <ExchangeSelect
           small
@@ -111,7 +105,9 @@ class RateRow extends PureComponent<Props> {
 }
 
 export default connect(
-  null,
+  createStructuredSelector({
+    exchangeId: exchangeSettingsForPairSelector,
+  }),
   {
     setExchangePairsAction,
   },

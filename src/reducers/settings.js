@@ -250,6 +250,18 @@ export const exchangeSettingsForTickerSelector = (
   return obj && obj.exchange
 }
 
+export const exchangeSettingsForPairSelector = (
+  state: State,
+  { from, to }: { from: Currency, to: Currency },
+): ?string => {
+  // FIXME this is a hack, we need to migrate to a new paradigm now! store all the exchange per from-to pairs!
+  if (to === counterValueCurrencySelector(state)) {
+    return counterValueExchangeSelector(state)
+  }
+  const obj = state.settings.currenciesSettings[from.ticker]
+  return obj && obj.exchange
+}
+
 export const confirmationsNbForCurrencySelector = (
   state: State,
   { currency }: { currency: CryptoCurrency },

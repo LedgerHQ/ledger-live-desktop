@@ -18,7 +18,6 @@ import SelectCurrency from 'components/SelectCurrency'
 import Text from 'components/base/Text'
 
 import {
-  currenciesSettingsSelector,
   counterValueExchangeSelector,
   counterValueCurrencySelector,
   intermediaryCurrency,
@@ -45,7 +44,6 @@ const Wrapper = styled.div`
 
 type Props = {
   currencies: CryptoCurrency[],
-  currenciesSettings: *,
   counterValueCurrency: Currency,
   counterValueExchange: string,
   t: T,
@@ -58,7 +56,6 @@ type State = {
 
 const mapStateToProps = createStructuredSelector({
   currencies: cryptoCurrenciesSelector,
-  currenciesSettings: currenciesSettingsSelector,
   counterValueCurrency: counterValueCurrencySelector,
   counterValueExchange: counterValueExchangeSelector,
 })
@@ -120,13 +117,7 @@ class TabCurrencies extends PureComponent<Props, State> {
   render() {
     const { currency, sectionVisible } = this.state
     if (!currency) return null // this case means there is no accounts
-    const {
-      t,
-      currenciesSettings,
-      currencies,
-      counterValueExchange,
-      counterValueCurrency,
-    } = this.props
+    const { t, currencies, counterValueExchange, counterValueCurrency } = this.props
 
     return (
       <Wrapper>
@@ -189,17 +180,11 @@ class TabCurrencies extends PureComponent<Props, State> {
               to={counterValueCurrency}
               exchangeId={counterValueExchange}
             />
-            {currencies.filter(c => c !== intermediaryCurrency).map(from => {
-              const cs = currenciesSettings[from.id]
-              return (
-                <RateRow
-                  key={from.id}
-                  from={from}
-                  to={intermediaryCurrency}
-                  exchangeId={cs && cs.exchange}
-                />
-              )
-            })}
+            {currencies
+              .filter(c => c !== intermediaryCurrency)
+              .map(from => (
+                <RateRow key={from.id} from={from} to={intermediaryCurrency} />
+              ))}
           </Body>
         </Section>
       </Wrapper>
