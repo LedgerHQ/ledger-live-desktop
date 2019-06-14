@@ -22,7 +22,9 @@ export const pairsSelector = createSelector(
   state => state,
   (currencies, counterValueCurrency, state) => {
     if (currencies.length === 0) return []
-    const intermediaries = uniq(currencies.map(c => intermediaryCurrency(c, counterValueCurrency)))
+    const intermediaries = uniq(
+      currencies.map(c => intermediaryCurrency(c, counterValueCurrency)),
+    ).filter(c => c !== counterValueCurrency)
     return intermediaries
       .map(from => ({
         from,
@@ -31,15 +33,14 @@ export const pairsSelector = createSelector(
       }))
       .concat(
         currencies
-          .filter(c => !intermediaries.includes(c) && !c.disableCountervalue)
           .map(from => {
+            if (intermediaries.includes(from) || from.disableCountervalue) return null
             const to = intermediaryCurrency(from, counterValueCurrency)
-            return {
-              from,
-              to,
-              exchange: exchangeSettingsForPairSelector(state, { from, to }),
-            }
-          }),
+            if (from === to) return null
+            const exchange = exchangeSettingsForPairSelector(state, { from, to })
+            return { from, to, exchange }
+          })
+          .filter(p => p),
       )
   },
 )
