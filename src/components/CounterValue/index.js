@@ -7,8 +7,7 @@ import type { Currency } from '@ledgerhq/live-common/lib/types'
 
 import {
   counterValueCurrencySelector,
-  exchangeSettingsForTickerSelector,
-  counterValueExchangeSelector,
+  exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
@@ -42,12 +41,16 @@ type Props = OwnProps & {
 const mapStateToProps = (state: State, props: OwnProps) => {
   const { currency, value, date, subMagnitude } = props
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
-  const toExchange = counterValueExchangeSelector(state)
+  const intermediary = intermediaryCurrency(currency, counterValueCurrency)
+  const fromExchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary })
+  const toExchange = exchangeSettingsForPairSelector(state, {
+    from: intermediary,
+    to: counterValueCurrency,
+  })
   const counterValue = CounterValues.calculateWithIntermediarySelector(state, {
     from: currency,
     fromExchange,
-    intermediary: intermediaryCurrency,
+    intermediary,
     toExchange,
     to: counterValueCurrency,
     value,

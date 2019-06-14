@@ -3,10 +3,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Trans } from 'react-i18next'
-import { createStructuredSelector } from 'reselect'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setExchangePairsAction } from 'actions/settings'
-import { exchangeSettingsForPairSelector } from 'reducers/settings'
 import ExchangeSelect from 'components/SelectExchange'
 import Box from 'components/base/Box'
 import { PlaceholderLine } from 'components/Placeholder'
@@ -18,7 +16,7 @@ import Ellipsis from '../../../../base/Ellipsis'
 type Props = {
   from: Currency,
   to: Currency,
-  exchangeId: ?string,
+  exchange: ?string,
   setExchangePairsAction: any => void,
 }
 
@@ -70,7 +68,7 @@ class RateRow extends PureComponent<Props> {
     ])
   }
   render() {
-    const { from, to, exchangeId } = this.props
+    const { from, to, exchange } = this.props
     return (
       <RateRowWrapper>
         <Box ff="Museo Sans|Regular" horizontal alignItems="center" color="dark" fontSize={4}>
@@ -91,13 +89,13 @@ class RateRow extends PureComponent<Props> {
           </Ellipsis>
         </div>
         <div>
-          <PriceGraph from={from} to={to} width={150} height={40} exchange={exchangeId} days={30} />
+          <PriceGraph from={from} to={to} width={150} height={40} exchange={exchange} days={30} />
         </div>
         <ExchangeSelect
           small
           from={from}
           to={to}
-          exchangeId={exchangeId}
+          exchangeId={exchange}
           onChange={this.handleChangeExchange}
           minWidth={200}
         />
@@ -107,9 +105,7 @@ class RateRow extends PureComponent<Props> {
 }
 
 export default connect(
-  createStructuredSelector({
-    exchangeId: exchangeSettingsForPairSelector,
-  }),
+  null,
   {
     setExchangePairsAction,
   },

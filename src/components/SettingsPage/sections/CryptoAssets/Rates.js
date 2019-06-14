@@ -5,17 +5,11 @@ import { Trans, translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { Currency } from '@ledgerhq/live-common/src/types'
 import type { T } from 'types/common'
-import { currenciesSelector } from 'reducers/accounts'
 import IconActivity from 'icons/Activity'
 import IconInfoCircle from 'icons/InfoCircle'
-import {
-  counterValueExchangeSelector,
-  counterValueCurrencySelector,
-  intermediaryCurrency,
-} from 'reducers/settings'
+import { pairsSelector } from 'helpers/countervalues'
 import Text from 'components/base/Text'
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
@@ -27,16 +21,12 @@ import {
 } from '../../SettingsSection'
 
 type Props = {
-  currencies: CryptoCurrency[],
-  counterValueCurrency: Currency,
-  counterValueExchange: string,
+  pairs: { from: Currency, to: Currency, exchange: ?string }[],
   t: T,
 }
 
 const mapStateToProps = createStructuredSelector({
-  currencies: currenciesSelector,
-  counterValueCurrency: counterValueCurrencySelector,
-  counterValueExchange: counterValueExchangeSelector,
+  pairs: pairsSelector,
 })
 
 const Circle = styled.div`
@@ -80,7 +70,7 @@ const RateTooltip = () => (
 
 class Rates extends PureComponent<Props> {
   render() {
-    const { t, currencies, counterValueExchange, counterValueCurrency } = this.props
+    const { t, pairs } = this.props
 
     return (
       <Section>
@@ -109,16 +99,9 @@ class Rates extends PureComponent<Props> {
               {'Exchange'}
             </Box>
           </RateRowWrapper>
-          <RateRow
-            from={intermediaryCurrency}
-            to={counterValueCurrency}
-            exchangeId={counterValueExchange}
-          />
-          {currencies
-            .filter(c => c !== intermediaryCurrency)
-            .map(from => (
-              <RateRow key={from.id} from={from} to={intermediaryCurrency} />
-            ))}
+          {pairs.map(({ from, to, exchange }) => (
+            <RateRow key={`${from.ticker}_${to.ticker}`} from={from} to={to} exchange={exchange} />
+          ))}
         </Body>
       </Section>
     )

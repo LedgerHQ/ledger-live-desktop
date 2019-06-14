@@ -7,10 +7,9 @@ import { createSelector } from 'reselect'
 import CounterValues from 'helpers/countervalues'
 import {
   intermediaryCurrency,
-  exchangeSettingsForTickerSelector,
+  exchangeSettingsForPairSelector,
   getOrderAccounts,
   counterValueCurrencySelector,
-  counterValueExchangeSelector,
 } from 'reducers/settings'
 import { accountsSelector } from 'reducers/accounts'
 import {
@@ -21,13 +20,20 @@ import {
 
 export const calculateCountervalueSelector = (state: State) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const toExchange = counterValueExchangeSelector(state)
   return (currency: Currency, value: BigNumber): ?BigNumber => {
-    const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
+    const intermediary = intermediaryCurrency(currency, counterValueCurrency)
+    const fromExchange = exchangeSettingsForPairSelector(state, {
+      from: currency,
+      to: intermediary,
+    })
+    const toExchange = exchangeSettingsForPairSelector(state, {
+      from: intermediary,
+      to: counterValueCurrency,
+    })
     return CounterValues.calculateWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
-      intermediary: intermediaryCurrency,
+      intermediary,
       toExchange,
       to: counterValueCurrency,
       value,

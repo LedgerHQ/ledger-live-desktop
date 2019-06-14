@@ -14,8 +14,7 @@ import Box from 'components/base/Box'
 import CurrencyUnitValue from 'components/CurrencyUnitValue'
 import {
   counterValueCurrencySelector,
-  exchangeSettingsForTickerSelector,
-  counterValueExchangeSelector,
+  exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
@@ -99,11 +98,10 @@ const mapStateToProps = (state: State, props: OwnProps) => {
   const effectiveUnit = unit || from.units[0]
   const value = new BigNumber(10 ** effectiveUnit.magnitude)
   const counterValueCurrency = to || counterValueCurrencySelector(state)
-  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: from.ticker })
-  const toExchange = counterValueExchangeSelector(state)
-
+  const intermediary = intermediaryCurrency(from, counterValueCurrency)
+  const fromExchange = exchangeSettingsForPairSelector(state, { from, to: intermediary })
   let counterValue
-  if (from && to && intermediaryCurrency.ticker !== from.ticker) {
+  if (from && to && intermediary.ticker !== from.ticker) {
     counterValue = CounterValues.calculateSelector(state, {
       from,
       to,
@@ -113,10 +111,14 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       disableRounding: true,
     })
   } else {
+    const toExchange = exchangeSettingsForPairSelector(state, {
+      from: intermediary,
+      to: counterValueCurrency,
+    })
     counterValue = CounterValues.calculateWithIntermediarySelector(state, {
       from,
       fromExchange,
-      intermediary: intermediaryCurrency,
+      intermediary,
       toExchange,
       to: counterValueCurrency,
       value,

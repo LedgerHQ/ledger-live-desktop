@@ -11,7 +11,6 @@ import { cryptoCurrenciesSelector } from 'reducers/accounts'
 import IconCurrencies from 'icons/Currencies'
 import IconAngleDown from 'icons/AngleDown'
 import TrackPage from 'analytics/TrackPage'
-import { counterValueExchangeSelector, counterValueCurrencySelector } from 'reducers/settings'
 import SelectCurrency from 'components/SelectCurrency'
 import Box from 'components/base/Box'
 import CurrencyRows from './CurrencyRows'
@@ -34,8 +33,6 @@ type State = {
 
 const mapStateToProps = createStructuredSelector({
   currencies: cryptoCurrenciesSelector,
-  counterValueCurrency: counterValueCurrencySelector,
-  counterValueExchange: counterValueExchangeSelector,
 })
 
 const Show = styled(Box)`

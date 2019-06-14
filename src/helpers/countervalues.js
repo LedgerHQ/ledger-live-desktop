@@ -5,10 +5,10 @@ import { LEDGER_COUNTERVALUES_API } from 'config/constants'
 import createCounterValues from '@ledgerhq/live-common/lib/countervalues'
 import { setExchangePairsAction } from 'actions/settings'
 import { currenciesSelector } from 'reducers/accounts'
+import uniq from 'lodash/uniq'
 import {
   counterValueCurrencySelector,
-  counterValueExchangeSelector,
-  exchangeSettingsForTickerSelector,
+  exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import logger from 'logger'
@@ -16,25 +16,32 @@ import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import network from '../api/network'
 
-const pairsSelector = createSelector(
+export const pairsSelector = createSelector(
   currenciesSelector,
   counterValueCurrencySelector,
-  counterValueExchangeSelector,
   state => state,
-  (currencies, counterValueCurrency, counterValueExchange, state) =>
-    currencies.length === 0
-      ? []
-      : [
-          { from: intermediaryCurrency, to: counterValueCurrency, exchange: counterValueExchange },
-        ].concat(
-          currencies
-            .filter(c => c.ticker !== intermediaryCurrency.ticker && !c.disableCountervalue)
-            .map(currency => ({
-              from: currency,
-              to: intermediaryCurrency,
-              exchange: exchangeSettingsForTickerSelector(state, { ticker: currency.ticker }),
-            })),
-        ),
+  (currencies, counterValueCurrency, state) => {
+    if (currencies.length === 0) return []
+    const intermediaries = uniq(currencies.map(c => intermediaryCurrency(c, counterValueCurrency)))
+    return intermediaries
+      .map(from => ({
+        from,
+        to: counterValueCurrency,
+        exchange: exchangeSettingsForPairSelector(state, { from, to: counterValueCurrency }),
+      }))
+      .concat(
+        currencies
+          .filter(c => !intermediaries.includes(c) && !c.disableCountervalue)
+          .map(from => {
+            const to = intermediaryCurrency(from, counterValueCurrency)
+            return {
+              from,
+              to,
+              exchange: exchangeSettingsForPairSelector(state, { from, to }),
+            }
+          }),
+      )
+  },
 )
 
 const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
