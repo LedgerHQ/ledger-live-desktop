@@ -30,6 +30,7 @@ type OwnProps = {
   date?: Date,
   color?: string,
   fontSize?: number,
+  placeholder?: React$Node,
 }
 
 type Props = OwnProps & {
@@ -56,18 +57,19 @@ const Price = ({
   withActivityCurrencyColor,
   withActivityColor,
   withEquality,
+  placeholder,
   color,
   fontSize,
 }: Props) => {
-  if (!counterValue || counterValue.isZero()) return null
+  if (!counterValue || counterValue.isZero()) return placeholder || null
 
   const activityColor = withActivityColor
     ? colors[withActivityColor]
     : !withActivityCurrencyColor
-      ? color
-        ? colors[color]
-        : undefined
-      : getCurrencyColor(from)
+    ? color
+      ? colors[color]
+      : undefined
+    : getCurrencyColor(from)
 
   const subMagnitude = counterValue.lt(1) ? 1 : 0
 

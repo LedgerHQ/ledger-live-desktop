@@ -9,10 +9,11 @@ import { setExchangePairsAction } from 'actions/settings'
 import { exchangeSettingsForPairSelector } from 'reducers/settings'
 import ExchangeSelect from 'components/SelectExchange'
 import Box from 'components/base/Box'
+import { PlaceholderLine } from 'components/Placeholder'
 import styled from 'styled-components'
 import PriceGraph from './PriceGraph'
-import Price from '../../Price'
-import Ellipsis from '../../base/Ellipsis'
+import Price from '../../../../Price'
+import Ellipsis from '../../../../base/Ellipsis'
 
 type Props = {
   from: Currency,
@@ -85,6 +86,7 @@ class RateRow extends PureComponent<Props> {
               to={to}
               color="graphite"
               fontSize={3}
+              placeholder={<PlaceholderLine width={16} height={2} />}
             />
           </Ellipsis>
         </div>

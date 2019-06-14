@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import * as d3 from 'd3'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import CounterValues from 'helpers/countervalues'
+import { PlaceholderLine } from 'components/Placeholder'
 import { colors } from 'styles/theme'
 import { rgba } from 'styles/helpers'
 
@@ -13,6 +14,7 @@ const mapStateToProps = (state, props: *) => {
   const data = []
   let t = Date.now() - props.days * DAY
   const value = BigNumber(10 ** props.from.units[0].magnitude)
+  let nbCounterValueOff = 0
   for (let i = 0; i < props.days; i++) {
     const date = new Date(t)
     const cv = CounterValues.calculateSelector(state, {
@@ -20,13 +22,14 @@ const mapStateToProps = (state, props: *) => {
       date,
       value,
     })
+    if (!cv) ++nbCounterValueOff
     data.push({
       date,
       value: cv ? cv.toNumber() : 0,
     })
     t += DAY
   }
-  return { data }
+  return { data, isAvailable: nbCounterValueOff < props.days }
 }
 
 class PriceGraph extends Component<{
@@ -34,12 +37,16 @@ class PriceGraph extends Component<{
   to: Currency, // eslint-disable-line
   days: number, // eslint-disable-line
   exchange: ?string, // eslint-disable-line
+  isAvailable: boolean,
   data: Array<{ date: Date, value: number }>,
   width: number,
   height: number,
 }> {
   render() {
-    const { data, width, height, from, to } = this.props
+    const { isAvailable, data, width, height, from, to } = this.props
+    if (!isAvailable) {
+      return <PlaceholderLine width={16} height={2} />
+    }
     const x = d3
       .scaleLinear()
       .domain([d3.min(data, d => d.date), d3.max(data, d => d.date)])

@@ -12,8 +12,7 @@ import type { SettingsState, CurrencySettings } from 'reducers/settings'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 import StepperNumber from 'components/base/StepperNumber'
 import Track from 'analytics/Track'
-
-import { SettingsSectionRow as Row } from '../SettingsSection'
+import { SettingsSectionRow as Row } from '../../SettingsSection'
 
 type Props = {
   t: T,
