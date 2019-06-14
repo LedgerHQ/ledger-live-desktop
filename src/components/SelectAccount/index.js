@@ -41,12 +41,14 @@ const tokenTick = (
   </div>
 )
 
-const getOptionValue = account =>
-  account.type === 'Account'
-    ? `${account.currency.ticker}|${account.currency.name}|${account.name}`
-    : `${account.token.ticker}|${account.token.name}`
+const getOptionValue = account => account.id
 
-const defaultFilter = createFilter()
+const defaultFilter = createFilter({
+  stringify: ({ data: account }) =>
+    account.type === 'Account'
+      ? `${account.currency.ticker}|${account.currency.name}|${account.name}`
+      : `${account.token.ticker}|${account.token.name}`,
+})
 const filterOption = o => (candidate, input) => {
   const selfMatches = defaultFilter(candidate, input)
   if (selfMatches) return selfMatches
