@@ -8,9 +8,7 @@ import {
   hasPasswordSelector,
   langAndRegionSelector,
   counterValueCurrencySelector,
-  intermediaryCurrency,
 } from 'reducers/settings'
-import type { Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { EXPERIMENTAL_MARKET_INDICATOR_SETTINGS } from 'config/constants'
 
@@ -19,7 +17,6 @@ import TrackPage from 'analytics/TrackPage'
 import MarketIndicatorRadio from '../MarketIndicatorRadio'
 import LanguageSelect from '../LanguageSelect'
 import CounterValueSelect from '../CounterValueSelect'
-import CounterValueExchangeSelect from '../CounterValueExchangeSelect'
 import RegionSelect from '../RegionSelect'
 import PasswordButton from '../PasswordButton'
 import PasswordAutoLockSelect from '../PasswordAutoLockSelect'
@@ -35,14 +32,13 @@ import {
 
 type Props = {
   t: T,
-  counterValueCurrency: Currency,
   useSystem: boolean,
   hasPassword: boolean,
 }
 
-class TabGeneral extends PureComponent<Props> {
+class SectionGeneral extends PureComponent<Props> {
   render() {
-    const { t, useSystem, counterValueCurrency, hasPassword } = this.props
+    const { t, useSystem, hasPassword } = this.props
 
     return (
       <Section>
@@ -59,20 +55,7 @@ class TabGeneral extends PureComponent<Props> {
           >
             <CounterValueSelect />
           </Row>
-          {counterValueCurrency.ticker !== intermediaryCurrency.ticker && (
-            <Row
-              title={t('settings.display.exchange', {
-                ticker: counterValueCurrency.ticker,
-                fiat: counterValueCurrency.name,
-              })}
-              desc={t('settings.display.exchangeDesc', {
-                fiat: counterValueCurrency.name,
-                ticker: counterValueCurrency.ticker,
-              })}
-            >
-              <CounterValueExchangeSelect />
-            </Row>
-          )}
+
           <Row title={t('settings.display.language')} desc={t('settings.display.languageDesc')}>
             <LanguageSelect />
           </Row>
@@ -127,5 +110,5 @@ export default translate()(
       }),
     ),
     null,
-  )(TabGeneral),
+  )(SectionGeneral),
 )

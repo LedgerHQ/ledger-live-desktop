@@ -14,20 +14,22 @@ import Box from 'components/base/Box'
 import CurrencyUnitValue from 'components/CurrencyUnitValue'
 import {
   counterValueCurrencySelector,
-  exchangeSettingsForTickerSelector,
-  counterValueExchangeSelector,
+  exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
 
 type OwnProps = {
   unit?: Unit,
-  currency: Currency,
+  from: Currency,
+  to?: Currency,
   withActivityCurrencyColor?: boolean,
+  withActivityColor?: string,
   withEquality?: boolean,
   date?: Date,
   color?: string,
   fontSize?: number,
+  placeholder?: React$Node,
 }
 
 type Props = OwnProps & {
@@ -50,19 +52,23 @@ const Price = ({
   value,
   counterValue,
   counterValueCurrency,
-  currency,
+  from,
   withActivityCurrencyColor,
+  withActivityColor,
   withEquality,
+  placeholder,
   color,
   fontSize,
 }: Props) => {
-  if (!counterValue || counterValue.isZero()) return null
+  if (!counterValue || counterValue.isZero()) return placeholder || null
 
-  const activityColor = !withActivityCurrencyColor
+  const activityColor = withActivityColor
+    ? colors[withActivityColor]
+    : !withActivityCurrencyColor
     ? color
       ? colors[color]
       : undefined
-    : getCurrencyColor(currency)
+    : getCurrencyColor(from)
 
   const subMagnitude = counterValue.lt(1) ? 1 : 0
 
@@ -88,22 +94,38 @@ const Price = ({
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const { unit, currency, date } = props
-  const effectiveUnit = unit || currency.units[0]
+  const { unit, from, to, date } = props
+  const effectiveUnit = unit || from.units[0]
   const value = new BigNumber(10 ** effectiveUnit.magnitude)
-  const counterValueCurrency = counterValueCurrencySelector(state)
-  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
-  const toExchange = counterValueExchangeSelector(state)
-  const counterValue = CounterValues.calculateWithIntermediarySelector(state, {
-    from: currency,
-    fromExchange,
-    intermediary: intermediaryCurrency,
-    toExchange,
-    to: counterValueCurrency,
-    value,
-    date,
-    disableRounding: true,
-  })
+  const counterValueCurrency = to || counterValueCurrencySelector(state)
+  const intermediary = intermediaryCurrency(from, counterValueCurrency)
+  const fromExchange = exchangeSettingsForPairSelector(state, { from, to: intermediary })
+  let counterValue
+  if (from && to && intermediary.ticker !== from.ticker) {
+    counterValue = CounterValues.calculateSelector(state, {
+      from,
+      to,
+      exchange: fromExchange,
+      value,
+      date,
+      disableRounding: true,
+    })
+  } else {
+    const toExchange = exchangeSettingsForPairSelector(state, {
+      from: intermediary,
+      to: counterValueCurrency,
+    })
+    counterValue = CounterValues.calculateWithIntermediarySelector(state, {
+      from,
+      fromExchange,
+      intermediary,
+      toExchange,
+      to: counterValueCurrency,
+      value,
+      date,
+      disableRounding: true,
+    })
+  }
 
   return {
     counterValueCurrency,

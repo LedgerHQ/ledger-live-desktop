@@ -8,8 +8,7 @@ import type { Currency, Account, TokenAccount } from '@ledgerhq/live-common/lib/
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import {
   counterValueCurrencySelector,
-  exchangeSettingsForTickerSelector,
-  counterValueExchangeSelector,
+  exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
@@ -67,8 +66,12 @@ const mapStateToProps = (state: State, props: OwnProps) => {
   const { account } = props
   const counterValueCurrency = counterValueCurrencySelector(state)
   const currency = getAccountCurrency(account)
-  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
-  const toExchange = counterValueExchangeSelector(state)
+  const intermediary = intermediaryCurrency(currency, counterValueCurrency)
+  const fromExchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary })
+  const toExchange = exchangeSettingsForPairSelector(state, {
+    from: intermediary,
+    to: counterValueCurrency,
+  })
 
   // FIXME this make the component not working with "Pure". is there a way we can calculate here whatever needs to be?
   // especially the value comes from props!
@@ -76,7 +79,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     CounterValues.calculateWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
-      intermediary: intermediaryCurrency,
+      intermediary,
       toExchange,
       to: counterValueCurrency,
       value,
@@ -86,7 +89,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     CounterValues.reverseWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
-      intermediary: intermediaryCurrency,
+      intermediary,
       toExchange,
       to: counterValueCurrency,
       value,

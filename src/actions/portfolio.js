@@ -6,9 +6,8 @@ import {
 } from '@ledgerhq/live-common/lib/portfolio'
 import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import {
-  exchangeSettingsForTickerSelector,
+  exchangeSettingsForPairSelector,
   counterValueCurrencySelector,
-  counterValueExchangeSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
@@ -36,17 +35,21 @@ export const balanceHistoryWithCountervalueSelector = (
   },
 ) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const counterValueExchange = counterValueExchangeSelector(state)
   const currency = account.type === 'Account' ? account.currency : account.token
-  const exchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
+  const intermediary = intermediaryCurrency(currency, counterValueCurrency)
+  const exchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary })
+  const toExchange = exchangeSettingsForPairSelector(state, {
+    from: intermediary,
+    to: counterValueCurrency,
+  })
   return getBalanceHistoryWithCountervalue(account, range, (_, value, date) =>
     CounterValues.calculateWithIntermediarySelector(state, {
       value,
       date,
       from: currency,
       fromExchange: exchange,
-      intermediary: intermediaryCurrency,
-      toExchange: counterValueExchange,
+      intermediary,
+      toExchange,
       to: counterValueCurrency,
     }),
   )
@@ -63,16 +66,20 @@ export const portfolioSelector = (
   },
 ) => {
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const counterValueExchange = counterValueExchangeSelector(state)
-  return getPortfolio(accounts, range, (currency, value, date) =>
-    CounterValues.calculateWithIntermediarySelector(state, {
+  return getPortfolio(accounts, range, (currency, value, date) => {
+    const intermediary = intermediaryCurrency(currency, counterValueCurrency)
+    const toExchange = exchangeSettingsForPairSelector(state, {
+      from: intermediary,
+      to: counterValueCurrency,
+    })
+    return CounterValues.calculateWithIntermediarySelector(state, {
       value,
       date,
       from: currency,
-      fromExchange: exchangeSettingsForTickerSelector(state, { ticker: currency.ticker }),
-      intermediary: intermediaryCurrency,
-      toExchange: counterValueExchange,
+      fromExchange: exchangeSettingsForPairSelector(state, { from: currency, to: intermediary }),
+      intermediary,
+      toExchange,
       to: counterValueCurrency,
-    }),
-  )
+    })
+  })
 }

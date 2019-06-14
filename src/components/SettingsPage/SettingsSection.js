@@ -9,7 +9,7 @@ import Box, { Card } from 'components/base/Box'
 
 export const SettingsSection = styled(Card).attrs({ p: 0 })``
 
-const SettingsSectionHeaderContainer = styled(Box).attrs({
+export const SettingsSectionHeaderContainer = styled(Box).attrs({
   p: 4,
   horizontal: true,
   align: 'center',
@@ -79,7 +79,7 @@ SettingsSectionHeader.defaultProps = {
   renderRight: undefined,
 }
 
-const SettingsSectionRowContainer = styled(Box).attrs({
+export const SettingsSectionRowContainer = styled(Box).attrs({
   p: 4,
   horizontal: true,
   align: 'center',
@@ -93,7 +93,7 @@ export function SettingsSectionRow({
   children,
   onClick,
 }: {
-  title: string,
+  title?: string,
   desc: string,
   children?: any,
   onClick?: ?Function,
@@ -101,9 +101,11 @@ export function SettingsSectionRow({
   return (
     <SettingsSectionRowContainer onClick={onClick} tabIndex={-1}>
       <Box grow shrink style={{ marginRight: '10%' }}>
-        <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-          {title}
-        </Box>
+        {title && (
+          <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+            {title}
+          </Box>
+        )}
         <Box ff="Open Sans" fontSize={3} color="grey" mt={1} mr={1} style={{ maxWidth: 520 }}>
           {desc}
         </Box>

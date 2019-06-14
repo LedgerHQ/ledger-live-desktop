@@ -88,7 +88,7 @@ class Row extends PureComponent<Props, State> {
           </Text>
         </Asset>
         <PriceSection>
-          <Price currency={currency} color="graphite" fontSize={3} />
+          <Price from={currency} color="graphite" fontSize={3} />
         </PriceSection>
         <Distribution>
           <Text ff="Rubik" color="dark" fontSize={3}>

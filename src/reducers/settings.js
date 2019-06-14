@@ -9,14 +9,20 @@ import {
 import { getLanguages } from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
-import type { CryptoCurrency, Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 import { getSystemLocale } from 'helpers/systemLocale'
 
 import type { CurrencySettings } from 'types/common'
 import type { State } from 'reducers'
 
-export const intermediaryCurrency = getCryptoCurrencyById('bitcoin')
+const bitcoin = getCryptoCurrencyById('bitcoin')
+const ethereum = getCryptoCurrencyById('ethereum')
+export const possibleIntermediaries = [bitcoin, ethereum]
+export const intermediaryCurrency = (from: Currency, _to: Currency) => {
+  if (from === ethereum || from.type === 'TokenCurrency') return ethereum
+  return bitcoin
+}
 
 export const timeRangeDaysByKey = {
   week: 7,
@@ -32,7 +38,6 @@ export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
   counterValue: string,
-  counterValueExchange: ?string,
   language: ?string,
   region: ?string,
   orderAccounts: string,
@@ -43,6 +48,9 @@ export type SettingsState = {
   marketIndicator: 'eastern' | 'western',
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,
+  },
+  pairExchanges: {
+    [pair: string]: ?string,
   },
   developerMode: boolean,
   shareAnalytics: boolean,
@@ -57,14 +65,12 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   const defaults = currencySettingsDefaults(crypto)
   return {
     confirmationsNb: defaults.confirmationsNb ? defaults.confirmationsNb.def : 0,
-    exchange: '',
   }
 }
 
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: 'USD',
-  counterValueExchange: null,
   language: null,
   region: null,
   orderAccounts: 'balance|desc',
@@ -74,6 +80,7 @@ const INITIAL_STATE: SettingsState = {
   selectedTimeRange: 'month',
   marketIndicator: 'western',
   currenciesSettings: {},
+  pairExchanges: {},
   developerMode: !!process.env.__DEV__,
   loaded: false,
   shareAnalytics: true,
@@ -83,6 +90,8 @@ const INITIAL_STATE: SettingsState = {
   accountsViewMode: 'card',
   showAccountsHelperBanner: true,
 }
+
+const pairHash = (from, to) => `${from.ticker}_${to.ticker}`
 
 const handlers: Object = {
   SETTINGS_SET_PAIRS: (
@@ -97,21 +106,10 @@ const handlers: Object = {
       }>,
     },
   ) => {
-    const counterValueCurrency = counterValueCurrencyLocalSelector(state)
     const copy = { ...state }
-    copy.currenciesSettings = { ...copy.currenciesSettings }
+    copy.pairExchanges = { ...copy.pairExchanges }
     for (const { to, from, exchange } of pairs) {
-      if (from.type !== 'FiatCurrency' && to.ticker === intermediaryCurrency.ticker) {
-        copy.currenciesSettings[from.ticker] = {
-          ...copy.currenciesSettings[from.ticker],
-          exchange,
-        }
-      } else if (
-        from.ticker === intermediaryCurrency.ticker &&
-        to.ticker === counterValueCurrency.ticker
-      ) {
-        copy.counterValueExchange = exchange
-      }
+      copy.pairExchanges[pairHash(from, to)] = exchange
     }
     return copy
   },
@@ -162,13 +160,6 @@ export const countervalueFirstSelector = createSelector(
   s => s.countervalueFirst,
 )
 
-export const counterValueExchangeLocalSelector = (s: SettingsState) => s.counterValueExchange
-
-export const counterValueExchangeSelector = createSelector(
-  storeSelector,
-  counterValueExchangeLocalSelector,
-)
-
 export const developerModeSelector = (state: State): boolean => state.settings.developerMode
 
 export const lastUsedVersionSelector = (state: State): string => state.settings.lastUsedVersion
@@ -205,7 +196,6 @@ export const getOrderAccounts = (state: State) => state.settings.orderAccounts
 
 export const areSettingsLoaded = (state: State) => state.settings.loaded
 
-// TODO drop (bad perf implication)
 export const currencySettingsLocaleSelector = (
   settings: SettingsState,
   currency: Currency,
@@ -226,28 +216,10 @@ export const currencySettingsSelector: CSS = createSelector(
   currencySettingsLocaleSelector,
 )
 
-// TODO drop
-export const currencySettingsForAccountSelector = (
+export const exchangeSettingsForPairSelector = (
   state: State,
-  { account }: { account: Account },
-) =>
-  currencySettingsSelector(state, {
-    currency: account.type === 'Account' ? account.currency : account.token,
-  })
-
-type ESFAS = Selector<*, { account: Account }, ?string>
-// TODO drop
-export const exchangeSettingsForAccountSelector: ESFAS = createSelector(
-  currencySettingsForAccountSelector,
-  settings => settings.exchange,
-)
-export const exchangeSettingsForTickerSelector = (
-  state: State,
-  { ticker }: { ticker: string },
-): ?string => {
-  const obj = state.settings.currenciesSettings[ticker]
-  return obj && obj.exchange
-}
+  { from, to }: { from: Currency, to: Currency },
+): ?string => state.settings.pairExchanges[pairHash(from, to)]
 
 export const confirmationsNbForCurrencySelector = (
   state: State,
@@ -275,13 +247,13 @@ export const dismissedBannerSelector = (state: State, { bannerKey }: { bannerKey
 
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
-  counterValueExchangeSelector,
   state => state.settings.currenciesSettings,
+  state => state.settings.pairExchanges,
   developerModeSelector,
-  (counterValueCurrency, counterValueExchange, currenciesSettings, developerModeEnabled) => ({
+  (counterValueCurrency, currenciesSettings, pairExchanges, developerModeEnabled) => ({
     counterValue: counterValueCurrency.ticker,
-    counterValueExchange,
     currenciesSettings,
+    pairExchanges,
     developerModeEnabled,
   }),
 )
