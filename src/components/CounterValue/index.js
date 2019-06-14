@@ -70,6 +70,7 @@ class CounterValue extends PureComponent<Props> {
     if (!value) {
       return placeholder || null
     }
+
     return (
       <FormattedVal
         val={value}
