@@ -196,23 +196,22 @@ class AccountRowItem extends PureComponent<Props, State> {
               )}
             </RowContent>
           </ContextMenuItem>
-          {showTokensIndicator &&
-            expanded && (
-              <TokenContent>
-                {tokens &&
-                  tokens.map((token, index) => (
-                    <TokenRow
-                      nested
-                      index={index}
-                      key={token.id}
-                      range={range}
-                      account={token}
-                      parentAccount={mainAccount}
-                      onClick={onClick}
-                    />
-                  ))}
-              </TokenContent>
-            )}
+          {showTokensIndicator && expanded && (
+            <TokenContent>
+              {tokens &&
+                tokens.map((token, index) => (
+                  <TokenRow
+                    nested
+                    index={index}
+                    key={token.id}
+                    range={range}
+                    account={token}
+                    parentAccount={mainAccount}
+                    onClick={onClick}
+                  />
+                ))}
+            </TokenContent>
+          )}
         </Row>
         {showTokensIndicator && !expanded && <TokenAccountIndicator />}
       </Wrapper>

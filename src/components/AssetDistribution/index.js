@@ -81,16 +81,17 @@ class AssetDistribution extends PureComponent<Props, State> {
         </Text>
         <Card p={0} mt={20}>
           <Header />
-          {subList.map(item => <Row key={item.currency.id} item={item} />)}
-          {!showAll &&
-            subList.length < distribution.list.length && (
-              <SeeAllButton onClick={() => this.setState({ showAll: true })}>
-                <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
-                  <Trans i18nKey="distribution.seeAll" />
-                </Text>{' '}
-                <IconAngleDown size={12} />
-              </SeeAllButton>
-            )}
+          {subList.map(item => (
+            <Row key={item.currency.id} item={item} />
+          ))}
+          {!showAll && subList.length < distribution.list.length && (
+            <SeeAllButton onClick={() => this.setState({ showAll: true })}>
+              <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
+                <Trans i18nKey="distribution.seeAll" />
+              </Text>{' '}
+              <IconAngleDown size={12} />
+            </SeeAllButton>
+          )}
         </Card>
       </>
     )

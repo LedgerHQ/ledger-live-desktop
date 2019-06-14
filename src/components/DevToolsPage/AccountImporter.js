@@ -120,8 +120,8 @@ class AccountImporter extends PureComponent<Props, State> {
         ? 'segwit_unsplit'
         : 'segwit'
       : isUnsplit
-        ? 'unsplit'
-        : ''
+      ? 'unsplit'
+      : ''
     const importableAccount = { xpub, currency, derivationMode, name }
     this.setState(({ importableAccounts }) => ({
       importableAccounts: [...importableAccounts, importableAccount],

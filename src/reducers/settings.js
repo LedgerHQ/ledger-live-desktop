@@ -157,7 +157,10 @@ export const counterValueCurrencySelector = createSelector(
   counterValueCurrencyLocalSelector,
 )
 
-export const countervalueFirstSelector = createSelector(storeSelector, s => s.countervalueFirst)
+export const countervalueFirstSelector = createSelector(
+  storeSelector,
+  s => s.countervalueFirst,
+)
 
 export const counterValueExchangeLocalSelector = (s: SettingsState) => s.counterValueExchange
 
@@ -188,7 +191,10 @@ export const langAndRegionSelector = (
   return { language, region, useSystem: true }
 }
 
-export const languageSelector = createSelector(langAndRegionSelector, o => o.language)
+export const languageSelector = createSelector(
+  langAndRegionSelector,
+  o => o.language,
+)
 
 export const localeSelector = createSelector(
   langAndRegionSelector,

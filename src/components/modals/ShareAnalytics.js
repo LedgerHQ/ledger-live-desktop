@@ -74,7 +74,11 @@ class ShareAnalytics extends PureComponent<Props, *> {
             <Fragment>
               <InlineDesc>{t('onboarding.analytics.shareAnalytics.desc')}</InlineDesc>
               <Box mx={5}>
-                <Ul>{items.map(item => <li key={item.key}>{item.desc}</li>)}</Ul>
+                <Ul>
+                  {items.map(item => (
+                    <li key={item.key}>{item.desc}</li>
+                  ))}
+                </Ul>
               </Box>
             </Fragment>
           )}

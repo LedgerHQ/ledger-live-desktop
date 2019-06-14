@@ -117,7 +117,9 @@ export default class Finish extends Component<StepProps, *> {
             </Button>
           </Box>
           <Box horizontal mt={3} flow={5} color="grey">
-            {socialMedia.map(socMed => <SocialMediaBox key={socMed.key} socMed={socMed} />)}
+            {socialMedia.map(socMed => (
+              <SocialMediaBox key={socMed.key} socMed={socMed} />
+            ))}
           </Box>
         </Box>
       </Box>

@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
 import { encodeURIScheme } from '@ledgerhq/live-common/lib/currencies'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
 import noop from 'lodash/noop'
 
@@ -127,7 +127,8 @@ const FooterButton = ({
 )
 
 type Props = {
-  account: Account,
+  name: string,
+  currency: CryptoCurrency,
   address: string,
   isAddressVerified?: boolean,
   onCopy: () => void,
@@ -171,15 +172,7 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
   _timeout: ?TimeoutID = null
 
   render() {
-    const {
-      account: { name: accountName, currency },
-      address,
-      onCopy,
-      onVerify,
-      isAddressVerified,
-      t,
-      ...props
-    } = this.props
+    const { name, currency, address, onCopy, onVerify, isAddressVerified, t, ...props } = this.props
 
     const currencyName = currency.name
 
@@ -198,10 +191,10 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
         </Box>
         <Label>
           <Box>
-            {accountName ? (
+            {name ? (
               <Trans i18nKey="currentAddress.for" parent="div">
                 {'Address for '}
-                <strong>{accountName}</strong>
+                <strong>{name}</strong>
               </Trans>
             ) : (
               t('currentAddress.title')
@@ -225,8 +218,8 @@ class CurrentAddress extends PureComponent<Props, { copyFeedback: boolean }> {
             {isAddressVerified === null
               ? t('currentAddress.messageIfUnverified', { currencyName })
               : isAddressVerified
-                ? t('currentAddress.messageIfAccepted', { currencyName })
-                : t('currentAddress.messageIfSkipped', { currencyName })}
+              ? t('currentAddress.messageIfAccepted', { currencyName })
+              : t('currentAddress.messageIfSkipped', { currencyName })}
             <LinkWithExternalIcon
               onClick={() => openURL(urls.recipientAddressInfo)}
               label={t('common.learnMore')}

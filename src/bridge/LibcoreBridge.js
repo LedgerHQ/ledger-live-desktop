@@ -3,11 +3,12 @@ import invariant from 'invariant'
 import { BigNumber } from 'bignumber.js'
 import { map } from 'rxjs/operators'
 import { patchAccount } from '@ledgerhq/live-common/lib/reconciliation'
-import type { Transaction } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount, Transaction } from '@ledgerhq/live-common/lib/types'
 import type { CurrencyBridge, AccountBridge } from '@ledgerhq/live-common/lib/bridge/types'
 import { FeeNotLoaded, InvalidAddress, NotEnoughBalance } from '@ledgerhq/errors'
 import { makeLRUCache } from '@ledgerhq/live-common/lib/cache'
 import { fromOperationRaw, toAccountRaw, fromAccountRaw } from '@ledgerhq/live-common/lib/account'
+import { apiForCurrency } from '@ledgerhq/live-common/lib/api/Ethereum'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
@@ -29,6 +30,11 @@ export const currencyBridge: CurrencyBridge = {
 // TODO: code below is not yet split per family but is a merge of all coin families.
 // how to make this scale? need to use live-common
 
+const getTransactionAccount = (a, t): Account | TokenAccount => {
+  const { tokenAccountId } = t
+  return tokenAccountId ? (a.tokenAccounts || []).find(ta => ta.id === tokenAccountId) || a : a
+}
+
 const asLibcoreTransaction = t => {
   const obj: Transaction = {
     recipient: t.recipient,
@@ -37,6 +43,10 @@ const asLibcoreTransaction = t => {
 
   if ('useAllAmount' in t) {
     obj.useAllAmount = t.useAllAmount
+  }
+
+  if (t.tokenAccountId) {
+    obj.tokenAccountId = t.tokenAccountId
   }
 
   // bitcoin fields
@@ -71,7 +81,9 @@ const createTransaction = () => ({
   gasLimit: BigNumber(0x5208),
   tag: undefined,
   fee: undefined,
+  tokenAccountId: undefined,
 })
+
 const feesLoaded = (a, t) => {
   switch (a.currency.family) {
     case 'bitcoin':
@@ -97,16 +109,19 @@ const startSync = (initialAccount, _observation) =>
     .send(toAccountRaw(initialAccount))
     .pipe(map(raw => account => patchAccount(account, raw)))
 
-const checkValidRecipient = makeLRUCache((account, recipient) => {
-  if (!recipient)
-    return Promise.reject(new InvalidAddress('', { currencyName: account.currency.name }))
-  return libcoreValidAddress
-    .send({
-      address: recipient,
-      currencyId: account.currency.id,
-    })
-    .toPromise()
-}, (currency, recipient) => `${currency.id}_${recipient}`)
+const checkValidRecipient = makeLRUCache(
+  (account, recipient) => {
+    if (!recipient)
+      return Promise.reject(new InvalidAddress('', { currencyName: account.currency.name }))
+    return libcoreValidAddress
+      .send({
+        address: recipient,
+        currencyId: account.currency.id,
+      })
+      .toPromise()
+  },
+  (currency, recipient) => `${currency.id}_${recipient}`,
+)
 
 /*
 const fetchTransactionNetworkInfo = async ({ currency }) => {
@@ -192,6 +207,10 @@ const editTransactionExtra = (a, t, field, value) => {
 
 const getTransactionExtra = (a, t, field) => t[field] // could add more check in future
 
+const editTokenAccountId = (a, t, tokenAccountId) => ({ ...t, tokenAccountId })
+
+const getTokenAccountId = (a, t) => t.tokenAccountId
+
 const signAndBroadcast = (account, transaction, deviceId) =>
   libcoreSignAndBroadcast
     .send({
@@ -213,11 +232,6 @@ const signAndBroadcast = (account, transaction, deviceId) =>
       }),
     )
 
-const addPendingOperation = (account, optimisticOperation) => ({
-  ...account,
-  pendingOperations: [...account.pendingOperations, optimisticOperation],
-})
-
 const getFees = makeLRUCache(async (a, t) => {
   await checkValidRecipient(a, t.recipient)
   const fees = await libcoreGetFees
@@ -230,6 +244,7 @@ const getFees = makeLRUCache(async (a, t) => {
   if (
     // FIXME workaround for LLC-246
     a.currency.family === 'ethereum' &&
+    !t.tokenAccountId &&
     !t.useAllAmount &&
     t.amount &&
     BigNumber(t.amount)
@@ -246,18 +261,46 @@ const checkValidTransaction = async (a, t) =>
   !feesLoaded(a, t)
     ? Promise.reject(new FeeNotLoaded())
     : !t.amount
-      ? Promise.resolve(null)
-      : getFees(a, t).then(() => null)
+    ? Promise.resolve(null)
+    : getFees(a, t).then(() => null)
 
-const getTotalSpent = async (a, t) =>
-  t.useAllAmount
-    ? a.balance
-    : !t.amount || BigNumber(t.amount).isZero()
-      ? Promise.resolve(BigNumber(0))
-      : getFees(a, t).then(totalFees => BigNumber(t.amount || '0').plus(totalFees || 0))
+const getTotalSpent = async (a, t) => {
+  const tAccount = getTransactionAccount(a, t)
 
-const getMaxAmount = async (a, t) =>
-  getFees(a, t).then(totalFees => a.balance.minus(totalFees || 0))
+  if (t.useAllAmount) {
+    return tAccount.balance
+  }
+
+  const amount = BigNumber(t.amount || '0')
+  if (amount.isZero()) {
+    return Promise.resolve(amount)
+  }
+
+  if (tAccount.type === 'TokenAccount') {
+    return Promise.resolve(amount)
+  }
+
+  return getFees(a, t).then(totalFees => amount.plus(totalFees || 0))
+}
+
+const getMaxAmount = async (a, t) => {
+  const tAccount = getTransactionAccount(a, t)
+  if (tAccount.type === 'TokenAccount') {
+    return Promise.resolve(tAccount.balance)
+  }
+  return getFees(a, t).then(totalFees => tAccount.balance.minus(totalFees || 0))
+}
+
+const prepareTransaction = (a, t) => {
+  if (a.currency.family !== 'ethereum') return Promise.resolve(t)
+  const api = apiForCurrency(a.currency)
+  const tAccount = getTransactionAccount(a, t)
+  const o =
+    tAccount.type === 'TokenAccount'
+      ? api.estimateGasLimitForERC20(tAccount.token.contractAddress)
+      : api.estimateGasLimitForERC20(t.recipient)
+  return o.then(gasLimit => ({ ...t, gasLimit: BigNumber(gasLimit) }))
+}
 
 export const accountBridge: AccountBridge<Transaction> = {
   startSync,
@@ -266,6 +309,8 @@ export const accountBridge: AccountBridge<Transaction> = {
   fetchTransactionNetworkInfo,
   getTransactionNetworkInfo,
   applyTransactionNetworkInfo,
+  editTokenAccountId,
+  getTokenAccountId,
   editTransactionAmount,
   getTransactionAmount,
   editTransactionRecipient,
@@ -276,5 +321,5 @@ export const accountBridge: AccountBridge<Transaction> = {
   getTotalSpent,
   getMaxAmount,
   signAndBroadcast,
-  addPendingOperation,
+  prepareTransaction,
 }

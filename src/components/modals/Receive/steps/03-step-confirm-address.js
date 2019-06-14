@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
 import TrackPage from 'analytics/TrackPage'
 import { urls } from 'config/urls'
 import { openURL } from 'helpers/linking'
@@ -20,6 +20,7 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
   render() {
     const { t, account, isAddressVerified, verifyAddressError, transitionTo, device } = this.props
     const isBlue = device && device.modelId === 'blue'
+    const currency = account ? getAccountCurrency(account) : null
 
     return (
       <Container>
@@ -49,8 +50,9 @@ export default class StepConfirmAddress extends PureComponent<StepProps> {
           <>
             <Title>{t('receive.steps.confirmAddress.action')}</Title>
             <Text>
-              {account &&
-                t('receive.steps.confirmAddress.text', { currencyName: account.currency.name })}
+              {currency
+                ? t('receive.steps.confirmAddress.text', { currencyName: currency.name })
+                : null}
             </Text>
             <LinkWithExternalIcon
               onClick={() => openURL(urls.recipientAddressInfo)}

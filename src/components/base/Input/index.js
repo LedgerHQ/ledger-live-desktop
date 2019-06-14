@@ -20,10 +20,10 @@ const Container = styled(Box).attrs({
     p.error
       ? p.theme.colors.pearl
       : p.warning
-        ? p.theme.colors.warning
-        : p.isFocus
-          ? p.theme.colors.wallet
-          : p.theme.colors.fog};
+      ? p.theme.colors.warning
+      : p.isFocus
+      ? p.theme.colors.wallet
+      : p.theme.colors.fog};
   box-shadow: ${p => (p.isFocus ? `rgba(0, 0, 0, 0.05) 0 2px 2px` : 'none')};
   height: ${p => (p.small ? '34' : '40')}px;
   position: relative;

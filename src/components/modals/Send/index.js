@@ -6,7 +6,8 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
-import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
+import { getMainAccount, addPendingOperation } from '@ledgerhq/live-common/lib/account'
 import Track from 'analytics/Track'
 import { updateAccountWithUpdater } from 'actions/accounts'
 import { MODAL_SEND } from 'config/constants'
@@ -42,7 +43,8 @@ type Props = {
 type State<Transaction> = {
   stepId: string,
   openedFromAccount: boolean,
-  account: ?Account,
+  account: ?(Account | TokenAccount),
+  parentAccount: ?Account,
   transaction: ?Transaction,
   optimisticOperation: ?Operation,
   isAppOpened: boolean,
@@ -54,7 +56,8 @@ type State<Transaction> = {
 export type StepProps<Transaction> = DefaultStepProps & {
   openedFromAccount: boolean,
   device: ?Device,
-  account: ?Account,
+  account: ?(Account | TokenAccount),
+  parentAccount: ?Account,
   transaction: ?Transaction,
   error: ?Error,
   signed: boolean,
@@ -62,7 +65,7 @@ export type StepProps<Transaction> = DefaultStepProps & {
   closeModal: void => void,
   openModal: (string, any) => void,
   isAppOpened: boolean,
-  onChangeAccount: (?Account) => void,
+  onChangeAccount: (?(Account | TokenAccount), ?Account) => void,
   onChangeAppOpened: boolean => void,
   onChangeTransaction: Transaction => void,
   onTransactionError: Error => void,
@@ -118,12 +121,23 @@ const INITIAL_STATE = {
   stepId: 'amount',
   amount: 0,
   openedFromAccount: false,
+  parentAccount: null,
   account: null,
   transaction: null,
   error: null,
   signed: false,
   optimisticOperation: null,
   isAppOpened: false,
+}
+
+function createTransaction(bridge, account, parentAccount) {
+  if (!bridge) return null
+  const mainAccount = getMainAccount(account, parentAccount)
+  const t = bridge.createTransaction(mainAccount)
+  const tokenAccountId = account.type === 'TokenAccount' && account.id
+  return tokenAccountId && bridge.editTokenAccountId
+    ? bridge.editTokenAccountId(mainAccount, t, tokenAccountId)
+    : t
 }
 
 class SendModal extends PureComponent<Props, State<*>> {
@@ -148,22 +162,24 @@ class SendModal extends PureComponent<Props, State<*>> {
     const { account } = this.state
     const { accounts } = this.props
     if (!account) {
+      const parentAccount = data && data.parentAccount
       const account = (data && data.account) || accounts[0]
-      const bridge = account && getAccountBridge(account)
-      const transaction = bridge ? bridge.createTransaction(account) : null
+      const bridge = account && getAccountBridge(account, parentAccount)
+      const transaction = bridge && createTransaction(bridge, account, parentAccount)
       this.setState({
         openedFromAccount: !!(data && data.account),
+        parentAccount,
         account,
         transaction,
       })
     }
   }
 
-  handleChangeAccount = (account: Account) => {
+  handleChangeAccount = (account: Account | TokenAccount, parentAccount: ?Account) => {
     if (account !== this.state.account) {
-      const bridge = getAccountBridge(account)
-      const transaction = bridge.createTransaction(account)
-      this.setState({ account, transaction })
+      const bridge = account && getAccountBridge(account, parentAccount)
+      const transaction = bridge && createTransaction(bridge, account, parentAccount)
+      this.setState({ account, parentAccount, transaction })
     }
   }
 
@@ -188,24 +204,22 @@ class SendModal extends PureComponent<Props, State<*>> {
   }
 
   handleOperationBroadcasted = (optimisticOperation: Operation) => {
-    const { account } = this.state
+    const { account, parentAccount } = this.state
     const { updateAccountWithUpdater } = this.props
     if (!account) return
-    const bridge = getAccountBridge(account)
-    const { addPendingOperation } = bridge
-    if (addPendingOperation) {
-      updateAccountWithUpdater(account.id, account =>
-        addPendingOperation(account, optimisticOperation),
-      )
-    }
+    const mainAccount = getMainAccount(account, parentAccount)
+    updateAccountWithUpdater(mainAccount.id, account =>
+      addPendingOperation(account, optimisticOperation),
+    )
     this.setState({ optimisticOperation, error: null })
   }
 
   handleSignTransaction = async ({ transitionTo }: { transitionTo: string => void }) => {
     const { device } = this.props
-    const { account, transaction } = this.state
+    const { account, parentAccount, transaction } = this.state
     if (!account) return
-    const bridge = getAccountBridge(account)
+    const mainAccount = getMainAccount(account, parentAccount)
+    const bridge = getAccountBridge(account, parentAccount)
     if (!device) {
       this.handleTransactionError(new DisconnectedDevice())
       transitionTo('confirmation')
@@ -215,14 +229,14 @@ class SendModal extends PureComponent<Props, State<*>> {
     invariant(account && transaction && bridge, 'signTransaction invalid conditions')
 
     const eventProps = {
-      currencyName: account.currency.name,
-      derivationMode: account.derivationMode,
-      freshAddressPath: account.freshAddressPath,
-      operationsLength: account.operations.length,
+      currencyName: mainAccount.currency.name,
+      derivationMode: mainAccount.derivationMode,
+      freshAddressPath: mainAccount.freshAddressPath,
+      operationsLength: mainAccount.operations.length,
     }
     track('SendTransactionStart', eventProps)
     this._signTransactionSub = bridge
-      .signAndBroadcast(account, transaction, device.path)
+      .signAndBroadcast(mainAccount, transaction, device.path)
       .subscribe({
         next: e => {
           switch (e.type) {
@@ -261,6 +275,7 @@ class SendModal extends PureComponent<Props, State<*>> {
       stepId,
       openedFromAccount,
       account,
+      parentAccount,
       isAppOpened,
       transaction,
       optimisticOperation,
@@ -272,6 +287,7 @@ class SendModal extends PureComponent<Props, State<*>> {
       device,
       openedFromAccount,
       account,
+      parentAccount,
       transaction,
       isAppOpened,
       error,

@@ -1785,18 +1785,18 @@
     "@ledgerhq/errors" "^4.61.0"
     events "^3.0.0"
 
-"@ledgerhq/ledger-core@^2.3.0-beta.9":
-  version "2.3.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.3.0-beta.9.tgz#0f51bbcb898d365575a0f1a220308923c37cb294"
-  integrity sha512-R70o7ZMG7wUc3flk1jFH21jHxwbkPMwPij2IuLsk3GyigV/aU1MbzBscFOMop7LIDRdPkAV9bQjm7BDtKTNvdQ==
+"@ledgerhq/ledger-core@^2.3.0-beta.10":
+  version "2.3.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ledger-core/-/ledger-core-2.3.0-beta.10.tgz#53f70e5f31e856f965ba08e9cc0c7d1abe4c1454"
+  integrity sha512-SthjeWoUR4A3NfvYMxrnyCUI0lJYh5D4Tw171kdTyXXbLe/b7KBlgOMi/K4CAfASseyOzLyNVkmYbveM6cL06Q==
   dependencies:
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@6.3.0":
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-6.3.0.tgz#d508211d6a78bf4555433d6127b0287041013661"
-  integrity sha512-qNd/eiAzX61rJsue9K0CJweFxbtmhcSDOk8HaauyMSdRgxhjtPg4eAggjYkfojOGKK98eSJtPeEzaeTlEcBrYg==
+"@ledgerhq/live-common@6.6.2":
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-6.6.2.tgz#a0aaac7cae8914f0401c9226095231ab5893b277"
+  integrity sha512-GYJQRvyAoQOyrKSfTz/8FL9J4VNwL08sFNytx94sClCNrctdZKSIxRKneNlJAAGwFYIWHKAgYrmDD19ldM3fCg==
   dependencies:
     "@ledgerhq/errors" "4.61.0"
     "@ledgerhq/hw-app-btc" "4.61.0"
@@ -1821,7 +1821,7 @@
     ripple-binary-codec "^0.2.0"
     ripple-bs58check "^2.0.2"
     ripple-hashes "^0.3.1"
-    ripple-lib "^1.2.3"
+    ripple-lib "1.1.2"
     rxjs "^6.5.2"
     rxjs-compat "^6.5.2"
 
@@ -13169,7 +13169,7 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier@^1.12.1, prettier@^1.13.5:
+prettier@^1.12.1:
   version "1.13.7"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.13.7.tgz#850f3b8af784a49a6ea2d2eaa7ed1428a34b7281"
   integrity sha512-KIU72UmYPGk4MujZGYMFwinB7lOf2LsDNGSOC8ufevsrPLISrZbNJlWstRi3m0AMuszbH+EFSQ/r6w56RSPK6w==
@@ -13178,6 +13178,11 @@ prettier@^1.13.7:
   version "1.14.2"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
   integrity sha512-McHPg0n1pIke+A/4VcaS2en+pTNjy4xF+Uuq86u/5dyDO59/TtFZtQ708QIRkEZ3qwKz3GVkVa6mpxK/CpB8Rg==
+
+prettier@^1.18.2:
+  version "1.18.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
+  integrity sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
 
 pretty-bytes@^1.0.2:
   version "1.0.4"
@@ -14595,6 +14600,19 @@ ripple-address-codec@^2.0.1:
     hash.js "^1.0.3"
     x-address-codec "^0.7.0"
 
+ripple-binary-codec@0.2.0, ripple-binary-codec@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ripple-binary-codec/-/ripple-binary-codec-0.2.0.tgz#cef049f671f398de255e5c190b9f6545c7c7c36f"
+  integrity sha512-qCf3syhtwPFq70JIh/7VSegynj5gWXVNI5T5I7dobqiNxY3fZQvOePRnchnN1OzC0jMh8x0b2ASmkvIlf259zQ==
+  dependencies:
+    babel-runtime "^6.6.1"
+    bn.js "^4.11.3"
+    create-hash "^1.1.2"
+    decimal.js "^5.0.8"
+    inherits "^2.0.1"
+    lodash "^4.12.0"
+    ripple-address-codec "^2.0.1"
+
 ripple-binary-codec@0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ripple-binary-codec/-/ripple-binary-codec-0.2.1.tgz#f343da758a64f3aceb4164b8a98fbc153b088c14"
@@ -14621,19 +14639,6 @@ ripple-binary-codec@^0.1.0, ripple-binary-codec@^0.1.13:
     lodash "^4.12.0"
     ripple-address-codec "^2.0.1"
 
-ripple-binary-codec@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ripple-binary-codec/-/ripple-binary-codec-0.2.0.tgz#cef049f671f398de255e5c190b9f6545c7c7c36f"
-  integrity sha512-qCf3syhtwPFq70JIh/7VSegynj5gWXVNI5T5I7dobqiNxY3fZQvOePRnchnN1OzC0jMh8x0b2ASmkvIlf259zQ==
-  dependencies:
-    babel-runtime "^6.6.1"
-    bn.js "^4.11.3"
-    create-hash "^1.1.2"
-    decimal.js "^5.0.8"
-    inherits "^2.0.1"
-    lodash "^4.12.0"
-    ripple-address-codec "^2.0.1"
-
 ripple-bs58@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/ripple-bs58/-/ripple-bs58-4.0.1.tgz#b94d7acdc07cfd66906477cb4df39f07583f86a3"
@@ -14649,16 +14654,6 @@ ripple-bs58check@^2.0.2:
     create-hash "^1.1.0"
     ripple-bs58 "^4.0.0"
 
-ripple-hashes@0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/ripple-hashes/-/ripple-hashes-0.3.2.tgz#f3ac3b1832cec6d0bac07e82acc10a0a6a1cc84e"
-  integrity sha512-1Emm/raLNChNR5nVoQPJ7NWQpHr8jJjIZDoug4ukw4RZ3+eehO5nyx86a+MaQKAeAc1nJRFwVjBvh9SeYpelYw==
-  dependencies:
-    bignumber.js "^4.1.0"
-    create-hash "^1.1.2"
-    ripple-address-codec "^2.0.1"
-    ripple-binary-codec "0.2.1"
-
 ripple-hashes@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/ripple-hashes/-/ripple-hashes-0.3.1.tgz#f2f46f1ff05e6487500a99839019114cd2482411"
@@ -14668,6 +14663,16 @@ ripple-hashes@^0.3.1:
     create-hash "^1.1.2"
     ripple-address-codec "^2.0.1"
     ripple-binary-codec "^0.1.0"
+
+ripple-hashes@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/ripple-hashes/-/ripple-hashes-0.3.2.tgz#f3ac3b1832cec6d0bac07e82acc10a0a6a1cc84e"
+  integrity sha512-1Emm/raLNChNR5nVoQPJ7NWQpHr8jJjIZDoug4ukw4RZ3+eehO5nyx86a+MaQKAeAc1nJRFwVjBvh9SeYpelYw==
+  dependencies:
+    bignumber.js "^4.1.0"
+    create-hash "^1.1.2"
+    ripple-address-codec "^2.0.1"
+    ripple-binary-codec "0.2.1"
 
 ripple-keypairs@^0.10.1:
   version "0.10.1"
@@ -14689,18 +14694,10 @@ ripple-lib-transactionparser@0.7.1:
     bignumber.js "^4.1.0"
     lodash "^4.17.4"
 
-ripple-lib-transactionparser@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/ripple-lib-transactionparser/-/ripple-lib-transactionparser-0.6.2.tgz#eb117834816cab3398445a74ec3cacec95b6b5fa"
-  integrity sha1-6xF4NIFsqzOYRFp07Dys7JW2tfo=
-  dependencies:
-    bignumber.js "^4.1.0"
-    lodash "^4.17.4"
-
-ripple-lib@^1.0.0-beta.0:
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/ripple-lib/-/ripple-lib-1.0.0-beta.2.tgz#f2e6ebc0b6b184746ae68f80a1042395dd49a6be"
-  integrity sha1-8ubrwLaxhHRq5o+AoQQjld1Jpr4=
+ripple-lib@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ripple-lib/-/ripple-lib-1.1.2.tgz#e9cf21e7ac61c70c90dd0b105bacc561e5046f12"
+  integrity sha512-LPWsOi0trS1gcBKJpQPA9vDCn3IUfW0RYaWLLlELoNQY0MJUOG1e0J3qQlDrL+/gRW/MywlPtux5D+I4GiEVHw==
   dependencies:
     "@types/lodash" "^4.14.85"
     "@types/ws" "^3.2.0"
@@ -14709,26 +14706,8 @@ ripple-lib@^1.0.0-beta.0:
     jsonschema "1.2.2"
     lodash "^4.17.4"
     ripple-address-codec "^2.0.1"
-    ripple-binary-codec "^0.1.13"
+    ripple-binary-codec "0.2.0"
     ripple-hashes "^0.3.1"
-    ripple-keypairs "^0.10.1"
-    ripple-lib-transactionparser "^0.6.2"
-    ws "^3.3.1"
-
-ripple-lib@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/ripple-lib/-/ripple-lib-1.2.3.tgz#0f3ee301fbc66e5fcd2045f25ed7f181541b346a"
-  integrity sha512-5UdVwviXAqfVfxn6xoEe5nePMl8QwsOV0UdVxuEfHGQ6DQUs8qfb2LGcvCXY/nLpKvkBwFqcQJP9BMc3CEng6Q==
-  dependencies:
-    "@types/lodash" "^4.14.85"
-    "@types/ws" "^3.2.0"
-    bignumber.js "^4.1.0"
-    https-proxy-agent "2.2.1"
-    jsonschema "1.2.2"
-    lodash "^4.17.4"
-    ripple-address-codec "^2.0.1"
-    ripple-binary-codec "0.2.1"
-    ripple-hashes "0.3.2"
     ripple-keypairs "^0.10.1"
     ripple-lib-transactionparser "0.7.1"
     ws "^3.3.1"

@@ -32,19 +32,18 @@ function OnboardingBreadcrumb(props: Props) {
     .map(step => ({ ...step, label: t(step.label) }))
 
   const onboardingRelaunchedSteps = onboarding.steps
-    .filter(
-      step =>
-        isInitializedFlow
-          ? !step.options.alreadyInitSkip && !step.external && !step.options.relaunchSkip
-          : !step.external && !step.options.relaunchSkip,
+    .filter(step =>
+      isInitializedFlow
+        ? !step.options.alreadyInitSkip && !step.external && !step.options.relaunchSkip
+        : !step.external && !step.options.relaunchSkip,
     )
     .map(step => ({ ...step, label: t(step.label) }))
 
   const filteredSteps = onboardingRelaunched
     ? onboardingRelaunchedSteps
     : isInitializedFlow
-      ? alreadyInitializedSteps
-      : regularSteps
+    ? alreadyInitializedSteps
+    : regularSteps
 
   const stepIndex = findIndex(filteredSteps, s => s.name === stepName)
   const genuineStepIndex = findIndex(filteredSteps, s => s.name === 'genuineCheck')

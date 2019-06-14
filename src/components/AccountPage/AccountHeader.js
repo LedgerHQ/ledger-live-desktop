@@ -8,6 +8,7 @@ import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
 import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
 
 const CurName = styled(Text).attrs({
@@ -28,15 +29,12 @@ const AccountName = styled(Text).attrs({
 
 type Props = {
   account: TokenAccount | Account,
-  parentAccount?: Account,
 }
 
 class AccountHeader extends PureComponent<Props> {
   render() {
-    const { account, parentAccount } = this.props
-    const mainAccount = account.type === 'Account' ? account : parentAccount
-    if (!mainAccount) return null
-    const currency = account.type === 'Account' ? account.currency : account.token
+    const { account } = this.props
+    const currency = getAccountCurrency(account)
     return (
       <Box horizontal align="center" flow={2} grow>
         <Box>
