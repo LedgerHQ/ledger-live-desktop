@@ -44,7 +44,7 @@ const TokenParentSelection = ({ onChangeAccount, mainAccount }) => {
 const TokenSelection = ({ currency, token, onChangeToken }) => {
   const tokens = useMemo(() => listTokensForCryptoCurrency(currency), [currency])
   return (
-    <>
+    <Box mt={30}>
       <Label>
         <Trans
           i18nKey="receive.steps.chooseAccount.token"
@@ -54,7 +54,7 @@ const TokenSelection = ({ currency, token, onChangeToken }) => {
         />
       </Label>
       <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token} />
-    </>
+    </Box>
   )
 }
 
