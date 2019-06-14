@@ -23,6 +23,8 @@ type Props = {
   t: T,
 }
 
+const getOptionValue = c => c.id
+
 const SelectCurrency = React.memo(
   ({ onChange, value, t, placeholder, currencies, autoFocus, ...props }: Props) => {
     const cryptos = currencies || useCryptocurrencies({ onlySupported: true })
@@ -40,7 +42,7 @@ const SelectCurrency = React.memo(
 
     const fuseOptions = {
       threshold: 0.1,
-      keys: ['name', 'ticker', 'value', 'label'],
+      keys: ['name', 'ticker'],
     }
     const fuse = new Fuse(options, fuseOptions)
     const loadOptions = (inputValue?: string) =>
@@ -57,6 +59,7 @@ const SelectCurrency = React.memo(
         async
         autoFocus={autoFocus}
         value={value}
+        getOptionValue={getOptionValue}
         renderOption={renderOption}
         renderValue={renderOption}
         defaultOptions={options}
