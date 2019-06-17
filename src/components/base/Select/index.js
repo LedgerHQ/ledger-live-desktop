@@ -128,7 +128,7 @@ class Select extends PureComponent<Props> {
       <Comp
         ref={c => (this.ref = c)}
         value={value}
-        maxMenuHeight={rowHeight * 5}
+        maxMenuHeight={rowHeight * 4.5}
         classNamePrefix="select"
         options={options}
         components={{
