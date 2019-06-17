@@ -1,15 +1,17 @@
 // @flow
 import logger from 'logger'
-import { throwError } from 'rxjs'
+import { throwError, Observable } from 'rxjs'
+import throttle from 'lodash/throttle'
 import '@ledgerhq/live-common/lib/load/tokens/ethereum/erc20'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { listen as listenLogs } from '@ledgerhq/logs'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import { setEnvUnsafe, getEnv } from '@ledgerhq/live-common/lib/env'
-import throttle from 'lodash/throttle'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
+import TransportNodeHidSingleton from '@ledgerhq/hw-transport-node-hid-singleton'
 import TransportHttp from '@ledgerhq/hw-transport-http'
 import { DisconnectedDevice } from '@ledgerhq/errors'
+import { LISTEN_DEVICES_DEBOUNCE } from 'config/constants'
 import { retry } from './promise'
 import './implement-libcore'
 import './live-common-set-supported-currencies'
@@ -25,6 +27,7 @@ for (const k in process.env) {
 let busy = false
 
 TransportNodeHid.setListenDevicesPollingSkip(() => busy)
+TransportNodeHid.setListenDevicesDebounce(LISTEN_DEVICES_DEBOUNCE)
 
 const refreshBusyUIState = throttle(() => {
   if (process.env.CLI) return
@@ -62,7 +65,19 @@ if (getEnv('DEVICE_PROXY_URL')) {
 } else {
   registerTransportModule({
     id: 'hid',
-    open: devicePath => retry(() => TransportNodeHid.open(devicePath), { maxRetry: 4 }),
+    open: devicePath =>
+      retry(
+        () =>
+          getEnv('EXPERIMENTAL_USB')
+            ? TransportNodeHidSingleton.open()
+            : TransportNodeHid.open(devicePath),
+        { maxRetry: 4 },
+      ),
     disconnect: () => Promise.resolve(),
   })
 }
+
+export const listenDevices = (): * =>
+  getEnv('EXPERIMENTAL_USB')
+    ? Observable.create(TransportNodeHidSingleton.listen)
+    : Observable.create(TransportNodeHid.listen)

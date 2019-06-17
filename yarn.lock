@@ -1685,6 +1685,13 @@
     camelcase "^5.0.0"
     prettier "^1.13.7"
 
+"@ledgerhq/compressjs@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/compressjs/-/compressjs-1.3.2.tgz#22571c51740901c8de20ea302be123e0b96aa8fd"
+  integrity sha512-gonFwAifRkSYDO7rt3NIBlvjvY8Nw+NM6LT1SuOBppuvoKbYtBViNh3EBPbP86+3Y4ux7DLUsNiUlqOgubJsdA==
+  dependencies:
+    commander "^2.20.0"
+
 "@ledgerhq/devices@^4.66.0":
   version "4.66.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-4.66.0.tgz#46ab4c437c4f96a95d0f5473ac7f37fbbc2f1c6c"
@@ -1723,10 +1730,10 @@
     "@ledgerhq/hw-transport" "^4.66.0"
     create-hash "^1.1.3"
 
-"@ledgerhq/hw-app-eth@4.66.0", "@ledgerhq/hw-app-eth@^4.66.0":
-  version "4.66.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.66.0.tgz#6609fe28e7a4d7c4a8d82f2d334da809eb7173d9"
-  integrity sha512-bztRxzuJ+yqnTRZxxtxIWzWOFwizcEGJjrrHXdDpcrg4in9NUGgPCbeAuMaHtB8rMzjxiSKK06Gi5KENhjCCEg==
+"@ledgerhq/hw-app-eth@4.67.0", "@ledgerhq/hw-app-eth@^4.67.0":
+  version "4.67.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-4.67.0.tgz#965c92e1a9b2277a17e828ad6434fca943e3c756"
+  integrity sha512-2XkArhZSoOMZdAAtmkwg70GcCoi9e/l2EG9q91TU6Qzfsmlt1NGzmQ/yUyddjw4oXFN5rlG5AuWqohDtYB4oGA==
   dependencies:
     "@ledgerhq/errors" "^4.66.0"
     "@ledgerhq/hw-transport" "^4.66.0"
@@ -1769,6 +1776,20 @@
     "@ledgerhq/logs" "^4.64.0"
     node-hid "^0.7.9"
 
+"@ledgerhq/hw-transport-node-hid-singleton@^4.66.0":
+  version "4.66.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid-singleton/-/hw-transport-node-hid-singleton-4.66.0.tgz#6db3f077b7868610f2f81fe7060106a20a65d62e"
+  integrity sha512-AbW49/wYtc8d4susIVo7n4fcmd1hRnbWmSOAqZy1KhR8VuGF+ckzbOayszaQZUfnWx9XfnWBRc70kdnSGpLFWQ==
+  dependencies:
+    "@ledgerhq/devices" "^4.66.0"
+    "@ledgerhq/errors" "^4.66.0"
+    "@ledgerhq/hw-transport" "^4.66.0"
+    "@ledgerhq/hw-transport-node-hid-noevents" "^4.66.0"
+    "@ledgerhq/logs" "^4.64.0"
+    lodash "^4.17.11"
+    node-hid "^0.7.9"
+    usb-detection "^4.3.0"
+
 "@ledgerhq/hw-transport-node-hid@^4.66.0":
   version "4.66.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid/-/hw-transport-node-hid-4.66.0.tgz#0acd11c2983d97e616e0ade59f4d709e92438cbf"
@@ -1800,20 +1821,20 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@7.4.0-beta.3":
-  version "7.4.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.4.0-beta.3.tgz#978351e09cf32b293758fc477e5dfb0e5510f871"
-  integrity sha512-5R1Qlv5F/xakpDiHRerntXyu5arQGChIbxsgHH6y1GSuvXIQYADDKVVMvvbiE65vyVDdzxPDoPkWjaNgAissAw==
+"@ledgerhq/live-common@7.6.4":
+  version "7.6.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.6.4.tgz#94a84c505420b48174db519fa2c8c7a45e5f4fa3"
+  integrity sha512-eL/Q1DY1iFOmdOKYKpEfCJ6vSI5vP2kQeAg32iVMByT+pqkf3wHMj36ocL7yJwCk3geutm4dmuZAHZNON/CBjg==
   dependencies:
+    "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/errors" "4.66.0"
     "@ledgerhq/hw-app-btc" "4.66.0"
-    "@ledgerhq/hw-app-eth" "4.66.0"
+    "@ledgerhq/hw-app-eth" "4.67.0"
     "@ledgerhq/hw-app-xrp" "4.66.0"
     "@ledgerhq/hw-transport" "4.66.0"
     "@ledgerhq/hw-transport-mocker" "4.66.0"
     "@ledgerhq/logs" "4.64.0"
     bignumber.js "^9.0.0"
-    compressjs gre/compressjs#hermit
     eip55 "^1.0.3"
     ethereumjs-tx "^1.3.7"
     invariant "^2.2.2"
@@ -1823,7 +1844,7 @@
     prando "^5.1.1"
     react "*"
     react-redux "5"
-    redux "^4.0.3"
+    redux "^4.0.4"
     reselect "^4.0.0"
     ripple-binary-codec "^0.2.0"
     ripple-bs58check "^2.0.2"
@@ -5417,7 +5438,7 @@ combined-stream@1.0.6, combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2, commander@^2.10.0, commander@^2.11.0, commander@^2.15.0, commander@^2.18.0, commander@^2.9.0:
+commander@2, commander@^2.10.0, commander@^2.11.0, commander@^2.15.0, commander@^2.18.0, commander@^2.20.0, commander@^2.9.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
   integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
@@ -5498,12 +5519,6 @@ compression@^1.5.2:
     on-headers "~1.0.1"
     safe-buffer "5.1.1"
     vary "~1.1.2"
-
-compressjs@gre/compressjs#hermit:
-  version "1.2.0"
-  resolved "https://codeload.github.com/gre/compressjs/tar.gz/19652f100671e559d7731980c26cd06a7e999b8d"
-  dependencies:
-    commander "~2.8.1"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -7606,6 +7621,11 @@ event-emitter@~0.3.5:
   dependencies:
     d "1"
     es5-ext "~0.10.14"
+
+eventemitter2@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-5.0.1.tgz#6197a095d5fb6b57e8942f6fd7eaad63a09c9452"
+  integrity sha1-YZegldX7a1folC9v1+qtY6CclFI=
 
 eventemitter3@^3.0.0:
   version "3.1.0"
@@ -13136,7 +13156,7 @@ prebuild-install@^2.0.0:
     tunnel-agent "^0.6.0"
     which-pm-runs "^1.0.0"
 
-prebuild-install@^5.2.4, prebuild-install@^5.3.0:
+prebuild-install@^5.1.0, prebuild-install@^5.2.4, prebuild-install@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-5.3.0.tgz#58b4d8344e03590990931ee088dd5401b03004c8"
   integrity sha512-aaLVANlj4HgZweKttFNUVNRxDukytuIuxeK2boIMHjagNJCiVKWFsKF4tCE3ql3GbrD2tExPQ7/pwtEJcHNZeg==
@@ -14144,10 +14164,10 @@ redux@^3.7.2:
     loose-envify "^1.1.0"
     symbol-observable "^1.0.3"
 
-redux@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.3.tgz#0ca18be085e6cf6ed50e445a125f85e8b26b266b"
-  integrity sha512-v/Iaw67Pe+na+cZvcKvPxAKT1ww5kM+M09fmaCndCQC4Lo434AYb5975HJgJlp0D7dJxfYaLxMD4VwfpLOZ1Rw==
+redux@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.4.tgz#4ee1aeb164b63d6a1bcc57ae4aa0b6e6fa7a3796"
+  integrity sha512-vKv4WdiJxOWKxK0yRoaK3Y4pxxB0ilzVx6dszU2W8wLxlb2yikRph4iV/ymtdJ6ZxpBLFbyrxklnT5yBbQSl3Q==
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
@@ -16623,6 +16643,16 @@ url@^0.11.0, url@~0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+usb-detection@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/usb-detection/-/usb-detection-4.3.0.tgz#0e0ca5d8515431edf26215b2643f45d3aae4b28e"
+  integrity sha512-hZ5klXudeyOzkRdv/CaQiG5sXJ2Cc2VwaXaO1Jrd3JKMUH7lckthp9zLM/NeFONW7Fdp4JaBIEPd+bLjjh8/Iw==
+  dependencies:
+    bindings "^1.3.0"
+    eventemitter2 "^5.0.1"
+    nan "^2.13.2"
+    prebuild-install "^5.1.0"
 
 usb@^1.6.0:
   version "1.6.0"

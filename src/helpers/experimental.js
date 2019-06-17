@@ -51,12 +51,10 @@ export const experimentalFeatures: Feature[] = [
       'Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.',
   },
   {
-    shadow: true, // we'll enable it later with a better implementation
     type: 'toggle',
     name: 'EXPERIMENTAL_USB',
     title: 'Experimental USB',
-    description:
-      'Alternative USB implementation that might help solve USB issues. Enabling this feature might create UI glitches.',
+    description: 'Alternative USB implementation that might help solve USB issues.',
   },
   {
     shadow: true,
