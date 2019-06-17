@@ -5,6 +5,7 @@ import fs from 'fs'
 import { ipcRenderer, webFrame, remote } from 'electron'
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
+import { getAllEnvs } from '@ledgerhq/live-common/lib/env'
 import getUser from 'helpers/user'
 import KeyHandler from 'react-key-handler'
 import Button from './base/Button'
@@ -43,6 +44,9 @@ class ExportLogsBtn extends Component<{
       environment: __DEV__ ? 'development' : 'production',
       userAgent: window.navigator.userAgent,
       userAnonymousId: user.id,
+      env: {
+        ...getAllEnvs(),
+      },
     })
     const path = remote.dialog.showSaveDialog({
       title: 'Export logs',
