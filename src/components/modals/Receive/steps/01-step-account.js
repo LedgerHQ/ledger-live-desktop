@@ -4,6 +4,7 @@ import React, { useCallback, useMemo } from 'react'
 import { Trans } from 'react-i18next'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account'
 import { listTokensForCryptoCurrency } from '@ledgerhq/live-common/lib/currencies'
+import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
@@ -41,7 +42,15 @@ const TokenParentSelection = ({ onChangeAccount, mainAccount }) => {
   )
 }
 
-const TokenSelection = ({ currency, token, onChangeToken }) => {
+const TokenSelection = ({
+  currency,
+  token,
+  onChangeToken,
+}: {
+  currency: CryptoCurrency,
+  token: ?TokenCurrency,
+  onChangeToken: (?TokenCurrency) => void,
+}) => {
   const tokens = useMemo(() => listTokensForCryptoCurrency(currency), [currency])
   return (
     <Box mt={30}>
@@ -53,7 +62,7 @@ const TokenSelection = ({ currency, token, onChangeToken }) => {
           }}
         />
       </Label>
-      <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token} />
+      <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token || tokens[0]} />
     </Box>
   )
 }
