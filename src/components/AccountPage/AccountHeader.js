@@ -9,7 +9,7 @@ import Box from 'components/base/Box'
 import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
 import { getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
-import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
+import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
 const CurName = styled(Text).attrs({
   ff: 'Open Sans|SemiBold',
@@ -38,12 +38,16 @@ class AccountHeader extends PureComponent<Props> {
     return (
       <Box horizontal align="center" flow={2} grow>
         <Box>
-          <CryptoCurrencyIcon currency={currency} size={24} />
+          <ParentCryptoCurrencyIcon
+            currency={currency}
+            parentCurrency={currency.parentCurrency}
+            borderColor="lightGrey"
+          />
         </Box>
         <Box grow>
-          <CurName>{currency.name}</CurName>
+          <CurName>{account.type === 'Account' ? currency.name : 'token'}</CurName>
           <AccountName>
-            <Ellipsis>{account.type === 'Account' ? account.name : null}</Ellipsis>
+            <Ellipsis>{account.type === 'Account' ? account.name : currency.name}</Ellipsis>
           </AccountName>
         </Box>
       </Box>
