@@ -14,6 +14,7 @@ const Cell = styled(Box).attrs({
   alignItems: 'flex-end',
 })`
   width: 150px;
+  text-align: right;
 `
 
 type Props = {

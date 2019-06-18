@@ -27,7 +27,7 @@ Ledger Live is an hybrid desktop application built with Electron, React, Redux, 
 
 ### Requirements
 
-- [NodeJS](https://nodejs.org) LTS
+- [NodeJS](https://nodejs.org) LTS/carbon (Node 8.x)
 - [Yarn](https://yarnpkg.com) LTS
 - [Python](https://www.python.org/) v2.7.10 (used by [node-gyp](https://github.com/nodejs/node-gyp) to build native addons)
 - You will also need a C++ compiler

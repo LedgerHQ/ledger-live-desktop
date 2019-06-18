@@ -45,6 +45,9 @@ const Asset = styled.div`
   > :first-child {
     margin-right: 10px;
   }
+  > :nth-child(2) {
+    margin-right: 8px;
+  }
 `
 const PriceSection = styled.div`
   width: 20%;
@@ -83,9 +86,9 @@ class Row extends PureComponent<Props, State> {
       <Wrapper>
         <Asset>
           {icon}
-          <Text ff="Open Sans|SemiBold" color="dark" fontSize={3}>
+          <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={3}>
             {currency.name}
-          </Text>
+          </Ellipsis>
         </Asset>
         <PriceSection>
           <Price from={currency} color="graphite" fontSize={3} />

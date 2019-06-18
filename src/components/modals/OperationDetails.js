@@ -221,6 +221,24 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                 <Fragment>
                   <OpDetailsData>
                     <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
+                    <Box horizontal>
+                      <Box
+                        mr={1}
+                        color="grey"
+                        style={{ lineHeight: 1.2 }}
+                      >
+                        {"≈"}
+                      </Box>
+                      <CounterValue
+                        color="grey"
+                        date={date}
+                        fontSize={3}
+                        currency={currency}
+                        value={fee}
+                        alwaysShowSign={false}
+                        subMagnitude={1}
+                      />
+                    </Box>
                   </OpDetailsData>
                 </Fragment>
               ) : (
