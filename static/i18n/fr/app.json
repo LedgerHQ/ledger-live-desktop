@@ -329,7 +329,7 @@
         "first": "1. Réinitialiser votre appareil",
         "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
         "turnOn": "Appuyez sur le bouton sur l'appareil pour l'activer.",
-        "falsePin": "Enter three wrong PIN codes to reset the device.",
+        "falsePin": "Entrez trois codes PIN erronés pour réinitialiser l'appareil.",
         "turnOff": "Appuyez sur bouton latéral et maintenez le jusqu'à ce que {{action}} soit affiché.",
         "confirmTurnOff": "Appuyez sur {{action}} pour confirmer.",
         "second": "Démarrage en mode {{mode}}",
