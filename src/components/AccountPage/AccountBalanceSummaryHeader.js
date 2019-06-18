@@ -22,12 +22,17 @@ import Swap from '../../icons/Swap'
 
 type Props = {
   isAvailable: boolean,
-  first: {
+  refBalance: {
     date: Date,
     value: BigNumber,
     countervalue: BigNumber,
   },
-  last: {
+  sinceBalance: {
+    date: Date,
+    value: BigNumber,
+    countervalue: BigNumber,
+  },
+  totalBalance: {
     date: Date,
     value: BigNumber,
     countervalue: BigNumber,
@@ -91,8 +96,9 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
       counterValue,
       selectedTimeRange,
       isAvailable,
-      first,
-      last,
+      totalBalance,
+      sinceBalance,
+      refBalance,
       countervalueFirst,
       setCountervalueFirst,
     } = this.props
@@ -101,8 +107,18 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
     const unit = account.type === 'Account' ? account.unit : currency.units[0]
     const cvUnit = counterValue.units[0]
     const data = [
-      { oldBalance: first.value, balance: last.value, unit },
-      { oldBalance: first.countervalue, balance: last.countervalue, unit: cvUnit },
+      {
+        oldBalance: sinceBalance.value,
+        refBalance: refBalance.value,
+        balance: totalBalance.value,
+        unit,
+      },
+      {
+        oldBalance: sinceBalance.countervalue,
+        refBalance: refBalance.countervalue,
+        balance: totalBalance.countervalue,
+        unit: cvUnit,
+      },
     ]
     if (countervalueFirst) {
       data.reverse()
@@ -165,7 +181,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             alignItems="center"
             totalBalance={data[0].balance}
             sinceBalance={data[0].oldBalance}
-            refBalance={data[0].oldBalance}
+            refBalance={data[0].refBalance}
             since={selectedTimeRange}
           />
           <BalanceSinceDiff
@@ -175,7 +191,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             alignItems="center"
             totalBalance={data[0].balance}
             sinceBalance={data[0].oldBalance}
-            refBalance={data[0].oldBalance}
+            refBalance={data[0].refBalance}
             since={selectedTimeRange}
           />
         </Box>

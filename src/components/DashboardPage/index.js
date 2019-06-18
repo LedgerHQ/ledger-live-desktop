@@ -2,6 +2,7 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
+import find from 'lodash/find'
 import { Redirect } from 'react-router'
 import { compose } from 'redux'
 import IconNanoX from 'icons/device/NanoXBanner'
@@ -73,7 +74,7 @@ class DashboardPage extends PureComponent<Props> {
       totalBalance={balanceHistory[balanceHistory.length - 1].value}
       since={this.props.selectedTimeRange}
       sinceBalance={balanceHistory[0].value}
-      refBalance={balanceHistory[0].value}
+      refBalance={(find(balanceHistory, record => record.value > 0) || balanceHistory[0]).value}
     />
   )
 

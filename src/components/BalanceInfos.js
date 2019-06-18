@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { Fragment } from 'react'
 import type { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 
@@ -9,7 +9,7 @@ import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
-import DeltaChange from './DeltaChange'
+import DeltaChangeProvider from './DeltaChangeProvider'
 import { PlaceholderLine } from './Placeholder'
 
 const Sub = styled(Box).attrs({
@@ -44,16 +44,26 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
   const { t, totalBalance, sinceBalance, refBalance, since, isAvailable, ...otherProps } = props
   return (
     <Box {...otherProps}>
-      <DeltaChange
-        placeholder={<PlaceholderLine width={100} />}
-        from={refBalance}
-        to={totalBalance}
-        color="dark"
-        animateTicker
-        fontSize={7}
-        withIcon
-      />
-      {!isAvailable ? <PlaceholderLine dark width={60} /> : <Sub>{t(`time.since.${since}`)}</Sub>}
+      <DeltaChangeProvider from={refBalance} to={totalBalance}>
+        {({ deltaValue }) => (
+          <Fragment>
+            <FormattedVal
+              isPercent
+              val={deltaValue}
+              placeholder={<PlaceholderLine width={100} />}
+              color="dark"
+              animateTicker
+              fontSize={7}
+              withIcon
+            />
+            {!isAvailable ? (
+              <PlaceholderLine dark width={60} />
+            ) : (
+              <Sub>{t(`time.since.${since}`)}</Sub>
+            )}
+          </Fragment>
+        )}
+      </DeltaChangeProvider>
     </Box>
   )
 }

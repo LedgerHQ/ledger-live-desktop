@@ -7,7 +7,6 @@ import CryptoCurrencyIcon from './CryptoCurrencyIcon'
 
 type Props = {
   currency: Currency,
-  parentCurrency?: Currency,
   borderColor?: string,
 }
 
@@ -21,15 +20,18 @@ const ParentCryptoCurrencyIconWrapper = styled.div`
 
 class ParentCryptoCurrencyIcon extends PureComponent<Props> {
   render() {
-    const { currency, parentCurrency, borderColor } = this.props
-    const double = !!parentCurrency
+    const { currency, borderColor } = this.props
 
-    return (
-      <ParentCryptoCurrencyIconWrapper borderColor={borderColor}>
-        {parentCurrency && <CryptoCurrencyIcon currency={parentCurrency} size={double ? 16 : 20} />}
-        <CryptoCurrencyIcon currency={currency} size={double ? 16 : 20} />
-      </ParentCryptoCurrencyIconWrapper>
-    )
+    if (currency.type === 'TokenCurrency' && currency.parentCurrency) {
+      return (
+        <ParentCryptoCurrencyIconWrapper borderColor={borderColor}>
+          <CryptoCurrencyIcon currency={currency.parentCurrency} size={16} />
+          <CryptoCurrencyIcon currency={currency} size={16} />
+        </ParentCryptoCurrencyIconWrapper>
+      )
+    }
+
+    return <CryptoCurrencyIcon currency={currency} size={20} />
   }
 }
 

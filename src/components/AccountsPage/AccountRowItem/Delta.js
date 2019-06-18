@@ -6,8 +6,8 @@ import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
 import type { BalanceHistoryWithCountervalue } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
-import DeltaChange from 'components/DeltaChange'
-import { PlaceholderLine } from '../../Placeholder'
+import DeltaChangeProvider from 'components/DeltaChangeProvider'
+import FormattedVal from 'components/base/FormattedVal'
 
 class Delta extends PureComponent<{
   histo: { history: BalanceHistoryWithCountervalue },
@@ -20,13 +20,11 @@ class Delta extends PureComponent<{
     const balanceEnd = history[history.length - 1].countervalue
     return (
       <Box flex="10%" justifyContent="flex-end">
-        <DeltaChange
-          placeholder={<PlaceholderLine width={16} height={2} />}
-          from={balanceStart}
-          to={balanceEnd}
-          alwaysShowSign
-          fontSize={3}
-        />
+        <DeltaChangeProvider from={balanceStart} to={balanceEnd}>
+          {({ deltaValue }) => (
+            <FormattedVal val={deltaValue} isPercent alwaysShowSign fontSize={3} />
+          )}
+        </DeltaChangeProvider>
       </Box>
     )
   }

@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
 import { BigNumber } from 'bignumber.js'
 import moment from 'moment'
+import find from 'lodash/find'
 import { formatShort } from '@ledgerhq/live-common/lib/currencies'
 import type {
   Currency,
@@ -78,8 +79,9 @@ class AccountBalanceSummary extends PureComponent<Props> {
       countervalueFirst,
       setCountervalueFirst,
     } = this.props
-    const first = history[0]
-    const last = history[history.length - 1]
+    const sinceBalance = history[0]
+    const refBalance = find(history, record => record.value.isGreaterThan(0)) || sinceBalance
+    const totalBalance = history[history.length - 1]
     const displayCountervalue = countervalueFirst && countervalueAvailable
     return (
       <Card p={0} py={5}>
@@ -89,8 +91,9 @@ class AccountBalanceSummary extends PureComponent<Props> {
             counterValue={counterValue}
             selectedTimeRange={range}
             isAvailable={countervalueAvailable}
-            first={first}
-            last={last}
+            totalBalance={totalBalance}
+            sinceBalance={sinceBalance}
+            refBalance={refBalance}
             countervalueFirst={displayCountervalue}
             setCountervalueFirst={setCountervalueFirst}
           />

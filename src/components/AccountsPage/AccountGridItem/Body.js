@@ -13,8 +13,9 @@ import type {
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
-import DeltaChange from 'components/DeltaChange'
 import Chart from 'components/base/Chart'
+import DeltaChangeProvider from 'components/DeltaChangeProvider'
+import FormattedVal from 'components/base/FormattedVal'
 
 const Placeholder = styled.div`
   height: 14px;
@@ -55,7 +56,11 @@ class Body extends PureComponent<{
             />
           </Box>
           <Box grow justifyContent="center">
-            <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
+            <DeltaChangeProvider from={balanceStart} to={balanceEnd}>
+              {({ deltaValue }) => (
+                <FormattedVal isPercent val={deltaValue} alwaysShowSign fontSize={3} />
+              )}
+            </DeltaChangeProvider>
           </Box>
         </Box>
         <Chart
