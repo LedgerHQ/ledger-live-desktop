@@ -125,8 +125,10 @@
     "title": "Accounts",
     "noResultFound": "No accounts found.",
     "order": {
-      "name": "Account Name",
-      "balance": "Account Balance"
+      "name|asc": "Name A-Z",
+      "name|desc": "Name Z-A",
+      "balance|asc": "Lowest Balance",
+      "balance|desc": "Highest Balance"
     },
     "range": {
       "week": "week",
@@ -164,7 +166,7 @@
   },
   "currentAddress": {
     "title": "現在のアドレス",
-    "for": "アカウント <1><0>{{accountName}}</0></1>のアドレス",
+    "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "アドレスが確認されました。QRコードをコピー、ペースト或いはスキャンして入力された場合は、再度アドレスをご確認ください。",
     "messageIfSkipped": "あなたの{{currencyName}} のアドレスが、Ledgerデバイスで確認できません。セキュリティを最適化するために、アドレスを確認してください。"
@@ -215,6 +217,13 @@
     },
     "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Receive token",
+    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
+    "placeholder2": "For more information: ",
+    "link": "Manage ERC20 tokens"
+  },
   "addAccounts": {
     "title": "アカウントを追加",
     "breadcrumb": {
@@ -249,13 +258,16 @@
     },
     "sections": {
       "importable": {
-        "title": "既存アカウントを追加"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "新規アカウントを追加"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "アカウントは既にポートフォリオ({{count}})内に存在します"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
       }
     }
   },
@@ -351,7 +363,9 @@
     "steps": {
       "chooseAccount": {
         "title": "アカウント",
-        "label": "入金アカウント"
+        "label": "入金アカウント",
+        "parentAccount": "1. Choose {{currencyName}} Account",
+        "token": "2. Choose {{currencyName}} Token"
       },
       "connectDevice": {
         "title": "機器",
@@ -378,6 +392,7 @@
         "recipientAddress": "受取人のアドレス",
         "amount": "金額",
         "fees": "ネットワーク手数料",
+        "useMax": "use max",
         "advancedOptions": "詳細オプション",
         "useRBF": "replace-by-fee取引を利用する",
         "message": "メッセージを残す（140）",
@@ -429,7 +444,9 @@
     "tabs": {
       "display": "一般",
       "export": "アカウント",
+      "cryptoAssets": "Crypto assets",
       "currencies": "通貨",
+      "rates": "Rates",
       "help": "ヘルプ",
       "about": "詳細",
       "experimental": "Experimental features"
@@ -468,11 +485,18 @@
       "stockDesc": "市場価値の増加を青色で表示するにはWesternを、赤色で表示するにはEasternを選択します。"
     },
     "currencies": {
-      "desc": "クリプトアセットを選択して、設定を編集します。",
+      "desc": "Edit your crypto asset's settings",
+      "select": "Select a crypto asset to edit its settings.",
       "exchange": "レートプロバイダー({{ticker}} → BTC)",
       "exchangeDesc": "{{currencyName}} とBitcoinの間の為替レートのプロバイダを選択してください。これは、お客様の暗号資産の価値の見積もりに使用されます({{ticker}}→BTC→{{fiat}})。",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
+    },
+    "rates": {
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "fromTo": "{{from}} to {{to}}",
+      "cryptoToFiat": "Crypto to fiat",
+      "cryptoToCrypto": "Crypto to Crypto"
     },
     "profile": {
       "password": "パスワードロック",
@@ -841,6 +865,10 @@
     "BtcUnmatchedApp": {
       "title": "アプリが間違っています",
       "description": "お使いの機器で‘{{managerAppName}}’ アプリを開きます"
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "正規品でない可能性があります",
