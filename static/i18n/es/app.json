@@ -125,8 +125,10 @@
     "title": "Cuentas",
     "noResultFound": "No se encontraron cuentas.",
     "order": {
-      "name": "Nombre de la Cuenta",
-      "balance": "Saldo de la Cuenta"
+      "name|asc": "Name A-Z",
+      "name|desc": "Name Z-A",
+      "balance|asc": "Lowest Balance",
+      "balance|desc": "Highest Balance"
     },
     "range": {
       "week": "semana",
@@ -164,7 +166,7 @@
   },
   "currentAddress": {
     "title": "Dirección actual",
-    "for": "Dirección de la cuenta <1><0>{{accountName}}</0></1>",
+    "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Por favor, comprueba que la dirección {{currencyName}} mostrada en Ledger Live coincide con la de tu dispositivo Ledger",
     "messageIfAccepted": "Dirección confirmada, compruébala de nuevo si la has copiado/pegado o si has escaneado el código QR.",
     "messageIfSkipped": "Tu {{currencyName}} dirección no ha sido confirmada en tu dispositivo Ledger. Comprueba tu dirección para maximizar la seguridad."
@@ -215,6 +217,13 @@
     },
     "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en {{button}} para actualizarlo."
   },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Receive token",
+    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
+    "placeholder2": "For more information: ",
+    "link": "Manage ERC20 tokens"
+  },
   "addAccounts": {
     "title": "Añadir cuentas",
     "breadcrumb": {
@@ -249,13 +258,16 @@
     },
     "sections": {
       "importable": {
-        "title": "Añadir cuenta existente"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "Añadir nueva cuenta"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "Cuentas ya en cartera ({{count}})"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
       }
     }
   },
@@ -351,7 +363,9 @@
     "steps": {
       "chooseAccount": {
         "title": "Cuenta",
-        "label": "Cuenta para abonos"
+        "label": "Cuenta para abonos",
+        "parentAccount": "1. Choose {{currencyName}} Account",
+        "token": "2. Choose {{currencyName}} Token"
       },
       "connectDevice": {
         "title": "Dispositivo",
@@ -378,6 +392,7 @@
         "recipientAddress": "Dirección del destinatario",
         "amount": "Importe",
         "fees": "Comisiones de red",
+        "useMax": "use max",
         "advancedOptions": "Opciones avanzadas",
         "useRBF": "Utilizar una transacción RBF",
         "message": "Dejar un mensaje (140) ",
@@ -429,7 +444,9 @@
     "tabs": {
       "display": "General",
       "export": "Cuentas",
+      "cryptoAssets": "Crypto assets",
       "currencies": "Monedas",
+      "rates": "Rates",
       "help": "Ayuda",
       "about": "Acerca de...",
       "experimental": "Funcionalidades experimentales"
@@ -468,11 +485,18 @@
       "stockDesc": "Elige Occidental para que la subida del valor de mercado aparezca en azul u Oriental para que aparezca en rojo."
     },
     "currencies": {
-      "desc": "Selecciona un crypto activo para editar sus ajustes.",
+      "desc": "Edit your crypto asset's settings",
+      "select": "Select a crypto asset to edit its settings.",
       "exchange": "Proveedor de tipo ({{ticker}} → BTC)",
       "exchangeDesc": "Elige el proveedor del tipo de cambio de {{currencyName}} a Bitcoin, utilizado para calcular el valor de tus criptoactivos ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Número de confirmaciones",
       "confirmationsNbDesc": "Establece el número de confirmaciones de red para que una transacción se marque como confirmada."
+    },
+    "rates": {
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "fromTo": "{{from}} to {{to}}",
+      "cryptoToFiat": "Crypto to fiat",
+      "cryptoToCrypto": "Crypto to Crypto"
     },
     "profile": {
       "password": "Bloqueo por contraseña",
@@ -841,6 +865,10 @@
     "BtcUnmatchedApp": {
       "title": "Esa aplicación no es correcta,",
       "description": "Abre la aplicación «{{managerAppName}}» en tu dispositivo"
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Posiblemente no es auténtico",
