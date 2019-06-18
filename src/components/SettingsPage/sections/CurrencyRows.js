@@ -34,19 +34,19 @@ class CurrencyRows extends PureComponent<Props> {
   updateCurrencySettings = (key: string, val: *) => {
     // FIXME this really should be a dedicated action
     const { settings, saveSettings, currency } = this.props
-    const currencySettings = settings.currenciesSettings[currency.id]
+    const currencySettings = settings.currenciesSettings[currency.ticker]
     let newCurrenciesSettings = []
     if (!currencySettings) {
       newCurrenciesSettings = {
         ...settings.currenciesSettings,
-        [currency.id]: {
+        [currency.ticker]: {
           [key]: val,
         },
       }
     } else {
       newCurrenciesSettings = {
         ...settings.currenciesSettings,
-        [currency.id]: {
+        [currency.ticker]: {
           ...currencySettings,
           [key]: val,
         },

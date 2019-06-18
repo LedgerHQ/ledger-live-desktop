@@ -4,17 +4,15 @@ import logger from 'logger'
 import invariant from 'invariant'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent, Fragment, useEffect } from 'react'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
 import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
-import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
+import { isAccountEmpty, groupAddAccounts } from '@ledgerhq/live-common/lib/account'
 import { DeviceShouldStayInApp } from '@ledgerhq/errors'
-
-import { getBridgeForCurrency } from 'bridge'
-
+import { getCurrencyBridge } from 'bridge'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import CurrencyBadge from 'components/base/CurrencyBadge'
@@ -86,6 +84,15 @@ const Desc = styled(Box).attrs({
   text-align: center;
 `
 
+const SectionAccounts = ({ defaultSelected, ...rest }: *) => {
+  useEffect(() => {
+    if (defaultSelected && rest.onSelectAll) {
+      rest.onSelectAll(rest.accounts)
+    }
+  }, [])
+  return <AccountsList {...rest} />
+}
+
 class StepImport extends PureComponent<StepProps> {
   componentDidMount() {
     this.props.setScanStatus('scanning')
@@ -126,7 +133,7 @@ class StepImport extends PureComponent<StepProps> {
       invariant(currency, 'No currency to scan')
       invariant(device, 'No device')
 
-      const bridge = getBridgeForCurrency(currency)
+      const bridge = getCurrencyBridge(currency)
 
       // TODO: use the real device
       const devicePath = device.path
@@ -210,95 +217,52 @@ class StepImport extends PureComponent<StepProps> {
 
     const currencyName = currency ? currency.name : ''
 
-    const importedAccounts = []
-    const importableAccounts = []
-    const creatableAccounts = []
-    let alreadyEmptyAccount
-    scannedAccounts.forEach(acc => {
-      const existingAccount = existingAccounts.find(a => a.id === acc.id)
-      const empty = isAccountEmpty(acc)
-      if (existingAccount) {
-        importedAccounts.push(existingAccount)
-        if (empty) {
-          alreadyEmptyAccount = existingAccount
-        }
-      } else if (empty) {
-        creatableAccounts.push(acc)
-      } else {
-        importableAccounts.push(acc)
-      }
+    const { sections, alreadyEmptyAccount } = groupAddAccounts(existingAccounts, scannedAccounts, {
+      scanning: scanStatus === 'scanning',
     })
 
-    const importableAccountsListTitle = t('addAccounts.accountToImportSubtitle', {
-      count: importableAccounts.length,
-    })
+    const emptyTexts = {
+      importable: t('addAccounts.noAccountToImport', { currencyName }),
 
-    const importedAccountsListTitle = t('addAccounts.accountAlreadyImportedSubtitle', {
-      count: importedAccounts.length,
-    })
-
-    const importableAccountsEmpty = t('addAccounts.noAccountToImport', { currencyName })
-
-    const shouldShowNew = scanStatus !== 'scanning'
+      creatable: alreadyEmptyAccount ? (
+        <Trans i18nKey="addAccounts.createNewAccount.noOperationOnLastAccount" parent="div">
+          {' '}
+          <Text ff="Open Sans|SemiBold" color="dark">
+            {alreadyEmptyAccount.name}
+          </Text>{' '}
+        </Trans>
+      ) : (
+        <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
+          {' '}
+          <Text ff="Open Sans|SemiBold" color="dark">
+            {currencyName}
+          </Text>{' '}
+        </Trans>
+      ),
+    }
 
     return (
       <Fragment>
         <TrackPage category="AddAccounts" name="Step3" />
         <Box mt={-4}>
-          {importableAccounts.length === 0 ? null : (
-            <AccountsList
-              title={importableAccountsListTitle}
-              emptyText={importableAccountsEmpty}
-              accounts={importableAccounts}
-              checkedIds={checkedAccountsIds}
-              onToggleAccount={this.handleToggleAccount}
-              setAccountName={setAccountName}
-              editedNames={editedNames}
-              onSelectAll={this.handleSelectAll}
-              onUnselectAll={this.handleUnselectAll}
-              autoFocusFirstInput
+          {sections.map(({ id, selectable, defaultSelected, data }, i) => (
+            <SectionAccounts
+              defaultSelected={defaultSelected}
+              key={id}
+              title={t(`addAccounts.sections.${id}.title`, { count: data.length })}
+              emptyText={emptyTexts[id]}
+              accounts={data}
+              autoFocusFirstInput={selectable && i === 0}
+              hideAmount={id === 'creatable'}
+              checkedIds={!selectable ? undefined : checkedAccountsIds}
+              onToggleAccount={!selectable ? undefined : this.handleToggleAccount}
+              setAccountName={!selectable ? undefined : setAccountName}
+              editedNames={!selectable ? undefined : editedNames}
+              onSelectAll={!selectable ? undefined : this.handleSelectAll}
+              onUnselectAll={!selectable ? undefined : this.handleUnselectAll}
             />
-          )}
-          {!shouldShowNew ? null : (
-            <AccountsList
-              autoFocusFirstInput={importableAccounts.length === 0}
-              title={t('addAccounts.createNewAccount.title')}
-              emptyText={
-                alreadyEmptyAccount ? (
-                  <Trans
-                    i18nKey="addAccounts.createNewAccount.noOperationOnLastAccount"
-                    parent="div"
-                  >
-                    {' '}
-                    <Text ff="Open Sans|SemiBold" color="dark">
-                      {alreadyEmptyAccount.name}
-                    </Text>{' '}
-                  </Trans>
-                ) : (
-                  <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
-                    {' '}
-                    <Text ff="Open Sans|SemiBold" color="dark">
-                      {currencyName}
-                    </Text>{' '}
-                  </Trans>
-                )
-              }
-              accounts={creatableAccounts}
-              checkedIds={checkedAccountsIds}
-              onToggleAccount={this.handleToggleAccount}
-              setAccountName={setAccountName}
-              editedNames={editedNames}
-              hideAmount
-            />
-          )}
-          {importedAccounts.length === 0 ? null : (
-            <AccountsList
-              title={importedAccountsListTitle}
-              accounts={importedAccounts}
-              editedNames={editedNames}
-              collapsible
-            />
-          )}
+          ))}
+
           {scanStatus === 'scanning' ? (
             <LoadingRow>
               <Spinner color="grey" size={16} />

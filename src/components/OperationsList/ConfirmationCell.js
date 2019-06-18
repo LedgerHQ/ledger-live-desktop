@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
 
-import type { Account, Operation } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
 
 import type { T, CurrencySettings } from 'types/common'
 
@@ -30,7 +30,8 @@ const Cell = styled(Box).attrs({
 `
 
 type Props = {
-  account: Account,
+  account: Account | TokenAccount,
+  parentAccount?: Account,
   currencySettings: CurrencySettings,
   marketIndicator: string,
   t: T,
@@ -39,12 +40,15 @@ type Props = {
 
 class ConfirmationCell extends PureComponent<Props> {
   render() {
-    const { account, currencySettings, t, operation, marketIndicator } = this.props
+    const { account, parentAccount, currencySettings, t, operation, marketIndicator } = this.props
+
+    const mainAccount = account.type === 'Account' ? account : parentAccount
+    if (!mainAccount) return null // this should never happen
 
     const isNegative = operation.type === 'OUT'
 
     const isConfirmed =
-      (operation.blockHeight ? account.blockHeight - operation.blockHeight : 0) >
+      (operation.blockHeight ? mainAccount.blockHeight - operation.blockHeight : 0) >
       currencySettings.confirmationsNb
 
     const marketColor = getMarketColor({

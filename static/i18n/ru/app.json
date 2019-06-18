@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
-    "accountAlreadyImportedSubtitle": "Счета, находящиеся в портфеле: ({{count}})",
-    "accountToImportSubtitle": "Добавить существующий счет",
     "accountToImportSubtitle_plural": "Добавить существующие счета",
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
@@ -241,7 +239,6 @@
     "successDescription": "Добавить больше счетов или вернуться в портфель",
     "successDescription_plural": "Добавить больше счетов или вернуться в портфель",
     "createNewAccount": {
-      "title": "Добавить новый счет",
       "noOperationOnLastAccount": "Невозможно добавить новый счет до получения на счет <1><0>{{accountName}}</0></1> активов.",
       "noAccountToCreate": "Счета в <1><0>{{currencyName}}</0></1> для создания не найдены"
     },
@@ -249,6 +246,17 @@
       "addMore": "Добавить еще",
       "add": "Добавить счет",
       "add_plural": "Добавить счета"
+    },
+    "sections": {
+      "importable": {
+        "title": "Добавить существующий счет"
+      },
+      "creatable": {
+        "title": "Добавить новый счет"
+      },
+      "imported": {
+        "title": "Счета, находящиеся в портфеле: ({{count}})"
+      }
     }
   },
   "operationDetails": {
@@ -295,6 +303,7 @@
       "steps": {
         "downloadingUpdate": "Downloading update",
         "updateMCU": "Обновление встроенного ПО",
+        "reset": "Prepare device",
         "osu": "Установка обновления ОС...",
         "flash-mcu": "Обновление микроконтроллера...",
         "flash-bootloader": "Обновление загрузчика...",
@@ -308,8 +317,26 @@
       "mcuFirst": "Отсоедините USB-кабель от устройства.",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Дождитесь завершения обновления.",
+      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
+      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Встроенное ПО обновлено",
-      "successText": "Повторно установите приложения на устройстве."
+      "successText": "Повторно установите приложения на устройстве.",
+      "resetTitle": "Prepare Device",
+      "resetSteps": {
+        "first": "1. Reset your device",
+        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
+        "turnOn": "Press the button on the device to turn it on.",
+        "falsePin": "Enter three wrong PIN codes to reset the device.",
+        "turnOff": "Press and hold the side button until {{action}} is displayed.",
+        "confirmTurnOff": "Tap {{action}} to confirm.",
+        "second": "2. Boot in {{mode}} mode",
+        "boot": "Press and hold the side button until {{option}} is displayed",
+        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
+        "third": "3. Uninstall all apps",
+        "openLive": "Open the Manager in Ledger Live.",
+        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+      }
     },
     "title": "Диспетчер",
     "subtitle": "Установка или удаление приложений на устройстве",

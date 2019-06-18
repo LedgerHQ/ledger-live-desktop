@@ -214,7 +214,7 @@ class RepairModal extends PureComponent<Props, *> {
                 <div style={{ flex: 1 }} />
                 <Button onClick={onReject}>{t(`common.${error ? 'close' : 'cancel'}`)}</Button>
                 <Button
-                  onClick={selectedOption ? () => repair(selectedOption.value) : null}
+                  onClick={selectedOption ? () => repair(selectedOption.forceMCU) : null}
                   primary={!isDanger}
                   danger={isDanger}
                   isLoading={isLoading}

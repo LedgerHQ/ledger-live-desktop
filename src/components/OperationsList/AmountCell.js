@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
-import type { CryptoCurrency, Unit, Operation } from '@ledgerhq/live-common/lib/types'
+import type { Currency, Unit, Operation } from '@ledgerhq/live-common/lib/types'
 import Box from 'components/base/Box'
 import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
@@ -14,11 +14,12 @@ const Cell = styled(Box).attrs({
   alignItems: 'flex-end',
 })`
   width: 150px;
+  text-align: right;
 `
 
 type Props = {
   operation: Operation,
-  currency: CryptoCurrency,
+  currency: Currency,
   unit: Unit,
 }
 

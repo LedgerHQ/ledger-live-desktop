@@ -31,7 +31,7 @@
     "back": "Retour",
     "reset": "Réinitialiser",
     "retry": "Réessayer",
-    "range": "Range",
+    "range": "Période",
     "stop": "Arrêter",
     "close": "Fermer",
     "eastern": "Est",
@@ -42,7 +42,7 @@
     "copyAddress": "Copier",
     "copied": "Copié",
     "addressCopied": "Adresse copiée",
-    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
+    "experimentalFeature": "FONCTIONNALITÉ EXPÉRIMENTALE ACTIVE",
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
@@ -81,18 +81,18 @@
     }
   },
   "fees": {
-    "slow": "Slow",
-    "fast": "Fast"
+    "slow": "Lent",
+    "fast": "Rapide"
   },
   "sidebar": {
     "menu": "Menu",
-    "accounts": "Accounts",
+    "accounts": "Comptes",
     "manager": "Manager",
     "exchange": "Acheter des cryptos",
     "developer": "Outils de développement",
     "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
+      "title": "Nouveau",
+      "description": "Vos comptes ont été déplacés vers une nouvelle page dédiée !"
     }
   },
   "account": {
@@ -122,21 +122,21 @@
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "Comptes",
+    "noResultFound": "Aucun compte trouvé.",
     "order": {
-      "name": "Account Name",
-      "balance": "Account Balance"
+      "name": "Nom du compte",
+      "balance": "Solde du compte"
     },
     "range": {
-      "week": "week",
-      "month": "month",
-      "year": "year"
+      "week": "semaine",
+      "month": "mois",
+      "year": "année"
     },
     "contextMenu": {
-      "receive": "Receive",
-      "send": "Send",
-      "edit": "Edit Account"
+      "receive": "Recevoir",
+      "send": "Envoyer",
+      "edit": "Éditer le compte"
     }
   },
   "banners": {
@@ -173,7 +173,7 @@
     "dashboard": "Accédez au <1>Dashboard</1> sur votre appareil",
     "step1": "Connectez et déverrouillez votre <1>appareil Ledger</1>",
     "step2": "Ouvrez l’application <1><0>{{managerAppName}}</0></1> sur votre appareil",
-    "step3": "Activez <1>Ledger Manager</1> sur votre appareil"
+    "step3": "Autorisez <1>Ledger Manager</1> sur votre appareil"
   },
   "emptyState": {
     "sidebar": {
@@ -213,7 +213,7 @@
     "modal": {
       "title": "Vérification d'authenticité"
     },
-    "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
+    "deviceInBootloader": "Votre appareil est en mode Bootloader. Cliquez sur {{button}} pour le mettre à jour."
   },
   "addAccounts": {
     "title": "Ajouter des comptes",
@@ -226,8 +226,6 @@
     "connectDevice": {
       "desc": "Suivez les étapes ci-dessous pour ajouter des comptes <1><0>{{currencyName}}</0></1>"
     },
-    "accountAlreadyImportedSubtitle": "Comptes déjà présents dans le portefeuille ({{count}})",
-    "accountToImportSubtitle": "Ajouter un compte existant",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
@@ -241,7 +239,6 @@
     "successDescription": "Ajoutez davantage de comptes ou retournez au Portfolio",
     "successDescription_plural": "Ajoutez davantage de comptes ou retournez au Portfolio",
     "createNewAccount": {
-      "title": "Ajouter un nouveau compte",
       "noOperationOnLastAccount": "Impossible d’ajouter un nouveau compte avant d’avoir reçu sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> à créer n’a été trouvé."
     },
@@ -249,6 +246,20 @@
       "addMore": "Ajouter davantage",
       "add": "Ajouter un compte",
       "add_plural": "Ajouter des comptes"
+    },
+    "sections": {
+      "importable": {
+        "title": "Ajouter un compte existant"
+      },
+      "creatable": {
+        "title": "Ajouter un nouveau compte"
+      },
+      "imported": {
+        "title": "Comptes déjà présents dans le portefeuille ({{count}})"
+      },
+      "migrate": {
+        "title": "Comptes à migrer"
+      }
     }
   },
   "operationDetails": {
@@ -257,7 +268,7 @@
     "date": "Date",
     "status": "Statut",
     "confirmed": "Confirmée",
-    "failed": "Failed",
+    "failed": "Échec",
     "notConfirmed": "Non confirmée",
     "fees": "Frais",
     "noFees": "Aucun frais",
@@ -295,21 +306,40 @@
       "steps": {
         "downloadingUpdate": "Téléchargement de la mise à jour",
         "updateMCU": "Mise à jour du firmware",
+        "reset": "Prepare device",
         "osu": "Installation de l'OSU...",
         "flash-mcu": "Mise à jour du MCU...",
         "flash-bootloader": "Mise à jour du bootloader...",
         "firmware": "Mise à jour du firmware...",
-        "flash": "Preparing your device..."
+        "flash": "Préparation de votre appareil..."
       },
       "confirmIdentifier": "Vérifier l’identifiant",
       "confirmIdentifierText": "Vérifiez que l’identifiant de votre appareil est le même que l’identifiant ci-dessous. Appuyez sur le bouton droit et saisissez votre code PIN pour confirmer.",
       "identifier": "Identifiant",
       "mcuTitle": "Finaliser la mise à jour",
       "mcuFirst": "Déconnectez le câble USB de votre appareil",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
+      "mcuSecond": "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu’à ce que l’écran <1><0>{{repairProcessing}}</0></1> apparaisse",
       "mcuPin": "Veuillez patienter pendant la finalisation de la mise à jour",
+      "mcuBlueFirst": "Appuyez sur le bouton latéral pendant 10 secondes pour éteindre l'appareil. Relâchez le bouton.",
+      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware mis à jour",
-      "successText": "Veuillez réinstaller les applications sur votre appareil"
+      "successText": "Veuillez réinstaller les applications sur votre appareil",
+      "resetTitle": "Prepare Device",
+      "resetSteps": {
+        "first": "1. Réinitialiser votre appareil",
+        "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
+        "turnOn": "Appuyez sur le bouton sur l'appareil pour l'activer.",
+        "falsePin": "Entrez trois codes PIN erronés pour réinitialiser l'appareil.",
+        "turnOff": "Appuyez sur bouton latéral et maintenez le jusqu'à ce que {{action}} soit affiché.",
+        "confirmTurnOff": "Appuyez sur {{action}} pour confirmer.",
+        "second": "Démarrage en mode {{mode}}",
+        "boot": "Appuyez et maintenez le bouton latéral jusqu'à ce que {{option}} soit affiché",
+        "recoveryMode": "Appuyez sur le Mode {{mode}} . Attendez jusqu'à ce que le tableau de bord apparaisse.",
+        "third": "3. Désinstaller toutes les applications",
+        "openLive": "Ouvrez le Manager dans Ledger Live.",
+        "uninstall": "Cliquez sur l'icône de corbeille grise pour toutes les applications actuellement installées sur le {{deviceName}}. Cela permet de faire de la place pour l'installateur du firmware.",
+        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+      }
     },
     "title": "Manager",
     "subtitle": "Installer ou désinstaller des applications sur votre appareil",
@@ -351,6 +381,7 @@
         "recipientAddress": "Adresse du destinataire",
         "amount": "Montant",
         "fees": "Frais de réseau",
+        "useMax": "Maximum",
         "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
         "message": "Laisser un message (140) ",
@@ -358,8 +389,8 @@
         "ethereumGasLimit": "Limite d'essence",
         "unitPerByte": "{{unit}} par octet",
         "highFeeModal": {
-          "title": "High fees",
-          "desc": "Be careful, the transaction fees (<1><0>{{fees}}</0></1>) represent more than 10% of the amount (<3><0>{{amount}}</0></3>). Do you want to continue?"
+          "title": "Frais élevés",
+          "desc": "Attention, les frais de transaction (<1><0>{{fees}}</0></1>) représentent plus de 10% du montant (<3><0>{{amount}}</0></3>). Souhaitez-vous continuer ?"
         }
       },
       "connectDevice": {
@@ -389,11 +420,11 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
+    "asset": "Actif ",
     "price": "Price",
-    "distribution": "Distribution",
-    "amount": "Amount",
-    "value": "Value",
+    "distribution": "Répartition",
+    "amount": "Montant",
+    "value": "Valeur",
     "seeAll": "See all",
     "header": "Asset distribution ({{count}})"
   },
@@ -405,7 +436,7 @@
       "currencies": "Devises",
       "help": "Aide",
       "about": "A propos de",
-      "experimental": "Experimental features"
+      "experimental": "Fonctionnalités expérimentales"
     },
     "export": {
       "accounts": {
@@ -483,7 +514,7 @@
       "privacyDesc": "Consultez notre Politique de confidentialité pour savoir quelles données personnelles nous collectons, à quelles fins et comment nous les utilisons."
     },
     "experimental": {
-      "desc": "Try out experimental features and let us know what you think",
+      "desc": "Essayez des fonctionnalités expérimentales et faites-nous savoir ce que vous en pensez",
       "disclaimer": "These are experimental features we provide on an “as is” basis for our community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk. Your crypto assets remain secured by your Ledger hardware wallet."
     },
     "hardResetModal": {
@@ -623,8 +654,8 @@
     },
     "selectDevice": {
       "title": "Sélectionner votre appareil",
-      "usbOnly": "usb only",
-      "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
+      "usbOnly": "USB uniquement",
+      "usbOnlyTooltip": "Ledger Live desktop n'est pas compatible avec le Bluetooth"
     },
     "selectPIN": {
       "disclaimer": {
@@ -637,19 +668,19 @@
         "instructions": {
           "nano": {
             "step1": "Connectez {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
-            "step2": "Press the right button to select <1><0>{{configureAsNewDevice}}?</0></1>.",
+            "step2": "Appuyez sur le bouton droit pour sélectionner <1><0>{{configureAsNewDevice}}?</0></1>.",
             "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
             "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
-            "step2": "Press both buttons to choose <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step2": "Appuyez sur les deux boutons pour choisir <1><0>{{setUpAsNewDevice}}</0></1>.",
             "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre.",
             "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "blue": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
-            "step2": "Tap on <1><0>{{configureAsNewDevice}}</0></1>.",
+            "step2": "Appuyez sur <1><0>{{configureAsNewDevice}}</0></1>.",
             "step3": "Choisissez un code PIN de 4 à 8 chiffres."
           }
         }
@@ -659,20 +690,20 @@
         "instructions": {
           "nano": {
             "step1": "Connectez le {{productName}} à votre ordinateur. Appuyez sur les deux boutons pour commencer.",
-            "step2": "Press the left button to cancel <1><0>{{configureAsNewDevice}}?</0></1>. Then press the right button to select <3><0>{{restoreConfiguration}}?</0></3>.",
+            "step2": "Appuyez sur le bouton gauche pour annuler <1><0>{{configureAsNewDevice}}?</0></1>. Ensuite, appuyez sur le bouton droit pour sélectionner <3><0>{{restoreConfiguration}}?</0></3>.",
             "step3": "Appuyez sur le bouton gauche ou droit pour sélectionner un chiffre. Appuyez sur les deux boutons pour valider.",
             "step4": "Sélectionnez ✓ pour confirmer votre code PIN. Sélectionnez ⬅ pour supprimer un chiffre."
           },
           "nanoX": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
             "step2": "Appuyez sur les deux boutons comme indiqué sur l’écran de votre {{productName}}.",
-            "step3": "Press the left button to cancel <1><0>{{setUpAsNewDevice}}</0></1>.",
-            "step4": "Press the right button to select <1><0>{{restoreConfiguration}}</0></1>.",
+            "step3": "Appuyez sur le bouton gauche pour annuler <1><0>{{setUpAsNewDevice}}</0></1>.",
+            "step4": "Appuyez sur le bouton droit pour sélectionner <1><0>{{restoreConfiguration}}</0></1>.",
             "step5": "Choisissez un code PIN de 4 à 8 chiffres."
           },
           "blue": {
             "step1": "Connectez {{productName}} à votre ordinateur.",
-            "step2": "Tap on <1><0>{{restoreConfiguration}}</0></1>.",
+            "step2": "Appuyez sur <1><0>{{restoreConfiguration}}</0></1>.",
             "step3": "Choisissez un code PIN de 4 à 8 chiffres."
           }
         }
@@ -683,13 +714,13 @@
         "title": "Enregistrez votre phrase de récupération.",
         "desc": "Votre appareil affichera une phrase de récupération de 24 mots pour sauvegarder vos clés privés",
         "nano": {
-          "step1": "Write <1><0>{{seedWord1}}</0></1> in position 1 on a blank Recovery sheet.",
+          "step1": "Écrivez le <1><0>{{seedWord1}}</0></1> dans la position 1 sur une feuille de récupération vide.",
           "step2": "Appuyez sur le bouton droit pour continuer et notez les 24 mots.",
           "step3": "Confirmez votre phrase de récupération : sélectionnez et validez chaque mot en appuyant sur les deux boutons."
         },
         "blue": {
           "step1": "Écrivez dans le bon ordre chaque mot sur une feuille de récupération vierge.",
-          "step2": "Tap <1><0>{{seedNext}}</0></1> and write down all words until the <3><0>{{seedConfirmation}}</0></3> screen appears.",
+          "step2": "Appuyez sur <1><0>{{seedNext}}</0></1> et écrivez tous les mots jusqu'à ce que l'écran <3><0>{{seedConfirmation}}</0></3> apparaisse.",
           "step3": "Saisissez chaque mot pour confirmer votre phrase de récupération."
         }
       },
@@ -698,8 +729,8 @@
         "desc": "Saisissez la phrase de récupération enregistrée sur votre feuille de récupération",
         "nano": {
           "step1": "Choisissez la longueur de votre phrase de récupération.",
-          "step2": "Enter the first letters of <1><0>{{seedWord1}}</0></1> until suggested words appear.",
-          "step3": "Choose <1><0>{{seedWord1}}</0></1> from the suggested words by pressing both buttons.",
+          "step2": "Entrez les premières lettres de <1><0>{{seedWord1}}</0></1> jusqu'à ce que les mots suggérés apparaissent.",
+          "step3": "Choisissez <1><0>{{seedWord1}}</0></1> à partir des mots suggérés en appuyant sur les deux boutons.",
           "step4": "Répétez le processus jusqu’au dernier mot."
         },
         "blue": {
@@ -800,7 +831,7 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "Des difficultés à connecter votre appareil ?"
   },
   "errors": {
     "generic": {
@@ -815,6 +846,10 @@
       "title": "Il ne s’agit pas de la bonne application.",
       "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil."
     },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
+    },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
       "description": "Contactez l’assistance Ledger"
@@ -824,12 +859,12 @@
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Désolé, la mise à jour a échoué",
+      "description": "Veuillez réessayer ou contacter le support de Ledger"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred, so please try again"
+      "title": "Veuillez redémarrer votre appareil Ledger et réessayer",
+      "description": "Une erreur inattendue s'est produite, veuillez réessayer"
     },
     "DeviceSocketFail": {
       "description": "Veuillez essayer à nouveau"
@@ -847,8 +882,8 @@
       "description": "Veuillez essayer à nouveau"
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Oops, device disconnected",
-      "description": "The connection to the device was lost during an operation, please try again"
+      "title": "Appareil déconnecté",
+      "description": "La connexion à l'appareil a été perdue pendant une opération, veuillez réessayer"
     },
     "EnpointConfig": {
       "title": "Point de terminaison non valide",
@@ -859,8 +894,8 @@
       "description": "Essayez de définir des frais personnalisés (status: {{status}})."
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps and check if a firmware update is available before reinstalling them"
+      "title": "Mise à jour du firmware ou de l'application requise",
+      "description": "Veuillez utiliser le Manager pour désinstaller toutes les applications et vérifier si une mise à jour du firmware est disponible avant de les réinstaller"
     },
     "HardResetFail": {
       "title": "Désolé, réinitialisation impossible",
@@ -993,7 +1028,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Mise à jour de l’application requise",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "Désinstallez et réinstallez l’application {{managerAppName}} dans le Manager"
     },
     "InvalidAddress": {
       "title": "Il ne s’agit pas d’une adresse {{currencyName}} valide."

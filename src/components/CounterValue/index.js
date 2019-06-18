@@ -3,11 +3,11 @@
 import type { BigNumber } from 'bignumber.js'
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
+import type { Currency } from '@ledgerhq/live-common/lib/types'
 
 import {
   counterValueCurrencySelector,
-  currencySettingsSelector,
+  exchangeSettingsForTickerSelector,
   counterValueExchangeSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
@@ -19,7 +19,7 @@ import type { State } from 'reducers'
 
 type OwnProps = {
   // wich market to query
-  currency: CryptoCurrency,
+  currency: Currency,
 
   // when? if not given: take latest
   date?: Date,
@@ -42,7 +42,7 @@ type Props = OwnProps & {
 const mapStateToProps = (state: State, props: OwnProps) => {
   const { currency, value, date, subMagnitude } = props
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const fromExchange = currencySettingsSelector(state, { currency }).exchange
+  const fromExchange = exchangeSettingsForTickerSelector(state, { ticker: currency.ticker })
   const toExchange = counterValueExchangeSelector(state)
   const counterValue = CounterValues.calculateWithIntermediarySelector(state, {
     from: currency,
@@ -70,6 +70,7 @@ class CounterValue extends PureComponent<Props> {
     if (!value) {
       return placeholder || null
     }
+
     return (
       <FormattedVal
         val={value}

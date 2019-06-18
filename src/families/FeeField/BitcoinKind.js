@@ -2,24 +2,23 @@
 
 import React, { Component } from 'react'
 import { BigNumber } from 'bignumber.js'
-import type { Account } from '@ledgerhq/live-common/lib/types'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
-
+import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
 import type { T } from 'types/common'
-
+import { getAccountBridge } from 'bridge'
 import { FeeNotLoaded, FeeRequired } from '@ledgerhq/errors'
 import InputCurrency from 'components/base/InputCurrency'
 import Select from 'components/base/Select'
-import type { Fees } from '@ledgerhq/live-common/lib/api/Fees'
-import WithFeesAPI from '../WithFeesAPI'
+import WithFeesAPI from 'components/WithFeesAPI'
+import Box from 'components/base/Box'
 import GenericContainer from './GenericContainer'
-import Box from '../base/Box'
 
 type Props = {
   account: Account,
-  feePerByte: ?BigNumber,
-  onChange: BigNumber => void,
+  transaction: *,
+  onChange: (*) => void,
   t: T,
 }
 
@@ -70,7 +69,7 @@ class FeesField extends Component<OwnProps, State> {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { fees, feePerByte, error } = nextProps
+    const { fees, error, transaction, account } = nextProps
     let items: FeeItem[] = []
     if (fees) {
       for (const key of Object.keys(fees)) {
@@ -87,6 +86,8 @@ class FeesField extends Component<OwnProps, State> {
       }
       items = items.sort((a, b) => a.blockCount - b.blockCount)
     }
+    const bridge = getAccountBridge(account)
+    const feePerByte = bridge.getTransactionExtra(account, transaction, 'feePerByte')
     items.push(!feePerByte && !error ? notLoadedItem : customItem)
     const selectedItem =
       feePerByte && prevState.selectedItem.feePerByte.eq(feePerByte)
@@ -96,13 +97,15 @@ class FeesField extends Component<OwnProps, State> {
   }
 
   componentDidUpdate({ fees: prevFees }: OwnProps) {
-    const { feePerByte, fees, onChange } = this.props
+    const { account, transaction, fees, onChange } = this.props
+    const bridge = getAccountBridge(account)
+    const feePerByte = bridge.getTransactionExtra(account, transaction, 'feePerByte')
     const { items, isFocused } = this.state
     if (fees && fees !== prevFees && !feePerByte && !isFocused) {
       // initialize with the median
       const feePerByte = (items.find(item => item.blockCount === defaultBlockCount) || items[0])
         .feePerByte
-      onChange(feePerByte)
+      onChange(bridge.editTransactionExtra(account, transaction, 'feePerByte', feePerByte))
     }
   }
 
@@ -111,29 +114,41 @@ class FeesField extends Component<OwnProps, State> {
   }
 
   onSelectChange = selectedItem => {
-    const { onChange } = this.props
+    const { onChange, account, transaction } = this.props
+    const bridge = getAccountBridge(account)
     const patch: $Shape<State> = { selectedItem }
     if (!selectedItem.feePerByte.isZero()) {
-      onChange(selectedItem.feePerByte)
+      onChange(
+        bridge.editTransactionExtra(account, transaction, 'feePerByte', selectedItem.feePerByte),
+      )
     } else {
       const { input } = this
       if (selectedItem.feePerByte.isZero() && input.current) {
         patch.isFocused = true
         input.current.select()
-        onChange(selectedItem.feePerByte)
+        onChange(
+          bridge.editTransactionExtra(account, transaction, 'feePerByte', selectedItem.feePerByte),
+        )
       }
     }
     this.setState(patch)
   }
 
+  onChange = value => {
+    const { onChange, account, transaction } = this.props
+    const bridge = getAccountBridge(account)
+    onChange(bridge.editTransactionExtra(account, transaction, 'feePerByte', value))
+  }
+
   input = React.createRef()
 
   render() {
-    const { account, feePerByte, error, onChange, t } = this.props
+    const { account, transaction, error, t } = this.props
     const { items, selectedItem } = this.state
     const { units } = account.currency
-
     const satoshi = units[units.length - 1]
+    const bridge = getAccountBridge(account)
+    const feePerByte = bridge.getTransactionExtra(account, transaction, 'feePerByte')
 
     return (
       <GenericContainer>
@@ -151,7 +166,7 @@ class FeesField extends Component<OwnProps, State> {
             units={units}
             containerProps={{ grow: true }}
             value={feePerByte}
-            onChange={onChange}
+            onChange={this.onChange}
             onChangeFocus={this.onChangeFocus}
             loading={!feePerByte && !error}
             error={

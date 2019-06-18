@@ -1,106 +1,20 @@
 // @flow
-import React from 'react'
+import invariant from 'invariant'
 import { BigNumber } from 'bignumber.js'
 import { map } from 'rxjs/operators'
-import LRU from 'lru-cache'
-import type { Account } from '@ledgerhq/live-common/lib/types'
-import { deserializeError, NotEnoughBalance, FeeNotLoaded } from '@ledgerhq/errors'
+import { patchAccount } from '@ledgerhq/live-common/lib/reconciliation'
+import type { Transaction } from '@ledgerhq/live-common/lib/types'
+import type { CurrencyBridge, AccountBridge } from '@ledgerhq/live-common/lib/bridge/types'
+import { FeeNotLoaded, InvalidAddress, NotEnoughBalance } from '@ledgerhq/errors'
+import { makeLRUCache } from '@ledgerhq/live-common/lib/cache'
 import { fromOperationRaw, toAccountRaw, fromAccountRaw } from '@ledgerhq/live-common/lib/account'
-import FeesBitcoinKind from 'components/FeesField/BitcoinKind'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreSyncAccount from 'commands/libcoreSyncAccount'
 import libcoreSignAndBroadcast from 'commands/libcoreSignAndBroadcast'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreValidAddress from 'commands/libcoreValidAddress'
-import type { WalletBridge, EditProps } from './types'
 
-const notImplemented = new Error('LibcoreBridge: not implemented')
-
-type Transaction = {
-  amount: BigNumber,
-  feePerByte: ?BigNumber,
-  recipient: string,
-}
-
-const serializeTransaction = t => {
-  const { feePerByte } = t
-  return {
-    recipient: t.recipient,
-    amount: t.amount.toString(),
-    feePerByte: (feePerByte && feePerByte.toString()) || '0',
-  }
-}
-
-const EditFees = ({ account, onChange, value }: EditProps<Transaction>) => (
-  <FeesBitcoinKind
-    onChange={feePerByte => {
-      onChange({ ...value, feePerByte })
-    }}
-    feePerByte={value.feePerByte}
-    account={account}
-  />
-)
-
-const recipientValidLRU = LRU({ max: 100 })
-
-const isRecipientValid = (account, recipient): Promise<?Error> => {
-  const key = `${account.currency.id}_${recipient}`
-  let promise = recipientValidLRU.get(key)
-  if (promise) return promise
-  if (!recipient) return Promise.resolve(null)
-  promise = libcoreValidAddress
-    .send({
-      address: recipient,
-      currencyId: account.currency.id,
-    })
-    .toPromise()
-    .then(o => o && deserializeError(o))
-  recipientValidLRU.set(key, promise)
-  return promise
-}
-
-const feesLRU = LRU({ max: 100 })
-
-const getFeesKey = (a, t) =>
-  `${a.id}_${a.blockHeight || 0}_${t.amount.toString()}_${t.recipient}_${
-    t.feePerByte ? t.feePerByte.toString() : ''
-  }`
-
-const getFees = async (a, transaction) => {
-  await isRecipientValid(a, transaction.recipient)
-  const key = getFeesKey(a, transaction)
-  let promise = feesLRU.get(key)
-  if (promise) return promise
-
-  promise = libcoreGetFees
-    .send({
-      accountRaw: toAccountRaw({ ...a, transactions: [] }),
-      transaction: serializeTransaction(transaction),
-    })
-    .toPromise()
-    .then(r => BigNumber(r.totalFees))
-  feesLRU.set(key, promise)
-  return promise
-}
-
-const checkValidTransaction = (a, t) =>
-  !t.feePerByte
-    ? Promise.reject(new FeeNotLoaded())
-    : t.feePerByte.eq(0)
-      ? Promise.resolve(false)
-      : !t.amount
-        ? Promise.resolve(true)
-        : getFees(a, t)
-            .then(() => true)
-            .catch(e => {
-              if (e instanceof NotEnoughBalance) {
-                throw e
-              }
-              feesLRU.del(getFeesKey(a, t))
-              throw e
-            })
-
-const LibcoreBridge: WalletBridge<Transaction> = {
+export const currencyBridge: CurrencyBridge = {
   scanAccountsOnDevice(currency, devicePath) {
     return libcoreScanAccounts
       .send({
@@ -109,119 +23,258 @@ const LibcoreBridge: WalletBridge<Transaction> = {
       })
       .pipe(map(fromAccountRaw))
   },
-
-  synchronize: account =>
-    libcoreSyncAccount
-      .send({
-        rawAccount: toAccountRaw(account),
-      })
-      .pipe(
-        map(({ rawAccount, requiresCacheFlush }) => {
-          const syncedAccount = fromAccountRaw(rawAccount)
-          return account => {
-            const accountOps = account.operations
-            const syncedOps = syncedAccount.operations
-            const patch: $Shape<Account> = {
-              id: syncedAccount.id,
-              freshAddress: syncedAccount.freshAddress,
-              freshAddressPath: syncedAccount.freshAddressPath,
-              balance: syncedAccount.balance,
-              blockHeight: syncedAccount.blockHeight,
-              lastSyncDate: new Date(),
-            }
-
-            const hasChanged =
-              requiresCacheFlush ||
-              accountOps.length !== syncedOps.length || // size change, we do a full refresh for now...
-              (accountOps.length > 0 &&
-                syncedOps.length > 0 &&
-                (accountOps[0].id !== syncedOps[0].id || // if same size, only check if the last item has changed.
-                  accountOps[0].blockHeight !== syncedOps[0].blockHeight))
-
-            if (hasChanged) {
-              patch.operations = syncedAccount.operations
-              patch.pendingOperations = [] // For now, we assume a change will clean the pendings.
-            }
-
-            return {
-              ...account,
-              ...patch,
-            }
-          }
-        }),
-      ),
-
-  pullMoreOperations: () => Promise.reject(notImplemented),
-
-  // TODO we need to move to the new bridge interface that unify these two:
-  isRecipientValid: (...args) => isRecipientValid(...args).then(() => true, () => false),
-  getRecipientWarning: (...args) => isRecipientValid(...args).catch(() => null),
-
-  createTransaction: () => ({
-    amount: BigNumber(0),
-    recipient: '',
-    feePerByte: null,
-    isRBF: false,
-  }),
-
-  editTransactionAmount: (account, t, amount) => ({
-    ...t,
-    amount,
-  }),
-
-  getTransactionAmount: (a, t) => t.amount,
-
-  editTransactionRecipient: (account, t, recipient) => ({
-    ...t,
-    recipient,
-  }),
-
-  getTransactionRecipient: (a, t) => t.recipient,
-
-  EditFees,
-
-  // EditAdvancedOptions,
-
-  checkValidTransaction,
-
-  getTotalSpent: (a, t) =>
-    t.amount.isZero()
-      ? Promise.resolve(BigNumber(0))
-      : getFees(a, t)
-          .then(totalFees => t.amount.plus(totalFees || 0))
-          .catch(() => BigNumber(0)),
-
-  getMaxAmount: (a, t) =>
-    getFees(a, t)
-      .catch(() => BigNumber(0))
-      .then(totalFees => a.balance.minus(totalFees || 0)),
-
-  signAndBroadcast: (account, transaction, deviceId) =>
-    libcoreSignAndBroadcast
-      .send({
-        account: toAccountRaw({ ...account, operations: [] }),
-        transaction: serializeTransaction(transaction),
-        deviceId,
-      })
-      .pipe(
-        map(e => {
-          switch (e.type) {
-            case 'broadcasted':
-              return {
-                type: 'broadcasted',
-                operation: fromOperationRaw(e.operation, account.id),
-              }
-            default:
-              // $FlowFixMe
-              return e
-          }
-        }),
-      ),
-
-  addPendingOperation: (account, operation) => ({
-    ...account,
-    pendingOperations: [operation].concat(account.pendingOperations),
-  }),
 }
 
-export default LibcoreBridge
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// TODO: code below is not yet split per family but is a merge of all coin families.
+// how to make this scale? need to use live-common
+
+const asLibcoreTransaction = t => {
+  const obj: Transaction = {
+    recipient: t.recipient,
+    amount: t.amount ? BigNumber(t.amount).toString() : '0',
+  }
+
+  if ('useAllAmount' in t) {
+    obj.useAllAmount = t.useAllAmount
+  }
+
+  // bitcoin fields
+  if (t.feePerByte) {
+    obj.feePerByte = BigNumber(t.feePerByte).toString()
+  }
+
+  // ethereum fields
+  if (t.gasPrice) {
+    obj.gasPrice = BigNumber(t.gasPrice).toString()
+  }
+  if (t.gasLimit) {
+    obj.gasLimit = BigNumber(t.gasLimit).toString()
+  }
+
+  // xrp
+  if (t.tag) {
+    obj.tag = t.tag
+  }
+  if (t.fee) {
+    obj.fee = BigNumber(t.fee).toString()
+  }
+  return obj
+}
+
+const createTransaction = () => ({
+  recipient: '',
+  amount: undefined,
+  useAllAmount: false,
+  feePerByte: undefined,
+  gasPrice: undefined,
+  gasLimit: BigNumber(0x5208),
+  tag: undefined,
+  fee: undefined,
+})
+const feesLoaded = (a, t) => {
+  switch (a.currency.family) {
+    case 'bitcoin':
+      return !!t.feePerByte
+    case 'ethereum':
+      return !!t.gasPrice
+    case 'ripple':
+      return !!t.fee
+    default:
+      return false
+  }
+}
+const feesHashFunction = (a, t) =>
+  `${a.id}_${a.blockHeight || 0}_${(t.amount || '0').toString()}_${t.recipient}_${
+    t.feePerByte ? t.feePerByte.toString() : ''
+  }_${t.gasLimit ? t.gasLimit.toString() : ''}_${t.gasPrice ? t.gasPrice.toString() : ''}_${
+    t.fee ? t.fee.toString() : ''
+  }`
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+const startSync = (initialAccount, _observation) =>
+  libcoreSyncAccount
+    .send(toAccountRaw(initialAccount))
+    .pipe(map(raw => account => patchAccount(account, raw)))
+
+const checkValidRecipient = makeLRUCache((account, recipient) => {
+  if (!recipient)
+    return Promise.reject(new InvalidAddress('', { currencyName: account.currency.name }))
+  return libcoreValidAddress
+    .send({
+      address: recipient,
+      currencyId: account.currency.id,
+    })
+    .toPromise()
+}, (currency, recipient) => `${currency.id}_${recipient}`)
+
+/*
+const fetchTransactionNetworkInfo = async ({ currency }) => {
+  const feeItems = await getFeeItems(currency)
+  return { feeItems }
+}
+const getTransactionNetworkInfo = (account, transaction) => transaction.networkInfo
+
+const applyTransactionNetworkInfo = (account, transaction, networkInfo) => ({
+  ...transaction,
+  networkInfo,
+  feePerByte: transaction.feePerByte || networkInfo.feeItems.defaultFeePerByte,
+})
+*/
+
+// TODO do we need this concept to live here? probably will have to be moved to live-common because is crypto dependent.
+const fetchTransactionNetworkInfo = () => Promise.resolve({})
+const getTransactionNetworkInfo = () => ({})
+const applyTransactionNetworkInfo = (_account, transaction) => transaction
+
+const editTransactionAmount = (account, t, amount) => ({
+  ...t,
+  amount,
+})
+
+const getTransactionAmount = (a, t) => BigNumber(t.amount || '0')
+
+const editTransactionRecipient = (account, t, recipient) => ({
+  ...t,
+  recipient,
+})
+
+const getTransactionRecipient = (a, t) => t.recipient
+
+const editTransactionExtra = (a, t, field, value) => {
+  switch (field) {
+    case 'feePerByte':
+      invariant(
+        !value || BigNumber.isBigNumber(value),
+        "editTransactionExtra(a,t,'feePerByte',value): BigNumber value expected",
+      )
+      return { ...t, feePerByte: value }
+
+    case 'useAllAmount':
+      invariant(
+        typeof value === 'boolean',
+        "editTransactionExtra(a,t,'useAllAmount',value): boolean value expected",
+      )
+      return { ...t, useAllAmount: value }
+
+    case 'gasLimit':
+      invariant(
+        value && BigNumber.isBigNumber(value),
+        "editTransactionExtra(a,t,'gasLimit',value): BigNumber value expected",
+      )
+      return { ...t, gasLimit: value }
+
+    case 'gasPrice':
+      invariant(
+        !value || BigNumber.isBigNumber(value),
+        "editTransactionExtra(a,t,'gasPrice',value): BigNumber value expected",
+      )
+      return { ...t, gasPrice: value }
+
+    case 'fee':
+      invariant(
+        !value || BigNumber.isBigNumber(value),
+        "editTransactionExtra(a,t,'fee',value): BigNumber value expected",
+      )
+      return { ...t, fee: value }
+
+    case 'tag':
+      invariant(
+        !value || typeof value === 'number',
+        "editTransactionExtra(a,t,'tag',value): number value expected",
+      )
+      return { ...t, tag: value }
+
+    default:
+      return t
+  }
+}
+
+const getTransactionExtra = (a, t, field) => t[field] // could add more check in future
+
+const signAndBroadcast = (account, transaction, deviceId) =>
+  libcoreSignAndBroadcast
+    .send({
+      account: toAccountRaw({ ...account, operations: [] }),
+      transaction: asLibcoreTransaction(transaction),
+      deviceId,
+    })
+    .pipe(
+      map(e => {
+        switch (e.type) {
+          case 'broadcasted':
+            return {
+              type: 'broadcasted',
+              operation: fromOperationRaw(e.operation, account.id),
+            }
+          default:
+            return e
+        }
+      }),
+    )
+
+const addPendingOperation = (account, optimisticOperation) => ({
+  ...account,
+  pendingOperations: [...account.pendingOperations, optimisticOperation],
+})
+
+const getFees = makeLRUCache(async (a, t) => {
+  await checkValidRecipient(a, t.recipient)
+  const fees = await libcoreGetFees
+    .send({
+      accountRaw: toAccountRaw({ ...a, transactions: [] }),
+      transaction: asLibcoreTransaction(t),
+    })
+    .toPromise()
+
+  if (
+    // FIXME workaround for LLC-246
+    a.currency.family === 'ethereum' &&
+    !t.useAllAmount &&
+    t.amount &&
+    BigNumber(t.amount)
+      .plus(fees)
+      .isGreaterThan(a.balance)
+  ) {
+    throw new NotEnoughBalance()
+  }
+
+  return fees
+}, feesHashFunction)
+
+const checkValidTransaction = async (a, t) =>
+  !feesLoaded(a, t)
+    ? Promise.reject(new FeeNotLoaded())
+    : !t.amount
+      ? Promise.resolve(null)
+      : getFees(a, t).then(() => null)
+
+const getTotalSpent = async (a, t) =>
+  t.useAllAmount
+    ? a.balance
+    : !t.amount || BigNumber(t.amount).isZero()
+      ? Promise.resolve(BigNumber(0))
+      : getFees(a, t).then(totalFees => BigNumber(t.amount || '0').plus(totalFees || 0))
+
+const getMaxAmount = async (a, t) =>
+  getFees(a, t).then(totalFees => a.balance.minus(totalFees || 0))
+
+export const accountBridge: AccountBridge<Transaction> = {
+  startSync,
+  checkValidRecipient,
+  createTransaction,
+  fetchTransactionNetworkInfo,
+  getTransactionNetworkInfo,
+  applyTransactionNetworkInfo,
+  editTransactionAmount,
+  getTransactionAmount,
+  editTransactionRecipient,
+  getTransactionRecipient,
+  editTransactionExtra,
+  getTransactionExtra,
+  checkValidTransaction,
+  getTotalSpent,
+  getMaxAmount,
+  signAndBroadcast,
+  addPendingOperation,
+}

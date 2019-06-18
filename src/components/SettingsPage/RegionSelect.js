@@ -43,7 +43,7 @@ class RegionSelect extends PureComponent<Props> {
         <Track onUpdate event="RegionSelectChange" currentRegion={currentRegion.region} />
         <Select
           small
-          minWidth={250}
+          minWidth={260}
           onChange={this.handleChangeRegion}
           renderSelected={item => item && item.name}
           value={currentRegion}

@@ -139,6 +139,7 @@ class DashboardPage extends PureComponent<Props> {
                   accounts={accounts}
                   title={t('dashboard.recentActivity')}
                   withAccount
+                  withTokenAccounts
                 />
               )}
               <StickyBackToTop scrollUpOnMount />
@@ -153,8 +154,8 @@ class DashboardPage extends PureComponent<Props> {
 }
 // This forces only one visible top banner at a time
 export const TopBannerContainer = styled.div`
-  margin-top: -3px; //To hide the separator bar
-  z-index: 20;
+  margin-top: 8px;
+  z-index: 19;
 
   & > *:not(:first-child) {
     display: none;

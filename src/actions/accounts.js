@@ -4,14 +4,17 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 
 import db from 'helpers/db'
 
-export type AddAccount = Account => *
-export const addAccount: AddAccount = payload => ({
+export const replaceAccounts = (payload: Account[]) => ({
+  type: 'DB:REPLACE_ACCOUNTS',
+  payload,
+})
+
+export const addAccount = (payload: Account) => ({
   type: 'DB:ADD_ACCOUNT',
   payload,
 })
 
-export type RemoveAccount = Account => { type: string, payload: Account }
-export const removeAccount: RemoveAccount = payload => ({
+export const removeAccount = (payload: Account) => ({
   type: 'DB:REMOVE_ACCOUNT',
   payload,
 })

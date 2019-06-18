@@ -45,6 +45,9 @@ const Asset = styled.div`
   > :first-child {
     margin-right: 10px;
   }
+  > :nth-child(2) {
+    margin-right: 8px;
+  }
 `
 const Price = styled.div`
   width: 20%;
@@ -80,15 +83,14 @@ class Row extends PureComponent<Props, State> {
     // $FlowFixMe
     const color = currency.color || colors.live
     const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2)
-    // $FlowFixMe
-    const icon = <CryptoCurrencyIcon currency={currency} size={16} color={color} />
+    const icon = <CryptoCurrencyIcon currency={currency} size={16} />
     return (
       <Wrapper>
         <Asset>
           {icon}
-          <Text ff="Open Sans|SemiBold" color="dark" fontSize={3}>
+          <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={3}>
             {currency.name}
-          </Text>
+          </Ellipsis>
         </Asset>
         <Price>
           <IconActivity size={12} color={colors.graphite} />

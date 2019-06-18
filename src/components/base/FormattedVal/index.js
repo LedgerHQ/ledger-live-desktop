@@ -55,6 +55,7 @@ type OwnProps = {
   animateTicker?: boolean,
   disableRounding?: boolean,
   isPercent?: boolean,
+  subMagnitude?: number,
 }
 
 const mapStateToProps = (state: State, _props: OwnProps) => ({
@@ -81,6 +82,7 @@ function FormattedVal(props: Props) {
     marketIndicator,
     color,
     ellipsis,
+    subMagnitude,
     ...p
   } = props
   let { val } = props
@@ -109,6 +111,7 @@ function FormattedVal(props: Props) {
       disableRounding,
       showCode,
       locale,
+      subMagnitude
     })
   }
 
@@ -141,6 +144,10 @@ function FormattedVal(props: Props) {
       )}
     </T>
   )
+}
+
+FormattedVal.defaultProps = {
+  subMagnitude: 0,
 }
 
 export default connect(mapStateToProps)(FormattedVal)
