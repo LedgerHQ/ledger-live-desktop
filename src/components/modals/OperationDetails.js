@@ -222,12 +222,8 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                   <OpDetailsData>
                     <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
                     <Box horizontal>
-                      <Box
-                        mr={1}
-                        color="grey"
-                        style={{ lineHeight: 1.2 }}
-                      >
-                        {"≈"}
+                      <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
+                        {'≈'}
                       </Box>
                       <CounterValue
                         color="grey"
