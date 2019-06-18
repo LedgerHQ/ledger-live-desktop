@@ -90,7 +90,9 @@ class ConfettiParty extends PureComponent<{ emit: boolean }, { confettis: Array<
     const { confettis } = this.state
     return (
       <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-        {confettis.map(c => <Confetti key={c.id} {...c} />)}
+        {confettis.map(c => (
+          <Confetti key={c.id} {...c} />
+        ))}
       </div>
     )
   }

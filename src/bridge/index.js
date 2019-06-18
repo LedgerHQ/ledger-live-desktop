@@ -1,5 +1,5 @@
 // @flow
-import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { CurrencyBridge, AccountBridge } from '@ledgerhq/live-common/lib/bridge/types'
 import {
   makeMockCurrencyBridge,
@@ -35,18 +35,23 @@ export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
   }
 }
 
-export const getAccountBridge = (account: Account): AccountBridge<any> => {
-  const { type } = decodeAccountId(account.id)
+export const getAccountBridge = (
+  account: Account | TokenAccount,
+  parentAccount: ?Account,
+): AccountBridge<any> => {
+  const mainAccount = account.type === 'Account' ? account : parentAccount
+  if (!mainAccount) throw new Error('an account expected')
+  const { type } = decodeAccountId(mainAccount.id)
   if (type === 'mock') return mockAccountBridge
   if (type === 'libcore') return LibcoreBridge.accountBridge
-  switch (account.currency.family) {
+  switch (mainAccount.currency.family) {
     case 'ripple':
       return RippleJSBridge.accountBridge
     case 'ethereum':
       return EthereumJSBridge.accountBridge
     default:
       throw new CurrencyNotSupported('currency not supported', {
-        currencyName: account.currency.name,
+        currencyName: mainAccount.currency.name,
       })
   }
 }

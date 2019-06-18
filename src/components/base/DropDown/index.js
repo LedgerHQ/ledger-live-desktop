@@ -18,10 +18,13 @@ const Drop = styled(Box).attrs({
   borderRadius: 1,
   p: 2,
 })`
+  ${p => p.border && `border:1px solid ${p.theme.colors.lightFog}`};
+  max-height: 400px;
   position: absolute;
   right: 0;
   top: 100%;
   z-index: 1;
+  overflow: scroll;
 `
 
 export const DropDownItem = styled(Box).attrs({
@@ -51,6 +54,7 @@ type Props = {
   items: Array<DropDownItemType>,
   keepOpenOnChange?: boolean,
   offsetTop: number | string,
+  border?: boolean,
   onChange?: DropDownItemType => void,
   onStateChange?: Function,
   renderItem: Object => any,
@@ -115,11 +119,11 @@ class DropDown extends PureComponent<Props> {
     selectedItem: DropDownItemType,
     downshiftProps: Object,
   ) => {
-    const { offsetTop, renderItem } = this.props
+    const { offsetTop, renderItem, border } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
     return (
-      <Drop mt={offsetTop}>
+      <Drop mt={offsetTop} border={border}>
         {items.map((item, i) => {
           const { key, ...props } = item
           return (

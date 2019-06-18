@@ -126,11 +126,15 @@ class WriteSeedRestore extends PureComponent<Props, *> {
             </Box>
             {onboarding.deviceModelId === 'nanoS' ? (
               <Box shrink flow={2} m={0}>
-                {stepsNano.map(step => <OptionRow key={step.key} step={step} />)}
+                {stepsNano.map(step => (
+                  <OptionRow key={step.key} step={step} />
+                ))}
               </Box>
             ) : (
               <Box shrink flow={2} m={0}>
-                {stepsBlue.map(step => <OptionRow key={step.key} step={step} />)}
+                {stepsBlue.map(step => (
+                  <OptionRow key={step.key} step={step} />
+                ))}
               </Box>
             )}
           </Inner>

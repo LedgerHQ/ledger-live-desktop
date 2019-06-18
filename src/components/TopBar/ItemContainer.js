@@ -14,6 +14,7 @@ export default styled(Tabbable).attrs({
   horizontal: true,
   borderRadius: 1,
 })`
+  -webkit-app-region: no-drag;
   height: 40px;
   pointer-events: ${p => (p.disabled ? 'none' : 'unset')};
 

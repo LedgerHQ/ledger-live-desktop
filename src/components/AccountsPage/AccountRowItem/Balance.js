@@ -9,9 +9,10 @@ import FormattedVal from 'components/base/FormattedVal'
 class Balance extends PureComponent<{
   unit: Unit,
   balance: BigNumber,
+  disableRounding?: boolean,
 }> {
   render() {
-    const { unit, balance } = this.props
+    const { unit, balance, disableRounding } = this.props
     return (
       <Box flex="30%" justifyContent="center" fontSize={4}>
         <FormattedVal
@@ -22,7 +23,7 @@ class Balance extends PureComponent<{
           unit={unit}
           showCode
           val={balance}
-          disableRounding
+          disableRounding={disableRounding}
         />
       </Box>
     )

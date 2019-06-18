@@ -71,7 +71,9 @@ class NoDevice extends PureComponent<StepProps, *> {
               <Title>{t('onboarding.noDevice.title')}</Title>
             </Box>
             <Box pt={4} flow={4}>
-              {optionCards.map(card => <OptionFlowCard key={card.key} card={card} />)}
+              {optionCards.map(card => (
+                <OptionFlowCard key={card.key} card={card} />
+              ))}
             </Box>
           </Box>
         </GrowScroll>

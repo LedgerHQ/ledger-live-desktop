@@ -5,14 +5,18 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
+import type { Currency, TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
+import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
-import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
+import {
+  isAccountEmpty,
+  getAccountCurrency,
+  getMainAccount,
+} from '@ledgerhq/live-common/lib/account'
 import { setCountervalueFirst } from 'actions/settings'
 import {
   counterValueCurrencySelector,
-  localeSelector,
   selectedTimeRangeSelector,
   countervalueFirstSelector,
 } from 'reducers/settings'
@@ -28,14 +32,34 @@ import BalanceSummary from './BalanceSummary'
 import AccountHeader from './AccountHeader'
 import AccountHeaderActions from './AccountHeaderActions'
 import EmptyStateAccount from './EmptyStateAccount'
+import TokenList from './TokensList'
 
-const mapStateToProps = (state, props) => ({
-  account: accountSelector(state, { accountId: props.match.params.id }),
-  counterValue: counterValueCurrencySelector(state),
-  settings: localeSelector(state),
-  selectedTimeRange: selectedTimeRangeSelector(state),
-  countervalueFirst: countervalueFirstSelector(state),
-})
+const mapStateToProps = (
+  state,
+  {
+    match: {
+      params: { id, parentId },
+    },
+  },
+) => {
+  const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId })
+  let account: ?(TokenAccount | Account)
+  if (parentAccount) {
+    const { tokenAccounts } = parentAccount
+    if (tokenAccounts) {
+      account = tokenAccounts.find(t => t.id === id)
+    }
+  } else {
+    account = accountSelector(state, { accountId: id })
+  }
+  return {
+    parentAccount,
+    account,
+    counterValue: counterValueCurrencySelector(state),
+    selectedTimeRange: selectedTimeRangeSelector(state),
+    countervalueFirst: countervalueFirstSelector(state),
+  }
+}
 
 const mapDispatchToProps = {
   setCountervalueFirst,
@@ -44,7 +68,8 @@ const mapDispatchToProps = {
 type Props = {
   counterValue: Currency,
   t: T,
-  account?: Account,
+  account?: TokenAccount | Account,
+  parentAccount?: Account,
   selectedTimeRange: TimeRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
@@ -54,6 +79,7 @@ class AccountPage extends PureComponent<Props> {
   render() {
     const {
       account,
+      parentAccount,
       t,
       counterValue,
       selectedTimeRange,
@@ -61,22 +87,26 @@ class AccountPage extends PureComponent<Props> {
       setCountervalueFirst,
     } = this.props
 
-    if (!account) {
+    const mainAccount = account ? getMainAccount(account, parentAccount) : null
+    if (!account || !mainAccount) {
       return <Redirect to="/accounts" />
     }
 
+    const currency = getAccountCurrency(account)
+    const color = getCurrencyColor(currency)
+
     return (
-      <Box>
+      <Box key={account.id}>
         <TrackPage
           category="Account"
-          currency={account.currency.id}
+          currency={currency.id}
           operationsLength={account.operations.length}
         />
-        <SyncOneAccountOnMount priority={10} accountId={account.id} />
+        <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
         <Box horizontal mb={5} flow={4}>
           <AccountHeader account={account} />
-          <AccountHeaderActions account={account} />
+          <AccountHeaderActions account={account} parentAccount={parentAccount} />
         </Box>
 
         {!isAccountEmpty(account) ? (
@@ -84,7 +114,8 @@ class AccountPage extends PureComponent<Props> {
             <Box mb={7}>
               <BalanceSummary
                 account={account}
-                chartColor={account.currency.color}
+                parentAccount={parentAccount}
+                chartColor={color}
                 chartId={`account-chart-${account.id}`}
                 counterValue={counterValue}
                 range={selectedTimeRange}
@@ -92,11 +123,16 @@ class AccountPage extends PureComponent<Props> {
                 setCountervalueFirst={setCountervalueFirst}
               />
             </Box>
-            <OperationsList account={account} title={t('account.lastOperations')} />
+            <TokenList account={account} range={selectedTimeRange} />
+            <OperationsList
+              account={account}
+              parentAccount={parentAccount}
+              title={t('account.lastOperations')}
+            />
             <StickyBackToTop scrollUpOnMount />
           </>
         ) : (
-          <EmptyStateAccount account={account} />
+          <EmptyStateAccount account={account} parentAccount={parentAccount} />
         )}
       </Box>
     )

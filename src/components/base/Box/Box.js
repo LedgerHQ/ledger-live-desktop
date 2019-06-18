@@ -51,6 +51,7 @@ export default styled.div`
     `
     user-select: text;
     `};
+  right: auto;
 
   ${p =>
     p.sticky &&

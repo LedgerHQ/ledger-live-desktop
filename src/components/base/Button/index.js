@@ -159,7 +159,7 @@ function getStyles(props, state) {
   return output
 }
 
-const Base = styled.button.attrs({
+export const Base = styled.button.attrs({
   ff: 'Museo Sans|Regular',
   fontSize: p => p.fontSize || (!p.small ? 4 : 3),
   px: p => (!p.small ? 4 : 3),

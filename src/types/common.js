@@ -10,7 +10,6 @@ export type Device = {
 
 export type CurrencySettings = {
   confirmationsNb: number,
-  exchange: ?string,
 }
 
 export type CurrenciesSettings = {

@@ -16,7 +16,6 @@ import { hasAccountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
 import IconLock from 'icons/Lock'
-import IconAngleLeft from 'icons/AngleLeft'
 import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
@@ -25,6 +24,7 @@ import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
 
 import ActivityIndicator from './ActivityIndicator'
 import ItemContainer from './ItemContainer'
+import Breadcrumb from './Breadcrumb'
 
 const Container = styled(Box).attrs({
   px: 6,
@@ -43,18 +43,6 @@ const Inner = styled(Box).attrs({
   flow: 4,
   align: 'center',
 })``
-
-const BreadCrumbBack = styled(Box)`
-  flex-direction: row;
-  align-items: center;
-  font-family: 'Open Sans';
-  font-size: 13px;
-  font-weight: 600;
-  color: ${p => p.theme.colors.grey};
-  :hover {
-    color: ${p => p.theme.colors.dark};
-  }
-`
 
 const Bar = styled.div`
   margin-left: 5px;
@@ -105,29 +93,14 @@ class TopBar extends PureComponent<Props> {
     }
   }
 
-  goBack = () => this.props.history.goBack()
-
   render() {
-    const {
-      location: { pathname },
-      hasPassword,
-      hasAccounts,
-      t,
-    } = this.props
-    const showBack = pathname.startsWith('/account/')
+    const { hasPassword, hasAccounts, t } = this.props
 
     return (
       <Container bg="lightGrey" color="graphite">
         <Inner>
           <Box grow horizontal>
-            {showBack && (
-              <BreadCrumbBack onClick={this.goBack}>
-                <Box mr={1}>
-                  <IconAngleLeft size={16} />
-                </Box>
-                {t('common.back')}
-              </BreadCrumbBack>
-            )}
+            <Breadcrumb />
             <Box grow />
             <CurrenciesStatusBanner />
             {hasAccounts && (

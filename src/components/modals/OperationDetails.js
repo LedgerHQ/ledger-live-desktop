@@ -108,8 +108,8 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const mainCurrency = parentAccount
     ? parentAccount.currency
     : account && account.type === 'Account'
-      ? account.currency
-      : null
+    ? account.currency
+    : null
   const confirmationsNb = mainCurrency
     ? confirmationsNbForCurrencySelector(state, { currency: mainCurrency })
     : 0
@@ -117,7 +117,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   if (account) {
     const maybeOp = account.operations.find(op => op.id === operationId)
     if (maybeOp) operation = maybeOp
-    else if (account.type === 'Account') {
+    else {
       const maybeOpPending = account.pendingOperations.find(op => op.id === operationId)
       operation = maybeOpPending
     }
@@ -222,12 +222,8 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                   <OpDetailsData>
                     <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
                     <Box horizontal>
-                      <Box
-                        mr={1}
-                        color="grey"
-                        style={{ lineHeight: 1.2 }}
-                      >
-                        {"≈"}
+                      <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
+                        {'≈'}
                       </Box>
                       <CounterValue
                         color="grey"
@@ -256,8 +252,8 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                   {hasFailed
                     ? t('operationDetails.failed')
                     : isConfirmed
-                      ? t('operationDetails.confirmed')
-                      : t('operationDetails.notConfirmed')}
+                    ? t('operationDetails.confirmed')
+                    : t('operationDetails.notConfirmed')}
                 </Box>
                 {hasFailed ? null : <Box>{`(${confirmations})`}</Box>}
               </OpDetailsData>
@@ -360,15 +356,14 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
             </GradientHover>
           </OpDetailsData>
         ))}
-        {shouldShowMore &&
-          !showMore && (
-            <Box onClick={this.onClick} py={1}>
-              <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
-                <IconChevronRight size={12} style={{ marginRight: 5 }} />
-                {t('operationDetails.showMore', { recipients: lines.length - numToShow })}
-              </More>
-            </Box>
-          )}
+        {shouldShowMore && !showMore && (
+          <Box onClick={this.onClick} py={1}>
+            <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+              <IconChevronRight size={12} style={{ marginRight: 5 }} />
+              {t('operationDetails.showMore', { recipients: lines.length - numToShow })}
+            </More>
+          </Box>
+        )}
         {showMore &&
           lines.slice(numToShow).map(line => (
             <OpDetailsData key={line}>
@@ -378,15 +373,14 @@ export class DataList extends Component<{ lines: string[], t: T }, *> {
               </GradientHover>
             </OpDetailsData>
           ))}
-        {shouldShowMore &&
-          showMore && (
-            <Box onClick={this.onClick} py={1}>
-              <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
-                <IconChevronRight size={12} style={{ marginRight: 5 }} />
-                {t('operationDetails.showLess')}
-              </More>
-            </Box>
-          )}
+        {shouldShowMore && showMore && (
+          <Box onClick={this.onClick} py={1}>
+            <More fontSize={4} color="wallet" ff="Open Sans|SemiBold" mt={1}>
+              <IconChevronRight size={12} style={{ marginRight: 5 }} />
+              {t('operationDetails.showLess')}
+            </More>
+          </Box>
+        )}
       </Box>
     )
   }

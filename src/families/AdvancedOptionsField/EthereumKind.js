@@ -26,6 +26,9 @@ class AdvancedOptions extends PureComponent<Props, *> {
   }
 
   componentDidUpdate(nextProps: Props) {
+    if (nextProps.account.id !== this.props.account.id) {
+      this.lastRecipient = '' // changing account need resync of gas limit for token accounts
+    }
     if (nextProps.transaction !== this.props.transaction) {
       this.resync()
     }
@@ -51,21 +54,18 @@ class AdvancedOptions extends PureComponent<Props, *> {
       .then(() => true, () => false)
     if (syncId !== this.syncId) return
     if (this.isUnmounted) return
-    if (isValid && bridge.estimateGasLimit) {
-      const { estimateGasLimit } = bridge
-      let gasLimit
+    if (isValid) {
       try {
         this.setState({ loading: true })
-        gasLimit = BigNumber(await estimateGasLimit(account, recipient))
+        const t = await bridge.prepareTransaction(account, transaction)
+        if (syncId !== this.syncId) return
+        if (t !== transaction) this.props.onChange(t)
       } finally {
         if (!this.isUnmounted) this.setState({ loading: false })
       }
       if (syncId !== this.syncId) return
       if (this.isUnmounted) return
       this.lastRecipient = recipient
-      this.props.onChange(
-        bridge.editTransactionExtra(account, transaction, 'gasLimit', BigNumber(gasLimit)),
-      )
     }
   }
 

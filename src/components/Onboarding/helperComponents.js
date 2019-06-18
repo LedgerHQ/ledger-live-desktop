@@ -104,7 +104,9 @@ export function DisclaimerBox({ disclaimerNotes, ...p }: { disclaimerNotes: any 
         <DisclaimerBoxIconContainer>
           <IconSensitiveOperationShield />
         </DisclaimerBoxIconContainer>
-        {disclaimerNotes.map(note => <OptionRow justify="center" key={note.key} step={note} />)}
+        {disclaimerNotes.map(note => (
+          <OptionRow justify="center" key={note.key} step={note} />
+        ))}
       </Box>
     </DisclaimerBoxContainer>
   )

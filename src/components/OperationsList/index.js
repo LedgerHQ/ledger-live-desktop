@@ -51,7 +51,8 @@ const mapDispatchToProps = {
 }
 
 type Props = {
-  account: Account,
+  account: Account | TokenAccount,
+  parentAccount?: ?Account,
   accounts: Account[],
   openModal: (string, Object) => *,
   t: T,
@@ -93,20 +94,27 @@ export class OperationsList extends PureComponent<Props, State> {
   }
 
   render() {
-    const { account, accounts, t, title, withAccount, withTokenAccounts } = this.props
+    const {
+      account,
+      parentAccount,
+      accounts,
+      t,
+      title,
+      withAccount,
+      withTokenAccounts,
+    } = this.props
     const { nbToShow } = this.state
 
     if (!account && !accounts) {
       console.warn('Preventing render OperationsList because not received account or accounts') // eslint-disable-line no-console
       return null
     }
-    const groupedOperations = accounts
-      ? groupAccountsOperationsByDay(accounts, { count: nbToShow, withTokenAccounts })
-      : groupAccountOperationsByDay(account, { count: nbToShow, withTokenAccounts })
+    const groupedOperations = account
+      ? groupAccountOperationsByDay(account, { count: nbToShow, withTokenAccounts })
+      : groupAccountsOperationsByDay(accounts, { count: nbToShow, withTokenAccounts })
 
-    const accountsMap = accounts
-      ? keyBy(flattenAccounts(accounts), 'id')
-      : { [account.id]: account }
+    const all = flattenAccounts(accounts || []).concat([account, parentAccount].filter(Boolean))
+    const accountsMap = keyBy(all, 'id')
 
     return (
       <Box flow={4}>

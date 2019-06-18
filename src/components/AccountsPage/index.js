@@ -4,11 +4,12 @@ import React, { PureComponent, Fragment } from 'react'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { createSelector, createStructuredSelector } from 'reselect'
 import { push } from 'react-router-redux'
 import styled from 'styled-components'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
+import { flattenSortAccountsSelector } from 'actions/general'
 import UpdateBanner from 'components/Updater/Banner'
 import AccountsHeader from './AccountsHeader'
 import AccountList from './AccountList'
@@ -19,7 +20,7 @@ import EmptyState from './EmptyState'
 import { TopBannerContainer } from '../DashboardPage'
 
 type Props = {
-  accounts: Account[],
+  accounts: (Account | TokenAccount)[],
   push: Function,
   range: PortfolioRange,
   mode: *,
@@ -27,8 +28,15 @@ type Props = {
   setSelectedTimeRange: PortfolioRange => void,
 }
 
+const accountsOrFlattenAccountsSelector = createSelector(
+  accountsViewModeSelector,
+  accountsSelector,
+  flattenSortAccountsSelector,
+  (mode, accounts, flattenedAccounts) => (mode === 'card' ? flattenedAccounts : accounts),
+)
+
 const mapStateToProps = createStructuredSelector({
-  accounts: accountsSelector,
+  accounts: accountsOrFlattenAccountsSelector,
   mode: accountsViewModeSelector,
   range: selectedTimeRangeSelector,
 })
@@ -55,7 +63,10 @@ export const GenericBox = styled(Box)`
 `
 
 class AccountsPage extends PureComponent<Props> {
-  onAccountClick = account => this.props.push(`/account/${account.id}`)
+  onAccountClick = (account: Account | TokenAccount, parentAccount: ?Account) =>
+    parentAccount
+      ? this.props.push(`/account/${parentAccount.id}/${account.id}`)
+      : this.props.push(`/account/${account.id}`)
 
   render() {
     const { accounts, mode, setAccountsViewMode, setSelectedTimeRange, range } = this.props

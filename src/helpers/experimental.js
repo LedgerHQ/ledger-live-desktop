@@ -73,12 +73,11 @@ export const experimentalFeatures: Feature[] = [
     description: 'Enable pre-release apps in the Manager',
   },
   {
-    shadow: true,
     type: 'toggle',
     name: 'EXPERIMENTAL_SEND_MAX',
     title: 'Experimental Send MAX',
     description:
-      'Support using all the balance to send funds with a MAX toggle (not yet supported in ETH and XRP)',
+      'Support using all the balance to send funds with a MAX toggle (not yet supported in XRP, only in Experimental Core for ETH)',
   },
 ]
 

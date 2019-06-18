@@ -3,20 +3,23 @@
 import React, { PureComponent } from 'react'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { cryptoCurrenciesSelector } from 'reducers/accounts'
 import IconCurrencies from 'icons/Currencies'
+import IconAngleDown from 'icons/AngleDown'
 import TrackPage from 'analytics/TrackPage'
 import SelectCurrency from 'components/SelectCurrency'
+import Box from 'components/base/Box'
 import CurrencyRows from './CurrencyRows'
-
 import {
   SettingsSection as Section,
   SettingsSectionHeader as Header,
   SettingsSectionBody as Body,
-} from '../SettingsSection'
+  SettingsSectionRow as Row,
+} from '../../SettingsSection'
 
 type Props = {
   currencies: CryptoCurrency[],
@@ -25,21 +28,30 @@ type Props = {
 
 type State = {
   currency: CryptoCurrency,
+  sectionVisible: boolean,
 }
 
 const mapStateToProps = createStructuredSelector({
   currencies: cryptoCurrenciesSelector,
 })
 
-class TabCurrencies extends PureComponent<Props, State> {
+const Show = styled(Box)`
+  transform: rotate(${p => (p.visible ? 180 : 0)}deg);
+`
+
+class Currencies extends PureComponent<Props, State> {
   state = {
     currency: this.props.currencies[0],
+    sectionVisible: false,
   }
 
   handleChangeCurrency = (currency: CryptoCurrency) => this.setState({ currency })
 
+  toggleCurrencySection = () =>
+    this.setState(prevState => ({ sectionVisible: !prevState.sectionVisible }))
+
   render() {
-    const { currency } = this.state
+    const { currency, sectionVisible } = this.state
     if (!currency) return null // this case means there is no accounts
     const { t, currencies } = this.props
     return (
@@ -50,21 +62,28 @@ class TabCurrencies extends PureComponent<Props, State> {
           title={t('settings.tabs.currencies')}
           desc={t('settings.currencies.desc')}
           renderRight={
-            <SelectCurrency
-              small
-              minWidth={200}
-              value={currency}
-              onChange={this.handleChangeCurrency}
-              currencies={currencies}
-            />
+            <Show visible={sectionVisible} onClick={this.toggleCurrencySection}>
+              <IconAngleDown size={24} />
+            </Show>
           }
         />
-        <Body>
-          <CurrencyRows currency={currency} />
-        </Body>
+        {sectionVisible && (
+          <Body>
+            <Row desc={t('settings.currencies.select')}>
+              <SelectCurrency
+                small
+                minWidth={200}
+                value={currency}
+                onChange={this.handleChangeCurrency}
+                currencies={currencies}
+              />
+            </Row>
+            <CurrencyRows currency={currency} />
+          </Body>
+        )}
       </Section>
     )
   }
 }
 
-export default translate()(connect(mapStateToProps)(TabCurrencies))
+export default translate()(connect(mapStateToProps)(Currencies))

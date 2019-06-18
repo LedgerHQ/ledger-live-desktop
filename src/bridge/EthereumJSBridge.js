@@ -508,8 +508,8 @@ export const accountBridge: AccountBridge<Transaction> = {
     !t.gasPrice
       ? Promise.reject(new FeeNotLoaded())
       : t.amount.isLessThanOrEqualTo(a.balance)
-        ? Promise.resolve(null)
-        : Promise.reject(new NotEnoughBalance()),
+      ? Promise.resolve(null)
+      : Promise.reject(new NotEnoughBalance()),
 
   getTotalSpent: (a, t) =>
     t.amount.isGreaterThan(0) &&
@@ -552,17 +552,5 @@ export const accountBridge: AccountBridge<Transaction> = {
       }
     }),
 
-  addPendingOperation: (account, operation) => ({
-    ...account,
-    pendingOperations: [operation].concat(
-      account.pendingOperations.filter(
-        o => o.transactionSequenceNumber === operation.transactionSequenceNumber,
-      ),
-    ),
-  }),
-
-  estimateGasLimit: (account, address) => {
-    const api = apiForCurrency(account.currency)
-    return api.estimateGasLimitForERC20(address)
-  },
+  prepareTransaction: (a, t) => Promise.resolve(t),
 }

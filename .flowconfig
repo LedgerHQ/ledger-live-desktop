@@ -2,6 +2,7 @@
 <PROJECT_ROOT>/node_modules/bcryptjs/src/bower.json
 <PROJECT_ROOT>/node_modules/config-chain/test/broken.json
 <PROJECT_ROOT>/node_modules/npm/node_modules/config-chain/test/broken.json
+<PROJECT_ROOT>/node_modules/react-window
 
 [untyped]
 .*/node_modules/react-select
