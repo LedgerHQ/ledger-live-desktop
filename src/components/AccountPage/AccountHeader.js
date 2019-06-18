@@ -40,7 +40,7 @@ class AccountHeader extends PureComponent<Props> {
         <Box>
           <ParentCryptoCurrencyIcon
             currency={currency}
-            parentCurrency={currency.parentCurrency}
+            parentCurrency={currency.type === 'TokenAccount' ? currency.parentCurrency : undefined}
             borderColor="lightGrey"
           />
         </Box>
