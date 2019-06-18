@@ -95,9 +95,8 @@ const Tag = styled(Link)`
   font-family: 'Open Sans';
   font-weight: bold;
   font-size: 10px;
-  height: 22px;
-  line-height: 22px;
-  padding: 0 8px;
+  padding: 2px 8px;
+  min-height: 22px;
   border-radius: 4px;
   color: ${p => p.theme.colors.smoke};
   background-color: ${p => p.theme.colors.lightFog};
