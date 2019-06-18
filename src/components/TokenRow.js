@@ -55,17 +55,6 @@ const NestedRow = styled(Box)`
   &:last-of-type {
     margin-bottom: 0px;
   }
-  opacity: 0;
-  animation: fadeIn 0.1s ease both;
-  animation-delay: ${p => p.index * 0.1}s;
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 `
 
 class TokenRow extends PureComponent<Props> {
