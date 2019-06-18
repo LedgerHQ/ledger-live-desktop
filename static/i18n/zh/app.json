@@ -125,8 +125,10 @@
     "title": "Accounts",
     "noResultFound": "No accounts found.",
     "order": {
-      "name": "Account Name",
-      "balance": "Account Balance"
+      "name|asc": "Name A-Z",
+      "name|desc": "Name Z-A",
+      "balance|asc": "Lowest Balance",
+      "balance|desc": "Highest Balance"
     },
     "range": {
       "week": "week",
@@ -164,7 +166,7 @@
   },
   "currentAddress": {
     "title": "当前地址",
-    "for": "账户 <1><0>{{accountName}}</0></1> 地址",
+    "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "请验证您设备上显示的 {{currencyName}} 地址与您的 Ledger Live 上显示的地址是否匹配",
     "messageIfAccepted": "地址已确认，如果您采用复制/粘贴或扫描二维码方式，则请重新验证。",
     "messageIfSkipped": "尚未在您的 Ledger 设备上确认您的 {{currencyName}} 地址。请验证以确保最优安全性。"
@@ -215,6 +217,13 @@
     },
     "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
   },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Receive token",
+    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
+    "placeholder2": "For more information: ",
+    "link": "Manage ERC20 tokens"
+  },
   "addAccounts": {
     "title": "添加账户",
     "breadcrumb": {
@@ -249,13 +258,16 @@
     },
     "sections": {
       "importable": {
-        "title": "添加现有账户"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "添加新账户"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "账户已位于 ({{count}}) 资产组合中"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to migrate"
       }
     }
   },
@@ -351,7 +363,9 @@
     "steps": {
       "chooseAccount": {
         "title": "账户",
-        "label": "信贷账户"
+        "label": "信贷账户",
+        "parentAccount": "1. Choose {{currencyName}} Account",
+        "token": "2. Choose {{currencyName}} Token"
       },
       "connectDevice": {
         "title": "设备",
@@ -378,6 +392,7 @@
         "recipientAddress": "收件人地址",
         "amount": "金额",
         "fees": "网络费用",
+        "useMax": "use max",
         "advancedOptions": "高级选项",
         "useRBF": "使用费用替代法交易",
         "message": "留言 (140)",
@@ -429,7 +444,9 @@
     "tabs": {
       "display": "通用",
       "export": "账户",
+      "cryptoAssets": "Crypto assets",
       "currencies": "货币",
+      "rates": "Rates",
       "help": "帮助",
       "about": "关于",
       "experimental": "Experimental features"
@@ -468,11 +485,18 @@
       "stockDesc": "选择西方即以蓝色显示市场价值的增长。选择东方即以红色显示市场价值的增长。"
     },
     "currencies": {
-      "desc": "选择一种加密资产以编辑其设置。",
+      "desc": "Edit your crypto asset's settings",
+      "select": "Select a crypto asset to edit its settings.",
       "exchange": "汇率提供商 ({{ticker}} → BTC)",
       "exchangeDesc": "选择 {{currencyName}} 兑比特币汇率的提供商，以估算您的加密资产的价值 ({{ticker}} → BTC → {{fiat}}) 。",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
+    },
+    "rates": {
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "fromTo": "{{from}} to {{to}}",
+      "cryptoToFiat": "Crypto to fiat",
+      "cryptoToCrypto": "Crypto to Crypto"
     },
     "profile": {
       "password": "密码锁",
@@ -841,6 +865,10 @@
     "BtcUnmatchedApp": {
       "title": "应用程序错误",
       "description": "打开您的设备上的‘{{managerAppName}}’应用程序"
+    },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto-assets is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "可能不是正版",

@@ -125,8 +125,10 @@
     "title": "Comptes",
     "noResultFound": "Aucun compte trouvé.",
     "order": {
-      "name": "Nom du compte",
-      "balance": "Solde du compte"
+      "name|asc": "Name A-Z",
+      "name|desc": "Name Z-A",
+      "balance|asc": "Lowest Balance",
+      "balance|desc": "Highest Balance"
     },
     "range": {
       "week": "semaine",
@@ -164,7 +166,7 @@
   },
   "currentAddress": {
     "title": "Adresse actuelle",
-    "for": "Adresse pour le compte <1><0>{{accountName}}</0></1>",
+    "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Veuillez vérifier que l’adresse {{currencyName}} affichée sur Ledger Live correspond à celle indiquée sur votre appareil",
     "messageIfAccepted": "Adresse confirmée. Veuillez la revérifier si vous la copiez/collez ou si vous scannez le QR code.",
     "messageIfSkipped": "Votre adresse {{currencyName}} n’a pas été confirmée sur votre appareil Ledger. Veuillez la vérifier pour une sécurité optimale."
@@ -214,6 +216,13 @@
       "title": "Vérification d'authenticité"
     },
     "deviceInBootloader": "Votre appareil est en mode Bootloader. Cliquez sur {{button}} pour le mettre à jour."
+  },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Receive token",
+    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
+    "placeholder2": "For more information: ",
+    "link": "Manage ERC20 tokens"
   },
   "addAccounts": {
     "title": "Ajouter des comptes",
@@ -354,7 +363,9 @@
     "steps": {
       "chooseAccount": {
         "title": "Compte",
-        "label": "Compte à créditer"
+        "label": "Compte à créditer",
+        "parentAccount": "1. Choose {{currencyName}} Account",
+        "token": "2. Choose {{currencyName}} Token"
       },
       "connectDevice": {
         "title": "Appareil",
@@ -433,7 +444,9 @@
     "tabs": {
       "display": "Général",
       "export": "Comptes",
+      "cryptoAssets": "Crypto assets",
       "currencies": "Devises",
+      "rates": "Rates",
       "help": "Aide",
       "about": "A propos de",
       "experimental": "Fonctionnalités expérimentales"
@@ -472,11 +485,18 @@
       "stockDesc": "Choisissez Ouest pour afficher une augmentation de la valeur du marché en bleu ou Est pour l’afficher en rouge."
     },
     "currencies": {
-      "desc": "Sélectionnez un crypto-actif pour en modifier les paramètres.",
+      "desc": "Edit your crypto asset's settings",
+      "select": "Select a crypto asset to edit its settings.",
       "exchange": "Prestataire de change ({{ticker}} → BTC)",
       "exchangeDesc": "Choisir le fournisseur du taux de change de {{currencyName}} en Bitcoins, utilisé pour estimer la valeur de vos crypto-actifs ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Nombre de confirmations",
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
+    },
+    "rates": {
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "fromTo": "{{from}} to {{to}}",
+      "cryptoToFiat": "Crypto to fiat",
+      "cryptoToCrypto": "Crypto to Crypto"
     },
     "profile": {
       "password": "Verrouillage par mot de passe",
