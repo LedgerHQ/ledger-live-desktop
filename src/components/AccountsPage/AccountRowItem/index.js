@@ -104,15 +104,27 @@ const mapDispatchToProps = {
   openModal,
 }
 
+const expandedStates: { [key: string]: boolean } = {}
+
 class AccountRowItem extends PureComponent<Props, State> {
-  state = {
-    expanded: false,
+  constructor(props) {
+    super(props)
+    const { account, parentAccount } = this.props
+    const accountId = parentAccount ? parentAccount.id : account.id
+
+    this.state = {
+      expanded: expandedStates[accountId],
+    }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({
-      expanded: !!nextProps.search,
-    })
+  static getDerivedStateFromProps(nextProps: Props) {
+    const { account } = nextProps
+    if (account.tokenAccounts) {
+      return {
+        expanded: expandedStates[account.id] || !!nextProps.search,
+      }
+    }
+    return null
   }
 
   onClick = () => {
@@ -140,7 +152,9 @@ class AccountRowItem extends PureComponent<Props, State> {
 
   toggleAccordion = e => {
     e.stopPropagation()
-    this.setState(prevState => ({ expanded: !prevState.expanded }))
+    const { account } = this.props
+    expandedStates[account.id] = !expandedStates[account.id]
+    this.setState({ expanded: expandedStates[account.id] })
   }
 
   render() {
