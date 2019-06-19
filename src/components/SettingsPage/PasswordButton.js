@@ -53,14 +53,14 @@ class PasswordButton extends PureComponent<Props, State> {
 
   handleOpenPasswordModal = () => this.setState({ isPasswordModalOpened: true })
   handleClosePasswordModal = () => this.setState({ isPasswordModalOpened: false })
-  handleDisablePassowrd = () => this.setState({ isDisablePasswordModalOpened: true })
+  handleDisablePassword = () => this.setState({ isDisablePasswordModalOpened: true })
   handleCloseDisablePasswordModal = () => this.setState({ isDisablePasswordModalOpened: false })
 
   handleChangePasswordCheck = isChecked => {
     if (isChecked) {
       this.handleOpenPasswordModal()
     } else {
-      this.handleDisablePassowrd()
+      this.handleDisablePassword()
     }
   }
 
