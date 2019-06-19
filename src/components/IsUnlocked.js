@@ -12,6 +12,7 @@ import { i } from 'helpers/staticPath'
 import IconTriangleWarning from 'icons/TriangleWarning'
 
 import db from 'helpers/db'
+import { setPassword as setLibcorePassword } from 'helpers/libcoreEncryption'
 import { hardReset } from 'helpers/reset'
 
 import { fetchAccounts } from 'actions/accounts'
@@ -116,6 +117,7 @@ class IsUnlocked extends Component<Props, State> {
       } else if (!db.isEncryptionKeyCorrect('app', 'accounts', inputValue.password)) {
         throw new PasswordIncorrectError()
       }
+      setLibcorePassword(inputValue.password)
       unlock()
       this.setState(defaultState)
     } catch (err) {

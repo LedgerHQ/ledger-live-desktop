@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import db from 'helpers/db'
+import { changePassword as changeLibcorePassword } from 'helpers/libcoreEncryption'
 import { hasPasswordSelector } from 'reducers/settings'
 import { cleanAccountsCache } from 'actions/accounts'
 import { saveSettings } from 'actions/settings'
@@ -49,6 +50,7 @@ class PasswordButton extends PureComponent<Props, State> {
       this.props.saveSettings({ hasPassword: false })
       await db.removeEncryptionKey('app', 'accounts')
     }
+    changeLibcorePassword(password || '')
   }
 
   handleOpenPasswordModal = () => this.setState({ isPasswordModalOpened: true })
