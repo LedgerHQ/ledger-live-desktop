@@ -3,7 +3,7 @@ import memoize from 'lodash/memoize'
 import { listCryptoCurrencies as listCC } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrencyIds, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
-const supported: CryptoCurrencyIds[] = [
+export const supported: CryptoCurrencyIds[] = [
   'bitcoin',
   'ethereum',
   'ripple',

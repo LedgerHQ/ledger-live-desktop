@@ -298,9 +298,13 @@
       "all": "App catalog",
       "installing": "Installing {{app}}...",
       "uninstalling": "Uninstalling {{app}}...",
-      "installSuccess": "Successfully installed {{app}}",
+      "installSuccess": "{{app}} was successfully installed",
       "uninstallSuccess": "{{app}} uninstalled",
-      "help": "Check on your device to see which apps are already installed"
+      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "unsupportedCurrency": "{{app}} is not supported in Ledger Live. Click the button to learn how to use it",
+      "help": "Check on your device to see which apps are already installed",
+      "installed": "App installed",
+      "uninstalled": "App uninstalled"
     },
     "firmware": {
       "installed": "Firmware version {{version}}",
