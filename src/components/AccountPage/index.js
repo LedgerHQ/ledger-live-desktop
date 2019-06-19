@@ -94,6 +94,7 @@ class AccountPage extends PureComponent<Props> {
 
     const currency = getAccountCurrency(account)
     const color = getCurrencyColor(currency)
+    const hasTokenAccounts = mainAccount.tokenAccounts && mainAccount.tokenAccounts.length
 
     return (
       <Box key={account.id}>
@@ -109,7 +110,7 @@ class AccountPage extends PureComponent<Props> {
           <AccountHeaderActions account={account} parentAccount={parentAccount} />
         </Box>
 
-        {!isAccountEmpty(account) ? (
+        {!isAccountEmpty(account) || hasTokenAccounts ? (
           <>
             <Box mb={7}>
               <BalanceSummary
