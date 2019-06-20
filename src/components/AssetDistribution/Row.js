@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import { BigNumber } from 'bignumber.js'
@@ -9,9 +9,9 @@ import CounterValue from 'components/CounterValue'
 import FormattedVal from 'components/base/FormattedVal'
 import Price from 'components/Price'
 import Text from 'components/base/Text'
-import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
+import Ellipsis from 'components/base/Ellipsis'
+import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Bar from './Bar'
-import Ellipsis from '../base/Ellipsis'
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
@@ -35,7 +35,6 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     flex-direction: row;
-    border: 1 px solid red;
     box-sizing: border-box;
   }
 `
@@ -91,13 +90,24 @@ class Row extends PureComponent<Props, State> {
           </Ellipsis>
         </Asset>
         <PriceSection>
-          <Price from={currency} color="graphite" fontSize={3} />
+          {distribution ? (
+            <Price from={currency} color="graphite" fontSize={3} />
+          ) : (
+            <Text ff="Rubik" color="dark" fontSize={3}>
+              {"-"}
+            </Text>
+          )}
         </PriceSection>
         <Distribution>
-          <Text ff="Rubik" color="dark" fontSize={3}>
-            {`${percentage}%`}
-          </Text>
-          <Bar progress={percentage} progressColor={color} />
+          {
+            !!distribution &&
+            <Fragment>
+              <Text ff="Rubik" color="dark" fontSize={3}>
+                {`${percentage}%`}
+              </Text>
+              <Bar progress={percentage} progressColor={color}/>
+            </Fragment>
+          }
         </Distribution>
         <Amount>
           <Ellipsis>
@@ -112,15 +122,21 @@ class Row extends PureComponent<Props, State> {
         </Amount>
         <Value>
           <Ellipsis>
-            <CounterValue
-              currency={currency}
-              value={amount}
-              disableRounding
-              color="graphite"
-              fontSize={3}
-              showCode
-              alwaysShowSign={false}
-            />
+          {distribution ? (
+              <CounterValue
+                currency={currency}
+                value={amount}
+                disableRounding
+                color="graphite"
+                fontSize={3}
+                showCode
+                alwaysShowSign={false}
+              />
+          ) : (
+            <Text ff="Rubik" color="dark" fontSize={3}>
+              {"-"}
+            </Text>
+          )}
           </Ellipsis>
         </Value>
       </Wrapper>
