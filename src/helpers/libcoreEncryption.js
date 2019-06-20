@@ -4,9 +4,9 @@ import { setEnvUnsafe, getEnv, getAllEnvs } from '@ledgerhq/live-common/lib/env'
 import { createCustomErrorClass } from '@ledgerhq/errors'
 import libcoreChangePasswordCmd from 'commands/libcoreChangePassword'
 import libcoreGetPoolNameCmd from 'commands/libcoreGetPoolName'
+import { resetLibcore } from './reset'
 
 const LibcoreWrongPassword = createCustomErrorClass('LibcoreWrongPassword')
-const LibcorePasswordMigrationFail = createCustomErrorClass('LibcorePasswordMigrationFail')
 
 const reloadLibcore = () => {
   ipcRenderer.send('set-envs', getAllEnvs())
@@ -52,6 +52,8 @@ export const encryptionMigration = async (password: string) => {
   try {
     await changePassword(password)
   } catch (err) {
-    throw new LibcorePasswordMigrationFail()
+    // Something went wrong, let's clean up and start anew
+    setPassword(password)
+    await resetLibcore()
   }
 }

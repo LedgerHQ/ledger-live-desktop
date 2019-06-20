@@ -17,7 +17,7 @@ async function deleteSqlite() {
   await rm(sqlitePath)
 }
 
-async function resetLibcore() {
+export async function resetLibcore() {
   // we need to stop everything that is happening right now, like syncs
   await killInternalProcess
     .send()
