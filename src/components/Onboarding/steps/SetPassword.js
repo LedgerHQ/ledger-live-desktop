@@ -7,6 +7,7 @@ import { getDeviceModel } from '@ledgerhq/devices'
 import { colors } from 'styles/theme'
 
 import db from 'helpers/db'
+import { changePassword as changeLibcorePassword } from 'helpers/libcoreEncryption'
 import { saveSettings } from 'actions/settings'
 
 import Box from 'components/base/Box'
@@ -61,6 +62,7 @@ class SetPassword extends PureComponent<Props, State> {
     const { nextStep, saveSettings } = this.props
 
     await db.setEncryptionKey('app', 'accounts', newPassword)
+    await changeLibcorePassword(newPassword)
     saveSettings({ hasPassword: true })
     this.handleReset()
     nextStep()
