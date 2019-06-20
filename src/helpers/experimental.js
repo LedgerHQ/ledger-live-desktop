@@ -82,6 +82,7 @@ export const experimentalFeatures: Feature[] = [
 ]
 
 const lsKey = 'experimentalFlags'
+const lsKeyVersion = `${lsKey}_llversion`
 
 export const getLocalStorageEnvs = (): { [_: string]: any } => {
   const maybeData = window.localStorage.getItem(lsKey)
@@ -94,6 +95,11 @@ export const getLocalStorageEnvs = (): { [_: string]: any } => {
     }
   })
   return obj
+}
+
+if (window.localStorage.getItem(lsKeyVersion) !== __APP_VERSION__) {
+  window.localStorage.removeItem(lsKey)
+  window.localStorage.setItem(lsKeyVersion, __APP_VERSION__)
 }
 
 const envs = getLocalStorageEnvs()
