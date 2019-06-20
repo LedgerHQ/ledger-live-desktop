@@ -5,17 +5,16 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
-import get from 'lodash/get'
 import { getDeviceModel } from '@ledgerhq/devices'
-
-import type { Device, T } from 'types/common'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
+
+import type { Device, T } from 'types/common'
 import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 import { openURL } from 'helpers/linking'
-import { listCryptoCurrencies, supported } from 'config/cryptocurrencies'
+import { listCryptoCurrencies, isCurrencySupported } from 'config/cryptocurrencies'
 import { urls } from 'config/urls'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
@@ -61,7 +60,7 @@ const List = styled(Box).attrs({
 `
 
 const IconWrapper = styled(Box).attrs({})`
-  \position: relative;
+  position: relative;
 `
 
 const AppIcon = styled.img`
@@ -243,17 +242,12 @@ class AppsList extends PureComponent<Props, State> {
     this.handleCloseModal()
   }
 
-  getIconUrl = () => {
-    const { app } = this.state
-    const icon = app ? ICONS_FALLBACK[app.icon] || app.icon : ''
-    return `https://api.ledgerwallet.com/update/assets/icons/${icon}`
-  }
-
   renderBody = () => {
     const { t, device } = this.props
     const { app, status, error, mode, progress } = this.state
 
-    const isSupported = supported.includes(get(app, 'name', '').toLowerCase())
+    const isCurrency = app && app.currency
+    const isSupported = app && app.currency && isCurrencySupported(app.currency)
     const isInstalling = mode === 'installing'
 
     return ['busy', 'idle'].includes(status) ? (
@@ -267,9 +261,11 @@ class AppsList extends PureComponent<Props, State> {
             <Trash size={30} />
           </Box>
         )}
-        <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          {mode !== 'home' ? t(`manager.apps.${mode}`, { app: get(app, 'name', '') }) : null}
-        </Text>
+        {app ? (
+          <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+            {mode !== 'home' ? t(`manager.apps.${mode}`, { app: app.name || '' }) : null}
+          </Text>
+        ) : null}
         <Box mt={6}>
           <ProgressBar width={150} progress={progress} />
         </Box>
@@ -280,7 +276,7 @@ class AppsList extends PureComponent<Props, State> {
           category="Manager"
           name="Error Modal"
           error={error && error.name}
-          app={get(app, 'name', '')}
+          app={app ? app.name : ''}
         />
         <Box grow align="center" justify="center" mt={5}>
           <Box color="alertRed">
@@ -314,7 +310,7 @@ class AppsList extends PureComponent<Props, State> {
           <AppCheck>
             <CheckFull size={24} />
           </AppCheck>
-          <AppIcon src={this.getIconUrl()} />
+          <AppIcon src={manager.getIconUrl(app ? app.icon : '')} />
         </IconWrapper>
         <Box
           color="dark"
@@ -324,9 +320,18 @@ class AppsList extends PureComponent<Props, State> {
           textAlign="center"
           style={{ maxWidth: 350 }}
         >
-          {t(`manager.apps.${isInstalling ? 'installSuccess' : 'uninstallSuccess'}`, {
-            app: get(app, 'name', ''),
-          })}
+          {t(
+            `manager.apps.${
+              isInstalling
+                ? isSupported || !isCurrency
+                  ? 'installSuccess'
+                  : 'unsupportedSuccess'
+                : 'uninstallSuccess'
+            }`,
+            {
+              app: app ? app.name : '',
+            },
+          )}
         </Box>
         {app && app.currency && isInstalling ? (
           <Box
@@ -339,7 +344,7 @@ class AppsList extends PureComponent<Props, State> {
           >
             {t(`manager.apps.${isSupported ? 'supportedCurrency' : 'unsupportedCurrency'}`, {
               app: app.name,
-              device: get(getDeviceModel(device.modelId), 'productName', ''),
+              device: getDeviceModel(device.modelId).productName,
             })}
           </Box>
         ) : null}
@@ -353,9 +358,9 @@ class AppsList extends PureComponent<Props, State> {
 
     const isInstalling = mode === 'installing'
     const isCurrency = app && app.currency
-    const isSupported = app && supported.includes(app.name.toLowerCase())
+    const isSupported = app && app.currency && isCurrencySupported(app.currency)
 
-    return isInstalling && isCurrency && !isSupported ? (
+    return isCurrency && isInstalling && !isSupported ? (
       <Box horizontal justifyContent="flex-end" style={{ width: '100%' }}>
         <Button onClick={this.handleCloseModal}>{t('common.close')}</Button>
         <Button style={{ marginLeft: 10 }} primary onClick={this.handleLearnMore}>

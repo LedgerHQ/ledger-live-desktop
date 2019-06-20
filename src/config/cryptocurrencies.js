@@ -3,7 +3,7 @@ import memoize from 'lodash/memoize'
 import { listCryptoCurrencies as listCC } from '@ledgerhq/live-common/lib/currencies'
 import type { CryptoCurrencyIds, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 
-export const supported: CryptoCurrencyIds[] = [
+const supported: CryptoCurrencyIds[] = [
   'bitcoin',
   'ethereum',
   'ripple',
@@ -32,6 +32,8 @@ export const supported: CryptoCurrencyIds[] = [
   'bitcoin_testnet',
   'ethereum_ropsten',
 ]
+
+export const isCurrencySupported = (currency: CryptoCurrency) => supported.includes(currency.id)
 
 export const listCryptoCurrencies: (
   withDevCrypto?: boolean,
