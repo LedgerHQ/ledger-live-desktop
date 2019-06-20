@@ -1715,10 +1715,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-4.62.0.tgz#a34dddde3131778c34f2791aceff4f511e416429"
   integrity sha512-H1hiwZKVg6jF4VdozKAIJUfv1XPn/EBATO8Bm0PKzk+9IgcIbfsFjQmEZl6fIH/DMGWyXqQsOr1xIr0NZyQn8Q==
 
-"@ledgerhq/hw-app-btc@4.62.0", "@ledgerhq/hw-app-btc@^4.62.0":
-  version "4.62.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.62.0.tgz#6a4448d9ac5506b8387f5f8ab0f3a7b32457d7d6"
-  integrity sha512-5Uw54WfGk7HwMllVB8yhRdYRhv49VF1hKzFozPPASAkSD8xVWcFMSVV3GzrXW2cW4hqBml0pfM+ug/xbns+xOQ==
+"@ledgerhq/hw-app-btc@4.63.0", "@ledgerhq/hw-app-btc@^4.63.0":
+  version "4.63.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-4.63.0.tgz#0c47b1aae7d1302fa3e7c9a6cea3f8305a7be9b9"
+  integrity sha512-vd+5brBWAxaJ6Qze3H05IyR3b11L50PMsPSdxkFYuUdjVYkQhU+jjD1S0h6ovejFsLOKeruf6NbovHqGsKkjcA==
   dependencies:
     "@ledgerhq/hw-transport" "^4.62.0"
     create-hash "^1.1.3"
@@ -1800,13 +1800,13 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@6.8.0":
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-6.8.0.tgz#e22963eadc092d995d9e0edd8025bd89a33bf9dd"
-  integrity sha512-SZ+YPL08tlnZnAEw0j7x0BQssnujcZfkcwSuHLyEafMMWXxHGnHri9vIptqT0SWRsN8ZgXvGAoDd48gKiTEvHQ==
+"@ledgerhq/live-common@6.10.0":
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-6.10.0.tgz#1e0da9d50cb3c26fca927afe8e96256132dce5b0"
+  integrity sha512-TX4O9XA3FGUUhKEpqfBxDR5F1rD5cB5nKtkH2uqzKZ7Am3cHA3Y3Fjje6Pg7RplLqr67PtrxXbb8dbbPa2RGwQ==
   dependencies:
     "@ledgerhq/errors" "4.62.0"
-    "@ledgerhq/hw-app-btc" "4.62.0"
+    "@ledgerhq/hw-app-btc" "4.63.0"
     "@ledgerhq/hw-app-eth" "4.62.0"
     "@ledgerhq/hw-app-xrp" "4.62.0"
     "@ledgerhq/hw-transport" "4.62.0"
