@@ -83,7 +83,7 @@ export function BalanceSinceDiff(props: Props) {
 export function BalanceTotal(props: BalanceTotalProps) {
   const { unit, totalBalance, isAvailable, showCryptoEvenIfNotAvailable, children } = props
   return (
-    <Box grow {...props}>
+    <Box grow shrink {...props}>
       {!isAvailable && !showCryptoEvenIfNotAvailable ? (
         <PlaceholderLine width={150} />
       ) : (
