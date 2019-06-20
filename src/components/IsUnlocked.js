@@ -103,28 +103,49 @@ class IsUnlocked extends Component<Props, State> {
       incorrectPassword: null,
     }))
 
+  unlockDb = async password => {
+    const { fetchAccounts } = this.props
+    const isAccountsDecrypted = await db.hasBeenDecrypted('app', 'accounts')
+
+    if (isAccountsDecrypted) {
+      return db.isEncryptionKeyCorrect('app', 'accounts', password)
+    }
+
+    try {
+      await db.setEncryptionKey('app', 'accounts', password)
+      await fetchAccounts()
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+
+  unlockLibcore = async password => {
+    try {
+      await unlockLibcore(password)
+    } catch (err) {
+      // since we know the password is valid for db, if it fails for libcore
+      // it can be because of being from a previous version which didn't implement encryption,
+      // so let's try a migration
+      await encryptionMigration(password)
+    }
+  }
+
   handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { unlock, fetchAccounts } = this.props
-    const { inputValue } = this.state
+    const { unlock } = this.props
+    const { password } = this.state.inputValue
 
-    const isAccountsDecrypted = await db.hasBeenDecrypted('app', 'accounts')
-    try {
-      if (!isAccountsDecrypted) {
-        await db.setEncryptionKey('app', 'accounts', inputValue.password)
-        await fetchAccounts()
-      } else if (!db.isEncryptionKeyCorrect('app', 'accounts', inputValue.password)) {
-        throw new PasswordIncorrectError()
-      }
-      try {
-        await unlockLibcore(inputValue.password)
-      } catch (err) {
-        await encryptionMigration(inputValue.password)
-      }
+    const dbUnlocked = await this.unlockDb(password)
+
+    // db password is used as the only source of truth because db lock/encryption as been implemented long before libcore one,
+    // so, while we're sure the password has been set on db, libcore data can be from an older Ledger Live and not yet be encrypted
+    if (dbUnlocked) {
+      this.unlockLibcore(password)
       unlock()
       this.setState(defaultState)
-    } catch (err) {
+    } else {
       this.setState({ incorrectPassword: new PasswordIncorrectError() })
     }
   }
