@@ -17,6 +17,7 @@ import installApp from 'commands/installApp'
 import killInternalProcess from 'commands/killInternalProcess'
 import libcoreChangePassword from 'commands/libcoreChangePassword'
 import libcoreGetFees from 'commands/libcoreGetFees'
+import libcoreGetPoolName from 'commands/libcoreGetPoolName'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 import libcoreReset from 'commands/libcoreReset'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
@@ -48,6 +49,7 @@ const all: Array<Command<any, any>> = [
   killInternalProcess,
   libcoreChangePassword,
   libcoreGetFees,
+  libcoreGetPoolName,
   libcoreGetVersion,
   libcoreReset,
   libcoreScanAccounts,
