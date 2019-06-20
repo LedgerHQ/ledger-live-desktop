@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import ReactSelect from 'react-select'
+import ReactSelect, { components } from 'react-select'
 import AsyncReactSelect from 'react-select/lib/Async'
 import { translate } from 'react-i18next'
 import { FixedSizeList as List } from 'react-window'
@@ -49,10 +49,20 @@ const Row = styled.div`
 const rowHeight = 40 // Fixme We should pass this as a prop for dynamic rows?
 class MenuList extends PureComponent<*> {
   render() {
-    const { options, children, maxHeight, getValue } = this.props
+    const {
+      options,
+      children,
+      maxHeight,
+      getValue,
+      selectProps: { noOptionsMessage },
+    } = this.props
     const [value] = getValue()
     const initialOffset = options.indexOf(value) * rowHeight
     const minHeight = Math.min(...[maxHeight, rowHeight * children.length])
+
+    if (!children.length && noOptionsMessage) {
+      return <components.NoOptionsMessage {...this.props} />
+    }
 
     children.length &&
       children.map(key => {
