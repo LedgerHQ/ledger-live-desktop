@@ -65,15 +65,14 @@ class DashboardPage extends PureComponent<Props> {
     this.props.saveSettings({ selectedTimeRange: item.key })
   }
 
-  Header = ({ balanceAvailable, balanceHistory }) => (
+  Header = ({ portfolio }) => (
     <BalanceInfos
       t={this.props.t}
       unit={this.props.counterValue.units[0]}
-      isAvailable={balanceAvailable}
-      totalBalance={balanceHistory[balanceHistory.length - 1].value}
+      isAvailable={portfolio.balanceAvailable}
       since={this.props.selectedTimeRange}
-      sinceBalance={balanceHistory[0].value}
-      refBalance={balanceHistory[0].value}
+      valueChange={portfolio.countervalueChange}
+      totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}
     />
   )
 

@@ -5,15 +5,11 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { balanceHistoryWithCountervalueSelector } from 'actions/portfolio'
-import type {
-  Account,
-  TokenAccount,
-  BalanceHistoryWithCountervalue,
-} from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount, AccountPortfolio } from '@ledgerhq/live-common/lib/types'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import Box from 'components/base/Box'
+import FormattedVal from 'components/base/FormattedVal'
 import CounterValue from 'components/CounterValue'
-import DeltaChange from 'components/DeltaChange'
 import Chart from 'components/base/Chart'
 
 const Placeholder = styled.div`
@@ -21,10 +17,7 @@ const Placeholder = styled.div`
 `
 
 class Body extends PureComponent<{
-  histo: {
-    history: BalanceHistoryWithCountervalue,
-    countervalueAvailable: boolean,
-  },
+  histo: AccountPortfolio,
   account: Account | TokenAccount,
 }> {
   // $FlowFixMe
@@ -33,11 +26,9 @@ class Body extends PureComponent<{
 
   render() {
     const {
-      histo: { history, countervalueAvailable },
+      histo: { history, countervalueAvailable, countervalueChange },
       account,
     } = this.props
-    const balanceStart = history[0].countervalue
-    const balanceEnd = history[history.length - 1].countervalue
     const currency = account.type === 'Account' ? account.currency : account.token
     return (
       <Box flow={4}>
@@ -55,7 +46,14 @@ class Body extends PureComponent<{
             />
           </Box>
           <Box grow justifyContent="center">
-            <DeltaChange from={balanceStart} to={balanceEnd} alwaysShowSign fontSize={3} />
+            {!countervalueChange.percentage ? null : (
+              <FormattedVal
+                isPercent
+                val={countervalueChange.percentage.times(100).integerValue()}
+                alwaysShowSign
+                fontSize={3}
+              />
+            )}
           </Box>
         </Box>
         <Chart
