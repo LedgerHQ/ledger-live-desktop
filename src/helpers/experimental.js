@@ -79,9 +79,18 @@ export const experimentalFeatures: Feature[] = [
     description:
       'Support using all the balance to send funds with a MAX toggle (not yet supported in XRP, only in Experimental Core for ETH)',
   },
+  {
+    shadow: true, // not correct yet
+    type: 'toggle',
+    name: 'EXPERIMENTAL_ROI_CALCULATION',
+    title: 'Experimental ROI calculation',
+    description:
+      'Changes the calculation method of the portfolio percentages by assuming that receiving crypto is a buy and sending is a sell',
+  },
 ]
 
 const lsKey = 'experimentalFlags'
+const lsKeyVersion = `${lsKey}_llversion`
 
 export const getLocalStorageEnvs = (): { [_: string]: any } => {
   const maybeData = window.localStorage.getItem(lsKey)
@@ -94,6 +103,11 @@ export const getLocalStorageEnvs = (): { [_: string]: any } => {
     }
   })
   return obj
+}
+
+if (window.localStorage.getItem(lsKeyVersion) !== __APP_VERSION__) {
+  window.localStorage.removeItem(lsKey)
+  window.localStorage.setItem(lsKeyVersion, __APP_VERSION__)
 }
 
 const envs = getLocalStorageEnvs()

@@ -99,9 +99,9 @@ const feesLoaded = (a, t) => {
 const feesHashFunction = (a, t) =>
   `${a.id}_${a.blockHeight || 0}_${(t.amount || '0').toString()}_${t.recipient}_${
     t.feePerByte ? t.feePerByte.toString() : ''
-  }_${t.gasLimit ? t.gasLimit.toString() : ''}_${t.gasPrice ? t.gasPrice.toString() : ''}_${
-    t.fee ? t.fee.toString() : ''
-  }`
+  }_${t.useAllAmount ? 'sendMax' : 'noSendMax'}_${t.gasLimit ? t.gasLimit.toString() : ''}_${
+    t.gasPrice ? t.gasPrice.toString() : ''
+  }_${t.fee ? t.fee.toString() : ''}`
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 const startSync = (initialAccount, _observation) =>

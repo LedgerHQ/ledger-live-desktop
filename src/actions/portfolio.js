@@ -1,6 +1,5 @@
 // @flow
 import {
-  getBalanceHistory,
   getBalanceHistoryWithCountervalue,
   getPortfolio,
 } from '@ledgerhq/live-common/lib/portfolio'
@@ -12,17 +11,6 @@ import {
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
 import type { State } from 'reducers'
-
-export const balanceHistorySelector = (
-  state: State,
-  {
-    account,
-    range,
-  }: {
-    account: Account,
-    range: PortfolioRange,
-  },
-) => getBalanceHistory(account, range)
 
 export const balanceHistoryWithCountervalueSelector = (
   state: State,
