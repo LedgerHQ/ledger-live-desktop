@@ -12,7 +12,7 @@ import type {
   Account,
   TokenAccount,
   PortfolioRange,
-  BalanceHistoryWithCountervalue,
+  AccountPortfolio,
 } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
@@ -26,10 +26,7 @@ type Props = {
   chartId: string,
   account: Account | TokenAccount,
   parentAccount: ?Account,
-  balanceHistoryWithCountervalue: {
-    countervalueAvailable: boolean,
-    history: BalanceHistoryWithCountervalue,
-  },
+  balanceHistoryWithCountervalue: AccountPortfolio,
   range: PortfolioRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
@@ -70,7 +67,12 @@ class AccountBalanceSummary extends PureComponent<Props> {
   render() {
     const {
       account,
-      balanceHistoryWithCountervalue: { history, countervalueAvailable },
+      balanceHistoryWithCountervalue: {
+        history,
+        countervalueAvailable,
+        countervalueChange,
+        cryptoChange,
+      },
       range,
       chartColor,
       chartId,
@@ -78,8 +80,6 @@ class AccountBalanceSummary extends PureComponent<Props> {
       countervalueFirst,
       setCountervalueFirst,
     } = this.props
-    const first = history[0]
-    const last = history[history.length - 1]
     const displayCountervalue = countervalueFirst && countervalueAvailable
     return (
       <Card p={0} py={5}>
@@ -88,9 +88,10 @@ class AccountBalanceSummary extends PureComponent<Props> {
             account={account}
             counterValue={counterValue}
             selectedTimeRange={range}
+            countervalueChange={countervalueChange}
+            cryptoChange={cryptoChange}
+            last={history[history.length - 1]}
             isAvailable={countervalueAvailable}
-            first={first}
-            last={last}
             countervalueFirst={displayCountervalue}
             setCountervalueFirst={setCountervalueFirst}
           />

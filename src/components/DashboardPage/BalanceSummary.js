@@ -7,13 +7,7 @@ import { portfolioSelector } from 'actions/portfolio'
 import { BigNumber } from 'bignumber.js'
 import moment from 'moment'
 import { formatShort } from '@ledgerhq/live-common/lib/currencies'
-import type {
-  Currency,
-  Account,
-  PortfolioRange,
-  Portfolio,
-  BalanceHistory,
-} from '@ledgerhq/live-common/lib/types'
+import type { Currency, PortfolioRange, Portfolio } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
 import Box, { Card } from 'components/base/Box'
@@ -24,13 +18,9 @@ type Props = {
   counterValue: Currency,
   chartColor: string,
   chartId: string,
-  accounts: Account[],
   portfolio: Portfolio,
   range: PortfolioRange,
-  Header?: React$ComponentType<{
-    balanceAvailable: boolean,
-    balanceHistory: BalanceHistory,
-  }>,
+  Header?: React$ComponentType<{ portfolio: Portfolio }>,
 }
 
 const Tooltip = ({ counterValue, d }: *) => (
@@ -60,7 +50,7 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
       <Card p={0} py={5}>
         {Header ? (
           <Box px={6}>
-            <Header {...portfolio} />
+            <Header portfolio={portfolio} />
           </Box>
         ) : null}
 
