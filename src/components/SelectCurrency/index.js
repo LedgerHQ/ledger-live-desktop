@@ -77,7 +77,7 @@ const renderOption = ({ data: currency }: Option) => (
   <Box grow horizontal alignItems="center" flow={2}>
     <CryptoCurrencyIcon currency={currency} size={16} />
     <Box grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-      {currency.name}
+      {`${currency.name} (${currency.ticker})`}
     </Box>
   </Box>
 )

@@ -12,7 +12,6 @@ import {
   DEBUG_DB,
   DEBUG_ACTION,
   DEBUG_TAB_KEY,
-  DEBUG_LIBCORE,
   DEBUG_WS,
   DEBUG_ANALYTICS,
 } from 'config/constants'
@@ -102,7 +101,6 @@ const logCmds = !__DEV__ || DEBUG_COMMANDS
 const logDb = !__DEV__ || DEBUG_DB
 const logRedux = !__DEV__ || DEBUG_ACTION
 const logTabkey = !__DEV__ || DEBUG_TAB_KEY
-const logLibcore = !__DEV__ || DEBUG_LIBCORE
 const logWS = !__DEV__ || DEBUG_WS
 const logNetwork = !__DEV__ || DEBUG_NETWORK
 const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
@@ -183,12 +181,6 @@ export default {
   websocket: (type: string, obj?: Object) => {
     if (logWS) {
       logger.log('debug', `~ ${type}`, { ...obj, type: 'ws' })
-    }
-  },
-
-  libcore: (level: string, msg: string) => {
-    if (logLibcore) {
-      logger.log(level.toLowerCase(), `🛠  ${msg}`, { type: 'libcore' })
     }
   },
 
