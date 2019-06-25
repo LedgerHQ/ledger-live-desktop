@@ -19,13 +19,17 @@ import {
   SettingsSectionHeader as Header,
   SettingsSectionBody as Body,
 } from '../../SettingsSection'
+import { selectedTimeRangeSelector, timeRangeDaysByKey } from '../../../../reducers/settings'
+import type { TimeRange } from '../../../../reducers/settings'
 
 type Props = {
+  timeRange: TimeRange,
   pairs: { from: Currency, to: Currency, exchange: ?string }[],
   t: T,
 }
 
 const mapStateToProps = createStructuredSelector({
+  timeRange: selectedTimeRangeSelector,
   pairs: pairsSelector,
 })
 
@@ -70,7 +74,8 @@ const RateTooltip = () => (
 
 class Rates extends PureComponent<Props> {
   render() {
-    const { t, pairs } = this.props
+    const { t, pairs, timeRange } = this.props
+    const days = timeRangeDaysByKey[timeRange]
 
     return (
       <Section>
@@ -82,7 +87,7 @@ class Rates extends PureComponent<Props> {
         <Body>
           <RateRowWrapper>
             <Box ff="Open Sans|SemiBold" alignItems="center" horizontal color="dark" fontSize={4}>
-              {'Rate'}
+              <Trans i18nKey="settings.rates.rate" />
               <TooltipButtonWrapper>
                 <Tooltip render={RateTooltip}>
                   <IconInfoCircle size={12} />
@@ -90,17 +95,23 @@ class Rates extends PureComponent<Props> {
               </TooltipButtonWrapper>
             </Box>
             <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-              {'Price'}
+              <Trans i18nKey="settings.rates.rpice" />
             </Box>
             <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-              {'Last 30 days'}
+              <Trans i18nKey={`settings.rates.last`} values={{ days }} />
             </Box>
             <Box ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-              {'Exchange'}
+              <Trans i18nKey="settings.rates.exchange" />
             </Box>
           </RateRowWrapper>
           {pairs.map(({ from, to, exchange }) => (
-            <RateRow key={`${from.ticker}_${to.ticker}`} from={from} to={to} exchange={exchange} />
+            <RateRow
+              key={`${from.ticker}_${to.ticker}`}
+              timeRange={timeRange}
+              from={from}
+              to={to}
+              exchange={exchange}
+            />
           ))}
         </Body>
       </Section>

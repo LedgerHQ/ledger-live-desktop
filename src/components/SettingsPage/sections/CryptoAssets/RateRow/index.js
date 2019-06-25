@@ -12,11 +12,13 @@ import styled from 'styled-components'
 import PriceGraph from './PriceGraph'
 import Price from '../../../../Price'
 import Ellipsis from '../../../../base/Ellipsis'
+import type { TimeRange } from '../../../../../reducers/settings'
 
 type Props = {
   from: Currency,
   to: Currency,
   exchange: ?string,
+  timeRange: TimeRange,
   setExchangePairsAction: any => void,
 }
 
@@ -68,7 +70,7 @@ class RateRow extends PureComponent<Props> {
     ])
   }
   render() {
-    const { from, to, exchange } = this.props
+    const { from, to, exchange, timeRange } = this.props
     return (
       <RateRowWrapper>
         <Box ff="Museo Sans|Regular" horizontal alignItems="center" color="dark" fontSize={4}>
@@ -89,7 +91,14 @@ class RateRow extends PureComponent<Props> {
           </Ellipsis>
         </div>
         <div>
-          <PriceGraph from={from} to={to} width={150} height={40} exchange={exchange} days={30} />
+          <PriceGraph
+            timeRange={timeRange}
+            from={from}
+            to={to}
+            width={150}
+            height={40}
+            exchange={exchange}
+          />
         </div>
         <ExchangeSelect
           small
