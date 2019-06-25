@@ -94,20 +94,19 @@ class Row extends PureComponent<Props, State> {
             <Price from={currency} color="graphite" fontSize={3} />
           ) : (
             <Text ff="Rubik" color="dark" fontSize={3}>
-              {"-"}
+              {'-'}
             </Text>
           )}
         </PriceSection>
         <Distribution>
-          {
-            !!distribution &&
+          {!!distribution && (
             <Fragment>
               <Text ff="Rubik" color="dark" fontSize={3}>
                 {`${percentage}%`}
               </Text>
-              <Bar progress={percentage} progressColor={color}/>
+              <Bar progress={percentage} progressColor={color} />
             </Fragment>
-          }
+          )}
         </Distribution>
         <Amount>
           <Ellipsis>
@@ -122,7 +121,7 @@ class Row extends PureComponent<Props, State> {
         </Amount>
         <Value>
           <Ellipsis>
-          {distribution ? (
+            {distribution ? (
               <CounterValue
                 currency={currency}
                 value={amount}
@@ -132,11 +131,11 @@ class Row extends PureComponent<Props, State> {
                 showCode
                 alwaysShowSign={false}
               />
-          ) : (
-            <Text ff="Rubik" color="dark" fontSize={3}>
-              {"-"}
-            </Text>
-          )}
+            ) : (
+              <Text ff="Rubik" color="dark" fontSize={3}>
+                {'-'}
+              </Text>
+            )}
           </Ellipsis>
         </Value>
       </Wrapper>
