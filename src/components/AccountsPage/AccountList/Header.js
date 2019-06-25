@@ -3,7 +3,6 @@
 import React, { PureComponent } from 'react'
 
 import Box from 'components/base/Box'
-import Text from 'components/base/Text'
 import styled from 'styled-components'
 import SearchIcon from 'icons/Search'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
@@ -72,9 +71,9 @@ class Header extends PureComponent<Props, { focused: boolean }> {
           onChange={onTextChange}
           value={search}
         />
-        <Text color="dark" ff="Museo Sans" fontSize={6} data-e2e="dashboard_AccountCount">
+        <Box>
           <AccountsRange onRangeChange={onRangeChange} range={range} />
-        </Text>
+        </Box>
         <Box ml={4} mr={4}>
           <AccountsOrder />
         </Box>
