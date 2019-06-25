@@ -497,7 +497,11 @@
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
       "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto"
+      "cryptoToCrypto": "Crypto to Crypto",
+      "rate": "Rate",
+      "last": "Last {{days}} days",
+      "price": "Price",
+      "exchange": "Exchange"
     },
     "profile": {
       "password": "Блокировка паролем",
