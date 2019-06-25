@@ -55,7 +55,7 @@ class PriceGraph extends Component<{
     const y = d3
       .scaleLinear()
       .domain([d3.min(data, d => d.value), d3.max(data, d => d.value)])
-      .range([0, height])
+      .range([height, 0])
 
     const path = d3
       .area()
