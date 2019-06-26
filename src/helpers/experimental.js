@@ -77,7 +77,7 @@ export const experimentalFeatures: Feature[] = [
     name: 'EXPERIMENTAL_SEND_MAX',
     title: 'Experimental Send MAX',
     description:
-      'Support using all the balance to send funds with a MAX toggle (not yet supported in XRP, only in Experimental Core for ETH)',
+      'Support sending the entire account balance with a MAX toggle. XRP not yet supported.',
   },
   {
     shadow: true, // not correct yet

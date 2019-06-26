@@ -53,10 +53,6 @@ const Placeholder = styled.div`
   flex-direction: column;
   display: flex;
   padding-right: 50px;
-  > :first-child {
-    display: block;
-    margin-bottom: 10px;
-  }
 `
 
 const mapDispatchToProps = {
@@ -101,10 +97,7 @@ class TokensList extends PureComponent<Props> {
           <EmptyState>
             <Placeholder>
               <Text color="graphite" ff="Open Sans|SemiBold" fontSize={4}>
-                <Trans i18nKey={'tokensList.placeholder'} />
-              </Text>
-              <Text color="graphite" ff="Open Sans|SemiBold" fontSize={4}>
-                <Trans i18nKey={'tokensList.placeholder2'} />
+                <Trans i18nKey={'tokensList.placeholder'} />{' '}
                 <LabelWithExternalIcon
                   color="wallet"
                   ff="Open Sans|SemiBold"
