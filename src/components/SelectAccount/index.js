@@ -8,7 +8,6 @@ import {
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import Select from 'components/base/Select'
-import Text from 'components/base/Text'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import React, { useCallback } from 'react'
 import { translate } from 'react-i18next'
@@ -18,6 +17,7 @@ import { accountsSelector } from 'reducers/accounts'
 import { createStructuredSelector } from 'reselect'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
+import Ellipsis from '../base/Ellipsis'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
@@ -72,19 +72,13 @@ const AccountOption = React.memo(
     const unit = getAccountUnit(account)
     const name = account.type === 'Account' ? account.name : currency.name
 
-    // FIXME: we need a non-hacky way to handle text ellipsis
-    const nameOuterStyle = { width: 0 }
-    const nameInnerStyle = { overflow: 'hidden', textOverflow: 'ellipsis' }
-
     return (
       <Box grow horizontal alignItems="center" flow={2}>
         {!isValue && account.type === 'TokenAccount' ? tokenTick : null}
         <CryptoCurrencyIcon currency={currency} size={16} />
-        <Box grow style={nameOuterStyle} ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-          <Text style={nameInnerStyle} ff="Open Sans|SemiBold" color="dark" fontSize={4}>
-            {name}
-          </Text>
-        </Box>
+        <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={4}>
+          {name}
+        </Ellipsis>
         <Box>
           <FormattedVal color="grey" val={account.balance} unit={unit} showCode disableRounding />
         </Box>
