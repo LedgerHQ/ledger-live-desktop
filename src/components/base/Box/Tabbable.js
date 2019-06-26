@@ -9,6 +9,7 @@ import { rgba } from 'styles/helpers'
 import Box from './Box'
 
 const KEY_ENTER = 13
+const KEY_SPACE = 32
 
 export const focusedShadowStyle = `
   0 0 0 1px ${rgba('#0a84ff', 0.5)} inset,
@@ -42,7 +43,8 @@ export default class Tabbable extends Component<
   handleKeyPress = (e: SyntheticKeyboardEvent<*>) => {
     const { isFocused } = this.state
     const { onClick } = this.props
-    const canPress = e.which === KEY_ENTER && isGlobalTabEnabled() && isFocused
+    const canPress =
+      (e.which === KEY_ENTER || e.which === KEY_SPACE) && isGlobalTabEnabled() && isFocused
     if (canPress && onClick) onClick(e)
   }
 
