@@ -131,9 +131,9 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
-      "week": "semaine",
-      "month": "mois",
-      "year": "année"
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
     },
     "contextMenu": {
       "receive": "Recevoir",
@@ -221,9 +221,8 @@
   "tokensList": {
     "title": "Tokens",
     "cta": "Receive token",
-    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
-    "placeholder2": "For more information: ",
-    "link": "Manage ERC20 tokens"
+    "placeholder": "To add tokens, simply send them to your Ethereum address.",
+    "link": "Learn more"
   },
   "addAccounts": {
     "title": "Ajouter des comptes",
@@ -268,7 +267,7 @@
         "title": "Comptes déjà présents dans le portefeuille ({{count}})"
       },
       "migrate": {
-        "title": "Comptes à migrer"
+        "title": "Accounts to update"
       }
     }
   },
@@ -393,7 +392,7 @@
         "recipientAddress": "Adresse du destinataire",
         "amount": "Montant",
         "fees": "Frais de réseau",
-        "useMax": "Maximum",
+        "useMax": "Max",
         "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
         "message": "Laisser un message (140) ",
@@ -446,7 +445,7 @@
       "display": "Général",
       "export": "Comptes",
       "cryptoAssets": "Crypto assets",
-      "currencies": "Devises",
+      "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "Aide",
       "about": "A propos de",
@@ -486,7 +485,7 @@
       "stockDesc": "Choisissez Ouest pour afficher une augmentation de la valeur du marché en bleu ou Est pour l’afficher en rouge."
     },
     "currencies": {
-      "desc": "Edit your crypto asset's settings",
+      "desc": "Change settings for each of your crypto assets",
       "select": "Select a crypto asset to edit its settings.",
       "exchange": "Prestataire de change ({{ticker}} → BTC)",
       "exchangeDesc": "Choisir le fournisseur du taux de change de {{currencyName}} en Bitcoins, utilisé pour estimer la valeur de vos crypto-actifs ({{ticker}} → BTC → {{fiat}}).",
@@ -494,14 +493,14 @@
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
       "last": "Last {{days}} days",
       "price": "Price",
-      "exchange": "Exchange"
+      "exchange": "Rate provider"
     },
     "profile": {
       "password": "Verrouillage par mot de passe",
@@ -873,7 +872,7 @@
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
-      "description": "This crypto-assets is not yet supported. Please contact us."
+      "description": "This crypto asset is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
