@@ -222,7 +222,9 @@
     "title": "Tokens",
     "cta": "Receive token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
-    "link": "Learn more"
+    "link": "Learn more",
+    "seeTokens": "See tokens ({{tokenCount}})",
+    "hideTokens": "Hide tokens ({{tokenCount}})"
   },
   "addAccounts": {
     "title": "Add accounts",

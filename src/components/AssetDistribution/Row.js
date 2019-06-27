@@ -126,7 +126,7 @@ class Row extends PureComponent<Props, State> {
                 currency={currency}
                 value={amount}
                 disableRounding
-                color="graphite"
+                color="dark"
                 fontSize={3}
                 showCode
                 alwaysShowSign={false}
