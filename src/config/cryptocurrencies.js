@@ -33,6 +33,8 @@ const supported: CryptoCurrencyIds[] = [
   'ethereum_ropsten',
 ]
 
+export const isCurrencySupported = (currency: CryptoCurrency) => supported.includes(currency.id)
+
 export const listCryptoCurrencies: (
   withDevCrypto?: boolean,
   onlyTerminated?: boolean,
