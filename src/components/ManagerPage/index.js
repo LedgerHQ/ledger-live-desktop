@@ -2,11 +2,12 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import invariant from 'invariant'
+import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
+import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 import type { Device } from 'types/common'
-import type { DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
-import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 
 import Dashboard from './Dashboard'
 import ManagerGenuineCheck from './ManagerGenuineCheck'
@@ -30,7 +31,7 @@ class ManagerPage extends PureComponent<Props, State> {
   state = INITIAL_STATE
 
   componentDidMount() {
-    getFullListSortedCryptoCurrencies() // start fetching the crypto currencies ordering
+    getFullListSortedCryptoCurrencies(getEnv('MANAGER_DEV_MODE')) // start fetching the crypto currencies ordering
   }
 
   // prettier-ignore

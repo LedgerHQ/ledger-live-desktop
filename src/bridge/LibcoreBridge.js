@@ -78,7 +78,7 @@ const createTransaction = () => ({
   useAllAmount: false,
   feePerByte: undefined,
   gasPrice: undefined,
-  gasLimit: BigNumber(0x5208),
+  gasLimit: undefined,
   tag: undefined,
   fee: undefined,
   tokenAccountId: undefined,
@@ -152,6 +152,7 @@ const getTransactionAmount = (a, t) => BigNumber(t.amount || '0')
 const editTransactionRecipient = (account, t, recipient) => ({
   ...t,
   recipient,
+  gasLimit: undefined, // need recalculation
 })
 
 const getTransactionRecipient = (a, t) => t.recipient
@@ -207,7 +208,11 @@ const editTransactionExtra = (a, t, field, value) => {
 
 const getTransactionExtra = (a, t, field) => t[field] // could add more check in future
 
-const editTokenAccountId = (a, t, tokenAccountId) => ({ ...t, tokenAccountId })
+const editTokenAccountId = (a, t, tokenAccountId) => ({
+  ...t,
+  tokenAccountId,
+  gasLimit: undefined, // need recalculation
+})
 
 const getTokenAccountId = (a, t) => t.tokenAccountId
 
@@ -291,15 +296,19 @@ const getMaxAmount = async (a, t) => {
   return getFees(a, t).then(totalFees => tAccount.balance.minus(totalFees || 0))
 }
 
+const estimateGasLimitForERC20 = makeLRUCache(
+  (currency, addr) => apiForCurrency(currency).estimateGasLimitForERC20(addr),
+  (currency, addr) => `${currency.id}_${addr}`,
+)
+
 const prepareTransaction = (a, t) => {
   if (a.currency.family !== 'ethereum') return Promise.resolve(t)
-  const api = apiForCurrency(a.currency)
   const tAccount = getTransactionAccount(a, t)
-  const o =
-    tAccount.type === 'TokenAccount'
-      ? api.estimateGasLimitForERC20(tAccount.token.contractAddress)
-      : api.estimateGasLimitForERC20(t.recipient)
-  return o.then(gasLimit => ({ ...t, gasLimit: BigNumber(gasLimit) }))
+  const addr = tAccount.type === 'TokenAccount' ? tAccount.token.contractAddress : t.recipient
+  if (!addr || t.gasLimit) return Promise.resolve(t)
+  return estimateGasLimitForERC20(a.currency, addr)
+    .then(str => BigNumber(str), () => BigNumber(0x5208))
+    .then(gasLimit => (t.gasLimit && BigNumber(t.gasLimit).eq(gasLimit) ? t : { ...t, gasLimit }))
 }
 
 export const accountBridge: AccountBridge<Transaction> = {

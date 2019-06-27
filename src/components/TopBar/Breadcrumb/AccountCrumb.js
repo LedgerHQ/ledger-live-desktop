@@ -60,8 +60,12 @@ const TextLink = styled.div`
   > :first-child {
     margin-right: 8px;
   }
+  ${p => (p.shrink ? 'flex: 1;' : '')}
 
   > ${Base} {
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+    overflow: hidden;
     padding: 0px;
     &:hover,
     &:active {
@@ -72,11 +76,11 @@ const TextLink = styled.div`
   }
 `
 const AngleDown = styled.div`
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 20px;
   text-align: center;
-  line-height: 14px;
+  line-height: 16px;
 
   &:hover {
     background: ${p => p.theme.colors.fog};
@@ -199,7 +203,8 @@ class AccountCrumb extends PureComponent<Props> {
       <>
         <Separator />
         <DropDown
-          flow={1}
+          flex={1}
+          shrink={parentId ? '0' : '1'}
           offsetTop={0}
           border
           horizontal
@@ -208,7 +213,7 @@ class AccountCrumb extends PureComponent<Props> {
           onStateChange={this.onAccountSelected}
           value={processedItems.find(a => a.key === id)}
         >
-          <TextLink>
+          <TextLink {...{ shrink: !parentId }}>
             {currency && <CryptoCurrencyIcon size={14} currency={currency} />}
             <Button onClick={this.openActiveAccount}>{name}</Button>
             <AngleDown>
