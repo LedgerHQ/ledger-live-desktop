@@ -131,9 +131,9 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
-      "week": "week",
-      "month": "month",
-      "year": "year"
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
     },
     "contextMenu": {
       "receive": "Receive",
@@ -221,9 +221,8 @@
   "tokensList": {
     "title": "Tokens",
     "cta": "Receive token",
-    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
-    "placeholder2": "For more information: ",
-    "link": "Manage ERC20 tokens"
+    "placeholder": "To add tokens, simply send them to your Ethereum address.",
+    "link": "Learn more"
   },
   "addAccounts": {
     "title": "Добавить счета",
@@ -268,7 +267,7 @@
         "title": "Accounts already in portfolio ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to migrate"
+        "title": "Accounts to update"
       }
     }
   },
@@ -299,9 +298,14 @@
       "all": "Каталог приложений",
       "installing": "Установка {{app}}...",
       "uninstalling": "Удаление {{app}}...",
-      "installSuccess": "{{app}} успешно установлено",
+      "installSuccess": "{{app}} was successfully installed",
+      "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} удалено",
-      "help": "Проверьте, какие приложения уже установлены на устройстве."
+      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "unsupportedCurrency": "{{app}} is not supported in Ledger Live. Click the button to learn how to use it",
+      "help": "Проверьте, какие приложения уже установлены на устройстве.",
+      "installed": "App installed",
+      "uninstalled": "App uninstalled"
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
@@ -393,7 +397,7 @@
         "recipientAddress": "Адрес получателя",
         "amount": "Сумма",
         "fees": "Комиссия за пользование сетью",
-        "useMax": "use max",
+        "useMax": "Max",
         "advancedOptions": "Дополнительные параметры",
         "useRBF": "Использовать транзакцию Replace-by-Fee (замена с повышением комиссии)",
         "message": "Оставьте сообщение (140)",
@@ -446,7 +450,7 @@
       "display": "Общие",
       "export": "Accounts",
       "cryptoAssets": "Crypto assets",
-      "currencies": "Валюта",
+      "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "Справка",
       "about": "О программе",
@@ -486,7 +490,7 @@
       "stockDesc": "Выберите «Западный», чтобы увеличение рыночной стоимости отображалось синим цветом, или «Восточный», чтобы увеличение рыночной стоимости отображалось красным цветом."
     },
     "currencies": {
-      "desc": "Edit your crypto asset's settings",
+      "desc": "Change settings for each of your crypto assets",
       "select": "Select a crypto asset to edit its settings.",
       "exchange": "Обменник ({{ticker}} → BTC)",
       "exchangeDesc": "Выберите обменник для обмена из {{currencyName}} в биткоины, используемый для оценки ценности криптоактивов ({{ticker}} → BTC → {{fiat}}).",
@@ -494,14 +498,14 @@
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
       "last": "Last {{days}} days",
       "price": "Price",
-      "exchange": "Exchange"
+      "exchange": "Rate provider"
     },
     "profile": {
       "password": "Блокировка паролем",
@@ -873,7 +877,7 @@
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
-      "description": "This crypto-assets is not yet supported. Please contact us."
+      "description": "This crypto asset is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
