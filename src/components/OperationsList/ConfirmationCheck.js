@@ -82,7 +82,7 @@ class ConfirmationCheck extends PureComponent<{
         {...props}
       >
         {type === 'IN' ? <IconReceive size={12} /> : <IconSend size={12} />}
-        {!isConfirmed && (
+        {!isConfirmed && !hasFailed && (
           <WrapperClock>
             <IconClock size={10} />
           </WrapperClock>
