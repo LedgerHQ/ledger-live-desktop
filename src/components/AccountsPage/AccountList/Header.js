@@ -71,9 +71,7 @@ class Header extends PureComponent<Props, { focused: boolean }> {
           onChange={onTextChange}
           value={search}
         />
-        <Box>
-          <AccountsRange onRangeChange={onRangeChange} range={range} />
-        </Box>
+        <AccountsRange onRangeChange={onRangeChange} range={range} />
         <Box ml={4} mr={4}>
           <AccountsOrder />
         </Box>
