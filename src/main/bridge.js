@@ -147,6 +147,7 @@ function handleGlobalInternalMessage(payload) {
       break
     case 'setLibcoreBusy':
     case 'setDeviceBusy':
+    case 'initLibcore':
     case 'executeHttpQueryOnRenderer': {
       const win = getMainWindow && getMainWindow()
       if (!win) {

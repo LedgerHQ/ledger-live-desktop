@@ -19,6 +19,7 @@ import libcoreChangePassword from 'commands/libcoreChangePassword'
 import libcoreGetFees from 'commands/libcoreGetFees'
 import libcoreGetPoolName from 'commands/libcoreGetPoolName'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
+import libcoreInit from 'commands/libcoreInit'
 import libcoreReset from 'commands/libcoreReset'
 import libcoreScanAccounts from 'commands/libcoreScanAccounts'
 import libcoreScanFromXPUB from 'commands/libcoreScanFromXPUB'
@@ -51,6 +52,7 @@ const all: Array<Command<any, any>> = [
   libcoreGetFees,
   libcoreGetPoolName,
   libcoreGetVersion,
+  libcoreInit,
   libcoreReset,
   libcoreScanAccounts,
   libcoreScanFromXPUB,

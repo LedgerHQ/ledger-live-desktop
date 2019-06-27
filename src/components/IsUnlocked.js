@@ -12,10 +12,14 @@ import { i } from 'helpers/staticPath'
 import IconTriangleWarning from 'icons/TriangleWarning'
 
 import db from 'helpers/db'
-import { unlock as unlockLibcore, encryptionMigration } from 'helpers/libcoreEncryption'
-import { hardReset } from 'helpers/reset'
+import {
+  isUnlocked as isLibcoreUnlocked,
+  changePassword as changeLibcorePassword,
+} from 'helpers/libcoreEncryption'
+import { hardReset, resetLibcore } from 'helpers/reset'
 
 import { fetchAccounts } from 'actions/accounts'
+import { setLibcorePassword } from 'actions/libcore'
 import { isLocked, unlock } from 'reducers/application'
 
 import { PasswordIncorrectError } from '@ledgerhq/errors'
@@ -37,6 +41,7 @@ type Props = {
   isLocked: boolean,
   t: T,
   unlock: Function,
+  setLibcorePassword: Function,
 }
 type State = {
   inputValue: InputValue,
@@ -52,6 +57,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps: Object = {
   fetchAccounts,
   unlock,
+  setLibcorePassword,
 }
 
 const defaultState = {
@@ -121,13 +127,31 @@ class IsUnlocked extends Component<Props, State> {
   }
 
   unlockLibcore = async password => {
-    try {
-      await unlockLibcore(password)
-    } catch (err) {
+    const { setLibcorePassword } = this.props
+
+    await setLibcorePassword(password)
+    const unlockedWithPW = await isLibcoreUnlocked()
+
+    // Migration time!
+    if (!unlockedWithPW) {
       // since we know the password is valid for db, if it fails for libcore
       // it can be because of being from a previous version which didn't implement encryption,
-      // so let's try a migration
-      await encryptionMigration(password)
+      // so let's try without a password
+      await setLibcorePassword('')
+      // await reloadLibcore()
+      const unlockedWithoutPW = await isLibcoreUnlocked()
+
+      if (unlockedWithoutPW) {
+        // Libcore is indeed unencrypted, so let's encrypt with db password
+        await changeLibcorePassword('', password)
+        // And reload with this new password
+        await setLibcorePassword(password)
+      } else {
+        // Something is wrong, let's set the password and reset libcore, so that
+        // it creates a brand new db encrypted with the current password
+        await setLibcorePassword(password)
+        resetLibcore()
+      }
     }
   }
 

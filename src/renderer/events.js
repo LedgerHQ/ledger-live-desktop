@@ -11,7 +11,10 @@ import { CHECK_UPDATE_DELAY, DISABLE_ACTIVITY_INDICATORS } from 'config/constant
 import { onSetDeviceBusy } from 'components/DeviceBusyIndicator'
 import { onSetLibcoreBusy } from 'components/LibcoreBusyIndicator'
 
+import libcoreInitCmd from 'commands/libcoreInit'
+
 import { lock } from 'reducers/application'
+import { getLibcorePassword } from 'reducers/libcore'
 
 const d = {
   sync: debug('lwd:sync'),
@@ -34,6 +37,12 @@ export default ({ store }: { store: Object }) => {
     if (db.hasEncryptionKey('app', 'accounts')) {
       store.dispatch(lock())
     }
+  })
+
+  ipcRenderer.on('initLibcore', () => {
+    const password = getLibcorePassword(store.getState())
+
+    libcoreInitCmd.send({ password }).toPromise()
   })
 
   ipcRenderer.on('executeHttpQueryOnRenderer', (event: any, { networkArg, id }) => {

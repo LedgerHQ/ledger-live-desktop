@@ -1,19 +1,32 @@
 // @flow
-import { ipcRenderer } from 'electron'
-import { setEnvUnsafe, getEnv, getAllEnvs } from '@ledgerhq/live-common/lib/env'
-import { createCustomErrorClass } from '@ledgerhq/errors'
+import logger from 'logger'
 import libcoreChangePasswordCmd from 'commands/libcoreChangePassword'
 import libcoreGetPoolNameCmd from 'commands/libcoreGetPoolName'
-import { resetLibcore } from './reset'
+import libcoreGetVersionCmd from 'commands/libcoreGetVersion'
+import killInternalProcess from 'commands/killInternalProcess'
 
-const LibcoreWrongPassword = createCustomErrorClass('LibcoreWrongPassword')
+import { retry } from './promise'
 
-const reloadLibcore = () => {
-  ipcRenderer.send('set-envs', getAllEnvs())
+export const waitForLibcore = async () => {
+  // Tries sending the lightest query (getVersion) to libcore until it gets a response
+  // Also getVersion works even if the db password is wrong
+  await retry(async () => libcoreGetVersionCmd.send().toPromise())
+}
+
+export const reloadLibcore = async () => {
+  logger.log('reloadLibcore')
+  await killInternalProcess
+    .send()
+    .toPromise()
+    .catch(() => {}) // this is a normal error due to the crash of the process, we ignore it
+  await waitForLibcore()
 }
 
 export const isUnlocked = async () => {
   try {
+    // Libcore is running fine with a wrong db password until it tries to access said db.
+    // As even an empty Ledger Live has a pool saved in the libcore db, let's try to get its name:
+    // the query will fail if it can't open the db (because its encrypted)
     await libcoreGetPoolNameCmd.send().toPromise()
     return true
   } catch (e) {
@@ -21,39 +34,6 @@ export const isUnlocked = async () => {
   }
 }
 
-export const setPassword = (password: string) => {
-  if (password !== getEnv('LIBCORE_PASSWORD')) {
-    setEnvUnsafe('LIBCORE_PASSWORD', password)
-    reloadLibcore()
-  }
-}
-
-export const changePassword = async (newPassword: string) => {
-  const oldPassword = getEnv('LIBCORE_PASSWORD')
-
+export const changePassword = async (oldPassword: string, newPassword: string) => {
   await libcoreChangePasswordCmd.send({ oldPassword, newPassword }).toPromise()
-
-  setPassword(newPassword)
-}
-
-export const unlock = async (password: string) => {
-  setPassword(password)
-
-  const unlocked = await isUnlocked()
-
-  if (!unlocked) {
-    throw new LibcoreWrongPassword()
-  }
-}
-
-export const encryptionMigration = async (password: string) => {
-  setPassword('')
-
-  try {
-    await changePassword(password)
-  } catch (err) {
-    // Something went wrong, let's clean up and start anew
-    setPassword(password)
-    await resetLibcore()
-  }
 }

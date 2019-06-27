@@ -6,8 +6,10 @@ import { translate } from 'react-i18next'
 import type { T } from 'types/common'
 import db from 'helpers/db'
 import { changePassword as changeLibcorePassword } from 'helpers/libcoreEncryption'
+import { getLibcorePassword } from 'reducers/libcore'
 import { hasPasswordSelector } from 'reducers/settings'
 import { cleanAccountsCache } from 'actions/accounts'
+import { setLibcorePassword } from 'actions/libcore'
 import { saveSettings } from 'actions/settings'
 import Track from 'analytics/Track'
 import Switch from 'components/base/Switch'
@@ -18,17 +20,21 @@ import DisablePasswordModal from './DisablePasswordModal'
 
 const mapStateToProps = state => ({
   hasPassword: hasPasswordSelector(state),
+  curentLibcorePassword: getLibcorePassword(state),
 })
 
 const mapDispatchToProps = {
   cleanAccountsCache,
   saveSettings,
+  setLibcorePassword,
 }
 
 type Props = {
   t: T,
   saveSettings: Function,
   hasPassword: boolean,
+  curentLibcorePassword: string,
+  setLibcorePassword: Function,
 }
 
 type State = {
@@ -43,6 +49,8 @@ class PasswordButton extends PureComponent<Props, State> {
   }
 
   setPassword = async password => {
+    const { curentLibcorePassword, setLibcorePassword } = this.props
+
     if (password) {
       this.props.saveSettings({ hasPassword: true })
       await db.setEncryptionKey('app', 'accounts', password)
@@ -50,7 +58,11 @@ class PasswordButton extends PureComponent<Props, State> {
       this.props.saveSettings({ hasPassword: false })
       await db.removeEncryptionKey('app', 'accounts')
     }
-    changeLibcorePassword(password || '')
+
+    const newLibcorePassword = password || ''
+
+    await changeLibcorePassword(curentLibcorePassword, newLibcorePassword)
+    await setLibcorePassword(newLibcorePassword)
   }
 
   handleOpenPasswordModal = () => this.setState({ isPasswordModalOpened: true })

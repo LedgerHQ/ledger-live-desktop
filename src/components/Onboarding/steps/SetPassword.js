@@ -9,6 +9,7 @@ import { colors } from 'styles/theme'
 import db from 'helpers/db'
 import { changePassword as changeLibcorePassword } from 'helpers/libcoreEncryption'
 import { saveSettings } from 'actions/settings'
+import { setLibcorePassword } from 'actions/libcore'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -36,6 +37,7 @@ type State = {
 
 const mapDispatchToProps = {
   saveSettings,
+  setLibcorePassword,
 }
 
 const INITIAL_STATE = {
@@ -46,6 +48,7 @@ const INITIAL_STATE = {
 
 type Props = StepProps & {
   saveSettings: any => void,
+  setLibcorePassword: string => void,
 }
 
 class SetPassword extends PureComponent<Props, State> {
@@ -62,7 +65,8 @@ class SetPassword extends PureComponent<Props, State> {
     const { nextStep, saveSettings } = this.props
 
     await db.setEncryptionKey('app', 'accounts', newPassword)
-    await changeLibcorePassword(newPassword)
+    await changeLibcorePassword('', newPassword)
+    setLibcorePassword(newPassword)
     saveSettings({ hasPassword: true })
     this.handleReset()
     nextStep()
