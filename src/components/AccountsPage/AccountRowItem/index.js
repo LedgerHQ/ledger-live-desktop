@@ -7,6 +7,8 @@ import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/acco
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import { openModal } from 'reducers/modals'
 import { connect } from 'react-redux'
+import { Trans } from 'react-i18next'
+import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
 import Header from './Header'
 import Balance from './Balance'
@@ -64,25 +66,26 @@ const TokenContent = styled.div`
   margin-top: 20px;
 `
 
-const TokenAccountIndicator = styled.div`
-  background: #ffffff;
+const TokenShowMoreIndicator = styled.div`
+  margin: 15px -20px -16px;
+  display: flex;
+  color: ${p => p.theme.colors.wallet};
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid ${p => p.theme.colors.lightFog};
+  background: white;
   border-radius: 0px 0px 4px 4px;
-  box-shadow: 0 4px 8px 0 #00000007;
-  height: 7px;
-  margin: -18px 10px 8px 10px;
-`
-
-export const TokenShowMoreIndicator = styled.button`
-  background-color: ${p => p.color || p.theme.colors.pillActiveBackground};
-  border-radius: ${p => p.size}px;
-  border-width: 0px;
-  color: ${p => p.color || p.theme.colors.wallet};
-  height: ${p => p.size}px;
-  line-height: ${p => p.size}px;
+  height: 32px;
   text-align: center;
-  transform: ${p => (p.expanded ? 'rotate(180deg)' : 'none')};
-  width: ${p => p.size}px;
-  transition: all 0.3s linear;
+
+  &:hover ${Text} {
+    text-decoration: underline;
+  }
+
+  > :nth-child(2) {
+    margin-left: 8px;
+    transform: rotate(${p => (p.expanded ? '180deg' : '0deg')});
+  }
 `
 
 type Props = {
@@ -197,17 +200,6 @@ class AccountRowItem extends PureComponent<Props, State> {
               <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
               <Countervalue account={account} currency={currency} range={range} />
               <Delta account={account} range={range} />
-              {showTokensIndicator && !disabled ? (
-                <TokenShowMoreIndicator
-                  size={18}
-                  expanded={expanded}
-                  onClick={this.toggleAccordion}
-                >
-                  <IconAngleDown size={16} />
-                </TokenShowMoreIndicator>
-              ) : (
-                <div style={{ width: 18 }} />
-              )}
             </RowContent>
           </ContextMenuItem>
           {showTokensIndicator && expanded && (
@@ -226,8 +218,18 @@ class AccountRowItem extends PureComponent<Props, State> {
                 ))}
             </TokenContent>
           )}
+          {showTokensIndicator && !disabled && tokens && (
+            <TokenShowMoreIndicator expanded={expanded} onClick={this.toggleAccordion}>
+              <Text color="wallet" ff="Open Sans|SemiBold" fontSize={4}>
+                <Trans
+                  i18nKey={expanded ? 'tokensList.hideTokens' : 'tokensList.seeTokens'}
+                  values={{ tokenCount: tokens.length }}
+                />
+              </Text>
+              <IconAngleDown size={16} />
+            </TokenShowMoreIndicator>
+          )}
         </Row>
-        {showTokensIndicator && !expanded && <TokenAccountIndicator />}
       </Wrapper>
     )
   }

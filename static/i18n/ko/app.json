@@ -131,9 +131,9 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
-      "week": "week",
-      "month": "month",
-      "year": "year"
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
     },
     "contextMenu": {
       "receive": "Receive",
@@ -221,9 +221,8 @@
   "tokensList": {
     "title": "Tokens",
     "cta": "Receive token",
-    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
-    "placeholder2": "For more information: ",
-    "link": "Manage ERC20 tokens"
+    "placeholder": "To add tokens, simply send them to your Ethereum address.",
+    "link": "Learn more"
   },
   "addAccounts": {
     "title": "계정 추가",
@@ -268,7 +267,7 @@
         "title": "Accounts already in portfolio ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to migrate"
+        "title": "Accounts to update"
       }
     }
   },
@@ -299,9 +298,14 @@
       "all": "앱 카탈로그",
       "installing": "{{app}} 설치 중...",
       "uninstalling": "{{app}} 제거 중...",
-      "installSuccess": "{{app}}을(를) 성공적으로 설치했습니다.",
+      "installSuccess": "{{app}} was successfully installed",
+      "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} 제거됨",
-      "help": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오."
+      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "unsupportedCurrency": "{{app}} is not supported in Ledger Live. Click the button to learn how to use it",
+      "help": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오.",
+      "installed": "App installed",
+      "uninstalled": "App uninstalled"
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
@@ -393,7 +397,7 @@
         "recipientAddress": "수취인 주소",
         "amount": "금액",
         "fees": "네트워크 수수료",
-        "useMax": "use max",
+        "useMax": "Max",
         "advancedOptions": "고급 옵션",
         "useRBF": "RBF(replace-by-fee) 트랜잭션 사용",
         "message": "메시지 남기기 (140 )",
@@ -446,7 +450,7 @@
       "display": "일반",
       "export": "Accounts",
       "cryptoAssets": "Crypto assets",
-      "currencies": "통화",
+      "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "도움말",
       "about": "소개",
@@ -486,7 +490,7 @@
       "stockDesc": "Western를 선택하면 시장가액이 파란색으로 증가합니다. Eastern을 선택하면 시장가액이 빨간색으로 증가합니다."
     },
     "currencies": {
-      "desc": "Edit your crypto asset's settings",
+      "desc": "Change settings for each of your crypto assets",
       "select": "Select a crypto asset to edit its settings.",
       "exchange": "환율 공급자 ({{ticker}} → BTC)",
       "exchangeDesc": "암호화 자산 ({{ticker}} → BTC → {{fiat}})의 가치를 추정하는 데 사용되는 {{currencyName}}에서 Bitcoin으로의 환율 공급자를 선택하십시오.",
@@ -494,14 +498,14 @@
       "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
       "last": "Last {{days}} days",
       "price": "Price",
-      "exchange": "Exchange"
+      "exchange": "Rate provider"
     },
     "profile": {
       "password": "암호 잠금",
@@ -873,7 +877,7 @@
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
-      "description": "This crypto-assets is not yet supported. Please contact us."
+      "description": "This crypto asset is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "정품이 아닐 수 있습니다.",
