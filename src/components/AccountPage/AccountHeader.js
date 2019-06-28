@@ -38,11 +38,7 @@ class AccountHeader extends PureComponent<Props> {
     return (
       <Box horizontal align="center" flow={2} grow>
         <Box>
-          <ParentCryptoCurrencyIcon
-            currency={currency}
-            parentCurrency={currency.type === 'TokenAccount' ? currency.parentCurrency : undefined}
-            borderColor="lightGrey"
-          />
+          <ParentCryptoCurrencyIcon currency={currency} borderColor="lightGrey" />
         </Box>
         <Box grow>
           <CurName>{account.type === 'Account' ? currency.name : 'token'}</CurName>

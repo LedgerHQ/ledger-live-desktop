@@ -33,7 +33,7 @@ export const DropDownItem = styled(Box).attrs({
   ff: p => (p.isActive ? 'Open Sans|SemiBold' : 'Open Sans'),
   fontSize: 4,
   px: 3,
-  color: p => (p.isHighlighted || p.isActive ? 'dark' : 'warnGrey'),
+  color: p => (p.isHighlighted || p.isActive ? 'dark' : 'smoke'),
   bg: p => (p.isActive ? 'lightGrey' : ''),
 })`
   height: 40px;

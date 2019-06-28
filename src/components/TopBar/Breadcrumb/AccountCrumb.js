@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
 import { push } from 'react-router-redux'
 
+import Text from 'components/base/Text'
 import { accountsSelector } from '../../../reducers/accounts'
 import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
 import DropDown from '../../base/DropDown'
@@ -32,8 +33,6 @@ type Props = {
 }
 
 const Item = styled.div`
-  font-family: 'Open Sans';
-  font-size: 13px;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -42,6 +41,10 @@ const Item = styled.div`
   color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
   > :first-child {
     margin-right: 10px;
+  }
+
+  > ${Text} {
+    flex: 1;
   }
 
   &:hover {
@@ -89,7 +92,8 @@ const AngleDown = styled.div`
 
 const Check = styled.div`
   color: ${p => p.theme.colors.wallet};
-  flex: 1;
+  align-items: center;
+  display: flex;
   text-align: right;
   margin-left: 20px;
 `
@@ -112,7 +116,9 @@ class AccountCrumb extends PureComponent<Props> {
           size={16}
           currency={parentId ? item.account.token : item.account.currency}
         />
-        {parentId ? item.account.token.name : item.account.name}
+        <Text ff={`Open Sans|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
+          {parentId ? item.account.token.name : item.account.name}
+        </Text>
         {isActive && (
           <Check>
             <IconCheck size={14} />
