@@ -39,6 +39,7 @@ export const experimentalFeatures: Feature[] = [
       'Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.',
   },
   {
+    shadow: true, // we'll enable it later with a better implementation
     type: 'toggle',
     name: 'EXPERIMENTAL_USB',
     title: 'Experimental USB',
@@ -105,8 +106,35 @@ export const getLocalStorageEnvs = (): { [_: string]: any } => {
   return obj
 }
 
+export const enabledExperimentalFeatures = (): string[] =>
+  // $FlowFixMe
+  experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k))
+
+export const isReadOnlyEnv = (key: EnvName) => key in process.env
+
+function sendToMain() {
+  ipcRenderer.send('set-envs', getAllEnvs())
+}
+
+export const setLocalStorageEnv = (key: EnvName, val: string) => {
+  if (setEnvUnsafe(key, val)) {
+    const envs = getLocalStorageEnvs()
+    envs[key] = val
+    window.localStorage.setItem(lsKey, JSON.stringify(envs))
+    sendToMain()
+  }
+}
+
 if (window.localStorage.getItem(lsKeyVersion) !== __APP_VERSION__) {
-  window.localStorage.removeItem(lsKey)
+  const existing = getLocalStorageEnvs()
+  // we replace all existing ones by clearing those who are gone
+  const restoredEnvs = {}
+  experimentalFeatures
+    .filter(e => !e.shadow && e.name in existing && setEnvUnsafe(e.name, existing[e.name]))
+    .forEach(e => {
+      restoredEnvs[e.name] = existing[e.name]
+    })
+  window.localStorage.setItem(lsKey, JSON.stringify(restoredEnvs))
   window.localStorage.setItem(lsKeyVersion, __APP_VERSION__)
 }
 
@@ -122,27 +150,8 @@ for (const k in process.env) {
 
 sendToMain()
 
-function sendToMain() {
-  ipcRenderer.send('set-envs', getAllEnvs())
-}
-
 changes.subscribe(({ name, value }) => {
   if (experimentalFeatures.find(f => f.name === name) && !isReadOnlyEnv(name)) {
     setLocalStorageEnv(name, value)
   }
 })
-
-export const enabledExperimentalFeatures = (): string[] =>
-  // $FlowFixMe
-  experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k))
-
-export const isReadOnlyEnv = (key: EnvName) => key in process.env
-
-export const setLocalStorageEnv = (key: EnvName, val: string) => {
-  if (setEnvUnsafe(key, val)) {
-    const envs = getLocalStorageEnvs()
-    envs[key] = val
-    window.localStorage.setItem(lsKey, JSON.stringify(envs))
-    sendToMain()
-  }
-}
