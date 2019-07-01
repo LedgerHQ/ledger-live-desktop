@@ -30,7 +30,6 @@ const cmd: Command<Input, Result> = createCommand('main:autoUpdate', () =>
         sendStatus('check-success')
       } catch (err) {
         logger.critical(err)
-        // don't throw if the check fail for now. it's a blank bullet.
         if (UPDATE_CHECK_IGNORE) {
           sendStatus('check-success')
         } else {

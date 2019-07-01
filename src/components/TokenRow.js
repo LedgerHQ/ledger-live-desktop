@@ -80,7 +80,6 @@ class TokenRow extends PureComponent<Props> {
         <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
         <Countervalue account={account} currency={token} range={range} />
         <Delta account={account} range={range} />
-        <div style={{ width: 18 }} />
       </Row>
     )
   }

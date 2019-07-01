@@ -93,7 +93,7 @@ export const EXPERIMENTAL_MARKET_INDICATOR_SETTINGS = boolFromEnv(
 
 // Auto update
 
-export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_CHECK_IGNORE', true)
+export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_CHECK_IGNORE', false)
 export const UPDATE_CHECK_FEED = stringFromEnv(
   'UPDATE_CHECK_FEED',
   'http://resources.live.ledger.app/public_resources/signatures',
