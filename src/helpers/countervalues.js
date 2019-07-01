@@ -1,7 +1,7 @@
 // @flow
 
 import { createSelector } from 'reselect'
-import createCounterValues from '@ledgerhq/live-common/lib/countervalues'
+import { implementCountervalues, getCountervalues } from '@ledgerhq/live-common/lib/countervalues'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import { makeLRUCache } from '@ledgerhq/live-common/lib/cache'
 import uniq from 'lodash/uniq'
@@ -66,8 +66,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
   }
 }
 
-// $FlowFixMe
-const CounterValues = createCounterValues({
+implementCountervalues({
   log: (...args) => logger.log('CounterValues:', ...args),
   getAPIBaseURL: () => LEDGER_COUNTERVALUES_API,
   storeSelector: state => state.countervalues,
@@ -76,6 +75,8 @@ const CounterValues = createCounterValues({
   addExtraPollingHooks,
   network,
 })
+
+const CounterValues = getCountervalues()
 
 let sortCache
 export const getFullListSortedCryptoCurrencies: (
