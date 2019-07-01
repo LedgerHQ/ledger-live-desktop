@@ -70,6 +70,8 @@ const Amount = styled.div`
 `
 const Value = styled.div`
   width: 15%;
+  box-sizing: border-box;
+  padding-left: 8px;
   text-align: right;
 `
 
