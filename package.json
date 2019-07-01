@@ -47,7 +47,7 @@
     "@ledgerhq/hw-transport-http": "^4.63.2",
     "@ledgerhq/hw-transport-node-hid": "^4.63.2",
     "@ledgerhq/ledger-core": "^3.0.0-beta.1",
-    "@ledgerhq/live-common": "^7.0.0-beta.6",
+    "@ledgerhq/live-common": "^7.0.0-beta.7",
     "@ledgerhq/logs": "^4.62.0",
     "animated": "^0.2.2",
     "async": "^2.6.2",
