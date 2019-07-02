@@ -6,6 +6,7 @@ import AsyncReactSelect from 'react-select/lib/Async'
 import { translate } from 'react-i18next'
 import { FixedSizeList as List } from 'react-window'
 import styled from 'styled-components'
+import debounce from 'lodash/debounce'
 
 import createStyles from './createStyles'
 import createRenderers from './createRenderers'
@@ -91,13 +92,25 @@ class Select extends PureComponent<Props> {
       // $FlowFixMe
       this.timeout = requestAnimationFrame(() => this.ref.focus())
     }
+
+    window.addEventListener('resize', this.resizeHandler)
   }
 
   componentWillUnmount() {
     if (this.timeout) {
       cancelAnimationFrame(this.timeout)
     }
+
+    window.removeEventListener('resize', this.resizeHandler)
   }
+
+  resizeHandler = debounce(
+    () => {
+      this.ref && this.ref.blur()
+    },
+    200,
+    { leading: true },
+  )
 
   handleChange = (value, { action }) => {
     const { onChange } = this.props
