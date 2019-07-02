@@ -66,7 +66,7 @@ class SetPassword extends PureComponent<Props, State> {
 
     await db.setEncryptionKey('app', 'accounts', newPassword)
     await changeLibcorePassword('', newPassword)
-    setLibcorePassword(newPassword)
+    await setLibcorePassword(newPassword)
     saveSettings({ hasPassword: true })
     this.handleReset()
     nextStep()

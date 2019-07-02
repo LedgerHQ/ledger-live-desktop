@@ -150,7 +150,7 @@ class IsUnlocked extends Component<Props, State> {
         // Something is wrong, let's set the password and reset libcore, so that
         // it creates a brand new db encrypted with the current password
         await setLibcorePassword(password)
-        resetLibcore()
+        await resetLibcore()
       }
     }
   }
