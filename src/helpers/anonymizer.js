@@ -65,6 +65,13 @@ function filepathRecursiveReplacer(obj: mixed, seen: Array<*>) {
   }
 }
 
+const redactPasswordsFromObject = (object: Object) =>
+  Object.keys(object).reduce((result, key) => {
+    const value = object[key]
+    result[key] = key.match(/password/i) ? !!value : value
+    return result
+  }, {})
+
 export default {
   url: (url: string): string =>
     url
@@ -76,4 +83,6 @@ export default {
   filepath: filepathReplace,
 
   filepathRecursiveReplacer: (obj: mixed) => filepathRecursiveReplacer(obj, []),
+
+  passwords: redactPasswordsFromObject,
 }

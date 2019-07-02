@@ -106,6 +106,7 @@ const logNetwork = !__DEV__ || DEBUG_NETWORK
 const logAnalytics = !__DEV__ || DEBUG_ANALYTICS
 const logApdu = !__DEV__ || DEBUG_DEVICE
 
+const inputCommandsWithPasswords = ['libcoreChangePassword', 'libcoreInit']
 const blacklistTooVerboseCommandInput = [
   'libcoreSyncAccount',
   'libcoreGetFees',
@@ -121,7 +122,11 @@ export default {
           logger.log(
             'info',
             `CMD ${id}.send()`,
-            blacklistTooVerboseCommandInput.includes(id) ? { type } : { type, data },
+            blacklistTooVerboseCommandInput.includes(id)
+              ? { type }
+              : inputCommandsWithPasswords.includes(id)
+              ? { type, data: anonymizer.passwords(data) }
+              : { type, data },
           )
           break
         case 'cmd.NEXT':
