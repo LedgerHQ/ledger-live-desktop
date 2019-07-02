@@ -48,7 +48,7 @@ const INITIAL_STATE = {
 
 type Props = StepProps & {
   saveSettings: any => void,
-  setLibcorePassword: string => void,
+  setLibcorePassword: string => Promise<void>,
 }
 
 class SetPassword extends PureComponent<Props, State> {
