@@ -48,12 +48,6 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: 'toggle',
-    name: 'EXPERIMENTAL_NATIVE_SEGWIT',
-    title: 'Native Segwit',
-    description: 'Experimental support of Native Segwit (bech32).',
-  },
-  {
-    type: 'toggle',
     name: 'EXPERIMENTAL_EXPLORERS',
     title: 'Experimental nodes',
     description: "Connect to Ledger's new blockchain nodes.",
