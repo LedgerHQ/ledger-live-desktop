@@ -305,7 +305,7 @@
       "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}}はアンインストールされました",
       "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
-      "unsupportedCurrency": "{{app}} is not supported in Ledger Live. Click the button to learn how to use it",
+      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "機器を確認して、インストール済みのアプリを確認してください",
       "installed": "App installed",
       "uninstalled": "App uninstalled"
