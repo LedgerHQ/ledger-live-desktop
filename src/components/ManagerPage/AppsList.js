@@ -7,14 +7,15 @@ import { translate } from 'react-i18next'
 import { compose } from 'redux'
 import { getDeviceModel } from '@ledgerhq/devices'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types/currencies'
+import {
+  currenciesByMarketcap,
+  listCryptoCurrencies,
+  isCurrencySupported,
+} from '@ledgerhq/live-common/lib/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
-
 import type { Device, T } from 'types/common'
-import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
 import { openURL } from 'helpers/linking'
-import { listCryptoCurrencies, isCurrencySupported } from 'config/cryptocurrencies'
 import { urls } from 'config/urls'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
@@ -112,10 +113,8 @@ type State = {
 }
 
 const oldAppsInstallDisabled = ['ZenCash', 'Ripple']
-const terminatedCryptoCurrencies: Array<CryptoCurrency> = listCryptoCurrencies(true, true)
 const canHandleInstall = app =>
-  !oldAppsInstallDisabled.includes(app.name) &&
-  !terminatedCryptoCurrencies.some(coin => coin.managerAppName === app.name)
+  !oldAppsInstallDisabled.includes(app.name) && !(app.currency && app.currency.terminated)
 
 const LoadingApp = () => (
   <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>
@@ -171,25 +170,13 @@ class AppsList extends PureComponent<Props, State> {
       const filteredAppVersionsList = await manager.getAppsList(
         deviceInfo,
         getEnv('MANAGER_DEV_MODE'),
-        getFullListSortedCryptoCurrencies,
+        () => currenciesByMarketcap(listCryptoCurrencies()),
       )
-
-      const withTickers = filteredAppVersionsList.map(app => {
-        const maybeCrypto = listCryptoCurrencies(true, false, false).find(
-          c => c.managerAppName.toLowerCase() === app.name.toLowerCase(),
-        )
-        const ticker = maybeCrypto ? maybeCrypto.ticker : ''
-
-        return {
-          ...app,
-          ticker,
-        }
-      })
 
       if (!this._unmounted) {
         this.setState({
           status: 'idle',
-          filteredAppVersionsList: withTickers,
+          filteredAppVersionsList,
           appsLoaded: true,
         })
       }
@@ -409,7 +396,7 @@ class AppsList extends PureComponent<Props, State> {
     const { filteredAppVersionsList, appsLoaded } = this.state
     return (
       <Box>
-        <AppSearchBar searchKeys={['ticker']} list={filteredAppVersionsList}>
+        <AppSearchBar searchKeys={['currency.ticker']} list={filteredAppVersionsList}>
           {items => (
             <List>
               {items.map(c => (

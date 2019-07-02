@@ -6,7 +6,6 @@ import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import { getMainAccount, getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import logger from 'logger'
 import { getAccountBridge } from 'bridge'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -232,9 +231,7 @@ export class StepAmountFooter extends PureComponent<
       bridge && mainAccount && transaction
         ? bridge.getTransactionAmount(mainAccount, transaction)
         : null
-    const isTerminated = mainAccount
-      ? listCryptoCurrencies(true, true).some(coin => coin.name === mainAccount.currency.name)
-      : false
+    const isTerminated = (mainAccount && mainAccount.currency.terminated) || false
     const accountUnit = !account
       ? null
       : account.type === 'Account'

@@ -2,11 +2,8 @@
 
 import { createSelector } from 'reselect'
 import { implementCountervalues, getCountervalues } from '@ledgerhq/live-common/lib/countervalues'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-import { makeLRUCache } from '@ledgerhq/live-common/lib/cache'
 import uniq from 'lodash/uniq'
 import { LEDGER_COUNTERVALUES_API } from 'config/constants'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import { setExchangePairsAction } from 'actions/settings'
 import { currenciesSelector } from 'reducers/accounts'
 import {
@@ -77,39 +74,5 @@ implementCountervalues({
 })
 
 const CounterValues = getCountervalues()
-
-let sortCache
-export const getFullListSortedCryptoCurrencies: (
-  withDevCrypto?: boolean,
-  onlyTerminated?: boolean,
-  onlySupported?: boolean,
-) => Promise<CryptoCurrency[]> = makeLRUCache(
-  (withDevCrypto = false, onlyTerminated = false, onlySupported = false) => {
-    if (!sortCache) {
-      sortCache = CounterValues.fetchTickersByMarketcap().then(
-        tickers => {
-          const list = listCryptoCurrencies(withDevCrypto, onlyTerminated, onlySupported).slice(0)
-          const prependList = []
-          tickers.forEach(ticker => {
-            const item = list.find(c => c.ticker === ticker)
-            if (item) {
-              list.splice(list.indexOf(item), 1)
-              prependList.push(item)
-            }
-          })
-          return prependList.concat(list)
-        },
-        () => {
-          sortCache = null // reset the cache for the next time it comes here to "try again"
-          return listCryptoCurrencies() // fallback on default sort
-        },
-      )
-    }
-
-    return sortCache
-  },
-  (withDevCrypto, onlyTerminated, onlySupported) =>
-    `${withDevCrypto ? '1' : '0'}_${onlyTerminated ? '1' : '0'}_${onlySupported ? '1' : '0'}`,
-)
 
 export default CounterValues

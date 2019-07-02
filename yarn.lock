@@ -1800,10 +1800,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^7.0.0-beta.8":
-  version "7.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.0.0-beta.8.tgz#811157123554977c3ceb8f5a9f037a1f4dd76948"
-  integrity sha512-y9W2ifbxuVyCh0tsw4Q04bPqgtQ2i2IqXHr4R+zsg+KrGNuaXPZllvVDO6+vPj6vu9aP2qAcSqfFiLrulh+iow==
+"@ledgerhq/live-common@^7.0.0-beta.9":
+  version "7.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.0.0-beta.9.tgz#09e56f8d5c4a555ba32d05a69903e9e082c56bfb"
+  integrity sha512-n4UbW7uh8e01LnnMt4TlqJbhrOoEe8yr0805p70L+iZ2HagGfaer6fOm8MDLY/AA13IuWKL/h/AzJQPUR3FVXQ==
   dependencies:
     "@ledgerhq/errors" "4.63.2"
     "@ledgerhq/hw-app-btc" "4.63.3"
