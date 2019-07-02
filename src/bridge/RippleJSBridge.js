@@ -605,8 +605,11 @@ export const accountBridge: AccountBridge<Transaction> = {
         return { ...t, fee: value }
 
       case 'tag':
+        if (!value) {
+          return { ...t, tag: undefined }
+        }
         invariant(
-          !value || typeof value === 'number',
+          typeof value === 'number',
           "editTransactionExtra(a,t,'tag',value): number value expected",
         )
         return { ...t, tag: value }
