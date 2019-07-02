@@ -64,6 +64,7 @@ const Base = styled.input.attrs({
   fontSize: 4,
 })`
   font-family: 'Open Sans';
+  font-weight: 600;
   ${fontFamily};
   ${fontSize};
   border: 0;
