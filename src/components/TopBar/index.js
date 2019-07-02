@@ -20,6 +20,7 @@ import IconSettings from 'icons/Settings'
 
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
+import ToggleDiscreetModeButton from 'components/Discreet/ToggleDiscreetModeButton'
 import CurrenciesStatusBanner from 'components/CurrenciesStatusBanner'
 
 import ActivityIndicator from './ActivityIndicator'
@@ -111,6 +112,14 @@ class TopBar extends PureComponent<Props> {
                   </Box>
                 </Fragment>
               )}
+              <Tooltip render={() => t('dashboard.toggleDiscreetMode')}>
+                <ItemContainer isInteractive>
+                  <ToggleDiscreetModeButton />
+                </ItemContainer>
+              </Tooltip>
+              <Box justifyContent="center">
+                <Bar />
+              </Box>
               <Tooltip render={() => t('settings.title')} data-e2e="setting_button">
                 <ItemContainer isInteractive onClick={this.navigateToSettings}>
                   <IconSettings size={16} />

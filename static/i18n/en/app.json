@@ -162,7 +162,8 @@
     "summary": "Here's the summary of your account",
     "summary_plural": "Here's the summary of your {{count}} accounts",
     "recentActivity": "Last operations",
-    "totalBalance": "Total balance"
+    "totalBalance": "Total balance",
+    "toggleDiscreetMode": "Toggle discreet mode"
   },
   "currentAddress": {
     "title": "Current address",

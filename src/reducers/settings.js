@@ -59,6 +59,7 @@ export type SettingsState = {
   dismissedBanners: string[],
   accountsViewMode: 'card' | 'list',
   showAccountsHelperBanner: boolean,
+  discreetMode: boolean,
 }
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -89,6 +90,7 @@ const INITIAL_STATE: SettingsState = {
   dismissedBanners: [],
   accountsViewMode: 'card',
   showAccountsHelperBanner: true,
+  discreetMode: false,
 }
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`
@@ -235,6 +237,8 @@ export const accountsViewModeSelector = (state: State) => state.settings.account
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs
 export const autoLockTimeoutSelector = (state: State) => state.settings.autoLockTimeout
+export const discreetModeSelector = (state: State): boolean => state.settings.discreetMode
+
 export const shareAnalyticsSelector = (state: State) => state.settings.shareAnalytics
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange
 export const hasCompletedOnboardingSelector = (state: State) =>

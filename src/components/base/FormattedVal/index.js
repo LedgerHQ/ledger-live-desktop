@@ -12,7 +12,8 @@ import type { State } from 'reducers'
 import { formatCurrencyUnit } from '@ledgerhq/live-common/lib/currencies'
 
 import { DISABLE_TICKER_ANIMATION } from 'config/constants'
-import { marketIndicatorSelector, localeSelector } from 'reducers/settings'
+import { marketIndicatorSelector, localeSelector, discreetModeSelector } from 'reducers/settings'
+import { DiscreetModeContext } from 'components/Discreet/DiscreetModeWrapper'
 
 import { getMarketColor } from 'styles/helpers'
 
@@ -61,12 +62,14 @@ type OwnProps = {
 const mapStateToProps = (state: State, _props: OwnProps) => ({
   marketIndicator: marketIndicatorSelector(state),
   locale: localeSelector(state),
+  discreetMode: discreetModeSelector(state),
 })
 
 type Props = OwnProps & {
   marketIndicator: string,
   locale: string,
   ellipsis?: boolean,
+  discreetMode?: boolean,
 }
 
 function FormattedVal(props: Props) {
@@ -115,6 +118,9 @@ function FormattedVal(props: Props) {
     })
   }
 
+  // NB could be extracted to an env var
+  const discreetText = text.replace(/[\d.,]/g, '*')
+
   if (animateTicker && !DISABLE_TICKER_ANIMATION) {
     text = <FlipTicker value={text} />
   } else if (ellipsis) {
@@ -127,22 +133,28 @@ function FormattedVal(props: Props) {
   })
 
   return (
-    <T color={color || marketColor} withIcon={withIcon} {...p}>
-      {withIcon ? (
-        <Box horizontal alignItems="center" flow={1}>
-          <Box>
-            <I color={marketColor}>
-              {isNegative ? <IconBottom size={16} /> : <IconTop size={16} />}
-            </I>
-          </Box>
-          <Box horizontal alignItems="center">
-            {text}
-          </Box>
-        </Box>
-      ) : (
-        text
+    <DiscreetModeContext.Consumer>
+      {({ discreetMode }) => (
+        <T color={color || marketColor} withIcon={withIcon} discreetMode={discreetMode} {...p}>
+          {withIcon ? (
+            <Box horizontal alignItems="center" flow={1}>
+              <Box>
+                <I color={marketColor}>
+                  {isNegative ? <IconBottom size={16} /> : <IconTop size={16} />}
+                </I>
+              </Box>
+              <Box horizontal alignItems="center">
+                {discreetMode ? discreetText : text}
+              </Box>
+            </Box>
+          ) : discreetMode ? (
+            discreetText
+          ) : (
+            text
+          )}
+        </T>
       )}
-    </T>
+    </DiscreetModeContext.Consumer>
   )
 }
 

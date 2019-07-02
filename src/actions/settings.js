@@ -55,3 +55,6 @@ export const dismissBanner = (bannerKey: string) => ({
   type: 'SETTINGS_DISMISS_BANNER',
   payload: bannerKey,
 })
+
+export const toggleDiscreetMode = (discreetMode: ?boolean) =>
+  saveSettings({ discreetMode: !discreetMode })
