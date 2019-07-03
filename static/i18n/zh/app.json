@@ -987,6 +987,9 @@
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "收件人地址无效。请至少发送 {{minimalAmount}} 次进行激活"
     },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
+    },
     "PasswordsDontMatch": {
       "title": "密码不匹配",
       "description": "请再试一次"
