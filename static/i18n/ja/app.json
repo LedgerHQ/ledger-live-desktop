@@ -987,6 +987,9 @@
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "受信者のアドレスが無効です。少なくても{{minimalAmount}}に送信し、有効にしてください"
     },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
+    },
     "PasswordsDontMatch": {
       "title": "パスワードがマッチしません",
       "description": "再試行してください"
