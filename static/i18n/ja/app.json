@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "ご使用のデバイスの<1>ダッシュボード</1>に進んでください",
     "step1": "<1>Ledger デバイス</1>を接続し、ロックを解除してください",
-    "step2": "ご使用のデバイスで<1><0>{{managerAppName}}</0></1>アプリに進んでください",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "ご使用のデバイスで<1>Ledgerマネージャー</1>を許可してください"
   },
   "emptyState": {

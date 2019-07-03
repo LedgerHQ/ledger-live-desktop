@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "Navega hasta el <1>Dashboard</1> en tu dispositivo",
     "step1": "Conecta y desbloquea tu <1>dispositivo Ledger</1>",
-    "step2": "Navega hasta la <1><0>{{managerAppName}}</0></1> aplicación en tu dispositivo",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Acepta <1>Ledger Manager</1> en tu dispositivo"
   },
   "emptyState": {
