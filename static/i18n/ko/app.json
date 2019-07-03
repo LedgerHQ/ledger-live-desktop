@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "장치의 <1>대시 보드</1>로 이동",
     "step1": "<1>Ledger 장치</1> 연결 및 잠금 해제",
-    "step2": "장치의 <1><0>{{managerAppName}}</0></1> 앱으로 이동",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "장치에서 <1>Ledger Manager</1> 허용"
   },
   "emptyState": {
