@@ -77,6 +77,7 @@ export const colors = {
   grey: '#999999',
   identity: '#41ccb4',
   lightFog: '#eeeeee',
+  sliderGrey: '#F0EFF1',
   lightGraphite: '#fafafa',
   lightGrey: '#f9f9f9',
   orange: '#ffa726',

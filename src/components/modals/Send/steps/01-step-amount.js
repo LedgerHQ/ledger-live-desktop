@@ -6,7 +6,6 @@ import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import { getMainAccount, getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import logger from 'logger'
 import { getAccountBridge } from 'bridge'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -113,6 +112,7 @@ export class StepAmountFooter extends PureComponent<
   StepProps<*>,
   {
     totalSpent: BigNumber,
+    maxAmount: BigNumber,
     canNext: boolean,
     isSyncing: boolean,
     highFeesOpen: boolean,
@@ -122,6 +122,7 @@ export class StepAmountFooter extends PureComponent<
     isSyncing: false,
     highFeesOpen: false,
     totalSpent: BigNumber(0),
+    maxAmount: BigNumber(0),
     canNext: false,
   }
 
@@ -171,12 +172,15 @@ export class StepAmountFooter extends PureComponent<
 
       const amount = bridge.getTransactionAmount(mainAccount, transaction)
       const useAllAmount = bridge.getTransactionExtra(mainAccount, transaction, 'useAllAmount')
+      let maxAmount
+      if (useAllAmount) maxAmount = await bridge.getMaxAmount(mainAccount, transaction)
+
       const canNext =
-        (!amount.isZero() || useAllAmount) &&
+        (!amount.isZero() || (useAllAmount && maxAmount && !maxAmount.isZero())) &&
         isRecipientValid &&
         !!isValidTransaction &&
         totalSpent.gt(0)
-      this.setState({ totalSpent, canNext, isSyncing: false })
+      this.setState({ totalSpent, maxAmount, canNext, isSyncing: false })
     } catch (err) {
       logger.critical(err)
       this.setState({ totalSpent: BigNumber(0), canNext: false, isSyncing: false })
@@ -184,15 +188,22 @@ export class StepAmountFooter extends PureComponent<
   }
 
   onNext = async () => {
-    const { totalSpent } = this.state
+    const { totalSpent, maxAmount } = this.state
     const { transitionTo, account, parentAccount, transaction } = this.props
     if (account && transaction) {
       if (
         !parentAccount &&
-        totalSpent
-          .minus(transaction.amount)
-          .times(10)
-          .gt(transaction.amount)
+        ((transaction.amount.gt(0) &&
+          totalSpent
+            .minus(transaction.amount)
+            .times(10)
+            .gt(transaction.amount)) ||
+          (maxAmount &&
+            maxAmount.gt(0) &&
+            totalSpent
+              .minus(maxAmount)
+              .times(10)
+              .gt(maxAmount)))
       ) {
         this.setState({ highFeesOpen: true })
         return
@@ -212,7 +223,7 @@ export class StepAmountFooter extends PureComponent<
 
   render() {
     const { t, account, parentAccount, transaction } = this.props
-    const { isSyncing, totalSpent, canNext, highFeesOpen } = this.state
+    const { isSyncing, totalSpent, canNext, highFeesOpen, maxAmount } = this.state
     const mainAccount = account ? getMainAccount(account, parentAccount) : null
     const currency = account ? getAccountCurrency(account) : null
     const bridge = account ? getAccountBridge(account, parentAccount) : null
@@ -220,9 +231,7 @@ export class StepAmountFooter extends PureComponent<
       bridge && mainAccount && transaction
         ? bridge.getTransactionAmount(mainAccount, transaction)
         : null
-    const isTerminated = mainAccount
-      ? listCryptoCurrencies(true, true).some(coin => coin.name === mainAccount.currency.name)
-      : false
+    const isTerminated = (mainAccount && mainAccount.currency.terminated) || false
     const accountUnit = !account
       ? null
       : account.type === 'Account'
@@ -274,8 +283,8 @@ export class StepAmountFooter extends PureComponent<
             isOpened={highFeesOpen}
             onReject={this.onRejectFees}
             onAccept={this.onAcceptFees}
-            fees={totalSpent.minus(amount)}
-            amount={amount}
+            fees={totalSpent.minus(!amount.isZero() ? amount : maxAmount)}
+            amount={!amount.isZero() ? amount : maxAmount}
             unit={accountUnit}
           />
         )}

@@ -21,6 +21,25 @@ export type Feature = FeatureCommon & FeatureToggle
 export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
+    name: 'EXPERIMENTAL_SEND_MAX',
+    title: 'Experimental Send MAX',
+    description:
+      'Support sending the entire account balance with a MAX toggle. XRP not yet supported.',
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_EXPLORERS',
+    title: 'Experimental nodes',
+    description: "Connect to Ledger's new blockchain nodes.",
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_LIBCORE',
+    title: 'Experimental Core',
+    description: 'Enable experimental Ledger lib-core features.',
+  },
+  {
+    type: 'toggle',
     name: 'EXPERIMENTAL_LANGUAGES',
     title: 'Translation testing',
     description: 'Adds unreleased languages to the language list in the general settings tab.',
@@ -47,24 +66,6 @@ export const experimentalFeatures: Feature[] = [
       'Alternative USB implementation that might help solve USB issues. Enabling this feature might create UI glitches.',
   },
   {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_NATIVE_SEGWIT',
-    title: 'Native Segwit',
-    description: 'Experimental support of Native Segwit (bech32).',
-  },
-  {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_EXPLORERS',
-    title: 'Experimental nodes',
-    description: "Connect to Ledger's new blockchain nodes.",
-  },
-  {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_LIBCORE',
-    title: 'Experimental Core',
-    description: 'Enable experimental Ledger lib-core features.',
-  },
-  {
     shadow: true,
     type: 'toggle',
     name: 'FORCE_PROVIDER',
@@ -72,13 +73,6 @@ export const experimentalFeatures: Feature[] = [
     valueOff: 1,
     title: 'Pre-release apps',
     description: 'Enable pre-release apps in the Manager',
-  },
-  {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_SEND_MAX',
-    title: 'Experimental Send MAX',
-    description:
-      'Support sending the entire account balance with a MAX toggle. XRP not yet supported.',
   },
   {
     shadow: true, // not correct yet

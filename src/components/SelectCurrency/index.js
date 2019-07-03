@@ -5,14 +5,15 @@ import { translate } from 'react-i18next'
 import Fuse from 'fuse.js'
 
 import type { Currency } from '@ledgerhq/live-common/lib/types'
+import {
+  useCurrenciesByMarketcap,
+  listSupportedCurrencies,
+} from '@ledgerhq/live-common/lib/currencies'
 import type { T } from 'types/common'
 import type { Option } from 'components/base/Select'
-
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
 import Select from 'components/base/Select'
 import Box from 'components/base/Box'
-
-import useCryptocurrencies from 'hooks/useCryptoCurrencies'
 
 type Props = {
   onChange: (?Currency) => void,
@@ -27,7 +28,11 @@ const getOptionValue = c => c.id
 
 const SelectCurrency = React.memo(
   ({ onChange, value, t, placeholder, currencies, autoFocus, ...props }: Props) => {
-    const cryptos = currencies || useCryptocurrencies({ onlySupported: true })
+    const c =
+      currencies ||
+      // $FlowFixMe
+      (listSupportedCurrencies(): Currency[])
+    const cryptos = useCurrenciesByMarketcap(c)
     const onChangeCallback = useCallback(item => onChange(item ? item.currency : null), [onChange])
     const noOptionsMessage = useCallback(
       ({ inputValue }: { inputValue: string }) =>
