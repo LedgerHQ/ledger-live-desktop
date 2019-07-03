@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "Перейдите на <1>панель мониторинга</1> на устройстве.",
     "step1": "Подключите и разблокируйте <1>устройство Ledger</1>.",
-    "step2": "Откройте на устройстве приложение <1><0>{{managerAppName}}</0></1>.",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Разрешите приложению <1>Ledger Manager</1> доступ к своему устройству."
   },
   "emptyState": {
