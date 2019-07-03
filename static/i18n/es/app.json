@@ -987,6 +987,9 @@
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "La dirección del destinatario está inactiva. Envía al menos {{minimalAmount}} para activarla."
     },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
+    },
     "PasswordsDontMatch": {
       "title": "Las contraseñas no coinciden.",
       "description": "Inténtalo de nuevo."
