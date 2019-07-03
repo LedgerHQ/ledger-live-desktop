@@ -125,15 +125,15 @@
     "title": "Comptes",
     "noResultFound": "Aucun compte trouvé.",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "Nom A-Z",
+      "name|desc": "Nom Z-A",
+      "balance|asc": "Solde croissant",
+      "balance|desc": "Solde décroissant"
     },
     "range": {
-      "week": "Week",
-      "month": "Month",
-      "year": "Year"
+      "week": "Semaine",
+      "month": "Mois",
+      "year": "Année"
     },
     "contextMenu": {
       "receive": "Recevoir",
@@ -166,7 +166,7 @@
   },
   "currentAddress": {
     "title": "Adresse actuelle",
-    "for": "Address for <1><0>{{name}}</0></1>",
+    "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Veuillez vérifier que l’adresse {{currencyName}} affichée sur Ledger Live correspond à celle indiquée sur votre appareil",
     "messageIfAccepted": "Adresse confirmée. Veuillez la revérifier si vous la copiez/collez ou si vous scannez le QR code.",
     "messageIfSkipped": "Votre adresse {{currencyName}} n’a pas été confirmée sur votre appareil Ledger. Veuillez la vérifier pour une sécurité optimale."
@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "Accédez au <1>Dashboard</1> sur votre appareil",
     "step1": "Connectez et déverrouillez votre <1>appareil Ledger</1>",
-    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step2": "Ouvrez l’application <1><0>{{managerAppName}}</0></1> sur votre appareil",
     "step3": "Autorisez <1>Ledger Manager</1> sur votre appareil"
   },
   "emptyState": {
@@ -220,12 +220,12 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
-    "placeholder": "To add tokens, simply send them to your Ethereum address.",
-    "link": "Learn more",
-    "seeTokens": "See tokens ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from"
+    "cta": "Recevoir un token",
+    "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
+    "link": "En savoir plus",
+    "seeTokens": "Voir tokens ({{tokenCount}})",
+    "hideTokens": "Cacher tokens ({{tokenCount}})",
+    "tooltip": "Token de"
   },
   "addAccounts": {
     "title": "Ajouter des comptes",
@@ -270,7 +270,7 @@
         "title": "Comptes déjà présents dans le portefeuille ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "Comptes à mettre à jour"
       }
     }
   },
@@ -301,14 +301,14 @@
       "all": "Catalogue d'applications",
       "installing": "Installation de {{app}}...",
       "uninstalling": "Désinstallation de {{app}}...",
-      "installSuccess": "{{app}} was successfully installed",
-      "unsupportedSuccess": "Learn how to use {{app}}",
+      "installSuccess": "{{app}} a été installé avec succès",
+      "unsupportedSuccess": "Découvrez comment utiliser {{app}}",
       "uninstallSuccess": "{{app}} désinstallé",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "supportedCurrency": "{{app}} est maintenant installé sur votre {{device}}. Ajoutez un compte pour pouvoir envoyer et recevoir des fonds",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "Consultez votre appareil pour voir quelles applications sont déjà installées.",
-      "installed": "App installed",
-      "uninstalled": "App uninstalled"
+      "installed": "Application installée",
+      "uninstalled": "Application désinstallée"
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
@@ -440,21 +440,21 @@
   },
   "distribution": {
     "asset": "Actif ",
-    "price": "Price",
+    "price": "Prix",
     "distribution": "Répartition",
     "amount": "Montant",
     "value": "Valeur",
-    "seeAll": "See all",
-    "header": "Asset distribution ({{count}})"
+    "seeAll": "Tout voir",
+    "header": "Distribution d'actifs ({{count}})"
   },
   "settings": {
     "title": "Paramètres",
     "tabs": {
       "display": "Général",
       "export": "Comptes",
-      "cryptoAssets": "Crypto assets",
-      "currencies": "Crypto assets",
-      "rates": "Rates",
+      "cryptoAssets": "Crypto-actifs",
+      "currencies": "Crypto-actifs",
+      "rates": "Taux",
       "help": "Aide",
       "about": "A propos de",
       "experimental": "Fonctionnalités expérimentales"
@@ -493,21 +493,21 @@
       "stockDesc": "Choisissez Ouest pour afficher une augmentation de la valeur du marché en bleu ou Est pour l’afficher en rouge."
     },
     "currencies": {
-      "desc": "Change settings for each of your crypto assets",
-      "select": "Select a crypto asset to edit its settings.",
+      "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
+      "select": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "exchange": "Prestataire de change ({{ticker}} → BTC)",
       "exchangeDesc": "Choisir le fournisseur du taux de change de {{currencyName}} en Bitcoins, utilisé pour estimer la valeur de vos crypto-actifs ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Nombre de confirmations",
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "desc": "Voici tous les tarifs utilisés par Ledger Live pour calculer les contrevaleurs.\nChoisissez quels fournisseurs de taux sont utilisés pour chaque taux.",
       "fromTo": "{{from}} to {{to}}",
-      "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto",
-      "rate": "Rate",
-      "last": "Last {{days}} days",
-      "price": "Price",
+      "cryptoToFiat": "Crypto vers fiat",
+      "cryptoToCrypto": "Crypto vers Crypto",
+      "rate": "Taux",
+      "last": "{{days}} derniers jours",
+      "price": "Prix",
       "exchange": "Rate provider"
     },
     "profile": {
@@ -879,8 +879,8 @@
       "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil."
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact us."
+      "title": "{{currencyName}} n'est pas pris en charge",
+      "description": "Cet actif crypto n'est pas encore pris en charge. Veuillez nous contacter."
     },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
