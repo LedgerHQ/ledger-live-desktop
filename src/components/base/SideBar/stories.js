@@ -55,6 +55,8 @@ const SIDEBAR_ITEMS = [
 
 stories.add('SideBarList', () => (
   <SideBarList>
-    {SIDEBAR_ITEMS.map(item => <SideBarListItem key={item.key} {...item} />)}
+    {SIDEBAR_ITEMS.map(item => (
+      <SideBarListItem key={item.key} {...item} />
+    ))}
   </SideBarList>
 ))

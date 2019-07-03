@@ -10,7 +10,7 @@ import SyncSkipUnderPriority from 'components/SyncSkipUnderPriority'
 
 import logger from 'logger'
 import Track from 'analytics/Track'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount, TokenCurrency } from '@ledgerhq/live-common/lib/types'
 
 import { MODAL_RECEIVE } from 'config/constants'
 import type { T, Device } from 'types/common'
@@ -37,7 +37,10 @@ type Props = {
 
 type State = {
   stepId: string,
-  account: ?Account,
+  account: ?(Account | TokenAccount),
+  token: ?TokenCurrency,
+  parentAccount: ?Account,
+  receiveTokenMode: boolean,
   isAppOpened: boolean,
   isAddressVerified: ?boolean,
   disabledSteps: number[],
@@ -46,7 +49,10 @@ type State = {
 
 export type StepProps = DefaultStepProps & {
   device: ?Device,
-  account: ?Account,
+  account: ?(Account | TokenAccount),
+  parentAccount: ?Account,
+  token: ?TokenCurrency,
+  receiveTokenMode: boolean,
   closeModal: void => void,
   isAppOpened: boolean,
   isAddressVerified: ?boolean,
@@ -54,7 +60,8 @@ export type StepProps = DefaultStepProps & {
   onRetry: void => void,
   onSkipConfirm: void => void,
   onResetSkip: void => void,
-  onChangeAccount: (?Account) => void,
+  onChangeToken: (token: ?TokenCurrency) => void,
+  onChangeAccount: (account: ?(Account | TokenAccount), tokenAccount: ?Account) => void,
   onChangeAppOpened: boolean => void,
   onChangeAddressVerified: (?boolean, ?Error) => void,
 }
@@ -102,6 +109,9 @@ const mapDispatchToProps = {
 const INITIAL_STATE = {
   stepId: 'account',
   account: null,
+  parentAccount: null,
+  token: null,
+  receiveTokenMode: false,
   isAppOpened: false,
   isAddressVerified: null,
   disabledSteps: [],
@@ -118,9 +128,17 @@ class ReceiveModal extends PureComponent<Props, State> {
 
     if (!account) {
       if (data && data.account) {
-        this.setState({ account: data.account, stepId: 'device' })
+        this.setState({
+          account: data.account,
+          parentAccount: data.parentAccount,
+          receiveTokenMode: !!data.receiveTokenMode,
+          stepId: data.receiveTokenMode ? 'account' : 'device',
+        })
       } else {
-        this.setState({ account: accounts[0] })
+        this.setState({
+          account: accounts[0],
+          parentAccount: null,
+        })
       }
     }
   }
@@ -138,7 +156,9 @@ class ReceiveModal extends PureComponent<Props, State> {
 
   handleStepChange = step => this.setState({ stepId: step.id })
 
-  handleChangeAccount = (account: ?Account) => this.setState({ account })
+  handleChangeToken = token => this.setState({ token })
+
+  handleChangeAccount = (account, parentAccount) => this.setState({ account, parentAccount })
 
   handleChangeAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
 
@@ -168,6 +188,9 @@ class ReceiveModal extends PureComponent<Props, State> {
     const {
       stepId,
       account,
+      parentAccount,
+      receiveTokenMode,
+      token,
       isAppOpened,
       isAddressVerified,
       disabledSteps,
@@ -177,6 +200,9 @@ class ReceiveModal extends PureComponent<Props, State> {
     const addtionnalProps = {
       device,
       account,
+      parentAccount,
+      receiveTokenMode,
+      token,
       isAppOpened,
       isAddressVerified,
       verifyAddressError,
@@ -185,6 +211,7 @@ class ReceiveModal extends PureComponent<Props, State> {
       onSkipConfirm: this.handleSkipConfirm,
       onResetSkip: this.handleResetSkip,
       onChangeAccount: this.handleChangeAccount,
+      onChangeToken: this.handleChangeToken,
       onChangeAppOpened: this.handleChangeAppOpened,
       onChangeAddressVerified: this.handleChangeAddressVerified,
     }

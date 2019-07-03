@@ -2,16 +2,17 @@
 import React, { Component } from 'react'
 import { Trans } from 'react-i18next'
 import { BigNumber } from 'bignumber.js'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { getAccountBridge } from 'bridge'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import RequestAmount from 'components/RequestAmount'
 import Switch from 'components/base/Switch'
+import { getMainAccount } from '@ledgerhq/live-common/lib/account/helpers'
 
 // list of errors that are handled somewhere else on UI, otherwise the field will catch every other errors.
-const blacklistErrorName = ['FeeNotLoaded', 'InvalidAddress']
+const blacklistErrorName = ['FeeNotLoaded', 'InvalidAddress', 'NotEnoughGas']
 
 const SendMax = ({ value, onChange }: { value: boolean, onChange: boolean => void }) => (
   <Box horizontal alignItems="center">
@@ -24,7 +25,8 @@ const SendMax = ({ value, onChange }: { value: boolean, onChange: boolean => voi
 
 class AmountField extends Component<
   {
-    account: Account,
+    account: Account | TokenAccount,
+    parentAccount: ?Account,
     transaction: *,
     onChangeTransaction: (*) => void,
     t: *,
@@ -51,13 +53,14 @@ class AmountField extends Component<
   }
   syncId = 0
   async resync() {
-    const { account, transaction } = this.props
-    const bridge = getAccountBridge(account)
+    const { account, parentAccount, transaction } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    const bridge = getAccountBridge(account, parentAccount)
     const syncId = ++this.syncId
     try {
-      await bridge.checkValidTransaction(account, transaction)
+      await bridge.checkValidTransaction(mainAccount, transaction)
       if (this.syncId !== syncId) return
-      const maxAmount = await bridge.getMaxAmount(account, transaction)
+      const maxAmount = await bridge.getMaxAmount(mainAccount, transaction)
       if (this.syncId !== syncId) return
       this.setState({ validTransactionError: null, maxAmount })
     } catch (validTransactionError) {
@@ -66,26 +69,29 @@ class AmountField extends Component<
   }
 
   onChange = (amount: BigNumber) => {
-    const { account, transaction, onChangeTransaction } = this.props
-    const bridge = getAccountBridge(account)
-    onChangeTransaction(bridge.editTransactionAmount(account, transaction, amount))
+    const { account, parentAccount, transaction, onChangeTransaction } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    const bridge = getAccountBridge(account, parentAccount)
+    onChangeTransaction(bridge.editTransactionAmount(mainAccount, transaction, amount))
   }
 
   onChangeSendMax = (useAllAmount: boolean) => {
-    const { account, transaction, onChangeTransaction } = this.props
-    const bridge = getAccountBridge(account)
+    const { account, parentAccount, transaction, onChangeTransaction } = this.props
+    const mainAccount = getMainAccount(account, parentAccount)
+    const bridge = getAccountBridge(account, parentAccount)
     let t = transaction
-    t = bridge.editTransactionExtra(account, t, 'useAllAmount', useAllAmount)
-    t = bridge.editTransactionAmount(account, t, BigNumber(0))
+    t = bridge.editTransactionExtra(mainAccount, t, 'useAllAmount', useAllAmount)
+    t = bridge.editTransactionAmount(mainAccount, t, BigNumber(0))
     onChangeTransaction(t)
   }
 
   render() {
-    const { account, transaction, t } = this.props
+    const { account, parentAccount, transaction, t } = this.props
     const { validTransactionError, maxAmount } = this.state
-    const bridge = getAccountBridge(account)
+    const mainAccount = getMainAccount(account, parentAccount)
+    const bridge = getAccountBridge(account, parentAccount)
     const useAllAmount = getEnv('EXPERIMENTAL_SEND_MAX')
-      ? bridge.getTransactionExtra(account, transaction, 'useAllAmount')
+      ? bridge.getTransactionExtra(mainAccount, transaction, 'useAllAmount')
       : null
 
     return (
@@ -118,7 +124,7 @@ class AmountField extends Component<
           value={
             useAllAmount
               ? maxAmount || BigNumber(0)
-              : bridge.getTransactionAmount(account, transaction)
+              : bridge.getTransactionAmount(mainAccount, transaction)
           }
         />
       </Box>

@@ -125,13 +125,15 @@
     "title": "Accounts",
     "noResultFound": "No accounts found.",
     "order": {
-      "name": "Account Name",
-      "balance": "Account Balance"
+      "name|asc": "Name A-Z",
+      "name|desc": "Name Z-A",
+      "balance|asc": "Lowest Balance",
+      "balance|desc": "Highest Balance"
     },
     "range": {
-      "week": "week",
-      "month": "month",
-      "year": "year"
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
     },
     "contextMenu": {
       "receive": "Receive",
@@ -164,7 +166,7 @@
   },
   "currentAddress": {
     "title": "Текущий адрес",
-    "for": "Адрес для счета <1><0>{{accountName}}</0></1>",
+    "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "Адрес подтвержден. Если он был вставлен из буфера обмена или введен в результате сканирования QR-кода, проверьте его еще раз.",
     "messageIfSkipped": "На используемом устройстве Ledger адрес {{currencyName}} не был подтвержден. Для обеспечения оптимального уровня безопасности проверьте его."
@@ -172,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "Перейдите на <1>панель мониторинга</1> на устройстве.",
     "step1": "Подключите и разблокируйте <1>устройство Ledger</1>.",
-    "step2": "Откройте на устройстве приложение <1><0>{{managerAppName}}</0></1>.",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Разрешите приложению <1>Ledger Manager</1> доступ к своему устройству."
   },
   "emptyState": {
@@ -207,13 +209,23 @@
     "taxtoken": "Автоматизированная программа учета налогов и затрат на операции с криптовалютой для граждан США.",
     "thorswap": "ThorSwap представляет собой мгновенную, безопасную и честную биржу криптоактивов, работающую на основе децентрализованных технологий атомных свопов. Это наиболее удобный способ начать торговлю, не требующий регистрации или соблюдения правила KYC (Know Your Customer — знай своего клиента) для проведения транзакций на небольшую сумму.",
     "bitpanda": "Bitpanda — это ведущая в Европе розничная брокерская компания, специализирующаяся на покупке и продаже такой криптовалюты, как Bitcoin, Ethereum, IOTA и много других. Вносите деньги, используя кредитную карточку, систему SOFORT-Transfer, NETELLER и другие варианты.",
-    "exmo": "Основанная в 2013 году биржа EXMO, отделения которой расположены в Лондоне, Киеве, Барселоне и Москве, занимает первое место среди бирж в Восточной Европе и является одной из крупнейших в мире по объему и ликвидности."
+    "exmo": "Основанная в 2013 году биржа EXMO, отделения которой расположены в Лондоне, Киеве, Барселоне и Москве, занимает первое место среди бирж в Восточной Европе и является одной из крупнейших в мире по объему и ликвидности.",
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
   },
   "genuinecheck": {
     "modal": {
       "title": "Проверка подлинности"
     },
     "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
+  },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Receive token",
+    "placeholder": "To add tokens, simply send them to your Ethereum address.",
+    "link": "Learn more",
+    "seeTokens": "See tokens ({{tokenCount}})",
+    "hideTokens": "Hide tokens ({{tokenCount}})",
+    "tooltip": "Token from"
   },
   "addAccounts": {
     "title": "Добавить счета",
@@ -249,13 +261,16 @@
     },
     "sections": {
       "importable": {
-        "title": "Добавить существующий счет"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "Добавить новый счет"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "Счета, находящиеся в портфеле: ({{count}})"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to update"
       }
     }
   },
@@ -286,9 +301,14 @@
       "all": "Каталог приложений",
       "installing": "Установка {{app}}...",
       "uninstalling": "Удаление {{app}}...",
-      "installSuccess": "{{app}} успешно установлено",
+      "installSuccess": "{{app}} was successfully installed",
+      "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} удалено",
-      "help": "Проверьте, какие приложения уже установлены на устройстве."
+      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
+      "help": "Проверьте, какие приложения уже установлены на устройстве.",
+      "installed": "App installed",
+      "uninstalled": "App uninstalled"
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
@@ -351,7 +371,9 @@
     "steps": {
       "chooseAccount": {
         "title": "Счет",
-        "label": "Счет для зачисления средств"
+        "label": "Счет для зачисления средств",
+        "parentAccount": "1. Choose {{currencyName}} Account",
+        "token": "2. Choose {{currencyName}} Token"
       },
       "connectDevice": {
         "title": "Устройство",
@@ -378,6 +400,7 @@
         "recipientAddress": "Адрес получателя",
         "amount": "Сумма",
         "fees": "Комиссия за пользование сетью",
+        "useMax": "Max",
         "advancedOptions": "Дополнительные параметры",
         "useRBF": "Использовать транзакцию Replace-by-Fee (замена с повышением комиссии)",
         "message": "Оставьте сообщение (140)",
@@ -429,7 +452,9 @@
     "tabs": {
       "display": "Общие",
       "export": "Accounts",
-      "currencies": "Валюта",
+      "cryptoAssets": "Crypto assets",
+      "currencies": "Crypto assets",
+      "rates": "Rates",
       "help": "Справка",
       "about": "О программе",
       "experimental": "Experimental features"
@@ -468,11 +493,22 @@
       "stockDesc": "Выберите «Западный», чтобы увеличение рыночной стоимости отображалось синим цветом, или «Восточный», чтобы увеличение рыночной стоимости отображалось красным цветом."
     },
     "currencies": {
-      "desc": "Для изменения настроек криптоактива его необходимо выделить.",
+      "desc": "Change settings for each of your crypto assets",
+      "select": "Select a crypto asset to edit its settings.",
       "exchange": "Обменник ({{ticker}} → BTC)",
       "exchangeDesc": "Выберите обменник для обмена из {{currencyName}} в биткоины, используемый для оценки ценности криптоактивов ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Количество подтверждений",
       "confirmationsNbDesc": "Задайте количество подтверждений транзакции, выполняемых сетью, необходимое для того, чтобы такая транзакция была отмечена как подтвержденная."
+    },
+    "rates": {
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "fromTo": "{{from}} to {{to}}",
+      "cryptoToFiat": "Crypto to fiat",
+      "cryptoToCrypto": "Crypto to Crypto",
+      "rate": "Rate",
+      "last": "Last {{days}} days",
+      "price": "Price",
+      "exchange": "Rate provider"
     },
     "profile": {
       "password": "Блокировка паролем",
@@ -842,6 +878,10 @@
       "title": "Это не то приложение.",
       "description": "Откройте приложение ‘{{managerAppName}}‘ на устройстве."
     },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto asset is not yet supported. Please contact us."
+    },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
       "description": "Обратитесь за помощью в службу поддержки компании Ledger"
@@ -946,6 +986,9 @@
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Адрес получателя неактивен. Чтобы активировать его, выберите сумму не менее {{minimalAmount}}."
+    },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Пароли не совпадают.",

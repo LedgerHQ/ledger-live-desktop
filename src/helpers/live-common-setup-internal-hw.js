@@ -12,6 +12,7 @@ import TransportHttp from '@ledgerhq/hw-transport-http'
 import { DisconnectedDevice } from '@ledgerhq/errors'
 import { retry } from './promise'
 import './implement-libcore'
+import './live-common-set-supported-currencies'
 
 listenLogs(({ id, date, ...log }) => logger.debug(log))
 

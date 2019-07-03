@@ -4,16 +4,14 @@ import { BigNumber } from 'bignumber.js'
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import type { Currency, Account } from '@ledgerhq/live-common/lib/types'
-
+import type { Currency, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import {
   counterValueCurrencySelector,
-  currencySettingsSelector,
-  counterValueExchangeSelector,
+  exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import CounterValues from 'helpers/countervalues'
-
 import InputCurrency from 'components/base/InputCurrency'
 import Box from 'components/base/Box'
 import type { State } from 'reducers'
@@ -51,7 +49,7 @@ type OwnProps = {
   onChange: BigNumber => void,
 
   // used to determine the left input unit
-  account: Account,
+  account: Account | TokenAccount,
 }
 
 type Props = OwnProps & {
@@ -65,12 +63,15 @@ type Props = OwnProps & {
 }
 
 const mapStateToProps = (state: State, props: OwnProps) => {
-  const {
-    account: { currency },
-  } = props
+  const { account } = props
   const counterValueCurrency = counterValueCurrencySelector(state)
-  const fromExchange = currencySettingsSelector(state, { currency }).exchange
-  const toExchange = counterValueExchangeSelector(state)
+  const currency = getAccountCurrency(account)
+  const intermediary = intermediaryCurrency(currency, counterValueCurrency)
+  const fromExchange = exchangeSettingsForPairSelector(state, { from: currency, to: intermediary })
+  const toExchange = exchangeSettingsForPairSelector(state, {
+    from: intermediary,
+    to: counterValueCurrency,
+  })
 
   // FIXME this make the component not working with "Pure". is there a way we can calculate here whatever needs to be?
   // especially the value comes from props!
@@ -78,7 +79,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     CounterValues.calculateWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
-      intermediary: intermediaryCurrency,
+      intermediary,
       toExchange,
       to: counterValueCurrency,
       value,
@@ -88,7 +89,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     CounterValues.reverseWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
-      intermediary: intermediaryCurrency,
+      intermediary,
       toExchange,
       to: counterValueCurrency,
       value,
@@ -138,6 +139,7 @@ export class RequestAmount extends PureComponent<Props> {
     } = this.props
     const right = getCounterValue(value) || BigNumber(0)
     const rightUnit = rightCurrency.units[0]
+    const defaultUnit = account.type === 'Account' ? account.unit : account.token.units[0]
     return (
       <Box horizontal flow={5} alignItems="center">
         <Box horizontal grow shrink>
@@ -145,10 +147,10 @@ export class RequestAmount extends PureComponent<Props> {
             disabled={disabled}
             error={validTransactionError}
             containerProps={{ grow: true }}
-            defaultUnit={account.unit}
+            defaultUnit={defaultUnit}
             value={value}
             onChange={this.onLeftChange}
-            renderRight={<InputRight>{account.unit.code}</InputRight>}
+            renderRight={<InputRight>{defaultUnit.code}</InputRight>}
           />
           <InputCenter>{'='}</InputCenter>
           <InputCurrency

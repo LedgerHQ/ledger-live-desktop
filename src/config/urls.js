@@ -24,6 +24,8 @@ export const urls = {
   recipientAddressInfo: 'https://support.ledger.com/hc/en-us/articles/360006433934',
   privacyPolicy: 'https://www.ledger.com/pages/privacy-policy',
   troubleshootingUSB: 'https://support.ledger.com/hc/en-us/articles/115005165269',
+  managerERC20: 'https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens',
+  appSupport: 'https://support.ledger.com/hc/en-us/categories/115000811829-Apps',
 
   githubIssues:
     'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc',

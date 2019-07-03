@@ -3,12 +3,13 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
 
 import Box from 'components/base/Box'
 import Ellipsis from 'components/base/Ellipsis'
 import Text from 'components/base/Text'
-import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
+import ParentCryptoCurrencyIcon from '../ParentCryptoCurrencyIcon'
 
 const CurName = styled(Text).attrs({
   ff: 'Open Sans|SemiBold',
@@ -27,21 +28,22 @@ const AccountName = styled(Text).attrs({
 `
 
 type Props = {
-  account: Account,
+  account: TokenAccount | Account,
 }
 
 class AccountHeader extends PureComponent<Props> {
   render() {
     const { account } = this.props
+    const currency = getAccountCurrency(account)
     return (
       <Box horizontal align="center" flow={2} grow>
-        <Box color={account.currency.color}>
-          <CryptoCurrencyIcon currency={account.currency} size={24} />
+        <Box>
+          <ParentCryptoCurrencyIcon currency={currency} borderColor="lightGrey" />
         </Box>
         <Box grow>
-          <CurName>{account.currency.name}</CurName>
+          <CurName>{account.type === 'Account' ? currency.name : 'token'}</CurName>
           <AccountName>
-            <Ellipsis>{account.name}</Ellipsis>
+            <Ellipsis>{account.type === 'Account' ? account.name : currency.name}</Ellipsis>
           </AccountName>
         </Box>
       </Box>

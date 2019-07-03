@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import { connect } from 'react-redux'
 import Box from 'components/base/Box'
 import { openModal } from 'reducers/modals'
@@ -24,8 +24,9 @@ const Card = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 
 
 type Props = {
   hidden?: boolean,
-  account: Account,
-  onClick: Account => void,
+  account: TokenAccount | Account,
+  parentAccount?: Account,
+  onClick: (Account | TokenAccount, ?Account) => void,
   range: PortfolioRange,
   openModal: Function,
 }
@@ -36,8 +37,8 @@ const mapDispatchToProps = {
 
 class AccountCard extends PureComponent<Props> {
   onClick = () => {
-    const { account, onClick } = this.props
-    onClick(account)
+    const { account, parentAccount, onClick } = this.props
+    onClick(account, parentAccount)
   }
 
   contextMenuItems = [
@@ -59,7 +60,8 @@ class AccountCard extends PureComponent<Props> {
   ]
 
   render() {
-    const { account, range, hidden, ...props } = this.props
+    const { account, parentAccount, range, hidden, ...props } = this.props
+
     return (
       <ContextMenuItem items={this.contextMenuItems}>
         <Card
@@ -69,8 +71,8 @@ class AccountCard extends PureComponent<Props> {
           onClick={this.onClick}
           data-e2e="dashboard_AccountCardWrapper"
         >
-          <AccountCardHeader account={account} />
-          <AccountCardBody account={account} range={range} />
+          <AccountCardHeader account={account} parentAccount={parentAccount} />
+          <AccountCardBody account={account} parentAccount={parentAccount} range={range} />
         </Card>
       </ContextMenuItem>
     )

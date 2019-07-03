@@ -2,10 +2,10 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { BigNumber } from 'bignumber.js'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import { getMainAccount, getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import logger from 'logger'
 import { getAccountBridge } from 'bridge'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -25,78 +25,94 @@ import HighFeeConfirmation from '../HighFeeConfirmation'
 
 const AccountFields = ({
   account,
+  parentAccount,
   transaction,
   onChangeTransaction,
   openedFromAccount,
   t,
 }: {
-  account: Account,
+  account: Account | TokenAccount,
+  parentAccount: ?Account,
   transaction: *,
   onChangeTransaction: (*) => void,
   openedFromAccount: boolean,
   t: *,
-}) => (
-  <Fragment key={account.id}>
-    <RecipientField
-      autoFocus={openedFromAccount}
-      account={account}
-      transaction={transaction}
-      onChangeTransaction={onChangeTransaction}
-      t={t}
-    />
+}) => {
+  const mainAccount = getMainAccount(account, parentAccount)
+  return (
+    <Fragment key={account.id}>
+      <RecipientField
+        autoFocus={openedFromAccount}
+        account={mainAccount}
+        transaction={transaction}
+        onChangeTransaction={onChangeTransaction}
+        t={t}
+      />
 
-    <AmountField
-      account={account}
-      transaction={transaction}
-      onChangeTransaction={onChangeTransaction}
-      t={t}
-    />
+      <AmountField
+        account={account}
+        parentAccount={parentAccount}
+        transaction={transaction}
+        onChangeTransaction={onChangeTransaction}
+        t={t}
+      />
 
-    <FeeField account={account} transaction={transaction} onChange={onChangeTransaction} />
+      <FeeField account={mainAccount} transaction={transaction} onChange={onChangeTransaction} />
 
-    <AdvancedOptionsField
-      account={account}
-      transaction={transaction}
-      onChange={onChangeTransaction}
-    />
-  </Fragment>
-)
+      <AdvancedOptionsField
+        account={mainAccount}
+        transaction={transaction}
+        onChange={onChangeTransaction}
+      />
+    </Fragment>
+  )
+}
 
 export default ({
   t,
   account,
+  parentAccount,
   openedFromAccount,
   transaction,
   onChangeAccount,
   onChangeTransaction,
-}: StepProps<*>) => (
-  <Box flow={4}>
-    <TrackPage category="Send Flow" name="Step 1" />
-    {account ? <CurrencyDownStatusAlert currency={account.currency} /> : null}
+}: StepProps<*>) => {
+  const mainAccount = account ? getMainAccount(account, parentAccount) : null
+  return (
+    <Box flow={4}>
+      <TrackPage category="Send Flow" name="Step 1" />
+      {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
 
-    <Box flow={1}>
-      <Label>{t('send.steps.amount.selectAccountDebit')}</Label>
-      <SelectAccount autoFocus={!openedFromAccount} onChange={onChangeAccount} value={account} />
-    </Box>
+      <Box flow={1}>
+        <Label>{t('send.steps.amount.selectAccountDebit')}</Label>
+        <SelectAccount
+          withTokenAccounts
+          autoFocus={!openedFromAccount}
+          onChange={onChangeAccount}
+          value={account}
+        />
+      </Box>
 
-    {account &&
-      transaction && (
+      {account && transaction && (
         <AccountFields
           key={account.id}
           account={account}
+          parentAccount={parentAccount}
           transaction={transaction}
           onChangeTransaction={onChangeTransaction}
           openedFromAccount={openedFromAccount}
           t={t}
         />
       )}
-  </Box>
-)
+    </Box>
+  )
+}
 
 export class StepAmountFooter extends PureComponent<
   StepProps<*>,
   {
     totalSpent: BigNumber,
+    maxAmount: BigNumber,
     canNext: boolean,
     isSyncing: boolean,
     highFeesOpen: boolean,
@@ -106,6 +122,7 @@ export class StepAmountFooter extends PureComponent<
     isSyncing: false,
     highFeesOpen: false,
     totalSpent: BigNumber(0),
+    maxAmount: BigNumber(0),
     canNext: false,
   }
 
@@ -129,7 +146,7 @@ export class StepAmountFooter extends PureComponent<
   syncId = 0
 
   async resync() {
-    const { account, transaction } = this.props
+    const { account, parentAccount, transaction } = this.props
     const syncId = ++this.syncId
     if (!account || !transaction) {
       this.setState({ canNext: false, isSyncing: false })
@@ -137,25 +154,33 @@ export class StepAmountFooter extends PureComponent<
     }
     this.setState({ isSyncing: true })
 
-    const bridge = getAccountBridge(account)
+    const bridge = getAccountBridge(account, parentAccount)
+    const mainAccount = getMainAccount(account, parentAccount)
     try {
-      const totalSpent = await bridge.getTotalSpent(account, transaction)
+      const totalSpent = await bridge.getTotalSpent(mainAccount, transaction)
       if (syncId !== this.syncId) return
 
       const isRecipientValid = await bridge
-        .checkValidRecipient(account, bridge.getTransactionRecipient(account, transaction))
+        .checkValidRecipient(mainAccount, bridge.getTransactionRecipient(mainAccount, transaction))
         .then(() => true, () => false)
       if (syncId !== this.syncId) return
 
       const isValidTransaction = await bridge
-        .checkValidTransaction(account, transaction)
+        .checkValidTransaction(mainAccount, transaction)
         .then(() => true, () => false)
       if (syncId !== this.syncId) return
 
-      const amount = bridge.getTransactionAmount(account, transaction)
+      const amount = bridge.getTransactionAmount(mainAccount, transaction)
+      const useAllAmount = bridge.getTransactionExtra(mainAccount, transaction, 'useAllAmount')
+      let maxAmount
+      if (useAllAmount) maxAmount = await bridge.getMaxAmount(mainAccount, transaction)
+
       const canNext =
-        !amount.isZero() && isRecipientValid && !!isValidTransaction && totalSpent.gt(0)
-      this.setState({ totalSpent, canNext, isSyncing: false })
+        (!amount.isZero() || (useAllAmount && maxAmount && !maxAmount.isZero())) &&
+        isRecipientValid &&
+        !!isValidTransaction &&
+        totalSpent.gt(0)
+      this.setState({ totalSpent, maxAmount, canNext, isSyncing: false })
     } catch (err) {
       logger.critical(err)
       this.setState({ totalSpent: BigNumber(0), canNext: false, isSyncing: false })
@@ -163,14 +188,22 @@ export class StepAmountFooter extends PureComponent<
   }
 
   onNext = async () => {
-    const { totalSpent } = this.state
-    const { transitionTo, account, transaction } = this.props
+    const { totalSpent, maxAmount } = this.state
+    const { transitionTo, account, parentAccount, transaction } = this.props
     if (account && transaction) {
       if (
-        totalSpent
-          .minus(transaction.amount)
-          .times(10)
-          .gt(transaction.amount)
+        !parentAccount &&
+        ((transaction.amount.gt(0) &&
+          totalSpent
+            .minus(transaction.amount)
+            .times(10)
+            .gt(transaction.amount)) ||
+          (maxAmount &&
+            maxAmount.gt(0) &&
+            totalSpent
+              .minus(maxAmount)
+              .times(10)
+              .gt(maxAmount)))
       ) {
         this.setState({ highFeesOpen: true })
         return
@@ -189,26 +222,34 @@ export class StepAmountFooter extends PureComponent<
   }
 
   render() {
-    const { t, account, transaction } = this.props
-    const { isSyncing, totalSpent, canNext, highFeesOpen } = this.state
-    const bridge = account && getAccountBridge(account)
+    const { t, account, parentAccount, transaction } = this.props
+    const { isSyncing, totalSpent, canNext, highFeesOpen, maxAmount } = this.state
+    const mainAccount = account ? getMainAccount(account, parentAccount) : null
+    const currency = account ? getAccountCurrency(account) : null
+    const bridge = account ? getAccountBridge(account, parentAccount) : null
     const amount =
-      bridge && account && transaction && bridge.getTransactionAmount(account, transaction)
-    const isTerminated =
-      account && listCryptoCurrencies(true, true).some(coin => coin.name === account.currency.name)
+      bridge && mainAccount && transaction
+        ? bridge.getTransactionAmount(mainAccount, transaction)
+        : null
+    const isTerminated = (mainAccount && mainAccount.currency.terminated) || false
+    const accountUnit = !account
+      ? null
+      : account.type === 'Account'
+      ? account.unit
+      : account.token.units[0]
 
     return (
       <Fragment>
         <Box grow>
           <Label>{t('send.totalSpent')}</Label>
           <Box horizontal flow={2} align="center">
-            {account && (
+            {accountUnit && (
               <FormattedVal
                 disableRounding
                 style={{ width: 'auto' }}
                 color="dark"
                 val={totalSpent}
-                unit={account.unit}
+                unit={accountUnit}
                 showCode
               />
             )}
@@ -218,7 +259,7 @@ export class StepAmountFooter extends PureComponent<
               </Text>
               {account && (
                 <CounterValue
-                  currency={account.currency}
+                  currency={currency}
                   value={totalSpent}
                   disableRounding
                   color="grey"
@@ -237,17 +278,16 @@ export class StepAmountFooter extends PureComponent<
         <Button primary disabled={!canNext || !!isTerminated} onClick={this.onNext}>
           {t('common.continue')}
         </Button>
-        {amount &&
-          account && (
-            <HighFeeConfirmation
-              isOpened={highFeesOpen}
-              onReject={this.onRejectFees}
-              onAccept={this.onAcceptFees}
-              fees={totalSpent.minus(amount)}
-              amount={amount}
-              unit={account.unit}
-            />
-          )}
+        {amount && accountUnit && (
+          <HighFeeConfirmation
+            isOpened={highFeesOpen}
+            onReject={this.onRejectFees}
+            onAccept={this.onAcceptFees}
+            fees={totalSpent.minus(!amount.isZero() ? amount : maxAmount)}
+            amount={!amount.isZero() ? amount : maxAmount}
+            unit={accountUnit}
+          />
+        )}
       </Fragment>
     )
   }

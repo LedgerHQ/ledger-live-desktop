@@ -25,12 +25,10 @@ export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLoc
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
-    counterValueExchange: null,
+    pairExchanges: {},
   })
 export const setLanguage = (language: ?string) => saveSettings({ language })
 export const setRegion = (region: ?string) => saveSettings({ region })
-export const setCounterValueExchange = (counterValueExchange: ?string) =>
-  saveSettings({ counterValueExchange })
 
 type FetchSettings = (*) => (Dispatch<*>) => void
 export const fetchSettings: FetchSettings = (settings: *) => dispatch => {

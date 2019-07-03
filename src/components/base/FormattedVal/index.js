@@ -111,7 +111,7 @@ function FormattedVal(props: Props) {
       disableRounding,
       showCode,
       locale,
-      subMagnitude
+      subMagnitude,
     })
   }
 

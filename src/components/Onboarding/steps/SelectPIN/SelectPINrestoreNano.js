@@ -81,7 +81,9 @@ class SelectPINrestoreNano extends PureComponent<Props, *> {
         <Inner style={{ width: 700 }}>
           <img alt="" src={i('select-pin-nano-onb.svg')} />
           <Box shrink grow flow={4} style={{ marginLeft: 40 }}>
-            {stepsLedgerNano.map(step => <OptionRow key={step.key} step={step} />)}
+            {stepsLedgerNano.map(step => (
+              <OptionRow key={step.key} step={step} />
+            ))}
           </Box>
         </Inner>
         <DisclaimerBox mt={6} disclaimerNotes={disclaimerNotes} />

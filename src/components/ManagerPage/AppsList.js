@@ -5,14 +5,18 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
-
-import type { Device, T } from 'types/common'
+import { getDeviceModel } from '@ledgerhq/devices'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types/currencies'
+import {
+  currenciesByMarketcap,
+  listCryptoCurrencies,
+  isCurrencySupported,
+} from '@ledgerhq/live-common/lib/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
-import { getFullListSortedCryptoCurrencies } from 'helpers/countervalues'
-import { listCryptoCurrencies } from 'config/cryptocurrencies'
+import type { Device, T } from 'types/common'
+import { openURL } from 'helpers/linking'
+import { urls } from 'config/urls'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import flushDevice from 'commands/flushDevice'
@@ -23,17 +27,17 @@ import Text from 'components/base/Text'
 import ProgressBar from 'components/ProgressBar'
 import Spinner from 'components/base/Spinner'
 import Button from 'components/base/Button'
+import ModalBody from 'components/base/Modal/ModalBody'
 import TranslatedError from 'components/TranslatedError'
 import TrackPage from 'analytics/TrackPage'
 import IconInfoCircle from 'icons/InfoCircle'
+import CheckFull from 'icons/CheckFull'
 import ExclamationCircleThin from 'icons/ExclamationCircleThin'
 import Update from 'icons/Update'
 import Trash from 'icons/Trash'
-import CheckCircle from 'icons/CheckCircle'
 import { FreezeDeviceChangeEvents } from './HookDeviceChange'
 import ManagerApp, { Container as FakeManagerAppContainer } from './ManagerApp'
 import AppSearchBar from './AppSearchBar'
-import ModalBody from '../base/Modal/ModalBody'
 
 const List = styled(Box).attrs({
   horizontal: true,
@@ -54,6 +58,29 @@ const List = styled(Box).attrs({
       }
     }
   }
+`
+
+const IconWrapper = styled(Box).attrs({})`
+  position: relative;
+`
+
+const AppIcon = styled.img`
+  display: block;
+  width: 56px;
+  height: 56px;
+  pointer-events: none;
+`
+
+const AppCheck = styled(Box).attrs({
+  align: 'center',
+  justify: 'center',
+})`
+  color: ${({ theme }) => theme.colors.positiveGreen};
+  border-radius: 24px;
+  border: 4px solid white;
+  position: absolute;
+  top: -18px;
+  right: -12px;
 `
 
 const ICONS_FALLBACK = {
@@ -80,16 +107,14 @@ type State = {
   error: ?Error,
   filteredAppVersionsList: Array<ApplicationVersion>,
   appsLoaded: boolean,
-  app: string,
+  app: ?ApplicationVersion,
   mode: Mode,
   progress: number,
 }
 
 const oldAppsInstallDisabled = ['ZenCash', 'Ripple']
-const terminatedCryptoCurrencies: Array<CryptoCurrency> = listCryptoCurrencies(true, true)
 const canHandleInstall = app =>
-  !oldAppsInstallDisabled.includes(app.name) &&
-  !terminatedCryptoCurrencies.some(coin => coin.managerAppName === app.name)
+  !oldAppsInstallDisabled.includes(app.name) && !(app.currency && app.currency.terminated)
 
 const LoadingApp = () => (
   <FakeManagerAppContainer noShadow align="center" justify="center" style={{ height: 90 }}>
@@ -119,7 +144,7 @@ class AppsList extends PureComponent<Props, State> {
     error: null,
     filteredAppVersionsList: [],
     appsLoaded: false,
-    app: '',
+    app: null,
     mode: 'home',
     progress: 0,
   }
@@ -145,25 +170,13 @@ class AppsList extends PureComponent<Props, State> {
       const filteredAppVersionsList = await manager.getAppsList(
         deviceInfo,
         getEnv('MANAGER_DEV_MODE'),
-        getFullListSortedCryptoCurrencies,
+        () => currenciesByMarketcap(listCryptoCurrencies()),
       )
-
-      const withTickers = filteredAppVersionsList.map(app => {
-        const maybeCrypto = listCryptoCurrencies(true, false, false).find(
-          c => c.managerAppName.toLowerCase() === app.name.toLowerCase(),
-        )
-        const ticker = maybeCrypto ? maybeCrypto.ticker : ''
-
-        return {
-          ...app,
-          ticker,
-        }
-      })
 
       if (!this._unmounted) {
         this.setState({
           status: 'idle',
-          filteredAppVersionsList: withTickers,
+          filteredAppVersionsList,
           appsLoaded: true,
         })
       }
@@ -181,7 +194,7 @@ class AppsList extends PureComponent<Props, State> {
 
   sub: *
   runAppScript = (app: ApplicationVersion, mode: *, cmd: *) => {
-    this.setState({ status: 'busy', app: app.name, mode, progress: 0 })
+    this.setState({ status: 'busy', app, mode, progress: 0 })
     const {
       device: { path: devicePath },
       deviceInfo: { targetId },
@@ -194,7 +207,7 @@ class AppsList extends PureComponent<Props, State> {
         this.setState({ status: 'success' })
       },
       error: error => {
-        this.setState({ status: 'error', error, app: '', mode: 'home' })
+        this.setState({ status: 'error', error, mode: 'home' })
       },
     })
   }
@@ -211,13 +224,22 @@ class AppsList extends PureComponent<Props, State> {
     this.setState({ status: 'idle', mode: 'home' })
   }
 
+  handleLearnMore = () => {
+    openURL(urls.appSupport)
+    this.handleCloseModal()
+  }
+
   renderBody = () => {
-    const { t } = this.props
+    const { t, device } = this.props
     const { app, status, error, mode, progress } = this.state
+
+    const isCurrency = app && app.currency
+    const isSupported = app && app.currency && isCurrencySupported(app.currency)
+    const isInstalling = mode === 'installing'
 
     return ['busy', 'idle'].includes(status) ? (
       <Box grow align="center" justify="center">
-        {mode === 'installing' ? (
+        {isInstalling ? (
           <Box color="grey" grow align="center" mb={5}>
             <Update size={30} />
           </Box>
@@ -226,16 +248,23 @@ class AppsList extends PureComponent<Props, State> {
             <Trash size={30} />
           </Box>
         )}
-        <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
-          {mode !== 'home' ? t(`manager.apps.${mode}`, { app }) : null}
-        </Text>
+        {app ? (
+          <Text ff="Museo Sans|Regular" fontSize={6} color="dark">
+            {mode !== 'home' ? t(`manager.apps.${mode}`, { app: app.name || '' }) : null}
+          </Text>
+        ) : null}
         <Box mt={6}>
           <ProgressBar width={150} progress={progress} />
         </Box>
       </Box>
     ) : status === 'error' ? (
       <Box>
-        <TrackPage category="Manager" name="Error Modal" error={error && error.name} app={app} />
+        <TrackPage
+          category="Manager"
+          name="Error Modal"
+          error={error && error.name}
+          app={app ? app.name : ''}
+        />
         <Box grow align="center" justify="center" mt={5}>
           <Box color="alertRed">
             <ExclamationCircleThin size={44} />
@@ -264,9 +293,12 @@ class AppsList extends PureComponent<Props, State> {
       </Box>
     ) : status === 'success' ? (
       <Box grow align="center" justify="center" mt={5}>
-        <Box color="positiveGreen">
-          <CheckCircle size={44} />
-        </Box>
+        <IconWrapper>
+          <AppCheck>
+            <CheckFull size={24} />
+          </AppCheck>
+          <AppIcon src={manager.getIconUrl(app ? app.icon : '')} />
+        </IconWrapper>
         <Box
           color="dark"
           mt={4}
@@ -275,17 +307,54 @@ class AppsList extends PureComponent<Props, State> {
           textAlign="center"
           style={{ maxWidth: 350 }}
         >
-          {t(`manager.apps.${mode === 'installing' ? 'installSuccess' : 'uninstallSuccess'}`, {
-            app,
-          })}
+          {t(
+            `manager.apps.${
+              isInstalling
+                ? isSupported || !isCurrency
+                  ? 'installSuccess'
+                  : 'unsupportedSuccess'
+                : 'uninstallSuccess'
+            }`,
+            {
+              app: app ? app.name : '',
+            },
+          )}
         </Box>
+        {app && app.currency && isInstalling ? (
+          <Box
+            color="smoke"
+            mt={2}
+            fontSize={4}
+            ff="Open Sans|Regular"
+            textAlign="center"
+            style={{ maxWidth: 350 }}
+          >
+            {t(`manager.apps.${isSupported ? 'supportedCurrency' : 'unsupportedCurrency'}`, {
+              app: app.name,
+              device: getDeviceModel(device.modelId).productName,
+            })}
+          </Box>
+        ) : null}
       </Box>
     ) : null
   }
 
   renderFooter = () => {
     const { t } = this.props
-    return (
+    const { app, mode } = this.state
+
+    const isInstalling = mode === 'installing'
+    const isCurrency = app && app.currency
+    const isSupported = app && app.currency && isCurrencySupported(app.currency)
+
+    return isCurrency && isInstalling && !isSupported ? (
+      <Box horizontal justifyContent="flex-end" style={{ width: '100%' }}>
+        <Button onClick={this.handleCloseModal}>{t('common.close')}</Button>
+        <Button style={{ marginLeft: 10 }} primary onClick={this.handleLearnMore}>
+          {t('common.learnMore')}
+        </Button>
+      </Box>
+    ) : (
       <Box horizontal justifyContent="flex-end" style={{ width: '100%' }}>
         <Button primary onClick={this.handleCloseModal}>
           {t('common.close')}
@@ -296,17 +365,23 @@ class AppsList extends PureComponent<Props, State> {
 
   renderModal = () => {
     const { status, mode } = this.state
+    const { t } = this.props
+    const shouldDisplayTitle = mode !== 'home' && status === 'success'
     return (
       <Modal
         isOpened={status !== 'idle' && status !== 'loading'}
         preventBackdropClick={['installing', 'uninstalling'].includes(mode)}
         centered
-        onClose={this.handleCloseModal}
+        onClose={null}
       >
         <ModalBody
           align="center"
           justify="center"
-          title={''}
+          title={
+            shouldDisplayTitle
+              ? t(`manager.apps.${mode === 'installing' ? 'installed' : 'uninstalled'}`)
+              : ''
+          }
           render={this.renderBody}
           onClose={this.handleCloseModal}
           renderFooter={['error', 'success'].includes(status) ? this.renderFooter : undefined}
@@ -321,7 +396,7 @@ class AppsList extends PureComponent<Props, State> {
     const { filteredAppVersionsList, appsLoaded } = this.state
     return (
       <Box>
-        <AppSearchBar searchKeys={['ticker']} list={filteredAppVersionsList}>
+        <AppSearchBar searchKeys={['currency.ticker']} list={filteredAppVersionsList}>
           {items => (
             <List>
               {items.map(c => (

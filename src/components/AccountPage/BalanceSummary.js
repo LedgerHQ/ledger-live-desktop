@@ -10,8 +10,9 @@ import { formatShort } from '@ledgerhq/live-common/lib/currencies'
 import type {
   Currency,
   Account,
+  TokenAccount,
   PortfolioRange,
-  BalanceHistoryWithCountervalue,
+  AccountPortfolio,
 } from '@ledgerhq/live-common/lib/types'
 
 import Chart from 'components/base/Chart'
@@ -23,11 +24,9 @@ type Props = {
   counterValue: Currency,
   chartColor: string,
   chartId: string,
-  account: Account,
-  balanceHistoryWithCountervalue: {
-    countervalueAvailable: boolean,
-    history: BalanceHistoryWithCountervalue,
-  },
+  account: Account | TokenAccount,
+  parentAccount: ?Account,
+  balanceHistoryWithCountervalue: AccountPortfolio,
   range: PortfolioRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
@@ -38,10 +37,8 @@ class AccountBalanceSummary extends PureComponent<Props> {
     const { account, counterValue, balanceHistoryWithCountervalue, countervalueFirst } = this.props
     const displayCountervalue =
       countervalueFirst && balanceHistoryWithCountervalue.countervalueAvailable
-    const data = [
-      { val: d.value, unit: account.unit },
-      { val: d.countervalue, unit: counterValue.units[0] },
-    ]
+    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    const data = [{ val: d.value, unit }, { val: d.countervalue, unit: counterValue.units[0] }]
     if (displayCountervalue) data.reverse()
     return (
       <Fragment>
@@ -54,7 +51,11 @@ class AccountBalanceSummary extends PureComponent<Props> {
     )
   }
 
-  renderTickYCryptoValue = val => formatShort(this.props.account.unit, BigNumber(val))
+  renderTickYCryptoValue = val => {
+    const { account } = this.props
+    const unit = account.type === 'Account' ? account.unit : account.token.units[0]
+    return formatShort(unit, BigNumber(val))
+  }
 
   renderTickYCounterValue = val => formatShort(this.props.counterValue.units[0], BigNumber(val))
 
@@ -66,7 +67,12 @@ class AccountBalanceSummary extends PureComponent<Props> {
   render() {
     const {
       account,
-      balanceHistoryWithCountervalue: { history, countervalueAvailable },
+      balanceHistoryWithCountervalue: {
+        history,
+        countervalueAvailable,
+        countervalueChange,
+        cryptoChange,
+      },
       range,
       chartColor,
       chartId,
@@ -74,8 +80,6 @@ class AccountBalanceSummary extends PureComponent<Props> {
       countervalueFirst,
       setCountervalueFirst,
     } = this.props
-    const first = history[0]
-    const last = history[history.length - 1]
     const displayCountervalue = countervalueFirst && countervalueAvailable
     return (
       <Card p={0} py={5}>
@@ -84,9 +88,10 @@ class AccountBalanceSummary extends PureComponent<Props> {
             account={account}
             counterValue={counterValue}
             selectedTimeRange={range}
+            countervalueChange={countervalueChange}
+            cryptoChange={cryptoChange}
+            last={history[history.length - 1]}
             isAvailable={countervalueAvailable}
-            first={first}
-            last={last}
             countervalueFirst={displayCountervalue}
             setCountervalueFirst={setCountervalueFirst}
           />

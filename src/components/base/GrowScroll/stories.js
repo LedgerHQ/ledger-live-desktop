@@ -21,7 +21,9 @@ stories.add('GrowScroll', () => {
       }}
     >
       <GrowScroll maxHeight={400}>
-        {[...Array(1000).keys()].map(v => <div key={v}>{v}</div>)}
+        {[...Array(1000).keys()].map(v => (
+          <div key={v}>{v}</div>
+        ))}
       </GrowScroll>
     </Box>
   )

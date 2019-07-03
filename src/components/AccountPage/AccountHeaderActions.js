@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import styled from 'styled-components'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import Tooltip from 'components/base/Tooltip'
 import { isAccountEmpty } from '@ledgerhq/live-common/lib/account'
 
@@ -49,7 +49,8 @@ const mapDispatchToProps = {
 }
 
 type OwnProps = {
-  account: Account,
+  account: TokenAccount | Account,
+  parentAccount: ?Account,
 }
 
 type Props = OwnProps & {
@@ -59,19 +60,23 @@ type Props = OwnProps & {
 
 class AccountHeaderActions extends PureComponent<Props> {
   render() {
-    const { account, openModal, t } = this.props
+    const { account, parentAccount, openModal, t } = this.props
     return (
       <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
         {!isAccountEmpty(account) ? (
           <Fragment>
-            <Button small primary onClick={() => openModal(MODAL_SEND, { account })}>
+            <Button small primary onClick={() => openModal(MODAL_SEND, { parentAccount, account })}>
               <Box horizontal flow={1} alignItems="center">
                 <IconSend size={12} />
                 <Box>{t('send.title')}</Box>
               </Box>
             </Button>
 
-            <Button small primary onClick={() => openModal(MODAL_RECEIVE, { account })}>
+            <Button
+              small
+              primary
+              onClick={() => openModal(MODAL_RECEIVE, { parentAccount, account })}
+            >
               <Box horizontal flow={1} alignItems="center">
                 <IconReceive size={12} />
                 <Box>{t('receive.title')}</Box>
@@ -79,13 +84,17 @@ class AccountHeaderActions extends PureComponent<Props> {
             </Button>
           </Fragment>
         ) : null}
-        <Tooltip render={() => t('account.settings.title')}>
-          <ButtonSettings onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { account })}>
-            <Box justifyContent="center">
-              <IconAccountSettings size={16} />
-            </Box>
-          </ButtonSettings>
-        </Tooltip>
+        {account.type === 'Account' ? (
+          <Tooltip render={() => t('account.settings.title')}>
+            <ButtonSettings
+              onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
+            >
+              <Box justifyContent="center">
+                <IconAccountSettings size={16} />
+              </Box>
+            </ButtonSettings>
+          </Tooltip>
+        ) : null}
       </Box>
     )
   }

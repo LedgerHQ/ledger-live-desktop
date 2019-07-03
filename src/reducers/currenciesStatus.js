@@ -4,14 +4,12 @@ import React from 'react'
 import { handleActions, createAction } from 'redux-actions'
 import { createSelector } from 'reselect'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-
+import { listSupportedCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import network from 'api/network'
 import { urls } from 'config/urls'
 import logger from 'logger'
-
 import { Trans } from 'react-i18next'
 import type { State } from './index'
-import { listCryptoCurrencies } from '../config/cryptocurrencies'
 
 export type CurrencyStatus = {
   id: string, // the currency id
@@ -43,8 +41,8 @@ export const fetchCurrenciesStatus = () => async (dispatch: *) => {
       url: process.env.LL_STATUS_ENDPOINT || urls.currenciesStatus,
     })
 
-    const terminatedCurrencies = listCryptoCurrencies(true, true)
-      .filter(coin => !data.find(c => c.id === coin.id))
+    const terminatedCurrencies = listSupportedCurrencies()
+      .filter(coin => coin.terminated && !data.find(c => c.id === coin.id))
       .map(coin => ({
         id: coin.id,
         nonce: 98,

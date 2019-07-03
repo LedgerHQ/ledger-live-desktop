@@ -57,8 +57,8 @@ const initialStepId = ({ deviceInfo, device }): StepId =>
   deviceInfo.isOSU
     ? 'updateMCU'
     : getDeviceModel(device.modelId).id === 'blue'
-      ? 'resetDevice'
-      : 'idCheck'
+    ? 'resetDevice'
+    : 'idCheck'
 
 const intializeState = (props: Props): State => ({
   firmware: null,

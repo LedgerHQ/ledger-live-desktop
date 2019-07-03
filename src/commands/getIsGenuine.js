@@ -15,11 +15,10 @@ type Input = {
 type Result = GenuineCheckEvent
 
 const cmd: Command<Input, Result> = createCommand('getIsGenuine', ({ devicePath, deviceInfo }) =>
-  withDevice(devicePath)(
-    transport =>
-      SKIP_GENUINE
-        ? of({ type: 'result', payload: '0000' }).pipe(delay(1000))
-        : checkDeviceForManager(transport, deviceInfo),
+  withDevice(devicePath)(transport =>
+    SKIP_GENUINE
+      ? of({ type: 'result', payload: '0000' }).pipe(delay(1000))
+      : checkDeviceForManager(transport, deviceInfo),
   ),
 )
 

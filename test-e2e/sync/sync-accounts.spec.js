@@ -46,13 +46,15 @@ function getSanitized(filePath) {
   const data = require(`${filePath}`) // eslint-disable-line import/no-dynamic-require
   const accounts = data.data.accounts.map(a => a.data)
   accounts.sort(ACCOUNT_SORT)
-  return accounts.map(a => pick(a, ACCOUNTS_FIELDS)).map(a => {
-    a.operations.sort(OP_SORT)
-    return {
-      ...a,
-      operations: a.operations.map(o => pick(o, OPS_FIELDS)),
-    }
-  })
+  return accounts
+    .map(a => pick(a, ACCOUNTS_FIELDS))
+    .map(a => {
+      a.operations.sort(OP_SORT)
+      return {
+        ...a,
+        operations: a.operations.map(o => pick(o, OPS_FIELDS)),
+      }
+    })
 }
 
 function getOpHash(op) {

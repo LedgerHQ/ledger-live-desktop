@@ -605,8 +605,11 @@ export const accountBridge: AccountBridge<Transaction> = {
         return { ...t, fee: value }
 
       case 'tag':
+        if (!value) {
+          return { ...t, tag: undefined }
+        }
         invariant(
-          !value || typeof value === 'number',
+          typeof value === 'number',
           "editTransactionExtra(a,t,'tag',value): number value expected",
         )
         return { ...t, tag: value }
@@ -696,19 +699,12 @@ export const accountBridge: AccountBridge<Transaction> = {
       }
     }),
 
-  addPendingOperation: (account, operation) => ({
-    ...account,
-    pendingOperations: [operation].concat(
-      account.pendingOperations.filter(
-        o => o.transactionSequenceNumber === operation.transactionSequenceNumber,
-      ),
-    ),
-  }),
-
   getDefaultEndpointConfig: () => defaultEndpoint,
 
   validateEndpointConfig: async endpointConfig => {
     const api = apiForEndpointConfig(RippleAPI, endpointConfig)
     await api.connect()
   },
+
+  prepareTransaction: (a, t) => Promise.resolve(t),
 }

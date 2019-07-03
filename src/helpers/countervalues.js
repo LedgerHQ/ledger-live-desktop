@@ -1,38 +1,46 @@
 // @flow
 
 import { createSelector } from 'reselect'
+import { implementCountervalues, getCountervalues } from '@ledgerhq/live-common/lib/countervalues'
+import uniq from 'lodash/uniq'
 import { LEDGER_COUNTERVALUES_API } from 'config/constants'
-import createCounterValues from '@ledgerhq/live-common/lib/countervalues'
 import { setExchangePairsAction } from 'actions/settings'
 import { currenciesSelector } from 'reducers/accounts'
 import {
   counterValueCurrencySelector,
-  counterValueExchangeSelector,
-  exchangeSettingsForTickerSelector,
+  exchangeSettingsForPairSelector,
   intermediaryCurrency,
 } from 'reducers/settings'
 import logger from 'logger'
-import { listCryptoCurrencies } from '@ledgerhq/live-common/lib/currencies'
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import network from '../api/network'
 
-const pairsSelector = createSelector(
+export const pairsSelector = createSelector(
   currenciesSelector,
   counterValueCurrencySelector,
-  counterValueExchangeSelector,
   state => state,
-  (currencies, counterValueCurrency, counterValueExchange, state) =>
-    currencies.length === 0
-      ? []
-      : [
-          { from: intermediaryCurrency, to: counterValueCurrency, exchange: counterValueExchange },
-        ].concat(
-          currencies.filter(c => c.ticker !== intermediaryCurrency.ticker).map(currency => ({
-            from: currency,
-            to: intermediaryCurrency,
-            exchange: exchangeSettingsForTickerSelector(state, { ticker: currency.ticker }),
-          })),
-        ),
+  (currencies, counterValueCurrency, state) => {
+    if (currencies.length === 0) return []
+    const intermediaries = uniq(
+      currencies.map(c => intermediaryCurrency(c, counterValueCurrency)),
+    ).filter(c => c !== counterValueCurrency)
+    return intermediaries
+      .map(from => ({
+        from,
+        to: counterValueCurrency,
+        exchange: exchangeSettingsForPairSelector(state, { from, to: counterValueCurrency }),
+      }))
+      .concat(
+        currencies
+          .map(from => {
+            if (intermediaries.includes(from) || from.disableCountervalue) return null
+            const to = intermediaryCurrency(from, counterValueCurrency)
+            if (from === to) return null
+            const exchange = exchangeSettingsForPairSelector(state, { from, to })
+            return { from, to, exchange }
+          })
+          .filter(p => p),
+      )
+  },
 )
 
 const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
@@ -55,8 +63,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
   }
 }
 
-// $FlowFixMe
-const CounterValues = createCounterValues({
+implementCountervalues({
   log: (...args) => logger.log('CounterValues:', ...args),
   getAPIBaseURL: () => LEDGER_COUNTERVALUES_API,
   storeSelector: state => state.countervalues,
@@ -66,30 +73,6 @@ const CounterValues = createCounterValues({
   network,
 })
 
-let sortCache
-export const getFullListSortedCryptoCurrencies: () => Promise<CryptoCurrency[]> = () => {
-  if (!sortCache) {
-    sortCache = CounterValues.fetchTickersByMarketcap().then(
-      tickers => {
-        const list = listCryptoCurrencies().slice(0)
-        const prependList = []
-        tickers.forEach(ticker => {
-          const item = list.find(c => c.ticker === ticker)
-          if (item) {
-            list.splice(list.indexOf(item), 1)
-            prependList.push(item)
-          }
-        })
-        return prependList.concat(list)
-      },
-      () => {
-        sortCache = null // reset the cache for the next time it comes here to "try again"
-        return listCryptoCurrencies() // fallback on default sort
-      },
-    )
-  }
-
-  return sortCache
-}
+const CounterValues = getCountervalues()
 
 export default CounterValues

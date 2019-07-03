@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import type { Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
+import type { TokenAccount, Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
 import { Trans } from 'react-i18next'
 
 import Text from 'components/base/Text'
@@ -11,11 +11,11 @@ import GridBody from '../AccountList/GridBody'
 import ListBody from '../AccountList/ListBody'
 
 type Props = {
-  accounts: Account[],
+  accounts: (Account | TokenAccount)[],
   mode: *,
   onModeChange: (*) => void,
   onRangeChange: PortfolioRange => void,
-  onAccountClick: Account => void,
+  onAccountClick: (Account | TokenAccount, ?Account) => void,
   range: PortfolioRange,
 }
 
@@ -28,9 +28,39 @@ const BodyByMode = {
   list: ListBody,
 }
 
+export const matchesSearch = (
+  search?: string,
+  account: Account | TokenAccount,
+  subMatch: boolean = false,
+): boolean => {
+  if (!search) return true
+  let match
+
+  if (account.type === 'Account') {
+    match = `${account.currency.ticker}|${account.currency.name}|${account.name}`
+    subMatch =
+      subMatch &&
+      !!account.tokenAccounts &&
+      account.tokenAccounts.some(token => matchesSearch(search, token))
+  } else {
+    match = `${account.token.ticker}|${account.token.name}`
+  }
+
+  return match.toLowerCase().includes(search.toLowerCase()) || subMatch
+}
+
 class AccountList extends Component<Props, State> {
   state = {
     search: '',
+  }
+
+  lookupParentAccount = (id: string): ?Account => {
+    for (const a of this.props.accounts) {
+      if (a.type === 'Account' && a.id === id) {
+        return a
+      }
+    }
+    return null
   }
 
   onTextChange = (evt: SyntheticInputEvent<HTMLInputElement>) =>
@@ -47,12 +77,7 @@ class AccountList extends Component<Props, State> {
     const hiddenAccounts = []
     for (let i = 0; i < accounts.length; i++) {
       const account = accounts[i]
-      if (
-        !search ||
-        `${account.currency.ticker}|${account.currency.name}|${account.name}`
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      ) {
+      if (matchesSearch(search, account, mode === 'list')) {
         visibleAccounts.push(account)
       } else {
         hiddenAccounts.push(account)
@@ -79,10 +104,12 @@ class AccountList extends Component<Props, State> {
           horizontal
           data-e2e="dashboard_AccountList"
           range={range}
+          search={search}
           visibleAccounts={visibleAccounts}
           hiddenAccounts={hiddenAccounts}
           showNewAccount={!search}
           onAccountClick={onAccountClick}
+          lookupParentAccount={this.lookupParentAccount}
         />
         <StickyBackToTop scrollUpOnMount />
       </div>

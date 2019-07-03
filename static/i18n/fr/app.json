@@ -125,13 +125,15 @@
     "title": "Comptes",
     "noResultFound": "Aucun compte trouvé.",
     "order": {
-      "name": "Nom du compte",
-      "balance": "Solde du compte"
+      "name|asc": "Nom A-Z",
+      "name|desc": "Nom Z-A",
+      "balance|asc": "Solde croissant",
+      "balance|desc": "Solde décroissant"
     },
     "range": {
-      "week": "semaine",
-      "month": "mois",
-      "year": "année"
+      "week": "Semaine",
+      "month": "Mois",
+      "year": "Année"
     },
     "contextMenu": {
       "receive": "Recevoir",
@@ -164,7 +166,7 @@
   },
   "currentAddress": {
     "title": "Adresse actuelle",
-    "for": "Adresse pour le compte <1><0>{{accountName}}</0></1>",
+    "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Veuillez vérifier que l’adresse {{currencyName}} affichée sur Ledger Live correspond à celle indiquée sur votre appareil",
     "messageIfAccepted": "Adresse confirmée. Veuillez la revérifier si vous la copiez/collez ou si vous scannez le QR code.",
     "messageIfSkipped": "Votre adresse {{currencyName}} n’a pas été confirmée sur votre appareil Ledger. Veuillez la vérifier pour une sécurité optimale."
@@ -207,13 +209,23 @@
     "taxtoken": "Logiciel automatisé de gestion des coûts initiaux et des taxes pour les cryptomonnaies réservé aux citoyens américains.",
     "thorswap": "ThorSwap est un marché de crypto-actifs instantané, sécurisé et équitable qui s'appuie sur les technologies décentralisées d’Atomic Swap. Il s’agit du moyen le plus pratique pour se lancer dans le trading, aucune inscription, aucun formulaire à remplir pour les transactions de faible montant.",
     "bitpanda": "Bitpanda est le service de courtage leader en Europe pour acheter et revendre Bitcoins, Ethereum, IOTA et bien d’autres. Déposez de l’argent avec votre carte bancaire, SOFORT-Transfer, NETELLER et d’autres options.",
-    "exmo": "Créé en 2013 et basé à Londres, Kiev, Barcelone et Moscou, EXMO est la plateforme d'échange numéro 1 en Europe de l’Est et l’une des plus grandes plateformes d'échange mondiales en termes de volume et de liquidités."
+    "exmo": "Créé en 2013 et basé à Londres, Kiev, Barcelone et Moscou, EXMO est la plateforme d'échange numéro 1 en Europe de l’Est et l’une des plus grandes plateformes d'échange mondiales en termes de volume et de liquidités.",
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
   },
   "genuinecheck": {
     "modal": {
       "title": "Vérification d'authenticité"
     },
     "deviceInBootloader": "Votre appareil est en mode Bootloader. Cliquez sur {{button}} pour le mettre à jour."
+  },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Recevoir un token",
+    "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
+    "link": "En savoir plus",
+    "seeTokens": "Voir tokens ({{tokenCount}})",
+    "hideTokens": "Cacher tokens ({{tokenCount}})",
+    "tooltip": "Token de"
   },
   "addAccounts": {
     "title": "Ajouter des comptes",
@@ -258,7 +270,7 @@
         "title": "Comptes déjà présents dans le portefeuille ({{count}})"
       },
       "migrate": {
-        "title": "Comptes à migrer"
+        "title": "Comptes à mettre à jour"
       }
     }
   },
@@ -289,9 +301,14 @@
       "all": "Catalogue d'applications",
       "installing": "Installation de {{app}}...",
       "uninstalling": "Désinstallation de {{app}}...",
-      "installSuccess": "{{app}} installé",
+      "installSuccess": "{{app}} a été installé avec succès",
+      "unsupportedSuccess": "Découvrez comment utiliser {{app}}",
       "uninstallSuccess": "{{app}} désinstallé",
-      "help": "Consultez votre appareil pour voir quelles applications sont déjà installées."
+      "supportedCurrency": "{{app}} est maintenant installé sur votre {{device}}. Ajoutez un compte pour pouvoir envoyer et recevoir des fonds",
+      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
+      "help": "Consultez votre appareil pour voir quelles applications sont déjà installées.",
+      "installed": "Application installée",
+      "uninstalled": "Application désinstallée"
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
@@ -354,7 +371,9 @@
     "steps": {
       "chooseAccount": {
         "title": "Compte",
-        "label": "Compte à créditer"
+        "label": "Compte à créditer",
+        "parentAccount": "1. Choose {{currencyName}} Account",
+        "token": "2. Choose {{currencyName}} Token"
       },
       "connectDevice": {
         "title": "Appareil",
@@ -381,7 +400,7 @@
         "recipientAddress": "Adresse du destinataire",
         "amount": "Montant",
         "fees": "Frais de réseau",
-        "useMax": "Maximum",
+        "useMax": "Max",
         "advancedOptions": "Options avancées",
         "useRBF": "Utiliser une transaction Replace-by-Fee",
         "message": "Laisser un message (140) ",
@@ -421,19 +440,21 @@
   },
   "distribution": {
     "asset": "Actif ",
-    "price": "Price",
+    "price": "Prix",
     "distribution": "Répartition",
     "amount": "Montant",
     "value": "Valeur",
-    "seeAll": "See all",
-    "header": "Asset distribution ({{count}})"
+    "seeAll": "Tout voir",
+    "header": "Distribution d'actifs ({{count}})"
   },
   "settings": {
     "title": "Paramètres",
     "tabs": {
       "display": "Général",
       "export": "Comptes",
-      "currencies": "Devises",
+      "cryptoAssets": "Crypto-actifs",
+      "currencies": "Crypto-actifs",
+      "rates": "Taux",
       "help": "Aide",
       "about": "A propos de",
       "experimental": "Fonctionnalités expérimentales"
@@ -472,11 +493,22 @@
       "stockDesc": "Choisissez Ouest pour afficher une augmentation de la valeur du marché en bleu ou Est pour l’afficher en rouge."
     },
     "currencies": {
-      "desc": "Sélectionnez un crypto-actif pour en modifier les paramètres.",
+      "desc": "Modifier les paramètres pour chacun de vos crypto-actifs",
+      "select": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "exchange": "Prestataire de change ({{ticker}} → BTC)",
       "exchangeDesc": "Choisir le fournisseur du taux de change de {{currencyName}} en Bitcoins, utilisé pour estimer la valeur de vos crypto-actifs ({{ticker}} → BTC → {{fiat}}).",
       "confirmationsNb": "Nombre de confirmations",
       "confirmationsNbDesc": "Définissez le nombre de confirmations réseau pour qu’une transaction soit marquée comme confirmée."
+    },
+    "rates": {
+      "desc": "Voici tous les tarifs utilisés par Ledger Live pour calculer les contrevaleurs.\nChoisissez quels fournisseurs de taux sont utilisés pour chaque taux.",
+      "fromTo": "{{from}} to {{to}}",
+      "cryptoToFiat": "Crypto vers fiat",
+      "cryptoToCrypto": "Crypto vers Crypto",
+      "rate": "Taux",
+      "last": "{{days}} derniers jours",
+      "price": "Prix",
+      "exchange": "Rate provider"
     },
     "profile": {
       "password": "Verrouillage par mot de passe",
@@ -847,8 +879,8 @@
       "description": "Ouvrez l’application « {{managerAppName}} » sur votre appareil."
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto-assets is not yet supported. Please contact us."
+      "title": "{{currencyName}} n'est pas pris en charge",
+      "description": "Cet actif crypto n'est pas encore pris en charge. Veuillez nous contacter."
     },
     "DeviceNotGenuine": {
       "title": "Vraisemblablement non authentique",
@@ -954,6 +986,9 @@
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "L’adresse du destinataire est inactive. Envoyez au minimum {{minimalAmount}} pour l’activer."
+    },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Les mots de passe de correspondent pas.",

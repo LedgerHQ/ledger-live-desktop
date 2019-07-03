@@ -10,8 +10,8 @@ import type { RouterHistory, Match, Location } from 'react-router'
 import { accountsSelector } from 'reducers/accounts'
 import Pills from 'components/base/Pills'
 import Box from 'components/base/Box'
-import SectionDisplay from './sections/Display'
-import SectionCurrencies from './sections/Currencies'
+import SectionDisplay from './sections/General'
+import SectionCryptoAssets from './sections/CryptoAssets'
 import SectionHelp from './sections/Help'
 import SectionAbout from './sections/About'
 import SectionExperimental from './sections/Experimental'
@@ -45,8 +45,8 @@ class SettingsPage extends PureComponent<Props, State> {
       },
       {
         key: 'currencies',
-        label: <Trans i18nKey="settings.tabs.currencies" />,
-        value: SectionCurrencies,
+        label: <Trans i18nKey="settings.tabs.cryptoAssets" />,
+        value: SectionCryptoAssets,
       },
       {
         key: 'export',
@@ -113,7 +113,9 @@ class SettingsPage extends PureComponent<Props, State> {
         </Box>
         <Pills mb={4} items={items} activeKey={tab.key} onChange={this.handleChangeTab} />
         <Switch>
-          {items.map(i => <Route key={i.key} path={`${match.url}/${i.key}`} component={i.value} />)}
+          {items.map(i => (
+            <Route key={i.key} path={`${match.url}/${i.key}`} component={i.value} />
+          ))}
           <Route component={defaultItem.value} />
         </Switch>
       </Box>

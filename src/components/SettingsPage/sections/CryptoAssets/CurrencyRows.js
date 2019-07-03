@@ -7,14 +7,12 @@ import { createStructuredSelector } from 'reselect'
 import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 import { saveSettings } from 'actions/settings'
-import { intermediaryCurrency, currencySettingsSelector, storeSelector } from 'reducers/settings'
+import { currencySettingsSelector, storeSelector } from 'reducers/settings'
 import type { SettingsState, CurrencySettings } from 'reducers/settings'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 import StepperNumber from 'components/base/StepperNumber'
-import ExchangeSelect from 'components/SelectExchange'
 import Track from 'analytics/Track'
-
-import { SettingsSectionRow as Row } from '../SettingsSection'
+import { SettingsSectionRow as Row } from '../../SettingsSection'
 
 type Props = {
   t: T,
@@ -27,9 +25,6 @@ type Props = {
 
 class CurrencyRows extends PureComponent<Props> {
   handleChangeConfirmationsNb = (nb: number) => this.updateCurrencySettings('confirmationsNb', nb)
-
-  handleChangeExchange = (exchange: *) =>
-    this.updateCurrencySettings('exchange', exchange ? exchange.id : null)
 
   updateCurrencySettings = (key: string, val: *) => {
     // FIXME this really should be a dedicated action
@@ -56,31 +51,11 @@ class CurrencyRows extends PureComponent<Props> {
   }
 
   render() {
-    const { currency, t, settings, currencySettings } = this.props
-    const { confirmationsNb, exchange } = currencySettings
+    const { currency, t, currencySettings } = this.props
+    const { confirmationsNb } = currencySettings
     const defaults = currencySettingsDefaults(currency)
     return (
       <Fragment>
-        {currency !== intermediaryCurrency ? (
-          <Row
-            title={t('settings.currencies.exchange', {
-              ticker: currency.ticker,
-            })}
-            desc={t('settings.currencies.exchangeDesc', {
-              ticker: currency.ticker,
-              fiat: settings.counterValue,
-            })}
-          >
-            <ExchangeSelect
-              small
-              from={currency}
-              to={intermediaryCurrency}
-              exchangeId={exchange}
-              onChange={this.handleChangeExchange}
-              minWidth={200}
-            />
-          </Row>
-        ) : null}
         {defaults.confirmationsNb ? (
           <Row
             title={t('settings.currencies.confirmationsNb')}

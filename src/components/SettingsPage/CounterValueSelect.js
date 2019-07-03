@@ -3,15 +3,15 @@
 import React, { Fragment, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { getCryptoCurrencyById, listFiatCurrencies } from '@ledgerhq/live-common/lib/currencies'
+import { listFiatCurrencies } from '@ledgerhq/live-common/lib/currencies'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setCounterValue } from 'actions/settings'
-import { counterValueCurrencySelector } from 'reducers/settings'
+import { counterValueCurrencySelector, possibleIntermediaries } from 'reducers/settings'
 import Select from 'components/base/Select'
 import Track from 'analytics/Track'
 
 // TODO allow more cryptos as countervalues, then refactor this to common
-const currencies = [...listFiatCurrencies(), getCryptoCurrencyById('bitcoin')].map(currency => ({
+const currencies = [...listFiatCurrencies(), ...possibleIntermediaries].map(currency => ({
   value: currency.ticker,
   label: `${currency.name} - ${currency.ticker}`,
   currency,

@@ -4,7 +4,7 @@ import { remote } from 'electron'
 import React, { Fragment, Component } from 'react'
 import { compose } from 'redux'
 import styled from 'styled-components'
-import { Route, withRouter } from 'react-router'
+import { Route, withRouter, Switch } from 'react-router'
 import { translate } from 'react-i18next'
 import { SYNC_PENDING_INTERVAL } from 'config/constants'
 
@@ -113,17 +113,20 @@ class Default extends Component<Props> {
             <Box grow horizontal bg="white">
               <SideBar />
 
-              <Box shrink grow bg="lightGrey" color="grey" overflow="hidden" relative>
+              <Box shrink grow bg="lightGrey" color="grey" overflow="visible" relative>
                 <HSMStatusBanner />
                 <TopBar />
                 <Main innerRef={n => (this._scrollContainer = n)} tabIndex={-1}>
-                  <Route path="/" exact component={DashboardPage} />
-                  <Route path="/settings" component={SettingsPage} />
-                  <Route path="/accounts" component={AccountsPage} />
-                  <Route path="/manager" component={ManagerPage} />
-                  <Route path="/partners" component={PartnersPage} />
-                  <Route path="/account/:id" component={AccountPage} />
-                  <Route path="/dev" component={DevToolsPage} />
+                  <Switch>
+                    <Route path="/" exact component={DashboardPage} />
+                    <Route path="/settings" component={SettingsPage} />
+                    <Route path="/accounts" component={AccountsPage} />
+                    <Route path="/manager" component={ManagerPage} />
+                    <Route path="/partners" component={PartnersPage} />
+                    <Route path="/account/:parentId/:id" component={AccountPage} />
+                    <Route path="/account/:id" component={AccountPage} />
+                    <Route path="/dev" component={DevToolsPage} />
+                  </Switch>
                 </Main>
               </Box>
             </Box>

@@ -18,10 +18,13 @@ const Drop = styled(Box).attrs({
   borderRadius: 1,
   p: 2,
 })`
+  ${p => p.border && `border:1px solid ${p.theme.colors.lightFog}`};
+  max-height: 400px;
   position: absolute;
   right: 0;
   top: 100%;
   z-index: 1;
+  overflow: scroll;
 `
 
 export const DropDownItem = styled(Box).attrs({
@@ -30,13 +33,17 @@ export const DropDownItem = styled(Box).attrs({
   ff: p => (p.isActive ? 'Open Sans|SemiBold' : 'Open Sans'),
   fontSize: 4,
   px: 3,
-  color: p => (p.isHighlighted || p.isActive ? 'dark' : 'warnGrey'),
+  color: p => (p.isHighlighted || p.isActive ? 'dark' : 'smoke'),
   bg: p => (p.isActive ? 'lightGrey' : ''),
 })`
   height: 40px;
   white-space: nowrap;
 `
 
+export const Wrapper = styled(Box)`
+  flex-shrink: 1;
+  ${p => p.shrink && `flex-shrink:${p.shrink};`}
+`
 function itemToString(item) {
   return item ? item.label : ''
 }
@@ -51,10 +58,12 @@ type Props = {
   items: Array<DropDownItemType>,
   keepOpenOnChange?: boolean,
   offsetTop: number | string,
+  border?: boolean,
   onChange?: DropDownItemType => void,
   onStateChange?: Function,
   renderItem: Object => any,
   value?: DropDownItemType | null,
+  shrink?: string,
 }
 
 class DropDown extends PureComponent<Props> {
@@ -115,11 +124,11 @@ class DropDown extends PureComponent<Props> {
     selectedItem: DropDownItemType,
     downshiftProps: Object,
   ) => {
-    const { offsetTop, renderItem } = this.props
+    const { offsetTop, renderItem, border } = this.props
     const { getItemProps, highlightedIndex } = downshiftProps
 
     return (
-      <Drop mt={offsetTop}>
+      <Drop mt={offsetTop} border={border}>
         {items.map((item, i) => {
           const { key, ...props } = item
           return (
@@ -137,7 +146,7 @@ class DropDown extends PureComponent<Props> {
   }
 
   render() {
-    const { children, items, value, onChange, ...props } = this.props
+    const { children, items, value, onChange, shrink, ...props } = this.props
     return (
       <Downshift
         onChange={onChange}
@@ -152,12 +161,12 @@ class DropDown extends PureComponent<Props> {
           selectedItem,
           ...downshiftProps
         }) => (
-          <Box {...getRootProps({ refKey: 'innerRef' })} horizontal relative>
+          <Wrapper shrink={shrink} {...getRootProps({ refKey: 'innerRef' })} horizontal relative>
             <Trigger {...getToggleButtonProps()} tabIndex={0} {...props}>
               {children}
             </Trigger>
             {isOpen && this.renderItems(items, selectedItem, downshiftProps)}
-          </Box>
+          </Wrapper>
         )}
       />
     )

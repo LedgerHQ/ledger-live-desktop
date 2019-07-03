@@ -20,16 +20,16 @@ const border = p =>
   p.hasFailed
     ? `1px solid ${p.theme.colors.alertRed}`
     : p.isConfirmed
-      ? 0
-      : `1px solid ${p.type === 'IN' ? p.marketColor : rgba(p.theme.colors.grey, 0.2)}`
+    ? 0
+    : `1px solid ${p.type === 'IN' ? p.marketColor : rgba(p.theme.colors.grey, 0.2)}`
 
 const Container = styled(Box).attrs({
   bg: p =>
     p.hasFailed
       ? rgba(p.theme.colors.alertRed, 0.05)
       : p.isConfirmed
-        ? rgba(p.type === 'IN' ? p.marketColor : p.theme.colors.grey, 0.2)
-        : 'none',
+      ? rgba(p.type === 'IN' ? p.marketColor : p.theme.colors.grey, 0.2)
+      : 'none',
   color: p =>
     p.hasFailed ? p.theme.colors.alertRed : p.type === 'IN' ? p.marketColor : p.theme.colors.grey,
   align: 'center',
@@ -82,7 +82,7 @@ class ConfirmationCheck extends PureComponent<{
         {...props}
       >
         {type === 'IN' ? <IconReceive size={12} /> : <IconSend size={12} />}
-        {!isConfirmed && (
+        {!isConfirmed && !hasFailed && (
           <WrapperClock>
             <IconClock size={10} />
           </WrapperClock>

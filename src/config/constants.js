@@ -66,6 +66,7 @@ export const FORCE_PROVIDER = intFromEnv('FORCE_PROVIDER', 0)
 // Flags
 
 export const DISABLE_TICKER_ANIMATION = boolFromEnv('DISABLE_TICKER_ANIMATION')
+export const DISABLE_CONTEXT_MENU = boolFromEnv('DISABLE_CONTEXT_MENU')
 export const DEBUG_ANALYTICS = boolFromEnv('DEBUG_ANALYTICS')
 export const DEBUG_DEVICE = boolFromEnv('DEBUG_DEVICE')
 export const DEBUG_NETWORK = boolFromEnv('DEBUG_NETWORK')
@@ -92,7 +93,7 @@ export const EXPERIMENTAL_MARKET_INDICATOR_SETTINGS = boolFromEnv(
 
 // Auto update
 
-export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_CHECK_IGNORE', true)
+export const UPDATE_CHECK_IGNORE = boolFromEnv('UPDATE_CHECK_IGNORE', false)
 export const UPDATE_CHECK_FEED = stringFromEnv(
   'UPDATE_CHECK_FEED',
   'http://resources.live.ledger.app/public_resources/signatures',

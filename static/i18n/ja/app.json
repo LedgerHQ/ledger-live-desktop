@@ -125,13 +125,15 @@
     "title": "Accounts",
     "noResultFound": "No accounts found.",
     "order": {
-      "name": "Account Name",
-      "balance": "Account Balance"
+      "name|asc": "Name A-Z",
+      "name|desc": "Name Z-A",
+      "balance|asc": "Lowest Balance",
+      "balance|desc": "Highest Balance"
     },
     "range": {
-      "week": "week",
-      "month": "month",
-      "year": "year"
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
     },
     "contextMenu": {
       "receive": "Receive",
@@ -164,7 +166,7 @@
   },
   "currentAddress": {
     "title": "現在のアドレス",
-    "for": "アカウント <1><0>{{accountName}}</0></1>のアドレス",
+    "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Please verify that the {{currencyName}} address shown in Ledger Live matches the one on your Ledger device",
     "messageIfAccepted": "アドレスが確認されました。QRコードをコピー、ペースト或いはスキャンして入力された場合は、再度アドレスをご確認ください。",
     "messageIfSkipped": "あなたの{{currencyName}} のアドレスが、Ledgerデバイスで確認できません。セキュリティを最適化するために、アドレスを確認してください。"
@@ -172,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "ご使用のデバイスの<1>ダッシュボード</1>に進んでください",
     "step1": "<1>Ledger デバイス</1>を接続し、ロックを解除してください",
-    "step2": "ご使用のデバイスで<1><0>{{managerAppName}}</0></1>アプリに進んでください",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "ご使用のデバイスで<1>Ledgerマネージャー</1>を許可してください"
   },
   "emptyState": {
@@ -207,13 +209,23 @@
     "taxtoken": "米国市民向けに、自動化された暗号資産の税金と費用計算ソフトウェア。",
     "thorswap": "ThorSwapは、分散型アトミックスワップテクノロジを採用した、迅速かつ安全で公正な暗号資産市場です。少額取引であれば、登録なし、またはKYC無しでお始めいただけますので、初心者には最も簡便です。",
     "bitpanda": "Bitpandaは、 Bitcoin、Ethereum、IOTAなどの売買のための欧州の個人向け大手ブローカーです。資金の預入には、クレジットカード、SOFORT-Transfer、NETELLERその他の方法がご使用になれます。",
-    "exmo": "EXMOは、2013年に設立され、ロンドン、キエフ、バルセロナ、モスクワに拠点を置く東ヨーロッパで第1位の取引所であり、量と流動性において世界最大の取引所の1つです。"
+    "exmo": "EXMOは、2013年に設立され、ロンドン、キエフ、バルセロナ、モスクワに拠点を置く東ヨーロッパで第1位の取引所であり、量と流動性において世界最大の取引所の1つです。",
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
   },
   "genuinecheck": {
     "modal": {
       "title": "真贋性チェック"
     },
     "deviceInBootloader": "Your device is in Bootloader mode. Click {{button}} to update it."
+  },
+  "tokensList": {
+    "title": "Tokens",
+    "cta": "Receive token",
+    "placeholder": "To add tokens, simply send them to your Ethereum address.",
+    "link": "Learn more",
+    "seeTokens": "See tokens ({{tokenCount}})",
+    "hideTokens": "Hide tokens ({{tokenCount}})",
+    "tooltip": "Token from"
   },
   "addAccounts": {
     "title": "アカウントを追加",
@@ -249,13 +261,16 @@
     },
     "sections": {
       "importable": {
-        "title": "既存アカウントを追加"
+        "title": "Add existing account"
       },
       "creatable": {
-        "title": "新規アカウントを追加"
+        "title": "Add new account"
       },
       "imported": {
-        "title": "アカウントは既にポートフォリオ({{count}})内に存在します"
+        "title": "Accounts already in portfolio ({{count}})"
+      },
+      "migrate": {
+        "title": "Accounts to update"
       }
     }
   },
@@ -286,9 +301,14 @@
       "all": "アプリカタログ",
       "installing": "{{app}}をインストールしています...",
       "uninstalling": "{{app}}をアンインストールしています...",
-      "installSuccess": "{{app}} は正常にインストールされました",
+      "installSuccess": "{{app}} was successfully installed",
+      "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}}はアンインストールされました",
-      "help": "機器を確認して、インストール済みのアプリを確認してください"
+      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
+      "help": "機器を確認して、インストール済みのアプリを確認してください",
+      "installed": "App installed",
+      "uninstalled": "App uninstalled"
     },
     "firmware": {
       "installed": "ファームウェアバージョン {{version}}",
@@ -351,7 +371,9 @@
     "steps": {
       "chooseAccount": {
         "title": "アカウント",
-        "label": "入金アカウント"
+        "label": "入金アカウント",
+        "parentAccount": "1. Choose {{currencyName}} Account",
+        "token": "2. Choose {{currencyName}} Token"
       },
       "connectDevice": {
         "title": "機器",
@@ -378,6 +400,7 @@
         "recipientAddress": "受取人のアドレス",
         "amount": "金額",
         "fees": "ネットワーク手数料",
+        "useMax": "Max",
         "advancedOptions": "詳細オプション",
         "useRBF": "replace-by-fee取引を利用する",
         "message": "メッセージを残す（140）",
@@ -429,7 +452,9 @@
     "tabs": {
       "display": "一般",
       "export": "アカウント",
-      "currencies": "通貨",
+      "cryptoAssets": "Crypto assets",
+      "currencies": "Crypto assets",
+      "rates": "Rates",
       "help": "ヘルプ",
       "about": "詳細",
       "experimental": "Experimental features"
@@ -468,11 +493,22 @@
       "stockDesc": "市場価値の増加を青色で表示するにはWesternを、赤色で表示するにはEasternを選択します。"
     },
     "currencies": {
-      "desc": "クリプトアセットを選択して、設定を編集します。",
+      "desc": "Change settings for each of your crypto assets",
+      "select": "Select a crypto asset to edit its settings.",
       "exchange": "レートプロバイダー({{ticker}} → BTC)",
       "exchangeDesc": "{{currencyName}} とBitcoinの間の為替レートのプロバイダを選択してください。これは、お客様の暗号資産の価値の見積もりに使用されます({{ticker}}→BTC→{{fiat}})。",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "取引を確認済みにするためのネットワーク確認数を設定します。"
+    },
+    "rates": {
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
+      "fromTo": "{{from}} to {{to}}",
+      "cryptoToFiat": "Crypto to fiat",
+      "cryptoToCrypto": "Crypto to Crypto",
+      "rate": "Rate",
+      "last": "Last {{days}} days",
+      "price": "Price",
+      "exchange": "Rate provider"
     },
     "profile": {
       "password": "パスワードロック",
@@ -842,6 +878,10 @@
       "title": "アプリが間違っています",
       "description": "お使いの機器で‘{{managerAppName}}’ アプリを開きます"
     },
+    "CurrencyNotSupported": {
+      "title": "{{currencyName}} is not supported",
+      "description": "This crypto asset is not yet supported. Please contact us."
+    },
     "DeviceNotGenuine": {
       "title": "正規品でない可能性があります",
       "description": "Ledgerサポートによる支援を依頼します"
@@ -946,6 +986,9 @@
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "受信者のアドレスが無効です。少なくても{{minimalAmount}}に送信し、有効にしてください"
+    },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "パスワードがマッチしません",

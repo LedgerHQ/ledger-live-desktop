@@ -121,17 +121,20 @@ class MainSideBar extends PureComponent<Props> {
 
   handleClickDashboard = () => this.push('/')
   handleOpenSendModal = () => {
-    this.push('/')
+    this.maybeRedirectToAccounts()
     this.props.openModal(MODAL_SEND)
   }
   handleOpenReceiveModal = () => {
-    this.push('/')
+    this.maybeRedirectToAccounts()
     this.props.openModal(MODAL_RECEIVE)
   }
   handleClickManager = () => this.push('/manager')
   handleClickAccounts = () => this.push('/accounts')
   handleClickExchange = () => this.push('/partners')
   handleClickDev = () => this.push('/dev')
+  maybeRedirectToAccounts = () => {
+    this.props.location.pathname === '/manager' && this.push('/accounts')
+  }
 
   render() {
     const { t, noAccounts, location, developerMode } = this.props

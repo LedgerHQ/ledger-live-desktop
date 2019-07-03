@@ -71,8 +71,8 @@ export default function StepConfirmation({
   const iconColor = optimisticOperation
     ? colors.positiveGreen
     : error
-      ? colors.alertRed
-      : colors.grey
+    ? colors.alertRed
+    : colors.grey
 
   const broadcastError = error && signed
 
@@ -117,24 +117,31 @@ export function StepConfirmationFooter({
   t,
   transitionTo,
   account,
+  parentAccount,
   onRetry,
   optimisticOperation,
   error,
   openModal,
   closeModal,
 }: StepProps<*>) {
+  const concernedOperation = optimisticOperation
+    ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
+      ? optimisticOperation.subOperations[0]
+      : optimisticOperation
+    : null
   return (
     <Fragment>
-      {optimisticOperation ? (
+      {concernedOperation ? (
         <Button
           ml={2}
           event="Send Flow Step 4 View OpD Clicked"
           onClick={() => {
             closeModal()
-            if (account && optimisticOperation) {
+            if (account && concernedOperation) {
               openModal(MODAL_OPERATION_DETAILS, {
-                operationId: optimisticOperation.id,
+                operationId: concernedOperation.id,
                 accountId: account.id,
+                parentId: parentAccount && parentAccount.id,
               })
             }
           }}

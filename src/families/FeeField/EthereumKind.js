@@ -1,6 +1,7 @@
 // @flow
 
-import React, { useEffect, useMemo, useRef, useCallback } from 'react'
+import React, { useEffect, useMemo, useState, useRef, useCallback } from 'react'
+import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import { BigNumber } from 'bignumber.js'
 import noop from 'lodash/noop'
@@ -17,7 +18,9 @@ import Text from 'components/base/Text'
 import CurrencyUnitValue from 'components/CurrencyUnitValue'
 import Slider from 'components/Slider'
 import WithFeesAPI from 'components/WithFeesAPI'
+import IconExclamationCircle from 'icons/ExclamationCircle'
 import GenericContainer from './GenericContainer'
+import TranslatedError from '../../components/TranslatedError'
 
 type Props = {
   account: Account,
@@ -25,17 +28,29 @@ type Props = {
   onChange: (*) => void,
 }
 
-const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
+const Error = styled.div`
+  align-items: center;
+  color: ${p => p.theme.colors.alertRed};
+  display: flex;
+  > :first-child {
+    margin-right: 5px;
+  }
+`
+
+const GasSlider = React.memo(({ defaultGas, value, onChange, error }: *) => {
   const range = useMemo(() => inferDynamicRange(defaultGas), [defaultGas])
   const index = reverseRangeIndex(range, value)
   const setValueIndex = useCallback(i => onChange(projectRangeIndex(range, i)), [range, onChange])
-  return <Slider value={index} onChange={setValueIndex} steps={range.steps} />
+  return <Slider error={error} value={index} onChange={setValueIndex} steps={range.steps} />
 })
 
 const fallbackGasPrice = BigNumber(10000000000)
 
+const handledErrors = ['NotEnoughGas']
+
 const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fees }) => {
   const bridge = getAccountBridge(account)
+  const [error, setError] = useState(null)
   const gasPrice = bridge.getTransactionExtra(account, transaction, 'gasPrice')
   const { units } = account.currency
   const unit = units.length > 1 ? units[1] : units[0]
@@ -50,36 +65,44 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
     [bridge, account, transaction],
   )
   const latestOnChange = useRef(onChangeF)
-  useEffect(
-    () => {
-      latestOnChange.current = onChangeF
-    },
-    [onChangeF],
-  )
+  useEffect(() => {
+    latestOnChange.current = onChangeF
+  }, [onChangeF])
 
   // as soon as a serverGas is fetched, we set it in the tx
-  useEffect(
-    () => {
-      if (!gasPrice && serverGas) {
-        latestOnChange.current(serverGas)
-      }
-    },
-    [account, transaction, gasPrice, serverGas],
-  )
+  useEffect(() => {
+    if (!gasPrice && serverGas) {
+      latestOnChange.current(serverGas)
+    }
+  }, [account, transaction, gasPrice, serverGas])
 
   // If after 5s, there is still no gasPrice set, we'll set in the tx the default gas
-  useEffect(
-    () => {
-      if (gasPrice) return noop
-      const timeout = setTimeout(() => {
-        if (!gasPrice) {
-          latestOnChange.current(defaultGas)
-        }
-      }, 5000)
-      return () => clearTimeout(timeout)
-    },
-    [gasPrice],
-  )
+  useEffect(() => {
+    if (gasPrice) return noop
+    const timeout = setTimeout(() => {
+      if (!gasPrice) {
+        latestOnChange.current(defaultGas)
+      }
+    }, 5000)
+    return () => clearTimeout(timeout)
+  }, [gasPrice])
+
+  useEffect(() => {
+    let ignored = false
+    bridge.checkValidTransaction(account, transaction).then(
+      () => {
+        if (ignored) return
+        setError(null)
+      },
+      error => {
+        if (ignored) return
+        setError(handledErrors.includes(error.name) ? error : null)
+      },
+    )
+    return () => {
+      ignored = true
+    }
+  }, [bridge, account, transaction])
 
   return (
     <GenericContainer
@@ -95,7 +118,7 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
       }
     >
       <Box flex={1} pt={2}>
-        <GasSlider defaultGas={defaultGas} value={value} onChange={onChangeF} />
+        <GasSlider error={error} defaultGas={defaultGas} value={value} onChange={onChangeF} />
       </Box>
       <Box
         ff="Open Sans|SemiBold"
@@ -111,6 +134,14 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
           <Trans i18nKey="fees.fast" />
         </Text>
       </Box>
+      {error && (
+        <Error>
+          <IconExclamationCircle size={12} />
+          <Box color="alertRed" ff="Open Sans|Regular" fontSize={4} textAlign="center">
+            <TranslatedError error={error} />
+          </Box>
+        </Error>
+      )}
     </GenericContainer>
   )
 }
