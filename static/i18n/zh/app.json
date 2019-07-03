@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "导航至您设备上的<1>仪表板</1>",
     "step1": "连接并解锁您的 <1>Ledger 设备</1>",
-    "step2": "导航至您设备上的 <1><0>{{managerAppName}}</0></1> 应用程序",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "在您的设备上允许 <1>Ledger Manager</1>"
   },
   "emptyState": {
