@@ -305,7 +305,7 @@
       "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} 已卸载",
       "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
-      "unsupportedCurrency": "{{app}} is not supported in Ledger Live. Click the button to learn how to use it",
+      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "检查您的设备，查看已安装了哪些应用程序",
       "installed": "App installed",
       "uninstalled": "App uninstalled"
