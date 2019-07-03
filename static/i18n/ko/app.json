@@ -987,6 +987,9 @@
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "수취인 주소가 비활성화되어 있습니다. 활성화하려면 적어도 {{minimalAmount}}을(를) 보내십시오."
     },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
+    },
     "PasswordsDontMatch": {
       "title": "암호가 일치하지 않습니다.",
       "description": "다시 시도하십시오."
