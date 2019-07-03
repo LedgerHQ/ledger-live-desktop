@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "Accédez au <1>Dashboard</1> sur votre appareil",
     "step1": "Connectez et déverrouillez votre <1>appareil Ledger</1>",
-    "step2": "Ouvrez l’application <1><0>{{managerAppName}}</0></1> sur votre appareil",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Autorisez <1>Ledger Manager</1> sur votre appareil"
   },
   "emptyState": {
