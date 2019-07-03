@@ -43,7 +43,7 @@ class RippleKind extends Component<Props> {
           <Label>
             <span>{t('send.steps.amount.rippleTag')}</span>
           </Label>
-          <Input value={String(tag || '')} onChange={this.onChange} />
+          <Input ff="Rubik" value={String(tag || '')} onChange={this.onChange} />
         </Box>
       </Box>
     )

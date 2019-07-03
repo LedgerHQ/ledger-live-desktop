@@ -61,9 +61,10 @@ const WarningDisplay = styled(ErrorDisplay)`
 `
 
 const Base = styled.input.attrs({
-  ff: p => (p.ff || p.small ? 'Open Sans' : 'Open Sans|SemiBold'),
   fontSize: 4,
 })`
+  font-family: 'Open Sans';
+  font-weight: 600;
   ${fontFamily};
   ${fontSize};
   border: 0;
