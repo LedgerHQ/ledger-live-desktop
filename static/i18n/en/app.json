@@ -174,7 +174,7 @@
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Allow <1>Ledger Manager</1> on your device"
   },
   "emptyState": {
