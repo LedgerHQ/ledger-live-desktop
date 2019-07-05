@@ -1,12 +1,13 @@
 // @flow
 
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import jsQR from 'jsqr'
 import logger from 'logger'
 import styled from 'styled-components'
 import IconCameraError from 'icons/CameraError'
 import IconCross from 'icons/Cross'
-import { Trans } from 'react-i18next'
+import { NoAccessToCamera } from '@ledgerhq/errors'
+import TranslatedError from './TranslatedError'
 
 const CameraWrapper = styled.div`
   width: ${p => p.width}px;
@@ -65,7 +66,7 @@ const Close = styled.div`
   margin-top: 12px;
   color: ${p => p.theme.colors.fog};
 `
-export default class QRCodeCameraPickerCanvas extends Component<
+export default class QRCodeCameraPickerCanvas extends PureComponent<
   {
     width: number,
     height: number,
@@ -77,7 +78,7 @@ export default class QRCodeCameraPickerCanvas extends Component<
     onPick: string => void,
   },
   {
-    message: ?React$Node,
+    error: ?Error,
   },
 > {
   static defaultProps = {
@@ -90,9 +91,7 @@ export default class QRCodeCameraPickerCanvas extends Component<
     dpr: window.devicePixelRatio || 1,
   }
 
-  state = {
-    message: '',
-  }
+  state = {}
 
   componentDidMount() {
     let getUserMedia
@@ -119,14 +118,14 @@ export default class QRCodeCameraPickerCanvas extends Component<
     }
 
     if (!getUserMedia) {
-      this.setState({ message: 'Incompatible browser' }) // eslint-disable-line
+      this.setState({ error: new NoAccessToCamera() }) // eslint-disable-line
     } else {
       getUserMedia({
         video: { facingMode: 'environment' },
       })
         .then(stream => {
           if (this.unmounted) return
-          this.setState({ message: null })
+          this.setState({ error: null })
           let video = document.createElement('video')
           video.setAttribute('playsinline', 'true')
           video.setAttribute('autoplay', 'true')
@@ -213,11 +212,9 @@ export default class QRCodeCameraPickerCanvas extends Component<
             this.unsubscribes.push(() => cancelAnimationFrame(raf))
           }
         })
-        .catch(_ => {
+        .catch(e => {
           if (this.unmounted) return
-          this.setState({
-            message: <Trans i18nKey="errors.NoAccessToCamera.description" />,
-          })
+          this.setState({ error: new NoAccessToCamera(e.message) })
         })
     }
   }
@@ -251,15 +248,17 @@ export default class QRCodeCameraPickerCanvas extends Component<
 
   render() {
     const { width, height, dpr } = this.props
-    const { message } = this.state
-    return message ? (
+    const { error } = this.state
+    return error ? (
       <CameraWrapper width={width} height={height}>
         <Close>
           <IconCross size={14} />
         </Close>
         <div>
           <IconCameraError size={32} />
-          <p>{message}</p>
+          <p>
+            <TranslatedError error={error} />
+          </p>
         </div>
       </CameraWrapper>
     ) : (
