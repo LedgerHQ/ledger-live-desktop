@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types'
 
 import { darken } from 'styles/helpers'
 
@@ -15,6 +15,7 @@ import { MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
 
 type Props = {
   account: Account,
+  currency: CryptoCurrency | TokenCurrency,
   isChecked: boolean,
   isDisabled?: boolean,
   autoFocusInput?: boolean,

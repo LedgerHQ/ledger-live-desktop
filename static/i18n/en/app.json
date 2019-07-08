@@ -223,7 +223,7 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
+    "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",

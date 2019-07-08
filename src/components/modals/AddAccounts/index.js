@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
-import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, TokenCurrency, Account } from '@ledgerhq/live-common/lib/types'
 import { addAccounts } from '@ledgerhq/live-common/lib/account'
 import Track from 'analytics/Track'
 import { MODAL_ADD_ACCOUNTS } from 'config/constants'
@@ -93,7 +93,7 @@ type State = {
 
 export type StepProps = DefaultStepProps & {
   t: T,
-  currency: ?CryptoCurrency,
+  currency: ?CryptoCurrency | ?TokenCurrency,
   device: ?Device,
   isAppOpened: boolean,
   scannedAccounts: Account[],

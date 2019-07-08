@@ -42,12 +42,11 @@ class ParentCryptoCurrencyIcon extends PureComponent<Props> {
   render() {
     const { currency, parent, borderColor } = this.props
     const double = parent && parent.currency
+    const parentCurrency = currency.type === 'TokenCurrency' ? currency.parentCurrency : null
 
     const content = (
       <ParentCryptoCurrencyIconWrapper borderColor={borderColor}>
-        {double && parent && (
-          <CryptoCurrencyIcon currency={parent.currency} size={double ? 16 : 20} />
-        )}
+        {parentCurrency && <CryptoCurrencyIcon currency={parentCurrency} size={double ? 16 : 20} />}
         <CryptoCurrencyIcon currency={currency} size={double ? 16 : 20} />
       </ParentCryptoCurrencyIconWrapper>
     )

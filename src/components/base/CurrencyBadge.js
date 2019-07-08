@@ -3,12 +3,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
-
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-
+import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types'
 import { rgba } from 'styles/helpers'
-
 import Box from 'components/base/Box'
+import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 
 const CryptoIconWrapper = styled(Box).attrs({
   align: 'center',
@@ -26,9 +24,12 @@ export function CurrencyCircleIcon({
   size,
   ...props
 }: {
-  currency: CryptoCurrency,
+  currency: CryptoCurrency | TokenCurrency,
   size: number,
 }) {
+  if (currency.type === 'TokenCurrency') {
+    return <ParentCryptoCurrencyIcon currency={currency} size={size} />
+  }
   const Icon = getCryptoCurrencyIcon(currency)
   return (
     <CryptoIconWrapper size={size} cryptoColor={currency.color} {...props}>
@@ -37,7 +38,7 @@ export function CurrencyCircleIcon({
   )
 }
 
-function CurrencyBadge({ currency, ...props }: { currency: CryptoCurrency }) {
+function CurrencyBadge({ currency, ...props }: { currency: CryptoCurrency | TokenCurrency }) {
   return (
     <Box horizontal flow={3} {...props}>
       <CurrencyCircleIcon size={40} currency={currency} />

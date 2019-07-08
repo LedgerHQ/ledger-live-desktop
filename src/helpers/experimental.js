@@ -2,6 +2,7 @@
 import { ipcRenderer } from 'electron'
 import { setEnvUnsafe, isEnvDefault, changes, getAllEnvs } from '@ledgerhq/live-common/lib/env'
 import type { EnvName } from '@ledgerhq/live-common/lib/env'
+import useEnv from 'hooks/useEnv'
 
 export type FeatureCommon = {
   name: EnvName,
@@ -140,3 +141,6 @@ changes.subscribe(({ name, value }) => {
     setLocalStorageEnv(name, value)
   }
 })
+
+export const useHaveTokens = () =>
+  !!useEnv('EXPERIMENTAL_EXPLORERS') && !!useEnv('EXPERIMENTAL_LIBCORE')
