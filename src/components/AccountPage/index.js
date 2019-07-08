@@ -105,7 +105,7 @@ class AccountPage extends PureComponent<Props> {
         <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
         <Box horizontal mb={5} flow={4}>
-          <AccountHeader account={account} />
+          <AccountHeader account={account} parentAccount={parentAccount} />
           <AccountHeaderActions account={account} parentAccount={parentAccount} />
         </Box>
 
