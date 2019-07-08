@@ -62,7 +62,7 @@ const TokenSelection = ({
           }}
         />
       </Label>
-      <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token || tokens[0]} />
+      <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token} />
     </Box>
   )
 }
@@ -96,9 +96,13 @@ export default function StepAccount({
   )
 }
 
-export function StepAccountFooter({ transitionTo, account }: StepProps) {
+export function StepAccountFooter({ transitionTo, receiveTokenMode, token, account }: StepProps) {
   return (
-    <Button disabled={!account} primary onClick={() => transitionTo('device')}>
+    <Button
+      disabled={!account || (receiveTokenMode && !token)}
+      primary
+      onClick={() => transitionTo('device')}
+    >
       <Trans i18nKey="common.continue" />
     </Button>
   )

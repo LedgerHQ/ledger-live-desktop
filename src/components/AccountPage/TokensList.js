@@ -62,7 +62,7 @@ const mapDispatchToProps = {
 
 // Fixme Temporarily hiding the receive token button
 const ReceiveButton = (props: { onClick: () => void }) => (
-  <Button hidden small primary onClick={props.onClick}>
+  <Button small primary onClick={props.onClick}>
     <Box horizontal flow={1} alignItems="center">
       <IconPlus size={12} />
       <Box>
