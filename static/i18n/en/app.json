@@ -971,7 +971,7 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to make space. This will not affect your crypto assets."
+      "description": "Uninstall all apps to make space. This will not affect your crypto assets."
     },
     "ManagerUninstallBTCDep": {
       "title": "Sorry, this app is required",
