@@ -445,7 +445,8 @@
     "distribution": "Répartition",
     "amount": "Montant",
     "value": "Valeur",
-    "seeAll": "Tout voir",
+    "showAll": "Show all",
+    "showLess": "Show less",
     "header": "Distribution d'actifs ({{count}})"
   },
   "settings": {
