@@ -445,7 +445,8 @@
     "distribution": "Distribution",
     "amount": "Amount",
     "value": "Value",
-    "seeAll": "See all",
+    "showAll": "Show all",
+    "showLess": "Show less",
     "header": "Asset distribution ({{count}})"
   },
   "settings": {
