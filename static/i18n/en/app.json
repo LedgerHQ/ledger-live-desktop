@@ -969,9 +969,13 @@
       "title": "Please unlock your device",
       "description": "Your device was locked, please unlock it"
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to make space. This will not affect your crypto assets."
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "Sorry, this app is required",
