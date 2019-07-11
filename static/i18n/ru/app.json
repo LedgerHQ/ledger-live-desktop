@@ -970,9 +970,13 @@
       "title": "Разблокируйте устройство.",
       "description": "Устройство было заблокировано. Разблокируйте его."
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "Недостаточно свободного места.",
-      "description": "Чтобы освободить место, удалите некоторые приложения. Это не повлияет на криптоактивы."
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "Это приложение является обязательным.",
