@@ -21,6 +21,25 @@ export type Feature = FeatureCommon & FeatureToggle
 export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
+    name: 'EXPERIMENTAL_SEND_MAX',
+    title: 'Experimental Send MAX',
+    description:
+      'Support sending the entire account balance with a MAX toggle. XRP not yet supported.',
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_EXPLORERS',
+    title: 'Experimental nodes',
+    description: "Connect to Ledger's new blockchain nodes.",
+  },
+  {
+    type: 'toggle',
+    name: 'EXPERIMENTAL_LIBCORE',
+    title: 'Experimental Core',
+    description: 'Enable experimental Ledger lib-core features.',
+  },
+  {
+    type: 'toggle',
     name: 'EXPERIMENTAL_LANGUAGES',
     title: 'Translation testing',
     description: 'Adds unreleased languages to the language list in the general settings tab.',
@@ -39,29 +58,12 @@ export const experimentalFeatures: Feature[] = [
       'Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.',
   },
   {
+    shadow: true, // we'll enable it later with a better implementation
     type: 'toggle',
     name: 'EXPERIMENTAL_USB',
     title: 'Experimental USB',
     description:
       'Alternative USB implementation that might help solve USB issues. Enabling this feature might create UI glitches.',
-  },
-  {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_NATIVE_SEGWIT',
-    title: 'Native Segwit',
-    description: 'Experimental support of Native Segwit (bech32).',
-  },
-  {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_EXPLORERS',
-    title: 'Experimental nodes',
-    description: "Connect to Ledger's new blockchain nodes.",
-  },
-  {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_LIBCORE',
-    title: 'Experimental Core',
-    description: 'Enable experimental Ledger lib-core features.',
   },
   {
     shadow: true,
@@ -73,15 +75,17 @@ export const experimentalFeatures: Feature[] = [
     description: 'Enable pre-release apps in the Manager',
   },
   {
+    shadow: true, // not correct yet
     type: 'toggle',
-    name: 'EXPERIMENTAL_SEND_MAX',
-    title: 'Experimental Send MAX',
+    name: 'EXPERIMENTAL_ROI_CALCULATION',
+    title: 'Experimental ROI calculation',
     description:
-      'Support using all the balance to send funds with a MAX toggle (not yet supported in XRP, only in Experimental Core for ETH)',
+      'Changes the calculation method of the portfolio percentages by assuming that receiving crypto is a buy and sending is a sell',
   },
 ]
 
 const lsKey = 'experimentalFlags'
+const lsKeyVersion = `${lsKey}_llversion`
 
 export const getLocalStorageEnvs = (): { [_: string]: any } => {
   const maybeData = window.localStorage.getItem(lsKey)
@@ -96,6 +100,38 @@ export const getLocalStorageEnvs = (): { [_: string]: any } => {
   return obj
 }
 
+export const enabledExperimentalFeatures = (): string[] =>
+  // $FlowFixMe
+  experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k))
+
+export const isReadOnlyEnv = (key: EnvName) => key in process.env
+
+function sendToMain() {
+  ipcRenderer.send('set-envs', getAllEnvs())
+}
+
+export const setLocalStorageEnv = (key: EnvName, val: string) => {
+  if (setEnvUnsafe(key, val)) {
+    const envs = getLocalStorageEnvs()
+    envs[key] = val
+    window.localStorage.setItem(lsKey, JSON.stringify(envs))
+    sendToMain()
+  }
+}
+
+if (window.localStorage.getItem(lsKeyVersion) !== __APP_VERSION__) {
+  const existing = getLocalStorageEnvs()
+  // we replace all existing ones by clearing those who are gone
+  const restoredEnvs = {}
+  experimentalFeatures
+    .filter(e => !e.shadow && e.name in existing && setEnvUnsafe(e.name, existing[e.name]))
+    .forEach(e => {
+      restoredEnvs[e.name] = existing[e.name]
+    })
+  window.localStorage.setItem(lsKey, JSON.stringify(restoredEnvs))
+  window.localStorage.setItem(lsKeyVersion, __APP_VERSION__)
+}
+
 const envs = getLocalStorageEnvs()
 /* eslint-disable guard-for-in */
 for (const k in envs) {
@@ -108,27 +144,8 @@ for (const k in process.env) {
 
 sendToMain()
 
-function sendToMain() {
-  ipcRenderer.send('set-envs', getAllEnvs())
-}
-
 changes.subscribe(({ name, value }) => {
   if (experimentalFeatures.find(f => f.name === name) && !isReadOnlyEnv(name)) {
     setLocalStorageEnv(name, value)
   }
 })
-
-export const enabledExperimentalFeatures = (): string[] =>
-  // $FlowFixMe
-  experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k))
-
-export const isReadOnlyEnv = (key: EnvName) => key in process.env
-
-export const setLocalStorageEnv = (key: EnvName, val: string) => {
-  if (setEnvUnsafe(key, val)) {
-    const envs = getLocalStorageEnvs()
-    envs[key] = val
-    window.localStorage.setItem(lsKey, JSON.stringify(envs))
-    sendToMain()
-  }
-}

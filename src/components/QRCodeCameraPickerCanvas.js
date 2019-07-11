@@ -1,10 +1,72 @@
 // @flow
 
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import jsQR from 'jsqr'
 import logger from 'logger'
+import styled from 'styled-components'
+import IconCameraError from 'icons/CameraError'
+import IconCross from 'icons/Cross'
+import { NoAccessToCamera } from '@ledgerhq/errors'
+import TranslatedError from './TranslatedError'
 
-export default class QRCodeCameraPickerCanvas extends Component<
+const CameraWrapper = styled.div`
+  width: ${p => p.width}px;
+  height: ${p => p.height}px;
+  padding: 12px 0px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: #f9f9f9;
+  color: ${p => p.theme.colors.grey};
+  overflow: hidden;
+  border: 1px solid ${p => p.theme.colors.fog};
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
+
+  > div:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    p {
+      font-family: 'Open Sans';
+      font-weight: 600;
+      padding: 12px 24px;
+      font-size: 13px;
+      color: ${p => p.theme.colors.smoke};
+    }
+  }
+`
+
+const Camera = styled.canvas`
+  width: ${p => p.width / p.dpr}px;
+  height: ${p => p.height / p.dpr}px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(80%) blur(6px);
+  transform: scaleX(-1);
+`
+
+const Overlay = styled.canvas`
+  width: ${p => p.width / p.dpr}px;
+  height: ${p => p.height / p.dpr}px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(-1);
+`
+// NB symbolic button since everything dismisses this
+const Close = styled.div`
+  align-self: flex-end;
+  margin-right: 12px;
+  margin-top: 12px;
+  color: ${p => p.theme.colors.fog};
+`
+export default class QRCodeCameraPickerCanvas extends PureComponent<
   {
     width: number,
     height: number,
@@ -16,7 +78,7 @@ export default class QRCodeCameraPickerCanvas extends Component<
     onPick: string => void,
   },
   {
-    message: ?string,
+    error: ?Error,
   },
 > {
   static defaultProps = {
@@ -29,9 +91,7 @@ export default class QRCodeCameraPickerCanvas extends Component<
     dpr: window.devicePixelRatio || 1,
   }
 
-  state = {
-    message: 'Please accept Camera permission',
-  }
+  state = {}
 
   componentDidMount() {
     let getUserMedia
@@ -58,14 +118,14 @@ export default class QRCodeCameraPickerCanvas extends Component<
     }
 
     if (!getUserMedia) {
-      this.setState({ message: 'Incompatible browser' }) // eslint-disable-line
+      this.setState({ error: new NoAccessToCamera() }) // eslint-disable-line
     } else {
       getUserMedia({
         video: { facingMode: 'environment' },
       })
         .then(stream => {
           if (this.unmounted) return
-          this.setState({ message: null })
+          this.setState({ error: null })
           let video = document.createElement('video')
           video.setAttribute('playsinline', 'true')
           video.setAttribute('autoplay', 'true')
@@ -154,9 +214,7 @@ export default class QRCodeCameraPickerCanvas extends Component<
         })
         .catch(e => {
           if (this.unmounted) return
-          this.setState({
-            message: String(e.message || e.name || e),
-          })
+          this.setState({ error: new NoAccessToCamera(e.message) })
         })
     }
   }
@@ -190,50 +248,24 @@ export default class QRCodeCameraPickerCanvas extends Component<
 
   render() {
     const { width, height, dpr } = this.props
-    const { message } = this.state
-    const style = {
-      width,
-      height,
-      position: 'relative',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: '#eee',
-      color: '#666',
-      fontSize: `${(width / 30).toFixed(0)}px`,
-      overflow: 'hidden',
-    }
-    const mainStyle = {
-      width,
-      height,
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      filter: 'brightness(80%) blur(6px)',
-      transform: 'scaleX(-1)',
-    }
-    const secondStyle = {
-      width,
-      height,
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      transform: 'scaleX(-1)',
-    }
-    return message ? (
-      <div style={style}>
-        <p>{message}</p>
-      </div>
+    const { error } = this.state
+    return error ? (
+      <CameraWrapper width={width} height={height}>
+        <Close>
+          <IconCross size={14} />
+        </Close>
+        <div>
+          <IconCameraError size={32} />
+          <p>
+            <TranslatedError error={error} />
+          </p>
+        </div>
+      </CameraWrapper>
     ) : (
-      <div style={style}>
-        <canvas ref={this._onMainRef} style={mainStyle} width={dpr * width} height={dpr * height} />
-        <canvas
-          ref={this._onSecondRef}
-          style={secondStyle}
-          width={dpr * width}
-          height={dpr * height}
-        />
-      </div>
+      <CameraWrapper width={width} height={height}>
+        <Camera innerRef={this._onMainRef} dpr={dpr} width={dpr * width} height={dpr * height} />
+        <Overlay innerRef={this._onSecondRef} dpr={dpr} width={dpr * width} height={dpr * height} />
+      </CameraWrapper>
     )
   }
 }

@@ -12,7 +12,7 @@ import Switch from 'components/base/Switch'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account/helpers'
 
 // list of errors that are handled somewhere else on UI, otherwise the field will catch every other errors.
-const blacklistErrorName = ['FeeNotLoaded', 'InvalidAddress']
+const blacklistErrorName = ['FeeNotLoaded', 'InvalidAddress', 'NotEnoughGas']
 
 const SendMax = ({ value, onChange }: { value: boolean, onChange: boolean => void }) => (
   <Box horizontal alignItems="center">

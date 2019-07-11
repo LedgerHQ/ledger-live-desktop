@@ -4,12 +4,11 @@ import React from 'react'
 import type { BigNumber } from 'bignumber.js'
 import styled from 'styled-components'
 
-import type { Unit } from '@ledgerhq/live-common/lib/types'
+import type { Unit, ValueChange } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
-import DeltaChange from './DeltaChange'
 import { PlaceholderLine } from './Placeholder'
 
 const Sub = styled(Box).attrs({
@@ -21,9 +20,8 @@ const Sub = styled(Box).attrs({
 
 type BalanceSinceProps = {
   since: string,
+  valueChange: ValueChange,
   totalBalance: BigNumber,
-  sinceBalance: BigNumber,
-  refBalance: BigNumber,
   isAvailable: boolean,
   t: T,
 }
@@ -41,13 +39,13 @@ type Props = {
 } & BalanceSinceProps
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
-  const { t, totalBalance, sinceBalance, refBalance, since, isAvailable, ...otherProps } = props
+  const { t, totalBalance, valueChange, since, isAvailable, ...otherProps } = props
+  if (!valueChange.percentage) return <Box {...otherProps} />
   return (
     <Box {...otherProps}>
-      <DeltaChange
-        placeholder={<PlaceholderLine width={100} />}
-        from={refBalance}
-        to={totalBalance}
+      <FormattedVal
+        isPercent
+        val={valueChange.percentage.times(100).integerValue()}
         color="dark"
         animateTicker
         fontSize={7}
@@ -59,7 +57,7 @@ export function BalanceSincePercent(props: BalanceSinceProps) {
 }
 
 export function BalanceSinceDiff(props: Props) {
-  const { t, totalBalance, sinceBalance, since, unit, isAvailable, ...otherProps } = props
+  const { t, totalBalance, valueChange, since, unit, isAvailable, ...otherProps } = props
   return (
     <Box {...otherProps}>
       {!isAvailable ? (
@@ -71,7 +69,7 @@ export function BalanceSinceDiff(props: Props) {
           unit={unit}
           fontSize={7}
           showCode
-          val={totalBalance.minus(sinceBalance)}
+          val={valueChange.value}
           withIcon
         />
       )}
@@ -83,7 +81,7 @@ export function BalanceSinceDiff(props: Props) {
 export function BalanceTotal(props: BalanceTotalProps) {
   const { unit, totalBalance, isAvailable, showCryptoEvenIfNotAvailable, children } = props
   return (
-    <Box grow {...props}>
+    <Box grow shrink {...props}>
       {!isAvailable && !showCryptoEvenIfNotAvailable ? (
         <PlaceholderLine width={150} />
       ) : (
@@ -108,7 +106,8 @@ BalanceTotal.defaultProps = {
 }
 
 function BalanceInfos(props: Props) {
-  const { t, totalBalance, since, sinceBalance, refBalance, isAvailable, unit } = props
+  const { t, totalBalance, since, valueChange, isAvailable, unit } = props
+
   return (
     <Box horizontal alignItems="center" flow={7}>
       <BalanceTotal unit={unit} isAvailable={isAvailable} totalBalance={totalBalance}>
@@ -117,9 +116,8 @@ function BalanceInfos(props: Props) {
       <BalanceSincePercent
         alignItems="flex-end"
         totalBalance={totalBalance}
-        sinceBalance={sinceBalance}
         isAvailable={isAvailable}
-        refBalance={refBalance}
+        valueChange={valueChange}
         since={since}
         t={t}
       />
@@ -128,8 +126,7 @@ function BalanceInfos(props: Props) {
         alignItems="flex-end"
         isAvailable={isAvailable}
         totalBalance={totalBalance}
-        sinceBalance={sinceBalance}
-        refBalance={refBalance}
+        valueChange={valueChange}
         since={since}
         t={t}
       />

@@ -15,7 +15,7 @@ import Box from 'components/base/Box'
 import ConfirmationCheck from './ConfirmationCheck'
 
 const mapStateToProps = createStructuredSelector({
-  currencySettings: (state, { account, parentAccount }) =>
+  confirmationsNb: (state, { account, parentAccount }) =>
     confirmationsNbForCurrencySelector(state, {
       currency: getMainAccount(account, parentAccount).currency,
     }),
@@ -42,9 +42,7 @@ type Props = {
 class ConfirmationCell extends PureComponent<Props> {
   render() {
     const { account, parentAccount, confirmationsNb, t, operation, marketIndicator } = this.props
-
-    const mainAccount = account.type === 'Account' ? account : parentAccount
-    if (!mainAccount) return null // this should never happen
+    const mainAccount = getMainAccount(account, parentAccount)
 
     const isNegative = operation.type === 'OUT'
 

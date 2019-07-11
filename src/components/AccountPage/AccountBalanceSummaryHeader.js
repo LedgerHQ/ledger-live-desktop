@@ -5,7 +5,7 @@ import { BigNumber } from 'bignumber.js'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
-import type { Currency, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
+import type { Currency, ValueChange, Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 
 import type { T } from 'types/common'
 
@@ -22,13 +22,9 @@ import Swap from '../../icons/Swap'
 
 type Props = {
   isAvailable: boolean,
-  first: {
-    date: Date,
-    value: BigNumber,
-    countervalue: BigNumber,
-  },
+  cryptoChange: ValueChange,
+  countervalueChange: ValueChange,
   last: {
-    date: Date,
     value: BigNumber,
     countervalue: BigNumber,
   },
@@ -91,8 +87,9 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
       counterValue,
       selectedTimeRange,
       isAvailable,
-      first,
+      cryptoChange,
       last,
+      countervalueChange,
       countervalueFirst,
       setCountervalueFirst,
     } = this.props
@@ -101,8 +98,8 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
     const unit = account.type === 'Account' ? account.unit : currency.units[0]
     const cvUnit = counterValue.units[0]
     const data = [
-      { oldBalance: first.value, balance: last.value, unit },
-      { oldBalance: first.countervalue, balance: last.countervalue, unit: cvUnit },
+      { valueChange: cryptoChange, balance: last.value, unit },
+      { valueChange: countervalueChange, balance: last.countervalue, unit: cvUnit },
     ]
     if (countervalueFirst) {
       data.reverse()
@@ -164,8 +161,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             t={t}
             alignItems="center"
             totalBalance={data[0].balance}
-            sinceBalance={data[0].oldBalance}
-            refBalance={data[0].oldBalance}
+            valueChange={data[0].valueChange}
             since={selectedTimeRange}
           />
           <BalanceSinceDiff
@@ -174,8 +170,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             unit={data[0].unit}
             alignItems="center"
             totalBalance={data[0].balance}
-            sinceBalance={data[0].oldBalance}
-            refBalance={data[0].oldBalance}
+            valueChange={data[0].valueChange}
             since={selectedTimeRange}
           />
         </Box>

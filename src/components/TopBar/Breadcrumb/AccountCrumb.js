@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
 import { push } from 'react-router-redux'
 
+import Text from 'components/base/Text'
 import { accountsSelector } from '../../../reducers/accounts'
 import CryptoCurrencyIcon from '../../CryptoCurrencyIcon'
 import DropDown from '../../base/DropDown'
@@ -32,8 +33,6 @@ type Props = {
 }
 
 const Item = styled.div`
-  font-family: 'Open Sans';
-  font-size: 13px;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -42,6 +41,10 @@ const Item = styled.div`
   color: ${p => (p.isActive ? p.theme.colors.dark : p.theme.colors.smoke)};
   > :first-child {
     margin-right: 10px;
+  }
+
+  > ${Text} {
+    flex: 1;
   }
 
   &:hover {
@@ -60,8 +63,12 @@ const TextLink = styled.div`
   > :first-child {
     margin-right: 8px;
   }
+  ${p => (p.shrink ? 'flex: 1;' : '')}
 
   > ${Base} {
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+    overflow: hidden;
     padding: 0px;
     &:hover,
     &:active {
@@ -72,11 +79,11 @@ const TextLink = styled.div`
   }
 `
 const AngleDown = styled.div`
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 20px;
   text-align: center;
-  line-height: 14px;
+  line-height: 16px;
 
   &:hover {
     background: ${p => p.theme.colors.fog};
@@ -85,7 +92,8 @@ const AngleDown = styled.div`
 
 const Check = styled.div`
   color: ${p => p.theme.colors.wallet};
-  flex: 1;
+  align-items: center;
+  display: flex;
   text-align: right;
   margin-left: 20px;
 `
@@ -108,7 +116,9 @@ class AccountCrumb extends PureComponent<Props> {
           size={16}
           currency={parentId ? item.account.token : item.account.currency}
         />
-        {parentId ? item.account.token.name : item.account.name}
+        <Text ff={`Open Sans|${isActive ? 'SemiBold' : 'Regular'}`} fontSize={4}>
+          {parentId ? item.account.token.name : item.account.name}
+        </Text>
         {isActive && (
           <Check>
             <IconCheck size={14} />
@@ -199,7 +209,8 @@ class AccountCrumb extends PureComponent<Props> {
       <>
         <Separator />
         <DropDown
-          flow={1}
+          flex={1}
+          shrink={parentId ? '0' : '1'}
           offsetTop={0}
           border
           horizontal
@@ -208,7 +219,7 @@ class AccountCrumb extends PureComponent<Props> {
           onStateChange={this.onAccountSelected}
           value={processedItems.find(a => a.key === id)}
         >
-          <TextLink>
+          <TextLink {...{ shrink: !parentId }}>
             {currency && <CryptoCurrencyIcon size={14} currency={currency} />}
             <Button onClick={this.openActiveAccount}>{name}</Button>
             <AngleDown>

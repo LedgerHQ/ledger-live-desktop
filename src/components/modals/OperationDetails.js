@@ -229,7 +229,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
                         color="grey"
                         date={date}
                         fontSize={3}
-                        currency={currency}
+                        currency={mainAccount.currency}
                         value={fee}
                         alwaysShowSign={false}
                         subMagnitude={1}

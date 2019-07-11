@@ -11,6 +11,12 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex: 1;
+  width: 0;
+  flex-shrink: 1;
+  text-overflow: ellipsis;
+  break-word: break-all;
+  white-space: nowrap;
   > * {
     font-family: 'Open Sans';
     font-weight: 600;

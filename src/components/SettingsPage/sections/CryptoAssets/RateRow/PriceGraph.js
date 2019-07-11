@@ -8,15 +8,15 @@ import CounterValues from 'helpers/countervalues'
 import { PlaceholderLine } from 'components/Placeholder'
 import { colors } from 'styles/theme'
 import { rgba } from 'styles/helpers'
+import { getDates } from '@ledgerhq/live-common/lib/portfolio'
 
-const DAY = 24 * 60 * 60 * 1000
 const mapStateToProps = (state, props: *) => {
+  const dates = getDates(props.timeRange)
   const data = []
-  let t = Date.now() - props.days * DAY
   const value = BigNumber(10 ** props.from.units[0].magnitude)
   let nbCounterValueOff = 0
-  for (let i = 0; i < props.days; i++) {
-    const date = new Date(t)
+  for (let i = 0; i < dates.length; i++) {
+    const date = dates[i]
     const cv = CounterValues.calculateSelector(state, {
       ...props,
       date,
@@ -27,15 +27,13 @@ const mapStateToProps = (state, props: *) => {
       date,
       value: cv ? cv.toNumber() : 0,
     })
-    t += DAY
   }
-  return { data, isAvailable: nbCounterValueOff < props.days }
+  return { data, isAvailable: nbCounterValueOff < dates.length }
 }
 
 class PriceGraph extends Component<{
   from: Currency, // eslint-disable-line
   to: Currency, // eslint-disable-line
-  days: number, // eslint-disable-line
   exchange: ?string, // eslint-disable-line
   isAvailable: boolean,
   data: Array<{ date: Date, value: number }>,
@@ -55,7 +53,7 @@ class PriceGraph extends Component<{
     const y = d3
       .scaleLinear()
       .domain([d3.min(data, d => d.value), d3.max(data, d => d.value)])
-      .range([0, height])
+      .range([height, 0])
 
     const path = d3
       .area()

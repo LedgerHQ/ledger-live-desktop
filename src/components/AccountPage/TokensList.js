@@ -53,10 +53,6 @@ const Placeholder = styled.div`
   flex-direction: column;
   display: flex;
   padding-right: 50px;
-  > :first-child {
-    display: block;
-    margin-bottom: 10px;
-  }
 `
 
 const mapDispatchToProps = {
@@ -64,8 +60,9 @@ const mapDispatchToProps = {
   openModal,
 }
 
+// Fixme Temporarily hiding the receive token button
 const ReceiveButton = (props: { onClick: () => void }) => (
-  <Button small primary onClick={props.onClick}>
+  <Button hidden small primary onClick={props.onClick}>
     <Box horizontal flow={1} alignItems="center">
       <IconPlus size={12} />
       <Box>
@@ -100,10 +97,7 @@ class TokensList extends PureComponent<Props> {
           <EmptyState>
             <Placeholder>
               <Text color="graphite" ff="Open Sans|SemiBold" fontSize={4}>
-                <Trans i18nKey={'tokensList.placeholder'} />
-              </Text>
-              <Text color="graphite" ff="Open Sans|SemiBold" fontSize={4}>
-                <Trans i18nKey={'tokensList.placeholder2'} />
+                <Trans i18nKey={'tokensList.placeholder'} />{' '}
                 <LabelWithExternalIcon
                   color="wallet"
                   ff="Open Sans|SemiBold"

@@ -1,14 +1,28 @@
 // @flow
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 
-const primaryColor = '#6591F3'
-const primaryColorHover = '#749cf3'
-const secondaryColor = '#F0EFF1'
-const buttonInnerColor = '#FFFFFF'
+import { colors as themeColors } from 'styles/theme'
+import { lighten } from 'styles/helpers'
+
+const palette = {
+  default: {
+    primary: themeColors.wallet,
+    primaryHover: lighten(themeColors.wallet, 0.1),
+    secondary: themeColors.sliderGrey,
+    buttonInner: themeColors.white,
+  },
+  error: {
+    primary: themeColors.alertRed,
+    primaryHover: lighten(themeColors.alertRed, 0.1),
+    secondary: themeColors.sliderGrey,
+    buttonInner: themeColors.white,
+  },
+}
 
 type Props = {
   steps: number,
   value: number,
+  error: ?Error,
   onChange: number => void,
 }
 
@@ -19,7 +33,7 @@ function xForEvent(node, e) {
   return clientX - left
 }
 
-const Handle = React.memo(({ active, x }: { active: boolean, x: number }) => {
+const Handle = React.memo(({ active, x, colors }: { active: boolean, x: number, colors: * }) => {
   const [hover, setHover] = useState(false)
   const onMouseEnter = useCallback(() => setHover(true), [])
   const onMouseLeave = useCallback(() => setHover(false), [])
@@ -35,9 +49,9 @@ const Handle = React.memo(({ active, x }: { active: boolean, x: number }) => {
     height: 2 * size,
     borderRadius: 2 * size,
     position: 'absolute',
-    backgroundColor: hover || active ? primaryColorHover : primaryColor,
+    backgroundColor: hover || active ? colors.primaryHover : colors.primary,
     border: '2px solid',
-    borderColor: buttonInnerColor,
+    borderColor: colors.buttonInner,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -49,7 +63,7 @@ const Handle = React.memo(({ active, x }: { active: boolean, x: number }) => {
     width: innerDotSize,
     height: innerDotSize,
     borderRadius: innerDotSize,
-    backgroundColor: buttonInnerColor,
+    backgroundColor: colors.buttonInner,
   }
 
   return (
@@ -59,18 +73,18 @@ const Handle = React.memo(({ active, x }: { active: boolean, x: number }) => {
   )
 })
 
-const Track = React.memo(({ x }: { x: number }) => (
+const Track = React.memo(({ x, colors }: { x: number, colors: * }) => (
   <div
     style={{
       width: `${(100 * x).toPrecision(3)}%`,
       height: 4,
       borderRadius: 4,
-      backgroundColor: primaryColor,
+      backgroundColor: colors.primary,
     }}
   />
 ))
 
-const Slider = ({ steps, value, onChange }: Props) => {
+const Slider = ({ steps, value, onChange, error }: Props) => {
   const [down, setDown] = useState(false)
   const root = useRef(null)
   const internalPadding = 12
@@ -175,6 +189,7 @@ const Slider = ({ steps, value, onChange }: Props) => {
 
   const x = value / (steps - 1)
 
+  const colors = palette[error ? 'error' : 'default']
   return (
     <div
       ref={root}
@@ -192,11 +207,11 @@ const Slider = ({ steps, value, onChange }: Props) => {
           width: '100%',
           height: 4,
           borderRadius: 4,
-          backgroundColor: secondaryColor,
+          backgroundColor: colors.secondary,
           position: 'relative',
         }}
       >
-        <Track x={x} />
+        <Track colors={colors} x={x} />
         <div
           style={{
             width: '100%',
@@ -205,7 +220,7 @@ const Slider = ({ steps, value, onChange }: Props) => {
           }}
         >
           <div style={{ position: 'relative' }}>
-            <Handle active={!!down} x={x} />
+            <Handle colors={colors} active={!!down} x={x} />
           </div>
         </div>
       </div>

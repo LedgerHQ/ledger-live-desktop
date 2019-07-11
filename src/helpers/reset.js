@@ -27,6 +27,7 @@ function reload() {
 export async function hardReset() {
   disableDBMiddleware()
   db.resetAll()
+  window.localStorage.clear()
   await delay(500)
   await resetLibcore()
   reload()

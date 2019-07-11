@@ -5,6 +5,7 @@
     "never": "Never",
     "apply": "Apply",
     "confirm": "Confirm",
+    "connecting": "Connecting..",
     "cancel": "Cancel",
     "getSupport": "Get support",
     "delete": "Delete",
@@ -131,9 +132,9 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
-      "week": "week",
-      "month": "month",
-      "year": "year"
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
     },
     "contextMenu": {
       "receive": "Receive",
@@ -174,7 +175,7 @@
   "deviceConnect": {
     "dashboard": "Navigate to the <1>Dashboard</1> on your device",
     "step1": "Connect and unlock your <1>Ledger device</1>",
-    "step2": "Navigate to the <1><0>{{managerAppName}}</0></1> app on your device",
+    "step2": "Open the <1><0>{{managerAppName}}</0></1> app on your device",
     "step3": "Allow <1>Ledger Manager</1> on your device"
   },
   "emptyState": {
@@ -209,7 +210,8 @@
     "taxtoken": "Automated cryptocurrency tax and cost basis software for US citizens.",
     "thorswap": "ThorSwap is an instant, safe and fair crypto asset market powered by decentralized atomic swap technologies. It is the most convenient way to start trading, no registration or KYC for small amount transactions.",
     "bitpanda": "Bitpanda is Europe’s leading retail broker for buying and selling Bitcoin, Ethereum, IOTA and many more. Deposit money using your credit card, SOFORT-Transfer, NETELLER, and other options.",
-    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity."
+    "exmo": "Founded in 2013 and based in London, Kiev, Barcelona, and Moscow, EXMO is #1 exchange in Eastern Europe, and one of the world's largest global exchanges in volume and liquidity.",
+    "ndax": "Canada’s leading cryptocurrency exchange, NDAX provides a regulated, secure and intuitive platform to buy and sell Bitcoin, Litecoin, Ethereum, XRP and other digital assets. Other key features include advanced trading, free deposits, and an institutional-grade custody solution via Ledger Vault."
   },
   "genuinecheck": {
     "modal": {
@@ -220,9 +222,11 @@
   "tokensList": {
     "title": "Tokens",
     "cta": "Receive token",
-    "placeholder": "To add tokens to your Ethereum account, click on the \"Receive token\" button, or send your tokens directly to your Ethereum address.",
-    "placeholder2": "For more information: ",
-    "link": "Manage ERC20 tokens"
+    "placeholder": "To add tokens, simply send them to your Ethereum address.",
+    "link": "Learn more",
+    "seeTokens": "See tokens ({{tokenCount}})",
+    "hideTokens": "Hide tokens ({{tokenCount}})",
+    "tooltip": "Token from"
   },
   "addAccounts": {
     "title": "Add accounts",
@@ -267,7 +271,7 @@
         "title": "Accounts already in portfolio ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to migrate"
+        "title": "Accounts to update"
       }
     }
   },
@@ -298,9 +302,14 @@
       "all": "App catalog",
       "installing": "Installing {{app}}...",
       "uninstalling": "Uninstalling {{app}}...",
-      "installSuccess": "Successfully installed {{app}}",
+      "installSuccess": "{{app}} was successfully installed",
+      "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} uninstalled",
-      "help": "Check on your device to see which apps are already installed"
+      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
+      "help": "Check on your device to see which apps are already installed",
+      "installed": "App installed",
+      "uninstalled": "App uninstalled"
     },
     "firmware": {
       "installed": "Firmware version {{version}}",
@@ -329,10 +338,8 @@
       "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please be patient while the update is finalized",
-      "mcuBlueFirst":
-        "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond":
-        "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
+      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
+      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware updated",
       "successText": "Please re-install the apps on your device",
       "resetTitle": "Prepare Device",
@@ -348,10 +355,8 @@
         "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
         "third": "3. Uninstall all apps",
         "openLive": "Open the Manager in Ledger Live.",
-        "uninstall":
-          "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
-        "disclaimer":
-          "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
+        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secured on your Recovery sheet."
       }
     },
     "title": "Manager",
@@ -396,7 +401,7 @@
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
-        "useMax": "use max",
+        "useMax": "Max",
         "advancedOptions": "Advanced options",
         "useRBF": "Use a replace-by-fee transaction",
         "message": "Leave a message (140)",
@@ -440,7 +445,8 @@
     "distribution": "Distribution",
     "amount": "Amount",
     "value": "Value",
-    "seeAll": "See all",
+    "showAll": "Show all",
+    "showLess": "Show less",
     "header": "Asset distribution ({{count}})"
   },
   "settings": {
@@ -449,13 +455,12 @@
       "display": "General",
       "export": "Accounts",
       "cryptoAssets": "Crypto assets",
-      "currencies": "Currencies",
+      "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "Help",
       "about": "About",
       "experimental": "Experimental features"
     },
-
     "export": {
       "accounts": {
         "title": "Export accounts",
@@ -490,7 +495,7 @@
       "stockDesc": "Choose Western to display an increase in market value in blue or Eastern to display it in red."
     },
     "currencies": {
-      "desc": "Edit your crypto asset's settings",
+      "desc": "Change settings for each of your crypto assets",
       "select": "Select a crypto asset to edit its settings.",
       "exchange": "Rate provider ({{ticker}} → BTC)",
       "exchangeDesc": "Choose the provider of the exchange rate from {{currencyName}} to Bitcoin, used to estimate the value of your crypto assets ({{ticker}} → BTC → {{fiat}}).",
@@ -498,10 +503,14 @@
       "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
     },
     "rates": {
-      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues. \nYou can configure a fiat countervalue and what exchanges are used for each rate.",
+      "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
       "cryptoToFiat": "Crypto to fiat",
-      "cryptoToCrypto": "Crypto to Crypto"
+      "cryptoToCrypto": "Crypto to Crypto",
+      "rate": "Rate",
+      "last": "Last {{days}} days",
+      "price": "Price",
+      "exchange": "Rate provider"
     },
     "profile": {
       "password": "Password lock",
@@ -871,9 +880,13 @@
       "title": "That's the wrong app",
       "description": "Open the ‘{{managerAppName}}’ app on your device"
     },
+    "NoAccessToCamera": {
+      "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
+      "description": ""
+    },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
-      "description": "This crypto-assets is not yet supported. Please contact us."
+      "description": "This crypto asset is not yet supported. Please contact us."
     },
     "DeviceNotGenuine": {
       "title": "Possibly not genuine",
@@ -957,9 +970,13 @@
       "title": "Please unlock your device",
       "description": "Your device was locked, please unlock it"
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to make space. This will not affect your crypto assets."
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "Sorry, this app is required",
@@ -979,6 +996,9 @@
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+    },
+    "NotEnoughGas": {
+      "title": "ETH balance in parent account insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Passwords don't match",
