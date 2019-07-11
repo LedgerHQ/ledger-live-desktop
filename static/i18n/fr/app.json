@@ -970,9 +970,13 @@
       "title": "Veuillez déverrouiller votre appareil.",
       "description": "Votre appareil était verrouillé, veuillez le déverrouiller"
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "Désolé, espace disponible insuffisant",
-      "description": "Désinstallez des applications pour libérer de l’espace. Cette opération n’affectera pas vos crypto-actifs."
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "Désolé, cette application est requise.",
