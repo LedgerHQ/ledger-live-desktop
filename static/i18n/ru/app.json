@@ -98,6 +98,8 @@
   },
   "account": {
     "lastOperations": "Последние операции",
+    "contractAddress": "Contract:",
+    "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "Еще не получили криптоактивы?",
       "desc": "Убедитесь в том, что на устройстве установлено приложение <1><0>{{managerAppName}}</0></1>, и начните получать.",
