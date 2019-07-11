@@ -98,6 +98,8 @@
   },
   "account": {
     "lastOperations": "마지막 작업",
+    "contractAddress": "Contract:",
+    "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "아직 암호화 자산이 없습니까?",
       "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
