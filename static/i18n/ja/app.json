@@ -98,6 +98,8 @@
   },
   "account": {
     "lastOperations": "最後の操作",
+    "contractAddress": "Contract:",
+    "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "まだクリプトアセットをお持ちではありませんか？",
       "desc": "受信を開始する前に、<1><0>{{managerAppName}}</0></1> アプリがインストールされていることを確認してください",
