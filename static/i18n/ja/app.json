@@ -970,9 +970,13 @@
       "title": "機器のロックを解除してください",
       "description": "お客様のデバイスがロックされています。ロックを解除してください"
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "保存スペースが残りわずかです。",
-      "description": "一部のアプリをアンインストールしてメモリースペースを設けてください。これはお持ちの暗号資産には影響しません。"
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "このアプリは必要です",
