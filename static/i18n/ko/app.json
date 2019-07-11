@@ -970,9 +970,13 @@
       "title": "장치를 잠금 해제하십시오.",
       "description": "장치가 잠겨 있습니다. 먼저 잠금 해제하십시오."
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "죄송합니다. 남아 있는 저장 공간이 충분하지 않습니다.",
-      "description": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다."
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "죄송합니다. 이 앱은 필요합니다.",
