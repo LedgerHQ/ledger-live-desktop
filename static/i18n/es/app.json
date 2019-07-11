@@ -970,9 +970,13 @@
       "title": "Desbloquea tu dispositivo",
       "description": "Tu dispositivo se ha bloqueado. Por favor, desbloquéalo"
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "Lo sentimos, no queda espacio suficiente.",
-      "description": "Desinstala algunas aplicaciones para liberar espacio. Esto no afectará a tus criptoactivos."
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "Lo sentimos, esta aplicación es obligatoria.",
