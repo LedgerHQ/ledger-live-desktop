@@ -970,9 +970,13 @@
       "title": "请解锁您的设备",
       "description": "您的设备已锁定，请解锁"
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "抱歉，剩余存储空间不足",
-      "description": "请卸载一些应用程序清出空间，此操作不会影响您的加密资产。"
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "抱歉，需要安装此应用程序",
