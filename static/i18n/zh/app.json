@@ -98,6 +98,8 @@
   },
   "account": {
     "lastOperations": "近期操作",
+    "contractAddress": "Contract:",
+    "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "还没有加密资产？",
       "desc": "请确认已安装 <1> <0>{{managerAppName}}</0> </1> 应用程序后开始接收",

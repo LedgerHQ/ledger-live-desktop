@@ -98,6 +98,8 @@
   },
   "account": {
     "lastOperations": "Últimas operaciones",
+    "contractAddress": "Contract:",
+    "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "¿Aún no tienes criptoactivos?",
       "desc": "Asegúrate de que la aplicación <1><0>{{managerAppName}}</0></1> está instalada y empieza a recibir.",
