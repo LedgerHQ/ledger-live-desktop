@@ -23,10 +23,6 @@ import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../../conf
 import TokenRow from '../../TokenRow'
 import { matchesSearch } from '../AccountList'
 
-const Wrapper = styled.div`
-  display: ${p => (p.hidden ? 'none' : 'contents')};
-`
-
 const Row = styled(Box)`
   background: #ffffff;
   border-radius: 4px;
@@ -130,6 +126,8 @@ class AccountRowItem extends PureComponent<Props, State> {
     return null
   }
 
+  scrollTopFocusRef = React.createRef()
+
   onClick = () => {
     const { account, parentAccount, onClick } = this.props
     onClick(account, parentAccount)
@@ -160,6 +158,15 @@ class AccountRowItem extends PureComponent<Props, State> {
     this.setState({ expanded: expandedStates[account.id] })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.expanded !== this.state.expanded && !this.state.expanded) {
+      const { scrollTopFocusRef } = this
+      if (scrollTopFocusRef.current) {
+        scrollTopFocusRef.current.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      }
+    }
+  }
+
   render() {
     const { account, parentAccount, range, hidden, onClick, disableRounding, search } = this.props
     const { expanded } = this.state
@@ -187,7 +194,8 @@ class AccountRowItem extends PureComponent<Props, State> {
 
     const showTokensIndicator = tokens && tokens.length > 0 && !hidden
     return (
-      <Wrapper hidden={hidden}>
+      <div style={{ position: 'relative' }} hidden={hidden}>
+        <span style={{ position: 'absolute', top: -70 }} ref={this.scrollTopFocusRef} />
         <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
           <ContextMenuItem items={this.contextMenuItems}>
             <RowContent disabled={disabled} onClick={this.onClick}>
@@ -230,7 +238,7 @@ class AccountRowItem extends PureComponent<Props, State> {
             </TokenShowMoreIndicator>
           )}
         </Row>
-      </Wrapper>
+      </div>
     )
   }
 }
