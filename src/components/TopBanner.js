@@ -4,9 +4,10 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import Box from 'components/base/Box'
-import { radii } from 'styles/theme'
 import IconCross from 'icons/Cross'
 import { createStructuredSelector } from 'reselect'
+import { colors, radii } from 'styles/theme'
+
 import { dismissBanner } from '../actions/settings'
 import { dismissedBannersSelector } from '../reducers/settings'
 
@@ -19,7 +20,7 @@ export type Content = {
 type Props = {
   content?: Content,
   status: string,
-  dismissable: boolean,
+  dismissable?: boolean,
   bannerId?: string,
   dismissedBanners: string[],
   dismissBanner: string => void,
@@ -84,17 +85,12 @@ const IconContainer = styled.div`
   align-items: center;
 `
 
-const colorForStatus = {
-  error: 'alertRed',
-  dark: '#142533',
-}
-
 const Container = styled(Box).attrs({
   horizontal: true,
   align: 'center',
   py: '8px',
   px: 3,
-  bg: p => colorForStatus[p.status] || 'wallet',
+  bg: p => colors[p.status] || 'wallet',
   color: 'white',
   mt: -20,
   mb: 20,

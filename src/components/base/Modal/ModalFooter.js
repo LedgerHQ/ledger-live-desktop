@@ -1,18 +1,16 @@
 // @flow
 
-import React from 'react'
+import styled from 'styled-components'
 
-import { colors } from 'styles/theme'
+const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px solid ${p => p.theme.colors.lightGrey};
+  padding: 20px;
 
-const MODAL_FOOTER_STYLE = {
-  display: 'flex',
-  justifyContent: 'flex-end',
-  borderTop: `2px solid ${colors.lightGrey}`,
-  padding: 20,
-}
-
-const ModalFooter = ({ children }: { children: any }) => (
-  <div style={MODAL_FOOTER_STYLE}>{children}</div>
-)
+  &:empty {
+    display: none;
+  }
+`
 
 export default ModalFooter

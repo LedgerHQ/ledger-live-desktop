@@ -15,8 +15,9 @@ import { MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
 
 type Props = {
   account: Account,
-  isChecked: boolean,
+  isChecked?: boolean,
   isDisabled?: boolean,
+  isReadonly?: boolean,
   autoFocusInput?: boolean,
   accountName: string,
   onToggleAccount?: (Account, boolean) => void,
@@ -66,6 +67,7 @@ export default class AccountRow extends PureComponent<Props> {
       onEditName,
       accountName,
       isDisabled,
+      isReadonly,
       autoFocusInput,
       hideAmount,
     } = this.props
@@ -103,10 +105,10 @@ export default class AccountRow extends PureComponent<Props> {
             color="grey"
           />
         ) : null}
-        {!isDisabled ? (
+        {!isDisabled && !isReadonly ? (
           <CheckBox disabled isChecked={isChecked || !!isDisabled} />
         ) : (
-          <div style={{ width: 20 }} />
+          !isReadonly && <div style={{ width: 20 }} />
         )}
       </AccountRowContainer>
     )

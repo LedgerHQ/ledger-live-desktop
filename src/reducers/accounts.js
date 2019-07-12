@@ -5,7 +5,7 @@ import { handleActions } from 'redux-actions'
 import accountModel from 'helpers/accountModel'
 import logger from 'logger'
 import type { Account } from '@ledgerhq/live-common/lib/types'
-import { flattenAccounts, clearAccount } from '@ledgerhq/live-common/lib/account'
+import { flattenAccounts, clearAccount, canBeMigrated } from '@ledgerhq/live-common/lib/account'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
 import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
 
@@ -87,6 +87,11 @@ export const hasAccountsSelector = createSelector(
   accounts => accounts.length > 0,
 )
 
+export const someAccountsNeedMigrationSelector = createSelector(
+  accountsSelector,
+  accounts => accounts.some(canBeMigrated),
+)
+
 export const currenciesSelector = createSelector(
   accountsSelector,
   accounts =>
@@ -105,6 +110,11 @@ export const accountSelector = createSelector(
   accountsSelector,
   (_, { accountId }: { accountId: string }) => accountId,
   (accounts, accountId) => accounts.find(a => a.id === accountId),
+)
+
+export const accountNeedsMigrationSelector = createSelector(
+  accountSelector,
+  account => canBeMigrated(account),
 )
 
 const isUpToDateAccount = a => {

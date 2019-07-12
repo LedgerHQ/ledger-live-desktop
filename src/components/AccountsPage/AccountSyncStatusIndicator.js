@@ -8,18 +8,22 @@ import { colors } from 'styles/theme'
 import IconCheck from 'icons/Check'
 import IconLoader from 'icons/Loader'
 import IconPending from 'icons/Clock'
+import IconWarning from 'icons/TriangleWarning'
 import IconError from 'icons/Error'
 import Box from 'components/base/Box'
 import Tooltip from 'components/base/Tooltip'
 import TranslatedError from 'components/TranslatedError'
+import { openModal } from 'reducers/modals'
 import { useBridgeSync } from '../../bridge/BridgeSyncContext'
-import { isUpToDateAccountSelector } from '../../reducers/accounts'
+import { accountNeedsMigrationSelector, isUpToDateAccountSelector } from '../../reducers/accounts'
 import { accountSyncStateSelector } from '../../reducers/bridgeSync'
 import { Rotating } from '../base/Spinner'
+import { MODAL_MIGRATE_ACCOUNTS } from '../../config/constants'
 
 const mapStateToProps = createStructuredSelector({
   syncState: accountSyncStateSelector,
   isUpToDateAccount: isUpToDateAccountSelector,
+  needsMigration: accountNeedsMigrationSelector,
 })
 
 class StatusQueued extends PureComponent<{ onClick: (*) => void }> {
@@ -83,9 +87,27 @@ class StatusError extends PureComponent<{ onClick: (*) => void, error: ?Error }>
   }
 }
 
+class StatusNeedsMigration extends PureComponent<{ openModal: string => void }> {
+  openMigrateAccountsModal = e => {
+    e.stopPropagation()
+    this.props.openModal(MODAL_MIGRATE_ACCOUNTS)
+  }
+  render() {
+    return (
+      <Tooltip render={() => <Trans i18nKey="common.sync.needsMigration" />}>
+        <Box onClick={this.openMigrateAccountsModal}>
+          <IconWarning onClick={this.openMigrateAccountsModal} color={colors.orange} size={16} />
+        </Box>
+      </Tooltip>
+    )
+  }
+}
+
 const AccountSyncStatusIndicator = ({
   accountId,
   isUpToDateAccount,
+  needsMigration,
+  openModal,
   syncState: { pending, error },
 }: *) => {
   const setSyncBehavior = useBridgeSync()
@@ -112,6 +134,9 @@ const AccountSyncStatusIndicator = ({
     clearTimeout(timeout.current)
   }, [])
 
+  if (needsMigration) {
+    return <StatusNeedsMigration openModal={openModal} onClick={onClick} />
+  }
   // We optimistically will show things are up to date even if it's actually synchronizing
   // in order to "debounce" the UI and don't make it blinks each time a sync happens
   // only when user did the account we will show the true state
@@ -127,4 +152,7 @@ const AccountSyncStatusIndicator = ({
   return <StatusQueued onClick={onClick} />
 }
 
-export default connect(mapStateToProps)(AccountSyncStatusIndicator)
+export default connect(
+  mapStateToProps,
+  { openModal },
+)(AccountSyncStatusIndicator)
