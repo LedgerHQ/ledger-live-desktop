@@ -21,13 +21,6 @@ export type Feature = FeatureCommon & FeatureToggle
 export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
-    name: 'EXPERIMENTAL_SEND_MAX',
-    title: 'Experimental Send MAX',
-    description:
-      'Support sending the entire account balance with a MAX toggle. XRP not yet supported.',
-  },
-  {
-    type: 'toggle',
     name: 'EXPERIMENTAL_EXPLORERS',
     title: 'Experimental nodes',
     description: "Connect to Ledger's new blockchain nodes.",
