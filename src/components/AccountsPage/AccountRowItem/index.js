@@ -39,7 +39,7 @@ const Row = styled(Box)`
   flex: 1;
   font-weight: 600;
   justify-content: flex-start;
-  margin-bottom: ${p => (p.tokens && !p.expanded ? 18 : 9)}px;
+  margin-bottom: 9px;
   padding: 16px 20px;
   position: relative;
   :hover {
