@@ -9,6 +9,7 @@ import {
   useCurrenciesByMarketcap,
   listSupportedCurrencies,
 } from '@ledgerhq/live-common/lib/currencies'
+import useEnv from 'hooks/useEnv'
 import type { T } from 'types/common'
 import type { Option } from 'components/base/Select'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
@@ -28,10 +29,14 @@ const getOptionValue = c => c.id
 
 const SelectCurrency = React.memo(
   ({ onChange, value, t, placeholder, currencies, autoFocus, ...props }: Props) => {
-    const c =
+    const devMode = useEnv('MANAGER_DEV_MODE')
+    let c =
       currencies ||
       // $FlowFixMe
       (listSupportedCurrencies(): Currency[])
+    if (!devMode) {
+      c = c.filter(c => c.type !== 'CryptoCurrency' || !c.isTestnetFor)
+    }
     const cryptos = useCurrenciesByMarketcap(c)
     const onChangeCallback = useCallback(item => onChange(item ? item.currency : null), [onChange])
     const noOptionsMessage = useCallback(

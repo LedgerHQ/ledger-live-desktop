@@ -1,10 +1,8 @@
 // @flow
-import logger from 'logger'
 import { throwError, Observable } from 'rxjs'
 import throttle from 'lodash/throttle'
 import '@ledgerhq/live-common/lib/load/tokens/ethereum/erc20'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
-import { listen as listenLogs } from '@ledgerhq/logs'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import { setEnvUnsafe, getEnv } from '@ledgerhq/live-common/lib/env'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
@@ -15,8 +13,6 @@ import { LISTEN_DEVICES_DEBOUNCE } from 'config/constants'
 import { retry } from './promise'
 import './implement-libcore'
 import './live-common-set-supported-currencies'
-
-listenLogs(({ id, date, ...log }) => logger.debug(log))
 
 /* eslint-disable guard-for-in */
 for (const k in process.env) {

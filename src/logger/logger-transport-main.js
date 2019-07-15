@@ -2,15 +2,18 @@ import Transport from 'winston-transport'
 
 export default class MainTransport extends Transport {
   logs = []
-  capacity = 2000
+  capacity = 3000
+  blacklist = ['hid-frame']
 
   log(info, callback) {
     setImmediate(() => {
       this.emit('logged', info)
     })
 
-    this.logs.unshift(info)
-    this.logs.splice(this.capacity)
+    if (!this.blacklist.includes(info.type)) {
+      this.logs.unshift(info)
+      this.logs.splice(this.capacity)
+    }
 
     callback()
   }
