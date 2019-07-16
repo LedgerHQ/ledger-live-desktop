@@ -3,12 +3,9 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import listenDevices from 'commands/listenDevices'
 import { addDevice, removeDevice, resetDevices } from 'actions/devices'
-import useEnv from 'hooks/useEnv'
 
 const ListenDevices = ({ addDevice, removeDevice, resetDevices }) => {
-  const experimentalUSB = useEnv('EXPERIMENTAL_USB')
   useEffect(() => {
-    if (experimentalUSB) return () => {}
     let sub
     let timeout
     function syncDevices() {
@@ -57,7 +54,7 @@ const ListenDevices = ({ addDevice, removeDevice, resetDevices }) => {
       clearTimeout(timeout)
       sub.unsubscribe()
     }
-  }, [experimentalUSB])
+  }, [])
   return null
 }
 

@@ -17,6 +17,33 @@ const makeError = (msg, status, url, method) => {
     : new LedgerAPI5xx(msg, obj)
 }
 
+const extractErrorMessage = (raw: string): ?string => {
+  try {
+    const data = JSON.parse(raw)
+    let msg = data.error || data.message || data.error_message
+    if (typeof msg === 'string') {
+      const m = msg.match(/^JsDefined\((.*)\)$/)
+      const innerPart = m ? m[1] : msg
+      try {
+        const r = JSON.parse(innerPart)
+        let message = r.message
+        if (typeof message === 'object') {
+          message = message.message
+        }
+        if (typeof message === 'string') {
+          msg = message
+        }
+      } catch (e) {
+        logger.warn("can't parse server result", e)
+      }
+      return msg ? String(msg) : null
+    }
+  } catch (e) {
+    logger.warn("can't parse server result", e)
+  }
+  return null
+}
+
 const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime, ...rest }): Promise<A> =>
   p.catch(error => {
     let errorToThrow
@@ -24,29 +51,13 @@ const userFriendlyError = <A>(p: Promise<A>, { url, method, startTime, ...rest }
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx
       const { data, status } = error.response
-      if (data && typeof data.error === 'string') {
-        let msg = data.error || data.message
-        if (typeof msg === 'string') {
-          const m = msg.match(/^JsDefined\((.*)\)$/)
-          const innerPart = m ? m[1] : msg
-          try {
-            const r = JSON.parse(innerPart)
-            let message = r.message
-            if (typeof message === 'object') {
-              message = message.message
-            }
-            if (typeof message === 'string') {
-              msg = message
-            }
-          } catch (e) {
-            logger.warn("can't parse server result", e)
-          }
-          if (msg && !msg.includes('<html')) {
-            errorToThrow = makeError(msg, status, anonymizer.url(url), method)
-          }
-        }
+      let msg
+      if (data && typeof data === 'string') {
+        msg = extractErrorMessage(data)
       }
-      if (!errorToThrow) {
+      if (msg) {
+        errorToThrow = makeError(msg, status, anonymizer.url(url), method)
+      } else {
         errorToThrow = makeError(`API HTTP ${status}`, status, anonymizer.url(url), method)
       }
       logger.networkError({

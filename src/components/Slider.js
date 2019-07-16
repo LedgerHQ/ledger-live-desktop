@@ -1,5 +1,6 @@
 // @flow
 import React, { useState, useRef, useCallback, useEffect } from 'react'
+
 import { colors as themeColors } from 'styles/theme'
 import { lighten } from 'styles/helpers'
 
@@ -17,7 +18,6 @@ const palette = {
     buttonInner: themeColors.white,
   },
 }
-const touches = typeof window !== 'undefined' && 'ontouchstart' in window
 
 type Props = {
   steps: number,
@@ -106,7 +106,7 @@ const Slider = ({ steps, value, onChange, error }: Props) => {
 
   const concernedEvent = useCallback(
     e => {
-      if (!touches) {
+      if (!e.targetTouches) {
         return e
       }
       if (!down) return e.targetTouches[0]
@@ -163,14 +163,14 @@ const Slider = ({ steps, value, onChange, error }: Props) => {
     // eslint-disable-next-line consistent-return
     () => {
       const { body } = document
-      if (down && !touches && body) {
+      if (down && body) {
         window.addEventListener('mousemove', onHandleMove)
         window.addEventListener('mouseup', onHandleEnd)
         // $FlowFixMe
         body.addEventListener('mouseleave', onHandleAbort)
         return () => {
           window.removeEventListener('mousemove', onHandleMove)
-          window.addEventListener('mouseup', onHandleEnd)
+          window.removeEventListener('mouseup', onHandleEnd)
           // $FlowFixMe
           body.removeEventListener('mouseleave', onHandleAbort)
         }
@@ -179,14 +179,13 @@ const Slider = ({ steps, value, onChange, error }: Props) => {
     [down, onHandleAbort, onHandleEnd, onHandleMove],
   )
 
-  const events = touches
-    ? {
+  const events = {
         onTouchStart: onHandleStart,
         onTouchEnd: onHandleEnd,
         onTouchMove: onHandleMove,
         onTouchCancel: onHandleAbort,
-      }
-    : { onMouseDown: onHandleStart }
+        onMouseDown: onHandleStart
+  }
 
   const x = value / (steps - 1)
 

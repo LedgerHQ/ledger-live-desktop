@@ -5,6 +5,7 @@
     "never": "从不",
     "apply": "应用",
     "confirm": "确认",
+    "connecting": "Connecting..",
     "cancel": "取消",
     "getSupport": "获取支持",
     "delete": "删除",
@@ -97,6 +98,8 @@
   },
   "account": {
     "lastOperations": "近期操作",
+    "contractAddress": "Contract:",
+    "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "还没有加密资产？",
       "desc": "请确认已安装 <1> <0>{{managerAppName}}</0> </1> 应用程序后开始接收",
@@ -444,7 +447,8 @@
     "distribution": "Distribution",
     "amount": "Amount",
     "value": "Value",
-    "seeAll": "See all",
+    "showAll": "Show all",
+    "showLess": "Show less",
     "header": "Asset distribution ({{count}})"
   },
   "settings": {
@@ -878,6 +882,10 @@
       "title": "应用程序错误",
       "description": "打开您的设备上的‘{{managerAppName}}’应用程序"
     },
+    "NoAccessToCamera": {
+      "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
+      "description": ""
+    },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
       "description": "This crypto asset is not yet supported. Please contact us."
@@ -964,9 +972,13 @@
       "title": "请解锁您的设备",
       "description": "您的设备已锁定，请解锁"
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "抱歉，剩余存储空间不足",
-      "description": "请卸载一些应用程序清出空间，此操作不会影响您的加密资产。"
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "抱歉，需要安装此应用程序",

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { Trans } from 'react-i18next'
 import { BigNumber } from 'bignumber.js'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
-import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { getAccountBridge } from 'bridge'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
@@ -90,9 +89,7 @@ class AmountField extends Component<
     const { validTransactionError, maxAmount } = this.state
     const mainAccount = getMainAccount(account, parentAccount)
     const bridge = getAccountBridge(account, parentAccount)
-    const useAllAmount = getEnv('EXPERIMENTAL_SEND_MAX')
-      ? bridge.getTransactionExtra(mainAccount, transaction, 'useAllAmount')
-      : null
+    const useAllAmount = bridge.getTransactionExtra(mainAccount, transaction, 'useAllAmount')
 
     return (
       <Box flow={1}>

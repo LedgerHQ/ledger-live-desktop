@@ -5,6 +5,7 @@
     "never": "결코 아님",
     "apply": "신청",
     "confirm": "확인",
+    "connecting": "Connecting..",
     "cancel": "취소",
     "getSupport": "지원 받기",
     "delete": "삭제",
@@ -97,6 +98,8 @@
   },
   "account": {
     "lastOperations": "마지막 작업",
+    "contractAddress": "Contract:",
+    "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "아직 암호화 자산이 없습니까?",
       "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수신을 시작하십시오.",
@@ -444,7 +447,8 @@
     "distribution": "Distribution",
     "amount": "Amount",
     "value": "Value",
-    "seeAll": "See all",
+    "showAll": "Show all",
+    "showLess": "Show less",
     "header": "Asset distribution ({{count}})"
   },
   "settings": {
@@ -878,6 +882,10 @@
       "title": "잘못된 앱입니다.",
       "description": "장치에서 ‘{{managerAppName}}’ 앱을 여십시오."
     },
+    "NoAccessToCamera": {
+      "title": "Please ensure your system has a camera, that it's not in use by another application and that Ledger Live has permission to use it.",
+      "description": ""
+    },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
       "description": "This crypto asset is not yet supported. Please contact us."
@@ -964,9 +972,13 @@
       "title": "장치를 잠금 해제하십시오.",
       "description": "장치가 잠겨 있습니다. 먼저 잠금 해제하십시오."
     },
+    "ManagerFirmwareNotEnoughSpace": {
+      "title": "Uninstall all apps from your device",
+      "description": "The private keys providing access to your crypto assets will stay safe on your device and should be backed up on your recovery sheet."
+    },
     "ManagerNotEnoughSpace": {
       "title": "죄송합니다. 남아 있는 저장 공간이 충분하지 않습니다.",
-      "description": "일부 앱을 제거하여 공간을 확보하십시오. 그렇게 해도 귀하의 암호화 자산에는 영향을 미치지 않습니다."
+      "description": "Uninstall some apps to make space. The private keys providing access to your crypto assets will stay safe on your device."
     },
     "ManagerUninstallBTCDep": {
       "title": "죄송합니다. 이 앱은 필요합니다.",
