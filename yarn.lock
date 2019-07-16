@@ -1821,10 +1821,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@7.6.4":
-  version "7.6.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.6.4.tgz#94a84c505420b48174db519fa2c8c7a45e5f4fa3"
-  integrity sha512-eL/Q1DY1iFOmdOKYKpEfCJ6vSI5vP2kQeAg32iVMByT+pqkf3wHMj36ocL7yJwCk3geutm4dmuZAHZNON/CBjg==
+"@ledgerhq/live-common@7.7.1":
+  version "7.7.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.7.1.tgz#291cb70f37636e9acedeb18553bde9dc54f6f49f"
+  integrity sha512-plknG0dDM8v33dHUp0grF6oc9F/+Lu+NM2rWuINTrQpqdcjxizZIy/svE71rDqk5FrzBjdSsKLISJSX6jPDXhg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/errors" "4.66.0"
@@ -11070,12 +11070,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.0.1, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.8.0, lodash@~4.17.10:
-  version "4.17.11"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
-  integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
-
-lodash@^4.17.14:
+lodash@^4.0.1, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.8.0, lodash@~4.17.10:
   version "4.17.14"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
   integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
