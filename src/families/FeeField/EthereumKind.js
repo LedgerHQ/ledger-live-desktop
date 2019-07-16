@@ -62,7 +62,7 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
     value => {
       onChange(bridge.editTransactionExtra(account, transaction, 'gasPrice', value))
     },
-    [bridge, account, transaction],
+    [bridge, account, transaction, onChange],
   )
   const latestOnChange = useRef(onChangeF)
   useEffect(() => {
@@ -85,7 +85,7 @@ const FeesField = ({ fees, account, transaction, onChange }: Props & { fees?: Fe
       }
     }, 5000)
     return () => clearTimeout(timeout)
-  }, [gasPrice])
+  }, [gasPrice, defaultGas])
 
   useEffect(() => {
     let ignored = false

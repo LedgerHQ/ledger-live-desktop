@@ -126,6 +126,15 @@ class AccountRowItem extends PureComponent<Props, State> {
     return null
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.expanded !== this.state.expanded && !this.state.expanded) {
+      const { scrollTopFocusRef } = this
+      if (scrollTopFocusRef.current) {
+        scrollTopFocusRef.current.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+      }
+    }
+  }
+
   scrollTopFocusRef = React.createRef()
 
   onClick = () => {
@@ -156,15 +165,6 @@ class AccountRowItem extends PureComponent<Props, State> {
     const { account } = this.props
     expandedStates[account.id] = !expandedStates[account.id]
     this.setState({ expanded: expandedStates[account.id] })
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.expanded !== this.state.expanded && !this.state.expanded) {
-      const { scrollTopFocusRef } = this
-      if (scrollTopFocusRef.current) {
-        scrollTopFocusRef.current.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-      }
-    }
   }
 
   render() {

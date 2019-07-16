@@ -89,7 +89,7 @@ const SectionAccounts = ({ defaultSelected, ...rest }: *) => {
     if (defaultSelected && rest.onSelectAll) {
       rest.onSelectAll(rest.accounts)
     }
-  }, [])
+  })
   return <AccountsList {...rest} />
 }
 
