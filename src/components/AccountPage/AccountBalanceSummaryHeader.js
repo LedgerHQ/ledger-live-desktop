@@ -157,7 +157,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
         </Box>
         <Box key={primaryKey} horizontal justifyContent="center" flow={7}>
           <BalanceSincePercent
-            isAvailable={isAvailable}
+            isAvailable
             t={t}
             alignItems="center"
             totalBalance={data[0].balance}
@@ -165,7 +165,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             since={selectedTimeRange}
           />
           <BalanceSinceDiff
-            isAvailable={isAvailable}
+            isAvailable
             t={t}
             unit={data[0].unit}
             alignItems="center"
