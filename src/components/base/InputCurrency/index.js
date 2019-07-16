@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react'
+import React, { PureComponent, type ElementRef } from 'react'
 import { BigNumber } from 'bignumber.js'
 import uncontrollable from 'uncontrollable'
 import styled from 'styled-components'
@@ -50,6 +50,7 @@ type Props = {
   allowZero: boolean,
   locale: string,
   disabled?: boolean,
+  forwardedRef: ?ElementRef<any>,
 }
 
 type State = {
@@ -160,16 +161,6 @@ class InputCurrency extends PureComponent<Props, State> {
     )
   }
 
-  select = () => {
-    // TODO we should fowardRef so InputCurrency ref is on Input
-    this.input && this.input.select()
-  }
-
-  input: ?Input
-  onRef = (input: ?Input) => {
-    this.input = input
-  }
-
   render() {
     const { renderRight, showAllDigits, unit, subMagnitude, locale, disabled } = this.props
     const { displayValue } = this.state
@@ -179,7 +170,7 @@ class InputCurrency extends PureComponent<Props, State> {
         data-e2e="addAccount_currencyInput"
         {...this.props}
         ff="Rubik"
-        ref={this.onRef}
+        ref={this.props.forwardedRef}
         disabled={disabled}
         value={displayValue}
         onChange={this.handleChange}
@@ -201,7 +192,7 @@ class InputCurrency extends PureComponent<Props, State> {
   }
 }
 
-export default uncontrollable(
+const Connected = uncontrollable(
   connect(
     createStructuredSelector({
       locale: localeSelector,
@@ -211,3 +202,8 @@ export default uncontrollable(
     unit: 'onChangeUnit',
   },
 )
+
+// $FlowFixMe
+export default React.forwardRef((props, ref) => (
+  <Connected {...props} forwardedRef={ref} />
+))
