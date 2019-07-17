@@ -138,19 +138,26 @@ class StepImport extends PureComponent<StepProps> {
       // TODO: use the real device
       const devicePath = device.path
 
+      // will be set to false if an existing account is found
+      let onlyNewAccounts = true
+
       this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath).subscribe({
         next: account => {
           const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
           const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
           const isNewAccount = isAccountEmpty(account)
+          if (!isNewAccount && !hasAlreadyBeenImported) {
+            onlyNewAccounts = false
+          }
           if (!hasAlreadyBeenScanned) {
             setScannedAccounts({
               scannedAccounts: [...scannedAccounts, account],
-              checkedAccountsIds:
-                !hasAlreadyBeenImported && !isNewAccount
-                  ? uniq([...checkedAccountsIds, account.id])
-                  : checkedAccountsIds,
+              checkedAccountsIds: onlyNewAccounts
+                ? [account.id]
+                : !hasAlreadyBeenImported && !isNewAccount
+                ? uniq([...checkedAccountsIds, account.id])
+                : checkedAccountsIds,
             })
           }
         },
