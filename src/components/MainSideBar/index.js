@@ -28,7 +28,6 @@ import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
 import TopGradient from './TopGradient'
-import KeyboardContent from '../KeyboardContent'
 import useExperimental from '../../hooks/useExperimental'
 import { darken } from '../../styles/helpers'
 
@@ -48,25 +47,7 @@ type Props = {
   location: Location,
   push: string => void,
   openModal: string => void,
-  developerMode: boolean,
 }
-
-const IconDev = () => (
-  <div
-    style={{
-      width: 16,
-      height: 16,
-      fontSize: 10,
-      fontFamily: 'monospace',
-      fontWeight: 'bold',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    {'DEV'}
-  </div>
-)
 
 const TagContainer = () => {
   const isExperimental = useExperimental()
@@ -137,7 +118,7 @@ class MainSideBar extends PureComponent<Props> {
   }
 
   render() {
-    const { t, noAccounts, location, developerMode } = this.props
+    const { t, noAccounts, location } = this.props
     const { pathname } = location
 
     return (
@@ -191,17 +172,6 @@ class MainSideBar extends PureComponent<Props> {
               onClick={this.handleClickExchange}
               isActive={pathname === '/partners'}
             />
-            {developerMode && (
-              <KeyboardContent sequence="DEVTOOLS">
-                <SideBarListItem
-                  label={t('sidebar.developer')}
-                  icon={IconDev}
-                  iconActiveColor="wallet"
-                  onClick={this.handleClickDev}
-                  isActive={pathname === '/dev'}
-                />
-              </KeyboardContent>
-            )}
             <Space of={30} />
           </SideBarList>
           <Space grow />
