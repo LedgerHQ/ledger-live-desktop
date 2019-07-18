@@ -5,13 +5,14 @@ import '@ledgerhq/live-common/lib/load/tokens/ethereum/erc20'
 import { registerTransportModule } from '@ledgerhq/live-common/lib/hw'
 import { addAccessHook, setErrorRemapping } from '@ledgerhq/live-common/lib/hw/deviceAccess'
 import { setEnvUnsafe, getEnv } from '@ledgerhq/live-common/lib/env'
+import { withLibcore } from '@ledgerhq/live-common/lib/libcore/access'
 import TransportNodeHid from '@ledgerhq/hw-transport-node-hid'
 import TransportNodeHidSingleton from '@ledgerhq/hw-transport-node-hid-singleton'
 import TransportHttp from '@ledgerhq/hw-transport-http'
 import { DisconnectedDevice } from '@ledgerhq/errors'
 import { LISTEN_DEVICES_DEBOUNCE } from 'config/constants'
 import { retry } from './promise'
-import './implement-libcore'
+import implementLibcore from './implement-libcore'
 import './live-common-set-supported-currencies'
 
 /* eslint-disable guard-for-in */
@@ -77,3 +78,13 @@ export const listenDevices = (): * =>
   getEnv('EXPERIMENTAL_USB')
     ? Observable.create(TransportNodeHidSingleton.listen)
     : Observable.create(TransportNodeHid.listen)
+
+process.on('message', message => {
+  if (message.type === 'initLibcore') {
+    const { password } = message
+    implementLibcore(password)
+  } else if (message.type === 'changeLibcorePassword') {
+    const { oldPassword, newPassword } = message
+    withLibcore(async core => core.getPoolInstance().changePassword(oldPassword, newPassword))
+  }
+})

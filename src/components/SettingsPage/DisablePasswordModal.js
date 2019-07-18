@@ -46,7 +46,7 @@ class DisablePasswordModal extends PureComponent<Props, State> {
       return
     }
 
-    onChangePassword('')
+    onChangePassword(currentPassword, '')
   }
 
   handleInputChange = (key: string) => (value: string) => {

@@ -15,7 +15,7 @@ import PasswordForm from './PasswordForm'
 type Props = {
   t: T,
   onClose: () => void,
-  onChangePassword: (?string) => void,
+  onChangePassword: (string, ?string) => void,
   hasPassword: boolean,
   isOpened: boolean,
 }
@@ -54,15 +54,11 @@ class PasswordModal extends PureComponent<Props, State> {
     }
 
     const { hasPassword, onChangePassword } = this.props
-    if (hasPassword) {
-      if (!db.isEncryptionKeyCorrect('app', 'accounts', currentPassword)) {
-        this.setState({ incorrectPassword: new PasswordIncorrectError() })
-        return
-      }
-      onChangePassword(newPassword)
-    } else {
-      onChangePassword(newPassword)
+    if (hasPassword && !db.isEncryptionKeyCorrect('app', 'accounts', currentPassword)) {
+      this.setState({ incorrectPassword: new PasswordIncorrectError() })
+      return
     }
+    onChangePassword(currentPassword, newPassword)
   }
 
   handleInputChange = (key: string) => (value: string) => {

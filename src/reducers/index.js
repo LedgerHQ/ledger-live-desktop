@@ -11,7 +11,6 @@ import accounts from './accounts'
 import application from './application'
 import currenciesStatus from './currenciesStatus'
 import devices from './devices'
-import libcore from './libcore'
 import modals from './modals'
 import settings from './settings'
 import onboarding from './onboarding'
@@ -20,7 +19,6 @@ import bridgeSync from './bridgeSync'
 import type { AccountsState } from './accounts'
 import type { ApplicationState } from './application'
 import type { DevicesState } from './devices'
-import type { LibcoreState } from './libcore'
 import type { ModalsState } from './modals'
 import type { SettingsState } from './settings'
 import type { OnboardingState } from './onboarding'
@@ -33,7 +31,6 @@ export type State = {
   countervalues: CounterValuesState,
   currenciesStatus: CurrenciesStatusState,
   devices: DevicesState,
-  libcore: LibcoreState,
   modals: ModalsState,
   router: LocationShape,
   settings: SettingsState,
@@ -48,7 +45,6 @@ export default combineReducers({
   countervalues: CounterValues.reducer,
   currenciesStatus,
   devices,
-  libcore,
   modals,
   router,
   settings,

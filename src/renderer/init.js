@@ -26,7 +26,6 @@ import { languageSelector, sentryLogsSelector } from 'reducers/settings'
 import { commandsById } from 'commands'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 
-import { retry } from 'helpers/promise'
 import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 import db from 'helpers/db'
 import dbMiddleware from 'middlewares/db'
@@ -93,7 +92,7 @@ async function init() {
 
     events({ store })
 
-    const libcoreVersion = await retry(async () => libcoreGetVersion.send().toPromise()) // wait for libcore to be loaded
+    const libcoreVersion = await libcoreGetVersion.send().toPromise()
     logger.log('libcore', libcoreVersion)
 
     window.addEventListener('keydown', (e: SyntheticKeyboardEvent<any>) => {

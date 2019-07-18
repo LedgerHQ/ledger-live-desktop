@@ -7,9 +7,11 @@ import { getDeviceModel } from '@ledgerhq/devices'
 import { colors } from 'styles/theme'
 
 import db from 'helpers/db'
-import { changePassword as changeLibcorePassword } from 'helpers/libcoreEncryption'
+import {
+  changePassword as changeLibcorePassword,
+  setPassword as setLibcorePassword,
+} from 'helpers/libcoreEncryption'
 import { saveSettings } from 'actions/settings'
-import { setLibcorePassword } from 'actions/libcore'
 
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -37,7 +39,6 @@ type State = {
 
 const mapDispatchToProps = {
   saveSettings,
-  setLibcorePassword,
 }
 
 const INITIAL_STATE = {
@@ -48,7 +49,6 @@ const INITIAL_STATE = {
 
 type Props = StepProps & {
   saveSettings: any => void,
-  setLibcorePassword: string => Promise<void>,
 }
 
 class SetPassword extends PureComponent<Props, State> {

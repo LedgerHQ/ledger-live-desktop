@@ -15,11 +15,11 @@ import db from 'helpers/db'
 import {
   isUnlocked as isLibcoreUnlocked,
   changePassword as changeLibcorePassword,
+  setPassword as setLibcorePassword,
 } from 'helpers/libcoreEncryption'
 import { hardReset, resetLibcore } from 'helpers/reset'
 
 import { fetchAccounts } from 'actions/accounts'
-import { setLibcorePassword } from 'actions/libcore'
 import { isLocked, unlock } from 'reducers/application'
 
 import { PasswordIncorrectError } from '@ledgerhq/errors'
@@ -41,7 +41,6 @@ type Props = {
   isLocked: boolean,
   t: T,
   unlock: Function,
-  setLibcorePassword: Function,
 }
 type State = {
   inputValue: InputValue,
@@ -57,7 +56,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps: Object = {
   fetchAccounts,
   unlock,
-  setLibcorePassword,
 }
 
 const defaultState = {
@@ -127,8 +125,6 @@ class IsUnlocked extends Component<Props, State> {
   }
 
   unlockLibcore = async password => {
-    const { setLibcorePassword } = this.props
-
     await setLibcorePassword(password)
     const unlockedWithPW = await isLibcoreUnlocked()
 

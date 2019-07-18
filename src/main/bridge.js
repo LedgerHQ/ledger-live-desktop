@@ -19,6 +19,7 @@ import { setInternalProcessPID } from './terminator'
 import { getMainWindow } from './app'
 
 let envs = {}
+let libcorePassword = ''
 
 const loggerTransport = new LoggerTransport()
 logger.add(loggerTransport)
@@ -70,6 +71,7 @@ const bootInternalProcess = () => {
   setInternalProcessPID(internalProcess.pid)
   internalProcess.on('message', handleGlobalInternalMessage)
   internalProcess.on('exit', handleExit)
+  internalProcess.send({ type: 'initLibcore', password: libcorePassword })
 }
 
 const onNewEnvs = (evt, val) => {
@@ -176,4 +178,11 @@ ipcMain.on('sentryLogsChanged', (event, payload) => {
   const p = internalProcess
   if (!p) return
   p.send({ type: 'sentryLogsChanged', payload })
+})
+
+ipcMain.on('setLibcorePassword', (event, password) => {
+  if (password !== libcorePassword) {
+    libcorePassword = password
+    killInternalProcess()
+  }
 })

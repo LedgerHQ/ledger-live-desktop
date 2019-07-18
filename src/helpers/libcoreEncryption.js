@@ -1,5 +1,7 @@
 // @flow
+import { ipcRenderer } from 'electron'
 import logger from 'logger'
+
 import libcoreChangePasswordCmd from 'commands/libcoreChangePassword'
 import libcoreGetPoolNameCmd from 'commands/libcoreGetPoolName'
 import libcoreGetVersionCmd from 'commands/libcoreGetVersion'
@@ -36,4 +38,9 @@ export const isUnlocked = async () => {
 
 export const changePassword = async (oldPassword: string, newPassword: string) => {
   await libcoreChangePasswordCmd.send({ oldPassword, newPassword }).toPromise()
+}
+
+export const setPassword = async (password: string) => {
+  ipcRenderer.send('setLibcorePassword', password)
+  await waitForLibcore()
 }

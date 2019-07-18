@@ -1,39 +1,10 @@
 // @flow
-//
-// Libcore implementation used to live here before libcore db encryption was added.
-// Now libcore needs to be init with the user password from the renderer without relying on env variables (for security/privacy reasons),
-// so we end up doing the following IPC dance when Internal process starts 💃
-//
-// Main Process------------------------------------+      Renderer Process-------------------------------------------+
-// |                                               |      |                                                          |
-// |            bridge-----------------------+     |      |   +----------+                          +-------------+  |
-// |            |                            |     |      |   |          |----getLibcorePassword--->|             |  |
-// |            |     +-------------------------------------->|  events  |                          | Redux Store |  |
-// |            |     |                      |     |      |   |          |<-------password----------|             |  |
-// |            |     |                      |     |      |   +----------+                          +-------------+  |
-// |            |     |                      |     |      |        |                                                 |
-// |            |     |                      |     |      |     password                                             |
-// |            |     |                      |     |      |        |                                                 |
-// |            |     |                      |     |      |        v                                                 |
-// |            |     |                      |     |      |   +------------------------+                             |
-// |            |     |                      |     |      |   |                        |                             |
-// |            |     |               +-----------------------|  commands/libcoreInit  |                             |
-// |            |     |               |      |     |      |   |                        |                             |
-// |            +-----|---------------|------+     |      |   +------------------------+                             |
-// |                  |               |            |      |                                                          |
-// +------------------|---------------|------------+      +----------------------------------------------------------+
-//                    |               |
-//           'initLibcore'          implementLibcore(password)
-//                    |               |
-// Internal Process---|---------------|------------+
-// |                  |               v            |
-// | implement-libcore---+  commandHandler-------+ |
-// | |                   |  |                    | |
-// | |    You are here   |  |  Executes Payload  | |
-// | |                   |  |                    | |
-// | +-------------------+  +--------------------+ |
-// +-----------------------------------------------+
+import implementLibcore from '@ledgerhq/live-common/lib/libcore/platforms/nodejs'
 
-process.send({
-  type: 'initLibcore',
-})
+export default (password: string) => {
+  implementLibcore({
+    lib: require('@ledgerhq/ledger-core'),
+    dbPath: process.env.LEDGER_LIVE_SQLITE_PATH,
+    dbPassword: password,
+  })
+}
