@@ -5,8 +5,11 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { translate } from 'react-i18next'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { getDeviceModel } from '@ledgerhq/devices'
 import type { ApplicationVersion, DeviceInfo } from '@ledgerhq/live-common/lib/types/manager'
+import type { Account, CryptoCurrency } from '@ledgerhq/live-common/lib/types'
 import {
   currenciesByMarketcap,
   listCryptoCurrencies,
@@ -14,9 +17,12 @@ import {
 } from '@ledgerhq/live-common/lib/currencies'
 import manager from '@ledgerhq/live-common/lib/manager'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
+import { flattenSortAccountsSelector } from 'actions/general'
+import { openModal } from 'reducers/modals'
 import type { Device, T } from 'types/common'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
+import { MODAL_ADD_ACCOUNTS } from 'config/constants'
 import installApp from 'commands/installApp'
 import uninstallApp from 'commands/uninstallApp'
 import flushDevice from 'commands/flushDevice'
@@ -97,9 +103,12 @@ type Status = 'loading' | 'idle' | 'busy' | 'success' | 'error'
 type Mode = 'home' | 'installing' | 'uninstalling'
 
 type Props = {
+  accounts: Account[],
   device: Device,
   deviceInfo: DeviceInfo,
   t: T,
+  push: typeof push,
+  openModal: typeof openModal,
 }
 
 type State = {
@@ -110,6 +119,15 @@ type State = {
   app: ?ApplicationVersion,
   mode: Mode,
   progress: number,
+}
+
+const mapStateToProps = state => ({
+  accounts: flattenSortAccountsSelector(state),
+})
+
+const mapDispatchToProps = {
+  push,
+  openModal,
 }
 
 const oldAppsInstallDisabled = ['ZenCash', 'Ripple']
@@ -229,6 +247,17 @@ class AppsList extends PureComponent<Props, State> {
     this.handleCloseModal()
   }
 
+  handleAddAccount = (currency?: CryptoCurrency) => () => {
+    this.handleCloseModal()
+    this.props.push('/accounts')
+    this.props.openModal(MODAL_ADD_ACCOUNTS, { currency: currency || null })
+  }
+
+  hasAppCurrencyAccount = (app: ?ApplicationVersion): boolean =>
+    !!this.props.accounts.find(acc =>
+      acc && acc.currency && app && app.currency ? acc.currency.id === app.currency.id : false,
+    )
+
   renderBody = () => {
     const { t, device } = this.props
     const { app, status, error, mode, progress } = this.state
@@ -236,6 +265,8 @@ class AppsList extends PureComponent<Props, State> {
     const isCurrency = app && app.currency
     const isSupported = app && app.currency && isCurrencySupported(app.currency)
     const isInstalling = mode === 'installing'
+
+    const hasAccount = this.hasAppCurrencyAccount(app)
 
     return ['busy', 'idle'].includes(status) ? (
       <Box grow align="center" justify="center">
@@ -329,10 +360,20 @@ class AppsList extends PureComponent<Props, State> {
             textAlign="center"
             style={{ maxWidth: 350 }}
           >
-            {t(`manager.apps.${isSupported ? 'supportedCurrency' : 'unsupportedCurrency'}`, {
-              app: app.name,
-              device: getDeviceModel(device.modelId).productName,
-            })}
+            {t(
+              `manager.apps.${
+                isSupported
+                  ? hasAccount
+                    ? 'supportedCurrency'
+                    : 'supportedCurrencyNeedAccount'
+                  : 'unsupportedCurrency'
+              }`,
+              {
+                app: app.name,
+                device: getDeviceModel(device.modelId).productName,
+                currency: (app && ((app.currency && app.currency.name) || app.name)) || '',
+              },
+            )}
           </Box>
         ) : null}
       </Box>
@@ -341,11 +382,41 @@ class AppsList extends PureComponent<Props, State> {
 
   renderFooter = () => {
     const { t } = this.props
-    const { app, mode } = this.state
+    const { app, mode, status } = this.state
 
     const isInstalling = mode === 'installing'
     const isCurrency = app && app.currency
     const isSupported = app && app.currency && isCurrencySupported(app.currency)
+    const isError = status === 'error'
+
+    if (isCurrency && isInstalling && isSupported && !isError) {
+      const hasAccount = this.hasAppCurrencyAccount(app)
+
+      const addAccountText = t('manager.apps.addAccount', {
+        name: (app && ((app.currency && app.currency.name) || app.name)) || '',
+      })
+      const handleAddAccount = this.handleAddAccount(app ? app.currency : undefined)
+
+      return (
+        <Box horizontal justifyContent="flex-end" style={{ width: '100%' }}>
+          {hasAccount ? (
+            <React.Fragment>
+              <Button onClick={handleAddAccount}>{addAccountText}</Button>
+              <Button style={{ marginLeft: 10 }} primary onClick={this.handleCloseModal}>
+                {t('common.close')}
+              </Button>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Button onClick={this.handleCloseModal}>{t('common.close')}</Button>
+              <Button style={{ marginLeft: 10 }} primary onClick={handleAddAccount}>
+                {addAccountText}
+              </Button>
+            </React.Fragment>
+          )}
+        </Box>
+      )
+    }
 
     return isCurrency && isInstalling && !isSupported ? (
       <Box horizontal justifyContent="flex-end" style={{ width: '100%' }}>
@@ -442,4 +513,10 @@ class AppsList extends PureComponent<Props, State> {
   }
 }
 
-export default compose(translate())(AppsList)
+export default compose(
+  translate(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(AppsList)
