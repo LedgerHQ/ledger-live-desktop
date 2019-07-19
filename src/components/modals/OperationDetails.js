@@ -24,15 +24,26 @@ import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
+import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
+import OperationC from 'components/OperationsList/Operation'
 
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
 import { accountSelector } from 'reducers/accounts'
+import { openModal } from 'reducers/modals'
 
 import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'reducers/settings'
 import IconChevronRight from 'icons/ChevronRight'
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 import Ellipsis from '../base/Ellipsis'
+
+const OpDetailsSection = styled(Box).attrs({
+  horizontal: true,
+  alignItems: 'center',
+  ff: 'Open Sans|SemiBold',
+  fontSize: 4,
+  color: 'grey',
+})``
 
 const OpDetailsTitle = styled(Box).attrs({
   ff: 'Museo Sans|ExtraBold',
@@ -93,6 +104,10 @@ const B = styled(Bar).attrs({
   size: 1,
 })``
 
+const mapDispatchToProps = {
+  openModal,
+}
+
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state)
   const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId })
@@ -133,10 +148,23 @@ type Props = {
   confirmationsNb: number,
   onClose: () => void,
   marketIndicator: *,
+  openModal: typeof openModal,
 }
 
-const OperationDetails = connect(mapStateToProps)((props: Props) => {
-  const { t, onClose, operation, account, parentAccount, confirmationsNb, marketIndicator } = props
+const OperationDetails = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)((props: Props) => {
+  const {
+    t,
+    onClose,
+    operation,
+    account,
+    parentAccount,
+    confirmationsNb,
+    marketIndicator,
+    openModal,
+  } = props
   if (!operation || !account) return null
   const mainAccount = parentAccount || (account.type === 'Account' ? account : undefined)
   if (!mainAccount) return null
@@ -157,6 +185,7 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const uniqueSenders = uniq(senders)
 
   const { hasFailed } = operation
+  const subOperations = operation.subOperations || []
 
   return (
     <ModalBody
@@ -203,6 +232,51 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               )}
             </Box>
           </Box>
+          {subOperations.length > 0 && account.type === 'Account' && (
+            <React.Fragment>
+              <OpDetailsSection>
+                {t('operationDetails.tokenOperations')}
+                <LabelInfoTooltip
+                  text={t('operationDetails.tokenTooltip')}
+                  style={{ marginLeft: 4 }}
+                />
+              </OpDetailsSection>
+              <Box>
+                {subOperations.map((op, i) => {
+                  const opAccount = (account.tokenAccounts || []).find(
+                    acc => acc.id === op.accountId,
+                  )
+
+                  if (!opAccount) return null
+
+                  return (
+                    <Box style={{ marginLeft: -20, marginRight: -20 }}>
+                      <OperationC
+                        compact
+                        text={opAccount.token.name}
+                        operation={op}
+                        account={opAccount}
+                        parentAccount={account}
+                        key={`${account.id}_${operation.id}`}
+                        onOperationClick={() =>
+                          openModal(MODAL_OPERATION_DETAILS, {
+                            operationId: op.id,
+                            accountId: op.accountId,
+                            parentId: account.id,
+                          })
+                        }
+                        t={t}
+                      />
+                      {i < subOperations.length - 1 && <B />}
+                    </Box>
+                  )
+                })}
+              </Box>
+              <OpDetailsSection mb={2}>
+                {t('operationDetails.details', { currency: account.currency.name })}
+              </OpDetailsSection>
+            </React.Fragment>
+          )}
           <Box horizontal flow={2}>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>

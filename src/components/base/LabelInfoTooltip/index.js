@@ -21,4 +21,4 @@ function LabelInfoTooltip(props: Props) {
   )
 }
 
-export default LabelInfoTooltip
+export default React.memo<Props>(LabelInfoTooltip, (prev, next) => prev.text === next.text)

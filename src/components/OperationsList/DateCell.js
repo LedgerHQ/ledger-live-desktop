@@ -11,12 +11,14 @@ const Cell = styled(Box).attrs({
   px: 3,
   horizontal: false,
 })`
-  width: 120px;
+  width: ${p => (p.compact ? 90 : 120)}px;
 `
 
 type Props = {
   t: T,
   operation: Operation,
+  text?: string,
+  compact?: boolean,
 }
 
 class DateCell extends PureComponent<Props> {
@@ -25,11 +27,18 @@ class DateCell extends PureComponent<Props> {
   }
 
   render() {
-    const { t, operation } = this.props
+    const { t, operation, compact, text } = this.props
+    const ellipsis = {
+      display: 'block',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+    }
+
     return (
-      <Cell>
-        <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke">
-          {t(`operation.type.${operation.type}`)}
+      <Cell compact={compact}>
+        <Box ff="Open Sans|SemiBold" fontSize={3} color="smoke" style={ellipsis}>
+          {text || t(`operation.type.${operation.type}`)}
         </Box>
         <OperationDate date={operation.date} />
       </Cell>
