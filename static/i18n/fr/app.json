@@ -307,11 +307,13 @@
       "installSuccess": "{{app}} a été installé avec succès",
       "unsupportedSuccess": "Découvrez comment utiliser {{app}}",
       "uninstallSuccess": "{{app}} désinstallé",
-      "supportedCurrency": "{{app}} est maintenant installé sur votre {{device}}. Ajoutez un compte pour pouvoir envoyer et recevoir des fonds",
+      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "Consultez votre appareil pour voir quelles applications sont déjà installées.",
       "installed": "Application installée",
-      "uninstalled": "Application désinstallée"
+      "uninstalled": "Application désinstallée",
+      "addAccount": "Add {{name}} account"
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",

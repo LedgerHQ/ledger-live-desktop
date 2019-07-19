@@ -307,11 +307,13 @@
       "installSuccess": "{{app}} was successfully installed",
       "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} 제거됨",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오.",
       "installed": "App installed",
-      "uninstalled": "App uninstalled"
+      "uninstalled": "App uninstalled",
+      "addAccount": "Add {{name}} account"
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
