@@ -195,6 +195,18 @@ class AddAccounts extends PureComponent<Props, State> {
 
   handleSetAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
 
+  handleBeforeOpen = ({ data }) => {
+    const { currency } = this.state
+
+    if (!currency) {
+      if (data && data.currency) {
+        this.setState({
+          currency: data.currency,
+        })
+      }
+    }
+  }
+
   onGoStep1 = () => {
     this.setState(({ reset }) => ({ ...INITIAL_STATE, reset: reset + 1 }))
   }
@@ -243,6 +255,7 @@ class AddAccounts extends PureComponent<Props, State> {
         name={MODAL_ADD_ACCOUNTS}
         refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}
+        onBeforeOpen={this.handleBeforeOpen}
         render={({ onClose }) => (
           <Stepper
             key={reset} // THIS IS A HACK because stepper is not controllable. FIXME
