@@ -28,7 +28,7 @@ const AutoRepair = ({ onDone }: Props) => {
       complete: () => onDone(),
     })
     return () => sub.unsubscribe()
-  }, [])
+  }, [onDone])
 
   return (
     <RepairModal

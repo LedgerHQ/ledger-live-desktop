@@ -16,7 +16,7 @@ const ConnectTroubleshooting = ({ appearsAfterDelay = 20000 }: Props) => {
   useEffect(() => {
     const timeout = setTimeout(() => setVisible(true), appearsAfterDelay)
     return () => clearTimeout(timeout)
-  }, [])
+  }, [appearsAfterDelay])
 
   return visible ? (
     <Box p={4} alignItems="center">
