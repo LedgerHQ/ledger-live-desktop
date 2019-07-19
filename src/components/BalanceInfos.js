@@ -40,7 +40,7 @@ type Props = {
 
 export function BalanceSincePercent(props: BalanceSinceProps) {
   const { t, totalBalance, valueChange, since, isAvailable, ...otherProps } = props
-  if (!valueChange.percentage) return <Box {...otherProps} />
+  if (!valueChange.percentage) return null;
   return (
     <Box {...otherProps}>
       <FormattedVal
