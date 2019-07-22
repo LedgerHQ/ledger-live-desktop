@@ -41,6 +41,8 @@ type Props = {
   ) => void,
   t: T,
   withAccount: boolean,
+  compact?: boolean,
+  text?: string,
 }
 
 class OperationComponent extends PureComponent<Props> {
@@ -54,7 +56,7 @@ class OperationComponent extends PureComponent<Props> {
   }
 
   render() {
-    const { account, parentAccount, t, operation, withAccount } = this.props
+    const { account, parentAccount, t, operation, withAccount, compact, text } = this.props
     const isOptimistic = operation.blockHeight === null
     return (
       <OperationRow isOptimistic={isOptimistic} onClick={this.onOperationClick}>
@@ -64,7 +66,7 @@ class OperationComponent extends PureComponent<Props> {
           account={account}
           t={t}
         />
-        <DateCell operation={operation} t={t} />
+        <DateCell compact={compact} text={text} operation={operation} t={t} />
         {withAccount &&
           (account.type === 'Account' ? (
             <AccountCell accountName={account.name} currency={account.currency} />
