@@ -292,7 +292,10 @@
     "identifier": "交易 ID",
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
-    "showLess": "显示更少"
+    "showLess": "显示更少",
+    "tokenOperations": "Token transactions",
+    "tokenTooltip": "This operation is related to the following token transactions",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "以上"
