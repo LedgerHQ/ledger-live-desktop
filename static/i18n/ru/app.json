@@ -292,7 +292,10 @@
     "identifier": "Идентификатор транзакции",
     "viewOperation": "Просмотреть в Explorer",
     "showMore": "Показать больше {{recipients}}",
-    "showLess": "Показать меньше"
+    "showLess": "Показать меньше",
+    "tokenOperations": "Token transactions",
+    "tokenTooltip": "This operation is related to the following token transactions",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "Вот и все"

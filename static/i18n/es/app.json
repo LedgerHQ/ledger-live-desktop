@@ -292,7 +292,10 @@
     "identifier": "ID de la transacción",
     "viewOperation": "Ver en el explorador",
     "showMore": "Ver {{recipients}} más",
-    "showLess": "Ver menos"
+    "showLess": "Ver menos",
+    "tokenOperations": "Token transactions",
+    "tokenTooltip": "This operation is related to the following token transactions",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "Eso es todo"
