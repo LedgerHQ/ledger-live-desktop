@@ -292,7 +292,10 @@
     "identifier": "取引ID",
     "viewOperation": "Explorerで表示",
     "showMore": "{{recipients}} 展開",
-    "showLess": "折りたたむ"
+    "showLess": "折りたたむ",
+    "tokenOperations": "Token transactions",
+    "tokenTooltip": "This operation is related to the following token transactions",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "すべて"
