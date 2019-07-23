@@ -226,7 +226,7 @@
     "cta": "Recevoir un token",
     "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
     "link": "En savoir plus",
-    "seeTokens": "Voir tokens ({{tokenCount}})",
+    "seeTokens": "Voir les ({{tokenCount}}) tokens",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de"
   },
