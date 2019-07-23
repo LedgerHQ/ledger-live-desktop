@@ -6,7 +6,10 @@ import { openURL } from 'helpers/linking'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
-import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
+import {
+  getOperationAmountNumber,
+  findOperationInAccount,
+} from '@ledgerhq/live-common/lib/operation'
 import { getTransactionExplorer, getDefaultExplorerView } from '@ledgerhq/live-common/lib/explorers'
 import uniq from 'lodash/uniq'
 
@@ -130,12 +133,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
     : 0
   let operation = null
   if (account) {
-    const maybeOp = account.operations.find(op => op.id === operationId)
-    if (maybeOp) operation = maybeOp
-    else {
-      const maybeOpPending = account.pendingOperations.find(op => op.id === operationId)
-      operation = maybeOpPending
-    }
+    operation = findOperationInAccount(account, operationId)
   }
   return { marketIndicator, account, parentAccount, operation, confirmationsNb }
 }
@@ -186,6 +184,7 @@ const OperationDetails = connect(
 
   const { hasFailed } = operation
   const subOperations = operation.subOperations || []
+  const internalOperations = operation.internalOperations || []
 
   return (
     <ModalBody
@@ -272,11 +271,48 @@ const OperationDetails = connect(
                   )
                 })}
               </Box>
-              <OpDetailsSection mb={2}>
-                {t('operationDetails.details', { currency: account.currency.name })}
-              </OpDetailsSection>
             </React.Fragment>
           )}
+
+          {internalOperations.length > 0 && account.type === 'Account' && (
+            <React.Fragment>
+              <OpDetailsSection>
+                {t('operationDetails.internalOperations')}
+                <LabelInfoTooltip
+                  text={t('operationDetails.internalOpTooltip')}
+                  style={{ marginLeft: 4 }}
+                />
+              </OpDetailsSection>
+              <Box>
+                {internalOperations.map((op, i) => (
+                  <Box style={{ marginLeft: -20, marginRight: -20 }}>
+                    <OperationC
+                      compact
+                      text={account.currency.name}
+                      operation={op}
+                      account={account}
+                      key={`${account.id}_${operation.id}`}
+                      onOperationClick={() =>
+                        openModal(MODAL_OPERATION_DETAILS, {
+                          operationId: op.id,
+                          accountId: op.accountId,
+                        })
+                      }
+                      t={t}
+                    />
+                    {i < internalOperations.length - 1 && <B />}
+                  </Box>
+                ))}
+              </Box>
+            </React.Fragment>
+          )}
+
+          {internalOperations.length || subOperations.length ? (
+            <OpDetailsSection mb={2}>
+              {t('operationDetails.details', { currency: account.currency.name })}
+            </OpDetailsSection>
+          ) : null}
+
           <Box horizontal flow={2}>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
