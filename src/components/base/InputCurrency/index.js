@@ -204,6 +204,4 @@ const Connected = uncontrollable(
 )
 
 // $FlowFixMe
-export default React.forwardRef((props, ref) => (
-  <Connected {...props} forwardedRef={ref} />
-))
+export default React.forwardRef((props, ref) => <Connected {...props} forwardedRef={ref} />)

@@ -180,11 +180,11 @@ const Slider = ({ steps, value, onChange, error }: Props) => {
   )
 
   const events = {
-        onTouchStart: onHandleStart,
-        onTouchEnd: onHandleEnd,
-        onTouchMove: onHandleMove,
-        onTouchCancel: onHandleAbort,
-        onMouseDown: onHandleStart
+    onTouchStart: onHandleStart,
+    onTouchEnd: onHandleEnd,
+    onTouchMove: onHandleMove,
+    onTouchCancel: onHandleAbort,
+    onMouseDown: onHandleStart,
   }
 
   const x = value / (steps - 1)
