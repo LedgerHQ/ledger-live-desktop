@@ -4,6 +4,7 @@
     "labelNo": "いいえ",
     "never": "オートロックしない",
     "apply": "適用",
+    "done": "Done",
     "confirm": "確認",
     "connecting": "Connecting..",
     "cancel": "キャンセル",
@@ -34,6 +35,7 @@
     "retry": "再試行",
     "range": "Range",
     "stop": "停止",
+    "updateNow": "Update now",
     "close": "閉じる",
     "eastern": "東部",
     "western": "西部",
@@ -55,6 +57,7 @@
       "syncing": "同期しています...",
       "upToDate": "同期が完了しました",
       "outdated": "中断",
+      "needsMigration": "Click to update account",
       "error": "同期エラー",
       "refresh": "更新",
       "ago": "同期時間{{time}}"
@@ -146,6 +149,7 @@
   },
   "banners": {
     "promoteMobile": "{{productName}} をスマホでもご利用できるようになりました。Ledger Live体験をお楽しみください。",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} はもうサポートされません"
   },
   "dashboard": {
@@ -229,6 +233,31 @@
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "アカウントを追加",
@@ -882,6 +911,10 @@
     "AccountNameRequired": {
       "title": "アカウント名が必要です",
       "description": "アカウント名を提供してください"
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "アプリが間違っています",
