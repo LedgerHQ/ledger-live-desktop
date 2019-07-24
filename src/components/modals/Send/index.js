@@ -20,7 +20,7 @@ import { track } from 'analytics/segment'
 import { getCurrentDevice } from 'reducers/devices'
 import { accountsSelector } from 'reducers/accounts'
 import { closeModal, openModal } from 'reducers/modals'
-import { DisconnectedDevice, UserRefusedOnDevice } from '@ledgerhq/errors'
+import { DisconnectedDevice, UserRefusedOnDevice, AccountNotSupported } from '@ledgerhq/errors'
 
 import Modal from 'components/base/Modal'
 import Stepper from 'components/base/Stepper'
@@ -164,22 +164,36 @@ class SendModal extends PureComponent<Props, State<*>> {
     if (!account) {
       const parentAccount = data && data.parentAccount
       const account = (data && data.account) || accounts[0]
-      const bridge = account && getAccountBridge(account, parentAccount)
-      const transaction = bridge && createTransaction(bridge, account, parentAccount)
-      this.setState({
-        openedFromAccount: !!(data && data.account),
-        parentAccount,
-        account,
-        transaction,
-      })
+      try {
+        const bridge = account && getAccountBridge(account, parentAccount)
+        const transaction = bridge && createTransaction(bridge, account, parentAccount)
+        this.setState({
+          openedFromAccount: !!(data && data.account),
+          parentAccount,
+          account,
+          transaction,
+          error: null,
+        })
+      } catch (error) {
+        this.setState({
+          error,
+          openedFromAccount: !!(data && data.account),
+          parentAccount,
+          account,
+        })
+      }
     }
   }
 
   handleChangeAccount = (account: Account | TokenAccount, parentAccount: ?Account) => {
     if (account !== this.state.account) {
-      const bridge = account && getAccountBridge(account, parentAccount)
-      const transaction = bridge && createTransaction(bridge, account, parentAccount)
-      this.setState({ account, parentAccount, transaction })
+      try {
+        const bridge = account && getAccountBridge(account, parentAccount)
+        const transaction = bridge && createTransaction(bridge, account, parentAccount)
+        this.setState({ account, parentAccount, transaction, error: null })
+      } catch (error) {
+        this.setState({ error, account, parentAccount })
+      }
     }
   }
 
@@ -302,7 +316,9 @@ class SendModal extends PureComponent<Props, State<*>> {
       signTransaction: this.handleSignTransaction,
     }
 
-    const errorSteps = error ? [error instanceof UserRefusedOnDevice ? 2 : 3] : []
+    const errorSteps = error
+      ? [error instanceof AccountNotSupported ? 0 : error instanceof UserRefusedOnDevice ? 2 : 3]
+      : []
 
     const isModalLocked = stepId === 'amount' || stepId === 'verification'
 

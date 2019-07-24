@@ -18,6 +18,7 @@ import { setAccountsViewMode, setSelectedTimeRange } from '../../actions/setting
 import { accountsViewModeSelector, selectedTimeRangeSelector } from '../../reducers/settings'
 import EmptyState from './EmptyState'
 import { TopBannerContainer } from '../DashboardPage'
+import MigrationBanner from '../modals/MigrateAccounts/Banner'
 
 type Props = {
   accounts: (Account | TokenAccount)[],
@@ -76,6 +77,7 @@ class AccountsPage extends PureComponent<Props> {
           <TrackPage category="Accounts" accountsLength={accounts.length} />
           <TopBannerContainer>
             <UpdateBanner />
+            <MigrationBanner />
           </TopBannerContainer>
           <EmptyState />
         </Fragment>
@@ -84,6 +86,9 @@ class AccountsPage extends PureComponent<Props> {
     return (
       <Box>
         <TrackPage category="Accounts" accountsLength={accounts.length} />
+        <TopBannerContainer>
+          <MigrationBanner />
+        </TopBannerContainer>
         <AccountsHeader />
         <AccountList
           onAccountClick={this.onAccountClick}

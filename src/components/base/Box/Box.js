@@ -3,6 +3,7 @@
 import styled from 'styled-components'
 import {
   alignItems,
+  alignSelf,
   borderRadius,
   boxShadow,
   color,
@@ -23,6 +24,7 @@ export const styledTextTransform = style({ prop: 'textTransform', cssProperty: '
 
 export default styled.div`
   ${alignItems};
+  ${alignSelf};
   ${borderRadius};
   ${boxShadow};
   ${color};
