@@ -4,6 +4,7 @@
     "labelNo": "아니오",
     "never": "결코 아님",
     "apply": "신청",
+    "done": "Done",
     "confirm": "확인",
     "connecting": "Connecting..",
     "cancel": "취소",
@@ -34,6 +35,7 @@
     "retry": "다시 시도",
     "range": "Range",
     "stop": "중지",
+    "updateNow": "Update now",
     "close": "닫기",
     "eastern": "동부",
     "western": "서부",
@@ -55,6 +57,7 @@
       "syncing": "동기화 중...",
       "upToDate": "동기화됨",
       "outdated": "일시 중지됨",
+      "needsMigration": "Click to update account",
       "error": "동기화 오류",
       "refresh": "새로고침",
       "ago": "{{time}} 동기화됨"
@@ -146,6 +149,7 @@
   },
   "banners": {
     "promoteMobile": "이제 {{productName}}을(를) 통해 모바일에서 제공되는 Ledger Live를 즐기세요.",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다."
   },
   "dashboard": {
@@ -229,6 +233,31 @@
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "계정 추가",
@@ -882,6 +911,10 @@
     "AccountNameRequired": {
       "title": "계정 이름이 필요합니다.",
       "description": "계정 이름을 입력하십시오."
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "잘못된 앱입니다.",

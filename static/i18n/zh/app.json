@@ -4,6 +4,7 @@
     "labelNo": "取消",
     "never": "从不",
     "apply": "应用",
+    "done": "Done",
     "confirm": "确认",
     "connecting": "Connecting..",
     "cancel": "取消",
@@ -34,6 +35,7 @@
     "retry": "重试",
     "range": "Range",
     "stop": "停止",
+    "updateNow": "Update now",
     "close": "关闭",
     "eastern": "东方",
     "western": "西方",
@@ -55,6 +57,7 @@
       "syncing": "正在同步...+",
       "upToDate": "已同步",
       "outdated": "暂停",
+      "needsMigration": "Click to update account",
       "error": "同步错误",
       "refresh": "刷新",
       "ago": "已同步 {{time}}"
@@ -146,6 +149,7 @@
   },
   "banners": {
     "promoteMobile": "享受 Ledger Live 体验，现已推出移动版本，尽在 {{productName}}",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "不再支持 {{coinName}}"
   },
   "dashboard": {
@@ -229,6 +233,31 @@
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "添加账户",
@@ -882,6 +911,10 @@
     "AccountNameRequired": {
       "title": "账户名为必填",
       "description": "请提供账户名"
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "应用程序错误",
