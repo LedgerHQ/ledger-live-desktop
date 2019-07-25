@@ -322,8 +322,10 @@
     "viewOperation": "탐색기에서 보기",
     "showMore": "{{recipients}} 자세히 표시",
     "showLess": "간단히 표시",
-    "tokenOperations": "Token transactions",
-    "tokenTooltip": "This operation is related to the following token transactions",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details"
   },
   "operationList": {
