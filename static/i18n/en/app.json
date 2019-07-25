@@ -270,6 +270,7 @@
     "connectDevice": {
       "desc": "Follow the steps below to add <1><0>{{currencyName}}</0></1> accounts"
     },
+    "tokensTip":"To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
     "unselectAll": "Deselect all ({{count}})",
@@ -409,12 +410,13 @@
       "chooseAccount": {
         "title": "Account",
         "label": "Account to credit",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "Device",
-        "withoutDevice": "Don't have your device?"
+        "withoutDevice": "Don't have your device?",
+        "tokensTip":"* Token reception is made through the {{currency}} address"
       },
       "confirmAddress": {
         "title": "Verification",

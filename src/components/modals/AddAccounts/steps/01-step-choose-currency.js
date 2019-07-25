@@ -25,17 +25,11 @@ const TokenTipsContainer = styled(Box)`
   padding: 16px;
 `
 
-const TokenTips = React.memo(() => (
+const TokenTips = React.memo(({ currency }: *) => (
   <TokenTipsContainer mt={4} horizontal alignItems="center">
     <InfoCircle size={16} color={colors.wallet} />
     <Text style={{ flex: 1, marginLeft: 20 }} ff="Open Sans|Regular" fontSize={4}>
-      <Trans i18nKey="to.do">
-        {'To add this ERC20 token, you need to '}
-        <Text ff="Open Sans|SemiBold">{'add an Ethereum account'}</Text>
-        {' then open it and click on the "'}
-        <Text ff="Open Sans|SemiBold">{'Add token'}</Text>
-        {'" button'}
-      </Trans>
+      <Trans i18nKey="addAccounts.tokensTip" values={{ currency: currency.parentCurrency.name }} />
     </Text>
   </TokenTipsContainer>
 ))
@@ -50,7 +44,7 @@ function StepChooseCurrency({ currency, setCurrency }: StepProps) {
     <Fragment>
       {currency ? <CurrencyDownStatusAlert currency={currency} /> : null}
       <SelectCurrency currencies={currencies} autoFocus onChange={setCurrency} value={currency} />
-      {currency && currency.type === 'TokenCurrency' ? <TokenTips /> : null}
+      {currency && currency.type === 'TokenCurrency' ? <TokenTips currency={currency} /> : null}
     </Fragment>
   )
 }

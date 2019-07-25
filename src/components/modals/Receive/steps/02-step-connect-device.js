@@ -4,8 +4,6 @@ import React, { Fragment } from 'react'
 import { Trans } from 'react-i18next'
 import { getMainAccount } from '@ledgerhq/live-common/lib/account/helpers'
 import type { TokenCurrency } from '@ledgerhq/live-common/lib/types'
-import { colors } from 'styles/theme'
-import InfoCircle from 'icons/InfoCircle'
 import Text from 'components/base/Text'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -17,18 +15,11 @@ import type { StepProps } from '../index'
 
 export const TokenTips: React$ComponentType<{ token: TokenCurrency }> = React.memo(({ token }) => (
   <Box mt={4} horizontal alignItems="center">
-    <InfoCircle size={12} color={colors.graphite} />
     <Text style={{ flex: 1, marginLeft: 10 }} ff="Open Sans|Regular" color="graphite" fontSize={3}>
-      <Trans i18nKey="to.do">
-        {'*'}
-        <Text color="dark" ff="Open Sans|SemiBold">
-          {token.name}
-        </Text>
-        {' is a token on '}
-        <Text color="dark" ff="Open Sans|SemiBold">
-          {token.parentCurrency.name}
-        </Text>
-      </Trans>
+      <Trans
+        i18nKey="receive.steps.connectDevice.tokensTip"
+        values={{ currency: token.parentCurrency.name }}
+      />
     </Text>
   </Box>
 ))

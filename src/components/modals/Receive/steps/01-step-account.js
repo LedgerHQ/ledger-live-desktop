@@ -53,17 +53,12 @@ const TokenSelection = ({
 }) => {
   const tokens = useMemo(() => listTokensForCryptoCurrency(currency), [currency])
   return (
-    <Box mt={30}>
-      <Label>
-        <Trans
-          i18nKey="receive.steps.chooseAccount.token"
-          values={{
-            currencyName: currency.name,
-          }}
-        />
+    <>
+      <Label mt={30}>
+        <Trans i18nKey="receive.steps.chooseAccount.token" />
       </Label>
       <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token} />
-    </Box>
+    </>
   )
 }
 

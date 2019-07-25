@@ -10,6 +10,7 @@ export default styled.label.attrs({
   align: 'center',
   display: 'block',
 })`
+  margin-top: ${p => (p.mt ? `${p.mt}px` : 'auto')};
   ${alignItems};
   ${color};
   ${fontSize};
