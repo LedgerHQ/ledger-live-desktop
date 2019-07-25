@@ -227,7 +227,7 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
+    "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
@@ -270,6 +270,7 @@
     "connectDevice": {
       "desc": "按照以下步骤，添加 <1><0>{{currencyName}}</0></1> 账户"
     },
+    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
     "unselectAll": "取消全选 ({{count}})",
@@ -411,12 +412,13 @@
       "chooseAccount": {
         "title": "账户",
         "label": "信贷账户",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "设备",
-        "withoutDevice": "您还没有 Ledger 设备？"
+        "withoutDevice": "您还没有 Ledger 设备？",
+        "tokensTip": "* Token reception is made through the {{currency}} address"
       },
       "confirmAddress": {
         "title": "验证",
