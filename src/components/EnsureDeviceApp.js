@@ -37,6 +37,7 @@ class EnsureDeviceApp extends Component<{
   device: ?Device,
   account?: ?Account,
   currency?: ?CryptoCurrency,
+  isToken?: boolean,
 }> {
   connectInteractionHandler = () =>
     createCancelablePolling(() => {
@@ -63,13 +64,13 @@ class EnsureDeviceApp extends Component<{
     })
 
   renderOpenAppTitle = () => {
-    const { account, currency } = this.props
+    const { account, currency, isToken } = this.props
     const cur = account ? account.currency : currency
     invariant(cur, 'No currency given')
     return (
       <Trans i18nKey="deviceConnect.step2" parent="div">
         {'Open the '}
-        <Bold>{cur.managerAppName}</Bold>
+        <Bold>{cur.managerAppName + (isToken ? '*' : '')}</Bold>
         {' app on your device'}
       </Trans>
     )
