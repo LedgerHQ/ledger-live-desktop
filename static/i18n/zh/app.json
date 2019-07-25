@@ -322,8 +322,10 @@
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
     "showLess": "显示更少",
-    "tokenOperations": "Token transactions",
-    "tokenTooltip": "This operation is related to the following token transactions",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details"
   },
   "operationList": {
