@@ -322,8 +322,10 @@
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
-    "tokenOperations": "Token transactions",
-    "tokenTooltip": "This operation is related to the following token transactions",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details"
   },
   "operationList": {
