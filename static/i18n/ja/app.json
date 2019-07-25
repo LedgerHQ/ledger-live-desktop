@@ -322,8 +322,10 @@
     "viewOperation": "Explorerで表示",
     "showMore": "{{recipients}} 展開",
     "showLess": "折りたたむ",
-    "tokenOperations": "Token transactions",
-    "tokenTooltip": "This operation is related to the following token transactions",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details"
   },
   "operationList": {
