@@ -227,7 +227,7 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
+    "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
@@ -270,6 +270,7 @@
     "connectDevice": {
       "desc": "Siga los pasos siguientes para agregar cuentas de <1><0>{{currencyName}}</0></1>"
     },
+    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
     "accountToImportSubtitle_plural": "Añadir cuentas existentes",
     "selectAll": "Seleccionar todas ({{count}})",
     "unselectAll": "Deseleccionar todas ({{count}})",
@@ -411,12 +412,13 @@
       "chooseAccount": {
         "title": "Cuenta",
         "label": "Cuenta para abonos",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "Dispositivo",
-        "withoutDevice": "¿No tienes tu dispositivo?"
+        "withoutDevice": "¿No tienes tu dispositivo?",
+        "tokensTip": "* Token reception is made through the {{currency}} address"
       },
       "confirmAddress": {
         "title": "Comprobación",
