@@ -227,7 +227,7 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Recevoir un token",
+    "cta": "Add token",
     "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
     "link": "En savoir plus",
     "seeTokens": "Voir les ({{tokenCount}}) tokens",
@@ -270,6 +270,7 @@
     "connectDevice": {
       "desc": "Suivez les étapes ci-dessous pour ajouter des comptes <1><0>{{currencyName}}</0></1>"
     },
+    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
@@ -322,8 +323,10 @@
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
     "showLess": "Afficher moins",
-    "tokenOperations": "Token transactions",
-    "tokenTooltip": "This operation is related to the following token transactions",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details"
   },
   "operationList": {
@@ -409,12 +412,13 @@
       "chooseAccount": {
         "title": "Compte",
         "label": "Compte à créditer",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "Appareil",
-        "withoutDevice": "Vous n’avez pas votre appareil ?"
+        "withoutDevice": "Vous n’avez pas votre appareil ?",
+        "tokensTip": "* Token reception is made through the {{currency}} address"
       },
       "confirmAddress": {
         "title": "Vérification",
