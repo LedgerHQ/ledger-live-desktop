@@ -1821,10 +1821,10 @@
     bindings "^1.3.0"
     nan "^2.6.2"
 
-"@ledgerhq/live-common@^7.8.2":
-  version "7.8.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.8.2.tgz#b84bd16c7688ec10a8ce3ac3db0c2aab19036579"
-  integrity sha512-cmQNgbFFWBoPITaucGLbIP+JPt80+x29FIdnhaw7YXUEDPko9qyv5+ga7UdsMpWzKcJTlgacJgklS44jyeJMFw==
+"@ledgerhq/live-common@^7.9.0":
+  version "7.9.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-7.9.0.tgz#a7aad5fe3f88d990049c673c6398147d4c0804c5"
+  integrity sha512-Ldx0EZ20x3qKv2SNP2eyDsiLSxgwcw094oEqzgWM//db+dcpyZx/1Vg3n6pYHPUeV8L1QjWEHDo8stTq3V/KqQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/errors" "4.68.2"
