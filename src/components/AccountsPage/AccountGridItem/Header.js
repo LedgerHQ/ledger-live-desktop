@@ -8,6 +8,7 @@ import Ellipsis from 'components/base/Ellipsis'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
+import Star from '../../Stars/Star'
 
 class HeadText extends PureComponent<{
   title: string,
@@ -30,7 +31,7 @@ class HeadText extends PureComponent<{
 
 class Header extends PureComponent<{
   account: Account | TokenAccount,
-  parentAccount?: Account,
+  parentAccount: ?Account,
 }> {
   render() {
     const { account, parentAccount } = this.props
@@ -62,6 +63,7 @@ class Header extends PureComponent<{
             accountId={(parentAccount && parentAccount.id) || account.id}
             account={account}
           />
+          <Star accountId={account.id} />
         </Box>
         <Bar size={1} color="fog" />
         <Box justifyContent="center">

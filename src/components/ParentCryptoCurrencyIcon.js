@@ -12,7 +12,7 @@ import { rgba } from '../styles/helpers'
 
 type Props = {
   currency: Currency,
-  parent?: Account,
+  parent?: ?Account,
   borderColor?: string,
 }
 

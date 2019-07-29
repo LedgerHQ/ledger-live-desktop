@@ -11,14 +11,13 @@ import type { T } from 'types/common'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
+import { MODAL_RECEIVE, MODAL_SEND, MAIN_SIDEBAR_WIDTH } from 'config/constants'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { developerModeSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
 import UpdateDot from 'components/Updater/UpdateDot'
 import IconManager from 'icons/Manager'
@@ -30,6 +29,7 @@ import IconExchange from 'icons/Exchange'
 import TopGradient from './TopGradient'
 import useExperimental from '../../hooks/useExperimental'
 import { darken } from '../../styles/helpers'
+import Stars from '../Stars'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
@@ -55,10 +55,11 @@ const TagContainer = () => {
   return isExperimental ? (
     <Box
       justifyContent="center"
-      m={4}
+      m={2}
       style={{
         flexGrow: 1,
         alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'flex-end',
       }}
     >
@@ -122,61 +123,62 @@ class MainSideBar extends PureComponent<Props> {
     const { pathname } = location
 
     return (
-      <Box relative bg="white" style={{ width: 230 }}>
+      <Box relative bg="white" style={{ width: MAIN_SIDEBAR_WIDTH }}>
         <TopGradient />
-        <GrowScroll>
-          <Space of={70} />
-          <SideBarList title={t('sidebar.menu')}>
-            <SideBarListItem
-              label={t('dashboard.title')}
-              icon={IconPieChart}
-              iconActiveColor="wallet"
-              onClick={this.handleClickDashboard}
-              isActive={pathname === '/'}
-              NotifComponent={noAccounts ? undefined : UpdateDot}
-              disabled={noAccounts}
-            />
-            <SideBarListItem
-              label={t('sidebar.accounts')}
-              icon={IconWallet}
-              iconActiveColor="wallet"
-              isActive={pathname === '/accounts'}
-              onClick={this.handleClickAccounts}
-              NotifComponent={noAccounts ? UpdateDot : undefined}
-            />
-            <SideBarListItem
-              label={t('send.title')}
-              icon={IconSend}
-              iconActiveColor="wallet"
-              onClick={this.handleOpenSendModal}
-              disabled={noAccounts}
-            />
-            <SideBarListItem
-              label={t('receive.title')}
-              icon={IconReceive}
-              iconActiveColor="wallet"
-              onClick={this.handleOpenReceiveModal}
-              disabled={noAccounts}
-            />
-            <SideBarListItem
-              label={t('sidebar.manager')}
-              icon={IconManager}
-              iconActiveColor="wallet"
-              onClick={this.handleClickManager}
-              isActive={pathname === '/manager'}
-            />
-            <SideBarListItem
-              label={t('sidebar.exchange')}
-              icon={IconExchange}
-              iconActiveColor="wallet"
-              onClick={this.handleClickExchange}
-              isActive={pathname === '/partners'}
-            />
-            <Space of={30} />
-          </SideBarList>
-          <Space grow />
+        <Space of={70} />
+        <SideBarList title={t('sidebar.menu')}>
+          <SideBarListItem
+            label={t('dashboard.title')}
+            icon={IconPieChart}
+            iconActiveColor="wallet"
+            onClick={this.handleClickDashboard}
+            isActive={pathname === '/'}
+            NotifComponent={noAccounts ? undefined : UpdateDot}
+            disabled={noAccounts}
+          />
+          <SideBarListItem
+            label={t('sidebar.accounts')}
+            icon={IconWallet}
+            iconActiveColor="wallet"
+            isActive={pathname === '/accounts'}
+            onClick={this.handleClickAccounts}
+            NotifComponent={noAccounts ? UpdateDot : undefined}
+          />
+          <SideBarListItem
+            label={t('send.title')}
+            icon={IconSend}
+            iconActiveColor="wallet"
+            onClick={this.handleOpenSendModal}
+            disabled={noAccounts}
+          />
+          <SideBarListItem
+            label={t('receive.title')}
+            icon={IconReceive}
+            iconActiveColor="wallet"
+            onClick={this.handleOpenReceiveModal}
+            disabled={noAccounts}
+          />
+          <SideBarListItem
+            label={t('sidebar.manager')}
+            icon={IconManager}
+            iconActiveColor="wallet"
+            onClick={this.handleClickManager}
+            isActive={pathname === '/manager'}
+          />
+          <SideBarListItem
+            label={t('sidebar.exchange')}
+            icon={IconExchange}
+            iconActiveColor="wallet"
+            onClick={this.handleClickExchange}
+            isActive={pathname === '/partners'}
+          />
+          <Space of={30} />
+        </SideBarList>
+
+        <SideBarList scroll title={t('sidebar.stars')}>
+          <Stars />
           <TagContainer />
-        </GrowScroll>
+        </SideBarList>
       </Box>
     )
   }

@@ -8,6 +8,7 @@ import type { Account } from '@ledgerhq/live-common/lib/types'
 import { flattenAccounts, clearAccount, canBeMigrated } from '@ledgerhq/live-common/lib/account'
 import { OUTDATED_CONSIDERED_DELAY, DEBUG_SYNC } from 'config/constants'
 import { currenciesStatusSelector, currencyDownStatusLocal } from './currenciesStatus'
+import { starredAccountIdsSelector } from './settings'
 
 export type AccountsState = Account[]
 const state: AccountsState = []
@@ -110,6 +111,25 @@ export const accountSelector = createSelector(
   accountsSelector,
   (_, { accountId }: { accountId: string }) => accountId,
   (accounts, accountId) => accounts.find(a => a.id === accountId),
+)
+
+export const starredAccountsSelector = createSelector(
+  accountsSelector,
+  starredAccountIdsSelector,
+  (accounts, ids) =>
+    flattenAccounts(accounts)
+      .filter(e => ids.includes(e.id))
+      .sort((a, b) => {
+        const posA = ids.indexOf(a.id)
+        const posB = ids.indexOf(b.id)
+        return posA > posB ? 1 : posA === posB ? 0 : -1
+      }),
+)
+
+export const isStarredAccountSelector = createSelector(
+  starredAccountIdsSelector,
+  (_, { accountId }: { accountId: string }) => accountId,
+  (ids, accountId) => ids.includes(accountId),
 )
 
 export const accountNeedsMigrationSelector = createSelector(

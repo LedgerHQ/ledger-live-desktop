@@ -5,6 +5,7 @@ import type { SettingsState as Settings } from 'reducers/settings'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setEnvOnAllThreads } from 'helpers/env'
+import type { Account } from '@ledgerhq/live-common/lib/types/account'
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> }
 
@@ -62,4 +63,18 @@ export const setExchangePairsAction: SetExchangePairs = pairs => ({
 export const dismissBanner = (bannerKey: string) => ({
   type: 'SETTINGS_DISMISS_BANNER',
   payload: bannerKey,
+})
+
+export const toggleStarAction = (accountId: string) => ({
+  type: 'SETTINGS_TOGGLE_STAR',
+  accountId,
+})
+
+export const dragDropStarAction = (payload: {
+  from: number,
+  to: number,
+  starredAccounts: Account[],
+}) => ({
+  type: 'SETTINGS_DRAG_DROP_STAR',
+  payload,
 })
