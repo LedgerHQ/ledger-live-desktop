@@ -499,7 +499,7 @@
       "help": "Aide",
       "about": "A propos de",
       "experimental": "Fonctionnalités expérimentales",
-      "accounts": "Comptes"
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -626,6 +626,12 @@
       "title": "Sauvegarder les logs",
       "desc": "La sauvegarde des logs de Ledger Live peut être nécessaire à des fins de dépannage.",
       "btn": "Sauvegarder"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
