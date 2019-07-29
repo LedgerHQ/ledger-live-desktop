@@ -499,7 +499,7 @@
       "help": "帮助",
       "about": "关于",
       "experimental": "Experimental features",
-      "accounts": "账户"
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -626,6 +626,12 @@
       "title": "保存日志",
       "desc": "故障排除可能需要导出 Ledger Live 日志记录。",
       "btn": "保存"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
