@@ -87,7 +87,7 @@ const INITIAL_STATE: SettingsState = {
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
-  accountsViewMode: 'card',
+  accountsViewMode: 'list',
   showAccountsHelperBanner: true,
 }
 
