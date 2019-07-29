@@ -20,6 +20,14 @@ for (const k in process.env) {
 }
 /* eslint-enable guard-for-in */
 
+process.on('message', message => {
+  if (message.type === 'setEnv') {
+    const { name, value } = message.env
+
+    setEnvUnsafe(name, value)
+  }
+})
+
 let busy = false
 
 TransportNodeHid.setListenDevicesPollingSkip(() => busy)
