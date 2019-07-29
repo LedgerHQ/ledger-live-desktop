@@ -89,7 +89,7 @@ const INITIAL_STATE: SettingsState = {
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
-  accountsViewMode: 'card',
+  accountsViewMode: 'list',
   showAccountsHelperBanner: true,
   hideEmptyTokenAccounts: getEnv('HIDE_EMPTY_TOKEN_ACCOUNTS'),
 }
