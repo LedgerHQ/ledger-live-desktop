@@ -499,7 +499,7 @@
       "help": "Ayuda",
       "about": "Acerca de...",
       "experimental": "Funcionalidades experimentales",
-      "accounts": "Cuentas"
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -626,6 +626,12 @@
       "title": "Guardar registros",
       "desc": "Exportar los registros de Ledger Live puede ser necesario para solucionar problemas.",
       "btn": "Guardar"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
