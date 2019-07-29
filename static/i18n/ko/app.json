@@ -493,13 +493,13 @@
     "title": "설정",
     "tabs": {
       "display": "일반",
-      "export": "Accounts",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "도움말",
       "about": "소개",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {

@@ -493,13 +493,13 @@
     "title": "Settings",
     "tabs": {
       "display": "General",
-      "export": "Accounts",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "Help",
       "about": "About",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -626,6 +626,12 @@
       "title": "Save logs",
       "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
       "btn": "Save"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {

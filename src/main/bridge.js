@@ -4,6 +4,7 @@ import '@babel/polyfill'
 import invariant from 'invariant'
 import { fork } from 'child_process'
 import { ipcMain, app } from 'electron'
+import debounce from 'lodash/debounce'
 import { ipcMainListenReceiveCommands } from 'helpers/ipc'
 import path from 'path'
 import logger from 'logger'
@@ -13,12 +14,12 @@ import user from 'helpers/user'
 import { executeCommand, unsubscribeCommand } from 'main/commandHandler'
 import { cleanUpBeforeClosingSync } from 'helpers/log'
 import { deserializeError } from '@ledgerhq/errors'
+import { setEnvUnsafe, getAllEnvs } from '@ledgerhq/live-common/lib/env'
+import { isRestartNeeded } from 'helpers/env'
 
 import { setInternalProcessPID } from './terminator'
 
 import { getMainWindow } from './app'
-
-let envs = {}
 
 const loggerTransport = new LoggerTransport()
 logger.add(loggerTransport)
@@ -48,6 +49,10 @@ const killInternalProcess = () => {
   }
 }
 
+const killInternalProcessDebounce = debounce(() => {
+  killInternalProcess()
+}, 500)
+
 const forkBundlePath = path.resolve(__dirname, `${__DEV__ ? '../../' : './'}dist/internals`)
 const handleExit = code => {
   logger.warn(`Internal process ended with code ${code}`)
@@ -58,7 +63,7 @@ const bootInternalProcess = () => {
   logger.log('booting internal process...')
   internalProcess = fork(forkBundlePath, {
     env: {
-      ...envs,
+      ...getAllEnvs(),
       ...process.env,
       IS_INTERNAL_PROCESS: 1,
       LEDGER_CONFIG_DIRECTORY,
@@ -70,11 +75,6 @@ const bootInternalProcess = () => {
   setInternalProcessPID(internalProcess.pid)
   internalProcess.on('message', handleGlobalInternalMessage)
   internalProcess.on('exit', handleExit)
-}
-
-const onNewEnvs = (evt, val) => {
-  envs = val
-  killInternalProcess()
 }
 
 process.on('exit', () => {
@@ -89,8 +89,6 @@ ipcMain.on('clean-processes', () => {
 ipcMain.on('log', (e, { log }) => {
   logger.onLog(log)
 })
-
-ipcMain.on('set-envs', onNewEnvs)
 
 ipcMainListenReceiveCommands({
   onUnsubscribe: requestId => {
@@ -175,4 +173,18 @@ ipcMain.on('sentryLogsChanged', (event, payload) => {
   const p = internalProcess
   if (!p) return
   p.send({ type: 'sentryLogsChanged', payload })
+})
+
+ipcMain.on('setEnv', (event, env) => {
+  const { name, value } = env
+
+  if (setEnvUnsafe(name, value)) {
+    if (isRestartNeeded(name)) {
+      killInternalProcessDebounce()
+    } else {
+      const p = internalProcess
+      if (!p) return
+      p.send({ type: 'setEnv', env })
+    }
+  }
 })

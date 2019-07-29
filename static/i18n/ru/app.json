@@ -493,13 +493,13 @@
     "title": "Настройки",
     "tabs": {
       "display": "Общие",
-      "export": "Accounts",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "Справка",
       "about": "О программе",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {

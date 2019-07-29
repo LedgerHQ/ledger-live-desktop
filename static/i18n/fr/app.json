@@ -493,13 +493,13 @@
     "title": "Paramètres",
     "tabs": {
       "display": "Général",
-      "export": "Comptes",
       "cryptoAssets": "Crypto-actifs",
       "currencies": "Crypto-actifs",
       "rates": "Taux",
       "help": "Aide",
       "about": "A propos de",
-      "experimental": "Fonctionnalités expérimentales"
+      "experimental": "Fonctionnalités expérimentales",
+      "accounts": "Comptes"
     },
     "export": {
       "accounts": {

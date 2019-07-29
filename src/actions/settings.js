@@ -4,6 +4,7 @@ import type { Dispatch } from 'redux'
 import type { SettingsState as Settings } from 'reducers/settings'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
+import { setEnvOnAllThreads } from 'helpers/env'
 
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> }
 
@@ -29,6 +30,13 @@ export const setCounterValue = (counterValue: string) =>
   })
 export const setLanguage = (language: ?string) => saveSettings({ language })
 export const setRegion = (region: ?string) => saveSettings({ region })
+export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => async (
+  dispatch: *,
+) => {
+  if (setEnvOnAllThreads('HIDE_EMPTY_TOKEN_ACCOUNTS', hideEmptyTokenAccounts)) {
+    dispatch(saveSettings({ hideEmptyTokenAccounts }))
+  }
+}
 
 type FetchSettings = (*) => (Dispatch<*>) => void
 export const fetchSettings: FetchSettings = (settings: *) => dispatch => {

@@ -10,6 +10,7 @@ import { getLanguages } from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 import { getSystemLocale } from 'helpers/systemLocale'
 
@@ -59,6 +60,7 @@ export type SettingsState = {
   dismissedBanners: string[],
   accountsViewMode: 'card' | 'list',
   showAccountsHelperBanner: boolean,
+  hideEmptyTokenAccounts: boolean,
 }
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -89,6 +91,7 @@ const INITIAL_STATE: SettingsState = {
   dismissedBanners: [],
   accountsViewMode: 'card',
   showAccountsHelperBanner: true,
+  hideEmptyTokenAccounts: getEnv('HIDE_EMPTY_TOKEN_ACCOUNTS'),
 }
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`
@@ -244,6 +247,9 @@ export const dismissedBannersSelector = (state: State) => state.settings.dismiss
 
 export const dismissedBannerSelector = (state: State, { bannerKey }: { bannerKey: string }) =>
   (state.settings.dismissedBanners || []).includes(bannerKey)
+
+export const hideEmptyTokenAccountsSelector = (state: State) =>
+  state.settings.hideEmptyTokenAccounts
 
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
