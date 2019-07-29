@@ -4,6 +4,7 @@ import {
   flattenAccounts,
   getAccountCurrency,
   getAccountUnit,
+  listTokenAccounts,
 } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
@@ -59,7 +60,9 @@ const filterOption = o => (candidate, input) => {
   if (selfMatches) return [selfMatches, true]
 
   if (candidate.data.type === 'Account' && o.withTokenAccounts) {
-    const { tokenAccounts } = candidate.data
+    const tokenAccounts = o.enforceHideEmptyTokenAccounts
+      ? listTokenAccounts(candidate.data)
+      : candidate.data.tokenAccounts
     if (tokenAccounts) {
       for (let i = 0; i < tokenAccounts.length; i++) {
         const ta = tokenAccounts[i]
@@ -109,6 +112,7 @@ const renderOption = ({ data }: { data: Option }) => (
 
 type Props = {
   withTokenAccounts?: boolean,
+  enforceHideEmptyTokenAccounts?: boolean,
   filter?: Account => boolean,
   accounts: Account[],
   onChange: (account: ?(Account | TokenAccount), tokenAccount: ?Account) => void,
@@ -121,6 +125,7 @@ const RawSelectAccount = ({
   onChange,
   value,
   withTokenAccounts,
+  enforceHideEmptyTokenAccounts,
   filter,
   t,
   ...props
@@ -128,7 +133,9 @@ const RawSelectAccount = ({
   const [searchInputValue, setSearchInputValue] = useState('')
 
   const filtered: Account[] = filter ? accounts.filter(filter) : accounts
-  const all = withTokenAccounts ? flattenAccounts(filtered) : filtered
+  const all = withTokenAccounts
+    ? flattenAccounts(filtered, { enforceHideEmptyTokenAccounts })
+    : filtered
   const selectedOption = value
     ? {
         account: all.find(o => o.id === value.id),
@@ -151,7 +158,7 @@ const RawSelectAccount = ({
   const manualFilter = useCallback(
     () =>
       all.reduce((result, option) => {
-        const [display, match] = filterOption({ withTokenAccounts })(
+        const [display, match] = filterOption({ withTokenAccounts, enforceHideEmptyTokenAccounts })(
           { data: option },
           searchInputValue,
         )
@@ -164,7 +171,7 @@ const RawSelectAccount = ({
         }
         return result
       }, []),
-    [searchInputValue, all, withTokenAccounts],
+    [searchInputValue, all, withTokenAccounts, enforceHideEmptyTokenAccounts],
   )
 
   const structuredResults = manualFilter()

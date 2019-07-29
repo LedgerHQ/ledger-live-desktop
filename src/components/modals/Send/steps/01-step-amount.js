@@ -89,6 +89,7 @@ export default ({
         <Label>{t('send.steps.amount.selectAccountDebit')}</Label>
         <SelectAccount
           withTokenAccounts
+          enforceHideEmptyTokenAccounts
           autoFocus={!openedFromAccount}
           onChange={onChangeAccount}
           value={account}

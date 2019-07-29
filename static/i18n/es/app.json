@@ -493,13 +493,13 @@
     "title": "Ajustes",
     "tabs": {
       "display": "General",
-      "export": "Cuentas",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "Ayuda",
       "about": "Acerca de...",
-      "experimental": "Funcionalidades experimentales"
+      "experimental": "Funcionalidades experimentales",
+      "accounts": "Cuentas"
     },
     "export": {
       "accounts": {

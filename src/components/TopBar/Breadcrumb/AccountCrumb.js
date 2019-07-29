@@ -9,6 +9,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
+import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import { push } from 'react-router-redux'
 
 import Text from 'components/base/Text'
@@ -192,7 +193,7 @@ class AccountCrumb extends PureComponent<Props> {
           name = tokenAccount.token.name
         }
       }
-      items = parentAccount && parentAccount.tokenAccounts
+      items = parentAccount && listTokenAccounts(parentAccount)
     } else {
       account = accounts.find(a => a.id === id)
       items = accounts

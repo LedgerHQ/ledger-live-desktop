@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
+import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import { openModal } from 'reducers/modals'
 import { connect } from 'react-redux'
 import { Trans } from 'react-i18next'
@@ -187,7 +188,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       currency = account.currency
       unit = account.unit
       mainAccount = account
-      tokens = account.tokenAccounts
+      tokens = listTokenAccounts(account)
       disabled = !matchesSearch(search, account)
       if (tokens) tokens = tokens.filter(t => matchesSearch(search, t))
     }

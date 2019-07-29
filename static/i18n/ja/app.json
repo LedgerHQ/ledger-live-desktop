@@ -493,13 +493,13 @@
     "title": "設定",
     "tabs": {
       "display": "一般",
-      "export": "アカウント",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "ヘルプ",
       "about": "詳細",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "アカウント"
     },
     "export": {
       "accounts": {

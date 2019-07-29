@@ -9,7 +9,7 @@ import { push } from 'react-router-redux'
 import styled from 'styled-components'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
-import { flattenSortAccountsSelector } from 'actions/general'
+import { flattenSortAccountsEnforceHideEmptyTokenSelector } from 'actions/general'
 import UpdateBanner from 'components/Updater/Banner'
 import AccountsHeader from './AccountsHeader'
 import AccountList from './AccountList'
@@ -32,7 +32,7 @@ type Props = {
 const accountsOrFlattenAccountsSelector = createSelector(
   accountsViewModeSelector,
   accountsSelector,
-  flattenSortAccountsSelector,
+  flattenSortAccountsEnforceHideEmptyTokenSelector,
   (mode, accounts, flattenedAccounts) => (mode === 'card' ? flattenedAccounts : accounts),
 )
 

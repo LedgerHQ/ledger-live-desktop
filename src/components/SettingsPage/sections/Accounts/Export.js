@@ -5,21 +5,20 @@ import { Trans, translate } from 'react-i18next'
 
 import type { T } from 'types/common'
 
-import TrackPage from 'analytics/TrackPage'
 import styled from 'styled-components'
-import { SettingsSection as Section, SettingsSectionHeader as Header } from '../SettingsSection'
-import { EXPERIMENTAL_WS_EXPORT } from '../../../config/constants'
-import IconShare from '../../../icons/Share'
-import Button from '../../base/Button'
-import Modal from '../../base/Modal'
-import ModalBody from '../../base/Modal/ModalBody'
-import Box from '../../base/Box'
-import QRCodeExporter from '../../QRCodeExporter'
-import { BulletRow } from '../../Onboarding/helperComponents'
-import Text from '../../base/Text'
-import SocketExport from '../SocketExport'
-import ExportOperationsBtn from '../../ExportOperationsBtn'
-import DownloadCloud from '../../../icons/DownloadCloud'
+import { SettingsSectionHeader as Header } from '../../SettingsSection'
+import { EXPERIMENTAL_WS_EXPORT } from '../../../../config/constants'
+import IconShare from '../../../../icons/Share'
+import Button from '../../../base/Button'
+import Modal from '../../../base/Modal'
+import ModalBody from '../../../base/Modal/ModalBody'
+import Box from '../../../base/Box'
+import QRCodeExporter from '../../../QRCodeExporter'
+import { BulletRow } from '../../../Onboarding/helperComponents'
+import Text from '../../../base/Text'
+import SocketExport from '../../SocketExport'
+import ExportOperationsBtn from '../../../ExportOperationsBtn'
+import DownloadCloud from '../../../../icons/DownloadCloud'
 
 const BulletRowIcon = styled(Box).attrs({
   ff: 'Rubik|Regular',
@@ -147,9 +146,7 @@ class SectionExport extends PureComponent<Props, State> {
     const { isModalOpened } = this.state
 
     return (
-      <Section style={{ flowDirection: 'column' }}>
-        <TrackPage category="Settings" name="Export" />
-
+      <>
         <Header
           icon={<IconShare size={16} />}
           title={t('settings.export.accounts.title')}
@@ -176,7 +173,7 @@ class SectionExport extends PureComponent<Props, State> {
           />
         )}
         <Modal isOpened={isModalOpened} onClose={this.onModalClose} render={this.renderModal} />
-      </Section>
+      </>
     )
   }
 }

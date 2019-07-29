@@ -15,7 +15,7 @@ import SectionCryptoAssets from './sections/CryptoAssets'
 import SectionHelp from './sections/Help'
 import SectionAbout from './sections/About'
 import SectionExperimental from './sections/Experimental'
-import SectionExport from './sections/Export'
+import SectionAccounts from './sections/Accounts'
 
 const mapStateToProps = state => ({
   accountsCount: accountsSelector(state).length,
@@ -49,9 +49,9 @@ class SettingsPage extends PureComponent<Props, State> {
         value: SectionCryptoAssets,
       },
       {
-        key: 'export',
-        label: <Trans i18nKey="settings.tabs.export" />,
-        value: SectionExport,
+        key: 'accounts',
+        label: <Trans i18nKey="settings.tabs.accounts" />,
+        value: SectionAccounts,
       },
       {
         key: 'about',

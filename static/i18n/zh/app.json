@@ -493,13 +493,13 @@
     "title": "设置",
     "tabs": {
       "display": "通用",
-      "export": "账户",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "帮助",
       "about": "关于",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "账户"
     },
     "export": {
       "accounts": {
