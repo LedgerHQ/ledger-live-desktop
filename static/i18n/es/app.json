@@ -270,7 +270,7 @@
     "connectDevice": {
       "desc": "Siga los pasos siguientes para agregar cuentas de <1><0>{{currencyName}}</0></1>"
     },
-    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Añadir cuentas existentes",
     "selectAll": "Seleccionar todas ({{count}})",
     "unselectAll": "Deseleccionar todas ({{count}})",
@@ -418,7 +418,7 @@
       "connectDevice": {
         "title": "Dispositivo",
         "withoutDevice": "¿No tienes tu dispositivo?",
-        "tokensTip": "* Token reception is made through the {{currency}} address"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "Comprobación",
