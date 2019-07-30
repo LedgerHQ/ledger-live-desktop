@@ -90,6 +90,7 @@
   },
   "sidebar": {
     "menu": "메뉴",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "관리자",
     "exchange": "암호화 자산 구입",
@@ -98,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "마지막 작업",
@@ -142,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"

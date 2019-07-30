@@ -90,6 +90,7 @@
   },
   "sidebar": {
     "menu": "Menú",
+    "stars": "Starred accounts",
     "accounts": "Cuentas",
     "manager": "Manager",
     "exchange": "Comprar crypto",
@@ -98,6 +99,10 @@
       "title": "Nueva actualización",
       "description": "¡Tus cuentas han sido movidas a una nueva página dedicada!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "Últimas operaciones",
@@ -142,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Recibir",
       "send": "Enviar",
       "edit": "Editar Cuenta"
