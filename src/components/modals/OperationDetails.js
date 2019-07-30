@@ -15,6 +15,7 @@ import uniq from 'lodash/uniq'
 
 import TrackPage from 'analytics/TrackPage'
 import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
@@ -131,10 +132,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const confirmationsNb = mainCurrency
     ? confirmationsNbForCurrencySelector(state, { currency: mainCurrency })
     : 0
-  let operation = null
-  if (account) {
-    operation = findOperationInAccount(account, operationId)
-  }
+  const operation = account ? findOperationInAccount(account, operationId) : null
   return { marketIndicator, account, parentAccount, operation, confirmationsNb }
 }
 
@@ -309,7 +307,7 @@ const OperationDetails = connect(
 
           {internalOperations.length || subOperations.length ? (
             <OpDetailsSection mb={2}>
-              {t('operationDetails.details', { currency: account.currency.name })}
+              {t('operationDetails.details', { currency: getAccountCurrency(account).name })}
             </OpDetailsSection>
           ) : null}
 

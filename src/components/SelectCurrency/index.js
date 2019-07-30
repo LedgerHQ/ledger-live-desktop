@@ -60,7 +60,7 @@ const SelectCurrency = React.memo(
     const manualFilter = useCallback(() => {
       const fuse = new Fuse(options, fuseOptions)
       return searchInputValue.length > 0 ? fuse.search(searchInputValue) : options
-    }, [searchInputValue, options])
+    }, [searchInputValue, options, fuseOptions])
 
     const filteredOptions = manualFilter()
     return (
