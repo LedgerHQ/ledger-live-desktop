@@ -26,6 +26,7 @@ export const DEFAULT_WINDOW_WIDTH = intFromEnv('LEDGER_DEFAULT_WINDOW_WIDTH', 10
 export const DEFAULT_WINDOW_HEIGHT = intFromEnv('LEDGER_DEFAULT_WINDOW_HEIGHT', 768)
 export const MIN_WIDTH = intFromEnv('LEDGER_MIN_WIDTH', 1024)
 export const MIN_HEIGHT = intFromEnv('LEDGER_MIN_HEIGHT', 700)
+export const MAIN_SIDEBAR_WIDTH = 230
 
 // time and delays...
 

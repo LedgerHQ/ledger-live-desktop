@@ -23,19 +23,21 @@ import IconSend from 'icons/Send'
 
 import Box, { Tabbable } from 'components/base/Box'
 import Button from 'components/base/Button'
+import Star from '../Stars/Star'
 
 const ButtonSettings = styled(Tabbable).attrs({
   align: 'center',
   justify: 'center',
-  borderRadius: 1,
 })`
-  width: 40px;
-  height: 40px;
-
+  width: 34px;
+  height: 34px;
+  border:1px solid ${p => p.theme.colors.grey};
+  border-radius:4px;
   &:hover {
     color: ${p => (p.disabled ? '' : p.theme.colors.dark)};
     background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.2))};
-  }
+    border-color:${p => p.theme.colors.dark};
+  
 
   &:active {
     background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.3))};
@@ -84,13 +86,16 @@ class AccountHeaderActions extends PureComponent<Props> {
             </Button>
           </Fragment>
         ) : null}
+        <Tooltip render={() => t('stars.tooltip')}>
+          <Star accountId={account.id} account={account} yellow />
+        </Tooltip>
         {account.type === 'Account' ? (
           <Tooltip render={() => t('account.settings.title')}>
             <ButtonSettings
               onClick={() => openModal(MODAL_SETTINGS_ACCOUNT, { parentAccount, account })}
             >
               <Box justifyContent="center">
-                <IconAccountSettings size={16} />
+                <IconAccountSettings size={14} />
               </Box>
             </ButtonSettings>
           </Tooltip>

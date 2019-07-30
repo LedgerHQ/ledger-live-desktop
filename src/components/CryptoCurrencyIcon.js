@@ -5,10 +5,12 @@ import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
 import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { rgba } from 'styles/helpers'
+import { colors } from 'styles/theme'
 
 type Props = {
   currency: Currency,
   size: number,
+  inactive?: boolean,
 }
 
 // NB this is to avoid seeing the parent icon through
@@ -34,8 +36,8 @@ const TokenIcon = styled.div`
 
 class CryptoCurrencyIcon extends PureComponent<Props> {
   render() {
-    const { currency, size } = this.props
-    const color = getCurrencyColor(currency)
+    const { currency, size, inactive } = this.props
+    const color = inactive ? colors.grey : getCurrencyColor(currency)
     if (currency.type === 'FiatCurrency') {
       return null
     }

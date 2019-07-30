@@ -85,6 +85,7 @@
     "raven": "^2.5.0",
     "raven-js": "^3.24.2",
     "react": "^16.8.6",
+    "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^16.8.6",
     "react-i18next": "^7.7.0",
     "react-key-handler": "^1.0.1",
