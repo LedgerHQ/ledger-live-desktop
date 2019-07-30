@@ -270,7 +270,7 @@
     "connectDevice": {
       "desc": "<1><0>{{currencyName}}</0></1> 계정을 추가하려면 아래 단계를 따르십시오."
     },
-    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "기존 계정 추가",
     "selectAll": "모든 ({{count}}) 선택",
     "unselectAll": "모든 ({{count}}) 선택 해제",
@@ -418,7 +418,7 @@
       "connectDevice": {
         "title": "장치",
         "withoutDevice": "장치가 없습니까?",
-        "tokensTip": "* Token reception is made through the {{currency}} address"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "확인",
