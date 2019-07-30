@@ -270,7 +270,7 @@
     "connectDevice": {
       "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
-    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Добавить существующие счета",
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
@@ -418,7 +418,7 @@
       "connectDevice": {
         "title": "Устройство",
         "withoutDevice": "Нет устройства?",
-        "tokensTip": "* Token reception is made through the {{currency}} address"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "Проверка",
