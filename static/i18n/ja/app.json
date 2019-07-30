@@ -270,7 +270,7 @@
     "connectDevice": {
       "desc": "以下の手順に従って、<1><0>{{currencyName}}</0></1>のアカウントを追加してください"
     },
-    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
     "selectAll": "すべての({{count}})を選択",
     "unselectAll": "すべての({{count}})を選択を解除",
@@ -418,7 +418,7 @@
       "connectDevice": {
         "title": "機器",
         "withoutDevice": "機器をお持ちではありませんか？",
-        "tokensTip": "* Token reception is made through the {{currency}} address"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "検証",
