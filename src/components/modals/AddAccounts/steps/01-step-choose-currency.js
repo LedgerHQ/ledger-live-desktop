@@ -29,7 +29,15 @@ const TokenTips = React.memo(({ currency }: *) => (
   <TokenTipsContainer mt={4} horizontal alignItems="center">
     <InfoCircle size={16} color={colors.wallet} />
     <Text style={{ flex: 1, marginLeft: 20 }} ff="Open Sans|Regular" fontSize={4}>
-      <Trans i18nKey="addAccounts.tokensTip" values={{ currency: currency.parentCurrency.name }} />
+      <Trans
+        i18nKey="addAccounts.tokensTip"
+        values={{
+          token: currency.name,
+          ticker: currency.ticker,
+          tokenType: currency.tokenType.toUpperCase(),
+          currency: currency.parentCurrency.name,
+        }}
+      />
     </Text>
   </TokenTipsContainer>
 ))
