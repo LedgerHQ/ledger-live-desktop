@@ -325,32 +325,34 @@ const OperationDetails = connect(
           </Box>
           <B />
           <Box horizontal flow={2}>
-            <Box flex={1}>
-              <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
-              {fee ? (
-                <Fragment>
-                  <OpDetailsData>
-                    <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
-                    <Box horizontal>
-                      <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
-                        {'≈'}
+            {type === 'OUT' && (
+              <Box flex={1}>
+                <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
+                {fee ? (
+                  <Fragment>
+                    <OpDetailsData>
+                      <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
+                      <Box horizontal>
+                        <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
+                          {'≈'}
+                        </Box>
+                        <CounterValue
+                          color="grey"
+                          date={date}
+                          fontSize={3}
+                          currency={mainAccount.currency}
+                          value={fee}
+                          alwaysShowSign={false}
+                          subMagnitude={1}
+                        />
                       </Box>
-                      <CounterValue
-                        color="grey"
-                        date={date}
-                        fontSize={3}
-                        currency={mainAccount.currency}
-                        value={fee}
-                        alwaysShowSign={false}
-                        subMagnitude={1}
-                      />
-                    </Box>
-                  </OpDetailsData>
-                </Fragment>
-              ) : (
-                <OpDetailsData>{t('operationDetails.noFees')}</OpDetailsData>
-              )}
-            </Box>
+                    </OpDetailsData>
+                  </Fragment>
+                ) : (
+                  <OpDetailsData>{t('operationDetails.noFees')}</OpDetailsData>
+                )}
+              </Box>
+            )}
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.status')}</OpDetailsTitle>
               <OpDetailsData

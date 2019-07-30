@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from 'react'
 import { translate } from 'react-i18next'
 import Fuse from 'fuse.js'
 
@@ -28,7 +28,6 @@ type Props = {
 const getOptionValue = c => c.id
 
 const SelectCurrency = React.memo(
-
   ({ onChange, value, t, placeholder, currencies, autoFocus, ...props }: Props) => {
     const devMode = useEnv('MANAGER_DEV_MODE')
     let c =
@@ -56,17 +55,14 @@ const SelectCurrency = React.memo(
     const fuseOptions = {
       threshold: 0.1,
       keys: ['name', 'ticker'],
-      shouldSort: false
+      shouldSort: false,
     }
-    const manualFilter = useCallback(
-      () => {
-        const fuse = new Fuse(options, fuseOptions)
-        return searchInputValue.length > 0 ? fuse.search(searchInputValue) : options
-      },
-      [searchInputValue, options],
-    )
+    const manualFilter = useCallback(() => {
+      const fuse = new Fuse(options, fuseOptions)
+      return searchInputValue.length > 0 ? fuse.search(searchInputValue) : options
+    }, [searchInputValue, options])
 
-    const filteredOptions = manualFilter();
+    const filteredOptions = manualFilter()
     return (
       <Select
         autoFocus={autoFocus}
