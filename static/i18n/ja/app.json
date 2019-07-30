@@ -90,6 +90,7 @@
   },
   "sidebar": {
     "menu": "メニュー",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "マネージャー",
     "exchange": "暗号資産を購入",
@@ -98,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "最後の操作",
@@ -142,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
