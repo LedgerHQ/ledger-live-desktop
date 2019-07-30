@@ -176,7 +176,7 @@ class MainSideBar extends PureComponent<Props> {
         </SideBarList>
 
         <SideBarList scroll title={t('sidebar.stars')}>
-          <Stars />
+          <Stars pathname={pathname} />
           <TagContainer />
         </SideBarList>
       </Box>

@@ -40,6 +40,7 @@ const mapDispatchToProps = {
 }
 
 class Stars extends PureComponent<{
+  pathname: string,
   starredAccounts: (Account | TokenAccount)[],
   dragDropStarAction: (*) => any,
 }> {
@@ -51,14 +52,14 @@ class Stars extends PureComponent<{
   }
 
   render() {
-    const { starredAccounts } = this.props
+    const { starredAccounts, pathname } = this.props
     return starredAccounts && starredAccounts.length ? (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="list" direction="vertical">
           {provided => (
-            <Container innerRef={provided.innerRef}>
+            <Container key={pathname} innerRef={provided.innerRef}>
               {starredAccounts.map((account: Account | TokenAccount, i) => (
-                <Item index={i} key={account.id} account={account} />
+                <Item index={i} key={account.id} account={account} pathname={pathname} />
               ))}
               {provided.placeholder}
             </Container>

@@ -2,8 +2,6 @@
 
 import React, { useCallback } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { withRouter } from 'react-router'
 import { push } from 'react-router-redux'
 import { Draggable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
@@ -29,6 +27,7 @@ const ItemWrapper = styled.div`
     color: ${p => p.theme.colors.dark};
   }
   &:active {
+    z-index: 1;
     border-color: ${p => (p.active ? p.theme.colors.lightFog : p.theme.colors.sliderGrey)};
     box-shadow: 0 12px 17px 0 rgba(0, 0, 0, 0.1);
   }
@@ -46,12 +45,12 @@ const Item = ({
   account,
   index,
   push,
-  location: { pathname },
+  pathname,
 }: {
   account: Account | TokenAccount,
   index: number,
   push: Function,
-  location: any,
+  pathname: string,
 }) => {
   const active = pathname.endsWith(account.id)
 
@@ -100,11 +99,7 @@ const Item = ({
   )
 }
 
-export default compose(
-  // $FlowFixMe
-  withRouter,
-  connect(
-    null,
-    mapDispatchToProps,
-  ),
+export default connect(
+  null,
+  mapDispatchToProps,
 )(Item)
