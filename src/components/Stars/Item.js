@@ -11,7 +11,6 @@ import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
 import Box from '../base/Box/Box'
-import { focusedShadowStyle } from '../base/Box/Tabbable'
 
 const AccountName = styled(Text)``
 const ItemWrapper = styled.div`
@@ -23,18 +22,18 @@ const ItemWrapper = styled.div`
   border-radius: 4px;
   border: 1px solid transparent;
   background: ${p => (p.active ? p.theme.colors.lightGrey : 'white')};
-  &:hover ${AccountName} {
+  margin-bottom: 10px;
+  &:hover ${AccountName},&:active ${AccountName} {
     color: ${p => p.theme.colors.dark};
   }
-  &:active {
+  ${p =>
+    p.isDragging
+      ? `
     z-index: 1;
-    border-color: ${p => (p.active ? p.theme.colors.lightFog : p.theme.colors.sliderGrey)};
+    border-color: ${p.active ? p.theme.colors.lightFog : p.theme.colors.sliderGrey};
     box-shadow: 0 12px 17px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  &:focused {
-    box-shadow: ${focusedShadowStyle};
-  }
+  `
+      : ''}
 `
 
 const mapDispatchToProps = {
@@ -63,10 +62,11 @@ const Item = ({
 
   return (
     <Draggable index={index} draggableId={account.id}>
-      {provided => (
+      {(provided, snapshot) => (
         <ItemWrapper
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          isDragging={snapshot.isDragging}
           innerRef={provided.innerRef}
           active={active}
           onClick={onAccountClick}
