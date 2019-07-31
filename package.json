@@ -48,7 +48,7 @@
     "@ledgerhq/hw-transport-node-hid": "^4.68.2",
     "@ledgerhq/hw-transport-node-hid-singleton": "^4.68.2",
     "@ledgerhq/ledger-core": "^3.1.0-beta.2",
-    "@ledgerhq/live-common": "^7.9.2",
+    "@ledgerhq/live-common": "^7.9.3",
     "@ledgerhq/logs": "^4.68.2",
     "animated": "^0.2.2",
     "async": "^2.6.2",

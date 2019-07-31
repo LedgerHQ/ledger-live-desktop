@@ -8,6 +8,7 @@ import {
 import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { CurrencyNotSupported } from '@ledgerhq/errors'
 import { checkAccountSupported, decodeAccountId } from '@ledgerhq/live-common/lib/account'
+import { libcoreNoGo } from '@ledgerhq/live-common/lib/account/support'
 import * as LibcoreBridge from './LibcoreBridge'
 import * as RippleJSBridge from './RippleJSBridge'
 import * as EthereumJSBridge from './EthereumJSBridge'
@@ -21,7 +22,7 @@ export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
     case 'ripple':
       return RippleJSBridge.currencyBridge
     case 'ethereum':
-      if (!getEnv('EXPERIMENTAL_LIBCORE')) {
+      if (!getEnv('EXPERIMENTAL_LIBCORE') || libcoreNoGo.includes(currency.id)) {
         return EthereumJSBridge.currencyBridge
       }
       return LibcoreBridge.currencyBridge
