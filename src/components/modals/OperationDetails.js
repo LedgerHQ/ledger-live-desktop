@@ -323,7 +323,7 @@ const OperationDetails = connect(
           </Box>
           <B />
           <Box horizontal flow={2}>
-            {type !== 'IN' && (
+            {type === 'OUT' && (
               <Box flex={1}>
                 <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
                 {fee ? (
