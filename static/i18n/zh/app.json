@@ -4,6 +4,7 @@
     "labelNo": "取消",
     "never": "从不",
     "apply": "应用",
+    "done": "Done",
     "confirm": "确认",
     "connecting": "Connecting..",
     "cancel": "取消",
@@ -34,6 +35,7 @@
     "retry": "重试",
     "range": "Range",
     "stop": "停止",
+    "updateNow": "Update now",
     "close": "关闭",
     "eastern": "东方",
     "western": "西方",
@@ -55,6 +57,7 @@
       "syncing": "正在同步...+",
       "upToDate": "已同步",
       "outdated": "暂停",
+      "needsMigration": "Click to update account",
       "error": "同步错误",
       "refresh": "刷新",
       "ago": "已同步 {{time}}"
@@ -87,6 +90,7 @@
   },
   "sidebar": {
     "menu": "菜单",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "管理器",
     "exchange": "购买加密资产",
@@ -95,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "近期操作",
@@ -139,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
@@ -146,6 +155,7 @@
   },
   "banners": {
     "promoteMobile": "享受 Ledger Live 体验，现已推出移动版本，尽在 {{productName}}",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "不再支持 {{coinName}}"
   },
   "dashboard": {
@@ -223,12 +233,37 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
+    "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "添加账户",
@@ -241,6 +276,7 @@
     "connectDevice": {
       "desc": "按照以下步骤，添加 <1><0>{{currencyName}}</0></1> 账户"
     },
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
     "unselectAll": "取消全选 ({{count}})",
@@ -292,7 +328,12 @@
     "identifier": "交易 ID",
     "viewOperation": "在区块链浏览器中查看",
     "showMore": "显示更多 {{recipients}}",
-    "showLess": "显示更少"
+    "showLess": "显示更少",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "以上"
@@ -307,11 +348,13 @@
       "installSuccess": "{{app}} was successfully installed",
       "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} 已卸载",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "检查您的设备，查看已安装了哪些应用程序",
       "installed": "App installed",
-      "uninstalled": "App uninstalled"
+      "uninstalled": "App uninstalled",
+      "addAccount": "Add {{name}} account"
     },
     "firmware": {
       "installed": "固件版本 {{version}}",
@@ -375,12 +418,13 @@
       "chooseAccount": {
         "title": "账户",
         "label": "信贷账户",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "设备",
-        "withoutDevice": "您还没有 Ledger 设备？"
+        "withoutDevice": "您还没有 Ledger 设备？",
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "验证",
@@ -455,13 +499,13 @@
     "title": "设置",
     "tabs": {
       "display": "通用",
-      "export": "账户",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "帮助",
       "about": "关于",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -588,6 +632,12 @@
       "title": "保存日志",
       "desc": "故障排除可能需要导出 Ledger Live 日志记录。",
       "btn": "保存"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
@@ -877,6 +927,10 @@
     "AccountNameRequired": {
       "title": "账户名为必填",
       "description": "请提供账户名"
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "应用程序错误",

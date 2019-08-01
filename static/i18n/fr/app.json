@@ -4,6 +4,7 @@
     "labelNo": "Non",
     "never": "Jamais",
     "apply": "Appliquer",
+    "done": "Done",
     "confirm": "Confirmer",
     "connecting": "Connecting..",
     "cancel": "Annuler",
@@ -34,6 +35,7 @@
     "retry": "Réessayer",
     "range": "Période",
     "stop": "Arrêter",
+    "updateNow": "Update now",
     "close": "Fermer",
     "eastern": "Est",
     "western": "Ouest",
@@ -55,6 +57,7 @@
       "syncing": "Synchronisation...",
       "upToDate": "Synchronisé",
       "outdated": "En pause",
+      "needsMigration": "Click to update account",
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser",
       "ago": "Synchronisé {{time}}"
@@ -87,6 +90,7 @@
   },
   "sidebar": {
     "menu": "Menu",
+    "stars": "Starred accounts",
     "accounts": "Comptes",
     "manager": "Manager",
     "exchange": "Acheter des cryptos",
@@ -95,6 +99,10 @@
       "title": "Nouveau",
       "description": "Vos comptes ont été déplacés vers une nouvelle page dédiée !"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "Dernières opérations",
@@ -139,6 +147,7 @@
       "year": "Année"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Recevoir",
       "send": "Envoyer",
       "edit": "Éditer le compte"
@@ -146,6 +155,7 @@
   },
   "banners": {
     "promoteMobile": "Profitez de l’expérience Ledger Live, maintenant disponible sur mobile avec {{productName}}",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} n’est plus pris en charge"
   },
   "dashboard": {
@@ -223,12 +233,37 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Recevoir un token",
+    "cta": "Add token",
     "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse Ethereum.",
     "link": "En savoir plus",
-    "seeTokens": "Voir tokens ({{tokenCount}})",
+    "seeTokens": "Voir les ({{tokenCount}}) tokens",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
     "tooltip": "Token de"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "Ajouter des comptes",
@@ -241,6 +276,7 @@
     "connectDevice": {
       "desc": "Suivez les étapes ci-dessous pour ajouter des comptes <1><0>{{currencyName}}</0></1>"
     },
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
@@ -292,7 +328,12 @@
     "identifier": "ID de la transaction",
     "viewOperation": "Afficher dans l'explorer",
     "showMore": "Afficher plus de {{recipients}}",
-    "showLess": "Afficher moins"
+    "showLess": "Afficher moins",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "C'est tout."
@@ -307,11 +348,13 @@
       "installSuccess": "{{app}} a été installé avec succès",
       "unsupportedSuccess": "Découvrez comment utiliser {{app}}",
       "uninstallSuccess": "{{app}} désinstallé",
-      "supportedCurrency": "{{app}} est maintenant installé sur votre {{device}}. Ajoutez un compte pour pouvoir envoyer et recevoir des fonds",
+      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "Consultez votre appareil pour voir quelles applications sont déjà installées.",
       "installed": "Application installée",
-      "uninstalled": "Application désinstallée"
+      "uninstalled": "Application désinstallée",
+      "addAccount": "Add {{name}} account"
     },
     "firmware": {
       "installed": "Version {{version}} du firmware",
@@ -375,12 +418,13 @@
       "chooseAccount": {
         "title": "Compte",
         "label": "Compte à créditer",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "Appareil",
-        "withoutDevice": "Vous n’avez pas votre appareil ?"
+        "withoutDevice": "Vous n’avez pas votre appareil ?",
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "Vérification",
@@ -455,13 +499,13 @@
     "title": "Paramètres",
     "tabs": {
       "display": "Général",
-      "export": "Comptes",
       "cryptoAssets": "Crypto-actifs",
       "currencies": "Crypto-actifs",
       "rates": "Taux",
       "help": "Aide",
       "about": "A propos de",
-      "experimental": "Fonctionnalités expérimentales"
+      "experimental": "Fonctionnalités expérimentales",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -588,6 +632,12 @@
       "title": "Sauvegarder les logs",
       "desc": "La sauvegarde des logs de Ledger Live peut être nécessaire à des fins de dépannage.",
       "btn": "Sauvegarder"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
@@ -877,6 +927,10 @@
     "AccountNameRequired": {
       "title": "Un nom de compte est requis.",
       "description": "Veuillez fournir un nom de compte."
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "Il ne s’agit pas de la bonne application.",

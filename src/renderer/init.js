@@ -22,7 +22,11 @@ import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from 'config/gl
 import { fetchAccounts } from 'actions/accounts'
 import { fetchSettings } from 'actions/settings'
 import { lock } from 'reducers/application'
-import { languageSelector, sentryLogsSelector } from 'reducers/settings'
+import {
+  languageSelector,
+  sentryLogsSelector,
+  hideEmptyTokenAccountsSelector,
+} from 'reducers/settings'
 import { commandsById } from 'commands'
 import libcoreGetVersion from 'commands/libcoreGetVersion'
 
@@ -30,6 +34,7 @@ import resolveUserDataDirectory from 'helpers/resolveUserDataDirectory'
 import db from 'helpers/db'
 import dbMiddleware from 'middlewares/db'
 import CounterValues from 'helpers/countervalues'
+import { setEnvOnAllThreads } from 'helpers/env'
 
 import { decodeAccountsModel, encodeAccountsModel } from 'reducers/accounts'
 
@@ -67,6 +72,9 @@ async function init() {
   const state = store.getState()
   const language = languageSelector(state)
   moment.locale(language)
+
+  const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state)
+  setEnvOnAllThreads('HIDE_EMPTY_TOKEN_ACCOUNTS', hideEmptyTokenAccounts)
 
   sentry(() => sentryLogsSelector(store.getState()))
 

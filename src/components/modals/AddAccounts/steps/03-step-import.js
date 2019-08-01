@@ -1,7 +1,6 @@
 // @flow
 
 import logger from 'logger'
-import invariant from 'invariant'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment, useEffect } from 'react'
@@ -85,10 +84,12 @@ const Desc = styled(Box).attrs({
 `
 
 const SectionAccounts = ({ defaultSelected, ...rest }: *) => {
+  // componentDidMount-like effect
   useEffect(() => {
     if (defaultSelected && rest.onSelectAll) {
       rest.onSelectAll(rest.accounts)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return <AccountsList {...rest} />
 }
@@ -129,28 +130,34 @@ class StepImport extends PureComponent<StepProps> {
   startScanAccountsDevice() {
     this.unsub()
     const { currency, device, setScanStatus, setScannedAccounts } = this.props
+    if (!currency || !device) return
+    const mainCurrency = currency.type === 'TokenCurrency' ? currency.parentCurrency : currency
     try {
-      invariant(currency, 'No currency to scan')
-      invariant(device, 'No device')
-
-      const bridge = getCurrencyBridge(currency)
+      const bridge = getCurrencyBridge(mainCurrency)
 
       // TODO: use the real device
       const devicePath = device.path
 
-      this.scanSubscription = bridge.scanAccountsOnDevice(currency, devicePath).subscribe({
+      // will be set to false if an existing account is found
+      let onlyNewAccounts = true
+
+      this.scanSubscription = bridge.scanAccountsOnDevice(mainCurrency, devicePath).subscribe({
         next: account => {
           const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
           const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
           const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
           const isNewAccount = isAccountEmpty(account)
+          if (!isNewAccount && !hasAlreadyBeenImported) {
+            onlyNewAccounts = false
+          }
           if (!hasAlreadyBeenScanned) {
             setScannedAccounts({
               scannedAccounts: [...scannedAccounts, account],
-              checkedAccountsIds:
-                !hasAlreadyBeenImported && !isNewAccount
-                  ? uniq([...checkedAccountsIds, account.id])
-                  : checkedAccountsIds,
+              checkedAccountsIds: onlyNewAccounts
+                ? [account.id]
+                : !hasAlreadyBeenImported && !isNewAccount
+                ? uniq([...checkedAccountsIds, account.id])
+                : checkedAccountsIds,
             })
           }
         },
@@ -210,12 +217,14 @@ class StepImport extends PureComponent<StepProps> {
       editedNames,
       t,
     } = this.props
+    if (!currency) return null
+    const mainCurrency = currency.type === 'TokenCurrency' ? currency.parentCurrency : currency
 
     if (err) {
-      return <ImportError error={err} currency={currency} />
+      return <ImportError error={err} currency={mainCurrency} />
     }
 
-    const currencyName = currency ? currency.name : ''
+    const currencyName = mainCurrency ? mainCurrency.name : ''
 
     const { sections, alreadyEmptyAccount } = groupAddAccounts(existingAccounts, scannedAccounts, {
       scanning: scanStatus === 'scanning',
@@ -247,6 +256,7 @@ class StepImport extends PureComponent<StepProps> {
         <Box mt={-4}>
           {sections.map(({ id, selectable, defaultSelected, data }, i) => (
             <SectionAccounts
+              currency={currency}
               defaultSelected={defaultSelected}
               key={id}
               title={t(`addAccounts.sections.${id}.title`, { count: data.length })}

@@ -14,6 +14,7 @@ type Props = {
   title: string,
   steps: Step[],
   initialStepId: string,
+  hideBreadcrumb?: boolean,
   onClose: void => void,
   onStepChange?: Step => void,
   disabledSteps?: number[],
@@ -61,7 +62,17 @@ class Stepper extends PureComponent<Props, State> {
   }
 
   render() {
-    const { t, steps, title, onClose, disabledSteps, errorSteps, children, ...props } = this.props
+    const {
+      t,
+      hideBreadcrumb,
+      steps,
+      title,
+      onClose,
+      disabledSteps,
+      errorSteps,
+      children,
+      ...props
+    } = this.props
     const { stepId } = this.state
 
     const stepIndex = steps.findIndex(s => s.id === stepId)
@@ -101,13 +112,15 @@ class Stepper extends PureComponent<Props, State> {
         noScroll={noScroll}
         render={() => (
           <Fragment>
-            <Breadcrumb
-              mb={props.error && props.signed ? 4 : 6}
-              currentStep={stepIndex}
-              items={steps}
-              stepsDisabled={disabledSteps}
-              stepsErrors={errorSteps}
-            />
+            {!hideBreadcrumb && (
+              <Breadcrumb
+                mb={props.error && props.signed ? 4 : 6}
+                currentStep={stepIndex}
+                items={steps}
+                stepsDisabled={disabledSteps}
+                stepsErrors={errorSteps}
+              />
+            )}
             <StepComponent {...stepProps} />
             {children}
           </Fragment>

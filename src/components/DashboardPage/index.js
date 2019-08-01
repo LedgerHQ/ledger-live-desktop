@@ -37,6 +37,7 @@ import SummaryDesc from './SummaryDesc'
 import TopBanner, { FakeLink } from '../TopBanner'
 import { urls } from '../../config/urls'
 import AssetDistribution from '../AssetDistribution'
+import MigrationBanner from '../modals/MigrateAccounts/Banner'
 
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
@@ -86,6 +87,7 @@ class DashboardPage extends PureComponent<Props> {
       <Fragment>
         <TopBannerContainer>
           <UpdateBanner />
+          <MigrationBanner />
           <TopBanner
             content={{
               message: t('banners.promoteMobile', getDeviceModel('nanoX')),

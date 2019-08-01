@@ -6,12 +6,16 @@ import { openURL } from 'helpers/linking'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
 import moment from 'moment'
-import { getOperationAmountNumber } from '@ledgerhq/live-common/lib/operation'
+import {
+  getOperationAmountNumber,
+  findOperationInAccount,
+} from '@ledgerhq/live-common/lib/operation'
 import { getTransactionExplorer, getDefaultExplorerView } from '@ledgerhq/live-common/lib/explorers'
 import uniq from 'lodash/uniq'
 
 import TrackPage from 'analytics/TrackPage'
 import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
@@ -24,15 +28,26 @@ import Bar from 'components/base/Bar'
 import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
+import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
+import OperationC from 'components/OperationsList/Operation'
 
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
 import { accountSelector } from 'reducers/accounts'
+import { openModal } from 'reducers/modals'
 
 import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'reducers/settings'
 import IconChevronRight from 'icons/ChevronRight'
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 import Ellipsis from '../base/Ellipsis'
+
+const OpDetailsSection = styled(Box).attrs({
+  horizontal: true,
+  alignItems: 'center',
+  ff: 'Open Sans|SemiBold',
+  fontSize: 4,
+  color: 'grey',
+})``
 
 const OpDetailsTitle = styled(Box).attrs({
   ff: 'Museo Sans|ExtraBold',
@@ -93,6 +108,10 @@ const B = styled(Bar).attrs({
   size: 1,
 })``
 
+const mapDispatchToProps = {
+  openModal,
+}
+
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state)
   const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId })
@@ -113,15 +132,7 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const confirmationsNb = mainCurrency
     ? confirmationsNbForCurrencySelector(state, { currency: mainCurrency })
     : 0
-  let operation = null
-  if (account) {
-    const maybeOp = account.operations.find(op => op.id === operationId)
-    if (maybeOp) operation = maybeOp
-    else {
-      const maybeOpPending = account.pendingOperations.find(op => op.id === operationId)
-      operation = maybeOpPending
-    }
-  }
+  const operation = account ? findOperationInAccount(account, operationId) : null
   return { marketIndicator, account, parentAccount, operation, confirmationsNb }
 }
 
@@ -133,10 +144,23 @@ type Props = {
   confirmationsNb: number,
   onClose: () => void,
   marketIndicator: *,
+  openModal: typeof openModal,
 }
 
-const OperationDetails = connect(mapStateToProps)((props: Props) => {
-  const { t, onClose, operation, account, parentAccount, confirmationsNb, marketIndicator } = props
+const OperationDetails = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)((props: Props) => {
+  const {
+    t,
+    onClose,
+    operation,
+    account,
+    parentAccount,
+    confirmationsNb,
+    marketIndicator,
+    openModal,
+  } = props
   if (!operation || !account) return null
   const mainAccount = parentAccount || (account.type === 'Account' ? account : undefined)
   if (!mainAccount) return null
@@ -157,6 +181,8 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
   const uniqueSenders = uniq(senders)
 
   const { hasFailed } = operation
+  const subOperations = operation.subOperations || []
+  const internalOperations = operation.internalOperations || []
 
   return (
     <ModalBody
@@ -203,6 +229,88 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
               )}
             </Box>
           </Box>
+          {subOperations.length > 0 && account.type === 'Account' && (
+            <React.Fragment>
+              <OpDetailsSection>
+                {t('operationDetails.tokenOperations')}
+                <LabelInfoTooltip
+                  text={t('operationDetails.tokenTooltip')}
+                  style={{ marginLeft: 4 }}
+                />
+              </OpDetailsSection>
+              <Box>
+                {subOperations.map((op, i) => {
+                  const opAccount = (account.tokenAccounts || []).find(
+                    acc => acc.id === op.accountId,
+                  )
+
+                  if (!opAccount) return null
+
+                  return (
+                    <Box style={{ marginLeft: -20, marginRight: -20 }}>
+                      <OperationC
+                        compact
+                        text={opAccount.token.name}
+                        operation={op}
+                        account={opAccount}
+                        parentAccount={account}
+                        key={`${account.id}_${operation.id}`}
+                        onOperationClick={() =>
+                          openModal(MODAL_OPERATION_DETAILS, {
+                            operationId: op.id,
+                            accountId: op.accountId,
+                            parentId: account.id,
+                          })
+                        }
+                        t={t}
+                      />
+                      {i < subOperations.length - 1 && <B />}
+                    </Box>
+                  )
+                })}
+              </Box>
+            </React.Fragment>
+          )}
+
+          {internalOperations.length > 0 && account.type === 'Account' && (
+            <React.Fragment>
+              <OpDetailsSection>
+                {t('operationDetails.internalOperations')}
+                <LabelInfoTooltip
+                  text={t('operationDetails.internalOpTooltip')}
+                  style={{ marginLeft: 4 }}
+                />
+              </OpDetailsSection>
+              <Box>
+                {internalOperations.map((op, i) => (
+                  <Box style={{ marginLeft: -20, marginRight: -20 }}>
+                    <OperationC
+                      compact
+                      text={account.currency.name}
+                      operation={op}
+                      account={account}
+                      key={`${account.id}_${operation.id}`}
+                      onOperationClick={() =>
+                        openModal(MODAL_OPERATION_DETAILS, {
+                          operationId: op.id,
+                          accountId: op.accountId,
+                        })
+                      }
+                      t={t}
+                    />
+                    {i < internalOperations.length - 1 && <B />}
+                  </Box>
+                ))}
+              </Box>
+            </React.Fragment>
+          )}
+
+          {internalOperations.length || subOperations.length ? (
+            <OpDetailsSection mb={2}>
+              {t('operationDetails.details', { currency: getAccountCurrency(account).name })}
+            </OpDetailsSection>
+          ) : null}
+
           <Box horizontal flow={2}>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
@@ -215,32 +323,34 @@ const OperationDetails = connect(mapStateToProps)((props: Props) => {
           </Box>
           <B />
           <Box horizontal flow={2}>
-            <Box flex={1}>
-              <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
-              {fee ? (
-                <Fragment>
-                  <OpDetailsData>
-                    <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
-                    <Box horizontal>
-                      <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
-                        {'≈'}
+            {type === 'OUT' && (
+              <Box flex={1}>
+                <OpDetailsTitle>{t('operationDetails.fees')}</OpDetailsTitle>
+                {fee ? (
+                  <Fragment>
+                    <OpDetailsData>
+                      <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
+                      <Box horizontal>
+                        <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
+                          {'≈'}
+                        </Box>
+                        <CounterValue
+                          color="grey"
+                          date={date}
+                          fontSize={3}
+                          currency={mainAccount.currency}
+                          value={fee}
+                          alwaysShowSign={false}
+                          subMagnitude={1}
+                        />
                       </Box>
-                      <CounterValue
-                        color="grey"
-                        date={date}
-                        fontSize={3}
-                        currency={mainAccount.currency}
-                        value={fee}
-                        alwaysShowSign={false}
-                        subMagnitude={1}
-                      />
-                    </Box>
-                  </OpDetailsData>
-                </Fragment>
-              ) : (
-                <OpDetailsData>{t('operationDetails.noFees')}</OpDetailsData>
-              )}
-            </Box>
+                    </OpDetailsData>
+                  </Fragment>
+                ) : (
+                  <OpDetailsData>{t('operationDetails.noFees')}</OpDetailsData>
+                )}
+              </Box>
+            )}
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.status')}</OpDetailsTitle>
               <OpDetailsData

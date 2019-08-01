@@ -53,17 +53,12 @@ const TokenSelection = ({
 }) => {
   const tokens = useMemo(() => listTokensForCryptoCurrency(currency), [currency])
   return (
-    <Box mt={30}>
-      <Label>
-        <Trans
-          i18nKey="receive.steps.chooseAccount.token"
-          values={{
-            currencyName: currency.name,
-          }}
-        />
+    <>
+      <Label mt={30}>
+        <Trans i18nKey="receive.steps.chooseAccount.token" />
       </Label>
-      <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token || tokens[0]} />
-    </Box>
+      <SelectCurrency onChange={onChangeToken} currencies={tokens} value={token} />
+    </>
   )
 }
 
@@ -96,9 +91,13 @@ export default function StepAccount({
   )
 }
 
-export function StepAccountFooter({ transitionTo, account }: StepProps) {
+export function StepAccountFooter({ transitionTo, receiveTokenMode, token, account }: StepProps) {
   return (
-    <Button disabled={!account} primary onClick={() => transitionTo('device')}>
+    <Button
+      disabled={!account || (receiveTokenMode && !token)}
+      primary
+      onClick={() => transitionTo('device')}
+    >
       <Trans i18nKey="common.continue" />
     </Button>
   )

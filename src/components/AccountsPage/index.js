@@ -9,7 +9,7 @@ import { push } from 'react-router-redux'
 import styled from 'styled-components'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
-import { flattenSortAccountsSelector } from 'actions/general'
+import { flattenSortAccountsEnforceHideEmptyTokenSelector } from 'actions/general'
 import UpdateBanner from 'components/Updater/Banner'
 import AccountsHeader from './AccountsHeader'
 import AccountList from './AccountList'
@@ -18,6 +18,7 @@ import { setAccountsViewMode, setSelectedTimeRange } from '../../actions/setting
 import { accountsViewModeSelector, selectedTimeRangeSelector } from '../../reducers/settings'
 import EmptyState from './EmptyState'
 import { TopBannerContainer } from '../DashboardPage'
+import MigrationBanner from '../modals/MigrateAccounts/Banner'
 
 type Props = {
   accounts: (Account | TokenAccount)[],
@@ -31,7 +32,7 @@ type Props = {
 const accountsOrFlattenAccountsSelector = createSelector(
   accountsViewModeSelector,
   accountsSelector,
-  flattenSortAccountsSelector,
+  flattenSortAccountsEnforceHideEmptyTokenSelector,
   (mode, accounts, flattenedAccounts) => (mode === 'card' ? flattenedAccounts : accounts),
 )
 
@@ -76,6 +77,7 @@ class AccountsPage extends PureComponent<Props> {
           <TrackPage category="Accounts" accountsLength={accounts.length} />
           <TopBannerContainer>
             <UpdateBanner />
+            <MigrationBanner />
           </TopBannerContainer>
           <EmptyState />
         </Fragment>
@@ -84,6 +86,9 @@ class AccountsPage extends PureComponent<Props> {
     return (
       <Box>
         <TrackPage category="Accounts" accountsLength={accounts.length} />
+        <TopBannerContainer>
+          <MigrationBanner />
+        </TopBannerContainer>
         <AccountsHeader />
         <AccountList
           onAccountClick={this.onAccountClick}

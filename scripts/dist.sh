@@ -25,7 +25,7 @@ fi
 yarn compile
 
 runJob \
-  "DEBUG=electron-builder electron-builder" \
+  "DEBUG=electron-builder electron-builder --publish never" \
   "building and packaging app..." \
   "app built and packaged successfully" \
   "failed to build app" \

@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import type { TokenAccount, Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
+import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import { Trans } from 'react-i18next'
 
 import Text from 'components/base/Text'
@@ -41,7 +42,7 @@ export const matchesSearch = (
     subMatch =
       subMatch &&
       !!account.tokenAccounts &&
-      account.tokenAccounts.some(token => matchesSearch(search, token))
+      listTokenAccounts(account).some(token => matchesSearch(search, token))
   } else {
     match = `${account.token.ticker}|${account.token.name}`
   }

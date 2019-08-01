@@ -5,8 +5,7 @@ import styled from 'styled-components'
 import Box from 'components/base/Box'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
-import { openModal } from 'reducers/modals'
-import { connect } from 'react-redux'
+import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import { Trans } from 'react-i18next'
 import Text from 'components/base/Text'
 import IconAngleDown from 'icons/AngleDown'
@@ -15,13 +14,10 @@ import Balance from './Balance'
 import Countervalue from './Countervalue'
 import Delta from './Delta'
 import AccountSyncStatusIndicator from '../AccountSyncStatusIndicator'
-import ContextMenuItem from '../../ContextMenu/ContextMenuItem'
-import IconSend from '../../../icons/Send'
-import IconReceive from '../../../icons/Receive'
-import IconAccountSettings from '../../../icons/AccountSettings'
-import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../../config/constants'
 import TokenRow from '../../TokenRow'
 import { matchesSearch } from '../AccountList'
+import Star from '../../Stars/Star'
+import AccountContextMenu from '../../ContextMenu/AccountContextMenu'
 
 const Row = styled(Box)`
   background: #ffffff;
@@ -91,7 +87,6 @@ type Props = {
   onClick: (Account | TokenAccount, ?Account) => void,
   hidden?: boolean,
   range: PortfolioRange,
-  openModal: Function,
   search?: string,
 }
 
@@ -99,14 +94,10 @@ type State = {
   expanded: boolean,
 }
 
-const mapDispatchToProps = {
-  openModal,
-}
-
 const expandedStates: { [key: string]: boolean } = {}
 
 class AccountRowItem extends PureComponent<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     const { account, parentAccount } = this.props
     const accountId = parentAccount ? parentAccount.id : account.id
@@ -126,45 +117,27 @@ class AccountRowItem extends PureComponent<Props, State> {
     return null
   }
 
-  scrollTopFocusRef = React.createRef()
-
-  onClick = () => {
-    const { account, parentAccount, onClick } = this.props
-    onClick(account, parentAccount)
-  }
-
-  contextMenuItems = [
-    {
-      label: 'accounts.contextMenu.send',
-      Icon: IconSend,
-      callback: () => this.props.openModal(MODAL_SEND, { account: this.props.account }),
-    },
-    {
-      label: 'accounts.contextMenu.receive',
-      Icon: IconReceive,
-      callback: () => this.props.openModal(MODAL_RECEIVE, { account: this.props.account }),
-    },
-    {
-      label: 'accounts.contextMenu.edit',
-      Icon: IconAccountSettings,
-      callback: () => this.props.openModal(MODAL_SETTINGS_ACCOUNT, { account: this.props.account }),
-    },
-  ]
-
-  toggleAccordion = e => {
-    e.stopPropagation()
-    const { account } = this.props
-    expandedStates[account.id] = !expandedStates[account.id]
-    this.setState({ expanded: expandedStates[account.id] })
-  }
-
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevState.expanded !== this.state.expanded && !this.state.expanded) {
       const { scrollTopFocusRef } = this
       if (scrollTopFocusRef.current) {
         scrollTopFocusRef.current.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
       }
     }
+  }
+
+  scrollTopFocusRef: * = React.createRef()
+
+  onClick = () => {
+    const { account, parentAccount, onClick } = this.props
+    onClick(account, parentAccount)
+  }
+
+  toggleAccordion = (e: SyntheticEvent<*>) => {
+    e.stopPropagation()
+    const { account } = this.props
+    expandedStates[account.id] = !expandedStates[account.id]
+    this.setState({ expanded: expandedStates[account.id] })
   }
 
   render() {
@@ -187,7 +160,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       currency = account.currency
       unit = account.unit
       mainAccount = account
-      tokens = account.tokenAccounts
+      tokens = listTokenAccounts(account)
       disabled = !matchesSearch(search, account)
       if (tokens) tokens = tokens.filter(t => matchesSearch(search, t))
     }
@@ -197,7 +170,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       <div style={{ position: 'relative' }} hidden={hidden}>
         <span style={{ position: 'absolute', top: -70 }} ref={this.scrollTopFocusRef} />
         <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
-          <ContextMenuItem items={this.contextMenuItems}>
+          <AccountContextMenu account={account}>
             <RowContent disabled={disabled} onClick={this.onClick}>
               <Header account={account} name={mainAccount.name} />
               <Box flex="12%">
@@ -208,8 +181,9 @@ class AccountRowItem extends PureComponent<Props, State> {
               <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
               <Countervalue account={account} currency={currency} range={range} />
               <Delta account={account} range={range} />
+              <Star accountId={account.id} />
             </RowContent>
-          </ContextMenuItem>
+          </AccountContextMenu>
           {showTokensIndicator && expanded && (
             <TokenContent>
               {tokens &&
@@ -243,7 +217,4 @@ class AccountRowItem extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(AccountRowItem)
+export default AccountRowItem

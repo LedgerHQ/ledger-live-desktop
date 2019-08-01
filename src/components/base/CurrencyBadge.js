@@ -3,12 +3,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { getCryptoCurrencyIcon } from '@ledgerhq/live-common/lib/react'
-
-import type { CryptoCurrency } from '@ledgerhq/live-common/lib/types'
-
+import type { CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types'
 import { rgba } from 'styles/helpers'
-
+import IconCheck from 'icons/Check'
 import Box from 'components/base/Box'
+import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
+
+import Spinner from './Spinner'
 
 const CryptoIconWrapper = styled(Box).attrs({
   align: 'center',
@@ -16,28 +17,64 @@ const CryptoIconWrapper = styled(Box).attrs({
   bg: p => rgba(p.cryptoColor, 0.1),
   color: p => p.cryptoColor,
 })`
-  border-radius: 50%;
+  border-radius: ${p => p.borderRadius || '50%'};
   width: ${p => p.size || 40}px;
   height: ${p => p.size || 40}px;
+  position: relative;
+
+  & > :nth-child(2) {
+    background: ${p => (p.showCheckmark ? p.theme.colors.positiveGreen : 'white')};
+    border-radius: 100%;
+    padding: 2px;
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > svg {
+      width: 14px;
+    }
+  }
 `
 
 export function CurrencyCircleIcon({
   currency,
   size,
+  showSpinner,
+  showCheckmark,
   ...props
 }: {
-  currency: CryptoCurrency,
+  currency: CryptoCurrency | TokenCurrency,
   size: number,
+  showSpinner?: boolean,
+  showCheckmark?: boolean,
 }) {
+  if (currency.type === 'TokenCurrency') {
+    return <ParentCryptoCurrencyIcon currency={currency} size={size} />
+  }
   const Icon = getCryptoCurrencyIcon(currency)
   return (
-    <CryptoIconWrapper size={size} cryptoColor={currency.color} {...props}>
+    <CryptoIconWrapper
+      size={size}
+      showCheckmark={showCheckmark}
+      cryptoColor={currency.color}
+      {...props}
+    >
       {Icon && <Icon size={size / 2} />}
+      {showCheckmark && (
+        <div>
+          <IconCheck color="white" size={16} />
+        </div>
+      )}
+      {showSpinner && <Spinner color="grey" size={14} />}
     </CryptoIconWrapper>
   )
 }
 
-function CurrencyBadge({ currency, ...props }: { currency: CryptoCurrency }) {
+function CurrencyBadge({ currency, ...props }: { currency: CryptoCurrency | TokenCurrency }) {
   return (
     <Box horizontal flow={3} {...props}>
       <CurrencyCircleIcon size={40} currency={currency} />

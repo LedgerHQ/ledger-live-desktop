@@ -15,8 +15,9 @@ import { MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
 
 type Props = {
   account: Account,
-  isChecked: boolean,
+  isChecked?: boolean,
   isDisabled?: boolean,
+  isReadonly?: boolean,
   autoFocusInput?: boolean,
   accountName: string,
   onToggleAccount?: (Account, boolean) => void,
@@ -27,6 +28,11 @@ type Props = {
 export default class AccountRow extends PureComponent<Props> {
   handlePreventSubmit = (e: SyntheticEvent<*>) => {
     e.preventDefault()
+    e.stopPropagation()
+  }
+
+  handleKeyPress = (e: SyntheticEvent<HTMLInputElement>) => {
+    // this fixes a bug with the event propagating to the Tabbable
     e.stopPropagation()
   }
 
@@ -66,6 +72,7 @@ export default class AccountRow extends PureComponent<Props> {
       onEditName,
       accountName,
       isDisabled,
+      isReadonly,
       autoFocusInput,
       hideAmount,
     } = this.props
@@ -85,6 +92,7 @@ export default class AccountRow extends PureComponent<Props> {
               onEnter={this.handlePreventSubmit}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
+              onKeyPress={this.handleKeyPress}
               maxLength={MAX_ACCOUNT_NAME_SIZE}
               editInPlace
               autoFocus={autoFocusInput}
@@ -103,10 +111,10 @@ export default class AccountRow extends PureComponent<Props> {
             color="grey"
           />
         ) : null}
-        {!isDisabled ? (
+        {!isDisabled && !isReadonly ? (
           <CheckBox disabled isChecked={isChecked || !!isDisabled} />
         ) : (
-          <div style={{ width: 20 }} />
+          !isReadonly && <div style={{ width: 20 }} />
         )}
       </AccountRowContainer>
     )

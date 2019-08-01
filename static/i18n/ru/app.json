@@ -4,6 +4,7 @@
     "labelNo": "Нет",
     "never": "Никогда",
     "apply": "Применить",
+    "done": "Done",
     "confirm": "Подтвердить",
     "connecting": "Connecting..",
     "cancel": "Отменить",
@@ -34,6 +35,7 @@
     "retry": "Повторить попытку",
     "range": "Range",
     "stop": "Остановить",
+    "updateNow": "Update now",
     "close": "Закрыть",
     "eastern": "Восточный",
     "western": "Западный",
@@ -55,6 +57,7 @@
       "syncing": "Синхронизация...",
       "upToDate": "Синхронизировано",
       "outdated": "Приостановлено",
+      "needsMigration": "Click to update account",
       "error": "Ошибка синхронизации",
       "refresh": "Обновить",
       "ago": "Синхронизировано {{time}}"
@@ -87,6 +90,7 @@
   },
   "sidebar": {
     "menu": "Меню",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Диспетчер",
     "exchange": "Купить крипто",
@@ -95,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "Последние операции",
@@ -139,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
@@ -146,6 +155,7 @@
   },
   "banners": {
     "promoteMobile": "Наслаждайтесь использованием Ledger Live теперь и на мобильных устройствах с {{productName}}",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} больше не поддерживается"
   },
   "dashboard": {
@@ -223,12 +233,37 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
+    "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "Добавить счета",
@@ -241,6 +276,7 @@
     "connectDevice": {
       "desc": "Чтобы добавить счета <1><0>{{currencyName}}</0></1>, выполните перечисленные ниже действия."
     },
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Добавить существующие счета",
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
@@ -292,7 +328,12 @@
     "identifier": "Идентификатор транзакции",
     "viewOperation": "Просмотреть в Explorer",
     "showMore": "Показать больше {{recipients}}",
-    "showLess": "Показать меньше"
+    "showLess": "Показать меньше",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "Вот и все"
@@ -307,11 +348,13 @@
       "installSuccess": "{{app}} was successfully installed",
       "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} удалено",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "Проверьте, какие приложения уже установлены на устройстве.",
       "installed": "App installed",
-      "uninstalled": "App uninstalled"
+      "uninstalled": "App uninstalled",
+      "addAccount": "Add {{name}} account"
     },
     "firmware": {
       "installed": "Версия встроенного ПО {{version}}",
@@ -375,12 +418,13 @@
       "chooseAccount": {
         "title": "Счет",
         "label": "Счет для зачисления средств",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "Устройство",
-        "withoutDevice": "Нет устройства?"
+        "withoutDevice": "Нет устройства?",
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "Проверка",
@@ -455,13 +499,13 @@
     "title": "Настройки",
     "tabs": {
       "display": "Общие",
-      "export": "Accounts",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "Справка",
       "about": "О программе",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -588,6 +632,12 @@
       "title": "Save logs",
       "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
       "btn": "Save"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
@@ -877,6 +927,10 @@
     "AccountNameRequired": {
       "title": "Необходимо указать название счета.",
       "description": "Укажите название счета."
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "Это не то приложение.",

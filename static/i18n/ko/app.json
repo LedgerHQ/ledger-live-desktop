@@ -4,6 +4,7 @@
     "labelNo": "아니오",
     "never": "결코 아님",
     "apply": "신청",
+    "done": "Done",
     "confirm": "확인",
     "connecting": "Connecting..",
     "cancel": "취소",
@@ -34,6 +35,7 @@
     "retry": "다시 시도",
     "range": "Range",
     "stop": "중지",
+    "updateNow": "Update now",
     "close": "닫기",
     "eastern": "동부",
     "western": "서부",
@@ -55,6 +57,7 @@
       "syncing": "동기화 중...",
       "upToDate": "동기화됨",
       "outdated": "일시 중지됨",
+      "needsMigration": "Click to update account",
       "error": "동기화 오류",
       "refresh": "새로고침",
       "ago": "{{time}} 동기화됨"
@@ -87,6 +90,7 @@
   },
   "sidebar": {
     "menu": "메뉴",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "관리자",
     "exchange": "암호화 자산 구입",
@@ -95,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "마지막 작업",
@@ -139,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
@@ -146,6 +155,7 @@
   },
   "banners": {
     "promoteMobile": "이제 {{productName}}을(를) 통해 모바일에서 제공되는 Ledger Live를 즐기세요.",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다."
   },
   "dashboard": {
@@ -223,12 +233,37 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
+    "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "계정 추가",
@@ -241,6 +276,7 @@
     "connectDevice": {
       "desc": "<1><0>{{currencyName}}</0></1> 계정을 추가하려면 아래 단계를 따르십시오."
     },
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "기존 계정 추가",
     "selectAll": "모든 ({{count}}) 선택",
     "unselectAll": "모든 ({{count}}) 선택 해제",
@@ -292,7 +328,12 @@
     "identifier": "트랜잭션 ID",
     "viewOperation": "탐색기에서 보기",
     "showMore": "{{recipients}} 자세히 표시",
-    "showLess": "간단히 표시"
+    "showLess": "간단히 표시",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "모두 끝났습니다."
@@ -307,11 +348,13 @@
       "installSuccess": "{{app}} was successfully installed",
       "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}} 제거됨",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "어떤 앱이 이미 설치되어 있는지 장치를 확인하십시오.",
       "installed": "App installed",
-      "uninstalled": "App uninstalled"
+      "uninstalled": "App uninstalled",
+      "addAccount": "Add {{name}} account"
     },
     "firmware": {
       "installed": "펌웨어 버전 {{version}}",
@@ -375,12 +418,13 @@
       "chooseAccount": {
         "title": "계정",
         "label": "입금할 계정",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "장치",
-        "withoutDevice": "장치가 없습니까?"
+        "withoutDevice": "장치가 없습니까?",
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "확인",
@@ -455,13 +499,13 @@
     "title": "설정",
     "tabs": {
       "display": "일반",
-      "export": "Accounts",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "도움말",
       "about": "소개",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -588,6 +632,12 @@
       "title": "Save logs",
       "desc": "Saving Ledger Live logs may be necessary for troubleshooting purposes.",
       "btn": "Save"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
@@ -877,6 +927,10 @@
     "AccountNameRequired": {
       "title": "계정 이름이 필요합니다.",
       "description": "계정 이름을 입력하십시오."
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "잘못된 앱입니다.",

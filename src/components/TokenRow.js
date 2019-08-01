@@ -11,6 +11,7 @@ import Header from './AccountsPage/AccountRowItem/Header'
 import Balance from './AccountsPage/AccountRowItem/Balance'
 import Delta from './AccountsPage/AccountRowItem/Delta'
 import Countervalue from './AccountsPage/AccountRowItem/Countervalue'
+import Star from './Stars/Star'
 
 type Props = {
   account: TokenAccount,
@@ -80,6 +81,7 @@ class TokenRow extends PureComponent<Props> {
         <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
         <Countervalue account={account} currency={token} range={range} />
         <Delta account={account} range={range} />
+        <Star accountId={account.id} />
       </Row>
     )
   }

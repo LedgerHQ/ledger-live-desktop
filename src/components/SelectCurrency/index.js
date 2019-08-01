@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { translate } from 'react-i18next'
 import Fuse from 'fuse.js'
 
@@ -37,6 +37,8 @@ const SelectCurrency = React.memo(
     if (!devMode) {
       c = c.filter(c => c.type !== 'CryptoCurrency' || !c.isTestnetFor)
     }
+    const [searchInputValue, setSearchInputValue] = useState('')
+
     const cryptos = useCurrenciesByMarketcap(c)
     const onChangeCallback = useCallback(item => onChange(item ? item.currency : null), [onChange])
     const noOptionsMessage = useCallback(
@@ -53,27 +55,25 @@ const SelectCurrency = React.memo(
     const fuseOptions = {
       threshold: 0.1,
       keys: ['name', 'ticker'],
+      shouldSort: false,
     }
-    const fuse = new Fuse(options, fuseOptions)
-    const loadOptions = (inputValue?: string) =>
-      new Promise(resolve => {
-        window.requestAnimationFrame(() => {
-          if (!inputValue) return resolve(options)
-          const result = fuse.search(inputValue)
-          return resolve(result)
-        })
-      })
+    const manualFilter = useCallback(() => {
+      const fuse = new Fuse(options, fuseOptions)
+      return searchInputValue.length > 0 ? fuse.search(searchInputValue) : options
+    }, [searchInputValue, options, fuseOptions])
 
+    const filteredOptions = manualFilter()
     return (
       <Select
-        async
         autoFocus={autoFocus}
         value={value}
+        options={filteredOptions}
+        filterOption={false}
         getOptionValue={getOptionValue}
         renderOption={renderOption}
         renderValue={renderOption}
-        defaultOptions={options}
-        loadOptions={loadOptions}
+        onInputChange={v => setSearchInputValue(v)}
+        inputValue={searchInputValue}
         placeholder={placeholder || t('common.selectCurrency')}
         noOptionsMessage={noOptionsMessage}
         onChange={onChangeCallback}

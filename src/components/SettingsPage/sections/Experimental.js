@@ -2,8 +2,9 @@
 
 import React, { PureComponent } from 'react'
 import { translate, Trans } from 'react-i18next'
-import { setEnvUnsafe, isEnvDefault } from '@ledgerhq/live-common/lib/env'
+import { isEnvDefault } from '@ledgerhq/live-common/lib/env'
 import { experimentalFeatures, isReadOnlyEnv } from 'helpers/experimental'
+import { setEnvOnAllThreads } from 'helpers/env'
 import type { T } from 'types/common'
 import TrackPage from 'analytics/TrackPage'
 import IconAtom from 'icons/Atom'
@@ -36,7 +37,7 @@ const ExperimentalFeatureRow = ({ feature }: { feature: Feature }) => {
       <Children
         readOnly={isReadOnlyEnv(feature.name)}
         checked={!isEnvDefault(feature.name)}
-        onChange={setEnvUnsafe}
+        onChange={setEnvOnAllThreads}
         {...rest}
       />
     </Row>

@@ -26,6 +26,7 @@ export const DEFAULT_WINDOW_WIDTH = intFromEnv('LEDGER_DEFAULT_WINDOW_WIDTH', 10
 export const DEFAULT_WINDOW_HEIGHT = intFromEnv('LEDGER_DEFAULT_WINDOW_HEIGHT', 768)
 export const MIN_WIDTH = intFromEnv('LEDGER_MIN_WIDTH', 1024)
 export const MIN_HEIGHT = intFromEnv('LEDGER_MIN_HEIGHT', 700)
+export const MAIN_SIDEBAR_WIDTH = 230
 
 // time and delays...
 
@@ -104,6 +105,7 @@ export const UPDATE_CHECK_FEED = stringFromEnv(
 export const MAX_ACCOUNT_NAME_SIZE = 50
 
 export const MODAL_ADD_ACCOUNTS = 'MODAL_ADD_ACCOUNTS'
+export const MODAL_MIGRATE_ACCOUNTS = 'MODAL_MIGRATE_ACCOUNTS'
 export const MODAL_OPERATION_DETAILS = 'MODAL_OPERATION_DETAILS'
 export const MODAL_RECEIVE = 'MODAL_RECEIVE'
 export const MODAL_SEND = 'MODAL_SEND'

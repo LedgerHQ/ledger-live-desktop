@@ -11,14 +11,13 @@ import type { T } from 'types/common'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { MODAL_RECEIVE, MODAL_SEND } from 'config/constants'
+import { MODAL_RECEIVE, MODAL_SEND, MAIN_SIDEBAR_WIDTH } from 'config/constants'
 import { accountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 import { developerModeSelector } from 'reducers/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
-import GrowScroll from 'components/base/GrowScroll'
 import Space from 'components/base/Space'
 import UpdateDot from 'components/Updater/UpdateDot'
 import IconManager from 'icons/Manager'
@@ -28,9 +27,9 @@ import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
 import TopGradient from './TopGradient'
-import KeyboardContent from '../KeyboardContent'
 import useExperimental from '../../hooks/useExperimental'
 import { darken } from '../../styles/helpers'
+import Stars from '../Stars'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
@@ -48,25 +47,7 @@ type Props = {
   location: Location,
   push: string => void,
   openModal: string => void,
-  developerMode: boolean,
 }
-
-const IconDev = () => (
-  <div
-    style={{
-      width: 16,
-      height: 16,
-      fontSize: 10,
-      fontFamily: 'monospace',
-      fontWeight: 'bold',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-    }}
-  >
-    {'DEV'}
-  </div>
-)
 
 const TagContainer = () => {
   const isExperimental = useExperimental()
@@ -74,10 +55,11 @@ const TagContainer = () => {
   return isExperimental ? (
     <Box
       justifyContent="center"
-      m={4}
+      m={2}
       style={{
         flexGrow: 1,
         alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'flex-end',
       }}
     >
@@ -137,76 +119,66 @@ class MainSideBar extends PureComponent<Props> {
   }
 
   render() {
-    const { t, noAccounts, location, developerMode } = this.props
+    const { t, noAccounts, location } = this.props
     const { pathname } = location
 
     return (
-      <Box relative bg="white" style={{ width: 230 }}>
+      <Box relative bg="white" style={{ width: MAIN_SIDEBAR_WIDTH }}>
         <TopGradient />
-        <GrowScroll>
-          <Space of={70} />
-          <SideBarList title={t('sidebar.menu')}>
-            <SideBarListItem
-              label={t('dashboard.title')}
-              icon={IconPieChart}
-              iconActiveColor="wallet"
-              onClick={this.handleClickDashboard}
-              isActive={pathname === '/'}
-              NotifComponent={noAccounts ? undefined : UpdateDot}
-              disabled={noAccounts}
-            />
-            <SideBarListItem
-              label={t('sidebar.accounts')}
-              icon={IconWallet}
-              iconActiveColor="wallet"
-              isActive={pathname === '/accounts'}
-              onClick={this.handleClickAccounts}
-              NotifComponent={noAccounts ? UpdateDot : undefined}
-            />
-            <SideBarListItem
-              label={t('send.title')}
-              icon={IconSend}
-              iconActiveColor="wallet"
-              onClick={this.handleOpenSendModal}
-              disabled={noAccounts}
-            />
-            <SideBarListItem
-              label={t('receive.title')}
-              icon={IconReceive}
-              iconActiveColor="wallet"
-              onClick={this.handleOpenReceiveModal}
-              disabled={noAccounts}
-            />
-            <SideBarListItem
-              label={t('sidebar.manager')}
-              icon={IconManager}
-              iconActiveColor="wallet"
-              onClick={this.handleClickManager}
-              isActive={pathname === '/manager'}
-            />
-            <SideBarListItem
-              label={t('sidebar.exchange')}
-              icon={IconExchange}
-              iconActiveColor="wallet"
-              onClick={this.handleClickExchange}
-              isActive={pathname === '/partners'}
-            />
-            {developerMode && (
-              <KeyboardContent sequence="DEVTOOLS">
-                <SideBarListItem
-                  label={t('sidebar.developer')}
-                  icon={IconDev}
-                  iconActiveColor="wallet"
-                  onClick={this.handleClickDev}
-                  isActive={pathname === '/dev'}
-                />
-              </KeyboardContent>
-            )}
-            <Space of={30} />
-          </SideBarList>
-          <Space grow />
+        <Space of={70} />
+        <SideBarList title={t('sidebar.menu')}>
+          <SideBarListItem
+            label={t('dashboard.title')}
+            icon={IconPieChart}
+            iconActiveColor="wallet"
+            onClick={this.handleClickDashboard}
+            isActive={pathname === '/'}
+            NotifComponent={noAccounts ? undefined : UpdateDot}
+            disabled={noAccounts}
+          />
+          <SideBarListItem
+            label={t('sidebar.accounts')}
+            icon={IconWallet}
+            iconActiveColor="wallet"
+            isActive={pathname === '/accounts'}
+            onClick={this.handleClickAccounts}
+            NotifComponent={noAccounts ? UpdateDot : undefined}
+          />
+          <SideBarListItem
+            label={t('send.title')}
+            icon={IconSend}
+            iconActiveColor="wallet"
+            onClick={this.handleOpenSendModal}
+            disabled={noAccounts}
+          />
+          <SideBarListItem
+            label={t('receive.title')}
+            icon={IconReceive}
+            iconActiveColor="wallet"
+            onClick={this.handleOpenReceiveModal}
+            disabled={noAccounts}
+          />
+          <SideBarListItem
+            label={t('sidebar.manager')}
+            icon={IconManager}
+            iconActiveColor="wallet"
+            onClick={this.handleClickManager}
+            isActive={pathname === '/manager'}
+          />
+          <SideBarListItem
+            label={t('sidebar.exchange')}
+            icon={IconExchange}
+            iconActiveColor="wallet"
+            onClick={this.handleClickExchange}
+            isActive={pathname === '/partners'}
+          />
+          <Space of={30} />
+        </SideBarList>
+
+        <SideBarList scroll title={t('sidebar.stars')}>
+          <Stars pathname={pathname} />
           <TagContainer />
-        </GrowScroll>
+        </SideBarList>
       </Box>
     )
   }

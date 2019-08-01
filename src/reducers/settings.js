@@ -10,6 +10,7 @@ import { getLanguages } from 'config/languages'
 import { createSelector } from 'reselect'
 import type { InputSelector as Selector } from 'reselect'
 import type { CryptoCurrency, Currency } from '@ledgerhq/live-common/lib/types'
+import { getEnv } from '@ledgerhq/live-common/lib/env'
 import { currencySettingsDefaults } from 'helpers/SettingsDefaults'
 import { getSystemLocale } from 'helpers/systemLocale'
 
@@ -37,6 +38,7 @@ export type { CurrencySettings }
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
+  starredAccountIds: string[],
   counterValue: string,
   language: ?string,
   region: ?string,
@@ -59,6 +61,7 @@ export type SettingsState = {
   dismissedBanners: string[],
   accountsViewMode: 'card' | 'list',
   showAccountsHelperBanner: boolean,
+  hideEmptyTokenAccounts: boolean,
 }
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -70,6 +73,7 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
 
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
+  starredAccountIds: [],
   counterValue: 'USD',
   language: null,
   region: null,
@@ -87,8 +91,9 @@ const INITIAL_STATE: SettingsState = {
   sentryLogs: true,
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
-  accountsViewMode: 'card',
+  accountsViewMode: 'list',
   showAccountsHelperBanner: true,
+  hideEmptyTokenAccounts: getEnv('HIDE_EMPTY_TOKEN_ACCOUNTS'),
 }
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`
@@ -132,7 +137,21 @@ const handlers: Object = {
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
   }),
+  SETTINGS_TOGGLE_STAR: (state: SettingsState, { accountId }) => ({
+    ...state,
+    starredAccountIds: state.starredAccountIds.includes(accountId)
+      ? state.starredAccountIds.filter(e => e !== accountId)
+      : [...state.starredAccountIds, accountId],
+  }),
+  SETTINGS_DRAG_DROP_STAR: (state: SettingsState, { payload: { from, to, starredAccounts } }) => {
+    const ids = starredAccounts.map(a => a.id)
+    ids.splice(to, 0, ids.splice(from, 1)[0])
 
+    return {
+      ...state,
+      starredAccountIds: ids,
+    }
+  },
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 }
@@ -245,6 +264,9 @@ export const dismissedBannersSelector = (state: State) => state.settings.dismiss
 export const dismissedBannerSelector = (state: State, { bannerKey }: { bannerKey: string }) =>
   (state.settings.dismissedBanners || []).includes(bannerKey)
 
+export const hideEmptyTokenAccountsSelector = (state: State) =>
+  state.settings.hideEmptyTokenAccounts
+
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
   state => state.settings.currenciesSettings,
@@ -257,5 +279,7 @@ export const exportSettingsSelector = createSelector(
     developerModeEnabled,
   }),
 )
+
+export const starredAccountIdsSelector = (state: State) => state.settings.starredAccountIds
 
 export default handleActions(handlers, INITIAL_STATE)

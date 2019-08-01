@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
+import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
 import { push } from 'react-router-redux'
@@ -62,7 +63,7 @@ const mapDispatchToProps = {
 
 // Fixme Temporarily hiding the receive token button
 const ReceiveButton = (props: { onClick: () => void }) => (
-  <Button hidden small primary onClick={props.onClick}>
+  <Button small primary onClick={props.onClick}>
     <Box horizontal flow={1} alignItems="center">
       <IconPlus size={12} />
       <Box>
@@ -84,7 +85,8 @@ class TokensList extends PureComponent<Props> {
   render() {
     const { account, t, range } = this.props
     if (!account.tokenAccounts) return null
-    const isEmpty = account.tokenAccounts.length === 0
+    const tokenAccounts = listTokenAccounts(account)
+    const isEmpty = tokenAccounts.length === 0
     return (
       <Box mb={50}>
         <Wrapper>
@@ -112,18 +114,17 @@ class TokensList extends PureComponent<Props> {
             <ReceiveButton onClick={this.onReceiveClick} />
           </EmptyState>
         )}
-        {account.tokenAccounts &&
-          account.tokenAccounts.map((token, index) => (
-            <TokenRow
-              index={index}
-              key={token.id}
-              range={range}
-              account={token}
-              parentAccount={account}
-              onClick={this.onAccountClick}
-              disableRounding
-            />
-          ))}
+        {tokenAccounts.map((token, index) => (
+          <TokenRow
+            index={index}
+            key={token.id}
+            range={range}
+            account={token}
+            parentAccount={account}
+            onClick={this.onAccountClick}
+            disableRounding
+          />
+        ))}
       </Box>
     )
   }

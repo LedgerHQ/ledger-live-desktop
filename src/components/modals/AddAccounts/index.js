@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Trans, translate } from 'react-i18next'
 import { createStructuredSelector } from 'reselect'
-import type { CryptoCurrency, Account } from '@ledgerhq/live-common/lib/types'
+import type { CryptoCurrency, TokenCurrency, Account } from '@ledgerhq/live-common/lib/types'
 import { addAccounts } from '@ledgerhq/live-common/lib/account'
 import Track from 'analytics/Track'
 import { MODAL_ADD_ACCOUNTS } from 'config/constants'
@@ -93,7 +93,7 @@ type State = {
 
 export type StepProps = DefaultStepProps & {
   t: T,
-  currency: ?CryptoCurrency,
+  currency: ?CryptoCurrency | ?TokenCurrency,
   device: ?Device,
   isAppOpened: boolean,
   scannedAccounts: Account[],
@@ -195,6 +195,18 @@ class AddAccounts extends PureComponent<Props, State> {
 
   handleSetAppOpened = (isAppOpened: boolean) => this.setState({ isAppOpened })
 
+  handleBeforeOpen = ({ data }) => {
+    const { currency } = this.state
+
+    if (!currency) {
+      if (data && data.currency) {
+        this.setState({
+          currency: data.currency,
+        })
+      }
+    }
+  }
+
   onGoStep1 = () => {
     this.setState(({ reset }) => ({ ...INITIAL_STATE, reset: reset + 1 }))
   }
@@ -243,6 +255,7 @@ class AddAccounts extends PureComponent<Props, State> {
         name={MODAL_ADD_ACCOUNTS}
         refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}
+        onBeforeOpen={this.handleBeforeOpen}
         render={({ onClose }) => (
           <Stepper
             key={reset} // THIS IS A HACK because stepper is not controllable. FIXME

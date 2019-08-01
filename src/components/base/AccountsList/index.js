@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, CryptoCurrency, TokenCurrency } from '@ledgerhq/live-common/lib/types'
 
 import Box from 'components/base/Box'
 import FakeLink from 'components/base/FakeLink'
@@ -14,6 +14,7 @@ import AccountRow from './AccountRow'
 class AccountsList extends Component<
   {
     accounts: Account[],
+    currency: CryptoCurrency | TokenCurrency,
     checkedIds?: string[],
     editedNames: { [accountId: string]: string },
     setAccountName?: (Account, string) => void,
@@ -51,6 +52,7 @@ class AccountsList extends Component<
   render() {
     const {
       accounts,
+      currency,
       checkedIds,
       onToggleAccount,
       editedNames,
@@ -107,6 +109,7 @@ class AccountsList extends Component<
               <AccountRow
                 key={account.id}
                 account={account}
+                currency={currency}
                 autoFocusInput={i === 0 && autoFocusFirstInput}
                 isDisabled={!onToggleAccount || !checkedIds}
                 isChecked={!checkedIds || checkedIds.find(id => id === account.id) !== undefined}

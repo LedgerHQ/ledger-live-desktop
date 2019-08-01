@@ -4,6 +4,7 @@
     "labelNo": "いいえ",
     "never": "オートロックしない",
     "apply": "適用",
+    "done": "Done",
     "confirm": "確認",
     "connecting": "Connecting..",
     "cancel": "キャンセル",
@@ -34,6 +35,7 @@
     "retry": "再試行",
     "range": "Range",
     "stop": "停止",
+    "updateNow": "Update now",
     "close": "閉じる",
     "eastern": "東部",
     "western": "西部",
@@ -55,6 +57,7 @@
       "syncing": "同期しています...",
       "upToDate": "同期が完了しました",
       "outdated": "中断",
+      "needsMigration": "Click to update account",
       "error": "同期エラー",
       "refresh": "更新",
       "ago": "同期時間{{time}}"
@@ -87,6 +90,7 @@
   },
   "sidebar": {
     "menu": "メニュー",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "マネージャー",
     "exchange": "暗号資産を購入",
@@ -95,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "最後の操作",
@@ -139,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
@@ -146,6 +155,7 @@
   },
   "banners": {
     "promoteMobile": "{{productName}} をスマホでもご利用できるようになりました。Ledger Live体験をお楽しみください。",
+    "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} はもうサポートされません"
   },
   "dashboard": {
@@ -223,12 +233,37 @@
   },
   "tokensList": {
     "title": "Tokens",
-    "cta": "Receive token",
+    "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from"
+  },
+  "migrateAccounts": {
+    "overview": {
+      "title": "Ledger Live accounts update",
+      "done": "Ledger Live accounts update completed",
+      "description": "New features in Ledger Live requires an update of your accounts.",
+      "currency": "1 {{currency}} account needs to be updated:",
+      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "footer": "You need your Ledger Device to complete the update",
+      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+    },
+    "connectDevice": {
+      "title": "{{currencyName}} update",
+      "description": ""
+    },
+    "progress": {
+      "title": "{{currencyName}} update in progress...",
+      "description": "Please wait while your accounts are updated",
+      "finished": "{{currencyName}} update completed"
+    },
+    "cta": {
+      "startUpdate": "Start update",
+      "nextCurrency": "Continue with {{currency}} update"
+    }
   },
   "addAccounts": {
     "title": "アカウントを追加",
@@ -241,6 +276,7 @@
     "connectDevice": {
       "desc": "以下の手順に従って、<1><0>{{currencyName}}</0></1>のアカウントを追加してください"
     },
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
     "selectAll": "すべての({{count}})を選択",
     "unselectAll": "すべての({{count}})を選択を解除",
@@ -292,7 +328,12 @@
     "identifier": "取引ID",
     "viewOperation": "Explorerで表示",
     "showMore": "{{recipients}} 展開",
-    "showLess": "折りたたむ"
+    "showLess": "折りたたむ",
+    "tokenOperations": "Token operations",
+    "tokenTooltip": "This operation is related to the following token operations",
+    "internalOperations": "Internal operations",
+    "internalOpTooltip": "This operation has internal operations",
+    "details": "{{ currency }} details"
   },
   "operationList": {
     "noMoreOperations": "すべて"
@@ -307,11 +348,13 @@
       "installSuccess": "{{app}} was successfully installed",
       "unsupportedSuccess": "Learn how to use {{app}}",
       "uninstallSuccess": "{{app}}はアンインストールされました",
-      "supportedCurrency": "{{app}} is now installed on your {{device}}. Add an account so you can send and receive funds",
+      "supportedCurrency": "{{app}} is now installed on your {{device}}.",
+      "supportedCurrencyNeedAccount": "{{app}} is now installed on your {{device}}. You need to add a {{currency}} account in order to receive and manage assets.",
       "unsupportedCurrency": "{{app}} support is not integrated in Ledger Live. Click the button to learn how to use it.",
       "help": "機器を確認して、インストール済みのアプリを確認してください",
       "installed": "App installed",
-      "uninstalled": "App uninstalled"
+      "uninstalled": "App uninstalled",
+      "addAccount": "Add {{name}} account"
     },
     "firmware": {
       "installed": "ファームウェアバージョン {{version}}",
@@ -375,12 +418,13 @@
       "chooseAccount": {
         "title": "アカウント",
         "label": "入金アカウント",
-        "parentAccount": "1. Choose {{currencyName}} Account",
-        "token": "2. Choose {{currencyName}} Token"
+        "parentAccount": "1. Select {{currencyName}} account",
+        "token": "2. Select a token"
       },
       "connectDevice": {
         "title": "機器",
-        "withoutDevice": "機器をお持ちではありませんか？"
+        "withoutDevice": "機器をお持ちではありませんか？",
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "検証",
@@ -455,13 +499,13 @@
     "title": "設定",
     "tabs": {
       "display": "一般",
-      "export": "アカウント",
       "cryptoAssets": "Crypto assets",
       "currencies": "Crypto assets",
       "rates": "Rates",
       "help": "ヘルプ",
       "about": "詳細",
-      "experimental": "Experimental features"
+      "experimental": "Experimental features",
+      "accounts": "Accounts"
     },
     "export": {
       "accounts": {
@@ -588,6 +632,12 @@
       "title": "ログの保存",
       "desc": "将来のトラブルシューティングのために、Ledger Liveログをセーブされることをお勧めします。",
       "btn": "保存"
+    },
+    "accounts": {
+      "hideEmptyTokens": {
+        "title": "Hide empty token accounts",
+        "desc": "Hide token accounts with zero balance on the Accounts page."
+      }
     }
   },
   "password": {
@@ -877,6 +927,10 @@
     "AccountNameRequired": {
       "title": "アカウント名が必要です",
       "description": "アカウント名を提供してください"
+    },
+    "AccountNotSupported": {
+      "title": "Account not supported.",
+      "description": "Please retry or contact Support ({{reason}})"
     },
     "BtcUnmatchedApp": {
       "title": "アプリが間違っています",

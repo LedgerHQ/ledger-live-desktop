@@ -54,7 +54,7 @@ const ListenDevices = ({ addDevice, removeDevice, resetDevices }) => {
       clearTimeout(timeout)
       sub.unsubscribe()
     }
-  }, [])
+  }, [addDevice, removeDevice, resetDevices])
   return null
 }
 

@@ -1,7 +1,9 @@
 // @flow
-import { ipcRenderer } from 'electron'
-import { setEnvUnsafe, isEnvDefault, changes, getAllEnvs } from '@ledgerhq/live-common/lib/env'
+import { isEnvDefault, changes } from '@ledgerhq/live-common/lib/env'
 import type { EnvName } from '@ledgerhq/live-common/lib/env'
+import useEnv from 'hooks/useEnv'
+
+import { setEnvOnAllThreads } from './env'
 
 export type FeatureCommon = {
   name: EnvName,
@@ -97,17 +99,10 @@ export const enabledExperimentalFeatures = (): string[] =>
 
 export const isReadOnlyEnv = (key: EnvName) => key in process.env
 
-function sendToMain() {
-  ipcRenderer.send('set-envs', getAllEnvs())
-}
-
 export const setLocalStorageEnv = (key: EnvName, val: string) => {
-  if (setEnvUnsafe(key, val)) {
-    const envs = getLocalStorageEnvs()
-    envs[key] = val
-    window.localStorage.setItem(lsKey, JSON.stringify(envs))
-    sendToMain()
-  }
+  const envs = getLocalStorageEnvs()
+  envs[key] = val
+  window.localStorage.setItem(lsKey, JSON.stringify(envs))
 }
 
 if (window.localStorage.getItem(lsKeyVersion) !== __APP_VERSION__) {
@@ -115,7 +110,7 @@ if (window.localStorage.getItem(lsKeyVersion) !== __APP_VERSION__) {
   // we replace all existing ones by clearing those who are gone
   const restoredEnvs = {}
   experimentalFeatures
-    .filter(e => !e.shadow && e.name in existing && setEnvUnsafe(e.name, existing[e.name]))
+    .filter(e => !e.shadow && e.name in existing && setEnvOnAllThreads(e.name, existing[e.name]))
     .forEach(e => {
       restoredEnvs[e.name] = existing[e.name]
     })
@@ -126,17 +121,21 @@ if (window.localStorage.getItem(lsKeyVersion) !== __APP_VERSION__) {
 const envs = getLocalStorageEnvs()
 /* eslint-disable guard-for-in */
 for (const k in envs) {
-  setEnvUnsafe(k, envs[k])
+  setEnvOnAllThreads(k, envs[k])
 }
 for (const k in process.env) {
-  setEnvUnsafe(k, process.env[k])
+  setEnvOnAllThreads(k, process.env[k])
 }
 /* eslint-enable guard-for-in */
-
-sendToMain()
 
 changes.subscribe(({ name, value }) => {
   if (experimentalFeatures.find(f => f.name === name) && !isReadOnlyEnv(name)) {
     setLocalStorageEnv(name, value)
   }
 })
+
+export const useWithTokens = () => {
+  const experimentalExplorers = !!useEnv('EXPERIMENTAL_EXPLORERS')
+  const experimentalLibcore = !!useEnv('EXPERIMENTAL_LIBCORE')
+  return experimentalExplorers && experimentalLibcore
+}

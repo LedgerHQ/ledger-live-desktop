@@ -7,20 +7,24 @@ import Button from 'components/base/Button'
 import EnsureDeviceApp from 'components/EnsureDeviceApp'
 
 import type { StepProps } from '../index'
+import { TokenTips } from '../../Receive/steps/02-step-connect-device'
 
 export default function StepConnectDevice({
   account,
   parentAccount,
   onChangeAppOpened,
 }: StepProps<*>) {
+  const token = account && account.type === 'TokenAccount' && account.token
   return (
     <Fragment>
       <TrackPage category="Send Flow" name="Step 2" />
       <EnsureDeviceApp
         account={account ? getMainAccount(account, parentAccount) : null}
+        isToken={!!token}
         waitBeforeSuccess={200}
         onSuccess={() => onChangeAppOpened(true)}
       />
+      {!token ? null : <TokenTips token={token} />}
     </Fragment>
   )
 }

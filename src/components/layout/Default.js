@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { Route, withRouter, Switch } from 'react-router'
 import { translate } from 'react-i18next'
 import { SYNC_PENDING_INTERVAL } from 'config/constants'
+import { connect } from 'react-redux'
 
 import type { Location } from 'react-router'
 
@@ -21,7 +22,6 @@ import DashboardPage from 'components/DashboardPage'
 import ManagerPage from 'components/ManagerPage'
 import AccountsPage from 'components/AccountsPage'
 import PartnersPage from 'components/PartnersPage'
-import DevToolsPage from 'components/DevToolsPage'
 import SettingsPage from 'components/SettingsPage'
 import KeyboardContent from 'components/KeyboardContent'
 import PerfIndicator from 'components/PerfIndicator'
@@ -40,6 +40,7 @@ import ListenDevices from 'components/ListenDevices'
 
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
+import type { State } from '../../reducers'
 
 const Main = styled(GrowScroll).attrs({
   px: 6,
@@ -50,6 +51,7 @@ const Main = styled(GrowScroll).attrs({
 
 type Props = {
   location: Location,
+  visibleModals: any[],
   i18n: {
     reloadResources: Function,
   },
@@ -88,6 +90,7 @@ class Default extends Component<Props> {
   _scrollContainer = null
 
   render() {
+    const { visibleModals } = this.props
     return (
       <Fragment>
         <TriggerAppReady />
@@ -99,7 +102,7 @@ class Default extends Component<Props> {
 
         <IsUnlocked>
           <OnboardingOrElse>
-            {Object.entries(modals).map(([name, ModalComponent]: [string, any]) => (
+            {visibleModals.map(([name, ModalComponent]) => (
               <ModalComponent key={name} />
             ))}
 
@@ -125,7 +128,6 @@ class Default extends Component<Props> {
                     <Route path="/partners" component={PartnersPage} />
                     <Route path="/account/:parentId/:id" component={AccountPage} />
                     <Route path="/account/:id" component={AccountPage} />
-                    <Route path="/dev" component={DevToolsPage} />
                   </Switch>
                 </Main>
               </Box>
@@ -142,8 +144,17 @@ class Default extends Component<Props> {
     )
   }
 }
+const mapStateToProps = (state: State): * => ({
+  visibleModals: Object.entries(modals).reduce((visible, [name, ModalComponent]: [string, any]) => {
+    if (state.modals.hasOwnProperty(name) && state.modals[name].isOpened) {
+      visible.push([name, ModalComponent])
+    }
+    return visible
+  }, []),
+})
 
 export default compose(
+  connect(mapStateToProps),
   // $FlowFixMe
   withRouter,
   translate(),

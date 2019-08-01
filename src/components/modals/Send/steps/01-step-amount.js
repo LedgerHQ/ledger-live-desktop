@@ -22,6 +22,7 @@ import RecipientField from '../fields/RecipientField'
 import AmountField from '../fields/AmountField'
 import type { StepProps } from '..'
 import HighFeeConfirmation from '../HighFeeConfirmation'
+import ErrorBanner from '../../../ErrorBanner'
 
 const AccountFields = ({
   account,
@@ -76,25 +77,28 @@ export default ({
   transaction,
   onChangeAccount,
   onChangeTransaction,
+  error,
 }: StepProps<*>) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
   return (
     <Box flow={4}>
       <TrackPage category="Send Flow" name="Step 1" />
       {mainAccount ? <CurrencyDownStatusAlert currency={mainAccount.currency} /> : null}
-
+      {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>
         <Label>{t('send.steps.amount.selectAccountDebit')}</Label>
         <SelectAccount
           withTokenAccounts
+          enforceHideEmptyTokenAccounts
           autoFocus={!openedFromAccount}
           onChange={onChangeAccount}
           value={account}
         />
       </Box>
 
-      {account && transaction && (
+      {account && transaction && !error && (
         <AccountFields
+          error={error}
           key={account.id}
           account={account}
           parentAccount={parentAccount}
@@ -146,9 +150,9 @@ export class StepAmountFooter extends PureComponent<
   syncId = 0
 
   async resync() {
-    const { account, parentAccount, transaction } = this.props
+    const { account, parentAccount, transaction, error } = this.props
     const syncId = ++this.syncId
-    if (!account || !transaction) {
+    if (!account || !transaction || error) {
       this.setState({ canNext: false, isSyncing: false })
       return
     }
@@ -226,7 +230,12 @@ export class StepAmountFooter extends PureComponent<
     const { isSyncing, totalSpent, canNext, highFeesOpen, maxAmount } = this.state
     const mainAccount = account ? getMainAccount(account, parentAccount) : null
     const currency = account ? getAccountCurrency(account) : null
-    const bridge = account ? getAccountBridge(account, parentAccount) : null
+    let bridge
+    try {
+      bridge = account ? getAccountBridge(account, parentAccount) : null
+    } catch (e) {
+      bridge = null
+    }
     const amount =
       bridge && mainAccount && transaction
         ? bridge.getTransactionAmount(mainAccount, transaction)

@@ -4,12 +4,13 @@ import {
   flattenAccounts,
   getAccountCurrency,
   getAccountUnit,
+  listTokenAccounts,
 } from '@ledgerhq/live-common/lib/account'
 import Box from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import Select from 'components/base/Select'
 import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { createFilter } from 'react-select'
@@ -41,7 +42,12 @@ const tokenTick = (
   </div>
 )
 
-const getOptionValue = account => account.id
+type Option = {
+  matched: 'boolean',
+  account: Account | TokenAccount,
+}
+
+const getOptionValue = option => option.account.id
 
 const defaultFilter = createFilter({
   stringify: ({ data: account }) =>
@@ -51,29 +57,40 @@ const defaultFilter = createFilter({
 })
 const filterOption = o => (candidate, input) => {
   const selfMatches = defaultFilter(candidate, input)
-  if (selfMatches) return selfMatches
+  if (selfMatches) return [selfMatches, true]
+
   if (candidate.data.type === 'Account' && o.withTokenAccounts) {
-    const { tokenAccounts } = candidate.data
+    const tokenAccounts = o.enforceHideEmptyTokenAccounts
+      ? listTokenAccounts(candidate.data)
+      : candidate.data.tokenAccounts
     if (tokenAccounts) {
       for (let i = 0; i < tokenAccounts.length; i++) {
         const ta = tokenAccounts[i]
-        if (defaultFilter({ value: getOptionValue(ta), data: ta }, input)) {
-          return true
+        if (defaultFilter({ value: ta.id, data: ta }, input)) {
+          return [true, false]
         }
       }
     }
   }
-  return false
+  return [false, false]
 }
 
 const AccountOption = React.memo(
-  ({ account, isValue }: { account: Account | TokenAccount, isValue?: boolean }) => {
+  ({
+    account,
+    isValue,
+    disabled,
+  }: {
+    account: Account | TokenAccount,
+    isValue?: boolean,
+    disabled?: boolean,
+  }) => {
     const currency = getAccountCurrency(account)
     const unit = getAccountUnit(account)
     const name = account.type === 'Account' ? account.name : currency.name
 
     return (
-      <Box grow horizontal alignItems="center" flow={2}>
+      <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
         {!isValue && account.type === 'TokenAccount' ? tokenTick : null}
         <CryptoCurrencyIcon currency={currency} size={16} />
         <Ellipsis ff="Open Sans|SemiBold" color="dark" fontSize={4}>
@@ -87,16 +104,15 @@ const AccountOption = React.memo(
   },
 )
 
-const renderValue = ({ data }: { data: Account | TokenAccount }) => (
-  <AccountOption account={data} isValue />
-)
+const renderValue = ({ data }: { data: Option }) => <AccountOption account={data.account} isValue />
 
-const renderOption = ({ data }: { data: Account | TokenAccount }) => (
-  <AccountOption account={data} />
+const renderOption = ({ data }: { data: Option }) => (
+  <AccountOption account={data.account} disabled={!data.matched} />
 )
 
 type Props = {
   withTokenAccounts?: boolean,
+  enforceHideEmptyTokenAccounts?: boolean,
   filter?: Account => boolean,
   accounts: Account[],
   onChange: (account: ?(Account | TokenAccount), tokenAccount: ?Account) => void,
@@ -109,34 +125,68 @@ const RawSelectAccount = ({
   onChange,
   value,
   withTokenAccounts,
+  enforceHideEmptyTokenAccounts,
   filter,
   t,
   ...props
 }: Props) => {
+  const [searchInputValue, setSearchInputValue] = useState('')
+
   const filtered: Account[] = filter ? accounts.filter(filter) : accounts
-  const all = withTokenAccounts ? flattenAccounts(filtered) : filtered
-  const selectedOption = value ? all.find(o => o.id === value.id) : null
+  const all = withTokenAccounts
+    ? flattenAccounts(filtered, { enforceHideEmptyTokenAccounts })
+    : filtered
+  const selectedOption = value
+    ? {
+        account: all.find(o => o.id === value.id),
+      }
+    : null
   const onChangeCallback = useCallback(
-    (option: ?(Account | TokenAccount)) => {
+    (option?: Option) => {
       if (!option) {
         onChange(null)
       } else {
+        const { account } = option
         const parentAccount =
-          option.type === 'TokenAccount' ? accounts.find(a => a.id === option.parentId) : null
-        onChange(option, parentAccount)
+          account.type === 'TokenAccount' ? accounts.find(a => a.id === account.parentId) : null
+        onChange(account, parentAccount)
       }
     },
     [accounts, onChange],
   )
+
+  const manualFilter = useCallback(
+    () =>
+      all.reduce((result, option) => {
+        const [display, match] = filterOption({ withTokenAccounts, enforceHideEmptyTokenAccounts })(
+          { data: option },
+          searchInputValue,
+        )
+
+        if (display) {
+          result.push({
+            matched: match,
+            account: option,
+          })
+        }
+        return result
+      }, []),
+    [searchInputValue, all, withTokenAccounts, enforceHideEmptyTokenAccounts],
+  )
+
+  const structuredResults = manualFilter()
   return (
     <Select
       {...props}
       value={selectedOption}
-      options={all}
+      options={structuredResults}
       getOptionValue={getOptionValue}
       renderValue={renderValue}
       renderOption={renderOption}
-      filterOption={filterOption({ withTokenAccounts })}
+      onInputChange={v => setSearchInputValue(v)}
+      inputValue={searchInputValue}
+      filterOption={false}
+      isOptionDisabled={option => !option.matched}
       placeholder={t('common.selectAccount')}
       noOptionsMessage={({ inputValue }) =>
         t('common.selectAccountNoOption', { accountName: inputValue })

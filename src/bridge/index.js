@@ -6,14 +6,12 @@ import {
   makeMockAccountBridge,
 } from '@ledgerhq/live-common/lib/bridge/makeMockBridge'
 import { getEnv } from '@ledgerhq/live-common/lib/env'
-import { createCustomErrorClass } from '@ledgerhq/errors'
-import { decodeAccountId } from '@ledgerhq/live-common/lib/account'
+import { CurrencyNotSupported } from '@ledgerhq/errors'
+import { checkAccountSupported, decodeAccountId } from '@ledgerhq/live-common/lib/account'
+import { libcoreNoGo } from '@ledgerhq/live-common/lib/account/support'
 import * as LibcoreBridge from './LibcoreBridge'
 import * as RippleJSBridge from './RippleJSBridge'
 import * as EthereumJSBridge from './EthereumJSBridge'
-
-// TODO as soon as it's in @ledgerhq/errors we can import it
-const CurrencyNotSupported = createCustomErrorClass('CurrencyNotSupported')
 
 const mockCurrencyBridge = makeMockCurrencyBridge()
 const mockAccountBridge = makeMockAccountBridge()
@@ -24,8 +22,7 @@ export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
     case 'ripple':
       return RippleJSBridge.currencyBridge
     case 'ethereum':
-      // ethereum classic not yet stable
-      if (currency.id === 'ethereum_classic' || !getEnv('EXPERIMENTAL_LIBCORE')) {
+      if (!getEnv('EXPERIMENTAL_LIBCORE') || libcoreNoGo.includes(currency.id)) {
         return EthereumJSBridge.currencyBridge
       }
       return LibcoreBridge.currencyBridge
@@ -42,6 +39,10 @@ export const getAccountBridge = (
 ): AccountBridge<any> => {
   const mainAccount = account.type === 'Account' ? account : parentAccount
   if (!mainAccount) throw new Error('an account expected')
+  const supportedError = checkAccountSupported(mainAccount)
+  if (supportedError) {
+    throw supportedError
+  }
   const { type } = decodeAccountId(mainAccount.id)
   if (type === 'mock') return mockAccountBridge
   if (type === 'libcore') return LibcoreBridge.accountBridge
