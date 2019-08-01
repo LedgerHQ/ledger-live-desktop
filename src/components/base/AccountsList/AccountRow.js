@@ -31,6 +31,11 @@ export default class AccountRow extends PureComponent<Props> {
     e.stopPropagation()
   }
 
+  handleKeyPress = (e: SyntheticEvent<HTMLInputElement>) => {
+    // this fixes a bug with the event propagating to the Tabbable
+    e.stopPropagation()
+  }
+
   onToggleAccount = () => {
     const { onToggleAccount, account, isChecked } = this.props
     if (onToggleAccount) onToggleAccount(account, !isChecked)
@@ -87,6 +92,7 @@ export default class AccountRow extends PureComponent<Props> {
               onEnter={this.handlePreventSubmit}
               onFocus={this.onFocus}
               onBlur={this.onBlur}
+              onKeyPress={this.handleKeyPress}
               maxLength={MAX_ACCOUNT_NAME_SIZE}
               editInPlace
               autoFocus={autoFocusInput}

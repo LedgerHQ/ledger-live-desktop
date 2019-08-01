@@ -80,6 +80,7 @@ export const colors = {
   sliderGrey: '#F0EFF1',
   lightGraphite: '#fafafa',
   lightGrey: '#f9f9f9',
+  starYellow: '#FFD24A',
   orange: '#ffa726',
   positiveGreen: '#66be54',
   smoke: '#666666',

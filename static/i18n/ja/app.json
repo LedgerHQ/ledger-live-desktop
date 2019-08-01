@@ -90,6 +90,7 @@
   },
   "sidebar": {
     "menu": "メニュー",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "マネージャー",
     "exchange": "暗号資産を購入",
@@ -98,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "最後の操作",
@@ -142,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
@@ -270,7 +276,7 @@
     "connectDevice": {
       "desc": "以下の手順に従って、<1><0>{{currencyName}}</0></1>のアカウントを追加してください"
     },
-    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
     "selectAll": "すべての({{count}})を選択",
     "unselectAll": "すべての({{count}})を選択を解除",
@@ -418,7 +424,7 @@
       "connectDevice": {
         "title": "機器",
         "withoutDevice": "機器をお持ちではありませんか？",
-        "tokensTip": "* Token reception is made through the {{currency}} address"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "検証",

@@ -90,6 +90,7 @@
   },
   "sidebar": {
     "menu": "菜单",
+    "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "管理器",
     "exchange": "购买加密资产",
@@ -98,6 +99,10 @@
       "title": "New Update",
       "description": "Your accounts have been moved to a new dedicated page!"
     }
+  },
+  "stars": {
+    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
+    "tooltip": "Star account"
   },
   "account": {
     "lastOperations": "近期操作",
@@ -142,6 +147,7 @@
       "year": "Year"
     },
     "contextMenu": {
+      "star": "Star",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
@@ -270,7 +276,7 @@
     "connectDevice": {
       "desc": "按照以下步骤，添加 <1><0>{{currencyName}}</0></1> 账户"
     },
-    "tokensTip": "To add this {{tokenType}} token, please add an {{currency}} account and send tokens to it",
+    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
     "unselectAll": "取消全选 ({{count}})",
@@ -418,7 +424,7 @@
       "connectDevice": {
         "title": "设备",
         "withoutDevice": "您还没有 Ledger 设备？",
-        "tokensTip": "* Token reception is made through the {{currency}} address"
+        "tokensTip": "* Open the {{currency}} app to manage your {{token}} tokens"
       },
       "confirmAddress": {
         "title": "验证",

@@ -38,6 +38,7 @@ export type { CurrencySettings }
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
+  starredAccountIds: string[],
   counterValue: string,
   language: ?string,
   region: ?string,
@@ -72,6 +73,7 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
 
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
+  starredAccountIds: [],
   counterValue: 'USD',
   language: null,
   region: null,
@@ -135,7 +137,21 @@ const handlers: Object = {
     ...state,
     dismissedBanners: [...state.dismissedBanners, bannerId],
   }),
+  SETTINGS_TOGGLE_STAR: (state: SettingsState, { accountId }) => ({
+    ...state,
+    starredAccountIds: state.starredAccountIds.includes(accountId)
+      ? state.starredAccountIds.filter(e => e !== accountId)
+      : [...state.starredAccountIds, accountId],
+  }),
+  SETTINGS_DRAG_DROP_STAR: (state: SettingsState, { payload: { from, to, starredAccounts } }) => {
+    const ids = starredAccounts.map(a => a.id)
+    ids.splice(to, 0, ids.splice(from, 1)[0])
 
+    return {
+      ...state,
+      starredAccountIds: ids,
+    }
+  },
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 }
@@ -263,5 +279,7 @@ export const exportSettingsSelector = createSelector(
     developerModeEnabled,
   }),
 )
+
+export const starredAccountIdsSelector = (state: State) => state.settings.starredAccountIds
 
 export default handleActions(handlers, INITIAL_STATE)

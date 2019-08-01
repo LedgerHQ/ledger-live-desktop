@@ -9,7 +9,7 @@ import Space from 'components/base/Space'
 
 type Props = {
   children: any,
-  title?: Node | string,
+  title?: React$Node,
   scroll?: boolean,
   titleRight?: any,
   emptyState?: any,

@@ -3,16 +3,10 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import type { TokenAccount, Account, PortfolioRange } from '@ledgerhq/live-common/lib/types'
-import { connect } from 'react-redux'
 import Box from 'components/base/Box'
-import { openModal } from 'reducers/modals'
 import AccountCardHeader from './Header'
 import AccountCardBody from './Body'
-import IconSend from '../../../icons/Send'
-import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../../config/constants'
-import IconReceive from '../../../icons/Receive'
-import IconAccountSettings from '../../../icons/AccountSettings'
-import ContextMenuItem from '../../ContextMenu/ContextMenuItem'
+import AccountContextMenu from '../../ContextMenu/AccountContextMenu'
 
 const Card = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 1 })`
   cursor: pointer;
@@ -25,14 +19,9 @@ const Card = styled(Box).attrs({ bg: 'white', p: 3, boxShadow: 0, borderRadius: 
 type Props = {
   hidden?: boolean,
   account: TokenAccount | Account,
-  parentAccount?: Account,
+  parentAccount: ?Account,
   onClick: (Account | TokenAccount, ?Account) => void,
   range: PortfolioRange,
-  openModal: Function,
-}
-
-const mapDispatchToProps = {
-  openModal,
 }
 
 class AccountCard extends PureComponent<Props> {
@@ -41,29 +30,11 @@ class AccountCard extends PureComponent<Props> {
     onClick(account, parentAccount)
   }
 
-  contextMenuItems = [
-    {
-      label: 'accounts.contextMenu.send',
-      Icon: IconSend,
-      callback: () => this.props.openModal(MODAL_SEND, { account: this.props.account }),
-    },
-    {
-      label: 'accounts.contextMenu.receive',
-      Icon: IconReceive,
-      callback: () => this.props.openModal(MODAL_RECEIVE, { account: this.props.account }),
-    },
-    {
-      label: 'accounts.contextMenu.edit',
-      Icon: IconAccountSettings,
-      callback: () => this.props.openModal(MODAL_SETTINGS_ACCOUNT, { account: this.props.account }),
-    },
-  ]
-
   render() {
     const { account, parentAccount, range, hidden, ...props } = this.props
 
     return (
-      <ContextMenuItem items={this.contextMenuItems}>
+      <AccountContextMenu account={account}>
         <Card
           {...props}
           style={{ display: hidden && 'none' }}
@@ -74,12 +45,9 @@ class AccountCard extends PureComponent<Props> {
           <AccountCardHeader account={account} parentAccount={parentAccount} />
           <AccountCardBody account={account} parentAccount={parentAccount} range={range} />
         </Card>
-      </ContextMenuItem>
+      </AccountContextMenu>
     )
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(AccountCard)
+export default AccountCard

@@ -18,7 +18,7 @@ export const TokenTips: React$ComponentType<{ token: TokenCurrency }> = React.me
     <Text style={{ flex: 1, marginLeft: 10 }} ff="Open Sans|Regular" color="graphite" fontSize={3}>
       <Trans
         i18nKey="receive.steps.connectDevice.tokensTip"
-        values={{ currency: token.parentCurrency.name }}
+        values={{ currency: token.parentCurrency.name, token: token.name }}
       />
     </Text>
   </Box>
