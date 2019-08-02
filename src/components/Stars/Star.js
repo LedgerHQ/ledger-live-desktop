@@ -33,7 +33,7 @@ const StarIcon = styled.div`
   & {
     height: 50px;
     width: 50px;
-    background-image: url(${p => i(p.yellow ? 'starAnim2.png' : 'starAnim.png')});
+    background-image: url("${p => i(p.yellow ? 'starAnim2.png' : 'starAnim.png')}");
     background-position: ${p => (p.filled ? 'right' : 'left')};
     background-repeat: no-repeat;
     background-size: 3000%;
