@@ -4,9 +4,9 @@
     "labelNo": "取消",
     "never": "从不",
     "apply": "应用",
-    "done": "Done",
+    "done": "已完成",
     "confirm": "确认",
-    "connecting": "Connecting..",
+    "connecting": "正在连接......",
     "cancel": "取消",
     "getSupport": "获取支持",
     "delete": "删除",
@@ -35,7 +35,7 @@
     "retry": "重试",
     "range": "Range",
     "stop": "停止",
-    "updateNow": "Update now",
+    "updateNow": "立即更新",
     "close": "关闭",
     "eastern": "东方",
     "western": "西方",
@@ -45,7 +45,7 @@
     "copyAddress": "复制",
     "copied": "已复制",
     "addressCopied": "地址已复制",
-    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
+    "experimentalFeature": "实验功能已激活",
     "lockScreen": {
       "title": "欢迎回来",
       "subTitle": null,
@@ -57,7 +57,7 @@
       "syncing": "正在同步...+",
       "upToDate": "已同步",
       "outdated": "暂停",
-      "needsMigration": "Click to update account",
+      "needsMigration": "点击更新账户",
       "error": "同步错误",
       "refresh": "刷新",
       "ago": "已同步 {{time}}"
@@ -85,29 +85,29 @@
     }
   },
   "fees": {
-    "slow": "Slow",
-    "fast": "Fast"
+    "slow": "低速",
+    "fast": "高速"
   },
   "sidebar": {
     "menu": "菜单",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "stars": "星标账户",
+    "accounts": "账户",
     "manager": "管理器",
     "exchange": "购买加密资产",
     "developer": "开发工具",
     "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
+      "title": "新版本更新",
+      "description": "您的账户已被移至新页面！"
     }
   },
   "stars": {
-    "placeholder": "Accounts that you star on the <1><0>Accounts</0></1> page will now appear here!",
-    "tooltip": "Star account"
+    "placeholder": "您在 <1><0>账户</0></1> 页面上的星标账户将在这里显示！",
+    "tooltip": "星标账户"
   },
   "account": {
     "lastOperations": "近期操作",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "contractAddress": "合同：",
+    "openInExplorer": "打开区块链浏览器",
     "emptyState": {
       "title": "还没有加密资产？",
       "desc": "请确认已安装 <1> <0>{{managerAppName}}</0> </1> 应用程序后开始接收",
@@ -133,21 +133,21 @@
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "账户",
+    "noResultFound": "未找到账户。",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "按A到Z的顺序命名",
+      "name|desc": "按Z到A的顺序命名",
+      "balance|asc": "最低余额",
+      "balance|desc": "最高余额"
     },
     "range": {
-      "week": "Week",
-      "month": "Month",
-      "year": "Year"
+      "week": "周度",
+      "month": "月度",
+      "year": "年度"
     },
     "contextMenu": {
-      "star": "Star",
+      "star": "星标",
       "receive": "Receive",
       "send": "Send",
       "edit": "Edit Account"
