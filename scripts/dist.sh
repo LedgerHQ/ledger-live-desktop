@@ -25,7 +25,7 @@ fi
 yarn compile
 
 runJob \
-  "DEBUG=electron-builder electron-builder --publish never" \
+  "CSC_IDENTITY_AUTO_DISCOVERY=false DEBUG=electron-builder electron-builder --publish never --config electron-builder-nightly.yml" \
   "building and packaging app..." \
   "app built and packaged successfully" \
   "failed to build app" \
