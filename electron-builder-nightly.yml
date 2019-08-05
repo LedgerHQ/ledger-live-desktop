@@ -1,0 +1,89 @@
+appId: com.ledger.live
+
+protocols:
+  name: Ledger Live
+  schemes:
+    - ledgerhq
+
+mac:
+  artifactName: ${name}-${version}-${os}.${ext}
+  category: public.app-category.wallet
+  target:
+    - dmg
+    - zip
+
+appImage:
+  systemIntegration: doNotAsk
+
+linux:
+  asarUnpack:
+    - node_modules/@ledgerhq/ledger-core
+  artifactName: ${name}-${version}-${os}-${arch}.${ext}
+  category: Finance
+  target:
+    - target: AppImage
+      arch:
+        - x64
+
+win:
+  artifactName: ${name}-${version}-${os}-${arch}.${ext}
+  icon: build/windows/app.ico
+  verifyUpdateCodeSignature: false
+  signAndEditExecutable: false
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  oneClick: false
+  perMachine: true
+  allowToChangeInstallationDirectory: true
+  installerIcon: build/windows/installer.ico
+  installerSidebar: build/windows/installerSidebar.bmp
+  uninstallerIcon: build/windows/uninstaller.ico
+  uninstallerSidebar: build/windows/uninstallerSidebar.bmp
+
+files:
+  # Include files
+  - dist/internals
+
+  # Exclude files
+  - "!report-*.html"
+  - "!node_modules/**/{CONTRIBUTORS,License,CNAME,AUTHOR,TODO,CONTRIBUTING,COPYING,INSTALL,NEWS,PORTING,Makefile,htdocs,CHANGELOG,ChangeLog,changelog,README,Readme,readme,test,sample,example,demo,composer.json,tsconfig.json,jsdoc.json,tslint.json,typings.json,gulpfile,bower.json,package-lock,Gruntfile,CMakeLists,karma.conf,yarn.lock}*"
+  - "!node_modules/**/{man,flow-typed,benchmark,spec,cmake,browser,vagrant,doxy*,bin,obj,obj.target,example,examples,test,tests,__tests__,mocks,__mocks__,doc,docs,msvc,Xcode,CVS,RCS,SCCS,.storybook}{,/**/*}"
+  - "!node_modules/**/*.{conf,png,pc,coffee,txt,spec.js,ts,js.flow,html,def,jst,xml,ico,in,ac,sln,dsp,dsw,cmd,vcproj,vcxproj,vcxproj.filters,pdb,exp,obj,lib,map,md,sh,gypi,gyp,h,cpp,yml,log,tlog,Makefile,mk,c,cc,rc,xcodeproj,xcconfig,d.ts,yaml,hpp}"
+
+  # Exclude modules
+  - "!node_modules/@ledgerhq/**/src{,/**/*}"
+  - "!node_modules/7zip-bin-{mac,linux,win}{,/**/*}"
+  - "!node_modules/7zip-bin{,/**/*}"
+  - "!node_modules/ajv/dist{,/**/*}"
+  - "!node_modules/app-builder-bin-{mac,linux,win}{,/**/*}"
+  - "!node_modules/app-builder-bin{,/**/*}"
+  - "!node_modules/app-builder-util{,/**/*}"
+  - "!node_modules/axios/dist{,/**/*}"
+  - "!node_modules/builder-util{,/**/*}"
+  - "!node_modules/d3-*/src{,/**/*}"
+  - "!node_modules/dmg-builder{,/**/*}"
+  - "!node_modules/downshift/preact{,/**/*}"
+  - "!node_modules/electron-builder-lib{,/**/*}"
+  - "!node_modules/electron-builder{,/**/*}"
+  - "!node_modules/electron-rebuild{,/**/*}"
+  - "!node_modules/electron{,/**/*}"
+  - "!node_modules/fuse.js/src{,/**/*}"
+  - "!node_modules/jsqr/test-data{,/**/*}"
+  - "!node_modules/ledger-test-library/{deps,android,djinni,objc}{,/**/*}"
+  - "!node_modules/lodash-{es,fp}{,/**/*}"
+  - "!node_modules/lodash/fp{,/**/*}"
+  - "!node_modules/moment/{src,min}{,/**/*}"
+  - "!node_modules/node-gyp{,/**/*}"
+  - "!node_modules/numeral/{src,min,templates,locales}{,/**/*}"
+  - "!node_modules/opencollective{,/**/*}"
+  - "!node_modules/qrcode/build{,/**/*}"
+  - "!node_modules/raven-js/dist{,/**/*}"
+  - "!node_modules/react-dom/umd{,/**/*}"
+  - "!node_modules/react-qr-reader/src{,/**/*}"
+  - "!node_modules/react/umd{,/**/*}"
+  - "!node_modules/source-map/dist{,/**/*}"
+  - "!node_modules/styled-components/src{,/**/*}"
