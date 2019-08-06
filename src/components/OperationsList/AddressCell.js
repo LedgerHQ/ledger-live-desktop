@@ -10,29 +10,41 @@ const Address = ({ value }: { value: string }) => {
     return <Box />
   }
 
-  const addrSize = value.length / 2
+  const quarter = Math.round(value.length / 4)
 
   // FIXME why not using CSS for this? meaning we might be able to have a left & right which both take 50% & play with overflow & text-align
-  const left = value.slice(0, 10)
-  const right = value.slice(-addrSize)
-  const middle = value.slice(10, -addrSize)
+  const left = value.slice(0, quarter)
+  const middle = value.slice(quarter, -quarter)
+  const right = value.slice(-quarter)
 
   return (
     <Box horizontal color="smoke" ff="Open Sans" fontSize={3}>
-      <div>{left}</div>
-      <AddressEllipsis>{middle}</AddressEllipsis>
-      <div>{right}</div>
+      <Left>{left}</Left>
+      <Middle>{middle}</Middle>
+      <Right>{right}</Right>
     </Box>
   )
 }
 
-const AddressEllipsis = styled.div`
+const Left = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+`
+
+const Right = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  direction: rtl;
+`
+
+const Middle = styled.div`
   display: block;
   flex-shrink: 1;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  min-width: 1em;
 `
 
 const Cell = styled(Box).attrs({
