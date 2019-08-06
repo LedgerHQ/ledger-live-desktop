@@ -16,7 +16,7 @@ const ButtonWrapper = styled.div`
   border-radius: 4px;
   padding: 8px;
   text-align: center;
-  background: ${p => (p.filled ? p.theme.colors.starYellow : p.theme.colors.white)};
+  background: ${p => (p.filled ? p.theme.colors.starYellow : 'transparent')};
   &:hover {
     background: ${p => (p.filled ? p.theme.colors.starYellow : rgba(p.theme.colors.fog, 0.2))};
     border-color: ${p => (p.filled ? p.theme.colors.starYellow : p.theme.colors.dark)};
