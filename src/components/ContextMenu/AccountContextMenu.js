@@ -27,7 +27,7 @@ const mapDispatchToProps = {
 class AccountContextMenu extends PureComponent<Props> {
   getContextMenuItems = () => {
     const { openModal, toggleStarAction, account } = this.props
-    return [
+    const items = [
       {
         label: 'accounts.contextMenu.send',
         Icon: IconSend,
@@ -38,17 +38,23 @@ class AccountContextMenu extends PureComponent<Props> {
         Icon: IconReceive,
         callback: () => openModal(MODAL_RECEIVE, { account }),
       },
-      {
+    ]
+
+    if (account.type === 'Account') {
+      items.push({
         label: 'accounts.contextMenu.edit',
         Icon: IconAccountSettings,
         callback: () => openModal(MODAL_SETTINGS_ACCOUNT, { account }),
-      },
-      {
-        label: 'accounts.contextMenu.star',
-        Icon: IconStar,
-        callback: () => toggleStarAction(account.id),
-      },
-    ]
+      })
+    }
+
+    items.push({
+      label: 'accounts.contextMenu.star',
+      Icon: IconStar,
+      callback: () => toggleStarAction(account.id),
+    })
+
+    return items
   }
 
   render() {
