@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Fragment, Component } from 'react'
+import React, { Fragment, Component, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { openURL } from 'helpers/linking'
 import { Trans, translate } from 'react-i18next'
@@ -15,7 +15,11 @@ import uniq from 'lodash/uniq'
 
 import TrackPage from 'analytics/TrackPage'
 import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
-import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
+import {
+  getAccountCurrency,
+  getAccountUnit,
+  getMainAccount,
+} from '@ledgerhq/live-common/lib/account'
 import { colors } from 'styles/theme'
 
 import type { T } from 'types/common'
@@ -29,7 +33,7 @@ import FormattedVal from 'components/base/FormattedVal'
 import Modal, { ModalBody } from 'components/base/Modal'
 import Text from 'components/base/Text'
 import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
-import OperationC from 'components/OperationsList/Operation'
+import OperationComponent from 'components/OperationsList/Operation'
 
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
 import { accountSelector } from 'reducers/accounts'
@@ -103,6 +107,11 @@ const OpDetailsData = styled(Box).attrs({
   }
 `
 
+const NoMarginWrapper = styled.div`
+  margin-left: -20px;
+  margin-right: -20px;
+`
+
 const B = styled(Bar).attrs({
   color: 'lightGrey',
   size: 1,
@@ -145,7 +154,9 @@ type Props = {
   onClose: () => void,
   marketIndicator: *,
   openModal: typeof openModal,
+  parentOperation?: Operation,
 }
+type openOperationType = 'goBack' | 'subOperation' | 'internalOperation'
 
 const OperationDetails = connect(
   mapStateToProps,
@@ -160,14 +171,14 @@ const OperationDetails = connect(
     confirmationsNb,
     marketIndicator,
     openModal,
+    parentOperation,
   } = props
   if (!operation || !account) return null
-  const mainAccount = parentAccount || (account.type === 'Account' ? account : undefined)
-  if (!mainAccount) return null
+  const mainAccount = getMainAccount(account, parentAccount)
   const { extra, hash, date, senders, type, fee, recipients } = operation
   const { name } = mainAccount
-  const currency = account.type === 'Account' ? account.currency : account.token
-  const unit = account.type === 'Account' ? account.unit : currency.units[0]
+  const currency = getAccountCurrency(account)
+  const unit = getAccountUnit(account)
   const amount = getOperationAmountNumber(operation)
   const isNegative = operation.type === 'OUT'
   const marketColor = getMarketColor({
@@ -184,10 +195,27 @@ const OperationDetails = connect(
   const subOperations = operation.subOperations || []
   const internalOperations = operation.internalOperations || []
 
+  const openOperation = useCallback(
+    (type: openOperationType, operation: Operation, parentOperation?: Operation) => {
+      const data = {
+        operationId: operation.id,
+        accountId: operation.accountId,
+      }
+      if (['subOperation', 'internalOperation'].includes(type)) {
+        data.parentOperation = parentOperation
+        if (type === 'subOperation') {
+          data.parentId = account.id
+        }
+      }
+      openModal(MODAL_OPERATION_DETAILS, data)
+    },
+    [openModal, account],
+  )
   return (
     <ModalBody
       title={t('operationDetails.title')}
       onClose={onClose}
+      onBack={parentOperation ? () => openOperation('goBack', parentOperation) : undefined}
       render={() => (
         <Box flow={3}>
           <Box alignItems="center" mt={1}>
@@ -247,25 +275,18 @@ const OperationDetails = connect(
                   if (!opAccount) return null
 
                   return (
-                    <Box style={{ marginLeft: -20, marginRight: -20 }}>
-                      <OperationC
+                    <NoMarginWrapper key={`${account.id}_${operation.id}`}>
+                      <OperationComponent
                         compact
                         text={opAccount.token.name}
                         operation={op}
                         account={opAccount}
                         parentAccount={account}
-                        key={`${account.id}_${operation.id}`}
-                        onOperationClick={() =>
-                          openModal(MODAL_OPERATION_DETAILS, {
-                            operationId: op.id,
-                            accountId: op.accountId,
-                            parentId: account.id,
-                          })
-                        }
+                        onOperationClick={() => openOperation('subOperation', op, operation)}
                         t={t}
                       />
                       {i < subOperations.length - 1 && <B />}
-                    </Box>
+                    </NoMarginWrapper>
                   )
                 })}
               </Box>
@@ -283,23 +304,17 @@ const OperationDetails = connect(
               </OpDetailsSection>
               <Box>
                 {internalOperations.map((op, i) => (
-                  <Box style={{ marginLeft: -20, marginRight: -20 }}>
-                    <OperationC
+                  <NoMarginWrapper key={`${account.id}_${operation.id}`}>
+                    <OperationComponent
                       compact
                       text={account.currency.name}
                       operation={op}
                       account={account}
-                      key={`${account.id}_${operation.id}`}
-                      onOperationClick={() =>
-                        openModal(MODAL_OPERATION_DETAILS, {
-                          operationId: op.id,
-                          accountId: op.accountId,
-                        })
-                      }
+                      onOperationClick={() => openOperation('internalOperation', op, operation)}
                       t={t}
                     />
                     {i < internalOperations.length - 1 && <B />}
-                  </Box>
+                  </NoMarginWrapper>
                 ))}
               </Box>
             </React.Fragment>
