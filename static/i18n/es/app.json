@@ -249,7 +249,8 @@
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
       "footer": "You need your Ledger Device to complete the update",
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
+      "doItLaterBtn": "Do it later"
     },
     "connectDevice": {
       "title": "{{currencyName}} update",
