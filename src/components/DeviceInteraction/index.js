@@ -15,6 +15,7 @@ type Props = {
   onSuccess?: any => void,
   onFail?: any => void,
   waitBeforeSuccess?: number,
+  disabled?: boolean,
 
   // when true and there is an error, display the error + retry button
   shouldRenderRetry?: boolean,
@@ -88,7 +89,7 @@ class DeviceInteraction extends PureComponent<Props, State> {
   }
 
   render() {
-    const { steps, shouldRenderRetry, renderError, ...props } = this.props
+    const { steps, shouldRenderRetry, renderError, disabled, ...props } = this.props
     const { stepIndex, error, isSuccess, data } = this.state
 
     return (
@@ -99,14 +100,14 @@ class DeviceInteraction extends PureComponent<Props, State> {
             <DeviceInteractionStep
               key={step.id}
               step={step}
-              isError={isError}
+              isError={disabled ? false : isError}
               isFirst={i === 0}
-              isLast={i === steps.length - 1}
-              isPrecedentActive={i === stepIndex - 1}
-              isActive={i === stepIndex}
-              isPassed={i < stepIndex}
-              isSuccess={i < stepIndex || (i === stepIndex && isSuccess)}
-              isFinished={isSuccess}
+              isLast={disabled ? false : i === steps.length - 1}
+              isPrecedentActive={disabled ? false : i === stepIndex - 1}
+              isActive={disabled ? false : i === stepIndex}
+              isPassed={disabled ? false : i < stepIndex}
+              isSuccess={disabled ? false : i < stepIndex || (i === stepIndex && isSuccess)}
+              isFinished={disabled ? false : isSuccess}
               onSuccess={this.handleSuccess}
               onFail={this.handleFail}
               data={data}
