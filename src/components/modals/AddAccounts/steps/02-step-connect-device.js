@@ -23,7 +23,7 @@ function StepConnectDevice({ t, currency, device, setAppOpened }: StepProps) {
       <TrackPage category="AddAccounts" name="Step2" />
       <Box align="center" mb={6}>
         {currency.type === 'TokenCurrency' ? (
-          <ParentCryptoCurrencyIcon currency={currency} size={40} />
+          <ParentCryptoCurrencyIcon currency={currency} bigger />
         ) : (
           <CurrencyCircleIcon size={40} currency={currency} />
         )}
