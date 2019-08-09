@@ -19,7 +19,7 @@ type Props = {
 // from AccountRowItem/index.js TokenBarIndicator
 const NestedIndicator = styled.div`
   height: 44px;
-  width:14px;
+  width: 14px;
 `
 
 class Header extends PureComponent<Props> {

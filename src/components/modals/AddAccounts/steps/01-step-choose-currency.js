@@ -8,9 +8,11 @@ import { listSupportedCurrencies, listTokens } from '@ledgerhq/live-common/lib/c
 import { colors } from 'styles/theme'
 import { useWithTokens } from 'helpers/experimental'
 import TrackPage from 'analytics/TrackPage'
+import { urls } from 'config/urls'
 import SelectCurrency from 'components/SelectCurrency'
 import InfoCircle from 'icons/InfoCircle'
 import Button from 'components/base/Button'
+import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import CurrencyDownStatusAlert from 'components/CurrencyDownStatusAlert'
@@ -62,13 +64,18 @@ export function StepChooseCurrencyFooter({ transitionTo, currency, t }: StepProp
     <Fragment>
       <TrackPage category="AddAccounts" name="Step1" />
       {currency && <CurrencyBadge mr="auto" currency={currency} />}
-      <Button
-        primary
-        disabled={!currency || currency.type === 'TokenCurrency'}
-        onClick={() => transitionTo('connectDevice')}
-      >
-        {t('common.continue')}
-      </Button>
+      {currency && currency.type === 'TokenCurrency' ? (
+        <ExternalLinkButton
+          primary
+          event="More info on Manage ERC20 tokens"
+          url={urls.managerERC20}
+          label={t('common.learnMore')}
+        />
+      ) : (
+        <Button primary disabled={!currency} onClick={() => transitionTo('connectDevice')}>
+          {t('common.continue')}
+        </Button>
+      )}
     </Fragment>
   )
 }
