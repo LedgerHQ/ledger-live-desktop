@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import { openModal } from 'reducers/modals'
-import type { Account } from '@ledgerhq/live-common/lib/types/account'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types/account'
 import { connect } from 'react-redux'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
@@ -11,7 +11,8 @@ import ContextMenuItem from './ContextMenuItem'
 import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../config/constants'
 
 type Props = {
-  account: Account,
+  account: TokenAccount | Account,
+  parentAccount: ?Account,
   children: any,
   openModal: Function,
 }
@@ -22,17 +23,17 @@ const mapDispatchToProps = {
 
 class AccountContextMenu extends PureComponent<Props> {
   getContextMenuItems = () => {
-    const { openModal, account } = this.props
+    const { openModal, account, parentAccount } = this.props
     const items = [
       {
         label: 'accounts.contextMenu.send',
         Icon: IconSend,
-        callback: () => openModal(MODAL_SEND, { account }),
+        callback: () => openModal(MODAL_SEND, { account, parentAccount }),
       },
       {
         label: 'accounts.contextMenu.receive',
         Icon: IconReceive,
-        callback: () => openModal(MODAL_RECEIVE, { account }),
+        callback: () => openModal(MODAL_RECEIVE, { account, parentAccount }),
       },
     ]
 
