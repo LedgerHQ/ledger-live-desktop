@@ -21,7 +21,7 @@ class PartnersPage extends PureComponent<Props> {
         <Box ff="Museo Sans|Regular" fontSize={7} color="dark">
           {t('partners.title')}
         </Box>
-        <Box ff="Museo Sans|Light" fontSize={5} mb={5}>
+        <Box ff="Museo Sans|Light" fontSize={5} mb={5} color="smoke">
           {t('partners.desc')}
         </Box>
         <Box flow={3}>
