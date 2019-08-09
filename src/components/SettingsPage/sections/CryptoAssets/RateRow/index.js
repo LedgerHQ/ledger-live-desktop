@@ -39,6 +39,9 @@ export const RateRowWrapper = styled.div`
 
   > * {
     flex: 1;
+    &:nth-child(1) {
+      flex: 0.75;
+    }
     &:nth-child(2) {
       width: 300px;
     }
@@ -81,7 +84,6 @@ class RateRow extends PureComponent<Props> {
           <Ellipsis>
             <Price
               withEquality
-              withActivityColor="wallet"
               from={from}
               to={to}
               color="graphite"
