@@ -16,7 +16,6 @@ type Props = {
 // NB this is to avoid seeing the parent icon through
 const TokenIconWrapper = styled.div`
   border-radius: 4px;
-  background: white;
 `
 const TokenIcon = styled.div`
   font-size: ${p => p.size / 2}px;
