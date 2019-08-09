@@ -47,6 +47,7 @@ type Props = {
 type State = {
   autoRepair: boolean,
   isBootloader: boolean,
+  isRepairing: boolean
 }
 
 const usbIcon = <IconUsb size={16} />
@@ -63,6 +64,7 @@ class GenuineCheck extends PureComponent<Props, State> {
   state = {
     isBootloader: false,
     autoRepair: false,
+    isRepairing: false
   }
 
   componentWillUnmount() {
@@ -158,9 +160,41 @@ class GenuineCheck extends PureComponent<Props, State> {
 
   onDoneAutoRepair = () => this.setState({ autoRepair: false })
 
+  setRapairing = (status) => this.setState({ isRepairing: status })
+
+  renderRepair() {
+    const { onSuccess, device, ...props } = this.props
+    const { isBootloader, isRepairing } = this.state
+
+    const continueT = props.t('common.continue')
+
+    if (!isRepairing && device) {
+      if (!isBootloader) {
+        return null
+      }
+      return (
+        <Box fontSize={3} color="dark" align="center" cursor="text" ff="Open Sans|SemiBold">
+          <Box mt={4} mb={2}>
+            <Trans
+              i18nKey="genuinecheck.deviceInBootloader"
+              values={{
+                button: continueT,
+              }}
+            />
+          </Box>
+          <Button primary onClick={this.onStartAutoRepair} event="RepairBootloaderButton">
+            {continueT}
+          </Button>
+        </Box>
+      )
+    }
+
+    return <ConnectTroubleshooting onRepair={this.setRapairing} />
+  }
+
   render() {
     const { onSuccess, device, ...props } = this.props
-    const { autoRepair, isBootloader } = this.state
+    const { autoRepair, isBootloader, isRepairing } = this.state
     const steps = [
       {
         id: 'device',
@@ -199,43 +233,24 @@ class GenuineCheck extends PureComponent<Props, State> {
       },
     ]
 
-    const continueT = props.t('common.continue')
-
     return (
       <Fragment>
-        <DeviceInteraction
-          key={device ? device.path : null}
-          {...props}
-          waitBeforeSuccess={500}
-          steps={steps}
-          onSuccess={onSuccess}
-          onFail={this.handleFail}
-          renderError={(error, retry) =>
-            device && isBootloader ? null : (
-              <ErrorDescContainer error={error} onRetry={retry} mt={4} />
-            )
-          }
-        />
+          <DeviceInteraction
+            disabled={isRepairing}
+            key={device ? device.path : null}
+            {...props}
+            waitBeforeSuccess={500}
+            steps={steps}
+            onSuccess={onSuccess}
+            onFail={this.handleFail}
+            renderError={(error, retry) =>
+              device && isBootloader ? null : (
+                <ErrorDescContainer error={error} onRetry={retry} mt={4} />
+              )
+            }
+          />
         {autoRepair ? <AutoRepair onDone={this.onDoneAutoRepair} /> : null}
-        {device ? (
-          isBootloader ? (
-            <Box fontSize={3} color="dark" align="center" cursor="text" ff="Open Sans|SemiBold">
-              <Box mt={4} mb={2}>
-                <Trans
-                  i18nKey="genuinecheck.deviceInBootloader"
-                  values={{
-                    button: continueT,
-                  }}
-                />
-              </Box>
-              <Button primary onClick={this.onStartAutoRepair} event="RepairBootloaderButton">
-                {continueT}
-              </Button>
-            </Box>
-          ) : null
-        ) : (
-          <ConnectTroubleshooting />
-        )}
+        {this.renderRepair()}
       </Fragment>
     )
   }

@@ -9,9 +9,10 @@ import RepairDeviceButton from 'components/SettingsPage/RepairDeviceButton'
 
 type Props = {
   appearsAfterDelay?: number,
+  onRepair?: boolean => void,
 }
 
-const ConnectTroubleshooting = ({ appearsAfterDelay = 20000 }: Props) => {
+const ConnectTroubleshooting = ({ appearsAfterDelay = 20000, onRepair }: Props) => {
   const [visible, setVisible] = useState(false)
   useEffect(() => {
     const timeout = setTimeout(() => setVisible(true), appearsAfterDelay)
@@ -27,7 +28,7 @@ const ConnectTroubleshooting = ({ appearsAfterDelay = 20000 }: Props) => {
       </Box>
       <Box horizontal>
         <ConnectTroubleshootingHelpButton />
-        <RepairDeviceButton />
+        <RepairDeviceButton onRepair={onRepair} />
       </Box>
     </Box>
   ) : null
