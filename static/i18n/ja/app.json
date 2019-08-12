@@ -244,7 +244,7 @@
     "overview": {
       "title": "Ledger Live accounts update",
       "done": "Ledger Live accounts update completed",
-      "description": "New features in Ledger Live requires an update of your accounts.",
+      "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
       "footer": "You need your Ledger Device to complete the update",
