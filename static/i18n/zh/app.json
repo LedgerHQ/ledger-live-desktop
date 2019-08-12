@@ -244,7 +244,7 @@
     "overview": {
       "title": "Ledger Live 账户可更新",
       "done": "Ledger Live 账户已更新",
-      "description": "为运行 Ledger Live 中的新功能，Ledger Live 需要更新您的账户。",
+      "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} 账户需要更新：",
       "currency_plural": "{{count}} {{currency}} 账户需要更新：",
       "footer": "您需要您的 Ledger 设备来完成更新",
