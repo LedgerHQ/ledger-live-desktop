@@ -49,14 +49,47 @@ const Row = styled.div`
 `
 const rowHeight = 40 // Fixme We should pass this as a prop for dynamic rows?
 class MenuList extends PureComponent<*> {
+  state = {
+    children: null,
+  }
+
+  static getDerivedStateFromProps({ children }, state) {
+    if (children !== state.children) {
+      const currentIndex = Math.max(children.findIndex(({ props: { isFocused } }) => isFocused), 0)
+
+      return {
+        children,
+        currentIndex,
+      }
+    }
+    return null
+  }
+
+  componentDidMount() {
+    this.scrollList()
+  }
+
+  componentDidUpdate() {
+    this.scrollList()
+  }
+
+  scrollList = () => {
+    const { currentIndex } = this.state
+    if (this.list && this.list.current) {
+      this.list.current.scrollToItem(currentIndex)
+    }
+  }
+
+  list = React.createRef()
+
   render() {
     const {
       options,
-      children,
       maxHeight,
       getValue,
       selectProps: { noOptionsMessage },
     } = this.props
+    const { children } = this.state
     const [value] = getValue()
     const initialOffset = options.indexOf(value) * rowHeight
     const minHeight = Math.min(...[maxHeight, rowHeight * children.length])
@@ -74,6 +107,7 @@ class MenuList extends PureComponent<*> {
 
     return (
       <List
+        ref={this.list}
         width="100%"
         height={minHeight}
         overscanCount={8}
