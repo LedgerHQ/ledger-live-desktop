@@ -58,7 +58,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     if (this.state.isLoading) return
     const { push, onRepair } = this.props
     if (onRepair) {
-      onRepair(true);
+      onRepair(true)
     }
     this.timeout = setTimeout(() => this.setState({ isLoading: true }), 500)
     this.sub = firmwareRepair.send({ version }).subscribe({
@@ -76,7 +76,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
           push('/manager')
         })
         if (onRepair) {
-          onRepair(false);
+          onRepair(false)
         }
       },
     })

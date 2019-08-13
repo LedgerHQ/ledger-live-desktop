@@ -47,7 +47,7 @@ type Props = {
 type State = {
   autoRepair: boolean,
   isBootloader: boolean,
-  isRepairing: boolean
+  isRepairing: boolean,
 }
 
 const usbIcon = <IconUsb size={16} />
@@ -64,7 +64,7 @@ class GenuineCheck extends PureComponent<Props, State> {
   state = {
     isBootloader: false,
     autoRepair: false,
-    isRepairing: false
+    isRepairing: false,
   }
 
   componentWillUnmount() {
@@ -160,7 +160,7 @@ class GenuineCheck extends PureComponent<Props, State> {
 
   onDoneAutoRepair = () => this.setState({ autoRepair: false })
 
-  setRapairing = (status) => this.setState({ isRepairing: status })
+  setRapairing = status => this.setState({ isRepairing: status })
 
   renderRepair() {
     const { onSuccess, device, ...props } = this.props
@@ -235,20 +235,20 @@ class GenuineCheck extends PureComponent<Props, State> {
 
     return (
       <Fragment>
-          <DeviceInteraction
-            disabled={isRepairing}
-            key={device ? device.path : null}
-            {...props}
-            waitBeforeSuccess={500}
-            steps={steps}
-            onSuccess={onSuccess}
-            onFail={this.handleFail}
-            renderError={(error, retry) =>
-              device && isBootloader ? null : (
-                <ErrorDescContainer error={error} onRetry={retry} mt={4} />
-              )
-            }
-          />
+        <DeviceInteraction
+          disabled={isRepairing}
+          key={device ? device.path : null}
+          {...props}
+          waitBeforeSuccess={500}
+          steps={steps}
+          onSuccess={onSuccess}
+          onFail={this.handleFail}
+          renderError={(error, retry) =>
+            device && isBootloader ? null : (
+              <ErrorDescContainer error={error} onRetry={retry} mt={4} />
+            )
+          }
+        />
         {autoRepair ? <AutoRepair onDone={this.onDoneAutoRepair} /> : null}
         {this.renderRepair()}
       </Fragment>

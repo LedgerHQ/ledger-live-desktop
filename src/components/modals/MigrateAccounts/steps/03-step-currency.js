@@ -7,7 +7,7 @@ import { reduce } from 'rxjs/operators'
 import { Trans } from 'react-i18next'
 
 import type { Account } from '@ledgerhq/live-common/lib/types/account'
-import { migrateAccounts } from '@ledgerhq/live-common/lib/account'
+import { findAccountMigration, migrateAccounts } from '@ledgerhq/live-common/lib/account'
 import last from 'lodash/last'
 import Text from 'components/base/Text'
 import TrackPage from 'analytics/TrackPage'
@@ -79,7 +79,15 @@ class StepCurrency extends PureComponent<Props> {
 
   startScanAccountsDevice() {
     this.unsub()
-    const { currency, device, setScanStatus, accounts, replaceAccounts } = this.props
+    const {
+      currency,
+      device,
+      setScanStatus,
+      accounts,
+      replaceAccounts,
+      starredAccountIds,
+      replaceStarAccountId,
+    } = this.props
 
     if (!currency || !device) return
 
@@ -88,6 +96,12 @@ class StepCurrency extends PureComponent<Props> {
       .pipe(reduce<Account>((all, acc) => all.concat(acc), []))
       .subscribe({
         next: scannedAccounts => {
+          accounts.forEach(a => {
+            const maybeMigration = findAccountMigration(a, scannedAccounts)
+            if (maybeMigration && starredAccountIds.includes(a.id)) {
+              replaceStarAccountId({ oldId: a.id, newId: maybeMigration.id })
+            }
+          })
           replaceAccounts(migrateAccounts({ scannedAccounts, existingAccounts: accounts }))
           setScanStatus('finished')
         },
