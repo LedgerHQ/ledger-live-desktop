@@ -7,11 +7,9 @@ import type { Currency } from '@ledgerhq/live-common/lib/types'
 import { setExchangePairsAction } from 'actions/settings'
 import ExchangeSelect from 'components/SelectExchange'
 import Box from 'components/base/Box'
-import { PlaceholderLine } from 'components/Placeholder'
 import styled from 'styled-components'
 import PriceGraph from './PriceGraph'
 import Price from '../../../../Price'
-import Ellipsis from '../../../../base/Ellipsis'
 import type { TimeRange } from '../../../../../reducers/settings'
 
 type Props = {
@@ -58,6 +56,16 @@ const RateTypeBar = styled.div`
     p.theme.colors[p.currencyType === 'FiatCurrency' ? 'wallet' : 'identity']};
 `
 
+const NoDataContainer = styled(Box)`
+  white-space: nowrap;
+`
+
+const NoData = () => (
+  <NoDataContainer ff="Open Sans|SemiBold" color="gray" fontSize={4}>
+    <Trans style={{whiteSpace: 'nowrap'}} i18nKey="settings.rates.noCounterValue" />
+  </NoDataContainer>
+)
+
 class RateRow extends PureComponent<Props> {
   handleChangeExchange = exchange => {
     const { from, to } = this.props
@@ -78,17 +86,15 @@ class RateRow extends PureComponent<Props> {
           <Trans i18nKey="settings.rates.fromTo" values={{ from: from.ticker, to: to.ticker }} />
         </Box>
         <div>
-          <Ellipsis>
-            <Price
-              withEquality
-              withActivityColor="wallet"
-              from={from}
-              to={to}
-              color="graphite"
-              fontSize={3}
-              placeholder={<PlaceholderLine width={16} height={2} />}
-            />
-          </Ellipsis>
+          <Price
+            withEquality
+            withActivityColor="wallet"
+            from={from}
+            to={to}
+            color="graphite"
+            fontSize={3}
+            placeholder={<NoData />}
+          />
         </div>
         <div>
           <PriceGraph
@@ -98,6 +104,7 @@ class RateRow extends PureComponent<Props> {
             width={150}
             height={40}
             exchange={exchange}
+            placeholder={null}
           />
         </div>
         <ExchangeSelect

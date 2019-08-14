@@ -39,11 +39,12 @@ class PriceGraph extends Component<{
   data: Array<{ date: Date, value: number }>,
   width: number,
   height: number,
+  placeholder: ?any,
 }> {
   render() {
-    const { isAvailable, data, width, height, from, to } = this.props
+    const { isAvailable, data, width, height, from, to, placeholder } = this.props
     if (!isAvailable) {
-      return <PlaceholderLine width={16} height={2} />
+      return placeholder !== undefined ? placeholder : <PlaceholderLine width={16} height={2} />
     }
     const x = d3
       .scaleLinear()

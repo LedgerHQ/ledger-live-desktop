@@ -101,6 +101,8 @@ class SelectExchange extends Component<
     const options = exchanges ? exchanges.map(e => ({ value: e.id, label: e.name, ...e })) : []
     const value = options.find(e => e.id === exchangeId)
 
+    const noExchanges = options.length === 0
+
     return error ? (
       <Box
         style={{ wordWrap: 'break-word', width: 250 }}
@@ -127,7 +129,10 @@ class SelectExchange extends Component<
           options={options}
           onChange={onChange}
           isLoading={isLoading}
-          placeholder={t('common.selectExchange')}
+          isDisabled={noExchanges}
+          placeholder={
+            noExchanges ? t('common.selectExchangeNoOptionAtAll') : t('common.selectExchange')
+          }
           noOptionsMessage={({ inputValue }) =>
             inputValue
               ? t('common.selectExchangeNoOption', { exchangeName: inputValue })
