@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { openURL } from 'helpers/linking'
 import { Trans, translate } from 'react-i18next'
 import styled from 'styled-components'
+import { push } from 'react-router-redux'
 import moment from 'moment'
 import {
   getOperationAmountNumber,
@@ -44,6 +45,7 @@ import IconChevronRight from 'icons/ChevronRight'
 import CounterValue from 'components/CounterValue'
 import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 import Ellipsis from '../base/Ellipsis'
+import Link from '../base/Link'
 
 const OpDetailsSection = styled(Box).attrs({
   horizontal: true,
@@ -105,6 +107,10 @@ const OpDetailsData = styled(Box).attrs({
     color: ${colors.wallet};
     font-weight: 400;
   }
+
+  &:hover ${Link} {
+    text-decoration: underline;
+  }
 `
 
 const NoMarginWrapper = styled.div`
@@ -119,6 +125,7 @@ const B = styled(Bar).attrs({
 
 const mapDispatchToProps = {
   openModal,
+  push,
 }
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
@@ -142,19 +149,30 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
     ? confirmationsNbForCurrencySelector(state, { currency: mainCurrency })
     : 0
   const operation = account ? findOperationInAccount(account, operationId) : null
-  return { marketIndicator, account, parentAccount, operation, confirmationsNb }
+  return {
+    marketIndicator,
+    account,
+    parentAccount,
+    operation,
+    confirmationsNb,
+    currentLocation: state.router.location.pathname,
+  }
 }
 
 type Props = {
   t: T,
   operation: ?Operation,
   account: ?(Account | TokenAccount),
+  accountId: string,
   parentAccount: ?Account,
+  parentId: ?string,
   confirmationsNb: number,
   onClose: () => void,
   marketIndicator: *,
   openModal: typeof openModal,
   parentOperation?: Operation,
+  push: string => void,
+  currentLocation: string,
 }
 type openOperationType = 'goBack' | 'subOperation' | 'internalOperation'
 
@@ -167,12 +185,17 @@ const OperationDetails = connect(
     onClose,
     operation,
     account,
+    accountId,
     parentAccount,
+    parentId,
     confirmationsNb,
     marketIndicator,
     openModal,
     parentOperation,
+    push,
+    currentLocation,
   } = props
+
   if (!operation || !account) return null
   const mainAccount = getMainAccount(account, parentAccount)
   const { extra, hash, date, senders, type, fee, recipients } = operation
@@ -213,6 +236,13 @@ const OperationDetails = connect(
     },
     [openModal, account],
   )
+
+  const goToAccount = useCallback(() => {
+    if (currentLocation !== `/account/${accountId}`) {
+      push(`/account${parentId ? `/${parentId}` : `/${accountId}`}`)
+    }
+    onClose()
+  }, [parentId, accountId, push, onClose, currentLocation])
 
   return (
     <ModalBody
@@ -332,7 +362,9 @@ const OperationDetails = connect(
           <Box horizontal flow={2}>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.account')}</OpDetailsTitle>
-              <OpDetailsData>{name}</OpDetailsData>
+              <OpDetailsData>
+                <Link onClick={goToAccount}>{name}</Link>
+              </OpDetailsData>
             </Box>
             <Box flex={1}>
               <OpDetailsTitle>{t('operationDetails.date')}</OpDetailsTitle>
