@@ -62,10 +62,12 @@ class Currencies extends PureComponent<Props, State> {
           title={t('settings.tabs.currencies')}
           desc={t('settings.currencies.desc')}
           renderRight={
-            <Show visible={sectionVisible} onClick={this.toggleCurrencySection}>
+            <Show visible={sectionVisible}>
               <IconAngleDown size={24} />
             </Show>
           }
+          onClick={this.toggleCurrencySection}
+          style={{ cursor: 'pointer' }}
         />
         {sectionVisible && (
           <Body>
