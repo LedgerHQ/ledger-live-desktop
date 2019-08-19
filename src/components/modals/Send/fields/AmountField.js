@@ -39,10 +39,10 @@ class AmountField extends Component<
   componentDidMount() {
     this.resync()
   }
-  componentDidUpdate(nextProps: *) {
+  componentDidUpdate(prevProps: *) {
     if (
-      nextProps.account !== this.props.account ||
-      nextProps.transaction !== this.props.transaction
+      prevProps.account !== this.props.account ||
+      prevProps.transaction !== this.props.transaction
     ) {
       this.resync()
     }
@@ -63,6 +63,7 @@ class AmountField extends Component<
       if (this.syncId !== syncId) return
       this.setState({ validTransactionError: null, maxAmount })
     } catch (validTransactionError) {
+      if (this.syncId !== syncId) return
       this.setState({ validTransactionError, maxAmount: null })
     }
   }

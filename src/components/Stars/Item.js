@@ -9,10 +9,14 @@ import { getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
 import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
-import CryptoCurrencyIcon from '../CryptoCurrencyIcon'
+import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 import Box from '../base/Box/Box'
 
 const AccountName = styled(Text)``
+const ParentCryptoCurrencyIconWrapper = styled.div`
+  width: 20px;
+`
+
 const ItemWrapper = styled.div`
   height: 60px;
   flex: 1;
@@ -72,11 +76,9 @@ const Item = ({
           onClick={onAccountClick}
         >
           <Box horizontal ff="Open Sans|SemiBold" flex={1} flow={3} alignItems="center">
-            <CryptoCurrencyIcon
-              inactive={!active}
-              currency={getAccountCurrency(account)}
-              size={16}
-            />
+            <ParentCryptoCurrencyIconWrapper>
+              <ParentCryptoCurrencyIcon inactive={!active} currency={getAccountCurrency(account)} />
+            </ParentCryptoCurrencyIconWrapper>
             <Box vertical flex={1}>
               <AccountName color="smoke">
                 {account.type === 'Account' ? account.name : account.token.name}
@@ -89,7 +91,6 @@ const Item = ({
                 unit={account.unit || account.token.units[0]}
                 showCode
                 val={account.balance}
-                disableRounding
               />
             </Box>
           </Box>

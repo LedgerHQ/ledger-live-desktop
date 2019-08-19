@@ -24,6 +24,8 @@ import StepCurrency, { StepCurrencyFooter } from './steps/03-step-currency'
 import { getCurrentDevice } from '../../../reducers/devices'
 import { replaceAccounts } from '../../../actions/accounts'
 import { closeModal } from '../../../reducers/modals'
+import { replaceStarAccountId } from '../../../actions/settings'
+import { starredAccountIdsSelector } from '../../../reducers/settings'
 
 const createSteps = () => {
   const onBack = ({ transitionTo }: StepProps) => {
@@ -52,6 +54,8 @@ const createSteps = () => {
 
 type ScanStatus = 'idle' | 'scanning' | 'error' | 'finished'
 export type StepProps = DefaultStepProps & {
+  starredAccountIds: string[],
+  replaceStarAccountId: ({ oldId: string, newId: string }) => void,
   migratableAccounts: { [key: string]: Account[] },
   migratedAccounts: { [key: string]: Account[] },
   err: ?Error,
@@ -126,12 +130,16 @@ class MigrateAccounts extends PureComponent<*, State> {
       migratableAccounts,
       totalMigratableAccounts,
       accounts,
+      starredAccountIds,
       replaceAccounts,
+      replaceStarAccountId,
     } = this.props
     const { stepId, isAppOpened, err, scanStatus, currency } = this.state
 
     const stepperProps = {
+      starredAccountIds,
       replaceAccounts,
+      replaceStarAccountId,
       migratableAccounts,
       totalMigratableAccounts,
       accounts,
@@ -176,6 +184,7 @@ class MigrateAccounts extends PureComponent<*, State> {
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
   accounts: accountsSelector,
+  starredAccountIds: starredAccountIdsSelector,
   totalMigratableAccounts: state => accountsSelector(state).filter(canBeMigrated).length,
   migratableAccounts: state =>
     groupBy(accountsSelector(state).filter(canBeMigrated), 'currency.id'),
@@ -183,6 +192,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   replaceAccounts,
+  replaceStarAccountId,
   closeModal,
 }
 export default compose(

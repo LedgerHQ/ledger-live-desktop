@@ -128,7 +128,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             unit={data[0].unit}
           >
             <Wrapper>
-              <div style={{ width: 'auto', marginRight: 8 }}>
+              <div style={{ width: 'auto', marginRight: 20 }}>
                 <FormattedVal
                   key={secondaryKey}
                   animateTicker

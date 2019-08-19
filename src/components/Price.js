@@ -74,8 +74,7 @@ const Price = ({
 
   return (
     <PriceWrapper color={color} fontSize={fontSize}>
-      <IconActivity size={12} style={{ color: activityColor }} />
-      {' '}
+      <IconActivity size={12} style={{ color: activityColor, marginRight: 4 }} />
       {!withEquality ? null : (
         <>
           <CurrencyUnitValue value={value} unit={effectiveUnit} showCode />

@@ -34,7 +34,7 @@ class AccountCard extends PureComponent<Props> {
     const { account, parentAccount, range, hidden, ...props } = this.props
 
     return (
-      <AccountContextMenu account={account}>
+      <AccountContextMenu account={account} parentAccount={parentAccount}>
         <Card
           {...props}
           style={{ display: hidden && 'none' }}

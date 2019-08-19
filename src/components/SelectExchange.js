@@ -42,7 +42,7 @@ class SelectExchange extends Component<
   },
 > {
   state = {
-    prevFromTo: '', // eslint-disable-line
+    prevFromTo: '',
     exchanges: null,
     error: null,
     isLoading: false,
@@ -103,7 +103,8 @@ class SelectExchange extends Component<
 
     const noExchanges = options.length === 0
 
-    return error ? (
+    // $FlowFixMe
+    return error && error.status !== 400 ? (
       <Box
         style={{ wordWrap: 'break-word', width: 250 }}
         color="alertRed"
