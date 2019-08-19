@@ -276,7 +276,7 @@ const OperationDetails = connect(
                   if (!opAccount) return null
 
                   return (
-                    <NoMarginWrapper key={`${account.id}_${operation.id}`}>
+                    <NoMarginWrapper key={`${op.id}`}>
                       <OperationComponent
                         compact
                         text={opAccount.token.name}
@@ -305,7 +305,7 @@ const OperationDetails = connect(
               </OpDetailsSection>
               <Box>
                 {internalOperations.map((op, i) => (
-                  <NoMarginWrapper key={`${account.id}_${operation.id}`}>
+                  <NoMarginWrapper key={`${op.id}`}>
                     <OperationComponent
                       compact
                       text={account.currency.name}
