@@ -92,7 +92,7 @@ const Container = styled(Box).attrs({
   px: 3,
   bg: p => colors[p.status] || 'wallet',
   color: 'white',
-  mt: -20,
+  mt: -32,
   mb: 20,
   fontSize: 4,
   ff: 'Open Sans|SemiBold',

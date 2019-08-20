@@ -155,7 +155,6 @@ class DashboardPage extends PureComponent<Props> {
 }
 // This forces only one visible top banner at a time
 export const TopBannerContainer = styled.div`
-  margin-top: 8px;
   z-index: 19;
 
   & > *:not(:first-child) {

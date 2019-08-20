@@ -27,7 +27,7 @@ class AccountsHeader extends PureComponent<Props> {
   render() {
     const { t } = this.props
     return (
-      <Box horizontal pb={6}>
+      <Box horizontal style={{ paddingBottom: 32 }}>
         <Box grow ff="Museo Sans|Regular" fontSize={7} color="dark">
           {t('accounts.title')}
         </Box>

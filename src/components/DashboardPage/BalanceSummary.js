@@ -47,7 +47,7 @@ class PortfolioBalanceSummary extends PureComponent<Props> {
   render() {
     const { portfolio, range, chartColor, chartId, Header } = this.props
     return (
-      <Card p={0} py={5}>
+      <Card p={0} py={5} style={{ marginTop: 32 }}>
         {Header ? (
           <Box px={6}>
             <Header portfolio={portfolio} />
