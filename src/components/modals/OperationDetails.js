@@ -211,6 +211,7 @@ const OperationDetails = connect(
     },
     [openModal, account],
   )
+
   return (
     <ModalBody
       title={t('operationDetails.title')}
@@ -275,7 +276,7 @@ const OperationDetails = connect(
                   if (!opAccount) return null
 
                   return (
-                    <NoMarginWrapper key={`${account.id}_${operation.id}`}>
+                    <NoMarginWrapper key={`${op.id}`}>
                       <OperationComponent
                         compact
                         text={opAccount.token.name}
@@ -304,7 +305,7 @@ const OperationDetails = connect(
               </OpDetailsSection>
               <Box>
                 {internalOperations.map((op, i) => (
-                  <NoMarginWrapper key={`${account.id}_${operation.id}`}>
+                  <NoMarginWrapper key={`${op.id}`}>
                     <OperationComponent
                       compact
                       text={account.currency.name}
@@ -346,9 +347,6 @@ const OperationDetails = connect(
                     <OpDetailsData>
                       <FormattedVal unit={mainAccount.unit} showCode val={fee} color="smoke" />
                       <Box horizontal>
-                        <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
-                          {'≈'}
-                        </Box>
                         <CounterValue
                           color="grey"
                           date={date}
@@ -357,6 +355,11 @@ const OperationDetails = connect(
                           value={fee}
                           alwaysShowSign={false}
                           subMagnitude={1}
+                          prefix={
+                            <Box mr={1} color="grey" style={{ lineHeight: 1.2 }}>
+                              {'≈'}
+                            </Box>
+                          }
                         />
                       </Box>
                     </OpDetailsData>

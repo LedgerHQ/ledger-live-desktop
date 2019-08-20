@@ -16,7 +16,7 @@ import FormattedVal from 'components/base/FormattedVal'
 
 import type { State } from 'reducers'
 
-type OwnProps = {
+type OwnProps = {|
   // wich market to query
   currency: Currency,
 
@@ -30,13 +30,19 @@ type OwnProps = {
   subMagnitude?: number,
 
   placeholder?: React$Node,
-}
 
-type Props = OwnProps & {
-  // from reducers
+  prefix: React$Node,
+|}
+
+type StateProps = {|
   counterValueCurrency: Currency,
   value: ?number,
-}
+|}
+
+type Props = {|
+  ...OwnProps,
+  ...StateProps,
+|}
 
 const mapStateToProps = (state: State, props: OwnProps) => {
   const { currency, value, date, subMagnitude } = props
@@ -68,20 +74,33 @@ class CounterValue extends PureComponent<Props> {
   static defaultProps = {
     alwaysShowSign: true, // FIXME this shouldn't be true by default
   }
+
   render() {
-    const { value, counterValueCurrency, date, alwaysShowSign, placeholder, ...props } = this.props
+    const {
+      value,
+      counterValueCurrency,
+      date,
+      alwaysShowSign,
+      placeholder,
+      prefix,
+      ...props
+    } = this.props
+
     if (!value) {
       return placeholder || null
     }
 
     return (
-      <FormattedVal
-        val={value}
-        unit={counterValueCurrency.units[0]}
-        showCode
-        alwaysShowSign={alwaysShowSign}
-        {...props}
-      />
+      <>
+        {prefix || null}
+        <FormattedVal
+          val={value}
+          unit={counterValueCurrency.units[0]}
+          showCode
+          alwaysShowSign={alwaysShowSign}
+          {...props}
+        />
+      </>
     )
   }
 }
