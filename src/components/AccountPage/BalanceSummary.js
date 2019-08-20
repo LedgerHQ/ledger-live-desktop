@@ -97,7 +97,7 @@ class AccountBalanceSummary extends PureComponent<Props> {
           />
         </Box>
 
-        <Box ff="Open Sans" fontSize={4} color="graphite" pt={6}>
+        <Box ff="Open Sans" fontSize={4} color="graphite" pt={5}>
           <Chart
             id={chartId}
             color={chartColor}

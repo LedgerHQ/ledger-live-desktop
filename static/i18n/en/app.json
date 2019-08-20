@@ -84,6 +84,11 @@
     "second_plural": "Seconds",
     "hour": "Hour",
     "hour_plural": "Hours",
+    "range": {
+      "week": "1W",
+      "month": "1M",
+      "year": "1Y"
+    },
     "since": {
       "day": "past day",
       "week": "past week",

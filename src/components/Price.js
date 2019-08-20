@@ -29,6 +29,7 @@ type OwnProps = {
   date?: Date,
   color?: string,
   fontSize?: number,
+  iconSize?: number,
   placeholder?: React$Node,
 }
 
@@ -45,6 +46,7 @@ const PriceWrapper = styled(Box).attrs({
 })`
   line-height: 1.2;
   white-space: pre;
+  align-items: baseline;
 `
 
 const Price = ({
@@ -59,6 +61,7 @@ const Price = ({
   placeholder,
   color,
   fontSize,
+  iconSize,
 }: Props) => {
   if (!counterValue || counterValue.isZero()) return placeholder || null
 
@@ -74,7 +77,7 @@ const Price = ({
 
   return (
     <PriceWrapper color={color} fontSize={fontSize}>
-      <IconActivity size={12} style={{ color: activityColor, marginRight: 4 }} />
+      <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
       {!withEquality ? null : (
         <>
           <CurrencyUnitValue value={value} unit={effectiveUnit} showCode />

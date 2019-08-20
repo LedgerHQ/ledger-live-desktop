@@ -12,7 +12,7 @@ import type { T } from 'types/common'
 import { setSelectedTimeRange } from 'actions/settings'
 import type { TimeRange } from 'reducers/settings'
 
-import { BalanceTotal, BalanceSinceDiff, BalanceSincePercent } from 'components/BalanceInfos'
+import { BalanceTotal, BalanceDiff } from 'components/BalanceInfos'
 import Box, { Tabbable } from 'components/base/Box'
 import FormattedVal from 'components/base/FormattedVal'
 import Price from 'components/Price'
@@ -55,10 +55,9 @@ const SwapButton = styled(Tabbable).attrs({
   color: ${p => p.theme.colors.fog};
   cursor: pointer;
   display: flex;
-  height: 49px;
+  height: 53px;
   justify-content: center;
-  margin-right: 12px;
-  margin-top: 2px;
+  margin-right: 16px;
   width: 25px;
 
   &:hover {
@@ -109,15 +108,17 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
     const secondaryKey = data[1].unit.code
 
     return (
-      <Box flow={4} mb={2}>
+      <Box flow={5}>
         <Box horizontal>
-          <SwapButton onClick={() => setCountervalueFirst(!countervalueFirst)}>
-            <Swap />
-          </SwapButton>
+          {isAvailable && (
+            <SwapButton onClick={() => setCountervalueFirst(!countervalueFirst)}>
+              <Swap />
+            </SwapButton>
+          )}
           <BalanceTotal
             key={primaryKey}
             style={{
-              cursor: 'pointer',
+              cursor: isAvailable ? 'pointer' : '',
               overflow: 'hidden',
               flexShrink: 1,
             }}
@@ -127,7 +128,7 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
             totalBalance={data[0].balance}
             unit={data[0].unit}
           >
-            <Wrapper>
+            <Wrapper style={{ marginTop: 4 }}>
               <div style={{ width: 'auto', marginRight: 20 }}>
                 <FormattedVal
                   key={secondaryKey}
@@ -147,32 +148,28 @@ class AccountBalanceSummaryHeader extends PureComponent<Props> {
                 withActivityCurrencyColor
                 withEquality
                 color="warmGrey"
-                fontSize={4}
+                fontSize={6}
+                iconSize={16}
               />
             </Wrapper>
           </BalanceTotal>
-          <Box>
-            <PillsDaysCount selected={selectedTimeRange} onChange={this.handleChangeSelectedTime} />
-          </Box>
         </Box>
-        <Box key={primaryKey} horizontal justifyContent="center" flow={7}>
-          <BalanceSincePercent
-            isAvailable
+        <Box
+          key={primaryKey}
+          horizontal
+          alignItems="center"
+          justifyContent={isAvailable ? 'space-between' : 'flex-end'}
+          flow={7}
+        >
+          <BalanceDiff
             t={t}
-            alignItems="center"
             totalBalance={data[0].balance}
             valueChange={data[0].valueChange}
-            since={selectedTimeRange}
-          />
-          <BalanceSinceDiff
-            isAvailable
-            t={t}
             unit={data[0].unit}
-            alignItems="center"
-            totalBalance={data[0].balance}
-            valueChange={data[0].valueChange}
             since={selectedTimeRange}
+            isAvailable={isAvailable}
           />
+          <PillsDaysCount selected={selectedTimeRange} onChange={this.handleChangeSelectedTime} />
         </Box>
       </Box>
     )
