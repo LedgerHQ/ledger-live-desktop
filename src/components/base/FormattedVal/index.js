@@ -19,8 +19,8 @@ import { getMarketColor } from 'styles/helpers'
 import Box from 'components/base/Box'
 import FlipTicker from 'components/base/FlipTicker'
 
-import IconBottom from 'icons/Bottom'
-import IconTop from 'icons/Top'
+import IconBottom from 'icons/ArrowDownRight'
+import IconTop from 'icons/ArrowUpRight'
 import Ellipsis from '../Ellipsis'
 
 const T = styled(Box).attrs({
@@ -31,9 +31,9 @@ const T = styled(Box).attrs({
   line-height: 1.2;
   white-space: pre;
   text-overflow: ellipsis;
-  display: block;
+  display: ${p => (p.inline ? 'inline-block' : 'block')};
   flex-shrink: 1;
-  width: 100%;
+  width: ${p => (p.inline ? '' : '100%')};
   overflow: hidden;
 `
 
@@ -56,6 +56,8 @@ type OwnProps = {
   disableRounding?: boolean,
   isPercent?: boolean,
   subMagnitude?: number,
+  prefix?: string,
+  suffix?: string,
 }
 
 const mapStateToProps = (state: State, _props: OwnProps) => ({
@@ -83,6 +85,8 @@ function FormattedVal(props: Props) {
     color,
     ellipsis,
     subMagnitude,
+    prefix,
+    suffix,
     ...p
   } = props
   let { val } = props
@@ -115,6 +119,9 @@ function FormattedVal(props: Props) {
     })
   }
 
+  if (prefix) text = prefix + text
+  if (suffix) text += suffix
+
   if (animateTicker && !DISABLE_TICKER_ANIMATION) {
     text = <FlipTicker value={text} />
   } else if (ellipsis) {
@@ -129,10 +136,10 @@ function FormattedVal(props: Props) {
   return (
     <T color={color || marketColor} withIcon={withIcon} {...p}>
       {withIcon ? (
-        <Box horizontal alignItems="center" flow={1}>
-          <Box>
+        <Box horizontal alignItems="center">
+          <Box mr={1}>
             <I color={marketColor}>
-              {isNegative ? <IconBottom size={16} /> : <IconTop size={16} />}
+              {isNegative ? <IconBottom size={24} /> : <IconTop size={24} />}
             </I>
           </Box>
           <Box horizontal alignItems="center">
