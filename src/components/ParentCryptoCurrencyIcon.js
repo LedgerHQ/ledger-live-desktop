@@ -11,7 +11,7 @@ import { rgba } from '../styles/helpers'
 
 type Props = {
   currency: Currency,
-  withTooltip: boolean,
+  withTooltip?: boolean,
   bigger?: boolean,
   inactive?: boolean,
 }
