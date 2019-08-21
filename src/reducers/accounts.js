@@ -113,6 +113,8 @@ export const accountSelector = createSelector(
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 )
 
+export const migratableAccountsSelector = (s: *): Account[] => s.accounts.filter(canBeMigrated)
+
 export const starredAccountsSelector = createSelector(
   accountsSelector,
   starredAccountIdsSelector,

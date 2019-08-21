@@ -422,23 +422,22 @@ const OperationDetails = connect(
             <Box horizontal>
               <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
               {recipients.length > 1 ? (
-              <Link>
-                <FakeLink
-                  underline
-                  fontSize={3}
-                  ml={2}
-                  color="smoke"
-                  onClick={() => openURL(urls.multipleDestinationAddresses)}
-                  iconFirst
-                >
-                  <Box mr={1}>
-                    <IconExternalLink size={12} />
-                  </Box>
-                  {t('operationDetails.multipleAddresses')}
-                </FakeLink>
-              </Link>
-              )
-                : null}
+                <Link>
+                  <FakeLink
+                    underline
+                    fontSize={3}
+                    ml={2}
+                    color="smoke"
+                    onClick={() => openURL(urls.multipleDestinationAddresses)}
+                    iconFirst
+                  >
+                    <Box mr={1}>
+                      <IconExternalLink size={12} />
+                    </Box>
+                    {t('operationDetails.multipleAddresses')}
+                  </FakeLink>
+                </Link>
+              ) : null}
             </Box>
             <DataList lines={recipients} t={t} />
           </Box>
