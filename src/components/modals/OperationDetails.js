@@ -200,6 +200,8 @@ const OperationDetails = connect(
       const data = {
         operationId: operation.id,
         accountId: operation.accountId,
+        parentOperation: undefined,
+        parentId: undefined,
       }
       if (['subOperation', 'internalOperation'].includes(type)) {
         data.parentOperation = parentOperation

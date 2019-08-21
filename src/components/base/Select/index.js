@@ -48,9 +48,10 @@ const Row = styled.div`
   }
 `
 const rowHeight = 40 // Fixme We should pass this as a prop for dynamic rows?
-class MenuList extends PureComponent<*> {
+class MenuList extends PureComponent<*, *> {
   state = {
     children: null,
+    currentIndex: 0,
   }
 
   static getDerivedStateFromProps({ children }, state) {
@@ -90,6 +91,8 @@ class MenuList extends PureComponent<*> {
       selectProps: { noOptionsMessage },
     } = this.props
     const { children } = this.state
+    if (!children) return null
+
     const [value] = getValue()
     const initialOffset = options.indexOf(value) * rowHeight
     const minHeight = Math.min(...[maxHeight, rowHeight * children.length])
