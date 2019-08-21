@@ -256,6 +256,7 @@ class AddAccounts extends PureComponent<Props, State> {
         refocusWhenChange={stepId}
         onHide={() => this.setState({ ...INITIAL_STATE })}
         onBeforeOpen={this.handleBeforeOpen}
+        preventBackdropClick={stepId === 'import'}
         render={({ onClose }) => (
           <Stepper
             key={reset} // THIS IS A HACK because stepper is not controllable. FIXME
