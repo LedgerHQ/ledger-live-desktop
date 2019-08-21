@@ -146,6 +146,11 @@
       "month": "月度",
       "year": "年度"
     },
+    "optionsMenu": {
+      "title": "Options",
+      "exportOperations": "Export operation history",
+      "exportToMobile": "Export to mobile"
+    },
     "contextMenu": {
       "star": "星标",
       "receive": "接收",
