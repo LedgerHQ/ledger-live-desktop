@@ -109,9 +109,9 @@ export const page = (category: string, name: ?string, properties: ?Object) => {
     logger.error('analytics is not available')
     return
   }
-  analytics.page(
-    category,
-    name,
+
+  analytics.track(
+    `Page ${category + (name ? ` ${name}` : '')}`,
     {
       ...extraProperties(storeInstance),
       ...properties,
