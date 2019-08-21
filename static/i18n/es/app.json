@@ -146,6 +146,11 @@
       "month": "Month",
       "year": "Year"
     },
+    "optionsMenu": {
+      "title": "Options",
+      "exportOperations": "Export operation history",
+      "exportToMobile": "Export to mobile"
+    },
     "contextMenu": {
       "star": "Star",
       "receive": "Recibir",
