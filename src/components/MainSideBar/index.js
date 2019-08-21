@@ -22,7 +22,7 @@ import Space from 'components/base/Space'
 import UpdateDot from 'components/Updater/UpdateDot'
 import IconManager from 'icons/Manager'
 import IconWallet from 'icons/Wallet'
-import IconPieChart from 'icons/PieChart'
+import IconPortfolio from 'icons/Portfolio'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
@@ -129,7 +129,7 @@ class MainSideBar extends PureComponent<Props> {
         <SideBarList title={t('sidebar.menu')}>
           <SideBarListItem
             label={t('dashboard.title')}
-            icon={IconPieChart}
+            icon={IconPortfolio}
             iconActiveColor="wallet"
             onClick={this.handleClickDashboard}
             isActive={pathname === '/'}
