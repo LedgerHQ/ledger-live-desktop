@@ -1,14 +1,17 @@
 // @flow
 
 import React, { PureComponent } from 'react'
-import Box from 'components/base/Box'
 import { compose } from 'redux'
 import { T, translate } from 'react-i18next'
 import { connect } from 'react-redux'
+
 import IconPlus from 'icons/Plus'
+import Box from 'components/base/Box'
 import Button from 'components/base/Button'
 import { openModal } from 'reducers/modals'
-import { MODAL_ADD_ACCOUNTS } from '../../config/constants'
+import { MODAL_ADD_ACCOUNTS } from 'config/constants'
+
+import OptionsButton from './OptionsButton'
 
 type Props = {
   t: T,
@@ -31,13 +34,14 @@ class AccountsHeader extends PureComponent<Props> {
         <Box grow ff="Museo Sans|Regular" fontSize={7} color="dark">
           {t('accounts.title')}
         </Box>
-        <Box>
+        <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
           <Button small primary onClick={this.handleAddAccountModal}>
             <Box horizontal flow={1} alignItems="center">
               <IconPlus size={12} />
               <Box>{t('addAccounts.cta.add')}</Box>
             </Box>
           </Button>
+          <OptionsButton />
         </Box>
       </Box>
     )

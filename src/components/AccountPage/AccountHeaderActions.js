@@ -31,13 +31,13 @@ const ButtonSettings = styled(Tabbable).attrs({
 })`
   width: 34px;
   height: 34px;
-  border:1px solid ${p => p.theme.colors.grey};
-  border-radius:4px;
+  border: 1px solid ${p => p.theme.colors.grey};
+  border-radius: 4px;
   &:hover {
     color: ${p => (p.disabled ? '' : p.theme.colors.dark)};
     background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.2))};
-    border-color:${p => p.theme.colors.dark};
-  
+    border-color: ${p => p.theme.colors.dark};
+  }
 
   &:active {
     background: ${p => (p.disabled ? '' : rgba(p.theme.colors.fog, 0.3))};
