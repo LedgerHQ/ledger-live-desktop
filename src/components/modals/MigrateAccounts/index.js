@@ -52,7 +52,7 @@ const createSteps = () => {
   ]
 }
 
-type ScanStatus = 'idle' | 'scanning' | 'error' | 'finished'
+type ScanStatus = 'idle' | 'scanning' | 'error' | 'finished' | 'finished-empty'
 export type StepProps = DefaultStepProps & {
   starredAccountIds: string[],
   replaceStarAccountId: ({ oldId: string, newId: string }) => void,
