@@ -12,7 +12,7 @@ import {
   reverseRangeIndex,
   projectRangeIndex,
 } from '@ledgerhq/live-common/lib/range'
-import { getAccountBridge } from 'bridge'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import Box from 'components/base/Box'
 import Text from 'components/base/Text'
 import CurrencyUnitValue from 'components/CurrencyUnitValue'

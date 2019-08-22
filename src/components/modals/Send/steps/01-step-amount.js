@@ -2,10 +2,14 @@
 
 import React, { PureComponent, Fragment } from 'react'
 import { BigNumber } from 'bignumber.js'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
-import { getMainAccount, getAccountCurrency } from '@ledgerhq/live-common/lib/account'
+import type { Account, AccountLike, Transaction } from '@ledgerhq/live-common/lib/types'
+import {
+  getMainAccount,
+  getAccountCurrency,
+  getAccountUnit,
+} from '@ledgerhq/live-common/lib/account'
 import logger from 'logger'
-import { getAccountBridge } from 'bridge'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import Button from 'components/base/Button'
@@ -20,9 +24,9 @@ import FeeField from 'families/FeeField'
 import AdvancedOptionsField from 'families/AdvancedOptionsField'
 import RecipientField from '../fields/RecipientField'
 import AmountField from '../fields/AmountField'
-import type { StepProps } from '..'
 import HighFeeConfirmation from '../HighFeeConfirmation'
 import ErrorBanner from '../../../ErrorBanner'
+import type { StepProps } from '../types'
 
 const AccountFields = ({
   account,
@@ -32,10 +36,10 @@ const AccountFields = ({
   openedFromAccount,
   t,
 }: {
-  account: Account | TokenAccount,
+  account: AccountLike,
   parentAccount: ?Account,
-  transaction: *,
-  onChangeTransaction: (*) => void,
+  transaction: Transaction,
+  onChangeTransaction: Transaction => void,
   openedFromAccount: boolean,
   t: *,
 }) => {
@@ -78,7 +82,7 @@ export default ({
   onChangeAccount,
   onChangeTransaction,
   error,
-}: StepProps<*>) => {
+}: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null
   return (
     <Box flow={4}>
@@ -88,8 +92,8 @@ export default ({
       <Box flow={1}>
         <Label>{t('send.steps.amount.selectAccountDebit')}</Label>
         <SelectAccount
-          withTokenAccounts
-          enforceHideEmptyTokenAccounts
+          withSubAccounts
+          enforceHideEmptySubAccounts
           autoFocus={!openedFromAccount}
           onChange={onChangeAccount}
           value={account}
@@ -113,7 +117,7 @@ export default ({
 }
 
 export class StepAmountFooter extends PureComponent<
-  StepProps<*>,
+  StepProps,
   {
     totalSpent: BigNumber,
     maxAmount: BigNumber,
@@ -134,7 +138,7 @@ export class StepAmountFooter extends PureComponent<
     this.resync()
   }
 
-  componentDidUpdate(nextProps: StepProps<*>) {
+  componentDidUpdate(nextProps: StepProps) {
     if (
       nextProps.account !== this.props.account ||
       nextProps.transaction !== this.props.transaction
@@ -241,11 +245,7 @@ export class StepAmountFooter extends PureComponent<
         ? bridge.getTransactionAmount(mainAccount, transaction)
         : null
     const isTerminated = (mainAccount && mainAccount.currency.terminated) || false
-    const accountUnit = !account
-      ? null
-      : account.type === 'Account'
-      ? account.unit
-      : account.token.units[0]
+    const accountUnit = !account ? null : getAccountUnit(account)
 
     return (
       <Fragment>

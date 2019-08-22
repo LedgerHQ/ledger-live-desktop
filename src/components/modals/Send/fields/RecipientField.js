@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react'
-import type { Account } from '@ledgerhq/live-common/lib/types'
+import type { Account, Transaction } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
-import { getAccountBridge } from 'bridge'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import { openURL } from 'helpers/linking'
 import { urls } from 'config/urls'
 import Box from 'components/base/Box'
@@ -11,7 +11,7 @@ import RecipientAddress from 'components/RecipientAddress'
 import { track } from 'analytics/segment'
 import { CantScanQRCode } from '@ledgerhq/errors'
 
-type Props<Transaction> = {
+type Props = {
   t: T,
   account: Account,
   transaction: Transaction,
@@ -19,10 +19,7 @@ type Props<Transaction> = {
   autoFocus?: boolean,
 }
 
-class RecipientField<Transaction> extends Component<
-  Props<Transaction>,
-  { error: ?Error, warning: ?Error },
-> {
+class RecipientField extends Component<Props, { error: ?Error, warning: ?Error }> {
   state = {
     error: null,
     warning: null,
@@ -30,7 +27,7 @@ class RecipientField<Transaction> extends Component<
   componentDidMount() {
     this.resync()
   }
-  componentDidUpdate(nextProps: Props<Transaction>) {
+  componentDidUpdate(nextProps: Props) {
     if (
       nextProps.account !== this.props.account ||
       nextProps.transaction !== this.props.transaction

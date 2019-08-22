@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react'
 import type { PortfolioRange } from '@ledgerhq/live-common/lib/types/portfolio'
-import { listTokenAccounts } from '@ledgerhq/live-common/lib/account/helpers'
+import { listSubAccounts } from '@ledgerhq/live-common/lib/account/helpers'
 import styled from 'styled-components'
 import { Trans, translate } from 'react-i18next'
 import { push } from 'react-router-redux'
@@ -85,9 +85,9 @@ class TokensList extends PureComponent<Props> {
 
   render() {
     const { account, t, range } = this.props
-    if (!account.tokenAccounts) return null
-    const tokenAccounts = listTokenAccounts(account)
-    const isEmpty = tokenAccounts.length === 0
+    if (!account.subAccounts) return null
+    const subAccounts = listSubAccounts(account)
+    const isEmpty = subAccounts.length === 0
     return (
       <Box mb={50}>
         <Wrapper>
@@ -115,7 +115,7 @@ class TokensList extends PureComponent<Props> {
             <ReceiveButton onClick={this.onReceiveClick} />
           </EmptyState>
         )}
-        {tokenAccounts.map((token, index) => (
+        {subAccounts.map((token, index) => (
           <AccountContextMenu key={token.id} account={token} parentAccount={account}>
             <TokenRow
               index={index}

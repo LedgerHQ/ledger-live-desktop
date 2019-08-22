@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
 import { Redirect } from 'react-router'
-import type { Currency, TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
+import type { Currency, AccountLike, Account } from '@ledgerhq/live-common/lib/types'
 import { getCurrencyColor } from '@ledgerhq/live-common/lib/currencies'
 import type { T } from 'types/common'
 import { accountSelector } from 'reducers/accounts'
@@ -13,6 +13,7 @@ import {
   isAccountEmpty,
   getAccountCurrency,
   getMainAccount,
+  findSubAccountById,
 } from '@ledgerhq/live-common/lib/account'
 import { setCountervalueFirst } from 'actions/settings'
 import {
@@ -43,12 +44,9 @@ const mapStateToProps = (
   },
 ) => {
   const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId })
-  let account: ?(TokenAccount | Account)
+  let account: ?AccountLike
   if (parentAccount) {
-    const { tokenAccounts } = parentAccount
-    if (tokenAccounts) {
-      account = tokenAccounts.find(t => t.id === id)
-    }
+    account = findSubAccountById(parentAccount, id)
   } else {
     account = accountSelector(state, { accountId: id })
   }
@@ -68,7 +66,7 @@ const mapDispatchToProps = {
 type Props = {
   counterValue: Currency,
   t: T,
-  account?: TokenAccount | Account,
+  account?: AccountLike,
   parentAccount?: Account,
   selectedTimeRange: TimeRange,
   countervalueFirst: boolean,

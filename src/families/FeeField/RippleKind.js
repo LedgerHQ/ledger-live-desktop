@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import type { BigNumber } from 'bignumber.js'
 import { RippleAPI } from 'ripple-lib'
-import { getAccountBridge } from 'bridge'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import { apiForEndpointConfig, parseAPIValue } from '@ledgerhq/live-common/lib/api/Ripple'
 import { FeeNotLoaded } from '@ledgerhq/errors'

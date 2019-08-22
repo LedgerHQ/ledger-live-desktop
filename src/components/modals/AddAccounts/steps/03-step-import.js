@@ -4,6 +4,7 @@ import logger from 'logger'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 import React, { PureComponent, Fragment, useEffect } from 'react'
+import { filter, map } from 'rxjs/operators'
 import type { Account } from '@ledgerhq/live-common/lib/types'
 import uniq from 'lodash/uniq'
 import { urls } from 'config/urls'
@@ -11,7 +12,7 @@ import ExternalLinkButton from 'components/base/ExternalLinkButton'
 import RetryButton from 'components/base/RetryButton'
 import { isAccountEmpty, groupAddAccounts } from '@ledgerhq/live-common/lib/account'
 import { DeviceShouldStayInApp } from '@ledgerhq/errors'
-import { getCurrencyBridge } from 'bridge'
+import { getCurrencyBridge } from '@ledgerhq/live-common/lib/bridge'
 import TrackPage from 'analytics/TrackPage'
 import Box from 'components/base/Box'
 import CurrencyBadge from 'components/base/CurrencyBadge'
@@ -141,35 +142,41 @@ class StepImport extends PureComponent<StepProps> {
       // will be set to false if an existing account is found
       let onlyNewAccounts = true
 
-      this.scanSubscription = bridge.scanAccountsOnDevice(mainCurrency, devicePath).subscribe({
-        next: account => {
-          const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
-          const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
-          const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
-          const isNewAccount = isAccountEmpty(account)
-          if (!isNewAccount && !hasAlreadyBeenImported) {
-            onlyNewAccounts = false
-          }
-          if (!hasAlreadyBeenScanned) {
-            setScannedAccounts({
-              scannedAccounts: [...scannedAccounts, account],
-              checkedAccountsIds: onlyNewAccounts
-                ? [account.id]
-                : !hasAlreadyBeenImported && !isNewAccount
-                ? uniq([...checkedAccountsIds, account.id])
-                : checkedAccountsIds,
-            })
-          }
-        },
-        complete: () => {
-          setScanStatus('finished')
-        },
-        error: err => {
-          logger.critical(err)
-          const error = remapTransportError(err, currency.name)
-          setScanStatus('error', error)
-        },
-      })
+      this.scanSubscription = bridge
+        .scanAccountsOnDevice(mainCurrency, devicePath)
+        .pipe(
+          filter(e => e.type === 'discovered'),
+          map(e => e.account),
+        )
+        .subscribe({
+          next: account => {
+            const { scannedAccounts, checkedAccountsIds, existingAccounts } = this.props
+            const hasAlreadyBeenScanned = !!scannedAccounts.find(a => account.id === a.id)
+            const hasAlreadyBeenImported = !!existingAccounts.find(a => account.id === a.id)
+            const isNewAccount = isAccountEmpty(account)
+            if (!isNewAccount && !hasAlreadyBeenImported) {
+              onlyNewAccounts = false
+            }
+            if (!hasAlreadyBeenScanned) {
+              setScannedAccounts({
+                scannedAccounts: [...scannedAccounts, account],
+                checkedAccountsIds: onlyNewAccounts
+                  ? [account.id]
+                  : !hasAlreadyBeenImported && !isNewAccount
+                  ? uniq([...checkedAccountsIds, account.id])
+                  : checkedAccountsIds,
+              })
+            }
+          },
+          complete: () => {
+            setScanStatus('finished')
+          },
+          error: err => {
+            logger.critical(err)
+            const error = remapTransportError(err, currency.name)
+            setScanStatus('error', error)
+          },
+        })
     } catch (err) {
       setScanStatus('error', err)
     }

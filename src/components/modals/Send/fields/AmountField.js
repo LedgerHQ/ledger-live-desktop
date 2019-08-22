@@ -2,8 +2,8 @@
 import React, { Component } from 'react'
 import { Trans } from 'react-i18next'
 import { BigNumber } from 'bignumber.js'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/lib/types'
-import { getAccountBridge } from 'bridge'
+import type { Account, AccountLike } from '@ledgerhq/live-common/lib/types'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import Box from 'components/base/Box'
 import Label from 'components/base/Label'
 import RequestAmount from 'components/RequestAmount'
@@ -24,7 +24,7 @@ const SendMax = ({ value, onChange }: { value: boolean, onChange: boolean => voi
 
 class AmountField extends Component<
   {
-    account: Account | TokenAccount,
+    account: AccountLike,
     parentAccount: ?Account,
     transaction: *,
     onChangeTransaction: (*) => void,

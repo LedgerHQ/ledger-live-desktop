@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { Draggable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
-import { getAccountCurrency } from '@ledgerhq/live-common/lib/account/helpers'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
+import { getAccountCurrency, getAccountUnit } from '@ledgerhq/live-common/lib/account/helpers'
+import type { AccountLike } from '@ledgerhq/live-common/src/types'
 import Text from 'components/base/Text'
 import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
@@ -56,7 +56,7 @@ const Item = ({
   pathname,
   collapsed,
 }: {
-  account: Account | TokenAccount,
+  account: AccountLike,
   index: number,
   push: Function,
   pathname: string,
@@ -65,11 +65,13 @@ const Item = ({
   const active = pathname.endsWith(account.id)
 
   const onAccountClick = useCallback(() => {
-    const parentAccountId = account.type === 'TokenAccount' ? account.parentId : undefined
+    const parentAccountId = account.type !== 'Account' ? account.parentId : undefined
     parentAccountId
       ? push(`/account/${parentAccountId}/${account.id}`)
       : push(`/account/${account.id}`)
   }, [account, push])
+
+  const unit = getAccountUnit(account)
 
   return (
     <Draggable index={index} draggableId={account.id}>
@@ -90,22 +92,22 @@ const Item = ({
             >
               <ParentCryptoCurrencyIcon inactive={!active} currency={getAccountCurrency(account)} />
             </ParentCryptoCurrencyIconWrapper>
-              <Box vertical flex={1}>
-                <Hide visible={snapshot.isDragging || !collapsed}>
-                  <AccountName color="smoke">
-                    {account.type === 'Account' ? account.name : account.token.name}
-                  </AccountName>
-                  <FormattedVal
-                    alwaysShowSign={false}
-                    animateTicker={false}
-                    ellipsis
-                    color="grey"
-                    unit={account.unit || account.token.units[0]}
-                    showCode
-                    val={account.balance}
-                  />
-                </Hide>
-              </Box>
+            <Box vertical flex={1}>
+              <Hide visible={snapshot.isDragging || !collapsed}>
+                <AccountName color="smoke">
+                  {account.type === 'Account' ? account.name : getAccountCurrency(account).name}
+                </AccountName>
+                <FormattedVal
+                  alwaysShowSign={false}
+                  animateTicker={false}
+                  ellipsis
+                  color="grey"
+                  unit={unit}
+                  showCode
+                  val={account.balance}
+                />
+              </Hide>
+            </Box>
           </Box>
         </ItemWrapper>
       )}

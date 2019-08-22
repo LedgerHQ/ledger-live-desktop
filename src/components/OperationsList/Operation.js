@@ -4,8 +4,9 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 import { rgba } from 'styles/helpers'
 import Box from 'components/base/Box'
-import type { TokenAccount, Account, Operation } from '@ledgerhq/live-common/lib/types'
+import type { AccountLike, Account, Operation } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
+import { getAccountCurrency } from '@ledgerhq/live-common/lib/account'
 
 import ConfirmationCell from './ConfirmationCell'
 import DateCell from './DateCell'
@@ -32,13 +33,9 @@ const OperationRow = styled(Box).attrs({
 
 type Props = {
   operation: Operation,
-  account: Account | TokenAccount,
+  account: AccountLike,
   parentAccount?: Account,
-  onOperationClick: (
-    operation: Operation,
-    account: Account | TokenAccount,
-    parentAccount?: Account,
-  ) => void,
+  onOperationClick: (operation: Operation, account: AccountLike, parentAccount?: Account) => void,
   t: T,
   withAccount: boolean,
   compact?: boolean,
@@ -58,6 +55,7 @@ class OperationComponent extends PureComponent<Props> {
   render() {
     const { account, parentAccount, t, operation, withAccount, compact, text } = this.props
     const isOptimistic = operation.blockHeight === null
+    const currency = getAccountCurrency(account)
     return (
       <OperationRow isOptimistic={isOptimistic} onClick={this.onOperationClick}>
         <ConfirmationCell
@@ -71,17 +69,13 @@ class OperationComponent extends PureComponent<Props> {
           (account.type === 'Account' ? (
             <AccountCell accountName={account.name} currency={account.currency} />
           ) : (
-            <AccountCell accountName={account.token.name} currency={account.token} />
+            <AccountCell accountName={currency.name} currency={currency} />
           ))}
         <AddressCell operation={operation} />
         {account.type === 'Account' ? (
           <AmountCell operation={operation} currency={account.currency} unit={account.unit} />
         ) : (
-          <AmountCell
-            operation={operation}
-            currency={account.token}
-            unit={account.token.units[0]}
-          />
+          <AmountCell operation={operation} currency={currency} unit={currency.units[0]} />
         )}
       </OperationRow>
     )

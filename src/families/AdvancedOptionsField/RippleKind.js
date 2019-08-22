@@ -4,10 +4,10 @@ import { BigNumber } from 'bignumber.js'
 import { translate } from 'react-i18next'
 
 import type { Account } from '@ledgerhq/live-common/lib/types/account'
+import { getAccountBridge } from '@ledgerhq/live-common/lib/bridge'
 import Box from 'components/base/Box'
 import Input from 'components/base/Input'
 import Label from 'components/base/Label'
-import { getAccountBridge } from '../../bridge'
 
 type Props = {
   onChange: (*) => void,

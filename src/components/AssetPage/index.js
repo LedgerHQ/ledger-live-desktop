@@ -58,12 +58,8 @@ const mapStateToProps = (state, props) => ({
   allAccounts: accountsSelector(state),
   countervalueFirst: countervalueFirstSelector(state),
   accounts: flattenAccounts(accountsSelector(state), {
-    enforceHideEmptyTokenAccounts: true,
-  }).filter(
-    a =>
-      (a.type === 'Account' ? a.currency : a.token) ===
-      findCurrencyByTicker(props.match.params.assetTicker),
-  ),
+    enforceHideEmptySubAccounts: true,
+  }).filter(a => getAccountCurrency(a) === findCurrencyByTicker(props.match.params.assetTicker)),
 })
 
 class AssetPage extends PureComponent<Props, State> {

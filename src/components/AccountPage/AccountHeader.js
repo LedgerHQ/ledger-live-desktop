@@ -4,7 +4,7 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Trans } from 'react-i18next'
 
-import type { TokenAccount, Account } from '@ledgerhq/live-common/lib/types'
+import type { AccountLike, Account } from '@ledgerhq/live-common/lib/types'
 import {
   getDefaultExplorerView,
   getAccountContractExplorer,
@@ -76,7 +76,7 @@ const AccountName = styled(Text).attrs({
 `
 
 type Props = {
-  account: TokenAccount | Account,
+  account: AccountLike,
   parentAccount: ?Account,
 }
 

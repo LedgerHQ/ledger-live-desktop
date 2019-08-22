@@ -3,7 +3,7 @@
 import invariant from 'invariant'
 import React, { Fragment, PureComponent } from 'react'
 import logger from 'logger'
-import { reduce } from 'rxjs/operators'
+import { reduce, filter, map } from 'rxjs/operators'
 import { Trans } from 'react-i18next'
 
 import type { Account } from '@ledgerhq/live-common/lib/types/account'
@@ -16,7 +16,7 @@ import IconExclamationCircle from 'icons/ExclamationCircle'
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
 import { CurrencyCircleIcon } from 'components/base/CurrencyBadge'
-import { getCurrencyBridge } from 'bridge'
+import { getCurrencyBridge } from '@ledgerhq/live-common/lib/bridge'
 import styled from 'styled-components'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import TranslatedError from 'components/TranslatedError'
@@ -108,7 +108,11 @@ class StepCurrency extends PureComponent<Props> {
 
     this.scanSubscription = getCurrencyBridge(currency)
       .scanAccountsOnDevice(currency, device.path)
-      .pipe(reduce<Account>((all, acc) => all.concat(acc), []))
+      .pipe(
+        filter(e => e.type === 'discovered'),
+        map(e => e.account),
+        reduce<Account>((all, acc) => all.concat(acc), []),
+      )
       .subscribe({
         next: scannedAccounts => {
           let totalMigratedAccounts = 0
