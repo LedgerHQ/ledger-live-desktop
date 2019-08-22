@@ -29,6 +29,7 @@ export const urls = {
   migrateAccounts: 'https://support.ledger.com/hc/en-us/articles/360025321733',
   githubIssues:
     'https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc',
+  multipleDestinationAddresses: 'https://support.ledger.com/hc/en-us/articles/360033801034',
 
   // Exchanges
   coinhouse: 'https://www.coinhouse.com/r/157530?utm_source=legderlive&utm_medium=referral',
