@@ -4,9 +4,9 @@
     "labelNo": "Нет",
     "never": "Никогда",
     "apply": "Применить",
-    "done": "Done",
+    "done": "Готово",
     "confirm": "Подтвердить",
-    "connecting": "Connecting..",
+    "connecting": "Подключение..",
     "cancel": "Отменить",
     "getSupport": "Get support",
     "delete": "Удалить",
@@ -35,7 +35,7 @@
     "retry": "Повторить попытку",
     "range": "Range",
     "stop": "Остановить",
-    "updateNow": "Update now",
+    "updateNow": "Обновить сейчас",
     "close": "Закрыть",
     "eastern": "Восточный",
     "western": "Западный",
@@ -145,6 +145,11 @@
       "week": "Week",
       "month": "Month",
       "year": "Year"
+    },
+    "optionsMenu": {
+      "title": "Options",
+      "exportOperations": "Export operation history",
+      "exportToMobile": "Export to mobile"
     },
     "contextMenu": {
       "star": "Star",
@@ -257,9 +262,18 @@
       "description": ""
     },
     "progress": {
-      "title": "{{currencyName}} update in progress...",
-      "description": "Please wait while your accounts are updated",
-      "finished": "{{currencyName}} update completed"
+      "finished": {
+        "title": "{{currencyName}} update completed",
+        "description": ""
+      },
+      "scanning": {
+        "title": "{{currencyName}} update in progress...",
+        "description": "Please wait while your accounts are updated"
+      },
+      "finished-empty": {
+        "title": "{{currencyName}} update incomplete",
+        "description": "No {{currencyName}} accounts to update"
+      }
     },
     "cta": {
       "startUpdate": "Start update",
