@@ -38,6 +38,7 @@ export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => as
     dispatch(saveSettings({ hideEmptyTokenAccounts }))
   }
 }
+export const setSidebarCollapsed = (sidebarCollapsed: boolean) => saveSettings({ sidebarCollapsed })
 
 type FetchSettings = (*) => (Dispatch<*>) => void
 export const fetchSettings: FetchSettings = (settings: *) => dispatch => {
