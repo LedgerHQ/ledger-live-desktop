@@ -12,9 +12,15 @@ import FormattedVal from 'components/base/FormattedVal'
 import ParentCryptoCurrencyIcon from 'components/ParentCryptoCurrencyIcon'
 import Box from '../base/Box/Box'
 
-const AccountName = styled(Text)``
+const AccountName = styled(Text)`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`
 const ParentCryptoCurrencyIconWrapper = styled.div`
   width: 20px;
+  margin-left: ${p => (p.collapsed && p.isToken ? '-6px' : '')};
+  transition: margin 0.5s;
 `
 
 const ItemWrapper = styled.div`
@@ -36,7 +42,8 @@ const ItemWrapper = styled.div`
     z-index: 1;
     border-color: ${p.active ? p.theme.colors.lightFog : p.theme.colors.sliderGrey};
     box-shadow: 0 12px 17px 0 rgba(0, 0, 0, 0.1);
-  `
+    width: ${p.collapsed ? '200px' : ''} !important;
+        `
       : ''}
 `
 
@@ -49,11 +56,13 @@ const Item = ({
   index,
   push,
   pathname,
+  collapsed,
 }: {
   account: Account | TokenAccount,
   index: number,
   push: Function,
   pathname: string,
+  collapsed?: boolean,
 }) => {
   const active = pathname.endsWith(account.id)
 
@@ -71,12 +80,16 @@ const Item = ({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           isDragging={snapshot.isDragging}
+          collapsed={collapsed}
           innerRef={provided.innerRef}
           active={active}
           onClick={onAccountClick}
         >
           <Box horizontal ff="Open Sans|SemiBold" flex={1} flow={3} alignItems="center">
-            <ParentCryptoCurrencyIconWrapper>
+            <ParentCryptoCurrencyIconWrapper
+              collapsed={collapsed}
+              isToken={account.type === 'TokenAccount'}
+            >
               <ParentCryptoCurrencyIcon inactive={!active} currency={getAccountCurrency(account)} />
             </ParentCryptoCurrencyIconWrapper>
             <Box vertical flex={1}>

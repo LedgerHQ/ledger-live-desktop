@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce'
 import c from 'color'
 
 export function enrichData(data) {
@@ -40,10 +41,14 @@ export function generateMargins(hideAxis) {
 }
 
 export function observeResize(node, cb) {
-  const onResize = () => {
-    const { width } = node.getBoundingClientRect()
-    cb(width)
-  }
+  const onResize = debounce(
+    () => {
+      const { width } = node.getBoundingClientRect()
+      cb(width)
+    },
+    100,
+    { maxWait: 1000 },
+  )
 
   const ro = new ResizeObserver(onResize)
   ro.observe(node)

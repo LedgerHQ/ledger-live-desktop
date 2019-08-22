@@ -12,9 +12,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { MODAL_RECEIVE, MODAL_SEND, MAIN_SIDEBAR_WIDTH } from 'config/constants'
-import { accountsSelector } from 'reducers/accounts'
+import { accountsSelector, starredAccountsSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
-import { developerModeSelector } from 'reducers/settings'
+import { developerModeSelector, sidebarCollapsedSelector } from 'reducers/settings'
+import { setSidebarCollapsed } from 'actions/settings'
 
 import { SideBarList, SideBarListItem } from 'components/base/SideBar'
 import Box from 'components/base/Box'
@@ -26,27 +27,34 @@ import IconPortfolio from 'icons/Portfolio'
 import IconReceive from 'icons/Receive'
 import IconSend from 'icons/Send'
 import IconExchange from 'icons/Exchange'
+import IconChevron from 'icons/ChevronRight'
 import TopGradient from './TopGradient'
 import useExperimental from '../../hooks/useExperimental'
-import { darken } from '../../styles/helpers'
+import { darken, rgba } from '../../styles/helpers'
 import Stars from '../Stars'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
+  hasStarredAccounts: starredAccountsSelector(state).length > 0,
   developerMode: developerModeSelector(state),
+  collapsed: sidebarCollapsedSelector(state),
 })
 
 const mapDispatchToProps = {
   push,
   openModal,
+  setCollapsed: setSidebarCollapsed,
 }
 
 type Props = {
   t: T,
   noAccounts: boolean,
+  hasStarredAccounts: boolean,
   location: Location,
   push: string => void,
   openModal: string => void,
+  collapsed: boolean,
+  setCollapsed: boolean => void,
 }
 
 const TagContainer = () => {
@@ -61,6 +69,7 @@ const TagContainer = () => {
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'flex-end',
+        textAlign: 'center',
       }}
     >
       <Tag to="/settings/experimental">
@@ -89,7 +98,85 @@ const Tag = styled(Link)`
   }
 `
 
+const collapserSize = 24
+const collapsedWidth = 15 * 4 + 16 // 15 * 4 margins + 16 icon size
+
+const Collapser = styled(Box).attrs({
+  alignItems: 'center',
+  justifyContent: 'center',
+})`
+  position: absolute;
+  top: ${58 - collapserSize / 2}px;
+  left: ${p => (p.collapsed ? collapsedWidth : MAIN_SIDEBAR_WIDTH) - collapserSize / 2}px;
+
+  width: ${collapserSize}px;
+  height: ${collapserSize}px;
+
+  cursor: pointer;
+  border-radius: 50%;
+  background: ${p => p.theme.colors.white};
+  color: ${p => p.theme.colors.grey};
+  border-color: ${p => p.theme.colors.fog};
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid;
+  transition: all 0.5s;
+  z-index: 100;
+
+  &:hover {
+    border-color: ${p => p.theme.colors.wallet};
+    color: ${p => p.theme.colors.wallet};
+    background: ${p => rgba(p.theme.colors.wallet, 0.1)};
+  }
+
+  & > * {
+    transform: ${p => (p.collapsed ? '' : 'rotate(180deg)')};
+    margin-left: ${p => (p.collapsed ? '' : '-2px')};
+
+    transition: transform 0.5s;
+  }
+`
+
+const Separator = styled(Box).attrs({
+  mx: 4,
+})`
+  height: 1px;
+  background: ${p => p.theme.colors.fog};
+`
+
+export const Hide = styled.div`
+  pointer-events: ${p => (p.visible ? '' : 'none')};
+  opacity: ${p => (p.visible ? 1 : 0)};
+  transition: opacity 0.15s;
+  overflow: hidden;
+`
+
+const SideBar = styled(Box).attrs({
+  relative: true,
+})`
+  background-color: ${p => p.theme.colors.white};
+  width: ${p => (p.collapsed ? collapsedWidth : MAIN_SIDEBAR_WIDTH)}px;
+  transition: width 0.5s;
+  will-change: width;
+  transform: translate3d(0, 0, 10);
+
+  & > ${Collapser} {
+    opacity: 0;
+  }
+
+  &:hover {
+    > ${Collapser} {
+      opacity: 1;
+    }
+  }
+`
+
 class MainSideBar extends PureComponent<Props> {
+  handleCollapse = () => {
+    const { setCollapsed, collapsed } = this.props
+
+    setCollapsed(!collapsed)
+  }
+
   push = (to: string) => {
     const { push } = this.props
     const {
@@ -119,14 +206,17 @@ class MainSideBar extends PureComponent<Props> {
   }
 
   render() {
-    const { t, noAccounts, location } = this.props
+    const { t, noAccounts, hasStarredAccounts, location, collapsed } = this.props
     const { pathname } = location
 
     return (
-      <Box relative bg="white" style={{ width: MAIN_SIDEBAR_WIDTH }}>
+      <SideBar collapsed={collapsed}>
+        <Collapser collapsed={collapsed} onClick={this.handleCollapse}>
+          <IconChevron size={16} />
+        </Collapser>
         <TopGradient />
         <Space of={70} />
-        <SideBarList title={t('sidebar.menu')}>
+        <SideBarList title={t('sidebar.menu')} collapsed={collapsed}>
           <SideBarListItem
             label={t('dashboard.title')}
             icon={IconPortfolio}
@@ -135,6 +225,7 @@ class MainSideBar extends PureComponent<Props> {
             isActive={pathname === '/'}
             NotifComponent={noAccounts ? undefined : UpdateDot}
             disabled={noAccounts}
+            showTooltip={collapsed}
           />
           <SideBarListItem
             label={t('sidebar.accounts')}
@@ -143,6 +234,7 @@ class MainSideBar extends PureComponent<Props> {
             isActive={pathname === '/accounts'}
             onClick={this.handleClickAccounts}
             NotifComponent={noAccounts ? UpdateDot : undefined}
+            showTooltip={collapsed}
           />
           <SideBarListItem
             label={t('send.title')}
@@ -150,6 +242,7 @@ class MainSideBar extends PureComponent<Props> {
             iconActiveColor="wallet"
             onClick={this.handleOpenSendModal}
             disabled={noAccounts}
+            showTooltip={collapsed}
           />
           <SideBarListItem
             label={t('receive.title')}
@@ -157,6 +250,7 @@ class MainSideBar extends PureComponent<Props> {
             iconActiveColor="wallet"
             onClick={this.handleOpenReceiveModal}
             disabled={noAccounts}
+            showTooltip={collapsed}
           />
           <SideBarListItem
             label={t('sidebar.manager')}
@@ -164,6 +258,7 @@ class MainSideBar extends PureComponent<Props> {
             iconActiveColor="wallet"
             onClick={this.handleClickManager}
             isActive={pathname === '/manager'}
+            showTooltip={collapsed}
           />
           <SideBarListItem
             label={t('sidebar.exchange')}
@@ -171,15 +266,23 @@ class MainSideBar extends PureComponent<Props> {
             iconActiveColor="wallet"
             onClick={this.handleClickExchange}
             isActive={pathname === '/partners'}
+            showTooltip={collapsed}
           />
           <Space of={30} />
         </SideBarList>
 
-        <SideBarList scroll title={t('sidebar.stars')}>
-          <Stars pathname={pathname} />
-          <TagContainer />
+        <Hide visible={collapsed && hasStarredAccounts} style={{ marginBottom: -8 }}>
+          <Separator />
+        </Hide>
+
+        <SideBarList scroll title={t('sidebar.stars')} collapsed={collapsed}>
+          <Stars pathname={pathname} collapsed={collapsed} />
+
+          <Hide visible={!collapsed}>
+            <TagContainer />
+          </Hide>
         </SideBarList>
-      </Box>
+      </SideBar>
     )
   }
 }

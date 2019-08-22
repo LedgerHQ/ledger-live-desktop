@@ -62,6 +62,7 @@ export type SettingsState = {
   accountsViewMode: 'card' | 'list',
   showAccountsHelperBanner: boolean,
   hideEmptyTokenAccounts: boolean,
+  sidebarCollapsed: boolean,
 }
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -94,6 +95,7 @@ const INITIAL_STATE: SettingsState = {
   accountsViewMode: 'list',
   showAccountsHelperBanner: true,
   hideEmptyTokenAccounts: getEnv('HIDE_EMPTY_TOKEN_ACCOUNTS'),
+  sidebarCollapsed: false,
 }
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`
@@ -256,6 +258,7 @@ export const confirmationsNbForCurrencySelector = (
   return defs.confirmationsNb ? defs.confirmationsNb.def : 0
 }
 
+export const sidebarCollapsedSelector = (state: State) => state.settings.sidebarCollapsed
 export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs

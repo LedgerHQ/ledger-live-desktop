@@ -2,13 +2,16 @@
 
 import React, { PureComponent } from 'react'
 import { Trans } from 'react-i18next'
-import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
-import Text from 'components/base/Text'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { push } from 'react-router-redux'
+import type { Account, TokenAccount } from '@ledgerhq/live-common/src/types'
+
+import SideBarTooltip from 'components/base/SideBar/SideBarTooltip'
+import { Hide } from 'components/MainSideBar'
+import Text from 'components/base/Text'
 import { dragDropStarAction } from '../../actions/settings'
 import { starredAccountsSelector } from '../../reducers/accounts'
 import { i } from '../../helpers/staticPath'
@@ -43,6 +46,7 @@ class Stars extends PureComponent<{
   pathname: string,
   starredAccounts: (Account | TokenAccount)[],
   dragDropStarAction: (*) => any,
+  collapsed: boolean,
 }> {
   onDragEnd = ({ source, destination }) => {
     const { dragDropStarAction, starredAccounts } = this.props
@@ -52,14 +56,25 @@ class Stars extends PureComponent<{
   }
 
   render() {
-    const { starredAccounts, pathname } = this.props
+    const { starredAccounts, pathname, collapsed } = this.props
     return starredAccounts && starredAccounts.length ? (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId="list" direction="vertical">
           {provided => (
             <Container key={pathname} innerRef={provided.innerRef}>
               {starredAccounts.map((account: Account | TokenAccount, i) => (
-                <Item index={i} key={account.id} account={account} pathname={pathname} />
+                <SideBarTooltip
+                  text={account.type === 'Account' ? account.name : account.token.name}
+                  enabled={collapsed}
+                >
+                  <Item
+                    index={i}
+                    key={account.id}
+                    account={account}
+                    pathname={pathname}
+                    collapsed={collapsed}
+                  />
+                </SideBarTooltip>
               ))}
               {provided.placeholder}
             </Container>
@@ -67,18 +82,20 @@ class Stars extends PureComponent<{
         </Droppable>
       </DragDropContext>
     ) : (
-      <Placeholder>
-        <img alt="stars placeholder" src={i('starsPlaceholder.png')} width="95" height="53" />
-        <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
-          <Trans i18nKey={'stars.placeholder'}>
-            {'Accounts that you star on the'}
-            <Text ff="Open Sans|SemiBold" color="dark">
-              {'Accounts'}
-            </Text>
-            {' page will now appear here!.'}
-          </Trans>
-        </Text>
-      </Placeholder>
+      <Hide visible={!collapsed}>
+        <Placeholder>
+          <img alt="stars placeholder" src={i('starsPlaceholder.png')} width="95" height="53" />
+          <Text ff="Open Sans|SemiBold" color="grey" fontSize={3}>
+            <Trans i18nKey={'stars.placeholder'}>
+              {'Accounts that you star on the'}
+              <Text ff="Open Sans|SemiBold" color="dark">
+                {'Accounts'}
+              </Text>
+              {' page will now appear here!.'}
+            </Trans>
+          </Text>
+        </Placeholder>
+      </Hide>
     )
   }
 }

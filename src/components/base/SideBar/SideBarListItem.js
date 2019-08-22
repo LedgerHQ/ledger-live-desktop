@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
 import Box, { Tabbable } from 'components/base/Box'
+import SideBarTooltip from './SideBarTooltip'
 
 export type Props = {
   label: string | (Props => React$Node),
@@ -15,6 +16,7 @@ export type Props = {
   isActive?: boolean,
   onClick?: void => void,
   isActive?: boolean,
+  showTooltip?: boolean,
 }
 
 class SideBarListItem extends PureComponent<Props> {
@@ -28,27 +30,34 @@ class SideBarListItem extends PureComponent<Props> {
       onClick,
       isActive,
       disabled,
+      showTooltip,
     } = this.props
+
+    const renderedLabel =
+      typeof label === 'function' ? (
+        label(this.props)
+      ) : (
+        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          {label}
+        </span>
+      )
+
     return (
-      <Container
-        isActive={!disabled && isActive}
-        iconActiveColor={iconActiveColor}
-        onClick={disabled ? undefined : onClick}
-        disabled={disabled}
-      >
-        {!!Icon && <Icon size={16} />}
-        <Box grow shrink>
-          {typeof label === 'function' ? (
-            label(this.props)
-          ) : (
-            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {label}
-            </span>
-          )}
-          {!!desc && desc(this.props)}
-        </Box>
-        {NotifComponent && <NotifComponent />}
-      </Container>
+      <SideBarTooltip text={renderedLabel} enabled={!!showTooltip}>
+        <Container
+          isActive={!disabled && isActive}
+          iconActiveColor={iconActiveColor}
+          onClick={disabled ? undefined : onClick}
+          disabled={disabled}
+        >
+          {!!Icon && <Icon size={16} />}
+          <Box grow shrink>
+            {renderedLabel}
+            {!!desc && desc(this.props)}
+          </Box>
+          {NotifComponent && <NotifComponent />}
+        </Container>
+      </SideBarTooltip>
     )
   }
 }
