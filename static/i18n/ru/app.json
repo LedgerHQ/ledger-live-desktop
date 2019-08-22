@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "День",
+    "day_plural": "Days",
     "week": "Неделя",
+    "week_plural": "Weeks",
     "month": "Месяц",
+    "month_plural": "Months",
     "year": "Год",
+    "year_plural": "Years",
     "minute": "Minute",
+    "minute_plural": "Minutes",
     "second": "Second",
+    "second_plural": "Seconds",
     "hour": "Hour",
+    "hour_plural": "Hours",
     "since": {
       "day": "прошедший день",
       "week": "прошедшая неделя",
@@ -566,6 +573,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
