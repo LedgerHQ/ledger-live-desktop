@@ -22,6 +22,8 @@ const cmd: Command<Input, Result> = createCommand(
   'libcoreScanFromXPUB',
   ({ currencyId, xpub, derivationMode, seedIdentifier }) => {
     const currency = getCryptoCurrencyById(currencyId)
+    const freshAddress = ''
+    const freshAddressPath = runDerivationScheme(derivationMode, getCryptoCurrencyById(currencyId))
     const account: $Exact<Account> = {
       type: 'Account',
       name: `(DEV) ${currencyId}`,
@@ -38,8 +40,9 @@ const cmd: Command<Input, Result> = createCommand(
       currency,
       unit: currency.units[0],
       index: 0,
-      freshAddress: '',
-      freshAddressPath: runDerivationScheme(derivationMode, getCryptoCurrencyById(currencyId)),
+      freshAddress,
+      freshAddressPath,
+      freshAddresses: [{ address: freshAddress, derivationPath: freshAddressPath }],
       lastSyncDate: new Date(),
       blockHeight: 0,
       balance: BigNumber(0),
