@@ -1,6 +1,7 @@
 // @flow
 import { isEnvDefault, changes } from '@ledgerhq/live-common/lib/env'
 import type { EnvName } from '@ledgerhq/live-common/lib/env'
+
 import { setEnvOnAllThreads } from './env'
 
 export type FeatureCommon = {

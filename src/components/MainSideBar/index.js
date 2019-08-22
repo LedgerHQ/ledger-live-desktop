@@ -32,7 +32,7 @@ import TopGradient from './TopGradient'
 import useExperimental from '../../hooks/useExperimental'
 import { darken, rgba } from '../../styles/helpers'
 import Stars from '../Stars'
-import { i } from '../../helpers/staticPath'
+import ExperimentalIcon from '../../icons/Experimental'
 
 const mapStateToProps = state => ({
   noAccounts: accountsSelector(state).length === 0,
@@ -78,7 +78,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
       }}
     >
       <Tag to="/settings/experimental">
-        <img src={i('experimental.svg')} alt="" draggable="false" width={16} height={16} />
+        <ExperimentalIcon width={16} height={16} />
         {collapsed ? null : (
           <TagText>
             <Trans i18nKey="common.experimentalFeature" />
