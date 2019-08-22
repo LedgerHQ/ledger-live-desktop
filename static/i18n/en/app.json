@@ -566,6 +566,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
