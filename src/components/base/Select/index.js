@@ -56,7 +56,9 @@ class MenuList extends PureComponent<*, *> {
 
   static getDerivedStateFromProps({ children }, state) {
     if (children !== state.children) {
-      const currentIndex = Math.max(children.findIndex(({ props: { isFocused } }) => isFocused), 0)
+      const currentIndex = Array.isArray(children)
+        ? Math.max(children.findIndex(({ props: { isFocused } }) => isFocused), 0)
+        : 0
 
       return {
         children,
