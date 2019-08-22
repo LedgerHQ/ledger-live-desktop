@@ -1,7 +1,7 @@
 // @flow
 
 import invariant from 'invariant'
-import React, { PureComponent, Fragment } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import logger from 'logger'
 import { reduce } from 'rxjs/operators'
 import { Trans } from 'react-i18next'
@@ -11,6 +11,7 @@ import { findAccountMigration, migrateAccounts } from '@ledgerhq/live-common/lib
 import last from 'lodash/last'
 import Text from 'components/base/Text'
 import TrackPage from 'analytics/TrackPage'
+import IconExclamationCircle from 'icons/ExclamationCircle'
 
 import Button from 'components/base/Button'
 import Box from 'components/base/Box'
@@ -20,6 +21,7 @@ import styled from 'styled-components'
 import IconExclamationCircleThin from 'icons/ExclamationCircleThin'
 import TranslatedError from 'components/TranslatedError'
 import DebugAppInfosForCurrency from 'components/DebugAppInfosForCurrency'
+import { colors } from 'styles/theme'
 import type { StepProps } from '../index'
 import ExternalLinkButton from '../../../base/ExternalLinkButton'
 import RetryButton from '../../../base/RetryButton'
@@ -59,6 +61,18 @@ const Desc = styled(Box).attrs({
   text-align: center;
 `
 
+const Exclamation = styled.div`
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+  background-color: ${p => p.theme.colors.pillActiveBackground};
+  align-items: center;
+  display: flex;
+  justify-content: center;
+`
+
 class StepCurrency extends PureComponent<Props> {
   componentDidMount() {
     this.props.setScanStatus('scanning')
@@ -96,14 +110,19 @@ class StepCurrency extends PureComponent<Props> {
       .pipe(reduce<Account>((all, acc) => all.concat(acc), []))
       .subscribe({
         next: scannedAccounts => {
+          let totalMigratedAccounts = 0
           accounts.forEach(a => {
             const maybeMigration = findAccountMigration(a, scannedAccounts)
-            if (maybeMigration && starredAccountIds.includes(a.id)) {
-              replaceStarAccountId({ oldId: a.id, newId: maybeMigration.id })
+            if (maybeMigration) {
+              totalMigratedAccounts++
+              if (starredAccountIds.includes(a.id)) {
+                replaceStarAccountId({ oldId: a.id, newId: maybeMigration.id })
+              }
             }
           })
+
           replaceAccounts(migrateAccounts({ scannedAccounts, existingAccounts: accounts }))
-          setScanStatus('finished')
+          setScanStatus(totalMigratedAccounts ? 'finished' : 'finished-empty')
         },
         error: err => {
           logger.critical(err)
@@ -117,7 +136,7 @@ class StepCurrency extends PureComponent<Props> {
     invariant(currency, 'No crypto asset given')
 
     const currencyName = `${currency.name} (${currency.ticker})`
-    const pending = scanStatus !== 'finished'
+    const pending = !['finished', 'finished-empty'].includes(scanStatus)
 
     if (err) {
       return <MigrationError error={err} />
@@ -127,14 +146,20 @@ class StepCurrency extends PureComponent<Props> {
       <Fragment>
         <TrackPage category="MigrateAccounts" name="Step3" />
         <Box align="center" pt={pending ? 30 : 0} pb={pending ? 40 : 0}>
-          <CurrencyCircleIcon
-            showSpinner={pending}
-            showCheckmark={!pending}
-            borderRadius="10px"
-            mb={15}
-            size={40}
-            currency={currency}
-          />
+          {scanStatus === 'finished-empty' ? (
+            <Exclamation>
+              <IconExclamationCircle size={20} color={colors.wallet} />
+            </Exclamation>
+          ) : (
+            <CurrencyCircleIcon
+              showSpinner={pending}
+              showCheckmark={!pending}
+              borderRadius="10px"
+              mb={15}
+              size={40}
+              currency={currency}
+            />
+          )}
           <Box
             ff="Museo Sans|Regular"
             fontSize={6}
@@ -144,18 +169,17 @@ class StepCurrency extends PureComponent<Props> {
             style={{ width: 370 }}
           >
             <Trans
-              i18nKey={
-                pending ? 'migrateAccounts.progress.title' : 'migrateAccounts.progress.finished'
-              }
+              i18nKey={`migrateAccounts.progress.${scanStatus}.title`}
               parent="div"
               values={{ currencyName }}
             />
           </Box>
-          {pending && (
-            <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
-              <Trans i18nKey="migrateAccounts.progress.description" />
-            </Text>
-          )}
+          <Text color="graphite" ff="Open Sans|Regular" fontSize={4}>
+            <Trans
+              i18nKey={`migrateAccounts.progress.${scanStatus}.description`}
+              values={{ currencyName }}
+            />
+          </Text>
         </Box>
       </Fragment>
     )
@@ -179,7 +203,7 @@ export const StepCurrencyFooter = ({
       </Fragment>
     )
   }
-  if (scanStatus !== 'finished' || !currency) return null
+  if (!['finished', 'finished-empty'].includes(scanStatus) || !currency) return null
   const lastCurrency = last(Object.keys(migratableAccounts))
   const next = lastCurrency !== currency.id && currency.id < lastCurrency ? 'device' : 'overview'
   const nextCurrency = getNextCurrency()
