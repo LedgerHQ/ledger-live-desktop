@@ -146,6 +146,11 @@
       "month": "月度",
       "year": "年度"
     },
+    "optionsMenu": {
+      "title": "Options",
+      "exportOperations": "Export operation history",
+      "exportToMobile": "Export to mobile"
+    },
     "contextMenu": {
       "star": "星标",
       "receive": "接收",
@@ -257,9 +262,18 @@
       "description": ""
     },
     "progress": {
-      "title": "{{currencyName}} 正在更新......",
-      "description": "正在更新您的账户，请稍候",
-      "finished": "{{currencyName}} 更新完成"
+      "finished": {
+        "title": "{{currencyName}} update completed",
+        "description": ""
+      },
+      "scanning": {
+        "title": "{{currencyName}} update in progress...",
+        "description": "Please wait while your accounts are updated"
+      },
+      "finished-empty": {
+        "title": "{{currencyName}} update incomplete",
+        "description": "No {{currencyName}} accounts to update"
+      }
     },
     "cta": {
       "startUpdate": "开始更新",
