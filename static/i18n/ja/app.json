@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "日",
+    "day_plural": "Days",
     "week": "週",
+    "week_plural": "Weeks",
     "month": "月",
+    "month_plural": "Months",
     "year": "年",
+    "year_plural": "Years",
     "minute": "分",
+    "minute_plural": "Minutes",
     "second": "秒",
+    "second_plural": "Seconds",
     "hour": "時間",
+    "hour_plural": "Hours",
     "since": {
       "day": "日（過去）",
       "week": "週（過去）",
@@ -566,6 +573,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",
