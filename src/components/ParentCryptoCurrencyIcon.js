@@ -26,7 +26,7 @@ const ParentCryptoCurrencyIconWrapper = styled.div`
       : `
   display: flex;
   align-items: center;`}
-  
+
   line-height: ${p => (p.bigger ? '18px' : '18px')};
   font-size: ${p => (p.bigger ? '12px' : '12px')};
   > :nth-child(2) {

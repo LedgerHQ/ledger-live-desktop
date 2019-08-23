@@ -8,7 +8,7 @@ import { darken } from 'styles/helpers'
 
 import Box, { Tabbable } from 'components/base/Box'
 import CheckBox from 'components/base/CheckBox'
-import CryptoCurrencyIcon from 'components/CryptoCurrencyIcon'
+import CryptoCurrencyIconWithCount from 'components/CryptoCurrencyIconWithCount'
 import FormattedVal from 'components/base/FormattedVal'
 import Input from 'components/base/Input'
 import { MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
@@ -76,12 +76,15 @@ export default class AccountRow extends PureComponent<Props> {
       autoFocusInput,
       hideAmount,
     } = this.props
+
+    const tokenCount = (account.tokenAccounts && account.tokenAccounts.length) || 0
+
     return (
       <AccountRowContainer
         isDisabled={isDisabled}
         onClick={isDisabled ? null : this.onToggleAccount}
       >
-        <CryptoCurrencyIcon currency={account.currency} size={16} />
+        <CryptoCurrencyIconWithCount currency={account.currency} count={tokenCount} withTooltip />
         <Box shrink grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {onEditName ? (
             <Input
@@ -98,7 +101,7 @@ export default class AccountRow extends PureComponent<Props> {
               autoFocus={autoFocusInput}
             />
           ) : (
-            <div style={this.overflowStyles}>{accountName}</div>
+            <div style={{ ...this.overflowStyles, paddingLeft: 15 }}>{accountName}</div>
           )}
         </Box>
         {!hideAmount ? (
@@ -111,11 +114,7 @@ export default class AccountRow extends PureComponent<Props> {
             color="grey"
           />
         ) : null}
-        {!isDisabled && !isReadonly ? (
-          <CheckBox disabled isChecked={isChecked || !!isDisabled} />
-        ) : (
-          !isReadonly && <div style={{ width: 20 }} />
-        )}
+        {!isDisabled && !isReadonly && <CheckBox disabled isChecked={isChecked || !!isDisabled} />}
       </AccountRowContainer>
     )
   }
