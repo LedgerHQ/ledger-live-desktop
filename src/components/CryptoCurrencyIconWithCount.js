@@ -22,8 +22,7 @@ const Wrapper = styled.div`
   ${p =>
     p.doubleIcon
       ? `
-  margin-left: -6px;
-  margin-right: -6px;
+  margin-right: -12px;
 
   > :nth-child(1) {
     clip-path: polygon(0% 0%, 100% 0%, 100% 50%, 81% 50%, 68% 54%, 58% 63%, 52% 74%, 50% 86%, 50% 100%, 0% 100%);

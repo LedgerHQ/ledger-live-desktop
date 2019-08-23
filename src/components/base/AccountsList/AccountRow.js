@@ -13,6 +13,15 @@ import FormattedVal from 'components/base/FormattedVal'
 import Input from 'components/base/Input'
 import { MAX_ACCOUNT_NAME_SIZE } from 'config/constants'
 
+const InputWrapper = styled.div`
+  margin-left: 4px;
+
+  & > div > div {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+`
+
 type Props = {
   account: Account,
   isChecked?: boolean,
@@ -87,19 +96,21 @@ export default class AccountRow extends PureComponent<Props> {
         <CryptoCurrencyIconWithCount currency={account.currency} count={tokenCount} withTooltip />
         <Box shrink grow ff="Open Sans|SemiBold" color="dark" fontSize={4}>
           {onEditName ? (
-            <Input
-              style={this.overflowStyles}
-              value={accountName}
-              onChange={this.handleChangeName}
-              onClick={this.onClickInput}
-              onEnter={this.handlePreventSubmit}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              onKeyPress={this.handleKeyPress}
-              maxLength={MAX_ACCOUNT_NAME_SIZE}
-              editInPlace
-              autoFocus={autoFocusInput}
-            />
+            <InputWrapper>
+              <Input
+                style={this.overflowStyles}
+                value={accountName}
+                onChange={this.handleChangeName}
+                onClick={this.onClickInput}
+                onEnter={this.handlePreventSubmit}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onKeyPress={this.handleKeyPress}
+                maxLength={MAX_ACCOUNT_NAME_SIZE}
+                editInPlace
+                autoFocus={autoFocusInput}
+              />
+            </InputWrapper>
           ) : (
             <div style={{ ...this.overflowStyles, paddingLeft: 15 }}>{accountName}</div>
           )}
