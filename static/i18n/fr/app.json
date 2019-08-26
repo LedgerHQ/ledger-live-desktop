@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "Jour",
+    "day_plural": "Days",
     "week": "Semaine",
+    "week_plural": "Weeks",
     "month": "Mois",
+    "month_plural": "Months",
     "year": "Année",
+    "year_plural": "Years",
     "minute": "Minute",
+    "minute_plural": "Minutes",
     "second": "Seconde",
+    "second_plural": "Seconds",
     "hour": "Heure",
+    "hour_plural": "Hours",
     "since": {
       "day": "hier",
       "week": "la semaine dernière",
@@ -243,7 +250,9 @@
     "link": "En savoir plus",
     "seeTokens": "Voir les ({{tokenCount}}) tokens",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
-    "tooltip": "Token de"
+    "tooltip": "Token de",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
@@ -566,6 +575,7 @@
     "rates": {
       "desc": "Voici tous les tarifs utilisés par Ledger Live pour calculer les contrevaleurs.\nChoisissez quels fournisseurs de taux sont utilisés pour chaque taux.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto vers fiat",
       "cryptoToCrypto": "Crypto vers Crypto",
       "rate": "Taux",
