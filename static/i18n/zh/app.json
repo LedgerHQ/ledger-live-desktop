@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "日度",
+    "day_plural": "Days",
     "week": "周度",
+    "week_plural": "Weeks",
     "month": "月度",
+    "month_plural": "Months",
     "year": "年度",
+    "year_plural": "Years",
     "minute": "分",
+    "minute_plural": "Minutes",
     "second": "秒",
+    "second_plural": "Seconds",
     "hour": "时",
+    "hour_plural": "Hours",
     "since": {
       "day": "昨天",
       "week": "上周",
@@ -243,7 +250,9 @@
     "link": "了解更多",
     "seeTokens": "查看代币 ({{tokenCount}})",
     "hideTokens": "隐藏代币 ({{tokenCount}})",
-    "tooltip": "代币来自"
+    "tooltip": "代币来自",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
@@ -566,6 +575,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} 至 {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "加密货币换作法定货币",
       "cryptoToCrypto": "加密货币换作加密货币",
       "rate": "汇率",
