@@ -23,18 +23,6 @@ export type Feature = FeatureCommon & FeatureToggle
 export const experimentalFeatures: Feature[] = [
   {
     type: 'toggle',
-    name: 'EXPERIMENTAL_EXPLORERS',
-    title: 'Experimental nodes',
-    description: "Connect to Ledger's new blockchain nodes.",
-  },
-  {
-    type: 'toggle',
-    name: 'EXPERIMENTAL_LIBCORE',
-    title: 'Experimental Core',
-    description: 'Enable experimental Ledger lib-core features.',
-  },
-  {
-    type: 'toggle',
     name: 'EXPERIMENTAL_LANGUAGES',
     title: 'Translation testing',
     description: 'Adds unreleased languages to the language list in the general settings tab.',
@@ -133,9 +121,3 @@ changes.subscribe(({ name, value }) => {
     setLocalStorageEnv(name, value)
   }
 })
-
-export const useWithTokens = () => {
-  const experimentalExplorers = !!useEnv('EXPERIMENTAL_EXPLORERS')
-  const experimentalLibcore = !!useEnv('EXPERIMENTAL_LIBCORE')
-  return experimentalExplorers && experimentalLibcore
-}
