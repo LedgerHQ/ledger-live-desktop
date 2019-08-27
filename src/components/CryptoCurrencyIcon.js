@@ -18,7 +18,7 @@ export const TokenIconWrapper = styled.div`
   border-radius: 4px;
 `
 export const TokenIcon = styled.div`
-  font-size: ${p => p.fontSize ? p.fontSize : p.size / 2}px;
+  font-size: ${p => (p.fontSize ? p.fontSize : p.size / 2)}px;
   font-family: 'Open Sans';
   font-weight: bold;
   color: ${p => p.color};
