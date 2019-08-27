@@ -4,12 +4,10 @@ import React, { PureComponent, Fragment } from 'react'
 import uniq from 'lodash/uniq'
 import { Redirect } from 'react-router'
 import { compose } from 'redux'
-import IconNanoX from 'icons/device/NanoXBanner'
 import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { createStructuredSelector } from 'reselect'
-import { getDeviceModel } from '@ledgerhq/devices'
 import type { Account, Currency } from '@ledgerhq/live-common/lib/types'
 import type { T } from 'types/common'
 
@@ -30,12 +28,9 @@ import PillsDaysCount from 'components/PillsDaysCount'
 import OperationsList from 'components/OperationsList'
 import StickyBackToTop from 'components/StickyBackToTop'
 import styled from 'styled-components'
-import { openURL } from 'helpers/linking'
 import BalanceSummary from './BalanceSummary'
 import CurrentGreetings from './CurrentGreetings'
 import SummaryDesc from './SummaryDesc'
-import TopBanner, { FakeLink } from '../TopBanner'
-import { urls } from '../../config/urls'
 import AssetDistribution from '../AssetDistribution'
 import MigrationBanner from '../modals/MigrateAccounts/Banner'
 
@@ -88,20 +83,6 @@ class DashboardPage extends PureComponent<Props> {
         <TopBannerContainer>
           <UpdateBanner />
           <MigrationBanner />
-          <TopBanner
-            content={{
-              message: t('banners.promoteMobile', getDeviceModel('nanoX')),
-              Icon: IconNanoX,
-              right: (
-                <FakeLink onClick={() => openURL(urls.promoNanoX)}>
-                  {t('common.learnMore')}
-                </FakeLink>
-              ),
-            }}
-            status={'dark'}
-            bannerId={'promoNanoX3'}
-            dismissable
-          />
         </TopBannerContainer>
         <RefreshAccountsOrdering onMount />
         <TrackPage
