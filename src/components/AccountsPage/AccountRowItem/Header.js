@@ -15,11 +15,11 @@ type Props = {
 }
 
 // NB Inside Head to not break alignment with parent row;
+// and this is in fact not seen, because we draw on top
+// from AccountRowItem/index.js TokenBarIndicator
 const NestedIndicator = styled.div`
-  border-left: 1px solid ${p => p.theme.colors.lightFog};
   height: 44px;
-  margin-left: 9px;
-  padding-left: 5px;
+  width: 14px;
 `
 
 class Header extends PureComponent<Props> {

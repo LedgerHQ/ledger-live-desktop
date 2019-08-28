@@ -115,6 +115,7 @@ const buttonStyles: { [_: string]: Style } = {
       background: transparent;
       border: 1px solid ${p.theme.colors.grey};
       color: ${p.theme.colors.grey};
+      box-shadow: ${p.isFocused ? focusedShadowStyle : ''}
     `,
     active: p => `
       color: ${darken(p.theme.colors.grey, 0.1)};

@@ -49,14 +49,18 @@ export function SettingsSectionHeader({
   desc,
   icon,
   renderRight,
+  onClick,
+  style,
 }: {
   title: string,
   desc: string,
   icon: any,
   renderRight?: any,
+  onClick?: () => void,
+  style?: any,
 }) {
   return (
-    <SettingsSectionHeaderContainer tabIndex={-1}>
+    <SettingsSectionHeaderContainer tabIndex={-1} onClick={onClick} style={style}>
       <RoundIconContainer mr={3}>{icon}</RoundIconContainer>
       <Box grow flex={1} mr={3}>
         <Box ff="Museo Sans|Regular" color="dark" data-e2e="settingsGeneral_title">

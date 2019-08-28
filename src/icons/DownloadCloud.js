@@ -6,7 +6,7 @@ const path = (
   <g
     fill="none"
     fillRule="evenodd"
-    stroke="#6490F1"
+    stroke="currentColor"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={1.5}
@@ -16,8 +16,8 @@ const path = (
   </g>
 )
 
-export default ({ width = 18, height = 15, ...p }: { width?: number, height?: number }) => (
-  <svg viewBox="0 0 18 15" height={height} width={width} {...p}>
+export default ({ size, ...p }: { size?: number }) => (
+  <svg viewBox="0 0 18 15" height={size} width={size} {...p}>
     {path}
   </svg>
 )

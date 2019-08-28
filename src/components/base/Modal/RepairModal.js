@@ -198,6 +198,7 @@ class RepairModal extends PureComponent<Props, *> {
                 <Box py={2} px={5} color="dark" fontSize={4}>
                   {repairChoices.map(choice => (
                     <Choice
+                      key={choice.id}
                       onSelect={this.onSelectOption}
                       selected={choice === selectedOption}
                       choice={choice}

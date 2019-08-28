@@ -42,7 +42,7 @@ class SelectExchange extends Component<
   },
 > {
   state = {
-    prevFromTo: '', // eslint-disable-line
+    prevFromTo: '',
     exchanges: null,
     error: null,
     isLoading: false,
@@ -101,7 +101,10 @@ class SelectExchange extends Component<
     const options = exchanges ? exchanges.map(e => ({ value: e.id, label: e.name, ...e })) : []
     const value = options.find(e => e.id === exchangeId)
 
-    return error ? (
+    const noExchanges = options.length === 0
+
+    // $FlowFixMe
+    return error && error.status !== 400 ? (
       <Box
         style={{ wordWrap: 'break-word', width: 250 }}
         color="alertRed"
@@ -127,7 +130,10 @@ class SelectExchange extends Component<
           options={options}
           onChange={onChange}
           isLoading={isLoading}
-          placeholder={t('common.selectExchange')}
+          isDisabled={noExchanges}
+          placeholder={
+            noExchanges ? t('common.selectExchangeNoOptionAtAll') : t('common.selectExchange')
+          }
           noOptionsMessage={({ inputValue }) =>
             inputValue
               ? t('common.selectExchangeNoOption', { exchangeName: inputValue })

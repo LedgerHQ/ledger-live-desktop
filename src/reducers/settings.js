@@ -152,6 +152,12 @@ const handlers: Object = {
       starredAccountIds: ids,
     }
   },
+  SETTINGS_REPLACE_STAR_ID: (state: SettingsState, { payload: { oldId, newId } }) => ({
+    ...state,
+    starredAccountIds: state.starredAccountIds.map(starredAccountId =>
+      starredAccountId === oldId ? newId : starredAccountId,
+    ),
+  }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
 }

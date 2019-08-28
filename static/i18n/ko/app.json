@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "일",
+    "day_plural": "Days",
     "week": "주",
+    "week_plural": "Weeks",
     "month": "월",
+    "month_plural": "Months",
     "year": "년",
+    "year_plural": "Years",
     "minute": "분",
+    "minute_plural": "Minutes",
     "second": "초",
+    "second_plural": "Seconds",
     "hour": "시",
+    "hour_plural": "Hours",
     "since": {
       "day": "전날",
       "week": "지난 주",
@@ -145,6 +152,11 @@
       "week": "Week",
       "month": "Month",
       "year": "Year"
+    },
+    "optionsMenu": {
+      "title": "Options",
+      "exportOperations": "Export operation history",
+      "exportToMobile": "Export to mobile"
     },
     "contextMenu": {
       "star": "Star",
@@ -238,27 +250,39 @@
     "link": "Learn more",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
-    "tooltip": "Token from"
+    "tooltip": "Token from",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live accounts update",
       "done": "Ledger Live accounts update completed",
-      "description": "New features in Ledger Live requires an update of your accounts.",
+      "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
       "footer": "You need your Ledger Device to complete the update",
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
+      "doItLaterBtn": "Do it later"
     },
     "connectDevice": {
       "title": "{{currencyName}} update",
       "description": ""
     },
     "progress": {
-      "title": "{{currencyName}} update in progress...",
-      "description": "Please wait while your accounts are updated",
-      "finished": "{{currencyName}} update completed"
+      "finished": {
+        "title": "{{currencyName}} update completed",
+        "description": ""
+      },
+      "scanning": {
+        "title": "{{currencyName}} update in progress...",
+        "description": "Please wait while your accounts are updated"
+      },
+      "finished-empty": {
+        "title": "{{currencyName}} update incomplete",
+        "description": "No {{currencyName}} accounts to update"
+      }
     },
     "cta": {
       "startUpdate": "Start update",
@@ -551,6 +575,7 @@
     "rates": {
       "desc": "Here are all the rates that are used by Ledger Live to calculate countervalues.\nChoose which rate providers are used for each rate.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto to fiat",
       "cryptoToCrypto": "Crypto to Crypto",
       "rate": "Rate",

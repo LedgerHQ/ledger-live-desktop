@@ -29,17 +29,17 @@ class PasswordAutoLockSelect extends PureComponent<Props> {
     this.props.setAutoLockTimeout(+timeoutKey)
   }
 
-  timeouts = [
-    { value: 1, label: `1 ${this.props.t('time.minute')}` },
-    { value: 10, label: `10 ${this.props.t('time.minute')}s` },
-    { value: 30, label: `30 ${this.props.t('time.minute')}s` },
+  timeouts = () => [
+    { value: 1, label: `1 ${this.props.t('time.minute', { count: 1 })}` },
+    { value: 10, label: `10 ${this.props.t('time.minute', { count: 10 })}` },
+    { value: 30, label: `30 ${this.props.t('time.minute', { count: 30 })}` },
     { value: 60, label: `1 ${this.props.t('time.hour')}` },
     { value: -1, label: this.props.t(`app:common.never`) },
   ]
 
   render() {
     const { autoLockTimeout } = this.props
-    const currentTimeout = this.timeouts.find(l => l.value === autoLockTimeout)
+    const currentTimeout = this.timeouts().find(l => l.value === autoLockTimeout)
 
     return (
       <Select
@@ -49,7 +49,7 @@ class PasswordAutoLockSelect extends PureComponent<Props> {
         onChange={this.handleChangeTimeout}
         renderSelected={item => item && item.name}
         value={currentTimeout}
-        options={this.timeouts}
+        options={this.timeouts()}
       />
     )
   }

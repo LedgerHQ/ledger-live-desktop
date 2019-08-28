@@ -37,6 +37,7 @@ import TopBar from 'components/TopBar'
 import SyncBackground from 'components/SyncBackground'
 import DebugUpdater from 'components/Updater/DebugUpdater'
 import ListenDevices from 'components/ListenDevices'
+import IsNewVersion from 'components/IsNewVersion'
 
 import SyncContinuouslyPendingOperations from '../SyncContinouslyPendingOperations'
 import HSMStatusBanner from '../HSMStatusBanner'
@@ -46,7 +47,7 @@ const Main = styled(GrowScroll).attrs({
   px: 6,
 })`
   outline: none;
-  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[4]}px;
+  padding-top: ${p => p.theme.sizes.topBarHeight + p.theme.space[6]}px;
 `
 
 type Props = {
@@ -105,6 +106,8 @@ class Default extends Component<Props> {
             {visibleModals.map(([name, ModalComponent]) => (
               <ModalComponent key={name} />
             ))}
+
+            <IsNewVersion />
 
             {process.env.DEBUG_UPDATE && <DebugUpdater />}
 

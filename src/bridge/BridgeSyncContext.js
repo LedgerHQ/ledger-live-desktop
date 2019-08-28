@@ -104,13 +104,26 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
           if (trackedRecently) return
           const account = this.props.accounts.find(a => a.id === accountId)
           if (!account) return
+          const tokenAccounts = account.tokenAccounts || []
           track(event, {
             duration: (Date.now() - startSyncTime) / 1000,
             currencyName: account.currency.name,
             derivationMode: account.derivationMode,
             freshAddressPath: account.freshAddressPath,
             operationsLength: account.operations.length,
+            tokensLength: tokenAccounts.length,
           })
+          if (event === 'SyncSuccess') {
+            tokenAccounts.forEach(tokenAccount => {
+              track('SyncSuccessToken', {
+                tokenId: tokenAccount.token.id,
+                tokenTicker: tokenAccount.token.ticker,
+                operationsLength: tokenAccount.operations.length,
+                parentCurrencyName: account.currency.name,
+                parentDerivationMode: account.derivationMode,
+              })
+            })
+          }
         }
 
         bridge.startSync(account, false).subscribe({

@@ -102,7 +102,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(
     return (
       <Box horizontal align="center" flow={2} grow>
         <Box>
-          <ParentCryptoCurrencyIcon currency={currency} borderColor="lightGrey" />
+          <ParentCryptoCurrencyIcon currency={currency} bigger />
         </Box>
         <Box grow>
           {contract && account.type === 'TokenAccount' ? (

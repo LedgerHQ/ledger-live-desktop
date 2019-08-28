@@ -4,9 +4,9 @@
     "labelNo": "Non",
     "never": "Jamais",
     "apply": "Appliquer",
-    "done": "Done",
+    "done": "Terminé",
     "confirm": "Confirmer",
-    "connecting": "Connecting..",
+    "connecting": "Connexion..",
     "cancel": "Annuler",
     "getSupport": "Obtenir de l’aide",
     "delete": "Supprimer",
@@ -35,7 +35,7 @@
     "retry": "Réessayer",
     "range": "Période",
     "stop": "Arrêter",
-    "updateNow": "Update now",
+    "updateNow": "Mettre à jour",
     "close": "Fermer",
     "eastern": "Est",
     "western": "Ouest",
@@ -57,7 +57,7 @@
       "syncing": "Synchronisation...",
       "upToDate": "Synchronisé",
       "outdated": "En pause",
-      "needsMigration": "Click to update account",
+      "needsMigration": "Cliquez pour mettre le compte à jour",
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser",
       "ago": "Synchronisé {{time}}"
@@ -71,12 +71,19 @@
   },
   "time": {
     "day": "Jour",
+    "day_plural": "Jours",
     "week": "Semaine",
+    "week_plural": "Semaines",
     "month": "Mois",
+    "month_plural": "Mois",
     "year": "Année",
+    "year_plural": "Années",
     "minute": "Minute",
+    "minute_plural": "Minutes",
     "second": "Seconde",
+    "second_plural": "Secondes",
     "hour": "Heure",
+    "hour_plural": "Heures",
     "since": {
       "day": "hier",
       "week": "la semaine dernière",
@@ -90,7 +97,7 @@
   },
   "sidebar": {
     "menu": "Menu",
-    "stars": "Starred accounts",
+    "stars": "Comptes favoris",
     "accounts": "Comptes",
     "manager": "Manager",
     "exchange": "Acheter des cryptos",
@@ -145,6 +152,11 @@
       "week": "Semaine",
       "month": "Mois",
       "year": "Année"
+    },
+    "optionsMenu": {
+      "title": "Options",
+      "exportOperations": "Export operation history",
+      "exportToMobile": "Export to mobile"
     },
     "contextMenu": {
       "star": "Star",
@@ -238,27 +250,39 @@
     "link": "En savoir plus",
     "seeTokens": "Voir les ({{tokenCount}}) tokens",
     "hideTokens": "Cacher tokens ({{tokenCount}})",
-    "tooltip": "Token de"
+    "tooltip": "Token de",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Tokens"
   },
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live accounts update",
       "done": "Ledger Live accounts update completed",
-      "description": "New features in Ledger Live requires an update of your accounts.",
+      "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
       "footer": "You need your Ledger Device to complete the update",
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below"
+      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
+      "doItLaterBtn": "Do it later"
     },
     "connectDevice": {
       "title": "{{currencyName}} update",
       "description": ""
     },
     "progress": {
-      "title": "{{currencyName}} update in progress...",
-      "description": "Please wait while your accounts are updated",
-      "finished": "{{currencyName}} update completed"
+      "finished": {
+        "title": "{{currencyName}} update completed",
+        "description": ""
+      },
+      "scanning": {
+        "title": "{{currencyName}} update in progress...",
+        "description": "Please wait while your accounts are updated"
+      },
+      "finished-empty": {
+        "title": "{{currencyName}} update incomplete",
+        "description": "No {{currencyName}} accounts to update"
+      }
     },
     "cta": {
       "startUpdate": "Start update",
@@ -452,7 +476,7 @@
         "useRBF": "Utiliser une transaction Replace-by-Fee",
         "message": "Laisser un message (140) ",
         "rippleTag": "Balise",
-        "ethereumGasLimit": "Limite d'essence",
+        "ethereumGasLimit": "Gas limit",
         "unitPerByte": "{{unit}} par octet",
         "highFeeModal": {
           "title": "Frais élevés",
@@ -551,6 +575,7 @@
     "rates": {
       "desc": "Voici tous les tarifs utilisés par Ledger Live pour calculer les contrevaleurs.\nChoisissez quels fournisseurs de taux sont utilisés pour chaque taux.",
       "fromTo": "{{from}} to {{to}}",
+      "noCounterValue": "We have no data for this trading pair.",
       "cryptoToFiat": "Crypto vers fiat",
       "cryptoToCrypto": "Crypto vers Crypto",
       "rate": "Taux",

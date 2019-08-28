@@ -58,6 +58,24 @@ const TokenContent = styled.div`
   margin-top: 20px;
 `
 
+const TokenContentWrapper = styled.div`
+  position: relative;
+`
+
+const TokenBarIndicator = styled.div`
+  width: 15px;
+  border-left: 1px solid ${p => p.theme.colors.lightFog};
+  z-index: 2;
+  margin-left: 9px;
+  padding-left: 5px;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  &:hover {
+    border-color: ${p => p.theme.colors.grey};
+  }
+`
+
 const TokenShowMoreIndicator = styled.div`
   margin: 15px -20px -16px;
   display: flex;
@@ -185,20 +203,23 @@ class AccountRowItem extends PureComponent<Props, State> {
             </RowContent>
           </AccountContextMenu>
           {showTokensIndicator && expanded && (
-            <TokenContent>
-              {tokens &&
-                tokens.map((token, index) => (
-                  <TokenRow
-                    nested
-                    index={index}
-                    key={token.id}
-                    range={range}
-                    account={token}
-                    parentAccount={mainAccount}
-                    onClick={onClick}
-                  />
-                ))}
-            </TokenContent>
+            <TokenContentWrapper>
+              <TokenBarIndicator onClick={this.toggleAccordion} />
+              <TokenContent>
+                {tokens &&
+                  tokens.map((token, index) => (
+                    <TokenRow
+                      nested
+                      index={index}
+                      key={token.id}
+                      range={range}
+                      account={token}
+                      parentAccount={mainAccount}
+                      onClick={onClick}
+                    />
+                  ))}
+              </TokenContent>
+            </TokenContentWrapper>
           )}
           {showTokensIndicator && !disabled && tokens && (
             <TokenShowMoreIndicator expanded={expanded} onClick={this.toggleAccordion}>

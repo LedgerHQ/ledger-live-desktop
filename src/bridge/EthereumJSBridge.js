@@ -233,6 +233,7 @@ export const currencyBridge: CurrencyBridge = {
                 seedIdentifier: freshAddress,
                 freshAddress,
                 freshAddressPath,
+                freshAddresses: [{ address: freshAddress, derivationPath: freshAddressPath }],
                 derivationMode,
                 name: getNewAccountPlaceholderName({
                   currency,
@@ -266,6 +267,7 @@ export const currencyBridge: CurrencyBridge = {
           seedIdentifier: freshAddress,
           freshAddress,
           freshAddressPath,
+          freshAddresses: [{ address: freshAddress, derivationPath: freshAddressPath }],
           derivationMode,
           name: getAccountPlaceholderName({ currency, index, derivationMode }),
           balance,

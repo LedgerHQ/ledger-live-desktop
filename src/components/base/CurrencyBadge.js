@@ -53,7 +53,7 @@ export function CurrencyCircleIcon({
   showCheckmark?: boolean,
 }) {
   if (currency.type === 'TokenCurrency') {
-    return <ParentCryptoCurrencyIcon currency={currency} size={size} />
+    return <ParentCryptoCurrencyIcon currency={currency} bigger />
   }
   const Icon = getCryptoCurrencyIcon(currency)
   return (

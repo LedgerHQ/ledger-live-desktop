@@ -5,7 +5,10 @@ export function enrichData(data) {
     ...d,
     ref: d,
     index: i,
-    parsedDate: d.date,
+    // normalize all dates to start of day for graph display to prevent d3 from
+    // rounding up
+    // see https://github.com/LedgerHQ/ledger-live-desktop/issues/2266
+    parsedDate: new Date(d.date).setHours(0, 0, 0, 0),
   }))
 }
 

@@ -63,18 +63,12 @@ const HelpLink = styled.span.attrs({
     color: ${p => rgba(p.theme.colors.wallet, 0.9)};
   }
 `
-const FooterContent = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-end;
-
-  > ${Text} {
-    margin-top: 21px;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+const FooterContent = styled(Box).attrs({
+  flow: 2,
+  horizontal: true,
+  align: 'center',
+})`
+  justify: flex-end;
 `
 
 const Exclamation = styled.div`
@@ -220,6 +214,7 @@ export const StepOverviewFooter = ({
       </FooterContent>
     ) : !currency && !hideLoopNotice ? (
       <FooterContent>
+        <Button onClick={onCloseModal}>{t('migrateAccounts.overview.doItLaterBtn')}</Button>
         <Button
           primary
           onClick={() => {
