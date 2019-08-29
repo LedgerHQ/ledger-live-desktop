@@ -118,6 +118,7 @@
     "emptyState": {
       "title": "まだクリプトアセットをお持ちではありませんか？",
       "desc": "受信を開始する前に、<1><0>{{managerAppName}}</0></1> アプリがインストールされていることを確認してください",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "受信"
       }
