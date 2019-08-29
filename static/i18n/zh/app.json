@@ -118,6 +118,7 @@
     "emptyState": {
       "title": "还没有加密资产？",
       "desc": "请确认已安装 <1> <0>{{managerAppName}}</0> </1> 应用程序后开始接收",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "接收"
       }
