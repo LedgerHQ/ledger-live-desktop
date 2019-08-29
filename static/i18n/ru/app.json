@@ -118,6 +118,7 @@
     "emptyState": {
       "title": "Еще не получили криптоактивы?",
       "desc": "Убедитесь в том, что на устройстве установлено приложение <1><0>{{managerAppName}}</0></1>, и начните получать.",
+      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "Получить"
       }
