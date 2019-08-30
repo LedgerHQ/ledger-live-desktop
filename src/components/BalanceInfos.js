@@ -46,32 +46,32 @@ type BalanceInfoProps = Props & {
 export function BalanceDiff(props: Props) {
   const { t, totalBalance, valueChange, since, unit, isAvailable, ...otherProps } = props
 
-  if (!isAvailable) return null;
+  if (!isAvailable) return null
 
   return (
     <Box horizontal {...otherProps}>
-        <Box horizontal alignItems="center" style={{ lineHeight: 1.2, fontSize: 20 }}>
-          {valueChange.percentage && (
-            <FormattedVal
-              isPercent
-              animateTicker
-              val={valueChange.percentage.times(100).integerValue()}
-              inline
-              withIcon
-            />
-          )}
+      <Box horizontal alignItems="center" style={{ lineHeight: 1.2, fontSize: 20 }}>
+        {valueChange.percentage && (
           <FormattedVal
-            unit={unit}
-            val={valueChange.value}
-            prefix={valueChange.percentage && ' ('}
-            suffix={valueChange.percentage && ')'}
-            withIcon={!valueChange.percentage}
-            alwaysShowSign={!!valueChange.percentage}
-            showCode
+            isPercent
             animateTicker
+            val={valueChange.percentage.times(100).integerValue()}
             inline
+            withIcon
           />
-        </Box>
+        )}
+        <FormattedVal
+          unit={unit}
+          val={valueChange.value}
+          prefix={valueChange.percentage && ' ('}
+          suffix={valueChange.percentage && ')'}
+          withIcon={!valueChange.percentage}
+          alwaysShowSign={!!valueChange.percentage}
+          showCode
+          animateTicker
+          inline
+        />
+      </Box>
     </Box>
   )
 }

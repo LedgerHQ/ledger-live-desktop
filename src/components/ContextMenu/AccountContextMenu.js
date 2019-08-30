@@ -13,6 +13,7 @@ import { MODAL_RECEIVE, MODAL_SEND, MODAL_SETTINGS_ACCOUNT } from '../../config/
 type Props = {
   account: TokenAccount | Account,
   parentAccount: ?Account,
+  leftClick?: boolean,
   children: any,
   openModal: Function,
 }
@@ -49,8 +50,11 @@ class AccountContextMenu extends PureComponent<Props> {
   }
 
   render() {
+    const { leftClick, children } = this.props
     return (
-      <ContextMenuItem items={this.getContextMenuItems()}>{this.props.children}</ContextMenuItem>
+      <ContextMenuItem leftClick={leftClick} items={this.getContextMenuItems()}>
+        {children}
+      </ContextMenuItem>
     )
   }
 }

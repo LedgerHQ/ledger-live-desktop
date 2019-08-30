@@ -30,6 +30,7 @@
     "lock": "Lock",
     "showMore": "Show more",
     "max": "Max",
+    "new": "New",
     "back": "Back",
     "reset": "Reset",
     "retry": "Retry",
@@ -525,6 +526,20 @@
     "showAll": "Show all",
     "showLess": "Show less",
     "header": "Asset distribution ({{count}})"
+  },
+  "accountDistribution": {
+    "account": "Account",
+    "price": "Price",
+    "distribution": "Distribution",
+    "amount": "Amount",
+    "value": "Value",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "header": "Account distribution ({{count}})",
+    "notice": "You can now click on assets for more details!"
+  },
+  "asset": {
+    "notice": "This page gathers all your {{currency}} accounts"
   },
   "settings": {
     "title": "Settings",
