@@ -9,23 +9,40 @@ import IconExternalLink from 'icons/ExternalLink'
 
 const LabelWrapper = styled(Label).attrs({ ff: p => (p.ff ? p.ff : 'Museo Sans|Bold') })`
   display: inline-flex;
-  color: ${p => p.theme.colors[p.color] || 'auto'};
+  color: ${p => p.theme.colors[p.color] || 'inherit'};
   &:hover {
     color: ${p => p.theme.colors.wallet};
     cursor: pointer;
   }
 `
 
-type Props = { onClick: ?() => void, label: string, color?: string, ff?: string }
+type Props = {
+  onClick: ?() => void,
+  label: string,
+  color?: string,
+  ff?: string,
+  iconFirst?: boolean,
+}
 
 // can add more dynamic options if needed
-export function LabelWithExternalIcon({ onClick, label, color, ff }: Props) {
+export function LabelWithExternalIcon({ onClick, label, color, ff, iconFirst = false }: Props) {
   return (
     <LabelWrapper onClick={onClick} color={color} ff={ff}>
-      <span>{label}</span>
-      <Box ml={1}>
-        <IconExternalLink size={12} />
-      </Box>
+      {iconFirst ? (
+        <>
+          <Box mr={1}>
+            <IconExternalLink size={12} />
+          </Box>
+          <span>{label}</span>
+        </>
+      ) : (
+        <>
+          <span>{label}</span>
+          <Box ml={1}>
+            <IconExternalLink size={12} />
+          </Box>
+        </>
+      )}
     </LabelWrapper>
   )
 }

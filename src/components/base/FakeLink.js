@@ -6,7 +6,9 @@ import { darken, lighten } from 'styles/helpers'
 export default styled(Box).attrs({
   cursor: 'pointer',
   color: p => p.color || 'wallet',
+  horizontal: true,
 })`
+  align-items: center;
   text-decoration: ${p => (p.underline ? 'underline' : 'none')};
   &:hover {
     text-decoration: underline;

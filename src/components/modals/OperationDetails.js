@@ -35,15 +35,18 @@ import Text from 'components/base/Text'
 import LabelInfoTooltip from 'components/base/LabelInfoTooltip'
 import OperationComponent from 'components/OperationsList/Operation'
 
+import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
 import CopyWithFeedback from 'components/base/CopyWithFeedback'
+import FakeLink from 'components/base/FakeLink'
+import Ellipsis from 'components/base/Ellipsis'
 import { accountSelector } from 'reducers/accounts'
 import { openModal } from 'reducers/modals'
 
 import { confirmationsNbForCurrencySelector, marketIndicatorSelector } from 'reducers/settings'
 import IconChevronRight from 'icons/ChevronRight'
+import IconExternalLink from 'icons/ExternalLink'
 import CounterValue from 'components/CounterValue'
-import ConfirmationCheck from 'components/OperationsList/ConfirmationCheck'
-import Ellipsis from '../base/Ellipsis'
+import { urls } from 'config/urls'
 
 const OpDetailsSection = styled(Box).attrs({
   horizontal: true,
@@ -60,6 +63,8 @@ const OpDetailsTitle = styled(Box).attrs({
   textTransform: 'uppercase',
   mb: 1,
 })`
+  justify-content: center;
+  height: 18px;
   letter-spacing: 2px;
 `
 export const Address = styled(Text).attrs({})`
@@ -116,6 +121,14 @@ const B = styled(Bar).attrs({
   color: 'lightGrey',
   size: 1,
 })``
+
+const Link = styled(Box).attrs({
+  mb: 1,
+})`
+  ${FakeLink}:hover {
+    color: ${p => p.theme.colors.wallet};
+  }
+`
 
 const mapDispatchToProps = {
   openModal,
@@ -406,7 +419,27 @@ const OperationDetails = connect(
           </Box>
           <B />
           <Box>
-            <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
+            <Box horizontal>
+              <OpDetailsTitle>{t('operationDetails.to')}</OpDetailsTitle>
+              {recipients.length > 1 ? (
+              <Link>
+                <FakeLink
+                  underline
+                  fontSize={3}
+                  ml={2}
+                  color="smoke"
+                  onClick={() => openURL(urls.multipleDestinationAddresses)}
+                  iconFirst
+                >
+                  <Box mr={1}>
+                    <IconExternalLink size={12} />
+                  </Box>
+                  {t('operationDetails.multipleAddresses')}
+                </FakeLink>
+              </Link>
+              )
+                : null}
+            </Box>
             <DataList lines={recipients} t={t} />
           </Box>
           {Object.entries(extra).map(([key, value]) => (
