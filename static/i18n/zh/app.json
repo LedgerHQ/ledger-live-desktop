@@ -358,7 +358,8 @@
     "tokenTooltip": "此操作与下列代币操作相关",
     "internalOperations": "内部操作",
     "internalOpTooltip": "此操作存在内部操作",
-    "details": "{{ currency }} 详细信息"
+    "details": "{{ currency }} 详细信息",
+    "multipleAddresses": "Why multiple addresses?"
   },
   "operationList": {
     "noMoreOperations": "以上"
