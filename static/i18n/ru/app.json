@@ -1,7 +1,7 @@
 {
   "common": {
     "labelYes": "Да",
-    "labelNo": "Нет",
+    "labelNo": "No",
     "never": "Никогда",
     "apply": "Применить",
     "done": "Готово",
@@ -33,7 +33,7 @@
     "back": "Назад",
     "reset": "Сбросить",
     "retry": "Повторить попытку",
-    "range": "Range",
+    "range": "Период",
     "stop": "Остановить",
     "updateNow": "Обновить сейчас",
     "close": "Закрыть",
@@ -45,7 +45,7 @@
     "copyAddress": "Копировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
-    "experimentalFeature": "EXPERIMENTAL FEATURE ACTIVE",
+    "experimentalFeature": "ЭКСПЕРЕМЕНТАЛЬНЫЕ ФУНКЦИИ АКТИВИРОВАНЫ",
     "lockScreen": {
       "title": "С возвращением",
       "subTitle": null,
@@ -78,11 +78,11 @@
     "month_plural": "Months",
     "year": "Год",
     "year_plural": "Years",
-    "minute": "Minute",
-    "minute_plural": "Minutes",
+    "minute": "Минута",
+    "minute_plural": "Минут",
     "second": "Second",
     "second_plural": "Seconds",
-    "hour": "Hour",
+    "hour": "Час",
     "hour_plural": "Hours",
     "since": {
       "day": "прошедший день",
@@ -98,13 +98,13 @@
   "sidebar": {
     "menu": "Меню",
     "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "accounts": "Счета",
     "manager": "Диспетчер",
     "exchange": "Купить крипто",
     "developer": "Инструменты разработчика",
     "newUpdate": {
-      "title": "New Update",
-      "description": "Your accounts have been moved to a new dedicated page!"
+      "title": "Новое обновление",
+      "description": "Ваши аккаунты были перемещены на новую отдельную страницу!"
     }
   },
   "stars": {
@@ -141,18 +141,18 @@
     }
   },
   "accounts": {
-    "title": "Accounts",
+    "title": "Счета",
     "noResultFound": "No accounts found.",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "Имя А-Я",
+      "name|desc": "Имя Я-А",
+      "balance|asc": "Наименьший баланс",
+      "balance|desc": "Наибольший баланс"
     },
     "range": {
-      "week": "Week",
-      "month": "Month",
-      "year": "Year"
+      "week": "Неделя",
+      "month": "Месяц",
+      "year": "Год"
     },
     "optionsMenu": {
       "title": "Options",
@@ -161,8 +161,8 @@
     },
     "contextMenu": {
       "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
+      "receive": "Получить",
+      "send": "Отправить",
       "edit": "Edit Account"
     }
   },
@@ -248,7 +248,7 @@
     "title": "Tokens",
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your Ethereum address.",
-    "link": "Learn more",
+    "link": "Подробнее",
     "seeTokens": "See tokens ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "tooltip": "Token from",
@@ -344,7 +344,7 @@
     "date": "Дата",
     "status": "Статус",
     "confirmed": "Подтверждено",
-    "failed": "Failed",
+    "failed": "Ошибка",
     "notConfirmed": "Не подтверждено",
     "fees": "Комиссия",
     "noFees": "Без комиссии",
@@ -716,7 +716,7 @@
     "cta": "Понятно"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
+    "title": "История операций",
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
     "titleSuccess": "Operation history successfully saved",
