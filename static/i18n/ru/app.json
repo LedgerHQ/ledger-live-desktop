@@ -718,11 +718,11 @@
   "exportOperationsModal": {
     "title": "История операций",
     "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "A CSV file of your operation history has been successfully saved in the selected folder",
-    "titleSuccess": "Operation history successfully saved",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
+    "descSuccess": "CSV-файл истории операций успешно сохранен в выбранной папке",
+    "titleSuccess": "История операций успешно сохранена",
+    "cta": "Сохранить",
+    "ctaSuccess": "Готово",
+    "noAccounts": "Нет аккаунтов для экспорта",
     "selectedAccounts": "Accounts to include",
     "selectedAccounts_plural": "Accounts to include ({{count}})"
   },
@@ -767,7 +767,7 @@
     },
     "selectDevice": {
       "title": "Выберите свое устройство",
-      "usbOnly": "usb only",
+      "usbOnly": "только usb",
       "usbOnlyTooltip": "Ledger Live desktop currently does not support Bluetooth"
     },
     "selectPIN": {
